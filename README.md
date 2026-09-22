@@ -29,9 +29,12 @@ Known caveat: SHX text plots as stroked vectors, so the PDF has no
 selectable or searchable text. Switch `TEXT_FONT` in `layers.py` to a
 TrueType font if that is wanted.
 
-## Moving to another machine
+## Picking this up cold
 
-Start at **[`docs/SETUP.md`](docs/SETUP.md)** — it rebuilds this
+- **An AI agent taking over** → [`docs/HANDOVER.md`](docs/HANDOVER.md),
+  then [`CLAUDE.md`](CLAUDE.md) (loaded automatically each session).
+  It includes the **VM test plan** — nothing here has run on the VM yet.
+- **Rebuilding the environment** → [`docs/SETUP.md`](docs/SETUP.md) — it rebuilds this
 environment from scratch, and records the failures worth not repeating
 (chiefly: use **Revit 2025, not 2026** — see
 [ADR-0008](docs/decisions/ADR-0008-revit-2025-not-2026.md)).
