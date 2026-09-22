@@ -31,7 +31,29 @@ from Autodesk.Revit.DB import (
     UnitTypeId, UnitUtils, UV, Wall, XYZ,
 )
 
-TEMPLATE = r"C:\ProgramData\Autodesk\RVT 2025\Templates\Default_M_ENU.rte"
+def _find_template():
+    """Locate a metric project template, without hard-coding a machine.
+
+    ARCHPIPE_REVIT_TEMPLATE overrides. Otherwise take the newest RVT
+    version folder that has the metric English template.
+    """
+    override = os.environ.get("ARCHPIPE_REVIT_TEMPLATE")
+    if override:
+        return override
+    root = r"C:\ProgramData\Autodesk"
+    found = []
+    if os.path.isdir(root):
+        for name in os.listdir(root):
+            if not name.startswith("RVT "):
+                continue
+            cand = os.path.join(root, name, "Templates", "Default_M_ENU.rte")
+            if os.path.isfile(cand):
+                found.append((name, cand))
+    found.sort(reverse=True)
+    return found[0][1] if found else ""
+
+
+TEMPLATE = _find_template()
 
 # The known truth this test rests on.
 WIDTH_MM = 6000.0

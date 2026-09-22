@@ -29,6 +29,13 @@ Known caveat: SHX text plots as stroked vectors, so the PDF has no
 selectable or searchable text. Switch `TEXT_FONT` in `layers.py` to a
 TrueType font if that is wanted.
 
+## Moving to another machine
+
+Start at **[`docs/SETUP.md`](docs/SETUP.md)** — it rebuilds this
+environment from scratch, and records the failures worth not repeating
+(chiefly: use **Revit 2025, not 2026** — see
+[ADR-0008](docs/decisions/ADR-0008-revit-2025-not-2026.md)).
+
 ## The method
 
 Design follows the **Villa Design Method** — eight decision-led stages
@@ -56,7 +63,7 @@ Drawing and review (Stage 4 onward):
     python -m archpipe build  spec/apartment.yaml --pdf # + DWG + plotted PDF
     python -m archpipe review spec/apartment.yaml       # rebuild the web sheet
 
-Verification (16 checks, positive and negative):
+Verification (53 checks, positive and negative):
 
     PYTHONPATH=src python scripts/verify.py
 

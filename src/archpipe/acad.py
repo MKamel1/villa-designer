@@ -17,12 +17,41 @@ command and reading the transcript, not from documentation.
 """
 from __future__ import annotations
 
+import os
 import subprocess
 from pathlib import Path
 
-ACCORECONSOLE = Path(
-    r"C:\Program Files\Autodesk\AutoCAD 2026\accoreconsole.exe"
-)
+def _find_accoreconsole() -> Path:
+    """Locate accoreconsole.exe without hard-coding one machine's install.
+
+    Order: an explicit override, then the newest AutoCAD found under the
+    usual roots. Hard-coding a version was fine on one machine and is the
+    first thing to break on another -- and this project is expected to
+    move to a Windows VM on a Linux host.
+
+    Note LT has no accoreconsole; only full AutoCAD ships it.
+    """
+    override = os.environ.get("ARCHPIPE_ACCORECONSOLE")
+    if override:
+        return Path(override)
+
+    candidates: list[Path] = []
+    for root in (Path(r"C:\Program Files\Autodesk"), Path(r"C:\Program Files")):
+        if not root.is_dir():
+            continue
+        try:
+            for child in root.iterdir():
+                exe = child / "accoreconsole.exe"
+                if child.is_dir() and exe.is_file():
+                    candidates.append(exe)
+        except OSError:
+            continue
+    # Newest version wins; the directory name carries the year.
+    candidates.sort(key=lambda p: p.parent.name, reverse=True)
+    return candidates[0] if candidates else Path("accoreconsole.exe")
+
+
+ACCORECONSOLE = _find_accoreconsole()
 
 DEFAULT_DEVICE = "DWG To PDF.pc3"
 DEFAULT_PAPER = "ISO full bleed A3 (420.00 x 297.00 MM)"

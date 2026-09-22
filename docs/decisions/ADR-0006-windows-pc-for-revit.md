@@ -1,7 +1,20 @@
 # ADR-0006 — Revit on the Windows PC; single-machine VM deferred
 
-- **Status:** accepted
+- **Status:** superseded in part — 2026-09-21
 - **Date:** 2026-09-20
+
+> **Update (2026-09-21).** The deferral below has been overtaken: the
+> client is building the Windows VM on `ai-workstation` to use the RTX
+> 3090 through passthrough, and the project moves there. The reasoning
+> for *why* the deferral was safe still stands and is the reason the move
+> is cheap — one authored artifact, a generated extract, git as the
+> contract (ADR-0002), so nothing about the design data depends on which
+> machine it sits on. `docs/SETUP.md` is the migration procedure.
+>
+> The unverified items named under "Revisit when" are now live risks
+> rather than hypotheticals: whether the 3090 isolates cleanly in its own
+> IOMMU group, a Windows licence for the guest, and how Autodesk
+> activation behaves inside a VM.
 
 ## Context
 
