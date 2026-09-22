@@ -1,0 +1,60 @@
+# Stage 1 (Ground) -- what the site dictates.
+#
+# *** EXAMPLE DATA. The plot, the statutory envelope and the location are
+# *** placeholders. These cannot be guessed: setbacks, plot ratio and
+# *** storey limits come from the local authority, and latitude decides
+# *** every orientation rule. Replace before trusting any output.
+#
+# Plan geometry is millimetres in project coordinates, matching model.yaml.
+# `north_angle` is the TRUE bearing of the project +Y axis, so the drawing
+# can sit square on the page while the sun analysis stays truthful.
+
+name: "Villa plot (EXAMPLE)"
+
+location:
+  latitude: 30.0444          # Cairo, as a stand-in
+  longitude: 31.2357
+  city: "Cairo (EXAMPLE)"
+  utc_offset_hours: 2
+
+north_angle: 0               # project +Y points true north
+
+# 18 m x 28 m rectangular plot = 504 m2
+boundary:
+  - [0, 0]
+  - [18000, 0]
+  - [18000, 28000]
+  - [0, 28000]
+
+access: [9000, 0]            # from the road on the south edge
+
+statutory:
+  setback_front: 4000
+  setback_rear: 3000
+  setback_side: 3000
+  height_limit: 11000
+  max_storeys: 2
+  plot_ratio: 0.75           # total floor area / plot area
+  site_coverage: 0.40        # footprint / plot area
+
+# Bearings are degrees clockwise from TRUE north.
+views:
+  - {id: V-1, bearing: 0,   quality: good, note: "open landscape to the north"}
+  - {id: V-2, bearing: 180, quality: poor, note: "road and neighbouring frontage"}
+
+noise:
+  - {id: NS-1, bearing: 180, source: road, severity: high}
+
+wind:
+  - {id: W-1, bearing: 315, note: "prevailing summer breeze from the north-west"}
+
+neighbours:
+  - id: N-1
+    height: 9000
+    boundary: [[18500, 0], [30000, 0], [30000, 28000], [18500, 28000]]
+
+spot_levels:
+  - {at: [0, 0],         z: 0}
+  - {at: [18000, 0],     z: 0}
+  - {at: [18000, 28000], z: 600}
+  - {at: [0, 28000],     z: 600}

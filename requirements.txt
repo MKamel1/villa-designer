@@ -1,0 +1,5 @@
+ezdxf==1.4.4
+matplotlib==3.11.2
+pymupdf==1.28.2
+PyYAML==6.0.3
+shapely==2.1.2

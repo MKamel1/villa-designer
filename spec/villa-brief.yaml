@@ -1,0 +1,79 @@
+# Stage 0 (Intent) -- the brief as data.
+#
+# *** EXAMPLE DATA. Every figure here is a placeholder until the client
+# *** interview replaces it. It exists so the Fit check can be tested and
+# *** so the interview has something concrete to react to.
+#
+# Filled by interview, not by handing this file to the client.
+
+name: "Villa - working brief (EXAMPLE)"
+
+household:
+  size: 4
+  growth_expected: false
+  ageing_in_place: true      # drives the ground-floor bedroom requirement
+  pets: [dog]
+
+living:
+  hosting_frequency: weekly  # never | occasional | monthly | weekly
+  typical_guests: 8
+  overnight_guests: true
+  cooking: enthusiast        # minimal | everyday | enthusiast | entertaining
+  work_from_home: 2
+  noise_sensitivity: high
+
+levels_preferred: 2
+
+# Public -> private ordering. Pattern 127 (Intimacy Gradient) is checked
+# against this at Stage 3.
+privacy_gradient:
+  [entrance, living, dining, kitchen, study, bathroom, bedroom, master]
+
+rooms:
+  # --- arrival and public ------------------------------------------------
+  - {id: B-ENT,  name: "Entrance hall",   occupancy: hall,     target_m2: 12, priority: must,   level_preference: ground}
+  - {id: B-LIV,  name: "Living",          occupancy: living,   target_m2: 45, priority: must,   level_preference: ground}
+  - {id: B-DIN,  name: "Dining",          occupancy: dining,   target_m2: 22, priority: must,   level_preference: ground}
+  - {id: B-KIT,  name: "Kitchen",         occupancy: kitchen,  target_m2: 28, priority: must,   level_preference: ground}
+  - {id: B-FAM,  name: "Family room",     occupancy: living,   target_m2: 25, priority: should, level_preference: ground}
+  - {id: B-WC,   name: "Guest WC",        occupancy: wc,       target_m2: 3,  priority: must,   level_preference: ground}
+
+  # --- work --------------------------------------------------------------
+  - {id: B-STU,  name: "Study",           occupancy: study,    target_m2: 12, priority: must,  count: 2}
+
+  # --- private -----------------------------------------------------------
+  - {id: B-MAS,  name: "Master bedroom",  occupancy: bedroom,  target_m2: 30, priority: must}
+  - {id: B-MENS, name: "Master ensuite",  occupancy: bathroom, target_m2: 12, priority: must}
+  - {id: B-DRS,  name: "Dressing room",   occupancy: dressing, target_m2: 10, priority: should}
+  - {id: B-BED,  name: "Bedroom",         occupancy: bedroom,  target_m2: 18, priority: must,  count: 2}
+  - {id: B-BTH,  name: "Family bathroom", occupancy: bathroom, target_m2: 10, priority: must}
+  - {id: B-GRD,  name: "Ground bedroom",  occupancy: bedroom,  target_m2: 16, priority: must,  level_preference: ground,
+     notes: "ageing in place; doubles as the guest room"}
+
+  # --- service -----------------------------------------------------------
+  - {id: B-UTL,  name: "Utility",         occupancy: utility,  target_m2: 10, priority: must,   level_preference: ground}
+  - {id: B-STO,  name: "Store",           occupancy: store,    target_m2: 8,  priority: should, level_preference: ground}
+  - {id: B-GAR,  name: "Garage",          occupancy: garage,   target_m2: 36, priority: nice,   level_preference: ground}
+
+storage_bulk_m3: 14
+
+accessibility:
+  step_free_entry: true
+  wheelchair: false
+  ground_floor_bedroom: true
+  ground_floor_wc: true
+
+aesthetic:
+  direction: >
+    Warm minimal. Natural stone and timber, deep window reveals, layered
+    lighting rather than a central fitting. Calm and hotel-like at the
+    entrance and in the master suite.
+  references: []        # taste-board images go here
+  must_have:
+    - "Daylight from two sides in the main living space"
+    - "A sheltered outdoor room usable in summer"
+  must_avoid:
+    - "Bedrooms opening directly off the living room"
+    - "A single central ceiling light as a room's only source"
+
+budget_note: "placeholder - band to be set at interview"

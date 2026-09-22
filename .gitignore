@@ -1,0 +1,28 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated drawing output -- everything here is regenerated from spec/
+out/
+
+# Autodesk working files
+*.bak
+*.dwl
+*.dwl2
+*.rvt.*
+*.slog
+plot.log
+*.log
+
+# Revit/AutoCAD models are authored artifacts, not source. The extract
+# (.model.json) is what belongs in git -- see ADR-0002.
+*.rvt
+*.rfa
+*.rte
+
+# Tooling
+.playwright-mcp/
+.DS_Store
+Thumbs.db

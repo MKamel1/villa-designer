@@ -1,0 +1,92 @@
+# L0 spec -- the source of truth. Everything else is a renderer.
+# Units: millimetres. Origin at the outer south-west corner grid intersection.
+#
+# Wall geometry is given as CENTRELINES; the renderer offsets by the wall
+# type thickness. Room boundaries are the finished inner faces.
+
+project:
+  name: "Demo Apartment - 2 Bed"
+  units: mm
+  standard: iso13567
+
+levels:
+  - id: L00
+    name: "Ground Floor"
+    elevation: 0
+    height: 3000
+
+wall_types:
+  - id: EXT300
+    description: "External cavity wall, 300mm"
+    thickness: 300
+    bearing: true
+    layers:                       # outer face inwards; must sum to thickness
+      - {material: facing_brick,  thickness: 100}
+      - {material: insulation,    thickness: 100}
+      - {material: blockwork,     thickness: 100}
+  - id: INT100
+    description: "Non-loadbearing stud partition, 100mm"
+    thickness: 100
+    bearing: false
+    layers:
+      - {material: gypsum_stud,   thickness: 100}
+
+walls:
+  # --- external envelope, clockwise from the SW corner -------------------
+  - {id: W-S,  level: L00, type: EXT300, start: [0, 0],         end: [10000, 0]}
+  - {id: W-E,  level: L00, type: EXT300, start: [10000, 0],     end: [10000, 8000]}
+  - {id: W-N,  level: L00, type: EXT300, start: [10000, 8000],  end: [0, 8000]}
+  - {id: W-W,  level: L00, type: EXT300, start: [0, 8000],      end: [0, 0]}
+  # --- internal partitions ----------------------------------------------
+  - {id: P-1,  level: L00, type: INT100, start: [5500, 0],      end: [5500, 8000]}
+  - {id: P-2,  level: L00, type: INT100, start: [5500, 4500],   end: [10000, 4500]}
+  - {id: P-3,  level: L00, type: INT100, start: [0, 5000],      end: [5500, 5000]}
+
+openings:
+  # `at` is the distance along the host wall from its start point to the
+  # CENTRE of the opening. `host` is the BIM host relationship.
+  - {id: D-01, host: W-S, kind: door,   width: 1000, height: 2100, at: 2000, family: entrance_single}
+  - {id: WD-01, host: W-S, kind: window, width: 1500, height: 1400, at: 7500, sill: 900}
+  # at:3000 would put this window exactly where partition P-3 lands -- the
+  # validator rejects it. 1500 places it cleanly in the kitchen.
+  - {id: WD-02, host: W-W, kind: window, width: 1800, height: 1400, at: 1500, sill: 900}
+  - {id: WD-03, host: W-N, kind: window, width: 1500, height: 1400, at: 3000, sill: 900}
+  - {id: WD-04, host: W-E, kind: window, width: 1500, height: 1400, at: 2000, sill: 900}
+  - {id: D-02, host: P-1, kind: door,   width: 900,  height: 2100, at: 2500, swing: left}
+  - {id: D-03, host: P-1, kind: door,   width: 900,  height: 2100, at: 6000, swing: right}
+  - {id: D-04, host: P-3, kind: door,   width: 900,  height: 2100, at: 4500, swing: left}
+
+rooms:
+  # Closed polygons on the finished inner faces. Area is computed, never typed.
+  - id: R-01
+    level: L00
+    name: "Living / Dining"
+    occupancy: living
+    boundary: [[150, 150], [5450, 150], [5450, 4950], [150, 4950]]
+  - id: R-02
+    level: L00
+    name: "Kitchen"
+    occupancy: kitchen
+    boundary: [[150, 5050], [5450, 5050], [5450, 7850], [150, 7850]]
+  - id: R-03
+    level: L00
+    name: "Bedroom 1"
+    occupancy: bedroom
+    boundary: [[5550, 150], [9850, 150], [9850, 4450], [5550, 4450]]
+  - id: R-04
+    level: L00
+    name: "Bedroom 2"
+    occupancy: bedroom
+    boundary: [[5550, 4550], [9850, 4550], [9850, 7850], [5550, 7850]]
+
+furniture:
+  # Sizes and required clearances come from the catalogue (Neufert figures);
+  # `size` would override the footprint for a bespoke piece.
+  - {id: F-01, level: L00, room: R-01, type: sofa_3seat,   at: [2800,  900], rotation: 0}
+  - {id: F-02, level: L00, room: R-01, type: coffee_table, at: [2800, 2000], rotation: 0}
+  - {id: F-03, level: L00, room: R-01, type: dining_4,     at: [4200, 3800], rotation: 0}
+  - {id: F-04, level: L00, room: R-02, type: kitchen_run,  at: [2800, 5350], rotation: 0}
+  - {id: F-05, level: L00, room: R-03, type: bed_double,   at: [7700, 1200], rotation: 0}
+  - {id: F-06, level: L00, room: R-03, type: wardrobe,     at: [9200, 3300], rotation: 0}
+  - {id: F-07, level: L00, room: R-04, type: bed_single,   at: [7500, 7300], rotation: 90}
+  - {id: F-08, level: L00, room: R-04, type: desk,         at: [6350, 5200], rotation: 0}

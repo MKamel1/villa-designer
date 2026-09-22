@@ -1,0 +1,1118 @@
+<title>Plan Review Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    /* Drawing-office palette: paper, ink, and the red architects mark up in. */
+    --paper:      #FBFAF6;
+    --sheet:      #FFFFFF;
+    --ink:        #17191D;
+    --ink-soft:   #5C5F66;
+    --ink-faint:  #8B8D93;
+    --rule:       #DEDAD0;
+    --rule-soft:  #EDEAE3;
+    --chrome:     #F3F1EB;
+    --redline:    #C0442B;
+    --redline-dim:#E8D3CD;
+    --blueline:   #2F5D87;
+    --shadow:     0 1px 2px rgba(23,25,29,.07), 0 8px 24px rgba(23,25,29,.06);
+    --radius:     3px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:      #16181B;
+      /* The raised surface cards, buttons and fields sit on. Without it the
+         light value carried over and they were white on near-white. The
+         drawing keeps its own literal #fff: paper is paper in either theme. */
+      --sheet:      #21252A;
+      --ink:        #E8E6E1;
+      --ink-soft:   #9A9DA3;
+      --ink-faint:  #6E7178;
+      --rule:       #2E3237;
+      --rule-soft:  #24272B;
+      --chrome:     #1C1F22;
+      --redline:    #E3705A;
+      --redline-dim:#3E2A26;
+      --blueline:   #6FA0CE;
+      --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper:      #16181B;
+    --sheet:      #21252A;
+    --ink:        #E8E6E1;
+    --ink-soft:   #9A9DA3;
+    --ink-faint:  #6E7178;
+    --rule:       #2E3237;
+    --rule-soft:  #24272B;
+    --chrome:     #1C1F22;
+    --redline:    #E3705A;
+    --redline-dim:#3E2A26;
+    --blueline:   #6FA0CE;
+    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace; }
+  .stamp {
+    font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    font-weight: 600;
+    font-size: 10px;
+    color: var(--ink-faint);
+  }
+
+  /* ---- title block -------------------------------------------------- */
+  .app { display: flex; flex-direction: column; height: 100%; }
+  .titleblock {
+    display: flex; flex-wrap: wrap; align-items: stretch;
+    border-bottom: 1px solid var(--rule);
+    background: var(--chrome);
+    padding-inline: 16px;
+    padding-block: 0;
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  }
+  .tb-cell { padding: 9px 18px 9px 0; margin-right: 18px; border-right: 1px solid var(--rule); }
+  .tb-cell:last-child { border-right: 0; margin-right: 0; }
+  .tb-cell.grow { flex: 1 1 auto; min-width: 0; border-right: 0; }
+  .tb-val { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tb-val.big { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .tb-actions { display: flex; align-items: center; gap: 8px; padding-block: 8px; }
+
+  button {
+    font: inherit; font-size: 13px; color: var(--ink);
+    background: var(--sheet); border: 1px solid var(--rule);
+    border-radius: var(--radius); padding: 6px 11px; cursor: pointer;
+  }
+  button:hover { border-color: var(--ink-faint); }
+  button:focus-visible { outline: 2px solid var(--redline); outline-offset: 1px; }
+  button.primary { background: var(--redline); border-color: var(--redline); color: #fff; font-weight: 500; }
+  button.primary[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  .iconbtn { padding: 5px 9px; line-height: 1; }
+
+  /* ---- main split ---------------------------------------------------- */
+  .split { flex: 1 1 auto; display: grid; grid-template-columns: 1fr 340px; min-height: 0; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; grid-template-rows: 1fr auto; } }
+
+  .stage {
+    position: relative; overflow: hidden; background: var(--paper);
+    /* faint drafting grid, so the sheet reads as sitting on a board */
+    background-image:
+      linear-gradient(var(--rule-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--rule-soft) 1px, transparent 1px);
+    background-size: 28px 28px;
+    touch-action: none; cursor: grab;
+  }
+  .stage.panning { cursor: grabbing; }
+  .stage.marking { cursor: crosshair; }
+
+  .canvas { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+  .sheet {
+    position: relative; background: #fff; box-shadow: var(--shadow);
+    border: 1px solid var(--rule);
+  }
+  .sheet svg { display: block; width: 100%; height: auto; }
+
+  .pin {
+    position: absolute; width: 0; height: 0; z-index: 5;
+  }
+  .pin-dot {
+    position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--redline); color: #fff;
+    border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.3);
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 600; cursor: pointer;
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .pin.resolved .pin-dot { background: var(--blueline); }
+  .pin.draft .pin-dot { background: var(--ink); animation: pulse 1.4s ease-in-out infinite; }
+  .pin.active .pin-dot { outline: 3px solid var(--redline); outline-offset: 2px; }
+  @keyframes pulse { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.15); } }
+  @media (prefers-reduced-motion: reduce) { .pin.draft .pin-dot { animation: none; } }
+
+  /* ---- readout + scale bar ------------------------------------------- */
+  .hud {
+    position: absolute; left: 12px; bottom: 12px; z-index: 10;
+    display: flex; align-items: flex-end; gap: 14px; pointer-events: none;
+  }
+  .hud-box {
+    background: color-mix(in srgb, var(--chrome) 92%, transparent);
+    border: 1px solid var(--rule); border-radius: var(--radius);
+    padding: 6px 9px; backdrop-filter: blur(6px);
+  }
+  .readout { font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .scalebar-line { display: flex; align-items: center; height: 9px; margin-top: 3px; }
+  .scalebar-line i { display: block; height: 100%; border: 1px solid var(--ink); border-right: 0; }
+  .scalebar-line i:nth-child(odd) { background: var(--ink); }
+  .scalebar-line i:last-child { border-right: 1px solid var(--ink); }
+
+  .zoomers { position: absolute; right: 12px; top: 12px; z-index: 10; display: flex; flex-direction: column; gap: 5px; }
+  .zoomers button { background: var(--chrome); }
+
+  /* ---- notes rail ----------------------------------------------------- */
+  .rail {
+    border-left: 1px solid var(--rule); background: var(--chrome);
+    display: flex; flex-direction: column; min-height: 0;
+  }
+  @media (max-width: 860px) { .rail { border-left: 0; border-top: 1px solid var(--rule); max-height: 45vh; } }
+  .rail-head { padding: 11px 16px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .rail-body { flex: 1 1 auto; overflow-y: auto; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+
+  .note {
+    background: var(--sheet); border: 1px solid var(--rule);
+    border-left: 3px solid var(--redline); border-radius: var(--radius);
+    padding: 9px 11px; cursor: pointer;
+  }
+  .note:hover { border-color: var(--ink-faint); border-left-color: var(--redline); }
+  .note.resolved { border-left-color: var(--blueline); opacity: .62; }
+  .note.active { border-color: var(--redline); box-shadow: 0 0 0 2px var(--redline-dim); }
+  .note-top { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+  .note-where { font-size: 11px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+  .note-text { margin: 5px 0 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .note-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 7px; }
+  .note-foot button { font-size: 11px; padding: 3px 8px; }
+
+  .composer { border-top: 1px solid var(--rule); padding: 11px 12px; background: var(--chrome); }
+  .composer textarea, .composer input[type=text] {
+    width: 100%; font: inherit; color: var(--ink); background: var(--sheet);
+    border: 1px solid var(--rule); border-radius: var(--radius); padding: 7px 9px;
+  }
+  .composer textarea { min-height: 62px; resize: vertical; }
+  .composer textarea:focus, .composer input:focus { outline: 2px solid var(--redline); outline-offset: -1px; border-color: var(--redline); }
+  .composer-row { display: flex; gap: 7px; align-items: center; margin-top: 7px; }
+  .composer-row .grow { flex: 1 1 auto; min-width: 0; }
+
+  .empty { color: var(--ink-soft); font-size: 13px; padding: 14px 4px; }
+  .banner { margin: 10px 12px 0; padding: 8px 10px; border-radius: var(--radius); font-size: 12.5px;
+            background: var(--redline-dim); color: var(--ink); border: 1px solid var(--redline); }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 11px; color: var(--ink-soft); padding: 0 16px 9px; }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  #scale-label { text-transform: none; letter-spacing: .04em; }
+
+  /* ---- JSON exchange --------------------------------------------------- */
+  .datapanel { border-top: 1px solid var(--rule); padding: 11px 12px; background: var(--chrome); }
+  .datapanel[hidden] { display: none; }
+  .datapanel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+  .datapanel textarea {
+    width: 100%; min-height: 104px; resize: vertical;
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11.5px; line-height: 1.45; white-space: pre; overflow-wrap: normal;
+    color: var(--ink); background: var(--sheet);
+    border: 1px solid var(--rule); border-radius: var(--radius); padding: 7px 9px;
+  }
+  .datapanel textarea:focus { outline: 2px solid var(--redline); outline-offset: -1px; border-color: var(--redline); }
+  .datapanel-row { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; margin-top: 7px; }
+  .datapanel-row button { font-size: 12px; padding: 5px 9px; }
+  .datapanel-msg { font-size: 11.5px; color: var(--ink-soft); margin-top: 7px; }
+  #store-tag { text-transform: none; letter-spacing: .04em; white-space: nowrap; }
+</style>
+
+<div class="app">
+  <header class="titleblock">
+    <div class="tb-cell">
+      <div class="stamp">Project</div>
+      <div class="tb-val big" id="tb-project">&mdash;</div>
+    </div>
+    <div class="tb-cell">
+      <div class="stamp">Level</div>
+      <div class="tb-val mono" id="tb-level">&mdash;</div>
+    </div>
+    <div class="tb-cell">
+      <div class="stamp">Units</div>
+      <div class="tb-val mono">mm</div>
+    </div>
+    <div class="tb-cell">
+      <div class="stamp">Extent</div>
+      <div class="tb-val mono" id="tb-extent">&mdash;</div>
+    </div>
+    <div class="tb-cell grow"></div>
+    <div class="tb-actions">
+      <button id="btn-mark" class="primary" aria-pressed="false">Add note</button>
+      <button id="btn-fit" class="iconbtn" title="Fit drawing to view">Fit</button>
+      <button id="btn-json" class="iconbtn" aria-expanded="false" aria-controls="datapanel"
+              title="Export or import the notes as JSON">JSON</button>
+    </div>
+  </header>
+
+  <div class="split">
+    <div class="stage" id="stage">
+      <div class="canvas" id="canvas">
+        <div class="sheet" id="sheet"><!--SVG--></div>
+      </div>
+      <div class="zoomers">
+        <button class="iconbtn" id="btn-in"  title="Zoom in"  aria-label="Zoom in">+</button>
+        <button class="iconbtn" id="btn-out" title="Zoom out" aria-label="Zoom out">&minus;</button>
+      </div>
+      <div class="hud">
+        <div class="hud-box">
+          <div class="stamp">Cursor</div>
+          <div class="readout mono" id="readout">&mdash; , &mdash;</div>
+        </div>
+        <div class="hud-box">
+          <div class="stamp" id="scale-label">Scale</div>
+          <div class="scalebar-line" id="scalebar"></div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="rail">
+      <div class="rail-head">
+        <div>
+          <div class="stamp">Review notes</div>
+          <div class="tb-val" id="note-count">No notes yet</div>
+        </div>
+        <button id="btn-showresolved" class="iconbtn" aria-pressed="false">Show closed</button>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--redline)"></i> Open</span>
+        <span><i class="swatch" style="background:var(--blueline)"></i> Closed</span>
+        <span>Click a note to locate it</span>
+      </div>
+      <div id="banner-slot"></div>
+      <div class="rail-body" id="notes"></div>
+      <div class="composer" id="composer" hidden>
+        <div class="stamp" id="composer-where">Note location</div>
+        <textarea id="note-text" placeholder="What should change here?" aria-label="Note text"></textarea>
+        <div class="composer-row">
+          <input type="text" id="note-author" class="grow" placeholder="Your name" aria-label="Your name">
+          <button id="btn-cancel">Cancel</button>
+          <button id="btn-save" class="primary">Add note</button>
+        </div>
+      </div>
+      <div class="datapanel" id="datapanel" hidden>
+        <div class="datapanel-head">
+          <div class="stamp">Notes JSON</div>
+          <div class="stamp" id="store-tag">&mdash;</div>
+        </div>
+        <textarea id="json-box" spellcheck="false" autocapitalize="off" autocorrect="off"
+                  aria-label="Notes JSON, for export and import"></textarea>
+        <div class="datapanel-row">
+          <button id="btn-export">Export</button>
+          <button id="btn-copy">Copy</button>
+          <button id="btn-import">Import</button>
+          <button id="btn-json-close">Close</button>
+        </div>
+        <div class="datapanel-msg" id="json-msg"></div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script type="application/json" id="plan-data">__VIEWER_DATA__</script>
+
+<script>
+(function () {
+  "use strict";
+
+  var DATA = JSON.parse(document.getElementById("plan-data").textContent);
+  var TF = DATA.transform;
+
+  // ---- model <-> svg ---------------------------------------------------
+  function toModel(sx, sy) {
+    return { x: TF.minx + (sx - TF.ox) / TF.s, y: TF.maxy - (sy - TF.oy) / TF.s };
+  }
+  function toSvg(mx, my) {
+    return { x: TF.ox + (mx - TF.minx) * TF.s, y: TF.oy + (TF.maxy - my) * TF.s };
+  }
+
+  // Which room contains a model point. This is what turns "a pin on a
+  // picture" into "a note about Bedroom 1".
+  function roomAt(mx, my) {
+    for (var i = 0; i < DATA.rooms.length; i++) {
+      var b = DATA.rooms[i].boundary, inside = false;
+      for (var j = 0, k = b.length - 1; j < b.length; k = j++) {
+        var xi = b[j][0], yi = b[j][1], xj = b[k][0], yj = b[k][1];
+        if (((yi > my) !== (yj > my)) && (mx < (xj - xi) * (my - yi) / (yj - yi) + xi)) inside = !inside;
+      }
+      if (inside) return DATA.rooms[i];
+    }
+    return null;
+  }
+  function placeLabel(mx, my) {
+    var r = roomAt(mx, my);
+    var at = Math.round(mx) + ", " + Math.round(my) + " mm";
+    return r ? r.name + " \u00b7 " + at : "Outside rooms \u00b7 " + at;
+  }
+
+  // ---- elements --------------------------------------------------------
+  var stage = document.getElementById("stage");
+  var canvas = document.getElementById("canvas");
+  var sheet = document.getElementById("sheet");
+  var svgEl = sheet.querySelector("svg");
+  var readout = document.getElementById("readout");
+  var notesEl = document.getElementById("notes");
+  var composer = document.getElementById("composer");
+  var composerWhere = document.getElementById("composer-where");
+  var textEl = document.getElementById("note-text");
+  var authorEl = document.getElementById("note-author");
+  var btnMark = document.getElementById("btn-mark");
+  var btnShowResolved = document.getElementById("btn-showresolved");
+
+  document.getElementById("tb-project").textContent = DATA.project;
+  document.getElementById("tb-level").textContent = DATA.level;
+  var ex = DATA.extents_mm;
+  document.getElementById("tb-extent").textContent =
+    Math.round(ex.maxx - ex.minx) + " \u00d7 " + Math.round(ex.maxy - ex.miny);
+
+  // The SVG carries mm page dimensions; strip them so CSS drives layout.
+  svgEl.removeAttribute("width");
+  svgEl.removeAttribute("height");
+
+  // ---- view transform ---------------------------------------------------
+  var view = { x: 0, y: 0, k: 1 };
+  var SHEET_W = 1000;   // css px of the sheet at k = 1; height from viewBox
+  sheet.style.width = SHEET_W + "px";
+  sheet.style.height = Math.round(SHEET_W * TF.vb_h / TF.vb_w) + "px";
+
+  function applyView() {
+    canvas.style.transform = "translate(" + view.x + "px," + view.y + "px) scale(" + view.k + ")";
+    var inv = 1 / view.k;
+    var dots = canvas.querySelectorAll(".pin-dot");
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].style.transform = "translate(-50%,-50%) scale(" + inv + ")";
+    }
+    drawScaleBar();
+  }
+  function fit() {
+    var pad = 36;
+    var sw = stage.clientWidth - pad * 2, sh = stage.clientHeight - pad * 2;
+    var hpx = SHEET_W * TF.vb_h / TF.vb_w;
+    view.k = Math.min(sw / SHEET_W, sh / hpx);
+    view.x = (stage.clientWidth - SHEET_W * view.k) / 2;
+    view.y = (stage.clientHeight - hpx * view.k) / 2;
+    applyView();
+  }
+  function zoomAt(cx, cy, factor) {
+    var k2 = Math.min(24, Math.max(0.05, view.k * factor));
+    var r = k2 / view.k;
+    view.x = cx - (cx - view.x) * r;
+    view.y = cy - (cy - view.y) * r;
+    view.k = k2;
+    applyView();
+  }
+
+  // Screen point -> model mm, via the sheet's rendered box.
+  function eventToModel(ev) {
+    var r = sheet.getBoundingClientRect();
+    if (!r.width || !r.height) return null;
+    var sx = (ev.clientX - r.left) / r.width * TF.vb_w;
+    var sy = (ev.clientY - r.top) / r.height * TF.vb_h;
+    return toModel(sx, sy);
+  }
+
+  // ---- scale bar --------------------------------------------------------
+  var NICE_MM = [100, 250, 500, 1000, 2000, 5000, 10000, 20000, 50000];
+  function drawScaleBar() {
+    var r = sheet.getBoundingClientRect();
+    if (!r.width) return;
+    var mmPerPx = (TF.vb_w / r.width) / TF.s;
+    var target = 96, chosen = NICE_MM[0];
+    for (var i = 0; i < NICE_MM.length; i++) {
+      if (NICE_MM[i] / mmPerPx <= target) chosen = NICE_MM[i];
+    }
+    var px = chosen / mmPerPx, seg = px / 4, bar = document.getElementById("scalebar");
+    bar.innerHTML = "";
+    for (var s = 0; s < 4; s++) {
+      var i2 = document.createElement("i");
+      i2.style.width = seg + "px";
+      bar.appendChild(i2);
+    }
+    document.getElementById("scale-label").textContent =
+      chosen >= 1000 ? (chosen / 1000) + " m" : chosen + " mm";
+  }
+
+  // ---- pan / zoom / cursor ---------------------------------------------
+  var drag = null, moved = 0;
+  stage.addEventListener("pointerdown", function (ev) {
+    if (ev.button !== 0) return;
+    drag = { x: ev.clientX, y: ev.clientY, vx: view.x, vy: view.y };
+    moved = 0;
+    stage.setPointerCapture(ev.pointerId);
+    stage.classList.add("panning");
+  });
+  stage.addEventListener("pointermove", function (ev) {
+    var m = eventToModel(ev);
+    if (m) readout.textContent = Math.round(m.x) + " , " + Math.round(m.y);
+    if (!drag) return;
+    var dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
+    moved = Math.max(moved, Math.abs(dx) + Math.abs(dy));
+    view.x = drag.vx + dx; view.y = drag.vy + dy;
+    applyView();
+  });
+  stage.addEventListener("pointerup", function (ev) {
+    stage.classList.remove("panning");
+    var wasDrag = drag && moved > 4;
+    drag = null;
+    if (!wasDrag && marking) {
+      var m = eventToModel(ev);
+      if (m) startDraft(m.x, m.y);
+    }
+  });
+  stage.addEventListener("pointercancel", function () { drag = null; stage.classList.remove("panning"); });
+  stage.addEventListener("wheel", function (ev) {
+    ev.preventDefault();
+    var r = stage.getBoundingClientRect();
+    zoomAt(ev.clientX - r.left, ev.clientY - r.top, ev.deltaY < 0 ? 1.12 : 1 / 1.12);
+  }, { passive: false });
+
+  document.getElementById("btn-fit").addEventListener("click", fit);
+  document.getElementById("btn-in").addEventListener("click", function () {
+    zoomAt(stage.clientWidth / 2, stage.clientHeight / 2, 1.3);
+  });
+  document.getElementById("btn-out").addEventListener("click", function () {
+    zoomAt(stage.clientWidth / 2, stage.clientHeight / 2, 1 / 1.3);
+  });
+
+  // ---- notes state ------------------------------------------------------
+  var notes = [];          // {id, x, y, room, roomId, text, author, created, resolved}
+  var draft = null;        // {x, y}
+  var marking = false;
+  var activeId = null;
+  var showResolved = false;
+  var store = null, unsubscribe = null, readOnly = false;
+
+  function remember(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function recall(k) { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } }
+  authorEl.value = recall("planreview.author");
+
+  function setMarking(on) {
+    marking = on;
+    btnMark.setAttribute("aria-pressed", String(on));
+    btnMark.textContent = on ? "Click the plan\u2026" : "Add note";
+    stage.classList.toggle("marking", on);
+  }
+  btnMark.addEventListener("click", function () { setMarking(!marking); });
+
+  function startDraft(x, y) {
+    draft = { x: x, y: y };
+    setMarking(false);
+    composer.hidden = false;
+    composerWhere.textContent = placeLabel(x, y);
+    textEl.value = "";
+    render();
+    textEl.focus();
+  }
+  function cancelDraft() {
+    draft = null; composer.hidden = true; render();
+  }
+  document.getElementById("btn-cancel").addEventListener("click", cancelDraft);
+
+  document.getElementById("btn-save").addEventListener("click", function () {
+    if (!draft) return;
+    var text = textEl.value.trim();
+    if (!text) { textEl.focus(); return; }
+    var author = authorEl.value.trim() || "Unsigned";
+    remember("planreview.author", author);
+    var r = roomAt(draft.x, draft.y);
+    var note = {
+      x: Math.round(draft.x), y: Math.round(draft.y),
+      room: r ? r.name : "", roomId: r ? r.id : "",
+      level: DATA.level, text: text, author: author,
+      created: new Date().toISOString(), resolved: false
+    };
+    save(note);
+    cancelDraft();
+  });
+
+  btnShowResolved.addEventListener("click", function () {
+    showResolved = !showResolved;
+    btnShowResolved.setAttribute("aria-pressed", String(showResolved));
+    btnShowResolved.textContent = showResolved ? "Hide closed" : "Show closed";
+    render();
+  });
+
+  // ---- note stores ------------------------------------------------------
+  // The page talks to one interface, so it runs unchanged on claude.ai, off
+  // a bare file:// URL, or in front of somebody else's notes service:
+  //
+  //   list()                  -> Promise<note[]>  the notes as they stand
+  //   add(note)               -> Promise          append one
+  //   update(id, patch)       -> Promise          merge fields into one
+  //   subscribe(cb, onError)  -> function         cb(note[]) on every change
+  //
+  // Two rules the implementations must keep. Rejections are passed through
+  // untouched, because the claude.ai error codes ("invalid_argument",
+  // "not_granted", "revoked") are what drive the read-only UI and a
+  // re-wrapped Error would silently kill it. And `subscribe` is the only
+  // thing that ever assigns `notes`, so a write is never echoed locally --
+  // it comes back through the subscription like everybody else's.
+
+  function newId() {
+    return "n-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8);
+  }
+  function fanout(subs, rows) {
+    for (var i = 0; i < subs.length; i++) {
+      try { subs[i](rows.slice()); } catch (e) {}
+    }
+  }
+
+  // The artifact database. Behaviour here is the original page's behaviour.
+  function ClaudeDbStore(db) {
+    var cache = [];
+    return {
+      kind: "claude",
+      label: function () { return "claude.ai database"; },
+      detail: function () { return "Shared with everyone who can open this artifact."; },
+      list: function () { return Promise.resolve(cache.slice()); },
+      add: function (note) { return db.collection("notes").add(note); },
+      update: function (id, patch) { return db.doc("notes/" + id).update(patch); },
+      subscribe: function (cb, onError) {
+        return db.collection("notes").onSnapshot(function (snap) {
+          cache = snap.docs.map(function (d) {
+            return Object.assign({ id: d.id }, d.data());
+          });
+          fanout([cb], cache);
+        }, onError);
+      }
+    };
+  }
+
+  // localStorage, which can throw or come back empty in a private window,
+  // on a file:// URL, or with site data blocked -- so every read and write
+  // is guarded and the in-memory copy stays authoritative either way.
+  function LocalStore(key) {
+    var mem = [], subs = [], persists = true;
+
+    function load() {
+      var raw;
+      try { raw = window.localStorage.getItem(key); }
+      catch (e) { persists = false; return; }
+      if (!raw) return;
+      try {
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) mem = parsed;
+      } catch (e) { /* corrupt value: start clean rather than blank the page */ }
+    }
+    function flush() {
+      try { window.localStorage.setItem(key, JSON.stringify(mem)); }
+      catch (e) { persists = false; }
+    }
+
+    load();
+    try {
+      window.addEventListener("storage", function (ev) {   // another tab wrote
+        if (ev && ev.key && ev.key !== key) return;
+        load();
+        fanout(subs, mem);
+      });
+    } catch (e) {}
+
+    return {
+      kind: "local",
+      label: function () { return persists ? "This browser" : "This tab only"; },
+      detail: function () {
+        return persists
+          ? "Kept in this browser's local storage. Export to move the notes anywhere else."
+          : "Storage is blocked here, so notes last until you close the tab. Export before you do.";
+      },
+      list: function () { return Promise.resolve(mem.slice()); },
+      add: function (note) {
+        var row = Object.assign({ id: newId() }, note);
+        mem = mem.concat([row]);
+        flush();
+        fanout(subs, mem);
+        return Promise.resolve(row);
+      },
+      update: function (id, patch) {
+        var hit = false;
+        mem = mem.map(function (n) {
+          if (n.id !== id) return n;
+          hit = true;
+          return Object.assign({}, n, patch);
+        });
+        if (hit) { flush(); fanout(subs, mem); }
+        return Promise.resolve();
+      },
+      subscribe: function (cb) {
+        subs.push(cb);
+        fanout([cb], mem);
+        return function () {
+          subs = subs.filter(function (f) { return f !== cb; });
+        };
+      }
+    };
+  }
+
+  // Any HTTP service, which is the escape hatch off this platform:
+  //   GET   {base}/notes        -> [note, ...]  (or {"notes": [...]})
+  //   POST  {base}/notes        <- note
+  //   PATCH {base}/notes/{id}   <- partial note
+  // Never active unless a base URL was configured -- see configuredApi().
+  function RestStore(base) {
+    var root = String(base).replace(/\/+$/, "");
+    var subs = [], cache = [], timer = null;
+
+    function bad(res) {
+      var e = new Error("HTTP " + res.status + " from the notes service");
+      e.code = "http_" + res.status;           // never "invalid_argument"
+      e.status = res.status;
+      return e;
+    }
+    function pull() {
+      return fetch(root + "/notes", { headers: { "accept": "application/json" } })
+        .then(function (res) { if (!res.ok) throw bad(res); return res.json(); })
+        .then(function (body) {
+          cache = Array.isArray(body) ? body
+                : (body && Array.isArray(body.notes) ? body.notes : []);
+          fanout(subs, cache);
+          return cache.slice();
+        });
+    }
+    return {
+      kind: "rest",
+      label: function () { return "REST service"; },
+      detail: function () { return root; },
+      list: function () { return pull(); },
+      add: function (note) {
+        return fetch(root + "/notes", {
+          method: "POST",
+          headers: { "content-type": "application/json", "accept": "application/json" },
+          body: JSON.stringify(note)
+        }).then(function (res) {
+          if (!res.ok) throw bad(res);
+          return pull();
+        });
+      },
+      update: function (id, patch) {
+        return fetch(root + "/notes/" + encodeURIComponent(id), {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(patch)
+        }).then(function (res) {
+          if (!res.ok) throw bad(res);
+          return pull();
+        });
+      },
+      subscribe: function (cb, onError) {
+        subs.push(cb);
+        pull().catch(function (e) { if (onError) onError(e); });
+        // Plain HTTP has no push channel, so poll gently: a second reviewer's
+        // notes should still turn up without a reload.
+        if (!timer) timer = setInterval(function () { pull().catch(function () {}); }, 20000);
+        return function () {
+          subs = subs.filter(function (f) { return f !== cb; });
+          if (!subs.length && timer) { clearInterval(timer); timer = null; }
+        };
+      }
+    };
+  }
+
+  // ---- persistence ------------------------------------------------------
+  function save(note) {
+    if (!store) { showBanner("Notes are not connected yet. Try again in a moment."); return; }
+    store.add(note).catch(function (e) {
+      if (e && e.code === "invalid_argument") goReadOnly();
+      else showBanner("That note could not be saved. " + ((e && e.message) || ""));
+    });
+  }
+  function toggleResolved(n) {
+    if (!store) return;
+    store.update(n.id, { resolved: !n.resolved }).catch(function (e) {
+      if (e && e.code === "invalid_argument") goReadOnly();
+      else showBanner("That note could not be updated. " + ((e && e.message) || ""));
+    });
+  }
+  function goReadOnly() {
+    if (readOnly) return;
+    readOnly = true;
+    btnMark.disabled = true;
+    if (btnImport) btnImport.disabled = true;
+    composer.hidden = true;
+    showBanner("You can read this sheet but not add notes to it. Ask for edit access to comment.");
+    render();
+  }
+  function showBanner(msg) {
+    var slot = document.getElementById("banner-slot");
+    slot.innerHTML = "";
+    var d = document.createElement("div");
+    d.className = "banner";
+    d.textContent = msg;
+    slot.appendChild(d);
+  }
+
+  // ---- render -----------------------------------------------------------
+  function visible() { return notes.filter(function (n) { return showResolved || !n.resolved; }); }
+
+  function render() {
+    var list = visible();
+    list.sort(function (a, b) { return (a.created || "").localeCompare(b.created || ""); });
+
+    var open = notes.filter(function (n) { return !n.resolved; }).length;
+    document.getElementById("note-count").textContent =
+      notes.length === 0 ? "No notes yet"
+        : open + " open \u00b7 " + (notes.length - open) + " closed";
+
+    // pins
+    var old = canvas.querySelectorAll(".pin");
+    for (var i = 0; i < old.length; i++) old[i].remove();
+    list.forEach(function (n, idx) { addPin(n, idx + 1); });
+    if (draft) addPin({ id: "__draft", x: draft.x, y: draft.y }, "", true);
+
+    // rail
+    notesEl.innerHTML = "";
+    if (!list.length) {
+      var e = document.createElement("div");
+      e.className = "empty";
+      e.textContent = notes.length
+        ? "All notes are closed. Use \u201cShow closed\u201d to review them."
+        : "No notes on this sheet yet. Press \u201cAdd note\u201d, then click the spot you mean.";
+      notesEl.appendChild(e);
+    }
+    list.forEach(function (n, idx) { notesEl.appendChild(noteCard(n, idx + 1)); });
+    applyView();
+  }
+
+  function addPin(n, label, isDraft) {
+    var p = toSvg(n.x, n.y);
+    var el = document.createElement("div");
+    el.className = "pin" + (isDraft ? " draft" : "") + (n.resolved ? " resolved" : "") +
+                   (n.id === activeId ? " active" : "");
+    el.style.left = (p.x / TF.vb_w * 100) + "%";
+    el.style.top = (p.y / TF.vb_h * 100) + "%";
+    var dot = document.createElement("div");
+    dot.className = "pin-dot";
+    dot.textContent = label;
+    if (!isDraft) {
+      dot.title = (n.room || "Outside rooms") + " \u2014 " + n.x + ", " + n.y + " mm";
+      dot.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        activeId = (activeId === n.id) ? null : n.id;
+        render();
+        var card = notesEl.querySelector('[data-id="' + n.id + '"]');
+        if (card) card.scrollIntoView({ block: "nearest", behavior: prefersReduced() ? "auto" : "smooth" });
+      });
+    }
+    el.appendChild(dot);
+    canvas.appendChild(el);
+  }
+
+  function prefersReduced() {
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function noteCard(n, idx) {
+    var card = document.createElement("article");
+    card.className = "note" + (n.resolved ? " resolved" : "") + (n.id === activeId ? " active" : "");
+    card.setAttribute("data-id", n.id);
+
+    var top = document.createElement("div");
+    top.className = "note-top";
+    var who = document.createElement("strong");
+    who.textContent = idx + ". " + (n.author || "Unsigned");
+    var where = document.createElement("span");
+    where.className = "note-where mono";
+    where.textContent = (n.room || "outside rooms") + " \u00b7 " + n.x + "," + n.y;
+    top.appendChild(who); top.appendChild(where);
+
+    var body = document.createElement("p");
+    body.className = "note-text";
+    body.textContent = n.text;
+
+    var foot = document.createElement("div");
+    foot.className = "note-foot";
+    var when = document.createElement("span");
+    when.className = "note-where";
+    when.textContent = n.created ? new Date(n.created).toLocaleString() : "";
+    var btn = document.createElement("button");
+    btn.textContent = n.resolved ? "Reopen" : "Mark done";
+    btn.disabled = readOnly;
+    btn.addEventListener("click", function (ev) { ev.stopPropagation(); toggleResolved(n); });
+    foot.appendChild(when); foot.appendChild(btn);
+
+    card.appendChild(top); card.appendChild(body); card.appendChild(foot);
+    card.addEventListener("click", function () {
+      activeId = (activeId === n.id) ? null : n.id;
+      centreOn(n);
+      render();
+    });
+    return card;
+  }
+
+  function centreOn(n) {
+    var p = toSvg(n.x, n.y);
+    var hpx = SHEET_W * TF.vb_h / TF.vb_w;
+    var px = p.x / TF.vb_w * SHEET_W, py = p.y / TF.vb_h * hpx;
+    view.x = stage.clientWidth / 2 - px * view.k;
+    view.y = stage.clientHeight / 2 - py * view.k;
+    applyView();
+  }
+
+  // ---- JSON exchange ----------------------------------------------------
+  // Notes have to be able to leave this page, or the review is trapped in
+  // whatever hosts it. Export is a selectable box plus a clipboard copy
+  // rather than a download: a published artifact runs sandboxed, where
+  // <a download> and script-driven saves do nothing for a viewer.
+  //
+  // The payload carries the model transform and the extents next to the
+  // notes, so a reader that never saw this page can still work out where
+  // "5700, 2500" is and which room that was.
+  var EXPORT_FORMAT = "arch-pipeline.review-notes";
+
+  var panel = document.getElementById("datapanel");
+  var jsonBox = document.getElementById("json-box");
+  var jsonMsg = document.getElementById("json-msg");
+  var btnJson = document.getElementById("btn-json");
+  var btnImport = document.getElementById("btn-import");
+  var storeTag = document.getElementById("store-tag");
+
+  function say(msg) { jsonMsg.textContent = msg; }
+
+  function exportPayload() {
+    return {
+      format: EXPORT_FORMAT,
+      version: 1,
+      exported: new Date().toISOString(),
+      project: DATA.project,
+      level: DATA.level,
+      units: "mm",
+      coordinates: "note.x and note.y are model millimetres, the same space as " +
+                   "extents_mm and room boundary points.",
+      extents_mm: DATA.extents_mm,
+      transform: TF,
+      transform_doc: {
+        about: "Maps SVG user units in the drawing to model millimetres.",
+        model_x: "minx + (svg_x - ox) / s",
+        model_y: "maxy - (svg_y - oy) / s",
+        svg_x: "ox + (model_x - minx) * s",
+        svg_y: "oy + (maxy - model_y) * s",
+        viewbox: "0 0 vb_w vb_h"
+      },
+      rooms: DATA.rooms.map(function (r) {
+        return { id: r.id, name: r.name, area_m2: r.area_m2, boundary: r.boundary };
+      }),
+      notes: notes.map(function (n) {
+        return {
+          id: n.id, x: n.x, y: n.y,
+          room: n.room || "", roomId: n.roomId || "",
+          level: n.level || DATA.level,
+          text: n.text || "", author: n.author || "",
+          created: n.created || "", resolved: !!n.resolved
+        };
+      })
+    };
+  }
+  function exportText() { return JSON.stringify(exportPayload(), null, 2); }
+
+  // Import is by content, not by id: ids belong to whichever store wrote
+  // them, so re-importing the same export twice must not double the sheet.
+  function fingerprint(n) {
+    return [n.x, n.y, n.created || "", n.author || "", n.text || ""].join("");
+  }
+  function cleanRow(row) {
+    var x = Number(row.x), y = Number(row.y);
+    if (!isFinite(x) || !isFinite(y)) return null;
+    var text = String(row.text == null ? "" : row.text).trim();
+    if (!text) return null;
+    return {
+      x: Math.round(x), y: Math.round(y),
+      room: String(row.room || ""), roomId: String(row.roomId || ""),
+      level: String(row.level || DATA.level),
+      text: text, author: String(row.author || "Unsigned"),
+      created: String(row.created || new Date().toISOString()),
+      resolved: !!row.resolved
+    };
+  }
+
+  function importText(raw) {
+    var parsed;
+    try { parsed = JSON.parse(String(raw)); }
+    catch (e) { return Promise.reject(new Error("that is not valid JSON")); }
+
+    var rows = Array.isArray(parsed) ? parsed
+             : (parsed && Array.isArray(parsed.notes) ? parsed.notes : null);
+    if (!rows) return Promise.reject(new Error("no \"notes\" array in there"));
+    if (!store) return Promise.reject(new Error("notes are not connected yet"));
+    if (readOnly) return Promise.reject(new Error("this sheet is read-only for you"));
+
+    var warning = "";
+    if (parsed && !Array.isArray(parsed)) {
+      if (parsed.project && parsed.project !== DATA.project) warning = "project " + parsed.project;
+      else if (parsed.level && parsed.level !== DATA.level) warning = "level " + parsed.level;
+    }
+
+    var have = Object.create(null);       // null prototype: note text is data
+    notes.forEach(function (n) { have[fingerprint(n)] = true; });
+
+    var queue = [];
+    for (var i = 0; i < rows.length; i++) {
+      var row = cleanRow(rows[i] || {});
+      if (!row) continue;
+      var fp = fingerprint(row);
+      if (have[fp]) continue;
+      have[fp] = true;
+      queue.push(row);
+    }
+
+    return Promise.all(queue.map(function (row) {
+      return store.add(row).then(function () { return true; }, function () { return false; });
+    })).then(function (results) {
+      var added = 0;
+      results.forEach(function (ok) { if (ok) added++; });
+      return {
+        total: rows.length, added: added,
+        skipped: rows.length - queue.length,
+        failed: queue.length - added,
+        warning: warning
+      };
+    });
+  }
+
+  function setPanel(open) {
+    panel.hidden = !open;
+    btnJson.setAttribute("aria-expanded", String(open));   // a disclosure, not a toggle
+    if (!open) return;
+    jsonBox.value = exportText();
+    say("Copy this out, or paste an exported sheet in and press Import.");
+    jsonBox.focus();
+    try { jsonBox.setSelectionRange(0, 0); } catch (e) {}
+    jsonBox.scrollTop = 0;
+    jsonBox.scrollLeft = 0;
+  }
+  btnJson.addEventListener("click", function () { setPanel(panel.hidden); });
+  document.getElementById("btn-json-close").addEventListener("click", function () {
+    setPanel(false);
+    btnJson.focus();
+  });
+  document.getElementById("btn-export").addEventListener("click", function () {
+    jsonBox.value = exportText();
+    jsonBox.focus();
+    try { jsonBox.select(); } catch (e) {}
+    say(notes.length + (notes.length === 1 ? " note" : " notes") +
+        ", with the transform and extents, ready to copy.");
+  });
+  document.getElementById("btn-copy").addEventListener("click", function () {
+    var text = jsonBox.value;
+    jsonBox.focus();
+    try { jsonBox.select(); } catch (e) {}
+    function manual() {
+      var ok = false;
+      try { ok = !!(document.execCommand && document.execCommand("copy")); } catch (e) { ok = false; }
+      say(ok ? "Copied to the clipboard."
+             : "The text is selected \u2014 press Ctrl+C (Cmd+C on a Mac) to copy it.");
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { say("Copied to the clipboard."); }, manual);
+    } else {
+      manual();
+    }
+  });
+  btnImport.addEventListener("click", function () {
+    say("Importing\u2026");
+    importText(jsonBox.value).then(function (r) {
+      var msg = "Imported " + r.added + " of " + r.total + ".";
+      if (r.skipped) msg += " " + r.skipped + " skipped as duplicate, empty or unreadable.";
+      if (r.failed) msg += " " + r.failed + " could not be saved.";
+      if (r.warning) msg += " That export came from " + r.warning + ".";
+      say(msg);
+    }, function (e) {
+      say("Nothing imported \u2014 " + ((e && e.message) || "unknown error") + ".");
+    });
+  });
+
+  // ---- store selection --------------------------------------------------
+  // Claude first so the artifact keeps working exactly as it did, then
+  // localStorage so a bare file still holds its notes. A REST service is
+  // only ever used when somebody configured one, and then it wins, because
+  // otherwise it could never be reached from inside claude.ai.
+  var LOCAL_KEY = "planreview.notes.v1|" + (DATA.project || "?") + "|" + (DATA.level || "?");
+  var API_KEY = "planreview.api";
+
+  // Read deliberately not from the query string: a link could then aim a
+  // reviewer's notes at somebody else's server. The host page sets the
+  // global, or this browser was told once to remember a service.
+  function configuredApi() {
+    if (typeof window.PLAN_REVIEW_NOTES_API === "string" && window.PLAN_REVIEW_NOTES_API) {
+      return window.PLAN_REVIEW_NOTES_API;
+    }
+    try { return window.localStorage.getItem(API_KEY) || ""; } catch (e) { return ""; }
+  }
+
+  function showStore() {
+    if (!storeTag) return;
+    storeTag.textContent = store ? store.label() : "Not connected";
+    storeTag.title = store ? store.detail() : "";
+  }
+
+  function attach(next) {
+    if (unsubscribe) { try { unsubscribe(); } catch (e) {} unsubscribe = null; }
+    store = next;
+    showStore();
+    try {
+      unsubscribe = store.subscribe(function (rows) {
+        notes = rows;
+        render();
+      }, function (err) {
+        if (err && (err.code === "not_granted" || err.code === "revoked")) goReadOnly();
+        else if (err) showBanner("Those notes could not be loaded. " + (err.message || ""));
+      });
+    } catch (e) {
+      showBanner("Notes could not be connected. " + ((e && e.message) || ""));
+    }
+  }
+  function useLocal() { attach(LocalStore(LOCAL_KEY)); }
+
+  function boot() {
+    var api = configuredApi();
+    if (api && typeof window.fetch === "function") {
+      try { attach(RestStore(api)); return; } catch (e) { /* fall through */ }
+    }
+    var pending = null;
+    try {
+      if (window.claude && typeof window.claude.use === "function") {
+        pending = window.claude.use("db");
+      }
+    } catch (e) { pending = null; }
+    if (pending && typeof pending.then === "function") {
+      pending.then(function (db) {
+        if (db) attach(ClaudeDbStore(db));
+        else useLocal();                  // not granted, or not served
+      }, useLocal);
+      return;
+    }
+    useLocal();                           // no platform here at all
+  }
+
+  // A handle for whatever drives this page next -- another agent, a host
+  // page, a console. Everything the buttons do is reachable from here.
+  window.planReview = {
+    format: EXPORT_FORMAT,
+    notes: function () { return notes.slice(); },
+    exportJson: function () { return exportText(); },
+    importJson: function (raw) { return importText(raw); },
+    store: function () { return store ? store.kind : null; },
+    connect: function (url) {
+      try { window.localStorage.setItem(API_KEY, String(url)); } catch (e) {}
+      attach(RestStore(url));
+      return store.kind;
+    },
+    disconnect: function () {
+      try { window.localStorage.removeItem(API_KEY); } catch (e) {}
+      useLocal();
+      return store.kind;
+    }
+  };
+
+  // ---- boot -------------------------------------------------------------
+  fit();
+  render();
+  setPanel(false);
+  window.addEventListener("resize", function () { drawScaleBar(); });
+  boot();
+})();
+</script>

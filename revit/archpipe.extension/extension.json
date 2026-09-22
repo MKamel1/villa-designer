@@ -1,0 +1,9 @@
+{
+  "name": "archpipe",
+  "type": "extension",
+  "description": "Export a Revit model to the archpipe L0 text extract (ADR-0001/ADR-0002).",
+  "author": "archpipe",
+  "builtin": "False",
+  "default_enabled": "True",
+  "rocket_mode_compatible": "True"
+}

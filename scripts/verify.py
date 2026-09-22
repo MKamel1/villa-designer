@@ -1,0 +1,302 @@
+"""Whole-project verification. Run after any change.
+
+    PYTHONPATH=src python scripts/verify.py
+
+Deliberately includes negative cases. A suite that only proves the happy
+path says nothing: the bed-clearance and door-swing false positives found
+earlier in this project both passed their positive tests.
+"""
+from __future__ import annotations
+
+import contextlib
+import io
+import pathlib
+import re
+import sys
+import tempfile
+
+import yaml
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+
+from archpipe import (brief as B, catalogue as cat, cli, codes,  # noqa: E402
+                      feasibility as F, rules, site as S, solar,
+                      vocabulary as V, web)
+from archpipe.model import load as load_model  # noqa: E402
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+TMP = pathlib.Path(tempfile.mkdtemp(prefix="archpipe-verify-"))
+FAILS: list[str] = []
+
+# A number with a unit attached. Used to prove that an `advisory` finding
+# never reports a measurement: `measured is None` alone would not catch a
+# figure written into the prose, and prose is what the reader believes.
+# Deliberately not a bare \d, which would fire on "Bedroom 1".
+MEASUREMENT = re.compile(r"\d+(?:\.\d+)?\s*(?:mm|m2|%)")
+
+
+def expect(name: str, ok: bool) -> None:
+    print(("  PASS  " if ok else "  FAIL  ") + name)
+    if not ok:
+        FAILS.append(name)
+
+
+def write(name: str, obj) -> pathlib.Path:
+    p = TMP / name
+    p.write_text(yaml.safe_dump(obj), encoding="utf-8")
+    return p
+
+
+def run_cli(*argv: str) -> tuple[int, str]:
+    """Drive the real CLI and capture what it printed.
+
+    `--stage` filtering, the exit contract and the guidance-versus-code
+    labelling are all properties of the command, not of `rules.review`, so
+    testing them through the API would prove nothing about what a user
+    actually gets.
+    """
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        rc = cli.main(list(argv))
+    return rc, buf.getvalue()
+
+
+def raises(exc, fn, *a, **kw) -> bool:
+    try:
+        fn(*a, **kw)
+    except exc:
+        return True
+    return False
+
+
+def main() -> int:
+    brief_src = yaml.safe_load((ROOT / "spec/villa-brief.yaml").read_text(encoding="utf-8"))
+    site_src = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))
+
+    print("GATES FIRE ON BAD INPUT")
+    bad = dict(brief_src)
+    bad["rooms"] = [r for r in brief_src["rooms"]
+                    if r["occupancy"] not in ("bathroom", "wc", "study")]
+    bad["accessibility"] = {**brief_src["accessibility"], "ground_floor_bedroom": False}
+    bad["aesthetic"] = {"direction": "", "references": []}
+    expect("brief gate fires on missing sanitary / study / aesthetic",
+           len(B.load(write("b1.yaml", bad)).gate()) >= 4)
+
+    few = dict(brief_src)
+    few["rooms"] = [r for r in brief_src["rooms"] if r["occupancy"] != "bedroom"] + [
+        {"id": "X", "name": "Only bedroom", "occupancy": "bedroom",
+         "target_m2": 20, "priority": "must"}]
+    few["household"] = {"size": 6}
+    expect("brief gate fires on too few bedrooms for the household",
+           any("bedroom" in p for p in B.load(write("b2.yaml", few)).gate()))
+
+    bare = {k: v for k, v in site_src.items()
+            if k not in ("statutory", "access", "views", "noise")}
+    expect("site gate fires on missing envelope / access / views",
+           len(S.load(write("s1.yaml", bare)).gate()) >= 4)
+
+    over = dict(site_src)
+    over["statutory"] = {**site_src["statutory"], "setback_side": 9500}
+    try:
+        S.load(write("s2.yaml", over))
+        expect("oversized setback raises", False)
+    except S.SiteError:
+        expect("oversized setback raises", True)
+
+    print("\nGATES STAY SILENT ON GOOD INPUT")
+    good_brief = B.load(ROOT / "spec/villa-brief.yaml")
+    good_site = S.load(ROOT / "spec/villa-site.yaml")
+    expect("good brief passes its gate", good_brief.gate() == [])
+    expect("good site passes its gate", good_site.gate() == [])
+
+    print("\nFEASIBILITY")
+    v = F.assess(good_brief, good_site)
+    expect("example brief does not fit the example plot", not v.fits)
+    expect("cut ladder proposes exactly the garage",
+           len(v.cuts) == 1 and v.cuts[0]["id"] == "B-GAR")
+    trimmed = dict(brief_src)
+    trimmed["rooms"] = [r for r in brief_src["rooms"] if r["id"] != "B-GAR"]
+    expect("taking the ladder's advice makes it fit",
+           F.assess(B.load(write("ok.yaml", trimmed)), good_site).fits)
+
+    print("\nGEOMETRY AND PHYSICS")
+    env, note = good_site.buildable()
+    expect("per-side setbacks on the rectangular plot give 252 m2",
+           abs(env.area / 1e6 - 252.0) < 0.1)
+    expect("frontage detected from the access point", "south edge" in note)
+    expect("solar position verification (14 checks)", solar.verify()["ok"])
+    expect("model<->svg transform verification", web.verify_transform()["ok"])
+
+    print("\nEXISTING RULE ENGINE")
+    p = load_model(ROOT / "spec/apartment.yaml")
+    findings = rules.review(p)
+    expect("apartment review produces findings", len(findings) > 0)
+    expect("every finding carries a source",
+           all(f.source for f in findings))
+    expect("missing bathroom is reported as a violation",
+           any(f.rule == "SAN-01" and f.severity == "violation" for f in findings))
+
+    # ---- the shared occupancy vocabulary -------------------------------
+    print("\nOCCUPANCY VOCABULARY")
+    used = ({r["occupancy"] for r in brief_src["rooms"]}
+            | {r.occupancy for r in p.rooms})
+    unknown = sorted(t for t in used if not V.is_known(t))
+    expect(f"every occupancy the brief and the spec use is declared "
+           f"({len(used)} terms)", not unknown)
+    # The specific join that was missing: the brief's only circulation term
+    # was absent from the rule engine's CIRCULATION set, so CIRC-01 would
+    # have found no circulation rooms and passed in silence.
+    expect("'hall' counts as circulation", "hall" in V.CIRCULATION)
+    expect("the brief's circulation term is visible to the intimacy rule",
+           any(r["occupancy"] in rules.CIRCULATION for r in brief_src["rooms"]))
+
+    typo_brief = dict(brief_src)
+    typo_brief["rooms"] = [
+        {**r, "occupancy": "lounge"} if r["id"] == "B-LIV" else r
+        for r in brief_src["rooms"]]
+    try:
+        B.load(write("typo.yaml", typo_brief))
+        expect("an undeclared occupancy is rejected by the brief", False)
+    except B.BriefError as e:
+        expect("an undeclared occupancy is rejected by the brief",
+               "lounge" in str(e) and "B-LIV" in str(e))
+
+    spec_src = yaml.safe_load((ROOT / "spec/apartment.yaml").read_text(encoding="utf-8"))
+    typo_spec = dict(spec_src)
+    typo_spec["rooms"] = [{**r, "occupancy": "lounge"} if r["id"] == "R-01" else r
+                          for r in spec_src["rooms"]]
+    expect("an undeclared occupancy is rejected by the rule engine",
+           raises(V.UnknownOccupancy, rules.review,
+                  load_model(write("typo_spec.yaml", typo_spec))))
+    # Knowing a term does not mean inventing a minimum area for it. Neufert
+    # publishes none for these, and a fabricated figure is the exact fault
+    # the vocabulary was added to prevent, not a tidier table.
+    expect("a declared term carries no invented minimum area",
+           all(t not in cat.MIN_AREA_M2
+               for t in ("hall", "utility", "store", "dressing", "garage")))
+
+    # ---- rule declarations --------------------------------------------
+    print("\nRULE DECLARATIONS: STAGE, KIND, REFERENCE, LADDER")
+    expect(f"every rule declares stage 0-7, a kind and a reference "
+           f"({len(rules.RULES)} rules)",
+           all(r.stage in rules.STAGES and r.kind in rules.KINDS and r.reference
+               for r in rules.RULES.values()))
+    expect("every rule carries a fix ladder",
+           all(r.remedies for r in rules.RULES.values()))
+    expect("every ladder is ordered cheapest-first",
+           all([x.rank for x in r.remedies] == sorted(x.rank for x in r.remedies)
+               for r in rules.RULES.values()))
+    expect("every loop a remedy names is one of L1-L13",
+           all(x.loop in rules.LOOPS
+               for r in rules.RULES.values() for x in r.remedies if x.loop))
+    expect("no remedy returns to a stage later than its own rule",
+           all(x.returns_to is None or x.returns_to <= r.stage
+               for r in rules.RULES.values() for x in r.remedies))
+    expect("every finding carries stage, kind, reference and a ladder",
+           all(f.stage in rules.STAGES and f.kind in rules.KINDS
+               and f.reference and f.remedies for f in findings))
+
+    advisory = [f for f in findings if f.kind == "advisory"]
+    expect("the library has at least one advisory-kind rule to test",
+           bool(advisory))
+    expect("advisory findings report no measurement",
+           bool(advisory) and all(f.measured is None
+                                  and not MEASUREMENT.search(f.message)
+                                  for f in advisory))
+    expect("computed findings do carry achieved-versus-required pairs",
+           any(f.measured is not None for f in findings))
+
+    # Negative cases: the invariants must actually reject bad declarations.
+    expect("a ladder in the wrong order is rejected",
+           raises(ValueError, rules.Rule, "X-01", "t", 4, "computed", "ref",
+                  remedies=(rules.Remedy("change the brief", 0, "L7"),
+                            rules.Remedy("move the furniture"))))
+    expect("a rule with no reference is rejected",
+           raises(ValueError, rules.Rule, "X-02", "t", 4, "computed", "",
+                  remedies=(rules.Remedy("do something"),)))
+    expect("a rule with no fix ladder is rejected",
+           raises(ValueError, rules.Rule, "X-03", "t", 4, "computed", "ref"))
+    expect("an invented loop id is rejected",
+           raises(ValueError, rules.Remedy, "do something", 3, "L99"))
+    expect("an advisory finding carrying a measurement is rejected",
+           raises(ValueError, rules.Finding, "VIEW-01", "advisory", "msg",
+                  reference="ref", stage=4, kind="advisory",
+                  remedies=(rules.Remedy("judge it"),),
+                  measured=rules.Measured(1, 2, "mm")))
+
+    # ---- stage-aware reporting, through the CLI ------------------------
+    print("\nSTAGE FILTERING AND THE EXIT CONTRACT")
+    SPEC = str(ROOT / "spec/apartment.yaml")
+    rc_all, out_all = run_cli("design", SPEC)
+    rc3, out3 = run_cli("design", SPEC, "--stage", "3")
+    rc2, out2 = run_cli("design", SPEC, "--stage", "2")
+    later = ("FURN-02", "DOOR-02", "LIGHT-01", "CIRC-03")
+    expect("unfiltered reports every stage and exits 1 on a violation",
+           rc_all == 1 and all(r in out_all for r in later)
+           and "SAN-01" in out_all)
+    expect("--stage 3 excludes every Stage 4 finding",
+           rc3 == 1 and not any(r in out3 for r in later))
+    expect("--stage 3 still reports the Stage 3 violation",
+           "SAN-01" in out3 and "reporting Stage 0-3" in out3)
+    expect("--stage 3 says how many findings it suppressed",
+           "9 later-stage finding(s) not shown" in out3)
+    expect("--stage 2 reports nothing and exits 0, though a later "
+           "violation exists",
+           rc2 == 0 and "0 findings" in out2 and "nothing to report" in out2)
+    s3 = rules.review(p, max_stage=3)
+    expect("the filtered set is a strict subset, all at or before the stage",
+           all(f.stage <= 3 for f in s3) and len(s3) < len(findings)
+           and any(f.stage > 3 for f in findings))
+
+    # ---- citations: reference required, code optional ------------------
+    print("\nCITATIONS AND CODE PACKS")
+    expect("every rule cites a reference, and none is a code clause",
+           all(r.reference for r in rules.RULES.values()))
+    expect("with no pack loaded, no finding carries a code clause",
+           all(f.code == "" for f in findings))
+    expect("with no pack loaded, output is labelled guidance not compliance",
+           "GUIDANCE" in out_all
+           and "NOT a statement of code compliance" in out_all)
+    expect("the example pack is marked an example and names no real "
+           "jurisdiction",
+           codes.EXAMPLE_PACK.example
+           and "EXAMPLE" in codes.EXAMPLE_PACK.jurisdiction)
+    rc_pack, out_pack = run_cli("design", SPEC, "--code-pack", "example",
+                                "--stage", "3")
+    expect("a loaded pack adds its clause to the rules it covers",
+           "code:" in out_pack and "EXAMPLE ONLY" in out_pack)
+    expect("an example pack still says the findings are not compliance",
+           "placeholders" in out_pack and "NOT" in out_pack)
+    expect("a pack covering no rule leaves the finding uncited by code",
+           codes.EXAMPLE_PACK.cite("FURN-02") == ""
+           and codes.EXAMPLE_PACK.cite("SAN-01") != "")
+    expect("a pack without a jurisdiction is rejected",
+           raises(codes.CodePackError, codes.CodePack, "p", "", "ed"))
+
+    # Pluggable means loadable from outside the code. If a jurisdiction can
+    # only be added by editing codes.py, the mechanism has not been built --
+    # and this is the one path no built-in pack can exercise.
+    pack_file = write("pack.yaml", {
+        "id": "somewhere-test", "jurisdiction": "Somewhere", "edition": "1st",
+        "clauses": {"AREA-01": {"clause": "A/1.1", "title": "room areas"}},
+    })
+    loaded = codes.load(pack_file)
+    expect("a jurisdiction pack loads from YAML with no code change",
+           loaded.id == "somewhere-test"
+           and loaded.cite("AREA-01").startswith("A/1.1")
+           and not loaded.example)
+    expect("a pack that is not the example says so in its disclaimer",
+           "Somewhere" in codes.disclaimer(loaded)
+           and "EXAMPLE" not in codes.disclaimer(loaded))
+    expect("a loaded pack reaches the findings it covers",
+           all(f.code.startswith("A/1.1")
+               for f in rules.review(p, pack=loaded) if f.rule == "AREA-01")
+           and all(f.code == "" for f in rules.review(p, pack=loaded)
+                   if f.rule != "AREA-01"))
+
+    print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
+    return 1 if FAILS else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
