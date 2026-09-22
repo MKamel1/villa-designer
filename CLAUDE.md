@@ -43,7 +43,7 @@ back each one forces the design. Everything here follows from that.
 ## Before you claim something works
 
 ```bash
-PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 53 checks
+PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 70 checks
 ```
 
 Every stage command exits non-zero when its gate is closed — that is by
@@ -52,8 +52,14 @@ plot, `design` exits 1 on a violation.
 
 ## Environment
 
-- **Revit 2025, not 2026** — 2026 could not be licensed for automated
-  launch (ADR-0008). Root cause never isolated.
+- **Revit 2025, not 2026** — the client's entitlement covers 2025 only,
+  which is why 2026 failed to launch (ADR-0008, resolved).
+- **Revit 2025 ships no content library** — 446 families, **0 doors, 0
+  beds**. 2026's 3,237 families are on disk and unusable: `.rfa` is
+  forward-compatible only. But the **family templates** (1,328 `.rft`,
+  including `Metric Door/Window/Furniture/Casework/Lighting Fixture`) and
+  **141 IES photometric files** ARE installed, which is why Stage 5
+  lighting was not blocked on the download.
 - **`pyrevit run <model>` does not open the model** — it hands you a
   `UIApplication` with zero documents. `extract_model.py` opens it itself.
 - **`revit.doc` returns `None`** in the runner rather than raising.
@@ -81,5 +87,7 @@ stand-in and means nothing for the real site.
     docs/HANDOVER.md context transfer + the VM test plan
     docs/SETUP.md    rebuilding the environment on a new machine
     src/archpipe/    rule engine, stages 0-2, drawing pipeline
+    src/archpipe/photometry.py  IES LM-63 reader
+    src/archpipe/lighting.py    lux grids, task points, heat maps
     revit/           extractor, pyRevit extension, probe, test-model builder
-    scripts/verify.py 53 checks, positive and negative
+    scripts/verify.py 70 checks, positive and negative

@@ -294,6 +294,92 @@ def main() -> int:
            and all(f.code == "" for f in rules.review(p, pack=loaded)
                    if f.rule != "AREA-01"))
 
+    # ---------------------------------------------------------- lighting
+    # Stage 5. `lighting.verify()` is the substantive suite -- it validates
+    # the engine against hand calculation before any heat map is trusted,
+    # because a false-colour image is persuasive whether or not it is right.
+    from archpipe import lighting, photometry
+
+    light_fails = lighting.verify()
+    expect(f"lighting engine verification ({len(light_fails)} failures)",
+           not light_fails)
+    for f in light_fails:
+        print(f"      {f}")
+
+    # IES parsing, against the real library Revit ships. These files need no
+    # content-library download, which is why Stage 5 was not blocked on it.
+    ies_dir = photometry.revit_ies_dir()
+    if ies_dir is None:
+        print("  SKIP  Revit IES library not on this machine")
+    else:
+        lamps, bad = photometry.load_directory(ies_dir)
+        expect(f"every IES file in the Revit library parses ({len(lamps)} "
+               f"files, {len(bad)} failures)", lamps and not bad)
+        for path, err in bad[:5]:
+            print(f"      {path.name}: {err}")
+        expect("each candela grid matches its declared angle counts",
+               all(len(g.candela) == len(g.vertical)
+                   and all(len(r) == len(g.horizontal) for r in g.candela)
+                   for g in lamps))
+        # A misparsed file shows up as impossible efficacy long before it
+        # shows up as a wrong heat map.
+        effs = [g.efficacy for g in lamps if g.efficacy]
+        expect("no luminaire claims an impossible efficacy",
+               effs and max(effs) < 250)
+
+    # Negative cases: malformed photometry must raise, not return a
+    # plausible distribution.
+    _iso = "\n".join(["IESNA91", "TILT=NONE", "1 1000 1 3 1 1 2 0 0 0",
+                      "1 1 10", "0 45 90", "0", "1000 1000 1000"])
+    expect("an IES file with no TILT line is rejected",
+           raises(photometry.IESError, photometry.parse, "IESNA91\n[TEST]\n1 2 3\n"))
+    expect("an IES candela block shorter than declared is rejected",
+           raises(photometry.IESError, photometry.parse,
+                  _iso.replace("1000 1000 1000", "1000 1000")))
+    expect("absolute photometry (-1 lumens) does not become negative light",
+           photometry.parse(
+               _iso.replace("1 1000 1 3", "1 -1 1 3")).total_lumens == 0.0)
+
+    iso = photometry.parse(_iso)
+    room4 = [(0.0, 0.0), (4000.0, 0.0), (4000.0, 4000.0), (0.0, 4000.0)]
+    lum = lighting.Luminaire("V1", iso, 2000.0, 2000.0, 2850.0)
+    expect("a room boundary in metres rather than mm is rejected",
+           raises(lighting.LightingError, lighting.lux_grid,
+                  [(0, 0), (4, 0), (4, 4), (0, 4)], [lum]))
+    expect("a maintenance factor above 1.0 is rejected",
+           raises(lighting.LightingError, lighting.lux_grid,
+                  room4, [lum], maintenance_factor=1.2))
+    expect("an unknown lighting layer is rejected",
+           raises(lighting.LightingError, lighting.Luminaire,
+                  "bad", iso, 0.0, 0.0, 2400.0, layer="mood"))
+
+    # The discipline point, tested as a name rather than as a threshold:
+    # EN 12464-1's U0 is defined on total illuminance, so a direct-only
+    # grid must not offer a property that reads as U0. See CLAUDE.md #4 --
+    # a metric this engine cannot support must not be presented as one.
+    grid4 = lighting.lux_grid(room4, [lum], room="verify", spacing=250.0)
+    expect("a direct-only grid exposes no bare `uniformity`/`diversity`",
+           not hasattr(grid4, "uniformity") and not hasattr(grid4, "diversity"))
+    expect("the direct ratio is labelled as not being U0",
+           "NOT U0" in grid4.summary())
+    expect("the grid states what it can and cannot judge",
+           "NOT valid: uniformity" in grid4.assessment_note()
+           and "task points" in grid4.assessment_note())
+    # Legacy IES wattage must not be passed off as a scheme's installed load.
+    expect("power density is unreported until a real wattage is stated",
+           grid4.power_density is None and grid4.total_load is None)
+    expect("power density is reported once wattage is stated",
+           lighting.lux_grid(room4, [lighting.Luminaire(
+               "V2", iso, 2000.0, 2000.0, 2850.0, watts=10.0)],
+               spacing=500.0).power_density is not None)
+    # The inter-reflection estimate must stay a range wide enough to be
+    # unusable as a verdict -- that is the point of it.
+    irc = lighting.interreflected_estimate(grid4, 4000.0, 4000.0, 2700.0)
+    expect("the inter-reflection estimate is an ordered range, not a number",
+           0.0 < irc.low < irc.high and irc.spread > 1.3)
+    expect("the inter-reflection estimate says it cannot decide uniformity",
+           "NOT a basis" in irc.note)
+
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     return 1 if FAILS else 0
 
