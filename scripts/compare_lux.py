@@ -60,17 +60,48 @@ def main() -> int:
         scheme.append(Luminaire(
             fx["id"], ph.load(ies_dir / fx["ies_file"]),
             fx["at"][0], fx["at"][1], fx["mounting_height"],
+            aim=float(fx.get("rotation") or 0.0),
             layer=fx.get("layer", "ambient"),
             output=float(fx.get("output") or 1.0)))
 
     # The render applies no maintenance factor -- it is an initial-condition
     # simulation of the fittings as specified. Compare like with like.
-    rows = []
+    # Furniture footprints, so occluded points can be separated out.
+    #
+    # The analytical engine has NO occlusion: it sums inverse-square
+    # contributions and nothing casts a shadow. Cycles traces rays, so a
+    # wardrobe blocks light. Comparing the two over a furnished room
+    # therefore measures the shadows, not the agreement -- and the render
+    # is the one that is right.
+    blocks = []
+    for fn in extract.get("furniture", []):
+        at, size = fn.get("at"), fn.get("size_mm")
+        if not at or not size:
+            continue
+        hw, hd = float(size[0]) / 2.0, float(size[1]) / 2.0
+        blocks.append((at[0] - hw, at[1] - hd, at[0] + hw, at[1] + hd))
+
+    def shadowed(x, y, margin=350.0):
+        """Inside or near a furniture footprint.
+
+        The margin is generous on purpose: the penumbra of a box lit by a
+        finite source extends beyond its plan outline, and the point of
+        this split is to isolate CLEAN points, not to draw the shadow
+        exactly.
+        """
+        for x0, y0, x1, y1 in blocks:
+            if (x0 - margin) <= x <= (x1 + margin) and                (y0 - margin) <= y <= (y1 + margin):
+                return True
+        return False
+
+    rows, clear = [], []
     for x, y, lux_r in rendered["points"]:
         if not (a.inset <= x <= W - a.inset and a.inset <= y <= D - a.inset):
             continue
         lux_a = point_illuminance(scheme, x, y, plane, maintenance_factor=1.0)
         rows.append((x, y, lux_a, lux_r))
+        if not shadowed(x, y):
+            clear.append((x, y, lux_a, lux_r))
 
     if not rows:
         print("No overlapping points to compare.")
@@ -102,13 +133,37 @@ def main() -> int:
           f"analytical {worst[2]:.1f}, rendered {worst[3]:.1f}")
 
     # Agreement where the light actually is: points above 10% of peak.
-    bright = [r for r in rows if r[2] > 0.1 * peak]
-    if bright:
-        ratios = [r[3] / r[2] for r in bright if r[2] > 0]
-        ratios.sort()
-        print(f"  over 10% of peak ({len(bright)} points): "
-              f"median ratio {ratios[len(ratios) // 2]:.4f}, "
+    def band(label, sample):
+        bright = [r for r in sample if r[2] > 0.1 * peak]
+        if not bright:
+            return None
+        ratios = sorted(r[3] / r[2] for r in bright if r[2] > 0)
+        med = ratios[len(ratios) // 2]
+        print(f"  {label} ({len(bright)} points): median ratio {med:.4f}, "
               f"range {ratios[0]:.4f}-{ratios[-1]:.4f}")
+        return med
+
+    band("over 10% of peak, ALL points", rows)
+    if blocks:
+        med = band("over 10% of peak, CLEAR of furniture", clear)
+        print()
+        print(f"  {len(rows) - len(clear)} of {len(rows)} points lie within "
+              f"350 mm of a furniture footprint.")
+        print("  The analytical engine models no occlusion, so those points "
+              "are where")
+        print("  the two MUST disagree. Agreement on the clear points is the "
+              "real test.")
+        if med is not None:
+            print()
+            if abs(med - 1.0) <= 0.05:
+                print(f"  VERDICT: clear-point median {med:.4f} -- the render "
+                      f"and the closed-form")
+                print("  calculation agree to within 5% where nothing is in "
+                      "the way.")
+            else:
+                print(f"  VERDICT: clear-point median {med:.4f} is outside "
+                      f"5%; something other")
+                print("  than shadowing differs.")
     return 0
 
 

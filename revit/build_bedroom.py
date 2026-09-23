@@ -211,6 +211,99 @@ def load_family(doc, directory, filename):
         return None, "load failed: %s" % str(exc)[:160]
 
 
+# Revit's own photometric parameters on a light fixture. Setting these
+# makes Revit the source of truth for the lighting scheme (ADR-0001)
+# rather than a second copy living in the spec: the extract then carries
+# everything the lux engine and the renderer need, and the spec is not
+# consulted again downstream.
+# Names verified by dumping a placed fixture's parameters, because the
+# obvious guesses are wrong: colour temperature is
+# FBX_LIGHT_INITIAL_COLOR_TEMPERATURE, not FBX_LIGHT_COLOR_TEMPERATURE,
+# and Autodesk's own spelling of "luminous" is inconsistent.
+PHOTOMETRIC_PARAMS = {
+    "ies": ("FBX_LIGHT_PHOTOMETRIC_FILE",),
+    "lumens": ("FBX_LIGHT_LUMINOUS_FLUX", "FBX_LIGHT_LIMUNOUS_FLUX"),
+    "kelvin": ("FBX_LIGHT_INITIAL_COLOR_TEMPERATURE",),
+    "watts": ("FBX_LIGHT_WATTAGE",),
+}
+
+
+def stamp_mark(el, ident):
+    """Write the spec id into Revit's Mark parameter.
+
+    The join key between the model and the spec. Measured on this project:
+    writes to the photometric parameters of third-party light families
+    report success and then do NOT survive the save, because those
+    families carry a read-only Light Source Definition that drives the
+    photometric web. Mark is plain text Revit always holds, so the scheme
+    can be rejoined to its photometry without either side guessing
+    (ADR-0012).
+    """
+    for nm in ("ALL_MODEL_MARK", "DOOR_NUMBER", "ALL_MODEL_INSTANCE_COMMENTS"):
+        bip = getattr(BuiltInParameter, nm, None)
+        if bip is None:
+            continue
+        try:
+            prm = el.get_Parameter(bip)
+            if prm is not None and not prm.IsReadOnly:
+                prm.Set(str(ident))
+                return nm
+        except Exception:
+            continue
+    return None
+
+
+def set_photometrics(inst, lt, ies_dir):
+    """Write the spec's photometry onto the placed fixture.
+
+    Parameters live on the fixture's TYPE in most families and on the
+    instance in some, so both are tried. What actually took is reported --
+    a silently-unset IES file would leave the renderer lighting the room
+    with a default it invented.
+    """
+    applied, missed = {}, []
+    for key, names in PHOTOMETRIC_PARAMS.items():
+        want = lt.get(key)
+        if want is None:
+            continue
+        if key == "ies":
+            want = os.path.join(ies_dir or "", str(want))
+            if not os.path.isfile(want):
+                missed.append("%s: file not found %s" % (key, want))
+                continue
+        done = False
+        for holder in (inst, getattr(inst, "Symbol", None)):
+            if holder is None or done:
+                continue
+            for nm in names:
+                bip = getattr(BuiltInParameter, nm, None)
+                if bip is None:
+                    continue
+                try:
+                    prm = holder.get_Parameter(bip)
+                    if prm is None or prm.IsReadOnly:
+                        continue
+                    if key == "ies":
+                        prm.Set(str(want))
+                    elif key == "lumens":
+                        prm.Set(UnitUtils.ConvertToInternalUnits(
+                            float(want), UnitTypeId.Lumens))
+                    elif key == "watts":
+                        prm.Set(UnitUtils.ConvertToInternalUnits(
+                            float(want), UnitTypeId.Watts))
+                    else:
+                        prm.Set(UnitUtils.ConvertToInternalUnits(
+                            float(want), UnitTypeId.Kelvin))
+                    applied[key] = want if key != "ies" else os.path.basename(want)
+                    done = True
+                    break
+                except Exception as exc:
+                    missed.append("%s via %s: %s" % (key, nm, str(exc)[:70]))
+        if not done and key not in applied:
+            missed.append("%s: no writable parameter found" % key)
+    return applied, missed
+
+
 # --------------------------------------------------------------------------
 # geometry
 # --------------------------------------------------------------------------
@@ -471,6 +564,7 @@ def main():
                 if inst is None:
                     raise RuntimeError("NewFamilyInstance returned None")
                 rec["element"] = str(inst.Id)
+                rec["mark"] = stamp_mark(inst, fn["id"])
             else:
                 h = float(fn.get("height") or 800.0)
                 ds = proxy_box(doc, fn["id"], fn["type"], float(at[0]),
@@ -545,6 +639,12 @@ def main():
             rec["placed"] = True
             rec["element"] = str(inst.Id)
             rec["placement_type"] = ptype
+            rec["mark"] = stamp_mark(inst, lt["id"])
+            applied, missed = set_photometrics(
+                inst, lt, os.environ.get("ARCHPIPE_IES_DIR"))
+            rec["photometrics"] = applied
+            if missed:
+                rec["photometrics_missed"] = missed[:4]
             try:
                 loc = inst.Location
                 pt2 = getattr(loc, "Point", None)

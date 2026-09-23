@@ -297,7 +297,10 @@ def build_furniture(data, mat):
         at = f.get("at")
         if not at:
             continue
-        size = f.get("size") or [600, 600]
+        # The Revit extract calls this `size_mm`; only the hand-written
+        # mock spec used `size`. Reading the wrong key silently built
+        # every proxy at the 600 x 600 default.
+        size = f.get("size_mm") or f.get("size") or [600, 600]
         h = m(f.get("height") or 750)
         bpy.ops.mesh.primitive_cube_add(size=1.0,
                                         location=(m(at[0]), m(at[1]), h / 2))
@@ -331,6 +334,19 @@ def build_furniture(data, mat):
 # far tail the relative error grows while the absolute error stays under
 # 0.1 lx.
 IES_POINT_POWER = 162.624
+
+# Blender's IES azimuth zero is 90 degrees from the LM-63 horizontal-angle
+# zero that `archpipe.photometry` reads. MEASURED, on a linear fitting with
+# real azimuthal asymmetry (LGLled.ies, 19 horizontal planes, 167 cd at
+# plane 0 against 681 cd at plane 90 for the same vertical angle):
+#
+#   rendered along +X, no rotation   223.4 lx   analytic at phi=0   60.1
+#   rendered along +X, rotated +90   57.8 lx    analytic at phi=0   60.1
+#
+# Invisible on an axially symmetric pendant, which is why it survived the
+# original calibration: every probe used then had a single horizontal
+# plane. On a linear fitting it is a factor of four, pointed the wrong way.
+IES_AZIMUTH_OFFSET_DEG = 90.0
 
 # Without a photometric profile there is no honest brightness to use, so
 # the scene falls back to treating the fitting as an isotropic source of
@@ -376,6 +392,7 @@ def build_lights(data):
             nt.links.new(node.outputs["Fac"],
                          nt.nodes["Emission"].inputs["Strength"])
             with_ies += 1
+            aim = float(fx.get("rotation") or 0.0) + IES_AZIMUTH_OFFSET_DEG
         else:
             lumens = float(fx.get("lumens") or DEFAULT_LUMENS)
             light.energy = lumens * float(fx.get("output") or 1.0)
@@ -386,6 +403,10 @@ def build_lights(data):
 
         obj = bpy.data.objects.new(light.name, light)
         obj.location = (m(at[0]), m(at[1]), m(fx.get("mounting_height") or 2400))
+        # Orientation only matters for an asymmetric distribution, but when
+        # it matters it matters by a factor of four.
+        obj.rotation_euler = (0.0, 0.0, math.radians(
+            float(fx.get("rotation") or 0.0) + IES_AZIMUTH_OFFSET_DEG))
         bpy.context.collection.objects.link(obj)
         made.append(obj)
 

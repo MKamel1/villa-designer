@@ -182,3 +182,65 @@ python scripts/compare_lux.py out/lux_direct.json
 
 A full-GI lux grid of the mock bedroom at 192×192 and 2048 samples takes
 **3.6 s** on the RTX 3090.
+
+## Addendum (2026-09-22) — three faults the first real room exposed
+
+The calibration above was done entirely on **axially symmetric** probes:
+every synthetic file had a single horizontal plane, and the one real
+fitting used (PLD1A21) has one too. Running the first Revit-built room
+through the same comparison dropped agreement from 1.0065 to **0.80**, and
+the causes were three separate bugs, none of which raised anything.
+
+**1. Blender's IES azimuth zero is 90 degrees from LM-63's.** Measured on
+`LGLled.ies`, a linear fitting with 19 horizontal planes and real
+asymmetry — 167 cd at plane 0 against 681 cd at plane 90 for the same
+vertical angle:
+
+| light rotation about Z | rendered at r=0.5 m | analytic at phi=0 |
+|---|---|---|
+| 0 | 223.4 lx | 60.1 lx |
+| **+90** | **57.8 lx** | 60.1 lx |
+
+`IES_AZIMUTH_OFFSET_DEG = 90` is now applied to every IES light, on top of
+the fitting's own rotation carried from Revit. Invisible on a symmetric
+pendant, a factor of four on a linear one, pointed the wrong way.
+
+**2. Luminous size taken from the family's bounding box.** The extract
+reported `luminous_size_mm` from the Revit family's extents — 1219 mm for
+a fitting whose IES declares a 594 x 24 x 3 mm luminous opening. Blender
+models a point light's size as a sphere of that radius, so a thin strip
+became a 0.61 m ball and the rendered peak beneath it fell to 41% of the
+calculated value. `make_render_input.py` now reads the opening from the
+IES file. The smallest dimension is used, deliberately: a sphere of the
+largest would be a bigger source than the fitting is on two of three axes
+and would wash out the distribution the file describes. The cost is
+slightly sharp shadow penumbrae from linear fittings — a softness
+artefact, not an illuminance error.
+
+**3. `build_scene` read `size` where the Revit extract writes `size_mm`.**
+Every furniture proxy silently rendered at the 600 x 600 default.
+
+### Agreement after the fixes, on the real model
+
+| | before | after |
+|---|---|---|
+| mean absolute difference | 52.67 lx | **8.11 lx** (1.27% of peak) |
+| median ratio, all points | 0.829 | **0.968** |
+| median ratio, clear of furniture | 0.800 | **0.9964** |
+| spread | 0.18–3.58 | 0.91–1.05 |
+
+### Two limits now measured rather than assumed
+
+- **Quadrant-symmetric files read ~8% low in Blender.** A synthetic
+  isotropic source declared with 5 horizontal planes rendered 229.6 lx
+  where the identical source with one plane rendered 247.8 and the true
+  answer is 250. Not compensated for, because silently scaling a renderer
+  to match a calculation would destroy the independence that makes the
+  comparison worth anything.
+- **An empty or malformed IES file does not fail.** Blender renders it
+  with a fallback distribution and says nothing. `make_render_input.py`
+  checks the file parses before writing the path.
+
+The analytical engine models **no occlusion**, so in a furnished room the
+two must disagree wherever something is in the way; `compare_lux.py` now
+separates clear points from shadowed ones and reports both.

@@ -11,9 +11,11 @@
       "at_source": "bounding_box_centre",
       "category": "furniture",
       "family": "",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a5a",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5a",
       "is_proxy": true,
       "level": null,
+      "mark": "FN-BED",
+      "mounting_height": 800.0,
       "rotation": null,
       "size_mm": [
         1600.0,
@@ -32,9 +34,11 @@
       "at_source": "bounding_box_centre",
       "category": "furniture",
       "family": "",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a5b",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5b",
       "is_proxy": true,
       "level": null,
+      "mark": "FN-BST-L",
+      "mounting_height": 800.0,
       "rotation": null,
       "size_mm": [
         450.0,
@@ -53,9 +57,11 @@
       "at_source": "bounding_box_centre",
       "category": "furniture",
       "family": "",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a5c",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5c",
       "is_proxy": true,
       "level": null,
+      "mark": "FN-BST-R",
+      "mounting_height": 800.0,
       "rotation": null,
       "size_mm": [
         450.0,
@@ -74,9 +80,11 @@
       "at_source": "bounding_box_centre",
       "category": "furniture",
       "family": "",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a5d",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5d",
       "is_proxy": true,
       "level": null,
+      "mark": "FN-WRD",
+      "mounting_height": 800.0,
       "rotation": null,
       "size_mm": [
         600.0,
@@ -95,9 +103,11 @@
       "at_source": "bounding_box_centre",
       "category": "furniture",
       "family": "",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a5e",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5e",
       "is_proxy": true,
       "level": null,
+      "mark": "FN-DSK",
+      "mounting_height": 800.0,
       "rotation": null,
       "size_mm": [
         1200.0,
@@ -114,8 +124,10 @@
       "at_source": "location_point",
       "category": "furniture",
       "family": "chair_cafe_wood_metal_9045_bimlibrary.co_",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033de0",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033de0",
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "mark": "FN-CHR",
+      "mounting_height": 0.0,
       "rotation": 0.0,
       "size_mm": [
         555.46900000000005,
@@ -148,51 +160,72 @@
       "at_source": "location_point",
       "category": "lighting",
       "family": "pendant_cone_16inch_106_bimlibrary.co_",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00034474",
+      "host_offset_mm": -300.0,
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00034474",
+      "ies": "generic",
+      "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "luminous_size_mm": 1219.2000000000000,
+      "mark": "LT-01",
+      "mounting_height": 2400.0,
       "rotation": 0.0,
       "size_mm": [
         1219.2000000000000,
         1219.2000000000000,
         1464.7790000000000
       ],
-      "type_name": "Pendant 16\" Dia"
+      "type_name": "Pendant 16\" Dia",
+      "watts": 12.100000000000000
     },
     {
       "at": [
-        1100.0,
+        1700.0,
         3300.0
       ],
       "at_source": "location_point",
       "category": "lighting",
       "family": "pendant_cylinder_simple_136_bimlibrary.co_",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00034b44",
+      "host_offset_mm": -700.0,
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00034b44",
+      "ies": "pendant2.ies",
+      "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "luminous_size_mm": 301.69799999999998,
+      "mark": "LT-02",
+      "mounting_height": 2000.0,
       "rotation": 0.0,
       "size_mm": [
         349.25,
         301.69799999999998,
         1066.8000000000000
       ],
-      "type_name": "4\" Dia X 8\"Height (Standard)"
+      "type_name": "4\" Dia X 8\"Height (Standard)",
+      "watts": 12.100000000000000
     },
     {
       "at": [
-        3100.0,
+        2500.0,
         3300.0
       ],
       "at_source": "location_point",
       "category": "lighting",
       "family": "pendant_cylinder_simple_136_bimlibrary.co_",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00034b46",
+      "host_offset_mm": -700.0,
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00034b46",
+      "ies": "pendant2.ies",
+      "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "luminous_size_mm": 301.69799999999998,
+      "mark": "LT-03",
+      "mounting_height": 2000.0,
       "rotation": 0.0,
       "size_mm": [
         349.25,
         301.69799999999998,
         1066.8000000000000
       ],
-      "type_name": "4\" Dia X 8\"Height (Standard)"
+      "type_name": "4\" Dia X 8\"Height (Standard)",
+      "watts": 12.100000000000000
     },
     {
       "at": [
@@ -202,15 +235,47 @@
       "at_source": "location_point",
       "category": "lighting",
       "family": "linear_ceiling_mount_parametric_111_bimlibrary.co_",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-0003527e",
+      "host_offset_mm": -300.0,
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-0003527e",
+      "ies": "generic",
+      "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "luminous_size_mm": 1219.2000000000000,
+      "mark": "LT-04",
+      "mounting_height": 2400.0,
       "rotation": 0.0,
       "size_mm": [
         1879.5999999999999,
         1219.2000000000000,
         1981.2000000000000
       ],
-      "type_name": "2.5\" x 4\" x 6'-0\""
+      "type_name": "2.5\" x 4\" x 6'-0\"",
+      "watts": 21.5
+    },
+    {
+      "at": [
+        3500.0,
+        700.0
+      ],
+      "at_source": "location_point",
+      "category": "lighting",
+      "family": "pendant_cylinder_simple_136_bimlibrary.co_",
+      "host_offset_mm": -400.0,
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00035280",
+      "ies": "pendant2.ies",
+      "kelvin": 3000.0,
+      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "luminous_size_mm": 301.69799999999998,
+      "mark": "LT-05",
+      "mounting_height": 2300.0,
+      "rotation": 0.0,
+      "size_mm": [
+        349.25,
+        301.69799999999998,
+        1066.8000000000000
+      ],
+      "type_name": "4\" Dia X 8\"Height (Standard)",
+      "watts": 12.100000000000000
     }
   ],
   "openings": [
@@ -218,8 +283,8 @@
       "at": 900.0,
       "family": "M_Single-Flush",
       "height": 2100.0,
-      "host": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a32",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a58",
+      "host": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a34",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a58",
       "kind": "door",
       "point": [
         4300.0,
@@ -233,8 +298,8 @@
       "at": 2200.0,
       "family": "M_Fixed",
       "height": 1400.0,
-      "host": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a33",
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a54",
+      "host": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a32",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a54",
       "kind": "window",
       "point": [
         2100.0,
@@ -255,10 +320,6 @@
       "area_m2": 15.119999999999999,
       "boundary": [
         [
-          4200.0,
-          3600.0
-        ],
-        [
           0.0,
           3600.0
         ],
@@ -269,9 +330,13 @@
         [
           4200.0,
           0.0
+        ],
+        [
+          4200.0,
+          3600.0
         ]
       ],
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a50",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a50",
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "name": "Bedroom 01",
       "number": "1"
@@ -856,10 +921,46 @@
     {
       "end": [
         -100.0,
+        -100.0
+      ],
+      "height": 2700.0,
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a31",
+      "is_curved": false,
+      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "start": [
+        -100.0,
+        3700.0
+      ],
+      "structural": false,
+      "thickness": 200.0,
+      "type": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
+      "type_name": "Generic - 200mm"
+    },
+    {
+      "end": [
+        4300.0,
+        -100.0
+      ],
+      "height": 2700.0,
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a32",
+      "is_curved": false,
+      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "start": [
+        -100.0,
+        -100.0
+      ],
+      "structural": false,
+      "thickness": 200.0,
+      "type": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
+      "type_name": "Generic - 200mm"
+    },
+    {
+      "end": [
+        -100.0,
         3700.0
       ],
       "height": 2700.0,
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a31",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a33",
       "is_curved": false,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "start": [
@@ -877,48 +978,12 @@
         3700.0
       ],
       "height": 2700.0,
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a32",
+      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a34",
       "is_curved": false,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "start": [
         4300.0,
         -100.0
-      ],
-      "structural": false,
-      "thickness": 200.0,
-      "type": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
-      "type_name": "Generic - 200mm"
-    },
-    {
-      "end": [
-        4300.0,
-        -100.0
-      ],
-      "height": 2700.0,
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a33",
-      "is_curved": false,
-      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
-      "start": [
-        -100.0,
-        -100.0
-      ],
-      "structural": false,
-      "thickness": 200.0,
-      "type": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
-      "type_name": "Generic - 200mm"
-    },
-    {
-      "end": [
-        -100.0,
-        -100.0
-      ],
-      "height": 2700.0,
-      "id": "34f760c8-18be-46a0-af1d-bbdcc8693c3b-00033a34",
-      "is_curved": false,
-      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
-      "start": [
-        -100.0,
-        3700.0
       ],
       "structural": false,
       "thickness": 200.0,

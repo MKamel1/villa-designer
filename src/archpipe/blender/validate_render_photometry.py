@@ -88,7 +88,7 @@ def clear():
             block.remove(item, do_unlink=True)
 
 
-def build(power, height, ies_path):
+def build(power, height, ies_path, aim_deg=0.0):
     clear()
     bpy.ops.mesh.primitive_plane_add(size=40.0, location=(0, 0, 0))
     mat = bpy.data.materials.new("measure")
@@ -123,6 +123,7 @@ def build(power, height, ies_path):
     ies.inputs["Strength"].default_value = 1.0
     nt.links.new(ies.outputs["Fac"], nt.nodes["Emission"].inputs["Strength"])
     obj = bpy.data.objects.new("fixture", ld)
+    obj.rotation_euler = (0.0, 0.0, math.radians(aim_deg))
     obj.location = (0, 0, height)
     bpy.context.collection.objects.link(obj)
 
@@ -180,7 +181,8 @@ def main():
                arg(args, "--offsets", "0,0.25,0.5,0.75,1.0,1.5,2.0").split(",")]
 
     configure()
-    cam = build(power, height, ies_path)
+    aim = arg(args, "--aim", 0.0, float)
+    cam = build(power, height, ies_path, aim)
 
     rows = []
     for r in offsets:
@@ -191,7 +193,7 @@ def main():
 
     print("VAL JSON " + json.dumps(
         {"ies": os.path.basename(ies_path), "height": height,
-         "power": power, "rows": rows}))
+         "power": power, "aim": aim, "rows": rows}))
     print("VAL DONE")
 
 

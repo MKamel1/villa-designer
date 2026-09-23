@@ -299,6 +299,49 @@ def _bbox_centre_and_size(el):
         return None, None
 
 
+def _photometrics(inst):
+    """IES file, lumens and colour temperature, read back from Revit.
+
+    Read from the instance first and the type second, matching where
+    `build_bedroom.set_photometrics` writes them. Without these the lux
+    engine and the renderer have no photometry and would fall back to an
+    invented lamp -- an image of *a* lighting scheme, not this one.
+    """
+    out = {}
+    names = (("ies", "FBX_LIGHT_PHOTOMETRIC_FILE", "string"),
+             ("lumens", "FBX_LIGHT_LUMINOUS_FLUX", UnitTypeId.Lumens),
+             ("kelvin", "FBX_LIGHT_INITIAL_COLOR_TEMPERATURE", UnitTypeId.Kelvin),
+             ("watts", "FBX_LIGHT_WATTAGE", UnitTypeId.Watts))
+    for key, nm, kind in names:
+        bip = getattr(BuiltInParameter, nm, None)
+        if bip is None:
+            continue
+        for holder in (inst, getattr(inst, "Symbol", None)):
+            if holder is None or key in out:
+                continue
+            try:
+                prm = holder.get_Parameter(bip)
+                if prm is None or not prm.HasValue:
+                    continue
+                # Skip READ-ONLY holders, mirroring where the builder
+                # writes. Without this the reader stops at the instance --
+                # which carries the family's own default -- while the
+                # builder had fallen through to the type, and the extract
+                # reports a photometric web nobody chose.
+                if prm.IsReadOnly:
+                    continue
+                if kind == "string":
+                    val = prm.AsString()
+                    if val:
+                        out[key] = val
+                else:
+                    out[key] = round(UnitUtils.ConvertFromInternalUnits(
+                        prm.AsDouble(), kind), 1)
+            except Exception:
+                continue
+    return out
+
+
 def extract_instances(doc, bic, tag):
     out = []
     for inst in _sorted_by_uid(_collect(doc, bic)):
@@ -341,6 +384,67 @@ def extract_instances(doc, bic, tag):
                 pass
         if not rec["family"]:
             rec["is_proxy"] = str(getattr(inst, "ApplicationId", "")) == "archpipe"
+
+        # Mounting height, relative to the element's level. `pt_mm` returns
+        # plan coordinates only, so Z was being dropped -- and a luminaire
+        # without a height cannot be placed in a lux grid or a render at
+        # all.
+        if pt is not None:
+            base = lvl.Elevation if lvl is not None else 0.0
+            height = pt.Z - base
+            # A hosted fixture keeps its LocationPoint AT the host and
+            # stores the drop in a separate offset parameter, so a pendant
+            # hung 1500 mm below a 2700 ceiling still reports Z = 2700.
+            # Reading the point alone puts every luminaire at ceiling level
+            # and the whole lux grid describes a different scheme.
+            for _bip in ("INSTANCE_FREE_HOST_OFFSET_PARAM",
+                         "INSTANCE_ELEVATION_PARAM"):
+                _b = getattr(BuiltInParameter, _bip, None)
+                if _b is None:
+                    continue
+                try:
+                    _p = inst.get_Parameter(_b)
+                    if _p is not None and _p.HasValue:
+                        off = _p.AsDouble()
+                        if abs(off) > 1e-9:
+                            height += off
+                            rec["host_offset_mm"] = mm(off)
+                        break
+                except Exception:
+                    continue
+            rec["mounting_height"] = mm(height)
+        elif centre is not None:
+            try:
+                bb = inst.get_BoundingBox(None)
+                base = lvl.Elevation if lvl is not None else 0.0
+                if bb is not None:
+                    rec["mounting_height"] = mm(bb.Max.Z - base)
+            except Exception:
+                pass
+
+        # The join key back to the spec. A DirectShape proxy carries it in
+        # ApplicationDataId instead, which is already read above.
+        for _nm in ("ALL_MODEL_MARK", "ALL_MODEL_INSTANCE_COMMENTS"):
+            _b = getattr(BuiltInParameter, _nm, None)
+            if _b is None or rec.get("mark"):
+                continue
+            try:
+                _p = inst.get_Parameter(_b)
+                if _p is not None and _p.HasValue:
+                    val = _p.AsString()
+                    if val:
+                        rec["mark"] = val
+            except Exception:
+                continue
+        if not rec.get("mark") and rec.get("applicationdataid"):
+            rec["mark"] = rec["applicationdataid"]
+
+        if tag == "lighting":
+            photo = _photometrics(inst)
+            if photo:
+                rec.update(photo)
+            rec["luminous_size_mm"] = (min(size[0], size[1])
+                                       if size else None)
         out.append(rec)
     return out
 

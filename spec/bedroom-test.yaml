@@ -95,6 +95,10 @@ lighting:
     host: ceiling
     ies: PLD1A21.ies
     lumens: 2780
+    watts: 29.3          # LED equivalent; the IES files are
+                          # 1990s incandescent/T12 and their
+                          # wattage describes a lamp nobody
+                          # would specify (ADR-0010)
     kelvin: 2700
     family: pendant_cone_16inch_106_bimlibrary.co_.rfa
   # SUBSTITUTION, recorded rather than hidden: the spec wants wall-mounted
@@ -103,22 +107,29 @@ lighting:
   # bedside PENDANTS, dropped to 1200 mm on a host offset. A legitimate
   # design choice, but not the one originally written, and the photometry
   # (EWL2A19, a lamphead) still describes the intended fitting.
+  # MOVED after the report measured 114 lx at the pillow against a
+  # 300-500 lx reading band. A 17-degree beam at 1200 mm lights the
+  # bedside TABLE, not the book: 600 mm away and 300 mm up is 63 degrees
+  # off the beam axis. Now over the pillow and raised to 2000 mm, which
+  # also clears the point-source limit (1100 mm against a 600 mm minimum).
   - id: LT-02
     layer: task
-    at: [1100, 3300]
-    mounting_height: 1200
+    at: [1700, 3300]
+    mounting_height: 2000
     host: ceiling
     ies: EWL2A19.ies
     lumens: 780
+    watts: 8.2
     kelvin: 2700
     family: pendant_cylinder_simple_136_bimlibrary.co_.rfa
   - id: LT-03
     layer: task
-    at: [3100, 3300]
-    mounting_height: 1200
+    at: [2500, 3300]
+    mounting_height: 2000
     host: ceiling
     ies: EWL2A19.ies
     lumens: 780
+    watts: 8.2
     kelvin: 2700
     family: pendant_cylinder_simple_136_bimlibrary.co_.rfa
   - id: LT-04
@@ -128,8 +139,24 @@ lighting:
     host: ceiling
     ies: LGLled.ies
     lumens: 1008
+    watts: 10.6
     kelvin: 3000
     family: linear_ceiling_mount_parametric_111_bimlibrary.co_.rfa
+
+  # ADDED after the first lighting report measured 4 lx on the desk top.
+  # The three-layer scheme lit the bed and the wardrobe and left the work
+  # surface dark. A task light is the cheapest fix and does not disturb the
+  # rest of the layout (loop L11: lighting -> lighting).
+  - id: LT-05
+    layer: task
+    at: [3500, 700]
+    mounting_height: 2300
+    host: ceiling
+    ies: LGLled.ies
+    lumens: 1008
+    watts: 10.6
+    kelvin: 3000
+    family: pendant_cylinder_simple_136_bimlibrary.co_.rfa
 
 materials:
   walls: painted
