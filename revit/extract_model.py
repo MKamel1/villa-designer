@@ -410,7 +410,7 @@ def main():
     doc = resolve_doc()
     if doc is None:
         print("archpipe: no project document open. Pass a model:")
-        print("archpipe:   pyrevit run extract_model.py <model.rvt> --revit=2025")
+        print("archpipe:   pyrevit run extract_model.py <model.rvt> --revit=2027")
         return None
 
     data = build(doc)

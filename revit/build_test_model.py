@@ -19,7 +19,7 @@ The room's area depends on the template's default wall thickness, so the
 checker derives the expected area from the extracted thickness rather
 than hard-coding it.
 
-    pyrevit run revit\\build_test_model.py --revit=2025
+    pyrevit run revit\\build_test_model.py --revit=2027
 
 Writes the .rvt to ARCHPIPE_TEST_MODEL, else the user profile.
 IronPython 2.7: no f-strings, no type hints.

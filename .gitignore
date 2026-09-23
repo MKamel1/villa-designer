@@ -28,3 +28,4 @@ plot.log
 Thumbs.db
 out/families/*.rfa
 out/families/too-new/*.rfa
+out/revit2027/*.rvt

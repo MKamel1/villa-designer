@@ -1,0 +1,701 @@
+{
+  "casework": [],
+  "furniture": [],
+  "levels": [
+    {
+      "elevation": 0.0,
+      "height": 4000.0,
+      "id": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "name": "Level 1"
+    },
+    {
+      "elevation": 4000.0,
+      "height": null,
+      "id": "44bd8488-e63e-11d3-918b-0000863f27ad-00003e29",
+      "name": "Level 2"
+    }
+  ],
+  "lighting": [],
+  "openings": [],
+  "project": {
+    "name": "test2027",
+    "number": "Project  Number",
+    "path": "C:\\Users\\mmbka\\arch-pipeline\\out\\revit2027\\test2027.rvt"
+  },
+  "rooms": [
+    {
+      "area_m2": 22.039999999999999,
+      "boundary": [
+        [
+          100.0,
+          100.0
+        ],
+        [
+          5900.0,
+          100.0
+        ],
+        [
+          5900.0,
+          3900.0
+        ],
+        [
+          100.0,
+          3900.0
+        ]
+      ],
+      "id": "21f8d3c6-3376-4f6f-837e-3f15e9e774b5-00033a35",
+      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "name": "Test Room",
+      "number": "1"
+    }
+  ],
+  "schema_version": 1,
+  "site": {
+    "base_point": [
+      0.0,
+      0.0
+    ],
+    "elevation": 0.0,
+    "latitude": 42.358662000000002,
+    "longitude": -71.056740000000005,
+    "north_angle": 0.0,
+    "place": "Boston, MA"
+  },
+  "source": "revit",
+  "units": "mm",
+  "wall_types": [
+    {
+      "bearing": null,
+      "id": "14df6a26-ac69-4a3e-b0e0-3aceb6078044-00009d96",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "",
+          "thickness": 200.0
+        }
+      ],
+      "name": "",
+      "thickness": 200.0
+    },
+    {
+      "bearing": null,
+      "id": "22712c68-ecc0-4fdf-bdbb-929626510e37-0000c6f7",
+      "layers": [],
+      "name": "",
+      "thickness": null
+    },
+    {
+      "bearing": null,
+      "id": "22712c68-ecc0-4fdf-bdbb-929626510e37-0000c6f8",
+      "layers": [],
+      "name": "",
+      "thickness": null
+    },
+    {
+      "bearing": null,
+      "id": "512df941-5e7a-4a19-978a-195f60dd4943-00007918",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "Concrete, Cast-in-Place gray",
+          "thickness": 300.0
+        }
+      ],
+      "name": "",
+      "thickness": 300.0
+    },
+    {
+      "bearing": null,
+      "id": "512df941-5e7a-4a19-978a-195f60dd4943-00007919",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "Concrete, Cast-in-Place gray",
+          "thickness": 300.0
+        }
+      ],
+      "name": "",
+      "thickness": 300.0
+    },
+    {
+      "bearing": null,
+      "id": "933c4a06-93b8-11d3-80f8-00c04f8efc32-000000db",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "",
+          "thickness": 150.0
+        }
+      ],
+      "name": "",
+      "thickness": 150.0
+    },
+    {
+      "bearing": null,
+      "id": "933c4a06-93b8-11d3-80f8-00c04f8efc32-000000dc",
+      "layers": [
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 92.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        }
+      ],
+      "name": "",
+      "thickness": 140.0
+    },
+    {
+      "bearing": null,
+      "id": "933c4a06-93b8-11d3-80f8-00c04f8efc32-000000dd",
+      "layers": [
+        {
+          "function": "Finish1",
+          "material": "Brick, Common",
+          "thickness": 90.0
+        },
+        {
+          "function": "Finish1",
+          "material": "Concrete Masonry Units",
+          "thickness": 90.0
+        },
+        {
+          "function": "Insulation",
+          "material": "Air",
+          "thickness": 76.0
+        },
+        {
+          "function": "Membrane",
+          "material": "Air Infiltration Barrier",
+          "thickness": 0.0
+        },
+        {
+          "function": "Substrate",
+          "material": "Plywood, Sheathing",
+          "thickness": 19.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 152.0
+        },
+        {
+          "function": "Membrane",
+          "material": "Vapor Retarder",
+          "thickness": 0.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 13.0
+        }
+      ],
+      "name": "",
+      "thickness": 350.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "",
+          "thickness": 200.0
+        }
+      ],
+      "name": "",
+      "thickness": 200.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000fa",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "",
+          "thickness": 250.0
+        }
+      ],
+      "name": "",
+      "thickness": 250.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000fb",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "",
+          "thickness": 300.0
+        }
+      ],
+      "name": "",
+      "thickness": 300.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000fc",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "",
+          "thickness": 375.0
+        }
+      ],
+      "name": "",
+      "thickness": 375.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e1-93b8-11d3-80f8-00c04f8efc32-000000fd",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "Concrete Masonry Units",
+          "thickness": 300.0
+        }
+      ],
+      "name": "",
+      "thickness": 300.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e1-93b8-11d3-80f8-00c04f8efc32-000000fe",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "Concrete Masonry Units",
+          "thickness": 200.0
+        }
+      ],
+      "name": "",
+      "thickness": 200.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e1-93b8-11d3-80f8-00c04f8efc32-000000ff",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "Concrete Masonry Units",
+          "thickness": 150.0
+        }
+      ],
+      "name": "",
+      "thickness": 150.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e1-93b8-11d3-80f8-00c04f8efc32-00000100",
+      "layers": [
+        {
+          "function": "Finish1",
+          "material": "EIFS, Exterior Insulation",
+          "thickness": 75.0
+        },
+        {
+          "function": "Insulation",
+          "material": "Air",
+          "thickness": 50.0
+        },
+        {
+          "function": "Membrane",
+          "material": "Air Infiltration Barrier",
+          "thickness": 0.0
+        },
+        {
+          "function": "Substrate",
+          "material": "Plywood, Sheathing",
+          "thickness": 15.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 150.0
+        },
+        {
+          "function": "Membrane",
+          "material": "Vapor Retarder",
+          "thickness": 0.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 12.0
+        }
+      ],
+      "name": "",
+      "thickness": 302.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e1-93b8-11d3-80f8-00c04f8efc32-00000101",
+      "layers": [
+        {
+          "function": "Structure",
+          "material": "Brick, Common",
+          "thickness": 90.0
+        }
+      ],
+      "name": "",
+      "thickness": 90.0
+    },
+    {
+      "bearing": null,
+      "id": "933c54e1-93b8-11d3-80f8-00c04f8efc32-00000102",
+      "layers": [
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 13.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 6.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 42.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 6.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 13.0
+        }
+      ],
+      "name": "",
+      "thickness": 80.0
+    },
+    {
+      "bearing": null,
+      "id": "b0ff40ff-93b6-11d3-80f8-00c04f8efc32-00000105",
+      "layers": [
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 92.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        }
+      ],
+      "name": "",
+      "thickness": 124.0
+    },
+    {
+      "bearing": null,
+      "id": "b0ff411c-93b6-11d3-80f8-00c04f8efc32-00000106",
+      "layers": [
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 64.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 9.0
+        }
+      ],
+      "name": "",
+      "thickness": 137.0
+    },
+    {
+      "bearing": null,
+      "id": "b0ff411d-93b6-11d3-80f8-00c04f8efc32-00000107",
+      "layers": [
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 64.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        }
+      ],
+      "name": "",
+      "thickness": 128.0
+    },
+    {
+      "bearing": null,
+      "id": "b0ff411e-93b6-11d3-80f8-00c04f8efc32-00000108",
+      "layers": [
+        {
+          "function": "Finish1",
+          "material": "Brick, Common",
+          "thickness": 90.0
+        },
+        {
+          "function": "Insulation",
+          "material": "Air",
+          "thickness": 76.0
+        },
+        {
+          "function": "Substrate",
+          "material": "Rigid insulation",
+          "thickness": 76.0
+        },
+        {
+          "function": "Membrane",
+          "material": "Damp-proofing",
+          "thickness": 0.0
+        },
+        {
+          "function": "Structure",
+          "material": "Concrete Masonry Units",
+          "thickness": 190.0
+        },
+        {
+          "function": "Substrate",
+          "material": "Metal Furring",
+          "thickness": 42.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board",
+          "thickness": 16.0
+        }
+      ],
+      "name": "",
+      "thickness": 490.0
+    },
+    {
+      "bearing": null,
+      "id": "cb74be9d-0c49-4127-96a8-1de4e3dd00ba-00005979",
+      "layers": [],
+      "name": "",
+      "thickness": null
+    },
+    {
+      "bearing": null,
+      "id": "f8dc8733-6ca1-4a9e-bd25-3e0787704d28-000126b5",
+      "layers": [
+        {
+          "function": "Finish1",
+          "material": "Brick, Common",
+          "thickness": 90.0
+        },
+        {
+          "function": "Insulation",
+          "material": "Air",
+          "thickness": 76.0
+        },
+        {
+          "function": "Membrane",
+          "material": "Air Infiltration Barrier",
+          "thickness": 0.0
+        },
+        {
+          "function": "Substrate",
+          "material": "Plywood, Sheathing",
+          "thickness": 19.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 152.0
+        },
+        {
+          "function": "Membrane",
+          "material": "",
+          "thickness": 0.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board (1)",
+          "thickness": 13.0
+        }
+      ],
+      "name": "",
+      "thickness": 350.0
+    },
+    {
+      "bearing": null,
+      "id": "f8dc8733-6ca1-4a9e-bd25-3e0787704d28-000126b6",
+      "layers": [],
+      "name": "",
+      "thickness": null
+    },
+    {
+      "bearing": null,
+      "id": "f8dc8733-6ca1-4a9e-bd25-3e0787704d28-000126b7",
+      "layers": [
+        {
+          "function": "Finish1",
+          "material": "Concrete Masonry Units (1)",
+          "thickness": 200.0
+        },
+        {
+          "function": "Insulation",
+          "material": "Air",
+          "thickness": 76.0
+        },
+        {
+          "function": "Membrane",
+          "material": "Air Infiltration Barrier",
+          "thickness": 0.0
+        },
+        {
+          "function": "Substrate",
+          "material": "Plywood, Sheathing",
+          "thickness": 19.0
+        },
+        {
+          "function": "Structure",
+          "material": "Metal Stud Layer",
+          "thickness": 152.0
+        },
+        {
+          "function": "Membrane",
+          "material": "",
+          "thickness": 0.0
+        },
+        {
+          "function": "Finish2",
+          "material": "Gypsum Wall Board (1)",
+          "thickness": 13.0
+        }
+      ],
+      "name": "",
+      "thickness": 460.0
+    }
+  ],
+  "walls": [
+    {
+      "end": [
+        6000.0,
+        0.0
+      ],
+      "height": 4000.0,
+      "id": "21f8d3c6-3376-4f6f-837e-3f15e9e774b5-00033a31",
+      "is_curved": false,
+      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "start": [
+        0.0,
+        0.0
+      ],
+      "structural": false,
+      "thickness": 200.0,
+      "type": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
+      "type_name": ""
+    },
+    {
+      "end": [
+        6000.0,
+        4000.0
+      ],
+      "height": 4000.0,
+      "id": "21f8d3c6-3376-4f6f-837e-3f15e9e774b5-00033a32",
+      "is_curved": false,
+      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "start": [
+        6000.0,
+        0.0
+      ],
+      "structural": false,
+      "thickness": 200.0,
+      "type": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
+      "type_name": ""
+    },
+    {
+      "end": [
+        0.0,
+        4000.0
+      ],
+      "height": 4000.0,
+      "id": "21f8d3c6-3376-4f6f-837e-3f15e9e774b5-00033a33",
+      "is_curved": false,
+      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "start": [
+        6000.0,
+        4000.0
+      ],
+      "structural": false,
+      "thickness": 200.0,
+      "type": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
+      "type_name": ""
+    },
+    {
+      "end": [
+        0.0,
+        0.0
+      ],
+      "height": 4000.0,
+      "id": "21f8d3c6-3376-4f6f-837e-3f15e9e774b5-00033a34",
+      "is_curved": false,
+      "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
+      "start": [
+        0.0,
+        4000.0
+      ],
+      "structural": false,
+      "thickness": 200.0,
+      "type": "933c54e0-93b8-11d3-80f8-00c04f8efc32-000000f9",
+      "type_name": ""
+    }
+  ]
+}

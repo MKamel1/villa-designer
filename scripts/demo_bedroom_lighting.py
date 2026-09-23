@@ -37,7 +37,7 @@ def led_watts(p):
     return round(p.total_lumens / LED_EFFICACY, 1)
 
 
-print("FITTINGS  (Revit 2025 IES library -- already on disk, no download)")
+print("FITTINGS  (from %s -- already on disk, no download)" % IES)
 print(f"  {'role':18} {'lumens':>7} {'file W':>7} {'file lm/W':>10} "
       f"{'LED W':>7}  file")
 for tag, p in (("ambient pendant", pendant), ("task    bedside", bedside),

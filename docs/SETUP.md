@@ -151,15 +151,17 @@ PYTHONPATH=src python scripts/verify.py                # ALL PASS, 53 checks
 
 # 2. Revit reachable from the command line
 $env:ARCHPIPE_PROBE_OUT="$PWD\probe.json"
-& $pr run "$PWDevit\probe.py" --revit=2025    # ABSOLUTE path
+& $pr run "$PWD
+evit\probe.py" --revit=2027    # ABSOLUTE path
 #    expect api_ok true, raw_revitapi_import true, a revit_username
 
 # 3. Build a model of KNOWN dimensions, then extract it
 $env:ARCHPIPE_TEST_MODEL="$PWD\test.rvt"
-& $pr run revit\build_test_model.py --revit=2025
+& $pr run revit\build_test_model.py --revit=2027
 $env:ARCHPIPE_MODEL="$PWD\test.rvt"
 $env:ARCHPIPE_EXTRACT_OUT="$PWD\test.model.json"
-& $pr run "$PWDevit\extract_model.py" --revit=2025
+& $pr run "$PWD
+evit\extract_model.py" --revit=2027
 ```
 
 **The script path must be ABSOLUTE.** `pyrevit run` passes it to Revit
@@ -173,8 +175,10 @@ Step 3 is the one that matters. The builder makes a rectangle of
 lengths of exactly `[4000, 4000, 6000, 6000]` and a room area of
 `(6000 − t) × (4000 − t)` for the template's wall thickness `t`.
 
-On the original machine: `t = 200 mm`, room area **22.040 m²**, matching
-exactly.
+Verified on **Revit 2027** (2026-09-22): wall lengths
+`[4000.0, 4000.0, 6000.0, 6000.0]` exact, `t = 200 mm`, room area
+**22.040 m²**, delta 0.000000 — identical to the original 2025 result
+(ADR-0011).
 
 **Why this check and not "did it run":** Revit's internal units are
 decimal feet. A units bug does not raise — it silently produces a model

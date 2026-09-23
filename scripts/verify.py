@@ -443,12 +443,12 @@ def main() -> int:
         print(f"      {f}")
 
     expect("a newer family is rejected for an older Revit",
-           rfa.FamilyInfo(pathlib.Path("x.rfa"), 2026).usable_in(2025) is False)
+           rfa.FamilyInfo(pathlib.Path("x.rfa"), 2028).usable_in(rfa.TARGET_REVIT) is False)
     expect("an older family is accepted",
-           rfa.FamilyInfo(pathlib.Path("x.rfa"), 2021).usable_in(2025) is True)
+           rfa.FamilyInfo(pathlib.Path("x.rfa"), 2021).usable_in(rfa.TARGET_REVIT) is True)
     # The distinction that matters most: unknown must never read as yes.
     expect("an unknown version is None, not True",
-           rfa.FamilyInfo(pathlib.Path("x.rfa"), None).usable_in(2025) is None)
+           rfa.FamilyInfo(pathlib.Path("x.rfa"), None).usable_in(rfa.TARGET_REVIT) is None)
     expect("an unknown version says so in words",
            "UNKNOWN" in rfa.FamilyInfo(pathlib.Path("x.rfa"), None).describe())
 
@@ -456,13 +456,46 @@ def main() -> int:
     fetched = sorted(pathlib.Path("out/families").glob("*.rfa")) \
         if pathlib.Path("out/families").is_dir() else []
     if fetched:
-        screened = rfa.screen(fetched, 2025)
+        screened = rfa.screen(fetched, rfa.TARGET_REVIT)
         expect(f"downloaded families screen cleanly "
                f"({len(screened['ok'])} usable of {len(fetched)})",
                not screened["unreadable"] and not screened["unknown"])
     else:
         print("  SKIP  no downloaded families to screen "
               "(run scripts/fetch_families.py)")
+
+    # ------------------------------------------- the Revit 2027 extract
+    # A real extract from Revit 2027, of geometry chosen in advance. Kept
+    # as a fixture so the extractor's OUTPUT CONTRACT can be regression
+    # tested on any machine, with no Revit and no licence.
+    #
+    # Revit works in decimal feet. A units bug does not raise -- it
+    # silently yields a model 304.8x wrong that looks entirely healthy --
+    # which is why this checks numbers that were chosen before the model
+    # was built rather than "did it run".
+    fixture = ROOT / "tests/fixtures/revit2027-test-model.json"
+    if fixture.is_file():
+        import json as _json
+        m = _json.loads(fixture.read_text(encoding="utf-8"))
+        expect("the 2027 fixture is in millimetres", m.get("units") == "mm")
+        w = m["walls"]
+        lens = sorted(round(math.dist(x["start"], x["end"]), 6) for x in w)
+        expect("2027 extract: wall centrelines are exactly 6000 x 4000",
+               lens == [4000.0, 4000.0, 6000.0, 6000.0])
+        thick = {x["thickness"] for x in w}
+        expect("2027 extract: one wall thickness, 200 mm", thick == {200.0})
+        room = m["rooms"][0]
+        t = thick.pop()
+        want = (6000.0 - t) * (4000.0 - t) / 1e6
+        expect(f"2027 extract: room area is {want:.3f} m2 to the millimetre",
+               abs(room["area_m2"] - want) < 1e-3)
+        bx = [p[0] for p in room["boundary"]]
+        by = [p[1] for p in room["boundary"]]
+        expect("2027 extract: room boundary spans the inner wall faces",
+               abs((max(bx) - min(bx)) - (6000.0 - t)) < 1e-6
+               and abs((max(by) - min(by)) - (4000.0 - t)) < 1e-6)
+    else:
+        print("  SKIP  no Revit 2027 extract fixture")
 
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     return 1 if FAILS else 0

@@ -9,8 +9,9 @@ can compute point-by-point illuminance.
 The format is **IESNA LM-63** (the Illuminating Engineering Society's
 photometric data standard; revisions LM-63-1986/91/95/2002 differ only in
 the header). Revit ships 141 of these files with the base install, at
-`C:\\ProgramData\\Autodesk\\RVT 2025\\IES` -- they need no content library
-download, which is why the lighting work can start before families arrive.
+`C:\\ProgramData\\Autodesk\\RVT 2027\\IES` (2025 ships the same 141). They
+need no content library download, which is why the lighting work could
+start before any families arrived.
 
 File layout, after the keyword block and the TILT line:
 
@@ -434,9 +435,10 @@ def load_directory(directory: str | Path) -> tuple[list[Photometry], list[tuple[
 
 
 # Where Revit keeps the photometry it ships. Checked in order; the first
-# that exists wins, so a 2025-only machine and a two-version machine both
+# that exists wins, so a single-version machine and a multi-version one both
 # work without configuration.
 REVIT_IES_DIRS = (
+    Path(r"C:\ProgramData\Autodesk\RVT 2027\IES"),
     Path(r"C:\ProgramData\Autodesk\RVT 2025\IES"),
     Path(r"C:\ProgramData\Autodesk\RVT 2026\IES"),
 )
@@ -447,7 +449,7 @@ def revit_ies_dir() -> Path | None:
 
     Note that IES files are plain text and version-independent -- unlike
     `.rfa` families, which are forward-compatible only (ADR-0008). So the
-    2026 folder is usable here even with a 2025-only entitlement.
+    IES folder of ANY installed release is usable whatever we author in.
     """
     for d in REVIT_IES_DIRS:
         if d.is_dir():

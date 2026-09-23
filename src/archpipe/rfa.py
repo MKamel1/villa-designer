@@ -38,6 +38,11 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 
+# The Revit release this project authors in (ADR-0011). A family must
+# be saved by this release or earlier to load, because .rfa is
+# forward-compatible only.
+TARGET_REVIT = 2027
+
 OLE_MAGIC = b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1"
 
 # How much of the file to scan. BasicFileInfo sits near the front in every
@@ -82,7 +87,7 @@ class FamilyInfo:
             return None
         return self.format_year <= target_year
 
-    def describe(self, target_year: int = 2025) -> str:
+    def describe(self, target_year: int = TARGET_REVIT) -> str:
         ok = self.usable_in(target_year)
         if ok is None:
             return (f"{self.path.name}: version UNKNOWN -- no BasicFileInfo "
@@ -152,7 +157,7 @@ def read(path: str | Path) -> FamilyInfo:
     )
 
 
-def screen(paths, target_year: int = 2025) -> dict:
+def screen(paths, target_year: int = TARGET_REVIT) -> dict:
     """Sort a pile of downloads into usable, too new, and unknown."""
     out = {"ok": [], "too_new": [], "unknown": [], "unreadable": []}
     for path in paths:
@@ -184,10 +189,13 @@ def verify() -> list[str]:
     # having checked nothing -- a vacuous test, which is worse than none
     # because it reports PASS.
     probes = [
-        (FamilyInfo(Path("newer.rfa"), 2026), 2025, False, "a newer family"),
-        (FamilyInfo(Path("same.rfa"), 2025), 2025, True, "a same-year family"),
-        (FamilyInfo(Path("older.rfa"), 2021), 2025, True, "an older family"),
-        (FamilyInfo(Path("unknown.rfa"), None), 2025, None, "an unknown family"),
+        (FamilyInfo(Path("newer.rfa"), 2028), 2027, False, "a newer family"),
+        (FamilyInfo(Path("same.rfa"), 2027), 2027, True, "a same-year family"),
+        (FamilyInfo(Path("older.rfa"), 2021), 2027, True, "an older family"),
+        (FamilyInfo(Path("unknown.rfa"), None), 2027, None, "an unknown family"),
+        # The 2025 -> 2027 move only widens what loads; nothing that worked
+        # before stops working.
+        (FamilyInfo(Path("was_ok.rfa"), 2025), 2027, True, "a 2025 family"),
     ]
     for info, target, want, label in probes:
         got = info.usable_in(target)
@@ -195,7 +203,7 @@ def verify() -> list[str]:
             fails.append(f"{label} in Revit {target}: got {got!r}, "
                          f"want {want!r}")
     # "Unknown" must never read as permission.
-    if FamilyInfo(Path("u.rfa"), None).usable_in(2025):
+    if FamilyInfo(Path("u.rfa"), None).usable_in(TARGET_REVIT):
         fails.append("an unknown version was treated as usable")
     if "UNKNOWN" not in FamilyInfo(Path("u.rfa"), None).describe():
         fails.append("an unknown version must say so in words")
@@ -204,7 +212,7 @@ def verify() -> list[str]:
     # the folder they were installed into -- independent ground truth
     # rather than the parser's own output.
     checked = 0
-    for year in (2021, 2022, 2023, 2024, 2025, 2026):
+    for year in (2021, 2022, 2023, 2024, 2025, 2026, 2027):
         root = Path(rf"C:\ProgramData\Autodesk\RVT {year}\Libraries")
         if not root.is_dir():
             continue
