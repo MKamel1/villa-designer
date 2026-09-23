@@ -1,0 +1,137 @@
+# The end-to-end test room: one bedroom, specified here and built in Revit.
+#
+# Chosen to exercise rules rather than to be pretty. 4200 x 3600 mm makes
+# the double bed's 750 mm access on BOTH sides (Neufert) and the wardrobe's
+# 750 mm door swing genuinely tight, so the clearance checks are real
+# checks rather than formalities.
+#
+# Positions are the centre of each piece, in millimetres, measured from the
+# room's inside south-west corner. The room's internal rectangle is
+# (0,0) to (width, depth); wall centrelines sit half a wall thickness
+# outside it.
+#
+# This file is the human surface. `scripts/make_bedroom_spec.py` converts
+# it to JSON for the Revit side, because the builder runs in IronPython
+# 2.7 inside Revit where PyYAML is not available.
+
+name: Bedroom 01
+level: Ground
+
+room:
+  width: 4200          # internal, mm (x)
+  depth: 3600          # internal, mm (y)
+  ceiling_height: 2700
+  wall_thickness: 200
+  occupancy: bedroom
+
+# Wall ids are compass points so openings can name their host readably.
+openings:
+  - id: WD-01
+    kind: window
+    host: south
+    at: 2100           # along the wall from the room's SW corner
+    width: 1500
+    height: 1400
+    sill: 900
+  - id: DR-01
+    kind: door
+    host: east
+    at: 800
+    width: 900
+    height: 2100
+    sill: 0
+
+# Furniture. `family` names a real .rfa where we have one; where we do not,
+# `proxy: true` builds a DirectShape box at the catalogue dimensions --
+# correctly categorised and named PROXY so it can never be mistaken for a
+# design proposal.
+furniture:
+  - id: FN-BED
+    type: bed_double
+    at: [2100, 2600]
+    size: [1600, 2000]
+    rotation: 0
+    proxy: true
+  - id: FN-BST-L
+    type: bedside_table
+    at: [1100, 3300]
+    size: [450, 400]
+    rotation: 0
+    proxy: true
+  - id: FN-BST-R
+    type: bedside_table
+    at: [3100, 3300]
+    size: [450, 400]
+    rotation: 0
+    proxy: true
+  - id: FN-WRD
+    type: wardrobe
+    at: [400, 1800]
+    size: [1200, 600]
+    rotation: 90
+    proxy: true
+  - id: FN-DSK
+    type: desk
+    at: [3500, 700]
+    size: [1200, 600]
+    rotation: 0
+    proxy: true
+  - id: FN-CHR
+    type: chair
+    at: [3500, 1200]
+    size: [500, 500]
+    rotation: 180
+    family: chair_cafe_wood_metal_9045_bimlibrary.co_.rfa
+
+# Three deliberate layers, so the "no lone central fixture" rule passes and
+# its negative case can be tested by deleting two of them. Positions match
+# scripts/demo_bedroom_lighting.py exactly, so the lux grid computed from
+# the REAL extract is comparable with the one computed from the mock.
+lighting:
+  - id: LT-01
+    layer: ambient
+    at: [2100, 1800]
+    mounting_height: 2400
+    host: ceiling
+    ies: PLD1A21.ies
+    lumens: 2780
+    kelvin: 2700
+    family: pendant_cone_16inch_106_bimlibrary.co_.rfa
+  # SUBSTITUTION, recorded rather than hidden: the spec wants wall-mounted
+  # bedside reading lights, and no wall-hostable luminaire was available in
+  # the downloaded set -- every one is ceiling-based. These are therefore
+  # bedside PENDANTS, dropped to 1200 mm on a host offset. A legitimate
+  # design choice, but not the one originally written, and the photometry
+  # (EWL2A19, a lamphead) still describes the intended fitting.
+  - id: LT-02
+    layer: task
+    at: [1100, 3300]
+    mounting_height: 1200
+    host: ceiling
+    ies: EWL2A19.ies
+    lumens: 780
+    kelvin: 2700
+    family: pendant_cylinder_simple_136_bimlibrary.co_.rfa
+  - id: LT-03
+    layer: task
+    at: [3100, 3300]
+    mounting_height: 1200
+    host: ceiling
+    ies: EWL2A19.ies
+    lumens: 780
+    kelvin: 2700
+    family: pendant_cylinder_simple_136_bimlibrary.co_.rfa
+  - id: LT-04
+    layer: accent
+    at: [400, 1800]
+    mounting_height: 2400
+    host: ceiling
+    ies: LGLled.ies
+    lumens: 1008
+    kelvin: 3000
+    family: linear_ceiling_mount_parametric_111_bimlibrary.co_.rfa
+
+materials:
+  walls: painted
+  floor: timber
+  ceiling: plaster

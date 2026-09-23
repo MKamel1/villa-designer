@@ -28,7 +28,7 @@ import os
 import sys
 
 from Autodesk.Revit.DB import (
-    BuiltInCategory, BuiltInParameter, FilteredElementCollector, Level,
+    BuiltInCategory, BuiltInParameter, Element, FilteredElementCollector, Level,
     LocationCurve, LocationPoint, SpatialElementBoundaryOptions,
     UnitTypeId, UnitUtils, Wall, WallType, XYZ,
 )
@@ -54,10 +54,32 @@ def pt_mm(p):
 # helpers
 # --------------------------------------------------------------------------
 def _name(el):
+    """An element's name.
+
+    `FamilySymbol.Name` raises `AttributeError: Name` under IronPython in
+    Revit 2027 -- `Name` is declared twice and the bridge cannot choose.
+    `Family.Name` is unaffected. The first version of this swallowed the
+    exception and returned "", so every `type_name` in the extract came
+    back empty and nothing said why. Found by building a real room and
+    reading it back.
+    """
+    if el is None:
+        return ""
     try:
         return el.Name
     except Exception:
-        return ""
+        pass
+    try:
+        return Element.Name.GetValue(el)
+    except Exception:
+        pass
+    try:
+        prm = el.get_Parameter(BuiltInParameter.SYMBOL_NAME_PARAM)
+        if prm is not None and prm.HasValue:
+            return prm.AsString() or ""
+    except Exception:
+        pass
+    return ""
 
 
 def _param_str(el, bip):
@@ -256,6 +278,27 @@ def _instance_rotation(inst):
         return None
 
 
+def _bbox_centre_and_size(el):
+    """Plan centre and size from an element's bounding box, in mm.
+
+    Needed because a `DirectShape` has no `LocationPoint` -- its position
+    lives in its geometry. The proxy furniture `build_bedroom.py` creates
+    for pieces we have no family for is exactly that, and without this the
+    extract reported `at: None` for every one of them, which would leave
+    the clearance rules with nothing to check.
+    """
+    try:
+        bb = el.get_BoundingBox(None)
+        if bb is None:
+            return None, None
+        return ([mm((bb.Min.X + bb.Max.X) / 2.0),
+                 mm((bb.Min.Y + bb.Max.Y) / 2.0)],
+                [mm(bb.Max.X - bb.Min.X), mm(bb.Max.Y - bb.Min.Y),
+                 mm(bb.Max.Z - bb.Min.Z)])
+    except Exception:
+        return None, None
+
+
 def extract_instances(doc, bic, tag):
     out = []
     for inst in _sorted_by_uid(_collect(doc, bic)):
@@ -263,15 +306,42 @@ def extract_instances(doc, bic, tag):
         pt = loc.Point if isinstance(loc, LocationPoint) else None
         sym = getattr(inst, "Symbol", None)
         lvl = doc.GetElement(inst.LevelId) if hasattr(inst, "LevelId") else None
-        out.append({
+
+        at = pt_mm(pt) if pt else None
+        centre, size = _bbox_centre_and_size(inst)
+        source = "location_point"
+        if at is None and centre is not None:
+            # Say WHERE the position came from. A bounding-box centre is a
+            # good answer for an axis-aligned box and a poor one for a
+            # rotated L-shape, and a downstream rule deserves to know which
+            # it is holding.
+            at = centre
+            source = "bounding_box_centre"
+
+        rec = {
             "id": inst.UniqueId,
             "category": tag,
             "family": _name(sym.Family) if sym else "",
             "type_name": _name(sym) if sym else "",
             "level": lvl.UniqueId if lvl else None,
-            "at": pt_mm(pt) if pt else None,
+            "at": at,
+            "at_source": source if at is not None else None,
             "rotation": _instance_rotation(inst),
-        })
+        }
+        if size is not None:
+            rec["size_mm"] = size
+        # A DirectShape carries the id archpipe stamped on it, which is how
+        # a proxy is traced back to the spec item it stands for.
+        for attr in ("ApplicationId", "ApplicationDataId"):
+            try:
+                val = getattr(inst, attr, None)
+                if val:
+                    rec[attr.lower()] = str(val)
+            except Exception:
+                pass
+        if not rec["family"]:
+            rec["is_proxy"] = str(getattr(inst, "ApplicationId", "")) == "archpipe"
+        out.append(rec)
     return out
 
 

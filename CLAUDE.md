@@ -43,7 +43,7 @@ back each one forces the design. Everything here follows from that.
 ## Before you claim something works
 
 ```bash
-PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 96 checks
+PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 104 checks
 ```
 
 Every stage command exits non-zero when its gate is closed — that is by
@@ -77,8 +77,15 @@ plot, `design` exits 1 on a violation.
 - **Revit 2027 ships MCP** — 78 tool classes, 6 public. Inventory in
   `docs/reference/revit-2027-mcp.md`. `AddCustomServer` is the route to
   registering our own engines as tools.
-- **No Revit version here ships usable content** — 2025 and 2027 both
-  have 446 families, **0 doors, 0 beds**. Verified 2026-09-22: there is
+- **The project TEMPLATE ships doors and windows.** `Default_M_ENU.rte`
+  has 7 door types and 9 window types loaded, plus ceiling and floor
+  types. The "0 doors" figure counts the *Libraries* folder, which is a
+  different thing — correcting an earlier claim of mine. Stock sizes are
+  fixed, so `build_bedroom.best_opening_symbol()` duplicates the nearest
+  type and sets its width/height rather than silently accepting a
+  near-miss.
+- **The Libraries folder still ships no furniture or lighting** — 2025 and
+  2027 both have 446 families, **0 beds**. Verified 2026-09-22: there is
   **no 2026 content on this machine
   at all** (`RVT 2026\` holds only `Recent` and `UserDataCache`); the
   earlier "3,237 stranded 2026 families" note in ADR-0008 is corrected
@@ -134,4 +141,4 @@ stand-in and means nothing for the real site.
     src/archpipe/blender/       scene build, photometric calibration,
                                 lux measurement from the render itself
     revit/           extractor, pyRevit extension, probe, test-model builder
-    scripts/verify.py 96 checks, positive and negative
+    scripts/verify.py 104 checks, positive and negative

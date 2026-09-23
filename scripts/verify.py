@@ -540,6 +540,50 @@ def main() -> int:
     else:
         print("  SKIP  no family placement fixture")
 
+    # ------------------------------------------- spec -> Revit -> extract
+    # THE HEADLINE REQUIREMENT: a room specified in YAML, built in Revit,
+    # read back, and matching. The extract is kept as a fixture so the
+    # round trip stays asserted on any machine, without Revit.
+    bed = ROOT / "tests/fixtures/bedroom-from-revit.json"
+    if bed.is_file():
+        import json as _json
+        b = _json.loads(bed.read_text(encoding="utf-8"))
+        spec_y = yaml.safe_load(
+            (ROOT / "spec/bedroom-test.yaml").read_text(encoding="utf-8"))
+        r = spec_y["room"]
+        room = (b.get("rooms") or [{}])[0]
+        expect("bedroom: room area is width x depth exactly",
+               abs(room.get("area_m2", 0) - r["width"] * r["depth"] / 1e6) < 1e-3)
+        expect("bedroom: the spec's room name survived the round trip",
+               room.get("name") == spec_y.get("name"))
+        expect("bedroom: four walls at centreline lengths",
+               sorted(round(math.dist(w["start"], w["end"]), 1)
+                      for w in b["walls"])
+               == sorted([float(r["depth"] + r["wall_thickness"])] * 2
+                         + [float(r["width"] + r["wall_thickness"])] * 2))
+        expect("bedroom: both openings built at the specified sizes",
+               {(o["kind"], o["width"], o["height"]) for o in b["openings"]}
+               == {(o["kind"], float(o["width"]), float(o["height"]))
+                   for o in spec_y["openings"]})
+        expect("bedroom: every furniture item and luminaire extracted",
+               len(b["furniture"]) == len(spec_y["furniture"])
+               and len(b["lighting"]) == len(spec_y["lighting"]))
+        # A DirectShape proxy has no LocationPoint, so the extractor falls
+        # back to the bounding-box centre -- and SAYS SO, because that is a
+        # good number for an axis-aligned box and a poor one otherwise.
+        proxies = [f for f in b["furniture"]
+                   if f.get("at_source") == "bounding_box_centre"]
+        expect("bedroom: proxy positions come from the bounding box and are "
+               "labelled as such", len(proxies) == 5)
+        expect("bedroom: every element reports where its position came from",
+               all(f.get("at") and f.get("at_source")
+                   for f in b["furniture"] + b["lighting"]))
+        # The extractor used to swallow the name error and return "".
+        expect("bedroom: opening type names are not empty",
+               all(o.get("type_name") for o in b["openings"]))
+    else:
+        print("  SKIP  no bedroom round-trip fixture")
+
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     return 1 if FAILS else 0
 
