@@ -43,7 +43,7 @@ back each one forces the design. Everything here follows from that.
 ## Before you claim something works
 
 ```bash
-PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 77 checks
+PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 83 checks
 ```
 
 Every stage command exits non-zero when its gate is closed — that is by
@@ -55,11 +55,17 @@ plot, `design` exits 1 on a violation.
 - **Revit 2025, not 2026** — the client's entitlement covers 2025 only,
   which is why 2026 failed to launch (ADR-0008, resolved).
 - **Revit 2025 ships no content library** — 446 families, **0 doors, 0
-  beds**. 2026's 3,237 families are on disk and unusable: `.rfa` is
-  forward-compatible only. But the **family templates** (1,328 `.rft`,
-  including `Metric Door/Window/Furniture/Casework/Lighting Fixture`) and
-  **141 IES photometric files** ARE installed, which is why Stage 5
-  lighting was not blocked on the download.
+  beds**. Verified 2026-09-22: there is **no 2026 content on this machine
+  at all** (`RVT 2026\` holds only `Recent` and `UserDataCache`); the
+  earlier "3,237 stranded 2026 families" note in ADR-0008 is corrected
+  there. But the **family templates** (1,328 `.rft`, including
+  `Metric Door/Window/Furniture/Casework/Lighting Fixture`) and **141 IES
+  photometric files** ARE installed, which is why Stage 5 lighting was not
+  blocked on any download.
+- **`.rfa` is forward-compatible only.** A family saved by a newer Revit
+  cannot be opened by an older one. Screen any download with
+  `archpipe.rfa` BEFORE opening it — opening a family in a newer Revit
+  upgrades it on save.
 - **`pyrevit run <model>` does not open the model** — it hands you a
   `UIApplication` with zero documents. `extract_model.py` opens it itself.
 - **`revit.doc` returns `None`** in the runner rather than raising.
@@ -92,4 +98,4 @@ stand-in and means nothing for the real site.
     src/archpipe/blender/       scene build, photometric calibration,
                                 lux measurement from the render itself
     revit/           extractor, pyRevit extension, probe, test-model builder
-    scripts/verify.py 77 checks, positive and negative
+    scripts/verify.py 83 checks, positive and negative

@@ -26,3 +26,5 @@ plot.log
 .playwright-mcp/
 .DS_Store
 Thumbs.db
+out/families/*.rfa
+out/families/too-new/*.rfa

@@ -430,6 +430,40 @@ def main() -> int:
     expect("the inter-reflection estimate says it cannot decide uniformity",
            "NOT a basis" in irc.note)
 
+    # ------------------------------------------------- family version gate
+    # Revit families are forward-compatible only, so a downloaded family
+    # saved by a newer release is useless and cannot be converted. Worse,
+    # checking by opening it UPGRADES it on save. `archpipe.rfa` reads the
+    # version out of the file instead.
+    from archpipe import rfa
+
+    rfa_fails = rfa.verify()
+    expect(f"rfa version reader ({len(rfa_fails)} failures)", not rfa_fails)
+    for f in rfa_fails:
+        print(f"      {f}")
+
+    expect("a newer family is rejected for an older Revit",
+           rfa.FamilyInfo(pathlib.Path("x.rfa"), 2026).usable_in(2025) is False)
+    expect("an older family is accepted",
+           rfa.FamilyInfo(pathlib.Path("x.rfa"), 2021).usable_in(2025) is True)
+    # The distinction that matters most: unknown must never read as yes.
+    expect("an unknown version is None, not True",
+           rfa.FamilyInfo(pathlib.Path("x.rfa"), None).usable_in(2025) is None)
+    expect("an unknown version says so in words",
+           "UNKNOWN" in rfa.FamilyInfo(pathlib.Path("x.rfa"), None).describe())
+
+    # Screening a real downloaded family, when one has been fetched.
+    fetched = sorted(pathlib.Path("out/families").glob("*.rfa")) \
+        if pathlib.Path("out/families").is_dir() else []
+    if fetched:
+        screened = rfa.screen(fetched, 2025)
+        expect(f"downloaded families screen cleanly "
+               f"({len(screened['ok'])} usable of {len(fetched)})",
+               not screened["unreadable"] and not screened["unknown"])
+    else:
+        print("  SKIP  no downloaded families to screen "
+              "(run scripts/fetch_families.py)")
+
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     return 1 if FAILS else 0
 
