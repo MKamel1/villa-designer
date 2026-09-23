@@ -66,8 +66,20 @@ plot, `design` exits 1 on a violation.
   cannot be opened by an older one. Screen any download with
   `archpipe.rfa` BEFORE opening it — opening a family in a newer Revit
   upgrades it on save.
+- **`pyrevit run` needs an ABSOLUTE script path.** A relative path is
+  passed to Revit verbatim, Revit's working directory is elsewhere, and
+  the journal records `TaskDialog "Can not find target file. Maybe
+  deleted?"` — while the CLI exits 0 with an empty execution log. Same
+  class as the `accoreconsole` relative-path trap in `acad.py`.
 - **`pyrevit run <model>` does not open the model** — it hands you a
   `UIApplication` with zero documents. `extract_model.py` opens it itself.
+- **Revit 2027 works too** (verified 2026-09-22): licensed, pyRevit 6.5.5
+  attaches, scripts run, `api_ok`. It runs on **.NET 10** where 2025 is on
+  .NET 8. Its content library is identical to 2025's — same 446 families,
+  0 doors, same 1,328 templates and 141 IES files.
+- A journal line `API_ERROR { Assembly version conflict ... pyRevitRunner.dll`
+  appears on **both** 2025 and 2027 and is **not fatal** — the add-in loads
+  and the script runs regardless. Do not chase it.
 - **`revit.doc` returns `None`** in the runner rather than raising.
 - **Revit internal units are decimal feet.** A units bug does not raise;
   it silently yields a model 304.8× wrong. All conversion goes through

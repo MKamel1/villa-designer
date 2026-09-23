@@ -151,7 +151,7 @@ PYTHONPATH=src python scripts/verify.py                # ALL PASS, 53 checks
 
 # 2. Revit reachable from the command line
 $env:ARCHPIPE_PROBE_OUT="$PWD\probe.json"
-& $pr run revit\probe.py --revit=2025
+& $pr run "$PWDevit\probe.py" --revit=2025    # ABSOLUTE path
 #    expect api_ok true, raw_revitapi_import true, a revit_username
 
 # 3. Build a model of KNOWN dimensions, then extract it
@@ -159,8 +159,14 @@ $env:ARCHPIPE_TEST_MODEL="$PWD\test.rvt"
 & $pr run revit\build_test_model.py --revit=2025
 $env:ARCHPIPE_MODEL="$PWD\test.rvt"
 $env:ARCHPIPE_EXTRACT_OUT="$PWD\test.model.json"
-& $pr run revit\extract_model.py --revit=2025
+& $pr run "$PWDevit\extract_model.py" --revit=2025
 ```
+
+**The script path must be ABSOLUTE.** `pyrevit run` passes it to Revit
+verbatim, Revit's working directory is not the project folder, and a
+relative path produces `TaskDialog "Can not find target file. Maybe
+deleted?"` in the journal while the CLI exits 0 with an empty execution
+log. Nothing anywhere says the script did not run.
 
 Step 3 is the one that matters. The builder makes a rectangle of
 **6000 × 4000 mm on wall centrelines**; the extract must report wall
