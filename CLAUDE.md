@@ -43,7 +43,7 @@ back each one forces the design. Everything here follows from that.
 ## Before you claim something works
 
 ```bash
-PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 88 checks
+PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 96 checks
 ```
 
 Every stage command exits non-zero when its gate is closed — that is by
@@ -58,6 +58,22 @@ plot, `design` exits 1 on a violation.
   .NET 10; 2025 is on .NET 8. 2025 stays attached as a fallback.
 - **`.rvt` and `.rfa` authored in 2027 can never open in 2025.** One-way
   door, accepted deliberately.
+- **A family symbol must be activated before placement** — `sym.Activate()`
+  then `doc.Regenerate()`. Every family tested loaded **inactive**.
+  Measured correction to the earlier assumption: in Revit 2027 this does
+  **not** fail silently, it raises `Exception: The symbol is not active.`
+  Loud, not silent. Good news, but do not rely on the old belief.
+- **`FamilySymbol.Name` raises `AttributeError: Name`** under IronPython
+  in 2027 (`Name` is declared twice and the bridge cannot choose).
+  `Family.Name` is fine. Use `Element.Name.GetValue(sym)` —
+  `place_families_test.el_name()` has the ladder.
+- **Free families lie about their category.** Measured: a fridge came in
+  as `Electrical Fixtures`, an espresso machine as `Furniture`. Any rule
+  that filters by category will miss them, so `family_map.py` must bind by
+  intent, not by trusting the file.
+- **Free families rarely declare width/height parameters.** All eight
+  tested returned nothing for `FAMILY_WIDTH_PARAM`. Use the **bounding
+  box** to check a family against the Neufert figure in `catalogue.py`.
 - **Revit 2027 ships MCP** — 78 tool classes, 6 public. Inventory in
   `docs/reference/revit-2027-mcp.md`. `AddCustomServer` is the route to
   registering our own engines as tools.
@@ -118,4 +134,4 @@ stand-in and means nothing for the real site.
     src/archpipe/blender/       scene build, photometric calibration,
                                 lux measurement from the render itself
     revit/           extractor, pyRevit extension, probe, test-model builder
-    scripts/verify.py 88 checks, positive and negative
+    scripts/verify.py 96 checks, positive and negative

@@ -497,6 +497,49 @@ def main() -> int:
     else:
         print("  SKIP  no Revit 2027 extract fixture")
 
+    # ------------------------------------------- the family placement gate
+    # Result of `revit/place_families_test.py` against Revit 2027, kept as
+    # a fixture so the gate's conclusions stay asserted on any machine.
+    # If families cannot be loaded, activated, placed and read back, then
+    # build_bedroom.py and everything downstream needs rethinking.
+    gate = ROOT / "tests/fixtures/revit2027-place-families.json"
+    if gate.is_file():
+        import json as _json
+        g = _json.loads(gate.read_text(encoding="utf-8"))
+        placed = [f for f in g["families"] if f.get("placed")]
+        expect(f"family gate: every family placed ({len(placed)}/"
+               f"{len(g['tested'])})", len(placed) == len(g["tested"]))
+        expect("family gate: each landed exactly where it was asked to",
+               all(f["read_back"]["delta_mm"] == [0.0, 0.0, 0.0]
+                   for f in placed if "read_back" in f))
+        expect("family gate: every family read back a real bounding box",
+               all(f["read_back"].get("bbox_size_mm")
+                   and min(f["read_back"]["bbox_size_mm"]) > 0
+                   for f in placed if "read_back" in f))
+        # The activation trap, as MEASURED rather than as assumed. The plan
+        # expected a silent None; Revit 2027 raises. Asserting the measured
+        # behaviour means a future release changing it will be noticed
+        # rather than silently tolerated.
+        trap = g.get("activation_trap") or {}
+        expect("family gate: an inactive symbol does not place",
+               trap.get("placed_anyway") is False)
+        expect("family gate: and in 2027 it raises rather than returning None",
+               trap.get("raised") is True
+               and "not active" in trap.get("exception", "").lower())
+        expect("family gate: every family loaded INACTIVE, so activation "
+               "is never optional",
+               all(f.get("was_active_on_load") is False
+                   for f in g["families"] if "was_active_on_load" in f))
+        # The two quality findings that shape family_map.py.
+        expect("family gate: free families declare no size parameters, so "
+               "the bounding box is the only dimension source",
+               all(not f.get("size_mm") for f in g["families"]))
+        cats = {f.get("category") for f in g["families"]}
+        expect("family gate: categories are unreliable and recorded as such",
+               "Electrical Fixtures" in cats)
+    else:
+        print("  SKIP  no family placement fixture")
+
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     return 1 if FAILS else 0
 

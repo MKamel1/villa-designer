@@ -1,0 +1,353 @@
+{
+  "activation_trap": {
+    "exception": "Exception: The symbol is not active.\r\nParameter name: symbol", 
+    "family": "1736906024wpdm_refrigerator_top_freezer_handle_01_bimlibrary", 
+    "is_active_before": false, 
+    "placed_anyway": false, 
+    "raised": true, 
+    "returned_none": false, 
+    "type": "2'-4\"W x 2'-8\"D", 
+    "verdict": "raised an exception -- at least it is loud"
+  }, 
+  "candidates": 28, 
+  "document": "place_test", 
+  "families": [
+    {
+      "activated": true, 
+      "category": "Specialty Equipment", 
+      "family_name": "1736906024wpdm_refrigerator_top_freezer_handle_01_bimlibrary", 
+      "file": "1736906024wpdm_refrigerator_top_freezer_handle_01_bimlibrary.rfa", 
+      "how": "level-based", 
+      "loaded": true, 
+      "placed": true, 
+      "placement_type": "OneLevelBased", 
+      "read_back": {
+        "bbox_size_mm": [
+          821.87099999999998, 
+          918.13099999999997, 
+          1644.6500000000001
+        ], 
+        "category": "Specialty Equipment", 
+        "delta_mm": [
+          0.0, 
+          0.0, 
+          0.0
+        ], 
+        "family": "1736906024wpdm_refrigerator_top_freezer_handle_01_bimlibrary", 
+        "id": "212524", 
+        "placed_at_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "requested_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "type": "2'-4\"W x 2'-8\"D"
+      }, 
+      "size_mm": {}, 
+      "symbol_count": 1, 
+      "type_name": "2'-4\"W x 2'-8\"D", 
+      "was_active_on_load": false
+    }, 
+    {
+      "activated": true, 
+      "category": "Electrical Fixtures", 
+      "family_name": "appliance_fridge_double_door", 
+      "file": "appliance_fridge_double_door.rfa", 
+      "how": "level-based", 
+      "loaded": true, 
+      "placed": true, 
+      "placement_type": "OneLevelBased", 
+      "read_back": {
+        "bbox_size_mm": [
+          914.39999999999998, 
+          857.25, 
+          1758.9500000000000
+        ], 
+        "category": "Electrical Fixtures", 
+        "delta_mm": [
+          0.0, 
+          0.0, 
+          0.0
+        ], 
+        "family": "appliance_fridge_double_door", 
+        "id": "213432", 
+        "placed_at_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "requested_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "type": "appliance_fridge_double_door"
+      }, 
+      "size_mm": {}, 
+      "symbol_count": 1, 
+      "type_name": "appliance_fridge_double_door", 
+      "was_active_on_load": false
+    }, 
+    {
+      "activated": true, 
+      "category": "Furniture", 
+      "family_name": "chair_cafe_wood_metal_9045_bimlibrary.co_", 
+      "file": "chair_cafe_wood_metal_9045_bimlibrary.co_.rfa", 
+      "how": "level-based", 
+      "loaded": true, 
+      "placed": true, 
+      "placement_type": "OneLevelBased", 
+      "read_back": {
+        "bbox_size_mm": [
+          555.46900000000005, 
+          580.79399999999998, 
+          857.52400000000000
+        ], 
+        "category": "Furniture", 
+        "delta_mm": [
+          0.0, 
+          0.0, 
+          0.0
+        ], 
+        "family": "chair_cafe_wood_metal_9045_bimlibrary.co_", 
+        "id": "214328", 
+        "placed_at_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "requested_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "type": "chair_cafe_wood_metal_9045_bimlibrary.co_"
+      }, 
+      "size_mm": {}, 
+      "symbol_count": 1, 
+      "type_name": "chair_cafe_wood_metal_9045_bimlibrary.co_", 
+      "was_active_on_load": false
+    }, 
+    {
+      "activated": true, 
+      "category": "Lighting Fixtures", 
+      "family_name": "chandelier_cascading-", 
+      "file": "chandelier_cascading-.rfa", 
+      "how": "hosted on wall 211505", 
+      "loaded": true, 
+      "placed": true, 
+      "placement_type": "OneLevelBasedHosted", 
+      "read_back": {
+        "bbox_size_mm": [
+          762.0, 
+          762.0, 
+          1066.8000000000000
+        ], 
+        "category": "Lighting Fixtures", 
+        "delta_mm": [
+          0.0, 
+          0.0, 
+          0.0
+        ], 
+        "family": "chandelier_cascading-", 
+        "id": "215233", 
+        "placed_at_mm": [
+          3000.0, 
+          0.0, 
+          900.0
+        ], 
+        "requested_mm": [
+          3000.0, 
+          0.0, 
+          900.0
+        ], 
+        "type": "chandelier_cascading-"
+      }, 
+      "size_mm": {}, 
+      "symbol_count": 1, 
+      "type_name": "chandelier_cascading-", 
+      "was_active_on_load": false
+    }, 
+    {
+      "activated": true, 
+      "category": "Furniture", 
+      "family_name": "coffee-maker_espresso", 
+      "file": "coffee-maker_espresso.rfa", 
+      "how": "level-based", 
+      "loaded": true, 
+      "placed": true, 
+      "placement_type": "OneLevelBased", 
+      "read_back": {
+        "bbox_size_mm": [
+          258.0, 
+          320.05399999999997, 
+          330.09500000000003
+        ], 
+        "category": "Furniture", 
+        "delta_mm": [
+          0.0, 
+          0.0, 
+          0.0
+        ], 
+        "family": "coffee-maker_espresso", 
+        "id": "216638", 
+        "placed_at_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "requested_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "type": "Espresso Machine_La Pavoni"
+      }, 
+      "size_mm": {}, 
+      "symbol_count": 1, 
+      "type_name": "Espresso Machine_La Pavoni", 
+      "was_active_on_load": false
+    }, 
+    {
+      "activated": true, 
+      "category": "Lighting Fixtures", 
+      "family_name": "linear_ceiling_mount_parametric_111_bimlibrary.co_", 
+      "file": "linear_ceiling_mount_parametric_111_bimlibrary.co_.rfa", 
+      "how": "hosted on wall 211505", 
+      "loaded": true, 
+      "placed": true, 
+      "placement_type": "OneLevelBasedHosted", 
+      "read_back": {
+        "bbox_size_mm": [
+          1879.5999999999999, 
+          1219.2000000000000, 
+          1981.2000000000000
+        ], 
+        "category": "Lighting Fixtures", 
+        "delta_mm": [
+          0.0, 
+          0.0, 
+          0.0
+        ], 
+        "family": "linear_ceiling_mount_parametric_111_bimlibrary.co_", 
+        "id": "218488", 
+        "placed_at_mm": [
+          3000.0, 
+          0.0, 
+          900.0
+        ], 
+        "requested_mm": [
+          3000.0, 
+          0.0, 
+          900.0
+        ], 
+        "type": "2.5\" x 4\" x 6'-0\""
+      }, 
+      "size_mm": {}, 
+      "symbol_count": 2, 
+      "type_name": "2.5\" x 4\" x 6'-0\"", 
+      "was_active_on_load": false
+    }, 
+    {
+      "activated": true, 
+      "category": "Lighting Fixtures", 
+      "family_name": "pendant_cone_16inch_106_bimlibrary.co_", 
+      "file": "pendant_cone_16inch_106_bimlibrary.co_.rfa", 
+      "how": "hosted on wall 211505", 
+      "loaded": true, 
+      "placed": true, 
+      "placement_type": "OneLevelBasedHosted", 
+      "read_back": {
+        "bbox_size_mm": [
+          1219.2000000000000, 
+          1219.2000000000000, 
+          1464.7790000000000
+        ], 
+        "category": "Lighting Fixtures", 
+        "delta_mm": [
+          0.0, 
+          0.0, 
+          0.0
+        ], 
+        "family": "pendant_cone_16inch_106_bimlibrary.co_", 
+        "id": "220171", 
+        "placed_at_mm": [
+          3000.0, 
+          0.0, 
+          900.0
+        ], 
+        "requested_mm": [
+          3000.0, 
+          0.0, 
+          900.0
+        ], 
+        "type": "Pendant 16\" Dia"
+      }, 
+      "size_mm": {}, 
+      "symbol_count": 1, 
+      "type_name": "Pendant 16\" Dia", 
+      "was_active_on_load": false
+    }, 
+    {
+      "activated": true, 
+      "category": "Specialty Equipment", 
+      "family_name": "refrigerator_4_french_doors_08_bimlibrary.co_", 
+      "file": "refrigerator_4_french_doors_08_bimlibrary.co_.rfa", 
+      "how": "level-based", 
+      "loaded": true, 
+      "placed": true, 
+      "placement_type": "OneLevelBased", 
+      "read_back": {
+        "bbox_size_mm": [
+          1009.4770000000000, 
+          873.68100000000004, 
+          1854.2000000000000
+        ], 
+        "category": "Specialty Equipment", 
+        "delta_mm": [
+          0.0, 
+          0.0, 
+          0.0
+        ], 
+        "family": "refrigerator_4_french_doors_08_bimlibrary.co_", 
+        "id": "221178", 
+        "placed_at_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "requested_mm": [
+          1000.0, 
+          1000.0, 
+          0.0
+        ], 
+        "type": "3'-0\"W x 2'-4\"D x 6'-1\"H"
+      }, 
+      "size_mm": {}, 
+      "symbol_count": 1, 
+      "type_name": "3'-0\"W x 2'-4\"D x 6'-1\"H", 
+      "was_active_on_load": false
+    }
+  ], 
+  "host_wall": "211505", 
+  "host_wall_length_mm": 6000.0, 
+  "level": "Level 1", 
+  "notes": [], 
+  "ok": true, 
+  "placed_count": 8, 
+  "saved_as": "C:\\Users\\mmbka\\arch-pipeline\\out\\revit2027\\placed.rvt", 
+  "tested": [
+    "1736906024wpdm_refrigerator_top_freezer_handle_01_bimlibrary.rfa", 
+    "appliance_fridge_double_door.rfa", 
+    "chair_cafe_wood_metal_9045_bimlibrary.co_.rfa", 
+    "chandelier_cascading-.rfa", 
+    "coffee-maker_espresso.rfa", 
+    "linear_ceiling_mount_parametric_111_bimlibrary.co_.rfa", 
+    "pendant_cone_16inch_106_bimlibrary.co_.rfa", 
+    "refrigerator_4_french_doors_08_bimlibrary.co_.rfa"
+  ]
+}
