@@ -106,6 +106,52 @@ class Photometry:
     def peak_candela(self) -> float:
         return max(max(row) for row in self.candela)
 
+    def integrated_flux(self, steps: int = 720, azimuths: int = 48) -> float:
+        """Luminous flux the LUMINAIRE actually emits, in lumens.
+
+        Numerically integrates the measured distribution over the sphere:
+
+            Phi = integral I(theta, phi) dOmega
+
+        THIS IS NOT `total_lumens`, AND THE DIFFERENCE IS LARGE.
+        `total_lumens` is `lamps * lumens_per_lamp` -- the flux the LAMPS
+        produce, which is an input. What leaves the fitting is less, because
+        a reflector absorbs, a lens absorbs and a shade blocks. The ratio is
+        the luminaire's optical efficiency.
+
+        Measured on the fittings Revit ships:
+
+            PLD1A21 lensed pendant   2780 lm declared -> 1758 lm emitted (63%)
+            EWL2A19 lamphead          780 lm declared ->  503 lm emitted (64%)
+            LGLled  narrow LED       1008 lm declared ->  390 lm emitted (39%)
+
+        Use the declared figure for anything about flux in the room -- an
+        inter-reflection estimate, a lumen-method check -- and the answer is
+        too high by a factor of about 1.7 for this scheme. That error was
+        found by disagreeing with a Cycles render, not by inspection.
+
+        Point-by-point illuminance is unaffected: it reads candela directly
+        and never touches either total.
+        """
+        total = 0.0
+        for i in range(steps):
+            a = math.pi * i / steps
+            b = math.pi * (i + 1) / steps
+            theta = (a + b) / 2.0
+            mean_i = sum(
+                self.intensity(math.degrees(theta), j * 360.0 / azimuths)
+                for j in range(azimuths)) / azimuths
+            total += mean_i * 2.0 * math.pi * math.sin(theta) * (b - a)
+        return total
+
+    def luminaire_efficiency(self) -> float | None:
+        """Emitted flux / lamp flux. None for absolute photometry, where
+        the file states no lamp flux to compare against."""
+        declared = self.total_lumens
+        if declared <= 0:
+            return None
+        return self.integrated_flux() / declared
+
     @property
     def efficacy(self) -> float | None:
         """Lumens per watt, or None when the file omits either figure.

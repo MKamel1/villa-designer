@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import contextlib
 import io
+import math
 import pathlib
 import re
 import sys
@@ -326,6 +327,55 @@ def main() -> int:
         effs = [g.efficacy for g in lamps if g.efficacy]
         expect("no luminaire claims an impossible efficacy",
                effs and max(effs) < 250)
+
+    # Emitted flux vs declared lamp flux. The integral has a closed form
+    # for an isotropic source, so this is checked against arithmetic
+    # rather than against itself.
+    _iso_full = photometry.parse("\n".join([
+        "IESNA91", "TILT=NONE", "1 12566 1 3 1 1 2 0 0 0", "1 1 100",
+        "0 90 180", "0", "1000 1000 1000"]))
+    expect("integrated flux of an isotropic 1000 cd source is 4*pi*1000",
+           abs(_iso_full.integrated_flux() - 4 * math.pi * 1000.0) < 5.0)
+    _hemi = photometry.parse("\n".join([
+        "IESNA91", "TILT=NONE", "1 6283 1 2 1 1 2 0 0 0", "1 1 100",
+        "0 90", "0", "1000 1000"]))
+    expect("a hemisphere emits half as much as a full sphere",
+           abs(_hemi.integrated_flux() - 2 * math.pi * 1000.0) < 5.0)
+    expect("emitted flux is not the declared lamp flux",
+           _iso_full.total_lumens == 12566.0
+           and abs(_iso_full.integrated_flux() - 12566.0) < 10.0)
+
+    if ies_dir is not None:
+        effs = [(g, g.luminaire_efficiency()) for g in lamps[:40]]
+        effs = [(g, e) for g, e in effs if e is not None]
+        # A fitting cannot emit more light than its lamps produce. A value
+        # above 1 means the declared lumens or the distribution is being
+        # misread -- the check that would have caught using one for the
+        # other.
+        expect("no luminaire emits more flux than its lamp produces",
+               effs and all(e <= 1.05 for _, e in effs))
+        expect("real fittings lose flux in their optics (efficiency < 1)",
+               effs and sum(1 for _, e in effs if e < 0.95) > len(effs) // 2)
+        # The specific trap, on the specific file.
+        pend = next((g for g in lamps if g.source.name == "PLD1A21.ies"), None)
+        if pend:
+            expect("PLD1A21 emits materially less than its lamps declare",
+                   pend.total_lumens == 2780.0
+                   and 1600 < pend.integrated_flux() < 1900)
+
+    # The inter-reflection estimate must be driven by emitted flux. Feeding
+    # it declared lamp flux overstated the mock bedroom by 1.7x.
+    _room = [(0.0, 0.0), (4000.0, 0.0), (4000.0, 4000.0), (0.0, 4000.0)]
+    _lum_eff = lighting.Luminaire(
+        "E1", pend if (ies_dir and pend) else _iso_full, 2000.0, 2000.0, 2850.0)
+    _g_eff = lighting.lux_grid(_room, [_lum_eff], spacing=500.0)
+    _irc_eff = lighting.interreflected_estimate(_g_eff, 4000.0, 4000.0, 2700.0)
+    _expected_hi = (_lum_eff.photometry.integrated_flux()
+                    * _irc_eff.average_reflectance
+                    / (_irc_eff.area * (1 - _irc_eff.average_reflectance))
+                    * _g_eff.maintenance_factor)
+    expect("inter-reflection uses emitted flux, not declared lamp flux",
+           abs(_irc_eff.high - _expected_hi) < 0.01)
 
     # Negative cases: malformed photometry must raise, not return a
     # plausible distribution.

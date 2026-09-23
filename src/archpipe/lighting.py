@@ -534,7 +534,14 @@ def interreflected_estimate(grid: LuxGrid, width: float, depth: float,
     if rho >= 1.0:
         raise LightingError("average reflectance must be below 1.0")
 
-    flux = sum(l.photometry.total_lumens * l.output for l in grid.luminaires)
+    # Flux the LUMINAIRES emit, not what their lamps produce. Using the
+    # declared lamp figure overstated this scheme by a factor of 1.7,
+    # because a lensed pendant emits about 63% of its lamp flux and a
+    # narrow LED fitting under 40%. The error was caught by disagreeing
+    # with a Cycles render (ADR-0010), which is exactly what the render
+    # was calibrated to be able to do.
+    flux = sum(l.photometry.integrated_flux() * l.output
+               for l in grid.luminaires)
     denom = area * (1.0 - rho)
 
     # Upper bound: first bounce weighted by area.

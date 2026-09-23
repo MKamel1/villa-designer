@@ -43,7 +43,7 @@ back each one forces the design. Everything here follows from that.
 ## Before you claim something works
 
 ```bash
-PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 70 checks
+PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 77 checks
 ```
 
 Every stage command exits non-zero when its gate is closed — that is by
@@ -89,5 +89,7 @@ stand-in and means nothing for the real site.
     src/archpipe/    rule engine, stages 0-2, drawing pipeline
     src/archpipe/photometry.py  IES LM-63 reader
     src/archpipe/lighting.py    lux grids, task points, heat maps
+    src/archpipe/blender/       scene build, photometric calibration,
+                                lux measurement from the render itself
     revit/           extractor, pyRevit extension, probe, test-model builder
-    scripts/verify.py 70 checks, positive and negative
+    scripts/verify.py 77 checks, positive and negative
