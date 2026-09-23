@@ -41,14 +41,16 @@ UNITS. Revit is decimal feet. `ft()` and `mm()` are the only conversions;
 a units bug does not raise, it silently yields geometry 304.8x wrong.
 """
 import json
+import hashlib
+import math
 import os
 import traceback
 
 from Autodesk.Revit.DB import (
     BuiltInCategory, BuiltInParameter, Ceiling, CeilingType, Curve,
-    CurveLoop, DirectShape, Element, ElementId, FilteredElementCollector,
+    Color, CurveLoop, DirectShape, Element, ElementId, ElementTransformUtils, FilteredElementCollector,
     Floor, FloorType, Line, Level, SaveAsOptions, Solid, Structure,
-    Transaction, UnitTypeId, UnitUtils, UV, Wall, WallType, XYZ,
+    Material, Options, Transaction, UnitTypeId, UnitUtils, UV, Wall, WallType, XYZ,
 )
 from Autodesk.Revit.DB import GeometryCreationUtilities as GCU
 from System.Collections.Generic import List
@@ -431,7 +433,10 @@ def proxy_box(doc, ident, kind, cx_mm, cy_mm, w_mm, d_mm, h_mm, rot_deg, level):
     geoms.Add(solid)
     ds.SetShape(geoms)
     try:
-        ds.Name = "PROXY %s" % kind
+        # The type AND the rotation, because a DirectShape reports neither:
+        # its geometry is baked and it has no Symbol. The extractor reads
+        # this name back and `from_extract` parses both out of it.
+        ds.Name = "PROXY %s @%g" % (kind, rot_deg or 0.0)
     except Exception:
         pass
     return ds
@@ -445,6 +450,8 @@ def main():
     with open(spec_path) as fh:
         spec = json.load(fh)
     report["spec"] = os.path.basename(spec_path)
+    with open(spec_path, 'rb') as fh:
+        report['spec_sha256'] = hashlib.sha256(fh.read()).hexdigest()
 
     fam_dir = os.environ.get("ARCHPIPE_FAMILY_DIR") or ""
     dest = os.environ.get("ARCHPIPE_BEDROOM_OUT") or os.path.join(
@@ -563,6 +570,10 @@ def main():
                     pt, sym, level, Structure.StructuralType.NonStructural)
                 if inst is None:
                     raise RuntimeError("NewFamilyInstance returned None")
+                angle = math.radians(float(fn.get('rotation') or 0.0))
+                if angle:
+                    ElementTransformUtils.RotateElement(
+                        doc, inst.Id, Line.CreateBound(pt, pt + XYZ.BasisZ), angle)
                 rec["element"] = str(inst.Id)
                 rec["mark"] = stamp_mark(inst, fn["id"])
             else:
@@ -572,6 +583,15 @@ def main():
                                h, float(fn.get("rotation") or 0.0), level)
                 rec["element"] = str(ds.Id)
                 rec["proxy"] = True
+                inst = ds
+            # Intent lives in the authored model as well as in the input.
+            # A desk chair and bedside tables intentionally share their
+            # parent's use space, but must still pass physical clash checks.
+            metadata = {'type': fn['type'],
+                        'accessory_to': fn.get('accessory_to') or ''}
+            prm = inst.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
+            if prm is not None and not prm.IsReadOnly:
+                prm.Set('archpipe:' + json.dumps(metadata, sort_keys=True))
             doc.Regenerate()
             rec["placed"] = True
             t.Commit()
@@ -657,6 +677,37 @@ def main():
             rec["error"] = str(exc)[:200]
             t.RollBack()
         report["lighting"].append(rec)
+
+    # Paint actual model faces, so the selected finishes can be read back.
+    # Colour is a design choice. Reflectance is a simulation assumption,
+    # recorded separately in the render specification, not inferred from RGB.
+    tx = Transaction(doc, 'archpipe: specified finishes')
+    tx.Start()
+    palette = {'painted': (235, 232, 220), 'timber': (145, 105, 65),
+               'plaster': (245, 245, 245)}
+    report['materials'] = []
+    for role, elements in [('walls', list(walls.values())),
+                           ('floor', [floor]), ('ceiling', [ceiling])]:
+        finish = spec.get('materials', {}).get(role)
+        if not finish:
+            continue
+        mat_id = Material.Create(doc, 'archpipe ' + finish)
+        mat = doc.GetElement(mat_id)
+        rgb = palette.get(finish, (200, 200, 200))
+        mat.Color = Color(*rgb)
+        mat.UseRenderAppearanceForShading = False
+        count = 0
+        for element in elements:
+            if element is None:
+                continue
+            for geom in element.get_Geometry(Options()):
+                if isinstance(geom, Solid):
+                    for face in geom.Faces:
+                        doc.Paint(element.Id, face, mat_id)
+                        count += 1
+        report['materials'].append({'role': role, 'name': el_name(mat),
+                                    'painted_faces': count})
+    tx.Commit()
 
     opts = SaveAsOptions()
     opts.OverwriteExistingFile = True

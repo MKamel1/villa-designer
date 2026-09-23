@@ -1,5 +1,12 @@
 # Handover — for the agent picking this up on the VM
 
+> Historical bootstrap handover (2026-09-20). For current work read
+> [ROADMAP.md](ROADMAP.md), [LEARNINGS.md](LEARNINGS.md), and
+> [MCP.md](MCP.md). Revit 2027 is now local; Blender renders run on the
+> Ubuntu workstation. The old "not built" lists below are not current status.
+> The [bedroom validation record](bedroom-validation.md) contains the
+> completed capability test and its remaining limitations.
+
 You are taking over an AI-led villa design system. Read this once, then
 work from `CLAUDE.md` (auto-loaded) and the documents it points at.
 

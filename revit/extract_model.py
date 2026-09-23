@@ -29,8 +29,8 @@ import sys
 
 from Autodesk.Revit.DB import (
     BuiltInCategory, BuiltInParameter, Element, FilteredElementCollector, Level,
-    LocationCurve, LocationPoint, SpatialElementBoundaryOptions,
-    UnitTypeId, UnitUtils, Wall, WallType, XYZ,
+    LocationCurve, LocationPoint, Options, Solid, SpatialElementBoundaryOptions,
+    TextNote, RevisionCloud, UnitTypeId, UnitUtils, Wall, WallType, XYZ,
 )
 
 PRECISION = 3          # mm, to 3 dp -- far below drawing tolerance
@@ -365,7 +365,10 @@ def extract_instances(doc, bic, tag):
             "id": inst.UniqueId,
             "category": tag,
             "family": _name(sym.Family) if sym else "",
-            "type_name": _name(sym) if sym else "",
+            # A DirectShape has no Symbol, but it does have its own name --
+            # and `build_bedroom` names proxies "PROXY <catalogue type>",
+            # which is how they map back to a clearance rule.
+            "type_name": _name(sym) if sym else _name(inst),
             "level": lvl.UniqueId if lvl else None,
             "at": at,
             "at_source": source if at is not None else None,
@@ -373,6 +376,15 @@ def extract_instances(doc, bic, tag):
         }
         if size is not None:
             rec["size_mm"] = size
+            rec['bbox_center_mm'] = centre
+            bb = inst.get_BoundingBox(None)
+            rec['base_height_mm'] = mm(bb.Min.Z)
+        comment = _param_str(inst, BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
+        if comment.startswith('archpipe:'):
+            try:
+                rec['archpipe'] = json.loads(comment[len('archpipe:'):])
+            except ValueError:
+                rec['metadata_error'] = 'invalid archpipe metadata in instance comments'
         # A DirectShape carries the id archpipe stamped on it, which is how
         # a proxy is traced back to the spec item it stands for.
         for attr in ("ApplicationId", "ApplicationDataId"):
@@ -432,7 +444,7 @@ def extract_instances(doc, bic, tag):
                 _p = inst.get_Parameter(_b)
                 if _p is not None and _p.HasValue:
                     val = _p.AsString()
-                    if val:
+                    if val and not val.startswith('archpipe:'):
                         rec["mark"] = val
             except Exception:
                 continue
@@ -477,6 +489,43 @@ def extract_site(doc):
 
 
 # --------------------------------------------------------------------------
+def extract_finishes(doc):
+    out = []
+    for bic, role in ((BuiltInCategory.OST_Walls, 'walls'),
+                      (BuiltInCategory.OST_Floors, 'floor'),
+                      (BuiltInCategory.OST_Ceilings, 'ceiling')):
+        for el in _sorted_by_uid(_collect(doc, bic)):
+            materials = {}
+            for geom in el.get_Geometry(Options()):
+                if not isinstance(geom, Solid):
+                    continue
+                for face in geom.Faces:
+                    if doc.IsPainted(el.Id, face):
+                        mid = doc.GetPaintedMaterial(el.Id, face)
+                        mat = doc.GetElement(mid)
+                        if mat:
+                            materials[mat.UniqueId] = {
+                                'id': mat.UniqueId, 'name': _name(mat),
+                                'rgb': [int(mat.Color.Red), int(mat.Color.Green), int(mat.Color.Blue)]}
+            out.append({'element': el.UniqueId, 'role': role,
+                        'paint': [materials[k] for k in sorted(materials)]})
+    return out
+
+
+def extract_markup(doc):
+    out = []
+    for note in _sorted_by_uid(FilteredElementCollector(doc).OfClass(TextNote).ToElements()):
+        out.append({'id': note.UniqueId, 'kind': 'text', 'text': note.Text,
+                    'view': str(note.OwnerViewId), 'at': pt_mm(note.Coord)})
+    for cloud in _sorted_by_uid(FilteredElementCollector(doc).OfClass(RevisionCloud).ToElements()):
+        curves = cloud.GetSketchCurves()
+        out.append({'id': cloud.UniqueId, 'kind': 'revision_cloud',
+                    'view': str(cloud.OwnerViewId),
+                    'revision': str(cloud.RevisionId),
+                    'boundary': [pt_mm(c.GetEndPoint(0)) for c in curves]})
+    return out
+
+
 def build(doc):
     return {
         "schema_version": SCHEMA_VERSION,
@@ -489,6 +538,8 @@ def build(doc):
                                  BuiltInParameter.PROJECT_NUMBER),
         },
         "site": extract_site(doc),
+        'finishes': extract_finishes(doc),
+        'markup': extract_markup(doc),
         "levels": extract_levels(doc),
         "wall_types": extract_wall_types(doc),
         "walls": extract_walls(doc),
@@ -591,8 +642,11 @@ def main():
     dest = destination(doc)
     # sort_keys makes the output order-independent; the explicit separators
     # keep it stable across Python versions. Both serve determinism.
+    # Serialize BEFORE opening the destination: .NET numeric wrappers can
+    # fail JSON encoding; such a failure must not truncate the last extract.
+    payload = json.dumps(data, indent=2, sort_keys=True, separators=(",", ": "))
     with open(dest, "w") as fh:
-        json.dump(data, fh, indent=2, sort_keys=True, separators=(",", ": "))
+        fh.write(payload)
 
     counts = dict((k, len(v)) for k, v in data.items() if isinstance(v, list))
     print("archpipe: wrote %s" % dest)

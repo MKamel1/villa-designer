@@ -109,6 +109,29 @@ def surface(name, reflectance, tint=(1.0, 1.0, 1.0), roughness=0.7):
     return material(name, (rgb[0], rgb[1], rgb[2], 1.0), roughness=roughness)
 
 
+def finish_surface(data, role, fallback, element=None):
+    """Read the authored paint hue; keep reflectance explicitly assumed.
+
+    Revit shading colour is not a measured optical property. It controls
+    hue here, while REFLECTANCE remains the stated simulation assumption.
+    """
+    for item in data.get('finishes', []):
+        if item.get('role') != role or (element and item.get('element') != element):
+            continue
+        paints = item.get('paint') or []
+        if len(paints) == 1:
+            p = paints[0]
+            rgb = p['rgb']
+            # Revit shading colour is sRGB; Blender base colours are linear.
+            def linear(v):
+                s = v / 255.0
+                return s / 12.92 if s <= 0.04045 else ((s + 0.055) / 1.055) ** 2.4
+            key = 'wall' if role == 'walls' else role
+            return surface(p['name'], REFLECTANCE[key],
+                           tint=tuple(linear(v) for v in rgb))
+    return fallback
+
+
 def mesh_from_polygon(name, points_m, z_m, height_m, mat=None):
     """Build a prism: a flat polygon at z, extruded up by `height_m`."""
     mesh = bpy.data.meshes.new(name)
@@ -179,7 +202,8 @@ def build_walls(data, mat):
             continue
         z = level_elevation(data, w.get("level"))
         h = m(w.get("height") or default_h)
-        obj = mesh_from_polygon("wall_%s" % w["id"][:8], corners, z, h, mat)
+        obj = mesh_from_polygon("wall_%s" % w["id"][:8], corners, z, h,
+                                finish_surface(data, 'walls', mat, w['id']))
         if obj:
             made.append((obj, w))
     return made
@@ -193,7 +217,7 @@ def build_floors(data, mat):
             continue
         z = level_elevation(data, r.get("level"))
         obj = mesh_from_polygon("floor_%s" % (r.get("name") or r["id"][:8]),
-                                pts, z, 0.0, mat)
+                                pts, z, 0.0, finish_surface(data, 'floor', mat))
         if obj:
             made.append(obj)
     return made
@@ -223,7 +247,8 @@ def build_ceilings(data, mat, default_height=2700.0):
         h = m(r.get("ceiling_height") or _room_wall_height(data, r)
               or default_height)
         obj = mesh_from_polygon(
-            "ceiling_%s" % (r.get("name") or r["id"][:8]), pts, z + h, 0.0, mat)
+            "ceiling_%s" % (r.get("name") or r["id"][:8]), pts, z + h, 0.0,
+            finish_surface(data, 'ceiling', mat))
         if obj:
             made.append(obj)
     return made
@@ -294,20 +319,24 @@ def build_furniture(data, mat):
     """
     made = []
     for f in data.get("furniture", []) + data.get("casework", []):
-        at = f.get("at")
+        at = f.get("bbox_center_mm") or f.get("at")
         if not at:
             continue
         # The Revit extract calls this `size_mm`; only the hand-written
         # mock spec used `size`. Reading the wrong key silently built
         # every proxy at the 600 x 600 default.
         size = f.get("size_mm") or f.get("size") or [600, 600]
-        h = m(f.get("height") or 750)
+        h = m(size[2] if len(size) > 2 else f.get("height") or 750)
+        base = m(f.get('base_height_mm') or 0)
         bpy.ops.mesh.primitive_cube_add(size=1.0,
-                                        location=(m(at[0]), m(at[1]), h / 2))
+                                        location=(m(at[0]), m(at[1]), base + h / 2))
         obj = bpy.context.active_object
         obj.name = "furn_%s" % (f.get("type_name") or f["id"][:8])
         obj.scale = (m(size[0]), m(size[1]), h)
-        obj.rotation_euler[2] = math.radians(f.get("rotation") or 0.0)
+        # size_mm is a WORLD bounding box, already rotated in Revit.
+        # Applying the instance angle again rotates it twice.
+        obj.rotation_euler[2] = (0.0 if f.get('size_mm')
+                                else math.radians(f.get("rotation") or 0.0))
         if mat:
             obj.data.materials.append(mat)
         made.append(obj)

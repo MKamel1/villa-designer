@@ -56,6 +56,15 @@ furnished, glazed interior with real light bounces.
 
 ---
 
+## Current continuation (2026-09-23)
+
+The bedroom now runs its scene build, graphics-accelerated render, and
+independent direct-light probe on this host. See
+[compute placement](compute-placement.md) for measured results and the
+current versus intended responsibilities. This continuation deployed job
+scripts and inputs only under the user's `~/archpipe/bedroom-e2e` directory;
+it made no system-wide Ubuntu changes.
+
 ## Pending / considered but not done
 
 - **Radiance** — not in apt (`Candidate: (none)`). Will need a source

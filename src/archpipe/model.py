@@ -164,6 +164,7 @@ class Furniture:
     rotation: float = 0.0      # degrees CCW; 0 means local +Y points at +Y
     size: tuple[float, float] | None = None   # (width, depth) override
     room: str = ""             # optional, for reporting
+    accessory_to: str = ""     # deliberately occupies its parent's use zone
 
     def corners(self, width: float, depth: float) -> tuple[Point, ...]:
         """Footprint corners, rotated about `at`."""
@@ -372,6 +373,7 @@ def load(path: str | Path) -> Project:
                 float(f.get("rotation", 0)),
                 (float(f["size"][0]), float(f["size"][1])) if f.get("size") else None,
                 f.get("room", ""),
+                f.get("accessory_to", ""),
             )
             for f in data.get("furniture", [])
         ),

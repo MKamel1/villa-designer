@@ -1,5 +1,13 @@
 # Resume this session
 
+Current continuation: see [docs/ROADMAP.md](docs/ROADMAP.md) and
+[docs/LEARNINGS.md](docs/LEARNINGS.md). The old session commands and notes
+below are retained as history. Run `scripts/run_bedroom.py --resume` for
+the example or call the `run_bedroom_example` MCP tool. The last run's
+measured evidence is `out/bedroom-acceptance.json`.
+The [validation record](docs/bedroom-validation.md) is the current handover
+for completed example work and remaining infrastructure improvements.
+
 ## The command
 
 ```

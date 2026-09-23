@@ -877,7 +877,12 @@ def r_furniture_clearance(p: Project, level: str) -> list[Finding]:
         if not t:
             continue
         w, d = _furniture_size(f)
-        others = unary_union([q for g, q in pieces if g.id != f.id]) if len(pieces) > 1 else None
+        # A specified desk chair occupies the desk's chair-use zone; a
+        # bedside table occupies the bed's head-end use zone. This explicit
+        # model relationship affects access only. Both remain obstacles to
+        # every other piece, and wall/physical-overlap checks still apply.
+        others = unary_union([q for g, q in pieces
+                              if g.id != f.id and g.accessory_to != f.id])
 
         for side, amount in t.clearance.items():
             got = _clearance_gap(f, poly, side, w, d, amount, solid, others)

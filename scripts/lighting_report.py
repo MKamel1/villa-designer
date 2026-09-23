@@ -201,6 +201,10 @@ def main(argv=None) -> int:
         "task_points": task_rows,
         "verdicts": [{"check": c, "pass": bool(o), "measured": m}
                      for c, o, m in verdicts],
+        'point_source_warnings': list(grid.point_source_warnings()),
+        'criteria_basis': 'Example design acceptance targets, not jurisdictional code requirements.',
+        'maintenance_factor': 0.8,
+        'uniformity_assessed': False,
     }, indent=2, sort_keys=True), encoding="utf-8")
     print(f"  data     -> {a.json}")
     return 1 if failed else 0

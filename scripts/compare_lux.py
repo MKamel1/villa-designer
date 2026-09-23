@@ -35,7 +35,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from archpipe import photometry as ph
 from archpipe.lighting import Luminaire, point_illuminance
 
-W, D = 4200.0, 3600.0
 
 
 def main() -> int:
@@ -48,7 +47,13 @@ def main() -> int:
 
     rendered = json.loads(a.rendered.read_text(encoding="utf-8"))
     extract = json.loads(a.extract.read_text(encoding="utf-8"))
+    boundary = extract['rooms'][0]['boundary']
+    x0, x1 = min(p[0] for p in boundary), max(p[0] for p in boundary)
+    y0, y1 = min(p[1] for p in boundary), max(p[1] for p in boundary)
     plane = rendered["working_plane_mm"]
+    if rendered.get('bounces') != 0:
+        print('Cannot compare reflected light with a direct-only calculation.')
+        return 1
 
     ies_dir = ph.revit_ies_dir()
     if ies_dir is None:
@@ -75,6 +80,8 @@ def main() -> int:
     # is the one that is right.
     blocks = []
     for fn in extract.get("furniture", []):
+        if rendered.get('furniture_included') is False:
+            break
         at, size = fn.get("at"), fn.get("size_mm")
         if not at or not size:
             continue
@@ -96,7 +103,7 @@ def main() -> int:
 
     rows, clear = [], []
     for x, y, lux_r in rendered["points"]:
-        if not (a.inset <= x <= W - a.inset and a.inset <= y <= D - a.inset):
+        if not (x0 + a.inset <= x <= x1 - a.inset and y0 + a.inset <= y <= y1 - a.inset):
             continue
         lux_a = point_illuminance(scheme, x, y, plane, maintenance_factor=1.0)
         rows.append((x, y, lux_a, lux_r))
@@ -143,7 +150,10 @@ def main() -> int:
               f"range {ratios[0]:.4f}-{ratios[-1]:.4f}")
         return med
 
-    band("over 10% of peak, ALL points", rows)
+    med_all = band("over 10% of peak, ALL points", rows)
+    med = med_all
+    if rendered.get('furniture_included') is False:
+        print('  Calibration probe excludes furniture; it does not verify furnished shadows.')
     if blocks:
         med = band("over 10% of peak, CLEAR of furniture", clear)
         print()
@@ -164,6 +174,12 @@ def main() -> int:
                 print(f"  VERDICT: clear-point median {med:.4f} is outside "
                       f"5%; something other")
                 print("  than shadowing differs.")
+    # Never return success after printing a failed or unavailable verdict.
+    # This is a pipeline gate, not merely an informational table.
+    if med is None or abs(med - 1.0) > 0.05:
+        print('  VERDICT: FAIL -- direct-light agreement outside 5% or unavailable')
+        return 1
+    print('  VERDICT: PASS -- direct-light median ratio within 5%')
     return 0
 
 

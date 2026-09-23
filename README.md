@@ -1,16 +1,23 @@
 # arch-pipeline
 
+Current roadmap: [docs/ROADMAP.md](docs/ROADMAP.md). Reusable lessons:
+[docs/LEARNINGS.md](docs/LEARNINGS.md). Assistant operations:
+[docs/MCP.md](docs/MCP.md). Machine responsibilities:
+[docs/ops/compute-placement.md](docs/ops/compute-placement.md).
+
+The bedroom is a capability example. Run it with
+`.venv/Scripts/python scripts/run_bedroom.py --resume`; the generated
+`out/bedroom-acceptance.json` records the evidence and limitations.
+
 An AI-led villa design system: a staged method with checks attached, so
 every piece of advice cites a source and reports achieved-versus-required
 rather than an adjective.
 
-**Source of truth:** once Revit is in place it is the only authored
-artifact, and the text model becomes a generated extract that nothing
-hand-edits ([ADR-0001](docs/decisions/ADR-0001-revit-as-source-of-truth.md),
-[ADR-0002](docs/decisions/ADR-0002-extract-not-sync.md)). Until then the
-YAML specs here are authored directly. Either way the design stays
-readable as text, which is what makes it reviewable by both a human and
-an agent — a `.rvt` is a binary blob neither can diff.
+**Source of truth:** Revit supplies measured geometry through a generated
+extract that nothing hand-edits. The bedroom example is authored from its
+text specification, with an explicit photometry join and measured checks
+after saving the model. See
+[decision 0012](docs/decisions/ADR-0012-example-input-and-photometry.md).
 
 ## Status
 
@@ -31,13 +38,15 @@ TrueType font if that is wanted.
 
 ## Picking this up cold
 
-- **An AI agent taking over** → [`docs/HANDOVER.md`](docs/HANDOVER.md),
-  then [`CLAUDE.md`](CLAUDE.md) (loaded automatically each session).
-  It includes the **VM test plan** — nothing here has run on the VM yet.
+- **An AI agent taking over** → [`docs/ROADMAP.md`](docs/ROADMAP.md),
+  [`docs/bedroom-validation.md`](docs/bedroom-validation.md), then
+  [`CLAUDE.md`](CLAUDE.md). Historical bootstrap notes remain in
+  [`docs/HANDOVER.md`](docs/HANDOVER.md).
 - **Rebuilding the environment** → [`docs/SETUP.md`](docs/SETUP.md) — it rebuilds this
-environment from scratch, and records the failures worth not repeating
-(chiefly: use **Revit 2025, not 2026** — see
-[ADR-0008](docs/decisions/ADR-0008-revit-2025-not-2026.md)).
+environment from scratch, and records earlier setup failures. The current
+target is **Revit 2027**; follow
+[decision 0011](docs/decisions/ADR-0011-target-revit-2027.md) for the
+version decision rather than historical 2025 setup notes.
 
 ## The method
 
@@ -66,7 +75,7 @@ Drawing and review (Stage 4 onward):
     python -m archpipe build  spec/apartment.yaml --pdf # + DWG + plotted PDF
     python -m archpipe review spec/apartment.yaml       # rebuild the web sheet
 
-Verification (53 checks, positive and negative):
+Verification (positive and negative):
 
     PYTHONPATH=src python scripts/verify.py
 

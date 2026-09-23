@@ -1,134 +1,280 @@
 {
   "casework": [],
+  "finishes": [
+    {
+      "element": "da26b238-7816-4de3-b507-0cf327242911-00033a31",
+      "paint": [
+        {
+          "id": "da26b238-7816-4de3-b507-0cf327242911-00035281",
+          "name": "archpipe painted",
+          "rgb": [
+            235,
+            232,
+            220
+          ]
+        }
+      ],
+      "role": "walls"
+    },
+    {
+      "element": "da26b238-7816-4de3-b507-0cf327242911-00033a32",
+      "paint": [
+        {
+          "id": "da26b238-7816-4de3-b507-0cf327242911-00035281",
+          "name": "archpipe painted",
+          "rgb": [
+            235,
+            232,
+            220
+          ]
+        }
+      ],
+      "role": "walls"
+    },
+    {
+      "element": "da26b238-7816-4de3-b507-0cf327242911-00033a33",
+      "paint": [
+        {
+          "id": "da26b238-7816-4de3-b507-0cf327242911-00035281",
+          "name": "archpipe painted",
+          "rgb": [
+            235,
+            232,
+            220
+          ]
+        }
+      ],
+      "role": "walls"
+    },
+    {
+      "element": "da26b238-7816-4de3-b507-0cf327242911-00033a34",
+      "paint": [
+        {
+          "id": "da26b238-7816-4de3-b507-0cf327242911-00035281",
+          "name": "archpipe painted",
+          "rgb": [
+            235,
+            232,
+            220
+          ]
+        }
+      ],
+      "role": "walls"
+    },
+    {
+      "element": "da26b238-7816-4de3-b507-0cf327242911-00033a37",
+      "paint": [
+        {
+          "id": "da26b238-7816-4de3-b507-0cf327242911-00035282",
+          "name": "archpipe timber",
+          "rgb": [
+            145,
+            105,
+            65
+          ]
+        }
+      ],
+      "role": "floor"
+    },
+    {
+      "element": "da26b238-7816-4de3-b507-0cf327242911-00033a3e",
+      "paint": [
+        {
+          "id": "da26b238-7816-4de3-b507-0cf327242911-00035283",
+          "name": "archpipe plaster",
+          "rgb": [
+            245,
+            245,
+            245
+          ]
+        }
+      ],
+      "role": "ceiling"
+    }
+  ],
   "furniture": [
     {
       "applicationdataid": "FN-BED",
       "applicationid": "archpipe",
+      "archpipe": {
+        "accessory_to": "",
+        "type": "bed_double"
+      },
       "at": [
-        2100.0,
+        2250.0,
         2600.0
       ],
       "at_source": "bounding_box_centre",
+      "base_height_mm": 0.0,
+      "bbox_center_mm": [
+        2250.0,
+        2600.0
+      ],
       "category": "furniture",
       "family": "",
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5a",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a5a",
       "is_proxy": true,
       "level": null,
       "mark": "FN-BED",
-      "mounting_height": 800.0,
+      "mounting_height": 600.0,
       "rotation": null,
       "size_mm": [
         1600.0,
         2000.0,
-        800.0
+        600.0
       ],
-      "type_name": ""
+      "type_name": "PROXY bed_double @180"
     },
     {
       "applicationdataid": "FN-BST-L",
       "applicationid": "archpipe",
+      "archpipe": {
+        "accessory_to": "FN-BED",
+        "type": "bedside_table"
+      },
       "at": [
-        1100.0,
+        1125.0,
         3300.0
       ],
       "at_source": "bounding_box_centre",
+      "base_height_mm": 0.0,
+      "bbox_center_mm": [
+        1125.0,
+        3300.0
+      ],
       "category": "furniture",
       "family": "",
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5b",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a5b",
       "is_proxy": true,
       "level": null,
       "mark": "FN-BST-L",
-      "mounting_height": 800.0,
+      "mounting_height": 500.0,
       "rotation": null,
       "size_mm": [
         450.0,
         400.0,
-        800.0
+        500.0
       ],
-      "type_name": ""
+      "type_name": "PROXY bedside_table @0"
     },
     {
       "applicationdataid": "FN-BST-R",
       "applicationid": "archpipe",
+      "archpipe": {
+        "accessory_to": "FN-BED",
+        "type": "bedside_table"
+      },
       "at": [
-        3100.0,
+        3375.0,
         3300.0
       ],
       "at_source": "bounding_box_centre",
+      "base_height_mm": 0.0,
+      "bbox_center_mm": [
+        3375.0,
+        3300.0
+      ],
       "category": "furniture",
       "family": "",
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5c",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a5c",
       "is_proxy": true,
       "level": null,
       "mark": "FN-BST-R",
-      "mounting_height": 800.0,
+      "mounting_height": 500.0,
       "rotation": null,
       "size_mm": [
         450.0,
         400.0,
-        800.0
+        500.0
       ],
-      "type_name": ""
+      "type_name": "PROXY bedside_table @0"
     },
     {
       "applicationdataid": "FN-WRD",
       "applicationid": "archpipe",
+      "archpipe": {
+        "accessory_to": "",
+        "type": "wardrobe"
+      },
       "at": [
         400.0,
-        1800.0
+        2300.0
       ],
       "at_source": "bounding_box_centre",
+      "base_height_mm": 0.0,
+      "bbox_center_mm": [
+        400.0,
+        2300.0
+      ],
       "category": "furniture",
       "family": "",
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5d",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a5d",
       "is_proxy": true,
       "level": null,
       "mark": "FN-WRD",
-      "mounting_height": 800.0,
+      "mounting_height": 2100.0,
       "rotation": null,
       "size_mm": [
         600.0,
         1200.0,
-        800.0
+        2100.0
       ],
-      "type_name": ""
+      "type_name": "PROXY wardrobe @270"
     },
     {
       "applicationdataid": "FN-DSK",
       "applicationid": "archpipe",
+      "archpipe": {
+        "accessory_to": "",
+        "type": "desk"
+      },
       "at": [
-        3500.0,
-        700.0
+        1050.0,
+        400.0
       ],
       "at_source": "bounding_box_centre",
+      "base_height_mm": 0.0,
+      "bbox_center_mm": [
+        1050.0,
+        400.0
+      ],
       "category": "furniture",
       "family": "",
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a5e",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a5e",
       "is_proxy": true,
       "level": null,
       "mark": "FN-DSK",
-      "mounting_height": 800.0,
+      "mounting_height": 750.0,
       "rotation": null,
       "size_mm": [
         1200.0,
         600.0,
-        800.0
+        750.0
       ],
-      "type_name": ""
+      "type_name": "PROXY desk @0"
     },
     {
+      "archpipe": {
+        "accessory_to": "FN-DSK",
+        "type": "chair"
+      },
       "at": [
-        3500.0,
-        1200.0
+        1050.0,
+        1060.0
       ],
       "at_source": "location_point",
+      "base_height_mm": -0.27400000000000002,
+      "bbox_center_mm": [
+        1050.0,
+        1039.3589999999999
+      ],
       "category": "furniture",
       "family": "chair_cafe_wood_metal_9045_bimlibrary.co_",
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033de0",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033de0",
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "mark": "FN-CHR",
       "mounting_height": 0.0,
-      "rotation": 0.0,
+      "rotation": 180.0,
       "size_mm": [
         555.46900000000005,
         580.79399999999998,
@@ -158,10 +304,15 @@
         1800.0
       ],
       "at_source": "location_point",
+      "base_height_mm": 1310.2619999999999,
+      "bbox_center_mm": [
+        2100.0,
+        1800.0
+      ],
       "category": "lighting",
       "family": "pendant_cone_16inch_106_bimlibrary.co_",
       "host_offset_mm": -300.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00034474",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00034474",
       "ies": "generic",
       "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
@@ -179,14 +330,19 @@
     },
     {
       "at": [
-        1700.0,
+        1725.0,
         3300.0
       ],
       "at_source": "location_point",
+      "base_height_mm": 1633.2000000000000,
+      "bbox_center_mm": [
+        1702.7750000000001,
+        3300.0
+      ],
       "category": "lighting",
       "family": "pendant_cylinder_simple_136_bimlibrary.co_",
       "host_offset_mm": -700.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00034b44",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00034b44",
       "ies": "pendant2.ies",
       "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
@@ -204,14 +360,19 @@
     },
     {
       "at": [
-        2500.0,
+        2775.0,
         3300.0
       ],
       "at_source": "location_point",
+      "base_height_mm": 1633.2000000000000,
+      "bbox_center_mm": [
+        2752.7750000000001,
+        3300.0
+      ],
       "category": "lighting",
       "family": "pendant_cylinder_simple_136_bimlibrary.co_",
       "host_offset_mm": -700.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00034b46",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00034b46",
       "ies": "pendant2.ies",
       "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
@@ -230,13 +391,18 @@
     {
       "at": [
         400.0,
-        1800.0
+        2300.0
       ],
       "at_source": "location_point",
+      "base_height_mm": 1988.8000000000000,
+      "bbox_center_mm": [
+        400.0,
+        2300.0
+      ],
       "category": "lighting",
       "family": "linear_ceiling_mount_parametric_111_bimlibrary.co_",
       "host_offset_mm": -300.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-0003527e",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-0003527e",
       "ies": "generic",
       "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
@@ -254,14 +420,19 @@
     },
     {
       "at": [
-        3500.0,
-        700.0
+        1050.0,
+        400.0
       ],
       "at_source": "location_point",
+      "base_height_mm": 1633.2000000000000,
+      "bbox_center_mm": [
+        1027.7750000000001,
+        400.0
+      ],
       "category": "lighting",
       "family": "pendant_cylinder_simple_136_bimlibrary.co_",
       "host_offset_mm": -400.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00035280",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00035280",
       "ies": "pendant2.ies",
       "kelvin": 3000.0,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
@@ -278,13 +449,109 @@
       "watts": 12.100000000000000
     }
   ],
+  "markup": [
+    {
+      "at": [
+        1800.0,
+        -400.0
+      ],
+      "id": "579874e5-d5a7-409c-bda0-e40eb1c5ba24-000352d0",
+      "kind": "text",
+      "text": "PIPELINE TEST\rReview wardrobe clearance.\rSynthetic; not client approval.\r",
+      "view": "217732"
+    },
+    {
+      "at": [
+        20.0,
+        275.0
+      ],
+      "id": "579874e5-d5a7-409c-bda0-e40eb1c5ba24-000352de",
+      "kind": "text",
+      "text": "AP-001 | ARCHPIPE Floor plan | 1:50 | CAPABILITY TEST\r",
+      "view": "217817"
+    },
+    {
+      "at": [
+        20.0,
+        275.0
+      ],
+      "id": "579874e5-d5a7-409c-bda0-e40eb1c5ba24-000352e5",
+      "kind": "text",
+      "text": "AP-002 | ARCHPIPE Reflected ceiling plan | 1:50 | CAPABILITY TEST\r",
+      "view": "217824"
+    },
+    {
+      "at": [
+        20.0,
+        275.0
+      ],
+      "id": "579874e5-d5a7-409c-bda0-e40eb1c5ba24-000352ec",
+      "kind": "text",
+      "text": "AP-003 | ARCHPIPE East interior elevation | 1:50 | CAPABILITY TEST\r",
+      "view": "217831"
+    },
+    {
+      "at": [
+        20.0,
+        275.0
+      ],
+      "id": "579874e5-d5a7-409c-bda0-e40eb1c5ba24-000352f3",
+      "kind": "text",
+      "text": "AP-004 | ARCHPIPE North interior elevation | 1:50 | CAPABILITY TEST\r",
+      "view": "217838"
+    },
+    {
+      "at": [
+        20.0,
+        275.0
+      ],
+      "id": "579874e5-d5a7-409c-bda0-e40eb1c5ba24-000352fa",
+      "kind": "text",
+      "text": "AP-005 | ARCHPIPE Bedroom section | 1:50 | CAPABILITY TEST\r",
+      "view": "217845"
+    },
+    {
+      "at": [
+        20.0,
+        275.0
+      ],
+      "id": "579874e5-d5a7-409c-bda0-e40eb1c5ba24-00035301",
+      "kind": "text",
+      "text": "AP-006 | ARCHPIPE 3D cutaway | 1:50 | CAPABILITY TEST\r",
+      "view": "217852"
+    },
+    {
+      "boundary": [
+        [
+          50.0,
+          1400.0
+        ],
+        [
+          800.0,
+          1400.0
+        ],
+        [
+          800.0,
+          2650.0
+        ],
+        [
+          50.0,
+          2650.0
+        ]
+      ],
+      "id": "579874e5-d5a7-409c-bda0-e40eb1c5ba24-000352d8",
+      "kind": "revision_cloud",
+      "revision": "217809",
+      "view": "217732"
+    }
+  ],
   "openings": [
     {
       "at": 900.0,
       "family": "M_Single-Flush",
       "height": 2100.0,
-      "host": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a34",
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a58",
+      "host": "da26b238-7816-4de3-b507-0cf327242911-00033a33",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a58",
       "kind": "door",
       "point": [
         4300.0,
@@ -298,8 +565,8 @@
       "at": 2200.0,
       "family": "M_Fixed",
       "height": 1400.0,
-      "host": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a32",
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a54",
+      "host": "da26b238-7816-4de3-b507-0cf327242911-00033a32",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a54",
       "kind": "window",
       "point": [
         2100.0,
@@ -336,7 +603,7 @@
           3600.0
         ]
       ],
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a50",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a50",
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "name": "Bedroom 01",
       "number": "1"
@@ -924,7 +1191,7 @@
         -100.0
       ],
       "height": 2700.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a31",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a31",
       "is_curved": false,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "start": [
@@ -942,7 +1209,7 @@
         -100.0
       ],
       "height": 2700.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a32",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a32",
       "is_curved": false,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "start": [
@@ -956,16 +1223,16 @@
     },
     {
       "end": [
-        -100.0,
+        4300.0,
         3700.0
       ],
       "height": 2700.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a33",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a33",
       "is_curved": false,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "start": [
         4300.0,
-        3700.0
+        -100.0
       ],
       "structural": false,
       "thickness": 200.0,
@@ -974,16 +1241,16 @@
     },
     {
       "end": [
-        4300.0,
+        -100.0,
         3700.0
       ],
       "height": 2700.0,
-      "id": "3186bf35-b8c1-4b7e-a158-4429e6e55cfb-00033a34",
+      "id": "da26b238-7816-4de3-b507-0cf327242911-00033a34",
       "is_curved": false,
       "level": "79503529-d2a7-11d3-9162-0000863f27ad-0000330f",
       "start": [
         4300.0,
-        -100.0
+        3700.0
       ],
       "structural": false,
       "thickness": 200.0,

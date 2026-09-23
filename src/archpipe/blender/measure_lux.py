@@ -232,6 +232,7 @@ def main():
         "bounds_mm": [x0 * 1000.0, y0 * 1000.0, x1 * 1000.0, y1 * 1000.0],
         "span_mm": span * 1000.0,
         "fixtures": len(lights),
+        "furniture_included": False,
         "units": "mm, lux",
         "note": ("Total illuminance including inter-reflection."
                  if bounces else

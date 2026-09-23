@@ -167,6 +167,15 @@ def main(argv=None) -> int:
         item = nearest(furn, fn["at"])
         c.true("%s (%s) at its specified position" % (fn["id"], fn["type"]),
                item is not None, "" if item else "nothing at %s" % (fn["at"],))
+        if item:
+            actual_rotation = item.get('rotation')
+            if item.get('is_proxy') and '@' in item.get('type_name', ''):
+                actual_rotation = float(item['type_name'].rsplit('@', 1)[1])
+            want_rotation = float(fn.get('rotation') or 0)
+            delta = None if actual_rotation is None else ((actual_rotation - want_rotation + 180) % 360 - 180)
+            c.eq('  %s rotation error (degrees)' % fn['id'], delta, 0, 0.01)
+            if fn.get('proxy') and fn.get('height'):
+                c.eq('  %s measured height' % fn['id'], (item.get('size_mm') or [0,0,None])[2], fn['height'])
         if item and item.get("size_mm") and fn.get("size"):
             # A rotation of 90 degrees swaps the plan footprint. Checking
             # the ROTATED size is the point: a dropped rotation is
@@ -207,6 +216,8 @@ def main(argv=None) -> int:
         item = nearest(lights, lt["at"])
         c.true("%s (%s) at its specified position" % (lt["id"], lt.get("layer")),
                item is not None, "" if item else "nothing at %s" % (lt["at"],))
+        if item:
+            c.eq('  %s mounting height' % lt['id'], item.get('mounting_height'), lt['mounting_height'])
         if item and lt.get("family"):
             stem = Path(lt["family"]).stem.lower()
             c.true("  %s is the family the spec named" % lt["id"],

@@ -25,6 +25,8 @@ plot.log
 # Tooling
 .playwright-mcp/
 .DS_Store
+.mcp.json
+.codex/config.toml
 Thumbs.db
 out/families/*.rfa
 out/families/too-new/*.rfa

@@ -46,47 +46,66 @@ openings:
 # correctly categorised and named PROXY so it can never be mistaken for a
 # design proposal.
 furniture:
+  # ROTATED 180 after FURN-02 reported "0 mm clear to its front where 750
+  # is needed -- a wall is in the way". The catalogue wants back = 0 (a
+  # headboard may touch a wall) and front = 750 (the foot needs access),
+  # so at rotation 0 the FOOT was against the north wall. Neufert also
+  # wants 750 to BOTH long sides. Shifted 150 mm east to leave exactly
+  # 750 between its west edge and the wardrobe's front.
   - id: FN-BED
     type: bed_double
-    at: [2100, 2600]
+    at: [2250, 2600]
     size: [1600, 2000]
-    rotation: 0
+    height: 600
+    rotation: 180
     proxy: true
   - id: FN-BST-L
     type: bedside_table
-    at: [1100, 3300]
+    at: [1125, 3300]
     size: [450, 400]
+    height: 500
+    accessory_to: FN-BED
     rotation: 0
     proxy: true
   - id: FN-BST-R
     type: bedside_table
-    at: [3100, 3300]
+    at: [3375, 3300]
     size: [450, 400]
+    height: 500
+    accessory_to: FN-BED
     rotation: 0
     proxy: true
+  # ROTATED after FURN-02 reported "100 mm clear to its front where 750 is
+  # needed -- a wall is in the way". At 90 the doors opened INTO the west
+  # wall. 270 turns the front to face the room.
   - id: FN-WRD
     type: wardrobe
-    at: [400, 1800]
+    at: [400, 2300]
     size: [1200, 600]
-    rotation: 90
+    height: 2100
+    rotation: 270
     proxy: true
+  # Moved clear of the east door and the bed-foot access zone. Measured
+  # geometry (including the real chair's offset centre) governs checks.
+  # The wardrobe also moved north so it does not obstruct the chair zone.
   - id: FN-DSK
     type: desk
-    at: [3500, 700]
+    at: [1050, 400]
     size: [1200, 600]
+    height: 750
     rotation: 0
     proxy: true
   - id: FN-CHR
     type: chair
-    at: [3500, 1200]
+    at: [1050, 1060]
     size: [500, 500]
+    accessory_to: FN-DSK
     rotation: 180
     family: chair_cafe_wood_metal_9045_bimlibrary.co_.rfa
 
 # Three deliberate layers, so the "no lone central fixture" rule passes and
-# its negative case can be tested by deleting two of them. Positions match
-# scripts/demo_bedroom_lighting.py exactly, so the lux grid computed from
-# the REAL extract is comparable with the one computed from the mock.
+# its negative case can be tested by deleting layers. Positions now follow
+# the corrected Revit layout, not the historical mock's fixed coordinates.
 lighting:
   - id: LT-01
     layer: ambient
@@ -114,7 +133,7 @@ lighting:
   # also clears the point-source limit (1100 mm against a 600 mm minimum).
   - id: LT-02
     layer: task
-    at: [1700, 3300]
+    at: [1725, 3300]
     mounting_height: 2000
     host: ceiling
     ies: EWL2A19.ies
@@ -124,7 +143,7 @@ lighting:
     family: pendant_cylinder_simple_136_bimlibrary.co_.rfa
   - id: LT-03
     layer: task
-    at: [2500, 3300]
+    at: [2775, 3300]
     mounting_height: 2000
     host: ceiling
     ies: EWL2A19.ies
@@ -134,7 +153,7 @@ lighting:
     family: pendant_cylinder_simple_136_bimlibrary.co_.rfa
   - id: LT-04
     layer: accent
-    at: [400, 1800]
+    at: [400, 2300]
     mounting_height: 2400
     host: ceiling
     ies: LGLled.ies
@@ -149,7 +168,7 @@ lighting:
   # rest of the layout (loop L11: lighting -> lighting).
   - id: LT-05
     layer: task
-    at: [3500, 700]
+    at: [1050, 400]
     mounting_height: 2300
     host: ceiling
     ies: LGLled.ies
