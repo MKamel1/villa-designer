@@ -715,7 +715,8 @@ def parse_args(argv):
     out = {"extract": None, "out": "render.png", "samples": 64,
            "res": (960, 540), "gpu": True, "measure": False,
            "exposure": None, "interior": False,
-           "target_lux": 200.0, "camera":None}
+           "target_lux": 200.0, "camera":None,
+           "export_glb": None, "no_render": False}
     i = 0
     while i < len(args):
         a = args[i]
@@ -742,6 +743,10 @@ def parse_args(argv):
             i += 1; out["exposure"] = float(args[i])
         elif a == "--target-lux":
             i += 1; out["target_lux"] = float(args[i])
+        elif a == "--export-glb":
+            i += 1; out["export_glb"] = args[i]
+        elif a == "--no-render":
+            out["no_render"] = True
         i += 1
     return out
 
@@ -809,6 +814,23 @@ def main():
         print("SCENE NOTE: no light fixtures in the extract -- added a "
               "fallback sun. This render shows GEOMETRY, not a lighting "
               "scheme.")
+
+    if opt["export_glb"]:
+        # A web viewer supplies its own camera and lighting environment; the
+        # scene's own Cycles setup is irrelevant to it. Real light objects
+        # export as glTF punctual lights, so the fixture layout still reads.
+        glb_path = os.path.abspath(opt["export_glb"])
+        bpy.ops.object.select_all(action="SELECT")
+        bpy.ops.export_scene.gltf(filepath=glb_path, export_format="GLB",
+                                  use_selection=False, export_lights=True,
+                                  export_cameras=False, export_apply=True,
+                                  export_yup=True)
+        print("SCENE wrote glb %s" % glb_path)
+
+    if opt["no_render"]:
+        print("SCENE walls=%d floors=%d openings_cut=%d furniture=%d lights=%d"
+              % (len(walls), len(floors), holes, len(furn), len(lights)))
+        return
 
     add_world()
     if opt['camera']:
