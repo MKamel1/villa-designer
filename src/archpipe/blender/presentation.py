@@ -580,7 +580,7 @@ def _image_mean_linear_luminance(img, samples=20000):
 
 
 def _apply_photo_texture(mat, library_root, asset_id, target_reflectance, tile_m=1.0,
-                         bump_strength=0.0):
+                         bump_strength=0.0, tint=(1.0, 1.0, 1.0)):
     """Swap a material's Base Color/Roughness for a real photographed sample.
 
     The existing procedural bump (already wired to Normal by an earlier
@@ -637,7 +637,9 @@ def _apply_photo_texture(mat, library_root, asset_id, target_reflectance, tile_m
     factor = (target_reflectance / mean) if mean > 0 else target_reflectance
     scale = nt.nodes.new("ShaderNodeVectorMath")
     scale.operation = "MULTIPLY"
-    scale.inputs[1].default_value = (factor, factor, factor)
+    # Tint normalised to unit luminance, so it changes hue, not reflectance.
+    ty = 0.2126 * tint[0] + 0.7152 * tint[1] + 0.0722 * tint[2]
+    scale.inputs[1].default_value = tuple(factor * t / ty for t in tint)
     nt.links.new(color_node.outputs["Color"], scale.inputs[0])
     nt.links.new(scale.outputs["Vector"], bsdf.inputs["Base Color"])
     nt.links.new(rough_node.outputs["Color"], bsdf.inputs["Roughness"])
@@ -695,9 +697,12 @@ def enhance_finishes(data, library_root=None):
         note = ("floor: plank joints ~1.3 m x 0.16 m (Brick Texture), grain bump, "
                 "+/-8% colour variance around extracted hue -- presentation "
                 "detail, not measured optics")
-        if library_root and _apply_photo_texture(timber, library_root, "WoodFloor041",
-                                                  0.25, tile_m=1.0):
-            note += "; Base Color/Roughness replaced by WoodFloor041 (ambientCG, CC0), mean-matched to 0.25"
+        # The photo's own plank seams replace the procedural Brick joints
+        # (bump_strength rewires Normal): procedural joints at 1.3 x 0.16 m
+        # would not line up with the photographed boards.
+        if library_root and _apply_photo_texture(timber, library_root, "WoodFloor051",
+                                                  0.25, tile_m=1.6, bump_strength=0.15):
+            note += "; Base Color/Roughness/bump from WoodFloor051 (ambientCG, CC0), mean-matched to 0.25"
         report[timber.name] = note
         handled.add(timber)
 
@@ -748,13 +753,19 @@ def enhance_finishes(data, library_root=None):
             note = "fabric: crossed-band weave bump + roughness variation"
             fabric_id = ("Fabric019" if "bedding" in name_l else
                         "Fabric082A" if "throw" in name_l else "Fabric036")
-            # A larger tile than the other materials: at 0.3 m the weave
-            # repeated too finely to read as fabric from camera distance --
-            # the requested fix is legibility of the weave, not fineness.
+            # Presentation reflectances per textile. The single 0.35
+            # "furniture" figure is the lighting engine's stated simplification
+            # and stays there; applied to bedding it rendered ivory sheets as
+            # mid-grey. Stated assumptions, not measurements.
+            kind = "bedding" if "bedding" in name_l else "throw" if "throw" in name_l else "linen"
+            refl, tint = {"bedding": (0.70, (1.0, 0.97, 0.90)),
+                          "linen": (0.40, (1.0, 0.96, 0.90)),
+                          "throw": (0.20, (1.0, 0.94, 0.88))}[kind]
             if library_root and _apply_photo_texture(mat, library_root, fabric_id,
-                                                      reflectance, tile_m=0.7,
-                                                      bump_strength=0.35):
-                note += "; Base Color/Roughness replaced by %s (ambientCG, CC0), mean-matched to %.2f, roughness-driven bump" % (fabric_id, reflectance)
+                                                      refl, tile_m=0.7,
+                                                      bump_strength=0.35, tint=tint):
+                note += ("; Base Color/Roughness replaced by %s (ambientCG, CC0), mean-matched "
+                         "to presentation reflectance %.2f, roughness-driven bump" % (fabric_id, refl))
             report[mat.name] = note
         elif "metal" in name_l:
             _enhance_dark_metal(mat)

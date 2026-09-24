@@ -410,9 +410,11 @@ def build_lights(data):
         light.shadow_soft_size = max(
             0.0, float(fx.get("luminous_size_mm") or 60.0) * 0.5 * MM_TO_M)
 
+        # `x or 1.0` turned a dimmed-to-zero fixture back on at full output.
+        output = 1.0 if fx.get("output") is None else float(fx["output"])
         ies_path = fx.get("ies")
         if ies_path and os.path.isfile(ies_path):
-            light.energy = IES_POINT_POWER * float(fx.get("output") or 1.0)
+            light.energy = IES_POINT_POWER * output
             light.use_nodes = True
             nt = light.node_tree
             node = nt.nodes.new("ShaderNodeTexIES")
@@ -425,7 +427,7 @@ def build_lights(data):
             aim = float(fx.get("rotation") or 0.0) + IES_AZIMUTH_OFFSET_DEG
         else:
             lumens = float(fx.get("lumens") or DEFAULT_LUMENS)
-            light.energy = lumens * float(fx.get("output") or 1.0)
+            light.energy = lumens * output
 
         kelvin = fx.get("kelvin")
         if kelvin:
@@ -769,7 +771,10 @@ def parse_args(argv):
            "exposure": None, "interior": False,
            "target_lux": 200.0, "camera":None,
            "export_glb": None, "no_render": False,
-           "profile": "draft", "time": "day", "dof": False}
+           "profile": "draft", "time": "day", "dof": False,
+           "interior_lights": True, "sun_alt": None, "sun_az": None,
+           "view_rotation": 0.0, "wb": None, "exposure_bias": 0.0,
+           "photo_camera": None, "cloth": True, "dress": True}
     i = 0
     while i < len(args):
         a = args[i]
@@ -806,6 +811,24 @@ def parse_args(argv):
             i += 1; out["time"] = args[i]
         elif a == "--dof":
             out["dof"] = True
+        elif a == "--interior-lights":
+            i += 1; out["interior_lights"] = args[i] == "on"
+        elif a == "--sun-alt":
+            i += 1; out["sun_alt"] = float(args[i])
+        elif a == "--sun-az":
+            i += 1; out["sun_az"] = float(args[i])
+        elif a == "--view-rotation":
+            i += 1; out["view_rotation"] = float(args[i])
+        elif a == "--wb":
+            i += 1; out["wb"] = float(args[i])
+        elif a == "--exposure-bias":
+            i += 1; out["exposure_bias"] = float(args[i])
+        elif a == "--photo-camera":
+            i += 1; out["photo_camera"] = args[i]
+        elif a == "--no-cloth":
+            out["cloth"] = False
+        elif a == "--no-dress":
+            out["dress"] = False
         i += 1
     if out["profile"] not in ("draft", "final"):
         print("SCENE ERROR: --profile must be draft or final")
@@ -875,9 +898,23 @@ def main():
         print("SCENE NOTE: --profile final requested but ARCHPIPE_ASSET_LIBRARY "
               "is not set; using procedural materials only.")
     print('SCENE PRESENTATION '+json.dumps(presentation.enhance_finishes(data, library_root=library_root),sort_keys=True))
-    lights = build_lights(data)
+    photoreal = None
+    if library_root:
+        pr_spec = importlib.util.spec_from_file_location(
+            'archpipe_photoreal', os.path.join(os.path.dirname(os.path.abspath(__file__)), 'photoreal.py'))
+        photoreal = importlib.util.module_from_spec(pr_spec)
+        pr_spec.loader.exec_module(photoreal)
+        print('SCENE FINISHES ' + json.dumps(photoreal.apply_finish_overrides(), sort_keys=True))
+        print('SCENE GLASS architectural (shadow/diffuse rays pass): %s' % photoreal.architectural_glass())
+        if opt["cloth"]:
+            print('SCENE BEDDING ' + json.dumps(photoreal.cloth_bedding(data)))
+        if opt["dress"]:
+            print('SCENE DRESSING %s' % photoreal.dress_room(data, library_root, presentation))
+    lights = build_lights(data) if opt["interior_lights"] else []
+    if not opt["interior_lights"]:
+        print("SCENE LIGHTING interior fixtures OFF (daylight only)")
 
-    if not lights:
+    if not lights and opt["interior_lights"]:
         # No fixtures in the extract. Add sun so the geometry is visible,
         # and say so -- an invented lamp must never be read as the scheme.
         sun_data = bpy.data.lights.new("fallback_sun", type="SUN")
@@ -912,16 +949,25 @@ def main():
         return
 
     hdri_path = None
-    if library_root:
+    if photoreal and opt["sun_alt"] is not None:
+        view = os.path.join(library_root, "hdri", "studio_garden.exr")
+        print('SCENE SKY ' + json.dumps(photoreal.daylight_world(
+            opt["sun_alt"], opt["sun_az"] or 180.0, view, opt["view_rotation"])))
+        photoreal.exterior_ground(data)
+        print('SCENE PORTALS %s' % photoreal.window_portals(data))
+    elif library_root:
         hdri_name = HDRI_BY_TIME[opt["time"]]
         candidate = os.path.join(library_root, "hdri", hdri_name + ".exr")
         hdri_path = candidate if os.path.isfile(candidate) else None
         if not hdri_path:
             print("SCENE NOTE: HDRI %r not found under the asset library; "
                   "using the flat sky instead." % hdri_name)
-    add_world(strength=HDRI_STRENGTH_BY_TIME.get(opt["time"], 1.0) if hdri_path else 1.0,
-             hdri_path=hdri_path)
-    if opt['camera']:
+    if not (photoreal and opt["sun_alt"] is not None):
+        add_world(strength=HDRI_STRENGTH_BY_TIME.get(opt["time"], 1.0) if hdri_path else 1.0,
+                  hdri_path=hdri_path)
+    if photoreal and opt["photo_camera"]:
+        photoreal.photographic_camera(opt["photo_camera"])
+    elif opt['camera']:
         add_named_camera(data,opt['camera'])
     else:
         (add_interior_camera(data) if opt["interior"] else add_camera(data))
@@ -937,6 +983,15 @@ def main():
                               measure=opt["measure"],
                               exposure=opt["exposure"],
                               target_lux=opt["target_lux"])
+    if photoreal:
+        photoreal.presentation_render_settings()
+        if opt["exposure"] is None:
+            ev, logavg = photoreal.camera_meter(bias_stops=opt["exposure_bias"])
+            bpy.context.scene.view_settings.exposure = ev
+            print("SCENE METER log-average %.4g -> exposure %.2f stops" % (logavg, ev))
+        wb = opt["wb"] or (5500.0 if not opt["interior_lights"] else 3000.0)
+        print("SCENE WHITE BALANCE %s K %s" % (wb, "applied" if photoreal.white_balance(wb)
+                                              else "unavailable (Blender < 4.3)"))
 
     print("SCENE walls=%d floors=%d openings_cut=%d furniture=%d lights=%d"
           % (len(walls), len(floors), holes, len(furn), len(lights)))
