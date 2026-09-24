@@ -28,6 +28,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from archpipe import photometry as ph                        # noqa: E402
+from archpipe.fixture_source import source_point             # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -71,7 +72,7 @@ def main(argv=None) -> int:
     spec = yaml.safe_load(a.spec.read_text(encoding="utf-8"))
     by_id = {l["id"]: l for l in spec.get("lighting", [])}
 
-    joined, orphans, unmatched = [], [], []
+    joined, orphans, unmatched, no_source = [], [], [], []
     for fx in got.get("lighting", []):
         key = fx.get("mark")
         s = by_id.get(key)
@@ -79,11 +80,24 @@ def main(argv=None) -> int:
             orphans.append({"family": fx.get("family"), "at": fx.get("at"),
                             "mark": key})
             continue
+        # The light comes from where the fitting EMITS, measured from its
+        # modelled geometry -- not from the family's insertion point. Using
+        # the insertion height put a drum's source 243 mm below the drum and
+        # a cone's 466 mm above its shade, in the render AND the lux engine,
+        # which then agreed with each other (archpipe.fixture_source).
+        src = source_point(fx.get("meshes"))
+        if src is None:
+            no_source.append(key)
+            at, height, basis = fx["at"], fx.get("mounting_height"), "insertion point (unverified)"
+        else:
+            at, height, basis = [src[0], src[1]], src[2], src[3]
         joined.append({
             # Geometry from Revit, which is authoritative and verified.
             "id": key,
-            "at": fx["at"],
-            "mounting_height": fx.get("mounting_height"),
+            "at": at,
+            "mounting_height": height,
+            "source_basis": basis,
+            "insertion": {"at": fx["at"], "mounting_height": fx.get("mounting_height")},
             # The LUMINOUS opening, from the IES file -- not the family's
             # bounding box. Measured cost of confusing them: a linear
             # fitting whose IES declares 594 x 24 mm has a family bounding
@@ -114,7 +128,8 @@ def main(argv=None) -> int:
     out["join"] = {"key": "Revit Mark parameter",
                    "matched": len(joined),
                    "orphan_fixtures": orphans,
-                   "spec_items_not_in_model": unmatched}
+                   "spec_items_not_in_model": unmatched,
+                   "fixtures_without_source_geometry": no_source}
 
     # Room height, which the extract does not carry but the scene needs to
     # build a ceiling.
@@ -130,14 +145,17 @@ def main(argv=None) -> int:
           f"on the Mark parameter")
     for j in joined:
         print(f"    {j['id']}  {j['ies_file']:<14} {j['lumens']:>5} lm  "
-              f"{j['kelvin']}K  {j['watts']}W  at {j['at']} h={j['mounting_height']}")
+              f"{j['kelvin']}K  {j['watts']}W  source {[round(v) for v in j['at']]} h={j['mounting_height']:.0f} "
+              f"({j['source_basis']}; insertion h={j['insertion']['mounting_height']})")
     if orphans:
         print(f"  {len(orphans)} fixture(s) in the model with no spec entry:")
         for o in orphans:
             print(f"    {o}")
     if unmatched:
         print(f"  {len(unmatched)} spec item(s) not found in the model: {unmatched}")
-    return 1 if (orphans or unmatched) else 0
+    if no_source:
+        print(f"  {len(no_source)} fixture(s) with no source geometry, insertion point used: {no_source}")
+    return 1 if (orphans or unmatched or no_source) else 0
 
 
 if __name__ == "__main__":

@@ -25,7 +25,10 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-TOL_MM = 1.0          # far below drawing tolerance; we expect exact
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.fixture_source import source_point             # noqa: E402
+
+TOL_MM = 1.0         # far below drawing tolerance; we expect exact
 TOL_M2 = 0.001
 
 
@@ -220,7 +223,18 @@ def main(argv=None) -> int:
         c.true("%s (%s) at its specified position" % (lt["id"], lt.get("layer")),
                item is not None, "" if item else "nothing at %s" % (lt["at"],))
         if item:
-            c.eq('  %s mounting height' % lt['id'], item.get('mounting_height'), lt['mounting_height'])
+            # The spec's mounting height is where the light comes FROM. The
+            # family insertion point is not the source: comparing insertion
+            # heights passed while the real emitters sat 57-466 mm off spec.
+            src = source_point(item.get('meshes'))
+            c.true('  %s light source measured from the fitting' % lt['id'], src is not None,
+                   '' if src else 'no light-source or lens geometry')
+            if src:
+                c.eq('  %s light source height' % lt['id'], round(src[2], 1),
+                     float(lt['mounting_height']), 25.0)
+                c.eq('  %s light source plan offset' % lt['id'],
+                     round(((src[0] - lt['at'][0]) ** 2 + (src[1] - lt['at'][1]) ** 2) ** 0.5, 1),
+                     0.0, 25.0)
             actual_rotation = float(item.get('rotation') or 0)
             want_rotation = float(lt.get('rotation') or 0)
             c.eq('  %s rotation error' % lt['id'],
@@ -232,6 +246,12 @@ def main(argv=None) -> int:
                 c.true('  %s housing fits inside room plan' % lt['id'],
                     min(p[0] for p in vertices)>=-TOL_MM and max(p[0] for p in vertices)<=w+TOL_MM and
                     min(p[1] for p in vertices)>=-TOL_MM and max(p[1] for p in vertices)<=d+TOL_MM)
+                # Moving an emitter to its spec height must not push the
+                # fitting through the ceiling to get there.
+                top = max(p[2] for p in vertices)
+                c.true('  %s housing below the ceiling' % lt['id'],
+                       top <= float(rm['ceiling_height']) + TOL_MM,
+                       '%.0f vs %.0f' % (top, float(rm['ceiling_height'])))
         if item and lt.get("family"):
             stem = Path(lt["family"]).stem.lower()
             c.true("  %s is the family the spec named" % lt["id"],

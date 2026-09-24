@@ -52,7 +52,8 @@ from Autodesk.Revit.DB import (
     Floor, FloorType, Line, Level, SaveAsOptions, Solid, Structure,
     Material, Options, Transaction, UnitTypeId, UnitUtils, UV, Wall, WallType, XYZ,
     GeometryObject, TessellatedShapeBuilder, TessellatedShapeBuilderTarget,
-    TessellatedShapeBuilderFallback, TessellatedFace,
+    TessellatedShapeBuilderFallback, TessellatedFace, ViewDetailLevel,
+    SpecTypeId, StorageType, SubTransaction,
 )
 from Autodesk.Revit.DB import GeometryCreationUtilities as GCU
 from System.Collections.Generic import List
@@ -254,6 +255,97 @@ def stamp_mark(el, ident):
                 return nm
         except Exception:
             continue
+    return None
+
+
+def light_source_z(doc, inst):
+    """(z_mm, basis, housing_top_mm) of where a placed fitting EMITS.
+
+    z is None (and basis says why) when the geometry holds no evidence.
+
+    The same rule as `archpipe.fixture_source` (which this IronPython
+    script cannot import): the apex of the Light Source subcategory
+    geometry, else the mid-height of the lens. The insertion point is not
+    the source -- placing insertion points at the spec heights left the
+    bedroom's emitters 57-466 mm off spec, and `check_bedroom.py` now
+    measures the extract independently to prove this did its job.
+    """
+    symbol, lens, every = [], [], []
+
+    def cat(obj):
+        try:
+            style = doc.GetElement(obj.GraphicsStyleId)
+            return (el_name(style.GraphicsStyleCategory) if style else "").lower()
+        except Exception:
+            return ""
+
+    def add(face, owner):
+        try:
+            pts = [p.Z for p in face.Triangulate().Vertices]
+        except Exception:
+            return
+        if (cat(face) or cat(owner)) == "light source":
+            symbol.extend(pts)
+            return
+        every.extend(pts)
+        mat = doc.GetElement(face.MaterialElementId)
+        if mat is not None and "lens" in el_name(mat).lower():
+            lens.extend(pts)
+
+    def visit(geometry):
+        for obj in geometry:
+            if obj.GetType().Name == "GeometryInstance":
+                visit(obj.GetInstanceGeometry())
+            elif isinstance(obj, Solid):
+                for face in obj.Faces:
+                    add(face, obj)
+
+    opt = Options()
+    opt.DetailLevel = ViewDetailLevel.Fine
+    opt.IncludeNonVisibleObjects = False
+    geometry = inst.get_Geometry(opt)
+    if geometry:
+        visit(geometry)
+    base = inst.Document.GetElement(inst.LevelId)
+    z0 = base.Elevation if base is not None else 0.0
+    top = mm(max(every) - z0) if every else None
+    if symbol:
+        return mm(max(symbol) - z0), "light_source_symbol apex", top
+    if lens:
+        return mm((min(lens) + max(lens)) / 2.0 - z0), "lens centre", top
+    return None, "no light-source or lens geometry", top
+
+
+def source_lever(doc, inst, z_now):
+    """(parameter, source mm per parameter mm) that moves the emitter, or None.
+
+    Found by measurement, not by name: nudge each writable instance length
+    by +100 mm in a rolled-back sub-transaction and keep the one that moves
+    the source. Measured on the bedroom's pendants: the host offset is inert
+    (offsets of -700 and -400 left both drums emitting at 2243 mm); the
+    lever is the family's "Ceiling To B.O. Fixture", at -1.0.
+    """
+    step = ft(100.0)
+    for p in inst.Parameters:
+        try:
+            if p.IsReadOnly or p.StorageType != StorageType.Double:
+                continue
+            if p.Definition.GetDataType() != SpecTypeId.Length:
+                continue
+        except Exception:
+            continue
+        st = SubTransaction(doc)
+        st.Start()
+        try:
+            p.Set(p.AsDouble() + step)
+            doc.Regenerate()
+            moved = light_source_z(doc, inst)[0]
+        except Exception:
+            moved = None
+        st.RollBack()
+        doc.Regenerate()
+        if moved is not None and abs(moved - z_now) > 50.0:
+            return p, (moved - z_now) / 100.0
     return None
 
 
@@ -688,6 +780,9 @@ def main():
             # under a 2700 ceiling needs a -1500 offset. Without this every
             # luminaire would silently sit at ceiling level and the whole
             # lux grid would describe a different scheme.
+            # MEASURED LIMIT: for the bedroom's pendant families this offset
+            # moves only the insertion point, not the body -- the emitter is
+            # set below by measurement (source_lever), not by this.
             angle = math.radians(float(lt.get('rotation') or 0))
             if angle:
                 ElementTransformUtils.RotateElement(doc, inst.Id,
@@ -710,6 +805,45 @@ def main():
                                           "fitting sits at ceiling level, not "
                                           "%.0f mm" % z)
             doc.Regenerate()
+            # The spec's mounting height is where the light comes FROM, so
+            # the insertion point goes wherever puts the EMITTER there:
+            # measure the placed fitting's source and move by the error.
+            # A fitting that cannot put its emitter there is NOT forced: a
+            # shade pushed through the ceiling would be a render of a room
+            # nobody can build. It stays as manufactured, and the miss is
+            # recorded for check_bedroom to fail on as a design finding.
+            src_z, basis, top = light_source_z(doc, inst)
+            rec["source_basis"] = basis
+            if src_z is None:
+                rec["source_problem"] = "cannot measure the light source: %s" % basis
+            elif abs(z - src_z) > 1.0:
+                lever = source_lever(doc, inst, src_z)
+                if lever is None:
+                    rec["source_problem"] = ("no parameter moves the emitter; it is at "
+                                             "%.0f mm by construction, spec %.0f" % (src_z, z))
+                else:
+                    prm, gain = lever
+                    before = prm.AsDouble()
+                    st = SubTransaction(doc)
+                    st.Start()
+                    prm.Set(before + ft((z - src_z) / gain))
+                    doc.Regenerate()
+                    new_z, basis, new_top = light_source_z(doc, inst)
+                    if new_top is not None and new_top > ch_mm + 1.0:
+                        st.RollBack()
+                        doc.Regenerate()
+                        rec["source_problem"] = (
+                            "emitter at %.0f mm puts the housing top at %.0f mm, above "
+                            "the %.0f mm ceiling; left at %.0f mm"
+                            % (z, new_top, ch_mm, src_z))
+                    else:
+                        st.Commit()
+                        rec["source_lever"] = {"parameter": prm.Definition.Name,
+                                               "from_mm": mm(before), "to_mm": mm(prm.AsDouble())}
+                        src_z = new_z
+            if src_z is not None:
+                rec["source_mm"] = src_z
+                rec["source_error_mm"] = round(src_z - z, 1)
             rec["placed"] = True
             rec["element"] = str(inst.Id)
             rec["placement_type"] = ptype
