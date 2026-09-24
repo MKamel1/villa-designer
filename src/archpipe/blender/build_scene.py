@@ -817,12 +817,17 @@ def main():
 
     if opt["export_glb"]:
         # A web viewer supplies its own camera and lighting environment; the
-        # scene's own Cycles setup is irrelevant to it. Real light objects
-        # export as glTF punctual lights, so the fixture layout still reads.
+        # scene's own Cycles setup is irrelevant to it. export_lights=False
+        # deliberately: Blender marks KHR_lights_punctual as a REQUIRED
+        # extension when lights are included, and a glTF loader that does
+        # not implement a required extension must refuse the whole file --
+        # this is what turned a fine export into model-viewer's generic
+        # "loadfailure" with no other detail. Geometry and materials are
+        # the point of this viewer; the photometric render is elsewhere.
         glb_path = os.path.abspath(opt["export_glb"])
         bpy.ops.object.select_all(action="SELECT")
         bpy.ops.export_scene.gltf(filepath=glb_path, export_format="GLB",
-                                  use_selection=False, export_lights=True,
+                                  use_selection=False, export_lights=False,
                                   export_cameras=False, export_apply=True,
                                   export_yup=True)
         print("SCENE wrote glb %s" % glb_path)
