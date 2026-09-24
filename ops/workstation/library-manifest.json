@@ -17,7 +17,11 @@
     {"id": "Metal046A", "source": "ambientcg", "role": "dark hardware / fixtures",
      "url": "https://ambientcg.com/get?file=Metal046A_1K-JPG.zip"},
     {"id": "Marble012", "source": "ambientcg", "role": "stone (future rooms)",
-     "url": "https://ambientcg.com/get?file=Marble012_1K-JPG.zip"}
+     "url": "https://ambientcg.com/get?file=Marble012_1K-JPG.zip"},
+    {"id": "WoodFloor051", "source": "ambientcg", "role": "floor: light oak, long staggered planks",
+     "url": "https://ambientcg.com/get?file=WoodFloor051_1K-JPG.zip"},
+    {"id": "Carpet001", "source": "ambientcg", "role": "rug",
+     "url": "https://ambientcg.com/get?file=Carpet001_1K-JPG.zip"}
   ],
   "hdris": [
     {"id": "kloofendal_48d_partly_cloudy_puresky", "role": "clear day",
@@ -29,13 +33,16 @@
     {"id": "belfast_sunset_puresky", "role": "golden hour",
      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/belfast_sunset_puresky_1k.exr"},
     {"id": "kloofendal_43d_clear_puresky", "role": "bright midday",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_43d_clear_puresky_1k.exr"}
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_43d_clear_puresky_1k.exr"},
+    {"id": "studio_garden", "role": "view out of the window (camera rays only; has a horizon)",
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/studio_garden_2k.exr"}
   ],
   "props": [
     {"id": "book_encyclopedia_set_01", "role": "desk / nightstand books", "api": "polyhaven-model"},
     {"id": "alarm_clock_01", "role": "bedside table", "api": "polyhaven-model"},
     {"id": "brass_vase_03", "role": "decorative surface item", "api": "polyhaven-model"},
     {"id": "potted_plant_04", "role": "desk / windowsill succulent", "api": "polyhaven-model"},
-    {"id": "potted_plant_01", "role": "floor corner", "api": "polyhaven-model"}
+    {"id": "potted_plant_01", "role": "floor corner", "api": "polyhaven-model"},
+    {"id": "throw_pillows_01", "role": "scanned cushions for the bed", "api": "polyhaven-model"}
   ]
 }

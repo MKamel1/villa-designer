@@ -26,7 +26,7 @@ def main():
     manifest = f"{release}/ops/workstation/library-manifest.json"
     script = f"{release}/ops/workstation/fetch_asset_library.py"
     library = f"{root}/assets/library"
-    cmd = f"python3 {shlex.quote(script)} {shlex.quote(manifest)} {shlex.quote(library)}"
+    cmd = f"python3 -u {shlex.quote(script)} {shlex.quote(manifest)} {shlex.quote(library)}"
     result = _ssh(host, cmd, timeout=1800)
     out = result.stdout.decode(errors="replace")
     err = result.stderr.decode(errors="replace")

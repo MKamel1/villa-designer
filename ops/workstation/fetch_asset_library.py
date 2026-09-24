@@ -52,13 +52,12 @@ def poly_haven_model_files(slug: str) -> dict:
         urllib.request.Request(f"https://api.polyhaven.com/files/{slug}",
                                headers={"User-Agent": USER_AGENT}), timeout=60) as resp:
         data = json.loads(resp.read())
+    # Shape is gltf[<res>]["gltf"] = {"url", "include": {...}}: the package
+    # sits one level below the resolution key.
     gltf = data.get("gltf", {})
     for res in ("2k", "1k", "4k", "8k"):
-        if res in gltf:
-            return res, gltf[res]
-    if gltf:
-        res = next(iter(gltf))
-        return res, gltf[res]
+        if res in gltf and "gltf" in gltf[res]:
+            return res, gltf[res]["gltf"]
     raise ValueError(f"{slug}: no gltf package published")
 
 
@@ -102,12 +101,11 @@ def do_prop(entry: dict, root: Path, index: dict) -> None:
         print("  skip %s (already fetched)" % asset_id)
         return
     res, package = poly_haven_model_files(asset_id)
+    if "url" not in package:
+        raise ValueError(f"{asset_id}: gltf package has no url")
     dest_dir.mkdir(parents=True, exist_ok=True)
-    files = {"model.gltf": package} if "url" in package else {}
-    for name, meta in (package.get("include") or {}).items():
-        files[name] = meta
-    if "url" in package:
-        files["model.gltf"] = package
+    files = {"model.gltf": package}
+    files.update(package.get("include") or {})
     recorded = {}
     for name, meta in files.items():
         out_path = dest_dir / name
