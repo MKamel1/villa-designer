@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "license": "CC0 1.0 Universal (public domain) -- ambientcg.com and polyhaven.com, no attribution required",
+  "materials": [
+    {"id": "Wood049", "source": "ambientcg", "role": "oak furniture grain",
+     "url": "https://ambientcg.com/get?file=Wood049_1K-JPG.zip"},
+    {"id": "WoodFloor041", "source": "ambientcg", "role": "floor",
+     "url": "https://ambientcg.com/get?file=WoodFloor041_1K-JPG.zip"},
+    {"id": "Fabric036", "source": "ambientcg", "role": "linen",
+     "url": "https://ambientcg.com/get?file=Fabric036_1K-JPG.zip"},
+    {"id": "Fabric019", "source": "ambientcg", "role": "bedding weave",
+     "url": "https://ambientcg.com/get?file=Fabric019_1K-JPG.zip"},
+    {"id": "Fabric082A", "source": "ambientcg", "role": "throw / fine weave",
+     "url": "https://ambientcg.com/get?file=Fabric082A_1K-JPG.zip"},
+    {"id": "Plaster001", "source": "ambientcg", "role": "wall / ceiling",
+     "url": "https://ambientcg.com/get?file=Plaster001_1K-JPG.zip"},
+    {"id": "Metal046A", "source": "ambientcg", "role": "dark hardware / fixtures",
+     "url": "https://ambientcg.com/get?file=Metal046A_1K-JPG.zip"},
+    {"id": "Marble012", "source": "ambientcg", "role": "stone (future rooms)",
+     "url": "https://ambientcg.com/get?file=Marble012_1K-JPG.zip"}
+  ],
+  "hdris": [
+    {"id": "kloofendal_48d_partly_cloudy_puresky", "role": "clear day",
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_48d_partly_cloudy_puresky_1k.exr"},
+    {"id": "overcast_soil_puresky", "role": "soft overcast day",
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/overcast_soil_puresky_1k.exr"},
+    {"id": "dikhololo_night", "role": "night",
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/dikhololo_night_1k.exr"},
+    {"id": "belfast_sunset_puresky", "role": "golden hour",
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/belfast_sunset_puresky_1k.exr"},
+    {"id": "kloofendal_43d_clear_puresky", "role": "bright midday",
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_43d_clear_puresky_1k.exr"}
+  ],
+  "props": [
+    {"id": "book_encyclopedia_set_01", "role": "desk / nightstand books", "api": "polyhaven-model"},
+    {"id": "alarm_clock_01", "role": "bedside table", "api": "polyhaven-model"},
+    {"id": "brass_vase_03", "role": "decorative surface item", "api": "polyhaven-model"},
+    {"id": "potted_plant_04", "role": "desk / windowsill succulent", "api": "polyhaven-model"},
+    {"id": "potted_plant_01", "role": "floor corner", "api": "polyhaven-model"}
+  ]
+}
