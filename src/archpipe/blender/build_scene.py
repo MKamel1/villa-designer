@@ -21,6 +21,7 @@ Revit's decimal feet -- it does not raise, it silently produces a model
 1000x wrong.
 """
 import json
+import importlib.util
 import math
 import os
 import sys
@@ -565,6 +566,21 @@ def add_camera(data, lens_mm=28.0, margin=1.25):
     return cam
 
 
+def add_named_camera(data, name):
+    """Repeatable interior viewpoints, expressed as fractions of room bounds."""
+    x0,y0,x1,y1 = bounds(data)
+    views = {'bed':((0.13,0.20,1.55),(0.57,0.75,1.10),22),
+             'window':((0.86,0.84,1.60),(0.37,0.18,1.15),22),
+             'overview':((0.89,0.18,1.65),(0.35,0.72,1.05),20)}
+    eye,target,lens = views[name]
+    cam = add_interior_camera(data,lens_mm=lens)
+    cam.location = (x0+(x1-x0)*eye[0],y0+(y1-y0)*eye[1],eye[2])
+    point = Vector((x0+(x1-x0)*target[0],y0+(y1-y0)*target[1],target[2]))
+    cam.rotation_euler = (point-Vector(cam.location)).to_track_quat('-Z','Y').to_euler()
+    cam.name = 'camera_'+name
+    return cam
+
+
 def add_world(strength=1.0):
     """A sky background, so surfaces facing away from the sun are not black.
 
@@ -699,7 +715,7 @@ def parse_args(argv):
     out = {"extract": None, "out": "render.png", "samples": 64,
            "res": (960, 540), "gpu": True, "measure": False,
            "exposure": None, "interior": False,
-           "target_lux": 200.0}
+           "target_lux": 200.0, "camera":None}
     i = 0
     while i < len(args):
         a = args[i]
@@ -716,6 +732,8 @@ def parse_args(argv):
         elif a == "--interior":
             # Stand inside the room. Required once a ceiling exists.
             out["interior"] = True
+        elif a == "--camera":
+            i += 1; out['camera'] = args[i]
         elif a == "--measure":
             # Linear EXR, no tone curve, no denoiser: the image becomes a
             # measurement instead of a picture.
@@ -758,7 +776,26 @@ def main():
     floors = build_floors(data, floor_mat)
     ceilings = build_ceilings(data, ceiling_mat)
     holes = cut_openings(data, walls)
-    furn = build_furniture(data, furn_mat)
+    # Import beside this script: Blender does not reliably add -P's folder
+    # to its module path. Dense meshes come from the saved native model.
+    presentation_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'presentation.py')
+    presentation_spec = importlib.util.spec_from_file_location('archpipe_presentation', presentation_path)
+    presentation = importlib.util.module_from_spec(presentation_spec)
+    presentation_spec.loader.exec_module(presentation)
+    furn, missing = presentation.build_items(data)
+    fallback = [item for item in missing if item.get('category') in ('furniture','casework')]
+    if fallback:
+        print('SCENE NOTE measured box fallback for %d items without extracted meshes' % len(fallback))
+        furn += build_furniture({'furniture':fallback}, furn_mat)
+    # Imported housing is visual context. Photometric files already encode
+    # the fitting's optics; do not obstruct the calibrated source a second
+    # time with a manufacturer's schematic housing/light-source geometry.
+    housings, missing_housings = presentation.build_items(data, categories=('lighting',))
+    for housing in housings:
+        housing.visible_shadow = False
+        housing.visible_diffuse = False
+    print('SCENE NOTE fixture housings use actual meshes for appearance; photometric distribution governs optics')
+    print('SCENE PRESENTATION '+json.dumps(presentation.enhance_finishes(data),sort_keys=True))
     lights = build_lights(data)
 
     if not lights:
@@ -774,7 +811,10 @@ def main():
               "scheme.")
 
     add_world()
-    (add_interior_camera(data) if opt["interior"] else add_camera(data))
+    if opt['camera']:
+        add_named_camera(data,opt['camera'])
+    else:
+        (add_interior_camera(data) if opt["interior"] else add_camera(data))
     device = configure_render(opt["samples"], opt["res"], opt["gpu"],
                               measure=opt["measure"],
                               exposure=opt["exposure"],

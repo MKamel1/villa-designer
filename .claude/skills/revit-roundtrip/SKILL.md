@@ -12,6 +12,11 @@ For the bedroom capability test use
 do not delete a lock until its owning process has been checked. Inspect every failed stage's log and expected
 artifact. The runner checks freshness because pyRevit can exit zero after
 a script error. Do not launch concurrent Revit writers against one model.
+Keep native authoring and installed-family checks on Windows. Deploy the
+generated text geometry through the workstation interface; its source
+package deliberately excludes native Revit binaries. Remote portable tests
+do not claim live Revit coverage. Worker reuse also checks actual runtime
+and asset fingerprints.
 
 For other models, identify the authorized authored input and target copy
 before adapting the workflow. Pass absolute script paths. Resolve/open

@@ -37,10 +37,10 @@ async def main():
         async with ClientSession(read, write) as client:
             await client.initialize()
             tools = await client.list_tools()
-            assert len(tools.tools) == 7
-            print('PASS real MCP handshake and seven typed tools')
+            assert len(tools.tools) == 8
+            print('PASS real MCP handshake and eight typed tools')
             resources = await client.list_resources()
-            assert {str(r.uri) for r in resources.resources} == {'archpipe://method', 'archpipe://learnings'}
+            assert {str(r.uri) for r in resources.resources} == {'archpipe://method', 'archpipe://learnings','archpipe://compute'}
             learned = await client.read_resource('archpipe://learnings')
             assert 'world bounding box' in learned.contents[0].text
             print('PASS shared learning and method resources')
@@ -68,12 +68,21 @@ async def main():
                 ('read_model', {'path':'../.claude/settings.json'}),
                 ('review_model', {'scope':'silence-errors'}),
                 ('catalogue_item', {'type_id':'invented'}),
+                ('run_workstation_job',{'operation':'delete-everything'}),
+                ('run_workstation_job',{'operation':'batch','workers':100}),
                 ('propose_example_edit', {'item_id':'FN-BED','x_mm':-10,'y_mm':0})]:
                 failed = await client.call_tool(name, args)
                 assert failed.isError, name
             print('PASS path escape, invalid scope, unknown requirement and outside-room edits fail')
             status = payload(await client.call_tool('project_status', {}))
             assert 'villa' in status['roadmap'].lower()
+            if '--worker-batch' in sys.argv:
+                result = payload(await client.call_tool('run_workstation_job',
+                    {'operation':'batch','samples':128,'resolution':'1280x800'},
+                    read_timeout_seconds=timedelta(seconds=300)))
+                assert result['passed'] and result['jobs']==3
+                assert Path(result['artifacts']).is_dir()
+                print('PASS actual workstation batch through MCP; reused',result['reused'])
             # Rebuild is expensive; invoke only when cached evidence exists.
             # This proves the one-call transport uses the validated resume path.
             if '--cached-run' in sys.argv:

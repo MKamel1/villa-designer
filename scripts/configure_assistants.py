@@ -15,7 +15,7 @@ path = ROOT/'.codex/config.toml'
 existing = path.read_text(encoding='utf-8') if path.exists() else ''
 start, end = '# BEGIN ARCHPIPE MCP\n', '# END ARCHPIPE MCP\n'
 block = (start+'[mcp_servers.archpipe]\ncommand = '+json.dumps(command)+
-         '\nargs = ['+json.dumps(script)+']\ntool_timeout_sec = 1200\n'+
+         '\nargs = ['+json.dumps(script)+']\ntool_timeout_sec = 2400\n'+
          '[mcp_servers.archpipe.env]\nPYTHONIOENCODING = "utf-8"\n'+end)
 if start in existing and end in existing:
     first, remaining = existing.split(start, 1)

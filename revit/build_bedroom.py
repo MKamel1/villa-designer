@@ -51,6 +51,8 @@ from Autodesk.Revit.DB import (
     Color, CurveLoop, DirectShape, Element, ElementId, ElementTransformUtils, FilteredElementCollector,
     Floor, FloorType, Line, Level, SaveAsOptions, Solid, Structure,
     Material, Options, Transaction, UnitTypeId, UnitUtils, UV, Wall, WallType, XYZ,
+    GeometryObject, TessellatedShapeBuilder, TessellatedShapeBuilderTarget,
+    TessellatedShapeBuilderFallback, TessellatedFace,
 )
 from Autodesk.Revit.DB import GeometryCreationUtilities as GCU
 from System.Collections.Generic import List
@@ -443,6 +445,48 @@ def proxy_box(doc, ident, kind, cx_mm, cy_mm, w_mm, d_mm, h_mm, rot_deg, level):
 
 
 # --------------------------------------------------------------------------
+def detailed_furniture(doc, item, level):
+    """Author the recipe's real component meshes in the native model.
+
+    World millimetres become internal feet here. Saved-model extraction,
+    not this authoring payload, supplies downstream rendering geometry.
+    """
+    materials = {el_name(m): m.Id for m in FilteredElementCollector(doc).OfClass(Material)}
+    geometries = List[GeometryObject]()
+    for component in item['meshes']:
+        material = component['material']
+        name = material['name']
+        if name not in materials:
+            materials[name] = Material.Create(doc, name)
+            mat = doc.GetElement(materials[name])
+            mat.Color = Color(*[int(v) for v in material['rgb']])
+            mat.UseRenderAppearanceForShading = False
+        builder = TessellatedShapeBuilder()
+        builder.OpenConnectedFaceSet(True)
+        vertices = [XYZ(ft(p[0]), ft(p[1]), level.Elevation + ft(p[2]))
+                    for p in component['vertices_mm']]
+        for triangle in component['triangles']:
+            points = List[XYZ]()
+            for index in triangle:
+                points.Add(vertices[index])
+            builder.AddFace(TessellatedFace(points, materials[name]))
+        builder.CloseConnectedFaceSet()
+        builder.Target = TessellatedShapeBuilderTarget.AnyGeometry
+        builder.Fallback = TessellatedShapeBuilderFallback.Mesh
+        builder.Build()
+        for geometry in builder.GetBuildResult().GetGeometricalObjects():
+            geometries.Add(geometry)
+    if geometries.Count == 0:
+        raise RuntimeError('Detailed furniture produced no native geometry')
+    ds = DirectShape.CreateElement(doc, ElementId(BuiltInCategory.OST_Furniture))
+    ds.ApplicationId = 'archpipe.detailed'
+    ds.ApplicationDataId = item['id']
+    ds.Name = 'DETAILED %s @%g' % (item['type'], float(item.get('rotation') or 0))
+    ds.SetShape(geometries)
+    stamp_mark(ds, item['id'])
+    return ds
+
+
 def main():
     spec_path = os.environ.get("ARCHPIPE_SPEC")
     if not spec_path or not os.path.isfile(spec_path):
@@ -559,7 +603,11 @@ def main():
         try:
             size = fn.get("size") or [600, 600]
             at = fn["at"]
-            if fn.get("family") and not fn.get("proxy"):
+            if fn.get('detail'):
+                inst = detailed_furniture(doc, fn, level)
+                rec.update(element=str(inst.Id), proxy=False,
+                           detail=fn['detail'], components=len(fn['meshes']))
+            elif fn.get("family") and not fn.get("proxy"):
                 sym, why = load_family(doc, fam_dir, fn["family"])
                 rec["family"] = why
                 if sym is None:
@@ -588,7 +636,9 @@ def main():
             # A desk chair and bedside tables intentionally share their
             # parent's use space, but must still pass physical clash checks.
             metadata = {'type': fn['type'],
-                        'accessory_to': fn.get('accessory_to') or ''}
+                        'accessory_to': fn.get('accessory_to') or '',
+                        'detail': fn.get('detail') or '',
+                        'rotation': float(fn.get('rotation') or 0)}
             prm = inst.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
             if prm is not None and not prm.IsReadOnly:
                 prm.Set('archpipe:' + json.dumps(metadata, sort_keys=True))
@@ -638,6 +688,10 @@ def main():
             # under a 2700 ceiling needs a -1500 offset. Without this every
             # luminaire would silently sit at ceiling level and the whole
             # lux grid would describe a different scheme.
+            angle = math.radians(float(lt.get('rotation') or 0))
+            if angle:
+                ElementTransformUtils.RotateElement(doc, inst.Id,
+                    Line.CreateBound(pt, pt + XYZ.BasisZ), angle)
             if lt.get("host") == "ceiling":
                 drop = z - ch_mm
                 if abs(drop) > 1.0:

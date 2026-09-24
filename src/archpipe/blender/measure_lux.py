@@ -45,6 +45,7 @@ import json
 import math
 import os
 import sys
+import time
 
 import bpy
 
@@ -171,6 +172,7 @@ def main():
         sys.exit(3)
 
     scene = bpy.context.scene
+    device = bs.configure_render(samples, (res,res), use_gpu='--gpu' in argv, measure=True)
     scene.render.engine = "CYCLES"
     scene.cycles.samples = samples
     scene.cycles.use_denoising = False          # a denoiser biases a reading
@@ -201,7 +203,9 @@ def main():
     add_ortho_camera(x0, y0, x1, y1, z)
 
     scene.render.filepath = exr_path
+    render_started = time.perf_counter()
     bpy.ops.render.render(write_still=True)
+    render_seconds = time.perf_counter()-render_started
 
     img = bpy.data.images.load(exr_path)
     w, h = img.size
@@ -227,6 +231,8 @@ def main():
         "working_plane_mm": plane_mm,
         "bounces": bounces,
         "samples": samples,
+        "device": device,
+        "render_seconds": render_seconds,
         "resolution": res,
         "probe_albedo": PROBE_ALBEDO,
         "bounds_mm": [x0 * 1000.0, y0 * 1000.0, x1 * 1000.0, y1 * 1000.0],

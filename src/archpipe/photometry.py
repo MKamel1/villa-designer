@@ -451,6 +451,13 @@ def revit_ies_dir() -> Path | None:
     `.rfa` families, which are forward-compatible only (ADR-0008). So the
     IES folder of ANY installed release is usable whatever we author in.
     """
+    import os
+    configured = os.environ.get('ARCHPIPE_IES_DIR')
+    if configured:
+        directory = Path(configured).expanduser()
+        if not directory.is_dir():
+            raise IESError('ARCHPIPE_IES_DIR is not an existing directory')
+        return directory
     for d in REVIT_IES_DIRS:
         if d.is_dir():
             return d

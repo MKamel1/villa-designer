@@ -437,7 +437,10 @@ def main() -> int:
     # version out of the file instead.
     from archpipe import rfa
 
-    rfa_fails = rfa.verify()
+    portable = '--portable' in sys.argv
+    if portable:
+        print('  SKIP  installed Revit family corpus: Windows-only integration; portable parser regressions run separately')
+    rfa_fails = rfa.verify(require_installed=not portable)
     expect(f"rfa version reader ({len(rfa_fails)} failures)", not rfa_fails)
     for f in rfa_fails:
         print(f"      {f}")

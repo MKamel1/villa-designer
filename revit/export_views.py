@@ -132,6 +132,10 @@ def main():
                         'text': text, 'boundary_mm': pts}
     for index, view in enumerate(views):
         view.DetailLevel = ViewDetailLevel.Fine
+        fixture_category = doc.Settings.Categories.get_Item(BuiltInCategory.OST_LightingFixtures)
+        for category in fixture_category.SubCategories:
+            if category.Name.lower() == 'light source' and view.CanCategoryBeHidden(category.Id):
+                view.SetCategoryHidden(category.Id, True)
         # Keep the native title family on one line; its default fixed
         # label box otherwise wraps over the scale annotation.
         title = view.Name[len('ARCHPIPE '):].replace('interior ', '').replace('Reflected ceiling', 'Ceiling')

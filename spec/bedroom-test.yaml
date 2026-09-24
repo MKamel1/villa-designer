@@ -41,10 +41,9 @@ openings:
     height: 2100
     sill: 0
 
-# Furniture. `family` names a real .rfa where we have one; where we do not,
-# `proxy: true` builds a DirectShape box at the catalogue dimensions --
-# correctly categorised and named PROXY so it can never be mistaken for a
-# design proposal.
+# Furniture. `family` names existing native content. A named detail recipe
+# authors manufacturer-neutral component meshes into Revit; its saved
+# geometry is extracted again for rendering and dimensional checks.
 furniture:
   # ROTATED 180 after FURN-02 reported "0 mm clear to its front where 750
   # is needed -- a wall is in the way". The catalogue wants back = 0 (a
@@ -56,9 +55,9 @@ furniture:
     type: bed_double
     at: [2250, 2600]
     size: [1600, 2000]
-    height: 600
+    height: 1100       # total headboard height; mattress is lower
     rotation: 180
-    proxy: true
+    detail: warm-contemporary-v1
   - id: FN-BST-L
     type: bedside_table
     at: [1125, 3300]
@@ -66,7 +65,7 @@ furniture:
     height: 500
     accessory_to: FN-BED
     rotation: 0
-    proxy: true
+    detail: warm-contemporary-v1
   - id: FN-BST-R
     type: bedside_table
     at: [3375, 3300]
@@ -74,7 +73,7 @@ furniture:
     height: 500
     accessory_to: FN-BED
     rotation: 0
-    proxy: true
+    detail: warm-contemporary-v1
   # ROTATED after FURN-02 reported "100 mm clear to its front where 750 is
   # needed -- a wall is in the way". At 90 the doors opened INTO the west
   # wall. 270 turns the front to face the room.
@@ -84,7 +83,7 @@ furniture:
     size: [1200, 600]
     height: 2100
     rotation: 270
-    proxy: true
+    detail: warm-contemporary-v1
   # Moved clear of the east door and the bed-foot access zone. Measured
   # geometry (including the real chair's offset centre) governs checks.
   # The wardrobe also moved north so it does not obstruct the chair zone.
@@ -94,7 +93,7 @@ furniture:
     size: [1200, 600]
     height: 750
     rotation: 0
-    proxy: true
+    detail: warm-contemporary-v1
   - id: FN-CHR
     type: chair
     at: [1050, 1060]
@@ -154,6 +153,7 @@ lighting:
   - id: LT-04
     layer: accent
     at: [400, 2300]
+    rotation: 90       # measured long housing runs along, not through, west wall
     mounting_height: 2400
     host: ceiling
     ies: LGLled.ies

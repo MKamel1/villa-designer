@@ -24,6 +24,12 @@ camera framing. Never retouch a simulation with image generation to make
 it look correct. Proxies and unmeasured optical properties stay labelled.
 
 Use the configured rendering workstation to keep the laptop's workload
-bounded. Capture a minimal failing input for new photometric bugs, add a
+bounded. Use `run_workstation_job` or `scripts/workstation.py` for cached
+view batches, probes and independent Radiance jobs; see
+[worker operations](../../../docs/ops/workstation-jobs.md). Graphics probes
+are the measured default. Re-benchmark after meaningful renderer, hardware
+or probe changes; do not rerun a benchmark merely because documentation changed.
+Keep execution success distinct from lighting/design acceptance.
+Capture a minimal failing input for new photometric bugs, add a
 regression, and update the calibration evidence. Do not generalize an
 example target into a code-compliance requirement without a verified source.

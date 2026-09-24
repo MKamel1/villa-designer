@@ -95,6 +95,7 @@ def main(argv=None) -> int:
             # Orientation matters for an asymmetric fitting.
             "rotation": fx.get("rotation") or 0.0,
             "family": fx.get("family"),
+            "meshes": fx.get('meshes', []),
             # Specification from the spec, which is the only authored copy.
             "ies": f"{a.ies_dir.rstrip('/')}/{s['ies']}",
             "ies_file": s["ies"],

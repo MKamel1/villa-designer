@@ -172,7 +172,7 @@ def screen(paths, target_year: int = TARGET_REVIT) -> dict:
     return out
 
 
-def verify() -> list[str]:
+def verify(*, require_installed: bool = True) -> list[str]:
     """Check the reader against families of KNOWN version on this machine.
 
     Revit installs its own library under
@@ -224,7 +224,7 @@ def verify() -> list[str]:
                              f"{info.format_year}")
             if not info.is_ole:
                 fails.append(f"{f.name} is not an OLE compound document")
-    if checked == 0:
+    if checked == 0 and require_installed:
         fails.append("no installed families found to check the parser "
                      "against; the compatibility logic was still tested")
     return fails

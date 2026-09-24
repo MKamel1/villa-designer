@@ -13,5 +13,10 @@
     "name": "lighting_reviewer",
     "description": "Review analytical lighting and render calibration, tracing numerical disagreement and reporting physical limits.",
     "instructions": "Read .agents/skills/lighting-proof/SKILL.md. Use the lighting engine and independent renderer rather than estimating illuminance in prose. Distinguish direct, reflected and occluded light; test like-for-like inputs. Return measured agreement, image findings and unverified assumptions. Do not change geometry or targets merely to obtain a passing report."
+  },
+  {
+    "name": "workstation_executor",
+    "description": "Run bounded Ubuntu rendering, independent lighting, verification and candidate batches with verified reuse and compact evidence.",
+    "instructions": "Read .agents/skills/workstation-jobs/SKILL.md. Own only the assigned batch and outputs. Use the typed workstation operation or shared CLI, preserve resource locks and report failures from fresh attempts. Return operation, passed state, reused count, artifact paths and physical/design findings separately. Keep native Revit authoring on Windows. Do not reinterpret a successful candidate computation as design approval."
   }
 ]

@@ -169,13 +169,16 @@ def main(argv=None) -> int:
                item is not None, "" if item else "nothing at %s" % (fn["at"],))
         if item:
             actual_rotation = item.get('rotation')
-            if item.get('is_proxy') and '@' in item.get('type_name', ''):
+            if '@' in item.get('type_name', ''):
                 actual_rotation = float(item['type_name'].rsplit('@', 1)[1])
             want_rotation = float(fn.get('rotation') or 0)
             delta = None if actual_rotation is None else ((actual_rotation - want_rotation + 180) % 360 - 180)
             c.eq('  %s rotation error (degrees)' % fn['id'], delta, 0, 0.01)
-            if fn.get('proxy') and fn.get('height'):
+            if (fn.get('proxy') or fn.get('detail')) and fn.get('height'):
                 c.eq('  %s measured height' % fn['id'], (item.get('size_mm') or [0,0,None])[2], fn['height'])
+            if fn.get('detail'):
+                c.true('  %s has actual saved detailed meshes' % fn['id'],
+                       bool(item.get('meshes')) and not item.get('is_proxy'))
         if item and item.get("size_mm") and fn.get("size"):
             # A rotation of 90 degrees swaps the plan footprint. Checking
             # the ROTATED size is the point: a dropped rotation is
@@ -184,7 +187,7 @@ def main(argv=None) -> int:
             want = list(fn["size"])
             if abs(rot - 90.0) < 1.0:
                 want = [want[1], want[0]]
-            is_proxy = bool(fn.get("proxy"))
+            is_proxy = bool(fn.get("proxy") or fn.get('detail'))
             if is_proxy:
                 # We built the box, so it must be exactly the size asked
                 # for. Anything else is a build error.
@@ -218,6 +221,17 @@ def main(argv=None) -> int:
                item is not None, "" if item else "nothing at %s" % (lt["at"],))
         if item:
             c.eq('  %s mounting height' % lt['id'], item.get('mounting_height'), lt['mounting_height'])
+            actual_rotation = float(item.get('rotation') or 0)
+            want_rotation = float(lt.get('rotation') or 0)
+            c.eq('  %s rotation error' % lt['id'],
+                 (actual_rotation-want_rotation+180)%360-180, 0, 0.01)
+            vertices = [p for mesh in item.get('meshes',[])
+                        if mesh.get('geometry_role') != 'light_source_symbol' for p in mesh['vertices_mm']]
+            c.true('  %s has saved fixture geometry' % lt['id'], bool(vertices))
+            if vertices:
+                c.true('  %s housing fits inside room plan' % lt['id'],
+                    min(p[0] for p in vertices)>=-TOL_MM and max(p[0] for p in vertices)<=w+TOL_MM and
+                    min(p[1] for p in vertices)>=-TOL_MM and max(p[1] for p in vertices)<=d+TOL_MM)
         if item and lt.get("family"):
             stem = Path(lt["family"]).stem.lower()
             c.true("  %s is the family the spec named" % lt["id"],

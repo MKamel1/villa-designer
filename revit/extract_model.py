@@ -31,6 +31,7 @@ from Autodesk.Revit.DB import (
     BuiltInCategory, BuiltInParameter, Element, FilteredElementCollector, Level,
     LocationCurve, LocationPoint, Options, Solid, SpatialElementBoundaryOptions,
     TextNote, RevisionCloud, UnitTypeId, UnitUtils, Wall, WallType, XYZ,
+    Mesh, GeometryInstance, ViewDetailLevel,
 )
 
 PRECISION = 3          # mm, to 3 dp -- far below drawing tolerance
@@ -200,6 +201,79 @@ def _distance_along(host_wall, point):
         return None
 
 
+def extract_meshes(doc, element):
+    """Triangulate native fine geometry in world millimetres, by material.
+
+    GetInstanceGeometry already applies the instance's transform. Applying
+    its location/rotation again would move real family meshes twice.
+    """
+    groups = {}
+    skipped = [0]
+
+    def style_name(obj):
+        style = doc.GetElement(obj.GraphicsStyleId)
+        return _name(style.GraphicsStyleCategory) if style else ''
+
+    def add_mesh(mesh, material_id, subcategory):
+        material = doc.GetElement(material_id)
+        name = _name(material) if material else 'Revit unspecified'
+        key = str(material_id) + '/' + subcategory
+        if key not in groups:
+            color = material.Color if material else None
+            groups[key] = {'name': name, 'subcategory': subcategory,
+                           'geometry_role': 'light_source_symbol' if subcategory.lower() == 'light source' else 'physical',
+                           'vertices_mm': [], 'triangles': [],
+                           'material': {'name': name,
+                               'rgb': [int(color.Red), int(color.Green), int(color.Blue)] if color else [180,180,180],
+                               'transparency': int(material.Transparency) if material else 0},
+                           '_indices': {}}
+        group = groups[key]
+        for index in range(mesh.NumTriangles):
+            triangle = mesh.get_Triangle(index)
+            indices = []
+            for corner in range(3):
+                point = triangle.get_Vertex(corner)
+                coord = (mm(point.X), mm(point.Y), mm(point.Z))
+                if coord not in group['_indices']:
+                    group['_indices'][coord] = len(group['vertices_mm'])
+                    group['vertices_mm'].append(list(coord))
+                indices.append(group['_indices'][coord])
+            if len(set(indices)) == 3:
+                group['triangles'].append(indices)
+            else:
+                skipped[0] += 1
+
+    def visit(geometry):
+        for obj in geometry:
+            if isinstance(obj, GeometryInstance):
+                visit(obj.GetInstanceGeometry())
+            elif isinstance(obj, Solid):
+                for face in obj.Faces:
+                    material_id = face.MaterialElementId
+                    try:
+                        if doc.IsPainted(element.Id, face):
+                            material_id = doc.GetPaintedMaterial(element.Id, face)
+                    except Exception:
+                        pass
+                    add_mesh(face.Triangulate(), material_id, style_name(face) or style_name(obj))
+            elif isinstance(obj, Mesh):
+                add_mesh(obj, obj.MaterialElementId, style_name(obj))
+
+    options = Options()
+    options.DetailLevel = ViewDetailLevel.Fine
+    options.IncludeNonVisibleObjects = False
+    geometry = element.get_Geometry(options)
+    if geometry:
+        visit(geometry)
+    result = []
+    for key in sorted(groups):
+        group = groups[key]
+        del group['_indices']
+        if group['triangles']:
+            result.append(group)
+    return result, skipped[0]
+
+
 def extract_openings(doc):
     out = []
     for bic, kind in ((BuiltInCategory.OST_Doors, "door"),
@@ -235,6 +309,7 @@ def extract_openings(doc):
                     entry["sill"] = mm(p.AsDouble())
             except Exception:
                 pass
+            entry['meshes'], entry['mesh_triangles_collapsed_at_precision'] = extract_meshes(doc, inst)
             out.append(entry)
     return out
 
@@ -396,6 +471,10 @@ def extract_instances(doc, bic, tag):
                 pass
         if not rec["family"]:
             rec["is_proxy"] = str(getattr(inst, "ApplicationId", "")) == "archpipe"
+            if (rec.get('archpipe') or {}).get('detail'):
+                rec['rotation'] = rec['archpipe']['rotation']
+
+        rec['meshes'], rec['mesh_triangles_collapsed_at_precision'] = extract_meshes(doc, inst)
 
         # Mounting height, relative to the element's level. `pt_mm` returns
         # plan coordinates only, so Z was being dropped -- and a luminaire

@@ -5,6 +5,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'scripts'))
@@ -13,6 +14,21 @@ from archpipe import photometry
 
 
 class PipelineTests(unittest.TestCase):
+    def test_worker_failure_replaces_previous_success(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root/'out').mkdir()
+            report = root/'out/bedroom-acceptance.json'
+            report.write_text(json.dumps({'passed':True}))
+            with patch.object(run_bedroom,'ROOT',root), \
+                 patch.object(run_bedroom,'input_hashes',return_value={}), \
+                 patch.object(run_bedroom,'run',side_effect=RuntimeError('worker unavailable')), \
+                 patch.object(sys,'argv',['run_bedroom.py','--resume']):
+                self.assertEqual(run_bedroom.main(),1)
+            result = json.loads(report.read_text())
+            self.assertFalse(result['passed'])
+            self.assertEqual(result['stage'],'worker_status')
+
     def test_stale_or_missing_artifacts_are_not_reused(self):
         self.assertFalse(run_bedroom.artifacts_match({}))
         self.assertFalse(run_bedroom.artifacts_match({'no-such-artifact': {'sha256':'x'}}))

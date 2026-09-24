@@ -4,9 +4,9 @@
 
 `spec/bedroom-test.yaml` stays the authored file. `revit/build_bedroom.py`
 runs in IronPython 2.7 inside Revit, where PyYAML is not available, so it
-reads JSON. This is a format conversion and nothing else -- no defaults are
-invented here, because a value that appears in the JSON but not the YAML
-would be a second place to author the design (ADR-0002).
+reads JSON. Named furniture recipes generate deterministic authoring
+meshes from the specified dimensions; the saved Revit model is extracted
+again before review or rendering.
 """
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'src'))
 REQUIRED_ROOM = ("width", "depth", "ceiling_height", "wall_thickness")
 
 
@@ -52,6 +53,10 @@ def convert(src: Path) -> dict:
             raise SystemExit(
                 f"{src}: {item.get('id')} at ({x}, {y}) is outside the "
                 f"{room['width']} x {room['depth']} mm room")
+    for item in spec.get('furniture',[]):
+        if item.get('detail'):
+            from archpipe.furniture import build_furniture
+            item['meshes'] = build_furniture(item)
     return spec
 
 

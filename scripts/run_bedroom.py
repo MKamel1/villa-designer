@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import time
@@ -17,7 +18,6 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 from archpipe.review_extract import review_model
-from render_remote import _ssh, _push
 
 
 def digest(path):
@@ -25,12 +25,14 @@ def digest(path):
 
 
 def input_hashes():
-    paths = [ROOT/'spec/bedroom-test.yaml', ROOT/'requirements.txt']
+    paths = [ROOT/'spec/bedroom-test.yaml', ROOT/'requirements.txt',ROOT/'requirements-worker.txt']
     paths += list((ROOT/'src/archpipe').glob('*.py'))
     paths += list((ROOT/'src/archpipe/blender').glob('*.py'))
     paths += [ROOT/'revit'/name for name in ['build_bedroom.py','extract_model.py','export_views.py']]
     paths += [ROOT/'scripts'/name for name in ['run_bedroom.py','make_bedroom_spec.py',
-              'check_bedroom.py','make_render_input.py','lighting_report.py','compare_lux.py','render_remote.py']]
+              'check_bedroom.py','make_render_input.py','lighting_report.py','compare_lux.py',
+              'render_remote.py','workstation.py','worker_entry.py']]
+    paths += list((ROOT/'ops/workstation').glob('*.py'))
     return {str(p.relative_to(ROOT)).replace('\\','/'): digest(p) for p in sorted(paths)}
 
 
@@ -42,7 +44,7 @@ def artifacts_match(records):
 def run(argv, label, env=None, expected=None, timeout=360):
     started = time.time_ns()
     res = subprocess.run([str(v) for v in argv], cwd=ROOT, env=env,
-                         capture_output=True, text=True, encoding='utf-8',
+                         stdin=subprocess.DEVNULL, capture_output=True, text=True, encoding='utf-8',
                          errors='replace', timeout=timeout)
     logs = ROOT / 'out/run-logs'
     logs.mkdir(parents=True, exist_ok=True)
@@ -68,19 +70,37 @@ def main():
     acceptance = out / 'bedroom-acceptance.json'
     inputs = input_hashes()
     previous = json.loads(acceptance.read_text()) if acceptance.is_file() else {}
+    # Reuse requires the actual worker environment as well as project
+    # inputs. Changed applications, packages or assets invalidate evidence.
+    try:
+        run([sys.executable,ROOT/'scripts/workstation.py','status'], 'worker_status',
+            expected=out/'workstation/status-latest.json',timeout=120)
+        runtime = json.loads((out/'workstation/status-latest.json').read_text())['runtime']
+    except Exception as exc:
+        failure = {'passed':False,'stage':'worker_status','error':str(exc),
+                   'input_hashes':inputs,'samples':a.samples,
+                   'scope':'capability example, not villa approval',
+                   'finished_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
+        acceptance.write_text(json.dumps(failure,indent=2),encoding='utf-8')
+        print('FAIL '+str(exc),file=sys.stderr)
+        return 1
+    runtime_id = hashlib.sha256(json.dumps(runtime,sort_keys=True).encode()).hexdigest()
     if (a.resume and previous.get('passed') and previous.get('input_hashes') == inputs
+            and previous.get('worker_runtime') == runtime_id
             and previous.get('samples') == a.samples and artifacts_match(previous.get('artifacts', {}))):
         print('PASS unchanged inputs and artifacts; reused complete verified run')
         print(acceptance)
         return 0
     revit_inputs = {k:v for k,v in inputs.items() if k.startswith('revit/') or
-                    k in ['spec/bedroom-test.yaml', 'scripts/make_bedroom_spec.py']}
+                    k in ['spec/bedroom-test.yaml', 'scripts/make_bedroom_spec.py',
+                          'src/archpipe/furniture.py']}
     if (a.resume and previous.get('revit_inputs') == revit_inputs and
             artifacts_match(previous.get('revit_artifacts', {}))):
         a.skip_revit = True
     result = {'passed': False, 'started_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
               'scope': 'capability example, not villa approval', 'checks': {}, 'artifacts': {},
-              'input_hashes': inputs, 'samples': a.samples, 'reused_revit': a.skip_revit}
+              'input_hashes': inputs, 'samples': a.samples, 'reused_revit': a.skip_revit,
+              'worker_runtime':runtime_id}
     acceptance.write_text(json.dumps(result, indent=2))
     env = {**os.environ, 'PYTHONIOENCODING': 'utf-8', 'PYTHONPATH': str(ROOT / 'src')}
     try:
@@ -138,49 +158,51 @@ def main():
             for index, page in enumerate(doc):
                 page.get_pixmap(matrix=pymupdf.Matrix(1.25,1.25)).save(str(out/f'bedroom-native/page-{index+1}.png'))
         result['checks']['native_views'] = views['views']
-        host = 'ai-workstation'
-        remote = '$HOME/archpipe/bedroom-e2e'
-        base = _ssh(host, 'printf %s "$HOME"')
-        if base.returncode:
-            raise RuntimeError('Rendering workstation unavailable')
-        ies_dir = base.stdout.decode().strip() + '/archpipe/ies'
-        run([sys.executable, ROOT/'scripts/make_render_input.py', '--ies-dir', ies_dir], 'render_input', env)
+        # Worker jobs bind each IES filename to a hashed deployed asset.
+        run([sys.executable, ROOT/'scripts/make_render_input.py', '--ies-dir', 'assets/ies'], 'render_input', env)
         run([sys.executable, ROOT/'scripts/lighting_report.py'], 'lighting', env)
         result['checks']['lighting'] = json.loads((out/'bedroom-lighting.json').read_text())
-        if _ssh(host, 'mkdir -p "'+remote+'"').returncode:
-            raise RuntimeError('Could not prepare render folder')
-        for local, name in [(ROOT/'src/archpipe/blender/build_scene.py','build_scene.py'),
-                            (ROOT/'src/archpipe/blender/measure_lux.py','measure_lux.py'),
-                            (out/'bedroom-render.json','model.json')]:
-            _push(host, local, remote+'/'+name)
-        # The visual render and independent direct-light probe share the
-        # current extract. Probe is intentionally empty-room calibration.
-        for script, filename, flags in [
-            ('build_scene.py', 'bedroom.png', '--interior --samples %d --res 1280x800 --target-lux 160' % a.samples),
-            ('measure_lux.py', 'lux-direct.json', '--bounces 0 --res 128 --samples 512')]:
-            cmd = ('cd "'+remote+'" && "$HOME/opt/blender/blender" -b -P '+script+
-                   ' -- --extract model.json --out '+filename+' '+flags)
-            res = _ssh(host, cmd, timeout=600)
-            log = res.stdout.decode(errors='replace') + res.stderr.decode(errors='replace')
-            (out/'run-logs'/('remote-'+script+'.log')).write_text(log, encoding='utf-8')
-            if res.returncode or ('SCENE wrote' not in log if script=='build_scene.py' else 'LUX' not in log):
-                raise RuntimeError('Remote '+script+' failed; inspect run log')
-            fetched = _ssh(host, 'cat "'+remote+'/'+filename+'"')
-            if fetched.returncode or not fetched.stdout:
-                raise RuntimeError('Could not fetch '+filename)
-            (out/filename).write_bytes(fetched.stdout)
-            print('PASS remote '+script, flush=True)
+        run([sys.executable,ROOT/'scripts/workstation.py','bedroom','--samples',str(a.samples),
+             '--resolution','1600x1000'], 'worker_bedroom',env,
+             out/'workstation/bedroom-latest.json',timeout=1800)
+        batch = json.loads((out/'workstation/bedroom-latest.json').read_text())
+        if not batch['passed']:
+            raise RuntimeError('Workstation batch did not pass')
+        bundle = out/'workstation'/batch['batch_id']
+        result['checks']['workstation'] = {'batch_id':batch['batch_id'],'jobs':len(batch['jobs']),
+                                         'reused':batch['reused']}
+        for job in batch['jobs']:
+            folder = bundle/job['job_id'][:16]
+            kind = job['manifest']['kind']
+            if kind=='render':
+                camera = job['manifest']['parameters']['camera']
+                shutil.copyfile(folder/'render.png',out/('bedroom-'+camera+'.png'))
+                if camera=='bed':
+                    shutil.copyfile(folder/'render.png',out/'bedroom.png')
+                    shutil.copyfile(folder/'render.log',out/'run-logs/remote-build_scene.py.log')
+            elif kind=='probe':
+                shutil.copyfile(folder/'lux.json',out/'lux-direct.json')
+                shutil.copyfile(folder/'probe.log',out/'run-logs/remote-measure_lux.py.log')
+            elif kind=='radiance':
+                shutil.copyfile(folder/'radiance-report.json',out/'radiance-report.json')
+                result['checks']['radiance'] = job['detail']
         run([sys.executable, ROOT/'scripts/compare_lux.py', out/'lux-direct.json',
              '--extract', out/'bedroom-render.json'], 'photometry_agreement', env)
         result['checks']['photometry_agreement'] = 'see out/run-logs/photometry_agreement.log'
         for name in ['revit2027/bedroom.rvt','bedroom-from-revit.json','bedroom-native/bedroom-native-views.pdf',
-                     'bedroom.png','bedroom-review.json','bedroom-lighting.json','bedroom-render.json']:
+                     'bedroom.png','bedroom-bed.png','bedroom-window.png','bedroom-overview.png',
+                     'bedroom-review.json','bedroom-lighting.json','bedroom-render.json',
+                     'lux-direct.json','radiance-report.json']:
             p = out/name
             result['artifacts'][name] = {'bytes': p.stat().st_size, 'sha256': digest(p)}
         result['spec_sha256'] = digest(ROOT/'spec/bedroom-test.yaml')
+        if input_hashes() != inputs:
+            raise RuntimeError('Source changed during this run; rerun to verify one consistent version')
         result['passed'] = True
-        result['limitations'] = ['Furniture uses measured bounding-box proxies in Blender; five Revit items are proxies.',
+        result['limitations'] = ['Five furniture items are manufacturer-neutral procedural detail, not specified commercial products; the chair is an existing native family.',
             'Paint hue is extracted; optical reflectances are stated assumptions, not measurements.',
+            'Procedural material grain/weave are presentation assumptions. Native light-source display webs are excluded; photometric data governs fixture optics.',
+            'Radiance daylight is an illustrative normalized overcast sky, not site/weather analysis; working-plane exclusions use conservative furniture bounds.',
             'Photometry is joined from the authored specification; third-party family light definitions may override Revit parameters.',
             'Direct-only lighting has no compliance verdict for uniformity; no real site or jurisdiction is specified.',
             'Synthetic markup tests transport; it is not client approval.']

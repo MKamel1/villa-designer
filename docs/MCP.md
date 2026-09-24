@@ -19,11 +19,20 @@ error. The official Python library is pinned to the maintained 1.30 line.
 | `lighting_at` | Direct illuminance at a point in millimetres | Read only; no shadow or uniformity claim |
 | `propose_example_edit` | Before/after placement and invalidated stages | Writes a candidate under `out/proposals`; does not change current design |
 | `run_bedroom_example` | Complete structured acceptance evidence | Rebuilds generated example outputs locally and renders on configured workstation |
+| `run_workstation_job` | Compact result, reuse count, artifact directory and failures | Runs a bounded Ubuntu verification, view batch, bedroom proof, benchmark, parameter sweep or Radiance simulation |
 
-`archpipe://method` and `archpipe://learnings` expose the shared method and
-learning index. Model/file arguments stay inside the project root; there
+`archpipe://method`, `archpipe://learnings` and `archpipe://compute` expose
+the shared method, learning index and measured compute placement.
+Model/file arguments stay inside the project root; there
 is no arbitrary command tool. Rebuild is explicitly marked as a write
 operation. Existing session authority still governs when it may be used.
+
+`read_model` returns mesh counts and material names by default, alongside
+measured dimensions and placement. Request `include_meshes=true` only when
+coordinates are necessary; rendering consumes the referenced extract file
+directly. `project_status` returns compact example evidence and whether it
+still matches local inputs/artifacts; a read-only status call does not
+probe the remote runtime.
 
 ## Fewer steps, with evidence
 
@@ -37,11 +46,13 @@ exit is a failed invocation, even if a previous acceptance file remains.
 `scripts/run_bedroom.py --resume` provides the same behavior
 without MCP.
 
-The reuse check covers recorded project code, specification and generated
-artifacts. Installed application versions and remote photometric assets
-are currently environment dependencies, not part of that fingerprint;
-rerun without resume after changing them. A versioned remote job manifest
-is the next infrastructure improvement.
+The reuse check covers recorded project code, specification, generated
+artifacts and the actual remote runtime. Worker manifests include application
+binary hashes, Python packages, graphics driver and photometric assets.
+Each job verifies its output hashes before reuse; failed or modified outputs
+are recomputed in a fresh attempt directory. Documentation changes do not
+invalidate otherwise identical render jobs. See [worker operations](ops/workstation-jobs.md)
+for setup, bounds, locking and benchmark evidence.
 
 Run `scripts/test_mcp.py` to launch an actual client/server session, list
 tools, read resources, exercise rules and check negative inputs. Run
@@ -49,6 +60,9 @@ tools, read resources, exercise rules and check negative inputs. Run
 the actual reuse operation with a 30-second response deadline. The test
 rejects stale prerequisites rather than accidentally starting a rebuild.
 Noninteractive child processes must not inherit the protocol input pipe.
+Use `scripts/test_mcp.py --worker-batch` to exercise an actual three-view
+Ubuntu batch through the same protocol; it may render when no matching
+cache exists. This is separate from the native-model reuse test.
 Run
 `scripts/sync_agent_assets.py --check` to catch workflow adapter drift.
 

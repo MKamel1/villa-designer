@@ -6,6 +6,8 @@ import math
 import os
 import subprocess
 import sys
+import asyncio
+from typing import Literal
 from dataclasses import asdict
 from pathlib import Path
 
@@ -30,9 +32,20 @@ def local_path(relative: str) -> Path:
 
 
 @mcp.tool(annotations=READ)
-def read_model(path: str = 'out/bedroom-from-revit.json') -> dict:
-    """Read a generated model extract, including measured geometry and review markup."""
-    return json.loads(local_path(path).read_text(encoding='utf-8'))
+def read_model(path: str = 'out/bedroom-from-revit.json', include_meshes: bool = False) -> dict:
+    """Read measured geometry and markup; summarize dense meshes unless explicitly requested."""
+    data = json.loads(local_path(path).read_text(encoding='utf-8'))
+    if not include_meshes:
+        for category in ('furniture','casework','openings','lighting'):
+            for item in data.get(category,[]):
+                if 'meshes' in item:
+                    meshes=item.pop('meshes')
+                    item['mesh_summary']={'components':len(meshes),
+                        'vertices':sum(len(m['vertices_mm']) for m in meshes),
+                        'triangles':sum(len(m['triangles']) for m in meshes),
+                        'materials':sorted({m.get('material',{}).get('name','unspecified') for m in meshes})}
+        data['mesh_data_path']=path
+    return data
 
 
 @mcp.tool(annotations=READ)
@@ -75,7 +88,22 @@ def project_status() -> dict:
     result = {'roadmap': (ROOT / 'docs/ROADMAP.md').read_text(encoding='utf-8')}
     p = ROOT / 'out/bedroom-acceptance.json'
     if p.is_file():
-        result['example'] = json.loads(p.read_text(encoding='utf-8'))
+        from run_bedroom import input_hashes, artifacts_match
+        evidence = json.loads(p.read_text(encoding='utf-8'))
+        result['example'] = {k:evidence.get(k) for k in
+            ('passed','scope','finished_utc','error','limitations')}
+        result['example'].update(evidence_path=str(p.relative_to(ROOT)),
+            matches_current_local_inputs=(evidence.get('input_hashes')==input_hashes() and
+                                          artifacts_match(evidence.get('artifacts',{}))),
+            remote_runtime_checked_now=False)
+    result['workstation'] = {}
+    for operation in ('verify','benchmark','sweep','batch','bedroom','radiance'):
+        path = ROOT/'out/workstation'/(operation+'-latest.json')
+        if path.is_file():
+            record = json.loads(path.read_text())
+            result['workstation'][operation] = {'passed':record.get('passed'),
+                'batch_id':record.get('batch_id'),'reused':record.get('reused'),
+                'jobs':len(record.get('jobs',[])),'report':str(path.relative_to(ROOT))}
     return result
 
 
@@ -87,6 +115,43 @@ def learnings() -> str:
 @mcp.resource('archpipe://method')
 def method() -> str:
     return (ROOT / 'docs/method/villa-design-method.md').read_text(encoding='utf-8')
+
+
+@mcp.resource('archpipe://compute')
+def compute_placement() -> str:
+    return (ROOT/'docs/ops/compute-placement.md').read_text(encoding='utf-8')
+
+
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=False,destructiveHint=False,openWorldHint=True))
+async def run_workstation_job(operation: Literal['verify','batch','bedroom','benchmark','sweep','radiance'],
+                             input_path: str = 'out/bedroom-render.json',
+                             samples: int = 256, resolution: str = '1600x1000',
+                             workers: int = 2) -> dict:
+    """Run bounded Ubuntu jobs, reuse matching evidence and fetch outputs in one call.
+
+    Operations cover portable verification, camera batches, a complete
+    bedroom render/probe/Radiance batch, processor/graphics benchmarks,
+    unbuilt lighting/layout alternatives and independent Radiance studies.
+    No Revit authoring or native family transfer. Parameters are bounded.
+    """
+    if not 1 <= workers <= 4 or not 32 <= samples <= 4096:
+        raise ValueError('workers must be 1..4 and samples 32..4096')
+    try:
+        dimensions = [int(v) for v in resolution.split('x')]
+    except ValueError:
+        raise ValueError('resolution must be widthxheight in pixels')
+    if len(dimensions)!=2 or any(v<128 or v>4096 for v in dimensions):
+        raise ValueError('Image dimensions must be 128..4096 pixels')
+    path = local_path(input_path)
+    argv = [sys.executable,str(ROOT/'scripts/workstation.py'),operation,'--input',str(path),
+            '--samples',str(samples),'--resolution',resolution,'--workers',str(workers)]
+    response = await asyncio.to_thread(subprocess.run,argv,cwd=ROOT,
+        stdin=subprocess.DEVNULL,capture_output=True,text=True,encoding='utf-8',
+        errors='replace',timeout=2400,env={**os.environ,'PYTHONIOENCODING':'utf-8'})
+    if response.returncode:
+        return {'passed':False,'exit_code':response.returncode,
+                'error':(response.stdout+response.stderr)[-5000:]}
+    return json.loads(response.stdout)
 
 
 @mcp.tool(annotations=WRITE)
@@ -141,9 +206,11 @@ def run_bedroom_example(resume: bool = True) -> dict:
                             env={**os.environ, 'PYTHONIOENCODING': 'utf-8'})
     report = ROOT / 'out/bedroom-acceptance.json'
     evidence = json.loads(report.read_text()) if report.is_file() else None
-    return {'exit_code': result.returncode, 'log': result.stdout[-10000:],
+    return {'passed':result.returncode == 0 and bool(evidence and evidence.get('passed')),
+            'exit_code': result.returncode, 'log': result.stdout[-10000:],
             'error': result.stderr[-3000:],
-            'acceptance': evidence}
+            'acceptance': evidence if result.returncode == 0 else None,
+            'evidence_path':str(report.relative_to(ROOT))}
 
 
 if __name__ == '__main__':
