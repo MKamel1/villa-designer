@@ -24,6 +24,21 @@ the document explicitly, activate symbols, convert length units at the
 boundary, save, re-extract, and verify against dimensions chosen before
 the model existed.
 
+**Verify the functional point, not the reference point.** A family's
+insertion point is a reference, not the thing the spec names (a light's
+emitter, a basin's rim, a door's clear opening). Measure the named point
+from the built geometry and compare it with the spec; a check that reads
+back the value the builder wrote is circular and passed while the
+bedroom's emitters sat 57-466 mm off spec.
+
+**A parameter write that does not raise is not proof it did anything.**
+The pendants' host offset was set to -700 and -400 and moved nothing.
+Find the lever by measured effect: nudge each writable length in a
+rolled-back sub-transaction and keep the one that moves the measured
+point (`build_bedroom.source_lever`, `revit/probe_fixture_drop.py`).
+Refuse a placement that is physically impossible (a fitting through the
+ceiling) and report it as a design finding; never force it.
+
 Keep all measured furniture as obstacles. Catalogue figures describe
 requirements, not replacement geometry. Preserve insertion-point versus
 bounding-box-centre distinctions and world versus local rotations.

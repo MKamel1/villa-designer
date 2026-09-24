@@ -672,7 +672,7 @@ def _item_box(item: dict) -> "Box | None":
     base = item.get("base_height_mm") or 0.0
     w = size[0]
     d = size[1] if len(size) > 1 else size[0]
-    h = size[2] if len(size) > 2 else (item.get("height") or 750.0)
+    h = size[2] if len(size) > 2 else float(item["height"])   # required: never an invented 750 mm
     if w <= 0 or d <= 0 or h <= 0:
         raise RadianceError(f"furniture {item.get('id')} has a non-positive dimension")
     return Box(at[0] - w / 2.0, at[1] - d / 2.0, base,

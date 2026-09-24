@@ -43,6 +43,20 @@ If lamps look wrong, find the error in the light's spec or conversion
 Never compensate with white balance, exposure or tone-curve tuning; the
 camera uses standard presets (daylight 5500 K, tungsten 3200 K).
 
+**Views are declared by what they show.** Each view lists its subjects
+by design id (`photoreal.VIEW_SUBJECTS`); `render_qa` fails a view whose
+subject is out of frame. A fixed camera over a moving design goes stale
+silently. Choose framings with the projection model before rendering, not
+by trial renders.
+
+**Guards inherit the defects they were calibrated on.** After fixing an
+upstream defect (e.g. lamps outside their shades), re-read every threshold
+set on renders that contained it before trusting a new pass or fail;
+`highlights_present` was set when misplaced lamps blasted the ceiling.
+A guard must never push toward in-camera compensation: warm light under
+the tungsten preset is advisory, not a failure. Camera presets are
+standard: daylight 5500 K, cloudy 6500 K, tungsten 3200 K.
+
 **The critic sees it before the user does.** After `render_qa` passes, run
 the `render_critic` role on the set. `render_qa` only knows defects it has
 already met; shape realism (curtains, fixtures, bedding) needs judgement.

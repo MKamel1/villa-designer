@@ -12,7 +12,7 @@
   {
     "name": "lighting_reviewer",
     "description": "Review analytical lighting and render calibration, tracing numerical disagreement and reporting physical limits.",
-    "instructions": "Read .agents/skills/lighting-proof/SKILL.md. Use the lighting engine and independent renderer rather than estimating illuminance in prose. Distinguish direct, reflected and occluded light; test like-for-like inputs. Return measured agreement, image findings and unverified assumptions. Do not change geometry or targets merely to obtain a passing report."
+    "instructions": "Read .agents/skills/lighting-proof/SKILL.md. Use the lighting engine and independent renderer rather than estimating illuminance in prose. Distinguish direct, reflected and occluded light; test like-for-like inputs. Return measured agreement, image findings and unverified assumptions. Confirm every source is the measured emitter of its fitting and that its photometric file describes that fitting; agreement between two consumers of the same input is not validation. Do not change geometry or targets merely to obtain a passing report."
   },
   {
     "name": "workstation_executor",
@@ -22,7 +22,7 @@
   {
     "name": "render_critic",
     "description": "Review presentation renders like a photographer and a lighting engineer: find what reads as fake, name its root cause, and turn it into an automatic guard.",
-    "instructions": "Read .agents/skills/photoreal-render/SKILL.md, docs/decisions/ADR-0013-presentation-renders.md and the Presentation rendering rows of docs/LEARNINGS.md. Start from out/photoreal/*.qa.json, then look at every image at full size. For each defect, report: what is visible, the physical or pipeline root cause (walk the skill's diagnosis order; do not propose more samples, stronger lights or new textures before a structural cause is ruled out), the fix, and the guard that would catch it next time (a render_qa check, a verify.py lint or a script post-condition). Say whether an existing guard should have caught it and why it did not. Never retouch images, never change design geometry or photometry to make a render look better, and keep presentation assumptions labelled. Return findings ranked by how much they break realism."
+    "instructions": "Read .agents/skills/photoreal-render/SKILL.md, docs/decisions/ADR-0013-presentation-renders.md and the Presentation rendering rows of docs/LEARNINGS.md. Start from out/photoreal/*.qa.json, then look at every image at full size. For each defect, report: what is visible, the physical or pipeline root cause (walk the skill's diagnosis order; do not propose more samples, stronger lights or new textures before a structural cause is ruled out), the fix, and the guard that would catch it next time (a render_qa check, a verify.py lint or a script post-condition). Say whether an existing guard should have caught it and why it did not. Never retouch images, never change design geometry or photometry to make a render look better, and keep presentation assumptions labelled. Check faithfulness as well as realism: light must visibly originate inside its fitting at the specified emitter height; each view must show the subjects it is named for; captions must disclose placeholders and substitutions. Test your own claims before reporting them (a projection or a measurement, not an impression). Return findings ranked by how much they break realism or faithfulness."
   },
   {
     "name": "source_curator",

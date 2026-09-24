@@ -376,7 +376,23 @@ VIEWS = {
     "window":   ((3.95, 3.35, 1.35), (1.80, 0.00, 1.30), 24.0),
     "desk":     ((3.30, 1.25, 1.35), (0.80, 0.40, 0.95), 24.0),
     "wardrobe": ((3.40, 1.30, 1.35), (0.30, 2.30, 1.10), 24.0),
-    "detail":   ((3.95, 2.40, 1.05), (3.20, 3.45, 0.70), 50.0),
+    # The reading light over the right pillow. The previous 50 mm framing was
+    # named "bedside, pendant and pillows" but never held the pendant: a
+    # 0.7-2.3 m vertical span does not fit a landscape frame at a detail
+    # focal length (searched), so 32 mm from the door corner.
+    "detail":   ((3.95, 0.50, 1.50), (2.70, 3.40, 1.50), 32.0),
+}
+
+# What each view is FOR, by design id. A view is a fixed camera; the design
+# moves under it. Nothing checked that the old detail view showed what it
+# was named for, and it did not. render_qa fails a view missing a subject.
+VIEW_SUBJECTS = {
+    "door": ["FN-BED", "FN-WRD"],
+    "bedfoot": ["FN-BED"],
+    "window": ["FN-DSK"],
+    "desk": ["FN-DSK", "FN-WRD"],
+    "wardrobe": ["FN-WRD"],
+    "detail": ["LT-03", "FN-BED"],
 }
 
 
@@ -695,6 +711,43 @@ def cloth_bedding(data):
 # ---------------------------------------------------------------------------
 # QA facts for archpipe.render_qa (what the scene contained, where windows land)
 # ---------------------------------------------------------------------------
+def _view_subjects(data, scene, cam, world_to_camera_view):
+    """Screen coverage of each design element this view is declared to show.
+
+    A luminaire is its measured light source (a point); furniture is its
+    world-aligned bounding box, visible when its projected rectangle covers
+    at least 10% of itself or of the frame.
+    """
+    view = cam.name[len("camera_"):] if cam.name.startswith("camera_") else cam.name
+    out = []
+    for sid in VIEW_SUBJECTS.get(view, []):
+        lt = next((l for l in data.get("lighting", []) if l.get("id") == sid), None)
+        fn = next((f for f in data.get("furniture", []) if f.get("mark") == sid), None)
+        if lt is not None:
+            p = world_to_camera_view(scene, cam, Vector((lt["at"][0] / 1000.0, lt["at"][1] / 1000.0,
+                                                         float(lt["mounting_height"]) / 1000.0)))
+            ok = p.z > 0 and 0.0 <= p.x <= 1.0 and 0.0 <= p.y <= 1.0
+            out.append({"id": sid, "in_frame": ok, "screen": [round(p.x, 3), round(p.y, 3)]})
+            continue
+        if fn is None or not fn.get("size_mm"):
+            out.append({"id": sid, "in_frame": False, "screen": None, "note": "not in the design data"})
+            continue
+        (cx, cy), (sx, sy, sz) = fn["at"], fn["size_mm"]
+        z0 = float(fn.get("base_height_mm") or 0.0)
+        pts = [world_to_camera_view(scene, cam, Vector(((cx + dx * sx / 2) / 1000.0, (cy + dy * sy / 2) / 1000.0,
+                                                        (z0 + dz * sz) / 1000.0)))
+               for dx in (-1, 1) for dy in (-1, 1) for dz in (0, 1)]
+        front = [q for q in pts if q.z > 0]
+        cover = 0.0
+        if front:
+            x0, x1 = min(q.x for q in front), max(q.x for q in front)
+            y0, y1 = min(q.y for q in front), max(q.y for q in front)
+            inter = max(0.0, min(x1, 1.0) - max(x0, 0.0)) * max(0.0, min(y1, 1.0) - max(y0, 0.0))
+            cover = inter / max(1e-6, min((x1 - x0) * (y1 - y0), 1.0))
+        out.append({"id": sid, "in_frame": cover >= 0.10, "coverage": round(cover, 3)})
+    return out
+
+
 def scene_qa(data, white_balance_applied, daylight=True):
     from bpy_extras.object_utils import world_to_camera_view
     scene = bpy.context.scene
@@ -707,6 +760,8 @@ def scene_qa(data, white_balance_applied, daylight=True):
     qa = {"camera": {"name": cam.name, "lens_mm": cam.data.lens,
                      "shift_y": cam.data.shift_y,
                      "pitch_deg": 90.0 + math.degrees(math.asin(max(-1.0, min(1.0, fwd.z))))}}
+
+    qa["subjects"] = _view_subjects(data, scene, cam, world_to_camera_view)
 
     lamps = [o for o in scene.objects if o.type == "LIGHT" and o.name.startswith("lamp_")]
     with_ies = sum(1 for o in lamps if o.data.use_nodes and

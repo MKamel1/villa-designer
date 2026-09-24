@@ -598,13 +598,46 @@ def main() -> int:
     falsy = re.compile(r"float\(.*\bor\s+([1-9][0-9.]*|[A-Z_]{3,})\s*\)")
     expect("falsy-zero lint catches the historical bug line",
            bool(falsy.search('energy = P * float(fx.get("output") or 1.0)')))
+    # Every code folder, including revit/: scanning only src/ and scripts/
+    # let build_bedroom.py's `mounting_height or 2400.0` through unseen.
+    code = [p for top in ("src", "scripts", "revit") for p in (ROOT / top).rglob("*.py")]
     offenders = [f"{p.relative_to(ROOT)}:{i}"
-                 for top in ("src", "scripts") for p in (ROOT / top).rglob("*.py")
+                 for p in code
                  for i, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1)
                  if falsy.search(line) and "falsy-ok" not in line
                  and "falsy.search(" not in line and "# Falsy" not in line]
     expect("no numeric `x or <nonzero>` default that swallows an explicit zero"
            + (f" ({', '.join(offenders[:5])})" if offenders else ""), not offenders)
+    # Invented design dimensions: `get("mounting_height") or 2400` builds,
+    # lights and checks a value nobody specified, and every consumer then
+    # agrees with it. A design dimension is required; a genuine fallback
+    # must say why on the line: `# default-ok: reason`.
+    invented = re.compile(r"""\.get\(["'](mounting_height|ceiling_height|wall_thickness|thickness|"""
+                          r"""height|width|depth|sill|lumens|kelvin|luminous_size_mm)["']\)\s*or\s*"""
+                          r"""([1-9]|[A-Za-z_]*(?:default|DEFAULT)\w*)""")
+    expect("invented-dimension lint catches the historical line",
+           bool(invented.search('z = float(lt.get("mounting_height") or 2400.0)')))  # falsy-ok: lint self-test string
+    expect("invented-dimension lint catches a named default (build_scene wall height)",
+           bool(invented.search('h = m(w.get("height") or default_h)')))
+    made_up = [f"{p.relative_to(ROOT)}:{i}"
+               for p in code
+               for i, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1)
+               if invented.search(line) and "default-ok:" not in line and "invented.search(" not in line]
+    expect("no silently invented design dimension (`get(dim) or <number>`)"
+           + (f" ({', '.join(made_up[:6])})" if made_up else ""), not made_up)
+    # Windows sharing locks: an open viewer made a plain overwrite of an
+    # out/ image fail with OSError 22, twice. The retrying writer first lived
+    # only in the render driver, so the pipeline runner hit it again: every
+    # writer that replaces pipeline output goes through archpipe.safe_io.
+    raw_copy = re.compile(r"shutil\.copy(file|2)?\(")
+    expect("raw-copy lint catches the historical run_bedroom line",
+           bool(raw_copy.search("shutil.copyfile(folder/'render.png',out/'bedroom.png')")))
+    copies = [f"{p.relative_to(ROOT)}:{i}"
+              for p in code
+              for i, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1)
+              if raw_copy.search(line) and "raw_copy.search(" not in line]
+    expect("output files are replaced via archpipe.safe_io, not a raw copy"
+           + (f" ({', '.join(copies[:5])})" if copies else ""), not copies)
     # Lamp colour is a lighting spec, not a look. Tanner Helland's display-
     # sRGB fit fed to Cycles as linear light made 2700 K lamps far too cool
     # and the night room blue; it was nearly "fixed" by tuning the camera's

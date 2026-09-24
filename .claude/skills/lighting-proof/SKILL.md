@@ -12,6 +12,20 @@ explicit specification by stable model identity and reject unmatched
 fixtures. A family write that appears successful is not proof its light
 definition survived save.
 
+A luminaire's position is its **measured emitter** (`archpipe.fixture_source`:
+Light Source symbol apex, else lens centre), and the spec's
+`mounting_height` means emitter height. Two consumers agreeing is not
+validation when both read the same wrong input: render and lux engine
+agreed to 3% while every source sat outside its fitting. Validate each
+input against something independent (`check_bedroom.py` measures the
+built geometry).
+
+The photometric file must describe the fitting it is attached to:
+`make_render_input` warns when the IES opening differs from the lens by
+more than x2 in size or x3 in shape (a strip file lit a round drum). A
+generic substitution is reported in every render caption until the
+specified product replaces it.
+
 Run the analytical report and the independent Blender direct-light probe
 on the same input. State maintenance factors, probe height, included
 geometry, bounce count and assumed reflectances. Compare direct with

@@ -172,7 +172,7 @@ def wall_footprint(wall):
     """
     x1, y1 = m(wall["start"][0]), m(wall["start"][1])
     x2, y2 = m(wall["end"][0]), m(wall["end"][1])
-    t = m(wall.get("thickness") or 100.0)
+    t = m(wall["thickness"])   # required: every extract carries it; never invent a wall
     dx, dy = x2 - x1, y2 - y1
     length = math.hypot(dx, dy)
     if length < 1e-9:
@@ -196,13 +196,12 @@ def level_elevation(data, level_id):
 
 def build_walls(data, mat):
     made = []
-    default_h = 2700.0
     for w in data.get("walls", []):
         corners = wall_footprint(w)
         if not corners:
             continue
         z = level_elevation(data, w.get("level"))
-        h = m(w.get("height") or default_h)
+        h = m(w["height"])   # required: every extract carries it; never invent a wall
         obj = mesh_from_polygon("wall_%s" % w["id"][:8], corners, z, h,
                                 finish_surface(data, 'walls', mat, w['id']))
         if obj:
@@ -291,7 +290,7 @@ def cut_openings(data, walls_made):
         at = m(o["at"])
         sill = m(o.get("sill") or 0)
         z = level_elevation(data, w.get("level"))
-        t = m(w.get("thickness") or 100.0)
+        t = m(w["thickness"])
 
         cx, cy = x1 + ux * at, y1 + uy * at
         cz = z + sill + height / 2.0
@@ -327,7 +326,7 @@ def build_furniture(data, mat):
         # mock spec used `size`. Reading the wrong key silently built
         # every proxy at the 600 x 600 default.
         size = f.get("size_mm") or f.get("size") or [600, 600]
-        h = m(size[2] if len(size) > 2 else f.get("height") or 750)
+        h = m(size[2] if len(size) > 2 else f["height"])   # required: a missing height is not 750 mm
         base = m(f.get('base_height_mm') or 0)
         bpy.ops.mesh.primitive_cube_add(size=1.0,
                                         location=(m(at[0]), m(at[1]), base + h / 2))
@@ -408,7 +407,7 @@ def build_lights(data):
         # A real fitting has a luminous opening, and its size is what makes
         # shadow edges soft. 0 would give razor shadows no room has.
         light.shadow_soft_size = max(
-            0.0, float(fx.get("luminous_size_mm") or 60.0) * 0.5 * MM_TO_M)  # falsy-ok: a 0 mm source is the razor-shadow case this avoids
+            0.0, float(fx.get("luminous_size_mm") or 60.0) * 0.5 * MM_TO_M)  # falsy-ok: a 0 mm source is the razor-shadow case this avoids; default-ok: shadow softness only, never illuminance
 
         # `x or 1.0` turned a dimmed-to-zero fixture back on at full output.
         output = 1.0 if fx.get("output") is None else float(fx["output"])
@@ -434,7 +433,12 @@ def build_lights(data):
             light.color = kelvin_to_rgb(float(kelvin))
 
         obj = bpy.data.objects.new(light.name, light)
-        obj.location = (m(at[0]), m(at[1]), m(fx.get("mounting_height") or 2400))
+        # The measured emitter height from make_render_input. No default: a
+        # silent 2400 mm stand-in is the same class of error as rendering
+        # from the insertion point, a source nobody specified.
+        if fx.get("mounting_height") is None:
+            raise ValueError("light %s has no mounting (emitter) height" % fx.get("id"))
+        obj.location = (m(at[0]), m(at[1]), m(fx["mounting_height"]))
         # Orientation only matters for an asymmetric distribution, but when
         # it matters it matters by a factor of four.
         obj.rotation_euler = (0.0, 0.0, math.radians(

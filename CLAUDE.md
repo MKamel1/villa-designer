@@ -58,7 +58,7 @@ back each one forces the design. Everything here follows from that.
 ## Before you claim something works
 
 ```bash
-PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 108 checks
+PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 116 checks
 ```
 
 Every stage command exits non-zero when its gate is closed — that is by
@@ -73,6 +73,12 @@ plot, `design` exits 1 on a violation.
   .NET 10; 2025 is on .NET 8. 2025 stays attached as a fallback.
 - **`.rvt` and `.rfa` authored in 2027 can never open in 2025.** One-way
   door, accepted deliberately.
+- **An insertion point is not the functional point, and a parameter
+  write that succeeds may move nothing.** Ceiling-hosted pendant families
+  ignored the host offset (-700 and -400 mm both emitted at 2243 mm);
+  the lever was `Ceiling To B.O. Fixture`. Verify what the spec names
+  (the emitter) from built geometry, and find levers by measured effect
+  (`revit/probe_fixture_drop.py`). Details in `docs/LEARNINGS.md`.
 - **A family symbol must be activated before placement** — `sym.Activate()`
   then `doc.Regenerate()`. Every family tested loaded **inactive**.
   Measured correction to the earlier assumption: in Revit 2027 this does
@@ -155,7 +161,7 @@ stand-in and means nothing for the real site.
     src/archpipe/blender/       scene build, photometric calibration,
                                 lux measurement from the render itself
     revit/           extractor, pyRevit extension, probe, test-model builder
-    scripts/verify.py 108 checks, positive and negative
+    scripts/verify.py 116 checks, positive and negative
 
 ## Evidence authority update — 2026-09-24
 

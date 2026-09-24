@@ -155,6 +155,16 @@ class RenderQATests(unittest.TestCase):
         warm = self.report(night, base=(135, 118, 100))
         self.assertEqual(self.status(warm, "colour_cast"), ["PASS"])
 
+    def test_strongly_warm_lamplit_night_is_advisory_not_a_fail(self):
+        """2700 K lamps under the fixed tungsten preset ARE warm. A FAIL here
+        could only be cleared by retuning white balance: in-camera cheating."""
+        night = dict(GOOD_QA, daylight=False)
+        r = self.report(night, base=(190, 140, 90))
+        self.assertEqual(self.status(r, "colour_cast"), ["WARN"])
+        self.assertTrue(r["passed"])
+        day = self.report(base=(190, 140, 90))           # daylight: still a defect
+        self.assertEqual(self.status(day, "colour_cast"), ["FAIL"])
+
     def test_locked_exposure_reports_tonal_as_warning(self):
         locked = dict(GOOD_QA, exposure_locked=True)
         r = self.report(locked, base=(45, 45, 44))
@@ -166,6 +176,14 @@ class RenderQATests(unittest.TestCase):
                         lights={"on": False, "count": 0, "with_ies": 0})
         flat = self.report(overcast, clip_fraction=0.0, window="dim")
         self.assertEqual(self.status(flat, "highlights_present"), ["WARN"])
+
+    def test_view_missing_its_subject_fails(self):
+        qa = dict(GOOD_QA, subjects=[{"id": "LT-03", "in_frame": False, "screen": [0.08, 2.59]},
+                                     {"id": "FN-BED", "in_frame": True, "coverage": 0.4}])
+        r = self.report(qa)
+        self.assertEqual(r["failed"], ["view_subject:LT-03"])
+        ok = dict(GOOD_QA, subjects=[{"id": "LT-03", "in_frame": True, "screen": [0.5, 0.7]}])
+        self.assertTrue(self.report(ok)["passed"])
 
     def test_log_parsing(self):
         log = "noise\nSCENE QA {\"camera\": {\"pitch_deg\": 90}}\nSCENE wrote x"

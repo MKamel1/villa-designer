@@ -3,7 +3,7 @@ import json
 import unittest
 from pathlib import Path
 
-from archpipe.fixture_source import source_point
+from archpipe.fixture_source import photometry_matches_fitting, source_point
 
 ROOT = Path(__file__).resolve().parents[1]
 # The fixture meshes of the model built BEFORE the fix, frozen so the
@@ -39,6 +39,26 @@ class SourcePointTests(unittest.TestCase):
         self.assertAlmostEqual(got["LT-04"][2], 2600, delta=2)    # linear: lens at the ceiling
         for k in data:
             self.assertIsNotNone(got[k], k)
+
+
+class PhotometryMatchesFittingTests(unittest.TestCase):
+    """Real IES luminous dimensions against the real fitting lenses."""
+
+    def setUp(self):
+        self.meshes = json.loads(PRE_FIX.read_text(encoding="utf-8"))
+
+    def test_strip_file_on_round_drum_is_flagged(self):          # LT-05, LGLled.ies
+        problems = photometry_matches_fitting([594, 24, 3], self.meshes["LT-05"])
+        self.assertEqual(len(problems), 2, problems)               # size AND shape
+
+    def test_short_strip_file_on_long_linear_is_flagged(self):   # LT-04, LGLled.ies
+        problems = photometry_matches_fitting([594, 24, 3], self.meshes["LT-04"])
+        self.assertEqual(len(problems), 1, problems)
+        self.assertIn("1826", problems[0])
+
+    def test_matching_opening_is_quiet(self):                    # negative case
+        self.assertEqual(photometry_matches_fitting([1800, 55, 3], self.meshes["LT-04"]), [])
+        self.assertEqual(photometry_matches_fitting([204, 0, 0], self.meshes["LT-01"]), [])
 
 
 if __name__ == "__main__":

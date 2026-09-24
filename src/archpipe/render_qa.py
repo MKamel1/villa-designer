@@ -132,11 +132,25 @@ def check(image_path, qa: dict) -> dict:
         lamp_lit = qa.get("lights", {}).get("on") and not qa.get("daylight", True)
         cool_limit = COOL_LAMPLIT_FAIL if lamp_lit else COOL_DAYLIGHT_FAIL
         bad = cast > CAST_FAIL or (warm == "cool" and cast > cool_limit)
-        add("colour_cast", "FAIL" if bad else "PASS",
-            f"mid-tone cast {cast:.3f} ({warm}; limit {CAST_FAIL} warm, {cool_limit} cool)",
+        # A WARM lamp-lit scene under the fixed tungsten preset is what 2700 K
+        # lamps physically look like. Failing it could only be "fixed" by
+        # retuning white balance -- the in-camera compensation ADR-0013
+        # forbids. So it is advisory: check the lamp spec, not the camera.
+        status = "FAIL" if bad else "PASS"
+        if bad and lamp_lit and warm == "warm":
+            status = "WARN"
+        add("colour_cast", status,
+            f"mid-tone cast {cast:.3f} ({warm}; limit {CAST_FAIL} warm, {cool_limit} cool)"
+            + ("; advisory: warm lamp light is physical, check the lamp spec" if status == "WARN" else ""),
             "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue.")
 
     # --- Checks that need to know what the scene contained --------------------
+    # A fixed camera over a design that moves: the old detail view was named
+    # for a pendant it never framed, and nothing noticed.
+    for sub in qa.get("subjects", []):
+        add(f"view_subject:{sub['id']}", "PASS" if sub.get("in_frame") else "FAIL",
+            f"coverage {sub.get('coverage')} screen {sub.get('screen')}" + (f" {sub['note']}" if sub.get("note") else ""),
+            "The detail view was named for a pendant it never showed.")
     cam = qa.get("camera", {})
     if "pitch_deg" in cam:
         off = abs(cam["pitch_deg"] - 90.0)

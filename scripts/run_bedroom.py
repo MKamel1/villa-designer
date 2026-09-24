@@ -10,14 +10,14 @@ import hashlib
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
 import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
-from archpipe.review_extract import review_model
+from archpipe.review_extract import review_model  # noqa: E402
+from archpipe.safe_io import copy_file  # noqa: E402
 
 
 def digest(path):
@@ -55,6 +55,27 @@ def run(argv, label, env=None, expected=None, timeout=360):
         raise RuntimeError(label + ' produced no fresh output; exit zero is insufficient')
     print('PASS ' + label, flush=True)
     return res
+
+
+def pid_alive(pid: int) -> bool:
+    """Whether a local process exists. Never signals it: on Windows
+    `os.kill(pid, 0)` TERMINATES the process rather than probing it."""
+    if os.name == 'nt':
+        import ctypes
+        handle = ctypes.windll.kernel32.OpenProcess(0x1000, False, pid)  # QUERY_LIMITED_INFORMATION
+        if not handle:
+            return False
+        code = ctypes.c_ulong()
+        ctypes.windll.kernel32.GetExitCodeProcess(handle, ctypes.byref(code))
+        ctypes.windll.kernel32.CloseHandle(handle)
+        return code.value == 259                                          # STILL_ACTIVE
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
 
 
 def main():
@@ -176,15 +197,15 @@ def main():
             kind = job['manifest']['kind']
             if kind=='render':
                 camera = job['manifest']['parameters']['camera']
-                shutil.copyfile(folder/'render.png',out/('bedroom-'+camera+'.png'))
+                copy_file(folder/'render.png',out/('bedroom-'+camera+'.png'))
                 if camera=='bed':
-                    shutil.copyfile(folder/'render.png',out/'bedroom.png')
-                    shutil.copyfile(folder/'render.log',out/'run-logs/remote-build_scene.py.log')
+                    copy_file(folder/'render.png',out/'bedroom.png')
+                    copy_file(folder/'render.log',out/'run-logs/remote-build_scene.py.log')
             elif kind=='probe':
-                shutil.copyfile(folder/'lux.json',out/'lux-direct.json')
-                shutil.copyfile(folder/'probe.log',out/'run-logs/remote-measure_lux.py.log')
+                copy_file(folder/'lux.json',out/'lux-direct.json')
+                copy_file(folder/'probe.log',out/'run-logs/remote-measure_lux.py.log')
             elif kind=='radiance':
-                shutil.copyfile(folder/'radiance-report.json',out/'radiance-report.json')
+                copy_file(folder/'radiance-report.json',out/'radiance-report.json')
                 result['checks']['radiance'] = job['detail']
         run([sys.executable, ROOT/'scripts/compare_lux.py', out/'lux-direct.json',
              '--extract', out/'bedroom-render.json'], 'photometry_agreement', env)
@@ -221,7 +242,18 @@ if __name__ == '__main__':
     try:
         fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
     except FileExistsError:
-        raise SystemExit('Another bedroom run owns out/bedroom-run.lock; inspect its process before retrying.')
+        # A killed run cannot clean up (its `finally` never runs), so a lock
+        # whose recorded owner is provably gone is stale. Anything else --
+        # a live owner, or an unreadable lock -- still stops the run.
+        try:
+            owner = int(lock.read_text().strip())
+        except (OSError, ValueError):
+            owner = None
+        if owner is None or pid_alive(owner):
+            raise SystemExit('Another bedroom run owns out/bedroom-run.lock; inspect its process before retrying.')
+        print(f'Removing stale out/bedroom-run.lock: owner process {owner} is not running')
+        lock.unlink()
+        fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
     try:
         with os.fdopen(fd, 'w') as fh:
             fh.write(str(os.getpid()))

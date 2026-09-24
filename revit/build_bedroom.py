@@ -603,8 +603,10 @@ def main():
 
     rm = spec["room"]
     w_mm, d_mm = float(rm["width"]), float(rm["depth"])
-    t_mm = float(rm.get("wall_thickness") or 200.0)
-    ch_mm = float(rm.get("ceiling_height") or 2700.0)
+    # Design dimensions are REQUIRED: a silent default builds a room nobody
+    # specified and every downstream check agrees with it (verify.py lint).
+    t_mm = float(rm["wall_thickness"])
+    ch_mm = float(rm["ceiling_height"])
 
     levels = sorted(FilteredElementCollector(doc).OfClass(Level).ToElements(),
                     key=lambda l: l.Elevation)
@@ -717,7 +719,7 @@ def main():
                 rec["element"] = str(inst.Id)
                 rec["mark"] = stamp_mark(inst, fn["id"])
             else:
-                h = float(fn.get("height") or 800.0)
+                h = float(fn["height"])   # a proxy is built to the spec's height, never an invented one
                 ds = proxy_box(doc, fn["id"], fn["type"], float(at[0]),
                                float(at[1]), float(size[0]), float(size[1]),
                                h, float(fn.get("rotation") or 0.0), level)
@@ -755,7 +757,7 @@ def main():
                 raise RuntimeError(why)
             activate(doc, sym)
             at = lt["at"]
-            z = float(lt.get("mounting_height") or 2400.0)
+            z = float(lt["mounting_height"])   # emitter height; required, never defaulted
             pt = XYZ(ft(at[0]), ft(at[1]), level.Elevation + ft(z))
             host_el = None
             if lt.get("host") == "ceiling":

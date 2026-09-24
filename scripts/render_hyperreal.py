@@ -15,6 +15,7 @@ Requires scripts/fetch_asset_library.py to have been run already.
 from __future__ import annotations
 import argparse
 import json
+import os
 import shlex
 import sys
 import time
@@ -26,6 +27,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from archpipe import render_qa
+from archpipe.safe_io import save_bytes
 from archpipe.solar import sun_position
 from render_remote import _ssh
 from workstation import deploy, digest
@@ -46,25 +48,13 @@ TONAL = {"highlight_clipping", "highlights_present", "shadows_present", "exposur
 LOOKS = ["AgX - Medium High Contrast", "AgX - High Contrast"]
 
 
-def save(path: Path, data: bytes, attempts: int = 10) -> None:
-    """Write via a temp file and swap it in, retrying a Windows sharing lock.
-
-    An image viewer or the search indexer holding the previous render made
-    a plain overwrite fail with OSError 22 halfway through a batch.
-    """
-    tmp = path.with_name(path.name + ".part")
-    tmp.write_bytes(data)
-    for i in range(attempts):
-        try:
-            tmp.replace(path)
-            return
-        except OSError:
-            if i == attempts - 1:
-                raise
-            time.sleep(1.0)
+def save(path: Path, data: bytes) -> None:
+    """Temp file plus retried replace (archpipe.safe_io: Windows sharing locks)."""
+    save_bytes(path, data)
 
 
-def write_caption(out: Path, qa: dict, stdout: str, a, preset: dict, input_id: str, look: str) -> None:
+def write_caption(out: Path, qa: dict, stdout: str, a, preset: dict, input_id: str, look: str,
+                  sun=None) -> None:
     """What in this image is the design, what is invented, what is assumed.
 
     Renders are used to make real design decisions, so every image carries
@@ -86,7 +76,13 @@ def write_caption(out: Path, qa: dict, stdout: str, a, preset: dict, input_id: s
     caption = {
         "image": out.name,
         "condition": {"time": a.time, "when_local": a.when if a.time == "day" else None,
-                      "sky": as_json(line("SCENE SKY")), "interior_lights": a.lights},
+                      "sky": as_json(line("SCENE SKY")), "interior_lights": a.lights,
+                      # Sun direction is computed from the site file, whose
+                      # location and north angle are EXAMPLE placeholders: a
+                      # sun patch is illustrative until the real site is set.
+                      "sun": ({"altitude_deg": round(sun.altitude, 2), "azimuth_deg": round(sun.azimuth, 2)}
+                              if sun is not None and a.time == "day" else None),
+                      "site": _site_note()},
         "camera": {"exposure_ev": qa.get("exposure_ev"), "exposure_locked": qa.get("exposure_locked"),
                    "look": look, "white_balance_k": qa.get("white_balance_k"),
                    "lens_mm": qa.get("camera", {}).get("lens_mm"), "samples": a.samples, "resolution": a.res},
@@ -97,6 +93,8 @@ def write_caption(out: Path, qa: dict, stdout: str, a, preset: dict, input_id: s
         "stand_ins_not_specified_products": [
             "furniture geometry: procedural, manufacturer-neutral (archpipe.furniture)",
             "light fixtures: generic Revit library families and generic IES files, not specified products",
+            {"photometric file does not describe the fitting": json.loads(Path(a.input).read_text(
+                encoding="utf-8")).get("join", {}).get("photometry_fitting_mismatch", {})},
             f"view out of the window: photographed HDRI '{view_hdri}', not the real site"],
         "assumptions": {"glass_transmittance": qa.get("glass", {}).get("transmittance"),
                         "finish_overrides": as_json(line("SCENE FINISHES")),
@@ -105,6 +103,15 @@ def write_caption(out: Path, qa: dict, stdout: str, a, preset: dict, input_id: s
         "design_input": {"extract": str(a.input), "sha256": input_id},
     }
     save(out.with_suffix(".caption.json"), json.dumps(caption, indent=2).encode("utf-8"))
+
+
+def _site_note():
+    s = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))
+    loc = s.get("location", s)
+    return {"file": "spec/villa-site.yaml", "latitude": loc.get("latitude"),
+            "longitude": loc.get("longitude"), "city": loc.get("city"),
+            "north_angle": s.get("north_angle"),
+            "placeholder": "EXAMPLE" in str(s.get("name", "")) + str(loc.get("city", ""))}
 
 
 def site():
@@ -179,8 +186,9 @@ def main():
     lock = None
     for view in views:
         stamp = f"{a.time}-{view}" + (f"-{a.tag}" if a.tag else "")
-        def render(look, exposure=None):
-            remote_out = f"{root}/inputs/{input_id}_{stamp}.png"
+        def render(look, exposure=None, suffix=""):
+            name = stamp + suffix
+            remote_out = f"{root}/inputs/{input_id}_{name}.png"
             flags = (f"--extract {shlex.quote(remote_input)} --out {shlex.quote(remote_out)} "
                      f"--interior --profile final --photo-camera {view} "
                      f"--interior-lights {a.lights} --sun-alt {sun.altitude:.3f} "
@@ -210,7 +218,7 @@ def main():
                 print(res.stderr.decode(errors="replace")[-3000:], file=sys.stderr)
                 raise RuntimeError(f"{view}: render failed (exit {res.returncode})")
             img = _ssh(a.host, f"cat {shlex.quote(remote_out)}").stdout
-            out = ROOT / f"out/photoreal/bedroom-{stamp}.png"
+            out = ROOT / f"out/photoreal/bedroom-{name}.png"
             out.parent.mkdir(parents=True, exist_ok=True)
             save(out, img)
             save(out.with_suffix(".log"), stdout.encode("utf-8"))
@@ -228,7 +236,7 @@ def main():
                     print(f"    QA {r['status']}: {r['check']} -- {r['detail']}")
             print("    QA PASS" if report["passed"] else "    QA FAIL: " + ", ".join(report["failed"]))
             qa = render_qa.scene_qa_from_log(stdout)
-            write_caption(out, qa, stdout, a, preset, input_id, look)
+            write_caption(out, qa, stdout, a, preset, input_id, look, sun)
             return report, qa
 
         if lock is not None:
@@ -241,7 +249,23 @@ def main():
             if failed and failed <= TONAL:
                 other = next(l for l in LOOKS if l != a.look)
                 print(f"    tonal-only failure {sorted(failed)}; retrying with look '{other}'")
-                retry, rqa = render(other)
+                # Rendered under its own name and promoted only if it passes.
+                # Rendering over the original left the files on disk from the
+                # failed retry while the report and exposure lock came from
+                # the first render: an image that disagreed with its own QA.
+                retry, rqa = render(other, suffix="-retry")
+                tried = ROOT / f"out/photoreal/bedroom-{stamp}-retry.png"
+                for ext in (".png", ".log", ".qa.json", ".caption.json"):
+                    src = tried.with_suffix(ext) if ext != ".png" else tried
+                    dst = ROOT / f"out/photoreal/bedroom-{stamp}{ext}"
+                    if retry["passed"]:
+                        os.replace(src, dst)
+                        if ext.endswith(".json"):   # records name their own image
+                            rec = json.loads(dst.read_text(encoding="utf-8"))
+                            rec["image"] = str(rec["image"]).replace(tried.name, dst.with_suffix(".png").name)
+                            dst.write_text(json.dumps(rec, indent=2), encoding="utf-8")
+                    elif src.exists():
+                        src.unlink()
                 if retry["passed"]:
                     report, qa = retry, rqa
             if not a.no_lock_exposure and len(views) > 1:

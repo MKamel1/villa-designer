@@ -37,9 +37,9 @@ async def main():
         async with ClientSession(read, write) as client:
             await client.initialize()
             tools = await client.list_tools()
-            assert len(tools.tools) == 12
-            assert {'stage_context', 'lookup_evidence', 'review_stage'} <= {t.name for t in tools.tools}
-            print('PASS real MCP handshake and twelve typed tools')
+            assert len(tools.tools) == 13
+            assert {'stage_context', 'lookup_evidence', 'review_stage', 'check_fixture_sources'} <= {t.name for t in tools.tools}
+            print('PASS real MCP handshake and thirteen typed tools')
             context = payload(await client.call_tool('stage_context', {'stage':0}))
             assert context['example'] and 'budget' in context['missing_inputs']
             evidence = payload(await client.call_tool('lookup_evidence', {'query':'shading','stage':3}))
@@ -67,6 +67,11 @@ async def main():
             light = payload(await client.call_tool('lighting_at', {'x_mm':1725, 'y_mm':3300, 'height_mm':900}))
             assert 300 < light['direct_lux'] < 500
             print('PASS cited catalogue and real photometric point')
+            sources = payload(await client.call_tool('check_fixture_sources', {}))
+            assert sources['passed'], sources
+            assert all(f['basis'] != 'no light-source or lens geometry' for f in sources['fixtures'])
+            assert any(f['photometry_mismatch'] for f in sources['fixtures'])   # known generic IES
+            print('PASS fixture emitters at spec; photometry mismatches reported')
             render = ROOT/'out/photoreal/bedroom-off-window.png'
             if render.is_file() and render.with_suffix('.log').is_file():
                 qa = payload(await client.call_tool('check_render',

@@ -17,6 +17,7 @@ error. The official Python library is pinned to the maintained 1.30 line.
 | `review_model` | Cited findings, measured furniture and scope exclusions | Read only; dwelling scope is default |
 | `catalogue_item` | Legacy diagnostic dimensions, source and verification status | Read only |
 | `lighting_at` | Direct illuminance at a point in millimetres | Read only; no shadow or uniformity claim |
+| `check_fixture_sources` | Each luminaire's measured emitter (Light Source apex or lens centre) against the spec height, and whether its IES file's opening matches the fitting | Read only; the insertion point is never the source. `passed` covers emitter height (25 mm); a photometry mismatch is reported, not failed |
 | `check_render` | Automatic checks on a presentation render (window view, daylight through glass, photometry bound, level camera, colour cast, clipping, CAD colours, textiles, cloth) | Read only; passing means no *known* defect, so still look at the image |
 | `propose_example_edit` | Before/after placement and invalidated stages | Writes a candidate under `out/proposals`; does not change current design |
 | `run_bedroom_example` | Complete structured acceptance evidence | Rebuilds generated example outputs locally and renders on configured workstation |

@@ -28,7 +28,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from archpipe import photometry as ph                        # noqa: E402
-from archpipe.fixture_source import source_point             # noqa: E402
+from archpipe.fixture_source import photometry_matches_fitting, source_point  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -73,6 +73,7 @@ def main(argv=None) -> int:
     by_id = {l["id"]: l for l in spec.get("lighting", [])}
 
     joined, orphans, unmatched, no_source = [], [], [], []
+    mismatch = {}
     for fx in got.get("lighting", []):
         key = fx.get("mark")
         s = by_id.get(key)
@@ -91,6 +92,17 @@ def main(argv=None) -> int:
             at, height, basis = fx["at"], fx.get("mounting_height"), "insertion point (unverified)"
         else:
             at, height, basis = [src[0], src[1]], src[2], src[3]
+        # The file must describe THIS fitting: a strip file on a round drum
+        # lights a drum as a strip. Reported, not failed: a recorded generic
+        # substitution is still the scheme under review (the spec says so).
+        try:
+            problems = photometry_matches_fitting(
+                [v * 1000.0 for v in ph.load(local_ies / s["ies"]).luminous_dimensions_m()],
+                fx.get("meshes"))
+        except Exception as exc:
+            problems = ["IES not readable for the check: %s" % exc]
+        if problems:
+            mismatch[key] = problems
         joined.append({
             # Geometry from Revit, which is authoritative and verified.
             "id": key,
@@ -129,7 +141,8 @@ def main(argv=None) -> int:
                    "matched": len(joined),
                    "orphan_fixtures": orphans,
                    "spec_items_not_in_model": unmatched,
-                   "fixtures_without_source_geometry": no_source}
+                   "fixtures_without_source_geometry": no_source,
+                   "photometry_fitting_mismatch": mismatch}
 
     # Room height, which the extract does not carry but the scene needs to
     # build a ceiling.
@@ -153,6 +166,8 @@ def main(argv=None) -> int:
             print(f"    {o}")
     if unmatched:
         print(f"  {len(unmatched)} spec item(s) not found in the model: {unmatched}")
+    for k, v in mismatch.items():
+        print(f"  WARNING {k}: photometric file is not this fitting -- {'; '.join(v)}")
     if no_source:
         print(f"  {len(no_source)} fixture(s) with no source geometry, insertion point used: {no_source}")
     return 1 if (orphans or unmatched or no_source) else 0

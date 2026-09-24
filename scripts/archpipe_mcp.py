@@ -229,6 +229,43 @@ def check_render(image: str = 'out/photoreal/bedroom-off-window.png') -> dict:
     return render_qa.check(png, render_qa.scene_qa_from_log(log.read_text(encoding='utf-8', errors='replace')))
 
 
+@mcp.tool(annotations=READ)
+def check_fixture_sources(path: str = 'out/bedroom-from-revit.json',
+                          spec: str = 'spec/bedroom-test.yaml') -> dict:
+    """Where each luminaire actually emits, against the spec, and whether its IES file fits it.
+
+    The emitter is measured from the built geometry (Light Source symbol
+    apex, else lens centre), never the insertion point: comparing insertion
+    heights passed while the bedroom's emitters sat 57-466 mm off spec. Also
+    reports a photometric file whose opening cannot be this fitting (a strip
+    file on a round drum).
+    """
+    import yaml
+    from archpipe.fixture_source import photometry_matches_fitting, source_point
+    model = json.loads(local_path(path).read_text(encoding='utf-8'))
+    wanted = {l['id']: l for l in yaml.safe_load(local_path(spec).read_text(encoding='utf-8')).get('lighting', [])}
+    ies_dir = photometry.revit_ies_dir()
+    rows = []
+    for fx in model.get('lighting', []):
+        s = wanted.get(fx.get('mark'))
+        src = source_point(fx.get('meshes'))
+        row = {'id': fx.get('mark'), 'family': fx.get('family'),
+               'emitter_mm': [round(v, 1) for v in src[:3]] if src else None,
+               'basis': src[3] if src else 'no light-source or lens geometry',
+               'insertion_height_mm': fx.get('mounting_height')}
+        if s:
+            row['spec_height_mm'] = s['mounting_height']
+            row['height_error_mm'] = round(src[2] - float(s['mounting_height']), 1) if src else None
+            try:
+                dims = [v * 1000.0 for v in photometry.load(ies_dir / s['ies']).luminous_dimensions_m()]
+                row['photometry_mismatch'] = photometry_matches_fitting(dims, fx.get('meshes'))
+            except Exception as exc:
+                row['photometry_mismatch'] = ['IES not readable: %s' % exc]
+        rows.append(row)
+    ok = all(r.get('height_error_mm') is not None and abs(r['height_error_mm']) <= 25 for r in rows)
+    return {'passed': ok, 'tolerance_mm': 25, 'fixtures': rows}
+
+
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=True, openWorldHint=True))
 def run_bedroom_example(resume: bool = True) -> dict:
     """Rebuild the current approved example spec, overwriting its generated model and outputs.
