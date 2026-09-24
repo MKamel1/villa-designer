@@ -105,11 +105,21 @@ furniture:
 # Three deliberate layers, so the "no lone central fixture" rule passes and
 # its negative case can be tested by deleting layers. Positions now follow
 # the corrected Revit layout, not the historical mock's fixed coordinates.
+#
+# mounting_height is the height of the LIGHT SOURCE (the emitter: the
+# family's Light Source apex, else its lens), NOT the insertion point.
+# check_bedroom.py measures it from the built geometry. Before 2026-09-24
+# emitters sat 57-466 mm off these figures while every check agreed.
 lighting:
+  # CLIENT DECISION 2026-09-24: was 2400, which this cone cannot reach --
+  # its shade top would be at 2717 mm, through the 2700 ceiling. As built
+  # at the family default it emitted at 1933 with the shade bottom at
+  # 1920, below the 2100 door head, in the walkway. 2233 = a 150 mm cord
+  # (assumption), shade top 2550. Floor centre 334 -> 259 lx, peak 998 -> 628.
   - id: LT-01
     layer: ambient
     at: [2100, 1800]
-    mounting_height: 2400
+    mounting_height: 2233
     host: ceiling
     ies: PLD1A21.ies
     lumens: 2780
@@ -154,7 +164,10 @@ lighting:
     layer: accent
     at: [400, 2300]
     rotation: 90       # measured long housing runs along, not through, west wall
-    mounting_height: 2400
+    # CLIENT DECISION 2026-09-24: was 2400. A surface-mounted linear emits
+    # at 2600 by construction (102 mm body under a 2700 ceiling); 2400
+    # would need a suspended fitting. Wardrobe face 328 -> 258 lx.
+    mounting_height: 2600
     host: ceiling
     ies: LGLled.ies
     lumens: 1008
