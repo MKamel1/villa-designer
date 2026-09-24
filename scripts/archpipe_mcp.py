@@ -187,6 +187,24 @@ def propose_example_edit(item_id: str, x_mm: float, y_mm: float,
             'status': 'Unbuilt proposal; current model unchanged.'}
 
 
+@mcp.tool(annotations=READ)
+def check_render(image: str = 'out/photoreal/bedroom-off-window.png') -> dict:
+    """Run the automatic presentation-render checks on a saved render.
+
+    Each check is a defect that once shipped and had to be spotted by eye
+    (void/mirror window, glass blocking daylight, lost photometry, tilted
+    camera, colour cast, clipping, CAD colours, grey textiles, collapsed
+    cloth). Reads the image and its `.log` beside it. Passing means no
+    KNOWN defect; still look at the image for new ones.
+    """
+    from archpipe import render_qa
+    png = local_path(image)
+    log = png.with_suffix('.log')
+    if not log.is_file():
+        raise ValueError('no render log beside the image; render with scripts/render_hyperreal.py')
+    return render_qa.check(png, render_qa.scene_qa_from_log(log.read_text(encoding='utf-8', errors='replace')))
+
+
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=True, openWorldHint=True))
 def run_bedroom_example(resume: bool = True) -> dict:
     """Rebuild the current approved example spec, overwriting its generated model and outputs.

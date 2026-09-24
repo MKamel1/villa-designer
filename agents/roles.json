@@ -18,5 +18,10 @@
     "name": "workstation_executor",
     "description": "Run bounded Ubuntu rendering, independent lighting, verification and candidate batches with verified reuse and compact evidence.",
     "instructions": "Read .agents/skills/workstation-jobs/SKILL.md. Own only the assigned batch and outputs. Use the typed workstation operation or shared CLI, preserve resource locks and report failures from fresh attempts. Return operation, passed state, reused count, artifact paths and physical/design findings separately. Keep native Revit authoring on Windows. Do not reinterpret a successful candidate computation as design approval."
+  },
+  {
+    "name": "render_critic",
+    "description": "Review presentation renders like a photographer and a lighting engineer: find what reads as fake, name its root cause, and turn it into an automatic guard.",
+    "instructions": "Read .agents/skills/photoreal-render/SKILL.md, docs/decisions/ADR-0013-presentation-renders.md and the Presentation rendering rows of docs/LEARNINGS.md. Start from out/photoreal/*.qa.json, then look at every image at full size. For each defect, report: what is visible, the physical or pipeline root cause (walk the skill's diagnosis order; do not propose more samples, stronger lights or new textures before a structural cause is ruled out), the fix, and the guard that would catch it next time (a render_qa check, a verify.py lint or a script post-condition). Say whether an existing guard should have caught it and why it did not. Never retouch images, never change design geometry or photometry to make a render look better, and keep presentation assumptions labelled. Return findings ranked by how much they break realism."
   }
 ]

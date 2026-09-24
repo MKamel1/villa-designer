@@ -408,7 +408,7 @@ def build_lights(data):
         # A real fitting has a luminous opening, and its size is what makes
         # shadow edges soft. 0 would give razor shadows no room has.
         light.shadow_soft_size = max(
-            0.0, float(fx.get("luminous_size_mm") or 60.0) * 0.5 * MM_TO_M)
+            0.0, float(fx.get("luminous_size_mm") or 60.0) * 0.5 * MM_TO_M)  # falsy-ok: a 0 mm source is the razor-shadow case this avoids
 
         # `x or 1.0` turned a dimmed-to-zero fixture back on at full output.
         output = 1.0 if fx.get("output") is None else float(fx["output"])
@@ -426,7 +426,7 @@ def build_lights(data):
             with_ies += 1
             aim = float(fx.get("rotation") or 0.0) + IES_AZIMUTH_OFFSET_DEG
         else:
-            lumens = float(fx.get("lumens") or DEFAULT_LUMENS)
+            lumens = DEFAULT_LUMENS if fx.get("lumens") is None else float(fx["lumens"])
             light.energy = lumens * output
 
         kelvin = fx.get("kelvin")
@@ -990,8 +990,12 @@ def main():
             bpy.context.scene.view_settings.exposure = ev
             print("SCENE METER log-average %.4g -> exposure %.2f stops" % (logavg, ev))
         wb = opt["wb"] or (5500.0 if not opt["interior_lights"] else 3000.0)
-        print("SCENE WHITE BALANCE %s K %s" % (wb, "applied" if photoreal.white_balance(wb)
+        wb_ok = photoreal.white_balance(wb)
+        print("SCENE WHITE BALANCE %s K %s" % (wb, "applied" if wb_ok
                                               else "unavailable (Blender < 4.3)"))
+        # One machine-readable line for archpipe.render_qa; keep it last
+        # before rendering so it describes the scene exactly as rendered.
+        print("SCENE QA " + json.dumps(photoreal.scene_qa(data, wb_ok)))
 
     print("SCENE walls=%d floors=%d openings_cut=%d furniture=%d lights=%d"
           % (len(walls), len(floors), holes, len(furn), len(lights)))

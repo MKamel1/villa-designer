@@ -208,6 +208,12 @@ dies on `None.Title`. `resolve_doc()` handles all three contexts.
 
 ## 7. Where to start
 
+**Launch your assistant from `arch-pipeline/`.** Claude Code discovers
+the project's agents and skills (`render_critic`, `lighting_reviewer`,
+`photoreal-render` and the rest) only in the directory it starts in. A
+session started in the parent folder silently has none of them. That
+happened once, and nobody noticed until an agent call failed.
+
 If the client has supplied plot and brief data: **run the Stage 0
 interview**, then Stage 1 and 2. That is the highest-value work and needs
 no Revit.

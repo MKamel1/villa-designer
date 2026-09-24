@@ -67,7 +67,7 @@ def main() -> int:
             fx["at"][0], fx["at"][1], fx["mounting_height"],
             aim=float(fx.get("rotation") or 0.0),
             layer=fx.get("layer", "ambient"),
-            output=float(fx.get("output") or 1.0)))
+            output=1.0 if fx.get("output") is None else float(fx["output"])))
 
     # The render applies no maintenance factor -- it is an initial-condition
     # simulation of the fittings as specified. Compare like with like.

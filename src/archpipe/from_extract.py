@@ -105,7 +105,7 @@ def convert(data: dict, *, name: str = "") -> Conversion:
         ident = lv.get("id") or f"L{len(levels)}"
         obj = Level(id=ident, name=lv.get("name") or ident,
                     elevation=float(lv.get("elevation") or 0.0),
-                    height=float(lv.get("height") or 2700.0))
+                    height=float(lv.get("height") or 2700.0))  # falsy-ok: a 0 mm storey is not a valid level
         levels.append(obj)
         by_uid[ident] = obj
     if not levels:
@@ -123,7 +123,7 @@ def convert(data: dict, *, name: str = "") -> Conversion:
     wall_types, seen = [], {}
     extracted_types = {t['id']: t for t in data.get('wall_types', [])}
     for w in data.get("walls", []):
-        t = float(w.get("thickness") or 100.0)
+        t = float(w.get("thickness") or 100.0)  # falsy-ok: a 0 mm wall is not valid geometry
         key = w.get('type') or f"WT-{t:g}"
         if key in seen:
             continue
@@ -143,7 +143,7 @@ def convert(data: dict, *, name: str = "") -> Conversion:
 
     walls = []
     for w in data.get("walls", []):
-        t = round(float(w.get("thickness") or 100.0), 3)
+        t = round(float(w.get("thickness") or 100.0), 3)  # falsy-ok: a 0 mm wall is not valid geometry
         walls.append(Wall(
             id=w["id"], level=level_of(w.get("level")),
             type=seen[w.get('type') or f"WT-{t:g}"],

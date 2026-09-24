@@ -46,11 +46,19 @@ back each one forces the design. Everything here follows from that.
 6. **Negative tests always.** Two false positives here passed their
    positive tests and were caught only by asking "does it stay quiet when
    it should?"
+7. **Every defect leaves a guard behind.** Before closing a defect, record
+   in `docs/LEARNINGS.md` why it was missed and which guard now catches it.
+   Prefer an automatic guard (a `render_qa`/`verify.py` check, a
+   post-condition or a regression) over prose. Prove the guard fails on a
+   *real* reproduction: two guards written against synthetic cases missed
+   the real defect. Diagnose the cause before tuning parameters; for
+   renders, follow the `photoreal-render` skill. Presentation renders
+   pass `render_qa` before anyone is shown them.
 
 ## Before you claim something works
 
 ```bash
-PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 104 checks
+PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 108 checks
 ```
 
 Every stage command exits non-zero when its gate is closed — that is by
@@ -147,4 +155,4 @@ stand-in and means nothing for the real site.
     src/archpipe/blender/       scene build, photometric calibration,
                                 lux measurement from the render itself
     revit/           extractor, pyRevit extension, probe, test-model builder
-    scripts/verify.py 104 checks, positive and negative
+    scripts/verify.py 108 checks, positive and negative

@@ -17,6 +17,7 @@ error. The official Python library is pinned to the maintained 1.30 line.
 | `review_model` | Cited findings, measured furniture and scope exclusions | Read only; dwelling scope is default |
 | `catalogue_item` | Published requirement and source | Read only |
 | `lighting_at` | Direct illuminance at a point in millimetres | Read only; no shadow or uniformity claim |
+| `check_render` | Automatic checks on a presentation render (window view, daylight through glass, photometry bound, level camera, colour cast, clipping, CAD colours, textiles, cloth) | Read only; passing means no *known* defect, so still look at the image |
 | `propose_example_edit` | Before/after placement and invalidated stages | Writes a candidate under `out/proposals`; does not change current design |
 | `run_bedroom_example` | Complete structured acceptance evidence | Rebuilds generated example outputs locally and renders on configured workstation |
 | `run_workstation_job` | Compact result, reuse count, artifact directory and failures | Runs a bounded Ubuntu verification, view batch, bedroom proof, benchmark, parameter sweep or Radiance simulation |

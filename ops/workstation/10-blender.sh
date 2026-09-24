@@ -56,9 +56,15 @@ if curl -fsSL "https://download.blender.org/release/Blender${SERIES}/blender-${V
     sha256sum -c "${TARBALL}.sha256" || { log "CHECKSUM FAILED"; exit 1; }
     log "checksum OK"
 else
-    log "WARNING: no published .sha256 -- integrity NOT verified"
-    log "         sha256 of what was downloaded:"
+    # This used to warn and carry on, and a wrong checksum-file name meant
+    # 4.5.14 installed unverified. A skipped integrity check now stops.
+    log "no published checksum for ${TARBALL}"
     sha256sum "${TARBALL}" | sed 's/^/           /'
+    if [ "${BLENDER_ALLOW_UNVERIFIED:-0}" != "1" ]; then
+        log "REFUSING to install unverified; set BLENDER_ALLOW_UNVERIFIED=1 to override"
+        exit 1
+    fi
+    log "WARNING: installing UNVERIFIED (BLENDER_ALLOW_UNVERIFIED=1)"
 fi
 
 log "extracting"

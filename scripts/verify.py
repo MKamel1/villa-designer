@@ -587,6 +587,33 @@ def main() -> int:
     else:
         print("  SKIP  no bedroom round-trip fixture")
 
+    print("\nLEARNED GUARDS (each exists because the defect shipped once)")
+    # Falsy-zero: `float(x or 1.0)` turns a deliberate 0 into the default.
+    # It silently made interior lights impossible to switch off, and the
+    # same line was repeated in compare_lux.py. The first version of this
+    # regex could not match the real bug (inner parentheses) and found
+    # nothing -- a guard is proven against the defect it targets. Where 0
+    # is itself invalid (a 0 mm wall), mark the line `# falsy-ok: reason`.
+    import re
+    falsy = re.compile(r"float\(.*\bor\s+([1-9][0-9.]*|[A-Z_]{3,})\s*\)")
+    expect("falsy-zero lint catches the historical bug line",
+           bool(falsy.search('energy = P * float(fx.get("output") or 1.0)')))
+    offenders = [f"{p.relative_to(ROOT)}:{i}"
+                 for top in ("src", "scripts") for p in (ROOT / top).rglob("*.py")
+                 for i, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1)
+                 if falsy.search(line) and "falsy-ok" not in line
+                 and "falsy.search(" not in line and "# Falsy" not in line]
+    expect("no numeric `x or <nonzero>` default that swallows an explicit zero"
+           + (f" ({', '.join(offenders[:5])})" if offenders else ""), not offenders)
+    # A skipped integrity check must stop the install, not print a warning.
+    installer = (ROOT / "ops/workstation/10-blender.sh").read_text(encoding="utf-8")
+    expect("Blender install refuses an unverified download unless explicitly allowed",
+           "BLENDER_ALLOW_UNVERIFIED" in installer)
+    # Presentation renders are checked by machine before anyone looks.
+    driver = (ROOT / "scripts/render_hyperreal.py").read_text(encoding="utf-8")
+    expect("render driver runs archpipe.render_qa on every image",
+           "render_qa.check(" in driver)
+
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     return 1 if FAILS else 0
 

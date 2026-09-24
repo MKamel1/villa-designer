@@ -25,6 +25,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe import render_qa
 from archpipe.solar import sun_position
 from render_remote import _ssh
 from workstation import deploy, digest
@@ -56,6 +57,10 @@ def main():
     ap.add_argument("--no-cloth", action="store_true")
     ap.add_argument("--no-dress", action="store_true")
     ap.add_argument("--tag", default="")
+    ap.add_argument("--allow-qa-fail", action="store_true",
+                    help="still exit 0 when archpipe.render_qa finds a defect")
+    ap.add_argument("--qa-break", default="",
+                    help="re-create historical defects (glass,view) to prove QA catches them")
     a = ap.parse_args()
     views = VIEWS if a.views == ["all"] else a.views
     bad = [v for v in views if v not in VIEWS]
@@ -87,6 +92,7 @@ def main():
     library = f"{root}/assets/library"
     script = f"{release}/src/archpipe/blender/build_scene.py"
 
+    qa_failed = []
     for view in views:
         stamp = f"{a.lights}-{view}" + (f"-{a.tag}" if a.tag else "")
         remote_out = f"{root}/inputs/{input_id}_{stamp}.png"
@@ -101,7 +107,8 @@ def main():
             flags += " --no-cloth"
         if a.no_dress:
             flags += " --no-dress"
-        cmd = (f"ARCHPIPE_ASSET_LIBRARY={shlex.quote(library)} {shlex.quote(blender)} "
+        cmd = (f"ARCHPIPE_ASSET_LIBRARY={shlex.quote(library)} "
+               f"ARCHPIPE_QA_BREAK={shlex.quote(a.qa_break)} {shlex.quote(blender)} "
                f"-b -t 8 --python-exit-code 1 -P {shlex.quote(script)} -- {flags}")
         started = time.monotonic()
         res = _ssh(a.host, cmd, timeout=3600)
@@ -116,11 +123,25 @@ def main():
         out = ROOT / f"out/photoreal/bedroom-{stamp}.png"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_bytes(img)
+        out.with_suffix(".log").write_text(stdout, encoding="utf-8")
         for l in notes:
             if l.startswith(("SCENE BEDDING", "SCENE METER", "SCENE WHITE", "SCENE SKY",
                              "SCENE DRESSING", "SCENE PORTALS")):
-                print("   ", l[:220])
+                print("   ", l[:400])
         print(f"{out}  {time.monotonic() - started:.0f}s")
+        # Every render is checked by machine before anyone looks at it; each
+        # check is a defect a person previously had to spot (LEARNINGS.md).
+        report = render_qa.check(out, render_qa.scene_qa_from_log(stdout))
+        out.with_suffix(".qa.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+        for r in report["checks"]:
+            if r["status"] != "PASS":
+                print(f"    QA {r['status']}: {r['check']} -- {r['detail']}")
+        print("    QA PASS" if report["passed"] else "    QA FAIL: " + ", ".join(report["failed"]))
+        if not report["passed"]:
+            qa_failed.append(view)
+    if qa_failed and not a.allow_qa_fail:
+        print(f"QA failed for {qa_failed}; see out/photoreal/*.qa.json", file=sys.stderr)
+        return 1
     return 0
 
 

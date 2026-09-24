@@ -37,8 +37,8 @@ async def main():
         async with ClientSession(read, write) as client:
             await client.initialize()
             tools = await client.list_tools()
-            assert len(tools.tools) == 8
-            print('PASS real MCP handshake and eight typed tools')
+            assert len(tools.tools) == 9
+            print('PASS real MCP handshake and nine typed tools')
             resources = await client.list_resources()
             assert {str(r.uri) for r in resources.resources} == {'archpipe://method', 'archpipe://learnings','archpipe://compute'}
             learned = await client.read_resource('archpipe://learnings')
@@ -57,6 +57,16 @@ async def main():
             light = payload(await client.call_tool('lighting_at', {'x_mm':1725, 'y_mm':3300, 'height_mm':900}))
             assert 300 < light['direct_lux'] < 500
             print('PASS cited catalogue and real photometric point')
+            render = ROOT/'out/photoreal/bedroom-off-window.png'
+            if render.is_file() and render.with_suffix('.log').is_file():
+                qa = payload(await client.call_tool('check_render',
+                                                    {'image': 'out/photoreal/bedroom-off-window.png'}))
+                names = {c['check'] for c in qa['checks']}
+                assert {'highlight_clipping', 'verticals_level', 'glass_passes_daylight'} <= names
+                assert any(n.startswith('window_view') for n in names)
+                print('PASS render QA over MCP: %s' % ('passed' if qa['passed'] else qa['failed']))
+            else:
+                print('SKIP render QA over MCP: no photoreal render on disk')
             spec = ROOT/'spec/bedroom-test.yaml'
             before = hashlib.sha256(spec.read_bytes()).hexdigest()
             proposed = payload(await client.call_tool('propose_example_edit', {

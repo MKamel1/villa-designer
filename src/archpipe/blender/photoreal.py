@@ -29,8 +29,14 @@ NISHITA_LUX_SCALE = 800.0
 # +Y is true north (the extract's north_angle is 0).
 
 
-def _lin(v):
-    return v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4
+LAST_BEDDING = None      # set by cloth_bedding, reported by scene_qa
+
+
+def _qa_break(name):
+    """Deliberately re-create a historical defect so render_qa can be shown
+    to catch it on a real render (ARCHPIPE_QA_BREAK=glass,view). Never set
+    in normal use; render_hyperreal.py --qa-break is the only caller."""
+    return name in os.environ.get("ARCHPIPE_QA_BREAK", "").split(",")
 
 
 # ---------------------------------------------------------------------------
@@ -47,6 +53,8 @@ def architectural_glass():
     no shadow, and the camera still sees its reflection and refraction.
     """
     done = []
+    if _qa_break("glass"):
+        return done
     for mat in bpy.data.materials:
         if not str(mat.get("presentation_assumption", "")).startswith("clear glazing"):
             continue
@@ -115,7 +123,7 @@ def daylight_world(sun_alt_deg, sun_az_deg, view_hdri=None, view_rotation_deg=0.
     light_bg.inputs["Strength"].default_value = sky_scale
     nt.links.new(sky.outputs["Color"], light_bg.inputs["Color"])
 
-    if not (view_hdri and os.path.isfile(view_hdri)):
+    if _qa_break("view") or not (view_hdri and os.path.isfile(view_hdri)):
         nt.links.new(light_bg.outputs["Background"], out.inputs["Surface"])
         return {"sky": "nishita", "view": None}
 
@@ -379,10 +387,10 @@ def presentation_render_settings():
     c.adaptive_threshold = 0.005
     if hasattr(c, "use_light_tree"):
         c.use_light_tree = True
-    try:
-        s.view_settings.look = "AgX - Medium High Contrast"
-    except TypeError:
-        pass
+    # AgX base look: its highlight roll-off keeps sunlit white bedding from
+    # clipping; "Medium High Contrast" clipped the sun patch (render_qa
+    # highlight_clipping).
+    s.view_settings.look = "None"
 
 
 # ---------------------------------------------------------------------------
@@ -430,10 +438,23 @@ def _simulate(obj, colliders, frames, mass, bending, pin_band=None):
             c.collision.cloth_friction = 8.0
     cloth = obj.modifiers.new("cloth", "CLOTH")
     st = cloth.settings
+    if pin_band:
+        # Pinned vertices hold their start position, like a duvet tucked
+        # under the pillows. Without it the overhang's weight dragged the
+        # whole sheet 0.6 m toward the foot and onto the floor (logged).
+        axis, value, width = pin_band
+        group = obj.vertex_groups.new(name="pin")
+        idx = [v.index for v in obj.data.vertices
+               if abs(getattr(obj.matrix_world @ v.co, axis) - value) <= width]
+        group.add(idx, 1.0, "REPLACE")
+        st.vertex_group_mass = "pin"
     st.quality = 8
     st.mass = mass
-    st.tension_stiffness = st.compression_stiffness = 12.0
-    st.shear_stiffness = 6.0
+    # Woven cotton barely stretches. At 12 the sheet elongated under its own
+    # weight until the overhang hung 0.66 m below the floor (logged
+    # duvet_z); 60 keeps the drop close to the cut length.
+    st.tension_stiffness = st.compression_stiffness = 60.0
+    st.shear_stiffness = 20.0
     st.bending_stiffness = bending
     st.air_damping = 1.5
     cs = cloth.collision_settings
@@ -493,7 +514,8 @@ def cloth_bedding(data):
     frame = [o for o in bpy.data.objects
              if o.get("source_id") == bid and o not in keep
              and ("oak" in o.name or "linen" in o.name)]
-    colliders = keep + frame
+    floors = [o for o in bpy.data.objects if o.name.startswith("floor_")]
+    colliders = keep + frame + floors
     mat_bedding = next((m for m in bpy.data.materials if m.name.startswith("archpipe ivory bedding")), None)
     mat_throw = next((m for m in bpy.data.materials if m.name.startswith("archpipe muted taupe throw")), None)
 
@@ -513,12 +535,22 @@ def cloth_bedding(data):
     rnd = random.Random(7)
     for v in duvet.data.vertices:
         v.co.z += rnd.uniform(0.0, 0.02)
-    _simulate(duvet, colliders, 50, mass=0.4, bending=0.6)
+    head_edge = cy - foot_sign * dl / 2.0
+    _simulate(duvet, colliders, 50, mass=0.4, bending=0.6, pin_band=("y", head_edge, 0.03))
+    # Loft: a real duvet is 5-7 cm of filling in soft, uneven baffles, not
+    # a flat sheet. Low-frequency displacement upward along the normal,
+    # then thickness, reads as filled fabric rather than a slab.
+    loft = bpy.data.textures.new("duvet_loft", type="CLOUDS")
+    loft.noise_scale = 0.22
+    disp = duvet.modifiers.new("loft", "DISPLACE")
+    disp.texture = loft
+    disp.strength = 0.035
+    disp.mid_level = 0.3
     solid = duvet.modifiers.new("thickness", "SOLIDIFY")
-    solid.thickness = 0.035
+    solid.thickness = 0.05
     solid.offset = 1.0
     sub = duvet.modifiers.new("smooth", "SUBSURF")
-    sub.levels = sub.render_levels = 1
+    sub.levels = sub.render_levels = 2
     if mat_bedding:
         duvet.data.materials.append(mat_bedding)
     for p in duvet.data.polygons:
@@ -542,8 +574,90 @@ def cloth_bedding(data):
         if o is not m_obj:
             sd = o.modifiers.new("smooth", "SUBSURF")
             sd.levels = sd.render_levels = 2
+    dv = [duvet.matrix_world @ v.co for v in duvet.data.vertices]
+    global LAST_BEDDING
+    LAST_BEDDING = {"mattress_y": [m_lo.y, m_hi.y], "mattress_top": m_hi.z,
+                    "duvet_y": [min(v.y for v in dv), max(v.y for v in dv)],
+                    "duvet_z_min": min(v.z for v in dv)}
     return {"bedding": "cloth", "duvet_removed_islands": removed,
-            "mattress_top_m": round(m_hi.z, 3)}
+            "mattress_x": [round(m_lo.x, 3), round(m_hi.x, 3)],
+            "mattress_y": [round(m_lo.y, 3), round(m_hi.y, 3)],
+            "mattress_top_m": round(m_hi.z, 3),
+            "duvet_x": [round(min(v.x for v in dv), 3), round(max(v.x for v in dv), 3)],
+            "duvet_y": [round(min(v.y for v in dv), 3), round(max(v.y for v in dv), 3)],
+            "duvet_z": [round(min(v.z for v in dv), 3), round(max(v.z for v in dv), 3)],
+            "duvet_cut_m": [round(dw, 3), round(dl, 3)],
+            "duvet_below_0.2m": sum(1 for v in dv if v.z < 0.2)}
+
+
+# ---------------------------------------------------------------------------
+# QA facts for archpipe.render_qa (what the scene contained, where windows land)
+# ---------------------------------------------------------------------------
+def scene_qa(data, white_balance_applied):
+    from bpy_extras.object_utils import world_to_camera_view
+    scene = bpy.context.scene
+    cam = scene.camera
+    fwd = cam.matrix_world.to_3x3() @ Vector((0.0, 0.0, -1.0))
+    qa = {"camera": {"name": cam.name, "lens_mm": cam.data.lens,
+                     "shift_y": cam.data.shift_y,
+                     "pitch_deg": 90.0 + math.degrees(math.asin(max(-1.0, min(1.0, fwd.z))))}}
+
+    lamps = [o for o in scene.objects if o.type == "LIGHT" and o.name.startswith("lamp_")]
+    with_ies = sum(1 for o in lamps if o.data.use_nodes and
+                   any(n.type == "TEX_IES" for n in o.data.node_tree.nodes))
+    qa["lights"] = {"on": bool(lamps), "count": len(lamps), "with_ies": with_ies,
+                    "fallback_sun": "fallback_sun" in scene.objects}
+
+    world = scene.world
+    sun = bool(world and world.use_nodes and any(
+        n.type == "TEX_SKY" and getattr(n, "sun_disc", False) for n in world.node_tree.nodes))
+    qa["sky"] = {"sun": sun}
+    qa["glass"] = {"architectural": sum(1 for m in bpy.data.materials if m.get("photoreal_glass"))}
+
+    walls = {w["id"]: w for w in data.get("walls", [])}
+    wins = []
+    for op in data.get("openings", []):
+        if op.get("kind") != "window" or op.get("host") not in walls:
+            continue
+        wl = walls[op["host"]]
+        sx, sy = wl["start"]; ex, ey = wl["end"]
+        L = math.hypot(ex - sx, ey - sy) or 1.0
+        ux, uy = (ex - sx) / L, (ey - sy) / L
+        cx, cy = sx + ux * op["at"], sy + uy * op["at"]
+        z0 = op.get("sill", 0.0); z1 = z0 + op["height"]
+        corners = [Vector(((cx + ux * s * op["width"] / 2) / 1000.0,
+                           (cy + uy * s * op["width"] / 2) / 1000.0, z / 1000.0))
+                   for s in (-1, 1) for z in (z0, z1)]
+        pts = [world_to_camera_view(scene, cam, c) for c in corners]
+        if any(p.z <= 0 for p in pts):
+            continue
+        rect = [max(0.0, min(p.x for p in pts)), max(0.0, min(p.y for p in pts)),
+                min(1.0, max(p.x for p in pts)), min(1.0, max(p.y for p in pts))]
+        if rect[2] > rect[0] and rect[3] > rect[1]:
+            wins.append({"id": op.get("id", ""), "screen": rect})
+    qa["windows"] = wins
+
+    used = {slot.material for o in scene.objects if o.type == "MESH" and o.visible_camera
+            for slot in o.material_slots if slot.material}
+    mats, textiles = [], []
+    for m in used:
+        entry = {"name": m.name,
+                 "override": str(m.get("presentation_assumption", "")).startswith("finish override"),
+                 "glass": bool(m.get("photoreal_glass")),
+                 "photo": bool(m.get("presentation_photo_texture"))}
+        bsdf = m.node_tree.nodes.get("Principled BSDF") if m.use_nodes else None
+        if bsdf and not bsdf.inputs["Base Color"].is_linked:
+            c = bsdf.inputs["Base Color"].default_value
+            entry["saturation"] = round(max(c[:3]) - min(c[:3]), 3)
+        mats.append(entry)
+        if any(k in m.name.lower() for k in ("linen", "bedding", "throw", "rug")):
+            textiles.append({"name": m.name, "reflectance": m.get("presentation_photo_reflectance")})
+    qa["materials"] = mats
+    qa["textiles"] = textiles
+    qa["white_balance"] = white_balance_applied
+    if LAST_BEDDING:
+        qa["bedding"] = LAST_BEDDING
+    return qa
 
 
 # ---------------------------------------------------------------------------

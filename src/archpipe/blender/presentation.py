@@ -550,6 +550,23 @@ def _load_pbr_images(library_root, asset_id):
     return images
 
 
+def _image_mean_linear_rgb(img, samples=20000):
+    """Mean LINEAR colour of an image (same sRGB decoding as below)."""
+    px = img.pixels[:]
+    n = len(px) // 4
+    if n == 0:
+        return (0.5, 0.5, 0.5)
+    stride = max(1, n // samples)
+    acc = [0.0, 0.0, 0.0]
+    count = 0
+    for i in range(0, n, stride):
+        o = i * 4
+        for c in range(3):
+            acc[c] += _srgb_to_linear(px[o + c] * 255.0)
+        count += 1
+    return tuple(a / count for a in acc)
+
+
 def _image_mean_linear_luminance(img, samples=20000):
     """Approximate mean Rec.709 luminance, in LINEAR light, of an image.
 
@@ -580,7 +597,7 @@ def _image_mean_linear_luminance(img, samples=20000):
 
 
 def _apply_photo_texture(mat, library_root, asset_id, target_reflectance, tile_m=1.0,
-                         bump_strength=0.0, tint=(1.0, 1.0, 1.0)):
+                         bump_strength=0.0, tint=(1.0, 1.0, 1.0), contrast=1.0):
     """Swap a material's Base Color/Roughness for a real photographed sample.
 
     The existing procedural bump (already wired to Normal by an earlier
@@ -635,11 +652,19 @@ def _apply_photo_texture(mat, library_root, asset_id, target_reflectance, tile_m
 
     mean = _image_mean_linear_luminance(images["color"])
     factor = (target_reflectance / mean) if mean > 0 else target_reflectance
+    # out = photo * (factor*c*tint) + mean_rgb*factor*(1-c)*tint. Its mean
+    # is exactly factor*mean_rgb*tint, whose luminance is the target, for
+    # any contrast c. Pulling toward the photo's MEAN COLOUR (not a grey of
+    # equal luminance -- the first version, which drained oak to grey-brown)
+    # softens the pattern without changing hue or reflectance. Tint is
+    # normalised to unit luminance, so it changes hue, not level.
+    mean_rgb = _image_mean_linear_rgb(images["color"]) if contrast < 1.0 else (0.0, 0.0, 0.0)
     scale = nt.nodes.new("ShaderNodeVectorMath")
-    scale.operation = "MULTIPLY"
-    # Tint normalised to unit luminance, so it changes hue, not reflectance.
+    scale.operation = "MULTIPLY_ADD"
     ty = 0.2126 * tint[0] + 0.7152 * tint[1] + 0.0722 * tint[2]
-    scale.inputs[1].default_value = tuple(factor * t / ty for t in tint)
+    scale.inputs[1].default_value = tuple(factor * contrast * t / ty for t in tint)
+    scale.inputs[2].default_value = tuple(m * factor * (1.0 - contrast) * t / ty
+                                          for m, t in zip(mean_rgb, tint))
     nt.links.new(color_node.outputs["Color"], scale.inputs[0])
     nt.links.new(scale.outputs["Vector"], bsdf.inputs["Base Color"])
     nt.links.new(rough_node.outputs["Color"], bsdf.inputs["Roughness"])
@@ -652,6 +677,7 @@ def _apply_photo_texture(mat, library_root, asset_id, target_reflectance, tile_m
         nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
 
     mat["presentation_photo_texture"] = asset_id
+    mat["presentation_photo_reflectance"] = target_reflectance
     mat["presentation_photo_mean_scale"] = factor
     mat["presentation_photo_detail"] = key
     return True
@@ -744,8 +770,11 @@ def enhance_finishes(data, library_root=None):
         if "oak" in name_l:
             _enhance_furniture_oak(mat)
             note = "furniture oak: mild grain bump, +/-5% colour variance"
+            # Finer tile and 55% contrast: at 0.8 m and full contrast the
+            # grain read as a bold printed pattern, not oak veneer.
             if library_root and _apply_photo_texture(mat, library_root, "Wood049",
-                                                      reflectance, tile_m=0.8):
+                                                      reflectance, tile_m=0.45,
+                                                      contrast=0.55):
                 note += "; Base Color/Roughness replaced by Wood049 (ambientCG, CC0), mean-matched to %.2f" % reflectance
             report[mat.name] = note
         elif any(k in name_l for k in ("linen", "bedding", "throw")):

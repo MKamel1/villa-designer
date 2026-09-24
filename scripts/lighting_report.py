@@ -98,7 +98,7 @@ def main(argv=None) -> int:
     xs = [p[0] for p in boundary]
     ys = [p[1] for p in boundary]
     w, d = max(xs) - min(xs), max(ys) - min(ys)
-    h = float(room.get("ceiling_height") or 2700.0)
+    h = float(room.get("ceiling_height") or 2700.0)  # falsy-ok: a 0 mm ceiling is not a room
     irc = interreflected_estimate(grid, w, d, h, surfaces=Surfaces())
 
     print("LIGHTING REPORT  %s  (built and measured in Revit)"
