@@ -156,3 +156,7 @@ stand-in and means nothing for the real site.
                                 lux measurement from the render itself
     revit/           extractor, pyRevit extension, probe, test-model builder
     scripts/verify.py 108 checks, positive and negative
+
+## Evidence authority update — 2026-09-24
+
+Read docs/guidance/README.md. A readable citation alone is not verification: historical claims that every catalogue figure is published are superseded by the evidence audit. Keep numerical legacy results diagnostic until actual source passages and applicability are verified. stage_context, lookup_evidence and review_stage expose the strengthened eight-stage guidance. Rendering and native-model workflows remain in place; client gates require explicit decisions tied to reviewed content.

@@ -18,6 +18,8 @@ def review_model(data: dict, *, scope: str = 'dwelling', level: str | None = Non
         'scope': scope,
         'disclaimer': 'Design guidance, not code compliance. No jurisdiction pack loaded.',
         'passed': not any(f.severity in ('violation', 'warning') for f in applicable),
+        'approval_ready': False,
+        'evidence_status': 'Legacy targets unverified; passed describes diagnostic checks only. Use review_stage for approval readiness.',
         'findings': [asdict(f) for f in applicable],
         'not_assessed': [{'rule': name, 'reason': 'Requires a complete dwelling; input is an isolated room.'}
                          for name in sorted(ROOM_CONTEXT_RULES)] if scope == 'room' else [],

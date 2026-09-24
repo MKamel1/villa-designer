@@ -24,6 +24,29 @@ READ = ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=F
 WRITE = ToolAnnotations(readOnlyHint=False, destructiveHint=False, openWorldHint=False)
 
 
+@mcp.tool(annotations=READ)
+def stage_context(stage: int, project_path: str = 'knowledge/projects/villa-pilot.json') -> dict:
+    """Return stage brief, decisions, missing facts, scoped evidence and deliverables."""
+    from archpipe.guidance import stage_context as context
+    return context(stage, project_path)
+
+
+@mcp.tool(annotations=READ)
+def lookup_evidence(query: str = '', stage: int | None = None,
+                    project_path: str = 'knowledge/projects/villa-pilot.json', limit: int = 8) -> dict:
+    """Retrieve focused paraphrases and precedent analysis with locators and applicability."""
+    from archpipe.guidance import lookup_evidence as lookup
+    project = json.loads(local_path(project_path).read_text(encoding='utf-8'))
+    return lookup(query, stage, project.get('facts', {}), limit)
+
+
+@mcp.tool(annotations=READ)
+def review_stage(stage: int, project_path: str = 'knowledge/projects/villa-pilot.json') -> dict:
+    """Review deterministic checks and qualitative evidence; never imply client approval."""
+    from archpipe.guidance import review_stage as stage_review
+    return stage_review(stage, project_path)
+
+
 def local_path(relative: str) -> Path:
     path = (ROOT / relative).resolve()
     if not path.is_relative_to(ROOT):
@@ -56,8 +79,9 @@ def review_model(path: str = 'out/bedroom-from-revit.json', scope: str = 'dwelli
 
 @mcp.tool(annotations=READ)
 def catalogue_item(type_id: str) -> dict:
-    """Look up a furniture type's published size, access requirement, and source."""
-    return asdict(catalogue.get(type_id))
+    """Look up legacy diagnostic dimensions and readable citations; targets are unverified."""
+    return dict(asdict(catalogue.get(type_id)), evidence_status='unverified',
+                approval_ready=False, audit='knowledge/rule-audit.json')
 
 
 @mcp.tool(annotations=READ)

@@ -1,14 +1,11 @@
 """Furniture catalogue: footprints and the clearance each piece demands.
 
-Every figure here is a published general-practice dimension, cited on the
-entry. The dominant source is Neufert, *Architects' Data* (the standard
-reference for residential dimensions); where a value is ordinary trade
-practice rather than a specific Neufert figure, it says so.
-
-These are DESIGN GUIDANCE, not building code. They are jurisdiction-neutral
-and deliberately conservative. Where a local code is stricter it wins, and
-a `site.jurisdiction` layer should override these values rather than edit
-them here.
+These are legacy diagnostic dimensions, with readable historical citations.
+The original edition-specific passages have NOT been verified. See
+docs/guidance/rule-audit.md. Neither their numerical values nor a passing
+calculation establish a published requirement, accessibility compliance or code
+compliance. Resolve conflicting sources by applicability, not by always choosing
+the largest dimension. Geometry extracted from a model remains measured geometry.
 
 `codes.py` now carries the pluggable half of that: a jurisdiction pack adds
 a **clause citation** to a rule, so a finding can say which clause it

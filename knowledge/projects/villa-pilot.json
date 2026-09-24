@@ -1,0 +1,450 @@
+{
+  "id": "villa-pilot",
+  "revision": "pilot-2",
+  "example": true,
+  "scope": "dwelling",
+  "brief": {
+    "household": "Two working adults, two children, weekly guests",
+    "priorities": [
+      "Sleep privacy",
+      "Sheltered garden dining",
+      "Calm tactile interiors"
+    ],
+    "taste": "Warm timber and muted mineral palette: pilot preference only"
+  },
+  "facts": {
+    "household": {
+      "value": "Two working adults and two children; future household changes unspecified",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "routines": {
+      "value": "Children sleep before weekly guests leave; adults both work at home",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "hosting": {
+      "value": "Weekly guests; number and overnight frequency unresolved",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "privacy": {
+      "value": "Private bedroom access must bypass public entertaining rooms",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "accessibility": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "maintenance": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "budget": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "taste": {
+      "value": "Provisional warm timber, muted mineral surfaces and calm arrival",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "location": {
+      "value": "Fictional northern-hemisphere site; latitude 30 degrees north for studies only",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "climate": {
+      "value": "hot-dry",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "hemisphere": {
+      "value": "north",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "north": {
+      "value": "True north at top of diagram",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "boundary": {
+      "value": "30 metres east-west by 40 metres north-south",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "levels": {
+      "value": "Level terrain; concept has ground and upper floors",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "access": {
+      "value": "Southern road and entrance; western service approach proposed",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "neighbours": {
+      "value": "Eastern neighbour; height, windows and distance unknown",
+      "status": "assumed",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "trees": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "utilities": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "views": {
+      "value": "Northern garden view is the scenario priority",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "noise": {
+      "value": "Southern road is a potential source; no measured level",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "wind": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "area_schedule": {
+      "value": "272 square metres usable, 98 square metres explicit allowances; 370 gross",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "available_area": {
+      "value": "400 square metre scenario allowance, not a legal envelope",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "outdoor_priorities": {
+      "value": "Sheltered dining beside kitchen and continuous northern garden",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "adjacencies": {
+      "value": "Private hall bypasses living; kitchen beside dining; wet rooms proposed to stack",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "structure_strategy": {
+      "value": "Preliminary supports beside garden opening; sizing and lateral system unresolved",
+      "status": "assumed",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "service_routes": {
+      "value": "Proposed concentrated wet core; distribution and equipment spaces unresolved",
+      "status": "assumed",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "landscape_strategy": {
+      "value": "Proposed sheltered northern terrace and separate maintenance approach; species and drainage unresolved",
+      "status": "assumed",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "furniture": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "openings": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "room_activities": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "model": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "comfort_targets": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "equipment": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "controls": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "material_intent": {
+      "value": "Provisional timber and mineral palette; no approved products",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "exposure": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "junctions": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "reviewed_revision": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "render_input": {
+      "value": null,
+      "status": "missing",
+      "provenance": "Not supplied or not demonstrated; do not infer from a generic narrative pointer"
+    },
+    "requirements": {
+      "value": "Sleep privacy and sheltered garden dining; complete traceability remains open",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    },
+    "open_issues": {
+      "value": "Independent critique recorded in docs/guidance/pilot-independent-critique.md",
+      "status": "example",
+      "provenance": "Explicit fictional pilot narrative; partial descriptions do not establish technical completion"
+    }
+  },
+  "decisions": [
+    {
+      "id": "recommendation-1",
+      "affects": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "status": "proposed",
+      "choice": "garden-bar",
+      "reason": "Separates private circulation while keeping one main garden and compact services"
+    },
+    {
+      "id": "work-privacy-open",
+      "affects": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "status": "unresolved",
+      "choice": "One study cannot yet demonstrate simultaneous private work for two adults",
+      "reason": "Independent critic found mismatch between household and room schedule; confirm shared study versus second work room"
+    }
+  ],
+  "selected_concept": "garden-bar",
+  "concepts": [
+    {
+      "entrance": "entry",
+      "rooms": {
+        "entry": "circulation",
+        "hall": "circulation",
+        "living": "public",
+        "bedroom": "private",
+        "service": "service"
+      },
+      "id": "garden-bar",
+      "connections": [
+        [
+          "entry",
+          "hall"
+        ],
+        [
+          "hall",
+          "living"
+        ],
+        [
+          "hall",
+          "bedroom"
+        ],
+        [
+          "entry",
+          "service"
+        ]
+      ],
+      "unsupported_spans": [
+        "Garden opening requires a sized lintel and lateral strategy"
+      ],
+      "comfort_issues": [
+        "West study shade and road-noise assessment unresolved"
+      ]
+    },
+    {
+      "entrance": "entry",
+      "rooms": {
+        "entry": "circulation",
+        "hall": "circulation",
+        "living": "public",
+        "bedroom": "private",
+        "service": "service"
+      },
+      "id": "courtyard",
+      "connections": [
+        [
+          "entry",
+          "hall"
+        ],
+        [
+          "hall",
+          "bedroom"
+        ],
+        [
+          "hall",
+          "living"
+        ],
+        [
+          "entry",
+          "service"
+        ]
+      ],
+      "unsupported_spans": [
+        "Courtyard corner support unresolved"
+      ],
+      "comfort_issues": [
+        "Courtyard airflow and upper-level overlooking require study"
+      ]
+    },
+    {
+      "entrance": "entry",
+      "rooms": {
+        "entry": "circulation",
+        "hall": "circulation",
+        "living": "public",
+        "bedroom": "private",
+        "service": "service"
+      },
+      "id": "pavilion",
+      "connections": [
+        [
+          "entry",
+          "living"
+        ],
+        [
+          "living",
+          "bedroom"
+        ],
+        [
+          "living",
+          "hall"
+        ],
+        [
+          "entry",
+          "service"
+        ]
+      ],
+      "unsupported_spans": [
+        "Long glazed living span has no support strategy"
+      ],
+      "comfort_issues": [
+        "Unshaded west glass risks glare and heat"
+      ]
+    }
+  ],
+  "area_schedule": {
+    "rooms": [
+      {
+        "id": "living",
+        "area_m2": 40
+      },
+      {
+        "id": "dining",
+        "area_m2": 22
+      },
+      {
+        "id": "kitchen",
+        "area_m2": 24
+      },
+      {
+        "id": "guest",
+        "area_m2": 18
+      },
+      {
+        "id": "bath-ground",
+        "area_m2": 6
+      },
+      {
+        "id": "utility",
+        "area_m2": 10
+      },
+      {
+        "id": "study",
+        "area_m2": 14
+      },
+      {
+        "id": "main-bedroom",
+        "area_m2": 24
+      },
+      {
+        "id": "dressing",
+        "area_m2": 10
+      },
+      {
+        "id": "ensuite",
+        "area_m2": 10
+      },
+      {
+        "id": "bed-2",
+        "area_m2": 18
+      },
+      {
+        "id": "bed-3",
+        "area_m2": 18
+      },
+      {
+        "id": "bath-family",
+        "area_m2": 8
+      },
+      {
+        "id": "family",
+        "area_m2": 24
+      },
+      {
+        "id": "storage",
+        "area_m2": 12
+      },
+      {
+        "id": "entry",
+        "area_m2": 14
+      }
+    ],
+    "circulation_m2": 40,
+    "walls_m2": 32,
+    "structure_m2": 12,
+    "services_m2": 14,
+    "available_m2": 400
+  },
+  "stages": {},
+  "requirements": [
+    {
+      "id": "sleep-privacy",
+      "response": "Private hall bypasses living in garden-bar",
+      "artifact": {}
+    },
+    {
+      "id": "garden-dining",
+      "response": "Sheltered northern terrace proposed",
+      "artifact": {}
+    }
+  ]
+}

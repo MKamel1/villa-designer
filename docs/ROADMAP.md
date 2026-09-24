@@ -81,3 +81,7 @@ bindings, door handing, named lighting targets with verified sources,
 multi-room dependencies, edit/read-back commands, and an Autodesk
 Assistant adapter if its public extension boundary can be verified.
 Do not silently promote this example into a generic villa generator.
+
+## Expert-guided design system — 2026-09-24
+
+The [guidance library](guidance/README.md) adds all eight stage packages, source acquisition manifest, legacy-rule audit, project quality brief, a fictional three-concept villa pilot and the measured-bedroom exercise. Three read-only tools supply stage context, focused evidence and approval-aware review. Public-source qualitative passages are verified; licensed numerical passages remain unresolved. This capability does not close real design gates or complete engineering, budget, comfort studies or final villa drawings.

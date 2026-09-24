@@ -37,8 +37,18 @@ async def main():
         async with ClientSession(read, write) as client:
             await client.initialize()
             tools = await client.list_tools()
-            assert len(tools.tools) == 9
-            print('PASS real MCP handshake and nine typed tools')
+            assert len(tools.tools) == 12
+            assert {'stage_context', 'lookup_evidence', 'review_stage'} <= {t.name for t in tools.tools}
+            print('PASS real MCP handshake and twelve typed tools')
+            context = payload(await client.call_tool('stage_context', {'stage':0}))
+            assert context['example'] and 'budget' in context['missing_inputs']
+            evidence = payload(await client.call_tool('lookup_evidence', {'query':'shading','stage':3}))
+            assert evidence['results'] and evidence['results'][0]['locator']
+            stage_review = payload(await client.call_tool('review_stage', {'stage':3}))
+            assert not stage_review['ready_for_client_approval']
+            assert any(c['concept']=='pavilion' and c['status']=='fail' for c in stage_review['checks'])
+            assert payload(await client.call_tool('review_stage', {'stage':3}))['reused']
+            print('PASS stage context, evidence provenance, critique and cached review')
             resources = await client.list_resources()
             assert {str(r.uri) for r in resources.resources} == {'archpipe://method', 'archpipe://learnings','archpipe://compute'}
             learned = await client.read_resource('archpipe://learnings')
@@ -75,6 +85,9 @@ async def main():
             assert hashlib.sha256(spec.read_bytes()).hexdigest() == before
             print('PASS candidate edit writes proposal and preserves current specification')
             for name, args in [
+                ('stage_context', {'stage':8}),
+                ('review_stage', {'stage':0, 'project_path':'../outside.json'}),
+                ('lookup_evidence', {'limit':21}),
                 ('read_model', {'path':'../.claude/settings.json'}),
                 ('review_model', {'scope':'silence-errors'}),
                 ('catalogue_item', {'type_id':'invented'}),

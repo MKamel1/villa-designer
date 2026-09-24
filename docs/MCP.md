@@ -15,7 +15,7 @@ error. The official Python library is pinned to the maintained 1.30 line.
 | `project_status` | Full roadmap and last example evidence | Read only |
 | `read_model` | Actual extracted geometry, finishes and markup | Read only |
 | `review_model` | Cited findings, measured furniture and scope exclusions | Read only; dwelling scope is default |
-| `catalogue_item` | Published requirement and source | Read only |
+| `catalogue_item` | Legacy diagnostic dimensions, source and verification status | Read only |
 | `lighting_at` | Direct illuminance at a point in millimetres | Read only; no shadow or uniformity claim |
 | `check_render` | Automatic checks on a presentation render (window view, daylight through glass, photometry bound, level camera, colour cast, clipping, CAD colours, textiles, cloth) | Read only; passing means no *known* defect, so still look at the image |
 | `propose_example_edit` | Before/after placement and invalidated stages | Writes a candidate under `out/proposals`; does not change current design |
@@ -85,3 +85,7 @@ References: [official Python library](https://py.sdk.modelcontextprotocol.io/v1/
 [MCP server guidance](https://modelcontextprotocol.io/docs/develop/build-server),
 [project skill discovery](https://learn.chatgpt.com/docs/build-skills),
 [Codex agent configuration](https://learn.chatgpt.com/docs/agent-configuration/subagents).
+
+## Expert guidance operations
+
+`stage_context(stage, project_path)` returns scoped project facts, decisions, missing inputs, evidence and deliverables. `lookup_evidence(query, stage, project_path, limit)` retrieves provenance-bearing paraphrases and precedent analysis. `review_stage(stage, project_path)` combines deterministic diagnostics and explicit qualitative review, source gaps, artifact freshness and client approval status. All are read-only; stages retain numbers 0 through 7. The default project is a fictional pilot. See [guidance records and limits](guidance/README.md). Numerical catalogue claims are unverified legacy diagnostics, not established published requirements.

@@ -6,44 +6,29 @@ A staged, looped, AI-led method for designing a private house.
 
 ---
 
-## Why not RIBA
+## Scope and evidence authority
 
-The RIBA Plan of Work 2020 is the default framework in practice, and it is
-the wrong backbone here. It is a **procurement framework**: its stages
-define when information passes between client, design team, contractor and
-statutory bodies, and who carries liability. For a private villa with one
-client and no tender, most of that machinery is dead weight.
+The original eight stages and thirteen backward loops remain the project method.
+The [expert guidance packages](../guidance/README.md) strengthen each stage with
+sources, methods, worked examples, failure cases, deliverables and approval criteria.
+The [coverage matrix and acquisition manifest](../guidance/coverage-and-acquisition.md)
+record the full scope and source needs.
 
-More importantly it is **deliberately silent on how to design**. Its Stage
-2 outcome is "Architectural Concept approved by the client and aligned to
-the Project Brief" — how one arrives at a good concept is left entirely to
-the designer. That is precisely the part this project needs.
+This work covers private-villa design and visualization. Hotel references inform
+residential aesthetics and comfort. Local-code research, permit documentation,
+construction administration and engineering certification are excluded. Supplied
+site restrictions are inputs with provenance, not a claim of legal verification.
+“A+ luxury” means the client-approved quality brief, not a certification.
 
-And one of its rules is actively wrong for a house. RIBA states Stage 3
-"is not about adjusting the Architectural Concept". Correct for a large
-commercial job with forty consultants and a change-control procedure.
-Wrong for a villa, where cheap iteration *before* commitment is the whole
-value.
+Earlier broad citations to Neufert, general practice, WELL and hospitality
+practice did not verify the claimed numerical values or applicability. The
+[rule audit](../guidance/rule-audit.md) now marks them unresolved. Readable citations
+remain for compatibility; measured geometry does not establish a valid target.
+The source registry distinguishes identified references from verified passages.
 
-| From RIBA | Verdict |
-|---|---|
-| Staged gates; decisions locked at the stage that owns them | **Kept** — the discipline is real |
-| Information exchanges, procurement strategy, liability machinery | **Dropped** |
-| "Do not adjust the concept downstream" | **Replaced** with explicit, budgeted loops |
-| Silence on design quality | **Filled** from Alexander, Neufert, bioclimatic method, WELL |
-
-## Sources
-
-Nothing in this method's *content* is invented. The framework is ours;
-the standards never are.
-
-1. **Christopher Alexander, *A Pattern Language* (1977)** — cited by
-   pattern number. Numbering verified against the published contents.
-2. **Neufert, *Architects' Data*** — dimensions, clearances, minimum areas.
-3. **Bioclimatic design method** — climate analysis first; orientation as
-   the primary move.
-4. **WELL / hospitality practice** — light quality, acoustics, arrival
-   sequence, back-of-house separation.
+Structure, services, lighting, materials and landscape start during concept design
+and develop together. Stage packages supersede historical claims of universal
+minimum dimensions or design superiority in this document.
 
 ---
 
@@ -156,44 +141,35 @@ Room · 145 Bulk Storage · **159 Light on Two Sides of Every Room** ·
 190 Ceiling Height Variety · 191 The Shape of Indoor Space · 196 Corner
 Doors · 198 Closets Between Rooms
 
-Pattern 159 deserves its emphasis: Alexander's claim is that people
-gravitate to rooms lit from two sides and leave single-aspect rooms
-unused. It is the strongest single predictor of whether a room gets lived
-in, and it is geometrically checkable.
+Treat the listed patterns as qualitative prompts until their actual passages
+and applicability are verified. Do not interpret a count of window aspects as a
+measured predictor of whether a household will use a room.
 
-**Rules:** minimum areas and proportion; furniture fit; clearance
-achieved-versus-required; furniture overlap; door swing arcs; circulation
-width by erosion; door clear widths; glazing ratio; storage volume;
-kitchen work triangle; stairs — riser 150–180 mm, going ≥ 250 mm, Blondel
-`2R + G = 600–650 mm`, ≤ ~16 risers per flight, headroom ≥ 2000 mm,
-width ≥ 900 mm.
+**Work:** dimensioned plans, sections and elevations; furniture and actual activity
+tests; kitchens, bathrooms, dressing rooms, storage, doors, windows, ceilings,
+shading and garden connections. Report actual measurements separately from
+unverified catalogue targets. The [Rooms package](../guidance/stages/4-rooms.md)
+defines the current deliverables and review.
 
-**Gate:** every room passes, or carries a recorded waiver.
+**Gate:** activities and spatial relationships reviewed, evidence gaps resolved,
+and explicit client decision recorded. A waiver does not verify a source.
 
 ### Stage 5 — Systems
 
-*Question:* light, power, water, air, sound, heat.
+*Question:* how do light, power, water, air, sound and temperature support life here?
 
-**Pattern 135 Tapestry of Light and Dark** is Alexander's 1977 statement
-of exactly the layered-lighting principle that reads as "hotel". Also
-181 The Fire · 199 Sunny Counter.
+Coordinate daylight, electric lighting, glare, scenes, controls, blackout,
+acoustics, cooling, ventilation, power, plumbing and technology. Show equipment,
+ducts, access panels and outlets in plans and sections. Use room-by-room comfort
+targets and a coordinated ceiling plan.
 
-**Lighting rules:** ≥ 3 layers (ambient / task / accent / decorative) in
-key rooms; **a lone central ceiling fixture as the only source fails** —
-the single biggest tell of domestic-versus-hospitality lighting; lux
-targets (living 100–300, kitchen worktop 300–500, bathroom 200–300 with
-500 at the mirror, bedroom 100–200, stairs 100–150, corridor 100);
-uniformity `Emin/Eavg` ≥ 0.4; glare sightlines — no bare lamp directly
-visible; colour-temperature consistency within a space; CRI ≥ 90;
-vertical surfaces lit, because perceived brightness comes from walls not
-floors; mirror lit at the face, not only overhead; under-cabinet task
-lighting where an overhead would cast the user's own shadow; low-level
-night circulation lighting.
+Earlier lighting numbers and layer counts were not verified universal residential
+requirements. Use [the Systems package](../guidance/stages/5-systems.md), scoped
+evidence and project-specific targets. Direct-light calculations cannot establish
+total-light uniformity or the absence of glare.
 
-**Other systems:** sockets and switches against furniture positions;
-ventilation extract rates; acoustic adjacency; hot-water dead-legs.
-
-**Gate:** lux grids meet target and uniformity; no unresolved glare.
+**Gate:** coordinated systems, appropriate measured studies, resolved evidence
+and explicit client approval; no attractive rendering substitutes for these.
 
 ### Stage 6 — Substance
 
@@ -207,7 +183,7 @@ build-ups; maintenance and cleaning access.
 The drawing set out of Revit, and a check back against Stage 0 intent.
 
 **Gate:** every Stage 0 intent is traceable to something in the design.
-This closing loop is what RIBA has no equivalent of.
+Compare plans, sections, landscape and day/night presentation together; expose unresolved issues and verify one reviewed revision.
 
 ---
 
@@ -232,9 +208,7 @@ handled deliberately rather than as chaos.
 | **L12** | Documentation exposes an unresolved junction | Proof → Substance | detail |
 | **L13** | Client changes their mind | any → Intent | anything — must stay cheap and recorded |
 
-L1 and L8 are the two most common in practice. L4 is the most expensive,
-which is why Stage 3 carries a wet-area stacking rule specifically to
-catch it early.
+Furniture, wall build-ups and wet-area stacking can force costly rework. Review their dependencies early; no universal frequency or cost ranking is claimed.
 
 ### Thrash control
 
@@ -269,6 +243,5 @@ Every rule declares:
 
 The `computed` / `advisory` split matters. Many of Alexander's patterns
 are qualitative by design; forcing them into pass/fail would produce
-confident nonsense. 159 Light on Two Sides is computable from a room's
-exterior wall segments. 134 Zen View is not, and must never be presented
+confident nonsense. The count of window-bearing aspects can be computed from geometry, but this does not verify the pattern’s qualitative claim. 134 Zen View is not, and must never be presented
 as though it were measured.

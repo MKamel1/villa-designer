@@ -1,0 +1,1425 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "problem-seeking",
+      "author": "William M. Pe\u00f1a and Steven A. Parshall",
+      "title": "Problem Seeking",
+      "edition": "5",
+      "publisher": "Wiley",
+      "stages": [
+        0,
+        2
+      ],
+      "isbn": "9781118152935",
+      "coverage": "programming process, goals, facts, needs and problem statements",
+      "priority": 1,
+      "url": "https://www.wiley-vch.de/en?isbn=9781118152935&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "site-analysis",
+      "author": "James A. LaGro Jr.",
+      "title": "Site Analysis",
+      "edition": "3",
+      "publisher": "Wiley",
+      "stages": [
+        1
+      ],
+      "isbn": "9781118123676",
+      "coverage": "site inventory, analysis and suitability",
+      "priority": 1,
+      "url": "https://www.wiley-vch.de/en?isbn=9781118123676&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "neufert",
+      "author": "Ernst Neufert",
+      "title": "Architects\u2019 Data",
+      "edition": "6",
+      "publisher": "Wiley",
+      "stages": [
+        2,
+        4
+      ],
+      "isbn": "9781119873945",
+      "coverage": "dwelling areas, doors, furniture dimensions, circulation and all associated notes",
+      "priority": 1,
+      "url": "https://www.wiley-vch.de/en?isbn=9781119873945&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "form-space-order",
+      "author": "Francis D. K. Ching",
+      "title": "Architecture: Form, Space, and Order",
+      "edition": "5",
+      "publisher": "Wiley",
+      "stages": [
+        3
+      ],
+      "isbn": "9781119853374",
+      "coverage": "spatial order, circulation, proportion and organizing principles",
+      "priority": 1,
+      "url": "https://www.wiley-vch.de/en?isbn=9781119853374&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "studio-companion",
+      "author": "Edward Allen and Joseph Iano",
+      "title": "The Architect\u2019s Studio Companion",
+      "edition": "7",
+      "publisher": "Wiley",
+      "stages": [
+        3,
+        5
+      ],
+      "isbn": "9781119826798",
+      "coverage": "preliminary structural systems and service-zone planning",
+      "priority": 1,
+      "url": "https://www.wiley-vch.de/en?isbn=9781119826798&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "interior-illustrated",
+      "author": "Francis D. K. Ching and Corky Binggeli",
+      "title": "Interior Design Illustrated",
+      "edition": "4",
+      "publisher": "Wiley",
+      "stages": [
+        4
+      ],
+      "isbn": "9781119377207",
+      "coverage": "room planning, furnishings and dimensional context",
+      "priority": 2,
+      "url": "https://www.wiley-vch.de/en?isbn=9781119377207&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "hospitality-lighting",
+      "author": "Illuminating Engineering Society",
+      "title": "Recommended Practice: Lighting Hospitality Spaces",
+      "edition": "to verify",
+      "publisher": "Illuminating Engineering Society",
+      "stages": [
+        5
+      ],
+      "isbn": null,
+      "coverage": "task illuminance, glare, colour quality, controls and residential applicability",
+      "priority": 1,
+      "url": "https://store.ies.org/product/recommended-pratice-lighting-hospitality-spaces/",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "building-systems",
+      "author": "Corky Binggeli and Christine M. Lucas",
+      "title": "Building Systems for Interior Designers",
+      "edition": "4",
+      "publisher": "Wiley",
+      "stages": [
+        5
+      ],
+      "isbn": "9781119985075",
+      "coverage": "mechanical, electrical, plumbing and access coordination",
+      "priority": 2,
+      "url": "https://www.wiley-vch.de/en?isbn=9781119985075&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "materials",
+      "author": "Corky Binggeli",
+      "title": "Materials for Interior Environments",
+      "edition": "2",
+      "publisher": "Wiley",
+      "stages": [
+        6
+      ],
+      "isbn": "9781118306352",
+      "coverage": "moisture exposure, durability, cleaning and finish selection",
+      "priority": 2,
+      "url": "https://www.wiley-vch.de/en?isbn=9781118306352&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "construction-illustrated",
+      "author": "Francis D. K. Ching",
+      "title": "Building Construction Illustrated",
+      "edition": "7",
+      "publisher": "Wiley",
+      "stages": [
+        6
+      ],
+      "isbn": "9781394279272",
+      "coverage": "envelope transitions, openings and junctions",
+      "priority": 2,
+      "url": "https://www.wiley-vch.de/en?isbn=9781394279272&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "sun-wind-light",
+      "author": "Mark DeKay and G. Z. Brown",
+      "title": "Sun, Wind, and Light",
+      "edition": "3",
+      "publisher": "Wiley",
+      "stages": [
+        1,
+        3,
+        5
+      ],
+      "isbn": "9781118332887",
+      "coverage": "climate-responsive strategies and limits",
+      "priority": 2,
+      "url": "https://www.wiley-vch.de/en?isbn=9781118332887&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "acoustics",
+      "author": "Marshall Long",
+      "title": "Architectural Acoustics",
+      "edition": "2",
+      "publisher": "Elsevier",
+      "stages": [
+        4,
+        5,
+        6
+      ],
+      "isbn": "9780123982582",
+      "coverage": "sound paths, isolation and room acoustic design",
+      "priority": 2,
+      "url": "https://shop.elsevier.com/books/architectural-acoustics/long/978-0-12-398258-2",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "ashrae55",
+      "author": "American Society of Heating, Refrigerating and Air-Conditioning Engineers",
+      "title": "Standard 55: Thermal Environmental Conditions for Human Occupancy",
+      "edition": "to verify",
+      "publisher": "ASHRAE",
+      "stages": [
+        5
+      ],
+      "isbn": null,
+      "coverage": "comfort scope, methods, assumptions and exceptions",
+      "priority": 2,
+      "url": "https://www.ashrae.org/technical-resources/standards-and-guidelines/titles-purposes-and-scopes",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "ashrae622",
+      "author": "American Society of Heating, Refrigerating and Air-Conditioning Engineers",
+      "title": "Standard 62.2: Ventilation and Acceptable Indoor Air Quality in Residential Buildings",
+      "edition": "to verify",
+      "publisher": "ASHRAE",
+      "stages": [
+        5
+      ],
+      "isbn": null,
+      "coverage": "residential applicability, ventilation methods and exceptions",
+      "priority": 2,
+      "url": "https://www.ashrae.org/technical-resources/standards-and-guidelines/titles-purposes-and-scopes",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "pattern-language",
+      "author": "Christopher Alexander and collaborators",
+      "title": "A Pattern Language",
+      "edition": "1977",
+      "publisher": "Oxford University Press",
+      "stages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "isbn": null,
+      "coverage": "actual pattern passages; contents numbering alone does not verify claims",
+      "priority": 2,
+      "url": "https://www.patternlanguage.com/",
+      "status": "identified",
+      "metadata_basis": "User acquisition plan; edition and contents require original verification",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
+      "acquisition": "Supply lawfully accessible original or relevant pages including title/copyright page, figures, tables, captions and footnotes. Curator determines exact locators after reading."
+    },
+    {
+      "id": "yourhome-brief",
+      "author": "Australian Government, Your Home",
+      "title": "Preliminary Research",
+      "edition": "web accessed 2026-09-24",
+      "publisher": "Australian Government, Your Home",
+      "stages": [
+        0
+      ],
+      "url": "https://www.yourhome.gov.au/buy-build-renovate/preliminary-research",
+      "status": "content_verified",
+      "coverage": "Key points",
+      "priority": 0,
+      "access_location": "https://www.yourhome.gov.au/buy-build-renovate/preliminary-research",
+      "permissions": "Publicly readable; copyright retained. Store brief paraphrases and locators, not full pages or photographs.",
+      "verification": "Read named sections online on 2026-09-24; only the scoped summaries below are verified."
+    },
+    {
+      "id": "yourhome-orientation",
+      "author": "Australian Government, Your Home",
+      "title": "Orientation",
+      "edition": "web accessed 2026-09-24",
+      "publisher": "Australian Government, Your Home",
+      "stages": [
+        1,
+        3
+      ],
+      "url": "https://www.yourhome.gov.au/passive-design/orientation",
+      "status": "content_verified",
+      "coverage": "Principles of good orientation; Your climate; True north and sun angles",
+      "priority": 0,
+      "access_location": "https://www.yourhome.gov.au/passive-design/orientation",
+      "permissions": "Publicly readable; copyright retained. Store brief paraphrases and locators, not full pages or photographs.",
+      "verification": "Read named sections online on 2026-09-24; only the scoped summaries below are verified."
+    },
+    {
+      "id": "yourhome-shading",
+      "author": "Australian Government, Your Home",
+      "title": "Shading",
+      "edition": "web accessed 2026-09-24",
+      "publisher": "Australian Government, Your Home",
+      "stages": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "url": "https://www.yourhome.gov.au/passive-design/shading",
+      "status": "content_verified",
+      "coverage": "Key points",
+      "priority": 0,
+      "access_location": "https://www.yourhome.gov.au/passive-design/shading",
+      "permissions": "Publicly readable; copyright retained. Store brief paraphrases and locators, not full pages or photographs.",
+      "verification": "Read named sections online on 2026-09-24; only the scoped summaries below are verified."
+    },
+    {
+      "id": "yourhome-cost",
+      "author": "Australian Government, Your Home",
+      "title": "Affordability",
+      "edition": "web accessed 2026-09-24",
+      "publisher": "Australian Government, Your Home",
+      "stages": [
+        0,
+        2,
+        6
+      ],
+      "url": "https://www.yourhome.gov.au/buy-build-renovate/affordability",
+      "status": "content_verified",
+      "coverage": "Key points; Costs and savings of sustainability features",
+      "priority": 0,
+      "access_location": "https://www.yourhome.gov.au/buy-build-renovate/affordability",
+      "permissions": "Publicly readable; copyright retained. Store brief paraphrases and locators, not full pages or photographs.",
+      "verification": "Read named sections online on 2026-09-24; only the scoped summaries below are verified."
+    },
+    {
+      "id": "yourhome-noise",
+      "author": "Australian Government, Your Home",
+      "title": "Noise control",
+      "edition": "web accessed 2026-09-24",
+      "publisher": "Australian Government, Your Home",
+      "stages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "url": "https://www.yourhome.gov.au/live-adapt/noise-control",
+      "status": "content_verified",
+      "coverage": "Key points",
+      "priority": 0,
+      "access_location": "https://www.yourhome.gov.au/live-adapt/noise-control",
+      "permissions": "Publicly readable; copyright retained. Store brief paraphrases and locators, not full pages or photographs.",
+      "verification": "Read named sections online on 2026-09-24; only the scoped summaries below are verified."
+    },
+    {
+      "id": "yourhome-light",
+      "author": "Australian Government, Your Home",
+      "title": "Lighting",
+      "edition": "web accessed 2026-09-24",
+      "publisher": "Australian Government, Your Home",
+      "stages": [
+        4,
+        5
+      ],
+      "url": "https://www.yourhome.gov.au/energy/lighting",
+      "status": "content_verified",
+      "coverage": "Key points",
+      "priority": 0,
+      "access_location": "https://www.yourhome.gov.au/energy/lighting",
+      "permissions": "Publicly readable; copyright retained. Store brief paraphrases and locators, not full pages or photographs.",
+      "verification": "Read named sections online on 2026-09-24; only the scoped summaries below are verified."
+    },
+    {
+      "id": "aia-phases",
+      "author": "American Institute of Architects, Knowledge Resources staff",
+      "title": "Defining the architect\u2019s basic services",
+      "edition": "web accessed 2026-09-24",
+      "publisher": "American Institute of Architects, Knowledge Resources staff",
+      "stages": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "url": "https://www.aia.org/resource-center/defining-the-architects-basic-services",
+      "status": "content_verified",
+      "coverage": "Schematic design phase services; Design development phase services",
+      "priority": 0,
+      "access_location": "https://www.aia.org/resource-center/defining-the-architects-basic-services",
+      "permissions": "Publicly readable; copyright retained. Store brief paraphrases and locators, not full pages or photographs.",
+      "verification": "Read named sections online on 2026-09-24; only the scoped summaries below are verified."
+    },
+    {
+      "id": "norm-copenhagen",
+      "author": "Norm Architects",
+      "title": "1 Hotel Copenhagen",
+      "edition": "web accessed 2026-09-24",
+      "publisher": "Norm Architects",
+      "stages": [
+        0,
+        3,
+        4,
+        6,
+        7
+      ],
+      "url": "https://normcph.com/project/1-hotel-copenhagen/",
+      "status": "content_verified",
+      "coverage": "Project introduction and arrival description, before first image",
+      "priority": 0,
+      "access_location": "https://normcph.com/project/1-hotel-copenhagen/",
+      "permissions": "Publicly readable; copyright retained. Store brief paraphrases and locators, not full pages or photographs.",
+      "verification": "Read named sections online on 2026-09-24; only the scoped summaries below are verified."
+    },
+    {
+      "id": "wbdg-programming",
+      "author": "Whole Building Design Guide",
+      "title": "Architectural Programming",
+      "edition": "web to verify",
+      "publisher": "WBDG",
+      "stages": [
+        0,
+        2
+      ],
+      "coverage": "programming",
+      "priority": 1,
+      "url": "https://www.wbdg.org/design-disciplines/architectural-programming",
+      "access_location": null,
+      "status": "identified",
+      "permissions": "Check terms before extracting",
+      "verification": "Web request returned no readable content on 2026-09-24"
+    },
+    {
+      "id": "blender-rendering",
+      "author": "Blender Foundation",
+      "title": "Rendering",
+      "edition": "web to verify",
+      "publisher": "Blender Foundation",
+      "stages": [
+        7
+      ],
+      "coverage": "rendering capabilities",
+      "priority": 2,
+      "url": "https://www.blender.org/features/rendering/",
+      "access_location": null,
+      "status": "identified",
+      "permissions": "Check terms before extracting",
+      "verification": "Web fetch failed on 2026-09-24; existing pipeline is local implementation evidence only"
+    },
+    {
+      "id": "yabu-spaces",
+      "author": "Yabu Pushelberg",
+      "title": "Spaces",
+      "edition": "web to verify",
+      "publisher": "Yabu Pushelberg",
+      "stages": [
+        0,
+        3,
+        6
+      ],
+      "coverage": "design approach",
+      "priority": 2,
+      "url": "https://www.yabupushelberg.com/disciplines/spaces",
+      "access_location": null,
+      "status": "identified",
+      "permissions": "No image reproduction permission established",
+      "verification": "Identified in user plan; not read"
+    },
+    {
+      "id": "legacy-citations",
+      "author": "Unresolved legacy attributions",
+      "title": "Existing rule references pending original-source verification",
+      "edition": "unresolved",
+      "publisher": "unresolved",
+      "stages": [
+        3,
+        4,
+        5
+      ],
+      "coverage": "Legacy assertions, not source passages",
+      "access_location": null,
+      "permissions": "No original acquired",
+      "status": "identified",
+      "priority": 1,
+      "url": null
+    }
+  ],
+  "evidence": [
+    {
+      "id": "yourhome-brief",
+      "source_id": "yourhome-brief",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Key points",
+      "stages": [
+        0
+      ],
+      "summary": "Keep household needs and long-term performance goals visible through design decisions.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Design-process guidance only; adapt to site, household and climate. No numerical or legal requirement is established.",
+      "exceptions": "No dimensional, comfort-performance or cost guarantee; external professional checks remain where needed.",
+      "verification": "Manual reading of the named primary-source section, 2026-09-24; paraphrase checked against text.",
+      "applies_when": {}
+    },
+    {
+      "id": "yourhome-orientation",
+      "source_id": "yourhome-orientation",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Principles of good orientation; Your climate; True north and sun angles",
+      "stages": [
+        1,
+        3
+      ],
+      "summary": "Evaluate climate, true north, seasonal sun and local wind before choosing orientation. Australian north-facing advice cannot be copied to another hemisphere.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Design-process guidance only; adapt to site, household and climate. No numerical or legal requirement is established.",
+      "exceptions": "No dimensional, comfort-performance or cost guarantee; external professional checks remain where needed.",
+      "verification": "Manual reading of the named primary-source section, 2026-09-24; paraphrase checked against text.",
+      "applies_when": {}
+    },
+    {
+      "id": "yourhome-shading",
+      "source_id": "yourhome-shading",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Key points",
+      "stages": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "summary": "Coordinate shading with orientation and seasonal solar access; fixed and adjustable devices offer different controls.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Design-process guidance only; adapt to site, household and climate. No numerical or legal requirement is established.",
+      "exceptions": "No dimensional, comfort-performance or cost guarantee; external professional checks remain where needed.",
+      "verification": "Manual reading of the named primary-source section, 2026-09-24; paraphrase checked against text.",
+      "applies_when": {}
+    },
+    {
+      "id": "yourhome-cost",
+      "source_id": "yourhome-cost",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Key points; Costs and savings of sustainability features",
+      "stages": [
+        0,
+        2,
+        6
+      ],
+      "summary": "Consider operating and maintenance costs alongside construction cost; area, envelope and equipment choices affect them.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Design-process guidance only; adapt to site, household and climate. No numerical or legal requirement is established.",
+      "exceptions": "No dimensional, comfort-performance or cost guarantee; external professional checks remain where needed.",
+      "verification": "Manual reading of the named primary-source section, 2026-09-24; paraphrase checked against text.",
+      "applies_when": {}
+    },
+    {
+      "id": "yourhome-noise",
+      "source_id": "yourhome-noise",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Key points",
+      "stages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "summary": "Distinguish airborne transmission, structure-borne noise and room reverberation. Inspect doors, vents, penetrations and junctions; soft finishes alone do not establish isolation.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Design-process guidance only; adapt to site, household and climate. No numerical or legal requirement is established.",
+      "exceptions": "No dimensional, comfort-performance or cost guarantee; external professional checks remain where needed.",
+      "verification": "Manual reading of the named primary-source section, 2026-09-24; paraphrase checked against text.",
+      "applies_when": {}
+    },
+    {
+      "id": "yourhome-light",
+      "source_id": "yourhome-light",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Key points",
+      "stages": [
+        4,
+        5
+      ],
+      "summary": "Combine daylight and task lighting while checking the thermal consequences of solar access.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Design-process guidance only; adapt to site, household and climate. No numerical or legal requirement is established.",
+      "exceptions": "No dimensional, comfort-performance or cost guarantee; external professional checks remain where needed.",
+      "verification": "Manual reading of the named primary-source section, 2026-09-24; paraphrase checked against text.",
+      "applies_when": {}
+    },
+    {
+      "id": "aia-phases",
+      "source_id": "aia-phases",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Schematic design phase services; Design development phase services",
+      "stages": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "summary": "Schematic work communicates spatial relationships through plans, sections and elevations. Development coordinates architecture, structure and services. Listed deliverables are examples, not mandatory requirements.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Design-process guidance only; adapt to site, household and climate. No numerical or legal requirement is established.",
+      "exceptions": "No dimensional, comfort-performance or cost guarantee; external professional checks remain where needed.",
+      "verification": "Manual reading of the named primary-source section, 2026-09-24; paraphrase checked against text.",
+      "applies_when": {}
+    },
+    {
+      "id": "norm-copenhagen",
+      "source_id": "norm-copenhagen",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Project introduction and arrival description, before first image",
+      "stages": [
+        0,
+        3,
+        4,
+        6,
+        7
+      ],
+      "summary": "The designers describe arrival as a transition from street activity to a calm interior, using timber, stone, planting and upholstery.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Design-process guidance only; adapt to site, household and climate. No numerical or legal requirement is established.",
+      "exceptions": "No dimensional, comfort-performance or cost guarantee; external professional checks remain where needed.",
+      "verification": "Manual reading of the named primary-source section, 2026-09-24; paraphrase checked against text.",
+      "applies_when": {}
+    },
+    {
+      "id": "legacy-SAN-01",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        3
+      ],
+      "summary": "Sanitary accommodation present on the level",
+      "readable_citation": "Neufert, Architects' Data -- dwelling schedule: every dwelling requires sanitary accommodation; near-universal code requirement",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-CIRC-01",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        3
+      ],
+      "summary": "Private rooms not reached through a living space",
+      "readable_citation": "Alexander, A Pattern Language -- 127 Intimacy Gradient; Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-CIRC-02",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        3
+      ],
+      "summary": "Entrance has a threshold zone",
+      "readable_citation": "Alexander, A Pattern Language -- 110 Main Entrance, 112 Entrance Transition, 130 Entrance Room; Neufert, Architects' Data -- entrances: a draught lobby or threshold zone",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-AREA-01",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Room meets its minimum floor area",
+      "readable_citation": "Neufert, Architects' Data -- minimum floor areas by room type",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-DIM-01",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Habitable room is wide enough to be usable",
+      "readable_citation": "General practice: below ~2.4 m a room will not take a bed plus circulation",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-DOOR-01",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Door clear width",
+      "readable_citation": "Neufert, Architects' Data -- doors: clear opening widths by room type",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-FURN-01",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Furniture fits where it is placed",
+      "readable_citation": "Geometric clash against the wall solid; footprints from Neufert, Architects' Data",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-FURN-02",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Furniture clearance achieved versus required",
+      "readable_citation": "Neufert, Architects' Data -- clearances by furniture type",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-FURN-03",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Two pieces do not occupy the same floor",
+      "readable_citation": "Geometric clash between footprints; footprints from Neufert, Architects' Data",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-DOOR-02",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Door leaf can swing",
+      "readable_citation": "Neufert, Architects' Data -- doors: the leaf must open through 90 degrees",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-LIGHT-01",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Glazing area against floor area",
+      "readable_citation": "Neufert, Architects' Data -- daylight: glazing area at least 1/8 of floor area in habitable rooms",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-CIRC-03",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "A route of minimum width connects the room's doors",
+      "readable_citation": "Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling",
+      "status": "unverified",
+      "category": "professional_recommendation",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "legacy-VIEW-01",
+      "source_id": "legacy-citations",
+      "edition": "unresolved",
+      "locator": null,
+      "stages": [
+        4
+      ],
+      "summary": "Whether a window frames a view worth keeping",
+      "readable_citation": "Alexander, A Pattern Language -- 134 Zen View",
+      "status": "unverified",
+      "category": "qualitative_principle",
+      "unit": null,
+      "conditions": "Applicability unresolved until original source and dimensional context verified",
+      "exceptions": "Not established",
+      "verification": null,
+      "applies_when": {},
+      "enabled_for_approval": false
+    },
+    {
+      "id": "australian-heating-orientation",
+      "source_id": "yourhome-orientation",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Good orientation for cool or temperate climates, opening paragraphs",
+      "stages": [
+        1,
+        3
+      ],
+      "summary": "For the stated Australian cool or temperate setting, place living areas toward north for winter solar access and coordinate summer shading.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Australian southern-hemisphere cool or temperate setting with winter heating needs; not a global north-facing rule.",
+      "exceptions": "Cooling-dominated and different-hemisphere sites need their own orientation assessment.",
+      "verification": "Read original Your Home section on 2026-09-24; no numerical rule extracted.",
+      "applies_when": {
+        "hemisphere": [
+          "south"
+        ],
+        "climate": [
+          "cool-temperate",
+          "temperate"
+        ],
+        "region": [
+          "Australia"
+        ],
+        "winter_heating": [
+          "needed"
+        ]
+      }
+    }
+  ],
+  "precedents": [
+    {
+      "id": "precedent-copenhagen",
+      "source_id": "norm-copenhagen",
+      "edition": "web accessed 2026-09-24",
+      "locator": "Project introduction and arrival description, before first image",
+      "stages": [
+        0,
+        3,
+        4,
+        6,
+        7
+      ],
+      "status": "verified",
+      "category": "qualitative_principle",
+      "summary": "Designer-authored arrival study; no photograph-derived dimensions.",
+      "conditions": "Transfer atmosphere and sequencing only, adapted to household, climate and maintenance.",
+      "verification": "Read original designer description on 2026-09-24.",
+      "applies_when": {},
+      "analysis": {
+        "arrival": "Text describes transition from active street to calm interior.",
+        "sequence": "Stair and atrium described as part of arrival.",
+        "proportions": "No measured proportions published in reviewed passage.",
+        "views": "No verified sightline geometry.",
+        "materials": "Timber, stone, planting and upholstery described together.",
+        "light": "Atrium light is described qualitatively; no measured illuminance.",
+        "furniture": "Upholstery contributes to material composition; access dimensions unknown.",
+        "details": "Construction assemblies and fixings unavailable."
+      },
+      "transfer": "Interpret as a domestic threshold and restrained tactile palette; recommendation is project interpretation.",
+      "limits": [
+        "Hotel staffing and upkeep differ from a home",
+        "Danish climate does not validate pilot shading",
+        "Scale and budget not transferable without drawings",
+        "Photographic staging does not prove comfort or circulation"
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "id": "0",
+      "name": "Intent",
+      "inputs": [
+        "household",
+        "routines",
+        "hosting",
+        "privacy",
+        "accessibility",
+        "maintenance",
+        "budget",
+        "taste"
+      ],
+      "questions": [
+        "Who is awake earliest, and who needs quiet then?",
+        "What do you enjoy in a hotel, and what would be inconvenient at home?",
+        "Which three outcomes should survive a budget reduction?"
+      ],
+      "evidence": [
+        "yourhome-brief",
+        "yourhome-cost",
+        "norm-copenhagen"
+      ],
+      "deliverables": [
+        "quality_brief",
+        "design_direction"
+      ],
+      "approval": [
+        "Routines and priorities are specific",
+        "Taste references analysed into observable attributes",
+        "Budget scope and exclusions understood"
+      ],
+      "method": [
+        "Translate each routine into a requirement with an identifier, priority and observable test.",
+        "Read references for proportion, palette, texture, lighting and atmosphere; obtain client response to a small illustrated direction.",
+        "Record disagreement, maintenance tolerance and budget trade-offs before asking for approval."
+      ],
+      "worked_example": "Two adults work at home; children sleep before weekly guests leave. Brief separates study calls and sleeping access from entertaining. Warm timber is a pilot preference, not a universal luxury requirement.",
+      "failures": [
+        "Failure: asking the client to choose duct sizes. Remedy: ask about noise, sleep and room use; develop technical implications in Systems.",
+        "Failure: calling every large room luxurious. Remedy: test routines and prioritise useful space in Fit."
+      ],
+      "quantitative_checks": [
+        "Measured geometry and source-validated targets where available; otherwise unresolved"
+      ],
+      "qualitative_criteria": [
+        "Routines and priorities are specific",
+        "Taste references analysed into observable attributes",
+        "Budget scope and exclusions understood"
+      ],
+      "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
+      "illustration": "docs/guidance/pilot-concepts.svg"
+    },
+    {
+      "id": "1",
+      "name": "Ground",
+      "inputs": [
+        "location",
+        "climate",
+        "hemisphere",
+        "north",
+        "boundary",
+        "levels",
+        "access",
+        "neighbours",
+        "trees",
+        "utilities",
+        "views",
+        "noise",
+        "wind"
+      ],
+      "questions": [
+        "Where would you want to sit outside at breakfast?",
+        "Which neighbouring views or noises bother you?"
+      ],
+      "evidence": [
+        "yourhome-orientation",
+        "yourhome-shading"
+      ],
+      "deliverables": [
+        "site_constraints",
+        "landscape_strategy"
+      ],
+      "approval": [
+        "Surveyed facts separated from assumptions",
+        "Sun wind views and noise inform orientation",
+        "Landscape water and access conflicts recorded"
+      ],
+      "method": [
+        "Inventory boundaries, existing buildings, trees, levels, access and utilities; attach provenance to each fact.",
+        "Draw true north, views, noise, seasonal shade and neighbours on one diagram. Test seasonal solar geometry using actual latitude.",
+        "Keep tree roots, drainage, equipment and garden paths in the same site strategy; do not substitute planting imagery for a maintainable landscape."
+      ],
+      "worked_example": "Pilot ground is a fictional 30 by 40 metre rectangle in a northern-hemisphere hot-dry scenario; road south and views north. These are known scenario inputs, not surveyed facts. Summer wind is an assumption needing weather evidence.",
+      "failures": [
+        "Failure: copying Australian north-facing heating advice. Remedy: recompute seasonal sun for the actual hemisphere; reopen Order and Systems.",
+        "Failure: trees shown over a service trench. Remedy: coordinate root space and utility routes before room placement."
+      ],
+      "quantitative_checks": [
+        "Measured geometry and source-validated targets where available; otherwise unresolved"
+      ],
+      "qualitative_criteria": [
+        "Surveyed facts separated from assumptions",
+        "Sun wind views and noise inform orientation",
+        "Landscape water and access conflicts recorded"
+      ],
+      "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
+      "illustration": "docs/guidance/pilot-concepts.svg"
+    },
+    {
+      "id": "2",
+      "name": "Fit",
+      "inputs": [
+        "area_schedule",
+        "budget",
+        "available_area",
+        "outdoor_priorities"
+      ],
+      "questions": [
+        "Would you give up a second lounge to keep a larger garden?",
+        "Does the budget include furniture, landscape and professional fees?"
+      ],
+      "evidence": [
+        "aia-phases",
+        "yourhome-cost"
+      ],
+      "deliverables": [
+        "area_schedule",
+        "cost_assumptions",
+        "tradeoffs"
+      ],
+      "approval": [
+        "Net and gross areas reconciled",
+        "Cost assumptions and exclusions explicit",
+        "Outdoor and service space retained"
+      ],
+      "method": [
+        "Schedule individual usable room areas, then separately add circulation, walls, structural zones and service space without double counting.",
+        "Compare totals and each storey footprint with supplied physical constraints; statutory inputs, if supplied, remain externally established.",
+        "Show cost scenarios with currency, date, rate provenance, exclusions and contingency. Without rates report cost unresolved; never invent a local estimate."
+      ],
+      "worked_example": "Pilot usable rooms total 272 square metres. Circulation 40, walls 32, structural zones 12 and services 14 give 370 square metres against a 400 square metre scenario allowance. These allowances are project assumptions; no net-to-gross benchmark is asserted.",
+      "failures": [
+        "Failure: gross area passes but ground-floor rooms exceed the footprint. Remedy: reconcile each level and reopen Order.",
+        "Failure: beautiful courtyard consumes circulation allowance. Remedy: recalculate and present a brief trade-off."
+      ],
+      "quantitative_checks": [
+        "Area arithmetic with explicit project assumptions"
+      ],
+      "qualitative_criteria": [
+        "Net and gross areas reconciled",
+        "Cost assumptions and exclusions explicit",
+        "Outdoor and service space retained"
+      ],
+      "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
+      "illustration": "docs/guidance/pilot-concepts.svg"
+    },
+    {
+      "id": "3",
+      "name": "Order",
+      "inputs": [
+        "adjacencies",
+        "privacy",
+        "structure_strategy",
+        "service_routes",
+        "climate",
+        "landscape_strategy"
+      ],
+      "questions": [
+        "Should guests see the garden immediately or discover it after arrival?",
+        "How should children reach bedrooms when you are hosting?"
+      ],
+      "evidence": [
+        "aia-phases",
+        "yourhome-orientation",
+        "yourhome-noise",
+        "norm-copenhagen"
+      ],
+      "deliverables": [
+        "three_concepts",
+        "recommendation",
+        "plans_sections_elevations",
+        "independent_critique"
+      ],
+      "approval": [
+        "Three concepts differ in spatial organisation",
+        "Private and service routes work",
+        "Structure wet stacking and landscape coordinated",
+        "Recommendation addresses critique",
+        "Drawn routes match the tested connectivity graph"
+      ],
+      "method": [
+        "Compare compact bar, courtyard and separated pavilion organisations using the same brief and area definitions.",
+        "Draw arrival, adjacency, private circulation, massing and at least one section together; test indoor-outdoor thresholds.",
+        "Overlay tentative supports, spans, stairs, wet stacks and main service paths. Flag unsized spans; never imply engineering certification.",
+        "Recommend one with reasons, diagram, evidence, cost/space/maintenance consequences and a client decision. Obtain a separately authored critique."
+      ],
+      "worked_example": "Pilot recommends a compact garden bar: private hall bypasses living and stacked service core limits distribution. Courtyard improves sheltered outdoor life but uses more envelope; pavilion exposes bedrooms to the hosting route and needs an unresolved long span.",
+      "failures": [
+        "Failure: spectacular glazing hides structural depth and glare. Remedy: draw the section with shading, beam zone and curtains; reopen Fit if necessary.",
+        "Failure: bedroom access crosses the party. Remedy: reserve a private hall, then recalculate area."
+      ],
+      "quantitative_checks": [
+        "Measured geometry and source-validated targets where available; otherwise unresolved"
+      ],
+      "qualitative_criteria": [
+        "Three concepts differ in spatial organisation",
+        "Private and service routes work",
+        "Structure wet stacking and landscape coordinated",
+        "Recommendation addresses critique"
+      ],
+      "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
+      "illustration": "docs/guidance/pilot-concepts.svg"
+    },
+    {
+      "id": "4",
+      "name": "Rooms",
+      "inputs": [
+        "furniture",
+        "openings",
+        "room_activities",
+        "accessibility",
+        "model"
+      ],
+      "questions": [
+        "Where do you put luggage, laundry and devices?",
+        "Can one person dress while another sleeps?"
+      ],
+      "evidence": [
+        "aia-phases",
+        "yourhome-light",
+        "yourhome-noise"
+      ],
+      "deliverables": [
+        "dimensioned_rooms",
+        "furniture_access",
+        "opening_schedule"
+      ],
+      "approval": [
+        "Daily activities and furniture access tested",
+        "Doors curtains and storage coordinate",
+        "Interior and exterior dimensions reconcile"
+      ],
+      "method": [
+        "Use measured geometry for room boundaries and actual furniture sizes; show doors, drawers, chair use, luggage and bed-making routes.",
+        "Resolve kitchens, bathrooms, dressing rooms and storage in plan and elevation; draw ceiling heights, reveals and shading in section.",
+        "Report achieved geometry separately from unverified access targets; verify the source passage before turning a diagnostic into a required minimum."
+      ],
+      "worked_example": "Bedroom fixture contains six furniture objects. Review keeps the unknown chair as an obstacle. Moving a bedside table onto the bed must expose a physical clash even when it is marked as a bed accessory. Existing access thresholds remain unverified.",
+      "failures": [
+        "Failure: replacing measured furniture by catalogue sizes. Remedy: retain extracted footprints and inspect disagreement.",
+        "Failure: plan fits but curtains collide with a wardrobe. Remedy: review opening and joinery elevations; return to Order if wall length changes."
+      ],
+      "quantitative_checks": [
+        "Measured geometry and source-validated targets where available; otherwise unresolved"
+      ],
+      "qualitative_criteria": [
+        "Daily activities and furniture access tested",
+        "Doors curtains and storage coordinate",
+        "Interior and exterior dimensions reconcile"
+      ],
+      "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
+      "illustration": "docs/guidance/bedroom-worked-example.md"
+    },
+    {
+      "id": "5",
+      "name": "Systems",
+      "inputs": [
+        "comfort_targets",
+        "equipment",
+        "service_routes",
+        "controls",
+        "model"
+      ],
+      "questions": [
+        "Do you read in bed while someone else sleeps?",
+        "Which sounds or temperatures disturb you?"
+      ],
+      "evidence": [
+        "yourhome-light",
+        "yourhome-shading",
+        "yourhome-noise",
+        "aia-phases"
+      ],
+      "deliverables": [
+        "comfort_schedule",
+        "coordinated_ceiling",
+        "service_access"
+      ],
+      "approval": [
+        "Daylight glare blackout and scenes reviewed",
+        "Cooling ventilation acoustics power water coordinated",
+        "Equipment maintenance access shown",
+        "Measured light distinguished from comfort targets"
+      ],
+      "method": [
+        "Make a room-by-room schedule for daylight, glare, blackout, sound, temperature, ventilation, sockets, water and controls; name unresolved targets.",
+        "Overlay luminaires, grilles, detectors, curtains, beams, ducts and access panels on the reflected ceiling plan and a service section.",
+        "Use existing direct-light arithmetic for diagnostic points. Total-light uniformity, glare, ventilation and thermal predictions require their appropriate methods and verified targets."
+      ],
+      "worked_example": "Bedroom reader wants a separately controlled bedside task light and a dark sleeping scene. Existing photometric workflow can measure direct light; it cannot prove acoustic privacy or thermal comfort. A duct through the headboard bulkhead triggers a section and noise review.",
+      "failures": [
+        "Failure: bright image treated as adequate lighting. Remedy: calculate the defined task plane and explain missing bounce/shadows.",
+        "Failure: ceiling conceals inaccessible equipment. Remedy: show removal path and access panel; reopen Rooms for lost height."
+      ],
+      "quantitative_checks": [
+        "Measured geometry and source-validated targets where available; otherwise unresolved"
+      ],
+      "qualitative_criteria": [
+        "Daylight glare blackout and scenes reviewed",
+        "Cooling ventilation acoustics power water coordinated",
+        "Equipment maintenance access shown",
+        "Measured light distinguished from comfort targets"
+      ],
+      "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
+      "illustration": "docs/guidance/bedroom-worked-example.md"
+    },
+    {
+      "id": "6",
+      "name": "Substance",
+      "inputs": [
+        "material_intent",
+        "exposure",
+        "maintenance",
+        "junctions",
+        "landscape_strategy"
+      ],
+      "questions": [
+        "Which surfaces are you willing to reseal or polish?",
+        "Should ageing and patina be visible?"
+      ],
+      "evidence": [
+        "yourhome-noise",
+        "yourhome-cost",
+        "aia-phases",
+        "norm-copenhagen"
+      ],
+      "deliverables": [
+        "material_board",
+        "finish_schedule",
+        "junction_details",
+        "planting_schedule"
+      ],
+      "approval": [
+        "Material transitions and alignment resolved",
+        "Moisture cleaning durability and replacement checked",
+        "Planting suits site and maintenance capacity"
+      ],
+      "method": [
+        "Schedule materials by room and exposure, with product evidence, sample status, cleaning and replacement access.",
+        "Draw representative floor-to-wall, window reveal, wet-area threshold, joinery-light and indoor-outdoor junctions; show layers and interfaces.",
+        "Coordinate drainage, weathering, acoustic seals and fixing zones with structure and services. Do not invent waterproofing assemblies without tested manufacturer details."
+      ],
+      "worked_example": "Bedroom study pairs timber joinery with a recessed task light: reserve accessible driver space and a removable panel. Garden threshold needs drainage and moisture detailing before the seamless appearance can be accepted.",
+      "failures": [
+        "Failure: render hides a fragile stone edge or impossible reveal. Remedy: dimension an assembly and obtain supplier details.",
+        "Failure: upholstery mistaken for wall sound isolation. Remedy: trace penetrations and flanking paths with Systems."
+      ],
+      "quantitative_checks": [
+        "Measured geometry and source-validated targets where available; otherwise unresolved"
+      ],
+      "qualitative_criteria": [
+        "Material transitions and alignment resolved",
+        "Moisture cleaning durability and replacement checked",
+        "Planting suits site and maintenance capacity"
+      ],
+      "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
+      "illustration": "docs/guidance/bedroom-worked-example.md"
+    },
+    {
+      "id": "7",
+      "name": "Proof",
+      "inputs": [
+        "reviewed_revision",
+        "model",
+        "render_input",
+        "requirements",
+        "open_issues"
+      ],
+      "questions": [
+        "Does the arrival and evening atmosphere match the agreed direction?",
+        "Which unresolved trade-off needs your decision?"
+      ],
+      "evidence": [
+        "aia-phases",
+        "norm-copenhagen"
+      ],
+      "deliverables": [
+        "coordinated_presentation",
+        "requirements_trace",
+        "open_issue_log"
+      ],
+      "approval": [
+        "Plans sections renders and schedules describe one revision",
+        "Every priority requirement has a design response",
+        "Independent critique and unresolved issues visible",
+        "Client approval explicitly recorded"
+      ],
+      "method": [
+        "Compare day/night views, measured model, plans, sections, interiors and landscape together. Show sightlines and routes that hero views can hide.",
+        "Bind render inputs and image files to the reviewed model and project revision using content hashes; rerun affected review after any change.",
+        "Trace every client requirement to an artifact; distinguish unresolved issues, rejected alternatives and accepted trade-offs. Presentation readiness does not authorize a real gate."
+      ],
+      "worked_example": "Pilot pavilion can look convincing in a garden view while its graph fails private access. Bedroom presentation must match its measured extract and rendering-input hashes; replacing an image or changing a model invalidates the binding.",
+      "failures": [
+        "Failure: beautiful image suppresses unresolved glare. Remedy: include the issue in the presentation and keep approval readiness closed.",
+        "Failure: cached review survives a changed source edition. Remedy: invalidate evidence-dependent review and recheck applicability."
+      ],
+      "quantitative_checks": [
+        "Measured geometry and source-validated targets where available; otherwise unresolved"
+      ],
+      "qualitative_criteria": [
+        "Plans sections renders and schedules describe one revision",
+        "Every priority requirement has a design response",
+        "Independent critique and unresolved issues visible",
+        "Client approval explicitly recorded"
+      ],
+      "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
+      "illustration": "docs/guidance/bedroom-worked-example.md"
+    }
+  ]
+}

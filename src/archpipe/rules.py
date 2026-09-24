@@ -1,4 +1,10 @@
-"""Design review: check an L0 spec against published planning dimensions.
+"""Design review: check geometry against legacy diagnostic planning dimensions.
+
+Historical source attributions below have not been verified against original
+edition-specific passages. Evidence references expose that unresolved status;
+the approval boundary lives in guidance.py. Valid geometry arithmetic does not
+validate a target or make a published requirement. The following historical
+description explains the engine's intended role, not completed source verification.
 
 This is the critic, and it is the honest version of "AI as architect".
 It does not invent layouts. It checks a layout against figures that have
@@ -35,7 +41,7 @@ sheet next to the thing they are about.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Callable
 
 from shapely.geometry import Point as ShpPoint, Polygon
@@ -136,6 +142,9 @@ class Rule:
     reference: str
     remedies: tuple = ()
     note: str = ""
+    # Structured cards are additive: readable historical citations stay intact.
+    evidence_refs: tuple[str, ...] = ()
+    evidence_status: str = "unverified"
 
     def __post_init__(self) -> None:
         if self.stage not in STAGES:
@@ -210,6 +219,8 @@ class Finding:
     kind: str = ""
     remedies: tuple = ()
     measured: Measured | None = None
+    evidence_refs: tuple[str, ...] = ()
+    evidence_status: str = "unverified"
 
     def __post_init__(self) -> None:
         if self.severity not in SEVERITIES:
@@ -305,6 +316,7 @@ def _finding(rule_id: str, severity: str, message: str, *, where: str = "",
         rule=rule_id, severity=severity, message=message, where=where, at=at,
         reference=reference or r.reference, stage=r.stage, kind=r.kind,
         remedies=r.remedies, measured=measured,
+        evidence_refs=r.evidence_refs, evidence_status=r.evidence_status,
     )
 
 
@@ -334,7 +346,7 @@ def _finding(rule_id: str, severity: str, message: str, *, where: str = "",
 
 _NEUFERT = "Neufert, Architects' Data"
 
-RULES: dict[str, Rule] = {r.id: r for r in (
+RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) for r in (
     # ---- Stage 3 (Order): the concept decisions ------------------------
     Rule(
         "SAN-01", "Sanitary accommodation present on the level", 3, "computed",

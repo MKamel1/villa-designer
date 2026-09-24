@@ -21,3 +21,5 @@ Use [the learning index](../../../docs/LEARNINGS.md) when an observed
 failure changes the process. A reproduced bug needs a regression; an
 architectural choice needs a decision record. Keep the broader roadmap
 current after completing an example capability.
+
+Use [expert guidance](../../../docs/guidance/README.md) and the numbered stage package for this decision. `stage_context` returns inputs and evidence; `lookup_evidence` retrieves scoped passages and precedents; `review_stage` reports unresolved evidence and approval readiness. Existing numerical targets remain diagnostic until verified against original editions. Use the source curator for acquisition and verification and the architectural critic for an independent challenge. Keep client taste project-local.

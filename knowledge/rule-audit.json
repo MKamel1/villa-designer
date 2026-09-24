@@ -1,0 +1,604 @@
+{
+  "date": "2026-09-24",
+  "rules": [
+    {
+      "id": "SAN-01",
+      "stage": 3,
+      "kind": "computed",
+      "reference": "Neufert, Architects' Data -- dwelling schedule: every dwelling requires sanitary accommodation; near-universal code requirement",
+      "evidence_refs": [
+        "legacy-SAN-01"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "CIRC-01",
+      "stage": 3,
+      "kind": "computed",
+      "reference": "Alexander, A Pattern Language -- 127 Intimacy Gradient; Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling",
+      "evidence_refs": [
+        "legacy-CIRC-01"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "CIRC-02",
+      "stage": 3,
+      "kind": "computed",
+      "reference": "Alexander, A Pattern Language -- 110 Main Entrance, 112 Entrance Transition, 130 Entrance Room; Neufert, Architects' Data -- entrances: a draught lobby or threshold zone",
+      "evidence_refs": [
+        "legacy-CIRC-02"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "AREA-01",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "Neufert, Architects' Data -- minimum floor areas by room type",
+      "evidence_refs": [
+        "legacy-AREA-01"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "DIM-01",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "General practice: below ~2.4 m a room will not take a bed plus circulation",
+      "evidence_refs": [
+        "legacy-DIM-01"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "DOOR-01",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "Neufert, Architects' Data -- doors: clear opening widths by room type",
+      "evidence_refs": [
+        "legacy-DOOR-01"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "FURN-01",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "Geometric clash against the wall solid; footprints from Neufert, Architects' Data",
+      "evidence_refs": [
+        "legacy-FURN-01"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "FURN-02",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "Neufert, Architects' Data -- clearances by furniture type",
+      "evidence_refs": [
+        "legacy-FURN-02"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "FURN-03",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "Geometric clash between footprints; footprints from Neufert, Architects' Data",
+      "evidence_refs": [
+        "legacy-FURN-03"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "DOOR-02",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "Neufert, Architects' Data -- doors: the leaf must open through 90 degrees",
+      "evidence_refs": [
+        "legacy-DOOR-02"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "LIGHT-01",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "Neufert, Architects' Data -- daylight: glazing area at least 1/8 of floor area in habitable rooms",
+      "evidence_refs": [
+        "legacy-LIGHT-01"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "CIRC-03",
+      "stage": 4,
+      "kind": "computed",
+      "reference": "Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling",
+      "evidence_refs": [
+        "legacy-CIRC-03"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    },
+    {
+      "id": "VIEW-01",
+      "stage": 4,
+      "kind": "advisory",
+      "reference": "Alexander, A Pattern Language -- 134 Zen View",
+      "evidence_refs": [
+        "legacy-VIEW-01"
+      ],
+      "status": "unresolved",
+      "enabled_for_approval": false,
+      "reason": "Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only."
+    }
+  ],
+  "additional_targets": [
+    {
+      "location": "src/archpipe/catalogue.py",
+      "status": "unverified",
+      "scope": "All furniture dimensions, access zones, room areas, door widths and glazing ratios; broad citations only"
+    },
+    {
+      "location": "src/archpipe/feasibility.py",
+      "status": "project_assumption",
+      "scope": "Default efficiency 0.78 is not a verified universal recommendation"
+    },
+    {
+      "location": "src/archpipe/lighting.py",
+      "status": "unverified",
+      "scope": "Lighting targets and physical-model heuristics require separate passage and applicability checks; valid arithmetic does not validate targets"
+    },
+    {
+      "location": "docs/method/villa-design-method.md",
+      "status": "superseded_by_evidence_packages",
+      "scope": "Historical stair, lighting, colour and acoustic claims are not verified numerical standards"
+    }
+  ],
+  "catalogue": [
+    {
+      "id": "bed_single",
+      "label": "Single bed",
+      "width": 900,
+      "depth": 2000,
+      "clearance": {
+        "front": 750,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- bedrooms: 750 mm access to one long side",
+      "note": "One long side may abut a wall; the foot needs access.",
+      "clearance_any": [
+        [
+          "left",
+          "right"
+        ],
+        750
+      ],
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "bed_double",
+      "label": "Double bed",
+      "width": 1600,
+      "depth": 2000,
+      "clearance": {
+        "front": 750,
+        "back": 0.0,
+        "left": 750,
+        "right": 750
+      },
+      "source": "Neufert, Architects' Data -- bedrooms: 750 mm access to BOTH long sides",
+      "note": "A double bed with one side against a wall is a recognised planning fault.",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "wardrobe",
+      "label": "Wardrobe",
+      "width": 1200,
+      "depth": 600,
+      "clearance": {
+        "front": 750,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- storage: 750 mm to open doors and stand",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "sofa_3seat",
+      "label": "Sofa, 3 seat",
+      "width": 2100,
+      "depth": 900,
+      "clearance": {
+        "front": 450,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- seating: 400-450 mm sofa to coffee table",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "sofa_2seat",
+      "label": "Sofa, 2 seat",
+      "width": 1500,
+      "depth": 900,
+      "clearance": {
+        "front": 450,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- seating: 400-450 mm sofa to coffee table",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "coffee_table",
+      "label": "Coffee table",
+      "width": 1100,
+      "depth": 600,
+      "clearance": {
+        "front": 450,
+        "back": 450,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- seating groups",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "tv_unit",
+      "label": "TV unit",
+      "width": 1600,
+      "depth": 450,
+      "clearance": {
+        "front": 2500,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "General practice: ~2.5 m minimum viewing distance for a domestic screen",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "dining_4",
+      "label": "Dining table, 4",
+      "width": 1200,
+      "depth": 800,
+      "clearance": {
+        "front": 800,
+        "back": 800,
+        "left": 800,
+        "right": 800
+      },
+      "source": "Neufert, Architects' Data -- dining: 800 mm per side to seat and rise",
+      "note": "1000 mm is preferred where the side is also a circulation route.",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "dining_6",
+      "label": "Dining table, 6",
+      "width": 1800,
+      "depth": 900,
+      "clearance": {
+        "front": 800,
+        "back": 800,
+        "left": 800,
+        "right": 800
+      },
+      "source": "Neufert, Architects' Data -- dining: 800 mm per side to seat and rise",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "kitchen_run",
+      "label": "Kitchen run",
+      "width": 3000,
+      "depth": 600,
+      "clearance": {
+        "front": 1200,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- kitchens: 1200 mm working aisle",
+      "note": "900 mm is the absolute minimum for a single-person galley.",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "kitchen_island",
+      "label": "Kitchen island",
+      "width": 1800,
+      "depth": 900,
+      "clearance": {
+        "front": 1200,
+        "back": 1200,
+        "left": 1000,
+        "right": 1000
+      },
+      "source": "Neufert, Architects' Data -- kitchens: 1200 mm working aisle",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "fridge",
+      "label": "Fridge/freezer",
+      "width": 700,
+      "depth": 700,
+      "clearance": {
+        "front": 1100,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "General practice: door swing plus standing room",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "wc",
+      "label": "WC pan",
+      "width": 400,
+      "depth": 700,
+      "clearance": {
+        "front": 600,
+        "back": 0.0,
+        "left": 200,
+        "right": 200
+      },
+      "source": "Neufert, Architects' Data -- sanitary: 600 mm clear in front of the pan",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "washbasin",
+      "label": "Washbasin",
+      "width": 600,
+      "depth": 500,
+      "clearance": {
+        "front": 700,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- sanitary: 700 mm standing room at a basin",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "bath",
+      "label": "Bath",
+      "width": 1700,
+      "depth": 750,
+      "clearance": {
+        "front": 700,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- sanitary: 700 mm alongside for access",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "shower",
+      "label": "Shower tray",
+      "width": 900,
+      "depth": 900,
+      "clearance": {
+        "front": 700,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- sanitary: 900x900 minimum practical tray",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "desk",
+      "label": "Desk",
+      "width": 1400,
+      "depth": 700,
+      "clearance": {
+        "front": 900,
+        "back": 0.0,
+        "left": 0.0,
+        "right": 0.0
+      },
+      "source": "Neufert, Architects' Data -- workplaces: 900 mm for a seated chair zone",
+      "note": "",
+      "clearance_any": null,
+      "status": "unverified",
+      "enabled_for_approval": false
+    }
+  ],
+  "planning": [
+    {
+      "id": "corridor_min",
+      "value": 900,
+      "unit": "mm",
+      "reference": "Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "corridor_preferred",
+      "value": 1200,
+      "unit": "mm",
+      "reference": "Neufert, Architects' Data -- circulation: 1200 mm for two people to pass",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "door_clear_habitable",
+      "value": 800,
+      "unit": "mm",
+      "reference": "Neufert, Architects' Data -- doors: 800 mm clear width to habitable rooms",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "door_clear_entrance",
+      "value": 900,
+      "unit": "mm",
+      "reference": "Neufert, Architects' Data -- doors: 900 mm at a dwelling entrance",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "door_clear_wc",
+      "value": 700,
+      "unit": "mm",
+      "reference": "Neufert, Architects' Data -- doors: 700 mm minimum to a WC",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "ceiling_min",
+      "value": 2400,
+      "unit": "mm",
+      "reference": "General practice / common code minimum for habitable rooms; Neufert cites 2500 mm as preferred",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "wheelchair_turn",
+      "value": 1500,
+      "unit": "mm",
+      "reference": "Neufert, Architects' Data -- accessibility: 1500 mm turning circle",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "daylight_ratio",
+      "value": 0.125,
+      "unit": "ratio",
+      "reference": "Neufert, Architects' Data -- daylight: glazing area at least 1/8 of floor area in habitable rooms",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "room_min_width",
+      "value": 2400,
+      "unit": "mm",
+      "reference": "General practice: below ~2.4 m a room will not take a bed plus circulation",
+      "status": "unverified",
+      "enabled_for_approval": false
+    }
+  ],
+  "room_areas": [
+    {
+      "id": "bedroom_single",
+      "value": 8.0,
+      "unit": "m2",
+      "reference": "Neufert, Architects' Data -- minimum single bedroom",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "bedroom",
+      "value": 12.0,
+      "unit": "m2",
+      "reference": "Neufert, Architects' Data -- minimum double bedroom",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "living",
+      "value": 16.0,
+      "unit": "m2",
+      "reference": "Neufert, Architects' Data -- minimum living room for a small dwelling",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "kitchen",
+      "value": 6.0,
+      "unit": "m2",
+      "reference": "Neufert, Architects' Data -- minimum separate kitchen",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "bathroom",
+      "value": 3.5,
+      "unit": "m2",
+      "reference": "Neufert, Architects' Data -- minimum bathroom with WC, basin and bath/shower",
+      "status": "unverified",
+      "enabled_for_approval": false
+    },
+    {
+      "id": "wc",
+      "value": 1.4,
+      "unit": "m2",
+      "reference": "Neufert, Architects' Data -- minimum separate WC compartment",
+      "status": "unverified",
+      "enabled_for_approval": false
+    }
+  ]
+}

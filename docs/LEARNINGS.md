@@ -109,3 +109,13 @@ For every defect, answer three questions before closing it:
 Do not copy bedroom coordinates, permissive example scope, or proxy
 fallbacks into universal villa rules. A later real-site result must not
 inherit the example's assumptions unnoticed.
+
+## Evidence-aware design gates
+
+Observed: existing rule records name books or general practice without edition-specific passages. Calculation tests validate arithmetic, not the target or its applicability. The new guidance boundary keeps those checks diagnostic and rejects wrong editions, unverified numerical transcriptions, incompatible climate assumptions and qualitative-to-numerical promotion. `tests/test_guidance.py` exercises these failures, the real bedroom obstacle case, source/artifact cache invalidation, project isolation and explicit approval bound to a reviewed content fingerprint. Missing facts and incomplete comfort/structure evidence remain unresolved even for attractive concepts.
+
+Independent pilot critique caught a diagram route crossing a guest block although
+the abstract connectivity graph passed. The diagram now reserves an entrance
+strip; graph checks alone cannot establish plan geometry. Keep an explicit
+diagram/graph comparison in the Order review, and mark incomplete narrative
+facts missing or assumed rather than calling a generic pointer a known input.
