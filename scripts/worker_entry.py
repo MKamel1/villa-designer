@@ -64,6 +64,7 @@ def main():
     assets = {name:value for name,value in manifest['files'].items() if name.startswith('assets/')}
     env = {**os.environ,'PYTHONPATH':str(release/'src'),'PYTHONIOENCODING':'utf-8',
            'ARCHPIPE_IES_DIR':str(release/'assets/ies'),
+           'ARCHPIPE_ASSET_LIBRARY':str(root/'assets/library'),
            'OMP_NUM_THREADS':'8','OPENBLAS_NUM_THREADS':'8'}
     packages = subprocess.check_output([sys.executable,'-m','pip','freeze'],text=True).splitlines()
     runtime = {'python':sys.version,'system':platform.platform(),'packages':packages,

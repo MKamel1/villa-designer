@@ -29,6 +29,7 @@ distribution function, the light model behind Blender's Principled BSDF
 node; IOR = index of refraction, the Principled BSDF's glass parameter.
 """
 import math
+import os
 
 import bmesh
 import bpy
@@ -528,7 +529,133 @@ def _enhance_dark_metal(mat):
     _mark_done(mat, key)
 
 
-def enhance_finishes(data):
+def _load_pbr_images(library_root, asset_id):
+    """Load an ambientCG material's Color/Roughness/NormalGL maps by name.
+
+    Returns None (never a partial dict) if the library or any expected file
+    is missing, so the caller's fallback is "keep the procedural material
+    as-is", not a half-textured one.
+    """
+    base = os.path.join(library_root, "materials", asset_id)
+    names = {"color": "%s_1K-JPG_Color.jpg" % asset_id,
+             "roughness": "%s_1K-JPG_Roughness.jpg" % asset_id}
+    images = {}
+    for key, fname in names.items():
+        path = os.path.join(base, fname)
+        if not os.path.isfile(path):
+            return None
+        img = bpy.data.images.get(fname) or bpy.data.images.load(path)
+        img.colorspace_settings.name = "sRGB" if key == "color" else "Non-Color"
+        images[key] = img
+    return images
+
+
+def _image_mean_linear_luminance(img, samples=20000):
+    """Approximate mean Rec.709 luminance, in LINEAR light, of an image.
+
+    `Image.pixels` returns the file's own encoded values -- for an sRGB-
+    tagged JPEG that is still gamma-encoded, not scene-linear -- regardless
+    of `colorspace_settings`, which only affects how Cycles reads the image
+    at render time. Averaging the raw bytes would read a photo's *encoded*
+    brightness as if it were radiance, which is not the quantity the
+    calibrated flat materials elsewhere in this file are stated in. Every
+    sampled channel goes through the same sRGB->linear curve `_make_material`
+    already uses before Rec.709-weighting it.
+    """
+    px = img.pixels[:]
+    n = len(px) // 4
+    if n == 0:
+        return 0.5
+    stride = max(1, n // samples)
+    total = 0.0
+    count = 0
+    for i in range(0, n, stride):
+        o = i * 4
+        r = _srgb_to_linear(px[o] * 255.0)
+        g = _srgb_to_linear(px[o + 1] * 255.0)
+        b = _srgb_to_linear(px[o + 2] * 255.0)
+        total += 0.2126 * r + 0.7152 * g + 0.0722 * b
+        count += 1
+    return total / count if count else 0.5
+
+
+def _apply_photo_texture(mat, library_root, asset_id, target_reflectance, tile_m=1.0,
+                         bump_strength=0.0):
+    """Swap a material's Base Color/Roughness for a real photographed sample.
+
+    The existing procedural bump (already wired to Normal by an earlier
+    `_enhance_*` call) is left untouched -- Base Color and Roughness are
+    separate BSDF inputs, so this only replaces what it explicitly links.
+    Photographed NormalGL maps are deliberately NOT used: they are tangent-
+    space data, correct only against the mesh's own UV layout, and these
+    objects carry none (Box-projected world coordinates drive the texture
+    instead, exactly like the procedural functions already do) -- wiring a
+    tangent-space map onto an unrelated projection produces confidently
+    wrong-looking shading, not a visible error. `bump_strength` > 0 instead
+    drives a height-based Bump node from the roughness map's own greyscale
+    -- a weave/grain map's roughness channel tracks its surface relief
+    closely enough to read as real bump, and Bump (unlike Normal Map) works
+    from a scalar height field in whatever coordinate space fed it, tangent
+    basis or not, so it has none of the Normal Map risk above. This
+    replaces whichever procedural bump the caller's earlier `_enhance_*`
+    call wired to Normal -- Blender drops the old link when a new one is
+    made to the same input, so it is a clean upgrade, not a conflict.
+
+    Mean-normalized to `target_reflectance` using the SAME linear-luminance
+    convention `_make_material`'s flat colours already use, so swapping a
+    flat calibrated colour for a photograph never changes the material's
+    average light return -- the one invariant this project's photometric
+    validation (ADR-0009, scripts/verify.py) depends on.
+    """
+    key = "photo_" + asset_id
+    if mat.get("presentation_photo_detail") == key:
+        return True
+    images = _load_pbr_images(library_root, asset_id)
+    if images is None:
+        return False
+    nt = mat.node_tree
+    bsdf = _bsdf(mat)
+    coord = _world_coord(nt)
+
+    mapping = nt.nodes.new("ShaderNodeMapping")
+    mapping.inputs["Scale"].default_value = (1.0 / tile_m, 1.0 / tile_m, 1.0 / tile_m)
+    nt.links.new(coord, mapping.inputs["Vector"])
+
+    color_node = nt.nodes.new("ShaderNodeTexImage")
+    color_node.image = images["color"]
+    color_node.projection = "BOX"
+    color_node.projection_blend = 0.3
+    nt.links.new(mapping.outputs["Vector"], color_node.inputs["Vector"])
+
+    rough_node = nt.nodes.new("ShaderNodeTexImage")
+    rough_node.image = images["roughness"]
+    rough_node.projection = "BOX"
+    rough_node.projection_blend = 0.3
+    nt.links.new(mapping.outputs["Vector"], rough_node.inputs["Vector"])
+
+    mean = _image_mean_linear_luminance(images["color"])
+    factor = (target_reflectance / mean) if mean > 0 else target_reflectance
+    scale = nt.nodes.new("ShaderNodeVectorMath")
+    scale.operation = "MULTIPLY"
+    scale.inputs[1].default_value = (factor, factor, factor)
+    nt.links.new(color_node.outputs["Color"], scale.inputs[0])
+    nt.links.new(scale.outputs["Vector"], bsdf.inputs["Base Color"])
+    nt.links.new(rough_node.outputs["Color"], bsdf.inputs["Roughness"])
+
+    if bump_strength > 0:
+        bump = nt.nodes.new("ShaderNodeBump")
+        bump.inputs["Strength"].default_value = bump_strength
+        bump.inputs["Distance"].default_value = 0.001
+        nt.links.new(rough_node.outputs["Color"], bump.inputs["Height"])
+        nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+
+    mat["presentation_photo_texture"] = asset_id
+    mat["presentation_photo_mean_scale"] = factor
+    mat["presentation_photo_detail"] = key
+    return True
+
+
+def enhance_finishes(data, library_root=None):
     """Add procedural detail to materials build_scene/build_items already made.
 
     Non-destructive: each material is found by name in `bpy.data.materials`
@@ -565,10 +692,13 @@ def enhance_finishes(data):
         if not timber:
             continue
         _enhance_floor_timber(timber)
-        report[timber.name] = (
-            "floor: plank joints ~1.3 m x 0.16 m (Brick Texture), grain bump, "
-            "+/-8% colour variance around extracted hue -- presentation "
-            "detail, not measured optics")
+        note = ("floor: plank joints ~1.3 m x 0.16 m (Brick Texture), grain bump, "
+                "+/-8% colour variance around extracted hue -- presentation "
+                "detail, not measured optics")
+        if library_root and _apply_photo_texture(timber, library_root, "WoodFloor041",
+                                                  0.25, tile_m=1.0):
+            note += "; Base Color/Roughness replaced by WoodFloor041 (ambientCG, CC0), mean-matched to 0.25"
+        report[timber.name] = note
         handled.add(timber)
 
     for wall_name in role_to_names.get("walls", ()):
@@ -605,14 +735,33 @@ def enhance_finishes(data):
             continue
         if not name_l.startswith("archpipe"):
             continue
+        reflectance = mat.get("presentation_reflectance", 0.35)
         if "oak" in name_l:
             _enhance_furniture_oak(mat)
-            report[mat.name] = "furniture oak: mild grain bump, +/-5% colour variance"
+            note = "furniture oak: mild grain bump, +/-5% colour variance"
+            if library_root and _apply_photo_texture(mat, library_root, "Wood049",
+                                                      reflectance, tile_m=0.8):
+                note += "; Base Color/Roughness replaced by Wood049 (ambientCG, CC0), mean-matched to %.2f" % reflectance
+            report[mat.name] = note
         elif any(k in name_l for k in ("linen", "bedding", "throw")):
             _enhance_fabric(mat)
-            report[mat.name] = "fabric: crossed-band weave bump + roughness variation"
+            note = "fabric: crossed-band weave bump + roughness variation"
+            fabric_id = ("Fabric019" if "bedding" in name_l else
+                        "Fabric082A" if "throw" in name_l else "Fabric036")
+            # A larger tile than the other materials: at 0.3 m the weave
+            # repeated too finely to read as fabric from camera distance --
+            # the requested fix is legibility of the weave, not fineness.
+            if library_root and _apply_photo_texture(mat, library_root, fabric_id,
+                                                      reflectance, tile_m=0.7,
+                                                      bump_strength=0.35):
+                note += "; Base Color/Roughness replaced by %s (ambientCG, CC0), mean-matched to %.2f, roughness-driven bump" % (fabric_id, reflectance)
+            report[mat.name] = note
         elif "metal" in name_l:
             _enhance_dark_metal(mat)
-            report[mat.name] = mat.get("presentation_assumption", "dark metal: metallic 0.8")
+            note = mat.get("presentation_assumption", "dark metal: metallic 0.8")
+            if library_root and _apply_photo_texture(mat, library_root, "Metal046A",
+                                                      reflectance, tile_m=0.4):
+                note += "; Base Color/Roughness replaced by Metal046A (ambientCG, CC0), mean-matched to %.2f" % reflectance
+            report[mat.name] = note
 
     return report

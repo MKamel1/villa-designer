@@ -15,12 +15,14 @@
 # Pinned version, deliberately. The scene builder uses Blender's `bpy`
 # API, which changes between releases. If the laptop and the workstation
 # run different Blenders, the same script silently produces different
-# scenes -- the worst kind of difference, because nothing errors. 4.2 LTS
-# is chosen for a long-supported, stable API, and it has full OptiX
-# support for the RTX 3090.
+# scenes -- the worst kind of difference, because nothing errors. 4.5 LTS
+# (moved from 4.2 LTS, ADR-0013) for the display White Balance added in
+# 4.3; OptiX on the RTX 3090 as before. The previous install is left in
+# place, so rolling back is re-pointing the symlink. Moving versions means
+# re-running calibrate_photometry.py (ADR-0010) before trusting a render.
 set -euo pipefail
 
-VERSION="${BLENDER_VERSION:-4.2.9}"
+VERSION="${BLENDER_VERSION:-4.5.14}"
 SERIES="${VERSION%.*}"                       # 4.2.9 -> 4.2
 PREFIX="${BLENDER_PREFIX:-$HOME/opt}"
 TARBALL="blender-${VERSION}-linux-x64.tar.xz"
@@ -45,8 +47,12 @@ curl -fL --progress-bar -o "${TARBALL}" "${URL}"
 # Verify against upstream's published checksum. A truncated download would
 # otherwise surface much later as an obscure Blender crash.
 log "verifying checksum"
-if curl -fsSL "https://download.blender.org/release/Blender${SERIES}/${TARBALL}.sha256" \
-        -o "${TARBALL}.sha256" 2>/dev/null; then
+# Upstream publishes one blender-<version>.sha256 covering every platform's
+# file, not one per tarball, so check only our line from it.
+if curl -fsSL "https://download.blender.org/release/Blender${SERIES}/blender-${VERSION}.sha256" \
+        -o "${TARBALL}.sha256.all" 2>/dev/null \
+        && grep " ${TARBALL}\$" "${TARBALL}.sha256.all" > "${TARBALL}.sha256"; then
+    rm -f "${TARBALL}.sha256.all"
     sha256sum -c "${TARBALL}.sha256" || { log "CHECKSUM FAILED"; exit 1; }
     log "checksum OK"
 else
@@ -57,7 +63,7 @@ fi
 
 log "extracting"
 tar -xJf "${TARBALL}"
-rm -f "${TARBALL}" "${TARBALL}.sha256"
+rm -f "${TARBALL}" "${TARBALL}.sha256" "${TARBALL}.sha256.all"
 
 ln -sfn "${DEST}" "${LINK}"
 log "symlink ${LINK} -> ${DEST}"

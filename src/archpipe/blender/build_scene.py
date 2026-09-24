@@ -581,19 +581,55 @@ def add_named_camera(data, name):
     return cam
 
 
-def add_world(strength=1.0):
+HDRI_BY_TIME = {
+    "day": "kloofendal_48d_partly_cloudy_puresky",
+    "overcast": "overcast_soil_puresky",
+    "night": "dikhololo_night",
+    "golden": "belfast_sunset_puresky",
+    "midday": "kloofendal_43d_clear_puresky",
+}
+
+# The window is a small aperture in a room lit mainly by its own fixtures;
+# an HDRI sky is for believable colour/reflection through that aperture,
+# not for matching a stated exterior illuminance, so its own strength is a
+# presentation choice, not a photometric one -- but it still has to respect
+# the real RATIO between daylight and a 160 lx interior, or the glass's own
+# ~4% specular reflection (present at any IOR, on top of transmission)
+# dominates what the camera sees and the window reads as a mirror showing
+# the room behind the camera instead of the sky. Measured at strength 1.0
+# that is exactly what happened (confirmed by raising it and watching the
+# same window turn into a plainly daylit sky). Values below follow typical
+# daylight illuminance ratios against a 160 lx interior: clear sky
+# ~15,000-25,000 lx (~100-150x), overcast ~2,000-5,000 lx (~15-30x),
+# golden hour ~1,000-2,000 lx (~6-12x), night sky negligible by comparison.
+HDRI_STRENGTH_BY_TIME = {"day": 15.0, "overcast": 3.0, "night": 0.08,
+                         "golden": 7.0, "midday": 18.0}
+
+
+def add_world(strength=1.0, hdri_path=None):
     """A sky background, so surfaces facing away from the sun are not black.
 
     Without ambient light a render reads as a lighting failure when it is
-    only a missing world.
+    only a missing world. `hdri_path`, when given, replaces the flat colour
+    with a real photographed sky (Poly Haven, CC0) for reflections and
+    through-window colour; omitted, the world stays the flat colour every
+    validated draft/measurement render has always used, unchanged.
     """
     world = bpy.data.worlds.get("World") or bpy.data.worlds.new("World")
     bpy.context.scene.world = world
     world.use_nodes = True
-    bg = world.node_tree.nodes.get("Background")
-    if bg:
+    nt = world.node_tree
+    bg = nt.nodes.get("Background")
+    if not bg:
+        return world
+    if hdri_path and os.path.isfile(hdri_path):
+        env = nt.nodes.new("ShaderNodeTexEnvironment")
+        env.image = bpy.data.images.load(hdri_path)
+        nt.links.new(env.outputs["Color"], bg.inputs["Color"])
+        world["presentation_hdri"] = os.path.basename(hdri_path)
+    else:
         bg.inputs["Color"].default_value = (0.55, 0.65, 0.80, 1.0)
-        bg.inputs["Strength"].default_value = strength
+    bg.inputs["Strength"].default_value = strength
     return world
 
 
@@ -676,6 +712,22 @@ def configure_render(samples, resolution, use_gpu=True, measure=False,
     else:
         scene.render.image_settings.file_format = "PNG"
         scene.cycles.use_denoising = True
+        try:
+            # OIDN over the OptiX denoiser for a delivered frame: slower,
+            # but it does not carry OptiX's occasional fine-detail smearing
+            # on high-frequency textures (grain, weave) the way a real-time
+            # denoiser tuned for viewport speed does.
+            scene.cycles.denoiser = "OPENIMAGEDENOISE"
+        except TypeError:
+            pass
+        try:
+            # Blackman-Harris over the default Gaussian: a tighter pixel
+            # filter reads as crisper architectural edges at the same
+            # sample count, at some cost in aliasing on thin geometry.
+            scene.cycles.pixel_filter_type = "BLACKMAN_HARRIS"
+            scene.cycles.filter_width = 1.5
+        except TypeError:
+            pass
         for transform in ("AgX", "Filmic", "Standard"):
             try:
                 scene.view_settings.view_transform = transform
@@ -716,7 +768,8 @@ def parse_args(argv):
            "res": (960, 540), "gpu": True, "measure": False,
            "exposure": None, "interior": False,
            "target_lux": 200.0, "camera":None,
-           "export_glb": None, "no_render": False}
+           "export_glb": None, "no_render": False,
+           "profile": "draft", "time": "day", "dof": False}
     i = 0
     while i < len(args):
         a = args[i]
@@ -747,7 +800,19 @@ def parse_args(argv):
             i += 1; out["export_glb"] = args[i]
         elif a == "--no-render":
             out["no_render"] = True
+        elif a == "--profile":
+            i += 1; out["profile"] = args[i]
+        elif a == "--time":
+            i += 1; out["time"] = args[i]
+        elif a == "--dof":
+            out["dof"] = True
         i += 1
+    if out["profile"] not in ("draft", "final"):
+        print("SCENE ERROR: --profile must be draft or final")
+        sys.exit(2)
+    if out["time"] not in ("day", "overcast", "night", "golden", "midday"):
+        print("SCENE ERROR: --time must be day, overcast, night, golden or midday")
+        sys.exit(2)
     return out
 
 
@@ -800,7 +865,16 @@ def main():
         housing.visible_shadow = False
         housing.visible_diffuse = False
     print('SCENE NOTE fixture housings use actual meshes for appearance; photometric distribution governs optics')
-    print('SCENE PRESENTATION '+json.dumps(presentation.enhance_finishes(data),sort_keys=True))
+    # Photo textures and HDRI skies are presentation-only: they are kept OUT
+    # of --measure entirely (validated flat/analytic agreement must never
+    # depend on which profile happened to render it) and out of the draft
+    # profile (fast iteration keeps the existing, already-verified look).
+    library_root = (os.environ.get("ARCHPIPE_ASSET_LIBRARY")
+                    if opt["profile"] == "final" and not opt["measure"] else None)
+    if opt["profile"] == "final" and not opt["measure"] and not library_root:
+        print("SCENE NOTE: --profile final requested but ARCHPIPE_ASSET_LIBRARY "
+              "is not set; using procedural materials only.")
+    print('SCENE PRESENTATION '+json.dumps(presentation.enhance_finishes(data, library_root=library_root),sort_keys=True))
     lights = build_lights(data)
 
     if not lights:
@@ -837,11 +911,28 @@ def main():
               % (len(walls), len(floors), holes, len(furn), len(lights)))
         return
 
-    add_world()
+    hdri_path = None
+    if library_root:
+        hdri_name = HDRI_BY_TIME[opt["time"]]
+        candidate = os.path.join(library_root, "hdri", hdri_name + ".exr")
+        hdri_path = candidate if os.path.isfile(candidate) else None
+        if not hdri_path:
+            print("SCENE NOTE: HDRI %r not found under the asset library; "
+                  "using the flat sky instead." % hdri_name)
+    add_world(strength=HDRI_STRENGTH_BY_TIME.get(opt["time"], 1.0) if hdri_path else 1.0,
+             hdri_path=hdri_path)
     if opt['camera']:
         add_named_camera(data,opt['camera'])
     else:
         (add_interior_camera(data) if opt["interior"] else add_camera(data))
+    if opt["dof"] and not opt["measure"]:
+        cam = bpy.context.scene.camera
+        if cam:
+            cam.data.dof.use_dof = True
+            cam.data.dof.aperture_fstop = 2.8
+            # Focus roughly a third into the room rather than at the lens,
+            # which would otherwise blur the entire frame uniformly.
+            cam.data.dof.focus_distance = 2.5
     device = configure_render(opt["samples"], opt["res"], opt["gpu"],
                               measure=opt["measure"],
                               exposure=opt["exposure"],
