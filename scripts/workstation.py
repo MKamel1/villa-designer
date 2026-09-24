@@ -40,6 +40,9 @@ def package():
     ies = photometry.revit_ies_dir()
     if ies:
         files.update({'assets/ies/'+p.name:p.read_bytes() for p in ies.glob('*.ies')})
+    # Picked manufacturer products join the same flat IES namespace (photometry.find_ies).
+    if photometry.PRODUCT_IES_DIR.is_dir():
+        files.update({'assets/ies/'+p.name:p.read_bytes() for p in photometry.PRODUCT_IES_DIR.glob('*.ies')})
     records = {name:digest(data) for name,data in sorted(files.items())}
     release_id = digest(json.dumps(records,sort_keys=True).encode())[:24]
     files['release.json'] = json.dumps({'id':release_id,'files':records},sort_keys=True).encode()

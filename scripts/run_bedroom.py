@@ -28,7 +28,7 @@ def input_hashes():
     paths = [ROOT/'spec/bedroom-test.yaml', ROOT/'requirements.txt',ROOT/'requirements-worker.txt']
     paths += list((ROOT/'src/archpipe').glob('*.py'))
     paths += list((ROOT/'src/archpipe/blender').glob('*.py'))
-    paths += [ROOT/'revit'/name for name in ['build_bedroom.py','extract_model.py','export_views.py']]
+    paths += [ROOT/'revit'/name for name in ['build_bedroom.py','extract_model.py','export_views.py','unattended.py']]
     paths += [ROOT/'scripts'/name for name in ['run_bedroom.py','make_bedroom_spec.py',
               'check_bedroom.py','make_render_input.py','lighting_report.py','compare_lux.py',
               'render_remote.py','workstation.py','worker_entry.py']]

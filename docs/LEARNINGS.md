@@ -100,6 +100,25 @@ listed as a check is automatic, and is proven against the real defect.
 | **Open**: the night door view fails `highlights_present` (p99.5 0.84 against 0.90) after the lamps were moved inside their fittings | The floor was calibrated on renders where lamps outside their shades blasted the ceiling: a guard inherits the defects it was calibrated on | Not lowered and not exposed up. Lamps are not modelled as visible luminous surfaces; the fix is the specified products. The skill now requires re-reading thresholds after an upstream fix |
 | Captions did not say the sun came from a placeholder site | The site file's EXAMPLE status was never carried into the image record | Captions record the sun altitude and azimuth, plus the site's latitude, longitude, north angle and `placeholder: true` |
 
+### Luminaire library (2026-09-24)
+
+See [ADR-0014](decisions/ADR-0014-luminaire-library.md) and the `lighting-library` skill.
+
+| Defect or finding | Why it was missed | Guard now in place |
+|---|---|---|
+| Signify's photometry and Revit file server is `Disallow: /` in robots.txt; bulk download was the obvious plan | The pages and the file server are different hosts with different rules | Read robots.txt and terms for every host before fetching. The catalogue reads only allowed pages; the person downloads files. `signify.fetch` refuses the host; `verify.py` checks the refusal and that no code calls it |
+| Signify served a zip labelled `application/json`; Revit type catalogues are UTF-16 with a BOM | Extensions and content types were assumed truthful | `library.sniff` identifies by content (zip, OLE, UTF-16 `##` header, IES, LDT); tested |
+| Converted LDT agreed with the manufacturer's IES in flux and peak but differed by up to 34% in single directions | EULUMDAT C0 and IES 0 degrees are different axes; totals cannot show a rotation | IES h = EULUMDAT C + 90, proven on all three Signify lamp sets (within 0.02%). Every imported product with both formats is compared direction by direction; a 90-degree-rotated pair fails the unit test |
+| The emitter rule found nothing on a Signify family | Its luminous face is "Glass, White, High Luminance"; the rule looked only for "lens" | `fixture_source.LUMINOUS_WORDS`; the IronPython copies are checked identical by `verify.py`, proven by reverting one copy |
+| A headless Revit probe hung on "The parameter Apparent Load doesn't exist in the Family" | Type catalogues raise modal warnings; nothing answered them. The first handler then read a script global after pyRevit tore the scope down | `revit/unattended.py`: dialogs answered and recorded, the store bound at registration; probes run in `try/finally` with a watchdog. The user spotted the dialog |
+| IronPython read UTF-16 as '' and died writing a registered sign (0xAE) mid-JSON | IronPython 2.7 text I/O is not Python 3's | Read bytes then decode; escape non-ASCII and serialise before opening the file (the trap `extract_model.py` already recorded) |
+| Signify's Revit family says 3200 K and 3 W; its LDT says 3000 K and 23 W | Manufacturer BIM metadata is not checked by anyone | The LDT governs; the build writes its figures onto the family; `install.resolve` refuses a spec that contradicts the product |
+| `housing below the ceiling` failed a recessed luminaire (body top 2732 over a 2700 ceiling) | The guard was written for pendants only | Mount-aware: recessed reports the recess depth needed as a coordination NOTE; test uses the measured geometry |
+| A unit test exported a synthetic IES into the real product folder, which is deployed to the render worker | The export folder was a global default | `install.resolve(ies_dir=...)` in tests; `verify.py` rejects any product IES not in the library, proven with the real stray file |
+| `git check-ignore` showed downloaded manufacturer files would have been committed | `assets/user/` was not ignored | Ignored; manifests carry source and hash instead of the files |
+| The catalogue crawl 404'd on families that exist only on market sites, and retried every 404 | `/global/` was assumed to hold everything; 4xx errors were treated like network faults | Fall back to the market page the family was listed on; no retry on 4xx; 404s cached |
+| Swapping to the 4300 lm lamp set over-lit the pillow: 501 lx against a 300-500 lx band | Not a defect: a swap changes results | Every swap re-runs the same requirement and lux gates (`scripts/luminaire_demo.py`, `out/demo/compare.json`) |
+
 ### Working practice (2026-09-24)
 
 | Defect | Why it was missed | Guard now in place |
@@ -109,6 +128,7 @@ listed as a check is automatic, and is proven against the real defect.
 | Windows file lock (`OSError 22`) when replacing an image being viewed, twice: in the render driver, then at the end of a 20-minute pipeline run | The first fix was local to the render driver, so the same error recurred in `run_bedroom.py`'s raw `shutil.copyfile` | Shared `archpipe.safe_io` (temp file plus retried replace) used by every writer of pipeline output; a `verify.py` lint rejects raw `shutil.copy*`, proven on the historical line. Rule: **fix a defect class where it lives, not where it was first seen** |
 | A stopped pipeline run left `bedroom-run.lock`, and every later run refused to start | A killed process never runs its `finally`, and the lock recorded a PID that nothing checked | `run_bedroom.py` removes a lock only when its recorded owner is provably not running (`pid_alive`, which never signals: on Windows `os.kill(pid, 0)` would kill the process). A live or unreadable owner still stops the run |
 | **Open**: right after a passing run, `run_bedroom --resume` once re-ran the downstream stages (6 s, worker jobs reused) where full reuse was expected; the next call reused fully | Not yet known. The test's pre-check (inputs and artifacts) agreed, so the likely differing key is `worker_runtime`, possibly captured before the run's own asset deployment. **Hypothesis, unverified** | None yet. Next step: record the runtime fingerprint before and after `worker_bedroom` and compare. `test_mcp.py --cached-run` catches the symptom |
+| Tests "could not import archpipe" | Windows `PYTHONPATH` separates entries with `;`, not `:` | Use `PYTHONPATH="src;."` on Windows |
 | `python` was not found from bash on Windows | The venv is not on the bash PATH | Call `.venv/Scripts/python.exe` explicitly |
 | `highlights_present` failed soft overcast light | The rule "a photo has near-white somewhere" is true only with a direct source | Advisory without a sun or lamps (`test_overcast_without_direct_source_may_lack_white`) |
 

@@ -53,6 +53,15 @@ def convert(src: Path) -> dict:
             raise SystemExit(
                 f"{src}: {item.get('id')} at ({x}, {y}) is outside the "
                 f"{room['width']} x {room['depth']} mm room")
+    # A lighting entry that names a product takes lumens, watts, colour, IES
+    # and Revit family from the verified manufacturer library; a typed value
+    # that disagrees is refused (archpipe.luminaires.install).
+    if any(l.get("product") for l in spec.get("lighting", [])):
+        from archpipe.luminaires.install import InstallError, resolve_all
+        try:
+            spec["lighting"] = resolve_all(spec["lighting"])
+        except InstallError as exc:
+            raise SystemExit(f"{src}: {exc}")
     for item in spec.get('furniture',[]):
         if item.get('detail'):
             from archpipe.furniture import build_furniture

@@ -37,9 +37,9 @@ async def main():
         async with ClientSession(read, write) as client:
             await client.initialize()
             tools = await client.list_tools()
-            assert len(tools.tools) == 13
-            assert {'stage_context', 'lookup_evidence', 'review_stage', 'check_fixture_sources'} <= {t.name for t in tools.tools}
-            print('PASS real MCP handshake and thirteen typed tools')
+            assert len(tools.tools) == 16
+            assert {'stage_context', 'lookup_evidence', 'review_stage', 'check_fixture_sources', 'search_luminaires', 'luminaire_alternates', 'luminaire_download_links'} <= {t.name for t in tools.tools}
+            print('PASS real MCP handshake and sixteen typed tools')
             context = payload(await client.call_tool('stage_context', {'stage':0}))
             assert context['example'] and 'budget' in context['missing_inputs']
             evidence = payload(await client.call_tool('lookup_evidence', {'query':'shading','stage':3}))
@@ -72,6 +72,19 @@ async def main():
             assert all(f['basis'] != 'no light-source or lens geometry' for f in sources['fixtures'])
             assert any(f['photometry_mismatch'] for f in sources['fixtures'])   # known generic IES
             print('PASS fixture emitters at spec; photometry mismatches reported')
+            lib_db = ROOT/'assets/user/luminaires/library.sqlite'
+            if lib_db.is_file():
+                found = payload(await client.call_tool('search_luminaires', {'limit': 5}))
+                assert found['layer'] == 'verified library'
+                assert all(r['verified'] == 1 for r in found['rows'])
+                if found['rows']:
+                    r0 = found['rows'][0]
+                    alt = payload(await client.call_tool('luminaire_alternates',
+                                                         {'manufacturer': r0['manufacturer'], 'sku': r0['sku']}))
+                    assert alt['base']['sku'] == r0['sku']
+                print('PASS verified luminaire search and alternates over MCP (%d rows)' % len(found['rows']))
+            else:
+                print('SKIP luminaire library over MCP: no local library')
             render = ROOT/'out/photoreal/bedroom-off-window.png'
             if render.is_file() and render.with_suffix('.log').is_file():
                 qa = payload(await client.call_tool('check_render',

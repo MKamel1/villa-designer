@@ -11,11 +11,23 @@ Basis, in order of preference:
 1. `light_source_symbol`: Revit's Light Source subcategory geometry. For a
    downlight it is the cone the family draws from its source, so the source
    is its apex: top z, centre x/y.
-2. The lens: a mesh whose material name contains "lens". The luminous
-   opening; LM-63 photometric centre convention. Centre x/y, mid z.
+2. The luminous surface: a mesh whose material name says it emits
+   (LUMINOUS_WORDS). The luminous opening; LM-63 photometric centre
+   convention. Centre x/y, mid z. "Lens" alone missed Signify's families,
+   whose emitting face is "Glass, White, High Luminance".
 3. None: no evidence in the geometry; the caller must say so.
 """
 from __future__ import annotations
+
+
+# Material-name evidence that a face is the luminous opening. Measured names:
+# bimlibrary "Lens -White", "Lens Glass"; Signify "Glass, White, High Luminance".
+LUMINOUS_WORDS = ("lens", "luminance", "luminous", "diffuser", "opal", "emitting")
+
+
+def luminous(material_name) -> bool:
+    low = str(material_name or "").lower()
+    return any(w in low for w in LUMINOUS_WORDS)
 
 
 def _bbox(vertices):
@@ -33,18 +45,18 @@ def source_point(meshes):
         pts = [v for m in symbol for v in m["vertices_mm"]]
         x0, x1, y0, y1, _, z1 = _bbox(pts)
         return ((x0 + x1) / 2.0, (y0 + y1) / 2.0, z1, "light_source_symbol apex")
-    lens = [m for m in meshes or [] if "lens" in str((m.get("material") or {}).get("name", "")).lower()
+    lens = [m for m in meshes or [] if luminous((m.get("material") or {}).get("name"))
             and m.get("vertices_mm")]
     if lens:
         pts = [v for m in lens for v in m["vertices_mm"]]
         x0, x1, y0, y1, z0, z1 = _bbox(pts)
-        return ((x0 + x1) / 2.0, (y0 + y1) / 2.0, (z0 + z1) / 2.0, "lens centre")
+        return ((x0 + x1) / 2.0, (y0 + y1) / 2.0, (z0 + z1) / 2.0, "luminous surface centre")
     return None
 
 
 def lens_extent(meshes):
     """Plan extent (long, short) in mm of the fitting's lens, or None."""
-    pts = [v for m in meshes or [] if "lens" in str((m.get("material") or {}).get("name", "")).lower()
+    pts = [v for m in meshes or [] if luminous((m.get("material") or {}).get("name"))
            for v in m.get("vertices_mm") or []]
     if not pts:
         return None

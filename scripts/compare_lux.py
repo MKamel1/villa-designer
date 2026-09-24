@@ -63,7 +63,7 @@ def main() -> int:
     scheme = []
     for fx in extract["lighting"]:
         scheme.append(Luminaire(
-            fx["id"], ph.load(ies_dir / fx["ies_file"]),
+            fx["id"], ph.load(ph.find_ies(fx["ies_file"], ies_dir)),
             fx["at"][0], fx["at"][1], fx["mounting_height"],
             aim=float(fx.get("rotation") or 0.0),
             layer=fx.get("layer", "ambient"),

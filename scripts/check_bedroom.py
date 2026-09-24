@@ -113,8 +113,17 @@ def check_light_source(c: Check, lt: dict, meshes, ceiling_mm: float) -> None:
             for p in m['vertices_mm']]
     if body:
         top = max(p[2] for p in body)
-        c.true('  %s housing below the ceiling' % lt['id'], top <= ceiling_mm + TOL_MM,
-               '%.0f vs %.0f' % (top, ceiling_mm))
+        mount = (lt.get('product') or {}).get('mount') or lt.get('mount')
+        if mount == 'recessed':
+            # A recessed fitting belongs in the ceiling void: its body above the
+            # ceiling is the design, not a clash (Signify CoreLine: 32 mm). What
+            # matters is a flush luminous face -- the emitter check above -- and
+            # the void depth it needs, a coordination figure, reported not judged.
+            c.note('  %s recess depth needed above the ceiling' % lt['id'],
+                   '%.0f mm (body top %.0f, ceiling %.0f)' % (max(0.0, top - ceiling_mm), top, ceiling_mm))
+        else:
+            c.true('  %s housing below the ceiling' % lt['id'], top <= ceiling_mm + TOL_MM,
+                   '%.0f vs %.0f' % (top, ceiling_mm))
 
 
 def main(argv=None) -> int:
@@ -129,7 +138,8 @@ def main(argv=None) -> int:
               % a.extract)
         return 2
 
-    spec = yaml.safe_load(a.spec.read_text(encoding="utf-8"))
+    from archpipe.luminaires.install import load_spec
+    spec = load_spec(a.spec)          # picked products resolved from the library
     got = json.loads(a.extract.read_text(encoding="utf-8"))
     c = Check()
     rm = spec["room"]

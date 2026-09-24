@@ -462,3 +462,26 @@ def revit_ies_dir() -> Path | None:
         if d.is_dir():
             return d
     return None
+
+
+# Manufacturer products picked from the luminaire library are exported here as
+# IES (archpipe.luminaires.library.export_ies), named <maker>-<sku>-ls<n>.ies so
+# they share one flat namespace with Revit's own files on the render worker.
+PRODUCT_IES_DIR = Path(__file__).resolve().parents[2] / "assets/user/luminaires/_ies"
+
+
+def find_ies(name: str, first: Path | None = None) -> Path:
+    """Resolve an IES filename: `first` (e.g. a worker release), then Revit's
+    library, then exported manufacturer products. Every consumer resolves
+    through here, so a picked product is found by the lux report, the render
+    comparison, the MCP tools and the workstation package alike. A missing
+    name returns a non-existent path so the caller's own not-found report
+    still fires."""
+    if Path(name).name != name:
+        raise IESError(f"IES reference must be a bare filename, got {name!r}")
+    dirs = [d for d in (first, revit_ies_dir(), PRODUCT_IES_DIR) if d is not None]
+    for d in dirs:
+        if (Path(d) / name).is_file():
+            return Path(d) / name
+    return Path(dirs[0] if dirs else PRODUCT_IES_DIR) / name
+

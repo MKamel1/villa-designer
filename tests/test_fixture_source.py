@@ -24,7 +24,7 @@ class SourcePointTests(unittest.TestCase):
 
     def test_lens_centre_without_symbol(self):
         x, y, z, basis = source_point([box(1920, 2250, "Shade"), box(1932, 1935, "Lens -White")])
-        self.assertEqual((z, basis), (1933.5, "lens centre"))
+        self.assertEqual((z, basis), (1933.5, "luminous surface centre"))
 
     def test_no_evidence_is_none(self):
         self.assertIsNone(source_point([box(2243, 2548)]))

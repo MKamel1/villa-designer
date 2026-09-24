@@ -46,7 +46,7 @@ def luminous_size(ies_dir, name, fallback):
     """
     if ies_dir is None:
         return fallback
-    path = ies_dir / name
+    path = ph.find_ies(name, ies_dir)
     if not path.is_file():
         return fallback
     try:
@@ -69,7 +69,8 @@ def main(argv=None) -> int:
 
     local_ies = ph.revit_ies_dir()
     got = json.loads(a.extract.read_text(encoding="utf-8"))
-    spec = yaml.safe_load(a.spec.read_text(encoding="utf-8"))
+    from archpipe.luminaires.install import load_spec
+    spec = load_spec(a.spec)          # picked products resolved from the library
     by_id = {l["id"]: l for l in spec.get("lighting", [])}
 
     joined, orphans, unmatched, no_source = [], [], [], []
@@ -97,7 +98,7 @@ def main(argv=None) -> int:
         # substitution is still the scheme under review (the spec says so).
         try:
             problems = photometry_matches_fitting(
-                [v * 1000.0 for v in ph.load(local_ies / s["ies"]).luminous_dimensions_m()],
+                [v * 1000.0 for v in ph.load(ph.find_ies(s["ies"], local_ies)).luminous_dimensions_m()],
                 fx.get("meshes"))
         except Exception as exc:
             problems = ["IES not readable for the check: %s" % exc]

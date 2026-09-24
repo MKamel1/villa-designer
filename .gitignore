@@ -31,3 +31,7 @@ Thumbs.db
 out/families/*.rfa
 out/families/too-new/*.rfa
 out/revit2027/*.rvt
+
+# User-supplied and manufacturer downloads (luminaire libraries, bed models):
+# third-party files are never committed; manifests record their source and hash.
+assets/user/

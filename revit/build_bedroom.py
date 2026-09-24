@@ -44,7 +44,11 @@ import json
 import hashlib
 import math
 import os
+import sys
 import traceback
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import unattended  # noqa: E402  (answers modal dialogs; see its docstring)
 
 from Autodesk.Revit.DB import (
     BuiltInCategory, BuiltInParameter, Ceiling, CeilingType, Curve,
@@ -59,6 +63,7 @@ from Autodesk.Revit.DB import GeometryCreationUtilities as GCU
 from System.Collections.Generic import List
 
 PRECISION = 3
+LUMINOUS_WORDS = ("lens", "luminance", "luminous", "diffuser", "opal", "emitting")
 report = {"walls": [], "openings": [], "furniture": [], "lighting": [],
           "notes": [], "errors": []}
 
@@ -289,7 +294,8 @@ def light_source_z(doc, inst):
             return
         every.extend(pts)
         mat = doc.GetElement(face.MaterialElementId)
-        if mat is not None and "lens" in el_name(mat).lower():
+        # Same words as archpipe.fixture_source.LUMINOUS_WORDS (not importable here).
+        if mat is not None and any(w in el_name(mat).lower() for w in LUMINOUS_WORDS):
             lens.extend(pts)
 
     def visit(geometry):
@@ -312,7 +318,7 @@ def light_source_z(doc, inst):
     if symbol:
         return mm(max(symbol) - z0), "light_source_symbol apex", top
     if lens:
-        return mm((min(lens) + max(lens)) / 2.0 - z0), "lens centre", top
+        return mm((min(lens) + max(lens)) / 2.0 - z0), "luminous surface centre", top
     return None, "no light-source or lens geometry", top
 
 
@@ -363,7 +369,14 @@ def set_photometrics(inst, lt, ies_dir):
         if want is None:
             continue
         if key == "ies":
-            want = os.path.join(ies_dir or "", str(want))
+            name_only = str(want)
+            want = os.path.join(ies_dir or "", name_only)
+            if not os.path.isfile(want):
+                # a picked manufacturer product is exported beside the library
+                # (photometry.PRODUCT_IES_DIR); same resolution order as find_ies
+                alt = os.path.join(os.environ.get("ARCHPIPE_PRODUCT_IES_DIR", ""), name_only)
+                if os.path.isfile(alt):
+                    want = alt
             if not os.path.isfile(want):
                 missed.append("%s: file not found %s" % (key, want))
                 continue
@@ -905,6 +918,9 @@ def main():
     doc.Close(False)
     report["saved"] = dest
 
+    # Dialogs Revit raised (answered OK) and transaction warnings: findings,
+    # e.g. a manufacturer type catalogue naming parameters its family lacks.
+    report["revit_messages"] = list(unattended.MESSAGES)
     out = os.environ.get("ARCHPIPE_BUILD_REPORT") or (dest + ".build.json")
     with open(out, "w") as fh:
         json.dump(report, fh, indent=2, sort_keys=True)
@@ -922,7 +938,10 @@ def main():
         print("archpipe: errors %s" % report["errors"][:3])
 
 
+unattended.install(__revit__)                                      # noqa: F821
 try:
     main()
 except Exception:
     print("archpipe: BUILD FAILED\n%s" % traceback.format_exc()[-1500:])
+finally:
+    unattended.uninstall(__revit__)                                # noqa: F821

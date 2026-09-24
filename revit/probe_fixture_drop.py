@@ -12,17 +12,19 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import extract_model as extract
+LUMINOUS_WORDS = ("lens", "luminance", "luminous", "diffuser", "opal", "emitting")
 from Autodesk.Revit.DB import (BuiltInCategory, BuiltInParameter, StorageType,
                                Transaction, UnitTypeId, UnitUtils, SpecTypeId)
 
 
 def source_z(doc, fixture):
-    """Same rule as archpipe.fixture_source: symbol apex, else lens centre."""
+    """Same rule as archpipe.fixture_source: symbol apex, else luminous surface centre."""
     meshes, _ = extract.extract_meshes(doc, fixture)
     sym = [v[2] for m in meshes if m['geometry_role'] == 'light_source_symbol' for v in m['vertices_mm']]
     if sym:
         return max(sym)
-    lens = [v[2] for m in meshes if 'lens' in m['material']['name'].lower() for v in m['vertices_mm']]
+    lens = [v[2] for m in meshes if any(w in m['material']['name'].lower() for w in LUMINOUS_WORDS)
+            for v in m['vertices_mm']]
     if lens:
         return (min(lens) + max(lens)) / 2.0
     return None

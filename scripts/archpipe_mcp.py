@@ -97,7 +97,7 @@ def lighting_at(x_mm: float, y_mm: float, height_mm: float,
         ies_name = f['ies_file']
         if Path(ies_name).name != ies_name:
             raise ValueError('ies_file must be a library filename')
-        scheme.append(Luminaire(f['id'], photometry.load(ies_dir / ies_name),
+        scheme.append(Luminaire(f['id'], photometry.load(photometry.find_ies(ies_name, ies_dir)),
                       f['at'][0], f['at'][1], f['mounting_height'],
                       aim=f.get('rotation') or 0, layer=f.get('layer') or 'ambient',
                       output=float(f.get('output', 1))))
@@ -235,7 +235,7 @@ def check_fixture_sources(path: str = 'out/bedroom-from-revit.json',
     """Where each luminaire actually emits, against the spec, and whether its IES file fits it.
 
     The emitter is measured from the built geometry (Light Source symbol
-    apex, else lens centre), never the insertion point: comparing insertion
+    apex, else the luminous surface centre), never the insertion point: comparing insertion
     heights passed while the bedroom's emitters sat 57-466 mm off spec. Also
     reports a photometric file whose opening cannot be this fitting (a strip
     file on a round drum).
@@ -257,13 +257,56 @@ def check_fixture_sources(path: str = 'out/bedroom-from-revit.json',
             row['spec_height_mm'] = s['mounting_height']
             row['height_error_mm'] = round(src[2] - float(s['mounting_height']), 1) if src else None
             try:
-                dims = [v * 1000.0 for v in photometry.load(ies_dir / s['ies']).luminous_dimensions_m()]
+                dims = [v * 1000.0 for v in photometry.load(photometry.find_ies(s['ies'], ies_dir)).luminous_dimensions_m()]
                 row['photometry_mismatch'] = photometry_matches_fitting(dims, fx.get('meshes'))
             except Exception as exc:
                 row['photometry_mismatch'] = ['IES not readable: %s' % exc]
         rows.append(row)
     ok = all(r.get('height_error_mm') is not None and abs(r['height_error_mm']) <= 25 for r in rows)
     return {'passed': ok, 'tolerance_mm': 25, 'fixtures': rows}
+
+
+@mcp.tool(annotations=READ)
+def search_luminaires(mount: str | None = None, lm_min: float | None = None, lm_max: float | None = None,
+                      cct: float | None = None, cri_min: float | None = None, market: str | None = None,
+                      text: str | None = None, manufacturer: str | None = None, catalogue: bool = False,
+                      limit: int = 30) -> dict:
+    """Search manufacturer luminaires.
+
+    catalogue=False: VERIFIED products whose manufacturer files are imported
+    and checked (pickable; one row per lamp set, figures from the LDT).
+    catalogue=True: everything the manufacturer lists, from its pages, with
+    market availability (EG, AE, SA, GB) -- unverified until downloaded.
+    """
+    from archpipe.luminaires import catalogue as cat, library as lib
+    lm = (lm_min or 0, lm_max or 1e9) if (lm_min is not None or lm_max is not None) else None  # falsy-ok: 0 lm is the open lower bound
+    if catalogue:
+        rows = cat.search_catalogue(mount=mount, lm=lm, cct=cct, market=market, text=text,
+                                    manufacturer=manufacturer, limit=limit)
+        return {'layer': 'catalogue (unverified)', 'rows': [{k: r[k] for k in (
+            'manufacturer', 'sku', 'title', 'mount', 'lm', 'watts', 'cct_k', 'ip', 'size_mm', 'markets', 'url')}
+            for r in rows]}
+    rows = lib.search(mount=mount, lm=lm, cct=cct, cri_min=cri_min, market=market, text=text,
+                      manufacturer=manufacturer, limit=limit)
+    return {'layer': 'verified library', 'rows': rows}
+
+
+@mcp.tool(annotations=READ)
+def luminaire_alternates(manufacturer: str, sku: str, lamp_set: int = 0, lm_tolerance: float = 0.15) -> dict:
+    """Verified products that can replace one: same mount and colour temperature,
+    at least its CRI, luminaire flux within the tolerance."""
+    from archpipe.luminaires import library as lib
+    return {'base': lib.get(manufacturer, sku, lamp_set),
+            'alternates': lib.alternates(manufacturer, sku, lamp_set, lm_tol=lm_tolerance)}
+
+
+@mcp.tool(annotations=READ)
+def luminaire_download_links(manufacturer: str, sku: str) -> dict:
+    """The manufacturer's own file links (LDT, IES, Revit) for a person to open in
+    a browser. The file server disallows automated download; drop the files into
+    assets/user/luminaires/inbox/<manufacturer>/ and run `scripts/luminaires.py import`."""
+    from archpipe.luminaires import catalogue as cat
+    return {'status': cat.status(manufacturer, sku), 'links': cat.download_links(manufacturer, sku)}
 
 
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=False, destructiveHint=True, openWorldHint=True))

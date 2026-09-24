@@ -638,6 +638,51 @@ def main() -> int:
               if raw_copy.search(line) and "raw_copy.search(" not in line]
     expect("output files are replaced via archpipe.safe_io, not a raw copy"
            + (f" ({', '.join(copies[:5])})" if copies else ""), not copies)
+    # The emitter rule lives in archpipe.fixture_source and is MIRRORED in
+    # IronPython scripts that cannot import it. "lens" alone missed Signify's
+    # "Glass, White, High Luminance"; one copy updated and another not would
+    # measure a different emitter in the build than in the check.
+    words = re.compile(r"\(\s*\"lens\"[^)]*\)")
+    copies = {}
+    for f in ("src/archpipe/fixture_source.py", "revit/build_bedroom.py",
+              "revit/probe_fixture_drop.py", "revit/probe_product_family.py"):
+        m = words.search((ROOT / f).read_text(encoding="utf-8"))
+        copies[f] = re.sub(r"\s+", "", m.group(0)) if m else None
+    expect("luminous-material words identical in every mirrored copy"
+           + ("" if len(set(copies.values())) == 1 else f" ({copies})"),
+           len(set(copies.values())) == 1 and None not in copies.values())
+    # A test once exported a synthetic product IES into the real product folder,
+    # which the workstation package deploys. Only files named for an imported
+    # library product may sit there.
+    from archpipe import photometry as _ph
+    stray = []
+    if _ph.PRODUCT_IES_DIR.is_dir():
+        from archpipe.luminaires import library as _lib
+        import sqlite3 as _sq
+        known = set()
+        if (_lib.LIBRARY / "library.sqlite").is_file():
+            con = _sq.connect(_lib.LIBRARY / "library.sqlite")
+            known = {f"{m}-{_lib._sku_clean(s)}-ls{k}.ies" for m, s, k in
+                     con.execute("select manufacturer, sku, lamp_set from rows")}
+            con.close()
+        stray = [p.name for p in _ph.PRODUCT_IES_DIR.glob("*.ies") if p.name not in known]
+    expect("product IES folder holds only imported library products"
+           + (f" ({', '.join(stray[:5])})" if stray else ""), not stray)
+    # Signify's file server disallows automated access (robots.txt): the
+    # catalogue fetcher must refuse it, and no code may call it directly.
+    from archpipe.luminaires import signify as _sig
+    try:
+        _sig.fetch(_sig.FILE_SERVER + "/ldt?id=0")
+        refused = False
+    except PermissionError:
+        refused = True
+    expect("catalogue fetcher refuses the robots-disallowed file server", refused)
+    call = re.compile(r"(urlopen|requests\.(get|post)|urlretrieve|curl|wget)")
+    fetchers = [f"{p.relative_to(ROOT)}:{i}" for p in code
+                for i, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1)
+                if ("api.microservices.signify.com" in line or "FILE_SERVER" in line) and call.search(line)]
+    expect("no direct call to a robots-disallowed manufacturer file server"
+           + (f" ({', '.join(fetchers[:4])})" if fetchers else ""), not fetchers)
     # Lamp colour is a lighting spec, not a look. Tanner Helland's display-
     # sRGB fit fed to Cycles as linear light made 2700 K lamps far too cool
     # and the night room blue; it was nearly "fixed" by tuning the camera's

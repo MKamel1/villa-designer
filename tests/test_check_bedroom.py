@@ -39,6 +39,20 @@ class FixtureSourceGuard(unittest.TestCase):
         self.assertTrue(r["light source height"])
         self.assertFalse(r["housing below the ceiling"])
 
+    def test_recessed_body_above_the_ceiling_is_a_note_not_a_fail(self):
+        """Measured on Signify CoreLine: body top 2732 over a 2700 ceiling, by design."""
+        body = [{"geometry_role": "physical", "material": {"name": "Laminate, White"},
+                 "vertices_mm": [[1850, 1400, 2688], [2150, 2600, 2732]]},
+                {"geometry_role": "physical", "material": {"name": "Glass, White, High Luminance"},
+                 "vertices_mm": [[1947, 1442, 2699], [2052, 2557, 2700]]}]
+        c = cb.Check()
+        cb.check_light_source(c, {"id": "LT-01", "at": [2000, 2000], "mounting_height": 2700,
+                                  "product": {"mount": "recessed"}}, body, 2700.0)
+        self.assertEqual([ok for ok, label, _ in c.rows if "ceiling" in label], [None])   # a NOTE
+        c = cb.Check()
+        cb.check_light_source(c, {"id": "LT-01", "at": [2000, 2000], "mounting_height": 2700}, body, 2700.0)
+        self.assertEqual([ok for ok, label, _ in c.rows if "ceiling" in label], [False])  # a pendant would clash
+
 
 if __name__ == "__main__":
     unittest.main()

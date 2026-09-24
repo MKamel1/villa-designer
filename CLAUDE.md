@@ -58,7 +58,7 @@ back each one forces the design. Everything here follows from that.
 ## Before you claim something works
 
 ```bash
-PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 116 checks
+PYTHONPATH=src python scripts/verify.py     # expect: ALL PASS, 120 checks
 ```
 
 Every stage command exits non-zero when its gate is closed — that is by
@@ -161,7 +161,7 @@ stand-in and means nothing for the real site.
     src/archpipe/blender/       scene build, photometric calibration,
                                 lux measurement from the render itself
     revit/           extractor, pyRevit extension, probe, test-model builder
-    scripts/verify.py 116 checks, positive and negative
+    scripts/verify.py 120 checks, positive and negative
 
 ## Evidence authority update — 2026-09-24
 

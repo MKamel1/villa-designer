@@ -43,7 +43,7 @@ def build_scheme(data, ies_dir):
         if not name:
             problems.append(f"{fx.get('id')}: no IES file named")
             continue
-        path = ies_dir / name
+        path = ph.find_ies(name, ies_dir)
         if not path.is_file():
             problems.append(f"{fx.get('id')}: {name} not found in {ies_dir}")
             continue
