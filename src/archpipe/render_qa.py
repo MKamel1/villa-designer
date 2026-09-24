@@ -24,8 +24,25 @@ from PIL import Image
 
 # Thresholds are deliberately loose: they catch a broken render, not taste.
 CLIP_FAIL = 0.03          # >3% of pixels clipped in any channel
+HIGHLIGHT_FLOOR = 0.90    # 99.5th percentile must reach near-white
+# Darkest 1% of a real daylight interior sits near 0.02-0.08 (under the
+# bed, furniture gaps). MEASURED on renders the critic called milky: door
+# 0.16, window 0.17 (lifted blacks) against bedfoot 0.08, which read
+# better. The highlight floor alone passed all three.
+SHADOW_CEILING = 0.10
+# Median luminance. MEASURED: well-exposed renders 0.35-0.43; highlight-
+# priority metering with no floor dropped two views to 0.18/0.23 (gloomy)
+# while every other check passed. Tonal checks now bound all four sides.
+MIDTONE_FLOOR = 0.30
+DARK_FINISH_MAX = 0.15    # a finish described as dark/black must be dark
 DARK_FAIL = 0.08          # >8% of pixels near black
-CAST_FAIL = 0.06          # mid-tone mean chroma distance from neutral
+# Mid-tone mean chroma distance from neutral. MEASURED on real renders: the
+# un-white-balanced 2700 K era scored 0.127-0.164 (R/B 2.1-2.7); balanced
+# renders of this warm-painted, oak-floored room 0.052-0.070 (R/B 1.4-1.5).
+# 0.06, set on a synthetic image, rejected a correctly balanced warm room.
+CAST_FAIL = 0.10
+COOL_LAMPLIT_FAIL = 0.02   # lamp-lit (night): any visible cool cast is wrong
+COOL_DAYLIGHT_FAIL = 0.05  # daylight/overcast may be slightly cool, not blue
 # Local detail = mean |difference| between pixels 2 apart, on the 800-wide
 # image. MEASURED on real renders: void sky gradient 0.0026, real garden
 # view 0.0365. A global std-dev was tried first and failed: a smooth
@@ -72,6 +89,22 @@ def check(image_path, qa: dict) -> dict:
     add("highlight_clipping", "FAIL" if clipped > CLIP_FAIL else "PASS",
         f"{clipped:.1%} of pixels clipped (limit {CLIP_FAIL:.0%})",
         "Sunlit white bedding blew out to pure white; expose for highlights.")
+    # A clipping ceiling alone pushed images toward flat and milky: nothing
+    # reached white (render_critic, stage 2). A sunlit room photographed
+    # always has near-white somewhere, so bound both ends.
+    lums_sorted = sorted(_luma(p) for p in px)
+    p995 = lums_sorted[int(0.995 * (len(lums_sorted) - 1))]
+    add("highlights_present", "FAIL" if p995 < HIGHLIGHT_FLOOR else "PASS",
+        f"99.5th-percentile luminance {p995:.2f} (min {HIGHLIGHT_FLOOR})",
+        "Nothing reached white, so the image read as a flat, milky render.")
+    median = lums_sorted[len(lums_sorted) // 2]
+    add("exposure_midtones", "FAIL" if median < MIDTONE_FLOOR else "PASS",
+        f"median luminance {median:.2f} (min {MIDTONE_FLOOR})",
+        "Protecting a sun patch underexposed the whole room to a gloomy 0.18 median.")
+    p01 = lums_sorted[int(0.01 * (len(lums_sorted) - 1))]
+    add("shadows_present", "FAIL" if p01 > SHADOW_CEILING else "PASS",
+        f"1st-percentile luminance {p01:.2f} (max {SHADOW_CEILING})",
+        "Lifted blacks (no true darks anywhere) made the render read milky and flat.")
     dark = sum(1 for p in px if max(p) <= 0.01) / len(px)
     add("crushed_shadows", "FAIL" if dark > DARK_FAIL else "PASS",
         f"{dark:.1%} of pixels near black (limit {DARK_FAIL:.0%})",
@@ -85,9 +118,15 @@ def check(image_path, qa: dict) -> dict:
         m = (mr + mg + mb) / 3.0
         cast = math.sqrt(((mr - m) ** 2 + (mg - m) ** 2 + (mb - m) ** 2) / 3.0)
         warm = "warm" if mr > mb else "cool"
-        add("colour_cast", "FAIL" if cast > CAST_FAIL else "PASS",
-            f"mid-tone cast {cast:.3f} ({warm}; limit {CAST_FAIL})",
-            "Unbalanced 2700 K light rendered the whole room orange.")
+        # Direction matters as much as size. Lamp-lit night renders balanced
+        # at 3000 K measured only 0.035-0.040 but COOL, and read plainly blue:
+        # a room lit by 2700 K lamps is never cool in a real photograph.
+        lamp_lit = qa.get("lights", {}).get("on") and not qa.get("daylight", True)
+        cool_limit = COOL_LAMPLIT_FAIL if lamp_lit else COOL_DAYLIGHT_FAIL
+        bad = cast > CAST_FAIL or (warm == "cool" and cast > cool_limit)
+        add("colour_cast", "FAIL" if bad else "PASS",
+            f"mid-tone cast {cast:.3f} ({warm}; limit {CAST_FAIL} warm, {cool_limit} cool)",
+            "Unbalanced 2700 K light rendered the room orange; over-correction turned a lamp-lit night blue.")
 
     # --- Checks that need to know what the scene contained --------------------
     cam = qa.get("camera", {})
@@ -109,16 +148,33 @@ def check(image_path, qa: dict) -> dict:
 
     windows = qa.get("windows", [])
     sky = qa.get("sky", {})
-    if sky.get("sun") and windows:
+    daylight = qa.get("daylight", True)
+    if (sky.get("sun") or sky.get("exterior")) and windows and daylight:
         add("glass_passes_daylight", "FAIL" if not qa.get("glass", {}).get("architectural") else "PASS",
             f"{qa.get('glass', {}).get('architectural', 0)} architectural glass material(s)",
             "Refractive glass blocks shadow rays: no sun entered the room.")
-    for win in windows:
+    # At night a dark window (with the room reflected in it) is correct, so
+    # the view checks apply only to daylight renders.
+    for win in (windows if daylight else []):
         rect = win.get("screen")          # [x0, y0, x1, y1] in 0..1, y up
         if not rect or rect[2] - rect[0] < 0.03 or rect[3] - rect[1] < 0.03:
             continue
         x0, x1 = int(rect[0] * w), int(rect[2] * w)
         y0, y1 = int((1 - rect[3]) * h), int((1 - rect[1]) * h)
+        # Daylight through a window is several stops above the room. The
+        # garden rendered dimmer than a sunlit desk (render_critic) because
+        # the view was scaled by an HDRI mean dominated by sky and sun.
+        inside = sorted(_luma(px[y * w + x]) for y in range(0, h, 3) for x in range(0, w, 3)
+                        if not (x0 <= x < x1 and y0 <= y < y1))
+        view = sorted(_luma(px[y * w + x]) for y in range(y0, y1, 2) for x in range(x0, x1, 2)
+                      if 0 <= x < w and 0 <= y < h)
+        if inside and view:
+            room_p90 = inside[int(0.90 * (len(inside) - 1))]
+            view_med = view[len(view) // 2]
+            add(f"window_brightness:{win.get('id', '?')[-6:]}",
+                "FAIL" if view_med < room_p90 else "PASS",
+                f"view median {view_med:.2f} vs room 90th percentile {room_p90:.2f}",
+                "The garden was darker than sunlit surfaces inside the room.")
         # Inset 12%: skip frame and reveal, sample the glazing itself.
         ix, iy = (x1 - x0) * 0.12, (y1 - y0) * 0.12
         box = (int(x0 + ix), int(y0 + iy), int(x1 - ix), int(y1 - iy))
@@ -143,6 +199,12 @@ def check(image_path, qa: dict) -> dict:
             "The window showed a void, a white card or a mirror of the room instead of a view.")
 
     for mat in qa.get("materials", []):
+        note = str(mat.get("note", "")).lower()
+        if mat.get("override") and ("dark" in note or "black" in note) \
+                and mat.get("luminance", 0) > DARK_FINISH_MAX:
+            add(f"finish_matches_name:{mat['name']}", "FAIL",
+                f"'{note}' has luminance {mat['luminance']:.2f} (max {DARK_FINISH_MAX})",
+                "'Dark bronze' was specified at 0.42 and rendered as pale tan.")
         if mat.get("override") or mat.get("glass") or mat.get("photo"):
             continue
         if mat.get("saturation", 0) > CAD_SATURATION:
@@ -154,6 +216,12 @@ def check(image_path, qa: dict) -> dict:
             add(f"textile_reflectance:{mat['name']}", "FAIL",
                 "textile without an explicit presentation reflectance",
                 "Ivory bedding rendered grey at the furniture-wide 0.35.")
+
+    for obj in qa.get("soft_goods", []):
+        if not obj.get("simulated"):
+            add(f"soft_goods_simulated:{obj['name']}", "FAIL",
+                "fabric modelled as a rigid shape, not cloth-simulated",
+                "Curtains built as a sine extrusion read as corrugated sheet.")
 
     bed = qa.get("bedding")
     if bed:

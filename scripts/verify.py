@@ -605,6 +605,35 @@ def main() -> int:
                  and "falsy.search(" not in line and "# Falsy" not in line]
     expect("no numeric `x or <nonzero>` default that swallows an explicit zero"
            + (f" ({', '.join(offenders[:5])})" if offenders else ""), not offenders)
+    # Lamp colour is a lighting spec, not a look. Tanner Helland's display-
+    # sRGB fit fed to Cycles as linear light made 2700 K lamps far too cool
+    # and the night room blue; it was nearly "fixed" by tuning the camera's
+    # white balance instead. Checked against the published CIE 1931
+    # Planckian locus, extracted without importing Blender.
+    import ast
+    scene_src = (ROOT / "src/archpipe/blender/build_scene.py").read_text(encoding="utf-8")
+    ns = {"math": math}
+    for node in ast.parse(scene_src).body:
+        if isinstance(node, ast.FunctionDef) and node.name in ("_cie1931", "kelvin_to_rgb"):
+            exec(compile(ast.Module([node], []), "build_scene", "exec"), ns)
+    rgb = ns["kelvin_to_rgb"]
+    def locus_xy(K):
+        c2, X, Y, Z = 1.4388e-2, 0.0, 0.0, 0.0
+        for nm in range(380, 781, 5):
+            lam = nm * 1e-9
+            b = 1.0 / (lam ** 5 * (math.exp(c2 / (lam * K)) - 1.0))
+            x, y, z = ns["_cie1931"](nm)
+            X += b * x; Y += b * y; Z += b * z
+        return X / (X + Y + Z), Y / (X + Y + Z)
+    ref = {2700: (0.4599, 0.4106), 4000: (0.3805, 0.3768), 6500: (0.3135, 0.3236)}
+    expect("lamp colour follows the published Planckian locus (dxy < 0.003)",
+           all(math.hypot(locus_xy(k)[0] - x, locus_xy(k)[1] - y) < 0.003 for k, (x, y) in ref.items()))
+    r27 = rgb(2700)
+    expect("2700 K lamp is linear-light warm (blue/red < 0.15), not display-sRGB",
+           r27[2] / r27[0] < 0.15)
+    expect("lamp colour never changes lamp brightness (Rec.709 luminance = 1)",
+           all(abs(0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2] - 1.0) < 1e-9
+               for c in (rgb(2700), rgb(4000), rgb(6500))))
     # A skipped integrity check must stop the install, not print a warning.
     installer = (ROOT / "ops/workstation/10-blender.sh").read_text(encoding="utf-8")
     expect("Blender install refuses an unverified download unless explicitly allowed",

@@ -596,8 +596,98 @@ def _image_mean_linear_luminance(img, samples=20000):
     return total / count if count else 0.5
 
 
+def _set_grain_axes(mat):
+    """Tag each object using `mat` with its grain axis: its longest extent.
+
+    Real timber grain runs along a member's length: vertical on a
+    wardrobe door or a leg, along a bed rail, along a desk top. World-space
+    box projection ran it horizontally on everything, including across the
+    gap between two doors (render_critic, stage 2).
+    """
+    for obj in bpy.data.objects:
+        if obj.type != "MESH" or mat.name not in [s.material.name for s in obj.material_slots
+                                                   if s.material]:
+            continue
+        pts = [obj.matrix_world @ Vector(c) for c in obj.bound_box]
+        ext = [max(p[i] for p in pts) - min(p[i] for p in pts) for i in range(3)]
+        axis = ext.index(max(ext))
+        for i, key in enumerate(("grain_x", "grain_y", "grain_z")):
+            obj[key] = 1.0 if i == axis else 0.0
+
+
+def _grain_triplanar(nt, image, tile_m):
+    """Three flat projections blended by the normal; image u follows the grain.
+
+    Wood049 is photographed with its grain along image u. On a face whose
+    normal is mostly axis N, u is set to the object's grain axis G when G
+    lies in that face, else to a fixed in-plane axis (end grain). G comes
+    from the per-object grain_x/y/z attributes set by _set_grain_axes, so
+    one shared material serves every piece.
+    """
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    sp = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(geo.outputs["Position"], sp.inputs[0])
+    sn = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(geo.outputs["Normal"], sn.inputs[0])
+    g = {}
+    for key in ("grain_x", "grain_y"):
+        attr = nt.nodes.new("ShaderNodeAttribute")
+        attr.attribute_type = "OBJECT"
+        attr.attribute_name = key
+        g[key] = attr.outputs["Fac"]
+
+    def math(op, a, b=None, c=None, value=None):
+        n = nt.nodes.new("ShaderNodeMath")
+        n.operation = op
+        for i, s in enumerate((a, b, c)):
+            if s is None:
+                continue
+            if isinstance(s, (int, float)):
+                n.inputs[i].default_value = float(s)
+            else:
+                nt.links.new(s, n.inputs[i])
+        return n.outputs["Value"]
+
+    def pick(gain, when_one, when_zero):
+        # gain*one + (1-gain)*zero  ==  gain*(one-zero) + zero
+        return math("MULTIPLY_ADD", gain, math("SUBTRACT", when_one, when_zero), when_zero)
+
+    x, y, z = sp.outputs["X"], sp.outputs["Y"], sp.outputs["Z"]
+    faces = {  # normal axis -> (u, v) on that face
+        "X": (pick(g["grain_y"], y, z), pick(g["grain_y"], z, y)),
+        "Y": (pick(g["grain_x"], x, z), pick(g["grain_x"], z, x)),
+        "Z": (pick(g["grain_y"], y, x), pick(g["grain_y"], x, y)),
+    }
+    weights = {}
+    for axis in "XYZ":
+        weights[axis] = math("POWER", math("ABSOLUTE", sn.outputs[axis]), 4.0)
+    total = math("ADD", math("ADD", weights["X"], weights["Y"]), weights["Z"])
+    blended = None
+    for axis, (u, v) in faces.items():
+        comb = nt.nodes.new("ShaderNodeCombineXYZ")
+        nt.links.new(math("DIVIDE", u, tile_m), comb.inputs["X"])
+        nt.links.new(math("DIVIDE", v, tile_m), comb.inputs["Y"])
+        tex = nt.nodes.new("ShaderNodeTexImage")
+        tex.image = image
+        nt.links.new(comb.outputs["Vector"], tex.inputs["Vector"])
+        scaled = nt.nodes.new("ShaderNodeVectorMath")
+        scaled.operation = "SCALE"
+        nt.links.new(tex.outputs["Color"], scaled.inputs[0])
+        nt.links.new(math("DIVIDE", weights[axis], total), scaled.inputs["Scale"])
+        if blended is None:
+            blended = scaled.outputs["Vector"]
+        else:
+            add = nt.nodes.new("ShaderNodeVectorMath")
+            add.operation = "ADD"
+            nt.links.new(blended, add.inputs[0])
+            nt.links.new(scaled.outputs["Vector"], add.inputs[1])
+            blended = add.outputs["Vector"]
+    return blended
+
+
 def _apply_photo_texture(mat, library_root, asset_id, target_reflectance, tile_m=1.0,
-                         bump_strength=0.0, tint=(1.0, 1.0, 1.0), contrast=1.0):
+                         bump_strength=0.0, tint=(1.0, 1.0, 1.0), contrast=1.0,
+                         grain=False):
     """Swap a material's Base Color/Roughness for a real photographed sample.
 
     The existing procedural bump (already wired to Normal by an earlier
@@ -665,15 +755,20 @@ def _apply_photo_texture(mat, library_root, asset_id, target_reflectance, tile_m
     scale.inputs[1].default_value = tuple(factor * contrast * t / ty for t in tint)
     scale.inputs[2].default_value = tuple(m * factor * (1.0 - contrast) * t / ty
                                           for m, t in zip(mean_rgb, tint))
-    nt.links.new(color_node.outputs["Color"], scale.inputs[0])
+    color_out, rough_out = color_node.outputs["Color"], rough_node.outputs["Color"]
+    if grain:
+        _set_grain_axes(mat)
+        color_out = _grain_triplanar(nt, images["color"], tile_m)
+        rough_out = _grain_triplanar(nt, images["roughness"], tile_m)
+    nt.links.new(color_out, scale.inputs[0])
     nt.links.new(scale.outputs["Vector"], bsdf.inputs["Base Color"])
-    nt.links.new(rough_node.outputs["Color"], bsdf.inputs["Roughness"])
+    nt.links.new(rough_out, bsdf.inputs["Roughness"])
 
     if bump_strength > 0:
         bump = nt.nodes.new("ShaderNodeBump")
         bump.inputs["Strength"].default_value = bump_strength
         bump.inputs["Distance"].default_value = 0.001
-        nt.links.new(rough_node.outputs["Color"], bump.inputs["Height"])
+        nt.links.new(rough_out, bump.inputs["Height"])
         nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
 
     mat["presentation_photo_texture"] = asset_id
@@ -772,9 +867,12 @@ def enhance_finishes(data, library_root=None):
             note = "furniture oak: mild grain bump, +/-5% colour variance"
             # Finer tile and 55% contrast: at 0.8 m and full contrast the
             # grain read as a bold printed pattern, not oak veneer.
+            # grain=True: per-object grain axis (doors vertical, rails along
+            # their length); its bump replaces the procedural horizontal bands.
             if library_root and _apply_photo_texture(mat, library_root, "Wood049",
                                                       reflectance, tile_m=0.45,
-                                                      contrast=0.55):
+                                                      contrast=0.55, grain=True,
+                                                      bump_strength=0.05):
                 note += "; Base Color/Roughness replaced by Wood049 (ambientCG, CC0), mean-matched to %.2f" % reflectance
             report[mat.name] = note
         elif any(k in name_l for k in ("linen", "bedding", "throw")):
@@ -790,9 +888,13 @@ def enhance_finishes(data, library_root=None):
             refl, tint = {"bedding": (0.70, (1.0, 0.97, 0.90)),
                           "linen": (0.40, (1.0, 0.96, 0.90)),
                           "throw": (0.20, (1.0, 0.94, 0.88))}[kind]
+            # Bedding at a finer tile with a weak bump: at 0.7 m / 0.35 the knit
+            # grid read as a regular crosshatch at camera distance (critic).
+            fine = kind == "bedding"
             if library_root and _apply_photo_texture(mat, library_root, fabric_id,
-                                                      refl, tile_m=0.7,
-                                                      bump_strength=0.35, tint=tint):
+                                                      refl, tile_m=0.35 if fine else 0.7,
+                                                      bump_strength=0.10 if fine else 0.35,
+                                                      tint=tint):
                 note += ("; Base Color/Roughness replaced by %s (ambientCG, CC0), mean-matched "
                          "to presentation reflectance %.2f, roughness-driven bump" % (fabric_id, refl))
             report[mat.name] = note

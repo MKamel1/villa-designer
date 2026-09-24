@@ -28,6 +28,18 @@ image (`out/photoreal/*.qa.json`). Drafts are 256 samples; ask before
 spending on final 2048-sample sets, and state the cost. Look at the images
 after QA passes: QA catches known defects, not new ones.
 
+**Lighting is a specification, not a look.** The render must be faithful to
+the fixtures' photometry: IES distribution, lumens and colour temperature.
+If lamps look wrong, find the error in the light's spec or conversion
+(e.g. display-sRGB lamp colour used as linear light) and fix it there.
+Never compensate with white balance, exposure or tone-curve tuning; the
+camera uses standard presets (daylight 5500 K, tungsten 3200 K).
+
+**The critic sees it before the user does.** After `render_qa` passes, run
+the `render_critic` role on the set. `render_qa` only knows defects it has
+already met; shape realism (curtains, fixtures, bedding) needs judgement.
+Check the critic's claims against physics before turning them into guards.
+
 **Measure, don't guess, renderer facts.** Unit scales, axis conventions and
 ray semantics are probed with a tiny scene (`calibrate_sky.py`,
 `calibrate_photometry.py`) and written down with the measured values.

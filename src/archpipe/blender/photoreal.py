@@ -83,16 +83,24 @@ def architectural_glass():
 # ---------------------------------------------------------------------------
 # Sky, sun, view out
 # ---------------------------------------------------------------------------
-def _image_mean_luminance(img, samples=40000):
+def _sky_luminance(img, samples=40000):
+    """Mean sky luminance of an equirectangular HDRI, its own sun excluded.
+
+    Upper half only (Blender's pixel row 0 is the bottom, i.e. the nadir),
+    brightest 1% dropped. A plain whole-image mean is dominated by a sun
+    captured in the photograph, which scaled everything else in the view
+    several stops too dark (render_critic, stage 2).
+    """
+    w, h = img.size
     px = img.pixels[:]
-    n = len(px) // 4
-    stride = max(1, n // samples)
-    tot = cnt = 0
-    for i in range(0, n, stride):
+    step = max(1, (w * h // 2) // samples)
+    vals = []
+    for i in range((h // 2) * w, h * w, step):
         o = i * 4
-        tot += 0.2126 * px[o] + 0.7152 * px[o + 1] + 0.0722 * px[o + 2]
-        cnt += 1
-    return tot / cnt if cnt else 1.0
+        vals.append(0.2126 * px[o] + 0.7152 * px[o + 1] + 0.0722 * px[o + 2])
+    vals.sort()
+    vals = vals[: max(1, int(len(vals) * 0.99))]
+    return sum(vals) / len(vals)
 
 
 def daylight_world(sun_alt_deg, sun_az_deg, view_hdri=None, view_rotation_deg=0.0,
@@ -138,7 +146,7 @@ def daylight_world(sun_alt_deg, sun_az_deg, view_hdri=None, view_rotation_deg=0.
     # global horizontal illuminance, spread over the hemisphere: E/(4*pi).
     diffuse_lum = 0.25 * max(1.0, 76.7 * math.sin(math.radians(max(5.0, sun_alt_deg)))
                              / math.sin(math.radians(35.0))) * sky_scale / math.pi
-    mean = _image_mean_luminance(env.image)
+    mean = _sky_luminance(env.image)
     view_bg = nt.nodes.new("ShaderNodeBackground")
     view_bg.inputs["Strength"].default_value = diffuse_lum / max(mean, 1e-6)
     nt.links.new(env.outputs["Color"], view_bg.inputs["Color"])
@@ -174,6 +182,59 @@ def daylight_world(sun_alt_deg, sun_az_deg, view_hdri=None, view_rotation_deg=0.
     nt.links.new(mix.outputs["Shader"], out.inputs["Surface"])
     return {"sky": "nishita", "view": os.path.basename(view_hdri),
             "view_strength": view_bg.inputs["Strength"].default_value}
+
+
+def _horizontal_illuminance(img, samples=60000):
+    """E on an open horizontal plane from an equirectangular image, in image units.
+
+    E = integral over the upper hemisphere of L * cos(zenith) d(omega). Row j
+    (Blender: row 0 is the nadir) sits at elevation e; a pixel covers
+    (pi/h)*(2*pi/w)*cos(e) steradians and cos(zenith) = sin(e).
+    """
+    w, h = img.size
+    px = img.pixels[:]
+    step = max(1, (w * h // 2) // samples)
+    d_theta, d_phi = math.pi / h, 2.0 * math.pi / w
+    total = 0.0
+    for i in range((h // 2) * w, h * w, step):
+        j = i // w
+        e = -math.pi / 2 + (j + 0.5) * d_theta
+        o = i * 4
+        lum = 0.2126 * px[o] + 0.7152 * px[o + 1] + 0.0722 * px[o + 2]
+        total += lum * math.sin(e) * math.cos(e) * d_theta * d_phi * step
+    return total
+
+
+def hdri_world(path, target_lux, rotation_deg=0.0):
+    """One photographed environment as both light and view (overcast, night).
+
+    Scaled so its horizontal illuminance equals `target_lux`, a stated
+    condition (overcast ~15 klx, moonless night ~0.3 lx), computed by
+    integrating the image rather than by eye. Unlike day, an overcast or
+    night sky has no sun to separate, so light and view can be one image,
+    and the view out then always matches the light coming in.
+    """
+    world = bpy.data.worlds.get("World") or bpy.data.worlds.new("World")
+    bpy.context.scene.world = world
+    world.use_nodes = True
+    nt = world.node_tree
+    for n in list(nt.nodes):
+        nt.nodes.remove(n)
+    out = nt.nodes.new("ShaderNodeOutputWorld")
+    coord = nt.nodes.new("ShaderNodeTexCoord")
+    mapping = nt.nodes.new("ShaderNodeMapping")
+    mapping.inputs["Rotation"].default_value = (0.0, 0.0, math.radians(rotation_deg))
+    env = nt.nodes.new("ShaderNodeTexEnvironment")
+    env.image = bpy.data.images.load(path)
+    bg = nt.nodes.new("ShaderNodeBackground")
+    e_img = _horizontal_illuminance(env.image)
+    bg.inputs["Strength"].default_value = target_lux / max(e_img, 1e-9)
+    nt.links.new(coord.outputs["Generated"], mapping.inputs["Vector"])
+    nt.links.new(mapping.outputs["Vector"], env.inputs["Vector"])
+    nt.links.new(env.outputs["Color"], bg.inputs["Color"])
+    nt.links.new(bg.outputs["Background"], out.inputs["Surface"])
+    return {"sky": "hdri", "hdri": os.path.basename(path), "target_lux": target_lux,
+            "strength": bg.inputs["Strength"].default_value}
 
 
 def exterior_ground(data, albedo=0.25):
@@ -249,15 +310,22 @@ FINISHES = {
     "Sash": dict(color=(0.93, 0.93, 0.91), rough=0.35, note="white powder-coated aluminium"),
     "Door - Frame": dict(color=(0.90, 0.90, 0.88), rough=0.45, note="white satin paint"),
     "Door - Panel": dict(color=(0.90, 0.90, 0.88), rough=0.45, note="white satin paint"),
-    "Shade Finish Dark Bronze": dict(color=(0.42, 0.30, 0.20), metal=1.0, rough=0.38,
+    # Patinated dark bronze. 0.42/0.30/0.20 was bright polished bronze and
+    # rendered pale tan (render_critic; render_qa finish_matches_name).
+    "Shade Finish Dark Bronze": dict(color=(0.11, 0.075, 0.05), metal=1.0, rough=0.42,
                                      note="dark bronze metal"),
-    "Shade Interior White": dict(color=(0.85, 0.85, 0.83), rough=0.5, note="white enamel"),
-    "Lens -White": dict(color=(0.92, 0.92, 0.92), rough=0.3, note="opal diffuser"),
+    "Shade Interior White": dict(color=(0.85, 0.85, 0.83), rough=0.25, note="white enamel"),
+    # Opal diffuser is frosted translucent glass: a matte white read as a
+    # paper plate under the cone (user review), and an opaque one cannot
+    # glow when the lamp behind it is on at night.
+    "Lens -White": dict(color=(0.95, 0.95, 0.94), rough=0.35, transmission=0.85,
+                        note="frosted opal glass diffuser"),
     "Chrome": dict(color=(0.90, 0.90, 0.90), metal=1.0, rough=0.06, note="polished chrome"),
     "Stainless Steel": dict(color=(0.75, 0.74, 0.72), metal=1.0, rough=0.22, note="brushed steel"),
     "Aluminum": dict(color=(0.88, 0.88, 0.88), metal=1.0, rough=0.3, note="satin aluminium"),
-    "Metal Black": dict(color=(0.04, 0.04, 0.04), metal=0.8, rough=0.4, note="black satin metal"),
-    "Matte Black": dict(color=(0.03, 0.03, 0.03), rough=0.7, note="matte black"),
+    "Metal Black": dict(color=(0.04, 0.04, 0.04), metal=0.8, rough=0.35, note="black satin metal"),
+    # Powder coat has a soft sheen; roughness 0.7 read as a dead CG black.
+    "Matte Black": dict(color=(0.03, 0.03, 0.03), rough=0.45, note="black powder coat"),
     "Cord Black": dict(color=(0.02, 0.02, 0.02), rough=0.6, note="black cord"),
     "Wood": dict(color=(0.30, 0.19, 0.10), rough=0.45, note="stained beech (chair)"),
 }
@@ -279,6 +347,10 @@ def apply_finish_overrides():
         bsdf.inputs["Base Color"].default_value = tuple(spec["color"]) + (1.0,)
         bsdf.inputs["Roughness"].default_value = spec["rough"]
         bsdf.inputs["Metallic"].default_value = spec.get("metal", 0.0)
+        if "transmission" in spec:
+            key = "Transmission Weight" if "Transmission Weight" in bsdf.inputs else "Transmission"
+            bsdf.inputs[key].default_value = spec["transmission"]
+            bsdf.inputs["IOR"].default_value = 1.5
         mat["presentation_assumption"] = "finish override: " + spec["note"]
         report[mat.name] = spec["note"]
     return report
@@ -330,7 +402,14 @@ def photographic_camera(name):
 # ---------------------------------------------------------------------------
 # Exposure and white balance
 # ---------------------------------------------------------------------------
-def camera_meter(key=0.18, bias_stops=0.0):
+# MEASURED (Blender 4.5.14, a scene-linear grey ramp through the real view
+# transform): stops over mid-grey at which each AgX look reaches display
+# white. The first highlight guard assumed 5 for every look; High Contrast
+# clips at 4.75, so a sunlit duvet still clipped 4.1% of the frame.
+AGX_WHITE_STOPS = {"None": 6.5, "AgX - Medium High Contrast": 5.5, "AgX - High Contrast": 4.75}
+
+
+def camera_meter(key=0.18, bias_stops=0.0, look="None"):
     """Expose like a camera's meter: a fast pre-render, log-average luminance.
 
     Returns the exposure in stops that maps the scene's log-average
@@ -355,14 +434,26 @@ def camera_meter(key=0.18, bias_stops=0.0):
     img = bpy.data.images.load(path)
     px = img.pixels[:]
     bpy.data.images.remove(img)
-    lums = sorted(0.2126 * px[i] + 0.7152 * px[i + 1] + 0.0722 * px[i + 2]
-                  for i in range(0, len(px), 4))
-    lums = [v for v in lums[: int(len(lums) * 0.97)] if v > 0]
+    all_lums = sorted(0.2126 * px[i] + 0.7152 * px[i + 1] + 0.0722 * px[i + 2]
+                      for i in range(0, len(px), 4))
+    lums = [v for v in all_lums[: int(len(all_lums) * 0.97)] if v > 0]
     logavg = math.exp(sum(math.log(v) for v in lums) / len(lums)) if lums else 1.0
     (s.cycles.samples, s.render.resolution_percentage, s.cycles.use_denoising,
      s.render.image_settings.file_format, s.render.image_settings.color_depth,
      s.view_settings.view_transform, s.view_settings.exposure, s.render.filepath) = saved
-    return math.log2(key / logavg) + bias_stops, logavg
+    ev = math.log2(key / logavg) + bias_stops
+    # Highlight priority, as a camera's highlight-weighted meter: an average
+    # meter let a large sunlit duvet clip 4.7% of the bedfoot frame (QA
+    # highlight_clipping). Back off until at most 1.5% of pixels sit above
+    # the look's measured white point, less half a stop: QA counts a pixel
+    # clipped when ANY channel clips, and warm sunlight clips red first.
+    white = key * 2.0 ** (AGX_WHITE_STOPS.get(look, 4.75) - 0.5)
+    # At most 0.7 stop of protection, like a photographer's compensation:
+    # uncapped, it underexposed two views to a 0.18 median (exposure_midtones).
+    floor = ev - 0.7
+    while ev > floor and sum(1 for v in all_lums if v * 2.0 ** ev > white) > 0.025 * len(all_lums):
+        ev -= 0.1
+    return ev, logavg
 
 
 def white_balance(kelvin):
@@ -375,7 +466,7 @@ def white_balance(kelvin):
     return True
 
 
-def presentation_render_settings():
+def presentation_render_settings(look="None"):
     s = bpy.context.scene
     c = s.cycles
     c.transmission_bounces = 32
@@ -387,10 +478,10 @@ def presentation_render_settings():
     c.adaptive_threshold = 0.005
     if hasattr(c, "use_light_tree"):
         c.use_light_tree = True
-    # AgX base look: its highlight roll-off keeps sunlit white bedding from
-    # clipping; "Medium High Contrast" clipped the sun patch (render_qa
-    # highlight_clipping).
-    s.view_settings.look = "None"
+    # The AgX look is a tonal choice bounded by render_qa on both ends:
+    # "None" (base) kept the sun patch from clipping but lifted blacks
+    # (shadows_present); a contrast look deepens them. Pick by QA, not taste.
+    s.view_settings.look = look
 
 
 # ---------------------------------------------------------------------------
@@ -473,6 +564,7 @@ def _simulate(obj, colliders, frames, mass, bending, pin_band=None):
     old = obj.data
     obj.data = baked
     bpy.data.meshes.remove(old)
+    obj["photoreal_cloth"] = True
     scene.frame_set(1)
 
 
@@ -541,10 +633,12 @@ def cloth_bedding(data):
     # a flat sheet. Low-frequency displacement upward along the normal,
     # then thickness, reads as filled fabric rather than a slab.
     loft = bpy.data.textures.new("duvet_loft", type="CLOUDS")
-    loft.noise_scale = 0.22
+    # Broad and gentle: at 0.22 m / 0.035 the loft read as even
+    # "cottage-cheese" lumps (render_critic); folds come from the simulation.
+    loft.noise_scale = 0.55
     disp = duvet.modifiers.new("loft", "DISPLACE")
     disp.texture = loft
-    disp.strength = 0.035
+    disp.strength = 0.018
     disp.mid_level = 0.3
     solid = duvet.modifiers.new("thickness", "SOLIDIFY")
     solid.thickness = 0.05
@@ -593,7 +687,7 @@ def cloth_bedding(data):
 # ---------------------------------------------------------------------------
 # QA facts for archpipe.render_qa (what the scene contained, where windows land)
 # ---------------------------------------------------------------------------
-def scene_qa(data, white_balance_applied):
+def scene_qa(data, white_balance_applied, daylight=True):
     from bpy_extras.object_utils import world_to_camera_view
     scene = bpy.context.scene
     cam = scene.camera
@@ -611,7 +705,9 @@ def scene_qa(data, white_balance_applied):
     world = scene.world
     sun = bool(world and world.use_nodes and any(
         n.type == "TEX_SKY" and getattr(n, "sun_disc", False) for n in world.node_tree.nodes))
-    qa["sky"] = {"sun": sun}
+    exterior = bool(world and world.use_nodes and any(
+        n.type in ("TEX_SKY", "TEX_ENVIRONMENT") for n in world.node_tree.nodes))
+    qa["sky"] = {"sun": sun, "exterior": exterior}
     qa["glass"] = {"architectural": sum(1 for m in bpy.data.materials if m.get("photoreal_glass"))}
 
     walls = {w["id"]: w for w in data.get("walls", [])}
@@ -649,12 +745,19 @@ def scene_qa(data, white_balance_applied):
         if bsdf and not bsdf.inputs["Base Color"].is_linked:
             c = bsdf.inputs["Base Color"].default_value
             entry["saturation"] = round(max(c[:3]) - min(c[:3]), 3)
+            entry["luminance"] = round(0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2], 3)
+        if entry["override"]:
+            entry["note"] = str(m.get("presentation_assumption", ""))
         mats.append(entry)
         if any(k in m.name.lower() for k in ("linen", "bedding", "throw", "rug")):
             textiles.append({"name": m.name, "reflectance": m.get("presentation_photo_reflectance")})
     qa["materials"] = mats
     qa["textiles"] = textiles
     qa["white_balance"] = white_balance_applied
+    qa["daylight"] = daylight
+    qa["soft_goods"] = [{"name": o.name, "simulated": bool(o.get("photoreal_cloth"))}
+                        for o in scene.objects if o.type == "MESH"
+                        and o.name.split(".")[0] in ("curtain", "duvet_cloth", "throw_cloth")]
     if LAST_BEDDING:
         qa["bedding"] = LAST_BEDDING
     return qa
@@ -744,15 +847,44 @@ def dress_room(data, library_root, presentation):
     bev.width = 0.004
     bev.segments = 2
 
-    # Curtains: pleated linen panels drawn to either side of the window.
-    cmat = next((m for m in bpy.data.materials if m.name.startswith("archpipe warm linen")), None)
+    # Curtains: linen panels hung from a visible rod and cloth-simulated from
+    # a gathered, pinned heading. A pure sine extrusion (the first version)
+    # had identical pleats top to bottom and read as corrugated sheet.
+    import random
+    rnd = random.Random(11)
+    rod_mat = next((m for m in bpy.data.materials if m.name.startswith("archpipe dark metal")), None)
+    bpy.ops.mesh.primitive_cylinder_add(radius=0.011, depth=2.7, vertices=24,
+                                        location=(2.10, 0.10, 2.62), rotation=(0, math.pi / 2, 0))
+    rod = bpy.context.active_object
+    rod.name = "curtain_rod"
+    if rod_mat:
+        rod.data.materials.append(rod_mat)
+    # Own lighter linen (not the headboard's): heavy dark taupe panels read
+    # as a wall of corrugated board (user review, stage 2).
+    cmat = bpy.data.materials.new("archpipe curtain linen")
+    cmat.use_nodes = True
+    presentation._apply_photo_texture(cmat, library_root, "Fabric036", 0.55, tile_m=0.5,
+                                      bump_strength=0.2, tint=(1.0, 0.97, 0.92))
+    floors = [o for o in bpy.data.objects if o.name.startswith("floor_")]
+    height = 2.60                              # rod at 2.62, hem kisses the floor
     for x0, x1 in ((0.85, 1.30), (2.90, 3.35)):
-        c = _grid("curtain", x1 - x0, 2.55, 40, 60, ((x0 + x1) / 2.0, 0.0), 0.0)
+        c = _grid("curtain", x1 - x0, height, 40, 90, ((x0 + x1) / 2.0, 0.0), 0.0)
+        # Irregular pleats: tight and deep at the gathered heading, relaxing
+        # toward the hem, each with its own depth and phase. Identical
+        # sine pleats top to bottom (the previous version) survived the
+        # simulation unchanged and looked machine-made.
+        pleats = 7
+        depth = [0.035 * rnd.uniform(0.6, 1.4) for _ in range(pleats + 1)]
+        phase = [rnd.uniform(-0.35, 0.35) for _ in range(pleats + 1)]
         for v in c.data.vertices:
-            # Grid y (-1.275..1.275) becomes height; x gets sinusoidal pleats.
             u = (v.co.x - x0) / (x1 - x0)
-            v.co = Vector((v.co.x, 0.10 + 0.035 * math.sin(u * math.pi * 9.0),
-                           0.05 + (v.co.y + 1.275)))
+            t = (v.co.y + height / 2.0) / height          # 0 = hem, 1 = heading
+            k = min(pleats, int(u * pleats))
+            relax = 0.55 + 0.45 * t
+            v.co = Vector((v.co.x,
+                           0.10 + depth[k] * relax * math.sin((u * pleats + phase[k]) * 2.0 * math.pi),
+                           0.012 + t * height))
+        _simulate(c, floors, 70, mass=0.3, bending=0.35, pin_band=("z", 0.012 + height, 0.02))
         solid = c.modifiers.new("thickness", "SOLIDIFY")
         solid.thickness = 0.004
         c.modifiers.new("smooth", "SUBSURF").levels = 1

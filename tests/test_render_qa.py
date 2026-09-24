@@ -20,8 +20,12 @@ GOOD_QA = {
 }
 
 
-def scene(path, base=(150, 150, 148), window="textured", clip_fraction=0.0):
-    """A neutral mid-grey room with a window region at GOOD_QA's screen rect."""
+def scene(path, base=(120, 120, 118), window="textured", clip_fraction=0.01,
+          shadow_fraction=0.02):
+    """A neutral room, a bright textured window at GOOD_QA's rect, 1% near-white.
+
+    Like a real daylight photograph: the view is brighter than the room and
+    something reaches white. A flat mid-grey scene is itself a failure."""
     rnd = random.Random(3)
     w, h = 400, 250
     img = Image.new("RGB", (w, h), base)
@@ -31,16 +35,21 @@ def scene(path, base=(150, 150, 148), window="textured", clip_fraction=0.0):
     for x in range(x0, x1):
         for y in range(y0, y1):
             if window == "textured":          # foliage/sky: real variation
-                v = rnd.randint(40, 230)
-                px[x, y] = (v // 2, v, v // 3)
+                v = rnd.randint(150, 250)
+                px[x, y] = (v - 20, v, v - 40)
             elif window == "void":            # smooth gradient, no content
                 v = 200 + (y - y0) * 20 // (y1 - y0)
                 px[x, y] = (v - 20, v - 10, v)
+            elif window == "dim":             # textured but darker than the room
+                v = rnd.randint(20, 80)
+                px[x, y] = (v, v + 10, v - 5)
             elif window == "white":
                 px[x, y] = (255, 255, 255)
     n = int(clip_fraction * w * h)
     for i in range(n):
         px[i % w, (i // w) % h] = (255, 255, 255)
+    for i in range(int(shadow_fraction * w * h)):   # true darks, e.g. under the bed
+        px[w - 1 - i % w, h - 1 - (i // w) % h] = (8, 8, 8)
     img.save(path)
     return path
 
@@ -101,6 +110,50 @@ class RenderQATests(unittest.TestCase):
         good = dict(GOOD_QA, bedding={"mattress_y": [1.64, 3.35], "mattress_top": 0.55,
                                       "duvet_y": [1.51, 2.90], "duvet_z_min": 0.11})
         self.assertEqual(self.status(self.report(good), "cloth_plausible"), ["PASS"])
+
+    def test_dim_window_fails(self):
+        r = self.report(window="dim")
+        self.assertEqual(self.status(r, "window_brightness"), ["FAIL"])
+
+    def test_flat_milky_image_fails(self):
+        flat = self.report(clip_fraction=0.0, window="dim")
+        self.assertEqual(self.status(flat, "highlights_present"), ["FAIL"])
+
+    def test_dark_finish_that_is_not_dark_fails(self):
+        qa = dict(GOOD_QA, materials=[{"name": "Shade Finish Dark Bronze", "override": True,
+                                       "note": "dark bronze metal", "luminance": 0.31}])
+        self.assertEqual(self.status(self.report(qa), "finish_matches_name"), ["FAIL"])
+        qa = dict(GOOD_QA, materials=[{"name": "Shade Finish Dark Bronze", "override": True,
+                                       "note": "dark bronze metal", "luminance": 0.08}])
+        self.assertEqual(self.status(self.report(qa), "finish_matches_name"), [])
+
+    def test_unsimulated_soft_goods_fail(self):
+        qa = dict(GOOD_QA, soft_goods=[{"name": "curtain", "simulated": False},
+                                       {"name": "duvet_cloth", "simulated": True}])
+        r = self.report(qa)
+        self.assertEqual(r["failed"], ["soft_goods_simulated:curtain"])
+
+    def test_lifted_blacks_fail(self):
+        self.assertEqual(self.status(self.report(shadow_fraction=0.0), "shadows_present"), ["FAIL"])
+
+    def test_underexposed_fails(self):
+        self.assertEqual(self.status(self.report(base=(45, 45, 44)), "exposure_midtones"), ["FAIL"])
+
+    def test_night_window_is_allowed_to_be_dark(self):
+        night = dict(GOOD_QA, daylight=False)
+        r = self.report(night, window="dim")
+        self.assertEqual(self.status(r, "window_"), [])
+
+    def test_overcast_glass_must_pass_daylight(self):
+        qa = dict(GOOD_QA, sky={"sun": False, "exterior": True}, glass={"architectural": 0})
+        self.assertEqual(self.status(self.report(qa), "glass_passes_daylight"), ["FAIL"])
+
+    def test_blue_lamplit_night_fails(self):
+        night = dict(GOOD_QA, daylight=False)
+        blue = self.report(night, base=(105, 118, 135))     # mildly cool, visibly blue
+        self.assertEqual(self.status(blue, "colour_cast"), ["FAIL"])
+        warm = self.report(night, base=(135, 118, 100))
+        self.assertEqual(self.status(warm, "colour_cast"), ["PASS"])
 
     def test_log_parsing(self):
         log = "noise\nSCENE QA {\"camera\": {\"pitch_deg\": 90}}\nSCENE wrote x"

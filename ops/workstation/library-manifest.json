@@ -35,7 +35,9 @@
     {"id": "kloofendal_43d_clear_puresky", "role": "bright midday",
      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_43d_clear_puresky_1k.exr"},
     {"id": "studio_garden", "role": "view out of the window (camera rays only; has a horizon)",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/studio_garden_2k.exr"}
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/studio_garden_2k.exr"},
+    {"id": "tiergarten", "role": "overcast: light AND view (overcast park with a horizon)",
+     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/tiergarten_2k.exr"}
   ],
   "props": [
     {"id": "book_encyclopedia_set_01", "role": "desk / nightstand books", "api": "polyhaven-model"},

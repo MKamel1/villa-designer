@@ -453,31 +453,49 @@ def build_lights(data):
     return made
 
 
+def _cie1931(lam):
+    """CIE 1931 2-degree colour matching functions, multi-lobe Gaussian fit
+    (Wyman, Sloan & Shirley 2013, JCGT 2(2)); within ~1% of the tabulated CMFs."""
+    def g(x, mu, s1, s2):
+        s = s1 if x < mu else s2
+        return math.exp(-0.5 * ((x - mu) / s) ** 2)
+    x = 1.056 * g(lam, 599.8, 37.9, 31.0) + 0.362 * g(lam, 442.0, 16.0, 26.7) \
+        - 0.065 * g(lam, 501.1, 20.4, 26.2)
+    y = 0.821 * g(lam, 568.8, 46.9, 40.5) + 0.286 * g(lam, 530.9, 16.3, 31.1)
+    z = 1.217 * g(lam, 437.0, 11.8, 36.0) + 0.681 * g(lam, 459.0, 26.0, 13.8)
+    return x, y, z
+
+
 def kelvin_to_rgb(kelvin):
-    """Approximate blackbody colour, normalised so luminance is unchanged.
+    """Blackbody colour in LINEAR Rec.709, normalised to unit luminance.
 
-    Colour temperature must not become a brightness control. Tinting a
-    light without renormalising would make a 2700 K lamp render dimmer
-    than a 4000 K one of identical output, which is a lighting error
-    dressed up as a colour choice.
+    Colour temperature must not become a brightness control: Y = 1, so a
+    2700 K and a 4000 K lamp of equal lumens render equally bright, and the
+    photometric calibration (ADR-0010) is untouched.
 
-    Planckian approximation after Tanner Helland's widely-used fit;
-    adequate for 1000-40000 K and well inside the tolerance of anything
-    we assert about a scheme.
+    Planck's law is integrated against the CIE 1931 observer (380-780 nm),
+    then XYZ -> linear sRGB/Rec.709 (D65), which is Cycles' working space.
+    The previous version used Tanner Helland's fit, whose output is
+    gamma-encoded DISPLAY sRGB; fed to Cycles as linear light it made a
+    2700 K lamp (1.00, 0.65, 0.34) instead of about (1.00, 0.39, 0.10) --
+    far too cool. The camera then correctly white-balanced a lamp that was
+    not really 2700 K, and the night room rendered blue.
     """
-    t = max(1000.0, min(40000.0, float(kelvin))) / 100.0
-    if t <= 66:
-        r = 255.0
-        g = 99.4708025861 * math.log(t) - 161.1195681661
-        b = 0.0 if t <= 19 else 138.5177312231 * math.log(t - 10) - 305.0447927307
-    else:
-        r = 329.698727446 * ((t - 60) ** -0.1332047592)
-        g = 288.1221695283 * ((t - 60) ** -0.0755148492)
-        b = 255.0
-    rgb = [max(0.0, min(255.0, v)) / 255.0 for v in (r, g, b)]
-    # Rec. 709 luminance, so the tint changes hue and not output.
-    y = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
-    return tuple(v / y for v in rgb) if y > 0 else (1.0, 1.0, 1.0)
+    t = max(1000.0, min(40000.0, float(kelvin)))
+    c2 = 1.4388e-2                               # m*K
+    X = Y = Z = 0.0
+    for nm in range(380, 781, 5):
+        lam = nm * 1e-9
+        b = 1.0 / (lam ** 5 * (math.exp(c2 / (lam * t)) - 1.0))
+        x, y, z = _cie1931(nm)
+        X += b * x; Y += b * y; Z += b * z
+    X, Z = X / Y, Z / Y
+    r = 3.2406 * X - 1.5372 - 0.4986 * Z
+    g = -0.9689 * X + 1.8758 + 0.0415 * Z
+    bl = 0.0557 * X - 0.2040 + 1.0570 * Z
+    rgb = [max(0.0, v) for v in (r, g, bl)]      # out-of-gamut blue at low K
+    lum = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
+    return tuple(v / lum for v in rgb)
 
 
 # ---------------------------------------------------------------------------
@@ -773,7 +791,8 @@ def parse_args(argv):
            "export_glb": None, "no_render": False,
            "profile": "draft", "time": "day", "dof": False,
            "interior_lights": True, "sun_alt": None, "sun_az": None,
-           "view_rotation": 0.0, "wb": None, "exposure_bias": 0.0,
+           "view_rotation": 0.0, "wb": None, "exposure_bias": 0.0, "look": "None",
+           "hdri": None, "hdri_lux": 15000.0, "hdri_rotation": 0.0,
            "photo_camera": None, "cloth": True, "dress": True}
     i = 0
     while i < len(args):
@@ -821,6 +840,14 @@ def parse_args(argv):
             i += 1; out["view_rotation"] = float(args[i])
         elif a == "--wb":
             i += 1; out["wb"] = float(args[i])
+        elif a == "--hdri":
+            i += 1; out["hdri"] = args[i]
+        elif a == "--hdri-lux":
+            i += 1; out["hdri_lux"] = float(args[i])
+        elif a == "--hdri-rotation":
+            i += 1; out["hdri_rotation"] = float(args[i])
+        elif a == "--look":
+            i += 1; out["look"] = args[i]
         elif a == "--exposure-bias":
             i += 1; out["exposure_bias"] = float(args[i])
         elif a == "--photo-camera":
@@ -949,7 +976,12 @@ def main():
         return
 
     hdri_path = None
-    if photoreal and opt["sun_alt"] is not None:
+    if photoreal and opt["hdri"]:
+        path = os.path.join(library_root, "hdri", opt["hdri"] + ".exr")
+        print('SCENE SKY ' + json.dumps(photoreal.hdri_world(path, opt["hdri_lux"], opt["hdri_rotation"])))
+        photoreal.exterior_ground(data)
+        print('SCENE PORTALS %s' % photoreal.window_portals(data))
+    elif photoreal and opt["sun_alt"] is not None:
         view = os.path.join(library_root, "hdri", "studio_garden.exr")
         print('SCENE SKY ' + json.dumps(photoreal.daylight_world(
             opt["sun_alt"], opt["sun_az"] or 180.0, view, opt["view_rotation"])))
@@ -962,7 +994,7 @@ def main():
         if not hdri_path:
             print("SCENE NOTE: HDRI %r not found under the asset library; "
                   "using the flat sky instead." % hdri_name)
-    if not (photoreal and opt["sun_alt"] is not None):
+    if not (photoreal and (opt["sun_alt"] is not None or opt["hdri"])):
         add_world(strength=HDRI_STRENGTH_BY_TIME.get(opt["time"], 1.0) if hdri_path else 1.0,
                   hdri_path=hdri_path)
     if photoreal and opt["photo_camera"]:
@@ -984,18 +1016,21 @@ def main():
                               exposure=opt["exposure"],
                               target_lux=opt["target_lux"])
     if photoreal:
-        photoreal.presentation_render_settings()
+        photoreal.presentation_render_settings(opt["look"])
         if opt["exposure"] is None:
-            ev, logavg = photoreal.camera_meter(bias_stops=opt["exposure_bias"])
+            ev, logavg = photoreal.camera_meter(bias_stops=opt["exposure_bias"], look=opt["look"])
             bpy.context.scene.view_settings.exposure = ev
-            print("SCENE METER log-average %.4g -> exposure %.2f stops" % (logavg, ev))
+            # Supersedes the "SCENE EXPOSURE ... (target N lx)" line above, which
+            # configure_render prints for the measurement path (render_critic
+            # read that stale line as the applied exposure).
+            print("SCENE METER log-average %.4g -> exposure %.2f stops (applied; supersedes the lux-target exposure above)" % (logavg, ev))
         wb = opt["wb"] or (5500.0 if not opt["interior_lights"] else 3000.0)
         wb_ok = photoreal.white_balance(wb)
         print("SCENE WHITE BALANCE %s K %s" % (wb, "applied" if wb_ok
                                               else "unavailable (Blender < 4.3)"))
         # One machine-readable line for archpipe.render_qa; keep it last
         # before rendering so it describes the scene exactly as rendered.
-        print("SCENE QA " + json.dumps(photoreal.scene_qa(data, wb_ok)))
+        print("SCENE QA " + json.dumps(photoreal.scene_qa(data, wb_ok, daylight=opt["time"] != "night")))
 
     print("SCENE walls=%d floors=%d openings_cut=%d furniture=%d lights=%d"
           % (len(walls), len(floors), holes, len(furn), len(lights)))
