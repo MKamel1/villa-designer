@@ -173,6 +173,9 @@ def _make_material(name, rgb255, transparency, reflectance):
         bsdf.inputs["IOR"].default_value = 1.5
         mat["presentation_assumption"] = (
             "clear glazing assumed: IOR 1.5, roughness 0.02, not measured")
+        # The model's own light transmittance (Revit material transparency),
+        # used when shadow rays pass the pane (photoreal.architectural_glass).
+        mat["presentation_transmittance"] = max(0.0, min(1.0, transparency / 100.0))
     else:
         rgb_lin = tuple(_srgb_to_linear(v) for v in rgb255)
         y = 0.2126 * rgb_lin[0] + 0.7152 * rgb_lin[1] + 0.0722 * rgb_lin[2]

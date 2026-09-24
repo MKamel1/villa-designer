@@ -1030,7 +1030,13 @@ def main():
                                               else "unavailable (Blender < 4.3)"))
         # One machine-readable line for archpipe.render_qa; keep it last
         # before rendering so it describes the scene exactly as rendered.
-        print("SCENE QA " + json.dumps(photoreal.scene_qa(data, wb_ok, daylight=opt["time"] != "night")))
+        qa = photoreal.scene_qa(data, wb_ok, daylight=opt["time"] != "night")
+        # Exposure locked across a set keeps real brightness differences
+        # visible; per-image metering would equalise them away.
+        qa.update(exposure_ev=bpy.context.scene.view_settings.exposure,
+                  exposure_locked=opt["exposure"] is not None, look=opt["look"],
+                  white_balance_k=wb)
+        print("SCENE QA " + json.dumps(qa))
 
     print("SCENE walls=%d floors=%d openings_cut=%d furniture=%d lights=%d"
           % (len(walls), len(floors), holes, len(furn), len(lights)))

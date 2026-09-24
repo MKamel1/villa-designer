@@ -28,6 +28,14 @@ image (`out/photoreal/*.qa.json`). Drafts are 256 samples; ask before
 spending on final 2048-sample sets, and state the cost. Look at the images
 after QA passes: QA catches known defects, not new ones.
 
+**Faithful before beautiful.** Renders are the client's main basis for real
+design decisions (ADR-0013 amendment). Keep exposure and look locked
+across a comparison set (the driver's default). Use model data for
+optics, e.g. glass transmittance, never 100%. Label everything not in
+the design: every render writes `*.caption.json`, and `--no-dress` shows
+the design alone. Replace appearances only with the actually specified
+product.
+
 **Lighting is a specification, not a look.** The render must be faithful to
 the fixtures' photometry: IES distribution, lumens and colour temperature.
 If lamps look wrong, find the error in the light's spec or conversion

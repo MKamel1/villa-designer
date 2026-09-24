@@ -64,6 +64,49 @@ def save(path: Path, data: bytes, attempts: int = 10) -> None:
             time.sleep(1.0)
 
 
+def write_caption(out: Path, qa: dict, stdout: str, a, preset: dict, input_id: str, look: str) -> None:
+    """What in this image is the design, what is invented, what is assumed.
+
+    Renders are used to make real design decisions, so every image carries
+    a record that separates design content from dressing and stand-ins and
+    states every optical assumption (ADR-0013, faithfulness).
+    """
+    def line(prefix):
+        hit = [l[len(prefix):].strip() for l in stdout.splitlines() if l.startswith(prefix)]
+        return hit[-1] if hit else None
+    def as_json(text):
+        try:
+            return json.loads(text) if text else None
+        except ValueError:
+            return text
+    dressing = as_json((line("SCENE DRESSING") or "").replace("'", '"')) or []
+    if not a.no_dress:
+        dressing = list(dressing) + ["skirting", "curtains and rod", "rug"]
+    view_hdri = preset["hdri"] or "studio_garden"
+    caption = {
+        "image": out.name,
+        "condition": {"time": a.time, "when_local": a.when if a.time == "day" else None,
+                      "sky": as_json(line("SCENE SKY")), "interior_lights": a.lights},
+        "camera": {"exposure_ev": qa.get("exposure_ev"), "exposure_locked": qa.get("exposure_locked"),
+                   "look": look, "white_balance_k": qa.get("white_balance_k"),
+                   "lens_mm": qa.get("camera", {}).get("lens_mm"), "samples": a.samples, "resolution": a.res},
+        "from_the_design": ["room, walls, openings, ceiling and floor from the Revit extract",
+                            "furniture positions and sizes from the Revit extract",
+                            "light fixture positions, lumens and colour temperature from the spec"],
+        "invented_not_in_design": dressing,
+        "stand_ins_not_specified_products": [
+            "furniture geometry: procedural, manufacturer-neutral (archpipe.furniture)",
+            "light fixtures: generic Revit library families and generic IES files, not specified products",
+            f"view out of the window: photographed HDRI '{view_hdri}', not the real site"],
+        "assumptions": {"glass_transmittance": qa.get("glass", {}).get("transmittance"),
+                        "finish_overrides": as_json(line("SCENE FINISHES")),
+                        "materials": as_json(line("SCENE PRESENTATION")),
+                        "exterior_ground_albedo": 0.25},
+        "design_input": {"extract": str(a.input), "sha256": input_id},
+    }
+    save(out.with_suffix(".caption.json"), json.dumps(caption, indent=2).encode("utf-8"))
+
+
 def site():
     s = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))
     loc = s.get("location", s)
@@ -92,6 +135,8 @@ def main():
     ap.add_argument("--no-cloth", action="store_true")
     ap.add_argument("--no-dress", action="store_true")
     ap.add_argument("--tag", default="")
+    ap.add_argument("--no-lock-exposure", action="store_true",
+                    help="meter every view separately (hides real brightness differences between views)")
     ap.add_argument("--allow-qa-fail", action="store_true",
                     help="still exit 0 when archpipe.render_qa finds a defect")
     ap.add_argument("--qa-break", default="",
@@ -131,9 +176,10 @@ def main():
     script = f"{release}/src/archpipe/blender/build_scene.py"
 
     qa_failed = []
+    lock = None
     for view in views:
         stamp = f"{a.time}-{view}" + (f"-{a.tag}" if a.tag else "")
-        def render(look):
+        def render(look, exposure=None):
             remote_out = f"{root}/inputs/{input_id}_{stamp}.png"
             flags = (f"--extract {shlex.quote(remote_input)} --out {shlex.quote(remote_out)} "
                      f"--interior --profile final --photo-camera {view} "
@@ -141,6 +187,8 @@ def main():
                      f"--sun-az {sun.azimuth:.3f} --view-rotation {a.view_rotation} --time {a.time} "
                      f"--exposure-bias {a.exposure_bias} --samples {a.samples} --res {a.res} "
                      f"--look {shlex.quote(look)}")
+            if exposure is not None:
+                flags += f" --exposure {exposure:.4f}"
             if a.wb:
                 flags += f" --wb {a.wb}"
             if preset["hdri"]:
@@ -179,16 +227,26 @@ def main():
                 if r["status"] != "PASS":
                     print(f"    QA {r['status']}: {r['check']} -- {r['detail']}")
             print("    QA PASS" if report["passed"] else "    QA FAIL: " + ", ".join(report["failed"]))
-            return report
+            qa = render_qa.scene_qa_from_log(stdout)
+            write_caption(out, qa, stdout, a, preset, input_id, look)
+            return report, qa
 
-        report = render(a.look)
-        failed = set(report["failed"])
-        if failed and failed <= TONAL:
-            other = next(l for l in LOOKS if l != a.look)
-            print(f"    tonal-only failure {sorted(failed)}; retrying with look '{other}'")
-            retry = render(other)
-            if retry["passed"]:
-                report = retry
+        if lock is not None:
+            # Same exposure and tone curve as the set's first view, so
+            # brightness differences between views are real, not metered away.
+            report, qa = render(lock["look"], lock["ev"])
+        else:
+            report, qa = render(a.look)
+            failed = set(report["failed"])
+            if failed and failed <= TONAL:
+                other = next(l for l in LOOKS if l != a.look)
+                print(f"    tonal-only failure {sorted(failed)}; retrying with look '{other}'")
+                retry, rqa = render(other)
+                if retry["passed"]:
+                    report, qa = retry, rqa
+            if not a.no_lock_exposure and len(views) > 1:
+                lock = {"ev": qa["exposure_ev"], "look": qa["look"]}
+                print(f"    exposure locked for the set: {lock['ev']:.2f} EV, look '{lock['look']}'")
         if not report["passed"]:
             qa_failed.append(view)
     if qa_failed and not a.allow_qa_fail:

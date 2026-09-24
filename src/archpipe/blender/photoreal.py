@@ -70,6 +70,14 @@ def architectural_glass():
         nt.links.new(path.outputs["Is Shadow Ray"], add.inputs[0])
         nt.links.new(path.outputs["Is Diffuse Ray"], add.inputs[1])
         clear = nt.nodes.new("ShaderNodeBsdfTransparent")
+        # Faithful transmittance, not 100%: the model states it (window
+        # "Glass" transparency 85). The pane is a closed slab, so a shadow
+        # ray crosses two faces; each gets sqrt(Tv) or Tv applies twice --
+        # the same trap recorded for Radiance (radiance._glazing_surface).
+        tv = float(mat.get("presentation_transmittance", 1.0))
+        per_face = math.sqrt(tv)
+        clear.inputs["Color"].default_value = (per_face, per_face, per_face, 1.0)
+        mat["photoreal_glass_tv"] = tv
         mix = nt.nodes.new("ShaderNodeMixShader")
         nt.links.new(add.outputs["Value"], mix.inputs["Fac"])
         nt.links.new(bsdf.outputs["BSDF"], mix.inputs[1])
@@ -690,6 +698,10 @@ def cloth_bedding(data):
 def scene_qa(data, white_balance_applied, daylight=True):
     from bpy_extras.object_utils import world_to_camera_view
     scene = bpy.context.scene
+    # matrix_world is only current after an evaluation. With a locked
+    # exposure no meter pre-render runs first, and the camera read as
+    # identity: pitch 0 reported for correctly level cameras.
+    bpy.context.view_layer.update()
     cam = scene.camera
     fwd = cam.matrix_world.to_3x3() @ Vector((0.0, 0.0, -1.0))
     qa = {"camera": {"name": cam.name, "lens_mm": cam.data.lens,
@@ -708,7 +720,9 @@ def scene_qa(data, white_balance_applied, daylight=True):
     exterior = bool(world and world.use_nodes and any(
         n.type in ("TEX_SKY", "TEX_ENVIRONMENT") for n in world.node_tree.nodes))
     qa["sky"] = {"sun": sun, "exterior": exterior}
-    qa["glass"] = {"architectural": sum(1 for m in bpy.data.materials if m.get("photoreal_glass"))}
+    qa["glass"] = {"architectural": sum(1 for m in bpy.data.materials if m.get("photoreal_glass")),
+                   "transmittance": sorted({round(float(m["photoreal_glass_tv"]), 3)
+                                            for m in bpy.data.materials if m.get("photoreal_glass")})}
 
     walls = {w["id"]: w for w in data.get("walls", [])}
     wins = []

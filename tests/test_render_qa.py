@@ -155,6 +155,18 @@ class RenderQATests(unittest.TestCase):
         warm = self.report(night, base=(135, 118, 100))
         self.assertEqual(self.status(warm, "colour_cast"), ["PASS"])
 
+    def test_locked_exposure_reports_tonal_as_warning(self):
+        locked = dict(GOOD_QA, exposure_locked=True)
+        r = self.report(locked, base=(45, 45, 44))
+        self.assertEqual(self.status(r, "exposure_midtones"), ["WARN"])
+        self.assertTrue(r["passed"])
+
+    def test_overcast_without_direct_source_may_lack_white(self):
+        overcast = dict(GOOD_QA, sky={"sun": False, "exterior": True},
+                        lights={"on": False, "count": 0, "with_ies": 0})
+        flat = self.report(overcast, clip_fraction=0.0, window="dim")
+        self.assertEqual(self.status(flat, "highlights_present"), ["WARN"])
+
     def test_log_parsing(self):
         log = "noise\nSCENE QA {\"camera\": {\"pitch_deg\": 90}}\nSCENE wrote x"
         self.assertEqual(render_qa.scene_qa_from_log(log)["camera"]["pitch_deg"], 90)

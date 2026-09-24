@@ -43,6 +43,7 @@ DARK_FAIL = 0.08          # >8% of pixels near black
 CAST_FAIL = 0.10
 COOL_LAMPLIT_FAIL = 0.02   # lamp-lit (night): any visible cool cast is wrong
 COOL_DAYLIGHT_FAIL = 0.05  # daylight/overcast may be slightly cool, not blue
+TONAL_CHECKS = {"highlight_clipping", "highlights_present", "shadows_present", "exposure_midtones"}
 # Local detail = mean |difference| between pixels 2 apart, on the 800-wide
 # image. MEASURED on real renders: void sky gradient 0.0026, real garden
 # view 0.0365. A global std-dev was tried first and failed: a smooth
@@ -94,8 +95,15 @@ def check(image_path, qa: dict) -> dict:
     # always has near-white somewhere, so bound both ends.
     lums_sorted = sorted(_luma(p) for p in px)
     p995 = lums_sorted[int(0.995 * (len(lums_sorted) - 1))]
-    add("highlights_present", "FAIL" if p995 < HIGHLIGHT_FLOOR else "PASS",
-        f"99.5th-percentile luminance {p995:.2f} (min {HIGHLIGHT_FLOOR})",
+    # Only a scene with a direct source (sun, or lamps on) must have
+    # near-white. Soft overcast light legitimately may not (measured: an
+    # overcast view without the window reached 0.86); failing it would push
+    # overcast images toward a false sunny contrast.
+    direct = qa.get("sky", {}).get("sun") or qa.get("lights", {}).get("on")
+    low = p995 < HIGHLIGHT_FLOOR
+    add("highlights_present", ("FAIL" if direct else "WARN") if low else "PASS",
+        f"99.5th-percentile luminance {p995:.2f} (min {HIGHLIGHT_FLOOR}"
+        + ("" if direct else "; advisory: no direct source") + ")",
         "Nothing reached white, so the image read as a flat, milky render.")
     median = lums_sorted[len(lums_sorted) // 2]
     add("exposure_midtones", "FAIL" if median < MIDTONE_FLOOR else "PASS",
@@ -238,6 +246,14 @@ def check(image_path, qa: dict) -> dict:
         add("white_balance_available", "WARN", "renderer cannot white-balance (Blender < 4.3)",
             "Orange cast came from the missing camera white balance.")
 
+    # With exposure locked across a comparison set, a view that is darker
+    # or brighter than the others is the point, not a defect: report tonal
+    # results as WARN so the set stays comparable.
+    if qa.get("exposure_locked"):
+        for r in results:
+            if r["check"] in TONAL_CHECKS and r["status"] == "FAIL":
+                r["status"] = "WARN"
+                r["detail"] += " (exposure locked across the set)"
     return {"image": str(image_path), "passed": all(r["status"] != "FAIL" for r in results),
             "failed": [r["check"] for r in results if r["status"] == "FAIL"],
             "checks": results}

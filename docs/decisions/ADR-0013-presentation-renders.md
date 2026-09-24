@@ -74,6 +74,40 @@ so the validated photometry stays byte-identical. It has these parts:
   bed. Cloth simulation keeps the specified bed, and `assets/user/bed/` is
   reserved for a model the user supplies.
 
+## Amendment (2026-09-24): faithful before beautiful
+
+The client's position: *"photos are our main source of our design in real
+life so it has to be faithful representation"*, and lighting errors must be
+fixed at the specification, *"don't cheat by basically photoshopping it"*.
+Renders are therefore evidence for design decisions, and every choice is
+judged by whether it could mislead one.
+
+- **Lighting specifications are fixed at the source.** Lamp colour was
+  display-sRGB treated as linear light, which made the lamps cooler than
+  their spec. It is now a CIE 1931 blackbody, and `verify.py` checks it
+  against the Planckian locus. Camera settings are standard presets
+  (daylight 5500 K, tungsten 3200 K), never tuned to hide an error.
+- **Glass transmits what the model says:** Revit transparency 85 gives
+  Tv 0.85, applied as sqrt(Tv) on each face of the slab. It was 100%,
+  which overstated daylight by about 15%.
+- **Exposure and tone curve are locked across a set.** Metering each
+  view separately equalised a dark corner with a sunlit bed, hiding the
+  very differences a designer needs to see. Each image records its
+  absolute exposure (EV).
+- **Every image carries a record** (`*.caption.json`) separating:
+  - what comes from the design;
+  - invented dressing (props, rug, curtains, skirting);
+  - stand-ins that are not specified products (procedural furniture,
+    generic Revit fixture families and generic IES files, a photographed
+    view that is not the site);
+  - every optical assumption.
+
+  `--no-dress` renders the design alone.
+- **Appearance swaps must be the specified product.** Replacing a
+  generic fixture with a nicer generic model would be decoration. The
+  faithful route is a chosen real product, whose manufacturer publishes
+  both a family and a measured IES file.
+
 ## Consequences
 
 - These renders are presentation. They are never a lighting verdict, which

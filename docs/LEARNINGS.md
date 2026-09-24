@@ -84,6 +84,11 @@ listed as a check is automatic, and is proven against the real defect.
 | Light fixtures look like CAD blocks (flat opal disc, crude shades) | Downloaded low-detail Revit families; materials cannot fix geometry | **Open.** Swap the visual housings for detailed models, keeping Revit's position and the IES photometry (as proposed for the bed) |
 | The critic claimed a garden darker than sunlit bedding was a defect | Sunlit white bedding (0.70) really is brighter than sunlit foliage (0.15) | Check reviewer claims against physics before turning them into guards |
 | Another session edited the same repo concurrently | Broad `git add` would have committed its unfinished work | Stage only your own hunks; confirm with `git diff --cached` before committing |
+| Window glass passed 100% of sunlight; the model says 85% | The fix for glass blocking shadow rays over-corrected to "perfectly transparent" with no data | Tv from the model's own material (transparency 85), sqrt(Tv) per face of the slab (the two-face trap already recorded for Radiance). Shown in each image's `caption.json` |
+| Every view was metered separately, so a dark corner and a sunlit bed looked equally bright | Per-image auto-exposure optimises each picture and destroys comparability between them | Exposure and look locked across a set, absolute EV recorded; tonal checks become WARN under a lock. Principle: faithful before beautiful (ADR-0013 amendment) |
+| Invented dressing and stand-ins were indistinguishable from design content | Nothing labelled what an image's contents were based on | `*.caption.json` per image: from the design, invented, stand-ins, assumptions; `--no-dress` shows the design only |
+| `verticals_level` reported a 0 deg pitch for level cameras | The check read `matrix_world` before any scene evaluation; only the metered first view had one | `view_layer.update()` before reading scene state. A check that reads state must force evaluation first |
+| "Detailed fixture swap" would have used generic nicer models | Appearance was treated as decoration, not design evidence | Swap only to the specified product (manufacturer family plus its own IES file); a design decision for the client |
 
 For a new failure, capture the input and expected versus measured result;
 separate hypotheses from facts. Add a regression where it can catch the
