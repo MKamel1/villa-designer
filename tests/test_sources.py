@@ -86,5 +86,21 @@ class RegistryTests(unittest.TestCase):
             self.assertTrue(s["free"] or s["cost_usd_approx"] > 0, s["id"])
 
 
+class StageDocTests(unittest.TestCase):
+    """The stage packages in library.json drive review_stage; the stage pages
+    are hand-maintained. A deliverable in one and not the other is drift."""
+
+    def test_stage_pages_list_the_registry_deliverables(self):
+        import re
+        lib = src.load()
+        pages = {p.name.split("-")[0]: p for p in (src.ROOT / "docs/guidance/stages").glob("*.md")}
+        for stage in lib["stages"]:
+            text = pages[stage["id"]].read_text(encoding="utf-8")
+            listed = re.search(r"Deliver: (.*)\.", text).group(1).split(", ")
+            self.assertEqual(listed, stage["deliverables"], f"stage {stage['id']}")
+            for criterion in stage["approval"]:
+                self.assertIn(criterion.split(":")[0], text, f"stage {stage['id']}")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -85,3 +85,22 @@ Do not silently promote this example into a generic villa generator.
 ## Expert-guided design system — 2026-09-24
 
 The [guidance library](guidance/README.md) adds all eight stage packages, source acquisition manifest, legacy-rule audit, project quality brief, a fictional three-concept villa pilot and the measured-bedroom exercise. Three read-only tools supply stage context, focused evidence and approval-aware review. Public-source qualitative passages are verified; licensed numerical passages remain unresolved. This capability does not close real design gates or complete engineering, budget, comfort studies or final villa drawings.
+
+## Sole-expert capability plan — 2026-09-24
+
+There is no other architect, interior or lighting designer on these
+projects, so the AI's judgements must rest on sources that have been
+obtained and read. Approved work, in phases:
+
+| Work | Status |
+|---|---|
+| Purchase list (UK + US practice, tiered, from `knowledge/library.json`) and intake of readable copies | Done: `scripts/sources.py list/intake` |
+| Method steps added: façade, climate/thermal window study, landscape, FF&E, cost at every gate, consultant hand-off, acoustics end-check, taste profile, critic calibration | Done: method v1.1 and stage packages |
+| Rule verification from the held books (13 audited rules first, then kitchen/bath, lighting, daylight/overheating) | Waiting for the books |
+| Concept design by generate-and-critique: precedent corpus, typology catalogue, constraint-solver variants, calibrated critic, three concepts | Planned |
+| Thermal/cooling/daylight toolchain (Ladybug Tools + EnergyPlus + Radiance on the workstation, Cairo weather) | Planned |
+| Product library for every category (surfaces, sanitary, kitchen, glazing, furniture, plants), broad index + 300–500 verified items | Planned |
+| Schedules, specification book, quantities and relative cost, IFC for consultants | Planned |
+
+**Consultant scope, missing in-house:** glare (DGP), HVAC design,
+electrical, plumbing and drainage, structural design, permits.

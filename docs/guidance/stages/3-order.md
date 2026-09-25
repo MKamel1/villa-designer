@@ -15,6 +15,8 @@ Required: adjacencies, privacy, structure_strategy, service_routes, climate, lan
 2. Draw arrival, adjacency, private circulation, massing and at least one section together; test indoor-outdoor thresholds.
 3. Overlay tentative supports, spans, stairs, wet stacks and main service paths. Flag unsized spans; never imply engineering certification.
 4. Recommend one with reasons, diagram, evidence, cost/space/maintenance consequences and a client decision. Obtain a separately authored critique.
+5. Draw massing, openings, shading and envelope material together; compare concepts' cooling load per square metre and solar gain under identical assumptions.
+6. Generate many variants per parti, score them with the calibrated critic, and present three from different partis with their trade-offs.
 
 ## Evidence
 
@@ -39,11 +41,15 @@ Compare every drawn arrival/private/service route with the graph used by the
 deterministic check. A graph pass cannot prove room widths, door positions or
 that a drawn route avoids another room. See the independent pilot critique.
 
-Deliver: three_concepts, recommendation, plans_sections_elevations, independent_critique.
+Deliver: three_concepts, recommendation, plans_sections_elevations, independent_critique, facade_strategy, concept_thermal_comparison.
 
 - Three concepts differ in spatial organisation
 - Private and service routes work
 - Structure wet stacking and landscape coordinated
 - Recommendation addresses critique
+- Drawn routes match the tested connectivity graph
+- Facade, openings and shading drawn with the massing
+- Concepts compared on cooling load and solar gain with the same assumptions
+- Concept critic calibrated on precedents before its scores are used
 
 Record reviewer, current revision, outcome and reasons for every qualitative criterion. Present the recommendation, household reason, visual explanation, evidence and cost/space/maintenance consequences. Request the client’s explicit decision only on a concrete reviewed proposal. Unresolved evidence or missing facts keep the gate open.

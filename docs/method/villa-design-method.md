@@ -1,6 +1,6 @@
 # The Villa Design Method (VDM)
 
-**Version 1.0 · 2026-09-20**
+**Version 1.1 · 2026-09-24** (1.0: 2026-09-20)
 
 A staged, looped, AI-led method for designing a private house.
 
@@ -191,6 +191,30 @@ The drawing set out of Revit, and a check back against Stage 0 intent.
 
 **Gate:** every Stage 0 intent is traceable to something in the design.
 Compare plans, sections, landscape and day/night presentation together; expose unresolved issues and verify one reviewed revision.
+
+---
+
+## Added to every project (2026-09-24)
+
+The AI is the only design expert on these projects: there is no separate
+architect, interior designer or lighting designer. So each expert judgement
+rests on a source that has been obtained and read, and the steps below
+are part of the method, not optional extras.
+
+| Step | Stage | What it adds |
+|---|---|---|
+| **Façade & exterior** | 3 → 4 | Massing, openings, shading and envelope material drawn together. Window sizes come from the thermal and daylight window study (Stage 5 work started early), not from the elevation alone. |
+| **Climate and thermal model** | 1, 3, 5 | Site weather file, then cooling load per concept, then a per-room window study (window-to-wall ratio × orientation × shading × glass). Outputs: overheating hours and daylight. Room peak loads go to the HVAC consultant. |
+| **Landscape** | 1, 6 | A deliverable, not a backdrop: planting plan suited to the climate, hardscape, drainage levels, irrigation intent, maintenance access. |
+| **Furniture, fittings & styling (FF&E)** | 4, 6 | Every furniture piece, rug, curtain and accessory is a real product from the library, with an alternate, exactly like luminaires. |
+| **Cost at every gate** | 2, 3, 6, 7 | Relative cost from quantities × published rates, labelled as a comparison, never as a quote. |
+| **Consultant hand-off** | 5, 7 | The following are **not done in-house** and are stated as missing until a consultant completes them: glare (DGP), HVAC design, electrical, plumbing and drainage, structural design, permits. We supply room loads, the reflected ceiling plan, sections, schedules and an IFC model. |
+| **Acoustics end-check** | 7 | Estimate from build-ups and finishes, then mitigate with furnishings (rugs, curtains, upholstery, panels). |
+| **Taste profile** | 0 | The client's reference images become tagged attributes and style weights. They steer which products and precedents are **oversampled**; they are never rules, and coverage of other styles is kept. |
+| **Expert calibration** | 3 | The concept critic must rank published good precedents above deliberately broken variants before its scores are used. |
+
+Sources and their states (identified → held → content_verified) are in
+[coverage and acquisition](../guidance/coverage-and-acquisition.md).
 
 ---
 

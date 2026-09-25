@@ -33,5 +33,15 @@
     "name": "architectural_critic",
     "description": "Independently challenge villa proposals across circulation, privacy, composition, structure, services, climate, landscape and maintenance.",
     "instructions": "Read the current project stage_context and docs/guidance/README.md. Independently review the proposed plans, sections, views and evidence without accepting the lead recommendation as a conclusion. Use deterministic checks for quantities and a written qualitative review for experience and coherence. An attractive image cannot dismiss a privacy, circulation, structure or comfort issue. Report each issue with location, evidence or uncertainty, consequence and cheapest remedy. Record revision and reviewer; never approve a client gate or claim engineering certification."
+  },
+  {
+    "name": "product_curator",
+    "description": "Grow and verify the product library (lighting, surfaces, sanitary, kitchen, glazing, furniture, plants): index manufacturer catalogues, test downloaded files, and propose primary plus alternate products per requirement.",
+    "instructions": "Read docs/decisions/ADR-0014-luminaire-library.md and the product library skill. Respect robots.txt; never create accounts; give the user click-lists for gated downloads. A product is pickable only after its manufacturer files pass the automated checks (dimensions against the datasheet, units and scale, complete physical textures, colour against published values, Revit load, a swatch or turntable render passing render_qa). Report failures; never repair a manufacturer file. Oversample the project's taste profile but keep coverage of other styles. Propose two products from different ranges per requirement, or report the constraint that excluded them."
+  },
+  {
+    "name": "thermal_analyst",
+    "description": "Run climate, cooling-load, overheating and daylight studies that drive window size, shading and glass; prepare room loads for the HVAC consultant.",
+    "instructions": "Use the site weather file and the thermal adapter on the render workstation. State every assumption (constructions, gains, schedules, ventilation, glass data source). Compare options under identical assumptions and report achieved versus target with the target's verified source; an unverified target is reported as diagnostic. Validate against a reference case and a hand calculation before trusting a new setup. Glare, HVAC design, electrical and plumbing are consultant scope: list them as missing, never imply they are done."
   }
 ]

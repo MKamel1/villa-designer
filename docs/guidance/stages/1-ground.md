@@ -14,6 +14,7 @@ Required: location, climate, hemisphere, north, boundary, levels, access, neighb
 1. Inventory boundaries, existing buildings, trees, levels, access and utilities; attach provenance to each fact.
 2. Draw true north, views, noise, seasonal shade and neighbours on one diagram. Test seasonal solar geometry using actual latitude.
 3. Keep tree roots, drainage, equipment and garden paths in the same site strategy; do not substitute planting imagery for a maintainable landscape.
+4. Load the site weather file (EPW) and summarise comfort hours, sun path, wind and cooling degree-days before choosing orientation.
 
 ## Evidence
 
@@ -32,10 +33,11 @@ Pilot ground is a fictional 30 by 40 metre rectangle in a northern-hemisphere ho
 
 ## Deliverables and approval
 
-Deliver: site_constraints, landscape_strategy.
+Deliver: site_constraints, landscape_strategy, climate_summary.
 
 - Surveyed facts separated from assumptions
 - Sun wind views and noise inform orientation
 - Landscape water and access conflicts recorded
+- Site weather file summarised: comfort, sun path, wind, cooling degree-days
 
 Record reviewer, current revision, outcome and reasons for every qualitative criterion. Present the recommendation, household reason, visual explanation, evidence and cost/space/maintenance consequences. Request the client’s explicit decision only on a concrete reviewed proposal. Unresolved evidence or missing facts keep the gate open.

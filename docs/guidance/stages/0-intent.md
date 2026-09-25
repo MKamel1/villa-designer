@@ -15,6 +15,7 @@ Required: household, routines, hosting, privacy, accessibility, maintenance, bud
 1. Translate each routine into a requirement with an identifier, priority and observable test.
 2. Read references for proportion, palette, texture, lighting and atmosphere; obtain client response to a small illustrated direction.
 3. Record disagreement, maintenance tolerance and budget trade-offs before asking for approval.
+4. Tag every client reference image into observable attributes (materials, palette, light types, furniture forms, room type) and weight styles. Flag physically questionable features in generated images. Keep coverage of other styles.
 
 ## Evidence
 
@@ -34,10 +35,11 @@ Two adults work at home; children sleep before weekly guests leave. Brief separa
 
 ## Deliverables and approval
 
-Deliver: quality_brief, design_direction.
+Deliver: quality_brief, design_direction, taste_profile.
 
 - Routines and priorities are specific
 - Taste references analysed into observable attributes
 - Budget scope and exclusions understood
+- Reference images tagged into attributes and style weights; used to oversample, not as rules
 
 Record reviewer, current revision, outcome and reasons for every qualitative criterion. Present the recommendation, household reason, visual explanation, evidence and cost/space/maintenance consequences. Request the client’s explicit decision only on a concrete reviewed proposal. Unresolved evidence or missing facts keep the gate open.

@@ -14,6 +14,8 @@ Required: comfort_targets, equipment, service_routes, controls, model. Each fact
 1. Make a room-by-room schedule for daylight, glare, blackout, sound, temperature, ventilation, sockets, water and controls; name unresolved targets.
 2. Overlay luminaires, grilles, detectors, curtains, beams, ducts and access panels on the reflected ceiling plan and a service section.
 3. Use existing direct-light arithmetic for diagnostic points. Total-light uniformity, glare, ventilation and thermal predictions require their appropriate methods and verified targets.
+4. Run the per-room window study (window-to-wall ratio x orientation x shading x glass) for overheating hours, cooling load and daylight; recommend each room's window.
+5. Prepare the consultant hand-off: room peak loads, reflected ceiling plan, sections, schedules and an IFC model. Glare, HVAC, electrical and plumbing stay missing until done.
 
 ## Evidence
 
@@ -34,7 +36,7 @@ Bedroom reader wants a separately controlled bedside task light and a dark sleep
 
 ## Deliverables and approval
 
-Deliver: comfort_schedule, coordinated_ceiling, service_access.
+Deliver: comfort_schedule, coordinated_ceiling, service_access, window_study, lighting_schedule, consultant_handoff.
 
 - Daylight glare blackout and scenes reviewed
 - Cooling ventilation acoustics power water coordinated
@@ -48,5 +50,7 @@ Deliver: comfort_schedule, coordinated_ceiling, service_access.
   spec carries `product` (primary) and `alternate`, tested against the same requirement
   (`install.candidate_report`). A shortfall is reported with the constraint that
   excluded the products, never quietly relaxed. See the `lighting-library` skill.
+- Window sizes, shading and glass justified by the per-room thermal and daylight study
+- Consultant scope listed as missing: glare (DGP), HVAC, electrical, plumbing, structure
 
 Record reviewer, current revision, outcome and reasons for every qualitative criterion. Present the recommendation, household reason, visual explanation, evidence and cost/space/maintenance consequences. Request the client’s explicit decision only on a concrete reviewed proposal. Unresolved evidence or missing facts keep the gate open.

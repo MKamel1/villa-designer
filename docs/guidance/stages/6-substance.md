@@ -14,6 +14,7 @@ Required: material_intent, exposure, maintenance, junctions, landscape_strategy.
 1. Schedule materials by room and exposure, with product evidence, sample status, cleaning and replacement access.
 2. Draw representative floor-to-wall, window reveal, wet-area threshold, joinery-light and indoor-outdoor junctions; show layers and interfaces.
 3. Coordinate drainage, weathering, acoustic seals and fixing zones with structure and services. Do not invent waterproofing assemblies without tested manufacturer details.
+4. Pick every finish and FF&E item from the verified product library with a primary and an alternate from different ranges, oversampling the taste profile.
 
 ## Evidence
 
@@ -34,10 +35,12 @@ Bedroom study pairs timber joinery with a recessed task light: reserve accessibl
 
 ## Deliverables and approval
 
-Deliver: material_board, finish_schedule, junction_details, planting_schedule.
+Deliver: material_board, finish_schedule, junction_details, planting_schedule, ffe_schedule.
 
 - Material transitions and alignment resolved
 - Moisture cleaning durability and replacement checked
 - Planting suits site and maintenance capacity
+- Every furniture, fitting and finish is a real library product with an alternate
+- Relative cost of the finish and FF&E choices shown
 
 Record reviewer, current revision, outcome and reasons for every qualitative criterion. Present the recommendation, household reason, visual explanation, evidence and cost/space/maintenance consequences. Request the client’s explicit decision only on a concrete reviewed proposal. Unresolved evidence or missing facts keep the gate open.

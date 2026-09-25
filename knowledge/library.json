@@ -1927,17 +1927,20 @@
       ],
       "deliverables": [
         "quality_brief",
-        "design_direction"
+        "design_direction",
+        "taste_profile"
       ],
       "approval": [
         "Routines and priorities are specific",
         "Taste references analysed into observable attributes",
-        "Budget scope and exclusions understood"
+        "Budget scope and exclusions understood",
+        "Reference images tagged into attributes and style weights; used to oversample, not as rules"
       ],
       "method": [
         "Translate each routine into a requirement with an identifier, priority and observable test.",
         "Read references for proportion, palette, texture, lighting and atmosphere; obtain client response to a small illustrated direction.",
-        "Record disagreement, maintenance tolerance and budget trade-offs before asking for approval."
+        "Record disagreement, maintenance tolerance and budget trade-offs before asking for approval.",
+        "Tag every client reference image into observable attributes (materials, palette, light types, furniture forms, room type) and weight styles. Flag physically questionable features in generated images. Keep coverage of other styles."
       ],
       "worked_example": "Two adults work at home; children sleep before weekly guests leave. Brief separates study calls and sleeping access from entertaining. Warm timber is a pilot preference, not a universal luxury requirement.",
       "failures": [
@@ -1950,7 +1953,8 @@
       "qualitative_criteria": [
         "Routines and priorities are specific",
         "Taste references analysed into observable attributes",
-        "Budget scope and exclusions understood"
+        "Budget scope and exclusions understood",
+        "Reference images tagged into attributes and style weights; used to oversample, not as rules"
       ],
       "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
       "illustration": "docs/guidance/pilot-concepts.svg"
@@ -1983,17 +1987,20 @@
       ],
       "deliverables": [
         "site_constraints",
-        "landscape_strategy"
+        "landscape_strategy",
+        "climate_summary"
       ],
       "approval": [
         "Surveyed facts separated from assumptions",
         "Sun wind views and noise inform orientation",
-        "Landscape water and access conflicts recorded"
+        "Landscape water and access conflicts recorded",
+        "Site weather file summarised: comfort, sun path, wind, cooling degree-days"
       ],
       "method": [
         "Inventory boundaries, existing buildings, trees, levels, access and utilities; attach provenance to each fact.",
         "Draw true north, views, noise, seasonal shade and neighbours on one diagram. Test seasonal solar geometry using actual latitude.",
-        "Keep tree roots, drainage, equipment and garden paths in the same site strategy; do not substitute planting imagery for a maintainable landscape."
+        "Keep tree roots, drainage, equipment and garden paths in the same site strategy; do not substitute planting imagery for a maintainable landscape.",
+        "Load the site weather file (EPW) and summarise comfort hours, sun path, wind and cooling degree-days before choosing orientation."
       ],
       "worked_example": "Pilot ground is a fictional 30 by 40 metre rectangle in a northern-hemisphere hot-dry scenario; road south and views north. These are known scenario inputs, not surveyed facts. Summer wind is an assumption needing weather evidence.",
       "failures": [
@@ -2006,7 +2013,8 @@
       "qualitative_criteria": [
         "Surveyed facts separated from assumptions",
         "Sun wind views and noise inform orientation",
-        "Landscape water and access conflicts recorded"
+        "Landscape water and access conflicts recorded",
+        "Site weather file summarised: comfort, sun path, wind, cooling degree-days"
       ],
       "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
       "illustration": "docs/guidance/pilot-concepts.svg"
@@ -2084,20 +2092,27 @@
         "three_concepts",
         "recommendation",
         "plans_sections_elevations",
-        "independent_critique"
+        "independent_critique",
+        "facade_strategy",
+        "concept_thermal_comparison"
       ],
       "approval": [
         "Three concepts differ in spatial organisation",
         "Private and service routes work",
         "Structure wet stacking and landscape coordinated",
         "Recommendation addresses critique",
-        "Drawn routes match the tested connectivity graph"
+        "Drawn routes match the tested connectivity graph",
+        "Facade, openings and shading drawn with the massing",
+        "Concepts compared on cooling load and solar gain with the same assumptions",
+        "Concept critic calibrated on precedents before its scores are used"
       ],
       "method": [
         "Compare compact bar, courtyard and separated pavilion organisations using the same brief and area definitions.",
         "Draw arrival, adjacency, private circulation, massing and at least one section together; test indoor-outdoor thresholds.",
         "Overlay tentative supports, spans, stairs, wet stacks and main service paths. Flag unsized spans; never imply engineering certification.",
-        "Recommend one with reasons, diagram, evidence, cost/space/maintenance consequences and a client decision. Obtain a separately authored critique."
+        "Recommend one with reasons, diagram, evidence, cost/space/maintenance consequences and a client decision. Obtain a separately authored critique.",
+        "Draw massing, openings, shading and envelope material together; compare concepts' cooling load per square metre and solar gain under identical assumptions.",
+        "Generate many variants per parti, score them with the calibrated critic, and present three from different partis with their trade-offs."
       ],
       "worked_example": "Pilot recommends a compact garden bar: private hall bypasses living and stacked service core limits distribution. Courtyard improves sheltered outdoor life but uses more envelope; pavilion exposes bedrooms to the hosting route and needs an unresolved long span.",
       "failures": [
@@ -2111,7 +2126,10 @@
         "Three concepts differ in spatial organisation",
         "Private and service routes work",
         "Structure wet stacking and landscape coordinated",
-        "Recommendation addresses critique"
+        "Recommendation addresses critique",
+        "Facade, openings and shading drawn with the massing",
+        "Concepts compared on cooling load and solar gain with the same assumptions",
+        "Concept critic calibrated on precedents before its scores are used"
       ],
       "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
       "illustration": "docs/guidance/pilot-concepts.svg"
@@ -2189,18 +2207,25 @@
       "deliverables": [
         "comfort_schedule",
         "coordinated_ceiling",
-        "service_access"
+        "service_access",
+        "window_study",
+        "lighting_schedule",
+        "consultant_handoff"
       ],
       "approval": [
         "Daylight glare blackout and scenes reviewed",
         "Cooling ventilation acoustics power water coordinated",
         "Equipment maintenance access shown",
-        "Measured light distinguished from comfort targets"
+        "Measured light distinguished from comfort targets",
+        "Window sizes, shading and glass justified by the per-room thermal and daylight study",
+        "Consultant scope listed as missing: glare (DGP), HVAC, electrical, plumbing, structure"
       ],
       "method": [
         "Make a room-by-room schedule for daylight, glare, blackout, sound, temperature, ventilation, sockets, water and controls; name unresolved targets.",
         "Overlay luminaires, grilles, detectors, curtains, beams, ducts and access panels on the reflected ceiling plan and a service section.",
-        "Use existing direct-light arithmetic for diagnostic points. Total-light uniformity, glare, ventilation and thermal predictions require their appropriate methods and verified targets."
+        "Use existing direct-light arithmetic for diagnostic points. Total-light uniformity, glare, ventilation and thermal predictions require their appropriate methods and verified targets.",
+        "Run the per-room window study (window-to-wall ratio x orientation x shading x glass) for overheating hours, cooling load and daylight; recommend each room's window.",
+        "Prepare the consultant hand-off: room peak loads, reflected ceiling plan, sections, schedules and an IFC model. Glare, HVAC, electrical and plumbing stay missing until done."
       ],
       "worked_example": "Bedroom reader wants a separately controlled bedside task light and a dark sleeping scene. Existing photometric workflow can measure direct light; it cannot prove acoustic privacy or thermal comfort. A duct through the headboard bulkhead triggers a section and noise review.",
       "failures": [
@@ -2214,7 +2239,9 @@
         "Daylight glare blackout and scenes reviewed",
         "Cooling ventilation acoustics power water coordinated",
         "Equipment maintenance access shown",
-        "Measured light distinguished from comfort targets"
+        "Measured light distinguished from comfort targets",
+        "Window sizes, shading and glass justified by the per-room thermal and daylight study",
+        "Consultant scope listed as missing: glare (DGP), HVAC, electrical, plumbing, structure"
       ],
       "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
       "illustration": "docs/guidance/bedroom-worked-example.md"
@@ -2243,17 +2270,21 @@
         "material_board",
         "finish_schedule",
         "junction_details",
-        "planting_schedule"
+        "planting_schedule",
+        "ffe_schedule"
       ],
       "approval": [
         "Material transitions and alignment resolved",
         "Moisture cleaning durability and replacement checked",
-        "Planting suits site and maintenance capacity"
+        "Planting suits site and maintenance capacity",
+        "Every furniture, fitting and finish is a real library product with an alternate",
+        "Relative cost of the finish and FF&E choices shown"
       ],
       "method": [
         "Schedule materials by room and exposure, with product evidence, sample status, cleaning and replacement access.",
         "Draw representative floor-to-wall, window reveal, wet-area threshold, joinery-light and indoor-outdoor junctions; show layers and interfaces.",
-        "Coordinate drainage, weathering, acoustic seals and fixing zones with structure and services. Do not invent waterproofing assemblies without tested manufacturer details."
+        "Coordinate drainage, weathering, acoustic seals and fixing zones with structure and services. Do not invent waterproofing assemblies without tested manufacturer details.",
+        "Pick every finish and FF&E item from the verified product library with a primary and an alternate from different ranges, oversampling the taste profile."
       ],
       "worked_example": "Bedroom study pairs timber joinery with a recessed task light: reserve accessible driver space and a removable panel. Garden threshold needs drainage and moisture detailing before the seamless appearance can be accepted.",
       "failures": [
@@ -2266,7 +2297,9 @@
       "qualitative_criteria": [
         "Material transitions and alignment resolved",
         "Moisture cleaning durability and replacement checked",
-        "Planting suits site and maintenance capacity"
+        "Planting suits site and maintenance capacity",
+        "Every furniture, fitting and finish is a real library product with an alternate",
+        "Relative cost of the finish and FF&E choices shown"
       ],
       "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
       "illustration": "docs/guidance/bedroom-worked-example.md"
@@ -2292,18 +2325,23 @@
       "deliverables": [
         "coordinated_presentation",
         "requirements_trace",
-        "open_issue_log"
+        "open_issue_log",
+        "acoustic_check",
+        "cost_comparison"
       ],
       "approval": [
         "Plans sections renders and schedules describe one revision",
         "Every priority requirement has a design response",
         "Independent critique and unresolved issues visible",
-        "Client approval explicitly recorded"
+        "Client approval explicitly recorded",
+        "Acoustic end-check done and mitigations listed",
+        "Consultant hand-off items shown as open, not hidden"
       ],
       "method": [
         "Compare day/night views, measured model, plans, sections, interiors and landscape together. Show sightlines and routes that hero views can hide.",
         "Bind render inputs and image files to the reviewed model and project revision using content hashes; rerun affected review after any change.",
-        "Trace every client requirement to an artifact; distinguish unresolved issues, rejected alternatives and accepted trade-offs. Presentation readiness does not authorize a real gate."
+        "Trace every client requirement to an artifact; distinguish unresolved issues, rejected alternatives and accepted trade-offs. Presentation readiness does not authorize a real gate.",
+        "Estimate room acoustics from build-ups and finishes; mitigate with rugs, curtains, upholstery or panels, and record what remains open."
       ],
       "worked_example": "Pilot pavilion can look convincing in a garden view while its graph fails private access. Bedroom presentation must match its measured extract and rendering-input hashes; replacing an image or changing a model invalidates the binding.",
       "failures": [
@@ -2317,7 +2355,9 @@
         "Plans sections renders and schedules describe one revision",
         "Every priority requirement has a design response",
         "Independent critique and unresolved issues visible",
-        "Client approval explicitly recorded"
+        "Client approval explicitly recorded",
+        "Acoustic end-check done and mitigations listed",
+        "Consultant hand-off items shown as open, not hidden"
       ],
       "workflow": "Recommendation \u2192 household reason \u2192 diagram \u2192 evidence \u2192 cost, space and maintenance \u2192 client decision",
       "illustration": "docs/guidance/bedroom-worked-example.md"

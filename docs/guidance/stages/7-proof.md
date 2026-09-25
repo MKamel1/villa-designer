@@ -14,6 +14,7 @@ Required: reviewed_revision, model, render_input, requirements, open_issues. Eac
 1. Compare day/night views, measured model, plans, sections, interiors and landscape together. Show sightlines and routes that hero views can hide.
 2. Bind render inputs and image files to the reviewed model and project revision using content hashes; rerun affected review after any change.
 3. Trace every client requirement to an artifact; distinguish unresolved issues, rejected alternatives and accepted trade-offs. Presentation readiness does not authorize a real gate.
+4. Estimate room acoustics from build-ups and finishes; mitigate with rugs, curtains, upholstery or panels, and record what remains open.
 
 ## Evidence
 
@@ -32,11 +33,13 @@ Pilot pavilion can look convincing in a garden view while its graph fails privat
 
 ## Deliverables and approval
 
-Deliver: coordinated_presentation, requirements_trace, open_issue_log.
+Deliver: coordinated_presentation, requirements_trace, open_issue_log, acoustic_check, cost_comparison.
 
 - Plans sections renders and schedules describe one revision
 - Every priority requirement has a design response
 - Independent critique and unresolved issues visible
 - Client approval explicitly recorded
+- Acoustic end-check done and mitigations listed
+- Consultant hand-off items shown as open, not hidden
 
 Record reviewer, current revision, outcome and reasons for every qualitative criterion. Present the recommendation, household reason, visual explanation, evidence and cost/space/maintenance consequences. Request the client’s explicit decision only on a concrete reviewed proposal. Unresolved evidence or missing facts keep the gate open.
