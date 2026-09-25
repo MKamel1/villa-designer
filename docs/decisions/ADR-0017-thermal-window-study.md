@@ -26,7 +26,9 @@ plumbing go to consultants, and the method records them as missing.
   typical design-stage inputs; **their sources are not yet verified.**
 - **Weather:** the site file from climate.onebuilding.org, held in
   `archpipe-sources/cairo-epw`. Cairo West (623680) and Cairo International
-  (623660) differ a lot, so the station must match the site:
+  (623660) differ a lot, so the station must match the site. **The site is Sheikh
+  Zayed City (client, 2026-09-24), so studies use Cairo West**, the nearest station
+  on the western side:
 
   | Station | Annual mean | CDD18 | HDD18 | Hours > 32 °C | July mean |
   |---|---|---|---|---|---|

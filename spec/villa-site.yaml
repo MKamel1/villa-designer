@@ -12,9 +12,12 @@
 name: "Villa plot (EXAMPLE)"
 
 location:
-  latitude: 30.0444          # Cairo, as a stand-in
-  longitude: 31.2357
-  city: "Cairo (EXAMPLE)"
+  # Sheikh Zayed City, Giza (client, 2026-09-24). CITY-LEVEL coordinates
+  # (Wikipedia/Wikidata 30 03 N, 31 00 E), not the plot: replace from the survey.
+  latitude: 30.050
+  longitude: 31.000
+  city: "Sheikh Zayed City, Giza (city-level; plot not surveyed)"
+  weather_station: "Cairo West AP, WMO 623680, TMYx (nearest station; ADR-0017)"
   utc_offset_hours: 2
 
 north_angle: 0               # project +Y points true north

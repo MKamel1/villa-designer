@@ -40,3 +40,7 @@ assets/user/
 # knowledge/projects/*/taste.json, never committed.
 villa_*_guidelines.docx
 villa_*_guidelines_images/
+
+# Books and standards dropped by the client: licensed originals, never committed.
+# scripts/sources.py intake files them into the private store (ARCHPIPE_SOURCES).
+sources/
