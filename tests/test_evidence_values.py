@@ -48,6 +48,9 @@ ORIGINAL = {
     "ukadm-bath-access-zone-700": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 27, ["700mm", "1100mm"]),
     "tss-front-of-storage-914": ("time-saver-interior/DeChiara, Panero, Zelnik - Time-Saver Standards for Interior Design and Space Planning (2nd ed).pdf", 107, ["36 in in front of dresser, closet, and chest of drawers"]),
     "tss-dining-chair-access-813": ("time-saver-interior/DeChiara, Panero, Zelnik - Time-Saver Standards for Interior Design and Space Planning (2nd ed).pdf", 101, ["32 in for chair plus access thereto"]),
+    "irc-r304-habitable-area": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 154, ["not less than 70 square feet (6.5 m2)"]),
+    "irc-r304-habitable-width": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 154, ["7 feet (2,134 mm) in any horizontal dimension"]),
+    "nkba-shower-clear-floor-762": ("nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf", 99, ["clear floor space of 30″ × 48″ (762 mm × 1219 mm)", "24″ (610 mm) must be planned in front of a shower entry"]),
     "irc-r303-glazing-8pct": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 103,
                               ["not less than 8 percent of the floor area"]),
     "mitton-path-of-travel-min": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 79,
@@ -123,7 +126,9 @@ class RuleAuditTests(unittest.TestCase):
         p = rows["AREA-01"]["parameters"]
         self.assertTrue(p["MIN_AREA_M2.bedroom"]["verified"])
         self.assertEqual(p["MIN_AREA_M2.bedroom"]["used"], 11.5)
-        self.assertFalse(p["MIN_AREA_M2.living"]["verified"])
+        self.assertTrue(p["MIN_AREA_M2.living"]["verified"])         # IRC R304.1 floor, 2026-09-25
+        self.assertFalse(p["MIN_AREA_M2.bathroom"]["verified"])      # still no held source
+        self.assertNotIn("MIN_AREA_M2.kitchen", p)                   # IRC excepts kitchens
         self.assertEqual(rows["AREA-01"]["status"], "partly verified")
         # only rules whose every number is verified AND whose mapping is complete; CIRC-03 by client decision 2026-09-25
         self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01"})

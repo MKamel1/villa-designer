@@ -72,3 +72,11 @@ the mapping marked complete.
 
 **Effect on the bedroom example.** The measured bedroom's wardrobe has 750 mm in front; the sourced value is 914 mm. `scripts/test_mcp.py` now expects exactly that warning.
 
+
+## Room minimums, shower and fridge (2026-09-25, later)
+
+| Rule | Change |
+|---|---|
+| AREA-01 | Living, dining and study: 6.5 m² (IRC R304.1, via Mitton p. 143). This replaces an unsourced 16 m²: it is a legal floor, and fit is judged by the FURN rules. The kitchen minimum is removed, because IRC excepts kitchens and NKBA aisles and runs judge them. Bathroom and WC minima remain unresolved. |
+| DIM-01 | Other habitable rooms: 2,134 mm (IRC R304.2, via Mitton p. 143; p. 92 misprints 2,143). Kitchens are excepted. DIM-01 is now fully sourced. |
+| FURN-02 | Fridge front: 1,219 mm, the NKBA multi-cook work aisle it faces. Shower front: 762 mm (NKBA access standard, 30 × 48 in). The code minimum is 610 mm, but the brief records ageing in place. 25 of 31 are now verified. Still unresolved: sofa to coffee table, coffee table, TV distance (Mitton gives 1–1.5× the screen diagonal for 4K, which needs the screen size), and desk. |

@@ -126,8 +126,8 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
     ),
     FurnitureType(
         "fridge", "Fridge/freezer", 700, 700,
-        _c(front=1100),
-        "General practice: door swing plus standing room",
+        _c(front=1219),
+        "NKBA Kitchen Planning Guidelines -- the fridge faces the work aisle: 48 in (1219 mm) for multiple cooks",
     ),
     # ---- sanitary ------------------------------------------------------
     FurnitureType(
@@ -148,8 +148,9 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
     ),
     FurnitureType(
         "shower", "Shower tray", 900, 900,
-        _c(front=700),
-        "Neufert, Architects' Data -- sanitary: 900x900 minimum practical tray",
+        _c(front=762),
+        "NKBA Bathroom Planning Guidelines (Access Standard) -- 30 x 48 in clear floor space at each fixture: at least 30 in (762 mm) in front in either orientation",
+        "Code minimum (IRC R307.1, same page) is 24 in (610 mm); the access standard is used because the brief records ageing in place.",
     ),
     # ---- work ----------------------------------------------------------
     FurnitureType(
@@ -169,7 +170,7 @@ PLANNING = {
     "ceiling_min":         (2400, "General practice / common code minimum for habitable rooms; Neufert cites 2500 mm as preferred"),
     "wheelchair_turn":     (1500, "Neufert, Architects' Data -- accessibility: 1500 mm turning circle"),
     "daylight_ratio":      (0.08, "IRC R303.1 as quoted in Mitton & Nystuen, Residential Interior Design 4th ed. p. 92 -- glazing area at least 8 % of floor area in habitable rooms (code minimum; the unsourced legacy 1/8 was replaced 2026-09-25)"),
-    "room_min_width":      (2400, "General practice: below ~2.4 m a room will not take a bed plus circulation"),
+    "room_min_width":      (2134, "IRC R304.2 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 7 ft (2134 mm) in any horizontal dimension; kitchens excepted"),
 }
 
 # Minimum floor areas by occupancy, mm^2 handled as m^2 here.
@@ -179,8 +180,11 @@ MIN_AREA_M2 = {
     # Legacy Neufert values (8.0 / 12.0 m2) had no verified passage.
     "bedroom_single": (7.5,  "Metric Handbook 7th ed. (2022) p. 22-4 -- NDSS: single bedroom at least 7.5 m2"),
     "bedroom":        (11.5, "Metric Handbook 7th ed. (2022) p. 22-4 -- NDSS: double (or twin) bedroom at least 11.5 m2"),
-    "living":         (16.0, "Neufert, Architects' Data -- minimum living room for a small dwelling"),
-    "kitchen":        (6.0,  "Neufert, Architects' Data -- minimum separate kitchen"),
+    # IRC R304.1 (quoted in Mitton & Nystuen 4th ed. p. 143): habitable rooms at least 70 sq ft (6.5 m2);
+    # kitchens are the stated exception, so they have no entry (NKBA aisles and runs judge them).
+    "living":         (6.5,  "IRC R304.1 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 70 sq ft (6.5 m2); kitchens excepted"),
+    "dining":         (6.5,  "IRC R304.1 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 70 sq ft (6.5 m2); kitchens excepted"),
+    "study":          (6.5,  "IRC R304.1 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 70 sq ft (6.5 m2); kitchens excepted"),
     "bathroom":       (3.5,  "Neufert, Architects' Data -- minimum bathroom with WC, basin and bath/shower"),
     "wc":             (1.4,  "Neufert, Architects' Data -- minimum separate WC compartment"),
 }

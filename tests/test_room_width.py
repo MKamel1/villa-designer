@@ -30,9 +30,10 @@ class RoomWidthTests(unittest.TestCase):
         m = _msgs(_p(("bedroom", 2600, 0), ("bedroom", 2600, 5000)))
         self.assertEqual(sum("2750" in x for x in m), 1)
 
-    def test_living_still_uses_legacy_generic_width(self):
-        self.assertEqual(len(_msgs(_p(("living", 2300, 0)))), 1)
-        self.assertEqual(_msgs(_p(("living", 2400, 0))), [])
+    def test_living_uses_irc_width_and_kitchen_is_excepted(self):
+        self.assertEqual(len(_msgs(_p(("living", 2133, 0)))), 1)     # IRC R304.2: 2134 mm
+        self.assertEqual(_msgs(_p(("living", 2134, 0))), [])
+        self.assertEqual(_msgs(_p(("kitchen", 1500, 0))), [])        # kitchens excepted
 
 
 if __name__ == "__main__":

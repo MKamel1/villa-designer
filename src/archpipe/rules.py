@@ -443,7 +443,7 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) fo
     Rule(
         "DIM-01", "Habitable room is wide enough to be usable", 4, "computed",
         "Bedrooms: Metric Handbook 7th ed. p. 22-4 quoting NDSS (2.15 / 2.55 / 2.75 m); "
-        "other habitable rooms: general practice ~2.4 m (unsourced)",
+        "other habitable rooms: IRC R304.2 via Mitton p. 143 (7 ft / 2134 mm; kitchens excepted)",
         remedies=(
             Remedy("Re-assign the use: a narrow room works as a store or "
                    "utility where it will not work as a habitable room.",
@@ -737,7 +737,7 @@ def r_room_min_width(p: Project, level: str) -> list[Finding]:
     """Bedrooms by NDSS type (verified); other habitable rooms by the legacy generic width."""
     out = []
     for r in (r for r in p.rooms if r.level == level):
-        if r.occupancy not in HABITABLE:
+        if r.occupancy not in HABITABLE or r.occupancy == "kitchen":   # IRC R304.2 excepts kitchens
             continue
         need, src = cat.ROOM_MIN_WIDTH.get(r.occupancy) or cat.PLANNING["room_min_width"]
         narrow = _narrow(r)

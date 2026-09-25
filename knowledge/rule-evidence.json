@@ -16,16 +16,10 @@
           "status": "verified"
         },
         "MIN_AREA_M2.living": {
-          "value": 16.0,
+          "value": 6.5,
           "unit": "m2",
-          "status": "unresolved",
-          "reason": "no held source gives a minimum living-room area; NDSS sets whole-dwelling areas instead"
-        },
-        "MIN_AREA_M2.kitchen": {
-          "value": 6.0,
-          "unit": "m2",
-          "status": "unresolved",
-          "reason": "not yet found in a held source"
+          "status": "verified",
+          "card": "irc-r304-habitable-area"
         },
         "MIN_AREA_M2.bathroom": {
           "value": 3.5,
@@ -38,8 +32,21 @@
           "unit": "m2",
           "status": "unresolved",
           "reason": "not yet found in a held source"
+        },
+        "MIN_AREA_M2.dining": {
+          "value": 6.5,
+          "unit": "m2",
+          "status": "verified",
+          "card": "irc-r304-habitable-area"
+        },
+        "MIN_AREA_M2.study": {
+          "value": 6.5,
+          "unit": "m2",
+          "status": "verified",
+          "card": "irc-r304-habitable-area"
         }
-      }
+      },
+      "note": "Kitchen minimum removed 2026-09-25: IRC R304.1 excepts kitchens (NKBA aisles and runs judge them). Living/dining/study use the IRC floor of 6.5 m2 (far below the unsourced legacy 16 m2: a legal floor, not a design size). Bathroom and WC minima remain unresolved."
     },
     "DIM-01": {
       "parameters": {
@@ -62,10 +69,11 @@
           "card": "ndss-first-double-bedroom-width"
         },
         "PLANNING.room_min_width": {
-          "value": 2400,
+          "value": 2134,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "no held source gives a minimum width for living rooms, kitchens, dining rooms or studies"
+          "status": "verified",
+          "card": "irc-r304-habitable-width",
+          "note": "living, dining, study; kitchens excepted (R304.2)"
         }
       }
     },
@@ -324,16 +332,16 @@
           "reason": "Mitton p. 85 gives viewing distance by screen size (Fig. 4.10b), not one value"
         },
         "CATALOGUE.fridge.front": {
-          "value": 1100,
+          "value": 1219,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "not yet found in a held source"
+          "status": "verified",
+          "card": "nkba-work-aisle-multi-cook"
         },
         "CATALOGUE.shower.front": {
-          "value": 700,
+          "value": 762,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "AD M Diagram 2.5 shower zone not yet transcribed"
+          "status": "verified",
+          "card": "nkba-shower-clear-floor-762"
         },
         "CATALOGUE.desk.front": {
           "value": 900,

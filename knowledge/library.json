@@ -3450,6 +3450,66 @@
       "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "irc-r304-habitable-area",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 5 Kitchens, Selected IRC kitchen-related code items (printed page 143), quoting IRC R304.1",
+      "stages": [
+        4
+      ],
+      "summary": "Habitable rooms: floor area not less than 70 sq ft (6.5 m2); kitchens are the stated exception.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "m2",
+      "verified_value": 6.5,
+      "original_page_checked": true,
+      "conditions": "US International Residential Code minimum, quoted by Mitton & Nystuen; a legal floor. Whether a room works is judged by furniture fit (FURN rules).",
+      "exceptions": "Kitchens (R304.1).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "irc-r304-habitable-width",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 5 Kitchens, Selected IRC kitchen-related code items (printed page 143), quoting IRC R304.2",
+      "stages": [
+        4
+      ],
+      "summary": "Habitable rooms: not less than 7 ft (2134 mm) in any horizontal dimension; kitchens excepted. (Mitton p. 92 misprints 2,143 mm.)",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 2134,
+      "original_page_checked": true,
+      "conditions": "US International Residential Code minimum, quoted by Mitton & Nystuen; a legal floor. Whether a room works is judged by furniture fit (FURN rules).",
+      "exceptions": "Kitchens (R304.2).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "nkba-shower-clear-floor-762",
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "locator": "Bathroom Planning Guideline, clear floor space (printed page 5 - verify from the image)",
+      "stages": [
+        4
+      ],
+      "summary": "Access standard: 30 x 48 in (762 x 1219 mm) clear floor space centred at each fixture; so at least 30 in (762 mm) in front in either orientation. Code minimum in front of a shower entry: 24 in (610 mm), IRC R307.1.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 762,
+      "original_page_checked": true,
+      "conditions": "NKBA access standard (recommended), used because the brief records ageing in place.",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [
