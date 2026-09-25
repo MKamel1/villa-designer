@@ -57,6 +57,8 @@ ORIGINAL = {
     "ukadm-clear-opening-90deg": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 58, ["face of the door when open at 90 degrees"]),
     "mitton-tv-uhd-min": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 97, ["1 to 1½ the screen size"]),
     "mitton-tv-uhd-max": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 97, ["1 to 1½ the screen size"]),
+    "mh-bathroom-m42-4.30": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 454, ["Accessible and adaptable dwelling bathroom", "Minimum recommended sizes for bathrooms"]),
+    "mh-wc-m42-2.61": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 454, ["Accessible and adaptable dwelling WC", "Minimum recommended sizes for bathrooms"]),
     "irc-r303-glazing-8pct": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 103,
                               ["not less than 8 percent of the floor area"]),
     "mitton-path-of-travel-min": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 79,
@@ -133,11 +135,11 @@ class RuleAuditTests(unittest.TestCase):
         self.assertTrue(p["MIN_AREA_M2.bedroom"]["verified"])
         self.assertEqual(p["MIN_AREA_M2.bedroom"]["used"], 11.5)
         self.assertTrue(p["MIN_AREA_M2.living"]["verified"])         # IRC R304.1 floor, 2026-09-25
-        self.assertFalse(p["MIN_AREA_M2.bathroom"]["verified"])      # still no held source
+        self.assertTrue(p["MIN_AREA_M2.bathroom"]["verified"])       # Metric Handbook Fig. 22.12d (M4(2))
         self.assertNotIn("MIN_AREA_M2.kitchen", p)                   # IRC excepts kitchens
-        self.assertEqual(rows["AREA-01"]["status"], "partly verified")
+        self.assertEqual(rows["AREA-01"]["status"], "verified")
         # only rules whose every number is verified AND whose mapping is complete; CIRC-03 by client decision 2026-09-25
-        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01", "DIM-01", "FURN-02", "DOOR-02", "TV-01"})
+        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01", "DIM-01", "FURN-02", "DOOR-02", "TV-01", "AREA-01"})
 
     def test_a_changed_catalogue_value_unverifies_the_parameter(self):
         from archpipe import catalogue as cat

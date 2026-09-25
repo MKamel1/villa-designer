@@ -95,3 +95,14 @@ the mapping marked complete.
 |---|---|---|
 | TV-01 (new) | verified, enabled | Seat-to-screen distance against Mitton Fig. 4.10b: UHD 1 to 1.5 × the screen diagonal. It uses a `tv_screen` piece, and assumes 16:9 and a UHD screen. The distance runs to the centre of the nearest sofa in front of the screen, within a 30° view cone. The finding reports the distance against the range. |
 | DOOR-02 | verified, enabled | AD M Appendix A measures clear opening width with the door open at 90°. The rule sweeps the leaf and reports the angle it reaches ("opens only 26 degrees of the 90 needed"). It replaces the unsourced 6 % overlap allowance; the demo apartment's two findings are unchanged. |
+
+## Bathroom and WC minimum areas (2026-09-25)
+
+| Room | Minimum | Source |
+|---|---|---|
+| Bathroom | 4.30 m² (2,150 × 2,000 mm) | Metric Handbook 7th ed. Fig. 22.12d, accessible and adaptable dwelling (AD M M4(2)) |
+| WC | 2.61 m² (1,450 × 1,800 mm) | Metric Handbook 7th ed. Fig. 22.12c, same context |
+
+- **Context choice.** The brief records ageing in place, the same basis as the AD M fitting zones. The plain minimum WC/cloakroom (Fig. 22.12a, 1,050 × 1,500) matches the unsourced legacy 1.4 m², but it is not the applicable context.
+- **How demanding.** Of 68,434 real Swiss bath and WC rooms, 67 % are below 4.30 m² and 22 % below 2.61 m² (median 3.78 m²). Many are WCs or shower rooms, so this is descriptive, not a calibration. M4(2) asks for more room than ordinary practice, by design. A project without an ageing-in-place requirement would use Fig. 22.12a.
+- **Status.** AREA-01 is now fully sourced and enabled for approval. En-suites that are additional to the main bathroom carry no area minimum (AD M Table 2.1, Note 1).

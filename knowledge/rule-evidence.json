@@ -22,16 +22,16 @@
           "card": "irc-r304-habitable-area"
         },
         "MIN_AREA_M2.bathroom": {
-          "value": 3.5,
+          "value": 4.3,
           "unit": "m2",
-          "status": "unresolved",
-          "reason": "not yet found in a held source"
+          "status": "verified",
+          "card": "mh-bathroom-m42-4.30"
         },
         "MIN_AREA_M2.wc": {
-          "value": 1.4,
+          "value": 2.61,
           "unit": "m2",
-          "status": "unresolved",
-          "reason": "not yet found in a held source"
+          "status": "verified",
+          "card": "mh-wc-m42-2.61"
         },
         "MIN_AREA_M2.dining": {
           "value": 6.5,
@@ -46,7 +46,8 @@
           "card": "irc-r304-habitable-area"
         }
       },
-      "note": "Kitchen minimum removed 2026-09-25: IRC R304.1 excepts kitchens (NKBA aisles and runs judge them). Living/dining/study use the IRC floor of 6.5 m2 (far below the unsourced legacy 16 m2: a legal floor, not a design size). Bathroom and WC minima remain unresolved."
+      "note": "Kitchen minimum removed 2026-09-25: IRC R304.1 excepts kitchens (NKBA aisles and runs judge them). Living/dining/study use the IRC floor of 6.5 m2 (far below the unsourced legacy 16 m2: a legal floor, not a design size). Bathroom and WC minima remain unresolved. Bathroom 4.30 m2 and WC 2.61 m2 from Metric Handbook Fig. 22.12 (M4(2)), 2026-09-25; legacy 3.5 / 1.4 were unsourced (1.4 matches only the plain minimum cloakroom).",
+      "complete": true
     },
     "DIM-01": {
       "parameters": {

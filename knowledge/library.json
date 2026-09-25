@@ -3635,6 +3635,46 @@
       "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mh-bathroom-m42-4.30",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Section 4.2 Sanitary provision, Figure 22.12d (printed page 22-11)",
+      "stages": [
+        4
+      ],
+      "summary": "Accessible and adaptable dwelling bathroom: minimum recommended 2150 x 2000 mm (4.30 m2).",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "m2",
+      "verified_value": 4.3,
+      "original_page_checked": true,
+      "conditions": "Accessible and adaptable dwellings (AD M M4(2)); applied because the villa brief records ageing in place. The plain minimum WC/cloakroom (Fig. 22.12a) is 1050 x 1500 mm.",
+      "exceptions": "Additional en-suites are outside AD M 2.22 (Table 2.1 Note 1) and carry no area minimum here.",
+      "verification": "Dimensions read from the figure image 2026-09-25 (they are not in the text layer); the regression test re-reads the caption. Area = the two dimensions multiplied.",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mh-wc-m42-2.61",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Section 4.2 Sanitary provision, Figure 22.12c (printed page 22-11)",
+      "stages": [
+        4
+      ],
+      "summary": "Accessible and adaptable dwelling WC: minimum recommended 1450 x 1800 mm (2.61 m2).",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "m2",
+      "verified_value": 2.61,
+      "original_page_checked": true,
+      "conditions": "Accessible and adaptable dwellings (AD M M4(2)); applied because the villa brief records ageing in place. The plain minimum WC/cloakroom (Fig. 22.12a) is 1050 x 1500 mm.",
+      "exceptions": "Additional en-suites are outside AD M 2.22 (Table 2.1 Note 1) and carry no area minimum here.",
+      "verification": "Dimensions read from the figure image 2026-09-25 (they are not in the text layer); the regression test re-reads the caption. Area = the two dimensions multiplied.",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

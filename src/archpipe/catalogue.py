@@ -195,8 +195,10 @@ MIN_AREA_M2 = {
     "living":         (6.5,  "IRC R304.1 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 70 sq ft (6.5 m2); kitchens excepted"),
     "dining":         (6.5,  "IRC R304.1 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 70 sq ft (6.5 m2); kitchens excepted"),
     "study":          (6.5,  "IRC R304.1 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 70 sq ft (6.5 m2); kitchens excepted"),
-    "bathroom":       (3.5,  "Neufert, Architects' Data -- minimum bathroom with WC, basin and bath/shower"),
-    "wc":             (1.4,  "Neufert, Architects' Data -- minimum separate WC compartment"),
+    # Metric Handbook 7th ed. Fig. 22.12 (pp. 22-10/11), accessible and adaptable dwellings (AD M M4(2)),
+    # chosen because the brief records ageing in place; the plain minimum WC/cloakroom is 1050 x 1500.
+    "bathroom":       (4.30, "Metric Handbook 7th ed. Fig. 22.12d -- accessible and adaptable dwelling bathroom 2150 x 2000 mm"),
+    "wc":             (2.61, "Metric Handbook 7th ed. Fig. 22.12c -- accessible and adaptable dwelling WC 1450 x 1800 mm"),
 }
 
 
