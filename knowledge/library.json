@@ -1971,6 +1971,31 @@
           "image_only": false
         }
       ]
+    },
+    {
+      "id": "swiss-dwellings",
+      "author": null,
+      "title": "Swiss Dwellings v3.0.0 (Archilyse AG)",
+      "edition": "as downloaded 2026-09-25",
+      "publisher": "Zenodo",
+      "stages": [
+        3,
+        4
+      ],
+      "isbn": null,
+      "coverage": "45,176 apartments with labelled room geometry in metres",
+      "priority": 2,
+      "url": "https://zenodo.org/records/7788422",
+      "status": "content_verified",
+      "metadata_basis": "Zenodo record read 2026-09-25; checksum verified on download",
+      "access_location": "ai-workstation ~/archpipe/library",
+      "permissions": "CC BY 4.0; only aggregate calibration results enter the repository.",
+      "acquisition": "Downloaded by the tool (Zenodo robots allow /api/records/*/files).",
+      "kind": "dataset",
+      "free": true,
+      "cost_usd_approx": 0,
+      "unlocks": "calibration of the concept critic and room rules on real plans",
+      "verification": "md5 checked against the Zenodo record 2026-09-25."
     }
   ],
   "evidence": [

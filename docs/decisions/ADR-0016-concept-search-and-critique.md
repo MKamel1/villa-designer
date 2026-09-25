@@ -87,3 +87,9 @@ Amendment 3 treats the outside as one node, joined to every mapped outdoor space
 Caveat: 40 plans with no detectable external door were excluded by the sampling rule.
 
 The checks that need a scale remain uncalibrated, so generated concepts stay diagnostic for area, width and wet-stack.
+
+**Update: dimensioned checks on Swiss Dwellings** (CC BY 4.0; metric geometry; `scripts/swiss_calibrate.py`, pre-registered).
+- The room rules AREA-01 and DIM-01 were run as-is on real apartments. Pre-registered sample: 300 apartments, quiet 99 %, seeded defects 300 of 300. Replication: 1,000 fresh apartments, quiet 99.2 %, seeded defects 1,000 of 1,000.
+- Flags came from genuinely small rooms, and from open-plan dining zones labelled as separate areas.
+- The thresholds sit just below the 1st percentile of real rooms, so they bite without being vacuous.
+- Not tested: the double-bedroom minimum (the data do not say which bedrooms are doubles), wet-stack, and area-schedule matching.

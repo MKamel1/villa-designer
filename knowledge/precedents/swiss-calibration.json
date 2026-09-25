@@ -1,0 +1,59 @@
+{
+ "dataset": "Swiss Dwellings v3.0.0 (Archilyse AG), https://zenodo.org/records/7788422, CC BY 4.0. Only aggregate results are stored here.",
+ "procedure": "scripts/swiss_calibrate.py (pre-registered in its docstring): real rule functions r_room_min_area / r_room_min_width on residential apartments rotated to their dominant wall direction; gate >= 90 % quiet; seeded defects (bedroom 7.0 m2, living room 2.0 m across) must be caught.",
+ "runs": [
+  {
+   "run": "1: apartments 1-300 (pre-registered, FINAL)",
+   "result": {
+    "sample": 300,
+    "gate": 0.9,
+    "quiet_rate": {
+     "area": 0.99,
+     "width": 0.99
+    },
+    "seeded_caught": {
+     "area": 300,
+     "width": 300
+    },
+    "gate_pass": true
+   },
+   "verdict": "PASSED first time, no amendment"
+  },
+  {
+   "run": "replication: apartments 301-1300 (fresh)",
+   "result": {
+    "sample": 1000,
+    "gate": 0.9,
+    "quiet_rate": {
+     "area": 0.992,
+     "width": 0.992
+    },
+    "seeded_caught": {
+     "area": 1000,
+     "width": 1000
+    },
+    "gate_pass": true
+   },
+   "verdict": "replicated"
+  }
+ ],
+ "flag_causes": [
+  "genuinely small rooms (about 2.03 m wide, 7.2 m2): below the single-bedroom minimum",
+  "open-plan dining ZONES labelled as separate areas (4.7-5.4 m2): the rule judges a zone as a room - known limit, not amended post hoc"
+ ],
+ "margins": {
+  "bedrooms_p1_area_m2": 8.6,
+  "bedrooms_p1_width_m": 2.27,
+  "living_p1_area_m2": 8.0,
+  "living_p1_width_m": 2.58,
+  "note": "thresholds sit just below the real 1st percentile: they bite in the tail, they are not vacuous"
+ },
+ "limits": [
+  "the double-bedroom minimum (11.5 m2 / 2.55-2.75 m) is not tested: the data do not say which bedrooms are doubles",
+  "wet-stack and area-schedule checks are not tested here"
+ ],
+ "status": {
+  "AREA-01 (bedroom_single, living, dining, study)": "calibrated on real plans",
+  "DIM-01 (bedroom_single, other habitable)": "calibrated on real plans"
+ }
+}

@@ -95,9 +95,16 @@ class GeometryCalibration(unittest.TestCase):
             self.skipTest("not calibrated: final held-out gate failed (%.1f %% quiet < 90 %%); door-to-room "
                           "association across thick walls is the named cause" % (100 * self.FINAL["quiet_rate"]["reachability"]))
 
-    def test_dimensioned_checks(self):
-        self.skipTest("not runnable: CubiCasa5k has no absolute scale; area, width and wet-stack checks need a "
-                      "labelled, dimensioned plan set")
+    def test_dimensioned_room_rules_on_real_metric_plans(self):
+        """AREA-01 / DIM-01 on Swiss Dwellings (metric geometry): knowledge/precedents/swiss-calibration.json."""
+        rec = self._json.loads((critic.ROOT / "knowledge/precedents/swiss-calibration.json").read_text(encoding="utf-8"))
+        for run in rec["runs"]:
+            r = run["result"]
+            self.assertGreaterEqual(min(r["quiet_rate"].values()), r["gate"], run["run"])
+            self.assertEqual(r["seeded_caught"], {"area": r["sample"], "width": r["sample"]}, run["run"])
+
+    def test_wet_stack_and_area_schedule(self):
+        self.skipTest("not calibrated: no held plan set has stacked villa storeys with a room schedule")
 
 
 if __name__ == "__main__":
