@@ -177,3 +177,13 @@ facts missing or assumed rather than calling a generic pointer a known input.
 | The thermal hand check failed north by 16 % | It compared TOTAL solar with an isotropic sky; EnergyPlus uses Perez (north sky diffuse −17 %, south +34 %) | The check asserts beam only (within 0.7 %); totals are information; `tests/test_thermal.py` stops the change being reverted |
 | EnergyPlus fatal errors returned zeros | A fatal run still leaves an empty SQLite file | `run_case` reads the `.err` log and raises on Fatal |
 | Thermal results were 3.6 million times too small | Ladybug already converts joules to kWh | Units are asserted per collection (`kWh`) |
+
+## Knowledge index (2026-09-24)
+
+| Observed | Why it was missed | Guard now |
+|---|---|---|
+| A file named "Neufert 6th ed. 2023" is the 1980 2nd English edition; "Lighting Design Basics 3rd" is the 1st (2004) | Editions were taken from download filenames | Editions confirmed from each copyright page before citing; `edition_note` records the mismatch |
+| Building Construction Illustrated's PDF page labels are sequence numbers (191 where the page prints 5.45) | PDF labels were trusted | Labels chosen from three candidates by agreement with printed edge numbers; < 70 % marked UNRELIABLE; `tests/test_knowledge_index.py` |
+| "overheating criteria operative temperature" returned nothing although Lechner covers it | Every word was required on one page | Partial-match fallback |
+| The fallback then returned a page for nonsense words | One matching word counted as a hit | At least half the words (min 2); the negative test caught it |
+| A book sent to the workstation arrived as 0 bytes, and the RAG system quarantined it as "unreadable PDF" | A piped ssh transfer failed silently | Copies are checked by sha256 on both ends before ingest |

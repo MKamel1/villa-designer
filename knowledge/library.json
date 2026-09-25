@@ -5,7 +5,7 @@
       "id": "problem-seeking",
       "author": "William M. Pe\u00f1a and Steven A. Parshall",
       "title": "Problem Seeking",
-      "edition": "4th ed.",
+      "edition": "4th ed., 2001 (Wiley/HOK, ISBN 0-471-12620-9)",
       "publisher": "Wiley",
       "stages": [
         0,
@@ -15,7 +15,7 @@
       "coverage": "programming process, goals, facts, needs and problem statements",
       "priority": 1,
       "url": "https://www.wiley-vch.de/en?isbn=9781118152935&option=com_eshop&view=product",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "User acquisition plan; edition and contents require original verification",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
@@ -31,7 +31,9 @@
           "pages": 250,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24.",
+      "edition_note": "Held 4th ed.; the 5th (2012) was listed."
     },
     {
       "id": "site-analysis",
@@ -59,7 +61,7 @@
       "id": "neufert",
       "author": "Ernst Neufert",
       "title": "Architects\u2019 Data",
-      "edition": "6",
+      "edition": "2nd (International) English ed., 1980, reprinted to 1998 (Blackwell Science, ISBN 0-632-02339-2)",
       "publisher": "Wiley",
       "stages": [
         2,
@@ -69,7 +71,7 @@
       "coverage": "dwelling areas, doors, furniture dimensions, circulation and all associated notes",
       "priority": 1,
       "url": "https://www.wiley-vch.de/en?isbn=9781119873945&option=com_eshop&view=product",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "User acquisition plan; edition and contents require original verification",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
@@ -84,13 +86,15 @@
           "pages": 447,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24.",
+      "edition_note": "HELD COPY IS THE 1980 EDITION although the file was labelled 6th/2023. Its dimensions are 1980 practice; the 6th ed. (2023) is still worth buying."
     },
     {
       "id": "form-space-order",
       "author": "Francis D. K. Ching",
       "title": "Architecture: Form, Space, and Order",
-      "edition": "5",
+      "edition": "5th ed., 2023 (Wiley, ISBN 9781119853374)",
       "publisher": "Wiley",
       "stages": [
         3
@@ -99,7 +103,7 @@
       "coverage": "spatial order, circulation, proportion and organizing principles",
       "priority": 1,
       "url": "https://www.wiley-vch.de/en?isbn=9781119853374&option=com_eshop&view=product",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "User acquisition plan; edition and contents require original verification",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
@@ -114,13 +118,14 @@
           "pages": 499,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "studio-companion",
       "author": "Edward Allen and Joseph Iano",
       "title": "The Architect\u2019s Studio Companion",
-      "edition": "7",
+      "edition": "7th ed., 2022 (Wiley, ISBN 9781119826798)",
       "publisher": "Wiley",
       "stages": [
         3,
@@ -130,7 +135,7 @@
       "coverage": "preliminary structural systems and service-zone planning",
       "priority": 1,
       "url": "https://www.wiley-vch.de/en?isbn=9781119826798&option=com_eshop&view=product",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "User acquisition plan; edition and contents require original verification",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
@@ -145,7 +150,8 @@
           "pages": 512,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "interior-illustrated",
@@ -243,7 +249,7 @@
       "id": "construction-illustrated",
       "author": "Francis D. K. Ching",
       "title": "Building Construction Illustrated",
-      "edition": "6th ed., 2020 (ISBN 9781119583080)",
+      "edition": "6th ed., 2020 (Wiley, LCCN 2019031008)",
       "publisher": "Wiley",
       "stages": [
         6
@@ -252,7 +258,7 @@
       "coverage": "envelope transitions, openings and junctions",
       "priority": 2,
       "url": "https://www.wiley-vch.de/en?isbn=9781394279272&option=com_eshop&view=product",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "User acquisition plan; edition and contents require original verification",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
@@ -268,7 +274,9 @@
           "pages": 515,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24.",
+      "edition_note": "Held 6th ed.; the 7th was listed."
     },
     {
       "id": "sun-wind-light",
@@ -298,7 +306,7 @@
       "id": "acoustics",
       "author": "Marshall Long",
       "title": "Architectural Acoustics",
-      "edition": "2",
+      "edition": "2nd ed., 2014 (Elsevier, ISBN 978-0-12-398258-2)",
       "publisher": "Elsevier",
       "stages": [
         4,
@@ -309,7 +317,7 @@
       "coverage": "sound paths, isolation and room acoustic design",
       "priority": 3,
       "url": "https://shop.elsevier.com/books/architectural-acoustics/long/978-0-12-398258-2",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "User acquisition plan; edition and contents require original verification",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store outside repository; record permitted excerpts only.",
@@ -324,7 +332,8 @@
           "pages": 943,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "ashrae55",
@@ -629,7 +638,7 @@
       "id": "metric-handbook",
       "author": "Pamela Buxton (ed.)",
       "title": "Metric Handbook: Planning and Design Data",
-      "edition": "7",
+      "edition": "7th ed., 2022 (Routledge)",
       "publisher": "Routledge",
       "stages": [
         2,
@@ -640,7 +649,7 @@
       "coverage": "dwelling, stair, kitchen and bathroom planning data; human dimensions",
       "priority": 1,
       "url": "https://www.routledge.com/Metric-Handbook-Planning-and-Design-Data/Buxton/p/book/9780367511395",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -656,7 +665,8 @@
           "pages": 908,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "human-dimension",
@@ -685,7 +695,7 @@
       "id": "residential-interior-design",
       "author": "Maureen Mitton and Courtney Nystuen",
       "title": "Residential Interior Design: A Guide to Planning Spaces",
-      "edition": "4",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
       "publisher": "Wiley",
       "stages": [
         4,
@@ -695,7 +705,7 @@
       "coverage": "room-by-room residential planning, clearances, storage, kitchens and baths",
       "priority": 1,
       "url": "https://www.wiley.com/en-us/Residential+Interior+Design%3A+A+Guide+to+Planning+Spaces%2C+4th+Edition-p-9781119653424",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -711,13 +721,14 @@
           "pages": 307,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "nkba-guidelines",
       "author": "National Kitchen & Bath Association",
       "title": "Kitchen & Bath Planning Guidelines with Support Spaces and Accessibility",
-      "edition": "2nd ed. (Kitchen & Bathroom Planning Guidelines with Access Standards)",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
       "publisher": "NKBA",
       "stages": [
         4,
@@ -727,7 +738,7 @@
       "coverage": "kitchen and bath clearances, work zones, ventilation, lighting, outlets",
       "priority": 1,
       "url": "https://nkba.org/planning-guidelines/",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -744,7 +755,8 @@
           "pages": 179,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "ies-rp11",
@@ -773,7 +785,7 @@
       "id": "precedents-in-architecture",
       "author": "Roger H. Clark and Michael Pause",
       "title": "Precedents in Architecture: Analytic Diagrams, Formative Ideas, and Partis",
-      "edition": "4",
+      "edition": "4th ed., 2012 (Wiley, ISBN 978-0-470-94674-9)",
       "publisher": "Wiley",
       "stages": [
         3
@@ -782,7 +794,7 @@
       "coverage": "analytic diagram method for >100 buildings",
       "priority": 1,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -798,13 +810,14 @@
           "pages": 354,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "floor-plan-manual",
       "author": "Oliver Heckmann and Friederike Schneider (eds.)",
       "title": "Floor Plan Manual Housing",
-      "edition": "5th rev. and expanded ed. (ISBN 9783035609622)",
+      "edition": "5th revised and expanded ed. (Birkh\u00e4user)",
       "publisher": "Birkh\u00e4user",
       "stages": [
         3,
@@ -814,7 +827,7 @@
       "coverage": "~160 analysed international housing plans and typologies",
       "priority": 1,
       "url": "https://birkhauser.com/books/9783035611496",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -831,13 +844,14 @@
           "pages": 369,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "lechner-hcl",
       "author": "Norbert M. Lechner and Patricia Andrasik",
       "title": "Heating, Cooling, Lighting: Sustainable Design Strategies Towards Net Zero Architecture",
-      "edition": "5",
+      "edition": "5th ed., 2021 (Wiley, EPUB)",
       "publisher": "Wiley",
       "stages": [
         1,
@@ -848,7 +862,7 @@
       "coverage": "passive cooling, shading, window sizing, daylight rules of thumb",
       "priority": 1,
       "url": "https://www.wiley.com/en-us/Heating%2C+Cooling%2C+Lighting%3A+Sustainable+Design+Strategies+Towards+Net+Zero+Architecture%2C+5th+Edition-p-9781119585749",
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -864,7 +878,8 @@
           "pages": 1960,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "cibse-tm59",
@@ -941,7 +956,7 @@
       "id": "ies-handbook",
       "author": "Illuminating Engineering Society",
       "title": "The Lighting Handbook",
-      "edition": "10",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
       "publisher": "IES",
       "stages": [
         5
@@ -950,7 +965,7 @@
       "coverage": "complete lighting reference: vision, photometry, applications",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -966,13 +981,14 @@
           "pages": 1331,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "sll-code",
       "author": "Society of Light and Lighting",
       "title": "SLL Code for Lighting (2022) and SLL Lighting Handbook (2018)",
-      "edition": "2012 (ISBN 9781628709865)",
+      "edition": "2012 (SLL, ISBN 978-1-906846-21-3)",
       "publisher": "CIBSE",
       "stages": [
         5
@@ -981,7 +997,7 @@
       "coverage": "UK lighting criteria and design method",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -998,13 +1014,15 @@
           "pages": 362,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24.",
+      "edition_note": "Held 2012 edition; the 2022 Code was listed."
     },
     {
       "id": "lighting-design-basics",
       "author": "Mark Karlen, Christina Spangler and James R. Benya",
       "title": "Lighting Design Basics",
-      "edition": "3",
+      "edition": "1st ed., 2004 (Wiley, ISBN 0-471-38162-4)",
       "publisher": "Wiley",
       "stages": [
         5
@@ -1013,7 +1031,7 @@
       "coverage": "layered lighting design method with room examples",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -1029,7 +1047,9 @@
           "pages": 199,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24.",
+      "edition_note": "HELD COPY IS THE 1st EDITION (2004) although the file was labelled 3rd/2017."
     },
     {
       "id": "daylighting-handbook",
@@ -1061,7 +1081,8 @@
           "pages": 17,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Held; edition not yet confirmed from the file (no readable copyright page: scan or sample)."
     },
     {
       "id": "cibse-guide-a",
@@ -1113,7 +1134,7 @@
       "id": "time-saver-interior",
       "author": "Joseph De Chiara, Julius Panero and Martin Zelnik",
       "title": "Time-Saver Standards for Interior Design and Space Planning",
-      "edition": "2",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
       "publisher": "McGraw-Hill",
       "stages": [
         4,
@@ -1123,7 +1144,7 @@
       "coverage": "interior dimension data and space planning",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -1139,7 +1160,8 @@
           "pages": 1745,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "id-reference-spec",
@@ -1172,7 +1194,8 @@
           "pages": 290,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Held; edition not yet confirmed from the file (no readable copyright page: scan or sample)."
     },
     {
       "id": "analysing-architecture",
@@ -1204,7 +1227,8 @@
           "pages": 207,
           "image_only": true
         }
-      ]
+      ],
+      "verification": "Held; edition not yet confirmed from the file (no readable copyright page: scan or sample)."
     },
     {
       "id": "spons",
@@ -1234,7 +1258,7 @@
       "id": "landscape-timesaver",
       "author": "Charles W. Harris and Nicholas T. Dines",
       "title": "Time-Saver Standards for Landscape Architecture (+ a dry-climate planting guide)",
-      "edition": "2",
+      "edition": "2nd ed., 1998 (McGraw-Hill)",
       "publisher": "McGraw-Hill",
       "stages": [
         1,
@@ -1244,7 +1268,7 @@
       "coverage": "site grading, hardscape, planting and irrigation data",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
@@ -1260,7 +1284,8 @@
           "pages": 923,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "bs8233",
@@ -1677,7 +1702,7 @@
       "id": "daylight-design-buildings",
       "author": "Nick Baker and Koen Steemers",
       "title": "Daylight Design of Buildings: A Handbook for Architects and Engineers",
-      "edition": "2002, reissued 2013 (ISBN 9781134257348)",
+      "edition": "2002 (James & James, ISBN 1 873936 88 5)",
       "publisher": "Earthscan/Routledge",
       "stages": [
         4,
@@ -1687,7 +1712,7 @@
       "coverage": "daylight design method, daylight factor, window design, glare",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Client-supplied copy 2026-09-24",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original; do not redistribute. Private store only.",
@@ -1703,13 +1728,14 @@
           "pages": 264,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "home-lighting-handbook",
       "author": "James Davidson",
       "title": "The Complete Home Lighting Handbook",
-      "edition": "1997 (ISBN 9780304348831)",
+      "edition": "1997 (Cassell, ISBN 0-304-35024-9)",
       "publisher": "Cassell",
       "stages": [
         5
@@ -1718,7 +1744,7 @@
       "coverage": "residential lighting by room, fittings and effects",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Client-supplied copy 2026-09-24",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original; do not redistribute. Private store only.",
@@ -1734,13 +1760,14 @@
           "pages": 164,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "hamdy-2017-overheating",
       "author": "Mohamed Hamdy, Salvatore Carlucci, Pieter-Jan Hoes, Jan Hensen",
       "title": "The impact of climate change on the overheating risk in dwellings: are passive strategies robust?",
-      "edition": "Building and Environment 122 (2017)",
+      "edition": "Building and Environment 122 (2017), doi 10.1016/j.buildenv.2017.06.031 (accepted manuscript)",
       "publisher": "Building and Environment 122",
       "stages": [
         5
@@ -1749,7 +1776,7 @@
       "coverage": "overheating robustness of passive strategies under climate change",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Client-supplied copy 2026-09-24",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original; do not redistribute. Private store only.",
@@ -1765,13 +1792,14 @@
           "pages": 27,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "nkba-kitchen-guidelines-free",
       "author": "National Kitchen & Bath Association",
       "title": "Kitchen Planning Guidelines with Access Standards (free edition)",
-      "edition": "free edition (IRC 2015 basis)",
+      "edition": "free edition based on IRC 2015 and ICC A117.1-2009 (NKBA)",
       "publisher": "NKBA",
       "stages": [
         4
@@ -1780,7 +1808,7 @@
       "coverage": "kitchen planning guidelines, IRC 2015 / ICC A117.1-2009 references",
       "priority": 1,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Client-supplied copy 2026-09-24",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original; do not redistribute. Private store only.",
@@ -1796,13 +1824,14 @@
           "pages": 36,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     },
     {
       "id": "nkba-dc-summary-4ed",
       "author": "National Kitchen & Bath Association",
       "title": "Kitchen & Bath Planning Guidelines With Support Spaces and Accessibility, 4th ed.: design-competition summary",
-      "edition": "4th ed. summary, 2023",
+      "edition": "4th ed. summary, 2022 (NKBA)",
       "publisher": "NKBA",
       "stages": [
         4
@@ -1811,7 +1840,7 @@
       "coverage": "summary of health, safety and welfare guidelines",
       "priority": 2,
       "url": null,
-      "status": "held",
+      "status": "content_verified",
       "metadata_basis": "Client-supplied copy 2026-09-24",
       "access_location": "archpipe-sources",
       "permissions": "Licensed original; do not redistribute. Private store only.",
@@ -1827,7 +1856,8 @@
           "pages": 47,
           "image_only": false
         }
-      ]
+      ],
+      "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
     }
   ],
   "evidence": [

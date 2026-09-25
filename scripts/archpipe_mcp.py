@@ -291,6 +291,38 @@ def search_luminaires(mount: str | None = None, lm_min: float | None = None, lm_
     return {'layer': 'verified library', 'rows': rows}
 
 
+@mcp.tool(annotations=READ)
+def search_books(query: str, book: str | None = None, limit: int = 10) -> dict:
+    """Full-text search over the HELD books and standards (private knowledge index).
+
+    Each hit gives the book, edition, PRINTED page to cite (or the EPUB section),
+    a snippet, and figure_heavy: much dimensional data sits in drawings, so a
+    figure page must be read as an image (book_page) and no hit never means no
+    rule. Cite only after reading the page; record an evidence card.
+    """
+    from archpipe import knowledge_index as k
+    return {'hits': k.search(query, book=book, limit=limit)}
+
+
+@mcp.tool(annotations=READ)
+def lookup_book_term(term: str, limit: int = 20) -> dict:
+    """The dictionary: back-of-book index entries for a term across every held book."""
+    from archpipe import knowledge_index as k
+    return {'entries': k.lookup_term(term, limit=limit)}
+
+
+@mcp.tool(annotations=READ)
+def book_page(book: str, pdf_page: int, count: int = 1, image: bool = False) -> dict:
+    """Read held pages (0-based PDF page): text, printed page, section; image=True
+    also renders the first page to PNG for drawings and returns its path."""
+    from archpipe import knowledge_index as k
+    count = max(1, min(count, 5))
+    out = {'pages': k.read(book, pdf_page, count)}
+    if image:
+        out['image'] = str(k.page_image(book, pdf_page))
+    return out
+
+
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False))
 def search_products(text: str | None = None, category: str | None = None, style: str | None = None,
                     kind: str | None = None, include_unverified: bool = False, limit: int = 30) -> dict:

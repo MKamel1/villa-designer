@@ -18,6 +18,9 @@ error. The official Python library is pinned to the maintained 1.30 line.
 | `catalogue_item` | Legacy diagnostic dimensions, source and verification status | Read only |
 | `lighting_at` | Direct illuminance at a point in millimetres | Read only; no shadow or uniformity claim |
 | `check_fixture_sources` | Each luminaire's measured emitter (Light Source apex or lens centre) against the spec height, and whether its IES file's opening matches the fitting | Read only; the insertion point is never the source. `passed` covers emitter height (25 mm); a photometry mismatch is reported, not failed |
+| `search_books` | Full-text search over the held books and standards: printed page to cite (or EPUB section), snippet, figure-heavy flag | Read only; private index; no hit never means no rule |
+| `lookup_book_term` | The dictionary: back-of-book index entries across every held book | Read only |
+| `book_page` | Read held pages by PDF page, optionally rendering the page image for drawings | Read only; image written to the private store |
 | `search_products` | Search the product library beyond luminaires (surfaces, fabrics, furniture, decor, plants): verified rows by default, with each check's passed / failed / not_checkable state | Read only; an appearance asset standing for a product is a look-alike-proxy unless linked |
 | `search_luminaires` | Search real manufacturer luminaires: the verified library (pickable, figures from the LDT) or the wider catalogue with market availability (EG, AE, SA, GB) | Read only; catalogue rows are unverified until their files are imported |
 | `propose_luminaires` | Two widely available products from different ranges for one lighting role, each confirmed live, or the constraint that excluded them | Reads one allowed product page per candidate; never downloads |
