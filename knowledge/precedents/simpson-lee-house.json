@@ -1,0 +1,41 @@
+{
+  "id": "simpson-lee-house",
+  "name": "Simpson-Lee House",
+  "architect": "Glenn Murcutt",
+  "year": "1989-1994",
+  "location_as_printed": "Mt. Wilson, New South Wales",
+  "climate": null,
+  "hemisphere": "south",
+  "sources": [
+    {
+      "source_id": "precedents-in-architecture",
+      "locator": "Glenn Murcutt, printed pages 158-159"
+    }
+  ],
+  "typology": "pavilions",
+  "organization": "linear",
+  "storeys": 1,
+  "rooms": null,
+  "adjacency": null,
+  "zoning": null,
+  "circulation": "a long walkway links the main bar to a separate small pavilion",
+  "orientation": null,
+  "section": "single storey; mono-pitch roofs; ground falls under the walkway",
+  "outdoor_relation": null,
+  "diagram_themes": [
+    "structure",
+    "natural light",
+    "massing",
+    "plan to section",
+    "circulation to use-space",
+    "unit to whole",
+    "repetitive to unique",
+    "symmetry and balance",
+    "geometry",
+    "additive and subtractive",
+    "hierarchy",
+    "parti"
+  ],
+  "notes": "Main bar plus a detached, rotated second pavilion; repetitive bays in the main bar. Rooms are not labelled at the book's drawing scale, so rooms, adjacency and zoning are not recorded. storeys = number of floor plans published (null where sections show more levels than plans).",
+  "verified": "2026-09-25 by Claude: drawing page and analytic-diagram page read as page images"
+}

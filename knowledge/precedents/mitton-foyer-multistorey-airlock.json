@@ -1,0 +1,106 @@
+{
+  "id": "mitton-foyer-multistorey-airlock",
+  "name": "Foyer adjacencies, multi-storey home with air lock",
+  "architect": null,
+  "year": null,
+  "climate": null,
+  "sources": [
+    {
+      "source_id": "residential-interior-design",
+      "locator": "Figure 3.5a, printed page 59"
+    }
+  ],
+  "typology": null,
+  "organization": null,
+  "storeys": 2,
+  "level_of_detail": "room graph",
+  "rooms": [
+    {
+      "id": "air-lock",
+      "use": "AIR LOCK",
+      "kind": "circulation",
+      "area_m2": null
+    },
+    {
+      "id": "foyer",
+      "use": "FOYER",
+      "kind": "circulation",
+      "area_m2": null
+    },
+    {
+      "id": "stair",
+      "use": "STAIR",
+      "kind": "circulation",
+      "area_m2": null
+    },
+    {
+      "id": "bedroom-suite",
+      "use": "BEDROOM SUITE",
+      "kind": "private",
+      "area_m2": null
+    },
+    {
+      "id": "guest-office",
+      "use": "GUEST/OFFICE",
+      "kind": "private",
+      "area_m2": null
+    },
+    {
+      "id": "powder",
+      "use": "POWDER ROOM",
+      "kind": "service",
+      "area_m2": null
+    },
+    {
+      "id": "closet",
+      "use": "CLOSET",
+      "kind": "service",
+      "area_m2": null
+    },
+    {
+      "id": "living",
+      "use": "LIVING SPACES",
+      "kind": "public",
+      "area_m2": null
+    }
+  ],
+  "adjacency": [
+    [
+      "air-lock",
+      "foyer"
+    ],
+    [
+      "foyer",
+      "stair"
+    ],
+    [
+      "stair",
+      "bedroom-suite"
+    ],
+    [
+      "foyer",
+      "guest-office"
+    ],
+    [
+      "foyer",
+      "powder"
+    ],
+    [
+      "foyer",
+      "closet"
+    ],
+    [
+      "foyer",
+      "living"
+    ]
+  ],
+  "entrance": "air-lock",
+  "zoning": null,
+  "circulation": null,
+  "orientation": null,
+  "section": null,
+  "outdoor_relation": null,
+  "diagram_themes": [],
+  "notes": "Caption: bedrooms on a second level, so the stair relationship matters; the air lock buffers the climate. The garage bubble has no drawn link to a named room and is omitted. `kind` (public/private/circulation/service/exterior) is archpipe's classification of the book's labels, used by the concept critic; it is not in the source.",
+  "verified": "2026-09-25 by Claude: figure read as a 220 dpi page image; room labels are the book's"
+}

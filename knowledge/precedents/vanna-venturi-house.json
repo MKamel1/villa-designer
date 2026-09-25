@@ -1,0 +1,41 @@
+{
+  "id": "vanna-venturi-house",
+  "name": "Vanna Venturi House",
+  "architect": "Robert Venturi",
+  "year": "1962",
+  "location_as_printed": "Philadelphia, Pennsylvania",
+  "climate": null,
+  "hemisphere": "north",
+  "sources": [
+    {
+      "source_id": "precedents-in-architecture",
+      "locator": "Robert Venturi, printed pages 224-225"
+    }
+  ],
+  "typology": null,
+  "organization": "centralized",
+  "storeys": 2,
+  "rooms": null,
+  "adjacency": null,
+  "zoning": null,
+  "circulation": "entry at the centre; the stair wraps the central chimney",
+  "orientation": null,
+  "section": "gabled section split at the centre",
+  "outdoor_relation": null,
+  "diagram_themes": [
+    "structure",
+    "natural light",
+    "massing",
+    "plan to section",
+    "circulation to use-space",
+    "unit to whole",
+    "repetitive to unique",
+    "symmetry and balance",
+    "geometry",
+    "additive and subtractive",
+    "hierarchy",
+    "parti"
+  ],
+  "notes": "Symmetric facade about a split gable; central chimney and stair; plan organised around the central core. Rooms are not labelled at the book's drawing scale, so rooms, adjacency and zoning are not recorded. storeys = number of floor plans published (null where sections show more levels than plans).",
+  "verified": "2026-09-25 by Claude: drawing page and analytic-diagram page read as page images"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "villa-savoye",
+  "name": "Villa Savoye",
+  "architect": "Le Corbusier",
+  "year": "1928-1931",
+  "location_as_printed": "Poissy, France",
+  "climate": null,
+  "hemisphere": "north",
+  "sources": [
+    {
+      "source_id": "precedents-in-architecture",
+      "locator": "Le Corbusier, printed pages 104-105"
+    }
+  ],
+  "typology": "grid",
+  "organization": "grid",
+  "storeys": 3,
+  "rooms": null,
+  "adjacency": null,
+  "zoning": null,
+  "circulation": "central ramp rising through the square plan, with a stair beside it",
+  "orientation": null,
+  "section": "raised main floor on columns; roof garden level above",
+  "outdoor_relation": "terrace/court cut into the main floor",
+  "diagram_themes": [
+    "structure",
+    "natural light",
+    "massing",
+    "plan to section",
+    "circulation to use-space",
+    "unit to whole",
+    "repetitive to unique",
+    "symmetry and balance",
+    "geometry",
+    "additive and subtractive",
+    "hierarchy",
+    "parti"
+  ],
+  "notes": "Square plan on a regular column grid; curved ground-floor enclosure; symmetry about the ramp axis. Rooms are not labelled at the book's drawing scale, so rooms, adjacency and zoning are not recorded. storeys = number of floor plans published (null where sections show more levels than plans).",
+  "verified": "2026-09-25 by Claude: drawing page and analytic-diagram page read as page images"
+}

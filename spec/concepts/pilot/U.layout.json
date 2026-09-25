@@ -1,0 +1,383 @@
+{
+ "id": "U-670",
+ "parti": "U",
+ "plot": {
+  "width_m": 30.0,
+  "depth_m": 40.0
+ },
+ "levels": {
+  "L00": 0.0,
+  "L01": 3.3
+ },
+ "rooms": {
+  "stair": {
+   "level": "L00",
+   "rect": [
+    1.95,
+    6.0,
+    4.55,
+    10.8
+   ],
+   "occupancy": "stair",
+   "name": "Stair",
+   "target_m2": null
+  },
+  "entry": {
+   "level": "L00",
+   "rect": [
+    4.55,
+    6.0,
+    7.45,
+    10.8
+   ],
+   "occupancy": "entrance",
+   "name": "Entry",
+   "target_m2": 14
+  },
+  "study": {
+   "level": "L00",
+   "rect": [
+    7.45,
+    6.0,
+    10.4,
+    10.8
+   ],
+   "occupancy": "study",
+   "name": "Study",
+   "target_m2": 14
+  },
+  "storage": {
+   "level": "L00",
+   "rect": [
+    10.4,
+    6.0,
+    12.9,
+    10.8
+   ],
+   "occupancy": "store",
+   "name": "Storage",
+   "target_m2": 12
+  },
+  "guest": {
+   "level": "L00",
+   "rect": [
+    12.9,
+    6.0,
+    16.65,
+    10.8
+   ],
+   "occupancy": "bedroom",
+   "name": "Guest",
+   "target_m2": 18
+  },
+  "bath-ground": {
+   "level": "L00",
+   "rect": [
+    16.65,
+    6.0,
+    28.0,
+    10.8
+   ],
+   "occupancy": "bathroom",
+   "name": "Bath Ground",
+   "target_m2": 6
+  },
+  "gallery-s": {
+   "level": "L00",
+   "rect": [
+    1.95,
+    10.8,
+    28.0,
+    12.1
+   ],
+   "occupancy": "corridor",
+   "name": "Gallery S",
+   "target_m2": null
+  },
+  "kitchen": {
+   "level": "L00",
+   "rect": [
+    1.95,
+    12.1,
+    7.55,
+    16.4
+   ],
+   "occupancy": "kitchen",
+   "name": "Kitchen",
+   "target_m2": 24
+  },
+  "dining": {
+   "level": "L00",
+   "rect": [
+    1.95,
+    16.4,
+    7.55,
+    20.3
+   ],
+   "occupancy": "dining",
+   "name": "Dining",
+   "target_m2": 22
+  },
+  "living": {
+   "level": "L00",
+   "rect": [
+    1.95,
+    20.3,
+    7.55,
+    27.45
+   ],
+   "occupancy": "living",
+   "name": "Living",
+   "target_m2": 40
+  },
+  "gallery-w": {
+   "level": "L00",
+   "rect": [
+    7.55,
+    12.1,
+    8.85,
+    27.45
+   ],
+   "occupancy": "corridor",
+   "name": "Gallery W",
+   "target_m2": null
+  },
+  "gallery-e": {
+   "level": "L00",
+   "rect": [
+    21.3,
+    12.1,
+    22.6,
+    13.95
+   ],
+   "occupancy": "corridor",
+   "name": "Gallery E",
+   "target_m2": null
+  },
+  "utility": {
+   "level": "L00",
+   "rect": [
+    22.6,
+    12.1,
+    28.0,
+    13.95
+   ],
+   "occupancy": "utility",
+   "name": "Utility",
+   "target_m2": 10
+  },
+  "stair-up": {
+   "level": "L01",
+   "rect": [
+    1.95,
+    6.0,
+    4.55,
+    10.8
+   ],
+   "occupancy": "stair",
+   "name": "Stair Up",
+   "target_m2": null
+  },
+  "family": {
+   "level": "L01",
+   "rect": [
+    4.55,
+    6.0,
+    9.55,
+    10.8
+   ],
+   "occupancy": "living",
+   "name": "Family",
+   "target_m2": 24
+  },
+  "bed-2": {
+   "level": "L01",
+   "rect": [
+    9.55,
+    6.0,
+    13.3,
+    10.8
+   ],
+   "occupancy": "bedroom",
+   "name": "Bed 2",
+   "target_m2": 18
+  },
+  "bed-3": {
+   "level": "L01",
+   "rect": [
+    13.3,
+    6.0,
+    17.05,
+    10.8
+   ],
+   "occupancy": "bedroom",
+   "name": "Bed 3",
+   "target_m2": 18
+  },
+  "ensuite": {
+   "level": "L01",
+   "rect": [
+    17.05,
+    6.0,
+    19.15,
+    10.8
+   ],
+   "occupancy": "ensuite",
+   "name": "Ensuite",
+   "target_m2": 10
+  },
+  "dressing": {
+   "level": "L01",
+   "rect": [
+    19.15,
+    6.0,
+    21.2,
+    10.8
+   ],
+   "occupancy": "dressing",
+   "name": "Dressing",
+   "target_m2": 10
+  },
+  "main-bedroom": {
+   "level": "L01",
+   "rect": [
+    21.2,
+    6.0,
+    26.2,
+    10.8
+   ],
+   "occupancy": "bedroom",
+   "name": "Main Bedroom",
+   "target_m2": 24
+  },
+  "bath-family": {
+   "level": "L01",
+   "rect": [
+    26.2,
+    6.0,
+    28.0,
+    10.8
+   ],
+   "occupancy": "bathroom",
+   "name": "Bath Family",
+   "target_m2": 8
+  },
+  "landing": {
+   "level": "L01",
+   "rect": [
+    1.95,
+    10.8,
+    28.0,
+    12.1
+   ],
+   "occupancy": "landing",
+   "name": "Landing",
+   "target_m2": null
+  }
+ },
+ "links": [
+  [
+   "living",
+   "dining"
+  ],
+  [
+   "dining",
+   "kitchen"
+  ],
+  [
+   "main-bedroom",
+   "dressing"
+  ],
+  [
+   "dressing",
+   "ensuite"
+  ],
+  [
+   "gallery-s",
+   "gallery-w"
+  ],
+  [
+   "gallery-s",
+   "gallery-e"
+  ],
+  [
+   "gallery-s",
+   "stair"
+  ],
+  [
+   "gallery-s",
+   "entry"
+  ],
+  [
+   "gallery-s",
+   "study"
+  ],
+  [
+   "gallery-s",
+   "storage"
+  ],
+  [
+   "gallery-s",
+   "guest"
+  ],
+  [
+   "gallery-s",
+   "bath-ground"
+  ],
+  [
+   "gallery-s",
+   "kitchen"
+  ],
+  [
+   "gallery-s",
+   "utility"
+  ],
+  [
+   "gallery-w",
+   "kitchen"
+  ],
+  [
+   "gallery-w",
+   "dining"
+  ],
+  [
+   "gallery-w",
+   "living"
+  ],
+  [
+   "gallery-e",
+   "utility"
+  ],
+  [
+   "landing",
+   "stair-up"
+  ],
+  [
+   "landing",
+   "family"
+  ],
+  [
+   "landing",
+   "bed-2"
+  ],
+  [
+   "landing",
+   "bed-3"
+  ],
+  [
+   "landing",
+   "main-bedroom"
+  ],
+  [
+   "landing",
+   "bath-family"
+  ]
+ ],
+ "vertical": [
+  [
+   "stair",
+   "stair-up"
+  ]
+ ],
+ "entrance": "entry"
+}

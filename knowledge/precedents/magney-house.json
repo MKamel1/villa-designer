@@ -1,0 +1,41 @@
+{
+  "id": "magney-house",
+  "name": "Magney House",
+  "architect": "Glenn Murcutt",
+  "year": "1982-1984",
+  "location_as_printed": "Bingie Point, Moruya, New South Wales",
+  "climate": null,
+  "hemisphere": "south",
+  "sources": [
+    {
+      "source_id": "precedents-in-architecture",
+      "locator": "Glenn Murcutt, printed pages 156-157"
+    }
+  ],
+  "typology": "bar",
+  "organization": "linear",
+  "storeys": 1,
+  "rooms": null,
+  "adjacency": null,
+  "zoning": null,
+  "circulation": "along one long side of the bar",
+  "orientation": null,
+  "section": "single storey; curved roof profile admits light",
+  "outdoor_relation": null,
+  "diagram_themes": [
+    "structure",
+    "natural light",
+    "massing",
+    "plan to section",
+    "circulation to use-space",
+    "unit to whole",
+    "repetitive to unique",
+    "symmetry and balance",
+    "geometry",
+    "additive and subtractive",
+    "hierarchy",
+    "parti"
+  ],
+  "notes": "Regular bay structure; repetitive units; the parti diagram splits the bar into two groups. Rooms are not labelled at the book's drawing scale, so rooms, adjacency and zoning are not recorded. storeys = number of floor plans published (null where sections show more levels than plans).",
+  "verified": "2026-09-25 by Claude: drawing page and analytic-diagram page read as page images"
+}

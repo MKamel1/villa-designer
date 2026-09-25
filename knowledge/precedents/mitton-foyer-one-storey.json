@@ -1,0 +1,96 @@
+{
+  "id": "mitton-foyer-one-storey",
+  "name": "Foyer adjacencies, one-storey home",
+  "architect": null,
+  "year": null,
+  "climate": null,
+  "sources": [
+    {
+      "source_id": "residential-interior-design",
+      "locator": "Figure 3.5b, printed page 59"
+    }
+  ],
+  "typology": null,
+  "organization": null,
+  "storeys": 1,
+  "level_of_detail": "room graph",
+  "rooms": [
+    {
+      "id": "foyer",
+      "use": "FOYER",
+      "kind": "circulation",
+      "area_m2": null
+    },
+    {
+      "id": "living",
+      "use": "LIVING SPACES",
+      "kind": "public",
+      "area_m2": null
+    },
+    {
+      "id": "bedrooms",
+      "use": "BEDROOMS",
+      "kind": "private",
+      "area_m2": null
+    },
+    {
+      "id": "closet",
+      "use": "CLOSET",
+      "kind": "service",
+      "area_m2": null
+    },
+    {
+      "id": "powder",
+      "use": "POWDER ROOM",
+      "kind": "service",
+      "area_m2": null
+    },
+    {
+      "id": "mud-utility",
+      "use": "MUD/UTIL",
+      "kind": "service",
+      "area_m2": null
+    },
+    {
+      "id": "garage",
+      "use": "GARAGE",
+      "kind": "service",
+      "area_m2": null
+    }
+  ],
+  "adjacency": [
+    [
+      "foyer",
+      "living"
+    ],
+    [
+      "foyer",
+      "bedrooms"
+    ],
+    [
+      "foyer",
+      "closet"
+    ],
+    [
+      "foyer",
+      "powder"
+    ],
+    [
+      "living",
+      "mud-utility"
+    ],
+    [
+      "mud-utility",
+      "garage"
+    ]
+  ],
+  "entrance": "foyer",
+  "zoning": null,
+  "circulation": null,
+  "orientation": null,
+  "section": null,
+  "outdoor_relation": null,
+  "diagram_themes": [],
+  "notes": "Caption: a mudroom adjacent to the garage and a half bath adjacent to the foyer. The bedrooms bubble meets the foyer with the closet between them; recorded as access from the foyer. Mud/util touches the living spaces bubble; recorded as that link. `kind` (public/private/circulation/service/exterior) is archpipe's classification of the book's labels, used by the concept critic; it is not in the source.",
+  "verified": "2026-09-25 by Claude: figure read as a 220 dpi page image; room labels are the book's"
+}

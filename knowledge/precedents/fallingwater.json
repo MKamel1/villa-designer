@@ -1,0 +1,41 @@
+{
+  "id": "fallingwater",
+  "name": "Fallingwater (Edgar J. Kaufmann House)",
+  "architect": "Frank Lloyd Wright",
+  "year": "1935",
+  "location_as_printed": "Ohiopyle, Pennsylvania",
+  "climate": null,
+  "hemisphere": "north",
+  "sources": [
+    {
+      "source_id": "precedents-in-architecture",
+      "locator": "Frank Lloyd Wright, printed pages 236-237"
+    }
+  ],
+  "typology": null,
+  "organization": "clustered",
+  "storeys": 2,
+  "rooms": null,
+  "adjacency": null,
+  "zoning": null,
+  "circulation": "around a vertical core anchored to the rock",
+  "orientation": null,
+  "section": "stacked cantilevered terraces over a stream",
+  "outdoor_relation": "terraces extend over the stream",
+  "diagram_themes": [
+    "structure",
+    "natural light",
+    "massing",
+    "plan to section",
+    "circulation to use-space",
+    "unit to whole",
+    "repetitive to unique",
+    "symmetry and balance",
+    "geometry",
+    "additive and subtractive",
+    "hierarchy",
+    "parti"
+  ],
+  "notes": "Overlapping rectangles and cantilevers about a core; geometry diagram shows a regulating grid. Rooms are not labelled at the book's drawing scale, so rooms, adjacency and zoning are not recorded. storeys = number of floor plans published (null where sections show more levels than plans).",
+  "verified": "2026-09-25 by Claude: drawing page and analytic-diagram page read as page images"
+}

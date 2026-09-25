@@ -1,0 +1,41 @@
+{
+  "id": "salt-point-house",
+  "name": "Salt Point House",
+  "architect": "Thomas Phifer",
+  "year": "2004-2007",
+  "location_as_printed": "Salt Point, New York",
+  "climate": null,
+  "hemisphere": "north",
+  "sources": [
+    {
+      "source_id": "precedents-in-architecture",
+      "locator": "Thomas Phifer, printed pages 174-175"
+    }
+  ],
+  "typology": "bar",
+  "organization": "linear",
+  "storeys": 2,
+  "rooms": null,
+  "adjacency": null,
+  "zoning": null,
+  "circulation": "a stair set in a central zone",
+  "orientation": null,
+  "section": "two floors; roof openings admit daylight",
+  "outdoor_relation": "open ends of the box are screened",
+  "diagram_themes": [
+    "structure",
+    "natural light",
+    "massing",
+    "plan to section",
+    "circulation to use-space",
+    "unit to whole",
+    "repetitive to unique",
+    "symmetry and balance",
+    "geometry",
+    "additive and subtractive",
+    "hierarchy",
+    "parti"
+  ],
+  "notes": "Simple rectangle with a regular two-row column structure and a central core; symmetry about both axes. Rooms are not labelled at the book's drawing scale, so rooms, adjacency and zoning are not recorded. storeys = number of floor plans published (null where sections show more levels than plans).",
+  "verified": "2026-09-25 by Claude: drawing page and analytic-diagram page read as page images"
+}

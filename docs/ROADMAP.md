@@ -96,10 +96,10 @@ obtained and read. Approved work, in phases:
 |---|---|
 | Purchase list (UK + US practice, tiered, from `knowledge/library.json`) and intake of readable copies | Done: `scripts/sources.py list/intake` |
 | Method steps added: façade, climate/thermal window study, landscape, FF&E, cost at every gate, consultant hand-off, acoustics end-check, taste profile, critic calibration | Done: method v1.1 and stage packages |
-| Rule verification from the held books (13 audited rules first, then kitchen/bath, lighting, daylight/overheating) | Waiting for the books |
-| Concept design by generate-and-critique: precedent corpus, typology catalogue, constraint-solver variants, calibrated critic, three concepts | Planned |
-| Thermal/cooling/daylight toolchain (Ladybug Tools + EnergyPlus + Radiance on the workstation, Cairo weather) | Planned |
-| Product library for every category (surfaces, sanitary, kitchen, glazing, furniture, plants), broad index + 300–500 verified items | Planned |
+| Rule verification from the held books (13 audited rules first, then kitchen/bath, lighting, daylight/overheating) | In progress: 25 books indexed (`scripts/knowledge.py`, semantic layer `scripts/semantic.py`); cards for AD K/M, NDSS, NKBA, Mitton, SLL ADF, Lechner, Ching; CIRC-01 verified, AREA-01 partly; CIRC-03 width, DIM-01 split and DOOR-01 restructure await decisions; TM59, BS EN 17037, BR 209, Neufert 6th still to buy |
+| Concept design by generate-and-critique: precedent corpus, typology catalogue, constraint-solver variants, calibrated critic, three concepts | v1 done, diagnostic (ADR-0016): 16 precedent records, 7 typologies, critic with graph calibration passing; geometric calibration blocked on a labelled dimensioned plan set; pilot bar/L/U in `docs/guidance/concepts-pilot.md` |
+| Thermal/cooling/daylight toolchain (Ladybug Tools + EnergyPlus + Radiance on the workstation, Cairo weather) | Done (ADR-0017): EnergyPlus shoebox window study with fins, validated against a hand beam calculation; Radiance daylight factor validated against sky normalisation and Lynes; TM59/EN 17037 criteria wait for the standards |
+| Product library for every category (surfaces, sanitary, kitchen, glazing, furniture, plants), broad index + 300–500 verified items | In progress (ADR-0015): ~3,550 indexed; 224 verified (19 Poly Haven/ambientCG, 94 Fab Megascans, 111 Sketchfab CC0/CC-BY); BIMobject families via the user's app (`docs/guidance/bimobject-shortlist.md`); glazing/IGDB not started |
 | Schedules, specification book, quantities and relative cost, IFC for consultants | Planned |
 
 **Consultant scope, missing in-house:** glare (DGP), HVAC design,

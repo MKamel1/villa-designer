@@ -1,0 +1,150 @@
+{
+  "id": "mitton-sample-project-main-level",
+  "name": "Sample project, main level (owner-approved bubble options)",
+  "architect": null,
+  "year": null,
+  "climate": null,
+  "sources": [
+    {
+      "source_id": "residential-interior-design",
+      "locator": "Figure 2.7, printed page 35 (options B2, C, D and blocking diagram E)"
+    }
+  ],
+  "typology": null,
+  "organization": null,
+  "storeys": null,
+  "level_of_detail": "room graph",
+  "rooms": [
+    {
+      "id": "porch",
+      "use": "PORCH",
+      "kind": "circulation",
+      "area_m2": null
+    },
+    {
+      "id": "entry",
+      "use": "ENTRY",
+      "kind": "circulation",
+      "area_m2": null
+    },
+    {
+      "id": "stair",
+      "use": "STAIR",
+      "kind": "circulation",
+      "area_m2": null
+    },
+    {
+      "id": "half-bath",
+      "use": "HALF BATH",
+      "kind": "service",
+      "area_m2": null
+    },
+    {
+      "id": "closet",
+      "use": "CLOS.",
+      "kind": "service",
+      "area_m2": null
+    },
+    {
+      "id": "master-bedroom",
+      "use": "MASTER BEDROOM",
+      "kind": "private",
+      "area_m2": null
+    },
+    {
+      "id": "living",
+      "use": "LIVING SPACE(S)",
+      "kind": "public",
+      "area_m2": null
+    },
+    {
+      "id": "dining",
+      "use": "DINING",
+      "kind": "public",
+      "area_m2": null
+    },
+    {
+      "id": "kitchen",
+      "use": "KITCHEN",
+      "kind": "public",
+      "area_m2": null
+    },
+    {
+      "id": "patio",
+      "use": "PATIO",
+      "kind": "exterior",
+      "area_m2": null
+    },
+    {
+      "id": "mud-utility",
+      "use": "MUD/UTILITY",
+      "kind": "service",
+      "area_m2": null
+    },
+    {
+      "id": "garage",
+      "use": "GARAGE",
+      "kind": "service",
+      "area_m2": null
+    }
+  ],
+  "adjacency": [
+    [
+      "porch",
+      "entry"
+    ],
+    [
+      "entry",
+      "stair"
+    ],
+    [
+      "entry",
+      "half-bath"
+    ],
+    [
+      "entry",
+      "closet"
+    ],
+    [
+      "entry",
+      "master-bedroom"
+    ],
+    [
+      "entry",
+      "living"
+    ],
+    [
+      "living",
+      "dining"
+    ],
+    [
+      "dining",
+      "kitchen"
+    ],
+    [
+      "kitchen",
+      "patio"
+    ],
+    [
+      "mud-utility",
+      "kitchen"
+    ],
+    [
+      "mud-utility",
+      "garage"
+    ],
+    [
+      "mud-utility",
+      "stair"
+    ]
+  ],
+  "entrance": "porch",
+  "zoning": null,
+  "circulation": null,
+  "orientation": null,
+  "section": null,
+  "outdoor_relation": null,
+  "diagram_themes": [],
+  "notes": "Composed from the options the caption says the owners chose or approved: B2 (living-dining-kitchen-patio chain), C (garage and mud/utility with the stair and a link 'to KIT.'), D (primary entrance: porch, entry, stair, half bath, closet, 'to master bedroom', 'to living space(s)'); blocking diagram E places these rooms together. The owner's-suite options A1/A2 are not chosen in the caption, so the suite interior is omitted. `kind` (public/private/circulation/service/exterior) is archpipe's classification of the book's labels, used by the concept critic; it is not in the source.",
+  "verified": "2026-09-25 by Claude: figure read as a 220 dpi page image; room labels are the book's"
+}

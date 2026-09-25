@@ -1,0 +1,41 @@
+{
+  "id": "smith-house",
+  "name": "Smith House",
+  "architect": "Richard Meier",
+  "year": "1965-1967",
+  "location_as_printed": "Darien, Connecticut",
+  "climate": null,
+  "hemisphere": "north",
+  "sources": [
+    {
+      "source_id": "precedents-in-architecture",
+      "locator": "Richard Meier, printed pages 136-137"
+    }
+  ],
+  "typology": null,
+  "organization": "linear",
+  "storeys": 3,
+  "rooms": null,
+  "adjacency": null,
+  "zoning": null,
+  "circulation": "entry ramp/bridge into a circulation zone separating a closed layer from an open layer",
+  "orientation": null,
+  "section": "three floors; a double-height open layer",
+  "outdoor_relation": "entry by a long ramp/bridge",
+  "diagram_themes": [
+    "structure",
+    "natural light",
+    "massing",
+    "plan to section",
+    "circulation to use-space",
+    "unit to whole",
+    "repetitive to unique",
+    "symmetry and balance",
+    "geometry",
+    "additive and subtractive",
+    "hierarchy",
+    "parti"
+  ],
+  "notes": "Closed front layer of cellular rooms and an open rear layer; the parti diagram shows two parallel bands. Rooms are not labelled at the book's drawing scale, so rooms, adjacency and zoning are not recorded. storeys = number of floor plans published (null where sections show more levels than plans).",
+  "verified": "2026-09-25 by Claude: drawing page and analytic-diagram page read as page images"
+}

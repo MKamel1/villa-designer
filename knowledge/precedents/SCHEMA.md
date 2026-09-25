@@ -39,7 +39,21 @@ pages have been read, including the analytic diagrams as page images
 
 The book's diagram vocabulary: structure, natural light, massing, plan to
 section, circulation to use-space, unit to whole, repetitive to unique,
-symmetry and balance, geometry, additive and subtractive, hierarchy.
+symmetry and balance, geometry, additive and subtractive, hierarchy, parti.
+
+Extra fields in use:
+- `location_as_printed`;
+- `hemisphere` (north or south, from the printed location);
+- `level_of_detail: "room graph"` with `entrance` and a `kind` per room.
+  `kind` is archpipe's classification of the book's label (public, private,
+  circulation, service, exterior) and is not in the source.
+
+**Two levels of record.**
+- *Precedents in Architecture* records are **parti level**. Their plans
+  are unlabelled at print scale, so `rooms`, `adjacency` and `zoning` are
+  null, and they do not feed room-level calibration.
+- The `mitton-*` records are **room graphs** read from labelled bubble
+  diagrams. They drive the critic's graph calibration.
 
 **Rules**
 - Record what the source shows. An unknown value is `null`, never a guess.
@@ -47,6 +61,11 @@ symmetry and balance, geometry, additive and subtractive, hierarchy.
   themes whose diagrams were read.
 - Climate is recorded so a precedent is not transplanted blindly. A
   southern-hemisphere house faces the sun to the north.
-- The calibration test (`tests/test_concept_calibration.py`, planned) runs
-  the critic on every record against seeded-bad mutations: rooms without
-  windows, private rooms reached through the living room, split wet stacks.
+- The calibration test (`tests/test_concept_calibration.py`) runs the
+  critic on every room-graph record and on seeded-bad mutations:
+  - private rooms reached through a living space;
+  - a WC reached only through a bedroom;
+  - a room with no door.
+
+  Geometric calibration needs a labelled, dimensioned published plan. None
+  is held yet, so it is skipped with that reason (ADR-0016).
