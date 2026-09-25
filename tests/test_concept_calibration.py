@@ -84,7 +84,7 @@ class GeometryCalibration(unittest.TestCase):
     the workstation; the recorded aggregate results are knowledge/precedents/cubicasa-calibration.json."""
     import json as _json
     REC = _json.loads((critic.ROOT / "knowledge/precedents/cubicasa-calibration.json").read_text(encoding="utf-8"))
-    FINAL = REC["runs"][2]["result"]
+    FINAL = next(r["result"] for r in REC["runs"] if "FINAL" in r["run"] and r["run"].startswith("4:"))
 
     def test_window_check_passed_the_final_held_out_gate(self):
         self.assertGreaterEqual(self.FINAL["quiet_rate"]["window"], self.FINAL["gate"])

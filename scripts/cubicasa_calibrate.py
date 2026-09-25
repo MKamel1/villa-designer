@@ -32,6 +32,14 @@ connections, and balcony doors counted as entrances. Fix 2: door openings
 are masked out of open-plan detection; an entrance is a door with nothing
 mapped outside it (else a hall door onto a mapped porch). The final gate is
 judged on plans 601-900 (--skip 600).
+
+Third run (plans 601-900): window PASSED (95.0 %), reachability FAILED
+(87.3 %). The cause, found on plan high_quality/9480, was not door matching
+(11 of 12 doors reach two rooms): reachability started from a plant-room door
+while the real front door opens onto a mapped porch. Amendment 3: the outside
+is one node, joined to every mapped outdoor space and every external door;
+reachability runs from it. Judged on plans 901-1200 (--skip 900); the window
+check is unchanged and is re-reported there too.
 """
 from __future__ import annotations
 

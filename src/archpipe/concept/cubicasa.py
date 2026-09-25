@@ -29,6 +29,7 @@ CIRCULATION = {"Entry", "HallWay", "DraughtLobby", "Hall", "StairWell"}
 SANITARY = {"Bath", "Sauna"}
 OUTSIDE_ROOMS = {"Outdoor"}
 UNKNOWN = {"Undefined", "UserDefined"}      # no stated use: shafts, voids, other units
+OUT = "OUTSIDE"
 GROW = 3            # px a door/window polygon is grown to reach the rooms beside the wall
 OPEN_MIN = 6        # px of direct room-to-room contact that counts as an open connection
 
@@ -138,10 +139,17 @@ def graph(rec):
     types = {rid: r["type"] for rid, r in rec["rooms"].items()}
     kind = {rid: ("private" if t in PRIVATE else "public" if t in PUBLIC else "circulation" if t in CIRCULATION
                   else "exterior" if t in OUTSIDE_ROOMS else "service") for rid, t in types.items()}
-    ent = sorted(set(entrances) or set(porch), key=lambda r: (types[r] not in CIRCULATION, r))
+    # the outside is one place (amendment 3): joined to every mapped outdoor space and every room with an
+    # external door; reachability runs from it. The main entrance (for privacy / WC access) prefers a hall.
+    external = set(entrances) | set(porch)
+    ent = sorted(external, key=lambda r: (types[r] not in CIRCULATION, r))
+    for r, t in types.items():
+        if t in OUTSIDE_ROOMS or r in external:
+            edges.add((OUT, r) if OUT < r else (r, OUT))
+    kind[OUT], types[OUT], windows[OUT] = "exterior", "Outside", 0
     return {"rooms": kind, "types": types, "connections": [list(e) for e in sorted(edges)],
             "open": [list(e) for e in sorted(open_edges)],
-            "entrance": ent[0] if ent else None, "entrances": ent,
+            "entrance": ent[0] if ent else None, "entrances": [OUT] if ent else [],
             "exempt": sorted(r for r, t in types.items() if t in UNKNOWN or t in OUTSIDE_ROOMS),
             "sanitary": [r for r, t in types.items() if t in SANITARY], "windows": windows}
 

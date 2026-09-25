@@ -77,3 +77,13 @@ The client approved CubiCasa5k (CC BY-NC-SA 4.0; only aggregate results are stor
 **Checks that need a scale** (area, width, wet stack): still not calibrated, because CubiCasa has no absolute scale.
 
 Generated concepts therefore stay diagnostic.
+
+**Update (run 4, plans 901–1200, fresh):** the run-3 reachability failures were not door matching. Reachability started from a plant-room door while the real front door opened onto a mapped porch.
+
+Amendment 3 treats the outside as one node, joined to every mapped outdoor space and every external door. On fresh plans:
+- **Reachability: now calibrated.** Quiet on 95.7 %, and caught 300 of 300 seeded defects.
+- **Window:** quiet on 94.0 %, and caught 284 of 300.
+
+Caveat: 40 plans with no detectable external door were excluded by the sampling rule.
+
+The checks that need a scale remain uncalibrated, so generated concepts stay diagnostic for area, width and wet-stack.

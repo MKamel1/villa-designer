@@ -97,6 +97,38 @@
    "verdict": "window PASSED (95.0 %); reachability FAILED (87.3 %). Remaining flags come from door-to-room association across thick walls (whole plans unreachable) - an extraction limit, not a check definition."
   },
   {
+   "run": "4: plans 901-1200 (fresh), amendment 3 (outside as one node) - FINAL",
+   "result": {
+    "sample": 300,
+    "skipped": {
+     "floors": 465,
+     "no_bed_or_living": 630,
+     "no_entrance": 40,
+     "parse_error": 0
+    },
+    "quiet_rate": {
+     "window": 0.94,
+     "reachability": 0.957,
+     "private_access": 0.56,
+     "wc_access": 0.993
+    },
+    "mutation_detected": {
+     "window": 284,
+     "reachability": 300
+    },
+    "gate": 0.9,
+    "by_subset": {
+     "high_quality_architectural": {
+      "window": 0.94,
+      "reachability": 0.957,
+      "n": 300
+     }
+    },
+    "gate_pass": true
+   },
+   "verdict": "window PASSED (94.0 %, 284/300 seeded defects); reachability PASSED (95.7 %, 300/300). 40 plans with no detectable external door were excluded by the sampling rule; the result applies to plans with a detectable entrance."
+  },
+  {
    "run": "diagnostic only: run-1 plans re-scored with final checks (not a gate: these plans were used to design the amendment)",
    "result": {
     "sample": 300,
@@ -134,8 +166,9 @@
   }
  ],
  "status": {
-  "window": "calibrated on real plans (final held-out gate passed)",
-  "reachability": "NOT calibrated (final held-out gate failed, 87.3 % < 90 %); next: associate doors to rooms across wall thickness, judge on plans 901-1200",
-  "window_seeded_recall": "277 of 300 on the final sample: 23 bedrooms read as open to a neighbour through gaps in drawn walls (extraction)"
+  "window": "calibrated on real plans (runs 3 and 4, fresh samples: 95.0 % and 94.0 % quiet)",
+  "reachability": "calibrated on real plans (run 4, fresh sample: 95.7 % quiet, 300/300 seeded defects); run 3 failed at 87.3 % before amendment 3",
+  "privacy_and_wc": "base rates only on real apartments (privacy quiet 56 %: bedrooms off living rooms or kitchens are common in Finnish flats); calibrated against published graphs instead",
+  "dimensioned_checks": "not calibrated: CubiCasa has no absolute scale"
  }
 }
