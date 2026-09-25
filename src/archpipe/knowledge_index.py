@@ -80,6 +80,21 @@ def _edge_numbers(text: str) -> list[int]:
     return [int(t) for t in _edge_tokens(text) if t.isdigit()]
 
 
+_HEAD = re.compile(r"^(\d{1,2}[.\-–]\d{1,3})\s+\D|\D\s+(\d{1,2}[.\-–]\d{1,3})$")
+
+
+def _running_head(text: str) -> str:
+    """A chapter-page number ('22-4 Houses and flats', 'Auditoria 15-11') on the first or
+    last line; section numbers further down ('22.3 Typical ...') are ignored."""
+    lines = [l.strip() for l in text.splitlines() if l.strip()]
+    for l in lines[:1] + lines[-1:]:
+        m = _HEAD.search(l) if len(l) <= 80 else None
+        if m:
+            return (m.group(1) or m.group(2)).replace("–", "-")
+    toks = [x for x in _edge_tokens(text) if not x.isdigit()]
+    return toks[0] if len(set(toks)) == 1 else ""
+
+
 def _decode_label(label: str) -> str:
     """Some PDFs store labels as UTF-16 hex ('<FEFF0034...>')."""
     m = re.fullmatch(r"<FEFF([0-9A-Fa-f]+)>(.*)", label or "")
@@ -125,10 +140,7 @@ def page_labels(doc, texts: list[str]) -> tuple[list[str], str]:
         off, support = offsets.most_common(1)[0]
         if support >= 5:
             cands[f"header/footer offset {off:+d}"] = [str(i + off) if i + off > 0 else "" for i in range(n)]
-    chap = []
-    for t in texts:     # chapter-page tokens read directly from each page
-        toks = [x for x in _edge_tokens(t) if not x.isdigit()]
-        chap.append(toks[0] if len(set(toks)) == 1 else "")
+    chap = [_running_head(t) for t in texts]     # chapter-page tokens read from each page
     if sum(1 for c in chap if c) > 0.3 * n:
         cands["printed chapter-page numbers"] = chap
     if not cands:

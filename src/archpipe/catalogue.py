@@ -169,8 +169,11 @@ PLANNING = {
 
 # Minimum floor areas by occupancy, mm^2 handled as m^2 here.
 MIN_AREA_M2 = {
-    "bedroom_single": (8.0,  "Neufert, Architects' Data -- minimum single bedroom"),
-    "bedroom":        (12.0, "Neufert, Architects' Data -- minimum double bedroom"),
+    # Verified 2026-09-25: Metric Handbook 7th ed., p. 22-4, quoting England's Nationally
+    # Described Space Standard (evidence cards ndss-*; knowledge/rule-evidence.json).
+    # Legacy Neufert values (8.0 / 12.0 m2) had no verified passage.
+    "bedroom_single": (7.5,  "Metric Handbook 7th ed. (2022) p. 22-4 -- NDSS: single bedroom at least 7.5 m2"),
+    "bedroom":        (11.5, "Metric Handbook 7th ed. (2022) p. 22-4 -- NDSS: double (or twin) bedroom at least 11.5 m2"),
     "living":         (16.0, "Neufert, Architects' Data -- minimum living room for a small dwelling"),
     "kitchen":        (6.0,  "Neufert, Architects' Data -- minimum separate kitchen"),
     "bathroom":       (3.5,  "Neufert, Architects' Data -- minimum bathroom with WC, basin and bath/shower"),

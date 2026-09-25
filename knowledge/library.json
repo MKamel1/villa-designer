@@ -2542,6 +2542,266 @@
       "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ndss-single-bedroom-area",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 Houses and flats, s.2.2 National Technical Housing Standards (printed page 22-4)",
+      "stages": [
+        4
+      ],
+      "summary": "A single bedroom has a floor area of at least 7.5 m2.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "m2",
+      "verified_value": 7.5,
+      "original_page_checked": true,
+      "conditions": "England's Nationally Described Space Standard (2015) as quoted in the Metric Handbook; used as a published best-practice benchmark for dwelling rooms, not a statement of code compliance.",
+      "exceptions": "Built-in wardrobe area counts, but may not reduce the minimum width.",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ndss-single-bedroom-width",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 Houses and flats, s.2.2 National Technical Housing Standards (printed page 22-4)",
+      "stages": [
+        4
+      ],
+      "summary": "A single bedroom is at least 2.15 m wide.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 2150,
+      "original_page_checked": true,
+      "conditions": "England's Nationally Described Space Standard (2015) as quoted in the Metric Handbook; used as a published best-practice benchmark for dwelling rooms, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ndss-double-bedroom-area",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 Houses and flats, s.2.2 National Technical Housing Standards (printed page 22-4)",
+      "stages": [
+        4
+      ],
+      "summary": "A double (or twin) bedroom has a floor area of at least 11.5 m2.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "m2",
+      "verified_value": 11.5,
+      "original_page_checked": true,
+      "conditions": "England's Nationally Described Space Standard (2015) as quoted in the Metric Handbook; used as a published best-practice benchmark for dwelling rooms, not a statement of code compliance.",
+      "exceptions": "Built-in wardrobe area counts, but may not reduce the minimum width.",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ndss-first-double-bedroom-width",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 Houses and flats, s.2.2 National Technical Housing Standards (printed page 22-4)",
+      "stages": [
+        4
+      ],
+      "summary": "One double (or twin) bedroom is at least 2.75 m wide.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 2750,
+      "original_page_checked": true,
+      "conditions": "England's Nationally Described Space Standard (2015) as quoted in the Metric Handbook; used as a published best-practice benchmark for dwelling rooms, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ndss-other-double-bedroom-width",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 Houses and flats, s.2.2 National Technical Housing Standards (printed page 22-4)",
+      "stages": [
+        4
+      ],
+      "summary": "Every other double (or twin) bedroom is at least 2.55 m wide.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 2550,
+      "original_page_checked": true,
+      "conditions": "England's Nationally Described Space Standard (2015) as quoted in the Metric Handbook; used as a published best-practice benchmark for dwelling rooms, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mitton-path-of-travel-min",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 3, Circulation Accessibility Checklist (printed page 68)",
+      "stages": [
+        4
+      ],
+      "summary": "Hallways and/or paths of travel must be a minimum of 36 inches (914 mm) wide.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 914,
+      "original_page_checked": true,
+      "conditions": "Accessibility checklist for residential circulation (US practice); applies to paths of travel, including routes through rooms.",
+      "exceptions": "Wheelchair turning needs a 1524 mm circle or a T-turn in addition.",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "nkba-work-aisle-one-cook",
+      "source_id": "nkba-kitchen-guidelines-free",
+      "edition": "free edition based on IRC 2015 and ICC A117.1-2009 (NKBA)",
+      "locator": "Kitchen Guideline: Work Aisle (printed page 6)",
+      "stages": [
+        4
+      ],
+      "summary": "Work aisle at least 42 in (1067 mm) for one cook.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 1067,
+      "original_page_checked": true,
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice). Measured between counter frontage, tall cabinets and/or appliances unless stated.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "nkba-work-aisle-multi-cook",
+      "source_id": "nkba-kitchen-guidelines-free",
+      "edition": "free edition based on IRC 2015 and ICC A117.1-2009 (NKBA)",
+      "locator": "Kitchen Guideline: Work Aisle (printed page 6)",
+      "stages": [
+        4
+      ],
+      "summary": "Work aisle at least 48 in (1219 mm) for multiple cooks.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 1219,
+      "original_page_checked": true,
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice). Measured between counter frontage, tall cabinets and/or appliances unless stated.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "nkba-walkway-min",
+      "source_id": "nkba-kitchen-guidelines-free",
+      "edition": "free edition based on IRC 2015 and ICC A117.1-2009 (NKBA)",
+      "locator": "Kitchen Guideline: Walkway (printed page 8)",
+      "stages": [
+        4
+      ],
+      "summary": "Walkway at least 36 in (914 mm) wide.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 914,
+      "original_page_checked": true,
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice). Measured between counter frontage, tall cabinets and/or appliances unless stated.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "nkba-walkway-perpendicular",
+      "source_id": "nkba-kitchen-guidelines-free",
+      "edition": "free edition based on IRC 2015 and ICC A117.1-2009 (NKBA)",
+      "locator": "Kitchen Guideline: Walkway, access standard (printed page 8)",
+      "stages": [
+        4
+      ],
+      "summary": "Where two walkways are perpendicular, one is at least 42 in (1067 mm) wide.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 1067,
+      "original_page_checked": true,
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice). Measured between counter frontage, tall cabinets and/or appliances unless stated.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "nkba-seating-no-traffic",
+      "source_id": "nkba-kitchen-guidelines-free",
+      "edition": "free edition based on IRC 2015 and ICC A117.1-2009 (NKBA)",
+      "locator": "Kitchen Guideline: Seating clearance (printed page 8)",
+      "stages": [
+        4
+      ],
+      "summary": "Where no traffic passes behind a seated diner, 32 in (813 mm) from counter/table edge to the wall or obstruction behind.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 813,
+      "original_page_checked": true,
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice). Measured between counter frontage, tall cabinets and/or appliances unless stated.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "nkba-dishwasher-to-sink-max",
+      "source_id": "nkba-kitchen-guidelines-free",
+      "edition": "free edition based on IRC 2015 and ICC A117.1-2009 (NKBA)",
+      "locator": "Kitchen Guideline: Dishwasher placement (printed page 15)",
+      "stages": [
+        4
+      ],
+      "summary": "Nearest edge of the primary dishwasher within 36 in (914 mm) of the nearest edge of a cleanup/prep sink.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 914,
+      "original_page_checked": true,
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice). Measured between counter frontage, tall cabinets and/or appliances unless stated.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "nkba-dishwasher-standing-space",
+      "source_id": "nkba-kitchen-guidelines-free",
+      "edition": "free edition based on IRC 2015 and ICC A117.1-2009 (NKBA)",
+      "locator": "Kitchen Guideline: Dishwasher placement (printed page 15)",
+      "stages": [
+        4
+      ],
+      "summary": "At least 21 in (533 mm) standing space between the dishwasher edge and frontage placed at a right angle.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 533,
+      "original_page_checked": true,
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice). Measured between counter frontage, tall cabinets and/or appliances unless stated.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

@@ -24,6 +24,25 @@ ORIGINAL = {
                                      ["775\n1050 (when approach is not head-on)"]),
     "ukadm-door-800-corridor-side": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 24,
                                      ["800\n900 (when approach is not head-on)"]),
+    "ndss-single-bedroom-area": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 447,
+                                 ["single bedroom has a floor area of at least 7.5 m2"]),
+    "ndss-single-bedroom-width": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 447,
+                                  ["is at least 2.15 m wide"]),
+    "ndss-double-bedroom-area": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 447,
+                                 ["has a floor area of at least 11.5 m2"]),
+    "ndss-first-double-bedroom-width": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 447,
+                                        ["is at least 2.75 m wide"]),
+    "ndss-other-double-bedroom-width": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 447,
+                                        ["at least 2.55 m wide"]),
+    "mitton-path-of-travel-min": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 79,
+                                  ["paths of travel must be a minimum of", "36 inches (914 mm) wide"]),
+    "nkba-work-aisle-one-cook": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 5, ["work aisle should be at least 42″ (1067 mm) for one cook"]),
+    "nkba-work-aisle-multi-cook": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 5, ["at least 48″ (1219 mm) for multiple cooks"]),
+    "nkba-walkway-min": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 7, ["width of a walkway should be at least 36″ (914 mm)"]),
+    "nkba-walkway-perpendicular": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 7, ["one walkway should be at least 42″ (1067 mm) wide"]),
+    "nkba-seating-no-traffic": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 7, ["allow 32″ (813 mm) of clearance"]),
+    "nkba-dishwasher-to-sink-max": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 14, ["dishwasher within 36″ (914 mm) of the nearest edge"]),
+    "nkba-dishwasher-standing-space": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 14, ["(533 mm) of standing space"]),
     "ukadm-entrance-door-min": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 14,
                                 ["minimum clear opening width of 775mm"]),
 }
@@ -61,11 +80,41 @@ class NumericalCardTests(unittest.TestCase):
                 missing.append(rel)
                 continue
             with pymupdf.open(path) as doc:
-                text = doc[page].get_text().replace("\t", " ")
+                text = " ".join(doc[page].get_text().split())   # layout whitespace is not content
             for n in needles:
-                self.assertIn(n, text, f"{key}: '{n}' not on page index {page} of {rel}")
+                self.assertIn(" ".join(n.split()), text, f"{key}: '{n}' not on page index {page} of {rel}")
         if missing:
             self.skipTest("originals not held on this machine: " + ", ".join(sorted(set(missing))))
+
+
+class RuleAuditTests(unittest.TestCase):
+    """The audit reports what the rule engine actually uses, against verified cards."""
+
+    def test_verified_bedroom_areas_are_the_values_in_use(self):
+        rows = {r["id"]: r for r in g.rule_audit()}
+        p = rows["AREA-01"]["parameters"]
+        self.assertTrue(p["MIN_AREA_M2.bedroom"]["verified"])
+        self.assertEqual(p["MIN_AREA_M2.bedroom"]["used"], 11.5)
+        self.assertFalse(p["MIN_AREA_M2.living"]["verified"])
+        self.assertEqual(rows["AREA-01"]["status"], "partly verified")
+        self.assertFalse(any(r["enabled_for_approval"] for r in rows.values()))
+
+    def test_a_changed_catalogue_value_unverifies_the_parameter(self):
+        from archpipe import catalogue as cat
+        old = cat.MIN_AREA_M2["bedroom"]
+        try:
+            cat.MIN_AREA_M2["bedroom"] = (12.0, old[1])
+            p = {r["id"]: r for r in g.rule_audit()}["AREA-01"]["parameters"]["MIN_AREA_M2.bedroom"]
+            self.assertFalse(p["verified"])
+        finally:
+            cat.MIN_AREA_M2["bedroom"] = old
+
+    def test_map_values_match_the_engine(self):
+        import json
+        m = json.loads((src.ROOT / "knowledge/rule-evidence.json").read_text(encoding="utf-8"))["rules"]
+        for rule, entry in m.items():
+            for key, p in entry["parameters"].items():
+                self.assertEqual(g.catalogue_value(key), p["value"], f"{rule} {key}")
 
 
 class BriefTargetTests(unittest.TestCase):

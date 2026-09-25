@@ -112,13 +112,50 @@ def lookup_evidence(query='', stage=None, facts=None, limit=8, root=ROOT):
             'unresolved': [] if candidates else ['No matching verified or identified evidence; do not invent a passage.']}
 
 
-def rule_audit():
+def catalogue_value(key):
+    """'MIN_AREA_M2.bedroom' / 'PLANNING.corridor_min' -> the number the rule engine uses."""
+    from . import catalogue as cat
+    table, name = key.split('.', 1)
+    return getattr(cat, table)[name][0]
+
+
+def rule_audit(root=ROOT):
+    """Per rule: which numbers are backed by a verified, edition-specific passage.
+
+    knowledge/rule-evidence.json maps a rule's parameters to evidence cards. A
+    parameter is verified only if the card passes numerical_target with the value
+    the rule engine actually uses. A rule is enabled for approval only when every
+    parameter is verified AND its map entry says the mapping is complete (qualitative
+    parts of a rule are not numbers and stay advisory)."""
     from .rules import RULES
-    return [{'id': rule.id, 'stage': rule.stage, 'kind': rule.kind,
-             'reference': rule.reference, 'evidence_refs': list(rule.evidence_refs),
-             'status': 'unresolved', 'enabled_for_approval': False,
-             'reason': 'Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only.'}
-            for rule in RULES.values()]
+    data = library(root)
+    path = root / 'knowledge/rule-evidence.json'
+    rmap = json.loads(path.read_text(encoding='utf-8'))['rules'] if path.is_file() else {}
+    rows = []
+    for rule in RULES.values():
+        entry = rmap.get(rule.id)
+        row = {'id': rule.id, 'stage': rule.stage, 'kind': rule.kind, 'reference': rule.reference,
+               'evidence_refs': list(rule.evidence_refs), 'status': 'unresolved', 'enabled_for_approval': False,
+               'reason': 'Readable citation has no verified edition-specific passage. Legacy computation is diagnostic only.'}
+        if entry:
+            params = {}
+            for key, p in entry['parameters'].items():
+                used = catalogue_value(key)
+                ok, why = False, p.get('reason', '')
+                if p.get('card'):
+                    card = data['evidence'].get(p['card'])
+                    res = numerical_target(card, data['sources'], used, p['unit']) if card else {'enabled': False, 'reasons': ['card missing']}
+                    ok = res['enabled'] and p.get('status') == 'verified'
+                    why = '; '.join(res['reasons']) if not res['enabled'] else ''
+                    row['evidence_refs'].append(p['card'])
+                params[key] = {'used': used, 'unit': p['unit'], 'verified': ok, 'card': p.get('card'), 'reason': why}
+            n_ok = sum(1 for v in params.values() if v['verified'])
+            row['parameters'] = params
+            row['status'] = ('verified' if n_ok == len(params) else 'partly verified' if n_ok else 'unresolved')
+            row['enabled_for_approval'] = row['status'] == 'verified' and bool(entry.get('complete'))
+            row['reason'] = f'{n_ok} of {len(params)} numerical parameters verified'
+        rows.append(row)
+    return rows
 
 
 def artifact_status(record, root=ROOT):

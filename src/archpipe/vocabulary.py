@@ -71,7 +71,7 @@ OCCUPANCIES: dict[str, Occupancy] = {o.term: o for o in (
        note="Habitable: a room worked in all day needs daylight and width."),
     _o("bedroom", "Bedroom", "habitable", "private"),
     _o("bedroom_single", "Bedroom, single", "habitable", "private",
-       note="Sizing variant. catalogue.MIN_AREA_M2 carries a separate 8.0 m2 "
+       note="Sizing variant. catalogue.MIN_AREA_M2 carries a separate 7.5 m2 "
             "minimum for it, so it is reachable as an occupancy and is a term "
             "here rather than a lookup key only."),
     # ---- sanitary ------------------------------------------------------

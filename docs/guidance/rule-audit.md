@@ -35,3 +35,26 @@ legacy rules still cite Neufert and remain diagnostic. They get restructured
 to reference verified cards, and their applicability, in the rule-verification
 step (W1b). CIRC-03 checks routes between furniture inside a room, and AD M's
 hall width does not apply to that.
+
+## Rules mapped to verified evidence (2026-09-25)
+
+`knowledge/rule-evidence.json` maps each rule's numerical parameters to
+evidence cards. `guidance.rule_audit()` marks a parameter verified only when
+the value the engine uses equals a verified card's value, in the card's unit.
+
+| Rule | State | What changed |
+|---|---|---|
+| AREA-01 | partly verified | Bedroom minimums changed to 11.5 m² (double) and 7.5 m² (single), per Metric Handbook 7th ed. p. 22-4 quoting NDSS. The legacy values were 12.0 and 8.0 (unsourced Neufert). Living, kitchen, bathroom and WC areas are unresolved. |
+| CIRC-01 | partly verified | Hall width 900 mm matches AD M M4(2) para 2.22a. Its privacy test stays qualitative (Alexander 127). |
+| CIRC-03 | unresolved | The route through a room needs a path-of-travel width: Mitton p. 68 gives 914 mm, and AD M's 900 mm applies to halls. A decision is needed. |
+| DIM-01 | unresolved | The generic 2.4 m has no source. NDSS gives widths by room type (2.15, 2.75 and 2.55 m). Split the rule by room type. |
+| DOOR-01 | unresolved | AD M ties door width to how the corridor approaches it (Table 2.1), not to room type. The AD M entrance minimum is 775 mm; the legacy value is 900 mm. |
+
+**Kitchen planning evidence** (NKBA, free edition): work aisle 1067 mm for one
+cook and 1219 mm for several; walkway 914 mm; one of two perpendicular
+walkways 1067 mm; seating with no traffic behind 813 mm; dishwasher within
+914 mm of the sink; 533 mm standing space beside the dishwasher. These are
+ready for a kitchen checker; no rule uses them yet.
+
+No rule is enabled for approval yet: that needs every parameter verified and
+the mapping marked complete.

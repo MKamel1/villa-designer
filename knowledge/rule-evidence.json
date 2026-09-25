@@ -1,0 +1,113 @@
+{
+  "date": "2026-09-25",
+  "rules": {
+    "AREA-01": {
+      "parameters": {
+        "MIN_AREA_M2.bedroom": {
+          "value": 11.5,
+          "unit": "m2",
+          "card": "ndss-double-bedroom-area",
+          "status": "verified"
+        },
+        "MIN_AREA_M2.bedroom_single": {
+          "value": 7.5,
+          "unit": "m2",
+          "card": "ndss-single-bedroom-area",
+          "status": "verified"
+        },
+        "MIN_AREA_M2.living": {
+          "value": 16.0,
+          "unit": "m2",
+          "status": "unresolved",
+          "reason": "no held source gives a minimum living-room area; NDSS sets whole-dwelling areas instead"
+        },
+        "MIN_AREA_M2.kitchen": {
+          "value": 6.0,
+          "unit": "m2",
+          "status": "unresolved",
+          "reason": "not yet found in a held source"
+        },
+        "MIN_AREA_M2.bathroom": {
+          "value": 3.5,
+          "unit": "m2",
+          "status": "unresolved",
+          "reason": "not yet found in a held source"
+        },
+        "MIN_AREA_M2.wc": {
+          "value": 1.4,
+          "unit": "m2",
+          "status": "unresolved",
+          "reason": "not yet found in a held source"
+        }
+      }
+    },
+    "DIM-01": {
+      "parameters": {
+        "PLANNING.room_min_width": {
+          "value": 2400,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "published widths are per room type (NDSS: single 2150, first double 2750, other double 2550); the single generic 2400 has no source. Split the rule by room type.",
+          "candidates": [
+            "ndss-single-bedroom-width",
+            "ndss-first-double-bedroom-width",
+            "ndss-other-double-bedroom-width"
+          ]
+        }
+      }
+    },
+    "CIRC-03": {
+      "parameters": {
+        "PLANNING.corridor_min": {
+          "value": 900,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "the route-through-room check needs a path-of-travel width: Mitton gives 914 mm (accessible paths); AD M's 900 mm is for halls and landings. Decision needed on which applies.",
+          "candidates": [
+            "mitton-path-of-travel-min",
+            "ukadm-hall-min-m42"
+          ]
+        }
+      }
+    },
+    "CIRC-01": {
+      "parameters": {
+        "PLANNING.corridor_min": {
+          "value": 900,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-hall-min-m42",
+          "note": "hall and landing width in an M4(2) dwelling; the rule's privacy test is qualitative (Alexander 127)"
+        }
+      }
+    },
+    "DOOR-01": {
+      "parameters": {
+        "PLANNING.door_clear_entrance": {
+          "value": 900,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "AD M: principal private entrance 775 mm minimum (ukadm-entrance-door-min); legacy 900 unsourced",
+          "candidates": [
+            "ukadm-entrance-door-min"
+          ]
+        },
+        "PLANNING.door_clear_habitable": {
+          "value": 800,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "AD M ties door width to how the corridor approaches it (750/775/800 with 900-1200 corridors), not to room type",
+          "candidates": [
+            "ukadm-door-800-corridor-side"
+          ]
+        },
+        "PLANNING.door_clear_wc": {
+          "value": 700,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "not yet found"
+        }
+      }
+    }
+  }
+}
