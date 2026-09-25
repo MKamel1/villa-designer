@@ -166,3 +166,14 @@ the abstract connectivity graph passed. The diagram now reserves an entrance
 strip; graph checks alone cannot establish plan geometry. Keep an explicit
 diagram/graph comparison in the Order review, and mark incomplete narrative
 facts missing or assumed rather than calling a generic pointer a known input.
+
+## Product library and thermal (2026-09-24)
+
+| Observed | Why it was missed | Guard now |
+|---|---|---|
+| A good texture (Poly Haven brown_leather) failed `maps_complete` | Map roles were guessed from file names (`_diff_`); this asset names its base map `_albedo_` | The source's role label wins (`find_maps(files=...)`); `tests/test_products.py` |
+| A good model failed `polycount_match` (10 296 vs 2 548) | The published count's definition (base vs exported, subdivided mesh) is unstated | polycount is `not_checkable` with both numbers; size stays the gate |
+| A model genuinely disagrees with its metadata (desk_lamp_arm_01 depth 202 vs 408 mm) | Nothing: the check caught it | Reported as failed, never repaired |
+| The thermal hand check failed north by 16 % | It compared TOTAL solar with an isotropic sky; EnergyPlus uses Perez (north sky diffuse −17 %, south +34 %) | The check asserts beam only (within 0.7 %); totals are information; `tests/test_thermal.py` stops the change being reverted |
+| EnergyPlus fatal errors returned zeros | A fatal run still leaves an empty SQLite file | `run_case` reads the `.err` log and raises on Fatal |
+| Thermal results were 3.6 million times too small | Ladybug already converts joules to kWh | Units are asserted per collection (`kWh`) |

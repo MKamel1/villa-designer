@@ -165,9 +165,10 @@ targets and a coordinated ceiling plan.
 
 Electric lighting is specified before it is chosen. For each lighting role, write
 the requirement and its reason. Then pick two widely available products from
-different ranges that meet it, confirmed to exist and be sold in the project's
-market, and design with their exact manufacturer data (primary plus a verified
-alternate). Renders and lux calculations use those products, never generic
+different ranges that meet it, each confirmed to exist, and design with their exact
+manufacturer data (primary plus a verified alternate). A market filter is optional:
+the design states intent and the closest match is sourced locally at procurement.
+Renders and lux calculations use those products, never generic
 stand-ins ([ADR-0014](../decisions/ADR-0014-luminaire-library.md)).
 
 Earlier lighting numbers and layer counts were not verified universal residential

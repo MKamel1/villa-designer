@@ -43,10 +43,11 @@ Deliver: comfort_schedule, coordinated_ceiling, service_access, window_study, li
 - Equipment maintenance access shown
 - Measured light distinguished from comfort targets
 - Lighting schedule of real products: for every lighting role, a written specification
-  (colour temperature, CRI, lumens, beam, size, IP, mount, market) with its reason,
+  (colour temperature, CRI, lumens, beam, size, IP, mount) with its reason,
   then TWO widely available products from different ranges that meet it
-  (`scripts/luminaires.py propose`), each confirmed live on the manufacturer's site and
-  sold in the project's market. Both are downloaded, imported and verified, and the
+  (`scripts/luminaires.py propose`), each confirmed live on the manufacturer's site. A
+  market filter is optional: design to intent and match locally at procurement (client
+  decision 2026-09-24). Both are downloaded, imported and verified, and the
   spec carries `product` (primary) and `alternate`, tested against the same requirement
   (`install.candidate_report`). A shortfall is reported with the constraint that
   excluded the products, never quietly relaxed. See the `lighting-library` skill.

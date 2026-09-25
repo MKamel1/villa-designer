@@ -291,6 +291,26 @@ def search_luminaires(mount: str | None = None, lm_min: float | None = None, lm_
     return {'layer': 'verified library', 'rows': rows}
 
 
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False))
+def search_products(text: str | None = None, category: str | None = None, style: str | None = None,
+                    kind: str | None = None, include_unverified: bool = False, limit: int = 30) -> dict:
+    """Search the product library beyond luminaires: surfaces, fabrics, furniture, decor, plants.
+
+    kind 'appearance' = a render asset (PBR material or 3D model, CC0 sources);
+    kind 'product' = something that can be bought. A render asset standing in
+    for a product is a look-alike-proxy unless a link says otherwise. Only
+    VERIFIED rows (every computable check passed) unless include_unverified.
+    style oversamples a taste profile (warm_contemporary, japandi, ...); it
+    never excludes other styles from a design.
+    """
+    from archpipe.products import store
+    rows = store.search(kind=kind, category=category, text=text, style=style,
+                        include_unverified=include_unverified, limit=limit)
+    for r in rows:
+        r['checks'] = {c['name']: c['status'] for c in store.checks_for(r['id'])}
+    return {'rows': rows, 'note': 'not_checkable never counts as passed'}
+
+
 @mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=True))
 def propose_luminaires(mount: str, kelvin: float | None = None, lm_min: float | None = None,
                        lm_max: float | None = None, max_size_mm: float | None = None, ip_min: int | None = None,
