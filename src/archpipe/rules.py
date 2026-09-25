@@ -457,7 +457,8 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) fo
     ),
     Rule(
         "DOOR-01", "Door clear width", 4, "computed",
-        f"{_NEUFERT} -- doors: clear opening widths by room type",
+        "UK AD M Vol 1 (2015) para 2.20 (entrance 775 mm) and para 2.22c / Table 2.1 "
+        "(door width by the width and approach of the corridor serving it)",
         note="Only two rungs, and that is the honest length. A door is a "
              "component before it is a decision.",
         remedies=(
@@ -758,25 +759,49 @@ def r_room_min_width(p: Project, level: str) -> list[Finding]:
     return out
 
 
+def _long_axis_x(r: Room) -> bool:
+    xs = [pt[0] for pt in r.boundary]
+    ys = [pt[1] for pt in r.boundary]
+    return (max(xs) - min(xs)) >= (max(ys) - min(ys))
+
+
+def door_need(approach: Room | None, host: Wall) -> tuple[float, str, str]:
+    """AD M Table 2.1: minimum clear opening for a door served by `approach` (a corridor or a room)."""
+    t = cat.DOOR_BY_CORRIDOR
+    if approach is None:
+        return t["side_1200"][1], t["side_1200"][2], "no approach space found"
+    width = _narrow(approach)
+    wall_along_x = abs(host.direction[0]) > abs(host.direction[1])
+    head_on = wall_along_x != _long_axis_x(approach)    # door in an end wall of the passage
+    if head_on and width + 1e-6 >= t["headon_900"][0]:
+        return t["headon_900"][1], t["headon_900"][2], f"approached head on from {width:.0f} mm"
+    for key in ("side_1200", "side_1050", "side_900"):
+        if width + 1e-6 >= t[key][0]:
+            return t[key][1], t[key][2], f"approached from the side of a {width:.0f} mm passage"
+    return t["side_900"][1], t["side_900"][2], f"passage only {width:.0f} mm (below 900 mm; see CIRC)"
+
+
 def r_door_clear_width(p: Project, level: str) -> list[Finding]:
+    """Entrance: AD M 2.20. Internal doors: AD M 2.22c / Table 2.1, where the corridor serving the
+    door sets its width; a door between two rooms is taken as approached from the narrower room.
+    Cupboards and en-suites are outside 2.22 (Table 2.1 Note 1)."""
     out = []
     for o in p.openings:
         w = p.wall(o.host)
         if w.level != level or o.kind != "door":
             continue
         a, b = opening_sides(p, o)
-        external = a is None or b is None
-        target = [r for r in (a, b) if r is not None]
-        occ = target[0].occupancy if target else ""
-        if external:
+        rooms = [r for r in (a, b) if r is not None]
+        if a is None or b is None:
             need, src = cat.PLANNING["door_clear_entrance"]
             label = "a dwelling entrance"
-        elif occ in ("wc", "bathroom", "shower_room"):
-            need, src = cat.PLANNING["door_clear_wc"]
-            label = "a WC or bathroom"
+        elif any(r.occupancy in ("ensuite", "store") for r in rooms):
+            continue
         else:
-            need, src = cat.PLANNING["door_clear_habitable"]
-            label = "a habitable room"
+            circ = [r for r in rooms if r.occupancy in CIRCULATION]
+            approach = min(circ or rooms, key=_narrow)
+            need, src, how = door_need(approach, w)
+            label = f"a door {how}"
         if o.width + 1e-6 < need:
             out.append(_finding(
                 "DOOR-01", "violation",

@@ -98,30 +98,38 @@
     "DOOR-01": {
       "parameters": {
         "PLANNING.door_clear_entrance": {
+          "value": 775,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-entrance-door-min"
+        },
+        "DOOR_BY_CORRIDOR.headon_900": {
           "value": 900,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "AD M: principal private entrance 775 mm minimum (ukadm-entrance-door-min); legacy 900 unsourced",
-          "candidates": [
-            "ukadm-entrance-door-min"
-          ]
+          "status": "verified",
+          "card": "ukadm-door-750-corridor-headon"
         },
-        "PLANNING.door_clear_habitable": {
-          "value": 800,
+        "DOOR_BY_CORRIDOR.side_1200": {
+          "value": 1200,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "AD M ties door width to how the corridor approaches it (750/775/800 with 900-1200 corridors), not to room type",
-          "candidates": [
-            "ukadm-door-800-corridor-side"
-          ]
+          "status": "verified",
+          "card": "ukadm-door-750-corridor-side"
         },
-        "PLANNING.door_clear_wc": {
-          "value": 700,
+        "DOOR_BY_CORRIDOR.side_1050": {
+          "value": 1050,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "not yet found"
+          "status": "verified",
+          "card": "ukadm-door-775-corridor-side"
+        },
+        "DOOR_BY_CORRIDOR.side_900": {
+          "value": 900,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-door-800-corridor-side"
         }
-      }
+      },
+      "complete": true,
+      "decision": "Restructured 2026-09-25 from Neufert room-type widths (unverified) to AD M Table 2.1. A door between two rooms is read as approached from the narrower room (the table names corridors; this reading is ours). The WC-specific 700 mm had no source and is dropped: AD M applies Table 2.1 to every door except cupboards and additional en-suites."
     },
     "LIGHT-01": {
       "parameters": {

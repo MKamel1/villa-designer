@@ -9,7 +9,7 @@ The legacy engine remains available for diagnostic comparisons, preserving its t
 | CIRC-02 | 3 | Alexander, A Pattern Language -- 110 Main Entrance, 112 Entrance Transition, 130 Entrance Room; Neufert, Architects' Data -- entrances: a draught lobby or threshold zone | Unresolved; diagnostic only |
 | AREA-01 | 4 | Neufert, Architects' Data -- minimum floor areas by room type | Unresolved; diagnostic only |
 | DIM-01 | 4 | General practice: below ~2.4 m a room will not take a bed plus circulation | Unresolved; diagnostic only |
-| DOOR-01 | 4 | Neufert, Architects' Data -- doors: clear opening widths by room type | Unresolved; diagnostic only |
+| DOOR-01 | 4 | UK AD M Vol 1 para 2.20 and Table 2.1 | Verified 2026-09-25 (see below) |
 | FURN-01 | 4 | Geometric clash against the wall solid; footprints from Neufert, Architects' Data | Unresolved; diagnostic only |
 | FURN-02 | 4 | Neufert, Architects' Data -- clearances by furniture type | Unresolved; diagnostic only |
 | FURN-03 | 4 | Geometric clash between footprints; footprints from Neufert, Architects' Data | Unresolved; diagnostic only |
@@ -50,7 +50,7 @@ the value the engine uses equals a verified card's value, in the card's unit.
 | LIGHT-01 | verified | Re-sourced 2026-09-25. The legacy 1/8 (12.5 %) was attributed to Neufert but is not in the held 1980 edition. The US code minimum (IRC R303.1, 8 %, quoted by Mitton p. 92) is the minimum-glazing screen; daylight adequacy is judged by SLL minimum ADF. |
 | CIRC-03 | verified | Client decision 2026-09-25: 900 mm (AD M M4(2) para 2.22a card). Mitton p. 68 gives 914 mm (36 in); the 1.6 % difference is within the close-values policy. Using the hall width for routes inside rooms is this decision, not AD M's own scope. |
 | DIM-01 | partly verified | Split by room type 2026-09-25. Bedrooms use NDSS via the Metric Handbook p. 22-4: single 2.15 m, other doubles 2.55 m, and one double of at least 2.75 m. Living, kitchen, dining and study keep the unsourced generic 2.4 m. |
-| DOOR-01 | unresolved | AD M ties door width to how the corridor approaches it (Table 2.1), not to room type. The AD M entrance minimum is 775 mm; the legacy value is 900 mm. |
+| DOOR-01 | verified | Restructured 2026-09-25 to UK AD M. The entrance needs 775 mm (para 2.20). Internal doors are set by the corridor serving them (Table 2.1): 750 mm head-on from 900 mm; side approach 750/775/800 mm from 1200/1050/900 mm. A door between two rooms is read as approached from the narrower room; that reading is ours. The unsourced 700 mm WC value is dropped. En-suites and cupboards are exempt (Note 1). |
 
 **Kitchen planning evidence** (NKBA, free edition): work aisle 1067 mm for one
 cook and 1219 mm for several; walkway 914 mm; one of two perpendicular

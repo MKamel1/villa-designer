@@ -158,9 +158,7 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
 PLANNING = {
     "corridor_min":        (900,  "Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling"),
     "corridor_preferred":  (1200, "Neufert, Architects' Data -- circulation: 1200 mm for two people to pass"),
-    "door_clear_habitable":(800,  "Neufert, Architects' Data -- doors: 800 mm clear width to habitable rooms"),
-    "door_clear_entrance": (900,  "Neufert, Architects' Data -- doors: 900 mm at a dwelling entrance"),
-    "door_clear_wc":       (700,  "Neufert, Architects' Data -- doors: 700 mm minimum to a WC"),
+    "door_clear_entrance": (775,  "UK AD M Vol 1 (2015) para 2.20 -- principal private entrance: 775 mm minimum clear opening"),
     "ceiling_min":         (2400, "General practice / common code minimum for habitable rooms; Neufert cites 2500 mm as preferred"),
     "wheelchair_turn":     (1500, "Neufert, Architects' Data -- accessibility: 1500 mm turning circle"),
     "daylight_ratio":      (0.08, "IRC R303.1 as quoted in Mitton & Nystuen, Residential Interior Design 4th ed. p. 92 -- glazing area at least 8 % of floor area in habitable rooms (code minimum; the unsourced legacy 1/8 was replaced 2026-09-25)"),
@@ -178,6 +176,16 @@ MIN_AREA_M2 = {
     "kitchen":        (6.0,  "Neufert, Architects' Data -- minimum separate kitchen"),
     "bathroom":       (3.5,  "Neufert, Architects' Data -- minimum bathroom with WC, basin and bath/shower"),
     "wc":             (1.4,  "Neufert, Architects' Data -- minimum separate WC compartment"),
+}
+
+
+# UK AD M Vol 1 (2015) Table 2.1: minimum door clear opening by the corridor that approaches it.
+# (corridor clear width mm, door clear opening mm); head-on approach needs 750 with a 900 corridor.
+DOOR_BY_CORRIDOR = {
+    "headon_900":  (900,  750, "UK AD M Vol 1 Table 2.1 -- 750 mm door, 900 mm corridor, approached head on"),
+    "side_1200":   (1200, 750, "UK AD M Vol 1 Table 2.1 -- 750 mm door, 1200 mm corridor, not head-on"),
+    "side_1050":   (1050, 775, "UK AD M Vol 1 Table 2.1 -- 775 mm door, 1050 mm corridor, not head-on"),
+    "side_900":    (900,  800, "UK AD M Vol 1 Table 2.1 -- 800 mm door, 900 mm corridor, not head-on"),
 }
 
 
