@@ -83,6 +83,7 @@ ORIGINAL = {
 
 # Presence cards (no number): the requirement text is re-read from the original too.
 PRESENCE = {
+    "aecom-villa-rates-2025": ("aecom-meh-2026/MEH 2026 Digital.pdf", 119, ["Villas 1,700 3,000 1,300 2,600 1,300 2,600 1,000 1,800"]),
     "mitton-foyer-transition": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 68, ["as a transition space from outside to inside"]),
     "mitton-air-lock-buffer": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 70, ["an air lock will serve as a buffer between outside and inside air"]),
     "ching-view-framing": ("form-space-order/Ching - Architecture Form Space and Order (5th ed, 2023).pdf", 228, ["frame a view so that we see it as a painting on a wall"]),

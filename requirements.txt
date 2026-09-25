@@ -4,3 +4,4 @@ pillow==12.3.0
 pymupdf==1.28.2
 PyYAML==6.0.3
 shapely==2.1.2
+ifcopenshell==0.8.5  # IFC export for the consultant hand-off (scripts/handoff.py)

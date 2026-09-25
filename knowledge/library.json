@@ -3878,6 +3878,25 @@
       "exceptions": null,
       "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
       "applies_when": {}
+    },
+    {
+      "id": "aecom-villa-rates-2025",
+      "source_id": "aecom-meh-2026",
+      "edition": "2026 (20th edition)",
+      "locator": "GCC building cost comparison table, Residential: Villas (printed page 120)",
+      "stages": [
+        2,
+        3,
+        6
+      ],
+      "summary": "Villas, USD per m2 GIA, Q3 2025: Dubai 1,700-3,000; Riyadh 1,300-2,600; Doha 1,300-2,600; Manama 1,000-1,800.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Gulf cities only, not Cairo: used to rank options relative to each other, never as a budget.",
+      "exceptions": "Excludes items listed on printed page 121 (e.g. loose furniture, artwork for residential).",
+      "verification": "Read on the held original page 2026-09-25 (table row checked).",
+      "applies_when": {}
     }
   ],
   "precedents": [

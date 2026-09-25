@@ -1,0 +1,22 @@
+id,level,host,width_mm,height_mm,between,swing,external
+L00-D00,L00,L00-W026,900.0,2100.0,Living / Dining,left,False
+L00-D01,L00,L00-W029,900.0,2100.0,Dining / Kitchen,left,False
+L00-D02,L00,L00-W007,900.0,2100.0,Hall / Stair,left,False
+L00-D03,L00,L00-W008,900.0,2100.0,Hall / Bath Ground,left,False
+L00-D04,L00,L00-W009,900.0,2100.0,Hall / Utility,left,False
+L00-D05,L00,L00-W010,900.0,2100.0,Hall / Entry,left,False
+L00-D06,L00,L00-W011,900.0,2100.0,Hall / Storage,left,False
+L00-D07,L00,L00-W012,900.0,2100.0,Hall / Study,left,False
+L00-D08,L00,L00-W013,900.0,2100.0,Hall / Guest,left,False
+L00-D09,L00,L00-W014,900.0,2100.0,Living / Hall,left,False
+L00-D10,L00,L00-W015,900.0,2100.0,Dining / Hall,left,False
+L00-D11,L00,L00-W016,900.0,2100.0,Kitchen / Hall,left,False
+L00-D12,L00,L00-W003,1000.0,2100.0,Entry / outside,left,True
+L01-D00,L01,L01-W023,900.0,2100.0,Dressing / Main Bedroom,left,False
+L01-D01,L01,L01-W022,900.0,2100.0,Ensuite / Dressing,left,False
+L01-D02,L01,L01-W005,900.0,2100.0,Landing / Stair Up,left,False
+L01-D03,L01,L01-W006,900.0,2100.0,Landing / Bath Family,left,False
+L01-D04,L01,L01-W009,900.0,2100.0,Landing / Main Bedroom,left,False
+L01-D05,L01,L01-W010,900.0,2100.0,Family / Landing,left,False
+L01-D06,L01,L01-W011,900.0,2100.0,Bed 2 / Landing,left,False
+L01-D07,L01,L01-W012,900.0,2100.0,Bed 3 / Landing,left,False

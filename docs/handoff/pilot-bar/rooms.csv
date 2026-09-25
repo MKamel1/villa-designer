@@ -1,0 +1,21 @@
+id,name,level,occupancy,area_m2,perimeter_m
+stair,Stair,L00,stair,12.48,15.2
+bath-ground,Bath Ground,L00,bathroom,8.84,13.8
+utility,Utility,L00,utility,9.1,13.9
+entry,Entry,L00,entrance,13.0,15.4
+storage,Storage,L00,store,10.92,14.6
+study,Study,L00,study,13.0,15.4
+guest,Guest,L00,bedroom,17.42,17.1
+hall,Hall,L00,corridor,20.28,36.2
+living,Living,L00,living,37.44,25.2
+dining,Dining,L00,dining,20.64,18.2
+kitchen,Kitchen,L00,kitchen,22.08,18.8
+stair-up,Stair Up,L01,stair,12.48,15.2
+bath-family,Bath Family,L01,bathroom,8.84,13.8
+ensuite,Ensuite,L01,ensuite,9.1,13.9
+dressing,Dressing,L01,dressing,9.1,13.9
+main-bedroom,Main Bedroom,L01,bedroom,22.1,18.9
+landing,Landing,L01,landing,14.7,26.9
+family,Family,L01,living,22.08,18.8
+bed-2,Bed 2,L01,bedroom,16.8,16.6
+bed-3,Bed 3,L01,bedroom,18.96,17.5

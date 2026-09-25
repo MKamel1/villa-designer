@@ -1,0 +1,19 @@
+id,level,host,width_mm,height_mm,between,sill_mm,area_m2,facing
+L00-G00,L00,L00-W001,800.0,1500.0,Bath Ground / outside,800.0,1.2,south
+L00-G01,L00,L00-W005,1470.0,1500.0,Study / outside,800.0,2.21,south
+L00-G02,L00,L00-W006,1900.0,1500.0,Guest / outside,800.0,2.85,south
+L00-G03,L00,L00-W017,2400.0,1500.0,outside / Living,800.0,3.6,north
+L00-G04,L00,L00-W018,2130.0,1500.0,outside / Dining,800.0,3.19,north
+L00-G05,L00,L00-W019,2300.0,1500.0,outside / Kitchen,800.0,3.45,north
+L00-G06,L00,L00-W022,2400.0,1500.0,outside / Living,800.0,3.6,west
+L00-G07,L00,L00-W031,1900.0,1500.0,Guest / outside,800.0,2.85,east
+L00-G08,L00,L00-W033,2300.0,1500.0,Kitchen / outside,800.0,3.45,east
+L01-G00,L01,L01-W001,800.0,1500.0,Bath Family / outside,800.0,1.2,south
+L01-G01,L01,L01-W002,800.0,1500.0,Ensuite / outside,800.0,1.2,south
+L01-G02,L01,L01-W004,2300.0,1500.0,Main Bedroom / outside,800.0,3.45,south
+L01-G03,L01,L01-W013,2300.0,1500.0,outside / Family,800.0,3.45,north
+L01-G04,L01,L01-W014,1800.0,1500.0,outside / Bed 2,800.0,2.7,north
+L01-G05,L01,L01-W015,2030.0,1500.0,outside / Bed 3,800.0,3.04,north
+L01-G06,L01,L01-W018,2300.0,1500.0,outside / Family,800.0,3.45,west
+L01-G07,L01,L01-W025,2300.0,1500.0,Main Bedroom / outside,800.0,3.45,east
+L01-G08,L01,L01-W027,2030.0,1500.0,Bed 3 / outside,800.0,3.04,east

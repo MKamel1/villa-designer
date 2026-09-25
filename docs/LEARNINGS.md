@@ -260,3 +260,16 @@ Both were caught only because the failure was diagnosed before any code changed.
 **Practice:** when a new test fails, check the fixture's arithmetic first, then the rule.
 
 **Third instance** (DOOR-02 test, same day): I expected contact where the leaf tip reaches the obstacle edge (83.6°). The leaf actually meets the obstacle's near corner first (71.6°), and the rule was right. The practice caught it before any code changed. The fixture docstring now states the geometry it relies on.
+
+## IFC export: a 1000x unit error, and a wrong diagnosis of the checker (2026-09-25)
+
+**The unit error.**
+- IfcOpenShell's `geometry.add_*_representation` helpers take SI metres and convert them to project units. Passing millimetres made every wall and space 1,000 times too large.
+- The counts (walls, openings, spaces) were all correct, so a count check could not see it.
+- **Guard:** `tests/test_deliverables.py` reads the written file back through the geometry engine and compares every space and wall with the spec, to within 0.5 mm. It was proven to fail with the bug reinstated (a 10,004,499 mm wall against 10,004 mm).
+
+**The wrong diagnosis.**
+- The first read-back returned no vertices, and I concluded the Windows Python 3.14 geometry build was broken.
+- The real cause: `create_shape(...).geometry.verts` read inline frees the shape before the buffer is copied, so it returned nothing or garbage.
+- Keeping the shape in a variable fixed it. A second environment (the workstation) exposed the cause.
+- **Lesson:** a "broken library" diagnosis needs a minimal reproduction that does not share my own code's pattern.

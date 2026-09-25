@@ -1,0 +1,16 @@
+[
+ {
+  "level": "L00",
+  "rule": "VIEW-01",
+  "severity": "advisory",
+  "where": "living",
+  "message": "Windows look out of Dining, Guest, Kitchen, Living, Study. Whether any of them frames something worth keeping is a judgement this model cannot make: it knows a window exists and nothing about what is outside it. Alexander's claim in 134 is that a view on continuous display stops being seen, so the question is which outlook to frame and which to screen -- decided on site, not here."
+ },
+ {
+  "level": "L01",
+  "rule": "VIEW-01",
+  "severity": "advisory",
+  "where": "main-bedroom",
+  "message": "Windows look out of Bed 2, Bed 3, Family, Main Bedroom. Whether any of them frames something worth keeping is a judgement this model cannot make: it knows a window exists and nothing about what is outside it. Alexander's claim in 134 is that a view on continuous display stops being seen, so the question is which outlook to frame and which to screen -- decided on site, not here."
+ }
+]
