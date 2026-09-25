@@ -13,6 +13,7 @@ import io
 import math
 import pathlib
 import re
+import subprocess
 import sys
 import tempfile
 
@@ -720,6 +721,13 @@ def main() -> int:
     driver = (ROOT / "scripts/render_hyperreal.py").read_text(encoding="utf-8")
     expect("render driver runs archpipe.render_qa on every image",
            "render_qa.check(" in driver)
+
+    # Licensed books and standards live in the private source store
+    # (archpipe.sources.SOURCES_ROOT), never in the repository.
+    tracked = subprocess.run(["git", "ls-files", "*.pdf", "*.epub"], cwd=ROOT, capture_output=True,
+                             text=True).stdout.split()
+    expect("no book or standard (PDF/EPUB) committed to the repository"
+           + (f" ({', '.join(tracked[:4])})" if tracked else ""), not tracked)
 
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     return 1 if FAILS else 0
