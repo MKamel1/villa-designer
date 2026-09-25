@@ -2,6 +2,7 @@
 
     python scripts/sources.py list      # rewrite the purchase list (docs + out/purchase-list.html)
     python scripts/sources.py intake    # file what you saved into ~/archpipe-sources/inbox/
+    python scripts/sources.py fetch-free  # download the public ones (robots.txt checked)
     python scripts/sources.py status    # counts per state: identified / held / content_verified
 
 Originals stay outside the repository (ARCHPIPE_SOURCES, default
@@ -29,7 +30,7 @@ def write_doc(lib: dict) -> None:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("cmd", choices=["list", "intake", "status"])
+    ap.add_argument("cmd", choices=["list", "intake", "fetch-free", "status"])
     a = ap.parse_args(argv)
     lib = src.load()
     if a.cmd == "list":
@@ -45,6 +46,12 @@ def main(argv=None) -> int:
                 print(f"  {k.upper()}: {r['file']}: {r['detail']}")
         print(f"  {len(rep['held'])} filed; registry updated")
         return 0 if not (rep["locked"] or rep["unreadable"] or rep["unmatched"]) else 1
+    if a.cmd == "fetch-free":
+        rep = src.fetch_free(lib)
+        src.save(lib)
+        write_doc(lib)
+        print(f"  {len(rep['held'])} files held, {len(rep['failed'])} failed")
+        return 1 if rep["failed"] else 0
     counts = {}
     for s in lib["sources"]:
         counts[s.get("status")] = counts.get(s.get("status"), 0) + 1

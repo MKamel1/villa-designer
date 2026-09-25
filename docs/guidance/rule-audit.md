@@ -19,3 +19,19 @@ The legacy engine remains available for diagnostic comparisons, preserving its t
 | VIEW-01 | 4 | Alexander, A Pattern Language -- 134 Zen View | Unresolved; diagnostic only |
 
 Also audit every catalogue dimension/access target, feasibility efficiency, lighting target and physical-model heuristic. See [machine-readable audit](../../knowledge/rule-audit.json). Page verification must check dimension arrows, clear versus nominal sizes, units, diagram context, exceptions and footnotes. A checked calculation does not verify its benchmark.
+
+## First verified numerical evidence (2026-09-24)
+
+Twelve cards are now verified from held originals: AD K 2013 (private stair
+rise/going/pitch, 2R+G, headroom 2 m) and AD M Vol 1 2015+2016 (M4(2) hall
+900 mm, door-to-corridor Table 2.1, entrance door 775 mm). Each carries the
+printed page, unit and value. `tests/test_evidence_values.py` re-reads the
+value from the original page when it is held.
+
+They corroborate part of CIRC-01 and DOOR-01. CIRC-01 is the 900 mm hall
+width, for halls and landings. DOOR-01 covers door widths, where AD M ties
+the width to how the corridor approaches the door, not to room type. The
+legacy rules still cite Neufert and remain diagnostic. They get restructured
+to reference verified cards, and their applicability, in the rule-verification
+step (W1b). CIRC-03 checks routes between furniture inside a room, and AD M's
+hall width does not apply to that.

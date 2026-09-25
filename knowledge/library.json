@@ -1170,7 +1170,7 @@
       "id": "uk-ad-o",
       "author": "HM Government",
       "title": "Approved Document O: Overheating",
-      "edition": "2021",
+      "edition": "2021 edition (takes effect 15 June 2022), England",
       "publisher": "DLUHC",
       "stages": [
         5
@@ -1179,21 +1179,31 @@
       "coverage": "overheating mitigation in new residential buildings",
       "priority": 1,
       "url": "https://www.gov.uk/government/publications/overheating-approved-document-o",
-      "status": "identified",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
-      "access_location": null,
+      "access_location": "archpipe-sources",
       "permissions": "Public; cite with access date.",
       "acquisition": "Public document; fetched by the tool where robots.txt allows, else downloaded by the user.",
       "kind": "standard",
       "free": true,
       "cost_usd_approx": 0,
-      "unlocks": "overheating method cross-check"
+      "unlocks": "overheating method cross-check",
+      "held_files": [
+        {
+          "file": "uk-ad-o/ADO.pdf",
+          "sha256": "36abadd39347d5d8a1c5fe0c021758efd8ecc09dc8f129393e47bcfa5edefab6",
+          "url": "https://assets.publishing.service.gov.uk/media/6218c5aad3bf7f4f0b29b624/ADO.pdf",
+          "pages": 44,
+          "image_only": false
+        }
+      ],
+      "verification": "Title/cover pages read from the held file 2026-09-24; edition confirmed. Passages are verified per evidence card."
     },
     {
       "id": "uk-ad-m",
       "author": "HM Government",
       "title": "Approved Document M: Access to and use of buildings, Volume 1 Dwellings",
-      "edition": "2015 incorporating amendments",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
       "publisher": "DLUHC",
       "stages": [
         4
@@ -1202,21 +1212,38 @@
       "coverage": "M4(1)/(2)/(3) accessible and adaptable dwellings",
       "priority": 1,
       "url": "https://www.gov.uk/government/publications/access-to-and-use-of-buildings-approved-document-m",
-      "status": "identified",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
-      "access_location": null,
+      "access_location": "archpipe-sources",
       "permissions": "Public; cite with access date.",
       "acquisition": "Public document; fetched by the tool where robots.txt allows, else downloaded by the user.",
       "kind": "standard",
       "free": true,
       "cost_usd_approx": 0,
-      "unlocks": "door widths, corridors, accessible bathrooms (ageing in place)"
+      "unlocks": "door widths, corridors, accessible bathrooms (ageing in place)",
+      "held_files": [
+        {
+          "file": "uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf",
+          "sha256": "fb66dd25e48500ad86e0ab034c94a5a1efdb2219c9eab98d9d4468a931133fd2",
+          "url": "https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf",
+          "pages": 69,
+          "image_only": false
+        },
+        {
+          "file": "uk-ad-m/AD_M_Corrigenda_SECURE.pdf",
+          "sha256": "b11dd2b39ff55d9e01472946812d78e6277eaef4519a60c261b07d10b793027f",
+          "url": "https://assets.publishing.service.gov.uk/media/5a804045e5274a2e8ab4f118/AD_M_Corrigenda_SECURE.pdf",
+          "pages": 12,
+          "image_only": false
+        }
+      ],
+      "verification": "Title/cover pages read from the held file 2026-09-24; edition confirmed. Passages are verified per evidence card."
     },
     {
       "id": "uk-ad-k",
       "author": "HM Government",
       "title": "Approved Document K: Protection from falling, collision and impact",
-      "edition": "2013",
+      "edition": "2013 edition, England",
       "publisher": "DLUHC",
       "stages": [
         4
@@ -1225,21 +1252,31 @@
       "coverage": "stairs, guarding, glazing safety",
       "priority": 1,
       "url": "https://www.gov.uk/government/publications/protection-from-falling-collision-and-impact-approved-document-k",
-      "status": "identified",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
-      "access_location": null,
+      "access_location": "archpipe-sources",
       "permissions": "Public; cite with access date.",
       "acquisition": "Public document; fetched by the tool where robots.txt allows, else downloaded by the user.",
       "kind": "standard",
       "free": true,
       "cost_usd_approx": 0,
-      "unlocks": "stair rise/going/headroom and guarding checks"
+      "unlocks": "stair rise/going/headroom and guarding checks",
+      "held_files": [
+        {
+          "file": "uk-ad-k/Approved_Document_K.pdf",
+          "sha256": "134e7b07b0730474efd6b5b65ce0bc7a9cf5db05bfa8491588b7884d42c10e51",
+          "url": "https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf",
+          "pages": 68,
+          "image_only": false
+        }
+      ],
+      "verification": "Title/cover pages read from the held file 2026-09-24; edition confirmed. Passages are verified per evidence card."
     },
     {
       "id": "uk-ad-f",
       "author": "HM Government",
       "title": "Approved Document F: Ventilation",
-      "edition": "2021",
+      "edition": "Volume 1 Dwellings, 2026 edition (takes effect 24 March 2027), England",
       "publisher": "DLUHC",
       "stages": [
         5
@@ -1248,21 +1285,31 @@
       "coverage": "ventilation provision in dwellings",
       "priority": 2,
       "url": "https://www.gov.uk/government/publications/ventilation-approved-document-f",
-      "status": "identified",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
-      "access_location": null,
+      "access_location": "archpipe-sources",
       "permissions": "Public; cite with access date.",
       "acquisition": "Public document; fetched by the tool where robots.txt allows, else downloaded by the user.",
       "kind": "standard",
       "free": true,
       "cost_usd_approx": 0,
-      "unlocks": "ventilation assumptions for the thermal model"
+      "unlocks": "ventilation assumptions for the thermal model",
+      "held_files": [
+        {
+          "file": "uk-ad-f/ADF1_2026.pdf",
+          "sha256": "4ca79c96120080df2d4f02eea1e3f15764b4ece701888a6c4ed6ee9e5fbd788d",
+          "url": "https://assets.publishing.service.gov.uk/media/69c12224d588c92c483e4b6a/ADF1_2026.pdf",
+          "pages": 66,
+          "image_only": false
+        }
+      ],
+      "verification": "Title/cover pages read from the held file 2026-09-24; edition confirmed. Passages are verified per evidence card."
     },
     {
       "id": "uk-ad-l",
       "author": "HM Government",
       "title": "Approved Document L: Conservation of fuel and power",
-      "edition": "2021",
+      "edition": "Volume 1 Dwellings, 2026 edition ('Energy and greenhouse gas emissions'), England",
       "publisher": "DLUHC",
       "stages": [
         5,
@@ -1272,21 +1319,31 @@
       "coverage": "fabric U-value and glazing limits",
       "priority": 2,
       "url": "https://www.gov.uk/government/publications/conservation-of-fuel-and-power-approved-document-l",
-      "status": "identified",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
-      "access_location": null,
+      "access_location": "archpipe-sources",
       "permissions": "Public; cite with access date.",
       "acquisition": "Public document; fetched by the tool where robots.txt allows, else downloaded by the user.",
       "kind": "standard",
       "free": true,
       "cost_usd_approx": 0,
-      "unlocks": "envelope performance assumptions"
+      "unlocks": "envelope performance assumptions",
+      "held_files": [
+        {
+          "file": "uk-ad-l/ADL1_2026.pdf",
+          "sha256": "438bbd1958b18605a89500598a07b6f0c0144e09812b72efbed3be8a0da927eb",
+          "url": "https://assets.publishing.service.gov.uk/media/69c122a6cfa346b9d4704a55/ADL1_2026.pdf",
+          "pages": 120,
+          "image_only": false
+        }
+      ],
+      "verification": "Title/cover pages read from the held file 2026-09-24; edition confirmed. Passages are verified per evidence card."
     },
     {
       "id": "ada-2010",
       "author": "US Department of Justice",
       "title": "2010 ADA Standards for Accessible Design",
-      "edition": "2010",
+      "edition": "2010 ADA Standards for Accessible Design, DOJ, 15 September 2010",
       "publisher": "DOJ",
       "stages": [
         4
@@ -1295,15 +1352,25 @@
       "coverage": "accessible routes, clear floor space, turning space",
       "priority": 1,
       "url": "https://www.ada.gov/law-and-regs/design-standards/2010-stds/",
-      "status": "identified",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
-      "access_location": null,
+      "access_location": "archpipe-sources",
       "permissions": "Public; cite with access date.",
       "acquisition": "Public document; fetched by the tool where robots.txt allows, else downloaded by the user.",
       "kind": "standard",
       "free": true,
       "cost_usd_approx": 0,
-      "unlocks": "US accessibility cross-check"
+      "unlocks": "US accessibility cross-check",
+      "held_files": [
+        {
+          "file": "ada-2010/2010-design-standards.pdf",
+          "sha256": "7925d75c58cde5551da73e451986b9fbfe35a9398d10a4e14be58314a8d86389",
+          "url": "https://www.ada.gov/assets/pdfs/2010-design-standards.pdf",
+          "pages": 279,
+          "image_only": false
+        }
+      ],
+      "verification": "Title/cover pages read from the held file 2026-09-24; edition confirmed. Passages are verified per evidence card."
     },
     {
       "id": "icc-irc-2024",
@@ -1333,7 +1400,7 @@
       "id": "cairo-epw",
       "author": "climate.onebuilding.org",
       "title": "Cairo weather files (EPW, TMYx) and 2050s morphed variant",
-      "edition": "latest",
+      "edition": "TMYx: Cairo Intl AP 623660 (30.122N 31.406E, 116 m, 2011-2025) and Cairo West AP 623680 (30.117N 30.917E, 151 m); files dated 2026-03-12",
       "publisher": "OneBuilding",
       "stages": [
         1,
@@ -1343,15 +1410,28 @@
       "coverage": "hourly weather for thermal and daylight simulation",
       "priority": 1,
       "url": "https://climate.onebuilding.org/",
-      "status": "identified",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
-      "access_location": null,
+      "access_location": "archpipe-sources",
       "permissions": "Public; cite with access date.",
       "acquisition": "Public document; fetched by the tool where robots.txt allows, else downloaded by the user.",
       "kind": "dataset",
       "free": true,
       "cost_usd_approx": 0,
-      "unlocks": "thermal, overheating and daylight simulation for the site"
+      "unlocks": "thermal, overheating and daylight simulation for the site",
+      "held_files": [
+        {
+          "file": "cairo-epw/EGY_QH_Cairo.Intl.AP.623660_TMYx.2011-2025.zip",
+          "sha256": "ccbf2f3b0e5a4f1c8d1dd2a185e142d4ac4dc2b62c7f217c80f5bbf149954289",
+          "url": "https://climate.onebuilding.org/WMO_Region_1_Africa/EGY_Egypt/QH_Al_Qahirah_Cairo/EGY_QH_Cairo.Intl.AP.623660_TMYx.2011-2025.zip"
+        },
+        {
+          "file": "cairo-epw/EGY_QH_Cairo.West.AP.623680_TMYx.zip",
+          "sha256": "aafb9aca4e33e1466db81ec7cbb308c4d940c9ba39a03a75f2322fe1d27ab781",
+          "url": "https://climate.onebuilding.org/WMO_Region_1_Africa/EGY_Egypt/QH_Al_Qahirah_Cairo/EGY_QH_Cairo.West.AP.623680_TMYx.zip"
+        }
+      ],
+      "verification": "EPW LOCATION headers read 2026-09-24; 2050s morphed file still to generate."
     },
     {
       "id": "lbnl-igdb",
@@ -1861,6 +1941,253 @@
           "needed"
         ]
       }
+    },
+    {
+      "id": "ukadk-private-stair-rise-max",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Section 1, para 1.3, Table 1.1 (printed page 5)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Private stair: rise 150 to 220 mm.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 220,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance. Private stair = within one dwelling.",
+      "exceptions": "Existing buildings may depart where dimensions prevent it (Table 1.1 note).",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadk-private-stair-going-min",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Section 1, para 1.3, Table 1.1 (printed page 5)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Private stair: going 220 to 300 mm.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 220,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "External tapered steps in dwellings: going at least 280 mm.",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadk-private-stair-pitch-max",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Table 1.1 note 1 (printed page 5)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Maximum pitch of a private stair.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "deg",
+      "verified_value": 42,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadk-2r-plus-g-min",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Table 1.1 footnote * (printed page 5)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Twice the rise plus the going between 550 and 700 mm (lower bound).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 550,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadk-2r-plus-g-max",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Table 1.1 footnote * (printed page 5)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Twice the rise plus the going between 550 and 700 mm (upper bound).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 700,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadk-stair-headroom-min",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Section 1, para 1.11, Diagram 1.3 (printed page 7)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Minimum headroom over the flight (above the pitch line) and landings.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 2000,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance. For all buildings.",
+      "exceptions": "Loft conversions have a separate reduced provision in AD K (not yet read).",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-hall-min-m42",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "M4(2) para 2.22a, Diagram 2.3 (printed page 17)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Accessible and adaptable dwellings: minimum clear width of every hall or landing.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 900,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance. Applies to halls and landings of an M4(2) dwelling, not to routes between furniture inside a room.",
+      "exceptions": "Localised obstruction (e.g. radiator) up to 2 m long may reduce the width to no less than 750 mm, not at a door or turn.",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-door-750-corridor-headon",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "M4(2) Table 2.1 (printed page 17); same values M4(1) Table 1.1 (page 8)",
+      "stages": [
+        4
+      ],
+      "summary": "Door clear opening 750 mm or wider needs a 900 mm corridor when approached head on.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 900,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "Cupboards not large enough to enter, and additional en-suites, are excluded (Table 2.1 note 1).",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-door-750-corridor-side",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "M4(2) Table 2.1 (printed page 17)",
+      "stages": [
+        4
+      ],
+      "summary": "Door clear opening 750 mm approached not head-on needs a 1200 mm corridor.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 1200,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-door-775-corridor-side",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "M4(2) Table 2.1 (printed page 17)",
+      "stages": [
+        4
+      ],
+      "summary": "Door clear opening 775 mm approached not head-on needs a 1050 mm corridor.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 1050,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "An 826 mm leaf up to 44 mm thick is deemed to give 775 mm clear (M4(1) Table 1.1 note).",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-door-800-corridor-side",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "M4(2) Table 2.1 (printed page 17)",
+      "stages": [
+        4
+      ],
+      "summary": "Door clear opening 800 mm approached not head-on needs a 900 mm corridor.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 900,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-entrance-door-min",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "M4(1) para 1.14a (printed page 7)",
+      "stages": [
+        4
+      ],
+      "summary": "Principal private entrance door minimum clear opening width.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 775,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance, used here as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the original PDF page 2026-09-24 (value, unit, table/diagram and notes checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

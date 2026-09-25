@@ -111,6 +111,63 @@ def write_purchase_html(lib: dict, dest: Path) -> Path:
     return dest
 
 
+# ---------------------------------------------------------------- free sources
+
+GOV = "https://assets.publishing.service.gov.uk/media/"
+ONEBUILDING = "https://climate.onebuilding.org/WMO_Region_1_Africa/EGY_Egypt/QH_Al_Qahirah_Cairo/"
+# The exact public files behind each free registry entry, found on the
+# publisher's own page (2026-09-24). Current editions for dwellings.
+FREE_FILES = {
+    "uk-ad-o": [GOV + "6218c5aad3bf7f4f0b29b624/ADO.pdf"],
+    "uk-ad-m": [GOV + "5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf",
+                GOV + "5a804045e5274a2e8ab4f118/AD_M_Corrigenda_SECURE.pdf"],
+    "uk-ad-k": [GOV + "60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"],
+    "uk-ad-f": [GOV + "69c12224d588c92c483e4b6a/ADF1_2026.pdf"],
+    "uk-ad-l": [GOV + "69c122a6cfa346b9d4704a55/ADL1_2026.pdf"],
+    "ada-2010": ["https://www.ada.gov/assets/pdfs/2010-design-standards.pdf"],
+    # Cairo International (the site file set in spec/villa-site.yaml) and
+    # Cairo West, the station nearest the western suburbs.
+    "cairo-epw": [ONEBUILDING + "EGY_QH_Cairo.Intl.AP.623660_TMYx.2011-2025.zip",
+                  ONEBUILDING + "EGY_QH_Cairo.West.AP.623680_TMYx.zip"],
+}
+
+
+def fetch_free(lib: dict, root: Path = SOURCES_ROOT, only: list[str] | None = None, log=print) -> dict:
+    """Download the public files in FREE_FILES (robots.txt checked) and mark them held."""
+    from archpipe import fetch
+    by_id = {s["id"]: s for s in lib["sources"]}
+    report = {"held": [], "failed": []}
+    for sid, urls in FREE_FILES.items():
+        if only and sid not in only:
+            continue
+        s = by_id[sid]
+        held = {h["sha256"]: h for h in s.get("held_files", [])}
+        for url in urls:
+            dest = root / sid / url.rsplit("/", 1)[-1]
+            try:
+                fetch.download(url, dest)
+            except Exception as exc:
+                report["failed"].append({"id": sid, "url": url, "detail": str(exc)})
+                log(f"  FAILED {sid}: {url}: {exc}")
+                continue
+            entry = {"file": f"{sid}/{dest.name}", "sha256": sha256(dest), "url": url}
+            if dest.suffix.lower() == ".pdf":
+                r = readability(dest)
+                entry.update(pages=r["pages"], image_only=r["image_only"])
+                if not r["readable"]:
+                    report["failed"].append({"id": sid, "url": url, "detail": r["detail"]})
+                    continue
+            held[entry["sha256"]] = entry
+            report["held"].append(entry)
+            log(f"  held {entry['file']}")
+        if held:
+            s["held_files"] = list(held.values())
+            s["access_location"] = "archpipe-sources"
+            if s.get("status") == "identified":
+                s["status"] = "held"
+    return report
+
+
 # ---------------------------------------------------------------- intake
 
 def sha256(path: Path) -> str:

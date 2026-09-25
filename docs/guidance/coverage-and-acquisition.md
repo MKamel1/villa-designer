@@ -106,22 +106,15 @@ by `python scripts/sources.py list`. Edit the registry, not this table.
 
 | Id | Title | Edition | What it unlocks | ≈ USD |
 |---|---|---|---|---|
-| `ada-2010` | US Department of Justice: [2010 ADA Standards for Accessible Design](https://www.ada.gov/law-and-regs/design-standards/2010-stds/) | 2010 | US accessibility cross-check | free |
-| `cairo-epw` | climate.onebuilding.org: [Cairo weather files (EPW, TMYx) and 2050s morphed variant](https://climate.onebuilding.org/) | latest | thermal, overheating and daylight simulation for the site | free |
 | `icc-irc-2024` | International Code Council: [International Residential Code](https://codes.iccsafe.org/content/IRC2024P1) | 2024 | US residential cross-check | free |
 | `lbnl-igdb` | Lawrence Berkeley National Laboratory: [International Glazing Database + WINDOW](https://windows.lbl.gov/software-tools) | latest | real glazing properties for the thermal model and glazing library | free |
 | `msd-dataset` | C. van Engelenburg et al.: [Modified Swiss Dwellings (MSD) floor-plan dataset](https://data.4tu.nl/datasets/e1d89cb5-6872-48fc-be63-aadd687ee6f9) | ECCV 2024 | statistical priors (adjacency, proportions) for the concept generator | free |
-| `uk-ad-k` | HM Government: [Approved Document K: Protection from falling, collision and impact](https://www.gov.uk/government/publications/protection-from-falling-collision-and-impact-approved-document-k) | 2013 | stair rise/going/headroom and guarding checks | free |
-| `uk-ad-m` | HM Government: [Approved Document M: Access to and use of buildings, Volume 1 Dwellings](https://www.gov.uk/government/publications/access-to-and-use-of-buildings-approved-document-m) | 2015 incorporating amendments | door widths, corridors, accessible bathrooms (ageing in place) | free |
-| `uk-ad-o` | HM Government: [Approved Document O: Overheating](https://www.gov.uk/government/publications/overheating-approved-document-o) | 2021 | overheating method cross-check | free |
 
 **Tier 2**
 
 | Id | Title | Edition | What it unlocks | ≈ USD |
 |---|---|---|---|---|
 | `cubicasa5k` | CubiCasa: CubiCasa5k floor-plan dataset | 2019 | additional detached-house plan priors | free |
-| `uk-ad-f` | HM Government: [Approved Document F: Ventilation](https://www.gov.uk/government/publications/ventilation-approved-document-f) | 2021 | ventilation assumptions for the thermal model | free |
-| `uk-ad-l` | HM Government: [Approved Document L: Conservation of fuel and power](https://www.gov.uk/government/publications/conservation-of-fuel-and-power-approved-document-l) | 2021 | envelope performance assumptions | free |
 
 Paid total about **$5,005** (prices approximate; confirm at checkout).
 <!-- purchase-list:end -->
