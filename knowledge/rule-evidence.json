@@ -75,7 +75,8 @@
           "card": "irc-r304-habitable-width",
           "note": "living, dining, study; kitchens excepted (R304.2)"
         }
-      }
+      },
+      "complete": true
     },
     "CIRC-03": {
       "parameters": {
@@ -344,7 +345,8 @@
           "card": "mitton-desk-chair-access-864"
         }
       },
-      "note": "Re-sourced 2026-09-25. Beds and sanitary zones: AD M M4(2) (brief: ageing in place). Time-Saver's bed clearances (22 in / 12 in) are convenience minimums for a different context and are not used. Wardrobe and dining: Time-Saver; kitchens: NKBA. TV viewing distance removed from clearances 2026-09-25: it is a seat-to-screen distance (Mitton Fig. 4.10b), not clear floor space."
+      "note": "Re-sourced 2026-09-25. Beds and sanitary zones: AD M M4(2) (brief: ageing in place). Time-Saver's bed clearances (22 in / 12 in) are convenience minimums for a different context and are not used. Wardrobe and dining: Time-Saver; kitchens: NKBA. TV viewing distance removed from clearances 2026-09-25: it is a seat-to-screen distance (Mitton Fig. 4.10b), not clear floor space.",
+      "complete": true
     }
   }
 }
