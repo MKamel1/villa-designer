@@ -60,3 +60,20 @@ seeded-bad ones.
   - U fails the 400 m² gross allowance at 436 m² and area match. Its ground bath stretches to 54 m², and its east arm is a stub (a 2 m² gallery plus the utility room). The U does not suit a 272 m² programme in this generator.
 - The real villa (Sheikh Zayed) is untouched. Nothing here closes a design gate.
 - **Next, to make the geometric critic trustworthy:** obtain a labelled, dimensioned plan set (e.g. *Floor Plan Manual* single-family chapter with its key, or Neufert house plans), encode 5–8 plans, and un-skip the geometric calibration.
+
+## Update 2026-09-25: real-plan calibration (CubiCasa5k)
+
+The client approved CubiCasa5k (CC BY-NC-SA 4.0; only aggregate results are stored in the repo).
+
+**Procedure** (pre-registered in `scripts/cubicasa_calibrate.py`): 300 single-floor plans per run, 90 % quiet gate, seeded defects must be caught. Results are in `knowledge/precedents/cubicasa-calibration.json`.
+
+**Window check: calibrated.** On fresh plans 601–900 it was quiet on 95.0 % and caught 277 of 300 seeded defects. One amendment was made: an open-plan room borrows daylight from a windowed room it is open to.
+
+**Reachability check: NOT calibrated.**
+- It was quiet on only 87.3 % of the final fresh sample, below the 90 % gate.
+- The named cause is door-to-room matching across thick walls, a parser limit.
+- Next step: fix the matching, then judge on plans 901–1200.
+
+**Checks that need a scale** (area, width, wet stack): still not calibrated, because CubiCasa has no absolute scale.
+
+Generated concepts therefore stay diagnostic.

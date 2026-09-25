@@ -211,3 +211,34 @@ facts missing or assumed rather than calling a generic pointer a known input.
 
 **Lesson:** read the generated drawings before trusting a clean check table.
 
+
+## Real-plan calibration: seeded-defect recall exposed extraction bugs (2026-09-25)
+
+**Calibration runs** (critic checks against CubiCasa5k, `scripts/cubicasa_calibrate.py`, pre-registered):
+- **Run 1** failed the 90 % gate (75.7 %). The images showed flaws in the check definitions:
+  - open-plan kitchen alcoves borrow the living room's daylight;
+  - garages and plant rooms have their own outside doors.
+- **Run 2** used amended checks on fresh plans. It passed, but seeded-defect recall fell, which exposed two parser bugs:
+  - a doorway is a gap in the wall, so it was read as an open-plan connection;
+  - balcony doors were read as entrances.
+
+**Guard:** recall on seeded defects is reported next to the quiet rate. A rising quiet rate with falling recall means the checks got more lenient, not more accurate.
+
+**Final run** (fresh plans 601–900):
+- window passed;
+- reachability failed (87.3 %), because doors inside thick walls are not matched to rooms. It stays not calibrated.
+
+**Lesson:** never re-score the sample used to design a fix. Every amendment is judged on untouched plans.
+
+## Adding documents to the workstation corpus (2026-09-25)
+
+`app.ingest_local` stages files and then runs `app.ingest`, which runs `app.parse_phase` from a temporary folder holding a per-run `config.yaml`.
+- Setting `RAG_CONFIG` overrides that per-run config. The parse phase then loses the document IDs and falls back to an arXiv query, which currently returns HTTP 406.
+- A relative `PYTHONPATH=.` also breaks in that temporary folder.
+
+**Working command:**
+```
+cd ~/ai-projects/archpipe-knowledge-data && PYTHONPATH=$HOME/ai-projects/research-system-rag \
+  ~/miniconda3/envs/agent-rag-research/bin/python -m app.ingest --paper-ids-file drop_in/<manifest>.txt
+```
+Use `app.ingest_local` for new drops, run the same way. The run on 2026-09-25 added TM59, AD G and AECOM: 35 documents, 20,345 points.

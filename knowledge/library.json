@@ -3273,6 +3273,23 @@
       "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-wc-entrance-or-principal-storey",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "Section 1, WC facilities, para 1.17a (printed page 8); definition of principal storey (Appendix A)",
+      "stages": [
+        3
+      ],
+      "summary": "A room containing a WC on the entrance storey or, where the entrance storey has no habitable rooms, on the principal storey (floor of the main living space) or the entrance storey.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": null,
+      "conditions": "England Building Regulations M4(1); used as best-practice guidance, not local compliance.",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (requirement text and definition checked).",
+      "applies_when": {}
     }
   ],
   "precedents": [

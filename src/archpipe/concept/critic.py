@@ -67,7 +67,11 @@ def graph_checks(g) -> list[dict]:
         reached = _reach(rooms, edges, start, blocked=lambda r: rooms[r] == "private")
         ok = [r for r in san if r in reached]
         out.append(_check("wc_access", "pass" if ok else "fail", rooms=ok or san))
-    unreached = sorted(set(rooms) - _reach(rooms, edges, start))
+    # every external door is an access point (a garage or plant room with its own door is reachable);
+    # outdoor spaces and rooms with no stated use are exempt (amendment 1, 2026-09-25)
+    reached = set().union(*(_reach(rooms, edges, e) for e in (g.get("entrances") or [start])))
+    exempt = set(g.get("exempt", [])) | {r for r, k in rooms.items() if k == "exterior"}
+    unreached = sorted(set(rooms) - reached - exempt)
     out.append(_check("reachability", "fail" if unreached else "pass", rooms=unreached))
     return out
 

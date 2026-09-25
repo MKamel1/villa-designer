@@ -80,10 +80,24 @@ class PilotConcepts(unittest.TestCase):
 
 
 class GeometryCalibration(unittest.TestCase):
-    def test_geometric_checks_against_published_plans(self):
-        self.skipTest("not runnable: no labelled, dimensioned published house plan is held (Precedents in "
-                      "Architecture plans are unlabelled at print scale; Floor Plan Manual keys rooms by number). "
-                      "Generated concepts stay diagnostic until this runs.")
+    """Real plans: CubiCasa5k, pre-registered procedure in scripts/cubicasa_calibrate.py. The data sit on
+    the workstation; the recorded aggregate results are knowledge/precedents/cubicasa-calibration.json."""
+    import json as _json
+    REC = _json.loads((critic.ROOT / "knowledge/precedents/cubicasa-calibration.json").read_text(encoding="utf-8"))
+    FINAL = REC["runs"][2]["result"]
+
+    def test_window_check_passed_the_final_held_out_gate(self):
+        self.assertGreaterEqual(self.FINAL["quiet_rate"]["window"], self.FINAL["gate"])
+        self.assertGreaterEqual(self.FINAL["mutation_detected"]["window"], 0.9 * self.FINAL["sample"])
+
+    def test_reachability_on_real_plans(self):
+        if self.FINAL["quiet_rate"]["reachability"] < self.FINAL["gate"]:
+            self.skipTest("not calibrated: final held-out gate failed (%.1f %% quiet < 90 %%); door-to-room "
+                          "association across thick walls is the named cause" % (100 * self.FINAL["quiet_rate"]["reachability"]))
+
+    def test_dimensioned_checks(self):
+        self.skipTest("not runnable: CubiCasa5k has no absolute scale; area, width and wet-stack checks need a "
+                      "labelled, dimensioned plan set")
 
 
 if __name__ == "__main__":

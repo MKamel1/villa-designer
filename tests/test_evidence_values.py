@@ -62,6 +62,8 @@ ORIGINAL = {
 PRESENCE = {
     "ukadg-dwelling-wc-entrance-storey": ("uk-ad-g/ADG_with_2024_amendments.pdf", 30,
                                           ["least one sanitary convenience", "principal/"]),
+    "ukadm-wc-entrance-or-principal-storey": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 15,
+                                              ["where there are no habitable rooms on the entrance storey, on the principal storey"]),
     "ukadg-dwelling-bathroom": ("uk-ad-g/ADG_with_2024_amendments.pdf", 34, ["at least one bathroom with a fxed bath or shower"]),
 }
 

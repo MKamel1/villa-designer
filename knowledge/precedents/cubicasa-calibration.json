@@ -1,0 +1,141 @@
+{
+ "dataset": "CubiCasa5k (Kalervo et al. 2019), https://zenodo.org/record/2613548, CC BY-NC-SA 4.0. Only aggregate results are stored here; no plan content.",
+ "procedure": "scripts/cubicasa_calibrate.py (pre-registered in its docstring): 300 single-floor plans with a bedroom, a living room and an entrance; gate: window and reachability quiet on >= 90 % of plans; seeded defects must be caught.",
+ "runs": [
+  {
+   "run": "1: plans 1-300, original checks",
+   "result": {
+    "sample": 300,
+    "skipped": {
+     "floors": 120,
+     "no_bed_or_living": 166,
+     "no_entrance": 1,
+     "parse_error": 0
+    },
+    "quiet_rate": {
+     "window": 0.757,
+     "reachability": 0.757,
+     "private_access": 0.53,
+     "wc_access": 0.987
+    },
+    "mutation_detected": {
+     "window": 300,
+     "reachability": 300
+    },
+    "gate": 0.9,
+    "gate_pass": false
+   },
+   "verdict": "gate failed; causes named from images: open-plan kitchen alcoves, garages/plant rooms with own external door, unlabelled spaces"
+  },
+  {
+   "run": "2: plans 301-600 (fresh), amendment 1",
+   "result": {
+    "sample": 300,
+    "skipped": {
+     "floors": 251,
+     "no_bed_or_living": 327,
+     "no_entrance": 1,
+     "parse_error": 0
+    },
+    "quiet_rate": {
+     "window": 0.957,
+     "reachability": 0.98,
+     "private_access": 0.59,
+     "wc_access": 0.99
+    },
+    "mutation_detected": {
+     "window": 283,
+     "reachability": 278
+    },
+    "gate": 0.9,
+    "by_subset": {
+     "high_quality": {
+      "window": 0.957,
+      "reachability": 0.98,
+      "n": 300
+     }
+    },
+    "gate_pass": true
+   },
+   "verdict": "gate passed, but seeded-defect recall dropped (283/278 of 300): exposed two extraction bugs (doorways read as open plan; balcony doors read as entrances)"
+  },
+  {
+   "run": "3: plans 601-900 (fresh), fix 2 - FINAL",
+   "result": {
+    "sample": 300,
+    "skipped": {
+     "floors": 381,
+     "no_bed_or_living": 515,
+     "no_entrance": 32,
+     "parse_error": 0
+    },
+    "quiet_rate": {
+     "window": 0.95,
+     "reachability": 0.873,
+     "private_access": 0.447,
+     "wc_access": 0.903
+    },
+    "mutation_detected": {
+     "window": 277,
+     "reachability": 299
+    },
+    "gate": 0.9,
+    "by_subset": {
+     "high_quality": {
+      "window": 0.931,
+      "reachability": 0.966,
+      "n": 29
+     },
+     "high_quality_architectural": {
+      "window": 0.952,
+      "reachability": 0.863,
+      "n": 271
+     }
+    },
+    "gate_pass": false
+   },
+   "verdict": "window PASSED (95.0 %); reachability FAILED (87.3 %). Remaining flags come from door-to-room association across thick walls (whole plans unreachable) - an extraction limit, not a check definition."
+  },
+  {
+   "run": "diagnostic only: run-1 plans re-scored with final checks (not a gate: these plans were used to design the amendment)",
+   "result": {
+    "sample": 300,
+    "skipped": {
+     "floors": 121,
+     "no_bed_or_living": 173,
+     "no_entrance": 10,
+     "parse_error": 0
+    },
+    "quiet_rate": {
+     "window": 0.953,
+     "reachability": 0.873,
+     "private_access": 0.527,
+     "wc_access": 0.907
+    },
+    "mutation_detected": {
+     "window": 279,
+     "reachability": 299
+    },
+    "gate": 0.9,
+    "by_subset": {
+     "colorful": {
+      "window": 0.917,
+      "reachability": 0.802,
+      "n": 121
+     },
+     "high_quality": {
+      "window": 0.978,
+      "reachability": 0.922,
+      "n": 179
+     }
+    },
+    "gate_pass": false
+   }
+  }
+ ],
+ "status": {
+  "window": "calibrated on real plans (final held-out gate passed)",
+  "reachability": "NOT calibrated (final held-out gate failed, 87.3 % < 90 %); next: associate doors to rooms across wall thickness, judge on plans 901-1200",
+  "window_seeded_recall": "277 of 300 on the final sample: 23 bedrooms read as open to a neighbour through gaps in drawn walls (extraction)"
+ }
+}

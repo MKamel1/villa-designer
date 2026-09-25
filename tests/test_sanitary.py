@@ -38,6 +38,17 @@ class SanitaryTests(unittest.TestCase):
         m = _msgs(_p([("L00", "hall"), ("L00", "wc")]))
         self.assertEqual(sum("No bathroom" in x for x in m), 1)
 
+    def test_entrance_storey_without_habitable_rooms_may_use_principal_storey(self):
+        # AD M 1.17a: entrance storey has only a hall; living and the WC are upstairs -> compliant
+        self.assertEqual(sum("entrance storey" in x for x in _msgs(_p([("L00", "hall"), ("L01", "living"), ("L01", "wc"),
+                                                                       ("L01", "bathroom")]))), 0)
+        # ...but a WC on neither the principal nor the entrance storey is still a finding
+        self.assertEqual(sum("entrance storey" in x for x in _msgs(_p([("L00", "hall"), ("L01", "living")]))), 1)
+
+    def test_habitable_entrance_storey_still_needs_its_own_wc(self):
+        m = _msgs(_p([("L00", "hall"), ("L00", "living"), ("L01", "wc"), ("L01", "bathroom")]))
+        self.assertEqual(sum("entrance storey" in x for x in m), 1)
+
     def test_entrance_storey_follows_the_external_door(self):
         # entrance on L01 (e.g. a sloping site): the WC must be there, not on L00
         m = _msgs(_p([("L01", "hall"), ("L00", "wc"), ("L00", "bathroom")], entrance_on="L01"))

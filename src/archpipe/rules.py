@@ -351,7 +351,8 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) fo
     Rule(
         "SAN-01", "WC on the entrance storey; a bathroom in the dwelling", 3, "computed",
         "UK Approved Document G (2015 incl. 2016 and 2024 amendments) para 4.8 with "
-        "M4(1): at least one WC, located on the principal/entrance storey; para 5.6: "
+        "M4(1): at least one WC, located on the principal/entrance storey (AD M Vol 1 para 1.17a: "
+        "the principal storey where the entrance storey has no habitable rooms); para 5.6: "
         "at least one bathroom with a fixed bath or shower and a washbasin",
         note="Stage 3, not Stage 4: whether a level has a WC at all is a "
              "zoning decision, settled when the plan's zones are set and "
@@ -684,7 +685,14 @@ def r_sanitary_present(p: Project, level: str) -> list[Finding]:
     rooms = [r for r in p.rooms if r.level == level]
     biggest = max(rooms, key=lambda r: r.area_m2, default=None)
     out = []
-    if not any(r.occupancy in WC_ROOMS for r in rooms):
+    # AD M Vol 1 para 1.17a: where the entrance storey has no habitable rooms, a WC on the principal
+    # storey (the floor with the main living space) or the entrance storey will do.
+    living = [r for r in p.rooms if r.occupancy == "living"]
+    principal = max(living, key=lambda r: r.area_m2).level if living else level
+    has_habitable = any(r.occupancy in HABITABLE for r in rooms)
+    wc_here = any(r.occupancy in WC_ROOMS for r in rooms)
+    wc_principal = any(r.occupancy in WC_ROOMS for r in p.rooms if r.level == principal)
+    if not wc_here and (has_habitable or not wc_principal):
         out.append(_finding(
             "SAN-01", "violation",
             "No WC on the entrance storey. A dwelling needs at least one WC, on the "

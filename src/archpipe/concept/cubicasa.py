@@ -28,6 +28,7 @@ PUBLIC = {"LivingRoom", "Lounge", "Kitchen", "Dining", "EatingArea"}
 CIRCULATION = {"Entry", "HallWay", "DraughtLobby", "Hall", "StairWell"}
 SANITARY = {"Bath", "Sauna"}
 OUTSIDE_ROOMS = {"Outdoor"}
+UNKNOWN = {"Undefined", "UserDefined"}      # no stated use: shafts, voids, other units
 GROW = 3            # px a door/window polygon is grown to reach the rooms beside the wall
 OPEN_MIN = 6        # px of direct room-to-room contact that counts as an open connection
 
@@ -42,7 +43,7 @@ def _points(el):
 
 
 def _floors(svg):
-    floors = [g for g in svg.getElementsByTagName("g") if g.getAttribute("class").split(" ")[0] == "Floor"]
+    floors = [g for g in svg.getElementsByTagName("g") if g.getAttribute("class").split(" ")[0] == "Floorplan"]
     return floors or [svg.documentElement]
 
 
@@ -99,18 +100,23 @@ def graph(rec):
         m = _mask(size, [rec["rooms"][rid]["poly"]])
         label[m & (label < 0)] = i
     wall = _mask(size, rec["walls"])
-    edges, entrances = set(), []
+    # a doorway is a gap in the wall: mask door openings too, so an open-plan connection means no
+    # wall AND no door between the rooms (fix 2026-09-25, found by missed seeded defects)
+    wall |= _mask(size, rec["doors"], GROW)
+    edges, entrances, porch, open_edges = set(), [], [], set()
     for d in rec["doors"]:
         m = _mask(size, [d], GROW)
         hit = sorted({ids[v] for v in np.unique(label[m]) if v >= 0})
+        for a in hit:                          # room to room, or room to balcony/porch (Outdoor)
+            for b in hit:
+                if a < b:
+                    edges.add((a, b))
         inside = [h for h in hit if rec["rooms"][h]["type"] not in OUTSIDE_ROOMS]
-        if len(inside) >= 2:
-            for a in inside:
-                for b in inside:
-                    if a < b:
-                        edges.add((a, b))
-        elif len(inside) == 1:
+        if len(hit) == 1 and inside:           # nothing mapped outside the door: an external door
             entrances.append(inside[0])
+        elif len(inside) == 1 and rec["rooms"][inside[0]]["type"] in CIRCULATION:
+            porch.append(inside[0])            # hall door onto a mapped porch or landing
+        # a door from a bedroom or living room onto a balcony is not an entrance
     # open connections: horizontally or vertically adjacent pixels of two different rooms, no wall between
     for axis in (0, 1):
         a = label[:-1, :] if axis == 0 else label[:, :-1]
@@ -122,6 +128,7 @@ def graph(rec):
         for (x, y), n in zip(pairs.T, counts):
             if n >= OPEN_MIN:
                 edges.add((ids[x], ids[y]))
+                open_edges.add((ids[x], ids[y]))
     windows = {rid: 0 for rid in ids}
     for w in rec["windows"]:
         m = _mask(size, [w], GROW)
@@ -131,12 +138,19 @@ def graph(rec):
     types = {rid: r["type"] for rid, r in rec["rooms"].items()}
     kind = {rid: ("private" if t in PRIVATE else "public" if t in PUBLIC else "circulation" if t in CIRCULATION
                   else "exterior" if t in OUTSIDE_ROOMS else "service") for rid, t in types.items()}
-    ent = sorted(entrances, key=lambda r: (types[r] not in CIRCULATION, r))
+    ent = sorted(set(entrances) or set(porch), key=lambda r: (types[r] not in CIRCULATION, r))
     return {"rooms": kind, "types": types, "connections": [list(e) for e in sorted(edges)],
-            "entrance": ent[0] if ent else None, "sanitary": [r for r, t in types.items() if t in SANITARY],
-            "windows": windows}
+            "open": [list(e) for e in sorted(open_edges)],
+            "entrance": ent[0] if ent else None, "entrances": ent,
+            "exempt": sorted(r for r, t in types.items() if t in UNKNOWN or t in OUTSIDE_ROOMS),
+            "sanitary": [r for r, t in types.items() if t in SANITARY], "windows": windows}
 
 
 def window_check(g):
-    dark = sorted(r for r, t in g["types"].items() if t in HABITABLE and not g["windows"][r])
+    """A habitable room needs a window, or an open (wall-less) connection to a habitable room that has
+    one: an open-plan kitchen alcove borrows the living room's daylight (amendment 1, 2026-09-25)."""
+    lit = {r for r, t in g["types"].items() if g["windows"][r]}
+    borrowed = {b if a in lit else a for a, b in g.get("open", [])
+                if (a in lit) != (b in lit) and g["types"][a] in HABITABLE and g["types"][b] in HABITABLE}
+    dark = sorted(r for r, t in g["types"].items() if t in HABITABLE and r not in lit and r not in borrowed)
     return {"check": "window", "status": "fail" if dark else "pass", "rooms": dark}
