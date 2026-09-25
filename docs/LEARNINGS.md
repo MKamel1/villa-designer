@@ -242,3 +242,19 @@ cd ~/ai-projects/archpipe-knowledge-data && PYTHONPATH=$HOME/ai-projects/researc
   ~/miniconda3/envs/agent-rag-research/bin/python -m app.ingest --paper-ids-file drop_in/<manifest>.txt
 ```
 Use `app.ingest_local` for new drops, run the same way. The run on 2026-09-25 added TM59, AD G and AECOM: 35 documents, 20,345 points.
+
+## Test fixtures with hand arithmetic fail like wrong rules (2026-09-25)
+
+**What happened.** Twice in one session a new test failed because its fixture was wrong, not the rule:
+- SAN-01: the fixture put a bedroom on the entrance storey, which made the expected WC mandatory;
+- FURN-02: the bed position was hand-computed, and the "failing" case actually left 850 mm on one side.
+
+Both were caught only because the failure was diagnosed before any code changed. The risk is "fixing" a correct rule, or loosening a test, to match a wrong fixture.
+
+**Guard** (`tests/test_bed_clearance.py` is the pattern):
+- build fixtures from the quantities under test (left gap, right gap, foot gap), not from coordinates;
+- take sizes from the object the rule reads (`catalogue.CATALOGUE[...]`);
+- assert the fixture's own geometry before calling the rule;
+- test exactly at the threshold (750 passes, 740 fails).
+
+**Practice:** when a new test fails, check the fixture's arithmetic first, then the rule.
