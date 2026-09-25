@@ -3575,6 +3575,66 @@
       "verification": "Read on the held original page 2026-09-25 (items 3 and 4 checked); 864 is derived as their sum.",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-clear-opening-90deg",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "Appendix A: Key terms, 'Clear opening width' (printed page 51)",
+      "stages": [
+        4
+      ],
+      "summary": "Clear opening width is measured between the doorframe (or stop) and the face of the door when open at 90 degrees.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "deg",
+      "verified_value": 90,
+      "original_page_checked": true,
+      "conditions": "Definition used by DOOR-01's widths; a leaf that cannot reach 90 degrees cannot deliver them.",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mitton-tv-uhd-min",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 4, Figure 4.10b (printed page 86)",
+      "stages": [
+        4
+      ],
+      "summary": "UHD/4K TVs: viewing distance 1 to 1.5 times the screen size (HD/1080p: 1.5 to 2.5 times).",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "ratio",
+      "verified_value": 1.0,
+      "original_page_checked": true,
+      "conditions": "Screen size = diagonal; UHD assumed for new screens.",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mitton-tv-uhd-max",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 4, Figure 4.10b (printed page 86)",
+      "stages": [
+        4
+      ],
+      "summary": "UHD/4K TVs: viewing distance 1 to 1.5 times the screen size (HD/1080p: 1.5 to 2.5 times).",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "ratio",
+      "verified_value": 1.5,
+      "original_page_checked": true,
+      "conditions": "Screen size = diagonal; UHD assumed for new screens.",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

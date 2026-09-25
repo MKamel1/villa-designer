@@ -44,7 +44,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 from typing import Callable
 
-from shapely.geometry import Point as ShpPoint, Polygon
+from shapely.geometry import LineString, Point as ShpPoint, Polygon
 from shapely.ops import unary_union
 
 from . import catalogue as cat
@@ -346,7 +346,7 @@ def _finding(rule_id: str, severity: str, message: str, *, where: str = "",
 
 _NEUFERT = "Neufert, Architects' Data"
 
-RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) for r in (
+RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('legacy-' + r.id,)) for r in (
     # ---- Stage 3 (Order): the concept decisions ------------------------
     Rule(
         "SAN-01", "WC on the entrance storey; a bathroom in the dwelling", 3, "computed",
@@ -516,8 +516,10 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) fo
         ),
     ),
     Rule(
-        "DOOR-02", "Door leaf can swing", 4, "computed",
-        f"{_NEUFERT} -- doors: the leaf must open through 90 degrees",
+        "DOOR-02", "Door leaf can open to 90 degrees", 4, "computed",
+        "UK AD M Vol 1 (2015) Appendix A: clear opening width is measured with the door "
+        "open at 90 degrees, so a leaf that cannot reach 90 degrees does not deliver the "
+        "width DOOR-01 requires",
         note="Its second rung is unique to doors, which is why ladders are "
              "per rule: rehanging a leaf fixes nothing about daylight.",
         remedies=(
@@ -525,6 +527,20 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) fo
             Remedy("Rehang the leaf on the other jamb, or reverse the swing.",
                    cost="A door schedule change, not a plan change."),
             Remedy("Move the opening, or enlarge the room.", 3, "L1"),
+        ),
+    ),
+    Rule(
+        "TV-01", "Viewing distance to the screen", 4, "computed",
+        "Mitton & Nystuen, Residential Interior Design 4th ed. p. 86, Fig. 4.10b: UHD/4K "
+        "viewing distance 1 to 1.5 times the screen size (HD 1.5 to 2.5 times)",
+        note="Seat-to-screen distance, not clear floor space: a coffee table sits inside it. "
+             "Measured from the screen face to the centre of the facing seat.",
+        evidence_refs=("mitton-tv-uhd-min", "mitton-tv-uhd-max"),
+        remedies=(
+            Remedy("Move the seating or the screen along the viewing axis."),
+            Remedy("Choose a screen size that suits the distance the room gives.",
+                   cost="A product change, not a plan change."),
+            Remedy("Re-plan the seating group or the room.", 3, "L1"),
         ),
     ),
     Rule(
@@ -1030,26 +1046,87 @@ def _swing_sector(w: Wall, o: Opening) -> Polygon:
     return Polygon(pts)
 
 
+def _leaf_line(w: Wall, o: Opening, opened_deg: float):
+    """The leaf as a line from the hinge, opened `opened_deg` from closed (same geometry as _swing_sector)."""
+    import math
+    dx, dy = w.direction
+    base = math.degrees(math.atan2(dy, dx))
+    if o.swing == "left":
+        hinge_at, ang = o.at - o.width / 2, base + opened_deg
+    else:
+        hinge_at, ang = o.at + o.width / 2, base + 180 - opened_deg
+    hinge = w.point_at(hinge_at, 0)
+    a = math.radians(ang)
+    return LineString([hinge, (hinge[0] + o.width * math.cos(a), hinge[1] + o.width * math.sin(a))])
+
+
+def door_opening_angle(p: Project, o: Opening, furn) -> float:
+    """How far (degrees) the leaf opens before it meets furniture, up to the required angle."""
+    need = cat.PLANNING["door_open_deg"][0]
+    w = p.wall(o.host)
+    for deg in range(1, int(need) + 1):
+        if _leaf_line(w, o, deg).intersects(furn):
+            return float(deg - 1)
+    return float(need)
+
+
 def r_door_swing_clear(p: Project, level: str) -> list[Finding]:
-    """A door leaf that cannot open because furniture is in its arc."""
+    """AD M measures clear width with the leaf at 90 degrees: report how far each leaf actually opens."""
     out = []
     pieces = [(f, _furniture_poly(f)) for f in p.furniture if f.level == level]
     if not pieces:
         return out
     furn = unary_union([q for _, q in pieces])
+    need, src = cat.PLANNING["door_open_deg"]
     for o in p.openings:
         w = p.wall(o.host)
         if o.kind != "door" or w.level != level:
             continue
-        arc = _swing_sector(w, o)
-        hit = arc.intersection(furn)
-        if hit.area > arc.area * 0.06:
+        got = door_opening_angle(p, o, furn)
+        if got + 1e-6 < need:
             out.append(_finding(
                 "DOOR-02", "warning",
-                f"Door {o.id} cannot swing fully: furniture sits in its arc. "
-                f"Either rehang it on the other jamb, change the swing direction, "
-                f"or move the furniture.",
-                where=o.id, at=opening_centre(p, o),
+                f"Door {o.id} opens only {got:.0f} degrees of the {need:.0f} needed: furniture sits in its "
+                f"arc, so it cannot give its clear opening width. Rehang it on the other jamb, change the "
+                f"swing, or move the furniture.",
+                where=o.id, at=opening_centre(p, o), reference=src,
+                measured=Measured(got, need, "deg"),
+            ))
+    return out
+
+
+def r_tv_viewing(p: Project, level: str) -> list[Finding]:
+    """Seat-to-screen distance against Mitton's UHD range (1-1.5 x the screen diagonal, 16:9 assumed)."""
+    import math
+    lo, src = cat.PLANNING["tv_view_min_ratio"]
+    hi = cat.PLANNING["tv_view_max_ratio"][0]
+    out = []
+    seats = [f for f in p.furniture if f.level == level and f.type in ("sofa_3seat", "sofa_2seat")]
+    for tv in (f for f in p.furniture if f.level == level and f.type == "tv_screen"):
+        w, _ = _furniture_size(tv)
+        diag = w * math.hypot(16, 9) / 16
+        a = math.radians(tv.rotation)
+        face = (-math.sin(a), math.cos(a))           # local +Y (front) after rotation
+        best = None
+        for s in seats:
+            vx, vy = s.at[0] - tv.at[0], s.at[1] - tv.at[1]
+            along = vx * face[0] + vy * face[1]
+            side = abs(-vx * face[1] + vy * face[0])
+            if along <= 0 or side > along * math.tan(math.radians(30)):   # in front, within the view cone
+                continue
+            if best is None or along < best[0]:
+                best = (along, s)
+        if best is None:
+            continue
+        d, s = best
+        need_lo, need_hi = lo * diag, hi * diag
+        if d + 1 < need_lo or d - 1 > need_hi:
+            req = need_lo if d < need_lo else need_hi
+            out.append(_finding(
+                "TV-01", "warning",
+                f"{s.id} sits {d:.0f} mm from the {diag / 25.4:.0f} in screen {tv.id}; UHD viewing wants "
+                f"{need_lo:.0f}-{need_hi:.0f} mm (1-1.5 x the screen size; HD 1.5-2.5 x).",
+                where=tv.id, at=tv.at, reference=src, measured=Measured(d, req, "mm"),
             ))
     return out
 
@@ -1191,6 +1268,7 @@ CHECKS: tuple[Callable[[Project, str], list[Finding]], ...] = (
     r_furniture_overlap,
     r_furniture_clearance,
     r_door_swing_clear,
+    r_tv_viewing,
     r_daylight,
     r_circulation_width,
     r_view_judgement,

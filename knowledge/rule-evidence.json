@@ -347,6 +347,36 @@
       },
       "note": "Re-sourced 2026-09-25. Beds and sanitary zones: AD M M4(2) (brief: ageing in place). Time-Saver's bed clearances (22 in / 12 in) are convenience minimums for a different context and are not used. Wardrobe and dining: Time-Saver; kitchens: NKBA. TV viewing distance removed from clearances 2026-09-25: it is a seat-to-screen distance (Mitton Fig. 4.10b), not clear floor space.",
       "complete": true
+    },
+    "DOOR-02": {
+      "parameters": {
+        "PLANNING.door_open_deg": {
+          "value": 90,
+          "unit": "deg",
+          "status": "verified",
+          "card": "ukadm-clear-opening-90deg"
+        }
+      },
+      "complete": true,
+      "note": "Re-sourced 2026-09-25; the legacy 6 % overlap allowance (unsourced) replaced by the achieved opening angle."
+    },
+    "TV-01": {
+      "parameters": {
+        "PLANNING.tv_view_min_ratio": {
+          "value": 1.0,
+          "unit": "ratio",
+          "status": "verified",
+          "card": "mitton-tv-uhd-min"
+        },
+        "PLANNING.tv_view_max_ratio": {
+          "value": 1.5,
+          "unit": "ratio",
+          "status": "verified",
+          "card": "mitton-tv-uhd-max"
+        }
+      },
+      "complete": true,
+      "note": "New 2026-09-25. Assumptions stated in the rule: 16:9 screen, UHD, distance to the facing seat's centre, 30-degree view cone."
     }
   }
 }

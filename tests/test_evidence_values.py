@@ -54,6 +54,9 @@ ORIGINAL = {
     "mitton-sofa-coffee-table-457": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 95, ["dimension shown (1) is a minimum and only pos"]),
     "mitton-desk-chair-access-864": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 246, ["10–20 inches (254–508mm) clear space provided in addition to the dimension of chair",
                                                     "24 inches by 24 inches (610 x 610 mm)"]),
+    "ukadm-clear-opening-90deg": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 58, ["face of the door when open at 90 degrees"]),
+    "mitton-tv-uhd-min": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 97, ["1 to 1½ the screen size"]),
+    "mitton-tv-uhd-max": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 97, ["1 to 1½ the screen size"]),
     "irc-r303-glazing-8pct": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 103,
                               ["not less than 8 percent of the floor area"]),
     "mitton-path-of-travel-min": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 79,
@@ -134,7 +137,7 @@ class RuleAuditTests(unittest.TestCase):
         self.assertNotIn("MIN_AREA_M2.kitchen", p)                   # IRC excepts kitchens
         self.assertEqual(rows["AREA-01"]["status"], "partly verified")
         # only rules whose every number is verified AND whose mapping is complete; CIRC-03 by client decision 2026-09-25
-        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01", "DIM-01", "FURN-02"})
+        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01", "DIM-01", "FURN-02", "DOOR-02", "TV-01"})
 
     def test_a_changed_catalogue_value_unverifies_the_parameter(self):
         from archpipe import catalogue as cat

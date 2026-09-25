@@ -258,3 +258,5 @@ Both were caught only because the failure was diagnosed before any code changed.
 - test exactly at the threshold (750 passes, 740 fails).
 
 **Practice:** when a new test fails, check the fixture's arithmetic first, then the rule.
+
+**Third instance** (DOOR-02 test, same day): I expected contact where the leaf tip reaches the obstacle edge (83.6°). The leaf actually meets the obstacle's near corner first (71.6°), and the rule was right. The practice caught it before any code changed. The fixture docstring now states the geometry it relies on.

@@ -103,6 +103,12 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
     ),
     # ---- dining --------------------------------------------------------
     FurnitureType(
+        "tv_screen", "TV screen (flat panel, 16:9)", 1440, 80,
+        _c(),
+        "Mitton & Nystuen 4th ed. p. 86, Fig. 4.10b -- viewing distance by screen size (checked by TV-01, not a clearance)",
+        "Width is the screen's own width; the diagonal is derived assuming 16:9 (1440 mm wide is a 65 in screen).",
+    ),
+    FurnitureType(
         "dining_4", "Dining table, 4", 1200, 800,
         _c(front=813, back=813, left=813, right=813),
         "Time-Saver Standards for Interior Design 2nd ed. p. 81 -- 32 in (813 mm) from table edge for chair plus access (NKBA agrees for kitchen seating)",
@@ -171,6 +177,9 @@ PLANNING = {
     "ceiling_min":         (2400, "General practice / common code minimum for habitable rooms; Neufert cites 2500 mm as preferred"),
     "wheelchair_turn":     (1500, "Neufert, Architects' Data -- accessibility: 1500 mm turning circle"),
     "daylight_ratio":      (0.08, "IRC R303.1 as quoted in Mitton & Nystuen, Residential Interior Design 4th ed. p. 92 -- glazing area at least 8 % of floor area in habitable rooms (code minimum; the unsourced legacy 1/8 was replaced 2026-09-25)"),
+    "tv_view_min_ratio":   (1.0,  "Mitton & Nystuen 4th ed. p. 86, Fig. 4.10b -- UHD/4K: viewing distance 1 to 1.5 times the screen size"),
+    "tv_view_max_ratio":   (1.5,  "Mitton & Nystuen 4th ed. p. 86, Fig. 4.10b -- UHD/4K: viewing distance 1 to 1.5 times the screen size"),
+    "door_open_deg":       (90,   "UK AD M Vol 1 (2015) Appendix A -- clear opening width is measured with the door open at 90 degrees"),
     "room_min_width":      (2134, "IRC R304.2 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 7 ft (2134 mm) in any horizontal dimension; kitchens excepted"),
 }
 

@@ -88,3 +88,10 @@ the mapping marked complete.
 - **TV: the 2.5 m "clearance" is removed.** Viewing distance runs from seat to screen (Mitton Fig. 4.10b: 1–1.5× the screen size for 4K), and a coffee table sits inside it, so it is not clear floor space. A seat-to-screen check is not implemented.
 - **FURN-02 is now fully sourced.**
 - **Bathroom and WC minimum areas stay unsourced** and diagnostic. The AD M fitting access zones (FURN-02) are the sourced test of a bathroom's usable size.
+
+## TV-01 and DOOR-02 (2026-09-25)
+
+| Rule | State | What it does |
+|---|---|---|
+| TV-01 (new) | verified, enabled | Seat-to-screen distance against Mitton Fig. 4.10b: UHD 1 to 1.5 × the screen diagonal. It uses a `tv_screen` piece, and assumes 16:9 and a UHD screen. The distance runs to the centre of the nearest sofa in front of the screen, within a 30° view cone. The finding reports the distance against the range. |
+| DOOR-02 | verified, enabled | AD M Appendix A measures clear opening width with the door open at 90°. The rule sweeps the leaf and reports the angle it reaches ("opens only 26 degrees of the 90 needed"). It replaces the unsourced 6 % overlap allowance; the demo apartment's two findings are unchanged. |
