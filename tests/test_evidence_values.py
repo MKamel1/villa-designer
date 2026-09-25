@@ -43,6 +43,9 @@ ORIGINAL = {
     "nkba-seating-no-traffic": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 7, ["allow 32″ (813 mm) of clearance"]),
     "nkba-dishwasher-to-sink-max": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 14, ["dishwasher within 36″ (914 mm) of the nearest edge"]),
     "nkba-dishwasher-standing-space": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 14, ["(533 mm) of standing space"]),
+    "sll-min-adf-bedroom": ("sll-code/SLL - Code for Lighting (2012).pdf", 127, ["Table 5.2 Minimum average daylight factor", "Bedrooms 1.0"]),
+    "sll-min-adf-living": ("sll-code/SLL - Code for Lighting (2012).pdf", 127, ["Table 5.2 Minimum average daylight factor", "Living rooms 1.5"]),
+    "sll-min-adf-kitchen": ("sll-code/SLL - Code for Lighting (2012).pdf", 127, ["Table 5.2 Minimum average daylight factor", "Kitchens 2.0"]),
     "ukadm-entrance-door-min": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 14,
                                 ["minimum clear opening width of 775mm"]),
 }

@@ -1,0 +1,1 @@
+{"kind": "daylight", "base": {}, "sweep": {"azimuth_deg": [0, 180], "wwr": [0.2, 0.35, 0.5], "overhang_m": [0.0, 0.6], "fin_m": [0.0, 0.4]}}

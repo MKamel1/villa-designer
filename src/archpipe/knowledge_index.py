@@ -253,7 +253,7 @@ def build(lib: dict | None = None, db: Path = DB, only: list[str] | None = None,
             else:
                 labels, basis = page_labels(doc, texts)
             outline = doc.get_toc()
-            toc = [{"level": lv, "title": ti, "pdf_page": p - 1, "label": labels[p - 1] if 0 < p <= len(labels) else "",
+            toc = [{"level": lv, "title": ti.replace("\x00", "").strip(), "pdf_page": p - 1, "label": labels[p - 1] if 0 < p <= len(labels) else "",
                     "basis": "pdf outline"} for lv, ti, p in outline]
             if len(toc) < 8 and kind == "pdf":
                 toc += printed_contents(texts, labels)

@@ -2802,6 +2802,69 @@
       "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "sll-min-adf-bedroom",
+      "source_id": "sll-code",
+      "edition": "2012 (SLL, ISBN 978-1-906846-21-3)",
+      "locator": "Chapter 5 Daylight, Table 5.2 Minimum average daylight factor (printed page 120)",
+      "stages": [
+        4,
+        5
+      ],
+      "summary": "Bedrooms: minimum average daylight factor 1.0 %.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "%",
+      "verified_value": 1.0,
+      "original_page_checked": true,
+      "conditions": "SLL Code for Lighting 2012, recommendations for dwellings (average daylight factor over the room). Published best-practice benchmark; the 2022 Code and BS EN 17037 are not held.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25.",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "sll-min-adf-living",
+      "source_id": "sll-code",
+      "edition": "2012 (SLL, ISBN 978-1-906846-21-3)",
+      "locator": "Chapter 5 Daylight, Table 5.2 Minimum average daylight factor (printed page 120)",
+      "stages": [
+        4,
+        5
+      ],
+      "summary": "Living rooms: minimum average daylight factor 1.5 %.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "%",
+      "verified_value": 1.5,
+      "original_page_checked": true,
+      "conditions": "SLL Code for Lighting 2012, recommendations for dwellings (average daylight factor over the room). Published best-practice benchmark; the 2022 Code and BS EN 17037 are not held.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25.",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "sll-min-adf-kitchen",
+      "source_id": "sll-code",
+      "edition": "2012 (SLL, ISBN 978-1-906846-21-3)",
+      "locator": "Chapter 5 Daylight, Table 5.2 Minimum average daylight factor (printed page 120)",
+      "stages": [
+        4,
+        5
+      ],
+      "summary": "Kitchens: minimum average daylight factor 2.0 %.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "%",
+      "verified_value": 2.0,
+      "original_page_checked": true,
+      "conditions": "SLL Code for Lighting 2012, recommendations for dwellings (average daylight factor over the room). Published best-practice benchmark; the 2022 Code and BS EN 17037 are not held.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25.",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

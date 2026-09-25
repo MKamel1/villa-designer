@@ -227,6 +227,18 @@ def shoebox(case: dict):
             ap.add_outdoor_shade(Shade(f"overhang_{ap.identifier}", Face3D(
                 [p1, p2, p2.move(n), p1.move(n)])))
 
+    fin = float(case.get("fin_m", 0.0))
+    if fin > 0:   # vertical fins at both jambs, full window height (low east/west sun)
+        for ap in facade.apertures:
+            pts = ap.geometry.vertices
+            zmin, zmax = min(q.z for q in pts), max(q.z for q in pts)
+            along = facade.normal.cross(Vector3D(0, 0, 1)).normalize()
+            ends = sorted(pts, key=lambda q: q.x * along.x + q.y * along.y)
+            n = facade.normal * fin
+            for i, e in enumerate((ends[0], ends[-1])):
+                b, tp = Point3D(e.x, e.y, zmin), Point3D(e.x, e.y, zmax)
+                ap.add_outdoor_shade(Shade(f"fin{i}_{ap.identifier}", Face3D([b, tp, tp.move(n), b.move(n)])))
+
     area = r["width_m"] * r["depth_m"]
     always = schedule_by_identifier("Always On")
     night = ScheduleRuleset.from_daily_values("bedroom occupancy",
@@ -260,7 +272,7 @@ def shoebox(case: dict):
     for o in OUTPUTS:
         sim.output.add_output(o)
     used = {k: a[k] for k in ASSUMPTIONS}
-    used.update({"azimuth_deg": az, "wwr": wwr, "overhang_m": over, "mode": mode,
+    used.update({"azimuth_deg": az, "wwr": wwr, "overhang_m": over, "fin_m": fin, "mode": mode,
                  "window_area_m2": round(sum(ap.area for ap in facade.apertures), 3),
                  "floor_area_m2": area, "wall_r_insulation_m2k_w": round(r_ins, 3)})
     return model, sim, used
@@ -357,3 +369,71 @@ def window_study(base: dict, sweep: dict, epw: Path, energyplus: Path, workdir: 
         case = dict(base, **dict(zip(keys, values)))
         results.append(run_case(case, epw, energyplus, workdir / f"case{i:03d}"))
     return results
+
+
+# ------------------------------------------------------------------ daylight
+
+# Stated reflectances for the daylight model (typical design-stage values, not yet
+# sourced to a card): walls 0.5, ceiling 0.8, floor 0.2, shading 0.35, ground 0.2.
+DAYLIGHT_REFLECTANCE = {"wall": 0.5, "ceiling": 0.8, "floor": 0.2, "shade": 0.35, "ground": 0.2}
+WORKPLANE_M = 0.85
+# gensky -c -B 55.866 sets the overcast sky's horizontal diffuse irradiance to 55.866 W/m2,
+# which is 10 000 lux at 179 lm/W, so daylight factor % = illuminance / 100.
+SKY_B = 55.866
+
+
+def daylight_factor(case: dict, radiance: Path, workdir: Path, grid_m: float = 0.5) -> dict:
+    """Daylight factor on the work plane under the CIE overcast sky (Radiance rtrace).
+
+    Also returns the simplified Lynes average daylight factor (Baker & Steemers p. 65),
+    DF = W.theta.T.M / (A (1 - R)), theta = vertical angle of visible sky from the window
+    centre in degrees (90 unobstructed), T = glass visible transmittance, M = 1 (clean)."""
+    import os
+    import subprocess
+    from honeybee_radiance.modifier.material import Glass, Plastic
+    from honeybee_radiance.writer import model_to_rad
+    model, _, used = shoebox(case)
+    room = model.rooms[0]
+    ref = DAYLIGHT_REFLECTANCE
+    mods = {"Wall": Plastic.from_single_reflectance("wall_m", ref["wall"]),
+            "RoofCeiling": Plastic.from_single_reflectance("ceiling_m", ref["ceiling"]),
+            "Floor": Plastic.from_single_reflectance("floor_m", ref["floor"])}
+    glass = Glass.from_single_transmittance("glass_m", used["glass"]["vt"])
+    shade = Plastic.from_single_reflectance("shade_m", ref["shade"])
+    for f in room.faces:
+        f.properties.radiance.modifier = mods[str(f.type)]
+        for ap in f.apertures:
+            ap.properties.radiance.modifier = glass
+            for s in ap.outdoor_shades:
+                s.properties.radiance.modifier = shade
+    grid = room.properties.radiance.generate_sensor_grid(grid_m, offset=WORKPLANE_M)
+    workdir.mkdir(parents=True, exist_ok=True)
+    scene, mat = model_to_rad(model)
+    sky = subprocess.run([str(radiance / "bin/gensky"), "-ang", "45", "0", "-c", "-B", str(SKY_B)],
+                         capture_output=True, text=True, check=True).stdout
+    g = ref["ground"]
+    sky += ("\nskyfunc glow sky_glow 0 0 4 1 1 1 0\nsky_glow source sky 0 0 4 0 0 1 180\n"
+            f"skyfunc glow ground_glow 0 0 4 {g} {g} {g} 0\nground_glow source ground 0 0 4 0 0 -1 180\n")
+    (workdir / "scene.rad").write_text(sky + "\n" + mat + "\n" + scene)
+    env = dict(os.environ, RAYPATH=f".:{radiance / 'lib'}")
+    oct_ = workdir / "scene.oct"
+    with oct_.open("wb") as o:
+        subprocess.run([str(radiance / "bin/oconv"), str(workdir / "scene.rad")], stdout=o, check=True, env=env)
+    pts_txt = "".join(f"{s.pos[0]} {s.pos[1]} {s.pos[2]} {s.dir[0]} {s.dir[1]} {s.dir[2]}\n" for s in grid.sensors)
+    pts_txt += "0 0 100 0 0 1\n"     # far above the roof, facing up: must see the whole sky (DF 100 %)
+    rt = subprocess.run([str(radiance / "bin/rtrace"), "-I", "-h", "-ab", "6", "-ad", "4096", "-as", "1024",
+                         "-ar", "512", "-aa", "0.1", "-lw", "2e-4", str(oct_)],
+                        input=pts_txt, capture_output=True, text=True, check=True, env=env).stdout
+    vals = [179 * (0.265 * float(a) + 0.670 * float(b) + 0.065 * float(c))
+            for a, b, c in (line.split()[:3] for line in rt.strip().splitlines())]
+    df = [v / 100.0 for v in vals[:-1]]
+    faces = room.faces
+    a_total = sum(f.area for f in faces)
+    w = sum(ap.area for f in faces for ap in f.apertures)
+    refl = {"Wall": ref["wall"], "RoofCeiling": ref["ceiling"], "Floor": ref["floor"]}
+    r_avg = sum(f.area * refl[str(f.type)] for f in faces) / a_total
+    lynes = w * 90.0 * used["glass"]["vt"] / (a_total * (1 - r_avg))
+    s = sorted(df)
+    return {"case": used, "df_avg": round(statistics.fmean(df), 2), "df_median": round(s[len(s) // 2], 2),
+            "df_min": round(s[0], 2), "points": len(df), "sky_check_df": round(vals[-1] / 100.0, 1),
+            "lynes_adf_unobstructed": round(lynes, 2), "reflectance": ref, "workplane_m": WORKPLANE_M}

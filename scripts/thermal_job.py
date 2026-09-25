@@ -51,12 +51,38 @@ def validate(epw: Path, eplus: Path, out: Path) -> dict:
     return {"passed": all(c["passed"] for c in checks), "checks": checks}
 
 
+def validate_daylight(radiance: Path, out: Path) -> dict:
+    checks = []
+    base = {"azimuth_deg": 0, "wwr": 0.3}
+    r0 = t.daylight_factor(base, radiance, out / "v0")
+    checks.append({"check": "sky normalisation: unobstructed upward probe reads DF 100 %",
+                   "value": r0["sky_check_df"], "passed": abs(r0["sky_check_df"] - 100) <= 3})
+    diff = (r0["df_avg"] - r0["lynes_adf_unobstructed"]) / r0["lynes_adf_unobstructed"]
+    checks.append({"check": "simulated average DF vs simplified Lynes formula (Baker & Steemers p. 65)",
+                   "sim": r0["df_avg"], "formula": r0["lynes_adf_unobstructed"], "diff": round(diff, 3),
+                   "passed": abs(diff) <= 0.35})
+    big = t.daylight_factor(dict(base, wwr=0.6), radiance, out / "v1")
+    lowt = t.daylight_factor(dict(base, glass={"vt": 0.3}), radiance, out / "v2")
+    over = t.daylight_factor(dict(base, overhang_m=1.2), radiance, out / "v3")
+    fin = t.daylight_factor(dict(base, fin_m=0.6), radiance, out / "v4")
+    checks.append({"check": "larger window raises DF", "ref": r0["df_avg"], "value": big["df_avg"],
+                   "passed": big["df_avg"] > r0["df_avg"]})
+    ratio = lowt["df_avg"] / r0["df_avg"]
+    checks.append({"check": "halving VT roughly halves DF", "ratio": round(ratio, 2), "passed": 0.4 <= ratio <= 0.6})
+    checks.append({"check": "overhang lowers DF", "ref": r0["df_avg"], "value": over["df_avg"],
+                   "passed": over["df_avg"] < r0["df_avg"]})
+    checks.append({"check": "fins lower DF", "ref": r0["df_avg"], "value": fin["df_avg"],
+                   "passed": fin["df_avg"] < r0["df_avg"]})
+    return {"passed": all(c["passed"] for c in checks), "checks": checks}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", type=Path, required=True)
     ap.add_argument("--epw", type=Path, required=True)
     ap.add_argument("--energyplus", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--radiance", type=Path)
     a = ap.parse_args()
     job = json.loads(a.input.read_text())
     a.out.mkdir(parents=True, exist_ok=True)
@@ -65,6 +91,14 @@ def main() -> int:
         result = {"climate": t.climate_summary(a.epw)}
     elif kind == "study":
         result = {"results": t.window_study(job.get("base", {}), job.get("sweep", {}), a.epw, a.energyplus, a.out)}
+    elif kind == "daylight":
+        import itertools
+        base, sweep = job.get("base", {}), job.get("sweep", {})
+        keys = list(sweep)
+        result = {"results": [t.daylight_factor(dict(base, **dict(zip(keys, v))), a.radiance, a.out / f"d{i:03d}")
+                              for i, v in enumerate(itertools.product(*(sweep[k] for k in keys)))]}
+    elif kind == "daylight-validate":
+        result = validate_daylight(a.radiance, a.out)
     elif kind == "validate":
         result = validate(a.epw, a.energyplus, a.out)
     else:

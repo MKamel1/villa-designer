@@ -60,6 +60,9 @@ class AssumptionTests(unittest.TestCase):
         job = (src.ROOT / "scripts" / "thermal_job.py").read_text(encoding="utf-8")
         self.assertIn('facade_beam_kwh_m2', job)
         self.assertIn('abs(diff) <= 0.02', job)
+        # the daylight validation keeps its independent checks: sky normalisation and the Lynes formula
+        self.assertIn("sky normalisation", job)
+        self.assertIn("Lynes", job)
 
 
 if __name__ == "__main__":

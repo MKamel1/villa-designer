@@ -86,7 +86,8 @@ def thermal(host, root, release, job_path, epw_zip):
     remote_job = root+'/inputs/thermal-'+job_id+'.json'
     _ssh(host, 'mkdir -p '+shlex.quote(root+'/inputs')+' && cat > '+shlex.quote(remote_job), stdin_bytes=job)
     cmd = [env['thermal_python'], release+'/scripts/thermal_job.py', '--input', remote_job, '--epw', epw,
-           '--energyplus', env['energyplus'], '--out', root+'/thermal/'+job_id]
+           '--energyplus', env['energyplus'], '--out', root+'/thermal/'+job_id,
+           '--radiance', env.get('radiance', '')]
     result = _ssh(host, shlex.join(cmd), timeout=7200)
     local = ROOT/'out/workstation'
     local.mkdir(parents=True, exist_ok=True)

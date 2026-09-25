@@ -76,12 +76,34 @@ The west peak stays highest even when shaded: a horizontal overhang does
 little against low western sun. So vertical fins or external blinds are the
 next shading type to add.
 
+## Daylight and fins (added 2026-09-25)
+
+- **Vertical fins:** `fin_m` adds fins at both jambs of each window, full
+  window height, as a new shading lever beside `overhang_m`.
+- **Daylight factor:** `thermal.daylight_factor` computes it on a 0.5 m
+  grid at 0.85 m work-plane height, using Radiance `rtrace` under the CIE
+  overcast sky (`gensky -c`) normalised to 10 000 lux. The job kind is
+  `daylight`, run with `workstation.py thermal`. Surface reflectances are
+  stated assumptions (walls 0.5, ceiling 0.8, floor 0.2).
+- **Targets now verified:** SLL Code for Lighting 2012, Table 5.2 (p. 120),
+  gives the minimum average daylight factor for bedrooms (1.0 %), living
+  rooms (1.5 %) and kitchens (2.0 %). These are cards `sll-min-adf-*`.
+  EN 17037 is still not held.
+- **Validation (`spec/thermal/daylight-validate.json`), all pass:**
+  - an unobstructed upward probe reads a daylight factor of 99.8 %
+    (sky normalisation);
+  - the simulated average daylight factor of 3.04 % is within 27 % of the
+    simplified Lynes formula's 4.14 % (Baker & Steemers p. 65, a
+    first-approximation formula; tolerance 35 %);
+  - a larger window raises daylight (5.06 %), halving visible
+    transmittance gives 0.45×, and a 1.2 m overhang (1.58 %) or 0.6 m fins
+    (2.66 %) lower it.
+
 ## Not yet covered (next)
 
-- Daylight (EN 17037 / sDA) through `honeybee-radiance`, reusing the
-  worker's Radiance 6.0.
-- Vertical fins and louvres.
 - 2050s morphed weather for TM59:2026.
+- Annual climate-based daylight (sDA/ASE) and glare, which is consultant
+  scope.
 - Glazing records from the LBNL IGDB, which needs a free account.
 
 ## Rejected
