@@ -96,11 +96,17 @@ obtained and read. Approved work, in phases:
 |---|---|
 | Purchase list (UK + US practice, tiered, from `knowledge/library.json`) and intake of readable copies | Done: `scripts/sources.py list/intake` |
 | Method steps added: façade, climate/thermal window study, landscape, FF&E, cost at every gate, consultant hand-off, acoustics end-check, taste profile, critic calibration | Done: method v1.1 and stage packages |
-| Rule verification from the held books (13 audited rules first, then kitchen/bath, lighting, daylight/overheating) | In progress: 25 books indexed (`scripts/knowledge.py`, semantic layer `scripts/semantic.py`); cards for AD K/M, NDSS, NKBA, Mitton, SLL ADF, Lechner, Ching; CIRC-01 verified, AREA-01 partly; CIRC-03 width, DIM-01 split and DOOR-01 restructure await decisions; TM59, BS EN 17037, BR 209, Neufert 6th still to buy |
-| Concept design by generate-and-critique: precedent corpus, typology catalogue, constraint-solver variants, calibrated critic, three concepts | v1 done, diagnostic (ADR-0016): 16 precedent records, 7 typologies, critic with graph calibration passing; geometric calibration blocked on a labelled dimensioned plan set; pilot bar/L/U in `docs/guidance/concepts-pilot.md` |
-| Thermal/cooling/daylight toolchain (Ladybug Tools + EnergyPlus + Radiance on the workstation, Cairo weather) | Done (ADR-0017): EnergyPlus shoebox window study with fins, validated against a hand beam calculation; Radiance daylight factor validated against sky normalisation and Lynes; TM59/EN 17037 criteria wait for the standards |
+| Rule verification from the held books (13 audited rules first, then kitchen/bath, lighting, daylight/overheating) | Done: every rule sourced from held books or free standards (AD B/G/K/M, NDSS, IRC via Mitton, NKBA, Time-Saver, Metric Handbook, TM59), values re-read from the originals by tests; all enabled for approval except CIRC-01 (privacy is a brief requirement). New rules FIRE-01, TV-01. See docs/guidance/rule-audit.md |
+| Concept design by generate-and-critique: precedent corpus, typology catalogue, constraint-solver variants, calibrated critic, three concepts | Done v1 (ADR-0016): critic calibrated on published graphs, CubiCasa5k (window, reachability) and Swiss Dwellings (area, width, principal double); wet stack shown to be a brief check; per-room TM59 screen per concept; MCP tools. Needs the real brief and plot to run for the villa |
+| Thermal/cooling/daylight toolchain (Ladybug Tools + EnergyPlus + Radiance on the workstation, Cairo weather) | Done (ADR-0017): window study with fins; Radiance daylight validated; TM59:2026 criteria (free, held) evaluated per room; concept screen per room |
 | Product library for every category (surfaces, sanitary, kitchen, glazing, furniture, plants), broad index + 300–500 verified items | In progress (ADR-0015): ~3,550 indexed; 224 verified (19 Poly Haven/ambientCG, 94 Fab Megascans, 111 Sketchfab CC0/CC-BY); BIMobject families via the user's app (`docs/guidance/bimobject-shortlist.md`); glazing/IGDB not started |
-| Schedules, specification book, quantities and relative cost, IFC for consultants | Planned |
+| Schedules, specification book, quantities and relative cost, IFC for consultants | Done: archpipe.deliverables + scripts/handoff.py (schedules CSV, quantities, AECOM relative cost, spec book from the product library, IFC4 verified against the spec to 0.000 mm, MISSING consultant scope). Example: docs/handoff/pilot-bar |
 
 **Consultant scope, missing in-house:** glare (DGP), HVAC design,
 electrical, plumbing and drainage, structural design, permits.
+
+**Needs from the client to go further:**
+- the Sheikh Zayed brief and plot, to run the concept generator and critic for the real villa;
+- a rotated Sketchfab token (the old one appeared in chat);
+- optional: BS EN 17037 (EVS edition, about €20–50) and BR 209 (£75), for sunlight-exposure and garden-sun pass marks.
+
