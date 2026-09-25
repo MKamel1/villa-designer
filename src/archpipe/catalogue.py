@@ -181,6 +181,15 @@ MIN_AREA_M2 = {
 }
 
 
+ROOM_MIN_WIDTH = {
+    # Verified 2026-09-25: Metric Handbook 7th ed., p. 22-4, quoting NDSS (cards ndss-*-width).
+    # Other habitable rooms still use PLANNING["room_min_width"] (legacy, unsourced).
+    "bedroom_single": (2150, "Metric Handbook 7th ed. (2022) p. 22-4 -- NDSS: single bedroom at least 2.15 m wide"),
+    "bedroom":        (2550, "Metric Handbook 7th ed. (2022) p. 22-4 -- NDSS: every other double bedroom at least 2.55 m wide"),
+    "bedroom_first":  (2750, "Metric Handbook 7th ed. (2022) p. 22-4 -- NDSS: one double bedroom at least 2.75 m wide"),
+}
+
+
 def get(type_id: str) -> FurnitureType:
     try:
         return CATALOGUE[type_id]

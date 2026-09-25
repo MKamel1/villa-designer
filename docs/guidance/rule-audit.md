@@ -48,7 +48,7 @@ the value the engine uses equals a verified card's value, in the card's unit.
 | CIRC-01 | partly verified | Hall width 900 mm matches AD M M4(2) para 2.22a. Its privacy test stays qualitative (Alexander 127). |
 | LIGHT-01 | verified | Re-sourced 2026-09-25. The legacy 1/8 (12.5 %) was attributed to Neufert but is not in the held 1980 edition. The US code minimum (IRC R303.1, 8 %, quoted by Mitton p. 92) is the minimum-glazing screen; daylight adequacy is judged by SLL minimum ADF. |
 | CIRC-03 | verified | Client decision 2026-09-25: 900 mm (AD M M4(2) para 2.22a card). Mitton p. 68 gives 914 mm (36 in); the 1.6 % difference is within the close-values policy. Using the hall width for routes inside rooms is this decision, not AD M's own scope. |
-| DIM-01 | unresolved | The generic 2.4 m has no source. NDSS gives widths by room type (2.15, 2.75 and 2.55 m). Split the rule by room type. |
+| DIM-01 | partly verified | Split by room type 2026-09-25. Bedrooms use NDSS via the Metric Handbook p. 22-4: single 2.15 m, other doubles 2.55 m, and one double of at least 2.75 m. Living, kitchen, dining and study keep the unsourced generic 2.4 m. |
 | DOOR-01 | unresolved | AD M ties door width to how the corridor approaches it (Table 2.1), not to room type. The AD M entrance minimum is 775 mm; the legacy value is 900 mm. |
 
 **Kitchen planning evidence** (NKBA, free edition): work aisle 1067 mm for one

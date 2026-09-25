@@ -43,16 +43,29 @@
     },
     "DIM-01": {
       "parameters": {
+        "ROOM_MIN_WIDTH.bedroom_single": {
+          "value": 2150,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ndss-single-bedroom-width"
+        },
+        "ROOM_MIN_WIDTH.bedroom": {
+          "value": 2550,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ndss-other-double-bedroom-width"
+        },
+        "ROOM_MIN_WIDTH.bedroom_first": {
+          "value": 2750,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ndss-first-double-bedroom-width"
+        },
         "PLANNING.room_min_width": {
           "value": 2400,
           "unit": "mm",
           "status": "unresolved",
-          "reason": "published widths are per room type (NDSS: single 2150, first double 2750, other double 2550); the single generic 2400 has no source. Split the rule by room type.",
-          "candidates": [
-            "ndss-single-bedroom-width",
-            "ndss-first-double-bedroom-width",
-            "ndss-other-double-bedroom-width"
-          ]
+          "reason": "no held source gives a minimum width for living rooms, kitchens, dining rooms or studies"
         }
       }
     },

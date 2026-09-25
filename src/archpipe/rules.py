@@ -440,8 +440,8 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) fo
     ),
     Rule(
         "DIM-01", "Habitable room is wide enough to be usable", 4, "computed",
-        "General practice: below ~2.4 m a room will not take a bed plus "
-        "circulation",
+        "Bedrooms: Metric Handbook 7th ed. p. 22-4 quoting NDSS (2.15 / 2.55 / 2.75 m); "
+        "other habitable rooms: general practice ~2.4 m (unsourced)",
         remedies=(
             Remedy("Re-assign the use: a narrow room works as a store or "
                    "utility where it will not work as a habitable room.",
@@ -694,23 +694,42 @@ def r_room_min_area(p: Project, level: str) -> list[Finding]:
     return out
 
 
+def _narrow(r: Room) -> float:
+    xs = [pt[0] for pt in r.boundary]
+    ys = [pt[1] for pt in r.boundary]
+    return min(max(xs) - min(xs), max(ys) - min(ys))
+
+
 def r_room_min_width(p: Project, level: str) -> list[Finding]:
-    need, src = cat.PLANNING["room_min_width"]
+    """Bedrooms by NDSS type (verified); other habitable rooms by the legacy generic width."""
     out = []
     for r in (r for r in p.rooms if r.level == level):
         if r.occupancy not in HABITABLE:
             continue
-        xs = [pt[0] for pt in r.boundary]
-        ys = [pt[1] for pt in r.boundary]
-        narrow = min(max(xs) - min(xs), max(ys) - min(ys))
+        need, src = cat.ROOM_MIN_WIDTH.get(r.occupancy) or cat.PLANNING["room_min_width"]
+        narrow = _narrow(r)
         if narrow + 1e-6 < need:
             out.append(_finding(
                 "DIM-01", "warning",
                 f"{r.name} is only {narrow:.0f} mm across at its narrowest. "
-                f"Below {need:.0f} mm a habitable room will not take furniture "
-                f"plus a circulation route.",
+                f"Below {need:.0f} mm a {r.occupancy.replace('_', ' ')} will not take its "
+                f"furniture plus a circulation route.",
                 where=r.id, at=r.centroid, reference=src,
                 measured=Measured(narrow, need, "mm"),
+            ))
+    # NDSS: one double bedroom in the dwelling at least 2.75 m wide. Dwelling-wide, reported
+    # once, on the level holding the widest double bedroom.
+    doubles = [r for r in p.rooms if r.occupancy == "bedroom"]
+    if doubles:
+        widest = max(doubles, key=_narrow)
+        need, src = cat.ROOM_MIN_WIDTH["bedroom_first"]
+        if widest.level == level and _narrow(widest) + 1e-6 < need:
+            out.append(_finding(
+                "DIM-01", "warning",
+                f"No double bedroom reaches {need:.0f} mm wide; the widest, {widest.name}, "
+                f"is {_narrow(widest):.0f} mm. The principal bedroom needs the extra width.",
+                where=widest.id, at=widest.centroid, reference=src,
+                measured=Measured(_narrow(widest), need, "mm"),
             ))
     return out
 
