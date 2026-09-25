@@ -82,23 +82,24 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
     # ---- living --------------------------------------------------------
     FurnitureType(
         "sofa_3seat", "Sofa, 3 seat", 2100, 900,
-        _c(front=450),
-        "Neufert, Architects' Data -- seating: 400-450 mm sofa to coffee table",
+        _c(front=457),
+        "Mitton & Nystuen, Residential Interior Design 4th ed. p. 84, Fig. 4.6 -- sofa to coffee table 12-18 in (305-457 mm); 12 in only where the table is also minimal, so 18 in (457 mm)",
     ),
     FurnitureType(
         "sofa_2seat", "Sofa, 2 seat", 1500, 900,
-        _c(front=450),
-        "Neufert, Architects' Data -- seating: 400-450 mm sofa to coffee table",
+        _c(front=457),
+        "Mitton & Nystuen, Residential Interior Design 4th ed. p. 84, Fig. 4.6 -- sofa to coffee table 12-18 in (305-457 mm); 12 in only where the table is also minimal, so 18 in (457 mm)",
     ),
     FurnitureType(
         "coffee_table", "Coffee table", 1100, 600,
-        _c(front=450, back=450),
-        "Neufert, Architects' Data -- seating groups",
+        _c(front=457, back=457),
+        "Mitton & Nystuen, Residential Interior Design 4th ed. p. 84, Fig. 4.6 -- sofa to coffee table 12-18 in (305-457 mm); 12 in only where the table is also minimal, so 18 in (457 mm)",
     ),
     FurnitureType(
         "tv_unit", "TV unit", 1600, 450,
-        _c(front=2500),
-        "General practice: ~2.5 m minimum viewing distance for a domestic screen",
+        _c(),
+        "No clearance: viewing distance is seat-to-screen, not clear floor space (Mitton p. 86, Fig. 4.10b: 1-1.5x the screen size for 4K, 1.5-2.5x for HD)",
+        "The legacy 2.5 m 'clearance' treated viewing distance as free floor space; a coffee table legitimately sits inside it.",
     ),
     # ---- dining --------------------------------------------------------
     FurnitureType(
@@ -155,8 +156,8 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
     # ---- work ----------------------------------------------------------
     FurnitureType(
         "desk", "Desk", 1400, 700,
-        _c(front=900),
-        "Neufert, Architects' Data -- workplaces: 900 mm for a seated chair zone",
+        _c(front=864),
+        "Mitton & Nystuen 4th ed. p. 235, Fig. 8.13 -- chair about 24 in (610 mm) plus 10-20 in (254-508 mm) clear: at least 34 in (864 mm) behind the desk",
     ),
 )}
 

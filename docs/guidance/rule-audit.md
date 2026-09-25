@@ -80,3 +80,11 @@ the mapping marked complete.
 | AREA-01 | Living, dining and study: 6.5 m² (IRC R304.1, via Mitton p. 143). This replaces an unsourced 16 m²: it is a legal floor, and fit is judged by the FURN rules. The kitchen minimum is removed, because IRC excepts kitchens and NKBA aisles and runs judge them. Bathroom and WC minima remain unresolved. |
 | DIM-01 | Other habitable rooms: 2,134 mm (IRC R304.2, via Mitton p. 143; p. 92 misprints 2,143). Kitchens are excepted. DIM-01 is now fully sourced. |
 | FURN-02 | Fridge front: 1,219 mm, the NKBA multi-cook work aisle it faces. Shower front: 762 mm (NKBA access standard, 30 × 48 in). The code minimum is 610 mm, but the brief records ageing in place. 25 of 31 are now verified. Still unresolved: sofa to coffee table, coffee table, TV distance (Mitton gives 1–1.5× the screen diagonal for 4K, which needs the screen size), and desk. |
+
+## Last clearances (2026-09-25, later)
+
+- **Sofa to coffee table: 457 mm** (Mitton Fig. 4.6, 12–18 in). The 12 in minimum applies only with a minimal-length table, and the catalogue table is 1,100 mm long. Read from the figure image, since the labels are not in the text layer.
+- **Desk: 864 mm** (Mitton Fig. 8.13): a 24 in chair zone plus 10 in clear, derived as their sum.
+- **TV: the 2.5 m "clearance" is removed.** Viewing distance runs from seat to screen (Mitton Fig. 4.10b: 1–1.5× the screen size for 4K), and a coffee table sits inside it, so it is not clear floor space. A seat-to-screen check is not implemented.
+- **FURN-02 is now fully sourced.**
+- **Bathroom and WC minimum areas stay unsourced** and diagnostic. The AD M fitting access zones (FURN-02) are the sourced test of a bathroom's usable size.

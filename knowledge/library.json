@@ -3535,6 +3535,46 @@
       "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mitton-sofa-coffee-table-457",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 4, Figure 4.6 Space required for adult seating (printed page 84)",
+      "stages": [
+        4
+      ],
+      "summary": "Sofa to coffee table 12-18 in (305-457 mm); the 12 in minimum only where the table length is also minimal, longer tables need more.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 457,
+      "original_page_checked": true,
+      "conditions": "US residential planning practice; the catalogue coffee table (1100 mm) is not minimal, so 18 in applies.",
+      "exceptions": null,
+      "verification": "Value read from the figure image 2026-09-25 (the dimension labels are not in the text layer); the regression test re-reads the caption's 12-inch minimum note.",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mitton-desk-chair-access-864",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 8, Figure 8.13 Desk and work surface reach distances and clearances (printed page 235)",
+      "stages": [
+        4
+      ],
+      "summary": "Chair about 24 x 24 in (610 mm) plus 10-20 in (254-508 mm) clear space for access: at least 34 in (864 mm) from the desk edge.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 864,
+      "original_page_checked": true,
+      "conditions": "US residential planning practice; the value is the sum of the figure's items 3 and 4 (610 + 254).",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (items 3 and 4 checked); 864 is derived as their sum.",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

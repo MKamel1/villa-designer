@@ -302,34 +302,28 @@
           "card": "ukadm-bath-access-zone-700"
         },
         "CATALOGUE.sofa_3seat.front": {
-          "value": 450,
+          "value": 457,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "no held source states a sofa-to-coffee-table distance as a number"
+          "status": "verified",
+          "card": "mitton-sofa-coffee-table-457"
         },
         "CATALOGUE.sofa_2seat.front": {
-          "value": 450,
+          "value": 457,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "as sofa_3seat"
+          "status": "verified",
+          "card": "mitton-sofa-coffee-table-457"
         },
         "CATALOGUE.coffee_table.front": {
-          "value": 450,
+          "value": 457,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "as sofa_3seat"
+          "status": "verified",
+          "card": "mitton-sofa-coffee-table-457"
         },
         "CATALOGUE.coffee_table.back": {
-          "value": 450,
+          "value": 457,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "as sofa_3seat"
-        },
-        "CATALOGUE.tv_unit.front": {
-          "value": 2500,
-          "unit": "mm",
-          "status": "unresolved",
-          "reason": "Mitton p. 85 gives viewing distance by screen size (Fig. 4.10b), not one value"
+          "status": "verified",
+          "card": "mitton-sofa-coffee-table-457"
         },
         "CATALOGUE.fridge.front": {
           "value": 1219,
@@ -344,13 +338,13 @@
           "card": "nkba-shower-clear-floor-762"
         },
         "CATALOGUE.desk.front": {
-          "value": 900,
+          "value": 864,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "not yet found in a held source"
+          "status": "verified",
+          "card": "mitton-desk-chair-access-864"
         }
       },
-      "note": "Re-sourced 2026-09-25. Beds and sanitary zones: AD M M4(2) (brief: ageing in place). Time-Saver's bed clearances (22 in / 12 in) are convenience minimums for a different context and are not used. Wardrobe and dining: Time-Saver; kitchens: NKBA."
+      "note": "Re-sourced 2026-09-25. Beds and sanitary zones: AD M M4(2) (brief: ageing in place). Time-Saver's bed clearances (22 in / 12 in) are convenience minimums for a different context and are not used. Wardrobe and dining: Time-Saver; kitchens: NKBA. TV viewing distance removed from clearances 2026-09-25: it is a seat-to-screen distance (Mitton Fig. 4.10b), not clear floor space."
     }
   }
 }
