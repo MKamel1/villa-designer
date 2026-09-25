@@ -61,14 +61,13 @@
         "PLANNING.corridor_min": {
           "value": 900,
           "unit": "mm",
-          "status": "unresolved",
-          "reason": "the route-through-room check needs a path-of-travel width: Mitton gives 914 mm (accessible paths); AD M's 900 mm is for halls and landings. Decision needed on which applies.",
-          "candidates": [
-            "mitton-path-of-travel-min",
-            "ukadm-hall-min-m42"
-          ]
+          "status": "verified",
+          "card": "ukadm-hall-min-m42",
+          "corroborating": ["mitton-path-of-travel-min"],
+          "decision": "Client decision 2026-09-25: use 900 mm. Mitton's 914 mm is 36 in converted; the two differ by 14 mm (1.6 %), so they are treated as the same recommendation (close-values policy, docs/guidance/README.md). Applying AD M's hall width to routes inside rooms is this decision, not AD M's own scope."
         }
-      }
+      },
+      "complete": true
     },
     "CIRC-01": {
       "parameters": {

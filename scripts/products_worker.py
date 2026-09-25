@@ -220,6 +220,13 @@ def model_check(rec: dict, out_dir: Path) -> list[dict]:
     _reset()
     gltf = next(iter(sorted(Path(rec["dir"]).glob("*.gltf")) + sorted(Path(rec["dir"]).glob("*.glb"))))
     bpy.ops.import_scene.gltf(filepath=str(gltf))
+    scale = rec.get("scale")
+    if scale:
+        # recorded unit correction (knowledge/products/sketchfab-scale-fixes.json); every use must apply it
+        for o in bpy.context.scene.objects:
+            if o.parent is None:
+                o.scale = [v * scale for v in o.scale]
+        bpy.context.view_layer.update()
     meshes = [o for o in bpy.context.scene.objects if o.type == "MESH"]
     from mathutils import Vector
     pts = [o.matrix_world @ Vector(c) for o in meshes for c in o.bound_box]
@@ -247,7 +254,8 @@ def model_check(rec: dict, out_dir: Path) -> list[dict]:
     checks.append({"name": "textures_resolved", "status": "failed" if missing else "passed", "measured": missing})
     sane = 10 <= dims[-1] <= 10000
     checks.append({"name": "units_scale_sane", "status": "passed" if sane else "failed", "expected": [10, 10000],
-                   "measured": round(dims[-1]), "detail": "largest extent in mm must be 1 cm to 10 m"})
+                   "measured": round(dims[-1]), "detail": "largest extent in mm must be 1 cm to 10 m"
+                   + (f"; measured after the recorded unit correction x{scale}" if scale else "")})
     return checks
 
 

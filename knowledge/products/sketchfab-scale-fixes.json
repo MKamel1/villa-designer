@@ -1,5 +1,5 @@
 {
- "note": "Models that fail units_scale_sane as downloaded. A proposed scale makes the largest extent a plausible furniture size (0.3-6 m); it is a correction to confirm by eye, so these stay failed until rescaled and re-checked.",
+ "note": "Models that failed units_scale_sane as downloaded. Client approved the rescale 2026-09-25: the scale is applied on import (products_worker.model_check, and data.scale_applied in the index); source files are unchanged, so every consumer must apply scale_applied. All 42 with a clean cm/mm fix re-verified; models with scale null stay failed.",
  "models": {
   "sketchfab:00c35e3215f74e4f9e33b6b7a14a87cf": {
    "largest_extent_mm_as_is": 174479,

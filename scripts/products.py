@@ -188,6 +188,7 @@ def sketchfab(host: str = "ai-workstation") -> dict:
     from archpipe.products import schema
     from workstation import _ssh
     rows = json.loads(_ssh(host, "python3 -", stdin_bytes=SKETCHFAB_SCAN.encode()).stdout)
+    fixes = json.loads((ROOT / "knowledge/products/sketchfab-scale-fixes.json").read_text(encoding="utf-8"))["models"]
     items, records = [], []
     for m in rows:
         words = (m.get("tags") or []) + (m.get("categories") or []) + [m.get("name") or ""]
@@ -196,11 +197,12 @@ def sketchfab(host: str = "ai-workstation") -> dict:
                         "name": m.get("name"), "brand": None, "license": m.get("licence"), "url": m.get("url"),
                         "tags": m.get("tags") or [], "styles": schema.styles_for(words),
                         "data": {"asset_type": "model", "author": m.get("author"), "attribution": m.get("attribution"),
-                                 "faces": m.get("faces")}})
+                                 "faces": m.get("faces"),
+                                 "scale_applied": (fixes.get(f"sketchfab:{m['uid']}") or {}).get("scale")}})
         items.append({"id": f"sketchfab:{m['uid']}", "source": "sketchfab", "key": f"{m['uid']}/gltf",
                       "asset_type": "model", "license": m.get("licence"),
                       "files": [{"name": "../model.zip", "url": "local:already-downloaded", "size": m["size"]}],
-                      "declared": {}})
+                      "declared": {}, "scale": (fixes.get(f"sketchfab:{m['uid']}") or {}).get("scale")})
     store.upsert_items(records)
     store.set_coverage("sketchfab", len(records), len(records))
     return run_checks(items, host, "sketchfab")

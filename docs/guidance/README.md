@@ -89,3 +89,17 @@ Run `.venv/Scripts/python scripts/demo_guidance.py` to regenerate the local pilo
 report. Run `.venv/Scripts/python -m unittest discover -s tests -p test_guidance.py`,
 `.venv/Scripts/python scripts/test_mcp.py`, and
 `.venv/Scripts/python scripts/verify.py` for verification.
+
+## When sources give different dimensions (client policy, 2026-09-25)
+
+1. **Close values (within 5 %): treat them as one recommendation.** Use either value and record both cards.
+   - Example: CIRC-03 uses 900 mm (AD M). Mitton's 914 mm is 36 in converted.
+   - Imperial/metric rounding is the usual cause of close values.
+2. **Far apart (more than 5 %): find out why before choosing.** Usual reasons:
+   - different context: accessible versus standard, public versus dwelling, a different room type or occupancy;
+   - a different measurement basis: clear opening versus structural or leaf width, finished versus structural face;
+   - a minimum versus a recommended value;
+   - a different country or edition.
+
+   Record the explanation. Use the value whose context matches the project. When contexts genuinely conflict, prefer the stricter value and say so.
+3. The choice, both sources and the reason go in `knowledge/rule-evidence.json` (`decision`, `corroborating`).

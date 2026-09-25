@@ -100,7 +100,8 @@ class RuleAuditTests(unittest.TestCase):
         self.assertEqual(p["MIN_AREA_M2.bedroom"]["used"], 11.5)
         self.assertFalse(p["MIN_AREA_M2.living"]["verified"])
         self.assertEqual(rows["AREA-01"]["status"], "partly verified")
-        self.assertFalse(any(r["enabled_for_approval"] for r in rows.values()))
+        # only rules whose every number is verified AND whose mapping is complete; CIRC-03 by client decision 2026-09-25
+        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03"})
 
     def test_a_changed_catalogue_value_unverifies_the_parameter(self):
         from archpipe import catalogue as cat
