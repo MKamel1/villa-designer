@@ -1,0 +1,357 @@
+{
+ "note": "Models that fail units_scale_sane as downloaded. A proposed scale makes the largest extent a plausible furniture size (0.3-6 m); it is a correction to confirm by eye, so these stay failed until rescaled and re-checked.",
+ "models": {
+  "sketchfab:00c35e3215f74e4f9e33b6b7a14a87cf": {
+   "largest_extent_mm_as_is": 174479,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1745
+  },
+  "sketchfab:031dba0a7ef44158b7c3a1186438db64": {
+   "largest_extent_mm_as_is": 140351,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1404
+  },
+  "sketchfab:033b034de3244b02a5487e171e4888dd": {
+   "largest_extent_mm_as_is": 206894,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2069
+  },
+  "sketchfab:0b89363972794e9a998913949e878042": {
+   "largest_extent_mm_as_is": 20551,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:0c4d6d98c48c46e6b71f2914fd049c8e": {
+   "largest_extent_mm_as_is": 19097,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:0d672a10acf94737ba672b4f747f9c97": {
+   "largest_extent_mm_as_is": 227964,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2280
+  },
+  "sketchfab:0f4c56dcadb64af29003cecf54e869d7": {
+   "largest_extent_mm_as_is": 10114,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:129dd2f84879477ea261b422d21491f4": {
+   "largest_extent_mm_as_is": 258391,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2584
+  },
+  "sketchfab:16070c2e6faa405391ab7ada8bb0aed6": {
+   "largest_extent_mm_as_is": 239939,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2399
+  },
+  "sketchfab:184baa16500841ef86fdc94e62017e58": {
+   "largest_extent_mm_as_is": 285550,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2856
+  },
+  "sketchfab:1d09094be7fc4e809841992d8801f217": {
+   "largest_extent_mm_as_is": 112992,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1130
+  },
+  "sketchfab:1d9310352e9942528f4199b5c8e20a88": {
+   "largest_extent_mm_as_is": 1546764,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 1547
+  },
+  "sketchfab:20865e74c69a4a77b0fa81bc8d852906": {
+   "largest_extent_mm_as_is": 497008,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 4970
+  },
+  "sketchfab:25f0b058cd2342fa9dfdf41c9df5fc82": {
+   "largest_extent_mm_as_is": 10000,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:2c587738161e43708b4d99210c57c9cc": {
+   "largest_extent_mm_as_is": 18860,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:3028ba44d1f245b886c12eadc934f722": {
+   "largest_extent_mm_as_is": 1350000,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 1350
+  },
+  "sketchfab:3088660885a244d2a16e0ab78e24936e": {
+   "largest_extent_mm_as_is": 360000,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 3600
+  },
+  "sketchfab:339ac3a31db046648463f5b5b852ad3e": {
+   "largest_extent_mm_as_is": 287238,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2872
+  },
+  "sketchfab:39de8d3ccc0b449f9aa2d446ab4e58e3": {
+   "largest_extent_mm_as_is": 10918,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:3ae5d56740584b64a3b03e0a2ed3209e": {
+   "largest_extent_mm_as_is": 78546,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 785
+  },
+  "sketchfab:410e3e70d7a64cf6a059f33407d1afcd": {
+   "largest_extent_mm_as_is": 2247644,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 2248
+  },
+  "sketchfab:4496cae1a3194c519dd5addb1d69299d": {
+   "largest_extent_mm_as_is": 23009,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:4f3db3cb57bd4bce886f7b9a13273a2f": {
+   "largest_extent_mm_as_is": 10828,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:507aeb748bc04d1ea923cd8bac6783dc": {
+   "largest_extent_mm_as_is": 23425,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:518fe01989904bf48a4a04980bc578af": {
+   "largest_extent_mm_as_is": 32681,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 327
+  },
+  "sketchfab:52f83ac364ed4e28878a658d48502048": {
+   "largest_extent_mm_as_is": 460160,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 4602
+  },
+  "sketchfab:5540183da1c7452f810f8de33734879a": {
+   "largest_extent_mm_as_is": 24909,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:58b855b5e2f34e42b9670e252c40c68a": {
+   "largest_extent_mm_as_is": 1006240,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 1006
+  },
+  "sketchfab:5afcdbfe5e20402c908fcc52b475275a": {
+   "largest_extent_mm_as_is": 1714645,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 1715
+  },
+  "sketchfab:5d206e1cee4144e19b9f636ee1393e9c": {
+   "largest_extent_mm_as_is": 193700,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1937
+  },
+  "sketchfab:5edba31f2fc44062a3c53efae30e8345": {
+   "largest_extent_mm_as_is": 52453,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 525
+  },
+  "sketchfab:6164eed28c464c94be8f5268240dc864": {
+   "largest_extent_mm_as_is": 10114,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:62e4dc3e34e643bd94ebc7395d5c17c7": {
+   "largest_extent_mm_as_is": 10714,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:642df0acc18f45d2af8eaa698bdccff7": {
+   "largest_extent_mm_as_is": 208689,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2087
+  },
+  "sketchfab:65cbbefb7774468e80ea4d815ce3cfd0": {
+   "largest_extent_mm_as_is": 22472,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:6784c09b84a342ee8f0509f5181e5c63": {
+   "largest_extent_mm_as_is": 12621,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:6acc8732df2c4b609e5d4ac52b364a24": {
+   "largest_extent_mm_as_is": 12940,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:6b33633360d34fa09c5f7abc6ee76ae3": {
+   "largest_extent_mm_as_is": 12913,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:7806c2e5146f471c98a561fc245f07c6": {
+   "largest_extent_mm_as_is": 176583,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1766
+  },
+  "sketchfab:80187f09dc43403ca8916d3618149579": {
+   "largest_extent_mm_as_is": 36891,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 369
+  },
+  "sketchfab:818254b878dd46dda5566d2ae88f84da": {
+   "largest_extent_mm_as_is": 167831,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1678
+  },
+  "sketchfab:857dc72b367e484a8f7a4749a575e58d": {
+   "largest_extent_mm_as_is": 5556147,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 5556
+  },
+  "sketchfab:8ce01f03c4c54c1bb69f6ba47a590586": {
+   "largest_extent_mm_as_is": 217388,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2174
+  },
+  "sketchfab:8f8a3dbd45534152b5771c36cc4742d9": {
+   "largest_extent_mm_as_is": 1316175,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 1316
+  },
+  "sketchfab:9843a830b96142a9a53f45f25304d93c": {
+   "largest_extent_mm_as_is": 22588,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:a24bcb6b7a2e448fad661004f403ae12": {
+   "largest_extent_mm_as_is": 276137,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2761
+  },
+  "sketchfab:a9738f4e651b4779acdddcfbb89516f6": {
+   "largest_extent_mm_as_is": 11586,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:b6b7c0c6526b4a2f9f2ae4710cbb29d2": {
+   "largest_extent_mm_as_is": 728175,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 728
+  },
+  "sketchfab:ba6315fe80d34b5ba7ff912f5ec71b19": {
+   "largest_extent_mm_as_is": 10746,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:ba6797a70b5e4d039087c60291669f43": {
+   "largest_extent_mm_as_is": 37664,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 377
+  },
+  "sketchfab:c41a27d7a1b24dc484bc603e1bc2d0ef": {
+   "largest_extent_mm_as_is": 113059,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1131
+  },
+  "sketchfab:c75bc71a5039440aa38f106e4086bd4e": {
+   "largest_extent_mm_as_is": 91425,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 914
+  },
+  "sketchfab:c8717576f2244716b3abf321065f2b9a": {
+   "largest_extent_mm_as_is": 187185,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1872
+  },
+  "sketchfab:ca9ed87062694ff2a2521c44484f1a9a": {
+   "largest_extent_mm_as_is": 503752,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 5038
+  },
+  "sketchfab:d9d5ed5de83b4d899ab93f55bdc3d0bc": {
+   "largest_extent_mm_as_is": 133296,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1333
+  },
+  "sketchfab:e57096564d9c411dabb3184bb3fef325": {
+   "largest_extent_mm_as_is": 258383,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 2584
+  },
+  "sketchfab:e826c513779149d7ab3bde944647573f": {
+   "largest_extent_mm_as_is": 68959,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 690
+  },
+  "sketchfab:eb5b03f82a104cd591dc66705fb37dac": {
+   "largest_extent_mm_as_is": 180223,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 1802
+  },
+  "sketchfab:f852064a2ddb40419f7c764b3cfb0d3e": {
+   "largest_extent_mm_as_is": 19109,
+   "likely_authored_in": null,
+   "scale": null
+  },
+  "sketchfab:f893c00f9fc34dde9e92870b3aea12f5": {
+   "largest_extent_mm_as_is": 86366,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 864
+  },
+  "sketchfab:f91f4cf36fec4e5e8fabda6deda315bc": {
+   "largest_extent_mm_as_is": 89125,
+   "likely_authored_in": "cm",
+   "scale": 0.01,
+   "largest_extent_mm_rescaled": 891
+  },
+  "sketchfab:fd881151b5c04ce59add63a6318b3dc3": {
+   "largest_extent_mm_as_is": 3061980,
+   "likely_authored_in": "mm",
+   "scale": 0.001,
+   "largest_extent_mm_rescaled": 3062
+  }
+ }
+}

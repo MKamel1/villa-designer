@@ -218,7 +218,7 @@ def swatch_check(rec: dict, rendered: float) -> dict:
 def model_check(rec: dict, out_dir: Path) -> list[dict]:
     import bpy
     _reset()
-    gltf = next(Path(rec["dir"]).glob("*.gltf"))
+    gltf = next(iter(sorted(Path(rec["dir"]).glob("*.gltf")) + sorted(Path(rec["dir"]).glob("*.glb"))))
     bpy.ops.import_scene.gltf(filepath=str(gltf))
     meshes = [o for o in bpy.context.scene.objects if o.type == "MESH"]
     from mathutils import Vector

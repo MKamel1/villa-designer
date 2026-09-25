@@ -172,9 +172,43 @@ def fab(host: str = "ai-workstation") -> dict:
     return run_checks(items, host, "fab")
 
 
+SKETCHFAB_SCAN = r"""
+import json, pathlib
+root = pathlib.Path.home() / "archpipe/library/sketchfab"
+out = []
+for d in sorted(p for p in root.iterdir() if p.is_dir() and (p / "meta.json").is_file()):
+    m = json.loads((d / "meta.json").read_text())
+    out.append(dict(m, size=(d / "model.zip").stat().st_size))
+print(json.dumps(out))
+"""
+
+
+def sketchfab(host: str = "ai-workstation") -> dict:
+    """Index and verify the Sketchfab models (CC0 / CC-BY) downloaded to ~/archpipe/library/sketchfab/."""
+    from archpipe.products import schema
+    from workstation import _ssh
+    rows = json.loads(_ssh(host, "python3 -", stdin_bytes=SKETCHFAB_SCAN.encode()).stdout)
+    items, records = [], []
+    for m in rows:
+        words = (m.get("tags") or []) + (m.get("categories") or []) + [m.get("name") or ""]
+        records.append({"id": f"sketchfab:{m['uid']}", "kind": "appearance",
+                        "category": schema.categorise(words) or "decor", "source": "sketchfab", "key": m["uid"],
+                        "name": m.get("name"), "brand": None, "license": m.get("licence"), "url": m.get("url"),
+                        "tags": m.get("tags") or [], "styles": schema.styles_for(words),
+                        "data": {"asset_type": "model", "author": m.get("author"), "attribution": m.get("attribution"),
+                                 "faces": m.get("faces")}})
+        items.append({"id": f"sketchfab:{m['uid']}", "source": "sketchfab", "key": f"{m['uid']}/gltf",
+                      "asset_type": "model", "license": m.get("licence"),
+                      "files": [{"name": "../model.zip", "url": "local:already-downloaded", "size": m["size"]}],
+                      "declared": {}})
+    store.upsert_items(records)
+    store.set_coverage("sketchfab", len(records), len(records))
+    return run_checks(items, host, "sketchfab")
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("cmd", choices=["index", "pilot", "fab", "search", "show", "status"])
+    ap.add_argument("cmd", choices=["index", "pilot", "fab", "sketchfab", "search", "show", "status"])
     ap.add_argument("id", nargs="?")
     ap.add_argument("--text")
     ap.add_argument("--category")
@@ -202,8 +236,8 @@ def main(argv=None) -> int:
                   f"{'caught' if n['caught'] else 'NOT CAUGHT'}")
         ok = all(n["caught"] for n in rep["negative_control"])
         return 0 if ok else 1
-    if a.cmd == "fab":
-        rep = fab()
+    if a.cmd in ("fab", "sketchfab"):
+        rep = fab() if a.cmd == "fab" else sketchfab()
         bad = [r for r in rep["items"] if r["layer"] != "verified"]
         print(f"  {len(rep['items']) - len(bad)} verified, {len(bad)} not")
         for r in bad:

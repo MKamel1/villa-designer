@@ -134,3 +134,19 @@ that need an account.
   carry session cookies, so there is no automated route. Use a click-list
   with manual downloads, or rely on BIMobject, whose manufacturers publish
   official Revit families.
+
+## Sketchfab result (2026-09-25)
+
+- **Downloaded:** all 173 shortlisted models, 14 GB, through the official
+  Data API with the client's token (stored on the workstation only). Each
+  licence was re-read before download, and CC-BY attribution is in each
+  `meta.json`.
+- **Verified: 111.** 62 fail `units_scale_sane` as downloaded: their largest
+  extent is 10 m to 5.5 km, meaning they were authored in cm or mm and
+  exported to glTF, whose unit is metres, without conversion.
+  `knowledge/products/sketchfab-scale-fixes.json` proposes a ×0.01 or ×0.001
+  scale for each. They stay failed until rescaled and re-checked, because a
+  scale guess is a correction, not a verification.
+- **Not checkable:** Sketchfab publishes no real-world dimensions, so size
+  can only be sanity-checked, not verified against a datasheet. Use these
+  as look-alike appearances; buyable furniture comes from BIMobject.
