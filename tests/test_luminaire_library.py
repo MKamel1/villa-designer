@@ -96,5 +96,18 @@ class LibraryTests(unittest.TestCase):
         self.assertIsNone(lib.sniff(b"<html>not a luminaire</html>"))
 
 
+
+class SignifyCrawlTests(unittest.TestCase):
+    def test_family_url_keeps_prof_segment(self):
+        """The crawler rebuilt /global/indoor-... without prof/ and lost every
+        global-only family to a real 404 (158 of 381)."""
+        import inspect
+        from archpipe.luminaires import signify
+        src = inspect.getsource(signify.crawl)
+        self.assertIn('fam.split("/")[2:]', src)
+        fam = "/global/prof/indoor-luminaires/recessed/x/LP_CF_1_EU/family"
+        self.assertEqual("/global/" + "/".join(fam.split("/")[2:]), fam)
+
+
 if __name__ == "__main__":
     unittest.main()

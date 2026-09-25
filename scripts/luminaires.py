@@ -78,7 +78,9 @@ def main(argv=None) -> int:
     if a.cmd == "crawl":
         from archpipe.luminaires import signify
         signify.crawl()
-        return 0
+        cov = cat.coverage().get("signify") or {}
+        ok = cov.get("families_read", 0) >= signify.MIN_COVERAGE * max(1, cov.get("families_listed", 1))
+        return 0 if ok else 1
     if a.cmd in ("search", "checklist"):
         if a.catalogue or a.cmd == "checklist":
             rows = cat.search_catalogue(mount=a.mount, lm=_range(a.lm), cct=a.cct, market=a.market, text=a.text,
@@ -88,6 +90,10 @@ def main(argv=None) -> int:
                 print(cat.write_checklist(rows, a.out, "Luminaire downloads"))
                 print(f"  {len(rows)} products")
                 return 0
+            for m, cv in cat.coverage().items():
+                if cv["families_read"] < cv["families_listed"]:
+                    print(f"  NOTE {m} catalogue covers {cv['families_read']} of {cv['families_listed']} "
+                          f"listed families (crawled {cv['crawled']})")
             for r in rows:
                 r["status"] = cat.status(r["manufacturer"], r["sku"])
             _print_rows(rows, ("manufacturer", "sku", "mount", "lm", "watts", "cct_k", "ip", "size_mm",

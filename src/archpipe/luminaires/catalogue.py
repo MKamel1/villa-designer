@@ -97,3 +97,18 @@ def write_checklist(products: list[dict], dest: Path, title: str = "Luminaire do
         "<table><tr><th>Maker</th><th>SKU</th><th>Product</th><th>Markets</th><th>Files</th></tr>"
         + "".join(rows) + "</table>", encoding="utf-8")
     return dest
+
+
+def coverage(library: Path = LIBRARY) -> dict:
+    """Per manufacturer: families listed vs read at the last crawl."""
+    db = library / "catalogue.sqlite"
+    if not db.is_file():
+        return {}
+    con = sqlite3.connect(db)
+    con.row_factory = sqlite3.Row
+    try:
+        return {r["manufacturer"]: dict(r) for r in con.execute("select * from coverage")}
+    except sqlite3.OperationalError:
+        return {}
+    finally:
+        con.close()

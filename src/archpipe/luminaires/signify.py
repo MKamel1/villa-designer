@@ -33,7 +33,7 @@ from archpipe.luminaires.library import LIBRARY
 
 BASE = "https://www.signify.com"
 UA = "archpipe-luminaire-catalogue/1.0 (architectural design research; pages only, robots.txt respected)"
-DELAY_S = 2.5
+DELAY_S = 3.0
 LOCALES = {"global": None, "en-eg": "EG", "en-ae": "AE", "en-sa": "SA", "en-gb": "GB"}
 SECTIONS = ("indoor-luminaires", "outdoor-luminaires")
 FILE_SERVER = "https://api.microservices.signify.com/api/configurator/v2/getPhotometricAssets"
@@ -44,6 +44,7 @@ CATEGORY_MOUNT = {
 }
 CACHE = LIBRARY / "_catalogue" / "signify" / "cache"
 _last = [0.0]
+RUN_STARTED = [0.0]
 
 
 def fetch(url: str, refresh: bool = False) -> str:
@@ -58,8 +59,11 @@ def fetch(url: str, refresh: bool = False) -> str:
     wait = DELAY_S - (time.monotonic() - _last[0])
     if wait > 0:
         time.sleep(wait)
+    # A 404 marker is trusted only within one crawl (RUN_STARTED). Signify's
+    # edge answered transient 404s for 158 of 381 live family pages; cached
+    # forever, a hiccup silently removed 41% of the catalogue.
     missing = f.with_suffix(".404")
-    if missing.is_file() and not refresh:
+    if missing.is_file() and not refresh and missing.stat().st_mtime >= RUN_STARTED[0]:
         raise FileNotFoundError(url)
     # Product slugs can hold non-ASCII ("milewide²"); urllib sends ASCII only.
     req = urllib.request.Request(urllib.parse.quote(url, safe=":/?&=%#"), headers={"User-Agent": UA})
@@ -70,7 +74,10 @@ def fetch(url: str, refresh: bool = False) -> str:
             break
         except urllib.error.HTTPError as exc:
             _last[0] = time.monotonic()
-            if 400 <= exc.code < 500:            # a client error will not change on retry
+            if exc.code == 404 and attempt == 0:  # one short retry for a transient edge error
+                time.sleep(10)
+                continue
+            if 400 <= exc.code < 500:
                 missing.write_text(str(exc.code))
                 raise FileNotFoundError(url) from None
             if attempt == 2:
@@ -145,6 +152,7 @@ def parse_spec(text: str) -> dict:
 
 def crawl(sections=SECTIONS, locales=LOCALES, log=print) -> int:
     """Walk categories and families; write the catalogue table. Resumable."""
+    RUN_STARTED[0] = time.time()
     fam_markets: dict[str, set] = {}
     fam_category: dict[str, str] = {}
     fam_seen_at: dict[str, list] = {}
@@ -158,14 +166,16 @@ def crawl(sections=SECTIONS, locales=LOCALES, log=print) -> int:
             for cat in cats:
                 cat_slug = cat.split("/")[-3]
                 for fam in families(loc, cat):
-                    key = "/".join(fam.split("/")[3:])           # locale-free path
+                    # locale-free path KEEPING "prof/": dropping it built /global/indoor-...
+                    # URLs that 404 for every family listed only on the global site
+                    key = "/".join(fam.split("/")[2:])
                     fam_markets.setdefault(key, set())
                     if market:
                         fam_markets[key].add(market)
                     fam_category.setdefault(key, f"{section}/{cat_slug}")
                     fam_seen_at.setdefault(key, []).append(fam)
             log(f"  {loc}/{section}: {len(cats)} categories, {len(fam_markets)} families so far")
-    rows = []
+    rows, unread = [], []
     for i, (key, markets) in enumerate(sorted(fam_markets.items()), 1):
         # Some families exist only on market sites, not under /global/.
         prods, path = None, None
@@ -180,6 +190,7 @@ def crawl(sections=SECTIONS, locales=LOCALES, log=print) -> int:
                 break
         if prods is None:
             log(f"  family {key}: no page found in any market")
+            unread.append(key)
             continue
         section, cat = fam_category[key].split("/")
         for p in prods:
@@ -189,9 +200,52 @@ def crawl(sections=SECTIONS, locales=LOCALES, log=print) -> int:
             rows.append(p)
         if i % 10 == 0:
             log(f"  {i}/{len(fam_markets)} families, {len(rows)} products")
+    if unread:                            # a cool-down sweep before calling anything missing
+        log(f"  {len(unread)} families unread; cooling down 60 s and retrying them once")
+        time.sleep(60)
+        RUN_STARTED[0] = time.time()
+        still = []
+        for key in unread:
+            got = None
+            for path in ["/global/" + key] + [f for f in fam_seen_at.get(key, []) if not f.startswith("/global/")]:
+                try:
+                    got = parse_family(fetch(BASE + path), path)
+                    break
+                except Exception:
+                    continue
+            if got is None:
+                still.append(key)
+                continue
+            section, cat = fam_category[key].split("/")
+            for p in got:
+                p.update(category=cat, section=section, markets=sorted(fam_markets[key]),
+                         mount=CATEGORY_MOUNT.get(cat, "outdoor" if section.startswith("outdoor") else "unknown"),
+                         files={k: f"{FILE_SERVER}/{k}?id={p['sku']}&locale=en_AA" for k in ("ldt", "ies", "revit")})
+                rows.append(p)
+        unread = still
     write_catalogue(rows)
-    log(f"catalogue: {len(rows)} Signify products in {len(fam_markets)} families")
+    coverage = 1.0 - len(unread) / max(1, len(fam_markets))
+    write_coverage("signify", len(fam_markets), len(fam_markets) - len(unread), len(rows), unread)
+    log(f"catalogue: {len(rows)} Signify products; {len(fam_markets) - len(unread)} of "
+        f"{len(fam_markets)} listed families read ({coverage:.0%})")
+    if coverage < MIN_COVERAGE:
+        log(f"WARNING: catalogue INCOMPLETE -- {len(unread)} listed families unread; rerun to retry them")
     return len(rows)
+
+
+# A crawl that silently lost 41% of its families once looked complete. The
+# coverage is stored with the catalogue and the CLI fails below this.
+MIN_COVERAGE = 0.95
+
+
+def write_coverage(manufacturer, listed, read, products, unread, library: Path = LIBRARY) -> None:
+    con = sqlite3.connect(library / "catalogue.sqlite")
+    con.execute("create table if not exists coverage (manufacturer primary key, families_listed,"
+                " families_read, products, unread, crawled)")
+    con.execute("insert or replace into coverage values (?,?,?,?,?,?)",
+                (manufacturer, listed, read, products, json.dumps(unread), time.strftime("%Y-%m-%d %H:%M")))
+    con.commit()
+    con.close()
 
 
 def write_catalogue(rows: list[dict], library: Path = LIBRARY) -> None:
@@ -200,6 +254,9 @@ def write_catalogue(rows: list[dict], library: Path = LIBRARY) -> None:
     con.execute("create table if not exists products (manufacturer, sku, region, title, family, category,"
                 " section, mount, lm, watts, cct_k, cri, ugr, beam_deg, size_mm, ip, markets, url,"
                 " files, description, crawled, primary key (manufacturer, sku))")
+    # A crawl is a full walk: replace this manufacturer's rows, so products seen
+    # only by an earlier (broken, partial) crawl cannot linger (248 did).
+    con.execute("delete from products where manufacturer = 'signify'")
     con.executemany(
         "insert or replace into products values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
         [("signify", r["sku"], r["region"], r["title"], r["family"], r["category"], r["section"], r["mount"],
