@@ -81,7 +81,7 @@
       "cost_usd_approx": 120,
       "held_files": [
         {
-          "file": "neufert/Neufert - Architects' Data (6th ed, 2023).pdf",
+          "file": "neufert/Neufert - Architects' Data (2nd English ed, 1980).pdf",
           "sha256": "100079896681d3436e58617f814bcfb7ef9502af040101af23b98fbf38a8165e",
           "pages": 447,
           "image_only": false
@@ -1042,7 +1042,7 @@
       "unlocks": "lighting layering method",
       "held_files": [
         {
-          "file": "lighting-design-basics/Karlen, Spangler, Benya - Lighting Design Basics (3rd ed, 2017).pdf",
+          "file": "lighting-design-basics/Karlen, Benya - Lighting Design Basics (1st ed, 2004).pdf",
           "sha256": "25067f8f68a6729a4b45d79dbb09ffdbeef22ffafb9c0b8556d065a723a51174",
           "pages": 199,
           "image_only": false
