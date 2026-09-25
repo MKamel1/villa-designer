@@ -3010,6 +3010,26 @@
       "exceptions": "Qualitative principle: informs and explains a concept; never scored as a measurement.",
       "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
       "applies_when": {}
+    },
+    {
+      "id": "irc-r303-glazing-8pct",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 4 Social and Leisure Spaces, Related Codes and Constraints (printed page 92), quoting IRC Section R303.1",
+      "stages": [
+        4
+      ],
+      "summary": "Habitable rooms: aggregate glazing area not less than 8 percent of the floor area (IRC R303.1, as quoted).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "ratio",
+      "verified_value": 0.08,
+      "original_page_checked": true,
+      "conditions": "US International Residential Code minimum for habitable rooms, quoted by Mitton & Nystuen; a legal floor, not a design target. Daylight performance is checked separately against SLL minimum ADF.",
+      "exceptions": "The code allows exceptions where approved mechanical ventilation and artificial light are provided; state and local amendments vary.",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

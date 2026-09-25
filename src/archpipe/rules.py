@@ -526,11 +526,11 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) fo
     ),
     Rule(
         "LIGHT-01", "Glazing area against floor area", 4, "computed",
-        f"{_NEUFERT} -- daylight: glazing area at least 1/8 of floor area in "
-        f"habitable rooms",
+        "IRC R303.1 (quoted in Mitton & Nystuen, Residential Interior Design, "
+        "4th ed., p. 92) -- glazing area at least 8 % of floor area in habitable rooms",
         note="Stage 3 owns 'every habitable room has a daylight-capable "
              "aspect'; that rule is not implemented. What IS implemented is "
-             "the 1/8 glazing ratio, which needs window sizes and so cannot "
+             "the glazing-to-floor ratio, which needs window sizes and so cannot "
              "fire before Stage 4.",
         remedies=(
             Remedy("Enlarge the window, or add a second one on the same "
@@ -998,7 +998,7 @@ def r_daylight(p: Project, level: str) -> list[Finding]:
             out.append(_finding(
                 "LIGHT-01", "warning",
                 f"{r.name} has {have:.2f} m2 of glazing against {need:.2f} m2 "
-                f"required (1/8 of its {r.area_m2:.1f} m2 floor). "
+                f"required ({ratio:.0%} of its {r.area_m2:.1f} m2 floor). "
                 f"{'It has no window at all.' if have == 0 else 'Enlarge or add a window.'}",
                 where=r.id, at=r.centroid, reference=src,
                 measured=Measured(have, need, "m2"),

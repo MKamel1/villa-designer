@@ -163,7 +163,7 @@ PLANNING = {
     "door_clear_wc":       (700,  "Neufert, Architects' Data -- doors: 700 mm minimum to a WC"),
     "ceiling_min":         (2400, "General practice / common code minimum for habitable rooms; Neufert cites 2500 mm as preferred"),
     "wheelchair_turn":     (1500, "Neufert, Architects' Data -- accessibility: 1500 mm turning circle"),
-    "daylight_ratio":      (0.125,"Neufert, Architects' Data -- daylight: glazing area at least 1/8 of floor area in habitable rooms"),
+    "daylight_ratio":      (0.08, "IRC R303.1 as quoted in Mitton & Nystuen, Residential Interior Design 4th ed. p. 92 -- glazing area at least 8 % of floor area in habitable rooms (code minimum; the unsourced legacy 1/8 was replaced 2026-09-25)"),
     "room_min_width":      (2400, "General practice: below ~2.4 m a room will not take a bed plus circulation"),
 }
 

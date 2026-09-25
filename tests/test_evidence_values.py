@@ -34,6 +34,8 @@ ORIGINAL = {
                                         ["is at least 2.75 m wide"]),
     "ndss-other-double-bedroom-width": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 447,
                                         ["at least 2.55 m wide"]),
+    "irc-r303-glazing-8pct": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 103,
+                              ["not less than 8 percent of the floor area"]),
     "mitton-path-of-travel-min": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 79,
                                   ["paths of travel must be a minimum of", "36 inches (914 mm) wide"]),
     "nkba-work-aisle-one-cook": ("nkba-kitchen-guidelines-free/NKBA - Kitchen Planning Guidelines with Access Standards (free edition).pdf", 5, ["work aisle should be at least 42″ (1067 mm) for one cook"]),
@@ -101,7 +103,7 @@ class RuleAuditTests(unittest.TestCase):
         self.assertFalse(p["MIN_AREA_M2.living"]["verified"])
         self.assertEqual(rows["AREA-01"]["status"], "partly verified")
         # only rules whose every number is verified AND whose mapping is complete; CIRC-03 by client decision 2026-09-25
-        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03"})
+        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01"})
 
     def test_a_changed_catalogue_value_unverifies_the_parameter(self):
         from archpipe import catalogue as cat

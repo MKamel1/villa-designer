@@ -14,7 +14,7 @@ The legacy engine remains available for diagnostic comparisons, preserving its t
 | FURN-02 | 4 | Neufert, Architects' Data -- clearances by furniture type | Unresolved; diagnostic only |
 | FURN-03 | 4 | Geometric clash between footprints; footprints from Neufert, Architects' Data | Unresolved; diagnostic only |
 | DOOR-02 | 4 | Neufert, Architects' Data -- doors: the leaf must open through 90 degrees | Unresolved; diagnostic only |
-| LIGHT-01 | 4 | Neufert, Architects' Data -- daylight: glazing area at least 1/8 of floor area in habitable rooms | Unresolved; diagnostic only |
+| LIGHT-01 | 4 | IRC R303.1 via Mitton & Nystuen 4th ed. p. 92 -- glazing at least 8 % of floor area | Verified 2026-09-25 (see below) |
 | CIRC-03 | 4 | Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling | Verified 2026-09-25 (see below) |
 | VIEW-01 | 4 | Alexander, A Pattern Language -- 134 Zen View | Unresolved; diagnostic only |
 
@@ -46,6 +46,7 @@ the value the engine uses equals a verified card's value, in the card's unit.
 |---|---|---|
 | AREA-01 | partly verified | Bedroom minimums changed to 11.5 m² (double) and 7.5 m² (single), per Metric Handbook 7th ed. p. 22-4 quoting NDSS. The legacy values were 12.0 and 8.0 (unsourced Neufert). Living, kitchen, bathroom and WC areas are unresolved. |
 | CIRC-01 | partly verified | Hall width 900 mm matches AD M M4(2) para 2.22a. Its privacy test stays qualitative (Alexander 127). |
+| LIGHT-01 | verified | Re-sourced 2026-09-25. The legacy 1/8 (12.5 %) was attributed to Neufert but is not in the held 1980 edition. The US code minimum (IRC R303.1, 8 %, quoted by Mitton p. 92) is the minimum-glazing screen; daylight adequacy is judged by SLL minimum ADF. |
 | CIRC-03 | verified | Client decision 2026-09-25: 900 mm (AD M M4(2) para 2.22a card). Mitton p. 68 gives 914 mm (36 in); the 1.6 % difference is within the close-values policy. Using the hall width for routes inside rooms is this decision, not AD M's own scope. |
 | DIM-01 | unresolved | The generic 2.4 m has no source. NDSS gives widths by room type (2.15, 2.75 and 2.55 m). Split the rule by room type. |
 | DOOR-01 | unresolved | AD M ties door width to how the corridor approaches it (Table 2.1), not to room type. The AD M entrance minimum is 775 mm; the legacy value is 900 mm. |

@@ -56,7 +56,7 @@ Spec: `spec/concepts/pilot/L.yaml` (loads with `archpipe.model.load`).
 | structure | not_certified | `{"max_room_short_side_m": 5.0}` |
 | cooling | not_measured | `{}` |
 
-Rule engine on the emitted spec (legacy rules are diagnostic per the rule audit): LIGHT-01 warning x1; VIEW-01 advisory x2
+Rule engine on the emitted spec (legacy rules are diagnostic per the rule audit): VIEW-01 advisory x2
 
 ## U: `U-670` (best of 1500 variants)
 

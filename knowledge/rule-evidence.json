@@ -63,7 +63,9 @@
           "unit": "mm",
           "status": "verified",
           "card": "ukadm-hall-min-m42",
-          "corroborating": ["mitton-path-of-travel-min"],
+          "corroborating": [
+            "mitton-path-of-travel-min"
+          ],
           "decision": "Client decision 2026-09-25: use 900 mm. Mitton's 914 mm is 36 in converted; the two differ by 14 mm (1.6 %), so they are treated as the same recommendation (close-values policy, docs/guidance/README.md). Applying AD M's hall width to routes inside rooms is this decision, not AD M's own scope."
         }
       },
@@ -107,6 +109,18 @@
           "reason": "not yet found"
         }
       }
+    },
+    "LIGHT-01": {
+      "parameters": {
+        "PLANNING.daylight_ratio": {
+          "value": 0.08,
+          "unit": "ratio",
+          "status": "verified",
+          "card": "irc-r303-glazing-8pct",
+          "decision": "Far-values policy 2026-09-25: the legacy 1/8 (12.5 %) was attributed to Neufert but is not in the held 1980 edition; the IRC 8 % is a legal minimum. LIGHT-01 is a minimum-glazing screen; daylight adequacy is judged by SLL minimum ADF (verified cards)."
+        }
+      },
+      "complete": true
     }
   }
 }
