@@ -1,0 +1,942 @@
+{
+  "project": "villa-01 (Villa Zayed, East Unit)",
+  "source": "33 client reference images (villa_01_guidelines_images/, also embedded in villa_01_guidelines.docx); reviewed 2026-09-24. Images are third-party and are not committed.",
+  "use": "OVERSAMPLING weights for library curation and precedent selection. Not rules: other styles stay covered and can be proposed.",
+  "client_styles_named": [
+    "contemporary/modern",
+    "japanese",
+    "scandinavian",
+    "warm transitional"
+  ],
+  "brief_concepts": {
+    "master bedroom": "Warm Luxury Minimalism",
+    "ensuite": "Modern Sanctuary",
+    "kitchen": "Culinary Sanctuary",
+    "dining and garden living": "The Organic Statement",
+    "upper living": "Comfortable Contemporary"
+  },
+  "style_weights": {
+    "warm_contemporary": 0.419,
+    "glam_luxury": 0.227,
+    "warm_transitional": 0.091,
+    "rustic_modern": 0.076,
+    "scandinavian": 0.071,
+    "japandi": 0.071,
+    "modern": 0.03,
+    "mid_century": 0.015
+  },
+  "attribute_frequency": {
+    "LED cove/backlit niche/shelf": 24,
+    "large-format stone/marble": 22,
+    "walnut": 12,
+    "floating joinery": 11,
+    "boucle/soft upholstery": 11,
+    "vertical slats/fluting": 10,
+    "brass": 8,
+    "globe pendants": 7,
+    "oak": 4,
+    "waterfall island": 4,
+    "microcement/concrete": 3
+  },
+  "rooms": {
+    "bedroom": 3,
+    "closet": 2,
+    "bathroom": 4,
+    "kids": 2,
+    "living": 7,
+    "media": 6,
+    "kitchen": 5,
+    "dining": 4
+  },
+  "images": [
+    {
+      "file": "villa_01_guidelines_images/image5.jpg",
+      "room": "bedroom",
+      "styles": [
+        "japandi"
+      ],
+      "materials": [
+        "oak vertical slats",
+        "oak platform bed",
+        "light oak floor",
+        "textured plaster niche"
+      ],
+      "lighting": [
+        "2700K cove around headboard niche",
+        "opal globe pendants low over nightstands",
+        "single downlight",
+        "shelf LED"
+      ],
+      "furniture": [
+        "low oak platform bed",
+        "floating nightstands",
+        "wall art"
+      ],
+      "palette": [
+        "warm white",
+        "oak",
+        "beige"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image6.jpg",
+      "room": "bedroom",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "large-format grey stone panels",
+        "walnut slats",
+        "wood floor"
+      ],
+      "lighting": [
+        "cove above headboard",
+        "linear recessed light",
+        "twin downlights",
+        "table lamps"
+      ],
+      "furniture": [
+        "upholstered taupe bed",
+        "floating nightstand",
+        "rug",
+        "large indoor plant"
+      ],
+      "palette": [
+        "taupe",
+        "grey",
+        "walnut"
+      ],
+      "flags": [
+        "floor-to-ceiling glazing with dark frames to garden"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image7.jpg",
+      "room": "bedroom",
+      "styles": [
+        "warm_contemporary",
+        "japandi"
+      ],
+      "materials": [
+        "walnut vertical slats (partial-height headboard wall)",
+        "boucle upholstery",
+        "light oak floor",
+        "tinted glass wardrobe doors in black frames"
+      ],
+      "lighting": [
+        "under-bed LED glow",
+        "slat-wall uplight",
+        "square recessed downlights",
+        "wardrobe interior LED"
+      ],
+      "furniture": [
+        "boucle platform bed",
+        "floating low dresser",
+        "boucle stool"
+      ],
+      "palette": [
+        "cream",
+        "walnut",
+        "greige"
+      ],
+      "flags": [
+        "generated image (ai mark)"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image8.jpg",
+      "room": "closet",
+      "styles": [
+        "warm_transitional"
+      ],
+      "materials": [
+        "painted cabinetry",
+        "woven baskets",
+        "carpet"
+      ],
+      "lighting": [
+        "shelf-edge LED strips",
+        "downlight"
+      ],
+      "furniture": [
+        "drawers with bar pulls",
+        "open shelving"
+      ],
+      "palette": [
+        "white",
+        "greige"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image9.jpg",
+      "room": "closet",
+      "styles": [
+        "glam_luxury",
+        "warm_contemporary"
+      ],
+      "materials": [
+        "mirror doors",
+        "polished marble-look tile floor",
+        "off-white lacquer"
+      ],
+      "lighting": [
+        "vertical LED strips in cabinet frames",
+        "square recessed downlights",
+        "shelf LED"
+      ],
+      "furniture": [
+        "mirrored wardrobe",
+        "drawers"
+      ],
+      "palette": [
+        "off-white",
+        "black"
+      ],
+      "flags": [
+        "generated image (ai mark)"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image10.jpg",
+      "room": "bathroom",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "beige veined marble large format",
+        "wood-look wall panels",
+        "wood slat strip",
+        "glass shower screen"
+      ],
+      "lighting": [
+        "backlit mirror",
+        "linear floor light",
+        "niche LED",
+        "cove",
+        "linear downlight"
+      ],
+      "furniture": [
+        "floating stone vanity",
+        "vessel basins",
+        "timber shelf"
+      ],
+      "palette": [
+        "beige",
+        "warm wood"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image11.jpg",
+      "room": "bathroom",
+      "styles": [
+        "glam_luxury"
+      ],
+      "materials": [
+        "black veined marble",
+        "brass fixtures",
+        "teak shower grate"
+      ],
+      "lighting": [
+        "backlit mirror",
+        "downlights",
+        "wall LED"
+      ],
+      "furniture": [
+        "wall-hung toilet and bidet",
+        "vessel basin"
+      ],
+      "palette": [
+        "black",
+        "brass"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image12.jpg",
+      "room": "bathroom",
+      "styles": [
+        "glam_luxury",
+        "warm_contemporary"
+      ],
+      "materials": [
+        "dark veined marble walls",
+        "backlit veined feature slab",
+        "large marble floor",
+        "brass fixtures"
+      ],
+      "lighting": [
+        "backlit stone feature wall behind tub",
+        "round downlights",
+        "pill backlit mirror",
+        "under-vanity LED"
+      ],
+      "furniture": [
+        "freestanding tub",
+        "floating vanity"
+      ],
+      "palette": [
+        "charcoal",
+        "white-grey",
+        "brass"
+      ],
+      "flags": [
+        "backlit slab reads as translucent onyx; opaque marble or quartzite cannot glow"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image13.jpg",
+      "room": "bathroom",
+      "styles": [
+        "warm_transitional",
+        "glam_luxury"
+      ],
+      "materials": [
+        "black marble walls",
+        "white veined marble floor",
+        "black vanity with brass trim"
+      ],
+      "lighting": [
+        "brass lantern sconces",
+        "shaded chandelier over tub"
+      ],
+      "furniture": [
+        "freestanding tub",
+        "double vanity"
+      ],
+      "palette": [
+        "black",
+        "white",
+        "brass"
+      ],
+      "flags": [
+        "chandelier directly over a tub"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image14.jpg",
+      "room": "kids",
+      "styles": [
+        "scandinavian"
+      ],
+      "materials": [
+        "oak",
+        "oak slat panel",
+        "grey textiles"
+      ],
+      "lighting": [
+        "cove",
+        "wall-mounted reading lights",
+        "desk lamps"
+      ],
+      "furniture": [
+        "oak bunk bed with drawers",
+        "long desk for two",
+        "wall shelving"
+      ],
+      "palette": [
+        "oak",
+        "grey",
+        "white"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image15.jpg",
+      "room": "kids",
+      "styles": [
+        "scandinavian"
+      ],
+      "materials": [
+        "oak veneer",
+        "grey paint"
+      ],
+      "lighting": [
+        "surface ceiling panels",
+        "desk lamp"
+      ],
+      "furniture": [
+        "loft bed over bed",
+        "desks",
+        "armchair"
+      ],
+      "palette": [
+        "oak",
+        "grey"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image16.png",
+      "room": "living",
+      "styles": [
+        "mid_century",
+        "warm_contemporary"
+      ],
+      "materials": [
+        "walnut plank wall",
+        "dark fabric wall panel"
+      ],
+      "lighting": [
+        "recessed downlights",
+        "tray ceiling"
+      ],
+      "furniture": [
+        "walnut credenza",
+        "grey sectional",
+        "geometric rug"
+      ],
+      "palette": [
+        "walnut",
+        "grey",
+        "black"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image17.png",
+      "room": "living",
+      "styles": [
+        "rustic_modern"
+      ],
+      "materials": [
+        "reclaimed wood plank wall",
+        "wood floor"
+      ],
+      "lighting": [
+        "grazing downlights",
+        "arc floor lamp"
+      ],
+      "furniture": [
+        "beige sectional",
+        "dark coffee table"
+      ],
+      "palette": [
+        "beige",
+        "cognac",
+        "brown"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image18.png",
+      "room": "media",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "dark stacked stone",
+        "walnut slats",
+        "wood floor"
+      ],
+      "lighting": [
+        "cove washing stone",
+        "black track spots"
+      ],
+      "furniture": [
+        "floating black console"
+      ],
+      "palette": [
+        "charcoal",
+        "walnut"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image19.png",
+      "room": "living",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "grey wall panels",
+        "dark slats",
+        "stone coffee table"
+      ],
+      "lighting": [
+        "clear-glass globe pendant cluster",
+        "perimeter cove",
+        "backlit console niche",
+        "floor lamp"
+      ],
+      "furniture": [
+        "light sectional",
+        "ottoman",
+        "floating console"
+      ],
+      "palette": [
+        "greige",
+        "grey",
+        "warm white"
+      ],
+      "flags": [
+        "floor-to-ceiling sliding doors"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image20.png",
+      "room": "media",
+      "styles": [
+        "rustic_modern"
+      ],
+      "materials": [
+        "dark reclaimed planks",
+        "black shelving"
+      ],
+      "lighting": [
+        "recessed spots in soffit"
+      ],
+      "furniture": [
+        "floating wood ledge"
+      ],
+      "palette": [
+        "dark brown",
+        "black"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image21.png",
+      "room": "living",
+      "styles": [
+        "warm_contemporary",
+        "glam_luxury"
+      ],
+      "materials": [
+        "large-format beige marble wall panels",
+        "polished marble floor"
+      ],
+      "lighting": [
+        "grazing downlights on stone",
+        "linear slot diffusers"
+      ],
+      "furniture": [
+        "beige sectional",
+        "round dark coffee table"
+      ],
+      "palette": [
+        "beige",
+        "cognac",
+        "black"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image22.png",
+      "room": "living",
+      "styles": [
+        "japandi",
+        "scandinavian",
+        "warm_contemporary"
+      ],
+      "materials": [
+        "microcement/concrete panels",
+        "walnut shelving",
+        "dark wood floor"
+      ],
+      "lighting": [
+        "shelf LED",
+        "single black pendant",
+        "cove"
+      ],
+      "furniture": [
+        "low grey sofa",
+        "round walnut coffee table"
+      ],
+      "palette": [
+        "grey",
+        "walnut",
+        "rust"
+      ],
+      "flags": [
+        "floor-to-ceiling glazing"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image23.png",
+      "room": "kitchen",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "walnut cabinetry",
+        "Calacatta-gold style marble waterfall island and hood"
+      ],
+      "lighting": [
+        "clear-glass globe pendants",
+        "downlights"
+      ],
+      "furniture": [
+        "leather stools with brass frames"
+      ],
+      "palette": [
+        "walnut",
+        "white-gold",
+        "brass"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image24.png",
+      "room": "kitchen",
+      "styles": [
+        "warm_transitional"
+      ],
+      "materials": [
+        "navy painted shaker cabinets",
+        "black-and-gold marble waterfall island"
+      ],
+      "lighting": [
+        "brass lantern pendants",
+        "square downlights"
+      ],
+      "furniture": [
+        "black leather stools"
+      ],
+      "palette": [
+        "navy",
+        "black",
+        "brass"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image25.png",
+      "room": "kitchen",
+      "styles": [
+        "warm_transitional",
+        "rustic_modern"
+      ],
+      "materials": [
+        "Taj Mahal quartzite style waterfall island",
+        "timber beam ceiling"
+      ],
+      "lighting": [
+        "glass globe pendants",
+        "cove in beams"
+      ],
+      "furniture": [
+        "timber block stools"
+      ],
+      "palette": [
+        "cream",
+        "warm wood"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image26.png",
+      "room": "kitchen",
+      "styles": [
+        "glam_luxury",
+        "warm_contemporary"
+      ],
+      "materials": [
+        "veined stone waterfall island",
+        "walnut cabinetry",
+        "marble floor"
+      ],
+      "lighting": [
+        "glowing stone veins",
+        "linear recessed",
+        "under-cabinet LED"
+      ],
+      "furniture": [
+        "island"
+      ],
+      "palette": [
+        "beige",
+        "gold",
+        "walnut"
+      ],
+      "flags": [
+        "glowing veins are physically implausible in opaque stone; only backlit onyx or translucent resin"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image27.png",
+      "room": "kitchen",
+      "styles": [
+        "modern"
+      ],
+      "materials": [
+        "white marble island",
+        "stainless hood"
+      ],
+      "lighting": [
+        "glass pendants"
+      ],
+      "furniture": [
+        "chrome stools"
+      ],
+      "palette": [
+        "white",
+        "steel"
+      ],
+      "flags": [
+        "double-height glazing"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image28.jpeg",
+      "room": "dining",
+      "styles": [
+        "warm_contemporary",
+        "glam_luxury"
+      ],
+      "materials": [
+        "grey marble feature wall",
+        "bronze trims",
+        "grey marble floor"
+      ],
+      "lighting": [
+        "clear-glass pendant cluster",
+        "cove",
+        "wall sconces"
+      ],
+      "furniture": [
+        "upholstered dining chairs with cognac seats",
+        "banquette"
+      ],
+      "palette": [
+        "grey",
+        "cognac",
+        "bronze"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image29.jpeg",
+      "room": "dining",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "textured concrete wall",
+        "walnut slats",
+        "rust panel"
+      ],
+      "lighting": [
+        "opal globe pendants at staggered heights",
+        "up/down wall cubes",
+        "cove"
+      ],
+      "furniture": [
+        "rust velvet dining chairs",
+        "stone table"
+      ],
+      "palette": [
+        "rust",
+        "grey",
+        "walnut"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image30.jpeg",
+      "room": "dining",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "concrete wall",
+        "walnut shelving"
+      ],
+      "lighting": [
+        "large black dome pendant cluster",
+        "backlit shelving"
+      ],
+      "furniture": [
+        "grey upholstered chairs",
+        "pedestal table"
+      ],
+      "palette": [
+        "charcoal",
+        "walnut",
+        "amber"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image31.jpeg",
+      "room": "dining",
+      "styles": [
+        "warm_contemporary",
+        "japandi"
+      ],
+      "materials": [
+        "walnut slab table",
+        "walnut panels"
+      ],
+      "lighting": [
+        "clear bubble-glass chandelier"
+      ],
+      "furniture": [
+        "light grey chairs with walnut legs"
+      ],
+      "palette": [
+        "walnut",
+        "grey",
+        "ochre"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image32.jpeg",
+      "room": "media",
+      "styles": [
+        "warm_contemporary",
+        "glam_luxury"
+      ],
+      "materials": [
+        "book-matched beige marble",
+        "fluted walnut",
+        "polished marble floor"
+      ],
+      "lighting": [
+        "backlit shelves",
+        "floor LED under console"
+      ],
+      "furniture": [
+        "floating console",
+        "cognac leather pouf"
+      ],
+      "palette": [
+        "beige",
+        "walnut",
+        "cognac"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image33.jpeg",
+      "room": "media",
+      "styles": [
+        "glam_luxury"
+      ],
+      "materials": [
+        "grey marble TV wall",
+        "grey stone floor"
+      ],
+      "lighting": [
+        "backlit shelves"
+      ],
+      "furniture": [
+        "grey modular sofa",
+        "stone and brass coffee tables"
+      ],
+      "palette": [
+        "grey",
+        "brass"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image34.jpeg",
+      "room": "media",
+      "styles": [
+        "glam_luxury"
+      ],
+      "materials": [
+        "grey marble with gold veins"
+      ],
+      "lighting": [
+        "backlit niches",
+        "floor LED",
+        "cove"
+      ],
+      "furniture": [
+        "floating stone console"
+      ],
+      "palette": [
+        "grey",
+        "amber"
+      ],
+      "flags": [
+        "screenshot with interface overlays"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image35.jpeg",
+      "room": "media",
+      "styles": [
+        "glam_luxury"
+      ],
+      "materials": [
+        "dark emperador-style marble"
+      ],
+      "lighting": [
+        "backlit shelves",
+        "TV halo"
+      ],
+      "furniture": [
+        "floating black console"
+      ],
+      "palette": [
+        "brown",
+        "cream"
+      ],
+      "flags": []
+    },
+    {
+      "file": "villa_01_guidelines_images/image36.jpeg",
+      "room": "living",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "beige travertine-style stone wall",
+        "walnut shelving"
+      ],
+      "lighting": [
+        "opal globe lamps",
+        "shelf LED"
+      ],
+      "furniture": [
+        "pouf",
+        "timber coffee table"
+      ],
+      "palette": [
+        "beige",
+        "walnut",
+        "white"
+      ],
+      "flags": [
+        "garden glazing"
+      ]
+    },
+    {
+      "file": "villa_01_guidelines_images/image37.jpeg",
+      "room": "living",
+      "styles": [
+        "warm_contemporary"
+      ],
+      "materials": [
+        "stacked slate fireplace wall",
+        "dark wood panelling",
+        "stone ledge"
+      ],
+      "lighting": [
+        "cove",
+        "downlights",
+        "linear gas fire"
+      ],
+      "furniture": [
+        "shag rug",
+        "cream sofa"
+      ],
+      "palette": [
+        "charcoal",
+        "walnut",
+        "cream"
+      ],
+      "flags": []
+    }
+  ],
+  "faithfulness": "Many images are generated. Flags mark features that cannot be built as shown; renders and specs must use the buildable version (for example backlit onyx, not glowing quartzite).",
+  "open": [
+    "exterior and landscape references not supplied yet"
+  ]
+}

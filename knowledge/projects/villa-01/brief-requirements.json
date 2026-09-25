@@ -1,0 +1,463 @@
+{
+  "project": "villa-01",
+  "source": "villa_01_guidelines.docx (client brief, 2026-09-24)",
+  "category": "client/project target",
+  "rule": "A client target governs the design unless the client changes it. Each is still checked against the named published sources once held; a conflict is reported with both values, never resolved silently.",
+  "requirements": [
+    {
+      "id": "K-CCT",
+      "room": "kitchen",
+      "what": "all kitchen sources 4000 K, no mixing",
+      "value": "4000 K",
+      "check_against": [
+        "ies-rp11",
+        "sll-code"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-CRI",
+      "room": "kitchen",
+      "what": "colour rendering for food preparation",
+      "value": "CRI >= 90",
+      "check_against": [
+        "ies-rp11"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-DIM",
+      "room": "kitchen",
+      "what": "all circuits dimmable",
+      "value": "dimmable",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-UC",
+      "room": "kitchen",
+      "what": "under-cabinet LED strip density in aluminium profile with diffuser, full length",
+      "value": ">= 120 LED/m",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-SPOT-OFF",
+      "room": "kitchen",
+      "what": "ceiling spots from wall edge, centred over counter edge",
+      "value": "600-800 mm",
+      "check_against": [
+        "ies-rp11",
+        "nkba-guidelines"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-SPOT-PITCH",
+      "room": "kitchen",
+      "what": "ceiling spot spacing",
+      "value": "1000 mm",
+      "check_against": [
+        "ies-rp11"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-SPOT-BEAM",
+      "room": "kitchen",
+      "what": "ceiling spot beam angle",
+      "value": "40-60 deg",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-PEND-H",
+      "room": "kitchen",
+      "what": "island pendant bottom above worktop",
+      "value": "750-850 mm",
+      "check_against": [
+        "nkba-guidelines",
+        "ies-rp11"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-BASE-H",
+      "room": "kitchen",
+      "what": "base cabinet to worktop surface",
+      "value": "900 mm",
+      "check_against": [
+        "nkba-guidelines",
+        "metric-handbook",
+        "neufert"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-TOE",
+      "room": "kitchen",
+      "what": "toe kick height, recessed",
+      "value": "100-120 mm",
+      "check_against": [
+        "metric-handbook"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-SPLASH",
+      "room": "kitchen",
+      "what": "worktop to underside of wall cabinets",
+      "value": "600 mm",
+      "check_against": [
+        "nkba-guidelines",
+        "metric-handbook"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-UPPER",
+      "room": "kitchen",
+      "what": "wall cabinet underside from floor",
+      "value": "1500 mm",
+      "check_against": [
+        "metric-handbook"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-BAR",
+      "room": "kitchen",
+      "what": "raised bar height if two-tier",
+      "value": "1050-1100 mm",
+      "check_against": [
+        "nkba-guidelines"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-DEPTH",
+      "room": "kitchen",
+      "what": "base cabinet depth",
+      "value": "600 mm",
+      "check_against": [
+        "metric-handbook"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-UDEPTH",
+      "room": "kitchen",
+      "what": "wall cabinet depth",
+      "value": "350 mm (max 400)",
+      "check_against": [
+        "metric-handbook"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-OVERHANG",
+      "room": "kitchen",
+      "what": "worktop overhang beyond cabinet face",
+      "value": "20-30 mm",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-KNEE",
+      "room": "kitchen",
+      "what": "island seating knee space",
+      "value": ">= 300 mm",
+      "check_against": [
+        "nkba-guidelines"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-AISLE",
+      "room": "kitchen",
+      "what": "work aisle, one cook / two cooks",
+      "value": ">= 1050 / 1200 mm",
+      "check_against": [
+        "nkba-guidelines",
+        "metric-handbook"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-WALK",
+      "room": "kitchen",
+      "what": "walkway (traffic side)",
+      "value": ">= 900 mm",
+      "check_against": [
+        "nkba-guidelines"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-FRIDGE",
+      "room": "kitchen",
+      "what": "side-by-side fridge niche",
+      "value": "920-950 mm wide, >= 700 mm deep",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-DW",
+      "room": "kitchen",
+      "what": "dishwasher edge from sink centre",
+      "value": "600-900 mm",
+      "check_against": [
+        "nkba-guidelines"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "K-STAIR-HEAD",
+      "room": "kitchen",
+      "what": "headroom under new stair landing in basement kitchen",
+      "value": ">= 2000 mm",
+      "check_against": [
+        "uk-ad-k",
+        "icc-irc-2024"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "D-TABLE",
+      "room": "dining",
+      "what": "six-seat table minimum",
+      "value": "1800 x 900 mm",
+      "check_against": [
+        "neufert",
+        "metric-handbook"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "D-PERSON",
+      "room": "dining",
+      "what": "table width per diner",
+      "value": "600 mm",
+      "check_against": [
+        "neufert",
+        "human-dimension"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "D-PUSH",
+      "room": "dining",
+      "what": "table edge to wall or obstacle (chair push-back)",
+      "value": ">= 900 mm",
+      "check_against": [
+        "human-dimension",
+        "neufert"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "D-WALK",
+      "room": "dining",
+      "what": "walkway behind seated diners",
+      "value": ">= 1200 mm",
+      "check_against": [
+        "human-dimension"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "D-RUG",
+      "room": "dining",
+      "what": "rug beyond table on all sides",
+      "value": "600-700 mm",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "D-PEND-H",
+      "room": "dining",
+      "what": "pendant bottom above table",
+      "value": "750-850 mm",
+      "check_against": [
+        "ies-rp11"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-CCT",
+      "room": "garden living",
+      "what": "lamps 2700 K, ceiling spots 3000 K, never cooler",
+      "value": "2700 / 3000 K",
+      "check_against": [
+        "ies-rp11"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-WIN",
+      "room": "garden living",
+      "what": "furniture clear of glazing for curtains",
+      "value": "> 250 mm",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-WALL",
+      "room": "garden living",
+      "what": "gap behind sofas and cabinets",
+      "value": "> 100 mm",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-RUGEDGE",
+      "room": "garden living",
+      "what": "bare floor between rug and walls",
+      "value": "300-450 mm",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-MAIN",
+      "room": "garden living",
+      "what": "main walkway (dining to garden)",
+      "value": "1200 mm",
+      "check_against": [
+        "human-dimension",
+        "residential-interior-design"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-SEC",
+      "room": "garden living",
+      "what": "secondary walkway",
+      "value": "750-900 mm",
+      "check_against": [
+        "human-dimension",
+        "residential-interior-design"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-COFFEE",
+      "room": "garden living",
+      "what": "coffee table to sofa seat",
+      "value": "400-450 mm",
+      "check_against": [
+        "human-dimension"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-CONV",
+      "room": "garden living",
+      "what": "seats within conversation distance",
+      "value": "2.5-3.0 m",
+      "check_against": [
+        "human-dimension",
+        "residential-interior-design"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-TV",
+      "room": "garden living",
+      "what": "screen centre height",
+      "value": "1050-1100 mm",
+      "check_against": [
+        "residential-interior-design"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-SCREEN",
+      "room": "garden living",
+      "what": "screen size",
+      "value": ">= 75 in",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-CHAND",
+      "room": "garden living",
+      "what": "central chandelier only if ceiling",
+      "value": ">= 3.0 m",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-RUGSOFA",
+      "room": "garden living",
+      "what": "rug beyond sofa sides",
+      "value": "200-300 mm",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "L-FLOAT",
+      "room": "garden living",
+      "what": "sofa pulled off the wall",
+      "value": "100-200 mm",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "C-LIGHT",
+      "room": "closet",
+      "what": "dressing light colour and rendering, shadow-free, vertical strips in every section",
+      "value": "4000 K, CRI >= 90",
+      "check_against": [
+        "ies-rp11"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "B-NODOWN",
+      "room": "ensuite",
+      "what": "no direct downlight over tub or shower; wall-wash only",
+      "value": "none",
+      "check_against": [
+        "ies-rp11"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "B-VANITY",
+      "room": "ensuite",
+      "what": "backlit mirror plus two vertical sconces for cross-lighting",
+      "value": "cross-lit",
+      "check_against": [
+        "ies-rp11",
+        "nkba-guidelines"
+      ],
+      "status": "unchecked"
+    },
+    {
+      "id": "M-BED",
+      "room": "master bedroom",
+      "what": "bed block moved toward ensuite (west)",
+      "value": "400 mm",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "M-HEADWALL",
+      "room": "master bedroom",
+      "what": "headboard wall partial height, not to ceiling (airflow)",
+      "value": "partial",
+      "check_against": [],
+      "status": "unchecked"
+    },
+    {
+      "id": "KID-DESK",
+      "room": "kids",
+      "what": "own adjustable task light per study station; shielded from sleep zone",
+      "value": "per station",
+      "check_against": [
+        "ies-rp11"
+      ],
+      "status": "unchecked"
+    }
+  ]
+}

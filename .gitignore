@@ -35,3 +35,8 @@ out/revit2027/*.rvt
 # User-supplied and manufacturer downloads (luminaire libraries, bed models):
 # third-party files are never committed; manifests record their source and hash.
 assets/user/
+
+# Client brief documents and third-party reference images: referenced by
+# knowledge/projects/*/taste.json, never committed.
+villa_*_guidelines.docx
+villa_*_guidelines_images/
