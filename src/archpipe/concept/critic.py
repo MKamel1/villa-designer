@@ -212,3 +212,36 @@ def rule_findings(spec_path) -> list[dict]:
             out.append({"level": lv.id, "rule": f.rule, "severity": f.severity, "where": f.where,
                         "message": f.message})
     return out
+
+
+FACING_AZIMUTH = {"north": 0, "east": 90, "south": 180, "west": 270}
+
+
+def thermal_cases(layout, height_m: float = 3.0) -> list[dict]:
+    """One free-running shoebox case per habitable room with a window, for the TM59 screen.
+
+    Orientation = the facade carrying the room's largest window; WWR = that facade's window area over
+    its wall area; room width = that facade's length, depth = the other dimension. Uses the thermal
+    module's stated default constructions and gains (ADR-0017)."""
+    cases = []
+    for lid in layout["levels"]:
+        _, wins, _ = L.openings(layout, lid)
+        by_room = {}
+        for w in wins:
+            by_room.setdefault(w["room"], []).append(w)
+        for rid, ws in by_room.items():
+            r = layout["rooms"][rid]
+            if r["occupancy"] not in vocab.HABITABLE:
+                continue
+            facing = max(ws, key=lambda w: w["width"])["facing"]
+            on = [w for w in ws if w["facing"] == facing]
+            x0, y0, x1, y1 = r["rect"]
+            along = (x1 - x0) if facing in ("north", "south") else (y1 - y0)
+            depth = (y1 - y0) if facing in ("north", "south") else (x1 - x0)
+            wwr = min(0.9, sum(w["width"] * L.WIN_H for w in on) / (along * height_m))
+            cases.append({"label": f"{layout['id']}/{rid}", "mode": "free",
+                          "use": "bedroom" if r["occupancy"] in ("bedroom", "bedroom_single") else "living",
+                          "azimuth_deg": FACING_AZIMUTH[facing], "wwr": round(wwr, 3), "overhang_m": 0.0,
+                          "room": {"width_m": round(along, 2), "depth_m": round(depth, 2), "height_m": height_m}})
+    return cases
+

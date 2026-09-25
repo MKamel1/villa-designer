@@ -292,6 +292,37 @@ def search_luminaires(mount: str | None = None, lm_min: float | None = None, lm_
 
 
 @mcp.tool(annotations=READ)
+def critique_concept(layout_path: str = 'spec/concepts/pilot/bar.layout.json', available_m2: float | None = None,
+                     circulation_m2: float | None = None) -> dict:
+    """Score a concept layout with the calibrated critic (graph + geometric checks, each with its basis) and the
+    rule engine on its emitted spec. Calibration status per check: knowledge/precedents/*-calibration.json."""
+    import tempfile
+    from archpipe.concept import critic, layout as L
+    lay = json.loads(local_path(layout_path).read_text(encoding='utf-8'))
+    res = critic.critique(lay, available_m2, circulation_m2)
+    with tempfile.TemporaryDirectory() as d:
+        res['rule_findings'] = critic.rule_findings(L.write_spec(lay, Path(d) / 'concept.yaml'))
+    return res
+
+
+@mcp.tool(annotations=READ)
+def concept_thermal_cases(layout_path: str = 'spec/concepts/pilot/bar.layout.json') -> dict:
+    """The free-running TM59 screen cases (one per habitable room) a layout produces; run them with
+    `scripts/concept.py thermal` on the workstation."""
+    from archpipe.concept import critic
+    return {'cases': critic.thermal_cases(json.loads(local_path(layout_path).read_text(encoding='utf-8')))}
+
+
+@mcp.tool(annotations=WRITE)
+def generate_concepts(n: int = 1500) -> dict:
+    """Run generator v1 on the fictional pilot (bar, L, U): writes spec/concepts/pilot/ and
+    docs/guidance/concepts-pilot.md. Never touches the real villa."""
+    r = subprocess.run([sys.executable, str(ROOT / 'scripts' / 'concept.py'), 'generate', '-n', str(int(n))],
+                       cwd=ROOT, capture_output=True, text=True, env=dict(os.environ, PYTHONPATH=str(ROOT / 'src')))
+    return {'returncode': r.returncode, 'output': r.stdout[-3000:], 'report': 'docs/guidance/concepts-pilot.md'}
+
+
+@mcp.tool(annotations=READ)
 def search_books(query: str, book: str | None = None, limit: int = 10) -> dict:
     """Full-text search over the HELD books and standards (private knowledge index).
 

@@ -102,5 +102,5 @@ Rule engine on the emitted spec (legacy rules are diagnostic per the rule audit)
 
 ## Not assessed (consultant scope or not yet run)
 
-- Cooling per concept: run the thermal shoebox per facade (`workstation.py thermal`) before choosing.
+- Cooling per concept: TM59 screen per room in `concepts-pilot-thermal.md` (`python scripts/concept.py thermal`); the critic's own `cooling` check stays not_measured because the screen runs on the workstation.
 - Structure, glare, HVAC, electrical, plumbing: MISSING in-house; consultant hand-off.

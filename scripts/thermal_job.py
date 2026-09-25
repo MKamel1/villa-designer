@@ -2,7 +2,7 @@
 
     <thermal_python> scripts/thermal_job.py --input job.json --epw <file.epw> --energyplus <path> --out <dir>
 
-job.json: {"kind": "climate" | "study" | "validate", "base": {...}, "sweep": {...}}
+job.json: {"kind": "climate" | "study" | "cases" | "validate", "base": {...}, "sweep": {...}}
 Prints one JSON document on stdout (EnergyPlus's own output goes to per-case logs).
 """
 from __future__ import annotations
@@ -91,6 +91,9 @@ def main() -> int:
         result = {"climate": t.climate_summary(a.epw)}
     elif kind == "study":
         result = {"results": t.window_study(job.get("base", {}), job.get("sweep", {}), a.epw, a.energyplus, a.out)}
+    elif kind == "cases":          # explicit cases, e.g. one per concept room (scripts/concept.py thermal)
+        result = {"results": [dict(t.run_case(c, a.epw, a.energyplus, a.out / f"case{i:03d}"), label=c.get("label"))
+                              for i, c in enumerate(job["cases"])]}
     elif kind == "daylight":
         import itertools
         base, sweep = job.get("base", {}), job.get("sweep", {})

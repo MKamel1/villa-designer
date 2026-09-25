@@ -208,9 +208,33 @@ def sketchfab(host: str = "ai-workstation") -> dict:
     return run_checks(items, host, "sketchfab")
 
 
+def batch(n: int = 220, host: str = "ai-workstation") -> dict:
+    """Verify N more Poly Haven / ambientCG items: round-robin over categories so coverage stays broad,
+    and within each category prefer the client's styles (taste.json oversampling weights)."""
+    taste = json.loads((ROOT / "knowledge/projects/villa-01/taste.json").read_text(encoding="utf-8"))["style_weights"]
+    pool = [it for it in store.search(include_unverified=True, limit=100000)
+            if it["source"] in ("polyhaven", "ambientcg") and it.get("layer") == "catalogue"]
+    by_cat = {}
+    for it in pool:
+        score = sum(taste.get(s, 0.0) for s in (it.get("styles") or []))
+        by_cat.setdefault(it.get("category") or "other", []).append((-score, it["id"], it))
+    queues = {c: sorted(v) for c, v in sorted(by_cat.items())}
+    chosen = []
+    while len(chosen) < n and any(queues.values()):
+        for c in list(queues):
+            if queues[c] and len(chosen) < n:
+                chosen.append(queues[c].pop(0)[2])
+    items = []
+    for it in chosen:
+        declared = {k: it["data"][k] for k in ("real_size_mm", "dimensions_mm", "polycount") if k in it["data"]}
+        items.append({"id": it["id"], "source": it["source"], "key": it["key"], "asset_type": it["data"]["asset_type"],
+                      "files": _files(it), "declared": declared})
+    return run_checks(items, host, "batch")
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("cmd", choices=["index", "pilot", "fab", "sketchfab", "search", "show", "status"])
+    ap.add_argument("cmd", choices=["index", "pilot", "batch", "fab", "sketchfab", "search", "show", "status"])
     ap.add_argument("id", nargs="?")
     ap.add_argument("--text")
     ap.add_argument("--category")
@@ -238,8 +262,8 @@ def main(argv=None) -> int:
                   f"{'caught' if n['caught'] else 'NOT CAUGHT'}")
         ok = all(n["caught"] for n in rep["negative_control"])
         return 0 if ok else 1
-    if a.cmd in ("fab", "sketchfab"):
-        rep = fab() if a.cmd == "fab" else sketchfab()
+    if a.cmd in ("fab", "sketchfab", "batch"):
+        rep = fab() if a.cmd == "fab" else sketchfab() if a.cmd == "sketchfab" else batch(a.limit)
         bad = [r for r in rep["items"] if r["layer"] != "verified"]
         print(f"  {len(rep['items']) - len(bad)} verified, {len(bad)} not")
         for r in bad:

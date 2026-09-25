@@ -37,9 +37,9 @@ async def main():
         async with ClientSession(read, write) as client:
             await client.initialize()
             tools = await client.list_tools()
-            assert len(tools.tools) == 22
+            assert len(tools.tools) == 25
             assert {'stage_context', 'lookup_evidence', 'review_stage', 'check_fixture_sources', 'search_luminaires', 'luminaire_alternates', 'luminaire_download_links', 'propose_luminaires'} <= {t.name for t in tools.tools}
-            print('PASS real MCP handshake and twenty-two typed tools')
+            print('PASS real MCP handshake and twenty-five typed tools')
             context = payload(await client.call_tool('stage_context', {'stage':0}))
             assert context['example'] and 'budget' in context['missing_inputs']
             evidence = payload(await client.call_tool('lookup_evidence', {'query':'shading','stage':3}))
@@ -54,6 +54,11 @@ async def main():
             learned = await client.read_resource('archpipe://learnings')
             assert 'world bounding box' in learned.contents[0].text
             print('PASS shared learning and method resources')
+            crit = payload(await client.call_tool('critique_concept', {}))
+            assert {c['check'] for c in crit['checks']} >= {'private_access', 'window', 'wet_stack'} and 'rule_findings' in crit
+            cases = payload(await client.call_tool('concept_thermal_cases', {}))
+            assert cases['cases'] and all(c['mode'] == 'free' for c in cases['cases'])
+            print('PASS concept critique and thermal cases')
             model = payload(await client.call_tool('read_model', {}))
             assert len(model['furniture']) == 6
             reviewed = payload(await client.call_tool('review_model', {'scope': 'room'}))
