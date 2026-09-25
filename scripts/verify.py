@@ -241,7 +241,7 @@ def main() -> int:
     expect("--stage 3 still reports the Stage 3 violation",
            "SAN-01" in out3 and "reporting Stage 0-3" in out3)
     expect("--stage 3 says how many findings it suppressed",
-           "9 later-stage finding(s) not shown" in out3)
+           "10 later-stage finding(s) not shown" in out3)   # 10 since FURN-02 re-sourced 2026-09-25
     expect("--stage 2 reports nothing and exits 0, though a later "
            "violation exists",
            rc2 == 0 and "0 findings" in out2 and "nothing to report" in out2)

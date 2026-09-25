@@ -57,7 +57,11 @@ async def main():
             model = payload(await client.call_tool('read_model', {}))
             assert len(model['furniture']) == 6
             reviewed = payload(await client.call_tool('review_model', {'scope': 'room'}))
-            assert reviewed['passed'] and reviewed['furniture_count'] == 6
+            # 2026-09-25: FURN-02 wardrobe front re-sourced to Time-Saver p. 87 (914 mm); the measured
+            # bedroom has 750 mm there, so exactly that one warning is expected (plus the advisory VIEW-01)
+            real = [f for f in reviewed['findings'] if f['severity'] != 'advisory']
+            assert reviewed['furniture_count'] == 6 and len(real) == 1, real
+            assert real[0]['rule'] == 'FURN-02' and '914 mm' in real[0]['message'] and 'Wardrobe' in real[0]['message']
             full = payload(await client.call_tool('review_model', {}))
             assert not full['passed']
             assert any(f['rule'] == 'SAN-01' for f in full['findings'])

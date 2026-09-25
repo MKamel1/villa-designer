@@ -60,3 +60,15 @@ ready for a kitchen checker; no rule uses them yet.
 
 No rule is enabled for approval yet: that needs every parameter verified and
 the mapping marked complete.
+
+## Furniture rules (2026-09-25)
+
+| Rule | State | What changed |
+|---|---|---|
+| FURN-02 | partly verified (23 of 31) | Clearances re-sourced. **Beds:** AD M 2.25 (750 mm: principal double both sides and foot; other doubles one side and foot; singles one side). **WC, basin, bath:** AD M Diagram 2.5 (1100 / 1100 / 700 mm zones). **Wardrobe front:** Time-Saver p. 87 (914 mm). **Dining:** Time-Saver p. 81 (813 mm), agreeing with NKBA. **Kitchens:** NKBA (1219 multi-cook aisle, 914 walkway). Unresolved: sofa to coffee table, TV distance, fridge, shower, desk. |
+| FURN-01, FURN-03 | no number to verify | Physical clash checks (furniture against walls, furniture against furniture) on the model's actual sizes. Catalogue footprints are placeholders until a product is chosen; AD M Appendix D gives minimum sizes for compliance layouts. |
+
+**Context choice for beds.** Time-Saver's bed clearances (22 in / 12 in) are convenience minimums; AD M's 750 mm zones are for accessible and adaptable homes. They are far apart. The villa brief records ageing in place, so AD M applies (close/far policy, docs/guidance/README.md).
+
+**Effect on the bedroom example.** The measured bedroom's wardrobe has 750 mm in front; the sourced value is 914 mm. `scripts/test_mcp.py` now expects exactly that warning.
+

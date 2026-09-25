@@ -3290,6 +3290,166 @@
       "exceptions": null,
       "verification": "Read on the held original page 2026-09-25 (requirement text and definition checked).",
       "applies_when": {}
+    },
+    {
+      "id": "ukadm-bed-principal-750",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "para 2.25b (printed page 18)",
+      "stages": [
+        4
+      ],
+      "summary": "Principal double bedroom: clear access zone at least 750 mm to both sides and the foot of the bed.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 750,
+      "original_page_checked": true,
+      "conditions": "UK AD M M4(2) accessible and adaptable dwellings; applied because the villa brief records ageing in place (spec/villa-brief.yaml).",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-bed-other-double-750",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "para 2.25c (printed page 18)",
+      "stages": [
+        4
+      ],
+      "summary": "Every other double bedroom: clear access zone at least 750 mm to one side and the foot of the bed.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 750,
+      "original_page_checked": true,
+      "conditions": "UK AD M M4(2) accessible and adaptable dwellings; applied because the villa brief records ageing in place (spec/villa-brief.yaml).",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-bed-single-750",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "para 2.25d (printed page 18)",
+      "stages": [
+        4
+      ],
+      "summary": "Single and twin bedrooms: clear access zone at least 750 mm to one side of each bed.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 750,
+      "original_page_checked": true,
+      "conditions": "UK AD M M4(2) accessible and adaptable dwellings; applied because the villa brief records ageing in place (spec/villa-brief.yaml).",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-wc-access-zone-1100",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "Diagram 2.5, key a (printed page 20)",
+      "stages": [
+        4
+      ],
+      "summary": "WC access zone 1100 mm deep in front of the pan (extending 1000 mm to one side of its centreline).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 1100,
+      "original_page_checked": true,
+      "conditions": "UK AD M M4(2) accessible and adaptable dwellings; applied because the villa brief records ageing in place (spec/villa-brief.yaml).",
+      "exceptions": "Zones may overlap except where noted (Diagram 2.5 note 2).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-basin-access-zone-1100",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "Diagram 2.5 (printed page 20)",
+      "stages": [
+        4
+      ],
+      "summary": "Basin access zone 1100 mm deep by 700 mm wide in front of the basin.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 1100,
+      "original_page_checked": true,
+      "conditions": "UK AD M M4(2) accessible and adaptable dwellings; applied because the villa brief records ageing in place (spec/villa-brief.yaml).",
+      "exceptions": "The zone may extend under the basin to any fixed obstruction (note 3).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadm-bath-access-zone-700",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "Diagram 2.5 (printed page 20)",
+      "stages": [
+        4
+      ],
+      "summary": "Bath access zone 700 mm wide alongside the bath, over 1100 mm of its length.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 700,
+      "original_page_checked": true,
+      "conditions": "UK AD M M4(2) accessible and adaptable dwellings; applied because the villa brief records ageing in place (spec/villa-brief.yaml).",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "tss-front-of-storage-914",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "locator": "Residential bedrooms, furniture clearances (printed page 87)",
+      "stages": [
+        4
+      ],
+      "summary": "36 in (914 mm) in front of dresser, closet and chest of drawers.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 914,
+      "original_page_checked": true,
+      "conditions": "US residential planning practice; the only held source giving a wardrobe-front clearance (36 in = 914.4 mm).",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "tss-dining-chair-access-813",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "locator": "Dining areas, furniture clearances (printed page 81)",
+      "stages": [
+        4
+      ],
+      "summary": "32 in (813 mm) from the table edge for chair plus access; 38 in with passage; 42 in for serving from behind.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 813,
+      "original_page_checked": true,
+      "conditions": "US residential planning practice; agrees with NKBA 32 in seating clearance with no traffic behind (card nkba-seating-no-traffic).",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

@@ -116,6 +116,10 @@ def catalogue_value(key):
     """'MIN_AREA_M2.bedroom' / 'PLANNING.corridor_min' -> the number the rule engine uses."""
     from . import catalogue as cat
     table, name = key.split('.', 1)
+    if table == 'CATALOGUE':            # 'CATALOGUE.<type>.<side|any>': a furniture clearance
+        type_id, side = name.split('.')
+        t = cat.CATALOGUE[type_id]
+        return t.clearance_any[1] if side == 'any' else t.clearance[side]
     return getattr(cat, table)[name][0]
 
 

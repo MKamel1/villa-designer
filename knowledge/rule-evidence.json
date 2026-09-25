@@ -152,6 +152,197 @@
       ],
       "complete": true,
       "note": "Presence rule, no number. Re-sourced 2026-09-25 from the unverified Neufert citation to AD G 4.8 / M4(1) and 5.6."
+    },
+    "FURN-02": {
+      "parameters": {
+        "CATALOGUE.bed_double.front": {
+          "value": 750,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-bed-principal-750"
+        },
+        "CATALOGUE.bed_double.left": {
+          "value": 750,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-bed-principal-750"
+        },
+        "CATALOGUE.bed_double.right": {
+          "value": 750,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-bed-principal-750"
+        },
+        "CATALOGUE.bed_double_other.front": {
+          "value": 750,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-bed-other-double-750"
+        },
+        "CATALOGUE.bed_double_other.any": {
+          "value": 750,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-bed-other-double-750"
+        },
+        "CATALOGUE.bed_single.any": {
+          "value": 750,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-bed-single-750"
+        },
+        "CATALOGUE.wardrobe.front": {
+          "value": 914,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-front-of-storage-914"
+        },
+        "CATALOGUE.dining_4.front": {
+          "value": 813,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-dining-chair-access-813"
+        },
+        "CATALOGUE.dining_4.back": {
+          "value": 813,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-dining-chair-access-813"
+        },
+        "CATALOGUE.dining_4.left": {
+          "value": 813,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-dining-chair-access-813"
+        },
+        "CATALOGUE.dining_4.right": {
+          "value": 813,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-dining-chair-access-813"
+        },
+        "CATALOGUE.dining_6.front": {
+          "value": 813,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-dining-chair-access-813"
+        },
+        "CATALOGUE.dining_6.back": {
+          "value": 813,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-dining-chair-access-813"
+        },
+        "CATALOGUE.dining_6.left": {
+          "value": 813,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-dining-chair-access-813"
+        },
+        "CATALOGUE.dining_6.right": {
+          "value": 813,
+          "unit": "mm",
+          "status": "verified",
+          "card": "tss-dining-chair-access-813"
+        },
+        "CATALOGUE.kitchen_run.front": {
+          "value": 1219,
+          "unit": "mm",
+          "status": "verified",
+          "card": "nkba-work-aisle-multi-cook"
+        },
+        "CATALOGUE.kitchen_island.front": {
+          "value": 1219,
+          "unit": "mm",
+          "status": "verified",
+          "card": "nkba-work-aisle-multi-cook"
+        },
+        "CATALOGUE.kitchen_island.back": {
+          "value": 1219,
+          "unit": "mm",
+          "status": "verified",
+          "card": "nkba-work-aisle-multi-cook"
+        },
+        "CATALOGUE.kitchen_island.left": {
+          "value": 914,
+          "unit": "mm",
+          "status": "verified",
+          "card": "nkba-walkway-min"
+        },
+        "CATALOGUE.kitchen_island.right": {
+          "value": 914,
+          "unit": "mm",
+          "status": "verified",
+          "card": "nkba-walkway-min"
+        },
+        "CATALOGUE.wc.front": {
+          "value": 1100,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-wc-access-zone-1100"
+        },
+        "CATALOGUE.washbasin.front": {
+          "value": 1100,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-basin-access-zone-1100"
+        },
+        "CATALOGUE.bath.front": {
+          "value": 700,
+          "unit": "mm",
+          "status": "verified",
+          "card": "ukadm-bath-access-zone-700"
+        },
+        "CATALOGUE.sofa_3seat.front": {
+          "value": 450,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "no held source states a sofa-to-coffee-table distance as a number"
+        },
+        "CATALOGUE.sofa_2seat.front": {
+          "value": 450,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "as sofa_3seat"
+        },
+        "CATALOGUE.coffee_table.front": {
+          "value": 450,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "as sofa_3seat"
+        },
+        "CATALOGUE.coffee_table.back": {
+          "value": 450,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "as sofa_3seat"
+        },
+        "CATALOGUE.tv_unit.front": {
+          "value": 2500,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "Mitton p. 85 gives viewing distance by screen size (Fig. 4.10b), not one value"
+        },
+        "CATALOGUE.fridge.front": {
+          "value": 1100,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "not yet found in a held source"
+        },
+        "CATALOGUE.shower.front": {
+          "value": 700,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "AD M Diagram 2.5 shower zone not yet transcribed"
+        },
+        "CATALOGUE.desk.front": {
+          "value": 900,
+          "unit": "mm",
+          "status": "unresolved",
+          "reason": "not yet found in a held source"
+        }
+      },
+      "note": "Re-sourced 2026-09-25. Beds and sanitary zones: AD M M4(2) (brief: ageing in place). Time-Saver's bed clearances (22 in / 12 in) are convenience minimums for a different context and are not used. Wardrobe and dining: Time-Saver; kitchens: NKBA."
     }
   }
 }

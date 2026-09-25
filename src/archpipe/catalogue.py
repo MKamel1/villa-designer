@@ -57,21 +57,27 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
     # ---- sleeping ------------------------------------------------------
     FurnitureType(
         "bed_single", "Single bed", 900, 2000,
-        _c(front=750),
-        "Neufert, Architects' Data -- bedrooms: 750 mm access to one long side",
-        "One long side may abut a wall; the foot needs access.",
+        _c(),
+        "UK AD M Vol 1 (2015) para 2.25d -- single and twin beds: 750 mm clear access zone to one side",
+        "One long side may abut a wall; AD M asks no zone at the foot of a single bed.",
         clearance_any=(("left", "right"), 750),
     ),
     FurnitureType(
-        "bed_double", "Double bed", 1600, 2000,
+        "bed_double", "Double bed (principal bedroom)", 1600, 2000,
         _c(front=750, left=750, right=750),
-        "Neufert, Architects' Data -- bedrooms: 750 mm access to BOTH long sides",
-        "A double bed with one side against a wall is a recognised planning fault.",
+        "UK AD M Vol 1 (2015) para 2.25b -- principal bedroom: 750 mm clear access zone to both sides and the foot",
+        "The principal double bedroom; other doubles use bed_double_other.",
+    ),
+    FurnitureType(
+        "bed_double_other", "Double bed (other bedrooms)", 1600, 2000,
+        _c(front=750),
+        "UK AD M Vol 1 (2015) para 2.25c -- other double bedrooms: 750 mm clear access zone to one side and the foot",
+        clearance_any=(("left", "right"), 750),
     ),
     FurnitureType(
         "wardrobe", "Wardrobe", 1200, 600,
-        _c(front=750),
-        "Neufert, Architects' Data -- storage: 750 mm to open doors and stand",
+        _c(front=914),
+        "Time-Saver Standards for Interior Design 2nd ed. p. 87 -- 36 in (914 mm) in front of dresser, closet and chest of drawers",
     ),
     # ---- living --------------------------------------------------------
     FurnitureType(
@@ -97,26 +103,26 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
     # ---- dining --------------------------------------------------------
     FurnitureType(
         "dining_4", "Dining table, 4", 1200, 800,
-        _c(front=800, back=800, left=800, right=800),
-        "Neufert, Architects' Data -- dining: 800 mm per side to seat and rise",
-        "1000 mm is preferred where the side is also a circulation route.",
+        _c(front=813, back=813, left=813, right=813),
+        "Time-Saver Standards for Interior Design 2nd ed. p. 81 -- 32 in (813 mm) from table edge for chair plus access (NKBA agrees for kitchen seating)",
+        "38 in (965 mm) where the side is also a passage (same source).",
     ),
     FurnitureType(
         "dining_6", "Dining table, 6", 1800, 900,
-        _c(front=800, back=800, left=800, right=800),
-        "Neufert, Architects' Data -- dining: 800 mm per side to seat and rise",
+        _c(front=813, back=813, left=813, right=813),
+        "Time-Saver Standards for Interior Design 2nd ed. p. 81 -- 32 in (813 mm) from table edge for chair plus access (NKBA agrees for kitchen seating)",
     ),
     # ---- kitchen -------------------------------------------------------
     FurnitureType(
         "kitchen_run", "Kitchen run", 3000, 600,
-        _c(front=1200),
-        "Neufert, Architects' Data -- kitchens: 1200 mm working aisle",
-        "900 mm is the absolute minimum for a single-person galley.",
+        _c(front=1219),
+        "NKBA Kitchen Planning Guidelines -- work aisle at least 48 in (1219 mm) for multiple cooks",
+        "42 in (1067 mm) for one cook (same source); a villa kitchen is planned for more than one cook.",
     ),
     FurnitureType(
         "kitchen_island", "Kitchen island", 1800, 900,
-        _c(front=1200, back=1200, left=1000, right=1000),
-        "Neufert, Architects' Data -- kitchens: 1200 mm working aisle",
+        _c(front=1219, back=1219, left=914, right=914),
+        "NKBA Kitchen Planning Guidelines -- work aisles 48 in (1219 mm) multi-cook; walkways 36 in (914 mm) at the ends",
     ),
     FurnitureType(
         "fridge", "Fridge/freezer", 700, 700,
@@ -126,18 +132,19 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
     # ---- sanitary ------------------------------------------------------
     FurnitureType(
         "wc", "WC pan", 400, 700,
-        _c(front=600, left=200, right=200),
-        "Neufert, Architects' Data -- sanitary: 600 mm clear in front of the pan",
+        _c(front=1100),
+        "UK AD M Vol 1 (2015) Diagram 2.5 -- WC access zone 1100 mm deep in front of the pan",
+        "AD M's zone also extends 1000 mm to one side of the pan centreline; that width is not modelled here.",
     ),
     FurnitureType(
         "washbasin", "Washbasin", 600, 500,
-        _c(front=700),
-        "Neufert, Architects' Data -- sanitary: 700 mm standing room at a basin",
+        _c(front=1100),
+        "UK AD M Vol 1 (2015) Diagram 2.5 -- basin access zone 1100 mm deep, 700 mm wide",
     ),
     FurnitureType(
         "bath", "Bath", 1700, 750,
         _c(front=700),
-        "Neufert, Architects' Data -- sanitary: 700 mm alongside for access",
+        "UK AD M Vol 1 (2015) Diagram 2.5 -- bath access zone 700 mm wide alongside, over 1100 mm of its length",
     ),
     FurnitureType(
         "shower", "Shower tray", 900, 900,
