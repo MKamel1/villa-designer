@@ -3,7 +3,9 @@
 Checked 2026-09-25. The client asked: get a book only if it is free, otherwise
 skip it or name an alternative, and say what each one blocks.
 
-**Only one book blocks a result today: CIBSE TM59. It is free.** The rest are
+**Update 2026-09-25: TM59 (2026) and the AECOM Middle East handbook are held.** TM59's criteria now drive the thermal window study (ADR-0017 addendum). AECOM's cost tables (printed pp. 120-122) cover Gulf cities, not Cairo: they serve the relative cost of options only, never an Egyptian budget.
+
+**Only one book blocked a result: CIBSE TM59. It is free.** The rest are
 covered by books already held, or they block only later or optional work.
 
 | Book | Free? | What it blocks today | Decision |
