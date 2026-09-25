@@ -48,12 +48,11 @@ by `python scripts/sources.py list`. Edit the registry, not this table.
 <!-- purchase-list:begin -->
 ### To buy
 
-**Tier 1** (about $925)
+**Tier 1** (about $805)
 
 | Id | Title | Edition | What it unlocks | ≈ USD |
 |---|---|---|---|---|
 | `br209` | Paul Littlefair et al.: BR 209 Site layout planning for daylight and sunlight: a guide to good practice | 3 (2022) | sunlight-to-garden and overshadowing checks at concept stage | 80 |
-| `cibse-tm59` | CIBSE: [TM59: Overheating risk in dwellings - a design stage methodology](https://www.cibse.org/knowledge-research/knowledge-portal/tm59-overheating-risk-in-dwellings-a-design-stage-methodology-2026/) | 2026 | the overheating gate for window and shading decisions | 120 |
 | `en17037` | BSI / CEN: BS EN 17037:2018+A1:2021 Daylight in buildings | 2018+A1:2021 | daylight targets for every habitable room | 350 |
 | `human-dimension` | Julius Panero and Martin Zelnik: Human Dimension & Interior Space | 1979 | furniture clearance checks (FURN-02, walkways, seating) | 45 |
 | `ies-rp11` | Illuminating Engineering Society / American Lighting Association: [ANSI/IES/ALA RP-11-26 Recommended Practice: Lighting for Interior and Exterior Residential Environments](https://webstore.ansi.org/standards/iesna/ansiiesalarp1126) | RP-11-26 | residential lighting targets for every room (replaces the hospitality RP) | 150 |
@@ -97,7 +96,7 @@ by `python scripts/sources.py list`. Edit the registry, not this table.
 |---|---|---|---|---|
 | `cubicasa5k` | CubiCasa: CubiCasa5k floor-plan dataset | 2019 | additional detached-house plan priors | free |
 
-Paid total about **$2,640** (prices approximate; confirm at checkout).
+Paid total about **$2,520** (prices approximate; confirm at checkout).
 <!-- purchase-list:end -->
 
 ## Also missing, and not solved by books
