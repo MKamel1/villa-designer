@@ -15,29 +15,31 @@ pages have been read, including the analytic diagrams as page images
 
 ```json
 {
-  "id": "magney-house",
-  "name": "Magney House, Bingie Point",
-  "architect": "Glenn Murcutt",
-  "year": 1984,
-  "climate": "temperate coastal (for reference only; not a hot-dry analogue)",
-  "sources": [{"source_id": "precedents-in-architecture", "locator": "Glenn Murcutt, printed pages 156-159"}],
-  "typology": "bar",                         // an id from knowledge/typologies.json
-  "organization": "linear",                  // Ching: centralized|linear|radial|clustered|grid
-  "storeys": 1,
-  "rooms": [{"id": "living", "use": "living", "area_m2": null}],   // null = not published; never guessed
-  "adjacency": [["entry", "living"], ["living", "kitchen"]],
-  "zoning": {"public": ["living", "kitchen"], "private": ["bed1", "bed2"]},
-  "circulation": "single-loaded spine along the south side",
-  "orientation": "long axis east-west; glazing north (southern hemisphere sun side)",
-  "section": "single volume, curved roof, clerestory",
-  "outdoor_relation": "verandah along the sun side",
-  "diagram_themes": ["structure", "natural light", "massing", "plan to section", "circulation to use-space",
-                     "unit to whole", "repetitive to unique", "symmetry and balance", "geometry",
-                     "additive and subtractive", "hierarchy"],
-  "notes": "what this precedent teaches for a villa, in one or two sentences",
-  "verified": "2026-09-25 by <reader>: pages and diagrams read"
+  "id": "<slug>",
+  "name": "<house name as printed>",
+  "architect": "<as printed>",
+  "year": null,                              // only if the pages state it
+  "climate": null,                           // from a cited source, else null
+  "sources": [{"source_id": "precedents-in-architecture", "locator": "<architect>, printed pages <n-m>"}],
+  "typology": "<id from knowledge/typologies.json, or null>",
+  "organization": "<centralized|linear|radial|clustered|grid, as the diagrams show>",
+  "storeys": null,
+  "rooms": [{"id": "<room>", "use": "<use>", "area_m2": null}],   // null = not published; never guessed
+  "adjacency": [["<room>", "<room>"]],
+  "zoning": {"public": [], "private": [], "service": []},
+  "circulation": null,
+  "orientation": null,
+  "section": null,
+  "outdoor_relation": null,
+  "diagram_themes": [],                      // only themes whose diagrams were read (book vocabulary below)
+  "notes": null,
+  "verified": "<date> by <reader>: pages and diagrams read"
 }
 ```
+
+The book's diagram vocabulary: structure, natural light, massing, plan to
+section, circulation to use-space, unit to whole, repetitive to unique,
+symmetry and balance, geometry, additive and subtractive, hierarchy.
 
 **Rules**
 - Record what the source shows. An unknown value is `null`, never a guess.

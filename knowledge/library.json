@@ -1858,6 +1858,30 @@
         }
       ],
       "verification": "Edition confirmed from the held file's title/copyright page, 2026-09-24."
+    },
+    {
+      "id": "neufert-6",
+      "author": "Ernst Neufert",
+      "title": "Architects' Data",
+      "edition": "6",
+      "publisher": "Wiley",
+      "stages": [
+        2,
+        4
+      ],
+      "isbn": "9781119873945",
+      "coverage": "current dwelling, door, furniture and circulation data",
+      "priority": 1,
+      "url": "https://www.wiley-vch.de/en?isbn=9781119873945&option=com_eshop&view=product",
+      "status": "identified",
+      "metadata_basis": "The held Neufert is the 1980 2nd English edition; the current 6th edition is still to obtain.",
+      "access_location": null,
+      "permissions": "Licensed original required; do not redistribute.",
+      "acquisition": "Supply a readable PDF/EPUB (check the copyright page says 6th edition).",
+      "kind": "book",
+      "free": false,
+      "cost_usd_approx": 120,
+      "unlocks": "current Neufert dimensions (the held copy is 1980 practice)"
     }
   ],
   "evidence": [

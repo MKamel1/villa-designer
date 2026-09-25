@@ -1,5 +1,5 @@
 {
-  "note": "Villa partis for concept generation. Properties cite qualitative evidence cards; the generator uses the 'generator' block; the critic scores every variant the same way whatever its parti.",
+  "note": "Villa partis for concept generation. Properties cite qualitative evidence cards; the generator uses the 'generator' block; the critic scores every variant the same way whatever its parti. 'sourced' properties quote cited cards; 'judgement' is labelled design opinion.",
   "typologies": [
     {
       "id": "bar",
@@ -9,19 +9,32 @@
         "ching-linear",
         "lechner-east-west-axis"
       ],
-      "strengths": [
-        "every room gets an exterior exposure",
-        "simple structure and services runs",
-        "an east-west bar puts most glass on north and south"
-      ],
-      "cautions": [
-        "long circulation spine; privacy depends on where the spine runs",
-        "a long west end needs shading"
-      ],
       "generator": {
         "footprint": "rectangle",
         "aspect_min": 2.5,
         "spine": "single-loaded or central"
+      },
+      "sourced": [
+        {
+          "property": "every room gets an exterior exposure",
+          "card": "ching-linear"
+        },
+        {
+          "property": "an east-west bar puts most glass on north and south",
+          "card": "lechner-east-west-axis"
+        }
+      ],
+      "judgement": {
+        "strengths": [
+          "every room gets an exterior exposure",
+          "simple structure and services runs",
+          "an east-west bar puts most glass on north and south"
+        ],
+        "cautions": [
+          "long circulation spine; privacy depends on where the spine runs",
+          "a long west end needs shading"
+        ],
+        "note": "AI design judgement, not from a cited passage: to be confirmed by precedent records and studies; never cited as a source."
       }
     },
     {
@@ -31,20 +44,29 @@
       "cards": [
         "ching-linear"
       ],
-      "strengths": [
-        "two wings separate public and private",
-        "the inside corner makes a sheltered garden"
-      ],
-      "cautions": [
-        "the corner room is dark and hard to plan",
-        "one wing may face east or west"
-      ],
       "generator": {
         "footprint": "L",
         "wing_ratio": [
           0.4,
           0.6
         ]
+      },
+      "sourced": [
+        {
+          "property": "each space along the sequence has an exterior exposure",
+          "card": "ching-linear"
+        }
+      ],
+      "judgement": {
+        "strengths": [
+          "two wings separate public and private",
+          "the inside corner makes a sheltered garden"
+        ],
+        "cautions": [
+          "the corner room is dark and hard to plan",
+          "one wing may face east or west"
+        ],
+        "note": "AI design judgement, not from a cited passage: to be confirmed by precedent records and studies; never cited as a source."
       }
     },
     {
@@ -55,17 +77,26 @@
         "ching-centralized",
         "lechner-courtyard-hot-dry"
       ],
-      "strengths": [
-        "a shaded outdoor room in a hot-dry climate",
-        "strong privacy from the street"
-      ],
-      "cautions": [
-        "more envelope per floor area",
-        "the court must open to prevailing breeze and away from low sun"
-      ],
       "generator": {
         "footprint": "U",
         "court_open_side": "choose from wind and view"
+      },
+      "sourced": [
+        {
+          "property": "courtyard forms suit hot and dry climates; the court is self-shading",
+          "card": "lechner-courtyard-hot-dry"
+        }
+      ],
+      "judgement": {
+        "strengths": [
+          "a shaded outdoor room in a hot-dry climate",
+          "strong privacy from the street"
+        ],
+        "cautions": [
+          "more envelope per floor area",
+          "the court must open to prevailing breeze and away from low sun"
+        ],
+        "note": "AI design judgement, not from a cited passage: to be confirmed by precedent records and studies; never cited as a source."
       }
     },
     {
@@ -76,16 +107,29 @@
         "ching-centralized",
         "lechner-courtyard-hot-dry"
       ],
-      "strengths": [
-        "self-shaded court, cross-ventilation, introverted privacy"
-      ],
-      "cautions": [
-        "circulation around the court costs area",
-        "court proportion drives daylight and sun"
-      ],
       "generator": {
         "footprint": "ring",
         "court_min_ratio": 0.15
+      },
+      "sourced": [
+        {
+          "property": "secondary spaces grouped around a dominant central space",
+          "card": "ching-centralized"
+        },
+        {
+          "property": "deep courtyards are beneficial in hot and dry climates",
+          "card": "lechner-courtyard-hot-dry"
+        }
+      ],
+      "judgement": {
+        "strengths": [
+          "self-shaded court, cross-ventilation, introverted privacy"
+        ],
+        "cautions": [
+          "circulation around the court costs area",
+          "court proportion drives daylight and sun"
+        ],
+        "note": "AI design judgement, not from a cited passage: to be confirmed by precedent records and studies; never cited as a source."
       }
     },
     {
@@ -95,17 +139,30 @@
       "cards": [
         "ching-clustered"
       ],
-      "strengths": [
-        "zones separated by garden",
-        "grows or phases easily"
-      ],
-      "cautions": [
-        "long links and more envelope",
-        "privacy only if links avoid the hosting route"
-      ],
       "generator": {
         "footprint": "cluster",
         "links": "covered or enclosed"
+      },
+      "sourced": [
+        {
+          "property": "flexible; accepts growth and change",
+          "card": "ching-clustered"
+        },
+        {
+          "property": "significance must be given by size, form or orientation",
+          "card": "ching-clustered"
+        }
+      ],
+      "judgement": {
+        "strengths": [
+          "zones separated by garden",
+          "grows or phases easily"
+        ],
+        "cautions": [
+          "long links and more envelope",
+          "privacy only if links avoid the hosting route"
+        ],
+        "note": "AI design judgement, not from a cited passage: to be confirmed by precedent records and studies; never cited as a source."
       }
     },
     {
@@ -115,20 +172,29 @@
       "cards": [
         "ching-radial"
       ],
-      "strengths": [
-        "wings reach separate site features and views",
-        "central hall organises everything"
-      ],
-      "cautions": [
-        "the hub must be generous",
-        "wings multiply facade orientations"
-      ],
       "generator": {
         "footprint": "pinwheel",
         "arms": [
           3,
           4
         ]
+      },
+      "sourced": [
+        {
+          "property": "extroverted; arms reach out to site features",
+          "card": "ching-radial"
+        }
+      ],
+      "judgement": {
+        "strengths": [
+          "wings reach separate site features and views",
+          "central hall organises everything"
+        ],
+        "cautions": [
+          "the hub must be generous",
+          "wings multiply facade orientations"
+        ],
+        "note": "AI design judgement, not from a cited passage: to be confirmed by precedent records and studies; never cited as a source."
       }
     },
     {
@@ -138,19 +204,28 @@
       "cards": [
         "ching-grid"
       ],
-      "strengths": [
-        "structure, services and rooms share one module",
-        "efficient construction"
-      ],
-      "cautions": [
-        "risk of monotony; hierarchy must come from size and void"
-      ],
       "generator": {
         "footprint": "rectangle",
         "module_mm": [
           3600,
           4800
         ]
+      },
+      "sourced": [
+        {
+          "property": "dissimilar spaces share common reference lines",
+          "card": "ching-grid"
+        }
+      ],
+      "judgement": {
+        "strengths": [
+          "structure, services and rooms share one module",
+          "efficient construction"
+        ],
+        "cautions": [
+          "risk of monotony; hierarchy must come from size and void"
+        ],
+        "note": "AI design judgement, not from a cited passage: to be confirmed by precedent records and studies; never cited as a source."
       }
     }
   ]

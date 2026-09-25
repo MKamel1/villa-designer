@@ -48,7 +48,7 @@ by `python scripts/sources.py list`. Edit the registry, not this table.
 <!-- purchase-list:begin -->
 ### To buy
 
-**Tier 1** (about $805)
+**Tier 1** (about $925)
 
 | Id | Title | Edition | What it unlocks | ≈ USD |
 |---|---|---|---|---|
@@ -57,6 +57,7 @@ by `python scripts/sources.py list`. Edit the registry, not this table.
 | `en17037` | BSI / CEN: BS EN 17037:2018+A1:2021 Daylight in buildings | 2018+A1:2021 | daylight targets for every habitable room | 350 |
 | `human-dimension` | Julius Panero and Martin Zelnik: Human Dimension & Interior Space | 1979 | furniture clearance checks (FURN-02, walkways, seating) | 45 |
 | `ies-rp11` | Illuminating Engineering Society / American Lighting Association: [ANSI/IES/ALA RP-11-26 Recommended Practice: Lighting for Interior and Exterior Residential Environments](https://webstore.ansi.org/standards/iesna/ansiiesalarp1126) | RP-11-26 | residential lighting targets for every room (replaces the hospitality RP) | 150 |
+| `neufert-6` | Ernst Neufert: [Architects' Data](https://www.wiley-vch.de/en?isbn=9781119873945&option=com_eshop&view=product) | 6, ISBN 9781119873945 | current Neufert dimensions (the held copy is 1980 practice) | 120 |
 | `pattern-language` | Christopher Alexander and collaborators: [A Pattern Language](https://www.patternlanguage.com/) | 1977 | actual pattern passages; contents numbering alone does not verify claims | 60 |
 
 **Tier 2** (about $1,330)
@@ -96,7 +97,7 @@ by `python scripts/sources.py list`. Edit the registry, not this table.
 |---|---|---|---|---|
 | `cubicasa5k` | CubiCasa: CubiCasa5k floor-plan dataset | 2019 | additional detached-house plan priors | free |
 
-Paid total about **$2,520** (prices approximate; confirm at checkout).
+Paid total about **$2,640** (prices approximate; confirm at checkout).
 <!-- purchase-list:end -->
 
 ## Also missing, and not solved by books
