@@ -40,5 +40,13 @@ Deliver: comfort_schedule, coordinated_ceiling, service_access.
 - Cooling ventilation acoustics power water coordinated
 - Equipment maintenance access shown
 - Measured light distinguished from comfort targets
+- Lighting schedule of real products: for every lighting role, a written specification
+  (colour temperature, CRI, lumens, beam, size, IP, mount, market) with its reason,
+  then TWO widely available products from different ranges that meet it
+  (`scripts/luminaires.py propose`), each confirmed live on the manufacturer's site and
+  sold in the project's market. Both are downloaded, imported and verified, and the
+  spec carries `product` (primary) and `alternate`, tested against the same requirement
+  (`install.candidate_report`). A shortfall is reported with the constraint that
+  excluded the products, never quietly relaxed. See the `lighting-library` skill.
 
 Record reviewer, current revision, outcome and reasons for every qualitative criterion. Present the recommendation, household reason, visual explanation, evidence and cost/space/maintenance consequences. Request the client’s explicit decision only on a concrete reviewed proposal. Unresolved evidence or missing facts keep the gate open.

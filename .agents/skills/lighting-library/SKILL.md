@@ -21,7 +21,14 @@ product and the design's position and emitter height:
 1. **State the requirement first:** colour temperature, CRI, flux range,
    beam, size, market. The requirement comes from the design, not from a
    product you already like.
-2. **Search the verified library.** Only these rows can be picked:
+2. **Propose two candidates** from different ranges, ranked by findability
+   (markets, then efficacy), each confirmed live:
+   `python scripts/luminaires.py propose --mount recessed --cct 3000 --lm 600-1200 --market EG`.
+   A shortfall prints the constraint that excluded products. Report it (for
+   example, "no 2700 K pendants in Signify's Egypt range; add a second
+   brand"); never relax the requirement silently. Write both into the spec
+   as `product` and `alternate`, and check both with `install.candidate_report`.
+   Then search the verified library, where only imported rows can be picked:
    `python scripts/luminaires.py search --mount pendant --cct 2700 --cri 90 --lm 600-1000`
    (MCP tool: `search_luminaires`).
 3. **If nothing fits, search the catalogue** (unverified; add `--market EG`

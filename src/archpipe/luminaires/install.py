@@ -72,6 +72,15 @@ def resolve(item: dict, *, library: Path = lib.LIBRARY, allow_unverified: bool =
         raise InstallError(f"{item.get('id')}: {mfr}/{sku} has no Revit family in the library; "
                            f"download its Revit file (scripts/luminaires.py links {mfr} {sku})")
     out.update(derived)
+    # The stage rule: every lighting role carries a second, independently
+    # verified product from another range, tested against the same requirement,
+    # so a swap needs no new research when the first is unavailable.
+    alt = item.get("alternate")
+    if alt:
+        a = resolve({"id": f"{item.get('id')} (alternate)", "product": alt}, library=library,
+                    allow_unverified=allow_unverified, ies_dir=ies_dir)
+        out["alternate"] = dict(a["product"], lumens=a["lumens"], watts=a["watts"], kelvin=a["kelvin"],
+                                cri=a["cri"], ies=a["ies"], family=a["family"])
     out["product"] = {"manufacturer": mfr, "sku": sku, "lamp_set": k, "name": row["name"],
                       "mount": row["mount"], "luminaire_lm": row["luminaire_lm"], "efficacy": row["efficacy"],
                       "beam_deg": row["beam_deg"], "size_mm": [row["length_mm"], row["width_mm"], row["height_mm"]],
@@ -131,3 +140,16 @@ def load_spec(path) -> dict:
     if any(l.get("product") for l in spec.get("lighting", [])):
         spec["lighting"] = resolve_all(spec["lighting"])
     return spec
+
+
+def candidate_report(item: dict) -> dict:
+    """Primary and alternate against the SAME requirement, achieved vs required."""
+    rep = {"primary": [{"check": n, "passed": ok, "detail": d} for n, ok, d in expectations(item)]}
+    alt = item.get("alternate")
+    if isinstance(alt, dict) and "lumens" in alt:
+        alt_item = {"kelvin": alt["kelvin"], "cri": alt["cri"], "product": alt, "requirement": item.get("requirement")}
+        rep["alternate"] = [{"check": n, "passed": ok, "detail": d} for n, ok, d in expectations(alt_item)]
+    else:
+        rep["alternate"] = "MISSING: the stage requires a verified alternate from another range"
+    return rep
+

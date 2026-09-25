@@ -291,6 +291,27 @@ def search_luminaires(mount: str | None = None, lm_min: float | None = None, lm_
     return {'layer': 'verified library', 'rows': rows}
 
 
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=True))
+def propose_luminaires(mount: str, kelvin: float | None = None, lm_min: float | None = None,
+                       lm_max: float | None = None, max_size_mm: float | None = None, ip_min: int | None = None,
+                       market: str | None = None) -> dict:
+    """Stage 5 rule: TWO widely available products from different ranges for one lighting role.
+
+    Ranked by findability (markets sold in, then efficacy); each is confirmed
+    live on the manufacturer's page now (one allowed page request each). A
+    shortfall names the constraint that excluded products -- report it; never
+    relax the requirement silently. Download both, import, then write them as
+    `product` and `alternate` in the spec.
+    """
+    from archpipe.luminaires import catalogue as cat
+    req = {"mount": mount, "kelvin": kelvin, "max_size_mm": max_size_mm, "ip_min": ip_min,
+           "lumens": [lm_min or 0, lm_max or 1e9] if (lm_min is not None or lm_max is not None) else None}  # falsy-ok: 0 lm is the open lower bound
+    req = {k: v for k, v in req.items() if v is not None}
+    got = cat.propose(req, market=market)
+    return {"requirement": req, "candidates": got,
+            "shortfall": None if len(got) >= 2 else cat.shortfall(req, market=market)}
+
+
 @mcp.tool(annotations=READ)
 def luminaire_alternates(manufacturer: str, sku: str, lamp_set: int = 0, lm_tolerance: float = 0.15) -> dict:
     """Verified products that can replace one: same mount and colour temperature,

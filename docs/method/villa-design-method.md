@@ -163,6 +163,13 @@ acoustics, cooling, ventilation, power, plumbing and technology. Show equipment,
 ducts, access panels and outlets in plans and sections. Use room-by-room comfort
 targets and a coordinated ceiling plan.
 
+Electric lighting is specified before it is chosen. For each lighting role, write
+the requirement and its reason. Then pick two widely available products from
+different ranges that meet it, confirmed to exist and be sold in the project's
+market, and design with their exact manufacturer data (primary plus a verified
+alternate). Renders and lux calculations use those products, never generic
+stand-ins ([ADR-0014](../decisions/ADR-0014-luminaire-library.md)).
+
 Earlier lighting numbers and layer counts were not verified universal residential
 requirements. Use [the Systems package](../guidance/stages/5-systems.md), scoped
 evidence and project-specific targets. Direct-light calculations cannot establish

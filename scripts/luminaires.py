@@ -8,6 +8,8 @@
     python scripts/luminaires.py alternates signify 911401840687 --lamp-set 0
     python scripts/luminaires.py links signify 911401840687 [more skus]   # file links to click
     python scripts/luminaires.py checklist --mount recessed --market EG   # a page of links to click
+    python scripts/luminaires.py propose --mount recessed --cct 3000 --lm 600-1200 --max-size 120 --market EG
+        # two widely available products from different ranges, each confirmed live
 
 Verified rows come from the manufacturer's own files, each checked (flux vs
 LORL, LDT vs the manufacturer's IES, sanity). Catalogue rows come from
@@ -65,6 +67,15 @@ def main(argv=None) -> int:
         s.add_argument("--include-unverified", action="store_true")
         s.add_argument("--limit", type=int, default=30)
         s.add_argument("--out", type=Path, default=ROOT / "out/luminaire-downloads.html")
+    pr = sub.add_parser("propose")
+    pr.add_argument("--mount", required=True)
+    pr.add_argument("--cct", type=float)
+    pr.add_argument("--lm", help="min-max lumens")
+    pr.add_argument("--max-size", type=float)
+    pr.add_argument("--ip-min", type=int)
+    pr.add_argument("--market")
+    pr.add_argument("-n", type=int, default=2)
+    pr.add_argument("--out", type=Path, default=ROOT / "out/luminaire-proposal.html")
     for name in ("show", "alternates", "links"):
         s = sub.add_parser(name)
         s.add_argument("manufacturer")
@@ -103,6 +114,21 @@ def main(argv=None) -> int:
                           beam=_range(a.beam), max_length_mm=a.max_length, market=a.market, text=a.text,
                           include_unverified=a.include_unverified, limit=a.limit)
         _print_rows(rows, COLS)
+        return 0
+    if a.cmd == "propose":
+        req = {"mount": a.mount, "kelvin": a.cct, "lumens": _range(a.lm), "max_size_mm": a.max_size,
+               "ip_min": a.ip_min}
+        req = {k: v for k, v in req.items() if v is not None}
+        got = cat.propose(req, market=a.market, n=a.n)
+        for c in got:
+            print(f"  {c['manufacturer']}/{c['sku']}  [{c['range']}]  sold in {c['markets']}  "
+                  f"{c['live']['detail']} ({c['live']['checked']})")
+            print(f"      {c['title']}")
+        if len(got) < a.n:
+            print(f"  SHORTFALL: {len(got)} of {a.n} candidates. " + json.dumps(cat.shortfall(req, market=a.market)))
+            return 1
+        print(cat.write_checklist([dict(c, manufacturer=c["manufacturer"]) for c in got], a.out,
+                                  "Download these two candidates"))
         return 0
     if a.cmd == "show":
         for sku in a.sku:

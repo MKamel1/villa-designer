@@ -112,3 +112,92 @@ def coverage(library: Path = LIBRARY) -> dict:
         return {}
     finally:
         con.close()
+
+
+def _meets(r: dict, req: dict) -> list[str]:
+    """Why a catalogue product fails a requirement ([] = fits on its page figures)."""
+    why = []
+    if req.get("mount") and r["mount"] != req["mount"]:
+        why.append("mount")
+    if req.get("kelvin") and not any(abs(v - req["kelvin"]) < 1 for v in r["cct_k"]):
+        why.append("colour temperature")
+    if req.get("lumens"):
+        lo, hi = req["lumens"]
+        if not any(lo <= v <= hi for v in r["lm"]):
+            why.append("lumen package")
+    if req.get("max_size_mm") and r["size_mm"] and max(r["size_mm"]) > req["max_size_mm"]:
+        why.append("size")
+    if req.get("ip_min") and (not r["ip"] or int(r["ip"][2:]) < req["ip_min"]):
+        why.append("IP rating")
+    return why
+
+
+def findability(r: dict) -> tuple:
+    """Easier to find = sold in more markets, then more efficient on its page figures."""
+    markets = len([m for m in (r["markets"] or "").split(",") if m])
+    eff = (max(r["lm"]) / max(r["watts"])) if r["lm"] and r["watts"] else 0.0
+    return (markets, eff)
+
+
+def propose(requirement: dict, *, market: str | None = None, n: int = 2, verify_live: bool = True,
+            library: Path = LIBRARY) -> list[dict]:
+    """Two (n) products for one lighting role, from DIFFERENT product ranges.
+
+    Filter the catalogue by the requirement and the market, rank by
+    findability, take the best of each family, and confirm each still exists
+    by re-reading its live product page (an allowed page, one request each).
+    CRI is rarely on the page: it is confirmed from the LDT after download.
+    """
+    fits = [r for r in _catalogue_rows(library)
+            if not _meets(r, requirement) and (not market or market.upper() in (r["markets"] or "").split(","))]
+    fits.sort(key=findability, reverse=True)
+    out, families = [], set()
+    for r in fits:
+        # the product range, from the URL (.../<range-slug>/<sku>_EU/product): the
+        # page-title family name came back empty and collapsed every range into one
+        fam = r["url"].rstrip("/").split("/")[-3]
+        if fam in families:
+            continue
+        cand = {k: r[k] for k in ("manufacturer", "sku", "title", "family", "mount", "lm", "watts", "cct_k",
+                                  "size_mm", "ip", "markets", "url")}
+        cand["range"] = fam
+        cand["findability"] = {"markets": findability(r)[0], "page_efficacy_lm_w": round(findability(r)[1], 1)}
+        cand["cri_note"] = "CRI confirmed from the LDT after download" if not r["cri"] else f"page CRI {r['cri']}"
+        if verify_live:
+            cand["live"] = _still_listed(r)
+            if not cand["live"]["listed"]:
+                continue
+        cand["files"] = r["files"]
+        cand["status"] = status(r["manufacturer"], r["sku"], library)
+        out.append(cand)
+        families.add(fam)
+        if len(out) == n:
+            break
+    return out
+
+
+def _still_listed(r: dict) -> dict:
+    import time as _t
+    from archpipe.luminaires import signify
+    try:
+        page = signify.fetch(r["url"], refresh=True)
+        ok = r["sku"] in page
+        return {"listed": ok, "checked": _t.strftime("%Y-%m-%d %H:%M"),
+                "detail": "product page live and lists the SKU" if ok else "page live but SKU not listed"}
+    except Exception as exc:
+        return {"listed": False, "checked": _t.strftime("%Y-%m-%d %H:%M"), "detail": f"page not reachable: {exc}"}
+
+
+def shortfall(requirement: dict, *, market: str | None = None, library: Path = LIBRARY) -> dict:
+    """Why fewer than two products fit: how many products each single
+    constraint excludes among those that match the mount (and market)."""
+    rows = [r for r in _catalogue_rows(library)
+            if (not market or market.upper() in (r["markets"] or "").split(","))
+            and (not requirement.get("mount") or r["mount"] == requirement["mount"])]
+    counts = {}
+    for r in rows:
+        for why in _meets(r, requirement):
+            counts[why] = counts.get(why, 0) + 1
+    ccts = sorted({v for r in rows for v in r["cct_k"]})
+    return {"same_mount_in_market": len(rows), "excluded_by": counts, "cct_available_k": ccts,
+            "catalogues": sorted({r["manufacturer"] for r in _catalogue_rows(library)})}

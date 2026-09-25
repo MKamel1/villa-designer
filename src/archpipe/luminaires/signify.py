@@ -111,7 +111,9 @@ _DESC = re.compile(r'product-table-list__product-description[^>]*>\s*(?P<d>[^<]+
 def parse_family(page: str, family_path: str) -> list[dict]:
     """Every product on a family page with its spec line."""
     page_u = page.replace("\\u002F", "/")
-    fam_name = html.unescape((re.search(r"<title>([^<|]+)", page) or [None, ""])[1]).strip()
+    t = re.search(r"<title[^>]*>\s*([^<|]+)", page)
+    fam_name = html.unescape(t.group(1)).strip() if t else ""
+    fam_name = fam_name or family_path.rstrip("/").split("/")[-3].replace("-", " ")  # range slug fallback
     out = []
     for m in _PRODUCT.finditer(page_u):
         tail = page_u[m.end(): m.end() + 6000]

@@ -75,6 +75,25 @@ class LibraryTests(unittest.TestCase):
         exp = dict((n, ok) for n, ok, _ in install.expectations(got, {"kelvin": 3000, "cri_min": 95}))
         self.assertEqual((exp["colour temperature"], exp["colour rendering"]), (True, False))
 
+    def test_alternate_is_resolved_and_tested_like_the_primary(self):
+        self.drop("ldt1", product_ldt())
+        self.drop("ldt2", product_ldt(sku="SKU-2", name="Other pendant LED", flux=1800.0, cri="80"))
+        self.drop("Test pendant LED.rfa", OLE)
+        self.drop("Other pendant LED.rfa", OLE)
+        lib.import_inbox(self.lib, log=lambda *a: None)
+        item = {"id": "LT-9", "at": [1, 1], "mounting_height": 2000,
+                "requirement": {"kelvin": 3000, "cri_min": 90},
+                "product": {"manufacturer": "signify", "sku": "SKU-1"},
+                "alternate": {"manufacturer": "signify", "sku": "SKU-2"}}
+        got = install.resolve(item, library=self.lib, ies_dir=self.lib / "_ies")
+        self.assertEqual(got["alternate"]["lumens"], 1800.0)
+        rep = install.candidate_report(got)
+        cri = {r["check"]: r["passed"] for r in rep["alternate"]}["colour rendering"]
+        self.assertFalse(cri)                                    # the alternate's CRI 80 misses 90: reported
+        with self.assertRaisesRegex(install.InstallError, "NOPE"):
+            install.resolve(dict(item, alternate={"manufacturer": "signify", "sku": "NOPE"}),
+                            library=self.lib, ies_dir=self.lib / "_ies")
+
     def test_unknown_product_is_an_error_with_the_next_step(self):
         with self.assertRaisesRegex(install.InstallError, "links signify NOPE"):
             install.resolve({"id": "X", "product": {"manufacturer": "signify", "sku": "NOPE"}},
@@ -107,6 +126,36 @@ class SignifyCrawlTests(unittest.TestCase):
         self.assertIn('fam.split("/")[2:]', src)
         fam = "/global/prof/indoor-luminaires/recessed/x/LP_CF_1_EU/family"
         self.assertEqual("/global/" + "/".join(fam.split("/")[2:]), fam)
+
+
+class TwoCandidateTests(unittest.TestCase):
+    """Stage 5 rule: two widely available products from different ranges."""
+
+    def setUp(self):
+        self.lib = Path(tempfile.mkdtemp())
+        from archpipe.luminaires import signify
+        mk = lambda sku, rng, lm, k, markets: {
+            "sku": sku, "region": "EU", "title": f"{rng} {lm} lm {k} K", "family": rng,
+            "url": f"https://www.signify.com/global/prof/indoor-luminaires/recessed/{rng}/{sku}_EU/product",
+            "description": "", "lm": [lm], "watts": [lm / 100], "cct_k": [k], "cri": [], "ugr": None,
+            "beam_deg": [], "size_mm": [70.0], "ip": "IP20", "category": "recessed", "section": "indoor-luminaires",
+            "mount": "recessed", "markets": markets, "files": {}}
+        signify.write_catalogue([mk("A1", "range-a", 800, 3000, ["EG", "AE", "SA"]),
+                                 mk("A2", "range-a", 900, 3000, ["EG", "AE", "SA", "GB"]),
+                                 mk("B1", "range-b", 700, 3000, ["EG"]),
+                                 mk("C1", "range-c", 800, 4000, ["EG", "AE", "SA", "GB"])], self.lib)
+
+    def test_two_ranges_ranked_by_findability(self):
+        from archpipe.luminaires import catalogue as cat
+        got = cat.propose({"mount": "recessed", "kelvin": 3000, "lumens": [600, 1000]}, market="EG",
+                          verify_live=False, library=self.lib)
+        self.assertEqual([g["sku"] for g in got], ["A2", "B1"])      # best of range-a, then range-b
+
+    def test_shortfall_names_the_excluding_constraint(self):
+        from archpipe.luminaires import catalogue as cat
+        req = {"mount": "recessed", "kelvin": 2700}
+        self.assertEqual(cat.propose(req, verify_live=False, library=self.lib), [])
+        self.assertEqual(cat.shortfall(req, library=self.lib)["excluded_by"], {"colour temperature": 4})
 
 
 if __name__ == "__main__":
