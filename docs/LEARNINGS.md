@@ -188,3 +188,26 @@ facts missing or assumed rather than calling a generic pointer a known input.
 | The fallback then returned a page for nonsense words | One matching word counted as a hit | At least half the words (min 2); the negative test caught it |
 | A book sent to the workstation arrived as 0 bytes, and the RAG system quarantined it as "unreadable PDF" | A piped ssh transfer failed silently | Copies are checked by sha256 on both ends before ingest |
 | Every scp copy failed with "No such file" | Shell-quoting the remote path: modern scp (SFTP) takes the path literally, so the quotes became part of the name | Pass the remote path unquoted to scp and quoted to ssh; verify sha256 on both ends |
+
+## Concept generator: the critic caught one defect, the drawing caught two (2026-09-25)
+
+**Defect 1: a room too narrow for a door.**
+- Generator v1 sized rooms at area ÷ band depth. A 6 m² bath in a 5 m band came out 1.2 m wide, and no door fits on 1.2 m of corridor wall.
+- It was missed because the generator placed no door-width constraint.
+- **Guard:** the critic caught it through `reachability` and `links_built`. The bath had no door and could not be reached. The generator now has a minimum run (`MIN_RUN` 1.8 m).
+
+**Defect 2: circulation area and stretched rooms were invisible to the checks.**
+- Only a look at the plan PNGs showed them:
+  - the L and U corridors were long;
+  - one U room was stretched to 54 m² against 6 m²;
+  - the U's east arm was a stub;
+  - an L upper floor overhung the ground floor.
+- Every check reported pass or advisory.
+- **Guards:**
+  - `circulation_area` reports achieved against the schedule allowance;
+  - `area_match` now fails a room more than 25 % off its schedule;
+  - `upper_supported` fails upper rooms with no ground room beneath.
+- Tests: `tests/test_concept.py`, with positive and negative cases.
+
+**Lesson:** read the generated drawings before trusting a clean check table.
+

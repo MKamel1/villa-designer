@@ -1,5 +1,5 @@
 {
- "id": "L-1060",
+ "id": "L-413",
  "parti": "L",
  "plot": {
   "width_m": 30.0,
@@ -13,10 +13,10 @@
   "hall": {
    "level": "L00",
    "rect": [
-    2.4,
-    16.75,
-    26.0,
-    18.05
+    2.0,
+    14.5,
+    28.0,
+    15.8
    ],
    "occupancy": "corridor",
    "name": "Hall",
@@ -25,10 +25,10 @@
   "stair": {
    "level": "L00",
    "rect": [
-    2.4,
-    18.05,
-    5.0,
-    23.05
+    2.0,
+    15.8,
+    4.6,
+    20.8
    ],
    "occupancy": "stair",
    "name": "Stair",
@@ -37,10 +37,10 @@
   "bath-ground": {
    "level": "L00",
    "rect": [
-    5.0,
-    18.05,
-    6.8,
-    23.05
+    4.6,
+    15.8,
+    6.4,
+    20.8
    ],
    "occupancy": "bathroom",
    "name": "Bath Ground",
@@ -49,10 +49,10 @@
   "utility": {
    "level": "L00",
    "rect": [
-    6.8,
-    18.05,
-    8.8,
-    23.05
+    6.4,
+    15.8,
+    8.4,
+    20.8
    ],
    "occupancy": "utility",
    "name": "Utility",
@@ -61,10 +61,10 @@
   "kitchen": {
    "level": "L00",
    "rect": [
-    8.8,
-    18.05,
-    13.6,
-    23.05
+    8.4,
+    15.8,
+    13.2,
+    20.8
    ],
    "occupancy": "kitchen",
    "name": "Kitchen",
@@ -73,10 +73,10 @@
   "dining": {
    "level": "L00",
    "rect": [
-    13.6,
-    18.05,
-    18.0,
-    23.05
+    13.2,
+    15.8,
+    17.6,
+    20.8
    ],
    "occupancy": "dining",
    "name": "Dining",
@@ -85,46 +85,46 @@
   "living": {
    "level": "L00",
    "rect": [
-    18.0,
-    18.05,
-    26.0,
-    23.05
+    17.6,
+    15.8,
+    25.6,
+    20.8
    ],
    "occupancy": "living",
    "name": "Living",
    "target_m2": 40
   },
+  "storage": {
+   "level": "L00",
+   "rect": [
+    25.6,
+    15.8,
+    28.0,
+    20.8
+   ],
+   "occupancy": "store",
+   "name": "Storage",
+   "target_m2": 12
+  },
   "entry": {
    "level": "L00",
    "rect": [
-    2.4,
+    2.0,
     6.0,
-    7.8,
+    7.4,
     8.6
    ],
    "occupancy": "entrance",
    "name": "Entry",
    "target_m2": 14
   },
-  "storage": {
-   "level": "L00",
-   "rect": [
-    2.4,
-    8.6,
-    7.8,
-    10.8
-   ],
-   "occupancy": "store",
-   "name": "Storage",
-   "target_m2": 12
-  },
   "study": {
    "level": "L00",
    "rect": [
-    2.4,
-    10.8,
-    7.8,
-    13.4
+    2.0,
+    8.6,
+    7.4,
+    11.2
    ],
    "occupancy": "study",
    "name": "Study",
@@ -133,10 +133,10 @@
   "guest": {
    "level": "L00",
    "rect": [
-    2.4,
-    13.4,
-    7.8,
-    16.75
+    2.0,
+    11.2,
+    7.4,
+    14.5
    ],
    "occupancy": "bedroom",
    "name": "Guest",
@@ -145,10 +145,10 @@
   "hall-b": {
    "level": "L00",
    "rect": [
-    7.8,
+    7.4,
     6.0,
-    9.1,
-    16.75
+    8.7,
+    14.5
    ],
    "occupancy": "corridor",
    "name": "Hall B",
@@ -157,10 +157,10 @@
   "landing": {
    "level": "L01",
    "rect": [
-    2.4,
-    16.75,
-    27.6,
-    18.05
+    2.0,
+    14.5,
+    27.2,
+    15.8
    ],
    "occupancy": "landing",
    "name": "Landing",
@@ -169,10 +169,10 @@
   "stair-up": {
    "level": "L01",
    "rect": [
-    2.4,
-    18.05,
-    5.0,
-    23.05
+    2.0,
+    15.8,
+    4.6,
+    20.8
    ],
    "occupancy": "stair",
    "name": "Stair Up",
@@ -181,10 +181,10 @@
   "bath-family": {
    "level": "L01",
    "rect": [
-    5.0,
-    18.05,
-    6.8,
-    23.05
+    4.6,
+    15.8,
+    6.4,
+    20.8
    ],
    "occupancy": "bathroom",
    "name": "Bath Family",
@@ -193,10 +193,10 @@
   "ensuite": {
    "level": "L01",
    "rect": [
-    6.8,
-    18.05,
-    8.8,
-    23.05
+    6.4,
+    15.8,
+    8.4,
+    20.8
    ],
    "occupancy": "ensuite",
    "name": "Ensuite",
@@ -205,10 +205,10 @@
   "dressing": {
    "level": "L01",
    "rect": [
-    8.8,
-    18.05,
-    10.8,
-    23.05
+    8.4,
+    15.8,
+    10.4,
+    20.8
    ],
    "occupancy": "dressing",
    "name": "Dressing",
@@ -217,10 +217,10 @@
   "main-bedroom": {
    "level": "L01",
    "rect": [
-    10.8,
-    18.05,
-    15.6,
-    23.05
+    10.4,
+    15.8,
+    15.2,
+    20.8
    ],
    "occupancy": "bedroom",
    "name": "Main Bedroom",
@@ -229,10 +229,10 @@
   "family": {
    "level": "L01",
    "rect": [
-    15.6,
-    18.05,
-    20.4,
-    23.05
+    15.2,
+    15.8,
+    20.0,
+    20.8
    ],
    "occupancy": "living",
    "name": "Family",
@@ -241,10 +241,10 @@
   "bed-3": {
    "level": "L01",
    "rect": [
-    20.4,
-    18.05,
-    24.0,
-    23.05
+    20.0,
+    15.8,
+    23.6,
+    20.8
    ],
    "occupancy": "bedroom",
    "name": "Bed 3",
@@ -253,10 +253,10 @@
   "bed-2": {
    "level": "L01",
    "rect": [
-    24.0,
-    18.05,
-    27.6,
-    23.05
+    23.6,
+    15.8,
+    27.2,
+    20.8
    ],
    "occupancy": "bedroom",
    "name": "Bed 2",
@@ -310,15 +310,15 @@
   ],
   [
    "hall",
+   "storage"
+  ],
+  [
+   "hall",
    "guest"
   ],
   [
    "hall-b",
    "entry"
-  ],
-  [
-   "hall-b",
-   "storage"
   ],
   [
    "hall-b",

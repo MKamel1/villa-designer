@@ -222,7 +222,7 @@ def score(result):
     get = {c["check"]: c for c in result["checks"]}
     dev = get["area_match"]["deviation_m2"]
     excess = get["circulation_area"]["excess_m2"] if "circulation_area" in get else 0.0
-    return (len(result["fails"]), round(excess + sum(abs(v) for v in dev.values()), 1))
+    return (len(result["fails"]), round(excess + sum(abs(v) for v in dev.values()), 1))  # area_match can fail too
 
 
 def search(parti, n=400, root=ROOT):

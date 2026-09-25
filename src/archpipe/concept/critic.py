@@ -24,13 +24,17 @@ BASIS = {
                  "private room.",
     "reachability": "Every room must be reachable from the entrance.",
     "links_built": "The layout must realise the doors its own graph intends.",
-    "window": "SLL Code for Lighting minimum average daylight factors (cards sll-min-adf-bedroom/-living/-kitchen): "
-              "a habitable room with no window cannot meet any of them.",
+    "window": "Bedrooms, living rooms, kitchens: SLL Code for Lighting minimum average daylight factors (cards "
+              "sll-min-adf-bedroom/-living/-kitchen); a room with no window cannot meet them. Study and dining are "
+              "included by extension (project judgement: rooms occupied by day), not by those cards.",
     "wet_stack": "Pilot fact 'adjacencies': wet rooms proposed to stack.",
     "living_north": "Pilot fact 'views': the northern garden view is the scenario priority.",
     "within_plot": "Pilot fact 'boundary': 30 m east-west by 40 m north-south. Setbacks are not supplied.",
     "circulation_area": "Pilot area schedule circulation_m2 allowance (project figure, not a standard); halls, "
                         "landings and stairs, not the scheduled entry.",
+    "upper_supported": "Project judgement: an upper room with no ground room under it needs a cantilever or "
+                       "transfer, which is structural (consultant) scope; the concept must not rely on it silently.",
+    "area_match": "Pilot area schedule: each room within 25 % of its scheduled area (project tolerance, not a standard).",
     "gross_area": "Pilot area schedule: available_m2 is a scenario allowance, not a legal envelope.",
     "elongation": "Card lechner-east-west-axis (qualitative): prefer a plan elongated east-west.",
 }
@@ -160,8 +164,18 @@ def geometry_checks(layout, available_m2=None, circulation_m2=None) -> list[dict
     out.append(_check("elongation", "advisory", east_west_m=round(bw, 1), north_south_m=round(bd, 1),
                       ratio=round(bw / bd, 2)))
     dev = {r: round(L.room_area(layout, r) - v["target_m2"], 1) for r, v in rooms.items() if v.get("target_m2")}
-    out.append(_check("area_match", "advisory", deviation_m2=dev,
+    off = sorted(r for r, d in dev.items() if abs(d) > 0.25 * rooms[r]["target_m2"])
+    out.append(_check("area_match", "fail" if off else "pass", rooms=off, deviation_m2=dev,
                       note="Achieved minus scheduled area per room (centreline)."))
+    if len(lv) > 1:
+        ground = [v["rect"] for v in rooms.values() if v["level"] == lv[0]]
+        loose = []
+        for r, v in rooms.items():
+            if v["level"] != lv[0]:
+                bare = L.room_area(layout, r) - sum(_overlap(v["rect"], g) for g in ground)
+                if bare > 0.05:
+                    loose.append({"room": r, "unsupported_m2": round(bare, 1)})
+        out.append(_check("upper_supported", "fail" if loose else "pass", rooms=loose))
     out.append(_check("structure", "not_certified", max_room_short_side_m=round(max(
         min(v["rect"][2] - v["rect"][0], v["rect"][3] - v["rect"][1]) for v in rooms.values()), 1),
         basis="Engineering sizing and certification excluded (consultant scope)."))

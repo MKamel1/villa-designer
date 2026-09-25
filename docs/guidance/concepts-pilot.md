@@ -25,13 +25,14 @@ Spec: `spec/concepts/pilot/bar.yaml` (loads with `archpipe.model.load`).
 | gross_area | pass | `{"gross_m2": 348.1, "available_m2": 400, "note": "Gross measured to wall centrelines."}` |
 | circulation_area | advisory | `{"achieved_m2": 66.8, "allowance_m2": 40, "excess_m2": 26.8}` |
 | elongation | advisory | `{"east_west_m": 17.2, "north_south_m": 11.7, "ratio": 1.47}` |
-| area_match | advisory | `{"deviation_m2": {"bath-ground": 3.7, "utility": -0.0, "entry": 0.0, "storage": -0.1, "study": 0.0, "guest": 1.2, "living": 0.0, "dining": 0.0, "kitchen": 0.0, "bath-family": 1.7, ` |
+| area_match | fail | `{"rooms": ["bath-ground"], "deviation_m2": {"bath-ground": 3.7, "utility": -0.0, "entry": 0.0, "storage": -0.1, "study": 0.0, "guest": 1.2, "living": 0.0, "dining": 0.0, "kitchen":` |
+| upper_supported | pass | `{"rooms": []}` |
 | structure | not_certified | `{"max_room_short_side_m": 5.0}` |
 | cooling | not_measured | `{}` |
 
 Rule engine on the emitted spec (legacy rules are diagnostic per the rule audit): VIEW-01 advisory x2
 
-## L: `L-1060` (best of 1500 variants)
+## L: `L-413` (best of 1500 variants)
 
 ![L](concepts-pilot/L.png)
 
@@ -48,13 +49,14 @@ Spec: `spec/concepts/pilot/L.yaml` (loads with `archpipe.model.load`).
 | living_north | pass | `{"rooms": ["living"]}` |
 | within_plot | pass | `{"rooms": [], "note": "Setbacks unknown: not checked."}` |
 | gross_area | pass | `{"gross_m2": 379.5, "available_m2": 400, "note": "Gross measured to wall centrelines."}` |
-| circulation_area | advisory | `{"achieved_m2": 103.4, "allowance_m2": 40, "excess_m2": 63.4}` |
-| elongation | advisory | `{"east_west_m": 23.6, "north_south_m": 17.1, "ratio": 1.38}` |
-| area_match | advisory | `{"deviation_m2": {"bath-ground": 3.0, "utility": 0.0, "kitchen": -0.0, "dining": 0.0, "living": 0.0, "entry": 0.0, "storage": -0.1, "study": 0.0, "guest": 0.1, "bath-family": 1.0, ` |
+| circulation_area | advisory | `{"achieved_m2": 103.6, "allowance_m2": 40, "excess_m2": 63.6}` |
+| elongation | advisory | `{"east_west_m": 26.0, "north_south_m": 14.8, "ratio": 1.76}` |
+| area_match | fail | `{"rooms": ["bath-ground"], "deviation_m2": {"bath-ground": 3.0, "utility": 0.0, "kitchen": -0.0, "dining": 0.0, "living": 0.0, "storage": -0.0, "entry": 0.0, "study": 0.0, "guest":` |
+| upper_supported | pass | `{"rooms": []}` |
 | structure | not_certified | `{"max_room_short_side_m": 5.0}` |
 | cooling | not_measured | `{}` |
 
-Rule engine on the emitted spec (legacy rules are diagnostic per the rule audit): VIEW-01 advisory x2
+Rule engine on the emitted spec (legacy rules are diagnostic per the rule audit): LIGHT-01 warning x1; VIEW-01 advisory x2
 
 ## U: `U-670` (best of 1500 variants)
 
@@ -75,7 +77,8 @@ Spec: `spec/concepts/pilot/U.yaml` (loads with `archpipe.model.load`).
 | gross_area | fail | `{"gross_m2": 436.1, "available_m2": 400, "note": "Gross measured to wall centrelines."}` |
 | circulation_area | advisory | `{"achieved_m2": 115.0, "allowance_m2": 40, "excess_m2": 75.0}` |
 | elongation | advisory | `{"east_west_m": 26.1, "north_south_m": 21.4, "ratio": 1.21}` |
-| area_match | advisory | `{"deviation_m2": {"entry": -0.1, "study": 0.2, "storage": 0.0, "guest": -0.0, "bath-ground": 48.5, "kitchen": 0.1, "dining": -0.2, "living": 0.0, "utility": -0.0, "family": 0.0, "b` |
+| area_match | fail | `{"rooms": ["bath-ground"], "deviation_m2": {"entry": -0.1, "study": 0.2, "storage": 0.0, "guest": -0.0, "bath-ground": 48.5, "kitchen": 0.1, "dining": -0.2, "living": 0.0, "utility` |
+| upper_supported | pass | `{"rooms": []}` |
 | structure | not_certified | `{"max_room_short_side_m": 5.6}` |
 | cooling | not_measured | `{}` |
 
@@ -87,11 +90,13 @@ Rule engine on the emitted spec (legacy rules are diagnostic per the rule audit)
 - **wc_access**: Pilot fact 'hosting' (weekly guests): a WC on the entrance level reached without entering a private room.
 - **reachability**: Every room must be reachable from the entrance.
 - **links_built**: The layout must realise the doors its own graph intends.
-- **window**: SLL Code for Lighting minimum average daylight factors (cards sll-min-adf-bedroom/-living/-kitchen): a habitable room with no window cannot meet any of them.
+- **window**: Bedrooms, living rooms, kitchens: SLL Code for Lighting minimum average daylight factors (cards sll-min-adf-bedroom/-living/-kitchen); a room with no window cannot meet them. Study and dining are included by extension (project judgement: rooms occupied by day), not by those cards.
 - **wet_stack**: Pilot fact 'adjacencies': wet rooms proposed to stack.
 - **living_north**: Pilot fact 'views': the northern garden view is the scenario priority.
 - **within_plot**: Pilot fact 'boundary': 30 m east-west by 40 m north-south. Setbacks are not supplied.
 - **circulation_area**: Pilot area schedule circulation_m2 allowance (project figure, not a standard); halls, landings and stairs, not the scheduled entry.
+- **upper_supported**: Project judgement: an upper room with no ground room under it needs a cantilever or transfer, which is structural (consultant) scope; the concept must not rely on it silently.
+- **area_match**: Pilot area schedule: each room within 25 % of its scheduled area (project tolerance, not a standard).
 - **gross_area**: Pilot area schedule: available_m2 is a scenario allowance, not a legal envelope.
 - **elongation**: Card lechner-east-west-axis (qualitative): prefer a plan elongated east-west.
 

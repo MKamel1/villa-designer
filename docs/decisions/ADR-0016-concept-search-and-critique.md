@@ -24,6 +24,8 @@ seeded-bad ones.
     - wet stack;
     - living with a north window;
     - within plot;
+    - upper rooms supported by ground rooms;
+    - each room within 25 % of its scheduled area;
     - gross and circulation area;
     - elongation.
   - Every check names its basis: a pilot fact, an evidence card, or "project figure, not a standard". A check without a sourced threshold stays advisory and only orders variants.
@@ -49,12 +51,12 @@ seeded-bad ones.
 - **Reconstructing room graphs of famous houses from memory or unlabelled drawings.** This breaks "record what the source shows".
 - **Calling mutation tests on synthetic layouts "calibration".** They are unit tests (`tests/test_concept.py`) and are kept separate.
 - **OR-Tools CP-SAT packing now.** The banded generator already meets every sourced check on the pilot for bar and L. A solver is worth adding when the geometric calibration can run and the checks get richer. Not pinned, not installed.
-- **Treating the schedule's 40 m² circulation allowance as a hard fail.** Every variant needs 66 m² or more with a stair and 1.3 m halls. That is a finding about the schedule, reported as achieved-versus-allowance.
+- **Treating the schedule's 40 m² circulation allowance as a hard fail.** Over all 1,500 variants per parti, the minimum circulation (halls, landings, stair) was 61.1 m² (bar), 98.9 m² (L) and 111.9 m² (U), with 1.3 m halls. That is a finding about the schedule, reported as achieved-versus-allowance.
 
 ## Consequences
 
 - `python scripts/concept.py generate` writes three concepts and `docs/guidance/concepts-pilot.md`:
-  - bar and L pass every check;
-  - U fails the 400 m² gross allowance at 436 m².
+  - bar and L pass every check except area match: the 6 m² ground bath comes out at about 9 to 9.7 m², because the generator's 1.8 m minimum frontage stretches it;
+  - U fails the 400 m² gross allowance at 436 m² and area match. Its ground bath stretches to 54 m², and its east arm is a stub (a 2 m² gallery plus the utility room). The U does not suit a 272 m² programme in this generator.
 - The real villa (Sheikh Zayed) is untouched. Nothing here closes a design gate.
 - **Next, to make the geometric critic trustworthy:** obtain a labelled, dimensioned plan set (e.g. *Floor Plan Manual* single-family chapter with its key, or Neufert house plans), encode 5–8 plans, and un-skip the geometric calibration.
