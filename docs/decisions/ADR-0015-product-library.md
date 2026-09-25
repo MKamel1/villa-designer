@@ -92,3 +92,45 @@ that need an account.
 - Paint LRV/LAB where the brand publishes it.
 - Glazing U/g/VT from IGDB, which needs a free account.
 - Deep verified core of 300–500 items.
+
+## Fab / Quixel Megascans (2026-09-24)
+
+- **Claimed (client-approved):** 111 free Megascans items were added to the
+  client's Fab library under the **$0 Professional licence**, which suits
+  commercial client work. Twelve models whose Professional licence costs
+  $28–42 were skipped; only a $0 offer is ever claimed.
+- **Downloaded:** 96 materials, 2K and 4K, 191 files, 9.2 GB, in
+  `~/archpipe/library/fab/<material>/`.
+  - Each file's size was checked against Fab's own listing.
+  - Signed links expire after 5 minutes, and the CDN sometimes stalls a
+    connection. The helper therefore runs at most 3 downloads at once and
+    abandons any transfer slower than 20 kB/s for 60 s.
+  - The 35 failed files were retried with fresh links, and all arrived.
+- **Chrome blocks scripted multi-file downloads** (its automatic-download
+  protection). Browser settings were not changed. The browser only
+  requested the signed links; the workstation downloaded the files.
+- **Verified: 94 of 96.** Each zip carries Megascans' own JSON, with the
+  scan area (real-world size) and the colour calibration (GretagMacbeth
+  ColorChecker).
+  - Black suede and studded leather fail `albedo_physical_range`, with
+    means of 0.010 and 0.006.
+  - That range's lower bound (0.02) is a generic PBR rule of thumb, not a
+    verified source. The two stay failed and flagged; the threshold is not
+    loosened to pass them.
+- **Search:** `python scripts/products.py search --text marble` (MCP
+  `search_products`).
+
+## Sketchfab and 3D Warehouse
+
+- **Sketchfab:** 173 furniture, lighting, bath, decor and plant models were
+  shortlisted, CC0 or CC-BY only (NonCommercial and NoDerivatives are
+  excluded). The browser tool refuses to return signed links, so downloads
+  use the official Data API with the client's own API token. The client
+  stores the token in `~/.config/archpipe/sketchfab.env` on the workstation,
+  and it is never seen or logged. `library/sketchfab/get.py` re-checks each
+  licence before downloading and writes the CC-BY attribution to
+  `meta.json`.
+- **3D Warehouse:** the browser tool blocks its data responses because they
+  carry session cookies, so there is no automated route. Use a click-list
+  with manual downloads, or rely on BIMobject, whose manufacturers publish
+  official Revit families.

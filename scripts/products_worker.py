@@ -109,8 +109,8 @@ def find_maps(d: Path, files: list[dict] = ()) -> dict:
     filename-only version missed Poly Haven's brown_leather, whose base map
     is called _albedo_, and failed a good asset."""
     found = {f["role"]: d / f["name"] for f in files if f.get("role")}
-    roles = {"base": ("_diff_", "_albedo_", "_col_", "_color."), "rough": ("_rough_", "_roughness."),
-             "normal": ("_nor_gl_", "_normalgl."), "metal": ("_metal_", "_metalness."),
+    roles = {"base": ("_diff_", "_albedo_", "_col_", "_color.", "_basecolor."), "rough": ("_rough_", "_roughness."),
+             "normal": ("_nor_gl_", "_normalgl.", "_normal."), "metal": ("_metal_", "_metalness."),
              "disp": ("_disp_", "_displacement.")}
     for p in sorted(d.rglob("*")):
         if p.suffix.lower() not in (".jpg", ".jpeg", ".png"):
@@ -129,9 +129,14 @@ def _reset():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
     sc.render.engine = "CYCLES"
+    import os
     sc.cycles.device = "GPU"
     prefs = bpy.context.preferences.addons["cycles"].preferences
+    if os.environ.get("ARCHPIPE_RENDER_CPU"):      # e.g. while a RAG ingest holds the GPU
+        sc.cycles.device = "CPU"
     try:
+        if sc.cycles.device == "CPU":
+            raise RuntimeError("CPU requested")
         prefs.compute_device_type = "OPTIX"
         prefs.get_devices()
         for dev in prefs.devices:
