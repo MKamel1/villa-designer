@@ -149,11 +149,18 @@ def rule_audit(root=ROOT):
                     why = '; '.join(res['reasons']) if not res['enabled'] else ''
                     row['evidence_refs'].append(p['card'])
                 params[key] = {'used': used, 'unit': p['unit'], 'verified': ok, 'card': p.get('card'), 'reason': why}
+            # presence rules carry no number: each mapped card must pass the (non-numerical) evidence gate
+            for cid in entry.get('cards', []):
+                card = data['evidence'].get(cid)
+                res = evidence_status(card, data['sources']) if card else {'status': 'unresolved', 'reasons': ['card missing']}
+                row['evidence_refs'].append(cid)
+                params['card:' + cid] = {'used': None, 'unit': None, 'verified': res['status'] == 'applicable',
+                                         'card': cid, 'reason': '; '.join(res['reasons'])}
             n_ok = sum(1 for v in params.values() if v['verified'])
             row['parameters'] = params
-            row['status'] = ('verified' if n_ok == len(params) else 'partly verified' if n_ok else 'unresolved')
+            row['status'] = ('verified' if params and n_ok == len(params) else 'partly verified' if n_ok else 'unresolved')
             row['enabled_for_approval'] = row['status'] == 'verified' and bool(entry.get('complete'))
-            row['reason'] = f'{n_ok} of {len(params)} numerical parameters verified'
+            row['reason'] = f'{n_ok} of {len(params)} numerical parameters or presence cards verified'
         rows.append(row)
     return rows
 

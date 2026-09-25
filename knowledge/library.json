@@ -1882,6 +1882,40 @@
       "free": false,
       "cost_usd_approx": 120,
       "unlocks": "current Neufert dimensions (the held copy is 1980 practice)"
+    },
+    {
+      "id": "uk-ad-g",
+      "author": "HM Government",
+      "title": "Approved Document G: Sanitation, hot water safety and water efficiency",
+      "edition": "2015 edition incorporating 2016 and 2024 amendments, England",
+      "publisher": "DLUHC",
+      "stages": [
+        3,
+        4
+      ],
+      "isbn": null,
+      "coverage": "sanitary conveniences, washing facilities, bathrooms, food preparation areas",
+      "priority": 1,
+      "url": "https://www.gov.uk/government/publications/sanitation-hot-water-safety-and-water-efficiency-approved-document-g",
+      "status": "content_verified",
+      "metadata_basis": "Added 2026-09-25 to re-source SAN-01 from a held public document",
+      "access_location": "archpipe-sources",
+      "permissions": "Public; cite with access date.",
+      "acquisition": "Public document; fetched by the tool where robots.txt allows.",
+      "kind": "standard",
+      "free": true,
+      "cost_usd_approx": 0,
+      "unlocks": "SAN-01: sanitary accommodation required in a dwelling",
+      "held_files": [
+        {
+          "file": "uk-ad-g/ADG_with_2024_amendments.pdf",
+          "sha256": "cc02cbfc66cc610098c3c878d23ecfe1b13d63a33303d1bde85a39abdba322fa",
+          "url": "https://assets.publishing.service.gov.uk/media/66f6c6ce3b919067bb4828cc/ADG_with_2024_amendments.pdf",
+          "pages": 56,
+          "image_only": false
+        }
+      ],
+      "verification": "Cover page read from the held file 2026-09-25: 2015 edition incorporating 2016 and 2024 amendments, England."
     }
   ],
   "evidence": [
@@ -3030,6 +3064,40 @@
       "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadg-dwelling-wc-entrance-storey",
+      "source_id": "uk-ad-g",
+      "edition": "2015 edition incorporating 2016 and 2024 amendments, England",
+      "locator": "Section G4, Scale of provision and layout in dwellings, para 4.8 and note on M4(1) (printed page 29)",
+      "stages": [
+        3
+      ],
+      "summary": "Any dwelling should have at least one sanitary convenience with associated hand washing; M4(1) requires it on the principal/entrance storey.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": null,
+      "conditions": "England Building Regulations; used as best-practice guidance, not local compliance.",
+      "exceptions": "Additional WCs each need an associated hand-washing facility (4.9).",
+      "verification": "Read on the held original page 2026-09-25 (requirement text and conditions checked).",
+      "applies_when": {}
+    },
+    {
+      "id": "ukadg-dwelling-bathroom",
+      "source_id": "uk-ad-g",
+      "edition": "2015 edition incorporating 2016 and 2024 amendments, England",
+      "locator": "Section G5, Scale of provision and layout in dwellings, para 5.6 (printed page 33)",
+      "stages": [
+        3
+      ],
+      "summary": "Any dwelling must have at least one bathroom with a fixed bath or shower, and a washbasin.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": null,
+      "conditions": "England Building Regulations; used as best-practice guidance, not local compliance.",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-25 (requirement text and conditions checked).",
+      "applies_when": {}
     }
   ],
   "precedents": [

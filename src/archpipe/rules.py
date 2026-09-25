@@ -349,9 +349,10 @@ _NEUFERT = "Neufert, Architects' Data"
 RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=('legacy-' + r.id,)) for r in (
     # ---- Stage 3 (Order): the concept decisions ------------------------
     Rule(
-        "SAN-01", "Sanitary accommodation present on the level", 3, "computed",
-        f"{_NEUFERT} -- dwelling schedule: every dwelling requires sanitary "
-        f"accommodation; near-universal code requirement",
+        "SAN-01", "WC on the entrance storey; a bathroom in the dwelling", 3, "computed",
+        "UK Approved Document G (2015 incl. 2016 and 2024 amendments) para 4.8 with "
+        "M4(1): at least one WC, located on the principal/entrance storey; para 5.6: "
+        "at least one bathroom with a fixed bath or shower and a washbasin",
         note="Stage 3, not Stage 4: whether a level has a WC at all is a "
              "zoning decision, settled when the plan's zones are set and "
              "before any room is dimensioned.",
@@ -660,20 +661,43 @@ def _min_area_key(occ: str) -> str | None:
 # --------------------------------------------------------------------------
 # rules
 # --------------------------------------------------------------------------
+WC_ROOMS = {"wc", "bathroom", "ensuite", "shower_room"}      # rooms assumed to contain a WC
+BATH_ROOMS = {"bathroom", "ensuite", "shower_room"}           # bath or shower plus basin
+
+
+def entrance_level(p: Project) -> str:
+    """The storey with an external door; else the lowest level."""
+    for o in p.openings:
+        if o.kind == "door":
+            a, b = opening_sides(p, o)
+            if (a is None) != (b is None):
+                return p.wall(o.host).level
+    return min(p.levels, key=lambda l: l.elevation).id if p.levels else ""
+
+
 def r_sanitary_present(p: Project, level: str) -> list[Finding]:
-    rooms = [r for r in p.rooms if r.level == level]
-    if any(r.occupancy in SANITARY for r in rooms):
+    """AD G 4.8 / M4(1): a WC on the entrance storey. AD G 5.6: a bathroom somewhere in the dwelling.
+    Upper storeys without a WC are not a finding. Reported only on the entrance storey."""
+    if level != entrance_level(p):
         return []
-    # Put the pin in the largest room, where the space would have to come from.
+    rooms = [r for r in p.rooms if r.level == level]
     biggest = max(rooms, key=lambda r: r.area_m2, default=None)
-    return [_finding(
-        "SAN-01", "violation",
-        "No bathroom or WC on this level. A dwelling needs at least one WC and "
-        "one bathing facility, and the WC must be reachable without passing "
-        "through a bedroom.",
-        where=biggest.id if biggest else "",
-        at=biggest.centroid if biggest else None,
-    )]
+    out = []
+    if not any(r.occupancy in WC_ROOMS for r in rooms):
+        out.append(_finding(
+            "SAN-01", "violation",
+            "No WC on the entrance storey. A dwelling needs at least one WC, on the "
+            "principal/entrance storey, and it must be reachable without passing "
+            "through a bedroom.",
+            where=biggest.id if biggest else "", at=biggest.centroid if biggest else None,
+        ))
+    if not any(r.occupancy in BATH_ROOMS for r in p.rooms):
+        out.append(_finding(
+            "SAN-01", "violation",
+            "No bathroom (fixed bath or shower with a washbasin) anywhere in the dwelling.",
+            where=biggest.id if biggest else "", at=biggest.centroid if biggest else None,
+        ))
+    return out
 
 
 def r_room_min_area(p: Project, level: str) -> list[Finding]:

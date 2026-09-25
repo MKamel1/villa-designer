@@ -52,6 +52,13 @@ ORIGINAL = {
                                 ["minimum clear opening width of 775mm"]),
 }
 
+# Presence cards (no number): the requirement text is re-read from the original too.
+PRESENCE = {
+    "ukadg-dwelling-wc-entrance-storey": ("uk-ad-g/ADG_with_2024_amendments.pdf", 30,
+                                          ["least one sanitary convenience", "principal/"]),
+    "ukadg-dwelling-bathroom": ("uk-ad-g/ADG_with_2024_amendments.pdf", 34, ["at least one bathroom with a fxed bath or shower"]),
+}
+
 
 class NumericalCardTests(unittest.TestCase):
     def setUp(self):
@@ -79,7 +86,7 @@ class NumericalCardTests(unittest.TestCase):
     def test_values_reread_from_the_held_original(self):
         import pymupdf
         missing = []
-        for key, (rel, page, needles) in ORIGINAL.items():
+        for key, (rel, page, needles) in {**ORIGINAL, **PRESENCE}.items():
             path = src.SOURCES_ROOT / rel
             if not path.is_file():
                 missing.append(rel)
@@ -103,7 +110,7 @@ class RuleAuditTests(unittest.TestCase):
         self.assertFalse(p["MIN_AREA_M2.living"]["verified"])
         self.assertEqual(rows["AREA-01"]["status"], "partly verified")
         # only rules whose every number is verified AND whose mapping is complete; CIRC-03 by client decision 2026-09-25
-        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01"})
+        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01"})
 
     def test_a_changed_catalogue_value_unverifies_the_parameter(self):
         from archpipe import catalogue as cat

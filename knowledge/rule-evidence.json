@@ -134,6 +134,15 @@
         }
       },
       "complete": true
+    },
+    "SAN-01": {
+      "parameters": {},
+      "cards": [
+        "ukadg-dwelling-wc-entrance-storey",
+        "ukadg-dwelling-bathroom"
+      ],
+      "complete": true,
+      "note": "Presence rule, no number. Re-sourced 2026-09-25 from the unverified Neufert citation to AD G 4.8 / M4(1) and 5.6."
     }
   }
 }

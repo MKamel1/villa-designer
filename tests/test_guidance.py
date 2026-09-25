@@ -65,7 +65,7 @@ class GuidanceTests(unittest.TestCase):
                 self.assertTrue(context['package'][key])
             self.assertTrue(any(c['applicability']['status']=='applicable' for c in context['knowledge']))
             self.assertFalse(g.review_stage(stage)['approved'])
-        self.assertEqual({r['id'] for r in g.rule_audit() if r['enabled_for_approval']}, {'CIRC-03', 'LIGHT-01'})
+        self.assertEqual({r['id'] for r in g.rule_audit() if r['enabled_for_approval']}, {'CIRC-03', 'LIGHT-01', 'SAN-01'})
         for row in g.rule_audit():
             self.assertTrue(row['evidence_refs'])
             self.assertTrue(all(ref in data['evidence'] for ref in row['evidence_refs']))

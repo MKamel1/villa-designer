@@ -4,7 +4,7 @@ The legacy engine remains available for diagnostic comparisons, preserving its t
 
 | Rule | Stage | Existing readable citation | Status |
 |---|---|---|---|
-| SAN-01 | 3 | Neufert, Architects' Data -- dwelling schedule: every dwelling requires sanitary accommodation; near-universal code requirement | Unresolved; diagnostic only |
+| SAN-01 | 3 | UK AD G para 4.8 with M4(1) and para 5.6 | Verified 2026-09-25 (see below) |
 | CIRC-01 | 3 | Alexander, A Pattern Language -- 127 Intimacy Gradient; Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling | Unresolved; diagnostic only |
 | CIRC-02 | 3 | Alexander, A Pattern Language -- 110 Main Entrance, 112 Entrance Transition, 130 Entrance Room; Neufert, Architects' Data -- entrances: a draught lobby or threshold zone | Unresolved; diagnostic only |
 | AREA-01 | 4 | Neufert, Architects' Data -- minimum floor areas by room type | Unresolved; diagnostic only |
@@ -46,6 +46,7 @@ the value the engine uses equals a verified card's value, in the card's unit.
 |---|---|---|
 | AREA-01 | partly verified | Bedroom minimums changed to 11.5 m² (double) and 7.5 m² (single), per Metric Handbook 7th ed. p. 22-4 quoting NDSS. The legacy values were 12.0 and 8.0 (unsourced Neufert). Living, kitchen, bathroom and WC areas are unresolved. |
 | CIRC-01 | partly verified | Hall width 900 mm matches AD M M4(2) para 2.22a. Its privacy test stays qualitative (Alexander 127). |
+| SAN-01 | verified | Re-sourced 2026-09-25 to UK AD G (free, held). A WC is required on the entrance storey (4.8 with M4(1)), and a bathroom with bath or shower and basin somewhere in the dwelling (5.6). An upper storey with no WC is no longer a finding, since AD G does not ask for one. |
 | LIGHT-01 | verified | Re-sourced 2026-09-25. The legacy 1/8 (12.5 %) was attributed to Neufert but is not in the held 1980 edition. The US code minimum (IRC R303.1, 8 %, quoted by Mitton p. 92) is the minimum-glazing screen; daylight adequacy is judged by SLL minimum ADF. |
 | CIRC-03 | verified | Client decision 2026-09-25: 900 mm (AD M M4(2) para 2.22a card). Mitton p. 68 gives 914 mm (36 in); the 1.6 % difference is within the close-values policy. Using the hall width for routes inside rooms is this decision, not AD M's own scope. |
 | DIM-01 | partly verified | Split by room type 2026-09-25. Bedrooms use NDSS via the Metric Handbook p. 22-4: single 2.15 m, other doubles 2.55 m, and one double of at least 2.75 m. Living, kitchen, dining and study keep the unsourced generic 2.4 m. |

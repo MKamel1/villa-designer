@@ -20,8 +20,8 @@ SANITARY_WORDS = re.compile(r"bath|powder|\bwc\b|toilet|ensuite|shower", re.I)
 BASIS = {
     "private_access": "Pilot fact 'privacy': private bedroom access must bypass public entertaining rooms "
                       "(knowledge/projects/villa-pilot.json); same test as guidance.concept_checks.",
-    "wc_access": "Pilot fact 'hosting' (weekly guests): a WC on the entrance level reached without entering a "
-                 "private room.",
+    "wc_access": "UK AD G para 4.8 with M4(1) (card ukadg-dwelling-wc-entrance-storey): a WC on the entrance "
+                 "storey; reached without entering a bedroom per pilot fact 'hosting' (weekly guests).",
     "reachability": "Every room must be reachable from the entrance.",
     "links_built": "The layout must realise the doors its own graph intends.",
     "window": "Bedrooms, living rooms, kitchens: SLL Code for Lighting minimum average daylight factors (cards "
