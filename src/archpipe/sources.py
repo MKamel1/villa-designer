@@ -124,6 +124,7 @@ FREE_FILES = {
     "uk-ad-k": [GOV + "60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"],
     "uk-ad-f": [GOV + "69c12224d588c92c483e4b6a/ADF1_2026.pdf"],
     "uk-ad-l": [GOV + "69c122a6cfa346b9d4704a55/ADL1_2026.pdf"],
+    "uk-ad-b1": [GOV + "67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf"],
     "uk-ad-g": [GOV + "66f6c6ce3b919067bb4828cc/ADG_with_2024_amendments.pdf"],
     "ada-2010": ["https://www.ada.gov/assets/pdfs/2010-design-standards.pdf"],
     # Cairo International (the site file set in spec/villa-site.yaml) and

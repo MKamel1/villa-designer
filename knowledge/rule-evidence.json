@@ -103,7 +103,11 @@
           "card": "ukadm-hall-min-m42",
           "note": "hall and landing width in an M4(2) dwelling; the rule's privacy test is qualitative (Alexander 127)"
         }
-      }
+      },
+      "cards": [
+        "adb-inner-room-2-11"
+      ],
+      "note": "Detection = AD B inner-room definition (card adb-inner-room-2-11); hall width AD M 2.22a. The PRIVACY judgement has no code or published figure (Alexander 127 is qualitative): it is a brief requirement, checked at concept stage by the critic's private_access against the brief. Fire consequence: FIRE-01. Kept not-complete on purpose."
     },
     "DOOR-01": {
       "parameters": {
@@ -378,6 +382,39 @@
       },
       "complete": true,
       "note": "New 2026-09-25. Assumptions stated in the rule: 16:9 screen, UHD, distance to the facing seat's centre, 30-degree view cone."
+    },
+    "FIRE-01": {
+      "parameters": {
+        "PLANNING.escape_window_area_m2": {
+          "value": 0.33,
+          "unit": "m2",
+          "status": "verified",
+          "card": "adb-escape-window-area"
+        },
+        "PLANNING.escape_window_min_mm": {
+          "value": 450,
+          "unit": "mm",
+          "status": "verified",
+          "card": "adb-escape-window-min"
+        },
+        "PLANNING.escape_window_sill_max": {
+          "value": 1100,
+          "unit": "mm",
+          "status": "verified",
+          "card": "adb-escape-window-sill"
+        },
+        "PLANNING.inner_room_storey_max": {
+          "value": 4500,
+          "unit": "mm",
+          "status": "verified",
+          "card": "adb-inner-room-storey-max"
+        }
+      },
+      "cards": [
+        "adb-inner-room-2-11"
+      ],
+      "complete": true,
+      "note": "New 2026-09-25. Ground taken as the lowest level; openable area taken as the whole window."
     }
   }
 }

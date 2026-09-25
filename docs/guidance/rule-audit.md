@@ -106,3 +106,17 @@ the mapping marked complete.
 - **Context choice.** The brief records ageing in place, the same basis as the AD M fitting zones. The plain minimum WC/cloakroom (Fig. 22.12a, 1,050 × 1,500) matches the unsourced legacy 1.4 m², but it is not the applicable context.
 - **How demanding.** Of 68,434 real Swiss bath and WC rooms, 67 % are below 4.30 m² and 22 % below 2.61 m² (median 3.78 m²). Many are WCs or shower rooms, so this is descriptive, not a calibration. M4(2) asks for more room than ordinary practice, by design. A project without an ageing-in-place requirement would use Fig. 22.12a.
 - **Status.** AREA-01 is now fully sourced and enabled for approval. En-suites that are additional to the main bathroom carry no area minimum (AD M Table 2.1, Note 1).
+
+## CIRC-01 privacy and the new FIRE-01 (2026-09-25)
+
+**What can be sourced, and what cannot.**
+- CIRC-01 detects a private room entered only through another room. That condition is AD B's definition of an **inner room** (AD B Vol 1 Appendix A; the Metric Handbook p. 11-17 cites it for houses). So the detection is now sourced.
+- The *privacy* consequence has no code or published figure; Alexander 127 is qualitative. It is a **brief requirement**. The concept critic already tests it against the brief (private_access, calibrated on published graphs). CIRC-01 therefore stays not-complete on purpose, and its reference says so.
+
+**FIRE-01 (new, verified, enabled).** This is the hard consequence of an inner room (AD B paras 2.10–2.11). An inner room is permitted only if it is:
+- a kitchen, utility, dressing room or bathroom/WC; or
+- on a storey at most 4.5 m above ground, with an emergency escape window: at least 0.33 m², 450 × 450 mm, sill at most 1,100 mm.
+
+Two assumptions are stated in the rule: ground is the lowest level, and the whole window counts as openable.
+- **Demo apartment:** its two bedrooms are inner rooms (CIRC-01 warns), but they are at ground level with escape-size windows, so FIRE-01 is quiet.
+- **Pilot concepts:** no findings, because their bedrooms open onto the landing.

@@ -382,10 +382,13 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
     Rule(
         "CIRC-01", "Private rooms not reached through a living space", 3,
         "computed",
-        "Alexander, A Pattern Language -- 127 Intimacy Gradient; "
-        f"{_NEUFERT} -- circulation: 900 mm minimum clear width in a dwelling",
+        "Detection: a private room entered only through another room is an inner room "
+        "(UK AD B Vol 1 Appendix A); its fire consequence is FIRE-01. Privacy consequence: "
+        "Alexander, A Pattern Language 127 Intimacy Gradient (qualitative) and the project brief. "
+        "Hall width 900 mm: UK AD M Vol 1 para 2.22a",
         note="The intimacy gradient is a Stage 3 pattern and Stage 3 owns the "
-             "circulation spine, decided before rooms are placed.",
+             "circulation spine, decided before rooms are placed. The privacy judgement has no "
+             "code or published figure: it applies where the brief asks for it.",
         remedies=(
             Remedy("Insert a hall or lobby between the living space and the "
                    "private room.",
@@ -527,6 +530,24 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
             Remedy("Rehang the leaf on the other jamb, or reverse the swing.",
                    cost="A door schedule change, not a plan change."),
             Remedy("Move the opening, or enlarge the room.", 3, "L1"),
+        ),
+    ),
+    Rule(
+        "FIRE-01", "Inner room permitted for escape", 3, "computed",
+        "UK AD B Vol 1 (2019 incl. amendments) para 2.11: an inner room (escape only through another "
+        "room) is permitted only for kitchens, utility, dressing, bathrooms/WCs, or a room on a storey "
+        "at most 4.5 m above ground with an emergency escape window (para 2.10); cited for houses in "
+        "the Metric Handbook 7th ed. p. 11-17",
+        note="Stage 3: whether a room is reached only through another room is a zoning fact. "
+             "Openable window area is not modelled: the whole window is taken as openable.",
+        evidence_refs=("adb-inner-room-2-11", "adb-escape-window-area", "adb-escape-window-min", "adb-escape-window-sill",
+                       "adb-inner-room-storey-max"),
+        remedies=(
+            Remedy("Give the room a door onto a hall or landing."),
+            Remedy("On a storey at most 4.5 m up, provide an emergency escape window (0.33 m2, 450 x 450 mm, "
+                   "sill at most 1100 mm).", cost="A window specification, not a plan change."),
+            Remedy("Re-zone so the room opens off circulation.", 3, "L1",
+                   cost="Re-opens the Stage 3 zoning."),
         ),
     ),
     Rule(
@@ -1095,6 +1116,64 @@ def r_door_swing_clear(p: Project, level: str) -> list[Finding]:
     return out
 
 
+PERMITTED_INNER = {"kitchen", "utility", "dressing", "bathroom", "ensuite", "shower_room", "wc"}
+
+
+def _door_neighbours(p: Project, r: Room, level: str) -> list:
+    """(opening, the room on the other side or None for outside) for every door of room r."""
+    out = []
+    for o in p.openings:
+        if o.kind != "door" or p.wall(o.host).level != level:
+            continue
+        a, b = opening_sides(p, o)
+        if a is r or b is r:
+            out.append((o, b if a is r else a))
+    return out
+
+
+def escape_window(p: Project, r: Room, level: str):
+    """A window of room r meeting AD B 2.10 by size and sill (whole window taken as openable)."""
+    area = cat.PLANNING["escape_window_area_m2"][0]
+    dim = cat.PLANNING["escape_window_min_mm"][0]
+    sill = cat.PLANNING["escape_window_sill_max"][0]
+    for o in p.openings:
+        if o.kind != "window" or p.wall(o.host).level != level:
+            continue
+        a, b = opening_sides(p, o)
+        if r in (a, b) and o.width >= dim and o.height >= dim and o.width * o.height / 1e6 >= area and o.sill <= sill:
+            return o
+    return None
+
+
+def r_inner_room(p: Project, level: str) -> list[Finding]:
+    """AD B 2.11: a room whose every door leads into another room (not circulation, not outside)."""
+    out = []
+    lv = next((l for l in p.levels if l.id == level), None)
+    ground = min((l.elevation for l in p.levels), default=0.0)
+    height = (lv.elevation - ground) if lv else 0.0
+    storey_max, src = cat.PLANNING["inner_room_storey_max"]
+    for r in (r for r in p.rooms if r.level == level):
+        if r.occupancy in CIRCULATION or r.occupancy in PERMITTED_INNER or not r.occupancy:
+            continue
+        doors = _door_neighbours(p, r, level)
+        if not doors or any(other is None or other.occupancy in CIRCULATION for _, other in doors):
+            continue                                    # no doors (other rules), or it opens onto circulation/outside
+        via = ", ".join(sorted({other.name for _, other in doors}))
+        win = escape_window(p, r, level)
+        if height <= storey_max and win is not None:
+            continue                                    # permitted by para 2.11e
+        why = (f"its storey is {height:.0f} mm above ground, over the {storey_max:.0f} mm limit" if height > storey_max
+               else "it has no window meeting the escape size (0.33 m2, 450 x 450 mm, sill at most 1100 mm)")
+        out.append(_finding(
+            "FIRE-01", "violation",
+            f"{r.name} is an inner room: escape is only through {via}. AD B permits that only on a storey at "
+            f"most {storey_max / 1000:.1f} m up with an emergency escape window, and {why}.",
+            where=r.id, at=r.centroid, reference=src,
+            measured=Measured(height, storey_max, "mm") if height > storey_max else None,
+        ))
+    return out
+
+
 def r_tv_viewing(p: Project, level: str) -> list[Finding]:
     """Seat-to-screen distance against Mitton's UHD range (1-1.5 x the screen diagonal, 16:9 assumed)."""
     import math
@@ -1268,6 +1347,7 @@ CHECKS: tuple[Callable[[Project, str], list[Finding]], ...] = (
     r_furniture_overlap,
     r_furniture_clearance,
     r_door_swing_clear,
+    r_inner_room,
     r_tv_viewing,
     r_daylight,
     r_circulation_width,

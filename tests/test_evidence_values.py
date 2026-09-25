@@ -59,6 +59,10 @@ ORIGINAL = {
     "mitton-tv-uhd-max": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 97, ["1 to 1½ the screen size"]),
     "mh-bathroom-m42-4.30": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 454, ["Accessible and adaptable dwelling bathroom", "Minimum recommended sizes for bathrooms"]),
     "mh-wc-m42-2.61": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 454, ["Accessible and adaptable dwelling WC", "Minimum recommended sizes for bathrooms"]),
+    "adb-escape-window-area": ("uk-ad-b1/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf", 26, ["A minimum area of 0.33m2"]),
+    "adb-escape-window-min": ("uk-ad-b1/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf", 26, ["A minimum height of 450mm and a minimum width of 450mm"]),
+    "adb-escape-window-sill": ("uk-ad-b1/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf", 26, ["bottom of the openable area is a maximum of 1100mm above the floor"]),
+    "adb-inner-room-storey-max": ("uk-ad-b1/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf", 26, ["a maximum of 4.5m above ground level which is provided with an emergency escape window"]),
     "irc-r303-glazing-8pct": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 103,
                               ["not less than 8 percent of the floor area"]),
     "mitton-path-of-travel-min": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 79,
@@ -79,6 +83,7 @@ ORIGINAL = {
 
 # Presence cards (no number): the requirement text is re-read from the original too.
 PRESENCE = {
+    "adb-inner-room-2-11": ("uk-ad-b1/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf", 26, ["An inner room is permitted when it is one of the following"]),
     "ukadg-dwelling-wc-entrance-storey": ("uk-ad-g/ADG_with_2024_amendments.pdf", 30,
                                           ["least one sanitary convenience", "principal/"]),
     "ukadm-wc-entrance-or-principal-storey": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 15,
@@ -139,7 +144,7 @@ class RuleAuditTests(unittest.TestCase):
         self.assertNotIn("MIN_AREA_M2.kitchen", p)                   # IRC excepts kitchens
         self.assertEqual(rows["AREA-01"]["status"], "verified")
         # only rules whose every number is verified AND whose mapping is complete; CIRC-03 by client decision 2026-09-25
-        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01", "DIM-01", "FURN-02", "DOOR-02", "TV-01", "AREA-01"})
+        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01", "DIM-01", "FURN-02", "DOOR-02", "TV-01", "AREA-01", "FIRE-01"})
 
     def test_a_changed_catalogue_value_unverifies_the_parameter(self):
         from archpipe import catalogue as cat

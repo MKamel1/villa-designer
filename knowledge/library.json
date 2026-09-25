@@ -1996,6 +1996,40 @@
       "cost_usd_approx": 0,
       "unlocks": "calibration of the concept critic and room rules on real plans",
       "verification": "md5 checked against the Zenodo record 2026-09-25."
+    },
+    {
+      "id": "uk-ad-b1",
+      "author": "HM Government",
+      "title": "Approved Document B: Fire safety, Volume 1 Dwellings",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with 2025, 2026 and 2029 amendments, England",
+      "publisher": "DLUHC",
+      "stages": [
+        3,
+        4
+      ],
+      "isbn": null,
+      "coverage": "means of escape, inner rooms, escape windows, fire spread in dwellings",
+      "priority": 1,
+      "url": "https://www.gov.uk/government/publications/fire-safety-approved-document-b",
+      "status": "content_verified",
+      "metadata_basis": "Added 2026-09-25: the Metric Handbook (p. 11-17) cites AD B Vol 1 para 2.11 on inner rooms",
+      "access_location": "archpipe-sources",
+      "permissions": "Public; cite with access date.",
+      "acquisition": "Public document; fetched by the tool where robots.txt allows.",
+      "kind": "standard",
+      "free": true,
+      "cost_usd_approx": 0,
+      "unlocks": "inner-room rule for bedrooms reached through living spaces (CIRC-01)",
+      "held_files": [
+        {
+          "file": "uk-ad-b1/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf",
+          "sha256": "b0b468a769fca82d6be7f8d92411771a07e8c14143d8f001a60d237c62738e78",
+          "url": "https://assets.publishing.service.gov.uk/media/67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf",
+          "pages": 228,
+          "image_only": false
+        }
+      ],
+      "verification": "Cover read from the held file 2026-09-25: 2019 edition incorporating 2020 and 2022 amendments, collated with 2025, 2026 and 2029 amendments."
     }
   ],
   "evidence": [
@@ -3674,6 +3708,103 @@
       "exceptions": "Additional en-suites are outside AD M 2.22 (Table 2.1 Note 1) and carry no area minimum here.",
       "verification": "Dimensions read from the figure image 2026-09-25 (they are not in the text layer); the regression test re-reads the caption. Area = the two dimensions multiplied.",
       "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "adb-inner-room-2-11",
+      "source_id": "uk-ad-b1",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with 2025, 2026 and 2029 amendments, England",
+      "locator": "para 2.11 Inner rooms (printed page 13); Appendix A definition",
+      "stages": [
+        3
+      ],
+      "summary": "An inner room (escape only through another room) is permitted only for a kitchen, laundry/utility, dressing room, bathroom/WC/shower, a room on a storey at most 4.5 m above ground with an emergency escape window (2.10), or a gallery (2.15).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": null,
+      "conditions": "England Building Regulations, dwellinghouses; used as best-practice guidance, not local compliance. Openable area is not modelled: the whole window is taken as openable, so a pass means the window could qualify.",
+      "exceptions": "A gallery complying with para 2.15 is also permitted as an inner room.",
+      "verification": "Read on the held original page 2026-09-25 (requirement text, values and conditions checked).",
+      "applies_when": {}
+    },
+    {
+      "id": "adb-escape-window-area",
+      "source_id": "uk-ad-b1",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with 2025, 2026 and 2029 amendments, England",
+      "locator": "para 2.10a(i) (printed page 13)",
+      "stages": [
+        3
+      ],
+      "summary": "Emergency escape window: unobstructed openable area at least 0.33 m2.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "m2",
+      "conditions": "England Building Regulations, dwellinghouses; used as best-practice guidance, not local compliance. Openable area is not modelled: the whole window is taken as openable, so a pass means the window could qualify.",
+      "exceptions": "A gallery complying with para 2.15 is also permitted as an inner room.",
+      "verification": "Read on the held original page 2026-09-25 (requirement text, values and conditions checked).",
+      "applies_when": {},
+      "verified_value": 0.33,
+      "original_page_checked": true,
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "adb-escape-window-min",
+      "source_id": "uk-ad-b1",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with 2025, 2026 and 2029 amendments, England",
+      "locator": "para 2.10a(ii) (printed page 13)",
+      "stages": [
+        3
+      ],
+      "summary": "Emergency escape window: at least 450 mm high and 450 mm wide.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "conditions": "England Building Regulations, dwellinghouses; used as best-practice guidance, not local compliance. Openable area is not modelled: the whole window is taken as openable, so a pass means the window could qualify.",
+      "exceptions": "A gallery complying with para 2.15 is also permitted as an inner room.",
+      "verification": "Read on the held original page 2026-09-25 (requirement text, values and conditions checked).",
+      "applies_when": {},
+      "verified_value": 450,
+      "original_page_checked": true,
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "adb-escape-window-sill",
+      "source_id": "uk-ad-b1",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with 2025, 2026 and 2029 amendments, England",
+      "locator": "para 2.10a(iii) (printed page 13)",
+      "stages": [
+        3
+      ],
+      "summary": "Bottom of the openable area at most 1100 mm above the floor.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "conditions": "England Building Regulations, dwellinghouses; used as best-practice guidance, not local compliance. Openable area is not modelled: the whole window is taken as openable, so a pass means the window could qualify.",
+      "exceptions": "A gallery complying with para 2.15 is also permitted as an inner room.",
+      "verification": "Read on the held original page 2026-09-25 (requirement text, values and conditions checked).",
+      "applies_when": {},
+      "verified_value": 1100,
+      "original_page_checked": true,
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "adb-inner-room-storey-max",
+      "source_id": "uk-ad-b1",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with 2025, 2026 and 2029 amendments, England",
+      "locator": "para 2.11e (printed page 13)",
+      "stages": [
+        3
+      ],
+      "summary": "Inner room permitted on a storey at most 4.5 m above ground level, with an escape window.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "conditions": "England Building Regulations, dwellinghouses; used as best-practice guidance, not local compliance. Openable area is not modelled: the whole window is taken as openable, so a pass means the window could qualify.",
+      "exceptions": "A gallery complying with para 2.15 is also permitted as an inner room.",
+      "verification": "Read on the held original page 2026-09-25 (requirement text, values and conditions checked).",
+      "applies_when": {},
+      "verified_value": 4500,
+      "original_page_checked": true,
       "regression_test": "tests/test_evidence_values.py"
     }
   ],

@@ -179,6 +179,10 @@ PLANNING = {
     "daylight_ratio":      (0.08, "IRC R303.1 as quoted in Mitton & Nystuen, Residential Interior Design 4th ed. p. 92 -- glazing area at least 8 % of floor area in habitable rooms (code minimum; the unsourced legacy 1/8 was replaced 2026-09-25)"),
     "tv_view_min_ratio":   (1.0,  "Mitton & Nystuen 4th ed. p. 86, Fig. 4.10b -- UHD/4K: viewing distance 1 to 1.5 times the screen size"),
     "tv_view_max_ratio":   (1.5,  "Mitton & Nystuen 4th ed. p. 86, Fig. 4.10b -- UHD/4K: viewing distance 1 to 1.5 times the screen size"),
+    "escape_window_area_m2":   (0.33, "UK AD B Vol 1 para 2.10a(i) -- emergency escape window: unobstructed openable area at least 0.33 m2"),
+    "escape_window_min_mm":    (450,  "UK AD B Vol 1 para 2.10a(ii) -- emergency escape window: at least 450 mm high and 450 mm wide"),
+    "escape_window_sill_max":  (1100, "UK AD B Vol 1 para 2.10a(iii) -- bottom of the openable area at most 1100 mm above the floor"),
+    "inner_room_storey_max":   (4500, "UK AD B Vol 1 para 2.11e -- an inner room on a storey at most 4.5 m above ground, with an escape window"),
     "door_open_deg":       (90,   "UK AD M Vol 1 (2015) Appendix A -- clear opening width is measured with the door open at 90 degrees"),
     "room_min_width":      (2134, "IRC R304.2 via Mitton & Nystuen 4th ed. p. 143 -- habitable rooms at least 7 ft (2134 mm) in any horizontal dimension; kitchens excepted"),
 }
