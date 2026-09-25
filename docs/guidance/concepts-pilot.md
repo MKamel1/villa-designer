@@ -91,7 +91,7 @@ Rule engine on the emitted spec (legacy rules are diagnostic per the rule audit)
 - **reachability**: Every room must be reachable from the entrance.
 - **links_built**: The layout must realise the doors its own graph intends.
 - **window**: Bedrooms, living rooms, kitchens: SLL Code for Lighting minimum average daylight factors (cards sll-min-adf-bedroom/-living/-kitchen); a room with no window cannot meet them. Study and dining are included by extension (project judgement: rooms occupied by day), not by those cards.
-- **wet_stack**: Pilot fact 'adjacencies': wet rooms proposed to stack.
+- **wet_stack**: Pilot fact 'adjacencies': wet rooms proposed to stack. A BRIEF check only: on real Swiss buildings with differing floors about half of upper bathrooms do not sit over wet rooms (knowledge/precedents/swiss-calibration.json), so failing it is not a quality defect in general.
 - **living_north**: Pilot fact 'views': the northern garden view is the scenario priority.
 - **within_plot**: Pilot fact 'boundary': 30 m east-west by 40 m north-south. Setbacks are not supplied.
 - **circulation_area**: Pilot area schedule circulation_m2 allowance (project figure, not a standard); halls, landings and stairs, not the scheduled entry.

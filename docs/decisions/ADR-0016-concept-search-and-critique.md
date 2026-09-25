@@ -93,3 +93,19 @@ The checks that need a scale remain uncalibrated, so generated concepts stay dia
 - Flags came from genuinely small rooms, and from open-plan dining zones labelled as separate areas.
 - The thresholds sit just below the 1st percentile of real rooms, so they bite without being vacuous.
 - Not tested: the double-bedroom minimum (the data do not say which bedrooms are doubles), wet-stack, and area-schedule matching.
+
+**Update: remaining checks** (`scripts/swiss_stack_calibrate.py`, pre-registered).
+- **Principal-double minimum** (11.5 m², 2.75 m, NDSS): calibrated on 300 apartments with two or more bedrooms, taking the largest as the principal. Quiet 98.7 % (area) and 97.7 % (width); seeded defects 300 of 300 for each.
+- **Wet stack: failed** on 300 real consecutive-floor pairs with different plans (48 % quiet).
+  - Of the unstacked upper bathrooms, 276 have no overlap with a wet room below, and about 293 sit within 1.5 m.
+  - Only 29 use a shaft continuing from the floor below.
+  - Good real buildings do not consistently stack, so the check is **not a quality criterion**. It remains a brief-compliance check (the pilot proposes stacking), and its basis says so. It was not tuned to pass.
+- **Arithmetic checks** (area match, gross and circulation area, within plot, upper floor supported, north living room, buildable links) compare a design with its own brief or plot. There is nothing in real plans to calibrate them against; unit tests cover them exactly.
+
+**Calibration status of every critic check:**
+
+| Status | Checks |
+|---|---|
+| Calibrated on real plans | graph checks (published graphs); window and reachability (CubiCasa); room area, width and principal double (Swiss) |
+| Brief check, not a quality criterion | wet stack |
+| Arithmetic, unit-tested | the rest |

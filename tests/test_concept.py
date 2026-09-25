@@ -66,6 +66,13 @@ class GeneratorTests(unittest.TestCase):
         r["living"]["rect"], r[south]["rect"] = r[south]["rect"], r["living"]["rect"]
         self.assertEqual(_status(critic.critique(lay, self.available), "living_north"), "fail")
 
+    def test_circulation_area_is_the_sum_of_halls_landings_and_stairs(self):
+        lay, _ = self.best["bar"]
+        want = sum(L.room_area(lay, r) for r, v in lay["rooms"].items() if v["occupancy"] in ("corridor", "landing", "stair"))
+        got = next(c for c in critic.critique(lay, self.available, 40)["checks"] if c["check"] == "circulation_area")
+        self.assertAlmostEqual(got["achieved_m2"], round(want, 1))
+        self.assertAlmostEqual(got["excess_m2"], round(max(0.0, want - 40), 1))
+
     def test_gross_area_fails_over_allowance(self):
         lay, _ = self.best["bar"]
         self.assertEqual(_status(critic.critique(lay, 100), "gross_area"), "fail")

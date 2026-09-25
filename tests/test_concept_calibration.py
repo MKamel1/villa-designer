@@ -98,13 +98,23 @@ class GeometryCalibration(unittest.TestCase):
     def test_dimensioned_room_rules_on_real_metric_plans(self):
         """AREA-01 / DIM-01 on Swiss Dwellings (metric geometry): knowledge/precedents/swiss-calibration.json."""
         rec = self._json.loads((critic.ROOT / "knowledge/precedents/swiss-calibration.json").read_text(encoding="utf-8"))
-        for run in rec["runs"]:
+        for run in (x for x in rec["runs"] if x["run"].startswith(("1:", "replication"))):
             r = run["result"]
             self.assertGreaterEqual(min(r["quiet_rate"].values()), r["gate"], run["run"])
             self.assertEqual(r["seeded_caught"], {"area": r["sample"], "width": r["sample"]}, run["run"])
 
-    def test_wet_stack_and_area_schedule(self):
-        self.skipTest("not calibrated: no held plan set has stacked villa storeys with a room schedule")
+    def test_principal_double_bedroom_on_real_plans(self):
+        rec = self._json.loads((critic.ROOT / "knowledge/precedents/swiss-calibration.json").read_text(encoding="utf-8"))
+        r = next(x["result"] for x in rec["runs"] if x["run"].startswith("double"))
+        self.assertGreaterEqual(min(r["quiet_rate"].values()), r["gate"])
+        self.assertEqual(r["seeded_caught"], {"area": r["sample"], "width": r["sample"]})
+
+    def test_wet_stack_is_not_a_calibrated_quality_criterion(self):
+        rec = self._json.loads((critic.ROOT / "knowledge/precedents/swiss-calibration.json").read_text(encoding="utf-8"))
+        r = next(x["result"] for x in rec["runs"] if x["run"].startswith("stack"))
+        self.assertLess(r["quiet_rate"]["wet_stack"], r["gate"])          # recorded failure, kept honest
+        self.assertIn("BRIEF check", critic.BASIS["wet_stack"])           # so the critic must say so
+        self.assertEqual(r["seeded_caught"]["wet_stack"], r["seeded_caught"]["of"])
 
 
 if __name__ == "__main__":
