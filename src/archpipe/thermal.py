@@ -348,6 +348,12 @@ def run_case(case: dict, epw: Path, energyplus: Path, workdir: Path) -> dict:
     if top:
         out["operative_hours_above_c"] = {str(k): sum(1 for t in top if t > k) for k in (26, 28, 30)}
         out["max_operative_c"] = round(max(top), 1)
+        if len(top) == 8760:
+            # TM59 criteria on this shoebox. Our occupancy, gains and window-opening assumptions are
+            # not TM59's prescribed profiles, so this is a TM59-criteria screen, not a TM59 assessment.
+            out["tm59"] = tm59(top, read_epw(Path(epw))["db"], case.get("use", "bedroom"),
+                               "mechanical" if used["mode"] == "cooled" else "natural")
+            out["tm59"]["basis"] = "TM59:2026 criteria on archpipe shoebox assumptions (screen, not an assessment)"
     out["window_transmitted_solar_kwh"] = round(total_kwh("Surface Window Transmitted Solar Radiation Energy"), 1)
     inc = res.data_collections_by_output_name("Surface Outside Face Incident Solar Radiation Rate per Area")
     # apertures are named <wall>_Glz<n>; the opaque facade wall is the other exterior surface
@@ -357,6 +363,65 @@ def run_case(case: dict, epw: Path, energyplus: Path, workdir: Path) -> dict:
         "Surface Outside Face Incident Beam Solar Radiation Rate per Area")
         if "_GLZ" not in c.header.metadata.get("Surface", "").upper()]
     out["facade_beam_kwh_m2"] = round(max((sum(c.values) for c in beam), default=0.0) / 1000.0, 1)
+    return out
+
+
+# ------------------------------------------------------------------ TM59 (2026)
+# CIBSE TM59:2026 section 2.4 and Table 2 (printed pages 9-11; cards tm59-*). Category II
+# (ordinary dwellings). The running-mean outdoor temperature follows TM52 Eq. 2.2/2.3 as
+# published in EN 16798-1 (alpha 0.8; TM52 itself is not held): cross-checked against
+# Ladybug's independent implementation in tests/test_thermal.py.
+TM59 = {"cat2_threshold_at_trm10": 25.1, "cat2_threshold_at_trm30": 31.7, "exceed_fraction": 0.03,
+        "crit_b_tn_cat2": 27.0, "crit_b_max_nights": 4, "crit_c_c": 26.0,
+        "living_hours": range(9, 22), "sleep": (23, 8)}
+MAY1, OCT1 = 120, 273          # day-of-year index (0-based) of 1 May and 1 October, non-leap year
+
+
+def running_mean_daily(daily_means: list[float], alpha: float = 0.8) -> list[float]:
+    """Trm for every day: TM52 Eq. 2.3 seeds day 7 from the previous seven days, Eq. 2.2 recurses."""
+    w = (1.0, 0.8, 0.6, 0.5, 0.4, 0.3, 0.2)
+    trm = [None] * len(daily_means)
+    trm[7] = sum(wi * daily_means[7 - 1 - i] for i, wi in enumerate(w)) / 3.8
+    for d in range(8, len(daily_means)):
+        trm[d] = (1 - alpha) * daily_means[d - 1] + alpha * trm[d - 1]
+    return trm
+
+
+def cat2_threshold(trm: float) -> float:
+    lo, hi = TM59["cat2_threshold_at_trm10"], TM59["cat2_threshold_at_trm30"]
+    t = min(max(trm, 10.0), 30.0)
+    return lo + (hi - lo) * (t - 10.0) / 20.0
+
+
+def tm59(operative: list[float], outdoor_db: list[float], use: str, ventilation: str) -> dict:
+    """TM59 criteria for one room from 8760 hourly operative temperatures.
+
+    use: "living" (living room, kitchen, home office) or "bedroom".
+    ventilation: "natural" (criteria a and b) or "mechanical" (criteria c and b)."""
+    assert len(operative) == len(outdoor_db) == 8760, "a full non-leap hourly year is required"
+    days = [statistics.fmean(outdoor_db[24 * d:24 * d + 24]) for d in range(365)]
+    trm = running_mean_daily(days)
+    hours = [h for h in range(MAY1 * 24, OCT1 * 24)
+             if use == "bedroom" or (h % 24) in TM59["living_hours"]]
+    limit = math.floor(TM59["exceed_fraction"] * len(hours))
+    out = {"use": use, "ventilation": ventilation, "occupied_hours": len(hours), "limit_hours": limit}
+    if ventilation == "natural":
+        # dT rounded to the nearest whole degree (TM52): dT >= 0.5 counts as 1 K
+        n = sum(1 for h in hours if operative[h] - cat2_threshold(trm[h // 24]) >= 0.5)
+        out["a"] = {"hours": n, "pass": n <= limit}
+    else:
+        n = sum(1 for h in hours if operative[h] > TM59["crit_c_c"])
+        out["c"] = {"hours": n, "pass": n <= limit}
+    if use == "bedroom":
+        s, e = TM59["sleep"]
+        nights = 0
+        for d in range(MAY1, OCT1):
+            span = list(range(24 * d + s, 24 * (d + 1) + e))
+            span = [h for h in span if h < 8760]
+            if statistics.fmean(operative[h] for h in span) > TM59["crit_b_tn_cat2"]:
+                nights += 1
+        out["b"] = {"nights": nights, "pass": nights <= TM59["crit_b_max_nights"]}
+    out["pass"] = all(v["pass"] for k, v in out.items() if k in ("a", "b", "c"))
     return out
 
 

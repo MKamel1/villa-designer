@@ -65,5 +65,64 @@ class AssumptionTests(unittest.TestCase):
         self.assertIn("Lynes", job)
 
 
+class TM59Tests(unittest.TestCase):
+    """CIBSE TM59:2026 criteria (cards tm59-*): anchors, independent running-mean check,
+    and each criterion's pass/fail edge."""
+    REF = Path(__file__).parent / "data" / "cairo-west-trm-ladybug.json"
+
+    def test_threshold_line_matches_tm59_anchors_and_ladybug_en15251(self):
+        import json
+        ref = json.loads(self.REF.read_text(encoding="utf-8"))["en15251_cat2_upper_at"]
+        for trm in (10, 20, 30):
+            self.assertAlmostEqual(t.cat2_threshold(trm), ref[str(trm)], places=6)
+        self.assertEqual((t.cat2_threshold(5), t.cat2_threshold(35)), (25.1, 31.7))   # fixed outside 10-30
+
+    def test_running_mean_equals_ladybug_recurrence(self):
+        # Ladybug labels each value one day later; the recurrence is identical. Ours follows
+        # TM59's text: Trm(1 May) from Trm(30 Apr) and the 30 April daily mean.
+        import json, statistics
+        epw, _ = _weather()
+        db = t.read_epw(epw)["db"]
+        days = [statistics.fmean(db[24 * d:24 * d + 24]) for d in range(365)]
+        ours = t.running_mean_daily(days)
+        lb = json.loads(self.REF.read_text(encoding="utf-8"))["trm"]
+        self.assertLess(max(abs(ours[d] - lb[d + 1]) for d in range(t.MAY1, t.OCT1)), 1e-9)
+
+    def _year(self, value):
+        return [value] * 8760
+
+    def test_criterion_c_edge(self):
+        out = self._year(20.0)
+        r = t.tm59(out, self._year(30.0), "living", "mechanical")
+        self.assertEqual((r["occupied_hours"], r["limit_hours"]), (1989, 59))    # TM59 Table 2
+        for h in range(t.MAY1 * 24 + 9, t.OCT1 * 24):
+            if (h % 24) in t.TM59["living_hours"] and sum(1 for x in out if x > 26) < 59:
+                out[h] = 26.5
+        self.assertTrue(t.tm59(out, self._year(30.0), "living", "mechanical")["pass"])
+        h = next(h for h in range(t.MAY1 * 24, t.OCT1 * 24) if (h % 24) in t.TM59["living_hours"] and out[h] <= 26)
+        out[h] = 26.5
+        self.assertFalse(t.tm59(out, self._year(30.0), "living", "mechanical")["pass"])
+
+    def test_bedroom_limits_and_criterion_b(self):
+        r = t.tm59(self._year(20.0), self._year(30.0), "bedroom", "mechanical")
+        self.assertEqual((r["occupied_hours"], r["limit_hours"]), (3672, 110))   # TM59 Table 2
+        hot = self._year(20.0)
+        for d in range(t.MAY1, t.MAY1 + 5):                     # five hot nights
+            for h in range(24 * d + 23, 24 * d + 32):
+                hot[h] = 27.5
+        b = t.tm59(hot, self._year(30.0), "bedroom", "mechanical")["b"]
+        self.assertEqual((b["nights"], b["pass"]), (5, False))
+        for h in range(24 * (t.MAY1 + 4) + 23, 24 * (t.MAY1 + 4) + 32):
+            hot[h] = 20.0
+        self.assertTrue(t.tm59(hot, self._year(30.0), "bedroom", "mechanical")["b"]["pass"])
+
+    def test_criterion_a_rounding(self):
+        # outdoor constant 30 C -> Trm 30 -> threshold 31.7; dT 0.4 rounds to 0 K, 0.5 to 1 K
+        quiet = t.tm59(self._year(31.7 + 0.4), self._year(30.0), "living", "natural")
+        loud = t.tm59(self._year(31.7 + 0.5), self._year(30.0), "living", "natural")
+        self.assertTrue(quiet["a"]["pass"])
+        self.assertFalse(loud["a"]["pass"])
+
+
 if __name__ == "__main__":
     unittest.main()

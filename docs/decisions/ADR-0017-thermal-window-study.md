@@ -115,3 +115,25 @@ next shading type to add.
   It is physically wrong for vertical surfaces (see Validation).
 - **System-wide `.deb` install.** It needs administrator rights on a shared
   worker.
+
+## Addendum 2026-09-25: TM59:2026 criteria
+
+CIBSE TM59:2026 is held (free from CIBSE), and its criteria are cards `tm59-*`. `thermal.tm59()` evaluates, for Category II dwellings:
+- **criterion a:** adaptive threshold 25.1–31.7 °C, dT rounded; at most 3 % of occupied hours;
+- **criterion b:** bedrooms, mean 23:00–08:00 above 27 °C on at most 4 nights;
+- **criterion c:** above 26 °C for at most 3 % of hours.
+
+It is checked independently in three ways:
+- the threshold line matches TM59's printed anchors and Ladybug's EN 15251 Category II upper limit at 10, 20 and 30 °C;
+- the running mean matches Ladybug's recurrence exactly (Ladybug labels days one later; ours follows TM59's worked text);
+- the occupied-hour totals reproduce TM59 Table 2 (1,989 and 3,672 hours).
+
+The running-mean formula comes from TM52 / EN 16798-1, which we do not hold. It is taken from the published formula and verified only against Ladybug.
+
+**Screen result** (`spec/thermal/window-study-tm59.json`): 4 × 5 × 3 m free-running bedroom, Cairo West weather, 48 cases.
+- **Criterion b fails in every case:** 23–81 nights against 4 allowed. Bedrooms at the site need cooling; TM59 Stage 3 then assesses criteria b and c.
+- **Criterion a:** north and south pass with shading or g 0.25 glass. West fails in every case, up to 1,169 hours against 110.
+
+**Limits:**
+- These are archpipe shoebox assumptions, not TM59's prescribed occupancy and window profiles. It is a criteria screen, not a TM59 assessment.
+- TM59's May–September window is England's summer; Egypt's hot season is longer.

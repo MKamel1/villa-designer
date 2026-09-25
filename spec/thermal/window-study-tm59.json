@@ -1,0 +1,37 @@
+{
+ "kind": "study",
+ "note": "TM59:2026 criteria screen on a 4 x 5 x 3 m bedroom shoebox, Cairo West weather, free-running with natural ventilation (TM59 Stage 1: passive only). Not a project decision; archpipe shoebox assumptions, not TM59's prescribed profiles.",
+ "base": {
+  "mode": "free",
+  "use": "bedroom"
+ },
+ "sweep": {
+  "azimuth_deg": [
+   0,
+   90,
+   180,
+   270
+  ],
+  "wwr": [
+   0.2,
+   0.35
+  ],
+  "overhang_m": [
+   0.0,
+   0.6,
+   1.2
+  ],
+  "glass": [
+   {
+    "u_w_m2k": 1.8,
+    "shgc": 0.4,
+    "vt": 0.6
+   },
+   {
+    "u_w_m2k": 1.4,
+    "shgc": 0.25,
+    "vt": 0.5
+   }
+  ]
+ }
+}

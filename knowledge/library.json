@@ -890,19 +890,40 @@
       "stages": [
         5
       ],
-      "isbn": null,
+      "isbn": "9781912034123",
       "coverage": "overheating criteria and modelling assumptions for homes (with TM52)",
       "priority": 1,
       "url": "https://www.cibse.org/knowledge-research/knowledge-portal/tm59-overheating-risk-in-dwellings-a-design-stage-methodology-2026/",
-      "status": "identified",
+      "status": "content_verified",
       "metadata_basis": "Acquisition plan 2026-09-24; edition confirmed from web listing, contents require reading the original",
-      "access_location": null,
+      "access_location": "archpipe-sources",
       "permissions": "Licensed original required; do not redistribute. Store in archpipe-sources outside the repository; record paraphrased evidence cards with locators only.",
       "acquisition": "Supply a readable (not DRM-locked) PDF/EPUB, or scans of the pages requested, including the title/copyright page, figures, tables, captions and footnotes.",
       "kind": "standard",
-      "free": false,
-      "cost_usd_approx": 120,
-      "unlocks": "the overheating gate for window and shading decisions"
+      "free": true,
+      "cost_usd_approx": 0,
+      "unlocks": "the overheating gate for window and shading decisions",
+      "verification": "Title and copyright page read from the held file 2026-09-25: CIBSE TM59: 2026, supplied free by CIBSE for the downloader's sole use.",
+      "held_files": [
+        {
+          "file": "cibse-tm59/TM59 compliance checklist (2026).pdf",
+          "sha256": "78739e9dad9bd12ab6f2d764f54b011993f00c2e4df5dcf96a8205a66da0c304",
+          "pages": 5,
+          "image_only": false
+        },
+        {
+          "file": "cibse-tm59/TM59 Overheating risk in dwellings - a design stage methodology (2026).pdf",
+          "sha256": "7f97c2cceba0e736b9fc446a9f571fbb156367a7e458440f35e9ff45ce956a5a",
+          "pages": 39,
+          "image_only": false
+        },
+        {
+          "file": "cibse-tm59/TM59 weather file requirements (2026).pdf",
+          "sha256": "c31d471de932ef1c11c34742d6a794c07d789c39d262581ef2a5576d243ad6ae",
+          "pages": 4,
+          "image_only": false
+        }
+      ]
     },
     {
       "id": "en17037",
@@ -1916,6 +1937,40 @@
         }
       ],
       "verification": "Cover page read from the held file 2026-09-25: 2015 edition incorporating 2016 and 2024 amendments, England."
+    },
+    {
+      "id": "aecom-meh-2026",
+      "author": "AECOM",
+      "title": "Middle East Property & Construction Handbook 2026",
+      "edition": "2026 (20th edition)",
+      "publisher": "AECOM",
+      "stages": [
+        2,
+        3,
+        6
+      ],
+      "isbn": null,
+      "coverage": "regional construction cost benchmarks per m2, market conditions, procurement",
+      "priority": 2,
+      "url": "https://insights.aecom.com/insights/meh",
+      "status": "content_verified",
+      "metadata_basis": "Added 2026-09-25 as the free substitute for Spon's/RSMeans (relative cost of options only)",
+      "access_location": "archpipe-sources",
+      "permissions": "Downloaded by the client from AECOM; do not redistribute; cite with page.",
+      "acquisition": "Free download from AECOM insights (client downloaded).",
+      "kind": "book",
+      "free": true,
+      "cost_usd_approx": 0,
+      "unlocks": "relative cost of options at each gate",
+      "verification": "Cover and foreword read from the held file 2026-09-25: 2026 edition, 20th anniversary.",
+      "held_files": [
+        {
+          "file": "aecom-meh-2026/MEH 2026 Digital.pdf",
+          "sha256": "7384ce7ba42228e815709803ac6e9fa8afb7b7dcca38a2c0af0cec462df7e48d",
+          "pages": 156,
+          "image_only": false
+        }
+      ]
     }
   ],
   "evidence": [
@@ -3098,6 +3153,126 @@
       "exceptions": null,
       "verification": "Read on the held original page 2026-09-25 (requirement text and conditions checked).",
       "applies_when": {}
+    },
+    {
+      "id": "tm59-crit-a-cat2-floor",
+      "source_id": "cibse-tm59",
+      "edition": "2026",
+      "locator": "Section 2.4.1 Criterion a (printed page 9)",
+      "stages": [
+        5
+      ],
+      "summary": "Criterion a, Category II: threshold fixed at 25.1 C below a running-mean outdoor temperature of 10 C.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "degC",
+      "verified_value": 25.1,
+      "original_page_checked": true,
+      "conditions": "CIBSE TM59:2026, Category II (ordinary dwellings), 1 May-30 Sep. An England method; applied to Cairo West weather as best-practice guidance. Egypt's hot season runs beyond September, so the study also reports April and October as a sensitivity (our extension).",
+      "exceptions": "Non-habitable spaces (halls, stairs, landings, garages) have no criterion; ceiling fans may raise criteria a and c thresholds (not b).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "tm59-crit-a-cat2-cap",
+      "source_id": "cibse-tm59",
+      "edition": "2026",
+      "locator": "Section 2.4.1 Criterion a (printed page 9)",
+      "stages": [
+        5
+      ],
+      "summary": "Criterion a, Category II: threshold fixed at 31.7 C above a running-mean outdoor temperature of 30 C; linear between.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "degC",
+      "verified_value": 31.7,
+      "original_page_checked": true,
+      "conditions": "CIBSE TM59:2026, Category II (ordinary dwellings), 1 May-30 Sep. An England method; applied to Cairo West weather as best-practice guidance. Egypt's hot season runs beyond September, so the study also reports April and October as a sensitivity (our extension).",
+      "exceptions": "Non-habitable spaces (halls, stairs, landings, garages) have no criterion; ceiling fans may raise criteria a and c thresholds (not b).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "tm59-exceed-3pct",
+      "source_id": "cibse-tm59",
+      "edition": "2026",
+      "locator": "Section 2.4.1 Criterion a and 2.4.3 Criterion c (printed pages 9-10)",
+      "stages": [
+        5
+      ],
+      "summary": "Criteria a and c: exceedance not more than 3 % of occupied hours, 1 May-30 Sep (59 h living/kitchen/office, 110 h bedrooms).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "ratio",
+      "verified_value": 0.03,
+      "original_page_checked": true,
+      "conditions": "CIBSE TM59:2026, Category II (ordinary dwellings), 1 May-30 Sep. An England method; applied to Cairo West weather as best-practice guidance. Egypt's hot season runs beyond September, so the study also reports April and October as a sensitivity (our extension).",
+      "exceptions": "Non-habitable spaces (halls, stairs, landings, garages) have no criterion; ceiling fans may raise criteria a and c thresholds (not b).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "tm59-crit-b-4-nights",
+      "source_id": "cibse-tm59",
+      "edition": "2026",
+      "locator": "Section 2.4.2 Criterion b (printed page 10)",
+      "stages": [
+        5
+      ],
+      "summary": "Criterion b (bedrooms): nights with mean operative temperature 23:00-08:00 above Tn not more than four, 1 May-30 Sep.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "nights",
+      "verified_value": 4,
+      "original_page_checked": true,
+      "conditions": "CIBSE TM59:2026, Category II (ordinary dwellings), 1 May-30 Sep. An England method; applied to Cairo West weather as best-practice guidance. Egypt's hot season runs beyond September, so the study also reports April and October as a sensitivity (our extension).",
+      "exceptions": "Non-habitable spaces (halls, stairs, landings, garages) have no criterion; ceiling fans may raise criteria a and c thresholds (not b).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "tm59-crit-b-tn-cat2",
+      "source_id": "cibse-tm59",
+      "edition": "2026",
+      "locator": "Table 2 (printed page 11)",
+      "stages": [
+        5
+      ],
+      "summary": "Criterion b: Tn fixed at 27 C for Category II dwellings (26 C Category I).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "degC",
+      "verified_value": 27.0,
+      "original_page_checked": true,
+      "conditions": "CIBSE TM59:2026, Category II (ordinary dwellings), 1 May-30 Sep. An England method; applied to Cairo West weather as best-practice guidance. Egypt's hot season runs beyond September, so the study also reports April and October as a sensitivity (our extension).",
+      "exceptions": "Non-habitable spaces (halls, stairs, landings, garages) have no criterion; ceiling fans may raise criteria a and c thresholds (not b).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "tm59-crit-c-26",
+      "source_id": "cibse-tm59",
+      "edition": "2026",
+      "locator": "Section 2.4.3 Criterion c (printed page 10)",
+      "stages": [
+        5
+      ],
+      "summary": "Criterion c (predominantly mechanically ventilated or cooled): operative temperature not above 26 C for more than 3 % of occupied hours.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "degC",
+      "verified_value": 26.0,
+      "original_page_checked": true,
+      "conditions": "CIBSE TM59:2026, Category II (ordinary dwellings), 1 May-30 Sep. An England method; applied to Cairo West weather as best-practice guidance. Egypt's hot season runs beyond September, so the study also reports April and October as a sensitivity (our extension).",
+      "exceptions": "Non-habitable spaces (halls, stairs, landings, garages) have no criterion; ceiling fans may raise criteria a and c thresholds (not b).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

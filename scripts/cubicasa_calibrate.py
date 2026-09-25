@@ -1,0 +1,93 @@
+"""Calibrate the critic's scale-free checks on real plans (CubiCasa5k, CC BY-NC-SA 4.0).
+
+    python scripts/cubicasa_calibrate.py <dir-with-plan-folders> [-n 300] [--out out/cubicasa-calibration.json]
+
+Pre-registered 2026-09-25, before any plan was looked at:
+- sample: the first N plans (sorted by path) with one floor, at least one
+  Bedroom and one LivingRoom, and a detectable entrance door;
+- gate: the `window` and `reachability` checks stay quiet on >= 90 % of the
+  sample, and every flagged plan in a reviewed subset has a named cause;
+- seeded defects on each quiet plan must fail: a bedroom's windows removed
+  (window), a bedroom's connections cut (reachability);
+- privacy (bedroom not through a living space) and WC access are reported as
+  base rates only: ordinary apartments are not bound by the pilot's brief.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import sys
+from pathlib import Path
+
+from archpipe.concept import critic, cubicasa as C
+
+GATE = 0.90
+
+
+def evaluate(folders, n):
+    rows, skipped = [], {"floors": 0, "no_bed_or_living": 0, "no_entrance": 0, "parse_error": 0}
+    for f in folders:
+        if len(rows) >= n:
+            break
+        try:
+            floors = C.parse(f / "model.svg")
+        except Exception:
+            skipped["parse_error"] += 1
+            continue
+        if len(floors) != 1:
+            skipped["floors"] += 1
+            continue
+        g = C.graph(floors[0])
+        types = set(g["types"].values())
+        if "Bedroom" not in types or not types & {"LivingRoom", "Lounge"}:
+            skipped["no_bed_or_living"] += 1
+            continue
+        if not g["entrance"]:
+            skipped["no_entrance"] += 1
+            continue
+        checks = {c["check"]: c for c in critic.graph_checks(g)}
+        checks["window"] = C.window_check(g)
+        bed = next(r for r, t in g["types"].items() if t == "Bedroom")
+        m1 = copy.deepcopy(g)
+        m1["windows"][bed] = 0
+        m2 = copy.deepcopy(g)
+        m2["connections"] = [e for e in m2["connections"] if bed not in e]
+        rows.append({"plan": f"{f.parent.name}/{f.name}", "rooms": len(g["rooms"]),
+                     "status": {k: c["status"] for k, c in checks.items()},
+                     "flagged": {k: c.get("rooms") for k, c in checks.items() if c["status"] == "fail"},
+                     "mutation_window_fails": C.window_check(m1)["status"] == "fail",
+                     "mutation_reach_fails": any(c["check"] == "reachability" and c["status"] == "fail"
+                                                 for c in critic.graph_checks(m2))})
+    return rows, skipped
+
+
+def summarise(rows, skipped):
+    n = len(rows)
+    rate = lambda k: sum(r["status"][k] != "fail" for r in rows) / n if n else 0.0
+    s = {"sample": n, "skipped": skipped,
+         "quiet_rate": {k: round(rate(k), 3) for k in ("window", "reachability", "private_access", "wc_access")},
+         "mutation_detected": {"window": sum(r["mutation_window_fails"] for r in rows),
+                               "reachability": sum(r["mutation_reach_fails"] for r in rows)},
+         "gate": GATE}
+    s["gate_pass"] = n > 0 and s["quiet_rate"]["window"] >= GATE and s["quiet_rate"]["reachability"] >= GATE
+    return s
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("root", type=Path)
+    ap.add_argument("-n", type=int, default=300)
+    ap.add_argument("--out", type=Path, default=Path("out/cubicasa-calibration.json"))
+    a = ap.parse_args(argv)
+    folders = sorted({p.parent for p in a.root.rglob("model.svg")})
+    rows, skipped = evaluate(folders, a.n)
+    s = summarise(rows, skipped)
+    a.out.parent.mkdir(parents=True, exist_ok=True)
+    a.out.write_text(json.dumps({"summary": s, "plans": rows}, indent=1), encoding="utf-8")
+    print(json.dumps(s, indent=1))
+    return 0 if s["gate_pass"] else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
