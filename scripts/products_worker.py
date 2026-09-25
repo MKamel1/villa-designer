@@ -93,10 +93,12 @@ def fetch_phase(job: dict, lib: Path) -> dict:
             if "base" in maps:
                 st = albedo_stats(maps["base"])
                 rec["albedo"] = st
-                # Physically plausible non-metal albedo: roughly charcoal (~0.03) to fresh snow (~0.9).
-                inside = 0.02 <= st["mean"] <= 0.90
+                # Time-Saver p. 1636 reflectance table (schema.albedo_limits): hard finishes 0.035-0.90; the
+                # caller passes lower limits for pile fabrics (black velour 0.4 %).
+                lo, hi = it.get("albedo_limits") or (0.035, 0.90)
+                inside = lo <= st["mean"] <= hi
                 rec["checks"].append({"name": "albedo_physical_range", "status": "passed" if inside else "failed",
-                                      "expected": [0.02, 0.90], "measured": round(st["mean"], 4),
+                                      "expected": [lo, hi], "measured": round(st["mean"], 4),
                                       "detail": "mean linear luminance of the base-colour map (Pillow sRGB decode)"})
         out.append(rec)
     return {"items": out}

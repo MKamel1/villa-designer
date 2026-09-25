@@ -65,6 +65,10 @@ def run_checks(items: list[dict], host: str = "ai-workstation", tag: str = "pilo
     checks, and record the results in the index. items: id, source, key, asset_type,
     files [{name, url, md5?, size?, role?}], declared {real_size_mm|dimensions_mm|polycount}."""
     from workstation import _ssh, deploy, digest
+    from archpipe.products import schema as _schema
+    for it in items:                                     # per-item albedo limits (pile fabrics go darker)
+        row = next((x for x in store.search(include_unverified=True, limit=100000) if x["id"] == it["id"]), {})
+        it.setdefault("albedo_limits", list(_schema.albedo_limits(row.get("category"), row.get("name"))))
     job = json.dumps({"items": items}).encode()
     root, release, _ = deploy(host)
     env = json.loads(_ssh(host, "cat " + shlex.quote(root + "/worker-environment.json")).stdout)
@@ -232,9 +236,28 @@ def batch(n: int = 220, host: str = "ai-workstation") -> dict:
     return run_checks(items, host, "batch")
 
 
+def rescore_albedo() -> list[tuple]:
+    """Re-judge stored albedo checks against schema.albedo_limits (no re-render: the measured mean is stored)."""
+    from archpipe.products import schema as _schema
+    changed = []
+    for it in store.search(include_unverified=True, limit=100000):
+        checks = store.checks_for(it["id"])
+        c = next((x for x in checks if x["name"] == "albedo_physical_range"), None)
+        if not c or c.get("measured") in (None, "", "null"):
+            continue
+        m = float(json.loads(c["measured"]) if isinstance(c["measured"], str) else c["measured"])
+        lo, hi = _schema.albedo_limits(it.get("category"), it.get("name"))
+        status = "passed" if lo <= m <= hi else "failed"
+        if status != c["status"] or json.loads(c["expected"]) != [lo, hi]:
+            layer = store.record_checks(it["id"], [{"name": c["name"], "status": status, "expected": [lo, hi],
+                                                    "measured": m, "detail": c["detail"]}])
+            changed.append((it["id"], m, c["status"], status, layer))
+    return changed
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("cmd", choices=["index", "pilot", "batch", "fab", "sketchfab", "search", "show", "status"])
+    ap.add_argument("cmd", choices=["index", "pilot", "batch", "rescore", "fab", "sketchfab", "search", "show", "status"])
     ap.add_argument("id", nargs="?")
     ap.add_argument("--text")
     ap.add_argument("--category")
@@ -262,6 +285,10 @@ def main(argv=None) -> int:
                   f"{'caught' if n['caught'] else 'NOT CAUGHT'}")
         ok = all(n["caught"] for n in rep["negative_control"])
         return 0 if ok else 1
+    if a.cmd == "rescore":
+        for row in rescore_albedo():
+            print("  %-50s %.4f %s -> %s (%s)" % row)
+        return 0
     if a.cmd in ("fab", "sketchfab", "batch"):
         rep = fab() if a.cmd == "fab" else sketchfab() if a.cmd == "sketchfab" else batch(a.limit)
         bad = [r for r in rep["items"] if r["layer"] != "verified"]

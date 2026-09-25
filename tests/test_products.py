@@ -99,3 +99,20 @@ class LightingAdapterTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AlbedoLimitTests(unittest.TestCase):
+    """Time-Saver p. 1636: hard finishes 0.035-0.90; pile fabrics down to 0.004 (black velour)."""
+
+    def test_hard_and_pile_floors(self):
+        from archpipe.products import schema
+        self.assertEqual(schema.albedo_limits("surface", "Black marble"), (0.035, 0.90))
+        self.assertEqual(schema.albedo_limits("fabric", "Leather brown"), (0.035, 0.90))   # leather is not pile
+        self.assertEqual(schema.albedo_limits("fabric", "Black velvet"), (0.004, 0.90))
+
+    def test_worker_uses_the_limits_it_is_given(self):
+        import pathlib
+        src = (pathlib.Path(__file__).resolve().parents[1] / "scripts" / "products_worker.py").read_text(encoding="utf-8")
+        self.assertIn('it.get("albedo_limits")', src)
+        self.assertNotIn("0.02 <= st", src)
+

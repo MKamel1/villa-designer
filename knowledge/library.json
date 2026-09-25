@@ -3897,6 +3897,23 @@
       "exceptions": "Excludes items listed on printed page 121 (e.g. loose furniture, artwork for residential).",
       "verification": "Read on the held original page 2026-09-25 (table row checked).",
       "applies_when": {}
+    },
+    {
+      "id": "tss-reflectance-table",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "locator": "General Reference Data, Color and Light: Material and Color Light Reflectances (printed page 1636)",
+      "stages": [
+        6
+      ],
+      "summary": "Brightest diffuse finish: dull or flat white 75-90 %. Darkest non-pile: ultramarine blue 3.5 %, black ink 4 %, black walnut 5-15 %. Pile: black velvet 1.8 %, black velour 0.4 %.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Used as the plausible range for the mean of a texture's base-colour map (products albedo_physical_range).",
+      "exceptions": "Metals and mirrors are specular and outside this diffuse range.",
+      "verification": "Read on the held original page 2026-09-25 (table values checked).",
+      "applies_when": {}
     }
   ],
   "precedents": [

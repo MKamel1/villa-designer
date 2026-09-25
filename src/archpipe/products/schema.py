@@ -58,3 +58,20 @@ def categorise(words: list[str]) -> str | None:
 def styles_for(words: list[str]) -> list[str]:
     text = " ".join(w.lower() for w in words)
     return sorted(s for s, keys in STYLE_WORDS.items() if any(k in text for k in keys))
+
+
+# Diffuse reflectance limits for a base-colour map, from Time-Saver Standards for Interior Design 2nd ed.
+# p. 1636 "Material and Color Light Reflectances" (card tss-reflectance-table): the brightest diffuse finish
+# is dull or flat white at 75-90 %; the darkest non-pile finish is ultramarine blue at 3.5 % (black ink 4 %,
+# black walnut 5-15 %); pile fabrics go far lower (black velvet 1.8 %, black velour 0.4 %).
+ALBEDO_MAX = 0.90
+ALBEDO_MIN_HARD = 0.035
+ALBEDO_MIN_PILE = 0.004
+PILE_WORDS = ("velvet", "velour", "plush", "pile", "chenille")
+
+
+def albedo_limits(category: str | None, name: str | None) -> tuple[float, float]:
+    """(lowest, highest) plausible mean diffuse reflectance for a material's base-colour map."""
+    pile = (category == "fabric") and any(w in (name or "").lower() for w in PILE_WORDS)
+    return (ALBEDO_MIN_PILE if pile else ALBEDO_MIN_HARD), ALBEDO_MAX
+
