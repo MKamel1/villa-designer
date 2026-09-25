@@ -1,0 +1,7 @@
+{"kind": "study",
+ "note": "Demonstration on a 4 x 5 x 3 m bedroom shoebox, Cairo West weather. Not a project decision.",
+ "base": {"mode": "cooled"},
+ "sweep": {"azimuth_deg": [0, 90, 180, 270],
+           "wwr": [0.2, 0.35, 0.5],
+           "overhang_m": [0.0, 0.6, 1.2],
+           "glass": [{"u_w_m2k": 1.8, "shgc": 0.40, "vt": 0.60}, {"u_w_m2k": 1.4, "shgc": 0.25, "vt": 0.50}]}}
