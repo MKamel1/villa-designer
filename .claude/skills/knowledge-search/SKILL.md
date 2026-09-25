@@ -11,8 +11,9 @@ Read [the decision](../../../docs/decisions/ADR-0018-knowledge-index.md).
    printed pages.
 2. Full text: `python scripts/knowledge.py search "hall landing width"`
    (MCP `search_books`). `match: all` hits come before `partial`.
-3. By meaning, when the wording differs: the client's RAG corpus
-   `archpipe_books` on the workstation (`semantic_search`).
+3. By meaning, when the wording differs: `python scripts/semantic.py "question"`
+   (MCP `semantic_books`), which queries the client's RAG corpus `archpipe_books`
+   on the workstation: 32 documents, 19 815 passages, the scanned Unwin included.
 4. Read before citing: `knowledge.py read <book> <pdf_page>`, or MCP
    `book_page`. If the hit is marked FIG, read the page image
    (`knowledge.py image <book> <pdf_page>`): the value may be in a drawing.

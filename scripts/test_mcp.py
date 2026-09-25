@@ -37,9 +37,9 @@ async def main():
         async with ClientSession(read, write) as client:
             await client.initialize()
             tools = await client.list_tools()
-            assert len(tools.tools) == 21
+            assert len(tools.tools) == 22
             assert {'stage_context', 'lookup_evidence', 'review_stage', 'check_fixture_sources', 'search_luminaires', 'luminaire_alternates', 'luminaire_download_links', 'propose_luminaires'} <= {t.name for t in tools.tools}
-            print('PASS real MCP handshake and twenty-one typed tools')
+            print('PASS real MCP handshake and twenty-two typed tools')
             context = payload(await client.call_tool('stage_context', {'stage':0}))
             assert context['example'] and 'budget' in context['missing_inputs']
             evidence = payload(await client.call_tool('lookup_evidence', {'query':'shading','stage':3}))

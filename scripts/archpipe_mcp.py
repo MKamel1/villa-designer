@@ -304,6 +304,18 @@ def search_books(query: str, book: str | None = None, limit: int = 10) -> dict:
     return {'hits': k.search(query, book=book, limit=limit)}
 
 
+@mcp.tool(annotations=ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=True))
+def semantic_books(query: str, k: int = 8) -> dict:
+    """Search the held books BY MEANING (the client's RAG corpus on the workstation).
+
+    Use when a question is worded differently from the books; for exact terms and
+    numbers use search_books. Hits give the book [registry id] and PDF page: read the
+    page with book_page and cite the PRINTED page before relying on it."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from semantic import search
+    return {'hits': search(query, max(1, min(k, 20)))}
+
+
 @mcp.tool(annotations=READ)
 def lookup_book_term(term: str, limit: int = 20) -> dict:
     """The dictionary: back-of-book index entries for a term across every held book."""

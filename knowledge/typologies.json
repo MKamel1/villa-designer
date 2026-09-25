@@ -1,0 +1,157 @@
+{
+  "note": "Villa partis for concept generation. Properties cite qualitative evidence cards; the generator uses the 'generator' block; the critic scores every variant the same way whatever its parti.",
+  "typologies": [
+    {
+      "id": "bar",
+      "name": "Linear bar",
+      "organization": "linear",
+      "cards": [
+        "ching-linear",
+        "lechner-east-west-axis"
+      ],
+      "strengths": [
+        "every room gets an exterior exposure",
+        "simple structure and services runs",
+        "an east-west bar puts most glass on north and south"
+      ],
+      "cautions": [
+        "long circulation spine; privacy depends on where the spine runs",
+        "a long west end needs shading"
+      ],
+      "generator": {
+        "footprint": "rectangle",
+        "aspect_min": 2.5,
+        "spine": "single-loaded or central"
+      }
+    },
+    {
+      "id": "L",
+      "name": "L-shape",
+      "organization": "linear (bent)",
+      "cards": [
+        "ching-linear"
+      ],
+      "strengths": [
+        "two wings separate public and private",
+        "the inside corner makes a sheltered garden"
+      ],
+      "cautions": [
+        "the corner room is dark and hard to plan",
+        "one wing may face east or west"
+      ],
+      "generator": {
+        "footprint": "L",
+        "wing_ratio": [
+          0.4,
+          0.6
+        ]
+      }
+    },
+    {
+      "id": "U",
+      "name": "U-shape / three-sided court",
+      "organization": "centralized around an exterior court",
+      "cards": [
+        "ching-centralized",
+        "lechner-courtyard-hot-dry"
+      ],
+      "strengths": [
+        "a shaded outdoor room in a hot-dry climate",
+        "strong privacy from the street"
+      ],
+      "cautions": [
+        "more envelope per floor area",
+        "the court must open to prevailing breeze and away from low sun"
+      ],
+      "generator": {
+        "footprint": "U",
+        "court_open_side": "choose from wind and view"
+      }
+    },
+    {
+      "id": "courtyard",
+      "name": "Courtyard (four-sided)",
+      "organization": "centralized",
+      "cards": [
+        "ching-centralized",
+        "lechner-courtyard-hot-dry"
+      ],
+      "strengths": [
+        "self-shaded court, cross-ventilation, introverted privacy"
+      ],
+      "cautions": [
+        "circulation around the court costs area",
+        "court proportion drives daylight and sun"
+      ],
+      "generator": {
+        "footprint": "ring",
+        "court_min_ratio": 0.15
+      }
+    },
+    {
+      "id": "pavilions",
+      "name": "Pavilion cluster",
+      "organization": "clustered",
+      "cards": [
+        "ching-clustered"
+      ],
+      "strengths": [
+        "zones separated by garden",
+        "grows or phases easily"
+      ],
+      "cautions": [
+        "long links and more envelope",
+        "privacy only if links avoid the hosting route"
+      ],
+      "generator": {
+        "footprint": "cluster",
+        "links": "covered or enclosed"
+      }
+    },
+    {
+      "id": "pinwheel",
+      "name": "Pinwheel",
+      "organization": "radial (pinwheel variant)",
+      "cards": [
+        "ching-radial"
+      ],
+      "strengths": [
+        "wings reach separate site features and views",
+        "central hall organises everything"
+      ],
+      "cautions": [
+        "the hub must be generous",
+        "wings multiply facade orientations"
+      ],
+      "generator": {
+        "footprint": "pinwheel",
+        "arms": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": "grid",
+      "name": "Grid / modular block",
+      "organization": "grid",
+      "cards": [
+        "ching-grid"
+      ],
+      "strengths": [
+        "structure, services and rooms share one module",
+        "efficient construction"
+      ],
+      "cautions": [
+        "risk of monotony; hierarchy must come from size and void"
+      ],
+      "generator": {
+        "footprint": "rectangle",
+        "module_mm": [
+          3600,
+          4800
+        ]
+      }
+    }
+  ]
+}

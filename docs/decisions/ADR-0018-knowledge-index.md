@@ -61,6 +61,19 @@ regression test.
   - as an MCP server, `app.serve --data-dir <same>`, launched with
     `conda run --no-capture-output` through ssh.
 
+**Completed 2026-09-25:** all 32 documents were ingested in 3.0 h, into
+19 815 vector points, with none quarantined. The scanned Unwin was OCR'd and
+is searchable. Known-answer checks:
+- the kitchen work aisle question finds NKBA p. 6;
+- the courtyard question finds Lechner 9.2, the section cited by card
+  `lechner-courtyard-hot-dry`;
+- the stair headroom question finds Metric Handbook 4.3.
+
+From the laptop, run `scripts/semantic.py`. It starts the corpus's own MCP
+server on the workstation and calls `semantic_search`. The stock
+`mcp_verify_client` truncates its printout at 4 000 characters, so it is
+not used.
+
 ## Rules learned while building it
 
 - **Filenames lie; the copyright page decides.** The file named "Neufert

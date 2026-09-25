@@ -2865,6 +2865,127 @@
       "verification": "Read on the held original page 2026-09-25.",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ching-centralized",
+      "source_id": "form-space-order",
+      "edition": "5th ed., 2023 (Wiley, ISBN 9781119853374)",
+      "locator": "Ch. 4 Organization, Centralized Organizations (printed page 234)",
+      "stages": [
+        3
+      ],
+      "summary": "A stable, concentrated composition: secondary spaces grouped around a large, dominant, regular central space; secondary spaces may differ to respond to function or site.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Describes formal and spatial properties; the design still has to be tested against the brief and site.",
+      "exceptions": "Qualitative principle: informs and explains a concept; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "ching-linear",
+      "source_id": "form-space-order",
+      "edition": "5th ed., 2023 (Wiley, ISBN 9781119853374)",
+      "locator": "Ch. 4 Organization, Linear Organizations (printed page 244)",
+      "stages": [
+        3
+      ],
+      "summary": "A series of spaces, related directly or through a separate linear space; every space along the sequence has an exterior exposure; expresses direction and growth and is terminated by a dominant space, entrance or the site.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Describes formal and spatial properties; the design still has to be tested against the brief and site.",
+      "exceptions": "Qualitative principle: informs and explains a concept; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "ching-radial",
+      "source_id": "form-space-order",
+      "edition": "5th ed., 2023 (Wiley, ISBN 9781119853374)",
+      "locator": "Ch. 4 Organization, Radial Organizations (printed page 254)",
+      "stages": [
+        3
+      ],
+      "summary": "A dominant central space from which linear arms extend; extroverted, reaching out to and attaching to site features; the pinwheel is a variant with arms off the sides of a square centre.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Describes formal and spatial properties; the design still has to be tested against the brief and site.",
+      "exceptions": "Qualitative principle: informs and explains a concept; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "ching-clustered",
+      "source_id": "form-space-order",
+      "edition": "5th ed., 2023 (Wiley, ISBN 9781119853374)",
+      "locator": "Ch. 4 Organization, Clustered Organizations (printed page 260)",
+      "stages": [
+        3
+      ],
+      "summary": "Spaces related by proximity or a shared visual trait; flexible and accepts growth and change; no inherent place of importance, so significance must be given by size, form or orientation.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Describes formal and spatial properties; the design still has to be tested against the brief and site.",
+      "exceptions": "Qualitative principle: informs and explains a concept; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "ching-grid",
+      "source_id": "form-space-order",
+      "edition": "5th ed., 2023 (Wiley, ISBN 9781119853374)",
+      "locator": "Ch. 4 Organization, Grid Organizations (printed page 270)",
+      "stages": [
+        3
+      ],
+      "summary": "Forms and spaces regulated by a three-dimensional grid; the regular field lets dissimilar spaces share common reference lines (structure, services, modules).",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Describes formal and spatial properties; the design still has to be tested against the brief and site.",
+      "exceptions": "Qualitative principle: informs and explains a concept; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "lechner-courtyard-hot-dry",
+      "source_id": "lechner-hcl",
+      "edition": "5th ed., 2021 (Wiley, EPUB)",
+      "locator": "Ch. 15 Tropical Architecture, Executive Summary; Ch. 9.2 Historical and indigenous use of passive cooling",
+      "stages": [
+        1,
+        3
+      ],
+      "summary": "Courtyard houses suit hot and dry climates; deep courtyards and atriums are beneficial there, with windows facing the self-shaded court.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Climate-type guidance; confirm with the site weather file and the thermal study.",
+      "exceptions": "Qualitative principle: informs and explains a concept; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "lechner-east-west-axis",
+      "source_id": "lechner-hcl",
+      "edition": "5th ed., 2021 (Wiley, EPUB)",
+      "locator": "Ch. 22 Checklist for designing net-zero buildings, 22.3 Form",
+      "stages": [
+        1,
+        3
+      ],
+      "summary": "Prefer a building elongated along an east-west axis, maximising south and north windows and minimising east and west ones.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "General plan-shape guidance; test against the site's views, access and the window study.",
+      "exceptions": "Qualitative principle: informs and explains a concept; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
     }
   ],
   "precedents": [
