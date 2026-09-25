@@ -415,6 +415,39 @@
       ],
       "complete": true,
       "note": "New 2026-09-25. Ground taken as the lowest level; openable area taken as the whole window."
+    },
+    "CIRC-02": {
+      "parameters": {},
+      "cards": [
+        "mitton-foyer-transition",
+        "mitton-air-lock-buffer"
+      ],
+      "complete": true,
+      "note": "Advisory, qualitative: no measurement. Pattern Language is not held; its ideas are cited through held sources."
+    },
+    "VIEW-01": {
+      "parameters": {},
+      "cards": [
+        "ching-view-framing"
+      ],
+      "complete": true,
+      "note": "Advisory, qualitative: no measurement (CLAUDE.md discipline 4)."
+    },
+    "FURN-01": {
+      "parameters": {},
+      "cards": [
+        "ukadm-furniture-layout-demonstrable"
+      ],
+      "complete": true,
+      "note": "Geometric fact on the model's furniture; catalogue footprints are placeholders until products are chosen (AD M Appendix D gives minimum sizes)."
+    },
+    "FURN-03": {
+      "parameters": {},
+      "cards": [
+        "ukadm-furniture-layout-demonstrable"
+      ],
+      "complete": true,
+      "note": "As FURN-01."
     }
   }
 }

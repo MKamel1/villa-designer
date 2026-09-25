@@ -3806,6 +3806,78 @@
       "verified_value": 4500,
       "original_page_checked": true,
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mitton-foyer-transition",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 3, Foyer and entry areas (printed page 57)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "The foyer/entry must function as a transition space from outside to inside, usually beside the most public rooms, the coat closet and a guest WC.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Residential planning practice (US); advisory.",
+      "exceptions": "Qualitative: informs a finding's explanation; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "mitton-air-lock-buffer",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "locator": "Chapter 3, Figure 3.5a caption (printed page 59)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "In an extreme climate an air lock serves as a buffer between outside and inside air temperatures.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Climate-dependent; relevant to a hot-arid site.",
+      "exceptions": "Qualitative: informs a finding's explanation; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "ching-view-framing",
+      "source_id": "form-space-order",
+      "edition": "5th ed., 2023 (Wiley, ISBN 9781119853374)",
+      "locator": "Chapter 4 Form & Space, View (printed page 213)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "A small opening can frame a view like a painting on a wall; a long narrow one hints at what lies beyond; a large one opens the room to a broad vista.",
+      "category": "qualitative_principle",
+      "status": "verified",
+      "unit": null,
+      "conditions": "Formal principle; whether an outlook is worth framing is judged on site.",
+      "exceptions": "Qualitative: informs a finding's explanation; never scored as a measurement.",
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
+    },
+    {
+      "id": "ukadm-furniture-layout-demonstrable",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "para 2.25e and NOTE (printed page 18); Appendix D furniture schedule (printed page 56)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "It must be demonstrable, e.g. by dimensioned layouts, that the bedroom provisions can be achieved, with furniture of the Appendix D sizes.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": null,
+      "conditions": "UK AD M M4(2); the same demonstration underlies every furniture-fit check.",
+      "exceptions": null,
+      "verification": "Passage read on the held original 2026-09-25; paraphrase checked against the text.",
+      "applies_when": {}
     }
   ],
   "precedents": [

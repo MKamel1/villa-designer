@@ -344,7 +344,6 @@ def _finding(rule_id: str, severity: str, message: str, *, where: str = "",
 # the same fault as inventing a clause number.
 # --------------------------------------------------------------------------
 
-_NEUFERT = "Neufert, Architects' Data"
 
 RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('legacy-' + r.id,)) for r in (
     # ---- Stage 3 (Order): the concept decisions ------------------------
@@ -406,9 +405,9 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
     ),
     Rule(
         "CIRC-02", "Entrance has a threshold zone", 3, "computed",
-        "Alexander, A Pattern Language -- 110 Main Entrance, 112 Entrance "
-        "Transition, 130 Entrance Room; "
-        f"{_NEUFERT} -- entrances: a draught lobby or threshold zone",
+        "Mitton & Nystuen, Residential Interior Design 4th ed. p. 57 (the foyer/entry must function as a "
+        "transition space from outside to inside, beside the coat closet and guest WC) and p. 59 (an air "
+        "lock buffers outside and inside air); after Alexander, A Pattern Language 110/112/130",
         note="Severity advisory, kind computed: whether the entrance opens "
              "into a circulation space is a topological test on the model, "
              "even though the consequence is comfort rather than a minimum.",
@@ -427,7 +426,8 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
     # ---- Stage 4 (Rooms): the method doc names each of these -----------
     Rule(
         "AREA-01", "Room meets its minimum floor area", 4, "computed",
-        f"{_NEUFERT} -- minimum floor areas by room type",
+        "Bedrooms: NDSS via Metric Handbook 7th ed. p. 22-4; living/dining/study: IRC R304.1 via Mitton "
+        "p. 143; bathroom and WC: Metric Handbook Fig. 22.12 (M4(2)); kitchens excepted (IRC R304.1)",
         note="Meaningful against brief targets as early as Stage 2, but the "
              "implemented rule reads Room.area_m2 off a drawn polygon, which "
              "does not exist until Stage 4.",
@@ -477,7 +477,9 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
     ),
     Rule(
         "FURN-01", "Furniture fits where it is placed", 4, "computed",
-        f"Geometric clash against the wall solid; footprints from {_NEUFERT}",
+        "UK AD M Vol 1 para 2.25e: it must be demonstrable with dimensioned layouts that the furniture "
+        "(Appendix D schedule) fits; a piece inside a wall or outside the room demonstrates nothing. "
+        "Footprints are the model's product sizes, else catalogue placeholders",
         remedies=(
             Remedy("Move or rotate the piece clear of the wall."),
             Remedy("Specify a smaller piece.",
@@ -491,7 +493,8 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
     Rule(
         "FURN-02", "Furniture clearance achieved versus required", 4,
         "computed",
-        f"{_NEUFERT} -- clearances by furniture type",
+        "Per furniture type (catalogue source on each piece): AD M para 2.25 and Diagram 2.5, NKBA, "
+        "Time-Saver pp. 81/87, Mitton Figs. 4.6 and 8.13",
         note="The method document's own worked example of a fix ladder.",
         remedies=(
             Remedy("Move the furniture.",
@@ -508,7 +511,8 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
     ),
     Rule(
         "FURN-03", "Two pieces do not occupy the same floor", 4, "computed",
-        f"Geometric clash between footprints; footprints from {_NEUFERT}",
+        "UK AD M Vol 1 para 2.25e: a dimensioned furniture layout must be achievable; two pieces "
+        "occupying the same floor are not. Footprints are the model's product sizes, else catalogue placeholders",
         remedies=(
             Remedy("Move one of the two pieces.",
                    cost="Both are placements; nothing else is implicated."),
@@ -588,7 +592,8 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
     Rule(
         "CIRC-03", "A route of minimum width connects the room's doors", 4,
         "computed",
-        f"{_NEUFERT} -- circulation: 900 mm minimum clear width in a dwelling",
+        "UK AD M Vol 1 para 2.22a (900 mm hall), applied to routes inside rooms by client decision "
+        "2026-09-25; Mitton p. 68 (36 in) corroborates",
         remedies=(
             Remedy("Move the furniture to open a route between the doors."),
             Remedy("Remove a piece.",
@@ -604,7 +609,8 @@ RULES: dict[str, Rule] = {r.id: replace(r, evidence_refs=r.evidence_refs or ('le
     Rule(
         "VIEW-01", "Whether a window frames a view worth keeping", 4,
         "advisory",
-        "Alexander, A Pattern Language -- 134 Zen View",
+        "Ching, Architecture: Form, Space, and Order 5th ed. p. 213 (an opening can frame a view like a "
+        "painting, or open a room to a broad vista); after Alexander, A Pattern Language 134 Zen View",
         note="The method document names 134 as its example of a pattern that "
              "must never be presented as measured: whether an outlook is "
              "worth framing is a judgement about a place, and no number in "

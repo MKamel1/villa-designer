@@ -171,11 +171,8 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
 # ---- non-furniture planning dimensions ---------------------------------
 # Each entry: (value_mm, citation). Used by rules.py.
 PLANNING = {
-    "corridor_min":        (900,  "Neufert, Architects' Data -- circulation: 900 mm minimum clear width in a dwelling"),
-    "corridor_preferred":  (1200, "Neufert, Architects' Data -- circulation: 1200 mm for two people to pass"),
+    "corridor_min":        (900,  "UK AD M Vol 1 para 2.22a -- hall or landing at least 900 mm clear (Mitton p. 68: 36 in)"),
     "door_clear_entrance": (775,  "UK AD M Vol 1 (2015) para 2.20 -- principal private entrance: 775 mm minimum clear opening"),
-    "ceiling_min":         (2400, "General practice / common code minimum for habitable rooms; Neufert cites 2500 mm as preferred"),
-    "wheelchair_turn":     (1500, "Neufert, Architects' Data -- accessibility: 1500 mm turning circle"),
     "daylight_ratio":      (0.08, "IRC R303.1 as quoted in Mitton & Nystuen, Residential Interior Design 4th ed. p. 92 -- glazing area at least 8 % of floor area in habitable rooms (code minimum; the unsourced legacy 1/8 was replaced 2026-09-25)"),
     "tv_view_min_ratio":   (1.0,  "Mitton & Nystuen 4th ed. p. 86, Fig. 4.10b -- UHD/4K: viewing distance 1 to 1.5 times the screen size"),
     "tv_view_max_ratio":   (1.5,  "Mitton & Nystuen 4th ed. p. 86, Fig. 4.10b -- UHD/4K: viewing distance 1 to 1.5 times the screen size"),

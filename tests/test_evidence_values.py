@@ -83,6 +83,10 @@ ORIGINAL = {
 
 # Presence cards (no number): the requirement text is re-read from the original too.
 PRESENCE = {
+    "mitton-foyer-transition": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 68, ["as a transition space from outside to inside"]),
+    "mitton-air-lock-buffer": ("residential-interior-design/Mitton, Nystuen - Residential Interior Design (4th ed, 2021).pdf", 70, ["an air lock will serve as a buffer between outside and inside air"]),
+    "ching-view-framing": ("form-space-order/Ching - Architecture Form Space and Order (5th ed, 2023).pdf", 228, ["frame a view so that we see it as a painting on a wall"]),
+    "ukadm-furniture-layout-demonstrable": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 25, ["It can be demonstrated (for example by providing dimensioned bedroom layouts"]),
     "adb-inner-room-2-11": ("uk-ad-b1/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf", 26, ["An inner room is permitted when it is one of the following"]),
     "ukadg-dwelling-wc-entrance-storey": ("uk-ad-g/ADG_with_2024_amendments.pdf", 30,
                                           ["least one sanitary convenience", "principal/"]),
@@ -144,7 +148,7 @@ class RuleAuditTests(unittest.TestCase):
         self.assertNotIn("MIN_AREA_M2.kitchen", p)                   # IRC excepts kitchens
         self.assertEqual(rows["AREA-01"]["status"], "verified")
         # only rules whose every number is verified AND whose mapping is complete; CIRC-03 by client decision 2026-09-25
-        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01", "DIM-01", "FURN-02", "DOOR-02", "TV-01", "AREA-01", "FIRE-01"})
+        self.assertEqual({k for k, r in rows.items() if r["enabled_for_approval"]}, {"CIRC-03", "LIGHT-01", "SAN-01", "DOOR-01", "DIM-01", "FURN-02", "DOOR-02", "TV-01", "AREA-01", "FIRE-01", "CIRC-02", "VIEW-01", "FURN-01", "FURN-03"})
 
     def test_a_changed_catalogue_value_unverifies_the_parameter(self):
         from archpipe import catalogue as cat

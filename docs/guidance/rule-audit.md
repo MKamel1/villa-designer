@@ -120,3 +120,16 @@ the mapping marked complete.
 Two assumptions are stated in the rule: ground is the lowest level, and the whole window counts as openable.
 - **Demo apartment:** its two bedrooms are inner rooms (CIRC-01 warns), but they are at ground level with escape-size windows, so FIRE-01 is quiet.
 - **Pilot concepts:** no findings, because their bedrooms open onto the landing.
+
+## Every rule sourced (2026-09-25)
+
+| Rule | Basis now |
+|---|---|
+| CIRC-02 (advisory) | Mitton p. 57 (the foyer as the transition from outside to inside, beside the coat closet and guest WC) and p. 59 (an air lock buffers the climate). *A Pattern Language* is not held, so its ideas are cited through held sources. |
+| VIEW-01 (advisory) | Ching, *Form, Space, and Order* p. 213 (an opening frames a view). Advisory findings still carry no measurement. |
+| FURN-01, FURN-03 | AD M para 2.25e: the furniture layout must be demonstrable (Appendix D sizes). A piece inside a wall, or two pieces on the same floor, demonstrates nothing. Footprints are product sizes, and catalogue defaults are placeholders. |
+| AREA-01, FURN-02, CIRC-03 | Their rule-level references now name the real sources instead of Neufert. |
+
+Three unused, unsourced catalogue entries (`corridor_preferred`, `ceiling_min`, `wheelchair_turn`) were removed. No rule or catalogue value now cites the unverified Neufert.
+
+**Status:** every rule is verified. All are enabled for approval except CIRC-01, deliberately: its privacy judgement is a brief requirement. The fire consequence of an inner room is FIRE-01.
