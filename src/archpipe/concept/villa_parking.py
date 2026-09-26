@@ -38,6 +38,28 @@ def clear_at(x):
 
 
 X_LOW = round(RAMP_X0 + (2.0 + B_FFL + BUILDUP) / DECK_TOP * (RAMP_X1 - RAMP_X0), 3)   # clear = 2.0 m (5.377)
+DOOR_H = 2.10            # ASSUMED standard door leaf height; the Revit types are sized to it (build_villa_option)
+HEAD_ZONE = 0.10         # frame + lintel above the leaf, ASSUMED
+WORK_H = 2.0             # client: under 2.0 m clear is storage; a room door under the ramp may drop to this leaf
+LOW_DOOR_MIN = 1.20      # a store under the low end of the ramp gets a cupboard-height door, not a room door
+
+
+def door_fit(lo, hi, width, occupancy):
+    """A door on a wall under the ramp between x lo..hi: slide it to the high (deck) end and size its leaf to the
+    clear height less the frame. Returns (x_centre, leaf_height, clear_at_low_jamb, kind): 'full' (2.10 leaf),
+    'reduced' (2.0-2.1 leaf, a room door where the ramp limits it), 'low' (a store's cupboard door, >= 1.2) or
+    'none' (no door fits: the check fails)."""
+    x0 = max(lo + 0.1, hi - 0.1 - width)
+    xc = round(x0 + width / 2, 3)
+    clear = clear_at(x0)
+    leaf = min(DOOR_H, round(int((clear - HEAD_ZONE + 1e-9) * 100) / 100.0, 2))
+    if leaf >= DOOR_H - 1e-9:
+        return xc, DOOR_H, clear, "full"
+    if leaf >= WORK_H - 1e-9:
+        return xc, leaf, clear, "reduced"
+    if occupancy == "store" and leaf >= LOW_DOOR_MIN:
+        return xc, leaf, clear, "low"
+    return xc, leaf, clear, "none"
 
 
 def _back(cars, spine_entry=None):

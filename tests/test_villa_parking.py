@@ -118,6 +118,42 @@ class YardWall(unittest.TestCase):
         self.assertNotIn("infill", RS.build(VO.s1()))
 
 
+class UnderRampFit(unittest.TestCase):
+    """Client review r7: walls came through the ramp and a 2.1 m door opened under a 1.9 m soffit."""
+
+    def test_every_option_fits_under_the_soffit(self):
+        for lay in P.options():
+            sp = RS.build(lay)
+            self.assertEqual(RS.clearance_problems(lay, sp["walls"], sp["doors"], sp["infills"]), [], lay["id"])
+
+    def test_a_full_height_cross_wall_is_caught(self):
+        lay = P.option("u", 2)
+        sp = RS.build(lay)
+        cross = [w for w in sp["walls"] if w["level"] == "B" and abs(w["x0"] - 5.377) < 1e-6]
+        cross[0]["height"] = RS.WALL_H                                   # the as-built defect
+        self.assertTrue(RS.clearance_problems(lay, sp["walls"], sp["doors"], sp["infills"]))
+
+    def test_a_flat_fence_wall_without_infill_is_caught(self):
+        lay = P.option("u", 2)
+        sp = RS.build(lay)
+        self.assertTrue(any("open under the soffit" in p
+                            for p in RS.clearance_problems(lay, sp["walls"], sp["doors"], [])))
+
+    def test_a_room_door_under_the_low_ramp_is_caught(self):
+        lay = P.option("u", 1)
+        sp = RS.build(lay)
+        d = [d for d in sp["doors"] if d.get("rooms") == ["lounge", "store-ramp"]][0]
+        d.update(x=4.497, height=2.10)                                   # where and how it was built
+        self.assertTrue(any(p.startswith("door") for p in
+                            RS.clearance_problems(lay, sp["walls"], sp["doors"], sp["infills"])))
+
+    def test_door_fit_kinds(self):
+        self.assertEqual(P.door_fit(3.617, 5.377, 0.8, "store")[3], "low")
+        self.assertEqual(P.door_fit(3.617, 5.377, 0.8, "utility")[3], "none")
+        self.assertEqual(P.door_fit(5.377, 7.377, 0.8, "utility")[3], "reduced")
+        self.assertEqual(P.door_fit(9.227, 11.2, 0.8, "wc")[3], "full")
+
+
 class Negative(unittest.TestCase):
     def test_a_closed_windowless_room_still_fails_window(self):
         lay = P.option("u", 1)

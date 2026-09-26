@@ -374,3 +374,41 @@ there would have passed `window` with no daylight at all. It was missed because 
 dropped; `test_villa_parking.Negative.test_a_closed_windowless_room_still_fails_window` failed on the real P1
 layout before the fix and passes after it. The same pass removed the store's side on the client's kept 1.40 m
 NE yard wall as a window face (`YardWall.test_store_side_on_the_wall_is_not_a_window`).
+
+## Walls came through the ramp, and a 2.1 m door opened under a 1.9 m soffit (2026-09-26, client review r7)
+
+Two model errors the client found in the round-7 PDFs; I had reviewed the same 3D pages and missed both.
+
+1. **Walls through the ramp and deck.** `revit_spec` clipped wall heights under the ramp with a guard meant to spare
+   the villa's east face (`min(y) < YE + 0.05: skip`). Every cross wall of the rooms under the ramp *starts* on
+   that face, so every one was skipped and built 2.8 m tall, 0.5-1.35 m through the ramp and deck. The wall along
+   the fence took the lowest clear height (1.45 m) over its whole length, leaving 850 mm open under the deck.
+2. **A door taller than the room it opens into.** Doors were put at the middle of the shared wall with whatever
+   leaf the template had; nothing compared a door head with the clear height where it stands. The lounge door to
+   the store under the ramp sat where the clear height is 1.91 m.
+
+Why it was missed: new element types (a sloping ramp, a deck) were added without a geometric post-condition
+against what they touch, and my check of the built model was a look at the images. A look is not a check.
+
+Guards: `revit_spec.clearance_problems` (walls above the soffit, gaps under it, door leaf + frame vs clear
+height), run on the spec (elevation-check row, `tests/test_villa_parking.UnderRampFit`) **and on Revit's read-back**
+(the builder now reads back every wall top and every door's type size; the checks page has a BUILT row). Proven
+on the real as-built specs: 8 problems in P1/P3, 9 in P2/P4, before the fix; 0 after. Doors under the ramp are
+placed by `villa_parking.door_fit` (slid to the high end, leaf sized: full 2.10, reduced to >= 2.0 for rooms,
+cupboard height for stores, else the check fails), and the builder makes exact-size door types instead of the
+nearest stock type.
+
+Rule going forward: any new element that bounds a space (slab, ramp, deck, beam, infill) gets a clearance
+post-condition against its neighbours, checked on the Revit read-back, before a PDF goes out.
+
+## Smaller catches in the same session (2026-09-26)
+
+- **A section drawn mirrored.** My drawn section across the NE yard wall put east on the right while looking
+  from the street toward the villa; facing +x, east (+y) is on the LEFT, as Revit's own export showed. I had
+  labelled Revit's (correct) image as mirrored. Guard: the drawn section and Revit's export sit side by side in
+  the PDF, same direction; derive left/right from the view direction, never assume.
+- **A locked model crashed the batch build.** `os.remove` on an option model the client had open in Revit killed
+  the run after P2 and left an old read-back. The builder now saves beside a locked file (`-v2`) and says so.
+- **A wall position assumed as fact.** The NE yard wall's thickness and side were labelled ASSUMED and sent for
+  confirmation before building on them; the client corrected the side (flush with the villa face, not the
+  column face). Keep asking before an assumption drives geometry.

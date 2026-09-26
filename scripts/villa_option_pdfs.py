@@ -184,6 +184,15 @@ def checks_page(pdf, lay, res, rb, op):
     for e in V.elevation_checks(lay):
         rows.append([e["status"].upper(), e["item"][:60], f"{e['achieved']} {e['unit']} (need {e['required']}); "
                      + (e["card"].split(" (")[0] + "; " + e["note"])[:200]])
+    if lay.get("parking2"):
+        sp = RS.build(lay)
+        doors = [d for d in rb.get("doors", []) if d.get("height")]
+        missing = len(rb.get("doors", [])) - len(doors)
+        probs = RS.clearance_problems(lay, rb.get("walls", []), doors, sp.get("infills", []))
+        ok = not probs and missing == 0 and rb.get("walls")
+        rows.append(["PASS" if ok else "FAIL", "BUILT: walls/doors under the ramp fit (Revit read-back)",
+                     ("%d problems" % len(probs) + ("; " + "; ".join(probs[:2]) if probs else "") +
+                      ("; %d doors without a read height" % missing if missing else ""))[:200]])
     rows.append(["BUILT", "Revit model", f"walls {rb['built'].get('walls')}, doors {rb['built'].get('doors')}, windows "
                  f"{rb['built'].get('windows')}, rooms {len(rb['rooms'])}, build failures {len(rb['failed'])}"])
     t = tx.table(cellText=rows, colLabels=["", "check", "result / basis"], colWidths=[0.07, 0.25, 0.68],

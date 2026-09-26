@@ -597,6 +597,21 @@ def elevation_checks(lay):
                                  % ((c - a) * (d - b), (cc - ca) * (d - b),
                                     math.degrees(math.atan2(E.FENCE_H / 1000 - 0.9, cc - a)),
                                     math.degrees(math.atan2(2.8 - 0.9, cc - ca)))))
+        from . import revit_spec as RS                                  # lazy: revit_spec imports this module
+        sp = RS.build(lay)
+        for d in sp["doors"]:
+            if "fit" not in d:
+                continue
+            kind = {"full": "room door", "reduced": "room door, leaf reduced by the ramp",
+                    "low": "cupboard-height door (store)", "none": "NO door fits"}[d["fit"]]
+            out.append(_row("door %s: leaf + frame under the ramp/deck" % " -> ".join(d["rooms"]),
+                            round(d["height"] + P.HEAD_ZONE, 2), round(d["clear"], 2),
+                            "geometry; leaf %.2f (%s), frame %.2f ASSUMED" % (d["height"], kind, P.HEAD_ZONE),
+                            d["fit"] != "none", "m"))
+        probs = RS.clearance_problems(lay, sp["walls"], sp["doors"], sp.get("infills", []))
+        out.append(_row("walls and doors under the ramp/deck fit under its soffit (spec)", len(probs), 0,
+                        "geometry post-condition (revit_spec.clearance_problems)", not probs, "problems",
+                        note="; ".join(probs[:3])))
         gate = round((FENCE_E - wy1) * 1000)
         out.append(_row("car gate: yard wall to east fence", gate, w_need, wc, gate >= w_need, "mm"))
     if lay.get("parking"):

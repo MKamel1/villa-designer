@@ -141,6 +141,50 @@ def host_at(walls, level_name, x, y):
     return best if bd < 0.2 else None
 
 
+def sym_dims(sym):
+    """(width, height) in metres of a door/window type, from whichever width/height parameters it carries."""
+    out = []
+    for bips in ((BuiltInParameter.DOOR_WIDTH, BuiltInParameter.FAMILY_WIDTH_PARAM),
+                 (BuiltInParameter.DOOR_HEIGHT, BuiltInParameter.FAMILY_HEIGHT_PARAM)):
+        v = None
+        for bip in bips:
+            p = sym.get_Parameter(bip)
+            if p is not None and p.HasValue and p.AsDouble() > 0:
+                v = round(UnitUtils.ConvertFromInternalUnits(p.AsDouble(), UnitTypeId.Millimeters) / 1000.0, 3)
+                break
+        out.append(v)
+    return tuple(out)
+
+
+def sized_door(doc, syms, width, height, cache):
+    """A door type of exactly width x height (m): a stock type if one matches, else a resized duplicate of the
+    nearest (a near-miss would put the wrong hole in the wall: a 2.1 m leaf under a 1.9 m ramp soffit)."""
+    key = (round(width, 3), round(height, 3))
+    if key in cache:
+        return cache[key]
+    best, bd = None, 1e9
+    for s, _ in syms:
+        w, h = sym_dims(s)
+        if w is None or h is None:
+            continue
+        d = abs(w - width) + abs(h - height)
+        if d < 0.001:
+            cache[key] = s
+            return s
+        if d < bd:
+            best, bd = s, d
+    dup = best.Duplicate("archpipe door %.0f x %.0f" % (width * 1000, height * 1000))
+    for bips, v in (((BuiltInParameter.DOOR_WIDTH, BuiltInParameter.FAMILY_WIDTH_PARAM), width),
+                    ((BuiltInParameter.DOOR_HEIGHT, BuiltInParameter.FAMILY_HEIGHT_PARAM), height)):
+        for bip in bips:
+            p = dup.get_Parameter(bip)
+            if p is not None and not p.IsReadOnly:
+                p.Set(ft(v))
+                break
+    cache[key] = dup
+    return dup
+
+
 def solid_box(b_mm):
     x0, y0, z0, x1, y1, z1 = [UnitUtils.ConvertToInternalUnits(v, UnitTypeId.Millimeters) for v in b_mm]
     lp = CurveLoop()
@@ -189,24 +233,35 @@ def build_option(app, model, spec, folder):
         except Exception as exc:
             rb["failed"].append({"wall": w, "error": str(exc)})
     rb["built"]["walls"] = len(walls)
+    doc.Regenerate()
+    rb["walls"] = []
+    for wall, w in walls:                                   # what was built: for the clearance post-condition
+        bbx = wall.get_BoundingBox(None)
+        rb["walls"].append({"level": w["level"], "x0": w["x0"], "y0": w["y0"], "x1": w["x1"], "y1": w["y1"],
+                            "z_top": round(UnitUtils.ConvertFromInternalUnits(bbx.Max.Z, UnitTypeId.Millimeters)
+                                           / 1000.0, 3)})
     t.Commit()
 
     t = tx(doc, "doors and windows")
     dsyms, wsyms = symbols(doc, BuiltInCategory.OST_Doors), symbols(doc, BuiltInCategory.OST_Windows)
     nd = nw = 0
+    sized = {}
     for d in spec["doors"]:
         ln = spec["levels"][d["level"]]
         h = host_at(walls, ln, d["x"], d["y"])
         if h is None:
             rb["failed"].append({"door": d, "error": "no host wall"})
             continue
-        sym = nearest_symbol(dsyms, d["width"])
         try:
+            sym = sized_door(doc, dsyms, d["width"], d.get("height", 2.10), sized)
             if not sym.IsActive:
                 sym.Activate()
                 doc.Regenerate()
-            doc.Create.NewFamilyInstance(XYZ(ft(d["x"]), ft(d["y"]), lv[ln].Elevation), sym, h[0], lv[ln],
-                                         StructuralType.NonStructural)
+            inst = doc.Create.NewFamilyInstance(XYZ(ft(d["x"]), ft(d["y"]), lv[ln].Elevation), sym, h[0], lv[ln],
+                                                StructuralType.NonStructural)
+            w_, h_ = sym_dims(sym)
+            rb.setdefault("doors", []).append({"level": d["level"], "x": d["x"], "y": d["y"], "rooms": d.get("rooms"),
+                                               "width": w_, "height": h_})
             nd += 1
         except Exception as exc:
             rb["failed"].append({"door": d, "error": str(exc)})
@@ -285,19 +340,21 @@ def build_option(app, model, spec, folder):
                 rb["built"]["parking_" + name] = int(str(s.Id))
             except Exception as exc:
                 rb["failed"].append({"parking": name, "error": str(exc)})
-        inf = spec.get("infill")
-        if inf:                                      # on the kept NE yard wall, up to the sloping ramp soffit
+        infills = [("infill-ne-wall", spec.get("infill"))] +             [("infill-%d" % i, f) for i, f in enumerate(spec.get("infills", []))]
+        for key, inf in infills:                     # wall tops up to the sloping ramp soffit (NE yard wall, fence side)
+            if not inf:
+                continue
             try:
                 wcid = ElementId(BuiltInCategory.OST_Walls)
                 if not DirectShape.IsValidCategoryId(wcid, doc):
                     wcid = ElementId(BuiltInCategory.OST_GenericModel)
                 s = DirectShape.CreateElement(doc, wcid)
-                s.ApplicationId, s.ApplicationDataId = "archpipe-option", "infill-ne-wall"
+                s.ApplicationId, s.ApplicationDataId = "archpipe-option", key
                 g = List[GeometryObject]()
                 g.Add(solid_prism_xz(inf["profile"], inf["y0"], inf["y1"]))
                 s.SetShape(g)
-                s.Name = "INFILL on the kept NE yard wall, up to the ramp"
-                rb["built"]["infill_ne_wall"] = int(str(s.Id))
+                s.Name = "INFILL " + inf.get("what", "on the kept NE yard wall, up to the ramp")
+                rb["built"].setdefault("infills", []).append(int(str(s.Id)))
             except Exception as exc:
                 rb["failed"].append({"infill": inf, "error": str(exc)})
         for i, c in enumerate(pk["cars"]):
@@ -417,8 +474,14 @@ def build_option(app, model, spec, folder):
     t.Commit()
 
     dest = os.path.join(folder, "omar-option-%s.rvt" % spec["id"])
-    if os.path.exists(dest):
-        os.remove(dest)
+    n = 1
+    while os.path.exists(dest):
+        try:
+            os.remove(dest)
+        except Exception:                                  # open in the user's Revit: never touch it, save beside it
+            n += 1
+            dest = os.path.join(folder, "omar-option-%s-v%d.rvt" % (spec["id"], n))
+            note("%s is in use; saving as %s" % (spec["id"], os.path.basename(dest)))
     so = SaveAsOptions()
     so.OverwriteExistingFile = True
     doc.SaveAs(dest, so)
