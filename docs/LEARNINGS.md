@@ -273,3 +273,28 @@ Both were caught only because the failure was diagnosed before any code changed.
 - The real cause: `create_shape(...).geometry.verts` read inline frees the shape before the buffer is copied, so it returned nothing or garbage.
 - Keeping the shape in a variable fixed it. A second environment (the workstation) exposed the cause.
 - **Lesson:** a "broken library" diagnosis needs a minimal reproduction that does not share my own code's pattern.
+
+## Reading a real Revit 2021 model in 2027: two serialisation failures after a 17-minute upgrade (2026-09-25)
+
+- Opening `omar.rvt` (Revit 2021) in 2027 upgrades it for ~17 minutes on every run. Both first runs then died at the very end, writing JSON:
+  1. Arabic text in names broke IronPython's `json.dumps` (UnicodeDecodeError);
+  2. in 2027, `ElementId.Value` is a .NET Int64, which the IronPython json encoder rejects (`1586207L is not JSON serializable`).
+- Why missed: the extractor had only ever read models we authored ourselves, with ASCII names and in 2027-native files.
+- **Guards:** `revit/probe_villa_inventory.py` saves the upgraded copy (`ARCHPIPE_SAVE_UPGRADED`, new file only) BEFORE any serialisation, so a late failure no longer costs another upgrade; `_clean()` coerces strings to unicode and any non-Python number through float/int before writing.
+- **Lesson:** in a slow session, persist the expensive result first, then do the fragile work.
+- The original's SHA-256 is recorded in `out/villa/original-sha256-before.txt` and re-checked after each run.
+
+## Building the villa environment in Revit 2027: two API traps (2026-09-25)
+
+1. **`ElementId(int)` is ambiguous in 2027 under IronPython.** It fails with "Multiple targets could match:
+   ElementId(BuiltInParameter), ElementId(BuiltInCategory), ElementId(Int64)".
+   - **Guard:** `build_villa_env._eid()` passes `System.Int64`.
+2. **Mass-category DirectShapes are hidden in views by default.** The first 3D export showed the neighbours' windows
+   floating in the air with no buildings. The read-back check still passed, because bounding boxes exist whether or
+   not a view shows them.
+   - **Guard:** context volumes use Generic Models.
+   - **Lesson:** a geometric read-back proves the model, not the picture, so look at every exported view before
+     showing it.
+
+The checker `scripts/villa_env.py check` has its own negative tests in `tests/test_villa_env.py`. They cover
+azimuth, a fence height, a missing slab, a column span and a level elevation.
