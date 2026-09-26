@@ -3914,6 +3914,153 @@
       "exceptions": "Metals and mirrors are specular and outside this diffuse range.",
       "verification": "Read on the held original page 2026-09-25 (table values checked).",
       "applies_when": {}
+    },
+    {
+      "id": "mh-dwelling-ceiling-min",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 Houses and flats, 'Ceiling heights' (printed page 22-13)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Minimum reasonable ceiling height for domestic buildings (2.4 m preferable; NDSS: 2.3 m over 75 % of the floor area).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "m",
+      "verified_value": 2.3,
+      "original_page_checked": true,
+      "conditions": "Metric Handbook guidance quoting the former standard and NDSS; used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "Not covered by Building Regulations since 1985 (the book says so); London Plan prefers 2.5 m.",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mh-garage-min-width",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 38, Fig. 38.26 'A domestic garage of minimum dimensions' (printed page 38-15)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Minimum internal width of a single domestic garage (door 2300 mm).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 2400,
+      "original_page_checked": true,
+      "conditions": "A garage drawn for one car; the book states no statutory requirement. used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "Passenger access needs Fig. 38.27 (2800-3200 mm).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked) - value read from the dimensioned figure image (not in the text layer).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mh-garage-min-length",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 38, Fig. 38.26 (printed page 38-15)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Minimum internal length of a single domestic garage.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 4900,
+      "original_page_checked": true,
+      "conditions": "As mh-garage-min-width. used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked) - value read from the dimensioned figure image (not in the text layer).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mh-garage-passenger-width",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 38, Fig. 38.27 'A more generous garage permitting passenger access' (printed page 38-15)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Internal width of a single garage that lets a passenger get out (lower bound of 2800-3200 mm).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 2800,
+      "original_page_checked": true,
+      "conditions": "As mh-garage-min-width. used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked) - value read from the dimensioned figure image (not in the text layer).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadk-guarding-drop-dwelling",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Section 3, para 3.2a (printed page 22)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "In dwellings, provide guarding where people could fall from a height of more than 600 mm.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 600,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance; used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "Stairs: para 1.41 (sides of flights and landings, drop of more than 600 mm).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadk-guarding-height-internal",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Section 3, Diagram 3.1 (printed page 24)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Single family dwellings: guarding height to stairs, landings, ramps and edges of internal floors.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 900,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance; used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ukadk-guarding-height-external",
+      "source_id": "uk-ad-k",
+      "edition": "2013 edition, England",
+      "locator": "Section 3, Diagram 3.1 (printed page 24)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Single family dwellings: guarding height to external balconies (including Juliet balconies) and edges of roofs.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 1100,
+      "original_page_checked": true,
+      "conditions": "England Approved Document guidance; used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

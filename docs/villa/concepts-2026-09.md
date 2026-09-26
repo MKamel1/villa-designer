@@ -103,3 +103,82 @@ What C costs:
 - The lift reading of the core's "X" box needs confirming.
 - Engineering (structure, MEP, glare) is consultant scope.
 - Next step after your choice: the thermal and daylight run on the chosen concept, then the 3D views.
+
+---
+
+# Round 2 (2026-09-25): A chosen with the flex room; the stair; alternative B with parking
+
+**Plans:** `out/villa/concepts/villa-concepts-r2.pdf`. It holds A, then the stair-study variant A-bay, then B. Each
+has a plan sheet and a section sheet, and the section sheet carries the elevation-check table.
+
+## The stair: along the blind party wall (recommended)
+
+You said the stair can go anywhere, so I compared two positions on the same layout:
+- a straight flight along the party wall, which is **A**;
+- a dog-leg in the 2.2 m facade bay, which is **A-bay**.
+
+| | A: straight flight along the party wall | A-bay: dog-leg in the facade bay |
+|---|---|---|
+| Kids' bedrooms A / B (net) | 13.8 / 14.5 m² | 12.4 / 12.4 m² |
+| Parents' bedroom | 16.9 m² | 13.2 m² |
+| Open kitchen / flex room | 21.7 / 12.9 m² | 16.1 / 7.4 m² |
+| Circulation, GF / basement | 19.0 / 7.3 m² | 23.0 / 12.9 m² |
+| Study / game room | 13.6 m² | 18.2 m² |
+| Facade used by the stair | none | 2.2 m on each storey |
+
+**Why the party wall.** It is blind anyway: it faces the shared core and can never take a window. A stair there
+costs no daylight and leaves the whole facade to rooms.
+
+**How it works.** The flight's foot is at the street end of the basement. Its top lands beside your GF core door and
+the start of the GF hall, and the basement entrance hall is at the same end.
+
+**The one loss** is 4.6 m² of study. The study keeps its street and east windows.
+
+**The rejected positions:**
+- **Middle of the bar:** it would split the basement's open kitchen from the dining room.
+- **Rear:** it would cross the garden living room and the parents' suite.
+
+**Checked against AD K Table 1.1.** 16 risers of 187.5 mm and 15 goings of 240 mm, giving:
+- a pitch of 38.0°, against a 42° maximum;
+- 2R+G of 615, against a range of 550–700;
+- a run of 3.60 m, which fills the zone exactly.
+
+**Headroom (AD K 2.0 m).** The GF floor may overhang the first 1.02 m of the flight. The GF slab opening therefore
+runs from 4.84 to 7.42 m from the street wall.
+
+## Alternative B: secured parking behind the gate, extra room underneath
+
+The old sheets show two cars in tandem in the east strip behind a street gate, with rooms at basement level
+underneath. Under a street-level deck, a room at basement level would have only **1.45 m** of clear height. B
+lowers the room's floor instead:
+
+| Level | Street datum |
+|---|---|
+| Street and parking deck (cars drive in flat through a new gate) | ±0.00 |
+| Deck soffit (0.10 build-up + 0.25 slab, assumed; structural consultant) | −0.35 |
+| **Extra room floor** (5 risers of 190 down from the basement; clear height **2.40 m**, against 2.3 m minimum and 2.4 m preferable, Metric Handbook p. 22-13) | **−2.75** |
+| Basement and yard | −1.80 |
+| Fence top (2.20 m above the deck, so the parking is enclosed) | +2.20 |
+
+**Parking:**
+- The strip is 2.99 m wide, against 2.80 m for a garage with passenger access (Metric Handbook Fig. 38.27).
+- The deck is 9.82 m long, against 2 × 4.90 m for two cars in tandem (Fig. 38.26).
+- The deck edge drops 1.80 m to the yard, so it needs **1100 mm guarding** (AD K para 3.2 and Diagram 3.1).
+- A stair of 10 risers × 180 mm with 250 mm goings runs along the fence from the deck down to the yard.
+
+**The extra room** (25.8 m² net before its internal steps) is reached from the flex room. It has windows on the
+front-yard side and at the yard end.
+
+**What B costs:**
+- The basement east windows of the laundry, stair and flex room are lost; the flex room keeps its street window.
+- About 29 m² of the east yard at the street end becomes deck.
+- Cars park 1.2 m below the GF study's windows.
+- **The excavation goes about 1.2 m below the basement floor, beside the fence and the building's east footings.**
+  That needs underpinning or retaining, waterproofing under a car deck, and drainage. All three are structural and
+  consultant scope, and they are the main cost and risk of B.
+
+## Still open
+- Confirm that a perimeter beam runs along the party wall. If it does, the flight is kept 50 mm off it.
+- The apartment's other wet stacks.
+- The basement drainage level. B makes this more important, since the room under the deck sits at −2.75.
+- The thermal and daylight run on A, then 3D.

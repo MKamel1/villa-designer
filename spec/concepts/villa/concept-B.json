@@ -1,42 +1,54 @@
 {
  "layout": {
   "id": "B",
-  "title": "A + basement extension into the east yard + private front door",
-  "summary": "As A, with the basement extended 2.99 m to the east fence under a GF-level deck (family / play room, rooflights), and the street strip as our own front door off the shared entrance steps.",
+  "title": "A + secured parking behind the gate, extra room underneath",
+  "summary": "As A, with a street-level parking deck for two cars in tandem in the east strip behind a new gate, a stair from the deck down to the yard, and an extra room under the deck reached from the flex room, its floor lowered to -2.75 for headroom.",
   "levels": {
    "B": -1.8,
    "GF": 1.2
   },
   "rooms": {
-   "vestibule": {
-    "id": "vestibule",
-    "level": "GF",
-    "rect": [
-     1.787,
-     -28.671,
-     3.617,
-     -23.591
-    ],
-    "occupancy": "entrance",
-    "name": "private entrance vestibule"
-   },
    "study-game": {
     "id": "study-game",
     "level": "GF",
     "rect": [
-     3.617,
-     -27.371,
-     7.197,
+     1.787,
+     -26.371,
+     7.417,
      -23.591
     ],
     "occupancy": "study",
     "name": "study / game room"
    },
+   "store-gf": {
+    "id": "store-gf",
+    "level": "GF",
+    "rect": [
+     1.787,
+     -28.671,
+     3.617,
+     -26.371
+    ],
+    "occupancy": "store",
+    "name": "store"
+   },
+   "stair-gf": {
+    "id": "stair-gf",
+    "level": "GF",
+    "rect": [
+     3.617,
+     -28.671,
+     7.417,
+     -26.371
+    ],
+    "occupancy": "stair",
+    "name": "stair void + gallery"
+   },
    "corridor": {
     "id": "corridor",
     "level": "GF",
     "rect": [
-     3.617,
+     7.417,
      -28.671,
      18.597,
      -27.371
@@ -44,25 +56,13 @@
     "occupancy": "corridor",
     "name": "hall"
    },
-   "stair-gf": {
-    "id": "stair-gf",
-    "level": "GF",
-    "rect": [
-     7.197,
-     -27.371,
-     9.397,
-     -23.591
-    ],
-    "occupancy": "stair",
-    "name": "stair to basement"
-   },
    "kids-a": {
     "id": "kids-a",
     "level": "GF",
     "rect": [
-     9.397,
+     7.417,
      -27.371,
-     12.997,
+     11.417,
      -23.591
     ],
     "occupancy": "bedroom",
@@ -72,9 +72,9 @@
     "id": "kids-b",
     "level": "GF",
     "rect": [
-     12.997,
+     11.417,
      -27.371,
-     16.597,
+     15.617,
      -23.591
     ],
     "occupancy": "bedroom",
@@ -84,9 +84,9 @@
     "id": "family-bath",
     "level": "GF",
     "rect": [
-     16.597,
+     15.617,
      -27.371,
-     18.597,
+     17.547,
      -23.591
     ],
     "occupancy": "bathroom",
@@ -96,7 +96,7 @@
     "id": "parents-bed",
     "level": "GF",
     "rect": [
-     18.597,
+     17.547,
      -27.371,
      22.597,
      -23.591
@@ -132,8 +132,8 @@
     "name": "en-suite",
     "suite": true
    },
-   "pantry": {
-    "id": "pantry",
+   "laundry": {
+    "id": "laundry",
     "level": "B",
     "rect": [
      3.617,
@@ -141,59 +141,47 @@
      6.94,
      -28.671
     ],
-    "occupancy": "store",
-    "name": "pantry / store"
+    "occupancy": "utility",
+    "name": "laundry"
    },
-   "laundry": {
-    "id": "laundry",
+   "stair-b": {
+    "id": "stair-b",
     "level": "B",
     "rect": [
      3.617,
      -28.671,
-     7.197,
-     -26.071
+     7.417,
+     -27.471
     ],
-    "occupancy": "utility",
-    "name": "laundry"
+    "occupancy": "stair",
+    "name": "stair to GF"
    },
    "flex": {
     "id": "flex",
     "level": "B",
     "rect": [
      3.617,
-     -26.071,
-     7.197,
+     -27.471,
+     7.417,
      -23.591
     ],
     "occupancy": "study",
-    "name": "flex (optional)"
+    "name": "flex room"
    },
    "hall-b": {
     "id": "hall-b",
     "level": "B",
     "rect": [
-     7.197,
+     7.417,
      -28.671,
      9.397,
-     -27.371
+     -26.671
     ],
     "occupancy": "entrance",
     "name": "entrance hall"
    },
-   "stair-b": {
-    "id": "stair-b",
-    "level": "B",
-    "rect": [
-     7.197,
-     -27.371,
-     9.397,
-     -23.591
-    ],
-    "occupancy": "stair",
-    "name": "stair to GF"
-   },
-   "gallery": {
-    "id": "gallery",
+   "pantry": {
+    "id": "pantry",
     "level": "B",
     "rect": [
      9.397,
@@ -201,14 +189,14 @@
      11.397,
      -26.671
     ],
-    "occupancy": "hall",
-    "name": "gallery"
+    "occupancy": "store",
+    "name": "pantry"
    },
    "kitchen": {
     "id": "kitchen",
     "level": "B",
     "rect": [
-     9.397,
+     7.417,
      -26.671,
      15.197,
      -23.591
@@ -276,28 +264,32 @@
     "occupancy": "store",
     "name": "store"
    },
-   "family-ext": {
-    "id": "family-ext",
+   "extra-room": {
+    "id": "extra-room",
     "level": "B",
     "rect": [
-     11.397,
+     -0.123,
      -23.591,
-     18.597,
+     9.7,
      -20.601
     ],
-    "occupancy": "living",
-    "name": "family / play (rooflights)",
-    "rooflight": true
+    "occupancy": "study",
+    "name": "extra room under the parking (FFL -2.75)",
+    "ffl": -2.75
    }
   },
   "links": [
    [
-    "corridor",
-    "stair-gf"
+    "stair-gf",
+    "corridor"
    ],
    [
-    "corridor",
+    "stair-gf",
     "study-game"
+   ],
+   [
+    "stair-gf",
+    "store-gf"
    ],
    [
     "corridor",
@@ -313,39 +305,35 @@
    ],
    [
     "corridor",
-    "parents-dressing"
+    "parents-bed"
    ],
    [
-    "parents-dressing",
-    "parents-bed"
+    "parents-bed",
+    "parents-dressing"
    ],
    [
     "parents-dressing",
     "parents-ensuite"
    ],
    [
-    "vestibule",
-    "corridor"
-   ],
-   [
     "hall-b",
     "stair-b"
    ],
    [
-    "hall-b",
+    "stair-b",
+    "flex"
+   ],
+   [
+    "stair-b",
     "laundry"
    ],
    [
     "hall-b",
-    "gallery"
-   ],
-   [
-    "gallery",
     "kitchen"
    ],
    [
-    "gallery",
-    "dirty-kitchen"
+    "kitchen",
+    "pantry"
    ],
    [
     "dirty-kitchen",
@@ -368,28 +356,11 @@
     "store-rear"
    ],
    [
-    "laundry",
-    "pantry"
-   ],
-   [
-    "stair-b",
-    "flex"
-   ],
-   [
-    "kitchen",
-    "family-ext"
-   ],
-   [
-    "dining",
-    "family-ext"
+    "flex",
+    "extra-room"
    ]
   ],
   "entries": [
-   [
-    "vestibule",
-    "GF",
-    "steps-landing"
-   ],
    [
     "corridor",
     "GF",
@@ -407,12 +378,28 @@
     "stair-gf"
    ]
   ],
+  "stair": "spine",
   "extension": [
-   11.397,
+   -0.123,
    -23.591,
-   18.597,
+   9.7,
    -20.601
-  ]
+  ],
+  "parking": {
+   "deck": [
+    -0.123,
+    -23.591,
+    9.7,
+    -20.601
+   ],
+   "deck_stair": [
+    9.7,
+    -21.601,
+    11.95,
+    -20.601
+   ],
+   "deck_top": 0.0
+  }
  },
  "critique": {
   "id": "B",
@@ -450,11 +437,9 @@
    },
    {
     "check": "window",
-    "status": "fail",
+    "status": "pass",
     "basis": "SLL Code for Lighting minimum ADF cards (bedroom/living/kitchen): a room with no window cannot meet them. Windows only on the street, east and rear faces; the party wall faces the shared core.",
-    "rooms": [
-     "dining"
-    ]
+    "rooms": []
    },
    {
     "check": "links_built",
@@ -511,7 +496,7 @@
     "distance_to_neighbour_facade_m": 6.23,
     "east_facing_rooms": [
      "dining",
-     "family-ext",
+     "extra-room",
      "flex",
      "kids-a",
      "kids-b",
@@ -533,7 +518,7 @@
     },
     "basement_habitable": [
      "dining",
-     "family-ext",
+     "extra-room",
      "flex",
      "kitchen",
      "living"
@@ -544,65 +529,63 @@
     "status": "advisory",
     "basis": "Advisory: circulation share of net area.",
     "net_m2": {
-     "B": 112.3,
-     "GF": 97.4
+     "B": 119.0,
+     "GF": 97.7
     },
     "circulation_m2": {
-     "B": 12.9,
-     "GF": 30.4
+     "B": 7.2,
+     "GF": 19.2
     },
     "share": {
-     "B": 0.11,
-     "GF": 0.31
+     "B": 0.06,
+     "GF": 0.2
     }
    }
   ],
-  "fails": [
-   "window"
-  ],
+  "fails": [],
   "warnings": [
    "min_area"
   ],
   "sizes": {
-   "vestibule": {
-    "net_w": 1.58,
-    "net_d": 4.68,
-    "net_m2": 7.4
-   },
    "study-game": {
-    "net_w": 3.48,
-    "net_d": 3.53,
-    "net_m2": 12.3
+    "net_w": 5.38,
+    "net_d": 2.53,
+    "net_m2": 13.6
    },
-   "corridor": {
-    "net_w": 14.88,
-    "net_d": 1.05,
-    "net_m2": 15.6
+   "store-gf": {
+    "net_w": 1.58,
+    "net_d": 2.05,
+    "net_m2": 3.2
    },
    "stair-gf": {
-    "net_w": 2.1,
-    "net_d": 3.53,
-    "net_m2": 7.4
+    "net_w": 3.7,
+    "net_d": 2.05,
+    "net_m2": 7.6
+   },
+   "corridor": {
+    "net_w": 11.08,
+    "net_d": 1.05,
+    "net_m2": 11.6
    },
    "kids-a": {
-    "net_w": 3.5,
+    "net_w": 3.9,
     "net_d": 3.53,
-    "net_m2": 12.4
+    "net_m2": 13.8
    },
    "kids-b": {
-    "net_w": 3.5,
+    "net_w": 4.1,
     "net_d": 3.53,
-    "net_m2": 12.4
+    "net_m2": 14.5
    },
    "family-bath": {
-    "net_w": 1.9,
+    "net_w": 1.83,
     "net_d": 3.53,
-    "net_m2": 6.7
+    "net_m2": 6.5
    },
    "parents-bed": {
-    "net_w": 3.75,
+    "net_w": 4.8,
     "net_d": 3.53,
-    "net_m2": 13.2
+    "net_m2": 16.9
    },
    "parents-dressing": {
     "net_w": 3.75,
@@ -614,40 +597,35 @@
     "net_d": 2.39,
     "net_m2": 5.5
    },
-   "pantry": {
+   "laundry": {
     "net_w": 2.92,
     "net_d": 1.0,
     "net_m2": 2.9
    },
-   "laundry": {
-    "net_w": 3.33,
-    "net_d": 2.5,
-    "net_m2": 8.3
+   "stair-b": {
+    "net_w": 3.55,
+    "net_d": 1.1,
+    "net_m2": 3.9
    },
    "flex": {
-    "net_w": 3.33,
-    "net_d": 2.23,
-    "net_m2": 7.4
+    "net_w": 3.55,
+    "net_d": 3.78,
+    "net_m2": 13.4
    },
    "hall-b": {
-    "net_w": 2.1,
-    "net_d": 1.05,
-    "net_m2": 2.2
+    "net_w": 1.88,
+    "net_d": 1.75,
+    "net_m2": 3.3
    },
-   "stair-b": {
-    "net_w": 2.1,
-    "net_d": 3.53,
-    "net_m2": 7.4
-   },
-   "gallery": {
+   "pantry": {
     "net_w": 1.9,
     "net_d": 1.75,
     "net_m2": 3.3
    },
    "kitchen": {
-    "net_w": 5.7,
-    "net_d": 2.98,
-    "net_m2": 17.0
+    "net_w": 7.68,
+    "net_d": 2.83,
+    "net_m2": 21.7
    },
    "dirty-kitchen": {
     "net_w": 2.3,
@@ -661,8 +639,8 @@
    },
    "dining": {
     "net_w": 3.3,
-    "net_d": 4.83,
-    "net_m2": 15.9
+    "net_d": 4.68,
+    "net_m2": 15.4
    },
    "living": {
     "net_w": 3.75,
@@ -674,36 +652,199 @@
     "net_d": 1.0,
     "net_m2": 4.9
    },
-   "family-ext": {
-    "net_w": 6.8,
+   "extra-room": {
+    "net_w": 9.42,
     "net_d": 2.74,
-    "net_m2": 18.6
+    "net_m2": 25.8
    }
   },
   "window_m": {
-   "vestibule": 6.91,
-   "study-game": 3.58,
+   "study-game": 8.41,
+   "store-gf": 2.3,
+   "stair-gf": 0.0,
    "corridor": 0.0,
-   "stair-gf": 2.2,
-   "kids-a": 3.6,
-   "kids-b": 3.6,
-   "family-bath": 2.0,
-   "parents-bed": 7.78,
+   "kids-a": 4.0,
+   "kids-b": 4.2,
+   "family-bath": 1.93,
+   "parents-bed": 8.83,
    "parents-dressing": 1.3,
    "parents-ensuite": 0.0,
-   "pantry": 1.25,
-   "laundry": 2.6,
-   "flex": 6.06,
+   "laundry": 1.25,
+   "stair-b": 1.2,
+   "flex": 3.88,
    "hall-b": 0.0,
-   "stair-b": 2.2,
-   "gallery": 0.0,
-   "kitchen": 2.0,
+   "pantry": 0.0,
+   "kitchen": 5.5,
    "dirty-kitchen": 0.0,
    "guest-wc": 0.0,
-   "dining": 0.0,
+   "dining": 3.4,
    "living": 9.08,
    "store-rear": 1.25,
-   "family-ext": 5.98
-  }
+   "extra-room": 6.73
+  },
+  "elevation_checks": [
+   {
+    "item": "basement (FFL -1.80) clear height under the slab",
+    "achieved": 2.7,
+    "required": 2.3,
+    "unit": "m",
+    "card": "mh-dwelling-ceiling-min (Chapter 22 Houses and flats, 'Ceiling heights' (printed page 22-13))",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "basement clear height under the perimeter beams (window heads)",
+    "achieved": 2.3,
+    "required": 2.3,
+    "unit": "m",
+    "card": "mh-dwelling-ceiling-min (Chapter 22 Houses and flats, 'Ceiling heights' (printed page 22-13))",
+    "status": "pass",
+    "note": "2.4 m is the book's preferable height; beam depth assumed 0.60"
+   },
+   {
+    "item": "ground floor (FFL +1.20) clear height under the slab",
+    "achieved": 2.7,
+    "required": 2.3,
+    "unit": "m",
+    "card": "mh-dwelling-ceiling-min (Chapter 22 Houses and flats, 'Ceiling heights' (printed page 22-13))",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "ground floor clear height under the perimeter beams (window heads)",
+    "achieved": 2.3,
+    "required": 2.3,
+    "unit": "m",
+    "card": "mh-dwelling-ceiling-min (Chapter 22 Houses and flats, 'Ceiling heights' (printed page 22-13))",
+    "status": "pass",
+    "note": "2.4 m is the book's preferable height; beam depth assumed 0.60"
+   },
+   {
+    "item": "private stair rise (16 risers over 3.00 m)",
+    "achieved": 187.5,
+    "required": 220,
+    "unit": "mm",
+    "card": "ukadk-private-stair-rise-max (Section 1, para 1.3, Table 1.1 (printed page 5))",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "private stair going",
+    "achieved": 240.0,
+    "required": 220,
+    "unit": "mm",
+    "card": "ukadk-private-stair-going-min (Section 1, para 1.3, Table 1.1 (printed page 5))",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "private stair pitch",
+    "achieved": 38.0,
+    "required": 42,
+    "unit": "deg",
+    "card": "ukadk-private-stair-pitch-max (Table 1.1 note 1 (printed page 5))",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "private stair 2R+G",
+    "achieved": 615,
+    "required": "550-700",
+    "unit": "mm",
+    "card": "ukadk-2r-plus-g-min (Table 1.1 footnote * (printed page 5))",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "private stair run fits its zone",
+    "achieved": 3600,
+    "required": 3600.0,
+    "unit": "mm",
+    "card": "geometry",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "stair headroom: GF floor may overhang the foot of the flight by at most",
+    "achieved": 1.02,
+    "required": "headroom >= 2.00 over the pitch line",
+    "unit": "m",
+    "card": "ukadk-stair-headroom-min (Section 1, para 1.11, Diagram 1.3 (printed page 7))",
+    "status": "pass",
+    "note": "GF slab opening from x = 4.84 to 7.42; keep the flight 50 mm off the party wall where a perimeter beam may run"
+   },
+   {
+    "item": "room under the deck: clear height (deck +/-0.00, soffit -0.35, FFL -2.75)",
+    "achieved": 2.4,
+    "required": 2.3,
+    "unit": "m",
+    "card": "mh-dwelling-ceiling-min (Chapter 22 Houses and flats, 'Ceiling heights' (printed page 22-13))",
+    "status": "pass",
+    "note": "2.40 = the book's preferable height"
+   },
+   {
+    "item": "steps down from the basement to the room (5 risers)",
+    "achieved": 190.0,
+    "required": 220,
+    "unit": "mm",
+    "card": "ukadk-private-stair-rise-max (Section 1, para 1.3, Table 1.1 (printed page 5))",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "deck edge over the yard: drop",
+    "achieved": 1800,
+    "required": 600,
+    "unit": "mm",
+    "card": "ukadk-guarding-drop-dwelling (Section 3, para 3.2a (printed page 22))",
+    "status": "pass",
+    "note": "guarding required (drop > 600 mm): 1100 mm high (ukadk-guarding-height-external (Section 3, Diagram 3.1 (printed page 24)))"
+   },
+   {
+    "item": "deck-to-yard stair (10 risers)",
+    "achieved": 180.0,
+    "required": 220,
+    "unit": "mm",
+    "card": "ukadk-private-stair-rise-max (Section 1, para 1.3, Table 1.1 (printed page 5))",
+    "status": "pass",
+    "note": "going 250 mm (min 220); 2R+G 610 (range 550-700)"
+   },
+   {
+    "item": "parking width, building face to fence",
+    "achieved": 2990,
+    "required": 2800,
+    "unit": "mm",
+    "card": "mh-garage-passenger-width (Chapter 38, Fig. 38.27 'A more generous garage permitting passenger access' (printed page 38-15))",
+    "status": "pass",
+    "note": ""
+   },
+   {
+    "item": "parking length for two cars in tandem",
+    "achieved": 9823,
+    "required": 9800,
+    "unit": "mm",
+    "card": "mh-garage-min-length (Chapter 38, Fig. 38.26 (printed page 38-15))",
+    "status": "pass",
+    "note": "the second car blocks the first (tandem)"
+   },
+   {
+    "item": "excavation below the basement floor for the room",
+    "achieved": 1.2,
+    "required": "-",
+    "unit": "m",
+    "card": "structural consultant",
+    "status": "advisory",
+    "note": "about 1.2 m below the basement FFL beside the fence and the building's east footings: underpinning / retaining and waterproofing to be designed"
+   },
+   {
+    "item": "fence top above the GF floor (sill needed to see over it)",
+    "achieved": 1.0,
+    "required": "-",
+    "unit": "m",
+    "card": "environment model",
+    "status": "advisory",
+    "note": ""
+   }
+  ]
  }
 }

@@ -102,6 +102,30 @@ def draw(lay, res, path):
             mid = (lo + hi) / 2
             p = (mid, e[1]) if e[0] == "h" else (e[1], mid)
             ax.plot(*T(*p), "s", ms=7, c="tab:red")
+        # alternative B: the street-level parking deck (GF sheet) and its outline over the room below (basement sheet)
+        pk = lay.get("parking")
+        if pk:
+            if lv == "GF":
+                poly(ax, pk["deck"], fc="#dddddd", ec="0.3", lw=1, hatch="..")
+                x0, y0, x1, y1 = pk["deck"]
+                cy0, cy1 = (y0 + y1) / 2 - 0.9, (y0 + y1) / 2 + 0.9
+                for cx0 in (x0 + 0.15, x0 + 0.15 + 4.75):
+                    poly(ax, (cx0, cy0, cx0 + 4.6, cy1), fc="white", ec="0.2", lw=0.8)
+                    ax.text(*T(cx0 + 2.3, (y0 + y1) / 2), "car", ha="center", va="center", fontsize=6)
+                gx = x0 - E.FENCE_T / 2000
+                ax.plot(*zip(T(gx, y0 + 0.3), T(gx, y1 - 0.3)), c="tab:red", lw=4)
+                ax.text(*T(x0 - 0.9, (y0 + y1) / 2), "new car gate", ha="center", va="center", fontsize=6,
+                        color="tab:red")
+                ax.text(*T(x0 + 5.0, y1 - 0.25), "parking deck +/-0.00 (street level)", ha="center", va="center",
+                        fontsize=6)
+                sx0, sy0, sx1, sy1 = pk["deck_stair"]
+                poly(ax, pk["deck_stair"], fc="white", ec="0.2", lw=0.8)
+                for i in range(1, 10):
+                    xx = sx0 + i * (sx1 - sx0) / 10
+                    ax.plot(*zip(T(xx, sy0), T(xx, sy1)), c="0.4", lw=0.5)
+                ax.text(*T((sx0 + sx1) / 2, sy0 - 0.3), "down to yard", ha="center", va="center", fontsize=5.5)
+            else:
+                poly(ax, pk["deck"], fill=False, ec="0.4", lw=0.8, ls="--")
         # columns (CAD), both storeys
         for x0, y0, x1, y1 in E.COLUMNS:
             poly(ax, (x0 / 1000, y0 / 1000, x1 / 1000, y1 / 1000), fc="k", ec="none")
@@ -131,13 +155,101 @@ def draw(lay, res, path):
     plt.close(fig)
 
 
+def room_at(lay, level, x, y):
+    for rid, r in lay["rooms"].items():
+        x0, y0, x1, y1 = r["rect"]
+        if r["level"] == level and x0 <= x <= x1 and y0 <= y <= y1:
+            return r
+    return None
+
+
+def draw_section(lay, checks, path, x_cut=5.5):
+    """Cross-section across the bar and the east strip at x_cut, street datum, plus the elevation-check table."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle
+    fig = plt.figure(figsize=(16.5, 11.7))
+    ax = fig.add_axes([0.05, 0.42, 0.9, 0.5])
+    B, GF = V.LEVELS["B"], V.LEVELS["GF"]
+    APT, ROOF = GF + V.STOREY, GF + 2 * V.STOREY
+    sis = V.m(E.SISTER_FACE)
+    fence_out = V.FENCE_E + E.FENCE_T / 1000
+    neigh = fence_out + E.OFFSET_E / 1000
+
+    def box(y0, z0, y1, z1, **kw):
+        ax.add_patch(Rectangle((y0, z0), y1 - y0, z1 - z0, **kw))
+
+    box(sis - 0.3, B - 0.4, V.YP, ROOF, fc="#f3e4cf", ec="#9a8060", lw=0.6)
+    ax.text((sis + V.YP) / 2, (B + APT) / 2, "shared core\n(not ours)", ha="center", va="center", fontsize=7, rotation=90)
+    for z, name in ((B, "basement"), (GF, "GF"), (APT, "apartment (not ours)"), (ROOF, "roof")):
+        box(V.YP, z - V.SLAB - (0.2 if z == B else 0), V.YE, z, fc="0.55", ec="none")
+    for z in (GF, APT, ROOF):
+        for y0 in (V.YP, V.YE - 0.25):
+            box(y0, z - V.BEAM, y0 + 0.25, z, fc="0.35", ec="none")
+    for zf, lv in ((B, "B"), (GF, "GF")):
+        r = room_at(lay, lv, x_cut, (V.YP + V.YE) / 2 + 0.8)
+        ax.text((V.YP + V.YE) / 2, zf + 1.3, (r["name"] if r else "") + f"\nFFL {zf:+.2f}", ha="center", fontsize=8)
+        ax.annotate("", xy=((V.YP + V.YE) / 2 + 1.3, zf + V.STOREY - V.SLAB), xytext=((V.YP + V.YE) / 2 + 1.3, zf + V.FLOOR_BUILDUP),
+                    arrowprops=dict(arrowstyle="<->", lw=0.7))
+        ax.text((V.YP + V.YE) / 2 + 1.4, zf + 1.35, f"{V.STOREY - V.SLAB - V.FLOOR_BUILDUP:.2f} clear\n"
+                f"{V.STOREY - V.BEAM - V.FLOOR_BUILDUP:.2f} under beam", fontsize=6.5)
+    ax.text((V.YP + V.YE) / 2, APT + 1.3, "apartment above (not ours)", ha="center", fontsize=8, color="0.3")
+    if lay.get("stair") == "spine" and V.X0 + V.EXT_WALL <= x_cut <= V.SPINE_X1:
+        g = V.stair_geometry("spine")
+        h = (x_cut - V.X0 - V.EXT_WALL) * g["rise"] / g["going"]
+        box(V.YP + 0.25, B, V.YS1, B + h, fc="#c8c8c8", ec="0.2", lw=0.6)
+        ax.text((V.YP + V.YS1) / 2 + 0.1, B + h + 0.15, "stair\nflight", fontsize=6, ha="center")
+    # east strip
+    pk = lay.get("parking")
+    if pk:
+        box(V.YE, -V.DECK_BUILDUP - V.DECK_SLAB, V.FENCE_E, 0.0, fc="0.55", ec="none")
+        box(V.YE + 0.25, V.EXTRA_FFL - 0.25, V.FENCE_E, V.EXTRA_FFL, fc="0.7", ec="none")
+        box(V.YE + 0.55, 0.0, V.YE + 0.55 + 1.85, 1.45, fc="white", ec="0.2", lw=0.8)
+        ax.text(V.YE + 1.47, 0.7, "car", ha="center", fontsize=7)
+        ax.text((V.YE + V.FENCE_E) / 2, V.EXTRA_FFL + 1.0, f"extra room\nFFL {V.EXTRA_FFL:+.2f}\n2.40 clear",
+                ha="center", fontsize=7)
+        ax.text((V.YE + V.FENCE_E) / 2, 0.15 + 1.5, "parking deck +/-0.00", ha="center", fontsize=7)
+    else:
+        box(V.YE, B - 0.25, V.FENCE_E, B, fc="#b7d3a0", ec="none")
+        ax.text((V.YE + V.FENCE_E) / 2, B + 0.2, "yard -1.80", ha="center", fontsize=7)
+    box(V.FENCE_E, B - 0.6, fence_out, B + E.FENCE_H / 1000, fc="0.4", ec="none")
+    ax.text(fence_out + 0.1, B + E.FENCE_H / 1000, f"fence top {B + E.FENCE_H / 1000:+.2f}", fontsize=7, va="bottom")
+    box(neigh, B, neigh + 3.0, B + E.NEIGHBOUR_H / 1000, fc="#c9c9d9", ec="#555577", lw=0.8)
+    ax.text(neigh + 1.5, B + 6, "neighbour\n12 m", ha="center", fontsize=7)
+    for z, lab in ((0.0, "street +/-0.00"), (B, "-1.80"), (GF, "+1.20"), (APT, "+4.20"), (ROOF, "+7.20")):
+        ax.axhline(z, color="0.6", lw=0.5, ls=":")
+        ax.text(sis - 0.5, z, lab, fontsize=7, ha="right", va="center")
+    ax.set_xlim(sis - 2.5, neigh + 3.5)
+    ax.set_ylim(min(B, V.EXTRA_FFL if pk else B) - 1.0, ROOF + 1.0)
+    ax.set_aspect("equal")
+    ax.set_xlabel("section across the bar at x = %.1f m from the street wall (looking toward the rear); metres" %
+                  (x_cut - V.X0))
+    ax.set_title(f"CONCEPT {lay['id']}: section and elevation checks (datum: street +/-0.00)", fontsize=11,
+                 weight="bold")
+    tx = fig.add_axes([0.05, 0.02, 0.9, 0.36])
+    tx.axis("off")
+    rows = [[c["status"].upper(), c["item"], f"{c['achieved']} {c['unit']}", f"{c['required']}",
+             (c["card"].split(" (")[0] + ("; " + c["note"] if c["note"] else ""))[:95]] for c in checks]
+    t = tx.table(cellText=rows, colLabels=["", "check", "achieved", "required", "source / note"], loc="upper center",
+                 colWidths=[0.05, 0.35, 0.08, 0.08, 0.44], cellLoc="left")
+    t.auto_set_font_size(False)
+    t.set_fontsize(6.5)
+    t.scale(1, 1.25)
+    for ext_ in (".pdf", ".png"):
+        fig.savefig(str(path) + ext_, dpi=130)
+    plt.close(fig)
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     rows = []
     for lay in V.concepts():
         res = V.critique(lay)
+        res["elevation_checks"] = V.elevation_checks(lay)
         V.write(lay, res, SPEC)
         draw(lay, res, OUT / f"concept-{lay['id']}")
+        draw_section(lay, res["elevation_checks"], OUT / f"section-{lay['id']}")
         rows.append((lay["id"], res["fails"], res["warnings"]))
         print(lay["id"], "fails", res["fails"], "warnings", res["warnings"])
     return 0

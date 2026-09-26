@@ -16,11 +16,49 @@ class Concepts(unittest.TestCase):
             res = V.critique(lay)
             self.assertEqual(res["fails"], [], (lay["id"], res["fails"]))
 
-    def test_b_extension_costs_the_dining_room_its_window(self):
-        """A real consequence of building the basement out to the fence, reported, not hidden."""
+    def test_b_parking_alternative_has_no_failures_and_the_extra_room_has_windows(self):
         res = V.critique(V.concept_b())
-        win = next(c for c in res["checks"] if c["check"] == "window")
-        self.assertEqual(win["rooms"], ["dining"])
+        self.assertEqual(res["fails"], [])
+        self.assertGreaterEqual(res["window_m"]["extra-room"], 1.0)     # front-yard side + the yard end
+
+    def test_spine_stair_frees_the_facade(self):
+        """The stair study: along the blind party wall the rooms on the facade are larger than with the dog-leg."""
+        spine, bay = V.critique(V.concept_a("spine")), V.critique(V.concept_a("bay"))
+        for rid in ("kids-a", "kids-b", "parents-bed", "kitchen"):
+            self.assertGreater(spine["sizes"][rid]["net_m2"], bay["sizes"][rid]["net_m2"], rid)
+
+
+class Elevations(unittest.TestCase):
+    def test_all_elevation_checks_pass_for_a_and_b(self):
+        for lay in (V.concept_a(), V.concept_a("bay"), V.concept_b()):
+            bad = [c["item"] for c in V.elevation_checks(lay) if c["status"] == "fail"]
+            self.assertEqual(bad, [], lay["id"])
+
+    def test_room_under_the_deck_at_basement_level_is_too_low(self):
+        """Negative: the old sheet's room at the basement floor under a street-level deck has 1.45 m."""
+        old = V.EXTRA_FFL
+        try:
+            V.EXTRA_FFL = -1.80
+            row = next(c for c in V.elevation_checks(V.concept_b()) if c["item"].startswith("room under the deck"))
+            self.assertEqual(row["status"], "fail")
+            self.assertAlmostEqual(row["achieved"], 1.45, places=2)
+        finally:
+            V.EXTRA_FFL = old
+
+    def test_short_stair_zone_fails_the_run(self):
+        old = V.SPINE_X1
+        try:
+            V.SPINE_X1 = 7.217                   # 3.40 m clear: 15 goings of 240 do not fit
+            row = next(c for c in V.elevation_checks(V.concept_a()) if c["item"].startswith("private stair run"))
+            self.assertEqual(row["status"], "fail")
+        finally:
+            V.SPINE_X1 = old
+
+    def test_stair_values_come_from_the_cards(self):
+        g = V.stair_geometry("spine")
+        self.assertLessEqual(g["rise"], 220)
+        self.assertGreaterEqual(g["going"], 220)
+        self.assertTrue(550 <= g["two_r_plus_g"] <= 700)
 
     def test_every_programme_room_is_placed(self):
         import json
@@ -99,13 +137,10 @@ class SeededDefects(unittest.TestCase):
 
     def test_suite_reached_through_living_fails_privacy(self):
         def f(lay):
-            # reach the dressing only through the basement living: move the suite's link off the hall
-            lay["links"] = [l for l in lay["links"] if l != ["corridor", "parents-dressing"]]
-            lay["rooms"]["parents-dressing"]["level"] = "B"
-            lay["rooms"]["parents-dressing"]["rect"] = list(V.REAR_SHARE)
-            lay["rooms"]["store-rear"]["rect"] = [17.268, -29.916, 17.3, -28.671]
-            lay["links"].append(["living", "parents-dressing"])
-            lay["rooms"]["parents-bed"]["level"] = "GF"
+            # only the basement entrance, and the GF hall turned into a living room: the suite is then reached
+            # only across a public room
+            lay["entries"] = [e for e in lay["entries"] if e[1] == "B"]
+            lay["rooms"]["corridor"]["occupancy"] = "living"
         res = self.mutate(f)
         self.assertEqual(status(res, "suite_privacy"), "fail")
 
