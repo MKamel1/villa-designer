@@ -108,28 +108,9 @@ def main():
 
 
 def _clean(v):
-    """Make every value JSON-safe: the model holds Arabic text, and Revit 2027 ElementId.Value is a .NET Int64,
-    both of which IronPython's json encoder rejects."""
-    if v is None or isinstance(v, bool):
-        return v
-    if isinstance(v, dict):
-        return dict((_clean(k), _clean(x)) for k, x in v.items())
-    if isinstance(v, (list, tuple)):
-        return [_clean(x) for x in v]
-    if isinstance(v, str) or type(v).__name__ in ("unicode", "String"):
-        try:
-            return u"%s" % v
-        except Exception:
-            return repr(v)
-    if isinstance(v, float):
-        return v
-    if isinstance(v, int) and type(v).__name__ == "int":
-        return v
-    try:                                            # long, Int64, Int32, Double and the like
-        f = float(v)
-        return int(f) if f == int(f) and abs(f) < 2 ** 53 else f
-    except Exception:
-        return repr(v)
+    """Kept for callers; the cleaner now lives in jsonsafe.py (shared with extract_model.py)."""
+    import jsonsafe
+    return jsonsafe.clean(v)
 
 
 def _write(path, data):

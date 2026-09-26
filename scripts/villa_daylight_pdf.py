@@ -41,10 +41,12 @@ def main():
         fig = plt.figure(figsize=(16.5, 11.7))
         vt = "; ".join("%s: %s" % (k, "PASS" if c["pass"] else "FAIL") for k, c in val["checks"].items())
         box = val["checks"]["box vs Metric Handbook eq. (4)"]
-        fig.suptitle("Daylight factor, CIE overcast sky (Radiance 6.0.1): %s\nValidation: %s. Box room: Radiance %.2f %% "
-                     "vs Metric Handbook p. 9-8 eq. (4) %.2f %% (%.0f %% apart, tolerance %.0f %% fixed before the run)."
-                     % (rep["status"], vt, box["radiance"], box["formula"], box["relative"] * 100,
-                        box["tolerance"] * 100), fontsize=10)
+        import textwrap
+        head = ("Validation: %s. Box room: Radiance %.2f %% vs Metric Handbook p. 9-8 eq. (4) %.2f %% (%.0f %% apart, "
+                "tolerance %.0f %% fixed before the run)." % (vt, box["radiance"], box["formula"], box["relative"] * 100,
+                                                              box["tolerance"] * 100))
+        fig.suptitle("Daylight factor, CIE overcast sky (Radiance 6.0.1): %s\n" % rep["status"] +
+                     "\n".join(textwrap.wrap(head, 170)), fontsize=10)
         rooms = {}
         for opt in OPTIONS:
             for rid, r in res.get(opt, {}).get("rooms", {}).items():

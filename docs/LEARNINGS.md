@@ -441,3 +441,19 @@ Five defects in one round; each was caught by a second, independent check disagr
    1.999 m (the laundry "at 2.0 m" was 1 mm short): now rounded up to the mm and verified. A new GF room reused the
    id `landing-gf` and silently replaced the straight stair's landing, breaking three checks at once: layout
    builders must not reuse ids (caught by the critic's entrances/stair_access/suite checks).
+
+## The daylight study found the generator under-glazing every room (2026-09-26)
+
+The first whole-building daylight run put kids bedroom A at 0.47 % ADF even in S1, with no deck in front of it.
+Cause: the spec sized a window as its facade run minus 0.4 m each side (`L - 0.8`), a margin meant for the room's
+corners; after round 8 the runs were already cut clear of the columns with their own 0.1 m margin, so the margin
+counted twice. The bedroom got a 0.63 m window and its second run's window (0.39 m) was dropped. Every option was
+under-glazed, which would have blamed the architecture for the generator's default. Now `revit_spec.REVEAL = 0.2`
+m each side; S1's kids bedroom A reads 1.24 % (two windows, 1.03 + 0.79 m).
+Why missed: no check tied window size to anything but a plausible default; nothing read daylight until now.
+Guard: the whole-building daylight study (archpipe.daylight, validated) now runs on every option, and its results
+table sits next to the SLL cards; a window rule that starves rooms shows as a column of red.
+Also caught while building it: a glazed opening drawn as two coincident panes would square the transmittance
+(`test_window_is_one_glass_pane_and_leaves_a_hole`); an opening that lands on no wall would silently become wall
+(`VillaScene.test_every_opening_lands_on_exactly_one_wall`); `villa_env.py check` ignored the read-back path it
+was given (now `--readback`); a PDF open in the viewer crashed the writer (now `safe_io.writable_path`).

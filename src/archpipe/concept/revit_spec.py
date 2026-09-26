@@ -21,6 +21,8 @@ LEVEL_NAME = {"B": "B -1.80", "GF": "GF +1.20"}
 LEVELS_Z = {"B": -3.0, "GF": 0.0}      # model z (m) of the storey FFLs
 DOOR_H = 2.10                          # ASSUMED standard leaf (= villa_parking.DOOR_H)
 GARDEN_DOOR_H = 2.20                   # sliding garden doors: to the 2.30 head under the beams, less the frame
+REVEAL = 0.20                          # wall kept each side of a window or garden door on its run (the runs are
+#                                        already cut clear of the columns; was 0.40, which under-glazed every room)
 SILL, HEAD = 0.90, 2.30              # head at the beam soffit less finishes (elevation_checks)
 
 
@@ -155,11 +157,11 @@ def build(lay):
                     garden = lv == "B" and occ in ("living", "dining", "kitchen")
                     span = [e[0], e[1], lo, hi]                  # axis, face coordinate, usable run
                     if garden and occ in ("living", "dining"):
-                        spec["doors"].append({"level": lv, "x": x, "y": y, "width": min(2.4, L_ - 0.8), "rooms": [rid, "yard"],
+                        spec["doors"].append({"level": lv, "x": x, "y": y, "width": min(2.4, L_ - 2 * REVEAL), "rooms": [rid, "yard"],
                                               "garden": True, "span": span})
                         continue
                     if occ in vocab.HABITABLE:
-                        spec["windows"].append({"level": lv, "x": x, "y": y, "width": round(min(2.4, L_ - 0.8), 2),
+                        spec["windows"].append({"level": lv, "x": x, "y": y, "width": round(min(2.4, L_ - 2 * REVEAL), 2),
                                                 "sill": SILL, "height": HEAD - SILL, "room": rid, "span": span})
                     else:
                         spec["windows"].append({"level": lv, "x": x, "y": y, "width": 0.8, "sill": 1.5,

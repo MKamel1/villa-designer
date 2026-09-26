@@ -24,7 +24,7 @@ from archpipe.concept import villa_daylight as VD                    # noqa: E40
 from archpipe.concept import villa_options as VO                     # noqa: E402
 from archpipe.concept import villa_parking as P                      # noqa: E402
 
-JOB = "villa-df-r8"
+JOB = "villa-df-r8b"
 LOCAL = Path("out/villa/daylight") / JOB
 REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 

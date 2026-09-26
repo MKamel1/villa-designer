@@ -27,6 +27,9 @@ import math
 import os
 import sys
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+import jsonsafe                                                     # noqa: E402
+
 from Autodesk.Revit.DB import (
     BuiltInCategory, BuiltInParameter, Element, FilteredElementCollector, Level,
     LocationCurve, LocationPoint, Options, Solid, SpatialElementBoundaryOptions,
@@ -723,7 +726,8 @@ def main():
     # keep it stable across Python versions. Both serve determinism.
     # Serialize BEFORE opening the destination: .NET numeric wrappers can
     # fail JSON encoding; such a failure must not truncate the last extract.
-    payload = json.dumps(data, indent=2, sort_keys=True, separators=(",", ": "))
+    # jsonsafe: client models carry Arabic names and .NET Int64 ids, which IronPython's encoder rejects
+    payload = jsonsafe.dumps(data, indent=2, sort_keys=True, separators=(",", ": "))
     with open(dest, "w") as fh:
         fh.write(payload)
 
