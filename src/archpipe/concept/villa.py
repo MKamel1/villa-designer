@@ -49,14 +49,19 @@ ENTRY_SEGMENTS = {
 }
 
 
+def _exts(extension):
+    """The basement extensions as a list of rectangles (one rect, a list of rects, or None)."""
+    if not extension:
+        return []
+    return [tuple(extension)] if isinstance(extension[0], (int, float)) else [tuple(e) for e in extension]
+
+
 def envelope(level, extension=None):
     """Rectangles whose union is a storey's usable outline."""
     if level == "GF":
         rects = [(X0, YP, XR, YE), BUMP]              # the street strip is an outdoor terrace
     else:
-        rects = [(X0, YP, XR, YE), FRONT_SHARE, REAR_SHARE]
-        if extension:
-            rects.append(extension)
+        rects = [(X0, YP, XR, YE), FRONT_SHARE, REAR_SHARE] + _exts(extension)
     return rects
 
 
@@ -68,14 +73,18 @@ def window_faces(level, extension=None):
     else:
         faces = [("v", X0, AX, YE), ("v", XR, AX, YE)]
         east = [(X0, XR)]
-        if extension:
-            x0, _, x1, y1 = extension
-            east = [(a, b) for a, b in ((X0, max(X0, x0)), (min(XR, x1), XR)) if b - a > 1e-6]
+        for x0, _, x1, y1 in _exts(extension):
+            cut = []
+            for a, b in east:                                   # the bar's east face is covered where it is built on
+                cut += [(a, min(b, x0)), (max(a, x1), b)]
+            east = [(a, b) for a, b in cut if b - a > 1e-6]
             faces.append(("v", x1, YE, y1))                     # the extension's end facing the yard
             if x0 < X0:
                 faces.append(("h", YE, x0, X0))                 # its side facing the front yard
             else:
                 faces.append(("v", x0, YE, y1))
+            if y1 < FENCE_E - 0.05:                             # its long side, unless it is built to the fence
+                faces.append(("h", y1, x0, x1))
         faces += [("h", YE, a, b) for a, b in east]
     return faces
 
@@ -378,7 +387,9 @@ def critique(lay):
                 blocked_ends.append({"stair": rid, "end": list(seg), "opens_onto": across or ["nothing"]})
     out.append(_chk("stair_access", "fail" if blocked_ends else "pass", ends=blocked_ends))
     from . import stairs as S
-    model = {"u": S.u_in_old_bay, "r3": S.r3_party_flight, "party-fixed": S.party_flight_fixed}[lay.get("stair", "u")]
+    from . import stair_options as SO
+    model = {"u": S.u_in_old_bay, "r3": S.r3_party_flight, "party-fixed": S.party_flight_fixed,
+             "u-front": SO.u_front_bay}[lay.get("stair", "u")]
     cl = S.clashes(model())
     hits = sorted({h["structure"] for h in cl["hits"]})
     out.append(_chk("stair_structure", "fail" if hits else "pass", clashes=hits,

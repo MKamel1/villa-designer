@@ -121,3 +121,46 @@ def analyse(opt, step=0.2):
             "pitch_deg": round(math.degrees(math.atan2(st["rise"], st["going"])), 1),
             "opening": opt["opening"], "core_doors": opt["core_doors"], "gf_facade_m": round(opt["gf_facade_m"], 2),
             "points": pts, "obstacles": ob}
+
+
+OPEN_OCC = {"kitchen", "dining", "living", "hall", "corridor", "entrance", "landing"}
+
+
+def analyse_layout(lay, step=0.2):
+    """The same openness metric on a complete layout: closed rooms are the basement rooms that are not open plan
+    (kitchen, dining, living, halls), plus the stair footprint and the columns; the entrance is the basement core
+    door (the midpoint of the entry segment the layout uses)."""
+    from . import revit_spec as R
+    st = R._stair_model(lay)
+    fp = stair_footprint(st)
+    closed = [tuple(r["rect"]) for r in lay["rooms"].values()
+              if r["level"] == "B" and r["occupancy"] not in OPEN_OCC and r["occupancy"] != "stair"]
+    cols = [tuple(v / 1000 for v in c) for c in V.E.COLUMNS]
+    ent = None
+    for rid, lv, seg in lay["entries"]:
+        if lv == "B":
+            s = V.ENTRY_SEGMENTS["B"][seg]
+            e = max(V.edges(lay["rooms"][rid]["rect"]), key=lambda e_: V.overlap_len(e_, s))
+            lo, hi = max(e[2], s[2]), min(e[3], s[3])
+            ent = ((lo + hi) / 2, e[1] + 0.3) if e[0] == "h" else (e[1] + 0.3, (lo + hi) / 2)
+    opt = {"id": lay["id"], "name": lay["title"], "stair": lambda: st, "entrance": ent, "opening": "",
+           "core_doors": "", "gf_facade_m": 0.0}
+    ob = {"stair": fp, "flex": (0, 0, 0, 0), "services": closed, "columns": cols}
+    blocks = [fp] + closed + cols
+    glaze = [(GLAZING[0], GLAZING[1] + (i + 0.5) * (GLAZING[2] - GLAZING[1]) / 12) for i in range(12)]
+    x0, y0, x1, y1 = V.X0 + V.EXT_WALL, V.YP + V.EXT_WALL, XR_IN, V.YE - V.EXT_WALL
+    seen = n = 0
+    pts = []
+    for i in range(int((x1 - x0) / step)):
+        for j in range(int((y1 - y0) / step)):
+            p = (x0 + (i + 0.5) * step, y0 + (j + 0.5) * step)
+            if any(r[0] <= p[0] <= r[2] and r[1] <= p[1] <= r[3] for r in [fp] + closed + cols):
+                continue
+            n += 1
+            vis = any(not any(_seg_hits_rect(p, g, r) for r in blocks) for g in glaze)
+            seen += vis
+            pts.append((p, vis))
+    evis = sum(not any(_seg_hits_rect(ent, g, r) for r in blocks) for g in glaze) / len(glaze) if ent else 0.0
+    return {"open_m2": round(n * step * step, 1), "garden_view_m2": round(seen * step * step, 1),
+            "garden_view_share": round(seen / n, 2), "entrance_view_share": round(evis, 2), "points": pts,
+            "obstacles": ob, "entrance": ent}

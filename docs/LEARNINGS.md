@@ -345,3 +345,21 @@ azimuth, a fence height, a missing slab, a column span and a level elevation.
 
 **Lesson.** A plan rectangle is not a stair. Before showing a stair, build it in 3D against the kept structure and
 read the existing model's marks (openings, parapet heights) before the old sheets.
+
+## Revit image exports: dark canvas, missing tag text, far-off level lines (2026-09-26)
+
+- **Dark canvas.** Revit 2027 exports plan and 3D images on the dark UI canvas, and setting
+  `Application.BackgroundColor` did not change it.
+- **Tag text.** Room tags were created but did not show in the exports.
+- **Level lines.** The surroundings 3D view carried level lines far outside the model, shrinking the model to a
+  corner.
+
+**Guards (in `scripts/villa_option_pdfs.py` and `revit/build_villa_option.py`):**
+- Plan images: the background turns white and the white linework turns dark.
+- 3D images: only the background changes. Recolouring bright pixels in 3D blackened the white wall surfaces; the
+  first composed page showed it and was redone.
+- Room names are placed from the known crop box (109.5 px/m), with Revit's own room areas from the read-back.
+- Levels are hidden in 3D views, and the images are cropped to their drawn content.
+
+**Independent check.** Revit's room areas agree with the concept tool's net areas (flex room 12.17 m² against 12.4;
+kitchen 16.66 against 16.6).
