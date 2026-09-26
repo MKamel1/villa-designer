@@ -412,3 +412,32 @@ post-condition against its neighbours, checked on the Revit read-back, before a 
 - **A wall position assumed as fact.** The NE yard wall's thickness and side were labelled ASSUMED and sent for
   confirmation before building on them; the client corrected the side (flush with the villa face, not the
   column face). Keep asking before an assumption drives geometry.
+
+## Round 8 catches: guards that disagreed with each other (2026-09-26)
+
+Five defects in one round; each was caught by a second, independent check disagreeing with the first.
+
+1. **A stair touching a column that Python passed.** The lengthwise U's half landing started at x 3977, the CAD
+   face of column 1590377. Revit holds that column face at 3977.2; the Python clash test counts an overlap only
+   above 1 mm, so it passed, and Revit's intersection filter (`scripts/villa_stairs.py compare`) flagged it.
+   Landing moved 20 mm clear. Guard: `tests/test_villa_parking.RevitStairCompare` requires every stair an option
+   uses to be in the Revit comparison and the comparison to agree; the checks page no longer claims "Revit
+   agrees" for a stair that was never compared (`villa.REVIT_STAIR_COMPARED`).
+2. **Doors and windows through columns.** Openings were centred on the shared wall with no knowledge of the kept
+   columns: the S4/P3/P4 GF entrance and basement pantry doors ran into column 1590377, a ramp door into the
+   column at x 7.0, and a window on a column would have passed too. Present since S4. Guard:
+   `revit_spec.opening_problems` on the spec and on Revit's read-back (checks page BUILT row); openings are placed
+   in column-free runs (`_clear_columns`), doors under the ramp in the highest column-free run.
+3. **A window credited but not built.** The critic took the kitchen's 1.5 m east face as a window; a column split it
+   into two 0.5 m pieces and the spec dropped the window, so the checks said lit and the model had no window.
+   Guard: the critic's window faces now subtract the columns (`villa._minus_columns`), and
+   `revit_spec.window_credit_problems` compares the critic's credit with the windows Revit built (read-back);
+   `WindowCredit.test_the_real_false_credit_is_caught` reproduces the real case. Dropped openings are listed on
+   the checks page. A seeded test had assumed the hall's 1.30 m street face could hold a window; the column
+   leaves 0.69 m, so the fixture was wrong, not the rule.
+4. **Checks rows hard-wired to one stair.** The stair rows always measured the old U (`u_in_old_bay`), so the new
+   stairs' pages showed the old U's slab opening. Guard: rows use `villa.stair_model(lay['stair'])`.
+5. **Rounding under a threshold, and an id collision.** `X_LOW` rounded to x 3.124 where the clear height is
+   1.999 m (the laundry "at 2.0 m" was 1 mm short): now rounded up to the mm and verified. A new GF room reused the
+   id `landing-gf` and silently replaced the straight stair's landing, breaking three checks at once: layout
+   builders must not reuse ids (caught by the critic's entrances/stair_access/suite checks).

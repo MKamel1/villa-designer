@@ -4082,6 +4082,27 @@
       "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked) - value read from the dimensioned figure image (not in the text layer).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "neufert-private-garage-slope-max",
+      "source_id": "neufert",
+      "edition": "2nd (International) English ed., 1980, reprinted to 1998 (Blackwell Science, ISBN 0-632-02339-2)",
+      "locator": "Habitat, Houses: Private garages, p. 101, text 'Incorporated within house' and Fig. 4",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Access slope to a garage in a house basement: not more than 20 %, where a basement garage is unavoidable.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "percent",
+      "verified_value": 20,
+      "original_page_checked": true,
+      "conditions": "Private dwelling garage in a basement; the book advises avoiding it where possible and notes steep ramps are hard on cold engines. Used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance. An old edition (1980): the current 6th edition is not held.",
+      "exceptions": "The Metric Handbook (7th ed. 2022, p. 38-12, card mh-garage-ramp-max) limits garage ramps to 10 % and allows 15 % only in car parks with vertical transition curves; a design over 10 % departs from it.",
+      "verification": "Read on the held original page 2026-09-26 (Neufert PDF page index 112): text 'access slope not more than 20%' and Fig. 4 caption 'In basement gar, where unavoidable, slope not more than 20%'.",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

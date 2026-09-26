@@ -152,11 +152,20 @@ class SeededDefects(unittest.TestCase):
         self.assertIn("gallery", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
 
     def test_room_on_the_street_face_is_not_dark(self):
-        """Negative of the above: the basement hall touches the street face, so it could have a window."""
+        """Negative of the above: the flex room's street face is 3.78 m, the NE corner column takes 0.51 + 0.1 margin,
+        leaving 3.12 m clear, so it can have a window."""
+        def f(lay):
+            lay["rooms"]["flex"]["occupancy"] = "study"
+        res = self.mutate(f)
+        self.assertNotIn("flex", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
+
+    def test_a_street_face_taken_by_a_column_is_dark(self):
+        """Round 8: the hall's street face is 1.30 m, but the party-side column takes 0.51 m + a 0.1 m frame margin,
+        leaving 0.69 m (< the 1.0 m a window face needs): as a habitable room it would be dark."""
         def f(lay):
             lay["rooms"]["hall-b"]["occupancy"] = "study"
         res = self.mutate(f)
-        self.assertNotIn("hall-b", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
+        self.assertIn("hall-b", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
 
     def test_unbuildable_door_fails(self):
         def f(lay):

@@ -156,14 +156,19 @@ def sym_dims(sym):
     return tuple(out)
 
 
-def sized_door(doc, syms, width, height, cache):
+def sized_door(doc, syms, width, height, cache, sliding=False):
     """A door type of exactly width x height (m): a stock type if one matches, else a resized duplicate of the
-    nearest (a near-miss would put the wrong hole in the wall: a 2.1 m leaf under a 1.9 m ramp soffit)."""
-    key = (round(width, 3), round(height, 3))
+    nearest (a near-miss would put the wrong hole in the wall: a 2.1 m leaf under a 1.9 m ramp soffit). sliding:
+    only from families whose name says sliding, when the model has any."""
+    key = (round(width, 3), round(height, 3), sliding)
     if key in cache:
         return cache[key]
     best, bd = None, 1e9
-    for s, _ in syms:
+    pool = syms
+    if sliding:
+        sl = [(s, w) for s, w in syms if "slid" in s.Family.Name.lower()]
+        pool = sl or syms
+    for s, _ in pool:
         w, h = sym_dims(s)
         if w is None or h is None:
             continue
@@ -253,7 +258,7 @@ def build_option(app, model, spec, folder):
             rb["failed"].append({"door": d, "error": "no host wall"})
             continue
         try:
-            sym = sized_door(doc, dsyms, d["width"], d.get("height", 2.10), sized)
+            sym = sized_door(doc, dsyms, d["width"], d.get("height", 2.10), sized, d.get("sliding", False))
             if not sym.IsActive:
                 sym.Activate()
                 doc.Regenerate()
@@ -261,7 +266,8 @@ def build_option(app, model, spec, folder):
                                                 StructuralType.NonStructural)
             w_, h_ = sym_dims(sym)
             rb.setdefault("doors", []).append({"level": d["level"], "x": d["x"], "y": d["y"], "rooms": d.get("rooms"),
-                                               "width": w_, "height": h_})
+                                               "width": w_, "height": h_, "family": sym.Family.Name,
+                                               "garden": bool(d.get("garden"))})
             nd += 1
         except Exception as exc:
             rb["failed"].append({"door": d, "error": str(exc)})
@@ -281,6 +287,8 @@ def build_option(app, model, spec, folder):
             p = inst.get_Parameter(BuiltInParameter.INSTANCE_SILL_HEIGHT_PARAM)
             if p is not None and not p.IsReadOnly:
                 p.Set(ft(wdw["sill"]))
+            rb.setdefault("windows", []).append({"room": wdw.get("room"), "level": wdw["level"], "x": wdw["x"],
+                                                 "y": wdw["y"], "width": wdw["width"], "sill": wdw["sill"]})
             nw += 1
         except Exception as exc:
             rb["failed"].append({"window": wdw, "error": str(exc)})
@@ -325,8 +333,8 @@ def build_option(app, model, spec, folder):
         if not DirectShape.IsValidCategoryId(fcid, doc):
             fcid = ElementId(BuiltInCategory.OST_GenericModel)
         r, d = pk["ramp"], pk["deck"]
-        prof = [(r["x0"], r["z_top0"]), (r["x1"], r["z_top1"]), (r["x1"], r["z_top1"] - r["thick"]),
-                (r["x0"], r["z_top0"] - r["thick"])]
+        top = [tuple(v) for v in r["profile"]]                  # the ramp's surface, eased ends and all
+        prof = top + [(x, z - r["thick"]) for x, z in reversed(top)]
         for name, geo in (("ramp", solid_prism_xz(prof, r["y0"], r["y1"])),
                           ("deck", solid_box([v * 1000 for v in (d["x0"], d["y0"], d["z_top"] - d["thick"],
                                                                   d["x1"], d["y1"], d["z_top"])]))):
@@ -357,6 +365,20 @@ def build_option(app, model, spec, folder):
                 rb["built"].setdefault("infills", []).append(int(str(s.Id)))
             except Exception as exc:
                 rb["failed"].append({"infill": inf, "error": str(exc)})
+        rcid = ElementId(BuiltInCategory.OST_StairsRailing)
+        if not DirectShape.IsValidCategoryId(rcid, doc):
+            rcid = ElementId(BuiltInCategory.OST_GenericModel)
+        for i, rail in enumerate(spec.get("rails", [])):          # guard rails 1.1 m (ramp edge, fence, deck end)
+            try:
+                s = DirectShape.CreateElement(doc, rcid)
+                s.ApplicationId, s.ApplicationDataId = "archpipe-option", "rail-%d" % i
+                g = List[GeometryObject]()
+                g.Add(solid_prism_xz(rail["profile"], rail["y0"], rail["y1"]))
+                s.SetShape(g)
+                s.Name = "GUARD " + rail["what"]
+                rb["built"].setdefault("rails", []).append(int(str(s.Id)))
+            except Exception as exc:
+                rb["failed"].append({"rail": rail["what"], "error": str(exc)})
         for i, c in enumerate(pk["cars"]):
             try:
                 s = DirectShape.CreateElement(doc, ElementId(BuiltInCategory.OST_GenericModel))

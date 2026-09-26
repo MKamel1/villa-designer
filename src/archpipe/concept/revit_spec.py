@@ -26,7 +26,7 @@ SILL, HEAD = 0.90, 2.30              # head at the beam soffit less finishes (el
 
 def _stair_model(lay):
     from . import stair_options as SO
-    return {"u": S.u_in_old_bay, "u-front": SO.u_front_bay, "party-fixed": S.party_flight_fixed}[lay["stair"]]()
+    return {"u": S.u_in_old_bay, "u-front": SO.u_front_bay, "party-fixed": S.party_flight_fixed, "u-length": S.u_lengthwise_party, "party-r8": S.party_flight_r8}[lay["stair"]]()
 
 
 def _room_at(lay, level, x, y):
@@ -125,7 +125,7 @@ def build(lay):
             else:
                 w_ = 0.9
             spec["doors"].append({"level": lv, "x": mid if e1[0] == "h" else e1[1], "y": e1[1] if e1[0] == "h" else mid,
-                                  "width": w_, "rooms": [a, b]})
+                                  "width": w_, "rooms": [a, b], "span": [e1[0], e1[1], lo, hi]})
         for rid, l2, seg in lay["entries"]:
             if l2 != lv:
                 continue
@@ -134,7 +134,7 @@ def build(lay):
             lo, hi = max(e[2], sg[2]), min(e[3], sg[3])
             mid = (lo + hi) / 2
             spec["doors"].append({"level": lv, "x": mid if e[0] == "h" else e[1], "y": e[1] if e[0] == "h" else mid,
-                                  "width": 1.0, "rooms": [rid, "core"], "entrance": True})
+                                  "width": 1.0, "rooms": [rid, "core"], "entrance": True, "span": [e[0], e[1], lo, hi]})
         # garden doors and windows
         ext = lay.get("extension")
         faces = V.window_faces(lv, ext)
@@ -153,16 +153,17 @@ def build(lay):
                     mid = (lo + hi) / 2
                     x, y = (mid, e[1]) if e[0] == "h" else (e[1], mid)
                     garden = lv == "B" and occ in ("living", "dining", "kitchen")
+                    span = [e[0], e[1], lo, hi]                  # axis, face coordinate, usable run
                     if garden and occ in ("living", "dining"):
                         spec["doors"].append({"level": lv, "x": x, "y": y, "width": min(2.4, L_ - 0.8), "rooms": [rid, "yard"],
-                                              "garden": True})
+                                              "garden": True, "span": span})
                         continue
                     if occ in vocab.HABITABLE:
                         spec["windows"].append({"level": lv, "x": x, "y": y, "width": round(min(2.4, L_ - 0.8), 2),
-                                                "sill": SILL, "height": HEAD - SILL, "room": rid})
+                                                "sill": SILL, "height": HEAD - SILL, "room": rid, "span": span})
                     else:
                         spec["windows"].append({"level": lv, "x": x, "y": y, "width": 0.8, "sill": 1.5,
-                                                "height": HEAD - 1.5, "room": rid})
+                                                "height": HEAD - 1.5, "room": rid, "span": span})
         for rid, r in lay["rooms"].items():
             if r["level"] == lv:
                 x0, y0, x1, y1 = r["rect"]
@@ -173,77 +174,198 @@ def build(lay):
     spec["stair_name"] = st["name"]
     pk2 = lay.get("parking2")
     if pk2:
-        from . import villa_parking as P
-        street = -1.2                                   # street level in model metres (GF FFL = 0)
-        r0, _, r1, _ = pk2["ramp"]
-        d0, y0, d1, y1 = pk2["deck"]
-        spec["parking2"] = {
-            "ramp": {"x0": r0, "x1": r1, "y0": y0, "y1": y1, "z_top0": street + 0.0,
-                     "z_top1": street + pk2["deck_top"], "thick": P.BUILDUP},
-            "deck": {"x0": d0, "x1": d1, "y0": y0, "y1": y1, "z_top": street + pk2["deck_top"], "thick": P.BUILDUP},
-            "cars": [[d0 + 0.2 + i * 4.9, (y0 + y1) / 2 - 0.9, d0 + 0.2 + i * 4.9 + 4.6, (y0 + y1) / 2 + 0.9,
-                      street + pk2["deck_top"], street + pk2["deck_top"] + 1.45] for i in range(pk2["cars"])]}
-        # walls of the rooms under the ramp and deck stop at the soffit above them (client review r7: they came
-        # through the ramp): a cross wall takes the clear height at its low face; a wall along the ramp is split at
-        # the ramp's top end, takes the clear height at its low end and gets a sloped infill up to the soffit
-        zb = LEVELS_Z["B"]
-        walls, spec["infills"] = [], []
-        for w in spec["walls"]:
-            if w["level"] != "B" or max(w["y0"], w["y1"]) <= V.YE + EXT_T:
-                walls.append(w)                        # inside the villa, or on its east face line
-                continue
-            if abs(w["y0"] - w["y1"]) > 1e-6:          # cross wall (constant x)
-                walls.append(dict(w, height=round(min(WALL_H, P.clear_at(w["x0"] - w["thickness"] / 2)), 3)))
-                continue
-            a, b = sorted((w["x0"], w["x1"]))
-            cuts = [a] + [c for c in (P.RAMP_X1,) if a + 1e-6 < c < b - 1e-6] + [b]
-            for s, e in zip(cuts, cuts[1:]):
-                h0, h1 = P.clear_at(s), P.clear_at(e)
-                walls.append(dict(w, x0=s, x1=e, height=round(min(WALL_H, h0), 3)))
-                if h1 - h0 > 0.005:
-                    t = w["thickness"] / 2
-                    spec["infills"].append({"what": "wall top up to the ramp soffit", "y0": round(w["y0"] - t, 3),
-                                            "y1": round(w["y0"] + t, 3), "profile": [
-                                                [s, round(zb + h0, 3)], [e, round(zb + h0, 3)], [e, round(zb + h1, 3)]]})
-        spec["walls"] = walls
-        # doors into the rooms under the ramp: at the wall's high end, leaf sized to the clear height
-        ext_ids = {r["id"] for r in lay["rooms"].values() if r.get("ext")}
-        for d in spec["doors"]:
-            ids = [i for i in d.get("rooms", []) if i in ext_ids]
-            if d["level"] != "B" or not ids:
-                continue
-            ra, rb_ = (lay["rooms"][i]["rect"] for i in d["rooms"])
-            if abs(d["y"] - V.YE) < 1e-6:                        # on the villa's east face: slides along x
-                lo, hi = max(ra[0], rb_[0]), min(ra[2], rb_[2])
-                d["x"], d["height"], d["clear"], d["fit"] = P.door_fit(lo, hi, d["width"],
-                                                                         lay["rooms"][ids[0]]["occupancy"])
-            else:                                               # a cross wall: the clear height is fixed there
-                c = P.clear_at(d["x"])
-                d["height"], d["clear"] = min(P.DOOR_H, round(c - P.HEAD_ZONE, 2)), c
-                d["fit"] = "full" if d["height"] >= P.DOOR_H - 1e-9 else "reduced"
-        # the kept NE yard wall is the store's side from the gate to the villa: no new wall there, only an infill
-        # from the wall top (1.40 m) up to the ramp soffit, whose profile slopes with the ramp
-        from .. import villa_env as E
-        wx0, wy0, wx1, wy1 = (v / 1000 for v in E.YARD_WALL)
-        spec["walls"] = [w for w in spec["walls"] if not (
-            w["level"] == "B" and abs(w["y0"] - w["y1"]) < 1e-6 and abs(w["y0"] - V.YE) < EXT_T
-            and max(w["x0"], w["x1"]) <= wx1 + 1e-6)]
-        top = LEVELS_Z["B"] + E.YARD_WALL_H / 1000
-        spec["infill"] = {"y0": wy0, "y1": wy1, "profile": [
-            [wx0, top], [wx1, top], [wx1, round(LEVELS_Z["B"] + P.clear_at(wx1), 3)],
-            [wx0, round(LEVELS_Z["B"] + P.clear_at(wx0), 3)]]}
-        # GF windows over the ramp / deck: high sills (a person on the deck sees over a 0.9 m sill)
-        for wdw in spec["windows"]:
-            if wdw["level"] == "GF" and abs(wdw["y"] - V.YE) < 1e-6 and r0 - 1e-6 <= wdw["x"] <= d1 + 1e-6:
-                wdw["sill"], wdw["height"] = 1.5, round(HEAD - 1.5, 2)
-        spec["roofs"] = []
+        _parking(lay, spec, pk2)
     else:
         spec["roofs"] = [list(r) for r in V._exts(lay.get("extension"))]   # east-yard blocks: roof at the GF floor
+    _clear_columns(spec)
     for d in spec["doors"]:                            # every door states its leaf height; Revit types are sized to it
         d.setdefault("height", GARDEN_DOOR_H if d.get("garden") else DOOR_H)
     op = S.clashes(st)["slab_opening_needed"]
     spec["gf_opening"] = [v / 1000 for v in op] if op else None
     return spec
+
+
+FACADE_COLUMNS = None
+
+
+def facade_columns():
+    """Column spans on the villa's faces: {("h", y) or ("v", x): [(lo, hi), ...]} in metres (villa_env.COLUMNS)."""
+    global FACADE_COLUMNS
+    if FACADE_COLUMNS is None:
+        from .. import villa_env as E
+        out = {}
+        for x0, y0, x1, y1 in ((v / 1000 for v in c) for c in E.COLUMNS):
+            for key, lo, hi, near in ((("h", V.YE), x0, x1, abs(y1 - V.YE) < 0.06),
+                                      (("h", V.YP), x0, x1, abs(y0 - V.YP) < 0.06),
+                                      (("v", V.X0), y0, y1, abs(x0 - V.X0) < 0.06),
+                                      (("v", V.XR), y0, y1, abs(x1 - V.XR) < 0.06)):
+                if near:
+                    out.setdefault(key, []).append((round(lo, 3), round(hi, 3)))
+        FACADE_COLUMNS = out
+    return FACADE_COLUMNS
+
+
+def _free_runs(lo, hi, blocks, margin=0.1):
+    runs = [(lo, hi)]
+    for b0, b1 in blocks:
+        nxt = []
+        for a, b in runs:
+            if b1 + margin <= a or b0 - margin >= b:
+                nxt.append((a, b))
+            else:
+                nxt += [(a, min(b, b0 - margin)), (max(a, b1 + margin), b)]
+        runs = [(a, b) for a, b in nxt if b - a > 1e-6]
+    return runs
+
+
+def _clear_columns(spec):
+    """Windows and garden doors sit in the widest stretch of their facade run clear of the kept columns and of
+    other openings on that run (client review r7 class: an opening through a column was never checked)."""
+    cols = facade_columns()
+    fixed = [d for d in spec["doors"] if d.get("fixed_span")]
+    keep_w = []
+    for o in [w for w in spec["windows"]] + [d for d in spec["doors"] if d.get("span")]:
+        ax, c, lo, hi = o["span"]
+        blocks = [bl for (a, cc), spans in cols.items() if a == ax and abs(cc - c) < 0.06 for bl in spans]
+        blocks += [tuple(d["fixed_span"]) for d in fixed if d["level"] == o["level"] and d["fixed_span_face"] == [ax, c]]
+        is_door = o in spec["doors"] and not o.get("garden")
+        runs = _free_runs(lo, hi, blocks, margin=0.05 if is_door else 0.1)
+        min_w = 1.2 if o.get("garden") else 0.6
+        if not runs:
+            if not is_door:
+                o["dropped"] = "no column-free run"
+            continue                                   # a door with no free run stays: opening_problems reports it
+        a, b = max(runs, key=lambda r: r[1] - r[0])
+        if is_door:
+            if b - a < o["width"] + 0.1 - 1e-9:       # leaf + a 50 mm frame each side
+                continue                               # does not fit: left in place for the post-condition to catch
+            mid = round((a + b) / 2, 3)
+        else:
+            width = round(min(o["width"], b - a - 0.2), 2)
+            if width < min_w:
+                o["dropped"] = "column-free run %.2f m" % (b - a)
+                continue
+            mid = round((a + b) / 2, 3)
+            o["width"] = width
+        if ax == "h":
+            o["x"] = mid
+        else:
+            o["y"] = mid
+    spec["dropped"] = [{"room": o.get("room") or "/".join(o.get("rooms", [])), "level": o["level"],
+                        "reason": o["dropped"]} for o in spec["windows"] + spec["doors"] if "dropped" in o]
+    spec["windows"] = [w for w in spec["windows"] if "dropped" not in w]
+    spec["doors"] = [d for d in spec["doors"] if "dropped" not in d]
+
+
+def opening_problems(spec):
+    """Post-condition: no window or door (by its width) overlaps a kept column on the facade line it sits in."""
+    cols, out = facade_columns(), []
+    for o in spec["windows"] + spec["doors"]:
+        for (ax, c), spans in cols.items():
+            on = abs((o["y"] if ax == "h" else o["x"]) - c) < 0.06
+            if not on:
+                continue
+            m = o["x"] if ax == "h" else o["y"]
+            for b0, b1 in spans:
+                if m - o["width"] / 2 < b1 - 1e-6 and m + o["width"] / 2 > b0 + 1e-6:
+                    out.append("%s at %s %.2f (w %.2f, %s) overlaps the column %.3f-%.3f"
+                               % ("door" if o in spec["doors"] else "window", ax, m, o["width"], o.get("level"), b0, b1))
+    return out
+
+
+def _parking(lay, spec, pk2):
+    from . import villa_parking as P
+    from .. import villa_env as E
+    street, zb = -1.2, LEVELS_Z["B"]                   # model z of the street and the basement FFL (m)
+    r0, _, r1, _ = pk2["ramp"]
+    d0, y0, d1, y1 = pk2["deck"]
+    deck_z = street + pk2["deck_top"]
+    spec["parking2"] = {
+        "ramp": {"profile": [[x, round(street + z, 3)] for x, z in pk2["profile"]], "y0": y0, "y1": y1,
+                 "thick": P.BUILDUP},
+        "deck": {"x0": d0, "x1": d1, "y0": y0, "y1": y1, "z_top": deck_z, "thick": P.BUILDUP},
+        "cars": [[d0 + 0.2 + i * 4.9, (y0 + y1) / 2 - 0.9, d0 + 0.2 + i * 4.9 + 4.6, (y0 + y1) / 2 + 0.9,
+                  deck_z, deck_z + 1.45] for i in range(pk2["cars"])]}
+    beyond = pk2.get("roof_beyond_deck")
+    spec["roofs"] = [list(beyond)] if beyond else []   # the rooms beyond a one-car deck: roof level with the deck
+    # walls of the rooms under the ramp and deck stop at the soffit above them (client review r7: they came through
+    # the ramp): a cross wall takes the clear height at its low face; a wall along the ramp is split at the ramp's
+    # slope breaks, takes the clear height at each piece's low end and gets a sloped infill up to the soffit
+    walls, spec["infills"] = [], []
+    for w in spec["walls"]:
+        if w["level"] != "B" or max(w["y0"], w["y1"]) <= V.YE + EXT_T:
+            walls.append(w)                            # inside the villa, or on its east face line
+            continue
+        if abs(w["y0"] - w["y1"]) > 1e-6:              # cross wall (constant x)
+            walls.append(dict(w, height=round(min(WALL_H, P.clear_at(w["x0"] - w["thickness"] / 2)), 3)))
+            continue
+        a, b = sorted((w["x0"], w["x1"]))
+        pts = P.soffit_points(a, b)
+        for (s_, h0), (e_, h1) in zip(pts, pts[1:]):
+            walls.append(dict(w, x0=s_, x1=e_, height=round(min(WALL_H, h0), 3)))
+            if h1 - h0 > 0.005:
+                t = w["thickness"] / 2
+                spec["infills"].append({"what": "wall top up to the ramp soffit", "y0": round(w["y0"] - t, 3),
+                                        "y1": round(w["y0"] + t, 3), "profile": [
+                                            [s_, round(zb + h0, 3)], [e_, round(zb + h0, 3)], [e_, round(zb + h1, 3)]]})
+    spec["walls"] = walls
+    # doors into the rooms under the ramp: at the wall's high end, leaf sized to the clear height
+    ext_ids = {r["id"] for r in lay["rooms"].values() if r.get("ext")}
+    for d in spec["doors"]:
+        ids = [i for i in d.get("rooms", []) if i in ext_ids]
+        if d["level"] != "B" or not ids:
+            continue
+        occ = lay["rooms"][ids[-1]]["occupancy"]
+        ra, rb_ = (lay["rooms"][i]["rect"] for i in d["rooms"])
+        d.pop("span", None)                            # placed here, by clear height, not by _clear_columns
+        if abs(d["y"] - V.YE) < 1e-6:                  # on the villa's east face: slides along x
+            lo, hi = max(ra[0], rb_[0]), min(ra[2], rb_[2])
+            runs = [r for r in _free_runs(lo, hi, facade_columns().get(("h", V.YE), []), margin=0.0)
+                    if r[1] - r[0] >= d["width"] + 0.2 - 1e-9] or [(lo, hi)]
+            a_, b_ = max(runs, key=lambda r: r[1])     # the highest stretch the door fits in
+            d["x"], d["height"], d["clear"], d["fit"] = P.door_fit(a_, b_, d["width"], occ)
+        else:                                          # a cross wall: the clear height is fixed there
+            d["height"], d["clear"], d["fit"] = P.leaf_for(min(P.clear_at(d["x"] - 0.1), P.clear_at(d["x"] + 0.1)), occ)
+    # the kept NE yard wall is the store's side from the gate to the villa: no new wall there, only an infill from
+    # the wall top (1.40 m) up to the ramp soffit, which follows the ramp's slope breaks
+    wx0, wy0, wx1, wy1 = (v / 1000 for v in E.YARD_WALL)
+    spec["walls"] = [w for w in spec["walls"] if not (
+        w["level"] == "B" and abs(w["y0"] - w["y1"]) < 1e-6 and abs(w["y0"] - V.YE) < EXT_T
+        and max(w["x0"], w["x1"]) <= wx1 + 1e-6)]
+    top = zb + E.YARD_WALL_H / 1000
+    soff = [[x, round(zb + c, 3)] for x, c in P.soffit_points(wx0, wx1)]
+    spec["infill"] = {"y0": wy0, "y1": wy1, "profile": [[wx0, top], [wx1, top]] + soff[::-1]}
+    # the GF door onto the deck: a bypass sliding door between the east-face columns, sill level with the deck
+    dd = lay.get("deck_door")
+    if dd:
+        spec["doors"].append({"level": "GF", "x": round((dd["x0"] + dd["x1"]) / 2, 3), "y": V.YE,
+                              "width": dd["width"], "height": P.DOOR_H, "rooms": [dd["room"], "deck"],
+                              "sliding": True, "fixed_span": [dd["x0"], dd["x1"]], "fixed_span_face": ["h", V.YE]})
+    # GF windows beside the ramp and deck: sills above the eye of a person standing on them (privacy)
+    eye = max(z for _, z in pk2["profile"]) + 1.6 - 1.2  # above the GF FFL
+    for wdw in spec["windows"]:
+        if wdw["level"] == "GF" and abs(wdw["y"] - V.YE) < 1e-6 and r0 - 1e-6 <= wdw["x"] <= d1 + 1e-6:
+            sill = round(eye + 0.1, 2)
+            wdw["sill"], wdw["height"] = sill, round(HEAD - sill, 2)
+    # guarding (1.1 m, card ukadk-guarding-height-external): the ramp's west edge over the sunken north patio, the
+    # deck and the ramp's top along the east fence where the fence is under 1.1 m above them, and the deck end
+    g, rails = 1.1, []
+    prof = [[x, round(street + z, 3)] for x, z in pk2["profile"]]
+    patio = [p for p in prof if p[0] <= wx1 + 1e-6] + [[wx1, round(street + P.top_at(wx1), 3)]]
+    rails.append({"what": "guard rail on the ramp edge over the north patio", "y0": round(V.YE - 0.05, 3),
+                  "y1": V.YE, "profile": [[x, z] for x, z in patio] + [[x, round(z + g, 3)] for x, z in patio[::-1]]})
+    fence_top = zb + E.FENCE_H / 1000
+    x_low = next((x for x in [i / 100 for i in range(int(r0 * 100), int(d1 * 100) + 1)]
+                  if fence_top - (street + P.top_at(x)) < g - 1e-9), None)
+    end = beyond[2] if beyond else d1
+    if x_low is not None:
+        zs = [[x_low, round(street + P.top_at(x_low), 3)]] + [p for p in prof if p[0] > x_low] + [[end, deck_z]]
+        rails.append({"what": "guard rail along the east fence (fence under 1.1 m above the deck)",
+                      "y0": round(y1 - 0.10, 3), "y1": round(y1 - 0.05, 3),
+                      "profile": zs + [[x, round(z + g, 3)] for x, z in zs[::-1]]})
+    rails.append({"what": "guard rail at the deck end over the yard", "y0": y0, "y1": y1, "profile": [
+        [end - 0.05, deck_z], [end, deck_z], [end, round(deck_z + g, 3)], [end - 0.05, round(deck_z + g, 3)]]})
+    spec["rails"] = rails
 
 
 def _line(w, off):
@@ -286,8 +408,26 @@ def clearance_problems(lay, walls, doors, infills=()):
         rooms = [lay["rooms"].get(r) for r in d.get("rooms") or []]
         if not any(r and r.get("ext") for r in rooms):
             continue
-        low = min(P.clear_at(d["x"] - d["width"] / 2), P.clear_at(d["x"] + d["width"] / 2))
+        if abs(d["y"] - V.YE) < 1e-6:                  # in the east face: the leaf runs along x under the slope
+            low = min(P.clear_at(d["x"] - d["width"] / 2), P.clear_at(d["x"] + d["width"] / 2))
+        else:                                          # in a cross wall: both faces of the wall
+            low = min(P.clear_at(d["x"] - 0.1), P.clear_at(d["x"] + 0.1))
         if d["height"] + P.HEAD_ZONE > low + tol:
             out.append("door x %.2f (%s): %.2f m leaf + %.2f frame under %.2f m clear"
                        % (d["x"], "/".join(d.get("rooms") or []), d["height"], P.HEAD_ZONE, low))
+    return out
+
+
+def window_credit_problems(lay, windows, doors):
+    """Post-condition (round 8): every habitable room the critic credits with its own window has a window or a
+    garden door in what is built (the spec, or Revit's read-back). The column pass once dropped a kitchen window
+    while the critic still counted the kitchen as lit."""
+    res = V.critique(lay)
+    w = [c for c in res["checks"] if c["check"] == "window"][0]
+    unlit = set(w.get("rooms") or []) | set(w.get("borrowed_light") or [])
+    have = {o.get("room") for o in windows} | {r for d in doors if d.get("garden") for r in d.get("rooms", [])}
+    out = []
+    for rid, r in lay["rooms"].items():
+        if r["occupancy"] in vocab.HABITABLE and rid not in unlit and rid not in have:
+            out.append("%s (%s) is credited with a window but none is built" % (rid, r["level"]))
     return out

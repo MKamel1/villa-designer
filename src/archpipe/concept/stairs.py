@@ -69,6 +69,43 @@ def u_stair(x0, x1, y_start, risers1, risers2, width, going, name):
             "ends": {"foot": ["h", y_start, fa[0], fa[1]], "top": ["h", y_top, fb[0], fb[1]]}}
 
 
+def u_lengthwise(x_end, y0, risers1, risers2, width, going, name, gap=50):
+    """A U stair running along the bar: flight 1 (the basement foot) on the far side of the well from y0 rises
+    toward x_end, a half landing across both flights at x_end, flight 2 on the y0 side returns and arrives at the
+    GF. Both ends face +x (away from x_end)."""
+    rise = (GF_FFL - B_FFL) / (risers1 + risers2)
+    f2 = (y0, y0 + width)                              # flight 2 (arrival) on the y0 side
+    f1 = (y0 + width + gap, y0 + 2 * width + gap)      # flight 1 (foot) beside it
+    x_land1 = x_end + LANDING_DEPTH
+    x_foot = x_land1 + (risers1 - 1) * going
+    parts = []
+    for i in range(1, risers1):
+        xa, xb = x_foot - (i - 1) * going, x_foot - i * going
+        top = B_FFL + i * rise
+        parts.append(_box(xa, f1[0], top - TREAD_T, xb, f1[1], top, f"{name} flight 1 tread {i}"))
+        parts.append(_box(xa, f1[0], top, xb, f1[1], top + HEAD, f"{name} headroom f1 tread {i}"))
+    z_land = B_FFL + risers1 * rise
+    parts.append(_box(x_end, f2[0], z_land - LANDING_T, x_land1, f1[1], z_land, f"{name} half landing"))
+    parts.append(_box(x_end, f2[0], z_land, x_land1, f1[1], z_land + HEAD, f"{name} headroom over the landing"))
+    for j in range(1, risers2):
+        xa, xb = x_land1 + (j - 1) * going, x_land1 + j * going
+        top = z_land + j * rise
+        parts.append(_box(xa, f2[0], top - TREAD_T, xb, f2[1], top, f"{name} flight 2 tread {j}"))
+        parts.append(_box(xa, f2[0], top, xb, f2[1], top + HEAD, f"{name} headroom f2 tread {j}"))
+    x_top = x_land1 + (risers2 - 1) * going
+    return {"name": name, "parts": parts, "rise": rise, "going": going, "risers": risers1 + risers2,
+            "landing": [x_end, f2[0], x_land1, f1[1]], "foot_x": x_foot, "top_x": x_top, "flight1": f1,
+            "flight2": f2, "ends": {"foot": ["v", x_foot, f1[0], f1[1]], "top": ["v", x_top, f2[0], f2[1]]}}
+
+
+def u_lengthwise_party():
+    """Client review r7: the U across the bar left a 1.30 m passage. Turned lengthwise along the party wall, off
+    the party-wall beam (y -28421), the half landing at the street end 20 mm clear of column 1590377 (CAD face
+    x 3977; Revit holds it at 3977.2 and flagged the landing touching it); 17 x 176.5 / 280 as the old U. The foot
+    and the GF arrival both face the rear."""
+    return u_lengthwise(3977 + 20, E.BAR[1] + 250, 9, 8, 900, 280, "U-stair along the party wall")
+
+
 # ---- the options ------------------------------------------------------------------------------------------------
 def r3_party_flight():
     """Round 3 as drawn (the defect): 16 x 187.5 / 240, y -28471..-27471, top at x 3817 on the street terrace."""
@@ -88,8 +125,16 @@ def party_flight_fixed():
     return straight(3977 + 900, 3977 + 900 + 16 * 280, y0, y0 + 950, 17, "party-wall flight, corrected")
 
 
+def party_flight_r8():
+    """Round 7 review: the corrected party-wall flight left 0.9 m between column 1590377 (x 3977) and the flight for
+    the GF core door on the top landing, and the door ran into the column. Moved 0.3 m to the rear: landing
+    x 3977-5177 (1.2 m: a 1.0 m door + frame)."""
+    y0 = E.BAR[1] + 250
+    return straight(3977 + 1200, 3977 + 1200 + 16 * 280, y0, y0 + 950, 17, "party-wall flight (r8, landing 1.2 m)")
+
+
 def options():
-    return [r3_party_flight(), u_in_old_bay(), party_flight_fixed()]
+    return [r3_party_flight(), u_in_old_bay(), party_flight_fixed(), u_lengthwise_party(), party_flight_r8()]
 
 
 # ---- structure ----------------------------------------------------------------------------------------------------

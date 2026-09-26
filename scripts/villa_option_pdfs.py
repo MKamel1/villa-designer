@@ -77,13 +77,23 @@ def plan_page(pdf, lay, rb, res):
         ax.text(*T(V.XR + 1.0, (V.YP + V.YE) / 2), "GARDEN (rear yard)", ha="center", fontsize=8, color="0.3")
         pk = lay.get("parking2")
         if pk:                                        # the ramp and deck are above the basement cut / below the GF
-            for rect, lab in ((pk["ramp"], "RAMP 10 %% street 0.00 to +%.2f" % pk["deck_top"]),
-                              (pk["deck"], "PARKING DECK +%.2f (%d car%s)" % (pk["deck_top"], pk["cars"],
-                                                                           "s" if pk["cars"] > 1 else ""))):
+            parts = [(pk["ramp"], "RAMP %d %% (%d %% ends) 0.00 to +%.2f"
+                      % (pk["gradient"] * 100, pk.get("transition", (0, 0))[1] * 100, pk["deck_top"])),
+                     (pk["deck"], "DECK +%.2f = GF (%d car%s)" % (pk["deck_top"], pk["cars"], "s" if pk["cars"] > 1
+                                                                   else ""))]
+            if pk.get("roof_beyond_deck"):
+                parts.append((pk["roof_beyond_deck"], "roof"))
+            dd = lay.get("deck_door")
+            if dd and lv == "GF":
+                ax.plot(*zip(T(dd["x0"], V.YE), T(dd["x1"], V.YE)), c="tab:orange", lw=4, solid_capstyle="butt")
+                ax.annotate("1.80 sliding door\nto the deck", T((dd["x0"] + dd["x1"]) / 2, V.YE),
+                            xytext=T((dd["x0"] + dd["x1"]) / 2, V.YE - 1.2), fontsize=5.5, color="tab:orange",
+                            ha="center", arrowprops=dict(arrowstyle="-", lw=0.5, color="tab:orange"))
+            for rect, lab in parts:
                 a, b, c, d = rect
                 ax.plot(*zip(*[T(a, b), T(c, b), T(c, d), T(a, d), T(a, b)]), ls="--", c="tab:orange", lw=1)
                 if lv == "GF":
-                    ax.text(*T((a + c) / 2, (b + d) / 2), lab, ha="center", va="center", fontsize=6, rotation=90,
+                    ax.text(*T((a + c) / 2, (b + d) / 2), lab, ha="center", va="center", fontsize=5.2, rotation=90,
                             color="tab:orange", bbox=dict(fc="white", ec="none", alpha=0.8, pad=0.3))
         np_ = lay.get("north_patio")
         if np_ and lv == "B":
@@ -133,8 +143,8 @@ def views_page(pdf, lay):
                                                       "above)")]
     if find(f"{lay['id']}-street-view"):
         spots[2] = ("garden-view", [0.01, 0.01, 0.40, 0.34], spots[2][2])
-        spots.append(("street-view", [0.42, 0.01, 0.57, 0.34], "From the street corner: gate, 10 % ramp, parking "
-                                                               "deck and car envelope(s), cut at 2.55 m"))
+        spots.append(("street-view", [0.42, 0.01, 0.57, 0.34], "From the street corner: gate, ramp up to the GF-level "
+                                                               "deck, car envelope(s), guard rails; cut at 2.55 m"))
     for key, box, title in spots:
         p = find(f"{lay['id']}-{key}")
         ax = fig.add_axes(box)
@@ -193,6 +203,18 @@ def checks_page(pdf, lay, res, rb, op):
         rows.append(["PASS" if ok else "FAIL", "BUILT: walls/doors under the ramp fit (Revit read-back)",
                      ("%d problems" % len(probs) + ("; " + "; ".join(probs[:2]) if probs else "") +
                       ("; %d doors without a read height" % missing if missing else ""))[:200]])
+    built_doors = [dict(d, level=d["level"]) for d in rb.get("doors", []) if d.get("width")]
+    op = RS.opening_problems({"windows": RS.build(lay)["windows"], "doors": built_doors})
+    rows.append(["PASS" if not op else "FAIL", "BUILT: no door or window through a kept column",
+                 ("%d problems" % len(op) + ("; " + "; ".join(op[:2]) if op else ""))[:200]])
+    sp_ = RS.build(lay)
+    if sp_.get("dropped"):
+        rows.append(["ADVISORY", "openings left out at a column (spec)",
+                     "; ".join("%s %s: %s" % (d["room"], d["level"], d["reason"]) for d in sp_["dropped"])[:200]])
+    wc = RS.window_credit_problems(lay, rb.get("windows", []), rb.get("doors", []))
+    rows.append(["PASS" if not wc and rb.get("windows") is not None else "FAIL",
+                 "BUILT: every room credited with a window has one (Revit read-back)",
+                 ("%d problems" % len(wc) + ("; " + "; ".join(wc[:2]) if wc else ""))[:200]])
     rows.append(["BUILT", "Revit model", f"walls {rb['built'].get('walls')}, doors {rb['built'].get('doors')}, windows "
                  f"{rb['built'].get('windows')}, rooms {len(rb['rooms'])}, build failures {len(rb['failed'])}"])
     t = tx.table(cellText=rows, colLabels=["", "check", "result / basis"], colWidths=[0.07, 0.25, 0.68],

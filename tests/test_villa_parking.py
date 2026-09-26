@@ -1,21 +1,33 @@
-"""Round 7 parking options: raised deck in the east yard, rooms under the ramp and deck."""
+"""Round 7 parking options (revised after the client review): a ramp up to a GF-level deck in the east yard, rooms
+underneath, the study opening onto the deck, the U-stair along the party wall."""
 import unittest
 
 from archpipe.concept import revit_spec as RS
+from archpipe.concept import stairs as S
 from archpipe.concept import villa as V
 from archpipe.concept import villa_parking as P
 
 
 class ParkingGeometry(unittest.TestCase):
-    def test_ramp_reaches_the_deck_at_the_card_gradient(self):
-        self.assertAlmostEqual((P.RAMP_X1 - P.RAMP_X0) * P.GRADIENT, P.DECK_TOP, places=3)
+    def test_ramp_profile(self):
+        # gate +0.00, 1.0 m at 10 %, 20 % main slope, 1.0 m at 10 %, GF level +1.20 at the ramp top
+        (x0, z0), (x1, z1), (x2, z2), (x3, z3) = P.ramp_profile()
+        self.assertEqual((x0, z0), (V.FENCE_N, 0.0))
+        self.assertAlmostEqual((z1 - z0) / (x1 - x0), 0.10, places=6)
+        self.assertAlmostEqual((z2 - z1) / (x2 - x1), 0.20, places=6)
+        self.assertAlmostEqual((z3 - z2) / (x3 - x2), 0.10, places=6)
+        self.assertAlmostEqual(z3, P.DECK_TOP, places=6)
+        self.assertAlmostEqual(P.DECK_TOP, V.LEVELS["GF"], places=6)          # level with the GF
 
-    def test_clear_height_under_the_ramp(self):
-        # street gate: +0.00 - 0.35 build-up over the -1.80 floor = 1.45 m; deck: 0.85 - 0.35 + 1.80 = 2.30 m
+    def test_clear_height_under_the_ramp_and_deck(self):
+        # gate: 0.00 - 0.35 build-up over the -1.80 floor = 1.45 m; deck: 1.20 - 0.35 + 1.80 = 2.65 m
         self.assertAlmostEqual(P.clear_at(P.RAMP_X0), 1.45, places=3)
-        self.assertAlmostEqual(P.clear_at(P.RAMP_X1), 2.30, places=3)
-        self.assertAlmostEqual(P.clear_at(P.X_LOW), 2.00, places=3)
-        self.assertAlmostEqual(P.clear_at(P.RAMP_X1 + 5), 2.30, places=3)
+        self.assertAlmostEqual(P.clear_at(P.RAMP_X1), 2.65, places=3)
+        self.assertGreaterEqual(P.clear_at(P.X_LOW), 2.0)
+        self.assertLess(P.clear_at(P.X_LOW - 0.002), 2.0)
+
+    def test_the_ramp_reaches_the_gf_before_the_study_door(self):
+        self.assertLessEqual(P.RAMP_X1, P.STUDY_DOOR[0])
 
 
 class ParkingOptions(unittest.TestCase):
@@ -33,7 +45,7 @@ class ParkingOptions(unittest.TestCase):
             self.assertAlmostEqual(under[0]["rect"][0], V.FENCE_N, places=3)
             for a, b in zip(under, under[1:]):
                 self.assertAlmostEqual(a["rect"][2], b["rect"][0], places=3, msg=lay["id"])
-            self.assertAlmostEqual(under[-1]["rect"][2], lay["parking2"]["deck"][2], places=3)
+            self.assertAlmostEqual(under[-1]["rect"][2], max(lay["parking2"]["deck"][2], P.EXT_MIN_END), places=3)
             for r in under:
                 self.assertAlmostEqual(r["rect"][3], V.FENCE_E, places=3)
 
@@ -48,26 +60,123 @@ class ParkingOptions(unittest.TestCase):
         for lay in self.opts:
             self.assertIn(("kitchen", "dirty-kitchen"), [tuple(l) for l in lay["links"]])
 
-    def test_parking_elevation_rows_pass(self):
+    def test_parking_elevation_rows_have_no_failure(self):
         for lay in self.opts:
-            rows = [e for e in V.elevation_checks(lay) if e.get("group") == "parking2" or "deck" in e["item"]
-                    or "ramp" in e["item"]]
-            self.assertTrue(rows, lay["id"])
+            rows = V.elevation_checks(lay)
             self.assertFalse([e for e in rows if e["status"] == "fail"], lay["id"])
 
-    def test_spec_has_ramp_deck_cars_and_high_sills_over_the_deck(self):
+    def test_the_gradient_over_the_mh_limit_is_a_recorded_waiver(self):
+        rows = {e["item"]: e for e in V.elevation_checks(P.option("u", 1))}
+        mh = rows["parking ramp: main gradient vs garage-ramp limit"]
+        self.assertEqual(mh["status"], "waived")
+        self.assertIn("client 2026-09-26", mh["note"])
+        self.assertEqual(rows["parking ramp: main gradient vs private basement-garage maximum"]["status"], "pass")
+
+    def test_spec_has_ramp_deck_cars_rails_and_high_sills(self):
         for lay in self.opts:
             sp = RS.build(lay)
             pk = sp["parking2"]
             self.assertEqual(len(pk["cars"]), lay["parking2"]["cars"])
             self.assertAlmostEqual(pk["deck"]["z_top"], -1.2 + P.DECK_TOP, places=3)
+            self.assertEqual(len(pk["ramp"]["profile"]), 4)
             for car in pk["cars"]:
                 self.assertLessEqual(car[2], pk["deck"]["x1"] + 1e-6)
             over = [w for w in sp["windows"] if w["level"] == "GF" and abs(w["y"] - V.YE) < 1e-6
                     and P.RAMP_X0 <= w["x"] <= pk["deck"]["x1"]]
             self.assertTrue(over)
-            self.assertTrue(all(w["sill"] >= 1.5 for w in over))
-            self.assertEqual(sp["roofs"], [])
+            self.assertTrue(all(w["sill"] >= 1.6 + 0.1 - 1e-9 for w in over))        # eye 1.6 above the deck
+            beyond = lay["parking2"]["roof_beyond_deck"]
+            self.assertEqual(sp["roofs"], [beyond] if beyond else [])
+            self.assertEqual(len(sp["rails"]), 3)
+
+    def test_study_opens_onto_the_deck_between_the_columns(self):
+        for lay in self.opts:
+            sp = RS.build(lay)
+            d = [d for d in sp["doors"] if d.get("sliding")]
+            self.assertEqual(len(d), 1)
+            d = d[0]
+            self.assertEqual((d["level"], d["rooms"][0], d["width"]), ("GF", "study-game", 1.8))
+            self.assertGreaterEqual(d["x"] - d["width"] / 2, 7.377 - 1e-6)
+            self.assertLessEqual(d["x"] + d["width"] / 2, 9.227 + 1e-6)
+            study = lay["rooms"]["study-game"]["rect"]
+            self.assertLessEqual(study[0], d["x"] - d["width"] / 2)
+            self.assertGreaterEqual(study[2], d["x"] + d["width"] / 2)
+
+
+class LengthwiseU(unittest.TestCase):
+    """Client review r7: the U across the bar left a 1.30 m passage and blocked the open plan."""
+
+    def test_no_clash_and_the_passage_beside_it(self):
+        st = S.u_lengthwise_party()
+        self.assertEqual(S.clashes(st)["hits"], [])
+        beside = V.YE - st["landing"][3] / 1000
+        self.assertGreater(beside, 2.9)                                   # was 1.30 with the U across the bar
+
+    def test_u_options_use_it_and_reach_the_pantry_under_the_upper_flight(self):
+        for lay in (P.option("u", 1), P.option("u", 2)):
+            self.assertEqual(lay["stair"], "u-length")
+            self.assertIn(("pass-stair", "pantry"), [tuple(l) for l in lay["links"]])
+            st = S.u_lengthwise_party()
+            x_pass = lay["rooms"]["pass-stair"]["rect"][0] * 1000
+            under = [p["box"][2] for p in st["parts"] if "flight 2 tread" in p["what"] and p["box"][3] > x_pass]
+            self.assertGreaterEqual(min(under) - 150 - S.B_FFL, 2000)      # 150 waist ASSUMED
+
+
+class RevitStairCompare(unittest.TestCase):
+    """Round 8: the Python clash check passed the lengthwise U while Revit found its landing touching column 1590377
+    (Revit holds the column face at x 3977.2, CAD at 3977; the 1 mm tolerance hid it). Every stair an option uses
+    must be in the Revit comparison, and the comparison must agree."""
+
+    def test_option_stairs_are_revit_compared(self):
+        for lay in P.options():
+            self.assertIn(lay["stair"], V.REVIT_STAIR_COMPARED, lay["id"])
+
+    def test_revit_readback_agrees_where_held(self):
+        import json
+        from pathlib import Path
+        rb = Path(__file__).resolve().parents[1] / "out" / "villa" / "stairs-readback.json"
+        if not rb.exists():
+            self.skipTest("no Revit stair read-back on this machine (run scripts/villa_stairs.py + Revit)")
+        data = json.loads(rb.read_text(encoding="utf-8"))
+        for key in ("u-length", "party-r8"):
+            st = V.stair_model(key)
+            rv = [o for o in data["options"] if o["name"] == st["name"]]
+            self.assertTrue(rv, st["name"])
+            rv_cols = {r["id"] for r in rv[0]["intersections"] if r["kind"] == "column"}
+            py_cols = {h["structure"] for h in S.clashes(st)["hits"] if h["kind"] == "column"}
+            self.assertEqual((rv_cols, py_cols), (set(), set()), st["name"])
+
+
+class Openings(unittest.TestCase):
+    def test_no_opening_overlaps_a_kept_column(self):
+        for lay in P.options():
+            self.assertEqual(RS.opening_problems(RS.build(lay)), [], lay["id"])
+
+    def test_a_window_on_a_column_is_caught(self):
+        sp = RS.build(P.option("u", 1))
+        w = [w for w in sp["windows"] if abs(w["y"] - V.YE) < 1e-6][0]
+        w["x"] = 11.367                                                   # centre of the column at x 11.197-11.537
+        self.assertTrue(RS.opening_problems(sp))
+
+
+class WindowCredit(unittest.TestCase):
+    """Round 8: the column pass dropped the P1 kitchen window while the critic still credited the kitchen as lit."""
+
+    def test_every_credited_room_has_a_built_window(self):
+        for lay in P.options():
+            sp = RS.build(lay)
+            self.assertEqual(RS.window_credit_problems(lay, sp["windows"], sp["doors"]), [], lay["id"])
+
+    def test_the_real_false_credit_is_caught(self):
+        lay = P.option("u", 1)
+        sp = RS.build(lay)                                   # the kitchen's face is split by a column: no window
+        orig = V._minus_columns
+        try:
+            V._minus_columns = lambda faces, margin=0.1: faces   # the critic as it was: columns ignored
+            probs = RS.window_credit_problems(lay, sp["windows"], sp["doors"])
+        finally:
+            V._minus_columns = orig
+        self.assertTrue(any(p.startswith("kitchen") for p in probs), probs)
 
 
 class YardWall(unittest.TestCase):
@@ -101,17 +210,19 @@ class YardWall(unittest.TestCase):
         faces = V.window_faces("B", lay["extension"])
         self.assertFalse([f for f in faces if f[0] == "h" and abs(f[1] - V.YE) < 1e-6 and f[2] < V.X0])
 
-
     def test_store_uses_the_kept_wall_with_an_infill_to_the_ramp(self):
         from archpipe import villa_env as E
         sp = RS.build(P.option("u", 1))
+        wx0, wx1 = E.YARD_WALL[0] / 1000, E.YARD_WALL[2] / 1000
         on_wall = [w for w in sp["walls"] if w["level"] == "B" and abs(w["y0"] - w["y1"]) < 1e-6
-                   and abs(w["y0"] - V.YE) < 0.2 and max(w["x0"], w["x1"]) <= E.YARD_WALL[2] / 1000 + 1e-6]
+                   and abs(w["y0"] - V.YE) < 0.2 and max(w["x0"], w["x1"]) <= wx1 + 1e-6]
         self.assertEqual(on_wall, [])
-        prof = sp["infill"]["profile"]
-        self.assertAlmostEqual(prof[0][1], -3.0 + 1.4, places=3)          # starts on the wall top
-        self.assertAlmostEqual(prof[3][1] - prof[0][1], 0.05, places=3)   # 50 mm at the gate
-        self.assertAlmostEqual(prof[2][1] - prof[1][1], 0.424, places=3)  # 424 mm at the villa
+        prof = {tuple(p) for p in sp["infill"]["profile"]}
+        top = -3.0 + E.YARD_WALL_H / 1000
+        self.assertIn((wx0, top), prof)                                      # starts on the wall top
+        self.assertIn((wx0, round(-3.0 + P.clear_at(wx0), 3)), prof)       # 50 mm at the gate
+        self.assertIn((wx1, round(-3.0 + P.clear_at(wx1), 3)), prof)       # up to the soffit at the villa
+        self.assertAlmostEqual(P.clear_at(wx0) - E.YARD_WALL_H / 1000, 0.05, places=3)
 
     def test_non_parking_spec_has_no_infill(self):
         from archpipe.concept import villa_options as VO
@@ -129,7 +240,9 @@ class UnderRampFit(unittest.TestCase):
     def test_a_full_height_cross_wall_is_caught(self):
         lay = P.option("u", 2)
         sp = RS.build(lay)
-        cross = [w for w in sp["walls"] if w["level"] == "B" and abs(w["x0"] - 5.377) < 1e-6]
+        cross = [w for w in sp["walls"] if w["level"] == "B" and abs(w["y0"] - w["y1"]) > 1e-6
+                 and w["y1"] > V.YE + 0.3 and w["x0"] < P.RAMP_X1]
+        self.assertTrue(cross)
         cross[0]["height"] = RS.WALL_H                                   # the as-built defect
         self.assertTrue(RS.clearance_problems(lay, sp["walls"], sp["doors"], sp["infills"]))
 
@@ -142,16 +255,16 @@ class UnderRampFit(unittest.TestCase):
     def test_a_room_door_under_the_low_ramp_is_caught(self):
         lay = P.option("u", 1)
         sp = RS.build(lay)
-        d = [d for d in sp["doors"] if d.get("rooms") == ["lounge", "store-ramp"]][0]
-        d.update(x=4.497, height=2.10)                                   # where and how it was built
+        d = [d for d in sp["doors"] if d.get("rooms") == ["laundry", "store-ramp"]][0]
+        d["height"] = 2.10                                               # a room door where only a cupboard fits
         self.assertTrue(any(p.startswith("door") for p in
                             RS.clearance_problems(lay, sp["walls"], sp["doors"], sp["infills"])))
 
     def test_door_fit_kinds(self):
-        self.assertEqual(P.door_fit(3.617, 5.377, 0.8, "store")[3], "low")
-        self.assertEqual(P.door_fit(3.617, 5.377, 0.8, "utility")[3], "none")
-        self.assertEqual(P.door_fit(5.377, 7.377, 0.8, "utility")[3], "reduced")
-        self.assertEqual(P.door_fit(9.227, 11.2, 0.8, "wc")[3], "full")
+        self.assertEqual(P.door_fit(0.0, 2.5, 0.8, "store")[3], "low")          # clear 1.70 at the low jamb
+        self.assertEqual(P.door_fit(0.0, 2.5, 0.8, "utility")[3], "none")
+        self.assertEqual(P.door_fit(2.9, 4.6, 0.8, "utility")[3], "reduced")    # clear 2.11: a 2.01 leaf
+        self.assertEqual(P.door_fit(9.3, 11.2, 0.8, "wc")[3], "full")
 
 
 class Negative(unittest.TestCase):
@@ -160,11 +273,11 @@ class Negative(unittest.TestCase):
         lay["rooms"]["laundry"]["occupancy"] = "bedroom"          # habitable, closed door, no window to the fence
         self.assertIn("window", V.critique(lay)["fails"])
 
-    def test_steeper_ramp_fails(self):
+    def test_a_ramp_steeper_than_the_private_maximum_fails(self):
         lay = P.option("u", 1)
-        lay["parking2"] = dict(lay["parking2"], gradient=0.15)
-        rows = [e for e in V.elevation_checks(lay) if "gradient" in e["item"].lower() or "ramp" in e["item"].lower()]
-        self.assertTrue(any(e["status"] == "fail" for e in rows))
+        lay["parking2"] = dict(lay["parking2"], gradient=0.25)
+        rows = [e for e in V.elevation_checks(lay) if "private basement-garage maximum" in e["item"]]
+        self.assertEqual(rows[0]["status"], "fail")
 
     def test_non_parking_layout_keeps_block_roofs(self):
         from archpipe.concept import villa_options as VO

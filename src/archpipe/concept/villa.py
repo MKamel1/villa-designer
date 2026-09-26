@@ -89,7 +89,29 @@ def window_faces(level, extension=None):
         faces = [f for f in faces if not (f[0] == "v" and sum(1 for r in exts if abs(r[0] - f[1]) < 1e-6
                                                                    or abs(r[2] - f[1]) < 1e-6) >= 2)]
         faces += [("h", YE, a, b) for a, b in east]
-    return faces
+    return _minus_columns(faces)
+
+
+def _minus_columns(faces, margin=0.1):
+    """Face segments with the kept columns (and a frame margin) cut out: a window cannot sit on a column (round 8:
+    the kitchen was credited with a 1.5 m face that a column split into two 0.5 m pieces, and the Revit spec
+    dropped the window)."""
+    cols = {}
+    for x0, y0, x1, y1 in ((m(v) for v in c) for c in E.COLUMNS):
+        for key, lo, hi, near in ((("h", YE), x0, x1, abs(y1 - YE) < 0.06), (("h", YP), x0, x1, abs(y0 - YP) < 0.06),
+                                  (("v", X0), y0, y1, abs(x0 - X0) < 0.06), (("v", XR), y0, y1, abs(x1 - XR) < 0.06)):
+            if near:
+                cols.setdefault(key, []).append((lo - margin, hi + margin))
+    out = []
+    for ax, c, a, b in faces:
+        runs = [(a, b)]
+        for k, spans in cols.items():
+            if k[0] != ax or abs(k[1] - c) > 1e-6:
+                continue
+            for s0, s1 in spans:
+                runs = [r for lo, hi in runs for r in ((lo, min(hi, s0)), (max(lo, s1), hi)) if r[1] - r[0] > 1e-6]
+        out += [(ax, c, lo, hi) for lo, hi in runs]
+    return out
 
 
 SHAFT_FACE = ("h", YP, SHAFT_X[0], SHAFT_X[1])               # vent only (sanitary / utility), both storeys
@@ -408,10 +430,7 @@ def critique(lay):
                 blocked_ends.append({"stair": rid, "end": list(seg), "opens_onto": across or ["nothing"]})
     out.append(_chk("stair_access", "fail" if blocked_ends else "pass", ends=blocked_ends))
     from . import stairs as S
-    from . import stair_options as SO
-    model = {"u": S.u_in_old_bay, "r3": S.r3_party_flight, "party-fixed": S.party_flight_fixed,
-             "u-front": SO.u_front_bay}[lay.get("stair", "u")]
-    cl = S.clashes(model())
+    cl = S.clashes(stair_model(lay.get("stair", "u")))
     hits = sorted({h["structure"] for h in cl["hits"]})
     out.append(_chk("stair_structure", "fail" if hits else "pass", clashes=hits,
                     gf_slab_opening_needed_mm=[round(v) for v in cl["slab_opening_needed"]]))
@@ -490,16 +509,33 @@ def _row(item, achieved, required, card, ok, unit="m", note=""):
             "status": "advisory" if required == "-" else "pass" if ok else "fail", "note": note}
 
 
-def stair_geometry(stair="u"):
-    """Rise/going of the private stair (basement -1.80 to GF +1.20), from the 3D model in concept/stairs.py."""
+REVIT_STAIR_COMPARED = {"u", "party-fixed", "u-length", "party-r8"}   # scripts/villa_stairs.py compare agreed
+
+
+def stair_model(key="u"):
+    """The layout's private stair as 3D solids (concept/stairs.py), by the layout's 'stair' key."""
     from . import stairs as S
-    st = S.u_in_old_bay()
+    from . import stair_options as SO
+    return {"u": S.u_in_old_bay, "r3": S.r3_party_flight, "spine": S.r3_party_flight,    # spine: the r2/r3 flight
+            "party-fixed": S.party_flight_fixed,
+            "u-length": S.u_lengthwise_party, "party-r8": S.party_flight_r8, "u-front": SO.u_front_bay}[key]()
+
+
+def stair_geometry(stair="u"):
+    """Rise/going of the private stair (basement -1.80 to GF +1.20), from the layout's own 3D model. The 'run fits
+    its zone' figure applies to the U across the bar (its half landing short of the facade columns); for the
+    other stairs the 3D clash check is the fit test."""
+    from . import stairs as S
+    st = stair_model(stair)
     rise, going = st["rise"], st["going"]
-    run_needed = (8 * going + S.LANDING_DEPTH)                 # the longer flight plus the half landing
-    run_available = (U_LANDING_LIMIT - YC) * 1000
-    return {"risers": st["risers"], "rise": round(rise, 1), "going": going, "flights": [8, 7],
-            "run_needed": round(run_needed), "run_available": round(run_available), "fits": run_needed <= run_available,
-            "pitch_deg": round(math.degrees(math.atan2(rise, going)), 1), "two_r_plus_g": round(2 * rise + going)}
+    out = {"risers": st["risers"], "rise": round(rise, 1), "going": going, "name": st["name"],
+           "pitch_deg": round(math.degrees(math.atan2(rise, going)), 1), "two_r_plus_g": round(2 * rise + going)}
+    if stair == "u":
+        run_needed = (8 * going + S.LANDING_DEPTH)             # the longer flight plus the half landing
+        run_available = (U_LANDING_LIMIT - YC) * 1000
+        out.update(run_needed=round(run_needed), run_available=round(run_available),
+                   fits=run_needed <= run_available)
+    return out
 
 
 U_LANDING_LIMIT = -24.101           # inner face of the facade columns 1585908 / 1585915 (CAD)
@@ -527,28 +563,43 @@ def elevation_checks(lay):
     out += [_row(f"private stair rise ({g['risers']} risers over 3.00 m)", g["rise"], rise_max, rc, g["rise"] <= rise_max, "mm"),
             _row("private stair going", g["going"], going_min, gc, g["going"] >= going_min, "mm"),
             _row("private stair pitch", g["pitch_deg"], pitch_max, pc, g["pitch_deg"] <= pitch_max, "deg"),
-            _row("private stair 2R+G", g["two_r_plus_g"], f"{lo}-{hi}", lc, lo <= g["two_r_plus_g"] <= hi, "mm"),
-            _row("private stair run fits its zone", g["run_available"], g["run_needed"], "geometry", g["fits"], "mm")]
+            _row("private stair 2R+G", g["two_r_plus_g"], f"{lo}-{hi}", lc, lo <= g["two_r_plus_g"] <= hi, "mm")]
+    if "fits" in g:
+        out.append(_row("private stair run fits its zone", g["run_available"], g["run_needed"], "geometry", g["fits"],
+                        "mm"))
     from . import stairs as S
-    cl = S.clashes(S.u_in_old_bay())
+    key = lay.get("stair", "u")
+    cl = S.clashes(stair_model(key))
     hits = sorted({h["structure"] for h in cl["hits"]})
-    out.append(_row("stair in 3D vs kept columns and beams (treads, landing, 2.0 m headroom)", len(hits), 0, hc,
-                    not hits, "clashes", note=("; ".join(hits) if hits else "none; Revit read-back agrees "
-                                               "(scripts/villa_stairs.py compare)") +
+    agree = ("Revit read-back agrees (scripts/villa_stairs.py compare)" if key in REVIT_STAIR_COMPARED else
+             "Python 3D check only (no Revit clash compare for this stair yet)")
+    out.append(_row("stair in 3D vs kept columns and beams (%s)" % g["name"], len(hits), 0, hc,
+                    not hits, "clashes", note=("; ".join(hits) if hits else "none; " + agree) +
                     "; GF slab opening needed x %.2f to %.2f, y %.2f to %.2f" % tuple(
                         cl["slab_opening_needed"][i] / 1000 for i in (0, 2, 1, 3))))
     pk2 = lay.get("parking2")
     if pk2:
         from . import villa_parking as P
+        g = pk2["gradient"] * 100
+        nmax, nc = _card("neufert-private-garage-slope-max")
         gmax, gc = _card("mh-garage-ramp-max")
-        out.append(_row("parking ramp gradient (street gate to deck)", round(pk2["gradient"] * 100, 1), gmax, gc,
-                        pk2["gradient"] * 100 <= gmax + 1e-9, "%",
-                        note="ramp %.1f m long, deck at street +%.2f" % (pk2["ramp"][2] - pk2["ramp"][0],
-                                                                           pk2["deck_top"])))
+        length = pk2["ramp"][2] - pk2["ramp"][0]
+        out.append(_row("parking ramp: main gradient vs private basement-garage maximum", round(g, 1), nmax, nc,
+                        g <= nmax + 1e-9, "%", note="ramp %.1f m from the gate, up to the GF level (+%.2f)"
+                                                     % (length, pk2["deck_top"])))
+        row = _row("parking ramp: main gradient vs garage-ramp limit", round(g, 1), gmax, gc, g <= gmax + 1e-9, "%")
+        if row["status"] == "fail":                   # client decision, recorded as a waiver (CLAUDE.md authority)
+            row.update(status="waived", note="client 2026-09-26: 'make the ramp reach the ground floor level at "
+                                             "the door (ramp climb faster)'; at 10 % the ramp would need 12 m")
+        out.append(row)
+        t_len, t_g = pk2.get("transition", (0, 0))
+        out.append(_row("parking ramp: eased ends (vertical transitions)", "%.1f m at %d %%" % (t_len, t_g * 100),
+                        "-", gc, True, "", note="MH p. 38-12: steep gradients need vertical transition curves at each "
+                        "end and should be avoided near the back of the pavement; lengths ASSUMED, civil designer"))
         out.append(_row("room under the deck: clear height (floor -1.80, soffit +%.2f)" % pk2["soffit"],
                         round(pk2["soffit"] - LEVELS["B"], 2), ceil_min, ceil_card,
                         pk2["soffit"] - LEVELS["B"] >= ceil_min - 1e-9,
-                        note="= the basement's clear height under its beams (client: 'on the beam level')"))
+                        note="the deck is level with the GF, so the rooms under it are taller than the basement"))
         for rid, r in lay["rooms"].items():
             if not r.get("ext") or r["rect"][0] >= P.RAMP_X1 - 1e-6:
                 continue
@@ -561,13 +612,35 @@ def elevation_checks(lay):
         g_ext, ge = _card("ukadk-guarding-height-external")
         drop = pk2["deck_top"] - LEVELS["B"]
         out.append(_row("deck end over the yard: drop", round(drop * 1000), g_drop, gd, True, "mm",
-                        note="guarding required: %d mm (%s)" % (g_ext, ge.split(" (")[0])))
-        eye = pk2["deck_top"] + 1.6
-        sill = LEVELS["GF"] + 0.9
-        out.append(_row("GF windows over the deck: eye on the deck vs a 0.9 m sill", round(eye, 2), round(sill, 2),
-                        "geometry (privacy)", True, "m",
-                        note="eye is above a 0.9 m sill: GF windows over the deck get 1.5 m sills (street +%.2f)"
-                             % (LEVELS["GF"] + 1.5)))
+                        note="guard rail %d mm modelled (%s)" % (g_ext, ge.split(" (")[0])))
+        wx1 = E.YARD_WALL[2] / 1000
+        edge_drop = P.top_at(wx1) - LEVELS["B"]
+        out.append(_row("ramp's west edge over the sunken north patio: drop (at the villa)", round(edge_drop * 1000),
+                        g_drop, gd, True, "mm", note="guard rail %d mm modelled along the ramp edge" % g_ext))
+        fence_above = E.FENCE_H / 1000 + LEVELS["B"] - pk2["deck_top"]
+        rail = g_ext if fence_above * 1000 < g_ext else round(fence_above * 1000)
+        out.append(_row("guarding along the east fence above the deck", rail, g_ext, ge, rail >= g_ext, "mm",
+                        note="the fence is only %d mm above the deck: a %d mm guard rail is modelled along it"
+                             % (round(fence_above * 1000), g_ext) if rail != round(fence_above * 1000) else
+                        "the fence itself"))
+        eye = pk2["deck_top"] + 1.6 - LEVELS["GF"]
+        out.append(_row("GF windows beside the deck: sill above the eye of a person on the deck", round(eye + 0.1, 2),
+                        round(eye, 2), "geometry (privacy; eye 1.6 m ASSUMED)", True, "m",
+                        note="the deck is level with the GF: windows there are high strips (%.2f-%.2f m)"
+                             % (eye + 0.1, 2.30)))
+        dd = lay.get("deck_door")
+        if dd:
+            out.append(_row("study door onto the deck: threshold vs deck", round(pk2["deck_top"], 2),
+                            LEVELS["GF"], "geometry", abs(pk2["deck_top"] - LEVELS["GF"]) < 1e-6, "m",
+                            note="%.2f m bypass sliding door between the columns at x %.3f-%.3f; level threshold "
+                                 "with a linear drain (ASSUMED detail)" % (dd["width"], dd["x0"], dd["x1"])))
+            out.append(_row("ramp top reached before the study door", round(P.RAMP_X1, 3), dd["x0"], "geometry",
+                            P.RAMP_X1 <= dd["x0"] + 1e-6, "m (x)"))
+        out.append(_row("people on the deck overlook the neighbour (eye vs fence top)",
+                        round(pk2["deck_top"] + 1.6, 2), round(E.FENCE_H / 1000 + LEVELS["B"], 2),
+                        "geometry (street datum)", True, "-", note="advisory: the fence is %.2f m above the deck"
+                                                                    % fence_above))
+        out[-1]["status"] = "advisory"
         w_need, wc = _card("mh-garage-passenger-width")
         l_need, lcard = _card("mh-garage-min-length")
         length = (pk2["deck"][2] - pk2["deck"][0]) * 1000
@@ -576,8 +649,6 @@ def elevation_checks(lay):
         out.append(_row("parking deck length for %d car(s)" % pk2["cars"], round(length), pk2["cars"] * l_need, lcard,
                         length >= pk2["cars"] * l_need - 1e-6, "mm",
                         note="tandem, tight" if pk2["cars"] == 2 else "one car with 1.0 m to spare"))
-        out.append(_row("fence top above the deck", round(E.FENCE_H / 1000 + LEVELS["B"] - pk2["deck_top"], 2), "-",
-                        "environment model", True, "m"))
         # the NE yard wall (client 2026-09-26) runs under the ramp's west edge from the gate to the NE column
         wx0, wy0, wx1, wy1 = (v / 1000 for v in E.YARD_WALL)
         w_top = LEVELS["B"] + E.YARD_WALL_H / 1000

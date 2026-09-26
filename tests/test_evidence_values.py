@@ -24,6 +24,8 @@ ORIGINAL = {
     # read from the page image (mh-garage-* cards say so)
     "mh-garage-ramp-max": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 785,
                            ["car parking garages are lim", "10 per cent", "15 per cent"]),
+    "neufert-private-garage-slope-max": ("neufert/Neufert - Architects' Data (2nd English ed, 1980).pdf", 112,
+                                         ["access slope not", "more than 20%", "where unavoidable, slope not more than 20%"]),
     "mh-garage-min-width": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 788,
                             ["38.26", "A domestic garage of minimum dimensions"]),
     "mh-garage-min-length": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 788,
