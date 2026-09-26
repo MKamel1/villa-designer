@@ -4,9 +4,9 @@ The envelope is not ours to invent: an 18.98 x 5.08 m bar on two storeys (baseme
 shared core (party wall, no daylight) and the east yard, with the apartment on top and the columns and perimeter
 beams fixed (src/archpipe/villa_env.py, docs/villa/environment-model.md). The parti is forced by that: a spine along
 the blind party wall for circulation and services, habitable rooms on the east facade band, full-depth rooms at the
-street and rear ends. Round 2 (client): the private stair may go anywhere; the straight flight along the blind party
-wall, in the direction of the client's villa_01 sketch (foot in the basement entrance hall, top on a landing at the
-street end of the GF), beats the dog-leg in the 2.2 m facade bay (stair study).
+street and rear ends. Round 4 (client review): the private stair is a U-stair in the old stair bay (the built
+opening), checked in 3D against the kept structure in Python and in Revit (concept/stairs.py); the street strip is
+an outdoor terrace, not floor area.
 
 The three concepts differ on the real axes (advisor 2026-09-25): which storey holds the living, whether the basement
 extends into the east yard, and what the street-side strip becomes. The critic cites the real project
@@ -43,7 +43,7 @@ LEVELS = {"B": -1.80, "GF": 1.20}                              # FFL relative to
 # where the villa can be entered (segments on the envelope): the core doors, and the entrance-steps landing
 ENTRY_SEGMENTS = {
     "GF": {"core-entrance": ("h", YP, X0, m(8506)), "core-lobby": ("h", YP, m(14134), m(15928)),
-           "steps-landing": ("h", YP, XS, X0)},
+           },
     "B": {"core-lobby-b": ("h", YP, m(6940), m(8506)), "core-lobby-b2": ("h", YP, m(14134), m(15745)),
           "core-lobby-b-cross": ("v", m(6940), AX, YP)},
 }
@@ -52,7 +52,7 @@ ENTRY_SEGMENTS = {
 def envelope(level, extension=None):
     """Rectangles whose union is a storey's usable outline."""
     if level == "GF":
-        rects = [(X0, YP, XR, YE), BUMP, (XS, YP, X0, YE)]
+        rects = [(X0, YP, XR, YE), BUMP]              # the street strip is an outdoor terrace
     else:
         rects = [(X0, YP, XR, YE), FRONT_SHARE, REAR_SHARE]
         if extension:
@@ -64,7 +64,7 @@ def window_faces(level, extension=None):
     """Envelope segments where a window may go: street, east and rear faces. The party wall faces the core
     (blind), the axis line faces the sister, the bathroom projection's sides face the core and a column."""
     if level == "GF":
-        faces = [("v", XS, YP, YE), ("h", YE, XS, XR), ("v", XR, YP, YE)]
+        faces = [("v", X0, YP, YE), ("h", YE, X0, XR), ("v", XR, YP, YE)]   # street face opens onto the terrace
     else:
         faces = [("v", X0, AX, YE), ("v", XR, AX, YE)]
         east = [(X0, XR)]
@@ -150,16 +150,15 @@ def net_dims(rect, outline):
 # ---- concepts -----------------------------------------------------------------------------------------------------
 YC = round(YP + 1.3, 3)          # spine depth 1.3 m: 0.9 m clear hall after the party wall (AD M para 2.22a)
 YK = round(YP + 2.0, 3)          # deeper service spine in the kitchen zone: 1.75 m clear for a galley or a WC
-STAIR = (7.197, YC, 9.397, YE)   # "bay": dog-leg in the 2.2 m column bay, stacked on both storeys
-# "spine": straight flight along the blind party wall at the street end, 3.6 m run (15 goings x 240, 16 risers x
-# 187.5). Direction from the client's villa_01 sketch: the foot is in the basement entrance hall (x = SPINE_X1), the
-# top lands at the street end of the GF (the strip); a 1.1 m gallery beside the void leads back to the GF hall.
-# (Round 2 first ran it the other way: the basement foot then opened only onto the flex room and laundry.)
-SPINE_X1 = 7.417                  # 3.60 m clear run from the street wall's inner face (X0 + 0.20)
-YS1 = round(YP + 1.2, 3)          # flight zone (0.95 m clear after the party wall)
-YS2 = round(YP + 2.3, 3)          # GF: flight void + passing gallery
-GF_FOOT_X = round(SPINE_X1 - 1.0, 3)   # GF floor may cover the flight's foot end for 1.0 m (headroom check: <= 1.02)
-UNDER_X = round(X0 + 1.2, 3)       # basement: store under the high end of the flight (a cupboard, not a route)
+# Round 4 (client: "the stairs are wrong ... check the model and the pdf"): the U-stair in the OLD STAIR BAY. The
+# DWG marks the built stair opening there (A-DETL, x 7.377-9.387); the old PDF has a U-stair there (goings 280, flights
+# across the bar, corridor along the core wall). The well runs between the facade columns' faces (x 7.377-9.227), the
+# half landing stops short of their inner face (y -24.101). 3D solids and clash checks: concept/stairs.py (Python)
+# and revit/build_villa_stairs.py (Revit). The straight flight along the party wall (rounds 2-3) ran into column
+# 1590377 and the front and party-wall beams.
+SX0, SX1 = 7.377, 9.227
+STAIR = (SX0, YC, SX1, YE)
+TERRACE = (XS, YP, X0, YE)        # the street strip is an OUTDOOR terrace (Revit: 900 mm parapet walls, sliding door)
 # Alternative B: secured parking on a street-level deck in the east strip behind a new gate, a room under it
 FENCE_N = round(X0 - E.OFFSET_N / 1000.0, 3)                   # street fence inner face
 DECK_END = 9.70                                                # two cars in tandem: 9.82 m from the fence
@@ -173,78 +172,37 @@ def _room(rid, level, rect, occ, name=None, **kw):
                  "name": name or rid.replace("-", " ")}, **kw)
 
 
-def _suite():
-    return [_room("parents-dressing", "GF", (18.597, YP, XR, YC), "dressing", "dressing", suite=True),
-            _room("parents-ensuite", "GF", BUMP, "ensuite", "en-suite", suite=True)]
-
-
-def _gf(stair):
-    if stair == "bay":
-        rooms = [_room("study-game", "GF", (XS, YC, 7.197, YE), "study", "study / game room"),
-                 _room("store-gf", "GF", (XS, YP, X0, YC), "store", "store"),
-                 _room("corridor", "GF", (X0, YP, 18.597, YC), "corridor", "hall"),
-                 _room("stair-gf", "GF", STAIR, "stair", "stair to basement", ends=[["h", YC, 7.197, 9.397]]),
-                 _room("kids-a", "GF", (9.397, YC, 12.997, YE), "bedroom", "kids bedroom A"),
-                 _room("kids-b", "GF", (12.997, YC, 16.597, YE), "bedroom", "kids bedroom B"),
-                 _room("family-bath", "GF", (16.597, YC, 18.597, YE), "bathroom", "family bathroom"),
-                 _room("parents-bed", "GF", (18.597, YC, XR, YE), "bedroom", "parents' bedroom", suite=True,
-                       first=True)] + _suite()
-        links = [("corridor", "stair-gf"), ("corridor", "study-game"), ("corridor", "store-gf"),
-                 ("corridor", "kids-a"), ("corridor", "kids-b"), ("corridor", "family-bath"),
-                 ("corridor", "parents-dressing"), ("parents-dressing", "parents-bed"),
-                 ("parents-dressing", "parents-ensuite")]
-    else:
-        # client's villa_01 sketch: the flight rises from the basement hall toward the street and lands at the
-        # front; a gallery beside the void leads back to the GF hall
-        rooms = [_room("study-game", "GF", (XS, YS2, SPINE_X1, YE), "study", "study / game room"),
-                 _room("landing-gf", "GF", (XS, YP, X0, YS2), "landing", "stair landing"),
-                 _room("stair-gf", "GF", (X0, YP, GF_FOOT_X, YS2), "stair", "stair void + gallery",
-                       ends=[["v", X0, YP, YS1]]),
-                 _room("hall-front", "GF", (GF_FOOT_X, YP, SPINE_X1, YS2), "corridor", "hall"),
-                 _room("corridor", "GF", (SPINE_X1, YP, 18.597, YC), "corridor", "hall"),
-                 _room("kids-a", "GF", (SPINE_X1, YC, 11.417, YE), "bedroom", "kids bedroom A"),
-                 _room("kids-b", "GF", (11.417, YC, 15.617, YE), "bedroom", "kids bedroom B"),
-                 _room("family-bath", "GF", (15.617, YC, 17.547, YE), "bathroom", "family bathroom"),
-                 _room("parents-bed", "GF", (17.547, YC, XR, YE), "bedroom", "parents' bedroom", suite=True,
-                       first=True)] + _suite()
-        links = [("landing-gf", "stair-gf"), ("stair-gf", "hall-front"), ("hall-front", "corridor"),
-                 ("stair-gf", "study-game"), ("corridor", "kids-a"), ("corridor", "kids-b"), ("corridor", "family-bath"),
-                 ("corridor", "parents-bed"), ("parents-bed", "parents-dressing"),
-                 ("parents-dressing", "parents-ensuite")]
+def _gf():
+    rooms = [_room("study-game", "GF", (X0, YC, SX0, YE), "study", "study / game room (door to the terrace)"),
+             _room("corridor", "GF", (X0, YP, 19.527, YC), "corridor", "hall"),
+             _room("stair-gf", "GF", STAIR, "stair", "stair (U, from the basement)", ends=[["h", YC, SX1 - 0.9, SX1]]),
+             _room("kids-a", "GF", (SX1, YC, 12.827, YE), "bedroom", "kids bedroom A"),
+             _room("kids-b", "GF", (12.827, YC, 16.427, YE), "bedroom", "kids bedroom B"),
+             _room("family-bath", "GF", (16.427, YC, 18.427, YE), "bathroom", "family bathroom"),
+             _room("parents-bed", "GF", (18.427, YC, XR, YE), "bedroom", "parents' bedroom", suite=True, first=True),
+             _room("parents-dressing", "GF", (19.527, YP, XR, YC), "dressing", "dressing", suite=True),
+             _room("parents-ensuite", "GF", BUMP, "ensuite", "en-suite", suite=True)]
+    links = [("corridor", "study-game"), ("corridor", "stair-gf"), ("corridor", "kids-a"), ("corridor", "kids-b"),
+             ("corridor", "family-bath"), ("corridor", "parents-bed"), ("parents-bed", "parents-dressing"),
+             ("parents-dressing", "parents-ensuite")]
     return rooms, links, [("corridor", "GF", "core-entrance")]
 
 
-def _b(stair, parking=False):
-    common = [
-        _room("dirty-kitchen", "B", (11.397, YP, 13.797, YK), "utility", "dirty kitchen"),
-        _room("guest-wc", "B", (13.797, YP, 15.197, YK), "wc", "guest WC"),
-        _room("dining", "B", (15.197, YP, 18.597, YE), "dining", "dining"),
-        _room("living", "B", (18.597, YP, XR, YE), "living", "garden living"),
-        _room("store-rear", "B", REAR_SHARE, "store", "store"),
-    ]
-    common_links = [("dirty-kitchen", "kitchen"), ("dining", "guest-wc"), ("kitchen", "dining"), ("dining", "living"),
-                    ("living", "store-rear")]
-    if stair == "bay":
-        rooms = [_room("pantry", "B", FRONT_SHARE, "store", "pantry / store"),
-                 _room("laundry", "B", (X0, YP, 7.197, -26.071), "utility", "laundry"),
-                 _room("flex", "B", (X0, -26.071, 7.197, YE), "study", "flex room"),
-                 _room("hall-b", "B", (7.197, YP, 9.397, YC), "entrance", "entrance hall"),
-                 _room("stair-b", "B", STAIR, "stair", "stair to GF", ends=[["h", YC, 7.197, 9.397]]),
-                 _room("gallery", "B", (9.397, YP, 11.397, YK), "hall", "gallery"),
-                 _room("kitchen", "B", (9.397, YK, 15.197, YE), "kitchen", "open kitchen")] + common
-        links = [("hall-b", "stair-b"), ("hall-b", "laundry"), ("hall-b", "gallery"), ("gallery", "kitchen"),
-                 ("gallery", "dirty-kitchen"), ("laundry", "pantry"), ("stair-b", "flex")] + common_links
-    else:
-        rooms = [_room("pantry", "B", FRONT_SHARE, "store", "pantry / store"),
-                 _room("store-under", "B", (X0, YP, UNDER_X, YS1), "store", "store under the upper flight"),
-                 _room("stair-b", "B", (UNDER_X, YP, SPINE_X1, YS1), "stair", "stair to GF",
-                       ends=[["v", SPINE_X1, YP, YS1]]),
-                 _room("flex", "B", (X0, YS1, SPINE_X1, YE), "study", "flex room"),
-                 _room("hall-b", "B", (SPINE_X1, YP, 9.397, YK), "entrance", "entrance hall"),
-                 _room("laundry", "B", (9.397, YP, 11.397, YK), "utility", "laundry"),
-                 _room("kitchen", "B", (SPINE_X1, YK, 15.197, YE), "kitchen", "open kitchen")] + common
-        links = [("hall-b", "stair-b"), ("hall-b", "kitchen"), ("hall-b", "laundry"), ("kitchen", "flex"),
-                 ("flex", "store-under"), ("store-under", "pantry")] + common_links
+def _b(parking=False):
+    rooms = [_room("laundry", "B", FRONT_SHARE, "utility", "laundry / pantry"),
+             _room("hall-b", "B", (X0, YP, SX1, YC), "entrance", "entrance hall"),
+             _room("flex", "B", (X0, YC, SX0, YE), "study", "flex room"),
+             _room("stair-b", "B", STAIR, "stair", "stair (U, to the GF)", ends=[["h", YC, SX0, SX0 + 0.9]]),
+             _room("gallery", "B", (SX1, YP, 11.397, YK), "hall", "gallery"),
+             _room("kitchen", "B", (SX1, YK, 15.197, YE), "kitchen", "open kitchen"),
+             _room("dirty-kitchen", "B", (11.397, YP, 13.797, YK), "utility", "dirty kitchen"),
+             _room("guest-wc", "B", (13.797, YP, 15.197, YK), "wc", "guest WC"),
+             _room("dining", "B", (15.197, YP, 18.597, YE), "dining", "dining"),
+             _room("living", "B", (18.597, YP, XR, YE), "living", "garden living"),
+             _room("store-rear", "B", REAR_SHARE, "store", "store")]
+    links = [("hall-b", "laundry"), ("hall-b", "flex"), ("hall-b", "stair-b"), ("hall-b", "gallery"),
+             ("gallery", "kitchen"), ("gallery", "dirty-kitchen"), ("dirty-kitchen", "kitchen"), ("dining", "guest-wc"),
+             ("kitchen", "dining"), ("dining", "living"), ("living", "store-rear")]
     if parking:
         rooms.append(_room("extra-room", "B", DECK, "study", "extra room under the parking (FFL -2.75)",
                            ffl=EXTRA_FFL))
@@ -252,72 +210,29 @@ def _b(stair, parking=False):
     return rooms, links, [("hall-b", "B", "core-lobby-b")]
 
 
-def concept_a(stair="spine"):
-    g, gl, ge = _gf(stair)
-    b, bl, be = _b(stair)
-    cid = "A" if stair == "spine" else "A-bay"
-    lay = _layout(cid, "Garden living below, bedrooms above" + ("" if stair == "spine" else " (stair in the facade bay)"),
-                  g + b, gl + bl, ge + be,
+def concept_a():
+    g, gl, ge = _gf()
+    b, bl, be = _b()
+    lay = _layout("A", "Garden living below, bedrooms above", g + b, gl + bl, ge + be,
                   "Living, dining and kitchen at yard level open to the garden, terrace and BBQ; bedrooms on the GF "
-                  "above the fence line; the parents' suite at the rear on the existing wet stack; " +
-                  ("a straight private stair along the blind party wall (the client's villa_01 sketch): foot in the "
-                   "basement entrance hall, top on a landing in the street strip, a gallery beside the void back to "
-                   "the GF hall." if stair == "spine" else "a dog-leg private stair in the 2.2 m column bay."))
-    lay["stair"] = stair
+                  "above the fence line; the parents' suite at the rear on the existing wet stack; the private stair "
+                  "is a U-stair in the old stair bay (built opening), both ends on the hall along the core wall.")
+    lay["stair"] = "u"
+    lay["terrace"] = list(TERRACE)
     return lay
 
 
-def concept_b(stair="spine"):
-    g, gl, ge = _gf(stair)
-    b, bl, be = _b(stair, parking=True)
+def concept_b():
+    g, gl, ge = _gf()
+    b, bl, be = _b(parking=True)
     lay = _layout("B", "A + secured parking behind the gate, extra room underneath", g + b, gl + bl, ge + be,
                   "As A, with a street-level parking deck for two cars in tandem in the east strip behind a new "
                   "gate, a stair from the deck down to the yard, and an extra room under the deck reached from the "
                   "flex room, its floor lowered to -2.75 for headroom.")
-    lay["stair"] = stair
+    lay["stair"] = "u"
+    lay["terrace"] = list(TERRACE)
     lay["extension"] = list(DECK)
     lay["parking"] = {"deck": list(DECK), "deck_stair": list(DECK_STAIR), "deck_top": 0.0}
-    return lay
-
-
-def concept_c():
-    """Kept for the record (round 1); the client chose A on 2026-09-25."""
-    gf = [
-        _room("store-gf", "GF", (XS, YP, X0, YC), "store", "store"),
-        _room("living", "GF", (XS, YC, 7.197, YE), "living", "living"),
-        _room("hall", "GF", (X0, YP, 9.397, YC), "entrance", "entrance hall"),
-        _room("stair-gf", "GF", STAIR, "stair", "stair to basement", ends=[["h", YC, 7.197, 9.397]]),
-        _room("gallery", "GF", (9.397, YP, 11.397, YK), "hall", "gallery"),
-        _room("kitchen", "GF", (9.397, YK, 15.197, YE), "kitchen", "open kitchen"),
-        _room("dirty-kitchen", "GF", (11.397, YP, 13.797, YK), "utility", "dirty kitchen"),
-        _room("guest-wc", "GF", (13.797, YP, 15.197, YK), "wc", "guest WC"),
-        _room("dining", "GF", (15.197, YP, 18.597, YE), "dining", "dining"),
-        _room("family", "GF", (18.597, YC, XR, YE), "living", "family room"),
-        _room("back-hall", "GF", (18.597, YP, XR, YC), "hall", "back hall"),
-        _room("laundry", "GF", BUMP, "utility", "laundry"),
-    ]
-    gl = [("hall", "store-gf"), ("hall", "living"), ("hall", "stair-gf"), ("hall", "gallery"), ("gallery", "kitchen"),
-          ("gallery", "dirty-kitchen"), ("dirty-kitchen", "kitchen"), ("dining", "guest-wc"), ("kitchen", "dining"),
-          ("dining", "back-hall"), ("back-hall", "family"), ("back-hall", "laundry")]
-    b = [
-        _room("family-bath", "B", (X0, AX, 5.8, YC), "bathroom", "family bathroom"),
-        _room("linen", "B", (5.8, AX, m(E.CORE_B_OURS_FRONT[1]), YP), "store", "linen / store"),
-        _room("corridor-b", "B", (5.8, YP, 18.597, YC), "corridor", "hall"),
-        _room("kids-a", "B", (X0, YC, 7.197, YE), "bedroom", "kids bedroom A"),
-        _room("stair-b", "B", STAIR, "stair", "stair to GF", ends=[["h", YC, 7.197, 9.397]]),
-        _room("kids-b", "B", (9.397, YC, 12.997, YE), "bedroom", "kids bedroom B"),
-        _room("study-game", "B", (12.997, YC, 16.597, YE), "study", "study / game room"),
-        _room("parents-bed", "B", (16.597, YC, XR, YE), "bedroom", "parents' bedroom", suite=True, first=True),
-        _room("parents-dressing", "B", (18.597, YP, XR, YC), "dressing", "dressing", suite=True),
-        _room("parents-ensuite", "B", REAR_SHARE, "ensuite", "en-suite", suite=True),
-    ]
-    bl = [("corridor-b", "family-bath"), ("corridor-b", "linen"), ("corridor-b", "kids-a"), ("corridor-b", "stair-b"),
-          ("corridor-b", "kids-b"), ("corridor-b", "study-game"), ("corridor-b", "parents-bed"),
-          ("parents-bed", "parents-dressing"), ("parents-dressing", "parents-ensuite")]
-    lay = _layout("C", "Reverse: living on the GF, bedrooms at yard level", gf + b, gl + bl,
-                  [("hall", "GF", "core-entrance"), ("corridor-b", "B", "core-lobby-b")],
-                  "Living, kitchen and dining on the entrance storey above the fence line; bedrooms at yard level.")
-    lay["stair"] = "bay"
     return lay
 
 
@@ -329,8 +244,8 @@ def _layout(cid, title, rooms, links, entries, summary):
 
 
 def concepts():
-    """Round 2 (client 2026-09-25): A chosen with the flex room; the stair study (A vs A-bay); alternative B."""
-    return [concept_a("spine"), concept_a("bay"), concept_b("spine")]
+    """Round 4 (client 2026-09-25): A with the flex room and the U-stair; alternative B with parking."""
+    return [concept_a(), concept_b()]
 
 
 # ---- critic -----------------------------------------------------------------------------------------------------
@@ -358,6 +273,9 @@ BASIS = {
     "basement_sky": "Advisory: angle to the top of the 4.0 m fence (from basement level) seen from a basement window "
                     "centre at 1.6 m, per facade. For the daylight run, not a pass/fail.",
     "circulation": "Advisory: circulation share of net area.",
+    "stair_structure": "The stair as 3D solids (treads, landing, 2.0 m headroom: card ukadk-stair-headroom-min) must "
+                       "not intersect the columns and beams we must keep (client); Revit's intersection filter is the "
+                       "independent second check (scripts/villa_stairs.py compare). Round 3's flight hit column 1590377.",
     "stair_access": "Each end of a stair (the foot on the lower storey, the arrival on the upper) must open onto "
                     "circulation, so people reach it without crossing a room; a stair modelled as one room joined to "
                     "a hall hid a foot that only a flex room and a laundry touched (LEARNINGS 2026-09-25).",
@@ -455,10 +373,16 @@ def critique(lay):
         for end in r["ends"]:
             seg = tuple(end)
             across = [o for o, v in rooms.items() if o != rid and v["level"] == r["level"] and
-                      max(overlap_len(e, seg) for e in edges(v["rect"])) >= 0.9]
+                      max(overlap_len(e, seg) for e in edges(v["rect"])) >= 0.8]   # a 0.9 m flight, float-safe
             if not any(rooms[o]["occupancy"] in vocab.CIRCULATION for o in across):
                 blocked_ends.append({"stair": rid, "end": list(seg), "opens_onto": across or ["nothing"]})
     out.append(_chk("stair_access", "fail" if blocked_ends else "pass", ends=blocked_ends))
+    from . import stairs as S
+    model = {"u": S.u_in_old_bay, "r3": S.r3_party_flight, "party-fixed": S.party_flight_fixed}[lay.get("stair", "u")]
+    cl = S.clashes(model())
+    hits = sorted({h["structure"] for h in cl["hits"]})
+    out.append(_chk("stair_structure", "fail" if hits else "pass", clashes=hits,
+                    gf_slab_opening_needed_mm=[round(v) for v in cl["slab_opening_needed"]]))
     public = {"living", "dining", "kitchen"}
     suite = [r for r, v in rooms.items() if v.get("suite")]
     via_public = [r for r in suite if r not in reach(lambda n: rooms[n]["occupancy"] in public)]
@@ -534,21 +458,19 @@ def _row(item, achieved, required, card, ok, unit="m", note=""):
             "status": "advisory" if required == "-" else "pass" if ok else "fail", "note": note}
 
 
-def stair_geometry(stair):
-    """Rise/going of the private stair between the basement (-1.80) and the GF (+1.20)."""
-    risers = 16
-    rise = STOREY * 1000 / risers
-    if stair == "spine":
-        going, flights = 240.0, [15]
-        run = (SPINE_X1 - (X0 + EXT_WALL)) * 1000
-        fits = flights[0] * going <= run + 1e-6
-    else:
-        going, flights = 250.0, [7, 7]                        # two flights of 8 risers around a half landing
-        run = (YE - EXT_WALL - (YC + INT_WALL / 2)) * 1000     # the bay's clear depth across the bar
-        fits = max(flights) * going + 1000 <= run + 1e-6       # a flight plus a half landing as deep as the width
-    return {"risers": risers, "rise": round(rise, 1), "going": going, "flights": flights, "run_needed": sum(flights) * going
-            if stair == "spine" else max(flights) * going + 1000, "run_available": round(run), "fits": fits,
+def stair_geometry(stair="u"):
+    """Rise/going of the private stair (basement -1.80 to GF +1.20), from the 3D model in concept/stairs.py."""
+    from . import stairs as S
+    st = S.u_in_old_bay()
+    rise, going = st["rise"], st["going"]
+    run_needed = (8 * going + S.LANDING_DEPTH)                 # the longer flight plus the half landing
+    run_available = (U_LANDING_LIMIT - YC) * 1000
+    return {"risers": st["risers"], "rise": round(rise, 1), "going": going, "flights": [8, 7],
+            "run_needed": round(run_needed), "run_available": round(run_available), "fits": run_needed <= run_available,
             "pitch_deg": round(math.degrees(math.atan2(rise, going)), 1), "two_r_plus_g": round(2 * rise + going)}
+
+
+U_LANDING_LIMIT = -24.101           # inner face of the facade columns 1585908 / 1585915 (CAD)
 
 
 def elevation_checks(lay):
@@ -563,25 +485,26 @@ def elevation_checks(lay):
         out.append(_row(f"{name} clear height under the perimeter beams (window heads)", round(under_beam, 2), ceil_min,
                         ceil_card, under_beam >= ceil_min - 1e-9,
                         note="2.4 m is the book's preferable height; beam depth assumed 0.60"))
-    g = stair_geometry(lay.get("stair", "spine"))
+    g = stair_geometry(lay.get("stair", "u"))
     rise_max, rc = _card("ukadk-private-stair-rise-max")
     going_min, gc = _card("ukadk-private-stair-going-min")
     pitch_max, pc = _card("ukadk-private-stair-pitch-max")
     lo, lc = _card("ukadk-2r-plus-g-min")
     hi, _ = _card("ukadk-2r-plus-g-max")
     head, hc = _card("ukadk-stair-headroom-min")
-    out += [_row("private stair rise (16 risers over 3.00 m)", g["rise"], rise_max, rc, g["rise"] <= rise_max, "mm"),
+    out += [_row(f"private stair rise ({g['risers']} risers over 3.00 m)", g["rise"], rise_max, rc, g["rise"] <= rise_max, "mm"),
             _row("private stair going", g["going"], going_min, gc, g["going"] >= going_min, "mm"),
             _row("private stair pitch", g["pitch_deg"], pitch_max, pc, g["pitch_deg"] <= pitch_max, "deg"),
             _row("private stair 2R+G", g["two_r_plus_g"], f"{lo}-{hi}", lc, lo <= g["two_r_plus_g"] <= hi, "mm"),
             _row("private stair run fits its zone", g["run_available"], g["run_needed"], "geometry", g["fits"], "mm")]
-    if lay.get("stair") == "spine":
-        soffit = STOREY - SLAB                                  # GF slab soffit above the basement floor
-        covered = (soffit - head / 1000) / (g["rise"] / g["going"])
-        out.append(_row("stair headroom: GF floor may overhang the foot of the flight by at most", round(covered, 2),
-                        "headroom >= 2.00 over the pitch line", hc, covered > 0,
-                        note=f"GF slab opening from x = {X0 + EXT_WALL:.2f} to {SPINE_X1 - covered:.2f} (floor over the foot end); keep the flight "
-                             "50 mm off the party wall where a perimeter beam may run"))
+    from . import stairs as S
+    cl = S.clashes(S.u_in_old_bay())
+    hits = sorted({h["structure"] for h in cl["hits"]})
+    out.append(_row("stair in 3D vs kept columns and beams (treads, landing, 2.0 m headroom)", len(hits), 0, hc,
+                    not hits, "clashes", note=("; ".join(hits) if hits else "none; Revit read-back agrees "
+                                               "(scripts/villa_stairs.py compare)") +
+                    "; GF slab opening needed x %.2f to %.2f, y %.2f to %.2f" % tuple(
+                        cl["slab_opening_needed"][i] / 1000 for i in (0, 2, 1, 3))))
     if lay.get("parking"):
         drop = 0.0 - LEVELS["B"]
         soffit = 0.0 - DECK_BUILDUP - DECK_SLAB

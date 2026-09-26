@@ -2,7 +2,7 @@
  "layout": {
   "id": "A",
   "title": "Garden living below, bedrooms above",
-  "summary": "Living, dining and kitchen at yard level open to the garden, terrace and BBQ; bedrooms on the GF above the fence line; the parents' suite at the rear on the existing wet stack; a straight private stair along the blind party wall (the client's villa_01 sketch): foot in the basement entrance hall, top on a landing in the street strip, a gallery beside the void back to the GF hall.",
+  "summary": "Living, dining and kitchen at yard level open to the garden, terrace and BBQ; bedrooms on the GF above the fence line; the parents' suite at the rear on the existing wet stack; the private stair is a U-stair in the old stair bay (built opening), both ends on the hall along the core wall.",
   "levels": {
    "B": -1.8,
    "GF": 1.2
@@ -12,77 +12,53 @@
     "id": "study-game",
     "level": "GF",
     "rect": [
-     1.787,
-     -26.371,
-     7.417,
+     3.617,
+     -27.371,
+     7.377,
      -23.591
     ],
     "occupancy": "study",
-    "name": "study / game room"
-   },
-   "landing-gf": {
-    "id": "landing-gf",
-    "level": "GF",
-    "rect": [
-     1.787,
-     -28.671,
-     3.617,
-     -26.371
-    ],
-    "occupancy": "landing",
-    "name": "stair landing"
-   },
-   "stair-gf": {
-    "id": "stair-gf",
-    "level": "GF",
-    "rect": [
-     3.617,
-     -28.671,
-     6.417,
-     -26.371
-    ],
-    "occupancy": "stair",
-    "name": "stair void + gallery",
-    "ends": [
-     [
-      "v",
-      3.617,
-      -28.671,
-      -27.471
-     ]
-    ]
-   },
-   "hall-front": {
-    "id": "hall-front",
-    "level": "GF",
-    "rect": [
-     6.417,
-     -28.671,
-     7.417,
-     -26.371
-    ],
-    "occupancy": "corridor",
-    "name": "hall"
+    "name": "study / game room (door to the terrace)"
    },
    "corridor": {
     "id": "corridor",
     "level": "GF",
     "rect": [
-     7.417,
+     3.617,
      -28.671,
-     18.597,
+     19.527,
      -27.371
     ],
     "occupancy": "corridor",
     "name": "hall"
    },
+   "stair-gf": {
+    "id": "stair-gf",
+    "level": "GF",
+    "rect": [
+     7.377,
+     -27.371,
+     9.227,
+     -23.591
+    ],
+    "occupancy": "stair",
+    "name": "stair (U, from the basement)",
+    "ends": [
+     [
+      "h",
+      -27.371,
+      8.327,
+      9.227
+     ]
+    ]
+   },
    "kids-a": {
     "id": "kids-a",
     "level": "GF",
     "rect": [
-     7.417,
+     9.227,
      -27.371,
-     11.417,
+     12.827,
      -23.591
     ],
     "occupancy": "bedroom",
@@ -92,9 +68,9 @@
     "id": "kids-b",
     "level": "GF",
     "rect": [
-     11.417,
+     12.827,
      -27.371,
-     15.617,
+     16.427,
      -23.591
     ],
     "occupancy": "bedroom",
@@ -104,9 +80,9 @@
     "id": "family-bath",
     "level": "GF",
     "rect": [
-     15.617,
+     16.427,
      -27.371,
-     17.547,
+     18.427,
      -23.591
     ],
     "occupancy": "bathroom",
@@ -116,7 +92,7 @@
     "id": "parents-bed",
     "level": "GF",
     "rect": [
-     17.547,
+     18.427,
      -27.371,
      22.597,
      -23.591
@@ -130,7 +106,7 @@
     "id": "parents-dressing",
     "level": "GF",
     "rect": [
-     18.597,
+     19.527,
      -28.671,
      22.597,
      -27.371
@@ -152,8 +128,8 @@
     "name": "en-suite",
     "suite": true
    },
-   "pantry": {
-    "id": "pantry",
+   "laundry": {
+    "id": "laundry",
     "level": "B",
     "rect": [
      3.617,
@@ -161,82 +137,70 @@
      6.94,
      -28.671
     ],
-    "occupancy": "store",
-    "name": "pantry / store"
+    "occupancy": "utility",
+    "name": "laundry / pantry"
    },
-   "store-under": {
-    "id": "store-under",
+   "hall-b": {
+    "id": "hall-b",
     "level": "B",
     "rect": [
      3.617,
      -28.671,
-     4.817,
-     -27.471
+     9.227,
+     -27.371
     ],
-    "occupancy": "store",
-    "name": "store under the upper flight"
-   },
-   "stair-b": {
-    "id": "stair-b",
-    "level": "B",
-    "rect": [
-     4.817,
-     -28.671,
-     7.417,
-     -27.471
-    ],
-    "occupancy": "stair",
-    "name": "stair to GF",
-    "ends": [
-     [
-      "v",
-      7.417,
-      -28.671,
-      -27.471
-     ]
-    ]
+    "occupancy": "entrance",
+    "name": "entrance hall"
    },
    "flex": {
     "id": "flex",
     "level": "B",
     "rect": [
      3.617,
-     -27.471,
-     7.417,
+     -27.371,
+     7.377,
      -23.591
     ],
     "occupancy": "study",
     "name": "flex room"
    },
-   "hall-b": {
-    "id": "hall-b",
+   "stair-b": {
+    "id": "stair-b",
     "level": "B",
     "rect": [
-     7.417,
-     -28.671,
-     9.397,
-     -26.671
+     7.377,
+     -27.371,
+     9.227,
+     -23.591
     ],
-    "occupancy": "entrance",
-    "name": "entrance hall"
+    "occupancy": "stair",
+    "name": "stair (U, to the GF)",
+    "ends": [
+     [
+      "h",
+      -27.371,
+      7.377,
+      8.277
+     ]
+    ]
    },
-   "laundry": {
-    "id": "laundry",
+   "gallery": {
+    "id": "gallery",
     "level": "B",
     "rect": [
-     9.397,
+     9.227,
      -28.671,
      11.397,
      -26.671
     ],
-    "occupancy": "utility",
-    "name": "laundry"
+    "occupancy": "hall",
+    "name": "gallery"
    },
    "kitchen": {
     "id": "kitchen",
     "level": "B",
     "rect": [
-     7.417,
+     9.227,
      -26.671,
      15.197,
      -23.591
@@ -307,20 +271,12 @@
   },
   "links": [
    [
-    "landing-gf",
-    "stair-gf"
-   ],
-   [
-    "stair-gf",
-    "hall-front"
-   ],
-   [
-    "hall-front",
-    "corridor"
-   ],
-   [
-    "stair-gf",
+    "corridor",
     "study-game"
+   ],
+   [
+    "corridor",
+    "stair-gf"
    ],
    [
     "corridor",
@@ -348,27 +304,27 @@
    ],
    [
     "hall-b",
+    "laundry"
+   ],
+   [
+    "hall-b",
+    "flex"
+   ],
+   [
+    "hall-b",
     "stair-b"
    ],
    [
     "hall-b",
+    "gallery"
+   ],
+   [
+    "gallery",
     "kitchen"
    ],
    [
-    "hall-b",
-    "laundry"
-   ],
-   [
-    "kitchen",
-    "flex"
-   ],
-   [
-    "flex",
-    "store-under"
-   ],
-   [
-    "store-under",
-    "pantry"
+    "gallery",
+    "dirty-kitchen"
    ],
    [
     "dirty-kitchen",
@@ -409,7 +365,13 @@
     "stair-gf"
    ]
   ],
-  "stair": "spine"
+  "stair": "u",
+  "terrace": [
+   1.787,
+   -28.671,
+   3.617,
+   -23.591
+  ]
  },
  "critique": {
   "id": "A",
@@ -474,6 +436,18 @@
     "status": "pass",
     "basis": "Each end of a stair (the foot on the lower storey, the arrival on the upper) must open onto circulation, so people reach it without crossing a room; a stair modelled as one room joined to a hall hid a foot that only a flex room and a laundry touched (LEARNINGS 2026-09-25).",
     "ends": []
+   },
+   {
+    "check": "stair_structure",
+    "status": "pass",
+    "basis": "The stair as 3D solids (treads, landing, 2.0 m headroom: card ukadk-stair-headroom-min) must not intersect the columns and beams we must keep (client); Revit's intersection filter is the independent second check (scripts/villa_stairs.py compare). Round 3's flight hit column 1590377.",
+    "clashes": [],
+    "gf_slab_opening_needed_mm": [
+     7377,
+     -27091,
+     9227,
+     -24181
+    ]
    },
    {
     "check": "suite_privacy",
@@ -543,16 +517,16 @@
     "status": "advisory",
     "basis": "Advisory: circulation share of net area.",
     "net_m2": {
-     "B": 92.5,
-     "GF": 97.4
+     "B": 92.8,
+     "GF": 89.2
     },
     "circulation_m2": {
-     "B": 6.0,
-     "GF": 22.1
+     "B": 16.2,
+     "GF": 22.6
     },
     "share": {
-     "B": 0.06,
-     "GF": 0.23
+     "B": 0.17,
+     "GF": 0.25
     }
    }
   ],
@@ -562,94 +536,79 @@
   ],
   "sizes": {
    "study-game": {
-    "net_w": 5.38,
-    "net_d": 2.53,
-    "net_m2": 13.6
-   },
-   "landing-gf": {
-    "net_w": 1.58,
-    "net_d": 2.05,
-    "net_m2": 3.2
-   },
-   "stair-gf": {
-    "net_w": 2.7,
-    "net_d": 2.05,
-    "net_m2": 5.5
-   },
-   "hall-front": {
-    "net_w": 0.9,
-    "net_d": 2.05,
-    "net_m2": 1.8
+    "net_w": 3.51,
+    "net_d": 3.53,
+    "net_m2": 12.4
    },
    "corridor": {
-    "net_w": 11.08,
+    "net_w": 15.66,
     "net_d": 1.05,
-    "net_m2": 11.6
+    "net_m2": 16.4
+   },
+   "stair-gf": {
+    "net_w": 1.75,
+    "net_d": 3.53,
+    "net_m2": 6.2
    },
    "kids-a": {
-    "net_w": 3.9,
+    "net_w": 3.5,
+    "net_d": 3.53,
+    "net_m2": 12.4
+   },
+   "kids-b": {
+    "net_w": 3.5,
+    "net_d": 3.53,
+    "net_m2": 12.4
+   },
+   "family-bath": {
+    "net_w": 1.9,
+    "net_d": 3.53,
+    "net_m2": 6.7
+   },
+   "parents-bed": {
+    "net_w": 3.92,
     "net_d": 3.53,
     "net_m2": 13.8
    },
-   "kids-b": {
-    "net_w": 4.1,
-    "net_d": 3.53,
-    "net_m2": 14.5
-   },
-   "family-bath": {
-    "net_w": 1.83,
-    "net_d": 3.53,
-    "net_m2": 6.5
-   },
-   "parents-bed": {
-    "net_w": 4.8,
-    "net_d": 3.53,
-    "net_m2": 16.9
-   },
    "parents-dressing": {
-    "net_w": 3.75,
+    "net_w": 2.82,
     "net_d": 1.2,
-    "net_m2": 4.5
+    "net_m2": 3.4
    },
    "parents-ensuite": {
     "net_w": 2.32,
     "net_d": 2.39,
     "net_m2": 5.5
    },
-   "pantry": {
+   "laundry": {
     "net_w": 2.92,
     "net_d": 1.0,
     "net_m2": 2.9
    },
-   "store-under": {
-    "net_w": 0.95,
-    "net_d": 1.1,
-    "net_m2": 1.0
-   },
-   "stair-b": {
-    "net_w": 2.5,
-    "net_d": 1.1,
-    "net_m2": 2.7
+   "hall-b": {
+    "net_w": 5.36,
+    "net_d": 1.2,
+    "net_m2": 6.4
    },
    "flex": {
-    "net_w": 3.55,
-    "net_d": 3.63,
-    "net_m2": 12.9
+    "net_w": 3.51,
+    "net_d": 3.53,
+    "net_m2": 12.4
    },
-   "hall-b": {
-    "net_w": 1.88,
-    "net_d": 1.75,
-    "net_m2": 3.3
+   "stair-b": {
+    "net_w": 1.75,
+    "net_d": 3.53,
+    "net_m2": 6.2
    },
-   "laundry": {
-    "net_w": 1.9,
+   "gallery": {
+    "net_w": 2.07,
     "net_d": 1.75,
-    "net_m2": 3.3
+    "net_m2": 3.6
    },
    "kitchen": {
-    "net_w": 7.68,
+    "net_w": 5.87,
     "net_d": 2.83,
-    "net_m2": 21.7
+    "net_m2": 16.6
    },
    "dirty-kitchen": {
     "net_w": 2.3,
@@ -678,24 +637,21 @@
    }
   },
   "window_m": {
-   "study-game": 8.41,
-   "landing-gf": 2.3,
-   "stair-gf": 0.0,
-   "hall-front": 0.0,
-   "corridor": 0.0,
-   "kids-a": 4.0,
-   "kids-b": 4.2,
-   "family-bath": 1.93,
-   "parents-bed": 8.83,
+   "study-game": 7.54,
+   "corridor": 1.3,
+   "stair-gf": 1.85,
+   "kids-a": 3.6,
+   "kids-b": 3.6,
+   "family-bath": 2.0,
+   "parents-bed": 7.95,
    "parents-dressing": 1.3,
    "parents-ensuite": 0.0,
-   "pantry": 1.25,
-   "store-under": 1.2,
-   "stair-b": 0.0,
-   "flex": 7.68,
-   "hall-b": 0.0,
-   "laundry": 0.0,
-   "kitchen": 7.78,
+   "laundry": 1.25,
+   "hall-b": 1.3,
+   "flex": 7.54,
+   "stair-b": 1.85,
+   "gallery": 0.0,
+   "kitchen": 5.97,
    "dirty-kitchen": 0.0,
    "guest-wc": 0.0,
    "dining": 3.4,
@@ -740,8 +696,8 @@
     "note": "2.4 m is the book's preferable height; beam depth assumed 0.60"
    },
    {
-    "item": "private stair rise (16 risers over 3.00 m)",
-    "achieved": 187.5,
+    "item": "private stair rise (17 risers over 3.00 m)",
+    "achieved": 176.5,
     "required": 220,
     "unit": "mm",
     "card": "ukadk-private-stair-rise-max (Section 1, para 1.3, Table 1.1 (printed page 5))",
@@ -750,7 +706,7 @@
    },
    {
     "item": "private stair going",
-    "achieved": 240.0,
+    "achieved": 280,
     "required": 220,
     "unit": "mm",
     "card": "ukadk-private-stair-going-min (Section 1, para 1.3, Table 1.1 (printed page 5))",
@@ -759,7 +715,7 @@
    },
    {
     "item": "private stair pitch",
-    "achieved": 38.0,
+    "achieved": 32.2,
     "required": 42,
     "unit": "deg",
     "card": "ukadk-private-stair-pitch-max (Table 1.1 note 1 (printed page 5))",
@@ -768,7 +724,7 @@
    },
    {
     "item": "private stair 2R+G",
-    "achieved": 615,
+    "achieved": 633,
     "required": "550-700",
     "unit": "mm",
     "card": "ukadk-2r-plus-g-min (Table 1.1 footnote * (printed page 5))",
@@ -777,21 +733,21 @@
    },
    {
     "item": "private stair run fits its zone",
-    "achieved": 3600,
-    "required": 3600.0,
+    "achieved": 3270,
+    "required": 3190,
     "unit": "mm",
     "card": "geometry",
     "status": "pass",
     "note": ""
    },
    {
-    "item": "stair headroom: GF floor may overhang the foot of the flight by at most",
-    "achieved": 1.02,
-    "required": "headroom >= 2.00 over the pitch line",
-    "unit": "m",
+    "item": "stair in 3D vs kept columns and beams (treads, landing, 2.0 m headroom)",
+    "achieved": 0,
+    "required": 0,
+    "unit": "clashes",
     "card": "ukadk-stair-headroom-min (Section 1, para 1.11, Diagram 1.3 (printed page 7))",
     "status": "pass",
-    "note": "GF slab opening from x = 3.82 to 6.39 (floor over the foot end); keep the flight 50 mm off the party wall where a perimeter beam may run"
+    "note": "none; Revit read-back agrees (scripts/villa_stairs.py compare); GF slab opening needed x 7.38 to 9.23, y -27.09 to -24.18"
    },
    {
     "item": "fence top above the GF floor (sill needed to see over it)",

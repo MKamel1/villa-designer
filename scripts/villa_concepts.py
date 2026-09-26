@@ -68,10 +68,12 @@ def draw(lay, res, path):
             ax.text(*T((x0 + x1) / 2, (y0 + y1) / 2), f"{r['name']}\n{s['net_m2']:.1f} m²\n{s['net_w']:.2f} x {s['net_d']:.2f}",
                     ha="center", va="center", fontsize=5.6, rotation=0 if (y1 - y0) >= 1.6 else 90)
             if r["occupancy"] == "stair":
-                for i in range(1, 16):                      # treads, drawn across the direction of travel
-                    if r.get("ends") and r["ends"][0][0] == "v":
-                        xx = x0 + i * (x1 - x0) / 16
-                        ax.plot(*zip(T(xx, y0), T(xx, min(y1, V.YS1))), c="0.6", lw=0.4)
+                from archpipe.concept import stairs as S
+                for part in S.u_in_old_bay()["parts"]:     # treads and landing from the 3D stair model (mm)
+                    if "headroom" in part["what"]:
+                        continue
+                    bx0, by0, _, bx1, by1, _ = [v / 1000 for v in part["box"]]
+                    poly(ax, (bx0, by0, bx1, by1), fill=False, ec="0.45", lw=0.5)
                 for end in r.get("ends", []):
                     ax_, c_, lo, hi = end
                     mid = (lo + hi) / 2
@@ -114,6 +116,11 @@ def draw(lay, res, path):
             mid = (lo + hi) / 2
             p = (mid, e[1]) if e[0] == "h" else (e[1], mid)
             ax.plot(*T(*p), "s", ms=7, c="tab:red")
+        if lv == "GF" and lay.get("terrace"):
+            poly(ax, lay["terrace"], fc="#eef3ea", ec="0.3", lw=0.8, hatch="//")
+            tx0, ty0, tx1, ty1 = lay["terrace"]
+            ax.text(*T((tx0 + tx1) / 2, (ty0 + ty1) / 2), "terrace (outdoor,\n0.9 m parapet)", ha="center",
+                    va="center", fontsize=5.6)
         # alternative B: the street-level parking deck (GF sheet) and its outline over the room below (basement sheet)
         pk = lay.get("parking")
         if pk:
@@ -260,8 +267,8 @@ def main():
         res = V.critique(lay)
         res["elevation_checks"] = V.elevation_checks(lay)
         V.write(lay, res, SPEC)
-        draw(lay, res, OUT / f"concept-{lay['id']}-r3")
-        draw_section(lay, res["elevation_checks"], OUT / f"section-{lay['id']}-r3")
+        draw(lay, res, OUT / f"concept-{lay['id']}-r4")
+        draw_section(lay, res["elevation_checks"], OUT / f"section-{lay['id']}-r4")
         rows.append((lay["id"], res["fails"], res["warnings"]))
         print(lay["id"], "fails", res["fails"], "warnings", res["warnings"])
     return 0

@@ -315,3 +315,33 @@ azimuth, a fence height, a missing slab, a column span and a level elevation.
 - **Also:** the plans now draw UP/DN arrows at the stair ends, so a reviewer sees the route.
 - **Lesson.** Check a stair by its two ends, not as a room. And read the client's own sketches before choosing a
   direction: the villa_01 docx sketch had the flight rising from the basement hall toward the street end.
+
+## The stair was never built in 3D, and the model already said where it belonged (2026-09-25, client review r3)
+
+**What was wrong** (Revit ids from `out/villa/omar-2027.rvt`; CAD `01-GROUND_FLOOR_PLAN.dwg`):
+1. **Stairs existed only as 2D rectangles**, so nothing was ever checked against the structure we must keep.
+2. **The round-3 straight flight ran into column 1590377.** Its top treads and headroom (x 3.82-3.98, y -28.47 to
+   -28.16) hit the GF column and its basement copy 1614989, and the assumed front and party-wall beams. Revit's
+   intersection filter confirmed all four.
+3. **The street strip is an outdoor terrace**, not floor:
+   - its street and east walls are 900 mm parapets;
+   - it is reached through the 68"x80" sliding door in the living room's front wall.
+   Rounds 1-3 put a study, then the GF stair landing, on it.
+4. **The old stair bay was ignored.** The DWG marks the built stair opening (layer A-DETL, x 7.377-9.387,
+   y -26.721 to -23.771), and the old PDF has a U-stair there with 280 mm goings. Revit's floors carry no opening,
+   and the environment build deleted those floors, so the checked model no longer showed it.
+5. **The dog-leg variant assumed a clear 2.2 m bay.** The facade columns project 0.51 m, leaving 1.85 m between
+   their faces.
+
+**Guards:**
+- `src/archpipe/concept/stairs.py` models each stair as treads, landings and a 2.0 m headroom envelope, and
+  clash-checks them against the columns on all storeys and the beams.
+- The critic's `stair_structure` check fails a layout whose stair clashes.
+  `tests/test_villa_concepts.py::StairStructure::test_round3_flight_hits_column_1590377` rebuilds the real round-3
+  geometry.
+- `revit/build_villa_stairs.py` builds the same solids in a copy of the environment model and runs Revit's
+  `ElementIntersectsSolidFilter`. `scripts/villa_stairs.py compare` shows the two checks agree.
+- The critic no longer allows rooms on the terrace (the GF envelope excludes it), and a test asserts it.
+
+**Lesson.** A plan rectangle is not a stair. Before showing a stair, build it in 3D against the kept structure and
+read the existing model's marks (openings, parapet heights) before the old sheets.

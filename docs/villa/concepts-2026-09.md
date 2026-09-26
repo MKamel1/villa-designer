@@ -209,3 +209,45 @@ and B.
 
 **Plans:** `out/villa/concepts/villa-concepts-r3.pdf` and `concept-{A,A-bay,B}-r3.pdf`. Green arrows mark UP/DN at
 each stair end.
+
+---
+
+# Round 4 (2026-09-25): the stair rebuilt in 3D, in the old stair bay
+
+The client asked whether the stairs had been modelled in Revit. They had not. The mistakes found by modelling
+them, and by reading the model and the PDF, are listed in `docs/LEARNINGS.md` (2026-09-25):
+- the round-3 flight ran into column 1590377 and the front and party-wall beams;
+- the street strip is an outdoor terrace;
+- the old stair bay was ignored;
+- the dog-leg bay is only 1.85 m clear.
+
+**Now: a U-stair in the old stair bay**, where the DWG marks the built opening and the old PDF has its U-stair:
+
+| | |
+|---|---|
+| Risers | 17 × 176.5 mm |
+| Goings | 280 mm (as the old stair) |
+| Pitch | 32.2° |
+| 2R+G | 633 mm |
+| Flights | 0.90 m wide, across the bar |
+| Half landing | 0.95 m, stopping short of the facade columns (x 7.377-9.227) |
+
+- **Both ends open onto the hall along the core wall:** the foot in the basement entrance hall, the top in the GF
+  hall.
+- **Clashes: none**, in Python and in Revit (`out/villa/omar-stairs.rvt`,
+  `stairs-view - 3D View - STAIR U-stair in the old bay.png`).
+- **GF slab opening:** x 7.38-9.23, y -27.09 to -24.18. That is the DWG opening extended 0.37 m toward the hall;
+  confirm on site.
+- **The alternative, tested:** a straight party-wall flight clear of the column is also clash-free in 3D. It would
+  need a new 3.4 m opening cut in the built slab along the party wall, and both core doors moved. Not recommended.
+
+**Areas (A):**
+- kids' bedrooms 12.4 m² each;
+- parents' bedroom 13.8 m²;
+- study / game room 12.4 m², with a door onto the terrace;
+- flex room 12.4 m²;
+- open kitchen 16.6 m², dining 15.4 m², garden living 18.1 m².
+
+B adds the parking and the extra room, unchanged.
+
+**Plans:** `out/villa/concepts/concept-{A,B}-r4.pdf`.

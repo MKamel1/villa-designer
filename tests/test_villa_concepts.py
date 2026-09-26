@@ -11,8 +11,8 @@ def status(res, name):
 
 
 class Concepts(unittest.TestCase):
-    def test_a_and_c_have_no_failures(self):
-        for lay in (V.concept_a(), V.concept_c()):
+    def test_a_and_b_have_no_failures(self):
+        for lay in (V.concept_a(), V.concept_b()):
             res = V.critique(lay)
             self.assertEqual(res["fails"], [], (lay["id"], res["fails"]))
 
@@ -21,31 +21,47 @@ class Concepts(unittest.TestCase):
         self.assertEqual(res["fails"], [])
         self.assertGreaterEqual(res["window_m"]["extra-room"], 1.0)     # front-yard side + the yard end
 
-    def test_spine_stair_frees_the_facade(self):
-        """The stair study: along the blind party wall the rooms on the facade are larger than with the dog-leg."""
-        spine, bay = V.critique(V.concept_a("spine")), V.critique(V.concept_a("bay"))
-        for rid in ("kids-a", "kids-b", "parents-bed", "kitchen"):
-            self.assertGreater(spine["sizes"][rid]["net_m2"], bay["sizes"][rid]["net_m2"], rid)
+    def test_the_street_strip_is_not_floor(self):
+        """The strip is an outdoor terrace (Revit: 900 mm parapet walls, sliding door): no room may sit on it."""
+        for lay in V.concepts():
+            for rid, r in lay["rooms"].items():
+                if r["level"] == "GF":
+                    self.assertGreaterEqual(r["rect"][0], V.X0 - 1e-6, rid)
+
+
+class StairStructure(unittest.TestCase):
+    def test_u_stair_clears_the_kept_structure(self):
+        from archpipe.concept import stairs as S
+        self.assertEqual(S.clashes(S.u_in_old_bay())["hits"], [])
+
+    def test_round3_flight_hits_column_1590377(self):
+        """The real round-3 geometry: the flight's top runs into the front party-side column (CAD/Revit 1590377)."""
+        lay = V.concept_a()
+        lay["stair"] = "r3"
+        chk = next(c for c in V.critique(lay)["checks"] if c["check"] == "stair_structure")
+        self.assertEqual(chk["status"], "fail")
+        self.assertTrue(any("1590377" in c for c in chk["clashes"]), chk["clashes"])
+
+    def test_u_stair_uses_the_old_bay_and_280_goings(self):
+        g = V.stair_geometry()
+        self.assertEqual(g["going"], 280)
+        self.assertTrue(g["fits"])
+        self.assertLessEqual(g["rise"], 220)
+        self.assertTrue(550 <= g["two_r_plus_g"] <= 700)
 
 
 class StairAccess(unittest.TestCase):
     def test_every_stair_end_opens_onto_circulation(self):
-        for lay in V.concepts() + [V.concept_c()]:
+        for lay in V.concepts():
             chk = next(c for c in V.critique(lay)["checks"] if c["check"] == "stair_access")
             self.assertEqual(chk["status"], "pass", (lay["id"], chk["ends"]))
 
-    def test_round2_defect_is_caught(self):
-        """The real defect the client found: the basement foot at the street end, touched only by the flex room
-        and the laundry (and the wall), with the stair still 'linked' to the hall along its side."""
+    def test_stair_end_facing_no_circulation_fails(self):
+        """The class of the round-2 defect: a stair end that only a room (or nothing) touches."""
         lay = copy.deepcopy(V.concept_a())
-        b = lay["rooms"]["stair-b"]
-        b["rect"][0] = V.X0
-        b["ends"] = [["v", V.X0, V.YP, V.YS1]]
-        del lay["rooms"]["store-under"]
-        lay["links"] = [l for l in lay["links"] if "store-under" not in l]
-        lay["links"] += [["stair-b", "flex"], ["stair-b", "pantry"]]     # round 2 linked them along the flight
+        lay["rooms"]["stair-b"]["ends"] = [["h", V.YE, V.SX0, V.SX0 + 0.9]]      # the facade end: nothing there
         res = V.critique(lay)
-        self.assertEqual(status(res, "reachability"), "pass")          # the graph alone did not see it
+        self.assertEqual(status(res, "reachability"), "pass")          # the graph alone does not see it
         self.assertEqual(status(res, "stair_access"), "fail")
 
     def test_undeclared_ends_fail(self):
@@ -56,7 +72,7 @@ class StairAccess(unittest.TestCase):
 
 class Elevations(unittest.TestCase):
     def test_all_elevation_checks_pass_for_a_and_b(self):
-        for lay in (V.concept_a(), V.concept_a("bay"), V.concept_b()):
+        for lay in (V.concept_a(), V.concept_b()):
             bad = [c["item"] for c in V.elevation_checks(lay) if c["status"] == "fail"]
             self.assertEqual(bad, [], lay["id"])
 
@@ -71,20 +87,14 @@ class Elevations(unittest.TestCase):
         finally:
             V.EXTRA_FFL = old
 
-    def test_short_stair_zone_fails_the_run(self):
-        old = V.SPINE_X1
+    def test_landing_pushed_into_the_facade_columns_fails_the_run(self):
+        old = V.U_LANDING_LIMIT
         try:
-            V.SPINE_X1 = 7.217                   # 3.40 m clear: 15 goings of 240 do not fit
+            V.U_LANDING_LIMIT = -24.4             # 2.97 m to the column line: 8 goings of 280 + a 0.95 landing do not fit
             row = next(c for c in V.elevation_checks(V.concept_a()) if c["item"].startswith("private stair run"))
             self.assertEqual(row["status"], "fail")
         finally:
-            V.SPINE_X1 = old
-
-    def test_stair_values_come_from_the_cards(self):
-        g = V.stair_geometry("spine")
-        self.assertLessEqual(g["rise"], 220)
-        self.assertGreaterEqual(g["going"], 220)
-        self.assertTrue(550 <= g["two_r_plus_g"] <= 700)
+            V.U_LANDING_LIMIT = old
 
     def test_every_programme_room_is_placed(self):
         import json
@@ -137,16 +147,16 @@ class SeededDefects(unittest.TestCase):
 
     def test_habitable_room_on_the_party_wall_only_is_dark(self):
         def f(lay):
-            lay["rooms"]["corridor"]["occupancy"] = "study"   # the GF hall: party wall + partitions, no facade
+            lay["rooms"]["gallery"]["occupancy"] = "study"    # basement gallery: party wall + partitions only
         res = self.mutate(f)
-        self.assertIn("corridor", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
+        self.assertIn("gallery", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
 
     def test_room_on_the_street_face_is_not_dark(self):
-        """Negative of the above: the strip's landing cell touches the street face, so it could have a window."""
+        """Negative of the above: the basement hall touches the street face, so it could have a window."""
         def f(lay):
-            lay["rooms"]["landing-gf"]["occupancy"] = "study"
+            lay["rooms"]["hall-b"]["occupancy"] = "study"
         res = self.mutate(f)
-        self.assertNotIn("landing-gf", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
+        self.assertNotIn("hall-b", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
 
     def test_unbuildable_door_fails(self):
         def f(lay):
