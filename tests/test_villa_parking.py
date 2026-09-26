@@ -35,7 +35,7 @@ class ParkingOptions(unittest.TestCase):
         self.opts = P.options()
 
     def test_four_options_pass_the_critic(self):
-        self.assertEqual([o["id"] for o in self.opts], ["P1", "P2", "P3", "P4"])
+        self.assertEqual([o["id"] for o in self.opts], ["P3", "P4", "P5"])   # P1/P2 dropped (client r9)
         for lay in self.opts:
             self.assertEqual(V.critique(lay)["fails"], [], lay["id"])
 
@@ -210,7 +210,7 @@ class FullHeightGlazing(unittest.TestCase):
                  "P3": ([{"level": "B", "room": "dirty-kitchen", "x": 14.5, "y": -22.096, "width": 0.8, "sill": 1.5}],
                         [{"level": "B", "x": 3.617, "y": -25.861, "width": 2.4, "height": 2.2, "garden": True,
                           "rooms": ["lounge", "yard"]}])}
-        lays = {l["id"]: l for l in P.options()}
+        lays = {l["id"]: l for l in [P.option("u", 1), P.option("u", 2), P.option("straight", 1)]}   # round-7 builds
         for oid, (wins, doors) in built.items():
             probs = RS.glazing_problems(lays[oid], wins, doors)
             self.assertTrue(any("end face" in p for p in probs), (oid, probs))
@@ -219,12 +219,69 @@ class FullHeightGlazing(unittest.TestCase):
         self.assertFalse(any("street face" in p for p in RS.glazing_problems(lays["P1"], *built["P1"])))
 
 
+class StairHeadroomAndRoute(unittest.TestCase):
+    """Client r9: the stair must reach GF level to best practice and leave room to pass under the slab. The headroom
+    envelope was drawn from the tread tops, and the GF slab soffit taken 100 mm too high; together they passed a
+    flight with 1.82 m under the slab edge. And the turn from the stair top round the void into the bedroom corridor
+    was 0.69 m wide (0.59 with a balustrade), which no check measured."""
+
+    def test_soffit_matches_the_slab_and_build_up(self):
+        self.assertAlmostEqual(S.SLAB_SOFFIT, S.GF_FFL - (V.FLOOR_BUILDUP + V.SLAB) * 1000, places=6)
+
+    def test_the_flight_climbs_the_full_storey_to_the_cards(self):
+        st = S.party_flight_r8()
+        self.assertAlmostEqual(st["rise"] * st["risers"], S.GF_FFL - S.B_FFL, places=6)       # 3.00 m exactly
+
+    def test_pitch_line_headroom_passes_with_the_spec_opening(self):
+        st = S.party_flight_r8()
+        op = [v * 1000 for v in RS.build(P.options()[0])["gf_opening"]]
+        self.assertGreaterEqual(S.pitch_headroom(st, op)[0], S.HEAD)
+
+    def test_the_round8_opening_is_caught(self):
+        # what round 8 built: the opening to x 8.537 (from the tread-top envelope)
+        hr, x = S.pitch_headroom(S.party_flight_r8(), [5177, -28421, 8537, -27471])
+        self.assertLess(hr, S.HEAD)
+        self.assertAlmostEqual(hr, 1824, delta=5)
+
+    def test_route_round_the_void_is_a_full_hall(self):
+        for lay in P.options():
+            self.assertGreaterEqual(V.gf_route_width(lay), 0.9, lay["id"])
+
+    def test_the_round8_pinch_is_caught(self):
+        import copy
+        lay = copy.deepcopy(P.options()[0])
+        r = lay["rooms"]
+        r["kids-a"]["rect"][0] = r["study-game"]["rect"][2] = 9.227          # the round-8 GF
+        r["gallery-end"]["rect"] = [8.657, -27.371, 9.227, -26.371]
+        r["stair-gf"]["rect"][2] = r["corridor"]["rect"][0] = 8.657
+        r["study-game"].pop("open")
+        orig = RS.build
+        try:
+            RS.build = lambda l: dict(orig(l), gf_opening=[5.177, -28.421, 8.537, -27.471])
+            self.assertLess(V.gf_route_width(lay), 0.9)
+        finally:
+            RS.build = orig
+
+    def test_the_study_is_open_to_the_stair(self):
+        for lay in P.options():
+            sp = RS.build(lay)
+            self.assertFalse([d for d in sp["doors"] if set(d.get("rooms") or []) & {"study-game"}
+                              and set(d["rooms"]) & {"stair-gf", "gallery-end"}], lay["id"])
+            seg = [s for s in RS.segments(lay, "GF") if set(s["rooms"]) == {"study-game", "stair-gf"}]
+            self.assertTrue(seg and all(RS._kind(lay, s) == "sep" for s in seg), lay["id"])
+
+    def test_p5_swaps_the_daylit_and_dark_rooms(self):
+        p5 = [l for l in P.options() if l["id"] == "P5"][0]
+        self.assertEqual(p5["rooms"]["study-game"]["occupancy"], "living")
+        self.assertEqual(p5["rooms"]["lounge"]["occupancy"], "media")
+
+
 class DaylightVariants(unittest.TestCase):
     def test_the_slot_has_one_grating_face_per_span_and_the_car_only_when_asked(self):
         from archpipe.concept import villa_daylight as VD
         lays = VD.variant_layouts()
-        base = VD.scene(*lays["P1-slot"])
-        car = VD.scene(*lays["P1-slot-car"])
+        base = VD.scene(*lays["P3-slot"])
+        car = VD.scene(*lays["P3-slot-car"])
         g = [f for f in base.faces if f.material == "grating"]
         self.assertTrue(g)
         spans = {(round(min(p[0] for p in f.points), 3), round(max(p[0] for p in f.points), 3)) for f in g}

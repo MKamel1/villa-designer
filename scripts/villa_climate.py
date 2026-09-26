@@ -5,7 +5,7 @@
 
 Hours: 09:30, 12:30 and 15:30 (weather-file standard time) on 21 March, 21 June and 21 December, from the Cairo
 International Airport TMYx weather file (2011-2025). Heights above the basement floor: 0.05 (floor), 0.85
-(work plane), 1.60 (standing eye) and 2.20 m. Options S1, S5, P1-P4.
+(work plane), 1.60 (standing eye) and 2.20 m. Options S1, S5, P3-P5 and the mitigation variants.
 """
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ from archpipe.concept import villa_daylight as VD                     # noqa: E4
 from archpipe.concept import villa_options as VO                      # noqa: E402
 from archpipe.concept import villa_parking as P                       # noqa: E402
 
-JOB = "villa-lux-r9"            # r9: floor-to-beam street and extension-end glazing + the mitigation variants
+JOB = "villa-lux-r10"           # r10: straight stair only (P3-P5), headroom-sized slab opening, open study, variants
 LOCAL = Path("out/villa/daylight") / JOB
 REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 EPW = Path(r"C:/Users/mmbka/archpipe-sources/cairo-epw/EGY_QH_Cairo.Intl.AP.623660_TMYx.2011-2025.zip")

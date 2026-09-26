@@ -97,6 +97,10 @@ OCCUPANCIES: dict[str, Occupancy] = {o.term: o for o in (
             "not lived in, so it carries no daylight ratio. It IS private, so "
             "reaching it through a living space is the same fault CIRC-01 "
             "reports for a bedroom."),
+    # ---- occupied, dark by design --------------------------------------
+    _o("media", "Media room / cinema",
+       note="Occupied but kept dark on purpose (client r9: the basement's darkest room is where the cinema goes). "
+            "Not habitable in the daylight sense: no daylight ratio is asked of it."),
     # ---- service / back of house ---------------------------------------
     _o("utility", "Utility", "service"),
     _o("store", "Store", "service"),

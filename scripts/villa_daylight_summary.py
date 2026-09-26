@@ -2,7 +2,7 @@
 
     PYTHONPATH=src python scripts/villa_daylight_summary.py      # out/villa/daylight/summary.json
 
-Sources (all validated runs): daylight factor (villa-df-r9), lux at 9 weather-file hours x 4 heights and the
+Sources (all validated runs): daylight factor (villa-df-r10), lux at 9 weather-file hours x 4 heights and the
 annual 08:00-18:00 statistics (villa-lux-r8), the eye-level renders (views/). Benchmarks from held cards only.
 """
 from __future__ import annotations
@@ -24,8 +24,8 @@ from archpipe.concept import villa_options as VO                      # noqa: E4
 from archpipe.concept import villa_parking as P                       # noqa: E402
 
 OUT = Path("out/villa/daylight")
-DF_JOB, LUX_JOB = OUT / "villa-df-r9", OUT / "villa-lux-r9"
-OPTIONS = ["S1", "S5", "P1", "P2", "P3", "P4"] + list(VD.VARIANTS)
+DF_JOB, LUX_JOB = OUT / "villa-df-r10", OUT / "villa-lux-r10"
+OPTIONS = ["S1", "S5", "P3", "P4", "P5"] + list(VD.VARIANTS)
 
 
 def pull_annual():
@@ -36,7 +36,7 @@ def pull_annual():
 
 
 def main():
-    if not (LUX_JOB / "cases" / "P1" / "annual_stats.json").exists():
+    if not (LUX_JOB / "cases" / "P3" / "annual_stats.json").exists():
         pull_annual()
     lux = json.loads((LUX_JOB / "report.json").read_text(encoding="utf-8"))
     df = json.loads((DF_JOB / "report.json").read_text(encoding="utf-8"))

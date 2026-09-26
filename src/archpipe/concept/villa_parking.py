@@ -40,7 +40,10 @@ RAMP_X0 = FN
 RAMP_X1 = round(RAMP_X0 + 2 * TRANSITION + (DECK_TOP - 2 * TRANSITION * TRANSITION_G) / GRADIENT, 3)   # 6.877
 CARS = {2: 9.8, 1: 5.9}
 EXT_MIN_END = 14.5         # the rooms under the deck run at least this far (beyond a one-car deck: own roof, like S5)
-DIRTY_KITCHEN_L = 3.8      # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)
+TURN_CLEAR = 1.0           # void edge to kids A's wall: 0.9 m hall (card ukadm-hall-min-m42) + balustrade and
+#                            half the partition (0.05 each, ASSUMED); checked by villa.gf_route_width
+KIDS_W = 3.36              # each kids bedroom's width (net area >= 11.5 m2, card ndss-double-bedroom-area)
+DIRTY_KITCHEN_L = 3.8     # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)
 STUDY_DOOR = (7.377, 9.227)                             # between the east-face column faces: 1.85 m clear
 STUDY_DOOR_W = 1.80
 
@@ -222,23 +225,39 @@ def _gf_straight():
         else:
             r[0] = round(r[0] + dx, 3)
         rooms[rid]["rect"] = r
+    # client r9: the slab opening runs as far as the headroom over the flight needs (2.0 m above the PITCH line,
+    # under the real soffit), and the way from the stair top round the void's end into the bedroom corridor keeps a
+    # full hall width; kids A's wall moves east for it (both kids rooms share what is left)
+    xv = S.clashes(S.party_flight_r8())["slab_opening_needed"][2] / 1000.0
+    xk = round(xv + TURN_CLEAR, 3)
+    for rid in ("stair-gf", "corridor"):
+        r = rooms[rid]["rect"]
+        rooms[rid]["rect"] = [r[0], r[1], round(xv, 3), r[3]] if rid == "stair-gf" else [round(xv, 3)] + r[1:]
     x0, y0, _, y1 = rooms["study-game"]["rect"]
-    rooms["study-game"]["rect"] = [x0, y0, SX1, y1]
-    rooms["study-game"]["name"] = "study / game room (sliding door to the deck)"
-    for rid, (a, b) in {"kids-a": (SX1, 12.827), "kids-b": (12.827, 16.427), "family-bath": (16.427, 18.427),
+    rooms["study-game"]["rect"] = [x0, y0, xk, y1]
+    rooms["study-game"]["name"] = "study / game room (open to the stair; sliding door to the deck)"
+    rooms["study-game"]["open"] = True               # client r9: no wall and no door to the stair
+    xb = round(xk + 2 * KIDS_W, 3)                    # the family bath gives up what the kids rooms need
+    kb = round(xk + KIDS_W, 3)
+    for rid, (a, b) in {"kids-a": (xk, kb), "kids-b": (kb, xb), "family-bath": (xb, 18.427),
                         "parents-bed": (18.427, XR)}.items():
         r = rooms[rid]["rect"]
         rooms[rid]["rect"] = [a, r[1], b, r[3]]
-    cx0 = rooms["corridor"]["rect"][0]                # the corner the study's run-on leaves beside the gallery
-    rooms["gallery-end"] = _room("gallery-end", "GF", (cx0, YC, SX1, y0), "corridor", "gallery end")
+    rooms["gallery-end"] = _room("gallery-end", "GF", (round(xv, 3), YC, xk, y0), "corridor",
+                                 "gallery (round the stair void to the bedrooms)")
     links = [l for l in base["links"] if base["rooms"][l[0]]["level"] == "GF"] + [("stair-gf", "gallery-end")]
     entries = [e for e in base["entries"] if e[1] == "GF"]
     return list(rooms.values()), links, entries
 
 
-def option(stair, cars, open_beyond=False):
-    """open_beyond: a daylight variant (id suffix '-open'): the east yard beyond the parked car left open."""
+def option(stair, cars, open_beyond=False, day_room=False):
+    """open_beyond: a daylight variant (id suffix '-open'): the east yard beyond the parked car left open.
+    day_room: option P5 (client r9, "a space worthy of the GF street room"): the daylit GF street room becomes the
+    family day room (living, with a study desk), open to the stair; the dark basement street room becomes the
+    cinema, where darkness is wanted."""
     oid = {("u", 1): "P1", ("u", 2): "P2", ("straight", 1): "P3", ("straight", 2): "P4"}[(stair, cars)]
+    if day_room:
+        oid = {("straight", 1): "P5", ("straight", 2): "P6"}[(stair, cars)]
     oid += "-open" if open_beyond else ""
     car_txt = "one car" if cars == 1 else "two cars in tandem"
     if stair == "u":
@@ -281,8 +300,14 @@ def option(stair, cars, open_beyond=False):
     if stair != "u":                                  # the straight option already has a utility under its landing
         under = [dict(r, id="laundry-ramp") if r["id"] == "laundry" else r for r in under]
         underl = [tuple("laundry-ramp" if n == "laundry" else n for n in l) for l in underl]
-    title = ("Option %s: %s stair, parking for %s on a GF-level deck, rooms underneath"
-             % (oid, "U (along the party wall)" if stair == "u" else "straight", car_txt))
+    if day_room:
+        gf = [dict(r, occupancy="living", name="family day room + study desk (open to the stair; sliding door to "
+                   "the deck)") if r["id"] == "study-game" else r for r in gf]
+        b = [dict(r, occupancy="media", name="cinema / TV (dark by design)") if r["id"] == "lounge" else
+             dict(r, name="games / hobby room (borrowed light)") if r["id"] == "media" else r for r in b]
+    title = ("Option %s: %s stair, parking for %s on a GF-level deck, rooms underneath%s"
+             % (oid, "U (along the party wall)" if stair == "u" else "straight", car_txt,
+                "; GF street room = family day room, basement street room = cinema" if day_room else ""))
     summary = ("Street gate, ramp (20 %% with 10 %% ends) up to a deck level with the GF (+1.20), %s; the study "
                "opens onto it through a 1.80 m sliding door, so with no car it is a GF-level yard. Rooms under the "
                "ramp and deck by clear height (stores, laundry, guest WC, dirty kitchen off the kitchen). Basement: "
@@ -306,4 +331,6 @@ def option(stair, cars, open_beyond=False):
 
 
 def options():
-    return [option("u", 1), option("u", 2), option("straight", 1), option("straight", 2)]
+    """The live options. P1/P2 (U stair along the party wall) dropped by the client in round 9; option("u", ...)
+    still builds them for the record."""
+    return [option("straight", 1), option("straight", 2), option("straight", 1, day_room=True)]

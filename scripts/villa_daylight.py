@@ -4,7 +4,7 @@
     PYTHONPATH=src python scripts/villa_daylight.py fetch    # when done: pull results, validate, write report JSON
 
 Cases: the three validation scenes (archpipe.daylight.validation_cases), S1 (the basement's east face open) and S5
-(east-yard blocks) as baselines, and the parking options P1-P4. Results are DIAGNOSTIC unless all three
+(east-yard blocks) as baselines, and the parking options P3-P5 (P1/P2 dropped, client r9). Results are DIAGNOSTIC unless all three
 validation checks pass.
 """
 from __future__ import annotations
@@ -24,7 +24,7 @@ from archpipe.concept import villa_daylight as VD                    # noqa: E40
 from archpipe.concept import villa_options as VO                     # noqa: E402
 from archpipe.concept import villa_parking as P                      # noqa: E402
 
-JOB = "villa-df-r9"            # r9: floor-to-beam street and extension-end glazing + the mitigation variants
+JOB = "villa-df-r10"           # r10: straight stair only (P3-P5), headroom-sized slab opening, open study, variants
 LOCAL = Path("out/villa/daylight") / JOB
 REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 
@@ -78,8 +78,8 @@ def fetch(host=DEFAULT_HOST):
     return 0 if val["all_pass"] else 1
 
 
-VIEW_JOB = "villa-views-r9"
-VIEW_VARIANTS = ["P1-open", "P1-slot", "P1-combo", "P2-slot", "P2-combo"]   # rendered besides the options
+VIEW_JOB = "villa-views-r10"
+VIEW_VARIANTS = ["P3-open", "P3-slot", "P3-combo", "P4-slot", "P4-combo", "P5-combo"]   # rendered besides the options
 EYE = -3.0 + 1.6                                   # basement FFL (model) + standing eye height
 VIEWS = {                                          # the same four spots in every option (checked clear of walls)
     "1-hall-to-garden": D.View((10.2, -27.9, EYE), (1.0, 0.12, -0.08)),

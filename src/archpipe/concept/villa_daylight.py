@@ -49,20 +49,22 @@ def _openings_on(wall, level, windows, doors):
 
 
 # Mitigation study (client r8: "if we keep the east side expansion, what maximises daylight?"): case -> (option,
-# variant). P1-open is the one-car option with nothing built beyond the parked car (villa_parking.option(...,
-# open_beyond=True)). The pass bar is fixed before the run in MITIGATION_BAR.
+# variant). P3-open / P5-open: the one-car option with nothing built beyond the parked car (villa_parking.option(...,
+# open_beyond=True)). The pass bar is fixed before the run in MITIGATION_BAR. Client r9 dropped P1/P2 (the U stair)
+# before any variant result was read; the same variants now run on the straight-stair options.
 VARIANTS = {
-    "P1-white": ("P1", {"white": True}),
-    "P1-glass": ("P1", {"glass_partitions": True}),
-    "P1-open": ("P1-open", {}),
-    "P1-slot": ("P1", {"slot": 0.9}),
-    "P1-slot-car": ("P1", {"slot": 0.9, "car": True}),
-    "P1-combo": ("P1-open", {"white": True, "glass_partitions": True}),
-    "P2-white": ("P2", {"white": True}),
-    "P2-glass": ("P2", {"glass_partitions": True}),
-    "P2-slot": ("P2", {"slot": 0.9}),
-    "P2-slot-car": ("P2", {"slot": 0.9, "car": True}),
-    "P2-combo": ("P2", {"white": True, "glass_partitions": True}),
+    "P3-white": ("P3", {"white": True}),
+    "P3-glass": ("P3", {"glass_partitions": True}),
+    "P3-open": ("P3-open", {}),
+    "P3-slot": ("P3", {"slot": 0.9}),
+    "P3-slot-car": ("P3", {"slot": 0.9, "car": True}),
+    "P3-combo": ("P3-open", {"white": True, "glass_partitions": True}),
+    "P4-white": ("P4", {"white": True}),
+    "P4-glass": ("P4", {"glass_partitions": True}),
+    "P4-slot": ("P4", {"slot": 0.9}),
+    "P4-slot-car": ("P4", {"slot": 0.9, "car": True}),
+    "P4-combo": ("P4", {"white": True, "glass_partitions": True}),
+    "P5-combo": ("P5-open", {"white": True, "glass_partitions": True}),
 }
 MITIGATION_BAR = {                     # registered 2026-09-26, before any variant result was seen
     "rooms": ["lounge", "media", "kitchen"],
@@ -76,7 +78,8 @@ MITIGATION_BAR = {                     # registered 2026-09-26, before any varia
 def variant_layouts():
     """{case: (layout, variant)} for the mitigation study."""
     from . import villa_parking as P
-    lays = {l["id"]: l for l in P.options() + [P.option("u", 1, open_beyond=True)]}
+    lays = {l["id"]: l for l in P.options() + [P.option("straight", 1, open_beyond=True),
+                                               P.option("straight", 1, open_beyond=True, day_room=True)]}
     return {case: (lays[oid], v) for case, (oid, v) in VARIANTS.items()}
 
 

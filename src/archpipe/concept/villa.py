@@ -504,6 +504,77 @@ def _card(cid):
     return c["verified_value"], f"{cid} ({c['locator']})"
 
 
+def RS_build_opening(lay):
+    """The GF slab opening the Revit spec declares for this layout (m), or None."""
+    from . import revit_spec as RS
+    return RS.build(lay).get("gf_opening")
+
+
+def gf_route_width(lay, cell=0.02, wall=0.05, rail=0.05):
+    """The widest square body (m) that can travel on the GF from the stair top (the landing) to the bedroom
+    corridor's far end, through the open rooms only (revit_spec.is_open), round the stair void (the GF slab opening,
+    less a balustrade `rail`) and clear of the walls of closed rooms (half a partition, `wall`). Independent of how
+    the rooms were drawn: it rasterises the floor. Client r9: the turn from the stair past the void's end into the
+    bedroom corridor was 0.69 m and no check saw it."""
+    import collections
+    import numpy as np
+    from . import revit_spec as RS
+    rooms = [r for r in lay["rooms"].values() if r["level"] == "GF"]
+    xs = [v for r in rooms for v in (r["rect"][0], r["rect"][2])]
+    ys = [v for r in rooms for v in (r["rect"][1], r["rect"][3])]
+    x0, y0 = min(xs), min(ys)
+    nx, ny = int((max(xs) - x0) / cell) + 1, int((max(ys) - y0) / cell) + 1
+    gx = x0 + (np.arange(nx) + 0.5) * cell
+    gy = y0 + (np.arange(ny) + 0.5) * cell
+    X, Y = np.meshgrid(gx, gy, indexing="ij")
+    free = np.zeros((nx, ny), bool)
+    for r in rooms:
+        if RS.is_open(r):
+            a, b, c, d = r["rect"]
+            free |= (X >= a) & (X <= c) & (Y >= b) & (Y <= d)
+    for r in rooms:                                    # closed rooms: their walls eat half a partition
+        if not RS.is_open(r):
+            a, b, c, d = r["rect"]
+            free &= ~((X > a - wall) & (X < c + wall) & (Y > b - wall) & (Y < d + wall))
+    op = RS.build(lay).get("gf_opening")
+    if op:
+        free &= ~((X > op[0] - rail) & (X < op[2] + rail) & (Y > op[1] - rail) & (Y < op[3] + rail))
+    free[[0, -1], :] = False                            # the outer walls
+    free[:, [0, -1]] = False
+    start = lay["rooms"]["landing-gf"]["rect"]
+    end = lay["rooms"]["corridor"]["rect"]
+
+    def passes(w):
+        k = max(1, int(round(w / cell)))
+        s = np.pad(np.cumsum(np.cumsum(free.astype(np.int32), 0), 1), ((1, 0), (1, 0)))
+        if k > min(nx, ny):
+            return False
+        win = s[k:, k:] - s[:-k, k:] - s[k:, :-k] + s[:-k, :-k]
+        ok = win == k * k                              # a k x k body whose lower-left cell is (i, j) fits
+        cx, cy = gx[: ok.shape[0]] + (k - 1) * cell / 2, gy[: ok.shape[1]] + (k - 1) * cell / 2
+        CX, CY = np.meshgrid(cx, cy, indexing="ij")
+        src = ok & (CX >= start[0]) & (CX <= start[2]) & (CY >= start[1]) & (CY <= start[3])
+        dst = ok & (CX >= end[2] - 1.0) & (CX <= end[2]) & (CY >= end[1]) & (CY <= end[3])
+        if not src.any() or not dst.any():
+            return False
+        seen = src.copy()
+        q = collections.deque(zip(*np.nonzero(src)))
+        while q:
+            i, j = q.popleft()
+            for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                a, b = i + di, j + dj
+                if 0 <= a < ok.shape[0] and 0 <= b < ok.shape[1] and ok[a, b] and not seen[a, b]:
+                    seen[a, b] = True
+                    q.append((a, b))
+        return bool((seen & dst).any())
+
+    lo, hi = 0.0, 2.0
+    for _ in range(12):
+        mid = (lo + hi) / 2
+        lo, hi = (mid, hi) if passes(mid) else (lo, mid)
+    return round(lo, 2)
+
+
 def _row(item, achieved, required, card, ok, unit="m", note=""):
     return {"item": item, "achieved": achieved, "required": required, "unit": unit, "card": card,
             "status": "advisory" if required == "-" else "pass" if ok else "fail", "note": note}
@@ -577,6 +648,20 @@ def elevation_checks(lay):
                     not hits, "clashes", note=("; ".join(hits) if hits else "none; " + agree) +
                     "; GF slab opening needed x %.2f to %.2f, y %.2f to %.2f" % tuple(
                         cl["slab_opening_needed"][i] / 1000 for i in (0, 2, 1, 3))))
+    st = stair_model(key)
+    if "pitch_line" in st:                              # straight flights: headroom from the pitch line, independently
+        op = [v * 1000 for v in (RS_build_opening(lay) or [])] or None
+        hr, hx = S.pitch_headroom(st, op)
+        out.append(_row("stair headroom above the pitch line (GF slab soffit %.2f, opening to x %.2f)"
+                        % (S.SLAB_SOFFIT / 1000, op[2] / 1000 if op else 0), round(hr), head, hc, hr >= head - 1e-6,
+                        "mm", note="least at x %.2f; soffit = FFL - build-up %.2f - slab %.2f" % (
+                            hx / 1000, FLOOR_BUILDUP, SLAB)))
+    if any(r["id"] == "landing-gf" for r in lay["rooms"].values()) and "corridor" in lay["rooms"]:
+        hall, hlc = _card("ukadm-hall-min-m42")
+        w = gf_route_width(lay)
+        out.append(_row("GF route from the stair top to the bedrooms: clear width (round the stair void)", w,
+                        hall / 1000, hlc, w >= hall / 1000 - 1e-6, note="rasterised floor, balustrade and half a "
+                        "partition allowed 0.05 m each (villa.gf_route_width)"))
     pk2 = lay.get("parking2")
     if pk2:
         from . import villa_parking as P

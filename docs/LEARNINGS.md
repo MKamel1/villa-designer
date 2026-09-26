@@ -495,3 +495,20 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   never see a wrong window. Now `build_villa_option.sized_door(..., what="window")` duplicates an exact-size type and
   the read-back reports the type's width/height and the instance's sill as built. Lesson: a read-back that copies
   its input is not a read-back; check each field's source.
+
+## Stair headroom from the tread tops, and a pinch round the void (client r9, 2026-09-26)
+
+- **Headroom was measured from the wrong line, under the wrong soffit.** AD K Diagram 1.3 (card
+  ukadk-stair-headroom-min) measures 2.0 m above the PITCH line; our envelope started at each tread top, which is
+  up to one rise lower at the back of the tread. And the GF slab zone was taken as -200..0 (slab only), ignoring the
+  0.10 floor build-up: the soffit is at -300. Together they sized the slab opening to x 8.537, which leaves 1.82 m.
+  Why missed: the envelope boxes WERE the check, so the generator and the check shared the error. Guards:
+  `stairs.straight` slices the envelope to the pitch line, `stairs.SLAB_SOFFIT` (tested equal to FLOOR_BUILDUP +
+  SLAB), and `stairs.pitch_headroom`, an independent sampled check shown as an elevation row; proven on the
+  round-8 opening (1824 mm, `test_the_round8_opening_is_caught`). The opening now runs to x 8.887 (2045 mm).
+- **The way from the stair top to the bedrooms was 0.69 m where it turned round the void.** Every room passed its
+  own width check; nothing measured the route between rooms. Guard: `villa.gf_route_width` rasterises the open
+  floor (void + balustrade and half partitions removed) and finds the widest body that gets from the landing to the
+  corridor's end; row "GF route from the stair top to the bedrooms" against card ukadm-hall-min-m42. Round-8 plan:
+  0.59 m (0.25 m once the void was right); now 0.91 m, kids A's wall moved to void + 1.0 m and the kids rooms kept
+  at 11.5 m2 by narrowing the family bath (1.82 m). The old S4 plan reads 0.21 m (superseded, not rebuilt).

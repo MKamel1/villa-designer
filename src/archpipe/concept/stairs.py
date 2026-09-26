@@ -19,6 +19,10 @@ TREAD_T = 60                                  # tread block thickness drawn unde
 LANDING_T = 150
 LANDING_DEPTH = 950                           # half landing: at least the flight width (0.9 m)
 YC = E.BAR[1] + 1300                          # spine edge (hall 0.9 m clear), as in concept.villa
+# the GF slab's underside: FFL less the floor build-up (0.10, ASSUMED) and the slab (0.20) = villa.FLOOR_BUILDUP +
+# villa.SLAB (tested equal). Was taken as -200 (slab only), 100 mm too high for every headroom under it.
+SLAB_SOFFIT = GF_FFL - 300
+HEAD_SLICES = 4                               # headroom envelope slices per going (over-conservative <= going / 4)
 
 
 def _box(x0, y0, z0, x1, y1, z1, what):
@@ -26,19 +30,51 @@ def _box(x0, y0, z0, x1, y1, z1, what):
 
 
 def straight(x_top, x_foot, y0, y1, risers, name):
-    """A straight flight rising from the basement foot (x_foot) to the GF (x_top); goings are equal."""
+    """A straight flight rising from the basement foot (x_foot) to the GF (x_top); goings are equal. Headroom is
+    measured from the PITCH LINE (the line through the nosings, AD K Diagram 1.3), not from the tread tops: over a
+    tread the pitch line climbs one rise, and a tread-top envelope once passed a flight with 1.8 m under the slab
+    edge (client r9)."""
     n_go = risers - 1
     going = (x_foot - x_top) / n_go
     rise = (GF_FFL - B_FFL) / risers
+    pitch = lambda x: B_FFL + rise * (1 + (x_foot - x) / going)       # noqa: E731  nosing of tread 1 at x_foot
     parts = []
     for i in range(1, n_go + 1):                       # tread i sits i risers above the basement
         xa = x_foot - (i - 1) * going
         xb = x_foot - i * going
         top = B_FFL + i * rise
         parts.append(_box(xa, y0, top - TREAD_T, xb, y1, top, f"{name} tread {i}"))
-        parts.append(_box(xa, y0, top, xb, y1, top + HEAD, f"{name} headroom over tread {i}"))
+        for k in range(HEAD_SLICES):                   # the sloping envelope as slices, each to its high end
+            a, b = xa - (xa - xb) * k / HEAD_SLICES, xa - (xa - xb) * (k + 1) / HEAD_SLICES
+            parts.append(_box(a, y0, top, b, y1, pitch(b) + HEAD, f"{name} headroom over tread {i}.{k}"))
     return {"name": name, "parts": parts, "rise": rise, "going": abs(going), "risers": risers,
-            "ends": {"foot": ["v", x_foot, y0, y1], "top": ["v", x_top, y0, y1]}}
+            "ends": {"foot": ["v", x_foot, y0, y1], "top": ["v", x_top, y0, y1]},
+            "pitch_line": {"x_low": x_foot + going, "x_high": x_top, "y0": y0, "y1": y1,
+                           "z_low": B_FFL, "z_high": GF_FFL}}
+
+
+def pitch_headroom(stair, opening_mm, step=10):
+    """Independent check of a straight flight: the least vertical distance (mm) from its pitch line to anything
+    overhead, sampled every `step` mm along the flight at both edges of its width. Overhead: the GF slab soffit
+    (SLAB_SOFFIT) wherever the point is outside the declared slab opening, and the kept beams. Returns (least
+    clearance, x where it occurs)."""
+    pl = stair["pitch_line"]
+    beams = [s["box"] for s in structure() if s["kind"] == "beam"]
+    lo_x, hi_x = sorted((pl["x_low"], pl["x_high"]))
+    best = (1e9, None)
+    x = lo_x
+    while x <= hi_x + 1e-6:
+        t = (x - pl["x_low"]) / (pl["x_high"] - pl["x_low"])
+        z = pl["z_low"] + t * (pl["z_high"] - pl["z_low"])
+        for y in (pl["y0"] + 1, pl["y1"] - 1):
+            over = []
+            if not (opening_mm and opening_mm[0] <= x <= opening_mm[2] and opening_mm[1] <= y <= opening_mm[3]):
+                over.append(SLAB_SOFFIT)
+            over += [b[2] for b in beams if b[0] <= x <= b[3] and b[1] <= y <= b[4] and b[2] >= z]
+            if over and min(over) - z < best[0]:
+                best = (min(over) - z, x)
+        x += step
+    return best
 
 
 def u_stair(x0, x1, y_start, risers1, risers2, width, going, name):
@@ -171,7 +207,7 @@ def clashes(stair, opening=None):
             if ok:
                 hits.append({"stair_part": part["what"], "structure": s["what"], "kind": s["kind"],
                              "overlap_mm": [round(v) for v in d]})
-    slab = [p["box"] for p in stair["parts"] if p["box"][5] > GF_FFL - 200 + 1 and p["box"][2] < GF_FFL - 1]
+    slab = [p["box"] for p in stair["parts"] if p["box"][5] > SLAB_SOFFIT + 1 and p["box"][2] < GF_FFL - 1]
     need = None
     if slab:
         need = [min(b[0] for b in slab), min(b[1] for b in slab), max(b[3] for b in slab), max(b[4] for b in slab)]
@@ -179,7 +215,7 @@ def clashes(stair, opening=None):
     if need and opening:
         for p in stair["parts"]:
             b = p["box"]
-            if b[5] > GF_FFL - 200 + 1 and b[2] < GF_FFL - 1 and not (
+            if b[5] > SLAB_SOFFIT + 1 and b[2] < GF_FFL - 1 and not (
                     b[0] >= opening[0] - 1 and b[1] >= opening[1] - 1 and b[3] <= opening[2] + 1 and b[4] <= opening[3] + 1):
                 outside.append(p["what"])
     return {"stair": stair["name"], "hits": hits, "slab_opening_needed": need, "outside_declared_opening": outside}

@@ -118,12 +118,17 @@ def _room_at_strict(lay, level, x, y):
     return None
 
 
+def is_open(room):
+    """Open-plan room: its occupancy is open, or the layout marks it open (client r9: the GF study is open to the
+    stair, no wall and no door)."""
+    return room["occupancy"] in OPEN or bool(room.get("open"))
+
+
 def _kind(lay, seg):
     a, b = seg["rooms"]
     if a is None or b is None:
         return "ext"
-    oa, ob = lay["rooms"][a]["occupancy"], lay["rooms"][b]["occupancy"]
-    return "sep" if oa in OPEN and ob in OPEN else "int"
+    return "sep" if is_open(lay["rooms"][a]) and is_open(lay["rooms"][b]) else "int"
 
 
 def _merge(segs):
@@ -161,7 +166,7 @@ def build(lay):
             ra, rb = lay["rooms"][a], lay["rooms"][b]
             if ra["level"] != lv or rb["level"] != lv:
                 continue
-            if ra["occupancy"] in OPEN and rb["occupancy"] in OPEN:
+            if is_open(ra) and is_open(rb):
                 continue                         # open plan: no door
             best = max(((V.overlap_len(e1, e2), e1, e2) for e1 in V.edges(ra["rect"]) for e2 in V.edges(rb["rect"])),
                        key=lambda q: q[0])
