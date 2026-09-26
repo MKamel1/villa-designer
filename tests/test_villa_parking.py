@@ -35,7 +35,7 @@ class ParkingOptions(unittest.TestCase):
         self.opts = P.options()
 
     def test_four_options_pass_the_critic(self):
-        self.assertEqual([o["id"] for o in self.opts], ["P3", "P4", "P5"])   # P1/P2 dropped (client r9)
+        self.assertEqual([o["id"] for o in self.opts], ["P3", "P4"])   # P1/P2 and P5 dropped (client r9)
         for lay in self.opts:
             self.assertEqual(V.critique(lay)["fails"], [], lay["id"])
 
@@ -50,7 +50,7 @@ class ParkingOptions(unittest.TestCase):
                 self.assertAlmostEqual(r["rect"][3], V.FENCE_E, places=3)
 
     def test_rooms_under_the_ramp_have_their_working_height(self):
-        need = {"utility": 2.0, "wc": 2.3, "store": 0.0}
+        need = {"utility": 2.0, "wc": 2.3, "store": 0.0, "media": 2.0}
         for lay in self.opts:
             for r in lay["rooms"].values():
                 if r.get("ext"):
@@ -270,10 +270,37 @@ class StairHeadroomAndRoute(unittest.TestCase):
             seg = [s for s in RS.segments(lay, "GF") if set(s["rooms"]) == {"study-game", "stair-gf"}]
             self.assertTrue(seg and all(RS._kind(lay, s) == "sep" for s in seg), lay["id"])
 
-    def test_p5_swaps_the_daylit_and_dark_rooms(self):
-        p5 = [l for l in P.options() if l["id"] == "P5"][0]
-        self.assertEqual(p5["rooms"]["study-game"]["occupancy"], "living")
-        self.assertEqual(p5["rooms"]["lounge"]["occupancy"], "media")
+    def test_the_cinema_sits_under_the_ramp_with_its_ceiling_and_a_door(self):
+        for lay in P.options():
+            c = lay["rooms"]["cinema"]
+            self.assertTrue(c.get("ext"))
+            self.assertEqual(c["occupancy"], "media")
+            row = [e for e in V.elevation_checks(lay) if e["item"].startswith(c["name"])][0]
+            self.assertEqual(row["status"], "pass", row)
+            self.assertGreaterEqual(row["achieved"], 75)
+            doors = [d for d in RS.build(lay)["doors"] if "cinema" in (d.get("rooms") or [])]
+            self.assertTrue(doors, lay["id"])
+
+    def test_the_ceiling_row_fails_a_room_too_far_down_the_ramp(self):
+        import copy
+        lay = copy.deepcopy(P.options()[0])
+        lay["rooms"]["cinema"]["rect"][0] = V.FENCE_N                  # from the gate: 1.45 m at its low end
+        row = [e for e in V.elevation_checks(lay) if e["item"].startswith(lay["rooms"]["cinema"]["name"])][0]
+        self.assertEqual(row["status"], "fail")
+
+    def test_the_bath_beside_the_stair_frees_the_kids_rooms(self):
+        north, east = P.option("straight", 1), P.option("straight", 1, bath_north=False)
+        sn, se = V.critique(north)["sizes"], V.critique(east)["sizes"]
+        self.assertGreater(sn["kids-a"]["net_m2"], se["kids-a"]["net_m2"])
+        self.assertGreaterEqual(sn["family-bath"]["net_w"], 2.15 - 1e-6)           # card mh-bathroom-m42-4.30
+        self.assertIn(("gallery-end", "family-bath"), [tuple(l) for l in north["links"]])
+
+    def test_the_lounge_is_glazed_across_the_whole_street_run(self):
+        for lay in P.options():
+            sp = RS.build(lay)
+            d = [d for d in sp["doors"] if d.get("full_height") and d["rooms"][0] == "lounge"]
+            self.assertEqual(len(d), 1)
+            self.assertAlmostEqual(d[0]["width"], 3.81 - 2 * RS.REVEAL, places=2)   # column to column, less reveals
 
 
 class DaylightVariants(unittest.TestCase):

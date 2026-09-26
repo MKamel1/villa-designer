@@ -25,7 +25,7 @@ from archpipe.concept import villa_parking as P                       # noqa: E4
 
 OUT = Path("out/villa/daylight")
 DF_JOB, LUX_JOB = OUT / "villa-df-r10", OUT / "villa-lux-r10"
-OPTIONS = ["S1", "S5", "P3", "P4", "P5"] + list(VD.VARIANTS)
+OPTIONS = ["S1", "S5", "P3", "P4"] + list(VD.VARIANTS)
 
 
 def pull_annual():

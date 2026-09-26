@@ -39,12 +39,34 @@ def _openings_on(wall, level, windows, doors):
         along, across = dx * ux + dy * uy, abs(-dx * uy + dy * ux)
         if across > wall["thickness"] / 2 + 0.1 or not (-0.01 <= along <= L + 0.01):
             continue
+        sp_ = o.get("span")                    # an opening near a corner belongs to the wall along its own run
+        if sp_ and (sp_[0] == "h") != (abs(yb - ya) < 1e-6):
+            continue
         if is_door:
             kind = "glazed" if (o.get("garden") or o.get("sliding")) else "door"
             sill, head = 0.0, o.get("height", 2.1)
         else:
             kind, sill, head = "window", o["sill"], o["sill"] + o["height"]
         out.append({"offset": along - o["width"] / 2, "width": o["width"], "sill": sill, "head": head, "kind": kind})
+    return out
+
+
+def _owners(walls, windows, doors):
+    """{id(opening): wall}: each opening goes to ONE wall, the nearest of those it lies on (a door beside a corner
+    once landed on both walls of the corner and was drawn twice)."""
+    out = {}
+    for o in list(windows) + list(doors):
+        best = None
+        for w in walls:
+            if not _openings_on(w, w["level"], [o] if o in windows else [], [o] if o in doors else []):
+                continue
+            (xa, ya), (xb, yb) = (w["x0"], w["y0"]), (w["x1"], w["y1"])
+            L = ((xb - xa) ** 2 + (yb - ya) ** 2) ** 0.5
+            across = abs(-(o["x"] - xa) * (yb - ya) / L + (o["y"] - ya) * (xb - xa) / L)
+            if best is None or across < best[0]:
+                best = (across, w)
+        if best:
+            out[id(o)] = best[1]
     return out
 
 
@@ -64,7 +86,6 @@ VARIANTS = {
     "P4-slot": ("P4", {"slot": 0.9}),
     "P4-slot-car": ("P4", {"slot": 0.9, "car": True}),
     "P4-combo": ("P4", {"white": True, "glass_partitions": True}),
-    "P5-combo": ("P5-open", {"white": True, "glass_partitions": True}),
 }
 MITIGATION_BAR = {                     # registered 2026-09-26, before any variant result was seen
     "rooms": ["lounge", "media", "kitchen"],
@@ -78,8 +99,7 @@ MITIGATION_BAR = {                     # registered 2026-09-26, before any varia
 def variant_layouts():
     """{case: (layout, variant)} for the mitigation study."""
     from . import villa_parking as P
-    lays = {l["id"]: l for l in P.options() + [P.option("straight", 1, open_beyond=True),
-                                               P.option("straight", 1, open_beyond=True, day_room=True)]}
+    lays = {l["id"]: l for l in P.options() + [P.option("straight", 1, open_beyond=True)]}
     return {case: (lays[oid], v) for case, (oid, v) in VARIANTS.items()}
 
 
@@ -171,16 +191,23 @@ def scene(lay, variant=None) -> D.Scene:
         s.add(D.box(rect[0], rect[1], -SLAB_T, rect[2], rect[3], 0.0, "ceiling", top="floor", bottom="ceiling"))
     # the option: walls with their openings, stair, block roofs / parking structures
     placed = 0
+    owner = _owners(sp["walls"], sp["windows"], sp["doors"])
     ext_x1 = max([r[2] for r in V._exts(lay.get("extension"))] or [0.0])
+    # glass partitions only in front of the service rooms (the cinema stays dark, the WC private)
+    glass_x = [(r["rect"][0], r["rect"][2]) for r in lay["rooms"].values() if r.get("ext") and r["occupancy"] == "utility"]
     for w in sp["walls"]:
         z0 = LEVEL_Z[w["level"]]
-        ops = _openings_on(w, w["level"], sp["windows"], sp["doors"])
+        ops = _openings_on(w, w["level"], [o for o in sp["windows"] if owner.get(id(o)) is w],
+                           [o for o in sp["doors"] if owner.get(id(o)) is w])
         placed += len(ops)
         if v.get("glass_partitions") and w["level"] == "B" and abs(w["y0"] - w["y1"]) < 1e-6 and \
                 abs(w["y0"] - V.YE) < RS.EXT_T and V.X0 - 1e-6 <= min(w["x0"], w["x1"]) and \
                 max(w["x0"], w["x1"]) <= ext_x1 + 1e-6:
-            # bar | extension: one glass wall, floor to beam
-            ops = [{"offset": 0.0, "width": abs(w["x1"] - w["x0"]), "sill": 0.0, "head": RS.HEAD, "kind": "glazed"}]
+            # bar | extension: glass walls, floor to beam, in front of the service rooms only
+            xa = min(w["x0"], w["x1"])
+            ops = [{"offset": max(a, xa) - xa, "width": min(b, max(w["x0"], w["x1"])) - max(a, xa), "sill": 0.0,
+                    "head": RS.HEAD, "kind": "glazed"} for a, b in glass_x
+                   if min(b, max(w["x0"], w["x1"])) - max(a, xa) > 0.3] or ops
         s.add(D.wall((w["x0"], w["y0"]), (w["x1"], w["y1"]), z0, w["height"], w["thickness"], ops))
     s.openings = {"spec": len(sp["windows"]) + len(sp["doors"]), "placed": placed}
     for b in sp["stair"]:

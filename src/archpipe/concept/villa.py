@@ -348,8 +348,10 @@ def critique(lay):
         occ = r["occupancy"]
         key = "bedroom" if occ == "bedroom" else occ if occ in ("living", "dining", "study") else \
             "bathroom" if occ in ("bathroom", "ensuite") else "wc" if occ == "wc" else None
-        if key and key in cat.MIN_AREA_M2:
+        if key and key in cat.MIN_AREA_M2 and not r.get("part_of"):   # an alcove counts with its room
             need = cat.MIN_AREA_M2[key][0]
+            if any(v.get("part_of") == rid for v in rooms.values()):
+                w, d = 1.0, w * d + sum(area(v["rect"]) for v in rooms.values() if v.get("part_of") == rid)
             if w * d < need:
                 (warn if key in ("bathroom", "wc") else small).append(
                     {"room": rid, "achieved_m2": round(w * d, 1), "required_m2": need})
@@ -366,6 +368,8 @@ def critique(lay):
         faces = window_faces(r["level"], ext)
         L_ = on_faces(r["rect"], faces)
         win_len[rid] = round(L_, 2)
+        if r.get("part_of"):                               # an alcove: lit with (and glazed across) its room
+            L_ = win_len[rid] = round(L_ + on_faces(rooms[r["part_of"]]["rect"], faces), 2)
         if r["occupancy"] in vocab.HABITABLE and L_ < 1.0 and not r.get("rooflight"):
             dark.append(rid)
     # an open-plan zone with no window of its own, joined without a wall to a room that has one, borrows light:
@@ -665,6 +669,16 @@ def elevation_checks(lay):
     pk2 = lay.get("parking2")
     if pk2:
         from . import villa_parking as P
+        cmin, cc = _card("mh-dwelling-ceiling-min")
+        for rid, r in lay["rooms"].items():               # occupied rooms under the sloping ramp (client r9: cinema)
+            if r.get("ext") and r["occupancy"] in ("media",) + tuple(vocab.HABITABLE):
+                x0, x1 = r["rect"][0], r["rect"][2]
+                n = 200
+                share = sum(1 for i in range(n) if P.clear_at(x0 + (i + 0.5) * (x1 - x0) / n) >= cmin - 1e-9) / n
+                out.append(_row("%s under the ramp: floor share with >= %.1f m clear" % (r["name"], cmin),
+                                round(100 * share), 75, cc, share >= 0.75 - 1e-9, "%",
+                                note="clear %.2f to %.2f m (the card's NDSS reading: 2.3 m over 75 %% of the floor)"
+                                     % (P.clear_at(x0), P.clear_at(x1))))
         g = pk2["gradient"] * 100
         nmax, nc = _card("neufert-private-garage-slope-max")
         gmax, gc = _card("mh-garage-ramp-max")

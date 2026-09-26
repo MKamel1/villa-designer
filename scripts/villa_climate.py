@@ -5,7 +5,7 @@
 
 Hours: 09:30, 12:30 and 15:30 (weather-file standard time) on 21 March, 21 June and 21 December, from the Cairo
 International Airport TMYx weather file (2011-2025). Heights above the basement floor: 0.05 (floor), 0.85
-(work plane), 1.60 (standing eye) and 2.20 m. Options S1, S5, P3-P5 and the mitigation variants.
+(work plane), 1.60 (standing eye) and 2.20 m. Options S1, S5, P3-P4 and the mitigation variants.
 """
 from __future__ import annotations
 

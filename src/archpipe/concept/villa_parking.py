@@ -43,7 +43,9 @@ EXT_MIN_END = 14.5         # the rooms under the deck run at least this far (bey
 TURN_CLEAR = 1.0           # void edge to kids A's wall: 0.9 m hall (card ukadm-hall-min-m42) + balustrade and
 #                            half the partition (0.05 each, ASSUMED); checked by villa.gf_route_width
 KIDS_W = 3.36              # each kids bedroom's width (net area >= 11.5 m2, card ndss-double-bedroom-area)
-DIRTY_KITCHEN_L = 3.8     # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)
+GUEST_WC_END = 11.2        # guest WC under the deck, from the deck start (x 9.227: 1.97 m wide)
+BATH_W = 2.25              # family bath beside the stair (client r9): 2.15 m clear inside (card mh-bathroom-m42-4.30)
+DIRTY_KITCHEN_L = 3.8    # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)
 STUDY_DOOR = (7.377, 9.227)                             # between the east-face column faces: 1.85 m clear
 STUDY_DOOR_W = 1.80
 
@@ -156,7 +158,7 @@ def _back(cars, spine_entry=None):
     return rooms, links
 
 
-def _under(cars, open_beyond=False):
+def _under(cars, open_beyond=False, cinema=False):
     """Rooms under the ramp and deck (east yard, to the fence), from the street gate. They run at least to x 14.5
     so the dirty kitchen opens off the kitchen; beyond a one-car deck they get their own roof, level with the deck
     (like option 5's blocks)."""
@@ -166,6 +168,7 @@ def _under(cars, open_beyond=False):
         # daylight variant: nothing built beyond the parked car, so the kitchen gets its east face back; the dirty
         # kitchen takes the store's place under the deck and opens off the media room
         ext_end = deck_end
+    if open_beyond and not cinema:
         rooms = [_room("store-ramp", "B", (FN, YE, X_LOW, FE), "store", "store under the ramp (1.45-2.0 m clear)",
                        ext=True),
                  _room("laundry", "B", (X_LOW, YE, 7.2, FE), "utility", "laundry (under the ramp)", ext=True),
@@ -178,6 +181,26 @@ def _under(cars, open_beyond=False):
     # the dirty kitchen is always the last room, behind the extension's full-height end window (client r8: a store
     # sat there in the two-car options, so the end had no window); the store in the middle takes up the rest
     dk0 = round(max(11.2, ext_end - DIRTY_KITCHEN_L), 3)
+    if cinema:
+        # client r9: the cinema needs no sun and wants doors, so it goes under the ramp (X_LOW to the deck start:
+        # 2.0 m clear at its low end, 2.3 m or more over 75 % of it, card mh-dwelling-ceiling-min); the guest WC,
+        # the laundry (where the deck leaves room) and the dirty kitchen go under the deck
+        rooms = [_room("store-ramp", "B", (FN, YE, X_LOW, FE), "store", "store under the ramp (1.45-2.0 m clear)",
+                       ext=True),
+                 _room("cinema", "B", (X_LOW, YE, SX1, FE), "media", "cinema (under the ramp; 2.0-2.65 m ceiling)",
+                       ext=True),
+                 _room("guest-wc", "B", (SX1, YE, GUEST_WC_END, FE), "wc", "guest WC (under the deck)", ext=True)]
+        links = [("cinema", "store-ramp"), ("lounge", "cinema"), ("media", "guest-wc"), ("kitchen", "dirty-kitchen")]
+        if dk0 > GUEST_WC_END + 1.2:
+            rooms.append(_room("laundry", "B", (GUEST_WC_END, YE, dk0, FE), "utility", "laundry (under the deck)",
+                               ext=True))
+            links.append(("laundry", "dirty-kitchen"))
+            dk_name = "dirty kitchen (door from the kitchen; full-height window at the end)"
+        else:
+            dk0 = GUEST_WC_END
+            dk_name = "dirty kitchen + laundry (door from the kitchen; full-height window at the end)"
+        rooms.append(_room("dirty-kitchen", "B", (dk0, YE, ext_end, FE), "utility", dk_name, ext=True))
+        return rooms, links, deck_end, ext_end
     rooms = [_room("store-ramp", "B", (FN, YE, X_LOW, FE), "store", "store under the ramp (1.45-2.0 m clear)",
                    ext=True),
              _room("laundry", "B", (X_LOW, YE, 7.2, FE), "utility", "laundry (under the ramp)", ext=True),
@@ -209,7 +232,7 @@ def _gf_u_lengthwise():
     return rooms, links, entries
 
 
-def _gf_straight():
+def _gf_straight(bath_north=True):
     """GF of option S4 with the study run on to x 9.227 (the deck door between the east-face columns) and the
     bedrooms shifted to the U layout's positions."""
     base = VO.s4()
@@ -234,31 +257,44 @@ def _gf_straight():
         r = rooms[rid]["rect"]
         rooms[rid]["rect"] = [r[0], r[1], round(xv, 3), r[3]] if rid == "stair-gf" else [round(xv, 3)] + r[1:]
     x0, y0, _, y1 = rooms["study-game"]["rect"]
-    rooms["study-game"]["rect"] = [x0, y0, xk, y1]
+    if bath_north:
+        # client r9: the family bath beside the stair top, shortened (its long side no deeper than the study) so
+        # the gallery in front of it takes the turn round the void; the kids rooms take the old bath's place
+        xk = round(SX1 + BATH_W, 3)
+        rooms["family-bath"]["rect"] = [SX1, y0, xk, y1]
+        study_x1 = SX1
+    else:
+        study_x1 = xk
+    rooms["study-game"]["rect"] = [x0, y0, study_x1, y1]
     rooms["study-game"]["name"] = "study / game room (open to the stair; sliding door to the deck)"
     rooms["study-game"]["open"] = True               # client r9: no wall and no door to the stair
-    xb = round(xk + 2 * KIDS_W, 3)                    # the family bath gives up what the kids rooms need
-    kb = round(xk + KIDS_W, 3)
-    for rid, (a, b) in {"kids-a": (xk, kb), "kids-b": (kb, xb), "family-bath": (xb, 18.427),
-                        "parents-bed": (18.427, XR)}.items():
+    if bath_north:
+        kb = round((xk + 18.427) / 2, 3)
+        spans = {"kids-a": (xk, kb), "kids-b": (kb, 18.427), "parents-bed": (18.427, XR)}
+    else:
+        xb = round(xk + 2 * KIDS_W, 3)                # the family bath gives up what the kids rooms need
+        kb = round(xk + KIDS_W, 3)
+        spans = {"kids-a": (xk, kb), "kids-b": (kb, xb), "family-bath": (xb, 18.427), "parents-bed": (18.427, XR)}
+    for rid, (a, b) in spans.items():
         r = rooms[rid]["rect"]
         rooms[rid]["rect"] = [a, r[1], b, r[3]]
     rooms["gallery-end"] = _room("gallery-end", "GF", (round(xv, 3), YC, xk, y0), "corridor",
                                  "gallery (round the stair void to the bedrooms)")
     links = [l for l in base["links"] if base["rooms"][l[0]]["level"] == "GF"] + [("stair-gf", "gallery-end")]
+    if bath_north:                                    # the bath opens off the gallery at the stair top
+        links = [l for l in links if "family-bath" not in l] + [("gallery-end", "family-bath")]
     entries = [e for e in base["entries"] if e[1] == "GF"]
     return list(rooms.values()), links, entries
 
 
-def option(stair, cars, open_beyond=False, day_room=False):
+def option(stair, cars, open_beyond=False, bath_north=True):
     """open_beyond: a daylight variant (id suffix '-open'): the east yard beyond the parked car left open.
-    day_room: option P5 (client r9, "a space worthy of the GF street room"): the daylit GF street room becomes the
-    family day room (living, with a study desk), open to the stair; the dark basement street room becomes the
-    cinema, where darkness is wanted."""
+    bath_north (straight stair): the family bath beside the stair top (client r9), else between the kids rooms and
+    the parents (round 9 plan; id suffix '-bath-east'). Client r9 dropped P5 (GF day room / basement cinema): the
+    cinema went under the ramp instead."""
     oid = {("u", 1): "P1", ("u", 2): "P2", ("straight", 1): "P3", ("straight", 2): "P4"}[(stair, cars)]
-    if day_room:
-        oid = {("straight", 1): "P5", ("straight", 2): "P6"}[(stair, cars)]
     oid += "-open" if open_beyond else ""
+    oid += "" if bath_north or stair == "u" else "-bath-east"
     car_txt = "one car" if cars == 1 else "two cars in tandem"
     if stair == "u":
         st = S.u_lengthwise_party()
@@ -280,34 +316,28 @@ def option(stair, cars, open_beyond=False, day_room=False):
         entries = ge + [("hall-b", "B", "core-lobby-b")]
         stair_key = "u-length"
     else:
-        gf, gl, ge = _gf_straight()
+        gf, gl, ge = _gf_straight(bath_north)
         ys = round(YP + 1.2, 3)
         st = S.party_flight_r8()
         xt, xf = st["ends"]["top"][1] / 1000, st["ends"]["foot"][1] / 1000      # 5.177, 9.657
-        b = [_room("laundry-landing", "B", (X0, YP, xt, ys), "utility", "utility (under the top landing)"),
+        # the utility under the top landing joins the lounge (client r9): the street face is glazed floor to beam
+        # across its whole run between the two columns
+        b = [dict(_room("lounge-nook", "B", (X0, YP, xt, ys), "living", "lounge (under the stair's top landing)"),
+                  part_of="lounge"),
              _room("stair-b", "B", (xt, YP, xf, ys), "stair", "stair (straight, to the GF)",
                    ends=[["v", xf, YP + 0.25, ys]]),
              _room("pantry", "B", V.FRONT_SHARE, "store", "pantry / store"),
              _room("lounge", "B", (X0, ys, xf, YE), "living", "flex / TV lounge"),
              _room("hall-b", "B", (xf, YP, 12.0, YK), "hall", "hall at the stair foot"),
-             _room("media", "B", (xf, YK, 12.0, YE), "living", "TV / media (cinema; borrowed light)")]
-        bl = [("hall-b", "stair-b"), ("hall-b", "media"), ("media", "lounge"), ("lounge", "laundry-landing"),
-              ("laundry-landing", "pantry")]
+             _room("media", "B", (xf, YK, 12.0, YE), "living", "family area (open to the lounge; borrowed light)")]
+        bl = [("hall-b", "stair-b"), ("hall-b", "media"), ("media", "lounge"), ("lounge", "lounge-nook"),
+              ("lounge-nook", "pantry")]
         back, backl = _back(cars, spine_entry=(14.134, 15.745))
         entries = ge + [("entry-b", "B", "core-lobby-b2")]
         stair_key = "party-r8"
-    under, underl, deck_end, ext_end = _under(cars, open_beyond)
-    if stair != "u":                                  # the straight option already has a utility under its landing
-        under = [dict(r, id="laundry-ramp") if r["id"] == "laundry" else r for r in under]
-        underl = [tuple("laundry-ramp" if n == "laundry" else n for n in l) for l in underl]
-    if day_room:
-        gf = [dict(r, occupancy="living", name="family day room + study desk (open to the stair; sliding door to "
-                   "the deck)") if r["id"] == "study-game" else r for r in gf]
-        b = [dict(r, occupancy="media", name="cinema / TV (dark by design)") if r["id"] == "lounge" else
-             dict(r, name="games / hobby room (borrowed light)") if r["id"] == "media" else r for r in b]
-    title = ("Option %s: %s stair, parking for %s on a GF-level deck, rooms underneath%s"
-             % (oid, "U (along the party wall)" if stair == "u" else "straight", car_txt,
-                "; GF street room = family day room, basement street room = cinema" if day_room else ""))
+    under, underl, deck_end, ext_end = _under(cars, open_beyond, cinema=stair != "u")
+    title = ("Option %s: %s stair, parking for %s on a GF-level deck, rooms underneath"
+             % (oid, "U (along the party wall)" if stair == "u" else "straight", car_txt))
     summary = ("Street gate, ramp (20 %% with 10 %% ends) up to a deck level with the GF (+1.20), %s; the study "
                "opens onto it through a 1.80 m sliding door, so with no car it is a GF-level yard. Rooms under the "
                "ramp and deck by clear height (stores, laundry, guest WC, dirty kitchen off the kitchen). Basement: "
@@ -333,4 +363,4 @@ def option(stair, cars, open_beyond=False, day_room=False):
 def options():
     """The live options. P1/P2 (U stair along the party wall) dropped by the client in round 9; option("u", ...)
     still builds them for the record."""
-    return [option("straight", 1), option("straight", 2), option("straight", 1, day_room=True)]
+    return [option("straight", 1), option("straight", 2)]

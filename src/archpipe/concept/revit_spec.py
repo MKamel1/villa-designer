@@ -39,6 +39,31 @@ def full_height_faces(lay, level):
     return out
 
 
+def street_runs(lay, level):
+    """Street-face runs of a living room together with its alcoves (rooms with part_of): [(face, lo, hi, room)],
+    one floor-to-beam opening each (client r9: "a very wide window where we need sun")."""
+    if level != "B":
+        return []
+    out = []
+    faces = [f for f in V.window_faces(level, lay.get("extension")) if full_height_faces(lay, level).get(
+        (f[0], round(f[1], 3))) == "street"]
+    for rid, r in lay["rooms"].items():
+        kids = [v for v in lay["rooms"].values() if v.get("part_of") == rid]
+        if r["level"] != level or not kids:
+            continue
+        for f in faces:
+            spans = sorted((max(e[2], f[2]), min(e[3], f[3])) for v in [r] + kids for e in V.edges(v["rect"])
+                           if V.overlap_len(e, f) > 1e-6)
+            run = []
+            for a, b in spans:
+                if run and a <= run[-1][1] + 1e-6:
+                    run[-1][1] = max(run[-1][1], b)
+                else:
+                    run.append([a, b])
+            out += [(f, a, b, rid) for a, b in run if b - a >= 1.0]
+    return out
+
+
 def glazing_problems(lay, windows, doors):
     """Post-condition (client r8 review): every run of a full-height face (full_height_faces) that the plan glazes
     carries an opening from the floor to the beam head, nearly as wide as the run. windows/doors: the spec or
@@ -51,14 +76,17 @@ def glazing_problems(lay, windows, doors):
         kind = full.get((f[0], round(f[1], 3)))
         if not kind:
             continue
+        runs = {rid: [(lo, hi) for f2, lo, hi, r2 in street_runs(lay, "B") if f2 == f and r2 == rid]
+                for rid in lay["rooms"]}
         for rid, r in lay["rooms"].items():
-            if r["level"] != "B" or (kind == "street" and r["occupancy"] not in vocab.HABITABLE):
+            if r["level"] != "B" or (kind == "street" and r["occupancy"] not in vocab.HABITABLE) or r.get("part_of"):
                 continue
-            for e in V.edges(r["rect"]):
-                L_ = V.overlap_len(e, f)
+            pieces = runs[rid] if kind == "street" and runs[rid] else [
+                (max(e[2], f[2]), min(e[3], f[3])) for e in V.edges(r["rect"]) if V.overlap_len(e, f) > 1e-6]
+            for lo, hi in pieces:
+                L_ = hi - lo
                 if L_ < 1.0:
                     continue
-                lo, hi = max(e[2], f[2]), min(e[3], f[3])
                 on = [o for o in ops if abs((o["x"] if f[0] == "v" else o["y"]) - f[1]) < 0.05
                       and lo - tol <= (o["y"] if f[0] == "v" else o["x"]) <= hi + tol]
                 need_w = L_ - 2 * REVEAL - tol
@@ -206,6 +234,9 @@ def build(lay):
                     x, y = (mid, e[1]) if e[0] == "h" else (e[1], mid)
                     span = [e[0], e[1], lo, hi]                  # axis, face coordinate, usable run
                     fh = full.get((f[0], round(f[1], 3)))
+                    if fh == "street" and (r.get("part_of") or any(v.get("part_of") == rid
+                                                                    for v in lay["rooms"].values())):
+                        continue                         # glazed as one run with its alcove (street_runs, below)
                     if fh and (fh == "end" or occ in vocab.HABITABLE):
                         # floor to beam across the whole column-free run (client 2026-09-26): the basement's street
                         # face (as built today) and the end of the east-yard extension, whatever room is behind it
@@ -230,6 +261,12 @@ def build(lay):
                     else:
                         spec["windows"].append({"level": lv, "x": x, "y": y, "width": 0.8, "sill": 1.5,
                                                 "height": HEAD - 1.5, "room": rid, "span": span})
+        for f, lo, hi, rid in street_runs(lay, lv):
+            wd = round(hi - lo - 2 * REVEAL, 2)
+            mid = (lo + hi) / 2
+            x, y = (f[1], mid) if f[0] == "v" else (mid, f[1])
+            spec["doors"].append({"level": lv, "x": x, "y": y, "width": wd, "rooms": [rid, "yard"], "garden": True,
+                                  "full_height": True, "span": [f[0], f[1], lo, hi]})
         for rid, r in lay["rooms"].items():
             if r["level"] == lv:
                 x0, y0, x1, y1 = r["rect"]
@@ -492,6 +529,7 @@ def window_credit_problems(lay, windows, doors):
     w = [c for c in res["checks"] if c["check"] == "window"][0]
     unlit = set(w.get("rooms") or []) | set(w.get("borrowed_light") or [])
     have = {o.get("room") for o in windows} | {r for d in doors if d.get("garden") for r in d.get("rooms", [])}
+    have |= {rid for rid, r in lay["rooms"].items() if r.get("part_of") in have}     # an alcove shares its room's
     out = []
     for rid, r in lay["rooms"].items():
         if r["occupancy"] in vocab.HABITABLE and rid not in unlit and rid not in have:

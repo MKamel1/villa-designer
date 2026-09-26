@@ -512,3 +512,10 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   corridor's end; row "GF route from the stair top to the bedrooms" against card ukadm-hall-min-m42. Round-8 plan:
   0.59 m (0.25 m once the void was right); now 0.91 m, kids A's wall moved to void + 1.0 m and the kids rooms kept
   at 11.5 m2 by narrowing the family bath (1.82 m). The old S4 plan reads 0.21 m (superseded, not rebuilt).
+- **r9 follow-ups.** A door beside a corner landed on both walls of the corner in the daylight scene (the parking
+  pass rebuilds doors without their `span`, so the direction test could not see it): each opening now goes to its
+  nearest wall only (`villa_daylight._owners`); `scene().openings` spec == placed for every case. An alcove of a room
+  (`part_of`, the lounge under the stair's top landing) is sized, lit and glazed with its room, so the street window
+  runs column to column (3.41 m) instead of stopping at a utility wall. Occupied rooms under the ramp (the cinema)
+  get a ceiling row: 2.3 m over 75 % of the floor (card mh-dwelling-ceiling-min), proven failing when the room is
+  pushed toward the gate.
