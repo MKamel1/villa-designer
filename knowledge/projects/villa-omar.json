@@ -1,0 +1,39 @@
+{
+  "project": "villa-omar",
+  "title": "Villa, Sheikh Zayed (east half of the twin: basement + ground floor)",
+  "sources": {
+    "brief": "docs/villa/brief-2026-09.md (client interview 2026-09-25)",
+    "environment": "docs/villa/environment-model.md; src/archpipe/villa_env.py",
+    "villa_01": "knowledge/projects/villa-01/brief-requirements.json (client targets that still hold)"
+  },
+  "facts": {
+    "household": "Two adults and three children; no staff; no gender separation of reception; no prayer room.",
+    "privacy": "The parents' suite must be private (reached without crossing living, dining or kitchen, and no other room reached through it). Children's rooms need not be.",
+    "ageing": "Ageing in place is a preference: M4(2) bathroom/WC sizes are the target; a shortfall is a warning, not a failure.",
+    "outdoors": "Garden, shaded terrace and BBQ in our sunken yard (-1.80). No pool, no parking in scope.",
+    "kitchen": "Open kitchen plus a separate dirty kitchen; built-in panel-ready appliances.",
+    "styles": "Warm contemporary, Japandi, Scandinavian, warm transitional.",
+    "review": "Plan PDFs first, then 3D, then renders."
+  },
+  "programme": [
+    {"id": "parents-bed", "occupancy": "bedroom", "min": "bedroom_first", "suite": true, "note": "one double bedroom: NDSS 11.5 m2 and 2.75 m wide"},
+    {"id": "parents-dressing", "occupancy": "dressing", "suite": true},
+    {"id": "parents-ensuite", "occupancy": "ensuite", "min": "bathroom", "suite": true, "preference": true},
+    {"id": "kids-a", "occupancy": "bedroom", "min": "bedroom", "note": "one room per gender; sized as twin (11.5 m2) because either may hold two of the three children"},
+    {"id": "kids-b", "occupancy": "bedroom", "min": "bedroom"},
+    {"id": "study-game", "occupancy": "study", "min": "study", "note": "shared study / game room"},
+    {"id": "family-bath", "occupancy": "bathroom", "min": "bathroom", "preference": true},
+    {"id": "living", "occupancy": "living", "min": "living"},
+    {"id": "dining", "occupancy": "dining", "min": "dining", "note": "villa_01 D-TABLE six seats 1800 x 900 and D-PUSH 900 mm"},
+    {"id": "kitchen", "occupancy": "kitchen", "note": "open; NKBA/Metric Handbook aisles judge it, no area minimum"},
+    {"id": "dirty-kitchen", "occupancy": "utility"},
+    {"id": "laundry", "occupancy": "utility"},
+    {"id": "guest-wc", "occupancy": "wc", "min": "wc", "preference": true},
+    {"id": "stair", "occupancy": "stair", "note": "private stair between basement and GF"}
+  ],
+  "open": [
+    "Apartment wet stacks above our GF: only the core bathroom above ours (x 19.6-22.3) is certain; the others are unknown.",
+    "Sewer invert against the basement (-1.80): basement wet rooms may need a pump.",
+    "The X-marked core box is read as the lift."
+  ]
+}
