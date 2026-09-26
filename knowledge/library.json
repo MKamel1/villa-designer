@@ -4061,6 +4061,27 @@
       "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "mh-garage-ramp-max",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 38, s.4 gradients (printed page 38-12)",
+      "stages": [
+        3,
+        4
+      ],
+      "summary": "Ramps to car parking garages are limited to 10 per cent (some basement car parks reach 15 %, with vertical transition curves).",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "percent",
+      "verified_value": 10,
+      "original_page_checked": true,
+      "conditions": "Metric Handbook guidance for car-park and garage ramps; used as a published best-practice benchmark (no jurisdiction pack loaded); design guidance, not a statement of code compliance.",
+      "exceptions": "Steeper ramps (up to 15 %) need vertical transition curves at each end.",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked) - value read from the dimensioned figure image (not in the text layer).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [

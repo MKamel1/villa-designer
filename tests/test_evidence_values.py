@@ -22,6 +22,8 @@ ORIGINAL = {
                                 ["minimum reasonable ceiling height for domestic buildings", "2.4 m is preferable"]),
     # garage sizes are dimension text inside the drawing, not the text layer: the caption is re-checked, the value was
     # read from the page image (mh-garage-* cards say so)
+    "mh-garage-ramp-max": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 785,
+                           ["car parking garages are lim", "10 per cent", "15 per cent"]),
     "mh-garage-min-width": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 788,
                             ["38.26", "A domestic garage of minimum dimensions"]),
     "mh-garage-min-length": ("metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf", 788,

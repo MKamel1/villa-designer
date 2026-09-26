@@ -168,7 +168,31 @@ def build(lay):
     st = _stair_model(lay)
     spec["stair"] = [p["box"] for p in st["parts"] if "headroom" not in p["what"]]
     spec["stair_name"] = st["name"]
-    spec["roofs"] = [list(r) for r in V._exts(lay.get("extension"))]      # east-yard blocks: roof slab at the GF floor
+    pk2 = lay.get("parking2")
+    if pk2:
+        from . import villa_parking as P
+        street = -1.2                                   # street level in model metres (GF FFL = 0)
+        r0, _, r1, _ = pk2["ramp"]
+        d0, y0, d1, y1 = pk2["deck"]
+        spec["parking2"] = {
+            "ramp": {"x0": r0, "x1": r1, "y0": y0, "y1": y1, "z_top0": street + 0.0,
+                     "z_top1": street + pk2["deck_top"], "thick": P.BUILDUP},
+            "deck": {"x0": d0, "x1": d1, "y0": y0, "y1": y1, "z_top": street + pk2["deck_top"], "thick": P.BUILDUP},
+            "cars": [[d0 + 0.2 + i * 4.9, (y0 + y1) / 2 - 0.9, d0 + 0.2 + i * 4.9 + 4.6, (y0 + y1) / 2 + 0.9,
+                      street + pk2["deck_top"], street + pk2["deck_top"] + 1.45] for i in range(pk2["cars"])]}
+        # rooms under the ramp: walls only as tall as the ramp soffit over them
+        for w in spec["walls"]:
+            if w["level"] != "B" or min(w["y0"], w["y1"]) < V.YE + 0.05:
+                continue
+            xmin = min(w["x0"], w["x1"])
+            w["height"] = round(min(WALL_H, P.clear_at(xmin)), 3)
+        # GF windows over the ramp / deck: high sills (a person on the deck sees over a 0.9 m sill)
+        for wdw in spec["windows"]:
+            if wdw["level"] == "GF" and abs(wdw["y"] - V.YE) < 1e-6 and r0 - 1e-6 <= wdw["x"] <= d1 + 1e-6:
+                wdw["sill"], wdw["height"] = 1.5, round(HEAD - 1.5, 2)
+        spec["roofs"] = []
+    else:
+        spec["roofs"] = [list(r) for r in V._exts(lay.get("extension"))]   # east-yard blocks: roof at the GF floor
     op = S.clashes(st)["slab_opening_needed"]
     spec["gf_opening"] = [v / 1000 for v in op] if op else None
     return spec

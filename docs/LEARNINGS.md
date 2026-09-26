@@ -363,3 +363,14 @@ read the existing model's marks (openings, parapet heights) before the old sheet
 
 **Independent check.** Revit's room areas agree with the concept tool's net areas (flex room 12.17 m² against 12.4;
 kitchen 16.66 against 16.6).
+
+## Extension blocks built against each other counted their joints as windows (2026-09-26, round 7)
+
+The round-7 rooms under the ramp and deck are contiguous blocks from the street gate to the deck end.
+`villa.window_faces` added each block's two end faces as external window faces, so the joint between the store
+and the laundry (x 5.377), the laundry and the WC, and so on counted as windows. A closed habitable room placed
+there would have passed `window` with no daylight at all. It was missed because every earlier extension block
+(S5) stood alone in the yard, so no end face ever touched another block. Guard: faces shared by two blocks are
+dropped; `test_villa_parking.Negative.test_a_closed_windowless_room_still_fails_window` failed on the real P1
+layout before the fix and passes after it. The same pass removed the store's side on the client's kept 1.40 m
+NE yard wall as a window face (`YardWall.test_store_side_on_the_wall_is_not_a_window`).

@@ -80,11 +80,14 @@ def window_faces(level, extension=None):
             east = [(a, b) for a, b in cut if b - a > 1e-6]
             faces.append(("v", x1, YE, y1))                     # the extension's end facing the yard
             if x0 < X0:
-                faces.append(("h", YE, x0, X0))                 # its side facing the front yard
+                pass       # its side toward the front yard stands on the NE yard wall (client 2026-09-26): no window
             else:
                 faces.append(("v", x0, YE, y1))
             if y1 < FENCE_E - 0.05:                             # its long side, unless it is built to the fence
                 faces.append(("h", y1, x0, x1))
+        exts = _exts(extension)                                 # blocks built against each other: the joint is a wall
+        faces = [f for f in faces if not (f[0] == "v" and sum(1 for r in exts if abs(r[0] - f[1]) < 1e-6
+                                                                   or abs(r[2] - f[1]) < 1e-6) >= 2)]
         faces += [("h", YE, a, b) for a, b in east]
     return faces
 
@@ -343,7 +346,25 @@ def critique(lay):
         win_len[rid] = round(L_, 2)
         if r["occupancy"] in vocab.HABITABLE and L_ < 1.0 and not r.get("rooflight"):
             dark.append(rid)
-    out.append(_chk("window", "fail" if dark else "pass", rooms=dark))
+    # an open-plan zone with no window of its own, joined without a wall to a room that has one, borrows light:
+    # reported as a warning (it is darker, and says so), not hidden and not a failure
+    open_occ = {"kitchen", "dining", "living", "hall", "corridor", "entrance", "landing"}
+    lit = {r for r in rooms if r not in dark and rooms[r]["occupancy"] in vocab.HABITABLE}
+    comp = {r: r for r in rooms}                           # open-plan areas: rooms joined without a wall
+
+    def root(r):
+        while comp[r] != r:
+            r = comp[r]
+        return r
+    for a, b in lay["links"]:
+        if (rooms[a]["occupancy"] in open_occ and rooms[b]["occupancy"] in open_occ
+                and rooms[a]["level"] == rooms[b]["level"]):
+            comp[root(a)] = root(b)
+    lit_roots = {root(r) for r in lit}
+    borrowed = sorted(r for r in dark if rooms[r]["occupancy"] in open_occ and root(r) in lit_roots)
+    hard = [r for r in dark if r not in borrowed]
+    out.append(_chk("window", "fail" if hard else ("warning" if borrowed else "pass"), rooms=hard,
+                    borrowed_light=borrowed))
     # doors and entrances
     unbuilt = [l for l in lay["links"] if rooms[l[0]]["level"] != rooms[l[1]]["level"]
                or shared_edge(rooms[l[0]]["rect"], rooms[l[1]]["rect"]) < DOOR_EDGE]
@@ -516,6 +537,68 @@ def elevation_checks(lay):
                                                "(scripts/villa_stairs.py compare)") +
                     "; GF slab opening needed x %.2f to %.2f, y %.2f to %.2f" % tuple(
                         cl["slab_opening_needed"][i] / 1000 for i in (0, 2, 1, 3))))
+    pk2 = lay.get("parking2")
+    if pk2:
+        from . import villa_parking as P
+        gmax, gc = _card("mh-garage-ramp-max")
+        out.append(_row("parking ramp gradient (street gate to deck)", round(pk2["gradient"] * 100, 1), gmax, gc,
+                        pk2["gradient"] * 100 <= gmax + 1e-9, "%",
+                        note="ramp %.1f m long, deck at street +%.2f" % (pk2["ramp"][2] - pk2["ramp"][0],
+                                                                           pk2["deck_top"])))
+        out.append(_row("room under the deck: clear height (floor -1.80, soffit +%.2f)" % pk2["soffit"],
+                        round(pk2["soffit"] - LEVELS["B"], 2), ceil_min, ceil_card,
+                        pk2["soffit"] - LEVELS["B"] >= ceil_min - 1e-9,
+                        note="= the basement's clear height under its beams (client: 'on the beam level')"))
+        for rid, r in lay["rooms"].items():
+            if not r.get("ext") or r["rect"][0] >= P.RAMP_X1 - 1e-6:
+                continue
+            lo, hi = P.clear_at(max(r["rect"][0], P.RAMP_X0)), P.clear_at(min(r["rect"][2], P.RAMP_X1))
+            need = 2.0 if r["occupancy"] in ("utility", "wc") else None
+            out.append(_row("%s: clear height under the ramp" % r["name"].split(" (")[0], "%.2f-%.2f" % (lo, hi),
+                            "-" if need is None else need, "project judgement (client: working height; 2.0 m = "
+                            "door height)", need is None or lo >= need - 1e-9, "m"))
+        g_drop, gd = _card("ukadk-guarding-drop-dwelling")
+        g_ext, ge = _card("ukadk-guarding-height-external")
+        drop = pk2["deck_top"] - LEVELS["B"]
+        out.append(_row("deck end over the yard: drop", round(drop * 1000), g_drop, gd, True, "mm",
+                        note="guarding required: %d mm (%s)" % (g_ext, ge.split(" (")[0])))
+        eye = pk2["deck_top"] + 1.6
+        sill = LEVELS["GF"] + 0.9
+        out.append(_row("GF windows over the deck: eye on the deck vs a 0.9 m sill", round(eye, 2), round(sill, 2),
+                        "geometry (privacy)", True, "m",
+                        note="eye is above a 0.9 m sill: GF windows over the deck get 1.5 m sills (street +%.2f)"
+                             % (LEVELS["GF"] + 1.5)))
+        w_need, wc = _card("mh-garage-passenger-width")
+        l_need, lcard = _card("mh-garage-min-length")
+        length = (pk2["deck"][2] - pk2["deck"][0]) * 1000
+        out.append(_row("parking width, building face to fence", round((FENCE_E - YE) * 1000), w_need, wc,
+                        (FENCE_E - YE) * 1000 >= w_need, "mm"))
+        out.append(_row("parking deck length for %d car(s)" % pk2["cars"], round(length), pk2["cars"] * l_need, lcard,
+                        length >= pk2["cars"] * l_need - 1e-6, "mm",
+                        note="tandem, tight" if pk2["cars"] == 2 else "one car with 1.0 m to spare"))
+        out.append(_row("fence top above the deck", round(E.FENCE_H / 1000 + LEVELS["B"] - pk2["deck_top"], 2), "-",
+                        "environment model", True, "m"))
+        # the NE yard wall (client 2026-09-26) runs under the ramp's west edge from the gate to the NE column
+        wx0, wy0, wx1, wy1 = (v / 1000 for v in E.YARD_WALL)
+        w_top = LEVELS["B"] + E.YARD_WALL_H / 1000
+        gaps = [round((P.clear_at(x) + LEVELS["B"]) - w_top, 2) for x in (wx0, wx1)]
+        out.append(_row("NE yard wall top (street %.2f) under the ramp soffit: gap gate / column" % w_top,
+                        "%.2f / %.2f" % tuple(gaps), 0.0, "geometry (environment model)", min(gaps) >= -1e-9, "m",
+                        note="the ramp clears the kept wall; it can bear on it with a %d-%d mm upstand (structural "
+                             "consultant)" % (gaps[0] * 1000, gaps[1] * 1000)))
+        np_ = lay.get("north_patio")
+        if np_:
+            a, b, c, d = np_["rect"]
+            ca, _, cc, _ = np_["covered"]
+            out.append(_row("north sunken patio: open-sky depth vs street fence height", round(ca - a, 2),
+                            "-", "geometry (environment model)", True, "m",
+                            note="%.1f m2 at -1.80 (%.1f m2 under the GF terrace); from the lounge glass at 0.9 m the "
+                                 "sky shows only between the fence top (%.0f deg) and the terrace soffit (%.0f deg)"
+                                 % ((c - a) * (d - b), (cc - ca) * (d - b),
+                                    math.degrees(math.atan2(E.FENCE_H / 1000 - 0.9, cc - a)),
+                                    math.degrees(math.atan2(2.8 - 0.9, cc - ca)))))
+        gate = round((FENCE_E - wy1) * 1000)
+        out.append(_row("car gate: yard wall to east fence", gate, w_need, wc, gate >= w_need, "mm"))
     if lay.get("parking"):
         drop = 0.0 - LEVELS["B"]
         soffit = 0.0 - DECK_BUILDUP - DECK_SLAB

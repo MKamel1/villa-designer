@@ -152,6 +152,20 @@ def solid_box(b_mm):
     return GCU.CreateExtrusionGeometry(loops, XYZ.BasisZ, z1 - z0)
 
 
+def solid_prism_xz(profile_m, y0_m, y1_m):
+    """A prism: a closed (x, z) profile in metres in the plane y = y0, extruded to y1 (the sloped ramp)."""
+    pts = [XYZ(ft(x), ft(y0_m), ft(z)) for x, z in profile_m]
+    lp = CurveLoop()
+    for i in range(len(pts)):
+        lp.Append(Line.CreateBound(pts[i], pts[(i + 1) % len(pts)]))
+    loops = List[CurveLoop]()
+    loops.Add(lp)
+    n = XYZ.BasisY if y1_m > y0_m else XYZ.BasisY.Negate()
+    if lp.IsCounterclockwise(n) is False:
+        lp.Flip()
+    return GCU.CreateExtrusionGeometry(loops, n, abs(ft(y1_m) - ft(y0_m)))
+
+
 def build_option(app, model, spec, folder):
     doc = app.OpenDocumentFile(model)
     lv = dict((X._name(l), l) for l in FilteredElementCollector(doc).OfClass(Level))
@@ -249,6 +263,38 @@ def build_option(app, model, spec, folder):
         except Exception as exc:
             rb["failed"].append({"roof": r, "error": str(exc)})
     rb["built"]["block_roofs"] = roofs
+    pk = spec.get("parking2")
+    if pk:
+        # the ramp and deck as floor-category solids (visible in the cutaways), the cars as generic models
+        fcid = ElementId(BuiltInCategory.OST_Floors)
+        if not DirectShape.IsValidCategoryId(fcid, doc):
+            fcid = ElementId(BuiltInCategory.OST_GenericModel)
+        r, d = pk["ramp"], pk["deck"]
+        prof = [(r["x0"], r["z_top0"]), (r["x1"], r["z_top1"]), (r["x1"], r["z_top1"] - r["thick"]),
+                (r["x0"], r["z_top0"] - r["thick"])]
+        for name, geo in (("ramp", solid_prism_xz(prof, r["y0"], r["y1"])),
+                          ("deck", solid_box([v * 1000 for v in (d["x0"], d["y0"], d["z_top"] - d["thick"],
+                                                                  d["x1"], d["y1"], d["z_top"])]))):
+            try:
+                s = DirectShape.CreateElement(doc, fcid)
+                s.ApplicationId, s.ApplicationDataId = "archpipe-option", name
+                g = List[GeometryObject]()
+                g.Add(geo)
+                s.SetShape(g)
+                s.Name = "PARKING " + name
+                rb["built"]["parking_" + name] = int(str(s.Id))
+            except Exception as exc:
+                rb["failed"].append({"parking": name, "error": str(exc)})
+        for i, c in enumerate(pk["cars"]):
+            try:
+                s = DirectShape.CreateElement(doc, ElementId(BuiltInCategory.OST_GenericModel))
+                s.ApplicationId, s.ApplicationDataId = "archpipe-option", "car-%d" % i
+                g = List[GeometryObject]()
+                g.Add(solid_box([v * 1000 for v in (c[0], c[1], c[4], c[2], c[3], c[5])]))
+                s.SetShape(g)
+                s.Name = "CAR %d (4.6 x 1.8 m envelope)" % (i + 1)
+            except Exception as exc:
+                rb["failed"].append({"car": i, "error": str(exc)})
     op = spec["gf_opening"]
     gf_floor = None
     for fl in FilteredElementCollector(doc).OfClass(Floor):
@@ -282,7 +328,7 @@ def build_option(app, model, spec, folder):
         v.Scale = 100
         v.DetailLevel = ViewDetailLevel.Medium
         bb = BoundingBoxXYZ()
-        bb.Min = XYZ(ft(0.6), ft(-31.8), ft(-10))
+        bb.Min = XYZ(ft(-0.9 if spec.get("parking2") else 0.6), ft(-31.8), ft(-10))   # parking: take in the north yard
         bb.Max = XYZ(ft(28.0), ft(-20.6), ft(10))
         v.CropBox = bb
         v.CropBoxActive = True
@@ -319,21 +365,28 @@ def build_option(app, model, spec, folder):
     v3t = [v for v in vft if v.ViewFamily == ViewFamily.ThreeDimensional][0]
     views3d = {}
     eye_dir = XYZ(-1.0, -0.9, -0.75).Normalize()           # from the garden (rear, east) looking toward the street
-    for key, zmax, hide_generic in (("basement cutaway", -0.25, True), ("GF cutaway", 2.55, True),
-                                    ("garden view", 12.0, False)):
+    keys = [("basement cutaway", -0.25, True), ("GF cutaway", 2.55, True), ("garden view", 12.0, False)]
+    if spec.get("parking2"):
+        keys.append(("street view", 2.55, False))            # the gate, ramp and deck from the street corner
+    for key, zmax, hide_generic in keys:
         v = View3D.CreateIsometric(doc, v3t.Id)
         try:
             v.Name = "%s %s" % (spec["id"], key)
         except Exception:
             pass
         centre = XYZ(ft(12.5), ft(-26.5), ft(-1.0))
-        eye = centre - eye_dir * ft(40)
-        up = XYZ.BasisZ - eye_dir * XYZ.BasisZ.DotProduct(eye_dir)
-        v.SetOrientation(ViewOrientation3D(eye, up.Normalize(), eye_dir))
+        d = XYZ(1.0, -0.9, -0.75).Normalize() if key == "street view" else eye_dir
+        eye = centre - d * ft(40)
+        up = XYZ.BasisZ - d * XYZ.BasisZ.DotProduct(d)
+        v.SetOrientation(ViewOrientation3D(eye, up.Normalize(), d))
         if key != "garden view":
             bb = BoundingBoxXYZ()
-            bb.Min = XYZ(ft(1.5), ft(-31.6), ft(-3.4))
-            bb.Max = XYZ(ft(23.0), ft(-23.3), ft(zmax))
+            y_max = -20.3 if spec.get("parking2") else -23.3        # take in the east-yard rooms and the deck
+            x_min = -0.6 if spec.get("parking2") else 1.5
+            if key == "street view":                                 # inside the fences, so they do not hide the ramp
+                y_max, x_min = -20.62, -0.10
+            bb.Min = XYZ(ft(x_min), ft(-31.6), ft(-3.4))
+            bb.Max = XYZ(ft(23.0), ft(y_max), ft(zmax))
             v.SetSectionBox(bb)
         v.DisplayStyle = DisplayStyle.ShadingWithEdges
         if hide_generic:

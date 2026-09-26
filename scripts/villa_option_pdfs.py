@@ -1,7 +1,8 @@
 """One PDF per option, from the Revit models: plans and 3D views exported from Revit, room names with Revit's own
 areas, the garden-view analysis and every check.
 
-    PYTHONPATH=src python scripts/villa_option_pdfs.py      # out/villa/options/Option-<id>.pdf
+    PYTHONPATH=src python scripts/villa_option_pdfs.py [r7]         # out/villa/options[-r7]/Option-<id>.pdf
+    PYTHONPATH=src python scripts/villa_option_pdfs.py spec [r7]    # the Revit spec for build_villa_option.py
 
 Needs revit/build_villa_option.py to have run (out/villa/options/*.png + readback.json).
 """
@@ -15,10 +16,14 @@ import numpy as np
 
 from archpipe.concept import stair_options as SO
 from archpipe.concept import villa as V
+from archpipe.concept import revit_spec as RS
 from archpipe.concept import villa_options as VO
+from archpipe.concept import villa_parking as VP
 
-OPT = Path("out/villa/options")
+SETS = {"s": (VO.options, Path("out/villa/options")), "r7": (VP.options, Path("out/villa/options-r7"))}
+OPT = SETS["s"][1]
 CROP = (0.6, -31.8, 28.0, -20.6)          # the plan views' crop box (build_villa_option.py), metres
+CROP_PARKING = (-0.9, -31.8, 28.0, -20.6)  # parking options: the north yard is in the plan
 
 
 def light(path, lines=True, crop=False):
@@ -58,7 +63,7 @@ def plan_page(pdf, lay, rb, res):
     for ax, lv, key in ((axes[0], "B", "plan-B"), (axes[1], "GF", "plan-GF")):
         img = light(find(f"{lay['id']}-{key}"))
         rot = np.rot90(img, k=-1)                     # street to the top, east to the right
-        x0, y0, x1, y1 = CROP
+        x0, y0, x1, y1 = CROP_PARKING if lay.get("parking2") else CROP
         ax.imshow(rot, extent=[y0, y1, -x1, -x0])
         for rid, r in lay["rooms"].items():
             if r["level"] != lv:
@@ -68,8 +73,36 @@ def plan_page(pdf, lay, rb, res):
             ax.text(*T((a + c) / 2, (b + d) / 2), f"{r['name']}\n{A:.1f} m²" if A else r["name"], ha="center",
                     va="center", fontsize=5.3, rotation=0 if (d - b) >= 1.6 else 90,
                     bbox=dict(fc="white", ec="none", alpha=0.7, pad=0.3))
-        ax.text(*T(V.X0 - 1.2, (V.YP + V.YE) / 2), "STREET", ha="center", fontsize=8, color="0.3")
+        ax.text(*T(x0 + 0.3, (V.YP + V.YE) / 2), "STREET", ha="center", fontsize=8, color="0.3")
         ax.text(*T(V.XR + 1.0, (V.YP + V.YE) / 2), "GARDEN (rear yard)", ha="center", fontsize=8, color="0.3")
+        pk = lay.get("parking2")
+        if pk:                                        # the ramp and deck are above the basement cut / below the GF
+            for rect, lab in ((pk["ramp"], "RAMP 10 %% street 0.00 to +%.2f" % pk["deck_top"]),
+                              (pk["deck"], "PARKING DECK +%.2f (%d car%s)" % (pk["deck_top"], pk["cars"],
+                                                                           "s" if pk["cars"] > 1 else ""))):
+                a, b, c, d = rect
+                ax.plot(*zip(*[T(a, b), T(c, b), T(c, d), T(a, d), T(a, b)]), ls="--", c="tab:orange", lw=1)
+                if lv == "GF":
+                    ax.text(*T((a + c) / 2, (b + d) / 2), lab, ha="center", va="center", fontsize=6, rotation=90,
+                            color="tab:orange", bbox=dict(fc="white", ec="none", alpha=0.8, pad=0.3))
+        np_ = lay.get("north_patio")
+        if np_ and lv == "B":
+            from matplotlib.patches import Polygon as Pg
+            a, b, c, d = np_["rect"]
+            ax.add_patch(Pg([T(a, b), T(c, b), T(c, d), T(a, d)], closed=True, fc="#dcefd6", ec="tab:green",
+                            lw=0.8, alpha=0.6, zorder=0))
+            ca, _, cc, _ = np_["covered"]
+            ax.plot(*zip(T(ca, b), T(ca, d)), ls=":", c="tab:green", lw=0.8)
+            ax.text(*T((a + ca) / 2, (b + d) / 2), "sunken patio (open)", ha="center", va="center", fontsize=5.5,
+                    color="darkgreen")
+            ax.text(*T((ca + cc) / 2, (b + d) / 2), "loggia under the GF terrace", ha="center", va="center",
+                    fontsize=5.5, color="darkgreen")
+        if lv == "B":
+            wx0, wy0, wx1, wy1 = (v / 1000 for v in V.E.YARD_WALL)
+            from matplotlib.patches import Polygon as Pg
+            ax.add_patch(Pg([T(wx0, wy0), T(wx1, wy0), T(wx1, wy1), T(wx0, wy1)], closed=True, fc="k", ec="k"))
+            ax.annotate("existing wall 1.40 m (kept)", T(wx0 + 0.5, wy1), xytext=T(wx0 + 0.5, wy1 + 1.5),
+                        fontsize=5.5, ha="center", arrowprops=dict(arrowstyle="-", lw=0.5))
         ax.set_xlim(y0, y1)
         ax.set_ylim(-x1, -x0)
         ax.set_aspect("equal")
@@ -79,7 +112,12 @@ def plan_page(pdf, lay, rb, res):
     crit = ", ".join(res["fails"]) or "no failures"
     warn = "; ".join(f"{w['room']} {w['achieved_m2']} m² vs M4(2) {w['required_m2']} (preference)"
                      for c in res["checks"] if c["check"] == "min_area" for w in c.get("preference", []))
-    fig.suptitle(f"{lay['title']}\n{lay['summary']}\nCritic: {crit}. Warnings: {warn or 'none'}. Room areas are "
+    others = ["%s (%s)" % (c["check"], "; ".join(str(x) for x in (c.get("borrowed_light") or c.get("warnings") or [])) or
+                           "see checks page") + " borrowed light, no own window" for c in res["checks"] if c["status"] == "warning" and c["check"] != "min_area"]
+    warn = "; ".join([w for w in [warn] + others if w])
+    import textwrap
+    summary = "\n".join(textwrap.wrap(lay["summary"], 190))
+    fig.suptitle(f"{lay['title']}\n{summary}\nCritic: {crit}. Warnings: {warn or 'none'}. Room areas are "
                  "Revit's own (room boundaries from the built walls).", fontsize=8.5)
     fig.tight_layout(rect=(0, 0, 1, 0.92))
     pdf.savefig(fig)
@@ -93,13 +131,17 @@ def views_page(pdf, lay):
              ("GF-cutaway", [0.52, 0.36, 0.47, 0.58], "Ground floor, cut at 2.55 m"),
              ("garden-view", [0.2, 0.01, 0.6, 0.34], "The villa in its surroundings (neighbours, fence, apartment "
                                                       "above)")]
+    if find(f"{lay['id']}-street-view"):
+        spots[2] = ("garden-view", [0.01, 0.01, 0.40, 0.34], spots[2][2])
+        spots.append(("street-view", [0.42, 0.01, 0.57, 0.34], "From the street corner: gate, 10 % ramp, parking "
+                                                               "deck and car envelope(s), cut at 2.55 m"))
     for key, box, title in spots:
         p = find(f"{lay['id']}-{key}")
         ax = fig.add_axes(box)
         ax.imshow(light(p, lines=False, crop=True))
         ax.axis("off")
         ax.set_title(title, fontsize=9)
-    fig.suptitle(f"{lay['title']}: 3D views from the Revit model (out/villa/options/omar-option-{lay['id']}.rvt)",
+    fig.suptitle(f"{lay['title']}: 3D views from the Revit model ({OPT.as_posix()}/omar-option-{lay['id']}.rvt)",
                  fontsize=10, weight="bold")
     pdf.savefig(fig)
     plt.close(fig)
@@ -141,13 +183,13 @@ def checks_page(pdf, lay, res, rb, op):
             rows.append([c["status"].upper(), c["check"], c["basis"][:110]])
     for e in V.elevation_checks(lay):
         rows.append([e["status"].upper(), e["item"][:60], f"{e['achieved']} {e['unit']} (need {e['required']}); "
-                     + (e["card"].split(" (")[0] + "; " + e["note"])[:80]])
+                     + (e["card"].split(" (")[0] + "; " + e["note"])[:200]])
     rows.append(["BUILT", "Revit model", f"walls {rb['built'].get('walls')}, doors {rb['built'].get('doors')}, windows "
                  f"{rb['built'].get('windows')}, rooms {len(rb['rooms'])}, build failures {len(rb['failed'])}"])
     t = tx.table(cellText=rows, colLabels=["", "check", "result / basis"], colWidths=[0.07, 0.25, 0.68],
                  loc="upper center", cellLoc="left")
     t.auto_set_font_size(False)
-    t.set_fontsize(6.2)
+    t.set_fontsize(5.8)
     t.scale(1, 1.18)
     fig.suptitle(f"{lay['title']}: checks (critic, elevations, stair in 3D) and the garden view", fontsize=10,
                  weight="bold")
@@ -156,12 +198,21 @@ def checks_page(pdf, lay, res, rb, op):
 
 
 def main():
+    global OPT
+    args = sys.argv[1:]
+    make, OPT = SETS["r7" if "r7" in args else "s"]
+    if "spec" in args:
+        OPT.mkdir(parents=True, exist_ok=True)
+        path = OPT / "options-spec.json"
+        path.write_text(json.dumps([RS.build(l) for l in make()], indent=1), encoding="utf-8")
+        print(path)
+        return 0
     import matplotlib
     matplotlib.use("Agg")
     from matplotlib.backends.backend_pdf import PdfPages
     rbs = {o["id"]: o for o in json.loads((OPT / "readback.json").read_text(encoding="utf-8"))["options"]}
     made = []
-    for lay in VO.options():
+    for lay in make():
         rb = rbs.get(lay["id"])
         if rb is None:
             print("no Revit read-back for", lay["id"])
