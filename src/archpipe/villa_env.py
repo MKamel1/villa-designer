@@ -48,8 +48,8 @@ COLUMNS = [
     (3617, -28671, 3977, -28161), (18367, -23951, 18877, -23591), (22237, -24101, 22597, -23591),
 ]
 # CLIENT 2026-09-26: a wall 1.40 m high (from the basement floor) runs from the north-east column (3617..3977,
-# -24151..-23641) perpendicular to the street fence, splitting the sunken front yard from the east yard. Thickness
-# 250 and alignment flush with the column's outer face are ASSUMED (not measured).
+# -24151..-23641) perpendicular to the street fence, splitting the sunken front yard from the east yard. CLIENT
+# (same day): about 250 thick, its east face flush with the villa's east face.
 YARD_WALL_H = 1400
 REVIT_GF_COLUMN_IDS = [1585908, 1585915, 1585917, 1585924, 1585933, 1585938, 1590377, 1591282, 1591340]
 # CAD A-GLAZ: current windows, used only to place the NEIGHBOURS' windows ("similar positions to ours").
@@ -69,7 +69,7 @@ STREET_FACADE_AZIMUTH = 290.0                 # BRIEF: the street (model -x) fac
 # Building face to the fence's INNER face, measured on the old GF PDF (client: "the fence offset can be used from the
 # pdf"); the PDF's own 4.02 front dimension runs to the fence's outer face (3.74 + 0.25 = 3.99).
 OFFSET_N, OFFSET_E, OFFSET_S = 3740, 2990, 5710
-YARD_WALL = (3617 - OFFSET_N, -23891, 3617, -23641)   # street fence inner face to the column
+YARD_WALL = (3617 - OFFSET_N, BAR[3] - 250, 3617, BAR[3])   # street fence inner face to the villa, flush with its east face
 FENCE_H, FENCE_T = 4000, 250                  # BRIEF: 4.00 m from basement level; PDF: drawn 0.25 thick
 NEIGHBOUR_H = 12000                           # BRIEF 12 m; measured from their basement level (ASSUMED datum)
 STREET_WIDTH = 10000                          # ASSUMED
@@ -87,8 +87,8 @@ ASSUMPTIONS = [   # confirmed by the client 2026-09-25 unless marked OPEN
     "it. The apartment repeats it. The old PDF draws it about 1.0-1.3 m deep; the CAD governs building geometry.",
     "The shared entrance steps run from the street gate over the sunken front yard to the core's GF entrance.",
     "Street width 10 m (context only). No fence between our yard and the sister's.",
-    "OPEN (2026-09-26): the north-east yard wall (NE column to the street fence, 1.40 m from the basement floor) is "
-    "250 mm thick and flush with the column's outer face.",
+    "The north-east yard wall (NE column to the street fence, 1.40 m from the basement floor) is about 250 mm thick "
+    "with its east face flush with the villa's east face (client 2026-09-26).",
     "The lift position is read from an X-marked box with a door on both floors (OPEN: confirm it is a lift).",
 ]
 QUESTIONS = []   # all answered 2026-09-25 (docs/villa/environment-model.md)
@@ -201,8 +201,8 @@ def spec():
                      ("fence-rear", (px1 - t, py0, px1, py1)), ("fence-west", (px0, py0, px1, py0 + t))):
         elements.append(_box(ident, "GenericModel", b, B, B + FENCE_H, "concrete fence 4.00 m from basement (BRIEF)"))
     elements.append(_box("yard-wall-ne", "GenericModel", YARD_WALL, B, B + YARD_WALL_H,
-                         "wall 1.40 m from the basement floor, NE column to the street fence (CLIENT 2026-09-26; "
-                         "250 thick, flush with the column face, ASSUMED)"))
+                         "wall 1.40 m from the basement floor, NE column to the street fence, ~250 thick, flush with "
+                         "the villa's east face (CLIENT 2026-09-26)"))
     # the apartment above ours and the sister (with its own apartment)
     elements.append(_prism("apartment-above", "GenericModel", fp, APT, ROOF - 200, "identical apartment above our GF (BRIEF)"))
     elements.append(_prism("apartment-above-front", "GenericModel", rect(*FRONT), APT, APT + 1100,

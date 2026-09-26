@@ -55,7 +55,7 @@ def main():
     rb = {"model": os.environ["ARCHPIPE_MODEL"], "elements": {}}
     for ds in FilteredElementCollector(doc).OfClass(DirectShape):
         key = ds.ApplicationDataId
-        if key in ("yard-wall-ne", "fence-street", "fence-east", "ramp", "deck", "car-0"):
+        if key in ("yard-wall-ne", "infill-ne-wall", "fence-street", "fence-east", "ramp", "deck", "car-0"):
             rb["elements"][key] = bb(ds)
     cols = []
     for c in FilteredElementCollector(doc).OfCategory(BuiltInCategory.OST_StructuralColumns) \
@@ -115,7 +115,7 @@ def main():
     solid = [f for f in FilteredElementCollector(doc).OfClass(FillPatternElement) if f.GetFillPattern().IsSolidFill][0]
     for ds in FilteredElementCollector(doc).OfClass(DirectShape):
         o = OverrideGraphicSettings()
-        if ds.ApplicationDataId == "yard-wall-ne":                 # the wall in solid red, unmistakable
+        if ds.ApplicationDataId in ("yard-wall-ne", "infill-ne-wall"):   # the wall (+ infill) in solid red
             o.SetSurfaceForegroundPatternId(solid.Id)
             o.SetSurfaceForegroundPatternColor(Color(210, 35, 35))
             v.SetElementOverrides(ds.Id, o)

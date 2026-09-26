@@ -1,7 +1,7 @@
 """One PDF for the client to confirm the kept NE yard wall: dimensioned plan and section drawn from Revit's own
 read-back (revit/probe_yard_wall.py), beside the plan, section and 3D view Revit exported.
 
-    PYTHONPATH=src python scripts/yard_wall_pdf.py      # out/villa/yard-wall/NE-yard-wall-check.pdf
+    PYTHONPATH=src python scripts/yard_wall_pdf.py      # out/villa/yard-wall/NE-yard-wall-confirmed.pdf
 """
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ def main():
     YE, X0, XS = -23591.0, 3617.0, 1787.0                                          # building face, street face, terrace
     T = lambda x, y: (y, -x)                                                     # noqa: E731  street up, east right
 
-    with PdfPages(DIR / "NE-yard-wall-check.pdf") as pdf:
+    with PdfPages(DIR / "NE-yard-wall-confirmed.pdf") as pdf:
         # ---- page 1: plan -------------------------------------------------------------------------------------
         fig = plt.figure(figsize=(16.5, 11.7))
         ax = fig.add_axes([0.03, 0.06, 0.52, 0.82])
@@ -80,8 +80,7 @@ def main():
                 va="bottom", rotation=0)
         dim(ax, T(-123 + 200, wy1), T(-123 + 200, fe[1]), "gate %.0f" % (fe[1] - wy1), off=(0, 0.25))
         dim(ax, T(7000, YE), T(7000, fe[1]), "%.0f" % (fe[1] - YE))
-        ax.text(*T(X0 - 150, wy1 + 20), "wall face flush with the column face; %.0f mm\ninside the building's east "
-                "face line" % (wy1 - YE if wy1 > YE else YE - wy1), fontsize=6.5, ha="left", va="bottom",
+        ax.text(*T(X0 - 150, wy1 + 20), "wall's east face flush with the villa's east face", fontsize=6.5, ha="left", va="bottom",
                 rotation=0, color="0.25")
         ax.set_xlim(-28900, -19700)
         ax.set_ylim(-8200, 900)
@@ -93,10 +92,10 @@ def main():
         ax2.imshow(np.rot90(light(img("yard-wall-plan")), k=-1))
         ax2.axis("off")
         ax2.set_title("Revit basement plan export (same orientation): the wall is the thin element from the\n"
-                      "street fence to the column, beside the store under the ramp", fontsize=8.5)
-        fig.suptitle("NE yard wall - please confirm location and height (model out/villa/options-r7/omar-option-P1.rvt,"
-                     " read back from Revit)\nASSUMED, not measured: 250 mm thickness, and the wall's east face flush "
-                     "with the column's east face.", fontsize=10)
+                      "street fence to the villa: the store's side under the ramp", fontsize=8.5)
+        fig.suptitle("NE yard wall as confirmed by the client (model out/villa/options-r7/omar-option-P1.rvt, read "
+                     "back from Revit)\n1.40 m from the basement floor, about 250 mm thick, east face flush with the "
+                     "villa's east face. The store under the ramp uses it as its side wall.", fontsize=10)
         pdf.savefig(fig)
         plt.close(fig)
 
@@ -119,26 +118,28 @@ def main():
         ax.text(-22100, ramp_top + 150, "RAMP (top street +%.2f here)" % (ramp_top / 1000), ha="center",
                 fontsize=8, color="tab:orange")
         dim(ax, (wy0 - 250, -1800), (wy0 - 250, z(wz1)), "%.0f" % (wz1 - wz0), off=(-280, 0), c="tab:red")
-        dim(ax, (wy1 + 250, z(wz1)), (wy1 + 250, ramp_soff), "%.0f gap" % (ramp_soff - z(wz1)), off=(420, 0))
+        ax.add_patch(Rectangle((wy0, z(wz1)), wy1 - wy0, ramp_soff - z(wz1), fc="none", ec="tab:red",
+                               hatch="////", lw=0.6))                                # infill up to the ramp
+        dim(ax, (wy1 + 250, z(wz1)), (wy1 + 250, ramp_soff), "infill %.0f" % (ramp_soff - z(wz1)), off=(480, 0))
         ax.annotate("", (fe[1] - 250, -1800), (fe[1] - 250, z(fe[5])), arrowprops=dict(arrowstyle="<->", lw=0.7))
         ax.text(fe[1] - 330, 1700, "east fence\n%.0f from the\nbasement floor" % (fe[5] - fe[2]), fontsize=7,
                 ha="left", va="center")
-        ax.text(wy0 + 125, z(wz1) + 60, "wall top\nstreet %.2f" % (z(wz1) / 1000), ha="center", va="bottom",
+        ax.text(wy0 - 700, z(wz1) - 40, "wall top\nstreet %.2f" % (z(wz1) / 1000), ha="center", va="top",
                 fontsize=7, color="tab:red")
         ax.set_xlim(-20000, -26600)                  # looking toward the villa from the street: east on the LEFT
         ax.set_ylim(-2300, 2600)
         ax.set_aspect("equal")
         ax.axis("off")
         ax.set_title("SECTION across the wall, 1.8 m in front of the villa, looking from the street toward the villa "
-                     "(east on the LEFT)\nlevels on the street datum; at the street gate the gap under the ramp is "
-                     "%.0f mm, at the column %.0f mm" % (0.10 * (wx0 - rp[0]) - 350 - z(wz1),
+                     "(east on the LEFT)\nlevels on the street datum; the infill on the wall up to the ramp is %.0f mm at "
+                     "the street gate and %.0f mm at the villa" % (0.10 * (wx0 - rp[0]) - 350 - z(wz1),
                                                          0.10 * (wx1 - rp[0]) - 350 - z(wz1)), fontsize=9.5,
                      weight="bold")
         ax2 = fig.add_axes([0.60, 0.10, 0.39, 0.74])
         ax2.imshow(light(img("yard-wall-section-across")))
         ax2.axis("off")
         ax2.set_title("Revit section at the same cut, same direction (east on the left). Left to right: east fence,\n"
-                      "ramp slab (cut), the store's two walls (hatched), the 1.40 m wall (plain), the villa beyond", fontsize=8.5)
+                      "ramp slab (cut), the store's wall at the fence (hatched), the kept 1.40 m wall + infill, the villa", fontsize=8.5)
         fig.suptitle("NE yard wall - height and relation to the ramp", fontsize=11, weight="bold")
         pdf.savefig(fig)
         plt.close(fig)
@@ -150,13 +151,12 @@ def main():
         ax.axis("off")
         fig.suptitle("Revit 3D from above the east yard, cut just above street level; fences and other context "
                      "hidden; the ramp is see-through.\nThe kept wall is the RED strip from the villa's NE column "
-                     "(magenta) to the street end. The grey wall just in front of it is the store's own side wall, "
-                     "which the option model\nbuilds on the villa's face line 50 mm east of the kept wall: once you "
-                     "confirm the wall, the store will use the kept wall instead (plus infill up to the ramp)",
+                     "(magenta) to the street end;\nit is the store's side wall, with an infill on top up to the "
+                     "ramp soffit (50 mm at the gate, 424 mm at the villa)",
                      fontsize=10)
         pdf.savefig(fig)
         plt.close(fig)
-    print(DIR / "NE-yard-wall-check.pdf")
+    print(DIR / "NE-yard-wall-confirmed.pdf")
 
 
 if __name__ == "__main__":

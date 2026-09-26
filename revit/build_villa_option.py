@@ -285,6 +285,21 @@ def build_option(app, model, spec, folder):
                 rb["built"]["parking_" + name] = int(str(s.Id))
             except Exception as exc:
                 rb["failed"].append({"parking": name, "error": str(exc)})
+        inf = spec.get("infill")
+        if inf:                                      # on the kept NE yard wall, up to the sloping ramp soffit
+            try:
+                wcid = ElementId(BuiltInCategory.OST_Walls)
+                if not DirectShape.IsValidCategoryId(wcid, doc):
+                    wcid = ElementId(BuiltInCategory.OST_GenericModel)
+                s = DirectShape.CreateElement(doc, wcid)
+                s.ApplicationId, s.ApplicationDataId = "archpipe-option", "infill-ne-wall"
+                g = List[GeometryObject]()
+                g.Add(solid_prism_xz(inf["profile"], inf["y0"], inf["y1"]))
+                s.SetShape(g)
+                s.Name = "INFILL on the kept NE yard wall, up to the ramp"
+                rb["built"]["infill_ne_wall"] = int(str(s.Id))
+            except Exception as exc:
+                rb["failed"].append({"infill": inf, "error": str(exc)})
         for i, c in enumerate(pk["cars"]):
             try:
                 s = DirectShape.CreateElement(doc, ElementId(BuiltInCategory.OST_GenericModel))

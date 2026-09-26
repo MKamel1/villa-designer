@@ -18,7 +18,8 @@ OPEN = {"kitchen", "dining", "living", "hall", "corridor", "entrance", "landing"
 EXT_T, INT_T = 0.20, 0.10
 WALL_H = 2.80                         # storey 3.0 less the 0.2 slab
 LEVEL_NAME = {"B": "B -1.80", "GF": "GF +1.20"}
-SILL, HEAD = 0.90, 2.30               # head at the beam soffit less finishes (elevation_checks)
+LEVELS_Z = {"B": -3.0, "GF": 0.0}      # model z (m) of the storey FFLs
+SILL, HEAD = 0.90, 2.30              # head at the beam soffit less finishes (elevation_checks)
 
 
 def _stair_model(lay):
@@ -186,6 +187,17 @@ def build(lay):
                 continue
             xmin = min(w["x0"], w["x1"])
             w["height"] = round(min(WALL_H, P.clear_at(xmin)), 3)
+        # the kept NE yard wall is the store's side from the gate to the villa: no new wall there, only an infill
+        # from the wall top (1.40 m) up to the ramp soffit, whose profile slopes with the ramp
+        from .. import villa_env as E
+        wx0, wy0, wx1, wy1 = (v / 1000 for v in E.YARD_WALL)
+        spec["walls"] = [w for w in spec["walls"] if not (
+            w["level"] == "B" and abs(w["y0"] - w["y1"]) < 1e-6 and abs(w["y0"] - V.YE) < EXT_T
+            and max(w["x0"], w["x1"]) <= wx1 + 1e-6)]
+        top = LEVELS_Z["B"] + E.YARD_WALL_H / 1000
+        spec["infill"] = {"y0": wy0, "y1": wy1, "profile": [
+            [wx0, top], [wx1, top], [wx1, round(LEVELS_Z["B"] + P.clear_at(wx1), 3)],
+            [wx0, round(LEVELS_Z["B"] + P.clear_at(wx0), 3)]]}
         # GF windows over the ramp / deck: high sills (a person on the deck sees over a 0.9 m sill)
         for wdw in spec["windows"]:
             if wdw["level"] == "GF" and abs(wdw["y"] - V.YE) < 1e-6 and r0 - 1e-6 <= wdw["x"] <= d1 + 1e-6:

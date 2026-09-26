@@ -78,8 +78,8 @@ class YardWall(unittest.TestCase):
         x0, y0, x1, y1 = E.YARD_WALL
         self.assertEqual(x1, E.BAR[0])
         self.assertEqual(x0, E.BAR[0] - E.OFFSET_N)
-        col = [c for c in E.COLUMNS if c[0] == E.BAR[0] and c[3] > -24000][0]
-        self.assertEqual(y1, col[3])
+        self.assertEqual(y1, E.BAR[3])                           # east face flush with the villa's (client)
+        self.assertEqual(y1 - y0, 250)
 
     def test_ramp_clears_the_wall_and_the_gate_fits_a_car(self):
         rows = {e["item"].split(" (")[0].split(":")[0]: e for e in V.elevation_checks(P.option("u", 1))}
@@ -100,6 +100,22 @@ class YardWall(unittest.TestCase):
         lay = P.option("u", 1)
         faces = V.window_faces("B", lay["extension"])
         self.assertFalse([f for f in faces if f[0] == "h" and abs(f[1] - V.YE) < 1e-6 and f[2] < V.X0])
+
+
+    def test_store_uses_the_kept_wall_with_an_infill_to_the_ramp(self):
+        from archpipe import villa_env as E
+        sp = RS.build(P.option("u", 1))
+        on_wall = [w for w in sp["walls"] if w["level"] == "B" and abs(w["y0"] - w["y1"]) < 1e-6
+                   and abs(w["y0"] - V.YE) < 0.2 and max(w["x0"], w["x1"]) <= E.YARD_WALL[2] / 1000 + 1e-6]
+        self.assertEqual(on_wall, [])
+        prof = sp["infill"]["profile"]
+        self.assertAlmostEqual(prof[0][1], -3.0 + 1.4, places=3)          # starts on the wall top
+        self.assertAlmostEqual(prof[3][1] - prof[0][1], 0.05, places=3)   # 50 mm at the gate
+        self.assertAlmostEqual(prof[2][1] - prof[1][1], 0.424, places=3)  # 424 mm at the villa
+
+    def test_non_parking_spec_has_no_infill(self):
+        from archpipe.concept import villa_options as VO
+        self.assertNotIn("infill", RS.build(VO.s1()))
 
 
 class Negative(unittest.TestCase):
