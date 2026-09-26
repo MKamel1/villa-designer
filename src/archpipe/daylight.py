@@ -65,7 +65,12 @@ class Material:
 MATERIALS = {m.name: m for m in (
     Material("floor", "plastic", 0.20), Material("wall", "plastic", 0.50), Material("ceiling", "plastic", 0.70),
     Material("ground", "plastic", 0.20), Material("context", "plastic", 0.35), Material("door", "plastic", 0.40),
-    Material("glass", "glass", 0.70))}           # 0.70: clear double glazing (Metric Handbook p. 9-8)
+    Material("glass", "glass", 0.70),            # 0.70: clear double glazing (Metric Handbook p. 9-8)
+    # mitigation studies only:
+    Material("white", "plastic", 0.80),          # flat white paint: card tss-reflectance-table gives 75-90 %
+    Material("grating", "glass", 0.60),          # ASSUMED: a drive-over grating's open area (not a product value);
+    #                                              modelled as a clear pane of that normal transmittance
+    Material("car", "plastic", 0.15))}           # ASSUMED: a parked car's mean reflectance
 
 
 @dataclass

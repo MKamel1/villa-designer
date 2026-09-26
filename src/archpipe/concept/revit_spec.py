@@ -26,6 +26,52 @@ REVEAL = 0.20                          # wall kept each side of a window or gard
 SILL, HEAD = 0.90, 2.30              # head at the beam soffit less finishes (elevation_checks)
 
 
+def full_height_faces(lay, level):
+    """Faces glazed floor to beam over their whole column-free run: {(axis, coordinate): 'street' | 'end'}. The
+    basement's street face has a floor-to-beam window today (client 2026-09-26, kept); the end of the east-yard
+    extension faces the garden and gets the same, whatever room is behind it (client: P1 had a 0.8 m utility
+    window there, P2/P4 none because a store was at the end)."""
+    if level != "B":
+        return {}
+    out = {("v", round(V.X0, 3)): "street"}
+    for _, _, x1, _ in V._exts(lay.get("extension")):
+        out.setdefault(("v", round(x1, 3)), "end")
+    return out
+
+
+def glazing_problems(lay, windows, doors):
+    """Post-condition (client r8 review): every run of a full-height face (full_height_faces) that the plan glazes
+    carries an opening from the floor to the beam head, nearly as wide as the run. windows/doors: the spec or
+    Revit's read-back (width, height and sill as BUILT). Returns problems (empty = pass)."""
+    out, tol = [], 0.02
+    full = full_height_faces(lay, "B")
+    ops = [dict(o, sill=o.get("sill", 0.0), head=o.get("sill", 0.0) + (o.get("height") or 0.0))
+           for o in list(windows) + [d for d in doors if d.get("garden")] if o.get("level") in ("B", LEVEL_NAME["B"])]
+    for f in V.window_faces("B", lay.get("extension")):
+        kind = full.get((f[0], round(f[1], 3)))
+        if not kind:
+            continue
+        for rid, r in lay["rooms"].items():
+            if r["level"] != "B" or (kind == "street" and r["occupancy"] not in vocab.HABITABLE):
+                continue
+            for e in V.edges(r["rect"]):
+                L_ = V.overlap_len(e, f)
+                if L_ < 1.0:
+                    continue
+                lo, hi = max(e[2], f[2]), min(e[3], f[3])
+                on = [o for o in ops if abs((o["x"] if f[0] == "v" else o["y"]) - f[1]) < 0.05
+                      and lo - tol <= (o["y"] if f[0] == "v" else o["x"]) <= hi + tol]
+                need_w = L_ - 2 * REVEAL - tol
+                # a door's leaf stops under its frame: the leaf reaches the head less the frame zone
+                ok = [o for o in on if o["sill"] <= tol and (o.get("width") or 0) >= need_w and
+                      o["head"] >= (GARDEN_DOOR_H if o.get("garden") else HEAD) - tol]
+                if not ok:
+                    got = ", ".join("%.2f wide, %.2f-%.2f" % (o.get("width") or 0, o["sill"], o["head"]) for o in on)
+                    out.append("%s %s face %s %.2f (%.2f m run): no floor-to-beam opening %.2f wide (built: %s)"
+                               % (rid, kind, f[0], f[1], L_, L_ - 2 * REVEAL, got or "nothing"))
+    return out
+
+
 def _stair_model(lay):
     from . import stair_options as SO
     return {"u": S.u_in_old_bay, "u-front": SO.u_front_bay, "party-fixed": S.party_flight_fixed, "u-length": S.u_lengthwise_party, "party-r8": S.party_flight_r8}[lay["stair"]]()
@@ -140,12 +186,11 @@ def build(lay):
         # garden doors and windows
         ext = lay.get("extension")
         faces = V.window_faces(lv, ext)
+        full = full_height_faces(lay, lv)
         for rid, r in lay["rooms"].items():
             if r["level"] != lv:
                 continue
             occ = r["occupancy"]
-            if occ not in vocab.HABITABLE and occ not in vocab.SANITARY and occ != "utility":
-                continue
             for e in V.edges(r["rect"]):
                 for f in faces:
                     L_ = V.overlap_len(e, f)
@@ -154,8 +199,22 @@ def build(lay):
                     lo, hi = max(e[2], f[2]), min(e[3], f[3])
                     mid = (lo + hi) / 2
                     x, y = (mid, e[1]) if e[0] == "h" else (e[1], mid)
-                    garden = lv == "B" and occ in ("living", "dining", "kitchen")
                     span = [e[0], e[1], lo, hi]                  # axis, face coordinate, usable run
+                    fh = full.get((f[0], round(f[1], 3)))
+                    if fh and (fh == "end" or occ in vocab.HABITABLE):
+                        # floor to beam across the whole column-free run (client 2026-09-26): the basement's street
+                        # face (as built today) and the end of the east-yard extension, whatever room is behind it
+                        wd = round(L_ - 2 * REVEAL, 2)
+                        if occ in ("living", "dining"):
+                            spec["doors"].append({"level": lv, "x": x, "y": y, "width": wd, "rooms": [rid, "yard"],
+                                                  "garden": True, "full_height": True, "span": span})
+                        else:
+                            spec["windows"].append({"level": lv, "x": x, "y": y, "width": wd, "sill": 0.0,
+                                                    "height": HEAD, "room": rid, "full_height": True, "span": span})
+                        continue
+                    if occ not in vocab.HABITABLE and occ not in vocab.SANITARY and occ != "utility":
+                        continue
+                    garden = lv == "B" and occ in ("living", "dining", "kitchen")
                     if garden and occ in ("living", "dining"):
                         spec["doors"].append({"level": lv, "x": x, "y": y, "width": min(2.4, L_ - 2 * REVEAL), "rooms": [rid, "yard"],
                                               "garden": True, "span": span})

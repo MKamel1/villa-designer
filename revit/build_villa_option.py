@@ -141,11 +141,14 @@ def host_at(walls, level_name, x, y):
     return best if bd < 0.2 else None
 
 
+WIDTH_BIPS = (BuiltInParameter.DOOR_WIDTH, BuiltInParameter.WINDOW_WIDTH, BuiltInParameter.FAMILY_WIDTH_PARAM)
+HEIGHT_BIPS = (BuiltInParameter.DOOR_HEIGHT, BuiltInParameter.WINDOW_HEIGHT, BuiltInParameter.FAMILY_HEIGHT_PARAM)
+
+
 def sym_dims(sym):
     """(width, height) in metres of a door/window type, from whichever width/height parameters it carries."""
     out = []
-    for bips in ((BuiltInParameter.DOOR_WIDTH, BuiltInParameter.FAMILY_WIDTH_PARAM),
-                 (BuiltInParameter.DOOR_HEIGHT, BuiltInParameter.FAMILY_HEIGHT_PARAM)):
+    for bips in (WIDTH_BIPS, HEIGHT_BIPS):
         v = None
         for bip in bips:
             p = sym.get_Parameter(bip)
@@ -156,11 +159,12 @@ def sym_dims(sym):
     return tuple(out)
 
 
-def sized_door(doc, syms, width, height, cache, sliding=False):
-    """A door type of exactly width x height (m): a stock type if one matches, else a resized duplicate of the
-    nearest (a near-miss would put the wrong hole in the wall: a 2.1 m leaf under a 1.9 m ramp soffit). sliding:
-    only from families whose name says sliding, when the model has any."""
-    key = (round(width, 3), round(height, 3), sliding)
+def sized_door(doc, syms, width, height, cache, sliding=False, what="door"):
+    """A door (or window) type of exactly width x height (m): a stock type if one matches, else a resized duplicate
+    of the nearest (a near-miss would put the wrong hole in the wall: a 2.1 m leaf under a 1.9 m ramp soffit; and
+    windows were once placed as the nearest stock width at its stock height, so a 2.6 m floor-to-beam window
+    would have been built 0.9 m tall). sliding: only from families whose name says sliding, when there are any."""
+    key = (what, round(width, 3), round(height, 3), sliding)
     if key in cache:
         return cache[key]
     best, bd = None, 1e9
@@ -178,9 +182,8 @@ def sized_door(doc, syms, width, height, cache, sliding=False):
             return s
         if d < bd:
             best, bd = s, d
-    dup = best.Duplicate("archpipe door %.0f x %.0f" % (width * 1000, height * 1000))
-    for bips, v in (((BuiltInParameter.DOOR_WIDTH, BuiltInParameter.FAMILY_WIDTH_PARAM), width),
-                    ((BuiltInParameter.DOOR_HEIGHT, BuiltInParameter.FAMILY_HEIGHT_PARAM), height)):
+    dup = best.Duplicate("archpipe %s %.0f x %.0f" % (what, width * 1000, height * 1000))
+    for bips, v in ((WIDTH_BIPS, width), (HEIGHT_BIPS, height)):
         for bip in bips:
             p = dup.get_Parameter(bip)
             if p is not None and not p.IsReadOnly:
@@ -258,7 +261,8 @@ def build_option(app, model, spec, folder):
             rb["failed"].append({"door": d, "error": "no host wall"})
             continue
         try:
-            sym = sized_door(doc, dsyms, d["width"], d.get("height", 2.10), sized, d.get("sliding", False))
+            sym = sized_door(doc, dsyms, d["width"], d.get("height", 2.10), sized,
+                             bool(d.get("sliding") or d.get("garden")))
             if not sym.IsActive:
                 sym.Activate()
                 doc.Regenerate()
@@ -277,8 +281,8 @@ def build_option(app, model, spec, folder):
         if h is None:
             rb["failed"].append({"window": wdw, "error": "no host wall"})
             continue
-        sym = nearest_symbol(wsyms, wdw["width"])
         try:
+            sym = sized_door(doc, wsyms, wdw["width"], wdw["height"], sized, what="window")
             if not sym.IsActive:
                 sym.Activate()
                 doc.Regenerate()
@@ -287,8 +291,14 @@ def build_option(app, model, spec, folder):
             p = inst.get_Parameter(BuiltInParameter.INSTANCE_SILL_HEIGHT_PARAM)
             if p is not None and not p.IsReadOnly:
                 p.Set(ft(wdw["sill"]))
+            doc.Regenerate()
+            w_, h_ = sym_dims(sym)                     # as BUILT (read-back), not the spec echoed
+            sill = None
+            if p is not None and p.HasValue:
+                sill = round(UnitUtils.ConvertFromInternalUnits(p.AsDouble(), UnitTypeId.Millimeters) / 1000.0, 3)
             rb.setdefault("windows", []).append({"room": wdw.get("room"), "level": wdw["level"], "x": wdw["x"],
-                                                 "y": wdw["y"], "width": wdw["width"], "sill": wdw["sill"]})
+                                                 "y": wdw["y"], "width": w_, "height": h_, "sill": sill,
+                                                 "family": sym.Family.Name})
             nw += 1
         except Exception as exc:
             rb["failed"].append({"window": wdw, "error": str(exc)})

@@ -25,7 +25,7 @@ from archpipe.concept import villa_daylight as VD                     # noqa: E4
 from archpipe.concept import villa_options as VO                      # noqa: E402
 from archpipe.concept import villa_parking as P                       # noqa: E402
 
-JOB = "villa-lux-r8"
+JOB = "villa-lux-r9"            # r9: floor-to-beam street and extension-end glazing + the mitigation variants
 LOCAL = Path("out/villa/daylight") / JOB
 REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 EPW = Path(r"C:/Users/mmbka/archpipe-sources/cairo-epw/EGY_QH_Cairo.Intl.AP.623660_TMYx.2011-2025.zip")
@@ -60,6 +60,9 @@ def cases():
     for lay in [VO.s1(), VO.s5()] + P.options():
         sc = VD.scene(lay)
         cs[lay["id"]] = (sc, sensors_for(sc))
+    for case, (lay, v) in VD.variant_layouts().items():
+        sc = VD.scene(lay, v)
+        cs[case] = (sc, sensors_for(sc))
     return cs
 
 

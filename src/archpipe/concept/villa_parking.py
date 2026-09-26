@@ -40,6 +40,7 @@ RAMP_X0 = FN
 RAMP_X1 = round(RAMP_X0 + 2 * TRANSITION + (DECK_TOP - 2 * TRANSITION * TRANSITION_G) / GRADIENT, 3)   # 6.877
 CARS = {2: 9.8, 1: 5.9}
 EXT_MIN_END = 14.5         # the rooms under the deck run at least this far (beyond a one-car deck: own roof, like S5)
+DIRTY_KITCHEN_L = 3.8      # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)
 STUDY_DOOR = (7.377, 9.227)                             # between the east-face column faces: 1.85 m clear
 STUDY_DOOR_W = 1.80
 
@@ -152,25 +153,37 @@ def _back(cars, spine_entry=None):
     return rooms, links
 
 
-def _under(cars):
+def _under(cars, open_beyond=False):
     """Rooms under the ramp and deck (east yard, to the fence), from the street gate. They run at least to x 14.5
     so the dirty kitchen opens off the kitchen; beyond a one-car deck they get their own roof, level with the deck
     (like option 5's blocks)."""
     deck_end = round(RAMP_X1 + CARS[cars], 3)
     ext_end = max(deck_end, EXT_MIN_END)
+    if open_beyond:
+        # daylight variant: nothing built beyond the parked car, so the kitchen gets its east face back; the dirty
+        # kitchen takes the store's place under the deck and opens off the media room
+        ext_end = deck_end
+        rooms = [_room("store-ramp", "B", (FN, YE, X_LOW, FE), "store", "store under the ramp (1.45-2.0 m clear)",
+                       ext=True),
+                 _room("laundry", "B", (X_LOW, YE, 7.2, FE), "utility", "laundry (under the ramp)", ext=True),
+                 _room("guest-wc", "B", (7.2, YE, SX1, FE), "wc", "guest WC (under the ramp top)", ext=True),
+                 _room("dirty-kitchen", "B", (SX1, YE, deck_end, FE), "utility",
+                       "dirty kitchen (under the deck; full-height window at the end)", ext=True)]
+        links = [("laundry", "store-ramp"), ("lounge", "laundry"), ("lounge", "guest-wc"),
+                 ("media", "dirty-kitchen")]
+        return rooms, links, deck_end, ext_end
+    # the dirty kitchen is always the last room, behind the extension's full-height end window (client r8: a store
+    # sat there in the two-car options, so the end had no window); the store in the middle takes up the rest
+    dk0 = round(max(11.2, ext_end - DIRTY_KITCHEN_L), 3)
     rooms = [_room("store-ramp", "B", (FN, YE, X_LOW, FE), "store", "store under the ramp (1.45-2.0 m clear)",
                    ext=True),
              _room("laundry", "B", (X_LOW, YE, 7.2, FE), "utility", "laundry (under the ramp)", ext=True),
              _room("guest-wc", "B", (7.2, YE, SX1, FE), "wc", "guest WC (under the ramp top)", ext=True),
-             _room("store-mid", "B", (SX1, YE, 11.2, FE), "store", "store (under the deck)", ext=True),
-             _room("dirty-kitchen", "B", (11.2, YE, min(ext_end, 15.0), FE), "utility",
-                   "dirty kitchen (door from the kitchen)", ext=True)]
+             _room("store-mid", "B", (SX1, YE, dk0, FE), "store", "store (under the deck)", ext=True),
+             _room("dirty-kitchen", "B", (dk0, YE, ext_end, FE), "utility",
+                   "dirty kitchen (door from the kitchen; full-height window at the end)", ext=True)]
     links = [("laundry", "store-ramp"), ("lounge", "laundry"), ("lounge", "guest-wc"), ("media", "store-mid"),
              ("kitchen", "dirty-kitchen")]
-    if ext_end > 15.0 + 1e-6:
-        rooms.append(_room("store-deck", "B", (15.0, YE, ext_end, FE), "store", "store / plant (under the deck)",
-                           ext=True))
-        links.append(("dirty-kitchen", "store-deck"))
     return rooms, links, deck_end, ext_end
 
 
@@ -223,8 +236,10 @@ def _gf_straight():
     return list(rooms.values()), links, entries
 
 
-def option(stair, cars):
+def option(stair, cars, open_beyond=False):
+    """open_beyond: a daylight variant (id suffix '-open'): the east yard beyond the parked car left open."""
     oid = {("u", 1): "P1", ("u", 2): "P2", ("straight", 1): "P3", ("straight", 2): "P4"}[(stair, cars)]
+    oid += "-open" if open_beyond else ""
     car_txt = "one car" if cars == 1 else "two cars in tandem"
     if stair == "u":
         st = S.u_lengthwise_party()
@@ -262,7 +277,7 @@ def option(stair, cars):
         back, backl = _back(cars, spine_entry=(14.134, 15.745))
         entries = ge + [("entry-b", "B", "core-lobby-b2")]
         stair_key = "party-r8"
-    under, underl, deck_end, ext_end = _under(cars)
+    under, underl, deck_end, ext_end = _under(cars, open_beyond)
     if stair != "u":                                  # the straight option already has a utility under its landing
         under = [dict(r, id="laundry-ramp") if r["id"] == "laundry" else r for r in under]
         underl = [tuple("laundry-ramp" if n == "laundry" else n for n in l) for l in underl]

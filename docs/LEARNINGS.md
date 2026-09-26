@@ -477,3 +477,21 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   sky (pre-registered 20 %; measured 11.6 % and 2.1 %).
 - **A camera that sees a wall.** One render spot (S1 view 1) faced a partition 1 m away because S1's rooms sit
   differently; comparable views need a spot open in every layout (view 5, down the basement's length).
+
+## Windows chosen by the room behind them, not by the face (client r8 review, 2026-09-26)
+
+- **The extension's end had a 0.8 m high-sill window (P1/P3) or none (P2/P4); the street door was capped at 2.4 m.**
+  The generator decided a window by the room's occupancy: a utility got 0.8 x 0.8 at sill 1.5, a store got nothing,
+  living rooms a garden door capped at 2.4 m. The client reads the facade, not the room list: the basement's street
+  face is floor to beam today, and the extension's end is the only face it has onto the garden.
+  Why missed: every check asked "does the room have a window" (window_credit_problems), none asked "is this face
+  glazed as intended". Guard: `revit_spec.full_height_faces` (street face + every extension end) and
+  `glazing_problems`, a post-condition on the spec and on Revit's read-back (PDF row "BUILT: street face and
+  extension end glazed floor to beam"); proven on the real round-7 read-back (P1, P2, P3 all caught; quiet on P1's
+  street door, which already fills its run). The dirty kitchen now always sits at the end
+  (`test_the_dirty_kitchen_is_the_last_room_of_the_extension`).
+- **The Revit window read-back echoed the spec.** Windows were placed as the nearest stock type by width only, at
+  the family's stock height, and the read-back copied the spec's width and sill, so a guard on the read-back could
+  never see a wrong window. Now `build_villa_option.sized_door(..., what="window")` duplicates an exact-size type and
+  the read-back reports the type's width/height and the instance's sill as built. Lesson: a read-back that copies
+  its input is not a read-back; check each field's source.

@@ -215,7 +215,11 @@ def checks_page(pdf, lay, res, rb, op):
     rows.append(["PASS" if not wc and rb.get("windows") is not None else "FAIL",
                  "BUILT: every room credited with a window has one (Revit read-back)",
                  ("%d problems" % len(wc) + ("; " + "; ".join(wc[:2]) if wc else ""))[:200]])
-    rows.append(["BUILT", "Revit model", f"walls {rb['built'].get('walls')}, doors {rb['built'].get('doors')}, windows "
+    gp = RS.glazing_problems(lay, rb.get("windows", []), rb.get("doors", []))
+    rows.append(["PASS" if not gp and rb.get("windows") is not None else "FAIL",
+                 "BUILT: street face and extension end glazed floor to beam (Revit read-back)",
+                 ("%d problems" % len(gp) + ("; " + "; ".join(gp[:2]) if gp else ""))[:200]])
+    rows.append(["BUILT", "Revit model",f"walls {rb['built'].get('walls')}, doors {rb['built'].get('doors')}, windows "
                  f"{rb['built'].get('windows')}, rooms {len(rb['rooms'])}, build failures {len(rb['failed'])}"])
     t = tx.table(cellText=rows, colLabels=["", "check", "result / basis"], colWidths=[0.07, 0.25, 0.68],
                  loc="upper center", cellLoc="left")

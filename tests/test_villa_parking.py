@@ -179,6 +179,68 @@ class WindowCredit(unittest.TestCase):
         self.assertTrue(any(p.startswith("kitchen") for p in probs), probs)
 
 
+class FullHeightGlazing(unittest.TestCase):
+    """Client r8 review: the basement's street face has a floor-to-beam window today, and the end of the east-yard
+    extension must have one in every option (P1 had a 0.8 m utility window there, P2/P4 none: a store was at the
+    end; P3/P4's street door was capped at 2.4 m on a 3.2 m run)."""
+
+    def test_every_option_glazes_both_faces_floor_to_beam(self):
+        for lay in P.options():
+            sp = RS.build(lay)
+            self.assertEqual(RS.glazing_problems(lay, sp["windows"], sp["doors"]), [], lay["id"])
+            end = [w for w in sp["windows"] if w.get("full_height") and w["room"] == "dirty-kitchen"]
+            self.assertEqual(len(end), 1, lay["id"])
+            # the extension is 2.99 m deep (fence offset): 2.99 - 2 x 0.20 reveal
+            self.assertAlmostEqual(end[0]["width"], 2.59, places=2)
+            self.assertEqual((end[0]["sill"], end[0]["height"]), (0.0, RS.HEAD))
+
+    def test_the_dirty_kitchen_is_the_last_room_of_the_extension(self):
+        for lay in P.options():
+            ext = [r for r in lay["rooms"].values() if r.get("ext")]
+            last = max(ext, key=lambda r: r["rect"][2])
+            self.assertEqual(last["id"], "dirty-kitchen", lay["id"])
+
+    def test_the_round7_builds_are_caught(self):
+        # what Revit actually built in round 7/8 (out/villa/options-r7/readback.json)
+        built = {"P1": ([{"level": "B", "room": "dirty-kitchen", "x": 14.5, "y": -22.096, "width": 0.8, "sill": 1.5}],
+                        [{"level": "B", "x": 3.617, "y": -25.411, "width": 1.92, "height": 2.2, "garden": True,
+                          "rooms": ["lounge", "yard"]}]),
+                 "P2": ([], [{"level": "B", "x": 3.617, "y": -25.411, "width": 1.92, "height": 2.2, "garden": True,
+                              "rooms": ["lounge", "yard"]}]),
+                 "P3": ([{"level": "B", "room": "dirty-kitchen", "x": 14.5, "y": -22.096, "width": 0.8, "sill": 1.5}],
+                        [{"level": "B", "x": 3.617, "y": -25.861, "width": 2.4, "height": 2.2, "garden": True,
+                          "rooms": ["lounge", "yard"]}])}
+        lays = {l["id"]: l for l in P.options()}
+        for oid, (wins, doors) in built.items():
+            probs = RS.glazing_problems(lays[oid], wins, doors)
+            self.assertTrue(any("end face" in p for p in probs), (oid, probs))
+        self.assertTrue(any("street face" in p for p in RS.glazing_problems(lays["P3"], *built["P3"])))
+        # and it stays quiet on the P1 street door, which already fills its run (1.92 = 2.32 - 2 x 0.20)
+        self.assertFalse(any("street face" in p for p in RS.glazing_problems(lays["P1"], *built["P1"])))
+
+
+class DaylightVariants(unittest.TestCase):
+    def test_the_slot_has_one_grating_face_per_span_and_the_car_only_when_asked(self):
+        from archpipe.concept import villa_daylight as VD
+        lays = VD.variant_layouts()
+        base = VD.scene(*lays["P1-slot"])
+        car = VD.scene(*lays["P1-slot-car"])
+        g = [f for f in base.faces if f.material == "grating"]
+        self.assertTrue(g)
+        spans = {(round(min(p[0] for p in f.points), 3), round(max(p[0] for p in f.points), 3)) for f in g}
+        self.assertEqual(len(spans), len(g))                  # no two coincident panes (T would be squared)
+        self.assertFalse([f for f in base.faces if f.material == "car"])
+        self.assertTrue([f for f in car.faces if f.material == "car"])
+        # the bar's east face is glazed onto the slot; the rooms under the deck start beyond it
+        self.assertTrue(all(r["polygon"][0][1] >= V.YE + 0.9 for r in base.rooms
+                            if r["id"] in ("guest-wc", "store-mid", "dirty-kitchen")))
+
+    def test_the_open_variant_gives_the_kitchen_its_east_window(self):
+        sp = RS.build(P.option("u", 1, open_beyond=True))
+        self.assertTrue([w for w in sp["windows"] if w["room"] == "kitchen" and abs(w["y"] - V.YE) < 1e-6])
+        self.assertFalse([w for w in RS.build(P.option("u", 1))["windows"] if w["room"] == "kitchen"])
+
+
 class YardWall(unittest.TestCase):
     """The kept NE yard wall (client 2026-09-26): NE column to the street fence, 1.40 m from the basement floor."""
 

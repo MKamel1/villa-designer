@@ -24,7 +24,7 @@ from archpipe.concept import villa_daylight as VD                    # noqa: E40
 from archpipe.concept import villa_options as VO                     # noqa: E402
 from archpipe.concept import villa_parking as P                      # noqa: E402
 
-JOB = "villa-df-r8b"
+JOB = "villa-df-r9"            # r9: floor-to-beam street and extension-end glazing + the mitigation variants
 LOCAL = Path("out/villa/daylight") / JOB
 REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 
@@ -34,6 +34,8 @@ def cases():
     out = dict(val)
     for lay in [VO.s1(), VO.s5()] + P.options():
         out[lay["id"]] = VD.scene(lay)
+    for case, (lay, v) in VD.variant_layouts().items():
+        out[case] = VD.scene(lay, v)
     return out, expect
 
 
@@ -76,7 +78,8 @@ def fetch(host=DEFAULT_HOST):
     return 0 if val["all_pass"] else 1
 
 
-VIEW_JOB = "villa-views-r8"
+VIEW_JOB = "villa-views-r9"
+VIEW_VARIANTS = ["P1-open", "P1-slot", "P1-combo", "P2-slot", "P2-combo"]   # rendered besides the options
 EYE = -3.0 + 1.6                                   # basement FFL (model) + standing eye height
 VIEWS = {                                          # the same four spots in every option (checked clear of walls)
     "1-hall-to-garden": D.View((10.2, -27.9, EYE), (1.0, 0.12, -0.08)),
@@ -99,6 +102,11 @@ def render(host=DEFAULT_HOST):
         sc = VD.scene(lay)
         sc.rooms = []
         cs[lay["id"]] = sc
+    vl = VD.variant_layouts()
+    for case in VIEW_VARIANTS:
+        sc = VD.scene(*vl[case])
+        sc.rooms = []
+        cs[case] = sc
     only = [v for v in VIEWS if v in sys.argv[2:]] or list(VIEWS)     # render: all views, or those named
     tgz = D.write_job(cs, local, views={c: {v: VIEWS[v] for v in only} for c in cs})
     res = _ssh(host, f'rm -rf "{remote}" && mkdir -p "{remote}" && tar xzf - -C "{remote}"',
