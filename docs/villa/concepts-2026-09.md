@@ -122,7 +122,7 @@ You said the stair can go anywhere, so I compared two positions on the same layo
 | Kids' bedrooms A / B (net) | 13.8 / 14.5 m² | 12.4 / 12.4 m² |
 | Parents' bedroom | 16.9 m² | 13.2 m² |
 | Open kitchen / flex room | 21.7 / 12.9 m² | 16.1 / 7.4 m² |
-| Circulation, GF / basement | 19.0 / 7.3 m² | 23.0 / 12.9 m² |
+| Circulation, GF / basement | 19.2 / 7.2 m² | 23.0 / 12.9 m² |
 | Study / game room | 13.6 m² | 18.2 m² |
 | Facade used by the stair | none | 2.2 m on each storey |
 
