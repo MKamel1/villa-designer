@@ -111,6 +111,12 @@ def plan():
             rect(bb, fc="#bbbbbb", ec="none")
             ax.text((bb[0] + bb[3]) / 2000, (bb[1] + bb[4]) / 2000, "STREET  +-0.00\n(width assumed)",
                     rotation=90, ha="center", va="center", fontsize=9)
+        elif sid.endswith("-GF") or sid in ("core-shaft", "entrance-steps"):
+            shaft = sid == "core-shaft"
+            rect(bb, fc="#9ec5e8" if shaft else "#fbe3c8", ec="#8a6a40", lw=0.8, hatch="xx" if shaft else None)
+            label = sid.replace("-GF", "").replace("core-", "")
+            ax.text((bb[0] + bb[3]) / 2000, (bb[1] + bb[4]) / 2000, label, ha="center", va="center", fontsize=6,
+                    rotation=0 if bb[3] - bb[0] > 2000 else 90)
         elif "-w" in sid and sid.split("-z")[-1] == "0":
             rect(bb, fc="#3060c0", ec="none")
     for c in rb["columns"]:

@@ -25,6 +25,22 @@ BAR = (3617, -28671, 22597, -23591)          # CAD A-WALL outer faces: x0, y0, x
 BUMP = (19604, -31311, 22324, -28671)        # CAD: bathroom projection on the sister side
 FRONT = (1787, -28671, 3617, -23591)         # CAD I-WALL: street-side terrace enclosure at GF (use ASSUMED)
 AXIS_Y = -29915.66                           # REVIT: mirror axis of the twin (mean of our/sister column faces)
+SISTER_FACE = round(2 * AXIS_Y - BAR[1], 2)  # the sister's face across the core (-31160.32)
+# The 2.49 m strip between the two villas is the SHARED CORE (old PDF plans, client 2026-09-25): entrance lobby,
+# the main stair to the apartments, an air shaft, a lobby, a lift, then the two GF bathrooms staggered (the sister's
+# first, ours at the rear, CAD). In the basement both ends of the core are split on the axis between the villas.
+# Positions along x: walls crossing the core measured on the PDFs (PDF, +-0.15 m), scaled on the CAD length 18.98 m.
+CORE_GF = [  # (id, x0, x1, what)
+    ("core-entrance", 3617, 8506, "shared entrance lobby from the street gate (+0.00 FFL of the old plan = GF)"),
+    ("core-stair", 8506, 12778, "shared main stair to the apartments (not in the DWG or Revit)"),
+    ("core-shaft-landing", 12778, 14134, "stair landing and air shaft"),
+    ("core-lobby", 14134, 15928, "shared lobby, doors to both villas"),
+    ("core-lift", 15928, 17408, "X-marked box with a 0.80 door: most likely the lift"),
+    ("sister-bath", 17408, 19604, "the sister's GF bathroom (staggered with ours)"),
+]
+CORE_B_OURS_FRONT = (3617, 6940)             # PDF basement: kitchen zone split on the axis
+CORE_B_OURS_REAR = (17268, 22597)            # PDF basement: split on the axis under the GF bathrooms
+SHAFT = (12838, -30271, 14074, -28671)     # PDF: air shaft on our side of the landing, 1.5 m wide, all floors
 # CAD S-COLS: our nine columns, (x0, y0, x1, y1). The Revit GF columns coincide to < 1 mm.
 COLUMNS = [
     (7017, -24101, 7377, -23591), (9227, -24101, 9567, -23591), (11197, -24251, 11537, -23591),
@@ -46,38 +62,29 @@ LEVELS = [("Street +-0.00", STREET), ("B -1.80", B), ("GF +1.20", GF), ("APT +4.
 # --- site -----------------------------------------------------------------------------------------------------
 LATITUDE, LONGITUDE, TIME_ZONE = 30.040260, 30.961099, 2.0   # BRIEF maps link, resolved 2026-09-25
 STREET_FACADE_AZIMUTH = 290.0                 # BRIEF: the street (model -x) facade faces true azimuth ~290
-OFFSET_N, OFFSET_E, OFFSET_S = 2500, 2500, 5000               # BRIEF yard offsets to the fence
-FENCE_H, FENCE_T = 4000, 200                  # BRIEF: concrete fence 4.00 m from basement level; thickness ASSUMED
+# Building face to the fence's INNER face, measured on the old GF PDF (client: "the fence offset can be used from the
+# pdf"); the PDF's own 4.02 front dimension runs to the fence's outer face (3.74 + 0.25 = 3.99).
+OFFSET_N, OFFSET_E, OFFSET_S = 3740, 2990, 5710
+FENCE_H, FENCE_T = 4000, 250                  # BRIEF: 4.00 m from basement level; PDF: drawn 0.25 thick
 NEIGHBOUR_H = 12000                           # BRIEF 12 m; measured from their basement level (ASSUMED datum)
 STREET_WIDTH = 10000                          # ASSUMED
 BEAM_W, BEAM_D = 250, 600                     # ASSUMED section; perimeter only (client)
 WINDOW_SILL, WINDOW_H = 900, 1500             # ASSUMED, neighbour windows only
 
-ASSUMPTIONS = [
-    "Floor-to-floor 3.00 m for the apartment above as for our ground floor (Revit columns 0-3000); the existing "
-    "Revit slab at 2900-3100 is 100 mm higher, within the close-value band.",
-    "The 2.5 m street-side offset is measured from the building face (x = 3617), giving the plot edge at x = 1117. "
-    "The old Revit yard floor stopped at x = 878 (2.74 m): a 10 % difference, so confirm.",
-    "The street-side enclosure (x 1787-3617, CAD I-WALL) is a ground-floor terrace or entrance landing over the "
-    "sunken yard; the apartment above repeats it.",
-    "Neighbour buildings are 12 m tall measured from their basement level (-1.80), i.e. four 3 m storeys, with "
-    "windows at our current window positions, sill 0.9 m, height 1.5 m on every storey.",
-    "Neighbour plots mirror ours: east neighbour 2.5 m from the shared fence, rear neighbour 5.0 m from it.",
-    "Perimeter beams 250 x 600 mm (top at slab top, outer face flush) under the GF, apartment floor and roof slabs, "
-    "following the full outline including the bathroom projection.",
-    "The sister villa mirrors our bar and terrace; the bathroom projection is ours only (its mirror falls on it).",
-    "Street width 10 m (not needed for the design, drawn for context).",
-    "No fence between our yard and the sister's yard (none was mentioned).",
+ASSUMPTIONS = [   # confirmed by the client 2026-09-25 unless marked OPEN
+    "Floor-to-floor 3.00 m for the apartment above as for our ground floor.",
+    "Neighbour buildings are 12 m tall from their basement level (-1.80), four 3 m storeys, windows at our current "
+    "window positions (sill 0.9, height 1.5) on every storey.",
+    "Neighbour plots mirror ours, set back from the shared fence as we are (PDF offsets).",
+    "Perimeter beams 250 x 600 mm under the GF, apartment and roof slabs.",
+    "The street-side strip (CAD, 1.83 m deep x 5.08 m, in front of the living room, beside the shared entrance) is "
+    "part of our GF with no use yet; the old plan asked whether to open it to the villa or to the stair, or close "
+    "it. The apartment repeats it. The old PDF draws it about 1.0-1.3 m deep; the CAD governs building geometry.",
+    "The shared entrance steps run from the street gate over the sunken front yard to the core's GF entrance.",
+    "Street width 10 m (context only). No fence between our yard and the sister's.",
+    "The lift position is read from an X-marked box with a door on both floors (OPEN: confirm it is a lift).",
 ]
-QUESTIONS = [
-    "The party-side facade (y = -28671) has only corner columns: an 18.98 m span. Are there columns or bearing "
-    "walls along it that the model is missing?",
-    "Is the bathroom projection (2.72 x 2.64 m) ours, and does it reach the sister's facade (0.15 m past it)?",
-    "How is the apartment above reached (stair, lift, entrance), and does that route cross our plot?",
-    "How does one get from the street (+-0.00) down to the yard (-1.80) and up to the ground floor (+1.20)?",
-    "Is the 2.49 m gap between our building and the sister's ours up to the mirror line, and is there a divider?",
-    "Revit has a column at x 22.4, y -31.4 (sister side, at the projection's corner) that the CAD does not show.",
-]
+QUESTIONS = []   # all answered 2026-09-25 (docs/villa/environment-model.md)
 
 
 def rect(x0, y0, x1, y1):
@@ -100,20 +107,26 @@ def footprint():
     return [(bx0, by1), (bx0, by0), (px0, by0), (px0, py0), (px1, py0), (px1, by0), (bx1, by0), (bx1, by1)]
 
 
+def footprint_b():
+    """Our basement outline: the bar plus our halves of the core's two ends (split on the axis), counter-clockwise."""
+    bx0, by0, bx1, by1 = BAR
+    (f0, f1), (r0, r1) = CORE_B_OURS_FRONT, CORE_B_OURS_REAR
+    return [(bx0, by1), (bx0, AXIS_Y), (f1, AXIS_Y), (f1, by0), (r0, by0), (r0, AXIS_Y), (bx1, AXIS_Y), (bx1, by1)]
+
+
 def plot():
-    """The whole plot (ours + sister): x0, y0, x1, y1."""
-    sister_face = round(2 * AXIS_Y - BAR[3], 2)
-    return (BAR[0] - OFFSET_N, sister_face - OFFSET_E, BAR[2] + OFFSET_S, BAR[3] + OFFSET_E)
+    """The whole plot (ours + sister) to the fence's OUTER face: x0, y0, x1, y1."""
+    sister_outer = round(2 * AXIS_Y - BAR[3], 2)
+    t = FENCE_T
+    return (BAR[0] - OFFSET_N - t, sister_outer - OFFSET_E - t, BAR[2] + OFFSET_S + t, BAR[3] + OFFSET_E + t)
 
 
 def yard():
-    """Our sunken yard: the east strip plus our halves of the street and rear strips, and our half of the gap
-    to the sister, as one simple polygon wrapped around the building."""
+    """Our sunken yard: the east strip plus our halves (to the axis) of the street and rear strips. The strip
+    between the villas is the shared core, not yard."""
     px0, py0, px1, py1 = plot()
     bx0, by0, bx1, by1 = BAR
-    qx0, _, qx1, _ = BUMP
-    return [(px0, py1), (px0, AXIS_Y), (qx0, AXIS_Y), (qx0, by0), (bx0, by0), (bx0, by1), (bx1, by1), (bx1, by0),
-            (qx1, by0), (qx1, AXIS_Y), (px1, AXIS_Y), (px1, py1)]
+    return [(px0, py1), (px0, AXIS_Y), (bx0, AXIS_Y), (bx0, by1), (bx1, by1), (bx1, AXIS_Y), (px1, AXIS_Y), (px1, py1)]
 
 
 def polygon_area(pts):
@@ -167,8 +180,9 @@ def spec():
     elements = []
     # our slabs (real Floors): basement floor, GF, apartment floor, apartment roof
     tags = {B: "B", GF: "GF", APT: "APT", ROOF: "ROOF"}
-    slabs = [{"id": "slab-%s" % tags[z], "level": name, "pts": fp,
-              "note": "our footprint slab (CAD outline)"} for name, z in LEVELS if z in tags]
+    slabs = [{"id": "slab-%s" % tags[z], "level": name, "pts": footprint_b() if z == B else fp,
+              "note": "our footprint slab (CAD outline%s)" % (" + our halves of the core ends" if z == B else "")}
+             for name, z in LEVELS if z in tags]
     slabs.append({"id": "slab-GF-front", "level": "GF +1.20", "pts": rect(*FRONT),
                   "note": "street-side terrace/landing, ASSUMED use"})
     slabs.append({"id": "yard-ours", "level": "B -1.80", "pts": yard(), "note": "our sunken yard at -1.80 (BRIEF)"})
@@ -186,7 +200,21 @@ def spec():
     sister = mirror_box(BAR)
     elements.append(_box("sister", "GenericModel", sister, B, ROOF, "sister villa + its apartment, mirrored (BRIEF)"))
     elements.append(_box("sister-front", "GenericModel", mirror_box(FRONT), GF - 200, GF, "sister's terrace, mirrored"))
-    elements += windows_on_face("sister", "y", sister[3], +1, PARTY_FACE_WINDOWS_X, (B, GF, APT))
+    # the shared core between the villas (not ours), per storey; the apartment storey repeats the GF (assumed)
+    for x0, x1, tag in ((CORE_B_OURS_FRONT[1], CORE_B_OURS_REAR[0], "core-B-shared"),):
+        elements.append(_box(tag, "GenericModel", (x0, SISTER_FACE, x1, by0), B, GF - 200,
+                             "shared basement core: lobby, main stair, shaft, lift (PDF)"))
+    for (x0, x1), tag in ((CORE_B_OURS_FRONT, "sister-core-B-front"), (CORE_B_OURS_REAR, "sister-core-B-rear")):
+        elements.append(_box(tag, "GenericModel", (x0, SISTER_FACE, x1, AXIS_Y), B, GF - 200,
+                             "the sister's half of the basement core end (PDF)"))
+    for z0, lv in ((GF, "GF"), (APT, "APT")):
+        for ident, x0, x1, what in CORE_GF:
+            elements.append(_box("%s-%s" % (ident, lv), "GenericModel", (x0, SISTER_FACE, x1, by0), z0, z0 + 2800,
+                                 what + ("" if lv == "GF" else " (apartment storey, assumed as GF)")))
+    elements.append(_box("core-shaft", "GenericModel", SHAFT, B,
+                         ROOF + 1000, "air shaft beside our party wall, all floors, open to the sky (PDF)"))
+    elements.append(_box("entrance-steps", "GenericModel", (px0 + FENCE_T, SISTER_FACE, bx0, by0), STREET, GF,
+                         "shared entrance steps from the street gate up to the core's GF entrance (PDF)"))
     # neighbours, 12 m from their basement level
     nz1 = B + NEIGHBOUR_H
     east = (bx0, py1 + OFFSET_E, bx1, py1 + OFFSET_E + twin_w)
@@ -207,7 +235,7 @@ def spec():
         "units": "mm", "origin": "Revit project internal = CAD", "levels": [{"name": n, "z": z} for n, z in LEVELS],
         "site": {"latitude": LATITUDE, "longitude": LONGITUDE, "time_zone": TIME_ZONE,
                  "street_facade_azimuth": STREET_FACADE_AZIMUTH, "street_facade_direction": [-1, 0]},
-        "plot": list(plot()), "axis_y": AXIS_Y, "footprint": fp,
+        "plot": list(plot()), "axis_y": AXIS_Y, "footprint": fp, "footprint_b": footprint_b(),
         "columns": {"revit_ids": REVIT_GF_COLUMN_IDS, "cad": COLUMNS,
                     "copies": [{"base": "B -1.80", "top": "GF +1.20", "dz": B - GF},
                                {"base": "APT +4.20 (not ours)", "top": "APT roof +7.20", "dz": APT - GF}],

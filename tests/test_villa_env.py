@@ -35,12 +35,21 @@ class MirrorAxis(unittest.TestCase):
 
 
 class Plot(unittest.TestCase):
-    def test_offsets_are_the_brief(self):
+    def test_offsets_are_the_pdf(self):
+        """Face to fence inner face as measured on the old GF PDF; the plot line is the fence's outer face."""
         px0, py0, px1, py1 = V.plot()
-        self.assertEqual(V.BAR[0] - px0, 2500)            # street side
-        self.assertEqual(py1 - V.BAR[3], 2500)            # plot-east
-        self.assertEqual(px1 - V.BAR[2], 5000)            # rear
-        self.assertAlmostEqual(V.mirror_box(V.BAR)[1] - py0, 2500, delta=1)   # sister side mirrors ours
+        t = V.FENCE_T
+        self.assertEqual(V.BAR[0] - px0, 3740 + t)        # street side; the PDF prints 4.02 to the outer face
+        self.assertAlmostEqual(V.BAR[0] - px0, 4020, delta=50)
+        self.assertEqual(py1 - V.BAR[3], 2990 + t)        # plot-east
+        self.assertEqual(px1 - V.BAR[2], 5710 + t)        # rear
+        self.assertAlmostEqual(V.mirror_box(V.BAR)[1] - py0, 2990 + t, delta=1)   # sister side mirrors ours
+
+    def test_fence_inner_faces_sit_at_the_offsets(self):
+        els = {e["id"]: e for e in V.spec()["elements"]}
+        self.assertEqual(V.BAR[0] - max(p[0] for p in els["fence-street"]["pts"]), 3740)
+        self.assertEqual(min(p[1] for p in els["fence-east"]["pts"]) - V.BAR[3], 2990)
+        self.assertEqual(min(p[0] for p in els["fence-rear"]["pts"]) - V.BAR[2], 5710)
 
     def test_fence_top_is_street_plus_2_20(self):
         fences = [e for e in V.spec()["elements"] if e["id"].startswith("fence-")]
@@ -49,20 +58,42 @@ class Plot(unittest.TestCase):
             self.assertEqual(f["z0"], V.B)
             self.assertEqual(f["z1"] - V.STREET, 2200)
 
-    def test_yard_area_is_half_plot_minus_building(self):
+    def test_yard_area_is_half_plot_minus_building_and_core(self):
         px0, py0, px1, py1 = V.plot()
         half = (px1 - px0) * (py1 - V.AXIS_Y) / 1e6
-        bar = (V.BAR[2] - V.BAR[0]) * (V.BAR[3] - V.BAR[1]) / 1e6
-        bump_in_half = (V.BUMP[2] - V.BUMP[0]) * (V.BAR[1] - V.AXIS_Y) / 1e6
-        self.assertAlmostEqual(V.polygon_area(V.yard()), half - bar - bump_in_half, places=3)
+        building_and_half_core = (V.BAR[2] - V.BAR[0]) * (V.BAR[3] - V.AXIS_Y) / 1e6
+        self.assertAlmostEqual(V.polygon_area(V.yard()), half - building_and_half_core, places=3)
 
-    def test_yard_excludes_the_building_and_includes_the_strips(self):
+    def test_yard_excludes_the_building_and_the_core(self):
         y = V.yard()
         self.assertFalse(inside((12000, -26000), y))      # inside the bar
         self.assertFalse(inside((21000, -29500), y))      # inside the bathroom projection
+        self.assertFalse(inside((10000, -29500), y))      # the shared core, not yard
         self.assertTrue(inside((12000, -22000), y))       # east strip
         self.assertTrue(inside((25000, -29000), y))       # rear strip, our half
+        self.assertTrue(inside((2000, -29000), y))        # street strip, our half
         self.assertFalse(inside((25000, -31000), y))      # rear strip, sister's half
+
+
+class Core(unittest.TestCase):
+    def test_gf_core_segments_tile_the_strip_up_to_our_bathroom(self):
+        segs = V.CORE_GF
+        self.assertEqual(segs[0][1], V.BAR[0])
+        for a, b in zip(segs, segs[1:]):
+            self.assertEqual(a[2], b[1], (a[0], b[0]))
+        self.assertEqual(segs[-1][2], V.BUMP[0])          # the sister's bathroom ends where ours (CAD) begins
+
+    def test_core_is_the_gap_between_the_villas(self):
+        self.assertAlmostEqual(V.BAR[1] - V.SISTER_FACE, 2489, delta=2)   # PDF: 2.51 clear between core walls
+
+    def test_basement_outline_adds_our_halves_of_the_core_ends(self):
+        bar = (V.BAR[2] - V.BAR[0]) * (V.BAR[3] - V.BAR[1]) / 1e6
+        depth = (V.BAR[1] - V.AXIS_Y) / 1e3
+        ends = ((V.CORE_B_OURS_FRONT[1] - V.CORE_B_OURS_FRONT[0]) + (V.CORE_B_OURS_REAR[1] - V.CORE_B_OURS_REAR[0])) / 1e3
+        self.assertAlmostEqual(V.polygon_area(V.footprint_b()), bar + depth * ends, places=3)
+        self.assertTrue(inside((20000, -29500), V.footprint_b()))     # under the GF bathrooms: ours to the axis
+        self.assertFalse(inside((10000, -29500), V.footprint_b()))    # the stair: shared
+        self.assertFalse(inside((20000, -30500), V.footprint_b()))    # beyond the axis: the sister's
 
 
 class Structure(unittest.TestCase):
@@ -86,14 +117,14 @@ class Neighbours(unittest.TestCase):
         els = {e["id"]: e for e in V.spec()["elements"]}
         east, rear = els["neighbour-east"], els["neighbour-rear"]
         self.assertEqual(east["z1"] - east["z0"], 12000)
-        self.assertEqual(min(p[1] for p in east["pts"]) - V.plot()[3], 2500)
-        self.assertEqual(min(p[0] for p in rear["pts"]) - V.plot()[2], 5000)
+        self.assertEqual(min(p[1] for p in east["pts"]) - V.plot()[3], V.OFFSET_E)   # set back like us
+        self.assertEqual(min(p[0] for p in rear["pts"]) - V.plot()[2], V.OFFSET_S)
 
     def test_neighbour_windows_face_us(self):
         els = [e for e in V.spec()["elements"] if e["id"].startswith("neighbour-east-w")]
         self.assertEqual(len(els), len(V.EAST_FACE_WINDOWS_X) * 4)
         for w in els:                                     # proud of the face, on our side
-            self.assertLessEqual(max(p[1] for p in w["pts"]), -18591)
+            self.assertLessEqual(max(p[1] for p in w["pts"]), V.plot()[3] + V.OFFSET_E)
 
 
 class ReadbackCheck(unittest.TestCase):
