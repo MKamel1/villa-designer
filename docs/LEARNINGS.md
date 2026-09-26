@@ -298,3 +298,20 @@ Both were caught only because the failure was diagnosed before any code changed.
 
 The checker `scripts/villa_env.py check` has its own negative tests in `tests/test_villa_env.py`. They cover
 azimuth, a fence height, a missing slab, a column span and a level elevation.
+
+## A stair modelled as one room hid a blocked foot (2026-09-25, found by the client)
+
+- **What happened.** In villa concept A (round 2) the straight flight along the party wall had its basement foot at
+  the street end. Only the flex room and the laundry touched that end, so the bottom step could be reached only
+  through a room.
+- **Why every check passed.** The critic treated the stair as a single room linked to the hall along its long side.
+  The graph said "reachable", and nothing asked where a person actually steps on and off.
+- **Guard.** The `stair_access` check in `src/archpipe/concept/villa.py`:
+  - every stair room declares its `ends` (the foot on the lower storey, the arrival on the upper);
+  - each end must open onto a circulation room;
+  - a stair without declared ends fails.
+  - `tests/test_villa_concepts.py::StairAccess.test_round2_defect_is_caught` rebuilds the real round-2 geometry and
+    proves the graph alone passes it while the new check fails it.
+- **Also:** the plans now draw UP/DN arrows at the stair ends, so a reviewer sees the route.
+- **Lesson.** Check a stair by its two ends, not as a room. And read the client's own sketches before choosing a
+  direction: the villa_01 docx sketch had the flight rising from the basement hall toward the street end.

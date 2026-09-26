@@ -68,8 +68,20 @@ def draw(lay, res, path):
             ax.text(*T((x0 + x1) / 2, (y0 + y1) / 2), f"{r['name']}\n{s['net_m2']:.1f} m²\n{s['net_w']:.2f} x {s['net_d']:.2f}",
                     ha="center", va="center", fontsize=5.6, rotation=0 if (y1 - y0) >= 1.6 else 90)
             if r["occupancy"] == "stair":
-                ax.plot(*zip(T(x0, y0), T(x1, y1)), c="0.4", lw=0.6)
-                ax.plot(*zip(T(x0, y1), T(x1, y0)), c="0.4", lw=0.6)
+                for i in range(1, 16):                      # treads, drawn across the direction of travel
+                    if r.get("ends") and r["ends"][0][0] == "v":
+                        xx = x0 + i * (x1 - x0) / 16
+                        ax.plot(*zip(T(xx, y0), T(xx, min(y1, V.YS1))), c="0.6", lw=0.4)
+                for end in r.get("ends", []):
+                    ax_, c_, lo, hi = end
+                    mid = (lo + hi) / 2
+                    start = (c_, mid) if ax_ == "v" else (mid, c_)
+                    cx_, cy_ = (x0 + x1) / 2, (y0 + y1) / 2
+                    tip = (start[0] + 0.75 * (cx_ - start[0]), start[1] + 0.75 * (cy_ - start[1])) if ax_ == "h" else \
+                        (start[0] + 0.75 * (cx_ - start[0]), start[1])
+                    ax.annotate("", xy=T(*tip), xytext=T(*start), arrowprops=dict(arrowstyle="-|>", lw=1.4, color="tab:green"))
+                    ax.text(*T(*start), "UP" if lv == "B" else "DN", fontsize=6.5, color="tab:green", weight="bold",
+                            ha="center", va="center")
             # windows on allowed faces
             for e in V.edges(r["rect"]):
                 for f in V.window_faces(lv, ext):
@@ -248,8 +260,8 @@ def main():
         res = V.critique(lay)
         res["elevation_checks"] = V.elevation_checks(lay)
         V.write(lay, res, SPEC)
-        draw(lay, res, OUT / f"concept-{lay['id']}")
-        draw_section(lay, res["elevation_checks"], OUT / f"section-{lay['id']}")
+        draw(lay, res, OUT / f"concept-{lay['id']}-r3")
+        draw_section(lay, res["elevation_checks"], OUT / f"section-{lay['id']}-r3")
         rows.append((lay["id"], res["fails"], res["warnings"]))
         print(lay["id"], "fails", res["fails"], "warnings", res["warnings"])
     return 0

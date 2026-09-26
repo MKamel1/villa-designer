@@ -182,3 +182,30 @@ front-yard side and at the yard end.
 - The apartment's other wet stacks.
 - The basement drainage level. B makes this more important, since the room under the deck sits at −2.75.
 - The thermal and daylight run on A, then 3D.
+
+---
+
+# Round 3 (2026-09-25): stair access fixed (client review)
+
+**What was wrong.** In round 2's A and B, the basement foot of the flight was at the street end. Only the flex room
+and the laundry touched it, so the stair could not be reached from the basement entrance hall without crossing a
+room.
+
+**The fix, following the client's villa_01 sketch** (straight flight along the party wall, over the old core-door
+zone). The flight now runs the other way:
+- **Basement:** the foot is in the basement entrance hall, beside the core door and the kitchen.
+- **GF:** the top lands on a landing in the street strip, and a 1.0 m clear gallery beside the void leads to the
+  GF hall.
+- **Under the high end of the flight:** a store, opening from the flex room and leading to the pantry.
+- **Laundry:** it moves to the service spine next to the entrance hall.
+
+**Headroom.** The GF floor covers the flight's foot end for 1.0 m (the check allows 1.02 m), so the GF slab opening
+runs from x 3.82 to 6.42.
+
+**Stair geometry is unchanged:** 16 × 187.5 mm risers, 15 × 240 mm goings, 38° pitch.
+
+**Critic.** A new `stair_access` check requires each stair end to open onto circulation. It passes for A, A-bay
+and B.
+
+**Plans:** `out/villa/concepts/villa-concepts-r3.pdf` and `concept-{A,A-bay,B}-r3.pdf`. Green arrows mark UP/DN at
+each stair end.

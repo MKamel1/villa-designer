@@ -28,6 +28,32 @@ class Concepts(unittest.TestCase):
             self.assertGreater(spine["sizes"][rid]["net_m2"], bay["sizes"][rid]["net_m2"], rid)
 
 
+class StairAccess(unittest.TestCase):
+    def test_every_stair_end_opens_onto_circulation(self):
+        for lay in V.concepts() + [V.concept_c()]:
+            chk = next(c for c in V.critique(lay)["checks"] if c["check"] == "stair_access")
+            self.assertEqual(chk["status"], "pass", (lay["id"], chk["ends"]))
+
+    def test_round2_defect_is_caught(self):
+        """The real defect the client found: the basement foot at the street end, touched only by the flex room
+        and the laundry (and the wall), with the stair still 'linked' to the hall along its side."""
+        lay = copy.deepcopy(V.concept_a())
+        b = lay["rooms"]["stair-b"]
+        b["rect"][0] = V.X0
+        b["ends"] = [["v", V.X0, V.YP, V.YS1]]
+        del lay["rooms"]["store-under"]
+        lay["links"] = [l for l in lay["links"] if "store-under" not in l]
+        lay["links"] += [["stair-b", "flex"], ["stair-b", "pantry"]]     # round 2 linked them along the flight
+        res = V.critique(lay)
+        self.assertEqual(status(res, "reachability"), "pass")          # the graph alone did not see it
+        self.assertEqual(status(res, "stair_access"), "fail")
+
+    def test_undeclared_ends_fail(self):
+        lay = copy.deepcopy(V.concept_a())
+        del lay["rooms"]["stair-gf"]["ends"]
+        self.assertEqual(status(V.critique(lay), "stair_access"), "fail")
+
+
 class Elevations(unittest.TestCase):
     def test_all_elevation_checks_pass_for_a_and_b(self):
         for lay in (V.concept_a(), V.concept_a("bay"), V.concept_b()):
@@ -116,11 +142,11 @@ class SeededDefects(unittest.TestCase):
         self.assertIn("corridor", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
 
     def test_room_on_the_street_face_is_not_dark(self):
-        """Negative of the above: the strip's store cell touches the street face, so it could have a window."""
+        """Negative of the above: the strip's landing cell touches the street face, so it could have a window."""
         def f(lay):
-            lay["rooms"]["store-gf"]["occupancy"] = "study"
+            lay["rooms"]["landing-gf"]["occupancy"] = "study"
         res = self.mutate(f)
-        self.assertNotIn("store-gf", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
+        self.assertNotIn("landing-gf", next(c for c in res["checks"] if c["check"] == "window")["rooms"])
 
     def test_unbuildable_door_fails(self):
         def f(lay):

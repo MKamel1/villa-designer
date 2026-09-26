@@ -54,7 +54,15 @@
      -23.591
     ],
     "occupancy": "stair",
-    "name": "stair to basement"
+    "name": "stair to basement",
+    "ends": [
+     [
+      "h",
+      -27.371,
+      7.197,
+      9.397
+     ]
+    ]
    },
    "kids-a": {
     "id": "kids-a",
@@ -190,7 +198,15 @@
      -23.591
     ],
     "occupancy": "stair",
-    "name": "stair to GF"
+    "name": "stair to GF",
+    "ends": [
+     [
+      "h",
+      -27.371,
+      7.197,
+      9.397
+     ]
+    ]
    },
    "gallery": {
     "id": "gallery",
@@ -440,6 +456,12 @@
     "status": "pass",
     "basis": "Every room reachable from an entrance.",
     "rooms": []
+   },
+   {
+    "check": "stair_access",
+    "status": "pass",
+    "basis": "Each end of a stair (the foot on the lower storey, the arrival on the upper) must open onto circulation, so people reach it without crossing a room; a stair modelled as one room joined to a hall hid a foot that only a flex room and a laundry touched (LEARNINGS 2026-09-25).",
+    "ends": []
    },
    {
     "check": "suite_privacy",
