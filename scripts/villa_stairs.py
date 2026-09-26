@@ -16,7 +16,8 @@ OUT = Path("out/villa")
 
 
 def spec():
-    data = {"options": [{"name": st["name"], "parts": st["parts"]} for st in S.options()]}
+    from archpipe.concept import stair_options as SO
+    data = {"options": [{"name": st["name"], "parts": st["parts"]} for st in S.options() + [SO.u_front_bay()]]}
     p = OUT / "stairs-spec.json"
     p.write_text(json.dumps(data), encoding="utf-8")
     return p
@@ -25,7 +26,8 @@ def spec():
 def compare():
     rb = json.loads((OUT / "stairs-readback.json").read_text(encoding="utf-8"))
     bad = 0
-    for st in S.options():
+    from archpipe.concept import stair_options as SO
+    for st in S.options() + [SO.u_front_bay()]:
         py = S.clashes(st)
         py_cols = sorted({h["structure"].split()[-1] for h in py["hits"] if h["kind"] == "column"})
         py_beams = sorted({h["structure"].split()[1] for h in py["hits"] if h["kind"] == "beam"})

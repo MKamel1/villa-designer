@@ -251,3 +251,26 @@ them, and by reading the model and the PDF, are listed in `docs/LEARNINGS.md` (2
 B adds the parking and the extra room, unchanged.
 
 **Plans:** `out/villa/concepts/concept-{A,B}-r4.pdf`.
+
+---
+
+# Stair options for an open basement that sees the back garden (2026-09-25)
+
+**Sheet:** `out/villa/concepts/stair-options.pdf`. **Metric:** open basement floor with a straight sight line to the
+rear glazing, and the share of that glazing visible from the basement entrance (`concept/stair_options.py`).
+
+| Option | Sees the garden | Entrance sees the garden | Structural work |
+|---|---|---|---|
+| S1: U-stair in the old bay, dirty kitchen and WC mid-plan (current A) | 49.4 / 58.8 m² (84 %) | 0 % | none |
+| **S2: same stair, dirty kitchen and WC moved to the street end** | **62.0 / 62.8 m² (99 %)** | **100 %** | **none** |
+| S3: U-stair in the street-end bay | 61.2 / 65.0 m² (94 %) | 100 % | new opening, old infilled |
+| S4: straight flight along the party wall | 60.5 / 61.7 m² (98 %) | 100 % | new opening, both core doors moved |
+
+All four are clash-free in 3D (Python and Revit), at 17 × 176.5 / 280 (32.2°).
+
+**Finding.** The stair is not what blocks the view; the closed service rooms in the middle of the plan are. Moving
+the dirty kitchen and the guest WC to the street end (beside the laundry, with street windows) opens the whole
+basement to the garden, and it needs no structural work.
+
+**Cost of S2.** The dirty kitchen sits about 3 m from the open kitchen, across the entrance hall. The guest WC
+moves next to the entrance, which is better for guests.
