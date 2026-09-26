@@ -41,8 +41,11 @@ def main():
     fs, fe, rp = E["fence-street"], E["fence-east"], E["ramp"]
     YE, X0, XS = -23591.0, 3617.0, 1787.0                                          # building face, street face, terrace
     T = lambda x, y: (y, -x)                                                     # noqa: E731  street up, east right
+    from archpipe.concept import villa_parking as VP
+    top = lambda x_mm: VP.top_at(x_mm / 1000.0) * 1000.0                        # noqa: E731  ramp surface, street mm
 
-    with PdfPages(DIR / "NE-yard-wall-confirmed.pdf") as pdf:
+    from archpipe.safe_io import writable_path
+    with PdfPages(writable_path(DIR / "NE-yard-wall-confirmed.pdf")) as pdf:
         # ---- page 1: plan -------------------------------------------------------------------------------------
         fig = plt.figure(figsize=(16.5, 11.7))
         ax = fig.add_axes([0.03, 0.06, 0.52, 0.82])
@@ -59,7 +62,7 @@ def main():
         ax.plot(*zip(T(XS, -28671), T(XS, YE)), ls=":", c="0.4", lw=0.8)
         ax.text(*T(XS + 150, -27400), "GF terrace edge above", fontsize=6.5, color="0.4")
         rect(rp[0], rp[1], 8000, rp[4], fc="none", ec="tab:orange", ls="--", lw=1)  # ramp, above
-        ax.text(*T(4500, -22100), "RAMP above (10 %, street 0.00 at the gate)\nstore under it", ha="center",
+        ax.text(*T(4500, -22100), "RAMP above (from street 0.00 at the gate)\nstore under it", ha="center",
                 fontsize=7.5, color="tab:orange")
         rect(fs[0], -28671, fs[3], fs[4], fc="0.35", ec="k")                        # street fence
         rect(fe[0], fe[1], 8000, fe[4], fc="0.35", ec="k")                          # east fence
@@ -104,7 +107,7 @@ def main():
         ax = fig.add_axes([0.03, 0.08, 0.55, 0.78])
         x = 1800.0
         z = lambda v: v - STREET                                                   # noqa: E731  street datum
-        ramp_top = 0.10 * (x - rp[0])
+        ramp_top = top(x)
         ramp_soff = ramp_top - 350
         ax.add_patch(Rectangle((-26500, z(-3200)), 6500, 200, fc="0.8", ec="k"))   # yard floor
         ax.add_patch(Rectangle((wy0, z(wz0)), wy1 - wy0, wz1 - wz0, fc="tab:red", ec="k"))
@@ -132,8 +135,7 @@ def main():
         ax.axis("off")
         ax.set_title("SECTION across the wall, 1.8 m in front of the villa, looking from the street toward the villa "
                      "(east on the LEFT)\nlevels on the street datum; the infill on the wall up to the ramp is %.0f mm at "
-                     "the street gate and %.0f mm at the villa" % (0.10 * (wx0 - rp[0]) - 350 - z(wz1),
-                                                         0.10 * (wx1 - rp[0]) - 350 - z(wz1)), fontsize=9.5,
+                     "the street gate and %.0f mm at the villa" % (top(wx0) - 350 - z(wz1), top(wx1) - 350 - z(wz1)), fontsize=9.5,
                      weight="bold")
         ax2 = fig.add_axes([0.60, 0.10, 0.39, 0.74])
         ax2.imshow(light(img("yard-wall-section-across")))

@@ -251,6 +251,8 @@ def main():
         res = V.critique(lay)
         op = SO.analyse_layout(lay)
         path = OPT / f"Option-{lay['id']}.pdf"
+        from archpipe.safe_io import writable_path
+        path = writable_path(path)
         with PdfPages(path) as pdf:
             plan_page(pdf, lay, rb, res)
             views_page(pdf, lay)

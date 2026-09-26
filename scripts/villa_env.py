@@ -2,7 +2,7 @@
 
     PYTHONPATH=src python scripts/villa_env.py spec    # out/villa/env-spec.json
     (run revit/build_villa_env.py in Revit 2027; see its docstring)
-    PYTHONPATH=src python scripts/villa_env.py check   # out/villa/env-readback.json vs the spec; exit 1 on mismatch
+    PYTHONPATH=src python scripts/villa_env.py check [--readback <path>]   # read-back vs the spec; exit 1 on mismatch
     PYTHONPATH=src python scripts/villa_env.py plan    # out/villa/env-site-plan.pdf/.png from the READ-BACK geometry
 """
 from __future__ import annotations
@@ -149,8 +149,13 @@ def main(argv):
     if cmd == "spec":
         print(V.write(OUT / "env-spec.json"))
         return 0
-    if cmd == "check":
-        bad = check()
+    if cmd == "check":                   # check [--readback <path>]: the default is out/villa/env-readback.json
+        rb = None
+        if "--readback" in argv:
+            path = Path(argv[argv.index("--readback") + 1])
+            rb = json.loads(path.read_text(encoding="utf-8"))
+            print("read-back:", path)
+        bad = check(rb=rb)
         for b in bad:
             print("FAIL", b)
         print("ENV CHECK:", "PASS" if not bad else "%d FAIL" % len(bad))
