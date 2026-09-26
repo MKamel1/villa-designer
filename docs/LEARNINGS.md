@@ -457,3 +457,23 @@ Also caught while building it: a glazed opening drawn as two coincident panes wo
 (`test_window_is_one_glass_pane_and_leaves_a_hole`); an opening that lands on no wall would silently become wall
 (`VillaScene.test_every_opening_lands_on_exactly_one_wall`); `villa_env.py check` ignored the read-back path it
 was given (now `--readback`); a PDF open in the viewer crashed the writer (now `safe_io.writable_path`).
+
+## Climate daylight, and a JSON fix that only a real model could test (2026-09-26)
+
+- **The JSON fix passed its unit test and failed on the client's model.** Cleaning values (Arabic text, .NET
+  Int64) was not enough: the model holds text in U+0080-U+00FF (Arabic stored as mis-decoded bytes, e.g. 0xD8), and
+  IronPython's own json string escaper tries to re-decode that as UTF-8 and throws. The unit test only exercised
+  CPython. Guard: `revit/jsonsafe.py` now writes JSON itself (ASCII, every non-ASCII char escaped; byte-identical
+  to json.dumps for ASCII data, tested), the extractor prints a full traceback on failure (the runner showed only
+  the message), and the proof is running the extractor on `omar-2027.rvt` itself. Lesson: a serialisation fix for
+  IronPython is proven only under IronPython, on the data that failed.
+- **`solar.sun_position` takes UTC and ignores tzinfo.** Passing Cairo local time with a tzinfo gave the sun at 81 deg
+  at 09:30. The docstring says UTC; the parameter accepts an aware datetime silently. Caught by plausibility.
+- **Two pieces of the build tree were macOS binaries.** The Radiance source tarball ships prebuilt Mach-O tools in
+  `ray/src/*`; copying them gave "Exec format error". The Linux build is `cmake-build/bin` (built the daylight-
+  coefficient tools there: gendaymtx, rcontrib, rfluxmtx, dctimestep, rmtxop, all 6.0.1).
+- **Climate-based daylight validated before use:** sky orientation (a vertical sensor facing the sun gets > 2x the one
+  facing away, pre-registered; measured 3.7-7x) and daylight coefficients vs direct rtrace under the same gendaylit
+  sky (pre-registered 20 %; measured 11.6 % and 2.1 %).
+- **A camera that sees a wall.** One render spot (S1 view 1) faced a partition 1 m away because S1's rooms sit
+  differently; comparable views need a spot open in every layout (view 5, down the basement's length).

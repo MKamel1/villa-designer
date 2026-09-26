@@ -264,21 +264,32 @@ for d in $(cat order.txt) ; do                     # validation cases first: a b
     rtrace $(cat opts.txt) -n {n} scene.oct < points.txt > out.txt 2> rtrace.log ) || echo "FAILED $d" >> errors.txt
   echo "done $d $(date +%T)" >> progress.txt
 done
+# eye-level renders (views.txt: case view rpict-view-args), all in parallel, same sky and settings
+if [ -s views.txt ]; then
+  while read -r c v args; do
+    echo "cd cases/$c && rpict {render} $args scene.oct > $v.hdr 2> $v.log"
+  done < views.txt | xargs -P {n} -I CMD bash -c CMD
+  echo "renders $(date +%T)" >> progress.txt
+fi
 touch DONE
 """
 
 
-def write_job(cases: dict, folder: Path, workers: int = 30, fine=()) -> Path:
+def write_job(cases: dict, folder: Path, workers: int = 30, fine=(), views=None) -> Path:
     """One folder per case (scene.rad, points.txt, rooms.json, opts.txt), plus the sky and run.sh; returns a
     .tar.gz. Cases named in `fine` are repeated as '<name>-fine' at RTRACE_FINE (a convergence check). Validation
-    cases (names starting 'v-') run first."""
+    cases (names starting 'v-') run first. views: {case: {view_name: View}} renders eye-level images (.hdr) of those
+    cases with the same sky, after the daylight factors."""
     cases = dict(cases)
     for name in fine:
         cases[name + "-fine"] = cases[name]
     folder = Path(folder)
     (folder / "cases").mkdir(parents=True, exist_ok=True)
     (folder / "sky_glow.rad").write_text(SKY_GLOW, encoding="ascii")
-    (folder / "run.sh").write_text(RUN_SH.format(B=SKY_B, n=workers), encoding="ascii", newline="\n")
+    (folder / "run.sh").write_text(RUN_SH.format(B=SKY_B, n=workers, render=" ".join(RPICT_OPTS)), encoding="ascii",
+                                   newline="\n")
+    vlines = [f"{c} {v} {view.args()}" for c, vs in (views or {}).items() for v, view in vs.items()]
+    (folder / "views.txt").write_text("\n".join(vlines) + ("\n" if vlines else ""), encoding="ascii", newline="\n")
     order = sorted(cases, key=lambda n: (not n.startswith("v-"), n))
     (folder / "order.txt").write_text("\n".join(order) + "\n", encoding="ascii", newline="\n")
     for name, scene in cases.items():
@@ -301,6 +312,69 @@ def write_job(cases: dict, folder: Path, workers: int = 30, fine=()) -> Path:
     tgz = folder.with_suffix(".tar.gz")
     tgz.write_bytes(buf.getvalue())
     return tgz
+
+
+RPICT_OPTS = ["-ab", "5", "-ad", "1024", "-as", "512", "-aa", "0.15", "-ar", "512", "-ps", "2", "-pt", "0.06",
+              "-lw", "2e-4", "-x", "1200", "-y", "800"]
+
+
+@dataclass(frozen=True)
+class View:
+    """A perspective camera: eye point, direction, horizontal and vertical view angles (degrees)."""
+    vp: tuple
+    vd: tuple
+    vh: float = 75.0
+    vv: float = 52.0
+
+    def args(self):
+        return ("-vtv -vp %.3f %.3f %.3f -vd %.4f %.4f %.4f -vu 0 0 1 -vh %.1f -vv %.1f"
+                % (tuple(self.vp) + tuple(self.vd) + (self.vh, self.vv)))
+
+
+def read_hdr(path):
+    """A Radiance .hdr (RGBE, run-length encoded or flat) as a float array (h, w, 3) of radiance, W/sr/m2."""
+    import numpy as np
+    data = Path(path).read_bytes()
+    head_end = data.index(b"\n\n") + 2
+    line_end = data.index(b"\n", head_end)
+    dims = data[head_end:line_end].split()
+    h, w = int(dims[1]), int(dims[3])
+    pos, out = line_end + 1, np.zeros((h, w, 4), dtype=np.uint8)
+    for y in range(h):
+        if w >= 8 and data[pos] == 2 and data[pos + 1] == 2:           # new-style run-length scanline
+            pos += 4
+            for c in range(4):
+                x = 0
+                while x < w:
+                    n = data[pos]
+                    pos += 1
+                    if n > 128:
+                        n -= 128
+                        out[y, x:x + n, c] = data[pos]
+                        pos += 1
+                    else:
+                        out[y, x:x + n, c] = np.frombuffer(data, np.uint8, n, pos)
+                        pos += n
+                    x += n
+        else:                                                         # flat
+            out[y] = np.frombuffer(data, np.uint8, 4 * w, pos).reshape(w, 4)
+            pos += 4 * w
+    e = out[..., 3].astype(np.int32)
+    scale = np.where(e > 0, np.ldexp(1.0, e - 136), 0.0)
+    return out[..., :3].astype(np.float64) * scale[..., None]
+
+
+def luminance(rgb):
+    """cd/m2 from radiance (Radiance's own efficacy and CIE weights)."""
+    return WHTEFFICACY * (CIE_RF * rgb[..., 0] + CIE_GF * rgb[..., 1] + CIE_BF * rgb[..., 2])
+
+
+def tonemap_fixed(rgb, white_cd=150.0, gamma=2.2):
+    """One FIXED exposure for every image (a comparison is only fair at one exposure): white_cd maps to display
+    white, gamma 2.2, no per-image auto-exposure."""
+    import numpy as np
+    v = np.clip(rgb * WHTEFFICACY / white_cd, 0, 1) ** (1 / gamma)
+    return (v * 255).astype(np.uint8)
 
 
 def df_percent(r, g, b):

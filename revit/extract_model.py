@@ -738,4 +738,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:                          # the runner shows only the message; the line is what we need
+        import traceback
+        print("archpipe: extract failed:\n" + traceback.format_exc())
+        raise

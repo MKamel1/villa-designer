@@ -4103,6 +4103,90 @@
       "verification": "Read on the held original page 2026-09-26 (Neufert PDF page index 112): text 'access slope not more than 20%' and Fig. 4 caption 'In basement gar, where unavoidable, slope not more than 20%'.",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ies-udi-useful-min",
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "locator": "Chapter 14 Designing Daylighting, 14.16.1.7 (printed page 14.47)",
+      "stages": [
+        4,
+        5
+      ],
+      "summary": "Useful daylight illuminance: below 100 lux daylight is insufficient.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lux",
+      "verified_value": 100,
+      "original_page_checked": true,
+      "conditions": "Climate-based annual daylight metrics as the IES Lighting Handbook describes them (research-based acceptance levels, not a code); used as a published best-practice benchmark (no jurisdiction pack loaded).",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-26 (PDF page index 535).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ies-udi-useful-max",
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "locator": "Chapter 14 Designing Daylighting, 14.16.1.7 (printed page 14.47)",
+      "stages": [
+        4,
+        5
+      ],
+      "summary": "Useful daylight illuminance: above 2000 lux daylight is excessive (glare, cooling).",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lux",
+      "verified_value": 2000,
+      "original_page_checked": true,
+      "conditions": "Climate-based annual daylight metrics as the IES Lighting Handbook describes them (research-based acceptance levels, not a code); used as a published best-practice benchmark (no jurisdiction pack loaded).",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-26 (PDF page index 535).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ies-sda-illuminance",
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "locator": "Chapter 14 Designing Daylighting, 14.16.1.5 (printed page 14.47)",
+      "stages": [
+        4,
+        5
+      ],
+      "summary": "Spatial daylight autonomy: target illuminance typically 300 lux for at least 50 % of the analysis year.",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lux",
+      "verified_value": 300,
+      "original_page_checked": true,
+      "conditions": "Climate-based annual daylight metrics as the IES Lighting Handbook describes them (research-based acceptance levels, not a code); used as a published best-practice benchmark (no jurisdiction pack loaded).",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-26 (PDF page index 535).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "id": "ies-sda-area-acceptable",
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "locator": "Chapter 14 Designing Daylighting, 14.16.1.5 (printed page 14.47)",
+      "stages": [
+        4,
+        5
+      ],
+      "summary": "Spatial daylight autonomy: occupants find a room nominally acceptable when sDA300 > 50 % of its area (more satisfied above 75 %, feasible limit ~95 %).",
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "%",
+      "verified_value": 50,
+      "original_page_checked": true,
+      "conditions": "Climate-based annual daylight metrics as the IES Lighting Handbook describes them (research-based acceptance levels, not a code); used as a published best-practice benchmark (no jurisdiction pack loaded).",
+      "exceptions": "",
+      "verification": "Read on the held original page 2026-09-26 (PDF page index 535).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
     }
   ],
   "precedents": [
