@@ -48,7 +48,7 @@ def main():
     bench = {k: V._card(k)[0] for k in ("sll-min-adf-bedroom", "sll-min-adf-living", "sll-min-adf-kitchen",
                                         "ies-udi-useful-min", "ies-udi-useful-max", "ies-sda-illuminance",
                                         "ies-sda-area-acceptable")}
-    data = {"stamps": lux["stamps"], "heights": lux["heights"], "benchmarks": bench,
+    data = {"round": "r11" if R11 else "r10", "stamps": lux["stamps"], "heights": lux["heights"], "benchmarks": bench,
             "validation": {"df": df["validation"], "lux_orientation": lux["orientation"], "lux_method": lux["method"]},
             "views": views, "options": {}}
     for opt in OPTIONS:
