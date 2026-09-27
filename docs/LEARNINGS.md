@@ -536,3 +536,9 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   `test_stools_need_room_to_walk_past`).
 - Also carded from the held originals: NKBA landing areas (sink, hob, fridge), seating width, and AD M Diagram 2.4
   zone 'a' (bedside furniture within 600 mm of the bed head).
+- **Stair flight counted as floor; slivers counted as reached.** Adding stair ends and the principal bedroom's
+  window (AD M Diagram 2.4 note 1) as route nodes, the negative test (a console at the stair foot) still passed:
+  the raster let the body stand on the flight, and a 9 mm overlap counted as reaching a node. Guards: the
+  basement flight, the GF opening and voids are not floor; a node needs up to 0.1 m of real overlap
+  (`test_stair_foot_must_stay_reachable`, `test_principal_bedroom_window_must_stay_reachable`). The dining table
+  is also checked extended to 2.8 m (`extended_table`).

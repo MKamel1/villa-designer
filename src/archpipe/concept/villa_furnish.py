@@ -318,8 +318,12 @@ def _door_zones(sp, lay, level):
     return out
 
 
-def check(items=None, lay=None):
-    """Every furniture check; returns {check: {"status", "problems": [...], "measured": {...}}}."""
+EXTENDED_TABLE = 2.8    # the dining table opened for 10 (ASSUMED leaf length: 10 x 600 mm place settings, less ends)
+
+
+def check(items=None, lay=None, _extended=False):
+    """Every furniture check; returns {check: {"status", "problems": [...], "measured": {...}}}. Also re-runs them
+    all with the dining table extended (key "extended_table")."""
     lay = lay or R.design("D1")
     items = items or layout(lay)
     sp = RS.build(lay)
@@ -450,6 +454,14 @@ def check(items=None, lay=None):
             meas["routes"].update(m)
     for k in ("inside_room", "columns", "overlap", "clearances", "doors", "windows", "kitchen", "viewing", "routes"):
         out[k] = {"status": "fail" if probs[k] else "pass", "problems": probs[k], "measured": dict(meas[k])}
+    if not _extended:
+        # the brief's other configuration: the dining table extended for 10 (client brief D-TABLE: 1.8 m for 6)
+        ext = [dict(it, w=EXTENDED_TABLE) if it["type"] == "dining_6x" else it for it in items]
+        if ext != items:
+            r2 = check(ext, lay, _extended=True)
+            bad = ["%s: %s" % (k, p) for k, v in r2.items() for p in v["problems"]]
+            out["extended_table"] = {"status": "fail" if bad else "pass", "problems": bad,
+                                     "measured": {"table": "%.1f m long, every check above re-run" % EXTENDED_TABLE}}
     return out
 
 
@@ -488,6 +500,10 @@ def route_problems(lay, sp, items, level, cell=0.02):
         for a, b, c, d in rects:                  # half-open, so a cell centred on a shared edge is not lost
             free |= (X >= a - 1e-9) & (X < c - 1e-9) & (Y >= b - 1e-9) & (Y < d - 1e-9)
         obst = [footprint(it) for it in items if it["room"] in cl and it["h"] >= 0.3] + _columns()
+        # not floor: the basement flight (you stand at its foot, not on it), the GF stair opening and any voids
+        obst += [lay["rooms"][c]["rect"] for c in cl if lay["rooms"][c]["occupancy"] == "stair" and level == "B"]
+        if level == "GF":
+            obst += ([sp["gf_opening"]] if sp.get("gf_opening") else []) + sp.get("gf_voids", [])
         for a, b, c, d in obst:
             free &= ~((X > a) & (X < c) & (Y > b) & (Y < d))
         k = max(1, int(np.ceil(BODY / cell - 1e-9)))   # never kinder than the card: the body rounds UP (0.92 m)
@@ -501,12 +517,42 @@ def route_problems(lay, sp, items, level, cell=0.02):
         body = k * cell
 
         def touching(rect):
-            return ok & (AX < rect[2]) & (AX + body > rect[0]) & (AY < rect[3]) & (AY + body > rect[1])
+            # a real overlap (up to 0.1 m each way), not a sliver: a body grazing a zone's edge is not in it
+            ex = min(0.1, (rect[2] - rect[0]) / 2 - 1e-6)
+            ey = min(0.1, (rect[3] - rect[1]) / 2 - 1e-6)
+            return ok & (AX < rect[2] - ex) & (AX + body > rect[0] + ex) & (AY < rect[3] - ey) & \
+                (AY + body > rect[1] + ey)
         nodes = []
         for z in zones:
             zc = ((z["rect"][0] + z["rect"][2]) / 2, (z["rect"][1] + z["rect"][3]) / 2)
             if any(q[0] <= zc[0] <= q[2] and q[1] <= zc[1] <= q[3] for q in rects):
                 nodes.append(("door " + z["door"], [z["rect"]]))
+        for sid in cl:                                   # stair arrivals: the floor in front of each stair end
+            srm = lay["rooms"][sid]
+            for end in srm.get("ends") or []:
+                ax_, c, a, b = end
+                x0s, y0s, x1s, y1s = srm["rect"]
+                if ax_ == "v":
+                    z = (c, a, c + 0.3, b) if abs(c - x1s) < 1e-6 else (c - 0.3, a, c, b)
+                else:
+                    z = (a, c, b, c + 0.3) if abs(c - y1s) < 1e-6 else (a, c - 0.3, b, c)
+                nodes.append(("stair end of " + sid, [z]))
+        for it in items:                                 # the principal bedroom's windows (AD M Diagram 2.4 note 1)
+            if it["room"] in cl and it["type"] == "bed_king":
+                for w in sp["windows"]:
+                    if w["level"] == level and w.get("room") == it["room"]:
+                        half = w["width"] / 2
+                        ax_ = (w.get("span") or ["h"])[0]
+                        rr = lay["rooms"][it["room"]]["rect"]
+                        if ax_ == "h":
+                            y = w["y"]
+                            z = (w["x"] - half, y - 0.3, w["x"] + half, y) if abs(y - rr[3]) < 0.06 else \
+                                (w["x"] - half, y, w["x"] + half, y + 0.3)
+                        else:
+                            x = w["x"]
+                            z = (x - 0.3, w["y"] - half, x, w["y"] + half) if abs(x - rr[2]) < 0.06 else \
+                                (x, w["y"] - half, x + 0.3, w["y"] + half)
+                        nodes.append(("window of " + it["room"], [_middle(z)]))
         for it in items:
             if it["room"] not in cl:
                 continue

@@ -20,7 +20,26 @@ class Layout(unittest.TestCase):
     def test_d1_passes_every_check(self):
         res = F.check()
         self.assertEqual({k: v["problems"] for k, v in res.items() if v["status"] != "pass"}, {})
-        self.assertEqual(len(res), 9)
+        self.assertEqual(len(res), 10)                      # 9 checks + the extended-table re-run
+
+    def test_a_table_too_long_to_extend_is_caught(self):
+        orig = F.EXTENDED_TABLE
+        try:
+            F.EXTENDED_TABLE = 3.8                           # reaches the island end and the living sofa
+            self.assertEqual(F.check()["extended_table"]["status"], "fail")
+        finally:
+            F.EXTENDED_TABLE = orig
+
+    def test_stair_foot_must_stay_reachable(self):
+        res = _run(lambda items, ids: items.append(F.item("console", "hall-b", "sideboard", 10.1, -28.0, 90, w=1.2,
+                                                          d=0.45, h=0.8, why="x", level="B")))
+        self.assertTrue(any("stair end of stair-b" in p for p in res["routes"]["problems"]), res["routes"])
+
+    def test_principal_bedroom_window_must_stay_reachable(self):
+        # AD M Diagram 2.4 note 1: clear access to the window (a wardrobe across the garden window)
+        res = _run(lambda items, ids: items.append(F.item("robe", "parents-bed", "wardrobe", 22.3, -25.8, 90, w=2.4,
+                                                          d=0.55, h=0.8, why="x", level="GF")))
+        self.assertTrue(any("window of parents-bed" in p for p in res["routes"]["problems"]), res["routes"])
 
     def test_every_item_has_a_reason_and_a_catalogue_type(self):
         for it in F.layout():

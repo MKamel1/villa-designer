@@ -28,11 +28,19 @@ DECISIONS = [
     ("Shared kids room (A)", "Two single beds, one desk and one 1.2 m wardrobe. A second desk and wardrobe do not "
                              "fit with a 750 mm zone beside each bed; a bunk bed would free the floor for both."),
     ("Parents' dressing", "The dressing room is 1.30 m deep: a 600 mm hanging wardrobe needs 914 mm in front of it "
-                          "(1.51 m in all). Drawn with 350 mm open shelving. Hanging needs a choice: a wardrobe wall in "
-                          "the bedroom, or a deeper dressing room."),
+                          "(1.51 m in all). Drawn with 350 mm open shelving. Hanging needs a choice: take 0.21 m from the "
+                          "ensuite behind it (2.64 -> 2.43 m deep), or keep shelving only. The bedroom side cannot give it: "
+                          "the king bed's 750 mm zone leaves 0.11 m."),
     ("Parents' door", "A pocket sliding door: a swinging door would hit the bedside table and the bed's 750 mm zone."),
     ("Garden living", "Tightest path in the basement: 0.92 m, beside the armchair near the east garden door "
                       "(914 mm needed)."),
+    ("Changed from the questionnaire's first suggestions", "Updated on the questionnaire so you choose between options "
+     "that fit: cinema 4 recliners -> 2; family bathroom double basin -> one; a desk per child -> one per bedroom (the "
+     "study has the shared desk); lounge 6 seats -> 5; no bench at the parents' bed foot (it sits in the AD M foot "
+     "zone); no pantry column in the tall wall (the front pantry holds 3.3 m of shelving); island hob 80 -> 90 cm."),
+    ("Not furnished yet", "Garden terrace, BBQ, north patio and the deck (outdoor pieces follow your questionnaire "
+                          "answers). Dimensions: piece sizes are in the schedule; the checks page lists the measured "
+                          "clearances."),
 ]
 
 
@@ -143,20 +151,26 @@ def main():
                  "overlap": "no two pieces overlap", "clearances": "clearance zones clear (AD M beds, TSS storage "
                  "and dining, Mitton sofa/desk, NKBA aisles and seating)", "doors": "door swings clear",
                  "windows": "no tall piece in front of glazing", "kitchen": "NKBA landing areas, dishwasher to sink",
-                 "viewing": "TV / cinema viewing distance 1.0-1.5 x screen (Mitton)",
-                 "routes": "914 mm path from every door to every piece's working side (Mitton)"}
+                 "viewing": "TV / cinema viewing distance 1.0-1.5 x screen (Mitton); eye 0.45 m behind the seat "
+                            "front is ASSUMED",
+                 "routes": "914 mm path from every door, stair end and the parents' window to every piece's working "
+                           "side (Mitton; AD M Diagram 2.4)",
+                 "extended_table": "all the above re-run with the dining table extended to 2.8 m (for 10)"}
         crow = []
         for k, v in res.items():
             m = "; ".join("%s: %s" % kv for kv in list(v["measured"].items())[:4])
-            crow.append([v["status"].upper(), NAMES[k], textwrap.shorten(("; ".join(v["problems"]) or m) or "-", 150)])
+            crow.append([v["status"].upper(), textwrap.fill(NAMES[k], 58),
+                         textwrap.fill(textwrap.shorten(("; ".join(v["problems"]) or m) or "-", 240), 120)])
         t = ax.table(cellText=crow, colLabels=["", "check", "result"], colWidths=[0.05, 0.3, 0.65], loc="upper center",
                      cellLoc="left")
-        t.auto_set_font_size(False); t.set_fontsize(7.5); t.scale(1, 1.6)
+        t.auto_set_font_size(False); t.set_fontsize(7); t.scale(1, 2.3)
         ax2 = fig.add_axes([0.02, 0.02, 0.96, 0.4]); ax2.axis("off")
         t2 = ax2.table(cellText=[[a, textwrap.fill(b, 140)] for a, b in DECISIONS], colLabels=["decision / note", ""],
                        colWidths=[0.16, 0.84], loc="upper center", cellLoc="left")
         t2.auto_set_font_size(False); t2.set_fontsize(7.5); t2.scale(1, 2.6)
-        fig.suptitle("D1 furnished: checks (all against held cards) and what the layout needs from you", fontsize=11)
+        fig.suptitle("D1 furnished: checks and what the layout needs from you. Cards read on the held originals; "
+                     "DIAGNOSTIC (no held card): the 914 mm in front of the washer/dryer and folding counter, 600 mm "
+                     "at the stores, the recliner envelope", fontsize=10)
         pdf.savefig(fig); plt.close(fig)
     print(path, {k: v["status"] for k, v in res.items()})
     return 0
