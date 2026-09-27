@@ -36,10 +36,24 @@ class Layout(unittest.TestCase):
         self.assertTrue(any("stair end of stair-b" in p for p in res["routes"]["problems"]), res["routes"])
 
     def test_principal_bedroom_window_must_stay_reachable(self):
-        # AD M Diagram 2.4 note 1: clear access to the window (a wardrobe across the garden window)
-        res = _run(lambda items, ids: items.append(F.item("robe", "parents-bed", "wardrobe", 22.3, -25.8, 90, w=2.4,
-                                                          d=0.55, h=0.8, why="x", level="GF")))
+        # AD M Diagram 2.4 note 1: clear access to the window (a wardrobe against the garden window, vanity moved)
+        def m(items, ids):
+            items.remove(ids["pb-vanity"])
+            items.append(F.item("robe", "parents-bed", "wardrobe", 22.397 - 0.275, -25.4, 90, w=2.6, d=0.55, h=2.2,
+                                why="x", level="GF"))
+        res = _run(m)
         self.assertTrue(any("window of parents-bed" in p for p in res["routes"]["problems"]), res["routes"])
+
+    def test_the_window_guard_follows_the_room_not_the_bed_type(self):
+        # it was keyed on bed_king: the queen bed (bed_double) silently switched it off
+        F.TRACE = {}
+        try:
+            F.check()
+            nodes = [n for n, _ in F.TRACE["parents-bed+parents-entry"]["nodes"]]
+        finally:
+            F.TRACE = None
+        self.assertEqual(nodes.count("window of parents-bed"), 2)
+        self.assertIn("door corridor/parents-entry", nodes)      # a pocket door still gives a route node
 
     def test_every_item_has_a_reason_and_a_catalogue_type(self):
         for it in F.layout():
@@ -47,9 +61,31 @@ class Layout(unittest.TestCase):
             cat.get(it["type"])
 
     def test_the_route_check_really_examines_rooms(self):
-        # the kids A beds' shared gap is a node: closing it must fail the route check (the first draft had 0.909 m)
-        res = _run(lambda items, ids: ids["ka-bed-2"].update(cy=-25.85))
-        self.assertTrue(any("ka-bed-1" in p for p in res["routes"]["problems"]), res["routes"])
+        # the kids A wardrobe moved into the room's middle shuts the bunk and both desks off from the door
+        res = _run(lambda items, ids: ids["ka-wardrobe"].update(cx=13.4))
+        self.assertTrue(any(p.startswith("ka-bunk") for p in res["routes"]["problems"]), res["routes"])
+
+    def test_the_body_turns_a_corner_the_path_turns(self):
+        # the dressing: the rail end and a column 1.24 m apart on the diagonal, legs 1.05 and 0.94 m: a 914 mm path
+        # turns there (a 914 mm SQUARE did not). And a straight 0.90 m aisle is still refused:
+        self.assertEqual(F.check()["routes"]["status"], "pass")
+        res = _run(lambda items, ids: ids["pd-hang-2"].update(cy=ids["pd-hang-2"]["cy"] + 0.04))   # aisle 0.90 m
+        self.assertTrue(any(p.startswith("pd-hang-1") for p in res["routes"]["problems"]), res["routes"])
+
+    def test_a_door_running_into_a_wall_is_caught(self):
+        # the real defect: the dressing door at x 22.10 ran 153 mm into the 0.2 m south wall
+        orig = F.VP.DRESSING_DOOR_X
+        try:
+            F.VP.DRESSING_DOOR_X = 22.10
+            self.assertIn("door parents-bed/parents-dressing runs 153 mm into a wall", F.check()["doors"]["problems"])
+        finally:
+            F.VP.DRESSING_DOOR_X = orig
+
+    def test_a_door_without_a_span_is_cut_from_its_own_wall(self):
+        # the cinema door (no span in the spec) defaulted to "h" and stayed walled up
+        lay = R.design("D1")
+        walls = F._walls(F.RS.build(lay), "B")
+        self.assertFalse(any(F._ov((3.12, -22.4, 3.13, -21.8), w) for w in walls))
 
 
 class ChecksFailOnRealMistakes(unittest.TestCase):
@@ -63,11 +99,13 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
         self.assertTrue(any("store-ramp" in p for p in _run(m)["routes"]["problems"]))
 
     def test_coffee_table_too_close(self):
-        res = _run(lambda items, ids: ids["lounge-coffee"].update(cy=-25.62))      # the first draft: 452 mm
+        # 440 mm from the sofa front, where 457 is needed
+        res = _run(lambda items, ids: ids["lounge-coffee"].update(
+            cy=ids["lounge-sofa"]["cy"] + ids["lounge-sofa"]["d"] / 2 + 0.44 + ids["lounge-coffee"]["d"] / 2))
         self.assertEqual(res["clearances"]["status"], "fail")
 
     def test_bedside_table_outside_zone_a_is_refused(self):
-        res = _run(lambda items, ids: ids["pb-bedside-1"].update(cx=19.3))       # moved along the bed side
+        res = _run(lambda items, ids: ids["pb-bedside"].update(cy=ids["pb-bedside"]["cy"] + 0.9))  # along the bed
         self.assertTrue(any("pb-bed" in p for p in res["clearances"]["problems"]))
 
     def test_bedside_table_in_zone_a_is_allowed(self):
@@ -77,13 +115,12 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
         res = _run(lambda items, ids: ids["kb-wardrobe"].update(cx=16.689))      # in front of the kids B door
         self.assertEqual(res["doors"]["status"], "fail")
 
-    def test_pocket_door_is_what_lets_the_parents_bed_fit(self):
-        orig = dict(F.DOOR_TYPES)
-        try:
-            F.DOOR_TYPES.clear()
-            self.assertTrue(any("pb-bedside-1" in p for p in F.check()["doors"]["problems"]))
-        finally:
-            F.DOOR_TYPES.update(orig)
+    def test_the_parents_entry_must_stay_passable(self):
+        # a pocket door has no swing zone, but its approach is a route node: a chest in the entry blocks it
+        res = _run(lambda items, ids: items.append(F.item("chest", "parents-entry", "sideboard", 18.977, -26.95, 0,
+                                                          w=0.9, d=0.45, h=0.8, why="x", level="GF")))
+        self.assertTrue(any("door corridor/parents-entry" in p or "parents-entry" in p
+                            for p in res["routes"]["problems"]), res["routes"])
 
     def test_tall_piece_in_front_of_a_window(self):
         res = _run(lambda items, ids: ids["kb-wardrobe"].update(cx=16.9, cy=-23.866, rot=180))

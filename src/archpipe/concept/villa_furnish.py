@@ -19,6 +19,7 @@ import numpy as np
 from .. import catalogue as cat
 from . import revit_spec as RS
 from . import villa as V
+from . import villa_parking as VP
 from . import villa_r11 as R
 
 SIDES = ("front", "back", "left", "right")
@@ -27,6 +28,8 @@ DIRS = {0: {"front": (0, 1), "back": (0, -1), "right": (1, 0), "left": (-1, 0)},
         -90: {"front": (1, 0), "back": (-1, 0), "right": (0, -1), "left": (0, 1)},
         90: {"front": (-1, 0), "back": (1, 0), "right": (0, 1), "left": (0, -1)}}
 BODY = 0.914            # card mitton-path-of-travel-min: paths of travel at least 36 in (914 mm)
+PRINCIPAL_BEDROOM = "parents-bed"
+BEDROOM_ROUTE = 0.750   # card ukadm-bedroom-route-750: inside a bedroom, a 750 mm access route from the doorway
 SEAT_EYE = 0.45         # eye behind the seat front (ASSUMED) for viewing distances
 
 
@@ -101,152 +104,188 @@ def head_zone(it, length):
     return (x0 - big, y1 - length, x1 + big, y1)
 
 
-def _ov(a, b, tol=1e-6):
+def _ov(a, b, tol=1e-3):            # 1 mm: a piece set against a wall touches it, it does not overlap
     return min(a[2], b[2]) - max(a[0], b[0]) > tol and min(a[3], b[3]) - max(a[1], b[1]) > tol
 
 
 # ---- the D1 layout ----------------------------------------------------------------------------------------------
+def clear_rect(lay, rid):
+    """The room's floor clear of its walls: inset 0.20 m on the building envelope (external walls sit inside the outer
+    face), half a partition (0.05 m) where it meets a closed room, nothing where it opens into its own open-plan
+    cluster. Round 12: pieces were first placed against the room outlines, i.e. inside the walls."""
+    r = lay["rooms"][rid]
+    lv = r["level"]
+    outline = V.boundary_segments(V.envelope(lv, lay.get("extension")))
+    cl = _cluster(lay, rid) - {rid}
+    x0, y0, x1, y1 = r["rect"]
+    ins = []
+    for e in V.edges(r["rect"]):                       # bottom (y0), top (y1), left (x0), right (x1)
+        L = e[3] - e[2]
+        if sum(V.overlap_len(e, s) for s in outline) > 0.5 * L:
+            ins.append(RS.EXT_T)
+        elif sum(V.overlap_len(e, f) for c in cl for f in V.edges(lay["rooms"][c]["rect"])) > 0.5 * L:
+            ins.append(0.0)
+        else:
+            ins.append(RS.INT_T / 2)
+    return (round(x0 + ins[2], 3), round(y0 + ins[0], 3), round(x1 - ins[3], 3), round(y1 - ins[1], 3))
+
+
 def layout(lay=None):
+    """D1, furnished for the client's questionnaire answers (2026-09-27)."""
     lay = lay or R.design("D1")
-    r = {k: v["rect"] for k, v in lay["rooms"].items()}
-    YE, YP = V.YE, V.YP
+    r = {k: clear_rect(lay, k) for k in lay["rooms"]}
     items = []
 
     def add(it, room, **kw):
         it.update(room=room, **kw)
         items.append(it)
 
-    # -- basement: street lounge (family TV), with the alcove under the stair landing left clear to the pantry
+    # ================= basement =================
+    # -- street lounge (family TV): 4-seat sofa + armchair, 75 in TV; the way to the pantry and the patio door kept
     L = r["lounge"]
     add(against("lounge-tv", L, "y1", 5.0, "tv_unit", w=2.0, h=0.5,
                 why="TV wall between the NE column and the column at x 7.0 (east face); 75 in screen"), "lounge",
         screen_in=75)
-    add(item("lounge-sofa", None, "sofa_4seat", 6.0, -26.847, 0, h=0.85,
-             why="facing the TV, back to the stair balustrade; leaves 0.98 m at its street end to the larder/pantry"),
+    add(item("lounge-sofa", None, "sofa_4seat", 6.22, L[1] + 0.575, 0, h=0.85,
+             why="facing the TV, back to the stair balustrade; 1.10 m clear at its street end, past the nook column, to the pantry"),
         "lounge", views="lounge-tv")
-    add(item("lounge-coffee", None, "coffee_table", 6.0, -25.61, 0, w=1.2, d=0.6, h=0.4,
+    add(item("lounge-coffee", None, "coffee_table", 6.22, L[1] + 0.1 + 0.95 + 0.462 + 0.3, 0, w=1.2, d=0.6, h=0.4,
              why="457 mm from the sofa (card mitton-sofa-coffee-table-457)"), "lounge")
     add(item("lounge-armchair", None, "armchair", 8.3, -26.2, -90, h=0.85,
-             why="fifth seat, facing the family corner and the kitchen; turns to the TV"), "lounge")
-    # -- kitchen (bay 4-5): tall wall on the party side, sink run on the east face, island with the hob and 4 stools
+             why="fifth seat, turned to the TV and the family corner"), "lounge")
+    # -- kitchen: tall wall (fridge-freezer, oven + combi) on the party side, sink run on the east face, 5-seat island
     K, KI = r["kitchen"], r["kitchen-island"]
-    add(against("k-tall", KI, "y0", 11.197, "base_run", w=2.85, d=0.6, h=2.3,
-                modules=[("counter", 0.45), ("fridge", 0.6), ("freezer", 0.6), ("oven", 0.6), ("coffee", 0.6)],
-                why="panel-ready columns (fridge, freezer, oven + combi, coffee); 450 counter beside the fridge "
-                    "(card nkba-fridge-landing-381)"), "kitchen-island")
-    add(against("k-run", K, "y1", 11.537, "base_run", w=2.463, d=0.6, h=0.9,
-                modules=[("counter", 0.5), ("sink", 0.9), ("dw", 0.6), ("counter", 0.463)],
-                why="sink under the east wall between column 4 and the dirty-kitchen door; dishwasher beside the sink"),
+    add(against("k-tall", KI, "y0", KI[0], "base_run", w=2.25, d=0.6, h=2.3,
+                modules=[("counter", 0.45), ("fridge", 0.6), ("oven", 0.6), ("counter", 0.6)],
+                why="integrated fridge-freezer and an oven + combi column (answers); 450 counter beside the fridge "
+                    "(card nkba-fridge-landing-381); coffee machine on the counter"), "kitchen-island")
+    add(against("k-run", K, "y1", 11.54, "base_run", w=2.41, d=0.6, h=0.9,
+                modules=[("counter", 0.5), ("sink", 0.9), ("dw", 0.6), ("counter", 0.41)],
+                why="sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it"),
         "kitchen")
-    add(item("k-island", None, "island", 12.9, -26.16, 0, w=2.5, d=1.2, h=0.92,
-             modules=[("counter", 0.8), ("hob", 0.9), ("counter", 0.8)], stools=4,
-             why="hob side faces the sink run (1.37 m work aisle); 4 stools on the party side, 610 mm each (card "
-                 "nkba-seating-width-610), with 1.31 m behind them to walk past to the tall wall (card "
-                 "nkba-seating-walk-past-1118)"), "kitchen")
-    # -- dining (bay 5-6) and its party side
+    run_front = K[3] - 0.6
+    add(item("k-island", None, "island", 13.075, run_front - 1.219 - 0.55, 0, w=3.05, d=1.1, h=0.92,
+             modules=[("counter", 1.05), ("hob", 0.9), ("counter", 1.1)], stools=5,
+             why="5 stools at 610 mm (card nkba-seating-width-610) on the party side, 1118 mm behind them to walk "
+                 "past to the tall wall (card nkba-seating-walk-past-1118); hob side faces the sink run across a 1.22 m "
+                 "aisle; 800 mm counter + 300 mm overhang"), "kitchen")
+    # -- dining (bay 5-6): table for 6, extends to 10
     D, DS = r["dining"], r["dining-side"]
-    add(item("dining-table", None, "dining_6x", 16.6, -25.9, 0, h=0.75, chairs=6,
-             why="1.8 x 0.9 for 6, extends to 2.8 m for 10; 965 mm passage both long sides"), "dining")
-    add(against("dining-sideboard", DS, "y0", 16.2, "sideboard", w=1.9, h=0.8,
-                why="serving sideboard on the party wall"), "dining-side")
+    add(item("dining-table", None, "dining_6x", 16.95, -25.9, 0, h=0.75, chairs=6,
+             why="1.8 x 0.9 for 6, extends to 2.8 m for 10 (the largest gatherings of 20 need a second table: garden "
+                 "or living); 965 mm passage both long sides"), "dining")
+    add(against("dining-sideboard", DS, "y0", 16.3, "sideboard", w=1.8, h=0.8, why="serving sideboard"), "dining-side")
     # -- garden living + library alcove
     G, A = r["living"], r["bar-alcove"]
-    add(item("living-sofa", None, "sofa_3seat", 19.45, -26.6, -90, h=0.85,
-             why="faces the rear garden doors; back to the dining (1.0 m behind it)"), "living")
-    add(item("living-coffee", None, "coffee_table", 20.657, -26.6, -90, w=1.1, d=0.6, h=0.4,
-             why="457 mm from the sofa"), "living")
-    add(item("living-chair-1", None, "armchair", 20.657, -28.2, 0, h=0.85, why="conversation pair across the table"),
+    add(item("living-sofa", None, "sofa_3seat", 20.35, -28.0, 0, h=0.85,
+             why="back to the library alcove, facing the east garden door; both garden doors stay open to reach"),
         "living")
-    add(item("living-chair-2", None, "armchair", 20.657, -24.95, 180, h=0.85,
-             why="keeps 1.1 m clear to the east garden door"), "living")
-    add(against("alcove-books", A, "y0", 18.2, "bookcase", w=3.8, d=0.35, h=2.2,
-                why="library wall along the back of the rear share"), "bar-alcove")
-    add(against("alcove-bench", A, "x1", -29.816, "window_bench", w=0.95, d=0.5, h=0.45,
+    add(item("living-coffee", None, "coffee_table", 20.35, -26.793, 0, w=1.1, d=0.6, h=0.4,
+             why="457 mm from the sofa"), "living")
+    add(item("living-chair-1", None, "armchair", 19.925, -25.611, 180, h=0.85,
+             why="facing the sofa across the table"), "living")
+    add(item("living-chair-2", None, "armchair", 20.825, -25.611, 180, h=0.85,
+             why="facing the sofa across the table; 1.4 m to the east garden door"), "living")
+    add(against("alcove-books", A, "y0", 18.45, "bookcase", w=3.3, d=0.3, h=2.2,
+                why="library wall along the back of the rear share (backlit shelves: answers)"), "bar-alcove")
+    add(against("alcove-bench", A, "x1", A[1] + 0.05, "window_bench", w=0.85, d=0.5, h=0.45,
                 why="reading seat at the garden window"), "bar-alcove")
-    # -- cinema under the ramp: screen on the high end wall (x 9.23, 2.65 m clear; the store door is on the low
-    #    wall), a row of three recliners toward the low end
+    # -- cinema: 85 in TV on the high end wall, a loveseat + floor cushions (answers)
     C = r["cinema"]
-    add(against("cinema-screen", C, "x1", -22.096 - 1.107, "screen", h=2.0, screen_in=100,
-                why="100 in screen on the high end wall (2.65 m clear); the entrance from the lounge is beside it"),
-        "cinema")
-    for i, yy in enumerate((-21.951, -21.051)):
-        add(item("cinema-seat-%d" % (i + 1), None, "recliner", 5.875, yy, -90, h=1.0,
-                 why="two recliners and a 1.19 m aisle to the store under the ramp (three would close it: 2.7 m of "
-                     "seats in a 2.99 m room)"), "cinema", views="cinema-screen")
+    add(against("cinema-tv", C, "x1", C[3] - 1.885, "screen", w=1.88, d=0.1, h=1.5, screen_in=85,
+                why="85 in TV on the high end wall (2.65 m clear), clear of the door from the lounge"), "cinema")
+    add(item("cinema-sofa", None, "sofa_2seat", C[2] - 0.1 - 2.7 - 0.45 + 0.45, C[3] - 0.95, -90, w=1.6,
+             d=0.95, h=0.9, why="loveseat for two, 2.5 m from the screen; floor cushions in front (not fixed)"),
+        "cinema", views="cinema-tv")
     # -- guest WC
     W = r["guest-wc"]
-    add(against("gwc-wc", W, "y1", 9.9, "wc", h=0.4, why="pan on the far wall, 1.1 m zone toward the door"), "guest-wc")
+    add(against("gwc-wc", W, "y1", 9.9, "wc", d=0.55, h=0.4, why="wall-hung pan on the far wall"), "guest-wc")
     add(against("gwc-basin", W, "x0", -22.9, "washbasin", h=0.85, why="basin on the side wall"), "guest-wc")
-    # -- dirty kitchen + laundry
+    # -- dirty kitchen + laundry: gas hob 60 + oven, sink, washer (line drying: answers)
     DK = r["dirty-kitchen"]
-    add(against("dk-run", DK, "y1", 11.2, "base_run", w=3.82, d=0.6, h=0.9,
-                modules=[("counter", 0.5), ("sink", 0.8), ("dw", 0.6), ("counter", 0.4), ("range", 0.9),
-                         ("counter", 0.62)],
-                why="gas range, sink and dishwasher on the fence-side wall (NKBA landing areas)"), "dirty-kitchen")
-    add(against("dk-laundry", DK, "y0", 11.2, "washer_dryer", h=1.8, why="stacked washer + dryer"), "dirty-kitchen")
-    add(against("dk-fold", DK, "y0", 11.9, "folding_counter", h=0.9, why="folding / ironing counter"), "dirty-kitchen")
+    add(against("dk-run", DK, "y1", DK[0], "base_run", w=3.6, d=0.6, h=0.9,
+                modules=[("washer", 0.6), ("counter", 0.62), ("sink", 0.8), ("counter", 0.62), ("hob", 0.6),
+                         ("counter", 0.4)],
+                why="heavy cooking here (answers): gas hob 60 + oven under, sink; washer at the end of the run"),
+        "dirty-kitchen")
+    add(against("dk-fold", DK, "y0", DK[0] + 0.1, "folding_counter", w=1.5, h=0.9,
+                why="folding counter; drying rack and cleaning cupboard beside it"), "dirty-kitchen")
+    add(against("dk-clean", DK, "y0", DK[0] + 1.7, "tall_column", w=0.6, d=0.6, h=2.2,
+                why="cleaning cupboard (answers: in the dirty kitchen)"), "dirty-kitchen")
     # -- stores
-    add(against("pantry-shelves", r["pantry"], "y0", 3.7, "pantry_shelving", w=3.1, h=2.2, why="shelving on the back "
-                "wall, 300 deep so 914 mm stays clear"), "pantry")
-    add(against("store-shelves", r["store-ramp"], "y1", 0.0, "store_shelving", w=2.9, h=1.3,
-                why="low shelving under the ramp (1.45-2.0 m clear)"), "store-ramp")
+    PP = r["pantry"]
+    add(against("pantry-shelves-1", PP, "x0", PP[1], "pantry_shelving", w=PP[3] - PP[1], h=2.2,
+                why="shelving on the end wall: the pantry is 1.0 m deep clear, too shallow for a back-wall run with "
+                    "914 mm in front"), "pantry")
+    add(against("pantry-shelves-2", PP, "x1", PP[1], "pantry_shelving", w=PP[3] - PP[1], h=2.2,
+                why="shelving on the other end wall"), "pantry")
+    add(against("store-shelves", r["store-ramp"], "y1", r["store-ramp"][0] + 0.1, "store_shelving", w=2.85, h=1.3,
+                why="low shelving under the ramp: luggage, seasonal clothes, cushions, tools, bikes (answers)"),
+        "store-ramp")
 
-    # -- GF: study / game room
+    # ================= ground floor =================
+    # -- study: shared homework desk (street window), adult work desk (east wall), gaming sofa + TV (answers)
     S = r["study-game"]
-    add(against("study-desk", S, "x0", -26.28, "desk", w=2.0, d=0.7, h=0.75,
+    add(against("study-desk", S, "x0", -26.3, "desk", w=1.8, d=0.7, h=0.75,
                 why="shared homework desk for two, under the street window (sill 0.9)"), "study-game")
-    add(against("study-tv", S, "y1", 5.3, "tv_unit", w=1.7, h=0.5, why="gaming / TV under the high window"),
+    add(against("study-adult-desk", S, "y1", 4.6, "desk", w=1.4, d=0.7, h=0.75,
+                why="adult work desk (one adult most days) under the high window; plain wall behind for calls"),
+        "study-game")
+    add(against("study-tv", S, "x1", -26.2, "tv_unit", w=1.6, h=0.5, why="gaming / TV on the bathroom wall"),
         "study-game", screen_in=55)
-    add(item("study-sofabed", None, "sofa_bed", 6.25, -25.8, 0, h=0.85,
-             why="sofa bed facing the TV, back to the stair gallery"), "study-game", views="study-tv")
-    # -- family bath
+    add(item("study-sofa", None, "sofa_2seat", 6.827 + 0.45 - 0.45, -25.4, -90, h=0.85,
+             why="gaming sofa facing the TV (no sofa bed: answers)"), "study-game", views="study-tv")
+    # -- family bath: walk-in shower, WC, basin (a bath does not also fit: answers asked 'if they fit')
     FB = r["family-bath"]
     add(against("fb-shower", FB, "y1", 9.567, "shower_walkin", w=1.63, d=0.9, h=0.1,
-                why="walk-in shower tray between the two east-face columns (glass screen; the high window over it)"),
+                why="walk-in shower between the two east-face columns"), "family-bath")
+    add(against("fb-wc", FB, "x0", FB[1] + 0.02, "wc", d=0.55, h=0.4, why="wall-hung WC"), "family-bath")
+    add(against("fb-basin", FB, "x0", FB[1] + 0.42, "washbasin", w=0.43, d=0.45, h=0.85,
+                why="compact basin beside the WC"),
         "family-bath")
-    add(against("fb-wc", FB, "x0", -25.66, "wc", h=0.4, why="WC on the west wall, clear of the shower zone"),
-        "family-bath")
-    add(against("fb-basin", FB, "x1", -26.3, "washbasin", h=0.85,
-                why="single basin: a double basin does not fit beside the WC and shower with their AD M zones"),
-        "family-bath")
-    # -- kids A (two children: two singles, one desk, one wardrobe)
+    # -- kids A (two girls): bunk bed, two desks, a 1.5 m wardrobe
     KA = r["kids-a"]
-    add(item("ka-bed-1", None, "bed_single", 12.54, -24.041, -90, h=0.5,
-             why="under the window, head to the west wall"), "kids-a")
-    add(item("ka-bed-2", None, "bed_single", 12.54, -25.9, -90, h=0.5,
-             why="parallel, 0.96 m between the beds (card ukadm-bed-single-750; a 914 mm path reaches it)"), "kids-a")
-    add(against("ka-desk", KA, "y1", 13.65, "desk", w=1.2, d=0.6, h=0.75, why="one desk under the window"), "kids-a")
-    add(against("ka-wardrobe", KA, "y0", 13.72, "wardrobe", w=1.2, d=0.55, h=2.2,
-                why="wardrobe beside the door"), "kids-a")
-    # -- kids B (one child)
+    add(item("ka-bunk", None, "bed_single", KA[0] + 0.45, -25.45, 0, h=1.7,
+             why="bunk bed against the west wall (answers)"), "kids-a")
+    add(against("ka-desk-1", KA, "y1", 12.62, "desk", w=1.1, d=0.6, h=0.75, why="desk, girl 1"), "kids-a")
+    add(against("ka-desk-2", KA, "y1", 13.76, "desk", w=1.1, d=0.6, h=0.75, why="desk, girl 2"), "kids-a")
+    add(against("ka-wardrobe", KA, "x1", KA[1] + 0.02, "wardrobe", w=1.5, d=0.6, h=2.2, why="1.5 m wardrobe"),
+        "kids-a")
+    # -- kids B (boy): 120 bed, desk, 1.5 m wardrobe
     KB = r["kids-b"]
-    add(item("kb-bed", None, "bed_small_double", 15.952, -25.4, -90, h=0.5,
-             why="120 x 200, head to the west wall"), "kids-b")
-    add(against("kb-desk", KB, "y1", 17.0, "desk", w=1.2, d=0.6, h=0.75, why="desk under the window"), "kids-b")
-    add(against("kb-wardrobe", KB, "y0", 17.2, "wardrobe", w=1.2, d=0.55, h=2.2, why="wardrobe beside the door"),
+    add(item("kb-bed", None, "bed_small_double", KB[0] + 1.0, -25.3, -90, h=0.5, why="120 x 200, head to the west wall"),
         "kids-b")
-    # -- parents
+    add(against("kb-desk", KB, "y1", 17.05, "desk", w=1.2, d=0.6, h=0.75, why="desk under the window"), "kids-b")
+    add(against("kb-wardrobe", KB, "y0", 17.2, "wardrobe", w=1.5 if KB[2] - 17.2 >= 1.5 else KB[2] - 17.2, d=0.6,
+                h=2.2, why="wardrobe beside the door"), "kids-b")
+    # -- parents: queen bed, head on the dressing wall; vanity at the garden window (answers)
     PB = r["parents-bed"]
-    add(item("pb-bed", None, "bed_king", 19.427, -25.61, -90, h=0.5,
-             why="king, head to the west wall; 750 mm both sides and the foot (principal bedroom), clear of the "
-                 "column at the head"), "parents-bed")
-    add(item("pb-bedside-1", None, "bedside_table", 18.627, -26.76, -90, h=0.55,
-             why="bedside in zone 'a' (card ukadm-bedside-zone-a-600)"), "parents-bed")
-    add(item("pb-bedside-2", None, "bedside_table", 18.627, -24.46, -90, h=0.55,
-             why="bedside in zone 'a' (card ukadm-bedside-zone-a-600)"), "parents-bed")
-    add(item("pb-chair", None, "armchair", 22.02, -26.8, 90, h=0.85, why="reading chair by the garden window"),
+    add(item("pb-bed", None, "bed_double", 20.33, PB[1] + 1.0, 0, h=0.5,
+             why="queen 160 x 200 (answers), head on the dressing wall, east of the entry; 750 mm both sides and "
+                 "the foot"), "parents-bed")
+    add(item("pb-bedside", None, "bedside_table", 20.33 + 0.8 + 0.25, PB[1] + 0.2, 0, h=0.55,
+             why="bedside in zone a; the other side has a wall shelf so the way in from the entry stays clear"),
         "parents-bed")
-    add(against("pd-shelves", r["parents-dressing"], "y0", 19.6, "bookcase", w=0.85, d=0.35, h=2.2,
-                why="dressing: 350 mm open shelving (hanging needs a decision: see the report)"), "parents-dressing")
-    add(against("pd-shelves-2", r["parents-dressing"], "y0", 21.35, "bookcase", w=0.85, d=0.35, h=2.2,
-                why="dressing: open shelving past the ensuite door"), "parents-dressing")
+    add(against("pb-vanity", PB, "x1", -25.3, "desk", w=1.0, d=0.4, h=0.75,
+                why="vanity / dressing table at the garden window (answers), clear of the bed zone"), "parents-bed")
+    # -- dressing: hanging on both long walls
+    PD = r["parents-dressing"]
+    add(against("pd-hang-1", PD, "y1", PD[0] + 0.05, "wardrobe", w=VP.DRESSING_DOOR_X - 0.5 - PD[0] - 0.05, d=0.6,
+                h=2.2,
+                why="hanging along the bedroom wall, up to the bedroom door"), "parents-dressing")
+    add(against("pd-hang-2", r["parents-dressing-ext"], "y0", r["parents-dressing-ext"][0] + 0.05, "wardrobe",
+                w=21.2 - r["parents-dressing-ext"][0] - 0.05,
+                d=0.6, h=2.2, why="hanging along the ensuite wall, up to the ensuite door"), "parents-dressing-ext")
+    # -- ensuite: bath, shower, double basin; WC on the south (garden) wall (client)
     PE = r["parents-ensuite"]
-    add(against("pe-shower", PE, "x1", -31.311, "shower_walkin", w=1.4, d=0.9, h=0.1,
-                why="walk-in shower in the far corner"), "parents-ensuite")
-    add(against("pe-basins", PE, "x0", -30.3, "washbasin_double", h=0.85, why="double basin on the west wall"),
+    add(against("pe-wc", PE, "x1", PE[1] + 0.86, "wc", d=0.5, h=0.4, why="WC on the south wall (client)"),
         "parents-ensuite")
-    add(against("pe-wc", PE, "y0", 20.2, "wc", h=0.4, why="WC on the far wall between basin and shower"),
+    add(against("pe-bath", PE, "y0", PE[0] + 0.05, "bath", h=0.55,
+                why="bath with a shower over it: a separate shower does not also fit (answers asked for both)"),
         "parents-ensuite")
+    add(against("pe-basin", PE, "x0", PE[3] - 0.65, "washbasin", h=0.85,
+                why="single basin: with the ensuite 0.21 m shorter for the dressing, a double basin zone reaches "
+                    "the bath"), "parents-ensuite")
     for it in items:
         it["level"] = lay["rooms"][it["room"]]["level"]
     return items
@@ -281,15 +320,57 @@ def _inside(rect, rects, step=0.05):
     return bool(ok.all())
 
 
+def _door_axis(d):
+    """"h" for a door in a wall along x, "v" along y: its span when the spec gives one, else by whether it sits on
+    the building's long faces (a missing span once defaulted to "h", so the cinema door was never cut from its
+    wall)."""
+    return (d.get("span") or [None])[0] or ("h" if any(abs(d["y"] - e) < 0.06 for e in (V.YE, V.YP)) else "v")
+
+
+def _walls(sp, level):
+    """The built walls of a storey as rectangles (the spec's centre lines and thicknesses; external walls already sit
+    inside the outer face), each cut at its doors. Pieces and their zones must not overlap them."""
+    gaps = []
+    for d in sp["doors"]:
+        if d["level"] == level:
+            ax = _door_axis(d)
+            gaps.append(((d["x"] - d["width"] / 2, d["y"] - 0.2, d["x"] + d["width"] / 2, d["y"] + 0.2), "h") if ax == "h"
+                        else ((d["x"] - 0.2, d["y"] - d["width"] / 2, d["x"] + 0.2, d["y"] + d["width"] / 2), "v"))
+    out = []
+    for w in sp["walls"]:
+        if w["level"] != level:
+            continue
+        t = w["thickness"] / 2
+        horiz = abs(w["y0"] - w["y1"]) < 1e-6
+        c = w["y0"] if horiz else w["x0"]
+        a, b = sorted((w["x0"], w["x1"])) if horiz else sorted((w["y0"], w["y1"]))
+        cuts = sorted(((g[0], g[2]) if horiz else (g[1], g[3])) for g, gax in gaps
+                      if gax == ("h" if horiz else "v") and (g[1] <= c <= g[3] if horiz else g[0] <= c <= g[2]))
+        pos = a
+        pieces = []
+        for g0, g1 in cuts:
+            if g1 > pos and g0 < b:
+                if g0 > pos:
+                    pieces.append((pos, g0))
+                pos = max(pos, g1)
+        if pos < b:
+            pieces.append((pos, b))
+        out += [(p0, c - t, p1, c + t) if horiz else (c - t, p0, c + t, p1) for p0, p1 in pieces]
+    return out
+
+
 def _columns():
     return [tuple(v / 1000 for v in c) for c in V.E.COLUMNS]
 
 
 DOOR_TYPES = {
+    # "into:<room>": swings into that room only (the other side keeps no swing zone)
+    "lounge-nook/pantry": "into:lounge-nook",       # the pantry is 1.0 m deep with its shelving: the door opens out
     # door (rooms joined by "/") -> "pocket": a sliding door into the wall, so it sweeps no floor. Parents: the king
     # bed's 750 mm zone and its bedside table sit where a swing would go; the wall beside the door has 1.18 m for
     # the pocket (Phase 2 builds it as a sliding door).
-    "corridor/parents-bed": "pocket",
+    "corridor/parents-entry": "pocket",
+    "parents-bed/parents-dressing": "into:parents-dressing",
 }
 
 
@@ -306,6 +387,8 @@ def _door_zones(sp, lay, level):
         span = d.get("span")
         axis = span[0] if span else ("h" if horiz else "v")
         depth = 0.9 if (d.get("garden") or d.get("sliding")) else w
+        into = (DOOR_TYPES.get("/".join(d.get("rooms") or [])) or "")
+        into = into[5:] if into.startswith("into:") else None
         for s in (-1, 1):
             if axis == "h":
                 z = (d["x"] - w / 2, d["y"], d["x"] + w / 2, d["y"] + s * depth)
@@ -313,8 +396,30 @@ def _door_zones(sp, lay, level):
                 z = (d["x"], d["y"] - w / 2, d["x"] + s * depth, d["y"] + w / 2)
             z = (min(z[0], z[2]), min(z[1], z[3]), max(z[0], z[2]), max(z[1], z[3]))
             mid = ((z[0] + z[2]) / 2, (z[1] + z[3]) / 2)
-            if RS._room_at(lay, level, *mid):
+            if RS._room_at(lay, level, *mid) and (into is None or RS._room_at(lay, level, *mid) == into):
                 out.append({"door": "/".join(d.get("rooms") or []), "rect": z, "garden": bool(d.get("garden"))})
+    return out
+
+
+def _door_approaches(sp, lay, level):
+    """The floor a body must reach at every door, whatever its type: a strip 0.3 m deep and the door's width on
+    each side. Route nodes come from these, not from the swing zones, which a pocket door (no swing) or a door
+    swinging one way lacks on a side: the parents' cluster lost its entry node that way and started its route from
+    a piece of furniture."""
+    out = []
+    for d in sp["doors"]:
+        if d["level"] != level:
+            continue
+        w = d["width"]
+        axis = _door_axis(d)
+        for s_ in (-1, 1):
+            if axis == "h":
+                z = (d["x"] - w / 2, d["y"], d["x"] + w / 2, d["y"] + s_ * 0.3)
+            else:
+                z = (d["x"], d["y"] - w / 2, d["x"] + s_ * 0.3, d["y"] + w / 2)
+            z = (min(z[0], z[2]), min(z[1], z[3]), max(z[0], z[2]), max(z[1], z[3]))
+            if RS._room_at(lay, level, (z[0] + z[2]) / 2, (z[1] + z[3]) / 2):
+                out.append({"door": "/".join(d.get("rooms") or []), "rect": z})
     return out
 
 
@@ -334,11 +439,13 @@ def check(items=None, lay=None, _extended=False):
     by_level = collections.defaultdict(list)
     for it in items:
         by_level[it["level"]].append(it)
+    walls = {lv: _walls(sp, lv) for lv in ("B", "GF")}
     for it in items:
         fp = footprint(it)
         cl = _cluster(lay, it["room"])
         rects = [lay["rooms"][c]["rect"] for c in cl]
-        if not _inside(fp, rects):
+        cols = _columns() + walls[it["level"]]         # walls and columns alike are obstacles
+        if not _inside(fp, rects) or any(_ov(fp, w) for w in walls[it["level"]]):
             probs["inside_room"].append("%s leaves %s" % (it["id"], it["room"]))
         for c in cols:
             if _ov(fp, c):
@@ -377,6 +484,18 @@ def check(items=None, lay=None, _extended=False):
             for it in its:
                 if _ov(z["rect"], footprint(it)):
                     probs["doors"].append("%s blocks the door %s" % (it["id"], z["door"]))
+        wl = _walls(sp, lv)
+        for d in sp["doors"]:                       # an opening must not run into a wall across it (the dressing
+            if d["level"] != lv:                    # door at 22.10 ran 0.15 m into the south wall)
+                continue
+            h_ = _door_axis(d) == "h"
+            o = (d["x"] - d["width"] / 2, d["y"] - 0.01, d["x"] + d["width"] / 2, d["y"] + 0.01) if h_ else \
+                (d["x"] - 0.01, d["y"] - d["width"] / 2, d["x"] + 0.01, d["y"] + d["width"] / 2)
+            for q in wl:
+                if _ov(o, q):
+                    lost = (min(o[2], q[2]) - max(o[0], q[0])) if h_ else (min(o[3], q[3]) - max(o[1], q[1]))
+                    probs["doors"].append("door %s runs %d mm into a wall" % ("/".join(d.get("rooms") or []),
+                                                                            round(lost * 1000)))
         for w in sp["windows"]:
             if w["level"] != lv:
                 continue
@@ -478,13 +597,38 @@ def _middle(rect):
     return (x0, y0 + t, x1, y1 - t)
 
 
+def _outside(rects, margin):
+    """The part of the rooms' bounding box (grown by margin) not covered by the rooms, as rectangles: the rooms'
+    edges cut the box into a grid; uncovered cells are merged along y within each column."""
+    x0 = min(q[0] for q in rects) - margin; y0 = min(q[1] for q in rects) - margin
+    x1 = max(q[2] for q in rects) + margin; y1 = max(q[3] for q in rects) + margin
+    xs = sorted({x0, x1} | {q[0] for q in rects} | {q[2] for q in rects})
+    ys = sorted({y0, y1} | {q[1] for q in rects} | {q[3] for q in rects})
+    out = []
+    for xa, xb in zip(xs, xs[1:]):
+        run = None
+        for ya, yb in zip(ys, ys[1:]):
+            mx, my = (xa + xb) / 2, (ya + yb) / 2
+            cov = any(q[0] <= mx <= q[2] and q[1] <= my <= q[3] for q in rects)
+            if not cov:
+                run = (run[0], yb) if run else (ya, yb)
+            elif run:
+                out.append((xa, run[0], xb, run[1])); run = None
+        if run:
+            out.append((xa, run[0], xb, run[1]))
+    return out
+
+
+TRACE = None   # set to {} to keep each cluster's raster
+
+
 def route_problems(lay, sp, items, level, cell=0.02):
     """In each open cluster of rooms, a 914 mm body (card mitton-path-of-travel-min) must get from every door of
     the cluster to every other door and to every piece's working side. Furniture over 0.3 m and the columns are
     obstacles; walls are the cluster's own edges. Returns [(problem, measured)]."""
     out = []
     done = set()
-    zones = _door_zones(sp, lay, level)
+    zones = _door_approaches(sp, lay, level)
     for rid, r in lay["rooms"].items():
         if r["level"] != level or rid in done:
             continue
@@ -499,29 +643,37 @@ def route_problems(lay, sp, items, level, cell=0.02):
         free = np.zeros((nx, ny), bool)
         for a, b, c, d in rects:                  # half-open, so a cell centred on a shared edge is not lost
             free |= (X >= a - 1e-9) & (X < c - 1e-9) & (Y >= b - 1e-9) & (Y < d - 1e-9)
-        obst = [footprint(it) for it in items if it["room"] in cl and it["h"] >= 0.3] + _columns()
+        walls_l = _walls(sp, level)
+        obst = [footprint(it) for it in items if it["room"] in cl and it["h"] >= 0.3] + _columns() + walls_l
         # not floor: the basement flight (you stand at its foot, not on it), the GF stair opening and any voids
         obst += [lay["rooms"][c]["rect"] for c in cl if lay["rooms"][c]["occupancy"] == "stair" and level == "B"]
         if level == "GF":
             obst += ([sp["gf_opening"]] if sp.get("gf_opening") else []) + sp.get("gf_voids", [])
         for a, b, c, d in obst:
             free &= ~((X > a) & (X < c) & (Y > b) & (Y < d))
-        k = max(1, int(np.ceil(BODY / cell - 1e-9)))   # never kinder than the card: the body rounds UP (0.92 m)
-        s = np.pad(np.cumsum(np.cumsum(free.astype(np.int32), 0), 1), ((1, 0), (1, 0)))
-        if k > min(nx, ny):
-            continue
-        win = s[k:, k:] - s[:-k, k:] - s[k:, :-k] + s[:-k, :-k]
-        ok = win == k * k
-        ax0, ay0 = gx[:ok.shape[0]] - cell / 2, gy[:ok.shape[1]] - cell / 2
-        AX, AY = np.meshgrid(ax0, ay0, indexing="ij")
-        body = k * cell
+        bedroom = all(lay["rooms"][c]["occupancy"] == "bedroom" for c in cl)
+        width = min(BODY, BEDROOM_ROUTE) if bedroom else BODY
+        # The body is a DISC of the path width: a path's width is measured across the direction of travel, so a
+        # disc is what a 914 mm path admits, on the straight and round a corner alike. (A square body of the same
+        # side, used before, failed corners the path itself turns: its corner sweeps outside the path width.)
+        # Clearance is the exact distance from a cell centre to each obstacle rectangle, and to the cluster's own
+        # edge (open joins to other clusters), which is the outside of its rooms cut into rectangles.
+        clear = np.full((nx, ny), np.inf)
+        for a, b, c, d in obst + _outside(rects, width):
+            if c < x0 - width or a > x1 + width or d < y0 - width or b > y1 + width:
+                continue
+            dx = np.maximum(np.maximum(a - X, X - c), 0.0)
+            dy = np.maximum(np.maximum(b - Y, Y - d), 0.0)
+            clear = np.minimum(clear, np.hypot(dx, dy))
+        ok = free & (clear >= width / 2 - 1e-9)
 
         def touching(rect):
             # a real overlap (up to 0.1 m each way), not a sliver: a body grazing a zone's edge is not in it
             ex = min(0.1, (rect[2] - rect[0]) / 2 - 1e-6)
             ey = min(0.1, (rect[3] - rect[1]) / 2 - 1e-6)
-            return ok & (AX < rect[2] - ex) & (AX + body > rect[0] + ex) & (AY < rect[3] - ey) & \
-                (AY + body > rect[1] + ey)
+            dx = np.maximum(np.maximum(rect[0] + ex - X, X - (rect[2] - ex)), 0.0)
+            dy = np.maximum(np.maximum(rect[1] + ey - Y, Y - (rect[3] - ey)), 0.0)
+            return ok & (np.hypot(dx, dy) < width / 2)
         nodes = []
         for z in zones:
             zc = ((z["rect"][0] + z["rect"][2]) / 2, (z["rect"][1] + z["rect"][3]) / 2)
@@ -537,22 +689,28 @@ def route_problems(lay, sp, items, level, cell=0.02):
                 else:
                     z = (a, c, b, c + 0.3) if abs(c - y1s) < 1e-6 else (a, c - 0.3, b, c)
                 nodes.append(("stair end of " + sid, [z]))
-        for it in items:                                 # the principal bedroom's windows (AD M Diagram 2.4 note 1)
-            if it["room"] in cl and it["type"] == "bed_king":
+        for rid in cl:                                   # the principal bedroom's windows (AD M Diagram 2.4 note 1)
+            if rid == PRINCIPAL_BEDROOM:                 # keyed on the room, not the bed type (a queen bed hid it)
                 for w in sp["windows"]:
-                    if w["level"] == level and w.get("room") == it["room"]:
+                    if w["level"] == level and w.get("room") == rid:
                         half = w["width"] / 2
                         ax_ = (w.get("span") or ["h"])[0]
-                        rr = lay["rooms"][it["room"]]["rect"]
+                        rr = lay["rooms"][rid]["rect"]
+                        # the strip starts at the wall's INNER face (a 0.2 m external wall swallowed a strip drawn
+                        # from its line)
+                        wr = next((q for q in walls_l if q[0] - 1e-6 <= w["x"] <= q[2] + 1e-6
+                                   and q[1] - 1e-6 <= w["y"] <= q[3] + 1e-6), None)
                         if ax_ == "h":
-                            y = w["y"]
-                            z = (w["x"] - half, y - 0.3, w["x"] + half, y) if abs(y - rr[3]) < 0.06 else \
+                            hi = abs(w["y"] - rr[3]) < 0.06
+                            y = (wr[1] if hi else wr[3]) if wr else w["y"]
+                            z = (w["x"] - half, y - 0.3, w["x"] + half, y) if hi else \
                                 (w["x"] - half, y, w["x"] + half, y + 0.3)
                         else:
-                            x = w["x"]
-                            z = (x - 0.3, w["y"] - half, x, w["y"] + half) if abs(x - rr[2]) < 0.06 else \
+                            hi = abs(w["x"] - rr[2]) < 0.06
+                            x = (wr[0] if hi else wr[2]) if wr else w["x"]
+                            z = (x - 0.3, w["y"] - half, x, w["y"] + half) if hi else \
                                 (x, w["y"] - half, x + 0.3, w["y"] + half)
-                        nodes.append(("window of " + it["room"], [_middle(z)]))
+                        nodes.append(("window of " + rid, [_middle(z)]))
         for it in items:
             if it["room"] not in cl:
                 continue
@@ -563,10 +721,13 @@ def route_problems(lay, sp, items, level, cell=0.02):
                 nodes.append((it["id"], [_middle(side_zone(it, sd, 0.3)) for sd in t.clearance_any[0]]))
             elif it["type"] in SEATS:                    # a seat facing a table is reached from its front or a side
                 nodes.append((it["id"], [_middle(side_zone(it, sd, 0.3)) for sd in ("front", "left", "right")]))
+            elif it["type"] == "coffee_table":          # a table among seats is reached from any side
+                nodes.append((it["id"], [_middle(side_zone(it, sd, 0.3)) for sd in SIDES]))
             elif t.clearance["front"] > 0:
                 nodes.append((it["id"], [_middle(side_zone(it, "front", 0.3))]))
         if len(nodes) < 2:
             continue
+        nodes.sort(key=lambda n: 0 if n[0].startswith("stair end") else 1)   # start at the stair where there is one
         seen = np.zeros(ok.shape, bool)
         start = touching(nodes[0][1][0])
         q = collections.deque(zip(*np.nonzero(start)))
@@ -578,8 +739,12 @@ def route_problems(lay, sp, items, level, cell=0.02):
                 if 0 <= a < ok.shape[0] and 0 <= b < ok.shape[1] and ok[a, b] and not seen[a, b]:
                     seen[a, b] = True
                     q.append((a, b))
+        if TRACE is not None:                            # for plotting a cluster when a route fails
+            TRACE["+".join(sorted(cl))] = dict(ok=ok, seen=seen, nodes=nodes, origin=(gx[0], gy[0]), cell=cell,
+                                               body=width, obst=obst)
         for name, rs_ in nodes[1:]:
             if not any((touching(rect) & seen).any() for rect in rs_):
-                out.append(("%s (%s): not reached by a 914 mm path from %s" % (name, "+".join(sorted(cl)),
-                                                                                  nodes[0][0]), {}))
+                out.append(("%s (%s): not reached by a %d mm path from %s" % (name, "+".join(sorted(cl)),
+                                                                                 round(width * 1000), nodes[0][0]),
+                            {}))
     return out

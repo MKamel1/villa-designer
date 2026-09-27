@@ -542,3 +542,37 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   basement flight, the GF opening and voids are not floor; a node needs up to 0.1 m of real overlap
   (`test_stair_foot_must_stay_reachable`, `test_principal_bedroom_window_must_stay_reachable`). The dining table
   is also checked extended to 2.8 m (`extended_table`).
+
+## Re-furnishing D1 for the questionnaire and the bigger dressing (2026-09-27)
+
+- **Furniture was placed against room outlines, i.e. inside the walls.** Room rects run to wall centre lines (or
+  the outer face on the envelope), so pieces "against a wall" sat 50-200 mm inside it and every check passed.
+  Guards: `clear_rect` for authoring; the checks take the spec's real walls (`_walls`, cut at doors) as obstacles
+  (inside_room fails a piece overlapping a wall).
+- **Pinned doors were re-centred.** `_clear_columns` moved a door placed with `door_at`; pinned doors now move only
+  if they hit a column. The critic's `min_area` fix overwrote `w`/`d` (min_width read 1.0); now `a_net`.
+- **A door can run into the wall across it.** The bedroom->dressing door at x 22.10 ran 153 mm into the 0.2 m
+  south wall (clear 0.75 m), and `_walls` cut *every* wall at a door gap, perpendicular ones too, so the clash was
+  also invisible to the route raster. The new guard then found three more: the ensuite door 26 mm into its wall,
+  the deck slider 25 mm into the study partition (centred between column faces, but the partition stands 50 mm
+  proud), and a false one, because a door with no `span` defaulted to "h" (the cinema door was never cut from its
+  wall). Guards: the doors check measures each opening against the walls (`test_a_door_running_into_a_wall_is_caught`,
+  proven at 153 mm on the real position); `_door_axis`; walls cut only parallel to a door
+  (`test_a_door_without_a_span_is_cut_from_its_own_wall`). Fixed: DRESSING_DOOR_X 21.847, ENSUITE_DOOR_X 21.65,
+  STUDY_DOOR to the partition face.
+- **The principal-bedroom window guard switched itself off.** It keyed on `bed_king`; the client's queen bed is
+  `bed_double`, so no window node existed and the check passed silently. Now keyed on the room (PRINCIPAL_BEDROOM);
+  `test_the_window_guard_follows_the_room_not_the_bed_type`. Its strip also started on the wall's line: a 0.2 m
+  external wall swallowed it; it now starts at the inner face.
+- **A pocket door gave no route node.** Route nodes came from swing zones, and a pocket door has none, so the
+  parents' cluster started its route at a piece of furniture and never checked the way in. Nodes now come from
+  approach strips at every door (`_door_approaches`); `test_the_parents_entry_must_stay_passable`. This exposed
+  real pinches, fixed in the design: the queen bed's foot had exactly 0.750 m (PARENTS_BED_DEPTH 3.00 -> 3.05:
+  0.80 m), kids B's bed corner to wardrobe corner 0.75 m (bed 0.1 m north), the ensuite approach 0.82 m (rail
+  0.1 m shorter), the lounge sofa end to the pantry (sofa 0.12 m east: 1.10 m).
+- **The square body failed corners the path turns.** Supersedes "body rounded UP" above: the body is now a DISC of
+  the path width with exact distances to obstacles (no grid rounding at all). A path's width is measured across
+  the direction of travel; a square of the same side sweeps outside that width at a turn (the dressing: rail end
+  and column 1.24 m apart on the diagonal, legs 1.05/0.94 m, refused). Negative kept:
+  `test_the_body_turns_a_corner_the_path_turns` refuses a straight 0.90 m aisle; all earlier negatives still fail.
+- Messages now state the width checked (750 in bedrooms, card ukadm-bedroom-route-750; 914 elsewhere).

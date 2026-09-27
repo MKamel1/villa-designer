@@ -350,12 +350,11 @@ def critique(lay):
             "bathroom" if occ in ("bathroom", "ensuite") else "wc" if occ == "wc" else None
         if key and key in cat.MIN_AREA_M2 and not r.get("part_of"):   # an alcove counts with its room
             need = cat.MIN_AREA_M2[key][0]
-            if any(v.get("part_of") == rid for v in rooms.values()):
-                w, d = 1.0, w * d + sum(area(v["rect"]) for v in rooms.values() if v.get("part_of") == rid)
-            if w * d < need:
+            a_net = w * d + sum(area(v["rect"]) for v in rooms.values() if v.get("part_of") == rid)
+            if a_net < need:
                 (warn if key in ("bathroom", "wc") else small).append(
-                    {"room": rid, "achieved_m2": round(w * d, 1), "required_m2": need})
-        if occ == "bedroom":
+                    {"room": rid, "achieved_m2": round(a_net, 1), "required_m2": need})
+        if occ == "bedroom" and not r.get("part_of"):
             wk = "bedroom_first" if r.get("first") else "bedroom"
             need = cat.ROOM_MIN_WIDTH[wk][0] / 1000
             if min(w, d) < need:

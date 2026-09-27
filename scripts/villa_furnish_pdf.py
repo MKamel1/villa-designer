@@ -20,27 +20,33 @@ FILL = {"living": "#f4ead8", "dining": "#f2e3c6", "kitchen": "#efdcc6", "media":
         "bathroom": "#e0ecf3", "ensuite": "#e0ecf3", "utility": "#e3ece0", "store": "#ececec", "stair": "#e4e4e4",
         "bedroom": "#ebe3f1", "study": "#f4ead8", "dressing": "#ebe3f1"}
 DECISIONS = [
-    ("Cinema seats", "Two recliners and a 1.19 m aisle. Three recliners fill the 2.99 m room and close the only way "
-                     "to the store under the ramp. For three, the store needs its own door from the north patio "
-                     "(through the kept 1.40 m yard wall)."),
-    ("Family bathroom basin", "One basin. A double basin does not fit beside the WC and the walk-in shower with "
-                              "their AD M access zones in 2.15 x 2.53 m."),
-    ("Shared kids room (A)", "Two single beds, one desk and one 1.2 m wardrobe. A second desk and wardrobe do not "
-                             "fit with a 750 mm zone beside each bed; a bunk bed would free the floor for both."),
-    ("Parents' dressing", "The dressing room is 1.30 m deep: a 600 mm hanging wardrobe needs 914 mm in front of it "
-                          "(1.51 m in all). Drawn with 350 mm open shelving. Hanging needs a choice: take 0.21 m from the "
-                          "ensuite behind it (2.64 -> 2.43 m deep), or keep shelving only. The bedroom side cannot give it: "
-                          "the king bed's 750 mm zone leaves 0.11 m."),
-    ("Parents' door", "A pocket sliding door: a swinging door would hit the bedside table and the bed's 750 mm zone."),
-    ("Garden living", "Tightest path in the basement: 0.92 m, beside the armchair near the east garden door "
-                      "(914 mm needed)."),
-    ("Changed from the questionnaire's first suggestions", "Updated on the questionnaire so you choose between options "
-     "that fit: cinema 4 recliners -> 2; family bathroom double basin -> one; a desk per child -> one per bedroom (the "
-     "study has the shared desk); lounge 6 seats -> 5; no bench at the parents' bed foot (it sits in the AD M foot "
-     "zone); no pantry column in the tall wall (the front pantry holds 3.3 m of shelving); island hob 80 -> 90 cm."),
-    ("Not furnished yet", "Garden terrace, BBQ, north patio and the deck (outdoor pieces follow your questionnaire "
-                          "answers). Dimensions: piece sizes are in the schedule; the checks page lists the measured "
-                          "clearances."),
+    ("Parents' dressing (your request)", "3.07 m of 600 mm hanging (was 0 m, shelving only): 1.72 m on the bedroom "
+     "wall and 1.35 m on the ensuite wall, with a 0.94 m aisle between (914 needed). Space came from both sides: "
+     "the bedroom gives its old dressing wall (the queen bed turned, head on a new wall 3.05 m from the east face) and "
+     "the ensuite gives 0.21 m."),
+    ("Parents' bedroom", "Queen 160 x 200 with 0.80 m at its foot and 1.05 m on the entry side (750 needed); one "
+     "bedside table (the entry side has a wall shelf so the way in stays clear); vanity under the garden window. "
+     "Entered through a short lobby with a pocket door; the dressing door opens into the dressing."),
+    ("Parents' ensuite (WC on the south wall)", "WC on the south (garden) wall as you asked; a 1.70 m bath with a "
+     "shower over it; one basin. A separate shower and a double basin do not both fit in 2.32 x 2.18 m clear once "
+     "the ensuite gave 0.21 m to the dressing."),
+    ("Family bathroom", "Walk-in shower 1.63 m, WC and a compact 430 mm basin. A bath as well does not fit "
+     "(2.15 x 2.53 m clear)."),
+    ("Shared kids room (A)", "Bunk bed, two 1.1 m desks under the window (a desk for every child, with kids B's), "
+     "one 1.5 m wardrobe. A second wardrobe does not fit; corridor storage is the option if needed."),
+    ("Kids room B", "120 cm bed, desk, and a 1.18 m wardrobe (1.5 m asked: the door swing "
+     "leaves 1.18 m of that wall)."),
+    ("Cinema", "Loveseat for 2 + floor cushions, 85 in screen (your answers)."),
+    ("Pantry", "1.0 m deep clear, so shelving goes on the two end walls only (914 mm kept in front)."),
+    ("Kitchen", "Tall wall: fridge-freezer, oven + combi; sink run with the dishwasher; 3.05 m island with the 90 cm "
+     "hob and 5 stools facing the tall wall with 1.31 m behind them. Heavy cooking in the dirty kitchen (60 cm gas "
+     "hob + washer, folding counter)."),
+    ("Gatherings of 20", "The dining table seats 6, 10 extended (2.8 m, checked). 20 guests need a second table, "
+     "e.g. in the garden living, set up for the occasion."),
+    ("Design changes this round", "Bedroom->dressing door moved 0.25 m west (it ran 153 mm into the south wall); "
+     "ensuite door 0.10 m west (26 mm into its wall); deck slider centred on its real 1.80 m clear; kids B bed "
+     "0.1 m north; lounge sofa 0.12 m east (1.10 m past its end to the pantry)."),
+    ("Not furnished yet", "Garden terrace (lounge seating), north patio. The deck stays clear for the car."),
 ]
 
 
@@ -149,12 +155,12 @@ def main():
         ax = fig.add_axes([0.02, 0.45, 0.96, 0.48]); ax.axis("off")
         NAMES = {"inside_room": "every piece inside its room", "columns": "no piece on a kept column",
                  "overlap": "no two pieces overlap", "clearances": "clearance zones clear (AD M beds, TSS storage "
-                 "and dining, Mitton sofa/desk, NKBA aisles and seating)", "doors": "door swings clear",
+                 "and dining, Mitton sofa/desk, NKBA aisles and seating)", "doors": "door swings clear; no door runs into a wall",
                  "windows": "no tall piece in front of glazing", "kitchen": "NKBA landing areas, dishwasher to sink",
                  "viewing": "TV / cinema viewing distance 1.0-1.5 x screen (Mitton); eye 0.45 m behind the seat "
                             "front is ASSUMED",
-                 "routes": "914 mm path from every door, stair end and the parents' window to every piece's working "
-                           "side (Mitton; AD M Diagram 2.4)",
+                 "routes": "914 mm path (750 in bedrooms, AD M 2.25a) from every door, stair end and the parents' "
+                           "windows to every piece's working side (Mitton; AD M Diagram 2.4)",
                  "extended_table": "all the above re-run with the dining table extended to 2.8 m (for 10)"}
         crow = []
         for k, v in res.items():
@@ -164,13 +170,16 @@ def main():
         t = ax.table(cellText=crow, colLabels=["", "check", "result"], colWidths=[0.05, 0.3, 0.65], loc="upper center",
                      cellLoc="left")
         t.auto_set_font_size(False); t.set_fontsize(7); t.scale(1, 2.3)
-        ax2 = fig.add_axes([0.02, 0.02, 0.96, 0.4]); ax2.axis("off")
+        fig.suptitle("D1 furnished: checks. Cards read on the held originals; DIAGNOSTIC (no held card): the 914 mm "
+                     "in front of the washer/dryer and folding counter, 600 mm at the stores, the recliner envelope",
+                     fontsize=10)
+        pdf.savefig(fig); plt.close(fig)
+        fig = plt.figure(figsize=(16.5, 11.7))
+        ax2 = fig.add_axes([0.02, 0.02, 0.96, 0.9]); ax2.axis("off")
         t2 = ax2.table(cellText=[[a, textwrap.fill(b, 140)] for a, b in DECISIONS], colLabels=["decision / note", ""],
                        colWidths=[0.16, 0.84], loc="upper center", cellLoc="left")
         t2.auto_set_font_size(False); t2.set_fontsize(7.5); t2.scale(1, 2.6)
-        fig.suptitle("D1 furnished: checks and what the layout needs from you. Cards read on the held originals; "
-                     "DIAGNOSTIC (no held card): the 914 mm in front of the washer/dryer and folding counter, 600 mm "
-                     "at the stores, the recliner envelope", fontsize=10)
+        fig.suptitle("D1 furnished: what changed and what the layout needs from you", fontsize=11)
         pdf.savefig(fig); plt.close(fig)
     print(path, {k: v["status"] for k, v in res.items()})
     return 0

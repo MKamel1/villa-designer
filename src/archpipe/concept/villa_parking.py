@@ -45,8 +45,12 @@ TURN_CLEAR = 1.0           # void edge to kids A's wall: 0.9 m hall (card ukadm-
 KIDS_W = 3.36              # each kids bedroom's width (net area >= 11.5 m2, card ndss-double-bedroom-area)
 GUEST_WC_END = 11.2        # guest WC under the deck, from the deck start (x 9.227: 1.97 m wide)
 BATH_W = 2.25              # family bath beside the stair (client r9): 2.15 m clear inside (card mh-bathroom-m42-4.30)
-DIRTY_KITCHEN_L = 3.8    # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)
-STUDY_DOOR = (7.377, 9.227)                             # between the east-face column faces: 1.85 m clear
+PARENTS_BED_DEPTH = 3.05   # 0.80 m clear at the queen bed foot (3.00 left exactly 0.750, no margin for finishes); parents bedroom from the east face: 11.5 m2 net with its entry (NDSS), queen bed + zones
+DRESSING_DOOR_X = 21.847   # bedroom -> dressing door: its east jamb 0.10 m off the south wall's inner face (22.397); at 22.10 it ran 0.15 m into that wall
+ENSUITE_DOOR_X = 21.65     # dressing -> ensuite door near the garden end; east jamb 74 mm off the ensuite wall face (22.124) - at 21.75 it ran 26 mm into it
+ENSUITE_GIVES = 0.21       # client questionnaire: the ensuite gets 0.21 m shorter for the dressing room
+DIRTY_KITCHEN_L = 3.8   # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)
+STUDY_DOOR = (7.377, 9.177)                             # column face to the study partition's face (the 0.1 m partition on 9.227 stands 50 mm proud of the column): 1.80 m clear
 STUDY_DOOR_W = 1.80
 
 
@@ -280,9 +284,37 @@ def _gf_straight(bath_north=True):
         rooms[rid]["rect"] = [a, r[1], b, r[3]]
     rooms["gallery-end"] = _room("gallery-end", "GF", (round(xv, 3), YC, xk, y0), "corridor",
                                  "gallery (round the stair void to the bedrooms)")
+    if bath_north:
+        # client r12 (furnishing): the dressing room was 1.30 m deep, too shallow for hanging clothes. The (queen) bed
+        # turns so its head is on a new wall 2.85 m from the east face: the bedroom keeps its AD M zones, and the
+        # dressing room gets 2.23 m, enough for a hanging wardrobe on both long walls (0.6 + 0.914 + 0.6). The
+        # corridor door opens into a small entry (part of the bedroom); the dressing and ensuite doors are at the
+        # garden end, clear of the bed.
+        py = round(YE - PARENTS_BED_DEPTH, 3)
+        bx0 = rooms["parents-bed"]["rect"][0]
+        dx0 = rooms["parents-dressing"]["rect"][0]
+        ex0, ey0, ex1, ey1 = rooms["parents-ensuite"]["rect"]
+        rooms["parents-bed"]["rect"] = [bx0, py, XR, YE]
+        rooms["parents-bed"]["first"] = False          # NDSS's one 2.75 m double/twin is kids A (3.4 m net)
+        rooms["kids-a"]["first"] = True
+        rooms["parents-entry"] = _room("parents-entry", "GF", (bx0, YC, dx0, py), "bedroom",
+                                       "parents' bedroom (entry)", part_of="parents-bed", suite=True)
+        rooms["parents-dressing"]["rect"] = [dx0, YP, XR, py]
+        rooms["parents-dressing"]["door_at"] = {"parents-bed": DRESSING_DOOR_X}
+        rooms["parents-dressing"]["name"] = "dressing (hanging both sides)"
+        # client questionnaire: "deepen the dressing room by 0.21 m (the ensuite gets 0.21 m shorter)"
+        rooms["parents-dressing-ext"] = _room("parents-dressing-ext", "GF", (ex0, round(ey1 - ENSUITE_GIVES, 3), ex1, ey1),
+                                              "dressing", "dressing (taken from the ensuite)",
+                                              part_of="parents-dressing", suite=True,
+                                              door_at={"parents-ensuite": ENSUITE_DOOR_X})
+        rooms["parents-ensuite"]["rect"] = [ex0, ey0, ex1, round(ey1 - ENSUITE_GIVES, 3)]
     links = [l for l in base["links"] if base["rooms"][l[0]]["level"] == "GF"] + [("stair-gf", "gallery-end")]
     if bath_north:                                    # the bath opens off the gallery at the stair top
         links = [l for l in links if "family-bath" not in l] + [("gallery-end", "family-bath")]
+        links = [l for l in links if tuple(l) not in (("corridor", "parents-bed"),
+                                                      ("parents-dressing", "parents-ensuite"))] + [
+            ("corridor", "parents-entry"), ("parents-entry", "parents-bed"),
+            ("parents-dressing", "parents-dressing-ext"), ("parents-dressing-ext", "parents-ensuite")]
     entries = [e for e in base["entries"] if e[1] == "GF"]
     return list(rooms.values()), links, entries
 

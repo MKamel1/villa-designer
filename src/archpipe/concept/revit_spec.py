@@ -163,7 +163,10 @@ def _kind(lay, seg):
     a, b = seg["rooms"]
     if a is None or b is None:
         return "ext"
-    return "sep" if is_open(lay["rooms"][a]) and is_open(lay["rooms"][b]) else "int"
+    ra, rb = lay["rooms"][a], lay["rooms"][b]
+    if ra.get("part_of") == b or rb.get("part_of") == a:          # a room and its alcove: one room, no wall
+        return "sep"
+    return "sep" if is_open(ra) and is_open(rb) else "int"
 
 
 def _merge(segs):
@@ -201,19 +204,25 @@ def build(lay):
             ra, rb = lay["rooms"][a], lay["rooms"][b]
             if ra["level"] != lv or rb["level"] != lv:
                 continue
-            if is_open(ra) and is_open(rb):
-                continue                         # open plan: no door
+            if (is_open(ra) and is_open(rb)) or ra.get("part_of") == b or rb.get("part_of") == a:
+                continue                         # open plan (or a room and its alcove): no door
             best = max(((V.overlap_len(e1, e2), e1, e2) for e1 in V.edges(ra["rect"]) for e2 in V.edges(rb["rect"])),
                        key=lambda q: q[0])
             L_, e1, e2 = best
             lo, hi = max(e1[2], e2[2]), min(e1[3], e2[3])
             mid = (lo + hi) / 2
+            pinned = (ra.get("door_at") or {}).get(b, (rb.get("door_at") or {}).get(a))
+            if pinned is not None and lo + 0.45 <= pinned <= hi - 0.45:   # a door the layout places (furnishing)
+                mid = pinned
+            else:
+                pinned = None
             if {ra["occupancy"], rb["occupancy"]} & {"wc", "bathroom", "ensuite", "store", "utility"}:
                 w_ = 0.8
             else:
                 w_ = 0.9
             spec["doors"].append({"level": lv, "x": mid if e1[0] == "h" else e1[1], "y": e1[1] if e1[0] == "h" else mid,
-                                  "width": w_, "rooms": [a, b], "span": [e1[0], e1[1], lo, hi]})
+                                  "width": w_, "rooms": [a, b], "span": [e1[0], e1[1], lo, hi],
+                                  **({"pinned": True} if pinned is not None else {})})
         for rid, l2, seg in lay["entries"]:
             if l2 != lv:
                 continue
@@ -350,6 +359,10 @@ def _clear_columns(spec):
         blocks = [bl for (a, cc), spans in cols.items() if a == ax and abs(cc - c) < 0.06 for bl in spans]
         blocks += [tuple(d["fixed_span"]) for d in fixed if d["level"] == o["level"] and d["fixed_span_face"] == [ax, c]]
         is_door = o in spec["doors"] and not o.get("garden")
+        if o.get("pinned"):                            # placed by the layout: keep it unless it hits a column
+            p = o["x"] if ax == "h" else o["y"]
+            if not any(s0 - 0.05 < p + o["width"] / 2 and p - o["width"] / 2 < s1 + 0.05 for s0, s1 in blocks):
+                continue
         runs = _free_runs(lo, hi, blocks, margin=0.05 if is_door else 0.1)
         min_w = 1.2 if o.get("garden") else 0.6
         if not runs:

@@ -8,6 +8,7 @@ from archpipe import sources as src
 
 # card -> (held file, 0-based page index, text that must be on that page)
 ORIGINAL = {
+    'ukadm-bedroom-route-750': ('uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf', 25, ['clear access route a minimum 750mm wide from the doorway']),
     'nkba-seating-walk-past-1118': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 28, ['allow at least 44″ (1118 mm) to walk past']),
     'nkba-seating-edge-past-914': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 28, ['allow at least 36″ (914 mm) to edge past']),
     'ukadm-bedside-zone-a-600': ('uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf', 26, ['Bedside furniture permitted', '600mm']),
