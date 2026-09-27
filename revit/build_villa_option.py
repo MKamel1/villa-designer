@@ -399,13 +399,13 @@ def build_option(app, model, spec, folder):
                 s.Name = "CAR %d (4.6 x 1.8 m envelope)" % (i + 1)
             except Exception as exc:
                 rb["failed"].append({"car": i, "error": str(exc)})
-    op = spec["gf_opening"]
+    ops = ([spec["gf_opening"]] if spec["gf_opening"] else []) + spec.get("gf_voids", [])
     gf_floor = None
     for fl in FilteredElementCollector(doc).OfClass(Floor):
         p = fl.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)
         if p is not None and p.AsString() == "ENV slab-GF":
             gf_floor = fl
-    if op and gf_floor is not None:
+    for k, op in enumerate(ops if gf_floor is not None else []):
         ca = CurveArray()
         z = lv[spec["levels"]["GF"]].Elevation
         pts = [XYZ(ft(op[0]), ft(op[1]), z), XYZ(ft(op[2]), ft(op[1]), z), XYZ(ft(op[2]), ft(op[3]), z),
@@ -414,7 +414,7 @@ def build_option(app, model, spec, folder):
             ca.Append(Line.CreateBound(pts[i], pts[(i + 1) % 4]))
         try:
             o = doc.Create.NewOpening(gf_floor, ca, True)
-            rb["built"]["gf_opening_id"] = int(str(o.Id))
+            rb["built"]["gf_opening_id" if k == 0 else "gf_void_%d_id" % k] = int(str(o.Id))
         except Exception as exc:
             rb["failed"].append({"opening": op, "error": str(exc)})
     t.Commit()

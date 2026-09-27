@@ -24,8 +24,11 @@ from archpipe.concept import villa_options as VO                      # noqa: E4
 from archpipe.concept import villa_parking as P                       # noqa: E402
 
 OUT = Path("out/villa/daylight")
-DF_JOB, LUX_JOB = OUT / "villa-df-r10", OUT / "villa-lux-r10"
-OPTIONS = ["S1", "S5", "P3", "P4"] + list(VD.VARIANTS)
+R11 = "r11" in sys.argv
+DF_JOB, LUX_JOB = (OUT / "villa-df-r11", OUT / "villa-lux-r11") if R11 else (OUT / "villa-df-r10", OUT / "villa-lux-r10")
+CASES = {(l["id"] if not v or l.get("daylight_variant") == v else v["_case"]): (l, v) for l, v in VD.round_cases(R11)}
+OPTIONS = list(CASES)
+SUMMARY = OUT / ("summary-r11.json" if R11 else "summary.json")
 
 
 def pull_annual():
@@ -41,8 +44,7 @@ def main():
     lux = json.loads((LUX_JOB / "report.json").read_text(encoding="utf-8"))
     df = json.loads((DF_JOB / "report.json").read_text(encoding="utf-8"))
     views = json.loads((OUT / "views" / "stats.json").read_text(encoding="utf-8"))
-    lays = {l["id"]: (l, None) for l in [VO.s1(), VO.s5()] + P.options()}
-    lays.update(VD.variant_layouts())
+    lays = CASES
     bench = {k: V._card(k)[0] for k in ("sll-min-adf-bedroom", "sll-min-adf-living", "sll-min-adf-kitchen",
                                         "ies-udi-useful-min", "ies-udi-useful-max", "ies-sda-illuminance",
                                         "ies-sda-area-acceptable")}
@@ -86,14 +88,15 @@ def main():
                     rooms[rid]["udi_useful"] = round(100 * statistics.mean(s[5][2] for s in ss))
                     rooms[rid]["udi_gt2000"] = round(100 * statistics.mean(s[5][3] for s in ss))
                     rooms[rid]["annual_mean_lux"] = round(statistics.mean(s[5][4] for s in ss))
-        title = lay["title"] + (" | variant: " + ", ".join("%s=%s" % kv for kv in sorted(var.items())) if var else "")
+        title = lay["title"] + (" | variant: " + ", ".join("%s=%s" % kv for kv in sorted(var.items())
+                                                             if not kv[0].startswith("_")) if var else "")
         data["options"][opt] = {"title": title, "variant": var or {}, "rooms": rooms, "df_points": dfp,
                                 "lux_sensors": [[s[1], s[2], s[3]] + s[4] + [round(s[5][0] * 100)] for s in sens]}
-    (OUT / "summary.json").write_text(json.dumps(data), encoding="utf-8")
-    print(OUT / "summary.json", round((OUT / "summary.json").stat().st_size / 1e6, 2), "MB")
+    SUMMARY.write_text(json.dumps(data), encoding="utf-8")
+    print(SUMMARY, round(SUMMARY.stat().st_size / 1e6, 2), "MB")
     for opt in OPTIONS:
         rs = data["options"][opt]["rooms"]
-        keep = [k for k in ("lounge", "flex", "hall-b", "media", "kitchen", "kitchen-island", "dining", "dining-spine",
+        keep = [k for k in ("lounge", "flex", "family", "media", "kitchen", "kitchen-island", "dining", "sitting", "dining-spine",
                             "living") if k in rs]
         print(opt, " | ".join("%s DF %.2f sDA %s%% UDI %s/%s/%s noon-Mar %s lx" % (
             k, rs[k].get("df", 0), rs[k].get("sda300"), rs[k].get("udi_lt100"), rs[k].get("udi_useful"),

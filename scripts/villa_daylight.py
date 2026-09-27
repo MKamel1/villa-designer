@@ -24,7 +24,8 @@ from archpipe.concept import villa_daylight as VD                    # noqa: E40
 from archpipe.concept import villa_options as VO                     # noqa: E402
 from archpipe.concept import villa_parking as P                      # noqa: E402
 
-JOB = "villa-df-r10"           # r10: straight stair only (P3-P5), headroom-sized slab opening, open study, variants
+R11 = "r11" in sys.argv
+JOB = "villa-df-r11" if R11 else "villa-df-r10"           # r10: straight stair only (P3-P5), headroom-sized slab opening, open study, variants
 LOCAL = Path("out/villa/daylight") / JOB
 REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 
@@ -32,10 +33,8 @@ REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 def cases():
     val, expect = D.validation_cases()
     out = dict(val)
-    for lay in [VO.s1(), VO.s5()] + P.options():
-        out[lay["id"]] = VD.scene(lay)
-    for case, (lay, v) in VD.variant_layouts().items():
-        out[case] = VD.scene(lay, v)
+    for lay, v in VD.round_cases(R11):
+        out[lay["id"] if not v or lay.get("daylight_variant") == v else v["_case"]] = VD.scene(lay, v)
     return out, expect
 
 
@@ -78,7 +77,7 @@ def fetch(host=DEFAULT_HOST):
     return 0 if val["all_pass"] else 1
 
 
-VIEW_JOB = "villa-views-r10"
+VIEW_JOB = "villa-views-r11" if R11 else "villa-views-r10"
 VIEW_VARIANTS = ["P3-open", "P3-slot", "P3-combo", "P4-slot", "P4-combo"]   # rendered besides the options
 EYE = -3.0 + 1.6                                   # basement FFL (model) + standing eye height
 VIEWS = {                                          # the same four spots in every option (checked clear of walls)
@@ -93,20 +92,17 @@ VIEW_NOTES = {"S1_1-hall-to-garden": "in S1 this spot faces a partition 1 m away
 
 def render(host=DEFAULT_HOST):
     """Eye-level basement renders of every option under the same overcast sky (no daylight-factor points)."""
-    job = VIEW_JOB + ("-" + "-".join(sys.argv[2:]) if sys.argv[2:] else "")
+    job = VIEW_JOB + ("-" + "-".join(a for a in sys.argv[2:] if a != "r11") if [a for a in sys.argv[2:] if a != "r11"] else "")
     local, remote = LOCAL.parent / job, f"$HOME/archpipe/daylight/{job}"
     if local.exists():
         shutil.rmtree(local)
     cs = {}
-    for lay in [VO.s1(), VO.s5()] + P.options():
-        sc = VD.scene(lay)
-        sc.rooms = []
-        cs[lay["id"]] = sc
-    vl = VD.variant_layouts()
-    for case in VIEW_VARIANTS:
-        sc = VD.scene(*vl[case])
-        sc.rooms = []
-        cs[case] = sc
+    for lay, v in VD.round_cases(R11):
+        case = lay["id"] if not v or lay.get("daylight_variant") == v else v["_case"]
+        if R11 or case in [l["id"] for l in [VO.s1(), VO.s5()] + P.options()] + VIEW_VARIANTS:
+            sc = VD.scene(lay, v)
+            sc.rooms = []
+            cs[case] = sc
     only = [v for v in VIEWS if v in sys.argv[2:]] or list(VIEWS)     # render: all views, or those named
     tgz = D.write_job(cs, local, views={c: {v: VIEWS[v] for v in only} for c in cs})
     res = _ssh(host, f'rm -rf "{remote}" && mkdir -p "{remote}" && tar xzf - -C "{remote}"',
@@ -122,7 +118,7 @@ def fetch_views(host=DEFAULT_HOST):
     """Pull the renders; write a fixed-exposure PNG and a false-colour luminance PNG for each."""
     import numpy as np
     from PIL import Image
-    job = VIEW_JOB + ("-" + "-".join(sys.argv[2:]) if sys.argv[2:] else "")
+    job = VIEW_JOB + ("-" + "-".join(a for a in sys.argv[2:] if a != "r11") if [a for a in sys.argv[2:] if a != "r11"] else "")
     local, remote = LOCAL.parent / job, f"$HOME/archpipe/daylight/{job}"
     st = _ssh(host, f'cd "{remote}" && ls DONE 2>/dev/null; tail -2 progress.txt 2>/dev/null')
     if "DONE" not in st.stdout.decode():

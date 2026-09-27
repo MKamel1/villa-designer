@@ -96,6 +96,19 @@ MITIGATION_BAR = {                     # registered 2026-09-26, before any varia
 }
 
 
+def round_cases(r11=False):
+    """[(layout, variant)] for a daylight run. Round 10: S1, S5, P3, P4 as specified + the mitigation variants.
+    Round 11: P3 as specified (the reference) and the four designs with their own practical variant (white
+    finishes; the floor-to-beam glazing is in the layout)."""
+    from . import villa_options as VO
+    from . import villa_parking as P
+    if r11:
+        from . import villa_r11 as R
+        return [(P.option("straight", 1), None)] + [(l, l["daylight_variant"]) for l in R.designs()]
+    out = [(l, None) for l in [VO.s1(), VO.s5()] + P.options()]
+    return out + [(lay, dict(v, _case=case)) for case, (lay, v) in variant_layouts().items()]
+
+
 def variant_layouts():
     """{case: (layout, variant)} for the mitigation study."""
     from . import villa_parking as P
@@ -183,8 +196,9 @@ def scene(lay, variant=None) -> D.Scene:
         z = ENV_LEVEL_Z[sl["level"]]
         poly = _m(sl["pts"])
         holes = []
-        if sl["id"] == "slab-GF" and op:
-            holes = [[(op[0], op[1]), (op[2], op[1]), (op[2], op[3]), (op[0], op[3])]]
+        if sl["id"] == "slab-GF":
+            holes = [[(o[0], o[1]), (o[2], o[1]), (o[2], o[3]), (o[0], o[3])]
+                     for o in ([op] if op else []) + sp.get("gf_voids", [])]
         top = "ground" if sl["id"].startswith("yard") else "floor"
         s.add(D.prism_z(poly, z - SLAB_T, z, top, "ceiling", "wall", holes=holes))
     for rect in (V.FRONT_SHARE, V.REAR_SHARE):              # the GF-level ceiling over our basement core shares

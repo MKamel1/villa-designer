@@ -25,7 +25,8 @@ from archpipe.concept import villa_daylight as VD                     # noqa: E4
 from archpipe.concept import villa_options as VO                      # noqa: E402
 from archpipe.concept import villa_parking as P                       # noqa: E402
 
-JOB = "villa-lux-r10"           # r10: straight stair only (P3-P5), headroom-sized slab opening, open study, variants
+R11 = "r11" in sys.argv
+JOB = "villa-lux-r11" if R11 else "villa-lux-r10"           # r10: straight stair only (P3-P5), headroom-sized slab opening, open study, variants
 LOCAL = Path("out/villa/daylight") / JOB
 REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 EPW = Path(r"C:/Users/mmbka/archpipe-sources/cairo-epw/EGY_QH_Cairo.Intl.AP.623660_TMYx.2011-2025.zip")
@@ -57,12 +58,9 @@ def cases():
     box = val["v-box"]
     cs["v-box"] = (box, [{"id": "room", "h": 0.85, "x": x, "y": y, "z": z, "n": (0, 0, 1)}
                          for r in box.rooms for x, y, z in D.grid(r, **r.get("grid", {}))])
-    for lay in [VO.s1(), VO.s5()] + P.options():
-        sc = VD.scene(lay)
-        cs[lay["id"]] = (sc, sensors_for(sc))
-    for case, (lay, v) in VD.variant_layouts().items():
+    for lay, v in VD.round_cases(R11):
         sc = VD.scene(lay, v)
-        cs[case] = (sc, sensors_for(sc))
+        cs[lay["id"] if not v or lay.get("daylight_variant") == v else v["_case"]] = (sc, sensors_for(sc))
     return cs
 
 

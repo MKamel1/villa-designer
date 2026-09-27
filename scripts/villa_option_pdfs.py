@@ -20,7 +20,10 @@ from archpipe.concept import revit_spec as RS
 from archpipe.concept import villa_options as VO
 from archpipe.concept import villa_parking as VP
 
-SETS = {"s": (VO.options, Path("out/villa/options")), "r7": (VP.options, Path("out/villa/options-r7"))}
+from archpipe.concept import villa_r11 as VR                          # noqa: E402
+
+SETS = {"s": (VO.options, Path("out/villa/options")), "r7": (VP.options, Path("out/villa/options-r7")),
+        "r11": (VR.designs, Path("out/villa/designs-r11"))}
 OPT = SETS["s"][1]
 CROP = (0.6, -31.8, 28.0, -20.6)          # the plan views' crop box (build_villa_option.py), metres
 CROP_PARKING = (-0.9, -31.8, 28.0, -20.6)  # parking options: the north yard is in the plan
@@ -235,7 +238,7 @@ def checks_page(pdf, lay, res, rb, op):
 def main():
     global OPT
     args = sys.argv[1:]
-    make, OPT = SETS["r7" if "r7" in args else "s"]
+    make, OPT = SETS["r11" if "r11" in args else "r7" if "r7" in args else "s"]
     if "spec" in args:
         OPT.mkdir(parents=True, exist_ok=True)
         path = OPT / "options-spec.json"

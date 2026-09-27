@@ -36,6 +36,9 @@ def full_height_faces(lay, level):
     out = {("v", round(V.X0, 3)): "street"}
     for _, _, x1, _ in V._exts(lay.get("extension")):
         out.setdefault(("v", round(x1, 3)), "end")
+    if lay.get("basement_full_height"):              # round 11: every basement face a lived-in room looks out of
+        out.setdefault(("v", round(V.XR, 3)), "yard")
+        out.setdefault(("h", round(V.YE, 3)), "yard")
     return out
 
 
@@ -79,7 +82,7 @@ def glazing_problems(lay, windows, doors):
         runs = {rid: [(lo, hi) for f2, lo, hi, r2 in street_runs(lay, "B") if f2 == f and r2 == rid]
                 for rid in lay["rooms"]}
         for rid, r in lay["rooms"].items():
-            if r["level"] != "B" or (kind == "street" and r["occupancy"] not in vocab.HABITABLE) or r.get("part_of"):
+            if r["level"] != "B" or (kind in ("street", "yard") and r["occupancy"] not in vocab.HABITABLE) or                     (r.get("part_of") and kind == "street"):
                 continue
             pieces = runs[rid] if kind == "street" and runs[rid] else [
                 (max(e[2], f[2]), min(e[3], f[3])) for e in V.edges(r["rect"]) if V.overlap_len(e, f) > 1e-6]
@@ -241,7 +244,7 @@ def build(lay):
                         # floor to beam across the whole column-free run (client 2026-09-26): the basement's street
                         # face (as built today) and the end of the east-yard extension, whatever room is behind it
                         wd = round(L_ - 2 * REVEAL, 2)
-                        if occ in ("living", "dining"):
+                        if occ in ("living", "dining") and not r.get("part_of"):   # an alcove gets a fixed pane
                             spec["doors"].append({"level": lv, "x": x, "y": y, "width": wd, "rooms": [rid, "yard"],
                                                   "garden": True, "full_height": True, "span": span})
                         else:
@@ -285,6 +288,17 @@ def build(lay):
         d.setdefault("height", GARDEN_DOOR_H if d.get("garden") else DOOR_H)
     op = S.clashes(st)["slab_opening_needed"]
     spec["gf_opening"] = [v / 1000 for v in op] if op else None
+    # round 11: double-height voids (GF rooms marked void): the GF slab is cut there too
+    # (the perimeter beams stay: a void on the envelope stops at the beam's inner face)
+    bw = V.E.BEAM_W / 1000.0
+    spec["gf_voids"] = []
+    for r in lay["rooms"].values():
+        if r["level"] == "GF" and r.get("void"):
+            x0, y0, x1, y1 = r["rect"]
+            spec["gf_voids"].append([round(x0 + (bw if abs(x0 - V.X0) < 1e-6 else 0), 3),
+                                     round(y0 + (bw if abs(y0 - V.YP) < 1e-6 else 0), 3),
+                                     round(x1 - (bw if abs(x1 - V.XR) < 1e-6 else 0), 3),
+                                     round(y1 - (bw if abs(y1 - V.YE) < 1e-6 else 0), 3)])
     return spec
 
 

@@ -540,8 +540,8 @@ def gf_route_width(lay, cell=0.02, wall=0.05, rail=0.05):
         if not RS.is_open(r):
             a, b, c, d = r["rect"]
             free &= ~((X > a - wall) & (X < c + wall) & (Y > b - wall) & (Y < d + wall))
-    op = RS.build(lay).get("gf_opening")
-    if op:
+    sp_ = RS.build(lay)
+    for op in ([sp_["gf_opening"]] if sp_.get("gf_opening") else []) + sp_.get("gf_voids", []):
         free &= ~((X > op[0] - rail) & (X < op[2] + rail) & (Y > op[1] - rail) & (Y < op[3] + rail))
     free[[0, -1], :] = False                            # the outer walls
     free[:, [0, -1]] = False
