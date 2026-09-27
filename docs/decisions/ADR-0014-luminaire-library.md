@@ -87,3 +87,15 @@ alternate. Europe and MENA are the markets that matter.
   reports the recess depth they need as a coordination figure, not a clash.
 - **Market availability is family-level.** An individual SKU can still vary
   by market.
+
+## iGuzzini source extension (2026-09-27)
+
+iGuzzini product pages expose LDT and IES links on the same permitted host.
+The crawler checks live robots rules before each command, uses a single paced
+request stream and caches responses on disk. Product-code inbox folders bind
+the photometry to the public product code if an LDT uses an internal number.
+The same library flux, paired-file and sanity checks decide whether each
+import is pickable. The fetch stops if live robots rules cannot be read.
+This extension has only fixture-based verification in the current execution
+environment: its connection to `www.iguzzini.com` was refused before
+`robots.txt` could be read. No real iGuzzini product was imported or approved.

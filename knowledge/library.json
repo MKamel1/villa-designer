@@ -4416,6 +4416,546 @@
       "verification": "Read on the held original page 2026-09-27 (value, unit and wording checked).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh and Ev at the preparation surfaces; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-kitchen-prep-500",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Kitchen preparation counters: 500 lx maintained (observers 25-65).",
+      "verified_value": 500
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh and Ev at the cooking surfaces; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-kitchen-cooktop-300",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Kitchen cooktops: 300 lx maintained.",
+      "verified_value": 300
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh and Ev at the top of the sink; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-kitchen-sink-300",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Kitchen sinks: 300 lx maintained.",
+      "verified_value": 300
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-kitchen-general-50",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Kitchen general: 50 lx maintained on the floor.",
+      "verified_value": 50
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the eating surface; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-breakfast-200",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Kitchen breakfast area (island seating): 200 lx on the eating surface.",
+      "verified_value": 200
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh and Ev at 3 ft (0.91 m); observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-laundry-200",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Laundry wash and dry: 200 lx maintained.",
+      "verified_value": 200
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-living-30",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Living room: 30 lx maintained on the floor (general).",
+      "verified_value": 30
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-media-lcd-20",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Media lounge, video on an LCD/LED screen: 20 lx on the floor.",
+      "verified_value": 20
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the desk; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-office-desk-400",
+      "locator": "Table 33.2, printed page 33.10 (PDF page index 1120)",
+      "summary": "Working (home) office desk: 400 lx maintained.",
+      "verified_value": 400
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the table plane; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-dining-informal-100",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Informal dining: 100 lx on the table.",
+      "verified_value": 100
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the table plane; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-dining-study-200",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Dining table used for study: 200 lx on the table.",
+      "verified_value": 200
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-family-room-100",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Family room: 100 lx on the floor.",
+      "verified_value": 100
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at 2 ft (0.61 m); observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-bedroom-general-50",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Bedroom general (dressing): 50 lx.",
+      "verified_value": 50
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at 3 ft (0.91 m); Ev 400 lx at 5 ft (1.52 m); observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-vanity-grooming-300",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Bathroom vanity, grooming: 300 lx Eh, 400 lx Ev at the face.",
+      "verified_value": 300
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-shower-50",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Showers and tubs: 50 lx.",
+      "verified_value": 50
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh and Ev at 4 ft (1.22 m) at the shelf face; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-walkin-closet-300",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Walk-in closet: 300 lx at the shelf face.",
+      "verified_value": 300
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-dressing-general-100",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Dressing room general: 100 lx on the floor.",
+      "verified_value": 100
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-passage-30",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Independent passageways (corridors): 30 lx on the floor.",
+      "verified_value": 30
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-game-digital-6",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Game room, digital games: 6 lx on the floor.",
+      "verified_value": 6
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh and Ev at 3 ft (0.91 m), small area; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-bed-reading-200",
+      "locator": "Table 33.2, printed page 33.12 (PDF page index 1122)",
+      "summary": "Reading in bed (headboard): 200 lx on a small area.",
+      "verified_value": 200
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh and Ev at 2 ft 6 in (0.76 m); observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-chair-reading-200",
+      "locator": "Table 33.2, printed page 33.12 (PDF page index 1122)",
+      "summary": "Reading at a casual chair: 200 lx.",
+      "verified_value": 200
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the desk; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-desk-400",
+      "locator": "Table 33.2, printed page 33.12 (PDF page index 1122)",
+      "summary": "Reading and writing at a desk: 400 lx.",
+      "verified_value": 400
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the treads; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-stairs-50",
+      "locator": "Table 33.2, printed page 33.12 (PDF page index 1122)",
+      "summary": "Steps and stairs: 50 lx on the treads.",
+      "verified_value": 50
+    },
+    {
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "lx",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (row, 25-65 column, plane checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at the floor; observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-storage-frequent-50",
+      "locator": "Table 33.2, printed page 33.12 (PDF page index 1122)",
+      "summary": "Storage in frequent use: 50 lx.",
+      "verified_value": 50
+    },
+    {
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and wording checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "unit": "mm",
+      "id": "rid-pendant-above-table-762",
+      "locator": "Figure 4.9 note 2, printed page 86 (PDF page index 97)",
+      "summary": "Hanging luminaires over a dining table above seated eye level: 30 in (762 mm) above the table is a good average (eye level 686-864 mm above the table).",
+      "conditions": "Pendant or chandelier over a table where people sit; adjustable fittings also acceptable.",
+      "verified_value": 762
+    },
+    {
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and wording checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "residential-interior-design",
+      "edition": "4th ed., 2022 (Wiley, ISBN 978-1-119-65342-4)",
+      "unit": "mm",
+      "id": "rid-vanity-sconces-914",
+      "locator": "Figure 7.55, printed page 218 (PDF page index 229)",
+      "summary": "Grooming light from sconces each side of the mirror at about adult eye level, 36-40 in (914-1016 mm) apart; toe-kick LED as night light.",
+      "conditions": "Bathroom vanity mirror; overhead-only light is the fallback.",
+      "verified_value": 914
+    },
+    {
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and wording checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "lighting-design-basics",
+      "edition": "1st ed., 2004 (Wiley, ISBN 0-471-38162-4)",
+      "unit": "deg",
+      "id": "ldb-accent-aim-30",
+      "locator": "Accent Lighting, printed page 62 (PDF page index 70)",
+      "summary": "Accent light aimed at the centre of the object about 30 degrees from vertical.",
+      "conditions": "Art and display accenting; other angles may suit a display.",
+      "verified_value": 30
     }
   ],
   "precedents": [

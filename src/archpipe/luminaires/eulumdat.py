@@ -45,11 +45,14 @@ class LampSet:
 
     @property
     def cct_k(self) -> float | None:
-        """Kelvin when the file states a single number, else None."""
+        """Kelvin when the file states a single number, else None. A label beside that one number is accepted
+        (iGuzzini writes 'ww/3000'); two numbers ('2700-6500', tunable) stay None."""
         try:
             return float(self.cct.strip())
         except ValueError:
-            return None
+            import re
+            nums = re.findall(r"(?<!\d)(\d{4})(?:\s*K)?(?!\d)", self.cct)
+            return float(nums[0]) if len(nums) == 1 and 1500 <= float(nums[0]) <= 10000 else None
 
     @property
     def cri_ra(self) -> float | None:

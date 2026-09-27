@@ -1,0 +1,821 @@
+"""Render a validated villa-render/1 scene inside Blender.
+
+Units are metres and calibrated lux. The display exposure is
+    Blender stops = log2(pi / (2.5 * 2**EV100)).
+Here EV100 is the stated exposure value at ISO 100. The denominator is the
+ISO 100 incident-light meter's 2.5 lux per exposure-value unit (C = 250); a
+Lambertian card of reflectance rho under E lux has luminance rho*E/pi. An
+incident meter exposes an 18 % grey card as middle grey (ISO 2720), so at a
+matching EV100 the grey card enters AgX at scene-linear 0.18 and a white card
+at 1.0. (The first version mapped the WHITE card to 0.18: every image 2.47
+stops dark; the villa's first draft set showed it.) The --calibrate run records the actual
+Blender white-card reading; no unrun value is claimed here.
+
+IES_POINT_POWER = 162.624 is measured in ADR-0010: the IES node emits its
+file's raw candela, without flux normalization. The spec's lumens therefore
+scale the file's candela by specified lumens / integrated file lumens.
+
+For an emitting surface, luminous exitance M is emitted lumens per square
+metre. A Lambertian face emits into its outward hemisphere; integrating
+constant radiance over that hemisphere gives M = pi * radiance. In this
+project's calibrated units, Blender Emission strength is therefore M/pi.
+The --calibrate sphere probe checks the rendered result independently.
+
+The prior workstation selftest measured the IES probe at 167.25 lux
+against 172.75 lux analytic (3.2 percent), with EV100 6.11 at 172 lux.
+Those are the user's measured baseline; the new sphere reading is pending.
+"""
+import argparse
+import importlib.util
+import json
+import math
+import os
+import sys
+import time
+
+import bmesh
+import bpy
+from mathutils import Matrix, Vector
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def sibling(name):
+    spec = importlib.util.spec_from_file_location("villa_" + name, os.path.join(HERE, name + ".py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+photoreal = sibling("photoreal")
+build_scene = sibling("build_scene")
+contract_spec = importlib.util.spec_from_file_location(
+    "villa_render_contract", os.path.join(HERE, "..", "villa_render_contract.py"))
+contract = importlib.util.module_from_spec(contract_spec)
+contract_spec.loader.exec_module(contract)
+IES_POINT_POWER = build_scene.IES_POINT_POWER
+IES_AZIMUTH_OFFSET_DEG = build_scene.IES_AZIMUTH_OFFSET_DEG
+
+
+def luminance(rgb):
+    return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
+
+
+def world_to_camera_view(scene, camera, point):
+    """Project a world point using Blender's camera frame and lens shifts.
+
+    Same normalized coordinates as bpy_extras.object_utils, implemented here
+    to keep this Blender script's imports to bpy, bmesh, mathutils and stdlib.
+    """
+    local = camera.matrix_world.inverted() @ point
+    frame = camera.data.view_frame(scene=scene)
+    z = frame[0].z
+    left, right = min(v.x for v in frame), max(v.x for v in frame)
+    bottom, top = min(v.y for v in frame), max(v.y for v in frame)
+    if local.z >= -1e-9:
+        return Vector((0, 0, -1))
+    x = local.x * z / local.z
+    y = local.y * z / local.z
+    return Vector(((x-left)/(right-left), (y-bottom)/(top-bottom), -local.z))
+
+
+def image_mean(img):
+    pixels = img.pixels[:]
+    step = max(1, len(pixels) // (4 * 20000))
+    total = count = 0
+    for i in range(0, len(pixels) // 4, step):
+        # Blender's image pixel buffer for an sRGB JPEG contains encoded samples.
+        def linear(v):
+            return v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4
+        total += luminance([linear(pixels[4*i+j]) for j in range(3)])
+        count += 1
+    return total / max(count, 1)
+
+
+def triplanar_normal(nt, coordinates, image):
+    """Interpret NormalGL as tangent vectors on three object-space planes."""
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    to_object = nt.nodes.new("ShaderNodeVectorTransform")
+    to_object.vector_type = "NORMAL"
+    to_object.convert_from, to_object.convert_to = "WORLD", "OBJECT"
+    nt.links.new(geo.outputs["Normal"], to_object.inputs["Vector"])
+    xyz = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(coordinates, xyz.inputs[0])
+    normal_xyz = nt.nodes.new("ShaderNodeSeparateXYZ")
+    nt.links.new(to_object.outputs["Vector"], normal_xyz.inputs[0])
+    def math_node(op, a, b=None):
+        n = nt.nodes.new("ShaderNodeMath")
+        n.operation = op
+        nt.links.new(a, n.inputs[0])
+        if isinstance(b, (int, float)):
+            n.inputs[1].default_value = b
+        elif b is not None:
+            nt.links.new(b, n.inputs[1])
+        return n.outputs[0]
+    weighted = []
+    weights = []
+    projections = (("X", ("Y", "Z"), ("B", "R", "G")),
+                   ("Y", ("Z", "X"), ("G", "B", "R")),
+                   ("Z", ("X", "Y"), ("R", "G", "B")))
+    for axis, uv, arrangement in projections:
+        coord = nt.nodes.new("ShaderNodeCombineXYZ")
+        nt.links.new(xyz.outputs[uv[0]], coord.inputs["X"])
+        nt.links.new(xyz.outputs[uv[1]], coord.inputs["Y"])
+        tex = nt.nodes.new("ShaderNodeTexImage")
+        tex.image = image
+        nt.links.new(coord.outputs[0], tex.inputs["Vector"])
+        minus = nt.nodes.new("ShaderNodeVectorMath")
+        minus.operation = "SUBTRACT"
+        minus.inputs[1].default_value = (0.5, 0.5, 0.5)
+        nt.links.new(tex.outputs["Color"], minus.inputs[0])
+        twice = nt.nodes.new("ShaderNodeVectorMath")
+        twice.operation = "SCALE"
+        twice.inputs["Scale"].default_value = 2
+        nt.links.new(minus.outputs[0], twice.inputs[0])
+        split = nt.nodes.new("ShaderNodeSeparateXYZ")
+        nt.links.new(twice.outputs[0], split.inputs[0])
+        mapped = {"R": split.outputs["X"], "G": split.outputs["Y"], "B": split.outputs["Z"]}
+        sign = math_node("SIGN", normal_xyz.outputs[axis])
+        components = [mapped[c] for c in arrangement]
+        normal_axis_index = "XYZ".index(axis)
+        components[normal_axis_index] = math_node("MULTIPLY", components[normal_axis_index], sign)
+        combined = nt.nodes.new("ShaderNodeCombineXYZ")
+        for socket, value in zip(("X", "Y", "Z"), components):
+            nt.links.new(value, combined.inputs[socket])
+        weight = math_node("POWER", math_node("ABSOLUTE", normal_xyz.outputs[axis]), 4)
+        scaled = nt.nodes.new("ShaderNodeVectorMath")
+        scaled.operation = "SCALE"
+        nt.links.new(combined.outputs[0], scaled.inputs[0])
+        nt.links.new(weight, scaled.inputs["Scale"])
+        weighted.append(scaled.outputs[0])
+        weights.append(weight)
+    result = weighted[0]
+    for other in weighted[1:]:
+        add = nt.nodes.new("ShaderNodeVectorMath")
+        add.operation = "ADD"
+        nt.links.new(result, add.inputs[0])
+        nt.links.new(other, add.inputs[1])
+        result = add.outputs[0]
+    normalized = nt.nodes.new("ShaderNodeVectorMath")
+    normalized.operation = "NORMALIZE"
+    nt.links.new(result, normalized.inputs[0])
+    to_world = nt.nodes.new("ShaderNodeVectorTransform")
+    to_world.vector_type = "NORMAL"
+    to_world.convert_from, to_world.convert_to = "OBJECT", "WORLD"
+    nt.links.new(normalized.outputs[0], to_world.inputs["Vector"])
+    return to_world.outputs["Vector"]
+
+
+def add_material(name, spec, library_root, warnings):
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nt = mat.node_tree
+    bsdf = nt.nodes.get("Principled BSDF")
+    out = nt.nodes.get("Material Output")
+    base = tuple(spec["base_rgb"]) + (1.0,)
+    bsdf.inputs["Base Color"].default_value = base
+    bsdf.inputs["Roughness"].default_value = spec.get("roughness", 0.6)
+    bsdf.inputs["Metallic"].default_value = spec.get("metallic", 0.0)
+    kind = spec["kind"]
+    if kind == "glass":
+        bsdf.inputs["Transmission Weight"].default_value = 1.0
+        bsdf.inputs["IOR"].default_value = 1.5
+        warnings.append(name + ": glass IOR 1.5 assumed; the contract has no IOR field")
+        mat["presentation_assumption"] = "clear glazing from villa contract"
+        mat["presentation_transmittance"] = spec["transmittance"]
+    elif kind == "translucent":
+        trans = nt.nodes.new("ShaderNodeBsdfTranslucent")
+        trans.inputs["Color"].default_value = base
+        mix = nt.nodes.new("ShaderNodeMixShader")
+        mix.inputs[0].default_value = spec.get("transmittance", 0.5)
+        nt.links.new(bsdf.outputs["BSDF"], mix.inputs[1])
+        nt.links.new(trans.outputs["BSDF"], mix.inputs[2])
+        nt.links.new(mix.outputs[0], out.inputs["Surface"])
+    elif kind == "emissive":
+        mat["emission_lm_per_m2"] = spec["emission_lm_per_m2"]
+        emit = nt.nodes.new("ShaderNodeEmission")
+        emit.name = "Villa Emission"
+        emit.inputs["Color"].default_value = build_scene.kelvin_to_rgb(spec["cct_k"]) + (1.0,)
+        emit.inputs["Strength"].default_value = contract.emission_strength(spec["emission_lm_per_m2"])
+        # Keep the authored base surface when the light output is zero.
+        # Adding the emission closure leaves that surface visible while lit.
+        surface = nt.nodes.new("ShaderNodeAddShader")
+        nt.links.new(bsdf.outputs["BSDF"], surface.inputs[0])
+        nt.links.new(emit.outputs[0], surface.inputs[1])
+        # Emit from outward faces only. Closed shells use their full outer
+        # area; a zero-thickness plane emits from the CCW side only.
+        geometry = nt.nodes.new("ShaderNodeNewGeometry")
+        transparent = nt.nodes.new("ShaderNodeBsdfTransparent")
+        mix = nt.nodes.new("ShaderNodeMixShader")
+        nt.links.new(geometry.outputs["Backfacing"], mix.inputs[0])
+        nt.links.new(surface.outputs[0], mix.inputs[1])
+        nt.links.new(transparent.outputs[0], mix.inputs[2])
+        nt.links.new(mix.outputs[0], out.inputs["Surface"])
+        if hasattr(mat, "cycles") and hasattr(mat.cycles, "sample_as_light"):
+            mat.cycles.sample_as_light = True
+    asset = spec.get("asset")
+    if asset and kind == "principled":
+        folder = os.path.join(library_root, "materials", asset)
+        def find(suffix):
+            if not os.path.isdir(folder):
+                return None
+            names = sorted(n for n in os.listdir(folder) if suffix.lower() in n.lower() and n.lower().endswith((".jpg", ".jpeg", ".png", ".exr")))
+            return os.path.join(folder, names[0]) if names else None
+        color_path = find("_Color")
+        if not color_path:
+            warnings.append("missing albedo asset: " + asset)
+        else:
+            coord = nt.nodes.new("ShaderNodeTexCoord")
+            mapping = nt.nodes.new("ShaderNodeMapping")
+            tile = spec.get("tile_m", 1.0)
+            mapping.inputs["Scale"].default_value = (1/tile, 1/tile, 1/tile)
+            axis = spec.get("grain_axis", "x")
+            mapping.inputs["Rotation"].default_value = {"x": (0, 0, 0), "y": (0, 0, math.pi/2), "z": (0, math.pi/2, 0)}[axis]
+            nt.links.new(coord.outputs["Generated"], mapping.inputs["Vector"])
+            # Generated coordinates are normalized by object bounds; Object
+            # coordinates retain the authored metre scale across all meshes.
+            nt.links.new(coord.outputs["Object"], mapping.inputs["Vector"])
+            def texture(path, colorspace):
+                node = nt.nodes.new("ShaderNodeTexImage")
+                node.image = bpy.data.images.load(path, check_existing=True)
+                node.image.colorspace_settings.name = colorspace
+                node.projection = "BOX"
+                node.projection_blend = 0.25
+                nt.links.new(mapping.outputs["Vector"], node.inputs["Vector"])
+                return node
+            color = texture(color_path, "sRGB")
+            mean = image_mean(color.image)
+            factor = spec.get("reflectance", luminance(base)) / max(mean, 1e-9)
+            scale = nt.nodes.new("ShaderNodeVectorMath")
+            scale.operation = "SCALE"
+            scale.inputs["Scale"].default_value = factor
+            nt.links.new(color.outputs["Color"], scale.inputs[0])
+            nt.links.new(scale.outputs["Vector"], bsdf.inputs["Base Color"])
+            rough = find("_Roughness")
+            if rough:
+                nt.links.new(texture(rough, "Non-Color").outputs["Color"], bsdf.inputs["Roughness"])
+            normal = find("_NormalGL")
+            if normal:
+                normal_image = bpy.data.images.load(normal, check_existing=True)
+                normal_image.colorspace_settings.name = "Non-Color"
+                nt.links.new(triplanar_normal(nt, mapping.outputs["Vector"], normal_image), bsdf.inputs["Normal"])
+    return mat
+
+
+def apply_visibility(obj, visibility):
+    for key in contract.RAY_VISIBILITY:
+        setattr(obj, "visible_" + key, visibility.get(key, True))
+
+
+def add_mesh_batch(specs, name, material, warnings):
+    """Build one Blender object from one or more authored mesh records."""
+    mesh = bpy.data.meshes.new(name)
+    obj = bpy.data.objects.new(name, mesh)
+    bpy.context.collection.objects.link(obj)
+    bm = bmesh.new()
+    for spec in specs:
+        index = {}
+        source_faces = []
+        for polygon in spec["faces"]:
+            # A keyhole polygon (a wall with its openings, daylight.with_holes) revisits vertices along its bridge:
+            # a repeat inside one face gets its own vertex; a face that already exists (coincident faces) is built
+            # from fresh vertices. Both made faces.new raise on the villa shell.
+            vertices, seen = [], set()
+            for point in polygon:
+                key = tuple(point)
+                if key not in index:
+                    index[key] = bm.verts.new(key)
+                v = index[key]
+                if v in seen:
+                    v = bm.verts.new(key)
+                seen.add(v)
+                vertices.append(v)
+            try:
+                source_faces.append(bm.faces.new(vertices))
+            except ValueError:
+                source_faces.append(bm.faces.new([bm.verts.new(tuple(p)) for p in polygon]))
+        source_edges = {edge for face in source_faces for edge in face.edges}
+        if all(len(edge.link_faces) == 2 for edge in source_edges):
+            volume = 0.0
+            for face in source_faces:
+                a = face.verts[0].co
+                for i in range(1, len(face.verts)-1):
+                    volume += a.dot(face.verts[i].co.cross(face.verts[i+1].co)) / 6
+            if volume < -1e-9:
+                bmesh.ops.reverse_faces(bm, faces=source_faces)
+                warnings.append(spec["id"] + ": reversed " + str(len(source_faces)) + " faces (negative signed volume)")
+    bm.normal_update()
+    bm.to_mesh(mesh)
+    bm.free()
+    mesh.materials.append(material)
+    apply_visibility(obj, specs[0].get("visibility", {}))
+    if material.get("emission_lm_per_m2") is not None and hasattr(obj, "cycles") and hasattr(obj.cycles, "use_multiple_importance_sampling"):
+        obj.cycles.use_multiple_importance_sampling = True
+    return obj
+
+
+def add_mesh_detail(obj, spec):
+    """Apply authored edge rounding and smoothing only to a separate object."""
+    bevel_width = spec.get("bevel_m", 0)
+    subdivision_levels = spec.get("subdivide", 0)
+    if bevel_width <= 0 and subdivision_levels <= 0:
+        return
+    bm = bmesh.new()
+    bm.from_mesh(obj.data)
+    for face in bm.faces:
+        face.smooth = True
+    angle = math.radians(30)
+    for edge in bm.edges:
+        if edge.is_manifold:
+            edge.smooth = edge.calc_face_angle(0.0) <= angle
+    bm.to_mesh(obj.data)
+    bm.free()
+    if bevel_width > 0:
+        bevel = obj.modifiers.new("Villa Bevel", "BEVEL")
+        bevel.width = bevel_width
+        bevel.segments = 2
+        bevel.limit_method = "ANGLE"
+        bevel.angle_limit = angle
+        bevel.harden_normals = True
+    if subdivision_levels > 0:
+        subdivision = obj.modifiers.new("Villa Subdivision", "SUBSURF")
+        subdivision.levels = subdivision_levels
+        subdivision.render_levels = subdivision_levels
+
+
+def build_meshes(mesh_specs, materials, material_specs, warnings):
+    batches = {}
+    for spec in mesh_specs:
+        key = contract.mesh_batch_key(spec, material_specs[spec["material"]]["kind"])
+        if key is None:
+            key = ("one", spec["id"])
+        batches.setdefault(key, []).append(spec)
+    objects = {}
+    for index, specs in enumerate(batches.values()):
+        name = specs[0]["id"] if len(specs) == 1 else "villa-merged-%04d" % index
+        obj = add_mesh_batch(specs, name, materials[specs[0]["material"]], warnings)
+        if len(specs) == 1:
+            add_mesh_detail(obj, specs[0])
+        for spec in specs:
+            objects[spec["id"]] = obj
+    return objects
+
+
+def layered_emissive_materials(mesh_specs, objects, material_specs):
+    """Give each switched emitter its own emission node; shared finishes stay shared."""
+    result = {}
+    for spec in mesh_specs:
+        if "layer" not in spec or material_specs[spec["material"]]["kind"] != "emissive":
+            continue
+        obj = objects[spec["id"]]
+        original = obj.data.materials[0]
+        material = original.copy()
+        material.name = "villa-emissive-" + spec["id"]
+        obj.data.materials[0] = material
+        result[spec["id"]] = material.node_tree.nodes["Villa Emission"]
+    return result
+
+
+def set_emissive_view(emissive_sources, mesh_by_id, switched_emitters, view):
+    """Set only emission strength; object visibility and base shader persist."""
+    current = []
+    for source in emissive_sources:
+        factor = contract.emissive_mesh_output_factor(mesh_by_id[source["id"]], view)
+        if source["id"] in switched_emitters:
+            switched_emitters[source["id"]].inputs["Strength"].default_value = contract.emission_strength(
+                source["exitance_lm_per_m2"]) * factor
+        current.append({**source, "output_factor": factor,
+                        "emitted_lumens": source["emitted_lumens"] * factor})
+    return current
+
+
+def ies_flux(path):
+    """Integrate Type C candela with LM-63 horizontal symmetry."""
+    lines = open(path, encoding="utf-8-sig", errors="replace").read().splitlines()
+    tilt = next(i for i, line in enumerate(lines) if line.upper().startswith("TILT="))
+    if lines[tilt].strip().upper() != "TILT=NONE":
+        raise ValueError("external/embedded IES tilt is unsupported: " + path)
+    data = [float(v) for v in " ".join(lines[tilt+1:]).replace(",", " ").split()]
+    lamps, lamp_lm, multiplier, nv, nh, photo_type = data[:6]
+    nv, nh = int(nv), int(nh)
+    if int(photo_type) != 1:
+        raise ValueError("only IES Type C supported: " + path)
+    start = 13
+    vertical = data[start:start+nv]
+    horizontal = data[start+nv:start+nv+nh]
+    vals = data[start+nv+nh:start+nv+nh+nv*nh]
+    if len(vals) != nv*nh or nv < 2 or nh < 1:
+        raise ValueError("incomplete IES candela table: " + path)
+    def candela(theta_index, azimuth):
+        if nh == 1:
+            return vals[theta_index]
+        maximum = horizontal[-1]
+        azimuth %= 360
+        if maximum <= 90:
+            azimuth %= 180
+            if azimuth > 90:
+                azimuth = 180-azimuth
+        elif maximum <= 180 and azimuth > 180:
+            azimuth = 360-azimuth
+        azimuth = min(azimuth, maximum)
+        for j in range(nh-1):
+            if horizontal[j] <= azimuth <= horizontal[j+1]:
+                f = (azimuth-horizontal[j]) / max(horizontal[j+1]-horizontal[j], 1e-9)
+                return vals[j*nv+theta_index]*(1-f) + vals[(j+1)*nv+theta_index]*f
+        return vals[(nh-1)*nv+theta_index]
+    flux = 0.0
+    for j in range(72):
+        da = 2*math.pi/72
+        az = (j+0.5)*360/72
+        for i in range(nv-1):
+            domega = da * (math.cos(math.radians(vertical[i]))-math.cos(math.radians(vertical[i+1])))
+            flux += max(0, domega) * (candela(i, az)+candela(i+1, az)) / 2
+    return flux * multiplier * data[10]
+
+
+def ies_nadir(path):
+    lines = open(path, encoding="utf-8-sig", errors="replace").read().splitlines()
+    tilt = next(i for i, line in enumerate(lines) if line.upper().startswith("TILT="))
+    data = [float(v) for v in " ".join(lines[tilt+1:]).replace(",", " ").split()]
+    nv, nh = int(data[3]), int(data[4])
+    if data[13] != 0 or len(data) < 13+nv+nh+1:
+        raise ValueError("IES nadir sample missing: " + path)
+    return data[13+nv+nh] * data[2] * data[10]
+
+
+def add_light(spec, ies_dir):
+    kind = spec["type"]
+    lamp = bpy.data.lights.new(spec["id"], "POINT" if kind == "ies" else "AREA")
+    lamp.color = build_scene.kelvin_to_rgb(spec["cct_k"])
+    if kind == "ies":
+        path = os.path.abspath(os.path.join(ies_dir, spec["ies"]))
+        if not path.startswith(os.path.abspath(ies_dir) + os.sep) or not os.path.isfile(path):
+            raise FileNotFoundError(path)
+        flux = ies_flux(path)
+        lamp.energy = IES_POINT_POWER * spec["lumens"] / flux
+        lamp.shadow_soft_size = 0.001
+        lamp.use_nodes = True
+        nodes = lamp.node_tree.nodes
+        tex = nodes.new("ShaderNodeTexIES")
+        tex.mode = "EXTERNAL"
+        tex.filepath = path
+        lamp.node_tree.links.new(tex.outputs["Fac"], nodes["Emission"].inputs["Strength"])
+    else:
+        lamp.shape = "RECTANGLE"
+        lamp.size, lamp.size_y = spec["size"]
+        lamp.energy = spec["lumens"]
+        lamp.spread = math.radians(spec["spread_deg"])
+    obj = bpy.data.objects.new(spec["id"], lamp)
+    bpy.context.collection.objects.link(obj)
+    obj.location = spec["position"]
+    aim = Vector(spec["aim"]).normalized()
+    if kind == "ies":
+        obj.rotation_euler = aim.to_track_quat("-Z", "Y").to_euler()
+        obj.rotation_euler.rotate_axis("Z", math.radians(spec["spin_deg"] + IES_AZIMUTH_OFFSET_DEG))
+    else:
+        length = Vector(spec["length_dir"])
+        length = (length - length.dot(aim)*aim).normalized()
+        width = aim.cross(length).normalized()
+        # Local X is width, local Y is length, local -Z is emission.
+        obj.rotation_euler = Matrix(((width.x, length.x, -aim.x), (width.y, length.y, -aim.y), (width.z, length.z, -aim.z))).to_euler()
+    return obj
+
+
+def configure_camera(view):
+    c = view["camera"]
+    camera = bpy.data.cameras.new("villa-camera")
+    obj = bpy.data.objects.new("villa-camera", camera)
+    bpy.context.collection.objects.link(obj)
+    obj.location = c["position"]
+    direction = Vector(c["target"]) - Vector(c["position"])
+    horizontal = Vector((direction.x, direction.y, 0))
+    pitch = math.degrees(math.atan2(direction.z, horizontal.length))
+    obj.rotation_euler = horizontal.to_track_quat("-Z", "Y").to_euler()
+    camera.lens = c["lens_mm"]
+    camera.sensor_width = c["sensor_mm"]
+    camera.sensor_fit = "HORIZONTAL"
+    camera.shift_x = c.get("shift_x", 0)
+    camera.shift_y = c.get("shift_y", 0) + direction.z / max(horizontal.length, 1e-9) * camera.lens / camera.sensor_width
+    bpy.context.scene.camera = obj
+    return obj, pitch
+
+
+def subjects(view, mesh_specs, objects):
+    result = []
+    scene = bpy.context.scene
+    for subject in view["subjects"]:
+        matches = [m for m in mesh_specs if m["id"] == subject or m["id"].startswith(subject) or m.get("room") == subject or m.get("label") == subject]
+        coords = [world_to_camera_view(scene, scene.camera, objects[m["id"]].matrix_world @ Vector(corner))
+                  for m in matches for corner in contract.mesh_bbox_corners(m)]
+        rect = [min((p.x for p in coords), default=0), min((p.y for p in coords), default=0),
+                max((p.x for p in coords), default=0), max((p.y for p in coords), default=0)]
+        overlap = max(0, min(1, rect[2])-max(0, rect[0])) * max(0, min(1, rect[3])-max(0, rect[1]))
+        area = max(1e-9, (rect[2]-rect[0])*(rect[3]-rect[1]))
+        visible = bool(coords) and any(p.z >= 0 for p in coords) and overlap > 0
+        result.append({"id": subject, "in_frame": visible, "coverage": overlap/area,
+                       "screen": rect,
+                       "matched_objects": [m["id"] for m in matches]})
+    return result
+
+
+def import_props(prop_specs, library_root):
+    """Use the established glTF importer, then apply authored scale and XYZ rotation."""
+    imported = []
+    for spec in prop_specs:
+        before = set(bpy.data.objects)
+        result = photoreal.import_prop(library_root, spec["asset"], spec["position"], spec["rotation_deg"][2])
+        new = [obj for obj in bpy.data.objects if obj not in before]
+        meshes = [obj for obj in new if obj.type == "MESH"]
+        if result is None or not meshes:
+            raise FileNotFoundError(os.path.join(library_root, "props", spec["asset"], "model.gltf"))
+        roots = [obj for obj in new if obj.parent is None]
+        for root in roots:
+            root.rotation_mode = "XYZ"
+            root.rotation_euler.x += math.radians(spec["rotation_deg"][0])
+            root.rotation_euler.y += math.radians(spec["rotation_deg"][1])
+            root.scale *= spec["scale"]
+        bpy.context.view_layer.update()
+        bottom = min((obj.matrix_world @ Vector(corner)).z for obj in meshes for corner in obj.bound_box)
+        for root in roots:
+            root.location.z += spec["position"][2] - bottom
+        for index, obj in enumerate(new):
+            obj.name = "prop-%s-%03d" % (spec["id"], index)
+        imported.append({"id": spec["id"], "asset": spec["asset"], "label": spec["label"],
+                         "objects": meshes})
+    return imported
+
+
+def visible_props(imported):
+    scene = bpy.context.scene
+    records = []
+    for prop in imported:
+        coords = [world_to_camera_view(scene, scene.camera, obj.matrix_world @ Vector(corner))
+                  for obj in prop["objects"] for corner in obj.bound_box]
+        x0 = min((p.x for p in coords), default=0)
+        y0 = min((p.y for p in coords), default=0)
+        x1 = max((p.x for p in coords), default=0)
+        y1 = max((p.y for p in coords), default=0)
+        overlap = max(0, min(1, x1)-max(0, x0)) * max(0, min(1, y1)-max(0, y0))
+        records.append({"id": prop["id"], "asset": prop["asset"], "label": prop["label"],
+                        "objects": [obj.name for obj in prop["objects"]],
+                        "in_frame": overlap > 0 and any(p.z >= 0 for p in coords),
+                        "screen": [x0, y0, x1, y1]})
+    return records
+
+
+def configure_cycles(cpu):
+    scene = bpy.context.scene
+    scene.render.engine = "CYCLES"
+    scene.cycles.device = "CPU"
+    if not cpu:
+        prefs = bpy.context.preferences.addons["cycles"].preferences
+        for backend in ("OPTIX", "CUDA"):
+            try:
+                prefs.get_devices()
+                prefs.compute_device_type = backend
+                devices = prefs.get_devices_for_type(backend)
+                if devices:
+                    for device in devices:
+                        device.use = device.type != "CPU"
+                    scene.cycles.device = "GPU"
+                    break
+            except Exception:
+                pass
+    scene.cycles.use_adaptive_sampling = True
+    scene.cycles.use_denoising = True
+    scene.cycles.denoiser = "OPENIMAGEDENOISE"
+    scene.cycles.use_light_tree = True
+    scene.render.use_persistent_data = True
+    scene.cycles.sample_clamp_indirect = 10
+    scene.cycles.max_bounces = 16
+
+
+def calibrate(scene_data, args):
+    """Measure IES lux, EV100 response and an 800-lumen emitting sphere."""
+    bpy.context.scene.render.use_persistent_data = False
+    ies = next((l for l in scene_data["lights"] if l["type"] == "ies"), None)
+    if ies is None:
+        raise ValueError("--calibrate requires an IES light for the baseline probe")
+    path = os.path.join(args.ies_dir, ies["ies"])
+    height = ies["position"][2]
+    for obj in list(bpy.data.objects):
+        bpy.data.objects.remove(obj, do_unlink=True)
+    bpy.ops.mesh.primitive_plane_add(size=0.4)
+    card = bpy.context.object
+    mat = bpy.data.materials.new("calibration Lambert card")
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    nodes.clear()
+    diffuse = nodes.new("ShaderNodeBsdfDiffuse")
+    diffuse.inputs["Color"].default_value = (0.5, 0.5, 0.5, 1)
+    out = nodes.new("ShaderNodeOutputMaterial")
+    mat.node_tree.links.new(diffuse.outputs["BSDF"], out.inputs["Surface"])
+    card.data.materials.append(mat)
+    lamp = add_light(ies, args.ies_dir)
+    lamp.location = (0, 0, height)
+    lamp.rotation_euler = Vector((0, 0, -1)).to_track_quat("-Z", "Y").to_euler()
+    lamp.rotation_euler.rotate_axis("Z", math.radians(IES_AZIMUTH_OFFSET_DEG))
+    cam_data = bpy.data.cameras.new("calibration camera")
+    cam = bpy.data.objects.new("calibration camera", cam_data)
+    bpy.context.collection.objects.link(cam)
+    cam.location = (0, 0, 1)
+    cam_data.type = "ORTHO"
+    cam_data.ortho_scale = 0.3
+    s = bpy.context.scene
+    s.camera = cam
+    world = bpy.data.worlds.new("calibration black")
+    world.use_nodes = True
+    world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0
+    s.world = world
+    s.cycles.max_bounces = 0
+    s.cycles.use_denoising = False
+    s.cycles.samples = 512
+    s.render.resolution_x = s.render.resolution_y = 64
+    s.render.image_settings.file_format = "OPEN_EXR"
+    s.render.image_settings.color_depth = "32"
+    s.view_settings.view_transform = "Standard"
+    s.view_settings.exposure = 0
+    exr = os.path.join(args.out, "calibration.exr")
+    s.render.filepath = exr
+    bpy.ops.render.render(write_still=True)
+    img = bpy.data.images.load(exr)
+    pixel = [img.pixels[4*(32*64+32)+i] for i in range(3)]
+    bpy.data.images.remove(img)
+    measured = luminance(pixel) * math.pi / 0.5
+    analytic = ies_nadir(path) * ies["lumens"] / ies_flux(path) / (height*height)
+    diffuse.inputs["Color"].default_value = (1, 1, 1, 1)
+    ev = math.log2(analytic / 2.5)
+    s.view_settings.view_transform = "AgX"
+    s.view_settings.look = "AgX - Medium High Contrast"
+    s.view_settings.exposure = math.log2(math.pi / (2.5*2**ev))
+    s.render.image_settings.file_format = "PNG"
+    s.render.image_settings.color_depth = "8"
+    png = os.path.join(args.out, "calibration.png")
+    s.render.filepath = png
+    bpy.ops.render.render(write_still=True)
+    img = bpy.data.images.load(png)
+    display = [img.pixels[4*(32*64+32)+i] for i in range(3)]
+    bpy.data.images.remove(img)
+    lamp_data = lamp.data
+    bpy.data.objects.remove(lamp, do_unlink=True)
+    bpy.data.lights.remove(lamp_data)
+    diffuse.inputs["Color"].default_value = (0.5, 0.5, 0.5, 1)
+    radius = 0.15
+    total_lumens = 800.0
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=32, ring_count=16, radius=radius, location=(0, 0, height))
+    sphere = bpy.context.object
+    area = sum(face.area for face in sphere.data.polygons)
+    exitance = total_lumens / area
+    sphere.data.materials.append(add_material("calibration emissive sphere", {
+        "kind": "emissive", "base_rgb": [1, 1, 1], "cct_k": ies["cct_k"],
+        "emission_lm_per_m2": exitance}, "", []))
+    if hasattr(sphere, "cycles") and hasattr(sphere.cycles, "use_multiple_importance_sampling"):
+        sphere.cycles.use_multiple_importance_sampling = True
+    s.view_settings.view_transform = "Standard"
+    s.view_settings.exposure = 0
+    s.cycles.sample_clamp_indirect = 0
+    s.render.image_settings.file_format = "OPEN_EXR"
+    s.render.image_settings.color_depth = "32"
+    sphere_exr = os.path.join(args.out, "calibration-emissive.exr")
+    s.render.filepath = sphere_exr
+    bpy.ops.render.render(write_still=True)
+    img = bpy.data.images.load(sphere_exr)
+    sphere_pixel = [img.pixels[4*(32*64+32)+i] for i in range(3)]
+    bpy.data.images.remove(img)
+    sphere_measured = luminance(sphere_pixel) * math.pi / 0.5
+    distance = height  # The probe is directly below the sphere centre.
+    sphere_analytic = (total_lumens / (4 * math.pi)) * height / distance**3
+    report = {"analytic_direct_lux": analytic, "blender_direct_lux": measured,
+              "relative_error": abs(measured-analytic)/analytic, "ev100": ev,
+              "exposure_stops": s.view_settings.exposure,
+              "white_card_display_luminance": luminance(display),
+              "white_card_scene_linear_target": 1.0,
+              "emissive_sphere": {"diameter_m": 2*radius, "mesh_area_m2": area,
+                                   "total_lumens": total_lumens, "exitance_lm_per_m2": exitance,
+                                   "emission_strength": contract.emission_strength(exitance),
+                                   "analytic_point_lux": sphere_analytic,
+                                   "blender_direct_lux": sphere_measured,
+                                   "relative_error": abs(sphere_measured-sphere_analytic)/sphere_analytic,
+                                   "within_10_percent": abs(sphere_measured-sphere_analytic)/sphere_analytic <= 0.10,
+                                   "light_tree": s.cycles.use_light_tree}}
+    with open(os.path.join(args.out, "calibration.json"), "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2)
+    print("VILLA RENDER calibration " + json.dumps(report), flush=True)
+
+
+def render(scene_data, args):
+    os.makedirs(args.out, exist_ok=True)
+    if args.views == "none" and not args.calibrate:
+        raise ValueError("--views none requires --calibrate")
+    if args.views == "none" and args.calibrate:
+        configure_cycles(args.cpu)
+        calibrate(scene_data, args)
+        return
+    warnings = []
+    library_root = os.path.expandvars(os.path.expanduser(args.library_root or scene_data["library_root"]))
+    materials = {name: add_material(name, spec, library_root, warnings) for name, spec in scene_data["materials"].items()}
+    photoreal.architectural_glass()
+    objects = build_meshes(scene_data["meshes"], materials, scene_data["materials"], warnings)
+    switched_emitters = layered_emissive_materials(scene_data["meshes"], objects, scene_data["materials"])
+    emissive_sources = []
+    for spec in scene_data["meshes"]:
+        mat_spec = scene_data["materials"][spec["material"]]
+        if mat_spec["kind"] == "emissive":
+            area = sum(face.area for face in objects[spec["id"]].data.polygons)
+            emissive_sources.append({"id": spec["id"], "layer": spec.get("layer"), "area_m2": area,
+                                     "exitance_lm_per_m2": mat_spec["emission_lm_per_m2"],
+                                     "emitted_lumens": area * mat_spec["emission_lm_per_m2"]})
+    imported_props = import_props(scene_data.get("props", []), library_root)
+    lights = {l["id"]: add_light(l, args.ies_dir) for l in scene_data["lights"]}
+    full_power = {ident: obj.data.energy for ident, obj in lights.items()}
+    mesh_by_id = {mesh["id"]: mesh for mesh in scene_data["meshes"]}
+    configure_cycles(args.cpu)
+    selected = {v["id"] for v in scene_data["views"]} if args.views == "all" else set(args.views.split(","))
+    for view in scene_data["views"]:
+        if view["id"] not in selected:
+            continue
+        current_warnings = list(warnings)
+        for spec in scene_data["lights"]:
+            obj = lights[spec["id"]]
+            factor = (view.get("dimmers", {}).get(spec["layer"], 1.0) * spec.get("dimmer", 1.0)) if spec["layer"] in view["layers_on"] else 0
+            obj.data.energy = full_power[spec["id"]] * factor
+            obj.hide_render = factor <= 0
+        current_emissive = set_emissive_view(emissive_sources, mesh_by_id, switched_emitters, view)
+        if view["state"] == "day":
+            sun = view["sun"]
+            photoreal.daylight_world(sun["altitude_deg"], sun["azimuth_true_deg"] - scene_data["north"]["model_y_bearing_deg"])
+        else:
+            sky_state = contract.sky_state_for_view(view["state"])
+            sky = scene_data["sky"][sky_state]
+            hdri = os.path.join(library_root, "hdri", sky["hdri"])
+            if not os.path.isfile(hdri):
+                raise FileNotFoundError(hdri)
+            photoreal.hdri_world(hdri, sky["horizontal_lux"])
+        camera, pitch = configure_camera(view)
+        s = bpy.context.scene
+        s.render.resolution_x, s.render.resolution_y = args.res or view["resolution"]
+        s.render.resolution_percentage = 100
+        s.cycles.samples = args.samples or view["samples"]
+        s.cycles.max_bounces = view.get("max_bounces", 16)
+        preset = scene_data["exposure"][view["exposure"]]
+        s.view_settings.view_transform = "AgX"
+        s.view_settings.look = "AgX - Medium High Contrast"
+        s.view_settings.exposure = math.log2(math.pi / (2.5 * 2**preset["ev100"]))
+        wb = photoreal.white_balance(preset["white_balance_k"])
+        if not wb:
+            current_warnings.append("Blender does not support stated white balance")
+        bpy.context.view_layer.update()
+        subject_result = subjects(view, scene_data["meshes"], objects)
+        prop_result = visible_props(imported_props)
+        path = os.path.join(args.out, view["id"] + ".png")
+        s.render.filepath = path
+        s.render.image_settings.file_format = "PNG"
+        started = time.monotonic()
+        bpy.ops.render.render(write_still=True)
+        elapsed = time.monotonic() - started
+        image = bpy.data.images.load(path)
+        pixels = image.pixels[:]
+        n = len(pixels)//4
+        clipped = sum(1 for i in range(n) if max(pixels[4*i:4*i+3]) >= 0.995)/max(n, 1)
+        mean = sum(luminance(pixels[4*i:4*i+3]) for i in range(n))/max(n, 1)
+        bpy.data.images.remove(image)
+        report = {"view": view["id"], "state": view["state"], "samples": s.cycles.samples,
+                  "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
+                  "lights_on_count": sum(not obj.hide_render for obj in lights.values()), "subjects": subject_result,
+                  "imported_props": prop_result, "mesh_object_count": len(set(objects.values())),
+                  "emissive_sources": current_emissive,
+                  "max_bounces": s.cycles.max_bounces, "clamp_indirect": s.cycles.sample_clamp_indirect,
+                  "clipped_pixel_fraction": clipped, "mean_luminance": mean, "ev100": preset["ev100"],
+                  "exposure_stops": s.view_settings.exposure, "white_balance_applied": wb,
+                  "camera_pitch_deg": pitch, "warnings": current_warnings}
+        with open(os.path.join(args.out, view["id"] + ".json"), "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2)
+        print("VILLA RENDER wrote " + path, flush=True)
+        camera_data = camera.data
+        bpy.data.objects.remove(camera, do_unlink=True)
+        bpy.data.cameras.remove(camera_data)
+        for unused in list(bpy.data.images):
+            if unused.users == 0 and unused.source == "FILE" and unused.filepath:
+                bpy.data.images.remove(unused)
+    if args.calibrate:
+        calibrate(scene_data, args)
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--scene", required=True)
+    ap.add_argument("--views", default="all")
+    ap.add_argument("--out", required=True)
+    ap.add_argument("--ies-dir", required=True)
+    ap.add_argument("--library-root")
+    ap.add_argument("--samples", type=int)
+    ap.add_argument("--res", type=lambda s: [int(v) for v in s.lower().split("x")])
+    ap.add_argument("--cpu", action="store_true")
+    ap.add_argument("--calibrate", action="store_true")
+    args = ap.parse_args(sys.argv[sys.argv.index("--")+1:] if "--" in sys.argv else [])
+    with open(args.scene, encoding="utf-8") as f:
+        render(json.load(f), args)
+
+
+if __name__ == "__main__":
+    main()

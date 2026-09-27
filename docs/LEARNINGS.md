@@ -586,3 +586,32 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   its box within 5 mm, category exact (bound by intent), and every furniture check re-run on the as-built
   footprints. First build: 65/65 elements, PASS. Negatives: 10 mm off, missing/doubled, wrong category, a
   wardrobe built 0.5 m out (`tests/test_villa_furnish3d.py`).
+
+## D1 lighting, products and the villa renderer (Phases 3-4, 2026-09-27)
+
+- **Function and beauty, both carded.** Function: 24 IES HB10 Table 33.2 rows (maintained lux, 25-65 column) read
+  on the held original, each a card with its row as the regression needle. Beauty: pendant 762 mm over a table
+  (Residential Interior Design Fig. 4.9), vanity sconces 914-1016 mm apart, accent aimed ~30 deg (Lighting Design
+  Basics p. 62). The client's rule (flush downlights for ambient; pendants/spots only for task and centrepieces) is
+  a test (`tests/test_villa_lighting.py`).
+- **First drafts failed their own checks, and that was the point.** Sconces alone gave 87-142 lx on the basin
+  counters (300 needed): sconces light faces (Ev), not counters (Eh); a task downlight in front of each mirror was
+  added (`test_basins_lit_only_by_sconces_fail_grooming` reproduces the draft). The island middle, tall-wall
+  counters, dirty kitchen run and kids' desks were also short and fixed in the design, not the check.
+- **A fitting was labelled with the wrong room.** A dining fill placed across an open-plan join kept the room it was
+  authored for; fittings are now labelled by the room that contains them (`test_recessed_fittings_sit_in_their_room_clear_of_columns`).
+- **Manufacturer data: parse, never repair.** iGuzzini LDTs write 'ww/3000' for the CCT: the parser now reads one
+  Kelvin value beside a label (two values stay None). The number regex matched a bare '.'. Underscore ST49 and the
+  Laser Evo wall washer fail our LDT/IES pair check (59.8 %, 100 %) and are not pickable; their positions use generic
+  or a stated substitute, named in every caption. Product pages are fetched within robots.txt (iguzzini.com Allow /;
+  the asset API host has no robots.txt); the configurator's LDT buttons were used in the browser as a person would.
+- **Git Bash rewrote '/en/...' CLI arguments into 'C:/Program Files/Git/en/...'.** Set MSYS_NO_PATHCONV=1 for any
+  URL-path argument.
+- **A render job resumed a stale result.** The driver's job id hashed the scene and IES files but not the renderer,
+  so a calibration after a renderer change returned the previous run's files. The renderer's code is now part of
+  the identity.
+- **Blender exited 0 after a Python exception**, so a crashed render reported success with no images: the driver
+  now runs Blender with `--python-exit-code 1`. The crash: the shell's walls-with-openings are keyhole polygons that
+  revisit a vertex; faces are now built with a fresh vertex for a repeat.
+- Calibrations measured on the workstation: IES downlight 167.25 lx vs 172.75 analytic (3.2 %); an 800 lm emissive
+  opal sphere 9.71 lx vs 9.79 analytic (0.8 %). Exposure presets were pre-registered before the first render.

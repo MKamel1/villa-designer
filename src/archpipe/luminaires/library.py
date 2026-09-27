@@ -44,7 +44,7 @@ LIBRARY = ROOT / "assets/user/luminaires"
 # inbox/ win when given (inbox/erco/... is ERCO whatever the file says).
 MANUFACTURERS = {
     "signify": "signify", "philips": "signify", "erco": "erco", "zumtobel": "zumtobel",
-    "thorn": "thorn", "iguzzini": "iguzzini", "trilux": "trilux", "ledvance": "ledvance",
+    "thorn": "thorn", "iguzzini": "iguzzini", "i guzzini": "iguzzini", "trilux": "trilux", "ledvance": "ledvance",
     "osram": "ledvance", "fagerhult": "fagerhult", "delta light": "deltalight", "deltalight": "deltalight",
     "flos": "flos", "artemide": "artemide", "louis poulsen": "louispoulsen", "reggiani": "reggiani",
     "opple": "opple", "disano": "disano", "linea light": "linealight", "xal": "xal", "occhio": "occhio",
@@ -168,6 +168,11 @@ def _sku_clean(s: str) -> str:
     return re.sub(r"[^A-Za-z0-9._-]+", "-", s.strip()).strip("-")[:80] or "unnamed"
 
 
+def _iguzzini_code(origin: str) -> str | None:
+    parts = re.split(r"[/\\]", origin)
+    return parts[1].upper() if len(parts) > 2 and parts[0].lower() == "iguzzini" and re.fullmatch(r"[A-Za-z0-9]{4,8}", parts[1]) else None
+
+
 def _mount(name: str) -> str:
     low = " " + name.lower() + " "
     for mount, words in MOUNT_WORDS:
@@ -208,7 +213,7 @@ def import_inbox(library: Path = LIBRARY, log=print) -> dict:
             skipped.append((origin, data, f"ldt error: {exc}"))
             continue
         mfr = _manufacturer(origin, L.company)
-        sku = _sku_clean(L.number or L.name)
+        sku = _iguzzini_code(origin) or _sku_clean(L.number or L.name)
         key = (mfr, sku)
         folder = library / mfr / sku
         folder.mkdir(parents=True, exist_ok=True)
@@ -221,7 +226,9 @@ def import_inbox(library: Path = LIBRARY, log=print) -> dict:
         cat = re.search(r"\[LUMCAT\]\s*(.+)", text)
         mfr = _manufacturer(origin, (re.search(r"\[MANUFAC\]\s*(.+)", text) or [None, ""])[1] or "")
         sku = _sku_clean(cat.group(1)) if cat else None
-        match = next((k for k in products if sku and k[1] == sku), None)
+        code = _iguzzini_code(origin)
+        match = next((k for k in products if (code and k == ("iguzzini", code)) or
+                      (not code and sku and k[1] == sku)), None)
         if match is None:
             skipped.append((origin, data, "ies without a matching ldt (ies-only import is not yet indexed)"))
             continue
@@ -248,7 +255,19 @@ def import_inbox(library: Path = LIBRARY, log=print) -> dict:
         products[match]["sources"].append({"origin": origin, "sha256": hashlib.sha256(data).hexdigest(),
                                            "kind": "rfa" if name.lower().endswith(".rfa") else "txt",
                                            "imported": time.strftime("%Y-%m-%d")})
+    catalogue_db = library / "catalogue.sqlite"
     for key, prod in products.items():
+        if key[0] == "iguzzini" and catalogue_db.is_file():
+            con = sqlite3.connect(catalogue_db)
+            try:
+                row = con.execute("select mount, markets from products where manufacturer=? and sku=?", key).fetchone()
+            finally:
+                con.close()
+            if row:
+                meta_path = prod["folder"] / "product.json"
+                meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.is_file() else {}
+                meta.update(mount=row[0], markets=row[1].split(",") if row[1] else [])
+                meta_path.write_text(json.dumps(meta, indent=2), encoding="utf-8")
         _write_product(key, prod)
     n = rebuild_index(library)
     report = {"products": len(products), "rows": n, "skipped": [(o, str(k)) for o, _, k in skipped]}

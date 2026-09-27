@@ -2,49 +2,282 @@
   "schema": 1,
   "license": "CC0 1.0 Universal (public domain) -- ambientcg.com and polyhaven.com, no attribution required",
   "materials": [
-    {"id": "Wood049", "source": "ambientcg", "role": "oak furniture grain",
-     "url": "https://ambientcg.com/get?file=Wood049_1K-JPG.zip"},
-    {"id": "WoodFloor041", "source": "ambientcg", "role": "floor",
-     "url": "https://ambientcg.com/get?file=WoodFloor041_1K-JPG.zip"},
-    {"id": "Fabric036", "source": "ambientcg", "role": "linen",
-     "url": "https://ambientcg.com/get?file=Fabric036_1K-JPG.zip"},
-    {"id": "Fabric019", "source": "ambientcg", "role": "bedding weave",
-     "url": "https://ambientcg.com/get?file=Fabric019_1K-JPG.zip"},
-    {"id": "Fabric082A", "source": "ambientcg", "role": "throw / fine weave",
-     "url": "https://ambientcg.com/get?file=Fabric082A_1K-JPG.zip"},
-    {"id": "Plaster001", "source": "ambientcg", "role": "wall / ceiling",
-     "url": "https://ambientcg.com/get?file=Plaster001_1K-JPG.zip"},
-    {"id": "Metal046A", "source": "ambientcg", "role": "dark hardware / fixtures",
-     "url": "https://ambientcg.com/get?file=Metal046A_1K-JPG.zip"},
-    {"id": "Marble012", "source": "ambientcg", "role": "stone (future rooms)",
-     "url": "https://ambientcg.com/get?file=Marble012_1K-JPG.zip"},
-    {"id": "WoodFloor051", "source": "ambientcg", "role": "floor: light oak, long staggered planks",
-     "url": "https://ambientcg.com/get?file=WoodFloor051_1K-JPG.zip"},
-    {"id": "Carpet001", "source": "ambientcg", "role": "rug",
-     "url": "https://ambientcg.com/get?file=Carpet001_1K-JPG.zip"}
+    {
+      "id": "Wood049",
+      "source": "ambientcg",
+      "role": "oak furniture grain",
+      "url": "https://ambientcg.com/get?file=Wood049_1K-JPG.zip"
+    },
+    {
+      "id": "WoodFloor041",
+      "source": "ambientcg",
+      "role": "floor",
+      "url": "https://ambientcg.com/get?file=WoodFloor041_1K-JPG.zip"
+    },
+    {
+      "id": "Fabric036",
+      "source": "ambientcg",
+      "role": "linen",
+      "url": "https://ambientcg.com/get?file=Fabric036_1K-JPG.zip"
+    },
+    {
+      "id": "Fabric019",
+      "source": "ambientcg",
+      "role": "bedding weave",
+      "url": "https://ambientcg.com/get?file=Fabric019_1K-JPG.zip"
+    },
+    {
+      "id": "Fabric082A",
+      "source": "ambientcg",
+      "role": "throw / fine weave",
+      "url": "https://ambientcg.com/get?file=Fabric082A_1K-JPG.zip"
+    },
+    {
+      "id": "Plaster001",
+      "source": "ambientcg",
+      "role": "wall / ceiling",
+      "url": "https://ambientcg.com/get?file=Plaster001_1K-JPG.zip"
+    },
+    {
+      "id": "Metal046A",
+      "source": "ambientcg",
+      "role": "dark hardware / fixtures",
+      "url": "https://ambientcg.com/get?file=Metal046A_1K-JPG.zip"
+    },
+    {
+      "id": "Marble012",
+      "source": "ambientcg",
+      "role": "stone (future rooms)",
+      "url": "https://ambientcg.com/get?file=Marble012_1K-JPG.zip"
+    },
+    {
+      "id": "WoodFloor051",
+      "source": "ambientcg",
+      "role": "floor: light oak, long staggered planks",
+      "url": "https://ambientcg.com/get?file=WoodFloor051_1K-JPG.zip"
+    },
+    {
+      "id": "Carpet001",
+      "source": "ambientcg",
+      "role": "rug",
+      "url": "https://ambientcg.com/get?file=Carpet001_1K-JPG.zip"
+    },
+    {
+      "id": "Travertine009",
+      "source": "ambientcg",
+      "role": "villa: basement floor, large-format honed travertine",
+      "url": "https://ambientcg.com/get?file=Travertine009_2K-JPG.zip"
+    },
+    {
+      "id": "Marble014",
+      "source": "ambientcg",
+      "role": "villa: family bath / guest WC stone",
+      "url": "https://ambientcg.com/get?file=Marble014_2K-JPG.zip"
+    },
+    {
+      "id": "Marble020",
+      "source": "ambientcg",
+      "role": "villa: ensuite stone",
+      "url": "https://ambientcg.com/get?file=Marble020_2K-JPG.zip"
+    },
+    {
+      "id": "Wood066",
+      "source": "ambientcg",
+      "role": "villa: walnut joinery",
+      "url": "https://ambientcg.com/get?file=Wood066_2K-JPG.zip"
+    },
+    {
+      "id": "Wood094",
+      "source": "ambientcg",
+      "role": "villa: light oak furniture, doors, slats",
+      "url": "https://ambientcg.com/get?file=Wood094_2K-JPG.zip"
+    },
+    {
+      "id": "Fabric030",
+      "source": "ambientcg",
+      "role": "villa: cinema upholstery / wall fabric",
+      "url": "https://ambientcg.com/get?file=Fabric030_1K-JPG.zip"
+    },
+    {
+      "id": "Fabric066",
+      "source": "ambientcg",
+      "role": "villa: kids soft furnishing (sage)",
+      "url": "https://ambientcg.com/get?file=Fabric066_1K-JPG.zip"
+    },
+    {
+      "id": "Leather030",
+      "source": "ambientcg",
+      "role": "villa: stool seats, study sofa",
+      "url": "https://ambientcg.com/get?file=Leather030_1K-JPG.zip"
+    },
+    {
+      "id": "Carpet016",
+      "source": "ambientcg",
+      "role": "villa: rugs",
+      "url": "https://ambientcg.com/get?file=Carpet016_1K-JPG.zip"
+    },
+    {
+      "id": "Fabric081C",
+      "source": "ambientcg",
+      "role": "villa: bedding white",
+      "url": "https://ambientcg.com/get?file=Fabric081C_1K-JPG.zip"
+    },
+    {
+      "id": "PavingStones146",
+      "source": "ambientcg",
+      "role": "villa: garden terrace paving",
+      "url": "https://ambientcg.com/get?file=PavingStones146_2K-JPG.zip"
+    },
+    {
+      "id": "Grass004",
+      "source": "ambientcg",
+      "role": "villa: lawn",
+      "url": "https://ambientcg.com/get?file=Grass004_2K-JPG.zip"
+    },
+    {
+      "id": "Plaster003",
+      "source": "ambientcg",
+      "role": "villa: exterior render",
+      "url": "https://ambientcg.com/get?file=Plaster003_1K-JPG.zip"
+    }
   ],
   "hdris": [
-    {"id": "kloofendal_48d_partly_cloudy_puresky", "role": "clear day",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_48d_partly_cloudy_puresky_1k.exr"},
-    {"id": "overcast_soil_puresky", "role": "soft overcast day",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/overcast_soil_puresky_1k.exr"},
-    {"id": "dikhololo_night", "role": "night",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/dikhololo_night_1k.exr"},
-    {"id": "belfast_sunset_puresky", "role": "golden hour",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/belfast_sunset_puresky_1k.exr"},
-    {"id": "kloofendal_43d_clear_puresky", "role": "bright midday",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_43d_clear_puresky_1k.exr"},
-    {"id": "studio_garden", "role": "view out of the window (camera rays only; has a horizon)",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/studio_garden_2k.exr"},
-    {"id": "tiergarten", "role": "overcast: light AND view (overcast park with a horizon)",
-     "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/tiergarten_2k.exr"}
+    {
+      "id": "kloofendal_48d_partly_cloudy_puresky",
+      "role": "clear day",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_48d_partly_cloudy_puresky_1k.exr"
+    },
+    {
+      "id": "overcast_soil_puresky",
+      "role": "soft overcast day",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/overcast_soil_puresky_1k.exr"
+    },
+    {
+      "id": "dikhololo_night",
+      "role": "night",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/dikhololo_night_1k.exr"
+    },
+    {
+      "id": "belfast_sunset_puresky",
+      "role": "golden hour",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/belfast_sunset_puresky_1k.exr"
+    },
+    {
+      "id": "kloofendal_43d_clear_puresky",
+      "role": "bright midday",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/1k/kloofendal_43d_clear_puresky_1k.exr"
+    },
+    {
+      "id": "studio_garden",
+      "role": "view out of the window (camera rays only; has a horizon)",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/studio_garden_2k.exr"
+    },
+    {
+      "id": "tiergarten",
+      "role": "overcast: light AND view (overcast park with a horizon)",
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/tiergarten_2k.exr"
+    }
   ],
   "props": [
-    {"id": "book_encyclopedia_set_01", "role": "desk / nightstand books", "api": "polyhaven-model"},
-    {"id": "alarm_clock_01", "role": "bedside table", "api": "polyhaven-model"},
-    {"id": "brass_vase_03", "role": "decorative surface item", "api": "polyhaven-model"},
-    {"id": "potted_plant_04", "role": "desk / windowsill succulent", "api": "polyhaven-model"},
-    {"id": "potted_plant_01", "role": "floor corner", "api": "polyhaven-model"},
-    {"id": "throw_pillows_01", "role": "scanned cushions for the bed", "api": "polyhaven-model"}
+    {
+      "id": "book_encyclopedia_set_01",
+      "role": "desk / nightstand books",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "alarm_clock_01",
+      "role": "bedside table",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "brass_vase_03",
+      "role": "decorative surface item",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "potted_plant_04",
+      "role": "desk / windowsill succulent",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "potted_plant_01",
+      "role": "floor corner",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "throw_pillows_01",
+      "role": "scanned cushions for the bed",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "potted_plant_02",
+      "role": "villa: floor plant",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "pachira_aquatica_01",
+      "role": "villa: large floor plant",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "calathea_orbifolia_01",
+      "role": "villa: plant",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "anthurium_botany_01",
+      "role": "villa: table plant",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "ceramic_vase_01",
+      "role": "villa: vase",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "ceramic_vase_03",
+      "role": "villa: vase",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "decorative_book_set_01",
+      "role": "villa: shelf books",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "wooden_bowl_01",
+      "role": "villa: island bowl",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "hanging_picture_frame_01",
+      "role": "villa: wall art",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "hanging_picture_frame_02",
+      "role": "villa: wall art",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "standing_picture_frame_01",
+      "role": "villa: shelf frame",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "shrub_01",
+      "role": "villa: garden shrub",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "shrub_03",
+      "role": "villa: garden shrub",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "planter_box_01",
+      "role": "villa: terrace planter",
+      "api": "polyhaven-model"
+    }
   ]
 }

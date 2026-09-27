@@ -1,0 +1,305 @@
+"""Pure-Python validation of the villa-render/1 authored scene contract."""
+from __future__ import annotations
+
+import math
+import re
+from datetime import datetime
+from pathlib import PurePosixPath
+
+KINDS = {"principled", "glass", "emissive", "translucent"}
+GROUPS = {"shell", "context", "furniture", "fixture", "dressing", "ground"}
+LAYERS = {"ambient", "task", "accent", "decorative", "night"}
+RAY_VISIBILITY = ("camera", "shadow", "diffuse", "glossy", "transmission")
+
+
+def _number(value, positive=False):
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and (not positive or value > 0)
+
+
+def _vector(value, length=3):
+    return isinstance(value, (list, tuple)) and len(value) == length and all(_number(v) for v in value)
+
+
+def _length(v):
+    return math.sqrt(sum(x*x for x in v))
+
+
+def _sub(a, b):
+    return [x-y for x, y in zip(a, b)]
+
+
+def _cross(a, b):
+    return (a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0])
+
+
+def _relative_path(value):
+    return (isinstance(value, str) and bool(value) and
+            re.fullmatch(r"[A-Za-z0-9_.\-/]+", value) is not None and
+            not PurePosixPath(value).is_absolute() and
+            ".." not in PurePosixPath(value).parts and "\\" not in value)
+
+
+def _timestamp(value):
+    if not isinstance(value, str):
+        return False
+    try:
+        return datetime.fromisoformat(value).tzinfo is not None
+    except ValueError:
+        return False
+
+
+def emission_strength(exitance_lm_per_m2: float) -> float:
+    """Blender emission strength for Lambertian luminous exitance.
+
+    Exitance is flux per emitting area. Lambert's cosine law integrates
+    constant radiance over one outward hemisphere to pi times radiance.
+    This project's measured light scale reads one Blender watt as one lumen.
+    Thus strength is exitance divided by pi in calibrated radiance units.
+    """
+    return exitance_lm_per_m2 / math.pi
+
+
+def mesh_batch_key(mesh: dict, material_kind: str):
+    """Only merge non-emitting architectural meshes with identical ray flags."""
+    if (mesh.get("keep_object") or "bevel_m" in mesh or "subdivide" in mesh or
+            mesh.get("group") in ("furniture", "fixture", "dressing") or material_kind == "emissive"):
+        return None
+    visibility = mesh.get("visibility", {})
+    return mesh["material"], tuple(visibility.get(name, True) for name in RAY_VISIBILITY)
+
+
+def emissive_mesh_output_factor(mesh: dict, view: dict) -> float:
+    """An unlayered mesh is always on; a layered one follows the view."""
+    layer = mesh.get("layer")
+    if layer is None:
+        return 1.0
+    if layer not in view["layers_on"]:
+        return 0.0
+    return view.get("dimmers", {}).get(layer, 1.0)
+
+
+def sky_state_for_view(state: str) -> str:
+    """Exterior dusk uses the specified evening sky with its own exposure."""
+    return "evening" if state == "exterior-dusk" else state
+
+
+def mesh_bbox_corners(mesh: dict):
+    """Bounds of one authored source, independent of Blender mesh merging."""
+    points = [point for face in mesh["faces"] for point in face]
+    low = [min(point[axis] for point in points) for axis in range(3)]
+    high = [max(point[axis] for point in points) for axis in range(3)]
+    return [(x, y, z) for x in (low[0], high[0]) for y in (low[1], high[1])
+            for z in (low[2], high[2])]
+
+
+def validate_scene(scene: dict) -> list[str]:
+    """Return actionable errors; an empty list means the input is renderable."""
+    errors = []
+    def need(condition, path, message):
+        if not condition:
+            errors.append(f"{path}: {message}")
+
+    if not isinstance(scene, dict):
+        return ["scene: expected object"]
+    need(scene.get("schema") == "villa-render/1", "schema", "expected villa-render/1")
+    need(isinstance(scene.get("id"), str) and bool(scene.get("id")), "id", "nonempty string required")
+    north = scene.get("north")
+    need(isinstance(north, dict) and _number(north.get("model_y_bearing_deg")), "north.model_y_bearing_deg", "finite number required")
+    need(isinstance(scene.get("library_root"), str) and bool(scene.get("library_root")), "library_root", "path required")
+    materials = scene.get("materials")
+    if not isinstance(materials, dict):
+        errors.append("materials: object required")
+        materials = {}
+    for name, mat in materials.items():
+        p = f"materials.{name}"
+        need(isinstance(name, str) and bool(name), p, "nonempty name required")
+        if not isinstance(mat, dict):
+            errors.append(f"{p}: object required"); continue
+        need(mat.get("kind") in KINDS, p+".kind", "unknown material kind")
+        need(_vector(mat.get("base_rgb")), p+".base_rgb", "three finite numbers required")
+        if mat.get("kind") in ("glass", "translucent"):
+            need("transmittance" in mat, p+".transmittance", "explicit transmittance required")
+        if mat.get("kind") == "emissive":
+            need("emission_lm_per_m2" in mat and "cct_k" in mat, p, "explicit emission and colour temperature required")
+        if "asset" in mat:
+            need("reflectance" in mat and "tile_m" in mat, p, "textured material needs reflectance and tile_m")
+        for field in ("roughness", "metallic", "reflectance", "transmittance"):
+            if field in mat:
+                need(_number(mat[field]) and 0 <= mat[field] <= 1, p+"."+field, "fraction from 0 to 1 required")
+        for field in ("tile_m", "cct_k"):
+            if field in mat:
+                need(_number(mat[field], positive=True), p+"."+field, "positive number required")
+        if "emission_lm_per_m2" in mat:
+            need(_number(mat["emission_lm_per_m2"]) and mat["emission_lm_per_m2"] >= 0, p+".emission_lm_per_m2", "nonnegative number required")
+        if "grain_axis" in mat:
+            need(mat["grain_axis"] in ("x", "y", "z"), p+".grain_axis", "expected x, y or z")
+        if "asset" in mat:
+            need(_relative_path(mat["asset"]), p+".asset", "safe relative asset name required")
+    meshes = scene.get("meshes")
+    if not isinstance(meshes, list):
+        errors.append("meshes: array required"); meshes = []
+    mesh_ids = set()
+    for i, mesh in enumerate(meshes):
+        p = f"meshes[{i}]"
+        if not isinstance(mesh, dict):
+            errors.append(f"{p}: object required"); continue
+        ident = mesh.get("id")
+        need(isinstance(ident, str) and bool(ident) and ident not in mesh_ids, p+".id", "unique nonempty string required")
+        mesh_ids.add(ident)
+        need(mesh.get("group") in GROUPS, p+".group", "unknown group")
+        need(mesh.get("material") in materials, p+".material", "unknown material")
+        need(mesh.get("room") is None or isinstance(mesh.get("room"), str), p+".room", "string or null required")
+        need(isinstance(mesh.get("label"), str), p+".label", "string required")
+        if "layer" in mesh:
+            need(mesh["layer"] in LAYERS, p+".layer", "unknown lighting layer")
+        if "keep_object" in mesh:
+            need(isinstance(mesh["keep_object"], bool), p+".keep_object", "boolean required")
+        if "bevel_m" in mesh:
+            need(_number(mesh["bevel_m"]) and 0 <= mesh["bevel_m"] <= 0.05,
+                 p+".bevel_m", "number from 0 to 0.05 m required")
+        if "subdivide" in mesh:
+            need(isinstance(mesh["subdivide"], int) and not isinstance(mesh["subdivide"], bool) and
+                 0 <= mesh["subdivide"] <= 2, p+".subdivide", "integer from 0 to 2 required")
+        if "visibility" in mesh:
+            visibility = mesh["visibility"]
+            need(isinstance(visibility, dict) and all(k in RAY_VISIBILITY and isinstance(v, bool)
+                 for k, v in visibility.items()), p+".visibility", "only camera, shadow, diffuse, glossy and transmission booleans allowed")
+        faces = mesh.get("faces")
+        if not isinstance(faces, list) or not faces:
+            errors.append(p+".faces: nonempty array required"); continue
+        for j, face in enumerate(faces):
+            fp = f"{p}.faces[{j}]"
+            if not isinstance(face, list) or len(face) < 3 or not all(_vector(v) for v in face):
+                errors.append(fp+": at least three three-dimensional vertices required"); continue
+            origin = face[0]
+            normal = None
+            for k in range(1, len(face)-1):
+                candidate = _cross(_sub(face[k], origin), _sub(face[k+1], origin))
+                if _length(candidate) > 1e-10:
+                    normal = [x/_length(candidate) for x in candidate]; break
+            if normal is None:
+                errors.append(fp+": degenerate polygon"); continue
+            if any(abs(sum(normal[d]*(v[d]-origin[d]) for d in range(3))) > 0.001 for v in face):
+                errors.append(fp+": nonplanar by more than 1 mm")
+            area = [0.0, 0.0, 0.0]
+            for a, b in zip(face, face[1:]+face[:1]):
+                c = _cross(a, b)
+                area = [area[d]+c[d] for d in range(3)]
+            if _length(area) < 1e-8 or any(_length(_sub(a, b)) < 1e-6 for a, b in zip(face, face[1:]+face[:1])):
+                errors.append(fp+": degenerate polygon")
+    lights = scene.get("lights")
+    if not isinstance(lights, list):
+        errors.append("lights: array required"); lights = []
+    light_ids = set()
+    for i, light in enumerate(lights):
+        p = f"lights[{i}]"
+        if not isinstance(light, dict):
+            errors.append(p+": object required"); continue
+        ident = light.get("id")
+        need(isinstance(ident, str) and bool(ident) and ident not in light_ids and ident not in mesh_ids,
+             p+".id", "unique nonempty string required across meshes and lights")
+        light_ids.add(ident)
+        need(light.get("type") in ("ies", "area", "line"), p+".type", "unknown light type")
+        need(light.get("layer") in LAYERS, p+".layer", "unknown layer")
+        need(isinstance(light.get("room"), str), p+".room", "room string required")
+        need(_vector(light.get("position")), p+".position", "three finite numbers required")
+        need(_vector(light.get("aim")) and _length(light["aim"]) > 0, p+".aim", "nonzero vector required")
+        need(_number(light.get("lumens")) and light["lumens"] >= 0, p+".lumens", "nonnegative number required")
+        need(_number(light.get("cct_k"), positive=True), p+".cct_k", "positive number required")
+        need(_number(light.get("cri")) and 0 <= light["cri"] <= 100, p+".cri", "colour rendering index from 0 to 100 required")
+        product = light.get("product")
+        need(isinstance(product, dict) and isinstance(product.get("manufacturer"), str) and
+             isinstance(product.get("code"), str) and isinstance(product.get("generic"), bool),
+             p+".product", "manufacturer, code and generic flag required")
+        if "dimmer" in light:
+            need(_number(light["dimmer"]) and 0 <= light["dimmer"] <= 1, p+".dimmer", "fraction from 0 to 1 required")
+        if light.get("type") == "ies":
+            need(_relative_path(light.get("ies")), p+".ies", "safe relative IES path required")
+            need(_number(light.get("spin_deg")), p+".spin_deg", "finite number required")
+        if light.get("type") in ("area", "line"):
+            need(_vector(light.get("size"), 2) and all(x > 0 for x in light["size"]), p+".size", "positive width and length required")
+            need(_vector(light.get("length_dir")) and _length(light["length_dir"]) > 0, p+".length_dir", "nonzero vector required")
+            need(_number(light.get("spread_deg")) and 0 < light["spread_deg"] <= 180, p+".spread_deg", "angle from 0 to 180 required")
+    props = scene.get("props", [])
+    if not isinstance(props, list):
+        errors.append("props: array required"); props = []
+    prop_ids = set()
+    for i, prop in enumerate(props):
+        p = f"props[{i}]"
+        if not isinstance(prop, dict):
+            errors.append(p+": object required"); continue
+        ident = prop.get("id")
+        need(isinstance(ident, str) and bool(ident) and ident not in prop_ids and
+             ident not in mesh_ids and ident not in light_ids, p+".id", "unique nonempty id required")
+        prop_ids.add(ident)
+        need(_relative_path(prop.get("asset")), p+".asset", "safe relative asset name required")
+        need(_vector(prop.get("position")), p+".position", "three finite numbers required")
+        need(_vector(prop.get("rotation_deg")), p+".rotation_deg", "three finite angles required")
+        need(_number(prop.get("scale"), positive=True), p+".scale", "positive scale required")
+        need(isinstance(prop.get("label"), str) and prop["label"].startswith("dressing: "),
+             p+".label", "label must begin 'dressing: '")
+    exposure = scene.get("exposure")
+    if not isinstance(exposure, dict):
+        errors.append("exposure: object required"); exposure = {}
+    for key, preset in exposure.items():
+        need(isinstance(key, str) and bool(key) and isinstance(preset, dict) and
+             _number(preset.get("ev100")) and _number(preset.get("white_balance_k"), positive=True),
+             "exposure."+str(key), "ev100 and positive white_balance_k required")
+    sky = scene.get("sky")
+    if not isinstance(sky, dict):
+        errors.append("sky: object required"); sky = {}
+    if "day" in sky:
+        need(sky["day"] == "nishita", "sky.day", "nishita required")
+    for state in ("evening", "night"):
+        if state in sky:
+            setting = sky[state]
+            need(isinstance(setting, dict) and _relative_path(setting.get("hdri")) and
+                 _number(setting.get("horizontal_lux"), positive=True), "sky."+state,
+                 "HDRI and positive horizontal_lux required")
+    views = scene.get("views")
+    if not isinstance(views, list) or not views:
+        errors.append("views: nonempty array required"); views = []
+    view_ids = set()
+    for i, view in enumerate(views):
+        p = f"views[{i}]"
+        if not isinstance(view, dict):
+            errors.append(p+": object required"); continue
+        ident = view.get("id")
+        need(isinstance(ident, str) and bool(ident) and ident not in view_ids and "/" not in ident and "\\" not in ident, p+".id", "unique safe id required")
+        view_ids.add(ident)
+        need(view.get("state") in ("day", "evening", "night", "exterior-dusk"), p+".state",
+             "day, evening, night or exterior-dusk required")
+        sky_state = sky_state_for_view(view.get("state"))
+        need(sky_state in sky, p+".state", "matching sky setting required")
+        need(isinstance(view.get("title"), str) and bool(view["title"]), p+".title", "nonempty title required")
+        need(_timestamp(view.get("when")), p+".when", "timezone-aware ISO timestamp required")
+        need(view.get("exposure") in exposure, p+".exposure", "unknown exposure preset")
+        camera = view.get("camera")
+        if not isinstance(camera, dict):
+            errors.append(p+".camera: object required")
+        else:
+            need(_vector(camera.get("position")), p+".camera.position", "three finite numbers required")
+            need(_vector(camera.get("target")), p+".camera.target", "three finite numbers required")
+            if _vector(camera.get("position")) and _vector(camera.get("target")):
+                need(_length(_sub(camera["position"], camera["target"])) > 1e-6, p+".camera", "position and target differ")
+            for field in ("lens_mm", "sensor_mm"):
+                need(_number(camera.get(field), positive=True), p+".camera."+field, "positive number required")
+            for field in ("shift_x", "shift_y"):
+                if field in camera:
+                    need(_number(camera[field]), p+".camera."+field, "finite number required")
+        res = view.get("resolution")
+        need(isinstance(res, list) and len(res) == 2 and all(isinstance(n, int) and not isinstance(n, bool) and n > 0 for n in res), p+".resolution", "two positive integers required")
+        need(isinstance(view.get("samples"), int) and view["samples"] > 0, p+".samples", "positive integer required")
+        if "max_bounces" in view:
+            need(isinstance(view["max_bounces"], int) and not isinstance(view["max_bounces"], bool) and
+                 0 <= view["max_bounces"] <= 64, p+".max_bounces", "integer from 0 to 64 required")
+        layers = view.get("layers_on")
+        need(isinstance(layers, list) and all(layer in LAYERS for layer in layers), p+".layers_on", "array of known layers required")
+        dimmers = view.get("dimmers", {})
+        need(isinstance(dimmers, dict) and all(k in LAYERS and _number(v) and 0 <= v <= 1 for k, v in dimmers.items()), p+".dimmers", "layer fractions required")
+        need(isinstance(view.get("subjects"), list) and all(isinstance(s, str) for s in view["subjects"]), p+".subjects", "array of strings required")
+        if view.get("state") == "day":
+            sun = view.get("sun")
+            need(isinstance(sun, dict) and _number(sun.get("altitude_deg")) and _number(sun.get("azimuth_true_deg")), p+".sun", "altitude and true azimuth required")
+    need(isinstance(scene.get("notes"), list) and all(isinstance(n, str) for n in scene.get("notes", [])), "notes", "array of strings required")
+    return errors

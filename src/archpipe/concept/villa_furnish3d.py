@@ -130,6 +130,11 @@ def body(it):
             z = min(H - 0.02, k * H / n)
             p.append(("shelf", (x0 + 0.02, yb + 0.02, z, x1 - 0.02, yf, z + 0.02)))
         return p
+    if t == "wardrobe" and str(it.get("room", "")).startswith("parents-dressing"):   # open hanging, no doors
+        return [("back", (x0, yb, 0, x1, yb + 0.02, H)), ("side", (x0, yb, 0, x0 + 0.02, yf, H)),
+                ("side", (x1 - 0.02, yb, 0, x1, yf, H)), ("plinth", (x0, yb, 0, x1, yf, PLINTH)),
+                ("shelf", (x0, yb, H - 0.25, x1, yf, H - 0.23)), ("top", (x0, yb, H - 0.02, x1, yf, H)),
+                ("rail", (x0 + 0.02, -0.01, H - 0.32, x1 - 0.02, 0.01, H - 0.30))]
     if t in ("wardrobe", "tall_column", "sideboard", "bedside_table", "washer_dryer", "folding_counter",
              "window_bench"):
         top = H if t != "folding_counter" else H - 0.04

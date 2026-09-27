@@ -50,6 +50,13 @@ def main(argv=None) -> int:
     sub.add_parser("import")
     c = sub.add_parser("crawl")
     c.add_argument("manufacturer", choices=["signify"])
+    ig = sub.add_parser("iguzzini", help="crawl iGuzzini pages or fetch product photometry")
+    ig_sub = ig.add_subparsers(dest="ig_cmd", required=True)
+    ig_crawl = ig_sub.add_parser("crawl")
+    ig_crawl.add_argument("--family", action="append", default=[], help="/en/<family>/ (repeatable)")
+    ig_crawl.add_argument("--codes", help="comma-separated product codes")
+    ig_fetch = ig_sub.add_parser("fetch")
+    ig_fetch.add_argument("code")
     for name in ("search", "checklist"):
         s = sub.add_parser(name)
         s.add_argument("--catalogue", action="store_true", help="search the unverified catalogue")
@@ -92,6 +99,15 @@ def main(argv=None) -> int:
         cov = cat.coverage().get("signify") or {}
         ok = cov.get("families_read", 0) >= signify.MIN_COVERAGE * max(1, cov.get("families_listed", 1))
         return 0 if ok else 1
+    if a.cmd == "iguzzini":
+        from archpipe.luminaires import iguzzini
+        if a.ig_cmd == "crawl":
+            rows = iguzzini.crawl_products(codes=(a.codes or "").split(","), family_paths=a.family)
+            return 0 if rows else 1
+        rep = iguzzini.fetch_photometry(a.code)
+        row = lib.get("iguzzini", a.code.upper())
+        print(json.dumps({"code": a.code.upper(), "row": row, "skipped": rep["skipped"]}, indent=2))
+        return 0 if row and row["verified"] else 1
     if a.cmd in ("search", "checklist"):
         if a.catalogue or a.cmd == "checklist":
             rows = cat.search_catalogue(mount=a.mount, lm=_range(a.lm), cct=a.cct, market=a.market, text=a.text,
