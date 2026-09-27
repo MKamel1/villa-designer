@@ -576,3 +576,13 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   and column 1.24 m apart on the diagonal, legs 1.05/0.94 m, refused). Negative kept:
   `test_the_body_turns_a_corner_the_path_turns` refuses a straight 0.90 m aisle; all earlier negatives still fail.
 - Messages now state the width checked (750 in bedrooms, card ukadm-bedroom-route-750; 914 elsewhere).
+
+## D1 furniture in Revit (Phase 2, 2026-09-27)
+
+- **A run's modules overran the run.** Building the dirty kitchen in 3D, its modules added up to 3.64 m on a 3.60 m
+  run; the 2D plan drew them and the landing check measured them without noticing. Guard: the kitchen check
+  requires modules to fill their run to 1 mm (`test_modules_must_fill_their_run`, proven on the real 3.64 m).
+- Post-condition PRE-REGISTERED before the first build (`villa_furnish3d.TOL`): each Mark built once, every face of
+  its box within 5 mm, category exact (bound by intent), and every furniture check re-run on the as-built
+  footprints. First build: 65/65 elements, PASS. Negatives: 10 mm off, missing/doubled, wrong category, a
+  wardrobe built 0.5 m out (`tests/test_villa_furnish3d.py`).

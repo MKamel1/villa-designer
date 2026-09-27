@@ -218,6 +218,58 @@ def solid_prism_xz(profile_m, y0_m, y1_m):
     return GCU.CreateExtrusionGeometry(loops, n, abs(ft(y1_m) - ft(y0_m)))
 
 
+FURN_BIC = {"furniture": BuiltInCategory.OST_Furniture, "casework": BuiltInCategory.OST_Casework,
+            "plumbing": BuiltInCategory.OST_PlumbingFixtures, "equipment": BuiltInCategory.OST_SpecialityEquipment}
+FURN_LABEL = {"OST_Furniture": "furniture", "OST_Casework": "casework", "OST_PlumbingFixtures": "plumbing",
+              "OST_SpecialityEquipment": "equipment", "OST_GenericModel": "generic"}
+
+
+def build_furniture(doc, lv, spec, rb):
+    """Each piece of spec["furniture"] (concept/villa_furnish3d.py) as one DirectShape of boxes in the category of
+    what it IS (never trusting a family's own category), stamped with its Mark; the read-back records the element's
+    built bounding box (z from the storey FFL), its category and Mark, for villa_furnish3d.postcondition."""
+    out = []
+    for f in spec["furniture"]:
+        level = lv[spec["levels"][f["level"]]]
+        z0 = UnitUtils.ConvertFromInternalUnits(level.Elevation, UnitTypeId.Millimeters)
+        cid = ElementId(FURN_BIC[f["category"]])
+        if not DirectShape.IsValidCategoryId(cid, doc):
+            cid = ElementId(BuiltInCategory.OST_GenericModel)      # read back as "generic": the check will say so
+        try:
+            s = DirectShape.CreateElement(doc, cid)
+            s.ApplicationId, s.ApplicationDataId = "archpipe-furniture", f["mark"]
+            g = List[GeometryObject]()
+            for b in f["boxes"]:
+                g.Add(solid_box([b[0] * 1000, b[1] * 1000, z0 + b[2] * 1000, b[3] * 1000, b[4] * 1000,
+                                 z0 + b[5] * 1000]))
+            s.SetShape(g)
+            s.Name = "FURN %s (%s)" % (f["mark"], f["type"])
+            p = s.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)
+            if p is not None and not p.IsReadOnly:
+                p.Set(f["mark"])
+        except Exception as exc:
+            rb["failed"].append({"furniture": f["mark"], "error": str(exc)})
+    doc.Regenerate()
+    for bic in list(FURN_BIC.values()) + [BuiltInCategory.OST_GenericModel]:
+        for el in FilteredElementCollector(doc).OfCategory(bic).WhereElementIsNotElementType().ToElements():
+            if not isinstance(el, DirectShape) or el.ApplicationId != "archpipe-furniture":
+                continue
+            p = el.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)
+            mark = p.AsString() if p is not None else None
+            f = [x for x in spec["furniture"] if x["mark"] == mark]
+            lvl = lv[spec["levels"][f[0]["level"]]] if f else None
+            zl = UnitUtils.ConvertFromInternalUnits(lvl.Elevation, UnitTypeId.Millimeters) if lvl else 0.0
+            bb = el.get_BoundingBox(None)
+            mm = lambda v: UnitUtils.ConvertFromInternalUnits(v, UnitTypeId.Millimeters)   # noqa: E731
+            out.append({"mark": mark, "app_id": el.ApplicationDataId,
+                        "category": FURN_LABEL.get(str(el.Category.BuiltInCategory), str(el.Category.Name)),
+                        "bbox": [round(mm(bb.Min.X) / 1000.0, 4), round(mm(bb.Min.Y) / 1000.0, 4),
+                                 round((mm(bb.Min.Z) - zl) / 1000.0, 4), round(mm(bb.Max.X) / 1000.0, 4),
+                                 round(mm(bb.Max.Y) / 1000.0, 4), round((mm(bb.Max.Z) - zl) / 1000.0, 4)]})
+    rb["furniture"] = out
+    rb["built"]["furniture"] = len(out)
+
+
 def build_option(app, model, spec, folder):
     doc = app.OpenDocumentFile(model)
     lv = dict((X._name(l), l) for l in FilteredElementCollector(doc).OfClass(Level))
@@ -418,6 +470,11 @@ def build_option(app, model, spec, folder):
         except Exception as exc:
             rb["failed"].append({"opening": op, "error": str(exc)})
     t.Commit()
+
+    if spec.get("furniture"):
+        t = tx(doc, "furniture")
+        build_furniture(doc, lv, spec, rb)
+        t.Commit()
 
     t = tx(doc, "plan views, rooms, tags")
     vft = list(FilteredElementCollector(doc).OfClass(ViewFamilyType))

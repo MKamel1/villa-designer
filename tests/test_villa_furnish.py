@@ -135,6 +135,11 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
             ids["dk-run"]["modules"] = [("counter", 0.5), ("sink", 0.8), ("counter", 1.0), ("dw", 0.6), ("range", 0.9)]
         self.assertTrue(any("dishwasher" in p for p in _run(m)["kitchen"]["problems"]))
 
+    def test_modules_must_fill_their_run(self):
+        # the real defect: the dirty-kitchen modules added up to 3.64 m on a 3.60 m run (found building it in 3D)
+        res = _run(lambda items, ids: ids["dk-run"]["modules"].__setitem__(-1, ("counter", 0.4)))
+        self.assertTrue(any("dk-run: modules add up to 3.64" in p for p in res["kitchen"]["problems"]))
+
     def test_hob_landing(self):
         res = _run(lambda items, ids: ids["k-island"].update(modules=[("counter", 0.2), ("hob", 0.9), ("counter", 1.4)]))
         self.assertTrue(any("hob landing" in p for p in res["kitchen"]["problems"]))

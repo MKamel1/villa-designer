@@ -205,7 +205,7 @@ def layout(lay=None):
     DK = r["dirty-kitchen"]
     add(against("dk-run", DK, "y1", DK[0], "base_run", w=3.6, d=0.6, h=0.9,
                 modules=[("washer", 0.6), ("counter", 0.62), ("sink", 0.8), ("counter", 0.62), ("hob", 0.6),
-                         ("counter", 0.4)],
+                         ("counter", 0.36)],
                 why="heavy cooking here (answers): gas hob 60 + oven under, sink; washer at the end of the run"),
         "dirty-kitchen")
     add(against("dk-fold", DK, "y0", DK[0] + 0.1, "folding_counter", w=1.5, h=0.9,
@@ -514,6 +514,9 @@ def check(items=None, lay=None, _extended=False):
     landing = ("counter", "dw")
     for it in items:
         mods = module_spans(it)
+        if mods and abs(sum(w for _, w in it["modules"]) - it["w"]) > 1e-3:   # the dirty-kitchen run's modules
+            probs["kitchen"].append("%s: modules add up to %.2f m, the run is %.2f m"   # once overran it by 40 mm
+                                    % (it["id"], sum(w for _, w in it["modules"]), it["w"]))
         for i, (kind, a, b) in enumerate(mods):
             if kind in need:
                 left = right = 0.0
