@@ -1,4 +1,4 @@
-"""Round 11: the four designs side by side (basement plans, what changed, areas, measured daylight).
+"""Round 12: the three designs side by side (basement plans, what changed, areas, measured daylight).
 
     PYTHONPATH=src python scripts/villa_r11_compare.py      # out/villa/designs-r12/Compare-D1-D3.pdf
 
@@ -56,15 +56,15 @@ def main():
             ax.set_title(textwrap.fill(lay["title"].replace("Design ", ""), 38), fontsize=8, weight="bold")
             rs = day.get(lay["id"], {}).get("rooms", {})
             lines = []
-            for rid in ("lounge", "family", "kitchen", "dining", "sitting", "living"):
+            for rid in ("lounge", "family", "kitchen-work", "kitchen", "dining", "living"):
                 r = rs.get(rid)
                 if r and r.get("df") is not None:
                     lines.append("%-8s DF %.2f %%  sDA %s %%" % (rid, r["df"], r.get("sda300")))
             ax.text(0.5, -0.02, "\n".join(lines) or "(daylight pending)", transform=ax.transAxes, ha="center",
                     va="top", fontsize=6.3, family="monospace")
-        fig.suptitle("Round 11: the four designs, BASEMENT (street at the top, garden at the bottom, east yard to the "
+        fig.suptitle("Round 12: the three designs, BASEMENT (street at the top, garden at the bottom, east yard to the "
                      "right)\nDaylight: CIE overcast daylight factor at 0.85 m and sDA300 (share of floor with 300 lx for "
-                     "half the year); white finishes and floor-to-beam glazing in all four", fontsize=10)
+                     "half the year); white finishes; floor-to-beam glazing on the north and east faces", fontsize=10)
         pdf.savefig(fig)
         plt.close(fig)
         fig, axes = plt.subplots(1, 3, figsize=(16.5, 11.7))
@@ -72,7 +72,7 @@ def main():
             plan(ax, lay, "GF")
             ax.set_title(lay["id"] + (" - GF with the void over the lounge" if lay["id"] == "D4" else " - GF (settled)"),
                          fontsize=9, weight="bold")
-        fig.suptitle("Round 11: GROUND FLOOR (the settled plan; D4 cuts a void over the basement lounge)", fontsize=10)
+        fig.suptitle("Round 12: GROUND FLOOR (the settled plan, the same in all three)", fontsize=10)
         pdf.savefig(fig)
         plt.close(fig)
     print(path)
