@@ -36,9 +36,13 @@ def full_height_faces(lay, level):
     out = {("v", round(V.X0, 3)): "street"}
     for _, _, x1, _ in V._exts(lay.get("extension")):
         out.setdefault(("v", round(x1, 3)), "end")
-    if lay.get("basement_full_height"):              # round 11: every basement face a lived-in room looks out of
-        out.setdefault(("v", round(V.XR, 3)), "yard")
-        out.setdefault(("h", round(V.YE, 3)), "yard")
+    fh = lay.get("basement_full_height")
+    if fh:                                           # round 11: every basement face a lived-in room looks out of;
+        faces = ("east", "garden") if fh is True else fh   # round 12: north and east only (the garden end glared)
+        if "garden" in faces:
+            out.setdefault(("v", round(V.XR, 3)), "yard")
+        if "east" in faces:
+            out.setdefault(("h", round(V.YE, 3)), "yard")
     return out
 
 

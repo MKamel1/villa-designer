@@ -45,10 +45,14 @@ XF = 9.657                                                        # the stair fo
 ENTRY = (14.134, 15.745)                                          # the second core lobby door (ENTRY_SEGMENTS)
 RS_ = V.REAR_SHARE                                                # 17.268..22.597 x AX..YP
 VOID_X1 = 5.6                                                     # D4: the lounge void, street face to x 5.6
-DESIGNS = ("D1", "D2", "D3", "D4")
-TITLES = {"D1": "Aligned: kitchen and dining on the column bays, bar alcove in the rear share",
-          "D2": "Kitchen in the light: kitchen in the lit east bay, scullery and garden WC in the rear share",
-          "D3": "Garden kitchen: kitchen and dining at the garden, dirty kitchen in the rear share",
+DESIGNS = ("D1", "D2", "D3")          # round 12 (client): D1 kept; D2 redefined (kitchen to the lit bay); D3 kitchen
+#                                       north. Round 11's D2 and D3 are superseded (git history); D4's void stays
+#                                       available as design("D4") = D1 + the void.
+TITLES = {"D1": "Aligned: kitchen bay 4-5, dining bay 5-6, garden living, bar alcove in the rear share",
+          "D2": "Kitchen at the heart: working kitchen bay 4-5 opening to an island in the lit bay 5-6; living + "
+                "dining at the garden",
+          "D3": "Kitchen north: kitchen + breakfast at the street window, dirty kitchen beside it under the ramp; "
+                "cinema under the deck; dining in the lit bay; living at the garden",
           "D4": "Double height: the street lounge open to the GF study above, garden WC + shower in the rear share"}
 
 
@@ -78,8 +82,12 @@ def _under(uses):
 
 
 def _basement(d):
+    if d == "D3":
+        return _basement_north()
     b = _front()
     links = list(FRONT_LINKS)
+    if d == "D2":
+        return _basement_heart(b, links)
     hall = _room("hall-b", "B", (XF, YP, COL4, YK), "hall", "hall at the stair foot")
     entry = _room("entry-b", "B", (ENTRY[0], YP, ENTRY[1], YK), "entrance", "entrance (second core lobby)")
     if d in ("D1", "D4"):
@@ -107,43 +115,68 @@ def _basement(d):
                         "a garden door fits the 1.14 m run)"),
                   _room("store-rear", "B", (RS_[0], AX, V.BUMP[0], YP), "store", "garden store (furniture, cushions)")]
             links += [("living", "garden-wc"), ("dining-side", "store-rear")]
-    elif d == "D2":
-        b += [hall, entry,
-              _room("family", "B", (XF, YK, COL4, YE), "living", "family / TV corner (open to the lounge)",
-                    part_of="lounge"),
-              _room("dining", "B", (COL4, YK, COL5, YE), "dining", "dining (middle bay, open both ways)"),
-              _room("servery", "B", (COL4, YP, ENTRY[0], YK), "dining", "servery / bar (party side)",
-                    part_of="dining"),
-              _room("kitchen", "B", (COL5, YK, COL6, YE), "kitchen", "open kitchen (lit bay 5-6, east glazing)"),
-              _room("kitchen-island", "B", (ENTRY[1], YP, COL6, YK), "kitchen", "open kitchen (island)"),
-              _room("living", "B", (COL6, YP, XR, YE), "living", "garden living"),
-              _room("scullery", "B", (RS_[0], AX, V.BUMP[0], YP), "utility", "scullery / walk-in pantry (off the "
-                    "kitchen)"),
-              _room("garden-wc", "B", (V.BUMP[0], AX, XR, YP), "wc", "garden WC (under the ensuite above)")]
-        links += [("lounge", "family"), ("hall-b", "stair-b"), ("hall-b", "family"), ("hall-b", "servery"),
-                  ("family", "dining"), ("dining", "servery"), ("servery", "entry-b"),
-                  ("dining", "kitchen"), ("entry-b", "kitchen-island"), ("kitchen", "kitchen-island"),
-                  ("kitchen", "living"), ("kitchen-island", "living"), ("kitchen-island", "scullery"),
-                  ("living", "garden-wc"), ("family", "store-deck"), ("dining", "laundry")]
-        under = [("store-deck", "store", "store (under the deck)", P.SX1, P.GUEST_WC_END),
-                 ("laundry", "utility", "laundry + store (full-height window at the end)", P.GUEST_WC_END, EXT_END)]
-    elif d == "D3":
-        b += [_room("hall-b", "B", (XF, YP, ENTRY[0], YK), "hall", "hall (stair foot to the second core door)"),
-              entry,
-              _room("family", "B", (XF, YK, COL5, YE), "living", "family / TV room (middle)"),
-              _room("sitting", "B", (COL5, YK, COL6, YE), "living", "sitting room (lit bay 5-6, east window)"),
-              _room("sitting-side", "B", (ENTRY[1], YP, COL6, YK), "living", "sitting room (party side)",
-                    part_of="sitting"),
-              _room("dining", "B", (COL6, YK, XR, YE), "dining", "dining (garden doors east and rear)"),
-              _room("kitchen", "B", (COL6, YP, XR, YK), "kitchen", "garden kitchen (island to the dining)"),
-              _room("scullery", "B", RS_, "utility", "dirty kitchen / scullery (behind the kitchen; a garden door fits)")]
-        links += [("lounge", "family"), ("hall-b", "stair-b"), ("hall-b", "family"), ("hall-b", "entry-b"),
-                  ("family", "sitting"), ("entry-b", "sitting-side"), ("sitting", "sitting-side"),
-                  ("sitting", "dining"), ("sitting-side", "kitchen"), ("dining", "kitchen"),
-                  ("kitchen", "scullery"), ("family", "guest-wc"), ("family", "laundry")]
-        under = [("guest-wc", "wc", "guest WC (under the deck)", P.SX1, P.GUEST_WC_END),
-                 ("laundry", "utility", "laundry + store (full-height window at the end)", P.GUEST_WC_END, EXT_END)]
     return b + _under(under), links
+
+
+def _basement_heart(b, links):
+    """Round 12 D2 (client: the kitchen in the lit bay, the living keeps the garden): one long family kitchen from
+    col 4 to col 6 - the working side (cooking wall, tall storage, the door to the dirty kitchen under the deck) in
+    bay 4-5, the island and breakfast table in the lit bay 5-6 at the east window - open to the living + dining at
+    the garden. The street lounge becomes the family / TV room."""
+    b[0] = dict(b[0], name="family / TV lounge (street window floor to beam)")
+    b += [_room("hall-b", "B", (XF, YP, COL4, YK), "hall", "hall at the stair foot"),
+          _room("entry-b", "B", (ENTRY[0], YP, ENTRY[1], YK), "entrance", "entrance (second core lobby)"),
+          _room("family", "B", (XF, YK, COL4, YE), "living", "family / TV (open to the lounge)", part_of="lounge"),
+          _room("kitchen-work", "B", (COL4, YK, COL5, YE), "kitchen", "kitchen: cooking wall (door to the dirty "
+                "kitchen)"),
+          _room("kitchen-store", "B", (COL4, YP, ENTRY[0], YK), "kitchen", "kitchen: tall storage wall"),
+          _room("kitchen", "B", (COL5, YK, COL6, YE), "kitchen", "kitchen: island + breakfast (lit bay, east window)"),
+          _room("kitchen-side", "B", (ENTRY[1], YP, COL6, YK), "kitchen", "kitchen (party side)", part_of="kitchen"),
+          _room("living", "B", (COL6, YP, XR, YE), "living", "garden living + dining"),
+          _room("bar-alcove", "B", RS_, "living", "bar / library alcove (garden window)", part_of="living")]
+    links += [("lounge", "family"), ("hall-b", "stair-b"), ("hall-b", "family"), ("hall-b", "kitchen-store"),
+              ("family", "kitchen-work"), ("kitchen-work", "kitchen-store"), ("kitchen-store", "entry-b"),
+              ("kitchen-work", "kitchen"), ("entry-b", "kitchen-side"), ("kitchen", "kitchen-side"),
+              ("kitchen", "living"), ("kitchen-side", "living"), ("living", "bar-alcove"),
+              ("family", "guest-wc"), ("kitchen-work", "dirty-kitchen")]
+    under = [("guest-wc", "wc", "guest WC (under the deck)", P.SX1, P.GUEST_WC_END),
+             ("dirty-kitchen", "utility", "dirty kitchen + laundry (full-height window at the end)",
+              P.GUEST_WC_END, EXT_END)]
+    return b + _under(under), links
+
+
+def _basement_north():
+    """Round 12 D3 (client: open to an option with the kitchen on the north side): kitchen + breakfast at the street
+    end behind the 3.4 m floor-to-beam window, a glazed door to the sunken patio, the larder under the stair landing
+    and the pantry beside it, and the dirty kitchen + laundry right next to it under the ramp. The cinema moves under
+    the deck (2.65 m clear everywhere). Middle: family / TV; lit bay 5-6: dining; garden: living."""
+    b = [_room("kitchen", "B", (X0, YS, XF, YE), "kitchen", "kitchen + breakfast (street window floor to beam)"),
+         _room("kitchen-nook", "B", (X0, YP, 5.177, YS), "kitchen", "larder (under the stair's top landing)",
+               part_of="kitchen"),
+         _room("stair-b", "B", (5.177, YP, XF, YS), "stair", "stair (straight, to the GF)",
+               ends=[["v", XF, YP + 0.25, YS]]),
+         _room("pantry", "B", V.FRONT_SHARE, "store", "pantry / store (off the larder)"),
+         _room("hall-b", "B", (XF, YP, ENTRY[0], YK), "hall", "hall (stair foot to the second core door)"),
+         _room("entry-b", "B", (ENTRY[0], YP, ENTRY[1], YK), "entrance", "entrance (second core lobby)"),
+         _room("family", "B", (XF, YK, COL5, YE), "living", "family / TV (middle)"),
+         _room("dining", "B", (COL5, YK, COL6, YE), "dining", "dining (lit bay 5-6, east window)"),
+         _room("dining-side", "B", (ENTRY[1], YP, COL6, YK), "dining", "dining (party side)", part_of="dining"),
+         _room("living", "B", (COL6, YP, XR, YE), "living", "garden living"),
+         _room("bar-alcove", "B", RS_, "living", "bar / library alcove (garden window)", part_of="living")]
+    links = [("kitchen", "kitchen-nook"), ("kitchen-nook", "pantry"), ("kitchen", "family"),
+             ("hall-b", "stair-b"), ("hall-b", "family"), ("hall-b", "entry-b"), ("entry-b", "dining-side"),
+             ("family", "dining"), ("dining", "dining-side"), ("dining", "living"), ("dining-side", "living"),
+             ("living", "bar-alcove"), ("kitchen", "dirty-kitchen"), ("dirty-kitchen", "store-ramp"),
+             ("dirty-kitchen", "store-top"), ("family", "guest-wc"), ("family", "cinema")]
+    rooms = [_room("store-ramp", "B", (FN, YE, P.X_LOW, FE), "store", "store under the ramp (1.45-2.0 m clear)",
+                   ext=True),
+             _room("dirty-kitchen", "B", (P.X_LOW, YE, 7.2, FE), "utility", "dirty kitchen + laundry (under the "
+                   "ramp, beside the kitchen)", ext=True),
+             _room("store-top", "B", (7.2, YE, P.SX1, FE), "store", "store (under the ramp top)", ext=True),
+             _room("guest-wc", "B", (P.SX1, YE, P.GUEST_WC_END, FE), "wc", "guest WC (under the deck)", ext=True),
+             _room("cinema", "B", (P.GUEST_WC_END, YE, EXT_END, FE), "media", "cinema (under the deck; 2.65 m "
+                   "clear; full-height end window with a blackout blind)", ext=True)]
+    return b + rooms, links
 
 
 def _gf(d):
@@ -174,12 +207,13 @@ def design(d):
     lay = V._layout(d, "Design %s - %s" % (d, TITLES[d]), gf + b, gl + bl, ge + [("entry-b", "B", "core-lobby-b2")],
                     TITLES[d])
     lay.update({k: base[k] for k in ("stair", "terrace", "deck_door", "north_patio")})
-    lay.update(extension=[list(r["rect"]) for r in under], basement_full_height=True,
+    lay.update(extension=[list(r["rect"]) for r in under],
+               basement_full_height=("east",),         # round 12: north + east; garden doors as round 10
                daylight_variant={"white": True},
                parking2=dict(base["parking2"], deck=[P.RAMP_X1, YE, deck_end, FE],
                              roof_beyond_deck=[deck_end, YE, EXT_END, FE], roof_beyond_planted=True))
     return lay
 
 
-def designs():
-    return [design(d) for d in DESIGNS]
+def designs(ids=DESIGNS):
+    return [design(d) for d in ids]

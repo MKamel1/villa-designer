@@ -1,8 +1,8 @@
 """Round 11: the four designs side by side (basement plans, what changed, areas, measured daylight).
 
-    PYTHONPATH=src python scripts/villa_r11_compare.py      # out/villa/designs-r11/Compare-D1-D4.pdf
+    PYTHONPATH=src python scripts/villa_r11_compare.py      # out/villa/designs-r12/Compare-D1-D3.pdf
 
-Daylight from out/villa/daylight/summary-r11.json (villa_daylight_summary.py r11), areas from the critic's net sizes.
+Daylight from out/villa/daylight/summary-r12.json (villa_daylight_summary.py r11), areas from the critic's net sizes.
 """
 from __future__ import annotations
 
@@ -14,8 +14,8 @@ from pathlib import Path
 from archpipe.concept import villa as V
 from archpipe.concept import villa_r11 as R
 
-OUT = Path("out/villa/designs-r11")
-SUM = Path("out/villa/daylight/summary-r11.json")
+OUT = Path("out/villa/designs-r12")
+SUM = Path("out/villa/daylight/summary-r12.json")
 COLOURS = {"living": "#f6d8a8", "dining": "#f3c37d", "kitchen": "#e9a86b", "media": "#8c8fb3", "wc": "#b9d7ea",
            "utility": "#c9dcc4", "store": "#dddddd", "stair": "#bbbbbb", "hall": "#f2f2f2", "entrance": "#f2f2f2",
            "study": "#f6e3c4", "bedroom": "#d9c7e8", "bathroom": "#b9d7ea", "ensuite": "#b9d7ea",
@@ -48,9 +48,9 @@ def main():
     day = json.loads(SUM.read_text(encoding="utf-8"))["options"] if SUM.exists() else {}
     OUT.mkdir(parents=True, exist_ok=True)
     from archpipe.safe_io import writable_path
-    path = writable_path(OUT / "Compare-D1-D4.pdf")
+    path = writable_path(OUT / "Compare-D1-D3.pdf")
     with PdfPages(path) as pdf:
-        fig, axes = plt.subplots(1, 4, figsize=(16.5, 11.7))
+        fig, axes = plt.subplots(1, 3, figsize=(16.5, 11.7))
         for ax, lay in zip(axes, lays):
             plan(ax, lay, "B")
             ax.set_title(textwrap.fill(lay["title"].replace("Design ", ""), 38), fontsize=8, weight="bold")
@@ -67,7 +67,7 @@ def main():
                      "half the year); white finishes and floor-to-beam glazing in all four", fontsize=10)
         pdf.savefig(fig)
         plt.close(fig)
-        fig, axes = plt.subplots(1, 4, figsize=(16.5, 11.7))
+        fig, axes = plt.subplots(1, 3, figsize=(16.5, 11.7))
         for ax, lay in zip(axes, lays):
             plan(ax, lay, "GF")
             ax.set_title(lay["id"] + (" - GF with the void over the lounge" if lay["id"] == "D4" else " - GF (settled)"),

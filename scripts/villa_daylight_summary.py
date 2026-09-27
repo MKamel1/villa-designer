@@ -25,10 +25,10 @@ from archpipe.concept import villa_parking as P                       # noqa: E4
 
 OUT = Path("out/villa/daylight")
 R11 = "r11" in sys.argv
-DF_JOB, LUX_JOB = (OUT / "villa-df-r11", OUT / "villa-lux-r11") if R11 else (OUT / "villa-df-r10", OUT / "villa-lux-r10")
+DF_JOB, LUX_JOB = (OUT / "villa-df-r12", OUT / "villa-lux-r12") if R11 else (OUT / "villa-df-r10", OUT / "villa-lux-r10")
 CASES = {(l["id"] if not v or l.get("daylight_variant") == v else v["_case"]): (l, v) for l, v in VD.round_cases(R11)}
 OPTIONS = list(CASES)
-SUMMARY = OUT / ("summary-r11.json" if R11 else "summary.json")
+SUMMARY = OUT / ("summary-r12.json" if R11 else "summary.json")
 
 
 def pull_annual():

@@ -23,7 +23,7 @@ from archpipe.concept import villa_parking as VP
 from archpipe.concept import villa_r11 as VR                          # noqa: E402
 
 SETS = {"s": (VO.options, Path("out/villa/options")), "r7": (VP.options, Path("out/villa/options-r7")),
-        "r11": (VR.designs, Path("out/villa/designs-r11"))}
+        "r11": (VR.designs, Path("out/villa/designs-r12"))}
 OPT = SETS["s"][1]
 CROP = (0.6, -31.8, 28.0, -20.6)          # the plan views' crop box (build_villa_option.py), metres
 CROP_PARKING = (-0.9, -31.8, 28.0, -20.6)  # parking options: the north yard is in the plan

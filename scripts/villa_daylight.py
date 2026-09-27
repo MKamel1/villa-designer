@@ -25,7 +25,7 @@ from archpipe.concept import villa_options as VO                     # noqa: E40
 from archpipe.concept import villa_parking as P                      # noqa: E402
 
 R11 = "r11" in sys.argv
-JOB = "villa-df-r11" if R11 else "villa-df-r10"           # r10: straight stair only (P3-P5), headroom-sized slab opening, open study, variants
+JOB = "villa-df-r12" if R11 else "villa-df-r10"           # r10: straight stair only (P3-P5), headroom-sized slab opening, open study, variants
 LOCAL = Path("out/villa/daylight") / JOB
 REMOTE = f"$HOME/archpipe/daylight/{JOB}"
 
@@ -77,7 +77,7 @@ def fetch(host=DEFAULT_HOST):
     return 0 if val["all_pass"] else 1
 
 
-VIEW_JOB = "villa-views-r11" if R11 else "villa-views-r10"
+VIEW_JOB = "villa-views-r12" if R11 else "villa-views-r10"
 VIEW_VARIANTS = ["P3-open", "P3-slot", "P3-combo", "P4-slot", "P4-combo"]   # rendered besides the options
 EYE = -3.0 + 1.6                                   # basement FFL (model) + standing eye height
 VIEWS = {                                          # the same four spots in every option (checked clear of walls)

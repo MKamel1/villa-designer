@@ -12,7 +12,7 @@ class Designs(unittest.TestCase):
         self.lays = R.designs()
 
     def test_four_designs_pass_every_check(self):
-        self.assertEqual([l["id"] for l in self.lays], ["D1", "D2", "D3", "D4"])
+        self.assertEqual([l["id"] for l in self.lays], ["D1", "D2", "D3"])   # round 12 set
         for lay in self.lays:
             sp = RS.build(lay)
             self.assertEqual(V.critique(lay)["fails"], [], lay["id"])
@@ -45,6 +45,22 @@ class Designs(unittest.TestCase):
         self.assertAlmostEqual(x0, V.X0 + 0.25, places=3)
         self.assertAlmostEqual(y1, V.YE - 0.25, places=3)
         self.assertEqual(RS.build(R.design("D1"))["gf_voids"], [])
+
+    def test_round12_garden_faces_are_round10_doors_and_north_east_full_height(self):
+        for lay in self.lays:
+            sp = RS.build(lay)
+            garden = [d for d in sp["doors"] if d.get("garden") and abs(d["x"] - V.XR) < 1e-6]
+            self.assertTrue(garden and all(d["width"] <= 2.4 + 1e-6 for d in garden), lay["id"])
+            self.assertIn(("h", round(V.YE, 3)), RS.full_height_faces(lay, "B"))
+            self.assertNotIn(("v", round(V.XR, 3)), RS.full_height_faces(lay, "B"))
+
+    def test_d3_puts_the_kitchen_at_the_street_with_its_dirty_kitchen_beside_it(self):
+        lay = R.design("D3")
+        self.assertEqual(lay["rooms"]["kitchen"]["rect"][0], V.X0)
+        self.assertIn(("kitchen", "dirty-kitchen"), [tuple(l) for l in lay["links"]])
+        self.assertLessEqual(lay["rooms"]["dirty-kitchen"]["rect"][2], P.SX1)
+        row = [e for e in V.elevation_checks(lay) if e["item"].startswith(lay["rooms"]["cinema"]["name"])][0]
+        self.assertEqual((row["status"], row["achieved"]), ("pass", 100))
 
 
 if __name__ == "__main__":
