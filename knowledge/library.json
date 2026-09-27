@@ -4187,6 +4187,215 @@
       "verification": "Read on the held original page 2026-09-26 (PDF page index 535).",
       "applies_when": {},
       "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-seating-width-610",
+      "locator": "Kitchen Planning Guideline 9, Seating Clearance (PDF page 34)",
+      "summary": "Kitchen seating: allow a 24 in (610 mm) wide knee space for each seated diner (15 in / 381 mm deep at a 36 in counter; 18 in at 30 in tables; 12 in at 42 in counters).",
+      "verified_value": 610
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-seating-knee-depth-381",
+      "locator": "Kitchen Planning Guideline 9, Seating Clearance (PDF page 34)",
+      "summary": "At a 36 in (914 mm) high counter: 15 in (381 mm) deep knee space for each seated diner.",
+      "verified_value": 381
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-sink-landing-610",
+      "locator": "Kitchen Planning Guideline 11, Cleanup/Prep Sink Landing Area (PDF page 38)",
+      "summary": "At least a 24 in (610 mm) wide landing area to one side of the sink and 18 in (457 mm) on the other.",
+      "verified_value": 610
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-sink-landing-457",
+      "locator": "Kitchen Planning Guideline 11, Cleanup/Prep Sink Landing Area (PDF page 38)",
+      "summary": "At least 18 in (457 mm) of landing area on the second side of the sink.",
+      "verified_value": 457
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-fridge-landing-381",
+      "locator": "Kitchen Planning Guideline 16, Refrigerator Landing Area (PDF pages 47-48)",
+      "summary": "At least 15 in (381 mm) of landing area on the handle side of the refrigerator (or either side of a side-by-side, or within 48 in across from its front).",
+      "verified_value": 381
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-hob-landing-305",
+      "locator": "Kitchen Planning Guideline 17, Cooking Surface Landing Area (PDF page 50)",
+      "summary": "At least 12 in (305 mm) of landing area on one side of a cooking surface and 15 in (381 mm) on the other.",
+      "verified_value": 305
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-hob-landing-381",
+      "locator": "Kitchen Planning Guideline 17, Cooking Surface Landing Area (PDF page 50)",
+      "summary": "At least 15 in (381 mm) of landing area on the second side of a cooking surface.",
+      "verified_value": 381
+    },
+    {
+      "id": "ukadm-bedside-zone-a-600",
+      "source_id": "uk-ad-m",
+      "edition": "Volume 1 Dwellings, 2015 edition incorporating 2016 amendments, with March 2016 corrections",
+      "locator": "Diagram 2.4, note 2 (Volume 1, 2015 incorporating 2016 amendments, printed page 19)",
+      "stages": [
+        4
+      ],
+      "summary": "Bedside furniture is permitted in zone 'a' of the bed access zone: the 600 mm at the bed head end.",
+      "category": "technical_requirement",
+      "status": "verified",
+      "unit": "mm",
+      "verified_value": 600,
+      "original_page_checked": true,
+      "conditions": "UK AD M M4(2) accessible and adaptable dwellings; applied because the villa brief records ageing in place (spec/villa-brief.yaml).",
+      "exceptions": null,
+      "verification": "Read on the held original page 2026-09-27 (note text and the 600 mm dimension on Diagram 2.4 checked).",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py"
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-seating-walk-past-1118",
+      "locator": "Kitchen Planning Guideline 8, Traffic Clearance at Seating b (PDF page 29)",
+      "summary": "If traffic passes behind a seated diner, allow at least 44 in (1118 mm) from the counter/table edge to walk past.",
+      "verified_value": 1118
+    },
+    {
+      "source_id": "nkba-guidelines",
+      "edition": "2nd ed., 2016 (NKBA/Wiley)",
+      "stages": [
+        4,
+        6
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "unit": "mm",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "verification": "Read on the held original page 2026-09-27 (value, unit and conditions checked).",
+      "regression_test": "tests/test_evidence_values.py",
+      "conditions": "NKBA Kitchen Planning Guidelines (recommendation, US residential practice).",
+      "id": "nkba-seating-edge-past-914",
+      "locator": "Kitchen Planning Guideline 8, Traffic Clearance at Seating a (PDF page 29)",
+      "summary": "If traffic passes behind a seated diner, allow at least 36 in (914 mm) to edge past.",
+      "verified_value": 914
     }
   ],
   "precedents": [

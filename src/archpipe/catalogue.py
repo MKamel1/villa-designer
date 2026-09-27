@@ -165,6 +165,102 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
         _c(front=864),
         "Mitton & Nystuen 4th ed. p. 235, Fig. 8.13 -- chair about 24 in (610 mm) plus 10-20 in (254-508 mm) clear: at least 34 in (864 mm) behind the desk",
     ),
+    # ---- villa scale (round 12, D1 furnishing) --------------------------------------------------------------------
+    # Footprints below are ASSUMED typical product envelopes (replaced by the chosen product's datasheet in Phase 2);
+    # the clearances cite a held, verified card where one exists (ENVELOPE) and say DIAGNOSTIC where none does.
+    FurnitureType(
+        "bed_king", "King bed (principal bedroom)", 1800, 2000,
+        _c(front=750, left=750, right=750),
+        "card ukadm-bed-principal-750 -- principal double bedroom: 750 mm to both sides and the foot",
+        "ENVELOPE: 180 x 200 mattress, frame flush.",
+    ),
+    FurnitureType(
+        "bed_small_double", "Small double bed (one child)", 1200, 2000,
+        _c(),
+        "card ukadm-bed-single-750 -- a bed for one person: 750 mm clear to one side",
+        "ENVELOPE: 120 x 200; slept in by one child, so the single-bed zone applies.",
+        clearance_any=(("left", "right"), 750),
+    ),
+    FurnitureType("bedside_table", "Bedside table", 500, 400, _c(), "ENVELOPE (no clearance of its own)"),
+    FurnitureType(
+        "sofa_4seat", "Sofa, 4 seat", 2600, 950, _c(front=457),
+        "card mitton-sofa-coffee-table-457 -- sofa to coffee table 18 in (457 mm) where the table is not minimal",
+        "ENVELOPE.",
+    ),
+    FurnitureType(
+        "sofa_bed", "Sofa bed (closed)", 2000, 950, _c(front=457),
+        "card mitton-sofa-coffee-table-457",
+        "ENVELOPE. Opened it needs about 2.1 m of depth: the floor in front is kept clear of fixed pieces.",
+    ),
+    FurnitureType(
+        "armchair", "Armchair", 850, 850, _c(front=457),
+        "card mitton-sofa-coffee-table-457 (seat to table)", "ENVELOPE.",
+    ),
+    FurnitureType(
+        "dining_6x", "Dining table, 6 (extends to 10)", 1800, 900,
+        _c(front=965, back=965, left=813, right=813),
+        "card tss-dining-chair-access-813 -- 813 mm for chair plus access; 965 mm (38 in) where the side is also a passage",
+        "ENVELOPE 1.8 x 0.9 (client brief D-TABLE); extends to about 2.8 m. Long sides are passages in D1.",
+    ),
+    FurnitureType(
+        "sideboard", "Sideboard", 2000, 450, _c(front=914),
+        "card tss-front-of-storage-914 -- 36 in (914 mm) in front of chests and closets", "ENVELOPE.",
+    ),
+    FurnitureType(
+        "bookcase", "Bookcase / shelving", 1200, 350, _c(front=914),
+        "card tss-front-of-storage-914", "ENVELOPE; width set per placement.",
+    ),
+    FurnitureType(
+        "pantry_shelving", "Pantry shelving", 1000, 300, _c(front=914),
+        "card tss-front-of-storage-914", "ENVELOPE; 300 mm deep so the 1.25 m pantry keeps 914 mm in front.",
+    ),
+    FurnitureType(
+        "store_shelving", "Store shelving", 1000, 500, _c(front=600),
+        "DIAGNOSTIC (no held card): 600 mm to reach a store shelf", "ENVELOPE.",
+    ),
+    FurnitureType(
+        "tall_column", "Tall appliance / pantry column", 600, 600, _c(front=1219),
+        "card nkba-work-aisle-multi-cook -- the column faces the work aisle: 48 in (1219 mm) for more than one cook",
+        "ENVELOPE 600 x 600 (fridge, freezer, oven, coffee columns, panel ready).",
+    ),
+    FurnitureType(
+        "base_run", "Kitchen base run (with modules)", 2400, 600, _c(front=1219),
+        "card nkba-work-aisle-multi-cook", "Width set per placement; modules (sink, dishwasher, hob) checked for landing areas.",
+    ),
+    FurnitureType(
+        "island", "Kitchen island (with seating overhang)", 2500, 1200, _c(front=1219, back=1118, left=914, right=914),
+        "cards nkba-work-aisle-multi-cook (working side), nkba-seating-walk-past-1118 (seated side: people walk "
+        "behind the stools to the tall wall), nkba-walkway-min (ends)",
+        "ENVELOPE: 900 mm counter + 300 mm overhang on the seated side; 610 mm per stool (card nkba-seating-width-610).",
+    ),
+    FurnitureType(
+        "washer_dryer", "Washer + dryer stack", 600, 650, _c(front=914),
+        "DIAGNOSTIC (no held card): 914 mm to load and unload, as for storage fronts", "ENVELOPE.",
+    ),
+    FurnitureType(
+        "folding_counter", "Laundry folding counter", 1500, 600, _c(front=914),
+        "DIAGNOSTIC (no held card)", "ENVELOPE.",
+    ),
+    FurnitureType(
+        "recliner", "Cinema recliner (reclined)", 900, 1650, _c(),
+        "DIAGNOSTIC (no held card): the reclined footprint is the envelope", "ENVELOPE 0.9 x 1.65 reclined.",
+    ),
+    FurnitureType(
+        "screen", "Projection screen 100 in (16:9)", 2214, 100, _c(),
+        "card mitton-tv-uhd-min/-max -- viewing distance checked separately (TV-01 style)", "Width of a 100 in 16:9 screen.",
+    ),
+    FurnitureType(
+        "washbasin_double", "Double basin vanity", 1200, 500, _c(front=1100),
+        "UK AD M Vol 1 (2015) Diagram 2.5 -- basin access zone 1100 mm deep (as washbasin)", "ENVELOPE.",
+    ),
+    FurnitureType(
+        "shower_walkin", "Walk-in shower", 1400, 900, _c(front=762),
+        "card nkba-shower-clear-floor-762", "ENVELOPE; size set per placement.",
+    ),
+    FurnitureType(
+        "window_bench", "Window bench", 1000, 500, _c(),
+        "ENVELOPE (a seat, no clearance of its own)",
+    ),
 )}
 
 

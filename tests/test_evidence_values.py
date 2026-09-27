@@ -8,6 +8,16 @@ from archpipe import sources as src
 
 # card -> (held file, 0-based page index, text that must be on that page)
 ORIGINAL = {
+    'nkba-seating-walk-past-1118': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 28, ['allow at least 44″ (1118 mm) to walk past']),
+    'nkba-seating-edge-past-914': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 28, ['allow at least 36″ (914 mm) to edge past']),
+    'ukadm-bedside-zone-a-600': ('uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf', 26, ['Bedside furniture permitted', '600mm']),
+    'nkba-seating-width-610': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 33, ['Allow a 24″ wide × 15″ deep (610 mm × 381 mm)']),
+    'nkba-seating-knee-depth-381': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 33, ['36″ (914 mm) high counters', '(610 mm × 381 mm)']),
+    'nkba-sink-landing-610': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 37, ['24″ (610 mm) wide landing area', '18″\n(457 mm) wide landing area']),
+    'nkba-sink-landing-457': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 37, ['(457 mm) wide landing area on the other side']),
+    'nkba-fridge-landing-381': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 47, ['15″ (381 mm) of landing area on the handle side of the refrigerator']),
+    'nkba-hob-landing-305': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 49, ['12″ (305 mm) of landing area on one side of a cooking surface']),
+    'nkba-hob-landing-381': ('nkba-guidelines/NKBA - Kitchen and Bathroom Planning Guidelines with Access Standards (2nd ed).pdf', 49, ['15″\n(381 mm) on the other side']),
     "ukadk-private-stair-rise-max": ("uk-ad-k/Approved_Document_K.pdf", 14, ["Private stair1, 2", "150", "220", "300"]),
     "ukadk-private-stair-going-min": ("uk-ad-k/Approved_Document_K.pdf", 14, ["Private stair1, 2", "220", "300"]),
     "ukadk-private-stair-pitch-max": ("uk-ad-k/Approved_Document_K.pdf", 14, ["maximum pitch for a private stair is 42"]),

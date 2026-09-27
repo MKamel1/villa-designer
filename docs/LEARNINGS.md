@@ -519,3 +519,20 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   runs column to column (3.41 m) instead of stopping at a utility wall. Occupied rooms under the ramp (the cinema)
   get a ceiling row: 2.3 m over 75 % of the floor (card mh-dwelling-ceiling-min), proven failing when the room is
   pushed toward the gate.
+
+## Furnishing D1: three checker gaps found by their own negative tests (2026-09-27)
+
+- **A 20 mm grid lost every shared room edge.** The furnished-route raster filled rooms with strict inequalities;
+  on a 20 mm grid the cell centres fell exactly on the edges between rooms, so every open-plan join became a wall
+  and nothing was reachable (a 0.5 m body failed). Guard: half-open fills; `test_the_route_check_really_examines_rooms`.
+- **The body was rounded down.** 914 mm on a 50 mm grid became a 900 mm body, so a 909 mm gap between two beds
+  passed. Guard: 20 mm grid, body rounded UP (never kinder than the card); the same test reproduces the first
+  draft's 0.909 m gap.
+- **A corner is not a side.** A body grazing the last centimetre of a bed's foot counted as reaching the bedside;
+  nodes are now the middle of the side (`_middle`). Seats facing a table are reached from the front or a side.
+- **The seating card assumed no traffic.** The island's seated side first faced the cook's aisle and passed on
+  the 813 mm no-traffic card. NKBA 2nd ed. (held) gives 1118 mm where people walk past behind the diners; the
+  stools now face the tall wall with 1.31 m behind them (cards nkba-seating-walk-past-1118 / -edge-past-914;
+  `test_stools_need_room_to_walk_past`).
+- Also carded from the held originals: NKBA landing areas (sink, hob, fridge), seating width, and AD M Diagram 2.4
+  zone 'a' (bedside furniture within 600 mm of the bed head).
