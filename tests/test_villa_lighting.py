@@ -95,7 +95,9 @@ class AdvisoryBrief(unittest.TestCase):
         self.assertEqual(over, [])
 
     def test_every_kids_desk_has_its_own_lamp(self):
-        self.assertEqual(sum(f.kind == "DESK" for f in FX), 3)
+        self.assertEqual(sum(f.kind == "DESK" and f.room == "kids-a" for f in FX), 2)
+        self.assertEqual(sum(f.kind == "DESK" and f.room == "kids-b" for f in FX), 1)
+        self.assertEqual(sum(f.kind == "DESK" and f.room == "cinema" for f in FX), 2)
 
     def test_no_4000k_source_anywhere(self):
         # the client disowned the 4000 K target (2026-09-27): nothing may silently reintroduce it

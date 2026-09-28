@@ -211,6 +211,15 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
         "card tss-front-of-storage-914", "ENVELOPE; width set per placement.",
     ),
     FurnitureType(
+        "daybed_nook", "Recessed daybed nook", 2000, 950, _c(),
+        "Client-approved 900 x 2000 mattress; card mitton-path-of-travel-min checks its reached front edge",
+        "A person enters from the front; the 914 mm route is checked at the access edge, not along enclosed sides.",
+    ),
+    FurnitureType(
+        "joinery_end_panel", "Fixed joinery end panel", 200, 400, _c(),
+        "Fixed infill beside the existing garden column; no cabinet door or working clearance",
+    ),
+    FurnitureType(
         "pantry_shelving", "Pantry shelving", 1000, 300, _c(front=914),
         "card tss-front-of-storage-914", "ENVELOPE; 300 mm deep so the 1.25 m pantry keeps 914 mm in front.",
     ),

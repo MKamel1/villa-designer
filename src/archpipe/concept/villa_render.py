@@ -674,11 +674,8 @@ def build(lay=None, views=None):
             mesh(mid + "-" + suffix, material, box_faces(*bounds), "fixture", room=item["room"],
                  label="ASSUMED coffee machine " + suffix + "; add to Revit", bevel_m=0.005)
 
-    coffee_machine("appliance-coffee-main", "k-tall", -0.765, -0.14)
+    coffee_machine("appliance-coffee-main", "k-run", 0.775, -0.14)
     coffee_machine("appliance-coffee-dirty", "dk-run", -0.90, 0)
-    appliance("appliance-microwave-dirty", "dk-fold", -0.35, 0, 0.90, 0.43, 0.34, 0.30)
-    appliance("appliance-fridge-dirty", "dk-fridge", 0, 0.285, 0.08, 0.54, 0.025, 1.95,
-              mat="greige-lacquer")
     island = it_all["k-island"]
     hob = next((a, b) for kind, a, b in F3._local_modules(island) if kind == "hob")
     hx, hy, _ = FD.to_world_point(island, sum(hob) / 2, 0, 0, LZ["B"])
@@ -1266,10 +1263,10 @@ def props(lay):
     add("living-plant-table", "potted_plant_04", x + 0.3, y, B + it["living-coffee"]["h"],
         label="single potted table plant, 0.168 x 0.185 m footprint, 0.267 m tall")
     add("living-plant", "potted_plant_02", 22.1, -24.25, B, label="floor plant by the garden door")
-    bk = fp["alcove-books"]
-    for k in range(3):
-        add("library-books-%d" % k, "book_encyclopedia_set_01", bk[0] + 0.5 + k * 1.1, bk[1] + 0.16,
-            B + 0.03 + (k + 1) * 0.44, label="books on the library shelves")
+    bk = fp["library-cabinet-right"]
+    for k in range(2):
+        add("library-books-%d" % k, "book_encyclopedia_set_01", bk[0] + 0.45 + k * 0.6, bk[1] + 0.16,
+            B + 0.02 + (k + 1) * 0.42, label="books on the library shelves")
     x, y = c("pb-bedside")
     add("bedside-books", "book_encyclopedia_set_01", x, y, G + it["pb-bedside"]["h"], label="books on the bedside")
     # plants where a person would put them (client: "consider if all the added plants are ... reasonable"): the
@@ -1329,7 +1326,7 @@ def VIEWS(lay=None):
     I = None                                                   # chosen camera
     v("v01-kitchen-garden", "Kitchen island to the garden", "day", I, I, 24, ["k-island", "dining-table"],
       room="kitchen", **BASEMENT_DAY)
-    v("v02-garden-living", "Garden living", "day", I, I, 24, ["living-sofa", "alcove-books"], room="living",
+    v("v02-garden-living", "Garden living", "day", I, I, 24, ["living-sofa", "library-daybed"], room="living",
       **BASEMENT_DAY)
     v("v03-street-lounge", "Street lounge", "day", I, I, 24, ["lounge-sofa", "lounge-tv"], room="lounge",
       **BASEMENT_DAY)
@@ -1345,7 +1342,7 @@ def VIEWS(lay=None):
     v("v09-dining-evening", "Dining and island at night", "evening", I, I, 24, ["dining-table", "k-island"],
       room="dining", dimmers={"ambient": 0.35, "task": 0.5})
     v("v10-living-evening", "Garden living at night: cove and library", "evening", I, I, 24,
-      ["alcove-books", "living-sofa"], room="living", dimmers={"ambient": 0.25, "task": 0.5})
+      ["library-daybed", "living-sofa"], room="living", dimmers={"ambient": 0.25, "task": 0.5})
     v("v11-stair-void", "The stair up to the globe cluster in the void", "evening", [10.45, -27.95, B + 1.45],
       [5.8, -27.95, B + 1.75], 14, ["stair-gf", "stair-b"], shift_y=0.30)
     v("v12-ensuite", "Parents' ensuite", "evening", I, I, 24, ["pe-bath", "pe-basin"], room="parents-ensuite",
@@ -1370,7 +1367,7 @@ def VIEWS(lay=None):
       ["study-sofa", "study-tv"], room="study-game", final_only=True, dimmers={"ambient": 0.4, "task": 0.6})
     v("v19-garden-facade", "Garden elevation by day", "day", [28.2, -31.0, B + 1.35], [20.0, -24.0, B + 1.35], 24,
       ["living-sofa"], final_only=True, shift_y=0.12, exposure="exterior-day")
-    v("v20-kitchen-run", "Kitchen run, tall wall and island at night", "evening", I, I, 24, ["k-run", "k-tall"],
+    v("v20-kitchen-run", "Kitchen run and island at night", "evening", I, I, 24, ["k-run", "k-island"],
       room="kitchen", final_only=True, dimmers={"ambient": 0.4, "task": 0.8})
     v("v21-lounge-evening", "Street lounge at night", "evening", I, I, 24, ["lounge-sofa", "lounge-tv"],
       room="lounge", final_only=True, dimmers={"ambient": 0.3, "accent": 0.6})
@@ -1381,7 +1378,7 @@ def VIEWS(lay=None):
       [8.9, -28.02, G + 1.35], 24, [], final_only=True, layers=["ambient", "accent"], dimmers={},
       exposure="evening")                      # lit by its lamps only: the lamp white balance, as a photographer would
     # the garden-level entrance gave no informative frame (a door leaf and a cabinet); the bar alcove instead
-    v("v24-bar-alcove", "Bar alcove and library at night", "evening", I, I, 24, ["alcove-books"], room="bar-alcove",
+    v("v24-bar-alcove", "Library and daybed nook at night", "evening", I, I, 24, ["library-daybed"], room="bar-alcove",
       final_only=True, dimmers={"ambient": 0.3, "accent": 0.8})
     # ADR-0013 part 8: 24 mm, a LEVEL camera at eye height 1.35 m (1.20 m seated), lens shift not tilt
     from . import render_views as RV

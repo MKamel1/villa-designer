@@ -81,6 +81,33 @@ def do_material(entry: dict, root: Path, index: dict) -> None:
     zip_path.unlink()
 
 
+def do_texture(entry: dict, root: Path, index: dict) -> None:
+    """A Poly Haven texture set (2k JPG): colour, roughness and GL normal, saved under the names the renderer's
+    material builder looks for (<id>_2K_Color.jpg, _Roughness, _NormalGL), next to the ambientCG materials."""
+    asset_id = entry["id"]
+    dest_dir = root / "materials" / asset_id
+    if dest_dir.is_dir() and any(dest_dir.glob("*_Color.jpg")):
+        print("  skip %s (already fetched)" % asset_id)
+        return
+    with urllib.request.urlopen(
+        urllib.request.Request(f"https://api.polyhaven.com/files/{asset_id}",
+                               headers={"User-Agent": USER_AGENT}), timeout=60) as resp:
+        data = json.loads(resp.read())
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    recorded = {}
+    for key, suffix in (("Diffuse", "Color"), ("Rough", "Roughness"), ("nor_gl", "NormalGL")):
+        meta = data.get(key, {}).get("2k", {}).get("jpg")
+        if not meta:
+            if key == "Diffuse":
+                raise ValueError(f"{asset_id}: no 2k diffuse map")
+            continue
+        out_path = dest_dir / f"{asset_id}_2K_{suffix}.jpg"
+        fetch(meta["url"], out_path, f"{asset_id}/{suffix}")
+        recorded[out_path.name] = {"path": str(out_path.relative_to(root)), "sha256": sha256(out_path),
+                                   "source": meta["url"], "license": "CC0"}
+    index.setdefault("materials", {})[asset_id] = recorded
+
+
 def do_hdri(entry: dict, root: Path, index: dict) -> None:
     asset_id = entry["id"]
     dest = root / "hdri" / (asset_id + ".exr")
@@ -130,7 +157,10 @@ def main() -> int:
 
     print("Materials:")
     for entry in manifest.get("materials", []):
-        do_material(entry, root, index)
+        try:
+            (do_texture if entry.get("api") == "polyhaven-texture" else do_material)(entry, root, index)
+        except Exception as exc:
+            print("  FAILED %s: %s" % (entry["id"], exc), file=sys.stderr)
     print("HDRIs:")
     for entry in manifest.get("hdris", []):
         do_hdri(entry, root, index)

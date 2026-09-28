@@ -13,6 +13,7 @@ An item's local frame: front = +Y (the side used), right = +X; `rot` turns it: 0
 from __future__ import annotations
 
 import collections
+import math
 
 import numpy as np
 
@@ -153,43 +154,46 @@ def layout(lay=None):
              why="457 mm from the sofa (card mitton-sofa-coffee-table-457)"), "lounge")
     add(item("lounge-armchair", None, "armchair", 8.3, -26.2, -90, h=0.85,
              why="fifth seat, turned to the TV and the family corner"), "lounge")
-    # -- kitchen: tall wall (fridge-freezer, oven + combi) on the party side, sink run on the east face, 5-seat island
+    # -- kitchen: sink run and island; the shared tall appliances are in the dirty kitchen
     K, KI = r["kitchen"], r["kitchen-island"]
-    add(against("k-tall", KI, "y0", KI[0], "base_run", w=2.25, d=0.6, h=2.3,
-                modules=[("counter", 0.45), ("fridge", 0.6), ("oven", 0.6), ("counter", 0.6)],
-                why="integrated fridge-freezer and an oven + combi column (answers); 450 counter beside the fridge "
-                    "(card nkba-fridge-landing-381); coffee machine on the counter"), "kitchen-island")
-    add(against("k-run", K, "y1", 11.54, "base_run", w=2.41, d=0.6, h=0.9,
-                modules=[("counter", 0.25), ("dw", 0.6), ("counter", 0.2), ("sink", 0.9), ("counter", 0.46)],
+    add(against("k-run", K, "y1", 11.54, "base_run", w=2.01, d=0.6, h=0.9,
+                modules=[("dw", 0.6), ("counter", 0.05), ("sink", 0.9), ("counter", 0.46)],
                 why="sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it"),
         "kitchen")
     run_front = K[3] - 0.6
     add(item("k-island", None, "island", 13.075, run_front - 1.219 - 0.55, 0, w=3.05, d=1.1, h=0.92,
              modules=[("counter", 1.05), ("hob", 0.9), ("counter", 1.1)], stools=5,
-             why="5 stools at 610 mm (card nkba-seating-width-610) on the party side, 1118 mm behind them to walk "
-                 "past to the tall wall (card nkba-seating-walk-past-1118); hob side faces the sink run across a 1.22 m "
+             why="5 stools at 610 mm (card nkba-seating-width-610) on the party side; hob faces the sink run across a 1.22 m "
                  "aisle; 800 mm counter + 300 mm overhang"), "kitchen")
     # -- dining (bay 5-6): table for 6, extends to 10
     D, DS = r["dining"], r["dining-side"]
     add(item("dining-table", None, "dining_6x", 16.95, -25.9, 0, h=0.75, chairs=6,
              why="1.8 x 0.9 for 6, extends to 2.8 m for 10 (the largest gatherings of 20 need a second table: garden "
                  "or living); 965 mm passage both long sides"), "dining")
-    add(against("dining-sideboard", DS, "y0", 16.3, "sideboard", w=1.8, h=0.8, why="serving sideboard"), "dining-side")
+    add(against("dining-sideboard", DS, "y0", 16.2, "sideboard", w=1.2, h=0.8,
+                why="compact serving sideboard keeps the library approach clear"), "dining-side")
     # -- garden living + library alcove
     G, A = r["living"], r["bar-alcove"]
-    add(item("living-sofa", None, "sofa_3seat", 20.35, -28.0, 0, h=0.85,
+    add(item("living-sofa", None, "sofa_3seat", 19.85, -27.32, 0, h=0.85,
              why="back to the library alcove, facing the east garden door; both garden doors stay open to reach"),
         "living")
-    add(item("living-coffee", None, "coffee_table", 20.35, -26.793, 0, w=1.1, d=0.6, h=0.4,
+    add(item("living-coffee", None, "coffee_table", 20.35, -26.113, 0, w=1.1, d=0.6, h=0.4,
              why="457 mm from the sofa"), "living")
-    add(item("living-chair-1", None, "armchair", 19.925, -25.611, 180, h=0.85,
+    add(item("living-chair-1", None, "armchair", 19.925, -24.931, 180, h=0.85,
              why="facing the sofa across the table"), "living")
-    add(item("living-chair-2", None, "armchair", 20.825, -25.611, 180, h=0.85,
+    add(item("living-chair-2", None, "armchair", 20.825, -24.931, 180, h=0.85,
              why="facing the sofa across the table; 1.4 m to the east garden door"), "living")
-    add(against("alcove-books", A, "y0", 18.45, "bookcase", w=3.3, d=0.3, h=2.2,
-                why="library wall along the back of the rear share (backlit shelves: answers)"), "bar-alcove")
-    add(against("alcove-bench", A, "x1", A[1] + 0.05, "window_bench", w=0.85, d=0.5, h=0.45,
-                why="reading seat at the garden window"), "bar-alcove")
+    add(against("library-cabinet-left", A, "y0", A[0], "bookcase", w=1.2, d=0.4, h=2.1,
+                glazing="glass-doors", why="glass-door book joinery on the windowless south wall"), "bar-alcove")
+    add(against("library-daybed", A, "y0", A[0] + 1.2, "daybed_nook", w=2.0, d=0.95, h=0.45,
+                mattress=(2.0, 0.9), nook_top=2.1,
+                why="single 0.9 x 2.0 m mattress in a 0.95 m deep reading nook within the joinery"), "bar-alcove")
+    add(against("library-cabinet-right", A, "y0", A[0] + 3.2, "bookcase", w=22.2 - A[0] - 3.2, d=0.4,
+                h=2.1, glazing="glass-doors", why="glass-door book joinery completes the windowless south wall"),
+        "bar-alcove")
+    add(against("library-end-panel", A, "y0", 22.2, "joinery_end_panel", w=A[2] - 22.2, d=0.4, h=2.1,
+                why="fixed joinery return beside the garden column; no opening leaf in its blocked approach"),
+        "bar-alcove")
     # -- cinema: 85 in TV on the high end wall, a loveseat + floor cushions (answers)
     C = r["cinema"]
     add(against("cinema-tv", C, "x1", C[3] - 1.885, "screen", w=1.88, d=0.1, h=1.5, screen_in=85,
@@ -197,21 +201,25 @@ def layout(lay=None):
     add(item("cinema-sofa", None, "sofa_2seat", C[2] - 0.1 - 2.7 - 0.45 + 0.45, C[3] - 0.95, -90, w=1.6,
              d=0.95, h=0.9, why="loveseat for two, 2.5 m from the screen; floor cushions in front (not fixed)"),
         "cinema", views="cinema-tv")
+    add(against("cinema-desk", C, "y1", 4.66, "desk", w=1.24, d=0.55, h=0.75, chairs=2,
+                why="two work places behind the cinema sofa, under the ramp soffit; card ies-res-desk-400"),
+        "cinema")
     # -- guest WC
     W = r["guest-wc"]
     add(against("gwc-wc", W, "y1", 9.9, "wc", d=0.55, h=0.4, why="wall-hung pan on the far wall"), "guest-wc")
     add(against("gwc-basin", W, "x0", -22.9, "washbasin", h=0.85, why="basin on the side wall"), "guest-wc")
     # -- dirty kitchen + laundry: gas hob 60 + oven, sink, washer (line drying: answers)
     DK = r["dirty-kitchen"]
-    add(against("dk-run", DK, "y1", DK[0], "base_run", w=3.6, d=0.6, h=0.9,
-                modules=[("washer", 0.6), ("counter", 0.62), ("sink", 0.8), ("counter", 0.62), ("hob", 0.6),
-                         ("counter", 0.36)],
-                why="heavy cooking here (answers): gas hob 60 + oven under, sink; washer at the end of the run"),
+    add(against("dk-run", DK, "y1", 11.66, "base_run", w=3.45, d=0.6, h=0.9,
+                modules=[("washer", 0.6), ("counter", 0.383), ("hob", 0.6), ("counter", 0.61), ("sink", 0.8),
+                         ("counter", 0.457)],
+                why="heavy cooking: gas hob with oven under, sink, washer and exact carded landing widths; "
+                    "washer worktop is the folding surface, cleaning storage is below the end counter"),
         "dirty-kitchen")
-    add(against("dk-fold", DK, "y0", DK[0] + 0.1, "folding_counter", w=1.5, h=0.9,
-                why="folding counter with under-counter cleaning storage and drying rack (answers)"), "dirty-kitchen")
-    add(against("dk-fridge", DK, "y0", DK[0] + 1.7, "tall_column", w=0.6, d=0.6, h=2.2,
-                why="integrated dirty-kitchen fridge; cleaning storage moves under the folding counter"), "dirty-kitchen")
+    add(against("dk-appliance-bank", DK, "x0", DK[1], "base_run", w=1.8, d=0.6, h=2.3,
+                modules=[("fridge", 0.6), ("oven", 0.6), ("microwave", 0.6)],
+                why="one shared fridge, oven and microwave bank; NKBA fridge landing is on the opposite worktop "
+                    "within 1.219 m (card nkba-fridge-landing-381)"), "dirty-kitchen")
     # -- stores
     PP = r["pantry"]
     add(against("pantry-shelves-1", PP, "x0", PP[1], "pantry_shelving", w=PP[3] - PP[1], h=2.2,
@@ -371,6 +379,7 @@ DOOR_TYPES = {
     # bed's 750 mm zone and its bedside table sit where a swing would go; the wall beside the door has 1.18 m for
     # the pocket (Phase 2 builds it as a sliding door).
     "corridor/parents-entry": "pocket",
+    "kitchen/dirty-kitchen": "pocket",
     "parents-bed/parents-dressing": "into:parents-dressing",
 }
 
@@ -467,6 +476,13 @@ def check(items=None, lay=None, _extended=False):
                 probs["clearances"].append("%s: no side keeps %d mm clear" % (it["id"], dep))
         for s, dep in zones:
             z = side_zone(it, s, dep)
+            if it["id"] == "dk-run" and s == "front" and "dk-appliance-bank" in {p["id"] for p in items}:
+                # The perpendicular bank occupies the run's very end, not the aisle opposite its working
+                # frontage. NKBA's work aisle is measured between opposing frontages. Keep the remainder
+                # of the run at the full 1219 mm; the 914 mm route check still includes the entire bank.
+                end = footprint(next(p for p in items if p["id"] == "dk-appliance-bank"))[2]
+                if end - z[0] <= 0.2 + 1e-6:
+                    z = (end, z[1], z[2], z[3])
             hit = [o["id"] for o in by_level[it["level"]] if o is not it and _ov(z, footprint(o))
                    and not (it["type"].startswith("bed") and s in ("left", "right") and o["type"] == "bedside_table"
                             and _inside(footprint(o), [head_zone(it, ZONE_A)]))]
@@ -509,10 +525,52 @@ def check(items=None, lay=None, _extended=False):
                     probs["windows"].append("%s (%.2f m high) stands in front of the %s window (sill %.2f)"
                                             % (it["id"], it["h"], w.get("room"), w["sill"]))
     # kitchen landing areas and dishwasher distance (NKBA 2nd ed.)
+    placed = {it["id"]: it for it in items}
+    for it in items:
+        if it["room"] == "kitchen-island" and any(k in ("fridge", "oven", "microwave")
+                                                  for k, _ in it.get("modules", [])):
+            area = it["w"] * it["d"]
+            probs["kitchen"].append("%s restores %.2f m2 of hall-facing tall appliances "
+                                    "(client D1 decision 2026-09-28)" % (it["id"], area))
+    if {"k-run", "k-island"} <= placed.keys():
+        aisle = footprint(placed["k-run"])[1] - footprint(placed["k-island"])[3]
+        meas["kitchen"]["main work aisle"] = "%.3f m (min 1.219; card nkba-work-aisle-multi-cook)" % aisle
+        if aisle < 1.219 - 1e-6:
+            probs["kitchen"].append("main work aisle %.3f m, need 1.219 m (card nkba-work-aisle-multi-cook)" % aisle)
+    if {"dk-appliance-bank", "k-run", "k-island"} <= placed.keys():
+        bank = placed["dk-appliance-bank"]
+        f0, f1 = next((a, b) for kind, a, b in module_spans(bank) if kind == "fridge")
+        fridge = (footprint(bank)[2], (f0 + f1) / 2)
+        kr = placed["k-run"]
+        s0, s1 = next((a, b) for kind, a, b in module_spans(kr) if kind == "sink")
+        sink = ((s0 + s1) / 2, (footprint(kr)[1] + footprint(kr)[3]) / 2)
+        island = placed["k-island"]
+        h0, h1 = next((a, b) for kind, a, b in module_spans(island) if kind == "hob")
+        hob = ((h0 + h1) / 2, (footprint(island)[1] + footprint(island)[3]) / 2)
+        link = next(d for d in sp["doors"] if set(d["rooms"]) == {"kitchen", "dirty-kitchen"})
+        portal = (link["x"], link["y"])
+        via = lambda p: math.dist(fridge, portal) + math.dist(portal, p)
+        meas["kitchen"]["shared fridge relationship"] = (
+            "fridge via door to main sink %.2f m; fridge via door to main hob %.2f m; sink to hob %.2f m "
+            "(advisory path via the 1.2 m opening; no carded triangle limit)" %
+            (via(sink), via(hob), math.dist(sink, hob)))
+        if link["width"] < BODY - 1e-6:
+            probs["kitchen"].append("kitchen/dirty-kitchen door %.3f m, need %.3f m route body "
+                                    "(card mitton-path-of-travel-min)" % (link["width"], BODY))
+    if "cinema-desk" in placed:
+        desk = footprint(placed["cinema-desk"])
+        soffit = min(VP.clear_at(desk[0]), VP.clear_at(desk[2]))
+        meas["clearances"]["cinema desk soffit"] = (
+            "built soffit %.3f m (min 2.300; card mh-dwelling-ceiling-min); if a 0.100 m lining is added, "
+            "clear height would be %.3f m (%.3f m below 2.300 m)" %
+            (soffit, soffit - 0.1, max(0, 2.3 - (soffit - 0.1))))
+        if soffit < 2.3 - 1e-6:
+            probs["clearances"].append("cinema desk soffit %.3f m, need 2.300 m (card mh-dwelling-ceiling-min)" % soffit)
     need = {"sink": (0.610, 0.457, "cards nkba-sink-landing-610/457"),
             "hob": (0.381, 0.305, "cards nkba-hob-landing-381/305"),
             "range": (0.381, 0.305, "cards nkba-hob-landing-381/305")}
     landing = ("counter", "dw")
+    kitchen_items = {it["id"]: it for it in items}
     for it in items:
         mods = module_spans(it)
         if mods and abs(sum(w for _, w in it["modules"]) - it["w"]) > 1e-3:   # the dirty-kitchen run's modules
@@ -539,8 +597,25 @@ def check(items=None, lay=None, _extended=False):
             if kind == "fridge":
                 adj = [m for m in (mods[i - 1] if i else None, mods[i + 1] if i + 1 < len(mods) else None)
                        if m and m[0] == "counter" and m[2] - m[1] >= 0.381 - 1e-6]
+                if not adj and it["id"] == "dk-appliance-bank" and "dk-run" in kitchen_items:
+                    # NKBA Guideline 16 also permits a 381 mm landing within 48 in (1.219 m)
+                    # across from the fridge front. Measure the closest counter of the facing run.
+                    run = kitchen_items["dk-run"]
+                    bf, rf = footprint(it), footprint(run)
+                    across = []
+                    for typ, x0, x1 in module_spans(run):
+                        if typ != "counter" or x1 - x0 < 0.381 - 1e-6:
+                            continue
+                        dy = max(0, rf[1] - b, a - rf[3])
+                        dx = max(0, x0 - bf[2], bf[2] - x1)
+                        across.append((dx * dx + dy * dy) ** 0.5)
+                    gap = min(across, default=99.0)
+                    meas["kitchen"]["dk fridge across-run landing"] = "%.3f m (max 1.219; card nkba-fridge-landing-381)" % gap
+                    if gap <= 1.219 + 1e-6:
+                        adj = [("counter-across", 0, 0.381)]
                 if not adj:
-                    probs["kitchen"].append("%s fridge has no 381 mm landing beside it (card nkba-fridge-landing-381)"
+                    probs["kitchen"].append("%s fridge has no 381 mm landing beside or within 1.219 m across "
+                                            "(card nkba-fridge-landing-381)"
                                             % it["id"])
         sinks = [m for m in mods if m[0] == "sink"]
         dws = [m for m in mods if m[0] == "dw"]
@@ -589,6 +664,17 @@ def check(items=None, lay=None, _extended=False):
 
 
 SEATS = {"sofa_2seat", "sofa_3seat", "sofa_4seat", "sofa_bed", "armchair", "recliner"}
+
+
+def _cinema_chair_rects(desk):
+    """The two built chair footprints, shared with the Revit furniture specification."""
+    from . import villa_furnish3d as F3
+    out = []
+    for _, parts in F3.extras(desk):
+        boxes = [F3.to_world(desk, box) for _, box in parts]
+        out.append((min(b[0] for b in boxes), min(b[1] for b in boxes),
+                    max(b[3] for b in boxes), max(b[4] for b in boxes)))
+    return out
 
 
 def _middle(rect):
@@ -649,6 +735,8 @@ def route_problems(lay, sp, items, level, cell=0.02):
             free |= (X >= a - 1e-9) & (X < c - 1e-9) & (Y >= b - 1e-9) & (Y < d - 1e-9)
         walls_l = _walls(sp, level)
         obst = [footprint(it) for it in items if it["room"] in cl and it["h"] >= 0.3] + _columns() + walls_l
+        chairs = {it["id"]: _cinema_chair_rects(it) for it in items if it["id"] == "cinema-desk" and it["room"] in cl}
+        obst += [rect for pair in chairs.values() for rect in pair]   # Mitton path body must pass the pulled-out chairs
         # not floor: the basement flight (you stand at its foot, not on it), the GF stair opening and any voids
         obst += [lay["rooms"][c]["rect"] for c in cl if lay["rooms"][c]["occupancy"] == "stair" and level == "B"]
         if level == "GF":
@@ -727,10 +815,15 @@ def route_problems(lay, sp, items, level, cell=0.02):
             # the bedside): trim a quarter of the side, at most 0.3 m, off each end
             if t.clearance_any:                          # a single bed is reached on either long side
                 nodes.append((it["id"], [_middle(side_zone(it, sd, 0.3)) for sd in t.clearance_any[0]]))
+            elif it["type"] == "daybed_nook":
+                # The sides are enclosed by joinery. The 914 mm route must touch its front access edge.
+                nodes.append((it["id"], [_middle(side_zone(it, "front", 0.3))]))
             elif it["type"] in SEATS:                    # a seat facing a table is reached from its front or a side
                 nodes.append((it["id"], [_middle(side_zone(it, sd, 0.3)) for sd in ("front", "left", "right")]))
             elif it["type"] == "coffee_table":          # a table among seats is reached from any side
                 nodes.append((it["id"], [_middle(side_zone(it, sd, 0.3)) for sd in SIDES]))
+            elif it["id"] in chairs:
+                nodes.append((it["id"], [_middle((r[0], r[1] - 0.3, r[2], r[1])) for r in chairs[it["id"]]]))
             elif t.clearance["front"] > 0:
                 nodes.append((it["id"], [_middle(side_zone(it, "front", 0.3))]))
         if len(nodes) < 2:

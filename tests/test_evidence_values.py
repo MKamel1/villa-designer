@@ -139,6 +139,26 @@ ORIGINAL = {
     "sll-min-adf-kitchen": ("sll-code/SLL - Code for Lighting (2012).pdf", 127, ["Table 5.2 Minimum average daylight factor", "Kitchens 2.0"]),
     "ukadm-entrance-door-min": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 14,
                                 ["minimum clear opening width of 775mm"]),
+    "ukadf-kitchen-intermittent-hood-30": ("uk-ad-f/ADF1_2026.pdf", 14,
+                                           ["Kitchen (cooker hood extracting to the outside)", "30"]),
+    "ukadf-kitchen-intermittent-no-hood-60": ("uk-ad-f/ADF1_2026.pdf", 14,
+                                              ["Kitchen (no cooker hood or cooker hood does not extract to the outside)", "60"]),
+    "ukadf-kitchen-continuous-high-13": ("uk-ad-f/ADF1_2026.pdf", 16,
+                                         ["Table 1.2  Minimum extract ventilation rates for continuous extract systems", "Kitchen", "13"]),
+    "ukadf-bathroom-intermittent-15": ("uk-ad-f/ADF1_2026.pdf", 14,
+                                       ["Table 1.1  Minimum extract ventilation rates for intermittent extract systems", "Bathroom", "15"]),
+    "ukadf-bathroom-continuous-high-8": ("uk-ad-f/ADF1_2026.pdf", 16,
+                                         ["Table 1.2  Minimum extract ventilation rates for continuous extract systems", "Bathroom", "8"]),
+    "ukadf-sanitary-intermittent-6": ("uk-ad-f/ADF1_2026.pdf", 14,
+                                      ["Sanitary accommodation", "6", "As an alternative for sanitary accommodation, the purge ventilation guidance may be used"]),
+    "ukadf-sanitary-continuous-high-6": ("uk-ad-f/ADF1_2026.pdf", 16,
+                                         ["Table 1.2  Minimum extract ventilation rates for continuous extract systems", "Sanitary accommodation", "6"]),
+    "ukadf-internal-door-undercut-10": ("uk-ad-f/ADF1_2026.pdf", 16,
+                                        ["minimum free area\nequivalent to a 10mm undercut in a 760mm wide door"]),
+    "ukadf-runon-timer-15min": ("uk-ad-f/ADF1_2026.pdf", 21,
+                                ["an intermittent extract fan should be provided with controls", "continue to operate the fan for at least 15 minutes after the room is vacated"]),
+    "ukadf-kitchen-bg-vent-singlestorey-10000": ("uk-ad-f/ADF1_2026.pdf", 22,
+                                                 ["Table 1.7  Minimum equivalent area of background ventilators for natural ventilation", "10,000mm2"]),
 }
 
 # Presence cards (no number): the requirement text is re-read from the original too.
@@ -155,6 +175,10 @@ PRESENCE = {
     "ukadm-wc-entrance-or-principal-storey": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 15,
                                               ["where there are no habitable rooms on the entrance storey, on the principal storey"]),
     "ukadg-dwelling-bathroom": ("uk-ad-g/ADG_with_2024_amendments.pdf", 34, ["at least one bathroom with a fxed bath or shower"]),
+    "ukadf-extract-to-outside": ("uk-ad-f/ADF1_2026.pdf", 14,
+                                 ["Extract ventilation to the outside should be provided in all of the following spaces"]),
+    "ukadf-wc-no-bg-vent-required": ("uk-ad-f/ADF1_2026.pdf", 22,
+                                     ["Table 1.7  Minimum equivalent area of background ventilators for natural ventilation", "Sanitary accommodation", "No minimum"]),
 }
 
 

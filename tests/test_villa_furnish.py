@@ -139,19 +139,18 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
         self.assertTrue(any("dishwasher" in p for p in _run(m)["kitchen"]["problems"]))
 
     def test_modules_must_fill_their_run(self):
-        # the real defect: the dirty-kitchen modules added up to 3.64 m on a 3.60 m run (found building it in 3D)
+        # the real defect: the dirty-kitchen modules overran their run (found building it in 3D)
         res = _run(lambda items, ids: ids["dk-run"]["modules"].__setitem__(-1, ("counter", 0.4)))
-        self.assertTrue(any("dk-run: modules add up to 3.64" in p for p in res["kitchen"]["problems"]))
+        self.assertTrue(any("dk-run: modules add up to" in p for p in res["kitchen"]["problems"]))
 
     def test_hob_landing(self):
         res = _run(lambda items, ids: ids["k-island"].update(modules=[("counter", 0.2), ("hob", 0.9), ("counter", 1.4)]))
         self.assertTrue(any("hob landing" in p for p in res["kitchen"]["problems"]))
 
-    def test_stools_need_room_to_walk_past(self):
-        # first draft: the seated side faced the cook's aisle; with the stools toward the tall wall the island
-        # must keep 1118 mm behind them (card nkba-seating-walk-past-1118): 0.3 m nearer fails
-        res = _run(lambda items, ids: ids["k-island"].update(cy=-26.46))
-        self.assertTrue(any("k-island back 1118" in p for p in res["clearances"]["problems"]), res["clearances"])
+    def test_island_keeps_a_multi_cook_work_aisle(self):
+        # With the tall wall gone, the remaining opposing counter frontages need 1219 mm (NKBA work aisle).
+        res = _run(lambda items, ids: ids["k-island"].update(cy=ids["k-island"]["cy"] + 0.05))
+        self.assertTrue(any("main work aisle" in p for p in res["kitchen"]["problems"]), res["kitchen"])
 
     def test_viewing_distance(self):
         res = _run(lambda items, ids: ids["lounge-tv"].update(screen_in=55))        # 2.78 m from a 55 in screen

@@ -28,6 +28,15 @@ def hfov(v):
     return 2 * math.degrees(math.atan(v["camera"]["sensor_mm"] / 2 / v["camera"]["lens_mm"]))  # sensor = width
 
 
+def door_leaf_near(scene, px, py):
+    """Whether the rendered scene actually has a door leaf at this camera (villa-render doorway guard)."""
+    return any(m.get("material") == "door-oak" and
+               any(abs(sum(p[0] for p in face) / len(face) - px) < 0.9 and
+                   abs(sum(p[1] for p in face) / len(face) - py) < 0.9
+                   for face in m["faces"])
+               for m in scene["meshes"])
+
+
 def main():
     scene = json.loads((OUT / "scene.json").read_text(encoding="utf-8"))
     lay = R.design("D1")
@@ -62,7 +71,11 @@ def main():
         sp_ = RS.build(lay)
         doorway = cam.get("reframed") == "doorway" and VR.in_door_opening(sp_, lv, px, py, cam.get("home_room"))
         if doorway and not v.get("hide_meshes"):
-            problems.append("%s: camera in a doorway but its door is not opened for the view" % v["id"])
+            # The telescopic kitchen door is specified as an opening but has no rendered leaf yet.
+            # Only require a hidden leaf when a door-oak face actually exists at this opening.
+            leaf_here = door_leaf_near(scene, px, py)
+            if leaf_here:
+                problems.append("%s: camera in a doorway but its door is not opened for the view" % v["id"])
         for q in ([] if doorway else F._walls(sp_, lv) + F._columns()):
             if q[0] - 0.2 < px < q[2] + 0.2 and q[1] - 0.2 < py < q[3] + 0.2:
                 problems.append("%s: camera within 0.2 m of a wall or column %s" % (v["id"], [round(t, 2) for t in q]))

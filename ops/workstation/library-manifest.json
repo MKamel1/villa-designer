@@ -145,6 +145,78 @@
       "source": "ambientcg",
       "role": "villa: walnut joinery (dark, less orange)",
       "url": "https://ambientcg.com/get?file=Wood051_2K-JPG.zip"
+    },
+    {
+      "id": "oak_veneer_01",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "natural oak veneer (client: wood looked fake)"
+    },
+    {
+      "id": "white_oak_veneer",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "light oak veneer joinery"
+    },
+    {
+      "id": "natural_walnut_veneer",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "walnut veneer joinery"
+    },
+    {
+      "id": "american_walnut_veneer",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "walnut veneer alternative"
+    },
+    {
+      "id": "teak_veneer",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "teak (outdoor / accents)"
+    },
+    {
+      "id": "oak_wood_planks",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "oak floor planks"
+    },
+    {
+      "id": "plank_flooring_02",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "engineered oak floor alternative"
+    },
+    {
+      "id": "rough_linen",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "curtain sheer / linen"
+    },
+    {
+      "id": "crepe_satin",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "curtain dim-out / blackout face"
+    },
+    {
+      "id": "gravel_ground_01",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "garden gravel"
+    },
+    {
+      "id": "floor_pebbles_01",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "planter mulch / pebbles"
+    },
+    {
+      "id": "sandstone_cracks",
+      "source": "polyhaven",
+      "api": "polyhaven-texture",
+      "role": "stone planter walls"
     }
   ],
   "hdris": [
@@ -283,6 +355,66 @@
     {
       "id": "planter_box_01",
       "role": "villa: terrace planter",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "jacaranda_tree",
+      "role": "shade tree (Cairo street tree; olive/citrus not available as CC0 models)",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "tree_small_02",
+      "role": "small garden tree (stand-in for citrus)",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "searsia_lucida",
+      "role": "evergreen Mediterranean-type shrub",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "grass_medium_01",
+      "role": "ornamental grass",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "grass_medium_02",
+      "role": "ornamental grass",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "flower_gazania",
+      "role": "drought-tolerant ground cover",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "periwinkle_plant",
+      "role": "ground cover",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "wild_rooibos_bush",
+      "role": "fine-leaved shrub",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "shrub_02",
+      "role": "shrub",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "shrub_04",
+      "role": "shrub",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "boulder_01",
+      "role": "garden boulder",
+      "api": "polyhaven-model"
+    },
+    {
+      "id": "namaqualand_stones_01",
+      "role": "stone scatter",
       "api": "polyhaven-model"
     }
   ]

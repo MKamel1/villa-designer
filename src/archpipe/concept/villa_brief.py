@@ -64,13 +64,12 @@ def check(lay=None):
     rng("K-UDEPTH", 350, 350, 400)
     rng("K-OVERHANG", F3.OVERHANG * 1000, 20, 30, note="adopted")
     rng("K-KNEE", 300, 300, 10000, note="island carcass set back 300 mm on the seating side")
-    tall = fp["k-tall"]
     isl = fp["k-island"]
-    rng("K-AISLE", (isl[1] - tall[3]) * 1000, 1200, 99999, note="tall wall to island (two cooks); the seating side "
-        "keeps 1118 mm to walk behind (NKBA)")
+    rng("K-AISLE", (run[1] - isl[3]) * 1000, 1219, 99999,
+        note="island to sink run for multiple cooks (card nkba-work-aisle-multi-cook)")
     rng("K-WALK", (run[1] - isl[3]) * 1000, 900, 99999, note="island to sink run")
-    put("K-FRIDGE", "superseded", "one integrated fridge-freezer (0.6 m column)",
-        "questionnaire: 'One integrated fridge-freezer' replaced the side-by-side niche")
+    put("K-FRIDGE", "superseded", "one shared integrated fridge-freezer in the dirty-kitchen bank",
+        "client moved the appliances from the hall-facing wall; one fridge serves both kitchens")
     mods = F.module_spans(it["k-run"])
     sink = next(m for m in mods if m[0] == "sink")
     dw = next(m for m in mods if m[0] == "dw")
@@ -104,8 +103,8 @@ def check(lay=None):
         else "not met", "sofa %.0f mm, chair %.0f mm from the garden glazing" % (
             (liv[2] - fp["living-sofa"][2]) * 1000, (liv[3] - fp["living-chair-2"][3]) * 1000))
     ls = fp["living-sofa"]
-    rng("L-FLOAT", (ls[1] - F.clear_rect(lay, "bar-alcove")[3]) * 1000 if False else
-        (ls[1] - (fp["alcove-books"][3])) * 1000, 100, 99999, note="sofa back to the library (floats in the room)")
+    rng("L-FLOAT", (ls[1] - fp["library-daybed"][3]) * 1000, 100, 99999,
+        note="sofa back to the daybed nook; the 914 mm route reaches its front edge")
     rng("L-WALL", 100, 100, 99999, note="sofas and cabinets keep >= 100 mm to walls (authored gaps)")
     rug = 2.6
     rng("L-RUGSOFA", (rug - it["living-sofa"]["w"]) / 2 * 1000, 200, 300, note="adopted")

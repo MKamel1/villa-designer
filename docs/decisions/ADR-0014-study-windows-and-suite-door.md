@@ -1,6 +1,6 @@
 # ADR-0014 — D1 study windows and parents' dressing door
 
-- **Status:** accepted client direction, pending Revit reconciliation
+- **Status:** accepted by the client 2026-09-28 (all items), pending Revit reconciliation
 - **Date:** 2026-09-27
 - **Applies to:** D1 concept and authored Revit specification. The study windows were also changed in D2 and D3 (the same study): pending the client's confirmation for those options.
 
@@ -32,3 +32,10 @@ These changes alter the authored Revit specification, daylight scene and render 
 - **Bunk ladder** added to kids' room A's bunk in `villa_furnish3d.body`: the Revit furniture specification changes,
   so the 5 mm read-back post-condition will differ from any model built before it.
 - **Study windows in D2 and D3** follow D1 (same study).
+
+## Client decision (2026-09-28): accepted
+
+The client answered "yes to all three decisions": the 0.8 m dressing door at x = 21.897 m with the 0.35 m bedside
+table (and its route waiver for the private dressing cluster), the low-sill study windows in D2 and D3, and the
+dirty-kitchen fridge replacing the cleaning column. The bunk ladder and bedside size follow. These are now accepted
+design, to be built in the Revit update.

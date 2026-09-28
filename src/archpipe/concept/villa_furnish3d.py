@@ -20,14 +20,16 @@ ABOVE = {"headboard": "a bed's headboard stands against the wall, above the matt
          "flush-plate": "a wall-hung WC's flush plate on the wall",
          "screen": "the TV screen above its unit / on the wall",
          "glass": "a walk-in shower's fixed glass screen",
-         "wall-units": "wall cupboards over the tall wall's counters"}
+         "wall-units": "wall cupboards over the tall wall's counters",
+         "nook-side": "the daybed's tall joinery surround", "nook-top": "the daybed nook top"}
 
 CATEGORY = {"base_run": "casework", "island": "casework", "tall_column": "casework", "pantry_shelving": "casework",
+            "bookcase": "casework", "daybed_nook": "casework", "joinery_end_panel": "casework",
             "store_shelving": "casework", "folding_counter": "casework",
             "wc": "plumbing", "washbasin": "plumbing", "washbasin_double": "plumbing", "bath": "plumbing",
             "shower_walkin": "plumbing", "washer_dryer": "equipment", "screen": "equipment"}
 
-TALL_MODULES = {"fridge", "oven", "tall"}
+TALL_MODULES = {"fridge", "oven", "microwave", "tall"}
 COUNTER_TOP = 0.90           # worktop height (the catalogue's run height)
 PLINTH, PLINTH_SET = 0.10, 0.05
 # advisory targets adopted from villa_01_guidelines.docx (K-SPLASH / K-UPPER, K-OVERHANG): sound practice
@@ -81,6 +83,13 @@ def body(it):
     """The piece's own parts [(name, local box)], all inside the footprint (x in +-w/2, y in +-d/2)."""
     W, D, H, t = it["w"], it["d"], it["h"], it["type"]
     x0, x1, yb, yf = -W / 2, W / 2, -D / 2, D / 2
+    if it["id"] == "library-daybed":
+        # The separate full-height surround is part of the nook, while the mattress stays low.
+        return [("base", (x0, yb, 0, x1, yf, 0.25)),
+                ("mattress", (x0, yb + 0.025, 0.25, x1, yf - 0.025, H)),
+                ("nook-side", (x0, yb, 0, x0 + 0.025, yf, it["nook_top"])),
+                ("nook-side", (x1 - 0.025, yb, 0, x1, yf, it["nook_top"])),
+                ("nook-top", (x0, yb, it["nook_top"] - 0.025, x1, yf, it["nook_top"]))]
     if t.startswith("bed_"):
         if H >= 1.5:                                                # a bunk bed
             p = [("post", (sx * W / 2 - (0.06 if sx > 0 else 0), sy * D / 2 - (0.06 if sy > 0 else 0), 0,
@@ -139,6 +148,9 @@ def body(it):
         for k in range(n + 1):
             z = min(H - 0.02, k * H / n)
             p.append(("shelf", (x0 + 0.02, yb + 0.02, z, x1 - 0.02, yf, z + 0.02)))
+        if it.get("glazing") == "glass-doors":
+            p.extend([("glass-door", (x0 + 0.02, yf - 0.015, 0.04, -0.01, yf, H - 0.04)),
+                      ("glass-door", (0.01, yf - 0.015, 0.04, x1 - 0.02, yf, H - 0.04))])
         return p
     if t == "wardrobe" and str(it.get("room", "")).startswith("parents-dressing"):   # open hanging, no doors
         return [("back", (x0, yb, 0, x1, yb + 0.02, H)), ("side", (x0, yb, 0, x0 + 0.02, yf, H)),
@@ -195,7 +207,7 @@ def extras(it):
     furnished plan draws them (scripts/villa_furnish_pdf.py)."""
     W, D = it["w"], it["d"]
     out = []
-    if it.get("chairs"):
+    if it.get("chairs") and it["type"].startswith("dining"):
         n = it["chairs"] // 2
         for k in range(n):
             xc = -W / 2 + (k + 0.5) * W / n
@@ -206,7 +218,7 @@ def extras(it):
             xc = -W / 2 + (k + 0.5) * W / it["stools"]
             out.append(("stool-%d" % (k + 1), _stool(xc, -D / 2 - 0.05, -D / 2 + 0.35)))
     if it["type"] == "desk":
-        n = max(1, int(W // 0.9))
+        n = it.get("chairs", max(1, int(W // 0.9)))
         for k in range(n):
             xc = -W / 2 + (k + 0.5) * W / n
             out.append(("chair-%d" % (k + 1), _chair(xc, D / 2 - 0.15, D / 2 + 0.3, True)))

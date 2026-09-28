@@ -193,6 +193,7 @@ class RenderStandard(unittest.TestCase):
         from archpipe.concept import render_support as S, revit_spec as RS, villa_r11 as R
         from archpipe.concept.villa_render import box_faces
         self.assertEqual(S.blocked_openings(SCENE), [])
+
         old = copy.deepcopy(SCENE)
         bed = (19.53, -26.591, 21.13, -24.591)
         for n, x in (("02", bed[0] - 0.28), ("03", bed[2] + 0.25)):
@@ -216,6 +217,16 @@ class RenderStandard(unittest.TestCase):
         self.assertIn("lamp-PEN-SMALL-parents-bed-02", found)
         self.assertIn("lamp-PEN-SMALL-parents-bed-03", found)
         self.assertIn("furn-pb-bedside-0", found)
+
+    def test_doorway_guard_uses_the_leaf_actually_in_the_scene(self):
+        # The real D1 scene has no leaf at the new telescopic kitchen door, while the cinema door has one.
+        from scripts import villa_render_views as views
+        by = {v["id"]: v for v in SCENE["views"]}
+        kitchen = by["v17-dirty-kitchen"]
+        cinema = by["v08-cinema"]
+        self.assertFalse(views.door_leaf_near(SCENE, *kitchen["camera"]["position"][:2]))
+        self.assertTrue(views.door_leaf_near(SCENE, *cinema["camera"]["position"][:2]))
+        self.assertTrue(cinema.get("hide_meshes"), "the real cinema leaf must be hidden for its doorway view")
 
     def test_study_windows_are_low_and_column_clear(self):
         from archpipe.concept import villa_r11 as R, revit_spec as RS
@@ -256,10 +267,9 @@ class RenderStandard(unittest.TestCase):
                             {name for name, _ in FD._task_chair(item["w"] * 1000, item["d"] * 1000)})
 
     def test_kitchen_appliances_and_sinks_are_present(self):
-        from archpipe.concept import villa_furnish as F, villa_furniture_detail as FD, villa_r11 as R
+        from archpipe.concept import villa_furnish as F, villa_furnish3d as F3, villa_furniture_detail as FD, villa_r11 as R
         ids = {m["id"] for m in SCENE["meshes"]}
-        for name in ("microwave-dirty", "fridge-dirty", "downdraft-island"):
-            self.assertIn("appliance-" + name, ids)
+        self.assertIn("appliance-downdraft-island", ids)
         for name in ("coffee-main", "coffee-dirty"):
             for part in ("body", "drip-tray", "spout", "water-tank"):
                 self.assertIn("appliance-" + name + "-" + part, ids)
@@ -274,11 +284,12 @@ class RenderStandard(unittest.TestCase):
         self.assertEqual(machine["subdivide"], 1)
         self.assertGreater(len(machine["faces"]), 100, "the machine body is a plain box again")
         items = {i["id"]: i for i in F.layout(R.design("D1"))}
-        self.assertIn("fridge", items["dk-fridge"]["why"])
-        self.assertIn("cleaning storage", items["dk-fold"]["why"])
+        self.assertIn("fridge", items["dk-appliance-bank"]["why"])
+        self.assertIn("cleaning storage", items["dk-run"]["why"])
         for name in ("k-run", "dk-run"):
             self.assertTrue({"sink", "tap"} <= set(FD.world_parts(items[name], 0)))
-        self.assertIn("microwave-glass", FD.world_parts(items["k-tall"], 0))
+        self.assertIn("microwave-glass", FD.world_parts(items["dk-appliance-bank"], 0))
+        self.assertIn("glass-door", {name for name, _ in F3.body(items["library-cabinet-left"])})
 
     def test_bath_mixer_ladder_and_upholstery_stay_in_the_checked_envelopes(self):
         from archpipe.concept import villa_furnish as F, villa_furnish3d as F3, villa_furniture_detail as FD

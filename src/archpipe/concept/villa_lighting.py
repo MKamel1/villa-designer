@@ -66,7 +66,7 @@ KINDS = {
                    cct=3000, cri=90, layer="task", diameter=0.12),
     "COVE": dict(what="LED strip in the cove, 2700 K", mount="strip", lm_per_m=900, cct=2700, cri=90,
                  layer="decorative"),
-    "BACK": dict(what="LED strip backlighting shelves", mount="strip", lm_per_m=400, cct=2700, cri=90,
+    "BACK": dict(what="LED strip inside glass-door book cabinet", mount="strip", lm_per_m=400, cct=2700, cri=90,
                  layer="accent"),
     "UC":   dict(what="under-cabinet LED strip", mount="strip", lm_per_m=1000, cct=3000, cri=90, layer="task"),
     "RAIL": dict(what="LED strip over the hanging rail (in-wardrobe)", mount="strip", lm_per_m=500, cct=3000, cri=90,
@@ -278,7 +278,7 @@ def design(lay=None):
     Fm = rc["family"]
     for x, y in _grid(Fm, 1, 2):
         add("DL", "family", x, y, why="family corner ambient", card="ies-res-family-room-100")
-    # kitchen: globe pendants over the island (centrepiece), task downlights either side, over the run and the tall wall
+    # kitchen: globe pendants over the island (centrepiece), task downlights over the run
     isl = fp["k-island"]
     top = LEVEL_Z["B"] + it["k-island"]["h"]
     cy = (isl[1] + isl[3]) / 2
@@ -290,22 +290,14 @@ def design(lay=None):
         add("DLN", "kitchen", x, isl[3] - 0.25, why="prep light on the cooking side of the island (hob)",
             card="ies-res-kitchen-prep-500")
     run = fp["k-run"]
-    for x in ((run[0] + run[2]) / 2 - 1.0, (run[0] + run[2]) / 2, (run[0] + run[2]) / 2 + 1.0):
+    for x in (run[0] + 0.25, (run[0] + run[2]) / 2, run[2] - 0.25):
         add("DLN", "kitchen", x, run[3] - 0.65, why="650 mm from the wall face, over the counter's front edge, 1.0 m "
             "pitch (advisory K-SPOT-OFF / K-SPOT-PITCH)", card="ies-res-kitchen-sink-300")
     add("DL", "kitchen", (rc["kitchen"][0] + isl[0]) / 2 + 0.2, cy + 0.9, why="kitchen general",
         card="ies-res-kitchen-general-50")
-    tall = fp["k-tall"]
-    for kind_, a_, b_ in [m for m in F.module_spans(it["k-tall"]) if m[0] == "counter"]:
-        strip("UC", "kitchen-island", (a_ + 0.02, tall[3] - 0.30), (b_ - 0.02, tall[3] - 0.30),
-              LEVEL_Z["B"] + 1.48, (0, 0, -1), why="under the wall units (600 mm over the worktop), LED >= 120/m "
-              "in an aluminium profile with diffuser",
-              card="ies-res-kitchen-prep-500")
-        add("DLN", "kitchen-island", (a_ + b_) / 2, tall[3] + 0.12, why="counter front, just clear of the wall units",
-            card="ies-res-kitchen-prep-500")
     KI = rc["kitchen-island"]
     for x in (KI[0] + 0.7, KI[2] - 0.7):
-        add("DL", "kitchen-island", x, (tall[3] + isl[1]) / 2, why="aisle between the tall wall and the stools",
+        add("DL", "kitchen-island", x, (KI[1] + isl[1]) / 2, why="aisle behind the island stools",
             card="ies-res-kitchen-general-50")
     strip("TOE", "kitchen", (isl[0] + 0.05, isl[3] - 0.05), (isl[2] - 0.05, isl[3] - 0.05), LEVEL_Z["B"] + 0.05,
           (0, 0.3, -1), why="island plinth glow: night light and the island floats")
@@ -323,23 +315,22 @@ def design(lay=None):
     for x in (sb[0] + 0.45, sb[2] - 0.45):
         add("ADJ", "dining-side", x, sb[3] + 0.9, aim=(0, -0.55, -1), why="accent on the sideboard and the art "
             "above it, ~30 deg", card="ldb-accent-aim-30")
-    # garden living: cove, library wall backlit, reading at the bench, soft downlights
+    # garden living: cove, lit glass cabinets, reading in the daybed nook, soft downlights
     Lv = rc["living"]
     cove("living", ("x0", "y0"), "cove on the dining and library sides: the garden living glows at night")
     for x, y in _grid((Lv[0] + 0.3, Lv[1] + 0.3, Lv[2], Lv[3]), 2, 2, mx=0.9, my=0.9):
         add("DL", "living", x, y, why="ambient, dimmable", card="ies-res-living-30")
-    bk = it["alcove-books"]
-    bfp = fp["alcove-books"]
-    nsh = max(2, int(bk["h"] / 0.38))
-    for k in range(1, nsh):
-        z = LEVEL_Z["B"] + k * bk["h"] / nsh - 0.03
-        strip("BACK", "bar-alcove", (bfp[0] + 0.05, bfp[1] + 0.05), (bfp[2] - 0.05, bfp[1] + 0.05), z, (0, 0.3, -1),
-              why="each library shelf backlit: the wall becomes a lantern")
-    bn = fp["alcove-bench"]
-    bx = beam_free_x((bn[0] + bn[2]) / 2, (bn[1] + bn[3]) / 2)           # clear of the perimeter beam over the bench end
-    add("ADJ", "bar-alcove", bx, (bn[1] + bn[3]) / 2, aim=((bn[0] + bn[2]) / 2 - bx, 0.0, -2.2),
-        why="reading at the window bench (moved clear of the perimeter beam: the first position was inside it)",
-        card="ies-res-chair-reading-200")
+    for name in ("library-cabinet-left", "library-cabinet-right"):
+        bk, bfp = it[name], fp[name]
+        nsh = max(2, int(bk["h"] / 0.38))
+        for k in range(1, nsh):
+            z = LEVEL_Z["B"] + k * bk["h"] / nsh - 0.03
+            strip("BACK", "bar-alcove", (bfp[0] + 0.05, bfp[1] + 0.05), (bfp[2] - 0.05, bfp[1] + 0.05), z,
+                  (0, 0.3, -1), why="inside the glass-door cabinet, behind the books")
+    nook = fp["library-daybed"]
+    for x in (nook[0] + 0.8, nook[2] - 0.8):
+        add("WALL-READ", "bar-alcove", x, (nook[1] + nook[3]) / 2, z=LEVEL_Z["B"] + 1.1,
+            why="paired swing-arm reading lights inside the daybed nook", card="ies-res-chair-reading-200")
     # cinema: dim wall-wash on the rear wall, low path glow, no light on the screen
     C = rc["cinema"]
     cs = fp["cinema-sofa"]
@@ -351,6 +342,10 @@ def design(lay=None):
             "the screen)", card="ies-res-media-lcd-20")
     strip("NL", "cinema", (C[0] + 0.3, C[1] + 0.05), (C[2] - 0.3, C[1] + 0.05), LEVEL_Z["B"] + 0.05, (0, 0.3, -1),
           why="low path glow to the door during a film")
+    desk = fp["cinema-desk"]
+    for x in (desk[0] + 0.31, desk[2] - 0.31):
+        add("DESK", "cinema", x, desk[1] + 0.28, z=LEVEL_Z["B"] + VL_DESK_Z,
+            why="two shielded task lamps at the cinema desk, switched off for films", card="ies-res-desk-400")
     Sr = rc["store-ramp"]
     add("DL", "store-ramp", (Sr[0] + Sr[2]) / 2, (Sr[1] + Sr[3]) / 2, why="store", card="ies-res-storage-frequent-50")
     G = rc["guest-wc"]
@@ -598,9 +593,6 @@ def task_points(lay=None):
         pts.append(("kitchen", "ies-res-breakfast-200", x, isl[1] + 0.2, B + 0.92, "island seating side"))
     run = fp["k-run"]
     pts.append(("kitchen", "ies-res-kitchen-sink-300", (run[0] + run[2]) / 2, run[1] + 0.25, B + 0.9, "sink"))
-    for kind_, a_, b_ in [m for m in F.module_spans(it["k-tall"]) if m[0] == "counter"]:
-        pts.append(("kitchen-island", "ies-res-kitchen-prep-500", (a_ + b_) / 2, fp["k-tall"][3] - 0.25, B + 0.9,
-                    "tall-wall counter"))
     pts.append(("dining", "ies-res-dining-informal-100", *c("dining-table"), B + 0.75, "dining table centre"))
     dt = fp["dining-table"]
     pts.append(("dining", "ies-res-dining-study-200", dt[0] + 0.3, (dt[1] + dt[3]) / 2, B + 0.75, "table end (homework)"))
@@ -616,7 +608,10 @@ def task_points(lay=None):
         pts.append((room, "ies-res-vanity-grooming-300", *c(basin), lv + 0.91, basin))
     a = fp["lounge-armchair"]
     pts.append(("lounge", "ies-res-chair-reading-200", *c("lounge-armchair"), B + 0.76, "armchair"))
-    pts.append(("bar-alcove", "ies-res-chair-reading-200", *c("alcove-bench"), B + 0.76, "window bench"))
+    pts.append(("bar-alcove", "ies-res-chair-reading-200", *c("library-daybed"), B + 0.76, "daybed nook"))
+    desk = fp["cinema-desk"]
+    for x in (desk[0] + 0.31, desk[2] - 0.31):
+        pts.append(("cinema", "ies-res-desk-400", x, (desk[1] + desk[3]) / 2, B + 0.75, "cinema desk"))
     return pts
 
 

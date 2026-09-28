@@ -183,7 +183,8 @@ def _merge(segs):
 
 def build(lay):
     spec = {"id": lay["id"], "title": lay["title"], "levels": LEVEL_NAME, "walls": [], "separations": [],
-            "doors": [], "windows": [], "rooms": [], "stair": [], "gf_opening": None}
+            "doors": [], "windows": [], "rooms": [], "stair": [], "gf_opening": None,
+            "hatches": [], "pocket_buildouts": [], "balustrades": [], "bath_fittings": [], "ventilation": []}
     for lv in ("B", "GF"):
         raw = []
         for s in segments(lay, lv):
@@ -222,6 +223,8 @@ def build(lay):
                 w_ = 0.9
             if {a, b} == {"parents-bed", "parents-dressing"}:
                 w_ = 0.8  # design lead: clears the 0.35 m bedside table with a 100 mm return to the east wall
+            if lay["id"] == "D1" and {a, b} == {"kitchen", "dirty-kitchen"}:
+                w_ = 1.2  # client-approved wider sliding link between the two work kitchens
             spec["doors"].append({"level": lv, "x": mid if e1[0] == "h" else e1[1], "y": e1[1] if e1[0] == "h" else mid,
                                   "width": w_, "rooms": [a, b], "span": [e1[0], e1[1], lo, hi],
                                   **({"pinned": True} if pinned is not None else {})})
@@ -334,7 +337,143 @@ def build(lay):
                                      round(y0 + (bw if abs(y0 - V.YP) < 1e-6 else 0), 3),
                                      round(x1 - (bw if abs(x1 - V.XR) < 1e-6 else 0), 3),
                                      round(y1 - (bw if abs(y1 - V.YE) < 1e-6 else 0), 3)])
+    if lay["id"] == "D1":
+        _d1_details(lay, spec)
     return spec
+
+
+def _d1_details(lay, spec):
+    """Client-approved D1 detail intent, expressed as native-builder inputs (metres from each floor)."""
+    from . import villa_furnish as F
+    door = next(d for d in spec["doors"] if set(d["rooms"]) == {"kitchen", "dirty-kitchen"})
+    door_lo = round(door["x"] - door["width"] / 2, 3)
+    door.update(sliding=True, slide_type="telescopic-pocket-3", leaf_count=3, panel_width=0.4,
+                pocket_side="west", pocket_span=[round(door_lo - 0.4, 3), door_lo], pocket_wall_thickness=0.15)
+    spec["pocket_buildouts"].append(dict(id="kitchen-dirty-pocket", level="B", wall_axis="h", y=door["y"],
+                                         x0=door["pocket_span"][0], x1=door["pocket_span"][1],
+                                         thickness=0.15, extra_side="dirty-kitchen", height=door["height"]))
+    spec["hatches"].append(dict(id="kitchen-sink-pass-through", level="B", wall_axis="h", x0=11.8, x1=13.1,
+                                y=-23.591, sill=1.0, head=2.1, above="k-run", closure="roll-up-shutter",
+                                shutter_box=[11.8, -23.666, 2.1, 13.1, -23.516, 2.3],
+                                card=None, basis="client-approved worktop + upstand and shutter"))
+    treads = sorted(([v / 1000 for v in box] for box in spec["stair"] if box[5] - box[2] < 300),
+                    key=lambda box: box[0])
+    open_y = treads[0][4]
+    nosings = [[round((t[0] + t[3]) / 2, 3), open_y, round(t[5], 3)] for t in treads]
+    spec["balustrades"].extend([
+        dict(id="stair-open-glass", level="B", side="open", stair="party-wall flight",
+             material="frameless laminated glass", support="steel stringer", top_edge="clear",
+             rail="none", nosing_profile=nosings, height_above_nosing=0.9, thickness_m=None,
+             basis="client glass decision; 0.9 m height carried from ASSUMED D1 render, structural size pending"),
+        dict(id="stair-wall-handrail", level="B", side="wall", stair="party-wall flight",
+             material="wood", support="wall", nosing_profile=[[x, -28.671, z] for x, _, z in nosings],
+             height_above_nosing=0.9,
+             basis="client wood handrail decision; 0.9 m height carried from ASSUMED D1 render")])
+    bath = F.footprint(next(i for i in F.layout(lay) if i["id"] == "pe-bath"))
+    spec["bath_fittings"].extend([
+        dict(id="pe-rain-head", level="GF", room="parents-ensuite", kind="ceiling-rain-head",
+             x=(bath[0] + bath[2]) / 2, y=(bath[1] + bath[3]) / 2, z=2.3, over="pe-bath"),
+        dict(id="pe-hand-shower", level="GF", room="parents-ensuite", kind="hand-shower",
+             x=bath[0] + 0.25, y=bath[1] + 0.05, z=1.1, over="pe-bath"),
+        dict(id="pe-bath-screen", level="GF", room="parents-ensuite", kind="fixed-frameless-glass",
+             x0=bath[0], x1=bath[0] + 0.9, y=bath[3], sill=0.55, head=2.1,
+             entry_clear=bath[2] - (bath[0] + 0.9), card="nkba-shower-clear-floor-762")])
+    # Approved Document F Vol 1 (2026), cards verified by the lead against the PDF text (Table 1.1 printed p.7,
+    # paras 1.21 and 1.51): guest WC intermittent extract 6 l/s with a 15 min run-on (no openable window) and a
+    # 10 mm door undercut; dirty kitchen 30 l/s through its cooker hood ducted to outside (the hood over dk-run's
+    # hob), make-up air through the 1.2 m sliding door's running gap.
+    for room, fan, door_rooms, kind, rate, card, runon, undercut in (
+            ("guest-wc", (10.1, -21.15, 2.45), ["family", "guest-wc"], "extract-fan", 6.0,
+             "ukadf-sanitary-intermittent-6", 15, 0.010),
+            ("dirty-kitchen", (13.3, -21.15, 2.35), ["kitchen", "dirty-kitchen"], "cooker-hood-ducted", 30.0,
+             "ukadf-kitchen-intermittent-hood-30", None, None)):
+        x, y, z = fan
+        spec["ventilation"].append(dict(id=room + "-extract", level="B", room=room, kind=kind,
+                                        fan=[x, y, z], duct_route=[[x, y, z], [x, -20.501, z]],
+                                        discharge="external-wall", discharge_card="ukadf-extract-to-outside",
+                                        makeup_air=dict(path="door-undercut" if undercut else "sliding-door-gap",
+                                                        door_rooms=door_rooms, undercut_m=undercut,
+                                                        card="ukadf-internal-door-undercut-10" if undercut else None),
+                                        operation="intermittent", rate_ls=rate, card=card,
+                                        run_on_min=runon, run_on_card="ukadf-runon-timer-15min" if runon else None))
+
+
+def check_wp1_spec(lay, spec=None):
+    """Check the D1 client detail geometry before a native builder consumes these fields."""
+    if lay["id"] != "D1":
+        return []
+    from . import villa_furnish as F
+    spec = spec if spec is not None else build(lay)
+    errors = []
+    door = next((d for d in spec["doors"] if set(d["rooms"]) == {"kitchen", "dirty-kitchen"}), None)
+    hatch = next((h for h in spec["hatches"] if h["id"] == "kitchen-sink-pass-through"), None)
+    if door is None or abs(door["width"] - 1.2) > 0.001 or not door.get("sliding"):
+        errors.append("kitchen/dirty-kitchen door: client-approved 1.2 m sliding opening missing")
+    if door and door["width"] < 0.914 - 1e-6:
+        errors.append("kitchen/dirty-kitchen opening below 0.914 m route body (card mitton-path-of-travel-min)")
+    buildout = next((b for b in spec["pocket_buildouts"] if b["id"] == "kitchen-dirty-pocket"), None)
+    if door and (buildout is None or buildout["x0"] != door["pocket_span"][0] or
+                 buildout["x1"] != door["pocket_span"][1] or buildout["thickness"] < door["pocket_wall_thickness"]):
+        errors.append("sliding door pocket needs its 0.15 m local wall buildout")
+    if hatch is None:
+        errors.append("kitchen sink pass-through missing")
+    else:
+        run = next(i for i in F.layout(lay) if i["id"] == "k-run")
+        run_fp = F.footprint(run)
+        sink = next((a, b) for kind, a, b in F.module_spans(run) if kind == "sink")
+        if hatch["sill"] < run["h"] + 0.1 - 1e-6:
+            errors.append("hatch sill below 0.90 m worktop + 0.10 m upstand (client decision)")
+        if hatch["x0"] >= sink[1] or hatch["x1"] <= sink[0]:
+            errors.append("hatch does not overlap the k-run sink")
+        if hatch["x0"] < run_fp[0] - 1e-6 or hatch["x1"] > run_fp[2] + 1e-6:
+            errors.append("hatch must stay within the k-run worktop width")
+        if any(c[0] < hatch["x1"] - 1e-6 and c[2] > hatch["x0"] + 1e-6 and
+               c[1] < hatch["y"] + 0.1 and c[3] > hatch["y"] - 0.1 for c in F._columns()):
+            errors.append("hatch overlaps a kept structural column")
+        if door and hatch["x1"] > door["pocket_span"][0] - 0.1 + 1e-6:
+            errors.append("hatch and sliding-door pocket need a 0.10 m clear wall return")
+        box = hatch["shutter_box"]
+        if hatch["closure"] != "roll-up-shutter" or box[2] < hatch["head"] - 1e-6 or box[5] <= box[2]:
+            errors.append("roll-up shutter box must be above the hatch head")
+    glass = next((g for g in spec["balustrades"] if g["id"] == "stair-open-glass"), None)
+    rail = next((g for g in spec["balustrades"] if g["id"] == "stair-wall-handrail"), None)
+    if not glass or glass["material"] != "frameless laminated glass" or glass["top_edge"] != "clear" or glass["rail"] != "none":
+        errors.append("client-approved frameless glass stair edge missing")
+    if not rail or rail["material"] != "wood" or rail["side"] != "wall":
+        errors.append("client-approved wall-side wood handrail missing")
+    bath = F.footprint(next(i for i in F.layout(lay) if i["id"] == "pe-bath"))
+    fittings = {x["id"]: x for x in spec["bath_fittings"]}
+    for name in ("pe-rain-head", "pe-hand-shower"):
+        f = fittings.get(name)
+        if f is None or not (bath[0] <= f["x"] <= bath[2] and bath[1] <= f["y"] <= bath[3]):
+            errors.append(name + " must remain over the bath")
+    screen = fittings.get("pe-bath-screen")
+    if screen is None or screen["x0"] < bath[0] - 1e-6 or screen["x1"] > bath[2] + 1e-6 or \
+            screen["y"] < bath[1] - 1e-6 or screen["y"] > bath[3] + 1e-6:
+        errors.append("fixed bath screen leaves the bath")
+    elif bath[2] - screen["x1"] < 0.762 - 1e-6:
+        errors.append("bath entry %.3f m, need 0.762 m (card nkba-shower-clear-floor-762)" %
+                      (bath[2] - screen["x1"]))
+    vents = {v["room"]: v for v in spec["ventilation"]}
+    for room in ("guest-wc", "dirty-kitchen"):
+        vent = vents.get(room)
+        if vent is None:
+            errors.append(room + " extract placeholder missing")
+            continue
+        r = F.clear_rect(lay, room)
+        x, y, _ = vent["fan"]
+        end = vent["duct_route"][-1]
+        if not (r[0] <= x <= r[2] and r[1] <= y <= r[3]) or end[1] <= lay["rooms"][room]["rect"][3]:
+            errors.append(room + " fan or duct does not reach its external wall")
+        need = {"guest-wc": ("ukadf-sanitary-intermittent-6", 6.0),
+                "dirty-kitchen": ("ukadf-kitchen-intermittent-hood-30", 30.0)}[room]
+        if vent["card"] != need[0] or (vent["rate_ls"] or 0) < need[1] - 1e-9:
+            errors.append("%s extract %s l/s, need %.0f l/s (card %s)" % (room, vent["rate_ls"], need[1], need[0]))
+        if room == "guest-wc" and ((vent.get("run_on_min") or 0) < 15 or
+                                   (vent["makeup_air"].get("undercut_m") or 0) < 0.010 - 1e-9):
+            errors.append("guest-wc needs a 15 min run-on and a 10 mm undercut (ukadf-runon-timer-15min, "
+                          "ukadf-internal-door-undercut-10)")
+    return errors
 
 
 FACADE_COLUMNS = None
