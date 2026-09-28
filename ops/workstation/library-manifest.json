@@ -139,6 +139,12 @@
       "source": "ambientcg",
       "role": "villa: exterior render",
       "url": "https://ambientcg.com/get?file=Plaster003_1K-JPG.zip"
+    },
+    {
+      "id": "Wood051",
+      "source": "ambientcg",
+      "role": "villa: walnut joinery (dark, less orange)",
+      "url": "https://ambientcg.com/get?file=Wood051_2K-JPG.zip"
     }
   ],
   "hdris": [

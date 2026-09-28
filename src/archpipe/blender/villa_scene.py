@@ -112,6 +112,22 @@ def image_mean(img):
     return total / max(count, 1)
 
 
+def image_mean_rgb(img):
+    """Mean LINEAR colour of an sRGB texture, per channel."""
+    pixels = img.pixels[:]
+    step = max(1, len(pixels) // (4 * 20000))
+    tot = [0.0, 0.0, 0.0]
+    count = 0
+
+    def linear(v):
+        return v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4
+    for i in range(0, len(pixels) // 4, step):
+        for j in range(3):
+            tot[j] += linear(pixels[4*i+j])
+        count += 1
+    return [t / max(count, 1) for t in tot]
+
+
 def triplanar_normal(nt, coordinates, image):
     """Interpret NormalGL as tangent vectors on three object-space planes."""
     geo = nt.nodes.new("ShaderNodeNewGeometry")
@@ -196,6 +212,9 @@ def add_material(name, spec, library_root, warnings):
     bsdf.inputs["Base Color"].default_value = base
     bsdf.inputs["Roughness"].default_value = spec.get("roughness", 0.6)
     bsdf.inputs["Metallic"].default_value = spec.get("metallic", 0.0)
+    if name in ("boucle", "linen", "sage-fabric", "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "outdoor-fabric"):
+        bsdf.inputs["Sheen Weight"].default_value = 0.18
+        bsdf.inputs["Sheen Roughness"].default_value = 0.7
     kind = spec["kind"]
     if kind == "glass":
         bsdf.inputs["Transmission Weight"].default_value = 1.0
@@ -264,11 +283,23 @@ def add_material(name, spec, library_root, warnings):
                 nt.links.new(mapping.outputs["Vector"], node.inputs["Vector"])
                 return node
             color = texture(color_path, "sRGB")
-            mean = image_mean(color.image)
-            factor = spec.get("reflectance", luminance(base)) / max(mean, 1e-9)
+            # ADR-0013 part 7: the photo keeps its PATTERN, the finish keeps its stated COLOUR. Each channel's mean
+            # is matched to the stated base colour at the stated reflectance. Matching luminance only let the photo's
+            # own chroma through (Marble014 G/R 0.87, B/R 0.69 against a stated cream 0.95 / 0.86): the stone floors
+            # and every bounce off them read pink.
+            mean_rgb = image_mean_rgb(color.image)
+            mean = luminance(mean_rgb)
+            refl = spec.get("reflectance", luminance(base))
+            target = [c * refl / max(luminance(base), 1e-9) for c in base[:3]]
+            factor = [t / max(m, 1e-9) for t, m in zip(target, mean_rgb)]
             scale = nt.nodes.new("ShaderNodeVectorMath")
-            scale.operation = "SCALE"
-            scale.inputs["Scale"].default_value = factor
+            scale.operation = "MULTIPLY_ADD"
+            contrast = spec.get("contrast", 1.0)
+            # Draw the photographed variation toward its own mean. Per-channel
+            # target means remain unchanged, so the stated hue and reflectance
+            # survive while veneer stops reading as printed stripes.
+            scale.inputs[1].default_value = [f * contrast for f in factor]
+            scale.inputs[2].default_value = [t * (1 - contrast) for t in target]
             nt.links.new(color.outputs["Color"], scale.inputs[0])
             # A reflectance cannot exceed one. Mean normalization of a dark
             # photographic texture otherwise produces energy-gaining texels.
@@ -278,13 +309,35 @@ def add_material(name, spec, library_root, warnings):
             nt.links.new(scale.outputs["Vector"], bounded.inputs[0])
             nt.links.new(bounded.outputs["Vector"], bsdf.inputs["Base Color"])
             mat["texture_mean_linear"] = mean
+            mat["texture_mean_rgb_linear"] = mean_rgb
             mat["texture_scale"] = factor
             mat["reflectance_bounded"] = True
             rough = find("_Roughness")
             if rough:
-                nt.links.new(texture(rough, "Non-Color").outputs["Color"], bsdf.inputs["Roughness"])
+                rough_color = texture(rough, "Non-Color").outputs["Color"]
+                # Preserve the specified roughness while retaining photographed
+                # small-scale variation. The map is also a projection-safe
+                # scalar height cue; a tangent normal map has no valid UV basis
+                # on these world-coordinate, box-projected meshes.
+                rough_range = nt.nodes.new("ShaderNodeMapRange")
+                rough_range.inputs["To Min"].default_value = max(0.0, spec.get("roughness", 0.6) - 0.12)
+                rough_range.inputs["To Max"].default_value = min(1.0, spec.get("roughness", 0.6) + 0.12)
+                nt.links.new(rough_color, rough_range.inputs["Value"])
+                nt.links.new(rough_range.outputs["Result"], bsdf.inputs["Roughness"])
+                fabrics = ("boucle", "linen", "sage-fabric", "charcoal-fabric", "taupe-fabric", "bedding-white",
+                           "throw-taupe", "outdoor-fabric")
+                if name in fabrics:
+                    # woven cloth: a subtle bump from the weave, not a hard photographed relief
+                    bump = nt.nodes.new("ShaderNodeBump")
+                    bump.inputs["Strength"].default_value = 0.15
+                    bump.inputs["Distance"].default_value = 0.0002
+                    nt.links.new(rough_color, bump.inputs["Height"])
+                    nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
             normal = find("_NormalGL")
-            if normal:
+            if normal and name not in ("boucle", "linen", "sage-fabric", "charcoal-fabric", "taupe-fabric",
+                                       "bedding-white", "throw-taupe", "outdoor-fabric"):
+                # stone, paving and wood keep their photographed relief through the object-space triplanar normal
+                # (built for box-projected meshes; a Codex pass removed it everywhere, the lead restored it here)
                 normal_image = bpy.data.images.load(normal, check_existing=True)
                 normal_image.colorspace_settings.name = "Non-Color"
                 nt.links.new(triplanar_normal(nt, mapping.outputs["Vector"], normal_image), bsdf.inputs["Normal"])
@@ -954,16 +1007,18 @@ def render(scene_data, args):
         measure_lighting(scene_data, args, lights, full_power, emissive_sources, mesh_by_id, switched_emitters)
         return
     selected = {v["id"] for v in scene_data["views"]} if args.views == "all" else set(args.views.split(","))
-    for view in scene_data["views"]:
-        if view["id"] not in selected:
-            continue
-        current_warnings = list(warnings)
+
+    hideable = {m for v in scene_data["views"] for m in v.get("hide_meshes", [])}
+
+    def setup_view(view):
+        for mid in hideable:                     # a door opened for a doorway camera, in that view only
+            objects[mid].hide_render = mid in view.get("hide_meshes", [])
         for spec in scene_data["lights"]:
             obj = lights[spec["id"]]
             factor = (view.get("dimmers", {}).get(spec["layer"], 1.0) * spec.get("dimmer", 1.0)) if spec["layer"] in view["layers_on"] else 0
             obj.data.energy = full_power[spec["id"]] * factor
             obj.hide_render = factor <= 0
-        current_emissive = set_emissive_view(emissive_sources, mesh_by_id, switched_emitters, view)
+        emissive = set_emissive_view(emissive_sources, mesh_by_id, switched_emitters, view)
         if view["state"] == "day":
             sun = view["sun"]
             photoreal.daylight_world(sun["altitude_deg"], sun["azimuth_true_deg"] - scene_data["north"]["model_y_bearing_deg"])
@@ -974,6 +1029,37 @@ def render(scene_data, args):
             if not os.path.isfile(hdri):
                 raise FileNotFoundError(hdri)
             photoreal.hdri_world(hdri, sky["horizontal_lux"])
+        return emissive
+
+    # ADR-0013 part 6, the bedroom standard: meter every view with photoreal.camera_meter (fast pre-render,
+    # log-average luminance, top 3 % excluded, highlight priority, -0.4 stop bias), then LOCK one exposure per
+    # state (the median of its views) so rooms still compare honestly (ADR-0013 amendment).
+    locked, metered = {}, {}
+    if scene_data.get("exposure_mode") == "set-metered":
+        by_state = {}
+        for view in scene_data["views"]:
+            if view["id"] not in selected:
+                continue
+            setup_view(view)
+            cam_, _ = configure_camera(view)
+            s0 = bpy.context.scene
+            s0.render.resolution_x, s0.render.resolution_y = args.res or view["resolution"]
+            s0.view_settings.view_transform = "AgX"
+            s0.view_settings.look = "AgX - Medium High Contrast"
+            ev, logavg = photoreal.camera_meter(bias_stops=-0.4, look="AgX - Medium High Contrast")
+            metered[view["id"]] = {"exposure_stops": ev, "log_average": logavg}
+            by_state.setdefault(view["exposure"], []).append(ev)
+            cdata = cam_.data
+            bpy.data.objects.remove(cam_, do_unlink=True)
+            bpy.data.cameras.remove(cdata)
+        for key, evs in by_state.items():
+            evs = sorted(evs)
+            locked[key] = evs[len(evs) // 2]
+    for view in scene_data["views"]:
+        if view["id"] not in selected:
+            continue
+        current_warnings = list(warnings)
+        current_emissive = setup_view(view)
         camera, pitch = configure_camera(view)
         s = bpy.context.scene
         s.render.resolution_x, s.render.resolution_y = args.res or view["resolution"]
@@ -983,7 +1069,11 @@ def render(scene_data, args):
         preset = scene_data["exposure"][view["exposure"]]
         s.view_settings.view_transform = "AgX"
         s.view_settings.look = "AgX - Medium High Contrast"
-        s.view_settings.exposure = math.log2(math.pi / (2.5 * 2**preset["ev100"]))
+        if view["exposure"] in locked:
+            s.view_settings.exposure = locked[view["exposure"]]
+        else:
+            s.view_settings.exposure = math.log2(math.pi / (2.5 * 2**preset["ev100"]))
+        locked_ev100 = math.log2(math.pi / (2.5 * 2 ** s.view_settings.exposure))
         wb = photoreal.white_balance(preset["white_balance_k"])
         if not wb:
             current_warnings.append("Blender does not support stated white balance")
@@ -1002,6 +1092,21 @@ def render(scene_data, args):
         clipped = sum(1 for i in range(n) if max(pixels[4*i:4*i+3]) >= 0.995)/max(n, 1)
         mean = sum(luminance(pixels[4*i:4*i+3]) for i in range(n))/max(n, 1)
         bpy.data.images.remove(image)
+        # ONE render, developed twice: the fixed-EV image above (compares rooms honestly) and a metered one (what
+        # an eye adapted to the room would see). The linear EXR is kept, so both are exposures of the same light.
+        result = bpy.data.images["Render Result"]
+        exr = os.path.join(args.out, view["id"] + ".exr")
+        s.render.image_settings.file_format = "OPEN_EXR"
+        s.render.image_settings.color_depth = "32"
+        result.save_render(exr, scene=s)
+        lin = bpy.data.images.load(exr)
+        lp = lin.pixels[:]
+        lums = sorted(luminance(lp[4*i:4*i+3]) for i in range(0, len(lp)//4, 7))
+        bpy.data.images.remove(lin)
+        keep = lums[:max(1, int(len(lums) * 0.99))]                   # the brightest 1 % (sky, lamps) excluded
+        log_avg = math.exp(sum(math.log(max(v, 1e-6)) for v in keep) / len(keep))
+        s.render.image_settings.file_format = "PNG"
+        s.render.image_settings.color_depth = "8"
         report = {"view": view["id"], "state": view["state"], "samples": s.cycles.samples,
                   "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
                   "lights_on_count": sum(not obj.hide_render for obj in lights.values()), "subjects": subject_result,
@@ -1010,6 +1115,8 @@ def render(scene_data, args):
                   "emissive_sources": current_emissive,
                   "max_bounces": s.cycles.max_bounces, "clamp_indirect": s.cycles.sample_clamp_indirect,
                   "clipped_pixel_fraction": clipped, "mean_luminance": mean, "ev100": preset["ev100"],
+                  "locked_ev100": locked_ev100, "view_meter": metered.get(view["id"]),
+                  "exposure_locked_per_state": bool(locked), "log_average_linear": log_avg,
                   "exposure_stops": s.view_settings.exposure, "white_balance_applied": wb,
                   "camera_pitch_deg": pitch, "warnings": current_warnings}
         with open(os.path.join(args.out, view["id"] + ".json"), "w", encoding="utf-8") as f:

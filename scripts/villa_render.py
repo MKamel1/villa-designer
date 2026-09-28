@@ -69,6 +69,7 @@ def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dic
             "design": {"meshes": [mesh["id"] for mesh in scene["meshes"]],
                        "lights": [light["id"] for light in scene["lights"]
                                   if light["layer"] in view["layers_on"]]},
+            "view_notes": view.get("caption_notes", []),
             "assumed": scene["notes"] + render_report["warnings"],
             "generic_photometry": generic,
             "emissive_sources": render_report.get("emissive_sources", []),
@@ -80,7 +81,10 @@ def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dic
 def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
     if requested == "none" and calibrate:
         return []
-    selected = list(by_id) if requested == "all" else requested.split(",")
+    # "review" = every view not marked final_only (the client's review drafts); "all" includes the final-only set
+    selected = (list(by_id) if requested == "all" else
+                [k for k, v in by_id.items() if not v.get("final_only")] if requested == "review" else
+                requested.split(","))
     unknown = sorted(set(selected) - set(by_id))
     if unknown:
         raise ValueError("Unknown views: " + ", ".join(unknown))

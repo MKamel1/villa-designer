@@ -46,7 +46,8 @@ KIDS_W = 3.36              # each kids bedroom's width (net area >= 11.5 m2, car
 GUEST_WC_END = 11.2        # guest WC under the deck, from the deck start (x 9.227: 1.97 m wide)
 BATH_W = 2.25              # family bath beside the stair (client r9): 2.15 m clear inside (card mh-bathroom-m42-4.30)
 PARENTS_BED_DEPTH = 3.05   # 0.80 m clear at the queen bed foot (3.00 left exactly 0.750, no margin for finishes); parents bedroom from the east face: 11.5 m2 net with its entry (NDSS), queen bed + zones
-DRESSING_DOOR_X = 21.847   # bedroom -> dressing door: its east jamb 0.10 m off the south wall's inner face (22.397); at 22.10 it ran 0.15 m into that wall
+DRESSING_DOOR_X = 21.897   # design lead (not client): 0.8 m door, opening 21.497-22.297, 100 mm return to the east
+#                            wall's inner face (22.397); the bedside table is 0.35 m so it stays out of the opening
 ENSUITE_DOOR_X = 21.65     # dressing -> ensuite door near the garden end; east jamb 74 mm off the ensuite wall face (22.124) - at 21.75 it ran 26 mm into it
 ENSUITE_GIVES = 0.21       # client questionnaire: the ensuite gets 0.21 m shorter for the dressing room
 DIRTY_KITCHEN_L = 3.8   # the dirty kitchen's length along the yard (x 11.2-15.0 in the round-7 plan)

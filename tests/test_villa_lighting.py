@@ -78,6 +78,16 @@ class AdvisoryBrief(unittest.TestCase):
 
 
 class ChecksFailOnRealMistakes(unittest.TestCase):
+    # These reproduce the first drafts, which were checked with the generic photometry. `villa_render.build()` binds
+    # the real products into the module (VL.PRODUCTS) for the whole process, which made this suite depend on test
+    # order (with the real sconces the ensuite basin reaches 526 lx on its own). Pin the generic state per test.
+    def setUp(self):
+        self._bound = dict(VL.PRODUCTS)
+        VL.PRODUCTS.clear()
+
+    def tearDown(self):
+        VL.PRODUCTS.update(self._bound)
+
     def test_island_without_its_task_lights_fails_prep(self):
         fx = [f for f in FX if not (f.kind == "DLN" and f.room == "kitchen")]
         res = VL.check(LAY, fx)

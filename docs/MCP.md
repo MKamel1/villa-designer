@@ -98,3 +98,33 @@ References: [official Python library](https://py.sdk.modelcontextprotocol.io/v1/
 ## Expert guidance operations
 
 `stage_context(stage, project_path)` returns scoped project facts, decisions, missing inputs, evidence and deliverables. `lookup_evidence(query, stage, project_path, limit)` retrieves provenance-bearing paraphrases and precedent analysis. `review_stage(stage, project_path)` combines deterministic diagnostics and explicit qualitative review, source gaps, artifact freshness and client approval status. All are read-only; stages retain numbers 0 through 7. The default project is a fictional pilot. See [guidance records and limits](guidance/README.md). Numerical catalogue claims are unverified legacy diagnostics, not established published requirements.
+
+## Whole-villa render operations (current command boundary)
+
+The villa renderer is a sequence of one-command operations sharing the
+`villa-render/1` scene contract. These are **command-line operations**:
+`scripts/archpipe_mcp.py` does not currently expose named villa render
+tools. Do not advertise them as callable Model Context Protocol operations
+until wrappers and a live client/server test exist. See
+[the scene contract](villa-render-scene.md), [ADR-0013](decisions/ADR-0013-presentation-renders.md)
+for the current contract and review boundary.
+
+| Operation | Command from repository root | Evidence and resume |
+|---|---|---|
+| Build scene | `PYTHONPATH=src .venv/Scripts/python.exe -c "from archpipe.concept import villa_render; print(villa_render.write()[0])"` | Writes the current D1 `out/villa/render-d1/scene.json`; rerun after layout, furniture, lighting, finish or view changes. The exporter defaults and mappings are still D1-specific. |
+| Check views | `PYTHONPATH=src .venv/Scripts/python.exe scripts/villa_render_views.py` | Writes `views-plan.png`; exits nonzero for a subject footprint outside frame, camera collision or invalid doorway setup. Currently reads D1 layout and path. |
+| Render draft | `PYTHONPATH=src .venv/Scripts/python.exe scripts/villa_render.py --scene out/villa/render-d1/scene.json --views all --samples 256 --res 960x640` | Driver validates the contract, deploys, fetches images and reports, runs applicable `render_qa`, writes captions. Inspect every image. |
+| Render final | `PYTHONPATH=src .venv/Scripts/python.exe scripts/villa_render.py --scene out/villa/render-d1/scene.json --views all --samples 1024 --res 1920x1280` | Same checks and captions at the recorded final settings; visual critic review is still required. |
+| Measure scene lighting | `PYTHONPATH=src .venv/Scripts/python.exe scripts/villa_render.py --views none --measure-lighting` | Fetches `lighting-measurements.json`; compare with the analytical design and remeasure after fixture moves. |
+| Build review page | `PYTHONPATH=src .venv/Scripts/python.exe scripts/villa_review_page.py` | Current D1 page at `out/villa/render-d1/review/index.html`; reads render reports, captions, quality checks and measured lighting/daylight. It is not itself a design approval. |
+
+For draft, final and lighting jobs, the driver hashes scene content,
+renderer code, referenced photometry files and run options into a job
+identifier. An identical rerun resumes the detached job or retrieves its
+completed artifacts after a connection loss; changing inputs starts a new
+job. The driver rejects a missing artifact and uses Blender's nonzero Python
+exit code. A successful process or reused job is execution evidence only:
+check the contract, the render quality reports, images and captions before
+review or publication. The scene exporter, view checker and review page still
+contain D1 paths and design identifiers; generalise those boundaries and test
+another layout before offering a generic one-call MCP operation.

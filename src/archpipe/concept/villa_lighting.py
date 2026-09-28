@@ -56,6 +56,8 @@ KINDS = {
                       layer="decorative", diameter=0.30),
     "PEN-SMALL": dict(what="opal glass globe pendant D200 (bedside)", mount="pendant", lm=350, beam=None, cct=2700,
                       cri=90, layer="decorative", diameter=0.20),
+    "WALL-READ": dict(what="adjustable wall-mounted swing-arm reading light (ASSUMED product)", mount="wall",
+                      lm=350, beam=None, cct=2700, cri=90, layer="decorative", diameter=0.12),
     "PEN-LIN": dict(what="linear pendant 1.6 m, direct/indirect", mount="pendant", lm=1200, beam=90, cct=2700,
                     cri=90, layer="task", length=1.6),
     "SCONCE": dict(what="vanity wall light, opal, each side of the mirror", mount="wall", lm=450, beam=None,
@@ -231,9 +233,15 @@ def design(lay=None):
     for x, y in _grid(Pn, 2, 1):
         add("DL", "pantry", x, y, why="pantry shelves", card="ies-res-storage-frequent-50")
     # stair: step markers in the party-wall side of the flight every 3rd tread, and a light at the foot
+    from . import revit_spec as RS_
+    walls_b = F._walls(RS_.build(lay), "B")
     for k, b in enumerate(sorted(lay and _stair_boxes(lay), key=lambda b: b[0])):
         if k % 3 == 1 and b[5] / 1000.0 + 0.25 < -0.65:        # below the beam soffit (-0.60): never in a beam
-            add("STEP", "stair-b", (b[0] + b[3]) / 2 / 1000.0, (b[1] / 1000.0) + 0.02,
+            # ON the party wall's face (the nearest wall below the tread): the treads stop 50-200 mm short of the
+            # wall in the spec, and a marker set 20 mm in from the tread edge floated in the air
+            xm, y0 = (b[0] + b[3]) / 2 / 1000.0, b[1] / 1000.0
+            face = max(w[3] for w in walls_b if w[0] <= xm <= w[2] and w[3] <= y0 + 1e-6)
+            add("STEP", "stair-b", xm, face + 0.002,
                 z=b[5] / 1000.0 + 0.25, aim=(0, 1, -0.3), why="step marker 0.25 m above the tread, party wall",
                 card="ies-res-stairs-50", level="B")
     H = rc["hall-b"]
@@ -383,14 +391,14 @@ def design(lay=None):
         q = fp[bed]
         strip("NL", room, (q[0] + 0.05, q[1] - 0.02), (q[2] - 0.05, q[1] - 0.02), 0.08, (0, -0.3, -1), level="GF",
               why="warm glow under the bed side: kids' night light")
-    # parents' bedroom: headboard cove, low globes at the bedside, reading spots, vanity accent, soft ambient
+    # parents' bedroom: headboard cove, swing-arm bedside lights, reading spots, vanity accent, soft ambient
     PB = rc["parents-bed"]
     b = fp["pb-bed"]
     strip("COVE", "parents-bed", (b[0] - 0.25, PB[1] + 0.12), (b[2] + 0.25, PB[1] + 0.12), CEILING + 0.03,
           (0, 0.4, 1), why="headboard cove: warm light grazing the bed wall (taste: 2700 K cove at the headboard)")
-    for x in (b[0] - 0.28, b[2] + 0.25):
-        add("PEN-SMALL", "parents-bed", x, b[1] + 0.2, z=1.15, extra={"hang_from": CEILING}, why="low opal globe at "
-            "each side of the bed (taste reference)")
+    for x in (b[0] + 0.18, b[2] - 0.18):
+        add("WALL-READ", "parents-bed", x, PB[1] + 0.13, z=1.45, aim=(0, 0.45, -0.35),
+            why="wall-mounted swing arm on the solid head wall, aimed at the pillow; clear of both passages")
     for x in (b[0] + 0.4, b[2] - 0.4):
         add("ADJ", "parents-bed", x, b[1] + 0.35, why="reading spot straight over the reading position (the tilted "
             "first aim landed 0.6 m down the bed: measured 135-142 lx in the scene)",

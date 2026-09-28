@@ -58,7 +58,12 @@ def main():
             q = F.footprint(it)
             if it["level"] == lv and q[0] - 0.05 < px < q[2] + 0.05 and q[1] - 0.05 < py < q[3] + 0.05 and                     pz < it["h"] + 0.3:
                 problems.append("%s: camera inside or on %s" % (v["id"], it["id"]))
-        for q in F._walls(RS.build(lay), lv) + F._columns():
+        from archpipe.concept import villa_render as VR
+        sp_ = RS.build(lay)
+        doorway = cam.get("reframed") == "doorway" and VR.in_door_opening(sp_, lv, px, py, cam.get("home_room"))
+        if doorway and not v.get("hide_meshes"):
+            problems.append("%s: camera in a doorway but its door is not opened for the view" % v["id"])
+        for q in ([] if doorway else F._walls(sp_, lv) + F._columns()):
             if q[0] - 0.2 < px < q[2] + 0.2 and q[1] - 0.2 < py < q[3] + 0.2:
                 problems.append("%s: camera within 0.2 m of a wall or column %s" % (v["id"], [round(t, 2) for t in q]))
         yaw = math.atan2(ty - py, tx - px)
@@ -72,13 +77,19 @@ def main():
             if s in items:
                 q = F.footprint(items[s])
                 cx, cy = (q[0] + q[2]) / 2, (q[1] + q[3]) / 2
-                ang = math.atan2(cy - py, cx - px) - yaw
-                ang = (ang + math.pi) % (2 * math.pi) - math.pi
-                ok = abs(ang) <= half
+                # the WHOLE subject must be in frame, every footprint corner: checking only its centre passed views
+                # that showed a corner of the ensuite and half a bed once the lens went to 24 mm (client: "limited
+                # coverage")
+                worst = 0.0
+                for qx, qy in ((q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3])):
+                    ang = math.atan2(qy - py, qx - px) - yaw
+                    ang = (ang + math.pi) % (2 * math.pi) - math.pi
+                    worst = max(worst, abs(ang))
+                ok = worst <= half
                 ax.plot([cx], [cy], "g^" if ok else "kx", ms=6)
                 if not ok:
-                    problems.append("%s: %s outside the field of view (%.0f deg off axis, half-FOV %.0f)"
-                                    % (v["id"], s, math.degrees(ang), math.degrees(half)))
+                    problems.append("%s: %s not wholly in frame (a corner %.0f deg off axis, half-FOV %.0f)"
+                                    % (v["id"], s, math.degrees(worst), math.degrees(half)))
         ax.set_title("%s  %s  %.0f mm (HFOV %.0f)" % (v["id"], lv, cam["lens_mm"], hfov(v)), fontsize=7)
         ax.set_aspect("equal")
         xs = [r["rect"][0] for r in lay["rooms"].values()] + [r["rect"][2] for r in lay["rooms"].values()]

@@ -21,6 +21,14 @@ look, check in this order and name the cause before changing anything:
    reflectance?
 6. Do soft goods drape (cloth), and is the simulation physically sane?
 7. Is the room dressed?
+8. Does every generated piece face the way the plan says, and does soft
+   goods' cut match the bedroom (0.30 m drop over sides and foot)?
+9. Do textures carry the stated finish colour (per-channel mean), or
+   their photo's own chroma?
+10. Does anything float? (`render_support.unsupported`)
+11. Is each subject wholly in frame at 24 mm from a real standing point?
+
+For a whole-villa set, follow the `villa-render` skill.
 
 **Render through the driver**, `scripts/render_hyperreal.py`, which places
 the sun from `spec/villa-site.yaml` and runs `archpipe.render_qa` on every

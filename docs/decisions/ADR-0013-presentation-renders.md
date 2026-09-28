@@ -123,3 +123,49 @@ judged by whether it could mislead one.
 - Superrendersfarm, *Cycles settings* (portals, bounces)
 - Render Infinity, *realistic textiles*
 - D5 and XYZ360, *archviz camera height and lens shift*
+
+## Amendment (2026-09-27): this is the standard for every render
+
+The client, comparing the villa set with `bedroom-overcast-door.png`: *"that should be our standards and our
+process for all renders"*. The first villa set was built on a new renderer that reused only the glass, sky and
+calibration parts of this decision and dropped the rest (16-20 mm lenses at 1.55 m, pre-guessed fixed exposures,
+bump-textured paint, box furniture, no skirting or frames); it looked like CG. Every presentation render now follows
+all ten parts above: 24 mm level camera at eye height with lens shift; exposure metered by
+`photoreal.camera_meter` and locked per state; real finishes (smooth paint, photo textures mean-matched to stated
+reflectances); `archpipe.furniture` geometry where a builder exists; cloth bedding; skirting, frames and labelled
+dressing; the caption record; `render_qa` and a render-critic pass before anyone sees an image.
+`tests/test_render_standard.py` fails if a villa scene departs from it.
+
+### Amendment (2026-09-27, client review of draft 8): framing, textures
+
+- **Framing is set by where the camera stands, not by the lens.** 24 mm stays the standard (client: "the 24 mm is
+  faithful to the human eye, may be just back up to cover more"). Each camera stands where a photographer could:
+  its room, 0.30 m off walls and columns, 0.15 m off furniture, or in one of its door openings with that door open
+  for that view only (stated in the caption). Where 24 mm cannot hold every subject from any such point, the view
+  uses **16 mm** (client decision), with the measured angle that forced it recorded on the camera and checked.
+- **Textures keep their pattern; the finish keeps its stated colour.** Each photo texture is mean-matched per
+  channel to the stated base colour at the stated reflectance. Luminance-only matching let a pink marble photo
+  stand in for a cream stone.
+
+### Amendment (2026-09-27): reusable whole-villa render handoff
+
+The ten-part bedroom presentation standard and the later camera and colour
+amendments apply to a whole-villa set. The reusable handoff requires a checked
+layout and furniture envelopes, a lighting design with verified products and
+photometry, and a finish schedule that states colour and reflectance. The
+exporter owns those choices and captions; the renderer consumes the scene
+contract. Whole-subject framing, camera clearances, generated furniture
+orientation, cloth cut, scene validity and support on rendered surfaces are
+checked before a workstation draft. Automatic image checks and a full-size
+render critic review follow the draft. The review page joins the images,
+captions, quality reports and measured lighting and daylight before a client
+decision. Every image must identify assumed finishes, procedural stand-ins,
+generic photometry, dressing and view-specific opened doors.
+
+The current D1 exporter, view checker, finished-daylight command and review
+page still contain D1 room names, mappings, view choices and output paths.
+Their existence demonstrates the process on D1; it is not evidence that a
+second villa can be run without adapting those inputs and testing its own
+geometry. The scene contract and workstation driver are the reusable
+boundaries. The operating sequence and known limits are recorded in the
+`docs/MCP.md` and `docs/villa-render-scene.md`.

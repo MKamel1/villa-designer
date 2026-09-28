@@ -212,7 +212,7 @@ def build(lay):
             lo, hi = max(e1[2], e2[2]), min(e1[3], e2[3])
             mid = (lo + hi) / 2
             pinned = (ra.get("door_at") or {}).get(b, (rb.get("door_at") or {}).get(a))
-            if pinned is not None and lo + 0.45 <= pinned <= hi - 0.45:   # a door the layout places (furnishing)
+            if pinned is not None and lo + 0.4 <= pinned <= hi - 0.4:   # a door the layout places (furnishing)
                 mid = pinned
             else:
                 pinned = None
@@ -220,6 +220,8 @@ def build(lay):
                 w_ = 0.8
             else:
                 w_ = 0.9
+            if {a, b} == {"parents-bed", "parents-dressing"}:
+                w_ = 0.8  # design lead: clears the 0.35 m bedside table with a 100 mm return to the east wall
             spec["doors"].append({"level": lv, "x": mid if e1[0] == "h" else e1[1], "y": e1[1] if e1[0] == "h" else mid,
                                   "width": w_, "rooms": [a, b], "span": [e1[0], e1[1], lo, hi],
                                   **({"pinned": True} if pinned is not None else {})})
@@ -232,6 +234,25 @@ def build(lay):
             mid = (lo + hi) / 2
             spec["doors"].append({"level": lv, "x": mid if e[0] == "h" else e[1], "y": e[1] if e[0] == "h" else mid,
                                   "width": 1.0, "rooms": [rid, "core"], "entrance": True, "span": [e[0], e[1], lo, hi]})
+        # Only if the dressing door's leaf reached into the 0.2 m east wall (an earlier 22.05 centre did, by 53 mm) is
+        # a recessed jamb reveal needed; at 21.897 the opening ends 100 mm short of the wall and nothing is cut.
+        dd = next((d for d in spec["doors"] if set(d["rooms"]) == {"parents-bed", "parents-dressing"}), None)
+        if lv == "GF" and dd is not None and dd["x"] + dd["width"] / 2 > V.XR - EXT_T + 1e-6:
+            door = next(d for d in spec["doors"] if set(d["rooms"]) == {"parents-bed", "parents-dressing"})
+            rebuilt = []
+            for wall in spec["walls"]:
+                if (wall["level"] == lv and wall["kind"] == "ext" and abs(wall["x0"] - wall["x1"]) < 1e-6
+                        and abs(wall["x0"] - (V.XR - EXT_T / 2)) < 1e-6
+                        and min(wall["y0"], wall["y1"]) < door["y"] - 0.45
+                        and max(wall["y0"], wall["y1"]) > door["y"] + 0.45):
+                    a, b = sorted((wall["y0"], wall["y1"]))
+                    for ya, yb, thickness, x in ((a, door["y"] - 0.45, EXT_T, wall["x0"]),
+                                                  (door["y"] - 0.45, door["y"] + 0.45, 0.147, V.XR - 0.147 / 2),
+                                                  (door["y"] + 0.45, b, EXT_T, wall["x0"])):
+                        rebuilt.append({**wall, "x0": x, "x1": x, "y0": ya, "y1": yb, "thickness": thickness})
+                else:
+                    rebuilt.append(wall)
+            spec["walls"] = rebuilt
         # garden doors and windows
         ext = lay.get("extension")
         faces = V.window_faces(lv, ext)
@@ -272,7 +293,8 @@ def build(lay):
                                               "garden": True, "span": span})
                         continue
                     if occ in vocab.HABITABLE:
-                        spec["windows"].append({"level": lv, "x": x, "y": y, "width": round(min(2.4, L_ - 2 * REVEAL), 2),
+                        width = L_ - 0.6 if rid == "study-game" else min(2.4, L_ - 2 * REVEAL)
+                        spec["windows"].append({"level": lv, "x": x, "y": y, "width": round(width, 2),
                                                 "sill": SILL, "height": HEAD - SILL, "room": rid, "span": span})
                     else:
                         spec["windows"].append({"level": lv, "x": x, "y": y, "width": 0.8, "sill": 1.5,
@@ -478,7 +500,8 @@ def _parking(lay, spec, pk2):
     # GF windows beside the ramp and deck: sills above the eye of a person standing on them (privacy)
     eye = max(z for _, z in pk2["profile"]) + 1.6 - 1.2  # above the GF FFL
     for wdw in spec["windows"]:
-        if wdw["level"] == "GF" and abs(wdw["y"] - V.YE) < 1e-6 and r0 - 1e-6 <= wdw["x"] <= d1 + 1e-6:
+        if (wdw["level"] == "GF" and wdw["room"] != "study-game" and abs(wdw["y"] - V.YE) < 1e-6
+                and r0 - 1e-6 <= wdw["x"] <= d1 + 1e-6):
             sill = round(eye + 0.1, 2)
             wdw["sill"], wdw["height"] = sill, round(HEAD - sill, 2)
     # guarding (1.1 m, card ukadk-guarding-height-external): the ramp's west edge over the sunken north patio, the

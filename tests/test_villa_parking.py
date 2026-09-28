@@ -84,7 +84,11 @@ class ParkingOptions(unittest.TestCase):
             over = [w for w in sp["windows"] if w["level"] == "GF" and abs(w["y"] - V.YE) < 1e-6
                     and P.RAMP_X0 <= w["x"] <= pk["deck"]["x1"]]
             self.assertTrue(over)
-            self.assertTrue(all(w["sill"] >= 1.6 + 0.1 - 1e-9 for w in over))        # eye 1.6 above the deck
+            # eye 1.6 above the deck -- except the study window, whose low sill is the client's recorded exception
+            # (ADR-0014: "big, low sill windows" in front of the desks); every other window over the deck keeps it
+            exempt = [w for w in over if w.get("room") == "study-game"]
+            self.assertTrue(all(w["sill"] >= 1.6 + 0.1 - 1e-9 for w in over if w not in exempt))
+            self.assertTrue(all(abs(w["sill"] - 0.9) < 1e-6 for w in exempt))
             beyond = lay["parking2"]["roof_beyond_deck"]
             self.assertEqual(sp["roofs"], [beyond] if beyond else [])
             self.assertEqual(len(sp["rails"]), 3)

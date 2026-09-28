@@ -66,18 +66,17 @@ class Layout(unittest.TestCase):
         self.assertTrue(any(p.startswith("ka-bunk") for p in res["routes"]["problems"]), res["routes"])
 
     def test_the_body_turns_a_corner_the_path_turns(self):
-        # the dressing: the rail end and a column 1.24 m apart on the diagonal, legs 1.05 and 0.94 m: a 914 mm path
-        # turns there (a 914 mm SQUARE did not). And a straight 0.90 m aisle is still refused:
+        # the private dressing follows the bedroom's 750 mm route at its 800 mm door; a 700 mm aisle is refused:
         self.assertEqual(F.check()["routes"]["status"], "pass")
-        res = _run(lambda items, ids: ids["pd-hang-2"].update(cy=ids["pd-hang-2"]["cy"] + 0.04))   # aisle 0.90 m
-        self.assertTrue(any(p.startswith("pd-hang-1") for p in res["routes"]["problems"]), res["routes"])
+        res = _run(lambda items, ids: ids["pd-hang-2"].update(cy=ids["pd-hang-2"]["cy"] + 0.24))
+        self.assertTrue(any(p.startswith("pd-hang-") for p in res["routes"]["problems"]), res["routes"])
 
     def test_a_door_running_into_a_wall_is_caught(self):
-        # the real defect: the dressing door at x 22.10 ran 153 mm into the 0.2 m south wall
+        # moving the new door 50 mm east makes its jamb enter the recessed wall reveal
         orig = F.VP.DRESSING_DOOR_X
         try:
             F.VP.DRESSING_DOOR_X = 22.10
-            self.assertIn("door parents-bed/parents-dressing runs 153 mm into a wall", F.check()["doors"]["problems"])
+            self.assertIn("door parents-bed/parents-dressing runs 50 mm into a wall", F.check()["doors"]["problems"])
         finally:
             F.VP.DRESSING_DOOR_X = orig
 

@@ -630,3 +630,104 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   this test. This is a configuration fix, not yet a measured improvement: the planned three-view
   comparison was blocked by SSH connection permission failures. Exposure and fixture powers
   have not been changed. Do not claim corrected renders until that comparison and review run.
+
+## D1 authenticity pass (client: "authentic to the daylight and lighting ... what the villa would look like after construction", 2026-09-27)
+
+- **A document was taken as the client's brief without the client owning it.** villa_01_guidelines.docx set
+  4000 K for the kitchen and dressing; the client: "I have never specified that specifically". It is now ADVISORY
+  (client decision): sound targets adopted, all 47 measured and reported by `villa_brief.check`, none enforced;
+  withdrawn targets carry the client's words; `test_no_4000k_source_anywhere`. Why missed: the lighting design
+  consulted the published cards but not the project brief file at all; now the brief check runs with the design.
+- **An in-scene lux measurement read 0 lx on every surface.** Its sensor camera sat 25 mm above the sensor with
+  Blender's default 100 mm near clip, so it saw the inside of the worktop. Once fixed, the measurement agrees with the
+  analytic direct calculation (island 1473 vs 1419 lx) and found three real design faults the analytic check cannot
+  see: reading spots tilted off the pillows (135 lx, now 1141), a desk lamp enclosed by its own shade, and a reading
+  spot INSIDE a perimeter beam (1 lx). Guards: `beam_clashes` + `test_no_fitting_in_a_beam` (proven on the real
+  position), step markers only below the beam soffit.
+- **Glass verified:** a single-sheet window transmits 0.700 (stated 0.70), a closed slab 0.850 (stated 0.85); the
+  probe is part of --calibrate.
+- **Unclamped transport brightens the images, physically.** Removing the indirect clamp made every room brighter;
+  the measurement's total/direct ratios (1.07-1.3 in lit rooms) are ordinary inter-reflection, so the earlier dark
+  images were the defect, not the new ones. Exposure stays pre-registered.
+- **The render and the daylight analysis now describe one building:** `scripts/villa_daylight_finished.py` puts the
+  render's faces and reflectances into the validated Radiance method (living ADF 4.1 -> 5.0 with the chosen finishes;
+  grid points under furniture read the shade beneath it).
+- Soft goods: duvets are cloth draped onto the beds' own parts (photoreal._simulate, unchanged); furniture and
+  sanitaryware are declared procedural stand-ins in every caption.
+
+### D1 renders, client review of draft 8 (2026-09-27)
+
+- **The parents' bed rendered head-to-foot.** The generator rotation map swapped 0 and 180 against the generator's
+  own docstring; its tall headboard stood at the foot and the duvet draped over it ("duvet flying on the end").
+  Missed because nothing compared the generated piece with the plan's orientation. Guard:
+  `test_generated_pieces_face_the_way_the_plan_says` (headboard and bedside drawers vs the plan's own parts; fails on
+  the old map with the real pb-bed).
+- **Duvets stood out stiffly past the foot in every bedroom.** The villa cut stopped 20 mm past the foot, where the
+  bedroom standard hangs 0.30 m over the foot and sides, and the sheet started from the plan's h, not the generated
+  mattress top. Guard: `test_duvet_cut_hangs_like_the_bedroom` (fails on the old cut: foot overhang 0.02).
+- **Stone and wood read pink.** Textures were mean-matched in luminance only, so each photo kept its own chroma
+  (Marble014 G/R 0.87, B/R 0.69 against the stated cream 0.95 / 0.86); the floor tinted every bounce. Measured on the
+  linear EXR before changing anything: the wall in v13 was redder than a 2700 K source on 0.80 plaster, so the cast
+  was in the scene, not the camera. Fix: per-channel mean-matching to the stated base colour at the stated
+  reflectance (ADR-0013 part 7). No white-balance change: that would have hidden a real cause.
+- **Forcing 24 mm on cameras framed for 16-20 mm cut the rooms.** The views guard checked only subject centres.
+  Guard: every footprint corner must be in frame. Cameras now stand where a photographer would (`frame`: same room
+  or its door opening, 0.30 m off walls, door leaf hidden for that view only); where 24 mm still cannot hold the
+  subjects, 16 mm by client decision, with the measured angle recorded and checked.
+- **1,780 zero-area triangles refused the whole draft on the workstation.** Corner radius equal to half a loft ring
+  made neighbouring arcs share end points. Guards: radii clamped below half; `test_scene_passes_the_render_contract`
+  runs the contract locally.
+- **A lighting negative test depended on test order.** `villa_render.build()` binds the real products into
+  `villa_lighting` for the process; with them the ensuite basin reaches 526 lx from its sconces alone. The first-draft
+  reproductions now pin the generic photometry per test.
+- **Open item, not fixed in the render:** the basement stair treads stand 50 mm (east) to 200 mm (west) off the party
+  wall in the spec, with no stringer; the render shows the model as it is. To be resolved in the Revit
+  reconciliation (a design question, not a render one).
+- **Floating objects, found by a new guard, not by eye** (`archpipe.concept.render_support.unsupported`,
+  `test_nothing_floats`, proven by `test_the_float_guard_catches_the_real_defects` on the real draft-9 lamp and
+  marker): desk-lamp shades bracketed to the window glass (now table lamps on their desks); stair step markers 70 mm
+  off the party wall (set from the tread edge; the treads stop short of the wall); 11 downlights 100 mm below the
+  cove rooms' slab field and 3 under the ramp 155 mm below the slab (the lighting design assumes one ceiling height
+  per room, and the parking model's ramp differs from the rendered ramp); 3 stair-void pendant cords ending at 2.70 m
+  in a double-height void; corridor path markers 21 mm proud; a vertical sconce 30 mm off its wall. All now seat on
+  the surface actually rendered (`_seat_recessed_on_soffit`, wall-marker snap, sconce bracket), recorded in the scene
+  notes for the Revit reconciliation. Lux must be re-measured in the scene after these moves.
+- **How the guard itself was wrong four times before it was right** (each caught by proving it on a real defect):
+  a merged mesh (every door handle in one object) had a house-sized bounding box that "touched" everything -> split
+  meshes into connected parts; bounding boxes of wall triangles around a window span the glass, and a fan over a
+  KEYHOLE polygon covers the opening -> ear-clipping and an exact triangle-box (separating-axis) test; sampled
+  points straddled a door leaf at exactly the tolerance -> exact overlap, not samples; a lamp arm "rested" on its own
+  shade while the shade hung from the arm -> only building surfaces ground a group, pieces only join groups.
+
+### D1 renders, client punch list (2026-09-28)
+
+- **The parents' entrance was closed by a render-only detail.** The slatted headboard panel ran 0.6 m past the bed
+  each way, across the doorless entry opening and the dressing door. The furnished-plan route check could not see
+  it (it checks layout pieces, not render details). Guard: `render_support.blocked_openings` (doors: any piece;
+  doorless passages 0.6-1.6 m: render details and hanging fixtures, which the route check cannot see);
+  `test_openings_passable` reproduces the old pendant and door. It also found a real LAYOUT defect the Gate A checks
+  missed: the parents' bedside table stood 0.23 m into the dressing door (clear 0.67 of 0.90 m), and a bedside
+  pendant hung at 1.15 m in the entry passage.
+- **A Codex fix cut an exterior wall; rejected.** Centring the 0.8 m dressing door at 22.05 put its leaf 53 mm into
+  the 0.2 m east wall and Codex added a recessed jamb reveal. The lead's arithmetic had used the room edge, not the
+  wall's inner face. Final: door centred 21.897 (100 mm return), bedside 0.35 m. Also corrected: the code comment
+  and ADR attributed the lead's door decision to the client; the route waiver it implies is pending, not accepted.
+- **A Codex pass removed every photographed normal map**, reasoning that tangent normals have no UV basis on
+  box-projected meshes; the renderer already had `triplanar_normal` for exactly that. Restored for stone, paving and
+  wood; fabrics keep the subtle weave bump. Reduced wood grain contrast is a finish CHOICE (a calm, low-figure
+  veneer) and is now labelled as such in the material notes, not presented as physics.
+- **Study windows: an inherited privacy rule overridden by the client.** The 1.7 m sill came from the ramp/deck
+  privacy adjustment in `revit_spec._parking`; ADR-0014 records the client's big low-sill windows. Daylight, glare
+  and privacy must be re-evaluated.
+- **Hand-typed cameras went stale and some looked the wrong way.** Interior views are now declared by intent (room +
+  subjects) and placed by `render_views.choose` (standing points 0.30 m off walls, 0.15 m off furniture or in a
+  door opening; score = subjects wholly in frame, then how much of the room's design shows, depth, windows).
+  Two slips found on the way: a point ON a room's edge was classed "inside" (its door stayed shut with the camera in
+  the leaf) -> strictly-inside test; a basement camera "opened" the ground-floor door above it -> same-storey match.
+  Where no point holds the subjects even at 16 mm, the build stops (the dirty-kitchen run and fridge face each
+  other: the view's subject became the run).
+- **Stair**: open risers kept; steel stringers, bearings, open-side balustrade and handrails added as ASSUMED
+  construction details (for the Revit model). **Kitchens**: microwave, coffee machine, hoods and a dirty-kitchen
+  fridge as ASSUMED appliances; the fridge replaced a cleaning column whose storage moved under the folding counter.
+- **Plants were placed without asking where a person would put one**: the bedroom plant stood in the vanity chair's
+  way, the study plant in front of the new low window. Moved to corners; no guard yet beyond float/openings.
