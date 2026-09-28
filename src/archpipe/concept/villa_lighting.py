@@ -36,6 +36,7 @@ from . import villa_parking as P
 from . import villa_r11 as R
 
 LEVEL_Z = {"B": -3.0, "GF": 0.0}
+VL_DESK_Z = 0.75 + 0.45          # desk lamp head 450 mm over a 750 mm desk
 CEILING = 2.70                 # false ceiling above FFL
 COVE_FIELD = 2.80              # the raised field inside a cove (slab soffit)
 COVE_BAND = 0.40
@@ -69,6 +70,13 @@ KINDS = {
     "TOE":  dict(what="toe-kick LED strip", mount="strip", lm_per_m=150, cct=2200, cri=90, layer="night"),
     "NL":   dict(what="night-light strip under the bed / plinth", mount="strip", lm_per_m=100, cct=2200, cri=90,
                  layer="night"),
+    "DESK": dict(what="adjustable wall-arm desk lamp, shielded head, 3000 K", mount="task-lamp", lm=450, beam=70,
+                 cct=3000, cri=90, layer="task"),
+    "VSTRIP": dict(what="vertical LED strip at a hanging-section edge (shadow-free dressing light)", mount="strip",
+                   lm_per_m=500, cct=3000, cri=90, layer="task"),
+    "MIRROR": dict(what="backlit mirror halo, 3000 K", mount="strip", lm_per_m=250, cct=3000, cri=90, layer="task"),
+    "VSCONCE": dict(what="vertical opal sconce 0.5 m, each side of the mirror", mount="wall", lm=450, beam=None,
+                    cct=3000, cri=90, layer="task", diameter=0.12),
     "STEP": dict(what="recessed step marker in the stair wall", mount="wall-marker", lm=60, beam=None, cct=2200,
                  cri=90, layer="night"),
     "PATH": dict(what="low recessed path marker (0.3 m AFF)", mount="wall-marker", lm=60, beam=None, cct=2200,
@@ -246,19 +254,20 @@ def design(lay=None):
         x = isl[0] + (k + 0.5) * (isl[2] - isl[0]) / 3
         add("PEN-GLOBE", "kitchen", x, cy, z=top + 0.762 + 0.15, why="three opal globes over the island, bottom 762 mm "
             "above the worktop", card="rid-pendant-above-table-762", extra={"hang_from": ceiling_z("B")})
-    for x in (isl[0] + 0.55, (isl[0] + isl[2]) / 2, isl[2] - 0.55):
+    for x in ((isl[0] + isl[2]) / 2 - 1.0, (isl[0] + isl[2]) / 2, (isl[0] + isl[2]) / 2 + 1.0):
         add("DLN", "kitchen", x, isl[3] - 0.25, why="prep light on the cooking side of the island (hob)",
             card="ies-res-kitchen-prep-500")
     run = fp["k-run"]
-    for x in (run[0] + 0.3, (run[0] + run[2]) / 2, run[2] - 0.3):
-        add("DLN", "kitchen", x, run[1] - 0.05, why="over the sink run's front edge (sink, dishwasher)",
-            card="ies-res-kitchen-sink-300")
+    for x in ((run[0] + run[2]) / 2 - 1.0, (run[0] + run[2]) / 2, (run[0] + run[2]) / 2 + 1.0):
+        add("DLN", "kitchen", x, run[3] - 0.65, why="650 mm from the wall face, over the counter's front edge, 1.0 m "
+            "pitch (advisory K-SPOT-OFF / K-SPOT-PITCH)", card="ies-res-kitchen-sink-300")
     add("DL", "kitchen", (rc["kitchen"][0] + isl[0]) / 2 + 0.2, cy + 0.9, why="kitchen general",
         card="ies-res-kitchen-general-50")
     tall = fp["k-tall"]
     for kind_, a_, b_ in [m for m in F.module_spans(it["k-tall"]) if m[0] == "counter"]:
         strip("UC", "kitchen-island", (a_ + 0.02, tall[3] - 0.30), (b_ - 0.02, tall[3] - 0.30),
-              LEVEL_Z["B"] + 1.43, (0, 0, -1), why="under the wall units: the tall wall's counters",
+              LEVEL_Z["B"] + 1.48, (0, 0, -1), why="under the wall units (600 mm over the worktop), LED >= 120/m "
+              "in an aluminium profile with diffuser",
               card="ies-res-kitchen-prep-500")
         add("DLN", "kitchen-island", (a_ + b_) / 2, tall[3] + 0.12, why="counter front, just clear of the wall units",
             card="ies-res-kitchen-prep-500")
@@ -366,8 +375,9 @@ def design(lay=None):
             add("DL", room, x, (K[1] + K[3]) / 2 - 0.3, why="bedroom ambient", card="ies-res-bedroom-general-50")
         for d in desks:
             q = fp[d]
-            add("DLN", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 - 0.15, why="desk light over the desk, just in "
-                "front of the head's shadow line (1000 lm package)", card="ies-res-desk-400", lm=1000)
+            add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF",
+                why="each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, "
+                    "out of the sleep zone", card="ies-res-desk-400")
         q = fp[bed]
         strip("NL", room, (q[0] + 0.05, q[1] - 0.02), (q[2] - 0.05, q[1] - 0.02), 0.08, (0, -0.3, -1), level="GF",
               why="warm glow under the bed side: kids' night light")
@@ -395,17 +405,28 @@ def design(lay=None):
         strip("RAIL", "parents-dressing" if w == "pd-hang-1" else "parents-dressing-ext",
               (q[0] + 0.05, (q[1] + q[3]) / 2), (q[2] - 0.05, (q[1] + q[3]) / 2), 2.05, (0, 0, -1), level="GF",
               why="LED over the rail: clothes lit from the front-top", card="ies-res-walkin-closet-300")
+    for w in ("pd-hang-1", "pd-hang-2"):
+        q = fp[w]
+        room_ = "parents-dressing" if w == "pd-hang-1" else "parents-dressing-ext"
+        n_ = max(1, int(round((q[2] - q[0]) / 1.0)))
+        front = q[1] if it[w]["rot"] == 0 else q[3]
+        for k in range(n_ + 1):
+            x_ = q[0] + 0.03 + k * (q[2] - q[0] - 0.06) / n_
+            add("VSTRIP", room_, x_, front, z=1.10, level="GF", length=1.8, along=(0.0, 0.0, 1.0),
+                aim=(0, -1 if it[w]["rot"] == 0 else 1, 0),
+                why="vertical strip at a section edge: shadow-free light on the clothes (advisory C-LIGHT; its "
+                    "4000 K withdrawn by the client)", card="ies-res-walkin-closet-300")
     D = rc["parents-dressing"]
     for x in (D[0] + 0.7, D[2] - 0.8):
         add("DL", "parents-dressing", x, (fp["pd-hang-1"][1] + fp["pd-hang-2"][3]) / 2, why="dressing aisle",
             card="ies-res-dressing-general-100")
     PEn = rc["parents-ensuite"]
-    add("DL", "parents-ensuite", (PEn[0] + PEn[2]) / 2 + 0.3, (PEn[1] + PEn[3]) / 2, why="ensuite ambient (wet-rated)",
-        card="ies-res-shower-50")
     bt = fp["pe-bath"]
-    add("DLN", "parents-ensuite", (bt[0] + bt[2]) / 2, (bt[1] + bt[3]) / 2, why="over the bath / shower",
-        card="ies-res-shower-50")
-    _sconces(add, "parents-ensuite", fp["pe-basin"], lay, rc)
+    ym = (bt[3] + PEn[3]) / 2                         # between the bath's edge and the door wall: not over the tub
+    for x in (PEn[0] + 0.30, PEn[2] - 0.30):
+        add("WW", "parents-ensuite", x, ym, aim=(-0.25 if x < (PEn[0] + PEn[2]) / 2 else 0.25, 0, -1),
+            why="washes the marble wall; no direct downlight over the tub (advisory B-NODOWN)", card="ies-res-shower-50")
+    _sconces(add, "parents-ensuite", fp["pe-basin"], lay, rc, vertical=True)
     pb_ = fp["pe-basin"]
     strip("TOE", "parents-ensuite", (pb_[2] + 0.02, pb_[1] + 0.03), (pb_[2] + 0.02, pb_[3] - 0.03), 0.30,
           (0.3, 0, -1), level="GF", why="glow under the vanity: night light")
@@ -422,7 +443,7 @@ def _gf_opening(lay):
     return RS.build(lay)["gf_opening"]
 
 
-def _sconces(add, room, basin, lay, rc):
+def _sconces(add, room, basin, lay, rc, vertical=False):
     """Two sconces either side of the mirror over a basin on a wall, 0.95 m apart at 1.60 m AFF (card
     rid-vanity-sconces-914: 914-1016 mm apart, eye level)."""
     x0, y0, x1, y1 = basin
@@ -443,8 +464,13 @@ def _sconces(add, room, basin, lay, rc):
         wx = r[0] + 0.06 if abs(x0 - r[0]) < 0.05 else r[2] - 0.06
         cy = (y0 + y1) / 2
         for s in (-1, 1):
-            add("SCONCE", room, wx, cy + s * 0.475, z=z, aim=(1 if wx < (r[0] + r[2]) / 2 else -1, 0, 0),
+            add("VSCONCE" if vertical else "SCONCE", room, wx, cy + s * 0.475, z=z,
+                aim=(1 if wx < (r[0] + r[2]) / 2 else -1, 0, 0),
                 why="grooming light each side of the mirror", card="rid-vanity-sconces-914", level=lv)
+        if vertical:                                  # backlit mirror halo (advisory B-VANITY)
+            add("MIRROR", room, wx + (0.01 if wx < (r[0] + r[2]) / 2 else -0.01), cy, z=z, level=lv, length=0.7,
+                along=(0.0, 1.0, 0.0), aim=(1 if wx < (r[0] + r[2]) / 2 else -1, 0, 0),
+                why="backlit mirror: soft light behind the glass (advisory B-VANITY)")
     else:
         wy = r[1] + 0.06 if abs(y0 - r[1]) < 0.05 else r[3] - 0.06
         cx = (x0 + x1) / 2
@@ -600,6 +626,7 @@ def _emitters(f):
         out = []
         for k in range(nseg):
             t = (k + 0.5) / nseg - 0.5
-            out.append((f.x + f.along[0] * t * f.length, f.y + f.along[1] * t * f.length, f.z, f.lumens / nseg))
+            out.append((f.x + f.along[0] * t * f.length, f.y + f.along[1] * t * f.length,
+                        f.z + f.along[2] * t * f.length, f.lumens / nseg))
         return out
     return [(f.x, f.y, f.z, f.lumens)]

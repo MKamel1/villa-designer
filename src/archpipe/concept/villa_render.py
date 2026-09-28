@@ -284,7 +284,7 @@ def build(lay=None, views=None):
     faces = []
     for k in range(int((bed[2] + 0.9 - (bed[0] - 0.6)) / 0.05)):
         xa = bed[0] - 0.6 + k * 0.05
-        faces += box_faces(xa, PB[1], 0.0, xa + 0.03, PB[1] + 0.03, VL.CEILING)
+        faces += box_faces(xa, PB[1], 0.0, xa + 0.03, PB[1] + 0.03, 2.10)   # partial height (advisory M-HEADWALL)
     mesh("detail-headboard-slats", "oak", faces, "furniture", room="parents-bed",
          label="detail: oak slatted headboard wall")
     op = sp["gf_opening"]
@@ -306,7 +306,7 @@ def build(lay=None, views=None):
             mesh("furn-%s-%d" % (f["mark"].replace("#", "-"), k), mat, faces, "furniture", room=f["room"],
                  label=f["mark"].split("#")[0])
     # rugs (design: soft floor where people sit)
-    for rid, anchor, (w, d) in (("lounge", "lounge-coffee", (2.6, 1.9)), ("living", "living-coffee", (2.4, 2.0)),
+    for rid, anchor, (w, d) in (("lounge", "lounge-coffee", (3.1, 2.0)), ("living", "living-coffee", (2.6, 2.4)),
                                 ("parents-bed", "pb-bed", (2.2, 2.6)), ("kids-a", "ka-bunk", (1.4, 2.0))):
         q = F.footprint(it[anchor])
         cx, cy = (q[0] + q[2]) / 2, (q[1] + q[3]) / 2
@@ -384,7 +384,7 @@ def build(lay=None, views=None):
     lights = []
     ies_dir = OUT / "ies"
     for k in VL.KINDS:
-        if k not in VL.PRODUCTS and VL.KINDS[k]["mount"] in ("recessed",):
+        if k not in VL.PRODUCTS and VL.KINDS[k]["mount"] in ("recessed", "task-lamp"):
             p = ies_dir / "generic" / (k + ".ies")
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(VL.generic_ies(VL.KINDS[k]["lm"], VL.KINDS[k]["beam"], k), encoding="utf-8")
@@ -408,6 +408,27 @@ def build(lay=None, views=None):
                  room=f.room, label="fitting " + f.id,
                  visibility={"camera": True, "glossy": True, "diffuse": False, "shadow": False,
                              "transmission": False}, layer=f.layer)
+        elif f.kind == "DESK":
+            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="ies", position=[f.x, f.y, f.z - 0.05],
+                               aim=[0.0, 0.0, -1.0], spin_deg=0.0, ies="generic/DESK.ies", lumens=round(f.lumens, 1),
+                               cct_k=cct, cri=90, product=pinfo, dimmer=1.0))
+            R_ = F.clear_rect(lay, f.room)
+            wy = R_[3] if abs(R_[3] - f.y) < abs(R_[1] - f.y) else R_[1]
+            mesh("lamp-shade-" + f.id, "black-metal", box_faces(f.x - 0.08, f.y - 0.08, f.z - 0.05, f.x + 0.08,
+                                                               f.y + 0.08, f.z + 0.05), "fixture", room=f.room,
+                 label="fitting " + f.id)
+            mesh("lamp-arm-" + f.id, "black-metal", box_faces(f.x - 0.008, min(f.y, wy), f.z + 0.04, f.x + 0.008,
+                                                             max(f.y, wy), f.z + 0.056), "fixture", room=f.room,
+                 label="fitting " + f.id)
+        elif f.kind == "VSCONCE":
+            area = 4 * 0.06 * 0.5
+            mname = "opal-vsconce-%d" % cct
+            mats[mname] = dict(kind="emissive", base_rgb=[0.95, 0.93, 0.90],
+                               emission_lm_per_m2=round(f.lumens / area, 1), cct_k=cct,
+                               note="vertical opal sconce, %d lm (GENERIC)" % f.lumens)
+            mesh("lamp-" + f.id, mname, box_faces(f.x - 0.03, f.y - 0.03, f.z - 0.25, f.x + 0.03, f.y + 0.03,
+                                                  f.z + 0.25), "fixture", room=f.room, label="fitting " + f.id,
+                 layer=f.layer)
         elif f.kind in ("PEN-GLOBE", "PEN-SMALL", "SCONCE"):
             r = k.get("diameter", 0.2) / 2
             area = 4 * math.pi * r * r

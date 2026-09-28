@@ -160,7 +160,7 @@ def layout(lay=None):
                 why="integrated fridge-freezer and an oven + combi column (answers); 450 counter beside the fridge "
                     "(card nkba-fridge-landing-381); coffee machine on the counter"), "kitchen-island")
     add(against("k-run", K, "y1", 11.54, "base_run", w=2.41, d=0.6, h=0.9,
-                modules=[("counter", 0.5), ("sink", 0.9), ("dw", 0.6), ("counter", 0.41)],
+                modules=[("counter", 0.25), ("dw", 0.6), ("counter", 0.2), ("sink", 0.9), ("counter", 0.46)],
                 why="sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it"),
         "kitchen")
     run_front = K[3] - 0.6

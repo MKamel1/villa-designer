@@ -49,7 +49,7 @@ class Cards(unittest.TestCase):
     def test_vanity_sconces_914_to_1016_apart(self):
         by = {}
         for f in FX:
-            if f.kind == "SCONCE":
+            if f.kind in ("SCONCE", "VSCONCE"):
                 by.setdefault(f.room, []).append(f)
         self.assertEqual(set(by), {"guest-wc", "family-bath", "parents-ensuite"})
         for room, (a, b) in by.items():
@@ -60,6 +60,21 @@ class Cards(unittest.TestCase):
         res = VL.check(LAY, FX)
         self.assertEqual([t for t in res["tasks"] if t["status"] != "pass"], [])
         self.assertEqual([r for r in res["rooms"] if r["status"] == "fail"], [])
+
+
+class AdvisoryBrief(unittest.TestCase):
+    def test_no_downlight_over_the_ensuite_tub(self):
+        tub = F.footprint({i["id"]: i for i in F.layout(LAY)}["pe-bath"])
+        over = [f.id for f in FX if f.room == "parents-ensuite" and VL.KINDS[f.kind]["mount"] == "recessed"
+                and f.kind != "WW" and tub[0] <= f.x <= tub[2] and tub[1] <= f.y <= tub[3]]
+        self.assertEqual(over, [])
+
+    def test_every_kids_desk_has_its_own_lamp(self):
+        self.assertEqual(sum(f.kind == "DESK" for f in FX), 3)
+
+    def test_no_4000k_source_anywhere(self):
+        # the client disowned the 4000 K target (2026-09-27): nothing may silently reintroduce it
+        self.assertTrue(all(VL.KINDS[f.kind]["cct"] < 3500 for f in FX))
 
 
 class ChecksFailOnRealMistakes(unittest.TestCase):

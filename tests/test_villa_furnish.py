@@ -127,8 +127,12 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
         self.assertEqual(res["windows"]["status"], "fail")
 
     def test_sink_landing(self):
-        res = _run(lambda items, ids: ids["k-run"]["modules"].__setitem__(0, ("counter", 0.3)))
-        self.assertTrue(any("sink landing" in p for p in res["kitchen"]["problems"]))
+        # 60 mm moved from the right-hand landing to the left: 400 mm where 457 is needed, run still filled
+        def m(items, ids):
+            ids["k-run"]["modules"][0] = ("counter", 0.31)
+            ids["k-run"]["modules"][-1] = ("counter", 0.40)
+        res = _run(m)
+        self.assertTrue(any("sink landing" in p for p in res["kitchen"]["problems"]), res["kitchen"])
 
     def test_dishwasher_far_from_the_sink(self):
         def m(items, ids):

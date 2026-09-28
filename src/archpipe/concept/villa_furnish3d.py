@@ -30,6 +30,9 @@ CATEGORY = {"base_run": "casework", "island": "casework", "tall_column": "casewo
 TALL_MODULES = {"fridge", "oven", "tall"}
 COUNTER_TOP = 0.90           # worktop height (the catalogue's run height)
 PLINTH, PLINTH_SET = 0.10, 0.05
+# advisory targets adopted from villa_01_guidelines.docx (K-SPLASH / K-UPPER, K-OVERHANG): sound practice
+SPLASH = 0.60                # worktop to the underside of the wall units (units from 1.50 m)
+OVERHANG = 0.025             # worktop beyond the cabinet face
 
 
 def to_world(it, b):
@@ -117,10 +120,10 @@ def body(it):
                 p.append((kind, (a, yb, 0, b, yf, H)))
                 continue
             p += [("plinth", (a, yb, 0, b, yf - PLINTH_SET, PLINTH)),
-                  (kind, (a, yb, PLINTH, b, yf, COUNTER_TOP - 0.04)),
+                  (kind, (a, yb, PLINTH, b, yf - OVERHANG, COUNTER_TOP - 0.04)),   # worktop overhangs 25 mm
                   ("worktop", (a, yb, COUNTER_TOP - 0.04, b, yf, COUNTER_TOP))]
             if tall_wall:
-                p.append(("wall-units", (a, yb, 1.45, b, yb + 0.35, H)))
+                p.append(("wall-units", (a, yb, COUNTER_TOP + SPLASH, b, yb + 0.35, H)))
         return p
     if t in ("bookcase", "pantry_shelving", "store_shelving"):
         p = [("back", (x0, yb, 0, x1, yb + 0.02, H)), ("side", (x0, yb, 0, x0 + 0.02, yf, H)),
