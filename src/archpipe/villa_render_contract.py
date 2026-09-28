@@ -10,6 +10,10 @@ KINDS = {"principled", "glass", "emissive", "translucent"}
 GROUPS = {"shell", "context", "furniture", "fixture", "dressing", "ground"}
 LAYERS = {"ambient", "task", "accent", "decorative", "night"}
 RAY_VISIBILITY = ("camera", "shadow", "diffuse", "glossy", "transmission")
+# archpipe.concept.villa_furnish.BODY: card mitton-path-of-travel-min, paths of travel at least 36 in (914 mm).
+# Duplicated as a literal (not imported) so this generic contract module stays free of a concept-package
+# dependency; villa_render.py's curtain loop cites the same card and constant name when it computes the field.
+DOOR_CLEAR_WIDTH_M = 0.914
 
 
 def _number(value, positive=False):
@@ -320,4 +324,44 @@ def validate_scene(scene: dict) -> list[str]:
         need(isinstance(c.get("center"), list) and len(c["center"]) == 2 and all(_number(v) for v in c["center"]),
              p+".center", "[x, y] required")
         need(_number(c.get("z_start")), p+".z_start", "number required")
+    # Curtains (client 2026-09-28): sheer + a heavy layer on a ceiling track, built and cloth-simulated in
+    # villa_scene.build_curtains like the cloth bedding above. The contract fixes the geometric guarantee that
+    # keeps the open state clear of a door passage (open_stack_m capped) rather than trusting a formula repeated in
+    # two places.
+    for i, c in enumerate(scene.get("curtains", [])):
+        p = "curtains[%d]" % i
+        need(isinstance(c, dict), p, "object required")
+        if not isinstance(c, dict):
+            continue
+        need(isinstance(c.get("id"), str) and bool(c.get("id")), p+".id", "nonempty string required")
+        need(isinstance(c.get("room"), str) and bool(c.get("room")), p+".room", "nonempty room string required")
+        need(c.get("axis") in ("h", "v"), p+".axis", "expected h (opening runs along x) or v (along y)")
+        need(_vector(c.get("center"), 2), p+".center", "[x, y] required")
+        need(_number(c.get("width"), positive=True), p+".width", "positive number required")
+        need(_number(c.get("floor_z")), p+".floor_z", "number required")
+        need(_number(c.get("track_z")) and c.get("track_z", 0) > c.get("floor_z", -1e9),
+             p+".track_z", "the track must be above the floor")
+        need(c.get("normal_sign") in (-1, 1), p+".normal_sign", "-1 or 1 required")
+        # The room-side boundary of the room's own clear_rect (past the wall's full thickness), NOT a small offset
+        # from the window line -- that hung the first draft's curtain inside the wall/reveal, behind the frame.
+        need(_number(c.get("wall_face")), p+".wall_face", "the wall's room-side face (a clear_rect boundary) required")
+        need(c.get("sheer_material") in scene.get("materials", {}), p+".sheer_material", "must name a material")
+        need(c.get("heavy_material") in scene.get("materials", {}), p+".heavy_material", "must name a material")
+        # Lead review (draft render 2): a flat 0.14 m stack cap held no real fabric (a 2.4-2.76 m door's pair of
+        # panels carries ~5 m of fullness). The stack (villa_render's STACK_RATIO x width, ASSUMED, not a cited
+        # standard) may now overlap the glazing edge; what it must never do is close a DOOR below a walkable
+        # clear width -- render_support.blocked_openings has no notion of "clear width" and would flag any such
+        # overlap by design, so that check is NOT used for curtains (see test_curtain_clear_width_through_doors).
+        need(c.get("opening_kind") in ("window", "garden-door"), p+".opening_kind", "expected window or garden-door")
+        need(_number(c.get("open_pier_reach_m"), positive=True), p+".open_pier_reach_m",
+             "positive number required (the wall pier's own extent beyond the opening)")
+        need(_number(c.get("open_stack_m"), positive=True) and
+             c.get("open_stack_m", -1) >= c.get("open_pier_reach_m", 1e9),
+             p+".open_stack_m", "must be at least the pier reach (it starts there and may extend further)")
+        if c.get("opening_kind") == "garden-door":
+            # DOOR_CLEAR_WIDTH_M == archpipe.concept.villa_furnish.BODY: card mitton-path-of-travel-min, paths of
+            # travel at least 36 in (914 mm). A window is never walked through, so it carries no clear-width field.
+            need(_number(c.get("open_clear_width_m"), positive=True) and
+                 c.get("open_clear_width_m", -1) >= DOOR_CLEAR_WIDTH_M - 1e-9,
+                 p+".open_clear_width_m", "a door's open curtains must leave >= %.3f m clear (F.BODY)" % DOOR_CLEAR_WIDTH_M)
     return errors

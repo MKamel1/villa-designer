@@ -46,19 +46,31 @@ M = {
     "travertine": dict(kind="principled", asset="Marble014", base_rgb=[0.66, 0.63, 0.57], reflectance=0.55,
                        roughness=0.35, tile_m=1.2, note="honed cream stone, large format (ASSUMED; the first "
                                                           "texture read pink)"),
-    "oak-floor": dict(kind="principled", asset="WoodFloor051", base_rgb=[0.45, 0.33, 0.22], reflectance=0.33,
-                      roughness=0.5, tile_m=2.0, grain_axis="x", contrast=0.65,
-                      note="light oak engineered planks (ASSUMED)"),
+    "oak-floor": dict(kind="principled", asset="oak_wood_planks", base_rgb=[0.45, 0.33, 0.22], reflectance=0.33,
+                      roughness=0.5, tile_m=1.20, grain_axis="x",
+                      note="light oak engineered planks (ASSUMED); Poly Haven oak_wood_planks, real scan 1.20 m"),
     "marble-ensuite": dict(kind="principled", asset="Marble020", base_rgb=[0.66, 0.60, 0.52], reflectance=0.58,
                            roughness=0.25, tile_m=1.2, note="warm cream marble, large format (ASSUMED)"),
     "marble-bath": dict(kind="principled", asset="Marble014", base_rgb=[0.70, 0.66, 0.58], reflectance=0.62,
                         roughness=0.3, tile_m=1.2, note="cream marble, large format (ASSUMED)"),
     "marble-white": dict(kind="principled", asset="Marble012", base_rgb=[0.78, 0.78, 0.76], reflectance=0.72,
                          roughness=0.18, tile_m=1.4, note="white veined stone worktops (ASSUMED)"),
-    "walnut": dict(kind="principled", asset="Wood051", base_rgb=[0.20, 0.11, 0.06], reflectance=0.12, roughness=0.45,
-                   tile_m=1.0, grain_axis="z", contrast=0.55, note="walnut veneer joinery (ASSUMED: a calm, low-figure veneer; photo grain contrast 55 %)"),
-    "oak": dict(kind="principled", asset="Wood049", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40, roughness=0.5,
-                tile_m=1.0, grain_axis="z", contrast=0.55, note="light oak veneer (ASSUMED: a calm, low-figure veneer; photo grain contrast 55 %)"),
+    # Client (2026-09-28): "for all the wood in the villa use a more natural texture it looks annoyingly fake". The
+    # ambientCG Wood0xx sets above were a repeating printed-looking stripe; replaced with Poly Haven scanned veneers
+    # (CC0, ops/workstation/library-manifest.json). tile_m is each asset's own real-world scan size
+    # (api.polyhaven.com/info/<id> "dimensions", already in metres/mm as published) so the grain repeats at the size
+    # it was actually cut, not an assumed one. The old `contrast` field pulled the photo toward its own mean colour
+    # to hide the previous texture's printed striping; these are real scans (not tileable-repeat placeholders), so
+    # it is REMOVED here (full photographed contrast kept) -- I could not preview the rendered result on this
+    # machine, so this is a judgement call, not a measured one; check the next render for busy/repeating grain
+    # before a client review.
+    "walnut": dict(kind="principled", asset="natural_walnut_veneer", base_rgb=[0.20, 0.11, 0.06], reflectance=0.12,
+                   roughness=0.45, tile_m=1.00, grain_axis="z",
+                   note="walnut veneer joinery (ASSUMED); Poly Haven natural_walnut_veneer, real scan 1.00 m"),
+    "oak": dict(kind="principled", asset="white_oak_veneer", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40,
+                roughness=0.5, tile_m=0.50, grain_axis="z",
+                note="light oak veneer (ASSUMED); Poly Haven white_oak_veneer (paler than door-oak, per its own "
+                     "'light oak' note), real scan 0.50 m"),
     "greige-lacquer": dict(kind="principled", base_rgb=[0.46, 0.42, 0.37], reflectance=0.43, roughness=0.35,
                            note="matt greige lacquer kitchen fronts (ASSUMED)"),
     "boucle": dict(kind="principled", asset="Fabric082A", base_rgb=[0.74, 0.70, 0.64], reflectance=0.66,
@@ -95,9 +107,10 @@ M = {
                         note="laminated glass guard"),
     "silvered-mirror": dict(kind="principled", base_rgb=[0.91, 0.92, 0.92], reflectance=0.92,
                             roughness=0.035, metallic=1.0, note="ASSUMED silvered glass vanity mirror"),
-    "door-oak": dict(kind="principled", asset="Wood049", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40,
-                     roughness=0.5, tile_m=1.0, grain_axis="z", contrast=0.55,
-                     note="flush oak veneer door, closed (ASSUMED)"),
+    "door-oak": dict(kind="principled", asset="oak_veneer_01", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40,
+                     roughness=0.5, tile_m=1.83, grain_axis="z",
+                     note="flush oak veneer door, closed (ASSUMED); Poly Haven oak_veneer_01 (medium oak, not the "
+                          "paler 'oak' joinery), real scan 1.83 m"),
     "render-exterior": dict(kind="principled", base_rgb=[0.65, 0.65, 0.65], reflectance=0.65,
                             roughness=0.85, note="neutral smooth mineral render on neighbouring buildings and apartment (ASSUMED)"),
     "paint-exterior-grey-green": dict(kind="principled", base_rgb=[0.590, 0.672, 0.605], reflectance=0.65,
@@ -108,14 +121,37 @@ M = {
                  roughness=1.0, tile_m=2.0, note="lawn (ASSUMED)"),
     "outdoor-fabric": dict(kind="principled", asset="Fabric036", base_rgb=[0.62, 0.58, 0.50], reflectance=0.55,
                            roughness=0.95, tile_m=0.3, note="outdoor acrylic fabric (terrace set)"),
-    "teak": dict(kind="principled", asset="Wood094", base_rgb=[0.35, 0.22, 0.12], reflectance=0.22, roughness=0.6,
-                 tile_m=1.0, grain_axis="x", note="teak frame (terrace set)"),
+    "teak": dict(kind="principled", asset="teak_veneer", base_rgb=[0.35, 0.22, 0.12], reflectance=0.22, roughness=0.6,
+                 tile_m=1.00, grain_axis="x", note="teak frame (terrace set); Poly Haven teak_veneer, real scan 1.00 m"),
     "alu-bronze": dict(kind="principled", base_rgb=[0.10, 0.09, 0.08], reflectance=0.09, roughness=0.35,
                        metallic=1.0, note="dark bronze anodised aluminium window and door frames (ASSUMED)"),
     "paint-white-satin": dict(kind="principled", base_rgb=[0.82, 0.81, 0.79], reflectance=0.80, roughness=0.35,
                               note="white satin paint (skirting, architraves)"),
     "white-paint-joinery": dict(kind="principled", base_rgb=[0.80, 0.79, 0.76], reflectance=0.78, roughness=0.4,
                                 note="white painted joinery (bunk bed, shelving)"),
+    # Curtains (client 2026-09-28): sheer + a heavy layer on a ceiling track in every bedroom/living-space window and
+    # glazed garden door (see the `curtains` list below). "translucent" mixes the stated opaque colour with a
+    # Translucent BSDF by `transmittance`; the ADR-0013 photo-texture pipeline in villa_scene.add_material was
+    # extended to that kind so these keep a scanned weave like every other fabric here. tile_m is each asset's own
+    # scanned physical size (api.polyhaven.com/info/<id> "dimensions"): a fine weave photographed close-up, so it
+    # tiles many times across a curtain width -- unlike a wood veneer, a repeating weave is correct, not a defect.
+    "curtain-sheer": dict(kind="translucent", asset="rough_linen", base_rgb=[0.86, 0.84, 0.79], reflectance=0.70,
+                          transmittance=0.55, roughness=0.85, tile_m=0.27,
+                          note="ASSUMED sheer linen curtain, transmittance 0.55 (daylight diffusion / daytime "
+                               "privacy, open at the sides in every state); Poly Haven rough_linen, real scan 0.27 m"),
+    # Notes avoid the words "dark"/"black" on purpose: render_qa.finish_matches_name treats either word in an
+    # overridden material's note as a claim that the finish itself renders near-black (luminance <= 0.15, written
+    # for "black-metal" / "dark bronze"). "Blackout" describes the lining's OPACITY (function), not its colour --
+    # a taupe fabric matching the room -- and tripped that check as a false positive on the first render.
+    "curtain-heavy": dict(kind="translucent", asset="crepe_satin", base_rgb=[0.40, 0.36, 0.31], reflectance=0.32,
+                          transmittance=0.02, roughness=0.6, tile_m=0.266,
+                          note="ASSUMED heavy curtain (bedrooms): opaque light-blocking lining, transmittance "
+                               "0.02; Poly Haven crepe_satin, real scan 0.266 m"),
+    "curtain-heavy-dimout": dict(kind="translucent", asset="crepe_satin", base_rgb=[0.40, 0.36, 0.31],
+                                 reflectance=0.32, transmittance=0.10, roughness=0.6, tile_m=0.266,
+                                 note="ASSUMED heavy curtain (living spaces): dim-out lining, transmittance 0.10 "
+                                      "(fuller opacity reserved for bedrooms); Poly Haven crepe_satin, real scan "
+                                      "0.266 m"),
 }
 M["oak-grain-x"] = dict(M["oak"], grain_axis="x", note="ASSUMED light oak veneer, grain along horizontal bed frame")
 M["walnut-grain-x"] = dict(M["walnut"], grain_axis="x", note="ASSUMED walnut veneer, grain along horizontal tops and shelves")
@@ -134,6 +170,10 @@ for r in ("landing-gf", "corridor", "gallery-end", "study-game", "kids-a", "kids
           "parents-dressing", "parents-dressing-ext"):
     FINISH[r] = ("oak-floor", "plaster-warm-white", "ceiling-white")
 UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")   # ceiling = the ramp/deck soffit lining
+# Curtains (client 2026-09-28): every window/glazed garden door in a room of one of these occupancies gets a
+# curtain -- "bedrooms + living spaces". Kitchens ("kitchen"/"utility"), sanitary rooms ("wc"/"bathroom"/"ensuite")
+# and circulation ("stair") are deliberately excluded even though some carry windows.
+CURTAIN_OCC = ("bedroom", "living", "dining", "study")
 
 
 # ------------------------------------------------------------------ geometry helpers
@@ -817,6 +857,112 @@ def build(lay=None, views=None):
     notes.append("Construction details added for the render: 80 mm skirting, 50 mm aluminium window frames and "
                  "mullions, 70 mm architraves and lever handles (not yet in the Revit model).")
 
+    # ---- curtains (client 2026-09-28): sheer + a heavy layer on a ceiling track, whole villa. RULE: every window
+    # and glazed garden door in a room whose occupancy is "bedroom", "living", "dining" or "study" gets curtains;
+    # kitchens/dirty kitchen (occupancy "kitchen"/"utility"), bathrooms/WC (occupancy "wc"/"bathroom"/"ensuite") and
+    # the stair void (no glazing) get none -- the client's "bedrooms + living spaces". Bedrooms get a blackout heavy
+    # layer, living/dining/study a dim-out one (curtain-heavy / curtain-heavy-dimout, above). Geometry is built and
+    # cloth-simulated in villa_scene.build_curtains (photoreal._grid/_simulate, the tested bedroom curtain ported
+    # and made axis-general); this list is the authored contract it consumes and, like the cloth duvets, is NOT a
+    # static mesh -- the float/passage guards never see it, so a dedicated test below checks the open state
+    # directly against render_support.blocked_openings.
+    curtains = []
+    curtain_openings = ([dict(w, kind="window") for w in sp["windows"]] +
+                        [dict(d, kind="garden-door") for d in sp["doors"] if d.get("garden")])
+    curtain_counts = {}
+    for o in curtain_openings:
+        room = o["room"] if o["kind"] == "window" else next(r for r in o["rooms"] if r != "yard")
+        occ = lay["rooms"][room]["occupancy"]
+        if occ not in CURTAIN_OCC:
+            continue
+        axis = (o.get("span") or [None])[0]
+        if axis not in ("h", "v"):
+            continue
+        rx0, ry0, rx1, ry1 = F.clear_rect(lay, room)
+        rcx, rcy = (rx0 + rx1) / 2, (ry0 + ry1) / 2
+        sign = 1 if (rcy > o["y"] if axis == "h" else rcx > o["x"]) else -1
+        # Lead review (draft render 1): the old track/panels were offset a few cm from the WINDOW LINE (o["x"]/
+        # o["y"]), which sits inside the wall's own thickness -- still behind detail-window-frames (alu-bronze,
+        # +-30 mm of that same line) and inside the reveal, so the closed curtain read as hanging inside the
+        # window, split by the mullion. A ceiling-track curtain hangs on the ROOM side of the WALL, not the
+        # glazing: `wall_face` is clear_rect's boundary on this side (the room's own clear-floor edge, already
+        # inset past the wall's full thickness -- 0.20 m envelope / 0.05 m partition, F.clear_rect's own numbers,
+        # not re-derived here), and villa_scene.build_curtains hangs the sheer 0.10 m and the heavy 0.15 m beyond
+        # THAT face into the room.
+        wall_face = (ry1 if sign < 0 else ry0) if axis == "h" else (rx1 if sign < 0 else rx0)
+        level, width = o["level"], o["width"]
+        floor_z = LZ[level]
+        track_z = VL.ceiling_z(level, x=o["x"], room=room, y=o["y"], lay=lay, spec=sp)
+        curtain_counts[room] = curtain_counts.get(room, 0) + 1
+        cid = "curtain-%s-%02d" % (room, curtain_counts[room])
+        bedroom = occ == "bedroom"
+        # Lead review (draft render 2): a 0.14 m flat cap was a curtain that could not physically exist -- a pair
+        # of panels for a 2.4-2.76 m door carries roughly double fullness (~5 m of fabric) and cannot gather into
+        # 0.14 m. STACK_RATIO (0.18 x opening width, per side, sheer and heavy stacking together) is the ASSUMED
+        # typical stacking allowance for pleated drapery -- not a cited standard, there isn't one for this. The
+        # stack sits beyond the opening as far as the wall PIER allows (`pier_reach`, capped by revit_spec.REVEAL
+        # so it never runs past the kept wall into the next opening or a corner); whatever more the ratio calls
+        # for hangs in front of the glazing/frame instead (a real short-pier install: the stack partly overlaps
+        # the glass edge). For a DOOR (garden/glazed; a window is never walked through, so it carries no passage
+        # rule) that overlap is capped so the two stacks together still leave F.BODY (0.914 m, "card
+        # mitton-path-of-travel-min: paths of travel at least 36 in") clear through the opening -- centred, since
+        # none of this villa's garden-door spec entries mark an operable side.
+        STACK_RATIO = 0.18
+        pier_reach = round(min(0.18, RS.REVEAL - 0.02), 3)
+        desired_stack = round(STACK_RATIO * width, 3)
+        opening_kind = o["kind"]
+        clear_width = None
+        if opening_kind == "garden-door":
+            max_overlap_each = max(0.0, (width - F.BODY) / 2)
+            overlap = min(max(0.0, desired_stack - pier_reach), max_overlap_each)
+            clear_width = round(width - 2 * overlap, 3)
+        else:
+            overlap = max(0.0, desired_stack - pier_reach)
+        stack = round(pier_reach + overlap, 3)
+        curtains.append(dict(
+            id=cid, room=room, level=level, axis=axis, center=[o["x"], o["y"]], width=round(width, 3),
+            floor_z=floor_z, track_z=round(track_z, 3), normal_sign=sign, wall_face=round(wall_face, 3),
+            bedroom=bedroom, opening_kind=opening_kind,
+            sheer_material="curtain-sheer", heavy_material="curtain-heavy" if bedroom else "curtain-heavy-dimout",
+            open_stack_m=stack, open_pier_reach_m=pier_reach, closed_overlap_m=0.05,
+            **({"open_clear_width_m": clear_width} if clear_width is not None else {}),
+            # Floor-length regardless of sill height: a punched bedroom window's curtain still runs track-to-floor
+            # (the norm in bedrooms/living rooms, not a curtain cut to the glass), so track_z/floor_z alone (not
+            # the window's own sill/head) drive villa_scene.build_curtains' panel height.
+            label="ASSUMED curtains: sheer + %s, ceiling track, floor-length" % ("blackout" if bedroom else "dim-out")))
+        # The track: a slim ceiling-fixed rail spanning width + pier_reach m each side, centred 0.125 m beyond the
+        # wall's inner face (mid-way through the sheer/heavy hanging band villa_scene uses) -- clear of the frame
+        # and reveal, not offset from the glazing line. It already runs the full opening width, so no change is
+        # needed for a stack that overlaps the glazing (that is fabric on the SAME rail, gathered further in).
+        half = width / 2 + pier_reach
+        z0, z1 = track_z - 0.03, track_z
+        track_at = wall_face + sign * 0.125
+        d0, d1 = sorted((track_at - 0.02, track_at + 0.02))
+        if axis == "h":
+            box = (o["x"] - half, d0, z0, o["x"] + half, d1, z1)
+        else:
+            box = (d0, o["y"] - half, z0, d1, o["y"] + half, z1)
+        mesh("detail-" + cid + "-track", "black-metal", box_faces(*box), "fixture", room=room,
+             label="detail: curtain ceiling track (ASSUMED)")
+    notes.append("Curtains (client 2026-09-28): sheer linen (rough_linen, transmittance 0.55) + a heavy layer on a "
+                 "ceiling track, every bedroom and living-space window and glazed garden door -- blackout "
+                 "(transmittance 0.02) in bedrooms, dim-out (0.10) in living/dining/study. Kitchens, the dirty "
+                 "kitchen, bathrooms/WC and the stair void have none. By day each side stacks to 0.18 x the "
+                 "opening's width (ASSUMED typical stacking allowance for pleated drapery, not a cited standard): "
+                 "as far beyond the opening as the wall pier allows, the rest overlapping the glazing edge, as a "
+                 "short-pier install does -- for a garden/glazed door this is capped so the two stacks still leave "
+                 "0.914 m clear to walk through (F.BODY, card mitton-path-of-travel-min); a window carries no such "
+                 "cap. The heavy layer closes across the opening at night; the sheer layer stays open in both "
+                 "states (its job is daytime diffusion, and the closed heavy layer already gives the night "
+                 "blackout/dim-out). ASSUMED: track and stacking dimensions, not a specified product.")
+    for v in views:
+        if v["state"] == "exterior-dusk":
+            continue
+        suffixes = ("-heavy-closed",) if v["state"] == "day" else ("-heavy-open-l", "-heavy-open-r")
+        hidden = [c["id"] + s for c in curtains for s in suffixes]
+        if hidden:
+            v.setdefault("hide_meshes", []).extend(hidden)
+
     # ---- terrace lounge set (questionnaire: lounge seating), on paving outside the garden living
     tx0 = 22.6 + 0.6
     zt = LZ["B"]
@@ -982,7 +1128,7 @@ def build(lay=None, views=None):
 
     scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes, "lights": lights,
-             "props": props(lay), "cloth": cloth, "views": views,
+             "props": props(lay), "cloth": cloth, "curtains": curtains, "views": views,
              "exposure_mode": "set-metered", "exposure": EXPOSURE, "sky": {"day": "nishita",
                                            "evening": {"hdri": "belfast_sunset_puresky.exr", "horizontal_lux": 30.0},
                                            "night": {"hdri": "dikhololo_night.exr", "horizontal_lux": 0.3}},

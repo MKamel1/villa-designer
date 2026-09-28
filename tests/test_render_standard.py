@@ -18,7 +18,7 @@ ALLOWED_MATERIALS = {
     "render-exterior", "paint-exterior-grey-green", "paving", "lawn", "outdoor-fabric", "teak",
     "alu-bronze", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
     "marker-2200", "opal-pen-globe-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
-    "opal-vsconce-3000",
+    "opal-vsconce-3000", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout",
 }
 
 
@@ -416,6 +416,101 @@ class RenderStandard(unittest.TestCase):
         found = {u[0] for u in S.unsupported(sc)}
         self.assertIn("lamp-shade-DESK-kids-a-03", found)
         self.assertIn("marker-STEP-stair-b-02", found)
+
+    def test_every_bedroom_and_living_window_has_a_curtain(self):
+        """Client 2026-09-28: sheer + blackout (bedrooms) / dim-out (living spaces) on ceiling tracks, whole villa.
+        RULE (villa_render.CURTAIN_OCC): every window/glazed garden door in a room whose occupancy is bedroom,
+        living, dining or study gets one; kitchens/dirty kitchen, bathrooms/WC and the stair void get none even
+        though some of them carry windows too."""
+        from archpipe.concept import revit_spec as RS
+        lay = VR.R.design("D1")
+        sp = RS.build(lay)
+        openings = ([w["room"] for w in sp["windows"]] +
+                   [next(r for r in d["rooms"] if r != "yard") for d in sp["doors"] if d.get("garden")])
+        expected_rooms = {room for room in openings if lay["rooms"][room]["occupancy"] in VR.CURTAIN_OCC}
+        got_rooms = {c["room"] for c in SCENE["curtains"]}
+        self.assertEqual(got_rooms, expected_rooms)
+        self.assertTrue(expected_rooms & {"kids-a", "kids-b", "parents-bed"}, "no bedroom curtains found")
+        self.assertTrue(expected_rooms & {"living", "dining"}, "no living-space curtains found")
+        excluded = {"guest-wc", "family-bath", "parents-ensuite", "kitchen", "kitchen-island", "kitchen-work",
+                   "kitchen-store", "kitchen-side", "dirty-kitchen", "stair-b", "stair-gf"}
+        self.assertEqual(got_rooms & excluded, set())
+        for c in SCENE["curtains"]:
+            bedroom = lay["rooms"][c["room"]]["occupancy"] == "bedroom"
+            self.assertEqual(c["bedroom"], bedroom, c["id"])
+            self.assertEqual(c["heavy_material"], "curtain-heavy" if bedroom else "curtain-heavy-dimout", c["id"])
+            self.assertEqual(c["sheer_material"], "curtain-sheer", c["id"])
+            self.assertGreaterEqual(c["open_stack_m"], c["open_pier_reach_m"], c["id"])
+            self.assertGreater(c["track_z"], c["floor_z"], c["id"])
+
+    def test_curtain_open_stack_is_a_realistic_fullness(self):
+        """Lead review of draft render 2: a flat 0.14 m stack cap held no real fabric -- a 2.4-2.76 m door's pair
+        of panels carries roughly double fullness (~5 m) and cannot gather into 0.14 m; rendering it would show a
+        curtain that could not exist. villa_render's STACK_RATIO (0.18 x opening width, ASSUMED typical stacking
+        allowance, ridden as far as the wall pier allows with the rest over the glazing edge, per opening_kind)
+        replaces it. This checks the stack is the full ratio (not silently clamped) for the villa's actual doors,
+        and that windows (never walked through) carry no clear-width field at all."""
+        for c in SCENE["curtains"]:
+            self.assertAlmostEqual(c["open_stack_m"], round(0.18 * c["width"], 3), places=2, msg=c["id"])
+            if c["opening_kind"] == "window":
+                self.assertNotIn("open_clear_width_m", c, c["id"] + ": a window has no passage rule")
+
+    def test_curtain_clear_width_through_doors(self):
+        """Task B guard (lead review): for a garden/glazed DOOR, the open sheer+heavy stacks together must leave
+        >= F.BODY (0.914 m, card mitton-path-of-travel-min, archpipe.concept.villa_furnish.BODY) clear to walk
+        through -- windows carry no such rule. render_support.blocked_openings is NOT used here: it treats a
+        door's WHOLE width as the passage and has no notion of "clear width", so it would flag the realistic
+        stack's deliberate overlap onto the glazing edge by design (see villa_scene.build_curtains). This checks
+        the contract's own open_clear_width_m field against the real 2.4 m and 2.76 m garden doors (pass) and
+        proves a synthetic curtain left under 0.914 m clear is rejected (fail)."""
+        from archpipe.concept import villa_furnish as F
+        from archpipe import villa_render_contract as C
+        import copy
+        self.assertEqual(F.BODY, 0.914)
+        doors = {round(c["width"], 2): c for c in SCENE["curtains"] if c["opening_kind"] == "garden-door"}
+        for width in (2.4, 2.76):
+            self.assertIn(width, doors, "no garden-door curtain at the expected width %.2f m" % width)
+            c = doors[width]
+            self.assertGreaterEqual(c["open_clear_width_m"], F.BODY, c["id"])
+            self.assertAlmostEqual(c["open_clear_width_m"], c["width"] - 2 * (c["open_stack_m"] - c["open_pier_reach_m"]),
+                                   places=2, msg=c["id"])
+        self.assertEqual(C.validate_scene(SCENE), [])
+        bad = copy.deepcopy(SCENE)
+        template = next(c for c in SCENE["curtains"] if c["opening_kind"] == "garden-door")
+        bad["curtains"] = [dict(template, open_clear_width_m=0.80)]     # < F.BODY: a stack that closes the door
+        errors = C.validate_scene(bad)
+        self.assertTrue(any("open_clear_width_m" in e for e in errors), errors)
+
+    def test_curtain_panels_hang_on_the_room_side_of_the_wall_not_the_window(self):
+        """Lead review of draft render 1: the closed curtain hung INSIDE the window reveal (behind
+        detail-window-frames, alu-bronze, +-0.03 m of the window line; split by the mullion into two apparent
+        curtains) because the panel's depth offset was measured from the window LINE, which is still inside the
+        wall's own thickness. villa_scene.build_curtains now hangs the sheer 0.10 m and the heavy 0.15 m past
+        `wall_face` (clear_rect's room-side boundary, already past the wall's full thickness) instead. This checks
+        every curtain's hang line lands strictly inside the room's clear rect and clear of the window/frame plane,
+        and proves the OLD (window-line-relative) placement would have failed the same check."""
+        from archpipe.concept import villa_furnish as F
+        lay = VR.R.design("D1")
+        FRAME_CLEARANCE = 0.06  # detail-window-frames extends +-0.03 m from the window line
+
+        def hang_ok(c, depth_offset):
+            rx0, ry0, rx1, ry1 = F.clear_rect(lay, c["room"])
+            at = c["wall_face"] + c["normal_sign"] * depth_offset
+            cx, cy = c["center"]
+            if c["axis"] == "h":
+                inside, clear_of_frame, delta = ry0 < at < ry1, abs(at - cy) >= FRAME_CLEARANCE, (at - cy)
+            else:
+                inside, clear_of_frame, delta = rx0 < at < rx1, abs(at - cx) >= FRAME_CLEARANCE, (at - cx)
+            return inside and clear_of_frame and delta * c["normal_sign"] > 0
+
+        self.assertTrue(SCENE["curtains"])
+        for c in SCENE["curtains"]:
+            self.assertTrue(hang_ok(c, 0.10), c["id"] + ": sheer not on the room side of the wall face")
+            self.assertTrue(hang_ok(c, 0.15), c["id"] + ": heavy not on the room side of the wall face")
+            # the pre-fix placement (0.05/0.11 m off the window line itself) fails this same check
+            old = dict(c, wall_face=c["center"][0 if c["axis"] == "v" else 1])
+            self.assertFalse(hang_ok(old, 0.05), c["id"] + ": window-line offset should fail this guard")
+            self.assertFalse(hang_ok(old, 0.11), c["id"] + ": window-line offset should fail this guard")
 
 
 if __name__ == "__main__":

@@ -212,7 +212,8 @@ def add_material(name, spec, library_root, warnings):
     bsdf.inputs["Base Color"].default_value = base
     bsdf.inputs["Roughness"].default_value = spec.get("roughness", 0.6)
     bsdf.inputs["Metallic"].default_value = spec.get("metallic", 0.0)
-    if name in ("boucle", "linen", "sage-fabric", "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "outdoor-fabric"):
+    if name in ("boucle", "linen", "sage-fabric", "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe",
+                "outdoor-fabric", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout"):
         bsdf.inputs["Sheen Weight"].default_value = 0.18
         bsdf.inputs["Sheen Roughness"].default_value = 0.7
     kind = spec["kind"]
@@ -253,7 +254,10 @@ def add_material(name, spec, library_root, warnings):
         if hasattr(mat, "cycles") and hasattr(mat.cycles, "sample_as_light"):
             mat.cycles.sample_as_light = True
     asset = spec.get("asset")
-    if asset and kind == "principled":
+    # Curtains (client 2026-09-28) are "translucent" (the sheer/heavy Mix Shader above), not "principled"; extended
+    # here so they get the same per-channel mean-matched photo texture as every other finish (ADR-0013 part 7)
+    # instead of a flat colour.
+    if asset and kind in ("principled", "translucent"):
         folder = os.path.join(library_root, "materials", asset)
         def find(suffix):
             if not os.path.isdir(folder):
@@ -308,6 +312,9 @@ def add_material(name, spec, library_root, warnings):
             bounded.inputs[1].default_value = (1, 1, 1)
             nt.links.new(scale.outputs["Vector"], bounded.inputs[0])
             nt.links.new(bounded.outputs["Vector"], bsdf.inputs["Base Color"])
+            if kind == "translucent":
+                # the transmitted (Translucent BSDF) colour keeps the same weave, not just the reflected one
+                nt.links.new(bounded.outputs["Vector"], trans.inputs["Color"])
             mat["texture_mean_linear"] = mean
             mat["texture_mean_rgb_linear"] = mean_rgb
             mat["texture_scale"] = factor
@@ -325,7 +332,7 @@ def add_material(name, spec, library_root, warnings):
                 nt.links.new(rough_color, rough_range.inputs["Value"])
                 nt.links.new(rough_range.outputs["Result"], bsdf.inputs["Roughness"])
                 fabrics = ("boucle", "linen", "sage-fabric", "charcoal-fabric", "taupe-fabric", "bedding-white",
-                           "throw-taupe", "outdoor-fabric")
+                           "throw-taupe", "outdoor-fabric", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout")
                 if name in fabrics:
                     # woven cloth: a subtle bump from the weave, not a hard photographed relief
                     bump = nt.nodes.new("ShaderNodeBump")
@@ -336,7 +343,8 @@ def add_material(name, spec, library_root, warnings):
             normal = find("_NormalGL")
             if normal and name not in ("boucle", "linen", "sage-fabric", "charcoal-fabric", "taupe-fabric",
                                        "bedding-white", "throw-taupe", "outdoor-fabric", "walnut", "oak",
-                                       "door-oak", "teak", "oak-floor"):
+                                       "door-oak", "teak", "oak-floor", "curtain-sheer", "curtain-heavy",
+                                       "curtain-heavy-dimout"):
                 # stone and paving keep their photographed relief through the object-space triplanar normal. Wood
                 # does not: a finished veneer is nearly flat, and on a close wardrobe end the normal map read as
                 # large watery ripples (draft 14 dressing view)
@@ -642,6 +650,105 @@ def drape_cloth(cloth_specs, materials):
                                   round(min(q.z for q in pts), 3), round(max(q.x for q in pts), 3),
                                   round(max(q.y for q in pts), 3), round(max(q.z for q in pts), 3)]})
     return report
+
+
+def build_curtains(curtain_specs, materials):
+    """Sheer + a heavy layer per opening (client 2026-09-28), ported from the bedroom's tested curtain
+    (`photoreal.dress_room`, ~919-964: irregular per-pleat depth/phase gathered at the heading and relaxing toward
+    the hem -- a pure sine extrusion read as corrugated sheet) and made axis-general (the bedroom's single fixed
+    wall) and stateful (an always-open sheer, an open-stacked heavy pair and a separate closed-heavy panel, so
+    per-view visibility is a hide, not a rebuild). Colliders are the room's own floor mesh (`villa_render.mesh`
+    names it "floor-<room>"); the top is pinned to the track height, so each panel hangs from the track by
+    construction and settles onto the floor rather than through it -- the generic float guard never sees these (they
+    are not `scene["meshes"]`, exactly like the cloth duvets), so this pin/collide is what keeps them off the
+    floor and clear of the ceiling. Returns (objects, report) -- report is the post-simulation world bounds per
+    panel (like `drape_cloth`'s bedding report), so a render's own JSON can be read to confirm where a panel
+    actually ended up, not just where it was authored to be."""
+    import random
+    objects = {}
+    report = []
+    floors = [o for o in bpy.data.objects if o.name.startswith("floor-")]
+    for spec in curtain_specs:
+        rnd = random.Random(abs(hash(spec["id"])) % (2 ** 31))
+        axis = spec["axis"]                                  # "h": opening runs along x, normal along y; "v": along y, normal along x
+        cx, cy = spec["center"]                               # the WINDOW LINE -- width-axis anchor only, never the hang depth
+        sign = spec["normal_sign"]
+        wall_face = spec["wall_face"]                         # clear_rect's room-side boundary (past the wall's full thickness)
+        floor_z, track_z = spec["floor_z"], spec["track_z"]
+        height = track_z - floor_z - 0.012                   # 12 mm floor clearance (the asked 10-15 mm)
+        width, stack = spec["width"], spec["open_stack_m"]
+        pier_reach, closed_overlap = spec["open_pier_reach_m"], spec.get("closed_overlap_m", 0.05)
+        room_floor = [o for o in floors if o.name == "floor-" + spec["room"]]
+        colliders = room_floor or floors
+
+        def panel(name, u0, u1, offset, material_name):
+            sx = u1 - u0
+            uc = (u0 + u1) / 2.0
+            n_u = max(8, int(sx / 0.05))
+            grid = photoreal._grid(name, sx, height, n_u, 60, (0.0, 0.0), 0.0)
+            pleats = 7
+            depth = [0.035 * rnd.uniform(0.6, 1.4) for _ in range(pleats + 1)]
+            phase = [rnd.uniform(-0.35, 0.35) for _ in range(pleats + 1)]
+            for v_ in grid.data.vertices:
+                u = (v_.co.x + sx / 2.0) / sx
+                t = (v_.co.y + height / 2.0) / height        # 0 = hem, 1 = the gathered heading at the track
+                k = min(pleats, int(u * pleats))
+                relax = 0.55 + 0.45 * t
+                wave = depth[k] * relax * math.sin((u * pleats + phase[k]) * 2.0 * math.pi)
+                # `offset` is an ABSOLUTE world coordinate along the perpendicular (hang-depth) axis -- built from
+                # `wall_face` below, never from cy/cx here. u0/u1 (and so uc) ARE opening-relative along the WIDTH
+                # axis, so that one still needs cx/cy added. (Earlier bug, fixed: leaving cx/cy out of the width
+                # axis placed every curtain in the whole villa near world origin -- invisible in both rendered
+                # views, found only by reading the render's own JSON. Separately, the lead's review caught the
+                # depth axis hanging inside the wall/reveal because it was offset from the window line, not from
+                # `wall_face`.)
+                local_u, local_off, local_z = v_.co.x, offset + sign * wave, floor_z + 0.006 + t * height
+                v_.co = Vector((cx + uc + local_u, local_off, local_z)) if axis == "h" else \
+                    Vector((local_off, cy + uc + local_u, local_z))
+            photoreal._simulate(grid, colliders, 60, mass=0.30, bending=0.35,
+                                pin_band=("z", floor_z + 0.006 + height, 0.02))
+            solid = grid.modifiers.new("thickness", "SOLIDIFY")
+            solid.thickness = 0.004
+            grid.modifiers.new("smooth", "SUBSURF").levels = 1
+            grid.data.materials.append(materials[material_name])
+            for p_ in grid.data.polygons:
+                p_.use_smooth = True
+            return grid
+
+        # Lead review (draft render 1): hang from the ROOM side of the wall's inner face, not a few cm off the
+        # window line (which is still inside the wall thickness, behind detail-window-frames and the reveal --
+        # the closed curtain read as hanging inside the window, split by the mullion). Sheer 0.10 m and heavy
+        # 0.15 m past `wall_face`, both within the client's stated 0.10-0.15 m band.
+        sheer_off, heavy_off = wall_face + sign * 0.10, wall_face + sign * 0.15
+        half = width / 2.0
+        # Each stack is anchored to the OUTER end of its track extension (half + pier_reach) and extends inward by
+        # `stack` (villa_render's STACK_RATIO x width, clamped for a door so F.BODY stays clear -- see
+        # villa_render.py's curtain loop), so when stack > pier_reach its innermost edge crosses half: exactly the
+        # "rest overlaps the glazing edge" the lead asked for, on the SAME rail (a real short-pier stacking
+        # curtain). The old flat 0.14 m cap treated any overlap as a defect; it wasn't -- only a passable clear
+        # width through a DOOR is (villa_render's `open_clear_width_m`, checked in
+        # test_curtain_clear_width_through_doors, not by the generic render_support.blocked_openings, which has
+        # no notion of "clear width" and would flag this overlap by design).
+        panels = [
+            panel(spec["id"] + "-sheer-l", -half - pier_reach, -half - pier_reach + stack, sheer_off, spec["sheer_material"]),
+            panel(spec["id"] + "-sheer-r", half + pier_reach - stack, half + pier_reach, sheer_off, spec["sheer_material"]),
+            panel(spec["id"] + "-heavy-open-l", -half - pier_reach, -half - pier_reach + stack, heavy_off, spec["heavy_material"]),
+            panel(spec["id"] + "-heavy-open-r", half + pier_reach - stack, half + pier_reach, heavy_off, spec["heavy_material"]),
+            panel(spec["id"] + "-heavy-closed", -half - closed_overlap, half + closed_overlap, heavy_off, spec["heavy_material"]),
+        ]
+        for obj in panels:
+            objects[obj.name] = obj
+            pts = [obj.matrix_world @ vv.co for vv in obj.data.vertices]
+            bx = (round(min(p.x for p in pts), 3), round(min(p.y for p in pts), 3), round(min(p.z for p in pts), 3),
+                 round(max(p.x for p in pts), 3), round(max(p.y for p in pts), 3), round(max(p.z for p in pts), 3))
+            # Post-condition (the missing-cx/cy bug above was invisible to every existing test, since a
+            # dropped-translation bug still produces a perfectly valid, contract-shaped mesh): the panel must
+            # actually be near its own opening, not near world origin or another room.
+            if abs((bx[0] + bx[3]) / 2 - cx) > 2.0 or abs((bx[1] + bx[4]) / 2 - cy) > 2.0:
+                raise ValueError("%s centred at (%.2f, %.2f), far from its opening at (%.2f, %.2f)" %
+                                 (obj.name, (bx[0] + bx[3]) / 2, (bx[1] + bx[4]) / 2, cx, cy))
+            report.append({"id": obj.name, "bounds": list(bx)})
+    return objects, report
 
 
 def import_props(prop_specs, library_root):
@@ -1000,6 +1107,11 @@ def render(scene_data, args):
                                      "exitance_lm_per_m2": mat_spec["emission_lm_per_m2"],
                                      "emitted_lumens": area * mat_spec["emission_lm_per_m2"]})
     cloth_report = drape_cloth(scene_data.get("cloth", []), materials)
+    # Curtains (client 2026-09-28) are cloth-simulated like the duvets above, not static meshes; their objects are
+    # merged into `objects` so the per-view hide mechanism below (villa_render's authored hide_meshes, the same
+    # doorway-open-door path) can toggle the heavy layer's open/closed pair per view.
+    curtain_objects, curtain_report = build_curtains(scene_data.get("curtains", []), materials)
+    objects.update(curtain_objects)
     imported_props = import_props(scene_data.get("props", []), library_root)
     lights = {l["id"]: add_light(l, args.ies_dir) for l in scene_data["lights"]}
     full_power = {ident: obj.data.energy for ident, obj in lights.items()}
@@ -1164,6 +1276,7 @@ def render(scene_data, args):
                   "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
                   "lights_on_count": sum(not obj.hide_render for obj in lights.values()), "subjects": subject_result,
                   "imported_props": prop_result, "cloth": cloth_report,
+                  "curtains": [dict(r, hidden=objects[r["id"]].hide_render) for r in curtain_report],
                   "mesh_object_count": len(set(objects.values())),
                   "emissive_sources": current_emissive,
                   "max_bounces": s.cycles.max_bounces, "clamp_indirect": s.cycles.sample_clamp_indirect,
