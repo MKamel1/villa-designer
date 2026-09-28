@@ -743,3 +743,11 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   tap, ladder, pillows, hood, coffee machine, mirrors, boxy sofas, framing and the six omitted QA checks (each
   confirmed in code); it recommended brightening the cinema and lounge, which would contradict the locked-exposure,
   no-enhancement rule; not done.
+- **Final renders, first pass (2026-09-28).** The driver reported a finished 24-view job as "stopped without status":
+  it read the status file just before the shell wrote it, then saw the process gone. Fix: re-read status before
+  declaring the job dead (the identical re-run resumed and fetched the results, as designed). The first final pass
+  also showed what drafts had skipped: exteriors by day on the interiors' exposure lock were blown out (own locked
+  state `exterior-day` now); a windowless corridor by day with lights off was black (lamps on, lamp white
+  balance); a street camera at garden level looked at the underside of the ground; from the street and the front
+  yard only the boundary wall and the ramp enclosure showed, so the street elevation is deferred until the site
+  frontage is modelled. Final-only views need at least one draft before the final set.

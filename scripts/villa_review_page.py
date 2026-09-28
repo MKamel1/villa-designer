@@ -23,6 +23,39 @@ E = html.escape
 
 STATE = {"day": "Day", "evening": "Evening", "exterior-dusk": "Dusk, outside"}
 
+# Why a QA flag stands: each is a physical result the render shows as it is (the render standard forbids correcting
+# it in camera). A flag without an entry here is shown as unexplained.
+def why(check, v):
+    """Why a QA flag stands, given the view: each is a physical result the render shows as it is (the render
+    standard forbids correcting it in camera). Anything else is shown as unexplained."""
+    c, st = check.split(":")[0], v["state"]
+    if c == "colour_cast" and st == "exterior-dusk":
+        return "blue hour: the sky is genuinely cool; not corrected in camera"
+    if c == "colour_cast" and st == "day":
+        return "3000 K lamps on by day under a daylight white balance: the warmth is real"
+    if c == "window_view":
+        return "the window looks onto a plain neighbouring wall with little detail"
+    if c == "crushed_shadows":
+        return "the room's dark areas are its specified lighting at the locked exposure"
+    if c == "window_brightness" and v.get("exposure") == "exterior-day":
+        return "outside by day, the windows read darker than the sunlit facade"
+    if c == "window_brightness":
+        return "the garden seen through basement glass is dimmer than the lit room"
+    return "unexplained: to be investigated"
+
+
+DECISIONS = [
+    ("Parents' dressing door", "Recommended: 0.8 m door centred 0.1 m from the east wall, with a slim 0.35 m bedside "
+     "table, so nothing stands in the opening (a 0.5 m table stood 0.23 m in it). A 0.8 m door is narrower than the "
+     "0.9 m route used elsewhere: it needs your yes as a waiver for the private dressing area (ADR-0014)."),
+    ("Stair structure", "Rendered with ASSUMED steel stringers, open risers and a bar balustrade; the model's treads "
+     "stop 50-200 mm short of the party wall. To be designed and put into the Revit model."),
+    ("Ramp soffit", "The parking model and the rendered ramp differ by up to 150 mm under the dirty kitchen; fittings "
+     "were seated on the rendered soffit. To be reconciled in Revit."),
+    ("Products", "Furniture, appliances, taps, mirrors and several fittings are procedural stand-ins at the checked "
+     "sizes; finishes are ASSUMED from your taste profile until you choose them."),
+]
+
 
 def main():
     scene = json.loads((R / "scene.json").read_text(encoding="utf-8"))
@@ -51,12 +84,13 @@ def main():
     parts = [HEAD]
     parts.append('''<header class="block"><div class="block-main"><p class="eyebrow">Villa Zayed · design D1 · review set</p>
 <h1>D1 as it would be built</h1>
-<p class="lede">Fourteen views rendered from the checked design: the furnished layout, the lighting scheme with its
+<p class="lede">%d views rendered from the checked design: the furnished layout, the lighting scheme with its
 real photometry, the daylight of the site, and the stated finishes. Nothing is retouched; where a room is dark, the
 design makes it dark.</p></div>
 <dl class="block-meta"><div><dt>Views</dt><dd>%d</dd></div><div><dt>Resolution</dt><dd>%d × %d</dd></div>
 <div><dt>Samples</dt><dd>%d</dd></div><div><dt>Status</dt><dd class="pill">For your review</dd></div></dl></header>'''
-                 % (len(plates), plates[0]["size"][0], plates[0]["size"][1], plates[0]["rep"]["samples"]))
+                 % (len(plates), len(plates), plates[0]["size"][0], plates[0]["size"][1],
+                    plates[0]["rep"]["samples"]))
     parts.append('''<section class="rules"><h2>How to read these images</h2><ul>
 <li><b>Exposure is metered once per state, then locked.</b> Like a photographer's meter: each view is metered, and the
 median of the day views (EV %s), the evening views (EV %s) and the dusk exterior (EV %s) is used for every view in that
@@ -75,7 +109,8 @@ are assumed from your taste profile; some fittings are generic until products ar
     for p in plates:
         v, rep = p["v"], p["rep"]
         sun = v.get("sun", {})
-        qa = ("QA pass" if not p["failed"] else "QA flags: " + ", ".join(p["failed"]))
+        qa = ("QA pass" if not p["failed"] else
+              "QA flags: " + "; ".join("%s (%s)" % (f, why(f, v)) for f in p["failed"]))
         parts.append('''<figure class="plate" id="%s"><img src="renders/%s.jpg" width="%d" height="%d" loading="lazy"
 alt="%s">
 <figcaption><h3>%s</h3><dl class="cap">
@@ -121,6 +156,8 @@ decided: the sound targets were adopted, every one is measured here, none is enf
 you never specified it.</p><details><summary>All %d targets</summary><div class="scroll"><table><thead><tr><th>Id</th>
 <th>Target</th><th>Value</th><th>D1</th><th>Status</th></tr></thead><tbody>%s</tbody></table></div></details>
 </section>''' % (len(brief), brow))
+    parts.append('<section><h2>Decisions waiting for you</h2><ul class="assume">%s</ul></section>'
+                 % "".join("<li><b>%s.</b> %s</li>" % (E(a), E(b)) for a, b in DECISIONS))
     parts.append('<section><h2>Stated assumptions</h2><ul class="assume">%s</ul></section>'
                  % "".join("<li>%s</li>" % E(n) for n in notes))
     parts.append('</main>')

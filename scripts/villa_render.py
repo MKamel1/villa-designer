@@ -179,6 +179,11 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         live = poll_remote(host, "test -f " + shlex.quote(job + "/pid") +
                            " && kill -0 $(cat " + shlex.quote(job + "/pid") + ")", job)
         if live.returncode:
+            # the shell writes status and exits between our two reads: read status once more before calling the
+            # job dead (a finished 24-view final was reported "stopped without status" this way)
+            status = poll_remote(host, "cat " + shlex.quote(job + "/status"), job)
+            if status.returncode == 0:
+                break
             log = _ssh(host, "tail -n 80 " + shlex.quote(job + "/render.log"))
             raise RuntimeError("Detached Blender job stopped without status: " + log.stdout.decode(errors="replace"))
         time.sleep(10)

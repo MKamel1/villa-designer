@@ -27,7 +27,7 @@ def _near(q, x, y, c):
 
 def _in_opening(sp, lv, x, y, room):
     for d in sp["doors"]:
-        if d["level"] != lv or d.get("garden") or room not in (d.get("rooms") or []):
+        if d["level"] != lv or d.get("garden") or d.get("entrance") or room not in (d.get("rooms") or []):
             continue
         h = F._door_axis(d) == "h"
         along, across = (x - d["x"], y - d["y"]) if h else (y - d["y"], x - d["x"])
@@ -40,13 +40,13 @@ def _angle(px, py, qx, qy, yaw):
     return (math.atan2(qy - py, qx - px) - yaw + math.pi) % (2 * math.pi) - math.pi
 
 
-def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=None):
+def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=None, extra=()):
     sp = sp or RS.build(lay)
     r = lay["rooms"][room]
     lv, rect = r["level"], r["rect"]
     walls = F._walls(sp, lv) + F._columns()
     items = [i for i in F.layout(lay) if i["level"] == lv]
-    pieces = [F.footprint(i) for i in items]
+    pieces = [F.footprint(i) for i in items] + [tuple(e[:4]) for e in extra if e[4] == lv]
     by_id = {i["id"]: i for i in items}
     subj = [c for s in subjects if s in by_id for q in [F.footprint(by_id[s])]
             for c in ((q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3]))]

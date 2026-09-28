@@ -1312,6 +1312,8 @@ EXPOSURE = {  # PRE-REGISTERED (2026-09-27) before the first render; incident me
     "day": {"ev100": 8.0, "white_balance_k": 5500},          # interiors lit by daylight, ~100-600 lx
     "evening": {"ev100": 6.0, "white_balance_k": 3000},      # ADR-0013: lamps 3000 K      # interiors at dusk by their own light, ~100-300 lx
     "exterior-dusk": {"ev100": 4.0, "white_balance_k": 4300},
+    # exteriors by day: their own locked state (draft finals: v19 on the interiors' day lock was blown out)
+    "exterior-day": {"ev100": 14.0, "white_balance_k": 5500},
 }
 
 
@@ -1324,14 +1326,15 @@ def VIEWS(lay=None):
     V = []
 
     def v(vid, title, state, pos, tgt, lens, subjects, when=None, layers=None, dimmers=None, shift_y=0.0,
-          room=None, final_only=False, seated=False):
+          room=None, final_only=False, seated=False, exposure=None):
         V.append({"id": vid, "title": title, "state": state, "when": when or (day if state == "day" else dusk),
                   "camera": {"position": pos, "target": tgt, "lens_mm": lens, "sensor_mm": 36, "shift_x": 0.0,
                              "shift_y": shift_y},
                   "resolution": [1920, 1280],
                   "layers_on": layers if layers is not None else (["ambient", "task", "accent", "decorative"]
                                                                   if state != "day" else []),
-                  "dimmers": dimmers or {}, "exposure": state if state in EXPOSURE else "day",
+                  "dimmers": dimmers or {},
+                  "exposure": exposure or (state if state in EXPOSURE else "day"),
                   "subjects": subjects, "samples": 1024, "room": room, "final_only": final_only,
                   "seated": seated})
 
@@ -1378,22 +1381,32 @@ def VIEWS(lay=None):
     v("v17-dirty-kitchen", "Dirty kitchen and laundry", "day", I, I, 24, ["dk-run"], room="dirty-kitchen",
       **BASEMENT_DAY)
     # the rest of the ten more, for the final set (v15-v17 above are three of them)
-    v("v18-street-facade", "The villa from the street", "day", [11.3, -46.0, B + 1.35], [11.3, -30.0, B + 1.35], 24,
-      [], final_only=True, shift_y=0.18)
+    # a street elevation needs the site frontage modelled (from the street only the boundary wall showed, from the
+    # front yard only the ramp enclosure): deferred; the study's other side instead
+    v("v18-study-evening", "Study at night: sofa and TV from the desks", "evening", I, I, 24,
+      ["study-sofa", "study-tv"], room="study-game", final_only=True, dimmers={"ambient": 0.4, "task": 0.6})
     v("v19-garden-facade", "Garden elevation by day", "day", [28.2, -31.0, B + 1.35], [20.0, -24.0, B + 1.35], 24,
-      ["living-sofa"], final_only=True, shift_y=0.12)
+      ["living-sofa"], final_only=True, shift_y=0.12, exposure="exterior-day")
     v("v20-kitchen-run", "Kitchen run, tall wall and island at night", "evening", I, I, 24, ["k-run", "k-tall"],
       room="kitchen", final_only=True, dimmers={"ambient": 0.4, "task": 0.8})
     v("v21-lounge-evening", "Street lounge at night", "evening", I, I, 24, ["lounge-sofa", "lounge-tv"],
       room="lounge", final_only=True, dimmers={"ambient": 0.3, "accent": 0.6})
     v("v22-parents-day", "Parents' bedroom by day", "day", I, I, 24, ["pb-bed", "pb-vanity"], room="parents-bed",
       final_only=True)
-    v("v23-gf-gallery", "Ground-floor corridor to the stair void", "day", I, I, 24, [], room="corridor",
-      final_only=True)
-    v("v24-entry-b", "Garden-level entrance at night", "evening", I, I, 24, [], room="entry-b", final_only=True)
+    # a windowless corridor is used with its lights on (first final, lights off by day: black)
+    v("v23-gf-gallery", "Ground-floor corridor to the stair void", "day", [19.1, -28.02, G + 1.35],
+      [8.9, -28.02, G + 1.35], 24, [], final_only=True, layers=["ambient", "accent"], dimmers={},
+      exposure="evening")                      # lit by its lamps only: the lamp white balance, as a photographer would
+    # the garden-level entrance gave no informative frame (a door leaf and a cabinet); the bar alcove instead
+    v("v24-bar-alcove", "Bar alcove and library at night", "evening", I, I, 24, ["alcove-books"], room="bar-alcove",
+      final_only=True, dimmers={"ambient": 0.3, "accent": 0.8})
     # ADR-0013 part 8: 24 mm, a LEVEL camera at eye height 1.35 m (1.20 m seated), lens shift not tilt
     from . import render_views as RV
     sp_ = RS.build(lay)
+    # floor-standing props (plants) as 0.5 m pieces, per storey, for the chooser's looming and clearance tests
+    floor_props = [(pr["position"][0] - 0.25, pr["position"][1] - 0.25, pr["position"][0] + 0.25,
+                    pr["position"][1] + 0.25, "B" if pr["position"][2] < -0.5 else "GF") for pr in props(lay)
+                   if any(abs(pr["position"][2] - z_) < 0.02 for z_ in LZ.values())]
     for x in V:
         c = x["camera"]
         if x["state"] == "exterior-dusk" or x["id"] in ("v18-street-facade", "v19-garden-facade"):
@@ -1402,12 +1415,14 @@ def VIEWS(lay=None):
         lvz = LZ[lay["rooms"][room]["level"]] if room else (LZ["B"] if c["position"][2] < -0.1 else LZ["GF"])
         eye = 1.20 if x.get("seated") else 1.35
         if room:
-            got = RV.choose(lay, room, x["subjects"], lens_mm=24, sensor_mm=c["sensor_mm"], sp=sp_)
+            got = RV.choose(lay, room, x["subjects"], lens_mm=24, sensor_mm=c["sensor_mm"], sp=sp_,
+                            extra=floor_props)
             half24 = math.degrees(math.atan(c["sensor_mm"] / 2 / 24))
             if not got["subjects_in_frame"]:
                 # client 2026-09-27: where 24 mm cannot hold the room's subjects from any standing point, 16 mm
                 half16 = math.degrees(math.atan(c["sensor_mm"] / 2 / 16))
-                got16 = RV.choose(lay, room, x["subjects"], lens_mm=16, sensor_mm=c["sensor_mm"], sp=sp_)
+                got16 = RV.choose(lay, room, x["subjects"], lens_mm=16, sensor_mm=c["sensor_mm"], sp=sp_,
+                                  extra=floor_props)
                 if not got16["subjects_in_frame"]:
                     raise ValueError("%s: even 16 mm cannot hold %s" % (x["id"], x["subjects"]))
                 c["lens_mm"] = 16
