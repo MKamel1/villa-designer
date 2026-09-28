@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import shlex
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -15,6 +16,24 @@ from archpipe.safe_io import save_bytes
 from archpipe.villa_render_contract import validate_scene
 from render_remote import _ssh, _push
 from workstation import deploy, digest
+
+
+def poll_remote(host: str, command: str, job: str):
+    """Retry a transient read without relaunching an expensive render."""
+    for attempt in range(3):
+        try:
+            result = _ssh(host, command, timeout=30)
+            if result.returncode != 255:
+                return result
+            detail = result.stderr.decode(errors="replace").strip()
+        except subprocess.TimeoutExpired:
+            detail = "SSH read timed out after 30 seconds"
+        if attempt < 2:
+            time.sleep(5)
+    raise RuntimeError(
+        f"Lost contact with render job {job}: {detail}. "
+        "The detached job may still be rendering. Rerun the identical command "
+        "to retrieve its result; do not launch a different job to recover it.")
 
 
 def villa_qa_context(scene: dict, view: dict, render_report: dict) -> dict:
@@ -69,14 +88,17 @@ def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
 
 
 def run(scene_path: Path, views: str, samples: int | None, resolution: str | None,
-        host: str, ies_dir: Path, dry_run: bool = False, calibrate: bool = False) -> dict:
+        host: str, ies_dir: Path, dry_run: bool = False, calibrate: bool = False,
+        measure_lighting: bool = False) -> dict:
     scene_path = scene_path.resolve()
     scene = json.loads(scene_path.read_text(encoding="utf-8"))
     errors = validate_scene(scene)
     if errors:
         raise ValueError("Invalid villa scene:\n" + "\n".join(errors))
     by_id = {v["id"]: v for v in scene["views"]}
-    selected = select_views(by_id, views, calibrate)
+    if measure_lighting and (calibrate or views != "none"):
+        raise ValueError("--measure-lighting requires --views none and no --calibrate")
+    selected = select_views(by_id, views, calibrate or measure_lighting)
     ies_names = sorted({l["ies"] for l in scene["lights"] if l["type"] == "ies"})
     files = {}
     for name in ies_names:
@@ -89,8 +111,9 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     # (it did once: a calibration after a renderer change returned the previous run's files)
     code = b"".join((ROOT / "src/archpipe/blender" / n).read_bytes() for n in ("villa_scene.py", "photoreal.py",
                                                                                  "build_scene.py", "presentation.py"))
+    code += (ROOT / "src/archpipe/villa_render_contract.py").read_bytes()
     identity = digest(scene_path.read_bytes() + code + b"".join(files[n].read_bytes() for n in ies_names)
-                      + json.dumps([selected, samples, resolution, calibrate], sort_keys=True).encode())[:24]
+                      + json.dumps([selected, samples, resolution, calibrate, measure_lighting], sort_keys=True).encode())[:24]
     if dry_run:
         return {"dry_run": True, "views": selected, "ies": ies_names, "job_id": identity,
                 "host": host, "scene": str(scene_path)}
@@ -116,6 +139,8 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         argv.extend(["--res", resolution])
     if calibrate:
         argv.append("--calibrate")
+    if measure_lighting:
+        argv.append("--measure-lighting")
     command = shlex.join(argv)
     # The shell writes status even if Blender exits nonzero. setsid and nohup
     # keep it alive when the initiating SSH connection drops.
@@ -127,11 +152,11 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     if result.returncode:
         raise RuntimeError(result.stderr.decode(errors="replace"))
     while True:
-        status = _ssh(host, "cat " + shlex.quote(job + "/status"), timeout=30)
+        status = poll_remote(host, "cat " + shlex.quote(job + "/status"), job)
         if status.returncode == 0:
             break
-        live = _ssh(host, "test -f " + shlex.quote(job + "/pid") +
-                    " && kill -0 $(cat " + shlex.quote(job + "/pid") + ")", timeout=30)
+        live = poll_remote(host, "test -f " + shlex.quote(job + "/pid") +
+                           " && kill -0 $(cat " + shlex.quote(job + "/pid") + ")", job)
         if live.returncode:
             log = _ssh(host, "tail -n 80 " + shlex.quote(job + "/render.log"))
             raise RuntimeError("Detached Blender job stopped without status: " + log.stdout.decode(errors="replace"))
@@ -168,8 +193,19 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
                 raise RuntimeError("Missing remote calibration artifact: " + suffix)
             save_bytes(output / suffix, fetched.stdout)
         calibration = json.loads((output / "calibration.json").read_text(encoding="utf-8"))
+    measurements = None
+    if measure_lighting:
+        fetched = _ssh(host, "cat " + shlex.quote(job + "/out/lighting-measurements.json"), timeout=120)
+        if fetched.returncode or not fetched.stdout:
+            raise RuntimeError("Missing lighting measurements")
+        save_bytes(output / "lighting-measurements.json", fetched.stdout)
+        measurements = json.loads(fetched.stdout)
     return {"release": release_id, "job_id": identity, "views": reports, "out": str(output),
-            "calibration": calibration}
+            "calibration": calibration,
+            "lighting_measurements": (None if measurements is None else {
+                "path": str(output / "lighting-measurements.json"),
+                "all_targets_met": measurements["all_targets_met"],
+                "failed": [p for p in measurements["points"] if not p["meets_target"]]})}
 
 
 def main():
@@ -182,8 +218,10 @@ def main():
     ap.add_argument("--ies-dir", type=Path, default=ROOT / "out/villa/render-d1/ies")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--calibrate", action="store_true")
+    ap.add_argument("--measure-lighting", action="store_true")
     a = ap.parse_args()
-    print(json.dumps(run(a.scene, a.views, a.samples, a.res, a.host, a.ies_dir, a.dry_run, a.calibrate), indent=2))
+    print(json.dumps(run(a.scene, a.views, a.samples, a.res, a.host, a.ies_dir, a.dry_run, a.calibrate,
+                         a.measure_lighting), indent=2))
 
 
 if __name__ == "__main__":

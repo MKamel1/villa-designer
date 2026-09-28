@@ -61,6 +61,26 @@ def luminance(rgb):
     return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
 
 
+def configure_glass(materials, material_specs):
+    """Respect whether a ray crosses one sheet or both sides of a slab.
+
+    The shared bedroom adapter assumes a closed slab. The villa daylight
+    shell represents each window as one sheet; applying the slab's square
+    root there overstated a specified 70 percent as 83.7 percent.
+    """
+    photoreal.architectural_glass()
+    for name, spec in material_specs.items():
+        if spec["kind"] != "glass":
+            continue
+        mat = materials[name]
+        interfaces = spec.get("interfaces", 2)
+        per_face = spec["transmittance"] ** (1 / interfaces)
+        for node in mat.node_tree.nodes:
+            if node.type == "BSDF_TRANSPARENT":
+                node.inputs["Color"].default_value = (per_face, per_face, per_face, 1)
+        mat["glass_interfaces"] = interfaces
+
+
 def world_to_camera_view(scene, camera, point):
     """Project a world point using Blender's camera frame and lens shifts.
 
@@ -250,7 +270,16 @@ def add_material(name, spec, library_root, warnings):
             scale.operation = "SCALE"
             scale.inputs["Scale"].default_value = factor
             nt.links.new(color.outputs["Color"], scale.inputs[0])
-            nt.links.new(scale.outputs["Vector"], bsdf.inputs["Base Color"])
+            # A reflectance cannot exceed one. Mean normalization of a dark
+            # photographic texture otherwise produces energy-gaining texels.
+            bounded = nt.nodes.new("ShaderNodeVectorMath")
+            bounded.operation = "MINIMUM"
+            bounded.inputs[1].default_value = (1, 1, 1)
+            nt.links.new(scale.outputs["Vector"], bounded.inputs[0])
+            nt.links.new(bounded.outputs["Vector"], bsdf.inputs["Base Color"])
+            mat["texture_mean_linear"] = mean
+            mat["texture_scale"] = factor
+            mat["reflectance_bounded"] = True
             rough = find("_Roughness")
             if rough:
                 nt.links.new(texture(rough, "Non-Color").outputs["Color"], bsdf.inputs["Roughness"])
@@ -519,25 +548,33 @@ def subjects(view, mesh_specs, objects):
 
 
 def import_props(prop_specs, library_root):
-    """Use the established glTF importer, then apply authored scale and XYZ rotation."""
+    """Transform each complete asset around one shared origin, then seat it."""
     imported = []
     for spec in prop_specs:
         before = set(bpy.data.objects)
-        result = photoreal.import_prop(library_root, spec["asset"], spec["position"], spec["rotation_deg"][2])
+        path = os.path.join(library_root, "props", spec["asset"], "model.gltf")
+        if not os.path.isfile(path):
+            raise FileNotFoundError(path)
+        bpy.ops.import_scene.gltf(filepath=path)
         new = [obj for obj in bpy.data.objects if obj not in before]
         meshes = [obj for obj in new if obj.type == "MESH"]
-        if result is None or not meshes:
+        if not meshes:
             raise FileNotFoundError(os.path.join(library_root, "props", spec["asset"], "model.gltf"))
         roots = [obj for obj in new if obj.parent is None]
+        # Multi-part pots have translated roots. Scaling those independently
+        # leaves component offsets unscaled and separates the leaves/soil/pot.
+        anchor = bpy.data.objects.new("prop-anchor-" + spec["id"], None)
+        bpy.context.collection.objects.link(anchor)
         for root in roots:
-            root.rotation_mode = "XYZ"
-            root.rotation_euler.x += math.radians(spec["rotation_deg"][0])
-            root.rotation_euler.y += math.radians(spec["rotation_deg"][1])
-            root.scale *= spec["scale"]
+            root.parent = anchor
+        anchor.rotation_mode = "XYZ"
+        anchor.rotation_euler = tuple(math.radians(v) for v in spec["rotation_deg"])
+        anchor.scale = (spec["scale"],) * 3
+        anchor.location = (spec["position"][0], spec["position"][1], 0)
         bpy.context.view_layer.update()
         bottom = min((obj.matrix_world @ Vector(corner)).z for obj in meshes for corner in obj.bound_box)
-        for root in roots:
-            root.location.z += spec["position"][2] - bottom
+        anchor.location.z += spec["position"][2] - bottom
+        bpy.context.view_layer.update()
         for index, obj in enumerate(new):
             obj.name = "prop-%s-%03d" % (spec["id"], index)
         imported.append({"id": spec["id"], "asset": spec["asset"], "label": spec["label"],
@@ -586,7 +623,15 @@ def configure_cycles(cpu):
     scene.cycles.denoiser = "OPENIMAGEDENOISE"
     scene.cycles.use_light_tree = True
     scene.render.use_persistent_data = True
-    scene.cycles.sample_clamp_indirect = 10
+    # This scene uses calibrated lumen units. Clamping at Blender's default
+    # 10 discards the bounced energy that lights deep interiors (the same
+    # measured trap already handled by build_scene.configure_render).
+    scene.cycles.sample_clamp_indirect = 0
+    scene.cycles.sample_clamp_direct = 0
+    scene.cycles.diffuse_bounces = 16
+    scene.cycles.glossy_bounces = 8
+    scene.cycles.transmission_bounces = 16
+    scene.cycles.transparent_max_bounces = 16
     scene.cycles.max_bounces = 16
 
 
@@ -703,10 +748,92 @@ def calibrate(scene_data, args):
     print("VILLA RENDER calibration " + json.dumps(report), flush=True)
 
 
+def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mesh_by_id, switched_emitters):
+    """Read maintained horizontal illuminance from the furnished scene.
+
+    Each tiny diffuse sensor has reflectance 0.5. Its linear radiance times
+    pi divided by 0.5 gives illuminance in the independently calibrated lux
+    units. No display exposure, white balance, denoising or ambient sky is
+    applied. Direct and reflected-light results are separate. These are
+    predictions for the authored fixtures and materials, not installed tests.
+    """
+    points = scene_data.get("measurement_points", [])
+    if not points:
+        raise ValueError("No measurement_points authored")
+    s = bpy.context.scene
+    maintenance = scene_data["measurement_maintenance_factor"]
+    layers = ["ambient", "task", "accent", "decorative"]
+    view = {"layers_on": layers, "dimmers": {layer: maintenance for layer in layers}}
+    set_emissive_view(emissive_sources, mesh_by_id, switched_emitters, view)
+    for spec in scene_data["lights"]:
+        obj = lights[spec["id"]]
+        obj.data.energy = full_power[spec["id"]] * maintenance if spec["layer"] in layers else 0
+        obj.hide_render = obj.data.energy <= 0
+    world = bpy.data.worlds.new("villa measurement black sky")
+    world.use_nodes = True
+    world.node_tree.nodes["Background"].inputs["Strength"].default_value = 0
+    s.world = world
+    s.cycles.use_denoising = False
+    s.cycles.samples = args.samples or 256
+    s.render.resolution_x = s.render.resolution_y = 32
+    s.render.resolution_percentage = 100
+    s.render.image_settings.file_format = "OPEN_EXR"
+    s.render.image_settings.color_depth = "32"
+    s.view_settings.view_transform = "Standard"
+    s.view_settings.look = "None"
+    s.view_settings.exposure = 0
+    if hasattr(s.view_settings, "use_white_balance"):
+        s.view_settings.use_white_balance = False
+    material = bpy.data.materials.new("villa diffuse sensor 0.5")
+    material.use_nodes = True
+    nodes = material.node_tree.nodes
+    nodes.clear()
+    diffuse = nodes.new("ShaderNodeBsdfDiffuse")
+    diffuse.inputs["Color"].default_value = (0.5, 0.5, 0.5, 1)
+    output = nodes.new("ShaderNodeOutputMaterial")
+    material.node_tree.links.new(diffuse.outputs[0], output.inputs["Surface"])
+    bpy.ops.mesh.primitive_plane_add(size=0.04)
+    sensor = bpy.context.object
+    sensor.name = "villa measurement sensor"
+    sensor.data.materials.append(material)
+    camera_data = bpy.data.cameras.new("villa measurement camera")
+    camera_data.type = "ORTHO"
+    camera_data.ortho_scale = 0.02
+    camera = bpy.data.objects.new("villa measurement camera", camera_data)
+    bpy.context.collection.objects.link(camera)
+    s.camera = camera
+    records = []
+    for index, point in enumerate(points):
+        x, y, z = point["position"]
+        sensor.location = (x, y, z + 0.001)
+        camera.location = (x, y, z + 0.025)
+        record = dict(point)
+        for mode, bounces in (("direct", 0), ("total", 16)):
+            s.cycles.max_bounces = bounces
+            path = os.path.join(args.out, "probe-%02d-%s.exr" % (index, mode))
+            s.render.filepath = path
+            bpy.ops.render.render(write_still=True)
+            image = bpy.data.images.load(path)
+            pixels = image.pixels[:]
+            radiances = [luminance(pixels[4*(y*32+x):4*(y*32+x)+3])
+                         for y in range(8, 24) for x in range(8, 24)]
+            record[mode + "_lux"] = sum(radiances) / len(radiances) * math.pi / 0.5
+            bpy.data.images.remove(image)
+        record["meets_target"] = record["total_lux"] >= point["required_lux"]
+        records.append(record)
+    result = {"maintenance_factor": maintenance, "sky": "off", "dimming": "all functional layers at full output",
+              "method": "0.5-reflectance sensor; linear radiance times pi / 0.5; 1 mm above task plane",
+              "occlusion": "actual scene geometry", "samples": s.cycles.samples,
+              "assumptions": scene_data["notes"], "points": records,
+              "all_targets_met": all(r["meets_target"] for r in records)}
+    with open(os.path.join(args.out, "lighting-measurements.json"), "w", encoding="utf-8") as stream:
+        json.dump(result, stream, indent=2)
+
+
 def render(scene_data, args):
     os.makedirs(args.out, exist_ok=True)
-    if args.views == "none" and not args.calibrate:
-        raise ValueError("--views none requires --calibrate")
+    if args.views == "none" and not (args.calibrate or args.measure_lighting):
+        raise ValueError("--views none requires --calibrate or --measure-lighting")
     if args.views == "none" and args.calibrate:
         configure_cycles(args.cpu)
         calibrate(scene_data, args)
@@ -714,7 +841,7 @@ def render(scene_data, args):
     warnings = []
     library_root = os.path.expandvars(os.path.expanduser(args.library_root or scene_data["library_root"]))
     materials = {name: add_material(name, spec, library_root, warnings) for name, spec in scene_data["materials"].items()}
-    photoreal.architectural_glass()
+    configure_glass(materials, scene_data["materials"])
     objects = build_meshes(scene_data["meshes"], materials, scene_data["materials"], warnings)
     switched_emitters = layered_emissive_materials(scene_data["meshes"], objects, scene_data["materials"])
     emissive_sources = []
@@ -730,6 +857,9 @@ def render(scene_data, args):
     full_power = {ident: obj.data.energy for ident, obj in lights.items()}
     mesh_by_id = {mesh["id"]: mesh for mesh in scene_data["meshes"]}
     configure_cycles(args.cpu)
+    if args.measure_lighting:
+        measure_lighting(scene_data, args, lights, full_power, emissive_sources, mesh_by_id, switched_emitters)
+        return
     selected = {v["id"] for v in scene_data["views"]} if args.views == "all" else set(args.views.split(","))
     for view in scene_data["views"]:
         if view["id"] not in selected:
@@ -812,6 +942,7 @@ def main():
     ap.add_argument("--res", type=lambda s: [int(v) for v in s.lower().split("x")])
     ap.add_argument("--cpu", action="store_true")
     ap.add_argument("--calibrate", action="store_true")
+    ap.add_argument("--measure-lighting", action="store_true")
     args = ap.parse_args(sys.argv[sys.argv.index("--")+1:] if "--" in sys.argv else [])
     with open(args.scene, encoding="utf-8") as f:
         render(json.load(f), args)

@@ -615,3 +615,18 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   revisit a vertex; faces are now built with a fresh vertex for a repeat.
 - Calibrations measured on the workstation: IES downlight 167.25 lx vs 172.75 analytic (3.2 %); an 800 lm emissive
   opal sphere 9.71 lx vs 9.79 analytic (0.8 %). Exposure presets were pre-registered before the first render.
+
+## D1 continuation audit (2026-09-27)
+
+- The final render driver stopped on a 30-second SSH polling timeout. Its surrounding shell
+  still returned success because its last command appended `EXIT 1` to a log. The workstation
+  finished all fourteen 1024-sample images. Re-running the identical content-addressed command
+  retrieved them without rendering again. Five images fail image checks; execution is not acceptance.
+- The villa renderer reintroduced indirect-light clamping at 10 in calibrated lumen units,
+  despite `build_scene.configure_render` documenting why this discards interior reflected light.
+  It also left diffuse bounce limits at Blender defaults. The villa configuration now disables
+  direct and indirect clamping and explicitly sets the bounce limits. Regression:
+  `test_calibrated_transport_does_not_discard_bounced_light`. The real old configuration fails
+  this test. This is a configuration fix, not yet a measured improvement: the planned three-view
+  comparison was blocked by SSH connection permission failures. Exposure and fixture powers
+  have not been changed. Do not claim corrected renders until that comparison and review run.

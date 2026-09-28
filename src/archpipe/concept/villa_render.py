@@ -82,9 +82,9 @@ M = {
                           note="glazed sanitary ceramic"),
     "screen-black": dict(kind="principled", base_rgb=[0.01, 0.01, 0.01], reflectance=0.01, roughness=0.05,
                          note="TV screen (off)"),
-    "glass-clear": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.70, roughness=0.0,
+    "glass-clear": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.70, interfaces=1, roughness=0.0,
                         note="clear double glazing, Tv 0.70 (Metric Handbook p. 9-8, the daylight study's value)"),
-    "glass-guard": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.85, roughness=0.0,
+    "glass-guard": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.85, interfaces=2, roughness=0.0,
                         note="laminated glass guard"),
     "door-oak": dict(kind="principled", asset="Wood094", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40,
                      roughness=0.5, tile_m=1.0, grain_axis="z", note="flush oak veneer door, closed (ASSUMED)"),
@@ -472,6 +472,10 @@ def build(lay=None, views=None):
              "exposure": EXPOSURE, "sky": {"day": "nishita",
                                            "evening": {"hdri": "belfast_sunset_puresky.exr", "horizontal_lux": 30.0},
                                            "night": {"hdri": "dikhololo_night.exr", "horizontal_lux": 0.3}},
+             "measurement_maintenance_factor": VL.MF,
+             "measurement_points": [dict(room=room, card=card, position=[x, y, z], label=label,
+                                         required_lux=VL.card_value(card))
+                                    for room, card, x, y, z, label in VL.task_points(lay)],
              "notes": notes + ["Finishes are ASSUMED from the taste profile (no finishes answers yet).",
                                "Dressing (plants, books, vases, art, pillows) is not design."]}
     return scene
@@ -567,7 +571,8 @@ def props(lay):
     add("lounge-books", "book_encyclopedia_set_01", x - 0.3, y, B + it["lounge-coffee"]["h"], label="books")
     add("lounge-plant", "pachira_aquatica_01", 4.3, -24.35, B, label="money tree in the corner by the street window")
     x, y = c("living-coffee")
-    add("living-plant-table", "anthurium_botany_01", x + 0.3, y, B + it["living-coffee"]["h"], label="table plant")
+    add("living-plant-table", "potted_plant_04", x + 0.3, y, B + it["living-coffee"]["h"],
+        label="single potted table plant, 0.168 x 0.185 m footprint, 0.267 m tall")
     add("living-plant", "potted_plant_02", 22.1, -24.25, B, label="floor plant by the garden door")
     bk = fp["alcove-books"]
     for k in range(3):
@@ -575,8 +580,8 @@ def props(lay):
             B + 0.03 + (k + 1) * 0.44, label="books on the library shelves")
     x, y = c("pb-bedside")
     add("bedside-books", "book_encyclopedia_set_01", x, y, G + it["pb-bedside"]["h"], label="books on the bedside")
-    add("bedroom-plant", "calathea_orbifolia_01", fp["pb-vanity"][0] - 0.1, fp["pb-vanity"][1] - 0.35, G,
-        label="plant")
+    add("bedroom-plant", "potted_plant_01", fp["pb-vanity"][0] - 0.2, fp["pb-vanity"][1] - 0.35, G, s=0.58,
+        label="single potted plant, 0.341 x 0.367 m footprint, 0.783 m tall")
     add("study-plant", "potted_plant_01", fp["study-sofa"][0] - 0.1, fp["study-sofa"][3] + 0.3, G, label="plant")
     add("terrace-planter-1", "planter_box_01", 25.3, -29.2, B, label="terrace planter")
     add("garden-shrub-1", "shrub_01", 27.4, -28.8, B, label="garden shrub")

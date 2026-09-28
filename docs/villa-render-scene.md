@@ -123,7 +123,8 @@ Units metres. Model axes: x street -> garden, y party wall -> east face, z absol
 - Exposure is LOCKED by the named `view.exposure` preset: no per-view auto-metering, so views compare honestly.
   White balance is the stated camera preset. AgX view transform.
 - Per view: set layers/dimmers and optional `max_bounces` (default 16), place the camera (level, lens shift),
-  render with OptiX on the GPU, OpenImageDenoise, light tree on, indirect-light clamp 10,
+  render with OptiX on the GPU, OpenImageDenoise, light tree on, direct and indirect clamping disabled,
+  sixteen diffuse, transmission and transparent bounces and eight glossy bounces,
   write `<view>.png` and `<view>.json` (samples, render time, lights on, subjects in frame via
   `world_to_camera_view`, imported props, fraction of pixels at clipping, mean luminance).
 - `--calibrate` also renders a diffuse floor card lit by an emissive sphere of 0.3 m diameter and 800 lm total

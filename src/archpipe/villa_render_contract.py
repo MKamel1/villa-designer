@@ -119,6 +119,9 @@ def validate_scene(scene: dict) -> list[str]:
         need(_vector(mat.get("base_rgb")), p+".base_rgb", "three finite numbers required")
         if mat.get("kind") in ("glass", "translucent"):
             need("transmittance" in mat, p+".transmittance", "explicit transmittance required")
+        if "interfaces" in mat:
+            need(type(mat["interfaces"]) is int and mat["interfaces"] in (1, 2),
+                 p+".interfaces", "one sheet or two slab interfaces required")
         if mat.get("kind") == "emissive":
             need("emission_lm_per_m2" in mat and "cct_k" in mat, p, "explicit emission and colour temperature required")
         if "asset" in mat:

@@ -3,7 +3,9 @@ import ast
 import copy
 import math
 import sys
+import subprocess
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -14,7 +16,7 @@ from archpipe.villa_render_contract import (emission_strength, emissive_mesh_out
                                             mesh_batch_key, mesh_bbox_corners, sky_state_for_view,
                                             validate_scene)
 sys.path.insert(0, str(ROOT / "scripts"))
-from villa_render import select_views, villa_caption, villa_qa_context, villa_qa_scope
+from villa_render import poll_remote, select_views, villa_caption, villa_qa_context, villa_qa_scope
 
 
 def blender_function(name):
@@ -28,6 +30,34 @@ def blender_function(name):
 
 
 class VillaRenderContractTest(unittest.TestCase):
+    def test_poll_recovers_timeout_without_starting_another_job(self):
+        completed = SimpleNamespace(returncode=0, stdout=b"0", stderr=b"")
+        with patch("villa_render._ssh", side_effect=[subprocess.TimeoutExpired("ssh", 30), completed]) as ssh, \
+                patch("villa_render.time.sleep"):
+            self.assertIs(poll_remote("worker", "cat job/status", "job"), completed)
+        self.assertEqual([c.args[1] for c in ssh.call_args_list], ["cat job/status"] * 2)
+
+    def test_poll_distinguishes_missing_status_from_lost_connection(self):
+        missing = SimpleNamespace(returncode=1, stdout=b"", stderr=b"not found")
+        with patch("villa_render._ssh", return_value=missing) as ssh:
+            self.assertIs(poll_remote("worker", "cat job/status", "job"), missing)
+            ssh.assert_called_once()
+        disconnected = SimpleNamespace(returncode=255, stdout=b"", stderr=b"connection lost")
+        with patch("villa_render._ssh", return_value=disconnected) as ssh, patch("villa_render.time.sleep"):
+            with self.assertRaisesRegex(RuntimeError, "detached job may still be rendering"):
+                poll_remote("worker", "cat job/status", "job")
+            self.assertEqual(ssh.call_count, 3)
+
+    def test_calibrated_transport_does_not_discard_bounced_light(self):
+        configure = blender_function("configure_cycles")
+        scene = SimpleNamespace(cycles=SimpleNamespace(), render=SimpleNamespace())
+        configure.__globals__["bpy"] = SimpleNamespace(context=SimpleNamespace(scene=scene))
+        configure(True)
+        self.assertEqual(scene.cycles.sample_clamp_indirect, 0)
+        self.assertEqual(scene.cycles.sample_clamp_direct, 0)
+        self.assertGreaterEqual(scene.cycles.diffuse_bounces, 16)
+        self.assertGreaterEqual(scene.cycles.transparent_max_bounces, 16)
+
     @classmethod
     def setUpClass(cls):
         cls.valid = {
