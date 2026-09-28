@@ -17,13 +17,15 @@ class Design(unittest.TestCase):
     def test_kitchen_bank_and_aisle_pass(self):
         items = {i["id"]: i for i in F.layout(LAY)}
         self.assertNotIn("k-tall", items)
-        self.assertEqual([k for k, _ in items["dk-appliance-bank"]["modules"]],
-                         ["fridge", "oven", "microwave"])
+        # client option A (2026-09-28): fridge + oven bank, microwave in the island, folding counter kept
+        self.assertEqual([k for k, _ in items["dk-appliance-bank"]["modules"]], ["fridge", "oven"])
+        self.assertIn("microwave", [k for k, _ in items["k-island"]["modules"]])
+        self.assertIn("dk-fold", items)
         result = F.check(list(items.values()), LAY)
         self.assertEqual(result["kitchen"]["status"], "pass")
         self.assertEqual(result["routes"]["status"], "pass")
         self.assertIn("1.219", result["kitchen"]["measured"]["main work aisle"])
-        self.assertIn("0.340", result["kitchen"]["measured"]["dk fridge across-run landing"])
+        self.assertIn("0.299", result["kitchen"]["measured"]["dk fridge across-run landing"])
         self.assertIn("via door", result["kitchen"]["measured"]["shared fridge relationship"])
 
     def test_old_tall_wall_and_narrow_aisle_fail_on_this_layout(self):

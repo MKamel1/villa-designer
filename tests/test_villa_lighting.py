@@ -62,6 +62,13 @@ class ClientRules(unittest.TestCase):
 
 
 class Cards(unittest.TestCase):
+    # The design is specified with its verified products (villa_lighting.PRODUCT_CHOICE). This suite used to pass or
+    # fail by test order: with generic photometry the dirty-kitchen run reads 477 lx of 500 since its downlights moved
+    # up to the real ceiling, and only an earlier test's bind_products() made it pass. Bind them here, explicitly.
+    @classmethod
+    def setUpClass(cls):
+        VL.bind_products()
+
     def test_pendants_hang_762_above_the_island_and_the_table(self):
         it = {i["id"]: i for i in F.layout(LAY)}
         for f in FX:

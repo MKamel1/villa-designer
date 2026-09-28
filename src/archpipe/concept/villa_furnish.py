@@ -162,7 +162,7 @@ def layout(lay=None):
         "kitchen")
     run_front = K[3] - 0.6
     add(item("k-island", None, "island", 13.075, run_front - 1.219 - 0.55, 0, w=3.05, d=1.1, h=0.92,
-             modules=[("counter", 1.05), ("hob", 0.9), ("counter", 1.1)], stools=5,
+             modules=[("microwave", 0.6), ("counter", 0.45), ("hob", 0.9), ("counter", 1.1)], stools=5,
              why="5 stools at 610 mm (card nkba-seating-width-610) on the party side; hob faces the sink run across a 1.22 m "
                  "aisle; 800 mm counter + 300 mm overhang"), "kitchen")
     # -- dining (bay 5-6): table for 6, extends to 10
@@ -216,10 +216,15 @@ def layout(lay=None):
                 why="heavy cooking: gas hob with oven under, sink, washer and exact carded landing widths; "
                     "washer worktop is the folding surface, cleaning storage is below the end counter"),
         "dirty-kitchen")
-    add(against("dk-appliance-bank", DK, "x0", DK[1], "base_run", w=1.8, d=0.6, h=2.3,
-                modules=[("fridge", 0.6), ("oven", 0.6), ("microwave", 0.6)],
-                why="one shared fridge, oven and microwave bank; NKBA fridge landing is on the opposite worktop "
-                    "within 1.219 m (card nkba-fridge-landing-381)"), "dirty-kitchen")
+    # client 2026-09-28, option A: a 2-unit bank (fridge + oven) so the wall under the pass-through keeps a
+    # folding counter (the 3-unit bank had displaced it); the microwave is built into the island's end
+    add(against("dk-appliance-bank", DK, "x0", -22.9, "base_run", w=1.2, d=0.6, h=2.3,
+                modules=[("fridge", 0.6), ("oven", 0.6)],
+                why="shared fridge and oven for both kitchens; NKBA fridge landing on the folding counter / run "
+                    "(card nkba-fridge-landing-381)"), "dirty-kitchen")
+    add(against("dk-fold", DK, "y0", 11.9, "folding_counter", w=1.25, h=0.9,
+                why="laundry folding counter with cleaning storage below, under the pass-through (its landing on the "
+                    "dirty-kitchen side)"), "dirty-kitchen")
     # -- stores
     PP = r["pantry"]
     add(against("pantry-shelves-1", PP, "x0", PP[1], "pantry_shelving", w=PP[3] - PP[1], h=2.2,
