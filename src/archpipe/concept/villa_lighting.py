@@ -232,7 +232,7 @@ def design(lay=None):
         add("DL", "pantry", x, y, why="pantry shelves", card="ies-res-storage-frequent-50")
     # stair: step markers in the party-wall side of the flight every 3rd tread, and a light at the foot
     for k, b in enumerate(sorted(lay and _stair_boxes(lay), key=lambda b: b[0])):
-        if k % 3 == 1:
+        if k % 3 == 1 and b[5] / 1000.0 + 0.25 < -0.65:        # below the beam soffit (-0.60): never in a beam
             add("STEP", "stair-b", (b[0] + b[3]) / 2 / 1000.0, (b[1] / 1000.0) + 0.02,
                 z=b[5] / 1000.0 + 0.25, aim=(0, 1, -0.3), why="step marker 0.25 m above the tread, party wall",
                 card="ies-res-stairs-50", level="B")
@@ -304,7 +304,9 @@ def design(lay=None):
         strip("BACK", "bar-alcove", (bfp[0] + 0.05, bfp[1] + 0.05), (bfp[2] - 0.05, bfp[1] + 0.05), z, (0, 0.3, -1),
               why="each library shelf backlit: the wall becomes a lantern")
     bn = fp["alcove-bench"]
-    add("ADJ", "bar-alcove", (bn[0] + bn[2]) / 2, (bn[1] + bn[3]) / 2, why="reading at the window bench",
+    bx = beam_free_x((bn[0] + bn[2]) / 2, (bn[1] + bn[3]) / 2)           # clear of the perimeter beam over the bench end
+    add("ADJ", "bar-alcove", bx, (bn[1] + bn[3]) / 2, aim=((bn[0] + bn[2]) / 2 - bx, 0.0, -2.2),
+        why="reading at the window bench (moved clear of the perimeter beam: the first position was inside it)",
         card="ies-res-chair-reading-200")
     # cinema: dim wall-wash on the rear wall, low path glow, no light on the screen
     C = rc["cinema"]
@@ -390,7 +392,8 @@ def design(lay=None):
         add("PEN-SMALL", "parents-bed", x, b[1] + 0.2, z=1.15, extra={"hang_from": CEILING}, why="low opal globe at "
             "each side of the bed (taste reference)")
     for x in (b[0] + 0.4, b[2] - 0.4):
-        add("ADJ", "parents-bed", x, b[1] + 0.35, aim=(0, 0.35, -1), why="reading spot on each pillow",
+        add("ADJ", "parents-bed", x, b[1] + 0.35, why="reading spot straight over the reading position (the tilted "
+            "first aim landed 0.6 m down the bed: measured 135-142 lx in the scene)",
             card="ies-res-bed-reading-200")
     for x, y in ((PB[0] + 0.55, (PB[1] + PB[3]) / 2), ((b[0] + b[2]) / 2, b[3] + 0.45)):
         add("DL", "parents-bed", x, y, why="ambient, dimmable", card="ies-res-bedroom-general-50")
@@ -431,6 +434,42 @@ def design(lay=None):
     strip("TOE", "parents-ensuite", (pb_[2] + 0.02, pb_[1] + 0.03), (pb_[2] + 0.02, pb_[3] - 0.03), 0.30,
           (0.3, 0, -1), level="GF", why="glow under the vanity: night light")
     return out
+
+
+def beams():
+    """The kept structural beams (villa_env), metres: (id, x0, y0, x1, y1, z0, z1)."""
+    from .. import villa_env as E
+    out = []
+    for e in E.spec()["elements"]:
+        if e["id"].startswith("beam-"):
+            xs = [q[0] / 1000 for q in e["pts"]]
+            ys = [q[1] / 1000 for q in e["pts"]]
+            out.append((e["id"], min(xs), min(ys), max(xs), max(ys), e["z0"] / 1000, e["z1"] / 1000))
+    return out
+
+
+def beam_free_x(x, y, margin=0.12):
+    """The largest x' <= x such that (x', y) is clear of every basement-ceiling beam over that y."""
+    for b in beams():
+        if b[2] <= y <= b[4] and b[1] - margin <= x <= b[3] + margin and b[5] < -0.25:
+            x = min(x, b[1] - margin)
+    return x
+
+
+def beam_clashes(fixtures):
+    """Fittings recessed into / mounted on a kept beam: a fitting cannot be recessed into structure."""
+    out = []
+    for f in fixtures:
+        if VL_MOUNTS.get(KINDS[f.kind]["mount"]) is None:
+            continue
+        for b in beams():
+            if b[1] - 0.04 <= f.x <= b[3] + 0.04 and b[2] - 0.04 <= f.y <= b[4] + 0.04 and \
+                    b[5] - 0.05 <= f.z <= b[6] + 0.05:
+                out.append("%s in or on %s" % (f.id, b[0]))
+    return out
+
+
+VL_MOUNTS = {"recessed": True, "wall-marker": True}
 
 
 def _stair_boxes(lay):

@@ -99,6 +99,14 @@ class Photometry(unittest.TestCase):
         iso = ph.parse(VL.generic_ies(800, None), name="iso")
         self.assertAlmostEqual(iso.integrated_flux(), 800, delta=16)   # the whole sphere (opal globe)
 
+    def test_no_fitting_in_a_beam(self):
+        # found by the in-scene measurement: the window-bench spot sat inside a perimeter beam (1 lx)
+        self.assertEqual(VL.beam_clashes(FX), [])
+
+    def test_the_beam_guard_catches_the_real_position(self):
+        bad = VL.Fixture("x", "ADJ", "bar-alcove", "B", 22.147, -29.241, -0.3)
+        self.assertTrue(VL.beam_clashes([bad]))
+
     def test_recessed_fittings_sit_in_their_room_clear_of_columns(self):
         for f in FX:
             if VL.KINDS[f.kind]["mount"] != "recessed":

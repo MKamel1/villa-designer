@@ -305,4 +305,19 @@ def validate_scene(scene: dict) -> list[str]:
             sun = view.get("sun")
             need(isinstance(sun, dict) and _number(sun.get("altitude_deg")) and _number(sun.get("azimuth_true_deg")), p+".sun", "altitude and true azimuth required")
     need(isinstance(scene.get("notes"), list) and all(isinstance(n, str) for n in scene.get("notes", [])), "notes", "array of strings required")
+    for i, c in enumerate(scene.get("cloth", [])):
+        p = "cloth[%d]" % i
+        need(isinstance(c, dict), p, "object required")
+        if not isinstance(c, dict):
+            continue
+        need(isinstance(c.get("id"), str), p+".id", "string required")
+        need(c.get("material") in scene.get("materials", {}), p+".material", "must name a material")
+        need(isinstance(c.get("colliders"), list) and all(isinstance(x, str) for x in c.get("colliders", [])),
+             p+".colliders", "list of mesh-id prefixes required")
+        need(isinstance(c.get("size"), list) and len(c["size"]) == 2 and all(_number(v) and 0.1 <= v <= 4
+                                                                             for v in c["size"]),
+             p+".size", "[w, l] in 0.1-4 m required")
+        need(isinstance(c.get("center"), list) and len(c["center"]) == 2 and all(_number(v) for v in c["center"]),
+             p+".center", "[x, y] required")
+        need(_number(c.get("z_start")), p+".z_start", "number required")
     return errors

@@ -231,6 +231,8 @@ def build(lay=None, views=None):
             room = _room_at(lay, cx, cy, cz - 0.1) if n[2] < -0.5 else None
             if room in FINISH and FINISH[room][2] != "ceiling-white":
                 mat = FINISH[room][2]
+        elif _normal(pts)[2] < -0.5:                            # a downward face (the sloped ramp soffit over the
+            mat = "ceiling-white"                               # cinema was dressed as wall fabric): a ceiling
         else:                                                    # "wall": our walls, columns, infills, rails
             n = _normal(pts)
             room = _room_at(lay, cx + 0.06 * n[0], cy + 0.06 * n[1], cz)
@@ -315,6 +317,7 @@ def build(lay=None, views=None):
              room=rid, label="rug-" + rid)
     notes.append("Rugs in the lounge, garden living, parents' bedroom and kids room A (ASSUMED).")
 
+    cloth = []
     # ---- dressing: clothes on the dressing rails, duvets and pillows on the beds (NOT design)
     import random
     rnd = random.Random(7)
@@ -355,7 +358,31 @@ def build(lay=None, views=None):
             dv = box_faces(xa, q[1] - 0.03, z, xb, q[3] + 0.03, z + 0.07)
             xa2, xb2 = sorted((head + s_ * 0.08, head + s_ * 0.48))
             pil = [box_faces(xa2, q[1] + 0.07, z, xb2, q[3] - 0.07, z + 0.14)]
-        mesh("dress-duvet-" + bid, duvet, dv, "dressing", room=b_["room"], label="dressing: duvet")
+        # the duvet is CLOTH, draped by the renderer onto the bed's own parts (render review: box duvets read as
+        # rigid slabs); the box above is kept only to derive its plan size, height and head edge
+        xs = [v[0] for f_ in dv for v in f_]
+        ys = [v[1] for f_ in dv for v in f_]
+        bunk = b_["h"] >= 1.5
+        if b_["rot"] in (0, 180):
+            pin = ["y", min(ys) if b_["rot"] == 0 else max(ys), 0.03]
+        else:
+            pin = ["x", min(xs) if b_["rot"] == -90 else max(xs), 0.03]
+        over = 0.0 if bunk else 0.30                       # a bunk's duvet stays within its frame
+        w_ = max(xs) - min(xs) - 0.06
+        l_ = max(ys) - min(ys)
+        if b_["rot"] in (0, 180):
+            size = [w_ + 2 * over, l_]
+        else:
+            size = [max(xs) - min(xs), max(ys) - min(ys) - 0.06 + 2 * over]
+        cloth.append(dict(id="duvet-" + bid, material=duvet, colliders=["furn-" + bid + "-", "dress-pillow-" + bid],
+                          center=[(min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2], size=size,
+                          z_start=round(z + 0.08, 3), pin=pin, frames=50, mass=0.4, bending=0.6, loft=0.018,
+                          thickness=0.05, label="dressing: duvet (cloth)"))
+        if bunk:                                           # the upper bunk has its own duvet
+            cloth.append(dict(id="duvet-" + bid + "-upper", material=duvet, colliders=["furn-" + bid + "-"],
+                              center=[(min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2], size=size,
+                              z_start=round(LZ["GF"] + 1.40 + 0.08, 3), pin=pin, frames=50, mass=0.4,
+                              bending=0.6, loft=0.018, thickness=0.05, label="dressing: duvet (cloth)"))
         for k, pf in enumerate(pil):
             mesh("dress-pillow-%s-%d" % (bid, k), "bedding-white", pf, "dressing", room=b_["room"],
                  label="dressing: pillow")
@@ -409,14 +436,15 @@ def build(lay=None, views=None):
                  visibility={"camera": True, "glossy": True, "diffuse": False, "shadow": False,
                              "transmission": False}, layer=f.layer)
         elif f.kind == "DESK":
-            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="ies", position=[f.x, f.y, f.z - 0.05],
+            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="ies", position=[f.x, f.y, f.z - 0.03],
                                aim=[0.0, 0.0, -1.0], spin_deg=0.0, ies="generic/DESK.ies", lumens=round(f.lumens, 1),
                                cct_k=cct, cri=90, product=pinfo, dimmer=1.0))
             R_ = F.clear_rect(lay, f.room)
             wy = R_[3] if abs(R_[3] - f.y) < abs(R_[1] - f.y) else R_[1]
-            mesh("lamp-shade-" + f.id, "black-metal", box_faces(f.x - 0.08, f.y - 0.08, f.z - 0.05, f.x + 0.08,
-                                                               f.y + 0.08, f.z + 0.05), "fixture", room=f.room,
-                 label="fitting " + f.id)
+            # an open shade: a hood over the lamp, open below (the first version closed the lamp inside a box)
+            mesh("lamp-shade-" + f.id, "black-metal",
+                 box_faces(f.x - 0.08, f.y - 0.08, f.z - 0.01, f.x + 0.08, f.y + 0.08, f.z + 0.05)[1:],
+                 "fixture", room=f.room, label="fitting " + f.id)
             mesh("lamp-arm-" + f.id, "black-metal", box_faces(f.x - 0.008, min(f.y, wy), f.z + 0.04, f.x + 0.008,
                                                              max(f.y, wy), f.z + 0.056), "fixture", room=f.room,
                  label="fitting " + f.id)
@@ -489,7 +517,7 @@ def build(lay=None, views=None):
 
     scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes, "lights": lights,
-             "props": props(lay), "views": views if views is not None else VIEWS(lay),
+             "props": props(lay), "cloth": cloth, "views": views if views is not None else VIEWS(lay),
              "exposure": EXPOSURE, "sky": {"day": "nishita",
                                            "evening": {"hdri": "belfast_sunset_puresky.exr", "horizontal_lux": 30.0},
                                            "night": {"hdri": "dikhololo_night.exr", "horizontal_lux": 0.3}},
@@ -497,7 +525,9 @@ def build(lay=None, views=None):
              "measurement_points": [dict(room=room, card=card, position=[x, y, z], label=label,
                                          required_lux=VL.card_value(card))
                                     for room, card, x, y, z, label in VL.task_points(lay)],
-             "notes": notes + ["Finishes are ASSUMED from the taste profile (no finishes answers yet).",
+             "notes": notes + ["Furniture, joinery and sanitaryware are PROCEDURAL STAND-INS at the checked sizes "
+                               "(massing, products still to choose): shapes are not products.",
+                               "Finishes are ASSUMED from the taste profile (no finishes answers yet).",
                                "Dressing (plants, books, vases, art, pillows) is not design."]}
     return scene
 
@@ -658,7 +688,7 @@ def VIEWS(lay=None):
     v("v07-terrace-dusk", "Garden and terrace at dusk", "exterior-dusk", [28.2, -21.2, B + 1.6], [21.0, -26.4, B + 1.8],
       20, ["terrace lounge set", "living-sofa"], layers=["ambient", "task", "accent", "decorative"],
       dimmers={"ambient": 0.5, "task": 0.4})
-    v("v08-cinema", "Cinema, lights up before a film", "evening", [8.75, -23.2, B + 1.3], [4.4, -21.4, B + 0.9], 18,
+    v("v08-cinema", "Cinema seating from the screen wall, lights up", "evening", [8.75, -23.2, B + 1.3], [4.4, -21.4, B + 0.9], 18,
       ["cinema-sofa"])
     # six more
     v("v09-dining-evening", "Dining and island at night", "evening", [18.1, -27.9, B + 1.55], [12.5, -25.2, B + 1.0], 20,
@@ -666,11 +696,11 @@ def VIEWS(lay=None):
     v("v10-living-evening", "Garden living at night: cove and library", "evening", [21.8, -24.5, B + 1.55],
       [18.4, -29.2, B + 1.3], 20, ["alcove-books", "living-sofa"], dimmers={"ambient": 0.25, "task": 0.5})
     v("v11-stair-void", "The stair up to the globe cluster in the void", "evening", [10.45, -27.95, B + 1.45],
-      [5.8, -27.95, B + 1.75], 16, ["stair-gf", "stair-b"], shift_y=0.18)
-    v("v12-ensuite", "Parents' ensuite", "evening", [21.6, -29.1, G + 1.55], [20.2, -30.6, G + 0.9], 16,
+      [5.8, -27.95, B + 1.75], 14, ["stair-gf", "stair-b"], shift_y=0.30)
+    v("v12-ensuite", "Parents' ensuite", "evening", [21.85, -29.15, G + 1.55], [19.9, -30.3, G + 0.9], 16,
       ["pe-bath", "pe-basin"], dimmers={"ambient": 0.5})
     v("v13-kids-b", "Kids' room B at bedtime", "evening", [17.9, -26.4, G + 1.45], [15.4, -24.0, G + 0.9], 18, ["kb-bed", "kb-desk"])
-    v("v14-dressing", "Parents' dressing", "evening", [21.95, -27.0, G + 1.55], [19.8, -28.3, G + 1.1], 16,
+    v("v14-dressing", "Parents' dressing", "evening", [22.1, -27.75, G + 1.55], [19.7, -27.8, G + 1.1], 16,
       ["pd-hang-1", "pd-hang-2"], dimmers={"ambient": 0.6})
     # sun per view (laptop side, archpipe.solar)
     from datetime import datetime

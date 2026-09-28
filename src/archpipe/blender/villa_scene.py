@@ -547,6 +547,48 @@ def subjects(view, mesh_specs, objects):
     return result
 
 
+def drape_cloth(cloth_specs, materials):
+    """Bedding as cloth (render review: box duvets read as rigid slabs). Each spec is a sheet dropped onto the
+    authored bed parts and settled with the bedroom's tested settings (photoreal._grid / _simulate: cotton that
+    barely stretches, pinned under the pillows), then given loft and thickness like photoreal.cloth_bedding. The
+    bed frame, mattress and footprint are untouched: only the soft goods are simulated."""
+    import random
+    report = []
+    for spec in cloth_specs:
+        colliders = [o for o in bpy.data.objects if o.type == "MESH" and
+                     any(o.name.startswith(pfx) for pfx in spec["colliders"])]
+        sheet = photoreal._grid("cloth-" + spec["id"], spec["size"][0], spec["size"][1],
+                                max(8, int(spec["size"][0] / 0.03)), max(8, int(spec["size"][1] / 0.03)),
+                                tuple(spec["center"]), spec["z_start"])
+        rnd = random.Random(7)
+        for v in sheet.data.vertices:
+            v.co.z += rnd.uniform(0.0, 0.015)
+        pin = spec.get("pin")
+        photoreal._simulate(sheet, colliders, spec.get("frames", 50), mass=spec.get("mass", 0.4),
+                            bending=spec.get("bending", 0.6), pin_band=tuple(pin) if pin else None)
+        if spec.get("loft", 0) > 0:
+            tex = bpy.data.textures.new("loft-" + spec["id"], type="CLOUDS")
+            tex.noise_scale = 0.55
+            disp = sheet.modifiers.new("loft", "DISPLACE")
+            disp.texture = tex
+            disp.strength = spec["loft"]
+            disp.mid_level = 0.3
+        solid = sheet.modifiers.new("thickness", "SOLIDIFY")
+        solid.thickness = spec.get("thickness", 0.04)
+        solid.offset = 1.0
+        sub = sheet.modifiers.new("smooth", "SUBSURF")
+        sub.levels = sub.render_levels = 1
+        sheet.data.materials.append(materials[spec["material"]])
+        for poly in sheet.data.polygons:
+            poly.use_smooth = True
+        pts = [sheet.matrix_world @ v.co for v in sheet.data.vertices]
+        report.append({"id": spec["id"], "colliders": len(colliders),
+                       "bounds": [round(min(q.x for q in pts), 3), round(min(q.y for q in pts), 3),
+                                  round(min(q.z for q in pts), 3), round(max(q.x for q in pts), 3),
+                                  round(max(q.y for q in pts), 3), round(max(q.z for q in pts), 3)]})
+    return report
+
+
 def import_props(prop_specs, library_root):
     """Transform each complete asset around one shared origin, then seat it."""
     imported = []
@@ -730,7 +772,53 @@ def calibrate(scene_data, args):
     sphere_measured = luminance(sphere_pixel) * math.pi / 0.5
     distance = height  # The probe is directly below the sphere centre.
     sphere_analytic = (total_lumens / (4 * math.pi)) * height / distance**3
+    # ---- glass probe: direct sun through one single-sheet pane (interfaces 1) and through a closed slab
+    # (interfaces 2) must transmit exactly the stated Tv. The camera sits BETWEEN the card and the glass, so its own
+    # rays never cross the glass; only the light's shadow rays do.
+    sphere_data = sphere.data
+    bpy.data.objects.remove(sphere, do_unlink=True)
+    bpy.data.meshes.remove(sphere_data)
+    sun_data = bpy.data.lights.new("glass probe sun", "SUN")
+    sun_data.energy = 10.0
+    sun_data.angle = 0.0
+    sun = bpy.data.objects.new("glass probe sun", sun_data)
+    bpy.context.collection.objects.link(sun)
+    sun.rotation_euler = (0, 0, 0)                       # pointing straight down
+    cam.location = (0, 0, 0.3)
+    s.cycles.max_bounces = 0
+
+    def read_card(tag):
+        path_ = os.path.join(args.out, "calibration-glass-%s.exr" % tag)
+        s.render.filepath = path_
+        bpy.ops.render.render(write_still=True)
+        im = bpy.data.images.load(path_)
+        px = [im.pixels[4*(32*64+32)+i] for i in range(3)]
+        bpy.data.images.remove(im)
+        return luminance(px)
+
+    open_sky = read_card("open")
+    glass_report = {}
+    for tag, interfaces, tv, solid in (("sheet", 1, 0.70, False), ("slab", 2, 0.85, True)):
+        spec = {"kind": "glass", "base_rgb": [1, 1, 1], "transmittance": tv, "interfaces": interfaces,
+                "roughness": 0.0}
+        gmat = add_material("probe glass " + tag, spec, "", [])
+        if solid:
+            bpy.ops.mesh.primitive_cube_add(size=1.0, location=(0, 0, 0.6))
+            pane = bpy.context.object
+            pane.scale = (1.0, 1.0, 0.003)
+        else:
+            bpy.ops.mesh.primitive_plane_add(size=2.0, location=(0, 0, 0.6))
+            pane = bpy.context.object
+        pane.data.materials.append(gmat)
+        configure_glass({"probe glass " + tag: gmat}, {"probe glass " + tag: spec})
+        through = read_card(tag)
+        glass_report[tag] = {"interfaces": interfaces, "stated_tv": tv, "measured_tv": through / open_sky,
+                             "within_0_03": abs(through / open_sky - tv) <= 0.03}
+        pane_data = pane.data
+        bpy.data.objects.remove(pane, do_unlink=True)
+        bpy.data.meshes.remove(pane_data)
     report = {"analytic_direct_lux": analytic, "blender_direct_lux": measured,
+              "glass_probe": glass_report,
               "relative_error": abs(measured-analytic)/analytic, "ev100": ev,
               "exposure_stops": s.view_settings.exposure,
               "white_card_display_luminance": luminance(display),
@@ -799,6 +887,10 @@ def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mes
     camera_data = bpy.data.cameras.new("villa measurement camera")
     camera_data.type = "ORTHO"
     camera_data.ortho_scale = 0.02
+    # the camera is 25 mm over the sensor: Blender's default near clip (100 mm) hid the sensor, so the camera saw
+    # the inside of the worktop / desk 100 mm below (0 lx at every task point on a surface; found 2026-09-27)
+    camera_data.clip_start = 0.001
+    camera_data.clip_end = 0.1
     camera = bpy.data.objects.new("villa measurement camera", camera_data)
     bpy.context.collection.objects.link(camera)
     s.camera = camera
@@ -852,6 +944,7 @@ def render(scene_data, args):
             emissive_sources.append({"id": spec["id"], "layer": spec.get("layer"), "area_m2": area,
                                      "exitance_lm_per_m2": mat_spec["emission_lm_per_m2"],
                                      "emitted_lumens": area * mat_spec["emission_lm_per_m2"]})
+    cloth_report = drape_cloth(scene_data.get("cloth", []), materials)
     imported_props = import_props(scene_data.get("props", []), library_root)
     lights = {l["id"]: add_light(l, args.ies_dir) for l in scene_data["lights"]}
     full_power = {ident: obj.data.energy for ident, obj in lights.items()}
@@ -912,7 +1005,8 @@ def render(scene_data, args):
         report = {"view": view["id"], "state": view["state"], "samples": s.cycles.samples,
                   "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
                   "lights_on_count": sum(not obj.hide_render for obj in lights.values()), "subjects": subject_result,
-                  "imported_props": prop_result, "mesh_object_count": len(set(objects.values())),
+                  "imported_props": prop_result, "cloth": cloth_report,
+                  "mesh_object_count": len(set(objects.values())),
                   "emissive_sources": current_emissive,
                   "max_bounces": s.cycles.max_bounces, "clamp_indirect": s.cycles.sample_clamp_indirect,
                   "clipped_pixel_fraction": clipped, "mean_luminance": mean, "ev100": preset["ev100"],
