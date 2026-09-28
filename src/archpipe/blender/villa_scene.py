@@ -335,9 +335,11 @@ def add_material(name, spec, library_root, warnings):
                     nt.links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
             normal = find("_NormalGL")
             if normal and name not in ("boucle", "linen", "sage-fabric", "charcoal-fabric", "taupe-fabric",
-                                       "bedding-white", "throw-taupe", "outdoor-fabric"):
-                # stone, paving and wood keep their photographed relief through the object-space triplanar normal
-                # (built for box-projected meshes; a Codex pass removed it everywhere, the lead restored it here)
+                                       "bedding-white", "throw-taupe", "outdoor-fabric", "walnut", "oak",
+                                       "door-oak", "teak", "oak-floor"):
+                # stone and paving keep their photographed relief through the object-space triplanar normal. Wood
+                # does not: a finished veneer is nearly flat, and on a close wardrobe end the normal map read as
+                # large watery ripples (draft 14 dressing view)
                 normal_image = bpy.data.images.load(normal, check_existing=True)
                 normal_image.colorspace_settings.name = "Non-Color"
                 nt.links.new(triplanar_normal(nt, mapping.outputs["Vector"], normal_image), bsdf.inputs["Normal"])
@@ -1107,6 +1109,57 @@ def render(scene_data, args):
         log_avg = math.exp(sum(math.log(max(v, 1e-6)) for v in keep) / len(keep))
         s.render.image_settings.file_format = "PNG"
         s.render.image_settings.color_depth = "8"
+        # QA provenance: screen windows are projected from the actual glass
+        # faces; cloth bounds are read after simulation, not from the cut.
+        windows = []
+        if view["state"] == "day":
+            origin = camera.matrix_world.translation
+            depsgraph = bpy.context.view_layer.depsgraph
+            for spec in scene_data["meshes"]:
+                if spec["material"] != "glass-clear" or spec["id"] in view.get("hide_meshes", []):
+                    continue
+                for k, face in enumerate(spec["faces"]):
+                    points = [world_to_camera_view(s, camera, Vector(p)) for p in face]
+                    if not points or any(p.z <= 0 for p in points):
+                        continue
+                    # Projected does not mean visible: a pane in the next
+                    # room must not make the image checker sample a wall.
+                    centre = sum((Vector(p) for p in face), Vector()) / len(face)
+                    samples = [centre] + [centre * 0.5 + Vector(p) * 0.5 for p in face]
+                    visible = False
+                    for target in samples:
+                        ray = target - origin
+                        hit, location, _normal, _index, obj, _matrix = s.ray_cast(
+                            depsgraph, origin, ray.normalized(), distance=ray.length + 0.02)
+                        if hit and obj.name == objects[spec["id"]].name and (location - target).length < 0.03:
+                            visible = True
+                            break
+                    if not visible:
+                        continue
+                    rect = [max(0, min(p.x for p in points)), max(0, min(p.y for p in points)),
+                            min(1, max(p.x for p in points)), min(1, max(p.y for p in points))]
+                    if rect[2] - rect[0] >= 0.03 and rect[3] - rect[1] >= 0.03:
+                        windows.append({"id": spec["id"] + "-" + str(k), "screen": rect})
+        qa_materials = [{"name": name, "note": mat.get("note", ""), "override": "base_rgb" in mat,
+                         "luminance": luminance(mat.get("base_rgb", [0, 0, 0])),
+                         "glass": mat["kind"] == "glass", "photo": bool(mat.get("asset")),
+                         "saturation": max(mat.get("base_rgb", [0, 0, 0])) - min(mat.get("base_rgb", [0, 0, 0]))}
+                        for name, mat in scene_data["materials"].items()]
+        textile_names = {"boucle", "linen", "sage-fabric", "taupe-fabric", "charcoal-fabric",
+                         "bedding-white", "throw-taupe", "rug", "outdoor-fabric", "leather-brown"}
+        qa_textiles = [{"name": name, "reflectance": scene_data["materials"][name].get("reflectance")}
+                       for name in sorted(textile_names & scene_data["materials"].keys())]
+        cloth_specs = {c["id"]: c for c in scene_data.get("cloth", [])}
+        qa_bedding = []
+        for record in cloth_report:
+            spec = cloth_specs[record["id"]]
+            if not record["id"].startswith("duvet-"):
+                continue
+            axis = 0 if spec["length_axis"] == "x" else 1
+            bounds = record["bounds"]
+            qa_bedding.append({"id": record["id"], "mattress_y": spec["mattress_span"],
+                               "duvet_y": [bounds[axis], bounds[axis + 3]],
+                               "duvet_z_min": bounds[2]})
         report = {"view": view["id"], "state": view["state"], "samples": s.cycles.samples,
                   "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
                   "lights_on_count": sum(not obj.hide_render for obj in lights.values()), "subjects": subject_result,
@@ -1119,6 +1172,14 @@ def render(scene_data, args):
                   "exposure_locked_per_state": bool(locked), "log_average_linear": log_avg,
                   "exposure_stops": s.view_settings.exposure, "white_balance_applied": wb,
                   "camera_pitch_deg": pitch, "warnings": current_warnings}
+        architectural_glass = sum(name == "glass-clear" and spec["kind"] == "glass" and
+                                  any(node.type == "BSDF_TRANSPARENT" for node in materials[name].node_tree.nodes)
+                                  for name, spec in scene_data["materials"].items())
+        report["qa_scene"] = {"windows": windows,
+                              "glass": {"architectural": architectural_glass},
+                              "materials": qa_materials, "textiles": qa_textiles,
+                              "soft_goods": [{"name": c["id"], "simulated": c["colliders"] > 0}
+                                             for c in cloth_report], "bedding": qa_bedding}
         with open(os.path.join(args.out, view["id"] + ".json"), "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
         print("VILLA RENDER wrote " + path, flush=True)

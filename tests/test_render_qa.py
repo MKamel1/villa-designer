@@ -125,7 +125,7 @@ class RenderQATests(unittest.TestCase):
         self.assertEqual(self.status(self.report(qa), "finish_matches_name"), ["FAIL"])
         qa = dict(GOOD_QA, materials=[{"name": "Shade Finish Dark Bronze", "override": True,
                                        "note": "dark bronze metal", "luminance": 0.08}])
-        self.assertEqual(self.status(self.report(qa), "finish_matches_name"), [])
+        self.assertEqual(self.status(self.report(qa), "finish_matches_name"), ["PASS"])
 
     def test_unsimulated_soft_goods_fail(self):
         qa = dict(GOOD_QA, soft_goods=[{"name": "curtain", "simulated": False},

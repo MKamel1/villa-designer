@@ -91,6 +91,13 @@ def body(it):
                   ("upper-frame", (x0, yb, 1.15, x1, yf, 1.25)), ("upper-mattress", (x0 + 0.03, yb + 0.06, 1.25,
                                                                                      x1 - 0.03, yf - 0.06, 1.4)),
                   ("rail", (x1 - 0.04, yb + 0.5, 1.4, x1, yf - 0.06, H))]
+            # The rail occupies +x; the ladder climbs the open -x side near
+            # the foot. Its rails and treads stay within the checked box.
+            la, lb = yf - 0.72, yf - 0.26
+            p += [("ladder-stile", (x0, la, 0, x0 + 0.045, la + 0.045, 1.47)),
+                  ("ladder-stile", (x0, lb - 0.045, 0, x0 + 0.045, lb, 1.47))]
+            p += [("ladder-rung", (x0, la + 0.025, z, x0 + 0.065, lb - 0.025, z + 0.035))
+                  for z in (0.32, 0.59, 0.86, 1.13)]
             return p
         return [("base", (x0, yb, 0.0, x1, yf, 0.25)),
                 ("mattress", (x0 + 0.02, yb + 0.06, 0.25, x1 - 0.02, yf - 0.02, H)),

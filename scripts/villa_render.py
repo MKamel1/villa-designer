@@ -42,24 +42,41 @@ def villa_qa_context(scene: dict, view: dict, render_report: dict) -> dict:
                  l.get("dimmer", 1) * view.get("dimmers", {}).get(l["layer"], 1) > 0
                  for l in scene["lights"])
     day = view["state"] == "day"
+    measured = render_report["qa_scene"]
     return {"subjects": render_report["subjects"],
-            "camera": {"pitch_deg": 90, "shift_y": view["camera"].get("shift_y", 0)},
+            "camera": {"pitch_deg": 90 + render_report["camera_pitch_deg"],
+                       "shift_y": view["camera"].get("shift_y", 0)},
             "white_balance": render_report["white_balance_applied"],
             "exposure_locked": True, "daylight": day,
-            "sky": {"sun": day},
+            "sky": {"sun": day}, "windows": measured["windows"],
+            "glass": measured["glass"], "materials": measured["materials"],
+            "textiles": measured["textiles"], "soft_goods": measured["soft_goods"],
+            "bedding": measured["bedding"],
             "lights": {"on": render_report["lights_on_count"] > 0 or any(
                            source.get("emitted_lumens", 0) > 0 for source in render_report.get("emissive_sources", [])),
                        "count": ies_on, "with_ies": ies_on}}
 
 
-def villa_qa_scope(qa: dict) -> dict:
-    return {"applied": [item["check"] for item in qa["checks"]],
-            "omitted": {"window_view": "no authored window screen rectangles",
-                        "glass_passes_daylight": "no authored window screen rectangles",
-                        "finish_matches_name": "no measured finish luminance metadata",
-                        "textile_reflectance": "no textile role metadata",
-                        "soft_goods_simulated": "no simulation metadata",
-                        "cloth_plausible": "bedroom-specific bedding geometry absent"}}
+def villa_qa_scope(qa: dict, context: dict | None = None) -> dict:
+    applied = [item["check"] for item in qa["checks"]]
+    context = context or {}
+    omitted = {}
+    for prefix in ("window_view", "glass_passes_daylight", "finish_matches_name", "textile_reflectance",
+                   "soft_goods_simulated", "cloth_plausible"):
+        if any(name == prefix or name.startswith(prefix + ":") for name in applied):
+            continue
+        if prefix in ("window_view", "glass_passes_daylight"):
+            omitted[prefix] = ("night view: a dark reflective window is expected" if not context.get("daylight")
+                               else "no visible glass pane occupies at least 3% of this view")
+        elif prefix == "finish_matches_name":
+            omitted[prefix] = "no scheduled dark or black finish is present"
+        elif prefix == "textile_reflectance":
+            omitted[prefix] = "no textile material is present"
+        elif prefix == "soft_goods_simulated":
+            omitted[prefix] = "no simulated soft goods are present"
+        else:
+            omitted[prefix] = "no simulated duvet with measured bounds is present"
+    return {"applied": applied, "omitted": omitted}
 
 
 def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dict:
@@ -184,7 +201,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         # window and fitting checks require its scene_qa geometry.
         qa_input = villa_qa_context(scene, view, render_report)
         qa = check(output / (ident + ".png"), qa_input)
-        qa["scope"] = villa_qa_scope(qa)
+        qa["scope"] = villa_qa_scope(qa, qa_input)
         save_bytes(output / (ident + ".qa.json"), json.dumps(qa, indent=2).encode("utf-8"))
         caption = villa_caption(scene, view, render_report, qa)
         save_bytes(output / (ident + ".caption.json"), json.dumps(caption, indent=2).encode("utf-8"))

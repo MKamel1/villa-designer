@@ -61,17 +61,32 @@ def _sofa(W, D, H, seats, arm):
     for sx in (-1, 1):
         for sy in (-1, 1):
             out.append(("leg", _taper_leg(sx * (W / 2 - 70), sy * (D / 2 - 70), 0, 60, 12, 18)))
-    out.append(("base", _slab(x0 + 10, x1 - 10, yb + 10, yf - 10, 60, 220, 25, 12)))
+    out.append(("base", _slab(x0 + 22, x1 - 22, yb + 18, yf - 18, 75, 220, 25, 12)))
+    out.append(("plinth", G._box(x0 + 24, x1 - 24, yb + 25, yf - 25, 55, 78)))
     for a0 in (x0, x1 - arm):
-        out.append(("arm", _slab(a0, a0 + arm, yb, yf, 60, 620, 40, 30)))
+        out.append(("arm", _slab(a0 - (15 if a0 > 0 else 0), a0 + arm + (15 if a0 < 0 else 0),
+                                  yb, yf, 190, 620, 65, 55, seg=8)))
     out.append(("base", _slab(x0 + arm, x1 - arm, yb, yb + 60, 220, H - 60, 20, 10)))      # back frame
     inner0, inner1 = x0 + arm + 5, x1 - arm - 5
     cw = (inner1 - inner0) / seats
     seat_top = 440
     for k in range(seats):
         a, b = inner0 + k * cw + 4, inner0 + (k + 1) * cw - 4
-        out.append(("seat", _slab(a, b, yb + 190, yf - 5, 220, seat_top, 45, 38)))
-        out.append(("back", _slab(a, b, yb + 55, yb + 250, 225, H - 5, 55, 45)))
+        # Separate pillow-like volumes keep an 8 mm seam. The crown is a loft,
+        # not a bevel on a flat box; its top ring is set in from every edge.
+        out.append(("seat", G._loft_rings([
+            _ring(a + 22, b - 22, yb + 205, yf - 23, 222, 50),
+            _ring(a, b, yb + 188, yf - 5, 300, 65),
+            _ring(a, b, yb + 188, yf - 5, 390, 65),
+            _ring(a + 17, b - 17, yb + 205, yf - 22, seat_top - 12, 57),
+            _ring(a + 70, b - 70, yb + 250, yf - 65, seat_top, 42)], 8)))
+        # The back cushion inclines towards the rear at its top and has a
+        # rounded, raised face. It remains within the checked sofa envelope.
+        out.append(("back", G._loft_rings([
+            _ring(a + 20, b - 20, yb + 88, yb + 250, 230, 45),
+            _ring(a, b, yb + 65, yb + 267, 315, 60),
+            _ring(a, b, yb + 46, yb + 248, H - 58, 60),
+            _ring(a + 24, b - 24, yb + 58, yb + 228, H - 10, 48)], 8)))
     return out
 
 
@@ -315,7 +330,14 @@ def _wc(W, D, H):
 
 def _bath(W, D, H):
     x0, x1, yb, yf = -W / 2, W / 2, -D / 2, D / 2
-    return [("bath", _bowl(x0, x1, yb, yf, 0, H, 70, 70, H - 110, 170, 260, seg=6))]
+    # The bath's local rear edge is against the solid wall. A deck mixer sits
+    # on that rim, with its spout extending over the bowl; all horizontal
+    # vertices remain inside the checked footprint.
+    return [("bath", _bowl(x0, x1, yb, yf, 0, H, 70, 70, H - 110, 170, 260, seg=6)),
+            ("tap", G._cylinder(0, yb + 42, H, H + 155, 18, seg=20)),
+            ("tap", G._box(-12, 12, yb + 42, yb + 235, H + 135, H + 155)),
+            ("tap", G._cylinder(0, yb + 235, H + 108, H + 145, 12, seg=16)),
+            ("tap", G._cylinder(85, yb + 42, H, H + 45, 15, seg=16))]
 
 
 # ------------------------------------------------------------------ dispatch

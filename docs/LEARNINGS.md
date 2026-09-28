@@ -731,3 +731,15 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   fridge as ASSUMED appliances; the fridge replaced a cleaning column whose storage moved under the folding counter.
 - **Plants were placed without asking where a person would put one**: the bedroom plant stood in the vanity chair's
   way, the study plant in front of the new low window. Moved to corners; no guard yet beyond float/openings.
+- **The view chooser's first scoring picked uninformative frames** (render critic on draft 11, checked by the lead):
+  the parents' view stood at the entry facing the windows (headboard out of frame); the dressing view was 60 % a
+  wardrobe end panel 0.68 m from the lens. Terms added to `render_views.choose`: stand on the main subject's front
+  side, penalise a piece within 0.8 m of the lens and in view, penalise subjects behind a wall in plan; the frame
+  constraint weighted so no bonus can outvote it. Guards: `tests/test_render_views.py` -- facing and looming FAIL on
+  the old scoring (proven); the wall-occlusion test did NOT fail on the old scoring (the family-bath camera had plan
+  line of sight to the WC), so it is not yet proven on a real case, and the critic's "WC not visible" has another
+  cause, still to be found on the next render.
+- **An automated critic's claims are leads, not findings.** The Sonnet render critic was right about the bath
+  tap, ladder, pillows, hood, coffee machine, mirrors, boxy sofas, framing and the six omitted QA checks (each
+  confirmed in code); it recommended brightening the cinema and lounge, which would contradict the locked-exposure,
+  no-enhancement rule; not done.

@@ -57,7 +57,52 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
                [(d["x"], d["y"]) for d in sp["doors"] if d["level"] == lv and d.get("garden") and
                 room in (d.get("rooms") or [])]
     half = math.atan(sensor_mm / 2 / lens_mm)
+    vhalf = math.atan(sensor_mm * 2 / 3 / 2 / lens_mm)          # 3:2 frame
+    tops = [((F.footprint(by_id[s_])[0] + F.footprint(by_id[s_])[2]) / 2,
+             (F.footprint(by_id[s_])[1] + F.footprint(by_id[s_])[3]) / 2, by_id[s_]["h"]) for s_ in subjects
+            if s_ in by_id]
+
+    def below(x, y):
+        """How far (rad) a subject's top sits below the frame's lower edge seen from eye height: the family-bath WC,
+        0.4 m tall 1 m from a 16 mm lens, passed the plan test and was out of the bottom of the frame."""
+        return sum(max(0.0, math.atan2(eye_m - h, max(math.hypot(cx - x, cy - y), 1e-6)) - vhalf)
+                   for cx, cy, h in tops)
     diag = math.hypot(rect[2] - rect[0], rect[3] - rect[1])
+    # the main subject's FRONT (villa_furnish: rot 0 front +y, 180 -y, -90 +x, 90 -x): a bed is seen from its foot,
+    # a sofa from its seat side, a desk from the user's side (draft 11's parents' view faced the windows instead)
+    main = by_id.get(subjects[0]) if subjects else None
+    front = {0: (0, 1), 180: (0, -1), -90: (1, 0), 90: (-1, 0)}.get(main["rot"]) if main else None
+    mq = F.footprint(main) if main else None
+    centres = [((F.footprint(by_id[s_])[0] + F.footprint(by_id[s_])[2]) / 2,
+                (F.footprint(by_id[s_])[1] + F.footprint(by_id[s_])[3]) / 2) for s_ in subjects if s_ in by_id]
+
+    def hidden(x, y):
+        """Subjects whose centre is behind a wall in plan (draft 11: the family-bath WC passed the frame test but
+        stood behind the shower wall)."""
+        n = 0
+        for cx, cy in centres:
+            L = math.hypot(cx - x, cy - y)
+            k = max(2, int(L / 0.05))
+            for i in range(1, k):
+                px, py = x + (cx - x) * i / k, y + (cy - y) * i / k
+                if math.hypot(px - x, py - y) > 0.05 and any(_near(q, px, py, -0.01) for q in walls):
+                    n += 1
+                    break
+        return n
+
+    def looming(x, y, yaw):
+        """Pieces within 0.8 m of the lens and in view: at that range an end panel fills the frame (draft 11's
+        dressing view was 60 % wardrobe side)."""
+        n = 0
+        for q in pieces:
+            qx, qy = min(max(x, q[0]), q[2]), min(max(y, q[1]), q[3])
+            # in view if ANY part of it is: its closest point or a corner (draft 13's dressing view had a wardrobe
+            # whose centre was just outside the frame while its end panel filled the left 40 %)
+            pts_ = [(qx, qy), (q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3])]
+            if math.hypot(qx - x, qy - y) < 1.0 and any(abs(_angle(x, y, a_, b_, yaw)) < half for a_, b_ in pts_
+                                                         if math.hypot(a_ - x, b_ - y) > 1e-6):
+                n += 1
+        return n
 
     def in_door_band(x, y):
         """Within 0.35 m of the wall line of one of this room's doors, near its opening: the wall is cut there, so
@@ -98,13 +143,20 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
         while y <= rect[3] + 0.3:
             if ok(x, y):
                 edge = min(abs(x - rect[0]), abs(x - rect[2]), abs(y - rect[1]), abs(y - rect[3]))
+                occluded = hidden(x, y)
+                low = below(x, y)
+                facing = 0.0
+                if front:
+                    mx, my = (mq[0] + mq[2]) / 2, (mq[1] + mq[3]) / 2
+                    facing = 1.0 if (x - mx) * front[0] + (y - my) * front[1] > 0 else 0.0
                 for deg in range(0, 360, YAW_STEP):
                     yaw = math.radians(deg)
-                    miss = sum(max(0.0, abs(_angle(x, y, qx, qy, yaw)) - half) for qx, qy in subj)
+                    miss = sum(max(0.0, abs(_angle(x, y, qx, qy, yaw)) - half) for qx, qy in subj) + low
                     seen = sum(abs(_angle(x, y, qx, qy, yaw)) <= half for qx, qy in room_items)
                     wins = sum(abs(_angle(x, y, qx, qy, yaw)) <= half for qx, qy in openings)
-                    score = (-10.0 * miss + (seen / max(1, len(room_items))) + 0.4 * min(wins, 1)
-                             + 0.6 * depth(x, y, yaw) / max(diag, 1e-6) - 0.15 * edge)
+                    score = (-100.0 * miss + (seen / max(1, len(room_items))) + 0.4 * min(wins, 1)
+                             + 0.6 * depth(x, y, yaw) / max(diag, 1e-6) - 0.15 * edge
+                             + 0.6 * facing - 1.0 * occluded - 1.0 * looming(x, y, yaw))
                     if best is None or score > best[0]:
                         best = (score, x, y, yaw, miss)
             y += STEP

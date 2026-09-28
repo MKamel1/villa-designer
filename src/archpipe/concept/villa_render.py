@@ -93,6 +93,8 @@ M = {
                         note="clear double glazing, Tv 0.70 (Metric Handbook p. 9-8, the daylight study's value)"),
     "glass-guard": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.85, interfaces=2, roughness=0.0,
                         note="laminated glass guard"),
+    "silvered-mirror": dict(kind="principled", base_rgb=[0.91, 0.92, 0.92], reflectance=0.92,
+                            roughness=0.035, metallic=1.0, note="ASSUMED silvered glass vanity mirror"),
     "door-oak": dict(kind="principled", asset="Wood049", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40,
                      roughness=0.5, tile_m=1.0, grain_axis="z", contrast=0.55,
                      note="flush oak veneer door, closed (ASSUMED)"),
@@ -432,12 +434,26 @@ def build(lay=None, views=None):
             comps = generated_components(src, kind, hh)
             z = LZ[f["level"]]
             by = {}
+            mattress_top_mm = max((v[2] for c in comps if c["name"].endswith(":mattress")
+                                   for v in c["vertices_mm"]), default=0)
             for c in comps:
                 part = c["name"].split(":")[1]
                 if part in ("duvet", "throw_base", "throw_fold"):
                     continue                                    # the cloth duvet replaces the sculpted one
-                vs = [[v[0] / 1000.0, v[1] / 1000.0, z + v[2] / 1000.0] for v in c["vertices_mm"]]
-                if part.startswith("pillow") and f["mark"] == "pb-bed":
+                triangles = c["triangles"]
+                vertices = c["vertices_mm"]
+                if part.startswith("pillow"):
+                    # A rounded rectangular pillow with a lofted face. The
+                    # generator's ellipsoid gave Kids B two flat discs.
+                    xx = [v[0] for v in vertices]; yy = [v[1] for v in vertices]
+                    xa, xb, ya, yb = min(xx), max(xx), min(yy), max(yy)
+                    rings = [(xa + 28, xb - 28, ya + 24, yb - 24, mattress_top_mm, 36),
+                             (xa, xb, ya, yb, mattress_top_mm + 32, 55),
+                             (xa, xb, ya, yb, mattress_top_mm + 95, 55),
+                             (xa + 55, xb - 55, ya + 48, yb - 48, mattress_top_mm + 135, 42)]
+                    vertices, triangles = FG._loft_rings(rings, 8)
+                vs = [[v[0] / 1000.0, v[1] / 1000.0, z + v[2] / 1000.0] for v in vertices]
+                if part.startswith("pillow") and f["mark"] in ("pb-bed", "kb-bed"):
                     # The reference's loose pillows stand against the headboard.
                     # Lean the existing authored cushion within the bed envelope;
                     # the base remains seated on the mattress. Dressing only.
@@ -453,7 +469,7 @@ def build(lay=None, views=None):
                     for v in vs:
                         v[2] -= lift
                 mat = GEN_MAT.get(c["material"]["name"], "oak")
-                if part.startswith("pillow") and f["mark"] == "pb-bed":
+                if part.startswith("pillow") and f["mark"] in ("pb-bed", "kb-bed"):
                     mat = "sage-fabric"
                 if mat == "oak" and part == "frame":
                     mat = "oak-grain-x"
@@ -461,7 +477,7 @@ def build(lay=None, views=None):
                 # without subdividing the mattress or the hard bed frame.
                 key = (mat, part) if part.startswith("pillow") else (mat, "body")
                 by.setdefault(key, []).extend(
-                    [[vs[t[0]], vs[t[1]], vs[t[2]]] for t in c["triangles"]])
+                    [[vs[t[0]], vs[t[1]], vs[t[2]]] for t in triangles])
             for k, ((mat, part), faces) in enumerate(by.items()):
                 meshes.append(dict(id="furn-%s-%d" % (f["mark"], k), group="furniture", material=mat,
                                    room=f["room"], label=f["mark"] + (" dressing: pillow" if part.startswith("pillow") else ""),
@@ -493,7 +509,8 @@ def build(lay=None, views=None):
                                    material=mat, room=f["room"], label=f["mark"].split("#")[0] +
                                    (" ASSUMED built-in microwave above oven" if component == "microwave-glass" else ""),
                                    faces=faces,
-                                   keep_object=True, bevel_m=0.006 if mat in SOFT else 0.0015))
+                                   keep_object=True, subdivide=1 if mat in SOFT else 0,
+                                   bevel_m=0.006 if mat in SOFT else 0.0015))
             detailed.add(f["mark"])
             continue
         parts = {}
@@ -562,7 +579,9 @@ def build(lay=None, views=None):
         # villa cut stopped 20 mm past the foot and the stiff lip stood out flat ("duvet flying on the end",
         # client 2026-09-27). A bunk's duvet stays 50 mm inside its frame on every side (the rail and posts).
         bunk = b_["h"] >= 1.5
-        over, foot_over = (-0.05, -0.05) if bunk else (0.30, 0.30)
+        # 0.26 m drop (the bedroom's 0.30 was on a higher mattress): on these 0.48-0.53 m mattresses a 0.30 m drop on
+        # two sides draped the foot corners to 30-50 mm off the floor (render_qa cloth_plausible, draft 12)
+        over, foot_over = (-0.05, -0.05) if bunk else (0.26, 0.26)
         axis = "y" if b_["rot"] in (0, 180) else "x"
         if axis == "y":
             head = q[1] if b_["rot"] == 0 else q[3]
@@ -574,6 +593,7 @@ def build(lay=None, views=None):
             a0, a1 = q[1], q[3]
         s_ = 1 if foot > head else -1
         start = head + s_ * 0.55
+        mspan = sorted((head, foot))
         if bid in gen_comps:
             # the generated bed's own mattress top and pillow edge (it is built taller than the plan's h): the sheet
             # starts 20 mm beyond the pillows, 60 mm over the real mattress, never inside the pillows
@@ -582,6 +602,10 @@ def build(lay=None, views=None):
             k_ = 1 if axis == "y" else 0
             pil_edge = [v[k_] / 1000.0 for n_, vs in byname.items() if n_.startswith("pillow") for v in vs]
             start = (max(pil_edge) if s_ > 0 else min(pil_edge)) + s_ * 0.02
+            # coverage is judged on the MATTRESS, not the footprint with its headboard zone (the check read 63 % of
+            # the footprint where the duvet covered ~72 % of the mattress)
+            mv = [v[k_] / 1000.0 for v in byname["mattress"]]
+            mspan = [min(mv), max(mv)]
         end = foot + s_ * foot_over
         length, width = abs(end - start), (a1 - a0) + 2 * over
         mid_l, mid_w = (start + end) / 2, (a0 + a1) / 2
@@ -592,6 +616,7 @@ def build(lay=None, views=None):
         cloth.append(dict(id="duvet-" + bid, material=duvet, colliders=["furn-" + bid + "-", "furn-" + bid + "side-", "dress-pillow-" + bid],
                           center=center, size=size, z_start=round(z + 0.08, 3), pin=pin, frames=60, mass=0.4,
                           bending=0.6, loft=0.018, thickness=0.05, cut=cut, bunk=bunk, mattress_top=round(z, 3),
+                          mattress_span=mspan, length_axis=axis,
                           label="dressing: duvet (cloth)"))
         if bid == "pb-bed":
             # The bedroom reference has a loose runner at the foot. It is
@@ -607,11 +632,15 @@ def build(lay=None, views=None):
             cloth.append(dict(id="duvet-" + bid + "-upper", material=duvet, colliders=["furn-" + bid + "-"],
                               center=center, size=size, z_start=round(LZ["GF"] + 1.40 + 0.08, 3), pin=pin,
                               frames=60, mass=0.4, bending=0.6, loft=0.018, thickness=0.05, cut=cut, bunk=True,
+                              mattress_span=sorted((head, foot)), length_axis=axis,
                               mattress_top=round(LZ["GF"] + 1.40, 3), label="dressing: duvet (cloth)"))
         for k, pf in enumerate(pil if bid not in generated else []):
             mesh("dress-pillow-%s-%d" % (bid, k), "bedding-white", pf, "dressing", room=b_["room"],
                  label="dressing: pillow")
     notes.append("Dressing: clothes on the dressing rails, duvets and pillows on the beds (not design).")
+    notes.append("ASSUMED furniture detailing: crowned sofa and chair cushions, rounded arms, exposed plinth and "
+                 "legs, and the bunk ladder on its open side; product and fixing details require Revit coordination. "
+                 "Rectangular lofted bed pillows are dressing, not specified products.")
     notes.append("By day the basement rooms are shown with their ambient and accent lights at 50 % (a basement is "
                  "used with lights on by day); bathrooms by day have their lights on; other ground-floor day "
                  "views are daylight only.")
@@ -624,8 +653,29 @@ def build(lay=None, views=None):
                                  wx + sx / 2, wy + sy / 2, LZ[item["level"]] + z0 + h),
              "fixture", room=item["room"], label="ASSUMED appliance: " + mid + "; add to Revit")
 
-    appliance("appliance-coffee-main", "k-tall", -0.765, -0.14, 0.90, 0.20, 0.22, 0.28)   # off the task point
-    appliance("appliance-coffee-dirty", "dk-run", -0.90, 0, 0.90, 0.20, 0.22, 0.28)
+    def coffee_machine(mid, support, lx, ly):
+        item = it_all[support]
+        x, y, _ = FD.to_world_point(item, lx, ly, 0, LZ[item["level"]])
+        floor = LZ[item["level"]] + 0.90
+        shell_vertices, shell_tris = FG._loft_rings([
+            (x-.075, x+.075, y-.09, y+.08, floor+.012, .022),
+            (x-.085, x+.085, y-.09, y+.08, floor+.055, .026),
+            (x-.085, x+.085, y-.09, y+.08, floor+.215, .026),
+            (x-.060, x+.060, y-.077, y+.062, floor+.265, .025)], 8)
+        mesh(mid + "-body", "black-metal",
+             [[shell_vertices[i] for i in tri] for tri in shell_tris], "fixture", room=item["room"],
+             label="ASSUMED rounded coffee machine housing; add to Revit", keep_object=True,
+             bevel_m=0.003, subdivide=1)
+        for suffix, material, bounds in (
+            ("drip-tray", "black-metal", (x-.078, y+.075, floor, x+.078, y+.11, floor+.018)),
+            ("spout", "brass", (x-.018, y+.072, floor+.115, x+.018, y+.108, floor+.145)),
+            ("water-tank", "glass-guard", (x-.063, y-.108, floor+.055, x+.063, y-.088, floor+.235)),
+        ):
+            mesh(mid + "-" + suffix, material, box_faces(*bounds), "fixture", room=item["room"],
+                 label="ASSUMED coffee machine " + suffix + "; add to Revit", bevel_m=0.005)
+
+    coffee_machine("appliance-coffee-main", "k-tall", -0.765, -0.14)
+    coffee_machine("appliance-coffee-dirty", "dk-run", -0.90, 0)
     appliance("appliance-microwave-dirty", "dk-fold", -0.35, 0, 0.90, 0.43, 0.34, 0.30)
     appliance("appliance-fridge-dirty", "dk-fridge", 0, 0.285, 0.08, 0.54, 0.025, 1.95,
               mat="greige-lacquer")
@@ -647,9 +697,46 @@ def build(lay=None, views=None):
     hob = next((a, b) for kind, a, b in F3._local_modules(dirty) if kind == "hob")
     hx, hy, _ = FD.to_world_point(dirty, sum(hob) / 2, 0, 0, LZ["B"])
     wall_y = lay["rooms"]["dirty-kitchen"]["rect"][3]
-    mesh("appliance-hood-dirty", "black-metal", box_faces(hx - 0.34, hy - 0.27, -1.05,
-         hx + 0.34, wall_y, -0.99), "fixture", room="dirty-kitchen",
-         label="ASSUMED wall cooker hood; add to Revit")
+    # The duct terminates at the rendered soffit, which is lower under the
+    # ramp than a room's nominal ceiling height.
+    from . import render_support as SUP
+    tris, owners = SUP._triangles([m for m in meshes if m["group"] in ("shell", "context")])
+    soffit = SUP._Surfaces(tris, owners)
+    hits = []
+    for t in soffit.t[soffit.down & (soffit.lo[:, 0] <= hx) & (hx <= soffit.hi[:, 0]) &
+                      (soffit.lo[:, 1] <= wall_y - 0.08) & (wall_y - 0.08 <= soffit.hi[:, 1])]:
+        (ax, ay, az), (bx, by_, bz), (cx, cy, cz) = t
+        px, py = hx, wall_y - 0.08
+        den = (by_ - cy) * (ax - cx) + (cx - bx) * (ay - cy)
+        if abs(den) < 1e-12:
+            continue
+        u = ((by_ - cy) * (px - cx) + (cx - bx) * (py - cy)) / den
+        v = ((cy - ay) * (px - cx) + (ax - cx) * (py - cy)) / den
+        if min(u, v, 1-u-v) >= -1e-6:
+            zz = u*az + v*bz + (1-u-v)*cz
+            if zz > -0.98:
+                hits.append(zz)
+    if not hits:
+        raise ValueError("Dirty-kitchen hood has no rendered soffit above it")
+    hood_top = min(hits)
+    mesh("appliance-hood-dirty-canopy", "black-metal", box_faces(hx - 0.34, hy - 0.27, -1.05,
+         hx + 0.34, wall_y, -0.98), "fixture", room="dirty-kitchen",
+         label="ASSUMED wall cooker hood canopy; add to Revit")
+    mesh("appliance-hood-dirty-chimney", "black-metal", box_faces(hx - 0.115, wall_y - 0.16, -0.98,
+         hx + 0.115, wall_y, hood_top), "fixture", room="dirty-kitchen",
+         label="ASSUMED cooker hood duct to rendered soffit; add to Revit")
+    for basin_id in ("gwc-basin", "fb-basin", "pe-basin"):
+        basin = it_all[basin_id]
+        width = min(basin["w"] - 0.04, 0.78)
+        back = -basin["d"] / 2
+        bounds = F3.to_world(basin, (-width/2, back, basin["h"] + 0.20,
+                                      width/2, back + 0.012, basin["h"] + 0.95))
+        mesh("mirror-" + basin_id, "silvered-mirror",
+             box_faces(bounds[0], bounds[1], LZ[basin["level"]] + bounds[2],
+                       bounds[3], bounds[4], LZ[basin["level"]] + bounds[5]),
+             "fixture", room=basin["room"], label="ASSUMED silvered wall mirror over " + basin_id + "; add to Revit")
+    notes.append("ASSUMED deck-mounted brass bath mixer and spout, three silvered vanity mirrors, coffee machine "
+                 "bodies with trays, spouts and water tanks, and dirty-kitchen canopy and duct; coordinate with Revit.")
     notes.append("ASSUMED kitchen products: main built-in microwave above oven, two worktop coffee machines, "
                  "dirty-kitchen microwave and integrated fridge (replacing the former cleaning column; cleaning "
                  "storage moves below the folding counter), island downdraft extractor and dirty-kitchen wall hood. "
@@ -1265,8 +1352,8 @@ def VIEWS(lay=None):
     v("v05-parents-bedroom", "Parents' bedroom", "evening", I, I, 24, ["pb-bed"], room="parents-bed",
       dimmers={"ambient": 0.3, "accent": 0.4, "task": 0.5})
     v("v06-kids-room", "Kids' room A", "day", I, I, 24, ["ka-bunk", "ka-desk-1"], room="kids-a")
-    v("v07-terrace-dusk", "Garden and terrace at dusk", "exterior-dusk", [28.2, -21.2, B + 1.6], [21.0, -26.4, B + 1.8],
-      20, ["terrace lounge set", "living-sofa"], layers=["ambient", "task", "accent", "decorative"],
+    v("v07-terrace-dusk", "Garden and terrace at dusk", "exterior-dusk", [28.2, -21.2, B + 1.6], [21.0, -26.4, B + 1.6],
+      20, ["terrace lounge set", "living-sofa"], shift_y=0.10, layers=["ambient", "task", "accent", "decorative"],
       dimmers={"ambient": 0.5, "task": 0.4})
     v("v08-cinema", "Cinema: seating and screen", "evening", I, I, 24, ["cinema-sofa", "cinema-tv"], room="cinema")
     v("v09-dining-evening", "Dining and island at night", "evening", I, I, 24, ["dining-table", "k-island"],
@@ -1278,13 +1365,15 @@ def VIEWS(lay=None):
     v("v12-ensuite", "Parents' ensuite", "evening", I, I, 24, ["pe-bath", "pe-basin"], room="parents-ensuite",
       dimmers={"ambient": 0.5})
     v("v13-kids-b", "Kids' room B at bedtime", "evening", I, I, 24, ["kb-bed", "kb-desk"], room="kids-b")
-    v("v14-dressing", "Parents' dressing", "evening", I, I, 24, ["pd-hang-1", "pd-hang-2"], room="parents-dressing",
+    v("v14-dressing", "Parents' dressing", "evening", I, I, 24, ["pd-hang-1"], room="parents-dressing",
       dimmers={"ambient": 0.6})
     # client: "Did we render pictures for parent's bathroom, family bathroom, guest bathroom, dirt kitchen"
     # bathrooms are used with their lights on, day or night; stated in the caption like the basement by day
     BATH_DAY = dict(layers=["ambient", "task", "accent"], dimmers={})
-    v("v15-family-bath", "Family bathroom", "day", I, I, 24, ["fb-basin", "fb-wc", "fb-shower"], room="family-bath",
+    v("v15-family-bath", "Family bathroom", "day", I, I, 24, ["fb-basin", "fb-shower"], room="family-bath",
       **BATH_DAY)
+    V[-1]["caption_notes"] = ["The WC is in the corner beside the door, below and outside this frame: no standing "
+                              "point holds basin, shower and WC together (checked by render_views.choose)."]
     v("v16-guest-wc", "Guest WC", "evening", I, I, 24, ["gwc-basin", "gwc-wc"], room="guest-wc")
     v("v17-dirty-kitchen", "Dirty kitchen and laundry", "day", I, I, 24, ["dk-run"], room="dirty-kitchen",
       **BASEMENT_DAY)

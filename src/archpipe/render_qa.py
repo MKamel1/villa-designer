@@ -222,9 +222,9 @@ def check(image_path, qa: dict) -> dict:
 
     for mat in qa.get("materials", []):
         note = str(mat.get("note", "")).lower()
-        if mat.get("override") and ("dark" in note or "black" in note) \
-                and mat.get("luminance", 0) > DARK_FINISH_MAX:
-            add(f"finish_matches_name:{mat['name']}", "FAIL",
+        if mat.get("override") and ("dark" in note or "black" in note):
+            add(f"finish_matches_name:{mat['name']}",
+                "FAIL" if mat.get("luminance", 0) > DARK_FINISH_MAX else "PASS",
                 f"'{note}' has luminance {mat['luminance']:.2f} (max {DARK_FINISH_MAX})",
                 "'Dark bronze' was specified at 0.42 and rendered as pale tan.")
         if mat.get("override") or mat.get("glass") or mat.get("photo"):
@@ -234,24 +234,27 @@ def check(image_path, qa: dict) -> dict:
                 f"linear colour spread {mat['saturation']:.2f} with no stated finish",
                 "Revit shading colour [64,0,0] rendered as a pure-red lamp shade.")
     for mat in qa.get("textiles", []):
-        if mat.get("reflectance") is None:
-            add(f"textile_reflectance:{mat['name']}", "FAIL",
-                "textile without an explicit presentation reflectance",
+        add(f"textile_reflectance:{mat['name']}",
+            "FAIL" if mat.get("reflectance") is None else "PASS",
+                "textile without an explicit presentation reflectance" if mat.get("reflectance") is None
+                else f"stated presentation reflectance {mat['reflectance']:.2f}",
                 "Ivory bedding rendered grey at the furniture-wide 0.35.")
 
     for obj in qa.get("soft_goods", []):
-        if not obj.get("simulated"):
-            add(f"soft_goods_simulated:{obj['name']}", "FAIL",
-                "fabric modelled as a rigid shape, not cloth-simulated",
+        add(f"soft_goods_simulated:{obj['name']}", "PASS" if obj.get("simulated") else "FAIL",
+                "cloth simulation completed" if obj.get("simulated") else "fabric modelled as a rigid shape, not cloth-simulated",
                 "Curtains built as a sine extrusion read as corrugated sheet.")
 
-    bed = qa.get("bedding")
-    if bed:
+    beds = qa.get("bedding") or []
+    if isinstance(beds, dict):
+        beds = [beds]
+    for bed in beds:
         m0, m1 = bed["mattress_y"]
         d0, d1 = bed["duvet_y"]
         cover = max(0.0, min(m1, d1) - max(m0, d0)) / max(1e-6, m1 - m0)
         on_floor = bed["duvet_z_min"] < 0.05
-        add("cloth_plausible", "FAIL" if (cover < 0.65 or on_floor) else "PASS",
+        name = "cloth_plausible" + (":" + bed["id"] if bed.get("id") else "")
+        add(name, "FAIL" if (cover < 0.65 or on_floor) else "PASS",
             f"duvet covers {cover:.0%} of the mattress length (min 65%), "
             f"lowest point {bed['duvet_z_min']:.2f} m (min 0.05)",
             "A too-elastic, unpinned duvet slid 0.6 m and hung onto the floor.")

@@ -14,7 +14,7 @@ ALLOWED_MATERIALS = {
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath",
     "marble-white", "walnut", "walnut-grain-x", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
-    "black-metal", "ceramic-white", "screen-black", "glass-clear", "glass-guard", "door-oak",
+    "black-metal", "ceramic-white", "screen-black", "glass-clear", "glass-guard", "silvered-mirror", "door-oak",
     "render-exterior", "paint-exterior-grey-green", "paving", "lawn", "outdoor-fabric", "teak",
     "alu-bronze", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
     "marker-2200", "opal-pen-globe-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
@@ -253,14 +253,128 @@ class RenderStandard(unittest.TestCase):
     def test_kitchen_appliances_and_sinks_are_present(self):
         from archpipe.concept import villa_furnish as F, villa_furniture_detail as FD, villa_r11 as R
         ids = {m["id"] for m in SCENE["meshes"]}
-        for name in ("coffee-main", "coffee-dirty", "microwave-dirty", "fridge-dirty", "downdraft-island", "hood-dirty"):
+        for name in ("microwave-dirty", "fridge-dirty", "downdraft-island"):
             self.assertIn("appliance-" + name, ids)
+        for name in ("coffee-main", "coffee-dirty"):
+            for part in ("body", "drip-tray", "spout", "water-tank"):
+                self.assertIn("appliance-" + name + "-" + part, ids)
+        for part in ("canopy", "chimney"):
+            self.assertIn("appliance-hood-dirty-" + part, ids)
+        hood = {m["id"].rsplit("-", 1)[-1]: m for m in SCENE["meshes"]
+                if m["id"].startswith("appliance-hood-dirty-")}
+        canopy_top = max(p[2] for face in hood["canopy"]["faces"] for p in face)
+        duct_top = max(p[2] for face in hood["chimney"]["faces"] for p in face)
+        self.assertGreater(duct_top - canopy_top, 0.25, "the wall hood is a flat plate again")
+        machine = next(m for m in SCENE["meshes"] if m["id"] == "appliance-coffee-dirty-body")
+        self.assertEqual(machine["subdivide"], 1)
+        self.assertGreater(len(machine["faces"]), 100, "the machine body is a plain box again")
         items = {i["id"]: i for i in F.layout(R.design("D1"))}
         self.assertIn("fridge", items["dk-fridge"]["why"])
         self.assertIn("cleaning storage", items["dk-fold"]["why"])
         for name in ("k-run", "dk-run"):
             self.assertTrue({"sink", "tap"} <= set(FD.world_parts(items[name], 0)))
         self.assertIn("microwave-glass", FD.world_parts(items["k-tall"], 0))
+
+    def test_bath_mixer_ladder_and_upholstery_stay_in_the_checked_envelopes(self):
+        from archpipe.concept import villa_furnish as F, villa_furnish3d as F3, villa_furniture_detail as FD
+        items = {i["id"]: i for i in F.layout(VR.R.design("D1"))}
+        bath = items["pe-bath"]
+        self.assertEqual(bath["rot"], 0)  # local rear rim faces its wall
+        parts = FD.world_parts(bath, 0)
+        self.assertIn("tap", parts)
+        self.assertTrue(any(m["id"].startswith("furn-pe-bath-") and m["material"] == "brass"
+                            for m in SCENE["meshes"]))
+        for item in items.values():
+            if item["type"].startswith("sofa") or item["type"] in ("armchair", "recliner"):
+                detail = FD.world_parts(item, 0)  # raises if a vertex leaves the checked box
+                self.assertTrue({"seat", "back", "arm", "plinth", "leg"} <= set(detail))
+        sofa = items["living-sofa"]
+        parts_local = FD.local_parts(sofa)
+        seat_vertices = next(vertices for name, (vertices, _) in parts_local if name == "seat")
+        self.assertGreater(len({round(v[2]) for v in seat_vertices}), 3, "a flat beveled slab returned")
+        crown = [v for v in seat_vertices if v[2] == max(p[2] for p in seat_vertices)]
+        self.assertGreater(min(v[0] for v in crown), min(v[0] for v in seat_vertices) + 0.03 * 1000)
+        back_vertices = next(vertices for name, (vertices, _) in parts_local if name == "back")
+        heights = sorted({v[2] for v in back_vertices})
+        mean_y = lambda height: sum(v[1] for v in back_vertices if v[2] == height) / sum(
+            v[2] == height for v in back_vertices)
+        self.assertLess(mean_y(heights[-2]), mean_y(heights[1]) - 0.01 * 1000)
+        self.assertTrue(all(m["subdivide"] == 1 for m in SCENE["meshes"] if
+                            m["id"].startswith("furn-living-sofa-") and m["material"] == "boucle"))
+        bunk = items["ka-bunk"]
+        bed_parts = F3.body(bunk)
+        self.assertEqual(sum(name == "ladder-rung" for name, _ in bed_parts), 4)
+        self.assertEqual(sum(name == "ladder-stile" for name, _ in bed_parts), 2)
+        self.assertTrue(all(-bunk["w"]/2 <= b[0] <= b[3] <= bunk["w"]/2 and
+                            -bunk["d"]/2 <= b[1] <= b[4] <= bunk["d"]/2 and 0 <= b[2] <= b[5] <= bunk["h"]
+                            for name, b in bed_parts if name.startswith("ladder-")))
+        self.assertTrue(any(m["id"].startswith("furn-ka-bunk-") for m in SCENE["meshes"]))
+
+    def test_bed_pillows_are_puffed_and_rest_on_the_mattress(self):
+        for bed in ("pb-bed", "kb-bed"):
+            pillows = [m for m in SCENE["meshes"] if m["id"].startswith("furn-" + bed + "-") and
+                       "dressing: pillow" in m["label"]]
+            self.assertEqual(len(pillows), 2)
+            for pillow in pillows:
+                pts = [p for face in pillow["faces"] for p in face]
+                self.assertGreater(max(p[2] for p in pts) - min(p[2] for p in pts), 0.12)
+                self.assertEqual(pillow["subdivide"], 1)
+                self.assertGreater(max(p[0] for p in pts) - min(p[0] for p in pts), 0.35)
+                self.assertGreater(max(p[1] for p in pts) - min(p[1] for p in pts), 0.25)
+
+    def test_mirrors_are_above_basins_and_between_the_sconces(self):
+        from archpipe.concept import villa_furnish as F
+        items = {i["id"]: i for i in F.layout(VR.R.design("D1"))}
+        for basin_id, room in (("gwc-basin", "guest-wc"), ("fb-basin", "family-bath"),
+                               ("pe-basin", "parents-ensuite")):
+            mirror = next(m for m in SCENE["meshes"] if m["id"] == "mirror-" + basin_id)
+            self.assertEqual(mirror["material"], "silvered-mirror")
+            pts = [p for face in mirror["faces"] for p in face]
+            floor = VR.LZ[items[basin_id]["level"]]
+            self.assertAlmostEqual(min(p[2] for p in pts) - floor - items[basin_id]["h"], 0.20)
+            sconces = [m for m in SCENE["meshes"] if m["id"].startswith(("lamp-SCONCE-" + room,
+                                                                           "lamp-VSCONCE-" + room))]
+            self.assertEqual(len(sconces), 2)
+            axis = 0 if max(p[0] for p in pts) - min(p[0] for p in pts) > 0.1 else 1
+            mirror_lo = min(p[axis] for p in pts); mirror_hi = max(p[axis] for p in pts)
+            centres = [sum(p[axis] for face in m["faces"] for p in face) /
+                       sum(len(face) for face in m["faces"]) for m in sconces]
+            self.assertLess(min(centres), mirror_lo)
+            self.assertGreater(max(centres), mirror_hi)
+
+    def test_villa_render_qa_receives_and_runs_the_six_scene_checks(self):
+        import sys
+        import io
+        from PIL import Image
+        from archpipe.render_qa import check
+        sys.path.insert(0, str(VR.ROOT / "scripts"))
+        import villa_render as driver
+        self.assertTrue(all("mattress_span" in c and "length_axis" in c for c in SCENE["cloth"]
+                            if c["id"].startswith("duvet-")))
+        day_view = next(v for v in SCENE["views"] if v["state"] == "day")
+        report = {"subjects": [], "white_balance_applied": True, "lights_on_count": 0,
+                  "camera_pitch_deg": 0,
+                  "qa_scene": {"windows": [{"id": "window-01", "screen": [0.1, 0.2, 0.5, 0.8]}],
+                               "glass": {"architectural": 1},
+                               "materials": [{"name": "alu-bronze", "note": "dark bronze", "override": True,
+                                              "luminance": 0.09}],
+                               "textiles": [{"name": "bedding-white", "reflectance": 0.70}],
+                               "soft_goods": [{"name": "duvet-kb-bed", "simulated": True}],
+                               "bedding": [{"id": "duvet-kb-bed", "mattress_y": [0, 2],
+                                            "duvet_y": [0.2, 2.2], "duvet_z_min": 0.30}]}}
+        context = driver.villa_qa_context(SCENE, day_view, report)
+        for key in ("windows", "glass", "materials", "textiles", "soft_goods", "bedding"):
+            self.assertEqual(context[key], report["qa_scene"][key])
+        image = io.BytesIO()
+        Image.new("RGB", (120, 80), (150, 150, 150)).save(image, format="PNG")
+        image.seek(0)
+        result = check(image, context)
+        scope = driver.villa_qa_scope(result, context)
+        for prefix in ("window_view", "glass_passes_daylight", "finish_matches_name",
+                       "textile_reflectance", "soft_goods_simulated", "cloth_plausible"):
+            self.assertTrue(any(name == prefix or name.startswith(prefix + ":") for name in scope["applied"]),
+                            prefix)
+            self.assertNotIn(prefix, scope["omitted"])
 
     def test_the_float_guard_catches_the_real_defects(self):
         import copy
