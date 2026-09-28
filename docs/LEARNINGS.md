@@ -751,3 +751,12 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   balance); a street camera at garden level looked at the underside of the ground; from the street and the front
   yard only the boundary wall and the ramp enclosure showed, so the street elevation is deferred until the site
   frontage is modelled. Final-only views need at least one draft before the final set.
+- **A render-side fix is not a design fix.** The fixture seating moved 14 fittings in the render only; the lighting
+  spec (and so Revit) still put them 100-155 mm below the ceiling. Source fix: `villa_lighting` reads the finished
+  ceiling (cove field, extension roof); the render's seating is now a check that must move nothing (test proven
+  on the old heights). Root cause of the ramp gap: the parking model's deck clearance was extended under the
+  extension roof, which the spec builds at ground-floor level.
+- **A specified tint must be checked in the image.** The grey-green exterior (G/R 1.06) read warm grey under the
+  sun in the finals; at 1.14 the sunlit facade samples G > R > B. **A published explanation must be measured**: the
+  v04 window flag was first explained as "a plain neighbouring wall"; a ray-cast showed the villa's own boundary
+  wall, then open sky (no context modelled there).
