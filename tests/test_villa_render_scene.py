@@ -339,8 +339,10 @@ class VillaRenderContractTest(unittest.TestCase):
         view["exposure"] = "dusk-facade"
         self.assertEqual(validate_scene(scene), [])
         self.assertEqual(sky_state_for_view(view["state"]), "evening")
+        # a render report must carry the scene measurements the QA checks read (qa_scene); a report without them
+        # fails loudly rather than silently skipping those checks
         context = villa_qa_context(scene, view, {"subjects": [], "white_balance_applied": True,
-                                                 "lights_on_count": 0})
+                                                 "lights_on_count": 0, "camera_pitch_deg": 0.0, "qa_scene": {"windows": [], "glass": [], "materials": [], "textiles": [], "soft_goods": [], "bedding": []}})
         self.assertFalse(context["daylight"])
         del scene["sky"]["evening"]
         self.assertIn("matching sky", " ".join(validate_scene(scene)))
@@ -360,7 +362,7 @@ class VillaRenderContractTest(unittest.TestCase):
     def test_qa_daylight_is_day_only_and_zero_dimmed_ies_is_excluded(self):
         scene = copy.deepcopy(self.valid)
         view = scene["views"][0]
-        report = {"subjects": [], "white_balance_applied": True, "lights_on_count": 1}
+        report = {"subjects": [], "white_balance_applied": True, "lights_on_count": 1, "camera_pitch_deg": 0.0, "qa_scene": {"windows": [], "glass": [], "materials": [], "textiles": [], "soft_goods": [], "bedding": []}}
         self.assertTrue(villa_qa_context(scene, view, report)["daylight"])
         for state in ("evening", "night"):
             view["state"] = state
