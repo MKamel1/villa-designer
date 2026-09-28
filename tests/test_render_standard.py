@@ -23,6 +23,11 @@ ALLOWED_MATERIALS = {
 
 
 class RenderStandard(unittest.TestCase):
+    def test_lighting_spec_needs_no_render_ceiling_moves(self):
+        moves = [note for note in SCENE["notes"] if note.startswith("Recessed fittings seated")]
+        self.assertEqual(moves, [], "render seating still corrected lighting-spec heights")
+        self.assertEqual(VR._seat_recessed_on_soffit(SCENE), [])
+
     def test_our_exterior_and_boundary_are_grey_green_context_is_neutral(self):
         finish = SCENE["materials"]["paint-exterior-grey-green"]
         self.assertAlmostEqual(finish["reflectance"], 0.65)

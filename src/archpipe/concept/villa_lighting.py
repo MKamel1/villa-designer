@@ -32,7 +32,8 @@ import math
 from dataclasses import dataclass, field
 
 from . import villa_furnish as F
-from . import villa_parking as P
+from . import revit_spec as RS
+from . import villa_daylight as VD
 from . import villa_r11 as R
 
 LEVEL_Z = {"B": -3.0, "GF": 0.0}
@@ -40,6 +41,7 @@ VL_DESK_Z = 0.75 + 0.45          # desk lamp head 450 mm over a 750 mm desk
 CEILING = 2.70                 # false ceiling above FFL
 COVE_FIELD = 2.80              # the raised field inside a cove (slab soffit)
 COVE_BAND = 0.40
+UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")
 MF = 0.8                       # maintenance factor (stated, lighting.DEFAULT_MAINTENANCE_FACTOR)
 
 # kind -> the requirement (what a product must meet) and its generic stand-in
@@ -155,11 +157,33 @@ class Fixture:
         return self.spec["layer"]
 
 
-def ceiling_z(level, x=None, room=None):
-    """Underside of the finished ceiling at x (absolute z)."""
+def ceiling_z(level, x=None, room=None, y=None, lay=None, spec=None):
+    """Finished ceiling above a fitting, using the cove design and the built ramp/deck/roof spec."""
     base = LEVEL_Z[level]
-    if level == "B" and room in ("cinema", "store-ramp", "guest-wc", "dirty-kitchen") and x is not None:
-        return base + min(CEILING, P.clear_at(x) - 0.005)       # flush in the soffit lining (no drop there)
+    if level == "B" and room in UNDER_SOFFIT:
+        if x is None or y is None:
+            raise ValueError("An under-soffit fitting needs both plan coordinates")
+        spec = spec if spec is not None else RS.build(lay or R.design("D1"))
+        for x0, y0, x1, y1 in spec.get("roofs", []):
+            if x0 <= x <= x1 and y0 <= y <= y1:
+                return -VD.SLAB_T                  # the extension roof is a GF-level slab
+        parking = spec["parking2"]
+        deck = parking["deck"]
+        if deck["x0"] <= x <= deck["x1"] and deck["y0"] <= y <= deck["y1"]:
+            return deck["z_top"] - deck["thick"]
+        ramp = parking["ramp"]
+        profile = ramp["profile"]
+        if ramp["y0"] <= y <= ramp["y1"]:
+            for (xa, za), (xb, zb) in zip(profile, profile[1:]):
+                if xa <= x <= xb:
+                    return za + (zb - za) * (x - xa) / (xb - xa) - ramp["thick"]
+        raise ValueError("No Revit-spec soffit above %s at (%.3f, %.3f)" % (room, x, y))
+    if room in ("lounge", "living") and x is not None and y is not None:
+        x0, y0, x1, y1 = F.clear_rect(lay or R.design("D1"), room)
+        if x0 + COVE_BAND < x < x1 - COVE_BAND and y0 + COVE_BAND < y < y1 - COVE_BAND:
+            return base + COVE_FIELD              # slab exposed inside the lower perimeter band
+    if level == "GF" and room == "stair-gf":
+        return base + COVE_FIELD                  # slab over the double-height stair void
     return base + CEILING
 
 
@@ -180,6 +204,7 @@ def design(lay=None):
     fp = {k: F.footprint(v) for k, v in it.items()}
     out = []
     n = {}
+    spec = RS.build(lay)
 
     def add(kind, room, x, y, z=None, why="", card="", level=None, **kw):
         level = level or lay["rooms"][room]["level"]
@@ -190,7 +215,7 @@ def design(lay=None):
                     room = other
                     break
         n[room] = n.get(room, 0) + 1
-        z = z if z is not None else ceiling_z(level, x, room)
+        z = z if z is not None else ceiling_z(level, x, room, y, lay, spec)
         out.append(Fixture("%s-%s-%02d" % (kind, room, n[room]), kind, room, level, round(x, 3), round(y, 3),
                            round(z, 3), why=why, card=card, **kw))
 
@@ -233,8 +258,7 @@ def design(lay=None):
     for x, y in _grid(Pn, 2, 1):
         add("DL", "pantry", x, y, why="pantry shelves", card="ies-res-storage-frequent-50")
     # stair: step markers in the party-wall side of the flight every 3rd tread, and a light at the foot
-    from . import revit_spec as RS_
-    walls_b = F._walls(RS_.build(lay), "B")
+    walls_b = F._walls(spec, "B")
     for k, b in enumerate(sorted(lay and _stair_boxes(lay), key=lambda b: b[0])):
         if k % 3 == 1 and b[5] / 1000.0 + 0.25 < -0.65:        # below the beam soffit (-0.60): never in a beam
             # ON the party wall's face (the nearest wall below the tread): the treads stop 50-200 mm short of the
@@ -345,7 +369,7 @@ def design(lay=None):
     op = _gf_opening(lay)
     for k, (fx, fy, dz) in enumerate(((0.3, 0.35, 1.0), (0.55, 0.6, 1.6), (0.8, 0.4, 1.25))):
         add("PEN-GLOBE", "stair-gf", op[0] + fx * (op[2] - op[0]), op[1] + fy * (op[3] - op[1]), z=CEILING - dz,
-            level="GF", extra={"hang_from": CEILING}, why="globe cluster dropping into the stair void: lights the "
+            level="GF", extra={"hang_from": ceiling_z("GF", room="stair-gf")}, why="globe cluster dropping into the stair void: lights the "
             "flight from above and marks the heart of the house", card="ies-res-stairs-50")
     Lg = rc["landing-gf"]
     add("DL", "landing-gf", (Lg[0] + Lg[2]) / 2, (Lg[1] + Lg[3]) / 2, why="stair top", card="ies-res-stairs-50")

@@ -100,8 +100,8 @@ M = {
                      note="flush oak veneer door, closed (ASSUMED)"),
     "render-exterior": dict(kind="principled", base_rgb=[0.65, 0.65, 0.65], reflectance=0.65,
                             roughness=0.85, note="neutral smooth mineral render on neighbouring buildings and apartment (ASSUMED)"),
-    "paint-exterior-grey-green": dict(kind="principled", base_rgb=[0.625, 0.66, 0.63], reflectance=0.65,
-                                       roughness=0.82, note="ASSUMED very light grey with a green cast, smooth mineral exterior paint; stated reflectance 0.65; our exterior and boundary walls"),
+    "paint-exterior-grey-green": dict(kind="principled", base_rgb=[0.590, 0.672, 0.605], reflectance=0.65,
+                                       roughness=0.82, note="ASSUMED very light grey with a green cast (G/R 1.14: at 1.06 the tint vanished under the sun in the finals), smooth mineral exterior paint; stated reflectance 0.65; our exterior and boundary walls"),
     "paving": dict(kind="principled", asset="PavingStones146", base_rgb=[0.62, 0.58, 0.52], reflectance=0.45,
                    roughness=0.8, tile_m=2.0, note="light stone paving (garden terrace, ASSUMED)"),
     "lawn": dict(kind="principled", asset="Grass004", base_rgb=[0.10, 0.16, 0.05], reflectance=0.12,
@@ -1003,10 +1003,7 @@ def build(lay=None, views=None):
 
 
 def _seat_recessed_on_soffit(scene):
-    """Every recessed fitting sits ON the ceiling rendered above it. The lighting design mounts them at one ceiling
-    height per room, which was wrong in two places: under the ramp (the parking model's ramp differs from the
-    rendered one by up to 150 mm) and in the cove rooms, whose central field is the slab 100 mm above the 2.70 m
-    band. They hung in the air. The moves are recorded; lux is re-measured in the scene itself."""
+    """Guard that the authored fittings and cords already reach the ceiling rendered above them."""
     from . import render_support as S
     import numpy as np
     shell = [m for m in scene["meshes"] if m["group"] in ("shell", "context")]
@@ -1017,7 +1014,7 @@ def _seat_recessed_on_soffit(scene):
     for L in scene["lights"]:
         if ("fix-" + L["id"]) not in by:
             continue
-        x, y, z0 = L["position"]
+        x, y, _ = L["position"]
         fix = by["fix-" + L["id"]]
         zf = fix["faces"][0][0][2]
         m = surf.down & (surf.lo[:, 0] <= x) & (x <= surf.hi[:, 0]) & (surf.lo[:, 1] <= y) & (y <= surf.hi[:, 1])
@@ -1039,16 +1036,10 @@ def _seat_recessed_on_soffit(scene):
         dz = min(above) - zf - 0.0015
         if abs(dz) < 0.012:
             continue
-        L["position"][2] = round(z0 + dz, 4)
-        for mid in ("fix-" + L["id"], "lens-" + L["id"]):
-            for f in by[mid]["faces"]:
-                for v in f:
-                    v[2] += dz
         moved.append("%s %+.0f mm" % (L["id"], dz * 1000))
-    # pendants: the cord runs up to the ceiling actually above it (two stair-void globes stopped at 2.70 m in the
-    # double-height void, their canopies fixed to nothing)
+    # A pendant cord must reach the actual ceiling above its canopy.
     for mid in [m["id"] for m in scene["meshes"] if m["id"].startswith("cord-")]:
-        cord, can = by[mid], by.get("canopy-" + mid[5:])
+        cord = by[mid]
         pts = [v for f in cord["faces"] for v in f]
         x = sum(v[0] for v in pts) / len(pts)
         y = sum(v[1] for v in pts) / len(pts)
@@ -1070,18 +1061,10 @@ def _seat_recessed_on_soffit(scene):
         if not above or abs(min(above) - top) < 0.012:
             continue
         dz = min(above) - top
-        for f in cord["faces"]:
-            for v in f:
-                if abs(v[2] - top) < 1e-6:
-                    v[2] += dz
-        if can:
-            for f in can["faces"]:
-                for v in f:
-                    v[2] += dz
         moved.append("%s cord %+.0f mm" % (mid[5:], dz * 1000))
     if moved:
-        scene["notes"].append("Recessed fittings seated on the ceiling rendered above them (the lighting design assumed "
-                              "one height per room; for the Revit reconciliation): " + ", ".join(moved) + ".")
+        raise ValueError("Lighting spec does not match rendered ceiling: " + ", ".join(moved))
+    return moved
 
 
 def _unit(v):
@@ -1355,8 +1338,8 @@ def VIEWS(lay=None):
     v("v05-parents-bedroom", "Parents' bedroom", "evening", I, I, 24, ["pb-bed"], room="parents-bed",
       dimmers={"ambient": 0.3, "accent": 0.4, "task": 0.5})
     v("v06-kids-room", "Kids' room A", "day", I, I, 24, ["ka-bunk", "ka-desk-1"], room="kids-a")
-    v("v07-terrace-dusk", "Garden and terrace at dusk", "exterior-dusk", [28.2, -21.2, B + 1.6], [21.0, -26.4, B + 1.6],
-      20, ["terrace lounge set", "living-sofa"], shift_y=0.10, layers=["ambient", "task", "accent", "decorative"],
+    v("v07-terrace-dusk", "Garden and terrace at dusk", "exterior-dusk", [28.2, -21.2, B + 1.35], [21.0, -26.4, B + 1.35],
+      24, ["terrace lounge set", "living-sofa"], shift_y=0.10, layers=["ambient", "task", "accent", "decorative"],
       dimmers={"ambient": 0.5, "task": 0.4})
     v("v08-cinema", "Cinema: seating and screen", "evening", I, I, 24, ["cinema-sofa", "cinema-tv"], room="cinema")
     v("v09-dining-evening", "Dining and island at night", "evening", I, I, 24, ["dining-table", "k-island"],

@@ -34,7 +34,10 @@ def why(check, v):
     if c == "colour_cast" and st == "day":
         return "3000 K lamps on by day under a daylight white balance: the warmth is real"
     if c == "window_view":
-        return "the window looks onto a plain neighbouring wall with little detail"
+        # checked by ray-casting the v04 camera through the north study window: the villa's own boundary wall 9 m
+        # away below 1.1 m, open sky above; nothing beyond is modelled on that side
+        return ("through this window: the villa's own boundary wall 9 m away, then open sky; no neighbouring "
+                "building is modelled on that side (a site-context gap, not a finding about the design)")
     if c == "crushed_shadows":
         return "the room's dark areas are its specified lighting at the locked exposure"
     if c == "window_brightness" and v.get("exposure") == "exterior-day":
@@ -48,6 +51,12 @@ DECISIONS = [
     ("Parents' dressing door", "Recommended: 0.8 m door centred 0.1 m from the east wall, with a slim 0.35 m bedside "
      "table, so nothing stands in the opening (a 0.5 m table stood 0.23 m in it). A 0.8 m door is narrower than the "
      "0.9 m route used elsewhere: it needs your yes as a waiver for the private dressing area (ADR-0014)."),
+    ("Study windows in D2 and D3 too", "Your big low-sill study windows were applied to all three options (same "
+     "study); please confirm that D2 and D3 should follow D1 here."),
+    ("Dirty-kitchen fridge", "A full-height fridge replaces the cleaning-cupboard column; cleaning storage moves under "
+     "the folding counter. Recommended (you asked for appliances there); needs your yes."),
+    ("Bunk ladder", "A ladder on the open side of kids' room A's bunk (a bunk needs one); it is now part of the "
+     "furniture specification sent to Revit."),
     ("Stair structure", "Rendered with ASSUMED steel stringers, open risers and a bar balustrade; the model's treads "
      "stop 50-200 mm short of the party wall. To be designed and put into the Revit model."),
     ("Ramp soffit", "The parking model and the rendered ramp differ by up to 150 mm under the dirty kitchen; fittings "

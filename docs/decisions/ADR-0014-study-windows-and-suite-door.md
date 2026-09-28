@@ -2,7 +2,7 @@
 
 - **Status:** accepted client direction, pending Revit reconciliation
 - **Date:** 2026-09-27
-- **Applies to:** D1 concept and authored Revit specification
+- **Applies to:** D1 concept and authored Revit specification. The study windows were also changed in D2 and D3 (the same study): pending the client's confirmation for those options.
 
 ## Context
 
@@ -21,3 +21,14 @@ An intermediate version centred the door at 22.05 m; its leaf reached 53 mm into
 ## Consequences
 
 These changes alter the authored Revit specification, daylight scene and render shell. They require Revit model updates and read-back verification. The wider study glazing can change daylight, glare, privacy and cooling results; these must be re-evaluated against the real site and selected glazing. The door's clear approach and swing must be checked after Revit reconciliation.
+
+
+## Further changes after Gate A, pending the client's explicit yes (2026-09-28)
+
+- **Dirty-kitchen fridge.** A full-height integrated fridge replaces the cleaning-cupboard column; cleaning storage
+  moves under the folding counter (`villa_furnish.py`). Recommended by the design lead in answer to the client's
+  request for appliances in the dirty kitchen; not accepted until confirmed.
+- **Parents' bedside table 0.35 m** (was 0.5 m), so it stands clear of the dressing door opening.
+- **Bunk ladder** added to kids' room A's bunk in `villa_furnish3d.body`: the Revit furniture specification changes,
+  so the 5 mm read-back post-condition will differ from any model built before it.
+- **Study windows in D2 and D3** follow D1 (same study).

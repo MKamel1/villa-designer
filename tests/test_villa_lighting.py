@@ -6,8 +6,10 @@ from archpipe import photometry as ph
 from archpipe.concept import villa_furnish as F
 from archpipe.concept import villa_lighting as VL
 from archpipe.concept import villa_r11 as R
+from archpipe.concept import revit_spec as RS
 
 LAY = R.design("D1")
+SPEC = RS.build(LAY)
 FX = VL.design(LAY)
 
 
@@ -17,7 +19,30 @@ class ClientRules(unittest.TestCase):
         for f in FX:
             if f.layer == "ambient":
                 self.assertEqual(VL.KINDS[f.kind]["mount"], "recessed", f.id)
-                self.assertAlmostEqual(f.z, VL.ceiling_z(f.level, f.x, f.room), places=3, msg=f.id)
+                self.assertAlmostEqual(f.z, VL.ceiling_z(f.level, f.x, f.room, f.y, LAY, SPEC),
+                                       places=3, msg=f.id)
+
+    def test_cove_field_and_extension_roof_set_fitting_heights(self):
+        for f in FX:
+            if f.room in ("lounge", "living") and f.spec["mount"] == "recessed":
+                x0, y0, x1, y1 = F.clear_rect(LAY, f.room)
+                in_field = (x0 + VL.COVE_BAND < f.x < x1 - VL.COVE_BAND and
+                            y0 + VL.COVE_BAND < f.y < y1 - VL.COVE_BAND)
+                expected = VL.LEVEL_Z["B"] + (VL.COVE_FIELD if in_field else VL.CEILING)
+                self.assertAlmostEqual(f.z, expected, places=3, msg=f.id)
+            if f.room == "dirty-kitchen" and f.spec["mount"] == "recessed":
+                under_roof = any(x0 <= f.x <= x1 and y0 <= f.y <= y1
+                                 for x0, y0, x1, y1 in SPEC["roofs"])
+                if under_roof:
+                    self.assertAlmostEqual(f.z, -0.20, places=3, msg=f.id)
+                else:
+                    deck = SPEC["parking2"]["deck"]
+                    self.assertAlmostEqual(f.z, deck["z_top"] - deck["thick"], places=3, msg=f.id)
+
+    def test_stair_pendant_cords_start_at_the_slab(self):
+        for f in FX:
+            if f.room == "stair-gf" and f.kind == "PEN-GLOBE":
+                self.assertAlmostEqual(f.extra["hang_from"], VL.COVE_FIELD, places=3, msg=f.id)
 
     def test_pendants_are_task_or_centrepiece_only(self):
         for f in FX:
