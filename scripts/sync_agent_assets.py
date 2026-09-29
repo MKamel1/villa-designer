@@ -11,8 +11,13 @@ def main():
     ap.add_argument('--check', action='store_true')
     a = ap.parse_args()
     outputs = {}
-    for path in (ROOT/'.agents/skills').glob('*/SKILL.md'):
-        outputs[ROOT/'.claude/skills'/path.parent.name/'SKILL.md'] = path.read_text(encoding='utf-8')
+    # Copy every file of each skill, not only SKILL.md: skills link to their own templates and examples, and a
+    # SKILL.md-only copy left those links dangling in the Claude adapter (defect-learning, 2026-09-29).
+    for skill in (ROOT/'.agents/skills').glob('*/SKILL.md'):
+        for path in skill.parent.rglob('*'):
+            if path.is_file():
+                outputs[ROOT/'.claude/skills'/skill.parent.name/path.relative_to(skill.parent)] = \
+                    path.read_text(encoding='utf-8')
     for role in json.loads((ROOT/'agents/roles.json').read_text()):
         name, desc, instruction = role['name'], role['description'], role['instructions']
         outputs[ROOT/'.codex/agents'/(name+'.toml')] = (

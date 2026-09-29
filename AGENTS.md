@@ -25,6 +25,12 @@ bend the design to satisfy a camera, meter or check; and work in small
 packages with a checkpoint after diagnosis and after the first fix.
 Details: `.agents/skills/villa-render/SKILL.md`, "Integration discipline".
 
+Whenever anything is found wrong (client, reviewer, test, render, read-back,
+agent), follow `.agents/skills/defect-learning/SKILL.md`: capture, reproduce
+on the real case, find why it escaped, generalise to its class and siblings,
+prevent by construction before adding a fail-closed check, prove it fires,
+stays quiet and generalises, then register it.
+
 Update code/tests, the learning index, and affected workflows together
 when a demonstrated failure changes the operating procedure. Do not
 silently treat historical setup notes as current evidence.
