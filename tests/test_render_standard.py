@@ -5,6 +5,8 @@ villa scene departs from the parts the bedroom proved."""
 import unittest
 
 from archpipe.blender import grain
+from archpipe.concept import revit_spec as RS
+from archpipe.concept import villa_r11 as R
 from archpipe.concept import villa_render as VR
 
 SCENE = VR.build()
@@ -317,12 +319,17 @@ class RenderStandard(unittest.TestCase):
         self.assertIn("furn-pb-bedside-0", found)
 
     def test_doorway_guard_uses_the_leaf_actually_in_the_scene(self):
-        # The real D1 scene has no leaf at the new telescopic kitchen door, while the cinema door has one.
+        # The telescopic kitchen door's panels are stowed in the pocket, clear of its 1.2 m opening, so the v17
+        # doorway camera stands in a clear opening; the cinema door has a swinging leaf that must be hidden.
         from scripts import villa_render_views as views
         by = {v["id"]: v for v in SCENE["views"]}
-        kitchen = by["v17-dirty-kitchen"]
         cinema = by["v08-cinema"]
-        self.assertFalse(views.door_leaf_near(SCENE, *kitchen["camera"]["position"][:2]))
+        door = next(d for d in RS.build(R.design("D1"))["doors"] if set(d["rooms"]) == {"kitchen", "dirty-kitchen"})
+        lo, hi = door["x"] - door["width"] / 2, door["x"] + door["width"] / 2
+        for m in SCENE["meshes"]:
+            if m["id"].startswith("detail-pocket-panel"):
+                xs = [p[0] for f in m["faces"] for p in f]
+                self.assertTrue(max(xs) <= lo + 1e-6 or min(xs) >= hi - 1e-6, m["id"] + " stands in the opening")
         self.assertTrue(views.door_leaf_near(SCENE, *cinema["camera"]["position"][:2]))
         self.assertTrue(cinema.get("hide_meshes"), "the real cinema leaf must be hidden for its doorway view")
 

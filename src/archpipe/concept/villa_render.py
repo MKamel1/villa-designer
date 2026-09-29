@@ -769,7 +769,7 @@ def build(lay=None, views=None):
     dirty = it_all["dk-run"]
     hob = next((a, b) for kind, a, b in F3._local_modules(dirty) if kind == "hob")
     hx, hy, _ = FD.to_world_point(dirty, sum(hob) / 2, 0, 0, LZ["B"])
-    wall_y = lay["rooms"]["dirty-kitchen"]["rect"][3]
+    wall_y = F.clear_rect(lay, "dirty-kitchen")[3]   # finished wall face, not the room rect (the wall centre)
     # The duct terminates at the rendered soffit, which is lower under the
     # ramp than a room's nominal ceiling height.
     from . import render_support as SUP
@@ -1630,7 +1630,7 @@ def VIEWS(lay=None):
     V[-1]["caption_notes"] = ["The WC is in the corner beside the door, below and outside this frame: no standing "
                               "point holds basin, shower and WC together (checked by render_views.choose)."]
     v("v16-guest-wc", "Guest WC", "evening", I, I, 24, ["gwc-basin", "gwc-wc"], room="guest-wc")
-    v("v17-dirty-kitchen", "Dirty kitchen and laundry", "day", I, I, 24, ["dk-run"], room="dirty-kitchen",
+    v("v17-dirty-kitchen", "Dirty kitchen and laundry", "day", I, I, 24, ["dk-run", "dk-appliance-bank"], room="dirty-kitchen",
       **BASEMENT_DAY)
     # the rest of the ten more, for the final set (v15-v17 above are three of them)
     # a street elevation needs the site frontage modelled (from the street only the boundary wall showed, from the

@@ -385,7 +385,7 @@ def _d1_details(lay, spec):
     for room, fan, door_rooms, kind, rate, card, runon, undercut in (
             ("guest-wc", (10.1, -21.15, 2.45), ["family", "guest-wc"], "extract-fan", 6.0,
              "ukadf-sanitary-intermittent-6", 15, 0.010),
-            ("dirty-kitchen", (13.3, -21.15, 2.35), ["kitchen", "dirty-kitchen"], "cooker-hood-ducted", 30.0,
+            ("dirty-kitchen", (13.827, -20.881, 2.35), ["kitchen", "dirty-kitchen"], "cooker-hood-ducted", 30.0,
              "ukadf-kitchen-intermittent-hood-30", None, None)):
         x, y, z = fan
         spec["ventilation"].append(dict(id=room + "-extract", level="B", room=room, kind=kind,

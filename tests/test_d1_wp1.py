@@ -128,6 +128,19 @@ class RevitInputs(unittest.TestCase):
         screen = next(x for x in spec["bath_fittings"] if x["id"] == "pe-bath-screen")
         self.assertAlmostEqual(screen["entry_clear"], 0.8)
 
+    def test_dirty_kitchen_duct_rises_from_the_hood_chimney(self):
+        # Round-2 draft v17: the spec fan sat at x 13.30 while the hood (over dk-run's hob) is at x 13.827, so the
+        # rendered duct hung in the air beside the chimney. The fan must sit inside the chimney's 0.23 x 0.16 m box.
+        vent = next(v for v in RS.build(LAY)["ventilation"] if v["room"] == "dirty-kitchen")
+        run = next(i for i in F.layout(LAY) if i["id"] == "dk-run")
+        from archpipe.concept import villa_furniture_detail as FD
+        hob = next((a, b) for k, a, b in F3._local_modules(run) if k == "hob")
+        hx = FD.to_world_point(run, sum(hob) / 2, 0, 0, 0)[0]
+        wall_y = F.clear_rect(LAY, "dirty-kitchen")[3]   # finished face the chimney stands against
+        self.assertLessEqual(abs(vent["fan"][0] - hx), 0.115)
+        self.assertTrue(wall_y - 0.16 <= vent["fan"][1] <= wall_y)
+        self.assertGreater(abs(13.3 - hx), 0.115, "the draft's fan x (the real defect) lies outside the chimney")
+
     def test_bath_entry_steel_rail_and_dead_duct_fail_on_real_spec(self):
         spec = RS.build(LAY)
         next(x for x in spec["bath_fittings"] if x["id"] == "pe-bath-screen")["x1"] += 0.1

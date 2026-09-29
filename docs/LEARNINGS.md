@@ -825,3 +825,10 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
 - **An asset stand-in's native size is a claim to check, not a default.** Codex placed CC0 trees without a
   workstation to see them; the first render showed the error. The lead must render or measure every new asset
   before trusting a guard that reasons about it.
+- **The dirty-kitchen duct floated beside its hood.** Round-2 critic pass on the drafts (v17): the extract duct hung
+  at x 13.30 while the hood chimney (over dk-run's hob) stands at x 13.827. The spec's fan position was typed in
+  rather than derived from the hob, and the float guard passed it because the duct touches the external wall.
+  Guard: `tests/test_d1_wp1.py::test_dirty_kitchen_duct_rises_from_the_hood_chimney` (the old x fails it). The
+  same critic pass showed the fridge/oven bank in no view; v17 now names it as a subject. Critic claims were
+  checked against scene data first: the hatch, pocket door, wall handrail, hand shower and library glass all
+  exist, and those "missing" findings were misreadings of the drafts.
