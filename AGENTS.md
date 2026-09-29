@@ -17,6 +17,14 @@ inspect `out/bedroom-acceptance.json`; CLI exit zero alone is insufficient.
 Generated extracts are never hand-edited. The specification is authored
 input for the example; Revit supplies the geometry actually reviewed.
 
+Passing tests is not proof that a visible result is right. For anything a
+client will see (renders, drawings, models): produce a preview and have it
+reviewed before integration; measure external inputs (asset size, units,
+facing, licences) instead of trusting them; fix the design's cause, never
+bend the design to satisfy a camera, meter or check; and work in small
+packages with a checkpoint after diagnosis and after the first fix.
+Details: `.agents/skills/villa-render/SKILL.md`, "Integration discipline".
+
 Update code/tests, the learning index, and affected workflows together
 when a demonstrated failure changes the operating procedure. Do not
 silently treat historical setup notes as current evidence.

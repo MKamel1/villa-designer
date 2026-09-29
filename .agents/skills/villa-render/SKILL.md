@@ -109,6 +109,48 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
   output folder out) and run the guards before its first render. A street
   elevation needs the site frontage modelled first.
 
+## Integration discipline (generalised from the D1 round-3 failures)
+
+Round 3 shipped a dozen visual defects that every numeric guard passed: a
+sofa facing backwards, a trellis that read as a wall, flat mint "grass",
+smoky pendant globes, a mirror-like bath screen, slab clothes, box lamps,
+19 m trees, a bench as a black block, concrete-looking planters, blocked
+cameras, a pitch-black store. One root cause: **"the tests pass" was taken
+as "it looks right"**, and nobody looked at a new element until the full
+draft. The rules that follow from it apply to any new element, material,
+asset or view:
+
+1. **Look before you integrate.** Every new builder, material or imported
+   asset gets an isolated preview render (close-up, neutral light, a 1.8 m
+   scale figure) that the lead reviews BEFORE it joins the scene. A report of
+   "tests pass" without the preview image is not accepted.
+2. **No placeholder shapes in presentation renders.** A box, slab or flat
+   colour standing in for a plant, garment, lamp or trellis is a defect even
+   when labelled; if the real thing cannot be built, leave it out and say so.
+3. **External assets are claims, not facts.** Measure every downloaded
+   model's bounds, normalise its units, record its front axis and up axis,
+   and prove orientation and scale in the preview. Never trust native size,
+   units or facing.
+4. **Physics before looks.** Refractive glass is a closed solid with
+   thickness; emitters sit inside diffusers; materials carry textures at
+   real-world scale. Guard each of these as a geometric/data check.
+5. **Cameras need line of sight, not just framing.** Subjects in frame is not
+   enough: nothing (prop canopy, pot, wall edge, trellis) may stand between
+   the lens and its subjects, and the lens may not start inside or within
+   1.0 m of any object.
+6. **The design is fixed; cameras move.** Never move plants, furniture or
+   fittings to clear a camera, meter, or check. Move the camera, or record
+   that the view cannot be taken.
+7. **Every room meets its lighting card, stores included**, and windowless
+   rooms are shown at interior exposure with their own lights on.
+8. **Aesthetic briefs carry references.** Garden, joinery and furniture
+   briefs include reference images and a plan sketch approved by the lead
+   before building; words like "raised stone planter" alone produce
+   concrete blocks.
+9. **Small, checkpointed work packages.** One change area per agent job,
+   with a stop-and-report after diagnosis and after the first fix (with its
+   preview). Large batches hide defects until the end.
+
 ## Never
 
 Compensate with exposure, white balance or tone curves; add unlabelled
