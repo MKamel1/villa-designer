@@ -4,8 +4,9 @@
     (then revit/build_villa_option.py with ARCHPIPE_OPTIONS_SPEC / _OUT pointing there)
     PYTHONPATH=src python scripts/villa_furnish_build.py check   # the post-condition on readback.json; exit 1 on a problem
 
-The post-condition's tolerance (5 mm on every face of every element's box, categories exact, each Mark once, and
-every furniture check re-run on the as-built footprints) was fixed in villa_furnish3d.TOL before the first build.
+The post-condition uses 5 mm on every face of every element's box, exact categories, each Mark once, and
+re-runs furniture checks on the as-built footprints. D1 round-2 details, the wall hatch, study windows and suite
+door are also checked from the Revit read-back; villa_furnish3d.TOL was fixed before the first furnishing build.
 """
 import json
 import sys
@@ -25,15 +26,16 @@ def main():
         sp = RS.build(lay)
         sp["id"] = "D1F"
         sp["furniture"] = F3.spec(lay)
+        sp["round2_elements"] = F3.round2_elements(sp)
         (OUT / "options-spec.json").write_text(json.dumps([sp], indent=1), encoding="utf-8")
         print(OUT / "options-spec.json", len(sp["furniture"]), "elements")
         return 0
     rb = json.loads((OUT / "readback.json").read_text(encoding="utf-8"))["options"][0]
-    spec = json.loads((OUT / "options-spec.json").read_text(encoding="utf-8"))[0]["furniture"]
-    probs = F3.postcondition(spec, rb.get("furniture", []), lay)
-    fails = [f for f in rb["failed"] if "furniture" in f]
-    print("built:", rb["built"], "| furniture failures:", len(fails), "| other build failures:",
-          len(rb["failed"]) - len(fails))
+    spec = json.loads((OUT / "options-spec.json").read_text(encoding="utf-8"))[0]
+    probs = F3.postcondition(spec["furniture"], rb.get("furniture", []), lay)
+    probs += F3.round2_postcondition(spec, rb, lay)
+    fails = rb["failed"]
+    print("built:", rb["built"], "| build failures:", len(fails))
     for p in fails + probs:
         print("  FAIL", p)
     print("POST-CONDITION", "PASS" if not probs and not fails else "FAIL")

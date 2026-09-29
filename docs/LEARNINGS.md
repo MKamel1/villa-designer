@@ -845,3 +845,10 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   `tests/test_render_standard.py::BuriedFixtures` finds shell faces on the room side of a fixture within its span,
   and fails on the real old rail. The critic had called the rail missing; the scene data showed it existed and
   was hidden, so the fix is placement, not a new mesh.
+- **A Revit wall Opening has no Mark or Comments, and the tag writer skipped them silently.** D1F round-2 build:
+  the hatch Opening was built exactly (x 11.80-13.10, sill 1.0, head 2.1, correct host wall) but the
+  post-condition reported "opening built 0 times", because `stamp()` finds no Mark parameter and writes nothing,
+  and Revit 2027 names the category "Rectangular Straight Wall Opening". The synthetic read-back fixture had
+  assumed a Mark. Now the builder records `spec_id` and logs the missing tag, and the check accepts the real
+  category. Guard: `tests/test_d1_wp5.py::test_real_revit_opening_has_no_mark_and_is_matched_by_spec_id`, built
+  from the real read-back shape.

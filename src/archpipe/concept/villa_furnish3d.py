@@ -252,6 +252,210 @@ def _env(bs):
 TOL = 0.005        # PRE-REGISTERED 2026-09-27 before the first build: as-built boxes within 5 mm of the spec
 
 
+def round2_elements(sp):
+    """World-space Revit solids from the approved detail fields. Sizes absent from the intent are labelled ASSUMED."""
+    from . import revit_spec as RS
+    out = []
+
+    def add(mark, category, box, room=None, comment="", profile=None):
+        row = dict(mark=mark, category=category, bbox=[round(v, 4) for v in box], room=room,
+                   comments=comment)
+        if profile is not None:
+            row["profile"] = profile
+        out.append(row)
+
+    for p in sp.get("pocket_buildouts", []):
+        z = RS.LEVELS_Z[p["level"]]
+        y0 = p["y"] if p["extra_side"] == "dirty-kitchen" else p["y"] - p["thickness"]
+        add(p["id"], "Walls", [p["x0"], y0, z, p["x1"], y0 + p["thickness"], z + p["height"]],
+            comment="pocket buildout; thickness %.3f m" % p["thickness"])
+    for h in sp.get("hatches", []):
+        z = RS.LEVELS_Z[h["level"]]
+        b = h["shutter_box"]
+        add(h["id"] + "-shutter", "Generic Models", [b[0], b[1], z + b[2], b[3], b[4], z + b[5]],
+            comment=h["closure"])
+    for rail in sp.get("balustrades", []):
+        pts = rail["nosing_profile"]
+        thickness = rail.get("thickness_m")
+        assumed = thickness is None
+        if assumed:
+            thickness = 0.02 if rail["side"] == "open" else 0.04
+        for i, (a, b) in enumerate(zip(pts, pts[1:])):
+            z = RS.LEVELS_Z[rail["level"]]
+            profile = [[a[0], z + a[2]], [b[0], z + b[2]],
+                       [b[0], z + b[2] + rail["height_above_nosing"]],
+                       [a[0], z + a[2] + rail["height_above_nosing"]]]
+            y = a[1]
+            y0, y1 = (y - thickness, y) if rail["side"] == "open" else (y, y + thickness)
+            add("%s-%02d" % (rail["id"], i + 1), "Generic Models",
+                [min(a[0], b[0]), y0, min(v[1] for v in profile), max(a[0], b[0]), y1,
+                 max(v[1] for v in profile)], room="stair-b", comment="%s; %sthickness %.3f m%s" %
+                (rail["material"], "ASSUMED visual " if assumed else "", thickness,
+                 "; structural size pending" if assumed else ""), profile=profile)
+    for f in sp.get("bath_fittings", []):
+        z = RS.LEVELS_Z[f["level"]]
+        if f["kind"] == "fixed-frameless-glass":
+            box = [f["x0"], f["y"] - 0.01, z + f["sill"], f["x1"], f["y"] + 0.01, z + f["head"]]
+            comment = "fixed bath screen; ASSUMED 20 mm representation thickness"
+        elif f["kind"] == "ceiling-rain-head":
+            box = [f["x"] - 0.1, f["y"] - 0.1, z + f["z"] - 0.02,
+                   f["x"] + 0.1, f["y"] + 0.1, z + f["z"]]
+            comment = "rain head; ASSUMED 200 mm representation diameter"
+        else:
+            add(f["id"] + "-rail", "Generic Models",
+                [f["x"] - 0.015, f["y"] - 0.015, z + f["z"] - 0.4,
+                 f["x"] + 0.015, f["y"] + 0.015, z + f["z"] + 0.1], f["room"],
+                "hand shower rail; ASSUMED representation size")
+            add(f["id"] + "-head", "Generic Models",
+                [f["x"] - 0.05, f["y"] - 0.03, z + f["z"] + 0.04,
+                 f["x"] + 0.05, f["y"] + 0.03, z + f["z"] + 0.1], f["room"],
+                "hand shower head; ASSUMED representation size")
+            continue
+        add(f["id"], "Generic Models", box, f["room"], comment)
+    for vent in sp.get("ventilation", []):
+        z = RS.LEVELS_Z[vent["level"]]
+        x, y, h = vent["fan"]
+        x2, y2, h2 = vent["duct_route"][-1]
+        note = "%s; %.1f l/s; card %s" % (vent["kind"], vent["rate_ls"], vent["card"])
+        add(vent["id"] + "-fan", "Mechanical Equipment",
+            [x - 0.05, y - 0.05, z + h - 0.05, x + 0.05, y + 0.05, z + h + 0.05], vent["room"],
+            note + "; ASSUMED 100 mm representation size")
+        add(vent["id"] + "-duct", "Ducts",
+            [min(x, x2) - 0.04, min(y, y2) - 0.04, z + min(h, h2) - 0.04,
+             max(x, x2) + 0.04, max(y, y2) + 0.04, z + max(h, h2) + 0.04],
+            comment=note + "; ASSUMED 80 mm representation width")
+        add(vent["id"] + "-grille", "Mechanical Equipment",
+            [x2 - 0.06, y2 - 0.02, z + h2 - 0.06, x2 + 0.06, y2 + 0.02, z + h2 + 0.06],
+            comment=note + "; external grille; ASSUMED 120 mm representation size")
+    return out
+
+
+def round2_postcondition(sp, rb, lay):
+    """Measured detail boxes, opening and sliding leaf; 5 mm on each face and no column/room escape."""
+    from .. import villa_env as E
+    from . import revit_spec as RS
+    expected = round2_elements(sp)
+    got = {}
+    problems = []
+    for row in rb.get("details", []):
+        got.setdefault(row.get("mark"), []).append(row)
+    for item in expected:
+        mark = item["mark"]
+        rows = got.get(mark, [])
+        if len(rows) != 1:
+            problems.append("%s: built %d times" % (mark, len(rows)))
+            continue
+        row = rows[0]
+        if row.get("category") != item["category"]:
+            problems.append("%s: category %s, expected %s" % (mark, row.get("category"), item["category"]))
+        if row.get("comments") != item["comments"]:
+            problems.append("%s: Comments differ from approved detail" % mark)
+        if len(row.get("bbox_mm", [])) != 6:
+            problems.append("%s: missing measured world bbox" % mark)
+            continue
+        b = [v / 1000.0 for v in row["bbox_mm"]]
+        if max(abs(a - c) for a, c in zip(b, item["bbox"])) > TOL + 1e-8:
+            problems.append("%s: world bbox more than 5 mm from spec" % mark)
+        room = item["room"]
+        if room:
+            rect = lay["rooms"][room]["rect"]
+            if b[0] < rect[0] - TOL or b[1] < rect[1] - TOL or b[3] > rect[2] + TOL or b[4] > rect[3] + TOL:
+                problems.append("%s: leaves room %s" % (mark, room))
+        for col in E.COLUMNS:
+            x0, y0, x1, y1 = [v / 1000.0 for v in col]
+            if min(b[3], x1) - max(b[0], x0) > 0.001 and min(b[4], y1) - max(b[1], y0) > 0.001:
+                problems.append("%s: intersects structural column" % mark)
+                break
+    for mark in set(got) - {x["mark"] for x in expected}:
+        problems.append("%s: unplanned detail" % mark)
+    hatch = sp["hatches"][0]
+    # an Opening has no Mark parameter in Revit 2027; the builder records the spec id beside the element id
+    openings = [x for x in rb.get("hatches", []) if (x.get("mark") or x.get("spec_id")) == hatch["id"]]
+    if len(openings) != 1:
+        problems.append("%s: opening built %d times" % (hatch["id"], len(openings)))
+    else:
+        op = openings[0]
+        box = op.get("bbox_mm", [])
+        z = RS.LEVELS_Z[hatch["level"]]
+        line = op.get("host_line_mm", [])
+        host_matches = (len(line) == 2 and all(len(p) == 2 for p in line) and
+                        all(abs(p[1] / 1000.0 - hatch["y"]) <= TOL for p in line) and
+                        min(p[0] for p in line) / 1000.0 <= hatch["x0"] + TOL and
+                        max(p[0] for p in line) / 1000.0 >= hatch["x1"] - TOL)
+        # Revit 2027 names a wall opening's category "Rectangular Straight Wall Opening" and gives it no Mark or
+        # Comments parameters (measured 2026-09-28); the closure is then carried by the shutter-box detail.
+        tagless = op.get("mark") is None and op.get("comments") is None
+        if (op.get("category") not in ("Openings", "Rectangular Straight Wall Opening") or
+                (not tagless and op.get("comments") != hatch["closure"]) or
+                op.get("host_wall") != op.get("expected_host_wall") or
+                not host_matches or len(box) != 6 or max(abs(box[k] / 1000.0 - v) for k, v in
+                                     ((0, hatch["x0"]), (3, hatch["x1"]), (2, z + hatch["sill"]),
+                                      (5, z + hatch["head"]))) > TOL):
+            problems.append("%s: wrong wall or opening extent" % hatch["id"])
+    doors = [d for d in rb.get("doors", []) if set(d.get("rooms") or []) == {"kitchen", "dirty-kitchen"}]
+    if len(doors) != 1 or doors[0].get("width") is None or abs(doors[0]["width"] - 1.2) > TOL:
+        problems.append("kitchen/dirty-kitchen door: built width differs from 1.2 m")
+    elif (doors[0].get("mark") != "kitchen-dirty-sliding" or doors[0].get("category") != "Doors" or
+          "telescopic-pocket-3" not in (doors[0].get("comments") or "") or
+          len(doors[0].get("bbox_mm") or []) != 6):
+        problems.append("kitchen/dirty-kitchen door: Mark, category, Comments or bbox missing")
+    suite = next(d for d in sp["doors"] if set(d["rooms"]) == {"parents-bed", "parents-dressing"})
+    suite_rows = [d for d in rb.get("doors", []) if set(d.get("rooms") or []) == set(suite["rooms"])]
+    if len(suite_rows) != 1:
+        problems.append("parents' dressing door: built %d times" % len(suite_rows))
+    else:
+        door = suite_rows[0]
+        point = door.get("point_mm") or []
+        if (door.get("category") != "Doors" or len(door.get("bbox_mm") or []) != 6 or
+                door.get("width") is None or abs(door["width"] - suite["width"]) > TOL or
+                len(point) != 2 or abs(point[0] / 1000.0 - suite["x"]) > TOL):
+            problems.append("parents' dressing door: category, box, width or x differs from spec")
+    for window in (w for w in sp["windows"] if w.get("room") == "study-game"):
+        mark = "window-study-game-%.3f-%.3f" % (window["x"], window["y"])
+        rows = [w for w in rb.get("windows", []) if w.get("mark") == mark]
+        if len(rows) != 1:
+            problems.append("%s: built %d times" % (mark, len(rows)))
+            continue
+        row = rows[0]
+        if (row.get("category") != "Windows" or len(row.get("bbox_mm") or []) != 6 or
+                row.get("sill") is None or row.get("height") is None or row.get("width") is None or
+                abs(row["sill"] - window["sill"]) > TOL or
+                abs(row["height"] - window["height"]) > TOL or
+                abs(row["width"] - window["width"]) > TOL):
+            problems.append("%s: category, box or size differs from low-sill spec" % mark)
+    new_furniture = {"library-cabinet-left", "library-cabinet-right", "library-daybed", "library-end-panel",
+                     "cinema-desk", "cinema-desk#chair-1", "cinema-desk#chair-2", "dk-appliance-bank", "dk-fold",
+                     "k-island"}
+    furniture_spec = {x["mark"]: x for x in sp.get("furniture", [])}
+    furniture_built = {x["mark"]: x for x in rb.get("furniture", [])}
+    for mark in new_furniture:
+        item, row = furniture_spec.get(mark), furniture_built.get(mark)
+        if item is None or row is None:
+            problems.append("%s: approved furniture missing from spec or read-back" % mark)
+            continue
+        if not row.get("comments"):
+            problems.append("%s: Comments missing" % mark)
+        world = row.get("bbox_mm") or []
+        if len(world) != 6:
+            problems.append("%s: measured world bbox missing" % mark)
+        else:
+            z = RS.LEVELS_Z[item["level"]]
+            wanted = [item["envelope"][k] + (z if k in (2, 5) else 0) for k in range(6)]
+            if max(abs(world[k] / 1000.0 - wanted[k]) for k in range(6)) > TOL + 1e-8:
+                problems.append("%s: world bbox more than 5 mm from spec" % mark)
+        b = row["bbox"]
+        room = item["room"]
+        rect = lay["rooms"][room]["rect"]
+        if b[0] < rect[0] - TOL or b[1] < rect[1] - TOL or b[3] > rect[2] + TOL or b[4] > rect[3] + TOL:
+            problems.append("%s: leaves room %s" % (mark, room))
+        for col in E.COLUMNS:
+            x0, y0, x1, y1 = [v / 1000.0 for v in col]
+            if min(b[3], x1) - max(b[0], x0) > 0.001 and min(b[4], y1) - max(b[1], y0) > 0.001:
+                problems.append("%s: intersects structural column" % mark)
+                break
+    return problems
+
+
 def postcondition(spec_items, readback, lay=None):
     """Compare the model's read-back ([{mark, category, bbox: [x0, y0, z0, x1, y1, z1]}], z from the storey FFL)
     with the spec, then re-run every furniture check on the AS-BUILT footprints. Returns a list of problems."""

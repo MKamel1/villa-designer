@@ -72,6 +72,7 @@ CLEAR = [BuiltInCategory.OST_Walls, BuiltInCategory.OST_Doors, BuiltInCategory.O
          BuiltInCategory.OST_Furniture, BuiltInCategory.OST_FurnitureSystems, BuiltInCategory.OST_Casework,
          BuiltInCategory.OST_PlumbingFixtures, BuiltInCategory.OST_LightingFixtures,
          BuiltInCategory.OST_SpecialityEquipment, BuiltInCategory.OST_MechanicalEquipment,
+         BuiltInCategory.OST_DuctCurves,
          BuiltInCategory.OST_ElectricalFixtures, BuiltInCategory.OST_Ceilings, BuiltInCategory.OST_Rooms,
          BuiltInCategory.OST_GenericModel, BuiltInCategory.OST_CommunicationDevices]
 
@@ -223,6 +224,93 @@ FURN_BIC = {"furniture": BuiltInCategory.OST_Furniture, "casework": BuiltInCateg
 FURN_LABEL = {"OST_Furniture": "furniture", "OST_Casework": "casework", "OST_PlumbingFixtures": "plumbing",
               "OST_SpecialityEquipment": "equipment", "OST_GenericModel": "generic"}
 
+DETAIL_BIC = {"Walls": BuiltInCategory.OST_Walls, "Generic Models": BuiltInCategory.OST_GenericModel,
+              "Mechanical Equipment": BuiltInCategory.OST_MechanicalEquipment,
+              "Ducts": BuiltInCategory.OST_DuctCurves}
+
+
+def world_box_mm(el):
+    """Measure the saved element's world bounding box, in millimetres."""
+    bb = el.get_BoundingBox(None)
+    if bb is None:
+        return None
+    return [round(UnitUtils.ConvertFromInternalUnits(v, UnitTypeId.Millimeters), 1) for v in
+            (bb.Min.X, bb.Min.Y, bb.Min.Z, bb.Max.X, bb.Max.Y, bb.Max.Z)]
+
+
+def stamp(el, mark, comments):
+    for bip, value in ((BuiltInParameter.ALL_MODEL_MARK, mark),
+                       (BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS, comments)):
+        p = el.get_Parameter(bip)
+        if p is not None and not p.IsReadOnly:
+            p.Set(value)
+
+
+def measured_mark(el):
+    p = el.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)
+    return p.AsString() if p is not None else None
+
+
+def measured_comments(el):
+    p = el.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
+    return p.AsString() if p is not None else None
+
+
+def build_round2(doc, lv, spec, walls, rb):
+    """Build D1's pocket wall, wall hatch and shaped detail placeholders from the authored option spec."""
+    rb["details"], rb["hatches"] = [], []
+    for row in spec.get("round2_elements", []):
+        mark = row["mark"]
+        try:
+            cid = ElementId(DETAIL_BIC[row["category"]])
+            if not DirectShape.IsValidCategoryId(cid, doc):
+                raise ValueError("DirectShape category unavailable: %s" % row["category"])
+            el = DirectShape.CreateElement(doc, cid)
+            el.ApplicationId, el.ApplicationDataId = "archpipe-round2", mark
+            g = List[GeometryObject]()
+            if row.get("profile"):
+                b = row["bbox"]
+                g.Add(solid_prism_xz(row["profile"], b[1], b[4]))
+            else:
+                g.Add(solid_box([v * 1000 for v in row["bbox"]]))
+            el.SetShape(g)
+            el.Name = "D1 " + mark
+            stamp(el, mark, row.get("comments", ""))
+            doc.Regenerate()
+            rb["details"].append({"mark": measured_mark(el), "category": str(el.Category.Name),
+                                  "bbox_mm": world_box_mm(el), "element_id": int(str(el.Id)),
+                                  "comments": measured_comments(el)})
+        except Exception as exc:
+            rb["failed"].append({"detail": mark, "error": str(exc)})
+    for h in spec.get("hatches", []):
+        host = host_at(walls, spec["levels"][h["level"]], (h["x0"] + h["x1"]) / 2, h["y"])
+        if host is None:
+            rb["failed"].append({"hatch": h["id"], "error": "no host wall"})
+            continue
+        try:
+            base = lv[spec["levels"][h["level"]]].Elevation
+            op = doc.Create.NewOpening(host[0], XYZ(ft(h["x0"]), ft(h["y"]), base + ft(h["sill"])),
+                                       XYZ(ft(h["x1"]), ft(h["y"]), base + ft(h["head"])))
+            stamp(op, h["id"], h["closure"])
+            doc.Regenerate()
+            # Revit Openings carry no Mark/Comments parameter (stamp() finds none), so the spec id is recorded here
+            # and the missing tag is logged rather than silently lost (D1F round-2 build, 2026-09-28).
+            if measured_mark(op) is None:
+                note("%s: Opening has no Mark parameter; identified by spec_id and element id" % h["id"])
+            rb["hatches"].append({"spec_id": h["id"], "mark": measured_mark(op), "category": str(op.Category.Name),
+                                  "bbox_mm": world_box_mm(op),
+                                  "comments": measured_comments(op),
+                                  "host_wall": int(str(op.Host.Id)), "expected_host_wall": int(str(host[0].Id)),
+                                  "host_line_mm": [[round(UnitUtils.ConvertFromInternalUnits(v, UnitTypeId.Millimeters), 1)
+                                                    for v in (host[0].Location.Curve.GetEndPoint(k).X,
+                                                              host[0].Location.Curve.GetEndPoint(k).Y)]
+                                                   for k in (0, 1)],
+                                  "element_id": int(str(op.Id))})
+        except Exception as exc:
+            rb["failed"].append({"hatch": h["id"], "error": str(exc)})
+    rb["built"]["round2_details"] = len(rb["details"])
+    rb["built"]["hatches"] = len(rb["hatches"])
+
 
 def build_furniture(doc, lv, spec, rb):
     """Each piece of spec["furniture"] (concept/villa_furnish3d.py) as one DirectShape of boxes in the category of
@@ -247,6 +335,9 @@ def build_furniture(doc, lv, spec, rb):
             p = s.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)
             if p is not None and not p.IsReadOnly:
                 p.Set(f["mark"])
+            cp = s.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS)
+            if cp is not None and not cp.IsReadOnly:
+                cp.Set("%s; room %s; parts %s" % (f["type"], f["room"], ", ".join(f["parts"])))
         except Exception as exc:
             rb["failed"].append({"furniture": f["mark"], "error": str(exc)})
     doc.Regenerate()
@@ -261,8 +352,9 @@ def build_furniture(doc, lv, spec, rb):
             zl = UnitUtils.ConvertFromInternalUnits(lvl.Elevation, UnitTypeId.Millimeters) if lvl else 0.0
             bb = el.get_BoundingBox(None)
             mm = lambda v: UnitUtils.ConvertFromInternalUnits(v, UnitTypeId.Millimeters)   # noqa: E731
-            out.append({"mark": mark, "app_id": el.ApplicationDataId,
+            out.append({"mark": mark, "app_id": el.ApplicationDataId, "comments": measured_comments(el),
                         "category": FURN_LABEL.get(str(el.Category.BuiltInCategory), str(el.Category.Name)),
+                        "bbox_mm": world_box_mm(el),
                         "bbox": [round(mm(bb.Min.X) / 1000.0, 4), round(mm(bb.Min.Y) / 1000.0, 4),
                                  round((mm(bb.Min.Z) - zl) / 1000.0, 4), round(mm(bb.Max.X) / 1000.0, 4),
                                  round(mm(bb.Max.Y) / 1000.0, 4), round((mm(bb.Max.Z) - zl) / 1000.0, 4)]})
@@ -320,10 +412,24 @@ def build_option(app, model, spec, folder):
                 doc.Regenerate()
             inst = doc.Create.NewFamilyInstance(XYZ(ft(d["x"]), ft(d["y"]), lv[ln].Elevation), sym, h[0], lv[ln],
                                                 StructuralType.NonStructural)
+            mark = "kitchen-dirty-sliding" if set(d.get("rooms", [])) == set(["kitchen", "dirty-kitchen"]) else \
+                "door-%s-%s" % tuple(d.get("rooms", ["unknown", "unknown"]))
+            sliding_family = "slid" in sym.Family.Name.lower()
+            comments = "%s; %s leaves; panel %.3f m; pocket %s" % (
+                d.get("slide_type", "sliding"), d.get("leaf_count", 1), d.get("panel_width", d["width"]),
+                d.get("pocket_span")) if d.get("sliding") else "option door"
+            if d.get("sliding") and not sliding_family:
+                comments += "; sliding intent, nearest door-family proxy"
+            stamp(inst, mark, comments)
+            doc.Regenerate()
             w_, h_ = sym_dims(sym)
             rb.setdefault("doors", []).append({"level": d["level"], "x": d["x"], "y": d["y"], "rooms": d.get("rooms"),
                                                "width": w_, "height": h_, "family": sym.Family.Name,
-                                               "garden": bool(d.get("garden"))})
+                                               "garden": bool(d.get("garden")), "mark": measured_mark(inst),
+                                               "category": str(inst.Category.Name), "bbox_mm": world_box_mm(inst),
+                                               "point_mm": [round(UnitUtils.ConvertFromInternalUnits(v, UnitTypeId.Millimeters), 1)
+                                                            for v in (inst.Location.Point.X, inst.Location.Point.Y)],
+                                               "comments": measured_comments(inst)})
             nd += 1
         except Exception as exc:
             rb["failed"].append({"door": d, "error": str(exc)})
@@ -343,6 +449,8 @@ def build_option(app, model, spec, folder):
             p = inst.get_Parameter(BuiltInParameter.INSTANCE_SILL_HEIGHT_PARAM)
             if p is not None and not p.IsReadOnly:
                 p.Set(ft(wdw["sill"]))
+            wmark = "window-%s-%.3f-%.3f" % (wdw.get("room", "unknown"), wdw["x"], wdw["y"])
+            stamp(inst, wmark, "sill %.3f m; head %.3f m" % (wdw["sill"], wdw["sill"] + wdw["height"]))
             doc.Regenerate()
             w_, h_ = sym_dims(sym)                     # as BUILT (read-back), not the spec echoed
             sill = None
@@ -350,12 +458,21 @@ def build_option(app, model, spec, folder):
                 sill = round(UnitUtils.ConvertFromInternalUnits(p.AsDouble(), UnitTypeId.Millimeters) / 1000.0, 3)
             rb.setdefault("windows", []).append({"room": wdw.get("room"), "level": wdw["level"], "x": wdw["x"],
                                                  "y": wdw["y"], "width": w_, "height": h_, "sill": sill,
-                                                 "family": sym.Family.Name})
+                                                 "family": sym.Family.Name, "mark": measured_mark(inst),
+                                                 "category": str(inst.Category.Name), "bbox_mm": world_box_mm(inst),
+                                                 "point_mm": [round(UnitUtils.ConvertFromInternalUnits(v, UnitTypeId.Millimeters), 1)
+                                                              for v in (inst.Location.Point.X, inst.Location.Point.Y)],
+                                                 "comments": measured_comments(inst)})
             nw += 1
         except Exception as exc:
             rb["failed"].append({"window": wdw, "error": str(exc)})
     rb["built"]["doors"], rb["built"]["windows"] = nd, nw
     t.Commit()
+
+    if spec.get("round2_elements") or spec.get("hatches"):
+        t = tx(doc, "D1 round 2 details")
+        build_round2(doc, lv, spec, walls, rb)
+        t.Commit()
 
     t = tx(doc, "stair and slab opening")
     cid = ElementId(BuiltInCategory.OST_Stairs)
