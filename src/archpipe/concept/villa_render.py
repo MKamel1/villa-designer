@@ -480,7 +480,9 @@ def build(lay=None, views=None):
              label="ASSUMED visible polished laminated-glass top edge")
     sloped_member("detail-stair-glass-shoe", open_y - 0.065, open_y - 0.025, -0.04, 0.06,
                   "ASSUMED steel base shoe on open stringer")
-    sloped_member("detail-stair-wall-handrail", wall_y + 0.06, wall_y + 0.09, 0.922, 0.044,
+    # on the bracket ends (wall_y + 0.325): the finished plaster beside the flight is at wall_y + 0.20 (-28.471),
+    # and the old offset (+0.06..0.09) buried the rail inside it (round-2 finals, v11)
+    sloped_member("detail-stair-wall-handrail", wall_y + 0.285, wall_y + 0.325, 0.922, 0.044,
                   "wall-side wood handrail %.2f m above nosings" % rail_spec["height_above_nosing"], "oak")
     notes.append("Details added for the render: fluted walnut TV wall, oak headboard slats, glass guard at the stair "
                  "opening, cove ceilings.")

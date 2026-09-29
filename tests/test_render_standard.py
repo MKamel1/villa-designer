@@ -627,6 +627,38 @@ class RenderStandard(unittest.TestCase):
             self.assertFalse(hang_ok(old, 0.11), c["id"] + ": window-line offset should fail this guard")
 
 
+def buried_behind_walls(scene, mesh_id, axis=1):
+    """Wall faces (constant `axis` coordinate, shell group) that the mesh's own span overlaps and that lie on the
+    room side of the mesh: a fixture behind such a face is inside the wall and never renders."""
+    m = next(x for x in scene["meshes"] if x["id"] == mesh_id)
+    pts = [q for f in m["faces"] for q in f]
+    lo = [min(q[k] for q in pts) for k in range(3)]
+    hi = [max(q[k] for q in pts) for k in range(3)]
+    out = []
+    for w in scene["meshes"]:
+        if w["group"] != "shell":
+            continue
+        for f in w["faces"]:
+            c = [q[axis] for q in f]
+            if max(c) - min(c) > 1e-4:
+                continue
+            o = [k for k in range(3) if k != axis]
+            if all(min(q[k] for q in f) < hi[k] - 0.05 and max(q[k] for q in f) > lo[k] + 0.05 for k in o)                     and lo[axis] < c[0] < hi[axis] + 0.5 and c[0] > hi[axis] - 1e-6:
+                out.append((w["id"], round(c[0], 3)))
+    return out
+
+
+class BuriedFixtures(unittest.TestCase):
+    def test_stair_wall_handrail_stands_in_front_of_the_plaster(self):
+        # Round-2 finals v11: the rail sat at y -28.611..-28.581 while the finished plaster beside the flight is at
+        # -28.471, so it rendered inside the wall and only its brackets showed.
+        self.assertEqual(buried_behind_walls(SCENE, "detail-stair-wall-handrail"), [])
+        old = {"meshes": [dict(id="old-rail", group="fixture", faces=[[[5.317, -28.611, 0.70], [9.517, -28.611, -1.95],
+                                                                        [9.517, -28.581, -1.95], [5.317, -28.581, 0.70]]])]
+               + [m for m in SCENE["meshes"] if m["group"] == "shell"]}
+        self.assertTrue(buried_behind_walls(old, "old-rail"), "the real buried rail must be caught")
+
+
 class WoodGrainMapping(unittest.TestCase):
     """Client 2026-09-28: stair tread wood (v11-stair-void.png) and the ensuite vanity front (v12-ensuite.png)
     both read as long smeared streaks -- "annoyingly fake". Cause, confirmed against a real Blender 4.2.9 import

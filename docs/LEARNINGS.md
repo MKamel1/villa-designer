@@ -579,6 +579,12 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
 
 ## D1 furniture in Revit (Phase 2, 2026-09-27)
 
+### D1 round-2 native detail payload (2026-09-28)
+
+- **The option spec listed approved details that the Revit builder ignored.** Doors, windows and furniture had a build path, while `hatches`, `pocket_buildouts`, `balustrades`, `bath_fittings` and `ventilation` did not. `villa_furnish_build.py spec` now includes `round2_elements`, derived from those fields; `build_villa_option.py` creates a Walls-category pocket buildout, a native wall Opening and tagged detail solids. `villa_furnish3d.round2_postcondition` checks measured world boxes, categories, the host wall, the 1.2 m door, suite door, study windows and structural columns. `tests/test_d1_wp5.py` moves the real-spec hatch, shortens the door, removes a grille, moves a glass panel and raises a study sill to prove the guard fails.
+- **A placeholder size is not structural design.** The stair spec leaves laminated-glass thickness `null`. The native detail payload uses a 20 mm representation and writes `ASSUMED` in Comments; the lead must replace it after structural sizing. Fitting and ventilation proxy sizes are likewise labelled. The option spec still has no lighting fixture records, so corrected fitting heights in `villa_lighting` cannot be reconciled by this Revit option build.
+- **The first open-side glass extrusion projected outside the stair room.** Its nosing line is the room edge; adding thickness toward positive y put the entire 20 mm panel into the adjacent room. The payload now puts that thickness inside `stair-b`; the room check and `test_glass_panel_outside_stair_room_fails` catch the old direction.
+
 - **A run's modules overran the run.** Building the dirty kitchen in 3D, its modules added up to 3.64 m on a 3.60 m
   run; the 2D plan drew them and the landing check measured them without noticing. Guard: the kitchen check
   requires modules to fill their run to 1 mm (`test_modules_must_fill_their_run`, proven on the real 3.64 m).
@@ -832,3 +838,10 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   same critic pass showed the fridge/oven bank in no view; v17 now names it as a subject. Critic claims were
   checked against scene data first: the hatch, pocket door, wall handrail, hand shower and library glass all
   exist, and those "missing" findings were misreadings of the drafts.
+- **The stair's wall handrail was buried in the plaster.** Round-2 finals (v11): only the rail's brackets showed.
+  The stair details take `wall_y` = -28.671 (the party-wall line), but the finished plaster beside the flight is
+  at -28.471; the rail was offset 60-90 mm from the party-wall line, so it sat 0.11-0.14 m inside the wall. This is
+  the same class as the dirty-kitchen chimney (room rect or structural line taken for the finished face). Guard:
+  `tests/test_render_standard.py::BuriedFixtures` finds shell faces on the room side of a fixture within its span,
+  and fails on the real old rail. The critic had called the rail missing; the scene data showed it existed and
+  was hidden, so the fix is placement, not a new mesh.
