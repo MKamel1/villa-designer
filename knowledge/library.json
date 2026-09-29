@@ -5190,6 +5190,426 @@
       "exceptions": null,
       "verification": "Read on the held original page 2026-09-28 (table row checked).",
       "applies_when": {}
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "neufert",
+      "edition": "2nd (International) English ed., 1980, reprinted to 1998 (Blackwell Science, ISBN 0-632-02339-2)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Neufert 'Wardrobes' text, Storage in Houses & Flats: effective depth of a built-in cupboard for hanging clothes.",
+      "id": "neufert-wardrobe-hanging-depth-600",
+      "locator": "printed page 73 (Habitat/Houses), PDF page index 84",
+      "summary": "Built-in cupboard clothes-hanging depth: 600 mm.",
+      "verified_value": 600
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "neufert",
+      "edition": "2nd (International) English ed., 1980, reprinted to 1998 (Blackwell Science, ISBN 0-632-02339-2)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Neufert 'Wardrobes' text: walk-in cupboard door width; USA gives 610 mm minimum, 660 mm preferred.",
+      "id": "neufert-walkin-door-min-550",
+      "locator": "printed page 73 (Habitat/Houses), PDF page index 84",
+      "summary": "Walk-in cupboard door width: 550 mm (USA minimum 610 mm, 660 mm preferred).",
+      "verified_value": 550
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Interior Design, Closets/Storage Areas, Reach-in closet: minimum front-to-back depth of space for hanging clothes.",
+      "id": "ts-closet-reachin-depth-610",
+      "locator": "printed page 216, PDF page index 236",
+      "summary": "Reach-in closet minimum front-to-back depth for hanging clothes: 610 mm (24 in).",
+      "verified_value": 610
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Interior Design, Closets/Storage Areas: minimum clearance between a hanging garment and the storage shelf, or between opposite garments, in a walk-in closet.",
+      "id": "ts-closet-walkin-clearance-914",
+      "locator": "printed page 216, PDF page index 236",
+      "summary": "Walk-in closet minimum clearance between hanging garments/shelf: 914 mm (36 in).",
+      "verified_value": 914
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Interior Design, Closets/Storage Areas: HUD Minimum Property Standards (1973) double-occupancy bedroom closet minimum dimensions, 24 in by 60 in (depth x rod length).",
+      "id": "ts-closet-hud-double-1524",
+      "locator": "printed page 217, PDF page index 237",
+      "summary": "HUD (1973) double-occupancy bedroom closet minimum rod length: 1524 mm (60 in), at 610 mm (24 in) depth.",
+      "verified_value": 1524
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Interior Design, Closets/Storage Areas, Types of Closets: average rod space per garment, women's clothing.",
+      "id": "ts-rod-space-womens-51",
+      "locator": "printed page 218, PDF page index 238",
+      "summary": "Rod space per garment, women's clothing: about 51 mm (2 in).",
+      "verified_value": 51
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Interior Design, Closets/Storage Areas, Types of Closets: average rod space per garment, men's clothing.",
+      "id": "ts-rod-space-mens-57",
+      "locator": "printed page 218, PDF page index 238",
+      "summary": "Rod space per garment, men's clothing: about 57 mm (2 1/4 in).",
+      "verified_value": 57
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Interior Design, Closets/Storage Areas, Types of Closets: average rod space per garment, heavy coats.",
+      "id": "ts-rod-space-coats-102",
+      "locator": "printed page 218, PDF page index 238",
+      "summary": "Rod space per garment, heavy coats: about 102 mm (4 in).",
+      "verified_value": 102
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Interior Design, Closets/Storage Areas, Types of Closets: recommended rod height for long robes (long-hang garments).",
+      "id": "ts-rod-height-longrobe-1727",
+      "locator": "printed page 218, PDF page index 238",
+      "summary": "Recommended closet rod height, long robes/long-hang garments: 1727 mm (68 in).",
+      "verified_value": 1727
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "time-saver-interior",
+      "edition": "2nd ed. (McGraw-Hill, ISBN 978-0-07-134616-0)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Interior Design, Closets/Storage Areas, Types of Closets: recommended rod height for adult clothing (standard single hang).",
+      "id": "ts-rod-height-adult-1600",
+      "locator": "printed page 218, PDF page index 238",
+      "summary": "Recommended closet rod height, adult clothing: 1600 mm (63 in).",
+      "verified_value": 1600
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "unit": "mm",
+      "verification": "Read from the page image 2026-09-29 (Figure 21.13a/b are dimensioned drawings with no embedded text layer; caption and figure number re-checked against the held original).",
+      "conditions": "Metric Handbook, Hotels chapter, Figure 21.13 'Space requirements for hotel bedroom furniture', panel (a) 'Wardrobe front - per person' and (b) 'Wardrobe plan': plan width per person. Hotel bedroom wardrobe standard; applied here as a per-person hanging-width allowance.",
+      "id": "mh-wardrobe-per-person-width-500",
+      "locator": "Figure 21.13, printed page 21-11, PDF page index 434",
+      "summary": "Hotel wardrobe hanging width per person: 500 mm (plan), 550 mm depth, 1750 mm rail-zone height, 1850 mm overall height.",
+      "verified_value": 500
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "metric-handbook",
+      "edition": "7th ed., 2022 (Routledge)",
+      "unit": "mm",
+      "verification": "Read from the page image 2026-09-29 (Figure 21.13e/f are dimensioned drawings with no embedded text layer; caption and figure number re-checked against the held original).",
+      "conditions": "Metric Handbook, Hotels chapter, Figure 21.13 'Space requirements for hotel bedroom furniture', panel (e) 'Drawer unit front': one drawer front should be 130 mm deep, the remainder 100 mm deep, in a 450 x 300 mm plan footprint.",
+      "id": "mh-drawer-front-depth-130",
+      "locator": "Figure 21.13, printed page 21-11, PDF page index 434",
+      "summary": "Hotel bedroom drawer unit: one drawer front 130 mm deep, remainder 100 mm deep; plan 450 x 300 mm.",
+      "verified_value": 130
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "neufert",
+      "edition": "2nd (International) English ed., 1980, reprinted to 1998 (Blackwell Science, ISBN 0-632-02339-2)",
+      "unit": "mm",
+      "verification": "Read from the page image 2026-09-29 (Fig. 6 'Dimensions of clothes' dimension labels are part of the drawing; the caption text 'Dimensions of clothes' is re-checked against the held original text layer).",
+      "conditions": "Neufert Fig. 6 'Dimensions of clothes': hang length (rail to hem) for women's dresses is 1450-1600 mm; women's & driving coats 1350-1450 mm; men's suits (jacket) drop 850 mm.",
+      "id": "neufert-longhang-drop-1600",
+      "locator": "Fig. 6 'Dimensions of clothes', printed page 74 (Habitat/Houses), PDF page index 85",
+      "summary": "Long-hang drop, women's dresses: 1450-1600 mm (max 1600 mm cited); coats 1350-1450 mm; men's suits 850 mm.",
+      "verified_value": 1600
+    },
+    {
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "unit": "lx",
+      "verification": "Read on the held original page 2026-09-29 (row, 25-65 column, plane checked).",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh (no plane note given for this row; general bathroom task); observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-bathroom-toilet-100",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Bathroom toilets and bidets: 100 lx Eh, 30 lx Ev.",
+      "verified_value": 100
+    },
+    {
+      "stages": [
+        5
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "ies-handbook",
+      "edition": "10th ed., 2011 (IES, ISBN 978-0-87995-241-9)",
+      "unit": "lx",
+      "verification": "Read on the held original page 2026-09-29 (row, 25-65 column, plane checked).",
+      "conditions": "IES Table 33.2 Residential Facilities Illuminance Recommendations: recommended MAINTAINED illuminance, Eh at 3 ft (0.91 m), Ev at 5 ft (1.52 m); observers: at least half aged 25-65; average over the area of coverage. Consensus recommendation (US practice), guidance not code.",
+      "id": "ies-res-bathroom-vanity-casual-200",
+      "locator": "Table 33.2, printed page 33.8 (PDF page index 1118)",
+      "summary": "Bathroom vanity, casual inspection: 200 lx Eh, 200 lx Ev.",
+      "verified_value": 200
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "landscape-timesaver",
+      "edition": "2nd ed., 1998 (McGraw-Hill)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Landscape Architecture, 3.3 Ramps, Widths: one-way pedestrian travel minimum clear width. Cited here as the minimum for a single-person garden path.",
+      "id": "lts-path-width-oneway-900",
+      "locator": "printed page 340-9, PDF page index 252",
+      "summary": "Minimum clear width, one-way pedestrian travel (ramp/path): 900 mm (3 ft).",
+      "verified_value": 900
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "landscape-timesaver",
+      "edition": "2nd ed., 1998 (McGraw-Hill)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (paragraph text, value and unit checked).",
+      "conditions": "Time-Saver Standards for Landscape Architecture, 3.3 Ramps, Widths: two-way pedestrian travel minimum clear width. Cited here as the minimum for a two-person-wide garden path.",
+      "id": "lts-path-width-twoway-1500",
+      "locator": "printed page 340-9, PDF page index 252",
+      "summary": "Minimum clear width, two-way pedestrian travel (ramp/path): 1500 mm (5 ft).",
+      "verified_value": 1500
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "landscape-timesaver",
+      "edition": "2nd ed., 1998 (McGraw-Hill)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (summary bullet list, value and unit checked).",
+      "conditions": "Time-Saver Standards for Landscape Architecture, 3.4 Seating Criteria summary: seatwalls/bench seat width, minimum of the typical range.",
+      "id": "lts-seatwall-width-400",
+      "locator": "printed page 340-11 (summary bullets, item 6), PDF page index 254",
+      "summary": "Outdoor seatwall/bench width: typically 400 to 450 mm (16 to 18 in).",
+      "verified_value": 400
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "landscape-timesaver",
+      "edition": "2nd ed., 1998 (McGraw-Hill)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (summary bullet list, value and unit checked).",
+      "conditions": "Time-Saver Standards for Landscape Architecture, 3.4 Seating Criteria summary: seatwalls/bench seat height, minimum of the typical range.",
+      "id": "lts-seatwall-height-350",
+      "locator": "printed page 340-11 (summary bullets, item 6), PDF page index 254",
+      "summary": "Outdoor seatwall/bench height: typically 350 to 450 mm (14 to 18 in).",
+      "verified_value": 350
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "landscape-timesaver",
+      "edition": "2nd ed., 1998 (McGraw-Hill)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (summary bullet list, value and unit checked).",
+      "conditions": "Time-Saver Standards for Landscape Architecture, summary bullets: outdoor stairway riser minimum.",
+      "id": "lts-outdoor-riser-min-115",
+      "locator": "printed page 340-11 (summary bullets, item 3), PDF page index 254",
+      "summary": "Outdoor stairway riser: minimum 115 mm (4.5 in).",
+      "verified_value": 115
+    },
+    {
+      "stages": [
+        4
+      ],
+      "category": "professional_recommendation",
+      "status": "verified",
+      "original_page_checked": true,
+      "exceptions": "",
+      "applies_when": {},
+      "regression_test": "tests/test_evidence_values.py",
+      "source_id": "landscape-timesaver",
+      "edition": "2nd ed., 1998 (McGraw-Hill)",
+      "unit": "mm",
+      "verification": "Read on the held original page 2026-09-29 (summary bullet list, value and unit checked).",
+      "conditions": "Time-Saver Standards for Landscape Architecture, summary bullets: outdoor stairway riser maximum (175 mm/7 in under utilitarian circumstances).",
+      "id": "lts-outdoor-riser-max-150",
+      "locator": "printed page 340-11 (summary bullets, item 3), PDF page index 254",
+      "summary": "Outdoor stairway riser: maximum 150 mm (6 in); 175 mm (7 in) under utilitarian circumstances.",
+      "verified_value": 150
     }
   ],
   "precedents": [

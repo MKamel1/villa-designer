@@ -44,3 +44,7 @@ villa_*_guidelines_images/
 # Books and standards dropped by the client: licensed originals, never committed.
 # scripts/sources.py intake files them into the private store (ARCHPIPE_SOURCES).
 sources/
+
+# local secrets and manual downloads (never commit)
+sketchfab-api.txt
+assets-incoming/
