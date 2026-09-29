@@ -55,18 +55,75 @@ class LandscapeGuards(unittest.TestCase):
         self.assertTrue(L.swing_violations(swing, [chair]))
         self.assertEqual(L.swing_violations(swing, [swing] + self.plan["objects"]), [])
 
-    def test_source_labels_and_drift_counts(self):
+    def test_source_labels_and_bed_population(self):
+        # Every plant carries a real care URL (round3 plant-palette.json or the
+        # supplementary EXTRA_CARE fetch, both real sources -- never invented).
         for p in self.plan["plants"]:
             self.assertIn("care: https://", p["label"])
-            self.assertIn("ASSUMED", p["label"] if p["species"] == "Duranta erecta" else "ASSUMED")
-        for bed in ("north", "west", "east", "south", "top-deck", "top-roof"):
-            self.assertEqual(sum(p["bed"] == bed for p in self.plan["plants"]), 3)
+        # The v17 design's thin "3 per bed, one species" beds are gone: every
+        # ground bed now carries a full layered border (>= 7 plants for the
+        # 3-layer beds; south's 2-layer bed still carries 7 given its accent).
+        counts = {bed: sum(p["bed"] == bed for p in self.plan["plants"])
+                  for bed in ("north", "east", "west", "south")}
+        for bed, n in counts.items():
+            self.assertGreaterEqual(n, 7, "%s bed only has %d plants" % (bed, n))
+        # Two ground-level shade specimens (east, south) plus the potted
+        # lemon (landscape-tree-*); the top-garden olive is a separate
+        # landscape-top-olive prop. None is the old mislabelled tree_small_02
+        # stand-in (see test_standin_real_and_old_mislabelled_tree_fails).
         self.assertEqual(len([p for p in self.props if p["id"].startswith("landscape-tree-")]), 3)
+        self.assertTrue(any(p["id"] == "landscape-top-olive" for p in self.props))
         self.assertEqual(len([p for p in self.props if p["id"].startswith("landscape-top-bench-")]), 2)
         self.assertFalse(any("lounge" in m["label"].lower() for m in self.meshes))
-        self.assertEqual(len([m for m in self.meshes if m["id"].startswith("landscape-sofa-")]), 1)
-        self.assertTrue(any("artificial-grass" == m["material"] for m in self.meshes))
         self.assertEqual(set(self.plan["paths"]), {"dining", "living-north", "living-east", "lounge-west", "study"})
+
+    def test_bistro_is_the_real_asset_not_a_box_proxy(self):
+        bistro = next(p for p in self.props if p["asset"] == "outdoor_table_chair_set_01")
+        self.assertEqual(bistro["scale"], 1.0)
+        # The legacy view-subject marker is a flat grass-material quad, not a
+        # second copy of the table/chairs -- no "teak"/"bistro-table" box mesh.
+        self.assertEqual(len([m for m in self.meshes if m["id"].startswith("landscape-sofa-")]), 1)
+        self.assertEqual(
+            next(m for m in self.meshes if m["id"].startswith("landscape-sofa-"))["material"],
+            "artificial-grass")
+        self.assertFalse(any(m["material"] == "teak" for m in self.meshes))
+
+    def test_layers_real_and_old_single_row_bed_fails(self):
+        # Positive: today's north/east/west beds each show 3 real layers.
+        self.assertEqual(L.layer_violations(self.plan["plants"]), [])
+        # Negative, on the real v17 reproduction: a single-row bed (one
+        # layer, "mid", as the old Duranta/Hibiscus beds were) fails.
+        draft = [dict(id="old-a", bed="north", layer="mid", spread_m=.8, center=(24.65, -20.88)),
+                 dict(id="old-b", bed="north", layer="mid", spread_m=.8, center=(25.55, -20.88)),
+                 dict(id="old-c", bed="north", layer="mid", spread_m=.8, center=(26.45, -20.88))]
+        self.assertEqual(L.layer_violations(draft, beds=("north",)), [("north", ["mid"])])
+
+    def test_drift_real_and_old_alternation_fails(self):
+        # Positive: today's back/mid/front layers each carry a real drift.
+        self.assertEqual(L.drift_violations(self.plan["plants"]), [])
+        # Negative: a west-mid layer with only 2 Ixora (as if the drift had
+        # been thinned back towards the v17 count) fails the >= 3 rule.
+        draft = [dict(id="d-a", bed="west", layer="mid", species="Ixora coccinea"),
+                 dict(id="d-b", bed="west", layer="mid", species="Ixora coccinea")]
+        self.assertEqual(L.drift_violations(draft), [("west", "mid", "Ixora coccinea", 2)])
+
+    def test_standin_real_and_old_mislabelled_tree_fails(self):
+        # Positive: nothing in today's build uses the tree_small_02 stand-in
+        # (it was dropped entirely -- see build()'s notes).
+        self.assertEqual(L.standin_violations(self.props), [])
+        # Negative, the real v17 defect: tree_small_02 (a generic small tree
+        # with no species credit) labelled as Bauhinia variegata with no
+        # "stand-in" disclosure at all.
+        draft = [dict(id="old-north-tree", asset="tree_small_02",
+                      label="dressing: Bauhinia variegata; care: https://example/ (round3); "
+                            "nursery height 2.55 m ASSUMED")]
+        self.assertEqual(L.standin_violations(draft),
+                         [("old-north-tree", "tree_small_02 used for a named species without a "
+                                             "stand-in disclosure")])
+        # A properly disclosed stand-in (this build's own convention) stays quiet.
+        disclosed = [dict(id="ok-tree", asset="tree_small_02",
+                          label="dressing: ASSUMED visual stand-in; Bauhinia variegata; care: https://x")]
+        self.assertEqual(L.standin_violations(disclosed), [])
 
 
 if __name__ == "__main__":
