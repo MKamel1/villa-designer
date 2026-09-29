@@ -226,7 +226,8 @@ FURN_LABEL = {"OST_Furniture": "furniture", "OST_Casework": "casework", "OST_Plu
 
 DETAIL_BIC = {"Walls": BuiltInCategory.OST_Walls, "Generic Models": BuiltInCategory.OST_GenericModel,
               "Mechanical Equipment": BuiltInCategory.OST_MechanicalEquipment,
-              "Ducts": BuiltInCategory.OST_DuctCurves}
+              "Ducts": BuiltInCategory.OST_DuctCurves, "Casework": BuiltInCategory.OST_Casework,
+              "Lighting Fixtures": BuiltInCategory.OST_LightingFixtures}
 
 
 def world_box_mm(el):
@@ -310,6 +311,35 @@ def build_round2(doc, lv, spec, walls, rb):
             rb["failed"].append({"hatch": h["id"], "error": str(exc)})
     rb["built"]["round2_details"] = len(rb["details"])
     rb["built"]["hatches"] = len(rb["hatches"])
+
+
+def build_round3(doc, spec, rb):
+    """Build and measure the D1 nook fixtures, dressing modules and cut storage bodies."""
+    rb["round3_details"] = []
+    for row in spec.get("round3_elements", []):
+        mark = row["mark"]
+        try:
+            cid = ElementId(DETAIL_BIC[row["category"]])
+            fallback = row["category"] == "Lighting Fixtures" and not DirectShape.IsValidCategoryId(cid, doc)
+            if fallback:
+                cid = ElementId(BuiltInCategory.OST_GenericModel)
+            if not DirectShape.IsValidCategoryId(cid, doc):
+                raise ValueError("DirectShape category unavailable: %s" % row["category"])
+            el = DirectShape.CreateElement(doc, cid)
+            el.ApplicationId, el.ApplicationDataId = "archpipe-round3", mark
+            g = List[GeometryObject]()
+            g.Add(solid_box([v * 1000 for v in row["bbox"]]))
+            el.SetShape(g)
+            el.Name = "D1 " + mark
+            comments = row["comments"] + ("; fixture kind " + mark.split("-")[0] if fallback else "")
+            stamp(el, mark, comments)
+            doc.Regenerate()
+            rb["round3_details"].append({"spec_id": mark, "mark": measured_mark(el),
+                                          "category": str(el.Category.Name), "bbox_mm": world_box_mm(el),
+                                          "comments": measured_comments(el), "element_id": int(str(el.Id))})
+        except Exception as exc:
+            rb["failed"].append({"round3_detail": mark, "error": str(exc)})
+    rb["built"]["round3_details"] = len(rb["round3_details"])
 
 
 def build_furniture(doc, lv, spec, rb):
@@ -591,6 +621,11 @@ def build_option(app, model, spec, folder):
     if spec.get("furniture"):
         t = tx(doc, "furniture")
         build_furniture(doc, lv, spec, rb)
+        t.Commit()
+
+    if spec.get("round3_elements"):
+        t = tx(doc, "D1 round 3 details")
+        build_round3(doc, spec, rb)
         t.Commit()
 
     t = tx(doc, "plan views, rooms, tags")

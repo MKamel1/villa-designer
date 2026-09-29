@@ -358,7 +358,7 @@ def round2_elements(sp):
         z = RS.LEVELS_Z[f["level"]]
         if f["kind"] == "fixed-frameless-glass":
             box = [f["x0"], f["y"] - 0.01, z + f["sill"], f["x1"], f["y"] + 0.01, z + f["head"]]
-            comment = "fixed bath screen; ASSUMED 20 mm representation thickness"
+            comment = "fixed bath screen; transmittance 0.91; ior 1.52; ASSUMED 20 mm representation thickness"
         elif f["kind"] == "ceiling-rain-head":
             box = [f["x"] - 0.1, f["y"] - 0.1, z + f["z"] - 0.02,
                    f["x"] + 0.1, f["y"] + 0.1, z + f["z"]]
@@ -390,6 +390,106 @@ def round2_elements(sp):
             [x2 - 0.06, y2 - 0.02, z + h2 - 0.06, x2 + 0.06, y2 + 0.02, z + h2 + 0.06],
             comment=note + "; external grille; ASSUMED 120 mm representation size")
     return out
+
+
+def round3_elements(sp, lay=None):
+    """Nook lights, dressing modules and soffit cut storage as separately measurable solids."""
+    from . import revit_spec as RS
+    from . import villa_lighting as L
+    lay = lay or F.R.design("D1")
+    out = []
+
+    def add(mark, category, level, box, comments):
+        z = RS.LEVELS_Z[level]
+        out.append(dict(mark=mark, category=category,
+                        bbox=[round(v + (z if k in (2, 5) else 0), 4) for k, v in enumerate(box)],
+                        comments=comments))
+
+    for light in L.design(lay):
+        if light.room != "bar-alcove" or light.kind not in ("SWING", "DLN"):
+            continue
+        z = light.z - RS.LEVELS_Z[light.level]
+        if light.kind == "SWING":
+            x, y = light.extra["wall_plate"]
+            add(light.id + "-plate", "Lighting Fixtures", light.level,
+                [x - .06, y - .015, z - .06, x + .06, y + .015, z + .06],
+                "SWING wall plate; articulated reach 0.6 m")
+            add(light.id + "-arm", "Lighting Fixtures", light.level,
+                [x - .012, y, z - .012, x + .012, light.y, z + .012],
+                "SWING articulated arm; reach 0.6 m")
+            add(light.id + "-head", "Lighting Fixtures", light.level,
+                [light.x - .06, light.y - .06, z - .06, light.x + .06, light.y + .06, z + .06],
+                "SWING rotating head; emitter at spec position")
+        else:
+            add(light.id, "Lighting Fixtures", light.level,
+                [light.x - .0375, light.y - .0375, z, light.x + .0375, light.y + .0375, z + .025],
+                "DLN recessed nook downlight; emitter at spec position")
+
+    for it in F.layout(lay):
+        if it["id"] in ("pd-hang-1", "pd-hang-2"):
+            for index, (kind, a, b) in enumerate(_local_modules(it), 1):
+                box = to_world(it, (a, -it["d"] / 2 + .03, .10, b, it["d"] / 2 - .03, 2.05))
+                add("%s-module-%02d" % (it["id"], index), "Casework", it["level"], box,
+                    "owner %s; kind %s" % (it["partner"], kind))
+        if it["type"] in ("under_stair_storage", "store_shelving") and it.get("soffit"):
+            for index, (kind, box) in enumerate(body(it), 1):
+                add("%s-body-%03d" % (it["id"], index), "Casework", it["level"], to_world(it, box),
+                    "%s; %s; soffit %s" % (it["type"], kind, it["soffit"]))
+    return out
+
+
+def round3_postcondition(sp, rb, lay=None):
+    """Compare every new native element's tag, category and world box to the authored D1 spec."""
+    expected = sp["round3_elements"] if "round3_elements" in sp else round3_elements(sp, lay)
+    got = {}
+    for row in rb.get("round3_details", []):
+        got.setdefault(row.get("mark") or row.get("spec_id"), []).append(row)
+    problems = []
+    for item in expected:
+        mark = item["mark"]
+        rows = got.get(mark, [])
+        if len(rows) != 1:
+            problems.append("%s: built %d times" % (mark, len(rows)))
+            continue
+        row = rows[0]
+        if row.get("mark") != mark:
+            problems.append("%s: Mark missing or differs" % mark)
+        if row.get("category") != item["category"]:
+            if not (item["category"] == "Lighting Fixtures" and row.get("category") == "Generic Models" and
+                    "fixture kind " in (row.get("comments") or "")):
+                problems.append("%s: category differs" % mark)
+        comment = row.get("comments") or ""
+        if comment != item["comments"] and comment != item["comments"] + "; fixture kind " + mark.split("-")[0]:
+            problems.append("%s: Comments differ" % mark)
+        box = row.get("bbox_mm") or []
+        if len(box) != 6 or max(abs(a / 1000 - b) for a, b in zip(box, item["bbox"])) > TOL + 1e-8:
+            problems.append("%s: world bbox more than 5 mm from spec" % mark)
+    for mark in set(got) - {x["mark"] for x in expected}:
+        problems.append("%s: unplanned round-3 detail" % mark)
+    furniture_spec = {x["mark"]: x for x in sp.get("furniture", [])}
+    furniture_got = {}
+    for row in rb.get("furniture", []):
+        furniture_got.setdefault(row.get("mark"), []).append(row)
+    for mark in ("lounge-armchair", "stair-flight-store", "stair-landing-store", "store-shelves"):
+        item = furniture_spec.get(mark)
+        rows = furniture_got.get(mark, [])
+        if item is None or len(rows) != 1:
+            problems.append("%s: furniture missing from spec or built %d times" % (mark, len(rows)))
+            continue
+        row = rows[0]
+        if row.get("category") != item["category"] or item["type"] not in (row.get("comments") or ""):
+            problems.append("%s: furniture category or Comments differ" % mark)
+        box = row.get("bbox_mm") or []
+        from . import revit_spec as RS
+        z = RS.LEVELS_Z[item["level"]]
+        wanted = [v + (z if k in (2, 5) else 0) for k, v in enumerate(item["envelope"])]
+        if len(box) != 6 or max(abs(a / 1000 - b) for a, b in zip(box, wanted)) > TOL + 1e-8:
+            problems.append("%s: furniture world bbox more than 5 mm from spec" % mark)
+    for row in rb.get("furniture", []) + rb.get("round3_details", []):
+        if "curtain" in (row.get("mark") or "").lower() or (row.get("mark") == "library-daybed" and
+                                                          "curtain" in (row.get("comments") or "").lower()):
+            problems.append("library nook curtain still built")
+    return problems
 
 
 def round2_postcondition(sp, rb, lay):

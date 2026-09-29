@@ -6,7 +6,8 @@
 
 The post-condition uses 5 mm on every face of every element's box, exact categories, each Mark once, and
 re-runs furniture checks on the as-built footprints. D1 round-2 details, the wall hatch, study windows and suite
-door are also checked from the Revit read-back; villa_furnish3d.TOL was fixed before the first furnishing build.
+door are also checked. Round-3 nook fixtures, dressing modules and soffit storage bodies have separate measured
+world boxes and tags in the same Revit build; villa_furnish3d.TOL was fixed before the first furnishing build.
 """
 import json
 import sys
@@ -27,6 +28,7 @@ def main():
         sp["id"] = "D1F"
         sp["furniture"] = F3.spec(lay)
         sp["round2_elements"] = F3.round2_elements(sp)
+        sp["round3_elements"] = F3.round3_elements(sp, lay)
         (OUT / "options-spec.json").write_text(json.dumps([sp], indent=1), encoding="utf-8")
         print(OUT / "options-spec.json", len(sp["furniture"]), "elements")
         return 0
@@ -34,6 +36,7 @@ def main():
     spec = json.loads((OUT / "options-spec.json").read_text(encoding="utf-8"))[0]
     probs = F3.postcondition(spec["furniture"], rb.get("furniture", []), lay)
     probs += F3.round2_postcondition(spec, rb, lay)
+    probs += F3.round3_postcondition(spec, rb, lay)
     fails = rb["failed"]
     print("built:", rb["built"], "| build failures:", len(fails))
     for p in fails + probs:
