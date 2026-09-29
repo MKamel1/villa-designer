@@ -760,3 +760,50 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   sun in the finals; at 1.14 the sunlit facade samples G > R > B. **A published explanation must be measured**: the
   v04 window flag was first explained as "a plain neighbouring wall"; a ray-cast showed the villa's own boundary
   wall, then open sky (no context modelled there).
+- **Landscape trees were placed at their CC0 asset's native size, checked only against a trunk setback.**
+  `villa_landscape.TREES` placed a jacaranda (measured on ai-workstation from the glTF POSITION accessors,
+  ops/workstation/library-manifest.json `bounds_m`: 19.3 m tall, ~24 x 19 m canopy) at scale 1.0, 18.30 m from the
+  north facade -- inside the 1.5 m trunk-setback rule, since the RULE only ever checked the trunk POINT.
+  The canopy, never measured, put jacaranda foliage through the parents' bedroom and the garden-living ceiling
+  (draft renders v01/v02/v05/v07/v17). Missed because: (1) no prop-size data existed anywhere in the repo -- Codex
+  had no workstation access to measure a glTF, and the lead's own figures were hand-copied from an ssh session, not
+  checked in; (2) `villa_landscape.facade_distance`/`inside_yard` operated on the TRUNK coordinate only, with no
+  concept of a prop's world-space extent. Fix: `ops/workstation/library-manifest.json` now carries a `bounds_m`
+  (native glTF Y-up world AABB, node-hierarchy-aware -- naively unioning every accessor's own min/max silently
+  missed that some Poly Haven packs, e.g. `shrub_02` and `searsia_lucida`, hold several complete plant variants as
+  separate offset root nodes; the union must walk the node TRS chain) for every landscape (and, cheaply, every
+  other) prop; `ops/workstation/fetch_asset_library.py` measures and drift-checks it going forward.
+  `villa_landscape.prop_world_box` reproduces `villa_scene.import_props`' glTF-Yup-to-Blender-Zup convention
+  (scene xyz = gltf x, -z, y; verified against a real headless Blender 4.2.9 `import_scene.gltf` of `tree_small_02`
+  and `shrub_02`, matching to < 1e-4 m) and `extent_violations` checks the FULL scaled/rotated/translated box, not
+  a point, against the building footprint (a) and the yard polygon by perimeter sampling, not just 4 corners (b) --
+  the yard is L-shaped, and a corner-only test can miss a bite its re-entrant corner takes from a wide canopy.
+  Height is now an explicitly labelled ASSUMPTION (3.5-4.5 m per tree; no cited mature-height figure for the
+  requested olive, Olea europaea, is held in knowledge/library.json) rather than the CC0 stand-in's raw mesh size.
+  Guard: `tests/test_landscape.py` freezes the real D1 draft placement and proves `extent_violations` fails on it
+  and passes on the corrected `TREES`/planting tables; four planting props (searsia, one grass, the rooibos, one
+  shrub) also needed a smaller scale once their true multi-variant bounds were known, not a moved point.
+- **Wood grain rotated into a Box-projected texture reads as a smeared streak, not a rotated grain.** Client:
+  stair tread wood (v11-stair-void.png) and the ensuite vanity front (v12-ensuite.png) both showed long streaks,
+  "annoyingly fake". Cause, confirmed against a real Blender 4.2.9 import on ai-workstation: `villa_scene
+  .add_material` redirects a material's `grain_axis` by ROTATING the Object coordinate fed into a Box-projected
+  `ShaderNodeTexImage`, but Blender's Box projection reads which PAIR of that vector's three components a face
+  samples from the face's own UNROTATED geometric normal -- rotating the coordinate does not rotate that pairing,
+  so a rotation can point one of the two sampled components at the face's own normal axis (which never varies
+  across that face), collapsing it to a single texel row/column. Missed because no guard checked a material's
+  `grain_axis` against the actual shape of the mesh it was assigned to, and the codebase's own existing workaround
+  (`"walnut-grain-x"`/`"oak-grain-x"`, identity rotation, already used for "horizontal tops and shelves") was never
+  applied to the stair treads (`villa_render.py` hardcoded plain `"walnut"`) or the washbasin/vanity front
+  (`part_material`, same). New bpy-free module `archpipe/blender/grain.py` (`mapping_rotated_span`) reproduces the
+  rotation and the per-face-normal axis pairing (matching `villa_scene.triplanar_normal`'s own convention) in pure
+  Python, so it is unit-tested without a Blender runtime. Fix: stair treads now use a new `"walnut-grain-y"`
+  (proven non-degenerate on the tread's Z-normal top face, and grains along its own 900 mm length, not its 280 mm
+  depth); the vanity front now uses the existing `"walnut-grain-x"` (identity rotation -- proven non-degenerate
+  regardless of which wall, and so which world axis, the panel's thin dimension ends up on, unlike `"walnut"`
+  itself, which only degenerates for SOME wall orientations, which is why only some walnut surfaces show the
+  defect). Guard: `tests/test_render_standard.py::WoodGrainMapping` reproduces the real collapse on the tread and
+  on a vanity-front orientation, and proves the fix is non-degenerate. Not fully closed: an attempted visual
+  (rendered-pixel) confirmation on ai-workstation was inconclusive -- real wood grain photos are intrinsically
+  anisotropic, so a simple per-axis variance comparison cannot distinguish "correctly oriented grain" from "a
+  collapsed axis" by itself; the geometric proof above does not depend on that measurement. Visually confirm on
+  the next real render.

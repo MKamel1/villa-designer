@@ -6,8 +6,10 @@ All positions are metres in the same frame as the villa scene.
 """
 from __future__ import annotations
 
+import json
 from datetime import datetime, timezone
-from math import hypot
+from math import cos, hypot, radians, sin
+from pathlib import Path
 
 from .. import solar, villa_env as E
 from . import villa_furniture_detail as FD
@@ -15,6 +17,13 @@ from . import villa_furniture_detail as FD
 GROUND = -3.0
 PLOT = tuple(v / 1000 for v in E.plot())
 YARD = tuple((x / 1000, y / 1000) for x, y in E.yard())
+
+# Our own building's occupied volume for the tree/shrub-extent guard: the GF footprint rectangles already used by
+# facade_distance (FRONT/BAR/BUMP), from z=0 (GF FFL) to E.APT (3.0 m, villa_env: the level above our own GF, "not
+# ours" but structurally solid over the same footprint) -- a single storey, which is what the defect's photos show
+# (canopy inside the parents' bedroom and the garden-living ceiling, both GF rooms).
+BUILDING_RECTS = tuple(tuple(v / 1000 for v in r) for r in (E.FRONT, E.BAR, E.BUMP))
+BUILDING_HEIGHT = E.APT / 1000
 
 
 def inside_yard(x, y):
@@ -44,6 +53,85 @@ def facade_distance(x, y):
     return min(distances)
 
 
+def _load_prop_bounds():
+    """Native glTF (Y-up, metres) world-AABB per library prop, from the checked-in `bounds_m` field of
+    ops/workstation/library-manifest.json (ops/workstation/fetch_asset_library.py measures and drift-checks it;
+    docs/LEARNINGS.md 2026-09-28)."""
+    path = Path(__file__).resolve().parents[3] / "ops" / "workstation" / "library-manifest.json"
+    manifest = json.loads(path.read_text())
+    return {p["id"]: (tuple(p["bounds_m"]["min"]), tuple(p["bounds_m"]["max"]))
+            for p in manifest.get("props", []) if "bounds_m" in p}
+
+
+PROP_BOUNDS = _load_prop_bounds()
+
+
+def prop_world_box(asset, position, rotation_deg, scale):
+    """World-space AABB (x0, y0, z0, x1, y1, z1) a prop occupies, reproducing villa_scene.import_props: Blender's
+    glTF importer converts native Y-up (x, y, z) to scene Z-up (x, -z, y) (verified 2026-09-28 against a headless
+    Blender 4.2.9 import of tree_small_02 and shrub_02 -- both matched this pure-Python transform to < 1e-4 m), the
+    anchor then scales uniformly, yaws about Z (only rotation_deg[2] is honoured: every landscape prop today is
+    upright with rotation_deg [0, 0, 0], and a future tilted prop is out of scope here), and finally re-seats the
+    whole prop so its lowest point sits exactly at `position[2]` (import_props' `bottom` correction)."""
+    (gx0, gy0, gz0), (gx1, gy1, gz1) = PROP_BOUNDS[asset]
+    lx0, lx1 = gx0, gx1                      # scene x = gltf x
+    ly0, ly1 = -gz1, -gz0                    # scene y = -gltf z
+    lz0, lz1 = gy0, gy1                      # scene z = gltf y (height)
+    corners = [(lx0, ly0), (lx1, ly0), (lx1, ly1), (lx0, ly1)]
+    yaw = radians(rotation_deg[2])
+    c, s = cos(yaw), sin(yaw)
+    rotated = [(scale * (x * c - y * s), scale * (x * s + y * c)) for x, y in corners]
+    px, py, pz = position
+    xs = [px + rx for rx, _ in rotated]
+    ys = [py + ry for _, ry in rotated]
+    height = scale * (lz1 - lz0)
+    return min(xs), min(ys), pz, max(xs), max(ys), pz + height
+
+
+def _rect_overlap_area(a, b):
+    ax0, ay0, ax1, ay1 = a
+    bx0, by0, bx1, by1 = b
+    return max(0.0, min(ax1, bx1) - max(ax0, bx0)) * max(0.0, min(ay1, by1) - max(ay0, by0))
+
+
+def _box_perimeter_points(x0, y0, x1, y1, step=0.1):
+    """Sample points around a rectangle's edges (not just its 4 corners): our yard polygon is L-shaped, and a
+    corner-only test can miss a bite the building's re-entrant corner takes out of a wide canopy's footprint."""
+    pts = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+    for xa, ya, xb, yb in ((x0, y0, x1, y0), (x1, y0, x1, y1), (x1, y1, x0, y1), (x0, y1, x0, y0)):
+        length = hypot(xb - xa, yb - ya)
+        n = max(1, int(length / step))
+        for k in range(1, n):
+            t = k / n
+            pts.append((xa + (xb - xa) * t, ya + (yb - ya) * t))
+    return pts
+
+
+def extent_violations(props):
+    """For every placed prop with known library bounds: (a) its full world box (trunk + canopy) must not enter our
+    building's occupied volume -- may overhang paving, must not overhang the villa; (b) its footprint must stay
+    inside our plot and our modeled yard, not the sister plot, the street or the neighbours. Returns a list of
+    (prop id, reason) pairs; empty means every prop passes."""
+    out = []
+    for p in props:
+        asset = p["asset"]
+        if asset not in PROP_BOUNDS:
+            continue
+        x0, y0, z0, x1, y1, z1 = prop_world_box(asset, p["position"], p.get("rotation_deg", [0, 0, 0]),
+                                                 p.get("scale", 1.0))
+        if z1 > 0 and z0 < BUILDING_HEIGHT:           # the prop's own z-range overlaps our GF storey's (0..APT)
+            for rect in BUILDING_RECTS:
+                if _rect_overlap_area((x0, y0, x1, y1), rect) > 1e-6:
+                    out.append((p["id"], "world box (%.2f,%.2f)-(%.2f,%.2f) enters the building footprint %s"
+                                % (x0, y0, x1, y1, tuple(round(v, 3) for v in rect))))
+                    break
+        outside = [pt for pt in _box_perimeter_points(x0, y0, x1, y1) if not inside_yard(*pt)]
+        if outside:
+            out.append((p["id"], "%d of its footprint's sampled points leave the modeled yard/plot (e.g. %.2f,%.2f)"
+                        % (len(outside), outside[0][0], outside[0][1])))
+    return out
+
+
 def _box(x0, y0, z0, x1, y1, z1):
     a = [x0, y0, z0]; b = [x1, y0, z0]; c = [x1, y1, z0]; d = [x0, y1, z0]
     e = [x0, y0, z1]; f = [x1, y0, z1]; g = [x1, y1, z1]; h = [x0, y1, z1]
@@ -64,11 +152,24 @@ PATHS = {
     "lounge-west": (1.00, -26.606, 3.617, -25.706),
 }
 
+# Mature height per tree, metres. Requested species is olive (Olea europaea); no cited figure for its mature
+# height is held in knowledge/library.json (checked 2026-09-28), so these are ASSUMED, not sourced: a young/
+# semi-mature landscaping specimen (the size actually sold and planted for immediate shade) is commonly
+# 3.5-4.5 m; a full jacaranda/tree_small_02 CC0 mesh at its native height (19.3 m / 4.5 m) was never checked
+# against either the plot or the building before this fix and produced the defect (canopies inside the parents'
+# bedroom and the garden-living ceiling, D1 draft renders v01/v02/v05/v07/v17). Height drives an isotropic
+# scale = target_h / native_h (never scaled non-uniformly, which would distort the canopy's own proportions);
+# native_h comes from PROP_BOUNDS, the checked-in library-manifest.json bounds_m. Position and yaw (rotation
+# about Z only) were then chosen, in that order, to clear archpipe.concept.villa_landscape.extent_violations
+# (building footprint + plot/yard) while keeping the tree near its original door/terrace, per the client's shade
+# preference (docs/LEARNINGS.md "Shade over sun"): the north strip beside the BAR facade is only 3.24 m deep, so
+# a wide-canopy jacaranda cannot fit there at any usable height -- the narrower tree_small_02 stands in for it,
+# yawed 90 deg so its own canopy's long axis (the asset is itself asymmetric, not our doing) points across the
+# strip's width rather than into the facade or the front plot line.
 TREES = (
-    # The tree is a CC0 jacaranda visual stand-in for the requested olive/citrus shade.
-    ("north-shade", "jacaranda_tree", 18.30, -21.55, 1.0),
-    ("east-shade", "jacaranda_tree", 24.50, -23.95, 0.85),
-    ("south-shade", "tree_small_02", 25.45, -28.35, 1.0),
+    ("north-shade", "tree_small_02", 18.30, -21.80, 90, 3.8),
+    ("east-shade", "jacaranda_tree", 25.00, -24.50, 90, 4.0),
+    ("south-shade", "tree_small_02", 25.45, -28.35, 90, 4.0),
 )
 
 
@@ -137,28 +238,48 @@ def build(spec):
         meshes.append(dict(id="landscape-planter-soil-" + name, group="ground", material="garden-gravel",
                            label="ASSUMED gravel mulch inside " + name + " planter",
                            faces=_quad(x0 + t, y0 + t, x1 - t, y1 - t, GROUND + 0.38)))
-    for name, asset, x, y, scale in TREES:
+    tree_props = []
+    for name, asset, x, y, yaw_deg, target_h in TREES:
         if not inside_yard(x, y) or facade_distance(x, y) < 1.5:
             raise ValueError(name + " tree violates plot or 1.5 m trunk setback")
-        props.append(dict(id="landscape-tree-" + name, asset=asset,
-                          position=[x, y, GROUND], rotation_deg=[0, 0, 0], scale=scale,
-                          label="dressing: ASSUMED CC0 " + asset + " shade-tree stand-in; olive/citrus model unavailable"))
-    planting = (("searsia", "searsia_lucida", 13.25, -21.65, GROUND + 0.38),
-                ("grass-n", "grass_medium_01", 13.75, -22.2, GROUND + 0.38),
-                ("gazania", "flower_gazania", 13.1, -22.25, GROUND + 0.38),
-                ("periwinkle", "periwinkle_plant", 27.45, -24.15, GROUND + 0.38),
-                ("grass-e", "grass_medium_02", 27.6, -25.25, GROUND + 0.38),
-                ("rooibos", "wild_rooibos_bush", 27.45, -28.0, GROUND + 0.38),
-                ("shrub-a", "shrub_01", 27.48, -28.75, GROUND + 0.38),
-                ("shrub-b", "shrub_02", 27.5, -24.9, GROUND + 0.38),
-                ("shrub-c", "shrub_03", 0.5, -24.3, GROUND + 0.38),
-                ("shrub-d", "shrub_04", 0.5, -24.95, GROUND + 0.38),
-                ("boulder", "boulder_01", 26.7, -22.5, GROUND),
-                ("stones", "namaqualand_stones_01", 25.4, -29.0, GROUND))
-    for name, asset, x, y, z in planting:
-        props.append(dict(id="landscape-" + name, asset=asset, position=[x, y, z],
-                          rotation_deg=[0, 0, 0], scale=1.0,
-                          label="dressing: ASSUMED CC0 " + asset + " garden planting"))
+        native_min, native_max = PROP_BOUNDS[asset]
+        scale = target_h / (native_max[1] - native_min[1])
+        tree_props.append(dict(id="landscape-tree-" + name, asset=asset,
+                          position=[x, y, GROUND], rotation_deg=[0, 0, yaw_deg], scale=scale,
+                          label="dressing: ASSUMED CC0 %s shade-tree stand-in for olive (Olea europaea); height "
+                                "%.1f m ASSUMED (no cited mature-height figure held for the species), scale "
+                                "derived from the asset's measured native height" % (asset, target_h)))
+    bad = extent_violations(tree_props)
+    if bad:
+        raise ValueError("landscape tree(s) violate the building/plot extent guard: " + "; ".join(
+            "%s: %s" % item for item in bad))
+    props += tree_props
+    # scale defaults to 1.0; four of these CC0 files are themselves multi-plant clusters (several complete
+    # variants as separate glTF root nodes at different offsets -- library-manifest.json bounds_m records the
+    # combined box, exactly what Blender's importer builds), so at scale 1.0 they are wider than the single small
+    # clump their name/position implied and crossed the plot or yard line once the real bounds were checked
+    # (extent_violations below; the fix is a smaller scale, not a moved point -- these dress a bed, not a tree).
+    planting = (("searsia", "searsia_lucida", 13.25, -21.65, GROUND + 0.38, 0.7),
+                ("grass-n", "grass_medium_01", 13.75, -22.2, GROUND + 0.38, 1.0),
+                ("gazania", "flower_gazania", 13.1, -22.25, GROUND + 0.38, 1.0),
+                ("periwinkle", "periwinkle_plant", 27.45, -24.15, GROUND + 0.38, 1.0),
+                ("grass-e", "grass_medium_02", 27.6, -25.25, GROUND + 0.38, 0.5),
+                ("rooibos", "wild_rooibos_bush", 27.45, -28.0, GROUND + 0.38, 0.45),
+                ("shrub-a", "shrub_01", 27.48, -28.75, GROUND + 0.38, 1.0),
+                ("shrub-b", "shrub_02", 27.5, -24.9, GROUND + 0.38, 0.18),
+                ("shrub-c", "shrub_03", 0.5, -24.3, GROUND + 0.38, 1.0),
+                ("shrub-d", "shrub_04", 0.5, -24.95, GROUND + 0.38, 1.0),
+                ("boulder", "boulder_01", 26.7, -22.5, GROUND, 1.0),
+                ("stones", "namaqualand_stones_01", 25.4, -29.0, GROUND, 1.0))
+    planting_props = [dict(id="landscape-" + name, asset=asset, position=[x, y, z],
+                          rotation_deg=[0, 0, 0], scale=scale,
+                          label="dressing: ASSUMED CC0 " + asset + " garden planting")
+                      for name, asset, x, y, z, scale in planting]
+    bad = extent_violations(planting_props)
+    if bad:
+        raise ValueError("landscape planting violates the building/plot extent guard: " + "; ".join(
+            "%s: %s" % item for item in bad))
+    props += planting_props
     meshes += _furniture("sofa", FD._sofa(2100, 850, 800, 3, 125), (24.95, -27.65), 2.1, 0.85, 0.8)
     meshes += _furniture("chair-one", FD._sofa(800, 800, 800, 1, 110), (23.35, -28.65), 0.8, 0.8, 0.8)
     meshes += _furniture("chair-two", FD._sofa(800, 800, 800, 1, 110), (24.45, -28.65), 0.8, 0.8, 0.8)

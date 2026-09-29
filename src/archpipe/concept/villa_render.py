@@ -165,6 +165,14 @@ M = {
 }
 M["oak-grain-x"] = dict(M["oak"], grain_axis="x", note="ASSUMED light oak veneer, grain along horizontal bed frame")
 M["walnut-grain-x"] = dict(M["walnut"], grain_axis="x", note="ASSUMED walnut veneer, grain along horizontal tops and shelves")
+# Client (2026-09-28): tread wood and the ensuite vanity front read as long smeared streaks, "annoyingly fake".
+# Confirmed by archpipe.blender.grain.mapping_rotated_span (pure-Python, tests/test_render_standard.py): plain
+# "walnut" (grain_axis="z") sends one of the tread top face's two sampled coordinates to the tread's own 60 mm
+# thickness -- a single texel row, stretched across the whole 900 mm tread. grain_axis="y" does not (it is the
+# rotation that instead sends the tread's 900 mm length to the image's own grain axis, so the wood now grains
+# along the tread, at the veneer's real scan scale, not across it).
+M["walnut-grain-y"] = dict(M["walnut"], grain_axis="y", note="ASSUMED walnut veneer, grain along the tread's "
+                           "own 900 mm length (stair treads only; see mapping_rotated_span)")
 
 # room -> (floor, wall, ceiling) finishes
 PUBLIC_B = ("lounge", "lounge-nook", "stair-b", "hall-b", "entry-b", "family", "kitchen", "kitchen-island", "dining",
@@ -302,7 +310,7 @@ def build(lay=None, views=None):
         boundary = source is not None and (source.startswith("fence-") or source == "yard-wall-ne")
         if any(all(b[0] - 1e-3 <= p[0] <= b[3] + 1e-3 and b[1] - 1e-3 <= p[1] <= b[4] + 1e-3 and
                    b[2] - 1e-3 <= p[2] <= b[5] + 1e-3 for p in pts) for b in stair_boxes):
-            mat = "walnut"                                       # the floating treads
+            mat = "walnut-grain-y"                                # the floating treads: grain along the tread's length
         elif f.material == "glass":
             mat = "glass-clear"
         elif f.material == "door":
@@ -1483,7 +1491,12 @@ def part_material(f, part):
     if t in ("wc",):
         return "ceramic-white" if part != "flush-plate" else "brass"
     if t in ("washbasin", "washbasin_double"):
-        return "ceramic-white" if part == "basin" else "walnut"
+        # "walnut" (grain_axis="z") is only safe when the visible front panel's WORLD normal happens to be Y (a
+        # wall running along X); against an X-normal wall it sends the panel's own ~19 mm thickness into a
+        # sampled coordinate instead (archpipe.blender.grain.mapping_rotated_span) -- the vanity smear (client
+        # 2026-09-28, v12-ensuite.png). "walnut-grain-x" is identity rotation: no coordinate is ever rotated, so
+        # it samples the true geometry on every wall orientation, not only some.
+        return "ceramic-white" if part == "basin" else "walnut-grain-x"
     if t == "bath":
         return "ceramic-white"
     if t == "shower_walkin":

@@ -49,6 +49,7 @@ def sibling(name):
 
 photoreal = sibling("photoreal")
 build_scene = sibling("build_scene")
+grain = sibling("grain")
 contract_spec = importlib.util.spec_from_file_location(
     "villa_render_contract", os.path.join(HERE, "..", "villa_render_contract.py"))
 contract = importlib.util.module_from_spec(contract_spec)
@@ -273,7 +274,9 @@ def add_material(name, spec, library_root, warnings):
             tile = spec.get("tile_m", 1.0)
             mapping.inputs["Scale"].default_value = (1/tile, 1/tile, 1/tile)
             axis = spec.get("grain_axis", "x")
-            mapping.inputs["Rotation"].default_value = {"x": (0, 0, 0), "y": (0, 0, math.pi/2), "z": (0, math.pi/2, 0)}[axis]
+            # docs/LEARNINGS.md 2026-09-28 (stair-tread / vanity wood smear): this rotation table is shared with
+            # the bpy-free archpipe.blender.grain module so the same numbers are proven by a unit test.
+            mapping.inputs["Rotation"].default_value = tuple(math.radians(v) for v in grain.GRAIN_ROTATION_DEG[axis])
             nt.links.new(coord.outputs["Generated"], mapping.inputs["Vector"])
             # Generated coordinates are normalized by object bounds; Object
             # coordinates retain the authored metre scale across all meshes.

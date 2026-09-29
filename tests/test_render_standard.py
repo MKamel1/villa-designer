@@ -4,6 +4,7 @@ be our standards and our process for all renders"). The first villa set skipped 
 villa scene departs from the parts the bedroom proved."""
 import unittest
 
+from archpipe.blender import grain
 from archpipe.concept import villa_render as VR
 
 SCENE = VR.build()
@@ -12,7 +13,7 @@ SCENE = VR.build()
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath",
-    "marble-white", "walnut", "walnut-grain-x", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
+    "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
     "black-metal", "ceramic-white", "screen-black", "glass-clear", "glass-guard", "glass-edge", "opal-strip",
     "silvered-mirror", "door-oak", "garden-gravel", "garden-pebbles", "garden-sandstone",
@@ -100,9 +101,11 @@ class RenderStandard(unittest.TestCase):
             y0, y1 = min(p[1] for p in pts), max(p[1] for p in pts)
             self.assertFalse(min(x1, parked[2]) - max(x0, parked[0]) > 0.005 and
                              min(y1, parked[3]) - max(y0, parked[1]) > 0.005, m["id"])
-        for _, _, x, y, _ in plan["trees"]:
+        for _, _, x, y, _, _ in plan["trees"]:
             self.assertTrue(LAND.inside_yard(x, y))
             self.assertGreaterEqual(LAND.facade_distance(x, y), 1.5)
+        self.assertEqual(LAND.extent_violations([p for p in props if p["id"].startswith("landscape-tree-")]), [],
+                         "every placed tree's real (measured) canopy must clear the building and stay in the yard")
         self.assertLess(LAND.facade_distance(1.10, -28.00), 1.5,
                         "the old west tree must fail against the front projection")
         for d in (d for d in sp["doors"] if d.get("garden")):
@@ -615,6 +618,55 @@ class RenderStandard(unittest.TestCase):
             old = dict(c, wall_face=c["center"][0 if c["axis"] == "v" else 1])
             self.assertFalse(hang_ok(old, 0.05), c["id"] + ": window-line offset should fail this guard")
             self.assertFalse(hang_ok(old, 0.11), c["id"] + ": window-line offset should fail this guard")
+
+
+class WoodGrainMapping(unittest.TestCase):
+    """Client 2026-09-28: stair tread wood (v11-stair-void.png) and the ensuite vanity front (v12-ensuite.png)
+    both read as long smeared streaks -- "annoyingly fake". Cause, confirmed against a real Blender 4.2.9 import
+    on ai-workstation (docs/LEARNINGS.md): a Box-projected Image Texture picks which pair of its input vector's
+    three components it reads from the mesh's own UNROTATED geometric normal; `villa_scene.add_material` redirects
+    grain by ROTATING that vector (`grain.GRAIN_ROTATION_DEG`), which does not move which pair is read -- it can
+    instead point one of the two read components at the face's own normal axis (constant across the whole face),
+    collapsing that coordinate to a single texel row/column. These tests exercise the same
+    `archpipe.blender.grain.mapping_rotated_span` `villa_scene` uses, so they need no Blender runtime."""
+
+    def test_current_bug_reproduced_on_the_real_tread_box(self):
+        # stairs.py tread boxes: x = going (280 mm, walking direction), y = flight width (900 mm, the tread's
+        # own length), z = TREAD_T (60 mm). The real, pre-fix material was plain "walnut" (grain_axis="z").
+        u_span, v_span = grain.mapping_rotated_span("z", (140.0, 450.0, 30.0))
+        self.assertAlmostEqual(u_span, 0.0, places=6,
+                               msg="the OLD 'walnut' mapping must collapse on the tread's top face (the real bug)")
+
+    def test_fix_grains_the_tread_along_its_own_length_not_its_depth(self):
+        u_span, v_span = grain.mapping_rotated_span("y", (140.0, 450.0, 30.0))
+        self.assertAlmostEqual(u_span, 900.0, places=3, msg="grain (image U) must run along the tread's 900 mm length")
+        self.assertAlmostEqual(v_span, 280.0, places=3)
+        self.assertGreater(min(u_span, v_span), 1.0, "neither span may collapse")
+
+    def test_current_bug_reproduced_on_a_vanity_front_against_an_x_normal_wall(self):
+        # villa_furniture_detail._fronts: local x = width, y = FRONT_T (19 mm, thin), z = height. villa_furnish3d
+        # to_world swaps local x/y into world x/y for a wall requiring a +-90 deg rotation, so a vanity against
+        # such a wall has its ~19 mm thickness along WORLD X, not world Y -- half-extents (9.5, 450, 350) below.
+        # The real, pre-fix material was plain "walnut" (grain_axis="z"), same as the tread.
+        u_span, v_span = grain.mapping_rotated_span("z", (9.5, 450.0, 350.0))
+        self.assertAlmostEqual(v_span, 0.0, places=6,
+                               msg="the OLD 'walnut' mapping must collapse on this vanity-front orientation")
+
+    def test_fix_is_safe_on_a_vanity_front_regardless_of_which_wall_it_sits_against(self):
+        # "walnut-grain-x" is identity rotation: no coordinate is ever rotated, so nothing can be pointed at the
+        # panel's own normal axis, on EITHER orientation a vanity front can end up in.
+        for half_extents in ((450.0, 9.5, 350.0), (9.5, 450.0, 350.0)):
+            u_span, v_span = grain.mapping_rotated_span("x", half_extents)
+            self.assertGreater(min(u_span, v_span), 1.0, half_extents)
+
+    def test_negative_stone_and_fabric_materials_are_unaffected(self):
+        # These never set grain_axis (villa_render.py M dict); spec.get("grain_axis", "x") already defaults them
+        # to the safe identity rotation, so this fix changes no rendered stone or fabric surface.
+        from archpipe.concept.villa_render import M
+        untouched = {"travertine", "marble-ensuite", "marble-bath", "marble-white", "boucle", "linen", "paving",
+                     "garden-gravel", "rug", "leather-brown"}
+        for name in untouched:
+            self.assertNotIn("grain_axis", M[name], name)
 
 
 if __name__ == "__main__":

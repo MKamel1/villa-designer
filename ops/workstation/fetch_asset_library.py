@@ -23,6 +23,84 @@ from pathlib import Path
 
 USER_AGENT = "archpipe-asset-fetch/1 (+https://github.com/) contact: project-internal"
 
+BOUNDS_TOLERANCE_M = 0.005   # 5 mm: a checked-in bound this far off the freshly measured one is drift, not rounding
+
+
+def _mat_mult(a: list, b: list) -> list:
+    r = [0.0] * 16
+    for c in range(4):
+        for row in range(4):
+            s = 0.0
+            for k in range(4):
+                s += a[k * 4 + row] * b[c * 4 + k]
+            r[c * 4 + row] = s
+    return r
+
+
+def _trs_matrix(node: dict) -> list:
+    if "matrix" in node:
+        return node["matrix"]
+    t = node.get("translation", [0, 0, 0])
+    x, y, z, w = node.get("rotation", [0, 0, 0, 1])
+    s = node.get("scale", [1, 1, 1])
+    xx, yy, zz = x * x, y * y, z * z
+    xy, xz, yz = x * y, x * z, y * z
+    wx, wy, wz = w * x, w * y, w * z
+    rm = [1 - 2 * (yy + zz), 2 * (xy + wz), 2 * (xz - wy), 0,
+          2 * (xy - wz), 1 - 2 * (xx + zz), 2 * (yz + wx), 0,
+          2 * (xz + wy), 2 * (yz - wx), 1 - 2 * (xx + yy), 0,
+          0, 0, 0, 1]
+    sm = [s[0], 0, 0, 0, 0, s[1], 0, 0, 0, 0, s[2], 0, 0, 0, 0, 1]
+    tm = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, t[0], t[1], t[2], 1]
+    return _mat_mult(tm, _mat_mult(rm, sm))
+
+
+def _apply(m: list, p) -> tuple:
+    x, y, z = p
+    return (m[0] * x + m[4] * y + m[8] * z + m[12],
+            m[1] * x + m[5] * y + m[9] * z + m[13],
+            m[2] * x + m[6] * y + m[10] * z + m[14])
+
+
+def gltf_world_bounds(gltf_path: Path):
+    """The prop's native (glTF Y-up, metres) world-space AABB: every POSITION accessor's local AABB (its 8
+    corners, so a rotated mesh's box is not under-estimated), transformed by its node's full TRS chain. A naive
+    union of every VEC3 accessor's own min/max misses node translations entirely -- some Poly Haven prop files
+    (e.g. shrub_02) hold several complete variants as separate root nodes offset sideways from each other, and
+    only this walk reproduces the combined box Blender's importer actually creates (verified against a headless
+    Blender 4.2.9 import of tree_small_02 and shrub_02, matching to better than 1e-4 m: 2026-09-28)."""
+    g = json.loads(gltf_path.read_text())
+    scene = g["scenes"][g.get("scene", 0)]
+    nodes, meshes, accessors = g["nodes"], g.get("meshes", []), g["accessors"]
+    mins, maxs = [1e18] * 3, [-1e18] * 3
+
+    def visit(node_idx, parent_m):
+        node = nodes[node_idx]
+        m = _mat_mult(parent_m, _trs_matrix(node))
+        if "mesh" in node:
+            for prim in meshes[node["mesh"]]["primitives"]:
+                acc_idx = prim["attributes"].get("POSITION")
+                if acc_idx is None:
+                    continue
+                acc = accessors[acc_idx]
+                amin, amax = acc.get("min"), acc.get("max")
+                if amin is None or amax is None:
+                    continue
+                for cx in (amin[0], amax[0]):
+                    for cy in (amin[1], amax[1]):
+                        for cz in (amin[2], amax[2]):
+                            wx, wy, wz = _apply(m, (cx, cy, cz))
+                            mins[0], maxs[0] = min(mins[0], wx), max(maxs[0], wx)
+                            mins[1], maxs[1] = min(mins[1], wy), max(maxs[1], wy)
+                            mins[2], maxs[2] = min(mins[2], wz), max(maxs[2], wz)
+        for child in node.get("children", []):
+            visit(child, m)
+
+    identity = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+    for root in scene["nodes"]:
+        visit(root, identity)
+    return mins, maxs
+
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
@@ -141,8 +219,20 @@ def do_prop(entry: dict, root: Path, index: dict) -> None:
         recorded[name] = {"path": str(out_path.relative_to(root)),
                           "sha256": sha256(out_path), "source": meta["url"],
                           "license": "CC0"}
+    gltf_path = dest_dir / "model.gltf"
+    mins, maxs = gltf_world_bounds(gltf_path)
+    bounds_m = {"min": [round(v, 4) for v in mins], "max": [round(v, 4) for v in maxs]}
+    checked_in = entry.get("bounds_m")
+    if checked_in:
+        drift = max(abs(a - b) for a, b in zip(checked_in["min"] + checked_in["max"],
+                                                bounds_m["min"] + bounds_m["max"]))
+        if drift > BOUNDS_TOLERANCE_M:
+            raise ValueError(f"{asset_id}: measured bounds {bounds_m} drifted {drift:.4f} m from the "
+                              f"checked-in library-manifest.json bounds_m {checked_in} -- the guard in "
+                              f"archpipe.concept.villa_landscape trusts the checked-in figure; re-measure and "
+                              f"update the manifest before using this asset")
     index.setdefault("props", {})[asset_id] = {"resolution": res, "files": recorded,
-                                               "role": entry.get("role")}
+                                               "role": entry.get("role"), "bounds_m": bounds_m}
 
 
 def main() -> int:
