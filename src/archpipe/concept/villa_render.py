@@ -1088,7 +1088,7 @@ def build(lay=None, views=None):
             v.setdefault("hide_meshes", []).extend(hidden)
 
     from . import villa_landscape as LAND
-    land_meshes, land_props, land_notes, _ = LAND.build(sp)
+    land_meshes, land_props, land_notes, _ = LAND.build(sp, lay)
     meshes.extend(land_meshes)
     notes.extend(land_notes)
 
@@ -1608,7 +1608,7 @@ def VIEWS(lay=None):
       dimmers={"ambient": 0.3, "accent": 0.4, "task": 0.5})
     v("v06-kids-room", "Kids' room A", "day", I, I, 24, ["ka-bunk", "ka-desk-1"], room="kids-a")
     v("v07-terrace-dusk", "Garden and terrace at dusk", "exterior-dusk", [28.2, -21.2, B + 1.35], [21.0, -26.4, B + 1.35],
-      24, ["terrace lounge set", "living-sofa"], shift_y=0.10, layers=["ambient", "task", "accent", "decorative"],
+      24, ["landscape-sofa", "living-sofa"], shift_y=0.10, layers=["ambient", "task", "accent", "decorative"],
       dimmers={"ambient": 0.5, "task": 0.4})
     v("v08-cinema", "Cinema: seating and screen", "evening", I, I, 24, ["cinema-sofa", "cinema-tv"], room="cinema")
     v("v09-dining-evening", "Dining and island at night", "evening", I, I, 24, ["dining-table", "k-island"],

@@ -107,11 +107,20 @@ def _box_perimeter_points(x0, y0, x1, y1, step=0.1):
     return pts
 
 
-def extent_violations(props):
+def garden_level_rooms(lay):
+    """Room rectangles on the garden's own storey (level B). The north strip of the modeled yard lies over the
+    basement store-ramp, cinema, guest WC and dirty kitchen, so the GF rectangles alone let the north planting bed
+    be placed inside the dirty kitchen (D1 draft render v17, 2026-09-28)."""
+    return tuple((r["rect"][0], r["rect"][1], r["rect"][2], r["rect"][3], name)
+                 for name, r in lay["rooms"].items() if r.get("level") == "B")
+
+
+def extent_violations(props, rooms=()):
     """For every placed prop with known library bounds: (a) its full world box (trunk + canopy) must not enter our
-    building's occupied volume -- may overhang paving, must not overhang the villa; (b) its footprint must stay
-    inside our plot and our modeled yard, not the sister plot, the street or the neighbours. Returns a list of
-    (prop id, reason) pairs; empty means every prop passes."""
+    building's occupied volume -- may overhang paving, must not overhang the villa; (b) it must not stand inside
+    any garden-level room (`rooms`, from garden_level_rooms); (c) its footprint must stay inside our plot and our
+    modeled yard, not the sister plot, the street or the neighbours. Returns a list of (prop id, reason) pairs;
+    empty means every prop passes."""
     out = []
     for p in props:
         asset = p["asset"]
@@ -119,6 +128,11 @@ def extent_violations(props):
             continue
         x0, y0, z0, x1, y1, z1 = prop_world_box(asset, p["position"], p.get("rotation_deg", [0, 0, 0]),
                                                  p.get("scale", 1.0))
+        for rx0, ry0, rx1, ry1, name in rooms:
+            if _rect_overlap_area((x0, y0, x1, y1), (rx0, ry0, rx1, ry1)) > 1e-6:
+                out.append((p["id"], "world box (%.2f,%.2f)-(%.2f,%.2f) enters the garden-level room %s"
+                            % (x0, y0, x1, y1, name)))
+                break
         if z1 > 0 and z0 < BUILDING_HEIGHT:           # the prop's own z-range overlaps our GF storey's (0..APT)
             for rect in BUILDING_RECTS:
                 if _rect_overlap_area((x0, y0, x1, y1), rect) > 1e-6:
@@ -197,8 +211,12 @@ def _furniture(mid, parts, center, width, depth, height):
     return out
 
 
-def build(spec):
+def build(spec, lay=None):
     """Return scene meshes, supported CC0 props, notes and checkable layout."""
+    if lay is None:
+        from . import villa_r11 as R
+        lay = R.design("D1")
+    rooms = garden_level_rooms(lay)
     meshes, props = [], []
     doors = [d for d in spec["doors"] if d.get("garden")]
     if len(doors) != len(PATHS):
@@ -218,13 +236,15 @@ def build(spec):
         meshes.append(dict(id="landscape-pebble-joints-" + name, group="ground", material="garden-pebbles",
                            label="ASSUMED pebble-set edge to sandstone path", faces=joint))
     # Gravel and raised sandstone beds avoid all four walking routes.
-    beds = (("north", (13.00, -22.65, 14.05, -20.80)),
+    beds = (("north", (21.25, -22.65, 22.45, -20.80)),   # open strip east of the dirty kitchen (x > 15.41)
             ("east", (26.95, -25.85, 28.15, -23.75)),
             ("south", (26.90, -29.25, 28.10, -27.25)),
             ("west", (0.20, -25.35, 0.85, -23.75)))
     for name, (x0, y0, x1, y1) in beds:
         if not all(inside_yard(x, y) for x in (x0, x1) for y in (y0, y1)):
             raise ValueError(name + " bed leaves our yard")
+        if any(_rect_overlap_area((x0, y0, x1, y1), r[:4]) > 1e-6 for r in rooms):
+            raise ValueError(name + " bed stands inside a garden-level room")
         meshes.append(dict(id="landscape-gravel-" + name, group="ground", material="garden-gravel",
                            label="ASSUMED gravel planting bed, " + name,
                            faces=_quad(x0, y0, x1, y1, GROUND + 0.006)))
@@ -249,7 +269,7 @@ def build(spec):
                           label="dressing: ASSUMED CC0 %s shade-tree stand-in for olive (Olea europaea); height "
                                 "%.1f m ASSUMED (no cited mature-height figure held for the species), scale "
                                 "derived from the asset's measured native height" % (asset, target_h)))
-    bad = extent_violations(tree_props)
+    bad = extent_violations(tree_props, rooms)
     if bad:
         raise ValueError("landscape tree(s) violate the building/plot extent guard: " + "; ".join(
             "%s: %s" % item for item in bad))
@@ -259,9 +279,9 @@ def build(spec):
     # combined box, exactly what Blender's importer builds), so at scale 1.0 they are wider than the single small
     # clump their name/position implied and crossed the plot or yard line once the real bounds were checked
     # (extent_violations below; the fix is a smaller scale, not a moved point -- these dress a bed, not a tree).
-    planting = (("searsia", "searsia_lucida", 13.25, -21.65, GROUND + 0.38, 0.7),
-                ("grass-n", "grass_medium_01", 13.75, -22.2, GROUND + 0.38, 1.0),
-                ("gazania", "flower_gazania", 13.1, -22.25, GROUND + 0.38, 1.0),
+    planting = (("searsia", "searsia_lucida", 21.6, -21.65, GROUND + 0.38, 0.7),
+                ("grass-n", "grass_medium_01", 22.1, -22.2, GROUND + 0.38, 1.0),
+                ("gazania", "flower_gazania", 21.55, -22.3, GROUND + 0.38, 1.0),
                 ("periwinkle", "periwinkle_plant", 27.45, -24.15, GROUND + 0.38, 1.0),
                 ("grass-e", "grass_medium_02", 27.6, -25.25, GROUND + 0.38, 0.5),
                 ("rooibos", "wild_rooibos_bush", 27.45, -28.0, GROUND + 0.38, 0.45),
@@ -269,13 +289,13 @@ def build(spec):
                 ("shrub-b", "shrub_02", 27.5, -24.9, GROUND + 0.38, 0.18),
                 ("shrub-c", "shrub_03", 0.5, -24.3, GROUND + 0.38, 1.0),
                 ("shrub-d", "shrub_04", 0.5, -24.95, GROUND + 0.38, 1.0),
-                ("boulder", "boulder_01", 26.7, -22.5, GROUND, 1.0),
+                ("boulder", "boulder_01", 27.55, -26.55, GROUND, 1.0),   # beside the east bed, clear of the v07 lens
                 ("stones", "namaqualand_stones_01", 25.4, -29.0, GROUND, 1.0))
     planting_props = [dict(id="landscape-" + name, asset=asset, position=[x, y, z],
                           rotation_deg=[0, 0, 0], scale=scale,
                           label="dressing: ASSUMED CC0 " + asset + " garden planting")
                       for name, asset, x, y, z, scale in planting]
-    bad = extent_violations(planting_props)
+    bad = extent_violations(planting_props, rooms)
     if bad:
         raise ValueError("landscape planting violates the building/plot extent guard: " + "; ".join(
             "%s: %s" % item for item in bad))

@@ -19,10 +19,24 @@ class ChosenViews(unittest.TestCase):
         scene = {"meshes": [{"id": "landscape-sofa-00",
                              "faces": [[[24.0, -28.0, -3.0], [26.1, -28.0, -3.0],
                                         [26.1, -27.15, -3.0], [24.0, -27.15, -3.0]]]}]}
-        self.assertEqual(views.subject_footprint("terrace lounge set", ITEMS, LAY["rooms"], scene),
+        self.assertEqual(views.subject_footprint("landscape-sofa", ITEMS, LAY["rooms"], scene),
                          (24.0, -28.0, 26.1, -27.15))
         with self.assertRaisesRegex(ValueError, "unresolved view subject"):
-            views.subject_footprint("terrace lounge set", ITEMS, LAY["rooms"], {"meshes": []})
+            views.subject_footprint("landscape-sofa", ITEMS, LAY["rooms"], {"meshes": []})
+
+    def test_every_view_subject_matches_scene_content(self):
+        """Round-2 draft: v07 still named "terrace lounge set" after the landscape replaced that set, so the
+        renderer matched nothing and QA reported the subject out of frame. Mirror villa_scene.subjects' matching."""
+        from archpipe.concept import villa_render as V
+        scene = V.build(LAY)
+        meshes = scene["meshes"]
+
+        def matched(s):
+            return [m for m in meshes if m["id"] == s or m["id"].startswith(s) or m.get("room") == s
+                    or m.get("label") == s]
+        orphans = [(v["id"], s) for v in scene["views"] for s in v["subjects"] if not matched(s)]
+        self.assertEqual(orphans, [])
+        self.assertFalse(matched("terrace lounge set"), "the stale v07 subject must stay unmatched (the real defect)")
 
     def test_bed_is_seen_from_its_front(self):
         """Draft 11's parents' view stood at the entry and faced the windows; the headboard was out of frame."""

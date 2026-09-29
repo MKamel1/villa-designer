@@ -43,7 +43,7 @@ def subject_footprint(subject, items, rooms, scene):
         return F.footprint(items[subject])
     if subject in rooms:
         return None  # stair void is a space, not a bounded furniture piece
-    if subject == "terrace lounge set":
+    if subject == "landscape-sofa":
         pts = [p for m in scene["meshes"] if m["id"].startswith("landscape-sofa-")
                for face in m["faces"] for p in face]
         if pts:

@@ -807,3 +807,21 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   anisotropic, so a simple per-axis variance comparison cannot distinguish "correctly oriented grain" from "a
   collapsed axis" by itself; the geometric proof above does not depend on that measurement. Visually confirm on
   the next real render.
+  Visually confirmed 2026-09-28 by the lead (second D1 round-2 draft, v11-stair-void.png): tread grain now runs along the tread.
+- **The prop-extent guard only knew the GF storey, so the north planting bed stood inside the dirty kitchen.**
+  Second round-2 draft, v17-dirty-kitchen.png: shrubs filled the basement dirty kitchen and showed through the new
+  kitchen hatch (v01). Cause: the garden is at basement level, and the yard polygon's north strip runs over the
+  basement store-ramp, cinema, guest WC and dirty kitchen; `extent_violations` checked only the GF rectangles
+  (FRONT/BAR/BUMP), so a bed at x 13.0-14.05 inside the dirty kitchen (x 11.2-15.41) passed both tests. Missed
+  because the first guard was proven only on the tree defect it was written for. Guard: `garden_level_rooms(lay)`
+  feeds every level-B room to `extent_violations` and to the bed check in `build`;
+  `tests/test_landscape.py::test_guard_fails_on_the_real_north_bed_inside_the_dirty_kitchen` shows the GF-only
+  guard passing the real draft searsia and the room-aware guard failing it. The bed moved to the open strip
+  east of the dirty kitchen.
+- **A view subject can outlive the thing it names.** v07 kept the subject "terrace lounge set" after the
+  landscape replaced that set, so the renderer matched no object and QA reported the subject out of frame.
+  Guard: `tests/test_render_views.py::test_every_view_subject_matches_scene_content` mirrors
+  `villa_scene.subjects`' matching over every view of the real scene.
+- **An asset stand-in's native size is a claim to check, not a default.** Codex placed CC0 trees without a
+  workstation to see them; the first render showed the error. The lead must render or measure every new asset
+  before trusting a guard that reasons about it.

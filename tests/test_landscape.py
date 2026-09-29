@@ -47,6 +47,18 @@ class LandscapeExtentGuard(unittest.TestCase):
                                     "the parents' bedroom and the garden-living ceiling")
         self.assertIn("building footprint", violations[0][1])
 
+    def test_guard_fails_on_the_real_north_bed_inside_the_dirty_kitchen(self):
+        # Second draft (v17): the north bed's searsia at (13.25, -21.65), scale 0.7, stood inside the basement dirty
+        # kitchen -- the GF-only building rectangles and the yard polygon both let it through.
+        draft = dict(id="landscape-searsia-draft", asset="searsia_lucida",
+                     position=[13.25, -21.65, LAND.GROUND + 0.38], rotation_deg=[0, 0, 0], scale=0.7)
+        self.assertEqual(LAND.extent_violations([draft]), [], "the GF-only guard missed it (the real defect)")
+        rooms = LAND.garden_level_rooms(R.design("D1"))
+        self.assertTrue(any("dirty-kitchen" in why for _, why in LAND.extent_violations([draft], rooms)))
+        lay = R.design("D1")
+        _, props, _, _ = LAND.build(RS.build(lay), lay)
+        self.assertEqual(LAND.extent_violations(props, rooms), [])
+
     def test_current_villa_landscape_build_clears_the_guard(self):
         lay = R.design("D1")
         sp = RS.build(lay)
