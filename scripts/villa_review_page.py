@@ -33,11 +33,15 @@ def why(check, v):
         return "blue hour: the sky is genuinely cool; not corrected in camera"
     if c == "colour_cast" and st == "day":
         return "3000 K lamps on by day under a daylight white balance: the warmth is real"
-    if c == "window_view":
+    if c == "window_view" and v["id"] == "v04-study-deck":
         # checked by ray-casting the v04 camera through the north study window: the villa's own boundary wall 9 m
         # away below 1.1 m, open sky above; nothing beyond is modelled on that side
         return ("through this window: the villa's own boundary wall 9 m away, then open sky; no neighbouring "
                 "building is modelled on that side (a site-context gap, not a finding about the design)")
+    if c == "window_view" and v["id"] == "v15-family-bath":
+        # measured by render_qa 2026-09-28: 84 % of the pane clipped at the day exposure locked for all day views
+        return ("the small high window clips to white at the day exposure shared by every day view: outside is far "
+                "brighter than this dim bathroom, as it would be to a camera; not corrected")
     if c == "crushed_shadows":
         return "the room's dark areas are its specified lighting at the locked exposure"
     if c == "window_brightness" and v.get("exposure") == "exterior-day":
@@ -48,21 +52,22 @@ def why(check, v):
 
 
 DECISIONS = [
-    ("Parents' dressing door", "Recommended: 0.8 m door centred 0.1 m from the east wall, with a slim 0.35 m bedside "
-     "table, so nothing stands in the opening (a 0.5 m table stood 0.23 m in it). A 0.8 m door is narrower than the "
-     "0.9 m route used elsewhere: it needs your yes as a waiver for the private dressing area (ADR-0014)."),
-    ("Study windows in D2 and D3 too", "Your big low-sill study windows were applied to all three options (same "
-     "study); please confirm that D2 and D3 should follow D1 here."),
-    ("Dirty-kitchen fridge", "A full-height fridge replaces the cleaning-cupboard column; cleaning storage moves under "
-     "the folding counter. Recommended (you asked for appliances there); needs your yes."),
-    ("Bunk ladder", "A ladder on the open side of kids' room A's bunk (a bunk needs one); it is now part of the "
-     "furniture specification sent to Revit."),
-    ("Stair structure", "Rendered with ASSUMED steel stringers, open risers and a bar balustrade; the model's treads "
-     "stop 50-200 mm short of the party wall. To be designed and put into the Revit model."),
+    ("Approved 2026-09-28", "The 0.8 m dressing door with a 0.35 m bedside table, the low-sill study windows in all "
+     "three options, and the dirty-kitchen fridge (option A: fridge and oven bank, microwave in the island, folding "
+     "counter kept) are now in the design, the renders and the Revit model (ADR-0014)."),
+    ("Stair glass and guard height", "The frameless glass is shown 12 mm thick in the renders and modelled 20 mm in "
+     "Revit, both ASSUMED; its thickness, fixing and the 0.9 m guard height need a structural engineer's sizing."),
+    ("Trees", "No free olive or citrus model exists, so the shade trees are labelled stand-ins sized to an ASSUMED "
+     "3.8-4 m; bougainvillea and jasmine on the walls are not shown. The species are your choice, not the model's."),
+    ("Cinema desk headroom", "The desk sits under the sloped ramp soffit with 2.307 m clear, 7 mm above the 2.300 m "
+     "target: it passes, with almost no margin if the ramp structure grows."),
+    ("Dishwasher position", "Measured 500 mm from the sink edge against the adopted 600-900 mm range: an advisory "
+     "from your guidelines document, not enforced."),
     ("Ramp soffit", "The parking model and the rendered ramp differ by up to 150 mm under the dirty kitchen; fittings "
      "were seated on the rendered soffit. To be reconciled in Revit."),
     ("Products", "Furniture, appliances, taps, mirrors and several fittings are procedural stand-ins at the checked "
-     "sizes; finishes are ASSUMED from your taste profile until you choose them."),
+     "sizes; finishes are ASSUMED from your taste profile until you choose them. Light fittings live in the lighting "
+     "design and are not yet placed in the Revit model."),
 ]
 
 
