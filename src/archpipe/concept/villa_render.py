@@ -1824,8 +1824,10 @@ EXPOSURE = {  # PRE-REGISTERED (2026-09-27) before the first render; incident me
 
 
 def VIEWS(lay=None):
-    """The 14 views: the client's 8 (questionnaire) + 6 more. Camera at eye height 1.55 m (1.2 m for the seated
-    cinema), level, framed on plan (check with scripts/villa_render_views.py)."""
+    """Client view set, with level cameras at 1.35 m standing eye height (1.20 m seated).
+
+    Check the authored garden and cross-room directions with scripts/villa_render_views.py.
+    """
     B, G = LZ["B"], LZ["GF"]
     day = "2026-10-15T10:30:00+03:00"
     dusk = "2026-10-15T18:35:00+03:00"
@@ -1906,6 +1908,34 @@ def VIEWS(lay=None):
     # the garden-level entrance gave no informative frame (a door leaf and a cabinet); the bar alcove instead
     v("v24-bar-alcove", "Library and daybed nook at night", "evening", I, I, 24, ["library-cabinet-left", "library-daybed", "library-cabinet-right"], room="living",
       final_only=True, dimmers={"ambient": 0.3, "accent": 0.8})
+    # Client additions, 2026-09-29. Garden overlooks and views through several rooms have explicit standing points;
+    # the single-room views below are placed by intent using render_views.choose.
+    v("v25-top-garden-gate", "Top garden from the street gate", "day", [4.4, -21.7, G + 1.35],
+      [12.4, -22.0, G + 1.35], 24, ["landscape-top-planter-deck", "landscape-top-planter-roof"],
+      final_only=True, exposure="exterior-day")
+    v("v26-top-garden-north", "Top garden over the north garden", "day", [14.5, -22.0, G + 1.35],
+      [19.0, -21.8, G + 1.35], 24, ["landscape-bed-north", "landscape-lemon-pot"],
+      shift_y=-0.22, final_only=True, exposure="exterior-day")
+    v("v27-north-garden-above", "North garden from the study deck", "day", [8.7, -22.3, G + 1.35],
+      [19.0, -21.8, G + 1.35], 24, ["landscape-bed-north", "landscape-lemon-pot"],
+      shift_y=-0.18, final_only=True, exposure="exterior-day")
+    v("v28-north-garden-below", "North garden at basement level", "day", [16.1, -21.0, B + 1.35],
+      [20.5, -22.1, B + 1.35], 24, ["landscape-lemon-pot", "landscape-trellis-north"],
+      final_only=True, exposure="exterior-day")
+    v("v29-under-stair-store", "Under-stair storage from the lounge", "day", I, I, 24,
+      ["stair-flight-store", "stair-landing-store"], room="lounge", final_only=True, **BASEMENT_DAY)
+    V[-1]["caption_notes"] = ["Sliding joinery fronts shown closed; the storage modules are behind them."]
+    v("v30-under-ramp-store", "Under-ramp store shelving", "day", I, I, 24,
+      ["store-shelves"], room="store-ramp", final_only=True, **BASEMENT_DAY)
+    V[-1]["caption_notes"] = ["The sloping ramp soffit gives 1.45 to 2.0 m clear height."]
+    v("v31-dressing-hers", "Dressing: her section", "evening", I, I, 24,
+      ["pd-hang-1"], room="parents-dressing", final_only=True, dimmers={"ambient": 0.6})
+    v("v32-dressing-his", "Dressing: his section", "evening", I, I, 24,
+      ["pd-hang-2"], room="parents-dressing-ext", final_only=True, dimmers={"ambient": 0.6})
+    v("v33-basement-north-south", "Basement open space, north to south", "day", [20.3, -23.9, B + 1.35],
+      [20.3, -28.5, B + 1.35], 24, ["living-sofa", "library-daybed"], final_only=True, **BASEMENT_DAY)
+    v("v34-basement-south-north", "Basement open space, south to north", "day", [17.8, -28.9, B + 1.35],
+      [19.85, -27.2, B + 1.35], 24, ["living-sofa"], final_only=True, **BASEMENT_DAY)
     # ADR-0013 part 8: 24 mm, a LEVEL camera at eye height 1.35 m (1.20 m seated), lens shift not tilt
     from . import render_views as RV
     sp_ = RS.build(lay)
@@ -1915,7 +1945,8 @@ def VIEWS(lay=None):
                    if any(abs(pr["position"][2] - z_) < 0.02 for z_ in LZ.values())]
     for x in V:
         c = x["camera"]
-        if x["state"] == "exterior-dusk" or x["id"] in ("v18-street-facade", "v19-garden-facade"):
+        if x["state"] == "exterior-dusk" or x["id"] in ("v18-street-facade", "v19-garden-facade") or \
+                x["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v33-", "v34-")):
             continue
         room = x.get("room")
         lvz = LZ[lay["rooms"][room]["level"]] if room else (LZ["B"] if c["position"][2] < -0.1 else LZ["GF"])

@@ -38,16 +38,16 @@ def door_leaf_near(scene, px, py):
 
 
 def subject_footprint(subject, items, rooms, scene):
-    """Plan bounds of a declared view subject, including the built outdoor sofa."""
+    """Plan bounds of a declared view subject, from furniture or matching built meshes."""
     if subject in items:
         return F.footprint(items[subject])
     if subject in rooms:
         return None  # stair void is a space, not a bounded furniture piece
-    if subject == "landscape-sofa":
-        pts = [p for m in scene["meshes"] if m["id"].startswith("landscape-sofa-")
-               for face in m["faces"] for p in face]
-        if pts:
-            return min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
+    pts = [p for m in scene["meshes"]
+           if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
+           for face in m["faces"] for p in face]
+    if pts:
+        return min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
     raise ValueError("unresolved view subject: " + subject)
 
 

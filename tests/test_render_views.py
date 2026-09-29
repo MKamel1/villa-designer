@@ -37,6 +37,14 @@ class ChosenViews(unittest.TestCase):
         orphans = [(v["id"], s) for v in scene["views"] for s in v["subjects"] if not matched(s)]
         self.assertEqual(orphans, [])
         self.assertFalse(matched("terrace lounge set"), "the stale v07 subject must stay unmatched (the real defect)")
+        additions = scene["views"][24:]
+        self.assertEqual([v["id"].split("-")[0] for v in additions],
+                         ["v%02d" % n for n in range(25, 35)])
+        self.assertTrue(all(v["subjects"] for v in additions))
+        self.assertTrue(all(v["camera"]["position"][2] == v["camera"]["target"][2]
+                            for v in additions), "the added cameras must stay level")
+        self.assertTrue(all(v["camera"]["lens_mm"] in (16, 24) for v in additions))
+        self.assertEqual([v["exposure"] for v in additions[:4]], ["exterior-day"] * 4)
 
     def test_bed_is_seen_from_its_front(self):
         """Draft 11's parents' view stood at the entry and faced the windows; the headboard was out of frame."""
