@@ -1539,10 +1539,18 @@ def props(lay):
     add("living-plant-table", "potted_plant_04", x + 0.3, y, B + it["living-coffee"]["h"],
         label="single potted table plant, 0.168 x 0.185 m footprint, 0.267 m tall")
     add("living-plant", "potted_plant_02", 22.1, -24.25, B, label="floor plant by the garden door")
-    bk = fp["library-cabinet-right"]
-    for k in range(2):
-        add("library-books-%d" % k, "book_encyclopedia_set_01", bk[0] + 0.45 + k * 0.6, bk[1] + 0.16,
-            B + (0.442, 0.842)[k], label="books on the library shelves")
+    # Client round 2: the lit glass-door cabinets are for book display. Every shelf (tops at 0.102 plinth, then
+    # 0.442/0.842/1.242/1.642 m, villa_furniture_detail._glass_bookcase) holds book sets 0.55 m wide, 0.24 m tall
+    # (measured bounds_m), alternating full and half rows so the display reads curated, not stocked.
+    n = 0
+    for cab, full, half in (("library-cabinet-left", (0.05, 0.62), (0.30,)),
+                            ("library-cabinet-right", (0.05, 0.90), (0.45,))):
+        bk = fp[cab]
+        for s, z in enumerate((0.080, 0.442, 0.842, 1.242, 1.642)):
+            for dx in (full if s % 2 == 0 else half):
+                add("library-books-%d" % n, "book_encyclopedia_set_01", bk[0] + dx, bk[1] + 0.16, B + z,
+                    label="books on the library shelves")
+                n += 1
     x, y = c("pb-bedside")
     add("bedside-books", "book_encyclopedia_set_01", x, y, G + it["pb-bedside"]["h"], label="books on the bedside")
     # plants where a person would put them (client: "consider if all the added plants are ... reasonable"): the
@@ -1650,7 +1658,7 @@ def VIEWS(lay=None):
       [8.9, -28.02, G + 1.35], 24, [], final_only=True, layers=["ambient", "accent"], dimmers={},
       exposure="evening")                      # lit by its lamps only: the lamp white balance, as a photographer would
     # the garden-level entrance gave no informative frame (a door leaf and a cabinet); the bar alcove instead
-    v("v24-bar-alcove", "Library and daybed nook at night", "evening", I, I, 24, ["library-daybed"], room="bar-alcove",
+    v("v24-bar-alcove", "Library and daybed nook at night", "evening", I, I, 24, ["library-cabinet-left", "library-daybed", "library-cabinet-right"], room="living",
       final_only=True, dimmers={"ambient": 0.3, "accent": 0.8})
     # ADR-0013 part 8: 24 mm, a LEVEL camera at eye height 1.35 m (1.20 m seated), lens shift not tilt
     from . import render_views as RV
