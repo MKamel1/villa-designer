@@ -14,6 +14,16 @@ ITEMS = {i["id"]: i for i in F.layout(LAY)}
 
 
 class ChosenViews(unittest.TestCase):
+    def test_exterior_lounge_subject_uses_built_sofa_bounds(self):
+        from scripts import villa_render_views as views
+        scene = {"meshes": [{"id": "landscape-sofa-00",
+                             "faces": [[[24.0, -28.0, -3.0], [26.1, -28.0, -3.0],
+                                        [26.1, -27.15, -3.0], [24.0, -27.15, -3.0]]]}]}
+        self.assertEqual(views.subject_footprint("terrace lounge set", ITEMS, LAY["rooms"], scene),
+                         (24.0, -28.0, 26.1, -27.15))
+        with self.assertRaisesRegex(ValueError, "unresolved view subject"):
+            views.subject_footprint("terrace lounge set", ITEMS, LAY["rooms"], {"meshes": []})
+
     def test_bed_is_seen_from_its_front(self):
         """Draft 11's parents' view stood at the entry and faced the windows; the headboard was out of frame."""
         c = RV.choose(LAY, "parents-bed", ["pb-bed"], lens_mm=24, sp=SP)

@@ -14,7 +14,8 @@ ALLOWED_MATERIALS = {
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath",
     "marble-white", "walnut", "walnut-grain-x", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
-    "black-metal", "ceramic-white", "screen-black", "glass-clear", "glass-guard", "silvered-mirror", "door-oak",
+    "black-metal", "ceramic-white", "screen-black", "glass-clear", "glass-guard", "glass-edge", "opal-strip",
+    "silvered-mirror", "door-oak", "garden-gravel", "garden-pebbles", "garden-sandstone",
     "render-exterior", "paint-exterior-grey-green", "paving", "lawn", "outdoor-fabric", "teak",
     "alu-bronze", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
     "marker-2200", "opal-pen-globe-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
@@ -23,6 +24,100 @@ ALLOWED_MATERIALS = {
 
 
 class RenderStandard(unittest.TestCase):
+    def test_wp2b_checked_joinery_and_kitchen_builders(self):
+        from archpipe.concept import villa_furnish as F, villa_furniture_detail as FD
+        items = {i["id"]: i for i in F.layout(VR.R.design("D1"))}
+        expected = {
+            "library-cabinet-left": {"glass-door", "door-frame", "shelf", "back"},
+            "library-cabinet-right": {"glass-door", "door-frame", "shelf", "back"},
+            "library-daybed": {"mattress", "cushion", "nook-side", "nook-top"},
+            "dk-appliance-bank": {"fridge", "oven-glass"},
+            "k-island": {"microwave-glass", "hob"},
+            "dk-fold": {"worktop", "front", "handle"},
+            "cinema-desk": {"top", "pedestal", "drawer", "cable-tray"},
+        }
+        for name, required in expected.items():
+            # world_parts raises EnvelopeError if any builder vertex leaves the
+            # checked footprint or the daybed's separate full-height surround.
+            parts = FD.world_parts(items[name], VR.LZ[items[name]["level"]])
+            self.assertTrue(required <= set(parts), (name, set(parts)))
+        ids = {m["id"] for m in SCENE["meshes"]}
+        self.assertTrue(any(i.startswith("detail-cabinet-led-") for i in ids))
+        self.assertIn("detail-curtain-library-nook-track", ids)
+        self.assertTrue(all(m["material"] == "walnut" for m in SCENE["meshes"]
+                            if m["id"].startswith("furn-library-end-panel-")))
+        self.assertEqual(sum(i.startswith("lamp-shade-DESK-cinema-") for i in ids), 2)
+        self.assertEqual(sum(i.startswith("furn-cinema-desk-chair-") and i.endswith("-0") for i in ids), 2)
+
+    def test_wp2b_openings_bath_stair_and_extract_match_spec(self):
+        from archpipe.concept import revit_spec as RS, villa_daylight as VD
+        from archpipe import daylight as D
+        lay = VR.R.design("D1")
+        sp = RS.build(lay)
+        ids = {m["id"] for m in SCENE["meshes"]}
+        for name in ("detail-hatch-sill", "detail-hatch-head", "detail-hatch-left", "detail-hatch-right",
+                     "detail-hatch-shutter-box", "detail-pocket-panel-0", "detail-pocket-panel-1",
+                     "detail-pocket-panel-2", "detail-pe-rain-head-plate", "detail-pe-rain-head-drop",
+                     "detail-pe-hand-shower-rail", "detail-pe-bath-screen", "detail-vent-guest-wc-grille",
+                     "detail-vent-dirty-kitchen-grille", "appliance-hood-dirty-canopy"):
+            self.assertIn(name, ids)
+        hatch = sp["hatches"][0]
+        wall = next(w for w in sp["walls"] if w["level"] == "B" and
+                    abs(w["y0"] - hatch["y"]) < 0.001 and w["x0"] <= hatch["x0"] < hatch["x1"] <= w["x1"])
+        opening = dict(offset=hatch["x0"] - wall["x0"], width=hatch["x1"] - hatch["x0"],
+                       sill=hatch["sill"], head=hatch["head"], kind="hole")
+        faces = D.wall((wall["x0"], wall["y0"]), (wall["x1"], wall["y1"]), VR.LZ["B"],
+                       wall["height"], wall["thickness"], [opening])
+        self.assertFalse(any(f.material in ("glass", "door") for f in faces))
+        self.assertEqual(VD.scene(lay).openings["spec"], len(sp["windows"]) + len(sp["doors"]) + 1)
+        self.assertEqual(VD.scene(lay).openings["placed"], VD.scene(lay).openings["spec"])
+        pocket = next(d for d in sp["doors"] if d.get("sliding") and
+                      set(d["rooms"]) == {"kitchen", "dirty-kitchen"})
+        self.assertEqual(VD._openings_on(wall, "B", [], [pocket])[0]["kind"], "hole",
+                         "stowed pocket leaves must leave an open passage, not a glass pane")
+        self.assertTrue(all(m["material"] == "glass-guard" for m in SCENE["meshes"]
+                            if m["id"].startswith("detail-stair-glass-") and
+                            "edge" not in m["id"] and m["id"][-2:].isdigit()))
+        self.assertEqual(next(m for m in SCENE["meshes"] if m["id"] == "detail-stair-wall-handrail")["material"], "oak")
+
+    def test_wp2b_landscape_plot_support_setbacks_and_routes(self):
+        from archpipe.concept import villa_landscape as LAND, revit_spec as RS, render_support as S
+        sp = RS.build(VR.R.design("D1"))
+        meshes, props, notes, plan = LAND.build(sp)
+        self.assertEqual(set(plan["paths"]), {"dining", "living-north", "living-east", "lounge-west"})
+        for m in meshes:
+            for face in m["faces"]:
+                for x, y, _ in face:
+                    self.assertTrue(LAND.inside_yard(x, y), m["id"])
+        parking = sp["parking2"]["ramp"]
+        deck = sp["parking2"]["deck"]
+        parked = (min(x for x, _ in parking["profile"]), parking["y0"], deck["x1"], parking["y1"])
+        for m in meshes:
+            if not m["id"].startswith(("landscape-planter-", "landscape-gravel-", "landscape-path-")):
+                continue
+            pts = [p for face in m["faces"] for p in face]
+            x0, x1 = min(p[0] for p in pts), max(p[0] for p in pts)
+            y0, y1 = min(p[1] for p in pts), max(p[1] for p in pts)
+            self.assertFalse(min(x1, parked[2]) - max(x0, parked[0]) > 0.005 and
+                             min(y1, parked[3]) - max(y0, parked[1]) > 0.005, m["id"])
+        for _, _, x, y, _ in plan["trees"]:
+            self.assertTrue(LAND.inside_yard(x, y))
+            self.assertGreaterEqual(LAND.facade_distance(x, y), 1.5)
+        self.assertLess(LAND.facade_distance(1.10, -28.00), 1.5,
+                        "the old west tree must fail against the front projection")
+        for d in (d for d in sp["doors"] if d.get("garden")):
+            self.assertTrue(any(x0 - 0.001 <= d["x"] <= x1 + 0.001 and
+                                y0 - 0.001 <= d["y"] <= y1 + 0.001
+                                for x0, y0, x1, y1 in plan["paths"].values()), d)
+        self.assertTrue({"jacaranda_tree", "tree_small_02", "searsia_lucida", "grass_medium_01",
+                         "grass_medium_02", "flower_gazania", "periwinkle_plant", "wild_rooibos_bush",
+                         "boulder_01", "namaqualand_stones_01"} <= {p["asset"] for p in props})
+        self.assertTrue(all(p["position"][2] >= LAND.GROUND for p in props))
+        self.assertEqual(S.unsupported(SCENE), [])
+        self.assertEqual(S.blocked_openings(SCENE), [])
+        self.assertTrue(any("14:00" in n and "17:00" in n for n in notes))
+        self.assertTrue(any("Drip" in n or "drip" in n for n in notes))
+
     def test_lighting_spec_needs_no_render_ceiling_moves(self):
         moves = [note for note in SCENE["notes"] if note.startswith("Recessed fittings seated")]
         self.assertEqual(moves, [], "render seating still corrected lighting-spec heights")
@@ -241,9 +336,10 @@ class RenderStandard(unittest.TestCase):
 
     def test_assumed_stair_construction_is_present(self):
         ids = {m["id"] for m in SCENE["meshes"]}
-        for suffix in ("wall-stringer-00", "wall-plate", "open-stringer", "baluster-00", "open-handrail",
-                       "wall-handrail"):
+        for suffix in ("wall-stringer-00", "wall-plate", "open-stringer", "glass-00", "glass-edge-00",
+                       "glass-shoe", "wall-handrail"):
             self.assertIn("detail-stair-" + suffix, ids)
+        self.assertFalse(any("baluster" in i or "open-handrail" in i for i in ids))
         self.assertIn("Risers remain open", " ".join(SCENE["notes"]))
 
     def test_desk_chairs_and_drawers_face_each_other(self):
@@ -288,7 +384,8 @@ class RenderStandard(unittest.TestCase):
         self.assertIn("cleaning storage", items["dk-run"]["why"])
         for name in ("k-run", "dk-run"):
             self.assertTrue({"sink", "tap"} <= set(FD.world_parts(items[name], 0)))
-        self.assertIn("microwave-glass", FD.world_parts(items["dk-appliance-bank"], 0))
+        self.assertIn("microwave-glass", FD.world_parts(items["k-island"], 0))
+        self.assertNotIn("microwave-glass", FD.world_parts(items["dk-appliance-bank"], 0))
         self.assertIn("glass-door", {name for name, _ in F3.body(items["library-cabinet-left"])})
 
     def test_bath_mixer_ladder_and_upholstery_stay_in_the_checked_envelopes(self):
@@ -429,7 +526,8 @@ class RenderStandard(unittest.TestCase):
                    [next(r for r in d["rooms"] if r != "yard") for d in sp["doors"] if d.get("garden")])
         expected_rooms = {room for room in openings if lay["rooms"][room]["occupancy"] in VR.CURTAIN_OCC}
         got_rooms = {c["room"] for c in SCENE["curtains"]}
-        self.assertEqual(got_rooms, expected_rooms)
+        self.assertEqual(got_rooms, expected_rooms | {"bar-alcove"})
+        self.assertEqual(sum(c["id"] == "curtain-library-nook" for c in SCENE["curtains"]), 1)
         self.assertTrue(expected_rooms & {"kids-a", "kids-b", "parents-bed"}, "no bedroom curtains found")
         self.assertTrue(expected_rooms & {"living", "dining"}, "no living-space curtains found")
         excluded = {"guest-wc", "family-bath", "parents-ensuite", "kitchen", "kitchen-island", "kitchen-work",
@@ -505,6 +603,12 @@ class RenderStandard(unittest.TestCase):
 
         self.assertTrue(SCENE["curtains"])
         for c in SCENE["curtains"]:
+            if c["id"] == "curtain-library-nook":
+                # This track is fixed to the daybed's checked tall surround,
+                # rather than to an exterior wall or window reveal.
+                self.assertEqual(c["opening_kind"], "window")
+                self.assertGreater(c["wall_face"] + 0.10, c["center"][1] - 0.01)
+                continue
             self.assertTrue(hang_ok(c, 0.10), c["id"] + ": sheer not on the room side of the wall face")
             self.assertTrue(hang_ok(c, 0.15), c["id"] + ": heavy not on the room side of the wall face")
             # the pre-fix placement (0.05/0.11 m off the window line itself) fails this same check

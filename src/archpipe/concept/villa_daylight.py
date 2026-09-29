@@ -3,7 +3,8 @@ from (concept/revit_spec.py) and the environment model (villa_env: fences, neigh
 above, core, columns, beams, slabs, the kept NE yard wall).
 
 Stated for this study (daylight notes, carried into the report):
-  * no car parked on the deck; no furniture; internal doors closed, open-plan joins open, garden and deck doors
+  * no car parked on the deck; no furniture; internal hinged doors closed and the pocket door stowed,
+    open-plan joins open, garden and deck doors
     glazed; guard rails drawn solid (a glass balustrade would let more light by);
   * the ground outside our plot is a plane at street level (the neighbours' own sunken yards are not modelled);
   * reflectances and glazing as daylight.MATERIALS; frames and dirt not modelled (clean-glass simulation).
@@ -43,10 +44,12 @@ def _openings_on(wall, level, windows, doors):
         if sp_ and (sp_[0] == "h") != (abs(yb - ya) < 1e-6):
             continue
         if is_door:
-            kind = "glazed" if (o.get("garden") or o.get("sliding")) else "door"
+            # The pocket leaves are stowed in the side pocket in the day
+            # scene; a glazed infill here would visibly close the opening.
+            kind = "glazed" if o.get("garden") else ("hole" if o.get("sliding") else "door")
             sill, head = 0.0, o.get("height", 2.1)
         else:
-            kind, sill, head = "window", o["sill"], o["sill"] + o["height"]
+            kind, sill, head = o.get("kind", "window"), o["sill"], o["sill"] + o["height"]
         out.append({"offset": along - o["width"] / 2, "width": o["width"], "sill": sill, "head": head, "kind": kind})
     return out
 
@@ -170,7 +173,7 @@ def scene(lay, variant=None) -> D.Scene:
     if v.get("slot"):
         sp = _slot_spec(sp, lay, v["slot"])
     s = D.Scene(notes=["car(s) parked on the deck" if v.get("car") else "no car parked",
-                       "no furniture; internal doors closed, open-plan joins open",
+                       "no furniture; internal hinged doors closed, pocket door stowed, open-plan joins open",
                        "garden and deck doors glazed; guard rails solid",
                        "ground outside the plot flat at street level; clean glass (maintenance factor 1)"]
                 + (["variant: " + ", ".join("%s=%s" % kv for kv in sorted(v.items()))] if v else []))
@@ -205,13 +208,21 @@ def scene(lay, variant=None) -> D.Scene:
         s.add(D.box(rect[0], rect[1], -SLAB_T, rect[2], rect[3], 0.0, "ceiling", top="floor", bottom="ceiling"))
     # the option: walls with their openings, stair, block roofs / parking structures
     placed = 0
-    owner = _owners(sp["walls"], sp["windows"], sp["doors"])
+    # A serving hatch is a void through the full wall thickness, with no pane.
+    # It must enter the same wall cutter as windows and doors: overlaying a
+    # reveal on an uncut wall would leave both wall faces blocking the view.
+    holes = [dict(level=h["level"], x=(h["x0"] + h["x1"]) / 2, y=h["y"],
+                  width=h["x1"] - h["x0"], sill=h["sill"], height=h["head"] - h["sill"],
+                  kind="hole", span=[h["wall_axis"], h["y"], h["x0"], h["x1"]])
+             for h in sp.get("hatches", [])]
+    cut_windows = sp["windows"] + holes
+    owner = _owners(sp["walls"], cut_windows, sp["doors"])
     ext_x1 = max([r[2] for r in V._exts(lay.get("extension"))] or [0.0])
     # glass partitions only in front of the service rooms (the cinema stays dark, the WC private)
     glass_x = [(r["rect"][0], r["rect"][2]) for r in lay["rooms"].values() if r.get("ext") and r["occupancy"] == "utility"]
     for w in sp["walls"]:
         z0 = LEVEL_Z[w["level"]]
-        ops = _openings_on(w, w["level"], [o for o in sp["windows"] if owner.get(id(o)) is w],
+        ops = _openings_on(w, w["level"], [o for o in cut_windows if owner.get(id(o)) is w],
                            [o for o in sp["doors"] if owner.get(id(o)) is w])
         placed += len(ops)
         if v.get("glass_partitions") and w["level"] == "B" and abs(w["y0"] - w["y1"]) < 1e-6 and \
@@ -223,7 +234,7 @@ def scene(lay, variant=None) -> D.Scene:
                     "head": RS.HEAD, "kind": "glazed"} for a, b in glass_x
                    if min(b, max(w["x0"], w["x1"])) - max(a, xa) > 0.3] or ops
         s.add(D.wall((w["x0"], w["y0"]), (w["x1"], w["y1"]), z0, w["height"], w["thickness"], ops))
-    s.openings = {"spec": len(sp["windows"]) + len(sp["doors"]), "placed": placed}
+    s.openings = {"spec": len(cut_windows) + len(sp["doors"]), "placed": placed}
     for b in sp["stair"]:
         s.add(D.box(*(v / 1000.0 for v in b), "wall"))
     slot = sp.get("slot")

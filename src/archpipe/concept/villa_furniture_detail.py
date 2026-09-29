@@ -245,8 +245,7 @@ def _runs(it, W, D, H, island):
             elif kind == "oven":
                 out += _fronts(a, b, face, plinth, 780, kind, drawers=True)
                 out.append(("oven-glass", G._box(a + 20, b - 20, face - FRONT_T, face, 800, 1400)))
-                out.append(("microwave-glass", G._box(a + 35, b - 35, face - FRONT_T, face, 1470, 1810)))
-                out += _fronts(a, b, face, 1830, H, kind, n_doors=1)
+                out += _fronts(a, b, face, 1430, H, kind, n_doors=1)
             else:
                 out += _fronts(a, b, face, plinth, H, kind, n_doors=1)
             continue
@@ -258,6 +257,10 @@ def _runs(it, W, D, H, island):
             out += _fronts(a, b, face, plinth, top - 40, kind, drawers=True)
         else:
             out += _fronts(a, b, face, plinth, top - 40, kind)
+        if kind == "microwave":
+            # A drawer-front appliance in the island, below the worktop.
+            out.append(("microwave-glass", G._box(a + 25, b - 25, face - 5, face,
+                                                   top - 380, top - 100)))
         if kind == "hob":
             c = (a + b) / 2
             hw = min(290, (b - a) / 2 - 20)
@@ -301,6 +304,52 @@ def _cabinet(W, D, H, kind, floating=False):
             out += _fronts(a + 15, b - 15, face, z0 + 15, H - 15, kind, n_doors=1, handle=None)
         else:
             out += _fronts(a + 15, b - 15, face, z0 + 15, H - 15, kind, n_doors=1)
+    return out
+
+
+def _glass_bookcase(W, D, H):
+    """Slim timber framed glass doors, open shelves and a recessed plinth."""
+    x0, x1, yb, yf = -W / 2, W / 2, -D / 2, D / 2
+    out = [("plinth", G._box(x0 + 25, x1 - 25, yb, yf - 35, 0, 80)),
+           ("back", G._box(x0, x1, yb, yb + 18, 80, H)),
+           ("side", G._box(x0, x0 + 22, yb, yf, 80, H)),
+           ("side", G._box(x1 - 22, x1, yb, yf, 80, H)),
+           ("top", G._box(x0, x1, yb, yf, H - 25, H))]
+    for z in (420, 820, 1220, 1620):
+        if z + 22 < H:
+            out.append(("shelf", G._box(x0 + 22, x1 - 22, yb + 18, yf - 28, z, z + 22)))
+    n = max(2, round(W / 550))
+    for k in range(n):
+        a, b = x0 + k * W / n + 2, x0 + (k + 1) * W / n - 2
+        z0, z1, yt = 85, H - 32, yf - 12
+        out += [("glass-door", G._box(a + 24, b - 24, yt - 8, yt, z0 + 25, z1 - 25)),
+                ("door-frame", G._box(a, a + 26, yt - 19, yf, z0, z1)),
+                ("door-frame", G._box(b - 26, b, yt - 19, yf, z0, z1)),
+                ("door-frame", G._box(a + 26, b - 26, yt - 19, yf, z0, z0 + 26)),
+                ("door-frame", G._box(a + 26, b - 26, yt - 19, yf, z1 - 26, z1)),
+                ("handle", G._box(b - 56, b - 48, yf - 2, yf, 940, 1090))]
+    return out
+
+
+def _daybed_nook(W, D, H, top):
+    x0, x1, yb, yf = -W / 2, W / 2, -D / 2, D / 2
+    out = [("base", G._box(x0, x1, yb, yf, 0, 250)),
+           ("mattress", _slab(x0 + 15, x1 - 15, yb + 25, yf - 25, 250, H, 45, 18)),
+           ("nook-side", G._box(x0, x0 + 25, yb, yf, 0, top)),
+           ("nook-side", G._box(x1 - 25, x1, yb, yf, 0, top)),
+           ("nook-top", G._box(x0, x1, yb, yf, top - 25, top))]
+    for x in (x0 + 370, x1 - 370):
+        out.append(("cushion", _slab(x - 270, x + 270, yb + 45, yb + 360,
+                                     H, H + 105, 45, 30)))
+    return out
+
+
+def _folding_counter(W, D, H):
+    x0, x1, yb, yf = -W / 2, W / 2, -D / 2, D / 2
+    out = [("plinth", G._box(x0 + 45, x1 - 45, yb + 30, yf - 45, 0, 90)),
+           ("carcass", G._box(x0, x1, yb, yf - 25, 90, H - 40)),
+           ("worktop", _slab(x0, x1, yb, yf, H - 40, H, 8, 3))]
+    out += _fronts(x0 + 10, x1 - 10, yf - 12, 95, H - 50, "cleaning-storage", n_doors=2)
     return out
 
 
@@ -353,6 +402,12 @@ def local_parts(it):
         return _dining_table(W, D, H)
     if t == "desk":
         return _desk(W, D, H)
+    if t == "bookcase" and it.get("glazing") == "glass-doors":
+        return _glass_bookcase(W, D, H)
+    if t == "daybed_nook":
+        return _daybed_nook(W, D, H, it["nook_top"] * 1000)
+    if t == "folding_counter":
+        return _folding_counter(W, D, H)
     if t in ("base_run", "island"):
         return _runs(it, W, D, H, t == "island")
     if t == "sideboard":
@@ -369,7 +424,7 @@ def local_parts(it):
     return None
 
 
-ABOVE_H = {"flush-plate", "tap", "hob"}      # may stand above h (as villa_furnish3d.ABOVE allows the flush plate)
+ABOVE_H = {"flush-plate", "tap", "hob"}
 
 
 def to_world_point(it, x, y, z, level_z):
@@ -388,7 +443,7 @@ def to_world_point(it, x, y, z, level_z):
 def world_parts(it, level_z, parts=None):
     """{part: [triangle, ...]} in world metres, each vertex inside the piece's footprint and height (+1 mm)."""
     parts = parts if parts is not None else local_parts(it)
-    W, D, H = it["w"] * 1000, it["d"] * 1000, it["h"] * 1000
+    W, D, H = it["w"] * 1000, it["d"] * 1000, (it.get("nook_top", it["h"]) if it.get("type") == "daybed_nook" else it["h"]) * 1000
     out = {}
     for name, (verts, tris) in parts:
         for x, y, z in verts:
@@ -424,7 +479,7 @@ def seat_parts(f, level_z):
     it = seat_item(f)
     if f["type"] == "chair":
         chair = _task_chair if f["mark"].split("#")[0] in {
-            "study-desk", "study-adult-desk", "ka-desk-1", "ka-desk-2", "kb-desk"} else _chair
+            "study-desk", "study-adult-desk", "ka-desk-1", "ka-desk-2", "kb-desk", "cinema-desk"} else _chair
         parts = chair(it["w"] * 1000, it["d"] * 1000, seat=it["seat_h"] * 1000, back=it["h"] * 1000)
     else:
         parts = _stool(it["w"] * 1000, it["d"] * 1000, seat=it["seat_h"] * 1000)

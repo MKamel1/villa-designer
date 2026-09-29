@@ -37,6 +37,20 @@ def door_leaf_near(scene, px, py):
                for m in scene["meshes"])
 
 
+def subject_footprint(subject, items, rooms, scene):
+    """Plan bounds of a declared view subject, including the built outdoor sofa."""
+    if subject in items:
+        return F.footprint(items[subject])
+    if subject in rooms:
+        return None  # stair void is a space, not a bounded furniture piece
+    if subject == "terrace lounge set":
+        pts = [p for m in scene["meshes"] if m["id"].startswith("landscape-sofa-")
+               for face in m["faces"] for p in face]
+        if pts:
+            return min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
+    raise ValueError("unresolved view subject: " + subject)
+
+
 def main():
     scene = json.loads((OUT / "scene.json").read_text(encoding="utf-8"))
     lay = R.design("D1")
@@ -71,8 +85,8 @@ def main():
         sp_ = RS.build(lay)
         doorway = cam.get("reframed") == "doorway" and VR.in_door_opening(sp_, lv, px, py, cam.get("home_room"))
         if doorway and not v.get("hide_meshes"):
-            # The telescopic kitchen door is specified as an opening but has no rendered leaf yet.
-            # Only require a hidden leaf when a door-oak face actually exists at this opening.
+            # The telescopic kitchen leaves are rendered inside their side pocket.
+            # Only require a hidden leaf when one actually spans this opening.
             leaf_here = door_leaf_near(scene, px, py)
             if leaf_here:
                 problems.append("%s: camera in a doorway but its door is not opened for the view" % v["id"])
@@ -87,8 +101,12 @@ def main():
         ax.add_patch(Polygon(wedge, fc="#ffcc00", alpha=0.25, ec="#cc9900"))
         ax.plot([px], [py], "ro", ms=4)
         for s in v["subjects"]:
-            if s in items:
-                q = F.footprint(items[s])
+            try:
+                q = subject_footprint(s, items, lay["rooms"], scene)
+            except ValueError as e:
+                problems.append("%s: %s" % (v["id"], e))
+                continue
+            if q is not None:
                 cx, cy = (q[0] + q[2]) / 2, (q[1] + q[3]) / 2
                 # the WHOLE subject must be in frame, every footprint corner: checking only its centre passed views
                 # that showed a corner of the ensuite and half a bed once the lens went to 24 mm (client: "limited

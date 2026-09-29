@@ -10,8 +10,8 @@ Everything the image shows comes from here, and every piece says what it is:
   - FALSE CEILINGS at 2.70 m and the coves (villa_lighting), FEATURE PANELS (walnut fluted TV wall, oak slatted
     headboard wall) and the GUARD round the stair opening (required, not yet in the Revit model) are DETAILS added
     here and labelled as such;
-  - FURNITURE is villa_furnish3d (the checked layout); the TERRACE lounge set is the questionnaire's answer
-    ("lounge seating"), authored here;
+  - FURNITURE is villa_furnish3d (the checked layout); the assumed garden and
+    outdoor teak lounge come from villa_landscape within the modeled yard;
   - LIGHTS are villa_lighting (verified iGuzzini products where bound, generic photometry otherwise, named);
   - DRESSING (plants, books, vases, art) is listed as dressing, not design.
 Units metres, model axes, z absolute (GF FFL 0, basement FFL -3.0).
@@ -105,6 +105,10 @@ M = {
                         note="clear double glazing, Tv 0.70 (Metric Handbook p. 9-8, the daylight study's value)"),
     "glass-guard": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.85, interfaces=2, roughness=0.0,
                         note="laminated glass guard"),
+    "glass-edge": dict(kind="principled", base_rgb=[0.58, 0.69, 0.65], reflectance=0.55,
+                       roughness=0.12, note="ASSUMED polished laminated-glass exposed edge"),
+    "opal-strip": dict(kind="principled", base_rgb=[0.88, 0.85, 0.78], reflectance=0.78,
+                       roughness=0.32, note="ASSUMED opal diffuser over the designed cabinet LED strip"),
     "silvered-mirror": dict(kind="principled", base_rgb=[0.91, 0.92, 0.92], reflectance=0.92,
                             roughness=0.035, metallic=1.0, note="ASSUMED silvered glass vanity mirror"),
     "door-oak": dict(kind="principled", asset="oak_veneer_01", base_rgb=[0.52, 0.40, 0.27], reflectance=0.40,
@@ -117,12 +121,18 @@ M = {
                                        roughness=0.82, note="ASSUMED very light grey with a green cast (G/R 1.14: at 1.06 the tint vanished under the sun in the finals), smooth mineral exterior paint; stated reflectance 0.65; our exterior and boundary walls"),
     "paving": dict(kind="principled", asset="PavingStones146", base_rgb=[0.62, 0.58, 0.52], reflectance=0.45,
                    roughness=0.8, tile_m=2.0, note="light stone paving (garden terrace, ASSUMED)"),
+    "garden-gravel": dict(kind="principled", asset="gravel_ground_01", base_rgb=[0.47, 0.43, 0.36],
+                          reflectance=0.32, roughness=1.0, tile_m=2.0, note="ASSUMED gravel beds, CC0 scan"),
+    "garden-pebbles": dict(kind="principled", asset="floor_pebbles_01", base_rgb=[0.48, 0.46, 0.41],
+                           reflectance=0.36, roughness=0.9, tile_m=1.5, note="ASSUMED pebble path joints, CC0 scan"),
+    "garden-sandstone": dict(kind="principled", asset="sandstone_cracks", base_rgb=[0.60, 0.52, 0.40],
+                             reflectance=0.42, roughness=0.85, tile_m=1.0, note="ASSUMED raised sandstone planters"),
     "lawn": dict(kind="principled", asset="Grass004", base_rgb=[0.10, 0.16, 0.05], reflectance=0.12,
                  roughness=1.0, tile_m=2.0, note="lawn (ASSUMED)"),
     "outdoor-fabric": dict(kind="principled", asset="Fabric036", base_rgb=[0.62, 0.58, 0.50], reflectance=0.55,
-                           roughness=0.95, tile_m=0.3, note="outdoor acrylic fabric (terrace set)"),
+                           roughness=0.95, tile_m=0.3, note="ASSUMED outdoor acrylic fabric (garden lounge)"),
     "teak": dict(kind="principled", asset="teak_veneer", base_rgb=[0.35, 0.22, 0.12], reflectance=0.22, roughness=0.6,
-                 tile_m=1.00, grain_axis="x", note="teak frame (terrace set); Poly Haven teak_veneer, real scan 1.00 m"),
+                 tile_m=1.00, grain_axis="x", note="ASSUMED teak frame (garden lounge); Poly Haven teak_veneer, real scan 1.00 m"),
     "alu-bronze": dict(kind="principled", base_rgb=[0.10, 0.09, 0.08], reflectance=0.09, roughness=0.35,
                        metallic=1.0, note="dark bronze anodised aluminium window and door frames (ASSUMED)"),
     "paint-white-satin": dict(kind="principled", base_rgb=[0.82, 0.81, 0.79], reflectance=0.80, roughness=0.35,
@@ -421,15 +431,12 @@ def build(lay=None, views=None):
              box_faces(xa, wall_y, za - 0.12, xb, ya + 0.025, za + 0.025), "fixture", room="stair-b",
              label="ASSUMED steel wall stringer and tread bearing; add to Revit")
         x = (xa + xb) / 2
-        mesh("detail-stair-baluster-%02d" % n, "black-metal",
-             box_faces(x - 0.009, open_y - 0.05, zb, x + 0.009, open_y - 0.032, zb + 0.91),
-             "fixture", room="stair-b", label="ASSUMED open-side vertical baluster; add to Revit")
         if n % 4 == 0:
             mesh("detail-stair-wall-rail-bracket-%02d" % n, "black-metal",
                  box_faces(x - 0.012, wall_y, zb + 0.87, x + 0.012, ya + 0.075, zb + 0.91),
                  "fixture", room="stair-b", label="ASSUMED wall handrail bracket; add to Revit")
 
-    def sloped_member(mid, y0, y1, offset, depth, label):
+    def sloped_member(mid, y0, y1, offset, depth, label, material="black-metal"):
         # A continuous prism follows the tread nosing line; its offset is measured from that line.
         first, last = treads[0], treads[-1]
         x0, x1 = (first[0] + first[3]) / 2, (last[0] + last[3]) / 2
@@ -438,7 +445,7 @@ def build(lay=None, views=None):
         c = [x1, y1, z1]; d = [x0, y1, z0]
         e = [x0, y1, z0 - depth]; f = [x1, y1, z1 - depth]
         g = [x1, y0, z1]; h = [x0, y0, z0]
-        mesh(mid, "black-metal", [[a, b, f, e], [h, g, c, d], [a, h, d, e], [b, f, c, g],
+        mesh(mid, material, [[a, b, f, e], [h, g, c, d], [a, h, d, e], [b, f, c, g],
                                   [a, b, g, h], [e, d, c, f]], "fixture", room="stair-b",
              label=label)
 
@@ -446,15 +453,32 @@ def build(lay=None, views=None):
                   "ASSUMED continuous open-side steel stringer; add to Revit")
     sloped_member("detail-stair-wall-plate", wall_y + 0.23, wall_y + 0.26, -0.06, 0.15,
                   "ASSUMED continuous wall stringer plate behind tread bearings; add to Revit")
-    sloped_member("detail-stair-open-handrail", open_y - 0.055, open_y - 0.025, 0.922, 0.044,
-                  "ASSUMED steel handrail 0.90 m above tread nosings; add to Revit")
+    glass_spec = next(b for b in sp["balustrades"] if b["id"] == "stair-open-glass")
+    rail_spec = next(b for b in sp["balustrades"] if b["id"] == "stair-wall-handrail")
+    profile = glass_spec["nosing_profile"]
+    # Three-tread laminated panels, with an open top edge. The 12 mm sheet
+    # and the steel shoe are ASSUMED pending structural glass sizing.
+    for k in range(0, len(profile) - 1, 3):
+        a, b = profile[k], profile[min(k + 3, len(profile) - 1)]
+        y0, y1 = open_y - 0.05, open_y - 0.038
+        lo, hi = -0.07, glass_spec["height_above_nosing"]
+        face = lambda yy: [[a[0], yy, a[2] + lo], [b[0], yy, b[2] + lo],
+                           [b[0], yy, b[2] + hi], [a[0], yy, a[2] + hi]]
+        mesh("detail-stair-glass-%02d" % k, "glass-guard", [face(y0), face(y1)[::-1]],
+             "fixture", room="stair-b", label="ASSUMED frameless laminated stair glass panel")
+        mesh("detail-stair-glass-edge-%02d" % k, "glass-edge",
+             [[[a[0], y0, a[2] + hi], [b[0], y0, b[2] + hi],
+               [b[0], y1, b[2] + hi], [a[0], y1, a[2] + hi]]], "fixture", room="stair-b",
+             label="ASSUMED visible polished laminated-glass top edge")
+    sloped_member("detail-stair-glass-shoe", open_y - 0.065, open_y - 0.025, -0.04, 0.06,
+                  "ASSUMED steel base shoe on open stringer")
     sloped_member("detail-stair-wall-handrail", wall_y + 0.06, wall_y + 0.09, 0.922, 0.044,
-                  "ASSUMED wall handrail 0.90 m above tread nosings; add to Revit")
+                  "wall-side wood handrail %.2f m above nosings" % rail_spec["height_above_nosing"], "oak")
     notes.append("Details added for the render: fluted walnut TV wall, oak headboard slats, glass guard at the stair "
                  "opening, cove ceilings.")
-    notes.append("ASSUMED stair construction: wall stringer plate fixed to the party wall, open-side steel stringer, "
-                 "vertical steel balusters and open-side/wall handrails at 0.90 m above tread nosings. Risers remain "
-                 "open. All members and fixings must be reconciled into the Revit model before construction review.")
+    notes.append("ASSUMED stair fixings: steel base shoe on the stringer holds three-tread frameless laminated glass "
+                 "panels with visible polished edges; glass thickness 12 mm awaits structural design. The wall-side "
+                 "wood handrail uses steel brackets. Risers remain open; coordinate fixings in Revit.")
 
     # ---- furniture (the checked layout), materials by type and part
     from .. import furniture as FG
@@ -547,7 +571,7 @@ def build(lay=None, views=None):
             for k, ((mat, component), faces) in enumerate(by.items()):
                 meshes.append(dict(id="furn-%s-%d" % (f["mark"].replace("#", "-"), k), group="furniture",
                                    material=mat, room=f["room"], label=f["mark"].split("#")[0] +
-                                   (" ASSUMED built-in microwave above oven" if component == "microwave-glass" else ""),
+                                   (" ASSUMED island microwave drawer front" if component == "microwave-glass" else ""),
                                    faces=faces,
                                    keep_object=True, subdivide=1 if mat in SOFT else 0,
                                    bevel_m=0.006 if mat in SOFT else 0.0015))
@@ -681,6 +705,10 @@ def build(lay=None, views=None):
     notes.append("ASSUMED furniture detailing: crowned sofa and chair cushions, rounded arms, exposed plinth and "
                  "legs, and the bunk ladder on its open side; product and fixing details require Revit coordination. "
                  "Rectangular lofted bed pillows are dressing, not specified products.")
+    notes.append("ASSUMED joinery details: slim walnut frames and clear architectural glass on the library cabinets, "
+                 "open timber shelves, upholstered daybed mattress and loose cushions, two ergonomic cinema task "
+                 "chairs, microwave drawer in the island, and cleaning-storage doors below the folding counter. "
+                 "Book props are labelled dressing; all builder vertices are checked against their authored envelopes.")
     notes.append("By day the basement rooms are shown with their ambient and accent lights at 50 % (a basement is "
                  "used with lights on by day); bathrooms by day have their lights on; other ground-floor day "
                  "views are daylight only.")
@@ -774,10 +802,82 @@ def build(lay=None, views=None):
              "fixture", room=basin["room"], label="ASSUMED silvered wall mirror over " + basin_id + "; add to Revit")
     notes.append("ASSUMED deck-mounted brass bath mixer and spout, three silvered vanity mirrors, coffee machine "
                  "bodies with trays, spouts and water tanks, and dirty-kitchen canopy and duct; coordinate with Revit.")
-    notes.append("ASSUMED kitchen products: main built-in microwave above oven, two worktop coffee machines, "
-                 "dirty-kitchen microwave and integrated fridge (replacing the former cleaning column; cleaning "
+    notes.append("ASSUMED kitchen products: two worktop coffee machines, island microwave drawer and "
+                 "dirty-kitchen integrated fridge and oven (cleaning "
                  "storage moves below the folding counter), island downdraft extractor and dirty-kitchen wall hood. "
                  "Both run sinks and taps are procedural geometry. Product choices and services go into Revit.")
+
+    # The shell cutter in villa_daylight has already removed the hatch from
+    # BOTH faces of the shared wall. These are its visible jambs and shutter.
+    for h in sp["hatches"]:
+        z0, z1 = LZ[h["level"]] + h["sill"], LZ[h["level"]] + h["head"]
+        xa, xb, yy = h["x0"], h["x1"], h["y"]
+        for part, bounds in (("sill", (xa, yy - 0.05, z0 - 0.018, xb, yy + 0.05, z0)),
+                             ("head", (xa, yy - 0.05, z1, xb, yy + 0.05, z1 + 0.018)),
+                             ("left", (xa - 0.018, yy - 0.05, z0, xa, yy + 0.05, z1)),
+                             ("right", (xb, yy - 0.05, z0, xb + 0.018, yy + 0.05, z1))):
+            mesh("detail-hatch-" + part, "garden-sandstone", box_faces(*bounds), "shell",
+                 label="ASSUMED stone pass-through " + part + " reveal")
+        b = h["shutter_box"]
+        mesh("detail-hatch-shutter-box", "greige-lacquer",
+             box_faces(b[0], b[1], LZ[h["level"]] + b[2], b[3], b[4], LZ[h["level"]] + b[5]),
+             "fixture", room="kitchen", label="ASSUMED roll-up shutter housing, raised open by day")
+    for p in sp["pocket_buildouts"]:
+        d = next(d for d in sp["doors"] if d.get("sliding") and d["level"] == p["level"])
+        for k in range(d["leaf_count"]):
+            x0, x1 = d["pocket_span"]
+            y = d["y"] + (k - 1) * 0.026
+            mesh("detail-pocket-panel-%d" % k, "door-oak",
+                 box_faces(x0 + 0.01, y - 0.009, LZ[d["level"]] + 0.015,
+                           x1 - 0.01, y + 0.009, LZ[d["level"]] + d["height"] - 0.015),
+                 "fixture", room="dirty-kitchen", label="ASSUMED telescopic sliding leaf stowed in pocket")
+        mesh("detail-pocket-track", "black-metal", box_faces(x0, d["y"] - 0.055,
+             LZ[d["level"]] + d["height"], d["x"] + d["width"] / 2, d["y"] + 0.055,
+             LZ[d["level"]] + d["height"] + 0.024), "fixture", room="dirty-kitchen",
+             label="ASSUMED overhead telescopic pocket track")
+    notes.append("ASSUMED hatch reveals and roll-up shutter housing: shutter raised for all current day views; "
+                 "three 0.4 m sliding panels are stowed inside the 0.4 m west pocket, with an overhead track.")
+
+    for fitting in sp["bath_fittings"]:
+        fid = "detail-" + fitting["id"]
+        if fitting["kind"] == "ceiling-rain-head":
+            x, y, z = fitting["x"], fitting["y"], LZ[fitting["level"]] + fitting["z"]
+            mesh(fid + "-drop", "brass", box_faces(x - 0.012, y - 0.012, z + 0.012,
+                 x + 0.012, y + 0.012, VL.ceiling_z("GF", x=x, y=y, room=fitting["room"], lay=lay, spec=sp)),
+                 "fixture", room=fitting["room"], label="ASSUMED ceiling rain-head drop")
+            mesh(fid + "-plate", "brass", box_faces(x - 0.16, y - 0.16, z - 0.014,
+                 x + 0.16, y + 0.16, z + 0.014), "fixture", room=fitting["room"],
+                 label="ASSUMED ceiling rain-head plate")
+        elif fitting["kind"] == "hand-shower":
+            x, y, z = fitting["x"], fitting["y"], fitting["z"]
+            mesh(fid + "-rail", "brass", box_faces(x - 0.012, y - 0.06, z - 0.35,
+                 x + 0.012, y + 0.012, z + 0.45), "fixture", room=fitting["room"],
+                 label="ASSUMED wall-mounted hand-shower rail")
+            mesh(fid + "-head", "brass", box_faces(x - 0.045, y + 0.005, z + 0.21,
+                 x + 0.045, y + 0.09, z + 0.31), "fixture", room=fitting["room"],
+                 label="ASSUMED hand shower on sliding holder")
+        else:
+            mesh(fid, "glass-guard", [[[fitting["x0"], fitting["y"], fitting["sill"]],
+                 [fitting["x1"], fitting["y"], fitting["sill"]],
+                 [fitting["x1"], fitting["y"], fitting["head"]],
+                 [fitting["x0"], fitting["y"], fitting["head"]]]], "fixture", room=fitting["room"],
+                 label="ASSUMED fixed frameless bath screen, open entry at far end")
+    for vent in sp["ventilation"]:
+        x, y, z = vent["fan"]
+        z += LZ[vent["level"]]
+        end_y = vent["duct_route"][-1][1]
+        mesh("detail-vent-" + vent["room"] + "-duct", "black-metal",
+             box_faces(x - 0.055, min(y, end_y), z - 0.055,
+                       x + 0.055, max(y, end_y), z + 0.055), "fixture", room=vent["room"],
+             label="ASSUMED duct to outside: " + vent["room"])
+        mesh("detail-vent-" + vent["room"] + "-grille", "alu-bronze",
+             box_faces(x - 0.12, end_y - 0.012, z - 0.12,
+                       x + 0.12, end_y + 0.012, z + 0.12), "fixture", room=vent["room"],
+             label="ASSUMED external extract grille: " + vent["room"])
+    notes.append("ASSUMED bath-fitting bodies and fixing details follow the specified rain head, hand shower rail "
+                 "and fixed frameless screen. Guest WC and dirty-kitchen ducts terminate at external grilles; "
+                 "the dirty-kitchen cooker hood is the specified extract source. Drip, flow and products remain "
+                 "service selections, not render claims.")
 
     # ---- construction details (labelled): skirting on internal wall faces (cut at doors), frames on glazing,
     # architraves and handles on internal doors
@@ -944,6 +1044,22 @@ def build(lay=None, views=None):
             box = (d0, o["y"] - half, z0, d1, o["y"] + half, z1)
         mesh("detail-" + cid + "-track", "black-metal", box_faces(*box), "fixture", room=room,
              label="detail: curtain ceiling track (ASSUMED)")
+    nook = F.footprint(it_all["library-daybed"])
+    ncx, nfront = (nook[0] + nook[2]) / 2, nook[3]
+    curtains.append(dict(id="curtain-library-nook", room="bar-alcove", level="B", axis="h",
+                         center=[ncx, nfront], width=round(nook[2] - nook[0] - 0.05, 3),
+                         floor_z=LZ["B"] + 0.45, track_z=LZ["B"] + it_all["library-daybed"]["nook_top"] - 0.03,
+                         normal_sign=1, wall_face=nfront - 0.10, bedroom=False, opening_kind="window",
+                         sheer_material="curtain-sheer", heavy_material="curtain-heavy-dimout",
+                         open_stack_m=round(0.18 * (nook[2] - nook[0] - 0.05), 3),
+                         open_pier_reach_m=0.025, closed_overlap_m=0.05,
+                         label="ASSUMED privacy curtain at daybed nook opening, open by day"))
+    mesh("detail-curtain-library-nook-track", "black-metal",
+         box_faces(nook[0] + 0.025, nfront - 0.012, LZ["B"] + 2.055,
+                   nook[2] - 0.025, nfront + 0.012, LZ["B"] + 2.10), "fixture", room="bar-alcove",
+         label="ASSUMED privacy-curtain track fixed to nook top")
+    notes.append("ASSUMED daybed privacy curtain: sheer linen and dim-out on a track fixed to the nook top, "
+                 "stacked open by day and heavy layer closed at night; fabric hangs to the mattress top.")
     notes.append("Curtains (client 2026-09-28): sheer linen (rough_linen, transmittance 0.55) + a heavy layer on a "
                  "ceiling track, every bedroom and living-space window and glazed garden door -- blackout "
                  "(transmittance 0.02) in bedrooms, dim-out (0.10) in living/dining/study. Kitchens, the dirty "
@@ -963,21 +1079,10 @@ def build(lay=None, views=None):
         if hidden:
             v.setdefault("hide_meshes", []).extend(hidden)
 
-    # ---- terrace lounge set (questionnaire: lounge seating), on paving outside the garden living
-    tx0 = 22.6 + 0.6
-    zt = LZ["B"]
-    mesh("terrace-paving", "paving", [quad_up(22.6, -29.9, 25.9, -20.4, zt + 0.004)], "ground",
-         label="terrace paving")
-    mesh("garden-lawn", "lawn", [quad_up(25.9, -29.9, 28.5, -20.4, zt + 0.004)], "ground", label="lawn")
-    for mid, (x0, y0, x1, y1, h, mat) in {
-            "terrace-sofa-base": (tx0 + 1.9, -27.6, tx0 + 2.75, -25.2, 0.40, "teak"),
-            "terrace-sofa-cushion": (tx0 + 1.9, -27.55, tx0 + 2.75, -25.25, 0.47, "outdoor-fabric"),
-            "terrace-sofa-back": (tx0 + 2.55, -27.6, tx0 + 2.75, -25.2, 0.78, "outdoor-fabric"),
-            "terrace-table": (tx0 + 0.95, -26.9, tx0 + 1.55, -25.9, 0.38, "teak"),
-            "terrace-chair-1": (tx0 + 0.0, -27.55, tx0 + 0.75, -26.8, 0.45, "outdoor-fabric"),
-            "terrace-chair-2": (tx0 + 0.0, -26.0, tx0 + 0.75, -25.25, 0.45, "outdoor-fabric")}.items():
-        mesh(mid, mat, box_faces(x0, y0, zt, x1, y1, zt + h), "furniture", label="terrace lounge set")
-    notes.append("Terrace lounge set (sofa, two chairs, table) from the questionnaire answer 'lounge seating'.")
+    from . import villa_landscape as LAND
+    land_meshes, land_props, land_notes, _ = LAND.build(sp)
+    meshes.extend(land_meshes)
+    notes.extend(land_notes)
 
     # ---- lights and fixture bodies
     VL.bind_products()
@@ -1070,7 +1175,8 @@ def build(lay=None, views=None):
             mesh("lamp-" + f.id, mname, sphere(f.x, f.y, cz, r), "fixture", room=f.room,
                  label="fitting " + f.id, layer=f.layer)
             if f.kind == "WALL-READ":
-                wall_y = lay["rooms"]["parents-bed"]["rect"][1]
+                wall_y = (F.footprint(it_all["library-daybed"])[1] if f.room == "bar-alcove" else
+                          lay["rooms"]["parents-bed"]["rect"][1])
                 mesh("bracket-" + f.id, "brass", box_faces(f.x - 0.012, wall_y, f.z - 0.012,
                      f.x + 0.012, f.y, f.z + 0.012), "fixture", room=f.room,
                      label="ASSUMED wall swing arm " + f.id)
@@ -1106,6 +1212,11 @@ def build(lay=None, views=None):
             lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="line", position=[f.x, f.y, f.z],
                                aim=_unit(f.aim), size=[0.012, f.length], length_dir=list(f.along), spread_deg=120,
                                lumens=round(f.lumens, 1), cct_k=cct, cri=90, product=pinfo, dimmer=1.0))
+            if f.kind == "BACK" and f.room == "bar-alcove":
+                mesh("detail-cabinet-led-" + f.id, "opal-strip", box_faces(
+                    f.x - f.length / 2, f.y - 0.04, f.z - 0.012,
+                    f.x + f.length / 2, f.y + 0.006, f.z + 0.002), "fixture", room=f.room,
+                    label="ASSUMED concealed LED strip behind library shelf books")
         elif k["mount"] == "wall-marker":
             w, h = 0.10, 0.04
             mname = "marker-%d" % cct
@@ -1128,7 +1239,7 @@ def build(lay=None, views=None):
 
     scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes, "lights": lights,
-             "props": props(lay), "cloth": cloth, "curtains": curtains, "views": views,
+             "props": props(lay) + land_props, "cloth": cloth, "curtains": curtains, "views": views,
              "exposure_mode": "set-metered", "exposure": EXPOSURE, "sky": {"day": "nishita",
                                            "evening": {"hdri": "belfast_sunset_puresky.exr", "horizontal_lux": 30.0},
                                            "night": {"hdri": "dikhololo_night.exr", "horizontal_lux": 0.3}},
@@ -1311,6 +1422,12 @@ def part_material(f, part):
     # detailed-builder parts (villa_furniture_detail): fittings share one finish across the house
     if part in ("handle", "tap", "pull"):
         return "brass"
+    if part == "glass-door":
+        return "glass-guard"
+    if part in ("door-frame", "nook-side", "nook-top"):
+        return "walnut"
+    if part in ("mattress", "cushion") and t == "daybed_nook":
+        return "linen"
     if part in ("gas-lift", "spoke", "caster", "arm-post"):
         return "black-metal"
     if part in ("seat-mesh", "back-mesh", "armrest"):
@@ -1353,7 +1470,7 @@ def part_material(f, part):
         if part == "plinth":
             return "black-metal"
         return "greige-lacquer"
-    if t in ("bookcase",):
+    if t in ("bookcase", "daybed_nook", "joinery_end_panel"):
         return "walnut"
     if t in ("pantry_shelving", "store_shelving"):
         return "white-paint-joinery"
@@ -1412,7 +1529,7 @@ def props(lay):
     bk = fp["library-cabinet-right"]
     for k in range(2):
         add("library-books-%d" % k, "book_encyclopedia_set_01", bk[0] + 0.45 + k * 0.6, bk[1] + 0.16,
-            B + 0.02 + (k + 1) * 0.42, label="books on the library shelves")
+            B + (0.442, 0.842)[k], label="books on the library shelves")
     x, y = c("pb-bedside")
     add("bedside-books", "book_encyclopedia_set_01", x, y, G + it["pb-bedside"]["h"], label="books on the bedside")
     # plants where a person would put them (client: "consider if all the added plants are ... reasonable"): the
@@ -1422,10 +1539,6 @@ def props(lay):
         label="single potted plant, 0.341 x 0.367 m footprint, 0.783 m tall")
     add("study-plant", "potted_plant_01", (fp["study-tv"][0] + fp["study-tv"][2]) / 2, fp["study-tv"][3] + 0.45, G,
         label="plant")
-    add("terrace-planter-1", "planter_box_01", 25.3, -29.2, B, label="terrace planter")
-    add("garden-shrub-1", "shrub_01", 27.4, -28.8, B, label="garden shrub")
-    add("garden-shrub-2", "shrub_03", 27.6, -22.0, B, label="garden shrub")
-    add("garden-shrub-3", "shrub_01", 27.2, -25.2, B, 40, label="garden shrub")
     for rid, sofa in (("lounge", "lounge-sofa"), ("living", "living-sofa")):
         x, y = c(sofa)
         add("pillows-" + rid, "throw_pillows_01", x, y - 0.05 if rid == "lounge" else y, B + 0.44,
