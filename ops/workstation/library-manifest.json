@@ -788,6 +788,581 @@
           0.0547
         ]
       }
+    },
+    {
+      "id": "sf_bauhinia",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/realistic-hd-hong-kong-orchid-tree-140-fbf6df7e95cf40729baef28850911bae",
+      "author": "PlantCatalog",
+      "author_url": "https://sketchfab.com/PlantCatalog",
+      "licence": "CC Attribution",
+      "credit": "Realistic HD Hong Kong orchid tree (1/40) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-hong-kong-orchid-tree-140-fbf6df7e95cf40729baef28850911bae), CC Attribution",
+      "role": "shade tree",
+      "faces": 103956,
+      "bounds_m": {
+        "min": [
+          -1.8796,
+          -0.0,
+          -1.9985
+        ],
+        "max": [
+          1.9914,
+          3.7376,
+          1.7905
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_bottlebrush",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/realistic-hd-bottlebrush-laevis-620-104731eec57147b5b47215a1214d8cf1",
+      "author": "PlantCatalog",
+      "author_url": "https://sketchfab.com/PlantCatalog",
+      "licence": "CC Attribution",
+      "credit": "Realistic HD Bottlebrush laevis (6/20) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-bottlebrush-laevis-620-104731eec57147b5b47215a1214d8cf1), CC Attribution",
+      "role": "shrub",
+      "faces": 14111,
+      "bounds_m": {
+        "min": [
+          -0.4047,
+          -0.0,
+          -0.2855
+        ],
+        "max": [
+          0.384,
+          0.6842,
+          0.3002
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_bougainvillea",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/bougainvillea-02fd760652ab48b085c5d46cf9d89676",
+      "author": "BenisonS",
+      "author_url": "https://sketchfab.com/BenisonS",
+      "licence": "CC Attribution",
+      "credit": "Bougainvillea by BenisonS (https://sketchfab.com/3d-models/bougainvillea-02fd760652ab48b085c5d46cf9d89676), CC Attribution",
+      "role": "bougainvillea shrub",
+      "faces": 163748,
+      "bounds_m": {
+        "min": [
+          -0.365,
+          -0.1436,
+          -0.5391
+        ],
+        "max": [
+          0.3335,
+          0.2644,
+          0.541
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_chelsea_bed",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/chelsea-bed-with-storage-3d-model-cbe6e0dcc10a414a84acc5cc08171b87",
+      "author": "bertosalotti",
+      "author_url": "https://sketchfab.com/bertosalotti",
+      "licence": "CC Attribution",
+      "credit": "Chelsea bed with storage - 3D Model by bertosalotti (https://sketchfab.com/3d-models/chelsea-bed-with-storage-3d-model-cbe6e0dcc10a414a84acc5cc08171b87), CC Attribution",
+      "role": "parents' bed",
+      "faces": 105298,
+      "bounds_m": {
+        "min": [
+          -0.9801,
+          0.0005,
+          -1.0649
+        ],
+        "max": [
+          0.9941,
+          1.0548,
+          1.206
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_cinema_sofa_velvet",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/luxury-modern-couch-black-d8e81d75f05b45b6b1cc7ce2563eaabb",
+      "author": "nghihuutr",
+      "author_url": "https://sketchfab.com/nghihuutr",
+      "licence": "CC Attribution",
+      "credit": "Luxury Modern Couch - Black by nghihuutr (https://sketchfab.com/3d-models/luxury-modern-couch-black-d8e81d75f05b45b6b1cc7ce2563eaabb), CC Attribution",
+      "role": "media-room sofa",
+      "faces": 224674,
+      "bounds_m": {
+        "min": [
+          -1.4033,
+          0.0,
+          -0.6999
+        ],
+        "max": [
+          1.4033,
+          0.9957,
+          0.439
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_dining_chair_boucle",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/modern-boucle-wooden-chair-47fc798d59d1442d9922e034ed9565d4",
+      "author": "burakbudakdesign",
+      "author_url": "https://sketchfab.com/burakbudakdesign",
+      "licence": "CC Attribution",
+      "credit": "Modern Bouclé Wooden Chair by burakbudakdesign (https://sketchfab.com/3d-models/modern-boucle-wooden-chair-47fc798d59d1442d9922e034ed9565d4), CC Attribution",
+      "role": "dining chair (8-seat table)",
+      "faces": 14842,
+      "bounds_m": {
+        "min": [
+          -0.311,
+          0.0053,
+          -0.3585
+        ],
+        "max": [
+          0.3058,
+          1.2079,
+          0.3594
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_egg_chair",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/hanging-egg-chair-bfbf84c34eee467389c4feaddcef2023",
+      "author": "Average3DmodelEnjoyer",
+      "author_url": "https://sketchfab.com/Average3DmodelEnjoyer",
+      "licence": "CC Attribution",
+      "credit": "Hanging Egg Chair by Average3DmodelEnjoyer (https://sketchfab.com/3d-models/hanging-egg-chair-bfbf84c34eee467389c4feaddcef2023), CC Attribution",
+      "role": "garden egg swing",
+      "faces": 69928,
+      "bounds_m": {
+        "min": [
+          0.2501,
+          -0.0051,
+          -4.7112
+        ],
+        "max": [
+          1.7112,
+          1.9795,
+          -3.2888
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_frangipani",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-1350-6afe1892d9fb419993cdfe54721110e9",
+      "author": "PlantCatalog",
+      "author_url": "https://sketchfab.com/PlantCatalog",
+      "licence": "CC Attribution",
+      "credit": "Realistic HD Frangipani tree (13/50) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-1350-6afe1892d9fb419993cdfe54721110e9), CC Attribution",
+      "role": "small tree",
+      "faces": 83887,
+      "bounds_m": {
+        "min": [
+          -1.5852,
+          -0.0,
+          -2.0063
+        ],
+        "max": [
+          2.3004,
+          2.7685,
+          1.5307
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_garden_flower_clump",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/daisies-c914e2eb8bab46e0b60b891aa4b125fe",
+      "author": "evolveduk",
+      "author_url": "https://sketchfab.com/evolveduk",
+      "licence": "CC Attribution",
+      "credit": "Daisies by evolveduk (https://sketchfab.com/3d-models/daisies-c914e2eb8bab46e0b60b891aa4b125fe), CC Attribution",
+      "role": "low colourful garden flower clump (gazania/pentas filler)",
+      "faces": 23120,
+      "bounds_m": {
+        "min": [
+          -2.1359,
+          -0.0913,
+          -2.0779
+        ],
+        "max": [
+          2.1521,
+          0.7411,
+          2.3419
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_hibiscus",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a",
+      "author": "PlantCatalog",
+      "author_url": "https://sketchfab.com/PlantCatalog",
+      "licence": "CC Attribution",
+      "credit": "Realistic HD Chinese hibiscus (6/20) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a), CC Attribution",
+      "role": "shrub",
+      "faces": 13616,
+      "bounds_m": {
+        "min": [
+          -0.5094,
+          -0.0,
+          -0.3685
+        ],
+        "max": [
+          0.6183,
+          1.0144,
+          0.5678
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_ixora",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/realistic-hd-chinese-jungle-geranium-210-268a0cc517c24094b66b27b6b8047d7c",
+      "author": "PlantCatalog",
+      "author_url": "https://sketchfab.com/PlantCatalog",
+      "licence": "CC Attribution",
+      "credit": "Realistic HD Chinese jungle geranium (2/10) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-chinese-jungle-geranium-210-268a0cc517c24094b66b27b6b8047d7c), CC Attribution",
+      "role": "shrub",
+      "faces": 88272,
+      "bounds_m": {
+        "min": [
+          -0.555,
+          -0.0424,
+          -0.5824
+        ],
+        "max": [
+          0.6677,
+          0.819,
+          0.662
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_jacaranda",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-940-e40bd12a6a1a4eb7a71bf2e8c2e671af",
+      "author": "PlantCatalog",
+      "author_url": "https://sketchfab.com/PlantCatalog",
+      "licence": "CC Attribution",
+      "credit": "Realistic HD Blue jacaranda (9/40) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-940-e40bd12a6a1a4eb7a71bf2e8c2e671af), CC Attribution",
+      "role": "shade tree",
+      "faces": 282308,
+      "bounds_m": {
+        "min": [
+          -4.178,
+          -0.0,
+          -3.4256
+        ],
+        "max": [
+          3.4132,
+          7.066,
+          3.8281
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_kidschair_oak",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/soborg-oak-wooden-chair-b905d354b1554d4399db1db5346ce895",
+      "author": "iJacques",
+      "author_url": "https://sketchfab.com/iJacques",
+      "licence": "CC Attribution",
+      "credit": "Soborg Oak Wooden Chair by iJacques (https://sketchfab.com/3d-models/soborg-oak-wooden-chair-b905d354b1554d4399db1db5346ce895), CC Attribution",
+      "role": "kids' desk chair (Scandinavian light oak) -- no matching desk found",
+      "faces": 42976,
+      "bounds_m": {
+        "min": [
+          -1.6106,
+          -0.0042,
+          -1.5596
+        ],
+        "max": [
+          1.6106,
+          5.0007,
+          1.5657
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_lavender_clump",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/lavender-e5217f0ca2ac4cff933d8136af309ad5",
+      "author": "MoraySmile",
+      "author_url": "https://sketchfab.com/MoraySmile",
+      "licence": "CC Attribution",
+      "credit": "Lavender by MoraySmile (https://sketchfab.com/3d-models/lavender-e5217f0ca2ac4cff933d8136af309ad5), CC Attribution",
+      "role": "lavender clump",
+      "faces": 7589,
+      "bounds_m": {
+        "min": [
+          -0.8473,
+          0.0037,
+          -0.8473
+        ],
+        "max": [
+          0.8473,
+          3.8775,
+          0.8473
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_lemon_tree",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/realistic-hd-lemon-tree-2030-8f24ad853a184d6ea4b6ac310d2fb639",
+      "author": "PlantCatalog",
+      "author_url": "https://sketchfab.com/PlantCatalog",
+      "licence": "CC Attribution",
+      "credit": "Realistic HD Lemon tree (20/30) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-lemon-tree-2030-8f24ad853a184d6ea4b6ac310d2fb639), CC Attribution",
+      "role": "small tree",
+      "faces": 278918,
+      "bounds_m": {
+        "min": [
+          -1.9836,
+          -0.1357,
+          -1.8677
+        ],
+        "max": [
+          2.0768,
+          2.9549,
+          1.984
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_minotti_aston_armchair",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/minotti-aston-armchair-d9716970474b42eaaf49d8156ffd1c65",
+      "author": "andrewswihart",
+      "author_url": "https://sketchfab.com/andrewswihart",
+      "licence": "CC Attribution",
+      "credit": "Minotti Aston Armchair by andrewswihart (https://sketchfab.com/3d-models/minotti-aston-armchair-d9716970474b42eaaf49d8156ffd1c65), CC Attribution",
+      "role": "armchair",
+      "faces": 217356,
+      "bounds_m": {
+        "min": [
+          -585.097,
+          -0.0,
+          -718.5308
+        ],
+        "max": [
+          585.097,
+          782.7639,
+          718.5308
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_minotti_sofa",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/sofa-minotti-e1422bbf699246b386f0ae6e37d9c635",
+      "author": "alejxbailey",
+      "author_url": "https://sketchfab.com/alejxbailey",
+      "licence": "CC Attribution",
+      "credit": "Sofa-minotti by alejxbailey (https://sketchfab.com/3d-models/sofa-minotti-e1422bbf699246b386f0ae6e37d9c635), CC Attribution",
+      "role": "garden-living sofa",
+      "faces": 262118,
+      "bounds_m": {
+        "min": [
+          -149.0593,
+          0.0005,
+          -51.7424
+        ],
+        "max": [
+          146.7969,
+          89.0986,
+          54.4181
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_modern_low_sofa",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/odern-sofa-dfed5023ec614799a68d392a6a4199ed",
+      "author": "avilov",
+      "author_url": "https://sketchfab.com/avilov",
+      "licence": "CC Attribution",
+      "credit": "Мodern sofa by avilov (https://sketchfab.com/3d-models/odern-sofa-dfed5023ec614799a68d392a6a4199ed), CC Attribution",
+      "role": "lounge / cinema sofa",
+      "faces": 100657,
+      "bounds_m": {
+        "min": [
+          -1.3884,
+          -0.0,
+          -0.0193
+        ],
+        "max": [
+          1.9059,
+          0.9199,
+          1.6024
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_olive_old",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/old-olive-tree-6328df8a0f214143a880a72b86db2ab4",
+      "author": "massive-graphisme",
+      "author_url": "https://sketchfab.com/massive-graphisme",
+      "licence": "CC Attribution",
+      "credit": "Old olive tree by massive-graphisme (https://sketchfab.com/3d-models/old-olive-tree-6328df8a0f214143a880a72b86db2ab4), CC Attribution",
+      "role": "specimen tree",
+      "faces": 67438,
+      "bounds_m": {
+        "min": [
+          -2.6712,
+          -0.0679,
+          -3.5451
+        ],
+        "max": [
+          2.5854,
+          4.5381,
+          2.1046
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_probber_cane_armchair",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/midcentury-harvey-probber-armchair-e54f711755a54b119b364fe6fcbfd821",
+      "author": "eireni",
+      "author_url": "https://sketchfab.com/eireni",
+      "licence": "CC Attribution",
+      "credit": "Midcentury Harvey Probber Armchair by eireni (https://sketchfab.com/3d-models/midcentury-harvey-probber-armchair-e54f711755a54b119b364fe6fcbfd821), CC Attribution",
+      "role": "lounge armchair",
+      "faces": 7062,
+      "bounds_m": {
+        "min": [
+          -36.5713,
+          -0.3564,
+          -15.5883
+        ],
+        "max": [
+          36.5713,
+          65.375,
+          45.8104
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_royal_poinciana",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1740-066ca51810ad483aa34ef738c0b7ae6a",
+      "author": "PlantCatalog",
+      "author_url": "https://sketchfab.com/PlantCatalog",
+      "licence": "CC Attribution",
+      "credit": "Realistic HD Royal poinciana (17/40) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1740-066ca51810ad483aa34ef738c0b7ae6a), CC Attribution",
+      "role": "shade tree",
+      "faces": 323555,
+      "bounds_m": {
+        "min": [
+          -4.5481,
+          -0.0,
+          -3.9642
+        ],
+        "max": [
+          4.4957,
+          4.2613,
+          4.1537
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_rug_round_jute",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/homerugs-jute-carpet-round-orange-91191da74305402c8527c58368c6508a",
+      "author": "tim.a.schmitz",
+      "author_url": "https://sketchfab.com/tim.a.schmitz",
+      "licence": "CC Attribution",
+      "credit": "Homerugs Jute Carpet Round Orange by tim.a.schmitz (https://sketchfab.com/3d-models/homerugs-jute-carpet-round-orange-91191da74305402c8527c58368c6508a), CC Attribution",
+      "role": "round jute/wool rug",
+      "faces": 4066436,
+      "bounds_m": {
+        "min": [
+          -82.2566,
+          -0.3011,
+          -18.078
+        ],
+        "max": [
+          -46.1898,
+          0.4724,
+          18.078
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+    },
+    {
+      "id": "sf_wooden_bench",
+      "source": "sketchfab",
+      "url": "https://sketchfab.com/3d-models/modern-wooden-bench-low-poly-free-84813ace7a3a4f1bbf17526d3e83e413",
+      "author": "marcosnegrao",
+      "author_url": "https://sketchfab.com/marcosnegrao",
+      "licence": "CC Attribution",
+      "credit": "Modern Wooden Bench – Low Poly / Free by marcosnegrao (https://sketchfab.com/3d-models/modern-wooden-bench-low-poly-free-84813ace7a3a4f1bbf17526d3e83e413), CC Attribution",
+      "role": "top-garden bench",
+      "faces": 16934,
+      "bounds_m": {
+        "min": [
+          0.9393,
+          -0.3476,
+          -1.7863
+        ],
+        "max": [
+          1.7445,
+          0.1302,
+          1.7934
+        ]
+      },
+      "units_note": "native units vary; always scaled uniformly into the checked footprint",
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
     }
   ],
   "_bounds_note": "bounds_m: native glTF (Y-up, metres) world AABB per prop, node-hierarchy-aware (handles multi-root variant packs e.g. shrub_02). Measured 2026-09-28 on ai-workstation via ops/workstation/fetch_asset_library.py bounds(); verified against one headless Blender 4.2.9 import (tree_small_02, shrub_02) matching to 1e-4 m. Blender glTF import maps (x,y,z)_gltf -> (x,-z,y)_scene."
