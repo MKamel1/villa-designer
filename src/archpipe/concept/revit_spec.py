@@ -377,6 +377,9 @@ def _d1_details(lay, spec):
              x=bath[0] + 0.25, y=bath[1] + 0.05, z=1.1, over="pe-bath"),
         dict(id="pe-bath-screen", level="GF", room="parents-ensuite", kind="fixed-frameless-glass",
              x0=bath[0], x1=bath[0] + 0.9, y=bath[3], sill=0.55, head=2.1,
+             transmittance=0.91, ior=1.52,
+             optical_note="ASSUMED 10 mm low-iron glass: 0.91 transmittance, 1.52 index of refraction; "
+                          "TODO low-iron-glass-optics",
              entry_clear=bath[2] - (bath[0] + 0.9), card="nkba-shower-clear-floor-762")])
     # Approved Document F Vol 1 (2026), cards verified by the lead against the PDF text (Table 1.1 printed p.7,
     # paras 1.21 and 1.51): guest WC intermittent extract 6 l/s with a 15 min run-on (no openable window) and a
@@ -454,6 +457,10 @@ def check_wp1_spec(lay, spec=None):
     elif bath[2] - screen["x1"] < 0.762 - 1e-6:
         errors.append("bath entry %.3f m, need 0.762 m (card nkba-shower-clear-floor-762)" %
                       (bath[2] - screen["x1"]))
+    if screen and (not 0 < screen.get("transmittance", 0) <= 1 or
+                   not 1 <= screen.get("ior", 0) <= 2):
+        errors.append("bath screen optical properties absent or outside physical bounds "
+                      "(ASSUMED low-iron 10 mm; TODO low-iron-glass-optics)")
     vents = {v["room"]: v for v in spec["ventilation"]}
     for room in ("guest-wc", "dirty-kitchen"):
         vent = vents.get(room)

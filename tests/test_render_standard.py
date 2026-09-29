@@ -14,6 +14,7 @@ SCENE = VR.build()
 # Audited presentation finishes, including the explicitly authored luminous
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
+    "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",  # round-3 garden finishes
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath",
     "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
@@ -87,7 +88,7 @@ class RenderStandard(unittest.TestCase):
         from archpipe.concept import villa_landscape as LAND, revit_spec as RS, render_support as S
         sp = RS.build(VR.R.design("D1"))
         meshes, props, notes, plan = LAND.build(sp)
-        self.assertEqual(set(plan["paths"]), {"dining", "living-north", "living-east", "lounge-west"})
+        self.assertEqual(set(plan["paths"]), {"dining", "living-north", "living-east", "lounge-west", "study"})
         for m in meshes:
             for face in m["faces"]:
                 for x, y, _ in face:
@@ -103,7 +104,7 @@ class RenderStandard(unittest.TestCase):
             y0, y1 = min(p[1] for p in pts), max(p[1] for p in pts)
             self.assertFalse(min(x1, parked[2]) - max(x0, parked[0]) > 0.005 and
                              min(y1, parked[3]) - max(y0, parked[1]) > 0.005, m["id"])
-        for _, _, x, y, _, _ in plan["trees"]:
+        for _, _, _, (x, y), _, _ in plan["trees"]:           # round 3: (bed, asset, species, (x, y), h, yaw)
             self.assertTrue(LAND.inside_yard(x, y))
             self.assertGreaterEqual(LAND.facade_distance(x, y), 1.5)
         self.assertEqual(LAND.extent_violations([p for p in props if p["id"].startswith("landscape-tree-")]), [],
@@ -114,13 +115,12 @@ class RenderStandard(unittest.TestCase):
             self.assertTrue(any(x0 - 0.001 <= d["x"] <= x1 + 0.001 and
                                 y0 - 0.001 <= d["y"] <= y1 + 0.001
                                 for x0, y0, x1, y1 in plan["paths"].values()), d)
-        self.assertTrue({"jacaranda_tree", "tree_small_02", "searsia_lucida", "grass_medium_01",
-                         "grass_medium_02", "flower_gazania", "periwinkle_plant", "wild_rooibos_bush",
-                         "boulder_01", "namaqualand_stones_01"} <= {p["asset"] for p in props})
+        # round 3 (client 2026-09-29) replaced the round-2 planting; test_landscape.py holds its species guards
+        self.assertTrue({"sf_bauhinia", "sf_frangipani", "sf_egg_chair", "sf_wooden_bench"} <= {p["asset"] for p in props})
         self.assertTrue(all(p["position"][2] >= LAND.GROUND for p in props))
         self.assertEqual(S.unsupported(SCENE), [])
         self.assertEqual(S.blocked_openings(SCENE), [])
-        self.assertTrue(any("14:00" in n and "17:00" in n for n in notes))
+        self.assertTrue(any("09:00-17:00" in n and "direct hours" in n for n in notes))   # round 3 per-bed sun screen
         self.assertTrue(any("Drip" in n or "drip" in n for n in notes))
 
     def test_lighting_spec_needs_no_render_ceiling_moves(self):

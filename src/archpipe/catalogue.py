@@ -228,6 +228,12 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
         "DIAGNOSTIC (no held card): 600 mm to reach a store shelf", "ENVELOPE.",
     ),
     FurnitureType(
+        "under_stair_storage", "Under-stair fitted storage", 1000, 400, _c(),
+        "Client round-3 storage brief; sliding doors keep the route clear; "
+        "headroom checked against card mh-dwelling-ceiling-min at the standing access bay",
+        "ASSUMED joinery size; TODO under-stair-joinery-product.",
+    ),
+    FurnitureType(
         "tall_column", "Tall appliance / pantry column", 600, 600, _c(front=1219),
         "card nkba-work-aisle-multi-cook -- the column faces the work aisle: 48 in (1219 mm) for more than one cook",
         "ENVELOPE 600 x 600 (fridge, freezer, oven, coffee columns, panel ready).",

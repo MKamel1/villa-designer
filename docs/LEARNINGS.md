@@ -828,6 +828,18 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   landscape replaced that set, so the renderer matched no object and QA reported the subject out of frame.
   Guard: `tests/test_render_views.py::test_every_view_subject_matches_scene_content` mirrors
   `villa_scene.subjects`' matching over every view of the real scene.
+- **A landscape change must close the route, roof edge and planting checks together.** The D1
+  2026-09-29 artificial-grass rebuild removed the teak lounge, but the first scene export still
+  failed `scripts/villa_render_views.py`: its terrace subject resolver required the old
+  `landscape-sofa-` mesh prefix. The new bistro table retains that identifier as a documented
+  view alias while its label and geometry identify the bistro. `tests/test_landscape.py` now
+  freezes the old oversized tree and dirty-kitchen shrub, a sofa footprint across the garden
+  approach, a plant at 0.3 times its maintained spread, a chair in the egg swing envelope,
+  and a planter on the deck rail line; each violation has a passing placed-layout control.
+  Run `villa_render.write()`, `scripts/villa_render_views.py`, both render-support guards,
+  unittest discovery and `scripts/verify.py` after changing a garden prop. The Poly Haven
+  `outdoor_table_chair_set_01` is absent from the checked manifest, so the bistro is a
+  dimensioned assumed proxy until that asset is indexed and measured.
 - **An asset stand-in's native size is a claim to check, not a default.** Codex placed CC0 trees without a
   workstation to see them; the first render showed the error. The lead must render or measure every new asset
   before trusting a guard that reasons about it.
@@ -852,3 +864,13 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   assumed a Mark. Now the builder records `spec_id` and logs the missing tag, and the check accepts the real
   category. Guard: `tests/test_d1_wp5.py::test_real_revit_opening_has_no_mark_and_is_matched_by_spec_id`, built
   from the real read-back shape.
+- **A Codex job dispatched from the wrong directory could not write the repo.** Round-3 WP2 ran with the session
+  sitting in the plans folder, so its only writable root was that folder; it worked on a copy and returned a
+  patch. Guard: dispatch Codex only from the repo directory, and every Codex prompt now starts "verify you can
+  write inside the repo; if not, stop and report".
+- **A per-point recomputation made the lighting check 110x slower and the suite 4.2 hours long.** Round-3
+  `villa_lighting.check` rebuilt the open-plan cluster (`villa_furnish._cluster`) for every fixture at every grid
+  point (334k calls, 171 of 180 s). Fixed by computing each room's cluster once (1.6 s). Missed because no test
+  bounds a check's run time; the suite's own duration (483 s vs 15,018 s) was the only signal.
+- **A climbing plant was drawn as an 80 mm magenta box floating 0.30 m above the ground** (round-3 WP3); the float
+  guard caught the lift, and the box itself is replaced by a realistic climber in the renderer (WP4).

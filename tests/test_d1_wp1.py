@@ -162,7 +162,7 @@ class Lighting(unittest.TestCase):
         self.assertEqual({p["card"] for p in points}, {"ies-res-chair-reading-200", "ies-res-desk-400"})
 
     def test_removed_task_lamps_fail_real_reading_and_desk_points(self):
-        fixtures = [f for f in L.design(LAY) if not ((f.room == "bar-alcove" and f.kind == "WALL-READ") or
+        fixtures = [f for f in L.design(LAY) if not ((f.room == "bar-alcove" and f.kind in ("SWING", "DLN")) or
                                                       (f.room == "cinema" and f.kind == "DESK"))]
         failed = {p["what"] for p in L.check(LAY, fixtures)["tasks"] if p["status"] == "fail"}
         self.assertTrue({"daybed nook", "cinema desk"} <= failed)

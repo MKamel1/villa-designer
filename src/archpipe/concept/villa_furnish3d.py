@@ -25,7 +25,7 @@ ABOVE = {"headboard": "a bed's headboard stands against the wall, above the matt
 
 CATEGORY = {"base_run": "casework", "island": "casework", "tall_column": "casework", "pantry_shelving": "casework",
             "bookcase": "casework", "daybed_nook": "casework", "joinery_end_panel": "casework",
-            "store_shelving": "casework", "folding_counter": "casework",
+            "store_shelving": "casework", "under_stair_storage": "casework", "folding_counter": "casework",
             "wc": "plumbing", "washbasin": "plumbing", "washbasin_double": "plumbing", "bath": "plumbing",
             "shower_walkin": "plumbing", "washer_dryer": "equipment", "screen": "equipment"}
 
@@ -120,6 +120,31 @@ def body(it):
     if t in ("coffee_table",):
         return [("top", (x0, yb, H - 0.05, x1, yf, H)), ("shelf", (x0 + 0.05, yb + 0.05, 0.1, x1 - 0.05, yf - 0.05,
                                                                    0.12))] + _legs(W, D, H - 0.05)
+    if t == "under_stair_storage":
+        from . import revit_spec as RS
+        from . import villa_r11 as R
+        parts = []
+        treads = RS.build(R.design("D1"))["stair"] if it.get("soffit") == "stair" else []
+        for kind, a, b in _local_modules(it):
+            spans = []
+            if treads:
+                for box in treads:
+                    xa = max(a, box[0] / 1000 - it["cx"])
+                    xb = min(b, box[3] / 1000 - it["cx"])
+                    if xb > xa + 1e-6:
+                        spans.append((xa, xb, min(H, box[2] / 1000 - RS.LEVELS_Z["B"] - 0.05)))
+            else:
+                spans = [(a, b, H)]
+            for xa, xb, top in spans:
+                if top < 0.15:
+                    continue
+                parts.extend([("plinth", (xa, yb, 0, xb, yf, 0.1)),
+                              (kind + "-carcass", (xa, yb, 0.1, xb, yf - 0.03, top)),
+                              ("sliding-door", (xa, yf - 0.025, 0.1, xb, yf, top))])
+                if top > 0.65:
+                    parts.append((kind + "-shelf", (xa, yb + 0.02, min(0.55, top - 0.08),
+                                                     xb, yf - 0.04, min(0.57, top - 0.06))))
+        return parts
     if t in ("dining_6x", "desk"):
         return [("top", (x0, yb, H - 0.04, x1, yf, H))] + _legs(W, D, H - 0.04)
     if t == "island":                                               # carcass set back 300 mm under the seating side
@@ -142,6 +167,21 @@ def body(it):
                 p.append(("wall-units", (a, yb, COUNTER_TOP + SPLASH, b, yb + 0.35, H)))
         return p
     if t in ("bookcase", "pantry_shelving", "store_shelving"):
+        if t == "store_shelving" and it.get("soffit") == "ramp":
+            from . import villa_parking as VP
+            parts = []
+            for kind, a, b in _local_modules(it):
+                world = to_world(it, (a, yb, 0, b, yf, H))
+                top = min(H, VP.clear_at(world[0]) - 0.05, VP.clear_at(world[3]) - 0.05)
+                parts += [(kind + "-back", (a, yb, 0, b, yb + 0.02, top)),
+                          (kind + "-base", (a, yb, 0.1, b, yf, 0.12))]
+                if kind != "bikes":
+                    for z in (0.55, 1.05):
+                        if z + 0.02 < top:
+                            parts.append((kind + "-shelf", (a, yb, z, b, yf, z + 0.02)))
+                else:
+                    parts.append(("bikes-hooks", (a + 0.05, yb, top - 0.2, b - 0.05, yb + 0.12, top - 0.15)))
+            return parts
         p = [("back", (x0, yb, 0, x1, yb + 0.02, H)), ("side", (x0, yb, 0, x0 + 0.02, yf, H)),
              ("side", (x1 - 0.02, yb, 0, x1, yf, H))]
         n = max(2, int(H / 0.38))
@@ -153,6 +193,28 @@ def body(it):
                       ("glass-door", (0.01, yf - 0.015, 0.04, x1 - 0.02, yf, H - 0.04))])
         return p
     if t == "wardrobe" and str(it.get("room", "")).startswith("parents-dressing"):   # open hanging, no doors
+        if it.get("modules"):
+            parts = [("plinth", (x0, yb, 0, x1, yf, PLINTH)),
+                     ("top-boxes", (x0, yb, 2.1, x1, yf, H)),
+                     ("hanger-storage", (x0, yb, 2.05, x1, yf, 2.1))]
+            for kind, a, b in _local_modules(it):
+                parts.extend([("divider", (a, yb, 0, a + 0.02, yf, H)),
+                              ("back", (a, yb, 0, b, yb + 0.02, H))])
+                if kind == "long-hang":
+                    parts.append(("long-hang-rail", (a + 0.02, -0.01, 1.87, b - 0.02, 0.01, 1.90)))
+                elif kind == "double-hang":
+                    for z in (1.0, 1.95):
+                        parts.append(("double-hang-rail", (a + 0.02, -0.01, z, b - 0.02, 0.01, z + 0.03)))
+                elif kind == "drawers":
+                    for index, label in enumerate(it["drawers"]):
+                        z = 0.11 + index * 0.25
+                        parts.append(("drawer-" + label, (a + 0.02, yb + 0.02, z, b - 0.02, yf, z + 0.23)))
+                elif kind == "trousers-pullout":
+                    parts.append(("trousers-pullout", (a + 0.02, yb + 0.02, 0.65, b - 0.02, yf, 0.72)))
+                else:
+                    for z in (0.5, 1.0, 1.5, 2.0):
+                        parts.append((kind, (a + 0.02, yb + 0.02, z, b - 0.02, yf, z + 0.02)))
+            return parts
         return [("back", (x0, yb, 0, x1, yb + 0.02, H)), ("side", (x0, yb, 0, x0 + 0.02, yf, H)),
                 ("side", (x1 - 0.02, yb, 0, x1, yf, H)), ("plinth", (x0, yb, 0, x1, yf, PLINTH)),
                 ("shelf", (x0, yb, H - 0.25, x1, yf, H - 0.23)), ("top", (x0, yb, H - 0.02, x1, yf, H)),
@@ -425,7 +487,8 @@ def round2_postcondition(sp, rb, lay):
             problems.append("%s: category, box or size differs from low-sill spec" % mark)
     new_furniture = {"library-cabinet-left", "library-cabinet-right", "library-daybed", "library-end-panel",
                      "cinema-desk", "cinema-desk#chair-1", "cinema-desk#chair-2", "dk-appliance-bank", "dk-fold",
-                     "k-island"}
+                     "k-island", "stair-flight-store", "stair-landing-store", "store-shelves",
+                     "pd-hang-1", "pd-hang-2"}
     furniture_spec = {x["mark"]: x for x in sp.get("furniture", [])}
     furniture_built = {x["mark"]: x for x in rb.get("furniture", [])}
     for mark in new_furniture:
@@ -445,8 +508,8 @@ def round2_postcondition(sp, rb, lay):
                 problems.append("%s: world bbox more than 5 mm from spec" % mark)
         b = row["bbox"]
         room = item["room"]
-        rect = lay["rooms"][room]["rect"]
-        if b[0] < rect[0] - TOL or b[1] < rect[1] - TOL or b[3] > rect[2] + TOL or b[4] > rect[3] + TOL:
+        rects = [lay["rooms"][rid]["rect"] for rid in F._cluster(lay, room)]
+        if not F._inside((b[0], b[1], b[3], b[4]), rects):
             problems.append("%s: leaves room %s" % (mark, room))
         for col in E.COLUMNS:
             x0, y0, x1, y1 = [v / 1000.0 for v in col]

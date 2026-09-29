@@ -60,6 +60,9 @@ KINDS = {
                       cri=90, layer="decorative", diameter=0.20),
     "WALL-READ": dict(what="adjustable wall-mounted swing-arm reading light (ASSUMED product)", mount="wall",
                       lm=350, beam=None, cct=2700, cri=90, layer="decorative", diameter=0.12),
+    "SWING": dict(what="movable wall reading light: wall plate, articulated 0.6 m reach and rotating head "
+                  "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=None,
+                  cct=2700, cri=90, layer="task", diameter=0.12, reach=0.6),
     "PEN-LIN": dict(what="linear pendant 1.6 m, direct/indirect", mount="pendant", lm=1200, beam=90, cct=2700,
                     cri=90, layer="task", length=1.6),
     "SCONCE": dict(what="vanity wall light, opal, each side of the mirror", mount="wall", lm=450, beam=None,
@@ -145,12 +148,13 @@ class Fixture:
 
     @property
     def lumens(self):
+        dimmer = self.extra.get("dimmer", 1.0)
         if self.kind in PRODUCTS:                  # a real product emits its own flux (dimming is per scene)
-            return PRODUCTS[self.kind]["lm"]
+            return PRODUCTS[self.kind]["lm"] * dimmer
         if self.lm is not None:
-            return self.lm
+            return self.lm * dimmer
         k = self.spec
-        return k["lm_per_m"] * self.length if "lm_per_m" in k else k["lm"]
+        return (k["lm_per_m"] * self.length if "lm_per_m" in k else k["lm"]) * dimmer
 
     @property
     def layer(self):
@@ -286,8 +290,10 @@ def design(lay=None):
         x = isl[0] + (k + 0.5) * (isl[2] - isl[0]) / 3
         add("PEN-GLOBE", "kitchen", x, cy, z=top + 0.762 + 0.15, why="three opal globes over the island, bottom 762 mm "
             "above the worktop", card="rid-pendant-above-table-762", extra={"hang_from": ceiling_z("B")})
-    for x in ((isl[0] + isl[2]) / 2 - 1.0, (isl[0] + isl[2]) / 2, (isl[0] + isl[2]) / 2 + 1.0):
-        add("DLN", "kitchen", x, isl[3] - 0.25, why="prep light on the cooking side of the island (hob)",
+    globe_x = [isl[0] + (k + 0.5) * (isl[2] - isl[0]) / 3 for k in range(3)]
+    for x in (isl[0] + 0.05, (globe_x[0] + globe_x[1]) / 2,
+              (globe_x[1] + globe_x[2]) / 2, isl[2] - 0.05):
+        add("DLN", "kitchen", x, cy, why="prep cone between opal globes, clear of their diffusing bodies",
             card="ies-res-kitchen-prep-500")
     run = fp["k-run"]
     for x in (run[0] + 0.25, (run[0] + run[2]) / 2, run[2] - 0.25):
@@ -329,8 +335,16 @@ def design(lay=None):
                   (0, 0.3, -1), why="inside the glass-door cabinet, behind the books")
     nook = fp["library-daybed"]
     for x in (nook[0] + 0.8, nook[2] - 0.8):
-        add("WALL-READ", "bar-alcove", x, (nook[1] + nook[3]) / 2, z=LEVEL_Z["B"] + 1.1,
-            why="paired swing-arm reading lights inside the daybed nook", card="ies-res-chair-reading-200")
+        wall_y = nook[1] + 0.04
+        add("SWING", "bar-alcove", x, wall_y + 0.48, z=LEVEL_Z["B"] + 1.1,
+            why="wall plate at rear; articulated arm and rotatable head sweep over the mattress",
+            card="ies-res-chair-reading-200", extra={"wall_plate": (x, wall_y), "reach": 0.6,
+                                                       "swept_y": (wall_y, wall_y + 0.6)})
+    for x in (nook[0] + 0.2, nook[2] - 0.2):
+        add("DLN", "bar-alcove", x, (nook[1] + nook[3]) / 2,
+            z=LEVEL_Z["B"] + it["library-daybed"]["nook_top"] - 0.025,
+            why="recessed in the 2.1 m nook top; task fill", card="ies-res-chair-reading-200",
+            extra={"dimmer": 0.4})
     # cinema: dim wall-wash on the rear wall, low path glow, no light on the screen
     C = rc["cinema"]
     cs = fp["cinema-sofa"]
@@ -457,6 +471,10 @@ def design(lay=None):
         add("WW", "parents-ensuite", x, ym, aim=(-0.25 if x < (PEn[0] + PEn[2]) / 2 else 0.25, 0, -1),
             why="washes the marble wall; no direct downlight over the tub (advisory B-NODOWN)", card="ies-res-shower-50")
     _sconces(add, "parents-ensuite", fp["pe-basin"], lay, rc, vertical=True)
+    # ASSUMED initial driver setting; final dimmer scene is measured in the render.
+    for fixture in out:
+        if fixture.room == "parents-ensuite":
+            fixture.extra["dimmer"] = 0.4
     pb_ = fp["pe-basin"]
     strip("TOE", "parents-ensuite", (pb_[2] + 0.02, pb_[1] + 0.03), (pb_[2] + 0.02, pb_[3] - 0.03), 0.30,
           (0.3, 0, -1), level="GF", why="glow under the vanity: night light")
@@ -633,6 +651,54 @@ def card_value(cid):
     return next(c["verified_value"] for c in lib["evidence"] if c["id"] == cid)
 
 
+def task_beam_obstructions(lay, fixtures):
+    """Report diffusing fixture spheres that intersect a downward task cone above its task plane.
+
+    The beam angle is the fixture/product specification; the body diameter is the fixture specification.
+    A sphere/cone overlap is a conservative shadow warning (IES task cards name the task plane).
+    """
+    planes = task_points(lay)
+    problems = []
+    for task in fixtures:
+        if task.kind != "DLN" or task.aim != (0.0, 0.0, -1.0):
+            continue
+        beam = PRODUCTS.get(task.kind, {}).get("beam", task.spec["beam"])
+        radius_slope = math.tan(math.radians(beam / 2))
+        for body in fixtures:
+            if body is task or body.level != task.level or "diameter" not in body.spec:
+                continue
+            if not _same_space(lay, body.room, task.room):
+                continue
+            radius = body.spec["diameter"] / 2
+            center_z = body.z + radius if body.spec["mount"] == "pendant" else body.z
+            if center_z + radius >= task.z or not any(room == task.room and zp < center_z - radius
+                                                       for room, _, _, _, zp, _ in planes):
+                continue
+            lateral = math.hypot(task.x - body.x, task.y - body.y)
+            cone_radius = (task.z - center_z) * radius_slope
+            if lateral < cone_radius + radius - 1e-6:
+                problems.append("%s cone intersects %s: lateral %.3f m, cone+body %.3f m "
+                                "(beam %.1f deg; card %s)" %
+                                (task.id, body.id, lateral, cone_radius + radius, beam, task.card))
+    return problems
+
+
+def swing_envelope_problems(lay, fixtures):
+    nook = next(i for i in F.layout(lay) if i["id"] == "library-daybed")
+    x0, y0, x1, y1 = F.footprint(nook)
+    out = []
+    for lamp in (f for f in fixtures if f.kind == "SWING" and f.room == "bar-alcove"):
+        plate = lamp.extra.get("wall_plate")
+        sweep = lamp.extra.get("swept_y")
+        reach = lamp.extra.get("reach", 0)
+        if not plate or not sweep or not (x0 + reach <= lamp.x <= x1 - reach and
+                                         y0 + 0.025 <= sweep[0] <= sweep[1] <= y1 - 0.025 and
+                                         math.dist((lamp.x, lamp.y), plate) <= reach + 1e-6):
+            out.append("%s arm leaves the mattress/nook or exceeds %.2f m ASSUMED reach "
+                       "(TODO swing-arm-product; card ies-res-chair-reading-200)" % (lamp.id, reach))
+    return out
+
+
 def check(lay=None, fixtures=None):
     """Achieved vs required. Task points: direct maintained lux from every fixture of the room's level above the
     plane (points carry a verdict). Rooms: floor-average direct lux (advisory). Strips count as a row of points."""
@@ -664,20 +730,27 @@ def check(lay=None, fixtures=None):
         r = lay["rooms"][room]
         x0, y0, x1, y1 = F.clear_rect(lay, room)
         zp = LEVEL_Z[r["level"]]
+        # the open cluster is a property of the room, not of each grid point: computing it once per room took the
+        # check from 180 s to seconds (it had been recomputed for every fixture at every point)
+        space = {room} | set(F._cluster(lay, room))
+        here = [(fx, fy, fz, p, s) for f, fx, fy, fz, p, s in lums.get(r["level"], []) if fz > zp and f.room in space]
         vals = []
         for i in range(int((x1 - x0) / 0.25)):
             for j in range(int((y1 - y0) / 0.25)):
                 x, y = x0 + (i + 0.5) * 0.25, y0 + (j + 0.5) * 0.25
-                vals.append(MF * sum(s * p.illuminance_at(x - fx, y - fy, fz - zp)
-                                     for f, fx, fy, fz, p, s in lums.get(r["level"], [])
-                                     if fz > zp and _same_space(lay, f.room, room)))
+                vals.append(MF * sum(s * p.illuminance_at(x - fx, y - fy, fz - zp) for fx, fy, fz, p, s in here))
         avg = sum(vals) / max(1, len(vals))
         need = card_value(card)
         rooms.append({"room": room, "card": card, "avg_floor_lx_direct": round(avg), "required_lx": need,
                       "status": "pass" if avg >= need else ("advisory" if avg >= 0.75 * need else "fail")})
+    # ASSUMED maximum 3.0 times the task target; TODO ies-task-excess-ratio.
+    excess = ["%s/%s %d lx, target %d lx, ASSUMED maximum %d lx (3.0 x; TODO ies-task-excess-ratio)" %
+              (row["room"], row["what"], row["achieved_lx"], row["required_lx"], 3 * row["required_lx"])
+              for row in rows if row["achieved_lx"] > 3 * row["required_lx"]]
     return {"tasks": rows, "rooms": rooms, "generic_kinds": sorted(generic),
+            "problems": task_beam_obstructions(lay, fixtures) + swing_envelope_problems(lay, fixtures) + excess,
             "note": "maintained (MF %.1f), DIRECT ONLY (inter-reflection ignored: conservative); coves excluded "
-                    "(indirect)" % MF}
+                    "(indirect); excess ratio ASSUMED 3.0 (TODO ies-task-excess-ratio)" % MF}
 
 
 def _same_space(lay, a, b):

@@ -20,7 +20,7 @@ class Layout(unittest.TestCase):
     def test_d1_passes_every_check(self):
         res = F.check()
         self.assertEqual({k: v["problems"] for k, v in res.items() if v["status"] != "pass"}, {})
-        self.assertEqual(len(res), 10)                      # 9 checks + the extended-table re-run
+        self.assertEqual(len(res), 14)                      # 13 checks + the extended-table re-run
 
     def test_a_table_too_long_to_extend_is_caught(self):
         orig = F.EXTENDED_TABLE

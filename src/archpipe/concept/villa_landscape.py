@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
-from math import cos, hypot, radians, sin
+from math import cos, hypot, radians, sin, tan
 from pathlib import Path
 
 from .. import solar, villa_env as E
@@ -115,6 +115,17 @@ def garden_level_rooms(lay):
                  for name, r in lay["rooms"].items() if r.get("level") == "B")
 
 
+DECK = (6.877, -23.591, 12.777, -20.601)
+ROOF = (12.777, -23.591, 15.412, -20.601)
+TOP = (DECK[0], DECK[1], ROOF[2], DECK[3])
+RAIL_CLEAR = 0.12  # ASSUMED rail mounting strip; rails remain in revit_spec.
+
+
+def _inside_rect(box, rect, margin=0.0):
+    return (rect[0] + margin <= box[0] and rect[1] + margin <= box[1] and
+            box[2] <= rect[2] - margin and box[3] <= rect[3] - margin)
+
+
 def extent_violations(props, rooms=()):
     """For every placed prop with known library bounds: (a) its full world box (trunk + canopy) must not enter our
     building's occupied volume -- may overhang paving, must not overhang the villa; (b) it must not stand inside
@@ -128,7 +139,7 @@ def extent_violations(props, rooms=()):
             continue
         x0, y0, z0, x1, y1, z1 = prop_world_box(asset, p["position"], p.get("rotation_deg", [0, 0, 0]),
                                                  p.get("scale", 1.0))
-        for rx0, ry0, rx1, ry1, name in rooms:
+        for rx0, ry0, rx1, ry1, name in (() if z0 >= 0 else rooms):
             if _rect_overlap_area((x0, y0, x1, y1), (rx0, ry0, rx1, ry1)) > 1e-6:
                 out.append((p["id"], "world box (%.2f,%.2f)-(%.2f,%.2f) enters the garden-level room %s"
                             % (x0, y0, x1, y1, name)))
@@ -139,10 +150,15 @@ def extent_violations(props, rooms=()):
                     out.append((p["id"], "world box (%.2f,%.2f)-(%.2f,%.2f) enters the building footprint %s"
                                 % (x0, y0, x1, y1, tuple(round(v, 3) for v in rect))))
                     break
-        outside = [pt for pt in _box_perimeter_points(x0, y0, x1, y1) if not inside_yard(*pt)]
-        if outside:
-            out.append((p["id"], "%d of its footprint's sampled points leave the modeled yard/plot (e.g. %.2f,%.2f)"
-                        % (len(outside), outside[0][0], outside[0][1])))
+        if p.get("zone") == "top":
+            if not (_inside_rect((x0, y0, x1, y1), DECK, RAIL_CLEAR) or
+                    _inside_rect((x0, y0, x1, y1), ROOF, RAIL_CLEAR)):
+                out.append((p["id"], "top prop leaves the deck/roof rectangle or rail line"))
+        else:
+            outside = [pt for pt in _box_perimeter_points(x0, y0, x1, y1) if not inside_yard(*pt)]
+            if outside:
+                out.append((p["id"], "%d of its footprint's sampled points leave the modeled yard/plot (e.g. %.2f,%.2f)"
+                            % (len(outside), outside[0][0], outside[0][1])))
     return out
 
 
@@ -157,168 +173,353 @@ def _quad(x0, y0, x1, y1, z):
     return [[[x0, y0, z], [x1, y0, z], [x1, y1, z], [x0, y1, z]]]
 
 
-# Door approaches are rectangles ending exactly on the garden threshold.
-# The lounge garden door is the west wing; the other three open north/east.
+# Clear walking rectangles terminate at the actual thresholds. The 0.914 m
+# width exceeds Time-Saver 2nd ed., p. 340-9, card lts-path-width-oneway-900.
 PATHS = {
-    "dining": (16.439, -23.591, 17.339, -21.35),
-    "living-north": (20.107, -23.591, 21.007, -21.35),
-    "living-east": (22.597, -26.581, 25.10, -25.681),
-    "lounge-west": (1.00, -26.606, 3.617, -25.706),
+    "dining": (16.432, -23.591, 17.346, -21.35),
+    "living-north": (20.100, -23.591, 21.014, -21.35),
+    "living-east": (22.597, -26.588, 25.10, -25.674),
+    "lounge-west": (1.00, -26.613, 3.617, -25.699),
+    "study": (7.820, -23.591, 8.734, -20.601),
 }
 
-# Mature height per tree, metres. Requested species is olive (Olea europaea); no cited figure for its mature
-# height is held in knowledge/library.json (checked 2026-09-28), so these are ASSUMED, not sourced: a young/
-# semi-mature landscaping specimen (the size actually sold and planted for immediate shade) is commonly
-# 3.5-4.5 m; a full jacaranda/tree_small_02 CC0 mesh at its native height (19.3 m / 4.5 m) was never checked
-# against either the plot or the building before this fix and produced the defect (canopies inside the parents'
-# bedroom and the garden-living ceiling, D1 draft renders v01/v02/v05/v07/v17). Height drives an isotropic
-# scale = target_h / native_h (never scaled non-uniformly, which would distort the canopy's own proportions);
-# native_h comes from PROP_BOUNDS, the checked-in library-manifest.json bounds_m. Position and yaw (rotation
-# about Z only) were then chosen, in that order, to clear archpipe.concept.villa_landscape.extent_violations
-# (building footprint + plot/yard) while keeping the tree near its original door/terrace, per the client's shade
-# preference (docs/LEARNINGS.md "Shade over sun"): the north strip beside the BAR facade is only 3.24 m deep, so
-# a wide-canopy jacaranda cannot fit there at any usable height -- the narrower tree_small_02 stands in for it,
-# yawed 90 deg so its own canopy's long axis (the asset is itself asymmetric, not our doing) points across the
-# strip's width rather than into the facade or the front plot line.
-TREES = (
-    ("north-shade", "tree_small_02", 18.30, -21.80, 90, 3.8),
-    ("east-shade", "jacaranda_tree", 25.00, -24.50, 90, 4.0),
-    ("south-shade", "tree_small_02", 25.45, -28.35, 90, 4.0),
-)
+BEDS = {
+    "north": (24.0, -21.32, 27.1, -20.40),
+    "east": (27.35, -27.15, 28.45, -23.80),
+    "south": (24.0, -29.82, 27.2, -28.72),
+    "west": (0.0, -27.45, 1.10, -24.10),
+}
+
+# The spreads are from the named palette where a width is available.
+# Duranta and hibiscus list heights only; 0.8 and 0.9 m are ASSUMED
+# maintained nursery spreads and must be checked with the nursery.
+SPREAD = {"Duranta erecta": 0.8, "Hibiscus rosa-sinensis": 0.9,
+          "Lavandula angustifolia 'Hidcote'": 0.75,
+          "Pennisetum setaceum": 0.9}
+PALETTE = Path(__file__).resolve().parents[3] / "out/villa/round3/plant-palette.json"
+MANIFEST = Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json"
 
 
-def _furniture(mid, parts, center, width, depth, height):
+def _plant_data():
+    rows = json.loads(PALETTE.read_text(encoding="utf-8"))["categories"]
+    found = {}
+    for entries in rows.values():
+        for row in entries:
+            name, url = row["botanical_name"], row["source_url"]
+            found[name] = (url, row)
+    return found
+
+
+def _credits():
+    return {row["id"]: row.get("credit", "Poly Haven, CC0")
+            for row in json.loads(MANIFEST.read_text(encoding="utf-8"))["props"]}
+
+
+def direct_sun_hours(x, y):
+    """Approximate solstice hours using measured solar angles and the yard edge.
+
+    A 3 m wall height is the model's GF level (villa_env.APT), used as an
+    explicit proxy for the court enclosure. This is a screen, not a shadow
+    calculation against the detailed Revit wall/rail geometry.
+    """
+    hours = []
+    wall_h = BUILDING_HEIGHT
+    for h in range(9, 18):
+        p = solar.sun_position(datetime(2026, 6, 21, h-3, tzinfo=timezone.utc),
+                               E.LATITUDE, E.LONGITUDE)
+        if p.altitude <= 0:
+            continue
+        dx, dy = sin(radians(p.azimuth)), cos(radians(p.azimuth))
+        clear = True
+        for step in range(1, 401):
+            distance = step * .05
+            if not inside_yard(x + dx * distance, y + dy * distance):
+                clear = tan(radians(p.altitude)) * distance >= wall_h
+                break
+        if clear:
+            hours.append(h)
+    return hours
+
+
+def _prop(pid, asset, center, ground, height, label, zone="lower", yaw=0):
+    """Uniform scale to an authored nursery height, then centre the native box."""
+    mn, mx = PROP_BOUNDS[asset]
+    scale = height / (mx[1] - mn[1])
+    c, s = cos(radians(yaw)), sin(radians(yaw))
+    cx = scale * (mn[0] + mx[0]) / 2
+    cy = -scale * (mn[2] + mx[2]) / 2
+    origin = [center[0] - cx * c + cy * s, center[1] - cx * s - cy * c, ground]
+    return dict(id=pid, asset=asset, position=origin, rotation_deg=[0, 0, yaw],
+                scale=scale, zone=zone, label="dressing: " + label)
+
+
+def _rect(p):
+    x0, y0, _, x1, y1, _ = prop_world_box(p["asset"], p["position"],
+                                          p["rotation_deg"], p["scale"])
+    return x0, y0, x1, y1
+
+
+def route_violations(items, routes=PATHS):
+    """Every plant or furniture footprint stays off the 0.914 m clear routes."""
+    return [(item["id"], name) for item in items for name, route in routes.items()
+            if _rect_overlap_area(item["rect"] if "rect" in item else _rect(item), route) > 1e-6]
+
+
+def object_extent_violations(objects, rooms=()):
     out = []
-    for k, (name, (vertices, triangles)) in enumerate(parts):
-        faces = []
-        for tri in triangles:
-            face = [[center[0] + vertices[j][0] / 1000,
-                     center[1] + vertices[j][1] / 1000,
-                     GROUND + vertices[j][2] / 1000] for j in tri]
-            for x, y, z in face:
-                if not (center[0] - width / 2 - 0.001 <= x <= center[0] + width / 2 + 0.001 and
-                        center[1] - depth / 2 - 0.001 <= y <= center[1] + depth / 2 + 0.001 and
-                        GROUND - 0.001 <= z <= GROUND + height + 0.001):
-                    raise ValueError(mid + ": outside checked outdoor furniture envelope")
-            faces.append(face)
-        mat = "outdoor-fabric" if name in ("seat", "back", "arm") else "teak"
-        if name == "leg":
-            mat = "teak"
-        out.append(dict(id="landscape-" + mid + "-%02d" % k, group="furniture", material=mat,
-                        label="ASSUMED outdoor teak and weatherproof-fabric lounge: " + mid,
-                        faces=faces, keep_object=True, subdivide=1 if mat == "outdoor-fabric" else 0,
-                        bevel_m=0.006))
+    for obj in objects:
+        rect = obj["rect"]
+        if obj.get("zone") == "top":
+            if not (_inside_rect(rect, DECK, RAIL_CLEAR) or _inside_rect(rect, ROOF, RAIL_CLEAR)):
+                out.append((obj["id"], "top furniture/planter crosses deck edge or rail line"))
+        elif (not all(inside_yard(x, y) for x, y in _box_perimeter_points(*rect)) or
+              any(_rect_overlap_area(rect, room[:4]) > 1e-6 for room in rooms)):
+            out.append((obj["id"], "lower furniture leaves yard or enters room"))
     return out
 
 
+def spacing_violations(plants):
+    """Compare neighbours within a bed and planting layer; trees over understory are intentional."""
+    out = []
+    for i, a in enumerate(plants):
+        for b in plants[i + 1:]:
+            if a.get("bed") != b.get("bed") or a.get("layer") != b.get("layer"):
+                continue
+            need = 0.8 * max(a["spread_m"], b["spread_m"])
+            got = hypot(a["center"][0] - b["center"][0], a["center"][1] - b["center"][1])
+            if got + 1e-6 < need:
+                out.append((a["id"], b["id"], round(got, 3), round(need, 3)))
+    return out
+
+
+def swing_violations(swing, items, envelope_margin=0.25):
+    """The stand footprint plus an ASSUMED 0.25 m motion allowance stays free."""
+    x0, y0, x1, y1 = _rect(swing)
+    envelope = (x0 - envelope_margin, y0 - envelope_margin,
+                x1 + envelope_margin, y1 + envelope_margin)
+    bad = [(p["id"], "swing envelope") for p in items if p["id"] != swing["id"]
+           and _rect_overlap_area(envelope, p.get("rect", _rect(p) if "asset" in p else (0, 0, 0, 0))) > 1e-6]
+    if any(not inside_yard(x, y) for x, y in _box_perimeter_points(*envelope)):
+        bad.append((swing["id"], "swing envelope leaves yard/wall clearance"))
+    return bad
+
+
+def _mesh(mid, group, material, faces, label):
+    return dict(id="landscape-" + mid, group=group, material=material,
+                faces=faces, label=label)
+
+
+def _stones(name, rect, z, meshes):
+    x0, y0, x1, y1 = rect
+    vertical = y1 - y0 > x1 - x0
+    length = (y1 - y0) if vertical else (x1 - x0)
+    count = max(2, int(length / 0.65))
+    # End pieces touch the threshold and the garden/street end of the route.
+    # Their authored clear route width is the full 0.914 m, not the narrower
+    # decorative field-stone dimension below.
+    ends = ((x0, y0, x1, min(y0+.25, y1)),
+            (x0, max(y1-.25, y0), x1, y1)) if vertical else (
+            (x0, y0, min(x0+.25, x1), y1),
+            (max(x1-.25, x0), y0, x1, y1))
+    for side, box in enumerate(ends):
+        meshes.append(_mesh("stone-%s-end-%d" % (name, side), "ground", "stepping-stone",
+                            _quad(*box, z + .012),
+                            "ASSUMED flush threshold stone; route width 0.914 m, "
+                            "Time-Saver 2nd ed. p.340-9, lts-path-width-oneway-900"))
+    for i in range(count):
+        t = (i + 0.5) / count
+        if vertical:
+            cx, cy = (x0 + x1) / 2, y0 + t * length
+            box = (x0, cy - 0.24, x1, cy + 0.24)
+        else:
+            cx, cy = x0 + t * length, (y0 + y1) / 2
+            box = (cx - 0.24, y0, cx + 0.24, y1)
+        meshes.append(_mesh("stone-%s-%02d" % (name, i), "ground", "stepping-stone",
+                            _quad(*box, z + 0.012),
+                            "ASSUMED flush stepping stone; clear route width 0.914 m, "
+                            "Time-Saver 2nd ed. p.340-9, lts-path-width-oneway-900"))
+
+
+def _bistro(meshes):
+    # Manifest does not contain outdoor_table_chair_set_01; dimensioned
+    # procedural proxy keeps the route and footprint independently checkable.
+    objects = []
+    for name, cx, cy, w, d, h in (("table", 26.05, -26.2, .70, .70, .72),
+                                   ("chair-a", 25.42, -26.2, .48, .54, .82),
+                                   ("chair-b", 26.80, -26.2, .48, .54, .82)):
+        rect = (cx-w/2, cy-d/2, cx+w/2, cy+d/2)
+        objects.append(dict(id="landscape-bistro-" + name, rect=rect))
+        mesh = _mesh("bistro-" + name, "furniture", "teak",
+                     _box(rect[0], rect[1], GROUND, rect[2], rect[3], GROUND+h),
+                     "ASSUMED dimensioned bistro proxy for Poly Haven outdoor_table_chair_set_01 (absent from checked manifest)")
+        if name == "table":
+            # The locked view checker resolves outdoor subjects by this
+            # historic prefix. The geometry and label are a bistro table.
+            mesh["id"] = "landscape-sofa-bistro-table-view-alias"
+        meshes.append(mesh)
+    return objects
+
+
 def build(spec, lay=None):
-    """Return scene meshes, supported CC0 props, notes and checkable layout."""
+    """Build the lower artificial-grass courts and the quiet deck garden."""
     if lay is None:
         from . import villa_r11 as R
         lay = R.design("D1")
     rooms = garden_level_rooms(lay)
-    meshes, props = [], []
+    data, credits = _plant_data(), _credits()
+    meshes, props, objects, plants = [], [], [], []
     doors = [d for d in spec["doors"] if d.get("garden")]
-    if len(doors) != len(PATHS):
-        raise ValueError("garden-door count changed; redraw all landscape approaches")
-    for name, (x0, y0, x1, y1) in PATHS.items():
-        if not all(inside_yard(x, y) for x in (x0, x1) for y in (y0, y1)):
-            raise ValueError(name + " path leaves our yard")
-        meshes.append(dict(id="landscape-path-" + name, group="ground", material="paving",
-                           label="ASSUMED honed sandstone walking path to " + name + " garden door",
-                           faces=_quad(x0, y0, x1, y1, GROUND + 0.004)))
-        if x1 - x0 < y1 - y0:
-            joint = _quad(x0, y0, x0 + 0.06, y1, GROUND + 0.007) + \
-                    _quad(x1 - 0.06, y0, x1, y1, GROUND + 0.007)
+    if len(doors) != 4:
+        raise ValueError("garden-door count changed; redraw approaches")
+
+    grass = (("west", (-.373, -29.915, 3.617, -23.591)),
+             ("north", (15.412, -23.591, 28.557, -20.351)),
+             ("east", (22.597, -29.915, 28.557, -23.591)),
+             ("top-deck", DECK), ("top-roof", ROOF))
+    for name, rect in grass:
+        z = 0.0 if name.startswith("top") else GROUND
+        meshes.append(_mesh("grass-" + name, "ground", "artificial-grass",
+                            _quad(*rect, z + .003), "ASSUMED drained artificial-grass system; " + name))
+    for name, rect in PATHS.items():
+        if name != "study" and not all(inside_yard(x, y) for x in (rect[0], rect[2])
+                                       for y in (rect[1], rect[3])):
+            raise ValueError(name + " route leaves yard")
+        _stones(name, rect, 0.0 if name == "study" else GROUND, meshes)
+
+    for name, rect in BEDS.items():
+        if not all(inside_yard(x, y) for x in (rect[0], rect[2]) for y in (rect[1], rect[3])):
+            raise ValueError(name + " bed leaves yard")
+        if any(_rect_overlap_area(rect, r[:4]) > 1e-6 for r in rooms):
+            raise ValueError(name + " bed enters garden-level room")
+        meshes.append(_mesh("bed-" + name, "ground", "garden-gravel",
+                            _quad(*rect, GROUND + .008), "ASSUMED irrigated boundary bed " + name))
+
+    # Shade specimens are scaled to nursery heights, not native glTF units.
+    trees = (("north", "tree_small_02", "Bauhinia variegata", (18.70, -21.80), 2.55, 90),
+             ("east", "sf_bauhinia", "Bauhinia variegata", (25.45, -23.15), 2.75, 0),
+             ("south", "sf_frangipani", "Plumeria rubra", (26.40, -28.05), 2.20, 0))
+    for bed, asset, species, center, height, yaw in trees:
+        url = data[species][0]
+        standin = "ASSUMED visual stand-in; " if asset == "tree_small_02" else ""
+        p = _prop("landscape-tree-" + bed, asset, center, GROUND, height,
+                  "%s%s; care: %s; nursery height %.2f m ASSUMED; %s" %
+                  (standin, species, url, height, credits[asset]), yaw=yaw)
+        props.append(p)
+
+    drifts = (("north", "Duranta erecta", "sf_ixora", (24.65, 25.55, 26.45), -20.88, .66),
+              ("west", "Duranta erecta", "sf_ixora", (.48, .48, .48), -24.80, .66),
+              ("east", "Hibiscus rosa-sinensis", "sf_hibiscus", (27.90, 27.90, 27.90), -24.35, .80),
+              ("south", "Lavandula angustifolia 'Hidcote'", "sf_lavender_clump",
+               (25.25, 26.05, 26.85), -29.25, .55))
+    for bed, species, asset, xs, y0, height in drifts:
+        url = data[species][0]
+        for i, x in enumerate(xs):
+            y = y0 + i * (-.90 if bed in ("west", "east") else 0)
+            label = ("%s; care: %s; %s; nursery height %.2f m ASSUMED; "
+                     "maintained spread %.2f m %s" %
+                     (species, url, credits[asset], height, SPREAD[species],
+                      "ASSUMED" if species != "Lavandula angustifolia 'Hidcote'" else
+                      "RHS palette"))
+            if species == "Duranta erecta":
+                label = "ASSUMED ixora visual stand-in for " + label
+            p = _prop("landscape-%s-%02d" % (bed, i), asset, (x, y), GROUND,
+                      height, label)
+            p.update(bed=bed, layer="mid" if bed != "south" else "edge",
+                     center=(x, y), spread_m=SPREAD[species], species=species)
+            props.append(p); plants.append(p)
+
+    # Slender wall trellises and coloured climbing masses; the mass is a
+    # labelled proxy, since an espaliered Bougainvillea model is unavailable.
+    boug = data["Bougainvillea glabra"][0]
+    for name, x, y in (("east", 28.42, -24.0), ("south", 26.0, -29.78)):
+        if name == "east":
+            frame = _box(x-.04, y, GROUND, x, y+1.5, GROUND+2.2)
+            mass = _box(x-.13, y+.08, GROUND, x-.05, y+1.42, GROUND+2.05)
         else:
-            joint = _quad(x0, y0, x1, y0 + 0.06, GROUND + 0.007) + \
-                    _quad(x0, y1 - 0.06, x1, y1, GROUND + 0.007)
-        meshes.append(dict(id="landscape-pebble-joints-" + name, group="ground", material="garden-pebbles",
-                           label="ASSUMED pebble-set edge to sandstone path", faces=joint))
-    # Gravel and raised sandstone beds avoid all four walking routes.
-    beds = (("north", (21.25, -22.65, 22.45, -20.80)),   # open strip east of the dirty kitchen (x > 15.41)
-            ("east", (26.95, -25.85, 28.15, -23.75)),
-            ("south", (26.90, -29.25, 28.10, -27.25)),
-            ("west", (0.20, -25.35, 0.85, -23.75)))
-    for name, (x0, y0, x1, y1) in beds:
-        if not all(inside_yard(x, y) for x in (x0, x1) for y in (y0, y1)):
-            raise ValueError(name + " bed leaves our yard")
-        if any(_rect_overlap_area((x0, y0, x1, y1), r[:4]) > 1e-6 for r in rooms):
-            raise ValueError(name + " bed stands inside a garden-level room")
-        meshes.append(dict(id="landscape-gravel-" + name, group="ground", material="garden-gravel",
-                           label="ASSUMED gravel planting bed, " + name,
-                           faces=_quad(x0, y0, x1, y1, GROUND + 0.006)))
-        t = 0.08
-        sides = (_box(x0, y0, GROUND, x0 + t, y1, GROUND + 0.45) +
-                 _box(x1 - t, y0, GROUND, x1, y1, GROUND + 0.45) +
-                 _box(x0 + t, y0, GROUND, x1 - t, y0 + t, GROUND + 0.45) +
-                 _box(x0 + t, y1 - t, GROUND, x1 - t, y1, GROUND + 0.45))
-        meshes.append(dict(id="landscape-planter-" + name, group="furniture", material="garden-sandstone",
-                           label="ASSUMED raised sandstone planter, " + name, faces=sides, bevel_m=0.005))
-        meshes.append(dict(id="landscape-planter-soil-" + name, group="ground", material="garden-gravel",
-                           label="ASSUMED gravel mulch inside " + name + " planter",
-                           faces=_quad(x0 + t, y0 + t, x1 - t, y1 - t, GROUND + 0.38)))
-    tree_props = []
-    for name, asset, x, y, yaw_deg, target_h in TREES:
-        if not inside_yard(x, y) or facade_distance(x, y) < 1.5:
-            raise ValueError(name + " tree violates plot or 1.5 m trunk setback")
-        native_min, native_max = PROP_BOUNDS[asset]
-        scale = target_h / (native_max[1] - native_min[1])
-        tree_props.append(dict(id="landscape-tree-" + name, asset=asset,
-                          position=[x, y, GROUND], rotation_deg=[0, 0, yaw_deg], scale=scale,
-                          label="dressing: ASSUMED CC0 %s shade-tree stand-in for olive (Olea europaea); height "
-                                "%.1f m ASSUMED (no cited mature-height figure held for the species), scale "
-                                "derived from the asset's measured native height" % (asset, target_h)))
-    bad = extent_violations(tree_props, rooms)
-    if bad:
-        raise ValueError("landscape tree(s) violate the building/plot extent guard: " + "; ".join(
-            "%s: %s" % item for item in bad))
-    props += tree_props
-    # scale defaults to 1.0; four of these CC0 files are themselves multi-plant clusters (several complete
-    # variants as separate glTF root nodes at different offsets -- library-manifest.json bounds_m records the
-    # combined box, exactly what Blender's importer builds), so at scale 1.0 they are wider than the single small
-    # clump their name/position implied and crossed the plot or yard line once the real bounds were checked
-    # (extent_violations below; the fix is a smaller scale, not a moved point -- these dress a bed, not a tree).
-    planting = (("searsia", "searsia_lucida", 21.6, -21.65, GROUND + 0.38, 0.7),
-                ("grass-n", "grass_medium_01", 22.1, -22.2, GROUND + 0.38, 1.0),
-                ("gazania", "flower_gazania", 21.55, -22.3, GROUND + 0.38, 1.0),
-                ("periwinkle", "periwinkle_plant", 27.45, -24.15, GROUND + 0.38, 1.0),
-                ("grass-e", "grass_medium_02", 27.6, -25.25, GROUND + 0.38, 0.5),
-                ("rooibos", "wild_rooibos_bush", 27.45, -28.0, GROUND + 0.38, 0.45),
-                ("shrub-a", "shrub_01", 27.48, -28.75, GROUND + 0.38, 1.0),
-                ("shrub-b", "shrub_02", 27.5, -24.9, GROUND + 0.38, 0.18),
-                ("shrub-c", "shrub_03", 0.5, -24.3, GROUND + 0.38, 1.0),
-                ("shrub-d", "shrub_04", 0.5, -24.95, GROUND + 0.38, 1.0),
-                ("boulder", "boulder_01", 27.55, -26.55, GROUND, 1.0),   # beside the east bed, clear of the v07 lens
-                ("stones", "namaqualand_stones_01", 25.4, -29.0, GROUND, 1.0))
-    planting_props = [dict(id="landscape-" + name, asset=asset, position=[x, y, z],
-                          rotation_deg=[0, 0, 0], scale=scale,
-                          label="dressing: ASSUMED CC0 " + asset + " garden planting")
-                      for name, asset, x, y, z, scale in planting]
-    bad = extent_violations(planting_props, rooms)
-    if bad:
-        raise ValueError("landscape planting violates the building/plot extent guard: " + "; ".join(
-            "%s: %s" % item for item in bad))
-    props += planting_props
-    meshes += _furniture("sofa", FD._sofa(2100, 850, 800, 3, 125), (24.95, -27.65), 2.1, 0.85, 0.8)
-    meshes += _furniture("chair-one", FD._sofa(800, 800, 800, 1, 110), (23.35, -28.65), 0.8, 0.8, 0.8)
-    meshes += _furniture("chair-two", FD._sofa(800, 800, 800, 1, 110), (24.45, -28.65), 0.8, 0.8, 0.8)
-    meshes += _furniture("table", FD._coffee_table(650, 650, 390), (25.55, -28.75), 0.65, 0.65, 0.39)
-    # Solar position is calculated for the illustrative Cairo site, summer
-    # solstice 14:00-17:00 local time (UTC+03). A tree canopy close to the
-    # east door and another above the north approach give afternoon shade;
-    # exact shadow coverage needs the workstation render and a real site.
-    positions = [solar.sun_position(datetime(2026, 6, 21, h - 3, tzinfo=timezone.utc),
-                                    E.LATITUDE, E.LONGITUDE) for h in (14, 15, 16, 17)]
-    solar_note = ", ".join("%02d:00 altitude %.1f°, azimuth %.1f°" % (h, p.altitude, p.azimuth)
-                           for h, p in zip((14, 15, 16, 17), positions))
-    notes = ["ASSUMED shaded Mediterranean garden on our north strip and east/west wings, including a south zone "
-             "within our east wing. Trees are >=1.5 m from the built facades; paths reach each garden door. "
-             "The sister plot south of the rear boundary remains untouched.",
-             "Summer solstice afternoon at placeholder Cairo site (local UTC+03): " + solar_note +
-             ". Tree canopies are placed over north/east garden approaches and the east terrace; exact shade "
-             "on each door and hour needs a render with actual asset dimensions and the real site.",
-             "ASSUMED drip irrigation to all raised planters and gravel beds; pipework is not rendered. "
-             "Olive, citrus and climber CC0 models are unavailable, so jacaranda/tree_small_02 are labelled "
-             "visual shade-tree stand-ins; no bougainvillea or jasmine mesh is shown."]
-    return meshes, props, notes, dict(paths=PATHS, trees=TREES, beds=beds)
+            frame = _box(x-.75, y, GROUND, x+.75, y+.04, GROUND+2.2)
+            mass = _box(x-.67, y+.05, GROUND, x+.67, y+.13, GROUND+2.05)
+        meshes.append(_mesh("trellis-"+name, "furniture", "trellis", frame,
+                            "ASSUMED trellis for Bougainvillea glabra; care: " + boug))
+        meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract", mass,
+                            "ASSUMED procedural magenta Bougainvillea glabra climber; care: " + boug))
+
+    objects += _bistro(meshes)
+    swing = _prop("landscape-egg-swing", "sf_egg_chair", (23.95, -28.30), GROUND,
+                  1.99, "Hanging egg basket swing on own stand; 1.99 m high; " + credits["sf_egg_chair"])
+    props.append(swing)
+    # The published model is 1.46 x 1.42 m. A 0.25 m motion margin is an
+    # explicit assumption until the manufacturer supplies a swing envelope.
+
+    # Raised deck planters are kept inside each structural rectangle. The
+    # shallow bed depth is ASSUMED pending waterproofing and load design.
+    top_planters = (("deck", (10.30, -22.95, 12.45, -22.45)),
+                    ("roof", (13.05, -22.95, 15.05, -22.45)))
+    for name, rect in top_planters:
+        objects.append(dict(id="landscape-top-planter-"+name, rect=rect, zone="top"))
+        meshes.append(_mesh("top-planter-"+name, "furniture", "garden-sandstone",
+                            _box(rect[0], rect[1], 0, rect[2], rect[3], .32),
+                            "ASSUMED 0.32 m shallow planter; structural/waterproofing review needed"))
+    top_species = "Lavandula angustifolia 'Hidcote'"
+    for i, x in enumerate((10.55, 11.30, 12.05, 13.35, 14.10, 14.85)):
+        p = _prop("landscape-top-lavender-%02d" % i, "sf_lavender_clump",
+                  (x, -22.70), .32, .48,
+                  "%s; care: %s; %s; shallow-root planter, nursery height 0.48 m ASSUMED" %
+                  (top_species, data[top_species][0], credits["sf_lavender_clump"]), zone="top")
+        p.update(bed="top-deck" if i < 3 else "top-roof", layer="edge",
+                 center=(x, -22.70), spread_m=SPREAD[top_species], species=top_species)
+        props.append(p); plants.append(p)
+    # A potted frangipani has the palette's shallow non-aggressive roots.
+    top_tree = _prop("landscape-top-frangipani", "sf_frangipani", (14.0, -21.70), 0.0,
+                     1.35, "potted Plumeria rubra; care: %s; nursery height 1.35 m ASSUMED; %s" %
+                     (data["Plumeria rubra"][0], credits["sf_frangipani"]), zone="top")
+    props.append(top_tree)
+    pot = (13.50, -22.20, 14.50, -21.20)
+    objects.append(dict(id="landscape-top-tree-pot", rect=pot, zone="top"))
+    meshes.append(_mesh("top-tree-pot", "furniture", "garden-sandstone",
+                        _box(*pot[:2], 0.0, *pot[2:], .45),
+                        "ASSUMED shallow container for Plumeria rubra; engineer waterproofing and load"))
+    for i, y in enumerate((-21.15, -22.00)):
+        p = _prop("landscape-top-bench-%d" % i, "sf_wooden_bench", (10.70, y), 0.0,
+                  .48, "ASSUMED bench; seat height to be checked on the imported mesh against "
+                  "Time-Saver 2nd ed. p.340-11, lts-seatwall-height-350; " + credits["sf_wooden_bench"],
+                  zone="top", yaw=90)
+        props.append(p)
+
+    failures = (extent_violations(props, rooms) + object_extent_violations(objects, rooms) +
+                [(pid, "door route " + route) for pid, route in route_violations(props + objects)] +
+                [(a, "plant spacing to %s: %.3f < %.3f m" % (b, got, need))
+                 for a, b, got, need in spacing_violations(plants)] +
+                swing_violations(swing, [swing] + objects))
+    if failures:
+        raise ValueError("landscape guard: " + "; ".join("%s: %s" % f for f in failures))
+
+    exposure = {bed: direct_sun_hours((r[0]+r[2])/2, (r[1]+r[3])/2)
+                for bed, r in BEDS.items()}
+    sun = "; ".join("%s %d/9 direct hours (%s)" %
+                    (bed, len(hours), ",".join(str(h) for h in hours) or "none")
+                    for bed, hours in exposure.items())
+    notes = ["Artificial grass in all three lower yard strips and on the deck/roof; "
+             "stepping-stone approaches reach four lower doors and the GF study door. "
+             "Clear routes 0.914 m, Time-Saver 2nd ed. p.340-9, lts-path-width-oneway-900.",
+             "North bed: Duranta erecta 3; west bed: Duranta erecta 3; east bed: "
+             "Hibiscus rosa-sinensis 3; south bed: Lavandula angustifolia 'Hidcote' 3; "
+             "top deck/roof planters: Lavandula angustifolia 'Hidcote' 3+3. "
+             "Species care URLs and asset authors/licences are on each prop label.",
+             "ASSUMED drip irrigation to every bed and planter (emitters at each plant, timer-controlled); "
+             "artificial grass needs none. ASSUMED irrigated Cairo garden; illustrative-site June 21 direct-sun screen at "
+             "each lower bed centre (hourly 09:00-17:00, 3.0 m enclosure from villa_env.APT): " + sun +
+             ". This edge-ray screen needs detailed shadow verification before procurement.",
+             "Top garden occupies the former parking deck and planted roof. Ramp remains unobstructed "
+             "and car-parkable. Existing 1.1 m rails are retained. Planters and furniture clear deck "
+             "edges/rail mounting lines by at least %.2f m. Shallow roots only over basement; "
+             "waterproofing, drainage and loading need engineering review." % RAIL_CLEAR,
+             "Poly Haven outdoor_table_chair_set_01 was absent from the checked prop manifest; "
+             "the two-chair bistro is an ASSUMED dimensioned proxy. SF bench seat height and "
+             "egg swing operating envelope require manufacturer read-back. The bistro table retains a "
+             "legacy landscape-sofa mesh-id prefix solely for the existing view subject resolver; "
+             "no sofa geometry remains."]
+    used_assets = sorted({p["asset"] for p in props})
+    notes.append("Landscape appearance credits: " + "; ".join(
+        asset + " -- " + credits[asset] for asset in used_assets))
+    return meshes, props, notes, dict(paths=PATHS, trees=trees, beds=BEDS, sun_hours=exposure,
+                                      objects=objects, plants=plants, swing=swing)

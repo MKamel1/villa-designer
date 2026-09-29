@@ -152,8 +152,18 @@ def layout(lay=None):
         "lounge", views="lounge-tv")
     add(item("lounge-coffee", None, "coffee_table", 6.22, L[1] + 0.1 + 0.95 + 0.462 + 0.3, 0, w=1.2, d=0.6, h=0.4,
              why="457 mm from the sofa (card mitton-sofa-coffee-table-457)"), "lounge")
-    add(item("lounge-armchair", None, "armchair", 8.3, -26.2, -90, h=0.85,
+    add(item("lounge-armchair", None, "armchair", 8.42, -26.2, 90, h=0.85,
              why="fifth seat, turned to the TV and the family corner"), "lounge")
+    add(against("stair-flight-store", r["stair-b"], "y0", 5.30, "under_stair_storage",
+                w=1.80, d=0.4, h=2.3, soffit="stair", doors="sliding",
+                modules=[("standing-access", 0.55), ("luggage", 0.65), ("seasonal-boxes", 0.60)],
+                why="sliding-door joinery cut to the descending stair soffit; standing access at the high end"),
+        "stair-b")
+    add(against("stair-landing-store", r["lounge-nook"], "y0", 3.99, "under_stair_storage",
+                w=0.2, d=0.2, h=2.3, soffit="landing", doors="sliding",
+                modules=[("small-boxes", 0.2)],
+                why="shallow box cubby below the top landing, between retained column and pantry door; "
+                    "sliding front clear of the lounge route"), "lounge-nook")
     # -- kitchen: sink run and island; the shared tall appliances are in the dirty kitchen
     K, KI = r["kitchen"], r["kitchen-island"]
     add(against("k-run", K, "y1", 11.54, "base_run", w=2.01, d=0.6, h=0.9,
@@ -186,7 +196,7 @@ def layout(lay=None):
     add(against("library-cabinet-left", A, "y0", A[0], "bookcase", w=1.2, d=0.4, h=2.1,
                 glazing="glass-doors", why="glass-door book joinery on the windowless south wall"), "bar-alcove")
     add(against("library-daybed", A, "y0", A[0] + 1.2, "daybed_nook", w=2.0, d=0.95, h=0.45,
-                mattress=(2.0, 0.9), nook_top=2.1,
+                mattress=(2.0, 0.9), nook_top=2.1, curtain=False,
                 why="single 0.9 x 2.0 m mattress in a 0.95 m deep reading nook within the joinery"), "bar-alcove")
     add(against("library-cabinet-right", A, "y0", A[0] + 3.2, "bookcase", w=22.2 - A[0] - 3.2, d=0.4,
                 h=2.1, glazing="glass-doors", why="glass-door book joinery completes the windowless south wall"),
@@ -233,7 +243,8 @@ def layout(lay=None):
     add(against("pantry-shelves-2", PP, "x1", PP[1], "pantry_shelving", w=PP[3] - PP[1], h=2.2,
                 why="shelving on the other end wall"), "pantry")
     add(against("store-shelves", r["store-ramp"], "y1", r["store-ramp"][0] + 0.1, "store_shelving", w=2.85, h=1.3,
-                why="low shelving under the ramp: luggage, seasonal clothes, cushions, tools, bikes (answers)"),
+                modules=[("luggage", 0.95), ("seasonal-boxes", 0.95), ("bikes", 0.95)],
+                soffit="ramp", why="zoned shelves under the rising ramp: luggage, seasonal boxes and bikes"),
         "store-ramp")
 
     # ================= ground floor =================
@@ -285,11 +296,18 @@ def layout(lay=None):
     # -- dressing: hanging on both long walls
     PD = r["parents-dressing"]
     add(against("pd-hang-1", PD, "y1", PD[0] + 0.05, "wardrobe", w=VP.DRESSING_DOOR_X - 0.55 - PD[0] - 0.05, d=0.6,
-                h=2.2,
+                h=2.3, partner="hers", modules=[("long-hang", 0.65), ("double-hang", 0.45),
+                    ("drawers", 0.42), ("hat-shelf", 0.20)],
+                drawers=["lingerie", "headscarves", "pyjamas", "sleepwear"],
+                top_boxes_above=2.1, hanger_storage=True,
                 why="hanging along the bedroom wall, up to the bedroom door"), "parents-dressing")
     add(against("pd-hang-2", r["parents-dressing-ext"], "y0", r["parents-dressing-ext"][0] + 0.05, "wardrobe",
                 w=21.2 - r["parents-dressing-ext"][0] - 0.05,
-                d=0.6, h=2.2, why="hanging along the ensuite wall, up to the ensuite door"), "parents-dressing-ext")
+                d=0.6, h=2.3, partner="his", modules=[("double-hang", 0.55), ("trousers-pullout", 0.25),
+                    ("drawers", 0.35), ("shelves", 0.196)],
+                drawers=["socks", "underwear", "T-shirts", "sportswear", "pyjamas", "sleepwear"],
+                top_boxes_above=2.1, hanger_storage=True,
+                why="his dedicated hanging, trousers, drawers and shelves up to the ensuite door"), "parents-dressing-ext")
     # -- ensuite: bath, shower, double basin; WC on the south (garden) wall (client)
     PE = r["parents-ensuite"]
     add(against("pe-wc", PE, "x1", PE[1] + 0.86, "wc", d=0.5, h=0.4, why="WC on the south wall (client)"),
@@ -632,6 +650,74 @@ def check(items=None, lay=None, _extended=False):
                                         % (it["id"], gap))
     # viewing distance (cards mitton-tv-uhd-min / -max: 1.0-1.5 x the screen size)
     ids = {it["id"]: it for it in items}
+    if ids.get("library-daybed", {}).get("curtain") is not False:
+        probs["nook_curtain"].append("library daybed curtain must be false (client round-3 veto)")
+    # ASSUMED 45 degrees, pending card seating-focal-angle-45; this is a project layout test.
+    for seat in (it for it in items if it["type"] in SEATS):
+        focal = ids.get(seat.get("views"))
+        if focal is None:
+            candidates = [it for it in items if it["room"] == seat["room"] and
+                          it["type"] in ("tv_unit", "screen", "coffee_table")]
+            tvs = [it for it in candidates if it["type"] in ("tv_unit", "screen")]
+            choices = tvs or candidates
+            focal = min(choices, key=lambda it: math.dist((it["cx"], it["cy"]),
+                                                           (seat["cx"], seat["cy"]))) if choices else None
+        if focal:
+            vx, vy = focal["cx"] - seat["cx"], focal["cy"] - seat["cy"]
+            fx, fy = DIRS[seat["rot"]]["front"]
+            angle = math.degrees(math.acos(max(-1, min(1, (vx * fx + vy * fy) / math.hypot(vx, vy)))))
+            meas["seating_focal"][seat["id"]] = "%.1f deg to %s (ASSUMED maximum 45 deg; TODO seating-focal-angle-45)" % (angle, focal["id"])
+            if angle > 45 + 1e-6:
+                probs["seating_focal"].append("%s faces %.1f deg from %s; ASSUMED maximum 45 deg (TODO seating-focal-angle-45)" %
+                                              (seat["id"], angle, focal["id"]))
+    # ASSUMED per-person capacity until card neufert-wardrobe-per-person is reviewed.
+    for partner, iid in (("hers", "pd-hang-1"), ("his", "pd-hang-2")):
+        wardrobe = ids.get(iid)
+        if not wardrobe:
+            probs["wardrobe_capacity"].append("%s dedicated wardrobe absent" % partner)
+            continue
+        modules = wardrobe.get("modules", [])
+        hanging = sum(width * (2 if kind == "double-hang" else 1)
+                      for kind, width in modules if kind in ("long-hang", "double-hang"))
+        drawers = len(wardrobe.get("drawers", []))
+        meas["wardrobe_capacity"][partner] = "%.2f m rail, %d drawers (ASSUMED minima 1.0 m / 4; TODO neufert-wardrobe-per-person)" % (hanging, drawers)
+        if wardrobe.get("partner") != partner or hanging < 1.0 - 1e-6 or drawers < 4:
+            probs["wardrobe_capacity"].append("%s: %.2f m rail / %d drawers; ASSUMED minima 1.0 m / 4, dedicated only (TODO neufert-wardrobe-per-person)" % (partner, hanging, drawers))
+        if wardrobe.get("top_boxes_above", 0) < 2.1 or not wardrobe.get("hanger_storage"):
+            probs["wardrobe_capacity"].append("%s top boxes or hanger storage absent" % partner)
+    if ids.get("pd-hang-1") and not any(k == "long-hang" for k, _ in ids["pd-hang-1"].get("modules", [])):
+        probs["wardrobe_capacity"].append("hers long-hang absent")
+    flight_store = ids.get("stair-flight-store")
+    landing_store = ids.get("stair-landing-store")
+    if flight_store and landing_store:
+        from . import villa_furnish3d as F3
+        parts = [F3.to_world(flight_store, b) for _, b in F3.body(flight_store)]
+        stair = [box for box in sp["stair"] if box[5] - box[2] < 300]
+        for box in parts:
+            for tread in stair:
+                if box[0] < tread[3] / 1000 - 1e-6 and box[3] > tread[0] / 1000 + 1e-6:
+                    clear = tread[2] / 1000 - RS.LEVELS_Z["B"]
+                    if box[5] > clear - 0.04:
+                        probs["under_stair_storage"].append("flight joinery exceeds stair soffit at x %.3f" % box[0])
+        access_end = min(flight_store["cx"] - flight_store["w"] / 2 + 0.55,
+                         footprint(flight_store)[2])
+        headroom = min(tread[2] / 1000 - RS.LEVELS_Z["B"]
+                       for tread in stair if tread[0] / 1000 < access_end and tread[3] / 1000 > footprint(flight_store)[0])
+        meas["under_stair_storage"]["standing access"] = "%.3f m (need 2.300 m; card mh-dwelling-ceiling-min)" % headroom
+        if headroom < 2.3 - 1e-6:
+            probs["under_stair_storage"].append("standing access %.3f m, need 2.300 m (card mh-dwelling-ceiling-min)" % headroom)
+        if flight_store.get("doors") != "sliding" or landing_store.get("doors") != "sliding":
+            probs["under_stair_storage"].append("storage doors must slide clear of the lounge route (client brief)")
+    else:
+        probs["under_stair_storage"].append("flight or landing storage missing (client round-3 brief)")
+    ramp = ids.get("store-shelves")
+    if ramp:
+        fp = footprint(ramp)
+        clear = min(VP.clear_at(fp[0]), VP.clear_at(fp[2]))
+        meas["under_stair_storage"]["ramp shelf"] = "%.3f m clear at low end; %.3f m shelf" % (clear, ramp["h"])
+        if ramp["h"] > clear - 0.05 or {k for k, _ in ramp.get("modules", [])} != \
+                {"luggage", "seasonal-boxes", "bikes"}:
+            probs["under_stair_storage"].append("ramp storage exceeds soffit or lacks luggage, boxes and bikes")
     for it in items:
         scr = ids.get(it.get("views"))
         if not scr:
@@ -655,7 +741,8 @@ def check(items=None, lay=None, _extended=False):
         for p, m in route_problems(lay, sp, by_level[lv], lv):
             probs["routes"].append(p)
             meas["routes"].update(m)
-    for k in ("inside_room", "columns", "overlap", "clearances", "doors", "windows", "kitchen", "viewing", "routes"):
+    for k in ("inside_room", "columns", "overlap", "clearances", "doors", "windows", "kitchen", "viewing",
+              "nook_curtain", "seating_focal", "wardrobe_capacity", "under_stair_storage", "routes"):
         out[k] = {"status": "fail" if probs[k] else "pass", "problems": probs[k], "measured": dict(meas[k])}
     if not _extended:
         # the brief's other configuration: the dining table extended for 10 (client brief D-TABLE: 1.8 m for 6)
