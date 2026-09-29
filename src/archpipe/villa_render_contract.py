@@ -126,6 +126,11 @@ def validate_scene(scene: dict) -> list[str]:
         if "interfaces" in mat:
             need(type(mat["interfaces"]) is int and mat["interfaces"] in (1, 2),
                  p+".interfaces", "one sheet or two slab interfaces required")
+        # WP4-B4: index of refraction, carried from a fitting's own measured optics (e.g. revit_spec bath_fittings'
+        # pe-bath-screen: 1.52) instead of villa_scene's hardcoded 1.5 assumption. Real glasses run roughly 1.45
+        # (fused silica) to 1.9 (dense flint); this range never invents a value, only bounds what is plausibly glass.
+        if "ior" in mat:
+            need(_number(mat["ior"]) and 1.0 < mat["ior"] < 3.0, p+".ior", "plausible glass index of refraction (1-3) required")
         if mat.get("kind") == "emissive":
             need("emission_lm_per_m2" in mat and "cct_k" in mat, p, "explicit emission and colour temperature required")
         if "asset" in mat:
@@ -245,6 +250,26 @@ def validate_scene(scene: dict) -> list[str]:
         need(_number(prop.get("scale"), positive=True), p+".scale", "positive scale required")
         need(isinstance(prop.get("label"), str) and prop["label"].startswith("dressing: "),
              p+".label", "label must begin 'dressing: '")
+    # WP4-A: real furniture models replacing a procedural stand-in where the fit rule allows it (uniform scale,
+    # never distorted). Kept separate from `props` because a model REPLACES design furniture (its label is not a
+    # "dressing: " item) and carries a `replaces` mesh-id prefix so the renderer hides the procedural geometry it
+    # stands in for while still leaving that geometry in the scene (dressing cloth colliders match it by name).
+    for i, model in enumerate(scene.get("models", [])):
+        p = f"models[{i}]"
+        if not isinstance(model, dict):
+            errors.append(f"{p}: object required"); continue
+        need(isinstance(model.get("id"), str) and bool(model.get("id")) and
+             model["id"] not in mesh_ids and model["id"] not in light_ids and model["id"] not in prop_ids,
+             p+".id", "unique nonempty id required")
+        need(_relative_path(model.get("asset")), p+".asset", "safe relative asset name required")
+        need(_vector(model.get("position")), p+".position", "three finite numbers required")
+        need(_vector(model.get("rotation_deg")), p+".rotation_deg", "three finite angles required")
+        need(_number(model.get("scale"), positive=True), p+".scale", "positive uniform scale required")
+        need(isinstance(model.get("replaces"), str) and bool(model.get("replaces")),
+             p+".replaces", "nonempty mesh-id prefix required (the procedural geometry this model hides)")
+        if "decimate_ratio" in model:
+            need(_number(model["decimate_ratio"]) and 0 < model["decimate_ratio"] <= 1,
+                 p+".decimate_ratio", "fraction from 0 (exclusive) to 1 required")
     exposure = scene.get("exposure")
     if not isinstance(exposure, dict):
         errors.append("exposure: object required"); exposure = {}

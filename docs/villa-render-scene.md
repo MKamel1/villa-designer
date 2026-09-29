@@ -5,6 +5,21 @@
 decision) builds and renders it. `scripts/villa_render.py` is the driver: deploy to the workstation, render, pull,
 QA. The renderer never invents content: anything not in scene.json is not in the image.
 
+## Product furniture and climbers (WP4b)
+
+`villa_furnish.PRODUCT` maps a piece to a library asset and its real width, depth, height, and one native-to-metre
+scale derived from `ops/workstation/library-manifest.json`. Native centimetres and millimetres are inferred from
+overall size; the Probber chair, kids' chair, and round rug use stated ASSUMED references where native units are
+ambiguous. A selected product replaces the generic `w` and `d` in the layout and every furnishing check runs on
+that box. A failed clearance, route, door, overlap, kitchen, or facing check retains the procedural piece and
+records the first failure. The renderer imports only accepted assets, centres them on the authored piece, seats
+them on the floor, and checks the world box against the product footprint plus 20 mm and height within 5 percent.
+The hidden procedural mesh remains available for cloth simulation.
+
+`climber_placement.placements` seeds foliage within each landscape climber envelope at an ASSUMED 120 pieces per
+square metre of its largest vertical face, with 70 percent green leaves and 30 percent magenta bracts. Blender
+hides the box and builds the visible leaf geometry; the envelope remains in the contract and its bounds are tested.
+
 ## scene.json (`"schema": "villa-render/1"`)
 
 Units metres. Model axes: x street -> garden, y party wall -> east face, z absolute (GF FFL = 0.0, basement FFL =
@@ -163,6 +178,14 @@ Units metres. Model axes: x street -> garden, y party wall -> east face, z absol
 - No random dressing; every prop must be in `scene.json`.
 
 ## Driver (scripts/villa_render.py)
+
+Before exporting real furniture models, place their measured footprints in
+`villa_furnish.layout()` and rearrange the table, seats, and routes around
+them. Run every furnishing check on the final arrangement. A model is placed
+only when the measured layout passes; an approved procedural arrangement
+keeps an explicit `product_rejected` reason when the real model cannot fit.
+The living room's former coffee position is a regression case because it
+fails the real sofa's front clearance.
 
 `--scene out/villa/render-d1/scene.json --views all|v01,v02 --samples N --res WxH [--host ai-workstation]`:
 deploy with `scripts/workstation.deploy`, push scene.json and the IES files it names, run Blender headless on the

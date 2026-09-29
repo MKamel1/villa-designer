@@ -88,6 +88,20 @@ class Layout(unittest.TestCase):
 
 
 class ChecksFailOnRealMistakes(unittest.TestCase):
+    def test_rearranged_product_rooms_pass_every_furnishing_check(self):
+        items = F.layout()
+        by_id = {it["id"]: it for it in items}
+        for mark, asset in (("living-sofa", "sf_minotti_sofa"),
+                            ("living-chair-1", "sf_probber_cane_armchair"),
+                            ("living-chair-2", "sf_probber_cane_armchair")):
+            self.assertEqual(by_id[mark].get("product"), asset)
+            self.assertFalse(by_id[mark].get("product_rejected"))
+        self.assertIn("914 mm pantry and yard routes", by_id["lounge-sofa"]["product_rejected"])
+        self.assertEqual(by_id["cinema-sofa"]["product_rejected"], "product too long for the cinema width")
+        self.assertEqual(by_id["pb-bed"]["product_rejected"],
+                         "real products available are king size (1.97-2.14 m); approved 0.35 m bedside arrangement kept")
+        self.assertTrue(all(row["status"] == "pass" for row in F.check(items).values()))
+
     def test_three_recliners_close_the_store(self):
         # first draft: three recliners across the 2.99 m cinema cut off the store under the ramp
         def m(items, ids):

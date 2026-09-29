@@ -131,6 +131,8 @@ M = {
                     roughness=0.7, note="ASSUMED timber wall trellis"),
     "bougainvillea-bract": dict(kind="principled", base_rgb=[0.58, 0.035, 0.25], reflectance=0.20,
                                 roughness=0.85, note="ASSUMED procedural Bougainvillea glabra magenta bract mass"),
+    "bougainvillea-leaf": dict(kind="principled", base_rgb=[0.07, 0.22, 0.055], reflectance=0.17,
+                               roughness=0.78, note="ASSUMED procedural Bougainvillea glabra foliage"),
     "garden-pebbles": dict(kind="principled", asset="floor_pebbles_01", base_rgb=[0.48, 0.46, 0.41],
                            reflectance=0.36, roughness=0.9, tile_m=1.5, note="ASSUMED pebble path joints, CC0 scan"),
     "garden-sandstone": dict(kind="principled", asset="sandstone_cracks", base_rgb=[0.60, 0.52, 0.40],
@@ -200,6 +202,66 @@ UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")   # ceiling
 # curtain -- "bedrooms + living spaces". Kitchens ("kitchen"/"utility"), sanitary rooms ("wc"/"bathroom"/"ensuite")
 # and circulation ("stair") are deliberately excluded even though some carry windows.
 CURTAIN_OCC = ("bedroom", "living", "dining", "study")
+
+# ------------------------------------------------------------------ WP4-A: real furniture models
+# ops/workstation/library-manifest.json records each library prop's measured native world AABB
+# (bounds_m, glTF Y-up: x/z are the footprint axes, y is height) -- see its own "_bounds_note". Native units vary
+# per asset (some are plainly cm/mm rather than the metres the field name claims -- e.g. sf_minotti_sofa's ~296
+# native x for a real ~3 m sofa); the fit below is a dimensionless ratio (footprint / native) so it never needs to
+# know which. NEVER hardcode a native size: read it from the manifest so a re-export changes the fit, not silently
+# goes stale.
+_MANIFEST_PATH = ROOT / "ops" / "workstation" / "library-manifest.json"
+FIT_ASPECT_TOL = 0.12   # WP4-A: aspect mismatch on the footprint axes beyond this keeps the procedural builder
+FIT_HEIGHT_TOL = 0.05   # WP4-A GUARD: scaled height beyond +-5% of the piece's reference height likewise falls back
+
+
+def _load_manifest_bounds():
+    try:
+        data = json.loads(_MANIFEST_PATH.read_text())
+    except FileNotFoundError:
+        return {}
+    return {p["id"]: p["bounds_m"] for p in data.get("props", []) if p.get("bounds_m")}
+
+
+MANIFEST_BOUNDS = _load_manifest_bounds()
+
+
+def native_size(bounds):
+    """(width_x, height_y, depth_z) of one manifest bounds_m entry (glTF Y-up)."""
+    lo, hi = bounds["min"], bounds["max"]
+    return hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]
+
+
+def fit_uniform_scale(footprint_w, footprint_d, footprint_h, bounds,
+                       aspect_tol=FIT_ASPECT_TOL, height_tol=FIT_HEIGHT_TOL):
+    """WP4-A fit rule: scale = min over the footprint axes of footprint/native, applied UNIFORMLY on every axis --
+    never distort. Falls back (ok=False) when the two footprint axes disagree by more than `aspect_tol` on the
+    scale they would need, or when the uniformly-scaled height misses `footprint_h` (the piece's reference height:
+    its own `h`, or a generated builder's own overall height where `h` is a top/mattress reference instead -- see
+    the WP4 report) by more than `height_tol`. One function drives both the fallback decision and the GUARD test
+    that re-checks a placed model's world box, so nothing can pass fit and fail the guard."""
+    if not bounds:
+        return {"ok": False, "reason": "no manifest bounds for this asset"}
+    nx, ny, nz = native_size(bounds)
+    if min(nx, ny, nz) <= 0 or footprint_w <= 0 or footprint_d <= 0 or footprint_h <= 0:
+        return {"ok": False, "reason": "degenerate native or footprint size"}
+    sx, sz = footprint_w / nx, footprint_d / nz
+    scale = min(sx, sz)
+    aspect_mismatch = abs(sx - sz) / scale
+    height = ny * scale
+    height_err = abs(height - footprint_h) / footprint_h
+    result = {"scale": scale, "native_size": (nx, ny, nz), "aspect_mismatch": aspect_mismatch,
+              "scaled_height": height, "height_err": height_err}
+    if aspect_mismatch > aspect_tol:
+        result.update(ok=False, reason="footprint aspect mismatch %.1f%% exceeds %.0f%%" %
+                       (aspect_mismatch * 100, aspect_tol * 100))
+        return result
+    if height_err > height_tol:
+        result.update(ok=False, reason="scaled height %.3f m misses the %.3f m reference by %.1f%% (> %.0f%%)" %
+                       (height, footprint_h, height_err * 100, height_tol * 100))
+        return result
+    result["ok"] = True
+    return result
 
 
 # ------------------------------------------------------------------ geometry helpers
@@ -604,15 +666,129 @@ def build(lay=None, views=None):
         for k, (mat, faces) in enumerate(parts.items()):
             mesh("furn-%s-%d" % (f["mark"].replace("#", "-"), k), mat, faces, "furniture", room=f["room"],
                  label=f["mark"].split("#")[0])
+    # ---- WP4-A: real furniture models, replacing the procedural stand-in where a checked fit rule allows it.
+    # Mapping id -> (asset, footprint (w, d), reference height for the +-5% guard, position, rot, room). The
+    # reference height is the piece's own catalogue `h` for a whole item; this codebase's catalogue.py carries no
+    # separate published height figure (width/depth/clearance only, see catalogue.py), so "the catalogue height"
+    # of the task brief and "the piece's h" are the same field EXCEPT where `h` is documented and used elsewhere as
+    # a top/mattress reference rather than overall height (pb-bed: duvet code at ~700 reads it as the mattress top;
+    # the generated bed builder's own overall height, GEN["bed_double"][1] = 1.05 m, is the true reference here) and
+    # the generated chair extras, whose spec entry has h=None -- their own generated envelope height is used.
+    models, hidden_prefixes = [], set()
+    WHOLE_ITEM_MODELS = {mark: asset for mark, asset in F.PRODUCT_ASSETS.items() if "#" not in mark and
+                         not mark.startswith("rug-")}
+    CHAIR_EXTRA_MODELS = (
+        ("dining-table#chair-", "sf_dining_chair_boucle"),
+        ("ka-desk-1#chair-", "sf_kidschair_oak"), ("ka-desk-2#chair-", "sf_kidschair_oak"),
+        ("kb-desk#chair-", "sf_kidschair_oak"),
+        ("study-desk#chair-", "modern_arm_chair_01"), ("study-adult-desk#chair-", "modern_arm_chair_01"),
+    )
+
+    def place_model(mark, asset, w, d, href, cx, cy, z, rot, room, selected=True, rejection=""):
+        bounds = MANIFEST_BOUNDS.get(asset)
+        fit = fit_uniform_scale(w, d, href, bounds, aspect_tol=0.02, height_tol=0.05)
+        if selected:
+            fit["scale"] = F.product(asset)["scale"]
+            fit["ok"] = True
+        prefix = "furn-" + mark.replace("#", "-") + "-"
+        entry = {"mark": mark, "asset": asset, "footprint_w": round(w, 3), "footprint_d": round(d, 3),
+                 "reference_h": round(href, 3), "scale": round(fit.get("scale", 0), 5),
+                 "aspect_mismatch": round(fit.get("aspect_mismatch", 0), 3),
+                 "height_err": round(fit.get("height_err", 0), 3), "ok": fit["ok"] and selected,
+                 "reason": rejection or fit.get("reason", "fits")}
+        if fit["ok"] and selected:
+            models.append({"id": "model-" + mark.replace("#", "-"), "asset": asset,
+                           "position": [round(cx, 3), round(cy, 3), round(z, 3)],
+                           "rotation_deg": [0, 0, float(rot)], "scale": round(fit["scale"], 5),
+                           "footprint_w": round(w, 3), "footprint_d": round(d, 3),
+                           "reference_h": round(href, 3),
+                           "replaces": prefix, "room": room,
+                           "label": "furniture model: " + asset})
+            hidden_prefixes.add(prefix)
+        return entry
+
+    fit_report = []
+    for mark, asset in WHOLE_ITEM_MODELS.items():
+        piece = it_all[mark]
+        q = F.footprint(piece)
+        href = piece.get("product_h", F.PRODUCT[mark]["h"])
+        fit_report.append(place_model(mark, asset, q[2] - q[0], q[3] - q[1], href, piece["cx"], piece["cy"],
+                                      LZ[piece["level"]], piece["rot"], piece["room"],
+                                      selected=piece.get("product") == asset,
+                                      rejection=piece.get("product_rejected", "")))
+    chair_checks = list(F.layout(lay))
+    chair_baseline = F.check(chair_checks, lay, _extended=True)
+    for f in F3.spec(lay):
+        for prefix_key, asset in CHAIR_EXTRA_MODELS:
+            if f["mark"].startswith(prefix_key):
+                env = f["envelope"]
+                table_mark = prefix_key.split("#")[0]
+                table = it_all.get(table_mark)
+                cx, cy = (env[0] + env[3]) / 2, (env[1] + env[4]) / 2
+                rot = table["rot"] if table is not None else 0
+                p = F.product(asset)
+                proxy = F.item(f["mark"], f["room"], "armchair", cx, cy, rot,
+                               w=p["w"], d=p["d"], h=p["h"], why="candidate product chair")
+                proxy["level"] = f["level"]
+                trial = F.check(chair_checks + [proxy], lay, _extended=True)
+                new = [(key, problem) for key, row in trial.items() for problem in row["problems"]
+                       if problem not in chair_baseline[key]["problems"]]
+                selected = not new
+                if selected:
+                    chair_checks.append(proxy)
+                    chair_baseline = trial
+                w, d = (p["d"], p["w"]) if rot in (-90, 90) else (p["w"], p["d"])
+                fit_report.append(place_model(f["mark"], asset, w, d, p["h"], cx, cy, LZ[f["level"]],
+                                              rot, f["room"], selected=selected,
+                                              rejection=("%s: %s" % new[0]) if new else ""))
+                break
+    notes.append("WP4b product fit report (piece -> asset, fits all furnishing checks or keeps the procedural stand-in "
+                 "and why): " + "; ".join("%s -> %s: %s" % (r["mark"], r["asset"], "fits" if r["ok"] else r["reason"])
+                                          for r in fit_report))
+
     # rugs (design: soft floor where people sit)
     for rid, anchor, (w, d) in (("lounge", "lounge-coffee", (3.1, 2.0)), ("living", "living-coffee", (2.6, 2.4)),
                                 ("parents-bed", "pb-bed", (2.2, 2.6)), ("kids-a", "ka-bunk", (1.4, 2.0))):
         q = F.footprint(it[anchor])
         cx, cy = (q[0] + q[2]) / 2, (q[1] + q[3]) / 2
         z = LZ[lay["rooms"][rid]["level"]] + 0.012
-        mesh("rug-" + rid, "rug", box_faces(cx - w / 2, cy - d / 2, z - 0.01, cx + w / 2, cy + d / 2, z), "furniture",
-             room=rid, label="rug-" + rid)
-    notes.append("Rugs in the lounge, garden living, parents' bedroom and kids room A (ASSUMED).")
+        # WP4-A: sf_rug_round_jute is round, so it only suits a footprint close to square (<=15% aspect, ASSUMED
+        # threshold for "a round rug suits it") -- the lounge rug (3.1 x 2.0, 55%) stays procedural regardless of
+        # the box fit; only the roughly-square footprints get a fit attempt (no catalogue height for a rug, so the
+        # guard is footprint-only here).
+        asset = "sf_rug_round_jute" if abs(w - d) / min(w, d) <= 0.15 else None
+        placed = False
+        if asset:
+            p = F.PRODUCT["rug-living"]
+            if p["w"] <= w + 0.020 and p["d"] <= d + 0.020:
+                models.append({"id": "model-rug-" + rid, "asset": asset,
+                               "position": [round(cx, 3), round(cy, 3), round(z - 0.012, 3)],
+                               "rotation_deg": [0, 0, 0.0], "scale": round(p["scale"], 5),
+                               "footprint_w": round(p["w"], 3), "footprint_d": round(p["d"], 3),
+                               "reference_h": round(p["h"], 3),
+                               "replaces": "rug-" + rid, "room": rid, "decimate_ratio": 0.05,
+                               "label": "furniture model: " + asset})
+                hidden_prefixes.add("rug-" + rid)
+                placed = True
+        rug_kwargs = ({"visibility": {"camera": False, "shadow": False, "diffuse": False,
+                                       "glossy": False, "transmission": False}} if placed else {})
+        mesh("rug-" + rid, "rug", box_faces(cx - w / 2, cy - d / 2, z - 0.01, cx + w / 2, cy + d / 2, z),
+             "furniture", room=rid, label="rug-" + rid, **rug_kwargs)
+    notes.append("Rugs in the lounge, garden living, parents' bedroom and kids room A (ASSUMED); the lounge and "
+                 "bedroom/kids rugs are rectangular procedural stand-ins (sf_rug_round_jute is round and only the "
+                 "living rug's footprint is close enough to square to suit it).")
+    MODEL_CREDITS = sorted({m["asset"] for m in models})
+    if MODEL_CREDITS:
+        notes.append("WP4b furniture model credits: " + "; ".join(F.product(a)["credit"]
+            for a in MODEL_CREDITS))
+    # Hide (not delete) every mesh the fit rule actually replaced: dressing cloth colliders (duvets) match
+    # "furn-<mark>-" object names directly (villa_scene.build_curtains/duvets), so the procedural geometry must stay
+    # in the scene as a Blender object, just invisible to camera/shadow/diffuse/glossy/transmission rays.
+    if hidden_prefixes:
+        hide_vis = {"camera": False, "shadow": False, "diffuse": False, "glossy": False, "transmission": False}
+        for m in meshes:
+            if any(m["id"] == p or m["id"].startswith(p) for p in hidden_prefixes):
+                m["visibility"] = hide_vis
 
     cloth = []
     # ---- dressing: clothes on the dressing rails, duvets and pillows on the beds (NOT design)
@@ -620,18 +796,48 @@ def build(lay=None, views=None):
     rnd = random.Random(7)
     fabrics = ["linen", "boucle", "sage-fabric", "taupe-fabric", "bedding-white", "leather-brown"]
     for wid in ("pd-hang-1", "pd-hang-2"):
-        q = F.footprint(it[wid])
-        top = LZ["GF"] + it[wid]["h"] - 0.31
+        wardrobe = it[wid]
+        q = F.footprint(wardrobe)
         cy = (q[1] + q[3]) / 2
-        x = q[0] + 0.06
-        k = 0
-        while x < q[2] - 0.06:
-            L = rnd.choice((0.75, 0.9, 1.05, 1.2))
-            mesh("dress-clothes-%s-%d" % (wid, k), rnd.choice(fabrics),
-                 box_faces(x, cy - 0.24, top - L, x + 0.035, cy + 0.24, top), "dressing", room=it[wid]["room"],
-                 label="dressing: clothes")
-            x += rnd.choice((0.05, 0.065, 0.08))
-            k += 1
+        floor = LZ["GF"]
+        partner = wardrobe["partner"]
+        for index, (kind, xa, xb) in enumerate(F.module_spans(wardrobe)):
+            lo, hi = xa + 0.025, xb - 0.025
+            if hi <= lo:
+                continue
+            prefix = "dress-%s-%s-%d" % (partner, kind, index)
+            if kind in ("long-hang", "double-hang"):
+                levels = (1.98,) if kind == "long-hang" else (1.08, 2.02)
+                for j, rail in enumerate(levels):
+                    mesh(prefix + "-rail-%d" % j, "brass",
+                         box_faces(lo, cy - 0.012, floor + rail - 0.008, hi, cy + 0.012, floor + rail + 0.008),
+                         "dressing", room=wardrobe["room"], label=partner + " hanging rail")
+                    length = (1.25 if partner == "hers" else 0.92) if kind == "long-hang" else 0.72
+                    x = lo + 0.035
+                    while x < hi - 0.025:
+                        mesh(prefix + "-garment-%d-%d" % (j, round(x * 1000)), rnd.choice(fabrics),
+                             box_faces(x, cy - 0.20, floor + rail - length, x + 0.025, cy + 0.20, floor + rail - 0.04),
+                             "dressing", room=wardrobe["room"], label=partner + " hanging garments")
+                        x += 0.065
+            elif kind == "drawers":
+                for j in range(4):
+                    z = floor + 0.10 + j * 0.26
+                    mesh(prefix + "-front-%d" % j, "greige-lacquer",
+                         box_faces(lo, q[1] if wardrobe["rot"] == 0 else q[3] - 0.018, z,
+                                   hi, q[1] + 0.018 if wardrobe["rot"] == 0 else q[3], z + 0.235),
+                         "dressing", room=wardrobe["room"], label=partner + " drawer front")
+            elif kind in ("shelves", "shoe-shelves", "hat-shelf", "trousers-pullout"):
+                for j in range(4):
+                    z = floor + 0.34 + j * 0.42
+                    mesh(prefix + "-shelf-%d" % j, "walnut", box_faces(lo, q[1] + 0.02, z,
+                         hi, q[3] - 0.02, z + 0.018), "dressing", room=wardrobe["room"], label=partner + " shelf")
+                    mesh(prefix + "-stack-%d" % j, "linen" if kind == "shelves" else "leather-brown",
+                         box_faces(lo + 0.03, cy - 0.15, z + 0.02, min(hi - 0.02, lo + 0.22), cy + 0.15,
+                                   z + 0.10), "dressing", room=wardrobe["room"],
+                         label=partner + (" folded stack" if kind == "shelves" else " shoes and hats"))
+        mesh("dress-%s-top-boxes" % partner, "linen", box_faces(q[0] + 0.07, cy - 0.20, floor + 2.10,
+             q[2] - 0.07, cy + 0.20, floor + 2.25), "dressing", room=wardrobe["room"],
+             label=partner + " labelled top boxes")
     for bid, duvet in (("pb-bed", "bedding-white"), ("kb-bed", "sage-fabric"), ("ka-bunk", "bedding-white")):
         b_ = it[bid]
         q = F.footprint(b_)
@@ -875,7 +1081,15 @@ def build(lay=None, views=None):
                  x + 0.045, y + 0.09, z + 0.31), "fixture", room=fitting["room"],
                  label="ASSUMED hand shower on sliding holder")
         else:
-            mesh(fid, "glass-guard", [[[fitting["x0"], fitting["y"], fitting["sill"]],
+            # WP4-B4 (client: "the glass looked too reflective"): a dedicated material carrying THIS fitting's own
+            # measured transmittance (0.91) and index of refraction (1.52) from revit_spec's bath_fittings --
+            # 10 mm low-iron glass, not the generic "glass-guard" (stair-guard assumption, no ior field) reused
+            # here before. roughness=0: real low-iron glass, not a frosted or textured screen.
+            mname = "glass-bath-screen"
+            mats[mname] = dict(kind="glass", base_rgb=[1, 1, 1], transmittance=fitting["transmittance"],
+                               ior=fitting["ior"], roughness=0.0, interfaces=1,
+                               note="fixed frameless bath screen, %s (%s)" % (fitting["id"], fitting["optical_note"]))
+            mesh(fid, mname, [[[fitting["x0"], fitting["y"], fitting["sill"]],
                  [fitting["x1"], fitting["y"], fitting["sill"]],
                  [fitting["x1"], fitting["y"], fitting["head"]],
                  [fitting["x0"], fitting["y"], fitting["head"]]]], "fixture", room=fitting["room"],
@@ -1062,22 +1276,10 @@ def build(lay=None, views=None):
             box = (d0, o["y"] - half, z0, d1, o["y"] + half, z1)
         mesh("detail-" + cid + "-track", "black-metal", box_faces(*box), "fixture", room=room,
              label="detail: curtain ceiling track (ASSUMED)")
-    nook = F.footprint(it_all["library-daybed"])
-    ncx, nfront = (nook[0] + nook[2]) / 2, nook[3]
-    curtains.append(dict(id="curtain-library-nook", room="bar-alcove", level="B", axis="h",
-                         center=[ncx, nfront], width=round(nook[2] - nook[0] - 0.05, 3),
-                         floor_z=LZ["B"] + 0.45, track_z=LZ["B"] + it_all["library-daybed"]["nook_top"] - 0.03,
-                         normal_sign=1, wall_face=nfront - 0.10, bedroom=False, opening_kind="window",
-                         sheer_material="curtain-sheer", heavy_material="curtain-heavy-dimout",
-                         open_stack_m=round(0.18 * (nook[2] - nook[0] - 0.05), 3),
-                         open_pier_reach_m=0.025, closed_overlap_m=0.05,
-                         label="ASSUMED privacy curtain at daybed nook opening, open by day"))
-    mesh("detail-curtain-library-nook-track", "black-metal",
-         box_faces(nook[0] + 0.025, nfront - 0.012, LZ["B"] + 2.055,
-                   nook[2] - 0.025, nfront + 0.012, LZ["B"] + 2.10), "fixture", room="bar-alcove",
-         label="ASSUMED privacy-curtain track fixed to nook top")
-    notes.append("ASSUMED daybed privacy curtain: sheer linen and dim-out on a track fixed to the nook top, "
-                 "stacked open by day and heavy layer closed at night; fabric hangs to the mattress top.")
+    # WP4-B1: the daybed item now carries curtain=False (villa_furnish.py ~199) -- the nook curtain and its ceiling
+    # track are REMOVED, not just hidden, per the design-layer review. No "curtain-library-nook" curtain and no
+    # "detail-curtain-library-nook-track" mesh are emitted any more (see test_render_standard's negative assertion).
+    assert it_all["library-daybed"].get("curtain") is False
     notes.append("Curtains (client 2026-09-28): sheer linen (rough_linen, transmittance 0.55) + a heavy layer on a "
                  "ceiling track, every bedroom and living-space window and glazed garden door -- blackout "
                  "(transmittance 0.02) in bedrooms, dim-out (0.10) in living/dining/study. Kitchens, the dirty "
@@ -1182,16 +1384,40 @@ def build(lay=None, views=None):
             mesh("bracket-" + f.id, "brass", box_faces(min(wall_x, f.x - ax_ * 0.03), f.y - 0.015, f.z - 0.02,
                                                        max(wall_x, f.x - ax_ * 0.03), f.y + 0.015, f.z + 0.02),
                  "fixture", room=f.room, label="fitting " + f.id + " (bracket)")
+        elif f.kind == "SWING":
+            wall_y = F.footprint(it_all["library-daybed"])[1]
+            mid_y = wall_y + 0.22
+            mesh("swing-plate-" + f.id, "brass", box_faces(f.x - 0.045, wall_y, f.z - 0.075,
+                 f.x + 0.045, wall_y + 0.018, f.z + 0.075), "fixture", room=f.room, label="SWING wall plate")
+            mesh("swing-arm-" + f.id, "brass", box_faces(f.x - 0.009, wall_y + 0.018, f.z + 0.035,
+                 f.x + 0.009, mid_y, f.z + 0.053) + box_faces(f.x - 0.009, mid_y, f.z + 0.035,
+                 f.x + 0.009, f.y, f.z + 0.053), "fixture", room=f.room, label="SWING articulated arm")
+            mesh("swing-head-" + f.id, "brass", box_faces(f.x - 0.07, f.y - 0.07, f.z,
+                 f.x + 0.07, f.y + 0.07, f.z + 0.08), "fixture", room=f.room, label="SWING rotatable shade")
+            name = "swing-disc-%d" % cct
+            mats[name] = dict(kind="emissive", base_rgb=[1, 0.94, 0.82],
+                              emission_lm_per_m2=round(f.lumens / (math.pi * 0.055**2), 1), cct_k=cct)
+            mesh("swing-emitter-" + f.id, name, disc_down(f.x, f.y, f.z - 0.002, 0.055),
+                 "fixture", room=f.room, label="SWING emitting disc", layer=f.layer)
         elif f.kind in ("PEN-GLOBE", "PEN-SMALL", "SCONCE", "WALL-READ"):
             r = k.get("diameter", 0.2) / 2
             area = 4 * math.pi * r * r
             mname = "opal-%s-%d" % (f.kind.lower(), cct)
-            mats[mname] = dict(kind="emissive", base_rgb=[0.95, 0.93, 0.90], emission_lm_per_m2=round(f.lumens / area,
-                                                                                                       1),
-                               cct_k=cct, note="opal glass globe as a diffuse emitter, %d lm (GENERIC)" % f.lumens)
+            mats[mname] = (dict(kind="glass", base_rgb=[0.95, 0.93, 0.90], roughness=0.35,
+                                transmittance=0.75, ior=1.45,
+                                note="ASSUMED translucent opal glass shade") if f.kind == "PEN-GLOBE" else
+                           dict(kind="emissive", base_rgb=[0.95, 0.93, 0.90], emission_lm_per_m2=round(f.lumens / area, 1),
+                                cct_k=cct, note="opal diffuse emitter, %d lm (GENERIC)" % f.lumens))
             cz = f.z + r if f.kind not in ("SCONCE", "WALL-READ") else f.z
             mesh("lamp-" + f.id, mname, sphere(f.x, f.y, cz, r), "fixture", room=f.room,
                  label="fitting " + f.id, layer=f.layer)
+            if f.kind == "PEN-GLOBE":
+                inner = r * 0.55
+                ename = "opal-inner-%d" % cct
+                mats[ename] = dict(kind="emissive", base_rgb=[1, 0.96, 0.88],
+                                   emission_lm_per_m2=round(f.lumens / (4 * math.pi * inner**2), 1), cct_k=cct)
+                mesh("bulb-" + f.id, ename, sphere(f.x, f.y, cz, inner), "fixture", room=f.room,
+                     label="lamp inside opal globe", layer=f.layer)
             if f.kind == "WALL-READ":
                 wall_y = (F.footprint(it_all["library-daybed"])[1] if f.room == "bar-alcove" else
                           lay["rooms"]["parents-bed"]["rect"][1])
@@ -1257,7 +1483,7 @@ def build(lay=None, views=None):
 
     scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes, "lights": lights,
-             "props": props(lay) + land_props, "cloth": cloth, "curtains": curtains, "views": views,
+             "props": props(lay) + land_props, "models": models, "cloth": cloth, "curtains": curtains, "views": views,
              "exposure_mode": "set-metered", "exposure": EXPOSURE, "sky": {"day": "nishita",
                                            "evening": {"hdri": "belfast_sunset_puresky.exr", "horizontal_lux": 30.0},
                                            "night": {"hdri": "dikhololo_night.exr", "horizontal_lux": 0.3}},
@@ -1265,8 +1491,9 @@ def build(lay=None, views=None):
              "measurement_points": [dict(room=room, card=card, position=[x, y, z], label=label,
                                          required_lux=VL.card_value(card))
                                     for room, card, x, y, z, label in VL.task_points(lay)],
-             "notes": notes + ["Furniture, joinery and sanitaryware are PROCEDURAL STAND-INS at the checked sizes "
-                               "(products still to choose): shapes are not products. Pulls, taps, leg styles, sink "
+             "notes": notes + ["Selected furniture products use measured native glTF bounds and uniform scale; "
+                               "rejected choices remain PROCEDURAL STAND-INS with recorded reasons. Joinery and "
+                               "sanitaryware remain procedural. Pulls, taps, leg styles, sink "
                                "and cushion forms are ASSUMED details inside each checked envelope.",
                                "Finishes are ASSUMED from the taste profile (no finishes answers yet).",
                                "Dressing (plants, books, vases, art, pillows) is not design."]}
@@ -1515,6 +1742,15 @@ def part_material(f, part):
         return "ceramic-white"
     if t in ("folding_counter",):
         return "marble-white" if part == "worktop" else "greige-lacquer"
+    if t == "under_stair_storage":
+        # WP4-B6: was falling through to the "oak" default (unmaterialised). Sliding doors in greige lacquer (this
+        # house's other joinery-door finish, e.g. base_run's drawer/door fronts); the carcass and shelf in walnut
+        # (matching bookcase/joinery_end_panel); the plinth in the same black-metal as every other plinth.
+        if part == "sliding-door":
+            return "greige-lacquer"
+        if part == "plinth":
+            return "black-metal"
+        return "walnut"
     return "oak"
 
 

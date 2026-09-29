@@ -14,6 +14,8 @@ from __future__ import annotations
 
 import collections
 import math
+import json
+from pathlib import Path
 
 import numpy as np
 
@@ -32,6 +34,49 @@ BODY = 0.914            # card mitton-path-of-travel-min: paths of travel at lea
 PRINCIPAL_BEDROOM = "parents-bed"
 BEDROOM_ROUTE = 0.750   # card ukadm-bedroom-route-750: inside a bedroom, a 750 mm access route from the doorway
 SEAT_EYE = 0.45         # eye behind the seat front (ASSUMED) for viewing distances
+
+# Chosen library products determine the authored envelope. The manifest's `bounds_m` is
+# actually in each glTF's native units; see its _bounds_note for axis order.
+PRODUCT_ASSETS = {
+    "living-sofa": "sf_minotti_sofa", "living-chair-1": "sf_probber_cane_armchair",
+    "living-chair-2": "sf_probber_cane_armchair", "lounge-sofa": "sf_modern_low_sofa",
+    "lounge-armchair": "sf_probber_cane_armchair", "cinema-sofa": "sf_cinema_sofa_velvet",
+    "pb-bed": "sf_chelsea_bed", "dining-table#chair-": "sf_dining_chair_boucle",
+    "ka-desk-1#chair-": "sf_kidschair_oak", "ka-desk-2#chair-": "sf_kidschair_oak",
+    "kb-desk#chair-": "sf_kidschair_oak", "study-desk#chair-": "modern_arm_chair_01",
+    "study-adult-desk#chair-": "modern_arm_chair_01", "rug-living": "sf_rug_round_jute",
+}
+_MANIFEST = Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json"
+_PROPS = {p["id"]: p for p in json.loads(_MANIFEST.read_text(encoding="utf-8"))["props"]}
+# These overall heights are ASSUMED from the former catalogue envelopes where the
+# native units cannot be inferred safely. They affect only uniform scale.
+_AMBIGUOUS_HEIGHT = {"sf_probber_cane_armchair": 0.85, "sf_kidschair_oak": 0.80}
+
+
+def product(asset):
+    """Return asset, real width/depth/height in metres and one uniform native scale."""
+    p = _PROPS[asset]
+    low, high = p["bounds_m"]["min"], p["bounds_m"]["max"]
+    native = tuple(high[i] - low[i] for i in (0, 2, 1))
+    largest = max(native)
+    if asset == "sf_rug_round_jute":
+        scale = 2.4 / native[0]
+        basis = "ASSUMED 2.4 m diameter from living rug envelope; native units ambiguous"
+    elif asset in _AMBIGUOUS_HEIGHT:
+        scale = _AMBIGUOUS_HEIGHT[asset] / native[2]
+        basis = "ASSUMED overall height from catalogue envelope"
+    elif largest > 500:
+        scale, basis = 0.001, "native millimetres (inferred from overall size)"
+    elif largest > 20:
+        scale, basis = 0.01, "native centimetres (inferred from overall size)"
+    else:
+        scale, basis = 1.0, "native metres"
+    return dict(asset=asset, w=native[0]*scale, d=native[1]*scale,
+                h=native[2]*scale, scale=scale, basis=basis, credit=p.get("credit", p.get("source", asset)))
+
+
+PRODUCT = {key: product(asset) for key, asset in PRODUCT_ASSETS.items()}
+_PRODUCT_LAYOUT_CACHE = {}
 
 
 def item(iid, room, typ, cx, cy, rot=0, w=None, d=None, h=0.8, why="", **kw):
@@ -131,7 +176,7 @@ def clear_rect(lay, rid):
     return (round(x0 + ins[2], 3), round(y0 + ins[0], 3), round(x1 - ins[3], 3), round(y1 - ins[1], 3))
 
 
-def layout(lay=None):
+def layout(lay=None, products=True):
     """D1, furnished for the client's questionnaire answers (2026-09-27)."""
     lay = lay or R.design("D1")
     r = {k: clear_rect(lay, k) for k in lay["rooms"]}
@@ -150,8 +195,9 @@ def layout(lay=None):
     add(item("lounge-sofa", None, "sofa_4seat", 6.22, L[1] + 0.575, 0, h=0.85,
              why="facing the TV, back to the stair balustrade; 1.10 m clear at its street end, past the nook column, to the pantry"),
         "lounge", views="lounge-tv")
-    add(item("lounge-coffee", None, "coffee_table", 6.22, L[1] + 0.1 + 0.95 + 0.462 + 0.3, 0, w=1.2, d=0.6, h=0.4,
-             why="457 mm from the sofa (card mitton-sofa-coffee-table-457)"), "lounge")
+    add(item("lounge-coffee", None, "coffee_table", 6.22, L[1] + 0.1 + 0.95 + 0.462 + 0.3, 0,
+             w=1.2, d=0.6, h=0.4,
+             why="457 mm from the procedural sofa retained after the real sofa closed the pantry route"), "lounge")
     add(item("lounge-armchair", None, "armchair", 8.42, -26.2, 90, h=0.85,
              why="fifth seat, turned to the TV and the family corner"), "lounge")
     add(against("stair-flight-store", r["stair-b"], "y0", 5.30, "under_stair_storage",
@@ -187,12 +233,14 @@ def layout(lay=None):
     add(item("living-sofa", None, "sofa_3seat", 19.85, -27.32, 0, h=0.85,
              why="back to the library alcove, facing the east garden door; both garden doors stay open to reach"),
         "living")
-    add(item("living-coffee", None, "coffee_table", 20.35, -26.113, 0, w=1.1, d=0.6, h=0.4,
-             why="457 mm from the sofa"), "living")
-    add(item("living-chair-1", None, "armchair", 19.925, -24.931, 180, h=0.85,
-             why="facing the sofa across the table"), "living")
-    add(item("living-chair-2", None, "armchair", 20.825, -24.931, 180, h=0.85,
-             why="facing the sofa across the table; 1.4 m to the east garden door"), "living")
+    add(item("living-coffee", None, "coffee_table", 20.35, -26.000, 0, w=1.1, d=0.45, h=0.4,
+             why="slim table between the real sofa and cane chairs; 457 mm front clearances on both sides"), "living")
+    add(item("living-chair-1", None, "armchair", 19.7, -24.900, 180,
+             w=PRODUCT["living-chair-1"]["w"], d=PRODUCT["living-chair-1"]["d"], h=0.85,
+             why="compact real cane chair facing the sofa across the table"), "living")
+    add(item("living-chair-2", None, "armchair", 20.75, -24.900, 180,
+             w=PRODUCT["living-chair-2"]["w"], d=PRODUCT["living-chair-2"]["d"], h=0.85,
+             why="compact real cane chair facing the sofa across the table; garden door route stays open"), "living")
     add(against("library-cabinet-left", A, "y0", A[0], "bookcase", w=1.2, d=0.4, h=2.1,
                 glazing="glass-doors", why="glass-door book joinery on the windowless south wall"), "bar-alcove")
     add(against("library-daybed", A, "y0", A[0] + 1.2, "daybed_nook", w=2.0, d=0.95, h=0.45,
@@ -320,6 +368,54 @@ def layout(lay=None):
                     "the bath"), "parents-ensuite")
     for it in items:
         it["level"] = lay["rooms"][it["room"]]["level"]
+    if products:
+        cache_key = tuple((name, tuple(room["rect"])) for name, room in sorted(lay["rooms"].items()))
+        if cache_key in _PRODUCT_LAYOUT_CACHE:
+            for it in items:
+                saved = _PRODUCT_LAYOUT_CACHE[cache_key].get(it["id"])
+                if saved:
+                    it.update(saved)
+            return items
+        # Try each chosen product at its own size. Preserve its original back line
+        # against the same wall, then run every furnishing check on the new box.
+        # A failed choice stays procedural at the original envelope with evidence.
+        baseline = check(items, lay, _extended=True)
+        for it in items:
+            p = PRODUCT.get(it["id"])
+            if p is None:
+                continue
+            if it["id"] == "cinema-sofa":
+                it["product_rejected"] = "product too long for the cinema width"
+                continue
+            if it["id"] == "lounge-sofa":
+                it["product_rejected"] = ("real 3.29 x 1.62 m sofa closes the 914 mm pantry and yard routes "
+                                          "with the coffee table beyond its 457 mm front clearance")
+                continue
+            if it["id"] == "pb-bed":
+                it["product_rejected"] = ("real products available are king size (1.97-2.14 m); "
+                                          "approved 0.35 m bedside arrangement kept")
+                continue
+            old = (it["cx"], it["cy"], it["w"], it["d"], it["h"])
+            front_x, front_y = DIRS[it["rot"]]["front"]
+            shift = (p["d"] - it["d"]) / 2
+            it["cx"] = round(it["cx"] + front_x * shift, 4)
+            it["cy"] = round(it["cy"] + front_y * shift, 4)
+            it["w"], it["d"] = p["w"], p["d"]
+            if it["id"] != "pb-bed":
+                it["h"] = p["h"]
+            trial = check(items, lay, _extended=True)
+            new = [(key, problem) for key, row in trial.items() for problem in row["problems"]
+                   if problem not in baseline[key]["problems"]]
+            if new:
+                it["cx"], it["cy"], it["w"], it["d"], it["h"] = old
+                it["product_rejected"] = "%s: %s" % new[0]
+            else:
+                it["product"] = p["asset"]
+                it["product_h"] = p["h"]
+                baseline = trial
+        _PRODUCT_LAYOUT_CACHE[cache_key] = {
+            it["id"]: {k: it[k] for k in ("cx", "cy", "w", "d", "h", "product", "product_h", "product_rejected") if k in it}
+            for it in items if it["id"] in PRODUCT}
     return items
 
 

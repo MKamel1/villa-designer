@@ -19,6 +19,10 @@ class D1Round3(unittest.TestCase):
 
     def test_furniture_checks_positive_and_negative_on_real_d1(self):
         good = F.check(self.items, self.lay)
+        by_id_good = {item["id"]: item for item in self.items}
+        self.assertEqual(by_id_good["living-sofa"].get("product"), "sf_minotti_sofa")
+        self.assertAlmostEqual(by_id_good["living-coffee"]["d"], 0.45)
+        self.assertEqual(by_id_good["pb-bed"].get("product"), None)
         for key in ("nook_curtain", "seating_focal", "wardrobe_capacity",
                     "under_stair_storage", "clearances", "doors", "routes"):
             self.assertEqual(good[key]["status"], "pass", (key, good[key]["problems"]))

@@ -19,15 +19,33 @@ ALLOWED_MATERIALS = {
     "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
     "black-metal", "ceramic-white", "screen-black", "glass-clear", "glass-guard", "glass-edge", "opal-strip",
-    "silvered-mirror", "door-oak", "garden-gravel", "garden-pebbles", "garden-sandstone",
-    "render-exterior", "paint-exterior-grey-green", "paving", "lawn", "outdoor-fabric", "teak",
+    "silvered-mirror", "door-oak", "garden-gravel", "garden-pebbles", "garden-sandstone", "glass-bath-screen",
+    "render-exterior", "paint-exterior-grey-green", "paving", "lawn", "outdoor-fabric", "teak", "bougainvillea-leaf",
     "alu-bronze", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
-    "marker-2200", "opal-pen-globe-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
+    "marker-2200", "opal-pen-globe-2700", "opal-inner-2700", "swing-disc-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
     "opal-vsconce-3000", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout",
 }
 
 
 class RenderStandard(unittest.TestCase):
+    def test_wp4b_fixture_and_dressing_parts(self):
+        ids = {m["id"] for m in SCENE["meshes"]}
+        swings = [m for m in SCENE["meshes"] if m["id"].startswith("swing-plate-")]
+        self.assertEqual(len(swings), 2)
+        for plate in swings:
+            lamp = plate["id"].removeprefix("swing-plate-")
+            self.assertIn("swing-arm-" + lamp, ids)
+            self.assertIn("swing-head-" + lamp, ids)
+            self.assertIn("swing-emitter-" + lamp, ids)
+        globes = [m for m in SCENE["meshes"] if m["material"] == "opal-pen-globe-2700"]
+        self.assertTrue(globes)
+        self.assertEqual(SCENE["materials"]["opal-pen-globe-2700"]["kind"], "glass")
+        self.assertTrue(all("bulb-" + m["id"].removeprefix("lamp-") in ids for m in globes))
+        self.assertTrue(any(i.startswith("dress-hers-long-hang-") for i in ids))
+        self.assertTrue(any(i.startswith("dress-his-drawers-") for i in ids))
+        self.assertIn("dress-hers-top-boxes", ids)
+        self.assertIn("dress-his-top-boxes", ids)
+
     def test_wp2b_checked_joinery_and_kitchen_builders(self):
         from archpipe.concept import villa_furnish as F, villa_furniture_detail as FD
         items = {i["id"]: i for i in F.layout(VR.R.design("D1"))}
@@ -47,7 +65,8 @@ class RenderStandard(unittest.TestCase):
             self.assertTrue(required <= set(parts), (name, set(parts)))
         ids = {m["id"] for m in SCENE["meshes"]}
         self.assertTrue(any(i.startswith("detail-cabinet-led-") for i in ids))
-        self.assertIn("detail-curtain-library-nook-track", ids)
+        # WP4-B1: the daybed item now carries curtain=False -- the nook curtain and its track are REMOVED.
+        self.assertNotIn("detail-curtain-library-nook-track", ids)
         self.assertTrue(all(m["material"] == "walnut" for m in SCENE["meshes"]
                             if m["id"].startswith("furn-library-end-panel-")))
         self.assertEqual(sum(i.startswith("lamp-shade-DESK-cinema-") for i in ids), 2)
@@ -536,8 +555,9 @@ class RenderStandard(unittest.TestCase):
                    [next(r for r in d["rooms"] if r != "yard") for d in sp["doors"] if d.get("garden")])
         expected_rooms = {room for room in openings if lay["rooms"][room]["occupancy"] in VR.CURTAIN_OCC}
         got_rooms = {c["room"] for c in SCENE["curtains"]}
-        self.assertEqual(got_rooms, expected_rooms | {"bar-alcove"})
-        self.assertEqual(sum(c["id"] == "curtain-library-nook" for c in SCENE["curtains"]), 1)
+        # WP4-B1: the daybed's nook curtain is removed (curtain=False), so "bar-alcove" no longer carries one.
+        self.assertEqual(got_rooms, expected_rooms)
+        self.assertEqual(sum(c["id"] == "curtain-library-nook" for c in SCENE["curtains"]), 0)
         self.assertTrue(expected_rooms & {"kids-a", "kids-b", "parents-bed"}, "no bedroom curtains found")
         self.assertTrue(expected_rooms & {"living", "dining"}, "no living-space curtains found")
         excluded = {"guest-wc", "family-bath", "parents-ensuite", "kitchen", "kitchen-island", "kitchen-work",

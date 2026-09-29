@@ -369,7 +369,7 @@ def _d1_details(lay, spec):
              material="wood", support="wall", nosing_profile=[[x, -28.671, z] for x, _, z in nosings],
              height_above_nosing=0.9,
              basis="client wood handrail decision; 0.9 m height carried from ASSUMED D1 render")])
-    bath = F.footprint(next(i for i in F.layout(lay) if i["id"] == "pe-bath"))
+    bath = F.footprint(next(i for i in F.layout(lay, products=False) if i["id"] == "pe-bath"))
     spec["bath_fittings"].extend([
         dict(id="pe-rain-head", level="GF", room="parents-ensuite", kind="ceiling-rain-head",
              x=(bath[0] + bath[2]) / 2, y=(bath[1] + bath[3]) / 2, z=2.3, over="pe-bath"),
@@ -421,7 +421,7 @@ def check_wp1_spec(lay, spec=None):
     if hatch is None:
         errors.append("kitchen sink pass-through missing")
     else:
-        run = next(i for i in F.layout(lay) if i["id"] == "k-run")
+        run = next(i for i in F.layout(lay, products=False) if i["id"] == "k-run")
         run_fp = F.footprint(run)
         sink = next((a, b) for kind, a, b in F.module_spans(run) if kind == "sink")
         if hatch["sill"] < run["h"] + 0.1 - 1e-6:
@@ -444,7 +444,7 @@ def check_wp1_spec(lay, spec=None):
         errors.append("client-approved frameless glass stair edge missing")
     if not rail or rail["material"] != "wood" or rail["side"] != "wall":
         errors.append("client-approved wall-side wood handrail missing")
-    bath = F.footprint(next(i for i in F.layout(lay) if i["id"] == "pe-bath"))
+    bath = F.footprint(next(i for i in F.layout(lay, products=False) if i["id"] == "pe-bath"))
     fittings = {x["id"]: x for x in spec["bath_fittings"]}
     for name in ("pe-rain-head", "pe-hand-shower"):
         f = fittings.get(name)

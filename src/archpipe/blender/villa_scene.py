@@ -220,8 +220,12 @@ def add_material(name, spec, library_root, warnings):
     kind = spec["kind"]
     if kind == "glass":
         bsdf.inputs["Transmission Weight"].default_value = 1.0
-        bsdf.inputs["IOR"].default_value = 1.5
-        warnings.append(name + ": glass IOR 1.5 assumed; the contract has no IOR field")
+        # WP4-B4: honour a fitting's own measured index of refraction (e.g. the ensuite bath screen's 1.52,
+        # revit_spec bath_fittings) instead of always assuming 1.5.
+        ior = spec.get("ior")
+        bsdf.inputs["IOR"].default_value = ior if ior is not None else 1.5
+        if ior is None:
+            warnings.append(name + ": glass IOR 1.5 assumed; the contract has no IOR field")
         mat["presentation_assumption"] = "clear glazing from villa contract"
         mat["presentation_transmittance"] = spec["transmittance"]
     elif kind == "translucent":
@@ -454,6 +458,42 @@ def build_meshes(mesh_specs, materials, material_specs, warnings):
         for spec in specs:
             objects[spec["id"]] = obj
     return objects
+
+
+def build_climbers(mesh_specs, objects, materials, warnings):
+    """Replace each box mass with dense individual leaf and bract polygons."""
+    placing = sibling("climber_placement")
+    for spec in mesh_specs:
+        if spec["material"] != "bougainvillea-bract" or "climber-" not in spec["id"]:
+            continue
+        obj = objects[spec["id"]]
+        obj.hide_render = True
+        points = [v for face in spec["faces"] for v in face]
+        box = (min(v[0] for v in points), min(v[1] for v in points), min(v[2] for v in points),
+               max(v[0] for v in points), max(v[1] for v in points), max(v[2] for v in points))
+        positions = placing.placements(box, density=120, seed=sum(map(ord, spec["id"])))
+        for kind, matname in (("leaf", "bougainvillea-leaf"), ("bract", "bougainvillea-bract")):
+            verts, faces = [], []
+            for x, y, z, label in positions:
+                if label != kind:
+                    continue
+                half = 0.028 if kind == "leaf" else 0.020
+                dx = min(half, x-box[0], box[3]-x)
+                dy = min(half, y-box[1], box[4]-y)
+                dz = min(half*1.5, z-box[2], box[5]-z)
+                if min(dx, dy, dz) <= 0:
+                    continue
+                base = len(verts)
+                verts.extend(((x-dx, y, z), (x, y-dy, z+dz),
+                              (x+dx, y, z), (x, y+dy, z-dz)))
+                faces.append((base, base+1, base+2, base+3))
+            mesh = bpy.data.meshes.new(spec["id"] + "-" + kind)
+            mesh.from_pydata(verts, [], faces)
+            mesh.update()
+            leaf_obj = bpy.data.objects.new(mesh.name, mesh)
+            bpy.context.collection.objects.link(leaf_obj)
+            mesh.materials.append(materials[matname])
+        warnings.append(spec["id"] + ": replaced box with %d scattered leaf/bract instances" % len(positions))
 
 
 def layered_emissive_materials(mesh_specs, objects, material_specs):
@@ -789,6 +829,55 @@ def import_props(prop_specs, library_root):
     return imported
 
 
+def import_models(model_specs, library_root):
+    """Import complete glTF products at one uniform scale, centred and seated on the floor."""
+    imported = []
+    for spec in model_specs:
+        before = set(bpy.data.objects)
+        path = os.path.join(library_root, "props", spec["asset"], "model.gltf")
+        if not os.path.isfile(path):
+            raise FileNotFoundError(path)
+        bpy.ops.import_scene.gltf(filepath=path)
+        new = [obj for obj in bpy.data.objects if obj not in before]
+        meshes = [obj for obj in new if obj.type == "MESH"]
+        if not meshes:
+            raise ValueError("model has no meshes: " + spec["asset"])
+        anchor = bpy.data.objects.new("model-anchor-" + spec["id"], None)
+        bpy.context.collection.objects.link(anchor)
+        for root in (obj for obj in new if obj.parent is None):
+            root.parent = anchor
+        anchor.rotation_mode = "XYZ"
+        anchor.rotation_euler = tuple(math.radians(v) for v in spec["rotation_deg"])
+        anchor.scale = (spec["scale"],) * 3
+        bpy.context.view_layer.update()
+        def corners():
+            return [obj.matrix_world @ Vector(c) for obj in meshes for c in obj.bound_box]
+        xyz = corners()
+        anchor.location = (spec["position"][0] - (min(v.x for v in xyz) + max(v.x for v in xyz))/2,
+                           spec["position"][1] - (min(v.y for v in xyz) + max(v.y for v in xyz))/2,
+                           spec["position"][2] - min(v.z for v in xyz))
+        bpy.context.view_layer.update()
+        total_faces = sum(len(obj.data.polygons) for obj in meshes)
+        asset_ratio = min(1.0, 500000 / max(total_faces, 1))
+        for obj in meshes:
+            faces = len(obj.data.polygons)
+            ratio = min(spec.get("decimate_ratio", 1.0), asset_ratio)
+            if ratio < 1.0 and faces > 10:
+                mod = obj.modifiers.new("bounded product decimation", "DECIMATE")
+                mod.ratio = ratio
+            obj.name = "model-%s-%s" % (spec["id"], obj.name)
+        xyz = corners()
+        box = (min(v.x for v in xyz), min(v.y for v in xyz), min(v.z for v in xyz),
+               max(v.x for v in xyz), max(v.y for v in xyz), max(v.z for v in xyz))
+        if "footprint_w" in spec:
+            if box[3]-box[0] > spec["footprint_w"] + 0.020 or box[4]-box[1] > spec["footprint_d"] + 0.020:
+                raise ValueError("model exceeds product footprint: " + spec["id"])
+            if abs((box[5]-box[2]) / spec["reference_h"] - 1) > 0.05:
+                raise ValueError("model height exceeds five percent tolerance: " + spec["id"])
+        imported.append({"id": spec["id"], "asset": spec["asset"], "bounds": box, "objects": meshes})
+    return imported
+
+
 def visible_props(imported):
     scene = bpy.context.scene
     records = []
@@ -1100,6 +1189,7 @@ def render(scene_data, args):
     materials = {name: add_material(name, spec, library_root, warnings) for name, spec in scene_data["materials"].items()}
     configure_glass(materials, scene_data["materials"])
     objects = build_meshes(scene_data["meshes"], materials, scene_data["materials"], warnings)
+    build_climbers(scene_data["meshes"], objects, materials, warnings)
     switched_emitters = layered_emissive_materials(scene_data["meshes"], objects, scene_data["materials"])
     emissive_sources = []
     for spec in scene_data["meshes"]:
@@ -1116,6 +1206,7 @@ def render(scene_data, args):
     curtain_objects, curtain_report = build_curtains(scene_data.get("curtains", []), materials)
     objects.update(curtain_objects)
     imported_props = import_props(scene_data.get("props", []), library_root)
+    imported_models = import_models(scene_data.get("models", []), library_root)
     lights = {l["id"]: add_light(l, args.ies_dir) for l in scene_data["lights"]}
     full_power = {ident: obj.data.energy for ident, obj in lights.items()}
     mesh_by_id = {mesh["id"]: mesh for mesh in scene_data["meshes"]}
@@ -1278,7 +1369,9 @@ def render(scene_data, args):
         report = {"view": view["id"], "state": view["state"], "samples": s.cycles.samples,
                   "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
                   "lights_on_count": sum(not obj.hide_render for obj in lights.values()), "subjects": subject_result,
-                  "imported_props": prop_result, "cloth": cloth_report,
+                  "imported_props": prop_result,
+                  "imported_models": [{"id": m["id"], "asset": m["asset"], "bounds": m["bounds"]}
+                                      for m in imported_models], "cloth": cloth_report,
                   "curtains": [dict(r, hidden=objects[r["id"]].hide_render) for r in curtain_report],
                   "mesh_object_count": len(set(objects.values())),
                   "emissive_sources": current_emissive,

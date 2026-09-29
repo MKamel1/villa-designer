@@ -16,6 +16,7 @@ import re
 import subprocess
 import sys
 import tempfile
+import uuid
 
 import yaml
 
@@ -27,7 +28,8 @@ from archpipe import (brief as B, catalogue as cat, cli, codes,  # noqa: E402
 from archpipe.model import load as load_model  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-TMP = pathlib.Path(tempfile.mkdtemp(prefix="archpipe-verify-"))
+TMP = pathlib.Path(tempfile.gettempdir()) / ("archpipe-verify-" + uuid.uuid4().hex)
+TMP.mkdir(parents=True)
 FAILS: list[str] = []
 
 # A number with a unit attached. Used to prove that an `advisory` finding
