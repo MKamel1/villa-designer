@@ -44,6 +44,7 @@ def villa_qa_context(scene: dict, view: dict, render_report: dict) -> dict:
     day = view["state"] == "day"
     measured = render_report["qa_scene"]
     return {"subjects": render_report["subjects"],
+            "exterior_camera": view["exposure"].startswith("exterior"),
             "camera": {"pitch_deg": 90 + render_report["camera_pitch_deg"],
                        "shift_y": view["camera"].get("shift_y", 0)},
             "white_balance": render_report["white_balance_applied"],

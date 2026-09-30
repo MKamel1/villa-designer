@@ -80,11 +80,12 @@ def prop_world_box(asset, position, rotation_deg, scale):
     corners = [(lx0, ly0), (lx1, ly0), (lx1, ly1), (lx0, ly1)]
     yaw = radians(rotation_deg[2])
     c, s = cos(yaw), sin(yaw)
-    rotated = [(scale * (x * c - y * s), scale * (x * s + y * c)) for x, y in corners]
+    sx, sy, sz = (scale, scale, scale) if isinstance(scale, (int, float)) else scale
+    rotated = [(sx * x * c - sy * y * s, sx * x * s + sy * y * c) for x, y in corners]
     px, py, pz = position
     xs = [px + rx for rx, _ in rotated]
     ys = [py + ry for _, ry in rotated]
-    height = scale * (lz1 - lz0)
+    height = sz * (lz1 - lz0)
     return min(xs), min(ys), pz, max(xs), max(ys), pz + height
 
 
@@ -239,6 +240,35 @@ EXTRA_CARE = {
 # Widths measured from PROP_BOUNDS (ops/workstation/library-manifest.json).
 CLUMP_SPREAD = {"flower_ursinia": 2.19, "flower_heliophila": 2.75,
                  "sf_garden_flower_clump": 4.30}
+
+# sf_wooden_bench (v25 defect, client "huge dark block"): manifest bounds_m native 0.81 x 0.48 x 3.58 m, long axis
+# native Z (scene Y before yaw). villa_scene.import_props applies one uniform scalar to x/y/z, so a single scale
+# cannot hit both a card-range seat height and the brief's ~1.8 m length from this asset's fixed 7.5:1 ratio.
+# Its scene-space height and plan axes are now scaled independently to meet both dimensions.
+BENCH_HEIGHT_RANGE = (0.35, 0.45)
+BENCH_HEIGHT_M = 0.40
+BENCH_LENGTH_M = 1.80
+
+
+def bench_violations(props, tol=0.02):
+    """Guard for the v25 defect: a placed sf_wooden_bench's world box (villa_landscape.prop_world_box) must show a
+    seat height inside the real Time-Saver seatwall range and a length matching BENCH_LENGTH_M."""
+    lo, hi = BENCH_HEIGHT_RANGE
+    out = []
+    for p in props:
+        if p["asset"] != "sf_wooden_bench":
+            continue
+        x0, y0, z0, x1, y1, z1 = prop_world_box(p["asset"], p["position"], p.get("rotation_deg", [0, 0, 0]),
+                                                 p["scale"])
+        height, length = z1 - z0, max(x1 - x0, y1 - y0)
+        if not (lo - tol <= height <= hi + tol):
+            out.append((p["id"], "seat height %.3f m outside Time-Saver lts-seatwall-height-350 range %.2f-%.2f m"
+                        % (height, lo, hi)))
+        if abs(length - BENCH_LENGTH_M) > tol:
+            out.append((p["id"], "bench length %.3f m differs from the 1.80 m design intent" % length))
+        if y1 - y0 < BENCH_LENGTH_M - tol:
+            out.append((p["id"], "bench long axis must run across the gate view along scene Y"))
+    return out
 
 
 def _plant_data():
@@ -540,8 +570,12 @@ def build(spec, lay=None):
     # appears, without every bed repeating every colour.
     BACK_H, MID_H, FRONT_H = 0.9, 1.0, 0.5
 
-    # north (x24.0-27.1 along the wall at y=-20.351; back near the wall)
-    for i, x in enumerate((24.55, 25.55, 26.55)):
+    # north (x24.0-27.1 along the wall at y=-20.351; back near the wall). Back and front densified from 3 to 4
+    # plants each (v28 read thin in its establishing shot, client round 4): spacing tightened but stays clear of
+    # spacing_violations' 0.8*spread minimum (back 0.78 m vs 0.72 m needed; front 0.80 m vs 0.60 m needed). Mid
+    # stays at 3: Ixora's 1.2 m spread needs 0.96 m centres, which 4 plants cannot fit in the 3.1 m bed without
+    # crowding the back/front rows.
+    for i, x in enumerate((24.35, 25.13, 25.91, 26.69)):
         plant("landscape-north-back-%02d" % i, "north", "back", "sf_bottlebrush",
               "Callistemon citrinus", BACK_H, (x, -21.00))
     for i, x in enumerate((24.55, 25.55, 26.55)):
@@ -549,7 +583,7 @@ def build(spec, lay=None):
               "Ixora coccinea", MID_H, (x, -21.35))
     plant("landscape-north-mid-accent", "north", "mid-accent", "sf_bougainvillea",
           "Bougainvillea glabra", 0.6, (24.15, -21.35), extra="; potted accent, not drift-counted")
-    for i, x in enumerate((24.55, 25.55, 26.55)):
+    for i, x in enumerate((24.25, 25.05, 25.85, 26.65)):
         plant("landscape-north-front-%02d" % i, "north", "front", "sf_lavender_clump",
               "Lavandula angustifolia 'Hidcote'", FRONT_H, (x, -21.95))
     clump("landscape-north-front-accent", "north", "front-accent", "sf_garden_flower_clump",
@@ -618,16 +652,16 @@ def build(spec, lay=None):
                         ("north", 25.5, -20.45), ("west", -0.30, -26.20)):
         if name == "east":
             frame = _box(x-.04, y, GROUND, x, y+1.5, GROUND+2.2)
-            mass = _box(x-.13, y+.08, GROUND, x-.05, y+1.42, GROUND+2.05)
+            mass = _box(x-.17, y+.08, GROUND, x-.05, y+1.42, GROUND+2.05)
         elif name == "south":
             frame = _box(x-.75, y, GROUND, x+.75, y+.04, GROUND+2.2)
-            mass = _box(x-.67, y+.05, GROUND, x+.67, y+.13, GROUND+2.05)
+            mass = _box(x-.67, y+.05, GROUND, x+.67, y+.17, GROUND+2.05)
         elif name == "north":
             frame = _box(x-1.0, y, GROUND, x+1.0, y+.04, GROUND+2.2)
-            mass = _box(x-.92, y+.005, GROUND, x+.92, y+.035, GROUND+2.05)
+            mass = _box(x-.92, y-.03, GROUND, x+.92, y+.09, GROUND+2.05)
         else:  # west
             frame = _box(x, y, GROUND, x+.04, y+1.5, GROUND+2.2)
-            mass = _box(x+.05, y+.08, GROUND, x+.13, y+1.42, GROUND+2.05)
+            mass = _box(x+.05, y+.08, GROUND, x+.17, y+1.42, GROUND+2.05)
         meshes.append(_mesh("trellis-"+name, "furniture", "trellis", frame,
                             "ASSUMED trellis for Bougainvillea glabra; care: " + boug))
         meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract", mass,
@@ -709,16 +743,53 @@ def build(spec, lay=None):
     # Lavandula (purple) and Gazania (orange) for the client's colour-block
     # request, rather than a single repeated species.
     top_mix = (("sf_lavender_clump", "Lavandula angustifolia 'Hidcote'", .48),
-               ("flower_gazania", "Gazania rigens", .25),
-               ("sf_lavender_clump", "Lavandula angustifolia 'Hidcote'", .48))
-    for i, x in enumerate((10.55, 11.30, 12.05, 13.35, 14.10, 14.85)):
-        asset, species, height = top_mix[i % 3]
+               ("flower_gazania", "Gazania rigens", .25))
+    # Densified from 3 to 4 plants per side (client: top garden "reads bleak"). Spacing tightened to 0.60-0.62 m,
+    # still clear of spacing_violations' 0.8*spread minimum for the widest species here (Lavandula, 0.75 m spread,
+    # needs 0.60 m). Gazania (native width ~1.58 m even at a small nursery height) is kept off the two positions
+    # nearest each side's own rail-clearance edge -- its world box crossed the DECK/ROOF usable line there;
+    # Lavandula (0.22 m wide) is narrow enough for the edge positions.
+    edge_species = (0, 1, 1, 0, 0, 1, 1, 0)          # index into top_mix; 0=lavender (edges), 1=gazania (interior)
+    for i, x in enumerate((10.34, 10.96, 11.58, 12.20, 13.09, 13.71, 14.33, 14.95)):
+        asset, species, height = top_mix[edge_species[i]]
         p = _prop("landscape-top-edge-%02d" % i, asset,
                   (x, -22.70), .32, height,
                   "%s; care: %s (%s); %s; shallow-root planter, nursery height %.2f m ASSUMED" %
                   (species, care(species), _care_note(species), credits[asset], height), zone="top")
-        p.update(bed="top-deck" if i < 3 else "top-roof", layer="edge",
+        p.update(bed="top-deck" if i < 4 else "top-roof", layer="edge",
                  center=(x, -22.70), spread_m=SPREAD[species], species=species)
+        props.append(p); plants.append(p)
+    # A second perimeter row along the south (building) wall, using the same groundcover-clump species the ground
+    # beds use for their yellow/white accents (client: top garden "reads bleak: few thin planters" -- a genuinely
+    # planted garden needs more than one thin edge row). flower_ursinia and sf_garden_flower_clump are flat native
+    # drifts (height << width, see CLUMP_SPREAD/clump()); scaling them down by height (as ordinary potted plants
+    # would be) still leaves them wide, which is right for a low border drift along a wall, not a small pot.
+    for pid, bed, asset, species, center, height in (
+            ("landscape-top-south-ursinia", "top-deck", "flower_ursinia", "Ursinia anthemoides", (10.20, -23.25), 0.18),
+            ("landscape-top-south-daisy", "top-roof", "sf_garden_flower_clump", "Bellis perennis", (14.00, -22.80), 0.22)):
+        mn_, mx_ = PROP_BOUNDS[asset]
+        scale_ = height / (mx_[1] - mn_[1])
+        width_ = scale_ * (mx_[0] - mn_[0])
+        p = _prop(pid, asset, center, 0.0, height,
+                  "%s; care: %s (%s); %s; south-wall perimeter drift, ASSUMED clump height %.2f m, achieved "
+                  "width %.2f m (scaled down from the ground-bed native-scale accent, CLUMP_SPREAD)" %
+                  (species, care(species), _care_note(species), credits[asset], height, width_), zone="top")
+        p.update(bed=bed, layer="south-edge", center=center, spread_m=width_, species=species)
+        props.append(p); plants.append(p)
+    # Two shallow northern perimeter containers bring visible shrub mass into the gate view. The previous
+    # lavender row scaled to only ~0.21 m across each plant and left this rail almost bare in v25.
+    for i, x in enumerate((7.40, 10.5)):
+        y = -21.20
+        rect = (x - .40, y - .40, x + .40, y + .40)
+        objects.append(dict(id="landscape-top-north-planter-%d" % i, rect=rect, zone="top"))
+        meshes.append(_mesh("top-north-planter-%d" % i, "furniture", "garden-sandstone",
+                            _box(*rect[:2], 0.0, *rect[2:], .30),
+                            "ASSUMED shallow northern perimeter container; waterproofing and load to engineer"))
+        p = _prop("landscape-top-north-ixora-%d" % i, "sf_ixora", (x, y), .30, .55,
+                  "Ixora coccinea; care: %s (%s); %s; nursery height 0.55 m ASSUMED" %
+                  (care("Ixora coccinea"), _care_note("Ixora coccinea"), credits["sf_ixora"]), zone="top")
+        p.update(bed="top-deck", layer="north-edge", center=(x, y), spread_m=SPREAD["Ixora coccinea"],
+                 species="Ixora coccinea")
         props.append(p); plants.append(p)
     # One potted Bougainvillea accent per planter (brief item 5), off the
     # edge-species drift so it is not drift-counted. The deck pot is a
@@ -756,12 +827,27 @@ def build(spec, lay=None):
     meshes.append(_mesh("top-tree-pot", "furniture", "garden-sandstone",
                         _box(*pot[:2], 0.0, *pot[2:], .45),
                         "ASSUMED shallow container for Olea europaea; engineer waterproofing and load"))
-    for i, y in enumerate((-21.15, -22.00)):
-        p = _prop("landscape-top-bench-%d" % i, "sf_wooden_bench", (10.70, y), 0.0,
-                  .48, "ASSUMED bench; seat height to be checked on the imported mesh against "
-                  "Time-Saver 2nd ed. p.340-11, lts-seatwall-height-350; " + credits["sf_wooden_bench"],
-                  zone="top", yaw=90)
-        props.append(p)
+    # v25 defect: two copies near-touching (0.04 m gap), each scaled ~1:1 by height alone, rendered as one 3.58 x
+    # 1.66 m dark slab. One bench only, scaled to the seat-height range and 1.8 m length; bench_violations
+    # guards this build against drifting back to the
+    # old scale). Position moved off the y=-22.70 edge-planting row and clear of the v26 standing point at the
+    # deck's north-east corner (scripts/villa_render_views.py's camera-proximity guard).
+    bench_length = BENCH_LENGTH_M
+    bench = _prop("landscape-top-bench-0", "sf_wooden_bench", (11.5, -21.75), 0.0, BENCH_HEIGHT_M,
+                  "ASSUMED bench; seat height %.2f m (Time-Saver 2nd ed. p.340-11, lts-seatwall-height-350, range "
+                  "350-450 mm); length achieved %.2f m vs the brief's ~1.8 m target -- sf_wooden_bench's native "
+                  "proportions (0.81 x 0.48 x 3.58 m) do not permit both a card-range seat height and a 1.8 m "
+                  "length under one uniform prop scale; independent scene height and plan scale used; "
+                  "%s" % (BENCH_HEIGHT_M, bench_length, credits["sf_wooden_bench"]), zone="top", yaw=0)
+    native = PROP_BOUNDS["sf_wooden_bench"]
+    plan_scale = BENCH_LENGTH_M / (native[1][2] - native[0][2])
+    height_scale = BENCH_HEIGHT_M / (native[1][1] - native[0][1])
+    bench["scale"] = [plan_scale, plan_scale, height_scale]
+    # _prop centred using its original uniform height scale; centre again with the final plan scale.
+    cx = plan_scale * (native[0][0] + native[1][0]) / 2
+    cy = -plan_scale * (native[0][2] + native[1][2]) / 2
+    bench["position"][:2] = [11.5 - cx, -21.75 - cy]
+    props.append(bench)
 
     failures = (extent_violations(props, rooms) + object_extent_violations(objects, rooms) +
                 [(pid, "door route " + route) for pid, route in route_violations(props + objects)] +
@@ -772,7 +858,7 @@ def build(spec, lay=None):
                  for bed, have in layer_violations(plants)] +
                 [(species, "%s/%s drift is %d, need >= 3" % (bed, layer, n))
                  for bed, layer, species, n in drift_violations(plants)] +
-                standin_violations(props))
+                standin_violations(props) + bench_violations(props))
     if failures:
         raise ValueError("landscape guard: " + "; ".join("%s: %s" % f for f in failures))
 

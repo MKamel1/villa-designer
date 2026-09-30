@@ -115,6 +115,19 @@ class RenderQATests(unittest.TestCase):
         r = self.report(window="dim")
         self.assertEqual(self.status(r, "window_brightness"), ["FAIL"])
 
+    def test_window_brightness_stays_strict_without_a_pass_tolerance(self):
+        # A tolerance was proposed to pass the real v01 draft (0.80 vs 0.81); the check stays as pre-registered.
+        self.assertEqual(render_qa.window_brightness_status(0.80, 0.81), "FAIL")
+        self.assertEqual(render_qa.window_brightness_status(0.81, 0.81), "PASS")
+
+    def test_exterior_camera_does_not_require_a_bright_interior_window(self):
+        # Real v25 draft: the outside camera saw a room window at median 0.66
+        # while sunlit exterior surfaces reached 0.85. That relation is physical.
+        qa = dict(GOOD_QA, exterior_camera=True)
+        report = self.report(qa, window="dim")
+        self.assertEqual(self.status(report, "window_brightness"), [])
+        self.assertEqual(self.status(report, "window_view"), ["PASS"])
+
     def test_flat_milky_image_fails(self):
         flat = self.report(clip_fraction=0.0, window="dim")
         self.assertEqual(self.status(flat, "highlights_present"), ["FAIL"])

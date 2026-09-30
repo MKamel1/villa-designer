@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from archpipe.concept import villa_furnish as F                      # noqa: E402
 from archpipe.concept import villa_r11 as R                          # noqa: E402
 from archpipe.concept import revit_spec as RS                        # noqa: E402
+from archpipe.concept import villa_landscape as LAND                  # noqa: E402
 
 OUT = ROOT / "out" / "villa" / "render-d1"
 
@@ -51,6 +52,61 @@ def subject_footprint(subject, items, rooms, scene):
     raise ValueError("unresolved view subject: " + subject)
 
 
+def camera_proximity_violations(view, scene, items, clearance=1.0):
+    """Return props and furniture closer than the required camera clearance in metres."""
+    px, py, pz = view["camera"]["position"]
+    level = "B" if pz < -0.1 else "GF"
+    failures = []
+    for prop in scene["props"]:
+        if prop["asset"] not in LAND.PROP_BOUNDS:
+            continue
+        x0, y0, z0, x1, y1, z1 = LAND.prop_world_box(
+            prop["asset"], prop["position"], prop.get("rotation_deg", [0, 0, 0]), prop["scale"])
+        distance = math.sqrt(sum(d*d for d in (
+            max(x0 - px, 0, px - x1), max(y0 - py, 0, py - y1), max(z0 - pz, 0, pz - z1))))
+        if distance < clearance:
+            failures.append((prop["id"], round(distance, 3)))
+    for item in items.values():
+        if item["level"] != level:
+            continue
+        x0, y0, x1, y1 = F.footprint(item)
+        distance = math.hypot(max(x0 - px, 0, px - x1), max(y0 - py, 0, py - y1))
+        if distance < clearance:
+            failures.append((item["id"], round(distance, 3)))
+    return failures
+
+
+def dominant_foreground_props(view, scene, minimum_angle_deg=25.0):
+    """Flag a tall specimen pot that occupies a large part of the horizontal view."""
+    px, py = view["camera"]["position"][:2]
+    tx, ty = view["camera"]["target"][:2]
+    yaw = math.atan2(ty-py, tx-px)
+    half = math.radians(hfov(view) / 2)
+    failures = []
+    for prop in scene["props"]:
+        # Low border planting is an intended subject of the north-garden view.
+        if prop["asset"] not in ("sf_lemon_tree", "sf_olive_old"):
+            continue
+        x0, y0, _, x1, y1, _ = LAND.prop_world_box(
+            prop["asset"], prop["position"], prop.get("rotation_deg", [0, 0, 0]), prop["scale"])
+        cx, cy = (x0+x1)/2, (y0+y1)/2
+        center_angle = (math.atan2(cy-py, cx-px)-yaw+math.pi) % (2*math.pi)-math.pi
+        if abs(center_angle) > half or math.hypot(cx-px, cy-py) > 5:
+            continue
+        angles = [(math.atan2(y-py, x-px)-yaw+math.pi) % (2*math.pi)-math.pi
+                  for x in (x0, x1) for y in (y0, y1)]
+        span = math.degrees(max(angles)-min(angles))
+        if span >= minimum_angle_deg:
+            failures.append((prop["id"], round(span, 1)))
+    return failures
+
+
+def under_stair_occlusion_violation(view):
+    """A v29 camera east of the first tread looks through the flight at the joinery."""
+    x, y = view["camera"]["position"][:2]
+    return x >= 5.0 or y <= -27.471
+
+
 def main():
     scene = json.loads((OUT / "scene.json").read_text(encoding="utf-8"))
     lay = R.design("D1")
@@ -73,6 +129,16 @@ def main():
                 q = F.footprint(it)
                 ax.add_patch(Rectangle((q[0], q[1]), q[2] - q[0], q[3] - q[1], fc="#cfc6b6", ec="0.3", lw=0.3))
         px, py = cam["position"][:2]
+        # The one-metre exterior clearance is calibrated on the v26/v28 canopy/pot
+        # failures. Compact interior view selection has its own 0.15 m clearance rule.
+        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-")):
+            for near_id, distance in camera_proximity_violations(v, scene, items):
+                problems.append("%s: camera %.2f m from %s (need >= 1.0 m)" % (v["id"], distance, near_id))
+        if v["id"].startswith("v28-"):
+            for prop_id, span in dominant_foreground_props(v, scene):
+                problems.append("%s: foreground %s fills %.1f degrees of frame" % (v["id"], prop_id, span))
+        if v["id"].startswith("v29-") and under_stair_occlusion_violation(v):
+            problems.append(v["id"] + ": stair flight hides the storage joinery from this camera")
         tx, ty = cam["target"][:2]
         pz = cam["position"][2] - (-3.0 if lv == "B" else 0.0)
         # the camera must stand in the open: not inside a piece (two draft views were inside wardrobes and rendered

@@ -73,7 +73,9 @@ class LandscapeGuards(unittest.TestCase):
         # stand-in (see test_standin_real_and_old_mislabelled_tree_fails).
         self.assertEqual(len([p for p in self.props if p["id"].startswith("landscape-tree-")]), 3)
         self.assertTrue(any(p["id"] == "landscape-top-olive" for p in self.props))
-        self.assertEqual(len([p for p in self.props if p["id"].startswith("landscape-top-bench-")]), 2)
+        # v25 defect: two near-touching benches read as one 3.58 x 1.66 m slab; one real bench now (see
+        # test_bench_real_seat_height_and_old_slab_fails for the height/length guard itself).
+        self.assertEqual(len([p for p in self.props if p["id"].startswith("landscape-top-bench-")]), 1)
         self.assertFalse(any("lounge" in m["label"].lower() for m in self.meshes))
         self.assertEqual(set(self.plan["paths"]), {"dining", "living-north", "living-east", "lounge-west", "study"})
 
@@ -106,6 +108,26 @@ class LandscapeGuards(unittest.TestCase):
         draft = [dict(id="d-a", bed="west", layer="mid", species="Ixora coccinea"),
                  dict(id="d-b", bed="west", layer="mid", species="Ixora coccinea")]
         self.assertEqual(L.drift_violations(draft), [("west", "mid", "Ixora coccinea", 2)])
+
+    def test_bench_real_seat_height_and_old_slab_fails(self):
+        # Positive: today's single bench passes (real seat height, real length, matching the scale build() chose).
+        self.assertEqual(L.bench_violations(self.props), [])
+        # Negative, the real v25 defect: the old dict (two copies, each scaled ~1:1 by height alone) reproduced
+        # here as its own world box -- a 3.58 m slab, not a bench.
+        old = L._prop("draft-old-bench", "sf_wooden_bench", (10.70, -21.15), 0.0, .48,
+                      "old scale", zone="top", yaw=90)
+        self.assertTrue(L.bench_violations([old]))
+        wrong_way = dict(next(p for p in self.props if p["asset"] == "sf_wooden_bench"))
+        wrong_way["rotation_deg"] = [0, 0, 90]
+        self.assertTrue(L.bench_violations([wrong_way]), "the old end-on gate view must fail")
+
+    def test_top_garden_has_planted_north_perimeter_containers(self):
+        shrubs = [p for p in self.props if p["id"].startswith("landscape-top-north-ixora-")]
+        containers = [m for m in self.meshes if m["id"].startswith("landscape-top-north-planter-")]
+        self.assertEqual(len(shrubs), 2)
+        self.assertEqual(len(containers), 2)
+        self.assertTrue(all(p["asset"] == "sf_ixora" and p["position"][2] == .30 for p in shrubs))
+        self.assertEqual(L.route_violations(shrubs), [])
 
     def test_standin_real_and_old_mislabelled_tree_fails(self):
         # Positive: nothing in today's build uses the tree_small_02 stand-in

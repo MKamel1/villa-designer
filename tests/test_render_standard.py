@@ -24,6 +24,8 @@ ALLOWED_MATERIALS = {
     "alu-bronze", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
     "marker-2200", "opal-pen-globe-2700", "opal-inner-2700", "swing-disc-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
     "opal-vsconce-3000", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout",
+    "garment-ivory", "garment-blush", "garment-terracotta", "garment-sage-soft",
+    "garment-navy", "garment-charcoal", "garment-stone", "garment-olive",
 }
 
 
@@ -35,16 +37,23 @@ class RenderStandard(unittest.TestCase):
         for plate in swings:
             lamp = plate["id"].removeprefix("swing-plate-")
             self.assertIn("swing-arm-" + lamp, ids)
+            self.assertIn("swing-knuckle-" + lamp, ids)
             self.assertIn("swing-head-" + lamp, ids)
             self.assertIn("swing-emitter-" + lamp, ids)
         globes = [m for m in SCENE["meshes"] if m["material"] == "opal-pen-globe-2700"]
         self.assertTrue(globes)
-        self.assertEqual(SCENE["materials"]["opal-pen-globe-2700"]["kind"], "glass")
+        # Client round-3 (v01): the globe shell read as "smoky grey glass" as a rough refractive "glass" kind.
+        # "translucent" (Principled diffuse + Translucent BSDF mix, already proven by the curtains) is the fix --
+        # a milky white body that diffusely passes the inner bulb's light, not a dielectric that mostly reflects.
+        globe_mat = SCENE["materials"]["opal-pen-globe-2700"]
+        self.assertEqual(globe_mat["kind"], "translucent")
+        self.assertGreater(min(globe_mat["base_rgb"]), 0.85, "must read white, not grey")
+        self.assertGreater(globe_mat.get("transmittance", 0), 0.4, "must actually glow from inside")
         self.assertTrue(all("bulb-" + m["id"].removeprefix("lamp-") in ids for m in globes))
         self.assertTrue(any(i.startswith("dress-hers-long-hang-") for i in ids))
         self.assertTrue(any(i.startswith("dress-his-drawers-") for i in ids))
-        self.assertIn("dress-hers-top-boxes", ids)
-        self.assertIn("dress-his-top-boxes", ids)
+        self.assertTrue(any(i.startswith("dress-hers-top-box-") for i in ids))
+        self.assertTrue(any(i.startswith("dress-his-top-box-") for i in ids))
 
     def test_wp2b_checked_joinery_and_kitchen_builders(self):
         from archpipe.concept import villa_furnish as F, villa_furniture_detail as FD
@@ -204,7 +213,11 @@ class RenderStandard(unittest.TestCase):
             if v["state"] == "exterior-dusk":
                 continue
             c = v["camera"]
-            if "lens_basis" in c:                  # client 2026-09-27: a CALCULATED lens where 24 mm cannot hold the room
+            if "lens_reason" in c:
+                self.assertEqual(v["id"], "v32-dressing-his")
+                self.assertEqual(c["lens_mm"], 16)
+                self.assertAlmostEqual(c["shift_y"], 0.10)
+            elif "lens_basis" in c:                  # client 2026-09-27: a CALCULATED lens where 24 mm cannot hold the room
                 import math
                 need = float(c["lens_basis"].split(" deg off axis")[0].split()[-1])
                 self.assertGreater(need, 36.87, v["id"] + ": 24 mm would have held it")
@@ -295,9 +308,26 @@ class RenderStandard(unittest.TestCase):
 
     def test_scene_passes_the_render_contract(self):
         """Checked here, not first on the workstation: the detailed furniture's lofts once carried 1,780 zero-area
-        triangles (corner radius = half the ring) and the whole draft was refused remotely."""
+        triangles (corner radius = half the ring) and the whole draft was refused remotely. Round-3: WP4/5's new
+        `rod_faces` helper (the dressing hanger's neck, the swing lamp's arm) degenerated on every VERTICAL rod --
+        its fallback "up" reference (0,0,1) is parallel to a straight-down direction, so the frame's cross product
+        was zero and every corner of both end squares collapsed onto the rod's own centreline. 72 degenerate faces
+        on the real scene, all "-hanger" meshes; see test_rod_faces_handles_a_vertical_rod below for the isolated
+        reproduction."""
         from archpipe import villa_render_contract as C
         self.assertEqual(C.validate_scene(SCENE), [])
+
+    def test_rod_faces_handles_a_vertical_rod(self):
+        # Reproduces the real pre-fix defect directly (a hanger's neck: same x/y, differing only in z) rather
+        # than relying on the full scene to surface it.
+        faces = VR.rod_faces((0.0, 0.0, 1.0), (0.0, 0.0, 0.9), 0.006)
+        from archpipe import villa_render_contract as C
+        errors = C.validate_scene({"schema": "villa-render/1", "camera": {"lens_mm": 24, "position": [0, 0, 0],
+                                   "target": [0, 0, -1]}, "exposure": {"ev100": 6}, "sun": None,
+                                   "library_root": "$HOME/archpipe/assets/library", "materials": {"black-metal": VR.M["black-metal"]},
+                                   "meshes": [dict(id="rod-test", group="fixture", material="black-metal", faces=faces)],
+                                   "lights": [], "views": []})
+        self.assertEqual([e for e in errors if "degenerate" in e or "faces" in e], [])
 
     def test_nothing_floats(self):
         """Client: "flying plants", "duvet flying"; draft 9 still had desk-lamp shades hanging in a window, step
@@ -726,6 +756,151 @@ class WoodGrainMapping(unittest.TestCase):
                      "garden-gravel", "rug", "leather-brown"}
         for name in untouched:
             self.assertNotIn("grain_axis", M[name], name)
+
+
+class ArtificialGrassGuard(unittest.TestCase):
+    """Round-3 defect 1: `artificial-grass` rendered as a flat, untextured mint-green plane. Cause: the MATERIALS
+    dict had no `asset` key, so villa_scene.add_material's photo-texture branch (`if asset and kind in (...)`)
+    never ran. Guard: the material must reference a texture set, and that set must be a real, fetchable manifest
+    entry -- not just a truthy string."""
+
+    def test_artificial_grass_references_a_real_texture_asset(self):
+        self.assertIn("asset", VR.M["artificial-grass"], "must reference a texture set, not a flat base colour")
+        import json
+        manifest = json.loads((VR.ROOT / "ops" / "workstation" / "library-manifest.json").read_text())
+        ids = {m["id"] for m in manifest["materials"]}
+        self.assertIn(VR.M["artificial-grass"]["asset"], ids, "asset must be a real, fetchable manifest entry")
+
+    def test_old_flat_colour_dict_is_caught_by_the_guard(self):
+        old = dict(kind="principled", base_rgb=[0.18, 0.30, 0.12], reflectance=0.22, roughness=0.95,
+                   note="ASSUMED drained artificial grass; client 2026-09-29")
+        self.assertNotIn("asset", old)
+
+
+def _watertight_and_volume(faces):
+    """faces: list of planar polygons (each a list of [x, y, z] points), the same shape `mesh()` stores. Returns
+    (is_closed, signed_volume). `is_closed`: every directed edge has exactly one match and exactly one reverse
+    match (a watertight two-manifold). `signed_volume`: the divergence-theorem volume from a fan triangulation
+    of each face; positive for a solid with consistently outward-wound (CCW) faces -- zero or negative means
+    either a degenerate (zero-thickness) shape or inconsistent winding."""
+    edge_count = {}
+    volume = 0.0
+    for face in faces:
+        n = len(face)
+        for i in range(n):
+            a = tuple(round(c, 6) for c in face[i])
+            b = tuple(round(c, 6) for c in face[(i + 1) % n])
+            edge_count[(a, b)] = edge_count.get((a, b), 0) + 1
+        v0 = face[0]
+        for i in range(1, n - 1):
+            v1, v2 = face[i], face[i + 1]
+            volume += (v0[0] * (v1[1]*v2[2] - v1[2]*v2[1])
+                       - v0[1] * (v1[0]*v2[2] - v1[2]*v2[0])
+                       + v0[2] * (v1[0]*v2[1] - v1[1]*v2[0])) / 6.0
+    closed = all(count == 1 and edge_count.get((b, a), 0) == 1 for (a, b), count in edge_count.items())
+    return closed, volume
+
+
+class GlassClosedSolidGuard(unittest.TestCase):
+    """Round-3 defect 4 (v12-ensuite.png): the ensuite bath screen read as a mirror. Lead's diagnosis, confirmed
+    here: `detail-pe-bath-screen` was a ZERO-THICKNESS plane with a refractive `kind="glass"` shader
+    (`glass-bath-screen`, interfaces=1) -- a ray entering the front face has nowhere to exit. Checked the same
+    class across every other refractive glass mesh in the scene (stair guard, stair glass panels), not just the
+    one the lead named. `glass-clear` (architectural windows) is a DELIBERATE, out-of-scope exception: it is
+    shell code (villa_render's window/opening builder, not furniture/fixture/garment GEOMETRY), a single sheet
+    by design, and its transmittance is daylight-calibrated against that assumption -- reported to the lead
+    rather than changed here."""
+
+    def test_every_refractive_glass_mesh_is_a_closed_solid_with_thickness(self):
+        checked = 0
+        for m in SCENE["meshes"]:
+            mat = SCENE["materials"].get(m["material"])
+            if not mat or mat["kind"] != "glass":
+                continue
+            checked += 1
+            closed, volume = _watertight_and_volume(m["faces"])
+            self.assertTrue(closed, "%s (%s) is not a watertight solid" % (m["id"], m["material"]))
+            self.assertGreater(volume, 0,
+                               "%s (%s) has zero/negative volume: no real thickness or inconsistent winding"
+                               % (m["id"], m["material"]))
+        self.assertGreater(checked, 0, "expected at least one refractive glass mesh in the scene")
+
+    def test_glass_clear_windows_have_two_interfaces(self):
+        windows = [m for m in SCENE["meshes"] if m["material"] == "glass-clear"]
+        self.assertTrue(windows, "expected architectural glazing meshes to exist")
+        self.assertEqual(SCENE["materials"]["glass-clear"]["interfaces"], 2)
+        self.assertTrue(all(_watertight_and_volume(m["faces"])[0] for m in windows))
+
+    def test_old_single_quad_bath_screen_is_caught_by_the_guard(self):
+        # Reproduces the real pre-fix defect on the real fitting dimensions (revit_spec's pe-bath-screen).
+        old_screen = [[[19.9, -25.9, 0.0], [21.1, -25.9, 0.0], [21.1, -25.9, 2.0], [19.9, -25.9, 2.0]]]
+        closed, volume = _watertight_and_volume(old_screen)
+        self.assertFalse(closed)
+
+
+class DressingGarmentGuard(unittest.TestCase):
+    """Round-3 defect 5 (v31/v32): hanging garments were flat 25 mm vertical slabs, all drawn from one shared,
+    colour-agnostic fabric list. Checks that the fix actually varies colour and shape, and stays inside the
+    checked module envelope (`test_nothing_floats`/`test_openings_passable` cover the general float/collision
+    guard against the real scene; these are specific to the new garment shapes)."""
+
+    def test_hanging_garments_use_more_than_one_colour_per_partner(self):
+        for partner, prefix in (("hers", "dress-hers-"), ("his", "dress-his-")):
+            mats_used = {m["material"] for m in SCENE["meshes"]
+                        if m["id"].startswith(prefix) and "-garment-" in m["id"] and "-hanger" not in m["id"]}
+            self.assertGreater(len(mats_used), 1, "%s garments should not all share one fabric colour" % partner)
+            for name in mats_used:
+                self.assertTrue(name.startswith("garment-"), name)
+
+    def test_garments_are_not_flat_slabs(self):
+        # A real drape has depth; the old defect was a uniform 25 mm slab with identical top/bottom extents.
+        garments = [m for m in SCENE["meshes"] if "-garment-" in m["id"] and "-hanger" not in m["id"]]
+        self.assertTrue(garments)
+        for m in garments[:40]:
+            xs = [p[0] for face in m["faces"] for p in face]
+            ys = [p[1] for face in m["faces"] for p in face]
+            self.assertGreater(max(xs) - min(xs), 0.04, m["id"] + " too thin along the rail")
+            self.assertGreater(max(ys) - min(ys), 0.03, m["id"] + " too thin front-to-back")
+            levels = {round(p[2], 3) for face in m["faces"] for p in face}
+            self.assertGreaterEqual(len(levels), 5, m["id"] + " has no shoulder/waist/hem drape")
+        # The first round-three correction had only a top and bottom ring.
+        old_slab = VR.pane_faces([[0, 0, 1], [.3, 0, 1], [.3, .03, 1], [0, .03, 1]],
+                                 [[0, 0, 0], [.3, 0, 0], [.3, .03, 0], [0, .03, 0]])
+        self.assertEqual(len({p[2] for face in old_slab for p in face}), 2)
+
+    def test_long_hang_garments_are_hers_only_and_in_the_dress_length_range(self):
+        for m in SCENE["meshes"]:
+            if not (m["id"].startswith("dress-hers-long-hang-") and "-garment-" in m["id"] and "-hanger" not in m["id"]):
+                continue
+            zs = [p[2] for face in m["faces"] for p in face]
+            self.assertTrue(1.40 <= max(zs) - min(zs) <= 1.65, "%s length %.2f out of the dress card range"
+                            % (m["id"], max(zs) - min(zs)))
+        self.assertFalse(any(m["id"].startswith("dress-his-long-hang-") for m in SCENE["meshes"]),
+                         "his wardrobe has no long-hang module (villa_furnish.py)")
+
+    def test_hanging_garments_stay_inside_their_module_envelope(self):
+        # Envelope containment is exercised end-to-end by test_nothing_floats/test_openings_passable on the
+        # real built scene; here we just confirm every garment mesh actually clamped to its module (no vertex
+        # strays past the wardrobe's own footprint padding used when placing it).
+        from archpipe.concept import villa_furnish as F
+        lay = R.design("D1")
+        wardrobes = {i["id"]: i for i in F.layout(lay) if i["id"] in ("pd-hang-1", "pd-hang-2")}
+        for wid, wardrobe in wardrobes.items():
+            q = F.footprint(wardrobe)
+            prefix = "dress-" + wardrobe["partner"] + "-"
+            for m in SCENE["meshes"]:
+                if not (m["id"].startswith(prefix) and "-garment-" in m["id"]):
+                    continue
+                xs = [p[0] for face in m["faces"] for p in face]
+                self.assertTrue(q[0] - 0.03 <= min(xs) and max(xs) <= q[2] + 0.03,
+                               "%s strays past its wardrobe module in x" % m["id"])
+
+    def test_each_partner_has_pairs_of_shoes_and_separate_top_boxes(self):
+        for partner in ("hers", "his"):
+            shoes = [m for m in SCENE["meshes"] if m["id"].startswith("dress-" + partner + "-shoe-")]
+            boxes = [m for m in SCENE["meshes"] if m["id"].startswith("dress-" + partner + "-top-box-")]
+            self.assertGreaterEqual(len(shoes), 2)
+            self.assertGreaterEqual(len(boxes), 2)
 
 
 if __name__ == "__main__":

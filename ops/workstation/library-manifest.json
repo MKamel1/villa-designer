@@ -135,6 +135,12 @@
       "url": "https://ambientcg.com/get?file=Grass004_2K-JPG.zip"
     },
     {
+      "id": "Grass002",
+      "source": "ambientcg",
+      "role": "villa: artificial-grass courts (short turf, distinct from the Grass004 lawn); mapped tile 1.0 m",
+      "url": "https://ambientcg.com/get?file=Grass002_2K-JPG.zip"
+    },
+    {
       "id": "Plaster003",
       "source": "ambientcg",
       "role": "villa: exterior render",

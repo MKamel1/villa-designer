@@ -247,7 +247,11 @@ def validate_scene(scene: dict) -> list[str]:
         need(_relative_path(prop.get("asset")), p+".asset", "safe relative asset name required")
         need(_vector(prop.get("position")), p+".position", "three finite numbers required")
         need(_vector(prop.get("rotation_deg")), p+".rotation_deg", "three finite angles required")
-        need(_number(prop.get("scale"), positive=True), p+".scale", "positive scale required")
+        scale = prop.get("scale")
+        need(_number(scale, positive=True) or
+             (isinstance(scale, list) and len(scale) == 3 and
+              all(_number(axis, positive=True) for axis in scale)),
+             p+".scale", "positive scale or three positive axis scales required")
         need(isinstance(prop.get("label"), str) and prop["label"].startswith("dressing: "),
              p+".label", "label must begin 'dressing: '")
     # WP4-A: real furniture models replacing a procedural stand-in where the fit rule allows it (uniform scale,

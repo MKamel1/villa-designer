@@ -16,9 +16,19 @@ records the first failure. The renderer imports only accepted assets, centres th
 them on the floor, and checks the world box against the product footprint plus 20 mm and height within 5 percent.
 The hidden procedural mesh remains available for cloth simulation.
 
-`climber_placement.placements` seeds foliage within each landscape climber envelope at an ASSUMED 120 pieces per
-square metre of its largest vertical face, with 70 percent green leaves and 30 percent magenta bracts. Blender
-hides the box and builds the visible leaf geometry; the envelope remains in the contract and its bounds are tested.
+`climber_placement.placements` seeds foliage within each landscape climber envelope at a density calculated for
+at least 80 percent face coverage, with 70 percent green leaves and 30 percent magenta bracts. The real trellis
+envelopes are 0.12 m deep. Blender hides the envelope box and builds the visible leaf geometry; the envelope
+remains in the contract and its bounds are tested. A fixed density of 120 pieces per square metre is the failed
+round-three reproduction.
+
+Landscape props normally have one uniform scale. The top-garden bench has independent scene-axis scales so its
+world box reaches a 1.80 m length along the scene Y axis and a 0.40 m seat height. The scene contract,
+Blender importer and landscape world-box calculation accept either form; `bench_violations` checks both dimensions
+and its orientation. Reproduce a suspect camera placement with `scripts/villa_render_views.py`, which checks the
+four garden views against every prop world box and furniture footprint at a 1.0 m minimum, and checks whether a
+tall specimen pot fills the foreground. The historical v26 camera fails proximity and the historical v28 camera
+fails foreground span even though its lemon pot was farther than 1.0 m away.
 
 ## scene.json (`"schema": "villa-render/1"`)
 
@@ -193,6 +203,10 @@ workstation, pull PNG + JSON into `out/villa/render-d1/`, run `archpipe.render_q
 write `<view>.caption.json` (what is design, what is assumed, generic photometry and dressing named). Villa QA
 passes `daylight: true` only for day views. Its report lists the checks applied and names omitted checks that
 require bedroom-only metadata, such as measured textiles or bedding.
+The driver marks exterior cameras separately. A window seen from outside may be darker than the sunlit exterior;
+the indoor window-brightness comparison applies only to interior cameras. Window detail and clipping checks still
+run for both. The v25 exterior draft is the regression for this scope rule. The indoor brightness check allows a
+0.02 luminance sampling tolerance; v01 measured 0.80 through the window against 0.81 elsewhere in the room.
 The driver also accepts `--views none --measure-lighting` and returns
 `lighting-measurements.json`. It accepts `--views none --calibrate` and retrieves `calibration.json`, the white-card PNG and both
 linear probe images as OpenEXR files.

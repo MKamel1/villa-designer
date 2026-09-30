@@ -93,6 +93,24 @@ M = {
                 tile_m=0.8, note="wool rug (ASSUMED)"),
     "leather-brown": dict(kind="principled", asset="Leather030", base_rgb=[0.14, 0.08, 0.05], reflectance=0.10,
                           roughness=0.5, tile_m=0.5, note="cognac leather (ASSUMED)"),
+    # Round-3 defect 5 (v31/v32 dressing): a small per-partner garment palette, replacing the single
+    # colour-agnostic `fabrics` list every hanging garment drew from before.
+    "garment-ivory": dict(kind="principled", base_rgb=[0.86, 0.83, 0.76], reflectance=0.55, roughness=0.6,
+                          note="ASSUMED hanging garment fabric, ivory"),
+    "garment-blush": dict(kind="principled", base_rgb=[0.70, 0.52, 0.50], reflectance=0.45, roughness=0.65,
+                          note="ASSUMED hanging garment fabric, dusty blush"),
+    "garment-terracotta": dict(kind="principled", base_rgb=[0.58, 0.32, 0.22], reflectance=0.35, roughness=0.7,
+                               note="ASSUMED hanging garment fabric, terracotta"),
+    "garment-sage-soft": dict(kind="principled", base_rgb=[0.46, 0.50, 0.40], reflectance=0.38, roughness=0.68,
+                              note="ASSUMED hanging garment fabric, soft sage"),
+    "garment-navy": dict(kind="principled", base_rgb=[0.10, 0.13, 0.22], reflectance=0.25, roughness=0.55,
+                         note="ASSUMED hanging garment fabric, navy"),
+    "garment-charcoal": dict(kind="principled", base_rgb=[0.16, 0.16, 0.17], reflectance=0.22, roughness=0.55,
+                             note="ASSUMED hanging garment fabric, charcoal wool-blend weave"),
+    "garment-stone": dict(kind="principled", base_rgb=[0.55, 0.52, 0.46], reflectance=0.42, roughness=0.6,
+                          note="ASSUMED hanging garment fabric, stone grey"),
+    "garment-olive": dict(kind="principled", base_rgb=[0.28, 0.30, 0.18], reflectance=0.28, roughness=0.62,
+                          note="ASSUMED hanging garment fabric, olive"),
     "brass": dict(kind="principled", base_rgb=[0.80, 0.62, 0.34], reflectance=0.62, roughness=0.3, metallic=1.0,
                   note="brushed brass (flat, no texture held)"),
     "black-metal": dict(kind="principled", base_rgb=[0.03, 0.03, 0.03], reflectance=0.03, roughness=0.4,
@@ -101,7 +119,7 @@ M = {
                           note="glazed sanitary ceramic"),
     "screen-black": dict(kind="principled", base_rgb=[0.01, 0.01, 0.01], reflectance=0.01, roughness=0.05,
                          note="TV screen (off)"),
-    "glass-clear": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.70, interfaces=1, roughness=0.0,
+    "glass-clear": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.70, interfaces=2, roughness=0.0,
                         note="clear double glazing, Tv 0.70 (Metric Handbook p. 9-8, the daylight study's value)"),
     "glass-guard": dict(kind="glass", base_rgb=[1, 1, 1], transmittance=0.85, interfaces=2, roughness=0.0,
                         note="laminated glass guard"),
@@ -123,8 +141,16 @@ M = {
                    roughness=0.8, tile_m=2.0, note="light stone paving (garden terrace, ASSUMED)"),
     "garden-gravel": dict(kind="principled", asset="gravel_ground_01", base_rgb=[0.47, 0.43, 0.36],
                           reflectance=0.32, roughness=1.0, tile_m=2.0, note="ASSUMED gravel beds, CC0 scan"),
-    "artificial-grass": dict(kind="principled", base_rgb=[0.18, 0.30, 0.12], reflectance=0.22,
-                             roughness=0.95, note="ASSUMED drained artificial grass; client 2026-09-29"),
+    # Client round-3 (draft renders): "flat untextured mint-green plane" -- this dict had no `asset`, so
+    # add_material's texture branch (villa_scene.py add_material, `if asset and kind in (...)`) never ran and the
+    # court rendered as one flat Principled BSDF colour. Fix: a real CC0 grass PBR set (ambientCG Grass002, the
+    # manifest's own short-cut-lawn scan, distinct from the Grass004 set already used for the garden lawn) mapped
+    # at a 1.0 m tile and a less saturated green than the
+    # earlier flat colour (G/R was 1.67; short artificial turf reads closer to G/R ~1.35 under daylight).
+    "artificial-grass": dict(kind="principled", asset="Grass002", base_rgb=[0.16, 0.235, 0.105], reflectance=0.20,
+                             roughness=0.92, tile_m=1.0,
+                             note="ASSUMED drained artificial grass, short turf (ambientCG Grass002 CC0 scan, "
+                                  "mapped tile 1.0 m); client 2026-09-29"),
     "stepping-stone": dict(kind="principled", base_rgb=[0.62, 0.58, 0.50], reflectance=0.45,
                            roughness=0.85, note="ASSUMED flush honed sandstone stepping stones"),
     "trellis": dict(kind="principled", base_rgb=[0.16, 0.12, 0.08], reflectance=0.13,
@@ -273,6 +299,47 @@ def box_faces(x0, y0, z0, x1, y1, z1):
             [[x1, y1, z0], [x0, y1, z0], [x0, y1, z1], [x1, y1, z1]],          # +y
             [[x0, y1, z0], [x0, y0, z0], [x0, y0, z1], [x0, y1, z1]],          # -x
             [[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]]]          # +x
+
+
+def pane_faces(front, back):
+    """Close a thin pane into a watertight solid given two matching 4-point rings (`front`, `back`) in the SAME
+    vertex order, offset along the pane's thin axis. `front` must already be wound CCW as seen from its own
+    outward side (the usual mesh()-face convention) -- `back` is then closed by reversing it and bridging the
+    four edges. Used for round-3 defect 4 (ensuite bath screen / stair glass): a refractive `kind="glass"`
+    material rendered as a zero-thickness plane (`glass-bath-screen`, interfaces=1) reads as a mirror, because a
+    ray entering the front face has nowhere to exit -- Cycles' glass BSDF needs a second, physically separated
+    interface. Unlike `box_faces` (axis-aligned only), this also closes the sloped stair-glass panels, whose
+    faces follow the tread nosing profile."""
+    faces = [front, back[::-1]]
+    for i in range(len(front)):
+        j = (i + 1) % len(front)
+        faces.append([front[j], front[i], back[i], back[j]])
+    return faces
+
+
+def rod_faces(p0, p1, w):
+    """A closed square-section rod between two arbitrary 3D points (round-3 defect 6: the swing-arm lamp's
+    knuckle-jointed segments are not axis-aligned, so `box_faces` cannot describe them). Builds an orthonormal
+    frame around the segment direction (a world-up reference, degenerate only for a near-vertical rod, which no
+    swing-arm segment here is) and closes the two end squares with `pane_faces`."""
+    dx, dy, dz = p1[0] - p0[0], p1[1] - p0[1], p1[2] - p0[2]
+    length = math.sqrt(dx*dx + dy*dy + dz*dz) or 1e-9
+    d = (dx / length, dy / length, dz / length)
+    # A world-up reference degenerates (zero cross product) for a near-VERTICAL rod, such as a hanger's own
+    # straight-down neck -- caught by test_render_contract's "degenerate polygon" check on the real scene, not
+    # a synthetic case. Switch to a world-X reference whenever the rod is within ~8 degrees of vertical.
+    up = (1.0, 0.0, 0.0) if abs(d[2]) > 0.99 else (0.0, 0.0, 1.0)
+    rx, ry, rz = d[1]*up[2] - d[2]*up[1], d[2]*up[0] - d[0]*up[2], d[0]*up[1] - d[1]*up[0]
+    rl = math.sqrt(rx*rx + ry*ry + rz*rz) or 1e-9
+    r = (rx / rl, ry / rl, rz / rl)
+    u = (r[1]*d[2] - r[2]*d[1], r[2]*d[0] - r[0]*d[2], r[0]*d[1] - r[1]*d[0])
+    hw = w / 2
+
+    def square(p, sign_r, sign_u):
+        return [p[i] + sign_r*hw*r[i] + sign_u*hw*u[i] for i in range(3)]
+    a = [square(p0, -1, -1), square(p0, 1, -1), square(p0, 1, 1), square(p0, -1, 1)]
+    b = [square(p1, -1, -1), square(p1, 1, -1), square(p1, 1, 1), square(p1, -1, 1)]
+    return pane_faces(a, b)
 
 
 def quad_up(x0, y0, x1, y1, z):
@@ -425,7 +492,16 @@ def build(lay=None, views=None):
             mat = FINISH[room][1] if room in FINISH else "paint-exterior-grey-green"
         key = (mat, room if mat not in ("render-exterior", "paint-exterior-grey-green", "paving", "travertine", "ceiling-white", "glass-clear")
                else None, source)
-        buckets.setdefault(key, []).append(pts)
+        if mat == "glass-clear":
+            # The shell supplies a single quad. A refractive shader requires two physical
+            # interfaces; retain the stated total transmission across the closed 10 mm pane.
+            if len(pts) != 4:
+                raise ValueError("architectural glass pane must have four corners")
+            n = _normal(pts)
+            back = [[p[i] - 0.01 * n[i] for i in range(3)] for p in pts]
+            buckets.setdefault(key, []).extend(pane_faces(pts, back))
+        else:
+            buckets.setdefault(key, []).append(pts)
     hide = {}
     for k, ((mat, room, source), faces) in enumerate(sorted(buckets.items(), key=lambda kv: (kv[0][0], kv[0][1] or "", kv[0][2] or ""))):
         grp = "context" if mat == "render-exterior" else "shell"
@@ -495,10 +571,14 @@ def build(lay=None, views=None):
          label="detail: oak slatted headboard wall")
     op = sp["gf_opening"]
     gz = 0.0
-    guard = [[[op[0], op[3], gz], [op[2], op[3], gz], [op[2], op[3], gz + 1.1], [op[0], op[3], gz + 1.1]],
-             [[op[2], op[1], gz], [op[2], op[3], gz], [op[2], op[3], gz + 1.1], [op[2], op[1], gz + 1.1]]]
+    # Round-3 defect 4 (glass reads as a mirror): this guard was two ZERO-THICKNESS quads with a refractive
+    # "glass-guard" (kind="glass") material -- exactly the ensuite bath-screen defect class. box_faces() gives
+    # each return panel a real 10 mm closed volume (both faces + the four edges), same fix as the bath screen.
+    GLASS_T = 0.01
+    guard = (box_faces(op[0], op[3] - GLASS_T / 2, gz, op[2], op[3] + GLASS_T / 2, gz + 1.1) +
+             box_faces(op[2] - GLASS_T / 2, op[1], gz, op[2] + GLASS_T / 2, op[3], gz + 1.1))
     mesh("detail-stair-guard", "glass-guard", guard, "furniture", room="stair-gf",
-         label="detail: 1.1 m glass guard at the stair opening (required; not yet in the Revit model)")
+         label="detail: 1.1 m glass guard at the stair opening, 10 mm closed pane (required; not yet in the Revit model)")
     # ASSUMED construction details: open risers remain visible between the steel members.
     treads = sorted(([v / 1000.0 for v in b] for b in sp["stair"] if b[5] - b[2] < 300), key=lambda b: b[0])
     wall_y = -28.671                         # party-wall face; the tread edge is at -28.421
@@ -542,11 +622,18 @@ def build(lay=None, views=None):
         lo, hi = -0.07, glass_spec["height_above_nosing"]
         face = lambda yy: [[a[0], yy, a[2] + lo], [b[0], yy, b[2] + lo],
                            [b[0], yy, b[2] + hi], [a[0], yy, a[2] + hi]]
-        mesh("detail-stair-glass-%02d" % k, "glass-guard", [face(y0), face(y1)[::-1]],
-             "fixture", room="stair-b", label="ASSUMED frameless laminated stair glass panel")
+        # Round-3 defect 4: the old mesh was these same two faces with NO side edges -- open on all four
+        # sides, so a refractive "glass-guard" ray entering the front face never hit a second interface and
+        # rendered as a mirror (the same class as the bath screen). pane_faces() bridges the 12 mm gap already
+        # present between y0/y1 into a watertight solid.
+        mesh("detail-stair-glass-%02d" % k, "glass-guard", pane_faces(face(y0), face(y1)),
+             "fixture", room="stair-b", label="ASSUMED frameless laminated stair glass panel, 12 mm closed pane")
+        # The polished-edge overlay sits on the box's own top face now; nudged out 1 mm so it does not
+        # z-fight with that real geometry (it is "principled", not "glass" -- not subject to the closed-solid
+        # guard, and was never the mirror defect).
         mesh("detail-stair-glass-edge-%02d" % k, "glass-edge",
-             [[[a[0], y0, a[2] + hi], [b[0], y0, b[2] + hi],
-               [b[0], y1, b[2] + hi], [a[0], y1, a[2] + hi]]], "fixture", room="stair-b",
+             [[[a[0], y0, a[2] + hi + 0.001], [b[0], y0, b[2] + hi + 0.001],
+               [b[0], y1, b[2] + hi + 0.001], [a[0], y1, a[2] + hi + 0.001]]], "fixture", room="stair-b",
              label="ASSUMED visible polished laminated-glass top edge")
     sloped_member("detail-stair-glass-shoe", open_y - 0.065, open_y - 0.025, -0.04, 0.06,
                   "ASSUMED steel base shoe on open stringer")
@@ -794,13 +881,58 @@ def build(lay=None, views=None):
     # ---- dressing: clothes on the dressing rails, duvets and pillows on the beds (NOT design)
     import random
     rnd = random.Random(7)
-    fabrics = ["linen", "boucle", "sage-fabric", "taupe-fabric", "bedding-white", "leather-brown"]
+    # Client round-3 (v31/v32): hanging clothes were flat 25 mm vertical slabs, all drawn from one shared,
+    # colour-agnostic `fabrics` list. Fixed here with real garment silhouettes (a hanger + a tapered body with
+    # front-to-back thickness -- pane_faces gives a proper closed, drape-tapered frustum, not a plane) and a
+    # small per-partner colour palette (MATERIALS table, "garment-*"). Lengths follow the brief: shirts
+    # 0.90-1.00 m, jackets ~0.85 m, dresses/abayas 1.45-1.60 m (card neufert-longhang-drop-1600), trousers
+    # folded over the hanger ~0.70 m.
+    GARMENT = {
+        "shirt":  dict(length=(0.90, 1.00), shoulder=0.28, hem=0.30, depth=(0.10, 0.14)),
+        "jacket": dict(length=(0.82, 0.88), shoulder=0.36, hem=0.34, depth=(0.13, 0.15)),
+        "dress":  dict(length=(1.45, 1.60), shoulder=0.26, hem=0.42, depth=(0.10, 0.17)),
+    }
+    HERS_FABRICS = ["garment-ivory", "garment-blush", "garment-terracotta", "garment-sage-soft"]
+    HIS_FABRICS = ["garment-navy", "garment-charcoal", "garment-stone", "garment-olive"]
+
+    def garment_body(cx, cy_, ztop, zbot, wtop, wbot, dtop, dbot):
+        # The first correction used only top and hem rings and still rendered as a flat slab in v31.
+        # Six cross-sections give a neck, sloped shoulders, sleeve/body taper and a gently flared hem. Small
+        # alternating front/back offsets give folds physical relief; every ring stays within the module clamp.
+        fractions = (0.0, 0.09, 0.23, 0.51, 0.78, 1.0)
+        widths = (0.45*wtop, wtop, 0.88*wtop, 0.72*wtop+0.28*wbot,
+                  0.35*wtop+0.65*wbot, wbot)
+        rings = []
+        for i, (fraction, width) in enumerate(zip(fractions, widths)):
+            z = ztop + fraction*(zbot-ztop)
+            depth = dtop + fraction*(dbot-dtop)
+            half = width/2
+            fold = min(0.014, depth*0.12) * (0.4 + fraction)
+            front, back = cy_-depth/2, cy_+depth/2
+            rings.append([[cx-half, front, z], [cx-half/2, front+fold, z],
+                          [cx, front-fold, z], [cx+half/2, front+fold, z],
+                          [cx+half, front, z], [cx+half, back, z],
+                          [cx, back+fold/2, z], [cx-half, back, z]])
+        faces = [rings[0], rings[-1][::-1]]
+        for top, bottom in zip(rings, rings[1:]):
+            for j in range(len(top)):
+                next_j = (j+1) % len(top)
+                faces.extend(([top[next_j], top[j], bottom[j]],
+                              [top[next_j], bottom[j], bottom[next_j]]))
+        return faces
+
+    def hanger_faces(cx, cy_, rail_z, shoulder_w):
+        neck = rod_faces((cx, cy_, rail_z - 0.004), (cx, cy_, rail_z - 0.045), 0.006)
+        bar = rod_faces((cx - shoulder_w * 0.35, cy_, rail_z - 0.045), (cx + shoulder_w * 0.35, cy_, rail_z - 0.045), 0.006)
+        return neck + bar
+
     for wid in ("pd-hang-1", "pd-hang-2"):
         wardrobe = it[wid]
         q = F.footprint(wardrobe)
         cy = (q[1] + q[3]) / 2
         floor = LZ["GF"]
         partner = wardrobe["partner"]
+        palette = HERS_FABRICS if partner == "hers" else HIS_FABRICS
         for index, (kind, xa, xb) in enumerate(F.module_spans(wardrobe)):
             lo, hi = xa + 0.025, xb - 0.025
             if hi <= lo:
@@ -809,16 +941,45 @@ def build(lay=None, views=None):
             if kind in ("long-hang", "double-hang"):
                 levels = (1.98,) if kind == "long-hang" else (1.08, 2.02)
                 for j, rail in enumerate(levels):
+                    rail_z = floor + rail
                     mesh(prefix + "-rail-%d" % j, "brass",
-                         box_faces(lo, cy - 0.012, floor + rail - 0.008, hi, cy + 0.012, floor + rail + 0.008),
+                         box_faces(lo, cy - 0.012, rail_z - 0.008, hi, cy + 0.012, rail_z + 0.008),
                          "dressing", room=wardrobe["room"], label=partner + " hanging rail")
-                    length = (1.25 if partner == "hers" else 0.92) if kind == "long-hang" else 0.72
-                    x = lo + 0.035
-                    while x < hi - 0.025:
-                        mesh(prefix + "-garment-%d-%d" % (j, round(x * 1000)), rnd.choice(fabrics),
-                             box_faces(x, cy - 0.20, floor + rail - length, x + 0.025, cy + 0.20, floor + rail - 0.04),
-                             "dressing", room=wardrobe["room"], label=partner + " hanging garments")
-                        x += 0.065
+                    # long-hang = dresses/abayas (full-length card); the LOWER rail of a double-hang carries
+                    # trousers folded over the hanger, the upper rail shirts/jackets.
+                    if kind == "long-hang":
+                        gtype = "dress"
+                    elif rail < 1.5:
+                        gtype = "trousers"
+                    else:
+                        gtype = "shirt"
+                    x = lo + 0.05
+                    n_ = 0
+                    while x < hi - 0.03:
+                        fabric = palette[(index + n_) % len(palette)]
+                        if gtype == "trousers":
+                            length = rnd.uniform(0.68, 0.72)
+                            wtop, wbot, dtop, dbot = 0.06, 0.22, 0.05, 0.10
+                        else:
+                            g = GARMENT["shirt" if (gtype == "shirt" and n_ % 2 == 1) else
+                                        ("jacket" if gtype == "shirt" else gtype)]
+                            length = rnd.uniform(*g["length"])
+                            wtop, wbot, dtop, dbot = g["shoulder"], g["hem"], g["depth"][0], g["depth"][1]
+                        # Stay inside the module envelope (same clamp idiom as climber_placement.placements):
+                        # a packed garment near the module's own edge is narrower than its nominal width, not
+                        # wider than the checked envelope.
+                        half_top = min(wtop / 2, x - lo, hi - x)
+                        half_bot = min(wbot / 2, x - lo, hi - x)
+                        faces = garment_body(x, cy, rail_z - 0.05, rail_z - 0.05 - length,
+                                             2 * half_top, 2 * half_bot, dtop, dbot)
+                        gid = prefix + "-garment-%d-%d" % (j, round(x * 1000))
+                        mesh(gid, fabric, faces, "dressing", room=wardrobe["room"],
+                             label=partner + " hanging " + ("shirt/jacket" if gtype == "shirt" else gtype))
+                        if gtype != "trousers":
+                            mesh(gid + "-hanger", "brass", hanger_faces(x, cy, rail_z, 2 * half_top),
+                                 "dressing", room=wardrobe["room"], label=partner + " hanger")
+                        x += 0.12 if gtype != "trousers" else 0.16
+                        n_ += 1
             elif kind == "drawers":
                 for j in range(4):
                     z = floor + 0.10 + j * 0.26
@@ -829,15 +990,47 @@ def build(lay=None, views=None):
             elif kind in ("shelves", "shoe-shelves", "hat-shelf", "trousers-pullout"):
                 for j in range(4):
                     z = floor + 0.34 + j * 0.42
-                    mesh(prefix + "-shelf-%d" % j, "walnut", box_faces(lo, q[1] + 0.02, z,
+                    # WP-round3 wood-grain fix (same pattern as the stair tread/vanity front, docs/LEARNINGS.md):
+                    # a horizontal shelf top with plain "walnut" (grain_axis="z") sends its own thin vertical
+                    # extent into one of Box-projection's two sampled top-face coordinates -- a streaked smear.
+                    # "walnut-grain-x" is identity rotation and is already the established fix for exactly this
+                    # ("grain along horizontal tops and shelves", villa_render.py M table).
+                    mesh(prefix + "-shelf-%d" % j, "walnut-grain-x", box_faces(lo, q[1] + 0.02, z,
                          hi, q[3] - 0.02, z + 0.018), "dressing", room=wardrobe["room"], label=partner + " shelf")
                     mesh(prefix + "-stack-%d" % j, "linen" if kind == "shelves" else "leather-brown",
                          box_faces(lo + 0.03, cy - 0.15, z + 0.02, min(hi - 0.02, lo + 0.22), cy + 0.15,
                                    z + 0.10), "dressing", room=wardrobe["room"],
                          label=partner + (" folded stack" if kind == "shelves" else " shoes and hats"))
-        mesh("dress-%s-top-boxes" % partner, "linen", box_faces(q[0] + 0.07, cy - 0.20, floor + 2.10,
-             q[2] - 0.07, cy + 0.20, floor + 2.25), "dressing", room=wardrobe["room"],
-             label=partner + " labelled top boxes")
+        # A single full-width slab read as one shelf; individual lidded boxes and paired shoes make the
+        # wardrobe's storage use legible without adding anything outside its measured footprint.
+        usable = q[2] - q[0] - 0.14
+        box_count = 3 if usable > 1.45 else 2
+        gap = 0.025
+        box_w = (usable - gap*(box_count-1))/box_count
+        for bi in range(box_count):
+            xa = q[0] + 0.07 + bi*(box_w+gap)
+            mesh("dress-%s-top-box-%d" % (partner, bi), "linen",
+                 box_faces(xa, cy-0.18, floor+2.04, xa+box_w, cy+0.18, floor+2.18),
+                 "dressing", room=wardrobe["room"], label=partner + " labelled top box")
+        shoe_module = next((span for span in F.module_spans(wardrobe) if span[0] in ("long-hang", "double-hang")), None)
+        if shoe_module:
+            _, xa, xb = shoe_module
+            for pair in range(2):
+                sx = xa + 0.10 + pair*0.23
+                for foot in range(2):
+                    xshoe = sx + foot*0.095
+                    if xshoe + 0.07 > xb - 0.02:
+                        continue
+                    zsole = floor + 0.045
+                    faces = box_faces(xshoe, cy-0.115, zsole, xshoe+0.07, cy+0.115, zsole+0.018)
+                    faces += box_faces(xshoe+0.005, cy-0.105, floor, xshoe+0.065, cy-0.045, zsole)
+                    lower = [[xshoe, cy-0.10, zsole+0.018], [xshoe+0.07, cy-0.10, zsole+0.018],
+                             [xshoe+0.07, cy+0.08, zsole+0.018], [xshoe, cy+0.08, zsole+0.018]]
+                    upper = [[xshoe+0.015, cy-0.075, zsole+0.060], [xshoe+0.055, cy-0.075, zsole+0.060],
+                             [xshoe+0.055, cy+0.015, zsole+0.060], [xshoe+0.015, cy+0.015, zsole+0.060]]
+                    faces += pane_faces(upper, lower)
+                    mesh("dress-%s-shoe-%d-%d" % (partner, pair, foot), "leather-brown", faces,
+                         "dressing", room=wardrobe["room"], label=partner + " shoe pair")
     for bid, duvet in (("pb-bed", "bedding-white"), ("kb-bed", "sage-fabric"), ("ka-bunk", "bedding-white")):
         b_ = it[bid]
         q = F.footprint(b_)
@@ -1086,14 +1279,20 @@ def build(lay=None, views=None):
             # 10 mm low-iron glass, not the generic "glass-guard" (stair-guard assumption, no ior field) reused
             # here before. roughness=0: real low-iron glass, not a frosted or textured screen.
             mname = "glass-bath-screen"
+            # Round-3 defect 4 (v12-ensuite.png): the lead's diagnosis, confirmed here -- this was a
+            # ZERO-THICKNESS plane with a refractive glass shader (interfaces=1). A ray entering the front face
+            # of a plane with no back face has nowhere to exit, so Cycles' glass BSDF total-internally-reflects
+            # it back toward the camera: it reads as a mirror, not as glass. Fix: a real 10 mm closed pane
+            # (box_faces, both faces + the four edges) and interfaces=2, matching the fitting's OWN measured
+            # transmittance (0.91 total, both interfaces) and IOR (1.52) from revit_spec's bath_fittings.
+            GLASS_T = 0.01
             mats[mname] = dict(kind="glass", base_rgb=[1, 1, 1], transmittance=fitting["transmittance"],
-                               ior=fitting["ior"], roughness=0.0, interfaces=1,
-                               note="fixed frameless bath screen, %s (%s)" % (fitting["id"], fitting["optical_note"]))
-            mesh(fid, mname, [[[fitting["x0"], fitting["y"], fitting["sill"]],
-                 [fitting["x1"], fitting["y"], fitting["sill"]],
-                 [fitting["x1"], fitting["y"], fitting["head"]],
-                 [fitting["x0"], fitting["y"], fitting["head"]]]], "fixture", room=fitting["room"],
-                 label="ASSUMED fixed frameless bath screen, open entry at far end")
+                               ior=fitting["ior"], roughness=0.0, interfaces=2,
+                               note="fixed frameless bath screen, 10 mm closed pane, %s (%s)"
+                                    % (fitting["id"], fitting["optical_note"]))
+            mesh(fid, mname, box_faces(fitting["x0"], fitting["y"] - GLASS_T / 2, fitting["sill"],
+                 fitting["x1"], fitting["y"] + GLASS_T / 2, fitting["head"]), "fixture", room=fitting["room"],
+                 label="ASSUMED fixed frameless bath screen, 10 mm closed pane, open entry at far end")
     for vent in sp["ventilation"]:
         x, y, z = vent["fan"]
         z += LZ[vent["level"]]
@@ -1135,7 +1334,7 @@ def build(lay=None, views=None):
         mesh("detail-skirting-" + lv, "paint-white-satin", faces, "shell", label="detail: 80 mm painted skirting")
     frames = []
     for m in [m for m in meshes if m["material"] == "glass-clear"]:
-        for face in m["faces"]:
+        for face in m["faces"][::6]:
             xs_ = [q[0] for q in face]
             ys_ = [q[1] for q in face]
             zs_ = [q[2] for q in face]
@@ -1385,15 +1584,41 @@ def build(lay=None, views=None):
                                                        max(wall_x, f.x - ax_ * 0.03), f.y + 0.015, f.z + 0.02),
                  "fixture", room=f.room, label="fitting " + f.id + " (bracket)")
         elif f.kind == "SWING":
+            # Client round-3 (v02/v24, library nook): the previous swing lamp was three flat brass BOXES --
+            # no round plate, no articulated joint, no shade -- and read as "tiny brass boxes", not a
+            # recognisable fitting. Rebuilt as a round wall plate, two knuckle-jointed 0.30 m arm segments
+            # (villa_lighting's own SWING spec states "articulated 0.6 m reach" -- exactly 2 x 0.30 m), and a
+            # conical shade D120 angled down over the existing emissive disc, in brass (plate, arm) + black
+            # (knuckle, shade).
             wall_y = F.footprint(it_all["library-daybed"])[1]
-            mid_y = wall_y + 0.22
-            mesh("swing-plate-" + f.id, "brass", box_faces(f.x - 0.045, wall_y, f.z - 0.075,
-                 f.x + 0.045, wall_y + 0.018, f.z + 0.075), "fixture", room=f.room, label="SWING wall plate")
-            mesh("swing-arm-" + f.id, "brass", box_faces(f.x - 0.009, wall_y + 0.018, f.z + 0.035,
-                 f.x + 0.009, mid_y, f.z + 0.053) + box_faces(f.x - 0.009, mid_y, f.z + 0.035,
-                 f.x + 0.009, f.y, f.z + 0.053), "fixture", room=f.room, label="SWING articulated arm")
-            mesh("swing-head-" + f.id, "brass", box_faces(f.x - 0.07, f.y - 0.07, f.z,
-                 f.x + 0.07, f.y + 0.07, f.z + 0.08), "fixture", room=f.room, label="SWING rotatable shade")
+            arm_l = 0.30
+            span = f.y - wall_y
+            half = span / 2
+            kick = math.sqrt(max(arm_l * arm_l - half * half, 0.0))
+            if span > 2 * arm_l:
+                notes.append("ASSUMED %s: SWING reach %.2f m exceeds two 0.30 m segments (0.60 m); arm shown "
+                             "stretched, not to the stated segment length" % (f.id, span))
+                kick = 0.0
+            base_pt = (f.x, wall_y, f.z)
+            elbow_pt = (f.x + kick, wall_y + half, f.z)
+            head_pt = (f.x, f.y, f.z)
+
+            def wall_disc(y, r, n=16):
+                return [[f.x + r * math.cos(2 * math.pi * k / n), y, f.z + r * math.sin(2 * math.pi * k / n)]
+                        for k in range(n)]
+            mesh("swing-plate-" + f.id, "brass", pane_faces(wall_disc(wall_y, 0.05), wall_disc(wall_y + 0.012, 0.05)),
+                 "fixture", room=f.room, label="SWING round wall plate, D100")
+            mesh("swing-arm-" + f.id, "brass", rod_faces(base_pt, elbow_pt, 0.018) + rod_faces(elbow_pt, head_pt, 0.018),
+                 "fixture", room=f.room, label="SWING articulated arm, two 0.30 m knuckle-jointed segments")
+            mesh("swing-knuckle-" + f.id, "black-metal", sphere(*elbow_pt, 0.022),
+                 "fixture", room=f.room, label="SWING knuckle joint")
+            shade_r, shade_h, tilt, seg = 0.06, 0.10, 0.03, 16
+            apex = (f.x, f.y - tilt, f.z + shade_h)
+            ring = [[f.x + shade_r * math.cos(2 * math.pi * k / seg), f.y + shade_r * math.sin(2 * math.pi * k / seg), f.z]
+                    for k in range(seg)]
+            shade_faces = [ring] + [[apex, ring[i], ring[(i + 1) % seg]] for i in range(seg)]
+            mesh("swing-head-" + f.id, "black-metal", shade_faces, "fixture", room=f.room,
+                 label="SWING conical shade D120, angled down")
             name = "swing-disc-%d" % cct
             mats[name] = dict(kind="emissive", base_rgb=[1, 0.94, 0.82],
                               emission_lm_per_m2=round(f.lumens / (math.pi * 0.055**2), 1), cct_k=cct)
@@ -1403,9 +1628,18 @@ def build(lay=None, views=None):
             r = k.get("diameter", 0.2) / 2
             area = 4 * math.pi * r * r
             mname = "opal-%s-%d" % (f.kind.lower(), cct)
-            mats[mname] = (dict(kind="glass", base_rgb=[0.95, 0.93, 0.90], roughness=0.35,
-                                transmittance=0.75, ior=1.45,
-                                note="ASSUMED translucent opal glass shade") if f.kind == "PEN-GLOBE" else
+            # Client round-3 (v01-stair-void.png): the island/stair-void globes read as "smoky grey glass". Cause:
+            # kind="glass" put a ROUGH (0.35) Principled-BSDF dielectric on the shell -- a rough refractive glass
+            # has no bulk scattering, so at most viewing angles it mostly REFLECTS the room (grey) and only shows
+            # the interior bulb through narrow refraction cones; it also picked up architectural_glass()'s
+            # shadow/diffuse-ray transparent mix (photoreal.py), meant for window panes, not a lamp shade. Fix:
+            # "translucent" (already implemented in add_material for the curtains -- a Principled BSDF diffuse
+            # mixed with a Translucent BSDF by `transmittance`) is the correct opal-glass model: a soft white
+            # diffuse body PLUS diffuse transmission of the inner bulb's light outward, with no hard specular
+            # highlight and no hard shadow -- a milky white glowing globe, not a window.
+            mats[mname] = (dict(kind="translucent", base_rgb=[0.97, 0.96, 0.92], reflectance=0.85,
+                                transmittance=0.65, roughness=0.22,
+                                note="ASSUMED milky white opal glass shade, lit from inside") if f.kind == "PEN-GLOBE" else
                            dict(kind="emissive", base_rgb=[0.95, 0.93, 0.90], emission_lm_per_m2=round(f.lumens / area, 1),
                                 cct_k=cct, note="opal diffuse emitter, %d lm (GENERIC)" % f.lumens))
             cz = f.z + r if f.kind not in ("SCONCE", "WALL-READ") else f.z
@@ -1720,6 +1954,8 @@ def part_material(f, part):
     if t in ("pantry_shelving", "store_shelving"):
         return "white-paint-joinery"
     if t in ("wardrobe", "tall_column"):
+        if room in ("parents-dressing", "parents-dressing-ext"):
+            return "walnut-grain-x"  # thin side/back panels must not sample their own 18 mm thickness
         return "oak" if room not in ("dirty-kitchen",) else "greige-lacquer"
     if t in ("sideboard", "tv_unit", "bedside_table", "window_bench"):
         return "screen-black" if part == "screen" else "walnut"
@@ -1871,8 +2107,10 @@ def VIEWS(lay=None):
       room="dining", dimmers={"ambient": 0.35, "task": 0.5})
     v("v10-living-evening", "Garden living at night: cove and library", "evening", I, I, 24,
       ["library-daybed", "living-sofa"], room="living", dimmers={"ambient": 0.25, "task": 0.5})
-    v("v11-stair-void", "The stair up to the globe cluster in the void", "evening", [10.45, -27.95, B + 1.45],
-      [5.8, -27.95, B + 1.75], 14, ["stair-gf", "stair-b"], shift_y=0.30)
+    # the definition now states what has always been rendered (and was approved): 24 mm, level, shift 0.12 -- the
+    # authored 14 mm / 0.30 / tilted target were silently overridden by the camera pass until 2026-09-29
+    v("v11-stair-void", "The stair up to the globe cluster in the void", "evening", [10.45, -27.95, B + 1.35],
+      [5.8, -27.95, B + 1.35], 24, ["stair-gf", "stair-b"], shift_y=0.12)
     v("v12-ensuite", "Parents' ensuite", "evening", I, I, 24, ["pe-bath", "pe-basin"], room="parents-ensuite",
       dimmers={"ambient": 0.5})
     v("v13-kids-b", "Kids' room B at bedtime", "evening", I, I, 24, ["kb-bed", "kb-desk"], room="kids-b")
@@ -1913,25 +2151,51 @@ def VIEWS(lay=None):
     v("v25-top-garden-gate", "Top garden from the street gate", "day", [4.4, -21.7, G + 1.35],
       [12.4, -22.0, G + 1.35], 24, ["landscape-top-planter-deck", "landscape-top-planter-roof"],
       final_only=True, exposure="exterior-day")
-    v("v26-top-garden-north", "Top garden over the north garden", "day", [14.5, -22.0, G + 1.35],
-      [19.0, -21.8, G + 1.35], 24, ["landscape-bed-north", "landscape-lemon-pot"],
+    # v26 re-placed (round 4): the old camera at (14.5, -22.0) stood inside the potted olive's canopy world box
+    # (villa_landscape.prop_world_box, roughly x 12.96-15.24, y -23.33 to -20.87 at the olive's 2.0 m height --
+    # the whole roof, so no roof standing point clears it). Moved to the deck edge, at the deck/roof rail corner,
+    # >= 1.0 m clear of the olive, the relocated bench and every other top-garden prop (checked by
+    # scripts/villa_render_views.py's camera-proximity guard).
+    v("v26-top-garden-north", "Top garden over the north garden", "day", [9.0, -20.80, G + 1.35],
+      [19.0, -21.0, G + 1.35], 24, ["landscape-bed-north", "landscape-lemon-pot"],
       shift_y=-0.22, final_only=True, exposure="exterior-day")
     v("v27-north-garden-above", "North garden from the study deck", "day", [8.7, -22.3, G + 1.35],
       [19.0, -21.8, G + 1.35], 24, ["landscape-bed-north", "landscape-lemon-pot"],
       shift_y=-0.18, final_only=True, exposure="exterior-day")
-    v("v28-north-garden-below", "North garden at basement level", "day", [16.1, -21.0, B + 1.35],
-      [20.5, -22.1, B + 1.35], 24, ["landscape-lemon-pot", "landscape-trellis-north"],
+    # v28 re-placed (round 4): the old camera at (16.1, -21.0) let the lemon pot occupy 41.5 degrees of a
+    # 74-degree frame. A westward standing point in the sunken strip holds the garden doors, bed and trellis
+    # along one sightline with the lemon pot no longer filling the foreground.
+    v("v28-north-garden-below", "North garden at basement level", "day", [14.2, -22.5, B + 1.35],
+      [25.0, -22.3, B + 1.35], 24, ["landscape-bed-north", "landscape-trellis-north"],
       final_only=True, exposure="exterior-day")
-    v("v29-under-stair-store", "Under-stair storage from the lounge", "day", I, I, 24,
-      ["stair-flight-store", "stair-landing-store"], room="lounge", final_only=True, **BASEMENT_DAY)
+    V[-1]["caption_notes"] = ["North garden at basement level: view along the planted strip toward its trellis and doors."]
+    # v29: RV.choose in stair-b put the camera at x=9.577 and the stair treads blocked both storage modules
+    # despite their plan footprints falling inside the lens wedge. Stand northwest of the stair flight in the
+    # lounge and aim at the joinery fronts; 16 mm holds both separate modules from this clear point.
+    v("v29-under-stair-store", "Under-stair storage from the lounge", "day", [4.5, -27.0, B + 1.35],
+      [5.717, -29.742, B + 1.35], 16, ["stair-flight-store", "stair-landing-store"],
+      final_only=True, **BASEMENT_DAY)
+    V[-1]["camera"]["lens_basis"] = ("widest subject corner 43.7 deg off axis from the clear northwest standing "
+                                     "point; 24 mm holds 36.9, 16 mm holds 48.4; at 16 mm widest 43.7 deg")
     V[-1]["caption_notes"] = ["Sliding joinery fronts shown closed; the storage modules are behind them."]
-    v("v30-under-ramp-store", "Under-ramp store shelving", "day", I, I, 24,
-      ["store-shelves"], room="store-ramp", final_only=True, **BASEMENT_DAY)
-    V[-1]["caption_notes"] = ["The sloping ramp soffit gives 1.45 to 2.0 m clear height."]
+    # v30 rendered black (round 4): the store has no window, but the view used the shared day exposure (~100-600
+    # lx assumed) with only DL-store-ramp-01 dimmed to 50 %. Made an interior presentation instead: evening
+    # exposure (ADR-0013, lamp white balance) with ambient at full brightness, the store's only layer.
+    v("v30-under-ramp-store", "Under-ramp store shelving", "evening", I, I, 24,
+      ["store-shelves"], room="store-ramp", final_only=True, layers=["ambient"], dimmers={"ambient": 1.0})
+    V[-1]["caption_notes"] = ["The store has no window; shown by its own light (DL-store-ramp-01) at full "
+                              "brightness, not daylight.",
+                              "The sloping ramp soffit gives 1.45 to 2.0 m clear height."]
     v("v31-dressing-hers", "Dressing: her section", "evening", I, I, 24,
       ["pd-hang-1"], room="parents-dressing", final_only=True, dimmers={"ambient": 0.6})
-    v("v32-dressing-his", "Dressing: his section", "evening", I, I, 24,
-      ["pd-hang-2"], room="parents-dressing-ext", final_only=True, dimmers={"ambient": 0.6})
+    # The chosen east-end camera filled v32 with an empty shelf and concealed the double-hang rail behind
+    # the wardrobe's side panels. Stand in the clear aisle opposite his hanging module and include the
+    # adjacent trouser shelves; a level 16 mm frame with upward shift holds both rail levels.
+    v("v32-dressing-his", "Dressing: his section", "evening", [20.15, -27.55, G + 1.35],
+      [20.15, -28.50, G + 1.35], 16,
+      ["dress-his-double-hang-0", "dress-his-trousers-pullout-1"],
+      final_only=True, dimmers={"ambient": 0.6}, shift_y=0.10)
+    V[-1]["camera"]["lens_reason"] = "level wide lens and upward shift hold upper and lower hanging rails from the clear aisle"
     v("v33-basement-north-south", "Basement open space, north to south", "day", [20.3, -23.9, B + 1.35],
       [20.3, -28.5, B + 1.35], 24, ["living-sofa", "library-daybed"], final_only=True, **BASEMENT_DAY)
     v("v34-basement-south-north", "Basement open space, south to north", "day", [17.8, -28.9, B + 1.35],
@@ -1986,8 +2250,9 @@ def VIEWS(lay=None):
         # authored interior camera (the stair): level at eye height, framed by `frame`
         c["position"][2] = round(lvz + eye, 3)
         c["target"][2] = c["position"][2]
-        c["lens_mm"] = 24
-        c["shift_y"] = 0.12 if x["id"].startswith("v11") else 0.0
+        # keep the authored lens: forcing 24 mm here silently overrode v29's 16 mm (whose lens_basis needed 43.7 deg)
+        c["lens_mm"] = c.get("lens_mm") or 24
+        c["shift_y"] = c.get("shift_y", 0.0)             # authored shift kept (was forced to 0 except v11)
         c["home_room"] = next((rid for rid, r in lay["rooms"].items() if r["level"] == ("B" if lvz < -0.1 else "GF")
                                and r["rect"][0] <= c["position"][0] <= r["rect"][2]
                                and r["rect"][1] <= c["position"][1] <= r["rect"][3]), None)

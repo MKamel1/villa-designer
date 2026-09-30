@@ -14,6 +14,40 @@ ITEMS = {i["id"]: i for i in F.layout(LAY)}
 
 
 class ChosenViews(unittest.TestCase):
+    def test_exterior_camera_clearance_catches_old_v26_and_v28(self):
+        from scripts import villa_render_views as views
+        from archpipe.concept import villa_render as V
+        scene = V.build(LAY)
+        items = {i["id"]: i for i in F.layout(LAY)}
+        by_id = {v["id"]: v for v in scene["views"]}
+        for name in ("v26-top-garden-north", "v28-north-garden-below"):
+            self.assertEqual(views.camera_proximity_violations(by_id[name], scene, items), [], name)
+        old26 = {**by_id["v26-top-garden-north"], "camera": {**by_id["v26-top-garden-north"]["camera"],
+                                                              "position": [14.5, -22.0, 1.35]}}
+        old28 = {**by_id["v28-north-garden-below"], "camera": {**by_id["v28-north-garden-below"]["camera"],
+                                                                "position": [16.1, -21.0, -1.65],
+                                                                "target": [20.5, -22.1, -1.65], "lens_mm": 24}}
+        self.assertTrue(any("olive" in name for name, _ in views.camera_proximity_violations(old26, scene, items)))
+        self.assertTrue(any("lemon" in name for name, _ in views.dominant_foreground_props(old28, scene)))
+        self.assertEqual(views.dominant_foreground_props(by_id["v28-north-garden-below"], scene), [])
+
+    def test_storage_views_show_joinery_and_windowless_room_lighting(self):
+        from archpipe.concept import villa_render as V
+        scene = V.build(LAY)
+        views = {v["id"]: v for v in scene["views"]}
+        under_stair = views["v29-under-stair-store"]
+        self.assertEqual(set(under_stair["subjects"]), {"stair-flight-store", "stair-landing-store"})
+        # The old chosen camera at x=9.577 looked THROUGH the stair treads at
+        # the stores. The northwest standing point sees their fronts first.
+        from scripts import villa_render_views as render_plan
+        self.assertFalse(render_plan.under_stair_occlusion_violation(under_stair))
+        old = {**under_stair, "camera": {**under_stair["camera"], "position": [9.577, -27.871, -1.65]}}
+        self.assertTrue(render_plan.under_stair_occlusion_violation(old))
+        under_ramp = views["v30-under-ramp-store"]
+        self.assertEqual(under_ramp["exposure"], "evening")
+        self.assertEqual(under_ramp["dimmers"]["ambient"], 1.0)
+        self.assertTrue(any("no window" in note.lower() for note in under_ramp["caption_notes"]))
+
     def test_exterior_lounge_subject_uses_built_sofa_bounds(self):
         from scripts import villa_render_views as views
         scene = {"meshes": [{"id": "landscape-sofa-00",

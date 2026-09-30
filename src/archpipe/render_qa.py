@@ -77,6 +77,12 @@ def _luma(p):
     return 0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2]
 
 
+def window_brightness_status(view_median, room_p90):
+    """Strict, as pre-registered: a daylight view darker than the room's 90th percentile fails. A borderline case
+    (v01 draft: 0.80 vs 0.81) is explained on the review page, not absorbed by a tolerance added to pass it."""
+    return "FAIL" if view_median < room_p90 else "PASS"
+
+
 def check(image_path, qa: dict) -> dict:
     img, px = _pixels(Image.open(image_path))
     w, h = img.size
@@ -190,11 +196,13 @@ def check(image_path, qa: dict) -> dict:
                         if not (x0 <= x < x1 and y0 <= y < y1))
         view = sorted(_luma(px[y * w + x]) for y in range(y0, y1, 2) for x in range(x0, x1, 2)
                       if 0 <= x < w and 0 <= y < h)
-        if inside and view:
+        # A daytime exterior camera looks into a darker room; the original
+        # bright-window comparison only applies to a camera inside that room.
+        if inside and view and not qa.get("exterior_camera"):
             room_p90 = inside[int(0.90 * (len(inside) - 1))]
             view_med = view[len(view) // 2]
             add(f"window_brightness:{win.get('id', '?')[-6:]}",
-                "FAIL" if view_med < room_p90 else "PASS",
+                window_brightness_status(view_med, room_p90),
                 f"view median {view_med:.2f} vs room 90th percentile {room_p90:.2f}",
                 "The garden was darker than sunlit surfaces inside the room.")
         # Inset 12%: skip frame and reveal, sample the glazing itself.

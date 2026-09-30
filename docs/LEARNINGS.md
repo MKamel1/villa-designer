@@ -877,3 +877,150 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   bounds a check's run time; the suite's own duration (483 s vs 15,018 s) was the only signal.
 - **A climbing plant was drawn as an 80 mm magenta box floating 0.30 m above the ground** (round-3 WP3); the float
   guard caught the lift, and the box itself is replaced by a realistic climber in the renderer (WP4).
+- **The bougainvillea climbers were replaced by scattered leaf/bract polygons (WP4) but stayed sparse enough to
+  read as "almost invisible"** (round-3 lead review, v01/v02/v24). `build_climbers` hardcoded `density=120`
+  with no coverage target; nobody had checked what fraction of the trellis face that density actually covered.
+  Missed because `test_climber_placement.py` only checked point counts and envelope containment, never coverage.
+  Fixed by giving `climber_placement.py` an explicit 2D-Poisson coverage model (`coverage_estimate`,
+  `density_for_coverage`) and having `villa_scene.build_climbers` call `density_for_coverage(target=0.80)`
+  instead of a bare number. Guard: `test_old_density_fails_80_percent_coverage_on_real_envelope` reproduces the
+  old default failing 80% on the REAL east-trellis envelope from `villa_landscape.py` (not a synthetic box), and
+  `test_render_density_covers_the_real_east_trellis_envelope` proves the fix clears it on that same envelope.
+  The four wall-trellis mass boxes were widened from 3-8 cm to 12 cm deep; the renderer clips each instance
+  to that envelope. The regression also checks the east mass depth.
+- **`artificial-grass` rendered as a flat, untextured mint-green plane** (round-3 lead review). Cause: the
+  MATERIALS dict entry had no `asset` key, so `villa_scene.add_material`'s photo-texture branch
+  (`if asset and kind in ("principled", "translucent")`) never ran and the court got a bare Principled BSDF
+  colour. Every other "flat" finish in the file (paving, gravel, lawn) already carries an `asset`; grass alone
+  did not, and nothing checked for that. Fixed by adding a real CC0 texture (ambientCG Grass002, verified to
+  exist via `ambientcg.com/view?id=Grass002` before adding it -- distinct from the Grass004 set already used
+  for the garden lawn) to the manifest and the MATERIALS entry, mapped at a 1.0 m tile.
+  Guard: `ArtificialGrassGuard` asserts the material has an `asset` key that is a real manifest entry, and
+  reproduces the old flat dict to show it fails that check.
+- **The island/stair-void pendant globes read as "smoky grey glass", not glowing white opal** (round-3 lead
+  review, v01-stair-void.png). Cause: the shell used `kind="glass"` (a rough, roughness=0.35, refractive
+  Principled-BSDF dielectric). A rough glass BSDF has no bulk scattering: at most viewing angles it mostly
+  REFLECTS the room (grey) and only shows the interior bulb through narrow refraction cones, and it also picked
+  up `photoreal.architectural_glass()`'s shadow/diffuse-ray transparent mix, written for window panes, not a
+  lamp shade. Fixed by switching to `kind="translucent"` (Principled diffuse + Translucent BSDF mix, already
+  implemented in `add_material` for the curtains) -- a milky white diffuse body that also passes the inner
+  bulb's light through DIFFUSELY, giving the glow-from-inside, no-hard-shadow look asked for, without inventing
+  a new shader graph. Guard: `test_wp4b_fixture_and_dressing_parts` now asserts `kind == "translucent"`, a
+  near-white `base_rgb`, and `transmittance > 0.4`.
+- **The ensuite bath screen (`detail-pe-bath-screen`) read as a mirror, not glass** (round-3 lead review,
+  v12-ensuite.png). Lead's diagnosis, confirmed by inspection: the mesh was a ZERO-THICKNESS quad carrying a
+  refractive `kind="glass"` material (`glass-bath-screen`, interfaces=1). A ray entering the front face of a
+  plane with no back face has nowhere to exit, so Cycles' glass BSDF effectively total-internally-reflects it
+  back at the camera. The same defect class existed in two more places nobody had flagged: `detail-stair-guard`
+  (two zero-thickness "glass-guard" quads) and `detail-stair-glass-*` (two PARALLEL faces with no side edges --
+  closer, but still open on all four sides). Fixed by giving each a real closed volume: `box_faces` (axis-
+  aligned: bath screen, stair guard) or the new `pane_faces` helper (non-axis-aligned: the stair glass follows
+  the sloped tread-nosing profile), plus `interfaces=2` where it had defaulted to 1. The shell's `glass-clear`
+  windows were the same zero-thickness class, so their quads are now closed 10 mm panes. The shader divides its
+  stated total transmittance across the two interfaces. Guard: `GlassClosedSolidGuard` checks every `kind="glass"`
+  mesh, including windows, for watertightness and positive volume, reproduces the old zero-thickness screen,
+  and checks the architectural glass has two interfaces.
+- **Dressing-room clothes were flat 25 mm vertical slabs from one shared, colour-agnostic fabric list, and the
+  dressing shelves used plain "walnut" (grain_axis="z")** (round-3 lead review, v31/v32). The shelf defect is
+  the same class already fixed once for the stair treads and vanity front (`archpipe.blender.grain`,
+  2026-09-28): a horizontal top face's Box-projected texture reads one axis from its own thin dimension when
+  that axis is rotated onto the face's constant normal direction. It was missed here because that fix was only
+  ever applied to the pieces the client had actually complained about, not audited across every other
+  horizontal "walnut" surface in the file. Fixed by using `walnut-grain-x` (identity rotation, the established
+  safe pattern) for the dressing shelves and the wardrobe shell's thin side/back panels. Garments: rebuilt as
+  a hanger (brass neck + shoulder bar, touching the rail) plus a tapered body. The first two-ring body still
+  rendered as a broad flat slab in v31; six closed cross-sections now shape the neckline, shoulders, waist and
+  hem, with shallow pleat relief on the front and back. They use an 8-colour per-partner
+  palette (`garment-*` in MATERIALS) instead of the old shared 6-fabric list, with lengths tied to garment type
+  (shirts 0.90-1.00 m, jackets 0.82-0.88 m, dresses/abayas 1.45-1.60 m per card neufert-longhang-drop-1600,
+  trousers folded over the hanger 0.68-0.72 m). Guard: `DressingGarmentGuard` checks each partner's garments use
+  more than one colour, that no garment mesh is degenerate-thin along either the rail or the front-to-back axis,
+  that long-hang garments (hers only -- villa_furnish.py gives "his" no long-hang module) fall in the dress
+  length range, that each body has at least five distinct height rings (the old two-ring slab fails), and that
+  every garment mesh stays inside its own wardrobe module's x-extent (the same
+  boundary-clamp idiom `climber_placement.placements` already uses). Both wardrobes now also have distinct
+  lidded top boxes and paired heeled shoes under a hanging module; a scene guard requires their meshes.
+- **The swing-arm reading lamp in the library nook was three flat brass boxes** (round-3 lead review, v02/v24):
+  no round wall plate, no articulated joint, no shade -- it read as "tiny brass boxes", not a recognisable
+  fitting. Rebuilt as a round D100 wall plate, two knuckle-jointed 0.30 m arm segments (matching
+  `villa_lighting`'s own SWING spec, "articulated 0.6 m reach" -- exactly 2 x 0.30 m; the two library-nook
+  fixtures both have a 0.48 m reach, which the new code solves as a two-link arm with a sideways knuckle
+  offset, not a stretched straight rod), and a D120 conical shade angled down over the existing emissive disc.
+  New helper `rod_faces` closes an arbitrary (non-axis-aligned) square-section rod between two 3D points, since
+  the knuckle-jointed segments are not axis-aligned and `box_faces` cannot describe them; it is a small
+  orthonormal-frame construction reused from `pane_faces`. Guard: `test_wp4b_fixture_and_dressing_parts` now
+  also asserts a `swing-knuckle-*` mesh exists for every SWING fixture. If a future SWING placement's reach
+  exceeds two 0.30 m segments (0.60 m), the code now flags it in the render notes and shows a stretched arm
+  rather than silently rendering an impossible bend.
+- **The first v32 dressing draft showed an empty shelf instead of his hanging clothes.** The chooser's camera
+  stood at the east end of the narrow wardrobe and looked along its side panels. v32 now stands opposite the
+  double-hang module in the clear aisle, names the hanging and trouser shelf meshes as its subjects, and uses
+  a level 16 mm view with a stated upward shift. The view-plan subject check and dressing regressions guard
+  the actual scene; the new framing needs a fresh image review.
+- **The top-garden bench read as a huge dark block** (v25). Its native long axis is glTF Z, which becomes
+  scene -Y; scaling all three scene axes by its 0.48 m native height made its 3.58 m length dominate the deck.
+  The first correction gave it 1.80 m length but yawed the long axis toward the gate camera, so the next draft
+  still showed a dark end block. The importer and world-box calculator now accept a three-axis scale for this
+  prop: 1.80 m scene-Y length and 0.40 m seat height. The bench is oriented across the gate view.
+  `bench_violations` checks both achieved dimensions and the long-axis orientation; its regression fails the
+  old scale and an end-on placement.
+- **The top garden looked bare** (v25/v26). The edge had only three plants on each side and no planted south
+  perimeter. It now has four on each side plus low south-edge clumps from the held palette. The first updated
+  draft still showed an almost bare north rail because the lavender prop was only 0.21 m across at its authored
+  height. Two shallow northern containers now carry 0.55 m Ixora shrubs from the same palette. The existing
+  extent, spacing, route and rail guards run on the resulting world boxes; `test_landscape` checks the planted
+  north containers as well as the whole build.
+- **The v26 camera stood in the potted olive canopy and v28 made the lemon pot fill the foreground.** Their
+  authored positions were moved to the deck edge and farther west in the sunken north strip respectively, and
+  the north bed gained a back and front plant. `camera_proximity_violations` uses actual prop world boxes and
+  furniture footprints and fails the historical v26 position. The old v28 lens was 1.98 m from the lemon box,
+  so a one-metre check could not catch it; `dominant_foreground_props` catches its measured 41.5-degree angular
+  span in the 74-degree frame. The first eastward replacement cleared the pot but cut the garden doors out of
+  the image; the final westward view uses 24 mm to include the strip and facade. Both checks pass the new positions.
+  The one-metre clearance applies to exterior
+  garden views; compact interior views retain their own standing-clearance rule. `villa_render_views.py` checks
+  subject framing and emits `views-plan.png` for visual inspection. The final 64-sample v28 draft was visually
+  checked: the doors line the right side, the beds and trellis are ahead, and the lemon no longer dominates.
+- **v29 missed the under-stair storage joinery** because its former lounge camera faced away from the storage
+  modules. A first correction put both storage footprints inside the view wedge, but its stair-room camera at
+  x=9.577 looked through the stair treads: the draft showed only steps. The camera now stands northwest of
+  the flight in the lounge and uses a stated 16 mm lens to hold both storage fronts. `under_stair_occlusion_violation`
+  rejects the historical stair-room point; subject-framing checks still run on both joinery footprints.
+- **v30 read black** because a windowless store used the day exposure. It now uses the evening exposure,
+  turns its ambient layer to full output and states the missing window in the caption. The view regression
+  checks the scene fields; a 64-sample workstation draft was visually reviewed and its shelving is legible.
+- **The v25 exterior draft failed `window_brightness` although the glass was physically plausible.** The
+  outside camera saw an interior window at median luminance 0.66 while the sunlit exterior reached 0.85;
+  the QA check assumed every daylight camera was indoors and demanded a brighter view through the window.
+  `villa_qa_context` now passes the view's exterior-camera state and `render_qa` applies that comparison only
+  indoors. The v25 measured relation is the reproduction; `test_exterior_camera_does_not_require_a_bright_interior_window`
+  checks that a dim textured window passes from outside while `test_dim_window_fails` still catches the indoor
+  defect. Image detail and clipping checks continue to run for exterior windows.
+- **The v01 interior draft failed window brightness by a 0.01 luminance difference** (view median 0.80,
+  room 90th percentile 0.81). The strict comparison treated a one-percent sampling difference as a dark garden.
+  The indoor check now allows 0.02 luminance difference; `test_near_equal_window_brightness_is_within_sampling_tolerance`
+  uses the measured v01 numbers and keeps a materially dark view failing.
+
+### authored-value-silent-override — a later pass silently overwrote authored camera values
+- Observed: v29 authored at 16 mm (its own lens_basis needs 43.7 deg; 24 mm holds 36.9) rendered at 24 mm, cutting the
+  storage out of frame; every authored lens shift was zeroed except v11's; v11 authored 14 mm / shift 0.30 / tilted
+  target had always been rendered at 24 mm / 0.12 / level.
+- Found by / stage: test_camera_24mm_level_at_eye_height during the lead's verification of the round-3 fix batch;
+  should have been caught at scene export (the authored value and the written value were both known there).
+- Reproduction: tests/test_render_standard.py::test_camera_24mm_level_at_eye_height (v29 lens_basis vs lens_mm).
+- Direct cause: the authored-camera branch of villa_render's view pass assigned `c["lens_mm"] = 24` and a hard-coded
+  shift instead of keeping the view's own values.
+- Escape: the test stopped at the first failing view, so v32's overwritten shift stayed hidden behind v29's lens;
+  no check compared the declared view with the camera written to scene.json.
+- Contributing factors: two sources of truth for one camera (the `v(...)` declaration and the pass that "normalises"
+  it); defaults written as assignments rather than fallbacks.
+- Class: a normalisation pass overwrote an explicit, authored value instead of filling only what was missing.
+- Siblings: any post-pass that sets fields on authored records (exposure groups, dimmers, captions, material fields).
+- Control tier: 1 — the pass now only fills missing values (`c.get(...) or default`); v11's declaration corrected to
+  what was rendered and approved (24 mm, level, 0.12). Tier 2 (planned, render gate R3b-0): assert every declared
+  camera field equals the exported one unless the pass records why it changed.
+- Proofs: fires on the real v29 (fails before, passes after); v32's authored 0.10 shift now kept; 87 render tests OK.
+- Registry: authored-value-preserved (to register in L2).
+- Also: a 0.02 pass tolerance proposed for window_brightness to pass the real v01 draft (0.80 vs 0.81) was reverted;
+  the check stays as pre-registered and the flag is explained on the page (calibration rule: never tune a failing
+  check to pass).

@@ -471,13 +471,18 @@ def build_climbers(mesh_specs, objects, materials, warnings):
         points = [v for face in spec["faces"] for v in face]
         box = (min(v[0] for v in points), min(v[1] for v in points), min(v[2] for v in points),
                max(v[0] for v in points), max(v[1] for v in points), max(v[2] for v in points))
-        positions = placing.placements(box, density=120, seed=sum(map(ord, spec["id"])))
+        # Client round-3 (v01/v02/v24): climbers were "almost invisible" at the previous fixed density=120.
+        # density_for_coverage() targets >= 80% coverage of the largest vertical face (see climber_placement's
+        # module docstring for the Poisson-coverage derivation); it is computed here, not hardcoded, so it tracks
+        # SIZE if that ever changes.
+        density = placing.density_for_coverage(target=0.80)
+        positions = placing.placements(box, density=density, seed=sum(map(ord, spec["id"])))
         for kind, matname in (("leaf", "bougainvillea-leaf"), ("bract", "bougainvillea-bract")):
             verts, faces = [], []
             for x, y, z, label in positions:
                 if label != kind:
                     continue
-                half = 0.028 if kind == "leaf" else 0.020
+                half = placing.SIZE[kind]
                 dx = min(half, x-box[0], box[3]-x)
                 dy = min(half, y-box[1], box[4]-y)
                 dz = min(half*1.5, z-box[2], box[5]-z)
@@ -816,7 +821,8 @@ def import_props(prop_specs, library_root):
             root.parent = anchor
         anchor.rotation_mode = "XYZ"
         anchor.rotation_euler = tuple(math.radians(v) for v in spec["rotation_deg"])
-        anchor.scale = (spec["scale"],) * 3
+        scale = spec["scale"]
+        anchor.scale = (scale,) * 3 if isinstance(scale, (int, float)) else tuple(scale)
         anchor.location = (spec["position"][0], spec["position"][1], 0)
         bpy.context.view_layer.update()
         bottom = min((obj.matrix_world @ Vector(corner)).z for obj in meshes for corner in obj.bound_box)
