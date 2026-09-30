@@ -1,311 +1,174 @@
-# arch-pipeline
-
-Current roadmap: [docs/ROADMAP.md](docs/ROADMAP.md). Reusable lessons:
-[docs/LEARNINGS.md](docs/LEARNINGS.md). Assistant operations:
-[docs/MCP.md](docs/MCP.md). Machine responsibilities:
-[docs/ops/compute-placement.md](docs/ops/compute-placement.md).
-
-The bedroom is a capability example. Run it with
-`.venv/Scripts/python scripts/run_bedroom.py --resume`; the generated
-`out/bedroom-acceptance.json` records the evidence and limitations.
-
-An AI-led villa design system: a staged method with checks attached, so
-every piece of advice cites a source and reports achieved-versus-required
-rather than an adjective.
-
-**Source of truth:** Revit supplies measured geometry through a generated
-extract that nothing hand-edits. The bedroom example is authored from its
-text specification, with an explicit photometry join and measured checks
-after saving the model. See
-[decision 0012](docs/decisions/ADR-0012-example-input-and-photometry.md).
-
-## Status
-
-Stages 0–2 (brief, site, feasibility) run today with **no Revit and no
-AutoCAD**. The AutoCAD drawing pipeline works end to end on Windows,
-fully headless:
-
-    spec/apartment.yaml  ->  DXF  ->  PNG preview
-                                 ->  DWG  ->  plotted PDF  ->  PNG of the plot
-
-Both PNGs have been checked visually. The second one matters: the DXF
-preview never touches AutoCAD, the CTB or lineweights, so it proves
-nothing about the plot.
-
-Known caveat: SHX text plots as stroked vectors, so the PDF has no
-selectable or searchable text. Switch `TEXT_FONT` in `layers.py` to a
-TrueType font if that is wanted.
-
-## Picking this up cold
-
-- **An AI agent taking over** → [`docs/ROADMAP.md`](docs/ROADMAP.md),
-  [`docs/bedroom-validation.md`](docs/bedroom-validation.md), then
-  [`CLAUDE.md`](CLAUDE.md). Historical bootstrap notes remain in
-  [`docs/HANDOVER.md`](docs/HANDOVER.md).
-- **Rebuilding the environment** → [`docs/SETUP.md`](docs/SETUP.md) — it rebuilds this
-environment from scratch, and records earlier setup failures. The current
-target is **Revit 2027**; follow
-[decision 0011](docs/decisions/ADR-0011-target-revit-2027.md) for the
-version decision rather than historical 2025 setup notes.
-
-## The method
-
-Design follows the **Villa Design Method** — eight decision-led stages
-with quality gates and thirteen named backward loops. See
-[`docs/method/villa-design-method.md`](docs/method/villa-design-method.md),
-with the reasoning in [`docs/PRD.md`](docs/PRD.md) and the decision
-record in [`docs/decisions/`](docs/decisions/).
-
-    0 Intent -> 1 Ground -> 2 Fit -> 3 Order -> 4 Rooms
-      -> 5 Systems -> 6 Substance -> 7 Proof
-
-## Run
-
-Method stages (no Autodesk, no Revit needed):
-
-    python -m archpipe brief spec/villa-brief.yaml              # Stage 0
-    python -m archpipe site  spec/villa-site.yaml               # Stage 1 + sun
-    python -m archpipe fit   spec/villa-brief.yaml spec/villa-site.yaml   # Stage 2
-
-Drawing and review (Stage 4 onward):
-
-    python -m archpipe check  spec/apartment.yaml       # validate + schedule
-    python -m archpipe design spec/apartment.yaml       # design review
-    python -m archpipe build  spec/apartment.yaml       # DXF + PNG
-    python -m archpipe build  spec/apartment.yaml --pdf # + DWG + plotted PDF
-    python -m archpipe review spec/apartment.yaml       # rebuild the web sheet
-
-Verification (positive and negative):
-
-    PYTHONPATH=src python scripts/verify.py
-
-Every stage command **exits non-zero when its gate is closed**, so each
-works as a gate in a script: `check` on a structural error, `design` on a
-`violation`, `brief`/`site` on a blocked gate, `fit` when the brief does
-not fit the plot.
-
-Setup:
-
-    python -m venv .venv
-    .venv/Scripts/python -m pip install -r requirements.txt
-    set PYTHONPATH=src
-
-## Layers
-
-- **L0 — the spec** (`spec/*.yaml`, `src/archpipe/model.py`).
-  Millimetres. Walls as centrelines with a *type*; openings reference a
-  *host* wall; rooms are closed boundary polygons. Deliberately
-  BIM-shaped even though the renderer is 2D, because a later IFC or
-  Revit renderer needs exactly these and retrofitting them is painful.
-  Areas are always computed, never typed.
-
-- **L1 — DXF renderer** (`render_dxf.py`). Pure Python via `ezdxf`. No
-  licence, no AutoCAD process, runs on Linux. Walls are built as
-  polygons and unioned with `shapely` before drawing, which is what
-  makes junctions clean up automatically; openings are subtracted, so a
-  reveal is a real hole in the poche rather than white paint on top.
-
-- **L2 — headless AutoCAD** (`acad.py`). `accoreconsole.exe` for
-  DXF→DWG and plotting to PDF. Windows only.
-
-- **L1b — web review sheet** (`web.py`, `viewer_data.py`, `build_viewer.py`,
-  `viewer/template.html`). DXF → SVG, published as a claude.ai artifact
-  with pan/zoom, a live cursor readout in millimetres, a scale bar, and
-  pinned review notes stored in the artifact's shared database.
-
-  The load-bearing part is the **model↔SVG transform**. A pin resolves to
-  model millimetres and, by point-in-polygon against the L0 room
-  boundaries, to the room it landed in — so a note reads "Bedroom 1 at
-  5700, 2500 mm", not "pixel 412, 308". `web.verify_transform()` checks
-  the mapping against geometry at known coordinates rather than trusting
-  the arithmetic; it currently lands within 0.01 mm (SVG path rounding).
-
-  Notes are read back with the `ArtifactData` tool, so client feedback
-  arrives as structured rows — coordinates, room id, author, text — that
-  can be acted on directly, not as markup entities to be parsed out of a
-  DWG.
-
-  **The page is not Claude-dependent.** Storage sits behind a `NoteStore`
-  interface with three backends — `ClaudeDbStore` (the artifact database),
-  `LocalStore` (localStorage) and `RestStore` (any HTTP endpoint) —
-  selected at boot, falling back rather than throwing when no platform is
-  present. Verified: served as a plain static file with `window.claude`
-  undefined, the plan renders, a pin resolves to its room and
-  millimetre coordinates, and a note survives a reload.
-
-  Export emits one self-describing JSON object — `format`, `version`,
-  `units`, `coordinates`, `extents_mm`, `transform`, `transform_doc`,
-  `rooms`, `notes` — so **another AI system can interpret the coordinates
-  without this page**. It is copy-to-clipboard and a visible textarea, not
-  a download link, because a published artifact's sandbox makes
-  script-driven downloads inert.
-
-- **Stage 0–2** (`brief.py`, `site.py`, `solar.py`, `feasibility.py`).
-  The brief and the site as data, and the check that they are compatible.
-
-  `brief.py` makes the brief machine-readable, which buys something no
-  generic checker has: the design can be checked **against the brief**,
-  not only against standards — "you asked for four bedrooms, the plan has
-  three".
-
-  `solar.py` implements the NOAA solar position algorithm. No library, no
-  service. It is **verified, not assumed**: `solar.verify()` runs 14
-  checks — solar-noon azimuth due south in the northern hemisphere and
-  due north in the southern, equinox noon altitude equal to 90 − |lat|,
-  solstice noon altitude of 90° at the matching tropic, and London
-  sunrise/sunset within two minutes of published almanac times once the
-  −0.833° refraction allowance is applied. A wrong azimuth does not
-  announce itself; it silently corrupts every orientation rule.
-
-  `feasibility.py` answers Stage 2 in arithmetic, before anything is
-  drawn, and returns a **cut ladder** — the concessions needed to fit,
-  cheapest first. Note the net/gross distinction: room areas in a brief
-  are net, permitted area is gross, and comparing them directly
-  over-cuts by about a quarter.
-
-- **Design review** (`rules.py`, `catalogue.py`). The critic. It does not
-  invent layouts; it checks one against published planning dimensions and
-  reports each failure with the rule, the number, the citation and the
-  consequence — so the advice can be argued with rather than taken on
-  trust.
-
-  Severity is `violation` (breaks a published minimum) / `warning`
-  (recognised planning fault) / `advisory` (comfort or preference).
-  Findings carry model coordinates, so `--notes` emits them straight
-  into the review sheet as pinned notes.
-
-  `catalogue.py` holds furniture footprints and the clearance each piece
-  demands, **each entry citing its source** — mostly Neufert,
-  *Architects' Data*, with trade practice marked as such. These are
-  design guidance, not code: where a local code is stricter it wins, and
-  a jurisdiction layer should override these values rather than edit
-  them.
-
-  Current rules: sanitary accommodation present; room minimum areas;
-  minimum habitable room width; door clear widths; private rooms reached
-  only through living space; entrance without a vestibule; furniture
-  clashing with walls; furniture overlapping furniture; blocked
-  clearance (reported as achieved-vs-required, e.g. "350 mm where 450 is
-  needed"); obstructed door swings; daylight at 1/8 of floor area; and a
-  circulation check that erodes the room's free space by half the
-  minimum corridor width and tests whether the doors remain connected.
-
-- **L3 — BIM.** Not built. See below.
-
-Drawing standard lives entirely in `layers.py` — layer names,
-lineweights, text and dimension styles. Changing office convention is a
-one-file edit.
-
-## Three accoreconsole traps
-
-All three were hit for real here, so they are recorded in `acad.py` too:
-
-1. An **invalid answer to a keyword prompt** puts the command into a
-   re-prompt loop (`Yes or No, please.`) that **blocks forever** and
-   ignores stdin EOF. A script that merely runs out of lines mid-command
-   usually aborts cleanly; it is the invalid answer that wedges it.
-   `_run()` therefore enforces a timeout and kills the child, because
-   `subprocess`'s own `TimeoutExpired` leaves it orphaned.
-
-2. The `-PLOT` prompt sequence depends on the output device. With a PDF
-   plotter there is **no** "write the plot to a file?" prompt — it goes
-   straight to the filename — and there **is** a shade-plot prompt after
-   lineweights. Getting this wrong causes trap 1.
-
-3. Given a **relative script path**, accoreconsole neither runs the
-   script nor reports an error: it exits 0 in under a second having done
-   nothing, which is indistinguishable from success. `_run()` resolves
-   and existence-checks both paths first. This one briefly produced a
-   false "no hang" result while testing trap 1.
-
-The sequence in `acad.py` was captured by running the command and
-reading the transcript, not from documentation. If it hangs after an
-AutoCAD upgrade, re-capture it the same way: run with stdout redirected
-to a file and read where it stopped.
-
-## Sheets
-
-`scripts/build_sheet.py` produces a **true 1:50 A3 sheet** with an ISO
-title block, frame, north arrow and graphic scale bar (`sheet.py`,
-`acad.plot_layout_pdf`).
-
-The scale is exact and verified from the DXF, not asserted: the viewport
-is 199 mm of paper showing 9950 mm of model, so 1:50.0000, and the
-10300 mm external width plots at 206.00 mm.
-
-Two things worth knowing:
-
-- Plotting a **named layout** uses a different `-PLOT` prompt sequence
-  from Model. The plot area is `Layout` (not `Limits`), the offset
-  prompt has **no** `[Center]` option — so `plot_pdf`'s `C` would wedge
-  the process here — and three prompts appear that Model never asks.
-  Captured empirically; see `acad.plot_layout_pdf`.
-- `to_dwg` now deletes the target first. `SAVEAS` over an existing file
-  asks "overwrite?", which no script line answers, and that wedges
-  accoreconsole — trap 1 again, found by hitting it.
-
-**Known cosmetic defect:** dashed linetypes (clearance zones, room
-boundaries) plot **solid** through the layout viewport. The `ARCH-DASHED`
-definition in the DXF is correct (300 total, 200 dash, 100 gap) and the
-layer carries it, and `$PSLTSCALE` is now 0, but the dashes still do not
-appear in the plotted PDF. The same geometry DOES render dashed in the
-web review sheet, so the fault is in the AutoCAD plot path, not in the
-linetype definition or the geometry. Cause not isolated beyond that. Impact is low — the zones
-remain legible by line weight — but it is unfixed, not fixed.
-
-## What is deliberately not done yet
-
-- **No sheet layout or title block.** The PDF is model-space extents
-  fitted to A3, not a true 1:50 sheet. This is the next thing to build
-  for output that looks professional rather than merely correct.
-- **No dimension strings** beyond two overall dimensions. Running
-  dimensions to openings and grid lines are not generated.
-- **Wall junctions** are handled by polygon union, which is right for
-  the common cases here but has not been tested on non-orthogonal walls
-  or walls of differing thickness meeting at acute angles.
-- **No BIM.** L0 carries the data an IFC/Revit renderer needs, but
-  nothing consumes it yet.
-
-## Revit
-
-Revit has no local headless mode — there is no `revitcoreconsole`.
-Automation means one of:
-
-1. pyRevit / Dynamo / a C# add-in running inside a licensed, open Revit
-   GUI session. Scripts are written here, run there.
-2. APS Design Automation for Revit — genuinely headless, runs in
-   Autodesk's cloud, bills credits, needs an entitlement.
-3. Skip Revit: emit IFC with `IfcOpenShell` (free, pure Python, runs on
-   Linux) and let Revit import it.
-
-Option 3 is a real deliverable but **not** a substitute for a native
-Revit model: an imported IFC arrives as generic geometry, not native
-parametric walls with Revit's type system, schedules and tags.
-
-## Sharing the review sheet — a real constraint
-
-An artifact that declares the `db` capability (or the full `comments`
-capability) is **organization-internal and cannot be shared by public
-link**. Everyone who reads or writes it must be a signed-in member of
-the owner's organization, and only viewers at "can interact" or above
-write shared data.
-
-So the review sheet as built works for you and for collaborators you
-grant access to. It does **not** work for an arbitrary external client
-handed a link. Two ways out when that day comes:
-
-1. Grant the client access to the artifact ("Can interact" or above).
-   Simplest, needs them signed in to claude.ai.
-2. Rebuild the note layer on `comments: {composer_only: true,
-   customAnchors: true}`, which keeps the artifact publicly shareable.
-   The shell then renders the threads and the page only positions the
-   pins; page-invented anchor names are not kept under that form, so
-   pins must anchor to real DOM elements and carry their location in the
-   compose `label`/`detail`. Read `comments.d.ts` before attempting it.
-
-## Two machines
-
-Windows is required for anything Autodesk-touching (L2, and any Revit
-work). L0 and L1 are pure Python and run fine on Linux, as would the
-IFC path — which makes the Ubuntu box the natural home for BIM
-experiments and for CI on the spec.
+# villa-designer (`archpipe`)
+
+An AI-led villa design system: a **staged method with checks attached**. It
+takes a house from client intent to a furnished, lit, rendered and
+documented design, and every piece of advice it gives cites a published
+source and reports *achieved versus required* rather than an adjective
+("350 mm clear where 450 is needed", never "a bit tight").
+
+It is not a CAD tool and not a layout generator. Its premise is that an AI is
+**strong as a critic and weak as an inventor**: it does not produce good plans
+from nothing, but it can check a plan against sourced figures, name the
+consequence, and order the remedies by how far back each one forces the
+design to go.
+
+> **Status: working research system, not a construction package.** Outputs
+> are design guidance, not code compliance (no jurisdiction pack is loaded),
+> and nothing here replaces a structural, MEP or permit consultant. The
+> bedroom is a capability example; the real villa (a Sheikh Zayed, Egypt
+> project) is in furnished-layout and render-review stage. Several
+> inputs are placeholders until the client supplies a survey and brief. See
+> [docs/ROADMAP.md](docs/ROADMAP.md) for exactly what is and is not done.
+
+## Authority model
+
+**The AI leads. The client governs.**
+
+- Every recommendation arrives with the reason, the cost and what was
+  rejected; not a menu.
+- A client **veto is absolute** and is recorded as a waiver with its reason.
+  Warnings are never silently suppressed, and downstream consequences are
+  stated at the moment of the veto.
+- **Silence is not approval.** A gate needs an explicit yes.
+
+## What it can do
+
+| Capability | What it does | Where |
+|---|---|---|
+| **Eight-stage method** | Intent, Ground, Fit, Order, Rooms, Systems, Substance, Proof, with quality gates and thirteen named backward loops ordering remedies cheapest-first | [method](docs/method/villa-design-method.md), [PRD](docs/PRD.md) |
+| **Stages 0-2 (no CAD needed)** | Machine-readable brief and site; NOAA solar-position engine verified against almanac times; feasibility arithmetic that returns a *cut ladder* | `brief.py`, `site.py`, `solar.py`, `feasibility.py` |
+| **Rule engine (the critic)** | Rules that cannot be created without a source citation; violation / warning / advisory severities; advisory findings never carry a fake measurement. Values are re-read from held books and free standards by tests | `rules.py`, `catalogue.py`, [rule audit](docs/guidance/rule-audit.md) |
+| **Evidence library** | Full-text and semantic search over held books and standards (printed page to cite); a passage counts as verified only when read and applicable | `knowledge_index.py`, [guidance](docs/guidance/README.md) |
+| **Concept generation and critique** | Typology catalogue and constraint-solver variants, judged by a critic calibrated on published plan datasets (CubiCasa5k, Swiss Dwellings) | `concept/`, [ADR-0016](docs/decisions/ADR-0016-concept-search-and-critique.md) |
+| **Climate, thermal and daylight** | Window studies with shading fins, TM59 overheating screen per room, Radiance daylight on Cairo-region weather | `thermal.py`, `daylight.py`, [ADR-0017](docs/decisions/ADR-0017-thermal-window-study.md) |
+| **Lighting** | IES/LDT photometry reader, lux grids and heat maps, layered-lighting checks, and a real-manufacturer luminaire library with exact specifications and alternates | `photometry.py`, `lighting.py`, `luminaires/` |
+| **Product library** | About 3,550 indexed and 469 verified surfaces, fabrics, furniture, plants and decor; buyable products kept apart from render look-alikes | `products/`, [ADR-0015](docs/decisions/ADR-0015-product-library.md) |
+| **Revit 2027 round-trip** | Text spec authors a native model; the saved model is re-extracted and compared with the input; native plans, ceiling plans, elevations, sections and sheets; markup survives save/extract | `revit/`, [validation record](docs/bedroom-validation.md) |
+| **Photoreal rendering** | Blender Cycles on a GPU workstation, calibrated against independent photometric probes, with automatic render QA (window view, daylight through glass, colour cast, clipping, cloth, level camera and more) | `blender/`, `render_qa.py`, [ADR-0013](docs/decisions/ADR-0013-presentation-renders.md) |
+| **Hand-off** | Schedules, quantities, relative cost, specification book and an IFC4 export checked against the spec, plus an explicit list of consultant scope that is *missing in-house* (glare, HVAC, electrical, plumbing, structure, permits) | `deliverables.py`, `scripts/handoff.py` |
+| **Assistant tools (MCP)** | Typed, mostly read-only operations so an AI assistant calls tools instead of reconstructing shell sequences | [docs/MCP.md](docs/MCP.md) |
+
+The legacy 2D pipeline (spec to DXF to DWG to plotted A3 sheet, plus a
+web review sheet with millimetre-accurate pinned notes) still works and is
+documented in [docs/pipeline-reference.md](docs/pipeline-reference.md).
+
+## The bedroom capability example
+
+One room exercises the whole chain end to end, so each link can be tested
+independently of the real villa:
+
+1. Text specification builds a native Revit 2027 model.
+2. The saved model is re-extracted and compared with the input (57 checks).
+3. The rule engine reviews the *measured* geometry.
+4. Native floor plan, reflected ceiling plan, elevations, section and 3D view go onto A3 sheets.
+5. A lighting report is computed from real fixture positions and joined photometry.
+6. The scene is rebuilt on the render workstation; rendered direct-light values agree with the analytical calculation (median ratio about 0.97 over 10,944 points).
+7. Synthetic markup (text and a revision cloud) survives save and extraction.
+
+```bash
+.venv/Scripts/python scripts/run_bedroom.py --resume
+```
+
+Evidence lands in `out/bedroom-acceptance.json`, initially *failed* and
+marked passed only after every gate completes. Details and limitations:
+[docs/bedroom-validation.md](docs/bedroom-validation.md).
+
+## Quick start
+
+Requires Python 3 (built on 3.14). Stages 0-2, the rule engine, and the
+tests need **no Autodesk software**.
+
+```bash
+python -m venv .venv
+.venv/Scripts/python -m pip install -r requirements.txt   # + requirements-mcp.txt for MCP
+export PYTHONPATH=src                                      # Windows cmd: set PYTHONPATH=src
+
+python scripts/verify.py          # expect: RESULT: ALL PASS (121 checks, positive and negative)
+
+python -m archpipe brief spec/villa-brief.yaml                          # Stage 0
+python -m archpipe site  spec/villa-site.yaml                           # Stage 1 + sun study
+python -m archpipe fit   spec/villa-brief.yaml spec/villa-site.yaml     # Stage 2
+python -m archpipe design spec/apartment.yaml                           # design review
+```
+
+Every stage command **exits non-zero when its gate is closed** (`fit` when
+the brief does not fit the plot, `design` on a violation). That is
+by design, so each command works as a gate in a script.
+
+`spec/villa-brief.yaml` and `spec/villa-site.yaml` are **placeholders**.
+Latitude drives every orientation figure, so the sun study on placeholder
+data means nothing for a real site.
+
+### Optional infrastructure
+
+| Needs | For |
+|---|---|
+| Windows + licensed **Revit 2027** and pyRevit | Native model authoring, extraction, drawings ([SETUP](docs/SETUP.md), [ADR-0011](docs/decisions/ADR-0011-target-revit-2027.md)). Files authored in 2027 cannot open in 2025. |
+| Full AutoCAD (not LT) | DWG and plotted PDF path only |
+| Ubuntu workstation with NVIDIA GPU, Blender 4.2, Radiance | Cycles renders, independent lighting and daylight studies, candidate sweeps ([compute placement](docs/ops/compute-placement.md), [workstation jobs](docs/ops/workstation-jobs.md)) |
+| Held books and standards (never committed) | Evidence search; `verify.py` fails if a PDF/EPUB is committed |
+
+Third-party assets, manufacturer files, client documents and generated
+`out/` content are deliberately not in the repository; manifests record
+their source and hash.
+
+## Working with AI assistants
+
+- **MCP server:** `scripts/archpipe_mcp.py` exposes project status, model
+  reading and review, evidence and book search, product and luminaire search,
+  render checks, lighting probes, concept generation and critique, and
+  bounded workstation jobs. There is deliberately no arbitrary-command
+  tool. Rebuilds are marked as write operations. See [docs/MCP.md](docs/MCP.md).
+- **Skills** (canonical in `.agents/skills/`): `villa-method`, one per stage
+  (`villa-intent` to `villa-proof`), `revit-roundtrip`, `lighting-proof`,
+  `lighting-library`, `product-library`, `knowledge-search`,
+  `photoreal-render`, `villa-render`, `workstation-jobs` and
+  `defect-learning`.
+- **Agent roles** in `agents/roles.json` (design lead, architectural critic,
+  render critic, lighting reviewer, thermal analyst, product and source
+  curators, Revit and workstation executors). Claude and Codex adapters are
+  generated by `scripts/sync_agent_assets.py`; run it with `--check` to
+  detect drift.
+- **Launch the assistant from the repository root.** Project agents and
+  skills are only discovered in the directory the session starts in.
+
+## Engineering disciplines
+
+These are the project's value; breaking one quietly is worse than not doing
+the work.
+
+1. Every rule cites a source; `rules.Rule` raises without one.
+2. No invented standards, figures or clause numbers. A readable citation is
+   not verification.
+3. Achieved-versus-required, never an adjective.
+4. Advisory findings carry no measurement.
+5. Verify against something independent (almanac times, hand-calculable
+   fixtures, models whose dimensions were chosen rather than measured).
+6. Negative tests always: does it stay quiet when it should?
+7. Every defect leaves a guard behind, recorded in [docs/LEARNINGS.md](docs/LEARNINGS.md),
+   preferably as an automatic check proven against a *real* reproduction.
+   Presentation renders pass `render_qa` before anyone is shown them, and
+   exposure is never tuned to hide a dark design.
+
+## Repository layout
+
+```
+docs/            method, PRD, ADRs (each with what was rejected), guidance, ops, learnings
+src/archpipe/    rule engine, stages 0-2, concept, thermal/daylight, lighting, luminaires,
+                 products, rendering contract, Revit/AutoCAD adapters
+src/archpipe/blender/   scene build, photometric calibration, lux measurement
+revit/           pyRevit extractor, probes, test-model builder
+scripts/         verify.py, run_bedroom.py, MCP server, workstation and villa tooling
+knowledge/       precedents, library index, product manifests (no third-party sources)
+.agents/ agents/ canonical skills and agent roles
+tests/           regression tests, including reproduced defects
+spec/            brief, site and example specifications
+```
+
+## Where to read next
+
+- New here: [docs/ROADMAP.md](docs/ROADMAP.md), then [CLAUDE.md](CLAUDE.md) (the working agreement).
+- Method: [docs/method/villa-design-method.md](docs/method/villa-design-method.md), [docs/PRD.md](docs/PRD.md), [docs/decisions/](docs/decisions/).
+- Measured traps and fixes: [docs/LEARNINGS.md](docs/LEARNINGS.md).
+- Current villa work: [docs/D1-CONTINUATION.md](docs/D1-CONTINUATION.md), [docs/villa-render-scene.md](docs/villa-render-scene.md).
+- Environment rebuild: [docs/SETUP.md](docs/SETUP.md). Historical notes: [docs/HANDOVER.md](docs/HANDOVER.md).
