@@ -5,6 +5,14 @@
 decision) builds and renders it. `scripts/villa_render.py` is the driver: deploy to the workstation, render, pull,
 QA. The renderer never invents content: anything not in scene.json is not in the image.
 
+When a later design pass enriches a view, material, fixture, furnishing item or opening, it uses
+`fill_defaults` for absent fields and `override` with a reason for an intentional replacement.
+Explicit `None`, zero and empty values remain authored. The `overrides` list retains each prior
+value, new value and reason. `tests/test_authored_values.py` compares declared cameras with the
+exported scene, furnishing dimensions with the catalogue and product, and door width and type with
+the initial specification across supported options. A scene update must preserve unrelated fields
+when its `overrides` entries are removed for comparison.
+
 ## Product furniture and climbers (WP4b)
 
 `villa_furnish.PRODUCT` maps a piece to a library asset and its real width, depth, height, and one native-to-metre

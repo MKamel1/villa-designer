@@ -13,6 +13,7 @@ from pathlib import Path
 
 from .. import solar, villa_env as E
 from . import villa_furniture_detail as FD
+from .authored_values import fill_defaults, override
 
 GROUND = -3.0
 PLOT = tuple(v / 1000 for v in E.plot())
@@ -520,7 +521,7 @@ def build(spec, lay=None):
                  (species, care(species), _care_note(species), credits[asset],
                   height, spread, extra))
         p = _prop(pid, asset, center, GROUND, height, label)
-        p.update(bed=bed, layer=layer, center=center, spread_m=spread, species=species)
+        fill_defaults(p, dict(bed=bed, layer=layer, center=center, spread_m=spread, species=species))
         props.append(p); plants.append(p)
 
     def clump(pid, bed, layer, asset, species, center, extra=""):
@@ -531,7 +532,7 @@ def build(spec, lay=None):
                  "not a per-plant nursery figure)%s" %
                  (species, care(species), _care_note(species), credits[asset], spread, extra))
         p = _clump_prop(pid, asset, center, GROUND, label)
-        p.update(bed=bed, layer=layer, center=center, spread_m=spread, species=species)
+        fill_defaults(p, dict(bed=bed, layer=layer, center=center, spread_m=spread, species=species))
         props.append(p); plants.append(p)
 
     # Shade specimens are scaled to nursery heights, not native glTF units.
@@ -639,8 +640,8 @@ def build(spec, lay=None):
               "Gazania rigens; care: %s (%s); %s; ASSUMED nursery height 0.25 m; orange accent, "
               "not drift-counted" % (care("Gazania rigens"), _care_note("Gazania rigens"),
                                      credits["flower_gazania"]))
-    p.update(bed="south", layer="front-accent", center=(26.70, -28.50),
-             spread_m=SPREAD["Gazania rigens"], species="Gazania rigens")
+    fill_defaults(p, dict(bed="south", layer="front-accent", center=(26.70, -28.50),
+                          spread_m=SPREAD["Gazania rigens"], species="Gazania rigens"))
     props.append(p); plants.append(p)
 
     # Slender wall trellises and coloured climbing masses; the mass is a
@@ -756,8 +757,8 @@ def build(spec, lay=None):
                   (x, -22.70), .32, height,
                   "%s; care: %s (%s); %s; shallow-root planter, nursery height %.2f m ASSUMED" %
                   (species, care(species), _care_note(species), credits[asset], height), zone="top")
-        p.update(bed="top-deck" if i < 4 else "top-roof", layer="edge",
-                 center=(x, -22.70), spread_m=SPREAD[species], species=species)
+        fill_defaults(p, dict(bed="top-deck" if i < 4 else "top-roof", layer="edge",
+                              center=(x, -22.70), spread_m=SPREAD[species], species=species))
         props.append(p); plants.append(p)
     # A second perimeter row along the south (building) wall, using the same groundcover-clump species the ground
     # beds use for their yellow/white accents (client: top garden "reads bleak: few thin planters" -- a genuinely
@@ -774,7 +775,7 @@ def build(spec, lay=None):
                   "%s; care: %s (%s); %s; south-wall perimeter drift, ASSUMED clump height %.2f m, achieved "
                   "width %.2f m (scaled down from the ground-bed native-scale accent, CLUMP_SPREAD)" %
                   (species, care(species), _care_note(species), credits[asset], height, width_), zone="top")
-        p.update(bed=bed, layer="south-edge", center=center, spread_m=width_, species=species)
+        fill_defaults(p, dict(bed=bed, layer="south-edge", center=center, spread_m=width_, species=species))
         props.append(p); plants.append(p)
     # Two shallow northern perimeter containers bring visible shrub mass into the gate view. The previous
     # lavender row scaled to only ~0.21 m across each plant and left this rail almost bare in v25.
@@ -788,8 +789,8 @@ def build(spec, lay=None):
         p = _prop("landscape-top-north-ixora-%d" % i, "sf_ixora", (x, y), .30, .55,
                   "Ixora coccinea; care: %s (%s); %s; nursery height 0.55 m ASSUMED" %
                   (care("Ixora coccinea"), _care_note("Ixora coccinea"), credits["sf_ixora"]), zone="top")
-        p.update(bed="top-deck", layer="north-edge", center=(x, y), spread_m=SPREAD["Ixora coccinea"],
-                 species="Ixora coccinea")
+        fill_defaults(p, dict(bed="top-deck", layer="north-edge", center=(x, y),
+                              spread_m=SPREAD["Ixora coccinea"], species="Ixora coccinea"))
         props.append(p); plants.append(p)
     # One potted Bougainvillea accent per planter (brief item 5), off the
     # edge-species drift so it is not drift-counted. The deck pot is a
@@ -808,8 +809,8 @@ def build(spec, lay=None):
                   "not drift-counted" % (care("Bougainvillea glabra"), _care_note("Bougainvillea glabra"),
                                         credits["sf_bougainvillea"]), zone="top")
         center = (x, -22.10 if name == "deck" else -21.50)
-        p.update(bed="top-" + name, layer="edge-accent", center=center,
-                 spread_m=SPREAD["Bougainvillea glabra"], species="Bougainvillea glabra")
+        fill_defaults(p, dict(bed="top-" + name, layer="edge-accent", center=center,
+                              spread_m=SPREAD["Bougainvillea glabra"], species="Bougainvillea glabra"))
         props.append(p); plants.append(p)
     # A potted olive (brief item 5) replaces the former frangipani; placed
     # on the roof (the deck's clear window is occupied by the study-door
@@ -842,11 +843,13 @@ def build(spec, lay=None):
     native = PROP_BOUNDS["sf_wooden_bench"]
     plan_scale = BENCH_LENGTH_M / (native[1][2] - native[0][2])
     height_scale = BENCH_HEIGHT_M / (native[1][1] - native[0][1])
-    bench["scale"] = [plan_scale, plan_scale, height_scale]
+    override(bench, "scale", [plan_scale, plan_scale, height_scale],
+             "fit bench plan length and seat height independently to the approved geometry")
     # _prop centred using its original uniform height scale; centre again with the final plan scale.
     cx = plan_scale * (native[0][0] + native[1][0]) / 2
     cy = -plan_scale * (native[0][2] + native[1][2]) / 2
-    bench["position"][:2] = [11.5 - cx, -21.75 - cy]
+    override(bench, "position", [11.5 - cx, -21.75 - cy] + bench["position"][2:],
+             "recenter the bench after its independent plan scale is applied")
     props.append(bench)
 
     failures = (extent_violations(props, rooms) + object_extent_violations(objects, rooms) +

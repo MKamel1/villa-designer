@@ -24,6 +24,7 @@ from . import revit_spec as RS
 from . import villa as V
 from . import villa_parking as VP
 from . import villa_r11 as R
+from .authored_values import fill_defaults, override
 
 SIDES = ("front", "back", "left", "right")
 DIRS = {0: {"front": (0, 1), "back": (0, -1), "right": (1, 0), "left": (-1, 0)},
@@ -374,7 +375,11 @@ def layout(lay=None, products=True):
             for it in items:
                 saved = _PRODUCT_LAYOUT_CACHE[cache_key].get(it["id"])
                 if saved:
-                    it.update(saved)
+                    for key, value in saved.items():
+                        if key in it:
+                            override(it, key, value, "accepted catalogue product fit restored from layout cache")
+                        else:
+                            fill_defaults(it, {key: value})
             return items
         # Try each chosen product at its own size. Preserve its original back line
         # against the same wall, then run every furnishing check on the new box.
@@ -396,18 +401,26 @@ def layout(lay=None, products=True):
                                           "approved 0.35 m bedside arrangement kept")
                 continue
             old = (it["cx"], it["cy"], it["w"], it["d"], it["h"])
+            prior_overrides = list(it.get("overrides", []))
+            reason = "fit accepted catalogue product %s to its authored wall" % p["asset"]
             front_x, front_y = DIRS[it["rot"]]["front"]
             shift = (p["d"] - it["d"]) / 2
-            it["cx"] = round(it["cx"] + front_x * shift, 4)
-            it["cy"] = round(it["cy"] + front_y * shift, 4)
-            it["w"], it["d"] = p["w"], p["d"]
+            override(it, "cx", round(it["cx"] + front_x * shift, 4), reason)
+            override(it, "cy", round(it["cy"] + front_y * shift, 4), reason)
+            override(it, "w", p["w"], reason)
+            override(it, "d", p["d"], reason)
             if it["id"] != "pb-bed":
-                it["h"] = p["h"]
+                override(it, "h", p["h"], reason)
             trial = check(items, lay, _extended=True)
             new = [(key, problem) for key, row in trial.items() for problem in row["problems"]
                    if problem not in baseline[key]["problems"]]
             if new:
-                it["cx"], it["cy"], it["w"], it["d"], it["h"] = old
+                for key, value in zip(("cx", "cy", "w", "d", "h"), old):
+                    it[key] = value
+                if prior_overrides:
+                    it["overrides"] = prior_overrides
+                else:
+                    it.pop("overrides", None)
                 it["product_rejected"] = "%s: %s" % new[0]
             else:
                 it["product"] = p["asset"]

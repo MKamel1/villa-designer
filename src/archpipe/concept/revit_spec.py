@@ -13,6 +13,7 @@ from __future__ import annotations
 from .. import vocabulary as vocab
 from . import stairs as S
 from . import villa as V
+from .authored_values import fill_defaults, override
 
 OPEN = {"kitchen", "dining", "living", "hall", "corridor", "entrance", "landing", "stair"}
 EXT_T, INT_T = 0.20, 0.10
@@ -363,8 +364,14 @@ def _d1_details(lay, spec):
     from . import villa_furnish as F
     door = next(d for d in spec["doors"] if set(d["rooms"]) == {"kitchen", "dirty-kitchen"})
     door_lo = round(door["x"] - door["width"] / 2, 3)
-    door.update(sliding=True, slide_type="telescopic-pocket-3", leaf_count=3, panel_width=0.4,
-                pocket_side="west", pocket_span=[round(door_lo - 0.4, 3), door_lo], pocket_wall_thickness=0.15)
+    pocket_detail = dict(sliding=True, slide_type="telescopic-pocket-3", leaf_count=3, panel_width=0.4,
+                         pocket_side="west", pocket_span=[round(door_lo - 0.4, 3), door_lo],
+                         pocket_wall_thickness=0.15)
+    for key, value in pocket_detail.items():
+        if key in door:
+            override(door, key, value, "client-approved D1 kitchen dirty-kitchen pocket door detail")
+        else:
+            fill_defaults(door, {key: value})
     spec["pocket_buildouts"].append(dict(id="kitchen-dirty-pocket", level="B", wall_axis="h", y=door["y"],
                                          x0=door["pocket_span"][0], x1=door["pocket_span"][1],
                                          thickness=0.15, extra_side="dirty-kitchen", height=door["height"]))
@@ -564,11 +571,11 @@ def _clear_columns(spec):
                 o["dropped"] = "column-free run %.2f m" % (b - a)
                 continue
             mid = round((a + b) / 2, 3)
-            o["width"] = width
+            override(o, "width", width, "column-free facade run limits opening width")
         if ax == "h":
-            o["x"] = mid
+            override(o, "x", mid, "centre opening in the selected column-free facade run")
         else:
-            o["y"] = mid
+            override(o, "y", mid, "centre opening in the selected column-free facade run")
     spec["dropped"] = [{"room": o.get("room") or "/".join(o.get("rooms", [])), "level": o["level"],
                         "reason": o["dropped"]} for o in spec["windows"] + spec["doors"] if "dropped" in o]
     spec["windows"] = [w for w in spec["windows"] if "dropped" not in w]
@@ -668,7 +675,9 @@ def _parking(lay, spec, pk2):
         if (wdw["level"] == "GF" and wdw["room"] != "study-game" and abs(wdw["y"] - V.YE) < 1e-6
                 and r0 - 1e-6 <= wdw["x"] <= d1 + 1e-6):
             sill = round(eye + 0.1, 2)
-            wdw["sill"], wdw["height"] = sill, round(HEAD - sill, 2)
+            override(wdw, "sill", sill, "raise ramp-facing window above standing eye level for privacy")
+            override(wdw, "height", round(HEAD - sill, 2),
+                     "retain the authored window head after privacy sill rises")
     # guarding (1.1 m, card ukadk-guarding-height-external): the ramp's west edge over the sunken north patio, the
     # deck and the ramp's top along the east fence where the fence is under 1.1 m above them, and the deck end
     g, rails = 1.1, []

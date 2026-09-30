@@ -30,6 +30,7 @@ from . import villa_furnish as F
 from . import villa_furnish3d as F3
 from . import villa_lighting as VL
 from . import villa_r11 as R
+from .authored_values import fill_defaults, override
 
 LZ = {"B": -3.0, "GF": 0.0}
 ROOT = Path(__file__).resolve().parents[3]
@@ -214,7 +215,7 @@ M["walnut-grain-y"] = dict(M["walnut"], grain_axis="y", note="ASSUMED walnut ven
 PUBLIC_B = ("lounge", "lounge-nook", "stair-b", "hall-b", "entry-b", "family", "kitchen", "kitchen-island", "dining",
             "dining-side", "living", "bar-alcove", "dirty-kitchen", "pantry", "store-ramp")
 FINISH = {r: ("travertine", "plaster-warm-white", "ceiling-white") for r in PUBLIC_B}
-FINISH.update({
+fill_defaults(FINISH, {
     "cinema": ("rug", "taupe-fabric", "ceiling-white"),
     "guest-wc": ("marble-bath", "marble-bath", "ceiling-white"),
     "family-bath": ("marble-bath", "marble-bath", "ceiling-white"),
@@ -222,7 +223,7 @@ FINISH.update({
 })
 for r in ("landing-gf", "corridor", "gallery-end", "study-game", "kids-a", "kids-b", "parents-bed", "parents-entry",
           "parents-dressing", "parents-dressing-ext"):
-    FINISH[r] = ("oak-floor", "plaster-warm-white", "ceiling-white")
+    fill_defaults(FINISH, {r: ("oak-floor", "plaster-warm-white", "ceiling-white")})
 UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")   # ceiling = the ramp/deck soffit lining
 # Curtains (client 2026-09-28): every window/glazed garden door in a room of one of these occupancies gets a
 # curtain -- "bedrooms + living spaces". Kitchens ("kitchen"/"utility"), sanitary rooms ("wc"/"bathroom"/"ensuite")
@@ -531,8 +532,15 @@ def build(lay=None, views=None):
     notes.append("ASSUMED exterior finish: our walls, ground-floor perimeter beams, exposed slab/ramp edges and boundary/fence walls use smooth very light grey-green mineral paint, reflectance 0.65. Entrance steps are paved; soffits are painted white. Neighbour and apartment context remains neutral mineral render; all exposed construction faces receive a stated finish.")
     for v in views:
         if v["id"] in hide:
-            v["hide_meshes"] = hide[v["id"]]
-            v.setdefault("caption_notes", []).append("Taken from the doorway with the door open (its leaf not shown).")
+            if "hide_meshes" in v:
+                override(v, "hide_meshes", v["hide_meshes"] + hide[v["id"]],
+                         "hide the open doorway leaf while retaining declared hidden meshes")
+            else:
+                fill_defaults(v, {"hide_meshes": hide[v["id"]]})
+            fill_defaults(v, {"caption_notes": []})
+            override(v, "caption_notes", v["caption_notes"] +
+                     ["Taken from the doorway with the door open (its leaf not shown)."],
+                     "explain the hidden open doorway leaf in the view caption")
 
     # ---- per-room floor finishes (2 mm over the slab) and false ceilings / coves
     cove_rooms = {f.extra.get("cove_room") for f in VL.design(lay) if f.kind == "COVE" and f.extra.get("cove_room")}
@@ -1311,10 +1319,10 @@ def build(lay=None, views=None):
             # (box_faces, both faces + the four edges) and interfaces=2, matching the fitting's OWN measured
             # transmittance (0.91 total, both interfaces) and IOR (1.52) from revit_spec's bath_fittings.
             GLASS_T = 0.01
-            mats[mname] = dict(kind="glass", base_rgb=[1, 1, 1], transmittance=fitting["transmittance"],
+            fill_defaults(mats, {mname: dict(kind="glass", base_rgb=[1, 1, 1], transmittance=fitting["transmittance"],
                                ior=fitting["ior"], roughness=0.0, interfaces=2,
                                note="fixed frameless bath screen, 10 mm closed pane, %s (%s)"
-                                    % (fitting["id"], fitting["optical_note"]))
+                                    % (fitting["id"], fitting["optical_note"]))})
             mesh(fid, mname, box_faces(fitting["x0"], fitting["y"] - GLASS_T / 2, fitting["sill"],
                  fitting["x1"], fitting["y"] + GLASS_T / 2, fitting["head"]), "fixture", room=fitting["room"],
                  label="ASSUMED fixed frameless bath screen, 10 mm closed pane, open entry at far end")
@@ -1521,7 +1529,11 @@ def build(lay=None, views=None):
         suffixes = ("-heavy-closed",) if v["state"] == "day" else ("-heavy-open-l", "-heavy-open-r")
         hidden = [c["id"] + s for c in curtains for s in suffixes]
         if hidden:
-            v.setdefault("hide_meshes", []).extend(hidden)
+            if "hide_meshes" in v:
+                override(v, "hide_meshes", v["hide_meshes"] + hidden,
+                         "hide curtain leaves that are open in this view state")
+            else:
+                fill_defaults(v, {"hide_meshes": hidden})
 
     from . import villa_landscape as LAND
     land_meshes, land_props, land_notes, _ = LAND.build(sp, lay)
@@ -2061,8 +2073,8 @@ def props(lay):
 
     def plant(pid, asset, x, y, z, room, support_id=None, s=1.0, label=""):
         add(pid, asset, x, y, z, s=s, label=label)
-        out[-1].update(indoor_plant=True, room=room, container="integrated-pot",
-                       support_id=support_id or "finished-floor")
+        fill_defaults(out[-1], dict(indoor_plant=True, room=room, container="integrated-pot",
+                                    support_id=support_id or "finished-floor"))
 
     def c(k):
         q = fp[k]
@@ -2185,7 +2197,7 @@ EXPOSURE = {  # PRE-REGISTERED (2026-09-27) before the first render; incident me
 }
 
 
-def VIEWS(lay=None):
+def VIEWS(lay=None, resolve=True):
     """Client view set, with level cameras at 1.35 m standing eye height (1.20 m seated).
 
     Check the authored garden and cross-room directions with scripts/villa_render_views.py.
@@ -2203,8 +2215,8 @@ def VIEWS(lay=None):
                   "resolution": [1920, 1280],
                   "layers_on": layers if layers is not None else (["ambient", "task", "accent", "decorative"]
                                                                   if state != "day" else []),
-                  "dimmers": dimmers or {},
-                  "exposure": exposure or (state if state in EXPOSURE else "day"),
+                  "dimmers": dict(dimmers) if dimmers is not None else {},
+                  "exposure": exposure if exposure is not None else (state if state in EXPOSURE else "day"),
                   "subjects": subjects, "samples": 1024, "room": room, "final_only": final_only,
                   "seated": seated})
 
@@ -2301,7 +2313,6 @@ def VIEWS(lay=None):
     v("v29-under-stair-store", "Under-stair storage from the lounge", "day", [5.2, -25.9, B + 1.35],
       [5.55, -28.4, B + 1.35], 24, ["stair-flight-store", "stair-landing-store"],
       final_only=True, **BASEMENT_DAY)
-    V[-1]["dimmers"]["accent"] = 1.0
     V[-1]["caption_notes"] = ["24 mm view from the lounge. Telescoping sliding fronts retracted into "
                               "the side pockets; each open bay has an ASSUMED internal LED strip. "
                               "Dressing inside: vacuum, suitcase, seasonal boxes and folded linens (ASSUMED)."]
@@ -2329,6 +2340,14 @@ def VIEWS(lay=None):
       [20.3, -28.5, B + 1.35], 24, ["living-sofa", "library-daybed"], final_only=True, **BASEMENT_DAY)
     v("v34-basement-south-north", "Basement open space, south to north", "day", [17.8, -28.9, B + 1.35],
       [19.85, -27.2, B + 1.35], 24, ["living-sofa"], final_only=True, **BASEMENT_DAY)
+    if not resolve:
+        return V
+    # The old shared BASEMENT_DAY dictionary made v29's full accent setting leak into six other views, whose
+    # captions state 50 %. Only v29 changes, on its own copy; the others keep their declared (captioned) 0.5.
+    for view in V:
+        if view["id"] == "v29-under-stair-store":
+            override(view, "dimmers", dict(view["dimmers"], accent=1.0),
+                     "under-stair storage accent strip is shown at full output")
     # ADR-0013 part 8: 24 mm, a LEVEL camera at eye height 1.35 m (1.20 m seated), lens shift not tilt
     from . import render_views as RV
     sp_ = RS.build(lay)
@@ -2355,7 +2374,7 @@ def VIEWS(lay=None):
                                   extra=floor_props)
                 if not got16["subjects_in_frame"]:
                     raise ValueError("%s: even 16 mm cannot hold %s" % (x["id"], x["subjects"]))
-                c["lens_mm"] = 16
+                override(c, "lens_mm", 16, "room subjects require the chosen 16 mm frame")
                 c["lens_basis"] = ("widest subject corner %.1f deg off axis from the best standing point; 24 mm holds "
                                    "%.1f, 16 mm holds %.1f; at 16 mm widest %.1f deg" % (
                                        got["widest_deg"], half24, half16, got16["widest_deg"]))
@@ -2364,11 +2383,13 @@ def VIEWS(lay=None):
                     "point (%s). Wider than the eye." % c["lens_basis"])
                 got = got16
             else:
-                c["lens_mm"] = 24
-            c["position"] = got["position"] + [round(lvz + eye, 3)]
-            c["target"] = got["target"] + [round(lvz + eye, 3)]
-            c["shift_y"] = 0.0
-            c["home_room"] = room
+                fill_defaults(c, {"lens_mm": 24})
+            override(c, "position", got["position"] + [round(lvz + eye, 3)],
+                     "room chooser positions the camera to include declared subjects")
+            override(c, "target", got["target"] + [round(lvz + eye, 3)],
+                     "room chooser aims the camera at declared subjects")
+            override(c, "shift_y", 0.0, "room chooser uses a level camera")
+            fill_defaults(c, {"home_room": room})
             inside = lay["rooms"][room]["rect"]
             # strictly inside, as render_views does: a point ON the room's edge stands in a door opening
             c["reframed"] = "doorway" if (RV._in_opening(sp_, lay["rooms"][room]["level"], got["position"][0],
@@ -2377,17 +2398,21 @@ def VIEWS(lay=None):
                                                inside[1] < got["position"][1] < inside[3])) else "chosen"
             continue
         # authored interior camera (the stair): level at eye height, framed by `frame`
-        c["position"][2] = round(lvz + eye, 3)
-        c["target"][2] = c["position"][2]
+        override(c, "position", c["position"][:2] + [round(lvz + eye, 3)],
+                 "camera eye height follows the standing or seated view intent")
+        override(c, "target", c["target"][:2] + [c["position"][2]],
+                 "camera target is level with eye height")
         # keep the authored lens: forcing 24 mm here silently overrode v29's 16 mm (whose lens_basis needed 43.7 deg)
-        c["lens_mm"] = c.get("lens_mm") or 24
-        c["shift_y"] = c.get("shift_y", 0.0)             # authored shift kept (was forced to 0 except v11)
-        c["home_room"] = next((rid for rid, r in lay["rooms"].items() if r["level"] == ("B" if lvz < -0.1 else "GF")
-                               and r["rect"][0] <= c["position"][0] <= r["rect"][2]
-                               and r["rect"][1] <= c["position"][1] <= r["rect"][3]), None)
+        fill_defaults(c, {"lens_mm": 24, "shift_y": 0.0})
+        fill_defaults(c, {"home_room": next((rid for rid, r in lay["rooms"].items()
+                                               if r["level"] == ("B" if lvz < -0.1 else "GF")
+                                               and r["rect"][0] <= c["position"][0] <= r["rect"][2]
+                                               and r["rect"][1] <= c["position"][1] <= r["rect"][3]), None)})
         pos, tgt, moved, widest = frame(lay, c["position"][:2], c["target"][:2], "B" if lvz < -0.1 else "GF",
                                         x["subjects"], c["sensor_mm"], c["lens_mm"])
-        c["position"][:2], c["target"][:2], c["reframed"] = pos, tgt, moved
+        override(c, "position", pos + c["position"][2:], "frame adjusts standing point to include subjects")
+        override(c, "target", tgt + c["target"][2:], "frame adjusts aim to include subjects")
+        fill_defaults(c, {"reframed": moved})
     # sun per view (laptop side, archpipe.solar)
     from datetime import datetime
     from ..solar import sun_position

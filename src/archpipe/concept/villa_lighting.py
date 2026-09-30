@@ -27,6 +27,7 @@ Photometry: until a manufacturer file is bound to a kind (`PRODUCTS`), a kind us
 cosine-power distribution with the kind's stated beam and lumens (`generic_ies`), and every output says so.
 """
 from __future__ import annotations
+from .authored_values import fill_defaults
 
 import math
 from dataclasses import dataclass, field
@@ -502,7 +503,7 @@ def design(lay=None):
     # ASSUMED initial driver setting; final dimmer scene is measured in the render.
     for fixture in out:
         if fixture.room == "parents-ensuite":
-            fixture.extra["dimmer"] = 0.4
+            fill_defaults(fixture.extra, {"dimmer": 0.4})
     pb_ = fp["pe-basin"]
     strip("TOE", "parents-ensuite", (pb_[2] + 0.02, pb_[1] + 0.03), (pb_[2] + 0.02, pb_[3] - 0.03), 0.30,
           (0.3, 0, -1), level="GF", why="glow under the vanity: night light")
