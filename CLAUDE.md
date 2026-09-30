@@ -65,6 +65,8 @@ Every stage command exits non-zero when its gate is closed — that is by
 design, not a failure: `fit` exits 1 when the brief does not fit the
 plot, `design` exits 1 on a violation.
 
+For the Python unittest suite, set `NO_COLOR=1` and use the process exit status as the pass/fail result. A text filter for `FAILED` missed coloured output during the R3b lighting integration; see `lighting-product-hidden-state` in `docs/LEARNINGS.md`.
+
 ## Environment
 
 - **Revit 2027 is the target** (ADR-0011, supersedes ADR-0008). Verified:

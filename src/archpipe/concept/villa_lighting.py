@@ -23,7 +23,7 @@ above the floor (a plenum for the flush fittings and coves under the 2.80 m slab
 2.80 m -> noted); under the ramp and deck, 0.10 m below the soffit. Coves: a 0.40 m perimeter band at 2.70 m round a
 field raised to 2.80 m, the LED strip on the band's inner edge.
 
-Photometry: until a manufacturer file is bound to a kind (`PRODUCTS`), a kind uses a GENERIC rotationally symmetric
+Photometry: if no verified manufacturer file exists for a kind, it uses a GENERIC rotationally symmetric
 cosine-power distribution with the kind's stated beam and lumens (`generic_ies`), and every output says so.
 """
 from __future__ import annotations
@@ -109,11 +109,15 @@ PRODUCT_CHOICE = {
                                        "Laser Evo D75 Soft Flood 33 deg grazing from 0.3 m"),
 }
 PRODUCTS: dict[str, dict] = {}
+_products_bound = False
 
 
 def bind_products(ies_dir=None):
     """Export each chosen verified product's IES (from its LDT) and bind it to its kind; a product missing from the
     library leaves the kind generic (stated in every output)."""
+    global _products_bound
+    if _products_bound:
+        return PRODUCTS
     from pathlib import Path
     from ..luminaires import library as LIB
     ies_dir = Path(ies_dir or Path(__file__).resolve().parents[3] / "out" / "villa" / "render-d1" / "ies")
@@ -125,7 +129,13 @@ def bind_products(ies_dir=None):
         PRODUCTS[kind] = {"manufacturer": mfr, "code": sku, "ies": str(path), "lm": float(row["luminaire_lm"]),
                           "watts": row["watts"], "cct": row["cct_k"], "beam": row["beam_deg"], "what": what,
                           "substitute": what.startswith("SUBSTITUTE")}
+    _products_bound = True
     return PRODUCTS
+
+
+def products():
+    """Return the cached verified bindings, creating them before any lighting consumer reads them."""
+    return bind_products()
 
 
 @dataclass
@@ -152,8 +162,9 @@ class Fixture:
     @property
     def lumens(self):
         dimmer = self.extra.get("dimmer", 1.0)
-        if self.kind in PRODUCTS:                  # a real product emits its own flux (dimming is per scene)
-            return PRODUCTS[self.kind]["lm"] * dimmer
+        product = products().get(self.kind)
+        if product:                               # a real product emits its own flux (dimming is per scene)
+            return product["lm"] * dimmer
         if self.lm is not None:
             return self.lm * dimmer
         k = self.spec
@@ -614,8 +625,9 @@ def generic_ies(lm, beam_deg, name="GENERIC"):
 def photometry_for(kind):
     from .. import photometry as ph
     k = KINDS[kind]
-    if kind in PRODUCTS:
-        return ph.load(PRODUCTS[kind]["ies"]), False
+    product = products().get(kind)
+    if product:
+        return ph.load(product["ies"]), False
     lm = k.get("lm") or k.get("lm_per_m", 100)
     beam = k.get("beam", 120) if k["mount"] != "strip" else 120
     return ph.parse(generic_ies(lm, beam), name=kind), True
@@ -635,9 +647,17 @@ def task_points(lay=None):
         return (q[0] + q[2]) / 2, (q[1] + q[3]) / 2
 
     isl = fp["k-island"]
-    for x in (isl[0] + 0.5, (isl[0] + isl[2]) / 2, isl[2] - 0.5):
+    prep_spans = [(a, b) for kind, a, b in F.module_spans(it["k-island"])
+                  if kind == "counter" and b - a >= 0.5]
+    prep_x = [(prep_spans[0][0] + prep_spans[0][1]) / 2,
+              prep_spans[-1][0] + (prep_spans[-1][1] - prep_spans[-1][0]) / 3,
+              prep_spans[-1][0] + 2 * (prep_spans[-1][1] - prep_spans[-1][0]) / 3]
+    for x in prep_x:
         pts.append(("kitchen", "ies-res-kitchen-prep-500", x, isl[3] - 0.3, B + 0.92, "island prep side"))
         pts.append(("kitchen", "ies-res-breakfast-200", x, isl[1] + 0.2, B + 0.92, "island seating side"))
+    burner = next((a, b) for kind, a, b in F.module_spans(it["k-island"]) if kind == "single-induction")
+    pts.append(("kitchen", "ies-res-kitchen-cooktop-300", (burner[0] + burner[1]) / 2,
+                (isl[1] + isl[3]) / 2, B + 0.926, "single induction zone"))
     run = fp["k-run"]
     pts.append(("kitchen", "ies-res-kitchen-sink-300", (run[0] + run[2]) / 2, run[1] + 0.25, B + 0.9, "sink"))
     pts.append(("dining", "ies-res-dining-informal-100", *c("dining-table"), B + 0.75, "dining table centre"))
@@ -692,7 +712,7 @@ def task_beam_obstructions(lay, fixtures):
     for task in fixtures:
         if task.kind != "DLN" or task.aim != (0.0, 0.0, -1.0):
             continue
-        beam = PRODUCTS.get(task.kind, {}).get("beam", task.spec["beam"])
+        beam = products().get(task.kind, {}).get("beam", task.spec["beam"])
         radius_slope = math.tan(math.radians(beam / 2))
         for body in fixtures:
             if body is task or body.level != task.level or "diameter" not in body.spec:

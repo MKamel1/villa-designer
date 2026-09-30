@@ -20,6 +20,9 @@ class Design(unittest.TestCase):
         # client option A (2026-09-28): fridge + oven bank, microwave in the island, folding counter kept
         self.assertEqual([k for k, _ in items["dk-appliance-bank"]["modules"]], ["fridge", "oven"])
         self.assertIn("microwave", [k for k, _ in items["k-island"]["modules"]])
+        self.assertEqual([k for k, _ in items["k-island"]["modules"] if k in ("hob", "single-induction")],
+                         ["single-induction"])
+        self.assertEqual([k for k, _ in items["dk-run"]["modules"] if k == "hob"], ["hob"])
         self.assertIn("dk-fold", items)
         result = F.check(list(items.values()), LAY)
         self.assertEqual(result["kitchen"]["status"], "pass")
@@ -27,6 +30,20 @@ class Design(unittest.TestCase):
         self.assertIn("1.219", result["kitchen"]["measured"]["main work aisle"])
         self.assertIn("0.299", result["kitchen"]["measured"]["dk fridge across-run landing"])
         self.assertIn("via door", result["kitchen"]["measured"]["shared fridge relationship"])
+        self.assertIn("0.60 / 1.50", result["kitchen"]["measured"]["k-island single-induction"])
+
+    def test_guest_open_shower_clearances_and_route(self):
+        items = {i["id"]: i for i in F.layout(LAY)}
+        shower = items["gwc-shower"]
+        wet = F.footprint(shower)
+        basin = F.footprint(items["gwc-basin"])
+        wc = F.footprint(items["gwc-wc"])
+        self.assertEqual((shower["enclosure"], shower["drain"]), ("none", "linear"))
+        self.assertGreaterEqual(round(wet[3] - wet[1], 3), 1.219)  # card nkba-shower-clear-floor-762
+        self.assertGreaterEqual(round(wet[2] - wet[0], 3), 0.762)
+        self.assertGreaterEqual(round(wet[1] - basin[3], 3), 0.150)
+        self.assertGreaterEqual(round(wc[1] - wet[3], 3), 0.130)
+        self.assertEqual(F.check(list(items.values()), LAY)["routes"]["status"], "pass")
 
     def test_old_tall_wall_and_narrow_aisle_fail_on_this_layout(self):
         items = F.layout(LAY)
@@ -117,13 +134,22 @@ class RevitInputs(unittest.TestCase):
         self.assertEqual(RS.check_wp1_spec(LAY, spec), [])
         self.assertEqual({v["room"] for v in spec["ventilation"]}, {"guest-wc", "dirty-kitchen"})
         vents = {v["room"]: v for v in spec["ventilation"]}
-        self.assertEqual((vents["guest-wc"]["rate_ls"], vents["guest-wc"]["card"]), (6.0, "ukadf-sanitary-intermittent-6"))
+        self.assertEqual((vents["guest-wc"]["rate_ls"], vents["guest-wc"]["card"]),
+                         (15.0, "ukadf-bathroom-intermittent-15"))
+        self.assertEqual(RS.sanitary_extract_requirement(F.layout(LAY, products=False), "guest-wc"),
+                         ("ukadf-bathroom-intermittent-15", 15.0))
+        bare = [i for i in F.layout(LAY, products=False) if i["id"] != "gwc-shower"]
+        self.assertEqual(RS.sanitary_extract_requirement(bare, "guest-wc"),
+                         ("ukadf-sanitary-intermittent-6", 6.0))
         self.assertEqual((vents["dirty-kitchen"]["rate_ls"], vents["dirty-kitchen"]["card"]),
                          (30.0, "ukadf-kitchen-intermittent-hood-30"))
+        wet = next(x for x in spec["bath_fittings"] if x["id"] == "gwc-linear-drain")
+        self.assertEqual((wet["upstand_m"], wet["enclosure"], wet["kind"]), (0.0, "none", "linear-drain"))
         # an extract below Approved Document F's rate fails the check
         import copy
         bad = copy.deepcopy(spec)
-        next(v for v in bad["ventilation"] if v["room"] == "guest-wc")["rate_ls"] = 5.0
+        stale = next(v for v in bad["ventilation"] if v["room"] == "guest-wc")
+        stale["rate_ls"], stale["card"] = 6.0, "ukadf-sanitary-intermittent-6"
         self.assertTrue(any("guest-wc extract" in e for e in RS.check_wp1_spec(LAY, bad)))
         screen = next(x for x in spec["bath_fittings"] if x["id"] == "pe-bath-screen")
         self.assertAlmostEqual(screen["entry_clear"], 0.8)
@@ -154,6 +180,40 @@ class RevitInputs(unittest.TestCase):
 
 
 class Lighting(unittest.TestCase):
+    def test_fresh_interpreter_matches_scene_bound_products(self):
+        import os
+        import subprocess
+        import sys
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[1]
+        env = os.environ.copy()
+        env["PYTHONPATH"] = str(root / "src")
+        script = ("import json, sys\n"
+                  "from archpipe.concept import villa_lighting as L\n"
+                  "from archpipe.concept import villa_r11 as R\n"
+                  "if len(sys.argv) > 1:\n"
+                  " from archpipe.concept import villa_render as VR\n"
+                  " VR.build()\n"
+                  "row = next(p for p in L.check(R.design('D1'))['tasks'] if p['what'] == 'single induction zone')\n"
+                  "print(json.dumps({'lux': row['achieved_lx'], 'product': L.PRODUCTS.get('DLN', {}).get('code')}))\n")
+        def measure(*args):
+            run = subprocess.run([sys.executable, "-c", script, *args], cwd=root, env=env,
+                                 text=True, capture_output=True, check=True)
+            import json
+            return json.loads(run.stdout.splitlines()[-1])
+
+        self.assertEqual(measure(), measure("scene"))
+
+    def test_single_induction_task_and_prep_points(self):
+        result = L.check(LAY)
+        cooking = [p for p in result["tasks"] if p["what"] == "single induction zone"]
+        self.assertEqual(len(cooking), 1)
+        self.assertEqual((cooking[0]["achieved_lx"], cooking[0]["required_lx"], cooking[0]["status"]),
+                         (1156, 300, "pass"))  # bound iGuzzini LSEVO-AAIIA6, not generic photometry
+        self.assertEqual(len([p for p in result["tasks"] if p["what"] == "island prep side" and
+                              p["status"] == "pass"]), 3)
+
     def test_library_and_cinema_tasks_are_carded_and_met(self):
         result = L.check(LAY)
         points = [p for p in result["tasks"] if p["what"] in ("daybed nook", "cinema desk")]

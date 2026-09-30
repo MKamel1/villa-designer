@@ -183,8 +183,16 @@ def body(it):
     if t == "island":                                               # carcass set back 300 mm under the seating side
         p = [("worktop", (x0, yb, H - 0.04, x1, yf, H)),
              ("plinth", (x0 + PLINTH_SET, yb + 0.3 + PLINTH_SET, 0, x1 - PLINTH_SET, yf - PLINTH_SET, PLINTH))]
+        if it.get("waterfall_ends") == "both-short":
+            # Same stone and full top depth on the two short x ends, floor to worktop.
+            p += [("waterfall-end", (x0, yb, 0, x0 + 0.04, yf, H)),
+                  ("waterfall-end", (x1 - 0.04, yb, 0, x1, yf, H))]
         for kind, a, b in _local_modules(it):
             p.append((kind, (a, yb + 0.3, PLINTH, b, yf, H - 0.04)))
+            if kind == "single-induction" and it.get("downdraft_basis"):
+                p.append(("single-induction-zone", (a + 0.02, -0.155, H - 0.006,
+                                                    b - 0.02, 0.155, H)))
+                p.append(("downdraft", (a, -0.34, H - 0.012, b, -0.26, H)))
         return p
     if t == "base_run":
         p = []
@@ -290,6 +298,10 @@ def body(it):
                 ("rim", (x0, yf - r, 0.12, x1, yf, H)), ("rim", (x0, yb + r, 0.12, x0 + r, yf - r, H)),
                 ("rim", (x1 - r, yb + r, 0.12, x1, yf - r, H))]
     if t == "shower_walkin":
+        if it.get("wet_zone"):
+            # The finish is recessed to finished-floor level. Drain is flush; no tray or screen.
+            return [("wet-floor", (x0, yb, -0.006, x1, yf, 0)),
+                    ("linear-drain", (x1 - 0.04, yb + 0.06, -0.006, x1 - 0.02, yf - 0.06, 0))]
         return [("tray", (x0, yb, 0, x1, yf, H)), ("glass", (x0 + W * 0.45, yf - 0.01, H, x1, yf, 2.0))]
     return [("block", (x0, yb, 0, x1, yf, H))]
 
@@ -403,6 +415,9 @@ def round2_elements(sp):
             box = [f["x"] - 0.1, f["y"] - 0.1, z + f["z"] - 0.02,
                    f["x"] + 0.1, f["y"] + 0.1, z + f["z"]]
             comment = "rain head; ASSUMED 200 mm representation diameter"
+        elif f["kind"] == "linear-drain":
+            box = [f["x0"], f["y0"], z - 0.006, f["x1"], f["y1"], z]
+            comment = "flush linear drain; open level-access wet zone, no upstand or enclosure; " + f["basis"]
         else:
             add(f["id"] + "-rail", "Generic Models",
                 [f["x"] - 0.015, f["y"] - 0.015, z + f["z"] - 0.4,

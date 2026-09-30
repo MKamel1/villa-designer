@@ -265,6 +265,10 @@ def _runs(it, W, D, H, island):
             c = (a + b) / 2
             hw = min(290, (b - a) / 2 - 20)
             out.append(("hob", G._box(c - hw, c + hw, (yb + yf) / 2 - 250, (yb + yf) / 2 + 250, top, top + 6)))
+        if kind == "single-induction":
+            c = (a + b) / 2
+            out.append(("single-induction", G._box(c - 155, c + 155, (yb + yf) / 2 - 155,
+                                                    (yb + yf) / 2 + 155, top, top + 6)))
         if kind == "sink":
             sink_holes.append((a, b))
         if tall_wall:
@@ -276,6 +280,9 @@ def _runs(it, W, D, H, island):
     y_hole0, y_hole1 = (yb + yf) / 2 - 220, (yb + yf) / 2 + 220
     for k in range(0, len(edges), 2):
         out.append(("worktop", _slab(edges[k], edges[k + 1], yb, yf, top - 40, top, 3, 2)))
+    if island and it.get("waterfall_ends") == "both-short":
+        out += [("waterfall-end", G._box(x0, x0 + 40, yb, yf, 0, top)),
+                ("waterfall-end", G._box(x1 - 40, x1, yb, yf, 0, top))]
     for a, b in sink_holes:
         a2, b2 = a + 60, b - 60
         out.append(("worktop", G._box(a2, b2, yb, y_hole0, top - 40, top)))
@@ -424,7 +431,7 @@ def local_parts(it):
     return None
 
 
-ABOVE_H = {"flush-plate", "tap", "hob"}
+ABOVE_H = {"flush-plate", "tap", "hob", "single-induction"}
 
 
 def to_world_point(it, x, y, z, level_z):

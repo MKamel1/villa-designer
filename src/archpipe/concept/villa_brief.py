@@ -47,7 +47,7 @@ def check(lay=None):
     rng("K-SPOT-OFF", off, 600, 800, note="sink-run spots, from the wall face")
     pitch = (spots[1].x - spots[0].x) * 1000
     rng("K-SPOT-PITCH", pitch, 1000, 1000, note="sink run and island task spots")
-    beam = VL.PRODUCTS.get("DLN", {}).get("beam") or VL.KINDS["DLN"]["beam"]
+    beam = VL.products().get("DLN", {}).get("beam") or VL.KINDS["DLN"]["beam"]
     rng("K-SPOT-BEAM", beam, 40, 60, "deg", "Laser Evo Cone M is 29 deg: narrower than advised; a 40-60 deg optic "
         "of the same family can replace it without moving a fitting (product to confirm)")
     top = LZ_B = -3.0

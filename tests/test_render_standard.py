@@ -15,7 +15,7 @@ SCENE = VR.build()
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
     "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",  # round-3 garden finishes
-    "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath",
+    "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath", "marble-wet",
     "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
     "black-metal", "ceramic-white", "screen-black", "glass-clear", "glass-guard", "glass-edge", "opal-strip",
@@ -81,7 +81,7 @@ class RenderStandard(unittest.TestCase):
             "library-cabinet-right": {"glass-door", "door-frame", "shelf", "back"},
             "library-daybed": {"mattress", "cushion", "nook-side", "nook-top"},
             "dk-appliance-bank": {"fridge", "oven-glass"},
-            "k-island": {"microwave-glass", "hob"},
+            "k-island": {"microwave-glass", "single-induction", "waterfall-end"},
             "dk-fold": {"worktop", "front", "handle"},
             "cinema-desk": {"top", "pedestal", "drawer", "cable-tray"},
         }
@@ -98,6 +98,10 @@ class RenderStandard(unittest.TestCase):
                             if m["id"].startswith("furn-library-end-panel-")))
         self.assertEqual(sum(i.startswith("lamp-shade-DESK-cinema-") for i in ids), 2)
         self.assertEqual(sum(i.startswith("furn-cinema-desk-chair-") and i.endswith("-0") for i in ids), 2)
+        wet = [m for m in SCENE["meshes"] if m["id"].startswith("furn-gwc-shower-")]
+        self.assertEqual({m["material"] for m in wet}, {"marble-wet", "black-metal"})
+        self.assertIn("detail-gwc-rain-head-plate", ids)
+        self.assertIn("detail-gwc-hand-shower-head", ids)
 
     def test_wp2b_openings_bath_stair_and_extract_match_spec(self):
         from archpipe.concept import revit_spec as RS, villa_daylight as VD

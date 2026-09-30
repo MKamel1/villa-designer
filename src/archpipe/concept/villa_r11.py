@@ -206,6 +206,12 @@ def design(d):
     deck_end = round(P.RAMP_X1 + P.CARS[1], 3)                   # the car's deck; planted roof beyond it
     lay = V._layout(d, "Design %s - %s" % (d, TITLES[d]), gf + b, gl + bl, ge + [("entry-b", "B", "core-lobby-b2")],
                     TITLES[d])
+    if d == "D1":
+        from .authored_values import override
+        override(lay["rooms"]["guest-wc"], "occupancy", "bathroom",
+                 "client 2026-09-29: open walk-in shower changes guest WC to bathroom")
+        override(lay["rooms"]["guest-wc"], "name", "guest bathroom (under the deck)",
+                 "client 2026-09-29: guest room now includes a shower")
     lay.update({k: base[k] for k in ("stair", "terrace", "deck_door", "north_patio")})
     lay.update(extension=[list(r["rect"]) for r in under],
                basement_full_height=("east",),         # round 12: north + east; garden doors as round 10

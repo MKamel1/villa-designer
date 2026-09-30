@@ -62,12 +62,7 @@ class ClientRules(unittest.TestCase):
 
 
 class Cards(unittest.TestCase):
-    # The design is specified with its verified products (villa_lighting.PRODUCT_CHOICE). This suite used to pass or
-    # fail by test order: with generic photometry the dirty-kitchen run reads 477 lx of 500 since its downlights moved
-    # up to the real ceiling, and only an earlier test's bind_products() made it pass. Bind them here, explicitly.
-    @classmethod
-    def setUpClass(cls):
-        VL.bind_products()
+    # The lighting accessor binds verified products before every calculation.
 
     def test_pendants_hang_762_above_the_island_and_the_table(self):
         it = {i["id"]: i for i in F.layout(LAY)}
@@ -112,30 +107,29 @@ class AdvisoryBrief(unittest.TestCase):
 
 
 class ChecksFailOnRealMistakes(unittest.TestCase):
-    # These reproduce the first drafts, which were checked with the generic photometry. `villa_render.build()` binds
-    # the real products into the module (VL.PRODUCTS) for the whole process, which made this suite depend on test
-    # order (with the real sconces the ensuite basin reaches 526 lx on its own). Pin the generic state per test.
-    def setUp(self):
-        self._bound = dict(VL.PRODUCTS)
-        VL.PRODUCTS.clear()
-
-    def tearDown(self):
-        VL.PRODUCTS.update(self._bound)
+    # Negative cases use the same verified photometry as the design.
 
     def test_island_without_its_task_lights_fails_prep(self):
         fx = [f for f in FX if not (f.kind == "DLN" and f.room == "kitchen")]
         res = VL.check(LAY, fx)
         self.assertTrue(any(t["card"] == "ies-res-kitchen-prep-500" and t["status"] == "fail" for t in res["tasks"]))
 
-    def test_basins_lit_only_by_sconces_fail_grooming(self):
-        # the first draft: sconces alone gave 87-142 lx on the counter
-        fx = [f for f in FX if not (f.kind == "DLN" and f.card == "ies-res-vanity-grooming-300")]
+    def test_basins_without_task_fittings_fail_grooming(self):
+        fx = [f for f in FX if not (f.card == "ies-res-vanity-grooming-300" or
+                                   f.kind in ("SCONCE", "VSCONCE") and f.room in
+                                   ("family-bath", "parents-ensuite", "guest-wc"))]
         res = VL.check(LAY, fx)
         self.assertEqual(sum(t["card"] == "ies-res-vanity-grooming-300" and t["status"] == "fail"
                              for t in res["tasks"]), 3)
 
 
 class Photometry(unittest.TestCase):
+    def test_verified_products_are_cached_and_unverified_kinds_stay_generic(self):
+        self.assertIs(VL.products(), VL.products())
+        self.assertEqual(VL.products()["DLN"]["code"], "LSEVO-AAIIA6")
+        self.assertFalse(VL.photometry_for("DLN")[1])
+        self.assertTrue(VL.photometry_for("PEN-GLOBE")[1])
+
     def test_generic_distribution_carries_its_lumens_and_beam(self):
         for lm, beam in ((650, 55), (750, 36), (500, 24)):
             p = ph.parse(VL.generic_ies(lm, beam), name="t")

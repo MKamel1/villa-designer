@@ -393,7 +393,17 @@ def _d1_details(lay, spec):
              height_above_nosing=0.9,
              basis="client wood handrail decision; 0.9 m height carried from ASSUMED D1 render")])
     bath = F.footprint(next(i for i in F.layout(lay, products=False) if i["id"] == "pe-bath"))
+    shower = next(i for i in F.layout(lay, products=False) if i["id"] == "gwc-shower")
+    wet = F.footprint(shower)
     spec["bath_fittings"].extend([
+        dict(id="gwc-rain-head", level="B", room="guest-wc", kind="ceiling-rain-head",
+             x=(wet[0] + wet[2]) / 2, y=(wet[1] + wet[3]) / 2, z=2.3, over="gwc-shower"),
+        dict(id="gwc-hand-shower", level="B", room="guest-wc", kind="hand-shower",
+             x=wet[2] - 0.03, y=(wet[1] + wet[3]) / 2, z=1.1, over="gwc-shower"),
+        dict(id="gwc-linear-drain", level="B", room="guest-wc", kind="linear-drain",
+             x0=wet[2] - 0.04, x1=wet[2] - 0.02, y0=wet[1] + 0.06, y1=wet[3] - 0.06,
+             z=0.0, falls="to linear drain", upstand_m=0.0, enclosure="none",
+             basis="ASSUMED wet-zone floor falls and flush linear drain; waterproofing/detail pending"),
         dict(id="pe-rain-head", level="GF", room="parents-ensuite", kind="ceiling-rain-head",
              x=(bath[0] + bath[2]) / 2, y=(bath[1] + bath[3]) / 2, z=2.3, over="pe-bath"),
         dict(id="pe-hand-shower", level="GF", room="parents-ensuite", kind="hand-shower",
@@ -405,15 +415,17 @@ def _d1_details(lay, spec):
                           "TODO low-iron-glass-optics",
              entry_clear=bath[2] - (bath[0] + 0.9), card="nkba-shower-clear-floor-762")])
     # Approved Document F Vol 1 (2026), cards verified by the lead against the PDF text (Table 1.1 printed p.7,
-    # paras 1.21 and 1.51): guest WC intermittent extract 6 l/s with a 15 min run-on (no openable window) and a
+    # paras 1.21 and 1.51): a room with a shower needs bathroom intermittent extract 15 l/s; 15 min run-on and a
     # 10 mm door undercut; dirty kitchen 30 l/s through its cooker hood ducted to outside (the hood over dk-run's
     # hob), make-up air through the 1.2 m sliding door's running gap.
     for room, fan, door_rooms, kind, rate, card, runon, undercut in (
-            ("guest-wc", (10.1, -21.15, 2.45), ["family", "guest-wc"], "extract-fan", 6.0,
-             "ukadf-sanitary-intermittent-6", 15, 0.010),
+            ("guest-wc", (10.1, -21.15, 2.45), ["family", "guest-wc"], "extract-fan", None,
+             None, 15, 0.010),
             ("dirty-kitchen", (13.827, -20.881, 2.35), ["kitchen", "dirty-kitchen"], "cooker-hood-ducted", 30.0,
              "ukadf-kitchen-intermittent-hood-30", None, None)):
         x, y, z = fan
+        if room == "guest-wc":
+            card, rate = sanitary_extract_requirement(F.layout(lay, products=False), room)
         spec["ventilation"].append(dict(id=room + "-extract", level="B", room=room, kind=kind,
                                         fan=[x, y, z], duct_route=[[x, y, z], [x, -20.501, z]],
                                         discharge="external-wall", discharge_card="ukadf-extract-to-outside",
@@ -422,6 +434,13 @@ def _d1_details(lay, spec):
                                                         card="ukadf-internal-door-undercut-10" if undercut else None),
                                         operation="intermittent", rate_ls=rate, card=card,
                                         run_on_min=runon, run_on_card="ukadf-runon-timer-15min" if runon else None))
+
+
+def sanitary_extract_requirement(items, room):
+    """Approved Document F intermittent rate follows the room's actual fittings."""
+    has_bath_or_shower = any(i["room"] == room and i["type"] in ("bath", "shower_walkin") for i in items)
+    return (("ukadf-bathroom-intermittent-15", 15.0) if has_bath_or_shower else
+            ("ukadf-sanitary-intermittent-6", 6.0))
 
 
 def check_wp1_spec(lay, spec=None):
@@ -469,6 +488,17 @@ def check_wp1_spec(lay, spec=None):
         errors.append("client-approved wall-side wood handrail missing")
     bath = F.footprint(next(i for i in F.layout(lay, products=False) if i["id"] == "pe-bath"))
     fittings = {x["id"]: x for x in spec["bath_fittings"]}
+    guest_shower = next(i for i in F.layout(lay, products=False) if i["id"] == "gwc-shower")
+    wet = F.footprint(guest_shower)
+    for name in ("gwc-rain-head", "gwc-hand-shower"):
+        f = fittings.get(name)
+        if f is None or not (wet[0] <= f["x"] <= wet[2] and wet[1] <= f["y"] <= wet[3]):
+            errors.append(name + " must remain over the guest wet zone")
+    drain = fittings.get("gwc-linear-drain")
+    if drain is None or drain.get("upstand_m") != 0 or drain.get("enclosure") != "none" or \
+            not (wet[0] <= drain["x0"] < drain["x1"] <= wet[2] and
+                 wet[1] <= drain["y0"] < drain["y1"] <= wet[3]):
+        errors.append("guest shower needs a flush linear drain and no enclosure")
     for name in ("pe-rain-head", "pe-hand-shower"):
         f = fittings.get(name)
         if f is None or not (bath[0] <= f["x"] <= bath[2] and bath[1] <= f["y"] <= bath[3]):
@@ -495,7 +525,7 @@ def check_wp1_spec(lay, spec=None):
         end = vent["duct_route"][-1]
         if not (r[0] <= x <= r[2] and r[1] <= y <= r[3]) or end[1] <= lay["rooms"][room]["rect"][3]:
             errors.append(room + " fan or duct does not reach its external wall")
-        need = {"guest-wc": ("ukadf-sanitary-intermittent-6", 6.0),
+        need = {"guest-wc": sanitary_extract_requirement(F.layout(lay, products=False), "guest-wc"),
                 "dirty-kitchen": ("ukadf-kitchen-intermittent-hood-30", 30.0)}[room]
         if vent["card"] != need[0] or (vent["rate_ls"] or 0) < need[1] - 1e-9:
             errors.append("%s extract %s l/s, need %.0f l/s (card %s)" % (room, vent["rate_ls"], need[1], need[0]))

@@ -1,5 +1,16 @@
 # Reusable engineering lessons
 
+### c2-unmeasured-asset-intake — model records could reach scenes without complete measurements
+- Observed: the real manifest contains a 19.4689 m jacaranda and a 295.8562 m wide, centimetre-scale sofa; all 62 model entries fail the phase 1 intake schema. Evidence: `docs/asset-intake-phase1.md`.
+- Found by / stage: render review and lessons audit at Stage 7; should have been caught at asset ingest before Stage 4 layout or Stage 7 rendering.
+- Reproduction: `tests/test_asset_intake.py` freezes the recorded bounds of `jacaranda_tree` and `sf_minotti_sofa` and exercises the missing-front, bedding and licence cases.
+- Direct cause: downloaded models were accepted with file bounds but without a complete unit, rights, contents, expected-size and preview record.
+- Escape: front-axis and bounds checks covered only parts of the fetch path; scene consumers could read the manifest directly.
+- Class and siblings: any external 3D furniture, plant, luminaire or prop can enter a scene before evidence is complete; the related audit entries are l0011, l0014, l0075, l0087, l0094, l0496, l0772, l0943 and l0960.
+- Control tier: phase 1 schema and diagnostic validator in `src/archpipe/asset_intake.py`; tier 1 fetch and importer construction gate and tier 2 verification remain for phase 2.
+- Proofs: eight focused tests fire on named historical and injected failures and stay quiet on a complete fixture; local re-measurement checks 23 files. This is a checkpoint, not a closed defect.
+- Registry: pending phase 2 integration.
+
 ## R3b-1: imported furniture front axis
 
 - Observed: the garden-living Minotti sofa faced backwards in the round-3 render. The lead found it at presentation review; asset ingest and scene export should have caught it.
@@ -1068,3 +1079,30 @@ was given (now `--readback`); a PDF open in the viewer crashed the writer (now `
   (today's drafts only; round-2 finals predate v29). The first migration kept those values and labelled them as
   deliberate overrides — which would have legitimised the bug. Rule: an override reason may explain a deliberate
   design change, never preserve an accidental one; the six views now export their declared 0.5, v29 alone 1.0.
+
+### shower-changes-room-extract — sanitary rate must follow fittings
+- Observed: the D1 guest WC had a fixed 6 l/s extract record while the client added an open shower on 2026-09-29. Found by client at Stage 4; ventilation spec should have caught it at Stage 5 input construction.
+- Reproduction: `tests/test_d1_wp1.py::RevitInputs.test_bath_glass_stair_glass_and_vent_placeholders_pass` freezes the stale 6 l/s rate and WC card on the real showered room; `check_wp1_spec` rejects it.
+- Direct cause and escape: rate and card were keyed to the room name, and earlier checks compared against another room-name constant. Class: service capacity authored from a label rather than fittings. Siblings: other sanitary rooms, including the clean WC-only case, are exercised through `sanitary_extract_requirement`.
+- Control tier 1: `revit_spec.sanitary_extract_requirement` derives 15 l/s and `ukadf-bathroom-intermittent-15` for a bath or shower, otherwise 6 l/s and `ukadf-sanitary-intermittent-6`; construction and check consume it. Tier 2: the real stale record fails and the WC-only counterexample remains 6 l/s. The 15 min run-on and 10 mm door undercut remain checked.
+- Registry: `shower-changes-room-extract` -> `sanitary_extract_requirement` / `check_wp1_spec` -> `test_bath_glass_stair_glass_and_vent_placeholders_pass` -> Stage 5.
+
+### island-and-open-shower-geometry — client intent across plan, model and scene
+- Observed: D1's island had a 900 mm main hob, no stone returns, and a 900 mm downdraft; the guest room had no shower. Client change R3b-5/R3b-7, 2026-09-29, at Stage 4; furnished plan and 3D input should catch it.
+- Direct cause and escape: island and shower detail was repeated across furnished plan, detail builder and scene; no client-intent check required exactly one single zone or both short stone ends. Class: plan fixture intent diverges from model and render detail. Siblings: dirty-kitchen main hob, microwave, family-bath shower and ensuite bath screen were reviewed.
+- Control tier 1: the island carries one ASSUMED 350 mm induction zone and microwave; detail and Revit bodies build two full-depth floor-to-top stone short ends. The guest shower builds a recessed flush wet finish and drain with no screen or upstand. Tier 2: `F.check` rejects a missing or duplicate single zone or island main hob; the Revit spec checks the wet fitting and no enclosure. `test_guest_open_shower_clearances_and_route`, `test_island_stone_returns_and_open_shower_are_in_revit_input`, and `test_wp2b_checked_joinery_and_kitchen_builders` cover the clean case and mutations.
+- Proof limits: local view-plan preview, float and opening guards passed; photographic draft and native Revit read-back need lead review. The wet-zone `marble-wet` is a look-alike appearance using the existing Marble014 texture at a smaller scale; it is not a specified slip-rated product. The assumed downdraft product, duct and discharge and wet-room waterproofing/falls detail remain coordination tasks.
+- Registry: `island-and-open-shower-geometry` -> `F.check`, `F3.body`, `FD._runs`, `RS.check_wp1_spec` -> the named tests -> Stage 4, Revit input and scene export.
+
+### lighting-product-hidden-state — lighting results depended on import order
+- Observed: the D1 island cooktop measured 624 lx in an isolated test and 1156 lx after `tests.test_render_standard` imported and built its scene. Lead review at Stage 5; the lighting test should have caught this at calculation entry.
+- Reproduction: `tests/test_d1_wp1.py::Lighting.test_fresh_interpreter_matches_scene_bound_products` freezes the real D1 cooktop point in two fresh interpreters.
+- Direct cause: `PRODUCTS` began empty; lux, fixture flux and beam paths read it before any guaranteed binding.
+- Escape: the test ran only in isolation, and the lead's result filter missed coloured `FAILED` output. Earlier tests also manually cleared the shared product dictionary.
+- Class: execution context implicit / hidden state in calculation inputs.
+- Siblings: fixture lumens, photometry, task-beam obstructions, brief beam and scene export; the dirty-kitchen and ensuite order traps recorded above share this root.
+- Contributing factors: generic photometry was a silent fallback for kinds with a verified product.
+- Control tier: 1, prevent by construction.
+- Control: `villa_lighting.products()` binds verified products once before fixture flux, photometry or task-beam reads; the brief and renderer use the same accessor. Kinds without a verified product remain labelled GENERIC. Test runs use `NO_COLOR=1` and the unittest exit status, never a search for `FAILED`.
+- Proofs: the fresh-interpreter regression failed before the fix at 624 lx without a product versus 1156 lx with `LSEVO-AAIIA6`; the same test passes after the fix. `test_verified_products_are_cached_and_unverified_kinds_stay_generic` checks the verified task light and a clean generic pendant. The real D1 lighting checks and full suite exercise sibling fixture and room paths; final run results are reported at the delivery checkpoint.
+- Registry: `lighting-product-hidden-state` -> `villa_lighting.products()` -> `test_fresh_interpreter_matches_scene_bound_products` and `test_verified_products_are_cached_and_unverified_kinds_stay_generic` -> Stage 5 calculation and scene export.

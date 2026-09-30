@@ -30,7 +30,13 @@ class Shapes(unittest.TestCase):
             for name, b in zip(s["parts"], s["boxes"]):
                 self.assertTrue(fp[0] - 1e-3 <= b[0] and b[3] <= fp[2] + 1e-3 and fp[1] - 1e-3 <= b[1]
                                 and b[4] <= fp[3] + 1e-3, (s["mark"], name, b, fp))
-                self.assertGreaterEqual(b[2], -1e-6, (s["mark"], name))
+                # The open shower finish and flush drain are recessed below finished floor;
+                # neither creates a tray upstand above the adjoining floor.
+                if s["mark"] == "gwc-shower":
+                    self.assertGreaterEqual(b[2], -0.006 - 1e-6, (s["mark"], name))
+                    self.assertEqual(b[5], 0)
+                else:
+                    self.assertGreaterEqual(b[2], -1e-6, (s["mark"], name))
                 if name not in F3.ABOVE:
                     self.assertLessEqual(b[5], s["h"] + 1e-3, (s["mark"], name, b[5], s["h"]))
             # the plan box of the solids IS the footprint, so the as-built box can be checked against it
@@ -59,6 +65,18 @@ class Shapes(unittest.TestCase):
         s = next(x for x in SPEC if x["mark"] == "ka-bunk")
         self.assertIn("upper-mattress", s["parts"])
         self.assertAlmostEqual(s["envelope"][5], 1.7)
+
+    def test_island_stone_returns_and_open_shower_are_in_revit_input(self):
+        island = next(x for x in SPEC if x["mark"] == "k-island")
+        ends = [b for n, b in zip(island["parts"], island["boxes"]) if n == "waterfall-end"]
+        self.assertEqual(len(ends), 2)
+        self.assertTrue(all(b[2] == 0 and b[5] == ITEMS["k-island"]["h"] and
+                            round(b[4] - b[1], 3) == ITEMS["k-island"]["d"] for b in ends))
+        self.assertIn("single-induction-zone", island["parts"])
+        self.assertIn("downdraft", island["parts"])
+        shower = next(x for x in SPEC if x["mark"] == "gwc-shower")
+        self.assertEqual(shower["parts"], ["wet-floor", "linear-drain"])
+        self.assertNotIn("glass", shower["parts"])
 
 
 class PostCondition(unittest.TestCase):

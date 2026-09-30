@@ -218,10 +218,17 @@ def layout(lay=None, products=True):
                 why="sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it"),
         "kitchen")
     run_front = K[3] - 0.6
-    add(item("k-island", None, "island", 13.075, run_front - 1.219 - 0.55, 0, w=3.05, d=1.1, h=0.92,
-             modules=[("microwave", 0.6), ("counter", 0.45), ("hob", 0.9), ("counter", 1.1)], stools=5,
-             why="5 stools at 610 mm (card nkba-seating-width-610) on the party side; hob faces the sink run across a 1.22 m "
-                 "aisle; 800 mm counter + 300 mm overhang"), "kitchen")
+    island = item("k-island", None, "island", 13.075, run_front - 1.219 - 0.55, 0, w=3.05, d=1.1, h=0.92,
+                  modules=[("microwave", 0.6), ("counter", 0.45), ("hob", 0.9), ("counter", 1.1)], stools=5,
+                  why="5 stools at 610 mm (card nkba-seating-width-610) on the party side; hob faces the sink run across a 1.22 m aisle; 800 mm counter + 300 mm overhang")
+    override(island, "modules", [("microwave", 0.6), ("counter", 0.60), ("single-induction", 0.35),
+                                 ("counter", 1.50)], "client 2026-09-29: main hob only in dirty kitchen; ASSUMED 350 mm single induction module")
+    override(island, "why", "Five stools on party side; one ASSUMED 350 mm induction zone and microwave; "
+             "double marble waterfall on short ends; 1.219 m work aisle", "client 2026-09-29 island revision")
+    fill_defaults(island, {"waterfall_ends": "both-short", "single_burner_basis": "ASSUMED 350 mm module; product pending",
+                           "downdraft_basis": "ASSUMED local capture for cooking fumes from the single zone; "
+                                              "350 mm unit, duct and discharge pending services design"})
+    add(island, "kitchen")
     # -- dining (bay 5-6): table for 6, extends to 10
     D, DS = r["dining"], r["dining-side"]
     add(item("dining-table", None, "dining_6x", 16.95, -25.9, 0, h=0.75, chairs=6,
@@ -263,10 +270,16 @@ def layout(lay=None, products=True):
     add(against("cinema-desk", C, "y1", 4.66, "desk", w=1.24, d=0.55, h=0.75, chairs=2,
                 why="two work places behind the cinema sofa, under the ramp soffit; card ies-res-desk-400"),
         "cinema")
-    # -- guest WC
+    # -- guest bathroom: open level-access wet zone along the east wall
     W = r["guest-wc"]
     add(against("gwc-wc", W, "y1", 9.9, "wc", d=0.55, h=0.4, why="wall-hung pan on the far wall"), "guest-wc")
-    add(against("gwc-basin", W, "x0", -22.9, "washbasin", h=0.85, why="basin on the side wall"), "guest-wc")
+    basin = against("gwc-basin", W, "x0", -22.9, "washbasin", h=0.85, why="basin on the side wall")
+    override(basin, "cy", -23.15, "client 2026-09-29: move basin south outside open shower splash zone")
+    add(basin, "guest-wc")
+    add(against("gwc-shower", W, "x1", -22.7, "shower_walkin", w=1.219, d=0.8, h=0.0,
+                wet_zone=True, enclosure="none", drain="linear", falls="to linear drain",
+                why="open level-access east-wall wet zone; no enclosure or tray upstand; "
+                    "ASSUMED 800 mm depth and 1219 mm length, card nkba-shower-clear-floor-762"), "guest-wc")
     # -- dirty kitchen + laundry: gas hob 60 + oven, sink, washer (line drying: answers)
     DK = r["dirty-kitchen"]
     add(against("dk-run", DK, "y1", 11.66, "base_run", w=3.45, d=0.6, h=0.9,
@@ -665,6 +678,10 @@ def check(items=None, lay=None, _extended=False):
             probs["kitchen"].append("%s restores %.2f m2 of hall-facing tall appliances "
                                     "(client D1 decision 2026-09-28)" % (it["id"], area))
     if {"k-run", "k-island"} <= placed.keys():
+        island_modules = [kind for kind, _ in placed["k-island"].get("modules", [])]
+        if island_modules.count("single-induction") != 1 or "hob" in island_modules or "microwave" not in island_modules:
+            probs["kitchen"].append("island needs one single induction zone and microwave, without a main hob "
+                                    "(client 2026-09-29)")
         aisle = footprint(placed["k-run"])[1] - footprint(placed["k-island"])[3]
         meas["kitchen"]["main work aisle"] = "%.3f m (min 1.219; card nkba-work-aisle-multi-cook)" % aisle
         if aisle < 1.219 - 1e-6:
@@ -677,8 +694,12 @@ def check(items=None, lay=None, _extended=False):
         s0, s1 = next((a, b) for kind, a, b in module_spans(kr) if kind == "sink")
         sink = ((s0 + s1) / 2, (footprint(kr)[1] + footprint(kr)[3]) / 2)
         island = placed["k-island"]
-        h0, h1 = next((a, b) for kind, a, b in module_spans(island) if kind == "hob")
-        hob = ((h0 + h1) / 2, (footprint(island)[1] + footprint(island)[3]) / 2)
+        dirty = placed["dk-run"]
+        dirty_hobs = [(a, b) for kind, a, b in module_spans(dirty) if kind == "hob"]
+        if not dirty_hobs:
+            probs["kitchen"].append("dirty kitchen main hob missing (client 2026-09-29)")
+        h0, h1 = dirty_hobs[0] if dirty_hobs else (footprint(dirty)[0], footprint(dirty)[0])
+        hob = ((h0 + h1) / 2, (footprint(dirty)[1] + footprint(dirty)[3]) / 2)
         link = next(d for d in sp["doors"] if set(d["rooms"]) == {"kitchen", "dirty-kitchen"})
         portal = (link["x"], link["y"])
         via = lambda p: math.dist(fridge, portal) + math.dist(portal, p)
@@ -699,6 +720,7 @@ def check(items=None, lay=None, _extended=False):
         if soffit < 2.3 - 1e-6:
             probs["clearances"].append("cinema desk soffit %.3f m, need 2.300 m (card mh-dwelling-ceiling-min)" % soffit)
     need = {"sink": (0.610, 0.457, "cards nkba-sink-landing-610/457"),
+            "single-induction": (0.381, 0.305, "cards nkba-hob-landing-381/305"),
             "hob": (0.381, 0.305, "cards nkba-hob-landing-381/305"),
             "range": (0.381, 0.305, "cards nkba-hob-landing-381/305")}
     landing = ("counter", "dw")

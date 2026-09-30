@@ -54,6 +54,9 @@ M = {
                            roughness=0.25, tile_m=1.2, note="warm cream marble, large format (ASSUMED)"),
     "marble-bath": dict(kind="principled", asset="Marble014", base_rgb=[0.70, 0.66, 0.58], reflectance=0.62,
                         roughness=0.3, tile_m=1.2, note="cream marble, large format (ASSUMED)"),
+    "marble-wet": dict(kind="principled", asset="Marble014", base_rgb=[0.62, 0.59, 0.53], reflectance=0.55,
+                       roughness=0.45, tile_m=0.3,
+                       note="ASSUMED smaller-format wet-zone stone look-alike; slip rating and product pending"),
     "marble-white": dict(kind="principled", asset="Marble012", base_rgb=[0.78, 0.78, 0.76], reflectance=0.72,
                          roughness=0.18, tile_m=1.4, note="white veined stone worktops (ASSUMED)"),
     # Client (2026-09-28): "for all the wood in the villa use a more natural texture it looks annoyingly fake". The
@@ -770,6 +773,10 @@ def build(lay=None, views=None):
         parts = {}
         for name, b in zip(f["parts"], f["boxes"]):
             mat = part_material(f, name)
+            if f["mark"] == "gwc-shower" and name in ("wet-floor", "linear-drain"):
+                # One millimetre visual offset avoids coplanar z-fighting with the shell floor;
+                # the authored Revit wet finish and drain still top out at finished-floor level.
+                b = (b[0], b[1], b[2], b[3], b[4], b[5] + (0.0015 if name == "linear-drain" else 0.001))
             if name in ("top", "shelf", "apron") and mat == "walnut":
                 mat = "walnut-grain-x"
             key = (mat, name) if f["type"] in ("under_stair_storage", "store_shelving") else (mat, "body")
@@ -1195,19 +1202,19 @@ def build(lay=None, views=None):
     coffee_machine("appliance-coffee-main", "k-run", 0.775, -0.14)
     coffee_machine("appliance-coffee-dirty", "dk-run", -0.90, 0)
     island = it_all["k-island"]
-    hob = next((a, b) for kind, a, b in F3._local_modules(island) if kind == "hob")
+    hob = next((a, b) for kind, a, b in F3._local_modules(island) if kind == "single-induction")
     hx, hy, _ = FD.to_world_point(island, sum(hob) / 2, 0, 0, LZ["B"])
-    # a DOWNDRAFT extractor behind the hob: a ceiling hood over the island shaded its task downlights (the in-scene
+    # ASSUMED compact downdraft behind the one cooking zone: a ceiling hood over the island shaded its task downlights (the in-scene
     # measurement read 117 lx of 500 on the prep side) and blocked the view across the kitchen
     ztop_i = LZ["B"] + island["h"]
     ax_ = 0 if island["rot"] in (0, 180) else 1
     back = -1 if island["rot"] in (0, 90) else 1
     if ax_ == 0:
-        vent = box_faces(hx - 0.45, hy + back * 0.30 - 0.04, ztop_i, hx + 0.45, hy + back * 0.30 + 0.04, ztop_i + 0.012)
+        vent = box_faces(hx - 0.175, hy + back * 0.30 - 0.04, ztop_i, hx + 0.175, hy + back * 0.30 + 0.04, ztop_i + 0.012)
     else:
-        vent = box_faces(hx + back * 0.30 - 0.04, hy - 0.45, ztop_i, hx + back * 0.30 + 0.04, hy + 0.45, ztop_i + 0.012)
+        vent = box_faces(hx + back * 0.30 - 0.04, hy - 0.175, ztop_i, hx + back * 0.30 + 0.04, hy + 0.175, ztop_i + 0.012)
     mesh("appliance-downdraft-island", "black-metal", vent, "fixture", room="kitchen",
-         label="ASSUMED downdraft extractor behind the island hob; add to Revit")
+         label="ASSUMED 350 mm downdraft local capture for cooking fumes from single induction zone; duct/discharge pending")
     dirty = it_all["dk-run"]
     hob = next((a, b) for kind, a, b in F3._local_modules(dirty) if kind == "hob")
     hx, hy, _ = FD.to_world_point(dirty, sum(hob) / 2, 0, 0, LZ["B"])
@@ -1293,19 +1300,23 @@ def build(lay=None, views=None):
         if fitting["kind"] == "ceiling-rain-head":
             x, y, z = fitting["x"], fitting["y"], LZ[fitting["level"]] + fitting["z"]
             mesh(fid + "-drop", "brass", box_faces(x - 0.012, y - 0.012, z + 0.012,
-                 x + 0.012, y + 0.012, VL.ceiling_z("GF", x=x, y=y, room=fitting["room"], lay=lay, spec=sp)),
+                 x + 0.012, y + 0.012, VL.ceiling_z(fitting["level"], x=x, y=y, room=fitting["room"], lay=lay, spec=sp)),
                  "fixture", room=fitting["room"], label="ASSUMED ceiling rain-head drop")
             mesh(fid + "-plate", "brass", box_faces(x - 0.16, y - 0.16, z - 0.014,
                  x + 0.16, y + 0.16, z + 0.014), "fixture", room=fitting["room"],
                  label="ASSUMED ceiling rain-head plate")
         elif fitting["kind"] == "hand-shower":
-            x, y, z = fitting["x"], fitting["y"], fitting["z"]
+            x, y, z = fitting["x"], fitting["y"], LZ[fitting["level"]] + fitting["z"]
             mesh(fid + "-rail", "brass", box_faces(x - 0.012, y - 0.06, z - 0.35,
                  x + 0.012, y + 0.012, z + 0.45), "fixture", room=fitting["room"],
                  label="ASSUMED wall-mounted hand-shower rail")
             mesh(fid + "-head", "brass", box_faces(x - 0.045, y + 0.005, z + 0.21,
                  x + 0.045, y + 0.09, z + 0.31), "fixture", room=fitting["room"],
                  label="ASSUMED hand shower on sliding holder")
+        elif fitting["kind"] == "linear-drain":
+            mesh(fid, "black-metal", box_faces(fitting["x0"], fitting["y0"], LZ[fitting["level"]] - 0.003,
+                 fitting["x1"], fitting["y1"], LZ[fitting["level"]]), "fixture", room=fitting["room"],
+                 label="ASSUMED flush linear drain in falling wet-zone floor; no enclosure")
         else:
             # WP4-B4 (client: "the glass looked too reflective"): a dedicated material carrying THIS fitting's own
             # measured transmittance (0.91) and index of refraction (1.52) from revit_spec's bath_fittings --
@@ -1338,8 +1349,8 @@ def build(lay=None, views=None):
              box_faces(x - 0.12, end_y - 0.012, z - 0.12,
                        x + 0.12, end_y + 0.012, z + 0.12), "fixture", room=vent["room"],
              label="ASSUMED external extract grille: " + vent["room"])
-    notes.append("ASSUMED bath-fitting bodies and fixing details follow the specified rain head, hand shower rail "
-                 "and fixed frameless screen. Guest WC and dirty-kitchen ducts terminate at external grilles; "
+    notes.append("ASSUMED bath-fitting bodies and fixing details follow the specified rain heads, hand shower rails, "
+                 "guest bathroom flush linear drain and ensuite fixed frameless screen. Guest bathroom and dirty-kitchen ducts terminate at external grilles; "
                  "the dirty-kitchen cooker hood is the specified extract source. Drip, flow and products remain "
                  "service selections, not render claims.")
 
@@ -1541,18 +1552,18 @@ def build(lay=None, views=None):
     notes.extend(land_notes)
 
     # ---- lights and fixture bodies
-    VL.bind_products()
+    products = VL.products()
     lights = []
     ies_dir = OUT / "ies"
     for k in VL.KINDS:
-        if k not in VL.PRODUCTS and VL.KINDS[k]["mount"] in ("recessed", "task-lamp"):
+        if k not in products and VL.KINDS[k]["mount"] in ("recessed", "task-lamp"):
             p = ies_dir / "generic" / (k + ".ies")
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(VL.generic_ies(VL.KINDS[k]["lm"], VL.KINDS[k]["beam"], k), encoding="utf-8")
     walls_by_level = {lv: F._walls(RS.build(lay), lv) for lv in ("B", "GF")}
     for f in VL.design(lay):
         k = VL.KINDS[f.kind]
-        prod = VL.PRODUCTS.get(f.kind)
+        prod = products.get(f.kind)
         cct = int(prod["cct"]) if prod else k["cct"]
         pinfo = ({"manufacturer": prod["manufacturer"], "code": prod["code"], "generic": False,
                   "substitute": prod["substitute"]} if prod else {"manufacturer": "generic", "code": f.kind,
@@ -1970,7 +1981,7 @@ def part_material(f, part):
         return "black-metal"
     if part in ("seat-mesh", "back-mesh", "armrest"):
         return "charcoal-fabric"
-    if part in ("hob", "oven-glass", "microwave-glass"):
+    if part in ("hob", "single-induction", "oven-glass", "microwave-glass"):
         return "screen-black"
     if part == "sink":
         return "black-metal"
@@ -2001,7 +2012,7 @@ def part_material(f, part):
             return "black-metal"
         return "walnut" if room in ("study-game", "parents-bed") else "oak"
     if t == "island":
-        return "marble-white" if part == "worktop" else ("black-metal" if part == "plinth" else "walnut")
+        return "marble-white" if part in ("worktop", "waterfall-end") else ("black-metal" if part == "plinth" else "walnut")
     if t == "base_run":
         if part == "worktop":
             return "marble-white"
@@ -2036,6 +2047,10 @@ def part_material(f, part):
     if t == "bath":
         return "ceramic-white"
     if t == "shower_walkin":
+        if part == "linear-drain":
+            return "black-metal"
+        if part == "wet-floor":
+            return "marble-wet"
         return "glass-guard" if part == "glass" else ("marble-ensuite" if room == "parents-ensuite" else "marble-bath")
     if t in ("washer_dryer",):
         return "ceramic-white"
@@ -2261,7 +2276,7 @@ def VIEWS(lay=None, resolve=True):
       **BATH_DAY)
     V[-1]["caption_notes"] = ["The WC is in the corner beside the door, below and outside this frame: no standing "
                               "point holds basin, shower and WC together (checked by render_views.choose)."]
-    v("v16-guest-wc", "Guest WC", "evening", I, I, 24, ["gwc-basin", "gwc-wc"], room="guest-wc")
+    v("v16-guest-wc", "Guest bathroom", "evening", I, I, 24, ["gwc-basin", "gwc-shower"], room="guest-wc")
     v("v17-dirty-kitchen", "Dirty kitchen and laundry", "day", I, I, 24, ["dk-run", "dk-appliance-bank"], room="dirty-kitchen",
       **BASEMENT_DAY)
     # the rest of the ten more, for the final set (v15-v17 above are three of them)

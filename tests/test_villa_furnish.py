@@ -158,8 +158,8 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
         self.assertTrue(any("dk-run: modules add up to" in p for p in res["kitchen"]["problems"]))
 
     def test_hob_landing(self):
-        res = _run(lambda items, ids: ids["k-island"].update(modules=[("counter", 0.2), ("hob", 0.9), ("counter", 1.4)]))
-        self.assertTrue(any("hob landing" in p for p in res["kitchen"]["problems"]))
+        res = _run(lambda items, ids: ids["k-island"].update(modules=[("counter", 0.2), ("single-induction", 0.35), ("counter", 2.5)]))
+        self.assertTrue(any("single-induction landing" in p for p in res["kitchen"]["problems"]))
 
     def test_island_keeps_a_multi_cook_work_aisle(self):
         # With the tall wall gone, the remaining opposing counter frontages need 1219 mm (NKBA work aisle).
