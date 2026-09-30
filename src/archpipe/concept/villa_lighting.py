@@ -81,6 +81,8 @@ KINDS = {
                  cct=3000, cri=90, layer="task"),
     "VSTRIP": dict(what="vertical LED strip at a hanging-section edge (shadow-free dressing light)", mount="strip",
                    lm_per_m=500, cct=3000, cri=90, layer="task"),
+    "STORE-BATTEN": dict(what="ASSUMED opal LED storage batten, 0.70 m per shelving bay", mount="strip",
+                          lm_per_m=900, cct=3000, cri=90, layer="task"),
     "MIRROR": dict(what="backlit mirror halo, 3000 K", mount="strip", lm_per_m=250, cct=3000, cri=90, layer="task"),
     "VSCONCE": dict(what="vertical opal sconce 0.5 m, each side of the mirror", mount="wall", lm=450, beam=None,
                     cct=3000, cri=90, layer="task", diameter=0.12),
@@ -256,6 +258,19 @@ def design(lay=None):
     a = fp["lounge-armchair"]
     add("ADJ", "lounge", (a[0] + a[2]) / 2 - 0.4, (a[1] + a[3]) / 2, aim=(0.35, 0, -1),
         why="reading light over the armchair, aimed ~20 deg", card="ies-res-chair-reading-200")
+    from . import villa_furnish3d as F3
+    for store in (piece for piece in it.values() if piece["type"] == "under_stair_storage"):
+        backs = [(name, F3.to_world(store, box)) for name, box in F3.body(store)
+                 if name.endswith("-back")]
+        for kind, _ in store["modules"]:
+            bay = [box for name, box in backs if name == kind + "-back"]
+            if not bay:
+                continue
+            xa, xb = min(box[0] for box in bay) + 0.035, max(box[3] for box in bay) - 0.035
+            y = bay[0][4] + 0.008  # on the inside face of the back panel
+            z = LEVEL_Z[store["level"]] + min(box[5] for box in bay) - 0.055
+            strip("BACK", store["room"], (xa, y), (xb, y), z, (0, 1, -0.35),
+                  why="ASSUMED internal LED strip on the back of each open under-stair bay")
     add("DL", "lounge-nook", (rc["lounge-nook"][0] + rc["lounge-nook"][2]) / 2, (rc["lounge-nook"][1] +
         rc["lounge-nook"][3]) / 2, why="the way to the pantry", card="ies-res-passage-30")
     Pn = rc["pantry"]
@@ -365,7 +380,16 @@ def design(lay=None):
         add("DESK", "cinema", x, desk[1] + 0.28, z=LEVEL_Z["B"] + VL_DESK_Z,
             why="two shielded task lamps at the cinema desk, switched off for films", card="ies-res-desk-400")
     Sr = rc["store-ramp"]
-    add("DL", "store-ramp", (Sr[0] + Sr[2]) / 2, (Sr[1] + Sr[3]) / 2, why="store", card="ies-res-storage-frequent-50")
+    shelf = fp["store-shelves"]
+    for bay in range(3):
+        xa = shelf[0] + bay * (shelf[2] - shelf[0]) / 3 + 0.125
+        xb = xa + 0.70
+        y = min(Sr[3] - 0.25, shelf[1] - 0.28)
+        z = min(ceiling_z("B", xa, "store-ramp", y, lay, spec),
+                ceiling_z("B", xb, "store-ramp", y, lay, spec)) - 0.08
+        strip("STORE-BATTEN", "store-ramp", (xa, y), (xb, y), z, (0, 0, -1),
+              why="one downward opal batten for each height-zoned shelving bay; ASSUMED product",
+              card="ies-res-storage-frequent-50")
     G = rc["guest-wc"]
     bs = fp["gwc-basin"]
     add("DL", "guest-wc", (G[0] + G[2]) / 2, (G[1] + G[3]) / 2, why="guest WC ambient", card="ies-res-shower-50")
@@ -644,6 +668,7 @@ ROOM_TARGETS = {   # room -> general card (floor average, direct only: advisory)
     "kids-a": "ies-res-bedroom-general-50", "kids-b": "ies-res-bedroom-general-50",
     "parents-bed": "ies-res-bedroom-general-50", "parents-dressing": "ies-res-dressing-general-100",
     "cinema": "ies-res-media-lcd-20", "dirty-kitchen": "ies-res-laundry-200", "pantry": "ies-res-storage-frequent-50",
+    "store-ramp": "ies-res-storage-frequent-50",
     "family-bath": "ies-res-shower-50", "parents-ensuite": "ies-res-shower-50", "guest-wc": "ies-res-shower-50",
 }
 

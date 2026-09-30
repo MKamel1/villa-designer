@@ -41,11 +41,32 @@ class ChosenViews(unittest.TestCase):
         # the stores. The northwest standing point sees their fronts first.
         from scripts import villa_render_views as render_plan
         self.assertFalse(render_plan.under_stair_occlusion_violation(under_stair))
+        self.assertEqual(render_plan.storage_front_occlusions(under_stair, ITEMS), [])
+        self.assertEqual(under_stair["camera"]["position"][:2], [5.2, -25.9])
+        self.assertEqual(under_stair["camera"]["lens_mm"], 24)
+        from archpipe.concept import villa_furnish3d as F3
+        old_parts = {}
+        for item_id in under_stair["subjects"]:
+            item = ITEMS[item_id]
+            parts = [(name, box) for name, box in F3.body(item) if name != "sliding-door-pocketed"]
+            for name, box in F3.body(item):
+                if name.endswith("-back"):
+                    xa, _, _, xb, _, top = box
+                    parts.append(("sliding-door-open", (xb - (xb - xa) * .28, item["d"] / 2 - .045,
+                                                        .1, xb - .006, item["d"] / 2 - .025, top)))
+            old_parts[item_id] = parts
+        self.assertTrue(render_plan.storage_front_occlusions(under_stair, ITEMS, old_parts),
+                        "the actual former 28-percent fronts must fail")
+        flight = ITEMS["stair-flight-store"]
+        closed = {flight["id"]: F3.body(flight) + [("sliding-door-closed", (-flight["w"] / 2,
+                    flight["d"] / 2 - .04, .1, flight["w"] / 2, flight["d"] / 2 - .02, 1.5))]}
+        self.assertTrue(render_plan.storage_front_occlusions(under_stair, ITEMS, closed))
         old = {**under_stair, "camera": {**under_stair["camera"], "position": [9.577, -27.871, -1.65]}}
         self.assertTrue(render_plan.under_stair_occlusion_violation(old))
         under_ramp = views["v30-under-ramp-store"]
         self.assertEqual(under_ramp["exposure"], "evening")
-        self.assertEqual(under_ramp["dimmers"]["ambient"], 1.0)
+        self.assertEqual(under_ramp["dimmers"]["task"], 1.0)
+        self.assertIn("task", under_ramp["layers_on"])
         self.assertTrue(any("no window" in note.lower() for note in under_ramp["caption_notes"]))
 
     def test_exterior_lounge_subject_uses_built_sofa_bounds(self):

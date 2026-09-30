@@ -28,11 +28,11 @@ def readback():
 class Round3BuilderContract(unittest.TestCase):
     def test_real_spec_round_trip_and_counts(self):
         self.assertEqual(len(SPEC["furniture"]), 71)
-        self.assertEqual(len(DETAILS), 67)
+        self.assertEqual(len(DETAILS), 75)   # round 3b: open bays, sides, shelves, bike hooks; stored contents excluded
         self.assertEqual(sum(d["mark"].startswith("SWING-") for d in DETAILS), 6)
         self.assertEqual(sum(d["mark"].startswith("DLN-") for d in DETAILS), 2)
         self.assertEqual(sum("-module-" in d["mark"] for d in DETAILS), 8)
-        self.assertEqual(sum("-body-" in d["mark"] for d in DETAILS), 51)
+        self.assertEqual(sum("-body-" in d["mark"] for d in DETAILS), 59)   # 51 + 8 new joinery parts (round 3b)
         self.assertFalse(any("curtain" in d["mark"].lower() for d in DETAILS))
         bath = next(d for d in F3.round2_elements(SPEC) if d["mark"] == "pe-bath-screen")
         self.assertIn("transmittance 0.91; ior 1.52", bath["comments"])
@@ -59,7 +59,7 @@ class Round3BuilderContract(unittest.TestCase):
     def test_storage_body_above_soffit_fails(self):
         rb = readback()
         next(d for d in rb["round3_details"] if d["mark"].startswith("stair-flight-store-body-")
-             and "carcass" in d["comments"])["bbox_mm"][5] += 10
+             and "-back" in d["comments"])["bbox_mm"][5] += 10
         self.assertTrue(any("stair-flight-store-body" in p and "bbox" in p
                             for p in F3.round3_postcondition(SPEC, rb, LAY)))
 
@@ -88,3 +88,10 @@ class Round3BuilderContract(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class StoredContentsStayOutOfRevit(unittest.TestCase):
+    def test_contents_are_not_construction(self):
+        # the round-3 storage change put suitcases, boxes and a vacuum into the Revit payload (67 -> 93 details)
+        kinds = {d["comments"].split("; ")[1] for d in F3.round3_elements(SPEC) if "-body-" in d["mark"]}
+        self.assertFalse(kinds & F3.STORED_CONTENTS, kinds & F3.STORED_CONTENTS)

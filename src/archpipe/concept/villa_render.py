@@ -764,10 +764,16 @@ def build(lay=None, views=None):
             mat = part_material(f, name)
             if name in ("top", "shelf", "apron") and mat == "walnut":
                 mat = "walnut-grain-x"
-            parts.setdefault(mat, []).extend(box_faces(b[0], b[1], z + b[2], b[3], b[4], z + b[5]))
-        for k, (mat, faces) in enumerate(parts.items()):
+            key = (mat, name) if f["type"] in ("under_stair_storage", "store_shelving") else (mat, "body")
+            parts.setdefault(key, []).extend(box_faces(b[0], b[1], z + b[2], b[3], b[4], z + b[5]))
+        for k, ((mat, name), faces) in enumerate(parts.items()):
+            label = f["mark"].split("#")[0]
+            if f["type"] in ("under_stair_storage", "store_shelving") and k:
+                label += " " + name + (" dressing" if name in
+                         ("vacuum-body", "vacuum-wand", "suitcase", "suitcase-handle", "storage-box",
+                          "folded-linens", "tool-case") else "")
             mesh("furn-%s-%d" % (f["mark"].replace("#", "-"), k), mat, faces, "furniture", room=f["room"],
-                 label=f["mark"].split("#")[0])
+                 label=label)
     # ---- WP4-A: real furniture models, replacing the procedural stand-in where a checked fit rule allows it.
     # Mapping id -> (asset, footprint (w, d), reference height for the +-5% guard, position, rot, room). The
     # reference height is the piece's own catalogue `h` for a whole item; this codebase's catalogue.py carries no
@@ -1711,11 +1717,31 @@ def build(lay=None, views=None):
             lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="line", position=[f.x, f.y, f.z],
                                aim=_unit(f.aim), size=[0.012, f.length], length_dir=list(f.along), spread_deg=120,
                                lumens=round(f.lumens, 1), cct_k=cct, cri=90, product=pinfo, dimmer=1.0))
+            if f.kind == "STORE-BATTEN":
+                mesh("batten-body-" + f.id, "white-paint-joinery",
+                     box_faces(f.x - f.length / 2, f.y - 0.025, f.z,
+                               f.x + f.length / 2, f.y + 0.025, f.z + 0.035),
+                     "fixture", room=f.room, label="ASSUMED opal LED storage batten body", layer=f.layer)
+                for end, sx in enumerate((f.x - f.length / 2 + 0.04, f.x + f.length / 2 - 0.04)):
+                    top = VL.ceiling_z(f.level, sx, f.room, f.y, lay, sp)
+                    mesh("batten-mount-%s-%d" % (f.id, end), "white-paint-joinery",
+                         box_faces(sx - 0.012, f.y - 0.012, f.z + 0.03,
+                                   sx + 0.012, f.y + 0.012, top),
+                         "fixture", room=f.room, label="ASSUMED batten soffit mount", layer=f.layer)
+                mesh("batten-diffuser-" + f.id, "opal-strip",
+                     [quad_down(f.x - f.length / 2 + 0.015, f.y - 0.018,
+                                f.x + f.length / 2 - 0.015, f.y + 0.018, f.z - 0.001)],
+                     "fixture", room=f.room, label="ASSUMED opal LED storage batten diffuser", layer=f.layer)
             if f.kind == "BACK" and f.room == "bar-alcove":
                 mesh("detail-cabinet-led-" + f.id, "opal-strip", box_faces(
                     f.x - f.length / 2, f.y - 0.04, f.z - 0.012,
                     f.x + f.length / 2, f.y + 0.006, f.z + 0.002), "fixture", room=f.room,
                     label="ASSUMED concealed LED strip behind library shelf books")
+            if f.kind == "BACK" and "under-stair bay" in f.why:
+                mesh("detail-store-led-" + f.id, "opal-strip", box_faces(
+                    f.x - f.length / 2, f.y - 0.008, f.z - 0.012,
+                    f.x + f.length / 2, f.y + 0.008, f.z + 0.002), "fixture", room=f.room,
+                    label="ASSUMED internal LED strip in open storage bay", layer=f.layer)
         elif k["mount"] == "wall-marker":
             w, h = 0.10, 0.04
             mname = "marker-%d" % cct
@@ -1973,6 +1999,10 @@ def part_material(f, part):
     if t in ("bookcase", "daybed_nook", "joinery_end_panel"):
         return "walnut"
     if t in ("pantry_shelving", "store_shelving"):
+        if part in ("storage-box", "tool-case"):
+            return "linen" if part == "storage-box" else "charcoal-fabric"
+        if part.startswith("suitcase"):
+            return "leather-brown"
         return "white-paint-joinery"
     if t in ("wardrobe", "tall_column"):
         if room in ("parents-dressing", "parents-dressing-ext"):
@@ -2003,8 +2033,14 @@ def part_material(f, part):
         # WP4-B6: was falling through to the "oak" default (unmaterialised). Sliding doors in greige lacquer (this
         # house's other joinery-door finish, e.g. base_run's drawer/door fronts); the carcass and shelf in walnut
         # (matching bookcase/joinery_end_panel); the plinth in the same black-metal as every other plinth.
-        if part == "sliding-door":
+        if part == "sliding-door-pocketed":
             return "greige-lacquer"
+        if part in ("storage-box", "folded-linens"):
+            return "linen" if part == "folded-linens" else "oak"
+        if part.startswith("suitcase"):
+            return "leather-brown"
+        if part.startswith("vacuum"):
+            return "black-metal"
         if part == "plinth":
             return "black-metal"
         return "walnut"
@@ -2023,6 +2059,11 @@ def props(lay):
         out.append({"id": pid, "asset": asset, "position": [round(x, 3), round(y, 3), round(z, 3)],
                     "rotation_deg": [0, 0, rz], "scale": s, "label": "dressing: " + (label or asset)})
 
+    def plant(pid, asset, x, y, z, room, support_id=None, s=1.0, label=""):
+        add(pid, asset, x, y, z, s=s, label=label)
+        out[-1].update(indoor_plant=True, room=room, container="integrated-pot",
+                       support_id=support_id or "finished-floor")
+
     def c(k):
         q = fp[k]
         return (q[0] + q[2]) / 2, (q[1] + q[3]) / 2
@@ -2037,11 +2078,13 @@ def props(lay):
         "art above the sideboard")
     x, y = c("lounge-coffee")
     add("lounge-books", "book_encyclopedia_set_01", x - 0.3, y, B + it["lounge-coffee"]["h"], label="books")
-    add("lounge-plant", "pachira_aquatica_01", 4.3, -24.35, B, label="money tree in the corner by the street window")
+    plant("lounge-plant", "potted_plant_01", 4.2, -24.35, B, "lounge",
+          label="potted floor plant beside street window; measured asset 0.587 x 0.634 m footprint")
     x, y = c("living-coffee")
-    add("living-plant-table", "potted_plant_04", x + 0.3, y, B + it["living-coffee"]["h"],
+    plant("living-plant-table", "potted_plant_04", x + 0.3, y, B + it["living-coffee"]["h"], "living",
+        support_id="living-coffee",
         label="single potted table plant, 0.168 x 0.185 m footprint, 0.267 m tall")
-    add("living-plant", "potted_plant_02", 22.1, -24.25, B, label="floor plant by the garden door")
+    plant("living-plant", "potted_plant_02", 22.1, -24.25, B, "living", label="potted floor plant by the garden door")
     # Client round 2: the lit glass-door cabinets are for book display. Every shelf (tops at 0.102 plinth, then
     # 0.442/0.842/1.242/1.642 m, villa_furniture_detail._glass_bookcase) holds book sets 0.55 m wide, 0.24 m tall
     # (measured bounds_m), alternating full and half rows so the display reads curated, not stocked.
@@ -2059,15 +2102,77 @@ def props(lay):
     # plants where a person would put them (client: "consider if all the added plants are ... reasonable"): the
     # bedroom one moved out of the vanity chair's way into the window corner beside the vanity; the study one out of
     # the new low window into the corner beside the TV unit
-    add("bedroom-plant", "potted_plant_01", fp["pb-vanity"][2] - 0.17, fp["pb-vanity"][3] + 0.32, G, s=0.58,
+    plant("bedroom-plant", "potted_plant_01", fp["pb-vanity"][2] - 0.17, fp["pb-vanity"][3] + 0.32, G,
+        "parents-bed", s=0.58,
         label="single potted plant, 0.341 x 0.367 m footprint, 0.783 m tall")
-    add("study-plant", "potted_plant_01", (fp["study-tv"][0] + fp["study-tv"][2]) / 2, fp["study-tv"][3] + 0.45, G,
+    plant("study-plant", "potted_plant_01", (fp["study-tv"][0] + fp["study-tv"][2]) / 2,
+        fp["study-tv"][3] + 0.45, G, "study-game",
         label="plant")
     for rid, sofa in (("lounge", "lounge-sofa"), ("living", "living-sofa")):
         x, y = c(sofa)
         add("pillows-" + rid, "throw_pillows_01", x, y - 0.05 if rid == "lounge" else y, B + 0.44,
             0 if rid == "lounge" else 0, label="throw pillows")
+    failures = indoor_plant_violations(out, lay)
+    if failures:
+        raise ValueError("indoor plant placement: " + "; ".join(failures))
     return out
+
+
+def indoor_plant_violations(placed, lay):
+    """Early scene guard for pot, support and seating-to-TV view corridor."""
+    items = F.layout(lay)
+    by_room = {}
+    for item in items:
+        by_room.setdefault(item["room"], []).append(item)
+    failures = []
+    by_id = {item["id"]: item for item in items}
+    for p in placed:
+        if not p.get("indoor_plant") and "plant" not in p["asset"] and "pachira" not in p["asset"]:
+            continue
+        pid, x, y, z = p["id"], *p["position"]
+        bounds = MANIFEST_BOUNDS.get(p["asset"])
+        if p.get("container") != "integrated-pot" or not p["asset"].startswith("potted_plant_"):
+            failures.append(pid + " lacks a measured integrated pot")
+        if bounds is None:
+            failures.append(pid + " has no measured asset bounds")
+            continue
+        support_id = p.get("support_id")
+        room = lay["rooms"].get(p.get("room"), {})
+        if support_id == "finished-floor":
+            support_z = LZ.get(room.get("level"), float("inf"))
+        elif support_id in by_id:
+            item = by_id[support_id]
+            support_z = LZ[item["level"]] + item["h"]
+            foot = F.footprint(item)
+            if not (foot[0] <= x <= foot[2] and foot[1] <= y <= foot[3]):
+                failures.append(pid + " is outside its named furniture support")
+        else:
+            support_z = float("inf")
+        if abs(z - support_z) > 0.001:
+            failures.append(pid + " base is below or above its finished support")
+        if p.get("room") not in by_room:
+            failures.append(pid + " has no room")
+            continue
+        half_w = (bounds["max"][0] - bounds["min"][0]) * p["scale"] / 2
+        half_d = (bounds["max"][2] - bounds["min"][2]) * p["scale"] / 2
+        room_items = by_room[p["room"]]
+        seats = [F.footprint(i) for i in room_items if i["type"].startswith("sofa")]
+        televisions = [F.footprint(i) for i in room_items if i["type"] == "tv_unit"]
+        for seat in seats:
+            for tv in televisions:
+                seat_y = (seat[1] + seat[3]) / 2
+                tv_y = (tv[1] + tv[3]) / 2
+                low_y, high_y = min(seat_y, tv_y), max(seat_y, tv_y)
+                if abs(tv_y - seat_y) < 0.1 or y + half_d < low_y or y - half_d > high_y:
+                    continue
+                ys = (max(low_y, y - half_d), min(high_y, y + half_d))
+                edges = [(seat[0] + (yy - seat_y) / (tv_y - seat_y) * (tv[0] - seat[0]),
+                          seat[2] + (yy - seat_y) / (tv_y - seat_y) * (tv[2] - seat[2])) for yy in ys]
+                if x + half_w > min(min(pair) for pair in edges) and \
+                        x - half_w < max(max(pair) for pair in edges):
+                    failures.append(pid + " blocks a seating-to-TV corridor")
+                    break
+    return failures
 
 
 # ------------------------------------------------------------------ views
@@ -2193,20 +2298,23 @@ def VIEWS(lay=None):
     # v29: RV.choose in stair-b put the camera at x=9.577 and the stair treads blocked both storage modules
     # despite their plan footprints falling inside the lens wedge. Stand northwest of the stair flight in the
     # lounge and aim at the joinery fronts; 16 mm holds both separate modules from this clear point.
-    v("v29-under-stair-store", "Under-stair storage from the lounge", "day", [4.5, -27.0, B + 1.35],
-      [5.717, -29.742, B + 1.35], 16, ["stair-flight-store", "stair-landing-store"],
+    v("v29-under-stair-store", "Under-stair storage from the lounge", "day", [5.2, -25.9, B + 1.35],
+      [5.55, -28.4, B + 1.35], 24, ["stair-flight-store", "stair-landing-store"],
       final_only=True, **BASEMENT_DAY)
-    V[-1]["camera"]["lens_basis"] = ("widest subject corner 43.7 deg off axis from the clear northwest standing "
-                                     "point; 24 mm holds 36.9, 16 mm holds 48.4; at 16 mm widest 43.7 deg")
-    V[-1]["caption_notes"] = ["Sliding joinery fronts shown closed; the storage modules are behind them."]
+    V[-1]["dimmers"]["accent"] = 1.0
+    V[-1]["caption_notes"] = ["24 mm view from the lounge. Telescoping sliding fronts retracted into "
+                              "the side pockets; each open bay has an ASSUMED internal LED strip. "
+                              "Dressing inside: vacuum, suitcase, seasonal boxes and folded linens (ASSUMED)."]
     # v30 rendered black (round 4): the store has no window, but the view used the shared day exposure (~100-600
     # lx assumed) with only DL-store-ramp-01 dimmed to 50 %. Made an interior presentation instead: evening
     # exposure (ADR-0013, lamp white balance) with ambient at full brightness, the store's only layer.
     v("v30-under-ramp-store", "Under-ramp store shelving", "evening", I, I, 24,
-      ["store-shelves"], room="store-ramp", final_only=True, layers=["ambient"], dimmers={"ambient": 1.0})
-    V[-1]["caption_notes"] = ["The store has no window; shown by its own light (DL-store-ramp-01) at full "
-                              "brightness, not daylight.",
-                              "The sloping ramp soffit gives 1.45 to 2.0 m clear height."]
+      ["store-shelves"], room="store-ramp", final_only=True, layers=["task"], dimmers={"task": 1.0})
+    V[-1]["caption_notes"] = ["Store has no window; shown with three ASSUMED opal LED battens, one over each bay; "
+                              "IES Lighting Handbook 10th ed. Table 33.2 frequent-use storage card: 50 lx "
+                              "maintained floor average.",
+                              "Shelves step below the 1.45 to 2.0 m ramp soffit; labelled boxes, suitcases and "
+                              "tool cases are dressing (ASSUMED). The bike bay stays clear at floor level."]
     v("v31-dressing-hers", "Dressing: her section", "evening", I, I, 24,
       ["pd-hang-1"], room="parents-dressing", final_only=True, dimmers={"ambient": 0.6})
     # The chosen east-end camera filled v32 with an empty shelf and concealed the double-hang rail behind

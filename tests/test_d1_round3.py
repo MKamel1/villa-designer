@@ -8,6 +8,7 @@ from archpipe.concept import villa_furnish as F
 from archpipe.concept import villa_furnish3d as F3
 from archpipe.concept import villa_lighting as L
 from archpipe.concept import villa_r11 as R
+from archpipe.concept import villa_render as V
 
 
 class D1Round3(unittest.TestCase):
@@ -36,6 +37,32 @@ class D1Round3(unittest.TestCase):
         bad = F.check(bad_items, self.lay)
         for key in ("nook_curtain", "seating_focal", "wardrobe_capacity", "under_stair_storage"):
             self.assertEqual(bad[key]["status"], "fail", key)
+
+    def test_open_store_contents_stay_below_both_soffits(self):
+        for item in (i for i in self.items if i["type"] in ("under_stair_storage", "store_shelving")):
+            named = F3.body(item)
+            self.assertTrue(any("sliding-door-pocketed" == name for name, _ in named) if
+                            item["type"] == "under_stair_storage" else any("shelf" in name for name, _ in named))
+            if item["type"] == "under_stair_storage":
+                self.assertEqual(sum(name == "sliding-door-pocketed" for name, _ in named), len(item["modules"]))
+                self.assertEqual(sum(name.endswith("-side") for name, _ in named), 2 * len(item["modules"]))
+            self.assertTrue(any(name in ("suitcase", "storage-box", "vacuum-body", "tool-case")
+                                for name, _ in named) if item["id"] != "stair-landing-store" else bool(named))
+        self.assertEqual(F.check(self.items, self.lay)["under_stair_storage"]["status"], "pass")
+        bad = copy.deepcopy(self.items)
+        next(i for i in bad if i["id"] == "store-shelves")["soffit"] = None
+        self.assertEqual(F.check(bad, self.lay)["under_stair_storage"]["status"], "fail")
+
+    def test_store_card_and_one_batten_per_bay(self):
+        under_stair = [f for f in self.fixtures if "under-stair bay" in f.why]
+        self.assertEqual(len(under_stair), 4)
+        self.assertTrue(all(f.kind == "BACK" and f.layer == "accent" for f in under_stair))
+        store = [f for f in self.fixtures if f.room == "store-ramp"]
+        self.assertEqual(len([f for f in store if f.kind == "STORE-BATTEN"]), 3)
+        self.assertTrue(all(f.card == "ies-res-storage-frequent-50" for f in store))
+        achieved = next(r for r in L.check(self.lay, self.fixtures)["rooms"] if r["room"] == "store-ramp")
+        self.assertGreaterEqual(achieved["avg_floor_lx_direct"], achieved["required_lx"])
+        self.assertEqual(achieved["required_lx"], 50)
 
     def test_real_island_shadow_reproduction_and_clear_relayout(self):
         self.assertFalse(L.task_beam_obstructions(self.lay, self.fixtures))

@@ -211,3 +211,9 @@ The driver also accepts `--views none --measure-lighting` and returns
 `lighting-measurements.json`. It accepts `--views none --calibrate` and retrieves `calibration.json`, the white-card PNG and both
 linear probe images as OpenEXR files.
 
+## Storage and indoor planting review (2026-09-29)
+
+For a storage view, declare whether sliding fronts are open and show stocked shelves or floor zones inside the checked envelope. The scene exports the state and labels stored items as dressing. Check every item against the stair or ramp soffit before export. Each windowless store needs a held lighting card, a fitting at every practical bay, and a reported achieved floor value; `store-ramp` uses the IES frequent-use storage card of 50 maintained lux and three ASSUMED opal battens. Inspect the isolated close-up before accepting the geometry or light in a final view.
+
+For each indoor plant, use a measured potted asset and declare the finished floor or furniture-top support elevation. `villa_render.indoor_plant_violations` checks pot identity, measured bounds, support contact and the sofa-to-television corridor for every room. Run it before `write()`, then inspect an eye-level preview to confirm that the pot reads on the floor and the television remains visible from the seats.
+

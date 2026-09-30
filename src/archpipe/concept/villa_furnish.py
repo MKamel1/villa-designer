@@ -290,7 +290,7 @@ def layout(lay=None, products=True):
                     "914 mm in front"), "pantry")
     add(against("pantry-shelves-2", PP, "x1", PP[1], "pantry_shelving", w=PP[3] - PP[1], h=2.2,
                 why="shelving on the other end wall"), "pantry")
-    add(against("store-shelves", r["store-ramp"], "y1", r["store-ramp"][0] + 0.1, "store_shelving", w=2.85, h=1.3,
+    add(against("store-shelves", r["store-ramp"], "y1", r["store-ramp"][0] + 0.1, "store_shelving", w=2.85, h=1.9,
                 modules=[("luggage", 0.95), ("seasonal-boxes", 0.95), ("bikes", 0.95)],
                 soffit="ramp", why="zoned shelves under the rising ramp: luggage, seasonal boxes and bikes"),
         "store-ramp")
@@ -808,10 +808,13 @@ def check(items=None, lay=None, _extended=False):
         probs["under_stair_storage"].append("flight or landing storage missing (client round-3 brief)")
     ramp = ids.get("store-shelves")
     if ramp:
+        from . import villa_furnish3d as F3
         fp = footprint(ramp)
         clear = min(VP.clear_at(fp[0]), VP.clear_at(fp[2]))
-        meas["under_stair_storage"]["ramp shelf"] = "%.3f m clear at low end; %.3f m shelf" % (clear, ramp["h"])
-        if ramp["h"] > clear - 0.05 or {k for k, _ in ramp.get("modules", [])} != \
+        world_parts = [F3.to_world(ramp, box) for _, box in F3.body(ramp)]
+        overs = [box for box in world_parts if box[5] > min(VP.clear_at(box[0]), VP.clear_at(box[3])) - 0.04]
+        meas["under_stair_storage"]["ramp shelf"] = "%.3f m clear at low end; bays clipped below soffit; %.3f m nominal high-bay height" % (clear, ramp["h"])
+        if overs or {k for k, _ in ramp.get("modules", [])} != \
                 {"luggage", "seasonal-boxes", "bikes"}:
             probs["under_stair_storage"].append("ramp storage exceeds soffit or lacks luggage, boxes and bikes")
     for it in items:

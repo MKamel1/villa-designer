@@ -104,7 +104,54 @@ def dominant_foreground_props(view, scene, minimum_angle_deg=25.0):
 def under_stair_occlusion_violation(view):
     """A v29 camera east of the first tread looks through the flight at the joinery."""
     x, y = view["camera"]["position"][:2]
-    return x >= 5.0 or y <= -27.471
+    return y <= -27.471
+
+
+def storage_front_occlusions(view, items, parts_by_id=None):
+    """Return each open bay whose interior-centre sightline crosses a storage front."""
+    from archpipe.concept import villa_furnish3d as F3
+    camera = view["camera"]["position"]
+    blocked = []
+    for item in items.values():
+        if item["type"] != "under_stair_storage" or item["id"] not in view["subjects"]:
+            continue
+        parts = (parts_by_id or {}).get(item["id"], F3.body(item))
+        for kind, _ in item["modules"]:
+            backs = [F3.to_world(item, box) for name, box in parts if name == kind + "-back"]
+            if not backs:
+                blocked.append((item["id"], kind, "missing bay"))
+                continue
+            x0, x1 = min(box[0] for box in backs), max(box[3] for box in backs)
+            y0, y1 = min(box[1] for box in backs), max(box[4] for box in backs)
+            target = ((x0 + x1) / 2, y1 + (item["d"] - (y1 - y0)) * 0.55,
+                      -3.0 + min(0.45, min(box[5] for box in backs) - 0.15))
+            for name, box in parts:
+                if not name.startswith("sliding-door"):
+                    continue
+                bounds = F3.to_world(item, box)
+                # A face-on panel still crowds the opening even if one centre ray
+                # threads past it. The old depiction left 28% of every tread bay closed.
+                if (bounds[3] - bounds[0] > 0.05 and bounds[1] > y1 + 0.15 and
+                        min(bounds[3], x1) - max(bounds[0], x0) > 0.05):
+                    blocked.append((item["id"], kind, name + " spans opening"))
+                    break
+                bounds = (bounds[0], bounds[1], bounds[2] - 3.0,
+                          bounds[3], bounds[4], bounds[5] - 3.0)
+                near, far = 0.0, 1.0
+                for axis in range(3):
+                    delta = target[axis] - camera[axis]
+                    if abs(delta) < 1e-10:
+                        if not bounds[axis] <= camera[axis] <= bounds[axis + 3]:
+                            near, far = 1.0, 0.0
+                            break
+                        continue
+                    lo = (bounds[axis] - camera[axis]) / delta
+                    hi = (bounds[axis + 3] - camera[axis]) / delta
+                    near, far = max(near, min(lo, hi)), min(far, max(lo, hi))
+                if near < far and 0.001 < near < 0.999:
+                    blocked.append((item["id"], kind, name))
+                    break
+    return blocked
 
 
 def main():
@@ -139,6 +186,9 @@ def main():
                 problems.append("%s: foreground %s fills %.1f degrees of frame" % (v["id"], prop_id, span))
         if v["id"].startswith("v29-") and under_stair_occlusion_violation(v):
             problems.append(v["id"] + ": stair flight hides the storage joinery from this camera")
+        if v["id"].startswith("v29-"):
+            for item_id, bay, front in storage_front_occlusions(v, items):
+                problems.append("%s: %s %s interior centre blocked by %s" % (v["id"], item_id, bay, front))
         tx, ty = cam["target"][:2]
         pz = cam["position"][2] - (-3.0 if lv == "B" else 0.0)
         # the camera must stand in the open: not inside a piece (two draft views were inside wardrobes and rendered

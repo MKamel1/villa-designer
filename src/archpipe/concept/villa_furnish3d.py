@@ -29,6 +29,9 @@ CATEGORY = {"base_run": "casework", "island": "casework", "tall_column": "casewo
             "wc": "plumbing", "washbasin": "plumbing", "washbasin_double": "plumbing", "bath": "plumbing",
             "shower_walkin": "plumbing", "washer_dryer": "equipment", "screen": "equipment"}
 
+# parts of a storage body that are the stored belongings (dressing), not the joinery; kept out of the Revit payload
+STORED_CONTENTS = {"folded-linens", "storage-box", "suitcase", "suitcase-handle", "vacuum-body", "vacuum-wand",
+                   "tool-case"}
 TALL_MODULES = {"fridge", "oven", "microwave", "tall"}
 COUNTER_TOP = 0.90           # worktop height (the catalogue's run height)
 PLINTH, PLINTH_SET = 0.10, 0.05
@@ -138,12 +141,42 @@ def body(it):
             for xa, xb, top in spans:
                 if top < 0.15:
                     continue
+                width = xb - xa
                 parts.extend([("plinth", (xa, yb, 0, xb, yf, 0.1)),
-                              (kind + "-carcass", (xa, yb, 0.1, xb, yf - 0.03, top)),
-                              ("sliding-door", (xa, yf - 0.025, 0.1, xb, yf, top))])
+                              (kind + "-back", (xa, yb, 0.1, xb, yb + 0.018, top))])
                 if top > 0.65:
                     parts.append((kind + "-shelf", (xa, yb + 0.02, min(0.55, top - 0.08),
                                                      xb, yf - 0.04, min(0.57, top - 0.06))))
+                inner_a, inner_b = xa + 0.04, xb - width * 0.31
+                if inner_b - inner_a > 0.07 and top > 0.40:
+                    cy0, cy1 = yb + 0.07, yf - 0.08
+                    if kind == "standing-access":
+                        parts += [("vacuum-body", (inner_a + 0.06, cy0, 0.12, inner_a + 0.16, cy0 + 0.12,
+                                                   min(top - 0.08, 0.56))),
+                                  ("vacuum-wand", (inner_a + 0.10, cy0 + 0.045, 0.49,
+                                                   inner_a + 0.125, cy0 + 0.07, min(top - 0.06, 1.25)))]
+                    elif kind == "luggage":
+                        parts += [("suitcase", (inner_a + 0.02, cy0, 0.12, inner_b - 0.02, cy1,
+                                                 min(top - 0.08, 0.47))),
+                                  ("suitcase-handle", (inner_a + 0.12, cy0 + 0.04, 0.47,
+                                                        inner_b - 0.12, cy0 + 0.065, min(top - 0.06, 0.51)))]
+                    else:
+                        parts.append(("storage-box", (inner_a + 0.02, cy0, 0.10,
+                                                       inner_b - 0.02, cy1, min(top - 0.08, 0.38))))
+                        if top > 0.85:
+                            parts.append(("folded-linens", (inner_a + 0.02, cy0, 0.57,
+                                                             inner_b - 0.02, cy1, min(top - 0.07, 0.70))))
+            if spans:
+                # The back follows the stair in small spans, but each bay has two end panels.
+                parts.append((kind + "-side", (a, yb, 0.1, a + 0.018, yf,
+                                               min(top for xa, xb, top in spans if xa < a + 0.018))))
+                parts.append((kind + "-side", (b - 0.018, yb, 0.1, b, yf,
+                                               min(top for xa, xb, top in spans if xb > b - 0.018))))
+                # One pocket per full bay. The stair profile divides the carcass into tread-sized
+                # spans; adding a leaf in that inner loop produced ten tall visible strips.
+                pocket_top = min(top for _, _, top in spans)
+                parts.append(("sliding-door-pocketed", (b - 0.038, yb + 0.035, 0.1,
+                                                        b - 0.020, yf - 0.055, pocket_top)))
         return parts
     if t in ("dining_6x", "desk"):
         return [("top", (x0, yb, H - 0.04, x1, yf, H))] + _legs(W, D, H - 0.04)
@@ -174,11 +207,18 @@ def body(it):
                 world = to_world(it, (a, yb, 0, b, yf, H))
                 top = min(H, VP.clear_at(world[0]) - 0.05, VP.clear_at(world[3]) - 0.05)
                 parts += [(kind + "-back", (a, yb, 0, b, yb + 0.02, top)),
-                          (kind + "-base", (a, yb, 0.1, b, yf, 0.12))]
+                          (kind + "-base", (a, yb, 0.1, b, yf, 0.12)),
+                          (kind + "-side", (a, yb, 0, a + 0.02, yf, top)),
+                          (kind + "-side", (b - 0.02, yb, 0, b, yf, top))]
                 if kind != "bikes":
                     for z in (0.55, 1.05):
                         if z + 0.02 < top:
                             parts.append((kind + "-shelf", (a, yb, z, b, yf, z + 0.02)))
+                    parts.append(("suitcase" if kind == "luggage" else "storage-box",
+                                  (a + 0.08, yb + 0.06, 0.12, b - 0.08, yf - 0.06, 0.48)))
+                    if top > 1.35:
+                        parts.append(("tool-case" if kind == "seasonal-boxes" else "storage-box",
+                                      (a + 0.12, yb + 0.08, 1.07, b - 0.12, yf - 0.08, 1.31)))
                 else:
                     parts.append(("bikes-hooks", (a + 0.05, yb, top - 0.2, b - 0.05, yb + 0.12, top - 0.15)))
             return parts
@@ -436,7 +476,8 @@ def round3_elements(sp, lay=None):
                 add("%s-module-%02d" % (it["id"], index), "Casework", it["level"], box,
                     "owner %s; kind %s" % (it["partner"], kind))
         if it["type"] in ("under_stair_storage", "store_shelving") and it.get("soffit"):
-            for index, (kind, box) in enumerate(body(it), 1):
+            # stored belongings are render dressing, not construction: they never go to Revit
+            for index, (kind, box) in enumerate([pb for pb in body(it) if pb[0] not in STORED_CONTENTS], 1):
                 add("%s-body-%03d" % (it["id"], index), "Casework", it["level"], to_world(it, box),
                     "%s; %s; soffit %s" % (it["type"], kind, it["soffit"]))
     return out

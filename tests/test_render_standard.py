@@ -30,6 +30,24 @@ ALLOWED_MATERIALS = {
 
 
 class RenderStandard(unittest.TestCase):
+    def test_indoor_plants_have_integrated_pots_floor_support_and_clear_tv(self):
+        from copy import deepcopy
+        lay = R.design("D1")
+        clean = [p for p in SCENE["props"] if p.get("indoor_plant")]
+        self.assertEqual(VR.indoor_plant_violations(clean, lay), [])
+        # Frozen real failed placement: the Pachira's manifest width is 6.869 m at scale 1.
+        old = deepcopy(next(p for p in clean if p["id"] == "lounge-plant"))
+        old.update(asset="pachira_aquatica_01", position=[4.3, -24.35, -3.0], scale=1.0)
+        old.pop("container")
+        self.assertTrue(any("pot" in x for x in VR.indoor_plant_violations([old], lay)))
+        self.assertTrue(any("corridor" in x for x in VR.indoor_plant_violations([old], lay)))
+        sunk = deepcopy(next(p for p in clean if p["id"] == "bedroom-plant"))
+        sunk["position"][2] -= 0.15
+        self.assertTrue(any("support" in x for x in VR.indoor_plant_violations([sunk], lay)))
+        blocked = deepcopy(next(p for p in clean if p["id"] == "lounge-plant"))
+        blocked["position"][:2] = [6.2, -25.4]
+        self.assertTrue(any("corridor" in x for x in VR.indoor_plant_violations([blocked], lay)))
+
     def test_wp4b_fixture_and_dressing_parts(self):
         ids = {m["id"] for m in SCENE["meshes"]}
         swings = [m for m in SCENE["meshes"] if m["id"].startswith("swing-plate-")]
@@ -586,13 +604,13 @@ class RenderStandard(unittest.TestCase):
         sc["meshes"].append(dict(id="old-arm", group="fixture", material="black-metal", faces=box_faces(
             x - 0.008, y, max(zs) - 0.01, x + 0.008, -23.591, max(zs) + 0.006)))
         # draft 9's step marker: 20 mm in from the tread edge, 70 mm off the wall
-        mk = next(m for m in sc["meshes"] if m["id"] == "marker-STEP-stair-b-02")
+        mk = next(m for m in sc["meshes"] if m["id"].startswith("marker-STEP-stair-b-"))
         for f in mk["faces"]:
             for v in f:
                 v[1] += 0.068
         found = {u[0] for u in S.unsupported(sc)}
         self.assertIn("lamp-shade-DESK-kids-a-03", found)
-        self.assertIn("marker-STEP-stair-b-02", found)
+        self.assertIn(mk["id"], found)
 
     def test_every_bedroom_and_living_window_has_a_curtain(self):
         """Client 2026-09-28: sheer + blackout (bedrooms) / dim-out (living spaces) on ceiling tracks, whole villa.
