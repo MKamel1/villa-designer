@@ -100,6 +100,20 @@ class ParkingOptions(unittest.TestCase):
             self.assertEqual(len(d), 1)
             d = d[0]
             self.assertEqual((d["level"], d["rooms"][0], d["width"]), ("GF", "study-game", 1.8))
+            self.assertTrue(d["glazed"])
+            self.assertEqual((d["slide_type"], d["glass"], d["frame"], d["glass_thickness_m"]),
+                             ("bypass", "clear", "aluminium-bronze", .010))
+            self.assertEqual(d["leaf_count"], 2)
+            self.assertEqual(RS.deck_glazing_problems(sp), [])
+            damaged = dict(sp, doors=[dict(entry, glazed=False) if entry is d else entry
+                                      for entry in sp["doors"]])
+            self.assertTrue(RS.deck_glazing_problems(damaged))
+            from archpipe.concept import villa_daylight as VD
+            wall = next(w for w in sp["walls"] if w["level"] == "GF" and
+                        abs(w["y0"] - d["y"]) < .11 and w["x0"] <= d["x"] <= w["x1"])
+            self.assertEqual(VD._openings_on(wall, "GF", [], [d])[0]["kind"], "glazed")
+            opaque = dict(d, glazed=False)
+            self.assertEqual(VD._openings_on(wall, "GF", [], [opaque])[0]["kind"], "hole")
             self.assertGreaterEqual(d["x"] - d["width"] / 2, 7.377 - 1e-6)
             self.assertLessEqual(d["x"] + d["width"] / 2, 9.227 + 1e-6)
             study = lay["rooms"]["study-game"]["rect"]

@@ -46,7 +46,7 @@ def _openings_on(wall, level, windows, doors):
         if is_door:
             # The pocket leaves are stowed in the side pocket in the day
             # scene; a glazed infill here would visibly close the opening.
-            kind = "glazed" if o.get("garden") else ("hole" if o.get("sliding") else "door")
+            kind = "glazed" if o.get("garden") or o.get("glazed") else ("hole" if o.get("sliding") else "door")
             sill, head = 0.0, o.get("height", 2.1)
         else:
             kind, sill, head = o.get("kind", "window"), o["sill"], o["sill"] + o["height"]

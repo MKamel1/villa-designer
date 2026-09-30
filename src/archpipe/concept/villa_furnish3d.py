@@ -411,11 +411,15 @@ def round3_elements(sp, lay=None):
         z = light.z - RS.LEVELS_Z[light.level]
         if light.kind == "SWING":
             x, y = light.extra["wall_plate"]
+            side = light.extra["mount_side"]
+            outward = -1 if side == "left" else 1
             add(light.id + "-plate", "Lighting Fixtures", light.level,
-                [x - .06, y - .015, z - .06, x + .06, y + .015, z + .06],
-                "SWING wall plate; articulated reach 0.6 m")
+                [min(x, x - outward * .012), y - .06, z - .06,
+                 max(x, x - outward * .012), y + .06, z + .06],
+                "SWING side-panel wall plate; articulated reach 0.6 m")
             add(light.id + "-arm", "Lighting Fixtures", light.level,
-                [x - .012, y, z - .012, x + .012, light.y, z + .012],
+                [min(x, light.x) - .012, min(y, light.y) - .012, z - .012,
+                 max(x, light.x) + .012, max(y, light.y) + .19, z + .012],
                 "SWING articulated arm; reach 0.6 m")
             add(light.id + "-head", "Lighting Fixtures", light.level,
                 [light.x - .06, light.y - .06, z - .06, light.x + .06, light.y + .06, z + .06],

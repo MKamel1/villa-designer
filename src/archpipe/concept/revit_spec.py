@@ -339,7 +339,23 @@ def build(lay):
                                      round(y1 - (bw if abs(y1 - V.YE) < 1e-6 else 0), 3)])
     if lay["id"] == "D1":
         _d1_details(lay, spec)
+    glazing_errors = deck_glazing_problems(spec)
+    if glazing_errors:
+        raise ValueError("; ".join(glazing_errors))
     return spec
+
+
+def deck_glazing_problems(spec):
+    """Exterior bypass sliders onto a deck must carry their glazing and frame intent at spec authoring."""
+    out = []
+    for d in spec["doors"]:
+        if "deck" not in d.get("rooms", ()):
+            continue
+        if not (d.get("sliding") and d.get("glazed") and d.get("glass") == "clear" and
+                d.get("frame") == "aluminium-bronze" and d.get("glass_thickness_m") == .010 and
+                d.get("leaf_count") == 2):
+            out.append("deck sliding door must have two clear 10 mm glazed leaves and aluminium-bronze frame")
+    return out
 
 
 def _d1_details(lay, spec):
@@ -642,7 +658,10 @@ def _parking(lay, spec, pk2):
     if dd:
         spec["doors"].append({"level": "GF", "x": round((dd["x0"] + dd["x1"]) / 2, 3), "y": V.YE,
                               "width": dd["width"], "height": P.DOOR_H, "rooms": [dd["room"], "deck"],
-                              "sliding": True, "fixed_span": [dd["x0"], dd["x1"]], "fixed_span_face": ["h", V.YE]})
+                              "sliding": True, "slide_type": "bypass", "glazed": True,
+                              "frame": "aluminium-bronze", "glass": "clear", "glass_thickness_m": 0.010,
+                              "leaf_count": 2, "panel_width": dd["width"] / 2,
+                              "fixed_span": [dd["x0"], dd["x1"]], "fixed_span_face": ["h", V.YE]})
     # GF windows beside the ramp and deck: sills above the eye of a person standing on them (privacy)
     eye = max(z for _, z in pk2["profile"]) + 1.6 - 1.2  # above the GF FFL
     for wdw in spec["windows"]:

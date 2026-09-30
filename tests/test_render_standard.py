@@ -393,6 +393,27 @@ class RenderStandard(unittest.TestCase):
             self.assertGreaterEqual((hi - lo - window["width"]) / 2, 0.3 - 1e-6)
             self.assertEqual(RS.opening_problems(spec), [])
 
+    def test_study_deck_slider_is_closed_glass_with_bronze_frame(self):
+        spec = RS.build(R.design("D1"))
+        door = next(d for d in spec["doors"] if set(d["rooms"]) == {"study-game", "deck"})
+        lo, hi = door["x"] - door["width"] / 2, door["x"] + door["width"] / 2
+        glass = [m for m in SCENE["meshes"] if m["material"] == "glass-clear"]
+        panes = []
+        for mesh in glass:
+            for face in mesh["faces"]:
+                if (all(lo - .001 <= p[0] <= hi + .001 for p in face) and
+                        all(abs(p[1] - door["y"]) <= .12 for p in face) and
+                        all(RS.LEVELS_Z["GF"] - .001 <= p[2] <= RS.LEVELS_Z["GF"] + door["height"] + .001
+                            for p in face)):
+                    panes.append(face)
+        self.assertEqual(len(panes), 12)  # six faces for each of the two closed leaves
+        ys = [p[1] for face in panes for p in face]
+        self.assertAlmostEqual(max(ys) - min(ys), .010, places=4)
+        frame = next(m for m in SCENE["meshes"] if m["id"] == "detail-window-frames")
+        self.assertEqual(frame["material"], "alu-bronze")
+        self.assertTrue(any(all(lo - .06 <= p[0] <= hi + .06 and abs(p[1] - door["y"]) <= .14
+                                for p in face) for face in frame["faces"]))
+
     def test_assumed_stair_construction_is_present(self):
         ids = {m["id"] for m in SCENE["meshes"]}
         for suffix in ("wall-stringer-00", "wall-plate", "open-stringer", "glass-00", "glass-edge-00",

@@ -334,14 +334,18 @@ def design(lay=None):
             strip("BACK", "bar-alcove", (bfp[0] + 0.05, bfp[1] + 0.05), (bfp[2] - 0.05, bfp[1] + 0.05), z,
                   (0, 0.3, -1), why="inside the glass-door cabinet, behind the books")
     nook = fp["library-daybed"]
-    for x in (nook[0] + 0.8, nook[2] - 0.8):
-        wall_y = nook[1] + 0.04
-        add("SWING", "bar-alcove", x, wall_y + 0.48, z=LEVEL_Z["B"] + 1.1,
-            why="wall plate at rear; articulated arm and rotatable head sweep over the mattress",
-            card="ies-res-chair-reading-200", extra={"wall_plate": (x, wall_y), "reach": 0.6,
-                                                       "swept_y": (wall_y, wall_y + 0.6)})
-    for x in (nook[0] + 0.2, nook[2] - 0.2):
-        add("DLN", "bar-alcove", x, (nook[1] + nook[3]) / 2,
+    # The 25 mm nook-side panels are in F3.body. Mount on their finished INNER faces, not their centrelines.
+    # ASSUMED plate/emitter height: 0.55 m above the authored 0.45 m mattress top, within seated arm reach.
+    for side, face_x, direction in (("left", nook[0] + 0.025, 1), ("right", nook[2] - 0.025, -1)):
+        y = (nook[1] + nook[3]) / 2
+        add("SWING", "bar-alcove", face_x + direction * 0.59, y, z=LEVEL_Z["B"] + it["library-daybed"]["h"] + 0.55,
+            why="ASSUMED side-panel plate 0.55 m above mattress; articulated arm swings over mattress",
+            card="ies-res-chair-reading-200", extra={"wall_plate": (face_x, y), "mount_side": side,
+                                                       "reach": 0.6, "swept_x": (min(face_x, face_x + direction * 0.6),
+                                                                                  max(face_x, face_x + direction * 0.6)),
+                                                       "swept_y": (y, y + math.sqrt(0.30**2 - (0.59 / 2)**2))})
+    for x in (nook[0] + 0.47, nook[2] - 0.47):
+        add("DLN", "bar-alcove", x, nook[1] + 0.11,
             z=LEVEL_Z["B"] + it["library-daybed"]["nook_top"] - 0.025,
             why="recessed in the 2.1 m nook top; task fill", card="ies-res-chair-reading-200",
             extra={"dimmer": 0.4})
@@ -689,11 +693,18 @@ def swing_envelope_problems(lay, fixtures):
     out = []
     for lamp in (f for f in fixtures if f.kind == "SWING" and f.room == "bar-alcove"):
         plate = lamp.extra.get("wall_plate")
-        sweep = lamp.extra.get("swept_y")
+        sweep = lamp.extra.get("swept_x")
+        sweep_y = lamp.extra.get("swept_y")
+        side = lamp.extra.get("mount_side")
         reach = lamp.extra.get("reach", 0)
-        if not plate or not sweep or not (x0 + reach <= lamp.x <= x1 - reach and
-                                         y0 + 0.025 <= sweep[0] <= sweep[1] <= y1 - 0.025 and
-                                         math.dist((lamp.x, lamp.y), plate) <= reach + 1e-6):
+        face_x = x0 + 0.025 if side == "left" else x1 - 0.025 if side == "right" else None
+        if not plate or not sweep or not sweep_y or face_x is None or not (
+                abs(plate[0] - face_x) <= 1e-6 and y0 + 0.06 <= plate[1] <= y1 - 0.06 and
+                x0 + 0.025 <= sweep[0] <= sweep[1] <= x1 - 0.025 and
+                y0 + 0.06 <= sweep_y[0] <= sweep_y[1] <= y1 - 0.06 and
+                x0 + 0.06 <= lamp.x <= x1 - 0.06 and y0 + 0.06 <= lamp.y <= y1 - 0.06 and
+                (lamp.x - plate[0]) * (1 if side == "left" else -1) > 0 and
+                math.dist((lamp.x, lamp.y), plate) <= reach + 1e-6):
             out.append("%s arm leaves the mattress/nook or exceeds %.2f m ASSUMED reach "
                        "(TODO swing-arm-product; card ies-res-chair-reading-200)" % (lamp.id, reach))
     return out

@@ -16,6 +16,7 @@ class D1Round3(unittest.TestCase):
         cls.lay = R.design("D1")
         cls.items = F.layout(cls.lay)
         cls.fixtures = L.design(cls.lay)
+        L.bind_products()  # validate the chosen measured files, not the generic stand-ins
 
     def test_furniture_checks_positive_and_negative_on_real_d1(self):
         good = F.check(self.items, self.lay)
@@ -48,12 +49,26 @@ class D1Round3(unittest.TestCase):
     def test_swing_envelope_and_lighting_targets(self):
         self.assertFalse(L.swing_envelope_problems(self.lay, self.fixtures))
         swing = next(f for f in self.fixtures if f.kind == "SWING")
+        nook = F.footprint(next(i for i in self.items if i["id"] == "library-daybed"))
+        swings = [f for f in self.fixtures if f.kind == "SWING" and f.room == "bar-alcove"]
+        self.assertEqual({f.extra["mount_side"] for f in swings}, {"left", "right"})
+        for f in swings:
+            face_x = nook[0] + .025 if f.extra["mount_side"] == "left" else nook[2] - .025
+            self.assertAlmostEqual(f.extra["wall_plate"][0], face_x)
+            self.assertAlmostEqual(f.z - L.LEVEL_Z["B"], 1.0)  # mattress top .45 + ASSUMED .55 m
+        old_back_wall = replace(swing, x=nook[0] + .8, y=nook[1] + .52,
+                                extra={"wall_plate": (nook[0] + .8, nook[1] + .04),
+                                       "reach": .6, "swept_y": (nook[1] + .04, nook[1] + .64)})
+        self.assertTrue(L.swing_envelope_problems(self.lay, [old_back_wall]))
+        wrong_face = replace(swing, extra={**swing.extra, "wall_plate": (nook[0] + .0125,
+                                                                            swing.extra["wall_plate"][1])})
+        self.assertTrue(L.swing_envelope_problems(self.lay, [wrong_face]))
         bad_swing = replace(swing, y=swing.y + 0.5)
         self.assertTrue(L.swing_envelope_problems(self.lay, [bad_swing]))
         report = L.check(self.lay, self.fixtures)
         points = {row["what"]: row for row in report["tasks"] if row["what"] in ("daybed nook", "pe-basin")}
         for row in points.values():
-            self.assertEqual(row["status"], "pass")
+            self.assertEqual(row["status"], "pass", row)
             self.assertLessEqual(row["achieved_lx"], row["required_lx"] * 3)
         island = [row for row in report["tasks"] if row["what"].startswith("island ")]
         self.assertEqual(len(island), 6)

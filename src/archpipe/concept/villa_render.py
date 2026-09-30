@@ -500,8 +500,21 @@ def build(lay=None, views=None):
             if len(pts) != 4:
                 raise ValueError("architectural glass pane must have four corners")
             n = _normal(pts)
-            back = [[p[i] - 0.01 * n[i] for i in range(3)] for p in pts]
-            buckets.setdefault(key, []).extend(pane_faces(pts, back))
+            glazed_slider = next((d for d in sp["doors"] if d.get("glazed") and d.get("sliding") and
+                                  abs(cx - d["x"]) < .01 and abs(cy - d["y"]) < .15 and
+                                  abs(max(p[0] for p in pts) - min(p[0] for p in pts) - d["width"]) < .01), None)
+            panes = [pts]
+            if glazed_slider:
+                xa, xb = min(p[0] for p in pts), max(p[0] for p in pts)
+                za, zb = min(p[2] for p in pts), max(p[2] for p in pts)
+                mid = (xa + xb) / 2
+                panes = [[[a, cy, za], [b, cy, za], [b, cy, zb], [a, cy, zb]]
+                         for a, b in ((xa, mid), (mid, xb))]
+            for leaf_index, front in enumerate(panes):
+                back = [[p[i] - 0.01 * n[i] for i in range(3)] for p in front]
+                leaf_key = (mat, room, "glazed-slider-%.3f-%.3f-leaf-%d" %
+                            (glazed_slider["x"], glazed_slider["y"], leaf_index)) if glazed_slider else key
+                buckets.setdefault(leaf_key, []).extend(pane_faces(front, back))
         else:
             buckets.setdefault(key, []).append(pts)
     hide = {}
@@ -1596,23 +1609,25 @@ def build(lay=None, views=None):
             # (villa_lighting's own SWING spec states "articulated 0.6 m reach" -- exactly 2 x 0.30 m), and a
             # conical shade D120 angled down over the existing emissive disc, in brass (plate, arm) + black
             # (knuckle, shade).
-            wall_y = F.footprint(it_all["library-daybed"])[1]
+            wall_x, wall_y = f.extra["wall_plate"]
             arm_l = 0.30
-            span = f.y - wall_y
+            span = abs(f.x - wall_x)
             half = span / 2
             kick = math.sqrt(max(arm_l * arm_l - half * half, 0.0))
             if span > 2 * arm_l:
                 notes.append("ASSUMED %s: SWING reach %.2f m exceeds two 0.30 m segments (0.60 m); arm shown "
                              "stretched, not to the stated segment length" % (f.id, span))
                 kick = 0.0
-            base_pt = (f.x, wall_y, f.z)
-            elbow_pt = (f.x + kick, wall_y + half, f.z)
+            base_pt = (wall_x, wall_y, f.z)
+            elbow_pt = ((wall_x + f.x) / 2, wall_y + kick, f.z)
             head_pt = (f.x, f.y, f.z)
 
-            def wall_disc(y, r, n=16):
-                return [[f.x + r * math.cos(2 * math.pi * k / n), y, f.z + r * math.sin(2 * math.pi * k / n)]
+            def wall_disc(x, r, n=16):
+                return [[x, wall_y + r * math.cos(2 * math.pi * k / n),
+                         f.z + r * math.sin(2 * math.pi * k / n)]
                         for k in range(n)]
-            mesh("swing-plate-" + f.id, "brass", pane_faces(wall_disc(wall_y, 0.05), wall_disc(wall_y + 0.012, 0.05)),
+            toward = 1 if f.x > wall_x else -1
+            mesh("swing-plate-" + f.id, "brass", pane_faces(wall_disc(wall_x, 0.05), wall_disc(wall_x + toward * 0.012, 0.05)),
                  "fixture", room=f.room, label="SWING round wall plate, D100")
             mesh("swing-arm-" + f.id, "brass", rod_faces(base_pt, elbow_pt, 0.018) + rod_faces(elbow_pt, head_pt, 0.018),
                  "fixture", room=f.room, label="SWING articulated arm, two 0.30 m knuckle-jointed segments")

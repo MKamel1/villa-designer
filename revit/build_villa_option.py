@@ -160,12 +160,12 @@ def sym_dims(sym):
     return tuple(out)
 
 
-def sized_door(doc, syms, width, height, cache, sliding=False, what="door"):
+def sized_door(doc, syms, width, height, cache, sliding=False, what="door", glazed=False):
     """A door (or window) type of exactly width x height (m): a stock type if one matches, else a resized duplicate
     of the nearest (a near-miss would put the wrong hole in the wall: a 2.1 m leaf under a 1.9 m ramp soffit; and
     windows were once placed as the nearest stock width at its stock height, so a 2.6 m floor-to-beam window
     would have been built 0.9 m tall). sliding: only from families whose name says sliding, when there are any."""
-    key = (what, round(width, 3), round(height, 3), sliding)
+    key = (what, round(width, 3), round(height, 3), sliding, glazed)
     if key in cache:
         return cache[key]
     best, bd = None, 1e9
@@ -173,6 +173,10 @@ def sized_door(doc, syms, width, height, cache, sliding=False, what="door"):
     if sliding:
         sl = [(s, w) for s, w in syms if "slid" in s.Family.Name.lower()]
         pool = sl or syms
+    if glazed:
+        glass = [(s, w) for s, w in pool if "glass" in s.Family.Name.lower() or
+                 "glaz" in s.Family.Name.lower()]
+        pool = glass or pool
     for s, _ in pool:
         w, h = sym_dims(s)
         if w is None or h is None:
@@ -436,7 +440,7 @@ def build_option(app, model, spec, folder):
             continue
         try:
             sym = sized_door(doc, dsyms, d["width"], d.get("height", 2.10), sized,
-                             bool(d.get("sliding") or d.get("garden")))
+                             bool(d.get("sliding") or d.get("garden")), glazed=bool(d.get("glazed") or d.get("garden")))
             if not sym.IsActive:
                 sym.Activate()
                 doc.Regenerate()
@@ -448,6 +452,11 @@ def build_option(app, model, spec, folder):
             comments = "%s; %s leaves; panel %.3f m; pocket %s" % (
                 d.get("slide_type", "sliding"), d.get("leaf_count", 1), d.get("panel_width", d["width"]),
                 d.get("pocket_span")) if d.get("sliding") else "option door"
+            if d.get("glazed"):
+                comments += "; glazed clear %.0f mm glass; %s frame" % (
+                    d["glass_thickness_m"] * 1000, d["frame"])
+                if not ("glass" in sym.Family.Name.lower() or "glaz" in sym.Family.Name.lower()):
+                    comments += "; glazing intent, nearest door-family proxy"
             if d.get("sliding") and not sliding_family:
                 comments += "; sliding intent, nearest door-family proxy"
             stamp(inst, mark, comments)
