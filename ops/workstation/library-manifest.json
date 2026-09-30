@@ -893,7 +893,9 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "sf_cinema_sofa_velvet",
@@ -918,7 +920,9 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "sf_dining_chair_boucle",
@@ -943,7 +947,9 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "sf_egg_chair",
@@ -1118,7 +1124,9 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "sf_lavender_clump",
@@ -1218,7 +1226,9 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "sf_modern_low_sofa",
@@ -1243,7 +1253,9 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "sf_olive_old",
@@ -1293,7 +1305,9 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "front_axis": "-Z",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "sf_royal_poinciana",
@@ -1343,7 +1357,9 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "front_axis": "none",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "sf_wooden_bench",
@@ -1458,7 +1474,9 @@
           1.0232,
           0.4111
         ]
-      }
+      },
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified"
     },
     {
       "id": "mid_century_lounge_chair",

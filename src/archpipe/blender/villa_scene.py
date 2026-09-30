@@ -38,6 +38,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.abspath(os.path.join(HERE, "..", "..")))
 
 
 def sibling(name):
@@ -839,6 +840,8 @@ def import_models(model_specs, library_root):
     """Import complete glTF products at one uniform scale, centred and seated on the floor."""
     imported = []
     for spec in model_specs:
+        from archpipe.furniture_orientation import check_model_orientation
+        check_model_orientation(spec)
         before = set(bpy.data.objects)
         path = os.path.join(library_root, "props", spec["asset"], "model.gltf")
         if not os.path.isfile(path):

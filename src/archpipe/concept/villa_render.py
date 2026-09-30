@@ -237,6 +237,7 @@ CURTAIN_OCC = ("bedroom", "living", "dining", "study")
 # know which. NEVER hardcode a native size: read it from the manifest so a re-export changes the fit, not silently
 # goes stale.
 _MANIFEST_PATH = ROOT / "ops" / "workstation" / "library-manifest.json"
+from archpipe.furniture_orientation import model_yaw, check_model_orientation
 FIT_ASPECT_TOL = 0.12   # WP4-A: aspect mismatch on the footprint axes beyond this keeps the procedural builder
 FIT_HEIGHT_TOL = 0.05   # WP4-A GUARD: scaled height beyond +-5% of the piece's reference height likewise falls back
 
@@ -250,6 +251,7 @@ def _load_manifest_bounds():
 
 
 MANIFEST_BOUNDS = _load_manifest_bounds()
+MANIFEST_FRONTS = {p["id"]: p.get("front_axis") for p in json.loads(_MANIFEST_PATH.read_text())["props"]}
 
 
 def native_size(bounds):
@@ -784,9 +786,12 @@ def build(lay=None, views=None):
                  "height_err": round(fit.get("height_err", 0), 3), "ok": fit["ok"] and selected,
                  "reason": rejection or fit.get("reason", "fits")}
         if fit["ok"] and selected:
+            front = MANIFEST_FRONTS.get(asset)
+            yaw = model_yaw(rot, front)
             models.append({"id": "model-" + mark.replace("#", "-"), "asset": asset,
                            "position": [round(cx, 3), round(cy, 3), round(z, 3)],
-                           "rotation_deg": [0, 0, float(rot)], "scale": round(fit["scale"], 5),
+                           "rotation_deg": [0, 0, yaw], "layout_rotation_deg": float(rot),
+                           "front_axis": front, "scale": round(fit["scale"], 5),
                            "footprint_w": round(w, 3), "footprint_d": round(d, 3),
                            "reference_h": round(href, 3),
                            "replaces": prefix, "room": room,
@@ -850,7 +855,8 @@ def build(lay=None, views=None):
             if p["w"] <= w + 0.020 and p["d"] <= d + 0.020:
                 models.append({"id": "model-rug-" + rid, "asset": asset,
                                "position": [round(cx, 3), round(cy, 3), round(z - 0.012, 3)],
-                               "rotation_deg": [0, 0, 0.0], "scale": round(p["scale"], 5),
+                               "rotation_deg": [0, 0, 0.0], "layout_rotation_deg": 0.0,
+                               "front_axis": MANIFEST_FRONTS[asset], "scale": round(p["scale"], 5),
                                "footprint_w": round(p["w"], 3), "footprint_d": round(p["d"], 3),
                                "reference_h": round(p["h"], 3),
                                "replaces": "rug-" + rid, "room": rid, "decimate_ratio": 0.05,
@@ -2275,6 +2281,10 @@ def VIEWS(lay=None):
 
 def write(path=None, views=None):
     scene = build(views=views)
+    from archpipe.villa_render_contract import validate_scene
+    errors = validate_scene(scene)
+    if errors:
+        raise ValueError("invalid exported scene: " + "; ".join(errors))
     path = Path(path or OUT / "scene.json")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(scene), encoding="utf-8")

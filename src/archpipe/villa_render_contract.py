@@ -268,6 +268,16 @@ def validate_scene(scene: dict) -> list[str]:
         need(_relative_path(model.get("asset")), p+".asset", "safe relative asset name required")
         need(_vector(model.get("position")), p+".position", "three finite numbers required")
         need(_vector(model.get("rotation_deg")), p+".rotation_deg", "three finite angles required")
+        need(model.get("front_axis") in ("+X", "-X", "+Z", "-Z", "none"),
+             p+".front_axis", "declared native front axis required")
+        need(_number(model.get("layout_rotation_deg")), p+".layout_rotation_deg",
+             "finite layout yaw required")
+        if model.get("front_axis") in ("+X", "-X", "+Z", "-Z", "none") and _vector(model.get("rotation_deg")) and _number(model.get("layout_rotation_deg")):
+            from archpipe.furniture_orientation import check_model_orientation
+            try:
+                check_model_orientation(model)
+            except ValueError as exc:
+                errors.append(p + ": " + str(exc))
         need(_number(model.get("scale"), positive=True), p+".scale", "positive uniform scale required")
         need(isinstance(model.get("replaces"), str) and bool(model.get("replaces")),
              p+".replaces", "nonempty mesh-id prefix required (the procedural geometry this model hides)")

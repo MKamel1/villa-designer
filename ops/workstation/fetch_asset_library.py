@@ -203,7 +203,9 @@ def do_prop(entry: dict, root: Path, index: dict) -> None:
     asset_id = entry["id"]
     dest_dir = root / "props" / asset_id
     if dest_dir.is_dir() and any(dest_dir.rglob("*.gltf")):
-        print("  skip %s (already fetched)" % asset_id)
+        print("  skip download %s (already fetched)" % asset_id)
+        from front_axis import measured_or_manual_front
+        measured_or_manual_front(entry, dest_dir / "model.gltf")
         return
     res, package = poly_haven_model_files(asset_id)
     if "url" not in package:
@@ -220,6 +222,8 @@ def do_prop(entry: dict, root: Path, index: dict) -> None:
                           "sha256": sha256(out_path), "source": meta["url"],
                           "license": "CC0"}
     gltf_path = dest_dir / "model.gltf"
+    from front_axis import measured_or_manual_front
+    measured_or_manual_front(entry, gltf_path)
     mins, maxs = gltf_world_bounds(gltf_path)
     bounds_m = {"min": [round(v, 4) for v in mins], "max": [round(v, 4) for v in maxs]}
     checked_in = entry.get("bounds_m")
@@ -260,6 +264,8 @@ def main() -> int:
             do_prop(entry, root, index)
         except Exception as exc:
             print("  FAILED %s: %s" % (entry["id"], exc), file=sys.stderr)
+
+    Path(sys.argv[1]).write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     index["license"] = manifest.get("license")
     index["updated"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())

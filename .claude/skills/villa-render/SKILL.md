@@ -130,7 +130,10 @@ asset or view:
 3. **External assets are claims, not facts.** Measure every downloaded
    model's bounds, normalise its units, record its front axis and up axis,
    and prove orientation and scale in the preview. Never trust native size,
-   units or facing.
+   units or facing. Enforced: seating/bed ingest estimates `front_axis`
+   (tall-back side) into the manifest, a lead-verified value overrides it,
+   placing a directional model without one raises, and export/import check
+   the resulting front against the layout within 1 deg.
 4. **Physics before looks.** Refractive glass is a closed solid with
    thickness; emitters sit inside diffusers; materials carry textures at
    real-world scale. Guard each of these as a geometric/data check.

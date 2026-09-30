@@ -19,6 +19,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 API = "https://api.sketchfab.com/v3/models/"
 ALLOWED = {"CC0 Public Domain", "CC Attribution"}
+MANIFEST = ROOT / "ops" / "workstation" / "library-manifest.json"
+
+
+def record_front(p, dest):
+    from front_axis import directional_role, measured_or_manual_front
+    if not directional_role(p.get("role", "")):
+        return
+    model = next(dest.rglob("*.gltf"), None)
+    if model is None:
+        raise ValueError(p["id"] + ": no glTF for front-axis measurement")
+    measured_or_manual_front(p, model)
 
 
 def _get(url, token=None):
@@ -31,12 +42,19 @@ def _get(url, token=None):
 
 def main() -> int:
     picks = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+    if MANIFEST.is_file():
+        manual = {e["id"]: e["front_axis"] for e in json.loads(MANIFEST.read_text(encoding="utf-8")).get("props", [])
+                  if e.get("front_axis_basis") == "lead-verified"}
+        for pick in picks:
+            if pick["id"] in manual:
+                pick["front_axis"] = manual[pick["id"]]
     out = Path(sys.argv[2])
     out.mkdir(parents=True, exist_ok=True)
     token = (ROOT / "sketchfab-api.txt").read_text(encoding="utf-8").strip()
     for p in picks:
         dest = out / p["id"]
         if (dest / "provenance.json").is_file():
+            record_front(p, dest)
             print("skip", p["id"])
             continue
         meta = json.loads(_get(API + p["uid"]))
@@ -55,12 +73,22 @@ def main() -> int:
         with zipfile.ZipFile(zpath) as zf:
             zf.extractall(dest)
         zpath.unlink()
+        record_front(p, dest)
         (dest / "provenance.json").write_text(json.dumps(dict(
             id=p["id"], source=meta["viewerUrl"], uid=p["uid"], name=meta["name"], author=meta["user"]["username"],
             author_url=meta["user"].get("profileUrl"), licence=licence, faces=meta.get("faceCount"),
             role=p.get("role"), fetched=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())), indent=1), encoding="utf-8")
         print("fetched %s (%s, %s, %s faces)" % (p["id"], licence, meta["user"]["username"], meta.get("faceCount")))
         time.sleep(1.0)
+    Path(sys.argv[1]).write_text(json.dumps(picks, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    if MANIFEST.is_file():
+        manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+        by_id = {p["id"]: p for p in picks}
+        for entry in manifest.get("props", []):
+            found = by_id.get(entry["id"])
+            if found and found.get("front_axis"):
+                entry.update(front_axis=found["front_axis"], front_axis_basis=found["front_axis_basis"])
+        MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return 0
 
 
