@@ -434,9 +434,9 @@ def swing_violations(swing, items, envelope_margin=0.25):
     return bad
 
 
-def _mesh(mid, group, material, faces, label):
+def _mesh(mid, group, material, faces, label, *, kind, surface=False, occupied_side=None):
     return dict(id="landscape-" + mid, group=group, material=material,
-                faces=faces, label=label)
+                faces=faces, label=label, part_kind=kind, surface=surface, occupied_side=occupied_side)
 
 
 def _stones(name, rect, z, meshes):
@@ -453,9 +453,9 @@ def _stones(name, rect, z, meshes):
             (max(x1-.25, x0), y0, x1, y1))
     for side, box in enumerate(ends):
         meshes.append(_mesh("stone-%s-end-%d" % (name, side), "ground", "stepping-stone",
-                            _quad(*box, z + .012),
+                            _box(box[0], box[1], z, box[2], box[3], z + .012),
                             "ASSUMED flush threshold stone; route width 0.914 m, "
-                            "Time-Saver 2nd ed. p.340-9, lts-path-width-oneway-900"))
+                            "Time-Saver 2nd ed. p.340-9, lts-path-width-oneway-900", kind="stepping-stone"))
     for i in range(count):
         t = (i + 0.5) / count
         if vertical:
@@ -465,9 +465,9 @@ def _stones(name, rect, z, meshes):
             cx, cy = x0 + t * length, (y0 + y1) / 2
             box = (cx - 0.24, y0, cx + 0.24, y1)
         meshes.append(_mesh("stone-%s-%02d" % (name, i), "ground", "stepping-stone",
-                            _quad(*box, z + 0.012),
+                            _box(box[0], box[1], z, box[2], box[3], z + .012),
                             "ASSUMED flush stepping stone; clear route width 0.914 m, "
-                            "Time-Saver 2nd ed. p.340-9, lts-path-width-oneway-900"))
+                            "Time-Saver 2nd ed. p.340-9, lts-path-width-oneway-900", kind="stepping-stone"))
 
 
 def build(spec, lay=None):
@@ -489,7 +489,7 @@ def build(spec, lay=None):
     for name, rect in grass:
         z = 0.0 if name.startswith("top") else GROUND
         meshes.append(_mesh("grass-" + name, "ground", "artificial-grass",
-                            _quad(*rect, z + .003), "ASSUMED drained artificial-grass system; " + name))
+                            _quad(*rect, z + .003), "ASSUMED drained artificial-grass system; " + name, kind="finish-layer", surface=True, occupied_side=(0,0,1)))
     for name, rect in PATHS.items():
         if name != "study" and not all(inside_yard(x, y) for x in (rect[0], rect[2])
                                        for y in (rect[1], rect[3])):
@@ -502,7 +502,7 @@ def build(spec, lay=None):
         if any(_rect_overlap_area(rect, r[:4]) > 1e-6 for r in rooms):
             raise ValueError(name + " bed enters garden-level room")
         meshes.append(_mesh("bed-" + name, "ground", "garden-gravel",
-                            _quad(*rect, GROUND + .008), "ASSUMED irrigated boundary bed " + name))
+                            _quad(*rect, GROUND + .008), "ASSUMED irrigated boundary bed " + name, kind="finish-layer", surface=True, occupied_side=(0,0,1)))
 
     def care(species):
         return data[species][0]
@@ -557,7 +557,7 @@ def build(spec, lay=None):
     objects.append(dict(id="landscape-tree-lemon-pot-planter", rect=lemon_pot))
     meshes.append(_mesh("lemon-pot", "furniture", "garden-sandstone",
                         _box(lemon_pot[0], lemon_pot[1], GROUND, lemon_pot[2], lemon_pot[3], GROUND + .45),
-                        "ASSUMED large sandstone container for a potted Citrus limon"))
+                        "ASSUMED large sandstone container for a potted Citrus limon", kind="planter"))
 
     # Standardised 3-layer border, the same recipe in every boundary bed
     # (the client's complaint was inconsistent placement, not too few
@@ -662,9 +662,9 @@ def build(spec, lay=None):
             frame = _box(x, y, GROUND, x+.04, y+1.5, GROUND+2.2)
             mass = _box(x+.05, y+.08, GROUND, x+.17, y+1.42, GROUND+2.05)
         meshes.append(_mesh("trellis-"+name, "furniture", "trellis", frame,
-                            "ASSUMED trellis for Bougainvillea glabra; care: " + boug))
+                            "ASSUMED trellis for Bougainvillea glabra; care: " + boug, kind="trellis"))
         meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract", mass,
-                            "ASSUMED procedural magenta Bougainvillea glabra climber; care: " + boug))
+                            "ASSUMED procedural magenta Bougainvillea glabra climber; care: " + boug, kind="climber"))
 
     # Paired planted pots flank each garden door, off the 0.914 m route by
     # >= 0.55 m (checked against the real drift-plant canopy width below,
@@ -701,7 +701,7 @@ def build(spec, lay=None):
         objects.append(dict(id="landscape-door-pot-" + name + "-planter", rect=pot_rect))
         meshes.append(_mesh("door-pot-planter-" + name, "furniture", "garden-sandstone",
                             _box(pot_rect[0], pot_rect[1], GROUND, pot_rect[2], pot_rect[3], GROUND+.4),
-                            "ASSUMED sandstone door-flanking pot"))
+                            "ASSUMED sandstone door-flanking pot", kind="planter"))
 
     # Bistro: the real Poly Haven CC0 outdoor_table_chair_set_01 (now
     # measured in the checked manifest, bounds_m 0.776 x 1.831 m, 0.859 m
@@ -721,7 +721,7 @@ def build(spec, lay=None):
     # so it is invisible in the render) keeps that resolver working.
     meshes.append(_mesh("sofa-bistro-marker-view-alias", "ground", "artificial-grass",
                         _quad(bx0, by0, bx1, by1, GROUND + .003),
-                        "view-subject marker only, no visual difference from the grass beneath it"))
+                        "view-subject marker only, no visual difference from the grass beneath it", kind="finish-layer", surface=True, occupied_side=(0,0,1)))
 
     swing = _prop("landscape-egg-swing", "sf_egg_chair", (23.95, -28.30), GROUND,
                   1.99, "Hanging egg basket swing on own stand; 1.99 m high; " + credits["sf_egg_chair"])
@@ -737,7 +737,7 @@ def build(spec, lay=None):
         objects.append(dict(id="landscape-top-planter-"+name, rect=rect, zone="top"))
         meshes.append(_mesh("top-planter-"+name, "furniture", "garden-sandstone",
                             _box(rect[0], rect[1], 0, rect[2], rect[3], .32),
-                            "ASSUMED 0.32 m shallow planter; structural/waterproofing review needed"))
+                            "ASSUMED 0.32 m shallow planter; structural/waterproofing review needed", kind="planter"))
     # Same shallow-rooted lower palette as the ground beds, alternating
     # Lavandula (purple) and Gazania (orange) for the client's colour-block
     # request, rather than a single repeated species.
@@ -783,7 +783,7 @@ def build(spec, lay=None):
         objects.append(dict(id="landscape-top-north-planter-%d" % i, rect=rect, zone="top"))
         meshes.append(_mesh("top-north-planter-%d" % i, "furniture", "garden-sandstone",
                             _box(*rect[:2], 0.0, *rect[2:], .30),
-                            "ASSUMED shallow northern perimeter container; waterproofing and load to engineer"))
+                            "ASSUMED shallow northern perimeter container; waterproofing and load to engineer", kind="planter"))
         p = _prop("landscape-top-north-ixora-%d" % i, "sf_ixora", (x, y), .30, .55,
                   "Ixora coccinea; care: %s (%s); %s; nursery height 0.55 m ASSUMED" %
                   (care("Ixora coccinea"), _care_note("Ixora coccinea"), credits["sf_ixora"]), zone="top")
@@ -825,7 +825,7 @@ def build(spec, lay=None):
     objects.append(dict(id="landscape-top-tree-pot", rect=pot, zone="top"))
     meshes.append(_mesh("top-tree-pot", "furniture", "garden-sandstone",
                         _box(*pot[:2], 0.0, *pot[2:], .45),
-                        "ASSUMED shallow container for Olea europaea; engineer waterproofing and load"))
+                        "ASSUMED shallow container for Olea europaea; engineer waterproofing and load", kind="planter"))
     # v25 defect: two copies near-touching (0.04 m gap), each scaled ~1:1 by height alone, rendered as one 3.58 x
     # 1.66 m dark slab. One bench only, scaled to the seat-height range and 1.8 m length; bench_violations
     # guards this build against drifting back to the

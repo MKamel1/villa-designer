@@ -181,9 +181,15 @@ def scene(lay, variant=None) -> D.Scene:
     # ground outside the plot at street level, as a ring round the plot
     px0, py0, px1, py1 = (v / 1000.0 for v in E.plot())
     R = 60.0
-    outer = [(px0 - R, py0 - R), (px1 + R, py0 - R), (px1 + R, py1 + R), (px0 - R, py1 + R)]
-    s.add([D.Face([(x, y, -1.2) for x, y in D.with_holes(outer, [[(px0, py0), (px1, py0), (px1, py1), (px0, py1)]])],
-                  "ground")])
+    # Four non-overlapping quads form the ring. A bridged polygon with a repeated
+    # vertex produced a zero-area fan triangle when the render mesh was triangulated.
+    ground_rects = ((px0 - R, py0 - R, px0, py1 + R),
+                    (px0, py0 - R, px1, py0),
+                    (px1, py0 - R, px1 + R, py1 + R),
+                    (px0, py1, px1, py1 + R))
+    s.add([D.Face([(x0, y0, -1.2), (x1, y0, -1.2),
+                   (x1, y1, -1.2), (x0, y1, -1.2)], "ground")
+           for x0, y0, x1, y1 in ground_rects])
     # environment solids (fences, neighbours, sister, apartment, core, beams, steps, street, the NE yard wall ...)
     for e in env["elements"]:
         if e.get("kind") != "box":

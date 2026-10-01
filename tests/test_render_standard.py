@@ -366,6 +366,9 @@ class RenderStandard(unittest.TestCase):
         self.assertEqual(S.blocked_openings(SCENE), [])
 
         old = copy.deepcopy(SCENE)
+        # Historical obstruction reproduction deliberately bypasses the current
+        # part constructor; the production scene above has already passed it.
+        old["meshes"] = list(old["meshes"])
         bed = (19.53, -26.591, 21.13, -24.591)
         for n, x in (("02", bed[0] - 0.28), ("03", bed[2] + 0.25)):
             y = bed[1] + 0.2

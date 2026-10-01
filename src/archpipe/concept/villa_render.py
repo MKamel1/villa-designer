@@ -31,6 +31,7 @@ from . import villa_furnish3d as F3
 from . import villa_lighting as VL
 from . import villa_r11 as R
 from .authored_values import fill_defaults, override
+from .physical_part import PartMeshList
 
 LZ = {"B": -3.0, "GF": 0.0}
 ROOT = Path(__file__).resolve().parents[3]
@@ -357,7 +358,12 @@ def quad_down(x0, y0, x1, y1, z):
 
 
 def disc_down(cx, cy, z, r, n=16):
-    return [[[cx + r * math.cos(-2 * math.pi * k / n), cy + r * math.sin(-2 * math.pi * k / n), z] for k in range(n)]]
+    # The visible underside is the lower face of a shallow closed disc.
+    # Its clockwise ring faces down; pane_faces closes the rim and upper face.
+    lower = [[cx + r * math.cos(-2 * math.pi * k / n),
+              cy + r * math.sin(-2 * math.pi * k / n), z] for k in range(n)]
+    upper = [[x, y, z + 0.002] for x, y, _ in lower]
+    return pane_faces(lower, upper)
 
 
 def sphere(cx, cy, cz, r, nu=16, nv=10):
@@ -419,24 +425,27 @@ def _environment_face_sources():
 
 
 # ------------------------------------------------------------------ the scene
-def build(lay=None, views=None):
+def build(lay=None, views=None, *, collect_part_failures=True):
     lay = lay or R.design("D1")
     sp = RS.build(lay)
-    meshes, notes = [], []
+    # C3 phase 1: collect all legacy failures for the lead's checkpoint.
+    # Strict construction is available with collect_part_failures=False.
+    meshes, notes = PartMeshList(collect=collect_part_failures), []
     mats = dict(M)
 
     views = views if views is not None else VIEWS(lay)
     doorway_cams = {v["id"]: v["camera"]["position"][:3] for v in views if v["camera"].get("reframed") == "doorway"}
     SOFT = {"boucle", "linen", "sage-fabric", "taupe-fabric", "charcoal-fabric", "bedding-white", "outdoor-fabric"}
 
-    def mesh(mid, mat, faces, group, room=None, label=None, **kw):
+    def mesh(mid, mat, faces, group, *, kind, room=None, label=None, **kw):
         if group in ("furniture", "dressing") and "bevel_m" not in kw and mat not in ("glass-guard", "rug"):
             # real pieces have no knife edges: 4 mm on hard pieces, soft rounded edges on upholstery and bedding
             if mat in SOFT:
                 kw.update(bevel_m=0.02, subdivide=1)
             else:
                 kw.update(bevel_m=0.004)
-        meshes.append(dict(id=mid, group=group, material=mat, room=room, label=label or mid, faces=faces, **kw))
+        meshes.append(dict(id=mid, group=group, material=mat, room=room, label=label or mid,
+                           faces=faces, part_kind=kind, **kw))
 
     # ---- shell: the daylight scene's faces, re-materialised
     shell = VD.scene(lay)
@@ -526,12 +535,12 @@ def build(lay=None, views=None):
         grp = "context" if mat == "render-exterior" else "shell"
         if room and room.startswith("open-for:"):
             mid = "door-open-%03d" % k
-            mesh(mid, mat, faces, grp, label="door leaf, open in " + room[9:], keep_object=True)
+            mesh(mid, mat, faces, grp, label="door leaf, open in " + room[9:], keep_object=True, kind="door-leaf")
             for vid in room[9:].split(","):
                 hide.setdefault(vid, []).append(mid)
             continue
         mesh("shell-%03d-%s" % (k, mat), mat, faces, grp, room=room, label=room or mat,
-             source_id=source or "villa-shell")
+             source_id=source or "villa-shell", kind="glass-pane" if mat == "glass-clear" else "door-leaf" if mat == "door-oak" else "finish-layer")
     notes.append("ASSUMED exterior finish: our walls, ground-floor perimeter beams, exposed slab/ramp edges and boundary/fence walls use smooth very light grey-green mineral paint, reflectance 0.65. Entrance steps are paved; soffits are painted white. Neighbour and apartment context remains neutral mineral render; all exposed construction faces receive a stated finish.")
     for v in views:
         if v["id"] in hide:
@@ -554,7 +563,7 @@ def build(lay=None, views=None):
         z = LZ[r["level"]]
         if rid not in ("stair-b",):
             mesh("floor-" + rid, FINISH[rid][0], [quad_up(x0, y0, x1, y1, z + 0.002)], "shell", room=rid,
-                 label=rid)
+                 label=rid, kind="finish-layer", surface=True, occupied_side=(0,0,1))
         if rid in UNDER_SOFFIT or rid in ("stair-b",):
             continue
         zc = z + VL.CEILING
@@ -567,10 +576,10 @@ def build(lay=None, views=None):
                                      (x0 + b, y1 - b, x0 + b, y0 + b), (x1 - b, y0 + b, x1 - b, y1 - b)):
                 lip.append([[xa, ya, zc], [xb, yb, zc], [xb, yb, zc + 0.08], [xa, ya, zc + 0.08]])
             mesh("ceiling-" + rid, "ceiling-white", ring + lip, "shell", room=rid,
-                 label="detail: cove ceiling (band at 2.70, field 2.80)")
+                 label="detail: cove ceiling (band at 2.70, field 2.80)", kind="finish-layer", surface=True, occupied_side=(0,0,-1))
         else:
             mesh("ceiling-" + rid, "ceiling-white", [quad_down(x0, y0, x1, y1, zc)], "shell", room=rid,
-                 label="detail: false ceiling 2.70")
+                 label="detail: false ceiling 2.70", kind="finish-layer", surface=True, occupied_side=(0,0,-1))
     notes.append("False ceilings at 2.70 m (plenum for the flush fittings; the daylight study assumed 2.80 m).")
 
     # ---- feature panels and the guard (details added here)
@@ -581,7 +590,7 @@ def build(lay=None, views=None):
     for k in range(int((tv[2] + 0.6 - (tv[0] - 0.6)) / 0.06)):
         xa = tv[0] - 0.6 + k * 0.06
         faces += box_faces(xa, L[3] - 0.04, LZ["B"], xa + 0.04, L[3], LZ["B"] + VL.CEILING)
-    mesh("detail-tv-fluting", "walnut", faces, "furniture", room="lounge", label="detail: walnut fluted TV wall")
+    mesh("detail-tv-fluting", "walnut", faces, "furniture", room="lounge", label="detail: walnut fluted TV wall", kind="wall-panel")
     PB = F.clear_rect(lay, "parents-bed")
     bed = F.footprint(it["pb-bed"])
     faces = []
@@ -594,7 +603,7 @@ def build(lay=None, views=None):
             continue
         faces += box_faces(xa, PB[1], 0.0, xa + 0.03, PB[1] + 0.03, 2.10)   # partial height (advisory M-HEADWALL)
     mesh("detail-headboard-slats", "oak", faces, "furniture", room="parents-bed",
-         label="detail: oak slatted headboard wall")
+         label="detail: oak slatted headboard wall", kind="wall-panel")
     op = sp["gf_opening"]
     gz = 0.0
     # Round-3 defect 4 (glass reads as a mirror): this guard was two ZERO-THICKNESS quads with a refractive
@@ -604,7 +613,7 @@ def build(lay=None, views=None):
     guard = (box_faces(op[0], op[3] - GLASS_T / 2, gz, op[2], op[3] + GLASS_T / 2, gz + 1.1) +
              box_faces(op[2] - GLASS_T / 2, op[1], gz, op[2] + GLASS_T / 2, op[3], gz + 1.1))
     mesh("detail-stair-guard", "glass-guard", guard, "furniture", room="stair-gf",
-         label="detail: 1.1 m glass guard at the stair opening, 10 mm closed pane (required; not yet in the Revit model)")
+         label="detail: 1.1 m glass guard at the stair opening, 10 mm closed pane (required; not yet in the Revit model)", kind="glass-pane")
     # ASSUMED construction details: open risers remain visible between the steel members.
     treads = sorted(([v / 1000.0 for v in b] for b in sp["stair"] if b[5] - b[2] < 300), key=lambda b: b[0])
     wall_y = -28.671                         # party-wall face; the tread edge is at -28.421
@@ -613,14 +622,14 @@ def build(lay=None, views=None):
         xa, ya, za, xb, yb, zb = t
         mesh("detail-stair-wall-stringer-%02d" % n, "black-metal",
              box_faces(xa, wall_y, za - 0.12, xb, ya + 0.025, za + 0.025), "fixture", room="stair-b",
-             label="ASSUMED steel wall stringer and tread bearing; add to Revit")
+             label="ASSUMED steel wall stringer and tread bearing; add to Revit", kind="stair-stringer")
         x = (xa + xb) / 2
         if n % 4 == 0:
             mesh("detail-stair-wall-rail-bracket-%02d" % n, "black-metal",
                  box_faces(x - 0.012, wall_y, zb + 0.87, x + 0.012, ya + 0.075, zb + 0.91),
-                 "fixture", room="stair-b", label="ASSUMED wall handrail bracket; add to Revit")
+                 "fixture", room="stair-b", label="ASSUMED wall handrail bracket; add to Revit", kind="rail-bracket")
 
-    def sloped_member(mid, y0, y1, offset, depth, label, material="black-metal"):
+    def sloped_member(mid, y0, y1, offset, depth, label, *, kind, material="black-metal"):
         # A continuous prism follows the tread nosing line; its offset is measured from that line.
         first, last = treads[0], treads[-1]
         x0, x1 = (first[0] + first[3]) / 2, (last[0] + last[3]) / 2
@@ -629,14 +638,13 @@ def build(lay=None, views=None):
         c = [x1, y1, z1]; d = [x0, y1, z0]
         e = [x0, y1, z0 - depth]; f = [x1, y1, z1 - depth]
         g = [x1, y0, z1]; h = [x0, y0, z0]
-        mesh(mid, material, [[a, b, f, e], [h, g, c, d], [a, h, d, e], [b, f, c, g],
-                                  [a, b, g, h], [e, d, c, f]], "fixture", room="stair-b",
-             label=label)
+        mesh(mid, material, pane_faces([a, b, g, h], [e, f, c, d]), "fixture", room="stair-b",
+             label=label, kind=kind)
 
     sloped_member("detail-stair-open-stringer", open_y - 0.055, open_y - 0.025, -0.06, 0.15,
-                  "ASSUMED continuous open-side steel stringer; add to Revit")
+                  "ASSUMED continuous open-side steel stringer; add to Revit", kind="stair-stringer")
     sloped_member("detail-stair-wall-plate", wall_y + 0.23, wall_y + 0.26, -0.06, 0.15,
-                  "ASSUMED continuous wall stringer plate behind tread bearings; add to Revit")
+                  "ASSUMED continuous wall stringer plate behind tread bearings; add to Revit", kind="wall-plate")
     glass_spec = next(b for b in sp["balustrades"] if b["id"] == "stair-open-glass")
     rail_spec = next(b for b in sp["balustrades"] if b["id"] == "stair-wall-handrail")
     profile = glass_spec["nosing_profile"]
@@ -653,20 +661,21 @@ def build(lay=None, views=None):
         # rendered as a mirror (the same class as the bath screen). pane_faces() bridges the 12 mm gap already
         # present between y0/y1 into a watertight solid.
         mesh("detail-stair-glass-%02d" % k, "glass-guard", pane_faces(face(y0), face(y1)),
-             "fixture", room="stair-b", label="ASSUMED frameless laminated stair glass panel, 12 mm closed pane")
+             "fixture", room="stair-b", label="ASSUMED frameless laminated stair glass panel, 12 mm closed pane", kind="glass-pane")
         # The polished-edge overlay sits on the box's own top face now; nudged out 1 mm so it does not
         # z-fight with that real geometry (it is "principled", not "glass" -- not subject to the closed-solid
         # guard, and was never the mirror defect).
         mesh("detail-stair-glass-edge-%02d" % k, "glass-edge",
              [[[a[0], y0, a[2] + hi + 0.001], [b[0], y0, b[2] + hi + 0.001],
                [b[0], y1, b[2] + hi + 0.001], [a[0], y1, a[2] + hi + 0.001]]], "fixture", room="stair-b",
-             label="ASSUMED visible polished laminated-glass top edge")
+             label="ASSUMED visible polished laminated-glass top edge", kind="glass-edge", surface=True, occupied_side=(0,0,1))
     sloped_member("detail-stair-glass-shoe", open_y - 0.065, open_y - 0.025, -0.04, 0.06,
-                  "ASSUMED steel base shoe on open stringer")
+                  "ASSUMED steel base shoe on open stringer", kind="glass-shoe")
     # on the bracket ends (wall_y + 0.325): the finished plaster beside the flight is at wall_y + 0.20 (-28.471),
     # and the old offset (+0.06..0.09) buried the rail inside it (round-2 finals, v11)
     sloped_member("detail-stair-wall-handrail", wall_y + 0.285, wall_y + 0.325, 0.922, 0.044,
-                  "wall-side wood handrail %.2f m above nosings" % rail_spec["height_above_nosing"], "oak")
+                  "wall-side wood handrail %.2f m above nosings" % rail_spec["height_above_nosing"],
+                  kind="handrail", material="oak")
     notes.append("Details added for the render: fluted walnut TV wall, oak headboard slats, glass guard at the stair "
                  "opening, cove ceilings.")
     notes.append("ASSUMED stair fixings: steel base shoe on the stringer holds three-tread frameless laminated glass "
@@ -738,7 +747,8 @@ def build(lay=None, views=None):
             for k, ((mat, part), faces) in enumerate(by.items()):
                 meshes.append(dict(id="furn-%s-%d" % (f["mark"], k), group="furniture", material=mat,
                                    room=f["room"], label=f["mark"] + (" dressing: pillow" if part.startswith("pillow") else ""),
-                                   faces=faces, keep_object=True, subdivide=1 if part.startswith("pillow") else 0,
+                                   faces=faces, part_kind="pillow" if part.startswith("pillow") else f["type"],
+                                   keep_object=True, subdivide=1 if part.startswith("pillow") else 0,
                                    bevel_m=0.003 if part.startswith("pillow") else 0))
             generated.add(f["mark"])
             gen_comps[f["mark"]] = comps
@@ -765,7 +775,7 @@ def build(lay=None, views=None):
                 meshes.append(dict(id="furn-%s-%d" % (f["mark"].replace("#", "-"), k), group="furniture",
                                    material=mat, room=f["room"], label=f["mark"].split("#")[0] +
                                    (" ASSUMED island microwave drawer front" if component == "microwave-glass" else ""),
-                                   faces=faces,
+                                   faces=faces, part_kind="appliance-front" if component == "microwave-glass" else f["type"],
                                    keep_object=True, subdivide=1 if mat in SOFT else 0,
                                    bevel_m=0.006 if mat in SOFT else 0.0015))
             detailed.add(f["mark"])
@@ -788,7 +798,7 @@ def build(lay=None, views=None):
                          ("vacuum-body", "vacuum-wand", "suitcase", "suitcase-handle", "storage-box",
                           "folded-linens", "tool-case") else "")
             mesh("furn-%s-%d" % (f["mark"].replace("#", "-"), k), mat, faces, "furniture", room=f["room"],
-                 label=label)
+                 label=label, kind=name if name != "body" else f["type"])
     # ---- WP4-A: real furniture models, replacing the procedural stand-in where a checked fit rule allows it.
     # Mapping id -> (asset, footprint (w, d), reference height for the +-5% guard, position, rot, room). The
     # reference height is the piece's own catalogue `h` for a whole item; this codebase's catalogue.py carries no
@@ -900,7 +910,7 @@ def build(lay=None, views=None):
         rug_kwargs = ({"visibility": {"camera": False, "shadow": False, "diffuse": False,
                                        "glossy": False, "transmission": False}} if placed else {})
         mesh("rug-" + rid, "rug", box_faces(cx - w / 2, cy - d / 2, z - 0.01, cx + w / 2, cy + d / 2, z),
-             "furniture", room=rid, label="rug-" + rid, **rug_kwargs)
+             "furniture", room=rid, label="rug-" + rid, **rug_kwargs, kind="rug")
     notes.append("Rugs in the lounge, garden living, parents' bedroom and kids room A (ASSUMED); the lounge and "
                  "bedroom/kids rugs are rectangular procedural stand-ins (sf_rug_round_jute is round and only the "
                  "living rug's footprint is close enough to square to suit it).")
@@ -984,7 +994,7 @@ def build(lay=None, views=None):
                     rail_z = floor + rail
                     mesh(prefix + "-rail-%d" % j, "brass",
                          box_faces(lo, cy - 0.012, rail_z - 0.008, hi, cy + 0.012, rail_z + 0.008),
-                         "dressing", room=wardrobe["room"], label=partner + " hanging rail")
+                         "dressing", room=wardrobe["room"], label=partner + " hanging rail", kind="hanging-rail")
                     # long-hang = dresses/abayas (full-length card); the LOWER rail of a double-hang carries
                     # trousers folded over the hanger, the upper rail shirts/jackets.
                     if kind == "long-hang":
@@ -1014,10 +1024,10 @@ def build(lay=None, views=None):
                                              2 * half_top, 2 * half_bot, dtop, dbot)
                         gid = prefix + "-garment-%d-%d" % (j, round(x * 1000))
                         mesh(gid, fabric, faces, "dressing", room=wardrobe["room"],
-                             label=partner + " hanging " + ("shirt/jacket" if gtype == "shirt" else gtype))
+                             label=partner + " hanging " + ("shirt/jacket" if gtype == "shirt" else gtype), kind="garment")
                         if gtype != "trousers":
                             mesh(gid + "-hanger", "brass", hanger_faces(x, cy, rail_z, 2 * half_top),
-                                 "dressing", room=wardrobe["room"], label=partner + " hanger")
+                                 "dressing", room=wardrobe["room"], label=partner + " hanger", kind="hanger")
                         x += 0.12 if gtype != "trousers" else 0.16
                         n_ += 1
             elif kind == "drawers":
@@ -1026,7 +1036,7 @@ def build(lay=None, views=None):
                     mesh(prefix + "-front-%d" % j, "greige-lacquer",
                          box_faces(lo, q[1] if wardrobe["rot"] == 0 else q[3] - 0.018, z,
                                    hi, q[1] + 0.018 if wardrobe["rot"] == 0 else q[3], z + 0.235),
-                         "dressing", room=wardrobe["room"], label=partner + " drawer front")
+                         "dressing", room=wardrobe["room"], label=partner + " drawer front", kind="door-leaf")
             elif kind in ("shelves", "shoe-shelves", "hat-shelf", "trousers-pullout"):
                 for j in range(4):
                     z = floor + 0.34 + j * 0.42
@@ -1036,11 +1046,11 @@ def build(lay=None, views=None):
                     # "walnut-grain-x" is identity rotation and is already the established fix for exactly this
                     # ("grain along horizontal tops and shelves", villa_render.py M table).
                     mesh(prefix + "-shelf-%d" % j, "walnut-grain-x", box_faces(lo, q[1] + 0.02, z,
-                         hi, q[3] - 0.02, z + 0.018), "dressing", room=wardrobe["room"], label=partner + " shelf")
+                         hi, q[3] - 0.02, z + 0.018), "dressing", room=wardrobe["room"], label=partner + " shelf", kind="shelf")
                     mesh(prefix + "-stack-%d" % j, "linen" if kind == "shelves" else "leather-brown",
                          box_faces(lo + 0.03, cy - 0.15, z + 0.02, min(hi - 0.02, lo + 0.22), cy + 0.15,
                                    z + 0.10), "dressing", room=wardrobe["room"],
-                         label=partner + (" folded stack" if kind == "shelves" else " shoes and hats"))
+                         label=partner + (" folded stack" if kind == "shelves" else " shoes and hats"), kind="folded-fabric" if kind == "shelves" else "luggage")
         # A single full-width slab read as one shelf; individual lidded boxes and paired shoes make the
         # wardrobe's storage use legible without adding anything outside its measured footprint.
         usable = q[2] - q[0] - 0.14
@@ -1051,7 +1061,7 @@ def build(lay=None, views=None):
             xa = q[0] + 0.07 + bi*(box_w+gap)
             mesh("dress-%s-top-box-%d" % (partner, bi), "linen",
                  box_faces(xa, cy-0.18, floor+2.04, xa+box_w, cy+0.18, floor+2.18),
-                 "dressing", room=wardrobe["room"], label=partner + " labelled top box")
+                 "dressing", room=wardrobe["room"], label=partner + " labelled top box", kind="storage-box")
         shoe_module = next((span for span in F.module_spans(wardrobe) if span[0] in ("long-hang", "double-hang")), None)
         if shoe_module:
             _, xa, xb = shoe_module
@@ -1070,7 +1080,7 @@ def build(lay=None, views=None):
                              [xshoe+0.055, cy+0.015, zsole+0.060], [xshoe+0.015, cy+0.015, zsole+0.060]]
                     faces += pane_faces(upper, lower)
                     mesh("dress-%s-shoe-%d-%d" % (partner, pair, foot), "leather-brown", faces,
-                         "dressing", room=wardrobe["room"], label=partner + " shoe pair")
+                         "dressing", room=wardrobe["room"], label=partner + " shoe pair", kind="shoe")
     for bid, duvet in (("pb-bed", "bedding-white"), ("kb-bed", "sage-fabric"), ("ka-bunk", "bedding-white")):
         b_ = it[bid]
         q = F.footprint(b_)
@@ -1157,7 +1167,7 @@ def build(lay=None, views=None):
                               mattress_top=round(LZ["GF"] + 1.40, 3), label="dressing: duvet (cloth)"))
         for k, pf in enumerate(pil if bid not in generated else []):
             mesh("dress-pillow-%s-%d" % (bid, k), "bedding-white", pf, "dressing", room=b_["room"],
-                 label="dressing: pillow")
+                 label="dressing: pillow", kind="pillow")
     notes.append("Dressing: clothes on the dressing rails, duvets and pillows on the beds (not design).")
     notes.append("ASSUMED furniture detailing: crowned sofa and chair cushions, rounded arms, exposed plinth and "
                  "legs, and the bunk ladder on its open side; product and fixing details require Revit coordination. "
@@ -1176,7 +1186,7 @@ def build(lay=None, views=None):
         wx, wy, _ = FD.to_world_point(item, lx, ly, 0, LZ[item["level"]])
         mesh(mid, mat, box_faces(wx - sx / 2, wy - sy / 2, LZ[item["level"]] + z0,
                                  wx + sx / 2, wy + sy / 2, LZ[item["level"]] + z0 + h),
-             "fixture", room=item["room"], label="ASSUMED appliance: " + mid + "; add to Revit")
+             "fixture", room=item["room"], label="ASSUMED appliance: " + mid + "; add to Revit", kind="appliance-front")
 
     def coffee_machine(mid, support, lx, ly):
         item = it_all[support]
@@ -1190,14 +1200,14 @@ def build(lay=None, views=None):
         mesh(mid + "-body", "black-metal",
              [[shell_vertices[i] for i in tri] for tri in shell_tris], "fixture", room=item["room"],
              label="ASSUMED rounded coffee machine housing; add to Revit", keep_object=True,
-             bevel_m=0.003, subdivide=1)
+             bevel_m=0.003, subdivide=1, kind="appliance-housing")
         for suffix, material, bounds in (
             ("drip-tray", "black-metal", (x-.078, y+.075, floor, x+.078, y+.11, floor+.018)),
             ("spout", "brass", (x-.018, y+.072, floor+.115, x+.018, y+.108, floor+.145)),
             ("water-tank", "glass-guard", (x-.063, y-.108, floor+.055, x+.063, y-.088, floor+.235)),
         ):
             mesh(mid + "-" + suffix, material, box_faces(*bounds), "fixture", room=item["room"],
-                 label="ASSUMED coffee machine " + suffix + "; add to Revit", bevel_m=0.005)
+                 label="ASSUMED coffee machine " + suffix + "; add to Revit", bevel_m=0.005, kind="glass-pane" if suffix == "water-tank" else "appliance-component")
 
     coffee_machine("appliance-coffee-main", "k-run", 0.775, -0.14)
     coffee_machine("appliance-coffee-dirty", "dk-run", -0.90, 0)
@@ -1214,7 +1224,7 @@ def build(lay=None, views=None):
     else:
         vent = box_faces(hx + back * 0.30 - 0.04, hy - 0.175, ztop_i, hx + back * 0.30 + 0.04, hy + 0.175, ztop_i + 0.012)
     mesh("appliance-downdraft-island", "black-metal", vent, "fixture", room="kitchen",
-         label="ASSUMED 350 mm downdraft local capture for cooking fumes from single induction zone; duct/discharge pending")
+         label="ASSUMED 350 mm downdraft local capture for cooking fumes from single induction zone; duct/discharge pending", kind="appliance-component")
     dirty = it_all["dk-run"]
     hob = next((a, b) for kind, a, b in F3._local_modules(dirty) if kind == "hob")
     hx, hy, _ = FD.to_world_point(dirty, sum(hob) / 2, 0, 0, LZ["B"])
@@ -1243,10 +1253,10 @@ def build(lay=None, views=None):
     hood_top = min(hits)
     mesh("appliance-hood-dirty-canopy", "black-metal", box_faces(hx - 0.34, hy - 0.27, -1.05,
          hx + 0.34, wall_y, -0.98), "fixture", room="dirty-kitchen",
-         label="ASSUMED wall cooker hood canopy; add to Revit")
+         label="ASSUMED wall cooker hood canopy; add to Revit", kind="appliance-housing")
     mesh("appliance-hood-dirty-chimney", "black-metal", box_faces(hx - 0.115, wall_y - 0.16, -0.98,
          hx + 0.115, wall_y, hood_top), "fixture", room="dirty-kitchen",
-         label="ASSUMED cooker hood duct to rendered soffit; add to Revit")
+         label="ASSUMED cooker hood duct to rendered soffit; add to Revit", kind="duct")
     for basin_id in ("gwc-basin", "fb-basin", "pe-basin"):
         basin = it_all[basin_id]
         width = min(basin["w"] - 0.04, 0.78)
@@ -1256,7 +1266,7 @@ def build(lay=None, views=None):
         mesh("mirror-" + basin_id, "silvered-mirror",
              box_faces(bounds[0], bounds[1], LZ[basin["level"]] + bounds[2],
                        bounds[3], bounds[4], LZ[basin["level"]] + bounds[5]),
-             "fixture", room=basin["room"], label="ASSUMED silvered wall mirror over " + basin_id + "; add to Revit")
+             "fixture", room=basin["room"], label="ASSUMED silvered wall mirror over " + basin_id + "; add to Revit", kind="mirror-panel")
     notes.append("ASSUMED deck-mounted brass bath mixer and spout, three silvered vanity mirrors, coffee machine "
                  "bodies with trays, spouts and water tanks, and dirty-kitchen canopy and duct; coordinate with Revit.")
     notes.append("ASSUMED kitchen products: two worktop coffee machines, island microwave drawer and "
@@ -1274,11 +1284,11 @@ def build(lay=None, views=None):
                              ("left", (xa - 0.018, yy - 0.05, z0, xa, yy + 0.05, z1)),
                              ("right", (xb, yy - 0.05, z0, xb + 0.018, yy + 0.05, z1))):
             mesh("detail-hatch-" + part, "garden-sandstone", box_faces(*bounds), "shell",
-                 label="ASSUMED stone pass-through " + part + " reveal")
+                 label="ASSUMED stone pass-through " + part + " reveal", kind="finish-layer")
         b = h["shutter_box"]
         mesh("detail-hatch-shutter-box", "greige-lacquer",
              box_faces(b[0], b[1], LZ[h["level"]] + b[2], b[3], b[4], LZ[h["level"]] + b[5]),
-             "fixture", room="kitchen", label="ASSUMED roll-up shutter housing, raised open by day")
+             "fixture", room="kitchen", label="ASSUMED roll-up shutter housing, raised open by day", kind="shutter-housing")
     for p in sp["pocket_buildouts"]:
         d = next(d for d in sp["doors"] if d.get("sliding") and d["level"] == p["level"])
         for k in range(d["leaf_count"]):
@@ -1287,11 +1297,11 @@ def build(lay=None, views=None):
             mesh("detail-pocket-panel-%d" % k, "door-oak",
                  box_faces(x0 + 0.01, y - 0.009, LZ[d["level"]] + 0.015,
                            x1 - 0.01, y + 0.009, LZ[d["level"]] + d["height"] - 0.015),
-                 "fixture", room="dirty-kitchen", label="ASSUMED telescopic sliding leaf stowed in pocket")
+                 "fixture", room="dirty-kitchen", label="ASSUMED telescopic sliding leaf stowed in pocket", kind="door-leaf")
         mesh("detail-pocket-track", "black-metal", box_faces(x0, d["y"] - 0.055,
              LZ[d["level"]] + d["height"], d["x"] + d["width"] / 2, d["y"] + 0.055,
              LZ[d["level"]] + d["height"] + 0.024), "fixture", room="dirty-kitchen",
-             label="ASSUMED overhead telescopic pocket track")
+             label="ASSUMED overhead telescopic pocket track", kind="door-track")
     notes.append("ASSUMED hatch reveals and roll-up shutter housing: shutter raised for all current day views; "
                  "three 0.4 m sliding panels are stowed inside the 0.4 m west pocket, with an overhead track.")
 
@@ -1301,22 +1311,22 @@ def build(lay=None, views=None):
             x, y, z = fitting["x"], fitting["y"], LZ[fitting["level"]] + fitting["z"]
             mesh(fid + "-drop", "brass", box_faces(x - 0.012, y - 0.012, z + 0.012,
                  x + 0.012, y + 0.012, VL.ceiling_z(fitting["level"], x=x, y=y, room=fitting["room"], lay=lay, spec=sp)),
-                 "fixture", room=fitting["room"], label="ASSUMED ceiling rain-head drop")
+                 "fixture", room=fitting["room"], label="ASSUMED ceiling rain-head drop", kind="rain-head")
             mesh(fid + "-plate", "brass", box_faces(x - 0.16, y - 0.16, z - 0.014,
                  x + 0.16, y + 0.16, z + 0.014), "fixture", room=fitting["room"],
-                 label="ASSUMED ceiling rain-head plate")
+                 label="ASSUMED ceiling rain-head plate", kind="rain-head")
         elif fitting["kind"] == "hand-shower":
             x, y, z = fitting["x"], fitting["y"], LZ[fitting["level"]] + fitting["z"]
             mesh(fid + "-rail", "brass", box_faces(x - 0.012, y - 0.06, z - 0.35,
                  x + 0.012, y + 0.012, z + 0.45), "fixture", room=fitting["room"],
-                 label="ASSUMED wall-mounted hand-shower rail")
+                 label="ASSUMED wall-mounted hand-shower rail", kind="riser-rail")
             mesh(fid + "-head", "brass", box_faces(x - 0.045, y + 0.005, z + 0.21,
                  x + 0.045, y + 0.09, z + 0.31), "fixture", room=fitting["room"],
-                 label="ASSUMED hand shower on sliding holder")
+                 label="ASSUMED hand shower on sliding holder", kind="shower-head")
         elif fitting["kind"] == "linear-drain":
             mesh(fid, "black-metal", box_faces(fitting["x0"], fitting["y0"], LZ[fitting["level"]] - 0.003,
                  fitting["x1"], fitting["y1"], LZ[fitting["level"]]), "fixture", room=fitting["room"],
-                 label="ASSUMED flush linear drain in falling wet-zone floor; no enclosure")
+                 label="ASSUMED flush linear drain in falling wet-zone floor; no enclosure", kind="drain")
         else:
             # WP4-B4 (client: "the glass looked too reflective"): a dedicated material carrying THIS fitting's own
             # measured transmittance (0.91) and index of refraction (1.52) from revit_spec's bath_fittings --
@@ -1336,7 +1346,7 @@ def build(lay=None, views=None):
                                     % (fitting["id"], fitting["optical_note"]))})
             mesh(fid, mname, box_faces(fitting["x0"], fitting["y"] - GLASS_T / 2, fitting["sill"],
                  fitting["x1"], fitting["y"] + GLASS_T / 2, fitting["head"]), "fixture", room=fitting["room"],
-                 label="ASSUMED fixed frameless bath screen, 10 mm closed pane, open entry at far end")
+                 label="ASSUMED fixed frameless bath screen, 10 mm closed pane, open entry at far end", kind="glass-pane")
     for vent in sp["ventilation"]:
         x, y, z = vent["fan"]
         z += LZ[vent["level"]]
@@ -1344,11 +1354,11 @@ def build(lay=None, views=None):
         mesh("detail-vent-" + vent["room"] + "-duct", "black-metal",
              box_faces(x - 0.055, min(y, end_y), z - 0.055,
                        x + 0.055, max(y, end_y), z + 0.055), "fixture", room=vent["room"],
-             label="ASSUMED duct to outside: " + vent["room"])
+             label="ASSUMED duct to outside: " + vent["room"], kind="duct")
         mesh("detail-vent-" + vent["room"] + "-grille", "alu-bronze",
              box_faces(x - 0.12, end_y - 0.012, z - 0.12,
                        x + 0.12, end_y + 0.012, z + 0.12), "fixture", room=vent["room"],
-             label="ASSUMED external extract grille: " + vent["room"])
+             label="ASSUMED external extract grille: " + vent["room"], kind="fan-grille")
     notes.append("ASSUMED bath-fitting bodies and fixing details follow the specified rain heads, hand shower rails, "
                  "guest bathroom flush linear drain and ensuite fixed frameless screen. Guest bathroom and dirty-kitchen ducts terminate at external grilles; "
                  "the dirty-kitchen cooker hood is the specified extract source. Drip, flow and products remain "
@@ -1375,7 +1385,7 @@ def build(lay=None, views=None):
                     if probe in FINISH and FINISH[probe][1] == "plaster-warm-white":
                         a_, b_ = (xx - 0.012, xx) if side < 0 else (xx, xx + 0.012)
                         faces += box_faces(a_, y0, zf, b_, y1, zf + 0.08)
-        mesh("detail-skirting-" + lv, "paint-white-satin", faces, "shell", label="detail: 80 mm painted skirting")
+        mesh("detail-skirting-" + lv, "paint-white-satin", faces, "shell", label="detail: 80 mm painted skirting", kind="finish-layer")
     frames = []
     for m in [m for m in meshes if m["material"] == "glass-clear"]:
         for face in m["faces"][::6]:
@@ -1399,7 +1409,7 @@ def build(lay=None, views=None):
                 if xb - xa > 1.6:
                     mid = (xa + xb) / 2
                     frames += box_faces(mid - fw / 2, y_ - 0.03, za, mid + fw / 2, y_ + 0.03, zb)
-    mesh("detail-window-frames", "alu-bronze", frames, "shell", label="detail: 50 mm aluminium frames (ASSUMED)")
+    mesh("detail-window-frames", "alu-bronze", frames, "shell", label="detail: 50 mm aluminium frames (ASSUMED)", kind="window-frame")
     arch, handles = [], []
     for d in sp["doors"]:
         if d.get("garden") or d.get("sliding"):
@@ -1427,8 +1437,8 @@ def build(lay=None, views=None):
                 hy = d["y"] + w_ / 2 - 0.08
                 handles += box_faces(min(d["x"], d["x"] + s_ * 0.07), hy - 0.07, z0 + 1.02, max(d["x"], d["x"] + s_ * 0.07),
                                      hy + 0.03, z0 + 1.04)
-    mesh("detail-architraves", "paint-white-satin", arch, "shell", label="detail: 70 mm architraves")
-    mesh("detail-door-handles", "brass", handles, "fixture", label="detail: lever handles")
+    mesh("detail-architraves", "paint-white-satin", arch, "shell", label="detail: 70 mm architraves", kind="door-trim")
+    mesh("detail-door-handles", "brass", handles, "fixture", label="detail: lever handles", kind="door-handle")
     notes.append("Construction details added for the render: 80 mm skirting, 50 mm aluminium window frames and "
                  "mullions, 70 mm architraves and lever handles (not yet in the Revit model).")
 
@@ -1518,7 +1528,7 @@ def build(lay=None, views=None):
         else:
             box = (d0, o["y"] - half, z0, d1, o["y"] + half, z1)
         mesh("detail-" + cid + "-track", "black-metal", box_faces(*box), "fixture", room=room,
-             label="detail: curtain ceiling track (ASSUMED)")
+             label="detail: curtain ceiling track (ASSUMED)", kind="curtain-track")
     # WP4-B1: the daybed item now carries curtain=False (villa_furnish.py ~199) -- the nook curtain and its ceiling
     # track are REMOVED, not just hidden, per the design-layer review. No "curtain-library-nook" curtain and no
     # "detail-curtain-library-nook-track" mesh are emitted any more (see test_render_standard's negative assertion).
@@ -1574,13 +1584,13 @@ def build(lay=None, views=None):
                                aim=_unit(f.aim), spin_deg=0.0, ies=ies, lumens=round(f.lumens, 1), cct_k=cct, cri=90,
                                product=pinfo, dimmer=1.0))
             mesh("fix-" + f.id, "black-metal", disc_down(f.x, f.y, f.z - 0.0015, 0.0415), "fixture", room=f.room,
-                 label="fitting " + f.id)
+                 label="fitting " + f.id, kind="downlight-trim")
             mats.setdefault("lens-%d" % cct, dict(kind="emissive", base_rgb=[1, 1, 1], emission_lm_per_m2=40000.0,
                                                   cct_k=cct, note="visible lens glow (no light contribution)"))
             mesh("lens-" + f.id, "lens-%d" % cct, disc_down(f.x, f.y, f.z - 0.002, 0.018), "fixture",
                  room=f.room, label="fitting " + f.id,
                  visibility={"camera": True, "glossy": True, "diffuse": False, "shadow": False,
-                             "transmission": False}, layer=f.layer)
+                             "transmission": False}, layer=f.layer, kind="light-lens")
         elif f.kind == "DESK":
             lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="ies", position=[f.x, f.y, f.z - 0.03],
                                aim=[0.0, 0.0, -1.0], spin_deg=0.0, ies="generic/DESK.ies", lumens=round(f.lumens, 1),
@@ -1610,11 +1620,11 @@ def build(lay=None, views=None):
             arm = box_faces(min(base_x, f.x) - 0.007, min(base_y, f.y) - 0.007, top - 0.007,
                             max(base_x, f.x) + 0.007, max(base_y, f.y) + 0.007, top + 0.007)
             mesh("lamp-shade-" + f.id, "black-metal",
-                 box_faces(f.x - 0.08, f.y - 0.08, f.z - 0.01, f.x + 0.08, f.y + 0.08, f.z + 0.05)[1:]
-                 + cyl(f.x, f.y, 0.007, f.z + 0.05, top), "fixture", room=f.room, label="fitting " + f.id)
+                 box_faces(f.x - 0.08, f.y - 0.08, f.z - 0.01, f.x + 0.08, f.y + 0.08, f.z + 0.05)
+                 + cyl(f.x, f.y, 0.007, f.z + 0.05, top), "fixture", room=f.room, label="fitting " + f.id, kind="lamp-head")
             mesh("lamp-arm-" + f.id, "black-metal",
                  cyl(base_x, base_y, 0.07, ztop, ztop + 0.015) + cyl(base_x, base_y, 0.007, ztop + 0.015, top + 0.007)
-                 + arm, "fixture", room=f.room, label="fitting " + f.id + " (base, stem and arm)")
+                 + arm, "fixture", room=f.room, label="fitting " + f.id + " (base, stem and arm)", kind="lamp-arm")
         elif f.kind == "VSCONCE":
             area = 4 * 0.06 * 0.5
             mname = "opal-vsconce-%d" % cct
@@ -1623,14 +1633,14 @@ def build(lay=None, views=None):
                                note="vertical opal sconce, %d lm (GENERIC)" % f.lumens)
             mesh("lamp-" + f.id, mname, box_faces(f.x - 0.03, f.y - 0.03, f.z - 0.25, f.x + 0.03, f.y + 0.03,
                                                   f.z + 0.25), "fixture", room=f.room, label="fitting " + f.id,
-                 layer=f.layer)
+                 layer=f.layer, kind="light-diffuser")
             # its wall bracket: the design sets the tube 60 mm off the wall (to its axis); the first version left a
             # 30 mm air gap behind it
             ax_ = 1 if f.aim[0] > 0 else -1
             wall_x = f.x - ax_ * 0.06
             mesh("bracket-" + f.id, "brass", box_faces(min(wall_x, f.x - ax_ * 0.03), f.y - 0.015, f.z - 0.02,
                                                        max(wall_x, f.x - ax_ * 0.03), f.y + 0.015, f.z + 0.02),
-                 "fixture", room=f.room, label="fitting " + f.id + " (bracket)")
+                 "fixture", room=f.room, label="fitting " + f.id + " (bracket)", kind="rail-bracket")
         elif f.kind == "SWING":
             # Client round-3 (v02/v24, library nook): the previous swing lamp was three flat brass BOXES --
             # no round plate, no articulated joint, no shade -- and read as "tiny brass boxes", not a
@@ -1656,24 +1666,38 @@ def build(lay=None, views=None):
                          f.z + r * math.sin(2 * math.pi * k / n)]
                         for k in range(n)]
             toward = 1 if f.x > wall_x else -1
-            mesh("swing-plate-" + f.id, "brass", pane_faces(wall_disc(wall_x, 0.05), wall_disc(wall_x + toward * 0.012, 0.05)),
-                 "fixture", room=f.room, label="SWING round wall plate, D100")
+            plate_front = wall_disc(wall_x + toward * 0.012, 0.05)
+            plate_back = wall_disc(wall_x, 0.05)
+            if toward < 0:
+                plate_front.reverse()
+                plate_back.reverse()
+            mesh("swing-plate-" + f.id, "brass", pane_faces(plate_front, plate_back),
+                 "fixture", room=f.room, label="SWING round wall plate, D100", kind="wall-plate")
             mesh("swing-arm-" + f.id, "brass", rod_faces(base_pt, elbow_pt, 0.018) + rod_faces(elbow_pt, head_pt, 0.018),
-                 "fixture", room=f.room, label="SWING articulated arm, two 0.30 m knuckle-jointed segments")
+                 "fixture", room=f.room, label="SWING articulated arm, two 0.30 m knuckle-jointed segments", kind="lamp-arm")
             mesh("swing-knuckle-" + f.id, "black-metal", sphere(*elbow_pt, 0.022),
-                 "fixture", room=f.room, label="SWING knuckle joint")
+                 "fixture", room=f.room, label="SWING knuckle joint", kind="lamp-joint")
             shade_r, shade_h, tilt, seg = 0.06, 0.10, 0.03, 16
             apex = (f.x, f.y - tilt, f.z + shade_h)
             ring = [[f.x + shade_r * math.cos(2 * math.pi * k / seg), f.y + shade_r * math.sin(2 * math.pi * k / seg), f.z]
                     for k in range(seg)]
-            shade_faces = [ring] + [[apex, ring[i], ring[(i + 1) % seg]] for i in range(seg)]
+            # A thin closed shade has outer and inner walls joined around its lip.
+            inner_apex = (apex[0], apex[1], apex[2] - 0.008)
+            inner_ring = [[f.x + (shade_r - 0.006) * math.cos(2 * math.pi * k / seg),
+                           f.y + (shade_r - 0.006) * math.sin(2 * math.pi * k / seg), f.z + 0.002]
+                          for k in range(seg)]
+            shade_faces = ([[apex, ring[(i + 1) % seg], ring[i]] for i in range(seg)] +
+                           [[inner_apex, inner_ring[i], inner_ring[(i + 1) % seg]] for i in range(seg)] +
+                           [[ring[i], ring[(i + 1) % seg], inner_ring[(i + 1) % seg], inner_ring[i]]
+                            for i in range(seg)])
+            shade_faces = [face[::-1] for face in shade_faces]
             mesh("swing-head-" + f.id, "black-metal", shade_faces, "fixture", room=f.room,
-                 label="SWING conical shade D120, angled down")
+                 label="SWING conical shade D120, angled down", kind="lamp-head")
             name = "swing-disc-%d" % cct
             mats[name] = dict(kind="emissive", base_rgb=[1, 0.94, 0.82],
                               emission_lm_per_m2=round(f.lumens / (math.pi * 0.055**2), 1), cct_k=cct)
             mesh("swing-emitter-" + f.id, name, disc_down(f.x, f.y, f.z - 0.002, 0.055),
-                 "fixture", room=f.room, label="SWING emitting disc", layer=f.layer)
+                 "fixture", room=f.room, label="SWING emitting disc", layer=f.layer, kind="light-lens")
         elif f.kind in ("PEN-GLOBE", "PEN-SMALL", "SCONCE", "WALL-READ"):
             r = k.get("diameter", 0.2) / 2
             area = 4 * math.pi * r * r
@@ -1694,20 +1718,20 @@ def build(lay=None, views=None):
                                 cct_k=cct, note="opal diffuse emitter, %d lm (GENERIC)" % f.lumens))
             cz = f.z + r if f.kind not in ("SCONCE", "WALL-READ") else f.z
             mesh("lamp-" + f.id, mname, sphere(f.x, f.y, cz, r), "fixture", room=f.room,
-                 label="fitting " + f.id, layer=f.layer)
+                 label="fitting " + f.id, layer=f.layer, kind="light-diffuser")
             if f.kind == "PEN-GLOBE":
                 inner = r * 0.55
                 ename = "opal-inner-%d" % cct
                 mats[ename] = dict(kind="emissive", base_rgb=[1, 0.96, 0.88],
                                    emission_lm_per_m2=round(f.lumens / (4 * math.pi * inner**2), 1), cct_k=cct)
                 mesh("bulb-" + f.id, ename, sphere(f.x, f.y, cz, inner), "fixture", room=f.room,
-                     label="lamp inside opal globe", layer=f.layer)
+                     label="lamp inside opal globe", layer=f.layer, kind="light-bulb")
             if f.kind == "WALL-READ":
                 wall_y = (F.footprint(it_all["library-daybed"])[1] if f.room == "bar-alcove" else
                           lay["rooms"]["parents-bed"]["rect"][1])
                 mesh("bracket-" + f.id, "brass", box_faces(f.x - 0.012, wall_y, f.z - 0.012,
                      f.x + 0.012, f.y, f.z + 0.012), "fixture", room=f.room,
-                     label="ASSUMED wall swing arm " + f.id)
+                     label="ASSUMED wall swing arm " + f.id, kind="rail-bracket")
             top = f.extra.get("hang_from")
             if top:
                 zb = LZ[f.level] + top if top < 2.9 and f.level == "B" else top
@@ -1715,27 +1739,27 @@ def build(lay=None, views=None):
                     zb = LZ["B"] + VL.CEILING if top > 0 else top
                 mesh("cord-" + f.id, "black-metal", box_faces(f.x - 0.003, f.y - 0.003, cz + r, f.x + 0.003,
                                                               f.y + 0.003, zb), "fixture", room=f.room,
-                     label="fitting " + f.id)
+                     label="fitting " + f.id, kind="lamp-cord")
                 mesh("canopy-" + f.id, "brass", box_faces(f.x - 0.05, f.y - 0.05, zb - 0.02, f.x + 0.05, f.y + 0.05,
-                                                          zb), "fixture", room=f.room, label="fitting " + f.id)
+                                                          zb), "fixture", room=f.room, label="fitting " + f.id, kind="wall-plate")
         elif f.kind == "PEN-LIN":
             Lg = k["length"]
             zb = f.z
             mesh("lamp-body-" + f.id, "black-metal", box_faces(f.x - Lg / 2, f.y - 0.03, zb, f.x + Lg / 2, f.y + 0.03,
                                                               zb + 0.06), "fixture", room=f.room,
-                 label="fitting " + f.id)
+                 label="fitting " + f.id, kind="lamp-housing")
             mname = "led-lin-%d" % cct
             mats[mname] = dict(kind="emissive", base_rgb=[1, 1, 1], emission_lm_per_m2=round(
                 f.lumens / ((Lg - 0.1) * 0.03), 1), cct_k=cct, note="linear pendant diffuser, %d lm (GENERIC)" %
                 f.lumens)
             mesh("lamp-" + f.id, mname, [quad_down(f.x - Lg / 2 + 0.05, f.y - 0.015, f.x + Lg / 2 - 0.05,
                                                    f.y + 0.015, zb - 0.001)], "fixture", room=f.room,
-                 label="fitting " + f.id, layer=f.layer)
+                 label="fitting " + f.id, layer=f.layer, kind="light-diffuser", surface=True, occupied_side=(0,0,-1))
             ceil = LZ["B"] + VL.CEILING
             for s in (-1, 1):
                 mesh("wire-%s-%d" % (f.id, s), "black-metal", box_faces(f.x + s * 0.6 - 0.002, f.y - 0.002, zb + 0.06,
                                                                          f.x + s * 0.6 + 0.002, f.y + 0.002, ceil),
-                     "fixture", room=f.room, label="fitting " + f.id)
+                     "fixture", room=f.room, label="fitting " + f.id, kind="lamp-wire")
         elif k["mount"] == "strip":
             lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="line", position=[f.x, f.y, f.z],
                                aim=_unit(f.aim), size=[0.012, f.length], length_dir=list(f.along), spread_deg=120,
@@ -1744,27 +1768,27 @@ def build(lay=None, views=None):
                 mesh("batten-body-" + f.id, "white-paint-joinery",
                      box_faces(f.x - f.length / 2, f.y - 0.025, f.z,
                                f.x + f.length / 2, f.y + 0.025, f.z + 0.035),
-                     "fixture", room=f.room, label="ASSUMED opal LED storage batten body", layer=f.layer)
+                     "fixture", room=f.room, label="ASSUMED opal LED storage batten body", layer=f.layer, kind="lamp-housing")
                 for end, sx in enumerate((f.x - f.length / 2 + 0.04, f.x + f.length / 2 - 0.04)):
                     top = VL.ceiling_z(f.level, sx, f.room, f.y, lay, sp)
                     mesh("batten-mount-%s-%d" % (f.id, end), "white-paint-joinery",
                          box_faces(sx - 0.012, f.y - 0.012, f.z + 0.03,
                                    sx + 0.012, f.y + 0.012, top),
-                         "fixture", room=f.room, label="ASSUMED batten soffit mount", layer=f.layer)
+                         "fixture", room=f.room, label="ASSUMED batten soffit mount", layer=f.layer, kind="rail-bracket")
                 mesh("batten-diffuser-" + f.id, "opal-strip",
                      [quad_down(f.x - f.length / 2 + 0.015, f.y - 0.018,
                                 f.x + f.length / 2 - 0.015, f.y + 0.018, f.z - 0.001)],
-                     "fixture", room=f.room, label="ASSUMED opal LED storage batten diffuser", layer=f.layer)
+                     "fixture", room=f.room, label="ASSUMED opal LED storage batten diffuser", layer=f.layer, kind="light-diffuser", surface=True, occupied_side=(0,0,-1))
             if f.kind == "BACK" and f.room == "bar-alcove":
                 mesh("detail-cabinet-led-" + f.id, "opal-strip", box_faces(
                     f.x - f.length / 2, f.y - 0.04, f.z - 0.012,
                     f.x + f.length / 2, f.y + 0.006, f.z + 0.002), "fixture", room=f.room,
-                    label="ASSUMED concealed LED strip behind library shelf books")
+                    label="ASSUMED concealed LED strip behind library shelf books", kind="led-strip")
             if f.kind == "BACK" and "under-stair bay" in f.why:
                 mesh("detail-store-led-" + f.id, "opal-strip", box_faces(
                     f.x - f.length / 2, f.y - 0.008, f.z - 0.012,
                     f.x + f.length / 2, f.y + 0.008, f.z + 0.002), "fixture", room=f.room,
-                    label="ASSUMED internal LED strip in open storage bay", layer=f.layer)
+                    label="ASSUMED internal LED strip in open storage bay", layer=f.layer, kind="led-strip")
         elif k["mount"] == "wall-marker":
             w, h = 0.10, 0.04
             mname = "marker-%d" % cct
@@ -1780,13 +1804,14 @@ def build(lay=None, views=None):
                     [f.x - w / 2, yy, f.z + h / 2]]
             if ay < 0:
                 face = face[::-1]
-            mesh("marker-" + f.id, mname, [face], "fixture", room=f.room, label="fitting " + f.id, layer=f.layer)
+            mesh("marker-" + f.id, mname, [face], "fixture", room=f.room, label="fitting " + f.id, layer=f.layer, kind="wall-marker", surface=True, occupied_side=(0,ay,0))
     notes.append("Photometry: iGuzzini Laser Evo D75 (DL AAK3EW, DLN AAIIA6, ADJ AAHENX; verified LDTs); wall "
                  "washer positions use AAK3EW as a stated substitute; strips, pendants, sconces and markers are "
                  "GENERIC (named in each caption).")
 
     scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes, "lights": lights,
+             "part_failures": meshes.failures,
              "props": props(lay) + land_props, "models": models, "cloth": cloth, "curtains": curtains, "views": views,
              "exposure_mode": "set-metered", "exposure": EXPOSURE, "sky": {"day": "nishita",
                                            "evening": {"hdri": "belfast_sunset_puresky.exr", "horizontal_lux": 30.0},
