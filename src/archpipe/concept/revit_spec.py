@@ -183,6 +183,11 @@ def _merge(segs):
 
 
 def build(lay):
+    from .build_cache import derived
+    return derived("revit_spec", lay, lambda: _build(lay))
+
+
+def _build(lay):
     spec = {"id": lay["id"], "title": lay["title"], "levels": LEVEL_NAME, "walls": [], "separations": [],
             "doors": [], "windows": [], "rooms": [], "stair": [], "gf_opening": None,
             "hatches": [], "pocket_buildouts": [], "balustrades": [], "bath_fittings": [], "ventilation": []}

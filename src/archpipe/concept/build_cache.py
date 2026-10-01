@@ -1,0 +1,32 @@
+"""Value-keyed, build-local memoization for derived villa records.
+
+Callers receive independent copies because scene and review passes may annotate records.
+The cache cannot survive a build or an exception, and a changed input has a new key.
+"""
+from __future__ import annotations
+
+import contextvars
+import copy
+import json
+from contextlib import contextmanager
+
+_cache = contextvars.ContextVar("villa_build_cache", default=None)
+
+
+@contextmanager
+def scope():
+    token = _cache.set({})
+    try:
+        yield
+    finally:
+        _cache.reset(token)
+
+
+def derived(name, inputs, compute):
+    cache = _cache.get()
+    if cache is None:
+        return compute()
+    key = (name, json.dumps(inputs, sort_keys=True, separators=(",", ":")))
+    if key not in cache:
+        cache[key] = copy.deepcopy(compute())
+    return copy.deepcopy(cache[key])

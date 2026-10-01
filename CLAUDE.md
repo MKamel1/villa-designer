@@ -65,7 +65,7 @@ Every stage command exits non-zero when its gate is closed — that is by
 design, not a failure: `fit` exits 1 when the brief does not fit the
 plot, `design` exits 1 on a violation.
 
-For the Python unittest suite, set `NO_COLOR=1` and use the process exit status as the pass/fail result. A text filter for `FAILED` missed coloured output during the R3b lighting integration; see `lighting-product-hidden-state` in `docs/LEARNINGS.md`.
+For the Python unittest suite, set `NO_COLOR=1` and use the process exit status as the pass/fail result. On the managed Windows sandbox, run `scripts/run_tests.py`: Python 3.14 `tempfile.mkdtemp` creates directories tests cannot write or remove, and the runner creates accessible test directories. A text filter for `FAILED` missed coloured output during the R3b lighting integration; see `lighting-product-hidden-state` in `docs/LEARNINGS.md`.
 
 ## Environment
 

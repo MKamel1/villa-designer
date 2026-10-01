@@ -13,6 +13,7 @@ An item's local frame: front = +Y (the side used), right = +X; `rot` turns it: 0
 from __future__ import annotations
 
 import collections
+import functools
 import math
 import json
 from pathlib import Path
@@ -162,7 +163,7 @@ def clear_rect(lay, rid):
     cluster. Round 12: pieces were first placed against the room outlines, i.e. inside the walls."""
     r = lay["rooms"][rid]
     lv = r["level"]
-    outline = V.boundary_segments(V.envelope(lv, lay.get("extension")))
+    outline = _envelope_boundary(lv, lay.get("extension"))
     cl = _cluster(lay, rid) - {rid}
     x0, y0, x1, y1 = r["rect"]
     ins = []
@@ -177,7 +178,24 @@ def clear_rect(lay, rid):
     return (round(x0 + ins[2], 3), round(y0 + ins[0], 3), round(x1 - ins[3], 3), round(y1 - ins[1], 3))
 
 
+@functools.lru_cache(maxsize=16)
+def _boundary_from_rects(rects):
+    return tuple(V.boundary_segments(rects))
+
+
+def _envelope_boundary(level, extension):
+    rects = tuple(tuple(r) for r in V.envelope(level, extension))
+    return _boundary_from_rects(rects)
+
+
 def layout(lay=None, products=True):
+    from .build_cache import derived
+    lay = lay or R.design("D1")
+    return derived("furnish_layout", (lay, products, PRODUCT if products else None),
+                   lambda: _layout(lay, products))
+
+
+def _layout(lay=None, products=True):
     """D1, furnished for the client's questionnaire answers (2026-09-27)."""
     lay = lay or R.design("D1")
     r = {k: clear_rect(lay, k) for k in lay["rooms"]}
@@ -383,7 +401,9 @@ def layout(lay=None, products=True):
     for it in items:
         it["level"] = lay["rooms"][it["room"]]["level"]
     if products:
-        cache_key = tuple((name, tuple(room["rect"])) for name, room in sorted(lay["rooms"].items()))
+        # Layout and chosen product records are the complete inputs. A rectangle-only
+        # key silently reused accepted fits after doors, links or products changed.
+        cache_key = json.dumps((lay, PRODUCT), sort_keys=True, separators=(",", ":"))
         if cache_key in _PRODUCT_LAYOUT_CACHE:
             for it in items:
                 saved = _PRODUCT_LAYOUT_CACHE[cache_key].get(it["id"])
@@ -582,6 +602,13 @@ EXTENDED_TABLE = 2.8    # the dining table opened for 10 (ASSUMED leaf length: 1
 
 
 def check(items=None, lay=None, _extended=False):
+    from .build_cache import derived
+    lay = lay or R.design("D1")
+    return derived("furnish_check", (items, lay, _extended),
+                   lambda: _check(items, lay, _extended))
+
+
+def _check(items=None, lay=None, _extended=False):
     """Every furniture check; returns {check: {"status", "problems": [...], "measured": {...}}}. Also re-runs them
     all with the dining table extended (key "extended_table")."""
     lay = lay or R.design("D1")

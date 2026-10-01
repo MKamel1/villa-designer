@@ -426,6 +426,12 @@ def _environment_face_sources():
 
 # ------------------------------------------------------------------ the scene
 def build(lay=None, views=None, *, collect_part_failures=True):
+    from .build_cache import scope
+    with scope():
+        return _build(lay, views, collect_part_failures=collect_part_failures)
+
+
+def _build(lay=None, views=None, *, collect_part_failures=True):
     lay = lay or R.design("D1")
     sp = RS.build(lay)
     # C3 phase 1: collect all legacy failures for the lead's checkpoint.

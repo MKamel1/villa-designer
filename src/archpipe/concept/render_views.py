@@ -40,6 +40,10 @@ def _angle(px, py, qx, qy, yaw):
     return (math.atan2(qy - py, qx - px) - yaw + math.pi) % (2 * math.pi) - math.pi
 
 
+def _bearing_angle(bearing, yaw):
+    return (bearing - yaw + math.pi) % (2 * math.pi) - math.pi
+
+
 def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=None, extra=()):
     sp = sp or RS.build(lay)
     r = lay["rooms"][room]
@@ -81,26 +85,27 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
         stood behind the shower wall)."""
         n = 0
         for cx, cy in centres:
+            # A sampled point on this segment cannot enter a wall whose box is
+            # disjoint from the segment box. Keep the original point test below.
+            candidates = [q for q in walls if q[0] + 0.01 < max(x, cx) and q[2] - 0.01 > min(x, cx)
+                          and q[1] + 0.01 < max(y, cy) and q[3] - 0.01 > min(y, cy)]
+            if not candidates:
+                continue
             L = math.hypot(cx - x, cy - y)
             k = max(2, int(L / 0.05))
             for i in range(1, k):
                 px, py = x + (cx - x) * i / k, y + (cy - y) * i / k
-                if math.hypot(px - x, py - y) > 0.05 and any(_near(q, px, py, -0.01) for q in walls):
+                if math.hypot(px - x, py - y) > 0.05 and any(_near(q, px, py, -0.01) for q in candidates):
                     n += 1
                     break
         return n
 
-    def looming(x, y, yaw):
+    def looming(x, y, yaw, nearby):
         """Pieces within 0.8 m of the lens and in view: at that range an end panel fills the frame (draft 11's
         dressing view was 60 % wardrobe side)."""
         n = 0
-        for q in pieces:
-            qx, qy = min(max(x, q[0]), q[2]), min(max(y, q[1]), q[3])
-            # in view if ANY part of it is: its closest point or a corner (draft 13's dressing view had a wardrobe
-            # whose centre was just outside the frame while its end panel filled the left 40 %)
-            pts_ = [(qx, qy), (q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3])]
-            if math.hypot(qx - x, qy - y) < 1.0 and any(abs(_angle(x, y, a_, b_, yaw)) < half for a_, b_ in pts_
-                                                         if math.hypot(a_ - x, b_ - y) > 1e-6):
+        for bearings in nearby:
+            if any(abs(_bearing_angle(b, yaw)) < half for b in bearings):
                 n += 1
         return n
 
@@ -145,18 +150,29 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
                 edge = min(abs(x - rect[0]), abs(x - rect[2]), abs(y - rect[1]), abs(y - rect[3]))
                 occluded = hidden(x, y)
                 low = below(x, y)
+                subj_bearings = [math.atan2(qy - y, qx - x) for qx, qy in subj]
+                room_bearings = [math.atan2(qy - y, qx - x) for qx, qy in room_items]
+                opening_bearings = [math.atan2(qy - y, qx - x) for qx, qy in openings]
+                nearby = []
+                for q in pieces:
+                    if q[0] - 1.0 < x < q[2] + 1.0 and q[1] - 1.0 < y < q[3] + 1.0:
+                        qx, qy = min(max(x, q[0]), q[2]), min(max(y, q[1]), q[3])
+                        if math.hypot(qx - x, qy - y) < 1.0:
+                            pts_ = [(qx, qy), (q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3])]
+                            nearby.append([math.atan2(b_ - y, a_ - x) for a_, b_ in pts_
+                                           if math.hypot(a_ - x, b_ - y) > 1e-6])
                 facing = 0.0
                 if front:
                     mx, my = (mq[0] + mq[2]) / 2, (mq[1] + mq[3]) / 2
                     facing = 1.0 if (x - mx) * front[0] + (y - my) * front[1] > 0 else 0.0
                 for deg in range(0, 360, YAW_STEP):
                     yaw = math.radians(deg)
-                    miss = sum(max(0.0, abs(_angle(x, y, qx, qy, yaw)) - half) for qx, qy in subj) + low
-                    seen = sum(abs(_angle(x, y, qx, qy, yaw)) <= half for qx, qy in room_items)
-                    wins = sum(abs(_angle(x, y, qx, qy, yaw)) <= half for qx, qy in openings)
+                    miss = sum(max(0.0, abs(_bearing_angle(b, yaw)) - half) for b in subj_bearings) + low
+                    seen = sum(abs(_bearing_angle(b, yaw)) <= half for b in room_bearings)
+                    wins = sum(abs(_bearing_angle(b, yaw)) <= half for b in opening_bearings)
                     score = (-100.0 * miss + (seen / max(1, len(room_items))) + 0.4 * min(wins, 1)
                              + 0.6 * depth(x, y, yaw) / max(diag, 1e-6) - 0.15 * edge
-                             + 0.6 * facing - 1.0 * occluded - 1.0 * looming(x, y, yaw))
+                             + 0.6 * facing - 1.0 * occluded - 1.0 * looming(x, y, yaw, nearby))
                     if best is None or score > best[0]:
                         best = (score, x, y, yaw, miss)
             y += STEP
