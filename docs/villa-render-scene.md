@@ -24,11 +24,12 @@ records the first failure. The renderer imports only accepted assets, centres th
 them on the floor, and checks the world box against the product footprint plus 20 mm and height within 5 percent.
 The hidden procedural mesh remains available for cloth simulation.
 
-`climber_placement.placements` seeds foliage within each landscape climber envelope at a density calculated for
-at least 80 percent face coverage, with 70 percent green leaves and 30 percent magenta bracts. The real trellis
-envelopes are 0.12 m deep. Blender hides the envelope box and builds the visible leaf geometry; the envelope
-remains in the contract and its bounds are tested. A fixed density of 120 pieces per square metre is the failed
-round-three reproduction.
+`climber_placement.placements` seeds foliage within each landscape climber envelope at an ASSUMED young-planting
+target of 35 percent face coverage, with 70 percent green leaves and 30 percent magenta bracts. The safety margin
+in the density calculation brings the model estimate to about 42 percent, leaving most of the open lattice visible.
+The branch source envelope follows the wall-mounted trellis frame on the yard side of the boundary. Blender hides
+that source mesh and builds the visible leaf geometry; both branch and foliage bounds are tested. A fixed density
+of 120 pieces per square metre was the failed round-three sparse-planting reproduction.
 
 Landscape props normally have one uniform scale. The top-garden bench has independent scene-axis scales so its
 world box reaches a 1.80 m length along the scene Y axis and a 0.40 m seat height. The scene contract,

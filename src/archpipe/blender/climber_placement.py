@@ -17,7 +17,10 @@ inverts it (with a safety margin, since edge-clipped instances near the
 envelope boundary cover less than their nominal area) to find the density
 needed for a stated coverage fraction. villa_scene.build_climbers calls
 `density_for_coverage()` instead of hardcoding a count, so raising the
-coverage target here raises the render automatically.
+coverage target here raises the render automatically. The current default
+is ASSUMED young planting at 35 percent target coverage so the open frame
+remains visible; the 80 percent target used for the earlier sparse-climber
+correction is historical.
 """
 from __future__ import annotations
 
@@ -29,6 +32,7 @@ import random
 # describes exactly what gets rendered, not a guess.
 SIZE = {"leaf": 0.032, "bract": 0.018}
 LEAF_FRACTION = 0.70
+COVERAGE_TARGET = 0.35  # ASSUMED young planting: leave most open lattice visible.
 
 
 def _instance_area(kind):
@@ -46,7 +50,7 @@ def coverage_estimate(density, leaf_fraction=LEAF_FRACTION):
     return 1 - math.exp(-density * mean_instance_area(leaf_fraction))
 
 
-def density_for_coverage(target=0.80, leaf_fraction=LEAF_FRACTION, safety=1.25):
+def density_for_coverage(target=COVERAGE_TARGET, leaf_fraction=LEAF_FRACTION, safety=1.25):
     """Instances per square metre needed for >= `target` coverage, with a
     safety margin for instances the envelope boundary clips (a leaf half off
     the edge of a shallow trellis mass covers less than its nominal area)."""

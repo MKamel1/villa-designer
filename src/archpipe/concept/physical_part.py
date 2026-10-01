@@ -28,6 +28,7 @@ BOX_KINDS = {
     "mirror-panel": "A silvered mirror panel has a rectangular substrate.",
     "appliance-front": "An integrated appliance front is a rectangular fascia.",
     "stepping-stone": "A cut rectangular paving stone has a rectangular solid body.",
+    "planter-soil": "Soil fill in a straight rectangular raised bed has a closed rectangular volume.",
 }
 
 

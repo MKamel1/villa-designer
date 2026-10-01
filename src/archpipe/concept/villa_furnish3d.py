@@ -158,8 +158,8 @@ def body(it):
                     elif kind == "luggage":
                         parts += [("suitcase", (inner_a + 0.02, cy0, 0.12, inner_b - 0.02, cy1,
                                                  min(top - 0.08, 0.47))),
-                                  ("suitcase-handle", (inner_a + 0.12, cy0 + 0.04, 0.47,
-                                                        inner_b - 0.12, cy0 + 0.065, min(top - 0.06, 0.51)))]
+                                  ("suitcase-handle", (inner_a + 0.12, cy1 - 0.02, 0.47,
+                                                        inner_b - 0.12, cy1, min(top - 0.06, 0.51)))]
                     else:
                         parts.append(("storage-box", (inner_a + 0.02, cy0, 0.10,
                                                        inner_b - 0.02, cy1, min(top - 0.08, 0.38))))

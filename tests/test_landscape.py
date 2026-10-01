@@ -13,6 +13,25 @@ class LandscapeGuards(unittest.TestCase):
         cls.meshes, cls.props, cls.notes, cls.plan = L.build(RS.build(cls.lay), cls.lay)
         cls.rooms = L.garden_level_rooms(cls.lay)
 
+    def test_each_climber_branch_stays_on_its_yard_side_trellis_frame(self):
+        by_id = {mesh["id"]: mesh for mesh in self.meshes}
+        # Frozen vertices from the failing D1 build: keep the boundary itself fixed.
+        self.assertFalse(L.inside_yard(24.891, -20.32))  # north, beyond the wall
+        self.assertFalse(L.inside_yard(-0.39, -25.909))  # west sibling
+        for name in ("east", "south", "north", "west"):
+            with self.subTest(climber=name):
+                frame = by_id["landscape-trellis-" + name]
+                branches = by_id["landscape-climber-branches-" + name]
+                frame_points = [point for face in frame["faces"] for point in face]
+                branch_points = [point for face in branches["faces"] for point in face]
+                self.assertTrue(branch_points)
+                for axis in (0, 1):
+                    lower = min(point[axis] for point in frame_points)
+                    upper = max(point[axis] for point in frame_points)
+                    self.assertTrue(all(lower - 1e-9 <= point[axis] <= upper + 1e-9
+                                        for point in branch_points), (name, axis))
+                self.assertTrue(all(L.inside_yard(point[0], point[1]) for point in branch_points), name)
+
     def test_old_native_jacaranda_enters_building(self):
         draft = dict(id="draft-north-jacaranda", asset="jacaranda_tree",
                      position=[18.30, -21.55, L.GROUND], rotation_deg=[0, 0, 0], scale=1.0)
@@ -141,7 +160,8 @@ class LandscapeGuards(unittest.TestCase):
 
     def test_top_garden_has_planted_north_perimeter_containers(self):
         shrubs = [p for p in self.props if p["id"].startswith("landscape-top-north-ixora-")]
-        containers = [m for m in self.meshes if m["id"].startswith("landscape-top-north-planter-")]
+        containers = [m for m in self.meshes if m["id"].startswith("landscape-top-north-planter-")
+                      and m["part_kind"] == "planter"]
         self.assertEqual(len(shrubs), 2)
         self.assertEqual(len(containers), 2)
         self.assertTrue(all(p["asset"] == "sf_ixora" and p["position"][2] == .30 for p in shrubs))

@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
-from math import cos, hypot, radians, sin, tan
+from math import cos, hypot, pi, radians, sin, tan
 from pathlib import Path
 
 from .. import solar, villa_env as E
@@ -169,6 +169,47 @@ def _box(x0, y0, z0, x1, y1, z1):
     e = [x0, y0, z1]; f = [x1, y0, z1]; g = [x1, y1, z1]; h = [x0, y1, z1]
     return [[d, c, b, a], [e, f, g, h], [a, b, f, e], [b, c, g, f],
             [c, d, h, g], [d, a, e, h]]
+
+
+def _pot(cx, cy, z, lower, upper, height, count=16):
+    """Closed tapered container, raised rim and soil, each a separate physical solid."""
+    def ring(radius, zz):
+        return [[cx + radius*cos(2*pi*i/count), cy + radius*sin(2*pi*i/count), zz]
+                for i in range(count)]
+    bottom, top = ring(lower, z), ring(upper, z+height)
+    inner_floor, inner_top = ring(lower-.015, z+.025), ring(upper-.015, z+height)
+    body = [bottom[::-1], inner_floor]
+    for i in range(count):
+        j = (i+1)%count
+        body += [[bottom[i], bottom[j], top[j], top[i]],
+                 [top[i], top[j], inner_top[j], inner_top[i]],
+                 [inner_floor[j], inner_floor[i], inner_top[i], inner_top[j]]]
+    outer_low, outer_high = ring(upper+.009, z+height-.026), ring(upper+.009, z+height)
+    inner_low, inner_high = ring(upper-.012, z+height-.026), ring(upper-.012, z+height)
+    rim = []
+    for i in range(count):
+        j = (i+1)%count
+        rim += [[outer_low[i], outer_low[j], outer_high[j], outer_high[i]],
+                [outer_high[i], outer_high[j], inner_high[j], inner_high[i]],
+                [inner_high[j], inner_low[j], inner_low[i], inner_high[i]],
+                [inner_low[j], outer_low[j], outer_low[i], inner_low[i]]]
+    soil_low, soil_high = ring(lower-.019, z+.026), ring(upper-.019, z+height-.005)
+    soil = [soil_low[::-1], soil_high] + [[soil_low[i], soil_low[(i+1)%count],
+             soil_high[(i+1)%count], soil_high[i]] for i in range(count)]
+    return body, rim, soil
+
+
+def _raised_bed(rect, z, height):
+    """Five thin closed boards and a visible soil surface, not a solid planter block."""
+    x0, y0, x1, y1 = rect
+    t = .025
+    body = (_box(x0, y0, z, x1, y1, z+t) +
+            _box(x0, y0, z+t, x0+t, y1, z+height) +
+            _box(x1-t, y0, z+t, x1, y1, z+height) +
+            _box(x0+t, y0, z+t, x1-t, y0+t, z+height) +
+            _box(x0+t, y1-t, z+t, x1-t, y1, z+height))
+    soil = _box(x0+t, y0+t, z+height-.009, x1-t, y1-t, z+height-.005)
+    return body, soil
 
 
 def _quad(x0, y0, x1, y1, z):
@@ -555,9 +596,12 @@ def build(spec, lay=None):
     props.append(lemon)
     lemon_pot = (18.55, -22.55, 19.45, -21.65)
     objects.append(dict(id="landscape-tree-lemon-pot-planter", rect=lemon_pot))
-    meshes.append(_mesh("lemon-pot", "furniture", "garden-sandstone",
-                        _box(lemon_pot[0], lemon_pot[1], GROUND, lemon_pot[2], lemon_pot[3], GROUND + .45),
-                        "ASSUMED large sandstone container for a potted Citrus limon", kind="planter"))
+    body, rim, soil = _pot(19.0, -22.10, GROUND, .36, .45, .45)
+    for suffix, mat, faces, kind in (("", "garden-sandstone", body, "planter"),
+                                      ("-rim", "garden-sandstone", rim, "planter-rim"),
+                                      ("-soil", "garden-gravel", soil, "planter-soil")):
+        meshes.append(_mesh("lemon-pot"+suffix, "furniture", mat, faces,
+                            "ASSUMED tapered potted Citrus limon container", kind=kind))
 
     # Standardised 3-layer border, the same recipe in every boundary bed
     # (the client's complaint was inconsistent placement, not too few
@@ -651,20 +695,50 @@ def build(spec, lay=None):
                         ("north", 25.5, -20.45), ("west", -0.30, -26.20)):
         if name == "east":
             frame = _box(x-.04, y, GROUND, x, y+1.5, GROUND+2.2)
-            mass = _box(x-.17, y+.08, GROUND, x-.05, y+1.42, GROUND+2.05)
         elif name == "south":
             frame = _box(x-.75, y, GROUND, x+.75, y+.04, GROUND+2.2)
-            mass = _box(x-.67, y+.05, GROUND, x+.67, y+.17, GROUND+2.05)
         elif name == "north":
             frame = _box(x-1.0, y, GROUND, x+1.0, y+.04, GROUND+2.2)
-            mass = _box(x-.92, y-.03, GROUND, x+.92, y+.09, GROUND+2.05)
         else:  # west
             frame = _box(x, y, GROUND, x+.04, y+1.5, GROUND+2.2)
-            mass = _box(x+.05, y+.08, GROUND, x+.17, y+1.42, GROUND+2.05)
-        meshes.append(_mesh("trellis-"+name, "furniture", "trellis", frame,
-                            "ASSUMED trellis for Bougainvillea glabra; care: " + boug, kind="trellis"))
-        meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract", mass,
-                            "ASSUMED procedural magenta Bougainvillea glabra climber; care: " + boug, kind="climber"))
+        pts = [p for face in frame for p in face]
+        fx0, fy0, fx1, fy1 = min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
+        along_x = fx1-fx0 > fy1-fy0
+        open_frame = []
+        for fraction in (0, .25, .5, .75, 1):
+            if along_x:
+                xx = fx0 + (fx1-fx0)*fraction
+                open_frame += _box(xx-.012, fy0, GROUND, xx+.012, fy1, GROUND+2.2)
+            else:
+                yy = fy0 + (fy1-fy0)*fraction
+                open_frame += _box(fx0, yy-.012, GROUND, fx1, yy+.012, GROUND+2.2)
+        for zz in (GROUND+.18, GROUND+1.05, GROUND+2.17):
+            open_frame += _box(fx0, fy0, zz, fx1, fy1, zz+.025)
+        meshes.append(_mesh("trellis-"+name, "furniture", "trellis", open_frame,
+                            "ASSUMED open timber trellis members for Bougainvillea glabra; care: " + boug, kind="trellis"))
+        # Woody stems fork across the open members; procedural leaves and bracts are placed separately.
+        branches = []
+        def branch_box(x0, y0, z0, x1, y1, z1):
+            # The wall face supports the frame. Keep every stem on that frame's yard side.
+            return _box(max(fx0, x0), max(fy0, y0), z0,
+                        min(fx1, x1), min(fy1, y1), z1)
+        for fraction in (.2, .5, .8):
+            if along_x:
+                xx = fx0 + (fx1-fx0)*fraction
+                branches += branch_box(xx-.009, fy0-.008, GROUND+.08, xx+.009, fy0+.01, GROUND+1.92)
+                branches += branch_box(xx-.11, fy0-.008, GROUND+1.17, xx+.11, fy0+.01, GROUND+1.19)
+                branches += branch_box(xx-.009, fy0-.09, GROUND+1.50, xx+.009, fy1+.09, GROUND+1.52)
+            else:
+                yy = fy0 + (fy1-fy0)*fraction
+                branches += branch_box(fx0-.008, yy-.009, GROUND+.08, fx0+.01, yy+.009, GROUND+1.92)
+                branches += branch_box(fx0-.008, yy-.11, GROUND+1.17, fx0+.01, yy+.11, GROUND+1.19)
+                branches += branch_box(fx0-.09, yy-.009, GROUND+1.50, fx1+.09, yy+.009, GROUND+1.52)
+        meshes.append(_mesh("climber-branches-"+name, "dressing", "trellis", branches,
+                            "ASSUMED branched Bougainvillea woody growth", kind="climber-branch"))
+        # The renderer hides this source mesh after deriving the leaf envelope from its bounds.
+        # Use the actual closed branch form as its source so the part boundary never admits a mass box.
+        meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract", branches,
+                            "ASSUMED procedural Bougainvillea leaves on branched growth; care: " + boug, kind="climber"))
 
     # Paired planted pots flank each garden door, off the 0.914 m route by
     # >= 0.55 m (checked against the real drift-plant canopy width below,
@@ -699,9 +773,12 @@ def build(spec, lay=None):
         props.append(p)
         pot_rect = (center[0]-.25, center[1]-.25, center[0]+.25, center[1]+.25)
         objects.append(dict(id="landscape-door-pot-" + name + "-planter", rect=pot_rect))
-        meshes.append(_mesh("door-pot-planter-" + name, "furniture", "garden-sandstone",
-                            _box(pot_rect[0], pot_rect[1], GROUND, pot_rect[2], pot_rect[3], GROUND+.4),
-                            "ASSUMED sandstone door-flanking pot", kind="planter"))
+        body, rim, soil = _pot(center[0], center[1], GROUND, .18, .25, .4)
+        for suffix, material, faces, kind in (("body", "garden-sandstone", body, "planter"),
+                                              ("rim", "garden-sandstone", rim, "planter-rim"),
+                                              ("soil", "garden-gravel", soil, "planter-soil")):
+            meshes.append(_mesh("door-pot-planter-" + name + "-" + suffix, "furniture", material,
+                                faces, "ASSUMED tapered door pot with rim and soil", kind=kind))
 
     # Bistro: the real Poly Haven CC0 outdoor_table_chair_set_01 (now
     # measured in the checked manifest, bounds_m 0.776 x 1.831 m, 0.859 m
@@ -735,9 +812,11 @@ def build(spec, lay=None):
                     ("roof", (13.05, -22.95, 15.05, -22.45)))
     for name, rect in top_planters:
         objects.append(dict(id="landscape-top-planter-"+name, rect=rect, zone="top"))
+        body, soil = _raised_bed(rect, 0.0, .32)
         meshes.append(_mesh("top-planter-"+name, "furniture", "garden-sandstone",
-                            _box(rect[0], rect[1], 0, rect[2], rect[3], .32),
-                            "ASSUMED 0.32 m shallow planter; structural/waterproofing review needed", kind="planter"))
+                            body, "ASSUMED 0.32 m hollow raised bed; structural/waterproofing review needed", kind="planter"))
+        meshes.append(_mesh("top-planter-"+name+"-soil", "furniture", "garden-gravel",
+                            soil, "ASSUMED shallow soil/mulch in raised bed", kind="planter-soil"))
     # Same shallow-rooted lower palette as the ground beds, alternating
     # Lavandula (purple) and Gazania (orange) for the client's colour-block
     # request, rather than a single repeated species.
@@ -781,9 +860,12 @@ def build(spec, lay=None):
         y = -21.20
         rect = (x - .40, y - .40, x + .40, y + .40)
         objects.append(dict(id="landscape-top-north-planter-%d" % i, rect=rect, zone="top"))
-        meshes.append(_mesh("top-north-planter-%d" % i, "furniture", "garden-sandstone",
-                            _box(*rect[:2], 0.0, *rect[2:], .30),
-                            "ASSUMED shallow northern perimeter container; waterproofing and load to engineer", kind="planter"))
+        body, rim, soil = _pot(x, y, 0.0, .32, .4, .30)
+        for suffix, mat, faces, kind in (("", "garden-sandstone", body, "planter"),
+                                          ("-rim", "garden-sandstone", rim, "planter-rim"),
+                                          ("-soil", "garden-gravel", soil, "planter-soil")):
+            meshes.append(_mesh("top-north-planter-%d%s" % (i, suffix), "furniture", mat, faces,
+                                "ASSUMED tapered northern container; waterproofing and load to engineer", kind=kind))
         p = _prop("landscape-top-north-ixora-%d" % i, "sf_ixora", (x, y), .30, .55,
                   "Ixora coccinea; care: %s (%s); %s; nursery height 0.55 m ASSUMED" %
                   (care("Ixora coccinea"), _care_note("Ixora coccinea"), credits["sf_ixora"]), zone="top")
@@ -823,9 +905,12 @@ def build(spec, lay=None):
     props.append(top_tree)
     pot = (13.50, -22.60, 14.70, -21.60)
     objects.append(dict(id="landscape-top-tree-pot", rect=pot, zone="top"))
-    meshes.append(_mesh("top-tree-pot", "furniture", "garden-sandstone",
-                        _box(*pot[:2], 0.0, *pot[2:], .45),
-                        "ASSUMED shallow container for Olea europaea; engineer waterproofing and load", kind="planter"))
+    body, rim, soil = _pot(14.10, -22.10, 0.0, .4, .5, .45)
+    for suffix, mat, faces, kind in (("", "garden-sandstone", body, "planter"),
+                                      ("-rim", "garden-sandstone", rim, "planter-rim"),
+                                      ("-soil", "garden-gravel", soil, "planter-soil")):
+        meshes.append(_mesh("top-tree-pot"+suffix, "furniture", mat, faces,
+                            "ASSUMED tapered olive container; engineer waterproofing and load", kind=kind))
     # v25 defect: two copies near-touching (0.04 m gap), each scaled ~1:1 by height alone, rendered as one 3.58 x
     # 1.66 m dark slab. One bench only, scaled to the seat-height range and 1.8 m length; bench_violations
     # guards this build against drifting back to the

@@ -40,6 +40,12 @@ class ClimberPlacement(unittest.TestCase):
         density = module.density_for_coverage(target=0.80)
         self.assertGreaterEqual(module.coverage_estimate(density), 0.80)
 
+    def test_young_planting_default_leaves_most_lattice_open(self):
+        self.assertEqual(module.COVERAGE_TARGET, 0.35)
+        estimated = module.coverage_estimate(module.density_for_coverage())
+        self.assertGreaterEqual(estimated, module.COVERAGE_TARGET)
+        self.assertLess(estimated, 0.50)
+
     def test_instance_sizes_in_the_requested_range(self):
         # leaf ~5-8 cm, bract ~3-4 cm (full span = 2 * half-extent)
         self.assertTrue(0.05 <= 2 * module.SIZE["leaf"] <= 0.08)

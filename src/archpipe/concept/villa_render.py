@@ -807,9 +807,44 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             detailed.add(f["mark"])
             continue
         parts = {}
-        for name, b in zip(f["parts"], f["boxes"]):
+        for part_index, (name, b) in enumerate(zip(f["parts"], f["boxes"])):
             if f["mark"] == "gwc-shower" and name == "linear-drain":
                 continue  # The bath-fitting record below owns the one visible drain.
+            if f["type"] in ("under_stair_storage", "store_shelving") and name == "suitcase-handle":
+                continue  # The outward handle is built from the suitcase's measured world box below.
+            if f["type"] in ("under_stair_storage", "store_shelving") and name in ("storage-box", "tool-case", "suitcase"):
+                xa, ya, za, xb, yb, zb = b[0], b[1], z+b[2], b[3], b[4], z+b[5]
+                stem = "furn-%s-%s-%d" % (f["mark"].replace("#", "-"), name, part_index)
+                material = part_material(f, name)
+                if name == "suitcase":
+                    # ASSUMED compact case: 550 x 350 x 300 mm maximum, fitted inside the existing bay.
+                    cx, cy = (xa+xb)/2, (ya+yb)/2
+                    half_w, half_d = min(.55, xb-xa)/2, min(.35, yb-ya)/2
+                    xa, xb, ya, yb = cx-half_w, cx+half_w, cy-half_d, cy+half_d
+                    zb = min(zb, za+.30)
+                    mesh(stem, material, box_faces(xa, ya, za, xb, yb, zb-.018) +
+                         box_faces(xa+.004, ya+.004, zb-.018, xb-.004, yb-.004, zb),
+                         "furniture", room=f["room"], label="ASSUMED compact suitcase, up to 550 x 350 x 300 mm, with lid seam", kind="suitcase")
+                    hx = (xa+xb)/2
+                    handle = (round_tube((hx-.055, yb+.012, za+.16), (hx-.055, yb+.012, za+.21), .007) +
+                              round_tube((hx-.055, yb+.012, za+.21), (hx+.055, yb+.012, za+.21), .007) +
+                              round_tube((hx+.055, yb+.012, za+.21), (hx+.055, yb+.012, za+.16), .007))
+                    mesh(stem+"-handle", "black-metal", handle, "furniture", room=f["room"],
+                         label="ASSUMED outward suitcase carry handle", kind="suitcase-handle")
+                    wheels = []
+                    for xx in (xa+.035, xb-.035):
+                        wheels += round_tube((xx, ya-.012, za), (xx, ya+.012, za), .025, 12)
+                    mesh(stem+"-wheels", "black-metal", wheels, "furniture", room=f["room"],
+                         label="ASSUMED suitcase wheels", kind="suitcase-wheel")
+                else:
+                    mesh(stem, material, box_faces(xa, ya, za, xb, yb, zb-.018) +
+                         box_faces(xa-.003, ya-.003, zb-.018, xb+.003, yb+.003, zb),
+                         "furniture", room=f["room"], label="ASSUMED lidded storage box", kind="storage-box")
+                    mesh(stem+"-handle", "leather-brown",
+                         round_tube(((xa+xb)/2-.045, yb+.003, (za+zb)/2),
+                                    ((xa+xb)/2+.045, yb+.003, (za+zb)/2), .007),
+                         "furniture", room=f["room"], label="ASSUMED box pull handle", kind="box-handle")
+                continue
             mat = part_material(f, name)
             if f["mark"] == "gwc-shower" and name in ("wet-floor", "linear-drain"):
                 # One millimetre visual offset avoids coplanar z-fighting with the shell floor;
@@ -1021,8 +1056,12 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                 for j, rail in enumerate(levels):
                     rail_z = floor + rail
                     mesh(prefix + "-rail-%d" % j, "brass",
-                         box_faces(lo, cy - 0.012, rail_z - 0.008, hi, cy + 0.012, rail_z + 0.008),
-                         "dressing", room=wardrobe["room"], label=partner + " hanging rail", kind="hanging-rail")
+                         round_tube((lo, cy, rail_z), (hi, cy, rail_z), .012),
+                         "dressing", room=wardrobe["room"], label=partner + " closed tubular hanging rail", kind="hanging-rail")
+                    for end, xx in (("left", lo), ("right", hi)):
+                        mesh(prefix + "-rail-%d-bracket-%s" % (j, end), "brass",
+                             round_tube((xx, cy, rail_z), (xx, q[1] + .012, rail_z), .019),
+                             "dressing", room=wardrobe["room"], label=partner + " rail end bracket", kind="rail-bracket")
                     # long-hang = dresses/abayas (full-length card); the LOWER rail of a double-hang carries
                     # trousers folded over the hanger, the upper rail shirts/jackets.
                     if kind == "long-hang":
@@ -1087,9 +1126,14 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         box_w = (usable - gap*(box_count-1))/box_count
         for bi in range(box_count):
             xa = q[0] + 0.07 + bi*(box_w+gap)
+            xb, ya, yb, za, zb = xa + box_w, cy - .18, cy + .18, floor + 2.04, floor + 2.18
             mesh("dress-%s-top-box-%d" % (partner, bi), "linen",
-                 box_faces(xa, cy-0.18, floor+2.04, xa+box_w, cy+0.18, floor+2.18),
-                 "dressing", room=wardrobe["room"], label=partner + " labelled top box", kind="storage-box")
+                 box_faces(xa, ya, za, xb, yb, zb-.018) +
+                 box_faces(xa-.003, ya-.003, zb-.018, xb+.003, yb+.003, zb),
+                 "dressing", room=wardrobe["room"], label=partner + " lidded top box", kind="storage-box")
+            mesh("dress-%s-top-box-%d-handle" % (partner, bi), "leather-brown",
+                 round_tube((xa+box_w*.4, yb+.002, za+.065), (xa+box_w*.6, yb+.002, za+.065), .007),
+                 "dressing", room=wardrobe["room"], label="ASSUMED box pull handle", kind="box-handle")
         shoe_module = next((span for span in F.module_spans(wardrobe) if span[0] in ("long-hang", "double-hang")), None)
         if shoe_module:
             _, xa, xb = shoe_module
@@ -1429,12 +1473,18 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         x, y, z = vent["fan"]
         z += LZ[vent["level"]]
         end_y = vent["duct_route"][-1][1]
-        mesh("detail-vent-" + vent["room"] + "-duct", "black-metal",
-             box_faces(x - 0.055, min(y, end_y), z - 0.055,
-                       x + 0.055, max(y, end_y), z + 0.055), "fixture", room=vent["room"],
-             label="ASSUMED duct to outside: " + vent["room"], kind="duct")
+        # The Revit service route remains authored; the exposed box was a render proxy.
+        # Its concealed ceiling-void routing and penetration have no coordinated section yet.
+        ceiling = VL.ceiling_z(vent["level"], x=x, y=y, room=vent["room"], lay=lay, spec=sp)
+        mesh("detail-vent-" + vent["room"] + "-valve", "paint-white-satin",
+             round_tube((x, y, ceiling - .012), (x, y, ceiling - .003), .065, 24),
+             "fixture", room=vent["room"],
+             label="ASSUMED 130 mm white round ceiling extract valve; concealed service duct", kind="extract-valve")
         # Four perimeter members and spaced blades leave actual visible slots into the duct.
-        face_y = end_y - .013
+        facade_faces = [w[3] for w in F._walls(sp, vent["level"])
+                        if w[0] <= x <= w[2] and w[3] <= end_y]
+        facade_y = max(facade_faces)  # the service route continues 100 mm beyond this built exterior face
+        face_y = facade_y - .012
         grille = []
         for xa, xb in ((x - .12, x - .105), (x + .105, x + .12)):
             grille.extend(box_faces(xa, face_y, z - .12, xb, face_y + .012, z + .12))
@@ -1442,12 +1492,12 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             grille.extend(box_faces(x - .105, face_y, za, x + .105, face_y + .012, zb))
         for k in range(7):
             zz = z - .09 + k*.03
-            grille.extend(box_faces(x - .103, face_y, zz, x + .103, face_y + .009, zz + .009))
+            grille.extend(box_faces(x - .107, face_y, zz, x + .107, face_y + .009, zz + .009))
         mesh("detail-vent-" + vent["room"] + "-grille", "alu-bronze", grille,
              "fixture", room=vent["room"],
              label="ASSUMED 240 mm square louvred external extract grille with open slots: " + vent["room"], kind="fan-grille")
     notes.append("ASSUMED bath-fitting bodies and fixing details follow the specified rain heads, hand shower rails, "
-                 "guest bathroom flush linear drain and ensuite fixed frameless screen. Guest bathroom and dirty-kitchen ducts terminate at external grilles; "
+                 "guest bathroom 70 mm flush linear drain and ensuite fixed frameless screen. Guest bathroom and dirty-kitchen ducts remain in the Revit services specification but are omitted from the visible render pending ceiling-void coordination; round ceiling valves and external grilles are shown. "
                  "the dirty-kitchen cooker hood is the specified extract source. Drip, flow and products remain "
                  "service selections, not render claims.")
 
@@ -2213,8 +2263,7 @@ def props(lay):
     add("dining-vase", "ceramic_vase_01", x, y, B + it["dining-table"]["h"], label="vase on the table")
     x, y = c("dining-sideboard")
     add("sideboard-vase", "ceramic_vase_03", x - 0.5, y, B + it["dining-sideboard"]["h"], label="vase on the sideboard")
-    add("sideboard-art", "hanging_picture_frame_01", x, fp["dining-sideboard"][1] + 0.02, B + 1.45, 0, 1.0,
-        "art above the sideboard")
+    # C3: this asset has an empty black front. Omit it until licensed artwork passes C2 intake.
     x, y = c("lounge-coffee")
     add("lounge-books", "book_encyclopedia_set_01", x - 0.3, y, B + it["lounge-coffee"]["h"], label="books")
     plant("lounge-plant", "potted_plant_01", 4.2, -24.35, B, "lounge",

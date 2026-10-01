@@ -49,6 +49,12 @@ class PhysicalPartBoundary(unittest.TestCase):
         with self.assertRaisesRegex(PartError, "bare rectangular proxy for hanging-rail"):
             self.part("hanging-rail", box_faces(0, 0, 0, 1, .02, .02))
 
+    def test_rectangular_soil_is_physical_but_a_box_pot_is_a_proxy(self):
+        fill = box_faces(0, 0, 0, 2, .5, .02)
+        self.part("planter-soil", fill)
+        with self.assertRaisesRegex(PartError, "bare rectangular proxy for planter"):
+            self.part("planter", fill)
+
     def test_single_sided_surface_faces_occupied_side(self):
         floor = [[[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0]]]
         self.part("finish-layer", floor, surface=True, occupied_side=(0, 0, 1))

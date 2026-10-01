@@ -63,6 +63,25 @@ def luminance(rgb):
     return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]
 
 
+def exposure_meter_views(views, selected):
+    """Meter the full scene cohort for every selected exposure state."""
+    states = {view["exposure"] for view in views if view["id"] in selected}
+    return [view for view in views if view["exposure"] in states]
+
+
+def exposure_locks(views, selected, meter):
+    """Return state locks and provenance, independent of render selection."""
+    readings, by_state, metered_over = {}, {}, {}
+    for view in exposure_meter_views(views, selected):
+        ev, logavg = meter(view)
+        readings[view["id"]] = {"exposure_stops": ev, "log_average": logavg}
+        state = view["exposure"]
+        by_state.setdefault(state, []).append(ev)
+        metered_over.setdefault(state, []).append(view["id"])
+    locked = {state: sorted(values)[len(values) // 2] for state, values in by_state.items()}
+    return locked, readings, metered_over
+
+
 def configure_glass(materials, material_specs):
     """Respect whether a ray crosses one sheet or both sides of a slab.
 
@@ -472,11 +491,9 @@ def build_climbers(mesh_specs, objects, materials, warnings):
         points = [v for face in spec["faces"] for v in face]
         box = (min(v[0] for v in points), min(v[1] for v in points), min(v[2] for v in points),
                max(v[0] for v in points), max(v[1] for v in points), max(v[2] for v in points))
-        # Client round-3 (v01/v02/v24): climbers were "almost invisible" at the previous fixed density=120.
-        # density_for_coverage() targets >= 80% coverage of the largest vertical face (see climber_placement's
-        # module docstring for the Poisson-coverage derivation); it is computed here, not hardcoded, so it tracks
-        # SIZE if that ever changes.
-        density = placing.density_for_coverage(target=0.80)
+        # ASSUMED young planting: target 35% face coverage so the open trellis reads clearly.
+        # The density follows the measured leaf and bract sizes in climber_placement.
+        density = placing.density_for_coverage()
         positions = placing.placements(box, density=density, seed=sum(map(ord, spec["id"])))
         for kind, matname in (("leaf", "bougainvillea-leaf"), ("bract", "bougainvillea-bract")):
             verts, faces = [], []
@@ -800,6 +817,107 @@ def build_curtains(curtain_specs, materials):
     return objects, report
 
 
+def normalise_imported_material(mat, asset, asset_kind):
+    """Replace an imported unlit base surface with a light-responsive surface."""
+    tree = mat.node_tree
+    nodes = tree.nodes
+    output = next((n for n in nodes if n.type == "OUTPUT_MATERIAL"), None)
+    surface = output.inputs["Surface"] if output else None
+    if not surface or not surface.is_linked:
+        return None
+    # An emitting asset must be explicitly declared by its placed specification.
+    emissions = [n for n in nodes if n.type == "EMISSION"]
+    if not emissions:
+        return None
+    if asset_kind == "luminaire":
+        return None
+    principals = [n for n in nodes if n.type == "BSDF_PRINCIPLED"]
+    if principals:
+        raise ValueError("asset %s: material %s mixes emission with a colour shader" % (asset, mat.name))
+    if len(emissions) != 1:
+        raise ValueError("asset %s: material %s has no supported colour shader" % (asset, mat.name))
+    colour = emissions[0].inputs["Color"]
+    tex = colour.links[0].from_node if colour.is_linked else None
+    if (tex and tex.type != "TEX_IMAGE") or (not tex and max(colour.default_value[:3]) <= 0.001):
+        raise ValueError("asset %s: material %s has no supported colour shader" % (asset, mat.name))
+    shader = nodes.new("ShaderNodeBsdfPrincipled")
+    shader.inputs["Roughness"].default_value = 0.8  # ASSUMED foliage default.
+    specular = shader.inputs.get("Specular IOR Level") or shader.inputs.get("Specular")
+    if specular:
+        specular.default_value = 0.2  # ASSUMED foliage default.
+    shader.inputs["Emission Strength"].default_value = 0.0
+    if tex:
+        tree.links.new(tex.outputs["Color"], shader.inputs["Base Color"])
+        if tex.image and tex.image.depth == 32:
+            tree.links.new(tex.outputs["Alpha"], shader.inputs["Alpha"])
+    else:
+        shader.inputs["Base Color"].default_value = colour.default_value[:]
+    tree.links.new(shader.outputs["BSDF"], surface)
+    for node in list(nodes):
+        if node.type in {"EMISSION", "MIX_SHADER", "BSDF_TRANSPARENT", "LIGHT_PATH"}:
+            nodes.remove(node)
+    if hasattr(mat, "surface_render_method"):
+        mat.surface_render_method = "DITHERED"
+    note = "Converted imported unlit/emission texture to Principled BSDF; ASSUMED foliage roughness 0.8, specular 0.2; emission 0"
+    mat["villa_material_qa"] = note
+    return {"material": mat.name, "note": note}
+
+
+def validate_imported_appearance(meshes, asset, asset_kind="appearance"):
+    """Normalise imported base surfaces, then fail if colour or emission is unsafe."""
+    qa = []
+    seen = set()
+    for obj in meshes:
+        if not obj.data.materials:
+            raise ValueError("asset %s: mesh %s has no render material" % (asset, obj.name))
+        for mat in obj.data.materials:
+            if mat is None or not mat.use_nodes:
+                raise ValueError("asset %s: mesh %s has no render material" % (asset, obj.name))
+            if id(mat) not in seen:
+                seen.add(id(mat))
+                change = normalise_imported_material(mat, asset, asset_kind)
+                if change:
+                    qa.append(change)
+            if asset_kind != "luminaire" and any(n.type == "EMISSION" for n in mat.node_tree.nodes):
+                raise ValueError("asset %s: material %s retains emission" % (asset, mat.name))
+            shaders = [node for node in mat.node_tree.nodes if node.type == "BSDF_PRINCIPLED"]
+            if not shaders and asset_kind != "luminaire":
+                raise ValueError("asset %s: material %s has no supported colour shader" % (asset, mat.name))
+            for shader in shaders:
+                strength = shader.inputs.get("Emission Strength")
+                if (asset_kind != "luminaire" and strength and
+                        (strength.is_linked or strength.default_value > 0.001)):
+                    raise ValueError("asset %s: material %s retains emission" % (asset, mat.name))
+                base = shader.inputs["Base Color"]
+                images = [node.image for link in base.links for node in (link.from_node,)
+                          if node.type == "TEX_IMAGE"]
+                if images and any(img is None or (not img.packed_file and not os.path.isfile(bpy.path.abspath(img.filepath)))
+                                  for img in images):
+                    raise ValueError("asset %s: material %s has missing base colour texture" % (asset, mat.name))
+                if not base.is_linked and max(base.default_value[:3]) <= 0.001:
+                    raise ValueError("asset %s: material %s has no base colour or texture" % (asset, mat.name))
+            # This source atlas has black RGB outside its plant cutouts and no alpha channel.
+            # Derive opacity from the base texture at import so its cards do not render black.
+            if asset == "sf_lavender_clump":
+                for shader in shaders:
+                    base = shader.inputs["Base Color"]
+                    if not base.links or base.links[0].from_node.type != "TEX_IMAGE":
+                        raise ValueError("sf_lavender_clump needs its base colour atlas")
+                    tex = base.links[0].from_node
+                    bw = mat.node_tree.nodes.new("ShaderNodeRGBToBW")
+                    cutout = mat.node_tree.nodes.new("ShaderNodeMath")
+                    cutout.operation = "GREATER_THAN"
+                    cutout.inputs[1].default_value = 0.035
+                    mat.node_tree.links.new(tex.outputs["Color"], bw.inputs["Color"])
+                    mat.node_tree.links.new(bw.outputs["Val"], cutout.inputs[0])
+                    mat.node_tree.links.new(cutout.outputs[0], shader.inputs["Alpha"])
+                if hasattr(mat, "surface_render_method"):
+                    mat.surface_render_method = "DITHERED"
+                elif hasattr(mat, "blend_method"):
+                    mat.blend_method = "CLIP"
+    return qa
+
+
 def import_props(prop_specs, library_root):
     """Transform each complete asset around one shared origin, then seat it."""
     imported = []
@@ -817,6 +935,7 @@ def import_props(prop_specs, library_root):
         meshes = [obj for obj in new if obj.type == "MESH"]
         if not meshes:
             raise FileNotFoundError(os.path.join(library_root, "props", spec["asset"], "model.gltf"))
+        material_qa = validate_imported_appearance(meshes, spec["asset"], spec.get("asset_kind", "appearance"))
         roots = [obj for obj in new if obj.parent is None]
         # Multi-part pots have translated roots. Scaling those independently
         # leaves component offsets unscaled and separates the leaves/soil/pot.
@@ -836,7 +955,7 @@ def import_props(prop_specs, library_root):
         for index, obj in enumerate(new):
             obj.name = "prop-%s-%03d" % (spec["id"], index)
         imported.append({"id": spec["id"], "asset": spec["asset"], "label": spec["label"],
-                         "objects": meshes})
+                         "objects": meshes, "material_qa": material_qa})
     return imported
 
 
@@ -859,6 +978,7 @@ def import_models(model_specs, library_root):
         meshes = [obj for obj in new if obj.type == "MESH"]
         if not meshes:
             raise ValueError("model has no meshes: " + spec["asset"])
+        material_qa = validate_imported_appearance(meshes, spec["asset"], spec.get("asset_kind", "appearance"))
         anchor = bpy.data.objects.new("model-anchor-" + spec["id"], None)
         bpy.context.collection.objects.link(anchor)
         for root in (obj for obj in new if obj.parent is None):
@@ -891,7 +1011,8 @@ def import_models(model_specs, library_root):
                 raise ValueError("model exceeds product footprint: " + spec["id"])
             if abs((box[5]-box[2]) / spec["reference_h"] - 1) > 0.05:
                 raise ValueError("model height exceeds five percent tolerance: " + spec["id"])
-        imported.append({"id": spec["id"], "asset": spec["asset"], "bounds": box, "objects": meshes})
+        imported.append({"id": spec["id"], "asset": spec["asset"], "bounds": box,
+                         "objects": meshes, "material_qa": material_qa})
     return imported
 
 
@@ -907,6 +1028,7 @@ def visible_props(imported):
         y1 = max((p.y for p in coords), default=0)
         overlap = max(0, min(1, x1)-max(0, x0)) * max(0, min(1, y1)-max(0, y0))
         records.append({"id": prop["id"], "asset": prop["asset"], "label": prop["label"],
+                        "material_qa": prop["material_qa"],
                         "objects": [obj.name for obj in prop["objects"]],
                         "in_frame": overlap > 0 and any(p.z >= 0 for p in coords),
                         "screen": [x0, y0, x1, y1]})
@@ -1259,12 +1381,9 @@ def render(scene_data, args):
     # ADR-0013 part 6, the bedroom standard: meter every view with photoreal.camera_meter (fast pre-render,
     # log-average luminance, top 3 % excluded, highlight priority, -0.4 stop bias), then LOCK one exposure per
     # state (the median of its views) so rooms still compare honestly (ADR-0013 amendment).
-    locked, metered = {}, {}
+    locked, metered, metered_over = {}, {}, {}
     if scene_data.get("exposure_mode") == "set-metered":
-        by_state = {}
-        for view in scene_data["views"]:
-            if view["id"] not in selected:
-                continue
+        def meter_view(view):
             setup_view(view)
             cam_, _ = configure_camera(view)
             s0 = bpy.context.scene
@@ -1272,14 +1391,11 @@ def render(scene_data, args):
             s0.view_settings.view_transform = "AgX"
             s0.view_settings.look = "AgX - Medium High Contrast"
             ev, logavg = photoreal.camera_meter(bias_stops=-0.4, look="AgX - Medium High Contrast")
-            metered[view["id"]] = {"exposure_stops": ev, "log_average": logavg}
-            by_state.setdefault(view["exposure"], []).append(ev)
             cdata = cam_.data
             bpy.data.objects.remove(cam_, do_unlink=True)
             bpy.data.cameras.remove(cdata)
-        for key, evs in by_state.items():
-            evs = sorted(evs)
-            locked[key] = evs[len(evs) // 2]
+            return ev, logavg
+        locked, metered, metered_over = exposure_locks(scene_data["views"], selected, meter_view)
     for view in scene_data["views"]:
         if view["id"] not in selected:
             continue
@@ -1387,7 +1503,8 @@ def render(scene_data, args):
                   "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
                   "lights_on_count": sum(not obj.hide_render for obj in lights.values()), "subjects": subject_result,
                   "imported_props": prop_result,
-                  "imported_models": [{"id": m["id"], "asset": m["asset"], "bounds": m["bounds"]}
+                  "imported_models": [{"id": m["id"], "asset": m["asset"], "bounds": m["bounds"],
+                                       "material_qa": m["material_qa"]}
                                       for m in imported_models], "cloth": cloth_report,
                   "curtains": [dict(r, hidden=objects[r["id"]].hide_render) for r in curtain_report],
                   "mesh_object_count": len(set(objects.values())),
@@ -1395,6 +1512,8 @@ def render(scene_data, args):
                   "max_bounces": s.cycles.max_bounces, "clamp_indirect": s.cycles.sample_clamp_indirect,
                   "clipped_pixel_fraction": clipped, "mean_luminance": mean, "ev100": preset["ev100"],
                   "locked_ev100": locked_ev100, "view_meter": metered.get(view["id"]),
+                  "exposure_state": view["exposure"],
+                  "exposure_metered_over": metered_over.get(view["exposure"], []),
                   "exposure_locked_per_state": bool(locked), "log_average_linear": log_avg,
                   "exposure_stops": s.view_settings.exposure, "white_balance_applied": wb,
                   "camera_pitch_deg": pitch, "warnings": current_warnings}

@@ -2007,6 +2007,7 @@
     },
     {
       "id": "sf_bougainvillea",
+      "material_qa": "Observed in Blender 4.5: glTF KHR_materials_unlit imports as texture-fed Emission in a Light Path/Transparent/Mix surface. Villa import converts the source texture to Principled BSDF, with ASSUMED foliage roughness 0.8 and specular 0.2 and zero emission; workstation sweep and corrected render preview pending.",
       "source": "sketchfab",
       "url": "https://sketchfab.com/3d-models/bougainvillea-02fd760652ab48b085c5d46cf9d89676",
       "author": "BenisonS",

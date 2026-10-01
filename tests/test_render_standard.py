@@ -30,6 +30,44 @@ ALLOWED_MATERIALS = {
 
 
 class RenderStandard(unittest.TestCase):
+    def test_c3_chunk_b_visible_parts_and_removed_frame(self):
+        from archpipe.concept.physical_part import Part
+        by_id = {m["id"]: m for m in SCENE["meshes"]}
+        kinds = ("hanging-rail", "rail-bracket", "storage-box", "box-handle",
+                 "suitcase", "suitcase-handle", "suitcase-wheel", "planter",
+                 "planter-rim", "planter-soil", "trellis", "climber-branch", "climber", "extract-valve")
+        for kind in kinds:
+            members = [m for m in SCENE["meshes"] if m["part_kind"] == kind and
+                       (m["id"].startswith(("dress-", "furn-", "landscape-door-pot-", "landscape-lemon-pot",
+                                            "landscape-top", "landscape-trellis-",
+                                            "landscape-climber-", "detail-vent-")))]
+            self.assertTrue(members, kind)
+            for m in members:
+                Part(kind, m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
+        self.assertGreaterEqual(len(by_id["landscape-trellis-north"]["faces"]), 48)
+        cases = [m for m in SCENE["meshes"] if m["part_kind"] == "suitcase" and m["id"].startswith("furn-")]
+        self.assertTrue(cases)
+        for case in cases:
+            points = [p for face in case["faces"] for p in face]
+            self.assertLessEqual(max(p[0] for p in points)-min(p[0] for p in points), .550001)
+            self.assertLessEqual(max(p[1] for p in points)-min(p[1] for p in points), .350001)
+            handle = by_id[case["id"]+"-handle"]
+            self.assertGreater(min(p[1] for face in handle["faces"] for p in face),
+                               max(p[1] for p in points))
+        self.assertFalse(any(p["asset"] == "hanging_picture_frame_01" for p in SCENE["props"]))
+        for room in ("guest-wc", "dirty-kitchen"):
+            valve = by_id[f"detail-vent-{room}-valve"]
+            fitting = next(v for v in RS.build(R.design("D1"))["ventilation"] if v["room"] == room)
+            from archpipe.concept import villa_lighting as VL
+            from archpipe.concept import villa_furnish as F
+            ceiling = VL.ceiling_z(fitting["level"], x=fitting["fan"][0], y=fitting["fan"][1],
+                                   room=room, lay=R.design("D1"), spec=RS.build(R.design("D1")))
+            self.assertLessEqual(max(p[2] for face in valve["faces"] for p in face), ceiling)
+            grille = by_id[f"detail-vent-{room}-grille"]
+            facade_y = max(w[3] for w in F._walls(RS.build(R.design("D1")), fitting["level"])
+                           if w[0] <= fitting["fan"][0] <= w[2] and w[3] <= fitting["duct_route"][-1][1])
+            self.assertAlmostEqual(max(p[1] for face in grille["faces"] for p in face), facade_y)
+
     def test_c3_bath_and_grille_parts_are_closed_and_detailed(self):
         from archpipe.concept.physical_part import Part
         by_id = {m["id"]: m for m in SCENE["meshes"]}
@@ -55,6 +93,11 @@ class RenderStandard(unittest.TestCase):
             self.assertEqual(m["part_kind"], "fan-grille")
             self.assertGreater(len(m["faces"]), 40)  # perimeter and seven separate blades leave open slots
             Part("fan-grille", m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
+            valve = by_id[f"detail-vent-{room}-valve"]
+            self.assertEqual(valve["part_kind"], "extract-valve")
+            Part("extract-valve", valve["faces"], ("x", "y", "z"), valve["material"], "authored-procedural")
+            self.assertNotIn(f"detail-vent-{room}-duct", by_id)
+            self.assertTrue(any(v["room"] == room and v["duct_route"] for v in RS.build(R.design("D1"))["ventilation"]))
         for name in ("detail-gwc-linear-drain", "detail-gwc-linear-drain-recess"):
             m = by_id[name]
             self.assertEqual(m["part_kind"], "drain")
@@ -62,6 +105,10 @@ class RenderStandard(unittest.TestCase):
         drain = by_id["detail-gwc-linear-drain"]
         self.assertEqual(drain["material"], "stainless")
         self.assertGreater(len(drain["faces"]), 100)  # frame plus slotted cross bars
+        spec_drain = next(f for f in RS.build(R.design("D1"))["bath_fittings"] if f["id"] == "gwc-linear-drain")
+        self.assertAlmostEqual(spec_drain["x1"] - spec_drain["x0"], .07)
+        self.assertAlmostEqual(max(p[0] for face in drain["faces"] for p in face) -
+                               min(p[0] for face in drain["faces"] for p in face), .07)
 
     def test_indoor_plants_have_integrated_pots_floor_support_and_clear_tv(self):
         from copy import deepcopy
