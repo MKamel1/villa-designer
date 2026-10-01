@@ -21,7 +21,7 @@ ALLOWED_MATERIALS = {
     "black-metal", "ceramic-white", "screen-black", "glass-clear", "glass-guard", "glass-edge", "opal-strip",
     "silvered-mirror", "door-oak", "garden-gravel", "garden-pebbles", "garden-sandstone", "glass-bath-screen",
     "render-exterior", "paint-exterior-grey-green", "paving", "lawn", "outdoor-fabric", "teak", "bougainvillea-leaf",
-    "alu-bronze", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
+    "alu-bronze", "stainless", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
     "marker-2200", "opal-pen-globe-2700", "opal-inner-2700", "swing-disc-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
     "opal-vsconce-3000", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout",
     "garment-ivory", "garment-blush", "garment-terracotta", "garment-sage-soft",
@@ -30,6 +30,39 @@ ALLOWED_MATERIALS = {
 
 
 class RenderStandard(unittest.TestCase):
+    def test_c3_bath_and_grille_parts_are_closed_and_detailed(self):
+        from archpipe.concept.physical_part import Part
+        by_id = {m["id"]: m for m in SCENE["meshes"]}
+        for prefix in ("gwc", "pe"):
+            kinds = {"rain-head": ("rain-head-drop", "rain-head-plate", "rain-head-nozzle-face",
+                                   "rain-head-nozzles"),
+                     "riser-rail": ("hand-shower-rail", "hand-shower-slider"),
+                     "shower-head": ("hand-shower-head",),
+                     "shower-hose": ("hand-shower-hose",)}
+            for kind, suffixes in kinds.items():
+                for suffix in suffixes:
+                    m = by_id[f"detail-{prefix}-{suffix}"]
+                    self.assertEqual(m["part_kind"], kind)
+                    Part(kind, m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
+            for end in ("lower", "upper"):
+                m = by_id[f"detail-{prefix}-hand-shower-bracket-{end}"]
+                Part(m["part_kind"], m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
+            head = by_id[f"detail-{prefix}-rain-head-plate"]
+            xs = [p[0] for face in head["faces"] for p in face]
+            self.assertAlmostEqual(max(xs) - min(xs), .28, places=3)
+        for room in ("guest-wc", "dirty-kitchen"):
+            m = by_id[f"detail-vent-{room}-grille"]
+            self.assertEqual(m["part_kind"], "fan-grille")
+            self.assertGreater(len(m["faces"]), 40)  # perimeter and seven separate blades leave open slots
+            Part("fan-grille", m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
+        for name in ("detail-gwc-linear-drain", "detail-gwc-linear-drain-recess"):
+            m = by_id[name]
+            self.assertEqual(m["part_kind"], "drain")
+            Part("drain", m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
+        drain = by_id["detail-gwc-linear-drain"]
+        self.assertEqual(drain["material"], "stainless")
+        self.assertGreater(len(drain["faces"]), 100)  # frame plus slotted cross bars
+
     def test_indoor_plants_have_integrated_pots_floor_support_and_clear_tv(self):
         from copy import deepcopy
         lay = R.design("D1")
@@ -99,7 +132,7 @@ class RenderStandard(unittest.TestCase):
         self.assertEqual(sum(i.startswith("lamp-shade-DESK-cinema-") for i in ids), 2)
         self.assertEqual(sum(i.startswith("furn-cinema-desk-chair-") and i.endswith("-0") for i in ids), 2)
         wet = [m for m in SCENE["meshes"] if m["id"].startswith("furn-gwc-shower-")]
-        self.assertEqual({m["material"] for m in wet}, {"marble-wet", "black-metal"})
+        self.assertEqual({m["material"] for m in wet}, {"marble-wet"})
         self.assertIn("detail-gwc-rain-head-plate", ids)
         self.assertIn("detail-gwc-hand-shower-head", ids)
 
@@ -241,8 +274,13 @@ class RenderStandard(unittest.TestCase):
                 self.assertAlmostEqual(c["shift_y"], 0.10)
             elif "lens_basis" in c:                  # client 2026-09-27: a CALCULATED lens where 24 mm cannot hold the room
                 import math
-                need = float(c["lens_basis"].split(" deg off axis")[0].split()[-1])
-                self.assertGreater(need, 36.87, v["id"] + ": 24 mm would have held it")
+                if v["id"] == "v16-guest-wc":
+                    need = float(c["lens_basis"].split(" deg above level eye")[0].split()[-1])
+                    self.assertGreater(need, math.degrees(math.atan(12 / 24)))
+                    self.assertLess(need, math.degrees(math.atan(12 / 16)))
+                else:
+                    need = float(c["lens_basis"].split(" deg off axis")[0].split()[-1])
+                    self.assertGreater(need, 36.87, v["id"] + ": 24 mm would have held it")
                 self.assertEqual(c["lens_mm"], 16, v["id"])
                 # the 16 mm camera is re-placed by render_views.choose; the check is at that camera
                 at16 = float(c["lens_basis"].split("at 16 mm widest ")[1].split()[0])

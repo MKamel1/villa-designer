@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from archpipe.render_qa import check
 from archpipe.safe_io import save_bytes
 from archpipe.villa_render_contract import validate_scene
+from archpipe.concept.villa_render import source_provenance, write as write_scene
 from render_remote import _ssh, _push
 from workstation import deploy, digest
 
@@ -111,9 +112,18 @@ def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
 
 def run(scene_path: Path, views: str, samples: int | None, resolution: str | None,
         host: str, ies_dir: Path, dry_run: bool = False, calibrate: bool = False,
-        measure_lighting: bool = False) -> dict:
+        measure_lighting: bool = False, allow_stale_scene: bool = False) -> dict:
     scene_path = scene_path.resolve()
     scene = json.loads(scene_path.read_text(encoding="utf-8"))
+    provenance = scene.get("provenance") or {}
+    scene_hash = provenance.get("source_hash")
+    current_hash = source_provenance()["source_hash"]
+    stale = scene_hash != current_hash
+    if stale and not allow_stale_scene:
+        raise ValueError("Scene provenance mismatch: scene source hash " + str(scene_hash) +
+                         " differs from current source hash " + current_hash +
+                         ". Rebuild by omitting --scene, or pass --allow-stale-scene to label this render STALE-SCENE.")
+    stale_label = "STALE-SCENE" if stale else None
     errors = validate_scene(scene)
     if errors:
         raise ValueError("Invalid villa scene:\n" + "\n".join(errors))
@@ -139,7 +149,8 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
                       + json.dumps([selected, samples, resolution, calibrate, measure_lighting], sort_keys=True).encode())[:24]
     if dry_run:
         return {"dry_run": True, "views": selected, "ies": ies_names, "job_id": identity,
-                "host": host, "scene": str(scene_path)}
+                "host": host, "scene": str(scene_path), "scene_provenance": provenance,
+                "scene_source_hash": scene_hash, "stale_scene": stale, "label": stale_label}
     root, release, release_id = deploy(host)
     job = root + "/villa-render/" + identity
     remote_ies = job + "/ies"
@@ -202,6 +213,12 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
                 raise RuntimeError("Missing remote render artifact: " + ident + suffix)
             save_bytes(output / (ident + suffix), fetched.stdout)
         render_report = json.loads((output / (ident + ".json")).read_text(encoding="utf-8"))
+        render_report["scene_provenance"] = provenance
+        render_report["scene_source_hash"] = scene_hash
+        render_report["stale_scene"] = stale
+        if stale:
+            render_report["label"] = stale_label
+        save_bytes(output / (ident + ".json"), json.dumps(render_report, indent=2).encode("utf-8"))
         view = by_id[ident]
         # Only bedroom-agnostic checks: image metrics, camera level, subjects,
         # glass presence and white-balance availability. The bedroom-specific
@@ -209,10 +226,20 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         qa_input = villa_qa_context(scene, view, render_report)
         qa = check(output / (ident + ".png"), qa_input)
         qa["scope"] = villa_qa_scope(qa, qa_input)
+        qa["scene_provenance"] = provenance
+        qa["scene_source_hash"] = scene_hash
+        qa["stale_scene"] = stale
+        if stale:
+            qa["label"] = stale_label
         save_bytes(output / (ident + ".qa.json"), json.dumps(qa, indent=2).encode("utf-8"))
         caption = villa_caption(scene, view, render_report, qa)
+        caption["scene_source_hash"] = scene_hash
+        caption["stale_scene"] = stale
+        if stale:
+            caption["label"] = stale_label
         save_bytes(output / (ident + ".caption.json"), json.dumps(caption, indent=2).encode("utf-8"))
-        reports.append({"view": ident, "png": str(output / (ident + ".png")), "qa_passed": qa["passed"]})
+        reports.append({"view": ident, "png": str(output / (ident + ".png")), "qa_passed": qa["passed"],
+                        "scene_source_hash": scene_hash, "stale_scene": stale, "label": stale_label})
     calibration = None
     if calibrate:
         for suffix in ("calibration.json", "calibration.png", "calibration.exr", "calibration-emissive.exr"):
@@ -221,6 +248,10 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
                 raise RuntimeError("Missing remote calibration artifact: " + suffix)
             save_bytes(output / suffix, fetched.stdout)
         calibration = json.loads((output / "calibration.json").read_text(encoding="utf-8"))
+        calibration.update(scene_provenance=provenance, scene_source_hash=scene_hash, stale_scene=stale)
+        if stale:
+            calibration["label"] = stale_label
+        save_bytes(output / "calibration.json", json.dumps(calibration, indent=2).encode("utf-8"))
     measurements = None
     if measure_lighting:
         fetched = _ssh(host, "cat " + shlex.quote(job + "/out/lighting-measurements.json"), timeout=120)
@@ -228,7 +259,13 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
             raise RuntimeError("Missing lighting measurements")
         save_bytes(output / "lighting-measurements.json", fetched.stdout)
         measurements = json.loads(fetched.stdout)
+        measurements.update(scene_provenance=provenance, scene_source_hash=scene_hash, stale_scene=stale)
+        if stale:
+            measurements["label"] = stale_label
+        save_bytes(output / "lighting-measurements.json", json.dumps(measurements, indent=2).encode("utf-8"))
     return {"release": release_id, "job_id": identity, "views": reports, "out": str(output),
+            "scene_provenance": provenance, "scene_source_hash": scene_hash,
+            "stale_scene": stale, "label": stale_label,
             "calibration": calibration,
             "lighting_measurements": (None if measurements is None else {
                 "path": str(output / "lighting-measurements.json"),
@@ -238,7 +275,8 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--scene", type=Path, default=ROOT / "out/villa/render-d1/scene.json")
+    ap.add_argument("--scene", type=Path)
+    ap.add_argument("--allow-stale-scene", action="store_true")
     ap.add_argument("--views", default="all")
     ap.add_argument("--samples", type=int)
     ap.add_argument("--res")
@@ -248,8 +286,16 @@ def main():
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--measure-lighting", action="store_true")
     a = ap.parse_args()
-    print(json.dumps(run(a.scene, a.views, a.samples, a.res, a.host, a.ies_dir, a.dry_run, a.calibrate,
-                         a.measure_lighting), indent=2))
+    if a.scene is None:
+        scene_path, _ = write_scene()
+    else:
+        scene_path = a.scene
+    try:
+        result = run(scene_path, a.views, a.samples, a.res, a.host, a.ies_dir, a.dry_run, a.calibrate,
+                     a.measure_lighting, a.allow_stale_scene)
+    except ValueError as exc:
+        ap.error(str(exc))
+    print(json.dumps(result, indent=2))
 
 
 if __name__ == "__main__":

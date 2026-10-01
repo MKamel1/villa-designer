@@ -146,6 +146,21 @@ class ChosenViews(unittest.TestCase):
         c = RV.choose(LAY, "family-bath", ["fb-basin", "fb-shower"], lens_mm=16, sp=SP)
         self.assertTrue(c["subjects_in_frame"])
 
+    def test_guest_rain_head_requires_wider_vertical_frame(self):
+        subjects = ["gwc-shower", "detail-gwc-rain-head", "detail-gwc-hand-shower"]
+        narrow = RV.choose(LAY, "guest-wc", subjects, lens_mm=24, sp=SP)
+        wide = RV.choose(LAY, "guest-wc", subjects, lens_mm=16, sp=SP)
+        self.assertFalse(narrow["subjects_in_frame"])
+        self.assertTrue(wide["subjects_in_frame"])
+        x, y = wide["position"]
+        walls = F._walls(SP, "B") + F._columns()
+        for fitting in (f for f in SP["bath_fittings"] if f["id"] in ("gwc-rain-head", "gwc-hand-shower")):
+            for step in range(1, 100):
+                px = x + (fitting["x"] - x) * step / 100
+                py = y + (fitting["y"] - y) * step / 100
+                self.assertFalse(any(RV._near(wall, px, py, -.01) for wall in walls),
+                                 fitting["id"] + " is blocked by a wall")
+
     def test_a_point_in_a_door_band_is_a_doorway_point(self):
         """A camera 30 mm inside the ensuite stood in its closed door leaf (a black band in draft 10)."""
         d = next(d for d in SP["doors"] if set(d["rooms"]) == {"parents-dressing-ext", "parents-ensuite"})

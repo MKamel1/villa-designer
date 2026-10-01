@@ -52,6 +52,15 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
     items = [i for i in F.layout(lay) if i["level"] == lv]
     pieces = [F.footprint(i) for i in items] + [tuple(e[:4]) for e in extra if e[4] == lv]
     by_id = {i["id"]: i for i in items}
+    # Bath fittings are camera subjects even though they are not furniture obstacles.
+    # Their small plan footprints let the same framing and wall-occlusion rules apply.
+    for fitting in sp.get("bath_fittings", []):
+        if fitting.get("room") != room or fitting.get("kind") not in ("ceiling-rain-head", "hand-shower"):
+            continue
+        size = .14 if fitting["kind"] == "ceiling-rain-head" else .09
+        by_id["detail-" + fitting["id"]] = dict(id="detail-" + fitting["id"],
+            cx=fitting["x"], cy=fitting["y"], w=size*2, d=size*2,
+            h=fitting["z"] + .02, rot=0)
     subj = [c for s in subjects if s in by_id for q in [F.footprint(by_id[s])]
             for c in ((q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3]))]
     room_items = [((F.footprint(i)[0] + F.footprint(i)[2]) / 2, (F.footprint(i)[1] + F.footprint(i)[3]) / 2)
@@ -65,6 +74,8 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
     tops = [((F.footprint(by_id[s_])[0] + F.footprint(by_id[s_])[2]) / 2,
              (F.footprint(by_id[s_])[1] + F.footprint(by_id[s_])[3]) / 2, by_id[s_]["h"]) for s_ in subjects
             if s_ in by_id]
+    high_fittings = [p for s_, p in zip((s for s in subjects if s in by_id), tops)
+                     if s_.startswith("detail-")]
 
     def below(x, y):
         """How far (rad) a subject's top sits below the frame's lower edge seen from eye height: the family-bath WC,
@@ -149,7 +160,8 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
             if ok(x, y):
                 edge = min(abs(x - rect[0]), abs(x - rect[2]), abs(y - rect[1]), abs(y - rect[3]))
                 occluded = hidden(x, y)
-                low = below(x, y)
+                low = below(x, y) + sum(max(0.0, math.atan2(h-eye_m, max(math.hypot(cx-x, cy-y), 1e-6)) - vhalf)
+                                          for cx, cy, h in high_fittings)
                 subj_bearings = [math.atan2(qy - y, qx - x) for qx, qy in subj]
                 room_bearings = [math.atan2(qy - y, qx - x) for qx, qy in room_items]
                 opening_bearings = [math.atan2(qy - y, qx - x) for qx, qy in openings]

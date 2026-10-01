@@ -176,6 +176,8 @@ M = {
                  tile_m=1.00, grain_axis="x", note="ASSUMED teak frame (garden lounge); Poly Haven teak_veneer, real scan 1.00 m"),
     "alu-bronze": dict(kind="principled", base_rgb=[0.10, 0.09, 0.08], reflectance=0.09, roughness=0.35,
                        metallic=1.0, note="dark bronze anodised aluminium window and door frames (ASSUMED)"),
+    "stainless": dict(kind="principled", base_rgb=[0.62, 0.65, 0.66], reflectance=0.55, roughness=0.28,
+                      metallic=1.0, note="ASSUMED brushed stainless drain grille; product pending"),
     "paint-white-satin": dict(kind="principled", base_rgb=[0.82, 0.81, 0.79], reflectance=0.80, roughness=0.35,
                               note="white satin paint (skirting, architraves)"),
     "white-paint-joinery": dict(kind="principled", base_rgb=[0.80, 0.79, 0.76], reflectance=0.78, roughness=0.4,
@@ -347,6 +349,24 @@ def rod_faces(p0, p1, w):
     a = [square(p0, -1, -1), square(p0, 1, -1), square(p0, 1, 1), square(p0, -1, 1)]
     b = [square(p1, -1, -1), square(p1, 1, -1), square(p1, 1, 1), square(p1, -1, 1)]
     return pane_faces(a, b)
+
+
+def round_tube(p0, p1, radius, n=16):
+    """Closed circular section between two points, including both end caps."""
+    d = [p1[i] - p0[i] for i in range(3)]
+    length = math.sqrt(sum(v*v for v in d))
+    if length <= 1e-6 or radius <= 0:
+        raise ValueError("round tube needs positive length and radius")
+    d = [v / length for v in d]
+    ref = [1., 0., 0.] if abs(d[2]) > .9 else [0., 0., 1.]
+    r = [d[1]*ref[2]-d[2]*ref[1], d[2]*ref[0]-d[0]*ref[2], d[0]*ref[1]-d[1]*ref[0]]
+    rl = math.sqrt(sum(v*v for v in r))
+    r = [v / rl for v in r]
+    u = [r[1]*d[2]-r[2]*d[1], r[2]*d[0]-r[0]*d[2], r[0]*d[1]-r[1]*d[0]]
+    def ring(p):
+        return [[p[j] + radius*(math.cos(2*math.pi*k/n)*r[j] + math.sin(2*math.pi*k/n)*u[j])
+                 for j in range(3)] for k in range(n)]
+    return pane_faces(ring(p0), ring(p1))
 
 
 def quad_up(x0, y0, x1, y1, z):
@@ -788,6 +808,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             continue
         parts = {}
         for name, b in zip(f["parts"], f["boxes"]):
+            if f["mark"] == "gwc-shower" and name == "linear-drain":
+                continue  # The bath-fitting record below owns the one visible drain.
             mat = part_material(f, name)
             if f["mark"] == "gwc-shower" and name in ("wet-floor", "linear-drain"):
                 # One millimetre visual offset avoids coplanar z-fighting with the shell floor;
@@ -1315,24 +1337,74 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         fid = "detail-" + fitting["id"]
         if fitting["kind"] == "ceiling-rain-head":
             x, y, z = fitting["x"], fitting["y"], LZ[fitting["level"]] + fitting["z"]
-            mesh(fid + "-drop", "brass", box_faces(x - 0.012, y - 0.012, z + 0.012,
-                 x + 0.012, y + 0.012, VL.ceiling_z(fitting["level"], x=x, y=y, room=fitting["room"], lay=lay, spec=sp)),
-                 "fixture", room=fitting["room"], label="ASSUMED ceiling rain-head drop", kind="rain-head")
-            mesh(fid + "-plate", "brass", box_faces(x - 0.16, y - 0.16, z - 0.014,
-                 x + 0.16, y + 0.16, z + 0.014), "fixture", room=fitting["room"],
-                 label="ASSUMED ceiling rain-head plate", kind="rain-head")
+            ceiling = VL.ceiling_z(fitting["level"], x=x, y=y, room=fitting["room"], lay=lay, spec=sp)
+            mesh(fid + "-drop", "brass", round_tube((x, y, z + .012), (x, y, ceiling), .012),
+                 "fixture", room=fitting["room"], label="ASSUMED closed brass ceiling drop, 24 mm diameter", kind="rain-head")
+            mesh(fid + "-plate", "brass", round_tube((x, y, z - .014), (x, y, z + .014), .14, 32),
+                 "fixture", room=fitting["room"],
+                 label="ASSUMED 280 mm diameter thin brass rain head; product pending", kind="rain-head")
+            mesh(fid + "-nozzle-face", "black-metal", round_tube((x, y, z - .016), (x, y, z - .014), .125, 32),
+                 "fixture", room=fitting["room"], label="ASSUMED recessed nozzle face", kind="rain-head")
+            nozzles = []
+            for radius, count in ((.045, 8), (.085, 12), (.115, 16)):
+                for k in range(count):
+                    nx, ny = x + radius*math.cos(2*math.pi*k/count), y + radius*math.sin(2*math.pi*k/count)
+                    nozzles.extend(round_tube((nx, ny, z - .019), (nx, ny, z - .016), .002, 8))
+            mesh(fid + "-nozzles", "brass", nozzles, "fixture", room=fitting["room"],
+                 label="ASSUMED circular nozzle array", kind="rain-head")
         elif fitting["kind"] == "hand-shower":
             x, y, z = fitting["x"], fitting["y"], LZ[fitting["level"]] + fitting["z"]
-            mesh(fid + "-rail", "brass", box_faces(x - 0.012, y - 0.06, z - 0.35,
-                 x + 0.012, y + 0.012, z + 0.45), "fixture", room=fitting["room"],
-                 label="ASSUMED wall-mounted hand-shower rail", kind="riser-rail")
-            mesh(fid + "-head", "brass", box_faces(x - 0.045, y + 0.005, z + 0.21,
-                 x + 0.045, y + 0.09, z + 0.31), "fixture", room=fitting["room"],
-                 label="ASSUMED hand shower on sliding holder", kind="shower-head")
+            rail_y = y + .025
+            walls = F._walls(sp, fitting["level"])
+            wall = min(walls, key=lambda w: math.hypot(max(w[0]-x, 0, x-w[2]),
+                                                       max(w[1]-rail_y, 0, rail_y-w[3])))
+            if x < wall[0]:
+                mount = (wall[0] + .02, rail_y)
+            elif x > wall[2]:
+                mount = (wall[2] - .02, rail_y)
+            elif rail_y > wall[3]:
+                mount = (x, wall[3] - .02)
+            else:
+                mount = (x, wall[1] + .02)
+            mesh(fid + "-rail", "brass", round_tube((x, rail_y, z - .35), (x, rail_y, z + .45), .012),
+                 "fixture", room=fitting["room"], label="ASSUMED 800 mm closed brass riser rail", kind="riser-rail")
+            for suffix, zz in (("lower", z - .31), ("upper", z + .41)):
+                mesh(fid + "-bracket-" + suffix, "brass", round_tube((x, rail_y, zz),
+                     (mount[0], mount[1], zz), .018), "fixture", room=fitting["room"],
+                     label="ASSUMED rail wall bracket", kind="rail-bracket")
+            mesh(fid + "-slider", "brass", round_tube((x, rail_y, z + .22),
+                 (x, rail_y, z + .29), .022), "fixture", room=fitting["room"],
+                 label="ASSUMED adjustable hand shower slider", kind="riser-rail")
+            mesh(fid + "-head", "brass", round_tube((x, rail_y + .035, z + .14),
+                 (x, rail_y + .07, z + .31), .013) +
+                 round_tube((x, rail_y + .07, z + .31), (x, rail_y + .095, z + .34), .038),
+                 "fixture", room=fitting["room"], label="ASSUMED shaped brass handset with outlet", kind="shower-head")
+            hose_points = [(x, rail_y + .035, z + .14), (x + .06, rail_y + .10, z - .02),
+                           (x + .09, rail_y + .12, z - .28), (x + .02, rail_y + .055, z - .34),
+                           (x, y, z - .24)]
+            hose = []
+            for a, b in zip(hose_points, hose_points[1:]):
+                hose.extend(round_tube(a, b, .006, 12))
+            mesh(fid + "-hose", "brass", hose, "fixture", room=fitting["room"],
+                 label="ASSUMED curved brass shower hose", kind="shower-hose")
         elif fitting["kind"] == "linear-drain":
-            mesh(fid, "black-metal", box_faces(fitting["x0"], fitting["y0"], LZ[fitting["level"]] - 0.003,
-                 fitting["x1"], fitting["y1"], LZ[fitting["level"]]), "fixture", room=fitting["room"],
-                 label="ASSUMED flush linear drain in falling wet-zone floor; no enclosure", kind="drain")
+            x0, x1, y0, y1 = (fitting[k] for k in ("x0", "x1", "y0", "y1"))
+            top = LZ[fitting["level"]] + .0015
+            recess = box_faces(x0, y0, top - .009, x1, y1, top - .006)
+            recess += box_faces(x0, y0, top - .006, x0 + .002, y1, top - .001)
+            recess += box_faces(x1 - .002, y0, top - .006, x1, y1, top - .001)
+            mesh(fid + "-recess", "black-metal", recess,
+                 "fixture", room=fitting["room"], label="ASSUMED dark drain channel recess", kind="drain")
+            steel = []
+            for xa, xb in ((x0, x0 + .003), (x1 - .003, x1)):
+                steel.extend(box_faces(xa, y0, top - .006, xb, y1, top))
+            for yy in (y0, y1 - .003):
+                steel.extend(box_faces(x0, yy, top - .006, x1, yy + .003, top))
+            for k in range(18):
+                yy = y0 + .012 + k*(y1-y0-.024)/18
+                steel.extend(box_faces(x0 + .004, yy, top - .002, x1 - .004, yy + .003, top))
+            mesh(fid, "stainless", steel, "fixture", room=fitting["room"],
+                 label="ASSUMED flush slotted stainless linear drain; floor fall not modelled", kind="drain")
         else:
             # WP4-B4 (client: "the glass looked too reflective"): a dedicated material carrying THIS fitting's own
             # measured transmittance (0.91) and index of refraction (1.52) from revit_spec's bath_fittings --
@@ -1361,10 +1433,19 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
              box_faces(x - 0.055, min(y, end_y), z - 0.055,
                        x + 0.055, max(y, end_y), z + 0.055), "fixture", room=vent["room"],
              label="ASSUMED duct to outside: " + vent["room"], kind="duct")
-        mesh("detail-vent-" + vent["room"] + "-grille", "alu-bronze",
-             box_faces(x - 0.12, end_y - 0.012, z - 0.12,
-                       x + 0.12, end_y + 0.012, z + 0.12), "fixture", room=vent["room"],
-             label="ASSUMED external extract grille: " + vent["room"], kind="fan-grille")
+        # Four perimeter members and spaced blades leave actual visible slots into the duct.
+        face_y = end_y - .013
+        grille = []
+        for xa, xb in ((x - .12, x - .105), (x + .105, x + .12)):
+            grille.extend(box_faces(xa, face_y, z - .12, xb, face_y + .012, z + .12))
+        for za, zb in ((z - .12, z - .105), (z + .105, z + .12)):
+            grille.extend(box_faces(x - .105, face_y, za, x + .105, face_y + .012, zb))
+        for k in range(7):
+            zz = z - .09 + k*.03
+            grille.extend(box_faces(x - .103, face_y, zz, x + .103, face_y + .009, zz + .009))
+        mesh("detail-vent-" + vent["room"] + "-grille", "alu-bronze", grille,
+             "fixture", room=vent["room"],
+             label="ASSUMED 240 mm square louvred external extract grille with open slots: " + vent["room"], kind="fan-grille")
     notes.append("ASSUMED bath-fitting bodies and fixing details follow the specified rain heads, hand shower rails, "
                  "guest bathroom flush linear drain and ensuite fixed frameless screen. Guest bathroom and dirty-kitchen ducts terminate at external grilles; "
                  "the dirty-kitchen cooker hood is the specified extract source. Drip, flow and products remain "
@@ -2307,7 +2388,8 @@ def VIEWS(lay=None, resolve=True):
       **BATH_DAY)
     V[-1]["caption_notes"] = ["The WC is in the corner beside the door, below and outside this frame: no standing "
                               "point holds basin, shower and WC together (checked by render_views.choose)."]
-    v("v16-guest-wc", "Guest bathroom", "evening", I, I, 24, ["gwc-basin", "gwc-shower"], room="guest-wc")
+    v("v16-guest-wc", "Guest bathroom", "evening", I, I, 24,
+      ["gwc-shower", "detail-gwc-rain-head", "detail-gwc-hand-shower"], room="guest-wc")
     v("v17-dirty-kitchen", "Dirty kitchen and laundry", "day", I, I, 24, ["dk-run", "dk-appliance-bank"], room="dirty-kitchen",
       **BASEMENT_DAY)
     # the rest of the ten more, for the final set (v15-v17 above are three of them)
@@ -2421,9 +2503,19 @@ def VIEWS(lay=None, resolve=True):
                 if not got16["subjects_in_frame"]:
                     raise ValueError("%s: even 16 mm cannot hold %s" % (x["id"], x["subjects"]))
                 override(c, "lens_mm", 16, "room subjects require the chosen 16 mm frame")
-                c["lens_basis"] = ("widest subject corner %.1f deg off axis from the best standing point; 24 mm holds "
-                                   "%.1f, 16 mm holds %.1f; at 16 mm widest %.1f deg" % (
-                                       got["widest_deg"], half24, half16, got16["widest_deg"]))
+                if x["id"] == "v16-guest-wc":
+                    head = next(f for f in sp_["bath_fittings"] if f["id"] == "gwc-rain-head")
+                    angle = math.degrees(math.atan2(head["z"] + .02 - eye,
+                        math.hypot(head["x"] - got["position"][0], head["y"] - got["position"][1])))
+                    c["lens_basis"] = ("rain head top %.1f deg above level eye from best 24 mm standing point; "
+                                       "24 mm vertical half-frame %.1f deg, 16 mm vertical half-frame %.1f deg; "
+                                       "at 16 mm widest %.1f deg" % (
+                                           angle, math.degrees(math.atan(c["sensor_mm"] / 3 / 24)),
+                                           math.degrees(math.atan(c["sensor_mm"] / 3 / 16)), got16["widest_deg"]))
+                else:
+                    c["lens_basis"] = ("widest subject corner %.1f deg off axis from the best standing point; 24 mm holds "
+                                       "%.1f, 16 mm holds %.1f; at 16 mm widest %.1f deg" % (
+                                           got["widest_deg"], half24, half16, got16["widest_deg"]))
                 x.setdefault("caption_notes", []).append(
                     "Lens 16 mm, not the standard 24 mm: the room cannot hold its subjects at 24 mm from any standing "
                     "point (%s). Wider than the eye." % c["lens_basis"])
@@ -2473,13 +2565,44 @@ def VIEWS(lay=None, resolve=True):
     return V
 
 
+def source_provenance(root=None):
+    """Identify the source and data inputs from which a villa scene is built."""
+    import hashlib
+    import subprocess
+
+    root = Path(root or ROOT).resolve()
+    inputs = sorted((root / "src/archpipe").rglob("*.py"))
+    inputs += [root / name for name in (
+        "ops/workstation/library-manifest.json", "out/villa/round3/plant-palette.json",
+        "spec/villa-site.yaml", "knowledge/library.json",
+        "knowledge/projects/villa-01/brief-requirements.json",
+        "knowledge/projects/villa-01/taste.json")]
+    h = hashlib.sha256()
+    for path in sorted(inputs, key=lambda p: p.relative_to(root).as_posix()):
+        name = path.relative_to(root).as_posix().encode("utf-8")
+        data = path.read_bytes()  # Missing inputs must fail before a scene can be trusted.
+        h.update(len(name).to_bytes(4, "big") + name)
+        h.update(len(data).to_bytes(8, "big") + data)
+    head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True)
+    status = subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"],
+                            cwd=root, capture_output=True, text=True)
+    return {"source_hash": h.hexdigest(), "git_head": head.stdout.strip() if head.returncode == 0 else None,
+            "git_dirty": bool(status.stdout.strip()) if status.returncode == 0 else None}
+
+
 def write(path=None, views=None):
+    before = source_provenance()
     scene = build(views=views)
     from archpipe.villa_render_contract import validate_scene
     errors = validate_scene(scene)
     if errors:
         raise ValueError("invalid exported scene: " + "; ".join(errors))
+    after = source_provenance()
+    if before["source_hash"] != after["source_hash"]:
+        raise RuntimeError("Villa scene source changed during build; retry the export")
+    scene["provenance"] = after
     path = Path(path or OUT / "scene.json")
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(scene), encoding="utf-8")
+    from archpipe.safe_io import save_bytes
+    save_bytes(path, json.dumps(scene).encode("utf-8"))
     return path, scene
