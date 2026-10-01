@@ -21,6 +21,9 @@ import urllib.request
 import zipfile
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
+from archpipe.asset_intake import validate_entry
+
 USER_AGENT = "archpipe-asset-fetch/1 (+https://github.com/) contact: project-internal"
 
 BOUNDS_TOLERANCE_M = 0.005   # 5 mm: a checked-in bound this far off the freshly measured one is drift, not rounding
@@ -203,9 +206,12 @@ def do_prop(entry: dict, root: Path, index: dict) -> None:
     asset_id = entry["id"]
     dest_dir = root / "props" / asset_id
     if dest_dir.is_dir() and any(dest_dir.rglob("*.gltf")):
-        print("  skip download %s (already fetched)" % asset_id)
         from front_axis import measured_or_manual_front
         measured_or_manual_front(entry, dest_dir / "model.gltf")
+        violations = validate_entry(entry, dest_dir / "model.gltf")
+        if violations:
+            raise ValueError(f"{asset_id}: intake violations: " + "; ".join(violations))
+        print("  skip download %s (already fetched)" % asset_id)
         return
     res, package = poly_haven_model_files(asset_id)
     if "url" not in package:
@@ -235,6 +241,9 @@ def do_prop(entry: dict, root: Path, index: dict) -> None:
                               f"checked-in library-manifest.json bounds_m {checked_in} -- the guard in "
                               f"archpipe.concept.villa_landscape trusts the checked-in figure; re-measure and "
                               f"update the manifest before using this asset")
+    violations = validate_entry(entry, gltf_path)
+    if violations:
+        raise ValueError(f"{asset_id}: intake violations: " + "; ".join(violations))
     index.setdefault("props", {})[asset_id] = {"resolution": res, "files": recorded,
                                                "role": entry.get("role"), "bounds_m": bounds_m}
 
@@ -259,19 +268,20 @@ def main() -> int:
     for entry in manifest.get("hdris", []):
         do_hdri(entry, root, index)
     print("Props:")
+    failed_props = []
     for entry in manifest.get("props", []):
         try:
             do_prop(entry, root, index)
         except Exception as exc:
             print("  FAILED %s: %s" % (entry["id"], exc), file=sys.stderr)
-
-    Path(sys.argv[1]).write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            failed_props.append(entry["id"])
+            index.get("props", {}).pop(entry["id"], None)
 
     index["license"] = manifest.get("license")
     index["updated"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     index_path.write_text(json.dumps(index, indent=2, sort_keys=True))
     print(index_path)
-    return 0
+    return 1 if failed_props else 0
 
 
 if __name__ == "__main__":

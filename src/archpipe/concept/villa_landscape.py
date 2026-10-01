@@ -201,24 +201,24 @@ BEDS = {
 
 # The spreads are from the named palette where a width is available; most
 # are not, so are ASSUMED maintained nursery spreads pending a nursery
-# check. Ixora, Callistemon, Citrus, Gazania and Bellis carry a real
-# MOBOT Plant Finder figure (fetched 2026-09-29, see EXTRA_CARE below);
-# the multi-plant packs (flower_ursinia, flower_heliophila,
+# check. Ixora, Citrus, Gazania and Bellis carry a MOBOT Plant Finder
+# figure; Callistemon has an RHS in-ground mature-size card (see EXTRA_CARE);
+# the multi-plant packs (flower_ursinia, the Plumbago look-alike proxy,
 # sf_garden_flower_clump) use the asset's own measured clump width from
 # PROP_BOUNDS as an ASSUMED spread, since the round3 palette does not list
-# Ursinia, Heliophila or Bellis and the model's box is the only measurement
+# Ursinia or Bellis and the model's box is the only measurement
 # actually taken.
 SPREAD = {"Duranta erecta": 0.8, "Hibiscus rosa-sinensis": 0.9,
           "Lavandula angustifolia 'Hidcote'": 0.75,
           "Pennisetum setaceum": 0.9,
           "Bougainvillea glabra": 0.9,          # ASSUMED potted/trained shrub form
-          "Callistemon citrinus": 0.9,          # ASSUMED ground spread; MOBOT figure is container-grown (0.6-0.9 m)
+          "Callistemon citrinus": 0.9,          # ASSUMED maintained spread; RHS in-ground mature spread is 2.5-4 m
           "Ixora coccinea": 1.2,                # MOBOT: 3-5 ft (0.9-1.5 m), mid value used
           "Gazania rigens": 0.3,                # MOBOT: 0.5-1.0 ft (0.15-0.3 m), upper value used
           "Bellis perennis": 0.2,               # MOBOT: 0.25-0.75 ft (0.08-0.23 m); the placed prop is a multi-plant clump, see CLUMP_SPREAD
           "Citrus limon": 1.6,                  # ASSUMED container/pruned spread; MOBOT ground figure is 10-15 ft (3-4.6 m), not usable for a doorside pot
-          "Ursinia anthemoides": None,          # not in round3 palette or MOBOT; see CLUMP_SPREAD
-          "Heliophila coronopifolia": None}     # not in round3 palette or MOBOT; see CLUMP_SPREAD
+          "Ursinia anthemoides": None,          # multi-plant clump; see CLUMP_SPREAD
+          "Plumbago auriculata": None}          # multi-plant proxy clump; see CLUMP_SPREAD
 PALETTE = Path(__file__).resolve().parents[3] / "out/villa/round3/plant-palette.json"
 MANIFEST = Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json"
 
@@ -228,17 +228,15 @@ MANIFEST = Path(__file__).resolve().parents[3] / "ops/workstation/library-manife
 # because this task may only edit villa_landscape.py and test_landscape.py.
 EXTRA_CARE = {
     "Ixora coccinea": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=286675",
-    "Callistemon citrinus": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=282871",
+    "Callistemon citrinus": "https://www.rhs.org.uk/plants/2687/callistemon-citrinus/details",
     "Citrus limon": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=286755",
     "Gazania rigens": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=277558",
     "Bellis perennis": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=277170",
-    "Ursinia anthemoides": "https://en.wikipedia.org/wiki/Ursinia_anthemoides",
-    "Heliophila coronopifolia": "https://en.wikipedia.org/wiki/Heliophila_coronopifolia",
+    "Ursinia anthemoides": "https://www.rhs.org.uk/plants/161741/ursinia-anthemoides/details",
 }
-# Multi-variant pack assets (several nursery plants modelled as one prop):
-# the placed prop's own native footprint IS the intended clump spread, so
-# scale stays 1.0 rather than being renormalised to a nursery height.
-# Widths measured from PROP_BOUNDS (ops/workstation/library-manifest.json).
+# Multi-variant pack assets (several nursery plants modelled as one prop).
+# These are native widths from PROP_BOUNDS; a height-constrained clump scales
+# its width by the same factor as its height.
 CLUMP_SPREAD = {"flower_ursinia": 2.19, "flower_heliophila": 2.75,
                  "sf_garden_flower_clump": 4.30}
 
@@ -339,10 +337,7 @@ def _prop(pid, asset, center, ground, height, label, zone="lower", yaw=0):
 
 
 def _clump_prop(pid, asset, center, ground, label, zone="lower", yaw=0):
-    """A multi-variant pack prop (flower_ursinia/flower_heliophila/sf_garden_flower_clump/
-    outdoor_table_chair_set_01): placed at its native scale (1.0) so the asset's own measured
-    footprint is the placed footprint, rather than being renormalised to an assumed nursery
-    height as `_prop` does for a single plant/tree."""
+    """Place a multi-variant pack at native scale when no height is authored."""
     mn, mx = PROP_BOUNDS[asset]
     return _prop(pid, asset, center, ground, mx[1] - mn[1], label, zone=zone, yaw=yaw)
 
@@ -524,14 +519,16 @@ def build(spec, lay=None):
         fill_defaults(p, dict(bed=bed, layer=layer, center=center, spread_m=spread, species=species))
         props.append(p); plants.append(p)
 
-    def clump(pid, bed, layer, asset, species, center, extra=""):
-        """One multi-plant pack prop at native scale; spread_m is the model's own measured
-        clump width (CLUMP_SPREAD), not a per-plant figure."""
-        spread = CLUMP_SPREAD[asset]
+    def clump(pid, bed, layer, asset, species, center, extra="", height=None):
+        """One multi-plant pack prop; an authored height scales all axes uniformly."""
+        mn, mx = PROP_BOUNDS[asset]
+        scale = height / (mx[1] - mn[1]) if height is not None else 1.0
+        spread = CLUMP_SPREAD[asset] * scale
         label = ("%s; care: %s (%s); %s; ASSUMED clump spread %.2f m (measured model footprint, "
                  "not a per-plant nursery figure)%s" %
                  (species, care(species), _care_note(species), credits[asset], spread, extra))
-        p = _clump_prop(pid, asset, center, GROUND, label)
+        p = (_prop(pid, asset, center, GROUND, height, label) if height is not None
+             else _clump_prop(pid, asset, center, GROUND, label))
         fill_defaults(p, dict(bed=bed, layer=layer, center=center, spread_m=spread, species=species))
         props.append(p); plants.append(p)
 
@@ -588,7 +585,8 @@ def build(spec, lay=None):
         plant("landscape-north-front-%02d" % i, "north", "front", "sf_lavender_clump",
               "Lavandula angustifolia 'Hidcote'", FRONT_H, (x, -21.95))
     clump("landscape-north-front-accent", "north", "front-accent", "sf_garden_flower_clump",
-          "Bellis perennis", (25.55, -22.90), extra="; white daisy accent clump, not drift-counted")
+          "Bellis perennis", (25.55, -22.90), extra="; white daisy accent clump, not drift-counted",
+          height=0.15)
 
     # west (x0.0-1.30 along the wall at x=-0.373; back near the wall). The
     # court here is only ~1 m deep before the lounge-west route begins, so
@@ -608,8 +606,8 @@ def build(spec, lay=None):
         plant("landscape-west-front-%02d" % i, "west", "front", "sf_lavender_clump",
               "Lavandula angustifolia 'Hidcote'", FRONT_H, (0.80, y))
     clump("landscape-west-front-accent", "west", "front-accent", "flower_heliophila",
-          "Heliophila coronopifolia", (1.10, -24.30),
-          extra="; blue-white accent clump, not drift-counted")
+          "Plumbago auriculata", (1.10, -24.30),
+          extra="; blue-flowered Plumbago look-alike proxy (Heliophila mesh); not drift-counted")
 
     # east (y-27.15..-23.80 along the wall at x=28.557; back near the wall)
     for i, y in enumerate((-24.30, -25.40, -26.50)):
@@ -762,12 +760,12 @@ def build(spec, lay=None):
         props.append(p); plants.append(p)
     # A second perimeter row along the south (building) wall, using the same groundcover-clump species the ground
     # beds use for their yellow/white accents (client: top garden "reads bleak: few thin planters" -- a genuinely
-    # planted garden needs more than one thin edge row). flower_ursinia and sf_garden_flower_clump are flat native
-    # drifts (height << width, see CLUMP_SPREAD/clump()); scaling them down by height (as ordinary potted plants
-    # would be) still leaves them wide, which is right for a low border drift along a wall, not a small pot.
+    # planted garden needs more than one thin edge row). The flower packs are flat native
+    # drifts (height much less than width, see CLUMP_SPREAD/clump()); uniform scaling
+    # keeps them as low border drifts along a wall.
     for pid, bed, asset, species, center, height in (
             ("landscape-top-south-ursinia", "top-deck", "flower_ursinia", "Ursinia anthemoides", (10.20, -23.25), 0.18),
-            ("landscape-top-south-daisy", "top-roof", "sf_garden_flower_clump", "Bellis perennis", (14.00, -22.80), 0.22)):
+            ("landscape-top-south-daisy", "top-roof", "sf_garden_flower_clump", "Bellis perennis", (14.00, -22.80), 0.15)):
         mn_, mx_ = PROP_BOUNDS[asset]
         scale_ = height / (mx_[1] - mn_[1])
         width_ = scale_ * (mx_[0] - mn_[0])

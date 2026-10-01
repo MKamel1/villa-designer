@@ -265,7 +265,7 @@
   "props": [
     {
       "id": "book_encyclopedia_set_01",
-      "role": "desk / nightstand books",
+      "role": "decor-small",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -278,11 +278,50 @@
           0.2374,
           0.101
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/book_encyclopedia_set_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: decor-small",
+        "author": "https://api.polyhaven.com/info/book_encyclopedia_set_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/book_encyclopedia_set_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "desk / nightstand books",
+      "contents": {},
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "John Malcolm",
+      "preview_image": "previews/book_encyclopedia_set_01.png"
     },
     {
       "id": "alarm_clock_01",
-      "role": "bedside table",
+      "role": "decor-small",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -295,11 +334,50 @@
           0.1729,
           0.0425
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/alarm_clock_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: decor-small",
+        "author": "https://api.polyhaven.com/info/alarm_clock_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/alarm_clock_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "bedside table",
+      "contents": {},
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "Yann Kervran, James Ray Cock",
+      "preview_image": "previews/alarm_clock_01.png"
     },
     {
       "id": "brass_vase_03",
-      "role": "decorative surface item",
+      "role": "decor-small",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -312,11 +390,50 @@
           0.2012,
           0.0412
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/brass_vase_03",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: decorative surface item",
+        "author": "https://api.polyhaven.com/info/brass_vase_03: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/brass_vase_03.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "decorative surface item",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "Rico Cilliers",
+      "preview_image": "previews/brass_vase_03.png"
     },
     {
       "id": "potted_plant_04",
-      "role": "desk / windowsill succulent",
+      "role": "indoor-table-plant",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -329,11 +446,55 @@
           0.2678,
           0.1008
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/potted_plant_04",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: desk / windowsill succulent",
+        "author": "https://api.polyhaven.com/info/potted_plant_04: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/potted_plant_04.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "zebra haworthia potted table plant",
+      "species": "Haworthiopsis attenuata",
+      "contents": {
+        "pot": true
+      },
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          0.5,
+          0.5,
+          0.5
+        ],
+        "basis": "species",
+        "source": "https://www.rhs.org.uk/plants/504241/haworthiopsis-attenuata/details",
+        "accessed": "2026-09-30",
+        "reason": "RHS mature species upper bounds; the numbered Poly Haven model is a look-alike appearance proxy, not an identified species scan."
+      },
+      "author": "James Ray Cock",
+      "preview_image": "previews/potted_plant_04.png"
     },
     {
       "id": "potted_plant_01",
-      "role": "floor corner",
+      "role": "indoor-floor-plant",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -346,11 +507,55 @@
           1.3365,
           0.2699
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/potted_plant_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: floor corner",
+        "author": "https://api.polyhaven.com/info/potted_plant_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/potted_plant_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "wavy-leaved potted floor tree look-alike proxy",
+      "species": "Ficus lyrata",
+      "contents": {
+        "pot": true
+      },
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          8.0,
+          1.5
+        ],
+        "basis": "species",
+        "source": "https://www.rhs.org.uk/plants/7207/ficus-lyrata/details",
+        "accessed": "2026-09-30",
+        "reason": "RHS mature species upper bounds; the numbered Poly Haven model is a look-alike appearance proxy, not an identified species scan."
+      },
+      "author": "Rico Cilliers",
+      "preview_image": "previews/potted_plant_01.png"
     },
     {
       "id": "throw_pillows_01",
-      "role": "scanned cushions for the bed",
+      "role": "bedding",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -363,11 +568,50 @@
           0.4481,
           0.3856
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/throw_pillows_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: scanned cushions for the bed",
+        "author": "https://api.polyhaven.com/info/throw_pillows_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/throw_pillows_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "scanned cushions for the bed",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          3,
+          2,
+          3
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "Serhii Khromov",
+      "preview_image": "previews/throw_pillows_01.png"
     },
     {
       "id": "potted_plant_02",
-      "role": "villa: floor plant",
+      "role": "indoor-floor-plant",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -380,11 +624,55 @@
           0.8412,
           0.2371
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/potted_plant_02",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: floor plant",
+        "author": "https://api.polyhaven.com/info/potted_plant_02: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/potted_plant_02.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "veined, variegated potted floor foliage look-alike proxy",
+      "species": "Syngonium podophyllum",
+      "contents": {
+        "pot": true
+      },
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.0,
+          2.5,
+          1.0
+        ],
+        "basis": "species",
+        "source": "https://www.rhs.org.uk/plants/17899/syngonium-podophyllum/details",
+        "accessed": "2026-09-30",
+        "reason": "RHS mature species upper bounds; the numbered Poly Haven model is a look-alike appearance proxy, not an identified species scan."
+      },
+      "author": "Rico Cilliers",
+      "preview_image": "previews/potted_plant_02.png"
     },
     {
       "id": "pachira_aquatica_01",
-      "role": "villa: large floor plant",
+      "role": "indoor-floor-plant",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -397,11 +685,35 @@
           1.8864,
           0.4061
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/pachira_aquatica_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: large floor plant",
+        "author": "https://api.polyhaven.com/info/pachira_aquatica_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/pachira_aquatica_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: large floor plant",
+      "author": "Rob Tuytel, Rico Cilliers",
+      "preview_image": "previews/pachira_aquatica_01.png"
     },
     {
       "id": "calathea_orbifolia_01",
-      "role": "villa: plant",
+      "role": "indoor-table-plant",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -414,11 +726,35 @@
           0.4159,
           0.8781
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/calathea_orbifolia_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: plant",
+        "author": "https://api.polyhaven.com/info/calathea_orbifolia_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/calathea_orbifolia_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: plant",
+      "author": "Rob Tuytel, Rico Cilliers",
+      "preview_image": "previews/calathea_orbifolia_01.png"
     },
     {
       "id": "anthurium_botany_01",
-      "role": "villa: table plant",
+      "role": "indoor-table-plant",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -431,11 +767,35 @@
           0.4893,
           0.6517
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/anthurium_botany_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: table plant",
+        "author": "https://api.polyhaven.com/info/anthurium_botany_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/anthurium_botany_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: table plant",
+      "author": "Rob Tuytel, Rico Cilliers",
+      "preview_image": "previews/anthurium_botany_01.png"
     },
     {
       "id": "ceramic_vase_01",
-      "role": "villa: vase",
+      "role": "decor-small",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -448,11 +808,50 @@
           0.4015,
           0.1018
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/ceramic_vase_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: vase",
+        "author": "https://api.polyhaven.com/info/ceramic_vase_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/ceramic_vase_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: vase",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "James Ray Cock",
+      "preview_image": "previews/ceramic_vase_01.png"
     },
     {
       "id": "ceramic_vase_03",
-      "role": "villa: vase",
+      "role": "decor-small",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -465,16 +864,92 @@
           0.4144,
           0.0561
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/ceramic_vase_03",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: vase",
+        "author": "https://api.polyhaven.com/info/ceramic_vase_03: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/ceramic_vase_03.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: vase",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "James Ray Cock",
+      "preview_image": "previews/ceramic_vase_03.png"
     },
     {
       "id": "decorative_book_set_01",
-      "role": "villa: shelf books",
-      "api": "polyhaven-model"
+      "role": "decor-small",
+      "api": "polyhaven-model",
+      "source_url": "https://polyhaven.com/a/decorative_book_set_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: decor-small",
+        "author": "https://api.polyhaven.com/info/decorative_book_set_01: authors"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "villa: shelf books",
+      "contents": {},
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "James Ray Cock"
     },
     {
       "id": "wooden_bowl_01",
-      "role": "villa: island bowl",
+      "role": "decor-small",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -487,11 +962,50 @@
           0.0942,
           0.1552
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/wooden_bowl_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: island bowl",
+        "author": "https://api.polyhaven.com/info/wooden_bowl_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/wooden_bowl_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: island bowl",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "Oliver Harries",
+      "preview_image": "previews/wooden_bowl_01.png"
     },
     {
       "id": "hanging_picture_frame_01",
-      "role": "villa: wall art",
+      "role": "wall-art",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -504,11 +1018,48 @@
           0.4205,
           0.0159
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/hanging_picture_frame_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "author": "https://api.polyhaven.com/info/hanging_picture_frame_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/hanging_picture_frame_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "villa: wall art",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          3,
+          3,
+          0.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "James Ray Cock",
+      "preview_image": "previews/hanging_picture_frame_01.png",
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified preview 2026-09-30"
     },
     {
       "id": "hanging_picture_frame_02",
-      "role": "villa: wall art",
+      "role": "wall-art",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -521,11 +1072,46 @@
           0.2214,
           0.0351
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/hanging_picture_frame_02",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "author": "https://api.polyhaven.com/info/hanging_picture_frame_02: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/hanging_picture_frame_02.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "villa: wall art",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          3,
+          3,
+          0.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "James Ray Cock",
+      "preview_image": "previews/hanging_picture_frame_02.png"
     },
     {
       "id": "standing_picture_frame_01",
-      "role": "villa: shelf frame",
+      "role": "decor-small",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -538,11 +1124,50 @@
           0.2492,
           0.1004
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/standing_picture_frame_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: decor-small",
+        "author": "https://api.polyhaven.com/info/standing_picture_frame_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/standing_picture_frame_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "villa: shelf frame",
+      "contents": {},
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.5,
+          1.5,
+          1.5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "James Ray Cock",
+      "preview_image": "previews/standing_picture_frame_01.png"
     },
     {
       "id": "shrub_01",
-      "role": "villa: garden shrub",
+      "role": "shrub",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -555,11 +1180,36 @@
           0.3872,
           0.1047
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/shrub_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: garden shrub",
+        "author": "https://api.polyhaven.com/info/shrub_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/shrub_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: garden shrub",
+      "contents": {},
+      "author": "Rico Cilliers",
+      "preview_image": "previews/shrub_01.png"
     },
     {
       "id": "shrub_03",
-      "role": "villa: garden shrub",
+      "role": "shrub",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -572,11 +1222,36 @@
           0.401,
           0.0785
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/shrub_03",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: garden shrub",
+        "author": "https://api.polyhaven.com/info/shrub_03: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/shrub_03.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: garden shrub",
+      "contents": {},
+      "author": "Rico Cilliers",
+      "preview_image": "previews/shrub_03.png"
     },
     {
       "id": "planter_box_01",
-      "role": "villa: terrace planter",
+      "role": "planter",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -589,11 +1264,50 @@
           0.425,
           0.2065
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/planter_box_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: villa: terrace planter",
+        "author": "https://api.polyhaven.com/info/planter_box_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/planter_box_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "villa: terrace planter",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          4,
+          3,
+          4
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "James Ray Cock",
+      "preview_image": "previews/planter_box_01.png"
     },
     {
       "id": "jacaranda_tree",
-      "role": "shade tree (Cairo street tree; olive/citrus not available as CC0 models)",
+      "role": "shade-tree",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -606,11 +1320,36 @@
           19.3223,
           9.2008
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/jacaranda_tree",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shade tree (Cairo street tree; olive/citrus not available as CC0 models)",
+        "author": "https://api.polyhaven.com/info/jacaranda_tree: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/jacaranda_tree.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "shade tree (Cairo street tree; olive/citrus not available as CC0 models)",
+      "contents": {},
+      "author": "Rob Tuytel, Rico Cilliers",
+      "preview_image": "previews/jacaranda_tree.png"
     },
     {
       "id": "tree_small_02",
-      "role": "small garden tree (stand-in for citrus)",
+      "role": "small-tree",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -623,11 +1362,36 @@
           4.5326,
           2.9099
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/tree_small_02",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: small garden tree (stand-in for citrus)",
+        "author": "https://api.polyhaven.com/info/tree_small_02: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/tree_small_02.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "small garden tree (stand-in for citrus)",
+      "contents": {},
+      "author": "Rico Cilliers",
+      "preview_image": "previews/tree_small_02.png"
     },
     {
       "id": "searsia_lucida",
-      "role": "evergreen Mediterranean-type shrub",
+      "role": "shrub",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -640,11 +1404,36 @@
           2.3148,
           1.253
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/searsia_lucida",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: evergreen Mediterranean-type shrub",
+        "author": "https://api.polyhaven.com/info/searsia_lucida: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/searsia_lucida.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "evergreen Mediterranean-type shrub",
+      "contents": {},
+      "author": "James Ray Cock, Jenelle van Heerden",
+      "preview_image": "previews/searsia_lucida.png"
     },
     {
       "id": "grass_medium_01",
-      "role": "ornamental grass",
+      "role": "ornamental-grass",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -657,11 +1446,36 @@
           0.317,
           0.1689
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/grass_medium_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: ornamental grass",
+        "author": "https://api.polyhaven.com/info/grass_medium_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/grass_medium_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "ornamental grass",
+      "contents": {},
+      "author": "Rob Tuytel, Rico Cilliers",
+      "preview_image": "previews/grass_medium_01.png"
     },
     {
       "id": "grass_medium_02",
-      "role": "ornamental grass",
+      "role": "ornamental-grass",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -674,11 +1488,36 @@
           0.3998,
           0.2578
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/grass_medium_02",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: ornamental grass",
+        "author": "https://api.polyhaven.com/info/grass_medium_02: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/grass_medium_02.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "ornamental grass",
+      "contents": {},
+      "author": "Rico Cilliers",
+      "preview_image": "previews/grass_medium_02.png"
     },
     {
       "id": "flower_gazania",
-      "role": "drought-tolerant ground cover",
+      "role": "groundcover",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -691,11 +1530,54 @@
           0.2581,
           0.3803
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/flower_gazania",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: drought-tolerant ground cover",
+        "author": "https://api.polyhaven.com/info/flower_gazania: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/flower_gazania.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "drought-tolerant ground cover",
+      "contents": {},
+      "species": "Gazania rigens",
+      "expected_size_range": {
+        "min_m": [
+          null,
+          0,
+          null
+        ],
+        "max_m": [
+          null,
+          0.3048,
+          null
+        ],
+        "basis": "species",
+        "source": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=277558",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "placed_scale": 0.62703787,
+      "placed_scale_reason": "villa_landscape._prop uniformly scales the measured 0.3987 m native clump to 0.25 m placed height; node inspection remains due on workstation",
+      "author": "James Ray Cock, Jenelle van Heerden",
+      "preview_image": "previews/flower_gazania.png"
     },
     {
       "id": "periwinkle_plant",
-      "role": "ground cover",
+      "role": "groundcover",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -708,11 +1590,36 @@
           0.4107,
           0.1305
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/periwinkle_plant",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: ground cover",
+        "author": "https://api.polyhaven.com/info/periwinkle_plant: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/periwinkle_plant.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "ground cover",
+      "contents": {},
+      "author": "Amal Kumar",
+      "preview_image": "previews/periwinkle_plant.png"
     },
     {
       "id": "wild_rooibos_bush",
-      "role": "fine-leaved shrub",
+      "role": "shrub",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -725,7 +1632,32 @@
           0.5389,
           0.3064
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/wild_rooibos_bush",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: fine-leaved shrub",
+        "author": "https://api.polyhaven.com/info/wild_rooibos_bush: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/wild_rooibos_bush.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "fine-leaved shrub",
+      "contents": {},
+      "author": "James Ray Cock, Jenelle van Heerden",
+      "preview_image": "previews/wild_rooibos_bush.png"
     },
     {
       "id": "shrub_02",
@@ -742,7 +1674,32 @@
           1.9417,
           1.3448
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/shrub_02",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shrub",
+        "author": "https://api.polyhaven.com/info/shrub_02: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/shrub_02.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "contents": {},
+      "use": "shrub",
+      "author": "Rico Cilliers",
+      "preview_image": "previews/shrub_02.png"
     },
     {
       "id": "shrub_04",
@@ -759,11 +1716,36 @@
           0.2133,
           0.0711
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/shrub_04",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shrub",
+        "author": "https://api.polyhaven.com/info/shrub_04: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/shrub_04.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "contents": {},
+      "use": "shrub",
+      "author": "Rico Cilliers",
+      "preview_image": "previews/shrub_04.png"
     },
     {
       "id": "boulder_01",
-      "role": "garden boulder",
+      "role": "boulder",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -776,11 +1758,50 @@
           0.9302,
           0.8819
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/boulder_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: boulder",
+        "author": "https://api.polyhaven.com/info/boulder_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/boulder_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "garden boulder",
+      "contents": {},
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          5,
+          5,
+          5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "Rico Cilliers",
+      "preview_image": "previews/boulder_01.png"
     },
     {
       "id": "namaqualand_stones_01",
-      "role": "stone scatter",
+      "role": "boulder",
       "api": "polyhaven-model",
       "bounds_m": {
         "min": [
@@ -793,7 +1814,46 @@
           0.0817,
           0.0547
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/namaqualand_stones_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "licence": "https://polyhaven.com/license",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: boulder",
+        "author": "https://api.polyhaven.com/info/namaqualand_stones_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/namaqualand_stones_01.png: Blender neutral preview"
+      },
+      "licence": "CC0",
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "stone scatter",
+      "contents": {},
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          5,
+          5,
+          5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "Greg Zaal, Jenelle van Heerden",
+      "preview_image": "previews/namaqualand_stones_01.png"
     },
     {
       "id": "sf_bauhinia",
@@ -803,7 +1863,7 @@
       "author_url": "https://sketchfab.com/PlantCatalog",
       "licence": "CC Attribution",
       "credit": "Realistic HD Hong Kong orchid tree (1/40) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-hong-kong-orchid-tree-140-fbf6df7e95cf40729baef28850911bae), CC Attribution",
-      "role": "shade tree",
+      "role": "shade-tree",
       "faces": 103956,
       "bounds_m": {
         "min": [
@@ -818,7 +1878,58 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/realistic-hd-hong-kong-orchid-tree-140-fbf6df7e95cf40729baef28850911bae",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shade tree",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_bauhinia.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "shade tree",
+      "contents": {},
+      "species": "Bauhinia variegata",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          10.668,
+          12.192,
+          10.668
+        ],
+        "basis": "species",
+        "source": "https://ask.ifas.ufl.edu/st092",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py.",
+        "accessed": "2026-09-30",
+        "published_size": "UF/IFAS ENH251/ST092: height 20-40 ft; spread 25-35 ft"
+      },
+      "preview_image": "previews/sf_bauhinia.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        3.871,
+        3.7376,
+        3.789
+      ],
+      "placement_scale_factors": [
+        0.775898973
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "placed_scale": 0.775898973,
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_bottlebrush",
@@ -843,7 +1954,56 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/realistic-hd-bottlebrush-laevis-620-104731eec57147b5b47215a1214d8cf1",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shrub",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_bottlebrush.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "contents": {},
+      "use": "shrub",
+      "species": "Callistemon citrinus",
+      "expected_size_range": {
+        "min_m": [
+          2.5,
+          4,
+          2.5
+        ],
+        "max_m": [
+          4,
+          8,
+          4
+        ],
+        "basis": "species",
+        "source": "https://www.rhs.org.uk/plants/2687/callistemon-citrinus/details",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_bottlebrush.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        0.7887,
+        0.6842,
+        0.5857
+      ],
+      "placement_scale_factors": [
+        1.315404852
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "placed_scale": 1.315404852,
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_bougainvillea",
@@ -853,7 +2013,7 @@
       "author_url": "https://sketchfab.com/BenisonS",
       "licence": "CC Attribution",
       "credit": "Bougainvillea by BenisonS (https://sketchfab.com/3d-models/bougainvillea-02fd760652ab48b085c5d46cf9d89676), CC Attribution",
-      "role": "bougainvillea shrub",
+      "role": "climber",
       "faces": 163748,
       "bounds_m": {
         "min": [
@@ -868,7 +2028,56 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/bougainvillea-02fd760652ab48b085c5d46cf9d89676",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: bougainvillea shrub",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_bougainvillea.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "bougainvillea shrub",
+      "contents": {},
+      "species": "Bougainvillea glabra",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          4,
+          8,
+          4
+        ],
+        "basis": "species",
+        "source": "https://www.rhs.org.uk/plants/91850/bougainvillea-glabra/details",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_bougainvillea.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        0.6985,
+        0.408,
+        1.0801
+      ],
+      "placement_scale_factors": [
+        1.470588235,
+        1.225490196,
+        0.980392157
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_chelsea_bed",
@@ -878,7 +2087,7 @@
       "author_url": "https://sketchfab.com/bertosalotti",
       "licence": "CC Attribution",
       "credit": "Chelsea bed with storage - 3D Model by bertosalotti (https://sketchfab.com/3d-models/chelsea-bed-with-storage-3d-model-cbe6e0dcc10a414a84acc5cc08171b87), CC Attribution",
-      "role": "parents' bed",
+      "role": "bed",
       "faces": 105298,
       "bounds_m": {
         "min": [
@@ -895,7 +2104,33 @@
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
       "manual_fetch": "ops/workstation/fetch_sketchfab.py",
       "front_axis": "+Z",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://sketchfab.com/3d-models/chelsea-bed-with-storage-3d-model-cbe6e0dcc10a414a84acc5cc08171b87",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_chelsea_bed.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "use": "parents' bed",
+      "expected_size_range": {
+        "min_m": [
+          1.05,
+          0.95,
+          2.14
+        ],
+        "max_m": [
+          2,
+          1.03,
+          2.24
+        ],
+        "basis": "product",
+        "source": "https://www.bertosalotti.it/letto_moderno/letto-matrimoniale-imbottito-con-contenitore-chelsea.html"
+      },
+      "preview_image": "previews/sf_chelsea_bed.png"
     },
     {
       "id": "sf_cinema_sofa_velvet",
@@ -905,7 +2140,7 @@
       "author_url": "https://sketchfab.com/nghihuutr",
       "licence": "CC Attribution",
       "credit": "Luxury Modern Couch - Black by nghihuutr (https://sketchfab.com/3d-models/luxury-modern-couch-black-d8e81d75f05b45b6b1cc7ce2563eaabb), CC Attribution",
-      "role": "media-room sofa",
+      "role": "sofa",
       "faces": 224674,
       "bounds_m": {
         "min": [
@@ -922,7 +2157,23 @@
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
       "manual_fetch": "ops/workstation/fetch_sketchfab.py",
       "front_axis": "+Z",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://sketchfab.com/3d-models/luxury-modern-couch-black-d8e81d75f05b45b6b1cc7ce2563eaabb",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "contents": "C:\\Users\\mmbka\\arch-pipeline\\out\\villa\\round3\\stage-props\\sf_cinema_sofa_velvet\\model.gltf: node, mesh and material names",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_cinema_sofa_velvet.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "contents": {
+        "bedding": true
+      },
+      "use": "media-room sofa",
+      "preview_image": "previews/sf_cinema_sofa_velvet.png"
     },
     {
       "id": "sf_dining_chair_boucle",
@@ -932,7 +2183,7 @@
       "author_url": "https://sketchfab.com/burakbudakdesign",
       "licence": "CC Attribution",
       "credit": "Modern Bouclé Wooden Chair by burakbudakdesign (https://sketchfab.com/3d-models/modern-boucle-wooden-chair-47fc798d59d1442d9922e034ed9565d4), CC Attribution",
-      "role": "dining chair (8-seat table)",
+      "role": "dining-chair",
       "faces": 14842,
       "bounds_m": {
         "min": [
@@ -949,7 +2200,20 @@
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
       "manual_fetch": "ops/workstation/fetch_sketchfab.py",
       "front_axis": "+Z",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://sketchfab.com/3d-models/modern-boucle-wooden-chair-47fc798d59d1442d9922e034ed9565d4",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_dining_chair_boucle.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "use": "dining chair (8-seat table)",
+      "contents": {},
+      "preview_image": "previews/sf_dining_chair_boucle.png"
     },
     {
       "id": "sf_egg_chair",
@@ -959,7 +2223,7 @@
       "author_url": "https://sketchfab.com/Average3DmodelEnjoyer",
       "licence": "CC Attribution",
       "credit": "Hanging Egg Chair by Average3DmodelEnjoyer (https://sketchfab.com/3d-models/hanging-egg-chair-bfbf84c34eee467389c4feaddcef2023), CC Attribution",
-      "role": "garden egg swing",
+      "role": "egg-swing",
       "faces": 69928,
       "bounds_m": {
         "min": [
@@ -974,7 +2238,52 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/hanging-egg-chair-bfbf84c34eee467389c4feaddcef2023",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_egg_chair.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "use": "garden egg swing",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          3,
+          3,
+          3
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "preview_image": "previews/sf_egg_chair.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        1.4611,
+        1.9846,
+        1.4224
+      ],
+      "placement_scale_factors": [
+        1.002720951
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "placed_scale": 1.002720951,
+      "front_axis": "+Z",
+      "front_axis_basis": "lead-verified preview 2026-09-30",
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_frangipani",
@@ -984,7 +2293,7 @@
       "author_url": "https://sketchfab.com/PlantCatalog",
       "licence": "CC Attribution",
       "credit": "Realistic HD Frangipani tree (13/50) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-1350-6afe1892d9fb419993cdfe54721110e9), CC Attribution",
-      "role": "small tree",
+      "role": "small-tree",
       "faces": 83887,
       "bounds_m": {
         "min": [
@@ -999,7 +2308,56 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-1350-6afe1892d9fb419993cdfe54721110e9",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: small tree",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_frangipani.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "small tree",
+      "contents": {},
+      "species": "Plumeria rubra",
+      "expected_size_range": {
+        "min_m": [
+          4.572,
+          4.572,
+          4.572
+        ],
+        "max_m": [
+          7.62,
+          7.62,
+          7.62
+        ],
+        "basis": "species",
+        "source": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?kempercode=d451",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_frangipani.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        3.8856,
+        2.7685,
+        3.537
+      ],
+      "placement_scale_factors": [
+        0.830774788
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "placed_scale": 0.830774788,
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_garden_flower_clump",
@@ -1009,7 +2367,7 @@
       "author_url": "https://sketchfab.com/evolveduk",
       "licence": "CC Attribution",
       "credit": "Daisies by evolveduk (https://sketchfab.com/3d-models/daisies-c914e2eb8bab46e0b60b891aa4b125fe), CC Attribution",
-      "role": "low colourful garden flower clump (gazania/pentas filler)",
+      "role": "groundcover",
       "faces": 23120,
       "bounds_m": {
         "min": [
@@ -1024,7 +2382,54 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/daisies-c914e2eb8bab46e0b60b891aa4b125fe",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: low colourful garden flower clump (gazania/pentas filler)",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_garden_flower_clump.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "low colourful garden flower clump (gazania/pentas filler)",
+      "contents": {},
+      "species": "Bellis perennis",
+      "expected_size_range": {
+        "min_m": [
+          null,
+          0,
+          null
+        ],
+        "max_m": [
+          null,
+          0.1524,
+          null
+        ],
+        "basis": "species",
+        "source": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=277170",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_garden_flower_clump.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        4.288,
+        0.8324,
+        4.4198
+      ],
+      "placement_scale_factors": [
+        0.180201826
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_hibiscus",
@@ -1049,7 +2454,56 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/realistic-hd-chinese-hibiscus-620-805e6e8c0dad4860970a1588827a8c5a",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shrub",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_hibiscus.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "contents": {},
+      "use": "shrub",
+      "species": "Hibiscus rosa-sinensis",
+      "expected_size_range": {
+        "min_m": [
+          null,
+          0,
+          null
+        ],
+        "max_m": [
+          null,
+          3.7,
+          null
+        ],
+        "basis": "species",
+        "source": "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=b557",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_hibiscus.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        1.1277,
+        1.0144,
+        0.9363
+      ],
+      "placement_scale_factors": [
+        0.985804416
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "placed_scale": 0.985804416,
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_ixora",
@@ -1074,7 +2528,57 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/realistic-hd-chinese-jungle-geranium-210-268a0cc517c24094b66b27b6b8047d7c",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shrub",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_ixora.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "contents": {},
+      "use": "shrub",
+      "species": "Ixora coccinea",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          1.524,
+          1.8288,
+          1.524
+        ],
+        "basis": "species",
+        "source": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=286675",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_ixora.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        1.2227,
+        0.8614,
+        1.2444
+      ],
+      "placement_scale_factors": [
+        1.160900859,
+        0.696540515,
+        0.928720687,
+        0.638495472
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_jacaranda",
@@ -1084,7 +2588,7 @@
       "author_url": "https://sketchfab.com/PlantCatalog",
       "licence": "CC Attribution",
       "credit": "Realistic HD Blue jacaranda (9/40) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-940-e40bd12a6a1a4eb7a71bf2e8c2e671af), CC Attribution",
-      "role": "shade tree",
+      "role": "shade-tree",
       "faces": 282308,
       "bounds_m": {
         "min": [
@@ -1099,7 +2603,24 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/realistic-hd-blue-jacaranda-940-e40bd12a6a1a4eb7a71bf2e8c2e671af",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shade tree",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_jacaranda.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "shade tree",
+      "contents": {},
+      "preview_image": "previews/sf_jacaranda.png"
     },
     {
       "id": "sf_kidschair_oak",
@@ -1109,7 +2630,7 @@
       "author_url": "https://sketchfab.com/iJacques",
       "licence": "CC Attribution",
       "credit": "Soborg Oak Wooden Chair by iJacques (https://sketchfab.com/3d-models/soborg-oak-wooden-chair-b905d354b1554d4399db1db5346ce895), CC Attribution",
-      "role": "kids' desk chair (Scandinavian light oak) -- no matching desk found",
+      "role": "task-chair",
       "faces": 42976,
       "bounds_m": {
         "min": [
@@ -1126,7 +2647,34 @@
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
       "manual_fetch": "ops/workstation/fetch_sketchfab.py",
       "front_axis": "+Z",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://sketchfab.com/3d-models/soborg-oak-wooden-chair-b905d354b1554d4399db1db5346ce895",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_kidschair_oak.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "use": "kids' desk chair (Scandinavian light oak) -- no matching desk found",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0.51,
+          0.8,
+          0.485
+        ],
+        "max_m": [
+          0.51,
+          0.8,
+          0.485
+        ],
+        "basis": "product",
+        "source": "https://www.fredericia.com/product/soborg-wood-base-3050-3050224856"
+      },
+      "preview_image": "previews/sf_kidschair_oak.png"
     },
     {
       "id": "sf_lavender_clump",
@@ -1136,7 +2684,7 @@
       "author_url": "https://sketchfab.com/MoraySmile",
       "licence": "CC Attribution",
       "credit": "Lavender by MoraySmile (https://sketchfab.com/3d-models/lavender-e5217f0ca2ac4cff933d8136af309ad5), CC Attribution",
-      "role": "lavender clump",
+      "role": "shrub",
       "faces": 7589,
       "bounds_m": {
         "min": [
@@ -1151,7 +2699,55 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/lavender-e5217f0ca2ac4cff933d8136af309ad5",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shrub",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_lavender_clump.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "use": "lavender clump",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "contents": {},
+      "species": "Lavandula angustifolia 'Hidcote'",
+      "expected_size_range": {
+        "min_m": [
+          null,
+          0,
+          null
+        ],
+        "max_m": [
+          null,
+          0.6,
+          null
+        ],
+        "basis": "species",
+        "source": "https://www.rhs.org.uk/plants/96353/lavandula-angustifolia-hidcote/details",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_lavender_clump.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        1.6946,
+        3.8738,
+        1.6946
+      ],
+      "placement_scale_factors": [
+        0.129072229,
+        0.12390934
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_lemon_tree",
@@ -1161,7 +2757,7 @@
       "author_url": "https://sketchfab.com/PlantCatalog",
       "licence": "CC Attribution",
       "credit": "Realistic HD Lemon tree (20/30) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-lemon-tree-2030-8f24ad853a184d6ea4b6ac310d2fb639), CC Attribution",
-      "role": "small tree",
+      "role": "small-tree",
       "faces": 278918,
       "bounds_m": {
         "min": [
@@ -1176,7 +2772,56 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/realistic-hd-lemon-tree-2030-8f24ad853a184d6ea4b6ac310d2fb639",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: small tree",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_lemon_tree.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "small tree",
+      "contents": {},
+      "species": "Citrus limon",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          null,
+          0
+        ],
+        "max_m": [
+          4.6,
+          null,
+          4.6
+        ],
+        "basis": "species",
+        "source": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=286755",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_lemon_tree.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        4.0604,
+        3.0906,
+        3.8517
+      ],
+      "placement_scale_factors": [
+        0.452986475
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "placed_scale": 0.452986475,
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_minotti_aston_armchair",
@@ -1201,7 +2846,34 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/minotti-aston-armchair-d9716970474b42eaaf49d8156ffd1c65",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_minotti_aston_armchair.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "contents": {},
+      "use": "armchair",
+      "expected_size_range": {
+        "min_m": [
+          0.74,
+          0.75,
+          0.84
+        ],
+        "max_m": [
+          0.74,
+          0.75,
+          0.84
+        ],
+        "basis": "product",
+        "source": "https://www.minotti.com/downloads/540/1358/ASTON_TECHNICAL_SHEET.pdf"
+      },
+      "preview_image": "previews/sf_minotti_aston_armchair.png"
     },
     {
       "id": "sf_minotti_sofa",
@@ -1210,8 +2882,8 @@
       "author": "alejxbailey",
       "author_url": "https://sketchfab.com/alejxbailey",
       "licence": "CC Attribution",
-      "credit": "Sofa-minotti by alejxbailey (https://sketchfab.com/3d-models/sofa-minotti-e1422bbf699246b386f0ae6e37d9c635), CC Attribution",
-      "role": "garden-living sofa",
+      "credit": "Minotti-style sofa (unidentified model), Sketchfab asset Sofa-minotti by alejxbailey (https://sketchfab.com/3d-models/sofa-minotti-e1422bbf699246b386f0ae6e37d9c635), CC Attribution",
+      "role": "sofa",
       "faces": 262118,
       "bounds_m": {
         "min": [
@@ -1228,7 +2900,30 @@
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
       "manual_fetch": "ops/workstation/fetch_sketchfab.py",
       "front_axis": "+Z",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://sketchfab.com/3d-models/sofa-minotti-e1422bbf699246b386f0ae6e37d9c635",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "src/archpipe/concept/villa_furnish.py:product",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_minotti_sofa.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 0.01,
+        "reason": "villa_furnish.product applies 0.01, inferred centimetres from 295.8562 native X units"
+      },
+      "use": "Minotti-style sofa (unidentified model), garden living",
+      "contents": {},
+      "size_override": {
+        "reason": "Large garden-living sofa accepted at its measured 2.9586 m width; real footprint passes layout clearance checks despite Mitton & Nystuen Fig. 4.3 generic 2.49 m maximum.",
+        "decided_by": "lead",
+        "date": "2026-09-30"
+      },
+      "preview_image": "previews/sf_minotti_sofa.png"
     },
     {
       "id": "sf_modern_low_sofa",
@@ -1238,7 +2933,7 @@
       "author_url": "https://sketchfab.com/avilov",
       "licence": "CC Attribution",
       "credit": "Мodern sofa by avilov (https://sketchfab.com/3d-models/odern-sofa-dfed5023ec614799a68d392a6a4199ed), CC Attribution",
-      "role": "lounge / cinema sofa",
+      "role": "sofa",
       "faces": 100657,
       "bounds_m": {
         "min": [
@@ -1255,7 +2950,20 @@
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
       "manual_fetch": "ops/workstation/fetch_sketchfab.py",
       "front_axis": "+Z",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://sketchfab.com/3d-models/odern-sofa-dfed5023ec614799a68d392a6a4199ed",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_modern_low_sofa.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "use": "lounge / cinema sofa",
+      "contents": {},
+      "preview_image": "previews/sf_modern_low_sofa.png"
     },
     {
       "id": "sf_olive_old",
@@ -1265,7 +2973,7 @@
       "author_url": "https://sketchfab.com/massive-graphisme",
       "licence": "CC Attribution",
       "credit": "Old olive tree by massive-graphisme (https://sketchfab.com/3d-models/old-olive-tree-6328df8a0f214143a880a72b86db2ab4), CC Attribution",
-      "role": "specimen tree",
+      "role": "shade-tree",
       "faces": 67438,
       "bounds_m": {
         "min": [
@@ -1280,7 +2988,56 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/old-olive-tree-6328df8a0f214143a880a72b86db2ab4",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: specimen tree",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_olive_old.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "specimen tree",
+      "contents": {},
+      "species": "Olea europaea",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          9,
+          9,
+          9
+        ],
+        "basis": "species",
+        "source": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=283004",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+      },
+      "preview_image": "previews/sf_olive_old.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        5.2566,
+        4.606,
+        5.6497
+      ],
+      "placement_scale_factors": [
+        0.43421624
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "placed_scale": 0.43421624,
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
     },
     {
       "id": "sf_probber_cane_armchair",
@@ -1290,7 +3047,7 @@
       "author_url": "https://sketchfab.com/eireni",
       "licence": "CC Attribution",
       "credit": "Midcentury Harvey Probber Armchair by eireni (https://sketchfab.com/3d-models/midcentury-harvey-probber-armchair-e54f711755a54b119b364fe6fcbfd821), CC Attribution",
-      "role": "lounge armchair",
+      "role": "armchair",
       "faces": 7062,
       "bounds_m": {
         "min": [
@@ -1307,7 +3064,36 @@
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
       "manual_fetch": "ops/workstation/fetch_sketchfab.py",
       "front_axis": "-Z",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://sketchfab.com/3d-models/midcentury-harvey-probber-armchair-e54f711755a54b119b364fe6fcbfd821",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_probber_cane_armchair.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models"
+      },
+      "up_axis": "+Y",
+      "use": "lounge armchair",
+      "contents": {},
+      "preview_image": "previews/sf_probber_cane_armchair.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion to native coordinates; furniture fitting uses a separate placement scale because native units are ambiguous."
+      },
+      "native_extent_xyz": [
+        73.1426,
+        65.7314,
+        61.3987
+      ],
+      "placement_scale_factors": [
+        0.012931414818
+      ],
+      "placed_scale": 0.012931414818488578,
+      "placement_scale_source": "src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models",
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models"
     },
     {
       "id": "sf_royal_poinciana",
@@ -1317,7 +3103,7 @@
       "author_url": "https://sketchfab.com/PlantCatalog",
       "licence": "CC Attribution",
       "credit": "Realistic HD Royal poinciana (17/40) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1740-066ca51810ad483aa34ef738c0b7ae6a), CC Attribution",
-      "role": "shade tree",
+      "role": "shade-tree",
       "faces": 323555,
       "bounds_m": {
         "min": [
@@ -1332,7 +3118,24 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/realistic-hd-royal-poinciana-1740-066ca51810ad483aa34ef738c0b7ae6a",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: shade tree",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_royal_poinciana.png: Blender neutral preview"
+      },
+      "up_axis": "+Y",
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "shade tree",
+      "contents": {},
+      "preview_image": "previews/sf_royal_poinciana.png"
     },
     {
       "id": "sf_rug_round_jute",
@@ -1342,7 +3145,7 @@
       "author_url": "https://sketchfab.com/tim.a.schmitz",
       "licence": "CC Attribution",
       "credit": "Homerugs Jute Carpet Round Orange by tim.a.schmitz (https://sketchfab.com/3d-models/homerugs-jute-carpet-round-orange-91191da74305402c8527c58368c6508a), CC Attribution",
-      "role": "round jute/wool rug",
+      "role": "rug",
       "faces": 4066436,
       "bounds_m": {
         "min": [
@@ -1359,7 +3162,52 @@
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
       "manual_fetch": "ops/workstation/fetch_sketchfab.py",
       "front_axis": "none",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://sketchfab.com/3d-models/homerugs-jute-carpet-round-orange-91191da74305402c8527c58368c6508a",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "front_axis_reason": "role: rug",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_rug_round_jute.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models"
+      },
+      "up_axis": "+Y",
+      "use": "round jute/wool rug",
+      "contents": {},
+      "front_axis_reason": "display object has no functional front",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          10,
+          0.3,
+          10
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "preview_image": "previews/sf_rug_round_jute.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion to native coordinates; furniture fitting uses a separate placement scale because native units are ambiguous."
+      },
+      "native_extent_xyz": [
+        36.0668,
+        0.7735,
+        36.156
+      ],
+      "placement_scale_factors": [
+        0.066543192077
+      ],
+      "placed_scale": 0.06654319207692391,
+      "placement_scale_source": "src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models",
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models"
     },
     {
       "id": "sf_wooden_bench",
@@ -1369,7 +3217,7 @@
       "author_url": "https://sketchfab.com/marcosnegrao",
       "licence": "CC Attribution",
       "credit": "Modern Wooden Bench – Low Poly / Free by marcosnegrao (https://sketchfab.com/3d-models/modern-wooden-bench-low-poly-free-84813ace7a3a4f1bbf17526d3e83e413), CC Attribution",
-      "role": "top-garden bench",
+      "role": "bench-outdoor",
       "faces": 16934,
       "bounds_m": {
         "min": [
@@ -1384,12 +3232,60 @@
         ]
       },
       "units_note": "native units vary; always scaled uniformly into the checked footprint",
-      "manual_fetch": "ops/workstation/fetch_sketchfab.py"
+      "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+      "source_url": "https://sketchfab.com/3d-models/modern-wooden-bench-low-poly-free-84813ace7a3a4f1bbf17526d3e83e413",
+      "intake_sources": {
+        "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+        "author": "fetch_sketchfab.py recorded API metadata",
+        "licence": "fetch_sketchfab.py recorded API metadata",
+        "credit": "fetch_sketchfab.py recorded API metadata",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/sf_wooden_bench.png: Blender neutral preview",
+        "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:build (BENCH_LENGTH_M/BENCH_HEIGHT_M over native extents); src/archpipe/blender/villa_scene.py:import_props"
+      },
+      "up_axis": "+Y",
+      "use": "top-garden bench",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          5,
+          2,
+          5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "preview_image": "previews/sf_wooden_bench.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+      },
+      "native_extent_xyz": [
+        0.8052,
+        0.4778,
+        3.5797
+      ],
+      "placement_scale_factors": [
+        [
+          0.502835433,
+          0.502835433,
+          0.837170364
+        ]
+      ],
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:build (BENCH_LENGTH_M/BENCH_HEIGHT_M over native extents); src/archpipe/blender/villa_scene.py:import_props",
+      "front_axis": "none",
+      "front_axis_basis": "lead-verified preview 2026-09-30",
+      "front_axis_reason": "Backless symmetric bench has no functional front."
     },
     {
       "id": "outdoor_table_chair_set_01",
       "url": "https://polyhaven.com/a/outdoor_table_chair_set_01",
-      "role": "garden bistro table and chairs",
+      "role": "bistro-set",
       "licence": "CC0",
       "bounds_m": {
         "min": [
@@ -1402,12 +3298,48 @@
           0.8526,
           0.9217
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/outdoor_table_chair_set_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "author": "https://api.polyhaven.com/info/outdoor_table_chair_set_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/outdoor_table_chair_set_01.png: Blender neutral preview"
+      },
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "garden bistro table and chairs",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          5,
+          2,
+          5
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "James Ray Cock",
+      "preview_image": "previews/outdoor_table_chair_set_01.png",
+      "front_axis": "none",
+      "front_axis_basis": "lead-verified preview 2026-09-30",
+      "front_axis_reason": "Table and surrounding chairs face each other; set has no single front."
     },
     {
       "id": "flower_ursinia",
       "url": "https://polyhaven.com/a/flower_ursinia",
-      "role": "garden groundcover colour",
+      "role": "groundcover",
       "licence": "CC0",
       "bounds_m": {
         "min": [
@@ -1420,12 +3352,53 @@
           0.1623,
           0.2027
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/flower_ursinia",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: garden groundcover colour",
+        "author": "https://api.polyhaven.com/info/flower_ursinia: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/flower_ursinia.png: Blender neutral preview"
+      },
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "garden groundcover colour",
+      "contents": {},
+      "species": "Ursinia anthemoides",
+      "expected_size_range": {
+        "min_m": [
+          null,
+          0.1,
+          null
+        ],
+        "max_m": [
+          null,
+          0.5,
+          null
+        ],
+        "basis": "species",
+        "source": "https://www.rhs.org.uk/plants/161741/ursinia-anthemoides/details",
+        "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py.",
+        "accessed": "2026-09-30",
+        "published_size": "RHS: max height 0.1-0.5 m; max spread 0.1-0.5 m; multi-plant clump width is checked against spacing"
+      },
+      "author": "Jenelle van Heerden, Rico Cilliers",
+      "preview_image": "previews/flower_ursinia.png"
     },
     {
       "id": "flower_heliophila",
       "url": "https://polyhaven.com/a/flower_heliophila",
-      "role": "garden groundcover colour",
+      "role": "groundcover",
       "licence": "CC0",
       "bounds_m": {
         "min": [
@@ -1438,12 +3411,51 @@
           0.3944,
           0.7943
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/flower_heliophila",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: garden groundcover colour",
+        "author": "https://api.polyhaven.com/info/flower_heliophila: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/flower_heliophila.png: Blender neutral preview"
+      },
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "blue-flowered Plumbago auriculata look-alike proxy; Heliophila model is appearance only",
+      "contents": {},
+      "species": "Plumbago auriculata",
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          3.048,
+          2.1336,
+          3.048
+        ],
+        "basis": "species",
+        "source": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?kempercode=a542",
+        "reason": "MOBOT Plumbago species card; the Heliophila mesh is an explicitly labelled blue-flowered look-alike proxy pending reviewed asset replacement."
+      },
+      "author": "Jenelle van Heerden",
+      "preview_image": "previews/flower_heliophila.png"
     },
     {
       "id": "didelta_spinosa",
       "url": "https://polyhaven.com/a/didelta_spinosa",
-      "role": "garden low shrub",
+      "role": "shrub",
       "licence": "CC0",
       "bounds_m": {
         "min": [
@@ -1456,12 +3468,35 @@
           1.9722,
           1.8699
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/didelta_spinosa",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "front_axis": "nondirectional role recorded in manifest",
+        "front_axis_reason": "role: garden low shrub",
+        "author": "https://api.polyhaven.com/info/didelta_spinosa: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/didelta_spinosa.png: Blender neutral preview"
+      },
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "front_axis": "none",
+      "front_axis_reason": "display object has no functional front",
+      "use": "garden low shrub",
+      "contents": {},
+      "author": "Jenelle van Heerden",
+      "preview_image": "previews/didelta_spinosa.png"
     },
     {
       "id": "modern_arm_chair_01",
       "url": "https://polyhaven.com/a/modern_arm_chair_01",
-      "role": "study armchair",
+      "role": "armchair",
       "licence": "CC0",
       "bounds_m": {
         "min": [
@@ -1476,12 +3511,31 @@
         ]
       },
       "front_axis": "+Z",
-      "front_axis_basis": "lead-verified"
+      "front_axis_basis": "lead-verified",
+      "source_url": "https://polyhaven.com/a/modern_arm_chair_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "author": "https://api.polyhaven.com/info/modern_arm_chair_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/modern_arm_chair_01.png: Blender neutral preview"
+      },
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "study armchair",
+      "contents": {},
+      "author": "Vibrant Nordic",
+      "preview_image": "previews/modern_arm_chair_01.png"
     },
     {
       "id": "mid_century_lounge_chair",
       "url": "https://polyhaven.com/a/mid_century_lounge_chair",
-      "role": "study lounge chair",
+      "role": "armchair",
       "licence": "CC0",
       "bounds_m": {
         "min": [
@@ -1494,12 +3548,31 @@
           1.1691,
           0.5289
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/mid_century_lounge_chair",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "author": "https://api.polyhaven.com/info/mid_century_lounge_chair: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/mid_century_lounge_chair.png: Blender neutral preview"
+      },
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "study lounge chair",
+      "contents": {},
+      "author": "Kuutti Siitonen",
+      "preview_image": "previews/mid_century_lounge_chair.png"
     },
     {
       "id": "desk_lamp_arm_01",
       "url": "https://polyhaven.com/a/desk_lamp_arm_01",
-      "role": "articulated arm lamp reference",
+      "role": "task-lamp",
       "licence": "CC0",
       "bounds_m": {
         "min": [
@@ -1512,7 +3585,40 @@
           0.8046,
           0.3172
         ]
-      }
+      },
+      "source_url": "https://polyhaven.com/a/desk_lamp_arm_01",
+      "intake_sources": {
+        "source_url": "Poly Haven asset page identified by manifest id",
+        "credit": "https://polyhaven.com/license (credit optional for CC0)",
+        "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+        "units_normalised": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; villa_scene.import_props",
+        "author": "https://api.polyhaven.com/info/desk_lamp_arm_01: authors",
+        "preview_image": "/home/omar/archpipe/assets/library/previews/desk_lamp_arm_01.png: Blender neutral preview"
+      },
+      "credit": "Poly Haven",
+      "up_axis": "+Y",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF specifies metres; Blender glTF importer uses file coordinates without unit rescale"
+      },
+      "use": "articulated arm lamp reference",
+      "contents": {},
+      "expected_size_range": {
+        "min_m": [
+          0,
+          0,
+          0
+        ],
+        "max_m": [
+          2,
+          2,
+          2
+        ],
+        "basis": "ASSUMED",
+        "reason": "Provisional intake envelope: no held role-size lesson or published product dimensions; review measured model and preview."
+      },
+      "author": "Yann Kervran, Kuutti Siitonen",
+      "preview_image": "previews/desk_lamp_arm_01.png"
     }
   ],
   "_bounds_note": "bounds_m: native glTF (Y-up, metres) world AABB per prop, node-hierarchy-aware (handles multi-root variant packs e.g. shrub_02). Measured 2026-09-28 on ai-workstation via ops/workstation/fetch_asset_library.py bounds(); verified against one headless Blender 4.2.9 import (tree_small_02, shrub_02) matching to 1e-4 m. Blender glTF import maps (x,y,z)_gltf -> (x,-z,y)_scene."

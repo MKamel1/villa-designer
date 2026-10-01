@@ -836,6 +836,10 @@ def scene_qa(data, white_balance_applied, daylight=True):
 # Dressing
 # ---------------------------------------------------------------------------
 def import_prop(library_root, prop_id, location, rotation_deg=0.0):
+    from pathlib import Path
+    from archpipe.asset_intake import require_registered_asset
+    require_registered_asset(prop_id, Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
+                             Path(library_root) / "props" / prop_id / "model.gltf")
     path = os.path.join(library_root, "props", prop_id, "model.gltf")
     if not os.path.isfile(path):
         return None

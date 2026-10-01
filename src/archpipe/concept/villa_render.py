@@ -2106,12 +2106,12 @@ def props(lay):
     x, y = c("lounge-coffee")
     add("lounge-books", "book_encyclopedia_set_01", x - 0.3, y, B + it["lounge-coffee"]["h"], label="books")
     plant("lounge-plant", "potted_plant_01", 4.2, -24.35, B, "lounge",
-          label="potted floor plant beside street window; measured asset 0.587 x 0.634 m footprint")
+          label="Ficus lyrata look-alike proxy beside street window; measured asset 0.587 x 0.634 m footprint")
     x, y = c("living-coffee")
     plant("living-plant-table", "potted_plant_04", x + 0.3, y, B + it["living-coffee"]["h"], "living",
         support_id="living-coffee",
-        label="single potted table plant, 0.168 x 0.185 m footprint, 0.267 m tall")
-    plant("living-plant", "potted_plant_02", 22.1, -24.25, B, "living", label="potted floor plant by the garden door")
+        label="Haworthiopsis attenuata potted table plant, 0.168 x 0.185 m footprint, 0.267 m tall")
+    plant("living-plant", "potted_plant_02", 22.1, -24.25, B, "living", label="Syngonium podophyllum look-alike proxy by the garden door")
     # Client round 2: the lit glass-door cabinets are for book display. Every shelf (tops at 0.102 plinth, then
     # 0.442/0.842/1.242/1.642 m, villa_furniture_detail._glass_bookcase) holds book sets 0.55 m wide, 0.24 m tall
     # (measured bounds_m), alternating full and half rows so the display reads curated, not stocked.
@@ -2131,10 +2131,10 @@ def props(lay):
     # the new low window into the corner beside the TV unit
     plant("bedroom-plant", "potted_plant_01", fp["pb-vanity"][2] - 0.17, fp["pb-vanity"][3] + 0.32, G,
         "parents-bed", s=0.58,
-        label="single potted plant, 0.341 x 0.367 m footprint, 0.783 m tall")
+        label="Ficus lyrata look-alike proxy, 0.341 x 0.367 m footprint, 0.783 m tall")
     plant("study-plant", "potted_plant_01", (fp["study-tv"][0] + fp["study-tv"][2]) / 2,
         fp["study-tv"][3] + 0.45, G, "study-game",
-        label="plant")
+        label="Ficus lyrata look-alike proxy")
     for rid, sofa in (("lounge", "lounge-sofa"), ("living", "living-sofa")):
         x, y = c(sofa)
         add("pillows-" + rid, "throw_pillows_01", x, y - 0.05 if rid == "lounge" else y, B + 0.44,

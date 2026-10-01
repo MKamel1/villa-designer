@@ -26,6 +26,8 @@ from archpipe import (brief as B, catalogue as cat, cli, codes,  # noqa: E402
                       feasibility as F, rules, site as S, solar,
                       vocabulary as V, web)
 from archpipe.model import load as load_model  # noqa: E402
+from archpipe.asset_intake import audit_scene_manifest, manifest_assumptions, manifest_overrides  # noqa: E402
+from archpipe.concept import villa_render as VR  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 TMP = pathlib.Path(tempfile.gettempdir()) / ("archpipe-verify-" + uuid.uuid4().hex)
@@ -74,6 +76,24 @@ def raises(exc, fn, *a, **kw) -> bool:
 
 
 def main() -> int:
+    manifest_path = ROOT / "ops/workstation/library-manifest.json"
+    intake = audit_scene_manifest(manifest_path, VR.build(views=[]), ROOT)
+    assumptions = manifest_assumptions(manifest_path)
+    overrides = manifest_overrides(manifest_path)
+    print("  ASSET INTAKE ASSUMPTIONS: %d" % len(assumptions))
+    print("  ASSET INTAKE PLACED: %d; CANDIDATES: %d" %
+          (len(intake["placed"]), len(intake["candidates"])))
+    for item in overrides:
+        print("  ASSET SIZE OVERRIDE %s: %s" % (item["id"], item["size_override"]))
+    for asset_id, violations in intake["placed"].items():
+        print("  ASSET INTAKE %s: %s" % (asset_id, "; ".join(violations)))
+    candidate_gaps = {asset_id: item["violations"] for asset_id, item in intake["candidates"].items()
+                      if item["violations"]}
+    print("  ASSET INTAKE CANDIDATE GAPS: %d" % len(candidate_gaps))
+    for asset_id, violations in candidate_gaps.items():
+        print("  ASSET INTAKE CANDIDATE %s status: candidate: %s" %
+              (asset_id, "; ".join(violations)))
+    expect("all placed manifest props pass asset intake", not intake["placed"])
     brief_src = yaml.safe_load((ROOT / "spec/villa-brief.yaml").read_text(encoding="utf-8"))
     site_src = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))
 

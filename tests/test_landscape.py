@@ -19,6 +19,24 @@ class LandscapeGuards(unittest.TestCase):
         self.assertTrue(any("building footprint" in why for _, why in L.extent_violations([draft])))
         self.assertEqual(L.extent_violations(self.props, self.rooms), [])
 
+    def test_blue_west_accent_uses_cited_plumbago_proxy_at_authored_center(self):
+        accent = [p for p in self.props if p["id"] == "landscape-west-front-accent"]
+        self.assertEqual(len(accent), 1)
+        self.assertEqual(accent[0]["center"], (1.10, -24.30))
+        self.assertEqual(accent[0]["species"], "Plumbago auriculata")
+        self.assertIn("look-alike proxy", accent[0]["label"])
+        self.assertNotIn("Heliophila coronopifolia", accent[0]["label"])
+
+    def test_bellis_clumps_keep_centers_and_fit_species_height(self):
+        daisies = [p for p in self.props if p["asset"] == "sf_garden_flower_clump"]
+        self.assertEqual(len(daisies), 2)
+        self.assertEqual({p["id"]: p["center"] for p in daisies}, {
+            "landscape-north-front-accent": (25.55, -22.90),
+            "landscape-top-south-daisy": (14.00, -22.80)})
+        for p in daisies:
+            self.assertAlmostEqual(p["scale"] * 0.8324, 0.15, places=7)
+            self.assertLessEqual(p["scale"] * 0.8324, 0.1524)
+
     def test_old_north_bed_enters_basement_room(self):
         draft = dict(id="draft-searsia", asset="searsia_lucida",
                      position=[13.25, -21.65, L.GROUND+.38], rotation_deg=[0, 0, 0], scale=.7)

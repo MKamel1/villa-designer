@@ -804,6 +804,10 @@ def import_props(prop_specs, library_root):
     """Transform each complete asset around one shared origin, then seat it."""
     imported = []
     for spec in prop_specs:
+        from archpipe.asset_intake import require_registered_asset
+        from pathlib import Path
+        require_registered_asset(spec["asset"], Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
+                                 Path(library_root) / "props" / spec["asset"] / "model.gltf")
         before = set(bpy.data.objects)
         path = os.path.join(library_root, "props", spec["asset"], "model.gltf")
         if not os.path.isfile(path):
@@ -840,6 +844,10 @@ def import_models(model_specs, library_root):
     """Import complete glTF products at one uniform scale, centred and seated on the floor."""
     imported = []
     for spec in model_specs:
+        from archpipe.asset_intake import require_registered_asset
+        from pathlib import Path
+        require_registered_asset(spec["asset"], Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
+                                 Path(library_root) / "props" / spec["asset"] / "model.gltf")
         from archpipe.furniture_orientation import check_model_orientation
         check_model_orientation(spec)
         before = set(bpy.data.objects)

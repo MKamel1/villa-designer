@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import json
 import math
-import re
+from datetime import date
 from pathlib import Path
 from typing import Callable
 
@@ -21,23 +21,60 @@ ALLOWED_LICENCES = {"CC0", "CC0 Public Domain", "CC-BY", "CC Attribution", "free
 BOUNDS_TOLERANCE_M = 0.005
 
 
+def _valid_size_override(value: object) -> bool:
+    if not (isinstance(value, dict) and set(value) == {"reason", "decided_by", "date"}
+            and isinstance(value["reason"], str) and bool(value["reason"].strip())
+            and value["decided_by"] == "lead"
+            and isinstance(value["date"], str)):
+        return False
+    try:
+        date.fromisoformat(value["date"])
+        return True
+    except ValueError:
+        return False
+
+# Asset type is controlled; descriptive placement and species text belongs in `use`.
+ROLES = frozenset({
+    "sofa", "armchair", "dining-chair", "task-chair", "bed", "bedside-table",
+    "rug", "bench-outdoor", "bistro-set", "egg-swing", "task-lamp",
+    "shade-tree", "small-tree", "shrub", "climber", "groundcover",
+    "ornamental-grass", "indoor-floor-plant", "indoor-table-plant",
+    "decor-small", "wall-art", "boulder", "planter", "bedding",
+})
+INDOOR_PLANTS = {"indoor-floor-plant", "indoor-table-plant"}
+GARDEN_PLANTS = {"shade-tree", "small-tree", "shrub", "climber", "groundcover", "ornamental-grass"}
+PLANT_ROLES = INDOOR_PLANTS | GARDEN_PLANTS
+ASSUMED_ROLES = {"decor-small", "wall-art", "boulder", "planter", "rug",
+                 "bistro-set", "egg-swing", "bench-outdoor", "task-lamp", "bedding"}
+DIR_ROLES = {"sofa", "armchair", "dining-chair", "task-chair", "bed", "bench-outdoor",
+             "bistro-set", "egg-swing", "task-lamp", "wall-art"}
+OPTIONALLY_NONDIRECTIONAL = {"bench-outdoor", "bistro-set"}
+
+# Figure 4.3 gives plan dimensions, not height. `None` leaves that axis
+# untested. These are preliminary planning ranges, so product sheets may
+# replace them for a real named product.
+ROLE_SIZE_RANGES: dict[str, dict] = {
+    "sofa": {"min_m": [1.83, None, 0.81], "max_m": [2.49, None, 1.12],
+             "source": "Mitton & Nystuen, Residential Interior Design, 4th ed., 2022, Fig. 4.3, printed p. 82: sofa plan width 183-249 cm, depth 81-112 cm"},
+    "armchair": {"min_m": [0.51, None, 0.61], "max_m": [1.27, None, 1.07],
+                 "source": "Mitton & Nystuen, Residential Interior Design, 4th ed., 2022, Fig. 4.3, printed p. 82: chair plan width 51-127 cm, depth 61-107 cm"},
+    "dining-chair": {"min_m": [0.51, None, 0.61], "max_m": [1.27, None, 1.07],
+                     "source": "Mitton & Nystuen, Residential Interior Design, 4th ed., 2022, Fig. 4.3, printed p. 82: chair plan width 51-127 cm, depth 61-107 cm; preliminary chair footprint"},
+}
+
+
 def role_kind(role: str) -> str:
-    role = role.lower()
-    if any(word in role for word in ("lamp", "luminaire", "pendant", "sconce")):
+    if role == "task-lamp":
         return "luminaire"
-    if any(word in role for word in ("tree", "plant", "shrub", "flower", "grass", "succulent", "groundcover", "ground cover")):
+    if role in INDOOR_PLANTS | GARDEN_PLANTS:
         return "plant"
-    if re.search(r"\b(bed|sofa|chair|armchair|seat|bench|desk|table|stool)s?\b", role):
+    if role in DIR_ROLES | {"bedside-table"}:
         return "furniture"
     return "prop"
 
 
 def directional(role: str) -> bool:
-    role = role.lower()
-    if role_kind(role) == "plant":
-        return False
-    return bool(re.search(r"\b(bed|sofa|chair|armchair|seat|bench|desk|swing|lamp|luminaire)s?\b", role)
-                and not re.search(r"books|cushions|bedside table", role))
+    return role in DIR_ROLES
 
 
 def _dimensions(bounds: object) -> list[float] | None:
@@ -57,11 +94,18 @@ def validate_entry(entry: dict, model_path: Path | None = None,
                    measure: Callable[[Path], dict] | None = None) -> list[str]:
     """Return all known violations; missing evidence never counts as a pass."""
     errors = [f"missing {key}" for key in REQUIRED
-              if key not in entry or entry[key] in (None, "") or (entry[key] == {} and key != "contents")]
+              if (key not in entry and not (key == "expected_size_range" and entry.get("role") in ROLE_SIZE_RANGES))
+              or (key in entry and (entry[key] in (None, "") or (entry[key] == {} and key != "contents")))]
     role = str(entry.get("role") or "")
+    if role and role not in ROLES:
+        errors.append(f"unknown role {role!r}")
+    if role in PLANT_ROLES and not entry.get("species"):
+        errors.append("plant requires species")
     axis = entry.get("front_axis")
     if directional(role):
-        if axis not in AXES:
+        if axis == "none" and role in OPTIONALLY_NONDIRECTIONAL and entry.get("front_axis_reason"):
+            pass
+        elif axis not in AXES:
             errors.append("directional role requires measured or lead-verified front_axis")
     elif axis == "none" and not entry.get("front_axis_reason"):
         errors.append("front_axis none requires a reason")
@@ -84,32 +128,76 @@ def validate_entry(entry: dict, model_path: Path | None = None,
     dimensions = _dimensions(entry.get("bounds_m"))
     if entry.get("bounds_m") is not None and dimensions is None:
         errors.append("bounds_m must have measured, finite min/max triples")
-    expected = entry.get("expected_size_range")
+    expected = entry.get("expected_size_range", ROLE_SIZE_RANGES.get(role))
+    size_override = entry.get("size_override")
+    if size_override is not None and not _valid_size_override(size_override):
+        errors.append("size_override requires reason, decided_by lead and ISO date")
+    placed_scale = entry.get("placed_scale")
+    if placed_scale is not None and (not isinstance(placed_scale, (int, float)) or isinstance(placed_scale, bool)
+                                     or not math.isfinite(placed_scale) or placed_scale <= 0):
+        errors.append("placed_scale must be positive and finite")
+    placement_scales = entry.get("placement_scale_factors")
+    if placement_scales is not None:
+        valid_scales = isinstance(placement_scales, list) and bool(placement_scales)
+        if valid_scales:
+            for scale in placement_scales:
+                factors = scale if isinstance(scale, list) else [scale]
+                if len(factors) not in (1, 3) or any(
+                    not isinstance(v, (int, float)) or isinstance(v, bool)
+                    or not math.isfinite(v) or v <= 0 for v in factors
+                ):
+                    valid_scales = False
+                    break
+        if not valid_scales:
+            errors.append("placement_scale_factors must contain positive scalar or XYZ scales")
     if isinstance(expected, dict):
         low, high, citation = expected.get("min_m"), expected.get("max_m"), expected.get("source")
+        assumed = expected.get("basis") == "ASSUMED"
         try:
-            valid = (len(low) == len(high) == 3 and bool(citation) and
-                     all(0 <= float(a) <= float(b) and math.isfinite(float(b)) for a, b in zip(low, high)))
+            valid = (len(low) == len(high) == 3 and (bool(citation) or assumed) and
+                     any(a is not None for a in low) and
+                     all((a is None and b is None) or
+                         (a is not None and b is not None and 0 <= float(a) <= float(b)
+                          and math.isfinite(float(b))) for a, b in zip(low, high)))
         except (TypeError, ValueError):
             valid = False
         if not valid:
-            errors.append("expected_size_range needs min_m, max_m and cited source")
-        elif dimensions and isinstance(units, dict) and isinstance(units.get("scale_factor"), (int, float)) and units["scale_factor"] > 0:
-            for name, raw, minimum, maximum in zip(("X", "Y", "Z"), dimensions, low, high):
-                actual = raw * units["scale_factor"]
-                if not float(minimum) <= actual <= float(maximum):
-                    errors.append(f"bounds_m {name} extent {actual:.4f} m outside cited range {minimum}-{maximum} m")
+            errors.append("expected_size_range needs valid min_m, max_m and cited source or allowed assumption")
+        if assumed and (role not in ASSUMED_ROLES or not expected.get("reason") or citation):
+            errors.append("ASSUMED range requires an allowed role, reason and no citation")
+        if role in PLANT_ROLES and (assumed or expected.get("basis") != "species" or not citation):
+            errors.append("plant requires cited species range")
+        if expected.get("basis") == "product" and not str(citation).startswith(("https://", "http://")):
+            errors.append("product dimensions require published source URL")
+        elif valid and dimensions and isinstance(units, dict) and isinstance(units.get("scale_factor"), (int, float)) and units["scale_factor"] > 0:
+            scales = placement_scales if placement_scales is not None and valid_scales else [placed_scale or 1]
+            for scale in scales:
+                # The stored vector is Blender XYZ; native glTF is X, Y up, Z.
+                native_factors = [scale[0], scale[2], scale[1]] if isinstance(scale, list) else [scale] * 3
+                for name, raw, factor, minimum, maximum in zip(("X", "Y", "Z"), dimensions, native_factors, low, high):
+                    if minimum is None:
+                        continue
+                    actual = raw * units["scale_factor"] * factor
+                    within_range = (actual <= float(maximum) if role in PLANT_ROLES
+                                    else float(minimum) <= actual <= float(maximum))
+                    if not within_range and not _valid_size_override(size_override):
+                        errors.append(f"bounds_m {name} extent {actual:.4f} m outside {'assumed' if assumed else 'cited'} range {minimum}-{maximum} m")
     elif expected is not None:
         errors.append("expected_size_range must be a cited range")
     contents = entry.get("contents")
     if isinstance(contents, dict):
-        if re.search(r"\bbed\b", role.lower()) and not re.search(r"cushions|for the bed", role.lower()) and contents.get("bedding") is not True:
+        if role == "bed" and contents.get("bedding") is not True:
             errors.append("bed requires bedding")
-        if role_kind(role) == "plant" and not (contents.get("pot") is True or contents.get("root_ball") is True):
-            errors.append("plant requires pot or root_ball")
+        if role in INDOOR_PLANTS and contents.get("pot") is not True:
+            errors.append("indoor plant requires pot")
     elif contents is not None:
         errors.append("contents must be recorded flags")
     if model_path is not None and model_path.is_file():
+        preview = entry.get("preview_image")
+        if preview:
+            relative = Path(str(preview))
+            if relative.is_absolute() or ".." in relative.parts or not (model_path.parents[2] / relative).is_file():
+                errors.append("preview_image does not exist beside the local library")
         if dimensions is None:
             errors.append("local model exists but recorded bounds are missing or invalid")
         else:
@@ -183,3 +271,74 @@ def validate_manifest(path: Path, local_root: Path | None = None) -> dict[str, l
         if errors:
             findings[asset_id] = errors
     return findings
+
+
+def manifest_assumptions(path: Path) -> list[dict]:
+    """List every declared size assumption separately from intake failures."""
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    return [{"id": entry.get("id"), "role": entry.get("role"),
+             "expected_size_range": entry["expected_size_range"]}
+            for entry in manifest.get("props", [])
+            if isinstance(entry.get("expected_size_range"), dict)
+            and entry["expected_size_range"].get("basis") == "ASSUMED"]
+
+
+def manifest_overrides(path: Path) -> list[dict]:
+    """List every deliberate size exception, including invalid ones for audit."""
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    return [{"id": entry.get("id"), "size_override": entry["size_override"]}
+            for entry in manifest.get("props", []) if "size_override" in entry]
+
+
+def audit_scene_manifest(path: Path, scene: dict, local_root: Path | None = None) -> dict:
+    """Classify manifest props from a built scene and gate only placed assets."""
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    entries = {entry["id"]: entry for entry in manifest.get("props", [])}
+    instances = scene.get("props", []) + scene.get("models", [])
+    placed = {item["asset"] for item in instances}
+    findings = validate_manifest(path, local_root)
+    for asset_id in placed - entries.keys():
+        findings[asset_id] = ["placed asset has no manifest entry"]
+    for asset_id in placed & entries.keys():
+        recorded = entries[asset_id].get("placed_scale")
+        if recorded is not None:
+            if not entries[asset_id].get("placed_scale_reason"):
+                findings.setdefault(asset_id, []).append("placed_scale requires reason")
+            scales = [item.get("scale", 1.0) for item in instances if item["asset"] == asset_id]
+            if any(not isinstance(scale, (int, float)) or abs(scale - recorded) > 1e-5 for scale in scales):
+                findings.setdefault(asset_id, []).append("placed_scale disagrees with built scene")
+        alternatives = entries[asset_id].get("placement_scale_factors")
+        if alternatives is not None:
+            if not entries[asset_id].get("placement_scale_source"):
+                findings.setdefault(asset_id, []).append("placement_scale_factors require code source")
+            for item in instances:
+                if item["asset"] != asset_id:
+                    continue
+                actual = item.get("scale", 1.0)
+                if not any(
+                    isinstance(actual, (int, float)) and isinstance(factor, (int, float))
+                    and abs(actual - factor) <= 1e-5
+                    or isinstance(actual, (list, tuple)) and isinstance(factor, list)
+                    and len(actual) == len(factor) == 3
+                    and all(abs(a - b) <= 1e-5 for a, b in zip(actual, factor))
+                    for factor in alternatives
+                ):
+                    findings.setdefault(asset_id, []).append("placement_scale_factors disagree with built scene")
+    return {
+        "placed": {asset_id: findings[asset_id] for asset_id in sorted(placed) if asset_id in findings},
+        "candidates": {asset_id: {"status": "candidate", "violations": findings.get(asset_id, [])}
+                       for asset_id in sorted(entries.keys() - placed)},
+    }
+
+
+def require_registered_asset(asset_id: str, manifest_path: Path, model_path: Path | None = None) -> dict:
+    """One fail-closed boundary for every scene importer."""
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    matches = [entry for entry in manifest.get("props", []) if entry.get("id") == asset_id]
+    if len(matches) != 1:
+        raise ValueError(f"asset {asset_id}: unregistered or duplicate manifest entry")
+    entry = matches[0]
+    violations = validate_entry(entry, model_path)
+    if violations:
+        raise ValueError(f"asset {asset_id}: " + "; ".join(violations))
+    return entry

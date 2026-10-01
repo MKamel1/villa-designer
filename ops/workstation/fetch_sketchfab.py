@@ -17,6 +17,8 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.asset_intake import validate_entry
 API = "https://api.sketchfab.com/v3/models/"
 ALLOWED = {"CC0 Public Domain", "CC Attribution"}
 MANIFEST = ROOT / "ops" / "workstation" / "library-manifest.json"
@@ -87,7 +89,17 @@ def main() -> int:
         for entry in manifest.get("props", []):
             found = by_id.get(entry["id"])
             if found and found.get("front_axis"):
+                proposed = dict(entry, front_axis=found["front_axis"], front_axis_basis=found["front_axis_basis"])
+                model = next((out / entry["id"]).rglob("*.gltf"), None)
+                violations = validate_entry(proposed, model)
+                if violations:
+                    raise ValueError(f"{entry['id']}: intake violations: " + "; ".join(violations))
                 entry.update(front_axis=found["front_axis"], front_axis_basis=found["front_axis_basis"])
+        for entry in manifest.get("props", []):
+            model = next((out / entry["id"]).rglob("*.gltf"), None)
+            violations = validate_entry(entry, model)
+            if violations:
+                raise ValueError(f"{entry['id']}: intake violations: " + "; ".join(violations))
         MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return 0
 
