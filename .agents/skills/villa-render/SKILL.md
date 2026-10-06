@@ -52,6 +52,13 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      Run `tests.test_asset_route_geometry` and portable verification
      with HOME pointing at an empty directory before returning the package.
    - Shell faces are classified by their real normal, not by tags.
+     Ground-only finishes cannot occur on downward faces (normal z < -0.7,
+     where z is vertical). Closed ground solids carry mineral substrate on
+     their undersides using explicit per-face slots, preserved by Blender.
+   - Procedural basal plants identify actual leaf faces and the root-soil
+     datum. `garden_render_review.plant_form_findings` measures foliage,
+     separately from stems; the authored maximum foliage gap is 0.20 m.
+     Preview the real plant form as well as checking the gap.
    - Furniture: generator pieces (`archpipe.furniture`) through
      `generator_rotation`; other types through `villa_furniture_detail`;
      boxes only where neither exists. Every vertex stays inside the checked
@@ -82,6 +89,18 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      check the failed 24 mm constraint and every successful 16 mm constraint;
      never infer the reason from a view identifier or parse caption prose. Exteriors
      and the stair keep authored, level cameras (lens shift, never tilt).
+     Exterior garden cameras stand inside the measured yard polygon
+     and outside all architectural overhead cover. Through-door/window
+     cameras declare `standing_room`, which must contain the camera on the
+     same level; these use the existing 0.15 m interior clearance. The yard
+     polygon alone does not establish open sky: report roofed strips and
+     actual overhead cover separately, using the camera's garden storey.
+     Swing motion envelopes include the
+     measured fence/wall thickness, rather than trusting the outer yard line.
+     Foreground opening frame members
+     must avoid the image's central third. Contract, plan review and portable
+     verification run the garden checks recorded in
+     `knowledge/garden-render-guards.json`.
    - Exposure is metered per view and LOCKED per state across the whole
      set: `day`, `evening`, `exterior-dusk`, `exterior-day`. Rendering a
      subset re-meters that subset, so a state's lock is only comparable when

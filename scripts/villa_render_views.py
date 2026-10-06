@@ -99,8 +99,10 @@ def subject_mesh_frame_violations(view, scene, subject):
     return sorted(failed)
 
 
-def camera_proximity_violations(view, scene, items, clearance=1.0):
+def camera_proximity_violations(view, scene, items, clearance=None):
     """Return props and furniture closer than the required camera clearance in metres."""
+    if clearance is None:
+        clearance = .15 if view.get("standing_room") else 1.0
     px, py, pz = view["camera"]["position"]
     level = "B" if pz < -0.1 else "GF"
     failures = []
@@ -236,7 +238,7 @@ def main():
         px, py = cam["position"][:2]
         # The one-metre exterior clearance is calibrated on the v26/v28 canopy/pot
         # failures. Compact interior view selection has its own 0.15 m clearance rule.
-        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v36-")):
+        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v36-", "v37-")):
             for near_id, distance in camera_proximity_violations(v, scene, items):
                 problems.append("%s: camera %.2f m from %s (need >= 1.0 m)" % (v["id"], distance, near_id))
         if v["id"].startswith("v28-"):
@@ -247,6 +249,10 @@ def main():
         if v["id"].startswith("v29-"):
             for item_id, bay, front in storage_front_occlusions(v, items):
                 problems.append("%s: %s %s interior centre blocked by %s" % (v["id"], item_id, bay, front))
+        from archpipe.concept.garden_render_review import opening_frame_findings, garden_camera_findings
+        problems.extend(garden_camera_findings(v, scene))
+        for failure in opening_frame_findings(v,scene):
+            problems.append(v["id"]+": "+failure["reason"])
         tx, ty = cam["target"][:2]
         pz = cam["position"][2] - (-3.0 if lv == "B" else 0.0)
         # the camera must stand in the open: not inside a piece (two draft views were inside wardrobes and rendered
@@ -275,7 +281,7 @@ def main():
         ax.add_patch(Polygon(wedge, fc="#ffcc00", alpha=0.25, ec="#cc9900"))
         ax.plot([px], [py], "ro", ms=4)
         for s in v["subjects"]:
-            if s in items and items[s]["type"] == "wc" or v["id"].startswith(("v07-", "v19-", "v25-", "v26-", "v27-", "v28-", "v36-")):
+            if s in items and items[s]["type"] == "wc" or v["id"].startswith(("v07-", "v19-", "v25-", "v26-", "v27-", "v28-", "v36-", "v37-")):
                 for edge in subject_mesh_frame_violations(v, scene, s):
                     problems.append("%s: built %s crosses %s" % (v["id"], s, edge))
             try:

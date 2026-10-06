@@ -16,6 +16,7 @@ SCENE = VR.build()
 ALLOWED_MATERIALS = {
     "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",
     "terracotta-red-glaze", "garden-soil", "garden-foliage", "star-jasmine-flower", "star-jasmine-leaf",  # round-3 garden finishes
+    "strelitzia-foliage", "stone-substrate",
     "top-trough-coating", "top-rosemary-foliage", "top-aloe-foliage",  # G3 explicitly ASSUMED appearances
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath", "marble-wet",
     "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
@@ -32,6 +33,31 @@ ALLOWED_MATERIALS = {
 
 
 class RenderStandard(unittest.TestCase):
+    def test_g2f_real_steps_and_ground_siblings_have_no_paved_soffits(self):
+        from copy import deepcopy
+        import json
+        from pathlib import Path
+        from archpipe.concept.garden_render_review import downward_ground_findings,normal
+        from archpipe.villa_render_contract import validate_scene,mesh_batch_key
+        frozen=json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        bad={'meshes':frozen['shell']+frozen['ground_siblings'],'materials':VR.M}
+        self.assertEqual(len(downward_ground_findings(bad)),3)
+        self.assertEqual(downward_ground_findings(SCENE),[])
+        self.assertEqual(validate_scene(SCENE),[])
+        # Independent class mutation and renamed floor-only material.
+        renamed=deepcopy(frozen['shell'][0]);renamed['id']='another-sloping-deck';renamed['material']='other-floor'
+        for f in renamed['faces']:
+            for q in f:q[2]+=.1*q[0]
+        self.assertTrue(downward_ground_findings({'meshes':[renamed],'materials':{'other-floor':{'surface_use':'ground-only'}}}))
+        clean=deepcopy(SCENE);stone=next(m for m in clean['meshes'] if m['id']=='landscape-stone-study-00')
+        self.assertIsNone(mesh_batch_key(stone,'principled'))
+        for i,face in enumerate(stone['faces']):
+            if normal(face)[2]<-.7:self.assertEqual(stone['face_materials'][i],'stone-substrate')
+        stone['face_materials']=[stone['material']]*len(stone['faces'])
+        self.assertTrue(any(stone['id'] in f for f in validate_scene(clean)))
+        stone['face_materials']=[]
+        self.assertTrue(any('one registered finish per authored face' in f for f in validate_scene(clean)))
+
     def test_c4_frozen_plant_support_datums(self):
         from copy import deepcopy
         import json

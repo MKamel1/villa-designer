@@ -213,7 +213,7 @@ class VillaRenderContractTest(unittest.TestCase):
         batches = []
         detailed = []
         build = blender_function("build_meshes")
-        build.__globals__["add_mesh_batch"] = lambda specs, name, material, warnings: batches.append(
+        build.__globals__["add_mesh_batch"] = lambda specs, name, material, warnings, materials=None: batches.append(
             ([spec["id"] for spec in specs], name)) or SimpleNamespace(name=name)
         build.__globals__["add_mesh_detail"] = lambda obj, spec: detailed.append((obj.name, spec["id"]))
         objects = build([plain, other, detail], {"white": object()},

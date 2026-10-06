@@ -386,16 +386,22 @@ def apply_visibility(obj, visibility):
         setattr(obj, "visible_" + key, visibility.get(key, True))
 
 
-def add_mesh_batch(specs, name, material, warnings):
+def add_mesh_batch(specs, name, material, warnings, materials=None):
     """Build one Blender object from one or more authored mesh records."""
     mesh = bpy.data.meshes.new(name)
     obj = bpy.data.objects.new(name, mesh)
     bpy.context.collection.objects.link(obj)
     bm = bmesh.new()
+    material_names = [specs[0]["material"]]
+    if materials is not None:
+        for spec in specs:
+            for key in spec.get("face_materials", []):
+                if key not in material_names:
+                    material_names.append(key)
     for spec in specs:
         index = {}
         source_faces = []
-        for polygon in spec["faces"]:
+        for face_index, polygon in enumerate(spec["faces"]):
             # A keyhole polygon (a wall with its openings, daylight.with_holes) revisits vertices along its bridge:
             # a repeat inside one face gets its own vertex; a face that already exists (coincident faces) is built
             # from fresh vertices. Both made faces.new raise on the villa shell.
@@ -413,6 +419,8 @@ def add_mesh_batch(specs, name, material, warnings):
                 source_faces.append(bm.faces.new(vertices))
             except ValueError:
                 source_faces.append(bm.faces.new([bm.verts.new(tuple(p)) for p in polygon]))
+            if "face_materials" in spec:
+                source_faces[-1].material_index = material_names.index(spec["face_materials"][face_index])
         source_edges = {edge for face in source_faces for edge in face.edges}
         if all(len(edge.link_faces) == 2 for edge in source_edges):
             volume = 0.0
@@ -427,6 +435,8 @@ def add_mesh_batch(specs, name, material, warnings):
     bm.to_mesh(mesh)
     bm.free()
     mesh.materials.append(material)
+    for key in material_names[1:]:
+        mesh.materials.append(materials[key])
     apply_visibility(obj, specs[0].get("visibility", {}))
     if material.get("emission_lm_per_m2") is not None and hasattr(obj, "cycles") and hasattr(obj.cycles, "use_multiple_importance_sampling"):
         obj.cycles.use_multiple_importance_sampling = True
@@ -472,7 +482,7 @@ def build_meshes(mesh_specs, materials, material_specs, warnings):
     objects = {}
     for index, specs in enumerate(batches.values()):
         name = specs[0]["id"] if len(specs) == 1 else "villa-merged-%04d" % index
-        obj = add_mesh_batch(specs, name, materials[specs[0]["material"]], warnings)
+        obj = add_mesh_batch(specs, name, materials[specs[0]["material"]], warnings, materials)
         if len(specs) == 1:
             add_mesh_detail(obj, specs[0])
         for spec in specs:

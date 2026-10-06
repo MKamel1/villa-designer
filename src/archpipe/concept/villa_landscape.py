@@ -766,6 +766,78 @@ def _lawn_with_pit(rect, center, radius, z, count=64):
     return [[inner[i],outer[i],outer[(i+1)%len(inner)],inner[(i+1)%len(inner)]] for i in range(len(inner))], inner
 
 
+def _paddle_clump(identifier, species, center, ground, data, *, bed, layer):
+    """Staged basal paddle-leaf appearance, in the palette's young envelope.
+
+    Dense overlapping leaves arise from several ground-level fans. Outer
+    blades arch; inner blades stand up. Every blade has independent height,
+    rotation and a measured final length:width ratio between 3 and 4.
+    """
+    import numpy as np
+    row = require_species(species, data)
+    assumed = row["placement_assumptions"]["procedural-clump"]
+    height, spread = assumed["height"]["range_m"][0], assumed["spread"]["range_m"][0]
+    faces, leaf_indices, blade_records = [], [], []
+    for index in range(17):
+        angle = index*2*pi*(3-5**.5)/2
+        radial = np.array([cos(angle),sin(angle),0.])
+        side = np.array([-sin(angle),cos(angle),0.])
+        outer = index < 6
+        root = radial*(.026+.009*(index%3))
+        base = root+np.array([0.,0.,.055+.023*(index%4) if outer else .16+.062*(index%5)])
+        blade_length = .53+.037*(index%5) if outer else .65+.028*(index%4)
+        width = blade_length/((4.4+.13*(index%4)) if outer else (3.9+.12*(index%4)))
+        tilt = .29+.015*(index%3) if outer else .06+.012*(index%4)
+        rings=[]
+        for segment in range(21):
+            t=segment/20
+            w=.008 if segment in (0,20) else sin(pi*t)**.48
+            reach = tilt*blade_length*(t+.18*sin(pi*t))
+            z = blade_length*(t-.23*t*t if outer else t-.035*t*t)
+            point = base+radial*reach+np.array([0.,0.,z])
+            tangent = radial*tilt+np.array([0.,0.,1-.46*t if outer else 1-.07*t])
+            normal = np.cross(side,tangent);normal/=np.linalg.norm(normal)
+            # Cross-section is a closed diamond: the ridge reads as a midrib,
+            # unlike the previous equal-height radial cup.
+            rings.append([(point-side*width*w/2).tolist(),(point-normal*.0018).tolist(),
+                          (point+side*width*w/2).tolist(),(point+normal*.0035).tolist()])
+        blade=[rings[0][::-1],rings[-1]]
+        for a,b in zip(rings,rings[1:]):
+            blade += [[a[k],a[(k+1)%4],b[(k+1)%4],b[k]] for k in range(4)]
+        blade=[[f[0],f[k+1],f[k]] for f in blade for k in range(1,len(f)-1)]
+        leaf_indices.extend(range(len(faces),len(faces)+len(blade)));faces+=blade
+        blade_records.append(dict(face_indices=list(range(len(faces)-len(blade),len(faces))),outer=outer))
+        # Petioles connect to their own basal fan, with overlap into the blade.
+        top=base+np.array([0.,0.,.025])
+        axis=top-root;axis/=np.linalg.norm(axis)
+        u=side;v=np.cross(axis,u)
+        a,b=[[(q+.004*(u*cos(k*2*pi/8)+v*sin(k*2*pi/8))).tolist() for k in range(8)] for q in (root,top)]
+        stem=[a[::-1],b]+[[a[k],a[(k+1)%8],b[(k+1)%8],b[k]] for k in range(8)]
+        faces += [[f[0],f[k],f[k+1]] for f in stem for k in range(1,len(f)-1)]
+    points=[q for f in faces for q in f]
+    lo=[min(q[k] for q in points) for k in range(3)];hi=[max(q[k] for q in points) for k in range(3)]
+    # Normalize to the sole palette envelope, then independently measure
+    # each real blade, including the effect of both coordinate factors.
+    horizontal_scale=spread/max(hi[k]-lo[k] for k in (0,1))
+    vertical_scale=height/(hi[2]-lo[2])
+    # The measured blade guard below refuses normalization that destroys
+    # the requested paddle proportions.
+    faces=[[[center[0]+q[0]*horizontal_scale,center[1]+q[1]*horizontal_scale,
+             ground+(q[2]-lo[2])*vertical_scale] for q in f] for f in faces]
+    for record in blade_records:
+        pts=np.unique(np.array([faces[i] for i in record["face_indices"]]).reshape(-1,3),axis=0)
+        _,_,axes=np.linalg.svd(pts-pts.mean(axis=0))
+        spans=np.ptp(pts@axes.T,axis=0)
+        record["measured_length_width_ratio"]=float(spans[0]/spans[1])
+        if not 3 <= record["measured_length_width_ratio"] <= 4:
+            raise ValueError("paddle blade length:width outside authored 3:1--4:1 brief")
+    mesh=_mesh(identifier,"dressing","strelitzia-foliage",faces,
+               "ASSUMED authored young Strelitzia reginae paddle-leaf clump; non-flowering young stage; photographic likeness and nursery supply UNVERIFIED",kind="plant-clump")
+    mesh.update(species=species,center=center,spread_m=row["spread"]["range_m"][1],bed=bed,
+                planting_layer=layer,root_z_m=ground,leaf_face_indices=leaf_indices,blade_records=blade_records,bevel_m=.0001)
+    return mesh
+
+
 def _botanical_clump(identifier, species, center, ground, data, *, bed, layer):
     """Authored leaves on connected petioles, not an imported species stand-in.
 
@@ -773,10 +845,13 @@ def _botanical_clump(identifier, species, center, ground, data, *, bed, layer):
     petioles and broad paddle blades. Young size is authored only in the
     palette. Photographic likeness and nursery supply need lead review.
     """
+    if species == "Strelitzia reginae":
+        return _paddle_clump(identifier,species,center,ground,data,bed=bed,layer=layer)
     row = require_species(species, data)
     assumed = row["placement_assumptions"]["procedural-clump"]
     height, spread = assumed["height"]["range_m"][0], assumed["spread"]["range_m"][0]
     faces = []
+    leaf_indices = []
     for index in range(10):
         angle = index*2*pi/10
         c, sn = cos(angle), sin(angle)
@@ -791,9 +866,11 @@ def _botanical_clump(identifier, species, center, ground, data, *, bed, layer):
                           [c*(reach-.003),sn*(reach-.003),z],
                           [c*reach+sn*width,sn*reach-c*width,z],
                           [c*(reach+.003),sn*(reach+.003),z]])
+        start=len(faces)
         faces += [rings[0][::-1],rings[-1]]
         for a,b in zip(rings,rings[1:]):
             faces += [[a[k],a[(k+1)%4],b[(k+1)%4],b[k]] for k in range(4)]
+        leaf_indices.extend(range(start,len(faces)))
         stem_rings = [[[c*.03 + .003*cos(k*2*pi/8),sn*.03 + .003*sin(k*2*pi/8),zz]
                        for k in range(8)] for zz in (0,blade_base+.02)]
         a,b = stem_rings
@@ -809,10 +886,12 @@ def _botanical_clump(identifier, species, center, ground, data, *, bed, layer):
                ground + (q[2]-lo[2])*height/(hi[2]-lo[2])] for q in f] for f in faces]
     # Swept blade rings are not coplanar quads. Triangulate their actual
     # closed surfaces before exporting; no render-side geometry repair.
+    source_faces=faces
+    leaf_indices=[j for j,(i,_) in enumerate((i,k) for i,f in enumerate(source_faces) for k in range(1,len(f)-1)) if i in leaf_indices]
     faces = [[face[0],face[k],face[k+1]] for face in faces for k in range(1,len(face)-1)]
     mesh = _mesh(identifier,"dressing","garden-foliage",faces,
                  "ASSUMED authored young " + species + " botanical appearance; photographic likeness UNVERIFIED; care: " + row["source_url"]["value"],kind="plant-clump")
-    mesh.update(species=species,center=center,spread_m=row["spread"]["range_m"][1],bed=bed,planting_layer=layer)
+    mesh.update(species=species,center=center,spread_m=row["spread"]["range_m"][1],bed=bed,planting_layer=layer,root_z_m=ground,leaf_face_indices=leaf_indices)
     return mesh
 
 
@@ -829,6 +908,7 @@ def _top_clump(identifier, species, center, soil_z, data, bed):
     height = assumption["height"]["range_m"][0]
     spread = assumption["spread"]["range_m"][0]
     faces = []
+    leaf_source_indices = []
 
     def tube(a,b,r):
         # Metre-native closed tube: every leaf physically meets its stem.
@@ -857,6 +937,7 @@ def _top_clump(identifier, species, center, soil_z, data, bed):
             faces += [rings[0][::-1],rings[-1]]
             for a,b in zip(rings,rings[1:]):
                 faces += [[a[k],a[(k+1)%4],b[(k+1)%4],b[k]] for k in range(4)]
+        leaf_source_indices=list(range(len(faces)))
         material="top-aloe-foliage"
     else:
         # A basal woody crown and alternating needle-covered branchlets.
@@ -871,7 +952,9 @@ def _top_clump(identifier, species, center, soil_z, data, bed):
                 point=tuple(origin[k]+t*(tip[k]-origin[k]) for k in range(3))
                 for side in (-1,1):
                     leaf=(point[0]+sign*.024,point[1]+side*.022,point[2]+.018)
-                    faces += tube(point,leaf,.0015)
+                    leaf_faces=tube(point,leaf,.0015)
+                    leaf_source_indices.extend(range(len(faces),len(faces)+len(leaf_faces)))
+                    faces += leaf_faces
         for index in range(7):
             x=(index-3)*.12
             points=[(0,0,.08),(x,-.08,.10),(x,-.17,.04),(x,-.24,-.10)]
@@ -880,7 +963,9 @@ def _top_clump(identifier, species, center, soil_z, data, bed):
                 for j in range(1,7):
                     point=tuple(a[k]+j/7*(b[k]-a[k]) for k in range(3))
                     for side in (-1,1):
-                        faces += tube(point,(point[0]+side*.022,point[1]-.008,point[2]+.01),.0015)
+                        leaf_faces=tube(point,(point[0]+side*.022,point[1]-.008,point[2]+.01),.0015)
+                        leaf_source_indices.extend(range(len(faces),len(faces)+len(leaf_faces)))
+                        faces += leaf_faces
         material="top-rosemary-foliage"
     pts=[q for f in faces for q in f]
     lo=[min(q[i] for q in pts) for i in range(3)]
@@ -897,12 +982,14 @@ def _top_clump(identifier, species, center, soil_z, data, bed):
              soil_z+bottom+(q[2]-lo[2])*height/(hi[2]-lo[2])] for q in f] for f in faces]
     # Include a real basal stem from soil into the crown after normalisation.
     faces += tube((center[0],center[1],root_z),(center[0],center[1],soil_z+height*.20),.005)
+    leaf_set=set(leaf_source_indices)
+    leaf_indices=[j for j,(i,_) in enumerate((i,k) for i,f in enumerate(faces) for k in range(1,len(f)-1)) if i in leaf_set]
     faces=[[face[0],face[k],face[k+1]] for face in faces for k in range(1,len(face)-1)]
     mesh=_mesh(identifier,"dressing",material,faces,
                "ASSUMED authored young "+species+" appearance; photographic likeness and nursery supply UNVERIFIED; care: "+row["source_url"]["value"],kind="plant-clump")
     spacing=row["placement_assumptions"].get("spacing_spread",{}).get("value",row["spread"]["range_m"][0] if row["spread"]["range_m"] else spread)
     mesh.update(species=species,zone="top",center=center,spread_m=spacing,bed=bed,
-                trough=bed,planting_layer="trough",root_z_m=root_z,sun_hours=direct_sun_hours(*center))
+                trough=bed,planting_layer="trough",root_z_m=root_z,leaf_face_indices=leaf_indices,sun_hours=direct_sun_hours(*center))
     return mesh
 
 
@@ -1201,6 +1288,7 @@ def review_candidate(spec, lay=None):
     for mesh in meshes:
         if mesh.get("part_kind") in ("climber", "climber-branch"):
             mesh["species"] = "Bougainvillea glabra" if mesh["id"].endswith("north") else "Trachelospermum jasminoides"
+            mesh["root_z_m"] = GROUND
 
     for name, center in (
             ("dining-w",(15.882,-22.97)), ("dining-e",(17.896,-22.97)),
@@ -1269,8 +1357,19 @@ def review_candidate(spec, lay=None):
              "Illustrative 09:00-17:00 direct hours screen: "+str(exposure)]
     ramp=spec["parking2"]["ramp"]
     gate_route=dict(profile=ramp["profile"],y0=PATHS["gate-link"][1],y1=PATHS["gate-link"][3])
+    boundary_obstacles = [dict(id=item["id"], rect=(min(p[0] for p in item["pts"])/1000,
+                                                   min(p[1] for p in item["pts"])/1000,
+                                                   max(p[0] for p in item["pts"])/1000,
+                                                   max(p[1] for p in item["pts"])/1000))
+                          for item in E.spec()["elements"]
+                          if item["id"].startswith("fence-") or item["id"] == "yard-wall-ne"]
     plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,
+                boundary_obstacles=boundary_obstacles,
                 east_rect=EAST,east_center=EAST_CENTER,tree_pit=dict(center=tree_center,diameter_m=radius*2,status="ASSUMED"))
+    from .garden_render_review import normal
+    for item in meshes:
+        if item["material"] == "stepping-stone":
+            item["face_materials"] = ["stone-substrate" if normal(face)[2]<-.7 else item["material"] for face in item["faces"]]
     plan["conflicts"] = candidate_violations(meshes,props,plan,lay)
     notes += ["UNRESOLVED garden guard: %s: %s" % f for f in plan["conflicts"]]
     return meshes,props,notes,plan
@@ -1292,15 +1391,16 @@ def candidate_violations(meshes, props, plan, lay):
     rooms = garden_level_rooms(lay)
     plants,objects = plan["plants"],plan["objects"]
     routes, ground = walking_routes(meshes)
+    from .garden_render_review import plant_form_findings
     swings = [p for p in props if p["asset"] == "sf_egg_chair"]
     return (extent_violations(props,rooms)+object_extent_violations(objects,rooms)+
-            [f for swing in swings for f in swing_violations(swing,props+objects+plants+[dict(id="bed-"+name,rect=rect) for name,rect in plan["beds"].items()])]+
+            [f for swing in swings for f in swing_violations(swing,props+objects+plants+plan.get("boundary_obstacles", [])+[dict(id="bed-"+name,rect=rect) for name,rect in plan["beds"].items()])]+
             [(pid,"door route "+route) for pid,route in route_violations(props+objects+[p for p in plants if "faces" in p], routes, ground)]+
             [(a,"plant spacing to %s: %.3f < %.3f m"%(b,got,need)) for a,b,got,need in spacing_violations(plants)]+
             [(bed,"only %d/3 primary layers: %s"%(len(have),have)) for bed,have in layer_violations(plants,plan["beds"])]+
             [(species,"%s/%s drift is %d, need 3-5"%(bed,layer,n)) for bed,layer,species,n in drift_violations(plants)]+
             sunlight_violations(plants)+standin_violations(props)+bench_violations(props)+species_violations(meshes+props)+
-            dimension_violations(meshes+props)+east_content_violations(meshes,props,objects)+
+            dimension_violations(meshes+props)+[("plant-form",f) for f in plant_form_findings(meshes)]+east_content_violations(meshes,props,objects)+
             canopy_violations(props)+canopy_violations(props,mature=True)+
             top_garden_violations(meshes,props,plan,spec_surface=TOP_SURFACE))
 

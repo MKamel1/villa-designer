@@ -160,6 +160,10 @@ M = {
                              roughness=0.92, tile_m=1.0,
                              note="ASSUMED drained artificial grass, short turf (ambientCG Grass002 CC0 scan, "
                                   "mapped tile 1.0 m); client 2026-09-29"),
+    "strelitzia-foliage": dict(kind="principled",base_rgb=[.08,.20,.16],reflectance=.18,roughness=.58,
+                                note="ASSUMED authored leathery blue-green Strelitzia foliage"),
+    "stone-substrate": dict(kind="principled",base_rgb=[.48,.46,.42],reflectance=.45,roughness=.9,
+                            note="ASSUMED unpolished mineral stone body, including buried underside; no floor texture"),
     "stepping-stone": dict(kind="principled", base_rgb=[0.62, 0.58, 0.50], reflectance=0.45,
                            roughness=0.85, note="ASSUMED flush honed sandstone stepping stones"),
     "trellis": dict(kind="principled", base_rgb=[0.16, 0.12, 0.08], reflectance=0.13,
@@ -560,6 +564,11 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             n = _normal(pts)
             room = _room_at(lay, cx + 0.06 * n[0], cy + 0.06 * n[1], cz)
             mat = FINISH[room][1] if room in FINISH else "paint-exterior-grey-green"
+        # Ground finishes are only eligible on upward/side surfaces. Apply
+        # this after semantic classification so context steps cannot bypass it.
+        from .garden_render_review import GROUND_ONLY
+        if mat in GROUND_ONLY and _normal(pts)[2] < -.7:
+            mat = "ceiling-white"
         # Apply the authored plaster layer to the occupied party-wall face.
         # Structural shell and treads retain their common CAD datum. Keep this
         # small package separate in the export so its finish is measurable.
@@ -2043,6 +2052,10 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                  "GENERIC (named in each caption).")
 
     scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
+             "garden_camera_domain": {
+                 "yard_polygon_m": LAND.YARD, "ground_m": LAND.GROUND, "upper_datum_m": 0.0,
+                 "rooms": {name: {"rect_m": room["rect"], "ground_m": LZ[room["level"]], "height_m": 2.8}
+                           for name, room in lay["rooms"].items()}},
              "mounting_hosts": {hid: asdict(host) for hid, host in stair_hosts.items()},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes,
              "diagnostic_meshes": diagnostic_meshes, "lights": lights,
@@ -2584,9 +2597,9 @@ def _VIEWS(lay=None, resolve=True):
     # front yard only the ramp enclosure): deferred; the study's other side instead
     v("v18-study-evening", "Study at night: sofa and TV from the desks", "evening", I, I, 24,
       ["study-sofa", "study-tv"], room="study-game", final_only=True, dimmers={"ambient": 0.4, "task": 0.6})
-    v("v19-garden-facade", "East lawn and young frangipani by day", "day", [28.0, -33.0, B + 1.35], [25.5240, -28.6561, B + 1.35], 24,
-      ["landscape-tree-east", "living-sofa"], final_only=True, shift_y=0.021, exposure="exterior-day")
-    V[-1]["caption_notes"] = ['East garden facade, lawn and stepping approach; young frangipani in the lawn, offset from centre for a clear door route. No east furniture, bed or trellis.']
+    v("v19-garden-facade", "South Garden lawn and young frangipani by day", "day", [28.30, -20.95, B + 1.35], [25.576804824924878, -25.143352839727097, B + 1.35], 24,
+      ["landscape-tree-east", "living-sofa"], final_only=True, shift_y=0.07514311046151044, exposure="exterior-day")
+    V[-1]["caption_notes"] = ['South Garden facade, lawn and stepping approach from inside the yard; young frangipani offset from centre for a clear door route. No South Garden furniture, bed or trellis. The living-room sofa is in frame through glazing but is partly obscured by the tree.']
     v("v20-kitchen-run", "Kitchen run and island at night", "evening", I, I, 24, ["k-run", "k-island"],
       room="kitchen", final_only=True, dimmers={"ambient": 0.4, "task": 0.8})
     v("v21-lounge-evening", "Street lounge at night", "evening", I, I, 24, ["lounge-sofa", "lounge-tv"],
@@ -2615,20 +2628,26 @@ def _VIEWS(lay=None, resolve=True):
       [19.0, -21.8, G + 1.35], 24, ["landscape-north-back", "landscape-north-mid", "landscape-north-front", "landscape-trellis-north"],
       shift_y=-0.61, final_only=True, exposure="exterior-day")
     V[-1]["caption_notes"] = ["North young three-layer planting and thin bougainvillea on open timber, from a clear standing point by the roof edge. Full soil-bed extent is outside the frame; v28 shows the north garden at ground level."]
-    # v28 re-placed (round 4): the old camera at (16.1, -21.0) let the lemon pot occupy 41.5 degrees of a
-    # 74-degree frame. A westward standing point in the sunken strip holds the garden doors, bed and trellis
-    # along one sightline with the lemon pot no longer filling the foreground.
-    v("v28-north-garden-below", "North garden at basement level", "day", [14.2, -22.5, B + 1.35],
+    # G2f: translate the standing point within the original kitchen-side space
+    # so its foreground glazing mullion stays outside the image's middle third.
+    v("v28-north-garden-below", "East Garden at basement level", "day", [14.2, -21.6, B + 1.35],
       [19.0, -21.8, B + 1.35], 24, ["landscape-bed-north", "landscape-trellis-north"],
-      final_only=True, exposure="exterior-day")
-    V[-1]["caption_notes"] = ["North garden at basement level: young three-layer boundary bed, open bougainvillea timber trellis and planted terracotta-red glazed door pots."]
-    v("v36-west-court", "West court from the shared-axis side", "day",
-      [.7, -33.4, B + 1.35], [1.4096, -28.4506, B + 1.35], 24,
+      shift_y=-.065, final_only=True, exposure="exterior-day")
+    V[-1]["standing_room"] = "dirty-kitchen"
+    V[-1]["caption_notes"] = ["East Garden at basement level, from the dirty kitchen: young three-layer boundary bed, open bougainvillea timber trellis and planted terracotta-red glazed door pots."]
+    v("v36-west-court", "North Garden bed and swing from open sky", "day",
+      [-.02, -23.85, B + 1.35], [2.8478821817552307, -27.94576022144499, B + 1.35], 24,
       ["landscape-bed-west", "landscape-west-back", "landscape-west-mid", "landscape-west-front",
-       "landscape-trellis-west", "landscape-climber-west", "landscape-door-pot-lounge-west",
-       "landscape-door-pot-planter-lounge-west", "landscape-west-bistro", "landscape-egg-swing"],
-      shift_y=-.088, final_only=True, exposure="exterior-day")
-    V[-1]["caption_notes"] = ["Level 24 mm camera at 1.35 m above the lower yard, on the sister side of the shared axis (no dividing fence). Three-layer west bed, open timber with white star jasmine, planted terracotta-red glazed pots, two-person bistro and swing on its own stand. Furniture relocated from the east garden; client to confirm."]
+       "landscape-door-pot-lounge-west",
+       "landscape-door-pot-planter-lounge-west", "landscape-egg-swing"],
+      shift_y=-.14001372799238446, final_only=True, exposure="exterior-day")
+    V[-1]["caption_notes"] = ["North Garden: level 24 mm camera at 1.35 m eye height, inside the yard and outside overhead cover. Three-layer bed, planted terracotta-red glazed pot and swing on its own stand. The GF balcony covers part of the bed; the modeled upper-storey projection covers the retained swing. No open swing position passes routes, planting and fence-aware motion clearance. Bistro remains fixed; companion v37 shows the trellis and bistro. Both pieces relocated from the east garden; client to confirm."]
+    v("v37-west-court-bistro", "North Garden trellis and bistro through the lounge", "day",
+      [5.35, -25.45, B + 1.35], [.4781496760738273, -24.3252447282807, B + 1.35], 24,
+      ["landscape-trellis-west", "landscape-climber-west", "landscape-west-bistro", "landscape-door-pot-lounge-west-n", "landscape-door-pot-planter-lounge-west-n"],
+      shift_y=-.14415908053594262, final_only=True, exposure="exterior-day")
+    V[-1]["standing_room"] = "lounge"
+    V[-1]["caption_notes"] = ["North Garden from the lounge: level 24 mm camera at 1.35 m eye height. Open timber star-jasmine trellis, fixed bistro and planted terracotta-red glazed pot. The pot partly hides the left chair seat/legs, and the bistro hides the lower trellis; all subjects are framed, not wholly unobstructed. Companion v36 shows the bed and retained covered swing. Both pieces relocated from the east garden; client to confirm."]
     # v29: RV.choose in stair-b put the camera at x=9.577 and the stair treads blocked both storage modules
     # despite their plan footprints falling inside the lens wedge. Stand northwest of the stair flight in the
     # lounge and aim at the joinery fronts; 16 mm holds both separate modules from this clear point.
@@ -2682,7 +2701,7 @@ def _VIEWS(lay=None, resolve=True):
     for x in V:
         c = x["camera"]
         if x["state"] == "exterior-dusk" or x["id"] in ("v18-street-facade", "v19-garden-facade") or \
-                x["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v33-", "v34-", "v36-")):
+                x["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v33-", "v34-", "v36-", "v37-")):
             continue
         room = x.get("room")
         lvz = LZ[lay["rooms"][room]["level"]] if room else (LZ["B"] if c["position"][2] < -0.1 else LZ["GF"])

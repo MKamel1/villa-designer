@@ -1,0 +1,75 @@
+{
+  "schema": "garden-render-guards/1",
+  "records": [
+    {
+      "lesson_id": "garden-g2f-plant-form",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "basal overlapping paddle builder and explicit leaf indices",
+      "check": "archpipe.concept.garden_render_review.plant_form_findings",
+      "stage": "scene contract, view plan and portable verification",
+      "proof_file": "tests/test_landscape.py",
+      "proofs": [
+        "test_g2f_real_leaf_gap_clean_paddles_and_renamed_siblings"
+      ]
+    },
+    {
+      "lesson_id": "garden-g2f-face-finish",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "normal-based shell finish and per-face mineral underside slots",
+      "check": "archpipe.concept.garden_render_review.downward_ground_findings",
+      "stage": "scene contract, view plan and portable verification",
+      "proof_file": "tests/test_render_standard.py",
+      "proofs": [
+        "test_g2f_real_steps_and_ground_siblings_have_no_paved_soffits"
+      ]
+    },
+    {
+      "lesson_id": "garden-g2f-opening-frame",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "project foreground opening members before accepting a standing camera",
+      "check": "archpipe.concept.garden_render_review.opening_frame_findings",
+      "stage": "scene contract, view plan and portable verification",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_g2f_foreground_mullion_real_camera_and_translated_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-g2f-court-cover",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "explicit measured yard/room standing domain and overhead architectural union",
+      "check": "archpipe.concept.garden_render_review.garden_camera_findings",
+      "stage": "scene contract, view plan and portable verification",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_g2f_real_outside_yard_cameras_cover_and_room_generalise"
+      ]
+    },
+    {
+      "lesson_id": "garden-g2f-fence-envelope",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "measure modeled fence/wall footprints into swing motion obstacles",
+      "check": "villa_landscape.candidate_violations and swing_violations",
+      "stage": "landscape candidate before scene integration",
+      "proof_file": "tests/test_landscape.py",
+      "proofs": [
+        "test_g2f_real_open_swing_candidate_cannot_use_fence_thickness"
+      ]
+    }
+  ]
+}

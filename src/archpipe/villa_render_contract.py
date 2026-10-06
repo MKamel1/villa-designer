@@ -65,7 +65,7 @@ def emission_strength(exitance_lm_per_m2: float) -> float:
 
 def mesh_batch_key(mesh: dict, material_kind: str):
     """Only merge non-emitting architectural meshes with identical ray flags."""
-    if (mesh.get("keep_object") or "bevel_m" in mesh or "subdivide" in mesh or
+    if (mesh.get("keep_object") or "face_materials" in mesh or "bevel_m" in mesh or "subdivide" in mesh or
             mesh.get("group") in ("furniture", "fixture", "dressing") or material_kind == "emissive"):
         return None
     visibility = mesh.get("visibility", {})
@@ -169,6 +169,10 @@ def validate_scene(scene: dict) -> list[str]:
             errors.append(f"{p}: render mesh {ident!r} must not be a diagnostic or host/support bookkeeping mesh")
         need(mesh.get("group") in GROUPS, p+".group", "unknown group")
         need(mesh.get("material") in materials, p+".material", "unknown material")
+        if "face_materials" in mesh:
+            assigned=mesh["face_materials"]
+            need(isinstance(assigned,list) and len(assigned)==len(mesh.get("faces",[])) and all(m in materials for m in assigned),
+                 p+".face_materials", "one registered finish per authored face required")
         need(mesh.get("room") is None or isinstance(mesh.get("room"), str), p+".room", "string or null required")
         need(isinstance(mesh.get("label"), str), p+".label", "string required")
         if "layer" in mesh:
@@ -412,4 +416,11 @@ def validate_scene(scene: dict) -> list[str]:
             need(_number(c.get("open_clear_width_m"), positive=True) and
              c.get("open_clear_width_m", -1) >= DOOR_CLEAR_WIDTH_M - 1e-9,
              p+".open_clear_width_m", "a door's open curtains must leave >= %.3f m clear (F.BODY)" % DOOR_CLEAR_WIDTH_M)
+    if not errors:
+        from .concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings
+        errors.extend(downward_ground_findings(scene))
+        errors.extend(plant_form_findings(meshes))
+        for view in scene.get("views", []):
+            errors.extend(f"{f['view']}: {f['mesh']} {f['reason']}" for f in opening_frame_findings(view,scene))
+            errors.extend(garden_camera_findings(view, scene))
     return errors

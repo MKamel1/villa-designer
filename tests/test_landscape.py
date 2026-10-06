@@ -21,6 +21,76 @@ class LandscapeGuards(unittest.TestCase):
         cls.centred_tree = json.loads((Path(__file__).parent / "fixtures/garden-g2-tree-centred-before.json").read_text())
         cls.other_props = [p for p in cls.props if p is not cls.tree]
 
+    def test_g2f_real_leaf_gap_clean_paddles_and_renamed_siblings(self):
+        from archpipe.concept.garden_render_review import plant_form_findings
+        from archpipe.concept.physical_part import Part
+        frozen=json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        self.assertIn('0.660 m',plant_form_findings(frozen['clumps'])[0])
+        self.assertEqual(plant_form_findings(self.meshes),[])
+        clump=next(m for m in self.meshes if m.get('species')=='Strelitzia reginae')
+        self.assertEqual(len(clump['blade_records']),17)
+        self.assertTrue(all(3<=b['measured_length_width_ratio']<=4 for b in clump['blade_records']))
+        # Another datum/identifier does not suppress the historical failure.
+        sibling=copy.deepcopy(frozen['clumps'][0]);sibling['id']='renamed-basal-plant'
+        for face in sibling['faces']:
+            for point in face:point[2]+=8
+        sibling['root_z_m']+=8
+        self.assertTrue(plant_form_findings([sibling]))
+        clean=copy.deepcopy(clump);clean['id']='another-paddle'
+        for face in clean['faces']:
+            for point in face:point[0]+=9;point[1]-=5;point[2]+=8
+        clean['root_z_m']+=8
+        self.assertEqual(plant_form_findings([clean]),[])
+        # A basal stem still reaching soil cannot hide a raised leaf mass.
+        mutant=copy.deepcopy(clean)
+        for i in mutant['leaf_face_indices']:
+            for q in mutant['faces'][i]:q[2]+=.7
+        self.assertTrue(any('leaf mass' in f for f in plant_form_findings([mutant])))
+        del clean['leaf_face_indices']
+        self.assertTrue(plant_form_findings([clean]))
+        for mesh in self.meshes:
+            if mesh.get('part_kind')=='plant-clump':
+                Part(mesh['part_kind'],mesh['faces'],('x','y','z'),mesh['material'],'authored-procedural')
+        climber=copy.deepcopy(next(m for m in self.meshes if m.get('part_kind')=='climber'))
+        for face in climber['faces']:
+            for q in face:q[2]+=1
+        self.assertTrue(plant_form_findings([climber]))
+
+    def test_g2f_client_retained_furniture_preserves_all_garden_guards(self):
+        frozen=json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        old=next(p for p in frozen['furniture'] if p['asset']=='outdoor_table_chair_set_01')
+        current=next(p for p in self.props if p['asset']==old['asset'])
+        self.assertEqual(current, old)
+        self.assertEqual(L.candidate_violations(self.meshes,self.props,self.plan,self.lay),[])
+        self.assertTrue('relocated from the east garden; client to confirm' in current['label'])
+        swing=next(p for p in self.props if p['asset']=='sf_egg_chair')
+        self.assertEqual(swing, next(p for p in frozen['furniture'] if p['asset']=='sf_egg_chair'))
+        # The tempting open swing point physically enters the bistro envelope.
+        bad=copy.deepcopy(swing)
+        rect=L._rect(bad);bad['position'][0]+=1.0-(rect[0]+rect[2])/2
+        bad['position'][1]+=-24.65-(rect[1]+rect[3])/2
+        self.assertTrue(L.swing_violations(bad,self.props+self.plan['objects']+self.plan['plants']))
+
+    def test_g2f_real_open_swing_candidate_cannot_use_fence_thickness(self):
+        frozen = json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())['fence_candidate']
+        candidate = frozen['swing']
+        old_items = self.props+self.plan['objects']+self.plan['plants']+[
+            dict(id='bed-'+name, rect=rect) for name, rect in self.plan['beds'].items()]
+        self.assertEqual(L.swing_violations(candidate, old_items), [])
+        findings = L.swing_violations(candidate, old_items+frozen['boundary_obstacles'])
+        self.assertIn(('fence-street', 'swing envelope'), findings)
+        placed = [candidate if p['id'] == candidate['id'] else p for p in self.props]
+        self.assertEqual(L.candidate_violations(self.meshes, placed,
+                         dict(self.plan, boundary_obstacles=[]), self.lay), [])
+        self.assertIn(('fence-street', 'swing envelope'),
+                      L.candidate_violations(self.meshes, placed, self.plan, self.lay))
+        self.assertEqual(L.candidate_violations(self.meshes, self.props, self.plan, self.lay), [])
+        renamed = copy.deepcopy(frozen['boundary_obstacles'])
+        for item in renamed:
+            item['id'] = 'other-villa-'+item['id']
+        self.assertIn(('other-villa-fence-street', 'swing envelope'),
+                      L.swing_violations(candidate, old_items+renamed))
+
     def test_palette_has_exact_agreed_species_and_unverified_fields(self):
         data = L._plant_data()
         self.assertEqual(set(data), {"Aspidistra elatior", "Ixora coccinea", "Strelitzia reginae",

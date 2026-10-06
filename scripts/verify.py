@@ -95,6 +95,20 @@ def main() -> int:
            RECORD.stat().st_size < 1500000)
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
     scene = VR.build(views=[])
+    garden_registry = json.loads((ROOT / "knowledge/garden-render-guards.json").read_text(encoding="utf-8"))
+    expect("garden render controls have registered proving tests",
+           all((ROOT / item["proof_file"]).is_file() and all(
+               "def " + name + "(" in (ROOT / item["proof_file"]).read_text(encoding="utf-8")
+               for name in item["proofs"]) for item in garden_registry["records"]))
+    from archpipe.concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings
+    expect("scene contains no ground-only downward faces", not downward_ground_findings(scene))
+    expect("procedural leaf mass reaches root soil", not plant_form_findings(scene["meshes"]))
+    from archpipe.concept import villa_r11
+    garden_views = VR.VIEWS(villa_r11.design("D1"))
+    view_findings=[f for v in garden_views for f in opening_frame_findings(v,scene)]
+    expect("foreground opening frames avoid every view's central third", not view_findings)
+    expect("garden cameras stand in open yard or a declared room",
+           not [f for v in garden_views for f in garden_camera_findings(v, scene)])
     mounting_registry = json.loads((ROOT / "knowledge/mounting-guards.json").read_text(encoding="utf-8"))
     expect("finished-surface controls have registered proving tests",
            all((ROOT / item["proof_file"]).is_file() and all(

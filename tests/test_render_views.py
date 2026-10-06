@@ -18,6 +18,68 @@ ITEMS = {i["id"]: i for i in F.layout(LAY)}
 
 
 class ChosenViews(unittest.TestCase):
+    def test_g2f_real_outside_yard_cameras_cover_and_room_generalise(self):
+        from archpipe.concept.garden_render_review import garden_camera_findings
+        from archpipe.concept import villa_render as V
+        frozen = json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        scene = frozen['scene_for_camera']
+        for view in frozen['outside_yard_views']:
+            self.assertIn('outside yard', garden_camera_findings(view, scene)[0])
+        upper = deepcopy(frozen['outside_yard_views'][1])
+        upper['camera']['position'][2] = 1.35
+        self.assertIn('outside yard', garden_camera_findings(upper, scene)[0])
+        covered = deepcopy(frozen['outside_yard_views'][1])
+        covered['id'] = 'another-garden-view'
+        covered['camera']['position'] = [2.6, -28.35, -1.65]
+        self.assertIn('under architectural cover', garden_camera_findings(covered, scene)[0])
+        for view in V.VIEWS(LAY):
+            self.assertEqual(garden_camera_findings(view, scene), [], view['id'])
+        through = deepcopy(covered)
+        through['camera']['position'] = [14.2, -21.6, -1.65]
+        through['standing_room'] = 'dirty-kitchen'
+        self.assertEqual(garden_camera_findings(through, scene), [])
+        through['standing_room'] = 'lounge'
+        self.assertTrue(garden_camera_findings(through, scene))
+        translated = deepcopy(scene)
+        domain = translated['garden_camera_domain']
+        domain['yard_polygon_m'] = [[x+11, y-5] for x, y in domain['yard_polygon_m']]
+        domain['ground_m'] += 7
+        domain['upper_datum_m'] += 7
+        for mesh in translated['meshes']:
+            for face in mesh['faces']:
+                for point in face:
+                    point[0] += 11; point[1] -= 5; point[2] += 7
+        old = deepcopy(frozen['outside_yard_views'][1]); old['id'] = 'renamed-view'
+        old['camera']['position'] = [old['camera']['position'][0]+11, old['camera']['position'][1]-5, old['camera']['position'][2]+7]
+        self.assertTrue(garden_camera_findings(old, translated))
+        self.assertTrue(garden_camera_findings(covered, {}))
+        self.assertEqual(garden_camera_findings({'subjects': []}, {}), [])
+
+    def test_g2f_foreground_mullion_real_camera_and_translated_sibling(self):
+        from archpipe.concept.garden_render_review import opening_frame_findings
+        from archpipe.concept import villa_render as V
+        frozen=json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        old=frozen['views'][0];scene=frozen['scene_for_frames']
+        self.assertEqual(opening_frame_findings(old,scene)[0]['face_indices'],[116,117,118,119])
+        new=next(v for v in V.VIEWS(resolve=False) if v['id'].startswith('v28'))
+        self.assertNotEqual(new['camera']['position'],old['camera']['position'])
+        self.assertEqual(opening_frame_findings(new,scene),[])
+        translated=deepcopy(scene);view=deepcopy(old);view['id']='another-through-opening-view'
+        for m in translated['meshes']:
+            for f in m['faces']:
+                for q in f:q[0]+=10;q[1]-=4;q[2]+=7
+        for key in ('position','target'):
+            view['camera'][key]=[view['camera'][key][0]+10,view['camera'][key][1]-4,view['camera'][key][2]+7]
+        self.assertTrue(opening_frame_findings(view,translated))
+        # A window behind the main subject is a facade in the image, not
+        # an opening through which this photograph is taken.
+        remote=deepcopy(scene)
+        for m in remote['meshes']:
+            if m.get('part_kind') in ('window-frame', 'glass-pane'):
+                for f in m['faces']:
+                    for q in f:q[0]+=10
+        self.assertEqual(opening_frame_findings(old,remote),[])
+
     def test_frozen_east_wc_vertical_lens_need_and_whole_mesh(self):
         from scripts.villa_render_views import subject_mesh_frame_violations
         frozen = json.loads((Path(__file__).parent / "fixtures/c4-family-wc-lens-before.json").read_text())
@@ -209,10 +271,15 @@ class ChosenViews(unittest.TestCase):
                        'landscape-west-front','landscape-trellis-west','landscape-climber-west',
                        'landscape-door-pot-lounge-west','landscape-door-pot-planter-lounge-west',
                        'landscape-west-bistro','landscape-egg-swing'):
-            self.assertIn(prefix,west['subjects'])
-            self.assertEqual(views.subject_mesh_frame_violations(west,scene,prefix),[])
+            owner=by["v37-west-court-bistro"] if prefix in ("landscape-west-bistro", "landscape-trellis-west", "landscape-climber-west") else west
+            self.assertIn(prefix,owner["subjects"])
+            self.assertEqual(views.subject_mesh_frame_violations(owner,scene,prefix),[])
         bad=deepcopy(west)
-        bad['camera']['target']=[.7,-38.0,-1.65]
+        # Reverse the current sightline. The former absolute target points
+        # toward the swing once the lens moves from the sister side to the
+        # required open-yard side, so it is no longer an adverse case.
+        position, target = bad['camera']['position'], bad['camera']['target']
+        bad['camera']['target']=[2*position[0]-target[0], 2*position[1]-target[1], position[2]]
         self.assertTrue(views.subject_mesh_frame_violations(bad,scene,'landscape-egg-swing'))
         for vid in ('v07-terrace-dusk','v19-garden-facade','v25-top-garden-gate',
                     'v26-top-garden-north','v27-north-garden-above','v28-north-garden-below'):
