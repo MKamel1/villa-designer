@@ -49,7 +49,7 @@ def measured_items(scene, lay):
     # Low fittings do not consume the floor approach, but all shower assembly
     # projections are kept as conservative route obstacles where they are
     # within a body's working-height range. Ceiling drops are above that.
-    for mesh in scene['meshes']:
+    for mesh in scene.get('diagnostic_meshes', []) + scene['meshes']:
         if mesh.get('mounting_package')=='b-bathroom' and mesh['id'].startswith('detail-'):
             bb = bounds(mesh)
             room = mesh.get('room')

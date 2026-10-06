@@ -158,6 +158,20 @@ def validate_scene(scene: dict) -> list[str]:
         ident = mesh.get("id")
         need(isinstance(ident, str) and bool(ident) and ident not in mesh_ids, p+".id", "unique nonempty string required")
         mesh_ids.add(ident)
+        # Guard: Bookkeeping and diagnostic meshes must never enter render meshes.
+        # Defect: ~600 bookkeeping meshes with "host-face-", "support-", etc. made walls render solid black.
+        is_bookkeeping_id = isinstance(ident, str) and (
+            ident.startswith("host-face-")
+            or ident.startswith("support-")
+            or ident.startswith("yard-boundary-edge-")
+            or ident.startswith("hood-support-patch-")
+            or ident == "finish-stair-basement-floor-host"
+            or "-patch-" in ident
+        )
+        is_diagnostic = bool(mesh.get("diagnostic")) or "diagnostic only" in str(mesh.get("label", "")).lower()
+        is_camera_hidden = mesh.get("visibility", {}).get("camera") is False
+        if is_bookkeeping_id or is_diagnostic or is_camera_hidden:
+            errors.append(f"{p}: render mesh {ident!r} must not be a diagnostic or host/support bookkeeping mesh")
         need(mesh.get("group") in GROUPS, p+".group", "unknown group")
         need(mesh.get("material") in materials, p+".material", "unknown material")
         need(mesh.get("room") is None or isinstance(mesh.get("room"), str), p+".room", "string or null required")

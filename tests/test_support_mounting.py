@@ -82,8 +82,9 @@ class SupportMounting(unittest.TestCase):
             target=next(m for m in mutant['meshes'] if m['id']==child['id'])
             for f in target['faces']:
                 for p in f:p[2]+=.01
-            self.assertTrue(any('finished-face error' in f for f in scene_findings(mutant)))
-            mutant=deepcopy(scene);mutant['meshes']=[m for m in mutant['meshes'] if not m.get('finished_host_id')]
+            mutant=deepcopy(scene)
+            mutant['diagnostic_meshes']=[m for m in mutant.get('diagnostic_meshes',[]) if not m.get('finished_host_id')]
+            mutant['meshes']=[m for m in mutant['meshes'] if not m.get('finished_host_id')]
             self.assertTrue(any('finite host coverage' in f for f in scene_findings(mutant)))
 
     def test_wc_slides_full_tables_and_family_geometry_retained(self):

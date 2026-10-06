@@ -81,8 +81,9 @@ def yard_sources(scene):
             basis='No modeled wall solid: polygon edge declared inner structural face; wall/height construction UNVERIFIED'
         source=dict(id='yard-boundary-edge-'+str(index),faces=[face],material=material,
                     group='shell',part_kind='finish-layer',label=basis,visibility={'camera':False},
+                    diagnostic=True,
                     yard_edge_index=index,wall_thickness_m=thickness,datum_basis=basis)
-        scene['meshes'].append(source)
+        scene.setdefault('diagnostic_meshes', []).append(source)
         host=datum(scene,source,face,inward,source['id'],'wall')
         scene['mounting_hosts'][host.id].update(wall_thickness_m=thickness,datum_basis=basis,
             maximum_authored_travel_m=MAXIMUM_TRAVEL_M,finish_basis='Modeled exterior paint/render; build-up UNVERIFIED; finished face = modeled face')
@@ -176,6 +177,6 @@ def apply_lead_review(scene):
         faces=[f for f in source['faces'] if sum(normal(f)[i]*outward[i] for i in range(3))>.999999
                and all(abs(sum((p[i]-origin[i])*outward[i] for i in range(3)))<1e-8 for p in f)]
         if not faces:continue
-        scene['meshes'].append(dict(id='hood-support-patch-'+source['id'],faces=[[[p[i]+depth*outward[i] for i in range(3)] for p in f] for f in faces],
+        scene.setdefault('diagnostic_meshes', []).append(dict(id='hood-support-patch-'+source['id'],faces=[[[p[i]+depth*outward[i] for i in range(3)] for p in f] for f in faces],
             group='shell',material=record['source_material'],part_kind='finish-layer',label='Actual coplanar wall support; approved plaster build-up',
-            finished_host_id=record['id'],source_mesh=source['id'],source_faces=deepcopy(faces),visibility={'camera':False}))
+            finished_host_id=record['id'],source_mesh=source['id'],source_faces=deepcopy(faces),visibility={'camera':False},diagnostic=True))

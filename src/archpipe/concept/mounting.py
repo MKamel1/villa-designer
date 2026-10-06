@@ -334,7 +334,8 @@ def host_coverage_findings(scene: dict, hosts: dict[str, Host]) -> list[str]:
             continue
         host = hosts[contract["host_id"]]
         position = mount(MountItem(mesh["id"]), host, "finished", 0, "surface-mounted").finished_face
-        surfaces = [face for member in scene["meshes"] if member.get("finished_host_id") == host.id
+        surfaces = [face for member in (scene.get("diagnostic_meshes", []) + scene.get("meshes", []))
+                    if member.get("finished_host_id") == host.id
                     for face in member["faces"] if all(abs(sum((p[i] - position[i]) * host.normal[i]
                                                                for i in range(3))) < 1e-8 for p in face)]
         points = [p for face in mesh["faces"] for p in face]

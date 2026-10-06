@@ -82,11 +82,11 @@ def measured_host(scene, anchor, outward, room, host_id, *, kind="wall", panel=F
     host_mesh = dict(id="host-face-" + host_id, material=member["material"],
                                 faces=deepcopy(coplanar), group="shell", room=room, part_kind="finish-layer",
                                 finished_host_id=host_id, label="Measured finished fixing face",
-                                visibility={"camera": False})
+                                visibility={"camera": False}, diagnostic=True)
     applied = finish.thickness_m <= .005
     if applied:
         host_mesh["faces"] = surfaces
-    scene["meshes"].append(host_mesh)
+    scene.setdefault("diagnostic_meshes", []).append(host_mesh)
     before = dict(host_mesh, faces=coplanar)
     after = dict(host_mesh, faces=surfaces)
     scene["mounting_movements"].append(dict(id=host_mesh["id"], package="b-bathroom" if host_id.startswith(("bath-", "detail-")) else "c-wall-lights",

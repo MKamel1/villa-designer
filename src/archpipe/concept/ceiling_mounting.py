@@ -30,8 +30,9 @@ def ceiling_host(scene, anchor, room, identifier):
                 and all(abs(sum((p[i]-face[0][i])*n[i] for i in range(3)))<1e-8 for p in f)]
     scene['mounting_hosts'][identifier] = dict(asdict(host),source_mesh=source['id'],source_faces=deepcopy(coplanar),
         source_material=source['material'],void_status='MISSING; UNVERIFIED finish-build-ups.json')
-    scene['meshes'].append(dict(id='host-face-'+identifier,material=source['material'],group='shell',room=room,
+    scene.setdefault('diagnostic_meshes', []).append(dict(id='host-face-'+identifier,material=source['material'],group='shell',room=room,
         faces=deepcopy(coplanar),finished_host_id=identifier,visibility={'camera':False},part_kind='finish-layer',
+        diagnostic=True,
         label='Measured finished ceiling fixing face: '+identifier+'; diagnostic only'))
     return host
 

@@ -464,6 +464,7 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     # C3 phase 1: collect all legacy failures for the lead's checkpoint.
     # Strict construction is available with collect_part_failures=False.
     meshes, notes = PartMeshList(collect=collect_part_failures), []
+    diagnostic_meshes = []
     mats = dict(M)
 
     views = views if views is not None else VIEWS(lay)
@@ -690,9 +691,11 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     floor_host = Host("stair-basement-floor", "floor", (0, 0, LZ["B"]), (0, 0, 1),
                       Finish("existing-model-floor-finish; build-up unknown; elevation retained", 0))
     stair_hosts[floor_host.id] = floor_host
-    mesh("finish-stair-basement-floor-host", "travertine", floor_faces, "shell", room="stair-b",
-         label="Existing basement floor face; no new thickness inferred", kind="finish-layer",
-         finished_host_id=floor_host.id, visibility={"camera": False})
+    diagnostic_meshes.append(dict(
+        id="finish-stair-basement-floor-host", group="shell", material="travertine",
+        room="stair-b", label="Existing basement floor face; no new thickness inferred",
+        faces=floor_faces, part_kind="finish-layer", finished_host_id=floor_host.id,
+        visibility={"camera": False}, diagnostic=True))
     for n, t in enumerate(treads):
         xa, ya, za, xb, yb, zb = t
         host = return_host if xa < return_end else stair_host
@@ -2022,7 +2025,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
 
     scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
              "mounting_hosts": {hid: asdict(host) for hid, host in stair_hosts.items()},
-             "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes, "lights": lights,
+             "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes,
+             "diagnostic_meshes": diagnostic_meshes, "lights": lights,
              "part_failures": meshes.failures,
              "props": props(lay) + land_props, "models": models, "cloth": cloth, "curtains": curtains, "views": views,
              "exposure_mode": "set-metered", "exposure": EXPOSURE, "sky": {"day": "nishita",

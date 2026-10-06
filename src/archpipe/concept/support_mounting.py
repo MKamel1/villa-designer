@@ -83,8 +83,9 @@ def datum(scene, source, face, outward, identifier, kind):
                     for i in range(3))) < 1e-8 for p in f)]
     scene['mounting_hosts'][identifier] = dict(asdict(host), source_mesh=source['id'],
         source_faces=deepcopy(coplanar), source_material=source['material'], finish_status='UNVERIFIED')
-    scene['meshes'].append(dict(id='host-face-'+identifier, material=source['material'],
+    scene.setdefault('diagnostic_meshes', []).append(dict(id='host-face-'+identifier, material=source['material'],
         faces=deepcopy(coplanar), group='shell', room=source.get('room'), part_kind='finish-layer',
+        diagnostic=True,
         label='Measured support datum: '+identifier, finished_host_id=identifier, visibility={'camera':False}))
     return host
 
@@ -209,7 +210,7 @@ def migrate(scene, lay):
                 member['mounting_package']='e-support'
         else:
             sources=[m for m in original if m['id']=='floor-'+room]
-            if not sources and room=='stair-b': sources=[m for m in original if m['id']=='finish-stair-basement-floor-host']
+            if not sources and room=='stair-b': sources=[m for m in original + scene.get('diagnostic_meshes', []) if m['id']=='finish-stair-basement-floor-host']
             if room=='parents-dressing-ext':
                 sources=[m for m in original if m['id'] in ('floor-parents-dressing-ext','floor-parents-dressing')]
             host=nearest(scene,anchor,(0,0,1),sources,'support-'+key,'floor')
@@ -219,8 +220,9 @@ def migrate(scene, lay):
                 faces=[f for f in source['faces'] if normal(f)[2]>.999999 and
                     all(abs(p[2]-host.structural_point[2])<1e-8 for p in f)]
                 if faces:
-                    scene['meshes'].append(dict(id=host.id+'-patch-'+source['id'],material=source['material'],
+                    scene.setdefault('diagnostic_meshes', []).append(dict(id=host.id+'-patch-'+source['id'],material=source['material'],
                         faces=deepcopy(faces),group='shell',room=source.get('room'),part_kind='finish-layer',
+                        diagnostic=True,
                         label='Actual coplanar finished floor support patch',finished_host_id=host.id,visibility={'camera':False}))
 
     # Remaining site parts bind to their intended source, never to their own
@@ -241,8 +243,9 @@ def migrate(scene, lay):
                 faces=[f for f in source['faces'] if normal(f)[2]<-.999999 and
                     all(abs(p[2]-host.structural_point[2])<1e-8 for p in f)]
                 if faces:
-                    scene['meshes'].append(dict(id=host_id+'-patch-'+source['id'],material=source['material'],
+                    scene.setdefault('diagnostic_meshes', []).append(dict(id=host_id+'-patch-'+source['id'],material=source['material'],
                         faces=deepcopy(faces),group='shell',room=source.get('room'),part_kind='finish-layer',
+                        diagnostic=True,
                         label='Actual adjacent coplanar ceiling support',finished_host_id=host.id,visibility={'camera':False}))
             if room=='parents-bed' and bb[1]<F.clear_rect(lay,room)[1]:
                 # Full track end overruns the actual ceiling; list a tangential
@@ -259,7 +262,7 @@ def migrate(scene, lay):
             mount_landscape(scene,member,yard_hosts)
         elif kind=='stair-stringer':
             host=nearest(scene,[anchor[0],anchor[1],bb[2]],(0,0,1),
-                [m for m in original if m['id']=='finish-stair-basement-floor-host'],host_id,'floor')
+                [m for m in original + scene.get('diagnostic_meshes', []) if m['id']=='finish-stair-basement-floor-host'],host_id,'floor')
             floor_assembly(scene,[member],host,mid)
         elif kind=='drain':
             wet=next(m for m in scene['meshes'] if m['id']=='furn-gwc-shower-0')

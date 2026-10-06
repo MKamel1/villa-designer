@@ -771,6 +771,19 @@ def main() -> int:
     expect("no book or standard (PDF/EPUB) committed to the repository"
            + (f" ({', '.join(tracked[:4])})" if tracked else ""), not tracked)
 
+    # Render scene meshes must never contain diagnostic or host/support bookkeeping geometry:
+    # ~600 bookkeeping meshes with "host-face-", "support-", etc. made walls render solid black.
+    from archpipe.villa_render_contract import validate_scene
+    mock_bad_scene = {
+        "schema": "villa-render/1", "id": "test", "north": {"model_y_bearing_deg": 0.0},
+        "library_root": "lib", "materials": {"m": {"kind": "principled", "base_rgb": [1, 1, 1]}},
+        "meshes": [{"id": "host-face-test", "group": "shell", "material": "m", "label": "test",
+                    "faces": [[[0, 0, 0], [1, 0, 0], [1, 1, 0]]]}],
+        "lights": [], "views": []
+    }
+    expect("validate_scene rejects host-face bookkeeping mesh in render meshes",
+           any("bookkeeping" in e or "host-face" in e for e in validate_scene(mock_bad_scene)))
+
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     return 1 if FAILS else 0
 

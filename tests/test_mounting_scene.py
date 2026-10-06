@@ -123,7 +123,7 @@ class StairFirstPackage(unittest.TestCase):
 
     def test_migrated_plane_contracts_quiet_but_core_coverage_fails(self):
         self.assertEqual(len(self.members), 22)
-        surfaces = [m for m in self.scene["meshes"] if m.get("finished_host_id")]
+        surfaces = [m for m in self.scene.get("diagnostic_meshes", []) + self.scene["meshes"] if m.get("finished_host_id")]
         subset = dict(meshes=self.members + surfaces, mounting_hosts=self.scene["mounting_hosts"])
         failures = scene_findings(subset)
         self.assertEqual(failures, [])
@@ -361,6 +361,47 @@ class StairFirstPackage(unittest.TestCase):
             if mesh["part_kind"] == "stair-stringer":
                 self.assertEqual(max(p[1] for f in mesh["faces"] for p in f),
                                  max(p[1] for f in old[mesh["id"]]["faces"] for p in f))
+
+    def test_render_meshes_contain_no_diagnostic_or_host_face_meshes(self):
+        from archpipe.villa_render_contract import validate_scene
+        render_mesh_ids = [m["id"] for m in self.scene["meshes"]]
+        for mid in render_mesh_ids:
+            self.assertFalse(mid.startswith("host-face-"), f"render mesh {mid} starts with host-face-")
+            self.assertFalse(mid.startswith("support-"), f"render mesh {mid} starts with support-")
+            self.assertFalse(mid.startswith("yard-boundary-edge-"), f"render mesh {mid} starts with yard-boundary-edge-")
+            self.assertFalse(mid.startswith("hood-support-patch-"), f"render mesh {mid} starts with hood-support-patch-")
+            self.assertFalse("-patch-" in mid, f"render mesh {mid} contains -patch-")
+            self.assertNotEqual(mid, "finish-stair-basement-floor-host")
+
+        for m in self.scene["meshes"]:
+            self.assertFalse(m.get("diagnostic", False), f"render mesh {m['id']} is marked diagnostic")
+            self.assertNotEqual(m.get("visibility", {}).get("camera"), False, f"render mesh {m['id']} is camera-hidden")
+
+        errors = validate_scene(self.scene)
+        self.assertFalse(any("bookkeeping" in e or "host-face" in e for e in errors), errors)
+
+        diagnostic_ids = [m["id"] for m in self.scene.get("diagnostic_meshes", [])]
+        self.assertTrue(any(mid.startswith("host-face-") for mid in diagnostic_ids))
+        self.assertTrue(any("stair-basement-floor" in mid for mid in diagnostic_ids))
+        self.assertIn("stair-basement-floor", self.scene.get("mounting_hosts", {}))
+
+        mutant = deepcopy(self.scene)
+        mutant["meshes"].append(dict(
+            id="host-face-bath-gwc-wc", group="shell", material="marble-bath",
+            room="guest-wc", label="Measured finished fixing face",
+            faces=[[[0, 0, 0], [1, 0, 0], [1, 1, 0]]], part_kind="finish-layer"
+        ))
+        mutant_errors = validate_scene(mutant)
+        self.assertTrue(any("host-face-bath-gwc-wc" in e and "bookkeeping" in e for e in mutant_errors))
+
+        mutant2 = deepcopy(self.scene)
+        mutant2["meshes"].append(dict(
+            id="support-detail-test-patch", group="shell", material="ceiling-white",
+            room="guest-wc", label="Support patch",
+            faces=[[[0, 0, 0], [1, 0, 0], [1, 1, 0]]], part_kind="finish-layer"
+        ))
+        mutant2_errors = validate_scene(mutant2)
+        self.assertTrue(any("support-detail-test-patch" in e and "bookkeeping" in e for e in mutant2_errors))
 
 
 class FinishEvidence(unittest.TestCase):
