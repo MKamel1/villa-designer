@@ -77,6 +77,7 @@ __all__ = [
     "register_guard",
     "register_review_step",
     "report_uncovered_lessons",
+    "verify_tier3_review_steps",
 ]
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -667,6 +668,121 @@ def format_coverage_report(
 coverage_report = format_coverage_report
 
 
+def _slugify_heading(heading: str) -> str:
+    """Normalize a markdown heading into a GitHub-compatible anchor slug."""
+    text = heading.strip().lower()
+    cleaned = [ch for ch in text if ch.isalnum() or ch in (" ", "-")]
+    joined = "".join(cleaned).strip()
+    slug = re.sub(r"\s+", "-", joined)
+    return slug.strip("-")
+
+
+def verify_tier3_review_steps(
+    audit_file: Path | str | None = None,
+    review_steps_file: Path | str | None = None,
+) -> dict[str, Any]:
+    """Verify that every Tier 3 lesson has a registered review step pointing to an existing doc section.
+
+    Validates that:
+    1. Both audit_file and review_steps_file exist, are non-empty, and can be read.
+    2. Every Tier 3 lesson defined in audit_file has at least one registered review step.
+    3. Every matching review step specifies a section anchor that exists in review_steps_file.
+
+    Args:
+        audit_file: Path to docs/lessons-audit.md. If None, uses default project path.
+        review_steps_file: Path to docs/review-steps.md. If None, uses default project path.
+
+    Returns:
+        dict containing passed (bool), total_tier3, covered_tier3_count, checked_steps_count,
+        errors (list[str]), and tier3_lessons (list[str]).
+
+    Raises:
+        UnreadableInputError: If either file is missing, empty, unreadable, or invalid.
+    """
+    if audit_file is not None and isinstance(audit_file, str) and not audit_file.strip():
+        raise UnreadableInputError("Audit file path cannot be empty")
+    if review_steps_file is not None and isinstance(review_steps_file, str) and not review_steps_file.strip():
+        raise UnreadableInputError("Review steps file path cannot be empty")
+
+    a_path = Path(audit_file) if audit_file is not None else (ROOT / "docs/lessons-audit.md")
+    r_path = Path(review_steps_file) if review_steps_file is not None else (ROOT / "docs/review-steps.md")
+
+    if not a_path.exists():
+        raise UnreadableInputError(f"Audit file not found: {a_path}")
+    if not a_path.is_file():
+        raise UnreadableInputError(f"Audit path is not a regular file: {a_path}")
+
+    if not r_path.exists():
+        raise UnreadableInputError(f"Review steps doc file not found: {r_path}")
+    if not r_path.is_file():
+        raise UnreadableInputError(f"Review steps doc path is not a regular file: {r_path}")
+
+    try:
+        r_content = r_path.read_text(encoding="utf-8")
+    except Exception as exc:
+        raise UnreadableInputError(f"Failed to read review steps file {r_path}: {exc}") from exc
+
+    if not r_content.strip():
+        raise UnreadableInputError(f"Review steps file is empty: {r_path}")
+
+    # Audit lessons coverage
+    audit = audit_lesson_coverage(audit_file=a_path)
+    if audit.get("errors"):
+        raise UnreadableInputError(f"Audit input contains errors: {'; '.join(audit['errors'])}")
+
+    tier3_lessons = {lid: data for lid, data in audit["lessons"].items() if data["tier"] == 3}
+    if not tier3_lessons:
+        raise UnreadableInputError(f"No Tier 3 lessons found in audit file {a_path}")
+
+    # Extract all heading slugs from review_steps_file
+    slugs: set[str] = set()
+    raw_headings: set[str] = set()
+    for line in r_content.splitlines():
+        line_s = line.strip()
+        if line_s.startswith("#"):
+            heading_text = line_s.lstrip("#").strip()
+            if heading_text:
+                slugs.add(_slugify_heading(heading_text))
+                raw_headings.add(heading_text.lower())
+
+    errors: list[str] = []
+    checked_steps: list[RegisteredReviewStep] = []
+    covered_tier3: list[str] = []
+
+    for lid in tier3_lessons:
+        steps = find_review_steps_for_lesson(lid)
+        if not steps:
+            errors.append(f"Tier 3 lesson {lid} has no registered review step")
+            continue
+        covered_tier3.append(lid)
+        for step in steps:
+            checked_steps.append(step)
+            loc = step.location.strip()
+            if not loc:
+                errors.append(f"Review step {step.name} (lesson {lid}) has empty location")
+                continue
+            file_part, has_anchor, anchor = loc.partition("#")
+            if not has_anchor or not anchor.strip():
+                errors.append(
+                    f"Review step {step.name} (lesson {lid}) location {loc!r} does not specify a section anchor"
+                )
+                continue
+            anchor_slug = _slugify_heading(anchor)
+            if anchor_slug not in slugs and anchor.lower().strip() not in raw_headings:
+                errors.append(
+                    f"Review step {step.name} (lesson {lid}) section {anchor!r} not found in {r_path.name}"
+                )
+
+    return {
+        "passed": len(errors) == 0,
+        "total_tier3": len(tier3_lessons),
+        "covered_tier3_count": len(covered_tier3),
+        "checked_steps_count": len(checked_steps),
+        "errors": errors,
+        "tier3_lessons": list(tier3_lessons.keys()),
+    }
+
+
 # -----------------------------------------------------------------------------
 # Pre-registered guards with frozen real cases
 # -----------------------------------------------------------------------------
@@ -785,29 +901,197 @@ register_guard(
 # Pre-registered Tier-3 review steps
 # -----------------------------------------------------------------------------
 
+# Moment A: Fact-Finding and Client Intent
 register_review_step(
-    name="review_direct_lighting_interreflection",
-    lesson_ids=("l0027-direct-calculations-omit", "l0027"),
-    text="Direct calculations omit shadows and inter-reflection; an empty-room probe is calibration. Named review of preview and client intent.",
-    location="docs/method/stage5-lighting.md",
+    name="review_client_brief_ownership",
+    lesson_ids=("l0645-document-taken-as", "l0645"),
+    text="Verify that brief documents and design targets are explicitly confirmed and owned by the client rather than adopted unconfirmed.",
+    location="docs/review-steps.md#moment-a-fact-finding-and-client-intent",
     reviewer="lead",
-    notes="Aesthetic lighting quality has no reliable purely numeric surrogate",
+    notes="A document was taken as the client's brief without the client owning it.",
+)
+
+register_review_step(
+    name="review_existing_wall_survey_confirmation",
+    lesson_ids=("l0415-wall-position-assumed", "l0415"),
+    text="Verify that existing boundary and party wall positions and thicknesses are confirmed by survey or client confirmation before driving geometry.",
+    location="docs/review-steps.md#moment-a-fact-finding-and-client-intent",
+    reviewer="lead",
+    notes="A wall position assumed as fact.",
+)
+
+register_review_step(
+    name="review_client_privacy_override",
+    lesson_ids=("l0728-study-windows-inherited", "l0728"),
+    text="Verify that departures from standard privacy or window-sill rules are backed by explicit client decision records.",
+    location="docs/review-steps.md#moment-a-fact-finding-and-client-intent",
+    reviewer="client",
+    notes="Study windows: an inherited privacy rule overridden by the client.",
+)
+
+register_review_step(
+    name="review_facade_composition_glazing",
+    lesson_ids=("l0486-extension-s-end", "l0486"),
+    text="Verify that facade compositions meet architectural and client expectations for floor-to-beam glazing on key street and garden faces beyond per-room utility rules.",
+    location="docs/review-steps.md#moment-a-fact-finding-and-client-intent",
+    reviewer="lead",
+    notes="The client reads the facade, not the room list.",
+)
+
+# Moment B: Layout and Design Option Acceptance
+register_review_step(
+    name="review_structural_placeholder_sizing",
+    lesson_ids=("l0588-placeholder-size-not", "l0588"),
+    text="Verify that unengineered structural members, glass balustrades, and fittings are marked ASSUMED in specifications pending structural sizing.",
+    location="docs/review-steps.md#moment-b-layout-and-design-option-acceptance",
+    reviewer="lead",
+    notes="A placeholder size is not structural design.",
 )
 
 register_review_step(
     name="review_negative_bed_shifts",
     lesson_ids=("l0041-both-negative-bed", "l0041"),
-    text="Both negative bed shifts failed design review while worker batch completed successfully; named review of preview and client intent.",
-    location="scripts/worker_entry.py",
+    text="Both negative bed shifts failed design review while worker batch completed successfully; verify candidate layouts pass human spatial and design review.",
+    location="docs/review-steps.md#moment-b-layout-and-design-option-acceptance",
     reviewer="lead",
-    notes="Client design approval requires human spatial review",
+    notes="Client design approval requires human spatial review.",
 )
 
 register_review_step(
+    name="review_stair_assumed_construction_details",
+    lesson_ids=("l0738-stair", "l0738"),
+    text="Verify that open risers, steel stringers, bearings, and balustrade tectonic details are documented as ASSUMED construction details for modeling.",
+    location="docs/review-steps.md#moment-b-layout-and-design-option-acceptance",
+    reviewer="lead",
+    notes="Stair: open risers kept; steel stringers, bearings, open-side balustrade and handrails added as ASSUMED construction details.",
+)
+
+register_review_step(
+    name="review_lighting_function_and_beauty_cards",
+    lesson_ids=("l0601-function-beauty-both", "l0601"),
+    text="Verify that the lighting design satisfies both numerical lux targets and aesthetic design cards (pendant heights, sconce spacing, fixture hierarchy).",
+    location="docs/review-steps.md#moment-b-layout-and-design-option-acceptance",
+    reviewer="lead",
+    notes="Function and beauty, both carded.",
+)
+
+register_review_step(
+    name="review_direct_lighting_interreflection",
+    lesson_ids=("l0027-direct-calculations-omit", "l0027"),
+    text="Direct calculations omit shadows and inter-reflection; an empty-room probe is calibration. Verify lighting in rendered scenes with full inter-reflection.",
+    location="docs/review-steps.md#moment-b-layout-and-design-option-acceptance",
+    reviewer="lead",
+    notes="Aesthetic lighting quality has no reliable purely numeric surrogate.",
+)
+
+# Moment C: Camera and Composition Choice
+register_review_step(
+    name="review_camera_view_framing_and_depth",
+    lesson_ids=("l0743-view-chooser-s", "l0743"),
+    text="Verify that camera positions stand on the primary subject's front side, avoid near-lens clipping (<0.8 m), and reveal room depth and design features.",
+    location="docs/review-steps.md#moment-c-camera-and-composition-choice",
+    reviewer="lead",
+    notes="The view chooser's first scoring picked uninformative frames.",
+)
+
+# Moment D: Render Realism and Aesthetics
+register_review_step(
     name="review_render_photorealism",
     lesson_ids=("l0058-five-render-rounds", "l0058"),
-    text="Five render rounds changed samples, textures and HDRI strength, and images still read as CG; named review of preview and client intent.",
-    location=".agents/skills/photoreal-render/SKILL.md",
+    text="Five render rounds changed samples, textures and HDRI strength, and images still read as CG; verify physical causes before image parameter tuning.",
+    location="docs/review-steps.md#moment-d-render-realism-and-aesthetics",
     reviewer="client",
-    notes="Photorealistic perception requires explicit lead/client visual review checkpoint",
+    notes="Photorealistic perception requires explicit lead/client visual review checkpoint.",
+)
+
+register_review_step(
+    name="review_simulated_soft_goods_drape",
+    lesson_ids=("l0086-curtains-looked-corrugat", "l0086"),
+    text="Verify that simulated soft goods (curtains, bedding, cushions) display organic relaxation and irregular gathering rather than machine-stiff corrugations.",
+    location="docs/review-steps.md#moment-d-render-realism-and-aesthetics",
+    reviewer="lead",
+    notes="Curtains looked corrugated, and then still machine-made after cloth simulation.",
+)
+
+register_review_step(
+    name="review_surface_material_tint_in_image",
+    lesson_ids=("l0768-specified-tint-must", "l0768"),
+    text="Verify that specified finish tints (such as facade plaster) sample with the intended chromaticity in the rendered image under sun/sky illumination.",
+    location="docs/review-steps.md#moment-d-render-realism-and-aesthetics",
+    reviewer="lead",
+    notes="A specified tint must be checked in the image.",
+)
+
+register_review_step(
+    name="review_climber_foliage_visual_density",
+    lesson_ids=("l0880-bougainvillea-climbers-r", "l0880"),
+    text="Verify that trellis climber foliage density provides adequate visible coverage without appearing sparse or almost invisible.",
+    location="docs/review-steps.md#moment-d-render-realism-and-aesthetics",
+    reviewer="lead",
+    notes="The bougainvillea climbers were replaced by scattered leaf/bract polygons (WP4) but stayed sparse enough to read as 'almost invisible'.",
+)
+
+register_review_step(
+    name="review_terrace_garden_planting_fullness",
+    lesson_ids=("l0967-top-garden-looked", "l0967"),
+    text="Verify that terrace and roof gardens have adequate perimeter planting and container shrubs to avoid reading as bare.",
+    location="docs/review-steps.md#moment-d-render-realism-and-aesthetics",
+    reviewer="lead",
+    notes="The top garden looked bare.",
+)
+
+# Moment E: Evaluating Automated Checks and Critics
+register_review_step(
+    name="review_automated_critic_claims_as_leads",
+    lesson_ids=("l0751-automated-critic-s", "l0751"),
+    text="Verify that automated critic flags are treated as investigative leads and verified against scene geometry and physical data before taking action.",
+    location="docs/review-steps.md#moment-e-evaluating-automated-checks-and-critics",
+    reviewer="lead",
+    notes="An automated critic's claims are leads, not findings.",
+)
+
+register_review_step(
+    name="review_critic_brightness_physics_validity",
+    lesson_ids=("l0088-critic-claimed-garden", "l0088"),
+    text="Verify critic claims of relative surface darkness against photometric physics and surface albedo before turning them into pipeline guards.",
+    location="docs/review-steps.md#moment-e-evaluating-automated-checks-and-critics",
+    reviewer="lead",
+    notes="The critic claimed a garden darker than sunlit bedding was a defect.",
+)
+
+register_review_step(
+    name="review_tungsten_warm_cast_physical_intent",
+    lesson_ids=("l0102-colour-cast-could", "l0102"),
+    text="Verify that warm color cast advisories on lamp-lit night views are accepted as physically correct under tungsten presets rather than compensated in camera.",
+    location="docs/review-steps.md#moment-e-evaluating-automated-checks-and-critics",
+    reviewer="lead",
+    notes="colour_cast could fail a warm lamp-lit night that is physically correct under the tungsten preset.",
+)
+
+register_review_step(
+    name="review_shielded_night_highlight_contrast",
+    lesson_ids=("l0103-open-night-door", "l0103"),
+    text="Verify that failed highlight thresholds on shielded night views reflect correct luminaire housing shielding rather than an underexposed scene.",
+    location="docs/review-steps.md#moment-e-evaluating-automated-checks-and-critics",
+    reviewer="lead",
+    notes="Open: the night door view fails highlights_present after lamps were moved inside their fittings.",
+)
+
+# Moment F: Delegating Research and Debugging
+register_review_step(
+    name="review_scientific_work_preliminary_research",
+    lesson_ids=("l0045-claude-code-s", "l0045"),
+    text="Verify that broad scientific and simulation tasks begin with literature research, pinned evidence, and documented physical formulas before writing code.",
+    location="docs/review-steps.md#moment-f-delegating-research-and-debugging",
+    reviewer="lead",
+    notes="Claude Code's actual session identified claude-sonnet-5; broad scientific work required substantial research before writing code.",
+)
+
+register_review_step(
+    name="review_minimal_reproduction_library_bug",
+    lesson_ids=("l0278-broken-library-diagnosis", "l0278"),
+    text="Verify that diagnosing a third-party library as broken requires an isolated minimal reproduction that does not share project codebase patterns.",
+    location="docs/review-steps.md#moment-f-delegating-research-and-debugging",
+    reviewer="lead",
+    notes="A 'broken library' diagnosis needs a minimal reproduction that does not share my own code's pattern.",
 )

@@ -53,6 +53,7 @@ from archpipe.guard_registry import (
     register_guard,
     register_review_step,
     report_uncovered_lessons,
+    verify_tier3_review_steps,
 )
 
 
@@ -112,7 +113,7 @@ class TestGuardRegistry(unittest.TestCase):
     def test_tier3_review_steps_are_registered_with_text_and_location(self) -> None:
         """Tier 3 lessons register named review steps with description and location."""
         steps = all_review_steps()
-        self.assertGreaterEqual(len(steps), 3, "Expected at least 3 registered Tier 3 review steps")
+        self.assertGreaterEqual(len(steps), 21, "Expected at least 21 registered Tier 3 review steps")
 
         for step in steps:
             self.assertEqual(step.tier, 3)
@@ -133,7 +134,7 @@ class TestGuardRegistry(unittest.TestCase):
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
         self.assertGreaterEqual(report["covered_by_guard_count"], 6)
-        self.assertGreaterEqual(report["covered_by_review_count"], 3)
+        self.assertGreaterEqual(report["covered_by_review_count"], 21)
         self.assertGreaterEqual(report["needs_real_case_count"], 1)
         self.assertGreater(report["uncovered_count"], 0)
 
@@ -149,11 +150,29 @@ class TestGuardRegistry(unittest.TestCase):
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
 
-        # Check Tier-3 review step lessons
+        # Check Tier-3 review step lessons (all 21 must be covered)
         expected_review_lessons = [
             "l0027-direct-calculations-omit",
             "l0041-both-negative-bed",
+            "l0045-claude-code-s",
             "l0058-five-render-rounds",
+            "l0086-curtains-looked-corrugat",
+            "l0088-critic-claimed-garden",
+            "l0102-colour-cast-could",
+            "l0103-open-night-door",
+            "l0278-broken-library-diagnosis",
+            "l0415-wall-position-assumed",
+            "l0486-extension-s-end",
+            "l0588-placeholder-size-not",
+            "l0601-function-beauty-both",
+            "l0645-document-taken-as",
+            "l0728-study-windows-inherited",
+            "l0738-stair",
+            "l0743-view-chooser-s",
+            "l0751-automated-critic-s",
+            "l0768-specified-tint-must",
+            "l0880-bougainvillea-climbers-r",
+            "l0967-top-garden-looked",
         ]
         for lid in expected_review_lessons:
             self.assertIn(lid, report["covered_by_review"], f"Lesson {lid} should be covered by review step")
@@ -278,6 +297,127 @@ class TestGuardRegistry(unittest.TestCase):
             register_review_step(name="", lesson_ids=("l0001",), text="text", location="loc")
         with self.assertRaises(UnreadableInputError):
             register_review_step(name="step", lesson_ids=(), text="text", location="loc")
+
+    def test_every_tier3_lesson_has_registered_review_step_with_existing_doc_section(self) -> None:
+        """Every tier-3 lesson in docs/lessons-audit.md has a registered review step
+        whose referenced doc section exists in docs/review-steps.md.
+        
+        The test reads both files directly, verifies coverage, and asserts all section anchors resolve.
+        """
+        audit_file = ROOT / "docs/lessons-audit.md"
+        review_steps_file = ROOT / "docs/review-steps.md"
+
+        self.assertTrue(audit_file.exists(), f"Audit file not found: {audit_file}")
+        self.assertTrue(review_steps_file.exists(), f"Review steps doc file not found: {review_steps_file}")
+
+        # Run verification via registry helper
+        result = verify_tier3_review_steps(audit_file=audit_file, review_steps_file=review_steps_file)
+
+        self.assertTrue(result["passed"], f"Tier-3 review verification failed: {result['errors']}")
+        self.assertEqual(result["total_tier3"], 21, "Expected exactly 21 Tier 3 lessons in audit")
+        self.assertEqual(result["covered_tier3_count"], 21, "Expected all 21 Tier 3 lessons to be covered")
+        self.assertEqual(len(result["errors"]), 0)
+
+        # Directly read and check both files independently in this test
+        audit_content = audit_file.read_text(encoding="utf-8")
+        review_doc_content = review_steps_file.read_text(encoding="utf-8")
+
+        # Parse headings from review_steps_file
+        doc_headings = set()
+        for line in review_doc_content.splitlines():
+            s = line.strip()
+            if s.startswith("#"):
+                doc_headings.add(s.lstrip("#").strip().lower())
+
+        tier3_ids = [
+            "l0027-direct-calculations-omit",
+            "l0041-both-negative-bed",
+            "l0045-claude-code-s",
+            "l0058-five-render-rounds",
+            "l0086-curtains-looked-corrugat",
+            "l0088-critic-claimed-garden",
+            "l0102-colour-cast-could",
+            "l0103-open-night-door",
+            "l0278-broken-library-diagnosis",
+            "l0415-wall-position-assumed",
+            "l0486-extension-s-end",
+            "l0588-placeholder-size-not",
+            "l0601-function-beauty-both",
+            "l0645-document-taken-as",
+            "l0728-study-windows-inherited",
+            "l0738-stair",
+            "l0743-view-chooser-s",
+            "l0751-automated-critic-s",
+            "l0768-specified-tint-must",
+            "l0880-bougainvillea-climbers-r",
+            "l0967-top-garden-looked",
+        ]
+
+        for lid in tier3_ids:
+            self.assertIn(lid, audit_content, f"Lesson {lid} missing from docs/lessons-audit.md")
+            steps = find_review_steps_for_lesson(lid)
+            self.assertGreaterEqual(len(steps), 1, f"Lesson {lid} must have at least one registered review step")
+            for step in steps:
+                self.assertEqual(step.tier, 3)
+                self.assertTrue(step.location, f"Review step {step.name} has empty location")
+                self.assertIn("#", step.location, f"Review step {step.name} location must specify section anchor")
+                _, _, anchor = step.location.partition("#")
+                self.assertTrue(anchor.strip(), f"Review step {step.name} has empty section anchor")
+                anchor_words = anchor.replace("-", " ").lower().split()
+                matched = any(all(w in h for w in anchor_words) for h in doc_headings)
+                self.assertTrue(
+                    matched,
+                    f"Section anchor {anchor!r} from review step {step.name} did not match any heading in docs/review-steps.md",
+                )
+
+    def test_verify_tier3_review_steps_unreadable_inputs_fail_closed(self) -> None:
+        """verify_tier3_review_steps raises UnreadableInputError on missing, empty, or unreadable input files."""
+        valid_audit = ROOT / "docs/lessons-audit.md"
+        valid_review_doc = ROOT / "docs/review-steps.md"
+
+        # 1. Non-existent audit file raises UnreadableInputError (compatible with FileNotFoundError and ValueError)
+        missing_audit = self.temp_dir / "missing-audit.md"
+        with self.assertRaises(UnreadableInputError):
+            verify_tier3_review_steps(audit_file=missing_audit, review_steps_file=valid_review_doc)
+        with self.assertRaises(FileNotFoundError):
+            verify_tier3_review_steps(audit_file=missing_audit, review_steps_file=valid_review_doc)
+        with self.assertRaises(ValueError):
+            verify_tier3_review_steps(audit_file=missing_audit, review_steps_file=valid_review_doc)
+
+        # 2. Empty audit file raises UnreadableInputError
+        empty_audit = self.temp_dir / "empty-audit.md"
+        empty_audit.write_text("", encoding="utf-8")
+        with self.assertRaises(UnreadableInputError):
+            verify_tier3_review_steps(audit_file=empty_audit, review_steps_file=valid_review_doc)
+
+        # 3. Non-existent review steps doc file raises UnreadableInputError
+        missing_doc = self.temp_dir / "missing-review-steps.md"
+        with self.assertRaises(UnreadableInputError):
+            verify_tier3_review_steps(audit_file=valid_audit, review_steps_file=missing_doc)
+        with self.assertRaises(FileNotFoundError):
+            verify_tier3_review_steps(audit_file=valid_audit, review_steps_file=missing_doc)
+        with self.assertRaises(ValueError):
+            verify_tier3_review_steps(audit_file=valid_audit, review_steps_file=missing_doc)
+
+        # 4. Empty review steps doc file raises UnreadableInputError
+        empty_doc = self.temp_dir / "empty-review-steps.md"
+        empty_doc.write_text("", encoding="utf-8")
+        with self.assertRaises(UnreadableInputError):
+            verify_tier3_review_steps(audit_file=valid_audit, review_steps_file=empty_doc)
+
+        # 5. Review steps doc missing expected section headings returns failed verification
+        broken_doc = self.temp_dir / "broken-review-steps.md"
+        broken_doc.write_text("# Document Without Moments\n\nSome text.", encoding="utf-8")
+        res = verify_tier3_review_steps(audit_file=valid_audit, review_steps_file=broken_doc)
+        self.assertFalse(res["passed"])
+        self.assertGreater(len(res["errors"]), 0)
+        self.assertTrue(any("not found in" in err for err in res["errors"]))
+
+        # 6. Empty string path inputs raise UnreadableInputError
+        with self.assertRaises(UnreadableInputError):
+            verify_tier3_review_steps(audit_file="", review_steps_file=valid_review_doc)
+        with self.assertRaises(UnreadableInputError):
+            verify_tier3_review_steps(audit_file=valid_audit, review_steps_file="")
 
 
 if __name__ == "__main__":
