@@ -664,6 +664,27 @@ def main() -> int:
     expect("no silently invented design dimension (`get(dim) or <number>`)"
            + (f" ({', '.join(made_up[:6])})" if made_up else ""), not made_up)
     # Windows sharing locks: an open viewer made a plain overwrite of an
+    # Guard registry: serialization-file-boundary-phase1 -> typed construction
+    # and shared publication -> tests.test_safe_io -> Revit extract/file output.
+    from archpipe import safe_io as boundary
+    boundary_values = [boundary.Byte(0), boundary.Color(0, 180, 255),
+                       boundary.ElementId(9223372036854775807),
+                       boundary.XYZ(0, -1, 2, 'ft'), boundary.Quantity(0, 'mm'),
+                       boundary.normalized_text('first\rsecond\r'), 0, False, None]
+    expect('typed bridge round trips including zero, False and None',
+           all(boundary.encode(boundary.assert_round_trip(v)) == boundary.encode(v)
+               for v in boundary_values))
+    try:
+        boundary.assert_measured_readback({'width': 1200}, {'width': 1000}, {'width': 'model'})
+        catches_echo = False
+    except ValueError:
+        catches_echo = True
+    expect('read-back rejects authored width echoed over measured stock width', catches_echo)
+    ribbon = (ROOT / 'revit/archpipe.extension/archpipe.tab/Model.panel/Extract Model.pushbutton/script.py').read_text(encoding='utf-8')
+    expect('ribbon extract uses shared atomic publication',
+           'extract_model.write_extract(dest, data)' in ribbon and 'json.dump(' not in ribbon)
+
+    # Windows sharing locks: an open viewer made a plain overwrite of an
     # out/ image fail with OSError 22, twice. The retrying writer first lived
     # only in the render driver, so the pipeline runner hit it again: every
     # writer that replaces pipeline output goes through archpipe.safe_io.

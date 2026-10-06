@@ -34,6 +34,7 @@ future change, so it is stated here.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from .safe_io import load_json
 
 from . import vocabulary as V
 from .catalogue import get as _cat_get
@@ -95,6 +96,8 @@ class Conversion:
 
 def convert(data: dict, *, name: str = "") -> Conversion:
     """Extract dict -> (Project, notes)."""
+    if not isinstance(data, dict):
+        data = load_json(data)
     notes = []
     units = data.get("units")
     if units != "mm":

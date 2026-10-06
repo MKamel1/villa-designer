@@ -21,6 +21,10 @@ class ExtractReviewTests(unittest.TestCase):
 
     def test_all_measured_pieces_survive(self):
         p = convert(self.data).project
+        extract_path = ROOT / 'tests/fixtures/bedroom-from-revit.json'
+        self.assertEqual(convert(extract_path).project, p)
+        self.assertEqual(review_model(extract_path, scope='room'),
+                         review_model(self.data, scope='room'))
         self.assertEqual(len(p.furniture), 6)
         by_id = {f.id: f for f in p.furniture}
         self.assertEqual(by_id['FN-BST-L'].type, 'bedside_table')

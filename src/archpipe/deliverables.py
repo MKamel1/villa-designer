@@ -7,10 +7,12 @@ page 120) cover Gulf cities, not Cairo, so they rank options and never make a bu
 from __future__ import annotations
 
 import csv
+import io
 import math
 from pathlib import Path
 
 from . import model, rules, vocabulary as vocab
+from .safe_io import atomic_path, save_text
 
 # AECOM MEH 2026 p. 120 (Q3 2025, USD/m2 GIA): villas, low-high per city. Card: aecom-villa-rates-2025.
 AECOM_VILLA_USD_M2 = {"Dubai": (1700, 3000), "Riyadh": (1300, 2600), "Doha": (1300, 2600), "Manama": (1000, 1800)}
@@ -90,13 +92,14 @@ def relative_cost(options: dict[str, float], city: str = "Dubai") -> list[dict]:
 
 def write_csv(rows: list[dict], path: Path) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w", newline="", encoding="utf-8") as f:
+    with io.StringIO(newline="") as f:
         if rows:
             w = csv.DictWriter(f, fieldnames=list(rows[0]))
             w.writeheader()
             w.writerows(rows)
         else:
             f.write("note\nnone in this model\n")
+        save_text(path, f.getvalue())
     return path
 
 
@@ -197,5 +200,6 @@ def to_ifc(p: model.Project, path: Path) -> Path:
         api.run("geometry.assign_representation", f, product=sp, representation=rep)
         place(sp, 0, 0, lv.elevation, 0.0)
     path.parent.mkdir(parents=True, exist_ok=True)
-    f.write(str(path))
+    with atomic_path(path) as staged:
+        f.write(staged)
     return path

@@ -15,6 +15,9 @@ class Int64:                               # stands in for System.Int64 (float()
     def __float__(self):
         return float(self.v)
 
+    def __int__(self):
+        return int(self.v)
+
 
 Int64.__name__ = "Int64"
 

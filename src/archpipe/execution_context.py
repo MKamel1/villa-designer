@@ -16,6 +16,7 @@ import sys
 import tempfile
 import time
 import uuid
+from .safe_io import save_json
 
 
 class ContextError(RuntimeError):
@@ -130,7 +131,7 @@ def preflight(*, root: Path, scripts=(), inputs=(), output: Path, temp: Path,
 def write_record(context: dict, path: Path) -> None:
     path = absolute(path, "context record")
     try:
-        path.write_text(json.dumps(context, indent=2) + "\n", encoding="utf-8")
+        save_json(path, context, indent=2)
     except OSError as exc:
         raise ContextError(f"cannot write context record {path}: {exc}") from exc
 

@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 from archpipe import deliverables as D, model, rules
+from archpipe.safe_io import save_json, save_text
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -43,12 +44,11 @@ def main(argv=None) -> int:
     q = D.quantities(p)
     gia = D.gross_area_m2(p)
     cost = D.relative_cost({a.name: gia})
-    (out / "quantities.json").write_text(json.dumps({"quantities": q, "net_room_area_m2": gia, "relative_cost": cost}, indent=1),
-                                         encoding="utf-8")
+    save_json(out / "quantities.json", {"quantities": q, "net_room_area_m2": gia, "relative_cost": cost}, indent=1)
     D.to_ifc(p, out / "model.ifc")
     findings = [{"level": lv.id, "rule": f.rule, "severity": f.severity, "where": f.where, "message": f.message}
                 for lv in p.levels for f in rules.review(p, lv.id)]
-    (out / "findings.json").write_text(json.dumps(findings, indent=1), encoding="utf-8")
+    save_json(out / "findings.json", findings, indent=1)
     thermal_lines = []
     tfile = ROOT / "out" / "workstation" / "thermal-cases-latest.json"
     if a.thermal_label and tfile.is_file():
@@ -73,7 +73,7 @@ def main(argv=None) -> int:
                   "|---|---|---|---|---|---|"] + thermal_lines + [""]
     lines += ["## MISSING in-house: needs a consultant", "", "| Scope | Who | What we hand over |", "|---|---|---|"]
     lines += [f"| {s_} | {w} | {h} |" for s_, w, h in MISSING] + [""]
-    (out / "README.md").write_text("\n".join(lines), encoding="utf-8")
+    save_text(out / "README.md", "\n".join(lines))
     print(f"  handoff: {out.relative_to(ROOT)} ({len(findings)} findings, {len(s['rooms'])} rooms)")
     return 0
 
