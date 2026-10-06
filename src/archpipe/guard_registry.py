@@ -54,6 +54,10 @@ from archpipe.external_claims import (
     check_photometry_fitting_agreement,
     ingest_bytes,
 )
+from archpipe.units_guard import (
+    UnitsConversionError,
+    check_units_guard,
+)
 
 __all__ = [
     "EvidenceStatus",
@@ -880,6 +884,31 @@ register_guard(
     expected_clean=EvidenceStatus.VERIFIED,
     tier=2,
     description="Rejects photometric file whose luminous opening aspect/size disagrees with physical fitting (l0098)",
+)
+
+# 7. C9: Coordinate or unit conversion scattered (l0012, l0023, l0114, l0182, l0409, l0473, l0669)
+def _guard_c9_units_conversion(target_root: Path | str | None = None) -> bool:
+    check_units_guard(target_root)
+    return True
+
+register_guard(
+    fn=_guard_c9_units_conversion,
+    name="units_conversion_guard",
+    lesson_ids=(
+        "l0012-directshape-rotation-bak", "l0012",
+        "l0023-revit-s-viewdirection", "l0023",
+        "l0114-converted-ldt-agreed", "l0114",
+        "l0182-thermal-results-3", "l0182",
+        "l0409-section-drawn-mirrored", "l0409",
+        "l0473-solar-sun-position", "l0473",
+        "l0669-parents-bed-rendered", "l0669",
+    ),
+    real_case=case(ROOT / "tests/fixtures/c9_unallowlisted_case"),
+    clean_case=case(ROOT),
+    expected_real=UnitsConversionError,
+    expected_clean=True,
+    tier=2,
+    description="Fails closed on raw unit conversion literals (304.8, 0.3048, 3.28084, 25.4) outside units boundary (C9)",
 )
 
 # Guard without real case listed as 'needs real case' (l0061: window_view passing void)
