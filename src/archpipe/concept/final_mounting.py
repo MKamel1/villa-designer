@@ -34,29 +34,42 @@ def trim_panel(panel, host, centre, margin):
 
 def apply(scene, lay):
     authority = json.loads((Path(__file__).resolve().parents[3]/'knowledge/c4-final-approvals.json').read_text())
-    meshes = {m['id']:m for m in scene['meshes']}
-    rows = {r['id']:r for r in scene['mounting_movements']}
+    render_meshes = {m['id']: m for m in scene['meshes']}
+    diag_meshes = {m['id']: m for m in scene.get('diagnostic_meshes', [])}
+    rows = {r['id']: r for r in scene['mounting_movements']}
     # Validate the whole approval package before applying any row.
     for approved in authority['rows']:
-        row = rows[approved['id']]
+        mid = approved['id']
+        if mid not in rows:
+            raise KeyError(mid + ': approved row not in scene mounting movements')
+        row = rows[mid]
         if row['host_id'] != approved['host_id'] or any(abs(a-b)>1e-8
                 for key in ('old','new') for a,b in zip(row[key],approved[key])):
             raise ValueError(approved['id']+': final approved schedule drift')
     for approved in authority['rows']:
-        row = rows[approved['id']]
-        meshes[row['id']]['faces'] = deepcopy(row['proposed_faces'])
-        meshes[row['id']]['mounting'].pop('approval',None)
+        mid = approved['id']
+        row = rows[mid]
+        if mid in render_meshes and mid in diag_meshes:
+            raise ValueError(mid + ': present in both render meshes and diagnostics channel')
+        if mid in render_meshes:
+            target = render_meshes[mid]
+        elif mid in diag_meshes:
+            target = diag_meshes[mid]
+        else:
+            raise KeyError(mid + ': approval row id is in neither render meshes nor diagnostics channel')
+        target['faces'] = deepcopy(row['proposed_faces'])
+        target.get('mounting', {}).pop('approval', None)
         row['approval'] = 'APPROVED final lead 2026-10-05; APPLIED'
     from . import villa_furnish as F
     centre = next(it['cx'] for it in F.layout(lay) if it['id']=='pb-bed')
-    panel = meshes['detail-headboard-slats']
+    panel = render_meshes['detail-headboard-slats']
     trimmed = trim_panel(panel, scene['mounting_hosts'][panel['mounting']['host_id']],
                          centre, authority['headboard_margin_m'])
     seated = []
-    for root in list(meshes.values()):
+    for root in list(render_meshes.values()):
         if not root['id'].startswith('appliance-coffee-') or not root['id'].endswith('-body'):
             continue
-        members = [root]+[m for m in meshes.values() if m.get('associated_mounting_root')==root['id']]
+        members = [root]+[m for m in render_meshes.values() if m.get('associated_mounting_root')==root['id']]
         record = scene['mounting_hosts'][root['mounting']['host_id']]
         host = Host(record['id'],record['kind'],tuple(record['structural_point']),
                     tuple(record['normal']),Finish(**record['finish']))

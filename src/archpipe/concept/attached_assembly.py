@@ -4,18 +4,19 @@ from .fitting_mounting import bounds
 
 
 def bind(scene, root_id, child_ids):
-    meshes = {m['id']: m for m in scene['meshes']}
-    root = meshes[root_id]
+    all_meshes = {m['id']: m for m in (scene.get('meshes', []) + scene.get('diagnostic_meshes', []))}
+    root = all_meshes[root_id]
     origin = bounds(root)[:3]
     for identifier in child_ids:
-        child = meshes[identifier]
+        child = all_meshes[identifier]
         child['associated_mounting_root'] = root_id
         child['attached_relative_origin_m'] = [bounds(child)[i]-origin[i] for i in range(3)]
 
 
 def translate(scene, root_id, delta, *, deferred_ids=()):
     """Move the root and every declared child once; retain per-vertex proof."""
-    members = [m for m in scene['meshes'] if m['id'] == root_id or
+    all_meshes = scene.get('meshes', []) + scene.get('diagnostic_meshes', [])
+    members = [m for m in all_meshes if m['id'] == root_id or
                (m.get('associated_mounting_root') == root_id and m['id'] not in deferred_ids)]
     if not any(m['id'] == root_id for m in members):
         raise ValueError('Missing attached assembly root: '+root_id)
@@ -31,12 +32,13 @@ def translate(scene, root_id, delta, *, deferred_ids=()):
 
 def findings(scene):
     meshes = {m['id']: m for m in scene['meshes']}
+    all_meshes = {m['id']: m for m in (scene.get('meshes', []) + scene.get('diagnostic_meshes', []))}
     failures = []
     for child in meshes.values():
         relative = child.get('attached_relative_origin_m')
         if relative is None:
             continue
-        root = meshes.get(child.get('associated_mounting_root'))
+        root = all_meshes.get(child.get('associated_mounting_root'))
         if root is None:
             failures.append(child['id']+': MISSING attached assembly root')
         elif any(abs(bounds(child)[i]-bounds(root)[i]-relative[i]) > 1e-8 for i in range(3)):

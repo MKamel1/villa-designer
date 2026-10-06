@@ -30,18 +30,21 @@ class SupportMounting(unittest.TestCase):
         self.assertTrue(all(f.split(':')[0] in pending or 'associated assembly body penetrates support face' in f or
                             f=='detail-headboard-slats: MISSING finite host coverage at fixing footprint'
                             for f in findings),findings)
-        meshes={m['id']:m for m in self.scene['meshes']}
-        last={r['id']:r for r in self.scene['mounting_movements'] if r['package']=='e-support'}
+        render_meshes = {m['id']: m for m in self.scene['meshes']}
+        diag_meshes = {m['id']: m for m in self.scene.get('diagnostic_meshes', [])}
+        last = {r['id']: r for r in self.scene['mounting_movements'] if r['package'] == 'e-support'}
         for row in last.values():
-            if row['approval']=='PENDING':
-                self.assertGreater(row['mm'],5)
-                self.assertEqual(bounds(meshes[row['id']]),row['old'])
+            rid = row['id']
+            target = render_meshes.get(rid) or diag_meshes[rid]
+            if row['approval'] == 'PENDING':
+                self.assertGreater(row['mm'], 5)
+                self.assertEqual(bounds(target), row['old'])
             else:
                 if row['approval'].startswith('APPLIED <='):
-                    self.assertLessEqual(row['mm'],5+1e-9)
+                    self.assertLessEqual(row['mm'], 5 + 1e-9)
                 else:
-                    self.assertIn(row['id'],self.scene['e_lead_review']['applied'])
-                self.assertEqual(meshes[row['id']]['faces'],row['proposed_faces'])
+                    self.assertIn(row['id'], self.scene['e_lead_review']['applied'])
+                self.assertEqual(target['faces'], row['proposed_faces'])
         from archpipe.villa_render_contract import validate_scene
         self.assertEqual(validate_scene(dict(self.scene,views=VR.VIEWS(R.design('D1')))),[])
         proposal=deepcopy(self.scene);by={m['id']:m for m in proposal['meshes']}

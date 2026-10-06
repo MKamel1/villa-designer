@@ -137,40 +137,53 @@ def apply_lead_review(scene):
     from pathlib import Path
     authority=json.loads((Path(__file__).resolve().parents[3]/'knowledge/c4-e-lead-approvals.json').read_text())
     retired={'host-face-support-detail-vent-'+room+'-grille' for room in ('guest-wc','dirty-kitchen')}
-    rows={r['id']:r for r in scene['mounting_movements']}
-    meshes={m['id']:m for m in scene['meshes']}
-    scene['e_lead_review']=dict(applied=[],retired_inward_datums=sorted(retired),rejected=authority['rejected'])
-    scene['e_approved_associated_movements']=[]
-    scene['e_approved_light_movements']=[]
+    rows = {r['id']: r for r in scene['mounting_movements']}
+    render_meshes = {m['id']: m for m in scene['meshes']}
+    diag_meshes = {m['id']: m for m in scene.get('diagnostic_meshes', [])}
+    scene['e_lead_review'] = dict(applied=[], retired_inward_datums=sorted(retired), rejected=authority['rejected'])
+    scene['e_approved_associated_movements'] = []
+    scene['e_approved_light_movements'] = []
     for approved in authority['rows']:
-        mid=approved['id']
+        mid = approved['id']
         if mid in retired:
-            if mid in rows:raise ValueError(mid+': obsolete inward grille movement still exists')
-            replacement=scene['mounting_hosts'][mid.removeprefix('host-face-')]
-            if replacement.get('side_basis') is None:raise ValueError(mid+': exterior replacement has no adjacency proof')
+            if mid in rows: raise ValueError(mid + ': obsolete inward grille movement still exists')
+            replacement = scene['mounting_hosts'][mid.removeprefix('host-face-')]
+            if replacement.get('side_basis') is None: raise ValueError(mid + ': exterior replacement has no adjacency proof')
             continue
-        row=rows[mid]
-        if row['host_id']!=approved['host_id'] or any(abs(a-b)>1e-8 for key in ('old','new') for a,b in zip(row[key],approved[key])):
-            raise ValueError(mid+': approved schedule drift; new lead review required')
-        from .attached_assembly import translate
-        delta=[row['new'][i]-row['old'][i] for i in range(3)]
-        carried=translate(scene,mid,delta)
-        meshes[mid].get('mounting',{}).pop('approval',None)
-        row['approval']='APPROVED lead 2026-10-05; APPLIED'
+        if mid not in rows:
+            raise KeyError(mid + ': approved row not in scene mounting movements')
+        row = rows[mid]
+        if row['host_id'] != approved['host_id'] or any(abs(a-b) > 1e-8 for key in ('old', 'new') for a, b in zip(row[key], approved[key])):
+            raise ValueError(mid + ': approved schedule drift; new lead review required')
+        if mid in render_meshes and mid in diag_meshes:
+            raise ValueError(mid + ': present in both render meshes and diagnostics channel')
+        delta = [row['new'][i] - row['old'][i] for i in range(3)]
+        if mid in render_meshes:
+            target = render_meshes[mid]
+            from .attached_assembly import translate
+            carried = translate(scene, mid, delta)
+            target.get('mounting', {}).pop('approval', None)
+            scene['e_approved_associated_movements'].extend(r for r in carried if r['id'] != mid)
+        elif mid in diag_meshes:
+            target = diag_meshes[mid]
+            target['faces'] = deepcopy(row['proposed_faces'])
+            target.get('mounting', {}).pop('approval', None)
+        else:
+            raise KeyError(mid + ': approval row id is in neither render meshes nor diagnostics channel')
+        row['approval'] = 'APPROVED lead 2026-10-05; APPLIED'
         scene['e_lead_review']['applied'].append(mid)
-        scene['e_approved_associated_movements'].extend(r for r in carried if r['id']!=mid)
         # Wall markers emit through their mesh material, with no analytical
         # light record. Cabinet strips have a separate analytical emitter.
-        light_id=mid.removeprefix('detail-cabinet-led-') if mid.startswith('detail-cabinet-led-') else None
+        light_id = mid.removeprefix('detail-cabinet-led-') if mid.startswith('detail-cabinet-led-') else None
         if light_id:
-            light=next(l for l in scene['lights'] if l['id']==light_id)
-            old=list(light['position']);light['position']=[old[i]+delta[i] for i in range(3)]
-            scene['e_approved_light_movements'].append(dict(id=light_id,root_id=mid,old=old,new=light['position'],delta=delta,
+            light = next(l for l in scene['lights'] if l['id'] == light_id)
+            old = list(light['position']); light['position'] = [old[i] + delta[i] for i in range(3)]
+            scene['e_approved_light_movements'].append(dict(id=light_id, root_id=mid, old=old, new=light['position'], delta=delta,
                 basis='Emitter follows approved fitting geometry; intensity unchanged; independent remeasurement required'))
     # Room-labelled shell meshes split one real wall across materials. Attach
     # the hood to the actual coplanar wall patches, never their extension.
-    mid='appliance-hood-dirty-canopy'
-    record=scene['mounting_hosts'][meshes[mid]['mounting']['host_id']]
+    mid = 'appliance-hood-dirty-canopy'
+    record = scene['mounting_hosts'][render_meshes[mid]['mounting']['host_id']]
     outward=record['normal'];origin=record['structural_point'];depth=record['finish']['thickness_m']
     for source in list(scene['meshes']):
         if source.get('source_id')!='villa-shell' or source['material'] not in ('marble-bath','plaster-warm-white','porcelain-tile'):continue

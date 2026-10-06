@@ -160,18 +160,22 @@ class StairFirstPackage(unittest.TestCase):
         # explicit frozen 58-row approval now applies; d stays bounded.
         self.assertEqual(self.scene['lead_approved_count'],64)
         fixes={'detail-gwc-hand-shower-head','detail-gwc-hand-shower-hose','lamp-SCONCE-guest-wc-03'}
-        current={m['id']:m for m in self.scene['meshes']}
+        render_meshes={m['id']:m for m in self.scene['meshes']}
+        diag_meshes={m['id']:m for m in self.scene.get('diagnostic_meshes',[])}
         for row in self.scene['mounting_movements']:
             if row['package']=='e-support': continue
             if row['id'] in fixes:
                 continue
-            mesh=current[row['id']]
+            rid=row['id']
+            self.assertTrue((rid in render_meshes) ^ (rid in diag_meshes),
+                            f"{rid}: row must be in exactly one channel")
+            mesh=render_meshes[rid] if rid in render_meshes else diag_meshes[rid]
             if row['approval']=='PENDING':
                 self.assertGreater(row['mm'],5)
                 self.assertEqual(bounds_for_test(mesh),row['old'])
             else:
                 self.assertEqual(mesh['faces'],row['proposed_faces'])
-        self.assertEqual(len([m for m in current.values() if m.get('mounting_package') in ('b-bathroom','c-wall-lights')]),62)
+        self.assertEqual(len([m for m in render_meshes.values() if m.get('mounting_package') in ('b-bathroom','c-wall-lights')]),62)
 
     def test_bc_frozen_handset_and_wall_edge_are_not_silenced(self):
         frozen=json.loads((Path(__file__).parent/'fixtures/c4-guest-before-fixes.json').read_text())
@@ -296,6 +300,15 @@ class StairFirstPackage(unittest.TestCase):
         row['new'][0]+=.001
         with self.assertRaisesRegex(ValueError,'schedule drift'):
             apply_approvals(mutant,APPROVALS.with_name('c4-d-lead-approvals.json'))
+        mutant_neither=deepcopy(self.scene)
+        mutant_neither['meshes']=[m for m in mutant_neither['meshes'] if m['id']!='lens-WW-cinema-03']
+        mutant_neither['diagnostic_meshes']=[m for m in mutant_neither.get('diagnostic_meshes',[]) if m['id']!='lens-WW-cinema-03']
+        with self.assertRaisesRegex(KeyError,'lens-WW-cinema-03'):
+            apply_approvals(mutant_neither,APPROVALS.with_name('c4-d-lead-approvals.json'))
+        mutant_both=deepcopy(self.scene)
+        mutant_both.setdefault('diagnostic_meshes',[]).append(dict(id='lens-WW-cinema-03',faces=[]))
+        with self.assertRaisesRegex(ValueError,'lens-WW-cinema-03'):
+            apply_approvals(mutant_both,APPROVALS.with_name('c4-d-lead-approvals.json'))
         original_packages={m['id'] for m in self.scene['meshes'] if m.get('mounting_package') in ('b-bathroom','c-wall-lights','d-ceiling')}
         self.assertFalse([f for f in scene_findings(self.scene) if 'finished-face error' in f and f.split(':')[0] in original_packages])
 
@@ -402,6 +415,57 @@ class StairFirstPackage(unittest.TestCase):
         ))
         mutant2_errors = validate_scene(mutant2)
         self.assertTrue(any("support-detail-test-patch" in e and "bookkeeping" in e for e in mutant2_errors))
+
+    def test_real_scene_build_approvals_applied_to_single_channel(self):
+        """Build real scene; prove no host-face/support in render meshes, all approvals applied to 1 channel."""
+        scene = VR.build(views=[])
+        self.assertIsNotNone(scene)
+
+        render_mesh_ids = {m['id'] for m in scene['meshes']}
+        diag_mesh_ids = {m['id'] for m in scene.get('diagnostic_meshes', [])}
+
+        # Assert no host-face or support id is in the render meshes
+        for mid in render_mesh_ids:
+            self.assertFalse(mid.startswith('host-face-'), f"host-face ID found in render meshes: {mid}")
+            self.assertFalse(mid.startswith('support-'), f"support ID found in render meshes: {mid}")
+
+        # Assert every approved row was applied to exactly one channel
+        from archpipe.concept.mounting_resume import APPROVALS
+        knowledge_dir = APPROVALS.parent
+        authority_files = [
+            knowledge_dir / 'c4-bc-approvals.json',
+            knowledge_dir / 'c4-d-lead-approvals.json',
+            knowledge_dir / 'c4-e-lead-approvals.json',
+            knowledge_dir / 'c4-final-approvals.json',
+        ]
+        retired = {'host-face-support-detail-vent-' + room + '-grille' for room in ('guest-wc', 'dirty-kitchen')}
+
+        render_meshes = {m['id']: m for m in scene['meshes']}
+        diag_meshes = {m['id']: m for m in scene.get('diagnostic_meshes', [])}
+        all_movements = {r['id']: r for r in scene['mounting_movements']}
+
+        approved_count = 0
+        for auth_file in authority_files:
+            auth_data = json.loads(auth_file.read_text(encoding='utf-8'))
+            for row in auth_data['rows']:
+                mid = row['id']
+                if mid in retired:
+                    continue
+                approved_count += 1
+                in_render = mid in render_mesh_ids
+                in_diag = mid in diag_mesh_ids
+                self.assertTrue(
+                    in_render ^ in_diag,
+                    f"Approved row {mid} must be applied to exactly one channel (render={in_render}, diag={in_diag})"
+                )
+                target = render_meshes[mid] if in_render else diag_meshes[mid]
+                self.assertEqual(
+                    target.get('faces'),
+                    all_movements[mid]['proposed_faces'],
+                    f"Faces for {mid} do not match proposed faces in movement record"
+                )
+
+        self.assertGreater(approved_count, 0)
 
 
 class FinishEvidence(unittest.TestCase):

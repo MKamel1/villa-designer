@@ -21,17 +21,28 @@ def host_object(record):
 def apply_approvals(scene, authority_path=APPROVALS):
     """Approve only the frozen schedule; reject geometry/host drift."""
     approved = {r['id']: r for r in json.loads(authority_path.read_text())['rows']}
-    meshes = {m['id']: m for m in scene['meshes']}
+    render_meshes = {m['id']: m for m in scene['meshes']}
+    diag_meshes = {m['id']: m for m in scene.get('diagnostic_meshes', [])}
     rows = {r['id']: r for r in scene['mounting_movements']}
     for mid, authority in approved.items():
+        if mid not in rows:
+            raise KeyError(mid + ': approved row not in scene mounting movements')
         row = rows[mid]
         if row['host_id'] != authority['host_id'] or any(
                 abs(a-b) > 1e-8 for key in ('old', 'new') for a,b in zip(row[key], authority[key])):
             raise ValueError(mid + ': approved schedule drift; new lead review required')
-        meshes[mid]['faces'] = deepcopy(row['proposed_faces'])
-        meshes[mid].get('mounting', {}).pop('approval', None)
+        if mid in render_meshes and mid in diag_meshes:
+            raise ValueError(mid + ': present in both render meshes and diagnostics channel')
+        if mid in render_meshes:
+            target = render_meshes[mid]
+        elif mid in diag_meshes:
+            target = diag_meshes[mid]
+        else:
+            raise KeyError(mid + ': approval row id is in neither render meshes nor diagnostics channel')
+        target['faces'] = deepcopy(row['proposed_faces'])
+        target.get('mounting', {}).pop('approval', None)
         row['approval'] = 'APPROVED lead 2026-10-05; APPLIED'
-    scene['lead_approved_count'] = scene.get('lead_approved_count',0)+len(approved)
+    scene['lead_approved_count'] = scene.get('lead_approved_count', 0) + len(approved)
 
 
 def wall_safe_hose(start, end, host, radius=HOSE_RADIUS_M, clearance=HOSE_CLEARANCE_M):
