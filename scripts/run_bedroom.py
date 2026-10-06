@@ -10,7 +10,6 @@ import hashlib
 import json
 import os
 from pathlib import Path
-import subprocess
 import sys
 import time
 
@@ -18,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 from archpipe.review_extract import review_model  # noqa: E402
 from archpipe.safe_io import copy_file  # noqa: E402
+from archpipe.execution_context import (ContextError, Tool, project_context,
+                                        run_checked)  # noqa: E402
 
 
 def digest(path):
@@ -42,17 +43,23 @@ def artifacts_match(records):
 
 
 def run(argv, label, env=None, expected=None, timeout=360):
-    started = time.time_ns()
-    res = subprocess.run([str(v) for v in argv], cwd=ROOT, env=env,
-                         stdin=subprocess.DEVNULL, capture_output=True, text=True, encoding='utf-8',
-                         errors='replace', timeout=timeout)
+    native = Path(argv[0]).name.lower() == 'pyrevit.exe'
+    tools = [Tool('pyrevit', Path(argv[0]), '6.5.5', ('--version',))] if native else []
+    context = project_context(ROOT, Path(__file__).resolve(), 'bedroom', tools=tools)
     logs = ROOT / 'out/run-logs'
     logs.mkdir(parents=True, exist_ok=True)
-    (logs / (label + '.log')).write_text(res.stdout + res.stderr, encoding='utf-8')
-    if res.returncode:
-        raise RuntimeError(label + ' failed; see ' + str(logs / (label + '.log')))
-    if expected and (not expected.is_file() or expected.stat().st_mtime_ns < started):
-        raise RuntimeError(label + ' produced no fresh output; exit zero is insufficient')
+    scripts = [argv[2] if native else argv[1]]
+    if native and expected is None:
+        raise ContextError('pyRevit requires an expected fresh artifact')
+    record = logs/(label+'.context.json')
+    try:
+        res = run_checked(argv, context=context, scripts=scripts,
+                          record=record, env=env, expected=expected, timeout=timeout)
+    finally:
+        if record.is_file():
+            evidence = json.loads(record.read_text(encoding='utf-8'))
+            (logs / (label + '.log')).write_text(evidence.get('stdout', '') + evidence.get('stderr', ''),
+                                                encoding='utf-8')
     print('PASS ' + label, flush=True)
     return res
 
@@ -86,6 +93,9 @@ def main():
     a = ap.parse_args()
     if not 32 <= a.samples <= 4096:
         ap.error('samples must be between 32 and 4096')
+    tools = [] if a.skip_revit else [Tool('pyrevit', Path(os.environ.get('APPDATA', '')) /
+                                       'pyRevit-Master/bin/pyrevit.exe', '6.5.5')]
+    context = project_context(ROOT, Path(__file__).resolve(), 'bedroom', tools=tools)
     out = ROOT / 'out'
     out.mkdir(exist_ok=True)
     acceptance = out / 'bedroom-acceptance.json'
@@ -98,7 +108,7 @@ def main():
             expected=out/'workstation/status-latest.json',timeout=120)
         runtime = json.loads((out/'workstation/status-latest.json').read_text())['runtime']
     except Exception as exc:
-        failure = {'passed':False,'stage':'worker_status','error':str(exc),
+        failure = {'passed':False,'stage':'worker_status','error':str(exc), 'execution_context':context,
                    'input_hashes':inputs,'samples':a.samples,
                    'scope':'capability example, not villa approval',
                    'finished_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
@@ -119,6 +129,7 @@ def main():
             artifacts_match(previous.get('revit_artifacts', {}))):
         a.skip_revit = True
     result = {'passed': False, 'started_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+              'execution_context': context,
               'scope': 'capability example, not villa approval', 'checks': {}, 'artifacts': {},
               'input_hashes': inputs, 'samples': a.samples, 'reused_revit': a.skip_revit,
               'worker_runtime':runtime_id}
@@ -237,6 +248,11 @@ def main():
 
 
 if __name__ == '__main__':
+    try:
+        project_context(ROOT, Path(__file__).resolve(), 'bedroom')
+    except ContextError as exc:
+        print('PREFLIGHT FAILED: ' + str(exc), file=sys.stderr)
+        raise SystemExit(2)
     lock = ROOT/'out/bedroom-run.lock'
     lock.parent.mkdir(exist_ok=True)
     try:
@@ -257,6 +273,10 @@ if __name__ == '__main__':
     try:
         with os.fdopen(fd, 'w') as fh:
             fh.write(str(os.getpid()))
-        raise SystemExit(main())
+        try:
+            raise SystemExit(main())
+        except ContextError as exc:
+            print('PREFLIGHT FAILED: ' + str(exc), file=sys.stderr)
+            raise SystemExit(2)
     finally:
         lock.unlink(missing_ok=True)

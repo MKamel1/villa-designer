@@ -1,5 +1,6 @@
 """A result must fail on wrong physics, scope, or stale evidence."""
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -21,13 +22,20 @@ class PipelineTests(unittest.TestCase):
             report = root/'out/bedroom-acceptance.json'
             report.write_text(json.dumps({'passed':True}))
             with patch.object(run_bedroom,'ROOT',root), \
+                 patch.dict(os.environ), \
+                 patch.object(tempfile,'tempdir',tempfile.tempdir), \
                  patch.object(run_bedroom,'input_hashes',return_value={}), \
                  patch.object(run_bedroom,'run',side_effect=RuntimeError('worker unavailable')), \
-                 patch.object(sys,'argv',['run_bedroom.py','--resume']):
+                 patch.object(sys,'argv',['run_bedroom.py','--resume','--skip-revit']):
+                # Worker availability is checked before downstream resume; this
+                # scenario does not require an installed native Revit runner.
                 self.assertEqual(run_bedroom.main(),1)
             result = json.loads(report.read_text())
             self.assertFalse(result['passed'])
             self.assertEqual(result['stage'],'worker_status')
+            self.assertEqual(result['error'],'worker unavailable')
+            self.assertEqual(result['execution_context']['working_directory'], str(root.resolve()))
+            self.assertTrue(all(Path(p).is_absolute() for p in result['execution_context']['scripts']))
 
     def test_stale_or_missing_artifacts_are_not_reused(self):
         self.assertFalse(run_bedroom.artifacts_match({}))

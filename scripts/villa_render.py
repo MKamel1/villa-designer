@@ -15,8 +15,39 @@ from archpipe.render_qa import check
 from archpipe.safe_io import save_bytes
 from archpipe.villa_render_contract import validate_scene
 from archpipe.concept.villa_render import source_provenance, write as write_scene
+from archpipe.execution_context import ContextError, project_context, write_record
 from render_remote import _ssh, _push
 from workstation import deploy, digest
+
+
+def remote_preflight(host: str, release: str, job: str, blender: str) -> dict:
+    """Check where Blender executes, before launching or reusing its job."""
+    remote_check = [release + "/scripts/preflight.py", "--root", release,
+                    "--script", release + "/src/archpipe/blender/villa_scene.py",
+                    "--out", job + "/out", "--temp", job + "/tmp",
+                    "--record", job + "/out/execution-context.json",
+                    "--tool", "blender", blender, "4.5.14"]
+    checked = _ssh(host, "cd " + shlex.quote(release) +
+                   " && NO_COLOR=1 PYTHONPATH=" + shlex.quote(release + "/src") +
+                   ' "$(command -v python3)" ' + shlex.join(remote_check))
+    if checked.returncode:
+        raise ContextError("remote preflight failed: " + checked.stderr.decode(errors="replace"))
+    fetched = _ssh(host, "cat " + shlex.quote(job + "/out/execution-context.json"))
+    if fetched.returncode:
+        raise ContextError("remote preflight context record missing")
+    try:
+        context = json.loads(fetched.stdout)
+        valid = (context["schema"] == "execution-context/1" and
+                 context["working_directory"] == release and
+                 context["tools"]["blender"]["requested_path"] == blender and
+                 context["tools"]["blender"]["version"] == "4.5.14" and
+                 context["environment"]["NO_COLOR"] == "1" and
+                 release + "/src/archpipe/blender/villa_scene.py" in context["scripts"])
+    except (ValueError, KeyError, TypeError):
+        valid = False
+    if not valid:
+        raise ContextError("remote preflight returned an incomplete or mismatched context")
+    return context
 
 
 def poll_remote(host: str, command: str, job: str):
@@ -114,6 +145,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         host: str, ies_dir: Path, dry_run: bool = False, calibrate: bool = False,
         measure_lighting: bool = False, allow_stale_scene: bool = False) -> dict:
     scene_path = scene_path.resolve()
+    context = project_context(ROOT, Path(__file__).resolve(), "villa-render")
     scene = json.loads(scene_path.read_text(encoding="utf-8"))
     provenance = scene.get("provenance") or {}
     scene_hash = provenance.get("source_hash")
@@ -145,10 +177,13 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
                                                                                  "build_scene.py", "presentation.py"))
     code += (ROOT / "src/archpipe/villa_render_contract.py").read_bytes()
     code += (ROOT / "src/archpipe/furniture_orientation.py").read_bytes()
+    code += (ROOT / "src/archpipe/execution_context.py").read_bytes()
+    code += (ROOT / "scripts/preflight.py").read_bytes()
     identity = digest(scene_path.read_bytes() + code + b"".join(files[n].read_bytes() for n in ies_names)
                       + json.dumps([selected, samples, resolution, calibrate, measure_lighting], sort_keys=True).encode())[:24]
     if dry_run:
         return {"dry_run": True, "views": selected, "ies": ies_names, "job_id": identity,
+                "execution_context": context, "remote_preflight": "not run (dry run)",
                 "host": host, "scene": str(scene_path), "scene_provenance": provenance,
                 "scene_source_hash": scene_hash, "stale_scene": stale, "label": stale_label}
     root, release, release_id = deploy(host)
@@ -175,7 +210,15 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         argv.append("--calibrate")
     if measure_lighting:
         argv.append("--measure-lighting")
-    command = shlex.join(argv)
+    # Run the same boundary on the machine that actually executes Blender.
+    # Resolve python3 there, record its actual interpreter, require absolute
+    # renderer paths and the pinned release from 10-blender.sh.
+    remote_context = remote_preflight(host, release, job, argv[0])
+    write_record({"local": context, "remote": remote_context},
+                 ROOT / "out/villa-render-execution-context.json")
+    command = ("cd " + shlex.quote(release) + " && NO_COLOR=1 TMP=" + shlex.quote(job + "/tmp") +
+               " TEMP=" + shlex.quote(job + "/tmp") + " TMPDIR=" + shlex.quote(job + "/tmp") +
+               " PYTHONPATH=" + shlex.quote(release + "/src") + " " + shlex.join(argv))
     # The shell writes status even if Blender exits nonzero. setsid and nohup
     # keep it alive when the initiating SSH connection drops.
     shell = command + " > " + shlex.quote(job + "/render.log") + " 2>&1; echo $? > " + shlex.quote(job + "/status")
@@ -214,6 +257,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
             save_bytes(output / (ident + suffix), fetched.stdout)
         render_report = json.loads((output / (ident + ".json")).read_text(encoding="utf-8"))
         render_report["scene_provenance"] = provenance
+        render_report["execution_context"] = {"local": context, "remote": remote_context}
         render_report["scene_source_hash"] = scene_hash
         render_report["stale_scene"] = stale
         if stale:
@@ -264,6 +308,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
             measurements["label"] = stale_label
         save_bytes(output / "lighting-measurements.json", json.dumps(measurements, indent=2).encode("utf-8"))
     return {"release": release_id, "job_id": identity, "views": reports, "out": str(output),
+            "execution_context": {"local": context, "remote": remote_context},
             "scene_provenance": provenance, "scene_source_hash": scene_hash,
             "stale_scene": stale, "label": stale_label,
             "calibration": calibration,
@@ -286,6 +331,10 @@ def main():
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--measure-lighting", action="store_true")
     a = ap.parse_args()
+    try:
+        project_context(ROOT, Path(__file__).resolve(), "villa-render")
+    except ContextError as exc:
+        ap.exit(2, "PREFLIGHT FAILED: " + str(exc) + "\n")
     if a.scene is None:
         scene_path, _ = write_scene()
     else:
@@ -293,7 +342,7 @@ def main():
     try:
         result = run(scene_path, a.views, a.samples, a.res, a.host, a.ies_dir, a.dry_run, a.calibrate,
                      a.measure_lighting, a.allow_stale_scene)
-    except ValueError as exc:
+    except (ValueError, ContextError) as exc:
         ap.error(str(exc))
     print(json.dumps(result, indent=2))
 

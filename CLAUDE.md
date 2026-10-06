@@ -67,6 +67,17 @@ plot, `design` exits 1 on a violation.
 
 For the Python unittest suite, set `NO_COLOR=1` and use the process exit status as the pass/fail result. On the managed Windows sandbox, run `scripts/run_tests.py`: Python 3.14 `tempfile.mkdtemp` creates directories tests cannot write or remove, and the runner creates accessible test directories. A text filter for `FAILED` missed coloured output during the R3b lighting integration; see `lighting-product-hidden-state` in `docs/LEARNINGS.md`.
 
+Launch migrated commands with the intended worktree's explicit script and Python interpreter.
+The caller may launch from any directory: preflight resolves paths from the declared
+absolute project root, and child launchers explicitly set and record their working directory.
+`scripts/run_tests.py` accepts focused unittest module names; do not use discovery
+when the job is scoped to focused testing. Verification, tests, the bedroom runner
+and villa rendering use `archpipe.execution_context` before work and write resolved
+context records under `out/`. Invalid launch contexts exit 2; test failure exits 1.
+See `docs/execution-context.md` for the interface, version policy, full inventory
+and Phase 2 boundaries. A checked context does not replace fresh native artifacts
+or acceptance inspection.
+
 ## Environment
 
 - **Revit 2027 is the target** (ADR-0011, supersedes ADR-0008). Verified:

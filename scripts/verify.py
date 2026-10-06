@@ -28,9 +28,15 @@ from archpipe import (brief as B, catalogue as cat, cli, codes,  # noqa: E402
 from archpipe.model import load as load_model  # noqa: E402
 from archpipe.asset_intake import audit_scene_manifest, manifest_assumptions, manifest_overrides  # noqa: E402
 from archpipe.concept import villa_render as VR  # noqa: E402
+from archpipe.execution_context import ContextError, absolute, project_context, write_record  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-TMP = pathlib.Path(tempfile.gettempdir()) / ("archpipe-verify-" + uuid.uuid4().hex)
+try:
+    EXECUTION_CONTEXT = project_context(ROOT, pathlib.Path(__file__).resolve(), "verify")
+except ContextError as exc:
+    print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+    raise SystemExit(2)
+TMP = pathlib.Path(EXECUTION_CONTEXT["temporary_directory"]) / ("archpipe-verify-" + uuid.uuid4().hex)
 TMP.mkdir(parents=True)
 FAILS: list[str] = []
 
@@ -76,6 +82,15 @@ def raises(exc, fn, *a, **kw) -> bool:
 
 
 def main() -> int:
+    expect("execution context refuses relative pyRevit and AutoCAD scripts",
+           all(raises(ContextError, absolute, pathlib.Path(path), "script", file=True)
+               for path in ("revit/build_bedroom.py", "out/plot.scr")))
+    expect("execution context records interpreter and disables colour",
+           EXECUTION_CONTEXT["environment"]["NO_COLOR"] == "1" and
+           pathlib.Path(EXECUTION_CONTEXT["tools"]["python"]["path"]).is_absolute())
+    expect("execution context records explicit absolute child directory and script paths",
+           EXECUTION_CONTEXT["working_directory"] == str(ROOT) and
+           all(pathlib.Path(p).is_absolute() for p in EXECUTION_CONTEXT["scripts"]))
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
     intake = audit_scene_manifest(manifest_path, VR.build(views=[]), ROOT)
     assumptions = manifest_assumptions(manifest_path)
@@ -752,8 +767,18 @@ def main() -> int:
            + (f" ({', '.join(tracked[:4])})" if tracked else ""), not tracked)
 
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
+    write_record({"execution_context": EXECUTION_CONTEXT, "failures": FAILS,
+                  "passed": not FAILS, "exit_code": 1 if FAILS else 0}, ROOT / "out/verify-result.json")
     return 1 if FAILS else 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except Exception as exc:
+        # A missing external dependency must leave failed current evidence,
+        # rather than a previous passing record beside a new traceback.
+        write_record({"execution_context": EXECUTION_CONTEXT, "passed": False,
+                      "exit_code": 1, "error": str(exc), "failures": FAILS},
+                     ROOT / "out/verify-result.json")
+        raise

@@ -10,11 +10,13 @@ import sys
 import tempfile
 import unittest
 import uuid
+import argparse
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context, write_record
 
 
 def _accessible_mkdtemp(suffix=None, prefix=None, dir=None):
@@ -32,14 +34,28 @@ def _accessible_mkdtemp(suffix=None, prefix=None, dir=None):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("modules", nargs="*", help="focused unittest modules; omitted means discovery")
+    args = parser.parse_args()
+    try:
+        context = project_context(ROOT, Path(__file__).resolve(), "tests")
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     if os.name == "nt":
         # Path.mkdir uses an accessible ACL here; tempfile.mkdtemp does not.
         test_temp = ROOT / "out" / "tmp"
         test_temp.mkdir(parents=True, exist_ok=True)
         tempfile.tempdir = str(test_temp)
         tempfile.mkdtemp = _accessible_mkdtemp
-    suite = unittest.defaultTestLoader.discover(str(ROOT / "tests"))
-    return 0 if unittest.TextTestRunner().run(suite).wasSuccessful() else 1
+    suite = (unittest.defaultTestLoader.loadTestsFromNames(args.modules) if args.modules else
+             unittest.defaultTestLoader.discover(str(ROOT / "tests")))
+    result = unittest.TextTestRunner().run(suite)
+    code = 0 if result.wasSuccessful() else 1
+    write_record({"execution_context": context, "modules": args.modules,
+                  "tests_run": result.testsRun, "exit_code": code, "passed": code == 0},
+                 ROOT / "out/tests-result.json")
+    return code
 
 
 if __name__ == "__main__":

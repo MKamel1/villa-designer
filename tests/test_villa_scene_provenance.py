@@ -58,7 +58,7 @@ def write():
     data["provenance"] = source_provenance(root)
     scene.write_text(json.dumps(data), encoding="utf-8")
     return scene, data
-driver.ROOT = root
+# Keep the launch root real; only provenance inputs use the isolated copy.
 sys.argv = ["villa_render.py", *sys.argv[4:]]
 with patch.object(driver, "source_provenance", lambda: source_provenance(root)), \\
      patch.object(driver, "write_scene", write), \\
@@ -138,6 +138,14 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
 
         def ssh(host, command, **kwargs):
             if command.startswith("cat "):
+                if command.endswith("/execution-context.json"):
+                    return RemoteResult(json.dumps({
+                        "schema": "execution-context/1", "working_directory": "/release",
+                        "scripts": ["/release/src/archpipe/blender/villa_scene.py"],
+                        "environment": {"NO_COLOR": "1"},
+                        "tools": {"blender": {"path": "/remote/opt/blender-4.5.14/blender",
+                                              "requested_path": "/remote/opt/blender/blender", "version": "4.5.14"}}
+                    }).encode())
                 if command.endswith("/status"):
                     return RemoteResult(b"0\n")
                 if command.endswith(".png"):
@@ -146,8 +154,7 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
                     return RemoteResult(b"{}")
             return RemoteResult()
 
-        with patch.object(driver, "ROOT", self.root), \
-             patch.object(driver, "source_provenance", lambda: source_provenance(self.root)), \
+        with patch.object(driver, "source_provenance", lambda: source_provenance(self.root)), \
              patch.object(driver, "validate_scene", lambda scene: []), \
              patch.object(driver, "deploy", lambda host: ("/remote/archpipe", "/release", "release")), \
              patch.object(driver, "_ssh", ssh), patch.object(driver, "_push"), \
