@@ -396,17 +396,24 @@ class RenderStandard(unittest.TestCase):
                 self.assertAlmostEqual(c["shift_y"], 0.10)
             elif "lens_basis" in c:                  # client 2026-09-27: a CALCULATED lens where 24 mm cannot hold the room
                 import math
-                if v["id"] == "v16-guest-wc":
-                    need = float(c["lens_basis"].split(" deg above level eye")[0].split()[-1])
-                    self.assertGreater(need, math.degrees(math.atan(12 / 24)))
-                    self.assertLess(need, math.degrees(math.atan(12 / 16)))
-                else:
-                    need = float(c["lens_basis"].split(" deg off axis")[0].split()[-1])
-                    self.assertGreater(need, 36.87, v["id"] + ": 24 mm would have held it")
+                narrow, wide = (c["lens_basis"][key] for key in ("at_24_mm", "at_16_mm"))
+                vertical_keys = ("lower_top_need_deg", "upper_fitting_need_deg", "whole_subject_need_deg")
+                for measured, lens in ((narrow, 24), (wide, 16)):
+                    self.assertAlmostEqual(measured["horizontal_limit_deg"],
+                                           math.degrees(math.atan(c["sensor_mm"] / 2 / lens)))
+                    self.assertAlmostEqual(measured["vertical_limit_deg"],
+                                           math.degrees(math.atan(c["sensor_mm"] / 3 / lens)))
+                self.assertEqual(narrow["framed_candidates"], 0, v["id"] + ": a 24 mm point holds it")
+                self.assertTrue(narrow["horizontal_need_deg"] > narrow["horizontal_limit_deg"] or
+                                any(narrow[key] > narrow["vertical_limit_deg"] for key in vertical_keys),
+                                v["id"] + ": 24 mm would have held it")
                 self.assertEqual(c["lens_mm"], 16, v["id"])
-                # the 16 mm camera is re-placed by render_views.choose; the check is at that camera
-                at16 = float(c["lens_basis"].split("at 16 mm widest ")[1].split()[0])
-                self.assertLessEqual(at16, math.degrees(math.atan(18 / 16)), v["id"] + ": 16 mm does not hold it")
+                self.assertGreater(wide["framed_candidates"], 0)
+                self.assertEqual(c["position"][:2], wide["position"])
+                self.assertEqual(c["target"][:2], wide["target"])
+                self.assertLessEqual(wide["horizontal_need_deg"], wide["horizontal_limit_deg"], v["id"])
+                for key in vertical_keys:
+                    self.assertLessEqual(wide[key], wide["vertical_limit_deg"], v["id"] + ": " + key)
             else:
                 self.assertEqual(c["lens_mm"], 24, v["id"])
             self.assertAlmostEqual(c["position"][2], c["target"][2], places=3, msg=v["id"] + " is tilted")

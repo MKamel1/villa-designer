@@ -20,8 +20,7 @@ class FinalMounting(unittest.TestCase):
         from archpipe.concept.mounting_clearances import review
         self.assertEqual(scene_findings(self.scene), [])
         report = review(self.scene)
-        self.assertEqual(len(report['failures']), 3)
-        self.assertTrue(all(r['room']=='family-bath' for r in report['failures']))
+        self.assertEqual(report['failures'], [])
         self.assertEqual(report['unresolved'], [])
         split = deepcopy(self.scene)
         root = next(m for m in split['meshes'] if m['id']=='appliance-coffee-main-body')

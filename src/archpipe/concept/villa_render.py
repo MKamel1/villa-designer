@@ -450,7 +450,8 @@ def _environment_face_sources():
 # ------------------------------------------------------------------ the scene
 def build(lay=None, views=None, *, collect_part_failures=True):
     from .build_cache import scope
-    with scope():
+    from .sanitary_relocation import input_revision
+    with scope(), input_revision(True):
         return _build(lay, views, collect_part_failures=collect_part_failures)
 
 
@@ -2060,6 +2061,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     apply_final_mounting(scene, lay)
     from .wc_slides import apply as apply_wc_slides
     apply_wc_slides(scene, lay)
+    from .sanitary_relocation import apply_family
+    apply_family(scene, lay)
     failures = indoor_plant_violations(scene['props'], lay, scene)
     if failures:
         raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
@@ -2482,6 +2485,12 @@ EXPOSURE = {  # PRE-REGISTERED (2026-09-27) before the first render; incident me
 
 
 def VIEWS(lay=None, resolve=True):
+    from .sanitary_relocation import input_revision
+    with input_revision(False):
+        return _VIEWS(lay,resolve)
+
+
+def _VIEWS(lay=None, resolve=True):
     """Client view set, with level cameras at 1.35 m standing eye height (1.20 m seated).
 
     Check the authored garden and cross-room directions with scripts/villa_render_views.py.
@@ -2541,8 +2550,10 @@ def VIEWS(lay=None, resolve=True):
     BATH_DAY = dict(layers=["ambient", "task", "accent"], dimmers={})
     v("v15-family-bath", "Family bathroom", "day", I, I, 24, ["fb-basin", "fb-shower"], room="family-bath",
       **BATH_DAY)
-    V[-1]["caption_notes"] = ["The WC is in the corner beside the door, below and outside this frame: no standing "
-                              "point holds basin, shower and WC together (checked by render_views.choose)."]
+    V[-1]["caption_notes"] = ["Basin and shower view. The client-selected east-wall WC is shown separately in v35-family-bath-wc."]
+    v('v35-family-bath-wc','Family bathroom east-wall WC','day',I,I,24,['fb-wc'],room='family-bath',
+      final_only=True,**BATH_DAY)
+    V[-1]['caption_notes']=['Wall-hung WC on east finished marble wall; services coordination pending.']
     v("v16-guest-wc", "Guest bathroom", "evening", I, I, 24,
       ["gwc-shower", "detail-gwc-rain-head", "detail-gwc-hand-shower"], room="guest-wc")
     v("v17-dirty-kitchen", "Dirty kitchen and laundry", "day", I, I, 24, ["dk-run", "dk-appliance-bank"], room="dirty-kitchen",
@@ -2650,32 +2661,31 @@ def VIEWS(lay=None, resolve=True):
         eye = 1.20 if x.get("seated") else 1.35
         if room:
             got = RV.choose(lay, room, x["subjects"], lens_mm=24, sensor_mm=c["sensor_mm"], sp=sp_,
-                            extra=floor_props)
-            half24 = math.degrees(math.atan(c["sensor_mm"] / 2 / 24))
+                            eye_m=eye, extra=floor_props)
             if not got["subjects_in_frame"]:
                 # client 2026-09-27: where 24 mm cannot hold the room's subjects from any standing point, 16 mm
-                half16 = math.degrees(math.atan(c["sensor_mm"] / 2 / 16))
                 got16 = RV.choose(lay, room, x["subjects"], lens_mm=16, sensor_mm=c["sensor_mm"], sp=sp_,
-                                  extra=floor_props)
+                                  eye_m=eye, extra=floor_props)
                 if not got16["subjects_in_frame"]:
                     raise ValueError("%s: even 16 mm cannot hold %s" % (x["id"], x["subjects"]))
                 override(c, "lens_mm", 16, "room subjects require the chosen 16 mm frame")
-                if x["id"] == "v16-guest-wc":
-                    head = next(f for f in sp_["bath_fittings"] if f["id"] == "gwc-rain-head")
-                    angle = math.degrees(math.atan2(head["z"] + .02 - eye,
-                        math.hypot(head["x"] - got["position"][0], head["y"] - got["position"][1])))
-                    c["lens_basis"] = ("rain head top %.1f deg above level eye from best 24 mm standing point; "
-                                       "24 mm vertical half-frame %.1f deg, 16 mm vertical half-frame %.1f deg; "
-                                       "at 16 mm widest %.1f deg" % (
-                                           angle, math.degrees(math.atan(c["sensor_mm"] / 3 / 24)),
-                                           math.degrees(math.atan(c["sensor_mm"] / 3 / 16)), got16["widest_deg"]))
-                else:
-                    c["lens_basis"] = ("widest subject corner %.1f deg off axis from the best standing point; 24 mm holds "
-                                       "%.1f, 16 mm holds %.1f; at 16 mm widest %.1f deg" % (
-                                           got["widest_deg"], half24, half16, got16["widest_deg"]))
+                # Record every measured constraint, not a view-id-specific
+                # guess at which constraint forced the wider lens.
+                c["lens_basis"] = {
+                    "at_24_mm": {**got["framing"], "position": got["position"], "target": got["target"],
+                                 "framed_candidates": got["framed_candidates"],
+                                 "search_step_m": got["search_step_m"]},
+                    "at_16_mm": {**got16["framing"], "position": got16["position"], "target": got16["target"],
+                                 "framed_candidates": got16["framed_candidates"],
+                                 "search_step_m": got16["search_step_m"]}}
                 x.setdefault("caption_notes", []).append(
-                    "Lens 16 mm, not the standard 24 mm: the room cannot hold its subjects at 24 mm from any standing "
-                    "point (%s). Wider than the eye." % c["lens_basis"])
+                    "Lens 16 mm: no searched standing point holds all subjects at 24 mm. "
+                    "At the best 24 mm point, horizontal need %.1f deg / limit %.1f deg; "
+                    "vertical need %.1f deg / limit %.1f deg. Wider than the eye." % (
+                        got["framing"]["horizontal_need_deg"], got["framing"]["horizontal_limit_deg"],
+                        max(got["framing"][key] for key in (
+                            "lower_top_need_deg", "upper_fitting_need_deg", "whole_subject_need_deg")),
+                        got["framing"]["vertical_limit_deg"]))
                 got = got16
             else:
                 fill_defaults(c, {"lens_mm": 24})

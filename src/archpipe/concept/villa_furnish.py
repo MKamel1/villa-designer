@@ -190,9 +190,15 @@ def _envelope_boundary(level, extension):
 
 def layout(lay=None, products=True):
     from .build_cache import derived
+    from .sanitary_relocation import historical_input, family_pose
     lay = lay or R.design("D1")
-    return derived("furnish_layout", (lay, products, PRODUCT if products else None),
-                   lambda: _layout(lay, products))
+    items=derived("furnish_layout", (lay, products, PRODUCT if products else None),
+                  lambda: _layout(lay, products))
+    if not historical_input():
+        pose=family_pose(lay,items)
+        next(it for it in items if it['id']=='fb-wc').update(pose,
+            why='Client 2026-10-05: wall-hung WC on east finished wall')
+    return items
 
 
 def _layout(lay=None, products=True):

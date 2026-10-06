@@ -109,7 +109,9 @@ class SceneMountingGuard(unittest.TestCase):
 class StairFirstPackage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.scene = VR.build(views=[])
+        from unittest.mock import patch
+        with patch('archpipe.concept.sanitary_relocation.apply_family'):
+            cls.scene = VR.build(views=[])
         # Historical a-d proofs retain their pre-e clearance case. Current
         # authorized slides are independently exercised by support tests.
         for identifier,record in cls.scene.get('wc_slides',{}).items():

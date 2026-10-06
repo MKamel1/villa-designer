@@ -409,6 +409,11 @@ def _d1_details(lay, spec):
     spec["construction_requirements"] = [dict(id="gwc-drain-installation", status="requirement",
         requirement="manufacturer installation data required", value_mm=None,
         scope="Drain installation, service access, waterproofing and falls; no numeric pass claimed")]
+    from .sanitary_relocation import family_pose
+    spec['sanitary_placements']={'fb-wc':family_pose(lay,F.layout(lay,products=False))}
+    spec['construction_requirements'].append(dict(id='fb-wc-east-services',status='requirement',
+        requirement='services coordination pending',value_mm=None,
+        scope='East-wall wall-hung carrier, concealed cistern/flush-plate connection and soil-stack position; no stack position invented'))
     spec["wet_zones"] = [dict(id="gwc-shower", room="guest-wc", rect=list(wet),
         finished_depth_m=.8, status="authored design intent", boundary_translation_m=-wet_finish)]
     spec["bath_fittings"].extend([

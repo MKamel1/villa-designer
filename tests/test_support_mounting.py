@@ -16,7 +16,7 @@ class SupportMounting(unittest.TestCase):
     def setUpClass(cls):
         # Retained package-f regressions deliberately evaluate that historical stage.
         from unittest.mock import patch
-        with patch('archpipe.concept.final_mounting.apply'):
+        with patch('archpipe.concept.final_mounting.apply'), patch('archpipe.concept.sanitary_relocation.apply_family'):
             cls.scene=VR.build(views=[])
 
     def test_real_missing_sites_now_bound_and_only_pending_findings(self):

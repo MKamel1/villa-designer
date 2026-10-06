@@ -46,11 +46,17 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      (0.25 m clear of each jamb; entrance and garden doors excluded; a point
      in a door's wall band is a doorway point and that door is opened for
      that view only). Score, in order: every subject wholly in frame
-     horizontally AND its top above the frame bottom (hard); the main
+     horizontally AND its top above the frame bottom (hard); WCs also project
+     every vertex of the physical pan and flush plate vertically, with a finer
+     standing-point search when the coarse grid cannot hold them; the main
      subject seen from its front; no piece within 1.0 m of the lens in view;
      no subject behind a wall; then how much of the room shows, depth and
      windows. 24 mm, level, eye 1.35 m (1.20 seated); 16 mm only where no
-     standing point holds the subjects, recorded in `lens_basis`. Exteriors
+     searched standing point holds the subjects, recorded in `lens_basis` as
+     structured horizontal and vertical needs/limits at both lenses, camera
+     points, search spacing and count of fully framed candidates. Assertions
+     check the failed 24 mm constraint and every successful 16 mm constraint;
+     never infer the reason from a view identifier or parse caption prose. Exteriors
      and the stair keep authored, level cameras (lens shift, never tilt).
    - Exposure is metered per view and LOCKED per state across the whole
      set: `day`, `evening`, `exterior-dusk`, `exterior-day`. Rendering a
@@ -79,7 +85,8 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      `scene_findings` also checks live support geometry and recorded datums.
    - `tests/test_render_views.py`: facing, looming, occlusion, height,
      door-band rules, each proven on the draft that broke it.
-   - `scripts/villa_render_views.py`: whole subject in frame, clearances,
+   - `scripts/villa_render_views.py`: whole subject in frame (built WC vertices
+     horizontally and vertically, including lens shift), clearances,
      doorway doors opened.
    - `tests/test_villa_lighting.py`, and the render report must carry
      `qa_scene` so every render_qa check runs (none silently skipped).

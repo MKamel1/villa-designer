@@ -52,6 +52,41 @@ def subject_footprint(subject, items, rooms, scene):
     raise ValueError("unresolved view subject: " + subject)
 
 
+def subject_mesh_frame_violations(view, scene, subject):
+    """Project every built vertex through a level camera, including sensor-width lens shift.
+
+    Horizontal coordinates span -0.5 to 0.5 sensor widths; vertical coordinates
+    span half the image height/width ratio either side of the shifted centre.
+    Returns failed frame edges; unresolved subjects fail closed.
+    """
+    points = [p for m in scene["meshes"]
+              if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
+              for face in m["faces"] for p in face]
+    if not points:
+        return ["unresolved built subject"]
+    camera = view["camera"]
+    px, py, pz = camera["position"]
+    tx, ty, _ = camera["target"]
+    yaw = math.atan2(ty-py, tx-px)
+    vertical_half = view["resolution"][1] / view["resolution"][0] / 2
+    failed = set()
+    for x, y, z in points:
+        forward = (x-px)*math.cos(yaw)+(y-py)*math.sin(yaw)
+        if forward <= 0:
+            failed.add("behind camera")
+            continue
+        right = (x-px)*math.sin(yaw)-(y-py)*math.cos(yaw)
+        horizontal = camera["lens_mm"] / camera["sensor_mm"] * right/forward - camera.get("shift_x", 0)
+        vertical = camera["lens_mm"] / camera["sensor_mm"] * (z-pz)/forward - camera.get("shift_y", 0)
+        if abs(horizontal) > .5:
+            failed.add("horizontal edge")
+        if vertical < -vertical_half:
+            failed.add("bottom edge")
+        if vertical > vertical_half:
+            failed.add("top edge")
+    return sorted(failed)
+
+
 def camera_proximity_violations(view, scene, items, clearance=1.0):
     """Return props and furniture closer than the required camera clearance in metres."""
     px, py, pz = view["camera"]["position"]
@@ -217,6 +252,9 @@ def main():
         ax.add_patch(Polygon(wedge, fc="#ffcc00", alpha=0.25, ec="#cc9900"))
         ax.plot([px], [py], "ro", ms=4)
         for s in v["subjects"]:
+            if s in items and items[s]["type"] == "wc":
+                for edge in subject_mesh_frame_violations(v, scene, s):
+                    problems.append("%s: built %s crosses %s" % (v["id"], s, edge))
             try:
                 q = subject_footprint(s, items, lay["rooms"], scene)
             except ValueError as e:

@@ -264,3 +264,28 @@ Clipping through an opening edge must repair keyhole topology before extrusion;
 a doubled slit must not become a nonmanifold solid. Disconnected clipped
 contours fail closed and require separately declared wall zones. Prove the
 opening-edge clip and disconnected rejection alongside the intact window.
+
+## Client sanitary wall changes
+
+Current sanitary intent is consumed by `villa_furnish.layout` and native
+`villa_furnish3d.spec`. `sanitary_relocation.input_revision(True)` scopes only
+the frozen C4 mounting input; it must not leak into public layout, view or native
+specification output. `mounting_clearances.measured_items` starts from historical
+authored envelopes, then applies either measured migration/slides or a current
+absolute relocation pose, never both. Mounting approvals remain immutable audit
+history. Wall changes carry every generated part (including the flush plate),
+rebind through C4, and declare attached-part ownership after rotation.
+
+For the client's east-wall family WC decision run
+`scripts/checkpoint_family_east.py`, review its diagnostic plan and full table,
+then the focused sanitary/native/mounting/view modules and `verify.py --portable`
+on Linux. Keep C4i physical finish construction and require zero unsupported
+render components. Enclosed shower footprints remain access-zone obstacles even
+when their modeled floor is low; open level-access wet zones retain the existing
+overlapping-zone guidance. Report wet-floor non-intersection separately.
+
+Keep `services coordination pending`; concealed cistern/carrier installation and
+soil-stack location are construction requirements, never invented coordinates.
+The lead renders `v15-family-bath` and `v35-family-bath-wc` and retains native
+Revit build/read-back and full-suite responsibility. A clearance failure remains
+a client decision and must be reported achieved versus required.

@@ -3,6 +3,21 @@
   "scope": "C4 final lead decisions; candidate host migration complete, whole-scene guard unconditional; native and presentation proof pending",
   "records": [
     {
+      "lesson_id": "c4-lens-basis-missing-vertical",
+      "control_tier": [1, 2],
+      "construction": "src/archpipe/concept/render_views.py::choose; structured lens_basis in villa_render.VIEWS",
+      "check": "scripts/villa_render_views.py::subject_mesh_frame_violations",
+      "stage": "view selection and exported-scene subject projection",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_frozen_east_wc_vertical_lens_need_and_whole_mesh",
+        "test_whole_wc_search_generalises_to_renamed_translated_room",
+        "test_live_east_wc_is_wholly_in_frame",
+        "test_guest_rain_head_requires_wider_vertical_frame"
+      ],
+      "closure": "Camera and whole-subject projection proofs; photoreal presentation review remains separate"
+    },
+    {
       "lesson_id": "c4-view-retirement-index",
       "control_tier": [
         1
@@ -291,6 +306,24 @@
         "test_ensuite_rail_is_carried_by_its_own_brackets"
       ],
       "closure": "Real suppressed-layer reproduction and closed outward solids; native/presentation/lighting acceptance remains separate."
+    },
+    {
+      "lesson_id": "c4-sanitary-wall-relocation",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/sanitary_relocation.py::relocate; family_pose; input_revision",
+      "check": "src/archpipe/concept/mounting_clearances.py::review; mounting.scene_findings",
+      "stage": "current layout, native specification and scripts/verify.py",
+      "proof_file": "tests/test_sanitary_relocation.py",
+      "proofs": [
+        "test_frozen_full_zone_fires_clean_current_quiet_and_wrong_pose_fires",
+        "test_rigid_members_and_reverse_host_generalise",
+        "test_current_layout_native_parts_and_drainage_note_match_measured_scene",
+        "test_support_finish_layers_remain_and_wc_view_has_measured_subject"
+      ],
+      "closure": "Client east-wall WC candidate; full clearance, diagnostic preview and support proof. Native/render acceptance pending."
     }
   ]
 }

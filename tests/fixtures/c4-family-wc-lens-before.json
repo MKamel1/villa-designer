@@ -1,0 +1,4917 @@
+{
+  "room": "family-bath",
+  "subjects": [
+    "fb-wc"
+  ],
+  "layout": {
+    "id": "D1",
+    "title": "Design D1 - Aligned: kitchen bay 4-5, dining bay 5-6, garden living, bar alcove in the rear share",
+    "summary": "Aligned: kitchen bay 4-5, dining bay 5-6, garden living, bar alcove in the rear share",
+    "levels": {
+      "B": -1.8,
+      "GF": 1.2
+    },
+    "rooms": {
+      "landing-gf": {
+        "id": "landing-gf",
+        "level": "GF",
+        "rect": [
+          3.617,
+          -28.671,
+          5.177,
+          -26.371
+        ],
+        "occupancy": "landing",
+        "name": "stair landing (core door)"
+      },
+      "stair-gf": {
+        "id": "stair-gf",
+        "level": "GF",
+        "rect": [
+          5.177,
+          -28.671,
+          8.887,
+          -26.371
+        ],
+        "occupancy": "stair",
+        "name": "stair void + gallery",
+        "ends": [
+          [
+            "v",
+            5.177,
+            -28.421,
+            -27.471
+          ]
+        ]
+      },
+      "corridor": {
+        "id": "corridor",
+        "level": "GF",
+        "rect": [
+          8.887,
+          -28.671,
+          19.527,
+          -27.371
+        ],
+        "occupancy": "corridor",
+        "name": "hall"
+      },
+      "study-game": {
+        "id": "study-game",
+        "level": "GF",
+        "rect": [
+          3.617,
+          -26.371,
+          9.227,
+          -23.591
+        ],
+        "occupancy": "study",
+        "name": "study / game room (open to the stair; sliding door to the deck)",
+        "open": true
+      },
+      "kids-a": {
+        "id": "kids-a",
+        "level": "GF",
+        "rect": [
+          11.477,
+          -27.371,
+          14.952,
+          -23.591
+        ],
+        "occupancy": "bedroom",
+        "name": "kids bedroom A",
+        "first": true
+      },
+      "kids-b": {
+        "id": "kids-b",
+        "level": "GF",
+        "rect": [
+          14.952,
+          -27.371,
+          18.427,
+          -23.591
+        ],
+        "occupancy": "bedroom",
+        "name": "kids bedroom B"
+      },
+      "family-bath": {
+        "id": "family-bath",
+        "level": "GF",
+        "rect": [
+          9.227,
+          -26.371,
+          11.477,
+          -23.591
+        ],
+        "occupancy": "bathroom",
+        "name": "family bathroom"
+      },
+      "parents-bed": {
+        "id": "parents-bed",
+        "level": "GF",
+        "rect": [
+          18.427,
+          -26.641,
+          22.597,
+          -23.591
+        ],
+        "occupancy": "bedroom",
+        "name": "parents' bedroom",
+        "suite": true,
+        "first": false
+      },
+      "parents-dressing": {
+        "id": "parents-dressing",
+        "level": "GF",
+        "rect": [
+          19.527,
+          -28.671,
+          22.597,
+          -26.641
+        ],
+        "occupancy": "dressing",
+        "name": "dressing (hanging both sides)",
+        "suite": true,
+        "door_at": {
+          "parents-bed": 21.897
+        }
+      },
+      "parents-ensuite": {
+        "id": "parents-ensuite",
+        "level": "GF",
+        "rect": [
+          19.604,
+          -31.311,
+          22.324,
+          -28.881
+        ],
+        "occupancy": "ensuite",
+        "name": "en-suite",
+        "suite": true
+      },
+      "gallery-end": {
+        "id": "gallery-end",
+        "level": "GF",
+        "rect": [
+          8.887,
+          -27.371,
+          11.477,
+          -26.371
+        ],
+        "occupancy": "corridor",
+        "name": "gallery (round the stair void to the bedrooms)"
+      },
+      "parents-entry": {
+        "id": "parents-entry",
+        "level": "GF",
+        "rect": [
+          18.427,
+          -27.371,
+          19.527,
+          -26.641
+        ],
+        "occupancy": "bedroom",
+        "name": "parents' bedroom (entry)",
+        "part_of": "parents-bed",
+        "suite": true
+      },
+      "parents-dressing-ext": {
+        "id": "parents-dressing-ext",
+        "level": "GF",
+        "rect": [
+          19.604,
+          -28.881,
+          22.324,
+          -28.671
+        ],
+        "occupancy": "dressing",
+        "name": "dressing (taken from the ensuite)",
+        "part_of": "parents-dressing",
+        "suite": true,
+        "door_at": {
+          "parents-ensuite": 21.65
+        }
+      },
+      "lounge": {
+        "id": "lounge",
+        "level": "B",
+        "rect": [
+          3.617,
+          -27.471,
+          9.657,
+          -23.591
+        ],
+        "occupancy": "living",
+        "name": "lounge (street window floor to beam)"
+      },
+      "lounge-nook": {
+        "id": "lounge-nook",
+        "level": "B",
+        "rect": [
+          3.617,
+          -28.671,
+          5.177,
+          -27.471
+        ],
+        "occupancy": "living",
+        "name": "lounge (under the stair's top landing)",
+        "part_of": "lounge"
+      },
+      "stair-b": {
+        "id": "stair-b",
+        "level": "B",
+        "rect": [
+          5.177,
+          -28.671,
+          9.657,
+          -27.471
+        ],
+        "occupancy": "stair",
+        "name": "stair (straight, to the GF)",
+        "ends": [
+          [
+            "v",
+            9.657,
+            -28.421,
+            -27.471
+          ]
+        ]
+      },
+      "pantry": {
+        "id": "pantry",
+        "level": "B",
+        "rect": [
+          3.617,
+          -29.916,
+          6.94,
+          -28.671
+        ],
+        "occupancy": "store",
+        "name": "pantry / store"
+      },
+      "hall-b": {
+        "id": "hall-b",
+        "level": "B",
+        "rect": [
+          9.657,
+          -28.671,
+          11.197,
+          -26.671
+        ],
+        "occupancy": "hall",
+        "name": "hall at the stair foot"
+      },
+      "entry-b": {
+        "id": "entry-b",
+        "level": "B",
+        "rect": [
+          14.134,
+          -28.671,
+          15.745,
+          -26.671
+        ],
+        "occupancy": "entrance",
+        "name": "entrance (second core lobby)"
+      },
+      "family": {
+        "id": "family",
+        "level": "B",
+        "rect": [
+          9.657,
+          -26.671,
+          11.197,
+          -23.591
+        ],
+        "occupancy": "living",
+        "name": "family / TV corner (open to the lounge)",
+        "part_of": "lounge"
+      },
+      "kitchen": {
+        "id": "kitchen",
+        "level": "B",
+        "rect": [
+          11.197,
+          -26.671,
+          14.902,
+          -23.591
+        ],
+        "occupancy": "kitchen",
+        "name": "open kitchen (column bay 4-5)"
+      },
+      "kitchen-island": {
+        "id": "kitchen-island",
+        "level": "B",
+        "rect": [
+          11.197,
+          -28.671,
+          14.134,
+          -26.671
+        ],
+        "occupancy": "kitchen",
+        "name": "open kitchen (island)"
+      },
+      "dining": {
+        "id": "dining",
+        "level": "B",
+        "rect": [
+          14.902,
+          -26.671,
+          18.367,
+          -23.591
+        ],
+        "occupancy": "dining",
+        "name": "dining (column bay 5-6, east window)"
+      },
+      "dining-side": {
+        "id": "dining-side",
+        "level": "B",
+        "rect": [
+          15.745,
+          -28.671,
+          18.367,
+          -26.671
+        ],
+        "occupancy": "dining",
+        "name": "dining (party side)",
+        "part_of": "dining"
+      },
+      "living": {
+        "id": "living",
+        "level": "B",
+        "rect": [
+          18.367,
+          -28.671,
+          22.597,
+          -23.591
+        ],
+        "occupancy": "living",
+        "name": "garden living"
+      },
+      "bar-alcove": {
+        "id": "bar-alcove",
+        "level": "B",
+        "rect": [
+          17.268,
+          -29.916,
+          22.597,
+          -28.671
+        ],
+        "occupancy": "living",
+        "name": "bar / library alcove (floor-to-beam garden window)",
+        "part_of": "living"
+      },
+      "store-ramp": {
+        "id": "store-ramp",
+        "level": "B",
+        "rect": [
+          -0.123,
+          -23.591,
+          3.125,
+          -20.601
+        ],
+        "occupancy": "store",
+        "name": "store under the ramp (1.45-2.0 m clear)",
+        "ext": true
+      },
+      "cinema": {
+        "id": "cinema",
+        "level": "B",
+        "rect": [
+          3.125,
+          -23.591,
+          9.227,
+          -20.601
+        ],
+        "occupancy": "media",
+        "name": "cinema (under the ramp; 2.0-2.65 m ceiling)",
+        "ext": true
+      },
+      "guest-wc": {
+        "id": "guest-wc",
+        "level": "B",
+        "rect": [
+          9.227,
+          -23.591,
+          11.2,
+          -20.601
+        ],
+        "occupancy": "bathroom",
+        "name": "guest bathroom (under the deck)",
+        "ext": true,
+        "overrides": [
+          {
+            "field": "occupancy",
+            "prior": "wc",
+            "new": "bathroom",
+            "reason": "client 2026-09-29: open walk-in shower changes guest WC to bathroom"
+          },
+          {
+            "field": "name",
+            "prior": "guest WC (under the deck)",
+            "new": "guest bathroom (under the deck)",
+            "reason": "client 2026-09-29: guest room now includes a shower"
+          }
+        ]
+      },
+      "dirty-kitchen": {
+        "id": "dirty-kitchen",
+        "level": "B",
+        "rect": [
+          11.2,
+          -23.591,
+          15.412,
+          -20.601
+        ],
+        "occupancy": "utility",
+        "name": "dirty kitchen + laundry (full-height window at the end)",
+        "ext": true
+      }
+    },
+    "links": [
+      [
+        "landing-gf",
+        "stair-gf"
+      ],
+      [
+        "stair-gf",
+        "corridor"
+      ],
+      [
+        "stair-gf",
+        "study-game"
+      ],
+      [
+        "corridor",
+        "kids-a"
+      ],
+      [
+        "corridor",
+        "kids-b"
+      ],
+      [
+        "parents-bed",
+        "parents-dressing"
+      ],
+      [
+        "stair-gf",
+        "gallery-end"
+      ],
+      [
+        "gallery-end",
+        "family-bath"
+      ],
+      [
+        "corridor",
+        "parents-entry"
+      ],
+      [
+        "parents-entry",
+        "parents-bed"
+      ],
+      [
+        "parents-dressing",
+        "parents-dressing-ext"
+      ],
+      [
+        "parents-dressing-ext",
+        "parents-ensuite"
+      ],
+      [
+        "lounge",
+        "lounge-nook"
+      ],
+      [
+        "lounge-nook",
+        "pantry"
+      ],
+      [
+        "lounge",
+        "cinema"
+      ],
+      [
+        "cinema",
+        "store-ramp"
+      ],
+      [
+        "lounge",
+        "family"
+      ],
+      [
+        "hall-b",
+        "stair-b"
+      ],
+      [
+        "hall-b",
+        "family"
+      ],
+      [
+        "hall-b",
+        "kitchen-island"
+      ],
+      [
+        "family",
+        "kitchen"
+      ],
+      [
+        "kitchen",
+        "kitchen-island"
+      ],
+      [
+        "kitchen-island",
+        "entry-b"
+      ],
+      [
+        "kitchen",
+        "dining"
+      ],
+      [
+        "entry-b",
+        "dining-side"
+      ],
+      [
+        "dining",
+        "dining-side"
+      ],
+      [
+        "dining",
+        "living"
+      ],
+      [
+        "dining-side",
+        "living"
+      ],
+      [
+        "family",
+        "guest-wc"
+      ],
+      [
+        "kitchen",
+        "dirty-kitchen"
+      ],
+      [
+        "living",
+        "bar-alcove"
+      ]
+    ],
+    "entries": [
+      [
+        "landing-gf",
+        "GF",
+        "core-entrance"
+      ],
+      [
+        "entry-b",
+        "B",
+        "core-lobby-b2"
+      ]
+    ],
+    "vertical": [
+      [
+        "stair-b",
+        "stair-gf"
+      ]
+    ],
+    "stair": "party-r8",
+    "terrace": [
+      1.787,
+      -28.671,
+      3.617,
+      -23.591
+    ],
+    "deck_door": {
+      "room": "study-game",
+      "x0": 7.377,
+      "x1": 9.177,
+      "width": 1.8,
+      "sliding": true
+    },
+    "north_patio": {
+      "rect": [
+        -0.123,
+        -28.671,
+        3.617,
+        -23.841
+      ],
+      "covered": [
+        1.787,
+        -28.671,
+        3.617,
+        -23.841
+      ],
+      "name": "sunken patio off the lounge (covered loggia under the GF terrace + open court)"
+    },
+    "extension": [
+      [
+        -0.123,
+        -23.591,
+        3.125,
+        -20.601
+      ],
+      [
+        3.125,
+        -23.591,
+        9.227,
+        -20.601
+      ],
+      [
+        9.227,
+        -23.591,
+        11.2,
+        -20.601
+      ],
+      [
+        11.2,
+        -23.591,
+        15.412,
+        -20.601
+      ]
+    ],
+    "basement_full_height": [
+      "east"
+    ],
+    "daylight_variant": {
+      "white": true
+    },
+    "parking2": {
+      "cars": 1,
+      "ramp": [
+        -0.123,
+        -23.591,
+        6.877,
+        -20.601
+      ],
+      "deck": [
+        6.877,
+        -23.591,
+        12.777,
+        -20.601
+      ],
+      "deck_top": 1.2,
+      "soffit": 0.85,
+      "gradient": 0.2,
+      "transition": [
+        1.0,
+        0.1
+      ],
+      "profile": [
+        [
+          -0.123,
+          0.0
+        ],
+        [
+          0.877,
+          0.1
+        ],
+        [
+          5.877,
+          1.1
+        ],
+        [
+          6.877,
+          1.2
+        ]
+      ],
+      "roof_beyond_deck": [
+        12.777,
+        -23.591,
+        15.412,
+        -20.601
+      ],
+      "roof_beyond_planted": true
+    }
+  },
+  "spec": {
+    "id": "D1",
+    "title": "Design D1 - Aligned: kitchen bay 4-5, dining bay 5-6, garden living, bar alcove in the rear share",
+    "levels": {
+      "B": "B -1.80",
+      "GF": "GF +1.20"
+    },
+    "walls": [
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 3.617,
+        "y0": -29.816,
+        "x1": 6.94,
+        "y1": -29.816
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 17.268,
+        "y0": -29.816,
+        "x1": 22.597,
+        "y1": -29.816
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 6.94,
+        "y0": -28.570999999999998,
+        "x1": 17.268,
+        "y1": -28.570999999999998
+      },
+      {
+        "level": "B",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 3.617,
+        "y0": -28.671,
+        "x1": 6.94,
+        "y1": -28.671
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 15.412,
+        "y0": -23.691000000000003,
+        "x1": 22.597,
+        "y1": -23.691000000000003
+      },
+      {
+        "level": "B",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 3.617,
+        "y0": -23.591,
+        "x1": 15.412,
+        "y1": -23.591
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 1.45,
+        "x0": -0.123,
+        "y0": -20.701,
+        "x1": 0.877,
+        "y1": -20.701
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 1.55,
+        "x0": 0.877,
+        "y0": -20.701,
+        "x1": 5.877,
+        "y1": -20.701
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.55,
+        "x0": 5.877,
+        "y0": -20.701,
+        "x1": 6.877,
+        "y1": -20.701
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.65,
+        "x0": 6.877,
+        "y0": -20.701,
+        "x1": 15.412,
+        "y1": -20.701
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 1.45,
+        "x0": -0.022999999999999993,
+        "y0": -23.591,
+        "x1": -0.022999999999999993,
+        "y1": -20.601
+      },
+      {
+        "level": "B",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 1.99,
+        "x0": 3.125,
+        "y0": -23.591,
+        "x1": 3.125,
+        "y1": -20.601
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 3.717,
+        "y0": -29.916,
+        "x1": 3.717,
+        "y1": -23.591
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 6.840000000000001,
+        "y0": -29.916,
+        "x1": 6.840000000000001,
+        "y1": -28.671
+      },
+      {
+        "level": "B",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.65,
+        "x0": 9.227,
+        "y0": -23.591,
+        "x1": 9.227,
+        "y1": -20.601
+      },
+      {
+        "level": "B",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.65,
+        "x0": 11.2,
+        "y0": -23.591,
+        "x1": 11.2,
+        "y1": -20.601
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.65,
+        "x0": 15.312000000000001,
+        "y0": -23.591,
+        "x1": 15.312000000000001,
+        "y1": -20.601
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 17.368000000000002,
+        "y0": -29.916,
+        "x1": 17.368000000000002,
+        "y1": -28.671
+      },
+      {
+        "level": "B",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 22.497,
+        "y0": -29.916,
+        "x1": 22.497,
+        "y1": -23.591
+      },
+      {
+        "level": "GF",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 19.604,
+        "y0": -31.211,
+        "x1": 22.324,
+        "y1": -31.211
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 19.604,
+        "y0": -28.881,
+        "x1": 22.324,
+        "y1": -28.881
+      },
+      {
+        "level": "GF",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 3.617,
+        "y0": -28.570999999999998,
+        "x1": 19.604,
+        "y1": -28.570999999999998
+      },
+      {
+        "level": "GF",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 22.324,
+        "y0": -28.570999999999998,
+        "x1": 22.597,
+        "y1": -28.570999999999998
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 11.477,
+        "y0": -27.371,
+        "x1": 19.527,
+        "y1": -27.371
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 19.527,
+        "y0": -26.641,
+        "x1": 22.597,
+        "y1": -26.641
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 9.227,
+        "y0": -26.371,
+        "x1": 11.477,
+        "y1": -26.371
+      },
+      {
+        "level": "GF",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 3.617,
+        "y0": -23.691000000000003,
+        "x1": 22.597,
+        "y1": -23.691000000000003
+      },
+      {
+        "level": "GF",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 3.717,
+        "y0": -28.671,
+        "x1": 3.717,
+        "y1": -23.591
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 9.227,
+        "y0": -26.371,
+        "x1": 9.227,
+        "y1": -23.591
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 11.477,
+        "y0": -27.371,
+        "x1": 11.477,
+        "y1": -23.591
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 14.952,
+        "y0": -27.371,
+        "x1": 14.952,
+        "y1": -23.591
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 18.427,
+        "y0": -27.371,
+        "x1": 18.427,
+        "y1": -23.591
+      },
+      {
+        "level": "GF",
+        "kind": "int",
+        "thickness": 0.1,
+        "height": 2.8,
+        "x0": 19.527,
+        "y0": -28.671,
+        "x1": 19.527,
+        "y1": -26.641
+      },
+      {
+        "level": "GF",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 19.704,
+        "y0": -31.311,
+        "x1": 19.704,
+        "y1": -28.671
+      },
+      {
+        "level": "GF",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 22.224,
+        "y0": -31.311,
+        "x1": 22.224,
+        "y1": -28.671
+      },
+      {
+        "level": "GF",
+        "kind": "ext",
+        "thickness": 0.2,
+        "height": 2.8,
+        "x0": 22.497,
+        "y0": -28.671,
+        "x1": 22.497,
+        "y1": -23.591
+      }
+    ],
+    "separations": [
+      {
+        "level": "B",
+        "x0": 17.268,
+        "y0": -28.671,
+        "x1": 22.597,
+        "y1": -28.671
+      },
+      {
+        "level": "B",
+        "x0": 3.617,
+        "y0": -27.471,
+        "x1": 9.657,
+        "y1": -27.471
+      },
+      {
+        "level": "B",
+        "x0": 9.657,
+        "y0": -26.671,
+        "x1": 18.367,
+        "y1": -26.671
+      },
+      {
+        "level": "B",
+        "x0": 5.177,
+        "y0": -28.671,
+        "x1": 5.177,
+        "y1": -27.471
+      },
+      {
+        "level": "B",
+        "x0": 9.657,
+        "y0": -28.671,
+        "x1": 9.657,
+        "y1": -23.591
+      },
+      {
+        "level": "B",
+        "x0": 11.197,
+        "y0": -28.671,
+        "x1": 11.197,
+        "y1": -23.591
+      },
+      {
+        "level": "B",
+        "x0": 14.134,
+        "y0": -28.671,
+        "x1": 14.134,
+        "y1": -26.671
+      },
+      {
+        "level": "B",
+        "x0": 14.902,
+        "y0": -26.671,
+        "x1": 14.902,
+        "y1": -23.591
+      },
+      {
+        "level": "B",
+        "x0": 15.745,
+        "y0": -28.671,
+        "x1": 15.745,
+        "y1": -26.671
+      },
+      {
+        "level": "B",
+        "x0": 18.367,
+        "y0": -28.671,
+        "x1": 18.367,
+        "y1": -23.591
+      },
+      {
+        "level": "GF",
+        "x0": 19.604,
+        "y0": -28.671,
+        "x1": 22.324,
+        "y1": -28.671
+      },
+      {
+        "level": "GF",
+        "x0": 8.887,
+        "y0": -27.371,
+        "x1": 11.477,
+        "y1": -27.371
+      },
+      {
+        "level": "GF",
+        "x0": 18.427,
+        "y0": -26.641,
+        "x1": 19.527,
+        "y1": -26.641
+      },
+      {
+        "level": "GF",
+        "x0": 3.617,
+        "y0": -26.371,
+        "x1": 9.227,
+        "y1": -26.371
+      },
+      {
+        "level": "GF",
+        "x0": 5.177,
+        "y0": -28.671,
+        "x1": 5.177,
+        "y1": -26.371
+      },
+      {
+        "level": "GF",
+        "x0": 8.887,
+        "y0": -28.671,
+        "x1": 8.887,
+        "y1": -26.371
+      }
+    ],
+    "doors": [
+      {
+        "level": "B",
+        "x": 4.602,
+        "y": -28.671,
+        "width": 0.8,
+        "rooms": [
+          "lounge-nook",
+          "pantry"
+        ],
+        "span": [
+          "h",
+          -28.671,
+          3.617,
+          5.177
+        ],
+        "overrides": [
+          {
+            "field": "x",
+            "prior": 4.397,
+            "new": 4.602,
+            "reason": "centre opening in the selected column-free facade run"
+          }
+        ],
+        "height": 2.1
+      },
+      {
+        "level": "B",
+        "x": 8.677,
+        "y": -23.591,
+        "width": 0.9,
+        "rooms": [
+          "lounge",
+          "cinema"
+        ],
+        "height": 2.1,
+        "clear": 2.65,
+        "fit": "full"
+      },
+      {
+        "level": "B",
+        "x": 3.125,
+        "y": -22.096,
+        "width": 0.8,
+        "rooms": [
+          "cinema",
+          "store-ramp"
+        ],
+        "height": 1.88,
+        "clear": 1.98,
+        "fit": "low"
+      },
+      {
+        "level": "B",
+        "x": 10.697,
+        "y": -23.591,
+        "width": 0.8,
+        "rooms": [
+          "family",
+          "guest-wc"
+        ],
+        "height": 2.1,
+        "clear": 2.65,
+        "fit": "full"
+      },
+      {
+        "level": "B",
+        "x": 14.202,
+        "y": -23.591,
+        "width": 1.2,
+        "rooms": [
+          "kitchen",
+          "dirty-kitchen"
+        ],
+        "height": 2.1,
+        "clear": 2.65,
+        "fit": "full",
+        "sliding": true,
+        "slide_type": "telescopic-pocket-3",
+        "leaf_count": 3,
+        "panel_width": 0.4,
+        "pocket_side": "west",
+        "pocket_span": [
+          13.202,
+          13.602
+        ],
+        "pocket_wall_thickness": 0.15
+      },
+      {
+        "level": "B",
+        "x": 14.939,
+        "y": -28.671,
+        "width": 1.0,
+        "rooms": [
+          "entry-b",
+          "core"
+        ],
+        "entrance": true,
+        "span": [
+          "h",
+          -28.671,
+          14.134,
+          15.745
+        ],
+        "overrides": [
+          {
+            "field": "x",
+            "prior": 14.939499999999999,
+            "new": 14.939,
+            "reason": "centre opening in the selected column-free facade run"
+          }
+        ],
+        "height": 2.1
+      },
+      {
+        "level": "B",
+        "x": 16.889,
+        "y": -23.591,
+        "width": 2.35,
+        "rooms": [
+          "dining",
+          "yard"
+        ],
+        "garden": true,
+        "full_height": true,
+        "span": [
+          "h",
+          -23.591,
+          15.512,
+          18.267
+        ],
+        "overrides": [
+          {
+            "field": "x",
+            "prior": 16.889499999999998,
+            "new": 16.889,
+            "reason": "centre opening in the selected column-free facade run"
+          }
+        ],
+        "height": 2.2
+      },
+      {
+        "level": "B",
+        "x": 20.557,
+        "y": -23.591,
+        "width": 2.76,
+        "rooms": [
+          "living",
+          "yard"
+        ],
+        "garden": true,
+        "full_height": true,
+        "span": [
+          "h",
+          -23.591,
+          18.977,
+          22.136999999999997
+        ],
+        "height": 2.2
+      },
+      {
+        "level": "B",
+        "x": 22.597,
+        "y": -26.131,
+        "width": 2.4,
+        "rooms": [
+          "living",
+          "yard"
+        ],
+        "garden": true,
+        "span": [
+          "v",
+          22.597,
+          -28.061,
+          -24.201
+        ],
+        "height": 2.2
+      },
+      {
+        "level": "B",
+        "x": 3.617,
+        "y": -26.156,
+        "width": 3.41,
+        "rooms": [
+          "lounge",
+          "yard"
+        ],
+        "garden": true,
+        "full_height": true,
+        "span": [
+          "v",
+          3.617,
+          -28.061,
+          -24.251
+        ],
+        "height": 2.2
+      },
+      {
+        "level": "GF",
+        "x": 13.215,
+        "y": -27.371,
+        "width": 0.9,
+        "rooms": [
+          "corridor",
+          "kids-a"
+        ],
+        "span": [
+          "h",
+          -27.371,
+          11.477,
+          14.952
+        ],
+        "overrides": [
+          {
+            "field": "x",
+            "prior": 13.214500000000001,
+            "new": 13.215,
+            "reason": "centre opening in the selected column-free facade run"
+          }
+        ],
+        "height": 2.1
+      },
+      {
+        "level": "GF",
+        "x": 16.689,
+        "y": -27.371,
+        "width": 0.9,
+        "rooms": [
+          "corridor",
+          "kids-b"
+        ],
+        "span": [
+          "h",
+          -27.371,
+          14.952,
+          18.427
+        ],
+        "overrides": [
+          {
+            "field": "x",
+            "prior": 16.6895,
+            "new": 16.689,
+            "reason": "centre opening in the selected column-free facade run"
+          }
+        ],
+        "height": 2.1
+      },
+      {
+        "level": "GF",
+        "x": 21.897,
+        "y": -26.641,
+        "width": 0.8,
+        "rooms": [
+          "parents-bed",
+          "parents-dressing"
+        ],
+        "span": [
+          "h",
+          -26.641,
+          19.527,
+          22.597
+        ],
+        "pinned": true,
+        "height": 2.1
+      },
+      {
+        "level": "GF",
+        "x": 10.352,
+        "y": -26.371,
+        "width": 0.8,
+        "rooms": [
+          "gallery-end",
+          "family-bath"
+        ],
+        "span": [
+          "h",
+          -26.371,
+          9.227,
+          11.477
+        ],
+        "height": 2.1
+      },
+      {
+        "level": "GF",
+        "x": 18.977,
+        "y": -27.371,
+        "width": 0.9,
+        "rooms": [
+          "corridor",
+          "parents-entry"
+        ],
+        "span": [
+          "h",
+          -27.371,
+          18.427,
+          19.527
+        ],
+        "height": 2.1
+      },
+      {
+        "level": "GF",
+        "x": 21.65,
+        "y": -28.881,
+        "width": 0.8,
+        "rooms": [
+          "parents-dressing-ext",
+          "parents-ensuite"
+        ],
+        "span": [
+          "h",
+          -28.881,
+          19.604,
+          22.324
+        ],
+        "pinned": true,
+        "height": 2.1
+      },
+      {
+        "level": "GF",
+        "x": 4.602,
+        "y": -28.671,
+        "width": 1.0,
+        "rooms": [
+          "landing-gf",
+          "core"
+        ],
+        "entrance": true,
+        "span": [
+          "h",
+          -28.671,
+          3.617,
+          5.177
+        ],
+        "overrides": [
+          {
+            "field": "x",
+            "prior": 4.397,
+            "new": 4.602,
+            "reason": "centre opening in the selected column-free facade run"
+          }
+        ],
+        "height": 2.1
+      },
+      {
+        "level": "GF",
+        "x": 8.277,
+        "y": -23.591,
+        "width": 1.8,
+        "height": 2.1,
+        "rooms": [
+          "study-game",
+          "deck"
+        ],
+        "sliding": true,
+        "slide_type": "bypass",
+        "glazed": true,
+        "frame": "aluminium-bronze",
+        "glass": "clear",
+        "glass_thickness_m": 0.01,
+        "leaf_count": 2,
+        "panel_width": 0.9,
+        "fixed_span": [
+          7.377,
+          9.177
+        ],
+        "fixed_span_face": [
+          "h",
+          -23.591
+        ]
+      }
+    ],
+    "windows": [
+      {
+        "level": "B",
+        "x": 15.412,
+        "y": -22.096,
+        "width": 2.59,
+        "sill": 0.0,
+        "height": 2.3,
+        "room": "dirty-kitchen",
+        "full_height": true,
+        "span": [
+          "v",
+          15.412,
+          -23.591,
+          -20.601
+        ]
+      },
+      {
+        "level": "GF",
+        "x": 5.497,
+        "y": -23.591,
+        "width": 2.24,
+        "sill": 0.9,
+        "height": 1.4,
+        "room": "study-game",
+        "span": [
+          "h",
+          -23.591,
+          4.077,
+          6.917000000000001
+        ]
+      },
+      {
+        "level": "GF",
+        "x": 3.617,
+        "y": -25.311,
+        "width": 1.52,
+        "sill": 0.9,
+        "height": 1.4,
+        "room": "study-game",
+        "span": [
+          "v",
+          3.617,
+          -26.371,
+          -24.251
+        ]
+      },
+      {
+        "level": "GF",
+        "x": 13.22,
+        "y": -23.591,
+        "width": 2.4,
+        "sill": 0.9,
+        "height": 1.4,
+        "room": "kids-a",
+        "span": [
+          "h",
+          -23.591,
+          11.637,
+          14.802
+        ],
+        "overrides": [
+          {
+            "field": "x",
+            "prior": 13.2195,
+            "new": 13.22,
+            "reason": "centre opening in the selected column-free facade run"
+          }
+        ]
+      },
+      {
+        "level": "GF",
+        "x": 16.889,
+        "y": -23.591,
+        "width": 2.35,
+        "sill": 0.9,
+        "height": 1.4,
+        "room": "kids-b",
+        "span": [
+          "h",
+          -23.591,
+          15.512,
+          18.267
+        ],
+        "overrides": [
+          {
+            "field": "x",
+            "prior": 16.889499999999998,
+            "new": 16.889,
+            "reason": "centre opening in the selected column-free facade run"
+          }
+        ]
+      },
+      {
+        "level": "GF",
+        "x": 10.382,
+        "y": -23.591,
+        "width": 0.8,
+        "sill": 1.7,
+        "height": 0.6,
+        "room": "family-bath",
+        "span": [
+          "h",
+          -23.591,
+          9.667,
+          11.097
+        ],
+        "overrides": [
+          {
+            "field": "sill",
+            "prior": 1.5,
+            "new": 1.7,
+            "reason": "raise ramp-facing window above standing eye level for privacy"
+          },
+          {
+            "field": "height",
+            "prior": 0.7999999999999998,
+            "new": 0.6,
+            "reason": "retain the authored window head after privacy sill rises"
+          }
+        ]
+      },
+      {
+        "level": "GF",
+        "x": 20.557,
+        "y": -23.591,
+        "width": 2.4,
+        "sill": 0.9,
+        "height": 1.4,
+        "room": "parents-bed",
+        "span": [
+          "h",
+          -23.591,
+          18.977,
+          22.136999999999997
+        ]
+      },
+      {
+        "level": "GF",
+        "x": 22.597,
+        "y": -25.421,
+        "width": 2.04,
+        "sill": 0.9,
+        "height": 1.4,
+        "room": "parents-bed",
+        "span": [
+          "v",
+          22.597,
+          -26.641,
+          -24.201
+        ]
+      }
+    ],
+    "rooms": [
+      {
+        "level": "B",
+        "id": "lounge",
+        "name": "lounge (street window floor to beam)",
+        "x": 6.6370000000000005,
+        "y": -25.531
+      },
+      {
+        "level": "B",
+        "id": "lounge-nook",
+        "name": "lounge (under the stair's top landing)",
+        "x": 4.397,
+        "y": -28.070999999999998
+      },
+      {
+        "level": "B",
+        "id": "stair-b",
+        "name": "stair (straight, to the GF)",
+        "x": 7.417,
+        "y": -28.070999999999998
+      },
+      {
+        "level": "B",
+        "id": "pantry",
+        "name": "pantry / store",
+        "x": 5.2785,
+        "y": -29.2935
+      },
+      {
+        "level": "B",
+        "id": "hall-b",
+        "name": "hall at the stair foot",
+        "x": 10.427,
+        "y": -27.671
+      },
+      {
+        "level": "B",
+        "id": "entry-b",
+        "name": "entrance (second core lobby)",
+        "x": 14.939499999999999,
+        "y": -27.671
+      },
+      {
+        "level": "B",
+        "id": "family",
+        "name": "family / TV corner (open to the lounge)",
+        "x": 10.427,
+        "y": -25.131
+      },
+      {
+        "level": "B",
+        "id": "kitchen",
+        "name": "open kitchen (column bay 4-5)",
+        "x": 13.049499999999998,
+        "y": -25.131
+      },
+      {
+        "level": "B",
+        "id": "kitchen-island",
+        "name": "open kitchen (island)",
+        "x": 12.6655,
+        "y": -27.671
+      },
+      {
+        "level": "B",
+        "id": "dining",
+        "name": "dining (column bay 5-6, east window)",
+        "x": 16.6345,
+        "y": -25.131
+      },
+      {
+        "level": "B",
+        "id": "dining-side",
+        "name": "dining (party side)",
+        "x": 17.056,
+        "y": -27.671
+      },
+      {
+        "level": "B",
+        "id": "living",
+        "name": "garden living",
+        "x": 20.482,
+        "y": -26.131
+      },
+      {
+        "level": "B",
+        "id": "bar-alcove",
+        "name": "bar / library alcove (floor-to-beam garden window)",
+        "x": 19.9325,
+        "y": -29.2935
+      },
+      {
+        "level": "B",
+        "id": "store-ramp",
+        "name": "store under the ramp (1.45-2.0 m clear)",
+        "x": 1.501,
+        "y": -22.096
+      },
+      {
+        "level": "B",
+        "id": "cinema",
+        "name": "cinema (under the ramp; 2.0-2.65 m ceiling)",
+        "x": 6.176,
+        "y": -22.096
+      },
+      {
+        "level": "B",
+        "id": "guest-wc",
+        "name": "guest bathroom (under the deck)",
+        "x": 10.2135,
+        "y": -22.096
+      },
+      {
+        "level": "B",
+        "id": "dirty-kitchen",
+        "name": "dirty kitchen + laundry (full-height window at the end)",
+        "x": 13.306000000000001,
+        "y": -22.096
+      },
+      {
+        "level": "GF",
+        "id": "landing-gf",
+        "name": "stair landing (core door)",
+        "x": 4.397,
+        "y": -27.521
+      },
+      {
+        "level": "GF",
+        "id": "stair-gf",
+        "name": "stair void + gallery",
+        "x": 7.032,
+        "y": -27.521
+      },
+      {
+        "level": "GF",
+        "id": "corridor",
+        "name": "hall",
+        "x": 14.207,
+        "y": -28.021
+      },
+      {
+        "level": "GF",
+        "id": "study-game",
+        "name": "study / game room (open to the stair; sliding door to the deck)",
+        "x": 6.422000000000001,
+        "y": -24.981
+      },
+      {
+        "level": "GF",
+        "id": "kids-a",
+        "name": "kids bedroom A",
+        "x": 13.214500000000001,
+        "y": -25.481
+      },
+      {
+        "level": "GF",
+        "id": "kids-b",
+        "name": "kids bedroom B",
+        "x": 16.6895,
+        "y": -25.481
+      },
+      {
+        "level": "GF",
+        "id": "family-bath",
+        "name": "family bathroom",
+        "x": 10.352,
+        "y": -24.981
+      },
+      {
+        "level": "GF",
+        "id": "parents-bed",
+        "name": "parents' bedroom",
+        "x": 20.512,
+        "y": -25.116
+      },
+      {
+        "level": "GF",
+        "id": "parents-dressing",
+        "name": "dressing (hanging both sides)",
+        "x": 21.062,
+        "y": -27.656
+      },
+      {
+        "level": "GF",
+        "id": "parents-ensuite",
+        "name": "en-suite",
+        "x": 20.964,
+        "y": -30.096
+      },
+      {
+        "level": "GF",
+        "id": "gallery-end",
+        "name": "gallery (round the stair void to the bedrooms)",
+        "x": 10.182,
+        "y": -26.871
+      },
+      {
+        "level": "GF",
+        "id": "parents-entry",
+        "name": "parents' bedroom (entry)",
+        "x": 18.977,
+        "y": -27.006
+      },
+      {
+        "level": "GF",
+        "id": "parents-dressing-ext",
+        "name": "dressing (taken from the ensuite)",
+        "x": 20.964,
+        "y": -28.776
+      }
+    ],
+    "stair": [
+      [
+        9377.0,
+        -28421,
+        -2883.529411764706,
+        9657.0,
+        -27471,
+        -2823.529411764706
+      ],
+      [
+        9097.0,
+        -28421,
+        -2707.0588235294117,
+        9377.0,
+        -27471,
+        -2647.0588235294117
+      ],
+      [
+        8817.0,
+        -28421,
+        -2530.5882352941176,
+        9097.0,
+        -27471,
+        -2470.5882352941176
+      ],
+      [
+        8537.0,
+        -28421,
+        -2354.1176470588234,
+        8817.0,
+        -27471,
+        -2294.1176470588234
+      ],
+      [
+        8257.0,
+        -28421,
+        -2177.6470588235293,
+        8537.0,
+        -27471,
+        -2117.6470588235293
+      ],
+      [
+        7977.0,
+        -28421,
+        -2001.1764705882354,
+        8257.0,
+        -27471,
+        -1941.1764705882354
+      ],
+      [
+        7697.0,
+        -28421,
+        -1824.7058823529412,
+        7977.0,
+        -27471,
+        -1764.7058823529412
+      ],
+      [
+        7417.0,
+        -28421,
+        -1648.235294117647,
+        7697.0,
+        -27471,
+        -1588.235294117647
+      ],
+      [
+        7137.0,
+        -28421,
+        -1471.764705882353,
+        7417.0,
+        -27471,
+        -1411.764705882353
+      ],
+      [
+        6857.0,
+        -28421,
+        -1295.2941176470588,
+        7137.0,
+        -27471,
+        -1235.2941176470588
+      ],
+      [
+        6577.0,
+        -28421,
+        -1118.8235294117646,
+        6857.0,
+        -27471,
+        -1058.8235294117646
+      ],
+      [
+        6297.0,
+        -28421,
+        -942.3529411764707,
+        6577.0,
+        -27471,
+        -882.3529411764707
+      ],
+      [
+        6017.0,
+        -28421,
+        -765.8823529411766,
+        6297.0,
+        -27471,
+        -705.8823529411766
+      ],
+      [
+        5737.0,
+        -28421,
+        -589.4117647058824,
+        6017.0,
+        -27471,
+        -529.4117647058824
+      ],
+      [
+        5457.0,
+        -28421,
+        -412.9411764705883,
+        5737.0,
+        -27471,
+        -352.9411764705883
+      ],
+      [
+        5177.0,
+        -28421,
+        -236.47058823529414,
+        5457.0,
+        -27471,
+        -176.47058823529414
+      ]
+    ],
+    "gf_opening": [
+      5.177,
+      -28.421,
+      8.887,
+      -27.471
+    ],
+    "hatches": [
+      {
+        "id": "kitchen-sink-pass-through",
+        "level": "B",
+        "wall_axis": "h",
+        "x0": 11.8,
+        "x1": 13.1,
+        "y": -23.591,
+        "sill": 1.0,
+        "head": 2.1,
+        "above": "k-run",
+        "closure": "roll-up-shutter",
+        "shutter_box": [
+          11.8,
+          -23.666,
+          2.1,
+          13.1,
+          -23.516,
+          2.3
+        ],
+        "card": null,
+        "basis": "client-approved worktop + upstand and shutter"
+      }
+    ],
+    "pocket_buildouts": [
+      {
+        "id": "kitchen-dirty-pocket",
+        "level": "B",
+        "wall_axis": "h",
+        "y": -23.591,
+        "x0": 13.202,
+        "x1": 13.602,
+        "thickness": 0.15,
+        "extra_side": "dirty-kitchen",
+        "height": 2.1
+      }
+    ],
+    "balustrades": [
+      {
+        "id": "stair-open-glass",
+        "level": "B",
+        "side": "open",
+        "stair": "party-wall flight",
+        "material": "frameless laminated glass",
+        "support": "steel stringer",
+        "top_edge": "clear",
+        "rail": "none",
+        "nosing_profile": [
+          [
+            5.317,
+            -27.471,
+            -0.176
+          ],
+          [
+            5.597,
+            -27.471,
+            -0.353
+          ],
+          [
+            5.877,
+            -27.471,
+            -0.529
+          ],
+          [
+            6.157,
+            -27.471,
+            -0.706
+          ],
+          [
+            6.437,
+            -27.471,
+            -0.882
+          ],
+          [
+            6.717,
+            -27.471,
+            -1.059
+          ],
+          [
+            6.997,
+            -27.471,
+            -1.235
+          ],
+          [
+            7.277,
+            -27.471,
+            -1.412
+          ],
+          [
+            7.557,
+            -27.471,
+            -1.588
+          ],
+          [
+            7.837,
+            -27.471,
+            -1.765
+          ],
+          [
+            8.117,
+            -27.471,
+            -1.941
+          ],
+          [
+            8.397,
+            -27.471,
+            -2.118
+          ],
+          [
+            8.677,
+            -27.471,
+            -2.294
+          ],
+          [
+            8.957,
+            -27.471,
+            -2.471
+          ],
+          [
+            9.237,
+            -27.471,
+            -2.647
+          ],
+          [
+            9.517,
+            -27.471,
+            -2.824
+          ]
+        ],
+        "height_above_nosing": 0.9,
+        "thickness_m": null,
+        "basis": "client glass decision; 0.9 m height carried from ASSUMED D1 render, structural size pending"
+      },
+      {
+        "id": "stair-wall-handrail",
+        "level": "B",
+        "side": "wall",
+        "stair": "party-wall flight",
+        "material": "wood",
+        "support": "wall",
+        "nosing_profile": [
+          [
+            5.317,
+            -28.671,
+            -0.176
+          ],
+          [
+            5.597,
+            -28.671,
+            -0.353
+          ],
+          [
+            5.877,
+            -28.671,
+            -0.529
+          ],
+          [
+            6.157,
+            -28.671,
+            -0.706
+          ],
+          [
+            6.437,
+            -28.671,
+            -0.882
+          ],
+          [
+            6.717,
+            -28.671,
+            -1.059
+          ],
+          [
+            6.997,
+            -28.671,
+            -1.235
+          ],
+          [
+            7.277,
+            -28.671,
+            -1.412
+          ],
+          [
+            7.557,
+            -28.671,
+            -1.588
+          ],
+          [
+            7.837,
+            -28.671,
+            -1.765
+          ],
+          [
+            8.117,
+            -28.671,
+            -1.941
+          ],
+          [
+            8.397,
+            -28.671,
+            -2.118
+          ],
+          [
+            8.677,
+            -28.671,
+            -2.294
+          ],
+          [
+            8.957,
+            -28.671,
+            -2.471
+          ],
+          [
+            9.237,
+            -28.671,
+            -2.647
+          ],
+          [
+            9.517,
+            -28.671,
+            -2.824
+          ]
+        ],
+        "height_above_nosing": 0.9,
+        "basis": "client wood handrail decision; 0.9 m height carried from ASSUMED D1 render"
+      }
+    ],
+    "bath_fittings": [
+      {
+        "id": "gwc-rain-head",
+        "level": "B",
+        "room": "guest-wc",
+        "kind": "ceiling-rain-head",
+        "x": 10.75,
+        "y": -22.09,
+        "z": 2.3,
+        "over": "gwc-shower"
+      },
+      {
+        "id": "gwc-hand-shower",
+        "level": "B",
+        "room": "guest-wc",
+        "kind": "hand-shower",
+        "x": 11.120000000000001,
+        "y": -22.09,
+        "z": 1.1,
+        "over": "gwc-shower"
+      },
+      {
+        "id": "gwc-linear-drain",
+        "level": "B",
+        "room": "guest-wc",
+        "kind": "linear-drain",
+        "x0": 11.057,
+        "x1": 11.127,
+        "y0": -22.6395,
+        "y1": -21.540499999999998,
+        "z": 0.0,
+        "falls": "to linear drain",
+        "upstand_m": 0.0,
+        "enclosure": "none",
+        "installation_status": "requirement",
+        "installation_requirement": "manufacturer installation data required",
+        "basis": "ASSUMED 70 mm tile-in grate at wet-zone edge; floor falls, waterproofing/detail pending"
+      },
+      {
+        "id": "pe-rain-head",
+        "level": "GF",
+        "room": "parents-ensuite",
+        "kind": "ceiling-rain-head",
+        "x": 20.704,
+        "y": -30.736,
+        "z": 2.3,
+        "over": "pe-bath"
+      },
+      {
+        "id": "pe-hand-shower",
+        "level": "GF",
+        "room": "parents-ensuite",
+        "kind": "hand-shower",
+        "x": 20.104,
+        "y": -31.061,
+        "z": 1.1,
+        "over": "pe-bath"
+      },
+      {
+        "id": "pe-bath-screen",
+        "level": "GF",
+        "room": "parents-ensuite",
+        "kind": "fixed-frameless-glass",
+        "x0": 19.854,
+        "x1": 20.753999999999998,
+        "y": -30.361,
+        "sill": 0.55,
+        "head": 2.1,
+        "transmittance": 0.91,
+        "ior": 1.52,
+        "optical_note": "ASSUMED 10 mm low-iron glass: 0.91 transmittance, 1.52 index of refraction; TODO low-iron-glass-optics",
+        "entry_clear": 0.8000000000000043,
+        "card": "nkba-shower-clear-floor-762"
+      }
+    ],
+    "ventilation": [
+      {
+        "id": "guest-wc-extract",
+        "level": "B",
+        "room": "guest-wc",
+        "kind": "extract-fan",
+        "fan": [
+          10.1,
+          -21.15,
+          2.45
+        ],
+        "duct_route": [
+          [
+            10.1,
+            -21.15,
+            2.45
+          ],
+          [
+            10.1,
+            -20.501,
+            2.45
+          ]
+        ],
+        "discharge": "external-wall",
+        "discharge_card": "ukadf-extract-to-outside",
+        "makeup_air": {
+          "path": "door-undercut",
+          "door_rooms": [
+            "family",
+            "guest-wc"
+          ],
+          "undercut_m": 0.01,
+          "card": "ukadf-internal-door-undercut-10"
+        },
+        "operation": "intermittent",
+        "rate_ls": 15.0,
+        "card": "ukadf-bathroom-intermittent-15",
+        "run_on_min": 15,
+        "run_on_card": "ukadf-runon-timer-15min"
+      },
+      {
+        "id": "dirty-kitchen-extract",
+        "level": "B",
+        "room": "dirty-kitchen",
+        "kind": "cooker-hood-ducted",
+        "fan": [
+          13.827,
+          -20.881,
+          2.35
+        ],
+        "duct_route": [
+          [
+            13.827,
+            -20.881,
+            2.35
+          ],
+          [
+            13.827,
+            -20.501,
+            2.35
+          ]
+        ],
+        "discharge": "external-wall",
+        "discharge_card": "ukadf-extract-to-outside",
+        "makeup_air": {
+          "path": "sliding-door-gap",
+          "door_rooms": [
+            "kitchen",
+            "dirty-kitchen"
+          ],
+          "undercut_m": null,
+          "card": null
+        },
+        "operation": "intermittent",
+        "rate_ls": 30.0,
+        "card": "ukadf-kitchen-intermittent-hood-30",
+        "run_on_min": null,
+        "run_on_card": null
+      }
+    ],
+    "stair_name": "party-wall flight (r8, landing 1.2 m)",
+    "stair_wall_datum": {
+      "outer_face_mm": -28671,
+      "tread_setback_mm": 250,
+      "basis": "villa_env.BAR measured CAD outer face; existing 250 mm beam clearance",
+      "structural_thickness_m": 0.2
+    },
+    "parking2": {
+      "ramp": {
+        "profile": [
+          [
+            -0.123,
+            -1.2
+          ],
+          [
+            0.877,
+            -1.1
+          ],
+          [
+            5.877,
+            -0.1
+          ],
+          [
+            6.877,
+            0.0
+          ]
+        ],
+        "y0": -23.591,
+        "y1": -20.601,
+        "thick": 0.35
+      },
+      "deck": {
+        "x0": 6.877,
+        "x1": 12.777,
+        "y0": -23.591,
+        "y1": -20.601,
+        "z_top": 0.0,
+        "thick": 0.35
+      },
+      "cars": [
+        [
+          7.077,
+          -22.996,
+          11.677,
+          -21.196,
+          0.0,
+          1.45
+        ]
+      ]
+    },
+    "roofs": [
+      [
+        12.777,
+        -23.591,
+        15.412,
+        -20.601
+      ]
+    ],
+    "infills": [
+      {
+        "what": "wall top up to the ramp soffit",
+        "y0": -20.801,
+        "y1": -20.601,
+        "profile": [
+          [
+            -0.123,
+            -1.55
+          ],
+          [
+            0.877,
+            -1.55
+          ],
+          [
+            0.877,
+            -1.45
+          ]
+        ]
+      },
+      {
+        "what": "wall top up to the ramp soffit",
+        "y0": -20.801,
+        "y1": -20.601,
+        "profile": [
+          [
+            0.877,
+            -1.45
+          ],
+          [
+            5.877,
+            -1.45
+          ],
+          [
+            5.877,
+            -0.45
+          ]
+        ]
+      },
+      {
+        "what": "wall top up to the ramp soffit",
+        "y0": -20.801,
+        "y1": -20.601,
+        "profile": [
+          [
+            5.877,
+            -0.45
+          ],
+          [
+            6.877,
+            -0.45
+          ],
+          [
+            6.877,
+            -0.35
+          ]
+        ]
+      }
+    ],
+    "infill": {
+      "y0": -23.841,
+      "y1": -23.591,
+      "profile": [
+        [
+          -0.123,
+          -1.6
+        ],
+        [
+          3.617,
+          -1.6
+        ],
+        [
+          3.617,
+          -0.902
+        ],
+        [
+          0.877,
+          -1.45
+        ],
+        [
+          -0.123,
+          -1.55
+        ]
+      ]
+    },
+    "rails": [
+      {
+        "what": "guard rail on the ramp edge over the north patio",
+        "y0": -23.641,
+        "y1": -23.591,
+        "profile": [
+          [
+            -0.123,
+            -1.2
+          ],
+          [
+            0.877,
+            -1.1
+          ],
+          [
+            3.617,
+            -0.552
+          ],
+          [
+            3.617,
+            0.548
+          ],
+          [
+            0.877,
+            0.0
+          ],
+          [
+            -0.123,
+            -0.1
+          ]
+        ]
+      },
+      {
+        "what": "guard rail along the east fence (fence under 1.1 m above the deck)",
+        "y0": -20.701,
+        "y1": -20.651,
+        "profile": [
+          [
+            5.88,
+            -0.1
+          ],
+          [
+            6.877,
+            0.0
+          ],
+          [
+            15.412,
+            0.0
+          ],
+          [
+            15.412,
+            1.1
+          ],
+          [
+            6.877,
+            1.1
+          ],
+          [
+            5.88,
+            1.0
+          ]
+        ]
+      },
+      {
+        "what": "guard rail at the deck end over the yard",
+        "y0": -23.591,
+        "y1": -20.601,
+        "profile": [
+          [
+            15.362,
+            0.0
+          ],
+          [
+            15.412,
+            0.0
+          ],
+          [
+            15.412,
+            1.1
+          ],
+          [
+            15.362,
+            1.1
+          ]
+        ]
+      }
+    ],
+    "dropped": [
+      {
+        "room": "study-game",
+        "level": "GF",
+        "reason": "no column-free run"
+      },
+      {
+        "room": "bar-alcove/yard",
+        "level": "B",
+        "reason": "column-free run 1.14 m"
+      }
+    ],
+    "gf_voids": [],
+    "construction_requirements": [
+      {
+        "id": "gwc-drain-installation",
+        "status": "requirement",
+        "requirement": "manufacturer installation data required",
+        "value_mm": null,
+        "scope": "Drain installation, service access, waterproofing and falls; no numeric pass claimed"
+      },
+      {
+        "id": "fb-wc-east-services",
+        "status": "requirement",
+        "requirement": "services coordination pending",
+        "value_mm": null,
+        "scope": "East-wall wall-hung carrier, concealed cistern/flush-plate connection and soil-stack position; no stack position invented"
+      }
+    ],
+    "sanitary_placements": {
+      "fb-wc": {
+        "cx": 11.129,
+        "cy": -25.819499999999998,
+        "rot": 90,
+        "host_id": "bath-fb-wc-east",
+        "drainage_note": "services coordination pending"
+      }
+    },
+    "wet_zones": [
+      {
+        "id": "gwc-shower",
+        "room": "guest-wc",
+        "rect": [
+          10.327,
+          -22.6995,
+          11.127,
+          -21.4805
+        ],
+        "finished_depth_m": 0.8,
+        "status": "authored design intent",
+        "boundary_translation_m": -0.023
+      }
+    ]
+  },
+  "items": [
+    {
+      "id": "lounge-tv",
+      "room": "lounge",
+      "type": "tv_unit",
+      "cx": 6.0,
+      "cy": -23.866,
+      "rot": 180,
+      "w": 2.0,
+      "d": 0.45,
+      "h": 0.5,
+      "why": "TV wall between the NE column and the column at x 7.0 (east face); 75 in screen",
+      "screen_in": 75,
+      "level": "B"
+    },
+    {
+      "id": "lounge-sofa",
+      "room": "lounge",
+      "type": "sofa_4seat",
+      "cx": 6.22,
+      "cy": -26.896,
+      "rot": 0,
+      "w": 2.6,
+      "d": 0.95,
+      "h": 0.85,
+      "why": "facing the TV, back to the stair balustrade; 1.10 m clear at its street end, past the nook column, to the pantry",
+      "views": "lounge-tv",
+      "level": "B",
+      "product_rejected": "real 3.29 x 1.62 m sofa closes the 914 mm pantry and yard routes with the coffee table beyond its 457 mm front clearance"
+    },
+    {
+      "id": "lounge-coffee",
+      "room": "lounge",
+      "type": "coffee_table",
+      "cx": 6.22,
+      "cy": -25.659,
+      "rot": 0,
+      "w": 1.2,
+      "d": 0.6,
+      "h": 0.4,
+      "why": "457 mm from the procedural sofa retained after the real sofa closed the pantry route",
+      "level": "B"
+    },
+    {
+      "id": "lounge-armchair",
+      "room": "lounge",
+      "type": "armchair",
+      "cx": 8.448,
+      "cy": -26.2,
+      "rot": 90,
+      "w": 0.9458373015027827,
+      "d": 0.7939720590159347,
+      "h": 0.85,
+      "why": "fifth seat, turned to the TV and the family corner",
+      "level": "B",
+      "overrides": [
+        {
+          "field": "cx",
+          "prior": 8.42,
+          "new": 8.448,
+          "reason": "fit accepted catalogue product sf_probber_cane_armchair to its authored wall"
+        },
+        {
+          "field": "w",
+          "prior": 0.85,
+          "new": 0.9458373015027827,
+          "reason": "fit accepted catalogue product sf_probber_cane_armchair to its authored wall"
+        },
+        {
+          "field": "d",
+          "prior": 0.85,
+          "new": 0.7939720590159347,
+          "reason": "fit accepted catalogue product sf_probber_cane_armchair to its authored wall"
+        }
+      ],
+      "product": "sf_probber_cane_armchair",
+      "product_h": 0.85
+    },
+    {
+      "id": "stair-flight-store",
+      "room": "stair-b",
+      "type": "under_stair_storage",
+      "cx": 6.2,
+      "cy": -28.271,
+      "rot": 0,
+      "w": 1.8,
+      "d": 0.4,
+      "h": 2.3,
+      "why": "sliding-door joinery cut to the descending stair soffit; standing access at the high end",
+      "soffit": "stair",
+      "doors": "sliding",
+      "modules": [
+        [
+          "standing-access",
+          0.55
+        ],
+        [
+          "luggage",
+          0.65
+        ],
+        [
+          "seasonal-boxes",
+          0.6
+        ]
+      ],
+      "level": "B"
+    },
+    {
+      "id": "stair-landing-store",
+      "room": "lounge-nook",
+      "type": "under_stair_storage",
+      "cx": 4.09,
+      "cy": -28.521,
+      "rot": 0,
+      "w": 0.2,
+      "d": 0.2,
+      "h": 2.3,
+      "why": "shallow box cubby below the top landing, between retained column and pantry door; sliding front clear of the lounge route",
+      "soffit": "landing",
+      "doors": "sliding",
+      "modules": [
+        [
+          "small-boxes",
+          0.2
+        ]
+      ],
+      "level": "B"
+    },
+    {
+      "id": "k-run",
+      "room": "kitchen",
+      "type": "base_run",
+      "cx": 12.545,
+      "cy": -23.941,
+      "rot": 180,
+      "w": 2.01,
+      "d": 0.6,
+      "h": 0.9,
+      "why": "sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it",
+      "modules": [
+        [
+          "dw",
+          0.6
+        ],
+        [
+          "counter",
+          0.05
+        ],
+        [
+          "sink",
+          0.9
+        ],
+        [
+          "counter",
+          0.46
+        ]
+      ],
+      "level": "B"
+    },
+    {
+      "id": "k-island",
+      "room": "kitchen",
+      "type": "island",
+      "cx": 13.075,
+      "cy": -26.01,
+      "rot": 0,
+      "w": 3.05,
+      "d": 1.1,
+      "h": 0.92,
+      "why": "Five stools on party side; one ASSUMED 350 mm induction zone and microwave; double marble waterfall on short ends; 1.219 m work aisle",
+      "modules": [
+        [
+          "microwave",
+          0.6
+        ],
+        [
+          "counter",
+          0.6
+        ],
+        [
+          "single-induction",
+          0.35
+        ],
+        [
+          "counter",
+          1.5
+        ]
+      ],
+      "stools": 5,
+      "overrides": [
+        {
+          "field": "modules",
+          "prior": [
+            [
+              "microwave",
+              0.6
+            ],
+            [
+              "counter",
+              0.45
+            ],
+            [
+              "hob",
+              0.9
+            ],
+            [
+              "counter",
+              1.1
+            ]
+          ],
+          "new": [
+            [
+              "microwave",
+              0.6
+            ],
+            [
+              "counter",
+              0.6
+            ],
+            [
+              "single-induction",
+              0.35
+            ],
+            [
+              "counter",
+              1.5
+            ]
+          ],
+          "reason": "client 2026-09-29: main hob only in dirty kitchen; ASSUMED 350 mm single induction module"
+        },
+        {
+          "field": "why",
+          "prior": "5 stools at 610 mm (card nkba-seating-width-610) on the party side; hob faces the sink run across a 1.22 m aisle; 800 mm counter + 300 mm overhang",
+          "new": "Five stools on party side; one ASSUMED 350 mm induction zone and microwave; double marble waterfall on short ends; 1.219 m work aisle",
+          "reason": "client 2026-09-29 island revision"
+        }
+      ],
+      "waterfall_ends": "both-short",
+      "single_burner_basis": "ASSUMED 350 mm module; product pending",
+      "downdraft_basis": "ASSUMED local capture for cooking fumes from the single zone; 350 mm unit, duct and discharge pending services design",
+      "level": "B"
+    },
+    {
+      "id": "dining-table",
+      "room": "dining",
+      "type": "dining_6x",
+      "cx": 16.95,
+      "cy": -25.9,
+      "rot": 0,
+      "w": 1.8,
+      "d": 0.9,
+      "h": 0.75,
+      "why": "1.8 x 0.9 for 6, extends to 2.8 m for 10 (the largest gatherings of 20 need a second table: garden or living); 965 mm passage both long sides",
+      "chairs": 6,
+      "level": "B"
+    },
+    {
+      "id": "dining-sideboard",
+      "room": "dining-side",
+      "type": "sideboard",
+      "cx": 16.8,
+      "cy": -28.246,
+      "rot": 0,
+      "w": 1.2,
+      "d": 0.45,
+      "h": 0.8,
+      "why": "compact serving sideboard keeps the library approach clear",
+      "level": "B"
+    },
+    {
+      "id": "living-sofa",
+      "room": "living",
+      "type": "sofa_3seat",
+      "cx": 19.85,
+      "cy": -27.2392,
+      "rot": 0,
+      "w": 2.958562,
+      "d": 1.0616050000000001,
+      "h": 0.890981,
+      "why": "back to the library alcove, facing the east garden door; both garden doors stay open to reach",
+      "level": "B",
+      "overrides": [
+        {
+          "field": "cy",
+          "prior": -27.32,
+          "new": -27.2392,
+          "reason": "fit accepted catalogue product sf_minotti_sofa to its authored wall"
+        },
+        {
+          "field": "w",
+          "prior": 2.1,
+          "new": 2.958562,
+          "reason": "fit accepted catalogue product sf_minotti_sofa to its authored wall"
+        },
+        {
+          "field": "d",
+          "prior": 0.9,
+          "new": 1.0616050000000001,
+          "reason": "fit accepted catalogue product sf_minotti_sofa to its authored wall"
+        },
+        {
+          "field": "h",
+          "prior": 0.85,
+          "new": 0.890981,
+          "reason": "fit accepted catalogue product sf_minotti_sofa to its authored wall"
+        }
+      ],
+      "product": "sf_minotti_sofa",
+      "product_h": 0.890981
+    },
+    {
+      "id": "living-coffee",
+      "room": "living",
+      "type": "coffee_table",
+      "cx": 20.35,
+      "cy": -26.0,
+      "rot": 0,
+      "w": 1.1,
+      "d": 0.45,
+      "h": 0.4,
+      "why": "slim table between the real sofa and cane chairs; 457 mm front clearances on both sides",
+      "level": "B"
+    },
+    {
+      "id": "living-chair-1",
+      "room": "living",
+      "type": "armchair",
+      "cx": 19.7,
+      "cy": -24.9,
+      "rot": 180,
+      "w": 0.9458373015027827,
+      "d": 0.7939720590159347,
+      "h": 0.85,
+      "why": "compact real cane chair facing the sofa across the table",
+      "level": "B",
+      "product": "sf_probber_cane_armchair",
+      "product_h": 0.85
+    },
+    {
+      "id": "living-chair-2",
+      "room": "living",
+      "type": "armchair",
+      "cx": 20.75,
+      "cy": -24.9,
+      "rot": 180,
+      "w": 0.9458373015027827,
+      "d": 0.7939720590159347,
+      "h": 0.85,
+      "why": "compact real cane chair facing the sofa across the table; garden door route stays open",
+      "level": "B",
+      "product": "sf_probber_cane_armchair",
+      "product_h": 0.85
+    },
+    {
+      "id": "library-cabinet-left",
+      "room": "bar-alcove",
+      "type": "bookcase",
+      "cx": 18.068,
+      "cy": -29.516,
+      "rot": 0,
+      "w": 1.2,
+      "d": 0.4,
+      "h": 2.1,
+      "why": "glass-door book joinery on the windowless south wall",
+      "glazing": "glass-doors",
+      "level": "B"
+    },
+    {
+      "id": "library-daybed",
+      "room": "bar-alcove",
+      "type": "daybed_nook",
+      "cx": 19.668,
+      "cy": -29.241,
+      "rot": 0,
+      "w": 2.0,
+      "d": 0.95,
+      "h": 0.45,
+      "why": "single 0.9 x 2.0 m mattress in a 0.95 m deep reading nook within the joinery",
+      "mattress": [
+        2.0,
+        0.9
+      ],
+      "nook_top": 2.1,
+      "curtain": false,
+      "level": "B"
+    },
+    {
+      "id": "library-cabinet-right",
+      "room": "bar-alcove",
+      "type": "bookcase",
+      "cx": 21.434,
+      "cy": -29.516,
+      "rot": 0,
+      "w": 1.5319999999999991,
+      "d": 0.4,
+      "h": 2.1,
+      "why": "glass-door book joinery completes the windowless south wall",
+      "glazing": "glass-doors",
+      "level": "B"
+    },
+    {
+      "id": "library-end-panel",
+      "room": "bar-alcove",
+      "type": "joinery_end_panel",
+      "cx": 22.298,
+      "cy": -29.516,
+      "rot": 0,
+      "w": 0.19699999999999918,
+      "d": 0.4,
+      "h": 2.1,
+      "why": "fixed joinery return beside the garden column; no opening leaf in its blocked approach",
+      "level": "B"
+    },
+    {
+      "id": "cinema-tv",
+      "room": "cinema",
+      "type": "screen",
+      "cx": 9.127,
+      "cy": -21.746,
+      "rot": 90,
+      "w": 1.88,
+      "d": 0.1,
+      "h": 1.5,
+      "why": "85 in TV on the high end wall (2.65 m clear), clear of the door from the lounge",
+      "screen_in": 85,
+      "level": "B"
+    },
+    {
+      "id": "cinema-sofa",
+      "room": "cinema",
+      "type": "sofa_2seat",
+      "cx": 6.377,
+      "cy": -21.751,
+      "rot": -90,
+      "w": 1.6,
+      "d": 0.95,
+      "h": 0.9,
+      "why": "loveseat for two, 2.5 m from the screen; floor cushions in front (not fixed)",
+      "views": "cinema-tv",
+      "level": "B",
+      "product_rejected": "product too long for the cinema width"
+    },
+    {
+      "id": "cinema-desk",
+      "room": "cinema",
+      "type": "desk",
+      "cx": 5.28,
+      "cy": -21.076,
+      "rot": 180,
+      "w": 1.24,
+      "d": 0.55,
+      "h": 0.75,
+      "why": "two work places behind the cinema sofa, under the ramp soffit; card ies-res-desk-400",
+      "chairs": 2,
+      "level": "B"
+    },
+    {
+      "id": "gwc-wc",
+      "room": "guest-wc",
+      "type": "wc",
+      "cx": 10.1,
+      "cy": -21.076,
+      "rot": 180,
+      "w": 0.4,
+      "d": 0.55,
+      "h": 0.4,
+      "why": "wall-hung pan on the far wall",
+      "level": "B"
+    },
+    {
+      "id": "gwc-basin",
+      "room": "guest-wc",
+      "type": "washbasin",
+      "cx": 9.527,
+      "cy": -23.15,
+      "rot": -90,
+      "w": 0.6,
+      "d": 0.5,
+      "h": 0.85,
+      "why": "basin on the side wall",
+      "overrides": [
+        {
+          "field": "cy",
+          "prior": -22.6,
+          "new": -23.15,
+          "reason": "client 2026-09-29: move basin south outside open shower splash zone"
+        }
+      ],
+      "level": "B"
+    },
+    {
+      "id": "gwc-shower",
+      "room": "guest-wc",
+      "type": "shower_walkin",
+      "cx": 10.727,
+      "cy": -22.09,
+      "rot": 90,
+      "w": 1.219,
+      "d": 0.8,
+      "h": 0.0,
+      "why": "open level-access east-wall wet zone; no enclosure or tray upstand; ASSUMED 800 mm depth and 1219 mm length, card nkba-shower-clear-floor-762",
+      "wet_zone": true,
+      "enclosure": "none",
+      "drain": "linear",
+      "falls": "to linear drain",
+      "level": "B"
+    },
+    {
+      "id": "dk-run",
+      "room": "dirty-kitchen",
+      "type": "base_run",
+      "cx": 13.385,
+      "cy": -21.101,
+      "rot": 180,
+      "w": 3.45,
+      "d": 0.6,
+      "h": 0.9,
+      "why": "heavy cooking: gas hob with oven under, sink, washer and exact carded landing widths; washer worktop is the folding surface, cleaning storage is below the end counter",
+      "modules": [
+        [
+          "washer",
+          0.6
+        ],
+        [
+          "counter",
+          0.383
+        ],
+        [
+          "hob",
+          0.6
+        ],
+        [
+          "counter",
+          0.61
+        ],
+        [
+          "sink",
+          0.8
+        ],
+        [
+          "counter",
+          0.457
+        ]
+      ],
+      "level": "B"
+    },
+    {
+      "id": "dk-appliance-bank",
+      "room": "dirty-kitchen",
+      "type": "base_run",
+      "cx": 11.55,
+      "cy": -22.3,
+      "rot": -90,
+      "w": 1.2,
+      "d": 0.6,
+      "h": 2.3,
+      "why": "shared fridge and oven for both kitchens; NKBA fridge landing on the folding counter / run (card nkba-fridge-landing-381)",
+      "modules": [
+        [
+          "fridge",
+          0.6
+        ],
+        [
+          "oven",
+          0.6
+        ]
+      ],
+      "level": "B"
+    },
+    {
+      "id": "dk-fold",
+      "room": "dirty-kitchen",
+      "type": "folding_counter",
+      "cx": 12.525,
+      "cy": -23.241,
+      "rot": 0,
+      "w": 1.25,
+      "d": 0.6,
+      "h": 0.9,
+      "why": "laundry folding counter with cleaning storage below, under the pass-through (its landing on the dirty-kitchen side)",
+      "level": "B"
+    },
+    {
+      "id": "pantry-shelves-1",
+      "room": "pantry",
+      "type": "pantry_shelving",
+      "cx": 3.967,
+      "cy": -29.218,
+      "rot": -90,
+      "w": 0.995000000000001,
+      "d": 0.3,
+      "h": 2.2,
+      "why": "shelving on the end wall: the pantry is 1.0 m deep clear, too shallow for a back-wall run with 914 mm in front",
+      "level": "B"
+    },
+    {
+      "id": "pantry-shelves-2",
+      "room": "pantry",
+      "type": "pantry_shelving",
+      "cx": 6.59,
+      "cy": -29.218,
+      "rot": 90,
+      "w": 0.995000000000001,
+      "d": 0.3,
+      "h": 2.2,
+      "why": "shelving on the other end wall",
+      "level": "B"
+    },
+    {
+      "id": "store-shelves",
+      "room": "store-ramp",
+      "type": "store_shelving",
+      "cx": 1.602,
+      "cy": -21.051,
+      "rot": 180,
+      "w": 2.85,
+      "d": 0.5,
+      "h": 1.9,
+      "why": "zoned shelves under the rising ramp: luggage, seasonal boxes and bikes",
+      "modules": [
+        [
+          "luggage",
+          0.95
+        ],
+        [
+          "seasonal-boxes",
+          0.95
+        ],
+        [
+          "bikes",
+          0.95
+        ]
+      ],
+      "soffit": "ramp",
+      "level": "B"
+    },
+    {
+      "id": "study-desk",
+      "room": "study-game",
+      "type": "desk",
+      "cx": 4.167,
+      "cy": -25.4,
+      "rot": -90,
+      "w": 1.8,
+      "d": 0.7,
+      "h": 0.75,
+      "why": "shared homework desk for two, under the street window (sill 0.9)",
+      "level": "GF"
+    },
+    {
+      "id": "study-adult-desk",
+      "room": "study-game",
+      "type": "desk",
+      "cx": 5.3,
+      "cy": -24.141,
+      "rot": 180,
+      "w": 1.4,
+      "d": 0.7,
+      "h": 0.75,
+      "why": "adult work desk (one adult most days) under the high window; plain wall behind for calls",
+      "level": "GF"
+    },
+    {
+      "id": "study-tv",
+      "room": "study-game",
+      "type": "tv_unit",
+      "cx": 8.952,
+      "cy": -25.4,
+      "rot": 90,
+      "w": 1.6,
+      "d": 0.45,
+      "h": 0.5,
+      "why": "gaming / TV on the bathroom wall",
+      "screen_in": 55,
+      "level": "GF"
+    },
+    {
+      "id": "study-sofa",
+      "room": "study-game",
+      "type": "sofa_2seat",
+      "cx": 6.827,
+      "cy": -25.4,
+      "rot": -90,
+      "w": 1.5,
+      "d": 0.9,
+      "h": 0.85,
+      "why": "gaming sofa facing the TV (no sofa bed: answers)",
+      "views": "study-tv",
+      "level": "GF"
+    },
+    {
+      "id": "fb-shower",
+      "room": "family-bath",
+      "type": "shower_walkin",
+      "cx": 10.382,
+      "cy": -24.241,
+      "rot": 180,
+      "w": 1.63,
+      "d": 0.9,
+      "h": 0.1,
+      "why": "walk-in shower between the two east-face columns",
+      "level": "GF"
+    },
+    {
+      "id": "fb-wc",
+      "room": "family-bath",
+      "type": "wc",
+      "cx": 11.129,
+      "cy": -25.819499999999998,
+      "rot": 90,
+      "w": 0.4,
+      "d": 0.55,
+      "h": 0.4,
+      "why": "Client 2026-10-05: wall-hung WC on east finished wall",
+      "level": "GF",
+      "host_id": "bath-fb-wc-east",
+      "drainage_note": "services coordination pending"
+    },
+    {
+      "id": "fb-basin",
+      "room": "family-bath",
+      "type": "washbasin",
+      "cx": 9.502,
+      "cy": -25.686,
+      "rot": -90,
+      "w": 0.43,
+      "d": 0.45,
+      "h": 0.85,
+      "why": "compact basin beside the WC",
+      "level": "GF"
+    },
+    {
+      "id": "ka-bunk",
+      "room": "kids-a",
+      "type": "bed_single",
+      "cx": 11.977,
+      "cy": -25.45,
+      "rot": 0,
+      "w": 0.9,
+      "d": 2.0,
+      "h": 1.7,
+      "why": "bunk bed against the west wall (answers)",
+      "level": "GF"
+    },
+    {
+      "id": "ka-desk-1",
+      "room": "kids-a",
+      "type": "desk",
+      "cx": 13.17,
+      "cy": -24.091,
+      "rot": 180,
+      "w": 1.1,
+      "d": 0.6,
+      "h": 0.75,
+      "why": "desk, girl 1",
+      "level": "GF"
+    },
+    {
+      "id": "ka-desk-2",
+      "room": "kids-a",
+      "type": "desk",
+      "cx": 14.31,
+      "cy": -24.091,
+      "rot": 180,
+      "w": 1.1,
+      "d": 0.6,
+      "h": 0.75,
+      "why": "desk, girl 2",
+      "level": "GF"
+    },
+    {
+      "id": "ka-wardrobe",
+      "room": "kids-a",
+      "type": "wardrobe",
+      "cx": 14.602,
+      "cy": -26.551,
+      "rot": 90,
+      "w": 1.5,
+      "d": 0.6,
+      "h": 2.2,
+      "why": "1.5 m wardrobe",
+      "level": "GF"
+    },
+    {
+      "id": "kb-bed",
+      "room": "kids-b",
+      "type": "bed_small_double",
+      "cx": 16.002,
+      "cy": -25.3,
+      "rot": -90,
+      "w": 1.2,
+      "d": 2.0,
+      "h": 0.5,
+      "why": "120 x 200, head to the west wall",
+      "level": "GF"
+    },
+    {
+      "id": "kb-desk",
+      "room": "kids-b",
+      "type": "desk",
+      "cx": 17.65,
+      "cy": -24.091,
+      "rot": 180,
+      "w": 1.2,
+      "d": 0.6,
+      "h": 0.75,
+      "why": "desk under the window",
+      "level": "GF"
+    },
+    {
+      "id": "kb-wardrobe",
+      "room": "kids-b",
+      "type": "wardrobe",
+      "cx": 17.788,
+      "cy": -27.021,
+      "rot": 0,
+      "w": 1.1769999999999996,
+      "d": 0.6,
+      "h": 2.2,
+      "why": "wardrobe beside the door",
+      "level": "GF"
+    },
+    {
+      "id": "pb-bed",
+      "room": "parents-bed",
+      "type": "bed_double",
+      "cx": 20.33,
+      "cy": -25.591,
+      "rot": 0,
+      "w": 1.6,
+      "d": 2.0,
+      "h": 0.5,
+      "why": "queen 160 x 200 (answers), head on the dressing wall, east of the entry; 750 mm both sides and the foot",
+      "level": "GF",
+      "product_rejected": "real products available are king size (1.97-2.14 m); approved 0.35 m bedside arrangement kept"
+    },
+    {
+      "id": "pb-bedside",
+      "room": "parents-bed",
+      "type": "bedside_table",
+      "cx": 21.305,
+      "cy": -26.391,
+      "rot": 0,
+      "w": 0.35,
+      "d": 0.4,
+      "h": 0.55,
+      "why": "slim 0.35 m bedside in zone a, clear of the dressing door opening (a 0.5 m one stood 0.23 m in it); the other side has a wall shelf so the way in from the entry stays clear",
+      "level": "GF"
+    },
+    {
+      "id": "pb-vanity",
+      "room": "parents-bed",
+      "type": "desk",
+      "cx": 22.197,
+      "cy": -24.8,
+      "rot": 90,
+      "w": 1.0,
+      "d": 0.4,
+      "h": 0.75,
+      "why": "vanity / dressing table at the garden window (answers), clear of the bed zone",
+      "level": "GF"
+    },
+    {
+      "id": "pd-hang-1",
+      "room": "parents-dressing",
+      "type": "wardrobe",
+      "cx": 20.487,
+      "cy": -26.991,
+      "rot": 180,
+      "w": 1.719999999999996,
+      "d": 0.6,
+      "h": 2.3,
+      "why": "hanging along the bedroom wall, up to the bedroom door",
+      "partner": "hers",
+      "modules": [
+        [
+          "long-hang",
+          0.65
+        ],
+        [
+          "double-hang",
+          0.45
+        ],
+        [
+          "drawers",
+          0.42
+        ],
+        [
+          "hat-shelf",
+          0.2
+        ]
+      ],
+      "drawers": [
+        "lingerie",
+        "headscarves",
+        "pyjamas",
+        "sleepwear"
+      ],
+      "top_boxes_above": 2.1,
+      "hanger_storage": true,
+      "level": "GF"
+    },
+    {
+      "id": "pd-hang-2",
+      "room": "parents-dressing-ext",
+      "type": "wardrobe",
+      "cx": 20.527,
+      "cy": -28.531,
+      "rot": 0,
+      "w": 1.3460000000000008,
+      "d": 0.6,
+      "h": 2.3,
+      "why": "his dedicated hanging, trousers, drawers and shelves up to the ensuite door",
+      "partner": "his",
+      "modules": [
+        [
+          "double-hang",
+          0.55
+        ],
+        [
+          "trousers-pullout",
+          0.25
+        ],
+        [
+          "drawers",
+          0.35
+        ],
+        [
+          "shelves",
+          0.196
+        ]
+      ],
+      "drawers": [
+        "socks",
+        "underwear",
+        "T-shirts",
+        "sportswear",
+        "pyjamas",
+        "sleepwear"
+      ],
+      "top_boxes_above": 2.1,
+      "hanger_storage": true,
+      "level": "GF"
+    },
+    {
+      "id": "pe-wc",
+      "room": "parents-ensuite",
+      "type": "wc",
+      "cx": 21.874,
+      "cy": -30.051,
+      "rot": 90,
+      "w": 0.4,
+      "d": 0.5,
+      "h": 0.4,
+      "why": "WC on the south wall (client)",
+      "level": "GF"
+    },
+    {
+      "id": "pe-bath",
+      "room": "parents-ensuite",
+      "type": "bath",
+      "cx": 20.704,
+      "cy": -30.736,
+      "rot": 0,
+      "w": 1.7,
+      "d": 0.75,
+      "h": 0.55,
+      "why": "bath with a shower over it: a separate shower does not also fit (answers asked for both)",
+      "level": "GF"
+    },
+    {
+      "id": "pe-basin",
+      "room": "parents-ensuite",
+      "type": "washbasin",
+      "cx": 20.054,
+      "cy": -29.281,
+      "rot": -90,
+      "w": 0.6,
+      "d": 0.5,
+      "h": 0.85,
+      "why": "single basin: with the ensuite 0.21 m shorter for the dressing, a double basin zone reaches the bath",
+      "level": "GF"
+    }
+  ],
+  "columns": [
+    [
+      7.017,
+      -24.101,
+      7.377,
+      -23.591
+    ],
+    [
+      9.227,
+      -24.101,
+      9.567,
+      -23.591
+    ],
+    [
+      11.197,
+      -24.251,
+      11.537,
+      -23.591
+    ],
+    [
+      14.902,
+      -23.951,
+      15.412,
+      -23.591
+    ],
+    [
+      22.237,
+      -28.671,
+      22.597,
+      -28.161
+    ],
+    [
+      3.617,
+      -24.151,
+      3.977,
+      -23.641
+    ],
+    [
+      3.617,
+      -28.671,
+      3.977,
+      -28.161
+    ],
+    [
+      18.367,
+      -23.951,
+      18.877,
+      -23.591
+    ],
+    [
+      22.237,
+      -24.101,
+      22.597,
+      -23.591
+    ]
+  ],
+  "walls": [
+    [
+      19.604,
+      -31.311,
+      22.324,
+      -31.110999999999997
+    ],
+    [
+      19.604,
+      -28.931,
+      21.25,
+      -28.831
+    ],
+    [
+      22.049999999999997,
+      -28.931,
+      22.324,
+      -28.831
+    ],
+    [
+      3.617,
+      -28.671,
+      4.102,
+      -28.470999999999997
+    ],
+    [
+      5.102,
+      -28.671,
+      19.604,
+      -28.470999999999997
+    ],
+    [
+      22.324,
+      -28.671,
+      22.597,
+      -28.470999999999997
+    ],
+    [
+      11.477,
+      -27.421,
+      12.765,
+      -27.320999999999998
+    ],
+    [
+      13.665,
+      -27.421,
+      16.239,
+      -27.320999999999998
+    ],
+    [
+      17.139,
+      -27.421,
+      18.527,
+      -27.320999999999998
+    ],
+    [
+      19.427,
+      -27.421,
+      19.527,
+      -27.320999999999998
+    ],
+    [
+      19.527,
+      -26.691,
+      21.497,
+      -26.590999999999998
+    ],
+    [
+      22.296999999999997,
+      -26.691,
+      22.597,
+      -26.590999999999998
+    ],
+    [
+      9.227,
+      -26.421,
+      9.952,
+      -26.320999999999998
+    ],
+    [
+      10.752,
+      -26.421,
+      11.477,
+      -26.320999999999998
+    ],
+    [
+      3.617,
+      -23.791000000000004,
+      7.376999999999999,
+      -23.591
+    ],
+    [
+      9.177,
+      -23.791000000000004,
+      22.597,
+      -23.591
+    ],
+    [
+      3.617,
+      -28.671,
+      3.817,
+      -23.591
+    ],
+    [
+      9.177,
+      -26.371,
+      9.277000000000001,
+      -23.591
+    ],
+    [
+      11.427,
+      -27.371,
+      11.527000000000001,
+      -23.591
+    ],
+    [
+      14.902,
+      -27.371,
+      15.002,
+      -23.591
+    ],
+    [
+      18.377,
+      -27.371,
+      18.477,
+      -23.591
+    ],
+    [
+      19.477,
+      -28.671,
+      19.577,
+      -26.641
+    ],
+    [
+      19.604,
+      -31.311,
+      19.804000000000002,
+      -28.671
+    ],
+    [
+      22.124,
+      -31.311,
+      22.324,
+      -28.671
+    ],
+    [
+      22.397,
+      -28.671,
+      22.597,
+      -23.591
+    ]
+  ],
+  "wc_vertices": [
+    [
+      10.854,
+      -25.839499999999997,
+      0.375
+    ],
+    [
+      10.854,
+      -25.7995,
+      0.375
+    ],
+    [
+      10.859,
+      -25.837999999999997,
+      0.385
+    ],
+    [
+      10.859,
+      -25.837999999999997,
+      0.39
+    ],
+    [
+      10.859,
+      -25.801,
+      0.385
+    ],
+    [
+      10.859,
+      -25.801,
+      0.39
+    ],
+    [
+      10.860133351267967,
+      -25.88608742811845,
+      0.375
+    ],
+    [
+      10.860133351267967,
+      -25.752912571881545,
+      0.375
+    ],
+    [
+      10.86501409165998,
+      -25.88368156146059,
+      0.385
+    ],
+    [
+      10.86501409165998,
+      -25.88368156146059,
+      0.39
+    ],
+    [
+      10.86501409165998,
+      -25.755318438539405,
+      0.385
+    ],
+    [
+      10.86501409165998,
+      -25.755318438539405,
+      0.39
+    ],
+    [
+      10.869,
+      -25.837999999999997,
+      0.375
+    ],
+    [
+      10.869,
+      -25.837999999999997,
+      0.4
+    ],
+    [
+      10.869,
+      -25.801,
+      0.375
+    ],
+    [
+      10.869,
+      -25.801,
+      0.4
+    ],
+    [
+      10.873999999999999,
+      -25.839499999999997,
+      0.33
+    ],
+    [
+      10.873999999999999,
+      -25.7995,
+      0.33
+    ],
+    [
+      10.874673349922869,
+      -25.881093371009566,
+      0.375
+    ],
+    [
+      10.874673349922869,
+      -25.881093371009566,
+      0.4
+    ],
+    [
+      10.874673349922869,
+      -25.75790662899043,
+      0.375
+    ],
+    [
+      10.874673349922869,
+      -25.75790662899043,
+      0.4
+    ],
+    [
+      10.8781154273188,
+      -25.929499999999997,
+      0.375
+    ],
+    [
+      10.8781154273188,
+      -25.7095,
+      0.375
+    ],
+    [
+      10.879792609530858,
+      -25.883499237667426,
+      0.33
+    ],
+    [
+      10.879792609530858,
+      -25.75550076233257,
+      0.33
+    ],
+    [
+      10.882646516232047,
+      -25.92625,
+      0.385
+    ],
+    [
+      10.882646516232047,
+      -25.92625,
+      0.39
+    ],
+    [
+      10.882646516232047,
+      -25.712749999999996,
+      0.385
+    ],
+    [
+      10.882646516232047,
+      -25.712749999999996,
+      0.39
+    ],
+    [
+      10.89130677026989,
+      -25.921249999999997,
+      0.375
+    ],
+    [
+      10.89130677026989,
+      -25.921249999999997,
+      0.4
+    ],
+    [
+      10.89130677026989,
+      -25.71775,
+      0.375
+    ],
+    [
+      10.89130677026989,
+      -25.71775,
+      0.4
+    ],
+    [
+      10.896775681356646,
+      -25.9245,
+      0.33
+    ],
+    [
+      10.896775681356646,
+      -25.714499999999997,
+      0.33
+    ],
+    [
+      10.90672077938642,
+      -25.966779220613578,
+      0.375
+    ],
+    [
+      10.90672077938642,
+      -25.672220779386418,
+      0.375
+    ],
+    [
+      10.910695653120573,
+      -25.962804346879423,
+      0.385
+    ],
+    [
+      10.910695653120573,
+      -25.962804346879423,
+      0.39
+    ],
+    [
+      10.910695653120573,
+      -25.676195653120573,
+      0.385
+    ],
+    [
+      10.910695653120573,
+      -25.676195653120573,
+      0.39
+    ],
+    [
+      10.91776672093244,
+      -25.95573327906756,
+      0.375
+    ],
+    [
+      10.91776672093244,
+      -25.95573327906756,
+      0.4
+    ],
+    [
+      10.91776672093244,
+      -25.683266720932437,
+      0.375
+    ],
+    [
+      10.91776672093244,
+      -25.683266720932437,
+      0.4
+    ],
+    [
+      10.923791847198286,
+      -25.95970815280171,
+      0.33
+    ],
+    [
+      10.923791847198286,
+      -25.679291847198286,
+      0.33
+    ],
+    [
+      10.943999999999999,
+      -25.995384572681196,
+      0.375
+    ],
+    [
+      10.943999999999999,
+      -25.6436154273188,
+      0.375
+    ],
+    [
+      10.94725,
+      -25.99085348376795,
+      0.385
+    ],
+    [
+      10.94725,
+      -25.99085348376795,
+      0.39
+    ],
+    [
+      10.94725,
+      -25.648146516232046,
+      0.385
+    ],
+    [
+      10.94725,
+      -25.648146516232046,
+      0.39
+    ],
+    [
+      10.95225,
+      -25.982193229730107,
+      0.375
+    ],
+    [
+      10.95225,
+      -25.982193229730107,
+      0.4
+    ],
+    [
+      10.95225,
+      -25.65680677026989,
+      0.375
+    ],
+    [
+      10.95225,
+      -25.65680677026989,
+      0.4
+    ],
+    [
+      10.959,
+      -25.986724318643354,
+      0.33
+    ],
+    [
+      10.959,
+      -25.65227568135664,
+      0.33
+    ],
+    [
+      10.987412571881546,
+      -26.01336664873203,
+      0.375
+    ],
+    [
+      10.987412571881546,
+      -25.625633351267965,
+      0.375
+    ],
+    [
+      10.989818438539405,
+      -26.008485908340017,
+      0.385
+    ],
+    [
+      10.989818438539405,
+      -26.008485908340017,
+      0.39
+    ],
+    [
+      10.989818438539405,
+      -25.63051409165998,
+      0.385
+    ],
+    [
+      10.989818438539405,
+      -25.63051409165998,
+      0.39
+    ],
+    [
+      10.99240662899043,
+      -25.998826650077127,
+      0.375
+    ],
+    [
+      10.99240662899043,
+      -25.998826650077127,
+      0.4
+    ],
+    [
+      10.99240662899043,
+      -25.64017334992287,
+      0.375
+    ],
+    [
+      10.99240662899043,
+      -25.64017334992287,
+      0.4
+    ],
+    [
+      10.994,
+      -25.8695,
+      0.12
+    ],
+    [
+      10.994,
+      -25.769499999999997,
+      0.12
+    ],
+    [
+      10.997066675633983,
+      -25.892793714059223,
+      0.12
+    ],
+    [
+      10.997066675633983,
+      -25.746206285940772,
+      0.12
+    ],
+    [
+      11.00000076233257,
+      -26.00370739046914,
+      0.33
+    ],
+    [
+      11.00000076233257,
+      -25.635292609530858,
+      0.33
+    ],
+    [
+      11.0060577136594,
+      -25.914499999999997,
+      0.12
+    ],
+    [
+      11.0060577136594,
+      -25.7245,
+      0.12
+    ],
+    [
+      11.02036038969321,
+      -25.93313961030679,
+      0.12
+    ],
+    [
+      11.02036038969321,
+      -25.705860389693207,
+      0.12
+    ],
+    [
+      11.033999999999999,
+      -26.019499999999997,
+      0.375
+    ],
+    [
+      11.033999999999999,
+      -25.6195,
+      0.375
+    ],
+    [
+      11.035499999999999,
+      -26.014499999999998,
+      0.385
+    ],
+    [
+      11.035499999999999,
+      -26.014499999999998,
+      0.39
+    ],
+    [
+      11.035499999999999,
+      -26.004499999999997,
+      0.375
+    ],
+    [
+      11.035499999999999,
+      -26.004499999999997,
+      0.4
+    ],
+    [
+      11.035499999999999,
+      -25.6345,
+      0.375
+    ],
+    [
+      11.035499999999999,
+      -25.6345,
+      0.4
+    ],
+    [
+      11.035499999999999,
+      -25.624499999999998,
+      0.385
+    ],
+    [
+      11.035499999999999,
+      -25.624499999999998,
+      0.39
+    ],
+    [
+      11.039,
+      -25.947442286340596,
+      0.12
+    ],
+    [
+      11.039,
+      -25.6915577136594,
+      0.12
+    ],
+    [
+      11.043999999999999,
+      -26.0095,
+      0.33
+    ],
+    [
+      11.043999999999999,
+      -25.629499999999997,
+      0.33
+    ],
+    [
+      11.060706285940773,
+      -25.956433324366014,
+      0.12
+    ],
+    [
+      11.060706285940773,
+      -25.682566675633982,
+      0.12
+    ],
+    [
+      11.084,
+      -25.9595,
+      0.12
+    ],
+    [
+      11.084,
+      -25.679499999999997,
+      0.12
+    ],
+    [
+      11.1875,
+      -26.014499999999998,
+      0.385
+    ],
+    [
+      11.1875,
+      -26.014499999999998,
+      0.39
+    ],
+    [
+      11.1875,
+      -26.004499999999997,
+      0.375
+    ],
+    [
+      11.1875,
+      -26.004499999999997,
+      0.4
+    ],
+    [
+      11.1875,
+      -25.6345,
+      0.375
+    ],
+    [
+      11.1875,
+      -25.6345,
+      0.4
+    ],
+    [
+      11.1875,
+      -25.624499999999998,
+      0.385
+    ],
+    [
+      11.1875,
+      -25.624499999999998,
+      0.39
+    ],
+    [
+      11.224,
+      -26.019499999999997,
+      0.375
+    ],
+    [
+      11.224,
+      -25.6195,
+      0.375
+    ],
+    [
+      11.230593371009569,
+      -25.998826650077127,
+      0.375
+    ],
+    [
+      11.230593371009569,
+      -25.998826650077127,
+      0.4
+    ],
+    [
+      11.230593371009569,
+      -25.64017334992287,
+      0.375
+    ],
+    [
+      11.230593371009569,
+      -25.64017334992287,
+      0.4
+    ],
+    [
+      11.233181561460594,
+      -26.008485908340017,
+      0.385
+    ],
+    [
+      11.233181561460594,
+      -26.008485908340017,
+      0.39
+    ],
+    [
+      11.233181561460594,
+      -25.63051409165998,
+      0.385
+    ],
+    [
+      11.233181561460594,
+      -25.63051409165998,
+      0.39
+    ],
+    [
+      11.234,
+      -26.0095,
+      0.33
+    ],
+    [
+      11.234,
+      -25.629499999999997,
+      0.33
+    ],
+    [
+      11.270587428118453,
+      -26.01336664873203,
+      0.375
+    ],
+    [
+      11.270587428118453,
+      -25.625633351267965,
+      0.375
+    ],
+    [
+      11.27075,
+      -25.982193229730107,
+      0.375
+    ],
+    [
+      11.27075,
+      -25.982193229730107,
+      0.4
+    ],
+    [
+      11.27075,
+      -25.65680677026989,
+      0.375
+    ],
+    [
+      11.27075,
+      -25.65680677026989,
+      0.4
+    ],
+    [
+      11.27575,
+      -25.99085348376795,
+      0.385
+    ],
+    [
+      11.27575,
+      -25.99085348376795,
+      0.39
+    ],
+    [
+      11.27575,
+      -25.648146516232046,
+      0.385
+    ],
+    [
+      11.27575,
+      -25.648146516232046,
+      0.39
+    ],
+    [
+      11.277999237667428,
+      -26.00370739046914,
+      0.33
+    ],
+    [
+      11.277999237667428,
+      -25.635292609530858,
+      0.33
+    ],
+    [
+      11.30523327906756,
+      -25.95573327906756,
+      0.375
+    ],
+    [
+      11.30523327906756,
+      -25.95573327906756,
+      0.4
+    ],
+    [
+      11.30523327906756,
+      -25.683266720932437,
+      0.375
+    ],
+    [
+      11.30523327906756,
+      -25.683266720932437,
+      0.4
+    ],
+    [
+      11.312304346879426,
+      -25.962804346879423,
+      0.385
+    ],
+    [
+      11.312304346879426,
+      -25.962804346879423,
+      0.39
+    ],
+    [
+      11.312304346879426,
+      -25.676195653120573,
+      0.385
+    ],
+    [
+      11.312304346879426,
+      -25.676195653120573,
+      0.39
+    ],
+    [
+      11.314,
+      -25.995384572681196,
+      0.375
+    ],
+    [
+      11.314,
+      -25.9595,
+      0.12
+    ],
+    [
+      11.314,
+      -25.679499999999997,
+      0.12
+    ],
+    [
+      11.314,
+      -25.6436154273188,
+      0.375
+    ],
+    [
+      11.318999999999999,
+      -25.986724318643354,
+      0.33
+    ],
+    [
+      11.318999999999999,
+      -25.65227568135664,
+      0.33
+    ],
+    [
+      11.331693229730108,
+      -25.921249999999997,
+      0.375
+    ],
+    [
+      11.331693229730108,
+      -25.921249999999997,
+      0.4
+    ],
+    [
+      11.331693229730108,
+      -25.71775,
+      0.375
+    ],
+    [
+      11.331693229730108,
+      -25.71775,
+      0.4
+    ],
+    [
+      11.337293714059227,
+      -25.956433324366014,
+      0.12
+    ],
+    [
+      11.337293714059227,
+      -25.682566675633982,
+      0.12
+    ],
+    [
+      11.340353483767952,
+      -25.92625,
+      0.385
+    ],
+    [
+      11.340353483767952,
+      -25.92625,
+      0.39
+    ],
+    [
+      11.340353483767952,
+      -25.712749999999996,
+      0.385
+    ],
+    [
+      11.340353483767952,
+      -25.712749999999996,
+      0.39
+    ],
+    [
+      11.34832665007713,
+      -25.881093371009566,
+      0.375
+    ],
+    [
+      11.34832665007713,
+      -25.881093371009566,
+      0.4
+    ],
+    [
+      11.34832665007713,
+      -25.75790662899043,
+      0.375
+    ],
+    [
+      11.34832665007713,
+      -25.75790662899043,
+      0.4
+    ],
+    [
+      11.351279220613579,
+      -25.966779220613578,
+      0.375
+    ],
+    [
+      11.351279220613579,
+      -25.672220779386418,
+      0.375
+    ],
+    [
+      11.354,
+      -25.837999999999997,
+      0.375
+    ],
+    [
+      11.354,
+      -25.837999999999997,
+      0.4
+    ],
+    [
+      11.354,
+      -25.801,
+      0.375
+    ],
+    [
+      11.354,
+      -25.801,
+      0.4
+    ],
+    [
+      11.354208152801712,
+      -25.95970815280171,
+      0.33
+    ],
+    [
+      11.354208152801712,
+      -25.679291847198286,
+      0.33
+    ],
+    [
+      11.35798590834002,
+      -25.88368156146059,
+      0.385
+    ],
+    [
+      11.35798590834002,
+      -25.88368156146059,
+      0.39
+    ],
+    [
+      11.35798590834002,
+      -25.755318438539405,
+      0.385
+    ],
+    [
+      11.35798590834002,
+      -25.755318438539405,
+      0.39
+    ],
+    [
+      11.359,
+      -25.947442286340596,
+      0.12
+    ],
+    [
+      11.359,
+      -25.6915577136594,
+      0.12
+    ],
+    [
+      11.363999999999999,
+      -25.837999999999997,
+      0.385
+    ],
+    [
+      11.363999999999999,
+      -25.837999999999997,
+      0.39
+    ],
+    [
+      11.363999999999999,
+      -25.801,
+      0.385
+    ],
+    [
+      11.363999999999999,
+      -25.801,
+      0.39
+    ],
+    [
+      11.377639610306788,
+      -25.93313961030679,
+      0.12
+    ],
+    [
+      11.377639610306788,
+      -25.705860389693207,
+      0.12
+    ],
+    [
+      11.379884572681199,
+      -25.929499999999997,
+      0.375
+    ],
+    [
+      11.379884572681199,
+      -25.7095,
+      0.375
+    ],
+    [
+      11.381224318643355,
+      -25.9245,
+      0.33
+    ],
+    [
+      11.381224318643355,
+      -25.714499999999997,
+      0.33
+    ],
+    [
+      11.384,
+      -25.9395,
+      0.95
+    ],
+    [
+      11.384,
+      -25.9395,
+      1.12
+    ],
+    [
+      11.384,
+      -25.699499999999997,
+      0.95
+    ],
+    [
+      11.384,
+      -25.699499999999997,
+      1.12
+    ],
+    [
+      11.3919422863406,
+      -25.914499999999997,
+      0.12
+    ],
+    [
+      11.3919422863406,
+      -25.7245,
+      0.12
+    ],
+    [
+      11.397866648732032,
+      -25.88608742811845,
+      0.375
+    ],
+    [
+      11.397866648732032,
+      -25.752912571881545,
+      0.375
+    ],
+    [
+      11.39820739046914,
+      -25.883499237667426,
+      0.33
+    ],
+    [
+      11.39820739046914,
+      -25.75550076233257,
+      0.33
+    ],
+    [
+      11.400933324366015,
+      -25.892793714059223,
+      0.12
+    ],
+    [
+      11.400933324366015,
+      -25.746206285940772,
+      0.12
+    ],
+    [
+      11.404,
+      -25.9395,
+      0.95
+    ],
+    [
+      11.404,
+      -25.9395,
+      1.12
+    ],
+    [
+      11.404,
+      -25.8695,
+      0.12
+    ],
+    [
+      11.404,
+      -25.839499999999997,
+      0.33
+    ],
+    [
+      11.404,
+      -25.839499999999997,
+      0.375
+    ],
+    [
+      11.404,
+      -25.7995,
+      0.33
+    ],
+    [
+      11.404,
+      -25.7995,
+      0.375
+    ],
+    [
+      11.404,
+      -25.769499999999997,
+      0.12
+    ],
+    [
+      11.404,
+      -25.699499999999997,
+      0.95
+    ],
+    [
+      11.404,
+      -25.699499999999997,
+      1.12
+    ]
+  ]
+}

@@ -44,7 +44,8 @@ def _bearing_angle(bearing, yaw):
     return (bearing - yaw + math.pi) % (2 * math.pi) - math.pi
 
 
-def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=None, extra=()):
+def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=None, extra=(),
+           *, _step=STEP):
     sp = sp or RS.build(lay)
     r = lay["rooms"][room]
     lv, rect = r["level"], r["rect"]
@@ -76,6 +77,27 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
             if s_ in by_id]
     high_fittings = [p for s_, p in zip((s for s in subjects if s in by_id), tops)
                      if s_.startswith("detail-")]
+    # A low pan's top being visible does not mean the whole WC is visible.
+    # Use the same physical builder as the scene, in floor-relative metres,
+    # including its flush plate. Do not change the fixture to suit the camera.
+    from . import villa_furniture_detail as FD
+    whole_vertices = list({tuple(p) for s in subjects if s in by_id and by_id[s].get("type") == "wc"
+                           for faces in FD.world_parts(by_id[s], 0.0).values()
+                           for face in faces for p in face})
+
+    def framing(x, y, yaw):
+        """Measured needs and limits in degrees, using the chooser's actual constraints."""
+        lower = max((max(0.0, math.atan2(eye_m-h, math.hypot(cx-x, cy-y)))
+                     for cx, cy, h in tops), default=0.0)
+        upper = max((max(0.0, math.atan2(h-eye_m, math.hypot(cx-x, cy-y)))
+                     for cx, cy, h in high_fittings), default=0.0)
+        whole = max((abs(math.atan2(p[2]-eye_m,
+                     (p[0]-x)*math.cos(yaw)+(p[1]-y)*math.sin(yaw)))
+                     for p in whole_vertices), default=0.0)
+        horizontal = max((abs(_angle(x, y, qx, qy, yaw)) for qx, qy in subj), default=0.0)
+        return dict(horizontal_need_deg=math.degrees(horizontal), lower_top_need_deg=math.degrees(lower),
+                    upper_fitting_need_deg=math.degrees(upper), whole_subject_need_deg=math.degrees(whole),
+                    horizontal_limit_deg=math.degrees(half), vertical_limit_deg=math.degrees(vhalf))
 
     def below(x, y):
         """How far (rad) a subject's top sits below the frame's lower edge seen from eye height: the family-bath WC,
@@ -153,6 +175,7 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
         return min(ts) if ts else 0.0
 
     best = None
+    framed_candidates = 0
     x = rect[0] - 0.3
     while x <= rect[2] + 0.3:
         y = rect[1] - 0.3
@@ -180,20 +203,32 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
                 for deg in range(0, 360, YAW_STEP):
                     yaw = math.radians(deg)
                     miss = sum(max(0.0, abs(_bearing_angle(b, yaw)) - half) for b in subj_bearings) + low
+                    whole = max((abs(math.atan2(p[2]-eye_m,
+                                 (p[0]-x)*math.cos(yaw)+(p[1]-y)*math.sin(yaw)))
+                                 for p in whole_vertices), default=0.0)
+                    miss += max(0.0, whole-vhalf)
+                    framed_candidates += miss == 0.0
                     seen = sum(abs(_bearing_angle(b, yaw)) <= half for b in room_bearings)
                     wins = sum(abs(_bearing_angle(b, yaw)) <= half for b in opening_bearings)
                     score = (-100.0 * miss + (seen / max(1, len(room_items))) + 0.4 * min(wins, 1)
                              + 0.6 * depth(x, y, yaw) / max(diag, 1e-6) - 0.15 * edge
                              + 0.6 * facing - 1.0 * occluded - 1.0 * looming(x, y, yaw, nearby))
-                    if best is None or score > best[0]:
+                    # Framing is hard: aesthetic score must never displace a
+                    # fully framed candidate with a slightly clipped candidate.
+                    if best is None or (miss == 0.0, score) > (best[4] == 0.0, best[0]):
                         best = (score, x, y, yaw, miss)
-            y += STEP
-        x += STEP
+            y += _step
+        x += _step
     if best is None:
         raise ValueError("no standing point in " + room)
     score, x, y, yaw, miss = best
+    if miss and whole_vertices and _step == STEP:
+        # Tight physical subjects can fit between coarse standing samples.
+        # Refine the same admissible search, without moving design geometry.
+        return choose(lay, room, subjects, lens_mm, sensor_mm, eye_m, sp, extra, _step=STEP/4)
     widest = max((abs(_angle(x, y, qx, qy, yaw)) for qx, qy in subj), default=0.0)
     return {"position": [round(x, 3), round(y, 3)], "target": [round(x + 3 * math.cos(yaw), 3),
                                                                 round(y + 3 * math.sin(yaw), 3)],
             "yaw_deg": round(math.degrees(yaw), 1), "widest_deg": round(math.degrees(widest), 1),
-            "subjects_in_frame": miss == 0.0, "score": round(score, 3), "level": lv}
+            "subjects_in_frame": miss == 0.0, "score": round(score, 3), "level": lv,
+            "framing": framing(x, y, yaw), "framed_candidates": framed_candidates, "search_step_m": _step}

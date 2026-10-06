@@ -20,7 +20,9 @@ def measured_items(scene, lay):
     Keep the larger of the authored envelope and actual assembled geometry,
     including the projecting fittings. Never rerun on the old furniture list.
     """
-    items = deepcopy(F.layout(lay))
+    from .sanitary_relocation import input_revision
+    with input_revision(True):
+        items = deepcopy(F.layout(lay))
     for item in items:
         if item.get('wet_zone'):
             floors=[m for m in scene['meshes'] if m['id'].startswith('furn-'+item['id']+'-')]
@@ -32,10 +34,14 @@ def measured_items(scene, lay):
     for item in items:
         if item['type'] not in ('wc','washbasin','washbasin_double'):
             continue
+        placement = scene.get('sanitary_placements', {}).get(item['id'])
+        if placement:
+            item.update({key: placement[key] for key in ('cx','cy','rot')})
         members = [m for m in scene['meshes'] if m['id'].startswith('furn-'+item['id']+'-')]
         row = next(rows[m['id']] for m in members)
-        item['cx'] += row['new'][0]-row['old'][0]
-        item['cy'] += row['new'][1]-row['old'][1]
+        if not placement:
+            item['cx'] += row['new'][0]-row['old'][0]
+            item['cy'] += row['new'][1]-row['old'][1]
         slide = scene.get('wc_slides', {}).get(item['id'], {})
         item['cx'] += slide.get('delta', [0,0,0])[0]
         item['cy'] += slide.get('delta', [0,0,0])[1]
@@ -184,14 +190,26 @@ def review(scene,lay=None):
             add(room,it['id']+' front approach',achieved,required,cat.get(it['type']).source,
                 'limiter: '+limiter+('; 700 mm basin approach width' if width else ''))
             if it['type']=='wc':
-                side_obstacles=[(name,b,'wall') for name,b in walls]+[(o['id'],F.footprint(o),o['type']) for o in room_items if o is not it and o['h']>=.3]
+                side_obstacles=[(name,b,'wall') for name,b in walls]+[(o['id'],F.footprint(o),o['type']) for o in room_items if o is not it and (o['h']>=.3 or (o['type']=='shower_walkin' and not o.get('wet_zone')))]
                 for achieved,required,limiter in wc_side_clearances(it,side_obstacles,finished_rect):
                     add(room,it['id']+' centreline side '+str(int(required*1000)),achieved,required,
                         'card ukadm-wc-access-zone-1100; Diagram 2.5 printed p.20; 350/1000 mm sides',
                         'limiter: '+limiter+'; mirrored handedness; basin rear encroachment capped at 300 mm')
         if room=='family-bath':
             by={i['id']:i for i in room_items}
-            feasibility=same_wall_slide_feasibility(by['fb-wc'],by['fb-basin'],by['fb-shower'],finished_rect)
+            if by['fb-wc']['rot']==by['fb-basin']['rot']==-90:
+                feasibility=same_wall_slide_feasibility(by['fb-wc'],by['fb-basin'],by['fb-shower'],finished_rect)
+            else:
+                feasibility=dict(status='OPPOSITE WALLS',reason='Client east-wall WC decision; full room review applies')
+            wet=F.footprint(by['fb-shower'])
+            for identifier in ('fb-wc','fb-basin'):
+                body=F.footprint(by[identifier])
+                add(room,identifier+' separation from wet zone',distance_rect(body,wet),0,
+                    'Project non-intersection with authored shower wet zone; no splash-distance minimum')
+                if F._ov(body,wet): rows[-1]['status']='FAIL'
+            add(room,'shower entry clear-floor width',wet[2]-wet[0],1.219,
+                'card nkba-shower-clear-floor-762; 762 x 1219 mm centred clear floor',
+                'Full shower frontage has the reported front approach depth')
         # All door swing regions touching this room, all floor-height items.
         rr=lay['rooms'][room]['rect']
         for zone in F._door_zones(sp,lay,lv):
