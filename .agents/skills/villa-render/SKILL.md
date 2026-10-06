@@ -27,6 +27,30 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
 ## Order
 
 1. **Export the scene**: `villa_render.write()` → `scene.json`.
+   - Scene build uses tracked inputs. Walking-envelope asset triangles come
+     from `knowledge/asset-route-geometry.json.gz`, not the build machine's HOME
+     or the render library. On the render host, measure new/replaced landscape
+     assets with `PYTHONPATH=src python scripts/generate_asset_route_geometry.py
+     --library-root /path/to/library --assets <asset ids>`; this updates both
+     the compressed record and manifest source/buffer hashes. The tracked
+     `knowledge/asset-route-policy.json` records admissible scale ranges and
+     the walking-height margin. Keep exact triangles intersecting that native
+     band with original face order, winding and connectivity; never hull or
+     decimate walking triangles. Framing uses only unrounded full-height 3D
+     convex-hull vertices. The policy declares route coordinate precision:
+     frangipani stays lossless for micrometre translation; other assets admit
+     at most 1 mm scene grid steps (0.866026 mm Euclidean rounding error).
+     Do not relax collision tolerances. Keep the gzip record below 1.5 MB;
+     generation and portable verification enforce this budget. Compare
+     hull-only and all-vertex results with
+     `scripts/generate_asset_framing_proof.py --library-root /path/to/library
+     --check` for real assets. Measure bytes, before/after counts and errors. Upright uniform scales
+     are required except the recorded axiswise bench exception. Scales or
+     walking tops outside coverage fail closed; widen the policy and regenerate
+     instead of extrapolating. Review the policy, record and manifest together.
+     Missing or stale records stop build even for nonoverlapping props.
+     Run `tests.test_asset_route_geometry` and portable verification
+     with HOME pointing at an empty directory before returning the package.
    - Shell faces are classified by their real normal, not by tags.
    - Furniture: generator pieces (`archpipe.furniture`) through
      `generator_rotation`; other types through `villa_furniture_detail`;

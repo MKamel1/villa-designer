@@ -39,18 +39,18 @@ def door_leaf_near(scene, px, py):
 
 
 def subject_points(subject, scene):
-    """Built mesh vertices plus actual transformed imported-prop vertices.
+    """Built mesh vertices plus transformed imported-prop convex-hull vertices.
 
     Imported assets are subjects in their own right; no invisible mesh
     marker may stand in for a removed assembly or a rendered prop.
     """
-    from archpipe.concept.route_geometry import prop_triangles
+    from archpipe.concept.route_geometry import prop_framing_points
     points = [p for m in scene["meshes"]
               if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
               for face in m["faces"] for p in face]
     for prop in scene.get("props", []):
         if prop["id"] == subject or prop["id"].startswith(subject) or prop.get("label") == subject:
-            points += prop_triangles(prop).reshape(-1,3).tolist()
+            points += prop_framing_points(prop).tolist()
     return points
 
 
@@ -67,7 +67,7 @@ def subject_footprint(subject, items, rooms, scene):
 
 
 def subject_mesh_frame_violations(view, scene, subject):
-    """Project every built vertex through a level camera, including sensor-width lens shift.
+    """Project built vertices and exact asset hulls through a level camera.
 
     Horizontal coordinates span -0.5 to 0.5 sensor widths; vertical coordinates
     span half the image height/width ratio either side of the shifted centre.

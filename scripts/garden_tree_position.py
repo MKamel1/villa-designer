@@ -29,6 +29,11 @@ def search_position():
               min(.5,usable[2]-model[2],usable[2]-radius-center[0]),
               min(usable[3]-model[3],usable[3]-radius-center[1]))
     routes, ground = L.walking_routes(meshes)
+    # Check the band of every route reachable within the search domain.
+    for name, rect in routes.items():
+        if (model[0]+bounds[0] <= rect[2] and model[2]+bounds[2] >= rect[0]
+                and model[1]+bounds[1] <= rect[3] and model[3]+bounds[3] >= rect[1]):
+            prop_triangles(tree, walking_top_m=ground[name]+2.0)
     answer = nearest_clear_translation(prop_triangles(tree),bounds,routes,ground)
     if answer is None:
         raise ValueError('no whole-lawn route-clear tree position')

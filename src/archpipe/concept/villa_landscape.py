@@ -439,17 +439,19 @@ def route_violations(items, routes=PATHS, route_ground=None):
     from .render_support import _tri_box_overlap, _triangles
     out = []
     for item in items:
+        # Validate every placed asset, including props clear of all routes.
+        triangles = prop_triangles(item) if "asset" in item else None
         candidates = [(name, route) for name, route in routes.items()
                       if _rect_overlap_area(_rect(item), route) > 1e-6]
         if not candidates:
             continue
-        triangles = None
-        if "asset" in item:
-            triangles = prop_triangles(item)
-        elif "faces" in item:
+        if "faces" in item and "asset" not in item:
             triangles, _ = _triangles([item])
         for name, route in candidates:
             ground = (route_ground or {}).get(name, 0.0 if name == "study" else GROUND)
+            if "asset" in item:
+                # A lower placement/higher route floor may reach omitted canopy.
+                prop_triangles(item, walking_top_m=ground+2.0)
             low = np.array([route[0], route[1], ground])
             high = np.array([route[2], route[3], ground+2.0])
             if triangles is not None:

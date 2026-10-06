@@ -1,0 +1,77 @@
+{
+  "schema": "asset-route-policy/1",
+  "margin_m": 0.41,
+  "basis": "Build-input coverage, not a design rule: 2.0 m walking height plus 0.41 m route-floor elevation above the placed asset base; includes the 0.4 m lowered frangipani diagnostic. Native top is base + (2.0 + margin_m) / minimum scale. Upright props only. Plants use one positive uniform scale from villa_landscape._prop (authored height / native height); explicit intervals below cover current authored contexts and existing diagnostics. Smaller scales require regeneration, never silent extrapolation.",
+  "assets": {
+    "flower_ursinia": {
+      "scale_range": [
+        1.0,
+        1.1
+      ],
+      "scale_mode": "uniform",
+      "basis": "Native clump scale 1.0477299185098952; range contains current _clump_prop build.",
+      "route_scene_step_m": 0.001,
+      "precision_basis": "Explicit build precision: scene grid step at most 1 mm at maximum admitted scale; Euclidean vertex error at most 0.866026 mm (the square root of three times 0.5 mm). Connectivity, face order and winding are retained."
+    },
+    "outdoor_table_chair_set_01": {
+      "scale_range": [
+        0.9,
+        1.1
+      ],
+      "scale_mode": "uniform",
+      "basis": "Bistro uniform height-derived scale 1.0; frozen D2 furniture placement uses the same scale.",
+      "route_scene_step_m": 0.001,
+      "precision_basis": "Explicit build precision: scene grid step at most 1 mm at maximum admitted scale; Euclidean vertex error at most 0.866026 mm (the square root of three times 0.5 mm). Connectivity, face order and winding are retained."
+    },
+    "sf_bougainvillea": {
+      "scale_range": [
+        0.9,
+        1.3
+      ],
+      "scale_mode": "uniform",
+      "basis": "Top planting authored heights produce uniform scales 0.9803921568627451 and 1.2254901960784312.",
+      "route_scene_step_m": 0.001,
+      "precision_basis": "Explicit build precision: scene grid step at most 1 mm at maximum admitted scale; Euclidean vertex error at most 0.866026 mm (the square root of three times 0.5 mm). Connectivity, face order and winding are retained."
+    },
+    "sf_egg_chair": {
+      "scale_range": [
+        1.0,
+        1.1
+      ],
+      "scale_mode": "uniform",
+      "basis": "Authored 1.99 m swing height gives uniform scale 1.002720951325204.",
+      "route_scene_step_m": 0.001,
+      "precision_basis": "Explicit build precision: scene grid step at most 1 mm at maximum admitted scale; Euclidean vertex error at most 0.866026 mm (the square root of three times 0.5 mm). Connectivity, face order and winding are retained."
+    },
+    "sf_frangipani": {
+      "scale_range": [
+        1.18,
+        1.7
+      ],
+      "scale_mode": "uniform",
+      "basis": "Approved canopy-derived uniform scale 1.1838603916174273, prior 1.183813298484641, and height-derived 4.6 m diagnostic scale about 1.662. Uniform positive scale and upright yaw preserve height ordering.",
+      "route_scene_step_m": 0,
+      "precision_basis": "Lossless float64: continuous translation search uses 1 micrometre separation."
+    },
+    "sf_ixora": {
+      "scale_range": [
+        0.63,
+        1.0
+      ],
+      "scale_mode": "uniform",
+      "basis": "Authored 0.55/0.60 m shrubs give scales 0.6384954724866497/0.6965405154399814; palette mutation to 0.7 m remains covered.",
+      "route_scene_step_m": 0.001,
+      "precision_basis": "Explicit build precision: scene grid step at most 1 mm at maximum admitted scale; Euclidean vertex error at most 0.866026 mm (the square root of three times 0.5 mm). Connectivity, face order and winding are retained."
+    },
+    "sf_wooden_bench": {
+      "scale_range": [
+        0.5,
+        1.0
+      ],
+      "scale_mode": "axiswise",
+      "basis": "Existing explicit bench exception: horizontal scale 0.5028354331368551 and vertical scale 0.8371703641691085; native-scale renamed bench diagnostic uses 1.0. Positive axis scales remain bounded individually; the native band uses the conservative minimum vertical scale. Entire bench is below the band, so this exception omits no triangles.",
+      "route_scene_step_m": 0.001,
+      "precision_basis": "Explicit build precision: scene grid step at most 1 mm at maximum admitted scale; Euclidean vertex error at most 0.866026 mm (the square root of three times 0.5 mm). Connectivity, face order and winding are retained."
+    }
+  }
+}

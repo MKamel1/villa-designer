@@ -77,6 +77,22 @@ def raises(exc, fn, *a, **kw) -> bool:
 
 
 def main() -> int:
+    from archpipe.build_input_guard import build_input_findings
+    host_reads = build_input_findings()
+    expect("build code has no implicit render-host asset reads" +
+           (": " + "; ".join(host_reads) if host_reads else ""), not host_reads)
+    build_registry = json.loads((ROOT / "knowledge/build-input-guards.json").read_text(encoding="utf-8"))
+    expect("portable build-input controls have registered proving tests",
+           all((ROOT / item["proof_file"]).is_file() and all(
+               "def " + name + "(" in (ROOT / item["proof_file"]).read_text(encoding="utf-8")
+               for name in item["proofs"]) for item in build_registry["records"]))
+    from archpipe.asset_route_record import RECORD, recorded_geometry, read_record
+    route_record = read_record()
+    expect("route records validate walking topology, precision, hulls and scale ranges",
+           all(recorded_geometry(asset)[2]["triangle_count_after"] <= row["triangle_count_before"]
+               for asset, row in route_record["assets"].items()))
+    expect("compressed route record stays below 1.5 MB",
+           RECORD.stat().st_size < 1500000)
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
     scene = VR.build(views=[])
     mounting_registry = json.loads((ROOT / "knowledge/mounting-guards.json").read_text(encoding="utf-8"))

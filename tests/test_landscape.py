@@ -174,11 +174,11 @@ class LandscapeGuards(unittest.TestCase):
         self.assertEqual(L.layer_violations(self.plan["plants"],{"new-border":(0,0,1,1)}),[("new-border",[])])
 
     def test_route_geometry_uses_actual_asset_below_passage_height(self):
-        from archpipe.concept.route_geometry import prop_triangles
+        from archpipe.concept.route_geometry import prop_triangles, prop_framing_points
         triangles = prop_triangles(self.tree)
         self.assertAlmostEqual(float(triangles[:,:,2].min()), L.GROUND)
         bounds = L.require_species("Plumeria rubra")["appearance_measurements"]["sf_frangipani"]["native_gltf_y_up_bounds_m"]
-        self.assertAlmostEqual(float(triangles[:,:,2].max())-L.GROUND,
+        self.assertAlmostEqual(float(prop_framing_points(self.tree)[:,2].max())-L.GROUND,
                                (bounds["max"][1]-bounds["min"][1])*self.tree["scale"])
         low = copy.deepcopy(self.centred_tree)
         low["position"][2] -= .4
@@ -223,7 +223,7 @@ class LandscapeGuards(unittest.TestCase):
     def test_route_reader_node_chain_strided_buffer_and_cache_change_generalise(self):
         import os,struct,tempfile
         import numpy as np
-        from archpipe.concept.route_geometry import asset_triangles
+        from archpipe.asset_route_generator import asset_triangles
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/"other-model.gltf";buffer=Path(tmp)/"geometry.bin"
             def write_blob(tip):
