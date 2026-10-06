@@ -263,6 +263,8 @@ def scene_findings(scene: dict) -> list[str]:
                 failures.append(mesh['id']+': MISSING sourced construction requirement host status')
     from .attached_assembly import findings as attached_findings
     failures.extend(attached_findings(scene))
+    from .support_mounting import plant_support_findings
+    failures.extend(plant_support_findings(scene))
     failures.extend(host_coverage_findings(scene, hosts))
     for mesh in scene['meshes']:
         root_id=mesh.get('associated_mounting_root')

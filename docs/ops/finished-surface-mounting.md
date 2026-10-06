@@ -220,3 +220,29 @@ coffee seating; earlier frozen approvals remain historical evidence.
 Focused modules and project-interpreter `verify.py` only; the lead runs the full
 suite and renders the listed diagnostic views. Inspect local before/after previews
 before checkpoint delivery; no native or presentation integration is implied.
+
+For the Linux lane-A continuation, use
+`/home/omar/archpipe/envs/b16842c6f2161c9d/venv/bin/python` with `PYTHONPATH=src`
+and `NO_COLOR=1`; the Windows interpreter paths above are historical. Set
+`MPLCONFIGDIR` to a writable task directory. Transferred luminaire indexes
+must be consumed through the portable library row readers; never change the
+shared library to repair separators. When ignored historical `out` artifacts
+are absent, reconstruct candidate baselines through the builder with subsequent
+approval steps disabled, and label their provenance as reconstructed on this
+host. Such baselines provide geometry comparisons, not historical execution
+evidence. Retain the checkpoint documents, failed-start logs and frozen fixtures.
+Use the existing `scripts/verify.py --portable` mode with focused
+`test_rfa_portable` on Ubuntu; record the Windows installed-family corpus as
+skipped coverage. Plain verification still requires that unavailable native
+corpus. The lead retains native integration checks and the full suite.
+
+## C4 plant support datum follow-through
+
+Package (e) seats furniture and plants on the modeled floor finish 2 mm above
+the nominal room level. Indoor plants name their floor or furniture support;
+`support_mounting.plant_support_face` measures its finite upward contact face.
+Record a plant contract for that face, never a furniture floor-root contract.
+After migration, pass the scene to `indoor_plant_violations`; without it, migrated
+props fail closed. `scene_findings` independently checks actual support geometry,
+plant base and recorded datum with the unchanged 1 mm comparison tolerance.
+Moved or removed supports and stale records remain failures.

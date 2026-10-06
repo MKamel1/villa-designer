@@ -2056,6 +2056,9 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     apply_final_mounting(scene, lay)
     from .wc_slides import apply as apply_wc_slides
     apply_wc_slides(scene, lay)
+    failures = indoor_plant_violations(scene['props'], lay, scene)
+    if failures:
+        raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
     return scene
 
 
@@ -2398,7 +2401,7 @@ def props(lay):
     return out
 
 
-def indoor_plant_violations(placed, lay):
+def indoor_plant_violations(placed, lay, scene=None):
     """Early scene guard for pot, support and seating-to-TV view corridor."""
     items = F.layout(lay)
     by_room = {}
@@ -2418,7 +2421,14 @@ def indoor_plant_violations(placed, lay):
             continue
         support_id = p.get("support_id")
         room = lay["rooms"].get(p.get("room"), {})
-        if support_id == "finished-floor":
+        if scene is not None:
+            from .support_mounting import plant_support_findings
+            failures.extend(plant_support_findings(scene, [p]))
+            support_z = z  # support was independently checked against the scene
+        elif p.get('mounting'):
+            failures.append(pid + ': scene geometry required to check migrated plant support')
+            support_z = z
+        elif support_id == "finished-floor":
             support_z = LZ.get(room.get("level"), float("inf"))
         elif support_id in by_id:
             item = by_id[support_id]

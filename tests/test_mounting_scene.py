@@ -180,7 +180,7 @@ class StairFirstPackage(unittest.TestCase):
         self.assertTrue(any('head: finished-face error -8.000' in f for f in failures))
         self.assertTrue(any('hose: finished-face error -65.961' in f for f in failures))
         ids={'detail-gwc-hand-shower-head','detail-gwc-hand-shower-hose','lamp-SCONCE-guest-wc-03'}
-        subset=dict(self.scene,meshes=[m for m in self.scene['meshes'] if m['id'] in ids or m.get('finished_host_id')])
+        subset=dict(self.scene,props=[],meshes=[m for m in self.scene["meshes"] if m["id"] in ids or m.get("finished_host_id")])
         self.assertEqual(scene_findings(subset),[])
         original=json.loads((Path(__file__).parent/'fixtures/c4-bc-before.json').read_text())
         old=next(m for m in original['meshes'] if m['id']=='detail-gwc-hand-shower-head')
@@ -227,7 +227,7 @@ class StairFirstPackage(unittest.TestCase):
         self.assertEqual(sum('MISSING recessed housing depth' in f for f in findings),len(self.scene['ceiling_unresolved']))
         ceiling=[m for m in self.scene['meshes'] if m.get('mounting_package')=='d-ceiling']
         surfaces=[m for m in self.scene['meshes'] if m.get('finished_host_id')]
-        proposal=deepcopy(dict(self.scene,meshes=ceiling+surfaces))
+        proposal=deepcopy(dict(self.scene,props=[],meshes=ceiling+surfaces))
         by={m['id']:m for m in proposal['meshes']}
         for row in self.scene['mounting_movements']:
             if row['package']=='d-ceiling': by[row['id']]['faces']=row['proposed_faces']

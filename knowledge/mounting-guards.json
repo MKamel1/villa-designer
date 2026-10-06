@@ -1,6 +1,6 @@
 {
   "schema": "mounting-guards/1",
-  "scope": "C4 phase 2; partial construction migration, whole-scene guard unconditional",
+  "scope": "C4 final lead decisions; candidate host migration complete, whole-scene guard unconditional; native and presentation proof pending",
   "records": [
     {
       "lesson_id": "c4-view-retirement-index",
@@ -76,7 +76,7 @@
         "test_reverse_normal_and_floor_are_not_d1_specific",
         "test_whole_scene_missing_host_is_unconditional"
       ],
-      "closure": "OPEN: 300 whole-scene inventory components remain unbound after approved b/c and ceiling package d; package e deferred."
+      "closure": "Final Linux candidate has zero missing hosts; actual frozen missing sites still fire. Native/presentation proof pending."
     },
     {
       "lesson_id": "c4-bc-body-and-wall-edge",
@@ -112,7 +112,7 @@
         "test_real_clearance_failures_retained_and_movement_is_measured",
         "test_full_side_clearance_blocks_partial_slide_and_generalises"
       ],
-      "closure": "Wet floor/drain intent restored by finished-face construction; family slide infeasible, five full-zone findings retained; drain is construction requirement."
+      "closure": "Final candidate retains exactly three family-bath access failures; wet floor/drain restored; native/presentation proof pending."
     },
     {
       "lesson_id": "c4-sloping-ceiling-coordinate",
@@ -195,7 +195,7 @@
         "test_external_grilles_choose_outdoor_side_and_reject_interior_only",
         "test_approval_drift_refuses_and_unapproved_geometry_is_retained"
       ],
-      "closure": "Wrong host construction corrected; revised proposals need approval; shared-axis wall construction and headboard support remain unresolved."
+      "closure": "All fourteen revised exterior rows approved and applied; finite exterior mounting passes. South shared-axis wall construction remains unverified; native/presentation proof pending."
     },
     {
       "lesson_id": "c4-approved-appliance-child-penetration",
@@ -208,7 +208,7 @@
       "proofs": [
         "test_joinery_recess_lights_and_support_siblings_fail_closed"
       ],
-      "closure": "OPEN: approved coffee poses put both retained rigid drip trays 12 mm into the worktop; revised appliance pose requires lead review."
+      "closure": "Final lead authority seats complete rigid coffee assemblies 12 mm higher; candidate penetrations clear while frozen real failures remain guarded. Native/presentation proof pending."
     },
     {
       "lesson_id": "c4-geometry-container-comparison",
@@ -241,6 +241,37 @@
         "test_small_automatic_parent_move_carries_real_attached_children"
       ],
       "closure": "Final lead-authorized candidate correction; native/presentation/lighting proof pending."
+    },
+    {
+      "lesson_id": "c4-linux-library-paths",
+      "control_tier": [
+        1
+      ],
+      "construction": "src/archpipe/luminaires/library.py::rebuild_index; _portable_row",
+      "check": "src/archpipe/luminaires/library.py::get; search",
+      "stage": "library import and portable scene build",
+      "proof_file": "tests/test_luminaire_library.py",
+      "proofs": [
+        "test_transferred_windows_index_paths_export_and_install_without_reindexing"
+      ],
+      "closure": "Portable persisted paths and legacy read normalization; temporary export/install proof preserves index bytes."
+    },
+    {
+      "lesson_id": "c4-plant-support-legacy-datum",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/support_mounting.py::plant_support_face; bind_plant_support; migrate",
+      "check": "src/archpipe/concept/support_mounting.py::plant_support_findings; villa_render.indoor_plant_violations; mounting.scene_findings",
+      "stage": "post-migration scene construction and scripts/verify.py",
+      "proof_file": "tests/test_render_standard.py",
+      "proofs": [
+        "test_c4_frozen_plant_support_datums",
+        "test_c4_plant_live_support_mutations_and_translated_siblings",
+        "test_indoor_plants_have_integrated_pots_floor_support_and_clear_tv"
+      ],
+      "closure": "Measured support records and unchanged candidate geometry; native/presentation review remains pending."
     }
   ]
 }

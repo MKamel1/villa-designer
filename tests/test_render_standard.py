@@ -30,6 +30,78 @@ ALLOWED_MATERIALS = {
 
 
 class RenderStandard(unittest.TestCase):
+    def test_c4_frozen_plant_support_datums(self):
+        from copy import deepcopy
+        import json
+        from pathlib import Path
+        from archpipe.concept.support_mounting import bind_plant_support, plant_support_findings
+        frozen = json.loads((Path(__file__).parent / 'fixtures/c4-plant-support-before.json').read_text())
+        # The real migrated table plant carried the table's floor contract.
+        self.assertEqual(plant_support_findings(frozen),
+                         ['living-plant-table: stale or MISSING recorded plant support datum'])
+        clean = deepcopy(frozen)
+        for prop in clean['props']:
+            bind_plant_support(clean, prop)
+        self.assertEqual(VR.indoor_plant_violations(clean['props'], R.design('D1'), clean), [])
+        self.assertEqual([p['position'] for p in clean['props']], [p['position'] for p in frozen['props']])
+        # Frozen clean geometry fires against every old room/table datum,
+        # and a migrated prop cannot silently fall back to authored heights.
+        for prop in clean['props']:
+            sunk = deepcopy(prop)
+            sunk['position'][2] -= .002
+            self.assertTrue(any('base' in f for f in plant_support_findings(clean, [sunk])))
+        self.assertTrue(all('scene geometry required' in f for f in
+                            VR.indoor_plant_violations(clean['props'], R.design('D1'))))
+
+    def test_c4_plant_live_support_mutations_and_translated_siblings(self):
+        from copy import deepcopy
+        import json
+        from pathlib import Path
+        from archpipe.concept.support_mounting import bind_plant_support, plant_support_findings
+        from archpipe.concept.mounting import scene_findings
+        frozen = json.loads((Path(__file__).parent / 'fixtures/c4-plant-support-before.json').read_text())
+        for prop in frozen['props']:
+            bind_plant_support(frozen, prop)
+        self.assertEqual(plant_support_findings(frozen), [])
+        for prop in frozen['props']:
+            source_id = frozen['mounting_hosts'][prop['mounting']['host_id']]['source_mesh']
+            for mutation in ('moved', 'removed', 'record'):
+                mutant = deepcopy(frozen)
+                if mutation == 'removed':
+                    mutant['meshes'] = [m for m in mutant['meshes'] if m['id'] != source_id]
+                elif mutation == 'moved':
+                    source = next(m for m in mutant['meshes'] if m['id'] == source_id)
+                    for face in source['faces']:
+                        for point in face:
+                            point[2] += .002
+                else:
+                    target = next(p for p in mutant['props'] if p['id'] == prop['id'])
+                    target['mounting']['finished_face'][2] -= .002
+                self.assertTrue(any(prop['id'] in f and 'support' in f for f in plant_support_findings(mutant)),
+                                (prop['id'], mutation))
+                self.assertTrue(any(prop['id'] in f and 'support' in f for f in scene_findings(mutant)))
+        # No D1 identifier, room, coordinates or nominal floor level is needed.
+        translated = deepcopy(frozen)
+        translated['meshes'] = [m for m in translated['meshes'] if not m.get('finished_host_id')]
+        translated['mounting_hosts'] = {}
+        for mesh in translated['meshes']:
+            mesh['id'] = mesh['id'].replace('floor-', 'floor-other-', 1) if mesh['id'].startswith('floor-') else mesh['id'].replace('furn-', 'furn-other-', 1)
+            mesh['room'] = 'other-' + mesh['room']
+            for face in mesh['faces']:
+                for point in face:
+                    for axis, travel in enumerate((7, -4, 8)):
+                        point[axis] += travel
+        for prop in translated['props']:
+            prop['id'] = 'other-' + prop['id']
+            prop['room'] = 'other-' + prop['room']
+            if prop['support_id'] != 'finished-floor':
+                prop['support_id'] = 'other-' + prop['support_id']
+            prop['position'] = [value + travel for value, travel in zip(prop['position'], (7, -4, 8))]
+            bind_plant_support(translated, prop)
+        self.assertEqual(plant_support_findings(translated), [])
+        translated['props'][0]['position'][2] += .002
+        self.assertTrue(any('base' in f for f in plant_support_findings(translated)))
+
     def test_c3_chunk_b_visible_parts_and_removed_frame(self):
         from archpipe.concept.physical_part import Part
         by_id = {m["id"]: m for m in SCENE["meshes"]}
@@ -117,19 +189,19 @@ class RenderStandard(unittest.TestCase):
         from copy import deepcopy
         lay = R.design("D1")
         clean = [p for p in SCENE["props"] if p.get("indoor_plant")]
-        self.assertEqual(VR.indoor_plant_violations(clean, lay), [])
+        self.assertEqual(VR.indoor_plant_violations(clean, lay, SCENE), [])
         # Frozen real failed placement: the Pachira's manifest width is 6.869 m at scale 1.
         old = deepcopy(next(p for p in clean if p["id"] == "lounge-plant"))
         old.update(asset="pachira_aquatica_01", position=[4.3, -24.35, -3.0], scale=1.0)
         old.pop("container")
-        self.assertTrue(any("pot" in x for x in VR.indoor_plant_violations([old], lay)))
-        self.assertTrue(any("corridor" in x for x in VR.indoor_plant_violations([old], lay)))
+        self.assertTrue(any("pot" in x for x in VR.indoor_plant_violations([old], lay, SCENE)))
+        self.assertTrue(any("corridor" in x for x in VR.indoor_plant_violations([old], lay, SCENE)))
         sunk = deepcopy(next(p for p in clean if p["id"] == "bedroom-plant"))
         sunk["position"][2] -= 0.15
-        self.assertTrue(any("support" in x for x in VR.indoor_plant_violations([sunk], lay)))
+        self.assertTrue(any("support" in x for x in VR.indoor_plant_violations([sunk], lay, SCENE)))
         blocked = deepcopy(next(p for p in clean if p["id"] == "lounge-plant"))
         blocked["position"][:2] = [6.2, -25.4]
-        self.assertTrue(any("corridor" in x for x in VR.indoor_plant_violations([blocked], lay)))
+        self.assertTrue(any("corridor" in x for x in VR.indoor_plant_violations([blocked], lay, SCENE)))
 
     def test_wp4b_fixture_and_dressing_parts(self):
         ids = {m["id"] for m in SCENE["meshes"]}

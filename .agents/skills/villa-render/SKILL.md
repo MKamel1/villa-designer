@@ -66,6 +66,11 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      (`render_support.unsupported`: exact contact, keyhole-safe
      triangulation, only the building grounds a group), **openings
      passable** (`render_support.blocked_openings`), appliances and fittings.
+   - Indoor plants bind to the actual upward face of their named finished
+     floor or furniture support after mounting migration. Check exported
+     positions with `indoor_plant_violations(props, layout, scene)`; authored
+     room levels and furniture heights are only pre-migration inputs.
+     `scene_findings` also checks live support geometry and recorded datums.
    - `tests/test_render_views.py`: facing, looming, occlusion, height,
      door-band rules, each proven on the draft that broke it.
    - `scripts/villa_render_views.py`: whole subject in frame, clearances,

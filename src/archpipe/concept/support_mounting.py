@@ -13,6 +13,69 @@ from .mounting import Host, Finish, MountItem, binding, SITE_KINDS, _on_polygon
 from .fitting_mounting import points, bounds, normal, package, measured_host
 
 
+def plant_support_face(scene, prop):
+    """Measure the highest upward face at the plant's named support point.
+
+    The support identifier names either the room's finished floor or an
+    authored furniture assembly. Coordinates and elevations are metres.
+    Diagnostic host copies are excluded: the physical source is authoritative.
+    """
+    support = prop.get('support_id')
+    if support == 'finished-floor':
+        sources = [m for m in scene['meshes'] if m['id'] == 'floor-' + prop['room']]
+    elif support:
+        sources = [m for m in scene['meshes'] if m['id'].startswith('furn-' + support + '-')
+                   and m.get('room') == prop.get('room')]
+    else:
+        sources = []
+    x, y, _ = prop['position']
+    choices = [(source, face) for source in sources for face in source['faces']
+               if normal(face)[2] > .999999 and
+               _on_polygon((x, y, face[0][2]), face, (0, 0, 1))]
+    if not choices:
+        raise ValueError(prop['id'] + ': MISSING finite named plant support')
+    return max(choices, key=lambda pair: pair[1][0][2])
+
+
+def bind_plant_support(scene, prop):
+    """Record the actual contact face, never the supporting assembly's root."""
+    source, face = plant_support_face(scene, prop)
+    floor = prop['support_id'] == 'finished-floor'
+    host = datum(scene, source, face, (0, 0, 1), 'support-prop-' + prop['id'],
+                 'floor' if floor else 'joinery-panel')
+    prop['mounting'] = binding(MountItem(prop['id']), host, 0,
+                               'floor-standing' if floor else 'surface-mounted')
+
+
+def plant_support_findings(scene, placed=None):
+    """Compare plant bases and recorded datums independently with live faces.
+
+    The existing 1 mm model comparison tolerance is retained. Missing sources,
+    contracts and host records fail closed, including removed or moved supports.
+    """
+    failures = []
+    for prop in scene.get('props', []) if placed is None else placed:
+        if not prop.get('indoor_plant'):
+            continue
+        try:
+            source, face = plant_support_face(scene, prop)
+        except ValueError as exc:
+            failures.append(str(exc))
+            continue
+        level = face[0][2]
+        if abs(prop['position'][2] - level) > .001:
+            failures.append(prop['id'] + ' base is below or above its finished support')
+        contract = prop.get('mounting', {})
+        host = scene.get('mounting_hosts', {}).get(contract.get('host_id'), {})
+        recorded = contract.get('finished_face', [])
+        point = host.get('structural_point', [])
+        if (host.get('source_mesh') != source['id'] or host.get('normal') not in ((0, 0, 1), [0, 0, 1])
+                or len(recorded) != 3 or len(point) != 3 or
+                abs(recorded[2] - level) > .001 or abs(point[2] - level) > .001):
+            failures.append(prop['id'] + ': stale or MISSING recorded plant support datum')
+    return failures
+
+
 def datum(scene, source, face, outward, identifier, kind):
     host = Host(identifier, kind, tuple(face[0]), tuple(outward),
                 Finish('modeled finished '+source['material']+'; build-up UNVERIFIED; level retained', 0))
@@ -300,6 +363,19 @@ def migrate(scene, lay):
     for prop in scene.get('props',[]):
         p=prop.get('position')
         if p is None or prop['id'].startswith('landscape-'): continue
+        if prop.get('indoor_plant'):
+            # Explicit plant supports replace containment-based assembly
+            # inference, which copied a table's floor-bearing child contract.
+            _, face = plant_support_face(scene, prop)
+            delta = [0, 0, face[0][2] - p[2]]
+            if abs(delta[2]) > .005 + 1e-9:
+                raise ValueError(prop['id'] + ': plant support movement exceeds 5 mm; approval required')
+            old = list(p)
+            prop['position'] = [p[i] + delta[i] for i in range(3)]
+            bind_plant_support(scene, prop)
+            scene['support_associated_movements'].append(dict(id=prop['id'], old=old,
+                new=prop['position'], delta=delta))
+            continue
         choices=[]
         for key,members in groups.items():
             rows=[r for r in scene['mounting_movements'][movement_start:] if r['id'] in {m['id'] for m in members}]

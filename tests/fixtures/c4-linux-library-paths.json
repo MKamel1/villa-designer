@@ -1,0 +1,20 @@
+[
+  {
+    "manufacturer": "iguzzini",
+    "sku": "LSEVO-AAK3EW",
+    "ldt": "iguzzini\\LSEVO-AAK3EW\\LSEVO-AAK3EW.ldt",
+    "folder": "iguzzini\\LSEVO-AAK3EW"
+  },
+  {
+    "manufacturer": "iguzzini",
+    "sku": "LSEVO-AAIIA6",
+    "ldt": "iguzzini\\LSEVO-AAIIA6\\LSEVO-AAIIA6.ldt",
+    "folder": "iguzzini\\LSEVO-AAIIA6"
+  },
+  {
+    "manufacturer": "iguzzini",
+    "sku": "LSEVO-AAHENX",
+    "ldt": "iguzzini\\LSEVO-AAHENX\\LSEVO-AAHENX.ldt",
+    "folder": "iguzzini\\LSEVO-AAHENX"
+  }
+]

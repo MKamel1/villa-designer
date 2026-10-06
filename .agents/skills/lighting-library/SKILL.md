@@ -60,3 +60,7 @@ product and the design's position and emitter height:
   it needs; don't fail it.
 - Tests write to temporary libraries and IES folders. The product IES
   folder is deployed to the render worker, and `verify.py` rejects strays.
+- Transferred library indexes may contain Windows separators. Read through
+  `library.get/search`, which normalize relative paths, and write index paths
+  with forward slashes. Do not rebuild a shared index to change separators;
+  prove export and family resolution with temporary files on the receiving host.
