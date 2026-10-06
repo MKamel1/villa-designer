@@ -92,9 +92,14 @@ class ChosenViews(unittest.TestCase):
         orphans = [(v["id"], s) for v in scene["views"] for s in v["subjects"] if not matched(s)]
         self.assertEqual(orphans, [])
         self.assertFalse(matched("terrace lounge set"), "the stale v07 subject must stay unmatched (the real defect)")
-        additions = scene["views"][24:]
+        # Retiring v14 shifted v25 to position 23. View identity must survive
+        # retirement/reordering; selecting a list tail silently lost v25.
+        expected_prefixes = ["v%02d" % n for n in range(25, 35)]
+        by_prefix = {v["id"].split("-")[0]: v for v in scene["views"]}
+        self.assertTrue(set(expected_prefixes).issubset(by_prefix))
+        additions = [by_prefix[prefix] for prefix in expected_prefixes]
         self.assertEqual([v["id"].split("-")[0] for v in additions],
-                         ["v%02d" % n for n in range(25, 35)])
+                         expected_prefixes)
         self.assertTrue(all(v["subjects"] for v in additions))
         self.assertTrue(all(v["camera"]["position"][2] == v["camera"]["target"][2]
                             for v in additions), "the added cameras must stay level")

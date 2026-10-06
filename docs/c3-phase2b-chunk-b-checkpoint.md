@@ -24,7 +24,7 @@ Each added physical kind declares a Part kind and is checked for a closed outwar
 
 ## Lead rendering list
 
-First review `v16-guest-wc`, `v17-dirty-kitchen`, `v14-dressing`, `v29-under-stair-store`, `v30-under-ramp-store`, `v19-garden-facade`, `v25-top-garden-gate`, `v26-top-garden-north`, `v27-north-garden-above` and `v28-north-garden-below`. Include `v31-dressing-hers` and `v32-dressing-his` for both detailed rail sets, and `v12-ensuite` to retain the Chunk A brass fitting check. Review isolated neutral-light close-ups of the valve, drain, rail/bracket, box/case, planter and trellis before integration.
+First review `v16-guest-wc`, `v17-dirty-kitchen`, `v31-dressing-hers`, `v32-dressing-his`, `v29-under-stair-store`, `v30-under-ramp-store`, `v19-garden-facade`, `v25-top-garden-gate`, `v26-top-garden-north`, `v27-north-garden-above` and `v28-north-garden-below`, plus `v12-ensuite` to retain the Chunk A brass fitting check. C4 retires the duplicate v14 camera; the two retained dressing views cover both detailed rail sets. Review isolated neutral-light close-ups of the valve, drain, rail/bracket, box/case, planter and trellis before integration.
 
 Lead acceptance remains open for visible duct concealment, valve and drain legibility, case scale and handle direction, absence of blocky pot bases and a solid trellis wall, and the removed empty frame.
 

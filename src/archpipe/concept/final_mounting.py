@@ -1,0 +1,75 @@
+"""Final lead-authorized C4 candidate corrections; no native integration."""
+from copy import deepcopy
+import json
+from pathlib import Path
+from .fitting_mounting import bounds, points
+from .attached_assembly import translate
+from .mounting import Host, Finish, MountItem, binding
+
+
+def trim_panel(panel, host, centre, margin):
+    """Fit a width symmetrically about the bed if that centre is on its wall."""
+    old = bounds(panel)
+    # Only a source patch covering the full panel height can carry it.
+    spans = [bounds(dict(faces=[face])) for face in host['source_faces']]
+    spans = [b for b in spans if b[2] <= old[2]+1e-8 and b[5] >= old[5]-1e-8]
+    span = min(spans, key=lambda b: abs((b[0]+b[3])/2-centre))
+    left, right = span[0]+margin, span[3]-margin
+    if left < centre < right:
+        half = min(centre-left, right-centre, (old[3]-old[0])/2)
+        low, high = centre-half, centre+half
+        basis = 'Symmetric about unchanged bed centreline'
+    else:
+        low, high = max(left, old[0]), min(right, old[3])
+        basis = 'Trim from overrunning side; centre outside finite support'
+    if high <= low:
+        raise ValueError('Panel has no finite wall span after margin')
+    for face in panel['faces']:
+        for point in face:
+            point[0] = low+(point[0]-old[0])*(high-low)/(old[3]-old[0])
+    return dict(old_width_mm=(old[3]-old[0])*1000, new_width_mm=(high-low)*1000,
+                old_bounds=old, new_bounds=bounds(panel), wall_span=span,
+                margin_mm=margin*1000, centre_x_m=centre, basis=basis)
+
+
+def apply(scene, lay):
+    authority = json.loads((Path(__file__).resolve().parents[3]/'knowledge/c4-final-approvals.json').read_text())
+    meshes = {m['id']:m for m in scene['meshes']}
+    rows = {r['id']:r for r in scene['mounting_movements']}
+    # Validate the whole approval package before applying any row.
+    for approved in authority['rows']:
+        row = rows[approved['id']]
+        if row['host_id'] != approved['host_id'] or any(abs(a-b)>1e-8
+                for key in ('old','new') for a,b in zip(row[key],approved[key])):
+            raise ValueError(approved['id']+': final approved schedule drift')
+    for approved in authority['rows']:
+        row = rows[approved['id']]
+        meshes[row['id']]['faces'] = deepcopy(row['proposed_faces'])
+        meshes[row['id']]['mounting'].pop('approval',None)
+        row['approval'] = 'APPROVED final lead 2026-10-05; APPLIED'
+    from . import villa_furnish as F
+    centre = next(it['cx'] for it in F.layout(lay) if it['id']=='pb-bed')
+    panel = meshes['detail-headboard-slats']
+    trimmed = trim_panel(panel, scene['mounting_hosts'][panel['mounting']['host_id']],
+                         centre, authority['headboard_margin_m'])
+    seated = []
+    for root in list(meshes.values()):
+        if not root['id'].startswith('appliance-coffee-') or not root['id'].endswith('-body'):
+            continue
+        members = [root]+[m for m in meshes.values() if m.get('associated_mounting_root')==root['id']]
+        record = scene['mounting_hosts'][root['mounting']['host_id']]
+        host = Host(record['id'],record['kind'],tuple(record['structural_point']),
+                    tuple(record['normal']),Finish(**record['finish']))
+        normal = host.normal
+        fixing = min(sum(p[i]*normal[i] for i in range(3)) for m in members for p in points(m))
+        target = sum(host.structural_point[i]*normal[i] for i in range(3))+host.finish.thickness_m
+        delta = [(target-fixing)*v for v in normal]
+        carried = translate(scene,root['id'],delta)
+        for member in members:
+            projection = min(sum(p[i]*normal[i] for i in range(3)) for p in points(member))-target
+            member['mounting'] = dict(binding(MountItem(member['id']),host,max(0,projection),
+                'surface-mounted' if projection < 1e-9 else 'wall-hung'),
+                assembly_root=root['id'],projection_basis='Generated part relative to lowest complete assembly fixing plane')
+        seated.append(dict(root_id=root['id'],delta=delta,members=carried,
+                           fixing_basis='Lowest complete rigid assembly part; actual modeled worktop'))
+    scene['c4_final'] = dict(applied=[r['id'] for r in authority['rows']],headboard=trimmed,coffee=seated)

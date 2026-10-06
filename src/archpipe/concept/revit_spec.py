@@ -322,6 +322,8 @@ def _build(lay):
     st = _stair_model(lay)
     spec["stair"] = [p["box"] for p in st["parts"] if "headroom" not in p["what"]]
     spec["stair_name"] = st["name"]
+    if "wall_datum" in st:
+        spec["stair_wall_datum"] = dict(st["wall_datum"], structural_thickness_m=EXT_T)
     pk2 = lay.get("parking2")
     if pk2:
         _parking(lay, spec, pk2)
@@ -394,20 +396,30 @@ def _d1_details(lay, spec):
              rail="none", nosing_profile=nosings, height_above_nosing=0.9, thickness_m=None,
              basis="client glass decision; 0.9 m height carried from ASSUMED D1 render, structural size pending"),
         dict(id="stair-wall-handrail", level="B", side="wall", stair="party-wall flight",
-             material="wood", support="wall", nosing_profile=[[x, -28.671, z] for x, _, z in nosings],
+             material="wood", support="wall",
+             nosing_profile=[[x, spec["stair_wall_datum"]["outer_face_mm"] / 1000, z]
+                             for x, _, z in nosings],
              height_above_nosing=0.9,
              basis="client wood handrail decision; 0.9 m height carried from ASSUMED D1 render")])
     bath = F.footprint(next(i for i in F.layout(lay, products=False) if i["id"] == "pe-bath"))
     shower = next(i for i in F.layout(lay, products=False) if i["id"] == "gwc-shower")
     wet = F.footprint(shower)
+    from .mounting import finish_from_record
+    wet_finish = finish_from_record("marble-wall-thinset").thickness_m
+    spec["construction_requirements"] = [dict(id="gwc-drain-installation", status="requirement",
+        requirement="manufacturer installation data required", value_mm=None,
+        scope="Drain installation, service access, waterproofing and falls; no numeric pass claimed")]
+    spec["wet_zones"] = [dict(id="gwc-shower", room="guest-wc", rect=list(wet),
+        finished_depth_m=.8, status="authored design intent", boundary_translation_m=-wet_finish)]
     spec["bath_fittings"].extend([
         dict(id="gwc-rain-head", level="B", room="guest-wc", kind="ceiling-rain-head",
-             x=(wet[0] + wet[2]) / 2, y=(wet[1] + wet[3]) / 2, z=2.3, over="gwc-shower"),
+             x=(wet[0] + wet[2]) / 2 + wet_finish, y=(wet[1] + wet[3]) / 2, z=2.3, over="gwc-shower"),
         dict(id="gwc-hand-shower", level="B", room="guest-wc", kind="hand-shower",
-             x=wet[2] - 0.03, y=(wet[1] + wet[3]) / 2, z=1.1, over="gwc-shower"),
+             x=wet[2] + wet_finish - 0.03, y=(wet[1] + wet[3]) / 2, z=1.1, over="gwc-shower"),
         dict(id="gwc-linear-drain", level="B", room="guest-wc", kind="linear-drain",
              x0=wet[2] - 0.07, x1=wet[2], y0=wet[1] + 0.06, y1=wet[3] - 0.06,
              z=0.0, falls="to linear drain", upstand_m=0.0, enclosure="none",
+             installation_status="requirement", installation_requirement="manufacturer installation data required",
              basis="ASSUMED 70 mm tile-in grate at wet-zone edge; floor falls, waterproofing/detail pending"),
         dict(id="pe-rain-head", level="GF", room="parents-ensuite", kind="ceiling-rain-head",
              x=(bath[0] + bath[2]) / 2, y=(bath[1] + bath[3]) / 2, z=2.3, over="pe-bath"),

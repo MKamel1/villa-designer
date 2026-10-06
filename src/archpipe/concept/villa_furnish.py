@@ -294,7 +294,10 @@ def _layout(lay=None, products=True):
     basin = against("gwc-basin", W, "x0", -22.9, "washbasin", h=0.85, why="basin on the side wall")
     override(basin, "cy", -23.15, "client 2026-09-29: move basin south outside open shower splash zone")
     add(basin, "guest-wc")
+    from .mounting import finish_from_record
+    wet_wall_finish = finish_from_record("marble-wall-thinset").thickness_m
     add(against("gwc-shower", W, "x1", -22.7, "shower_walkin", w=1.219, d=0.8, h=0.0,
+                gap=wet_wall_finish,
                 wet_zone=True, enclosure="none", drain="linear", falls="to linear drain",
                 why="open level-access east-wall wet zone; no enclosure or tray upstand; "
                     "ASSUMED 800 mm depth and 1219 mm length, card nkba-shower-clear-floor-762"), "guest-wc")
@@ -965,7 +968,7 @@ def _outside(rects, margin):
 TRACE = None   # set to {} to keep each cluster's raster
 
 
-def route_problems(lay, sp, items, level, cell=0.02):
+def route_problems(lay, sp, items, level, cell=0.02, room_ids=None):
     """In each open cluster of rooms, a 914 mm body (card mitton-path-of-travel-min) must get from every door of
     the cluster to every other door and to every piece's working side. Furniture over 0.3 m and the columns are
     obstacles; walls are the cluster's own edges. Returns [(problem, measured)]."""
@@ -977,6 +980,8 @@ def route_problems(lay, sp, items, level, cell=0.02):
             continue
         cl = _cluster(lay, rid)
         done |= cl
+        if room_ids is not None and not cl.intersection(room_ids):
+            continue
         rects = [lay["rooms"][c]["rect"] for c in cl]
         x0 = min(q[0] for q in rects); y0 = min(q[1] for q in rects)
         x1 = max(q[2] for q in rects); y1 = max(q[3] for q in rects)
@@ -1063,6 +1068,8 @@ def route_problems(lay, sp, items, level, cell=0.02):
         for it in items:
             if it["room"] not in cl:
                 continue
+            if it.get("mounting_obstacle"):
+                continue  # Measured fitting/wall obstruction, not a new route destination.
             t = cat.get(it["type"])
             # a side is reached along its middle, not at a corner (a body grazing a bed's foot corner is not at
             # the bedside): trim a quarter of the side, at most 0.3 m, off each end

@@ -66,7 +66,10 @@ class RenderStandard(unittest.TestCase):
             grille = by_id[f"detail-vent-{room}-grille"]
             facade_y = max(w[3] for w in F._walls(RS.build(R.design("D1")), fitting["level"])
                            if w[0] <= fitting["fan"][0] <= w[2] and w[3] <= fitting["duct_route"][-1][1])
-            self.assertAlmostEqual(max(p[1] for face in grille["faces"] for p in face), facade_y)
+            # The approved exterior grille's rear fixing face sits on the
+            # facade; its 12 mm body projects outdoors, with no burial.
+            self.assertAlmostEqual(min(p[1] for face in grille["faces"] for p in face), facade_y)
+            self.assertAlmostEqual(max(p[1] for face in grille["faces"] for p in face), facade_y+.012)
 
     def test_c3_bath_and_grille_parts_are_closed_and_detailed(self):
         from archpipe.concept.physical_part import Part

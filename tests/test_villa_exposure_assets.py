@@ -23,9 +23,10 @@ def load_function(name):
 
 class ExposureCohortTest(unittest.TestCase):
     def test_lock_is_independent_of_selected_views(self):
-        # Frozen shape of the failed batch: three normal interiors, ten bright/dark peers.
+        # Retained interior cohort and daytime peers after duplicate-camera
+        # retirement: subset selection must never change the state's lock.
         views = ([{"id": n, "exposure": "evening"} for n in
-                  ("v12-ensuite", "v16-guest-wc", "v14-dressing", "v31-dressing-hers")]
+                  ("v12-ensuite", "v16-guest-wc", "v31-dressing-hers", "v32-dressing-his")]
                  + [{"id": n, "exposure": "day"} for n in
                     ("v17-dirty-kitchen", "v25-top-garden-gate", "v26-top-garden-north")])
         readings = {v["id"]: i for i, v in enumerate(views)}

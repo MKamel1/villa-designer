@@ -32,6 +32,9 @@ from . import villa_lighting as VL
 from . import villa_r11 as R
 from .authored_values import fill_defaults, override
 from .physical_part import PartMeshList
+from .mounting import MountItem, binding, check_mesh, Host, Finish, stacked_finish_bridge
+from . import stair_mounting as SM
+from dataclasses import asdict
 
 LZ = {"B": -3.0, "GF": 0.0}
 ROOT = Path(__file__).resolve().parents[3]
@@ -454,6 +457,10 @@ def build(lay=None, views=None, *, collect_part_failures=True):
 def _build(lay=None, views=None, *, collect_part_failures=True):
     lay = lay or R.design("D1")
     sp = RS.build(lay)
+    stair_host = SM.wall_host(sp)
+    stair_finished_y = SM.finished_y(stair_host)
+    return_host, return_end = SM.return_host(sp)
+    stair_hosts = {h.id: h for h in (stair_host, return_host)}
     # C3 phase 1: collect all legacy failures for the lead's checkpoint.
     # Strict construction is available with collect_part_failures=False.
     meshes, notes = PartMeshList(collect=collect_part_failures), []
@@ -477,6 +484,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     shell = VD.scene(lay)
     environment_sources = _environment_face_sources()
     stair_boxes = [[v / 1000.0 for v in b] for b in sp["stair"]]
+    flight_boxes = [b for b in stair_boxes if b[5] - b[2] < 0.3]
+    stair_x0, stair_x1 = min(b[0] for b in flight_boxes), max(b[3] for b in flight_boxes)
     buckets = {}
     for f in shell.faces:
         pts = [list(p) for p in f.points]
@@ -531,6 +540,27 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             n = _normal(pts)
             room = _room_at(lay, cx + 0.06 * n[0], cy + 0.06 * n[1], cz)
             mat = FINISH[room][1] if room in FINISH else "paint-exterior-grey-green"
+        # Apply the authored plaster layer to the occupied party-wall face.
+        # Structural shell and treads retain their common CAD datum. Keep this
+        # small package separate in the export so its finish is measurable.
+        if (mat == "plaster-warm-white" and _normal(pts)[1] > 0.5 and
+                all(abs(p[1] - return_host.structural_point[1]) < 1e-8 for p in pts) and
+                max(p[0] for p in pts) > stair_x0 and min(p[0] for p in pts) < stair_x1):
+            unchanged, finished = SM.plaster_faces(pts, return_host, stair_x0, stair_x1)
+            if unchanged:
+                buckets.setdefault((mat, room, source), []).extend(unchanged)
+            if finished:
+                buckets.setdefault((mat, room, return_host.id), []).append(finished)
+            continue
+        if (mat == "plaster-warm-white" and _normal(pts)[1] > 0.5 and
+                all(abs(p[1] - stair_host.structural_point[1]) < 1e-8 for p in pts) and
+                max(p[0] for p in pts) > stair_x0 and min(p[0] for p in pts) < stair_x1):
+            unchanged, finished = SM.plaster_faces(pts, stair_host, stair_x0, stair_x1)
+            if unchanged:
+                buckets.setdefault((mat, room, source), []).extend(unchanged)
+            if finished:
+                buckets.setdefault((mat, room, stair_host.id), []).append(finished)
+            continue
         key = (mat, room if mat not in ("render-exterior", "paint-exterior-grey-green", "paving", "travertine", "ceiling-white", "glass-clear")
                else None, source)
         if mat == "glass-clear":
@@ -567,6 +597,15 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             continue
         mesh("shell-%03d-%s" % (k, mat), mat, faces, grp, room=room, label=room or mat,
              source_id=source or "villa-shell", kind="glass-pane" if mat == "glass-clear" else "door-leaf" if mat == "door-oak" else "finish-layer")
+        if source in stair_hosts:
+            meshes[-1]["finished_host_id"] = source
+    party_faces = [f for m in meshes if m.get("finished_host_id") == stair_host.id for f in m["faces"]]
+    lower = [f for f in party_faces if max(p[2] for p in f) < 0]
+    upper = [f for f in party_faces if min(p[2] for p in f) >= 0]
+    bridge = stacked_finish_bridge(stair_host, stair_host, lower, upper, VD.SLAB_T)
+    mesh("finish-stair-stacked-slab-edge", "plaster-warm-white", bridge, "shell", room="stair-b",
+         label="Continuous coplanar stacked-wall plaster across slab edge", kind="finish-layer",
+         finished_host_id=stair_host.id)
     notes.append("ASSUMED exterior finish: our walls, ground-floor perimeter beams, exposed slab/ramp edges and boundary/fence walls use smooth very light grey-green mineral paint, reflectance 0.65. Entrance steps are paved; soffits are painted white. Neighbour and apartment context remains neutral mineral render; all exposed construction faces receive a stated finish.")
     for v in views:
         if v["id"] in hide:
@@ -642,20 +681,39 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
          label="detail: 1.1 m glass guard at the stair opening, 10 mm closed pane (required; not yet in the Revit model)", kind="glass-pane")
     # ASSUMED construction details: open risers remain visible between the steel members.
     treads = sorted(([v / 1000.0 for v in b] for b in sp["stair"] if b[5] - b[2] < 300), key=lambda b: b[0])
-    wall_y = -28.671                         # party-wall face; the tread edge is at -28.421
+    rail_near_y = stair_finished_y + SM.RAIL_CLEARANCE_M
+    rail_far_y = rail_near_y + SM.RAIL_WIDTH_M
     open_y = treads[0][4]
+    # The slab's existing upper surface is the basement stair floor finish.
+    floor_faces = [list(f.points) for f in shell.faces if _normal(f.points)[2] > .5 and
+                   all(abs(p[2] - LZ["B"]) < 1e-8 for p in f.points)]
+    floor_host = Host("stair-basement-floor", "floor", (0, 0, LZ["B"]), (0, 0, 1),
+                      Finish("existing-model-floor-finish; build-up unknown; elevation retained", 0))
+    stair_hosts[floor_host.id] = floor_host
+    mesh("finish-stair-basement-floor-host", "travertine", floor_faces, "shell", room="stair-b",
+         label="Existing basement floor face; no new thickness inferred", kind="finish-layer",
+         finished_host_id=floor_host.id, visibility={"camera": False})
     for n, t in enumerate(treads):
         xa, ya, za, xb, yb, zb = t
+        host = return_host if xa < return_end else stair_host
+        bearing = box_faces(xa, SM.finished_y(host), max(za - .12, LZ["B"]),
+                            min(xb, return_end) if host == return_host else xb, ya + .025, za + .025)
+        if xa < return_end < xb:
+            bearing += box_faces(return_end, stair_finished_y, max(za - .12, LZ["B"]), xb, ya + .025, za + .025)
+        if n == len(treads) - 1:
+            host = floor_host
         mesh("detail-stair-wall-stringer-%02d" % n, "black-metal",
-             box_faces(xa, wall_y, za - 0.12, xb, ya + 0.025, za + 0.025), "fixture", room="stair-b",
-             label="ASSUMED steel wall stringer and tread bearing; add to Revit", kind="stair-stringer")
+             bearing, "fixture", room="stair-b",
+             label="ASSUMED steel wall stringer and tread bearing; add to Revit", kind="stair-stringer",
+             mounting=binding(MountItem("detail-stair-wall-stringer-%02d" % n), host, 0.0, "surface-mounted"))
         x = (xa + xb) / 2
         if n % 4 == 0:
             mesh("detail-stair-wall-rail-bracket-%02d" % n, "black-metal",
-                 box_faces(x - 0.012, wall_y, zb + 0.87, x + 0.012, ya + 0.075, zb + 0.91),
-                 "fixture", room="stair-b", label="ASSUMED wall handrail bracket; add to Revit", kind="rail-bracket")
+                 box_faces(x - 0.012, stair_finished_y, zb + 0.87, x + 0.012, rail_far_y, zb + 0.91),
+                 "fixture", room="stair-b", label="ASSUMED wall handrail bracket; add to Revit", kind="rail-bracket",
+                 mounting=binding(MountItem("detail-stair-wall-rail-bracket-%02d" % n), stair_host, 0.0, "surface-mounted"))
 
-    def sloped_member(mid, y0, y1, offset, depth, label, *, kind, material="black-metal"):
+    def sloped_member(mid, y0, y1, offset, depth, label, *, kind, material="black-metal", mounting=None):
         # A continuous prism follows the tread nosing line; its offset is measured from that line.
         first, last = treads[0], treads[-1]
         x0, x1 = (first[0] + first[3]) / 2, (last[0] + last[3]) / 2
@@ -666,11 +724,15 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         g = [x1, y0, z1]; h = [x0, y0, z0]
         mesh(mid, material, pane_faces([a, b, g, h], [e, f, c, d]), "fixture", room="stair-b",
              label=label, kind=kind)
+        if mounting is not None:
+            meshes[-1]["mounting"] = mounting
 
     sloped_member("detail-stair-open-stringer", open_y - 0.055, open_y - 0.025, -0.06, 0.15,
                   "ASSUMED continuous open-side steel stringer; add to Revit", kind="stair-stringer")
-    sloped_member("detail-stair-wall-plate", wall_y + 0.23, wall_y + 0.26, -0.06, 0.15,
-                  "ASSUMED continuous wall stringer plate behind tread bearings; add to Revit", kind="wall-plate")
+    sloped_member("detail-stair-wall-plate", stair_finished_y + SM.PLATE_CLEARANCE_M,
+                  stair_finished_y + SM.PLATE_CLEARANCE_M + SM.PLATE_WIDTH_M, -0.06, 0.15,
+                  "ASSUMED continuous wall stringer plate behind tread bearings; add to Revit", kind="wall-plate",
+                  mounting=binding(MountItem("detail-stair-wall-plate"), stair_host, SM.PLATE_CLEARANCE_M, "wall-hung"))
     glass_spec = next(b for b in sp["balustrades"] if b["id"] == "stair-open-glass")
     rail_spec = next(b for b in sp["balustrades"] if b["id"] == "stair-wall-handrail")
     profile = glass_spec["nosing_profile"]
@@ -697,11 +759,18 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
              label="ASSUMED visible polished laminated-glass top edge", kind="glass-edge", surface=True, occupied_side=(0,0,1))
     sloped_member("detail-stair-glass-shoe", open_y - 0.065, open_y - 0.025, -0.04, 0.06,
                   "ASSUMED steel base shoe on open stringer", kind="glass-shoe")
-    # on the bracket ends (wall_y + 0.325): the finished plaster beside the flight is at wall_y + 0.20 (-28.471),
-    # and the old offset (+0.06..0.09) buried the rail inside it (round-2 finals, v11)
-    sloped_member("detail-stair-wall-handrail", wall_y + 0.285, wall_y + 0.325, 0.922, 0.044,
+    sloped_member("detail-stair-wall-handrail", rail_near_y, rail_far_y, 0.922, 0.044,
                   "wall-side wood handrail %.2f m above nosings" % rail_spec["height_above_nosing"],
-                  kind="handrail", material="oak")
+                  kind="handrail", material="oak",
+                  mounting=binding(MountItem("detail-stair-wall-handrail"), stair_host, SM.RAIL_CLEARANCE_M, "wall-hung"))
+    # Unconditional validation of this first migrated package. Missing hosts
+    # outside this package are also reported by the whole-scene verify guard.
+    for member in meshes:
+        if member["id"].startswith(("detail-stair-wall-stringer-", "detail-stair-wall-rail-bracket-")) or member["id"] in (
+                "detail-stair-wall-plate", "detail-stair-wall-handrail"):
+            failures = check_mesh(member, stair_hosts)
+            if failures:
+                raise ValueError("; ".join(failures))
     notes.append("Details added for the render: fluted walnut TV wall, oak headboard slats, glass guard at the stair "
                  "opening, cove ceilings.")
     notes.append("ASSUMED stair fixings: steel base shoe on the stringer holds three-tread frameless laminated glass "
@@ -1281,6 +1350,9 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             mesh(mid + "-" + suffix, material, box_faces(*bounds), "fixture", room=item["room"],
                  label="ASSUMED coffee machine " + suffix + "; add to Revit", bevel_m=0.005, kind="glass-pane" if suffix == "water-tank" else "appliance-component")
 
+        from .attached_assembly import bind
+        bind(dict(meshes=meshes), mid+"-body", [mid+"-"+suffix for suffix in ("drip-tray", "spout", "water-tank")])
+
     coffee_machine("appliance-coffee-main", "k-run", 0.775, -0.14)
     coffee_machine("appliance-coffee-dirty", "dk-run", -0.90, 0)
     island = it_all["k-island"]
@@ -1329,6 +1401,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     mesh("appliance-hood-dirty-chimney", "black-metal", box_faces(hx - 0.115, wall_y - 0.16, -0.98,
          hx + 0.115, wall_y, hood_top), "fixture", room="dirty-kitchen",
          label="ASSUMED cooker hood duct to rendered soffit; add to Revit", kind="duct")
+    from .attached_assembly import bind
+    bind(dict(meshes=meshes), "appliance-hood-dirty-canopy", ["appliance-hood-dirty-chimney"])
     for basin_id in ("gwc-basin", "fb-basin", "pe-basin"):
         basin = it_all[basin_id]
         width = min(basin["w"] - 0.04, 0.78)
@@ -1947,6 +2021,7 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                  "GENERIC (named in each caption).")
 
     scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
+             "mounting_hosts": {hid: asdict(host) for hid, host in stair_hosts.items()},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes, "lights": lights,
              "part_failures": meshes.failures,
              "props": props(lay) + land_props, "models": models, "cloth": cloth, "curtains": curtains, "views": views,
@@ -1964,6 +2039,23 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                                "Finishes are ASSUMED from the taste profile (no finishes answers yet).",
                                "Dressing (plants, books, vases, art, pillows) is not design."]}
     _seat_recessed_on_soffit(scene)
+    from .fitting_mounting import migrate
+    migrate(scene, lay, sp, FINISH)
+    from .mounting_resume import apply_approvals, guest_fixes
+    apply_approvals(scene)
+    guest_fixes(scene, sp)
+    from .ceiling_mounting import migrate as migrate_ceiling
+    migrate_ceiling(scene, lay)
+    from .mounting_resume import APPROVALS
+    apply_approvals(scene, APPROVALS.with_name('c4-d-lead-approvals.json'))
+    from .support_mounting import migrate as migrate_support
+    migrate_support(scene, lay)
+    from .exterior_mounting import apply_lead_review
+    apply_lead_review(scene)
+    from .final_mounting import apply as apply_final_mounting
+    apply_final_mounting(scene, lay)
+    from .wc_slides import apply as apply_wc_slides
+    apply_wc_slides(scene, lay)
     return scene
 
 
@@ -2428,8 +2520,6 @@ def VIEWS(lay=None, resolve=True):
     v("v12-ensuite", "Parents' ensuite", "evening", I, I, 24, ["pe-bath", "pe-basin"], room="parents-ensuite",
       dimmers={"ambient": 0.5})
     v("v13-kids-b", "Kids' room B at bedtime", "evening", I, I, 24, ["kb-bed", "kb-desk"], room="kids-b")
-    v("v14-dressing", "Parents' dressing", "evening", I, I, 24, ["pd-hang-1"], room="parents-dressing",
-      dimmers={"ambient": 0.6})
     # client: "Did we render pictures for parent's bathroom, family bathroom, guest bathroom, dirt kitchen"
     # bathrooms are used with their lights on, day or night; stated in the caption like the basement by day
     BATH_DAY = dict(layers=["ambient", "task", "accent"], dimmers={})
@@ -2504,7 +2594,9 @@ def VIEWS(lay=None, resolve=True):
                               "Shelves step below the 1.45 to 2.0 m ramp soffit; labelled boxes, suitcases and "
                               "tool cases are dressing (ASSUMED). The bike bay stays clear at floor level."]
     v("v31-dressing-hers", "Dressing: her section", "evening", I, I, 24,
-      ["pd-hang-1"], room="parents-dressing", final_only=True, dimmers={"ambient": 0.6})
+      ["pd-hang-1"], room="parents-dressing", dimmers={"ambient": 0.6})
+    V[-1]["caption_notes"] = ["Her hanging section; the matching duplicate v14 camera has been retired. "
+                              "His double-height hanging section is shown separately in v32."]
     # The chosen east-end camera filled v32 with an empty shelf and concealed the double-hang rail behind
     # the wardrobe's side panels. Stand in the clear aisle opposite his hanging module and include the
     # adjacent trouser shelves; a level 16 mm frame with upward shift holds both rail levels.

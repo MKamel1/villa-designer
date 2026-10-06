@@ -1,0 +1,246 @@
+{
+  "schema": "mounting-guards/1",
+  "scope": "C4 phase 2; partial construction migration, whole-scene guard unconditional",
+  "records": [
+    {
+      "lesson_id": "c4-view-retirement-index",
+      "control_tier": [
+        1
+      ],
+      "construction": "tests/test_render_views.py identifier selection",
+      "stage": "view regression",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_every_view_subject_matches_scene_content"
+      ],
+      "closure": "Camera retirement retains all intended review subjects; regression rerun recorded in checkpoint"
+    },
+    {
+      "lesson_id": "c4-infinite-host-plane",
+      "control_tier": [
+        2
+      ],
+      "check": "src/archpipe/concept/mounting.py::host_coverage_findings",
+      "stage": "scripts/verify.py",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_frozen_actual_core_return_and_clean_sibling",
+        "test_migrated_plane_contracts_quiet_but_core_coverage_fails"
+      ],
+      "closure": "Nine stair contacts resolved by approved real return, continuous slab-edge finish and floor bearing. Photoreal review remains pending."
+    },
+    {
+      "lesson_id": "l0856-stair-s-wall",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/stair_mounting.py",
+      "check": "src/archpipe/concept/mounting.py::scene_findings",
+      "stage": "scripts/verify.py and migrated stair construction",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_frozen_l0856_not_current_export",
+        "test_migrated_plane_contracts_quiet_but_core_coverage_fails",
+        "test_common_datum_in_d1_d2_d3"
+      ],
+      "closure": "Approved stair movements applied with real return/party/floor hosts; 22 components pass. Photoreal review pending."
+    },
+    {
+      "lesson_id": "l0119-housing-below-ceiling",
+      "control_tier": [
+        2
+      ],
+      "check": "src/archpipe/concept/mounting.py::check_mesh",
+      "stage": "scripts/verify.py",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_frozen_l0119_reports_unknown_void_and_depth",
+        "test_ceiling_unknowns_are_unresolved_and_small_moves_only",
+        "test_lead_ceiling_requirements_and_authority_fail_closed"
+      ],
+      "closure": "80 ceiling roots resolve against sourced 120/123 mm construction requirements; not verified-as-built. Housing/void mutations remain guarded."
+    },
+    {
+      "lesson_id": "c4-finish-hosts-absent",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "knowledge/finish-build-ups.json",
+      "check": "src/archpipe/concept/mounting.py::scene_findings",
+      "stage": "scripts/verify.py",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_missing_host_and_geometry_mutations_fail",
+        "test_reverse_normal_and_floor_are_not_d1_specific",
+        "test_whole_scene_missing_host_is_unconditional"
+      ],
+      "closure": "OPEN: 300 whole-scene inventory components remain unbound after approved b/c and ceiling package d; package e deferred."
+    },
+    {
+      "lesson_id": "c4-bc-body-and-wall-edge",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/fitting_mounting.py",
+      "check": "src/archpipe/concept/mounting.py::scene_findings",
+      "stage": "scripts/verify.py and b/c checkpoint",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_bc_pending_geometry_unchanged_small_moves_applied",
+        "test_bc_frozen_handset_and_wall_edge_are_not_silenced",
+        "test_bounded_movement_threshold_generalises",
+        "test_stacked_hosts_same_finish_merge_offset_and_different_finish_do_not",
+        "test_stair_return_step_and_floor_trim_use_real_datums",
+        "test_hose_construction_generalises_and_rejects_buried_connections"
+      ],
+      "closure": "Approved 58 rows and three guest fixes applied in candidate; frozen failures fire, corrected plane/finite guards clear. Product sconce plate unverified; photoreal/native/lighting proof pending."
+    },
+    {
+      "lesson_id": "c4-approved-move-clearance-recheck",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/mounting_clearances.py::measured_items",
+      "check": "scripts/verify.py::review_mounting_clearances",
+      "stage": "candidate geometry approval checkpoint",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_real_clearance_failures_retained_and_movement_is_measured",
+        "test_full_side_clearance_blocks_partial_slide_and_generalises"
+      ],
+      "closure": "Wet floor/drain intent restored by finished-face construction; family slide infeasible, five full-zone findings retained; drain is construction requirement."
+    },
+    {
+      "lesson_id": "c4-sloping-ceiling-coordinate",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/ceiling_mounting.py::migrate",
+      "check": "src/archpipe/concept/mounting.py::scene_findings",
+      "stage": "ceiling candidate assembly",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_ceiling_unknowns_are_unresolved_and_small_moves_only"
+      ],
+      "closure": "Six frozen cinema movements approved and applied; signed-plane guard quiet. Actual void installation remains construction requirement."
+    },
+    {
+      "lesson_id": "c4-ceiling-host-render-contract",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/ceiling_mounting.py::ceiling_host",
+      "check": "src/archpipe/villa_render_contract.py::validate_scene",
+      "stage": "candidate scene export",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_ceiling_unknowns_are_unresolved_and_small_moves_only"
+      ],
+      "closure": "Constructor labels every diagnostic ceiling mesh; actual missing-label reproduction and batten sibling fail; full candidate quiet."
+    },
+    {
+      "lesson_id": "c4-whole-access-zone-and-distance",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/mounting_clearances.py::wc_side_clearances; villa_furnish.py finished-face wet construction",
+      "check": "src/archpipe/concept/mounting_clearances.py::review",
+      "stage": "scripts/verify.py and candidate checkpoint",
+      "proof_file": "tests/test_mounting_scene.py",
+      "proofs": [
+        "test_real_clearance_failures_retained_and_movement_is_measured",
+        "test_full_side_clearance_blocks_partial_slide_and_generalises"
+      ],
+      "closure": "Continuous necessary constraints rule out both family slide orders; actual floor mesh and Euclidean separations measured; expanded sibling findings retained."
+    },
+    {
+      "lesson_id": "c4-support-chain-contracts",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/support_mounting.py: finite datums, independent roots, bounded assembly corrections",
+      "check": "src/archpipe/concept/mounting.py: child root, finite floor coverage and named support parts",
+      "stage": "candidate construction and scripts/verify.py",
+      "proof_file": "tests/test_support_mounting.py",
+      "proofs": [
+        "test_real_missing_sites_now_bound_and_only_pending_findings",
+        "test_generated_child_cannot_invent_floor_support_and_generalises",
+        "test_wc_slides_full_tables_and_family_geometry_retained",
+        "test_joinery_recess_lights_and_support_siblings_fail_closed",
+        "test_actual_boundary_mismatch_stays_pending_and_full_span_edges_generalise"
+      ],
+      "closure": "Host declarations complete; pending geometry and construction installation requirements remain open. No presentation/native acceptance."
+    },
+    {
+      "lesson_id": "c4-boundary-and-exterior-side",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/exterior_mounting.py: finite yard polygon hosts, bounded convex full-envelope selection, exterior room adjacency, frozen authority",
+      "check": "src/archpipe/concept/mounting.py::scene_findings",
+      "stage": "candidate construction and scripts/verify.py",
+      "proof_file": "tests/test_exterior_mounting.py",
+      "proofs": [
+        "test_real_south_remote_rejected_boundary_resolves_and_translates",
+        "test_full_footprint_required_not_anchor_or_infinite_extension",
+        "test_external_grilles_choose_outdoor_side_and_reject_interior_only",
+        "test_approval_drift_refuses_and_unapproved_geometry_is_retained"
+      ],
+      "closure": "Wrong host construction corrected; revised proposals need approval; shared-axis wall construction and headboard support remain unresolved."
+    },
+    {
+      "lesson_id": "c4-approved-appliance-child-penetration",
+      "control_tier": [
+        2
+      ],
+      "check": "src/archpipe/concept/mounting.py::scene_findings associated assembly body penetration",
+      "stage": "approved candidate construction and scripts/verify.py",
+      "proof_file": "tests/test_support_mounting.py",
+      "proofs": [
+        "test_joinery_recess_lights_and_support_siblings_fail_closed"
+      ],
+      "closure": "OPEN: approved coffee poses put both retained rigid drip trays 12 mm into the worktop; revised appliance pose requires lead review."
+    },
+    {
+      "lesson_id": "c4-geometry-container-comparison",
+      "control_tier": [
+        1
+      ],
+      "construction": "scripts/checkpoint_mounting_e.py::geometry_diff",
+      "stage": "checkpoint geometry comparison",
+      "proof_file": "tests/test_exterior_mounting.py",
+      "proofs": [
+        "test_geometry_diff_compares_coordinates_not_container_types"
+      ],
+      "closure": "Coordinate comparison ignores tuple/list storage differences and retains real movements."
+    },
+    {
+      "lesson_id": "c4-final-rigid-assembly-and-panel-span",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/attached_assembly.py; src/archpipe/concept/final_mounting.py",
+      "check": "src/archpipe/concept/mounting.py::scene_findings",
+      "stage": "candidate construction and scripts/verify.py",
+      "proof_file": "tests/test_final_mounting.py",
+      "proofs": [
+        "test_real_final_candidate_only_family_clearances",
+        "test_real_split_move_fires_rigid_move_quiet_and_renamed_hood_sibling",
+        "test_frozen_penetrations_and_wall_edge_fire_trim_generalises",
+        "test_final_approval_drift_refuses_before_any_application",
+        "test_small_automatic_parent_move_carries_real_attached_children"
+      ],
+      "closure": "Final lead-authorized candidate correction; native/presentation/lighting proof pending."
+    }
+  ]
+}

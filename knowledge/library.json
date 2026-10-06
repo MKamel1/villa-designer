@@ -3426,9 +3426,15 @@
       "original_page_checked": true,
       "conditions": "UK AD M M4(2) accessible and adaptable dwellings; applied because the villa brief records ageing in place (spec/villa-brief.yaml).",
       "exceptions": "Zones may overlap except where noted (Diagram 2.5 note 2).",
-      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked).",
+      "verification": "Read on the held original page 2026-09-25 (value, unit and conditions checked). Side dimensions and permitted washbasin encroachment re-read from held original Diagram 2.5 printed p.20 on 2026-10-05.",
       "applies_when": {},
-      "regression_test": "tests/test_evidence_values.py"
+      "regression_test": "tests/test_evidence_values.py",
+      "verified_dimensions_mm": {
+        "front_depth": 1100,
+        "narrow_side_from_centreline": 350,
+        "wide_side_from_centreline": 1000,
+        "rear_wall_washbasin_encroachment_max": 300
+      }
     },
     {
       "id": "ukadm-basin-access-zone-1100",
