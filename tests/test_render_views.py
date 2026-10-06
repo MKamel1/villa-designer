@@ -221,6 +221,45 @@ class ChosenViews(unittest.TestCase):
         for vid in ('v02-garden-living','v10-living-evening','v07-terrace-dusk','v19-garden-facade'):
             self.assertIn('offset from centre for a clear door route',' '.join(by[vid]['caption_notes']))
 
+    def test_g3_top_views_name_physical_troughs_drifts_benches_and_open_colour(self):
+        from scripts import villa_render_views as views
+        from archpipe.concept import villa_render as V
+        scene=V.build(LAY)
+        by={v['id']:v for v in scene['views']}
+        for vid in ('v25-top-garden-gate','v26-top-garden-north'):
+            view=by[vid]
+            self.assertEqual(set(view['subjects']),{'landscape-top-bench','landscape-top-trough',
+                                                  'landscape-top-deck-north','landscape-top-roof'})
+            self.assertIn('trough colour: dark bronze, pending client confirmation',' '.join(view['caption_notes']))
+            self.assertTrue(view['final_only'])
+            self.assertEqual(views.camera_proximity_violations(view,scene,ITEMS),[])
+            for subject in view['subjects']:
+                self.assertTrue(views.subject_points(subject,scene))
+                self.assertEqual(views.subject_mesh_frame_violations(view,scene,subject),[])
+        self.assertEqual(by['v25-top-garden-gate']['camera']['position'],[4.4,-21.7,1.35])
+        self.assertEqual(by['v26-top-garden-north']['camera']['position'],[6.95,-23.2,1.35])
+        import json
+        from pathlib import Path
+        before=json.loads((Path(__file__).parent/'fixtures/garden-g3-v27-before.json').read_text())
+        self.assertTrue(any(pid=='landscape-top-north-ixora-1' for pid,_ in
+                            views.camera_proximity_violations(before,scene,ITEMS)))
+        current=by['v27-north-garden-above']
+        self.assertEqual(views.camera_proximity_violations(current,scene,ITEMS),[])
+        self.assertEqual(set(current['subjects']),{'landscape-north-back','landscape-north-mid',
+                                                  'landscape-north-front','landscape-trellis-north'})
+        self.assertIn('Full soil-bed extent is outside the frame',' '.join(current['caption_notes']))
+        for subject in current['subjects']:
+            self.assertEqual(views.subject_mesh_frame_violations(current,scene,subject),[])
+        # Procedural appearances cannot bypass a guard that once checked
+        # only imported props. A renamed real aloe leaf mesh still fires.
+        source=next(m for m in scene['meshes'] if m.get('species')=='Aloe vera')
+        points=[p for f in source['faces'] for p in f]
+        close=deepcopy(current)
+        close['camera']['position']=[sum(p[0] for p in points)/len(points),
+                                     sum(p[1] for p in points)/len(points),1.35]
+        renamed=dict(source,id='unrelated-procedural-rosette')
+        self.assertTrue(views.camera_proximity_violations(close,dict(meshes=[renamed],props=[]),{}))
+
     def test_every_view_subject_matches_scene_content(self):
         """Round-2 draft: v07 still named "terrace lounge set" after the landscape replaced that set, so the
         renderer matched nothing and QA reported the subject out of frame. Mirror villa_scene.subjects' matching."""

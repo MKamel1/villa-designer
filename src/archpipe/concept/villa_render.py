@@ -30,6 +30,7 @@ from . import villa_furnish as F
 from . import villa_furnish3d as F3
 from . import villa_lighting as VL
 from . import villa_r11 as R
+from .villa_landscape import TROUGH_COLOUR
 from .authored_values import fill_defaults, override
 from .physical_part import PartMeshList
 from .mounting import MountItem, binding, check_mesh, Host, Finish, stacked_finish_bridge
@@ -169,6 +170,13 @@ M = {
                                roughness=0.78, note="ASSUMED procedural Bougainvillea glabra foliage"),
     "terracotta-red-glaze": dict(kind="principled",base_rgb=[0.42,0.075,0.035],reflectance=0.17,
                                  roughness=0.22,note="ASSUMED terracotta-red glazed ceramic; client decision 2026-10-05"),
+    "top-trough-coating": dict(kind="principled",base_rgb=TROUGH_COLOUR["base_rgb"],reflectance=.08,
+                              roughness=.48,metallic=0.0,
+                              note=TROUGH_COLOUR["name"]+"; ASSUMED authored powder coating, not a manufacturer finish; weathering/loaded weight UNVERIFIED"),
+    "top-rosemary-foliage": dict(kind="principled",base_rgb=[.065,.14,.075],reflectance=.10,roughness=.8,
+                                note="ASSUMED authored prostrate rosemary needles"),
+    "top-aloe-foliage": dict(kind="principled",base_rgb=[.15,.25,.17],reflectance=.20,roughness=.6,
+                            note="ASSUMED authored Aloe vera rosette"),
     "garden-soil": dict(kind="principled",base_rgb=[0.065,0.038,0.018],reflectance=0.04,
                         roughness=1.0,note="ASSUMED visible potting soil"),
     "garden-foliage": dict(kind="principled",base_rgb=[0.035,0.15,0.045],reflectance=0.10,
@@ -2595,22 +2603,18 @@ def _VIEWS(lay=None, resolve=True):
     # Client additions, 2026-09-29. Garden overlooks and views through several rooms have explicit standing points;
     # the single-room views below are placed by intent using render_views.choose.
     v("v25-top-garden-gate", "Top garden from the street gate", "day", [4.4, -21.7, G + 1.35],
-      [12.4, -22.0, G + 1.35], 24, ["landscape-top-bench", "landscape-top-north-ixora"],
+      [12.4, -22.0, G + 1.35], 24, ["landscape-top-bench", "landscape-top-trough", "landscape-top-deck-north", "landscape-top-roof"],
       final_only=True, exposure="exterior-day")
-    V[-1]["caption_notes"] = ['Existing top bench and planted Ixora pots; empty long planters removed. G3 top replacement design remains pending.']
-    # v26 re-placed (round 4): the old camera at (14.5, -22.0) stood inside the potted olive's canopy world box
-    # (villa_landscape.prop_world_box, roughly x 12.96-15.24, y -23.33 to -20.87 at the olive's 2.0 m height --
-    # the whole roof, so no roof standing point clears it). Moved to the deck edge, at the deck/roof rail corner,
-    # >= 1.0 m clear of the olive, the relocated bench and every other top-garden prop (checked by
-    # scripts/villa_render_views.py's camera-proximity guard).
-    v("v26-top-garden-north", "Top garden over the north garden", "day", [9.0, -20.80, G + 1.35],
-      [19.0, -21.0, G + 1.35], 24, ["landscape-bed-north", "landscape-trellis-north"],
-      shift_y=-0.22, final_only=True, exposure="exterior-day")
-    V[-1]["caption_notes"] = ['North young three-layer bed and thin bougainvillea on open timber; no lemon-pot subject.']
-    v("v27-north-garden-above", "North garden from the study deck", "day", [8.7, -22.3, G + 1.35],
-      [19.0, -21.8, G + 1.35], 24, ["landscape-bed-north", "landscape-trellis-north"],
-      shift_y=-0.18, final_only=True, exposure="exterior-day")
-    V[-1]["caption_notes"] = ['North young three-layer bed and thin bougainvillea on open timber; no lemon-pot subject.']
+    V[-1]["caption_notes"] = ["Top benches on slabs, low steel troughs with rosemary/aloe drifts and central artificial turf; paved study-to-gate approach. trough colour: dark bronze, pending client confirmation. No potted shade tree: no verified top species fits."]
+    # G3 view looks along the fixed top-garden planting from the ramp approach.
+    v("v26-top-garden-north", "Top garden north troughs and benches", "day", [6.95, -23.20, G + 1.35],
+      [13.4, -21.8, G + 1.35], 24, ["landscape-top-bench", "landscape-top-trough", "landscape-top-deck-north", "landscape-top-roof"],
+      shift_y=-0.10, final_only=True, exposure="exterior-day")
+    V[-1]["caption_notes"] = ["Top benches and slim north/south steel troughs planted in rosemary/aloe drifts. trough colour: dark bronze, pending client confirmation; authored appearance ASSUMED. Waterproofing, nursery roots, Egyptian-sun weathering and loaded weight UNVERIFIED."]
+    v("v27-north-garden-above", "North planting from the roof edge", "day", [14.6, -22.1, G + 1.35],
+      [19.0, -21.8, G + 1.35], 24, ["landscape-north-back", "landscape-north-mid", "landscape-north-front", "landscape-trellis-north"],
+      shift_y=-0.61, final_only=True, exposure="exterior-day")
+    V[-1]["caption_notes"] = ["North young three-layer planting and thin bougainvillea on open timber, from a clear standing point by the roof edge. Full soil-bed extent is outside the frame; v28 shows the north garden at ground level."]
     # v28 re-placed (round 4): the old camera at (16.1, -21.0) let the lemon pot occupy 41.5 degrees of a
     # 74-degree frame. A westward standing point in the sunken strip holds the garden doors, bed and trellis
     # along one sightline with the lemon pot no longer filling the foreground.

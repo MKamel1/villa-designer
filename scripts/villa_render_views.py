@@ -113,6 +113,17 @@ def camera_proximity_violations(view, scene, items, clearance=1.0):
             max(x0 - px, 0, px - x1), max(y0 - py, 0, py - y1), max(z0 - pz, 0, pz - z1))))
         if distance < clearance:
             failures.append((prop["id"], round(distance, 3)))
+    # New procedural top foliage/containers need the same lens clearance
+    # as imported planting. Paving/turf are the standing surface.
+    for mesh in scene["meshes"]:
+        if mesh.get("zone") != "top" or mesh.get("group") not in ("furniture", "dressing"):
+            continue
+        points = [p for f in mesh["faces"] for p in f]
+        lo = [min(p[i] for p in points) for i in range(3)]
+        hi = [max(p[i] for p in points) for i in range(3)]
+        distance = math.sqrt(sum(max(lo[i]-v, 0, v-hi[i])**2 for i,v in enumerate((px,py,pz))))
+        if distance < clearance:
+            failures.append((mesh["id"], round(distance, 3)))
     for item in items.values():
         if item["level"] != level:
             continue

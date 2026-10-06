@@ -413,6 +413,70 @@
         "test_d4_real_stale_scale_fires_current_quiet_and_renamed_sibling"
       ],
       "closure": "Real stale record and renamed drift fire; current independent record and native units stay quiet. Lead photographic review remains open."
+    },
+    {
+      "lesson_id": "garden-g3-built-top-envelope",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "villa_landscape._steel_trough; _top_garden physical soil/root/deck and slab datums; _top_clump solid tips; palette-owned dimensions",
+      "check": "villa_landscape.top_garden_violations; gate_route_violations; candidate_violations; physical_part.Part; villa_render_contract.validate_scene",
+      "stage": "Scene construction, portable verification and lead preview before rendering",
+      "proof_file": "tests/test_landscape.py",
+      "proofs": [
+        "test_g3_actual_rim_reproduction_surface_route_and_renamed_siblings",
+        "test_g3_trough_drifts_seating_palette_and_material_intent",
+        "test_g3_ixora_requires_quote_and_sun_otherwise_top_palette_replaces",
+        "test_g3_tapered_leaf_tip_real_degenerate_control",
+        "test_g3_study_gate_chain_and_sloped_d2_volume_keep_driveway"
+      ],
+      "closure": "Built-outline, support, route and plant-geometry numerical proofs; lead photographic/client/nursery acceptance remains open."
+    },
+    {
+      "lesson_id": "garden-g3-solid-leaf-tip",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "villa_landscape._top_clump: nonzero tapered blade tip thickness",
+      "check": "physical_part.geometry_errors; villa_render_contract.validate_scene",
+      "stage": "Isolated plant construction before lead preview",
+      "proof_file": "tests/test_landscape.py",
+      "proofs": [
+        "test_g3_tapered_leaf_tip_real_degenerate_control",
+        "test_real_clump_nonplanar_and_lighting_namespace_defects_cannot_recur"
+      ],
+      "closure": "Real tip, clean aloe/rosemary and renamed degeneration proofs; photographic review remains open."
+    },
+    {
+      "lesson_id": "garden-g3-finish-consumer",
+      "control_tier": [
+        2
+      ],
+      "construction": "villa_render.M definitions and explicit independent ALLOWED_MATERIALS registrations for the three assumed G3 appearances",
+      "check": "tests.test_render_standard.RenderStandard.test_every_mesh_has_an_explicit_finish",
+      "stage": "Whole-scene appearance contract before lead preview",
+      "proof_file": "tests/test_render_standard.py",
+      "proofs": [
+        "test_g3_frozen_finish_consumer_and_renamed_missing_registration"
+      ],
+      "closure": "Real prior list and renamed unknown finish refused; registered assumed appearances accepted; lead photographic review pending."
+    },
+    {
+      "lesson_id": "garden-g3-camera-neighbour",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "camera-only v27 roof-edge correction; actual planting subjects and explicit soil-bed crop caption; design fixed",
+      "check": "scripts.villa_render_views.camera_proximity_violations includes procedural top meshes; subject_mesh_frame_violations",
+      "stage": "Whole view set before lead preview/render",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_g3_top_views_name_physical_troughs_drifts_benches_and_open_colour"
+      ],
+      "closure": "Real adjacent-camera and renamed procedural-mesh failures; clean current numerical framing/proximity; lead photographic review pending."
     }
   ]
 }

@@ -16,6 +16,7 @@ SCENE = VR.build()
 ALLOWED_MATERIALS = {
     "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",
     "terracotta-red-glaze", "garden-soil", "garden-foliage", "star-jasmine-flower", "star-jasmine-leaf",  # round-3 garden finishes
+    "top-trough-coating", "top-rosemary-foliage", "top-aloe-foliage",  # G3 explicitly ASSUMED appearances
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath", "marble-wet",
     "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
@@ -296,7 +297,7 @@ class RenderStandard(unittest.TestCase):
         from archpipe.concept import villa_landscape as LAND, revit_spec as RS, render_support as S
         sp = RS.build(VR.R.design("D1"))
         meshes, props, notes, plan = LAND.build(sp)
-        self.assertEqual(set(plan["paths"]), {"dining", "living-north", "living-east", "lounge-west", "study"})
+        self.assertEqual(set(plan["paths"]), {"dining", "living-north", "living-east", "lounge-west", "study", "gate-link"})
         for m in meshes:
             for face in m["faces"]:
                 for x, y, _ in face:
@@ -371,6 +372,22 @@ class RenderStandard(unittest.TestCase):
         self.assertEqual({m.get("material") for m in SCENE["meshes"]} - ALLOWED_MATERIALS, set())
         self.assertTrue(all(m["material"] in SCENE["materials"] for m in SCENE["meshes"]))
         self.assertEqual(set(SCENE["materials"]) - ALLOWED_MATERIALS, set())
+
+    def test_g3_frozen_finish_consumer_and_renamed_missing_registration(self):
+        import json
+        from pathlib import Path
+        from unittest.mock import patch
+        old=set(json.loads((Path(__file__).parent/'fixtures/garden-g3-material-list-before.json').read_text()))
+        self.test_every_mesh_has_an_explicit_finish()
+        # Execute the actual consumer guard with its real prior input.
+        with patch.dict(globals(),ALLOWED_MATERIALS=old):
+            with self.assertRaises(AssertionError):
+                self.test_every_mesh_has_an_explicit_finish()
+        sibling=dict(meshes=[dict(material='unregistered-sibling-finish')],
+                     materials={'unregistered-sibling-finish':{}})
+        with patch.dict(globals(),SCENE=sibling):
+            with self.assertRaises(AssertionError):
+                self.test_every_mesh_has_an_explicit_finish()
 
     def test_parents_pillows_are_seated_and_lean_against_headboard(self):
         from archpipe.concept import villa_furnish as F

@@ -488,7 +488,26 @@
         "status": "UNVERIFIED",
         "reason": "Confirm with local nursery and engineer"
       },
-      "placement_assumptions": {}
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.3,
+              0.3
+            ],
+            "status": "ASSUMED",
+            "reason": "G3 authored prostrate shoots including trailing stems; within verified height range."
+          },
+          "spread": {
+            "range_m": [
+              1.0,
+              1.0
+            ],
+            "status": "ASSUMED",
+            "reason": "G3 longitudinal spread at verified lower mature range; narrow young growth trails inward over the trough edge."
+          }
+        }
+      }
     },
     {
       "species": "Aloe vera",
@@ -533,7 +552,31 @@
         "status": "UNVERIFIED",
         "reason": "Confirm with local nursery and engineer"
       },
-      "placement_assumptions": {}
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.55,
+              0.55
+            ],
+            "status": "ASSUMED",
+            "reason": "G3 young rosette appearance; client brief up to 0.9 m, numerical source range still missing in record; nursery confirmation required."
+          },
+          "spread": {
+            "range_m": [
+              0.36,
+              0.36
+            ],
+            "status": "ASSUMED",
+            "reason": "G3 young nursery rosette envelope; mature spread UNVERIFIED."
+          }
+        },
+        "spacing_spread": {
+          "value": 0.5,
+          "status": "ASSUMED",
+          "reason": "G3 nursery centre-spacing envelope; mature spread UNVERIFIED."
+        }
+      }
     },
     {
       "species": "Plumeria rubra",

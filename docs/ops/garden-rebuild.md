@@ -16,3 +16,42 @@ Renderer consumers also need a producer-to-consumer wiring proof when their argu
 D4 placement procedure (2026-10-06): a lead-authorised route remedy may move the tree/pit for the brief's clear door route; this does not authorise camera-driven design moves. Run `PYTHONPATH=src python scripts/garden_tree_position.py` to reproduce the continuous whole-lawn minimum with actual triangle height-band clipping. The horizontal centre-line band, model canopy and mature-circle bounds are intersected before subtracting every route/stone forbidden translation region. Record the resulting centre and numerical separation in the sole palette. Turf and pit are rebuilt around that recorded centre; never shift an exported mesh by hand. Retain the frozen centred low-branch reproduction. Confirm every authoritative landscape guard, `unsupported` and `blocked_openings`, then export and check plan framing. Independent asset-placement metadata must be refreshed when scale changes; run `tests.test_asset_intake` and portable verification against the authoritative scene, because a blocked upstream build can hide downstream drift. D4 changes position only; D1 supplies the unchanged scale.
 
 The west overview camera is on the sister side of the shared axis, in the modelled lower front-yard strip without a dividing fence. Its caption must state that vantage. It uses 24 mm, level aim and 1.35 m standing eye height with vertical lens shift; no ground, plant, furniture or route moved for the camera. Lead draft and photographic sightline review remain required; the plan/projection preview is numerical evidence only.
+
+G3 top-garden procedure (2026-10-06): build slim hollow steel troughs from a
+single named assumed coating parameter, at the measured deck datum. Join root
+seating to actual recessed soil and benches to real paving slabs. Review the
+built outer envelope, including folded rims and trailing shoots, against the
+deck/roof and retained rail strip; declared schedule rectangles alone cannot
+prove clearance. Keep trough drifts to 3–5 of one species. Check study and
+connecting deck paths with D2 floor-to-2 m occupancy; check the street-gate
+continuation over the unchanged driveway by subtracting its measured sloping
+floor from actual triangles, segment by segment. Do not construct flat paving
+over the ramp. Ixora in the two top pots requires both the checked flowering
+quote and measured full-sun samples; otherwise use the top palette. Ursinia
+needs checked top placement and light evidence before placement. Regenerate
+tracked asset geometry for new imports; do not read the library during build.
+
+Solid tapered plant blades must retain nonzero tip thickness. Run both physical
+part and render-contract checks on the isolated new botanical mesh, then the
+whole scene. `scripts/garden_top_plan.py` supplies a reproducible measured plan
+preview without Blender. Record eight/nine sun samples individually, not a
+uniform nine-hour assertion; the enclosure screen is not a detailed shadow or
+Egypt performance study. Never infer photographic approval from this schematic
+or passing tests: the lead reviews close-up draft troughs, foliage and benches
+before integration. Supplier weathering and loaded-weight data, nursery root
+behaviour and waterproofing, dark-bronze client colour confirmation, and the
+unplaced potted shade tree remain explicit open items.
+
+G3 finish-consumer follow-up: add a named authored material and its independent
+`tests/test_render_standard.py::ALLOWED_MATERIALS` registration together.
+Preserve the explicit finish-list refusal for unknown appearances. An isolated
+mesh contract accepting a declared material does not prove its whole-scene
+finish registration; execute that consumer before handing off a render scene.
+
+G3 camera-neighbour follow-up: run the whole exterior camera set immediately
+after the first fixed layout, before the long acceptance batch. Review adjacent
+views as well as the two named top views. Proximity checks include actual
+procedural top foliage and containers as well as imported props. If a clear
+standing point cannot hold the full soil-bed extent, retain the design, declare
+honest actual planting subjects, and caption the omitted extent and companion
+view. Final-only v27 also needs its own lead draft after camera correction.

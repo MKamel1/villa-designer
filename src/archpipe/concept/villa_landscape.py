@@ -1,4 +1,4 @@
-"""D1 garden evidence and fail-closed G1/G2 rebuild candidate.
+"""D1 garden evidence and fail-closed G1/G2/G3 rebuild candidate.
 
 The south planting zone is the southern end of our east yard. The land below
 the rear boundary belongs to the sister plot and is never dressed as ours.
@@ -120,6 +120,20 @@ def garden_level_rooms(lay):
 DECK = (6.877, -23.591, 12.777, -20.601)
 ROOF = (12.777, -23.591, 15.412, -20.601)
 TOP = (DECK[0], DECK[1], ROOF[2], DECK[3])
+TOP_SURFACE = 0.0  # Scene GF datum; street +1.20 m in villa_parking.
+TROUGH_COLOUR = dict(name="dark bronze, ASSUMED pending client confirmation",
+                     base_rgb=[0.12, 0.075, 0.045])
+# Dimensions below are authored ASSUMED design intent, not supplier sizes.
+TOP_TROUGHS = (
+    ("deck-north", (9.20, -21.10, 12.40, -20.76), "Salvia rosmarinus Prostrata Group",
+     ((9.80, -20.93), (10.80, -20.93), (11.80, -20.93))),
+    ("roof-north", (13.02, -21.16, 15.15, -20.76), "Aloe vera",
+     ((13.40, -20.96), (14.10, -20.96), (14.80, -20.96))),
+    ("roof-south", (13.02, -23.44, 15.15, -23.04), "Aloe vera",
+     ((13.40, -23.24), (14.10, -23.24), (14.80, -23.24))),
+)
+TOP_TROUGH_HEIGHT = .25
+BENCH_KNEE_CLEAR = .60  # ASSUMED free space in front; nursery/furniture review pending.
 RAIL_CLEAR = 0.12  # ASSUMED rail mounting strip; rails remain in revit_spec.
 
 
@@ -212,6 +226,26 @@ def _raised_bed(rect, z, height):
     return body, soil
 
 
+def _steel_trough(rect, z, height):
+    """Closed 3 mm base and side plates, folded rim, and recessed soil.
+
+    All dimensions are ASSUMED fabrication intent awaiting a supplier.
+    No pedestal, cap or stone proxy forms part of this assembly.
+    """
+    x0, y0, x1, y1 = rect
+    t = .003
+    body = (_box(x0,y0,z,x1,y1,z+t) +
+            _box(x0,y0,z+t,x0+t,y1,z+height) +
+            _box(x1-t,y0,z+t,x1,y1,z+height) +
+            _box(x0+t,y0,z+t,x1-t,y0+t,z+height) +
+            _box(x0+t,y1-t,z+t,x1-t,y1,z+height))
+    # Inward folds retain the stated outside envelope.
+    body += (_box(x0+t,y0+t,z+height-t,x1-t,y0+.012,z+height) +
+             _box(x0+t,y1-.012,z+height-t,x1-t,y1-t,z+height))
+    soil = _box(x0+t,y0+t,z+t,x1-t,y1-t,z+height-.005)
+    return body, soil
+
+
 def _quad(x0, y0, x1, y1, z):
     return [[[x0, y0, z], [x1, y0, z], [x1, y1, z], [x0, y1, z]]]
 
@@ -224,6 +258,7 @@ PATHS = {
     "living-east": (22.597, -26.588, 25.10, -25.674),
     "lounge-west": (1.00, -26.613, 3.617, -25.699),
     "study": (7.820, -23.591, 8.734, -20.601),
+    "gate-link": (6.877, -22.55, 8.734, -21.636),
 }
 
 # Boundary beds actually built, excluding the lawn-only east by client decision.
@@ -448,7 +483,7 @@ def route_violations(items, routes=PATHS, route_ground=None):
         if "faces" in item and "asset" not in item:
             triangles, _ = _triangles([item])
         for name, route in candidates:
-            ground = (route_ground or {}).get(name, 0.0 if name == "study" else GROUND)
+            ground = (route_ground or {}).get(name, TOP_SURFACE if name in ("study", "gate-link") else GROUND)
             if "asset" in item:
                 # A lower placement/higher route floor may reach omitted canopy.
                 prop_triangles(item, walking_top_m=ground+2.0)
@@ -519,15 +554,13 @@ def layer_violations(plants, beds=None):
 
 
 def drift_violations(plants, min_count=3, max_count=5, layers=("back", "mid", "front")):
-    """Every species placed in a ground-bed border layer (back/mid/front) must appear at
-    least `min_count` times in that bed+layer -- a drift, not a token planting (the client's
-    "lacks taste and standardization" complaint). Accent props (layer names ending
-    '-accent') are documented single specimens, and the shallow top-deck/roof 'edge'
-    planters (only 3 slots per side, deliberately alternated for colour) are a different,
-    looser design regime -- both are exempt by design, not by omission."""
+    """Ground-bed strata and top troughs each require 3-5 of one species.
+
+    Pots remain individual accents; troughs never inherit that exemption.
+    """
     seen = {}
     for p in plants:
-        if planting_layer(p) in layers:
+        if planting_layer(p) in layers or p.get("trough") is not None:
             key = (p["bed"], planting_layer(p), p["species"])
             seen[key] = seen.get(key, 0) + 1
     return [(bed, layer, species, n) for (bed, layer, species), n in seen.items() if not min_count <= n <= max_count]
@@ -783,10 +816,248 @@ def _botanical_clump(identifier, species, center, ground, data, *, bed, layer):
     return mesh
 
 
+def _top_clump(identifier, species, center, soil_z, data, bed):
+    """Species-specific solid leaves/shoots; palette owns all size claims.
+
+    Rosemary has branched horizontal stems with paired needle leaves and
+    descending inward trails. Aloe has thick tapered radial rosette blades.
+    These are ASSUMED authored botanical appearances, not product assets.
+    """
+    import numpy as np
+    row = require_species(species,data)
+    assumption = row["placement_assumptions"]["procedural-clump"]
+    height = assumption["height"]["range_m"][0]
+    spread = assumption["spread"]["range_m"][0]
+    faces = []
+
+    def tube(a,b,r):
+        # Metre-native closed tube: every leaf physically meets its stem.
+        a,b = np.array(a),np.array(b)
+        axis = b-a; axis /= np.linalg.norm(axis)
+        helper = np.array([0.,0.,1.]) if abs(axis[2]) < .9 else np.array([1.,0.,0.])
+        u = np.cross(axis,helper); u /= np.linalg.norm(u)
+        v = np.cross(axis,u)
+        rings = [[(p+r*(u*cos(k*2*pi/6)+v*sin(k*2*pi/6))).tolist() for k in range(6)] for p in (a,b)]
+        low,high = rings
+        return [low[::-1],high]+[[low[k],low[(k+1)%6],high[(k+1)%6],high[k]] for k in range(6)]
+
+    if species == "Aloe vera":
+        for index in range(15):
+            angle = index*2*pi/15
+            c,s = cos(angle),sin(angle)
+            length = .95 if index%3==0 else .65+.10*(index%3)
+            rings=[]
+            for t,width in ((0,.018),(.18,.055),(.50,.040),(.80,.019),(1,.001)):
+                reach = .015+.165*t
+                z = length*(t**.72)
+                rings.append([[c*reach-s*width,s*reach+c*width,z],
+                              [c*(reach-(.0008+.014*(1-t))),s*(reach-(.0008+.014*(1-t))),z],
+                              [c*reach+s*width,s*reach-c*width,z],
+                              [c*(reach+(.0008+.014*(1-t))),s*(reach+(.0008+.014*(1-t))),z]])
+            faces += [rings[0][::-1],rings[-1]]
+            for a,b in zip(rings,rings[1:]):
+                faces += [[a[k],a[(k+1)%4],b[(k+1)%4],b[k]] for k in range(4)]
+        material="top-aloe-foliage"
+    else:
+        # A basal woody crown and alternating needle-covered branchlets.
+        faces += tube((0,0,0),(0,0,.15),.006)
+        for index in range(14):
+            sign = -1 if index%2 else 1
+            tip=(sign*(.34+.012*index), .06*cos(index*1.7), .10+.007*(index%5))
+            origin=(0,0,.09)
+            faces += tube(origin,tip,.003)
+            for j in range(1,18):
+                t=j/18
+                point=tuple(origin[k]+t*(tip[k]-origin[k]) for k in range(3))
+                for side in (-1,1):
+                    leaf=(point[0]+sign*.024,point[1]+side*.022,point[2]+.018)
+                    faces += tube(point,leaf,.0015)
+        for index in range(7):
+            x=(index-3)*.12
+            points=[(0,0,.08),(x,-.08,.10),(x,-.17,.04),(x,-.24,-.10)]
+            for a,b in zip(points,points[1:]):
+                faces += tube(a,b,.003)
+                for j in range(1,7):
+                    point=tuple(a[k]+j/7*(b[k]-a[k]) for k in range(3))
+                    for side in (-1,1):
+                        faces += tube(point,(point[0]+side*.022,point[1]-.008,point[2]+.01),.0015)
+        material="top-rosemary-foliage"
+    pts=[q for f in faces for q in f]
+    lo=[min(q[i] for q in pts) for i in range(3)]
+    hi=[max(q[i] for q in pts) for i in range(3)]
+    plan_scale=spread/max(hi[i]-lo[i] for i in (0,1))
+    # Rosemary trails inward (negative scene Y); only its longitudinal
+    # span carries the card's spread. Young narrow depth is ASSUMED.
+    y_scale = .32/(hi[1]-lo[1]) if species != "Aloe vera" else plan_scale
+    root_z = soil_z
+    # Rosemary height includes its descending shoots; root remains at soil.
+    bottom = -height/3 if species != "Aloe vera" else 0
+    faces=[[[center[0]+q[0]*plan_scale,
+             center[1]+q[1]*y_scale,
+             soil_z+bottom+(q[2]-lo[2])*height/(hi[2]-lo[2])] for q in f] for f in faces]
+    # Include a real basal stem from soil into the crown after normalisation.
+    faces += tube((center[0],center[1],root_z),(center[0],center[1],soil_z+height*.20),.005)
+    faces=[[face[0],face[k],face[k+1]] for face in faces for k in range(1,len(face)-1)]
+    mesh=_mesh(identifier,"dressing",material,faces,
+               "ASSUMED authored young "+species+" appearance; photographic likeness and nursery supply UNVERIFIED; care: "+row["source_url"]["value"],kind="plant-clump")
+    spacing=row["placement_assumptions"].get("spacing_spread",{}).get("value",row["spread"]["range_m"][0] if row["spread"]["range_m"] else spread)
+    mesh.update(species=species,zone="top",center=center,spread_m=spacing,bed=bed,
+                trough=bed,planting_layer="trough",root_z_m=root_z,sun_hours=direct_sun_hours(*center))
+    return mesh
+
+
+def _top_garden(spec, data, credits, meshes, props, objects, plants):
+    """Construct deck-seated troughs, physical pads and clear seating spaces."""
+    surface = spec["parking2"]["deck"]["z_top"]
+    if abs(surface-TOP_SURFACE)>1e-9:
+        raise ValueError("top garden datum changed; coordinate deck, roof and routes")
+    troughs,benches = [],[]
+    for name,rect,species,centers in TOP_TROUGHS:
+        body,soil = _steel_trough(rect,surface,TOP_TROUGH_HEIGHT)
+        identifier="landscape-top-trough-"+name
+        for suffix,faces,material,kind in (("body",body,"top-trough-coating","steel-trough"),
+                                          ("soil",soil,"garden-soil","planter-soil")):
+            item=_mesh("top-trough-"+name+"-"+suffix,"furniture",material,faces,
+                       "ASSUMED slim powder-coated steel trough; "+TROUGH_COLOUR["name"]+"; supplier weathering/loaded weight UNVERIFIED",kind=kind)
+            item.update(zone="top",trough=identifier)
+            meshes.append(item)
+        obj=dict(id=identifier,rect=rect,zone="top",bottom_m=surface,top_m=surface+TOP_TROUGH_HEIGHT,
+                 species=species,soil_z_m=surface+TOP_TROUGH_HEIGHT-.005,centers=centers)
+        # Container recipe species is schedule metadata, not a second plant.
+        objects.append({k:v for k,v in obj.items() if k != "species"});troughs.append(obj)
+        for i,center in enumerate(centers):
+            clump=_top_clump("top-%s-%02d"%(name,i),species,center,obj["soil_z_m"],data,identifier)
+            meshes.append(clump); plants.append(clump)
+    native=PROP_BOUNDS["sf_wooden_bench"]
+    plan_scale=BENCH_LENGTH_M/(native[1][2]-native[0][2])
+    height_scale=BENCH_HEIGHT_M/(native[1][1]-native[0][1])
+    for i,(center,facing) in enumerate((((10.60,-22.10),(1,0)),((14.00,-22.10),(-1,0)))):
+        bench=_prop("landscape-top-bench-%d"%i,"sf_wooden_bench",center,surface+.012,BENCH_HEIGHT_M,
+                    "ASSUMED backless bench on paving slab, facing the central garden; 0.40 m seat height, Time-Saver 2nd ed. p.340-11; "+credits["sf_wooden_bench"],zone="top")
+        override(bench,"scale",[plan_scale,plan_scale,height_scale],"recorded bench axiswise exception: 1.8 m length and 0.4 m seat height")
+        override(bench,"position",[center[0]-plan_scale*(native[0][0]+native[1][0])/2,
+                                   center[1]+plan_scale*(native[0][2]+native[1][2])/2,surface+.012],
+                 "centre actual final-scale bench on its slab")
+        bench["facing"]=facing
+        rect=_rect(bench);pad=(rect[0]-.02,rect[1]-.02,rect[2]+.02,rect[3]+.02)
+        knee=(rect[2],rect[1],rect[2]+BENCH_KNEE_CLEAR,rect[3]) if facing[0]>0 else (rect[0]-BENCH_KNEE_CLEAR,rect[1],rect[0],rect[3])
+        slab=_mesh("top-bench-slab-%d"%i,"ground","stepping-stone",_box(pad[0],pad[1],surface,pad[2],pad[3],surface+.012),
+                   "ASSUMED flush bench paving slab, no plinth",kind="bench-slab")
+        slab["zone"]="top";meshes.append(slab);props.append(bench)
+        benches.append(dict(id=bench["id"],slab_id=slab["id"],knee_rect=knee,required_knee_m=BENCH_KNEE_CLEAR,facing=facing))
+    # Turf is the central field; paving and pads have their own exposed faces.
+    from shapely.geometry import box
+    from shapely.ops import triangulate
+    meshes[:] = [m for m in meshes if m["id"] not in ("landscape-grass-top-deck","landscape-grass-top-roof")]
+    cutouts = [box(*PATHS["study"]),box(*PATHS["gate-link"])]
+    cutouts += [box(*_mesh_rect(m)) for m in meshes if m.get("part_kind")=="bench-slab"]
+    for name,rect in (("deck",DECK),("roof",ROOF)):
+        field=box(rect[0]+RAIL_CLEAR,-23.04,rect[2]-RAIL_CLEAR,-21.20)
+        for cutout in cutouts:
+            field=field.difference(cutout)
+        faces=[[[x,y,surface+.003] for x,y in list(t.exterior.coords)[:-1]]
+               for t in triangulate(field) if field.covers(t)]
+        meshes.append(_mesh("grass-top-"+name,"ground","artificial-grass",faces,
+                            "ASSUMED central artificial turf, clear paving and bench pads",kind="finish-layer",surface=True,occupied_side=(0,0,1)))
+    return troughs,benches
+
+
+def top_garden_violations(meshes, props, plan, *, spec_surface=TOP_SURFACE,
+                          deck=DECK, roof=ROOF, rail_clear=RAIL_CLEAR):
+    """Built top envelopes, surface contact, soil seating and routes fail closed.
+
+    Optional outline/datum inputs prove this geometry rule away from D1.
+    Ground finishes may reach the rails; containers and planting may not.
+    """
+    out=[]
+    items=[m for m in meshes if m.get("zone")=="top" or m["id"].startswith("landscape-top-")]+[p for p in props if p.get("zone")=="top"]
+    for item in items:
+        kind=item.get("part_kind")
+        if kind in ("finish-layer","stepping-stone"):
+            continue
+        if not (_inside_rect(_rect(item),deck,rail_clear) or _inside_rect(_rect(item),roof,rail_clear)):
+            out.append((item["id"],"built top envelope crosses outline or rail strip"))
+        if "faces" in item:
+            bottom=min(q[2] for f in item["faces"] for q in f)
+            if kind in ("steel-trough","planter","bench-slab") and abs(bottom-spec_surface)>1e-6:
+                out.append((item["id"],"container/slab does not sit on deck surface"))
+            if kind == "steel-trough":
+                import numpy as np
+                downward=[]
+                for face in item["faces"]:
+                    a,b,c=np.array(face[:3])
+                    normal=np.cross(b-a,c-a)
+                    if normal[2]<0 and abs(normal[2])>np.linalg.norm(normal)*.5:
+                        downward.append(face)
+                base=min(downward,key=lambda f:sum(q[2] for q in f)/len(f)) if downward else []
+                if not base or any(abs(q[2]-spec_surface)>1e-6 for q in base):
+                    out.append((item["id"],"trough base is not fully seated on deck surface"))
+        if item.get("species"):
+            row=require_species(item["species"])
+            ixora=item["species"]=="Ixora coccinea"
+            threshold=json.loads(PALETTE.read_text())["design_assumptions"]["full_sun_screen"]["hours"]
+            quote=str(row["light"]["value"]).lower()
+            if ixora:
+                if (not item.get("bed","").startswith("top-pot-") or row["light"]["status"]!="VERIFIED" or
+                    "full sun for best flowering" not in quote or len(direct_sun_hours(*item["center"]))<=threshold):
+                    out.append((item["id"],"top Ixora requires existing pot, checked flowering quote and full-sun hours"))
+            elif "top" not in row["zones"]["value"]:
+                out.append((item["id"],"species lacks verified top-zone placement"))
+            if item.get("trough"):
+                trough=next((t for t in plan.get("top_troughs",[]) if t["id"]==item["trough"]),None)
+                if (trough is None or not _inside_rect((*item["center"],*item["center"]),trough["rect"]) or
+                    abs(item["root_z_m"]-trough["soil_z_m"])>1e-6):
+                    out.append((item["id"],"plant root is not seated in its trough soil"))
+    routes,ground=walking_routes(meshes)
+    out += [(pid,"top walking route "+name) for pid,name in route_violations(items,routes,ground)]
+    if plan.get("gate_route"):
+        out += gate_route_violations(items,plan["gate_route"])
+    by_id={i["id"]:i for i in items}
+    for seating in plan.get("top_benches",[]):
+        bench=by_id.get(seating["id"]);slab=by_id.get(seating["slab_id"])
+        if bench is None or slab is None:
+            out.append((seating["id"],"bench lacks physical slab"));continue
+        top=max(q[2] for f in slab["faces"] for q in f)
+        if not _inside_rect(_rect(bench),_rect(slab)) or abs(bench["position"][2]-top)>1e-6:
+            out.append((bench["id"],"bench is not seated on its slab"))
+        if tuple(bench.get("facing",()))!=tuple(seating["facing"]) or abs(bench["facing"][0])!=1:
+            out.append((bench["id"],"bench facing differs from clear knee side"))
+        others=[i for i in items if i["id"] not in (bench["id"],slab["id"]) and i.get("part_kind") not in ("finish-layer","stepping-stone","bench-slab")]
+        out += [(bench["id"],"knee space blocked by "+pid) for pid,_ in route_violations(others,{"knee":seating["knee_rect"]},{"knee":spec_surface})]
+    return out
+
+
+def gate_route_violations(items, route):
+    """D2 walking contact over an unchanged piecewise-linear driveway.
+
+    route contains its y limits and measured pairs of x and surface z.
+    Subtract each segment's sloping floor from actual triangles, so the
+    tested vertical walking volume is exactly floor to floor plus 2 m.
+    The ramp is shared access, not a newly paved pedestrian ramp.
+    """
+    import numpy as np
+    from .route_geometry import prop_triangles
+    from .render_support import _triangles, _tri_box_overlap
+    out=[]
+    for item in items:
+        for (xa,za),(xb,zb) in zip(route["profile"],route["profile"][1:]):
+            rect=(xa,route["y0"],xb,route["y1"])
+            if _rect_overlap_area(_rect(item),rect)<=1e-6:
+                continue
+            triangles=prop_triangles(item,walking_top_m=max(za,zb)+2) if "asset" in item else _triangles([item])[0]
+            local=triangles.copy()
+            local[:,:,2]-=za+(local[:,:,0]-xa)*(zb-za)/(xb-xa)
+            lo=np.array([xa,rect[1],0.]);hi=np.array([xb,rect[3],2.])
+            nearby=np.all(local.min(axis=1)<=hi,axis=1)&np.all(local.max(axis=1)>=lo,axis=1)
+            if nearby.any() and _tri_box_overlap(local[nearby],(lo+hi)/2,(hi-lo)/2).any():
+                out.append((item["id"],"street-gate ramp walking envelope"));break
+    return out
+
+
 def review_candidate(spec, lay=None):
     """Measured G1/G2 proposal for lead diagnosis, never a scene-export path.
 
-    build() refuses unresolved geometry. G3 replacement design is pending.
+    build() refuses unresolved geometry. No photographic approval is inferred.
     """
     if lay is None:
         from . import villa_r11 as R
@@ -957,46 +1228,48 @@ def review_candidate(spec, lay=None):
     swing = _prop("landscape-egg-swing","sf_egg_chair",(2.60,-28.35),GROUND,1.99,
                   "Egg-shaped hanging swing on own stand; relocated from the east garden; client to confirm; " + credits["sf_egg_chair"])
     props += [bistro,swing]
-    # G3 containers and approved placements retain their pre-G1 geometry.
-    # Unplanted G3 long containers removed rather than rendered empty;
-    # replacement top planting belongs to G3.
-    plant("landscape-top-south-ursinia","flower_ursinia",(10.20,-23.25),zone="top",bed="top-deck",layer="south-edge",ground=0.0)
-    for i,x in enumerate((7.40,10.5)):
-        y=-21.20
-        objects.append(dict(id="landscape-top-north-planter-%d"%i,rect=(x-.40,y-.40,x+.40,y+.40),zone="top"))
-        body,rim,soil=_pot(x,y,0.0,.32,.4,.30)
-        for suffix,mat,faces,kind in (("","garden-sandstone",body,"planter"),("-rim","garden-sandstone",rim,"planter-rim"),("-soil","garden-gravel",soil,"planter-soil")):
-            meshes.append(_mesh("top-north-planter-%d%s"%(i,suffix),"furniture",mat,faces,"ASSUMED retained G3 container",kind=kind))
-        plant("landscape-top-north-ixora-%d"%i,"sf_ixora",(x,y),zone="top",bed="top-deck",layer="north-edge",ground=.30)
-    for name,x,y in (("deck",7.38,-22.10),("roof",13.90,-21.50)):
-        plant("landscape-top-boug-"+name,"sf_bougainvillea",(x,y),zone="top",bed="top-"+name,layer="edge-accent",ground=0.0)
-    bench_length = BENCH_LENGTH_M
-    bench = _prop("landscape-top-bench-0", "sf_wooden_bench", (11.5, -21.75), 0.0, BENCH_HEIGHT_M,
-                  "ASSUMED bench; seat height %.2f m (Time-Saver 2nd ed. p.340-11, lts-seatwall-height-350, range "
-                  "350-450 mm); length achieved %.2f m vs the brief's ~1.8 m target -- sf_wooden_bench's native "
-                  "proportions (0.81 x 0.48 x 3.58 m) do not permit both a card-range seat height and a 1.8 m "
-                  "length under one uniform prop scale; independent scene height and plan scale used; "
-                  "%s" % (BENCH_HEIGHT_M, bench_length, credits["sf_wooden_bench"]), zone="top", yaw=0)
-    native = PROP_BOUNDS["sf_wooden_bench"]
-    plan_scale = BENCH_LENGTH_M / (native[1][2] - native[0][2])
-    height_scale = BENCH_HEIGHT_M / (native[1][1] - native[0][1])
-    override(bench, "scale", [plan_scale, plan_scale, height_scale],
-             "fit bench plan length and seat height independently to the approved geometry")
-    # _prop centred using its original uniform height scale; centre again with the final plan scale.
-    cx = plan_scale * (native[0][0] + native[1][0]) / 2
-    cy = -plan_scale * (native[0][2] + native[1][2]) / 2
-    override(bench, "position", [11.5 - cx, -21.75 - cy] + bench["position"][2:],
-             "recenter the bench after its independent plan scale is applied")
-    props.append(bench)
+    # Two existing pot positions redesigned as planted glazed pots, with no plinth.
+    # Ixora is the brief's explicit top-zone exception, conditional on sun evidence.
+    for i, center in enumerate(((7.40,-21.20),(9.30,-22.95))):
+        potdata = record["design_assumptions"]["door_pot"]
+        body,rim,soil = _pot(*center,TOP_SURFACE,potdata["lower_radius_m"],potdata["upper_radius_m"],potdata["height_m"])
+        for suffix,mat,faces,kind in (("body","terracotta-red-glaze",body,"planter"),
+                                      ("rim","terracotta-red-glaze",rim,"planter-rim"),
+                                      ("soil","garden-soil",soil,"planter-soil")):
+            item = _mesh("top-pot-%d-%s"%(i,suffix),"furniture",mat,faces,
+                         "ASSUMED planted glazed ceramic pot; replaces stone-look bowl; no plinth",kind=kind)
+            item["zone"]="top"
+            meshes.append(item)
+        ixora = require_species("Ixora coccinea",data)
+        full_sun = record["design_assumptions"]["full_sun_screen"]["hours"]
+        if (ixora["light"]["status"] == "VERIFIED" and
+            "full sun for best flowering" in str(ixora["light"]["value"]).lower() and
+            len(direct_sun_hours(*center)) > full_sun):
+            pp=plant("landscape-top-north-ixora-%d"%i,"sf_ixora",center,zone="top",bed="top-pot-%d"%i,
+                     layer="accent",ground=TOP_SURFACE+potdata["height_m"]-.005)
+        else:
+            pp=_top_clump("top-pot-aloe-%d"%i,"Aloe vera",center,TOP_SURFACE+potdata["height_m"]-.005,
+                          data,"top-pot-%d"%i)
+            pp.pop("trough");pp["planting_layer"]="accent"
+            meshes.append(pp);plants.append(pp)
+        pp["sun_hours"] = direct_sun_hours(*center)
+        objects.append(dict(id="landscape-top-pot-%d"%i,rect=(center[0]-.259,center[1]-.259,center[0]+.259,center[1]+.259),zone="top"))
+    troughs, benches = _top_garden(spec, data, credits, meshes, props, objects, plants)
 
 
     exposure = {name:direct_sun_hours((r[0]+r[2])/2,(r[1]+r[3])/2) for name,r in beds.items()}
     notes = ["G1/G2 review candidate: artificial turf, stepping stones, one Plumeria in the lawn, offset from centre for a clear door route and ASSUMED 1.2 m gravel tree pit.",
              "Only knowledge/garden-palette.json supplies botanical dimensions, sources and placement assumptions. Egypt performance and root behaviour over the basement slab are UNVERIFIED.",
-             "G2 north/west boundary beds and terracotta-red glazed door pots replanted from the palette; thin open timber trellises mounted on boundary faces. G3 replacement top planting remains pending; empty containers removed.",
+             "G2 north/west boundary beds and terracotta-red glazed door pots replanted from the palette; thin open timber trellises mounted on boundary faces. G3 low steel troughs with rosemary/aloe drifts, two benches on slabs and a gate-link path; no shade tree placed.",
              "ASSUMED drip irrigation to retained beds/containers; tree-pit watering/drainage needs local nursery and engineering review.",
+             "Trough colour: " + TROUGH_COLOUR["name"] + "; authored appearance ASSUMED, not a manufacturer finish. Powder-coat weathering in Egyptian sun and loaded deck weight UNVERIFIED; supplier data sheet and engineer decide before ordering.",
+             "Top container roots/deep rooting and waterproofing over the basement slab UNVERIFIED: local nursery and waterproofing/structural consultant must confirm; no deep-rooted tree specified.",
+             "Round-3 potted small shade tree not placed: no verified top-zone shade-tree species fits the palette; open client/nursery item.",
+             "Ursinia omitted: palette light UNVERIFIED and zone gf-beds does not establish this top container placement.",
              "Illustrative 09:00-17:00 direct hours screen: "+str(exposure)]
-    plan = dict(paths=PATHS,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,
+    ramp=spec["parking2"]["ramp"]
+    gate_route=dict(profile=ramp["profile"],y0=PATHS["gate-link"][1],y1=PATHS["gate-link"][3])
+    plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,
                 east_rect=EAST,east_center=EAST_CENTER,tree_pit=dict(center=tree_center,diameter_m=radius*2,status="ASSUMED"))
     plan["conflicts"] = candidate_violations(meshes,props,plan,lay)
     notes += ["UNRESOLVED garden guard: %s: %s" % f for f in plan["conflicts"]]
@@ -1006,7 +1279,7 @@ def review_candidate(spec, lay=None):
 def walking_routes(meshes):
     """Route rectangles and actual ground heights, including every built stone."""
     routes = dict(PATHS)
-    ground = {name: (0.0 if name == "study" else GROUND) for name in routes}
+    ground = {name: (TOP_SURFACE if name in ("study", "gate-link") else GROUND) for name in routes}
     for stone in meshes:
         if stone.get("part_kind") == "stepping-stone":
             routes[stone["id"]] = _mesh_rect(stone)
@@ -1028,7 +1301,8 @@ def candidate_violations(meshes, props, plan, lay):
             [(species,"%s/%s drift is %d, need 3-5"%(bed,layer,n)) for bed,layer,species,n in drift_violations(plants)]+
             sunlight_violations(plants)+standin_violations(props)+bench_violations(props)+species_violations(meshes+props)+
             dimension_violations(meshes+props)+east_content_violations(meshes,props,objects)+
-            canopy_violations(props)+canopy_violations(props,mature=True))
+            canopy_violations(props)+canopy_violations(props,mature=True)+
+            top_garden_violations(meshes,props,plan,spec_surface=TOP_SURFACE))
 
 
 def build(spec, lay=None):

@@ -321,7 +321,7 @@ class LandscapeGuards(unittest.TestCase):
 
     def test_procedural_clumps_have_recorded_size_and_mutations_fail(self):
         clumps=[m for m in self.meshes if m["part_kind"]=="plant-clump"]
-        self.assertEqual(len(clumps),14)
+        self.assertEqual(len(clumps),23)
         self.assertEqual(L.dimension_violations(clumps), [])
         for source in clumps[:2]:
             altered=copy.deepcopy(source)
@@ -375,6 +375,136 @@ class LandscapeGuards(unittest.TestCase):
         wrong=copy.deepcopy(next(p for p in self.props if p["asset"]=="sf_wooden_bench"))
         wrong["rotation_deg"]=[0,0,90]
         self.assertTrue(L.bench_violations([wrong]))
+
+    def test_g3_actual_rim_reproduction_surface_route_and_renamed_siblings(self):
+        old=json.loads((Path(__file__).parent/"fixtures/garden-g3-before.json").read_text())
+        failures=L.top_garden_violations(old["meshes"],old["props"],{})
+        self.assertTrue(any("outline or rail" in why for _,why in failures))
+        rim=copy.deepcopy(next(m for m in old["meshes"] if m["id"]=="landscape-top-north-planter-0-rim"))
+        rim.update(id="another-container-rim",zone="top")
+        self.assertTrue(L.top_garden_violations([rim],[],{}))
+        self.assertEqual(L.top_garden_violations(self.meshes,self.props,self.plan),[])
+        trough=next(m for m in self.meshes if m.get("part_kind")=="steel-trough")
+        for delta,reason in (((0,0,.01),"deck surface"),((0,0,-.01),"deck surface"),
+                             ((0,.2,0),"rail strip"),((-2.1,-1.3,0),"walking route")):
+            moved=copy.deepcopy(trough);moved["id"]="renamed-trough"
+            moved["faces"]=[[[q[i]+delta[i] for i in range(3)] for q in f] for f in moved["faces"]]
+            self.assertTrue(any(reason in why for _,why in L.top_garden_violations([moved],[],{})),(delta,reason))
+        tilted=copy.deepcopy(trough)
+        tilted["faces"]=[[[q[0],q[1],q[2]+.03*(q[0]-L._rect(trough)[0])] for q in f] for f in tilted["faces"]]
+        self.assertTrue(any("fully seated" in why for _,why in L.top_garden_violations([tilted],[],{})))
+        # A procedural plant really crossing the route cannot hide behind
+        # schedule rectangles or a renamed species instance.
+        plant=copy.deepcopy(next(m for m in self.meshes if m.get("trough") and m.get("species")))
+        plant["id"]="another-trailing-plant"
+        plant["faces"]=[[[q[0]-2.5,q[1]-.9,q[2]] for q in f] for f in plant["faces"]]
+        self.assertTrue(any("walking route" in why for _,why in L.top_garden_violations([plant],[],self.plan)))
+        # Same physical check on unrelated coordinates and a nonzero datum.
+        shifted=copy.deepcopy(trough)
+        shifted["faces"]=[[[q[0]+30,q[1]+50,q[2]+4] for q in f] for f in shifted["faces"]]
+        deck=tuple(v+d for v,d in zip(L.DECK,(30,50,30,50)))
+        roof=tuple(v+d for v,d in zip(L.ROOF,(30,50,30,50)))
+        self.assertEqual(L.top_garden_violations([shifted],[],{},deck=deck,roof=roof,spec_surface=4),[])
+        shifted["faces"]=[[[q[0],q[1],q[2]+.002] for q in f] for f in shifted["faces"]]
+        self.assertTrue(L.top_garden_violations([shifted],[],{},deck=deck,roof=roof,spec_surface=4))
+        with patch.object(L,"review_candidate",return_value=(self.meshes+[rim],self.props,self.notes,
+                         dict(self.plan,conflicts=L.top_garden_violations([rim],[],{})))):
+            with self.assertRaisesRegex(ValueError,"rail strip"):
+                L.build(self.spec,self.lay)
+
+    def test_g3_trough_drifts_seating_palette_and_material_intent(self):
+        from archpipe.concept import villa_render as VR
+        self.assertEqual(len(self.plan["top_troughs"]),3)
+        self.assertEqual(len(self.plan["top_benches"]),2)
+        for trough in self.plan["top_troughs"]:
+            plants=[p for p in self.plan["plants"] if p.get("trough")==trough["id"]]
+            self.assertEqual(len(plants),3)
+            self.assertEqual({p["species"] for p in plants},{trough["species"]})
+            self.assertEqual(L.drift_violations(plants[:2]),[(trough["id"],"trough",trough["species"],2)])
+            self.assertEqual(L.drift_violations(plants),[])
+            self.assertEqual(L.spacing_violations(plants),[])
+            for plant in plants:
+                self.assertEqual(plant["root_z_m"],trough["soil_z_m"])
+                self.assertEqual(plant["sun_hours"],L.direct_sun_hours(*plant["center"]))
+                self.assertGreater(len(plant["sun_hours"]),6)
+                wrong=dict(plant,root_z_m=plant["root_z_m"]+.01)
+                self.assertTrue(any("root" in why for _,why in L.top_garden_violations([wrong],[],self.plan)))
+        top=[p for p in self.plan["plants"] if p.get("zone")=="top"]
+        self.assertEqual({p["species"] for p in top},{"Ixora coccinea","Salvia rosmarinus Prostrata Group","Aloe vera"})
+        self.assertEqual(sum(p["species"]=="Ixora coccinea" for p in top),2)
+        self.assertFalse(any("Ursinia" in p["species"] or "Bougainvillea" in p["species"] for p in top))
+        self.assertEqual(VR.M["top-trough-coating"]["base_rgb"],L.TROUGH_COLOUR["base_rgb"])
+        self.assertIn("ASSUMED pending client confirmation",L.TROUGH_COLOUR["name"])
+        self.assertIn("not a manufacturer finish",VR.M["top-trough-coating"]["note"])
+        # Real bench support and knee side fail if the slab or facing changes.
+        slabs=[m for m in self.meshes if m.get("part_kind")=="bench-slab"]
+        self.assertEqual(len(slabs),2)
+        self.assertTrue(any("slab" in why for _,why in L.top_garden_violations(
+            [m for m in self.meshes if m not in slabs],self.props,self.plan)))
+        altered=copy.deepcopy(self.props)
+        next(p for p in altered if p["id"]==self.plan["top_benches"][0]["id"])["facing"]=(0,1)
+        self.assertTrue(any("facing" in why for _,why in L.top_garden_violations(self.meshes,altered,self.plan)))
+
+    def test_g3_ixora_requires_quote_and_sun_otherwise_top_palette_replaces(self):
+        ixora=next(p for p in self.props if p.get("bed","").startswith("top-pot-"))
+        with patch.object(L,"direct_sun_hours",return_value=[10,11]):
+            self.assertTrue(any("Ixora" in why for _,why in L.top_garden_violations([], [ixora],self.plan)))
+            m,p,_,plan=L.review_candidate(self.spec,self.lay)
+        pots=[a for a in plan["plants"] if a.get("bed","").startswith("top-pot-")]
+        self.assertEqual(len(pots),2)
+        self.assertEqual({a["species"] for a in pots},{"Aloe vera"})
+        self.assertFalse(any(a.get("species")=="Ixora coccinea" and a.get("zone")=="top" for a in p))
+        self.assertEqual(L.dimension_violations(pots),[])
+        from tempfile import TemporaryDirectory
+        record=json.loads(L.PALETTE.read_text())
+        next(r for r in record['species'] if r['species']=='Ixora coccinea')['light']['status']='UNVERIFIED'
+        with TemporaryDirectory() as tmp:
+            path=Path(tmp)/'palette.json';path.write_text(json.dumps(record))
+            with patch.object(L,'PALETTE',path):
+                self.assertTrue(any('Ixora' in why for _,why in L.top_garden_violations([], [ixora],self.plan)))
+                _,_,_,replaced=L.review_candidate(self.spec,self.lay)
+        pots=[a for a in replaced['plants'] if a.get('bed','').startswith('top-pot-')]
+        self.assertEqual({a['species'] for a in pots},{'Aloe vera'})
+
+    def test_g3_tapered_leaf_tip_real_degenerate_control(self):
+        from archpipe.concept.physical_part import geometry_errors
+        before=json.loads((Path(__file__).parent/"fixtures/garden-g3-aloe-tip-before.json").read_text())
+        self.assertIn("zero-area triangle",geometry_errors(before["faces"]))
+        for species in ("Aloe vera","Salvia rosmarinus Prostrata Group"):
+            leaves=[m for m in self.meshes if m.get("zone")=="top" and m.get("species")==species]
+            self.assertTrue(leaves)
+            for leaf in leaves:
+                self.assertEqual(geometry_errors(leaf["faces"]),[])
+            altered=copy.deepcopy(leaves[0]);altered["id"]="unrelated-young-plant"
+            altered["faces"][0]=[altered["faces"][0][0]]*3
+            self.assertIn("zero-area triangle",geometry_errors(altered["faces"]))
+
+    def test_g3_study_gate_chain_and_sloped_d2_volume_keep_driveway(self):
+        route=self.plan["gate_route"]
+        self.assertEqual(route["profile"],[[-.123,-1.2],[.877,-1.1],[5.877,-.1],[6.877,0.]])
+        self.assertEqual(route["profile"],self.spec["parking2"]["ramp"]["profile"])
+        gate=self.plan["paths"]["gate-link"];study=self.plan["paths"]["study"]
+        self.assertGreaterEqual(gate[3]-gate[1],.900)
+        self.assertGreaterEqual(study[2]-study[0],.900)
+        self.assertEqual(gate[0],route["profile"][-1][0])
+        self.assertGreater(L._rect_overlap_area(gate,study),0)
+        self.assertEqual(L.gate_route_violations(self.meshes+self.props,route),[])
+        # Walk over a sloping actual floor, including geometry below the
+        # top-garden datum. A flat floor-to-2m screen would miss this.
+        low=dict(id="other-low-branch",faces=L._box(2,-22.2,-.7,2.2,-21.9,-.6))
+        self.assertTrue(L.gate_route_violations([low],route))
+        high=dict(low,id="head-clear-branch",faces=L._box(2,-22.2,1.2,2.2,-21.9,1.3))
+        self.assertEqual(L.gate_route_violations([high],route),[])
+        # An independent ramp, renamed object and floor prove generality.
+        sibling=dict(profile=[[20,4],[22,4.4]],y0=10,y1=11)
+        beam=dict(id="unrelated-beam",faces=L._box(20.5,10.2,4.3,21,10.8,4.4))
+        self.assertTrue(L.gate_route_violations([beam],sibling))
+        beam["faces"]=L._box(20.5,10.2,6.3,21,10.8,6.4)
+        self.assertEqual(L.gate_route_violations([beam],sibling),[])
+        # New paving is restricted to the deck; the driveway stays intact.
+        stones=[m for m in self.meshes if "stone-gate-link" in m["id"]]
+        self.assertTrue(stones)
+        self.assertTrue(all(L._rect(m)[0]>=L.DECK[0] for m in stones))
 
     def test_standin_real_and_old_mislabelled_tree_fails(self):
         draft=[dict(id="old-north-tree",asset="tree_small_02",label="dressing: Bauhinia variegata; nursery height 2.55 m ASSUMED")]
