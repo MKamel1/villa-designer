@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from archpipe.render_qa import check
 from archpipe.safe_io import save_bytes
+from archpipe.stage_result import enforce_clean_verdict, validate_stage_result, write_stage_result
 from archpipe.villa_render_contract import validate_scene
 from archpipe.concept.villa_render import source_provenance, write as write_scene
 from archpipe.execution_context import ContextError, project_context, write_record
@@ -307,6 +308,31 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         if stale:
             measurements["label"] = stale_label
         save_bytes(output / "lighting-measurements.json", json.dumps(measurements, indent=2).encode("utf-8"))
+    stage_record_path = output / "villa-render.stage-result.json"
+    outputs = []
+    for ident in selected:
+        for suffix in (".png", ".json", ".qa.json", ".caption.json"):
+            outputs.append(output / (ident + suffix))
+    if calibrate:
+        for suffix in ("calibration.json", "calibration.png", "calibration.exr", "calibration-emissive.exr"):
+            outputs.append(output / suffix)
+    if measure_lighting:
+        outputs.append(output / "lighting-measurements.json")
+    all_qa_passed = all(r.get("qa_passed", False) for r in reports) if reports else True
+    write_stage_result(
+        "villa-render",
+        record_path=stage_record_path,
+        inputs=[scene_path, *files.values()],
+        outputs=outputs,
+        exit_code=0 if (all_qa_passed and (not stale or allow_stale_scene)) else 1,
+        metadata={
+            "job_id": identity,
+            "views_count": len(reports),
+            "all_qa_passed": all_qa_passed,
+            "stale_scene": stale,
+            "label": stale_label,
+        },
+    )
     return {"release": release_id, "job_id": identity, "views": reports, "out": str(output),
             "execution_context": {"local": context, "remote": remote_context},
             "scene_provenance": provenance, "scene_source_hash": scene_hash,
@@ -345,6 +371,10 @@ def main():
     except (ValueError, ContextError) as exc:
         ap.error(str(exc))
     print(json.dumps(result, indent=2))
+    if not a.dry_run:
+        all_passed = all(v.get("qa_passed", True) for v in result.get("views", []))
+        stale_ok = (not result.get("stale_scene")) or a.allow_stale_scene
+        enforce_clean_verdict(all_passed and stale_ok, exit_code=1)
 
 
 if __name__ == "__main__":

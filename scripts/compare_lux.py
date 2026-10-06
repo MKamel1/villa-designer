@@ -34,6 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from archpipe import photometry as ph
 from archpipe.lighting import Luminaire, point_illuminance
+from archpipe.stage_result import enforce_clean_verdict, write_stage_result
 
 
 
@@ -176,11 +177,26 @@ def main() -> int:
                 print("  than shadowing differs.")
     # Never return success after printing a failed or unavailable verdict.
     # This is a pipeline gate, not merely an informational table.
-    if med is None or abs(med - 1.0) > 0.05:
-        print('  VERDICT: FAIL -- direct-light agreement outside 5% or unavailable')
-        return 1
-    print('  VERDICT: PASS -- direct-light median ratio within 5%')
-    return 0
+    bad = med is None or abs(med - 1.0) > 0.05
+    verdict_text = "FAIL -- direct-light agreement outside 5% or unavailable" if bad else "PASS -- direct-light median ratio within 5%"
+    print(f"  VERDICT: {verdict_text}")
+    out_dir = Path(a.rendered).parent
+    stage_record = out_dir / "compare-lux.stage-result.json"
+    inputs = [p for p in (a.rendered, a.extract) if p.is_file()]
+    write_stage_result(
+        "compare-lux",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[],
+        exit_code=1 if bad else 0,
+        metadata={
+            "median_ratio": med,
+            "points_compared": n,
+            "verdict": verdict_text,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict({"passed": not bad, "verdict": verdict_text}, exit_code=1)
 
 
 if __name__ == "__main__":

@@ -27,6 +27,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from archpipe.fixture_source import source_point             # noqa: E402
+from archpipe.stage_result import enforce_clean_verdict, write_stage_result  # noqa: E402
 
 TOL_MM = 1.0         # far below drawing tolerance; we expect exact
 TOL_M2 = 0.001
@@ -278,11 +279,21 @@ def main(argv=None) -> int:
                    item.get("family") or "-")
 
     bad = c.report()
+    record_path = a.extract.parent / "check-bedroom.stage-result.json"
+    inputs = [p for p in (a.spec, a.extract) if p.is_file()]
+    write_stage_result(
+        "check-bedroom",
+        record_path=record_path,
+        inputs=inputs,
+        outputs=[],
+        exit_code=1 if bad else 0,
+        metadata={"failures": bad, "checks": len(c.rows)},
+    )
     if bad:
         print("  The model Revit built does not match the spec.")
     else:
         print("  Revit built exactly what the spec asked for.")
-    return 1 if bad else 0
+    return enforce_clean_verdict(bad == 0, exit_code=1)
 
 
 if __name__ == "__main__":

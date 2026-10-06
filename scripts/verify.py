@@ -31,6 +31,7 @@ from archpipe.model import load as load_model  # noqa: E402
 from archpipe.asset_intake import audit_scene_manifest, manifest_assumptions, manifest_overrides  # noqa: E402
 from archpipe.concept import villa_render as VR  # noqa: E402
 from archpipe.execution_context import ContextError, absolute, project_context, write_record  # noqa: E402
+from archpipe.stage_result import enforce_clean_verdict, validate_stage_result, write_stage_result  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 try:
@@ -810,10 +811,42 @@ def main() -> int:
     expect("no book or standard (PDF/EPUB) committed to the repository"
            + (f" ({', '.join(tracked[:4])})" if tracked else ""), not tracked)
 
+    # Pipeline stages must have atomic proof: a report printing FAIL cannot exit 0 (l0029),
+    # an input change must invalidate a cached stage result (l0040), and an empty/missing
+    # output must fail completeness.
+    from archpipe.stage_result import (report_has_failure as _rhf,
+                                       write_stage_result as _wsr,
+                                       validate_stage_result as _vsr)
+    expect("stage_result helper catches report with FAIL and refuses pass (l0029)",
+           _rhf({"passed": False, "failures": ["x"]})[0] and _rhf("VERDICT: FAIL")[0]
+           and not _rhf({"passed": True, "failures": []})[0])
+    import tempfile as _tf
+    with _tf.TemporaryDirectory() as _td:
+        _tp = pathlib.Path(_td)
+        _ti = _tp / "i.txt"; _ti.write_text("1", encoding="utf-8")
+        _to = _tp / "o.txt"; _to.write_text("2", encoding="utf-8")
+        _tr = _tp / "r.json"
+        _wsr("guard_test", record_path=_tr, inputs=[_ti], outputs=[_to], root=_tp)
+        _ti.write_text("changed", encoding="utf-8")
+        _stale_ok, _stale_why, _ = _vsr(_tr, root=_tp, raise_on_error=False)
+    expect("stage_result validation refuses cached output after input modification (l0040)",
+           not _stale_ok and "stale" in _stale_why)
+
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
+    record_path = ROOT / "out/verify-result.json"
     write_record({"execution_context": EXECUTION_CONTEXT, "failures": FAILS,
-                  "passed": not FAILS, "exit_code": 1 if FAILS else 0}, ROOT / "out/verify-result.json")
-    return 1 if FAILS else 0
+                  "passed": not FAILS, "exit_code": 1 if FAILS else 0}, record_path)
+    stage_record_path = ROOT / "out/verify.stage-result.json"
+    inputs = [ROOT / "spec/bedroom-test.yaml", ROOT / "spec/apartment.yaml", ROOT / "spec/villa-site.yaml"]
+    write_stage_result(
+        "verify",
+        record_path=stage_record_path,
+        inputs=[p for p in inputs if p.is_file()],
+        outputs=[record_path],
+        exit_code=1 if FAILS else 0,
+        metadata={"failures": FAILS, "passed": not FAILS},
+    )
+    return enforce_clean_verdict(not FAILS, exit_code=1)
 
 
 if __name__ == "__main__":
@@ -825,4 +858,16 @@ if __name__ == "__main__":
         write_record({"execution_context": EXECUTION_CONTEXT, "passed": False,
                       "exit_code": 1, "error": str(exc), "failures": FAILS},
                      ROOT / "out/verify-result.json")
+        try:
+            write_stage_result(
+                "verify",
+                record_path=ROOT / "out/verify.stage-result.json",
+                inputs=[],
+                outputs=[ROOT / "out/verify-result.json"],
+                exit_code=1,
+                status="fail",
+                metadata={"error": str(exc), "failures": FAILS},
+            )
+        except Exception:
+            pass
         raise
