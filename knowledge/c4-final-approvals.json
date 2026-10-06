@@ -40,7 +40,11 @@
         -20.589,
         -0.5299999999999999
       ]
-    },
+    }
+  ],
+  "headboard_margin_m": 0.01,
+  "coffee_complete_assembly_seating": true,
+  "retired_rows": [
     {
       "id": "landscape-trellis-east",
       "host_id": "yard-boundary-edge-6",
@@ -59,7 +63,9 @@
         28.307,
         -22.488,
         -0.7999999999999998
-      ]
+      ],
+      "disposition": "removed",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-climber-branches-east",
@@ -79,7 +85,9 @@
         28.307,
         -22.69,
         -1.08
-      ]
+      ],
+      "disposition": "removed",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-climber-east",
@@ -99,7 +107,9 @@
         28.307,
         -22.69,
         -1.08
-      ]
+      ],
+      "disposition": "removed",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-trellis-south",
@@ -119,7 +129,9 @@
         26.762,
         -29.87566,
         -0.7999999999999998
-      ]
+      ],
+      "disposition": "removed",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-climber-branches-south",
@@ -139,7 +151,9 @@
         26.56,
         -29.87566,
         -1.08
-      ]
+      ],
+      "disposition": "removed",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-climber-south",
@@ -159,7 +173,9 @@
         26.56,
         -29.87566,
         -1.08
-      ]
+      ],
+      "disposition": "removed",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-trellis-north",
@@ -179,7 +195,9 @@
         26.512,
         -20.601,
         -0.7999999999999998
-      ]
+      ],
+      "disposition": "rebuilt",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-climber-branches-north",
@@ -199,7 +217,9 @@
         26.21,
         -20.601,
         -1.08
-      ]
+      ],
+      "disposition": "rebuilt",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-climber-north",
@@ -219,7 +239,9 @@
         26.21,
         -20.601,
         -1.08
-      ]
+      ],
+      "disposition": "rebuilt",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-trellis-west",
@@ -239,7 +261,9 @@
         -0.08300000000000002,
         -24.688,
         -0.7999999999999998
-      ]
+      ],
+      "disposition": "rebuilt",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-climber-branches-west",
@@ -259,7 +283,9 @@
         -0.08300000000000002,
         -24.89,
         -1.08
-      ]
+      ],
+      "disposition": "rebuilt",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     },
     {
       "id": "landscape-climber-west",
@@ -279,9 +305,9 @@
         -0.08300000000000002,
         -24.89,
         -1.08
-      ]
+      ],
+      "disposition": "rebuilt",
+      "reason": "lead decision 2026-10-06: G1 lawn-only east removes east/south assemblies; G2 north/west replacements authored on finite boundary faces, so old movement approvals cannot be reused."
     }
-  ],
-  "headboard_margin_m": 0.01,
-  "coffee_complete_assembly_seating": true
+  ]
 }

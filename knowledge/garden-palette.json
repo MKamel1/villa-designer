@@ -1,0 +1,976 @@
+{
+  "schema": "garden-palette/1",
+  "brief_date": "2026-10-05",
+  "evidence_origin": "Client-agreed verified table supplied for G1; no independent local-nursery confirmation. VERIFIED denotes evidence in that table, ASSUMED denotes design/legacy rendering intent, UNVERIFIED denotes missing evidence. All dimensions are metres. MEASURED denotes a local geometry read-back, not botanical evidence.",
+  "species": [
+    {
+      "species": "Aspidistra elatior",
+      "zones": {
+        "value": [
+          "north",
+          "west"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          0.5,
+          1
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.1,
+          0.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "bright, indirect light or a shaded spot",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/aspidistra-elatior",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.5,
+              0.5
+            ],
+            "status": "ASSUMED",
+            "reason": "Young planting appearance within verified range; explicit shaped leaves and petioles, not a species-labelled imported look-alike."
+          },
+          "spread": {
+            "range_m": [
+              0.4,
+              0.4
+            ],
+            "status": "ASSUMED",
+            "reason": "Young planting appearance within verified range; spacing remains based on recorded spread."
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        }
+      }
+    },
+    {
+      "species": "Ixora coccinea",
+      "zones": {
+        "value": [
+          "north",
+          "west"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          1.2,
+          1.8
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "reason": "Spread not stated in the agreed source table.",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": "full sun for best flowering, though it can tolerate some light shade",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=286675",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "spacing_spread": {
+          "value": 1.2,
+          "status": "ASSUMED",
+          "reason": "Retains explicit legacy nursery spacing envelope pending local nursery confirmation; not a sourced spread."
+        },
+        "sf_ixora": {
+          "height": {
+            "range_m": [
+              0.55,
+              1.0
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "spread": {
+            "range_m": [
+              0.7945437659623871,
+              1.4446250290225218
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "contexts": {
+            "landscape-north-mid-00": {
+              "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-mid-01": {
+              "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-mid-02": {
+              "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-west-mid-00": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-west-mid-01": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-west-mid-02": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-top-north-ixora-0": {
+              "height_m": 0.55,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-top-north-ixora-1": {
+              "height_m": 0.55,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            }
+          }
+        }
+      }
+    },
+    {
+      "species": "Strelitzia reginae",
+      "zones": {
+        "value": [
+          "north",
+          "west"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          1,
+          1.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.5,
+          1
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "kind": "no checked light quote in brief",
+        "guidance": {
+          "value": "bright light, regular water, not deep shade",
+          "status": "VERIFIED",
+          "kind": "brief paraphrase, not quotation"
+        }
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/strelitzia-reginae",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              1.1,
+              1.1
+            ],
+            "status": "ASSUMED",
+            "reason": "Young planting appearance within verified range; explicit shaped leaves and petioles, not a species-labelled imported look-alike."
+          },
+          "spread": {
+            "range_m": [
+              0.5,
+              0.5
+            ],
+            "status": "ASSUMED",
+            "reason": "Young planting appearance within verified range; spacing remains based on recorded spread."
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        }
+      }
+    },
+    {
+      "species": "Callistemon citrinus",
+      "zones": {
+        "value": [
+          "gf-beds"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          4,
+          8
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          2.5,
+          4
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "full sun",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/2687/callistemon-citrinus/details",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "sf_bottlebrush": {
+          "height": {
+            "range_m": [
+              0.9,
+              0.9
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "spread": {
+            "range_m": [
+              1.037459807073955,
+              1.037459807073955
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "contexts": {
+            "landscape-north-back-00": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-back-01": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-back-02": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-back-03": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-west-back-00": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-west-back-01": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-west-back-02": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            }
+          }
+        },
+        "spacing_spread": {
+          "value": 0.9,
+          "status": "ASSUMED",
+          "reason": "Retains legacy maintained spacing envelope for existing G2/G3 placement; nursery confirmation pending."
+        }
+      }
+    },
+    {
+      "species": "Ursinia anthemoides",
+      "zones": {
+        "value": [
+          "gf-beds"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          0.1,
+          0.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.1,
+          0.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "kind": "no checked light quote in brief"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/161741/ursinia-anthemoides/details",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "flower_ursinia": {
+          "height": {
+            "range_m": [
+              0.18,
+              0.18
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "spread": {
+            "range_m": [
+              2.2985098952270078,
+              2.2985098952270078
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim. Multi-plant appearance pack, not single-plant spread."
+          },
+          "contexts": {
+            "landscape-top-south-ursinia": {
+              "height_m": 0.18,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            }
+          }
+        }
+      }
+    },
+    {
+      "species": "Salvia rosmarinus Prostrata Group",
+      "zones": {
+        "value": [
+          "top"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          0.1,
+          0.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          1,
+          1.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "kind": "no checked light quote in brief"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/salvia-rosmarinus-prostrata-group",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {}
+    },
+    {
+      "species": "Aloe vera",
+      "zones": {
+        "value": [
+          "top"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": null,
+        "status": "VERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": [
+          "Prefers full sun but can adapt to partial shade",
+          "drought-tolerant"
+        ],
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=282054",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {}
+    },
+    {
+      "species": "Plumeria rubra",
+      "zones": {
+        "value": [
+          "east"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          4.6,
+          7.6
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          4.6,
+          7.6
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "kind": "no checked light quote in brief"
+      },
+      "source_url": {
+        "value": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?kempercode=d451",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "sf_frangipani": {
+          "rendered_stage": {
+            "value": "young pruned tree",
+            "status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread"
+          },
+          "height": {
+            "range_m": [
+              3.2773871168547286,
+              3.277587116854729
+            ],
+            "status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread"
+          },
+          "spread": {
+            "range_m": [
+              4.5999,
+              4.600099999999999
+            ],
+            "status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread"
+          }
+        }
+      },
+      "habit": {
+        "value": "small rounded deciduous tree",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "appearance_measurements": {
+        "sf_frangipani": {
+          "status": "MEASURED",
+          "measured_on": "2026-10-06",
+          "source": "Local glTF POSITION accessor bounds plus node transforms; agrees with tracked manifest within 0.00003 m.",
+          "native_gltf_y_up_bounds_m": {
+            "min": [
+              -1.5851744413375854,
+              -4.496876211753807e-16,
+              -2.0063219070434566
+            ],
+            "max": [
+              2.3004188537597656,
+              2.7684743404388437,
+              1.5306861400604261
+            ]
+          },
+          "trunk_base_gltf_m": [
+            -0.003329545259475708,
+            0.0,
+            0.001042589545249939
+          ],
+          "trunk_measurement": "Centre of bark POSITION vertices at <=0.01 m height; 26 vertices, all at ground; glTF node chain transforms original (x,y,z) to (x,z,-y).",
+          "model_gltf_sha256": "03d79d7028bf53cd330f1f5f3d55c592004db1a6714392f801a0dd853ee14d1a",
+          "scene_bin_sha256": "20b0305d3f6ed8f2897fb7b3464d51579a122619a8e30a40e6e3a64c30cbbab7",
+          "scale": 1.1838603916174273,
+          "scale_basis": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread; uniform scale = 4.6 m / measured maximum horizontal native span",
+          "up_axis": "+Y (glTF), +Z (scene)",
+          "front_axis": "none; nondirectional tree",
+          "appearance_claim": "named species appearance; not procurement/local nursery performance evidence",
+          "licence": "CC Attribution",
+          "credit": "Realistic HD Frangipani tree (13/50) by PlantCatalog; see library manifest for attribution URL"
+        }
+      }
+    },
+    {
+      "species": "Trachelospermum jasminoides",
+      "zones": {
+        "value": [
+          "shadier-trellises"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": "warm, sunny, or light-shaded sheltered spot",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/trachelospermum-jasminoides",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-trellis": {
+          "height": {
+            "range_m": [
+              0,
+              2.2
+            ],
+            "status": "ASSUMED",
+            "reason": "Young trained planting on open 1.5 m long, 2.2 m high timber frame; mature size not claimed."
+          },
+          "spread": {
+            "range_m": [
+              0,
+              1.5
+            ],
+            "status": "ASSUMED",
+            "reason": "Young trained planting on open 1.5 m long, 2.2 m high timber frame; mature size not claimed."
+          }
+        }
+      },
+      "growth": {
+        "value": "can reach 4m (14ft) or more; twining",
+        "status": "VERIFIED",
+        "kind": "brief quote and description; no upper size bound"
+      }
+    },
+    {
+      "species": "Bougainvillea glabra",
+      "zones": {
+        "value": [
+          "sunniest-trellis"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": "prefer full sun",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=282937",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "sf_bougainvillea": {
+          "height": {
+            "range_m": [
+              0.4,
+              0.6
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "spread": {
+            "range_m": [
+              1.0589215686274511,
+              1.5883823529411765
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "contexts": {
+            "landscape-north-mid-accent": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-west-mid-accent": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-door-pot-dining-w": {
+              "height_m": 0.5,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-door-pot-living-north-e": {
+              "height_m": 0.5,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-door-pot-lounge-west-s": {
+              "height_m": 0.5,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-top-boug-deck": {
+              "height_m": 0.4,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-top-boug-roof": {
+              "height_m": 0.5,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            }
+          }
+        },
+        "spacing_spread": {
+          "value": 0.9,
+          "status": "ASSUMED",
+          "reason": "Retains legacy maintained spacing envelope for existing G2/G3 placement; nursery confirmation pending."
+        },
+        "procedural-trellis": {
+          "height": {
+            "range_m": [
+              0,
+              2.2
+            ],
+            "status": "ASSUMED",
+            "reason": "Young trained planting on open 1.5 m long, 2.2 m high timber frame; mature size not claimed."
+          },
+          "spread": {
+            "range_m": [
+              0,
+              1.5
+            ],
+            "status": "ASSUMED",
+            "reason": "Young trained planting on open 1.5 m long, 2.2 m high timber frame; mature size not claimed."
+          }
+        }
+      },
+      "habit": {
+        "value": "scrambling shrubs or woody climbers",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      }
+    }
+  ],
+  "excluded": [
+    {
+      "species": "Pennisetum setaceum",
+      "reason": "Invasive",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Clivia miniata",
+      "reason": "Needs more water and no direct sun",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Acanthus mollis",
+      "reason": "Spreads from root fragments",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Agave attenuata",
+      "reason": "Flower spike 1.5\u20133 m",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Delonix regia",
+      "reason": "Too tall or wide for the courts",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Jacaranda mimosifolia",
+      "reason": "Too tall or wide for the courts",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Cassia fistula",
+      "reason": "Too tall or wide for the courts",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Bauhinia variegata",
+      "reason": "Too tall or wide for the courts",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    }
+  ],
+  "design_assumptions": {
+    "east_tree_pit": {
+      "diameter_m": 1.2,
+      "status": "ASSUMED",
+      "reason": "Client G1 instruction; nursery/root and drainage review outstanding.",
+      "surface": "gravel"
+    },
+    "east_tree_target": {
+      "height_m": 3.277487116854729,
+      "spread_m": 4.6,
+      "status": "ASSUMED",
+      "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread",
+      "rendered_stage": "young pruned tree"
+    },
+    "trellis_coverage": {
+      "value": 0.35,
+      "status": "ASSUMED",
+      "reason": "Client young-planting brief: timber frame stays visible"
+    },
+    "door_pot": {
+      "height_m": 0.4,
+      "lower_radius_m": 0.18,
+      "upper_radius_m": 0.25,
+      "status": "ASSUMED",
+      "reason": "client decision 2026-10-05: terracotta-red glazed tapered ceramic with rim and visible soil, directly on turf/paving; no base"
+    },
+    "full_sun_screen": {
+      "hours": 6,
+      "comparison": "strictly_more_than",
+      "status": "VERIFIED",
+      "source_url": "https://www.rhs.org.uk/garden-design/shade-gardening",
+      "source_quote": "Full sun: More than six hours of direct sun per day at midsummer.",
+      "checked_on": "2026-10-06",
+      "applicability": "Hourly June-solstice enclosure proxy only; detailed site climate and planting performance UNVERIFIED"
+    },
+    "east_tree_position": {
+      "center_m": [
+        25.576999999999998,
+        -24.41111528638369
+      ],
+      "status": "MEASURED",
+      "decision": "D4",
+      "description": "in the lawn, offset from centre for a clear door route",
+      "search": {
+        "translation_m": [
+          0.0,
+          0.7222147136163092
+        ],
+        "distance_m": 0.7222147136163092,
+        "boundary_distance_m": 0.7222137136163093,
+        "clearance_m": 1e-06,
+        "bounds_m": [
+          -0.5,
+          -2.4823299999999975,
+          0.0027058383684810394,
+          2.1559166158306198
+        ],
+        "forbidden_polygons": 5359
+      }
+    }
+  },
+  "lead_decisions": [
+    {
+      "id": "D1",
+      "decision": "lead decision 2026-10-06",
+      "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread"
+    },
+    {
+      "id": "D2",
+      "decision": "lead decision 2026-10-06",
+      "reason": "Only geometry from ground to 2.0 m obstructs walking, consistent with render_support.blocked_openings passage height; whole canopy footprints falsely blocked head-clear routes."
+    },
+    {
+      "id": "D3",
+      "decision": "lead decision 2026-10-06",
+      "reason": "client decision 2026-10-05: east has lawn, paths and one tree only; layer scope is the beds actually built in north and west."
+    },
+    {
+      "id": "D4",
+      "decision": "lead decision 2026-10-06",
+      "reason": "Real young frangipani branches enter the living-east walking envelope at about 1.71 m. One tree in the lawn is the brief intent; exact centring is secondary to a clear door route. The long court axis offers relocation slack.",
+      "constraints": "Search the whole lawn, x within 0.5 m of the court centre line, y bounded by fence inner faces and plot; trunk and pit move together; same uniform scale, no rotation or mesh pruning; every guard retained."
+    }
+  ]
+}

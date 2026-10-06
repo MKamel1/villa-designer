@@ -1,0 +1,74 @@
+{
+  "id": "sf_frangipani",
+  "source": "sketchfab",
+  "url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-1350-6afe1892d9fb419993cdfe54721110e9",
+  "author": "PlantCatalog",
+  "author_url": "https://sketchfab.com/PlantCatalog",
+  "licence": "CC Attribution",
+  "credit": "Realistic HD Frangipani tree (13/50) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-1350-6afe1892d9fb419993cdfe54721110e9), CC Attribution",
+  "role": "small-tree",
+  "faces": 83887,
+  "bounds_m": {
+    "min": [
+      -1.5852,
+      -0.0,
+      -2.0063
+    ],
+    "max": [
+      2.3004,
+      2.7685,
+      1.5307
+    ]
+  },
+  "units_note": "native units vary; always scaled uniformly into the checked footprint",
+  "manual_fetch": "ops/workstation/fetch_sketchfab.py",
+  "source_url": "https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-1350-6afe1892d9fb419993cdfe54721110e9",
+  "intake_sources": {
+    "source_url": "fetch_sketchfab.py API viewerUrl recorded as manifest url",
+    "author": "fetch_sketchfab.py recorded API metadata",
+    "licence": "fetch_sketchfab.py recorded API metadata",
+    "credit": "fetch_sketchfab.py recorded API metadata",
+    "up_axis": "https://github.com/KhronosGroup/glTF/blob/main/specification/2.0/Specification.adoc#34-coordinate-system-and-units; Blender glTF import converts (x,y,z) to (x,-z,y), villa_landscape.py",
+    "front_axis": "nondirectional role recorded in manifest",
+    "front_axis_reason": "role: small tree",
+    "preview_image": "/home/omar/archpipe/assets/library/previews/sf_frangipani.png: Blender neutral preview",
+    "units_normalised": "src/archpipe/blender/villa_scene.py:import_props/import_models (no unit conversion); src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+  },
+  "up_axis": "+Y",
+  "front_axis": "none",
+  "front_axis_reason": "display object has no functional front",
+  "use": "small tree",
+  "contents": {},
+  "species": "Plumeria rubra",
+  "expected_size_range": {
+    "min_m": [
+      4.572,
+      4.572,
+      4.572
+    ],
+    "max_m": [
+      7.62,
+      7.62,
+      7.62
+    ],
+    "basis": "species",
+    "source": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?kempercode=d451",
+    "reason": "Species mature-size ceiling; nursery size may be smaller. Landscape-maintained or clump spread is ASSUMED where noted in villa_landscape.py."
+  },
+  "preview_image": "previews/sf_frangipani.png",
+  "units_normalised": {
+    "scale_factor": 1.0,
+    "reason": "Blender glTF import applies no unit conversion; landscape placement applies a separate scale to the native coordinates."
+  },
+  "native_extent_xyz": [
+    3.8856,
+    2.7685,
+    3.537
+  ],
+  "placement_scale_factors": [
+    0.830774788
+  ],
+  "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+  "placed_scale": 0.830774788,
+  "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+}

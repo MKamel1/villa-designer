@@ -22,7 +22,7 @@ class SupportMounting(unittest.TestCase):
     def test_real_missing_sites_now_bound_and_only_pending_findings(self):
         frozen=json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text())
         self.assertTrue(any('MISSING mounting host' in f for f in scene_findings(frozen)))
-        self.assertEqual(len(self.scene['support_inventory_before']),300)
+        self.assertEqual(len(self.scene['support_inventory_before']),294)
         findings=scene_findings(self.scene)
         self.assertFalse(any('MISSING mounting host' in f for f in findings))
         pending={r['id'] for r in self.scene['mounting_movements'] if r['approval']=='PENDING'}
@@ -158,14 +158,30 @@ class SupportMounting(unittest.TestCase):
         before={m['id']:m for m in frozen['trellis_meshes']}
         for m in self.scene['meshes']:
             if m['id'].startswith(('landscape-trellis-','landscape-climber')):
-                self.assertEqual(m['faces'],before[m['id']]['faces'])
+                self.assertNotEqual(m['faces'],before[m['id']]['faces'])
                 host=self.scene['mounting_hosts'][m['mounting']['host_id']]
                 source=next(mm for mm in self.scene['meshes']+self.scene.get('diagnostic_meshes', []) if mm['id']==host['source_mesh'])
                 self.assertTrue(source['id'].startswith('yard-boundary-edge-'))
                 self.assertLessEqual(host['maximum_authored_travel_m'],.300)
-                self.assertEqual(m['mounting']['approval'],'PENDING')
-        south=next(r for r in self.scene['mounting_movements'] if r['id']=='landscape-trellis-south')
+                self.assertNotEqual(m['mounting'].get('approval'),'PENDING')
+        # Retain the real pre-rebuild mounting mismatch as a frozen proof,
+        # independently of the two new face-authored assemblies.
+        from archpipe.concept.exterior_mounting import yard_sources, mount_landscape
+        historical=dict(meshes=deepcopy([m for m in self.scene['meshes'] if
+            str(m.get('source_id','')).startswith('fence-')]),mounting_hosts={},mounting_movements=[])
+        sources=yard_sources(historical)
+        for member in deepcopy(frozen['trellis_meshes']):
+            if not member['id'].startswith(('landscape-trellis-','landscape-climber')): continue
+            member.pop('mounting',None)
+            historical['meshes'].append(member)
+            mount_landscape(historical,member,sources)
+        south=next(r for r in historical['mounting_movements'] if r['id']=='landscape-trellis-south')
         self.assertAlmostEqual(south['mm'],135.66)
+        self.assertEqual(south['approval'],'PENDING')
+        for row in self.scene['mounting_movements']:
+            if row['id'].startswith(('landscape-trellis','landscape-climber')):
+                self.assertAlmostEqual(row['mm'],0)
+                self.assertEqual(row['approval'],'APPLIED <=5 mm')
         for travel in (0,8):
             members=deepcopy(frozen['pantry_meshes'][:1]);floor=deepcopy(frozen['pantry_meshes'][1])
             for m in members+[floor]:

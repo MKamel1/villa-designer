@@ -28,6 +28,29 @@ def complete(role="armchair"):
 
 
 class AssetIntakeTests(unittest.TestCase):
+    def test_d4_real_stale_scale_fires_current_quiet_and_renamed_sibling(self):
+        from copy import deepcopy
+        from tempfile import TemporaryDirectory
+        from archpipe.concept import villa_landscape as L
+        before=json.loads((ROOT/'tests/fixtures/garden-d4-intake-before.json').read_text())
+        tree=json.loads((ROOT/'tests/fixtures/garden-g2-tree-centred-before.json').read_text())
+        current=PROPS['sf_frangipani']
+        self.assertEqual(current['placed_scale'],L.require_species('Plumeria rubra')['appearance_measurements']['sf_frangipani']['scale'])
+        self.assertEqual(current['units_normalised'],before['units_normalised'])
+        with TemporaryDirectory() as tmp:
+            path=Path(tmp)/'manifest.json'
+            for entry,prop,expected in ((before,tree,True),(current,tree,False)):
+                path.write_text(json.dumps({'props':[entry]}))
+                found=audit_scene_manifest(path,{'props':[prop]},ROOT)['placed']
+                self.assertEqual(bool(found),expected)
+                if expected:
+                    self.assertIn('placed_scale disagrees with built scene',found['sf_frangipani'])
+                    self.assertIn('placement_scale_factors disagree with built scene',found['sf_frangipani'])
+            sibling=deepcopy(current);sibling['id']='other-measured-plant'
+            prop=dict(tree,asset=sibling['id'],scale=tree['scale']*.9)
+            path.write_text(json.dumps({'props':[sibling]}))
+            self.assertIn('placed_scale disagrees with built scene',audit_scene_manifest(path,{'props':[prop]},ROOT)['placed'][sibling['id']])
+
     def test_real_19_m_jacaranda_exceeds_named_range(self):
         entry = dict(complete("shade-tree"), bounds_m=PROPS["jacaranda_tree"]["bounds_m"],
                      contents={"root_ball": True}, front_axis="none", front_axis_reason="radial canopy",

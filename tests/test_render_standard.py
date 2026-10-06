@@ -14,7 +14,8 @@ SCENE = VR.build()
 # Audited presentation finishes, including the explicitly authored luminous
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
-    "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",  # round-3 garden finishes
+    "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",
+    "terracotta-red-glaze", "garden-soil", "garden-foliage", "star-jasmine-flower", "star-jasmine-leaf",  # round-3 garden finishes
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath", "marble-wet",
     "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
@@ -116,7 +117,9 @@ class RenderStandard(unittest.TestCase):
             self.assertTrue(members, kind)
             for m in members:
                 Part(kind, m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
-        self.assertGreaterEqual(len(by_id["landscape-trellis-north"]["faces"]), 48)
+        # G1 removes the former north trellis because it occupied the full
+        # east court. The retained west assembly still needs real members.
+        self.assertGreaterEqual(len(by_id["landscape-trellis-west"]["faces"]), 48)
         cases = [m for m in SCENE["meshes"] if m["part_kind"] == "suitcase" and m["id"].startswith("furn-")]
         self.assertTrue(cases)
         for case in cases:
@@ -320,8 +323,14 @@ class RenderStandard(unittest.TestCase):
             self.assertTrue(any(x0 - 0.001 <= d["x"] <= x1 + 0.001 and
                                 y0 - 0.001 <= d["y"] <= y1 + 0.001
                                 for x0, y0, x1, y1 in plan["paths"].values()), d)
-        # round 3 (client 2026-09-29) replaced the round-2 planting; test_landscape.py holds its species guards
-        self.assertTrue({"sf_bauhinia", "sf_frangipani", "sf_egg_chair", "sf_wooden_bench"} <= {p["asset"] for p in props})
+        # G1's client-agreed palette excludes Bauhinia and east furniture.
+        assets = {p["asset"] for p in props}
+        self.assertTrue({"sf_frangipani", "sf_wooden_bench"} <= assets)
+        self.assertNotIn("sf_bauhinia",assets)
+        self.assertTrue({"sf_egg_chair", "outdoor_table_chair_set_01"} <= assets)
+        for prop in props:
+            if prop["asset"] in ("sf_egg_chair", "outdoor_table_chair_set_01"):
+                self.assertLess(LAND._rect(prop)[2],LAND.EAST[0])
         self.assertTrue(all(p["position"][2] >= LAND.GROUND for p in props))
         self.assertEqual(S.unsupported(SCENE), [])
         self.assertEqual(S.blocked_openings(SCENE), [])

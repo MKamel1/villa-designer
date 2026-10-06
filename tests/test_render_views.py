@@ -110,8 +110,14 @@ class ChosenViews(unittest.TestCase):
         old28 = {**by_id["v28-north-garden-below"], "camera": {**by_id["v28-north-garden-below"]["camera"],
                                                                 "position": [16.1, -21.0, -1.65],
                                                                 "target": [20.5, -22.1, -1.65], "lens_mm": 24}}
-        self.assertTrue(any("olive" in name for name, _ in views.camera_proximity_violations(old26, scene, items)))
-        self.assertTrue(any("lemon" in name for name, _ in views.dominant_foreground_props(old28, scene)))
+        # Retired specimens remain a frozen historical camera proof, not
+        # restored objects or invisible aliases in the current garden.
+        import json
+        from pathlib import Path
+        frozen=json.loads((Path(__file__).parent/'fixtures/garden-g1-before.json').read_text())
+        historic={**scene,"props":frozen["props"]}
+        self.assertTrue(any("olive" in name for name, _ in views.camera_proximity_violations(old26, historic, items)))
+        self.assertTrue(any("lemon" in name for name, _ in views.dominant_foreground_props(old28, historic)))
         self.assertEqual(views.dominant_foreground_props(by_id["v28-north-garden-below"], scene), [])
 
     def test_storage_views_show_joinery_and_windowless_room_lighting(self):
@@ -162,12 +168,65 @@ class ChosenViews(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unresolved view subject"):
             views.subject_footprint("landscape-sofa", ITEMS, LAY["rooms"], {"meshes": []})
 
+    def test_imported_garden_subjects_resolve_from_measured_props_without_markers(self):
+        from scripts import villa_render_views as views
+        from archpipe.concept import villa_landscape as L, revit_spec as RS
+        _,props,_,_=L.review_candidate(RS.build(LAY),LAY)
+        tree=next(p for p in props if p["asset"]=="sf_frangipani")
+        scene={"meshes":[],"props":[tree]}
+        expected=L._rect(tree)
+        for got,need in zip(views.subject_footprint(tree["id"],ITEMS,LAY["rooms"],scene),expected):
+            self.assertAlmostEqual(got,need,places=4)
+        renamed=dict(tree,id="another-imported-specimen")
+        for got,need in zip(views.subject_footprint(renamed["id"],ITEMS,LAY["rooms"],{"meshes":[],"props":[renamed]}),expected):
+            self.assertAlmostEqual(got,need,places=4)
+        with self.assertRaisesRegex(ValueError,"unresolved view subject"):
+            views.subject_footprint(tree["id"],ITEMS,LAY["rooms"],{"meshes":[],"props":[]})
+
+    def test_v07_reframed_tree_and_living_sofa_without_design_movement(self):
+        from scripts import villa_render_views as views
+        from archpipe.concept import villa_render as V
+        scene=V.build(LAY)
+        view=next(v for v in scene["views"] if v["id"]=="v07-terrace-dusk")
+        self.assertNotIn("landscape-sofa",view["subjects"])
+        for subject in view["subjects"]:
+            self.assertEqual(views.subject_mesh_frame_violations(view,scene,subject),[])
+        old={**view,"camera":{**view["camera"],"position":[28.2,-21.2,-1.65],
+                            "target":[21.0,-26.4,-1.65],"shift_y":.10}}
+        self.assertIn("horizontal edge",views.subject_mesh_frame_violations(old,scene,"landscape-tree-east"))
+
+    def test_d4_garden_handoff_and_west_view_hold_actual_geometry(self):
+        from scripts import villa_render_views as views
+        from archpipe.concept import villa_render as V
+        scene=V.build(LAY)
+        by={v['id']:v for v in scene['views']}
+        west=by['v36-west-court']
+        self.assertEqual(west['camera']['lens_mm'],24)
+        self.assertEqual(west['camera']['position'][2],-1.65)
+        self.assertEqual(west['camera']['target'][2],-1.65)
+        self.assertEqual(views.camera_proximity_violations(west,scene,ITEMS),[])
+        for prefix in ('landscape-bed-west','landscape-west-back','landscape-west-mid',
+                       'landscape-west-front','landscape-trellis-west','landscape-climber-west',
+                       'landscape-door-pot-lounge-west','landscape-door-pot-planter-lounge-west',
+                       'landscape-west-bistro','landscape-egg-swing'):
+            self.assertIn(prefix,west['subjects'])
+            self.assertEqual(views.subject_mesh_frame_violations(west,scene,prefix),[])
+        bad=deepcopy(west)
+        bad['camera']['target']=[.7,-38.0,-1.65]
+        self.assertTrue(views.subject_mesh_frame_violations(bad,scene,'landscape-egg-swing'))
+        for vid in ('v07-terrace-dusk','v19-garden-facade','v25-top-garden-gate',
+                    'v26-top-garden-north','v27-north-garden-above','v28-north-garden-below'):
+            for subject in by[vid]['subjects']:
+                self.assertEqual(views.subject_mesh_frame_violations(by[vid],scene,subject),[],(vid,subject))
+        for vid in ('v02-garden-living','v10-living-evening','v07-terrace-dusk','v19-garden-facade'):
+            self.assertIn('offset from centre for a clear door route',' '.join(by[vid]['caption_notes']))
+
     def test_every_view_subject_matches_scene_content(self):
         """Round-2 draft: v07 still named "terrace lounge set" after the landscape replaced that set, so the
         renderer matched nothing and QA reported the subject out of frame. Mirror villa_scene.subjects' matching."""
         from archpipe.concept import villa_render as V
         scene = V.build(LAY)
-        meshes = scene["meshes"]
+        meshes = scene["meshes"] + scene["props"]
 
         def matched(s):
             return [m for m in meshes if m["id"] == s or m["id"].startswith(s) or m.get("room") == s

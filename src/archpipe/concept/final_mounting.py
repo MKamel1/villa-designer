@@ -33,20 +33,33 @@ def trim_panel(panel, host, centre, margin):
                 margin_mm=margin*1000, centre_x_m=centre, basis=basis)
 
 
-def apply(scene, lay):
-    authority = json.loads((Path(__file__).resolve().parents[3]/'knowledge/c4-final-approvals.json').read_text())
-    render_meshes = {m['id']: m for m in scene['meshes']}
-    diag_meshes = {m['id']: m for m in scene.get('diagnostic_meshes', [])}
-    rows = {r['id']: r for r in scene['mounting_movements']}
-    # Validate the whole approval package before applying any row.
-    for approved in authority['rows']:
+def validate_rows(rows, approved_rows):
+    """Compare active approval coordinates before applying any movement."""
+    for approved in approved_rows:
         mid = approved['id']
         if mid not in rows:
             raise KeyError(mid + ': approved row not in scene mounting movements')
         row = rows[mid]
         if row['host_id'] != approved['host_id'] or any(abs(a-b)>1e-8
                 for key in ('old','new') for a,b in zip(row[key],approved[key])):
-            raise ValueError(approved['id']+': final approved schedule drift')
+            raise ValueError(mid+': final approved schedule drift')
+
+
+def apply(scene, lay):
+    authority = json.loads((Path(__file__).resolve().parents[3]/'knowledge/c4-final-approvals.json').read_text())
+    render_meshes = {m['id']: m for m in scene['meshes']}
+    diag_meshes = {m['id']: m for m in scene.get('diagnostic_meshes', [])}
+    rows = {r['id']: r for r in scene['mounting_movements']}
+    # Retire exact historic rows as data, keeping their coordinates for
+    # frozen proofs. Rebuilt members must be face-authored and automatic.
+    for retired in authority.get('retired_rows', []):
+        mid = retired['id']
+        if retired['disposition'] == 'removed':
+            if mid in render_meshes or mid in rows:
+                raise ValueError(mid + ': retired garden assembly restored')
+        elif mid not in rows or rows[mid]['mm'] > 5 or rows[mid]['approval'] == 'PENDING':
+            raise ValueError(mid + ': replacement garden assembly needs finite face mounting')
+    validate_rows(rows, authority['rows'])
     for approved in authority['rows']:
         mid = approved['id']
         row = rows[mid]
@@ -95,4 +108,4 @@ def apply(scene, lay):
             record_final(member, before_members[member['id']], 'Final lead authority: seat lowest complete coffee assembly part')
         seated.append(dict(root_id=root['id'],delta=delta,members=carried,
                            fixing_basis='Lowest complete rigid assembly part; actual modeled worktop'))
-    scene['c4_final'] = dict(applied=[r['id'] for r in authority['rows']],headboard=trimmed,coffee=seated)
+    scene['c4_final'] = dict(applied=[r['id'] for r in authority['rows']],retired=[r['id'] for r in authority.get('retired_rows', [])],headboard=trimmed,coffee=seated)

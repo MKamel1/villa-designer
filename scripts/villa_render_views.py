@@ -38,15 +38,29 @@ def door_leaf_near(scene, px, py):
                for m in scene["meshes"])
 
 
+def subject_points(subject, scene):
+    """Built mesh vertices plus actual transformed imported-prop vertices.
+
+    Imported assets are subjects in their own right; no invisible mesh
+    marker may stand in for a removed assembly or a rendered prop.
+    """
+    from archpipe.concept.route_geometry import prop_triangles
+    points = [p for m in scene["meshes"]
+              if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
+              for face in m["faces"] for p in face]
+    for prop in scene.get("props", []):
+        if prop["id"] == subject or prop["id"].startswith(subject) or prop.get("label") == subject:
+            points += prop_triangles(prop).reshape(-1,3).tolist()
+    return points
+
+
 def subject_footprint(subject, items, rooms, scene):
     """Plan bounds of a declared view subject, from furniture or matching built meshes."""
     if subject in items:
         return F.footprint(items[subject])
     if subject in rooms:
         return None  # stair void is a space, not a bounded furniture piece
-    pts = [p for m in scene["meshes"]
-           if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
-           for face in m["faces"] for p in face]
+    pts = subject_points(subject, scene)
     if pts:
         return min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
     raise ValueError("unresolved view subject: " + subject)
@@ -59,9 +73,7 @@ def subject_mesh_frame_violations(view, scene, subject):
     span half the image height/width ratio either side of the shifted centre.
     Returns failed frame edges; unresolved subjects fail closed.
     """
-    points = [p for m in scene["meshes"]
-              if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
-              for face in m["faces"] for p in face]
+    points = subject_points(subject, scene)
     if not points:
         return ["unresolved built subject"]
     camera = view["camera"]
@@ -213,7 +225,7 @@ def main():
         px, py = cam["position"][:2]
         # The one-metre exterior clearance is calibrated on the v26/v28 canopy/pot
         # failures. Compact interior view selection has its own 0.15 m clearance rule.
-        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-")):
+        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v36-")):
             for near_id, distance in camera_proximity_violations(v, scene, items):
                 problems.append("%s: camera %.2f m from %s (need >= 1.0 m)" % (v["id"], distance, near_id))
         if v["id"].startswith("v28-"):
@@ -252,7 +264,7 @@ def main():
         ax.add_patch(Polygon(wedge, fc="#ffcc00", alpha=0.25, ec="#cc9900"))
         ax.plot([px], [py], "ro", ms=4)
         for s in v["subjects"]:
-            if s in items and items[s]["type"] == "wc":
+            if s in items and items[s]["type"] == "wc" or v["id"].startswith(("v07-", "v19-", "v25-", "v26-", "v27-", "v28-", "v36-")):
                 for edge in subject_mesh_frame_violations(v, scene, s):
                     problems.append("%s: built %s crosses %s" % (v["id"], s, edge))
             try:
@@ -266,7 +278,12 @@ def main():
                 # that showed a corner of the ensuite and half a bed once the lens went to 24 mm (client: "limited
                 # coverage")
                 worst = 0.0
-                for qx, qy in ((q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3])):
+                # Imported/constructed garden subjects use their actual vertices;
+                # empty corners of an asymmetric canopy box are not geometry.
+                actual = subject_points(s, scene) if s not in items else []
+                projected = [(p[0],p[1]) for p in actual] if actual else (
+                    (q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3]))
+                for qx, qy in projected:
                     ang = math.atan2(qy - py, qx - px) - yaw
                     ang = (ang + math.pi) % (2 * math.pi) - math.pi
                     worst = max(worst, abs(ang))
@@ -278,8 +295,8 @@ def main():
         ax.set_title("%s  %s  %.0f mm (HFOV %.0f)" % (v["id"], lv, cam["lens_mm"], hfov(v)), fontsize=7)
         ax.set_aspect("equal")
         xs = [r["rect"][0] for r in lay["rooms"].values()] + [r["rect"][2] for r in lay["rooms"].values()]
-        ax.set_xlim(min(xs) - 0.5, 29)
-        ax.set_ylim(-31.5, -20.0)
+        ax.set_xlim(min(min(xs) - 0.5, px - 0.5), max(29, px + 0.5))
+        ax.set_ylim(min(-31.5, py - 0.5), max(-20.0, py + 0.5))
         ax.tick_params(labelsize=5)
     for ax in list(axs.flat)[n:]:
         ax.axis("off")

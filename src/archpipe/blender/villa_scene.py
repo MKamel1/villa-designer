@@ -484,7 +484,7 @@ def build_climbers(mesh_specs, objects, materials, warnings):
     """Replace each box mass with dense individual leaf and bract polygons."""
     placing = sibling("climber_placement")
     for spec in mesh_specs:
-        if spec["material"] != "bougainvillea-bract" or "climber-" not in spec["id"]:
+        if spec.get("part_kind") != "climber":
             continue
         obj = objects[spec["id"]]
         obj.hide_render = True
@@ -495,7 +495,8 @@ def build_climbers(mesh_specs, objects, materials, warnings):
         # The density follows the measured leaf and bract sizes in climber_placement.
         density = placing.density_for_coverage()
         positions = placing.placements(box, density=density, seed=sum(map(ord, spec["id"])))
-        for kind, matname in (("leaf", "bougainvillea-leaf"), ("bract", "bougainvillea-bract")):
+        leaf_material = "star-jasmine-leaf" if spec.get("species") == "Trachelospermum jasminoides" else "bougainvillea-leaf"
+        for kind, matname in (("leaf", leaf_material), ("bract", spec["material"])):
             verts, faces = [], []
             for x, y, z, label in positions:
                 if label != kind:
@@ -658,13 +659,19 @@ def configure_camera(view):
     return obj, pitch
 
 
-def subjects(view, mesh_specs, objects):
+def subjects(view, mesh_specs, objects, imported_props=()):
     result = []
     scene = bpy.context.scene
     for subject in view["subjects"]:
         matches = [m for m in mesh_specs if m["id"] == subject or m["id"].startswith(subject) or m.get("room") == subject or m.get("label") == subject]
         coords = [world_to_camera_view(scene, scene.camera, objects[m["id"]].matrix_world @ Vector(corner))
                   for m in matches for corner in contract.mesh_bbox_corners(m)]
+        # Imported props are measured from the actual Blender meshes after
+        # axis conversion, scaling and floor seating; never marker proxies.
+        prop_matches = [record for record in imported_props if record["id"] == subject
+                        or record["id"].startswith(subject) or record.get("label") == subject]
+        coords += [world_to_camera_view(scene, scene.camera, obj.matrix_world @ vertex.co)
+                   for record in prop_matches for obj in record["objects"] for vertex in obj.data.vertices]
         rect = [min((p.x for p in coords), default=0), min((p.y for p in coords), default=0),
                 max((p.x for p in coords), default=0), max((p.y for p in coords), default=0)]
         overlap = max(0, min(1, rect[2])-max(0, rect[0])) * max(0, min(1, rect[3])-max(0, rect[1]))
@@ -672,7 +679,7 @@ def subjects(view, mesh_specs, objects):
         visible = bool(coords) and any(p.z >= 0 for p in coords) and overlap > 0
         result.append({"id": subject, "in_frame": visible, "coverage": overlap/area,
                        "screen": rect,
-                       "matched_objects": [m["id"] for m in matches]})
+                       "matched_objects": [m["id"] for m in matches] + [r["id"] for r in prop_matches]})
     return result
 
 
@@ -1419,7 +1426,7 @@ def render(scene_data, args):
         if not wb:
             current_warnings.append("Blender does not support stated white balance")
         bpy.context.view_layer.update()
-        subject_result = subjects(view, scene_data["meshes"], objects)
+        subject_result = subjects(view, scene_data["meshes"], objects, imported_props)
         prop_result = visible_props(imported_props)
         path = os.path.join(args.out, view["id"] + ".png")
         s.render.filepath = path

@@ -28,7 +28,8 @@ class FinalMounting(unittest.TestCase):
             for point in face: point[2]+=.012
         self.assertEqual(sum('attached assembly split movement' in f for f in scene_findings(split)),3)
         final = self.scene['c4_final']
-        self.assertEqual(len(final['applied']), 14)
+        self.assertEqual(len(final['applied']), 2)
+        self.assertEqual(len(final['retired']),12)
         self.assertAlmostEqual(final['headboard']['old_width_mm'], 1980)
         self.assertAlmostEqual(final['headboard']['new_width_mm'], 1586)
         self.assertEqual(final['headboard']['basis'], 'Symmetric about unchanged bed centreline')
@@ -80,14 +81,25 @@ class FinalMounting(unittest.TestCase):
             self.assertAlmostEqual(result['new_width_mm'],1586)
 
     def test_final_approval_drift_refuses_before_any_application(self):
-        from archpipe.concept.final_mounting import apply
+        from archpipe.concept.final_mounting import validate_rows
+        authority=json.loads(Path('knowledge/c4-final-approvals.json').read_text())
         scene = deepcopy(self.frozen)
-        row = next(r for r in scene['mounting_movements'] if r['id']=='landscape-trellis-east')
+        row = next(r for r in scene['mounting_movements'] if r['id']=='detail-vent-guest-wc-grille')
         row['new'][0] += .005
         before = deepcopy(scene['meshes'])
         with self.assertRaisesRegex(ValueError,'final approved schedule drift'):
-            apply(scene,R.design('D1'))
+            validate_rows({r['id']:r for r in scene['mounting_movements']},authority['rows'])
         self.assertEqual(scene['meshes'],before)
+
+    def test_frozen_east_approval_drift_still_fails_after_scene_retirement(self):
+        from archpipe.concept.final_mounting import validate_rows
+        authority=json.loads(Path('knowledge/c4-final-approvals.json').read_text())
+        approved=next(r for r in authority['retired_rows'] if r['id']=='landscape-trellis-east')
+        old=next(r for r in self.frozen['mounting_movements'] if r['id']==approved['id'])
+        validate_rows({old['id']:old},[approved])
+        changed=deepcopy(old);changed['new'][0]+=.005
+        with self.assertRaisesRegex(ValueError,'final approved schedule drift'):
+            validate_rows({changed['id']:changed},[approved])
 
     def test_small_automatic_parent_move_carries_real_attached_children(self):
         from archpipe.concept.fitting_mounting import package, points
