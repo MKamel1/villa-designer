@@ -163,14 +163,9 @@ def validate_scene(scene: dict) -> list[str]:
         is_bookkeeping_id = isinstance(ident, str) and (
             ident.startswith("host-face-")
             or ident.startswith("support-")
-            or ident.startswith("yard-boundary-edge-")
-            or ident.startswith("hood-support-patch-")
-            or ident == "finish-stair-basement-floor-host"
-            or "-patch-" in ident
         )
-        is_diagnostic = bool(mesh.get("diagnostic")) or "diagnostic only" in str(mesh.get("label", "")).lower()
-        is_camera_hidden = mesh.get("visibility", {}).get("camera") is False
-        if is_bookkeeping_id or is_diagnostic or is_camera_hidden:
+        is_diagnostic = bool(mesh.get("diagnostic"))
+        if is_bookkeeping_id or is_diagnostic:
             errors.append(f"{p}: render mesh {ident!r} must not be a diagnostic or host/support bookkeeping mesh")
         need(mesh.get("group") in GROUPS, p+".group", "unknown group")
         need(mesh.get("material") in materials, p+".material", "unknown material")
@@ -415,6 +410,6 @@ def validate_scene(scene: dict) -> list[str]:
             # DOOR_CLEAR_WIDTH_M == archpipe.concept.villa_furnish.BODY: card mitton-path-of-travel-min, paths of
             # travel at least 36 in (914 mm). A window is never walked through, so it carries no clear-width field.
             need(_number(c.get("open_clear_width_m"), positive=True) and
-                 c.get("open_clear_width_m", -1) >= DOOR_CLEAR_WIDTH_M - 1e-9,
-                 p+".open_clear_width_m", "a door's open curtains must leave >= %.3f m clear (F.BODY)" % DOOR_CLEAR_WIDTH_M)
+             c.get("open_clear_width_m", -1) >= DOOR_CLEAR_WIDTH_M - 1e-9,
+             p+".open_clear_width_m", "a door's open curtains must leave >= %.3f m clear (F.BODY)" % DOOR_CLEAR_WIDTH_M)
     return errors

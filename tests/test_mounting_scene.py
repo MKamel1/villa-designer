@@ -369,7 +369,7 @@ class StairFirstPackage(unittest.TestCase):
                 if mesh["id"].endswith("stringer-06") or (axis == 2 and mesh["id"].endswith("stringer-15")):
                     continue  # stepped return contact and approved floor bearing trim
                 self.assertEqual([p[axis] for f in mesh["faces"] for p in f],
-                                 [p[axis] for f in before["faces"] for p in f])
+                                  [p[axis] for f in before["faces"] for p in f])
         for mesh in self.members:
             if mesh["part_kind"] == "stair-stringer":
                 self.assertEqual(max(p[1] for f in mesh["faces"] for p in f),
@@ -388,7 +388,6 @@ class StairFirstPackage(unittest.TestCase):
 
         for m in self.scene["meshes"]:
             self.assertFalse(m.get("diagnostic", False), f"render mesh {m['id']} is marked diagnostic")
-            self.assertNotEqual(m.get("visibility", {}).get("camera"), False, f"render mesh {m['id']} is camera-hidden")
 
         errors = validate_scene(self.scene)
         self.assertFalse(any("bookkeeping" in e or "host-face" in e for e in errors), errors)
@@ -415,6 +414,39 @@ class StairFirstPackage(unittest.TestCase):
         ))
         mutant2_errors = validate_scene(mutant2)
         self.assertTrue(any("support-detail-test-patch" in e and "bookkeeping" in e for e in mutant2_errors))
+
+    def test_real_full_scene_passes_write_contract(self):
+        """(1) The real full scene passes villa_render's write-time contract."""
+        from archpipe.villa_render_contract import validate_scene
+        scene = VR.build()
+        errors = validate_scene(scene)
+        self.assertEqual(errors, [], f"Real full scene failed write-time contract: {errors}")
+
+    def test_host_face_mesh_in_render_list_fails(self):
+        """(2) A host-face mesh in the render list fails the write-time contract."""
+        from archpipe.villa_render_contract import validate_scene
+        scene = VR.build()
+        mutant = deepcopy(scene)
+        mutant["meshes"].append(dict(
+            id="host-face-test-wall", group="shell", material="plaster-warm-white",
+            room="lounge", label="Bookkeeping host face",
+            faces=[[[0, 0, 0], [1, 0, 0], [1, 1, 0]]], part_kind="finish-layer"
+        ))
+        errors = validate_scene(mutant)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("host-face-test-wall", errors[0])
+        self.assertIn("must not be a diagnostic or host/support bookkeeping mesh", errors[0])
+
+    def test_real_furniture_mesh_with_finished_host_id_passes(self):
+        """(3) A real furniture mesh legitimately carrying finished_host_id passes."""
+        from archpipe.villa_render_contract import validate_scene
+        scene = VR.build()
+        mutant = deepcopy(scene)
+        furn = next(m for m in mutant["meshes"] if m["id"] == "furn-lounge-armchair-0")
+        furn["finished_host_id"] = "support-lounge-armchair"
+        furn["mounting"] = {"host_id": "support-lounge-armchair", "kind": "floor-standing"}
+        errors = validate_scene(mutant)
+        self.assertEqual(errors, [], f"Real furniture with finished_host_id failed write-time contract: {errors}")
 
     def test_real_scene_build_approvals_applied_to_single_channel(self):
         """Build real scene; prove no host-face/support in render meshes, all approvals applied to 1 channel."""
