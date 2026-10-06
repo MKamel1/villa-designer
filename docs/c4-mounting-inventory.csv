@@ -1,0 +1,583 @@
+site_id,room,part_kind,face_state,datum_gap_mm,finished_face_error_mm,measurement_note
+appliance-coffee-dirty-body,dirty-kitchen,appliance-housing,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+appliance-coffee-main-body,kitchen,appliance-housing,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+appliance-hood-dirty-canopy,dirty-kitchen,appliance-housing,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-body-STORE-BATTEN-store-ramp-01,store-ramp,lamp-housing,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-body-STORE-BATTEN-store-ramp-02,store-ramp,lamp-housing,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-body-STORE-BATTEN-store-ramp-03,store-ramp,lamp-housing,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-diffuser-STORE-BATTEN-store-ramp-01,store-ramp,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-diffuser-STORE-BATTEN-store-ramp-02,store-ramp,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-diffuser-STORE-BATTEN-store-ramp-03,store-ramp,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-mount-STORE-BATTEN-store-ramp-01-0,store-ramp,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-mount-STORE-BATTEN-store-ramp-01-1,store-ramp,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-mount-STORE-BATTEN-store-ramp-02-0,store-ramp,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-mount-STORE-BATTEN-store-ramp-02-1,store-ramp,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-mount-STORE-BATTEN-store-ramp-03-0,store-ramp,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+batten-mount-STORE-BATTEN-store-ramp-03-1,store-ramp,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bracket-VSCONCE-parents-ensuite-04,parents-ensuite,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bracket-VSCONCE-parents-ensuite-05,parents-ensuite,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bracket-WALL-READ-parents-bed-02,parents-bed,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bracket-WALL-READ-parents-bed-03,parents-bed,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bulb-PEN-GLOBE-kitchen-01,kitchen,light-bulb,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bulb-PEN-GLOBE-kitchen-02,kitchen,light-bulb,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bulb-PEN-GLOBE-kitchen-03,kitchen,light-bulb,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bulb-PEN-GLOBE-stair-gf-01,stair-gf,light-bulb,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bulb-PEN-GLOBE-stair-gf-02,stair-gf,light-bulb,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+bulb-PEN-GLOBE-stair-gf-03,stair-gf,light-bulb,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+canopy-PEN-GLOBE-kitchen-01,kitchen,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+canopy-PEN-GLOBE-kitchen-02,kitchen,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+canopy-PEN-GLOBE-kitchen-03,kitchen,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+canopy-PEN-GLOBE-stair-gf-01,stair-gf,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+canopy-PEN-GLOBE-stair-gf-02,stair-gf,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+canopy-PEN-GLOBE-stair-gf-03,stair-gf,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+cord-PEN-GLOBE-kitchen-01,kitchen,lamp-cord,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+cord-PEN-GLOBE-kitchen-02,kitchen,lamp-cord,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+cord-PEN-GLOBE-kitchen-03,kitchen,lamp-cord,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+cord-PEN-GLOBE-stair-gf-01,stair-gf,lamp-cord,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+cord-PEN-GLOBE-stair-gf-02,stair-gf,lamp-cord,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+cord-PEN-GLOBE-stair-gf-03,stair-gf,lamp-cord,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-cabinet-led-BACK-bar-alcove-01,bar-alcove,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-cabinet-led-BACK-bar-alcove-02,bar-alcove,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-cabinet-led-BACK-bar-alcove-03,bar-alcove,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-cabinet-led-BACK-bar-alcove-04,bar-alcove,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-cabinet-led-BACK-bar-alcove-05,bar-alcove,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-cabinet-led-BACK-bar-alcove-06,bar-alcove,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-cabinet-led-BACK-bar-alcove-07,bar-alcove,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-cabinet-led-BACK-bar-alcove-08,bar-alcove,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-dining-01-track,dining,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-kids-a-01-track,kids-a,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-kids-b-01-track,kids-b,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-living-01-track,living,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-living-02-track,living,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-lounge-01-track,lounge,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-parents-bed-01-track,parents-bed,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-parents-bed-02-track,parents-bed,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-study-game-01-track,study-game,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-curtain-study-game-02-track,study-game,curtain-track,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-gwc-hand-shower-bracket-lower,guest-wc,rail-bracket,structural wall bounds used,,,Bracket endpoint is placed 20 mm inside the nearest structural wall bound; finish build-up is absent.
+detail-gwc-hand-shower-bracket-upper,guest-wc,rail-bracket,structural wall bounds used,,,Bracket endpoint is placed 20 mm inside the nearest structural wall bound; finish build-up is absent.
+detail-gwc-hand-shower-head,guest-wc,shower-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-gwc-hand-shower-rail,guest-wc,riser-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-gwc-hand-shower-slider,guest-wc,riser-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-gwc-linear-drain,guest-wc,drain,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-gwc-linear-drain-recess,guest-wc,drain,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-gwc-rain-head-drop,guest-wc,rain-head,finished ceiling height used,0.0,,Drop reaches modeled finished ceiling; head elevation remains authored.
+detail-gwc-rain-head-nozzle-face,guest-wc,rain-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-gwc-rain-head-nozzles,guest-wc,rain-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-gwc-rain-head-plate,guest-wc,rain-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-headboard-slats,parents-bed,wall-panel,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-pe-hand-shower-bracket-lower,parents-ensuite,rail-bracket,structural wall bounds used,,,Bracket endpoint is placed 20 mm inside the nearest structural wall bound; finish build-up is absent.
+detail-pe-hand-shower-bracket-upper,parents-ensuite,rail-bracket,structural wall bounds used,,,Bracket endpoint is placed 20 mm inside the nearest structural wall bound; finish build-up is absent.
+detail-pe-hand-shower-head,parents-ensuite,shower-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-pe-hand-shower-rail,parents-ensuite,riser-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-pe-hand-shower-slider,parents-ensuite,riser-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-pe-rain-head-drop,parents-ensuite,rain-head,finished ceiling height used,0.0,,Drop reaches modeled finished ceiling; head elevation remains authored.
+detail-pe-rain-head-nozzle-face,parents-ensuite,rain-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-pe-rain-head-nozzles,parents-ensuite,rain-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-pe-rain-head-plate,parents-ensuite,rain-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-open-stringer,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-handrail,stair-b,handrail,modeled plaster face known; host binding absent,85.0,,Nearest rail face projects 85 mm from the stated plaster face; historic buried state was corrected by an ad-hoc offset.
+detail-stair-wall-plate,stair-b,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-rail-bracket-00,stair-b,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-rail-bracket-04,stair-b,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-rail-bracket-08,stair-b,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-rail-bracket-12,stair-b,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-00,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-01,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-02,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-03,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-04,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-05,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-06,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-07,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-08,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-09,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-10,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-11,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-12,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-13,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-14,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-stair-wall-stringer-15,stair-b,stair-stringer,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-store-led-BACK-lounge-nook-01,lounge-nook,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-store-led-BACK-stair-b-01,stair-b,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-store-led-BACK-stair-b-02,stair-b,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-store-led-BACK-stair-b-03,stair-b,led-strip,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-tv-fluting,lounge,wall-panel,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+detail-vent-dirty-kitchen-grille,dirty-kitchen,fan-grille,structural exterior face used,0.0,,Grille reaches modeled exterior face; exterior finish build-up is not stated.
+detail-vent-dirty-kitchen-valve,dirty-kitchen,extract-valve,finished ceiling height used; fixing depth implicit,3.0,,Top is 3 mm below the ceiling; body projects 3 to 12 mm into room.
+detail-vent-guest-wc-grille,guest-wc,fan-grille,structural exterior face used,0.0,,Grille reaches modeled exterior face; exterior finish build-up is not stated.
+detail-vent-guest-wc-valve,guest-wc,extract-valve,finished ceiling height used; fixing depth implicit,3.0,,Top is 3 mm below the ceiling; body projects 3 to 12 mm into room.
+dress-hers-double-hang-1-rail-0,parents-dressing,hanging-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-double-hang-1-rail-0-bracket-left,parents-dressing,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-double-hang-1-rail-0-bracket-right,parents-dressing,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-double-hang-1-rail-1,parents-dressing,hanging-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-double-hang-1-rail-1-bracket-left,parents-dressing,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-double-hang-1-rail-1-bracket-right,parents-dressing,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-hat-shelf-3-shelf-0,parents-dressing,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-hat-shelf-3-shelf-1,parents-dressing,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-hat-shelf-3-shelf-2,parents-dressing,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-hat-shelf-3-shelf-3,parents-dressing,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-long-hang-0-rail-0,parents-dressing,hanging-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-long-hang-0-rail-0-bracket-left,parents-dressing,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-hers-long-hang-0-rail-0-bracket-right,parents-dressing,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-double-hang-0-rail-0,parents-dressing-ext,hanging-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-double-hang-0-rail-0-bracket-left,parents-dressing-ext,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-double-hang-0-rail-0-bracket-right,parents-dressing-ext,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-double-hang-0-rail-1,parents-dressing-ext,hanging-rail,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-double-hang-0-rail-1-bracket-left,parents-dressing-ext,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-double-hang-0-rail-1-bracket-right,parents-dressing-ext,rail-bracket,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-shelves-3-shelf-0,parents-dressing-ext,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-shelves-3-shelf-1,parents-dressing-ext,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-shelves-3-shelf-2,parents-dressing-ext,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-shelves-3-shelf-3,parents-dressing-ext,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-trousers-pullout-1-shelf-0,parents-dressing-ext,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-trousers-pullout-1-shelf-1,parents-dressing-ext,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-trousers-pullout-1-shelf-2,parents-dressing-ext,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+dress-his-trousers-pullout-1-shelf-3,parents-dressing-ext,shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+fix-ADJ-dining-02,dining,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-ADJ-dining-side-01,dining-side,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-ADJ-dining-side-02,dining-side,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-ADJ-dining-side-03,dining-side,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-ADJ-lounge-09,lounge,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-ADJ-parents-bed-04,parents-bed,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-ADJ-parents-bed-05,parents-bed,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-ADJ-parents-bed-08,parents-bed,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-cinema-01,cinema,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-cinema-02,cinema,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-dirty-kitchen-05,dirty-kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-dirty-kitchen-06,dirty-kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-entry-b-01,entry-b,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-family-01,family,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-family-02,family,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-family-bath-01,family-bath,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-gallery-end-01,gallery-end,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-guest-wc-01,guest-wc,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-hall-b-01,hall-b,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-hall-b-02,hall-b,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-kids-a-01,kids-a,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-kids-a-02,kids-a,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-kids-b-01,kids-b,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-kids-b-02,kids-b,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-kitchen-11,kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-kitchen-island-01,kitchen-island,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-kitchen-island-02,kitchen-island,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-landing-gf-01,landing-gf,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-living-03,living,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-living-04,living,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-living-05,living,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-living-06,living,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-lounge-01,lounge,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-lounge-02,lounge,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-lounge-03,lounge,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-lounge-04,lounge,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-lounge-05,lounge,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-lounge-06,lounge,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-lounge-nook-02,lounge-nook,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-pantry-01,pantry,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-pantry-02,pantry,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-parents-bed-06,parents-bed,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-parents-bed-07,parents-bed,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-parents-dressing-06,parents-dressing,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-parents-dressing-07,parents-dressing,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-parents-entry-01,parents-entry,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-study-game-01,study-game,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-study-game-02,study-game,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-study-game-03,study-game,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DL-study-game-04,study-game,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-bar-alcove-11,bar-alcove,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-bar-alcove-12,bar-alcove,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-dirty-kitchen-01,dirty-kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-dirty-kitchen-02,dirty-kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-dirty-kitchen-03,dirty-kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-dirty-kitchen-04,dirty-kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-family-bath-02,family-bath,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-family-bath-03,family-bath,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-guest-wc-02,guest-wc,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-kitchen-04,kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-kitchen-05,kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-kitchen-06,kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-kitchen-07,kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-kitchen-08,kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-kitchen-09,kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-kitchen-10,kitchen,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-parents-ensuite-03,parents-ensuite,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-study-game-05,study-game,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-study-game-06,study-game,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-DLN-study-game-07,study-game,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-cinema-03,cinema,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-cinema-04,cinema,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-cinema-05,cinema,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-corridor-01,corridor,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-corridor-02,corridor,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-corridor-03,corridor,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-corridor-04,corridor,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-corridor-05,corridor,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-corridor-06,corridor,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-entry-b-02,entry-b,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-parents-ensuite-01,parents-ensuite,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+fix-WW-parents-ensuite-02,parents-ensuite,downlight-trim,finished ceiling height used; housing not exported,,,Trim location can be checked against ceiling; housing depth and clear void are absent from this scene.
+furn-cinema-desk-0,cinema,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-desk-1,cinema,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-desk-2,cinema,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-desk-chair-1-0,cinema,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-desk-chair-1-1,cinema,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-desk-chair-2-0,cinema,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-desk-chair-2-1,cinema,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-sofa-0,cinema,sofa_2seat,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-sofa-1,cinema,sofa_2seat,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-cinema-tv-0,cinema,screen,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-dining-sideboard-0,dining-side,sideboard,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-sideboard-1,dining-side,sideboard,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-0,dining,dining_6x,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-1,dining,dining_6x,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-1-0,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-1-1,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-2-0,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-2-1,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-3-0,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-3-1,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-4-0,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-4-1,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-5-0,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-5-1,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-6-0,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dining-table-chair-6-1,dining,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-appliance-bank-0,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-appliance-bank-1,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-appliance-bank-2,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-appliance-bank-3,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-fold-0,dirty-kitchen,folding_counter,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-fold-1,dirty-kitchen,folding_counter,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-fold-2,dirty-kitchen,folding_counter,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-run-0,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-run-1,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-run-2,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-run-3,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-dk-run-4,dirty-kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-fb-basin-0,family-bath,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-fb-basin-1,family-bath,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-fb-basin-2,family-bath,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-fb-shower-0,family-bath,shower_walkin,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-fb-shower-1,family-bath,shower_walkin,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-fb-wc-0,family-bath,wc,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-fb-wc-1,family-bath,wc,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-gwc-basin-0,guest-wc,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-gwc-basin-1,guest-wc,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-gwc-basin-2,guest-wc,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-gwc-shower-0,guest-wc,shower_walkin,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-gwc-wc-0,guest-wc,wc,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-gwc-wc-1,guest-wc,wc,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-k-island-0,kitchen,island,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-1,kitchen,island,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-2,kitchen,island,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-3,kitchen,appliance-front,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-4,kitchen,island,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-5,kitchen,island,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-1-0,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-1-1,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-2-0,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-2-1,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-3-0,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-3-1,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-4-0,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-4-1,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-5-0,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-island-stool-5-1,kitchen,stool,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-run-0,kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-run-1,kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-run-2,kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-k-run-3,kitchen,base_run,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-bunk-0,kids-a,bed_single,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-bunk-1,kids-a,bed_single,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-1-0,kids-a,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-1-1,kids-a,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-1-2,kids-a,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-1-chair-1-0,kids-a,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-1-chair-1-1,kids-a,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-2-0,kids-a,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-2-1,kids-a,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-2-2,kids-a,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-2-chair-1-0,kids-a,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-desk-2-chair-1-1,kids-a,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-wardrobe-0,kids-a,wardrobe,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-ka-wardrobe-1,kids-a,wardrobe,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-bed-0,kids-b,bed_small_double,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-bed-1,kids-b,bed_small_double,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-bed-2,kids-b,bed_small_double,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-bed-3,kids-b,bed_small_double,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-bed-4,kids-b,pillow,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-bed-5,kids-b,pillow,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-desk-0,kids-b,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-desk-1,kids-b,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-desk-2,kids-b,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-desk-chair-1-0,kids-b,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-desk-chair-1-1,kids-b,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-wardrobe-0,kids-b,wardrobe,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-kb-wardrobe-1,kids-b,wardrobe,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-cabinet-left-0,bar-alcove,bookcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-cabinet-left-1,bar-alcove,bookcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-cabinet-left-2,bar-alcove,bookcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-cabinet-left-3,bar-alcove,bookcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-cabinet-right-0,bar-alcove,bookcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-cabinet-right-1,bar-alcove,bookcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-cabinet-right-2,bar-alcove,bookcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-cabinet-right-3,bar-alcove,bookcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-daybed-0,bar-alcove,daybed_nook,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-daybed-1,bar-alcove,daybed_nook,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-library-end-panel-0,bar-alcove,joinery_end_panel,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-living-chair-1-0,living,armchair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-living-chair-1-1,living,armchair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-living-chair-2-0,living,armchair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-living-chair-2-1,living,armchair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-living-coffee-0,living,coffee_table,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-living-coffee-1,living,coffee_table,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-living-sofa-0,living,sofa_3seat,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-living-sofa-1,living,sofa_3seat,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-lounge-armchair-0,lounge,armchair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-lounge-armchair-1,lounge,armchair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-lounge-coffee-0,lounge,coffee_table,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-lounge-coffee-1,lounge,coffee_table,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-lounge-sofa-0,lounge,sofa_4seat,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-lounge-sofa-1,lounge,sofa_4seat,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-lounge-tv-0,lounge,tv_unit,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-lounge-tv-1,lounge,tv_unit,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-pantry-shelves-1-0,pantry,pantry_shelving,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pantry-shelves-2-0,pantry,pantry_shelving,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-bed-0,parents-bed,bed_double,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-bed-1,parents-bed,bed_double,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-bed-2,parents-bed,bed_double,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-bed-3,parents-bed,bed_double,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-bed-4,parents-bed,pillow,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-bed-5,parents-bed,pillow,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-bedside-0,parents-bed,bedside_table,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-bedside-1,parents-bed,bedside_table,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-vanity-0,parents-bed,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-vanity-1,parents-bed,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-vanity-2,parents-bed,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-vanity-3,parents-bed,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-vanity-chair-1-0,parents-bed,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pb-vanity-chair-1-1,parents-bed,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pd-hang-1-0,parents-dressing,wardrobe,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pd-hang-2-0,parents-dressing-ext,wardrobe,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pe-basin-0,parents-ensuite,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-pe-basin-1,parents-ensuite,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-pe-basin-2,parents-ensuite,washbasin,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-pe-bath-0,parents-ensuite,bath,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pe-bath-1,parents-ensuite,bath,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-pe-wc-0,parents-ensuite,wc,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-pe-wc-1,parents-ensuite,wc,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-stair-flight-store-0,stair-b,plinth,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-1,stair-b,standing-access-back,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-10,stair-b,seasonal-boxes-back,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-11,stair-b,seasonal-boxes-shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-12,stair-b,folded-linens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-13,stair-b,seasonal-boxes-side,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-2,stair-b,standing-access-shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-3,stair-b,vacuum-body,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-4,stair-b,vacuum-wand,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-5,stair-b,standing-access-side,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-6,stair-b,sliding-door-pocketed,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-7,stair-b,luggage-back,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-8,stair-b,luggage-shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-9,stair-b,luggage-side,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-storage-box-35,stair-b,storage-box,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-storage-box-35-handle,stair-b,box-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-storage-box-40,stair-b,storage-box,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-storage-box-40-handle,stair-b,box-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-17,stair-b,suitcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-17-handle,stair-b,suitcase-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-17-wheels,stair-b,suitcase-wheel,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-22,stair-b,suitcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-22-handle,stair-b,suitcase-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-22-wheels,stair-b,suitcase-wheel,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-27,stair-b,suitcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-27-handle,stair-b,suitcase-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-flight-store-suitcase-27-wheels,stair-b,suitcase-wheel,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-landing-store-0,lounge-nook,plinth,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-landing-store-1,lounge-nook,small-boxes-back,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-landing-store-2,lounge-nook,small-boxes-shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-landing-store-3,lounge-nook,folded-linens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-landing-store-4,lounge-nook,small-boxes-side,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-landing-store-5,lounge-nook,sliding-door-pocketed,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-landing-store-storage-box-3,lounge-nook,storage-box,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-stair-landing-store-storage-box-3-handle,lounge-nook,box-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-0,store-ramp,luggage-back,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-1,store-ramp,luggage-base,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-10,store-ramp,bikes-side,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-11,store-ramp,bikes-hooks,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-2,store-ramp,luggage-side,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-3,store-ramp,luggage-shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-4,store-ramp,seasonal-boxes-back,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-5,store-ramp,seasonal-boxes-base,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-6,store-ramp,seasonal-boxes-side,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-7,store-ramp,seasonal-boxes-shelf,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-8,store-ramp,bikes-back,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-9,store-ramp,bikes-base,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-storage-box-14,store-ramp,storage-box,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-storage-box-14-handle,store-ramp,box-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-storage-box-7,store-ramp,storage-box,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-storage-box-7-handle,store-ramp,box-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-suitcase-6,store-ramp,suitcase,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-suitcase-6-handle,store-ramp,suitcase-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-suitcase-6-wheels,store-ramp,suitcase-wheel,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-tool-case-15,store-ramp,storage-box,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-store-shelves-tool-case-15-handle,store-ramp,box-handle,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-adult-desk-0,study-game,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-adult-desk-1,study-game,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-adult-desk-2,study-game,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-adult-desk-3,study-game,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-adult-desk-chair-1-0,study-game,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-adult-desk-chair-1-1,study-game,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-desk-0,study-game,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-desk-1,study-game,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-desk-2,study-game,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-desk-3,study-game,desk,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-desk-chair-1-0,study-game,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-desk-chair-1-1,study-game,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-desk-chair-2-0,study-game,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-desk-chair-2-1,study-game,chair,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-sofa-0,study-game,sofa_2seat,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-sofa-1,study-game,sofa_2seat,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+furn-study-tv-0,study-game,tv_unit,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+furn-study-tv-1,study-game,tv_unit,furnished item envelope; wall host undeclared,,,Footprint is authored against clear room rectangle; finish thickness and fixing depth are not recorded.
+lamp-PEN-GLOBE-kitchen-01,kitchen,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-PEN-GLOBE-kitchen-02,kitchen,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-PEN-GLOBE-kitchen-03,kitchen,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-PEN-GLOBE-stair-gf-01,stair-gf,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-PEN-GLOBE-stair-gf-02,stair-gf,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-PEN-GLOBE-stair-gf-03,stair-gf,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-PEN-LIN-dining-01,dining,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-SCONCE-family-bath-04,family-bath,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-SCONCE-family-bath-05,family-bath,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-SCONCE-guest-wc-03,guest-wc,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-SCONCE-guest-wc-04,guest-wc,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-VSCONCE-parents-ensuite-04,parents-ensuite,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-VSCONCE-parents-ensuite-05,parents-ensuite,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-WALL-READ-parents-bed-02,parents-bed,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-WALL-READ-parents-bed-03,parents-bed,light-diffuser,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-arm-DESK-cinema-07,cinema,lamp-arm,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-arm-DESK-cinema-08,cinema,lamp-arm,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-arm-DESK-kids-a-03,kids-a,lamp-arm,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-arm-DESK-kids-a-04,kids-a,lamp-arm,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-arm-DESK-kids-b-03,kids-b,lamp-arm,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-body-PEN-LIN-dining-01,dining,lamp-housing,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-shade-DESK-cinema-07,cinema,lamp-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-shade-DESK-cinema-08,cinema,lamp-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-shade-DESK-kids-a-03,kids-a,lamp-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-shade-DESK-kids-a-04,kids-a,lamp-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lamp-shade-DESK-kids-b-03,kids-b,lamp-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+landscape-climber-branches-east,,climber-branch,derived from trellis; trellis host undeclared,,,"Climber follows the trellis frame, whose wall fixing has no declared finished face."
+landscape-climber-branches-north,,climber-branch,derived from trellis; trellis host undeclared,,,"Climber follows the trellis frame, whose wall fixing has no declared finished face."
+landscape-climber-branches-south,,climber-branch,derived from trellis; trellis host undeclared,,,"Climber follows the trellis frame, whose wall fixing has no declared finished face."
+landscape-climber-branches-west,,climber-branch,derived from trellis; trellis host undeclared,,,"Climber follows the trellis frame, whose wall fixing has no declared finished face."
+landscape-climber-east,,climber,derived from trellis; trellis host undeclared,,,"Climber follows the trellis frame, whose wall fixing has no declared finished face."
+landscape-climber-north,,climber,derived from trellis; trellis host undeclared,,,"Climber follows the trellis frame, whose wall fixing has no declared finished face."
+landscape-climber-south,,climber,derived from trellis; trellis host undeclared,,,"Climber follows the trellis frame, whose wall fixing has no declared finished face."
+landscape-climber-west,,climber,derived from trellis; trellis host undeclared,,,"Climber follows the trellis frame, whose wall fixing has no declared finished face."
+landscape-trellis-east,,trellis,fixed world coordinates; host undeclared,,,Boundary wall face and cladding build-up are not bound to the trellis.
+landscape-trellis-north,,trellis,fixed world coordinates; host undeclared,,,Boundary wall face and cladding build-up are not bound to the trellis.
+landscape-trellis-south,,trellis,fixed world coordinates; host undeclared,,,Boundary wall face and cladding build-up are not bound to the trellis.
+landscape-trellis-west,,trellis,fixed world coordinates; host undeclared,,,Boundary wall face and cladding build-up are not bound to the trellis.
+lens-ADJ-dining-02,dining,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-ADJ-dining-side-01,dining-side,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-ADJ-dining-side-02,dining-side,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-ADJ-dining-side-03,dining-side,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-ADJ-lounge-09,lounge,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-ADJ-parents-bed-04,parents-bed,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-ADJ-parents-bed-05,parents-bed,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-ADJ-parents-bed-08,parents-bed,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-cinema-01,cinema,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-cinema-02,cinema,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-dirty-kitchen-05,dirty-kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-dirty-kitchen-06,dirty-kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-entry-b-01,entry-b,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-family-01,family,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-family-02,family,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-family-bath-01,family-bath,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-gallery-end-01,gallery-end,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-guest-wc-01,guest-wc,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-hall-b-01,hall-b,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-hall-b-02,hall-b,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-kids-a-01,kids-a,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-kids-a-02,kids-a,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-kids-b-01,kids-b,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-kids-b-02,kids-b,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-kitchen-11,kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-kitchen-island-01,kitchen-island,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-kitchen-island-02,kitchen-island,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-landing-gf-01,landing-gf,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-living-03,living,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-living-04,living,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-living-05,living,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-living-06,living,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-lounge-01,lounge,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-lounge-02,lounge,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-lounge-03,lounge,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-lounge-04,lounge,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-lounge-05,lounge,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-lounge-06,lounge,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-lounge-nook-02,lounge-nook,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-pantry-01,pantry,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-pantry-02,pantry,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-parents-bed-06,parents-bed,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-parents-bed-07,parents-bed,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-parents-dressing-06,parents-dressing,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-parents-dressing-07,parents-dressing,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-parents-entry-01,parents-entry,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-study-game-01,study-game,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-study-game-02,study-game,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-study-game-03,study-game,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DL-study-game-04,study-game,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-bar-alcove-11,bar-alcove,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-bar-alcove-12,bar-alcove,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-dirty-kitchen-01,dirty-kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-dirty-kitchen-02,dirty-kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-dirty-kitchen-03,dirty-kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-dirty-kitchen-04,dirty-kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-family-bath-02,family-bath,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-family-bath-03,family-bath,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-guest-wc-02,guest-wc,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-kitchen-04,kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-kitchen-05,kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-kitchen-06,kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-kitchen-07,kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-kitchen-08,kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-kitchen-09,kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-kitchen-10,kitchen,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-parents-ensuite-03,parents-ensuite,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-study-game-05,study-game,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-study-game-06,study-game,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-DLN-study-game-07,study-game,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-cinema-03,cinema,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-cinema-04,cinema,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-cinema-05,cinema,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-corridor-01,corridor,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-corridor-02,corridor,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-corridor-03,corridor,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-corridor-04,corridor,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-corridor-05,corridor,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-corridor-06,corridor,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-entry-b-02,entry-b,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-parents-ensuite-01,parents-ensuite,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+lens-WW-parents-ensuite-02,parents-ensuite,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+marker-PATH-corridor-07,corridor,wall-marker,structural wall face used,1.0,,Visible marker plane is 1 mm proud of modeled wall; finish build-up is not stated.
+marker-PATH-corridor-08,corridor,wall-marker,structural wall face used,1.0,,Visible marker plane is 1 mm proud of modeled wall; finish build-up is not stated.
+marker-PATH-corridor-09,corridor,wall-marker,structural wall face used,1.0,,Visible marker plane is 1 mm proud of modeled wall; finish build-up is not stated.
+marker-STEP-stair-b-04,stair-b,wall-marker,structural wall face used,1.0,,Visible marker plane is 1 mm proud of modeled wall; finish build-up is not stated.
+marker-STEP-stair-b-05,stair-b,wall-marker,structural wall face used,1.0,,Visible marker plane is 1 mm proud of modeled wall; finish build-up is not stated.
+marker-STEP-stair-b-06,stair-b,wall-marker,structural wall face used,1.0,,Visible marker plane is 1 mm proud of modeled wall; finish build-up is not stated.
+mirror-fb-basin,family-bath,mirror-panel,derived from basin back; wall host undeclared,,,"Mirror back follows basin footprint, without a bound finished wall face."
+mirror-gwc-basin,guest-wc,mirror-panel,derived from basin back; wall host undeclared,,,"Mirror back follows basin footprint, without a bound finished wall face."
+mirror-pe-basin,parents-ensuite,mirror-panel,derived from basin back; wall host undeclared,,,"Mirror back follows basin footprint, without a bound finished wall face."
+swing-arm-SWING-bar-alcove-09,bar-alcove,lamp-arm,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-arm-SWING-bar-alcove-10,bar-alcove,lamp-arm,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-emitter-SWING-bar-alcove-09,bar-alcove,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-emitter-SWING-bar-alcove-10,bar-alcove,light-lens,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-head-SWING-bar-alcove-09,bar-alcove,lamp-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-head-SWING-bar-alcove-10,bar-alcove,lamp-head,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-knuckle-SWING-bar-alcove-09,bar-alcove,lamp-joint,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-knuckle-SWING-bar-alcove-10,bar-alcove,lamp-joint,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-plate-SWING-bar-alcove-09,bar-alcove,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+swing-plate-SWING-bar-alcove-10,bar-alcove,wall-plate,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+wire-PEN-LIN-dining-01--1,dining,lamp-wire,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.
+wire-PEN-LIN-dining-01-1,dining,lamp-wire,no declared finished host face,,,Finish build-up thickness and host binding absent; finished-face error cannot be measured.

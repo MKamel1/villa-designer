@@ -2,6 +2,10 @@
 Client 2026-09-27: "Some of the cameras are looking at the wrong direction and uninformative"."""
 import math
 import unittest
+import json
+from pathlib import Path
+from copy import deepcopy
+from unittest.mock import patch
 
 from archpipe.concept import render_views as RV
 from archpipe.concept import revit_spec as RS
@@ -14,6 +18,85 @@ ITEMS = {i["id"]: i for i in F.layout(LAY)}
 
 
 class ChosenViews(unittest.TestCase):
+    def test_frozen_east_wc_vertical_lens_need_and_whole_mesh(self):
+        from scripts.villa_render_views import subject_mesh_frame_violations
+        frozen = json.loads((Path(__file__).parent / "fixtures/c4-family-wc-lens-before.json").read_text())
+        meshes = {"meshes": [{"id": "furn-fb-wc-0", "label": "fb-wc",
+                               "faces": [frozen["wc_vertices"]]}]}
+        old = {"resolution": [1920, 1280], "camera": {"position": [9.727, -24.971, 1.35],
+               "target": [12.025, -26.899, 1.35], "lens_mm": 16, "sensor_mm": 36}}
+        self.assertEqual(subject_mesh_frame_violations(old, meshes, "fb-wc"), ["bottom edge"])
+        original_items = deepcopy(frozen["items"])
+        with patch.object(F, "layout", return_value=frozen["items"]), \
+             patch.object(F, "_walls", return_value=frozen["walls"]), \
+             patch.object(F, "_columns", return_value=frozen["columns"]):
+            narrow = RV.choose(frozen["layout"], frozen["room"], frozen["subjects"], lens_mm=24, sp=frozen["spec"])
+            wide = RV.choose(frozen["layout"], frozen["room"], frozen["subjects"], lens_mm=16, sp=frozen["spec"])
+        self.assertFalse(narrow["subjects_in_frame"])
+        self.assertEqual(narrow["framed_candidates"], 0)
+        self.assertLess(narrow["framing"]["horizontal_need_deg"], narrow["framing"]["horizontal_limit_deg"])
+        self.assertGreater(narrow["framing"]["lower_top_need_deg"], narrow["framing"]["vertical_limit_deg"])
+        self.assertGreater(narrow["framing"]["whole_subject_need_deg"], narrow["framing"]["vertical_limit_deg"])
+        self.assertTrue(wide["subjects_in_frame"])
+        self.assertGreater(wide["framed_candidates"], 0)
+        self.assertEqual(wide["search_step_m"], RV.STEP/4)
+        new = {**old, "camera": {**old["camera"], "position": wide["position"]+[1.35],
+                                "target": wide["target"]+[1.35]}}
+        self.assertEqual(subject_mesh_frame_violations(new, meshes, "fb-wc"), [])
+        self.assertEqual(frozen["items"], original_items, "camera placement must leave the fixtures fixed")
+        # Independent injected clipping must still fail: neither height nor
+        # horizontal coverage may be excused by the corrected lens diagnostics.
+        mutant = deepcopy(new)
+        mutant["camera"]["lens_mm"] = 24
+        self.assertIn("bottom edge", subject_mesh_frame_violations(mutant, meshes, "fb-wc"))
+        mutant = deepcopy(new)
+        mutant["camera"]["target"] = [new["camera"]["position"][0]-3, new["camera"]["position"][1], 1.35]
+        self.assertTrue(subject_mesh_frame_violations(mutant, meshes, "fb-wc"))
+        self.assertTrue(subject_mesh_frame_violations(new, {"meshes": []}, "fb-wc"))
+
+    def test_whole_wc_search_generalises_to_renamed_translated_room(self):
+        frozen = json.loads((Path(__file__).parent / "fixtures/c4-family-wc-lens-before.json").read_text())
+        room = frozen["layout"]["rooms"]["family-bath"]
+        room["rect"] = [v+7 if k % 2 == 0 else v-4 for k, v in enumerate(room["rect"])]
+        lay = {"rooms": {"compact-room": room}}
+        for item in frozen["items"]:
+            item["cx"] += 7
+            item["cy"] -= 4
+            if item["id"] == "fb-wc":
+                item["id"] = "other-pan"
+            if item["room"] == "family-bath":
+                item["room"] = "compact-room"
+        for collection in ("doors", "windows", "bath_fittings"):
+            for record in frozen["spec"][collection]:
+                # The spec also carries line/zone fitting records. Only the
+                # point records are consumed by this camera search.
+                if "x" in record and "y" in record:
+                    record["x"] += 7
+                    record["y"] -= 4
+                if record.get("room") == "family-bath":
+                    record["room"] = "compact-room"
+                if "rooms" in record:
+                    record["rooms"] = ["compact-room" if r == "family-bath" else r for r in record["rooms"]]
+        translated = lambda boxes: [[v+7 if k % 2 == 0 else v-4 for k, v in enumerate(q)] for q in boxes]
+        with patch.object(F, "layout", return_value=frozen["items"]), \
+             patch.object(F, "_walls", return_value=translated(frozen["walls"])), \
+             patch.object(F, "_columns", return_value=translated(frozen["columns"])):
+            c = RV.choose(lay, "compact-room", ["other-pan"], lens_mm=16, sp=frozen["spec"])
+            narrow = RV.choose(lay, "compact-room", ["other-pan"], lens_mm=24, sp=frozen["spec"])
+        self.assertTrue(c["subjects_in_frame"])
+        self.assertGreater(c["framed_candidates"], 0)
+        self.assertFalse(narrow["subjects_in_frame"])
+        self.assertAlmostEqual(c["position"][0]-7, 9.602, places=3)
+        self.assertAlmostEqual(c["position"][1]+4, -24.846, places=3)
+
+    def test_live_east_wc_is_wholly_in_frame(self):
+        from scripts.villa_render_views import subject_mesh_frame_violations
+        from archpipe.concept import villa_render as V
+        scene = V.build(LAY)
+        view = next(v for v in scene["views"] if v["id"] == "v35-family-bath-wc")
+        self.assertEqual(subject_mesh_frame_violations(view, scene, "fb-wc"), [])
+        self.assertEqual(view["camera"]["lens_mm"], 16)
+
     def test_exterior_camera_clearance_catches_old_v26_and_v28(self):
         from scripts import villa_render_views as views
         from archpipe.concept import villa_render as V
@@ -92,9 +175,14 @@ class ChosenViews(unittest.TestCase):
         orphans = [(v["id"], s) for v in scene["views"] for s in v["subjects"] if not matched(s)]
         self.assertEqual(orphans, [])
         self.assertFalse(matched("terrace lounge set"), "the stale v07 subject must stay unmatched (the real defect)")
-        additions = scene["views"][24:]
+        # Retiring v14 shifted v25 to position 23. View identity must survive
+        # retirement/reordering; selecting a list tail silently lost v25.
+        expected_prefixes = ["v%02d" % n for n in range(25, 35)]
+        by_prefix = {v["id"].split("-")[0]: v for v in scene["views"]}
+        self.assertTrue(set(expected_prefixes).issubset(by_prefix))
+        additions = [by_prefix[prefix] for prefix in expected_prefixes]
         self.assertEqual([v["id"].split("-")[0] for v in additions],
-                         ["v%02d" % n for n in range(25, 35)])
+                         expected_prefixes)
         self.assertTrue(all(v["subjects"] for v in additions))
         self.assertTrue(all(v["camera"]["position"][2] == v["camera"]["target"][2]
                             for v in additions), "the added cameras must stay level")

@@ -390,6 +390,15 @@ def rebuild_index(library: Path = LIBRARY) -> int:
 
 
 # ---------------------------------------------------------------------- query
+def _portable_row(row) -> dict:
+    """Decode relative index paths written on either Windows or Linux."""
+    result = dict(row)
+    for key in ("ldt", "folder"):
+        if key in result:
+            result[key] = result[key].replace("\\", "/")
+    return result
+
+
 class _connect:
     """Read connection that is CLOSED on exit (sqlite3's own context manager
     only commits, and left handles open)."""
@@ -428,14 +437,14 @@ def search(*, library: Path = LIBRARY, manufacturer=None, mount=None, lm=None, c
     sql = "select * from rows" + (" where " + " and ".join(where) if where else "") + \
           " order by efficacy desc limit ?"
     with _connect(library) as con:
-        return [dict(r) for r in con.execute(sql, args + [limit])]
+        return [_portable_row(r) for r in con.execute(sql, args + [limit])]
 
 
 def get(manufacturer: str, sku: str, lamp_set: int = 0, library: Path = LIBRARY) -> dict | None:
     with _connect(library) as con:
         r = con.execute("select * from rows where manufacturer=? and sku=? and lamp_set=?",
                         (manufacturer.lower(), sku, lamp_set)).fetchone()
-    return dict(r) if r else None
+    return _portable_row(r) if r else None
 
 
 def alternates(manufacturer: str, sku: str, lamp_set: int = 0, *, lm_tol=0.15, any_manufacturer=True,

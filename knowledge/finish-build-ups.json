@@ -1,0 +1,53 @@
+{
+  "schema": "finish-build-ups/1",
+  "authority": "Lead checked printed pages, C4 phase 2 instruction, 2026-10-04",
+  "units": "millimetres",
+  "records": {
+    "interior-plaster": {
+      "source": "Ching, Building Construction Illustrated", "page": "10.05",
+      "status": "VERIFIED", "scope": "Gypsum plaster on masonry/lath",
+      "two_coat_typical_mm": 13, "three_coat_range_mm": [16, 19],
+      "selected_mm": 13, "selection": "Two-coat interior plaster walls"
+    },
+    "wall-tile-bed": {
+      "source": "Ching, Building Construction Illustrated", "page": "10.14",
+      "status": "VERIFIED", "thinset_range_mm": [3, 6],
+      "cement_mortar_range_mm": [19, 25], "organic_adhesive_mm": 2,
+      "selected_mm": 3, "selection": "ASSUMED selection within verified thinset range for adhered wall finishes"
+    },
+    "porcelain-wall-tile": {
+      "source": "Lead assumption", "page": null, "status": "ASSUMED",
+      "selected_mm": 10, "reason": "Tile thickness is not given on Ching 10.14"
+    },
+    "floor-tile-bed": {
+      "source": "Ching, Building Construction Illustrated", "page": "10.14",
+      "status": "VERIFIED", "thinset_range_mm": [3, 6],
+      "cement_mortar_range_mm": [32, 51], "shower_reinforced_mortar_range_mm": [25, 45],
+      "selected_mm": null, "selection": "System and finish thickness not yet authored; preserve existing floor elevations"
+    },
+    "granite-cladding-reference": {
+      "source": "Metric Handbook", "page": "7-20", "sections": ["10.1", "10.2"],
+      "status": "VERIFIED", "external_mm": 40, "internal_mm": 20,
+      "scope": "GRANITE only; not a verified marble dimension"
+    },
+    "interior-marble-slab": {
+      "source": "Lead assumption by analogy to Metric Handbook granite", "page": "7-20",
+      "status": "ASSUMED", "selected_mm": 20,
+      "reason": "Analogy to interior granite cladding; marble thickness itself unverified"
+    },
+    "suspended-gypsum-ceiling": {
+      "source": null, "page": null, "status": "UNVERIFIED",
+      "selected_mm": null, "clear_void_mm": null, "void_status": "MISSING",
+      "selection": "Preserve project ceiling heights; no board thickness or clear void inferred from height difference"
+    },
+    "exterior-render": {
+      "source": null, "page": null, "status": "UNVERIFIED", "selected_mm": null,
+      "selection": "Preserve existing geometry"
+    }
+  },
+  "assemblies": {
+    "interior-plaster": ["interior-plaster"],
+    "porcelain-wall-thinset": ["porcelain-wall-tile", "wall-tile-bed"],
+    "marble-wall-thinset": ["interior-marble-slab", "wall-tile-bed"]
+  }
+}

@@ -1,6 +1,8 @@
 """The luminaire library: import, verify, search, install -- on synthetic
 manufacturer files (real ones are never committed)."""
 import io
+import json
+import sqlite3
 import tempfile
 import unittest
 import zipfile
@@ -101,6 +103,38 @@ class LibraryTests(unittest.TestCase):
         with self.assertRaisesRegex(install.InstallError, "links signify NOPE"):
             install.resolve({"id": "X", "product": {"manufacturer": "signify", "sku": "NOPE"}},
                             library=self._empty_library())
+
+    def test_transferred_windows_index_paths_export_and_install_without_reindexing(self):
+        frozen = json.loads((Path(__file__).parent / 'fixtures/c4-linux-library-paths.json').read_text())
+        # Actual transferred path strings, independent temporary product data.
+        for row in frozen:
+            folder = self.lib / row['folder'].replace('\\', '/')
+            folder.mkdir(parents=True)
+            (folder / (row['sku']+'.ldt')).write_text(product_ldt(sku=row['sku']))
+            (folder / 'product.json').write_text(json.dumps({
+                'manufacturer': row['manufacturer'], 'sku': row['sku']}))
+            (folder / 'portable.rfa').write_bytes(OLE)
+        lib.rebuild_index(self.lib)
+        with sqlite3.connect(self.lib / 'library.sqlite') as con:
+            for row in frozen:
+                con.execute('update rows set ldt=?, folder=? where sku=?',
+                            (row['ldt'], row['folder'], row['sku']))
+        before = (self.lib / 'library.sqlite').read_bytes()
+        for row in frozen:
+            got = lib.get(row['manufacturer'], row['sku'], library=self.lib)
+            self.assertEqual(got['ldt'], row['ldt'].replace('\\', '/'))
+            self.assertEqual(got['folder'], row['folder'].replace('\\', '/'))
+            resolved = install.resolve({'id': 'portable-'+row['sku'], 'product': {
+                'manufacturer': row['manufacturer'], 'sku': row['sku']}},
+                library=self.lib, ies_dir=self.lib / '_ies')
+            self.assertTrue(Path(resolved['family']).is_file())
+            self.assertAlmostEqual(ph.load(self.lib / '_ies' / resolved['ies']).total_lumens, 2000)
+        self.assertTrue(all('\\' not in r[key] for r in lib.search(library=self.lib)
+                            for key in ('ldt', 'folder')))
+        self.assertEqual((self.lib / 'library.sqlite').read_bytes(), before)
+        # Other identifiers and mixed separators use the same read boundary.
+        self.assertEqual(lib._portable_row({'ldt': 'other\\range/file.ldt',
+                                          'folder': 'other/range'})['ldt'], 'other/range/file.ldt')
 
     def _empty_library(self):
         lib.rebuild_index(self.lib)

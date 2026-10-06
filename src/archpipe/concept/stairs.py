@@ -165,8 +165,14 @@ def party_flight_r8():
     """Round 7 review: the corrected party-wall flight left 0.9 m between column 1590377 (x 3977) and the flight for
     the GF core door on the top landing, and the door ran into the column. Moved 0.3 m to the rear: landing
     x 3977-5177 (1.2 m: a 1.0 m door + frame)."""
-    y0 = E.BAR[1] + 250
-    return straight(3977 + 1200, 3977 + 1200 + 16 * 280, y0, y0 + 950, 17, "party-wall flight (r8, landing 1.2 m)")
+    outer_face = E.BAR[1]
+    tread_setback = 250
+    y0 = outer_face + tread_setback
+    result = straight(3977 + 1200, 3977 + 1200 + 16 * 280, y0, y0 + 950, 17,
+                      "party-wall flight (r8, landing 1.2 m)")
+    result["wall_datum"] = dict(outer_face_mm=outer_face, tread_setback_mm=tread_setback,
+                                basis="villa_env.BAR measured CAD outer face; existing 250 mm beam clearance")
+    return result
 
 
 def options():

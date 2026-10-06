@@ -116,7 +116,29 @@ def main() -> int:
            json.loads(native_dumps([Int64(), 22.04, False, None])) ==
            [9223372036854775807, 22.04, False, None])
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
-    intake = audit_scene_manifest(manifest_path, VR.build(views=[]), ROOT)
+    scene = VR.build(views=[])
+    mounting_registry = json.loads((ROOT / "knowledge/mounting-guards.json").read_text(encoding="utf-8"))
+    expect("finished-surface controls have registered proving tests",
+           all((ROOT / item["proof_file"]).is_file() and all(
+               "def " + name + "(" in (ROOT / item["proof_file"]).read_text(encoding="utf-8")
+               for name in item["proofs"]) for item in mounting_registry["records"]))
+    from archpipe.concept.mounting import scene_findings
+    mounting_failures = scene_findings(scene)
+    from archpipe.concept.finish_layers import surface_findings, solid_findings
+    mounting_failures.extend(surface_findings(scene))
+    mounting_failures.extend(solid_findings(scene))
+    missing_mounting_hosts = sum("MISSING mounting host" in failure for failure in mounting_failures)
+    expect("finished-surface mounting: hosts, fixing geometry and declared void requirements resolve"
+           + (f" ({len(mounting_failures)} failures; {missing_mounting_hosts} missing hosts; first: {mounting_failures[0]})" if mounting_failures else ""),
+           not mounting_failures)
+    from archpipe.concept.mounting_clearances import review as review_mounting_clearances
+    clearance_report = review_mounting_clearances(scene)
+    clearance_failures = clearance_report['failures'] + clearance_report['unresolved']
+    expect('approved mounting moves: affected bathroom clearances/routes resolved'
+           + (f" ({len(clearance_failures)} failures/unresolved: " + '; '.join(
+               f"{r['check']} achieved {r['achieved_mm']} mm / required {r['required_mm']} mm"
+               for r in clearance_failures) + ')' if clearance_failures else ''), not clearance_failures)
+    intake = audit_scene_manifest(manifest_path, scene, ROOT)
     assumptions = manifest_assumptions(manifest_path)
     overrides = manifest_overrides(manifest_path)
     print("  ASSET INTAKE ASSUMPTIONS: %d" % len(assumptions))
@@ -831,6 +853,18 @@ def main() -> int:
         _stale_ok, _stale_why, _ = _vsr(_tr, root=_tp, raise_on_error=False)
     expect("stage_result validation refuses cached output after input modification (l0040)",
            not _stale_ok and "stale" in _stale_why)
+    # Render scene meshes must never contain diagnostic or host/support bookkeeping geometry:
+    # ~600 bookkeeping meshes with "host-face-", "support-", etc. made walls render solid black.
+    from archpipe.villa_render_contract import validate_scene
+    mock_bad_scene = {
+        "schema": "villa-render/1", "id": "test", "north": {"model_y_bearing_deg": 0.0},
+        "library_root": "lib", "materials": {"m": {"kind": "principled", "base_rgb": [1, 1, 1]}},
+        "meshes": [{"id": "host-face-test", "group": "shell", "material": "m", "label": "test",
+                    "faces": [[[0, 0, 0], [1, 0, 0], [1, 1, 0]]]}],
+        "lights": [], "views": []
+    }
+    expect("validate_scene rejects host-face bookkeeping mesh in render meshes",
+           any("bookkeeping" in e or "host-face" in e for e in validate_scene(mock_bad_scene)))
 
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     record_path = ROOT / "out/verify-result.json"

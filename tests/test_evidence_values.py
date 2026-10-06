@@ -103,7 +103,7 @@ ORIGINAL = {
     "ukadm-bed-principal-750": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 25, ["750mm wide to both sides and the foot of the bed"]),
     "ukadm-bed-other-double-750": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 25, ["750mm wide to one side and the foot of the bed"]),
     "ukadm-bed-single-750": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 25, ["750mm wide to one side of each bed"]),
-    "ukadm-wc-access-zone-1100": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 27, ["WC access zone", "1100mm"]),
+    "ukadm-wc-access-zone-1100": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 27, ["WC access zone", "1100mm", "350mm", "1000mm", "300mm"]),
     "ukadm-basin-access-zone-1100": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 27, ["1100mm", "700mm"]),
     "ukadm-bath-access-zone-700": ("uk-ad-m/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf", 27, ["700mm", "1100mm"]),
     "tss-front-of-storage-914": ("time-saver-interior/DeChiara, Panero, Zelnik - Time-Saver Standards for Interior Design and Space Planning (2nd ed).pdf", 107, ["36 in in front of dresser, closet, and chest of drawers"]),
