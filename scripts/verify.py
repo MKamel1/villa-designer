@@ -12,6 +12,7 @@ import contextlib
 import io
 import json
 import math
+import os
 import pathlib
 import re
 import runpy
@@ -20,9 +21,25 @@ import sys
 import tempfile
 import uuid
 
-import yaml
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "src"))
+from archpipe.execution_context import (ContextError, absolute, project_context,  # noqa: E402
+                                        requirements_import_names, write_record)
+
+try:
+    req_file = os.environ.get("ARCHPIPE_TEST_REQUIREMENTS_FILE")
+    req_path = pathlib.Path(req_file) if req_file else (ROOT / "requirements.txt")
+    req_mods = list(requirements_import_names(req_path))
+    test_extra = os.environ.get("ARCHPIPE_TEST_EXTRA_MODULES")
+    if test_extra:
+        req_mods.extend(m.strip() for m in test_extra.split(",") if m.strip())
+    EXECUTION_CONTEXT = project_context(ROOT, pathlib.Path(__file__).resolve(), "verify", modules=req_mods)
+except ContextError as exc:
+    print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+    raise SystemExit(2)
+
+import yaml  # noqa: E402
 
 from archpipe import (brief as B, catalogue as cat, cli, codes,  # noqa: E402
                       feasibility as F, rules, site as S, solar,
@@ -30,15 +47,8 @@ from archpipe import (brief as B, catalogue as cat, cli, codes,  # noqa: E402
 from archpipe.model import load as load_model  # noqa: E402
 from archpipe.asset_intake import audit_scene_manifest, manifest_assumptions, manifest_overrides  # noqa: E402
 from archpipe.concept import villa_render as VR  # noqa: E402
-from archpipe.execution_context import ContextError, absolute, project_context, write_record  # noqa: E402
 from archpipe.stage_result import enforce_clean_verdict, validate_stage_result, write_stage_result  # noqa: E402
 
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-try:
-    EXECUTION_CONTEXT = project_context(ROOT, pathlib.Path(__file__).resolve(), "verify")
-except ContextError as exc:
-    print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
-    raise SystemExit(2)
 TMP = pathlib.Path(EXECUTION_CONTEXT["temporary_directory"]) / ("archpipe-verify-" + uuid.uuid4().hex)
 TMP.mkdir(parents=True)
 FAILS: list[str] = []
@@ -94,6 +104,9 @@ def main() -> int:
     expect("execution context records explicit absolute child directory and script paths",
            EXECUTION_CONTEXT["working_directory"] == str(ROOT) and
            all(pathlib.Path(p).is_absolute() for p in EXECUTION_CONTEXT["scripts"]))
+    expect("execution context records checked dependencies and shapely is present",
+           bool(EXECUTION_CONTEXT.get("modules")) and
+           EXECUTION_CONTEXT["modules"].get("shapely", {}).get("found") is True)
     from archpipe.luminaires.library import resolve_library_path
     parts = ("iguzzini", "LSEVO-AAK3EW", "LSEVO-AAK3EW.ldt")
     expect("stored luminaire paths accept both separators on POSIX and Windows",

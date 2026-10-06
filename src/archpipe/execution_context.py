@@ -7,6 +7,7 @@ Only tools used by the operation are required (no Revit on render workers).
 from __future__ import annotations
 
 from dataclasses import dataclass
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -15,8 +16,104 @@ import subprocess
 import sys
 import tempfile
 import time
+from typing import Any, Iterable
 import uuid
 from .safe_io import save_json
+
+
+DISTRIBUTION_TO_IMPORT: dict[str, str] = {
+    "contourpy": "contourpy",
+    "cycler": "cycler",
+    "ezdxf": "ezdxf",
+    "fonttools": "fonttools",
+    "ifcopenshell": "ifcopenshell",
+    "kiwisolver": "kiwisolver",
+    "matplotlib": "matplotlib",
+    "numpy": "numpy",
+    "packaging": "packaging",
+    "pillow": "PIL",
+    "pymupdf": "pymupdf",
+    "pyparsing": "pyparsing",
+    "python-dateutil": "dateutil",
+    "pyyaml": "yaml",
+    "shapely": "shapely",
+    "six": "six",
+    "typing_extensions": "typing_extensions",
+}
+
+
+def requirements_import_names(requirements_path: Path | str) -> list[str]:
+    """Read a requirements file and return mapped top-level import names.
+
+    Maps package distribution names explicitly to import names (e.g. PyYAML -> yaml,
+    pillow -> PIL, shapely -> shapely, numpy -> numpy) without guessing packages
+    not declared in the requirements file.
+    """
+    path = Path(requirements_path).resolve()
+    if not path.is_file():
+        raise ContextError(f"requirements missing file: {path}")
+    names: list[str] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        clean = line.split("#")[0].strip()
+        if not clean:
+            continue
+        dist = re.split(r"[=<>!~;@\s]", clean)[0].strip()
+        if not dist:
+            continue
+        import_name = DISTRIBUTION_TO_IMPORT.get(dist.lower(), dist)
+        if import_name not in names:
+            names.append(import_name)
+    return names
+
+
+def check_dependencies(
+    modules: Iterable[str],
+    *,
+    root: Path,
+    interpreter: str | Path | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Verify that declared Python modules can be located via importlib.util.find_spec.
+
+    Uses importlib.util.find_spec without import side effects. If any module is
+    missing, raises ContextError with the missing modules, the active interpreter,
+    and a hint pointing to the project environment derived from root.
+    """
+    target_interpreter = str(interpreter or sys.executable)
+    checked: dict[str, dict[str, Any]] = {}
+    missing: list[str] = []
+
+    for name in modules:
+        if not name:
+            continue
+        try:
+            spec = importlib.util.find_spec(name)
+            found = spec is not None
+        except (ImportError, ValueError, AttributeError):
+            found = False
+
+        checked[name] = {"found": found}
+        if not found:
+            missing.append(name)
+
+    if missing:
+        venv_candidate = root / ".venv"
+        if os.name == "nt":
+            venv_exe = venv_candidate / "Scripts" / "python.exe"
+        else:
+            venv_exe = venv_candidate / "bin" / "python"
+        hint_path = str(
+            venv_exe
+            if venv_candidate.is_dir()
+            else (root / (".venv/Scripts/python.exe" if os.name == "nt" else ".venv/bin/python"))
+        )
+        missing_names = ", ".join(missing)
+        raise ContextError(
+            f"missing required Python module(s): {missing_names}; "
+            f"interpreter: {target_interpreter}; "
+            f"use the project environment (e.g. {hint_path} on Windows or the worker venv on the workstation)"
+        )
+
+    return checked
 
 
 class ContextError(RuntimeError):
@@ -87,12 +184,13 @@ def resolve_tool(tool: Tool, env: dict, cwd: Path) -> dict:
 
 def preflight(*, root: Path, scripts=(), inputs=(), output: Path, temp: Path,
               tools=(), env: dict | None = None, required_roles=(), available_roles=(),
-              python_version: str | None = None) -> dict:
+              python_version: str | None = None, modules=(), required_modules=()) -> dict:
     """Validate, then return a JSON-safe record before any requested work.
 
     Python policy is 3.11 through 3.14; optional python_version pins an exact
     interpreter release. Other tools always require an exact release.
     Role availability comes from the live session, never roles.json.
+    Declared modules are validated via find_spec before work commences.
     """
     root = absolute(root, "project root")
     if not root.is_dir():
@@ -101,6 +199,8 @@ def preflight(*, root: Path, scripts=(), inputs=(), output: Path, temp: Path,
     version = ".".join(map(str, sys.version_info[:3]))
     if not (3, 11) <= sys.version_info[:2] <= (3, 14) or (python_version and version != python_version):
         raise ContextError(f"unsupported Python {version}; required {python_version or '3.11 through 3.14'}")
+    module_list = list(modules or required_modules)
+    checked_modules = check_dependencies(module_list, root=root, interpreter=interpreter)
     paths = [str(project_path(root, p, "script", file=True)) for p in scripts]
     input_paths = [str(project_path(root, p, "input", file=True)) for p in inputs]
     output = writable_directory(project_path(root, output, "output directory"), "output directory")
@@ -122,7 +222,9 @@ def preflight(*, root: Path, scripts=(), inputs=(), output: Path, temp: Path,
         resolved[tool.name]["requested_path"] = str(requested if requested.is_absolute() else root / requested)
     return {"schema": "execution-context/1", "working_directory": str(root),
             "launch_directory": str(Path.cwd().resolve()),
-            "scripts": paths, "inputs": input_paths, "tools": resolved, "output_directory": str(output),
+            "scripts": paths, "inputs": input_paths, "tools": resolved,
+            "modules": checked_modules,
+            "output_directory": str(output),
             "temporary_directory": str(temp), "environment": {
                 key: effective[key] for key in ("NO_COLOR", "PYTHONPATH", "TMP", "TEMP", "TMPDIR")},
             "required_roles": list(required_roles), "available_roles": list(available_roles)}
@@ -136,10 +238,11 @@ def write_record(context: dict, path: Path) -> None:
         raise ContextError(f"cannot write context record {path}: {exc}") from exc
 
 
-def project_context(root: Path, script: Path, name: str, *, tools=()) -> dict:
+def project_context(root: Path, script: Path, name: str, *, tools=(), modules=(), required_modules=()) -> dict:
     """Preflight a project entry point and configure its own process."""
+    module_reqs = modules or required_modules
     context = preflight(root=root, scripts=[script], output=root / "out",
-                        temp=root / "out/tmp", tools=tools)
+                        temp=root / "out/tmp", tools=tools, modules=module_reqs)
     os.environ.update(context["environment"])
     tempfile.tempdir = context["temporary_directory"]
     write_record(context, Path(context["output_directory"]) / (name + "-execution-context.json"))

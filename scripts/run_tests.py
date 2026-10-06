@@ -16,7 +16,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
-from archpipe.execution_context import ContextError, project_context, write_record
+from archpipe.execution_context import (ContextError, project_context,
+                                        requirements_import_names, write_record)
 
 
 def _accessible_mkdtemp(suffix=None, prefix=None, dir=None):
@@ -38,7 +39,13 @@ def main():
     parser.add_argument("modules", nargs="*", help="focused unittest modules; omitted means discovery")
     args = parser.parse_args()
     try:
-        context = project_context(ROOT, Path(__file__).resolve(), "tests")
+        req_file = os.environ.get("ARCHPIPE_TEST_REQUIREMENTS_FILE")
+        req_path = Path(req_file) if req_file else (ROOT / "requirements.txt")
+        req_mods = list(requirements_import_names(req_path))
+        test_extra = os.environ.get("ARCHPIPE_TEST_EXTRA_MODULES")
+        if test_extra:
+            req_mods.extend(m.strip() for m in test_extra.split(",") if m.strip())
+        context = project_context(ROOT, Path(__file__).resolve(), "tests", modules=req_mods)
     except ContextError as exc:
         print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
         return 2

@@ -235,6 +235,85 @@ class ExecutionContextTests(unittest.TestCase):
         self.assertIn("native failure evidence", (logs / "frozen-failure.log").read_text())
         self.assertEqual(json.loads((logs / "frozen-failure.context.json").read_text())["exit_code"], 1)
 
+    def test_missing_declared_module_fails_with_interpreter_and_hint(self):
+        missing_name = "archpipe_nonexistent_mod_c9x"
+        with self.assertRaises(ContextError) as ctx:
+            self.context(modules=[missing_name])
+        msg = str(ctx.exception)
+        self.assertIn(missing_name, msg)
+        self.assertTrue(sys.executable in msg or str(Path(sys.executable).resolve()) in msg)
+        self.assertIn("use the project environment", msg)
+
+    def test_all_present_modules_stay_quiet_and_recorded_in_context(self):
+        context = self.context(modules=["json", "pathlib"])
+        self.assertIn("modules", context)
+        self.assertEqual(context["modules"]["json"], {"found": True})
+        self.assertEqual(context["modules"]["pathlib"], {"found": True})
+
+    def test_real_incident_reproduced_by_value_shapely_missing(self):
+        # Real incident (2026-10-06): Windows suite launched with system interpreter
+        # lacking shapely from requirements.txt. Frozen fixture of mapped requirements.
+        from archpipe.execution_context import requirements_import_names
+        import importlib.util
+
+        frozen_req_imports = tuple(requirements_import_names(ROOT / "requirements.txt"))
+        self.assertIn("shapely", frozen_req_imports)
+
+        real_find_spec = importlib.util.find_spec
+
+        def mock_find_spec(name, *args, **kwargs):
+            if name == "shapely":
+                return None
+            return real_find_spec(name, *args, **kwargs)
+
+        with patch("importlib.util.find_spec", side_effect=mock_find_spec):
+            with self.assertRaises(ContextError) as ctx:
+                self.context(modules=frozen_req_imports)
+        msg = str(ctx.exception)
+        self.assertIn("shapely", msg)
+        self.assertTrue(sys.executable in msg or str(Path(sys.executable).resolve()) in msg)
+        self.assertIn("use the project environment", msg)
+
+    def test_run_tests_subprocess_exits_2_on_missing_dependency(self):
+        env = dict(os.environ)
+        env["ARCHPIPE_TEST_EXTRA_MODULES"] = "archpipe_nonexistent_mod_c9x"
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/run_tests.py")],
+            env=env,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("PREFLIGHT FAILED:", result.stderr)
+        self.assertIn("archpipe_nonexistent_mod_c9x", result.stderr)
+        self.assertTrue(sys.executable in result.stderr or str(Path(sys.executable).resolve()) in result.stderr)
+        self.assertIn("use the project environment", result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+
+    def test_verify_subprocess_exits_2_on_missing_dependency(self):
+        env = dict(os.environ)
+        env["ARCHPIPE_TEST_EXTRA_MODULES"] = "archpipe_nonexistent_mod_c9x"
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/verify.py")],
+            env=env,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("PREFLIGHT FAILED:", result.stderr)
+        self.assertIn("archpipe_nonexistent_mod_c9x", result.stderr)
+        self.assertTrue(sys.executable in result.stderr or str(Path(sys.executable).resolve()) in result.stderr)
+        self.assertIn("use the project environment", result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+
+    def test_requirements_import_names_mapping(self):
+        from archpipe.execution_context import requirements_import_names
+        mapped = requirements_import_names(ROOT / "requirements.txt")
+        expected = ["ezdxf", "matplotlib", "PIL", "pymupdf", "yaml", "shapely", "ifcopenshell"]
+        self.assertEqual(mapped, expected)
+
 
 if __name__ == "__main__":
     unittest.main()
