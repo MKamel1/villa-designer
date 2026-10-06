@@ -30,6 +30,11 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import jsonsafe                                                     # noqa: E402
 
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
+
 from Autodesk.Revit.DB import (
     BuiltInCategory, BuiltInParameter, Element, FilteredElementCollector, Level,
     LocationCurve, LocationPoint, Options, Solid, SpatialElementBoundaryOptions,
@@ -713,6 +718,15 @@ def _model_path_argument():
     return None
 
 
+def write_extract(dest, data):
+    """Serialize native values before atomically replacing the last extract."""
+    # Explicit ordering/separators keep bytes stable across both entry points.
+    # safe_io completes serialization before staging and preserves the old
+    # destination if serialization, flushing or publication fails.
+    safe_io.save_json(dest, data, serializer=jsonsafe.dumps, indent=2,
+                      sort_keys=True, separators=(",", ": "))
+
+
 def main():
     doc = resolve_doc()
     if doc is None:
@@ -722,14 +736,7 @@ def main():
 
     data = build(doc)
     dest = destination(doc)
-    # sort_keys makes the output order-independent; the explicit separators
-    # keep it stable across Python versions. Both serve determinism.
-    # Serialize BEFORE opening the destination: .NET numeric wrappers can
-    # fail JSON encoding; such a failure must not truncate the last extract.
-    # jsonsafe: client models carry Arabic names and .NET Int64 ids, which IronPython's encoder rejects
-    payload = jsonsafe.dumps(data, indent=2, sort_keys=True, separators=(",", ": "))
-    with open(dest, "w") as fh:
-        fh.write(payload)
+    write_extract(dest, data)
 
     counts = dict((k, len(v)) for k, v in data.items() if isinstance(v, list))
     print("archpipe: wrote %s" % dest)

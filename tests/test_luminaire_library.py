@@ -4,7 +4,8 @@ import io
 import tempfile
 import unittest
 import zipfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
+from unittest.mock import patch
 
 from archpipe import photometry as ph
 from archpipe.luminaires import eulumdat as eu
@@ -44,6 +45,8 @@ class LibraryTests(unittest.TestCase):
         rows = lib.search(library=self.lib, mount="pendant")
         self.assertEqual(len(rows), 1)
         r = rows[0]
+        self.assertEqual(r["ldt"], "signify/SKU-1/SKU-1.ldt")
+        self.assertEqual(r["folder"], "signify/SKU-1")
         self.assertEqual((r["verified"], r["has_rfa"], r["has_mfr_ies"]), (1, 1, 1))
         self.assertTrue(r["pair_check"].startswith("ok"), r["pair_check"])
         self.assertEqual((r["cct_k"], r["cri_ra"], r["watts"]), (3000.0, 90.0, 20.0))
@@ -114,6 +117,54 @@ class LibraryTests(unittest.TestCase):
         self.assertEqual(lib.sniff("﻿,Wattage##OTHER##,X##LENGTH##MILLIMETERS\n".encode("utf-16")), "txt")
         self.assertIsNone(lib.sniff(b"<html>not a luminaire</html>"))
 
+
+
+class StoredPathTests(unittest.TestCase):
+    def test_nonrelative_paths_cannot_replace_the_library_root(self):
+        for stored in ("/outside/file.ldt", r"C:\outside\file.ldt", "C:file.ldt",
+                       r"\\server\share\file.ldt", "../file.ldt", r"other\..\file.ldt"):
+            for root in (PurePosixPath("/library"), PureWindowsPath("C:/library")):
+                with self.subTest(root=root, stored=stored), self.assertRaises(ValueError):
+                    lib.resolve_library_path(root, stored)
+
+    def test_both_separators_resolve_on_both_platforms(self):
+        # Freeze the real Linux failure; pure paths exercise Windows on any host.
+        parts = ("iguzzini", "LSEVO-AAK3EW", "LSEVO-AAK3EW.ldt")
+        for root in (PurePosixPath("/library"), PureWindowsPath("C:/library")):
+            for stored in (r"iguzzini\LSEVO-AAK3EW\LSEVO-AAK3EW.ldt",
+                           "iguzzini/LSEVO-AAK3EW/LSEVO-AAK3EW.ldt",
+                           r"iguzzini/LSEVO-AAK3EW\LSEVO-AAK3EW.ldt"):
+                with self.subTest(root=root, stored=stored):
+                    self.assertEqual(lib.resolve_library_path(root, stored), root.joinpath(*parts))
+                    self.assertEqual(root.joinpath(*parts).relative_to(root).as_posix(),
+                                     "iguzzini/LSEVO-AAK3EW/LSEVO-AAK3EW.ldt")
+
+    def test_export_reads_the_real_backslash_stored_path(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            source = root / "iguzzini" / "LSEVO-AAK3EW" / "LSEVO-AAK3EW.ldt"
+            source.parent.mkdir(parents=True)
+            source.write_text(product_ldt(sku="LSEVO-AAK3EW"), encoding="latin-1")
+            with patch.object(lib, "get", return_value={
+                    "ldt": r"iguzzini\LSEVO-AAK3EW\LSEVO-AAK3EW.ldt"}):
+                dest = lib.export_ies("iguzzini", "LSEVO-AAK3EW", 0, root / "export.ies", root)
+            self.assertEqual(ph.load(dest).total_lumens, 2000.0)
+
+    def test_install_reads_backslash_folder_sibling(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            inbox = root / "inbox" / "signify"
+            inbox.mkdir(parents=True)
+            (inbox / "test.ldt").write_text(product_ldt(), encoding="latin-1")
+            (inbox / "Test pendant LED.rfa").write_bytes(OLE)
+            lib.import_inbox(root, log=lambda *a: None)
+            row = lib.get("signify", "SKU-1", library=root)
+            row.update(ldt=r"signify\SKU-1\SKU-1.ldt", folder=r"signify\SKU-1")
+            with patch.object(lib, "get", return_value=row):
+                result = install.resolve({"id": "portable", "product": {
+                    "manufacturer": "signify", "sku": "SKU-1"}}, library=root, ies_dir=root / "_ies")
+            self.assertEqual(Path(result["family"]),
+                             (root / "signify" / "SKU-1" / "Test pendant LED.rfa").resolve())
 
 
 class SignifyCrawlTests(unittest.TestCase):

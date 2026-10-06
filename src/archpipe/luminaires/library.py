@@ -32,13 +32,27 @@ import sqlite3
 import time
 import zipfile
 from dataclasses import asdict, dataclass
-from pathlib import Path
+from pathlib import Path, PurePath, PureWindowsPath
 
 from archpipe import photometry as ph
 from archpipe.luminaires import eulumdat as eu
 
 ROOT = Path(__file__).resolve().parents[3]
 LIBRARY = ROOT / "assets/user/luminaires"
+
+
+def resolve_library_path(library: PurePath, stored: str) -> PurePath:
+    """Join a stored relative path using either separator, on any host.
+
+    PureWindowsPath accepts both slash styles without consulting the host;
+    joining its parts preserves the library root's native path flavour.
+    New index entries use as_posix() so persistence is host independent.
+    """
+    relative = PureWindowsPath(stored)
+    if relative.anchor or ".." in relative.parts:
+        raise ValueError(f"not a library-relative path: {stored!r}")
+    return library.joinpath(*relative.parts)
+
 
 # Company line / [MANUFAC] text -> one manufacturer key. Folder names under
 # inbox/ win when given (inbox/erco/... is ERCO whatever the file says).
@@ -360,7 +374,8 @@ def rebuild_index(library: Path = LIBRARY) -> int:
                 has_rfa=int(any(folder.glob("*.[rR][fF][aA]"))), has_mfr_ies=int(any(folder.glob("mfr_*"))),
                 flux_check=c["flux_check"], pair_check=c["pair_check"], sanity=c["sanity"],
                 verified=c["verified"], markets=",".join(meta.get("markets", [])),
-                ldt=str(next(folder.glob("*.ldt")).relative_to(library)), folder=str(folder.relative_to(library))))
+                ldt=next(folder.glob("*.ldt")).relative_to(library).as_posix(),
+                folder=folder.relative_to(library).as_posix()))
     tmp = db.with_suffix(".tmp")
     tmp.unlink(missing_ok=True)
     con = sqlite3.connect(tmp)
@@ -445,7 +460,7 @@ def export_ies(manufacturer: str, sku: str, lamp_set: int, dest: Path, library: 
     row = get(manufacturer, sku, lamp_set, library)
     if row is None:
         raise KeyError(f"{manufacturer}/{sku} lamp set {lamp_set} is not in the library")
-    L = eu.load(library / row["ldt"])
+    L = eu.load(resolve_library_path(library, row["ldt"]))
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(L.to_ies_text(lamp_set, manufacturer=manufacturer), encoding="utf-8")
     return dest

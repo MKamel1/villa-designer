@@ -23,6 +23,40 @@ Int64.__name__ = "Int64"
 
 
 class JsonSafe(unittest.TestCase):
+    def test_bridge_integer_siblings_preserve_exact_values(self):
+        for name, value in (("Int64", 9223372036854775807), ("UInt64", 18446744073709551615),
+                            ("Int32", -2147483648), ("UInt32", 4294967295),
+                            ("Int16", -32768), ("UInt16", 65535),
+                            ("Byte", 255), ("SByte", -128), ("long", 2 ** 80)):
+            def forbidden_float(self):
+                raise AssertionError("integer bridge reached float")
+            bridge = type(name, (), {"__int__": lambda self: value, "__float__": forbidden_float})()
+            with self.subTest(name=name):
+                got = json.loads(jsonsafe.dumps({"value": bridge}))["value"]
+                self.assertEqual(got, value)
+                self.assertIs(type(got), int)
+
+    def test_native_integer_subclass_stays_exact(self):
+        class Identifier(int):
+            def __float__(self):
+                raise AssertionError("integer subclass reached float")
+        self.assertEqual(json.loads(jsonsafe.dumps(Identifier(2 ** 80))), 2 ** 80)
+
+    def test_real_valued_bridge_keeps_fraction(self):
+        for name in ("Double", "Decimal"):
+            bridge = type(name, (), {"__float__": lambda self: 22.04,
+                                    "__int__": lambda self: 22})()
+            self.assertEqual(json.loads(jsonsafe.dumps(bridge)), 22.04)
+
+    def test_failed_integer_conversion_does_not_fall_back_to_float(self):
+        class Int64:
+            def __int__(self):
+                raise ValueError("invalid integer bridge")
+            def __float__(self):
+                return 1.25
+        bridge = Int64()
+        self.assertEqual(json.loads(jsonsafe.dumps(bridge)), repr(bridge))
+
     def test_arabic_names_and_int64_ids(self):
         data = {"name": u"غرفة المعيشة", "id": Int64(1586207),
                 "area": 22.04, "nested": [Int64(3), {"k": u"سلم"}]}

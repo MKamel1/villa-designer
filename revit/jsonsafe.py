@@ -33,9 +33,16 @@ def clean(v):
             return repr(v)
     if isinstance(v, float):
         return v
-    if isinstance(v, int) and name == "int":
-        return v
-    try:                                            # long, Int64, Int32, Double, Decimal and the like
+    if isinstance(v, int) or name in ("long", "Byte", "SByte", "Int16", "UInt16",
+                                     "Int32", "UInt32", "Int64", "UInt64"):
+        # Integral bridge types supply __int__, which float() need not accept.
+        # Keep identifiers exact on CPython 3.12/3.14 and IronPython 2.7;
+        # a failed integer conversion must never fall back through float.
+        try:
+            return int(v)
+        except Exception:
+            return repr(v)
+    try:                                            # Double, Decimal and other real-valued bridges
         f = float(v)
         return int(f) if f == int(f) and abs(f) < 2 ** 53 else f
     except Exception:

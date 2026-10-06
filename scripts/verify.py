@@ -10,9 +10,11 @@ from __future__ import annotations
 
 import contextlib
 import io
+import json
 import math
 import pathlib
 import re
+import runpy
 import subprocess
 import sys
 import tempfile
@@ -91,6 +93,27 @@ def main() -> int:
     expect("execution context records explicit absolute child directory and script paths",
            EXECUTION_CONTEXT["working_directory"] == str(ROOT) and
            all(pathlib.Path(p).is_absolute() for p in EXECUTION_CONTEXT["scripts"]))
+    from archpipe.luminaires.library import resolve_library_path
+    parts = ("iguzzini", "LSEVO-AAK3EW", "LSEVO-AAK3EW.ldt")
+    expect("stored luminaire paths accept both separators on POSIX and Windows",
+           all(resolve_library_path(root, separator.join(parts)) == root.joinpath(*parts)
+               for root in (pathlib.PurePosixPath("/library"), pathlib.PureWindowsPath("C:/library"))
+               for separator in ("/", "\\")))
+    expect("stored luminaire paths cannot replace or leave the library root",
+           all(raises(ValueError, resolve_library_path, pathlib.PurePosixPath("/library"), stored)
+               for stored in ("../outside.ldt", r"C:\outside.ldt", "/outside.ldt")))
+    native_dumps = runpy.run_path(str(ROOT / "revit/jsonsafe.py"))["dumps"]
+
+    class Int64:
+        def __int__(self):
+            return 9223372036854775807
+
+        def __float__(self):
+            raise AssertionError("integral identifier converted to float")
+
+    expect("native serializer preserves large bridge integers and ordinary values",
+           json.loads(native_dumps([Int64(), 22.04, False, None])) ==
+           [9223372036854775807, 22.04, False, None])
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
     intake = audit_scene_manifest(manifest_path, VR.build(views=[]), ROOT)
     assumptions = manifest_assumptions(manifest_path)

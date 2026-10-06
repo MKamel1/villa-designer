@@ -46,7 +46,7 @@ actual or specification values are not independent measurement evidence.
 | Boundary | Before | Phase 1 |
 |---|---|---|
 | `safe_io.save_bytes`, `copy_file` | Shared fixed `.part`, retries, no disk flush | Unique staging, disk flush, atomic replace, failure cleanup |
-| CLI `revit/extract_model.py` | ASCII serializer before opening; in-place overwrite; manual Color casts | Shared `write_extract`; typed Color projection; TextNote original/normalized record alongside legacy text |
+| CLI `revit/extract_model.py` | ASCII serializer before opening; in-place overwrite; manual Color casts | Shared `write_extract`; typed Color/TextNote adapter wiring is not present in this worktree and remains pending |
 | Extract Model ribbon | Raw JSON/truncating writes | Same `write_extract` as CLI |
 | `from_extract.convert`, `review_extract.review_model` | Dict input, explicit mm and measured footprint requirements | Dict behavior retained; file inputs use `load_json` through convert |
 | `deliverables.write_csv`, `to_ifc`; `scripts/handoff.py` | Direct CSV/IFC/JSON/README writes | Atomic publication; independent IFC geometry tests retained |
@@ -54,8 +54,9 @@ actual or specification values are not independent measurement evidence.
 | `execution_context.write_record` | Direct JSON overwrite | Atomic shared JSON writer |
 | `revit/jsonsafe.clean` | Integral wrappers passed through float | Exact integer conversion before numeric fallback |
 
-Legacy extract fields remain compatible. Color and TextNote use the typed boundary;
-the complete extract is not changed to a typed envelope. Native lengths retain
+Legacy extract fields remain compatible. The current extractor still casts Color
+channels manually and exports legacy TextNote fields; native typed adapter wiring
+remains pending. The complete extract is not changed to a typed envelope. Native lengths retain
 Autodesk UnitUtils and the existing millimetre declaration. Generic typed units
 and identifiers are tested but complete field adoption is pending. Legacy
 `jsonsafe` still stringifies unknown objects; strict `encode` rejects them.
@@ -96,6 +97,17 @@ update is the operating procedure above; the lead must carry it into that skill.
 Registry key `serialization-file-boundary-phase1`: shared construction/publication
 -> `tests.test_safe_io` -> bridge/file-output stage. `scripts/verify.py` executes
 typed round trips, stock-width echo rejection and ribbon shared-publication checks.
+
+Current-source correction (2026-10-05): the first Linux verification found that
+the earlier documented CLI/ribbon publication migration was absent. The missing
+`write_extract` helper is now implemented with `safe_io.save_json` and the native
+serializer, and both actual entry points use it. `tests.test_extract_publication`
+executes them with native APIs stubbed, checks exact large identifiers/Unicode,
+and preserves the old extract under serialization and flush failures. The three
+new regressions failed before correction; the focused publication/boundary/
+serializer run passed 24 tests, exit 0. See `extract-publication-migration-missing`
+in `docs/LEARNINGS.md` for current full-suite and verification evidence. Historical
+ALL PASS records below are not proof of current integration or native acceptance.
 
 50 focused tests passed, exit 0: `tests.test_safe_io`, `tests.test_jsonsafe`,
 `tests.test_extract_review`, `tests.test_deliverables`, `tests.test_execution_context`,

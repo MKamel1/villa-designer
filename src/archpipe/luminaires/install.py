@@ -46,7 +46,7 @@ def resolve(item: dict, *, library: Path = lib.LIBRARY, allow_unverified: bool =
     if not row["verified"] and not allow_unverified:
         raise InstallError(f"{item.get('id')}: {mfr}/{sku} failed its checks: {row['flux_check']}; "
                            f"{row['pair_check']}; {row['sanity']}")
-    folder = library / row["folder"]
+    folder = lib.resolve_library_path(library, row["folder"])
     rfas = sorted(folder.glob("*.[rR][fF][aA]"))
     name = ies_name(mfr, sku, k)
     lib.export_ies(mfr, sku, k, (ies_dir or ph.PRODUCT_IES_DIR) / name, library)
@@ -152,4 +152,3 @@ def candidate_report(item: dict) -> dict:
     else:
         rep["alternate"] = "MISSING: the stage requires a verified alternate from another range"
     return rep
-
