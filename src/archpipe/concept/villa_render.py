@@ -2063,6 +2063,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     failures = indoor_plant_violations(scene['props'], lay, scene)
     if failures:
         raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
+    from .finish_layers import build as build_finish_layers
+    build_finish_layers(scene, {room:F.clear_rect(lay,room) for room in lay["rooms"]})
     return scene
 
 

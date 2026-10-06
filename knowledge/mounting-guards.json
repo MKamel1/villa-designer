@@ -272,6 +272,25 @@
         "test_indoor_plants_have_integrated_pots_floor_support_and_clear_tv"
       ],
       "closure": "Measured support records and unchanged candidate geometry; native/presentation review remains pending."
+    },
+    {
+      "lesson_id": "c4-finished-layer-bookkeeping-only",
+      "lesson": "fittings mounted to a finished face float when the finish layer is bookkeeping-only",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/finish_layers.py::build; extrude",
+      "check": "src/archpipe/concept/finish_layers.py::surface_findings; solid_findings",
+      "stage": "scene construction and scripts/verify.py",
+      "proof_file": "tests/test_mounting_finish_layers.py",
+      "proofs": [
+        "test_real_suppressed_finish_fires_and_clean_scene_stays_quiet",
+        "test_finish_solids_closed_outward_full_extent_same_material",
+        "test_keyhole_opening_and_translated_reversed_normal_sibling",
+        "test_ensuite_rail_is_carried_by_its_own_brackets"
+      ],
+      "closure": "Real suppressed-layer reproduction and closed outward solids; native/presentation/lighting acceptance remains separate."
     }
   ]
 }

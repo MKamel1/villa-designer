@@ -1,6 +1,7 @@
 """Final lead-authorized C4 candidate corrections; no native integration."""
 from copy import deepcopy
 import json
+import math
 from pathlib import Path
 from .fitting_mounting import bounds, points
 from .attached_assembly import translate
@@ -63,13 +64,21 @@ def apply(scene, lay):
     from . import villa_furnish as F
     centre = next(it['cx'] for it in F.layout(lay) if it['id']=='pb-bed')
     panel = render_meshes['detail-headboard-slats']
+    before_panel = deepcopy(panel)
     trimmed = trim_panel(panel, scene['mounting_hosts'][panel['mounting']['host_id']],
                          centre, authority['headboard_margin_m'])
+    def record_final(member, before, why):
+        scene['mounting_movements'].append(dict(id=member['id'], package='final-design-fixes',
+            host_id=member['mounting']['host_id'], old=bounds(before), new=bounds(member),
+            mm=round(max(math.dist(a,b) for a,b in zip(points(before),points(member)))*1000,6),
+            why=why, approval=authority['approval']+'; APPLIED', proposed_faces=deepcopy(member['faces'])))
+    record_final(panel, before_panel, 'Final lead authority: headboard finite-wall trim with declared margin')
     seated = []
     for root in list(render_meshes.values()):
         if not root['id'].startswith('appliance-coffee-') or not root['id'].endswith('-body'):
             continue
         members = [root]+[m for m in render_meshes.values() if m.get('associated_mounting_root')==root['id']]
+        before_members = {m['id']:deepcopy(m) for m in members}
         record = scene['mounting_hosts'][root['mounting']['host_id']]
         host = Host(record['id'],record['kind'],tuple(record['structural_point']),
                     tuple(record['normal']),Finish(**record['finish']))
@@ -83,6 +92,7 @@ def apply(scene, lay):
             member['mounting'] = dict(binding(MountItem(member['id']),host,max(0,projection),
                 'surface-mounted' if projection < 1e-9 else 'wall-hung'),
                 assembly_root=root['id'],projection_basis='Generated part relative to lowest complete assembly fixing plane')
+            record_final(member, before_members[member['id']], 'Final lead authority: seat lowest complete coffee assembly part')
         seated.append(dict(root_id=root['id'],delta=delta,members=carried,
                            fixing_basis='Lowest complete rigid assembly part; actual modeled worktop'))
     scene['c4_final'] = dict(applied=[r['id'] for r in authority['rows']],headboard=trimmed,coffee=seated)

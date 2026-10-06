@@ -66,6 +66,12 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      (`render_support.unsupported`: exact contact, keyhole-safe
      triangulation, only the building grounds a group), **openings
      passable** (`render_support.blocked_openings`), appliances and fittings.
+   - Nonzero finished host datums require physical `finish-layer-` solids,
+     not diagnostic host/support planes. `finish_layers` preserves complete
+     source wall contours and openings, partitions shared shell polygons by
+     room where finish assemblies differ, and replaces covered source faces.
+     Verify render-only finished-face distance and closed outward winding;
+     prove both on the real scene with finish construction suppressed.
    - Indoor plants bind to the actual upward face of their named finished
      floor or furniture support after mounting migration. Check exported
      positions with `indoor_plant_violations(props, layout, scene)`; authored

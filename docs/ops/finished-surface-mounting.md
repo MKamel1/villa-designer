@@ -246,3 +246,21 @@ After migration, pass the scene to `indoor_plant_violations`; without it, migrat
 props fail closed. `scene_findings` independently checks actual support geometry,
 plant base and recorded datum with the unchanged 1 mm comparison tolerance.
 Moved or removed supports and stale records remain failures.
+
+C4i render geometry: a diagnostic finished-face datum does not certify physical
+support. At the end of mounting migration, `finish_layers.build` extrudes the
+complete measured source polygons (including opening contours) for every
+nonzero finish host. Shared hosts share one solid; existing finished stair
+surfaces retain their authored datum. The solid replaces its covered source
+polygon, avoiding coincident shell faces. Include every supplementary coplanar
+source patch, not just the initially selected host polygon. Keep host/support
+bookkeeping in diagnostics. `verify.py` independently checks render-only
+mounting-face distance (2 mm) and closed, outward-wound solids. Suppress layer
+construction on the real scene to prove the check fires, then test reversed
+normals, window openings and translated siblings. Final authorized geometry
+changes append movement records; prior proposals remain immutable audit history.
+
+Clipping through an opening edge must repair keyhole topology before extrusion;
+a doubled slit must not become a nonmanifold solid. Disconnected clipped
+contours fail closed and require separately declared wall zones. Prove the
+opening-edge clip and disconnected rejection alongside the intact window.

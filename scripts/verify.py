@@ -86,6 +86,9 @@ def main() -> int:
                for name in item["proofs"]) for item in mounting_registry["records"]))
     from archpipe.concept.mounting import scene_findings
     mounting_failures = scene_findings(scene)
+    from archpipe.concept.finish_layers import surface_findings, solid_findings
+    mounting_failures.extend(surface_findings(scene))
+    mounting_failures.extend(solid_findings(scene))
     missing_mounting_hosts = sum("MISSING mounting host" in failure for failure in mounting_failures)
     expect("finished-surface mounting: hosts, fixing geometry and declared void requirements resolve"
            + (f" ({len(mounting_failures)} failures; {missing_mounting_hosts} missing hosts; first: {mounting_failures[0]})" if mounting_failures else ""),

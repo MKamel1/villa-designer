@@ -1,0 +1,12 @@
+[
+  "furn-gwc-wc-0", "furn-gwc-wc-1", "furn-gwc-basin-0", "furn-gwc-basin-1", "furn-gwc-basin-2",
+  "furn-fb-wc-0", "furn-fb-wc-1", "furn-fb-basin-0", "furn-fb-basin-1", "furn-fb-basin-2",
+  "furn-pe-wc-0", "furn-pe-wc-1", "furn-pe-basin-0", "furn-pe-basin-1", "furn-pe-basin-2",
+  "mirror-gwc-basin", "mirror-fb-basin", "mirror-pe-basin",
+  "detail-gwc-hand-shower-rail", "detail-gwc-hand-shower-bracket-lower", "detail-gwc-hand-shower-bracket-upper",
+  "detail-gwc-hand-shower-slider", "detail-gwc-hand-shower-head", "detail-gwc-hand-shower-hose",
+  "detail-pe-hand-shower-rail", "detail-pe-hand-shower-bracket-lower", "detail-pe-hand-shower-bracket-upper",
+  "detail-pe-hand-shower-slider", "detail-pe-hand-shower-head", "detail-pe-hand-shower-hose",
+  "lamp-SCONCE-guest-wc-04", "lamp-SCONCE-family-bath-04", "lamp-SCONCE-family-bath-05",
+  "lamp-VSCONCE-parents-ensuite-04", "bracket-VSCONCE-parents-ensuite-04"
+]

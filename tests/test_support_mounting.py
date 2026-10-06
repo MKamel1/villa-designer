@@ -160,7 +160,7 @@ class SupportMounting(unittest.TestCase):
             if m['id'].startswith(('landscape-trellis-','landscape-climber')):
                 self.assertEqual(m['faces'],before[m['id']]['faces'])
                 host=self.scene['mounting_hosts'][m['mounting']['host_id']]
-                source=next(mm for mm in self.scene['meshes'] if mm['id']==host['source_mesh'])
+                source=next(mm for mm in self.scene['meshes']+self.scene.get('diagnostic_meshes', []) if mm['id']==host['source_mesh'])
                 self.assertTrue(source['id'].startswith('yard-boundary-edge-'))
                 self.assertLessEqual(host['maximum_authored_travel_m'],.300)
                 self.assertEqual(m['mounting']['approval'],'PENDING')

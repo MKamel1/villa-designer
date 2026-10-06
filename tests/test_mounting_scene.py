@@ -217,10 +217,13 @@ class StairFirstPackage(unittest.TestCase):
         self.assertEqual(contract.validate_scene(schema_scene),[])
         frozen=json.loads((Path(__file__).parent/'fixtures/c4-ceiling-label-before.json').read_text())
         reproduced=deepcopy(schema_scene)
-        reproduced['meshes']=[frozen if m['id']==frozen['id'] else m for m in reproduced['meshes']]
+        # Reproduce the historical render-channel defect explicitly: this
+        # datum now lives only in diagnostics, so replacement was a no-op.
+        self.assertIn(frozen['id'], {m['id'] for m in reproduced['diagnostic_meshes']})
+        reproduced['meshes'].append(frozen)
         self.assertTrue(any('.label: string required' in f for f in contract.validate_scene(reproduced)))
         sibling=deepcopy(schema_scene)
-        del next(m for m in sibling['meshes'] if m['id'].startswith('host-face-ceiling-batten-'))['label']
+        del next(m for m in sibling['meshes'] if m['material']=='ceiling-white')['label']
         self.assertTrue(any('.label: string required' in f for f in contract.validate_scene(sibling)))
         self.assertEqual(len(self.scene['ceiling_existing_bc']),10)
         self.assertEqual(self.scene['ceiling_unresolved'],[])
@@ -496,6 +499,14 @@ class StairFirstPackage(unittest.TestCase):
                     all_movements[mid]['proposed_faces'],
                     f"Faces for {mid} do not match proposed faces in movement record"
                 )
+                # Later explicit design fixes supersede a pose, but the
+                # approved host and bounds must survive in the history.
+                scheduled = [r for r in scene['mounting_movements'] if r['id']==mid
+                             and r['host_id']==row['host_id'] and
+                             all(abs(a-b)<1e-8 for key in ('old','new')
+                                 for a,b in zip(r[key],row[key]))]
+                self.assertTrue(scheduled, f"Frozen approval for {mid} absent from movement history")
+                self.assertTrue(all('APPLIED' in r['approval'] for r in scheduled))
 
         self.assertGreater(approved_count, 0)
 
