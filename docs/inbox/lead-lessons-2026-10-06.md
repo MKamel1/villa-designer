@@ -1,0 +1,1 @@
+Recorded into [LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1551) entries: execution-context-wrong-interpreter, ssh-monitor-silent-drop, visible-element-unpreviewed-integration, procedural-plant-and-soffit-guards, agent-prompt-appended-contradiction, and site-orientation-conflation.

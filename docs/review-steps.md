@@ -12,11 +12,12 @@ Document Outline:
   - [Moment F: Delegating Research and Debugging](#moment-f-delegating-research-and-debugging)
   - [Automatable Lessons and Measurable Signals](#automatable-lessons-and-measurable-signals)
 Executive Summary: >
-  This document establishes concrete human review moments and rigorous checklists for all 21 Tier 3
-  engineering lessons from the architectural pipeline lessons audit. Each item is structured as a
-  concrete question with an observable answer, grounded in verbatim citations from LEARNINGS.md, and
-  details the verifiable evidence the reviewer must record. It also identifies candidate lessons
-  amenable to future automated controls along with their measurable physical signals.
+  This document establishes concrete human review moments and rigorous checklists for Tier 3
+  engineering lessons from the architectural pipeline lessons audit (expanded to 23 with 2026-10-06
+  process learnings). Each item is structured as a concrete question with an observable answer,
+  grounded in verbatim citations from LEARNINGS.md, and details the verifiable evidence the reviewer
+  must record. It also identifies candidate lessons amenable to future automated controls along with
+  their measurable physical signals.
 ---
 
 # Tier 3 Review Moments and Checklists
@@ -26,7 +27,7 @@ perception where no reliable numeric or geometric surrogate exists.
 
 ## Inventory of Tier 3 Lessons
 
-The 21 Tier 3 lessons from [docs/lessons-audit.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md) are:
+The 23 Tier 3 lessons from [docs/lessons-audit.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md) and 2026-10-06 process learnings are:
 
 1. **l0027-direct-calculations-omit**: Direct calculations omit shadows and inter-reflection; an empty-room probe is calibration
 2. **l0041-both-negative-bed**: Both negative bed shifts failed design review while the worker batch completed successfully
@@ -49,6 +50,8 @@ The 21 Tier 3 lessons from [docs/lessons-audit.md](file:///C:/Users/mmbka/arch-p
 19. **l0768-specified-tint-must**: A specified tint must be checked in the image.
 20. **l0880-bougainvillea-climbers-r**: The bougainvillea climbers were replaced by scattered leaf/bract polygons (WP4) but stayed sparse enough to read as "almost invisible"
 21. **l0967-top-garden-looked**: The top garden looked bare
+22. **visible-element-unpreviewed-integration**: a new visible element needs a recorded preview artefact (path + hash) before its builder can be referenced by the scene
+23. **procedural-plant-and-soffit-guards**: procedural Strelitzia (lollipop blobs on bare stalks) and a ramp with paving on its soffit escaped without visual preview
 
 ## Review Moments and Checklists
 
@@ -181,6 +184,13 @@ Conducted during visual inspection of presentation renders.
 - **Observable Answer:** Yes / No. (Must be Yes).
 - **Evidence to Record:** Render preview image ID showing mature container planting and perimeter bed coverage.
 
+### Item D.6: Procedural Plant-Form Morphology and Botanical Plausibility
+- **Lesson ID:** `procedural-plant-and-soffit-guards`
+- **Source Quote (Verbatim):** "Codex integrated procedural Strelitzia (lollipop blobs on bare stalks) and a ramp with paving on its soffit without any visual preview; caught only at lead render review." ([docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1586))
+- **Concrete Question:** Do procedural plant elements display authentic botanical morphology (leaf blades, petioles, fan structure) rather than crude geometric approximations (such as lollipop blobs on bare stalks), and have downward soffit faces received appropriate ceiling/soffit finishes rather than paving materials?
+- **Observable Answer:** Yes / No. (Must be Yes).
+- **Evidence to Record:** Neutral preview image ID and lead reviewer sign-off confirming botanical plausibility and correct finish allocation.
+
 ---
 
 ## Moment E: Evaluating Automated Checks and Critics
@@ -235,11 +245,18 @@ Conducted during delegation of scientific research and troubleshooting tasks.
 - **Observable Answer:** Yes / No. (Must be Yes).
 - **Evidence to Record:** Absolute path to the isolated standalone reproduction script and its terminal execution log.
 
+### Item F.3: Visual Preview Artifact Before Scene Integration (Look-Before-Integrate)
+- **Lesson ID:** `visible-element-unpreviewed-integration`
+- **Source Quote (Verbatim):** "a new visible element needs a recorded preview artefact (path + hash) before its builder can be referenced by the scene" ([docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1575))
+- **Concrete Question:** Does every newly authored procedural component builder, plant generator, or exterior surface feature have a recorded, inspected neutral preview artifact (file path and SHA-256 hash) before being referenced by the scene assembly?
+- **Observable Answer:** Yes / No. (Must be Yes).
+- **Evidence to Record:** File path and SHA-256 hash of the inspected neutral preview image artifact recorded in the dispatch or review log.
+
 ---
 
 ## Automatable Lessons and Measurable Signals
 
-While all 21 lessons are registered as human review steps, 6 lessons possess concrete physical signals
+While all 23 lessons are registered as human review steps, 8 lessons possess concrete physical signals
 that could allow promotion to automated Tier 2 fail-closed guards in future iterations:
 
 1. **l0768-specified-tint-must**:
@@ -265,3 +282,11 @@ that could allow promotion to automated Tier 2 fail-closed guards in future iter
 6. **l0588-placeholder-size-not**:
    - *Automatable Control:* Lint schema on Revit parameters and specification dictionaries at the final delivery stage gate.
    - *Measurable Signal:* Count of components with `"ASSUMED"` comment flag equals zero at final stage gate.
+
+7. **procedural-plant-and-soffit-guards**:
+   - *Automatable Control:* G2f construction guards: bounding aspect ratios and leaf/fan morphology checks for procedural plants; surface normal check rejecting floor/paving finishes on downward faces ($z < -0.7$).
+   - *Measurable Signal:* Plant bounding and facet count match botanical profile; count of downward-facing paving faces equals zero.
+
+8. **visible-element-unpreviewed-integration**:
+   - *Automatable Control:* Pre-scene export gate validating that every imported or referenced procedural builder has an entry in a registered preview manifest with an existing disk artifact and valid SHA-256 hash.
+   - *Measurable Signal:* Unregistered or un-hashed procedural scene components equals zero at scene build entry.
