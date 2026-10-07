@@ -51,6 +51,7 @@ from . import catalogue as cat
 from . import vocabulary as vocab
 from .codes import CodePack
 from .model import Furniture, Opening, Project, Room, Wall
+from .units import mm_to_in
 
 # The occupancy groups come from the shared vocabulary. They used to be
 # four literal sets in this file, which is how `hall` came to be absent
@@ -1209,7 +1210,7 @@ def r_tv_viewing(p: Project, level: str) -> list[Finding]:
             req = need_lo if d < need_lo else need_hi
             out.append(_finding(
                 "TV-01", "warning",
-                f"{s.id} sits {d:.0f} mm from the {diag / 25.4:.0f} in screen {tv.id}; UHD viewing wants "
+                f"{s.id} sits {d:.0f} mm from the {mm_to_in(diag):.0f} in screen {tv.id}; UHD viewing wants "
                 f"{need_lo:.0f}-{need_hi:.0f} mm (1-1.5 x the screen size; HD 1.5-2.5 x).",
                 where=tv.id, at=tv.at, reference=src, measured=Measured(d, req, "mm"),
             ))

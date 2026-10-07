@@ -48,7 +48,7 @@ from pathlib import Path
 UNITS_FEET = 1
 UNITS_METRES = 2
 
-FEET_TO_M = 0.3048
+from .units import M_PER_FOOT as FEET_TO_M  # the one exact boundary (1 ft = 0.3048 m)
 
 # LM-63 photometric_type field.
 PHOTO_TYPE_C = 1        # the interior-luminaire convention
