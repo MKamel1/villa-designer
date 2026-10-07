@@ -20,11 +20,15 @@ Example Usage:
 """
 from __future__ import annotations
 
+import ast
+import inspect
 import io
 from pathlib import Path
 import shutil
 import sys
 import tempfile
+import textwrap
+import types
 import unittest
 import uuid
 import zipfile
@@ -133,10 +137,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 20)
+        self.assertEqual(report["covered_by_guard_count"], 30)
         self.assertEqual(report["covered_by_review_count"], 21)
-        self.assertEqual(report["needs_real_case_count"], 7)
-        self.assertEqual(report["uncovered_count"], 169)
+        self.assertEqual(report["needs_real_case_count"], 9)
+        self.assertEqual(report["uncovered_count"], 157)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -153,9 +157,36 @@ class TestGuardRegistry(unittest.TestCase):
             "l0131-windows-file-lock",
             "l0272-tests-test-deliverables",
             "l0466-json-fix-passed",
+            # Phase 2 Batch 2 Asset & Intake
+            "l0011-template-contains-doors",
+            "l0014-real-minotti-sofa",
+            "l0075-free-modern-bed",
+            "l0496-revit-window-read",
+            "l0772-landscape-trees-placed",
+            "l0846-asset-stand-s",
+            "l0960-top-garden-bench",
+            # Phase 2 Batch 2 Photometrics & Lighting
+            "l0025-third-party-families",
+            "l0123-swapping-4300-lm",
+            "l0650-scene-lux-measurement",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
+
+        # Lessons whose local re-implementations were deleted and left uncovered (no production guard yet)
+        deleted_reimplementation_lessons = [
+            "l0177-good-texture-poly",
+            "l0178-good-model-failed",
+            "l0026-blender-ies-azimuth",
+            "l0080-lamps-rendered-far",
+            "l0090-window-glass-passed",
+            "l0095-lamp-sources-sat",
+            "l0096-two-spec-heights",
+            "l0119-housing-below-ceiling",
+            "l0656-glass-verified",
+        ]
+        for lid in deleted_reimplementation_lessons:
+            self.assertIn(lid, report["uncovered_lessons"], f"Lesson {lid} should be uncovered (no production guard yet)")
 
         # Check Tier-3 review step lessons (all 21 must be covered)
         expected_review_lessons = [
@@ -193,6 +224,8 @@ class TestGuardRegistry(unittest.TestCase):
             "l0082-highlight-priority-then",
             "l0100-detail-view-named",
             "l0136-highlights-present-faile",
+            "l0072-all-six-props",
+            "l0074-nishita-sky-units",
         ]
         for lid in expected_needs_real_case:
             self.assertIn(lid, report["needs_real_case"], f"Lesson {lid} should be tracked as needs_real_case")
@@ -479,6 +512,151 @@ class TestGuardRegistry(unittest.TestCase):
             self.assertFalse(real_res.passed)
             self.assertFalse(real_res.fired)
             self.assertIn("needs real case", real_res.error_message.lower())
+
+    def test_phase2_batch2_guards_execution(self) -> None:
+        """Every guard added in Phase 2 Batch 2 executes as expected."""
+        # 1. Active Asset & intake and Photometrics & lighting guards run on real (fires) and clean (quiet)
+        batch2_active = [
+            "asset_intake_role_vocabulary",
+            "asset_intake_bounds_normalisation",
+            "asset_intake_contents_and_licence",
+            "safe_io_spec_echo_rejection",
+            "villa_landscape_tree_extent",
+            "villa_landscape_standin_disclosure",
+            "villa_landscape_bench_dimensions",
+            "luminaires_spec_contradiction_rejection",
+            "luminaires_flux_requirement",
+            "villa_lighting_beam_clashes",
+        ]
+        for name in batch2_active:
+            guard = get_guard(name)
+            self.assertFalse(guard.needs_real_case, f"{name} should not need real case")
+            real_res = guard.run_case("real")
+            self.assertTrue(real_res.passed, f"{name} real failed: {real_res.error_message}")
+            self.assertTrue(real_res.fired, f"{name} real did not fire")
+
+            clean_res = guard.run_case("clean")
+            self.assertTrue(clean_res.passed, f"{name} clean failed: {clean_res.error_message}")
+            self.assertFalse(clean_res.fired, f"{name} clean fired unexpectedly")
+
+        # 2. Batch 2 guards registered with needs_real_case=True
+        batch2_needs_real = [
+            "asset_intake_empty_package",
+            "lighting_nishita_sky_calibration",
+        ]
+        for name in batch2_needs_real:
+            guard = get_guard(name)
+            self.assertTrue(guard.needs_real_case, f"{name} should have needs_real_case=True")
+            real_res = guard.run_case("real")
+            self.assertFalse(real_res.passed)
+            self.assertFalse(real_res.fired)
+            self.assertIn("needs real case", real_res.error_message.lower())
+
+    def _get_production_calls(self, fn: Any) -> list[str]:
+        """Parses AST of fn and returns all calls to production modules (archpipe.* != guard_registry, or revit/*)."""
+        src = textwrap.dedent(inspect.getsource(fn))
+        tree = ast.parse(src)
+        fn_globals = getattr(fn, "__globals__", {})
+        calls: list[str] = []
+
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Call):
+                continue
+
+            target_func = node.func
+            resolved_module = ""
+            call_repr = ""
+
+            if isinstance(target_func, ast.Name):
+                func_name = target_func.id
+                call_repr = func_name
+                obj = fn_globals.get(func_name)
+                if obj is not None:
+                    resolved_module = getattr(obj, "__module__", "")
+            elif isinstance(target_func, ast.Attribute):
+                chain: list[str] = []
+                curr: ast.AST = target_func
+                while isinstance(curr, ast.Attribute):
+                    chain.append(curr.attr)
+                    curr = curr.value
+                if isinstance(curr, ast.Name):
+                    chain.append(curr.id)
+                    chain.reverse()
+                    call_repr = ".".join(chain)
+                    base_obj = fn_globals.get(chain[0])
+                    if base_obj is not None:
+                        curr_obj = base_obj
+                        for part in chain[1:]:
+                            curr_obj = getattr(curr_obj, part, None)
+                            if curr_obj is None:
+                                break
+                        if curr_obj is not None:
+                            resolved_module = getattr(curr_obj, "__module__", "")
+                            if not resolved_module and isinstance(curr_obj, types.ModuleType):
+                                resolved_module = getattr(curr_obj, "__name__", "")
+                        elif isinstance(base_obj, types.ModuleType):
+                            resolved_module = getattr(base_obj, "__name__", "")
+
+            resolved_module = resolved_module or ""  # some callables report __module__ = None
+            is_archpipe_prod = (
+                resolved_module.startswith("archpipe.")
+                and resolved_module != "archpipe.guard_registry"
+                and not resolved_module.endswith(".guard_registry")
+            )
+            is_revit_prod = resolved_module.startswith("revit.") or resolved_module == "revit"
+
+            if is_archpipe_prod or is_revit_prod:
+                calls.append(f"{resolved_module}:{call_repr}")
+
+        return calls
+
+    def _assert_calls_production_module(self, fn: Any) -> list[str]:
+        """Asserts that fn calls at least one production module function."""
+        calls = self._get_production_calls(fn)
+        if not calls:
+            raise AssertionError(
+                f"Function {getattr(fn, '__name__', str(fn))} does not call any production module "
+                f"(archpipe.* != guard_registry, or revit/*)."
+            )
+        return calls
+
+    def test_meta_guard_guard_registry_functions_call_production_modules(self) -> None:
+        """Meta-guard: every guard fn defined in guard_registry must call a production module, not re-implement logic."""
+        registry_defined_guards = [
+            g for g in all_guards()
+            if getattr(g.guard_fn, "__module__", "") in ("archpipe.guard_registry", "src.archpipe.guard_registry")
+        ]
+        self.assertGreater(len(registry_defined_guards), 0, "Expected registry-defined guard functions")
+
+        for guard in registry_defined_guards:
+            calls = self._assert_calls_production_module(guard.guard_fn)
+            self.assertGreater(
+                len(calls),
+                0,
+                f"Guard '{guard.name}' has fn defined in guard_registry but does not call any production "
+                f"module (archpipe.* != guard_registry, or revit/*). Re-implementations inside "
+                f"guard_registry are rejected."
+            )
+
+        # Negative test: a function doing only local re-implementation arithmetic must be rejected
+        def dummy_reimplementation_check(val: float) -> float:
+            threshold = 100.0 * 2.5
+            if val > threshold:
+                raise ValueError("Too large")
+            return val * 1.5
+
+        with self.assertRaises(AssertionError) as ctx:
+            self._assert_calls_production_module(dummy_reimplementation_check)
+        self.assertIn("does not call any production module", str(ctx.exception))
+
+        # Negative test 2: a function using only standard library (math) must also be rejected
+        def dummy_stdlib_only_check(val: float) -> float:
+            import math
+            return math.sin(val)
+
+        with self.assertRaises(AssertionError) as ctx_stdlib:
+            self._assert_calls_production_module(dummy_stdlib_only_check)
+        self.assertIn("does not call any production module", str(ctx_stdlib.exception))
 
 
 if __name__ == "__main__":
