@@ -1,0 +1,138 @@
+{
+  "_metadata": {
+    "description": "Frozen real-case defect reproductions for Class C5 (emitter and fitting disconnected)",
+    "structure": "spec lighting entries, layout fixture placements, and extracted meshes capturing historical C5 defects",
+    "total_items": 5,
+    "last_updated": "2026-10-06T21:18:00Z"
+  },
+  "spec": {
+    "name": "bedroom-c5-failing-reproductions",
+    "lighting": [
+      {
+        "id": "LT-01-coreline-4300lm",
+        "layer": "ambient",
+        "at": [2100.0, 1800.0],
+        "mounting_height": 2700.0,
+        "mount": "recessed",
+        "lumens": 4300.0,
+        "kelvin": 3000,
+        "product": {
+          "manufacturer": "signify",
+          "sku": "911401840687",
+          "lamp_set": 0,
+          "luminaire_lm": 4300.0,
+          "mount": "recessed"
+        },
+        "requirement": {
+          "lumens": [2500, 3500],
+          "kelvin": 3000
+        }
+      },
+      {
+        "id": "LT-01-impossible-height",
+        "layer": "ambient",
+        "at": [2100.0, 1800.0],
+        "mounting_height": 2400.0,
+        "mount": "pendant",
+        "lumens": 2780.0,
+        "kelvin": 2700
+      },
+      {
+        "id": "LT-02-source-offset",
+        "layer": "task",
+        "at": [1725.0, 3300.0],
+        "mounting_height": 2000.0,
+        "mount": "pendant",
+        "lumens": 780.0,
+        "kelvin": 2700
+      },
+      {
+        "id": "LT-01-pendant-penetration",
+        "layer": "ambient",
+        "at": [2000.0, 2000.0],
+        "mounting_height": 2700.0,
+        "mount": "pendant",
+        "lumens": 2780.0,
+        "kelvin": 2700
+      }
+    ],
+    "fixtures": [
+      {
+        "id": "DL-dining-misplaced",
+        "kind": "DL",
+        "room": "dining",
+        "level": "B",
+        "x": 23.5,
+        "y": -22.0,
+        "z": -0.3
+      }
+    ]
+  },
+  "meshes": {
+    "LT-01-impossible-height": [
+      {
+        "geometry_role": "physical",
+        "material": {"name": "Shade Finish Dark Bronze"},
+        "vertices_mm": [
+          [2100.0, 1800.0, 2717.1],
+          [2000.0, 1700.0, 2386.9],
+          [2200.0, 1900.0, 2386.9]
+        ]
+      },
+      {
+        "geometry_role": "physical",
+        "material": {"name": "Cord Black"},
+        "vertices_mm": [
+          [2100.0, 1800.0, 3167.0],
+          [2100.0, 1800.0, 2717.1]
+        ]
+      },
+      {
+        "geometry_role": "physical",
+        "material": {"name": "Lens -White"},
+        "vertices_mm": [
+          [2050.0, 1750.0, 2400.0],
+          [2150.0, 1850.0, 2400.0]
+        ]
+      }
+    ],
+    "LT-02-source-offset": [
+      {
+        "geometry_role": "light_source_symbol",
+        "material": {"name": "Revit unspecified"},
+        "vertices_mm": [
+          [1725.0, 3300.0, 2242.8],
+          [1700.0, 3275.0, 1633.9],
+          [1750.0, 3325.0, 1633.9]
+        ]
+      },
+      {
+        "geometry_role": "physical",
+        "material": {"name": "Stainless Steel"},
+        "vertices_mm": [
+          [1700.0, 3275.0, 2244.4],
+          [1750.0, 3325.0, 2242.8]
+        ]
+      }
+    ],
+    "LT-01-pendant-penetration": [
+      {
+        "geometry_role": "physical",
+        "material": {"name": "Laminate, White"},
+        "vertices_mm": [
+          [1850.0, 1400.0, 2688.0],
+          [2150.0, 2600.0, 2732.0]
+        ]
+      },
+      {
+        "geometry_role": "physical",
+        "material": {"name": "Glass, White, High Luminance"},
+        "vertices_mm": [
+          [1947.0, 1442.0, 2699.0],
+          [2052.0, 2557.0, 2700.0]
+        ]
+      }
+    ]
+  },
+  "ceiling_mm": 2700.0
+}

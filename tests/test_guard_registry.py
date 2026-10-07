@@ -133,10 +133,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 20)
+        self.assertEqual(report["covered_by_guard_count"], 25)
         self.assertEqual(report["covered_by_review_count"], 21)
         self.assertEqual(report["needs_real_case_count"], 7)
-        self.assertEqual(report["uncovered_count"], 169)
+        self.assertEqual(report["uncovered_count"], 164)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -153,6 +153,11 @@ class TestGuardRegistry(unittest.TestCase):
             "l0131-windows-file-lock",
             "l0272-tests-test-deliverables",
             "l0466-json-fix-passed",
+            "l0095-lamp-sources-sat",
+            "l0096-two-spec-heights",
+            "l0119-housing-below-ceiling",
+            "l0123-swapping-4300-lm",
+            "l0610-fitting-labelled-wrong",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
@@ -480,6 +485,19 @@ class TestGuardRegistry(unittest.TestCase):
             self.assertFalse(real_res.fired)
             self.assertIn("needs real case", real_res.error_message.lower())
 
+    def test_c5_fixture_record_guard_execution(self) -> None:
+        """Class C5 fixture record consistency guard executes on real and clean cases."""
+        guard = get_guard("fixture_record_consistency")
+        self.assertFalse(guard.needs_real_case)
+        real_res = guard.run_case("real")
+        self.assertTrue(real_res.passed, f"fixture_record_consistency real failed: {real_res.error_message}")
+        self.assertTrue(real_res.fired, "fixture_record_consistency real did not fire")
+
+        clean_res = guard.run_case("clean")
+        self.assertTrue(clean_res.passed, f"fixture_record_consistency clean failed: {clean_res.error_message}")
+        self.assertFalse(clean_res.fired, "fixture_record_consistency clean fired unexpectedly")
+
 
 if __name__ == "__main__":
     unittest.main()
+
