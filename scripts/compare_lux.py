@@ -57,6 +57,8 @@ def main() -> int:
     except ContextError as exc:
         print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
         return 2
+
+    rendered = json.loads(a.rendered.read_text(encoding="utf-8"))
     extract = json.loads(a.extract.read_text(encoding="utf-8"))
     boundary = extract['rooms'][0]['boundary']
     x0, x1 = min(p[0] for p in boundary), max(p[0] for p in boundary)
