@@ -95,6 +95,11 @@ def main() -> int:
            RECORD.stat().st_size < 1500000)
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
     scene = VR.build(views=[])
+    from archpipe.orientation_guard import scene_findings as orientation_findings, document_findings
+    expect("client garden compass names agree with geometry", not orientation_findings(scene))
+    expect("garden documents use recorded client compass names", not document_findings())
+    from archpipe.concept.garden_sun import scene_findings as garden_sun_findings
+    expect("garden sun evidence covers all plants and binds actual enclosure rays", not garden_sun_findings(scene))
     garden_registry = json.loads((ROOT / "knowledge/garden-render-guards.json").read_text(encoding="utf-8"))
     expect("garden render controls have registered proving tests",
            all((ROOT / item["proof_file"]).is_file() and all(

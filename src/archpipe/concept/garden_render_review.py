@@ -171,13 +171,13 @@ def plant_form_findings(meshes):
             points=[q for face in mesh['faces'] for q in face]
             bounds=[min(q[k] for q in points) for k in range(3)]+[max(q[k] for q in points) for k in range(3)]
             root=mesh.get('root_z_m')
-            leaves=[z-SIZE['leaf'] for x,y,z,kind in placements(bounds,density_for_coverage(),sum(map(ord,mesh['id']))) if kind=='leaf']
+            leaves=[z-SIZE['leaf'] for x,y,z,kind in placements(bounds,density_for_coverage(),mesh.get('appearance_seed',sum(map(ord,mesh['id'])))) if kind=='leaf']
             if mesh.get('species')=='Cissus alata':
                 from ..blender.climber_placement import grape_ivy_geometry,ivy_connection_findings
                 stems=next((m for m in meshes if m['id']==mesh.get('stem_mesh')),None)
                 if stems is None:
                     out.append(mesh['id']+': missing physical training stems');continue
-                foliage,petioles,_=grape_ivy_geometry(bounds,stems['faces'],sum(map(ord,mesh['id'])))
+                foliage,petioles,_=grape_ivy_geometry(bounds,stems['faces'],mesh.get('appearance_seed',sum(map(ord,mesh['id']))))
                 out.extend(mesh['id']+': '+f for f in ivy_connection_findings(foliage,petioles,stems['faces']))
                 leaves=[q[2] for f in foliage for q in f]
             if root is None or not leaves:

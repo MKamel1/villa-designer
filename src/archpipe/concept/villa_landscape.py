@@ -1,6 +1,6 @@
 """D1 garden evidence and fail-closed G1/G2/G3 rebuild candidate.
 
-The south planting zone is the southern end of our east yard. The land below
+The south garden is the rear garden; the east yard contains the ramp and top deck. The land below
 the rear boundary belongs to the sister plot and is never dressed as ours.
 All positions are metres in the same frame as the villa scene.
 """
@@ -12,6 +12,7 @@ from math import cos, hypot, pi, radians, sin, tan
 from pathlib import Path
 
 from .. import solar, villa_env as E
+from ..orientation import side_name, zone_name
 from . import villa_furniture_detail as FD
 from .authored_values import fill_defaults, override
 
@@ -43,7 +44,7 @@ def inside_yard(x, y):
 
 def facade_distance(x, y):
     # Include the front ground-floor projection: overlooking it left the
-    # first west-wing tree only 0.69 m from that facade.
+    # first north-garden tree only 0.69 m from that facade.
     rects = [(v / 1000 for v in r) for r in (E.FRONT, E.BAR, E.BUMP)]
     distances = []
     for rect in rects:
@@ -110,8 +111,8 @@ def _box_perimeter_points(x0, y0, x1, y1, step=0.1):
 
 
 def garden_level_rooms(lay):
-    """Room rectangles on the garden's own storey (level B). The north strip of the modeled yard lies over the
-    basement store-ramp, cinema, guest WC and dirty kitchen, so the GF rectangles alone let the north planting bed
+    """Room rectangles on the garden's own storey (level B). The east strip of the modeled yard lies over the
+    basement store-ramp, cinema, guest WC and dirty kitchen, so the GF rectangles alone let the east planting bed
     be placed inside the dirty kitchen (D1 draft render v17, 2026-09-28)."""
     return tuple((r["rect"][0], r["rect"][1], r["rect"][2], r["rect"][3], name)
                  for name, r in lay["rooms"].items() if r.get("level") == "B")
@@ -125,11 +126,11 @@ TROUGH_COLOUR = dict(name="dark bronze, ASSUMED pending client confirmation",
                      base_rgb=[0.12, 0.075, 0.045])
 # Dimensions below are authored ASSUMED design intent, not supplier sizes.
 TOP_TROUGHS = (
-    ("deck-north", (9.20, -21.10, 12.40, -20.76), "Salvia rosmarinus Prostrata Group",
+    ("deck-east", (9.20, -21.10, 12.40, -20.76), "Salvia rosmarinus Prostrata Group",
      ((9.80, -20.93), (10.80, -20.93), (11.80, -20.93))),
-    ("roof-north", (13.02, -21.16, 15.15, -20.76), "Aloe vera",
+    ("roof-east", (13.02, -21.16, 15.15, -20.76), "Aloe vera",
      ((13.40, -20.96), (14.10, -20.96), (14.80, -20.96))),
-    ("roof-south", (13.02, -23.44, 15.15, -23.04), "Aloe vera",
+    ("roof-west", (13.02, -23.44, 15.15, -23.04), "Aloe vera",
      ((13.40, -23.24), (14.10, -23.24), (14.80, -23.24))),
 )
 TOP_TROUGH_HEIGHT = .25
@@ -254,17 +255,17 @@ def _quad(x0, y0, x1, y1, z):
 # width exceeds Time-Saver 2nd ed., p. 340-9, card lts-path-width-oneway-900.
 PATHS = {
     "dining": (16.432, -23.591, 17.346, -21.35),
-    "living-north": (20.100, -23.591, 21.014, -21.35),
-    "living-east": (22.597, -26.588, 25.10, -25.674),
-    "lounge-west": (1.00, -26.613, 3.617, -25.699),
+    "living-"+side_name("+y"): (20.100, -23.591, 21.014, -21.35),
+    "living-"+side_name("+x"): (22.597, -26.588, 25.10, -25.674),
+    "lounge-"+side_name("-x"): (1.00, -26.613, 3.617, -25.699),
     "study": (7.820, -23.591, 8.734, -20.601),
     "gate-link": (6.877, -22.55, 8.734, -21.636),
 }
 
-# Boundary beds actually built, excluding the lawn-only east by client decision.
+# Boundary beds actually built, excluding the lawn-only south by client decision.
 BEDS = {
-    "west": (-.05, -28.50, 3.45, -26.90),
-    "north": (17.45, -22.70, 20.05, -20.65),
+    side_name("-x"): (-.05, -28.50, 3.45, -26.90),
+    side_name("+y"): (17.45, -22.70, 20.05, -20.65),
 }
 
 # The agreed tracked record is the only botanical/placement evidence input.
@@ -401,30 +402,16 @@ def _credits():
             for row in json.loads(MANIFEST.read_text(encoding="utf-8"))["props"]}
 
 
-def direct_sun_hours(x, y):
-    """Approximate solstice hours using measured solar angles and the yard edge.
+def direct_sun_hours(x, y, *, ground=None, day="2026-06-21", study=None):
+    """Actual scene ray casts with recorded true-north rotation, at hourly steps.
 
-    A 3 m wall height is the model's GF level (villa_env.APT), used as an
-    explicit proxy for the court enclosure. This is a screen, not a shadow
-    calculation against the detailed Revit wall/rail geometry.
+    Ground is the sampling surface elevation in metres. The default identifies
+    the deck by its measured rectangle; lower garden sampling uses GROUND.
     """
-    hours = []
-    wall_h = BUILDING_HEIGHT
-    for h in range(9, 18):
-        p = solar.sun_position(datetime(2026, 6, 21, h-3, tzinfo=timezone.utc),
-                               E.LATITUDE, E.LONGITUDE)
-        if p.altitude <= 0:
-            continue
-        dx, dy = sin(radians(p.azimuth)), cos(radians(p.azimuth))
-        clear = True
-        for step in range(1, 401):
-            distance = step * .05
-            if not inside_yard(x + dx * distance, y + dy * distance):
-                clear = tan(radians(p.altitude)) * distance >= wall_h
-                break
-        if clear:
-            hours.append(h)
-    return hours
+    from .garden_sun import default_study, active_study
+    if ground is None:
+        ground = TOP_SURFACE if TOP[0] <= x <= TOP[2] and TOP[1] <= y <= TOP[3] else GROUND
+    return (study or active_study.get() or default_study()).hours(x,y,ground,day)
 
 
 def _prop(pid, asset, center, ground, height, label, zone="lower", yaw=0):
@@ -641,8 +628,8 @@ def _stones(name, rect, z, meshes):
 
 
 # Court dimensions are measured from villa_env, not the rounded brief.
-EAST = (E.BAR[2]/1000, E.AXIS_Y/1000, PLOT[2], PLOT[3])
-EAST_CENTER = ((EAST[0]+EAST[2])/2, (EAST[1]+EAST[3])/2)
+SOUTH = (E.BAR[2]/1000, E.AXIS_Y/1000, PLOT[2], PLOT[3])
+SOUTH_CENTER = ((SOUTH[0]+SOUTH[2])/2, (SOUTH[1]+SOUTH[3])/2)
 
 
 def _mesh_rect(mesh):
@@ -659,30 +646,30 @@ def _covers_point(face, x, y):
     return inside
 
 
-def east_content_violations(meshes, props, objects=()):
-    """Physical lower-court contents; no dependence on east/south ID names."""
+def south_content_violations(meshes, props, objects=()):
+    """Physical lower-court contents; independent of garden ID names."""
     out, trees = [], []
-    pit_center = tuple(json.loads(PALETTE.read_text())["design_assumptions"]["east_tree_position"]["center_m"])
+    pit_center = tuple(json.loads(PALETTE.read_text())["design_assumptions"]["south_tree_position"]["center_m"])
     for item in list(props)+list(objects):
         if item.get("zone") == "top":
             continue
         rect = item["rect"] if "rect" in item else _rect(item)
-        if _rect_overlap_area(rect, EAST) <= 1e-6:
+        if _rect_overlap_area(rect, SOUTH) <= 1e-6:
             continue
         if item.get("species") == "Plumeria rubra" and item.get("asset") == "sf_frangipani":
             trees.append(item)
         else:
-            out.append((item["id"], "east permits only lawn, paths, tree pit and one Plumeria"))
+            out.append((item["id"], "south permits only lawn, paths, tree pit and one Plumeria"))
     for mesh in meshes:
         pts = [p for face in mesh["faces"] for p in face]
-        if min(p[2] for p in pts) >= -.01 or _rect_overlap_area(_mesh_rect(mesh), EAST) <= 1e-6:
+        if min(p[2] for p in pts) >= -.01 or _rect_overlap_area(_mesh_rect(mesh), SOUTH) <= 1e-6:
             continue
         allowed = (mesh["material"] == "artificial-grass" and mesh.get("part_kind") == "finish-layer" or
                    mesh.get("part_kind") == "stepping-stone" or mesh.get("part_kind") == "tree-pit")
         if not allowed:
-            out.append((mesh["id"], "east contains a forbidden surface or object"))
+            out.append((mesh["id"], "south contains a forbidden surface or object"))
     if len(trees) != 1:
-        out.append(("east", "exactly one Plumeria required; found %d" % len(trees)))
+        out.append(("south", "exactly one Plumeria required; found %d" % len(trees)))
     else:
         tree = trees[0]
         ax, _, az = require_species("Plumeria rubra")["appearance_measurements"]["sf_frangipani"]["trunk_base_gltf_m"]
@@ -690,7 +677,7 @@ def east_content_violations(meshes, props, objects=()):
         dx, dy = ax*tree["scale"], -az*tree["scale"]
         trunk = (tree["position"][0]+dx*cos(yaw)-dy*sin(yaw),
                  tree["position"][1]+dx*sin(yaw)+dy*cos(yaw))
-        if abs(tree["center"][0]-EAST_CENTER[0]) > .5+1e-9:
+        if abs(tree["center"][0]-SOUTH_CENTER[0]) > .5+1e-9:
             out.append((tree["id"], "D4 trunk exceeds 0.5 m from court centre line"))
         if hypot(trunk[0]-tree["center"][0], trunk[1]-tree["center"][1]) > 1e-6:
             out.append((tree["id"], "declared centre differs from measured trunk"))
@@ -698,9 +685,9 @@ def east_content_violations(meshes, props, objects=()):
             out.append((tree["id"], "measured trunk is not centred in the lawn pit"))
     pits = [m for m in meshes if m.get("part_kind") == "tree-pit"]
     if len(pits) != 1:
-        out.append(("east", "exactly one visible tree pit required"))
+        out.append(("south", "exactly one visible tree pit required"))
     else:
-        radius = json.loads(PALETTE.read_text())["design_assumptions"]["east_tree_pit"]["diameter_m"]/2
+        radius = json.loads(PALETTE.read_text())["design_assumptions"]["south_tree_pit"]["diameter_m"]/2
         if any(abs(hypot(p[0]-pit_center[0], p[1]-pit_center[1])-radius) > 1e-6
                for face in pits[0]["faces"] for p in face):
             out.append((pits[0]["id"], "tree pit differs from the recorded ASSUMED diameter/centre"))
@@ -727,7 +714,7 @@ def canopy_violations(props, *, mature=False):
     """
     out = []
     fence = E.FENCE_T/1000
-    usable = (EAST[0], EAST[1], EAST[2]-fence, EAST[3]-fence)
+    usable = (SOUTH[0], SOUTH[1], SOUTH[2]-fence, SOUTH[3]-fence)
     for p in props:
         if p.get("species") != "Plumeria rubra":
             continue
@@ -1086,8 +1073,8 @@ def top_garden_violations(meshes, props, plan, *, spec_surface=TOP_SURFACE,
             quote=str(row["light"]["value"]).lower()
             if ixora:
                 if (not item.get("bed","").startswith("top-pot-") or row["light"]["status"]!="VERIFIED" or
-                    "full sun for best flowering" not in quote or len(direct_sun_hours(*item["center"]))<=threshold):
-                    out.append((item["id"],"top Ixora requires existing pot, checked flowering quote and full-sun hours"))
+                    "full sun for best flowering" not in quote):
+                    out.append((item["id"],"top Ixora requires existing pot and checked flowering quote; light mismatch is reported separately"))
             elif "top" not in row["zones"]["value"]:
                 out.append((item["id"],"species lacks verified top-zone placement"))
             if item.get("trough"):
@@ -1154,14 +1141,14 @@ def review_candidate(spec, lay=None):
     meshes, props, objects, plants = [], [], [], []
     if len([d for d in spec["doors"] if d.get("garden")]) != 4:
         raise ValueError("garden-door count changed; redraw approaches")
-    radius = record["design_assumptions"]["east_tree_pit"]["diameter_m"]/2
-    tree_center = tuple(record["design_assumptions"]["east_tree_position"]["center_m"])
-    lawn, ring = _lawn_with_pit(EAST, tree_center, radius, GROUND+.003)
-    meshes.append(_mesh("grass-east", "ground", "artificial-grass", lawn,
+    radius = record["design_assumptions"]["south_tree_pit"]["diameter_m"]/2
+    tree_center = tuple(record["design_assumptions"]["south_tree_position"]["center_m"])
+    lawn, ring = _lawn_with_pit(SOUTH, tree_center, radius, GROUND+.003)
+    meshes.append(_mesh("grass-south", "ground", "artificial-grass", lawn,
                         "ASSUMED artificial turf with an open tree pit", kind="finish-layer", surface=True, occupied_side=(0,0,1)))
-    meshes.append(_mesh("tree-pit-east", "ground", "garden-gravel", [ring],
+    meshes.append(_mesh("tree-pit-south", "ground", "garden-gravel", [ring],
                         "ASSUMED 1.2 m diameter gravel tree pit; roots/drainage UNVERIFIED", kind="tree-pit", surface=True, occupied_side=(0,0,1)))
-    for name, rect in (("north", (15.412,-23.591,EAST[0],-20.351)),
+    for name, rect in (("east", (15.412,-23.591,SOUTH[0],-20.351)),
                        ("top-deck",DECK),("top-roof",ROOF)):
         z = 0.0 if name.startswith("top") else GROUND
         meshes.append(_mesh("grass-"+name,"ground","artificial-grass",_quad(*rect,z+.003),
@@ -1169,13 +1156,13 @@ def review_candidate(spec, lay=None):
     for name, rect in PATHS.items():
         _stones(name,rect,0.0 if name=="study" else GROUND,meshes)
     beds = dict(BEDS)
-    beds["west"] = tuple(record["design_assumptions"]["north_garden_g4"]["beds"]["west"])
+    beds["north"] = tuple(record["design_assumptions"]["north_garden_g4"]["beds"]["north"])
     for name,rect in beds.items():
         if any(not inside_yard(x,y) for x,y in _box_perimeter_points(*rect)):
             raise ValueError(name+" bed leaves yard")
         if any(_rect_overlap_area(rect,r[:4]) > 1e-6 for r in garden_level_rooms(lay)):
             raise ValueError(name+" bed enters garden-level room")
-        if name == "west":
+        if name == "north":
             continue  # G4 soil and slim edging are constructed together below.
         meshes.append(_mesh("bed-"+name,"ground","garden-gravel",_quad(*rect,GROUND+.008),
                             "ASSUMED boundary bed, three primary layers; G2 young planting",kind="finish-layer",surface=True,occupied_side=(0,0,1)))
@@ -1201,7 +1188,7 @@ def review_candidate(spec, lay=None):
         props.append(p); plants.append(p)
         return p
 
-    tree = plant("landscape-tree-east","sf_frangipani",tree_center,bed="east",layer="tree")
+    tree = plant("landscape-tree-south","sf_frangipani",tree_center,bed="south",layer="tree")
     # Plant the measured trunk, not the asymmetrical canopy box centre, in
     # the lawn opening. Scaling about the canopy centre would miss the pit.
     measurement = data["Plumeria rubra"]["appearance_measurements"]["sf_frangipani"]
@@ -1216,7 +1203,7 @@ def review_candidate(spec, lay=None):
              "D4: seat the measured trunk in its moving pit, in the lawn, offset from centre for a clear door route")
     tree["asset_measurement"]["trunk_base_gltf_m"] = measurement["trunk_base_gltf_m"]
     tree["label"] += "; ASSUMED rendered stage: young pruned tree; stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread; lead decision 2026-10-06"
-    trees = (("east","sf_frangipani","Plumeria rubra",tree_center,tree["asset_measurement"]["height_m"],0),)
+    trees = (("south","sf_frangipani","Plumeria rubra",tree_center,tree["asset_measurement"]["height_m"],0),)
     # Uniform species drifts, three height strata per actual boundary bed.
     # Ixora's spacing spread is explicitly ASSUMED in the palette, not a
     # sourced mature spread. Strelitzia and Aspidistra use the card spreads.
@@ -1224,15 +1211,15 @@ def review_candidate(spec, lay=None):
     from shapely.geometry import box as polygon_box, Polygon
     from shapely.ops import triangulate
     shade = record["design_assumptions"]["north_garden_g4"]
-    ground_beds = {"west": beds["west"], "west-accent": tuple(shade["accent_bed"]), "west-swing-back": tuple(shade["swing_back_bed"])}
+    ground_beds = {"north": beds["north"], "north-accent": tuple(shade["accent_bed"]), "north-swing-back": tuple(shade["swing_back_bed"])}
     gravel = polygon_box(*NORTH_COURT).intersection(Polygon(YARD))
     for rect in ground_beds.values():gravel = gravel.difference(polygon_box(*rect))
     gravel_faces = [[[x,y,GROUND+.003] for x,y in list(t.exterior.coords)[:-1]]
                     for t in triangulate(gravel) if gravel.covers(t)]
-    meshes.append(_mesh("gravel-west","ground","garden-gravel",gravel_faces,
+    meshes.append(_mesh("gravel-north","ground","garden-gravel",gravel_faces,
                         "ASSUMED mineral gravel paths/mulch; mineral gravel around the balcony hanging retreat",kind="finish-layer",surface=True,occupied_side=(0,0,1)))
     for name, (x0,y0,x1,y1) in ground_beds.items():
-        meshes.append(_mesh("bed-west" if name=="west" else "accent-bed-west" if name=="west-accent" else "soil-"+name,"ground","garden-soil",_quad(x0,y0,x1,y1,GROUND),
+        meshes.append(_mesh("bed-north" if name=="north" else "accent-bed-north" if name=="north-accent" else "soil-"+name,"ground","garden-soil",_quad(x0,y0,x1,y1,GROUND),
                             "North garden: in-ground soil at court datum; root/drainage engineering UNVERIFIED",kind="soil-bed",surface=True,occupied_side=(0,0,1)))
         edge = (_box(x0,y0,GROUND,x1,y0+.015,GROUND+.018)+
                 _box(x0,y1-.015,GROUND,x1,y1,GROUND+.018)+
@@ -1244,32 +1231,32 @@ def review_candidate(spec, lay=None):
         for i, center in enumerate(drift["centers_m"]):
             species = drift["species"]
             constructor = _botanical_clump if species == "Aspidistra elatior" else SHADE.clump
-            clump = constructor("west-%s-%02d"%(drift["layer"],i),species,center,GROUND,data,bed="west",layer=drift["layer"])
+            clump = constructor("north-%s-%02d"%(drift["layer"],i),species,center,GROUND,data,bed="north",layer=drift["layer"])
             meshes.append(clump);plants.append(clump)
-    clump = SHADE.clump("west-rhapis-accent","Rhapis excelsa",shade["accent_center_m"],GROUND,data,bed="west-accent",layer="accent")
+    clump = SHADE.clump("north-rhapis-accent","Rhapis excelsa",shade["accent_center_m"],GROUND,data,bed="north-accent",layer="accent")
     clump["label"] += "; ASSUMED root barrier; keep centre >=1.0 m from walls and paths"
     meshes.append(clump);plants.append(clump)
-    meshes.append(SHADE.stone("west-feature-stone",shade["feature_stone_center_m"],GROUND))
+    meshes.append(SHADE.stone("north-feature-stone",shade["feature_stone_center_m"],GROUND))
     for i, center in enumerate(((17.90,-21.75),(18.90,-21.75),(19.60,-22.45))):
         # Young Ixora at 0.55 m is the recorded default, not the obsolete
-        # north nursery context at 1.0 m, whose canopy would close the path.
-        plant("landscape-north-mid-drift-%02d"%i,"sf_ixora",center,bed="north",layer="mid")
+        # east nursery context at 1.0 m, whose canopy would close the path.
+        plant("landscape-east-mid-drift-%02d"%i,"sf_ixora",center,bed="east",layer="mid")
     for i, x in enumerate((17.90,18.75,19.60)):
         for species, layer, y in (("Strelitzia reginae","back",-20.95),
                                   ("Aspidistra elatior","front",-22.43)):
-            clump = _botanical_clump("north-%s-%02d"%(layer,i),species,(x,y),GROUND,data,bed="north",layer=layer)
+            clump = _botanical_clump("east-%s-%02d"%(layer,i),species,(x,y),GROUND,data,bed="east",layer=layer)
             meshes.append(clump); plants.append(clump)
 
-    for name, x, y in (("west", *shade["trellis_start_m"]), ("north",18.75,-20.641)):
-        if name == "east":
+    for name, x, y in (("north", *shade["trellis_start_m"]), ("east",18.75,-20.641)):
+        if name == "south":
             frame = _box(x-.04, y, GROUND, x, y+1.5, GROUND+2.2)
-        elif name == "south":
+        elif name == "west":
             frame = _box(x-.75, y, GROUND, x+.75, y+.04, GROUND+2.2)
-        elif name == "north":
+        elif name == "east":
             frame = _box(x-.75, y, GROUND, x+.75, y+.04, GROUND+2.2)
-        else:  # west
+        else:  # north
             frame = _box(x, y, GROUND, x+.04, y+1.5, GROUND+2.2)
-        climber_species = "Bougainvillea glabra" if name == "north" else "Cissus alata"
+        climber_species = "Bougainvillea glabra" if name == "east" else "Cissus alata"
         climber_source = require_species(climber_species,data)["source_url"]["value"]
         pts = [p for face in frame for p in face]
         fx0, fy0, fx1, fy1 = min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
@@ -1307,20 +1294,22 @@ def review_candidate(spec, lay=None):
                             "ASSUMED young branched " + climber_species + " woody growth", kind="climber-branch"))
         # The renderer hides this source mesh after deriving the leaf envelope from its bounds.
         # Use the actual closed branch form as its source so the part boundary never admits a mass box.
-        meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract" if name=="north" else "grape-ivy-leaf", branches,
+        meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract" if name=="east" else "grape-ivy-leaf", branches,
                             "ASSUMED thin young " + climber_species + "; target frame coverage 35%; care: " + climber_source, kind="climber"))
 
 
     for mesh in meshes:
         if mesh.get("part_kind") in ("climber", "climber-branch"):
-            mesh["species"] = "Bougainvillea glabra" if mesh["id"].endswith("north") else "Cissus alata"
+            mesh["species"] = "Bougainvillea glabra" if mesh["id"].endswith("east") else "Cissus alata"
             mesh["root_z_m"] = GROUND
+            from ..orientation import appearance_seed
+            mesh["appearance_seed"] = appearance_seed(mesh["id"])
             if mesh.get("part_kind") == "climber" and mesh["species"] == "Cissus alata":
-                mesh["stem_mesh"] = "landscape-climber-branches-west"
+                mesh["stem_mesh"] = "landscape-climber-branches-north"
 
     for name, center in (
-            ("dining-w",(15.882,-22.97)), ("dining-e",(17.896,-22.97)),
-            ("living-north-w",(19.55,-22.97)), ("living-north-e",(21.564,-22.97)),
+            ("dining-n",(15.882,-22.97)), ("dining-s",(17.896,-22.97)),
+            ("living-east-n",(19.55,-22.97)), ("living-east-s",(21.564,-22.97)),
 ):
         species = "Ixora coccinea" if not name.startswith("lounge") else "Aspidistra elatior"
         potdata = record["design_assumptions"]["door_pot"]
@@ -1357,9 +1346,8 @@ def review_candidate(spec, lay=None):
         ixora = require_species("Ixora coccinea",data)
         full_sun = record["design_assumptions"]["full_sun_screen"]["hours"]
         if (ixora["light"]["status"] == "VERIFIED" and
-            "full sun for best flowering" in str(ixora["light"]["value"]).lower() and
-            len(direct_sun_hours(*center)) > full_sun):
-            pp=plant("landscape-top-north-ixora-%d"%i,"sf_ixora",center,zone="top",bed="top-pot-%d"%i,
+            "full sun for best flowering" in str(ixora["light"]["value"]).lower()):
+            pp=plant("landscape-top-pot-ixora-%d"%i,"sf_ixora",center,zone="top",bed="top-pot-%d"%i,
                      layer="accent",ground=TOP_SURFACE+potdata["height_m"]-.005)
         else:
             pp=_top_clump("top-pot-aloe-%d"%i,"Aloe vera",center,TOP_SURFACE+potdata["height_m"]-.005,
@@ -1372,7 +1360,7 @@ def review_candidate(spec, lay=None):
 
 
     exposure = {name:direct_sun_hours((r[0]+r[2])/2,(r[1]+r[3])/2) for name,r in beds.items()}
-    notes = ["North garden G4: lush shade foliage in ground-level soil beds; gravel under the GF balcony. Bistro and lounge pots removed per client 2026-10-06. Hanging swing restored from GF balcony: client decision 2026-10-06; structural check pending. Cissus alata replaces star jasmine on the open timber trellis; light applicability PARTIAL, Cairo winter suitability UNVERIFIED.",
+    notes = [zone_name("-x")+" G4: lush shade foliage in ground-level soil beds; gravel under the GF balcony. Bistro and lounge pots removed per client 2026-10-06. Hanging swing restored from GF balcony: client decision 2026-10-06; structural check pending. Cissus alata replaces star jasmine on the open timber trellis; light applicability PARTIAL, Cairo winter suitability UNVERIFIED.",
              "G1/G2 review candidate: artificial turf, stepping stones, one Plumeria in the lawn, offset from centre for a clear door route and ASSUMED 1.2 m gravel tree pit.",
              "Only knowledge/garden-palette.json supplies botanical dimensions, sources and placement assumptions. Egypt performance and root behaviour over the basement slab are UNVERIFIED.",
              "Retained east-yard boundary bed and terracotta-red glazed door pots; north garden G4 shade beds and grape ivy on open timber. G3 low steel troughs with rosemary/aloe drifts, two benches on slabs and a gate-link path; no shade tree placed.",
@@ -1381,7 +1369,7 @@ def review_candidate(spec, lay=None):
              "Top container roots/deep rooting and waterproofing over the basement slab UNVERIFIED: local nursery and waterproofing/structural consultant must confirm; no deep-rooted tree specified.",
              "Round-3 potted small shade tree not placed: no verified top-zone shade-tree species fits the palette; open client/nursery item.",
              "Ursinia omitted: palette light UNVERIFIED and zone gf-beds does not establish this top container placement.",
-             "Illustrative 09:00-17:00 direct hours screen: "+str(exposure)]
+             "Hourly June scene ray-cast (local standard time UTC+02): "+str(exposure)]
     ramp=spec["parking2"]["ramp"]
     gate_route=dict(profile=ramp["profile"],y0=PATHS["gate-link"][1],y1=PATHS["gate-link"][3])
     boundary_obstacles = [dict(id=item["id"], rect=(min(p[0] for p in item["pts"])/1000,
@@ -1390,14 +1378,20 @@ def review_candidate(spec, lay=None):
                                                    max(p[1] for p in item["pts"])/1000))
                           for item in E.spec()["elements"]
                           if item["id"].startswith("fence-") or item["id"] == "yard-wall-ne"]
-    plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,accent_beds={"west-accent":shade["accent_bed"],"west-swing-back":shade["swing_back_bed"]},
+    plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,accent_beds={"north-accent":shade["accent_bed"],"north-swing-back":shade["swing_back_bed"]},
                 boundary_obstacles=boundary_obstacles,
-                east_rect=EAST,east_center=EAST_CENTER,tree_pit=dict(center=tree_center,diameter_m=radius*2,status="ASSUMED"))
+                south_rect=SOUTH,south_center=SOUTH_CENTER,tree_pit=dict(center=tree_center,diameter_m=radius*2,status="ASSUMED"))
+    from .garden_sun import audit_plants, active_study, default_study
+    study = active_study.get() or default_study()
+    plan["plant_light_review"] = audit_plants(plants+[m for m in meshes if m.get("part_kind")=="climber"],study)
+    plan["sun_geometry_sha256"] = study.geometry_sha256
     from .garden_render_review import normal
     for item in meshes:
         if item["material"] == "stepping-stone":
             item["face_materials"] = ["stone-substrate" if normal(face)[2]<-.7 else item["material"] for face in item["faces"]]
-    plan["conflicts"] = candidate_violations(meshes,props,plan,lay)
+    from ..orientation_guard import scene_findings as orientation_findings
+    naming=orientation_findings(dict(meshes=meshes,props=props,garden_zones={**beds,**plan["accent_beds"],**PATHS}))
+    plan["conflicts"] = [("orientation", f) for f in naming]+candidate_violations(meshes,props,plan,lay)
     notes += ["UNRESOLVED garden guard: %s: %s" % f for f in plan["conflicts"]]
     return meshes,props,notes,plan
 
@@ -1473,7 +1467,7 @@ def north_garden_violations(meshes, props, objects=(), *, court=NORTH_COURT,
 
 
 def candidate_violations(meshes, props, plan, lay):
-    """Existing checks plus identity, dimensions, east contents and real wall limits."""
+    """Existing checks plus identity, dimensions, south contents and real wall limits."""
     rooms = garden_level_rooms(lay)
     plants,objects = plan["plants"],plan["objects"]
     routes, ground = walking_routes(meshes)
@@ -1493,7 +1487,7 @@ def candidate_violations(meshes, props, plan, lay):
             [(bed,"only %d/3 primary layers: %s"%(len(have),have)) for bed,have in layer_violations(plants,plan["beds"])]+
             [(species,"%s/%s drift is %d, need 3-5"%(bed,layer,n)) for bed,layer,species,n in drift_violations(plants)]+
             sunlight_violations(plants)+standin_violations(props)+bench_violations(props)+species_violations(meshes+props)+
-            dimension_violations(meshes+props)+[("plant-form",f) for f in plant_form_findings(meshes)]+east_content_violations(meshes,props,objects)+
+            dimension_violations(meshes+props)+[("plant-form",f) for f in plant_form_findings(meshes)]+south_content_violations(meshes,props,objects)+
             canopy_violations(props)+canopy_violations(props,mature=True)+
             top_garden_violations(meshes,props,plan,spec_surface=TOP_SURFACE))
 
@@ -1544,3 +1538,9 @@ def reveal_ground_soil(shell_meshes, soil_meshes):
         if changed:
             m['faces']=faces;m['face_materials']=materials
             m['label']=m.get('label','')+'; ground finish cut back at authored soil-bed boundaries'
+
+
+def geometry_zone(x,y):
+    """Client side of a lower-yard position, using the recorded naming axes."""
+    from ..orientation_guard import geometry_side
+    return geometry_side((x,y),tuple(v/1000 for v in E.BAR))

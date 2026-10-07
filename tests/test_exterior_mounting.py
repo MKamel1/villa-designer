@@ -1,3 +1,4 @@
+from archpipe.orientation import historical_aliases
 """Frozen rejected real hosts, distance/coverage mutations and side siblings."""
 from copy import deepcopy
 import json
@@ -11,11 +12,11 @@ from archpipe.concept import villa_r11 as R
 
 class ExteriorMounting(unittest.TestCase):
     def setUp(self):
-        self.frozen=json.loads((Path(__file__).parent/'fixtures/c4-e-rejected-hosts.json').read_text())
+        self.frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/c4-e-rejected-hosts.json').read_text()))
         self.scene=dict(meshes=deepcopy(self.frozen['meshes']),mounting_hosts={},mounting_movements=[])
 
     def test_real_south_remote_rejected_boundary_resolves_and_translates(self):
-        south=next(m for m in self.scene['meshes'] if m['id']=='landscape-trellis-south')
+        south=next(m for m in self.scene['meshes'] if m['id']=='landscape-trellis-west')
         wrong=next(m for m in self.scene['meshes'] if m.get('source_id')=='fence-west')
         self.assertAlmostEqual(next(r['mm'] for r in self.frozen['rows'] if r['id']==south['id']),9450.32)
         with self.assertRaisesRegex(ValueError,'refused host'):
@@ -42,7 +43,7 @@ class ExteriorMounting(unittest.TestCase):
     def test_full_footprint_required_not_anchor_or_infinite_extension(self):
         sources=yard_sources(self.scene)
         source=deepcopy(next(s for s,h in sources if s['id']=='yard-boundary-edge-5'))
-        member=next(m for m in self.scene['meshes'] if m['id']=='landscape-trellis-south')
+        member=next(m for m in self.scene['meshes'] if m['id']=='landscape-trellis-west')
         self.assertTrue(finite_face(member,[source],(0,1,0)))
         centre=(bounds(member)[0]+bounds(member)[3])/2
         for f in source['faces']:

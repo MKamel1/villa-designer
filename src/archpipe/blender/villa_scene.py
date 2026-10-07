@@ -504,7 +504,7 @@ def build_climbers(mesh_specs, objects, materials, warnings):
         if spec.get('species') == 'Cissus alata':
             stems=next((m for m in mesh_specs if m['id']==spec.get('stem_mesh')),None)
             if stems is None:raise ValueError('Cissus foliage is missing its physical stem mesh')
-            leaves,petioles,contacts=placing.grape_ivy_geometry(box,stems['faces'],seed=sum(map(ord,spec['id'])))
+            leaves,petioles,contacts=placing.grape_ivy_geometry(box,stems['faces'],seed=spec.get('appearance_seed',sum(map(ord,spec['id']))))
             polygons=leaves+petioles
             verts=[];faces=[]
             for polygon in polygons:
@@ -519,7 +519,7 @@ def build_climbers(mesh_specs, objects, materials, warnings):
         # ASSUMED young planting: target 35% face coverage so the open trellis reads clearly.
         # The density follows the measured leaf and bract sizes in climber_placement.
         density = placing.density_for_coverage()
-        positions = placing.placements(box, density=density, seed=sum(map(ord, spec["id"])))
+        positions = placing.placements(box, density=density, seed=spec.get("appearance_seed",sum(map(ord, spec["id"]))))
         leaf_material = "star-jasmine-leaf" if spec.get("species") == "Trachelospermum jasminoides" else "bougainvillea-leaf"
         for kind, matname in (("leaf", leaf_material), ("bract", spec["material"])):
             verts, faces = [], []

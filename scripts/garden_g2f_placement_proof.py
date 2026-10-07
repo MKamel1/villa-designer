@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 import numpy as np
 from shapely.geometry import box
+from archpipe.orientation import side_name
 from archpipe.concept import villa_landscape as L, villa_r11 as R, revit_spec as S
 from archpipe.concept.garden_render_review import overhead_cover
 
@@ -52,7 +53,7 @@ def measure(scene):
                 counts['current_all_guards'] += 1
             else:
                 rejected.append(dict(swing=candidate, failures=failures))
-    bed = L.BEDS['west']
+    bed = L.BEDS[side_name('-x')]
     minimum_shift = -28.671-bed[1]
     shifted = (bed[0], bed[1]+minimum_shift+.02, bed[2], bed[3]+minimum_shift+.02)
     return dict(swing_translation_search=counts, spacing_m=.05, orientation_changed=False,
@@ -60,7 +61,7 @@ def measure(scene):
                 retained_current_guard_failures=L.candidate_violations(meshes, props, plan, lay),
                 bed=dict(original_rect_m=bed, minimum_model_y_translation_m=minimum_shift,
                          tested_rect_m=shifted,
-                         door_route_overlap_m2=box(*shifted).intersection(box(*L.PATHS['lounge-west'])).area))
+                         door_route_overlap_m2=box(*shifted).intersection(box(*L.PATHS['lounge-north'])).area))
 
 
 def main():

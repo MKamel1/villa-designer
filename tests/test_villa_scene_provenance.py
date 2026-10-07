@@ -25,7 +25,7 @@ class VillaSceneProvenance(unittest.TestCase):
             "src/archpipe/blender/photoreal.py", "src/archpipe/blender/build_scene.py",
             "src/archpipe/blender/presentation.py", "src/archpipe/villa_render_contract.py",
             "src/archpipe/furniture_orientation.py", "ops/workstation/library-manifest.json",
-            "knowledge/garden-palette.json", "knowledge/c4-final-approvals.json", "spec/villa-site.yaml",
+            "knowledge/garden-palette.json", "knowledge/site-orientation.json", "knowledge/c4-final-approvals.json", "spec/villa-site.yaml",
             "knowledge/library.json", "knowledge/projects/villa-01/brief-requirements.json",
             "knowledge/projects/villa-01/taste.json"]
         for relative in paths:
@@ -86,6 +86,13 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
         self.assertFalse(result["stale_scene"])
         self.assertEqual(json.loads(self.scene.read_text())["provenance"]["source_hash"],
                          result["scene_source_hash"])
+
+    def test_orientation_record_change_makes_scene_stale(self):
+        authority=self.root/'knowledge/site-orientation.json'
+        authority.write_bytes(authority.read_bytes()+b' ')
+        result=self._driver('--scene',str(self.scene),'--dry-run')
+        self.assertNotEqual(result.returncode,0)
+        self.assertIn('Scene provenance mismatch',result.stderr)
 
     def test_data_change_is_stale_and_override_is_labelled(self):
         palette = self.root / "knowledge/garden-palette.json"

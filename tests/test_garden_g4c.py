@@ -1,3 +1,4 @@
+from archpipe.orientation import historical_aliases
 """Real suspended retreat, frozen cushion failures and adverse view mutations."""
 from copy import deepcopy
 import gzip,json
@@ -19,7 +20,7 @@ class HangingRetreat(unittest.TestCase):
         self.assertEqual(mounting_findings(self.scene),[])
         self.assertEqual(S.cushion_findings(self.parts),[])
         for name in ('seat','support'):
-            bad=json.loads(gzip.decompress(Path('tests/fixtures/garden-g4c-'+name+'-before.json.gz').read_bytes()))
+            bad=historical_aliases(json.loads(gzip.decompress(Path('tests/fixtures/garden-g4c-'+name+'-before.json.gz').read_bytes())))
             self.assertIn('missing physical cushion bearing',str(S.cushion_findings(bad)))
         bad=deepcopy(self.parts)
         for m in bad:
@@ -41,7 +42,7 @@ class HangingRetreat(unittest.TestCase):
 
     def test_real_curved_faces_are_triangles_and_new_bed_ids_unique(self):
         from archpipe.villa_render_contract import validate_scene
-        frozen=json.loads(gzip.decompress(Path('tests/fixtures/garden-g4c-topology-before.json.gz').read_bytes()))
+        frozen=historical_aliases(json.loads(gzip.decompress(Path('tests/fixtures/garden-g4c-topology-before.json.gz').read_bytes())))
         bad=dict(self.scene,meshes=frozen)
         self.assertIn('nonplanar',str(validate_scene(bad)))
         self.assertTrue(all(len(face)==3 for m in self.parts for face in m['faces']))
@@ -50,26 +51,26 @@ class HangingRetreat(unittest.TestCase):
     def test_actual_retreat_bed_cannot_cover_walking_stones(self):
         from archpipe.concept.garden_render_review import soil_visibility_findings
         from archpipe.concept import villa_landscape as L, revit_spec as RS
-        before=json.loads(Path('tests/fixtures/garden-g4c-soil-before.json').read_text())
+        before=historical_aliases(json.loads(Path('tests/fixtures/garden-g4c-soil-before.json').read_text()))
         self.assertEqual(len(soil_visibility_findings(before)),2)
         self.assertEqual(soil_visibility_findings(self.scene),[])
         meshes,props,_,plan=L.review_candidate(RS.build(R.design('D1')))
-        soil=next(m for m in meshes if m['id']=='landscape-accent-bed-west')
+        soil=next(m for m in meshes if m['id']=='landscape-accent-bed-north')
         soil['faces']=deepcopy(before['meshes'][0]['faces'])
         self.assertIn('soil obscured',str(L.candidate_violations(meshes,props,plan,R.design('D1'))))
 
     def test_real_rear_soil_cannot_alias_main_bed_subject(self):
         from scripts.villa_render_views import subject_mesh_frame_violations
-        frozen=json.loads(Path('tests/fixtures/garden-g4c-subject-prefix-before.json').read_text())
-        self.assertIn('behind camera',subject_mesh_frame_violations(frozen['view'],frozen,'landscape-bed-west'))
-        matched=[m for m in self.scene['meshes'] if m['id'].startswith('landscape-bed-west')]
-        self.assertEqual([m['id'] for m in matched],['landscape-bed-west'])
-        self.assertEqual(subject_mesh_frame_violations(frozen['view'],self.scene,'landscape-bed-west'),[])
+        frozen=historical_aliases(json.loads(Path('tests/fixtures/garden-g4c-subject-prefix-before.json').read_text()))
+        self.assertIn('behind camera',subject_mesh_frame_violations(frozen['view'],frozen,'landscape-bed-north'))
+        matched=[m for m in self.scene['meshes'] if m['id'].startswith('landscape-bed-north')]
+        self.assertEqual([m['id'] for m in matched],['landscape-bed-north'])
+        self.assertEqual(subject_mesh_frame_violations(frozen['view'],self.scene,'landscape-bed-north'),[])
 
     def test_real_framed_but_occluded_garden_subjects_and_sibling(self):
         from archpipe.concept.garden_render_review import subject_visibility_findings,subject_visibility_evidence
-        frozen=json.loads(gzip.decompress(Path('tests/fixtures/garden-g4c-visibility-before.json.gz').read_bytes()))
-        targets=['landscape-west-feature-stone','landscape-west-rhapis-accent','landscape-west-back-02']
+        frozen=historical_aliases(json.loads(gzip.decompress(Path('tests/fixtures/garden-g4c-visibility-before.json.gz').read_bytes())))
+        targets=['landscape-north-feature-stone','landscape-north-rhapis-accent','landscape-north-back-02']
         frozen['view']['visibility_targets']=targets
         from scripts.villa_render_views import subject_mesh_frame_violations
         for subject in targets:self.assertEqual(subject_mesh_frame_violations(frozen['view'],frozen,subject),[])

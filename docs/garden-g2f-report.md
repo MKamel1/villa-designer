@@ -1,11 +1,9 @@
 # Garden G2 render-review fixes
 
 2026-10-06. Resumed the uncommitted package after the usage limit; preserved G3,
-shared-data symlinks and identifiers. No presentation images or commits.
+shared-data symlinks. Identifiers now follow the recorded client convention. No presentation images or commits.
 Client directions: model −x = **North**, +y = **East**, +x = **South**, −y = **West**.
-Thus `west-court` identifiers refer to the **North Garden**, `north-garden`
-identifiers to the **East Garden**, and the lawn-only `east` identifiers to
-the **South Garden**. “GF balcony” is the client's name for the context
+Current IDs use North Garden for the street side, East Yard for the ramp/deck and open strip, and South Garden for the rear lawn. The exact historical aliases are recorded in `knowledge/site-orientation.json`. “GF balcony” is the client's name for the context
 object still identified as `entrance-steps`. GF means ground floor.
 All dimensions below are measured scene metres; areas are square metres.
 QA means automated quality assurance. EXR is the linear high dynamic range
@@ -97,7 +95,7 @@ removed to manufacture an open garden. See `court-corrected-domain.json`.
 The bistro's authored centre remains **(2.05, −24.65)**. The swing's authored
 centre remains **(2.60, −28.35)**. Asset anchor coordinates differ from these
 centres because their native bounds are asymmetric; report JSON retains both.
-Both labels retain **“relocated from the east garden; client to confirm”**,
+Both labels retain **“relocated from the south garden; client to confirm”**,
 as explicitly requested even though the client now calls that side South.
 
 Sun/sky screen from real opaque architectural triangles, at each footprint
@@ -142,8 +140,8 @@ A bounded 24 mm search found no open-yard single frame containing the whole
 bed, trellis, pot, swing and bistro. Two views preserve the design:
 
 - **v36**: open-sky North Garden standing point (−0.02, −23.85, −1.65),
-  looking toward the complete bed, south pot and swing. It records the real cover.
-- **v37**: North Garden trellis, bistro and north pot through the lounge;
+  looking toward the complete bed, west pot and swing. It records the real cover.
+- **v37**: North Garden trellis, bistro and east pot through the lounge;
   declared standing room `lounge`, position (5.35, −25.45, −1.65).
 - **v19**: South Garden and living room from an in-yard point
   (28.30, −20.95, −1.65), replacing the outside-yard sibling camera.
@@ -160,7 +158,7 @@ existing emissive fixture meshes retained are diagnostic only; the final
 neutral pass replaces those emissive shaders with neutral diffuse materials.
 All seven full-size specimen/material/camera previews were inspected by the independent render-critic before final camera integration. It accepted the cameras with explicit limits: the v37 pot hides much of the left seat/legs, the bistro hides lower trellis, and v19 does not clearly show the living-room sofa through glazing. The v37 foliage/bistro projected rectangle overlap is 28.45%, and bistro/trellis rectangle overlap is 29.72%; these are bounding-rectangle overlap measurements, **not actual occlusion percentages**. No claim of wholly unobstructed subjects or presentation lighting approval is made.
 
-## F4 — East Garden foreground mullion
+## F4 — south garden foreground mullion
 
 Frozen old v28 projects actual `detail-window-frames` faces **116–119** into
 the central third. Existing checks framed subjects and measured props without
@@ -261,3 +259,10 @@ before camera integration with the visibility limits stated above.
 Rerender: **v28, v36, new v37, v19**, and other views exposing Strelitzia or the
 corrected underside (including v27). **v07** retains an explained QA flag;
 no corrective rerender is claimed necessary for its unchanged cast.
+
+Current naming authority: [site orientation](../knowledge/site-orientation.json). Historical numeric sun-proxy results in this report are superseded by [the orientation and ray-cast report](orientation-naming-report.md).
+
+<!-- garden-side: -x; name: north -->
+<!-- garden-side: +y; name: east -->
+<!-- garden-side: +x; name: south -->
+<!-- garden-side: -y; name: west -->

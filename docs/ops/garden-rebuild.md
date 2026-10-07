@@ -15,7 +15,7 @@ Renderer consumers also need a producer-to-consumer wiring proof when their argu
 
 D4 placement procedure (2026-10-06): a lead-authorised route remedy may move the tree/pit for the brief's clear door route; this does not authorise camera-driven design moves. Run `PYTHONPATH=src python scripts/garden_tree_position.py` to reproduce the continuous whole-lawn minimum with actual triangle height-band clipping. The horizontal centre-line band, model canopy and mature-circle bounds are intersected before subtracting every route/stone forbidden translation region. Record the resulting centre and numerical separation in the sole palette. Turf and pit are rebuilt around that recorded centre; never shift an exported mesh by hand. Retain the frozen centred low-branch reproduction. Confirm every authoritative landscape guard, `unsupported` and `blocked_openings`, then export and check plan framing. Independent asset-placement metadata must be refreshed when scale changes; run `tests.test_asset_intake` and portable verification against the authoritative scene, because a blocked upstream build can hide downstream drift. D4 changes position only; D1 supplies the unchanged scale.
 
-The west overview camera is on the sister side of the shared axis, in the modelled lower front-yard strip without a dividing fence. Its caption must state that vantage. It uses 24 mm, level aim and 1.35 m standing eye height with vertical lens shift; no ground, plant, furniture or route moved for the camera. Lead draft and photographic sightline review remain required; the plan/projection preview is numerical evidence only.
+The north garden overview camera is on the sister side of the shared axis, in the modelled lower front-yard strip without a dividing fence. Its caption must state that vantage. It uses 24 mm, level aim and 1.35 m standing eye height with vertical lens shift; no ground, plant, furniture or route moved for the camera. Lead draft and photographic sightline review remain required; the plan/projection preview is numerical evidence only.
 
 G3 top-garden procedure (2026-10-06): build slim hollow steel troughs from a
 single named assumed coating parameter, at the measured deck datum. Join root
@@ -57,9 +57,7 @@ honest actual planting subjects, and caption the omitted extent and companion
 view. Final-only v27 also needs its own lead draft after camera correction.
 
 G4 north-garden procedure (2026-10-06): client naming follows the street:
-model −x is north, +y east, +x south, −y west. Existing identifiers remain
-unchanged; true bearing is solar input only. The legacy west court is the
-client's north garden. Use its tracked deep-shade palette, retaining PARTIAL
+model −x is north, +y east, +x south, −y west. Identifiers now follow knowledge/site-orientation.json; true bearing is solar input only. The street-side court is the client's north garden. Use its tracked deep-shade palette, retaining PARTIAL
 light applicability for grape ivy/mondo and UNVERIFIED Cairo winter/nursery
 performance. Under the ground-floor balcony, use Aspidistra or gravel only.
 Do not revive the withdrawn top-garden removal instruction.
@@ -132,3 +130,35 @@ plus an independently reviewed neutral preview for glass/imported props and
 aesthetics. Preserve a frozen fully-occluded-but-framed input. Namespace new
 soil independently of existing view subject prefixes; test exact matches.
 Regenerate diagnostic images rather than reusing files solely by filename.
+
+Current naming authority: [site orientation](../../knowledge/site-orientation.json). Historical numeric sun-proxy results in this report are superseded by [the orientation and ray-cast report](../orientation-naming-report.md).
+
+<!-- garden-side: -x; name: north -->
+<!-- garden-side: +y; name: east -->
+<!-- garden-side: +x; name: south -->
+<!-- garden-side: -y; name: west -->
+
+Orientation and sun-hours correction (2026-10-06): use the authoritative
+client model-side names in `knowledge/site-orientation.json` for every bed,
+route, assembly and caption. `archpipe.orientation.side_name` reads that
+record; true model-Y bearing is exclusively solar input. Current identifiers
+use north for the street-side garden, east for the ramp/deck/open yard and
+south for the rear lawn. Frozen historical IDs resolve only through the
+recorded alias table; preserve the original fixture bytes. Trellis mounting
+normals derive from model sides rather than compass strings. Preserve recorded
+climber appearance seeds when renaming assemblies.
+
+Before selecting a plant for its light requirement, ray-cast against the
+actual opaque building, context and ground with the recorded true-north
+rotation. Use 21 June, 20 March and 21 December, hourly local standard time
+from sunrise to sunset. Report sampling points, ground datum, dates, timezone,
+geometry hash, glass/plant exclusions and quote applicability. An hourly count
+is not weather-weighted horticultural illuminance. Missing quotes remain
+UNVERIFIED; a preference or best-flowering mismatch must be disclosed even
+where some shade tolerance is quoted. Keep accepted spatial planting fixed
+while reporting newly found light mismatches; a separate client/nursery
+review decides changes. Run `tests.test_orientation` plus affected garden,
+mounting and view consumers; normal and fresh empty-HOME portable verification
+must exit zero, with actual unsupported/opening lists empty. A naming-only
+package compares old/new actual coordinates and preserved appearance seeds;
+it requires no presentation render or shared-data writes.

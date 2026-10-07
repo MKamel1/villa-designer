@@ -7,8 +7,8 @@
       "species": "Aspidistra elatior",
       "zones": {
         "value": [
+          "east",
           "north",
-          "west",
           "north garden (deep shade)"
         ],
         "status": "VERIFIED",
@@ -77,7 +77,7 @@
           "status": "VERIFIED",
           "quotes": [
             "Deep shade (Less than 2 hours to no direct sunlight), Dappled Sunlight (Shade through upper canopy all day), Cast iron plants are intolerant of direct sun, which can scorch and bleach the leaves. (NC State)",
-            "The plant does equally well in filtered and deep shade\u2014just don\u2019t plant it in full sun, which will bleach and burn the leaves. (UF/IFAS)"
+            "The plant does equally well in filtered and deep shade—just don’t plant it in full sun, which will bleach and burn the leaves. (UF/IFAS)"
           ]
         },
         "toxicity": {
@@ -102,8 +102,8 @@
       "species": "Ixora coccinea",
       "zones": {
         "value": [
-          "north",
-          "west"
+          "east",
+          "north"
         ],
         "status": "VERIFIED",
         "basis": "client-agreed placement zones"
@@ -167,42 +167,42 @@
             "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
           },
           "contexts": {
-            "landscape-north-mid-00": {
+            "landscape-east-mid-00": {
               "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-mid-01": {
+              "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-mid-02": {
+              "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-mid-00": {
+              "height_m": 0.6,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
             },
             "landscape-north-mid-01": {
-              "height_m": 1.0,
+              "height_m": 0.6,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
             },
             "landscape-north-mid-02": {
-              "height_m": 1.0,
-              "status": "ASSUMED",
-              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
-            },
-            "landscape-west-mid-00": {
               "height_m": 0.6,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
             },
-            "landscape-west-mid-01": {
-              "height_m": 0.6,
-              "status": "ASSUMED",
-              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
-            },
-            "landscape-west-mid-02": {
-              "height_m": 0.6,
-              "status": "ASSUMED",
-              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
-            },
-            "landscape-top-north-ixora-0": {
+            "landscape-top-pot-ixora-0": {
               "height_m": 0.55,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
             },
-            "landscape-top-north-ixora-1": {
+            "landscape-top-pot-ixora-1": {
               "height_m": 0.55,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
@@ -215,8 +215,8 @@
       "species": "Strelitzia reginae",
       "zones": {
         "value": [
-          "north",
-          "west"
+          "east",
+          "north"
         ],
         "status": "VERIFIED",
         "basis": "client-agreed placement zones"
@@ -350,6 +350,26 @@
             "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
           },
           "contexts": {
+            "landscape-east-back-00": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-back-01": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-back-02": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-back-03": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
             "landscape-north-back-00": {
               "height_m": 0.9,
               "status": "ASSUMED",
@@ -361,26 +381,6 @@
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
             },
             "landscape-north-back-02": {
-              "height_m": 0.9,
-              "status": "ASSUMED",
-              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
-            },
-            "landscape-north-back-03": {
-              "height_m": 0.9,
-              "status": "ASSUMED",
-              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
-            },
-            "landscape-west-back-00": {
-              "height_m": 0.9,
-              "status": "ASSUMED",
-              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
-            },
-            "landscape-west-back-01": {
-              "height_m": 0.9,
-              "status": "ASSUMED",
-              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
-            },
-            "landscape-west-back-02": {
               "height_m": 0.9,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
@@ -459,7 +459,7 @@
             "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim. Multi-plant appearance pack, not single-plant spread."
           },
           "contexts": {
-            "landscape-top-south-ursinia": {
+            "landscape-top-west-ursinia": {
               "height_m": 0.18,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
@@ -608,7 +608,7 @@
       "species": "Plumeria rubra",
       "zones": {
         "value": [
-          "east"
+          "south"
         ],
         "status": "VERIFIED",
         "basis": "client-agreed placement zones"
@@ -840,12 +840,12 @@
             "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
           },
           "contexts": {
-            "landscape-north-mid-accent": {
+            "landscape-east-mid-accent": {
               "height_m": 0.6,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
             },
-            "landscape-west-mid-accent": {
+            "landscape-north-mid-accent": {
               "height_m": 0.6,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
@@ -855,12 +855,12 @@
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
             },
-            "landscape-door-pot-living-north-e": {
+            "landscape-door-pot-living-east-e": {
               "height_m": 0.5,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
             },
-            "landscape-door-pot-lounge-west-s": {
+            "landscape-door-pot-lounge-north-s": {
               "height_m": 0.5,
               "status": "ASSUMED",
               "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
@@ -1100,7 +1100,7 @@
         "status": "VERIFIED",
         "quotes": [
           "USDA Plant Hardiness Zone: 9a, 9b, 10a, 10b, 11a, 11b. Plants must be brought when the temperature threatens to drop below 50 degrees Fahrenheit, as they are tender, tropical palms. (NC State)",
-          "winter minimum temperature of 12\u201315\u00baC (54\u201359\u00baF) (RHS)"
+          "winter minimum temperature of 12–15ºC (54–59ºF) (RHS)"
         ]
       },
       "root_spread_habit": {
@@ -1444,7 +1444,7 @@
         "status": "VERIFIED",
         "quotes": [
           "USDA Plant Hardiness Zone: 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b (NC State)",
-          "USDA Zones 7\u201310 (Missouri Botanical Garden)"
+          "USDA Zones 7–10 (Missouri Botanical Garden)"
         ]
       },
       "root_spread_habit": {
@@ -1631,7 +1631,7 @@
     },
     {
       "species": "Agave attenuata",
-      "reason": "Flower spike 1.5\u20133 m",
+      "reason": "Flower spike 1.5–3 m",
       "status": "VERIFIED",
       "basis": "client exclusion decision; not an independently checked botanical claim"
     },
@@ -1718,7 +1718,7 @@
       "source_urls": [
         "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/"
       ],
-      "lead_research_excerpt": "10. Monstera deliciosa \u2014 Split-leaf Philodendron / Swiss Cheese Plant\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/monstera-deliciosa/](https://plants.ces.ncsu.edu/plants/monstera-deliciosa/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Climbing Method: Clinging\"`, `\"In its native habitat it starts its life as a terrestrial plant, turning epiphytic once it comes into contact with a sturdy tree it can climb... Sturdy support is necessary to prevent the stems from breaking.\"`\n  * *Status*: **VERIFIED** (Requires heavy anchoring).\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"can grow to 70 feet tall, though it stays between 6 to 8 feet in most home environments\"`, `\"Leaves are gigantic, up to 1 foot or more\"`, `\"Available Space To Plant: 6-feet-12 feet\"`\n  * *Status*: **MISMATCH (Gigantic foliage obscures trellis framework completely)**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Dappled Sunlight (Shade through upper canopy all day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`, `\"moderate brightness but not direct sunlight\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Water this plant thoroughly, then allow the top quarter to one-third part to dry between watering. Using a humidifier or setting in the plant container on a tray of wet pebbles helps increase the humidity in dry interior settings.\"`\n  * *Status*: **MISMATCH (Demands high ambient humidity; suffers leaf desiccations in dry desert air)**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`, `\"prefers an average warm temperature of 60 to 85 degrees F.\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: `\"Poison Severity: Low\"`, `\"Poison Toxic Principle: Needle-like calcium oxalate crystals; possibly other unidentified toxins\"`, `\"Poison Symptoms: Intense burning of mouth, tongue, and throat; nausea, vomiting, difficulty swallowing, drooling, and diarrhea may also occur; contact with cell sap may cause skin irritation.\"`\n  * *Status*: **MISMATCH (Oxalate crystal toxicity dangerous to curious toddlers)**\n"
+      "lead_research_excerpt": "10. Monstera deliciosa — Split-leaf Philodendron / Swiss Cheese Plant\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/monstera-deliciosa/](https://plants.ces.ncsu.edu/plants/monstera-deliciosa/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Climbing Method: Clinging\"`, `\"In its native habitat it starts its life as a terrestrial plant, turning epiphytic once it comes into contact with a sturdy tree it can climb... Sturdy support is necessary to prevent the stems from breaking.\"`\n  * *Status*: **VERIFIED** (Requires heavy anchoring).\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"can grow to 70 feet tall, though it stays between 6 to 8 feet in most home environments\"`, `\"Leaves are gigantic, up to 1 foot or more\"`, `\"Available Space To Plant: 6-feet-12 feet\"`\n  * *Status*: **MISMATCH (Gigantic foliage obscures trellis framework completely)**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Dappled Sunlight (Shade through upper canopy all day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`, `\"moderate brightness but not direct sunlight\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Water this plant thoroughly, then allow the top quarter to one-third part to dry between watering. Using a humidifier or setting in the plant container on a tray of wet pebbles helps increase the humidity in dry interior settings.\"`\n  * *Status*: **MISMATCH (Demands high ambient humidity; suffers leaf desiccations in dry desert air)**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`, `\"prefers an average warm temperature of 60 to 85 degrees F.\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: `\"Poison Severity: Low\"`, `\"Poison Toxic Principle: Needle-like calcium oxalate crystals; possibly other unidentified toxins\"`, `\"Poison Symptoms: Intense burning of mouth, tongue, and throat; nausea, vomiting, difficulty swallowing, drooling, and diarrhea may also occur; contact with cell sap may cause skin irritation.\"`\n  * *Status*: **MISMATCH (Oxalate crystal toxicity dangerous to curious toddlers)**\n"
     },
     {
       "species": "Philodendron xanadu",
@@ -1819,7 +1819,7 @@
       "basis": "lead-verified research 2026-10-06",
       "research": "out/agy-research/shade-climber.md",
       "source_url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
-      "lead_research_excerpt": "5. Hedera helix \u2014 English Ivy\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/hedera-helix/](https://plants.ces.ncsu.edu/plants/hedera-helix/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/hedera-helix/](https://assessment.ifas.ufl.edu/assessments/hedera-helix/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Stem Description: Vine climbs by adventitious roots... Aerial roots can damage painted surfaces, loose mortar and aluminum siding.\"`\n  * *Status*: **MISMATCH (Directly damages mortar joints and painted masonry)**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 20 ft. 0 in. - 80 ft. 0 in.\", \"Width: 3 ft. 0 in. - 50 ft. 0 in.\"`\n  * *Status*: **MISMATCH (Massive 20\u201380 ft vine completely overwhelms a 1.5 m \u00d7 2.2 m screen)**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Deep shade (Less than 2 hours to no direct sunlight)\", \"Resistance To Challenges: Heavy Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Resistance To Challenges: Drought, Dry Soil\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 4a through 13b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\", \"Maintenance: High\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 11\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Highly invasive weed)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Saponins, including hederagenin, and polyacetylenes, including didehydrofalcarinol and falcarinol\"`, `\"Poison Symptoms: Burning in mouth, throat; severe stomach pain, vomiting, diarrhea, convulsions, delirium, dermatitis with redness, itching and blisters.\"`, Tag: `#problem for children`\n  * *Status*: **MISMATCH (Hazardous to children aged 3, 6, and 10)**\n"
+      "lead_research_excerpt": "5. Hedera helix — English Ivy\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/hedera-helix/](https://plants.ces.ncsu.edu/plants/hedera-helix/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/hedera-helix/](https://assessment.ifas.ufl.edu/assessments/hedera-helix/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Stem Description: Vine climbs by adventitious roots... Aerial roots can damage painted surfaces, loose mortar and aluminum siding.\"`\n  * *Status*: **MISMATCH (Directly damages mortar joints and painted masonry)**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 20 ft. 0 in. - 80 ft. 0 in.\", \"Width: 3 ft. 0 in. - 50 ft. 0 in.\"`\n  * *Status*: **MISMATCH (Massive 20–80 ft vine completely overwhelms a 1.5 m × 2.2 m screen)**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Deep shade (Less than 2 hours to no direct sunlight)\", \"Resistance To Challenges: Heavy Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Resistance To Challenges: Drought, Dry Soil\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 4a through 13b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\", \"Maintenance: High\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 11\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Highly invasive weed)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Saponins, including hederagenin, and polyacetylenes, including didehydrofalcarinol and falcarinol\"`, `\"Poison Symptoms: Burning in mouth, throat; severe stomach pain, vomiting, diarrhea, convulsions, delirium, dermatitis with redness, itching and blisters.\"`, Tag: `#problem for children`\n  * *Status*: **MISMATCH (Hazardous to children aged 3, 6, and 10)**\n"
     },
     {
       "species": "Ficus pumila",
@@ -1828,7 +1828,7 @@
       "basis": "lead-verified research 2026-10-06",
       "research": "out/agy-research/shade-climber.md",
       "source_url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
-      "lead_research_excerpt": "4. Ficus pumila \u2014 Creeping Fig\n\n* **Sources**: UF/IFAS Gardening Solutions, UF/IFAS Assessment & NC State Plant Toolbox\n  * URL (UF/IFAS GS): [https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/creeping-fig.html](https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/creeping-fig.html)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/ficus-pumila/](https://assessment.ifas.ufl.edu/assessments/ficus-pumila/)\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/ficus-pumila/](https://plants.ces.ncsu.edu/plants/ficus-pumila/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"The vine\u2019s adhesive pads make it hard to remove, so consider planting it on privacy walls, but avoid the walls of your home. It can damage wooden structures.\"`\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls, clusters of adventitious roots (holdfasts)\"`\n  * *Status*: **MISMATCH (Severely damages wooden trellis structures and adheres aggressively)**\n* **Mature Dimensions**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"It climbs 25 to 30 feet or more\"`\n  * *Verbatim Quote (NC State)*: `\"Height: 10 ft. 0 in. - 15 ft. 0 in.\", \"Width: 3 ft. 0 in. - 6 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Full sun (6 or more hours of direct sunlight a day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Verbatim Quote (UF/IFAS GS)*: `\"Creeping fig can grow in full sun or part shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"Once established, it is fairly drought tolerant\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"It grows vigorously, requiring frequent pruning to keep it tidy.\"`\n  * *Status*: **VERIFIED** (Overwhelming growth covers entire trellis, obscuring woodwork).\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 10\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Invasive risk)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Problems: Problem for Cats, Problem for Dogs\"`, `\"Milky sap causes mild dermatitis in some individuals.\"`\n  * *Status*: **MISMATCH**\n"
+      "lead_research_excerpt": "4. Ficus pumila — Creeping Fig\n\n* **Sources**: UF/IFAS Gardening Solutions, UF/IFAS Assessment & NC State Plant Toolbox\n  * URL (UF/IFAS GS): [https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/creeping-fig.html](https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/creeping-fig.html)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/ficus-pumila/](https://assessment.ifas.ufl.edu/assessments/ficus-pumila/)\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/ficus-pumila/](https://plants.ces.ncsu.edu/plants/ficus-pumila/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"The vine’s adhesive pads make it hard to remove, so consider planting it on privacy walls, but avoid the walls of your home. It can damage wooden structures.\"`\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls, clusters of adventitious roots (holdfasts)\"`\n  * *Status*: **MISMATCH (Severely damages wooden trellis structures and adheres aggressively)**\n* **Mature Dimensions**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"It climbs 25 to 30 feet or more\"`\n  * *Verbatim Quote (NC State)*: `\"Height: 10 ft. 0 in. - 15 ft. 0 in.\", \"Width: 3 ft. 0 in. - 6 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Full sun (6 or more hours of direct sunlight a day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Verbatim Quote (UF/IFAS GS)*: `\"Creeping fig can grow in full sun or part shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"Once established, it is fairly drought tolerant\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"It grows vigorously, requiring frequent pruning to keep it tidy.\"`\n  * *Status*: **VERIFIED** (Overwhelming growth covers entire trellis, obscuring woodwork).\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 10\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Invasive risk)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Problems: Problem for Cats, Problem for Dogs\"`, `\"Milky sap causes mild dermatitis in some individuals.\"`\n  * *Status*: **MISMATCH**\n"
     },
     {
       "species": "Epipremnum aureum",
@@ -1837,7 +1837,7 @@
       "basis": "lead-verified research 2026-10-06",
       "research": "out/agy-research/shade-climber.md",
       "source_url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
-      "lead_research_excerpt": "6. Epipremnum aureum \u2014 Golden Pothos\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/epipremnum-aureum/](https://plants.ces.ncsu.edu/plants/epipremnum-aureum/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/epipremnum-aureum/](https://assessment.ifas.ufl.edu/assessments/epipremnum-aureum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 20 ft. 0 in. - 40 ft. 0 in.\", \"Width: 3 ft. 0 in. - 6 ft. 0 in.\"`\n  * *Status*: **MISMATCH**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Deep shade (Less than 2 hours to no direct sunlight), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 17\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Severe invasive risk)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Calcium oxalate crystals\"`, `\"Poison Symptoms: Chewing on this plant can result in severe pain and swelling of the mouth, lips, tongue and throat. Other symptoms include excessive drooling, difficulty swallowing, vomiting, diarrhea, and decreased appetite. Can also cause skin irritation.\"`\n  * *Status*: **MISMATCH (Unsafe for young children)**\n"
+      "lead_research_excerpt": "6. Epipremnum aureum — Golden Pothos\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/epipremnum-aureum/](https://plants.ces.ncsu.edu/plants/epipremnum-aureum/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/epipremnum-aureum/](https://assessment.ifas.ufl.edu/assessments/epipremnum-aureum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 20 ft. 0 in. - 40 ft. 0 in.\", \"Width: 3 ft. 0 in. - 6 ft. 0 in.\"`\n  * *Status*: **MISMATCH**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Deep shade (Less than 2 hours to no direct sunlight), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 17\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Severe invasive risk)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Calcium oxalate crystals\"`, `\"Poison Symptoms: Chewing on this plant can result in severe pain and swelling of the mouth, lips, tongue and throat. Other symptoms include excessive drooling, difficulty swallowing, vomiting, diarrhea, and decreased appetite. Can also cause skin irritation.\"`\n  * *Status*: **MISMATCH (Unsafe for young children)**\n"
     },
     {
       "species": "Syngonium podophyllum",
@@ -1846,7 +1846,7 @@
       "basis": "lead-verified research 2026-10-06",
       "research": "out/agy-research/shade-climber.md",
       "source_url": "https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/",
-      "lead_research_excerpt": "8. Syngonium podophyllum \u2014 Arrowhead Vine\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/](https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/syngonium-podophyllum/](https://assessment.ifas.ufl.edu/assessments/syngonium-podophyllum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 10 ft. 0 in. - 20 ft. 0 in.\", \"Width: 1 ft. 0 in. - 2 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Dappled Sunlight, Deep shade (Less than 2 hours to no direct sunlight), Partial Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"Conclusions by Zone: Central: Invasive (No Uses), South: Invasive (No Uses)\"`, `\"Predictive Tool Score: 16\"`, `\"Invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Category 1 Invasive)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Calcium oxalate crystals\"`, `\"Poison Symptoms: Swelling and pain of lips, mouth, tongue; excessive drooling; difficulty swallowing; vomiting; diarrhea. Skin irritation.\"`, `\"Problems: Poisonous to Humans, Problem for Cats, Problem for Dogs\"`\n  * *Status*: **MISMATCH (Toxic to children)**\n"
+      "lead_research_excerpt": "8. Syngonium podophyllum — Arrowhead Vine\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/](https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/syngonium-podophyllum/](https://assessment.ifas.ufl.edu/assessments/syngonium-podophyllum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 10 ft. 0 in. - 20 ft. 0 in.\", \"Width: 1 ft. 0 in. - 2 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Dappled Sunlight, Deep shade (Less than 2 hours to no direct sunlight), Partial Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"Conclusions by Zone: Central: Invasive (No Uses), South: Invasive (No Uses)\"`, `\"Predictive Tool Score: 16\"`, `\"Invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Category 1 Invasive)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Calcium oxalate crystals\"`, `\"Poison Symptoms: Swelling and pain of lips, mouth, tongue; excessive drooling; difficulty swallowing; vomiting; diarrhea. Skin irritation.\"`, `\"Problems: Poisonous to Humans, Problem for Cats, Problem for Dogs\"`\n  * *Status*: **MISMATCH (Toxic to children)**\n"
     },
     {
       "species": "Philodendron hederaceum",
@@ -1855,7 +1855,7 @@
       "basis": "lead-verified research 2026-10-06",
       "research": "out/agy-research/shade-climber.md",
       "source_url": "https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/",
-      "lead_research_excerpt": "7. Philodendron hederaceum \u2014 Heartleaf Philodendron\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/](https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Climbing Method: Clinging\"`, `\"Stem Description: Vines climb by adventitious roots. Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"Height: 10 ft. 0 in. - 20 ft. 0 in.\", \"Width: 1 ft. 0 in. - 3 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Dappled Sunlight, Deep shade (Less than 2 hours to no direct sunlight), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: `\"Poison Severity: Low\"`, `\"Poison Toxic Principle: Needle-like calcium oxalate crystals (oxalate crystals and toxic protein)\"`, `\"Poison Symptoms: Pain and swelling of the lips, tongue, and palate; skin irritation from contact with cell sap\"`, `\"Problems: Problem for Children, Problem for Cats, Problem for Dogs\"`\n  * *Status*: **MISMATCH (Explicitly documented as \"Problem for Children\")**\n"
+      "lead_research_excerpt": "7. Philodendron hederaceum — Heartleaf Philodendron\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/](https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Climbing Method: Clinging\"`, `\"Stem Description: Vines climb by adventitious roots. Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"Height: 10 ft. 0 in. - 20 ft. 0 in.\", \"Width: 1 ft. 0 in. - 3 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Dappled Sunlight, Deep shade (Less than 2 hours to no direct sunlight), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: `\"Poison Severity: Low\"`, `\"Poison Toxic Principle: Needle-like calcium oxalate crystals (oxalate crystals and toxic protein)\"`, `\"Poison Symptoms: Pain and swelling of the lips, tongue, and palate; skin irritation from contact with cell sap\"`, `\"Problems: Problem for Children, Problem for Cats, Problem for Dogs\"`\n  * *Status*: **MISMATCH (Explicitly documented as \"Problem for Children\")**\n"
     },
     {
       "species": "Parthenocissus tricuspidata",
@@ -1864,16 +1864,10 @@
       "basis": "lead-verified research 2026-10-06",
       "research": "out/agy-research/shade-climber.md",
       "source_url": "https://plants.ces.ncsu.edu/plants/parthenocissus-tricuspidata/",
-      "lead_research_excerpt": "9. Parthenocissus tricuspidata \u2014 Boston Ivy\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/parthenocissus-tricuspidata/](https://plants.ces.ncsu.edu/plants/parthenocissus-tricuspidata/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Boston ivy climbs by short tendrils branched with terminal sucker-like adhesive discs.\"`, `\"It should not be grown up wood or shingle walls because the holdfasts are difficult to remove, can creep under shingles and will ruin the paint. Vines can also attach to and damage such objects as gutters, shutters or wiring around homes and buildings.\"`\n  * *Status*: **MISMATCH (Adhesive discs damage wood surfaces, paint, and mortar)**\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"Dimensions: Height: 30 ft. 0 in. - 60 ft. 0 in., Width: 5 ft. 0 in. - 10 ft. 0 in.\"`\n  * *Status*: **MISMATCH (30\u201360 ft is massively excessive for a 2.2 m high trellis)**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Full sun (6 or more hours of direct sunlight a day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`, `\"Resistance To Challenges: Heavy Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Soil Drainage: Good Drainage, Moist, Occasionally Dry\"`, `\"Resistance To Challenges: Drought, Dry Soil\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 4a through 8b\"`, `\"cold hardy to about 15 degrees F.\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: Tags: `#childrens-garden`, `#playground plant`. No poison characteristics or toxic principles listed.\n  * *Status*: **VERIFIED** (Non-toxic).\n"
+      "lead_research_excerpt": "9. Parthenocissus tricuspidata — Boston Ivy\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/parthenocissus-tricuspidata/](https://plants.ces.ncsu.edu/plants/parthenocissus-tricuspidata/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Boston ivy climbs by short tendrils branched with terminal sucker-like adhesive discs.\"`, `\"It should not be grown up wood or shingle walls because the holdfasts are difficult to remove, can creep under shingles and will ruin the paint. Vines can also attach to and damage such objects as gutters, shutters or wiring around homes and buildings.\"`\n  * *Status*: **MISMATCH (Adhesive discs damage wood surfaces, paint, and mortar)**\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"Dimensions: Height: 30 ft. 0 in. - 60 ft. 0 in., Width: 5 ft. 0 in. - 10 ft. 0 in.\"`\n  * *Status*: **MISMATCH (30–60 ft is massively excessive for a 2.2 m high trellis)**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Full sun (6 or more hours of direct sunlight a day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`, `\"Resistance To Challenges: Heavy Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Soil Drainage: Good Drainage, Moist, Occasionally Dry\"`, `\"Resistance To Challenges: Drought, Dry Soil\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 4a through 8b\"`, `\"cold hardy to about 15 degrees F.\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: Tags: `#childrens-garden`, `#playground plant`. No poison characteristics or toxic principles listed.\n  * *Status*: **VERIFIED** (Non-toxic).\n"
     }
   ],
   "design_assumptions": {
-    "east_tree_pit": {
-      "diameter_m": 1.2,
-      "status": "ASSUMED",
-      "reason": "Client G1 instruction; nursery/root and drainage review outstanding.",
-      "surface": "gravel"
-    },
     "east_tree_target": {
       "height_m": 3.277487116854729,
       "spread_m": 4.6,
@@ -1900,37 +1894,12 @@
       "source_url": "https://www.rhs.org.uk/garden-design/shade-gardening",
       "source_quote": "Full sun: More than six hours of direct sun per day at midsummer.",
       "checked_on": "2026-10-06",
-      "applicability": "Hourly June-solstice enclosure proxy only; detailed site climate and planting performance UNVERIFIED"
-    },
-    "east_tree_position": {
-      "center_m": [
-        25.576999999999998,
-        -24.41111528638369
-      ],
-      "status": "MEASURED",
-      "decision": "D4",
-      "description": "in the lawn, offset from centre for a clear door route",
-      "search": {
-        "translation_m": [
-          0.0,
-          0.7222147136163092
-        ],
-        "distance_m": 0.7222147136163092,
-        "boundary_distance_m": 0.7222137136163093,
-        "clearance_m": 1e-06,
-        "bounds_m": [
-          -0.5,
-          -2.4823299999999975,
-          0.0027058383684810394,
-          2.1559166158306198
-        ],
-        "forbidden_polygons": 5359
-      }
+      "applicability": "Hourly June-solstice actual opaque scene ray-cast with recorded true-north rotation; detailed site climate, leaf-level light and planting performance UNVERIFIED"
     },
     "north_garden_g4": {
       "status": "ASSUMED",
       "beds": {
-        "west": [
+        "north": [
           -0.05,
           -28.5,
           3.45,
@@ -2414,6 +2383,37 @@
           }
         ],
         "licence": "Original project geometry; no third-party mesh licence applies; no standalone redistribution grant declared"
+      }
+    },
+    "south_tree_pit": {
+      "diameter_m": 1.2,
+      "status": "ASSUMED",
+      "reason": "Client G1 instruction; nursery/root and drainage review outstanding.",
+      "surface": "gravel"
+    },
+    "south_tree_position": {
+      "center_m": [
+        25.576999999999998,
+        -24.41111528638369
+      ],
+      "status": "MEASURED",
+      "decision": "D4",
+      "description": "in the lawn, offset from centre for a clear door route",
+      "search": {
+        "translation_m": [
+          0.0,
+          0.7222147136163092
+        ],
+        "distance_m": 0.7222147136163092,
+        "boundary_distance_m": 0.7222137136163093,
+        "clearance_m": 1e-06,
+        "bounds_m": [
+          -0.5,
+          -2.4823299999999975,
+          0.0027058383684810394,
+          2.1559166158306198
+        ],
+        "forbidden_polygons": 5359
       }
     }
   },

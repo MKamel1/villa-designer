@@ -16,10 +16,10 @@ def search_position():
     tree = copy.deepcopy(next(p for p in props if p['asset'] == 'sf_frangipani'))
     current = tree['center']
     for axis in (0,1):
-        tree['position'][axis] += L.EAST_CENTER[axis]-current[axis]
-    tree['center'] = L.EAST_CENTER
+        tree['position'][axis] += L.SOUTH_CENTER[axis]-current[axis]
+    tree['center'] = L.SOUTH_CENTER
     fence = L.E.FENCE_T/1000
-    usable = (L.EAST[0],L.EAST[1],L.EAST[2]-fence,L.EAST[3]-fence)
+    usable = (L.SOUTH[0],L.SOUTH[1],L.SOUTH[2]-fence,L.SOUTH[3]-fence)
     model = L._rect(tree)
     center = tree['center']
     radius = L.require_species('Plumeria rubra')['spread']['range_m'][0]/2

@@ -7,7 +7,7 @@ verification results follow below. No presentation renders or commit.
 ## Scope and construction status
 
 The client's north garden is the street-side sunken court, retained in code
-as `west`: x −0.373 to 3.617, y −29.916 to −23.591 metres. Coordinates x and y
+as `north`: x −0.373 to 3.617, y −29.916 to −23.591 metres. Coordinates x and y
 are horizontal model axes; z is vertical and increases upward. Court ground
 is z −3.0. GF means ground floor. The GF slab strip is over the house-facing
 side of this garden; its measured soffit is z −0.2. Client street naming
@@ -81,8 +81,8 @@ this court changes; retained other-garden hashes are checked by G4 tests.
 
 | Item | G4 position/extent | G4c final position/extent | Design reason |
 |---|---|---|---|
-| Third Fatsia, `west-back-02` | (2.80, −27.70) | (1.10, −24.50) | Dense broad-leaf layer beside/forward of the retreat; screens blank boundary in seated field |
-| Third Aspidistra, `west-mid-02` | (2.80, −28.25) | (3.40, −24.17) | Green behind basket, beyond its motion envelope and outside full lounge opening |
+| Third Fatsia, `north-back-02` | (2.80, −27.70) | (1.10, −24.50) | Dense broad-leaf layer beside/forward of the retreat; screens blank boundary in seated field |
+| Third Aspidistra, `north-mid-02` | (2.80, −28.25) | (3.40, −24.17) | Green behind basket, beyond its motion envelope and outside full lounge opening |
 | Rhapis accent | (1.20, −24.65) | (1.02, −24.65) | Green beside seat; keep motion and assumed root/path/wall clearance |
 | Feature stone | (2.65, −24.05) | (1.02, −24.16) | Move into garden-facing seat cone, clear motion and actual boundary thickness |
 | Accent soil bed: min/max x/y | (0.50, −25.20, 1.90, −24.10) | (0.05, −25.20, 1.60, −23.86) | Ground-level soil around the layered enclosure, clear walking stones and motion |
@@ -225,3 +225,10 @@ identifier-map selection and asserted matching identifiers fix it, retaining
 The lead owns the full suite and commit. `assets/user` and
 `out/villa/round3`, including shared targets, remain untouched. No packages
 are installed and no presentation image or native-model approval is claimed.
+
+Current naming authority: [site orientation](../knowledge/site-orientation.json). Historical numeric sun-proxy results in this report are superseded by [the orientation and ray-cast report](orientation-naming-report.md).
+
+<!-- garden-side: -x; name: north -->
+<!-- garden-side: +y; name: east -->
+<!-- garden-side: +x; name: south -->
+<!-- garden-side: -y; name: west -->

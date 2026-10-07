@@ -1,3 +1,4 @@
+from archpipe.orientation import historical_aliases
 """Views chosen by intent (archpipe.concept.render_views): each rule is here because a draft broke it.
 Client 2026-09-27: "Some of the cameras are looking at the wrong direction and uninformative"."""
 import math
@@ -21,7 +22,7 @@ class ChosenViews(unittest.TestCase):
     def test_g2f_real_outside_yard_cameras_cover_and_room_generalise(self):
         from archpipe.concept.garden_render_review import garden_camera_findings
         from archpipe.concept import villa_render as V
-        frozen = json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        frozen = historical_aliases(json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text()))
         scene = frozen['scene_for_camera']
         for view in frozen['outside_yard_views']:
             self.assertIn('outside yard', garden_camera_findings(view, scene)[0])
@@ -58,7 +59,7 @@ class ChosenViews(unittest.TestCase):
     def test_g2f_foreground_mullion_real_camera_and_translated_sibling(self):
         from archpipe.concept.garden_render_review import opening_frame_findings
         from archpipe.concept import villa_render as V
-        frozen=json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text()))
         old=frozen['views'][0];scene=frozen['scene_for_frames']
         self.assertEqual(opening_frame_findings(old,scene)[0]['face_indices'],[116,117,118,119])
         new=next(v for v in V.VIEWS(resolve=False) if v['id'].startswith('v28'))
@@ -82,7 +83,7 @@ class ChosenViews(unittest.TestCase):
 
     def test_frozen_east_wc_vertical_lens_need_and_whole_mesh(self):
         from scripts.villa_render_views import subject_mesh_frame_violations
-        frozen = json.loads((Path(__file__).parent / "fixtures/c4-family-wc-lens-before.json").read_text())
+        frozen = historical_aliases(json.loads((Path(__file__).parent / "fixtures/c4-family-wc-lens-before.json").read_text()))
         meshes = {"meshes": [{"id": "furn-fb-wc-0", "label": "fb-wc",
                                "faces": [frozen["wc_vertices"]]}]}
         old = {"resolution": [1920, 1280], "camera": {"position": [9.727, -24.971, 1.35],
@@ -117,7 +118,7 @@ class ChosenViews(unittest.TestCase):
         self.assertTrue(subject_mesh_frame_violations(new, {"meshes": []}, "fb-wc"))
 
     def test_whole_wc_search_generalises_to_renamed_translated_room(self):
-        frozen = json.loads((Path(__file__).parent / "fixtures/c4-family-wc-lens-before.json").read_text())
+        frozen = historical_aliases(json.loads((Path(__file__).parent / "fixtures/c4-family-wc-lens-before.json").read_text()))
         room = frozen["layout"]["rooms"]["family-bath"]
         room["rect"] = [v+7 if k % 2 == 0 else v-4 for k, v in enumerate(room["rect"])]
         lay = {"rooms": {"compact-room": room}}
@@ -165,22 +166,22 @@ class ChosenViews(unittest.TestCase):
         scene = V.build(LAY)
         items = {i["id"]: i for i in F.layout(LAY)}
         by_id = {v["id"]: v for v in scene["views"]}
-        for name in ("v26-top-garden-north", "v28-north-garden-below"):
+        for name in ("v26-top-garden-east", "v28-east-yard-below"):
             self.assertEqual(views.camera_proximity_violations(by_id[name], scene, items), [], name)
-        old26 = {**by_id["v26-top-garden-north"], "camera": {**by_id["v26-top-garden-north"]["camera"],
+        old26 = {**by_id["v26-top-garden-east"], "camera": {**by_id["v26-top-garden-east"]["camera"],
                                                               "position": [14.5, -22.0, 1.35]}}
-        old28 = {**by_id["v28-north-garden-below"], "camera": {**by_id["v28-north-garden-below"]["camera"],
+        old28 = {**by_id["v28-east-yard-below"], "camera": {**by_id["v28-east-yard-below"]["camera"],
                                                                 "position": [16.1, -21.0, -1.65],
                                                                 "target": [20.5, -22.1, -1.65], "lens_mm": 24}}
         # Retired specimens remain a frozen historical camera proof, not
         # restored objects or invisible aliases in the current garden.
         import json
         from pathlib import Path
-        frozen=json.loads((Path(__file__).parent/'fixtures/garden-g1-before.json').read_text())
+        frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/garden-g1-before.json').read_text()))
         historic={**scene,"props":frozen["props"]}
         self.assertTrue(any("olive" in name for name, _ in views.camera_proximity_violations(old26, historic, items)))
         self.assertTrue(any("lemon" in name for name, _ in views.dominant_foreground_props(old28, historic)))
-        self.assertEqual(views.dominant_foreground_props(by_id["v28-north-garden-below"], scene), [])
+        self.assertEqual(views.dominant_foreground_props(by_id["v28-east-yard-below"], scene), [])
 
     def test_storage_views_show_joinery_and_windowless_room_lighting(self):
         from archpipe.concept import villa_render as V
@@ -255,23 +256,23 @@ class ChosenViews(unittest.TestCase):
             self.assertEqual(views.subject_mesh_frame_violations(view,scene,subject),[])
         old={**view,"camera":{**view["camera"],"position":[28.2,-21.2,-1.65],
                             "target":[21.0,-26.4,-1.65],"shift_y":.10}}
-        self.assertIn("horizontal edge",views.subject_mesh_frame_violations(old,scene,"landscape-tree-east"))
+        self.assertIn("horizontal edge",views.subject_mesh_frame_violations(old,scene,"landscape-tree-south"))
 
     def test_d4_garden_handoff_and_west_view_hold_actual_geometry(self):
         from scripts import villa_render_views as views
         from archpipe.concept import villa_render as V
         scene=V.build(LAY)
         by={v['id']:v for v in scene['views']}
-        west=by['v36-west-court']
+        west=by['v36-north-garden']
         self.assertEqual(west['camera']['lens_mm'],24)
         self.assertEqual(west['camera']['position'][2],-1.65)
         self.assertEqual(west['camera']['target'][2],-1.65)
         self.assertEqual(views.camera_proximity_violations(west,scene,ITEMS),[])
-        for vid in ('v36-west-court','v37-west-court-bistro','v38-north-garden-floor-bed'):
+        for vid in ('v36-north-garden','v37-north-garden-lounge','v38-north-garden-floor-bed'):
             for prefix in by[vid]['subjects']:
                 self.assertEqual(views.subject_mesh_frame_violations(by[vid],scene,prefix),[])
         self.assertEqual(set(by['v38-north-garden-floor-bed']['subjects']),
-                         {'landscape-bed-west','landscape-west-back-00','landscape-west-back-01','landscape-west-mid-00','landscape-west-mid-01','landscape-west-front','landscape-west-edge'})
+                         {'landscape-bed-north','landscape-north-back-00','landscape-north-back-01','landscape-north-mid-00','landscape-north-mid-01','landscape-north-front','landscape-north-edge'})
         self.assertFalse(any(p['asset'] in ('outdoor_table_chair_set_01','sf_egg_chair') for p in scene['props']))
         bad=deepcopy(west)
         # Reverse the current sightline. The former absolute target points
@@ -281,7 +282,7 @@ class ChosenViews(unittest.TestCase):
         bad['camera']['target']=[2*position[0]-target[0], 2*position[1]-target[1], position[2]]
         self.assertTrue(views.subject_mesh_frame_violations(bad,scene,west['subjects'][0]))
         for vid in ('v07-terrace-dusk','v19-garden-facade','v25-top-garden-gate',
-                    'v26-top-garden-north','v27-north-garden-above','v28-north-garden-below'):
+                    'v26-top-garden-east','v27-east-yard-above','v28-east-yard-below'):
             for subject in by[vid]['subjects']:
                 self.assertEqual(views.subject_mesh_frame_violations(by[vid],scene,subject),[],(vid,subject))
         for vid in ('v02-garden-living','v10-living-evening','v07-terrace-dusk','v19-garden-facade'):
@@ -292,10 +293,10 @@ class ChosenViews(unittest.TestCase):
         from archpipe.concept import villa_render as V
         scene=V.build(LAY)
         by={v['id']:v for v in scene['views']}
-        for vid in ('v25-top-garden-gate','v26-top-garden-north'):
+        for vid in ('v25-top-garden-gate','v26-top-garden-east'):
             view=by[vid]
             self.assertEqual(set(view['subjects']),{'landscape-top-bench','landscape-top-trough',
-                                                  'landscape-top-deck-north','landscape-top-roof'})
+                                                  'landscape-top-deck-east','landscape-top-roof'})
             self.assertIn('trough colour: dark bronze, pending client confirmation',' '.join(view['caption_notes']))
             self.assertTrue(view['final_only'])
             self.assertEqual(views.camera_proximity_violations(view,scene,ITEMS),[])
@@ -303,16 +304,16 @@ class ChosenViews(unittest.TestCase):
                 self.assertTrue(views.subject_points(subject,scene))
                 self.assertEqual(views.subject_mesh_frame_violations(view,scene,subject),[])
         self.assertEqual(by['v25-top-garden-gate']['camera']['position'],[4.4,-21.7,1.35])
-        self.assertEqual(by['v26-top-garden-north']['camera']['position'],[6.95,-23.2,1.35])
+        self.assertEqual(by['v26-top-garden-east']['camera']['position'],[6.95,-23.2,1.35])
         import json
         from pathlib import Path
-        before=json.loads((Path(__file__).parent/'fixtures/garden-g3-v27-before.json').read_text())
-        self.assertTrue(any(pid=='landscape-top-north-ixora-1' for pid,_ in
+        before=historical_aliases(json.loads((Path(__file__).parent/'fixtures/garden-g3-v27-before.json').read_text()))
+        self.assertTrue(any(pid=='landscape-top-pot-ixora-1' for pid,_ in
                             views.camera_proximity_violations(before,scene,ITEMS)))
-        current=by['v27-north-garden-above']
+        current=by['v27-east-yard-above']
         self.assertEqual(views.camera_proximity_violations(current,scene,ITEMS),[])
-        self.assertEqual(set(current['subjects']),{'landscape-north-back','landscape-north-mid',
-                                                  'landscape-north-front','landscape-trellis-north'})
+        self.assertEqual(set(current['subjects']),{'landscape-east-back','landscape-east-mid',
+                                                  'landscape-east-front','landscape-trellis-east'})
         self.assertIn('Full soil-bed extent is outside the frame',' '.join(current['caption_notes']))
         for subject in current['subjects']:
             self.assertEqual(views.subject_mesh_frame_violations(current,scene,subject),[])
@@ -343,7 +344,7 @@ class ChosenViews(unittest.TestCase):
         # retirement/reordering; selecting a list tail silently lost v25.
         expected_prefixes = ["v%02d" % n for n in range(25, 35)]
         by_prefix = {v["id"].split("-")[0]: v for v in scene["views"]}
-        old_notes=json.loads((Path(__file__).parent/'fixtures/garden-g4-captions-before.json').read_text())
+        old_notes=historical_aliases(json.loads((Path(__file__).parent/'fixtures/garden-g4-captions-before.json').read_text()))
         self.assertNotIn('photographic',str(old_notes[1]['caption_notes']))
         self.assertIn('whole ground-level bed',str(old_notes[2]['caption_notes']))
         for prefix in ('v36','v37','v38'):

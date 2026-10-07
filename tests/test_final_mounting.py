@@ -1,3 +1,4 @@
+from archpipe.orientation import historical_aliases
 """Frozen final-C4 defects and complete rigid assembly construction proofs."""
 from copy import deepcopy
 import json
@@ -14,7 +15,7 @@ class FinalMounting(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.scene = VR.build(views=[])
-        cls.frozen = json.loads(Path('tests/fixtures/c4-final-before.json').read_text())
+        cls.frozen = historical_aliases(json.loads(Path('tests/fixtures/c4-final-before.json').read_text()))
 
     def test_real_final_candidate_only_family_clearances(self):
         from archpipe.concept.mounting_clearances import review
@@ -82,7 +83,7 @@ class FinalMounting(unittest.TestCase):
 
     def test_final_approval_drift_refuses_before_any_application(self):
         from archpipe.concept.final_mounting import validate_rows
-        authority=json.loads(Path('knowledge/c4-final-approvals.json').read_text())
+        authority=historical_aliases(json.loads(Path('knowledge/c4-final-approvals.json').read_text()))
         scene = deepcopy(self.frozen)
         row = next(r for r in scene['mounting_movements'] if r['id']=='detail-vent-guest-wc-grille')
         row['new'][0] += .005
@@ -93,8 +94,8 @@ class FinalMounting(unittest.TestCase):
 
     def test_frozen_east_approval_drift_still_fails_after_scene_retirement(self):
         from archpipe.concept.final_mounting import validate_rows
-        authority=json.loads(Path('knowledge/c4-final-approvals.json').read_text())
-        approved=next(r for r in authority['retired_rows'] if r['id']=='landscape-trellis-east')
+        authority=historical_aliases(json.loads(Path('knowledge/c4-final-approvals.json').read_text()))
+        approved=next(r for r in authority['retired_rows'] if r['id']=='landscape-trellis-south')
         old=next(r for r in self.frozen['mounting_movements'] if r['id']==approved['id'])
         validate_rows({old['id']:old},[approved])
         changed=deepcopy(old);changed['new'][0]+=.005

@@ -34,9 +34,9 @@ shadow simulation or annual Egypt performance finding.
 
 | Trough | Length × width × height, m | Rectangle, m | Species | Centres, m | Drift | Sun samples per plant |
 |---|---|---|---|---|---|---|
-| Deck north | 3.20 × 0.34 × 0.25 | (9.20, −21.10, 12.40, −20.76) | Salvia rosmarinus Prostrata Group | (9.80, −20.93), (10.80, −20.93), (11.80, −20.93) | 3 | 8/9 each: 09–16 |
-| Roof north | 2.13 × 0.40 × 0.25 | (13.02, −21.16, 15.15, −20.76) | Aloe vera | (13.40, −20.96), (14.10, −20.96), (14.80, −20.96) | 3 | 9/9 each: 09–17 |
-| Roof south | 2.13 × 0.40 × 0.25 | (13.02, −23.44, 15.15, −23.04) | Aloe vera | (13.40, −23.24), (14.10, −23.24), (14.80, −23.24) | 3 | 9/9 each: 09–17 |
+| Deck east | 3.20 × 0.34 × 0.25 | (9.20, −21.10, 12.40, −20.76) | Salvia rosmarinus Prostrata Group | (9.80, −20.93), (10.80, −20.93), (11.80, −20.93) | 3 | 8/9 each: 09–16 |
+| Roof east | 2.13 × 0.40 × 0.25 | (13.02, −21.16, 15.15, −20.76) | Aloe vera | (13.40, −20.96), (14.10, −20.96), (14.80, −20.96) | 3 | 9/9 each: 09–17 |
+| Roof west | 2.13 × 0.40 × 0.25 | (13.02, −23.44, 15.15, −23.04) | Aloe vera | (13.40, −23.24), (14.10, −23.24), (14.80, −23.24) | 3 | 9/9 each: 09–17 |
 
 Rosemary has a measured 1.00 m longitudinal span, 0.32 m young depth and
 0.30 m total shoot height including the trails; its verified palette range
@@ -53,7 +53,7 @@ three-plant drift; the drift guard rejects two or six plants without exemption.
 The two existing top-pot assemblies are rebuilt as planted terracotta-red
 glazed ceramic pots with visible soil, directly on the deck. Centres are
 (7.40, −21.20) and (9.30, −22.95) m. The former second location (10.50, −21.20)
-would occupy the new north trough planting; this is a layout correction for
+would occupy the new east trough planting; this is a layout correction for
 the planting/clear access design, not a camera move. Pots are 0.40 m high with
 0.18/0.25 m lower/upper radii and 0.259 m rim radius, all ASSUMED geometry.
 Both retain Ixora coccinea at the palette's ASSUMED 0.55 m nursery height:
@@ -62,7 +62,7 @@ the record contains “full sun for best flowering” and both centres achieve
 A quote or sun-screen failure replaces these accents with Aloe vera from the
 top palette; it cannot silently keep Ixora. Nursery spread/root review remains
 open, and top Ixora is the brief's explicit two-pot exception to its normal
-north/west placement zones.
+east/north placement zones.
 
 Ursinia anthemoides is omitted: its zone is `gf-beds` and its light field is
 UNVERIFIED, so its record does not establish this top-trough placement.
@@ -99,8 +99,8 @@ backless/symmetric, so “facing” declares the side with clear knee space.
 
 | Bench | Centre, m | Facing | Knee envelope, m | Achieved / required |
 |---|---|---|---|---|
-| Deck | (10.60, −22.10) | East, positive x, into central garden | (10.80244, −23.00, 11.40244, −21.20) | 0.600 m clear / 0.600 m ASSUMED design target |
-| Roof | (14.00, −22.10) | West, negative x, into central garden | (13.19756, −23.00, 13.79756, −21.20) | 0.600 m clear / 0.600 m ASSUMED design target |
+| Deck | (10.60, −22.10) | South, positive x, into central garden | (10.80244, −23.00, 11.40244, −21.20) | 0.600 m clear / 0.600 m ASSUMED design target |
+| Roof | (14.00, −22.10) | North, negative x, into central garden | (13.19756, −23.00, 13.79756, −21.20) | 0.600 m clear / 0.600 m ASSUMED design target |
 
 Both seats/slabs are off the study/gate path, and neither knee envelope is
 blocked by actual planting or containers. Artificial grass forms the central
@@ -167,7 +167,7 @@ maximum scene rounding error is 0.866025 mm. The tracked gzip record is
 keeps its measured bounds/axes and CC Attribution credit. Existing Ixora asset
 records are reused at the unchanged approved scale.
 
-Both `v25-top-garden-gate` and `v26-top-garden-north` name actual top benches,
+Both `v25-top-garden-gate` and `v26-top-garden-east` name actual top benches,
 troughs and rosemary/aloe meshes, without marker aliases. Captions note
 “trough colour: dark bronze, pending client confirmation”. V25 retains its
 existing gate-approach camera. V26 moves only the camera to
@@ -180,7 +180,7 @@ Whole-set review also found unchanged v27 only 0.521 m from the new second
 Ixora against the retained 1.0 m lens-clearance requirement. The frozen
 `garden-g3-v27-before.json` still fires. Only that camera moves to
 (14.60, −22.10, 1.35), target (19.00, −21.80, 1.35), 24 mm level, vertical
-shift −0.61. Subjects are the actual north back/mid/front planting strata
+shift −0.61. Subjects are the actual east back/mid/front planting strata
 and trellis. All their vertices/hulls frame wholly; the caption explicitly
 states the full soil-bed extent is outside the frame and points to v28 at
 ground level. The proximity checker now also includes procedural top plant
@@ -214,3 +214,10 @@ was inspected after regeneration. Passing geometry/tests does not close the
 lead's photographic appearance/sightline review.
 Shared `out/villa/round3` and `assets/user` were not modified; no package
 installation, full-suite run, render, native-model modification or commit.
+
+Current naming authority: [site orientation](../knowledge/site-orientation.json). Historical numeric sun-proxy results in this report are superseded by [the orientation and ray-cast report](orientation-naming-report.md).
+
+<!-- garden-side: -x; name: north -->
+<!-- garden-side: +y; name: east -->
+<!-- garden-side: +x; name: south -->
+<!-- garden-side: -y; name: west -->

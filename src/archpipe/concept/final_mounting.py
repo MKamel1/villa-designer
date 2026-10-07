@@ -47,6 +47,8 @@ def validate_rows(rows, approved_rows):
 
 def apply(scene, lay):
     authority = json.loads((Path(__file__).resolve().parents[3]/'knowledge/c4-final-approvals.json').read_text())
+    from ..orientation import historical_aliases
+    authority = historical_aliases(authority)
     render_meshes = {m['id']: m for m in scene['meshes']}
     diag_meshes = {m['id']: m for m in scene.get('diagnostic_meshes', [])}
     rows = {r['id']: r for r in scene['mounting_movements']}

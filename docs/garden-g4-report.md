@@ -8,10 +8,9 @@ diagnostic critic review complete. No presentation rendering or commit.
 Client names follow the street. In the model, x runs north to south, y runs
 west to east, and z runs vertically upward; coordinates and dimensions below
 are metres. Negative x is north, positive y east, positive x south, negative y
-west. True north is used only for solar calculations. Existing identifiers,
-including `west`, v36 and v37, are retained.
+west. True north is used only for solar calculations. Current identifiers follow knowledge/site-orientation.json; frozen historical IDs resolve through its explicit alias table.
 
-Only the client's north garden (legacy west court) changes. Its authored
+Only the client's north garden changes. Its authored
 scope is x −0.373 to 3.617 and y −29.916 to −23.591; gravel is intersected with
 the actual yard boundary at y −29.91566. Ground soil elevation is z −3.0.
 The top garden, east yard and south garden retain their landscape meshes,
@@ -187,3 +186,10 @@ No packages installed, presentation images rendered, native model rebuilt,
 shared target modified, or commit made. Neutral geometry/appearance previews
 are diagnostic evidence; photographic species likeness, final lighting,
 local nursery suitability and real design/construction gates remain open.
+
+Current naming authority: [site orientation](../knowledge/site-orientation.json). Historical numeric sun-proxy results in this report are superseded by [the orientation and ray-cast report](orientation-naming-report.md).
+
+<!-- garden-side: -x; name: north -->
+<!-- garden-side: +y; name: east -->
+<!-- garden-side: +x; name: south -->
+<!-- garden-side: -y; name: west -->

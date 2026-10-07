@@ -192,6 +192,24 @@
         "test_real_rear_soil_cannot_alias_main_bed_subject",
         "test_real_framed_but_occluded_garden_subjects_and_sibling"
       ]
+    },
+    {
+      "lesson_id": "two-norths-conflated",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "site-orientation authority separates client naming from true solar rotation; explicit immutable historical aliases and preserved climber seeds; actual opaque scene rays for three dates",
+      "check": "archpipe.orientation_guard.scene_findings / document_findings; archpipe.concept.garden_sun.SunStudy",
+      "stage": "scene build, scene contract and portable verification",
+      "proof_file": "tests/test_orientation.py",
+      "proofs": [
+        "test_committed_names_fail_and_current_names_stay_quiet",
+        "test_names_generalise_to_translated_geometry_and_mutated_text",
+        "test_true_sun_rotation_and_actual_changed_enclosure",
+        "test_real_scene_reproduces_lead_and_old_proxy_disagrees",
+        "test_rename_preserves_actual_geometry_and_climber_appearance"
+      ]
     }
   ]
 }

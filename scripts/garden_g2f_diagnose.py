@@ -1,4 +1,4 @@
-"""Reproduce west-court cover and architecture-only sun/sky measurements.
+"""Reproduce north-garden cover and architecture-only sun/sky measurements.
 
 Metres in the scene frame; north bearing is the true bearing of scene +y.
 Sky visibility is the unweighted fraction of 512 equal-solid-angle upper
@@ -13,6 +13,7 @@ from pathlib import Path
 import numpy as np
 from shapely.geometry import Polygon,box
 from shapely.ops import unary_union
+from archpipe.orientation import side_name
 from archpipe import solar
 from archpipe.concept import villa_landscape as L,render_support as S
 from archpipe.concept.garden_render_review import overhead_cover
@@ -62,7 +63,7 @@ def main():
     triangles,cover=enclosure(s,rect,L.GROUND)
     court=box(*rect);r=dict(client_name='North Garden',rect_m=rect,total_area_m2=court.area,covered_area_m2=cover.area,open_area_m2=court.difference(cover).area,cover_wkt=cover.wkt,excluded_roofed_strip_m=(-.373,-23.591,3.617,-20.351),furniture=[])
     balcony=box(-.123,-31.16032,3.617,-28.671)
-    bed=box(*L.BEDS['west'])
+    bed=box(*L.BEDS[side_name('-x')])
     r['bed']=dict(area_m2=bed.area,balcony_covered_m2=bed.intersection(balcony).area,all_cover_m2=bed.intersection(cover).area)
     r['balcony_cover_m2']=court.intersection(balcony).area
     r['sun_screen']=dict(latitude_deg=30.05,longitude_deg=31.0,north_bearing_deg=s['north']['model_y_bearing_deg'],timezone='UTC+02:00',opaque_architecture_only=True,weather_weighted=False)

@@ -146,7 +146,7 @@ class RenderStandard(unittest.TestCase):
                 Part(kind, m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
         # G1 removes the former north trellis because it occupied the full
         # east court. The retained west assembly still needs real members.
-        self.assertGreaterEqual(len(by_id["landscape-trellis-west"]["faces"]), 48)
+        self.assertGreaterEqual(len(by_id["landscape-trellis-north"]["faces"]), 48)
         cases = [m for m in SCENE["meshes"] if m["part_kind"] == "suitcase" and m["id"].startswith("furn-")]
         self.assertTrue(cases)
         for case in cases:
@@ -323,7 +323,7 @@ class RenderStandard(unittest.TestCase):
         from archpipe.concept import villa_landscape as LAND, revit_spec as RS, render_support as S
         sp = RS.build(VR.R.design("D1"))
         meshes, props, notes, plan = LAND.build(sp)
-        self.assertEqual(set(plan["paths"]), {"dining", "living-north", "living-east", "lounge-west", "study", "gate-link"})
+        self.assertEqual(set(plan["paths"]), {"dining", "living-east", "living-south", "lounge-north", "study", "gate-link"})
         for m in meshes:
             for face in m["faces"]:
                 for x, y, _ in face:
@@ -361,7 +361,7 @@ class RenderStandard(unittest.TestCase):
         self.assertTrue(all(p["position"][2] >= LAND.GROUND for p in props))
         self.assertEqual(S.unsupported(SCENE), [])
         self.assertEqual(S.blocked_openings(SCENE), [])
-        self.assertTrue(any("09:00-17:00" in n and "direct hours" in n for n in notes))   # round 3 per-bed sun screen
+        self.assertTrue(any("Hourly June scene ray-cast" in n and "UTC+02" in n for n in notes))   # round 3 per-bed sun screen
         self.assertTrue(any("Drip" in n or "drip" in n for n in notes))
 
     def test_lighting_spec_needs_no_render_ceiling_moves(self):

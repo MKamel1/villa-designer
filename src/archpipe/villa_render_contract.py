@@ -422,6 +422,10 @@ def validate_scene(scene: dict) -> list[str]:
         errors.extend(plant_form_findings(meshes))
         from .concept.garden_render_review import soil_visibility_findings
         errors.extend(soil_visibility_findings(scene))
+        from .orientation_guard import scene_findings as orientation_findings
+        errors.extend(orientation_findings(scene))
+        from .concept.garden_sun import scene_findings as garden_sun_findings
+        errors.extend(garden_sun_findings(scene))
         from .concept.villa_landscape import north_garden_scene_violations
         errors.extend("%s: %s" % f for f in north_garden_scene_violations(scene))
         from .concept.garden_swing import scene_findings as swing_findings
