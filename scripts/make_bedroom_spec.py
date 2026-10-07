@@ -18,7 +18,8 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'src'))
+sys.path.insert(0, str(ROOT / 'src'))
+from archpipe.execution_context import ContextError, project_context
 REQUIRED_ROOM = ("width", "depth", "ceiling_height", "wall_thickness")
 
 
@@ -75,6 +76,17 @@ def main(argv=None) -> int:
                     default=ROOT / "spec/bedroom-test.yaml")
     ap.add_argument("--out", type=Path, default=ROOT / "out/bedroom-spec.json")
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "make-bedroom-spec",
+            inputs=[a.spec],
+            modules=["yaml"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
 
     spec = convert(a.spec)
     a.out.parent.mkdir(parents=True, exist_ok=True)

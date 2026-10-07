@@ -30,8 +30,10 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 
+from archpipe.execution_context import ContextError, project_context
 from archpipe import photometry as ph
 from archpipe.lighting import Luminaire, point_illuminance
 from archpipe.stage_result import enforce_clean_verdict, write_stage_result
@@ -45,8 +47,16 @@ def main() -> int:
     ap.add_argument("--inset", type=float, default=150.0,
                     help="ignore a band at the wall face, mm")
     a = ap.parse_args()
-
-    rendered = json.loads(a.rendered.read_text(encoding="utf-8"))
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "compare-lux",
+            inputs=[a.rendered, a.extract],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     extract = json.loads(a.extract.read_text(encoding="utf-8"))
     boundary = extract['rooms'][0]['boundary']
     x0, x1 = min(p[0] for p in boundary), max(p[0] for p in boundary)

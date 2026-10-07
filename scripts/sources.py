@@ -16,6 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import sources as src  # noqa: E402
 
 DOC = ROOT / "docs" / "guidance" / "coverage-and-acquisition.md"
@@ -32,6 +33,17 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("cmd", choices=["list", "intake", "fetch-free", "status"])
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "sources",
+            inputs=[ROOT / "knowledge/library.json"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
+
     lib = src.load()
     if a.cmd == "list":
         write_doc(lib)

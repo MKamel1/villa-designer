@@ -5,10 +5,22 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'src'))
+from archpipe.execution_context import ContextError, project_context
 from archpipe.guidance import review_stage, stage_context, lookup_evidence, _indexed
 
 
 def main():
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "demo-guidance",
+            inputs=[ROOT / "knowledge/projects/villa-pilot.json"],
+            modules=["yaml", "shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     report = {'scope': 'Fictional design-guidance demonstration; no real gate approval',
               'villa': [], 'bedroom': []}
     for stage in range(8):

@@ -15,9 +15,10 @@ import json
 import sys
 from pathlib import Path
 
-from archpipe.concept import critic, generator as G, layout as L
-
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context
+from archpipe.concept import critic, generator as G, layout as L
 OUT = ROOT / "spec" / "concepts" / "pilot"
 DOC = ROOT / "docs" / "guidance" / "concepts-pilot.md"
 IMG = ROOT / "docs" / "guidance" / "concepts-pilot"
@@ -167,6 +168,17 @@ def main(argv=None) -> int:
     ap.add_argument("cmd", choices=["generate", "calibrate", "thermal"])
     ap.add_argument("-n", type=int, default=1500)
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "concept",
+            inputs=[ROOT / "knowledge/projects/villa-pilot.json"],
+            modules=["matplotlib", "yaml", "shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     return generate(a.n) if a.cmd == "generate" else thermal() if a.cmd == "thermal" else calibrate()
 
 

@@ -24,6 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe.luminaires import catalogue as cat  # noqa: E402
 from archpipe.luminaires import library as lib    # noqa: E402
 
@@ -89,6 +90,15 @@ def main(argv=None) -> int:
         s.add_argument("sku", nargs="+")
         s.add_argument("--lamp-set", type=int, default=0)
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "luminaires",
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
 
     if a.cmd == "import":
         rep = lib.import_inbox()

@@ -238,11 +238,37 @@ def write_record(context: dict, path: Path) -> None:
         raise ContextError(f"cannot write context record {path}: {exc}") from exc
 
 
-def project_context(root: Path, script: Path, name: str, *, tools=(), modules=(), required_modules=()) -> dict:
+def project_context(
+    root: Path,
+    script: Path,
+    name: str,
+    *,
+    inputs=(),
+    output: Path | None = None,
+    temp: Path | None = None,
+    tools=(),
+    modules=(),
+    required_modules=(),
+) -> dict:
     """Preflight a project entry point and configure its own process."""
-    module_reqs = modules or required_modules
-    context = preflight(root=root, scripts=[script], output=root / "out",
-                        temp=root / "out/tmp", tools=tools, modules=module_reqs)
+    module_reqs = list(modules or required_modules)
+    test_extra = os.environ.get("ARCHPIPE_TEST_EXTRA_MODULES")
+    if test_extra:
+        for m in test_extra.split(","):
+            m = m.strip()
+            if m and m not in module_reqs:
+                module_reqs.append(m)
+    out_dir = output if output is not None else (root / "out")
+    tmp_dir = temp if temp is not None else (root / "out/tmp")
+    context = preflight(
+        root=root,
+        scripts=[script],
+        inputs=inputs,
+        output=out_dir,
+        temp=tmp_dir,
+        tools=tools,
+        modules=module_reqs,
+    )
     os.environ.update(context["environment"])
     tempfile.tempdir = context["temporary_directory"]
     write_record(context, Path(context["output_directory"]) / (name + "-execution-context.json"))

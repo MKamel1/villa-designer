@@ -17,7 +17,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context
 
 W, D = 4200.0, 3600.0          # internal, mm
 WALL_T = 200.0
@@ -85,6 +90,15 @@ def main() -> int:
                     help="IES folder path ON THE RENDERING MACHINE")
     ap.add_argument("--out", type=Path, default=Path("out/bedroom.json"))
     a = ap.parse_args()
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "make-bedroom-extract",
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
 
     data = build(a.ies_dir)
     a.out.parent.mkdir(parents=True, exist_ok=True)

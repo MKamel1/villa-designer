@@ -15,6 +15,11 @@ import re
 import shlex
 import subprocess
 import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context
 
 HOST = "ai-workstation"
 REPO = "~/ai-projects/research-system-rag"
@@ -62,6 +67,15 @@ def main(argv=None) -> int:
     ap.add_argument("query", nargs="+")
     ap.add_argument("-k", type=int, default=8)
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "semantic",
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     hits = search(" ".join(a.query), a.k)
     for h in hits:
         print(f"  {h['title']}\n    PDF page {h['pdf_page']} | {h['section']}\n    {h['text']}")

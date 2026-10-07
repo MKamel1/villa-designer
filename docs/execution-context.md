@@ -20,39 +20,39 @@ Before Phase 1, none of these entry points used a complete shared context. The t
 
 | Entry point | Current coverage |
 |---|---|
-| `scripts/archpipe_mcp.py` | Phase 2: no shared preflight |
-| `scripts/build_sheet.py` | Phase 2: no shared preflight |
-| `scripts/capture_plot_prompts.py` | Phase 2: no shared preflight |
-| `scripts/check_bedroom.py` | Phase 2: no shared preflight |
-| `scripts/compare_lux.py` | Phase 2: no shared preflight |
-| `scripts/concept.py` | Phase 2: no shared preflight |
+| `scripts/archpipe_mcp.py` | Skipped in Phase 2 Batch A: long-running FastMCP stdio server; unmapped mcp package |
+| `scripts/build_sheet.py` | Skipped in Phase 2 Batch A: headless AutoCAD boundary (acad._run) |
+| `scripts/capture_plot_prompts.py` | Skipped in Phase 2 Batch A: headless AutoCAD boundary (acad._run) |
+| `scripts/check_bedroom.py` | Shared: launch preflight; declared inputs (spec, extract); requirements check (yaml); invalid context exits 2 |
+| `scripts/compare_lux.py` | Shared: launch preflight; declared inputs (rendered, extract); invalid context exits 2 |
+| `scripts/concept.py` | Shared: launch preflight; declared inputs (pilot project); requirements check (matplotlib, yaml, shapely); invalid context exits 2 |
 | `scripts/configure_assistants.py` | Phase 2: no shared preflight |
 | `scripts/cubicasa_calibrate.py` | Phase 2: no shared preflight |
 | `scripts/delegate_implementation.py` | Phase 2: no shared preflight |
-| `scripts/demo_bedroom_lighting.py` | Phase 2: no shared preflight |
-| `scripts/demo_guidance.py` | Phase 2: no shared preflight |
-| `scripts/export_bedroom_glb.py` | Phase 2: no shared preflight |
+| `scripts/demo_bedroom_lighting.py` | Shared: launch preflight in main(); safe import without side effects; invalid context exits 2 |
+| `scripts/demo_guidance.py` | Shared: launch preflight; declared inputs (pilot project); requirements check (yaml, shapely); invalid context exits 2 |
+| `scripts/export_bedroom_glb.py` | Shared: launch preflight; declared inputs (input glb/mesh); invalid context exits 2 |
 | `scripts/fetch_asset_library.py` | Phase 2: no shared preflight |
 | `scripts/fetch_families.py` | Phase 2: no shared preflight |
 | `scripts/handoff.py` | Phase 2: no shared preflight |
-| `scripts/knowledge.py` | Phase 2: no shared preflight |
-| `scripts/lighting_report.py` | Phase 2: no shared preflight |
-| `scripts/luminaire_demo.py` | Phase 2: no shared preflight |
-| `scripts/luminaires.py` | Phase 2: no shared preflight |
-| `scripts/make_bedroom_extract.py` | Phase 2: no shared preflight |
-| `scripts/make_bedroom_spec.py` | Phase 2: no shared preflight |
-| `scripts/make_render_input.py` | Phase 2: no shared preflight |
+| `scripts/knowledge.py` | Shared: launch preflight; requirements check (pymupdf); invalid context exits 2 |
+| `scripts/lighting_report.py` | Shared: launch preflight; declared inputs (input); invalid context exits 2 |
+| `scripts/luminaire_demo.py` | Skipped in Phase 2 Batch A: raw pyRevit subprocess runner handled via run_bedroom |
+| `scripts/luminaires.py` | Shared: launch preflight; context record; invalid context exits 2 |
+| `scripts/make_bedroom_extract.py` | Shared: launch preflight; context record; invalid context exits 2 |
+| `scripts/make_bedroom_spec.py` | Shared: launch preflight; declared inputs (spec); requirements check (yaml); invalid context exits 2 |
+| `scripts/make_render_input.py` | Shared: launch preflight; declared inputs (extract, spec); requirements check (yaml); invalid context exits 2 |
 | `scripts/preflight.py` | thin shared preflight command; context record; invalid context exits 2 |
 | `scripts/preview_furniture_orientation.py` | Phase 2: no shared preflight |
-| `scripts/products.py` | Phase 2: no shared preflight |
+| `scripts/products.py` | Shared: launch preflight; requirements check (PIL); invalid context exits 2 |
 | `scripts/products_worker.py` | Phase 2: no shared preflight |
 | `scripts/render_hyperreal.py` | partial: worker environment paths and render quality checks |
 | `scripts/render_remote.py` | partial: absolute scene script, SSH status and returned artifacts |
-| `scripts/review_model.py` | Phase 2: no shared preflight |
+| `scripts/review_model.py` | Shared: launch preflight; declared inputs (extract); requirements check (shapely); invalid context exits 2 |
 | `scripts/run_bedroom.py` | shared preflight and checked stage launcher; pyRevit version; absolute scripts; fresh artifacts |
 | `scripts/run_tests.py` | shared preflight; declared requirements check (`requirements.txt`); focused modules; accessible Windows temp allocator; exit-status result record |
-| `scripts/semantic.py` | Phase 2: no shared preflight |
-| `scripts/sources.py` | Phase 2: no shared preflight |
+| `scripts/semantic.py` | Shared: launch preflight; context record; invalid context exits 2 |
+| `scripts/sources.py` | Shared: launch preflight; declared inputs (library.json); invalid context exits 2 |
 | `scripts/swiss_calibrate.py` | Phase 2: no shared preflight |
 | `scripts/swiss_stack_calibrate.py` | Phase 2: no shared preflight |
 | `scripts/sync_agent_assets.py` | Phase 2: no shared preflight |
@@ -118,6 +118,21 @@ Native Revit Python inventory:
 - **Incident (2026-10-06, lead)**: The Windows full suite was launched with system interpreter `C:\Python314\python.exe` instead of the project venv `C:\Users\mmbka\arch-pipeline\.venv\Scripts\python.exe`. The Python version check in `archpipe.execution_context.preflight` passed (Python 3.14 is supported), but the system interpreter lacked project packages. Consequently, 24 test modules failed to import (`ModuleNotFoundError: No module named 'shapely'`, from `src/archpipe/rules.py:47` and `src/archpipe/site.py:19`), and `scripts/verify.py` crashed at top-level import before preflight ran. 31 minutes were wasted with output resembling code failures.
 - **Resolution**: Moved from Phase 2 scope to Done. `execution_context.preflight` and `project_context` now accept declared module dependencies (`modules` / `required_modules`) and test them using `importlib.util.find_spec` (avoiding side-effect imports). `requirements_import_names` derives import names explicitly from `requirements.txt` via `DISTRIBUTION_TO_IMPORT` (e.g., `shapely` -> `shapely`, `PyYAML` -> `yaml`, `pillow` -> `PIL`, `pymupdf` -> `pymupdf`). Missing dependencies trigger the invalid-context path (exit 2) with a single unambiguous message reporting missing modules, `sys.executable`, and the root `.venv` hint. `scripts/run_tests.py` and `scripts/verify.py` run this check before importing third-party or domain modules (`verify.py` bootstraps preflight before `yaml` and `archpipe.rules`). `verify.py` unconditionally asserts that the context records checked dependencies and that `shapely` is present.
 
+### Completed Phase 2 item: Phase 2 Batch A entry points
+- **Scope**: Migrated 16 command-line entry points to the shared `project_context` launch preflight: `check_bedroom.py`, `compare_lux.py`, `concept.py`, `demo_bedroom_lighting.py`, `demo_guidance.py`, `export_bedroom_glb.py`, `knowledge.py`, `lighting_report.py`, `luminaires.py`, `make_bedroom_extract.py`, `make_bedroom_spec.py`, `make_render_input.py`, `products.py`, `review_model.py`, `semantic.py`, `sources.py`.
+- **Preflight and import safety**: Each script invokes `project_context` strictly within its CLI entry point (`main()` or `__main__` guard) and never at module top level. Modules can be imported safely by tests and tools without preflight side effects. `demo_bedroom_lighting.py` was refactored from top-level script execution into a guarded `main()`, removing top-level Revit IES file dependencies.
+- **Fail-closed contract**: Declared inputs and required third-party packages (mapped from `requirements.txt` via `requirements_import_names`) are verified before execution. Any missing file or module raises `ContextError`, which each script catches to print `PREFLIGHT FAILED: <reason>` to stderr and exit with code 2 without tracebacks.
+- **Skipped scripts**:
+  - `scripts/archpipe_mcp.py`: Long-running stdio FastMCP server with indefinite lifecycle; `mcp` is not in project dependencies (`requirements.txt`).
+  - `scripts/build_sheet.py`: Headless AutoCAD console runner (`src/archpipe/acad.py::_run`); belongs to AutoCAD execution boundary.
+  - `scripts/capture_plot_prompts.py`: Headless AutoCAD script runner; belongs to AutoCAD boundary.
+  - `scripts/luminaire_demo.py`: Raw pyRevit 6.5.5 runner without `run_checked` / `Tool` contract; pyRevit runs are managed via `scripts/run_bedroom.py`.
+- **Proofs**: Added 4 tests in `tests/test_execution_context.py`:
+  - AST check verifying that all 16 scripts invoke preflight inside `main()` or `__main__` and never at module top level.
+  - Import-isolation check verifying that importing all 16 modules does not invoke preflight.
+  - Subprocess exit-2 check on `scripts/check_bedroom.py` when a dependency is missing.
+  - Subprocess exit-2 check on `scripts/make_render_input.py` when a declared input file is missing.
+
 ## Defect controls and proving tests
 
 Guard registry: `execution-context-implicit-phase1` -> `execution_context.preflight`, `run_checked`, the four migrated entry points and two unconditional `verify.py` checks -> `tests/test_execution_context.py`, `tests/test_villa_render_scene.py`, `tests/test_villa_scene_provenance.py` -> launch boundary.
@@ -149,3 +164,5 @@ Canonical workflow follow-up: `.agents/skills` is read-only in this session and 
 - Launch-directory correction (2026-10-05): the earlier equality requirement was withdrawn. Focused `scripts/run_tests.py tests.test_pipeline_contracts tests.test_execution_context` passed 20 tests, exit 0; `scripts/verify.py` reported ALL PASS, exit 0. The previous missing-library result above is historical, not current verification evidence. See `execution-context-launch-directory` in `docs/LEARNINGS.md` for cause, controls and proving tests. Full suite not run; no commit.
 
 - Interpreter-environment correction (2026-10-06): Phase 2 item "interpreter environment, not just version" completed after lead's Windows full suite incident. `scripts/run_tests.py` and `scripts/verify.py` enforce declared module dependency preflights before importing third-party or domain packages. `tests/test_execution_context.py` reproduces the missing-shapely incident by value and verifies subprocess exit code 2 on missing dependencies. See `execution-context-wrong-interpreter` in `docs/LEARNINGS.md`.
+
+- Phase 2 Batch A entry points (2026-10-07): Migrated 16 entry points to `project_context` with declared inputs and requirements; skipped 4 scripts at distinct boundaries (`archpipe_mcp.py`, `build_sheet.py`, `capture_plot_prompts.py`, `luminaire_demo.py`). AST, import-isolation, and subprocess exit-2 proofs in `tests/test_execution_context.py`.

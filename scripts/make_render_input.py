@@ -27,6 +27,7 @@ from pathlib import Path
 import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import photometry as ph                        # noqa: E402
 from archpipe.fixture_source import photometry_matches_fitting, source_point  # noqa: E402
 
@@ -66,6 +67,17 @@ def main(argv=None) -> int:
                     help="IES folder path ON THE RENDERING MACHINE")
     ap.add_argument("--out", type=Path, default=ROOT / "out/bedroom-render.json")
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "make-render-input",
+            inputs=[a.extract, a.spec],
+            modules=["yaml"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
 
     local_ies = ph.revit_ies_dir()
     got = json.loads(a.extract.read_text(encoding="utf-8"))

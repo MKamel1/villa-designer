@@ -22,6 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import photometry as ph                       # noqa: E402
 from archpipe.lighting import (Luminaire, Surfaces, converged,   # noqa: E402
                                heatmap_svg, interreflected_estimate,
@@ -70,6 +71,16 @@ def main(argv=None) -> int:
     ap.add_argument("--json", type=Path,
                     default=ROOT / "out/bedroom-lighting.json")
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "lighting-report",
+            inputs=[a.input],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
 
     data = json.loads(a.input.read_text(encoding="utf-8"))
     ies_dir = ph.revit_ies_dir()

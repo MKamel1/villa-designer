@@ -26,6 +26,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe.fixture_source import source_point             # noqa: E402
 from archpipe.stage_result import enforce_clean_verdict, write_stage_result  # noqa: E402
 
@@ -133,10 +134,16 @@ def main(argv=None) -> int:
     ap.add_argument("--extract", type=Path,
                     default=ROOT / "out/bedroom-from-revit.json")
     a = ap.parse_args(argv)
-
-    if not a.extract.is_file():
-        print("No extract at %s -- run build_bedroom.py then extract_model.py"
-              % a.extract)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "check-bedroom",
+            inputs=[a.spec, a.extract],
+            modules=["yaml"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
         return 2
 
     from archpipe.luminaires.install import load_spec

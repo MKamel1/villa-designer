@@ -20,6 +20,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context
 from render_remote import _ssh
 from workstation import deploy, digest
 
@@ -30,9 +31,16 @@ def main():
     ap.add_argument("--input", type=Path, default=ROOT / "out/bedroom-render.json")
     ap.add_argument("--out", type=Path, default=ROOT / "out/bedroom.glb")
     a = ap.parse_args()
-
-    if not a.input.is_file():
-        ap.error(f"{a.input} not found -- run scripts/make_render_input.py first")
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "export-bedroom-glb",
+            inputs=[a.input],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
 
     root, release, release_id = deploy(a.host)
 

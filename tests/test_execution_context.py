@@ -12,6 +12,24 @@ from archpipe.execution_context import (ContextError, Tool, absolute, preflight,
                                         resolve_tool, run_checked)
 
 ROOT = Path(__file__).resolve().parents[1]
+BATCH_A_MIGRATED_SCRIPTS = (
+    "check_bedroom.py",
+    "compare_lux.py",
+    "concept.py",
+    "demo_bedroom_lighting.py",
+    "demo_guidance.py",
+    "export_bedroom_glb.py",
+    "knowledge.py",
+    "lighting_report.py",
+    "luminaires.py",
+    "make_bedroom_extract.py",
+    "make_bedroom_spec.py",
+    "make_render_input.py",
+    "products.py",
+    "review_model.py",
+    "semantic.py",
+    "sources.py",
+)
 
 
 class ExecutionContextTests(unittest.TestCase):
@@ -313,6 +331,132 @@ class ExecutionContextTests(unittest.TestCase):
         mapped = requirements_import_names(ROOT / "requirements.txt")
         expected = ["ezdxf", "matplotlib", "PIL", "pymupdf", "yaml", "shapely", "ifcopenshell"]
         self.assertEqual(mapped, expected)
+
+    def test_batch_a_scripts_call_preflight_in_main_and_not_at_module_top_level(self):
+        import ast
+
+        for script_name in BATCH_A_MIGRATED_SCRIPTS:
+            with self.subTest(script=script_name):
+                script_path = ROOT / "scripts" / script_name
+                tree = ast.parse(script_path.read_text(encoding="utf-8"))
+
+                preflight_calls_in_main_or_cli = 0
+                preflight_calls_at_module_top_level = 0
+
+                for stmt in tree.body:
+                    if isinstance(stmt, ast.FunctionDef) and stmt.name == "main":
+                        for node in ast.walk(stmt):
+                            if isinstance(node, ast.Call):
+                                fn = node.func
+                                if (isinstance(fn, ast.Name) and fn.id in ("project_context", "preflight")) or \
+                                   (isinstance(fn, ast.Attribute) and fn.attr in ("project_context", "preflight")):
+                                    preflight_calls_in_main_or_cli += 1
+                    elif isinstance(stmt, ast.If):
+                        is_main_guard = False
+                        if isinstance(stmt.test, ast.Compare):
+                            for comp_node in ast.walk(stmt.test):
+                                if isinstance(comp_node, ast.Constant) and comp_node.value == "__main__":
+                                    is_main_guard = True
+                        if is_main_guard:
+                            for node in ast.walk(stmt):
+                                if isinstance(node, ast.Call):
+                                    fn = node.func
+                                    if (isinstance(fn, ast.Name) and fn.id in ("project_context", "preflight")) or \
+                                       (isinstance(fn, ast.Attribute) and fn.attr in ("project_context", "preflight")):
+                                        preflight_calls_in_main_or_cli += 1
+                        else:
+                            for node in ast.walk(stmt):
+                                if isinstance(node, ast.Call):
+                                    fn = node.func
+                                    if (isinstance(fn, ast.Name) and fn.id in ("project_context", "preflight")) or \
+                                       (isinstance(fn, ast.Attribute) and fn.attr in ("project_context", "preflight")):
+                                        preflight_calls_at_module_top_level += 1
+                    else:
+                        for node in ast.walk(stmt):
+                            if isinstance(node, ast.Call):
+                                fn = node.func
+                                if (isinstance(fn, ast.Name) and fn.id in ("project_context", "preflight")) or \
+                                   (isinstance(fn, ast.Attribute) and fn.attr in ("project_context", "preflight")):
+                                    preflight_calls_at_module_top_level += 1
+
+                self.assertEqual(
+                    preflight_calls_at_module_top_level,
+                    0,
+                    f"{script_name} must not call preflight at module top level",
+                )
+                self.assertGreater(
+                    preflight_calls_in_main_or_cli,
+                    0,
+                    f"{script_name} must call preflight inside main() or __main__ guard",
+                )
+
+    def test_importing_batch_a_scripts_does_not_run_preflight(self):
+        import importlib.util
+        import archpipe.execution_context as ec
+
+        def fail_preflight(*args, **kwargs):
+            raise AssertionError("preflight was called at import time")
+
+        def fail_project_context(*args, **kwargs):
+            raise AssertionError("project_context was called at import time")
+
+        with patch.object(ec, "preflight", side_effect=fail_preflight), \
+             patch.object(ec, "project_context", side_effect=fail_project_context):
+            for script_name in BATCH_A_MIGRATED_SCRIPTS:
+                with self.subTest(script=script_name):
+                    script_path = ROOT / "scripts" / script_name
+                    mod_name = "test_import_" + script_path.stem
+                    spec = importlib.util.spec_from_file_location(mod_name, script_path)
+                    self.assertIsNotNone(spec)
+                    self.assertIsNotNone(spec.loader)
+                    mod = importlib.util.module_from_spec(spec)
+                    try:
+                        sys.modules[mod_name] = mod
+                        spec.loader.exec_module(mod)
+                    finally:
+                        sys.modules.pop(mod_name, None)
+
+    def test_check_bedroom_subprocess_exits_2_on_missing_dependency(self):
+        env = dict(os.environ)
+        env["ARCHPIPE_TEST_EXTRA_MODULES"] = "archpipe_nonexistent_mod_c9x"
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/check_bedroom.py")],
+            env=env,
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("PREFLIGHT FAILED:", result.stderr)
+        self.assertIn("archpipe_nonexistent_mod_c9x", result.stderr)
+        self.assertTrue(sys.executable in result.stderr or str(Path(sys.executable).resolve()) in result.stderr)
+        self.assertIn("use the project environment", result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+        lines = [ln for ln in result.stderr.strip().splitlines() if ln.strip()]
+        self.assertEqual(len(lines), 1)
+
+    def test_make_render_input_subprocess_exits_2_on_missing_input(self):
+        missing_input = "out/nonexistent_extract_test_c9x.json"
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(ROOT / "scripts/make_render_input.py"),
+                "--extract",
+                missing_input,
+                "--ies-dir",
+                "assets/ies",
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 2)
+        self.assertIn("PREFLIGHT FAILED:", result.stderr)
+        self.assertIn("missing file", result.stderr)
+        self.assertIn("nonexistent_extract_test_c9x.json", result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+        lines = [ln for ln in result.stderr.strip().splitlines() if ln.strip()]
+        self.assertEqual(len(lines), 1)
 
 
 if __name__ == "__main__":

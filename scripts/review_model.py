@@ -4,7 +4,9 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'src'))
+from archpipe.execution_context import ContextError, project_context
 from archpipe.review_extract import review_model
 
 
@@ -14,6 +16,17 @@ def main():
     ap.add_argument('--scope', choices=['room', 'dwelling'], default='dwelling')
     ap.add_argument('--out', type=Path)
     a = ap.parse_args()
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "review-model",
+            inputs=[a.extract],
+            modules=["shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     result = review_model(json.loads(a.extract.read_text(encoding='utf-8')), scope=a.scope)
     if a.out:
         a.out.parent.mkdir(parents=True, exist_ok=True)

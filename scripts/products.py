@@ -21,6 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import fetch  # noqa: E402
 from archpipe.products import sources, store  # noqa: E402
 
@@ -266,6 +267,16 @@ def main(argv=None) -> int:
     ap.add_argument("--all", action="store_true", help="include unverified catalogue rows")
     ap.add_argument("--limit", type=int, default=30)
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "products",
+            modules=["PIL"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     if a.cmd == "index":
         t, m = sources.polyhaven("textures"), sources.polyhaven("models")
         store.upsert_items(t + m)

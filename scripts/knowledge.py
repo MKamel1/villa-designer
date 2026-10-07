@@ -21,6 +21,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import knowledge_index as k  # noqa: E402
 
 
@@ -32,6 +33,16 @@ def main(argv=None) -> int:
     ap.add_argument("--limit", type=int, default=10)
     ap.add_argument("--count", type=int, default=1)
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "knowledge",
+            modules=["pymupdf"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     if a.cmd == "build":
         k.build()
         return 0
