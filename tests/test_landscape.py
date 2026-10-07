@@ -1,5 +1,6 @@
 """G1/G2 measured candidate and frozen physical failures; export remains fail closed."""
 import copy
+import gzip
 import json
 from math import hypot
 from pathlib import Path
@@ -58,32 +59,23 @@ class LandscapeGuards(unittest.TestCase):
 
     def test_g2f_client_retained_furniture_preserves_all_garden_guards(self):
         frozen=json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        # G4 explicitly supersedes furniture retention. Preserve the real
+        # placements as historical failure inputs instead of reintroducing them.
         old=next(p for p in frozen['furniture'] if p['asset']=='outdoor_table_chair_set_01')
-        current=next(p for p in self.props if p['asset']==old['asset'])
-        self.assertEqual(current, old)
+        before=json.loads(gzip.decompress((Path(__file__).parent/'fixtures/garden-g4-before.json.gz').read_bytes()))
+        self.assertEqual(old,next(p for p in before['props'] if p['asset']==old['asset']))
+        self.assertFalse(any(p['asset'] in ('outdoor_table_chair_set_01','sf_egg_chair') for p in self.props))
         self.assertEqual(L.candidate_violations(self.meshes,self.props,self.plan,self.lay),[])
-        self.assertTrue('relocated from the east garden; client to confirm' in current['label'])
-        swing=next(p for p in self.props if p['asset']=='sf_egg_chair')
-        self.assertEqual(swing, next(p for p in frozen['furniture'] if p['asset']=='sf_egg_chair'))
-        # The tempting open swing point physically enters the bistro envelope.
-        bad=copy.deepcopy(swing)
-        rect=L._rect(bad);bad['position'][0]+=1.0-(rect[0]+rect[2])/2
-        bad['position'][1]+=-24.65-(rect[1]+rect[3])/2
-        self.assertTrue(L.swing_violations(bad,self.props+self.plan['objects']+self.plan['plants']))
 
     def test_g2f_real_open_swing_candidate_cannot_use_fence_thickness(self):
         frozen = json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())['fence_candidate']
         candidate = frozen['swing']
-        old_items = self.props+self.plan['objects']+self.plan['plants']+[
-            dict(id='bed-'+name, rect=rect) for name, rect in self.plan['beds'].items()]
+        before=json.loads(gzip.decompress((Path(__file__).parent/'fixtures/garden-g4-before.json.gz').read_bytes()))
+        old_items = before['props']+before['objects']+[
+            dict(id='bed-'+name, rect=rect) for name, rect in before['beds'].items()]
         self.assertEqual(L.swing_violations(candidate, old_items), [])
         findings = L.swing_violations(candidate, old_items+frozen['boundary_obstacles'])
         self.assertIn(('fence-street', 'swing envelope'), findings)
-        placed = [candidate if p['id'] == candidate['id'] else p for p in self.props]
-        self.assertEqual(L.candidate_violations(self.meshes, placed,
-                         dict(self.plan, boundary_obstacles=[]), self.lay), [])
-        self.assertIn(('fence-street', 'swing envelope'),
-                      L.candidate_violations(self.meshes, placed, self.plan, self.lay))
         self.assertEqual(L.candidate_violations(self.meshes, self.props, self.plan, self.lay), [])
         renamed = copy.deepcopy(frozen['boundary_obstacles'])
         for item in renamed:
@@ -95,7 +87,8 @@ class LandscapeGuards(unittest.TestCase):
         data = L._plant_data()
         self.assertEqual(set(data), {"Aspidistra elatior", "Ixora coccinea", "Strelitzia reginae",
             "Callistemon citrinus", "Ursinia anthemoides", "Salvia rosmarinus Prostrata Group",
-            "Aloe vera", "Plumeria rubra", "Trachelospermum jasminoides", "Bougainvillea glabra"})
+            "Aloe vera", "Plumeria rubra", "Trachelospermum jasminoides", "Bougainvillea glabra", "Cissus alata",
+            "Rhapis excelsa", "Fatsia japonica", "Chlorophytum comosum", "Ophiopogon japonicus", "Liriope muscari"})
         for row in data.values():
             self.assertEqual(row["egypt_performance"]["status"], "UNVERIFIED")
             self.assertEqual(row["root_behaviour_over_basement_slab"]["status"], "UNVERIFIED")
@@ -111,14 +104,14 @@ class LandscapeGuards(unittest.TestCase):
         # can silently restore the prior height. Use an existing approved asset.
         record = json.loads(L.PALETTE.read_text())
         ixora = next(r for r in record["species"] if r["species"] == "Ixora coccinea")
-        ixora["placement_assumptions"]["sf_ixora"]["contexts"]["landscape-west-mid-00"]["height_m"] = .7
+        ixora["placement_assumptions"]["sf_ixora"]["contexts"]["landscape-top-north-ixora-0"]["height_m"] = .7
         from tempfile import TemporaryDirectory
         with TemporaryDirectory() as tmp:
             path = Path(tmp)/"palette.json"
             path.write_text(json.dumps(record))
             with patch.object(L, "PALETTE", path):
                 _, props, _, _ = L.review_candidate(self.spec, self.lay)
-        changed = next(p for p in props if p["id"] == "landscape-west-mid-00")
+        changed = next(p for p in props if p["id"] == "landscape-top-north-ixora-0")
         mn, mx = L.PROP_BOUNDS[changed["asset"]]
         self.assertAlmostEqual(changed["scale"]*(mx[1]-mn[1]), .7)
         source = Path(L.__file__).read_text()
@@ -151,7 +144,7 @@ class LandscapeGuards(unittest.TestCase):
         duplicate = dict(self.tree, id="second-tree")
         self.assertTrue(L.east_content_violations(self.meshes, self.props+[duplicate]))
         furniture = [p for p in self.props if p["asset"] in ("sf_egg_chair", "outdoor_table_chair_set_01")]
-        self.assertEqual(len(furniture), 2)
+        self.assertEqual(len(furniture), 0)
         self.assertTrue(all(L._rect(p)[2] < L.EAST[0] for p in furniture))
         self.assertTrue(all("relocated from the east garden; client to confirm" in p["label"] for p in furniture))
 
@@ -321,11 +314,11 @@ class LandscapeGuards(unittest.TestCase):
                 self.assertEqual(len(drift),3)
                 self.assertEqual(len({p["species"] for p in drift}),1)
         by_id={m["id"]:m for m in self.meshes}
-        self.assertEqual(by_id["landscape-climber-west"]["species"],"Trachelospermum jasminoides")
+        self.assertEqual(by_id["landscape-climber-west"]["species"],"Cissus alata")
         self.assertEqual(by_id["landscape-climber-north"]["species"],"Bougainvillea glabra")
         self.assertGreater(len(L.direct_sun_hours(18.75,-20.641)),len(L.direct_sun_hours(-.123,-24.65)))
         pots=[m for m in self.meshes if m["part_kind"]=="planter" and "door-pot" in m["id"]]
-        self.assertEqual(len(pots),6)
+        self.assertEqual(len(pots),4)
         for pot in pots:
             self.assertEqual(pot["material"],"terracotta-red-glaze")
             self.assertAlmostEqual(min(q[2] for f in pot["faces"] for q in f),L.GROUND)
@@ -391,7 +384,7 @@ class LandscapeGuards(unittest.TestCase):
 
     def test_procedural_clumps_have_recorded_size_and_mutations_fail(self):
         clumps=[m for m in self.meshes if m["part_kind"]=="plant-clump"]
-        self.assertEqual(len(clumps),23)
+        self.assertEqual(len(clumps),30)
         self.assertEqual(L.dimension_violations(clumps), [])
         for source in clumps[:2]:
             altered=copy.deepcopy(source)
@@ -434,9 +427,7 @@ class LandscapeGuards(unittest.TestCase):
         chair=dict(id="draft-chair",rect=(x1+.05,y0,x1+.25,y1))
         self.assertTrue(L.swing_violations(swing,[chair]))
         self.assertEqual(L.swing_violations(swing,[swing]), [])
-        self.assertIsNotNone(self.plan["swing"])
-        self.assertEqual(L.swing_violations(self.plan["swing"],self.props+self.plan["objects"]+self.plan["plants"]+
-            [dict(id="bed-"+name,rect=rect) for name,rect in self.plan["beds"].items()]), [])
+        self.assertIsNone(self.plan["swing"])
 
     def test_bench_real_seat_height_and_old_slab_fails(self):
         self.assertEqual(L.bench_violations(self.props), [])

@@ -267,20 +267,19 @@ class ChosenViews(unittest.TestCase):
         self.assertEqual(west['camera']['position'][2],-1.65)
         self.assertEqual(west['camera']['target'][2],-1.65)
         self.assertEqual(views.camera_proximity_violations(west,scene,ITEMS),[])
-        for prefix in ('landscape-bed-west','landscape-west-back','landscape-west-mid',
-                       'landscape-west-front','landscape-trellis-west','landscape-climber-west',
-                       'landscape-door-pot-lounge-west','landscape-door-pot-planter-lounge-west',
-                       'landscape-west-bistro','landscape-egg-swing'):
-            owner=by["v37-west-court-bistro"] if prefix in ("landscape-west-bistro", "landscape-trellis-west", "landscape-climber-west") else west
-            self.assertIn(prefix,owner["subjects"])
-            self.assertEqual(views.subject_mesh_frame_violations(owner,scene,prefix),[])
+        for vid in ('v36-west-court','v37-west-court-bistro','v38-north-garden-floor-bed'):
+            for prefix in by[vid]['subjects']:
+                self.assertEqual(views.subject_mesh_frame_violations(by[vid],scene,prefix),[])
+        self.assertEqual(set(by['v38-north-garden-floor-bed']['subjects']),
+                         {'landscape-bed-west','landscape-west-back','landscape-west-mid','landscape-west-front','landscape-west-edge'})
+        self.assertFalse(any(p['asset'] in ('outdoor_table_chair_set_01','sf_egg_chair') for p in scene['props']))
         bad=deepcopy(west)
         # Reverse the current sightline. The former absolute target points
         # toward the swing once the lens moves from the sister side to the
         # required open-yard side, so it is no longer an adverse case.
         position, target = bad['camera']['position'], bad['camera']['target']
         bad['camera']['target']=[2*position[0]-target[0], 2*position[1]-target[1], position[2]]
-        self.assertTrue(views.subject_mesh_frame_violations(bad,scene,'landscape-egg-swing'))
+        self.assertTrue(views.subject_mesh_frame_violations(bad,scene,west['subjects'][0]))
         for vid in ('v07-terrace-dusk','v19-garden-facade','v25-top-garden-gate',
                     'v26-top-garden-north','v27-north-garden-above','v28-north-garden-below'):
             for subject in by[vid]['subjects']:
@@ -344,6 +343,15 @@ class ChosenViews(unittest.TestCase):
         # retirement/reordering; selecting a list tail silently lost v25.
         expected_prefixes = ["v%02d" % n for n in range(25, 35)]
         by_prefix = {v["id"].split("-")[0]: v for v in scene["views"]}
+        old_notes=json.loads((Path(__file__).parent/'fixtures/garden-g4-captions-before.json').read_text())
+        self.assertNotIn('photographic',str(old_notes[1]['caption_notes']))
+        self.assertIn('whole ground-level bed',str(old_notes[2]['caption_notes']))
+        for prefix in ('v36','v37','v38'):
+            notes=' '.join(by_prefix[prefix]['caption_notes'])
+            self.assertIn('Authored botanical appearances ASSUMED',notes)
+            self.assertIn('photographic likeness, procurement and Egypt nursery performance UNVERIFIED',notes)
+        self.assertIn('near corner is partly screened',str(by_prefix['v38']['caption_notes']))
+        self.assertNotIn('complete',by_prefix['v38']['title'])
         self.assertTrue(set(expected_prefixes).issubset(by_prefix))
         additions = [by_prefix[prefix] for prefix in expected_prefixes]
         self.assertEqual([v["id"].split("-")[0] for v in additions],
@@ -425,3 +433,17 @@ class ChosenViews(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class G4CameraPhysicalContents(unittest.TestCase):
+    def test_g4_ground_plants_cannot_bypass_lens_clearance(self):
+        from scripts.villa_render_views import camera_proximity_violations
+        from archpipe.concept import villa_render as V
+        scene=V.build(views=[])
+        source=deepcopy(next(m for m in scene['meshes'] if m.get('species')=='Rhapis excelsa'))
+        source['id']='another-ground-fan'
+        view=deepcopy(next(v for v in V.VIEWS(resolve=False) if v['id'].startswith('v36')))
+        view['camera']['position']=[source['center'][0],source['center'][1],source['root_z_m']+1.35]
+        self.assertTrue(camera_proximity_violations(view,dict(meshes=[source],props=[]),{}))
+        view['camera']['position'][0]+=5
+        self.assertEqual(camera_proximity_violations(view,dict(meshes=[source],props=[]),{}),[])

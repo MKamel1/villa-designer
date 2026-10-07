@@ -55,10 +55,24 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      Ground-only finishes cannot occur on downward faces (normal z < -0.7,
      where z is vertical). Closed ground solids carry mineral substrate on
      their undersides using explicit per-face slots, preserved by Blender.
+     At ground-level soil beds, retire the architectural paving cap at the
+     actual bed boundary using `villa_landscape.reveal_ground_soil`; never
+     raise soil to hide a competing finish. Contract and portable verification
+     run `garden_render_review.soil_visibility_findings` against real faces.
+     Review the bed in architectural context after its isolated preview.
    - Procedural basal plants identify actual leaf faces and the root-soil
      datum. `garden_render_review.plant_form_findings` measures foliage,
      separately from stems; the authored maximum foliage gap is 0.20 m.
      Preview the real plant form as well as checking the gap.
+     Species-specific forms also require botanical structure and physical
+     continuity: continuous palmate leaf surfaces, distinct fan nodes and
+     physical petioles joining ivy leaves to training stems. Use
+     `garden_shade.form_findings` and `climber_placement.ivy_connection_findings`
+     with the real rejected preview geometry frozen in a regression fixture.
+     These checks prove authored construction, not photographic likeness.
+     Climber coverage uses projected leaf-area union. State whether the
+     denominator is the training envelope or the whole timber-frame rectangle;
+     a percentage measured in one cannot be claimed for the other.
    - Furniture: generator pieces (`archpipe.furniture`) through
      `generator_rotation`; other types through `villa_furniture_detail`;
      boxes only where neither exists. Every vertex stays inside the checked
@@ -101,6 +115,12 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      must avoid the image's central third. Contract, plan review and portable
      verification run the garden checks recorded in
      `knowledge/garden-render-guards.json`.
+     Include procedural ground foliage and feature stones in lens clearance,
+     just like imported props and top-garden planting. Landscape candidates
+     also check the full physical door passage with `blocked_openings`, not
+     only the authored path strip. Street-based client garden names and
+     true-north solar bearing have separate roles; keep legacy identifiers
+     until an explicitly scoped migration.
    - Exposure is metered per view and LOCKED per state across the whole
      set: `day`, `evening`, `exterior-dusk`, `exterior-day`. Rendering a
      subset re-meters that subset, so a state's lock is only comparable when
@@ -162,6 +182,11 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
   `render_views.choose` place it; never hand-tune a camera to hide a
   problem. If the subjects cannot fit, choose honest subjects and say what
   is out of frame in `caption_notes`.
+  Projecting a bed footprint inside the frame does not prove all corners
+  visible: measure camera-to-corner sightlines and disclose unavoidable
+  window-frame screening. Carry shared authored-appearance and photographic /
+  procurement limits into every related caption; scene metadata alone is
+  insufficient when a caption names a species.
 - **New finish**: stated colour + reflectance; textures supply pattern only
   (per-channel mean matching). Check the tint survives in the final image
   (the first grey-green exterior read warm grey under the sun).

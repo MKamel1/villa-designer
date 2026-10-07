@@ -116,7 +116,7 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
 
     def test_write_stamps_scene_and_refuses_source_change_during_build(self):
         target = self.root / "export.json"
-        with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1"}), \
+        with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1", "lights": []}), \
              patch("archpipe.villa_render_contract.validate_scene", lambda scene: []), \
              patch.object(scene_builder, "source_provenance", lambda: source_provenance(self.root)):
             scene_builder.write(target)
@@ -124,7 +124,7 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
         self.assertEqual(stamped["provenance"]["source_hash"], source_provenance(self.root)["source_hash"])
         old_bytes = target.read_bytes()
         hashes = iter(({"source_hash": "before"}, {"source_hash": "after"}))
-        with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1"}), \
+        with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1", "lights": []}), \
              patch("archpipe.villa_render_contract.validate_scene", lambda scene: []), \
              patch.object(scene_builder, "source_provenance", lambda: next(hashes)):
             with self.assertRaisesRegex(RuntimeError, "changed during build"):

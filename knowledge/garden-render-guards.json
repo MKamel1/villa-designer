@@ -70,6 +70,105 @@
       "proofs": [
         "test_g2f_real_open_swing_candidate_cannot_use_fence_thickness"
       ]
+    },
+    {
+      "lesson_id": "garden-g4-court-policy",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "court-specific shade planting builder; remove bistro and all lounge pots",
+      "check": "villa_landscape.north_garden_violations and north_garden_scene_violations",
+      "stage": "candidate, scene contract and portable verification",
+      "proof_file": "tests/test_garden_g4.py",
+      "proofs": [
+        "test_g4_frozen_bistro_pots_shade_and_translated_court",
+        "test_g4_other_gardens_unchanged_and_counts_spacing"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4-species-form",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "continuous closed Fatsia laminae, staggered Rhapis crowns and truncate fan tips, irregular stone rings; connected Cissus petioles",
+      "check": "garden_shade.form_findings; climber_placement.ivy_connection_findings; garden_render_review.plant_form_findings",
+      "stage": "isolated preview, scene contract and portable verification",
+      "proof_file": "tests/test_garden_g4.py",
+      "proofs": [
+        "test_g4_real_shape_preview_failures_and_clean_mutations",
+        "test_g4_real_floating_ivy_and_connected_geometry"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4-door-width",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "set the third Fatsia clear of the real door passage; clip mulch to actual yard polygon",
+      "check": "render_support.blocked_openings in landscape candidate; landscape yard-boundary regression",
+      "stage": "landscape candidate before scene export",
+      "proof_file": "tests/test_garden_g4.py",
+      "proofs": [
+        "test_g4_first_plant_door_failure_is_now_early_and_quiet"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4-soil-visibility",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "cut competing ground finish faces at authored ground-bed boundaries",
+      "check": "garden_render_review.soil_visibility_findings",
+      "stage": "scene contract and portable verification",
+      "proof_file": "tests/test_garden_g4.py",
+      "proofs": [
+        "test_g4_actual_coplanar_paving_soil_visibility_generalises"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4-export-side-effect",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "generic photometry generated only beside an explicit exported scene",
+      "check": "frozen symlinked-output reproduction and write-refusal test",
+      "stage": "scene build and explicit export",
+      "proof_file": "tests/test_garden_g4.py",
+      "proofs": [
+        "test_g4_generic_photometry_writes_only_explicit_exports"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4-camera-ground-foliage",
+      "control_tier": [
+        2
+      ],
+      "construction": "same lens clearance for ground procedural and imported landscape contents",
+      "check": "scripts.villa_render_views.camera_proximity_violations",
+      "stage": "view plan",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_g4_ground_plants_cannot_bypass_lens_clearance"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4-caption-evidence",
+      "control_tier": [
+        1,
+        3
+      ],
+      "construction": "shared authored-appearance note on the three north-garden views; disclose measured screened bed corner",
+      "check": "archpipe.concept.villa_render.VIEWS",
+      "stage": "view declaration and contextual critic review",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_every_view_subject_matches_scene_content"
+      ]
     }
   ]
 }

@@ -263,7 +263,7 @@ PATHS = {
 
 # Boundary beds actually built, excluding the lawn-only east by client decision.
 BEDS = {
-    "west": (-.05, -29.80, 1.50, -26.90),
+    "west": (-.05, -28.50, 3.45, -26.90),
     "north": (17.45, -22.70, 20.05, -20.65),
 }
 
@@ -1161,8 +1161,7 @@ def review_candidate(spec, lay=None):
                         "ASSUMED artificial turf with an open tree pit", kind="finish-layer", surface=True, occupied_side=(0,0,1)))
     meshes.append(_mesh("tree-pit-east", "ground", "garden-gravel", [ring],
                         "ASSUMED 1.2 m diameter gravel tree pit; roots/drainage UNVERIFIED", kind="tree-pit", surface=True, occupied_side=(0,0,1)))
-    for name, rect in (("west", (-.373,-29.915,3.617,-23.591)),
-                       ("north", (15.412,-23.591,EAST[0],-20.351)),
+    for name, rect in (("north", (15.412,-23.591,EAST[0],-20.351)),
                        ("top-deck",DECK),("top-roof",ROOF)):
         z = 0.0 if name.startswith("top") else GROUND
         meshes.append(_mesh("grass-"+name,"ground","artificial-grass",_quad(*rect,z+.003),
@@ -1170,11 +1169,14 @@ def review_candidate(spec, lay=None):
     for name, rect in PATHS.items():
         _stones(name,rect,0.0 if name=="study" else GROUND,meshes)
     beds = dict(BEDS)
+    beds["west"] = tuple(record["design_assumptions"]["north_garden_g4"]["beds"]["west"])
     for name,rect in beds.items():
         if any(not inside_yard(x,y) for x,y in _box_perimeter_points(*rect)):
             raise ValueError(name+" bed leaves yard")
         if any(_rect_overlap_area(rect,r[:4]) > 1e-6 for r in garden_level_rooms(lay)):
             raise ValueError(name+" bed enters garden-level room")
+        if name == "west":
+            continue  # G4 soil and slim edging are constructed together below.
         meshes.append(_mesh("bed-"+name,"ground","garden-gravel",_quad(*rect,GROUND+.008),
                             "ASSUMED boundary bed, three primary layers; G2 young planting",kind="finish-layer",surface=True,occupied_side=(0,0,1)))
 
@@ -1218,12 +1220,36 @@ def review_candidate(spec, lay=None):
     # Uniform species drifts, three height strata per actual boundary bed.
     # Ixora's spacing spread is explicitly ASSUMED in the palette, not a
     # sourced mature spread. Strelitzia and Aspidistra use the card spreads.
-    for i, y in enumerate((-29.30, -28.30, -27.30)):
-        plant("landscape-west-mid-%02d"%i,"sf_ixora",(.75,y),bed="west",layer="mid")
-        clump = _botanical_clump("west-back-%02d"%i, "Strelitzia reginae", (1.20,y), GROUND, data, bed="west", layer="back")
-        meshes.append(clump); plants.append(clump)
-        clump = _botanical_clump("west-front-%02d"%i, "Aspidistra elatior", (.18,y), GROUND, data, bed="west", layer="front")
-        meshes.append(clump); plants.append(clump)
+    from . import garden_shade as SHADE
+    from shapely.geometry import box as polygon_box, Polygon
+    from shapely.ops import triangulate
+    shade = record["design_assumptions"]["north_garden_g4"]
+    ground_beds = {"west": beds["west"], "west-accent": tuple(shade["accent_bed"])}
+    gravel = polygon_box(*NORTH_COURT).intersection(Polygon(YARD))
+    for rect in ground_beds.values():gravel = gravel.difference(polygon_box(*rect))
+    gravel_faces = [[[x,y,GROUND+.003] for x,y in list(t.exterior.coords)[:-1]]
+                    for t in triangulate(gravel) if gravel.covers(t)]
+    meshes.append(_mesh("gravel-west","ground","garden-gravel",gravel_faces,
+                        "ASSUMED mineral gravel paths/mulch; covered GF balcony portion has gravel only",kind="finish-layer",surface=True,occupied_side=(0,0,1)))
+    for name, (x0,y0,x1,y1) in ground_beds.items():
+        meshes.append(_mesh("bed-west" if name=="west" else "accent-bed-west","ground","garden-soil",_quad(x0,y0,x1,y1,GROUND),
+                            "North garden: in-ground soil at court datum; root/drainage engineering UNVERIFIED",kind="soil-bed",surface=True,occupied_side=(0,0,1)))
+        edge = (_box(x0,y0,GROUND,x1,y0+.015,GROUND+.018)+
+                _box(x0,y1-.015,GROUND,x1,y1,GROUND+.018)+
+                _box(x0,y0+.015,GROUND,x0+.015,y1-.015,GROUND+.018)+
+                _box(x1-.015,y0+.015,GROUND,x1,y1-.015,GROUND+.018))
+        meshes.append(_mesh("edging-"+name,"ground","trellis",edge,
+                            "ASSUMED 15 mm slim timber edging, 18 mm above court; no raised container",kind="bed-edge"))
+    for drift in shade["drifts"]:
+        for i, center in enumerate(drift["centers_m"]):
+            species = drift["species"]
+            constructor = _botanical_clump if species == "Aspidistra elatior" else SHADE.clump
+            clump = constructor("west-%s-%02d"%(drift["layer"],i),species,center,GROUND,data,bed="west",layer=drift["layer"])
+            meshes.append(clump);plants.append(clump)
+    clump = SHADE.clump("west-rhapis-accent","Rhapis excelsa",shade["accent_center_m"],GROUND,data,bed="west-accent",layer="accent")
+    clump["label"] += "; ASSUMED root barrier; keep centre >=1.0 m from walls and paths"
+    meshes.append(clump);plants.append(clump)
+    meshes.append(SHADE.stone("west-feature-stone",shade["feature_stone_center_m"],GROUND))
     for i, center in enumerate(((17.90,-21.75),(18.90,-21.75),(19.60,-22.45))):
         # Young Ixora at 0.55 m is the recorded default, not the obsolete
         # north nursery context at 1.0 m, whose canopy would close the path.
@@ -1234,7 +1260,7 @@ def review_candidate(spec, lay=None):
             clump = _botanical_clump("north-%s-%02d"%(layer,i),species,(x,y),GROUND,data,bed="north",layer=layer)
             meshes.append(clump); plants.append(clump)
 
-    for name, x, y in (("west", -.123, -25.40), ("north",18.75,-20.641)):
+    for name, x, y in (("west", *shade["trellis_start_m"]), ("north",18.75,-20.641)):
         if name == "east":
             frame = _box(x-.04, y, GROUND, x, y+1.5, GROUND+2.2)
         elif name == "south":
@@ -1243,7 +1269,7 @@ def review_candidate(spec, lay=None):
             frame = _box(x-.75, y, GROUND, x+.75, y+.04, GROUND+2.2)
         else:  # west
             frame = _box(x, y, GROUND, x+.04, y+1.5, GROUND+2.2)
-        climber_species = "Bougainvillea glabra" if name == "north" else "Trachelospermum jasminoides"
+        climber_species = "Bougainvillea glabra" if name == "north" else "Cissus alata"
         climber_source = require_species(climber_species,data)["source_url"]["value"]
         pts = [p for face in frame for p in face]
         fx0, fy0, fx1, fy1 = min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
@@ -1281,19 +1307,21 @@ def review_candidate(spec, lay=None):
                             "ASSUMED young branched " + climber_species + " woody growth", kind="climber-branch"))
         # The renderer hides this source mesh after deriving the leaf envelope from its bounds.
         # Use the actual closed branch form as its source so the part boundary never admits a mass box.
-        meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract" if name=="north" else "star-jasmine-flower", branches,
+        meshes.append(_mesh("climber-"+name, "dressing", "bougainvillea-bract" if name=="north" else "grape-ivy-leaf", branches,
                             "ASSUMED thin young " + climber_species + "; target frame coverage 35%; care: " + climber_source, kind="climber"))
 
 
     for mesh in meshes:
         if mesh.get("part_kind") in ("climber", "climber-branch"):
-            mesh["species"] = "Bougainvillea glabra" if mesh["id"].endswith("north") else "Trachelospermum jasminoides"
+            mesh["species"] = "Bougainvillea glabra" if mesh["id"].endswith("north") else "Cissus alata"
             mesh["root_z_m"] = GROUND
+            if mesh.get("part_kind") == "climber" and mesh["species"] == "Cissus alata":
+                mesh["stem_mesh"] = "landscape-climber-branches-west"
 
     for name, center in (
             ("dining-w",(15.882,-22.97)), ("dining-e",(17.896,-22.97)),
             ("living-north-w",(19.55,-22.97)), ("living-north-e",(21.564,-22.97)),
-            ("lounge-west-s",(2.90,-26.98)), ("lounge-west-n",(2.90,-25.149))):
+):
         species = "Ixora coccinea" if not name.startswith("lounge") else "Aspidistra elatior"
         potdata = record["design_assumptions"]["door_pot"]
         if species == "Ixora coccinea":
@@ -1309,13 +1337,9 @@ def review_candidate(spec, lay=None):
                                       ("soil","garden-soil",soil,"planter-soil")):
             meshes.append(_mesh("door-pot-planter-"+name+"-"+suffix,"furniture",mat,faces,
                                 "ASSUMED glazed ceramic tapered pot; terracotta-red client decision 2026-10-05; planted " + species + "; directly on turf",kind=kind))
-    # Both requested pieces fit in the west court without altering the
-    # walking routes or nursery drifts. Client confirmation is still open.
-    bistro = _prop("landscape-west-bistro","outdoor_table_chair_set_01",(2.05,-24.65),GROUND,.8585,
-                   "Morning-coffee bistro for two; relocated from the east garden; client to confirm; Poly Haven CC0")
-    swing = _prop("landscape-egg-swing","sf_egg_chair",(2.60,-28.35),GROUND,1.99,
-                  "Egg-shaped hanging swing on own stand; relocated from the east garden; client to confirm; " + credits["sf_egg_chair"])
-    props += [bistro,swing]
+    # G4: bistro/pots removed per client. The old swing is architecturally
+    # covered; the shade layout has no accepted open motion envelope.
+    swing = None
     # Two existing pot positions redesigned as planted glazed pots, with no plinth.
     # Ixora is the brief's explicit top-zone exception, conditional on sun evidence.
     for i, center in enumerate(((7.40,-21.20),(9.30,-22.95))):
@@ -1346,9 +1370,10 @@ def review_candidate(spec, lay=None):
 
 
     exposure = {name:direct_sun_hours((r[0]+r[2])/2,(r[1]+r[3])/2) for name,r in beds.items()}
-    notes = ["G1/G2 review candidate: artificial turf, stepping stones, one Plumeria in the lawn, offset from centre for a clear door route and ASSUMED 1.2 m gravel tree pit.",
+    notes = ["North garden G4: lush shade foliage in ground-level soil beds; gravel under the GF balcony. Bistro and lounge pots removed per client 2026-10-06. Covered swing omitted; client to confirm removal. Cissus alata replaces star jasmine on the open timber trellis; light applicability PARTIAL, Cairo winter suitability UNVERIFIED.",
+             "G1/G2 review candidate: artificial turf, stepping stones, one Plumeria in the lawn, offset from centre for a clear door route and ASSUMED 1.2 m gravel tree pit.",
              "Only knowledge/garden-palette.json supplies botanical dimensions, sources and placement assumptions. Egypt performance and root behaviour over the basement slab are UNVERIFIED.",
-             "G2 north/west boundary beds and terracotta-red glazed door pots replanted from the palette; thin open timber trellises mounted on boundary faces. G3 low steel troughs with rosemary/aloe drifts, two benches on slabs and a gate-link path; no shade tree placed.",
+             "Retained east-yard boundary bed and terracotta-red glazed door pots; north garden G4 shade beds and grape ivy on open timber. G3 low steel troughs with rosemary/aloe drifts, two benches on slabs and a gate-link path; no shade tree placed.",
              "ASSUMED drip irrigation to retained beds/containers; tree-pit watering/drainage needs local nursery and engineering review.",
              "Trough colour: " + TROUGH_COLOUR["name"] + "; authored appearance ASSUMED, not a manufacturer finish. Powder-coat weathering in Egyptian sun and loaded deck weight UNVERIFIED; supplier data sheet and engineer decide before ordering.",
              "Top container roots/deep rooting and waterproofing over the basement slab UNVERIFIED: local nursery and waterproofing/structural consultant must confirm; no deep-rooted tree specified.",
@@ -1363,7 +1388,7 @@ def review_candidate(spec, lay=None):
                                                    max(p[1] for p in item["pts"])/1000))
                           for item in E.spec()["elements"]
                           if item["id"].startswith("fence-") or item["id"] == "yard-wall-ne"]
-    plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,
+    plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,accent_beds={"west-accent":shade["accent_bed"]},
                 boundary_obstacles=boundary_obstacles,
                 east_rect=EAST,east_center=EAST_CENTER,tree_pit=dict(center=tree_center,diameter_m=radius*2,status="ASSUMED"))
     from .garden_render_review import normal
@@ -1386,6 +1411,63 @@ def walking_routes(meshes):
     return routes, ground
 
 
+# Client street-based NORTH is the legacy west court. True north is solar only.
+NORTH_COURT = (-.373, -29.916, 3.617, -23.591)
+NORTH_BALCONY_EDGE = -28.671
+SHADE_ZONE = 'north garden (deep shade)'
+
+
+def north_garden_violations(meshes, props, objects=(), *, court=NORTH_COURT,
+                            ground=GROUND, balcony_edge=NORTH_BALCONY_EDGE, cover=None):
+    """Spatial content policy, independent of item identifiers and solar axes.
+
+    court is the client-named court rectangle in metres; ground is its soil
+    elevation, balcony_edge its covered end in model y. Optional cover is
+    the actual overhead architectural union in the plot plane.
+    """
+    from shapely.geometry import box
+    out=[]
+    allowed_species={name for name,row in _plant_data().items() if SHADE_ZONE in row['zones']['value']}
+    def occupies(item):
+        if item.get('zone')=='top':return False
+        if 'faces' in item:
+            if min(q[2] for f in item['faces'] for q in f)>ground+2.5:return False
+        elif item.get('position',[0,0,ground])[2]>ground+2.5:return False
+        return _rect_overlap_area(_rect(item),court)>1e-6
+    for item in list(props)+list(objects):
+        if not occupies(item):continue
+        if item.get('asset')=='sf_egg_chair' and 'client to confirm' in item.get('label','').lower():
+            r=_rect(item);envelope=(r[0]-.25,r[1]-.25,r[2]+.25,r[3]+.25)
+            if envelope[1]<balcony_edge or cover is not None and box(*envelope).intersection(cover).area>1e-6:
+                out.append((item['id'],'north garden swing must be wholly open to sky'))
+        else:out.append((item['id'],'north garden forbids containers, table and seating except a flagged open-sky swing'))
+    allowed={'finish-layer','stepping-stone','soil-bed','bed-edge','feature-stone','trellis','climber','climber-branch','plant-clump'}
+    for item in meshes:
+        if not occupies(item):continue
+        kind=item.get('part_kind');points=[q for f in item['faces'] for q in f]
+        if kind not in allowed:
+            out.append((item['id'],'north garden forbids raised container or non-landscape content'))
+        if kind=='soil-bed' and abs(max(q[2] for q in points)-ground)>1e-6:
+            out.append((item['id'],'north garden soil surface must be at court ground level'))
+        if kind=='bed-edge' and (min(q[2] for q in points)<ground-1e-6 or max(q[2] for q in points)>ground+.02+1e-6):
+            out.append((item['id'],'north garden edging must be slim at ground level'))
+        if item.get('material')=='artificial-grass':
+            out.append((item['id'],'north garden requires gravel mulch and paths'))
+        if 'species' in item:
+            if item['species'] not in allowed_species:
+                out.append((item['id'],'north garden requires its recorded shade palette'))
+            if kind=='plant-clump':
+                if abs(item.get('root_z_m',float('inf'))-ground)>1e-6:
+                    out.append((item['id'],'north garden roots must meet ground-level soil'))
+                if min(q[1] for q in points)<balcony_edge and item['species']!='Aspidistra elatior':
+                    out.append((item['id'],'only Aspidistra allowed under the GF balcony'))
+            if item['species']=='Rhapis excelsa':
+                x,y=item['center'];distances=[x-(court[0]+E.FENCE_T/1000),court[2]-x,y-court[1],court[3]-y]
+                distances += [hypot(max(r[0]-x,0,x-r[2]),max(r[1]-y,0,y-r[3])) for r in PATHS.values() if _rect_overlap_area(r,court)>1e-6]
+                if min(distances)<1.-1e-6:out.append((item['id'],'Rhapis centre needs >=1.0 m from walls/paths; ASSUMED root barrier'))
+    return out
+
+
 def candidate_violations(meshes, props, plan, lay):
     """Existing checks plus identity, dimensions, east contents and real wall limits."""
     rooms = garden_level_rooms(lay)
@@ -1393,7 +1475,8 @@ def candidate_violations(meshes, props, plan, lay):
     routes, ground = walking_routes(meshes)
     from .garden_render_review import plant_form_findings
     swings = [p for p in props if p["asset"] == "sf_egg_chair"]
-    return (extent_violations(props,rooms)+object_extent_violations(objects,rooms)+
+    from .render_support import blocked_openings
+    return ([(mid,"door passage "+why) for mid,why in blocked_openings(dict(meshes=meshes),lay)]+north_garden_violations(meshes,props,objects)+extent_violations(props,rooms)+object_extent_violations(objects,rooms)+
             [f for swing in swings for f in swing_violations(swing,props+objects+plants+plan.get("boundary_obstacles", [])+[dict(id="bed-"+name,rect=rect) for name,rect in plan["beds"].items()])]+
             [(pid,"door route "+route) for pid,route in route_violations(props+objects+[p for p in plants if "faces" in p], routes, ground)]+
             [(a,"plant spacing to %s: %.3f < %.3f m"%(b,got,need)) for a,b,got,need in spacing_violations(plants)]+
@@ -1411,3 +1494,43 @@ def build(spec, lay=None):
     if plan["conflicts"]:
         raise ValueError("landscape guard: "+"; ".join("%s: %s"%f for f in plan["conflicts"]))
     return meshes,props,notes,plan
+
+
+def north_garden_scene_violations(scene):
+    """Apply the court policy to authoritative physical contents and cover."""
+    from .garden_render_review import overhead_cover
+    return north_garden_violations(
+        [m for m in scene['meshes'] if m.get('group') in ('ground','furniture','dressing')],
+        scene.get('props',[]),cover=overhead_cover(scene,GROUND))
+
+
+def reveal_ground_soil(shell_meshes, soil_meshes):
+    """Cut competing floor finish faces at authored soil boundaries.
+
+    This constructs render finishes from the measured shell; it never edits
+    an extract. Soil elevation is fixed. Side/underside geometry and all
+    architectural datums stay intact; the soil face supplies the removed cap.
+    """
+    from shapely.geometry import Polygon
+    from shapely.ops import triangulate
+    from .garden_render_review import normal
+    beds=[(Polygon([q[:2] for q in m['faces'][0]]),m['faces'][0][0][2]) for m in soil_meshes if m.get('part_kind')=='soil-bed']
+    for m in shell_meshes:
+        if m.get('group') not in ('shell','ground','context'):continue
+        slots=m.get('face_materials',[m['material']]*len(m['faces']))
+        faces=[];materials=[];changed=False
+        for face,material in zip(m['faces'],slots):
+            if normal(face)[2]<.999 or max(q[2] for q in face)-min(q[2] for q in face)>1e-6:
+                faces.append(face);materials.append(material);continue
+            z=face[0][2];polygon=Polygon([q[:2] for q in face]);remaining=polygon
+            for bed,soil_z in beds:
+                if abs(z-soil_z)<1e-6:remaining=remaining.difference(bed)
+            if abs(remaining.area-polygon.area)<1e-9:
+                faces.append(face);materials.append(material);continue
+            changed=True
+            for triangle in triangulate(remaining):
+                if remaining.covers(triangle):
+                    faces.append([[x,y,z] for x,y in list(triangle.exterior.coords)[:-1]]);materials.append(material)
+        if changed:
+            m['faces']=faces;m['face_materials']=materials
+            m['label']=m.get('label','')+'; ground finish cut back at authored soil-bed boundaries'

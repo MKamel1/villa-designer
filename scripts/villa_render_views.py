@@ -115,10 +115,10 @@ def camera_proximity_violations(view, scene, items, clearance=None):
             max(x0 - px, 0, px - x1), max(y0 - py, 0, py - y1), max(z0 - pz, 0, pz - z1))))
         if distance < clearance:
             failures.append((prop["id"], round(distance, 3)))
-    # New procedural top foliage/containers need the same lens clearance
+    # Procedural landscape foliage/containers need the same lens clearance
     # as imported planting. Paving/turf are the standing surface.
     for mesh in scene["meshes"]:
-        if mesh.get("zone") != "top" or mesh.get("group") not in ("furniture", "dressing"):
+        if mesh.get("part_kind") not in ("plant-clump", "feature-stone", "climber", "climber-branch", "trellis", "planter", "planter-rim", "steel-trough") or mesh.get("group") not in ("furniture", "dressing"):
             continue
         points = [p for f in mesh["faces"] for p in f]
         lo = [min(p[i] for p in points) for i in range(3)]
@@ -238,7 +238,7 @@ def main():
         px, py = cam["position"][:2]
         # The one-metre exterior clearance is calibrated on the v26/v28 canopy/pot
         # failures. Compact interior view selection has its own 0.15 m clearance rule.
-        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v36-", "v37-")):
+        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v36-", "v37-", "v38-")):
             for near_id, distance in camera_proximity_violations(v, scene, items):
                 problems.append("%s: camera %.2f m from %s (need >= 1.0 m)" % (v["id"], distance, near_id))
         if v["id"].startswith("v28-"):
@@ -281,7 +281,7 @@ def main():
         ax.add_patch(Polygon(wedge, fc="#ffcc00", alpha=0.25, ec="#cc9900"))
         ax.plot([px], [py], "ro", ms=4)
         for s in v["subjects"]:
-            if s in items and items[s]["type"] == "wc" or v["id"].startswith(("v07-", "v19-", "v25-", "v26-", "v27-", "v28-", "v36-", "v37-")):
+            if s in items and items[s]["type"] == "wc" or v["id"].startswith(("v07-", "v19-", "v25-", "v26-", "v27-", "v28-", "v36-", "v37-", "v38-")):
                 for edge in subject_mesh_frame_violations(v, scene, s):
                     problems.append("%s: built %s crosses %s" % (v["id"], s, edge))
             try:

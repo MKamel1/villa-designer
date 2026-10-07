@@ -91,7 +91,8 @@ def plant_form_findings(meshes):
     root datum refuse procedural clumps. Thin climbing foliage is generated
     separately and checked from its actual deterministic leaf placements.
     """
-    out = []
+    from .garden_shade import form_findings
+    out = form_findings(meshes)
     for mesh in meshes:
         if mesh.get('part_kind') == 'climber':
             from ..blender.climber_placement import placements,density_for_coverage,SIZE
@@ -99,6 +100,14 @@ def plant_form_findings(meshes):
             bounds=[min(q[k] for q in points) for k in range(3)]+[max(q[k] for q in points) for k in range(3)]
             root=mesh.get('root_z_m')
             leaves=[z-SIZE['leaf'] for x,y,z,kind in placements(bounds,density_for_coverage(),sum(map(ord,mesh['id']))) if kind=='leaf']
+            if mesh.get('species')=='Cissus alata':
+                from ..blender.climber_placement import grape_ivy_geometry,ivy_connection_findings
+                stems=next((m for m in meshes if m['id']==mesh.get('stem_mesh')),None)
+                if stems is None:
+                    out.append(mesh['id']+': missing physical training stems');continue
+                foliage,petioles,_=grape_ivy_geometry(bounds,stems['faces'],sum(map(ord,mesh['id'])))
+                out.extend(mesh['id']+': '+f for f in ivy_connection_findings(foliage,petioles,stems['faces']))
+                leaves=[q[2] for f in foliage for q in f]
             if root is None or not leaves:
                 out.append(mesh['id']+': MISSING measured climbing leaves/root soil datum')
             elif min(leaves)-root>LEAF_GAP_M+1e-9:
@@ -209,3 +218,26 @@ def opening_frame_findings(view, scene):
             if polygon.intersection(box(-1/6,-half_height,1/6,half_height)).area>1e-10:hit_faces.append(index)
         if hit_faces:findings.append(dict(view=view['id'],mesh=mesh['id'],face_indices=hit_faces,reason='foreground opening frame occupies central third'))
     return findings
+
+
+def soil_visibility_findings(scene):
+    """Refuse mineral floor faces covering ground-bed soil at its elevation.
+
+    Each soil surface comes from actual faces. Plant foliage and slim edging
+    are intentional above soil; architectural floor finishes are competing
+    surfaces and cannot be coplanar with it. No court or item-id exemptions.
+    """
+    from shapely.geometry import Polygon
+    out=[]
+    beds=[(m,Polygon([q[:2] for q in m['faces'][0]]),m['faces'][0][0][2]) for m in scene['meshes'] if m.get('part_kind')=='soil-bed']
+    for soil,bed,z in beds:
+        for m in scene['meshes']:
+            if m.get('part_kind') in ('soil-bed','bed-edge') or m.get('group') not in ('shell','context','ground'):continue
+            slots=m.get('face_materials',[m['material']]*len(m['faces']))
+            area=0.
+            for face,material in zip(m['faces'],slots):
+                if material=='garden-soil' or normal(face)[2]<.999:continue
+                if min(q[2] for q in face)<z-1e-6 or max(q[2] for q in face)>z+.02:continue
+                area+=Polygon([q[:2] for q in face]).intersection(bed).area
+            if area>1e-6:out.append('%s: %.6f m2 soil obscured by %s'%(soil['id'],area,m['id']))
+    return out

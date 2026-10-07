@@ -55,3 +55,54 @@ procedural top foliage and containers as well as imported props. If a clear
 standing point cannot hold the full soil-bed extent, retain the design, declare
 honest actual planting subjects, and caption the omitted extent and companion
 view. Final-only v27 also needs its own lead draft after camera correction.
+
+G4 north-garden procedure (2026-10-06): client naming follows the street:
+model −x is north, +y east, +x south, −y west. Existing identifiers remain
+unchanged; true bearing is solar input only. The legacy west court is the
+client's north garden. Use its tracked deep-shade palette, retaining PARTIAL
+light applicability for grape ivy/mondo and UNVERIFIED Cairo winter/nursery
+performance. Under the ground-floor balcony, use Aspidistra or gravel only.
+Do not revive the withdrawn top-garden removal instruction.
+
+Build soil at the court datum, with slim edging, and retire the old paving
+finish at each actual bed boundary through `reveal_ground_soil`. An isolated
+soil preview cannot prove it remains visible over the architectural backing:
+run `soil_visibility_findings` and review a contextual neutral preview before
+handoff. Keep soil elevation fixed when correcting a competing finish. No
+slab excavation, soil depth, root barrier, waterproofing or drainage is
+engineered by this render-finish operation; the nursery/engineer owns those.
+
+Use continuous Fatsia laminae, independent Rhapis fan nodes and truncate
+segments, and explicitly connected grape-ivy petioles. Run the shared form
+checks on the isolated elements and the complete scene; retained/imported
+plants do not establish a new species identity. New external plants still
+require the complete licence, author, bounds, unit, facing and route-record
+intake. Authored procedural appearances need no invented external licence.
+Preview/review each new species, stone, bed and climber; neutral diagnostics
+are not presentation lighting approval.
+
+Check the actual door-passage width in the landscape candidate as well as the
+narrower path. Include ground procedural foliage and all beds in swing/camera
+clearance. Cameras move; the garden stays fixed. If the full bed cannot be
+framed from a clear open-sky position, declare honest visible subjects and a
+through-lounge companion. Report the actual overhead union separately from
+the ground-floor balcony; a client naming correction is not authority to
+silently remove modelled architecture.
+Check actual bed-corner sightlines as well as projected bounds. v38's near
+corner is screened by the existing lounge frame and its caption discloses
+that screen. Related views receive one shared authored-appearance,
+photographic-likeness and procurement-limit note instead of separate copies.
+For caption-only changes, compare decoded before/after exported meshes,
+props, lights and cameras exactly; do not compare JSON lists directly with
+the builder's tuple-bearing in-memory structures or round geometry values.
+Measure climber coverage as projected leaf-area union and state its
+denominator: training-envelope coverage and whole timber-frame coverage are
+different quantities. G4's 33.36% and 20.51% respectively must remain distinct.
+
+Resolve output paths before reporting a shared-data write. `build` no longer
+generates generic photometry into global OUT; `write(path)` creates generic
+files beside the explicit export. Existing verified catalogue binding remains
+its separate workflow. In this worktree, `out/villa/render-d1` resolves locally,
+while `out/villa/round3` and `assets/user` resolve to protected shared data.
+Keep every G4 export, preview and log under `out/garden-g4`. Never infer an
+actual mutation from similar folder names or a potentially writing branch.

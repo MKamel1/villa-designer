@@ -420,6 +420,10 @@ def validate_scene(scene: dict) -> list[str]:
         from .concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings
         errors.extend(downward_ground_findings(scene))
         errors.extend(plant_form_findings(meshes))
+        from .concept.garden_render_review import soil_visibility_findings
+        errors.extend(soil_visibility_findings(scene))
+        from .concept.villa_landscape import north_garden_scene_violations
+        errors.extend("%s: %s" % f for f in north_garden_scene_violations(scene))
         for view in scene.get("views", []):
             errors.extend(f"{f['view']}: {f['mesh']} {f['reason']}" for f in opening_frame_findings(view,scene))
             errors.extend(garden_camera_findings(view, scene))

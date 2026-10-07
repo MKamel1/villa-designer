@@ -501,6 +501,21 @@ def build_climbers(mesh_specs, objects, materials, warnings):
         points = [v for face in spec["faces"] for v in face]
         box = (min(v[0] for v in points), min(v[1] for v in points), min(v[2] for v in points),
                max(v[0] for v in points), max(v[1] for v in points), max(v[2] for v in points))
+        if spec.get('species') == 'Cissus alata':
+            stems=next((m for m in mesh_specs if m['id']==spec.get('stem_mesh')),None)
+            if stems is None:raise ValueError('Cissus foliage is missing its physical stem mesh')
+            leaves,petioles,contacts=placing.grape_ivy_geometry(box,stems['faces'],seed=sum(map(ord,spec['id'])))
+            polygons=leaves+petioles
+            verts=[];faces=[]
+            for polygon in polygons:
+                start=len(verts);verts.extend(polygon);faces.append(tuple(range(start,len(verts))))
+            mesh=bpy.data.meshes.new(spec['id']+'-trifoliate-leaves')
+            mesh.from_pydata(verts,[],faces);mesh.update()
+            leaf_obj=bpy.data.objects.new(mesh.name,mesh);bpy.context.collection.objects.link(leaf_obj)
+            mesh.materials.append(materials[spec['material']]);mesh.materials.append(materials[stems['material']])
+            for polygon in mesh.polygons:polygon.material_index=int(polygon.index>=len(leaves))
+            warnings.append(spec['id']+': young trifoliate foliage; ASSUMED 35% training target; no flowers')
+            continue
         # ASSUMED young planting: target 35% face coverage so the open trellis reads clearly.
         # The density follows the measured leaf and bract sizes in climber_placement.
         density = placing.density_for_coverage()

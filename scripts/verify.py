@@ -103,6 +103,10 @@ def main() -> int:
     from archpipe.concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings
     expect("scene contains no ground-only downward faces", not downward_ground_findings(scene))
     expect("procedural leaf mass reaches root soil", not plant_form_findings(scene["meshes"]))
+    from archpipe.concept.garden_render_review import soil_visibility_findings
+    expect("ground-bed soil has no competing floor finish", not soil_visibility_findings(scene))
+    from archpipe.concept.villa_landscape import north_garden_scene_violations
+    expect("north garden has only shade landscape in ground-level beds", not north_garden_scene_violations(scene))
     from archpipe.concept import villa_r11
     garden_views = VR.VIEWS(villa_r11.design("D1"))
     view_findings=[f for v in garden_views for f in opening_frame_findings(v,scene)]

@@ -185,6 +185,10 @@ M = {
                         roughness=1.0,note="ASSUMED visible potting soil"),
     "garden-foliage": dict(kind="principled",base_rgb=[0.035,0.15,0.045],reflectance=0.10,
                            roughness=0.72,note="ASSUMED young Aspidistra/Strelitzia blade appearance"),
+    "shade-variegation": dict(kind="principled",base_rgb=[.55,.64,.39],reflectance=.5,roughness=.75,
+                              note="ASSUMED cream variegation on spider-plant leaves"),
+    "grape-ivy-leaf": dict(kind="principled",base_rgb=[.045,.16,.055],reflectance=.11,roughness=.68,
+                           note="ASSUMED young Cissus alata trifoliate foliage; no bloom claim"),
     "star-jasmine-flower": dict(kind="principled",base_rgb=[0.80,0.78,0.70],reflectance=0.78,
                                roughness=0.80,note="ASSUMED young star jasmine white flowers"),
     "star-jasmine-leaf": dict(kind="principled",base_rgb=[0.035,0.15,0.045],reflectance=0.10,
@@ -1800,18 +1804,13 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
 
     from . import villa_landscape as LAND
     land_meshes, land_props, land_notes, _ = LAND.build(sp, lay)
+    LAND.reveal_ground_soil(meshes,land_meshes)
     meshes.extend(land_meshes)
     notes.extend(land_notes)
 
     # ---- lights and fixture bodies
     products = VL.products()
     lights = []
-    ies_dir = OUT / "ies"
-    for k in VL.KINDS:
-        if k not in products and VL.KINDS[k]["mount"] in ("recessed", "task-lamp"):
-            p = ies_dir / "generic" / (k + ".ies")
-            p.parent.mkdir(parents=True, exist_ok=True)
-            p.write_text(VL.generic_ies(VL.KINDS[k]["lm"], VL.KINDS[k]["beam"], k), encoding="utf-8")
     walls_by_level = {lv: F._walls(RS.build(lay), lv) for lv in ("B", "GF")}
     for f in VL.design(lay):
         k = VL.KINDS[f.kind]
@@ -2635,19 +2634,27 @@ def _VIEWS(lay=None, resolve=True):
       shift_y=-.065, final_only=True, exposure="exterior-day")
     V[-1]["standing_room"] = "dirty-kitchen"
     V[-1]["caption_notes"] = ["East Garden at basement level, from the dirty kitchen: young three-layer boundary bed, open bougainvillea timber trellis and planted terracotta-red glazed door pots."]
-    v("v36-west-court", "North Garden bed and swing from open sky", "day",
-      [-.02, -23.85, B + 1.35], [2.8478821817552307, -27.94576022144499, B + 1.35], 24,
-      ["landscape-bed-west", "landscape-west-back", "landscape-west-mid", "landscape-west-front",
-       "landscape-door-pot-lounge-west",
-       "landscape-door-pot-planter-lounge-west", "landscape-egg-swing"],
-      shift_y=-.14001372799238446, final_only=True, exposure="exterior-day")
-    V[-1]["caption_notes"] = ["North Garden: level 24 mm camera at 1.35 m eye height, inside the yard and outside overhead cover. Three-layer bed, planted terracotta-red glazed pot and swing on its own stand. The GF balcony covers part of the bed; the modeled upper-storey projection covers the retained swing. No open swing position passes routes, planting and fence-aware motion clearance. Bistro remains fixed; companion v37 shows the trellis and bistro. Both pieces relocated from the east garden; client to confirm."]
-    v("v37-west-court-bistro", "North Garden trellis and bistro through the lounge", "day",
+    v("v36-west-court", "North garden — shade planting from open sky", "day",
+      [1.75, -26.20, B + 1.35], [.55, -27.70, B + 1.35], 24,
+      ["landscape-west-back-00", "landscape-west-mid-00", "landscape-west-front-00", "landscape-west-edge-00"],
+      shift_y=-.31, final_only=True, exposure="exterior-day")
+    V[-1]["caption_notes"] = ["North garden: open-sky standing camera, showing the left Fatsia/Aspidistra/spider-plant/mondo grouping in ground-level soil. The full bed cannot be framed from the searched clear open-sky positions; companion v38 shows its full extent through the lounge. Bistro and lounge pots removed per client 2026-10-06. Covered swing omitted; client to confirm removal. Under the GF balcony: gravel only. Authored botanical appearances ASSUMED; Egypt nursery performance UNVERIFIED."]
+    v("v37-west-court-bistro", "North garden — grape ivy and foliage accent through the lounge", "day",
       [5.35, -25.45, B + 1.35], [.4781496760738273, -24.3252447282807, B + 1.35], 24,
-      ["landscape-trellis-west", "landscape-climber-west", "landscape-west-bistro", "landscape-door-pot-lounge-west-n", "landscape-door-pot-planter-lounge-west-n"],
+      ["landscape-trellis-west", "landscape-climber-west", "landscape-west-rhapis-accent", "landscape-west-feature-stone"],
       shift_y=-.14415908053594262, final_only=True, exposure="exterior-day")
     V[-1]["standing_room"] = "lounge"
-    V[-1]["caption_notes"] = ["North Garden from the lounge: level 24 mm camera at 1.35 m eye height. Open timber star-jasmine trellis, fixed bistro and planted terracotta-red glazed pot. The pot partly hides the left chair seat/legs, and the bistro hides the lower trellis; all subjects are framed, not wholly unobstructed. Companion v36 shows the bed and retained covered swing. Both pieces relocated from the east garden; client to confirm."]
+    V[-1]["caption_notes"] = ["North garden from the lounge: open timber trellis with young Cissus alata, one Rhapis clump and an ASSUMED natural feature stone. Thin training leaves the frame partly visible; target coverage about 35%. Climber light applicability PARTIAL; winter-night and Egypt performance UNVERIFIED. Bistro and raised containers removed per client 2026-10-06. Companions v36/v38 show the layered floor bed."]
+    v("v38-north-garden-floor-bed", "North garden — floor-bed extent through the lounge", "day",
+      [4.10, -25.00, B + 1.35], [1.60, -27.70, B + 1.35], 24,
+      ["landscape-bed-west", "landscape-west-back", "landscape-west-mid", "landscape-west-front", "landscape-west-edge"],
+      shift_y=-.18, final_only=True, exposure="exterior-day")
+    V[-1]["standing_room"] = "lounge"
+    V[-1]["caption_notes"] = ["North garden through the lounge: overall ground-level bed extent and layered shade drifts; its near corner is partly screened by the existing lounge window frame. Slim edging, visible soil and mineral gravel paths; no raised containers or bistro. Companion v36 stands in open sky and v37 shows the grape-ivy trellis, Rhapis accent and feature stone. Authored young/pruned forms ASSUMED; nursery, winter, roots and slab drainage UNVERIFIED."]
+    # These three just-declared views share the same evidence scope, whatever
+    # their identifiers or individual descriptions. This is no likeness claim.
+    for north_view in V[-3:]:
+        north_view["caption_notes"].append("Authored botanical appearances ASSUMED; photographic likeness, procurement and Egypt nursery performance UNVERIFIED.")
     # v29: RV.choose in stair-b put the camera at x=9.577 and the stair treads blocked both storage modules
     # despite their plan footprints falling inside the lens wedge. Stand northwest of the stair flight in the
     # lounge and aim at the joinery fronts; 16 mm holds both separate modules from this clear point.
@@ -2701,7 +2708,7 @@ def _VIEWS(lay=None, resolve=True):
     for x in V:
         c = x["camera"]
         if x["state"] == "exterior-dusk" or x["id"] in ("v18-street-facade", "v19-garden-facade") or \
-                x["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v33-", "v34-", "v36-", "v37-")):
+                x["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v33-", "v34-", "v36-", "v37-", "v38-")):
             continue
         room = x.get("room")
         lvz = LZ[lay["rooms"][room]["level"]] if room else (LZ["B"] if c["position"][2] < -0.1 else LZ["GF"])
@@ -2818,6 +2825,15 @@ def write(path=None, views=None):
     scene["provenance"] = after
     path = Path(path or OUT / "scene.json")
     path.parent.mkdir(parents=True, exist_ok=True)
+    # Generate generic photometry
+    # only beside this explicitly requested export, never in global OUT.
+    for light in scene["lights"]:
+        ies = light.get("ies", "")
+        if ies.startswith("generic/"):
+            kind = Path(ies).stem
+            target = path.parent / "ies" / ies
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(VL.generic_ies(VL.KINDS[kind]["lm"], VL.KINDS[kind]["beam"], kind),encoding="utf-8")
     from archpipe.safe_io import save_bytes
     save_bytes(path, json.dumps(scene).encode("utf-8"))
     return path, scene

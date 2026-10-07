@@ -16,7 +16,7 @@ SCENE = VR.build()
 ALLOWED_MATERIALS = {
     "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",
     "terracotta-red-glaze", "garden-soil", "garden-foliage", "star-jasmine-flower", "star-jasmine-leaf",  # round-3 garden finishes
-    "strelitzia-foliage", "stone-substrate",
+    "strelitzia-foliage", "stone-substrate", "shade-variegation", "grape-ivy-leaf",
     "top-trough-coating", "top-rosemary-foliage", "top-aloe-foliage",  # G3 explicitly ASSUMED appearances
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath", "marble-wet",
     "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
@@ -354,7 +354,7 @@ class RenderStandard(unittest.TestCase):
         assets = {p["asset"] for p in props}
         self.assertTrue({"sf_frangipani", "sf_wooden_bench"} <= assets)
         self.assertNotIn("sf_bauhinia",assets)
-        self.assertTrue({"sf_egg_chair", "outdoor_table_chair_set_01"} <= assets)
+        self.assertFalse({"sf_egg_chair", "outdoor_table_chair_set_01"} & assets)
         for prop in props:
             if prop["asset"] in ("sf_egg_chair", "outdoor_table_chair_set_01"):
                 self.assertLess(LAND._rect(prop)[2],LAND.EAST[0])
