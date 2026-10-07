@@ -82,13 +82,14 @@ def audit_plants(plants, study):
         center=plant.get('center')
         if center is None:
             rect=L._rect(plant);center=((rect[0]+rect[2])/2,(rect[1]+rect[3])/2)
-        ground=0. if plant.get('zone')=='top' else -3.
+        ground=float(plant.get('root_z_m',0. if plant.get('zone')=='top' else -3.))
         dates={date:study.hours(*center,ground,date) for date in DATES}
         june=len(dates[DATES[0]]);q=quote.lower();status='SUPPORTED_BY_MIDSUMMER_SCREEN';reason=''
         if not quote:status='UNVERIFIED';reason='No checked light quote; hours cannot establish suitability.'
         elif 'intolerant of direct sun' in q and max(map(len,dates.values()))>0:
             status='MISMATCH';reason='Quote excludes direct sunlight; enclosure-only rays reach this plant.'
-        elif ('full sun' in q and 'partial shade' not in q and 'deep shade' not in q and 'dappled' not in q and june<=6):
+        elif ((('full sun' in q and not any(s in q for s in ('partial shade','part shade','heavy shade','deep shade','dappled','light shade')))
+               or 'full sun for best flowering' in q or 'bright, sunny' in q or 'bright sunny' in q) and june<=6):
             status='MISMATCH';reason='Full-sun preference/best flowering not met: midsummer requires more than six direct hours (tracked RHS definition).'
         elif ('bright, indirect' in q or 'shaded spot' in q) and june>0:
             status='UNRESOLVED';reason='Direct rays reach the sampling point; neighbouring foliage shade is excluded, so indirect-light suitability is unproven.'
@@ -96,9 +97,16 @@ def audit_plants(plants, study):
             status='MISMATCH';reason='Deep shade screen; quoted dappled/partial shade does not establish deep-shade applicability. Retain recorded client trial risk.'
         elif light['status']=='PARTIAL':status='PARTIAL';reason=light.get('applicability','Quote applicability remains partial.')
         seasonal=''
-        if quote and ('sun' in q or 'partial shade' in q) and 'deep shade' not in q and len(dates[DATES[2]])<2:
+        if quote and ('sun' in q or 'partial shade' in q) and not any(s in q for s in ('deep shade','heavy shade')) and len(dates[DATES[2]])<2:
             seasonal='Winter measures fewer than two direct hours; this screen cannot establish the quoted sun/partial-shade applicability in winter.'
-        out.append(dict(id=plant['id'],species=plant['species'],zone=L.geometry_zone(*center) if ground<0 else 'top',
+        # A root near a building corner may be nearer a different house face.
+        # Garden identity follows the recorded ground domains, not that face.
+        zone='top'
+        if ground<0:
+            zone=L.geometry_zone(*center)
+            rect=L.SOUTH
+            if rect[0]<=center[0]<=rect[2] and rect[1]<=center[1]<=rect[3]:zone='south'
+        out.append(dict(id=plant['id'],species=plant['species'],zone=zone,
                         center_m=list(center),ground_m=ground,quote=light['value'],quote_status=light['status'],
                         source_url=row['source_url']['value'],sunlit_local_standard_hours=dates,
                         status=status,reason=reason,seasonal_limits=seasonal))

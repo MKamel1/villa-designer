@@ -120,9 +120,14 @@ def exterior_host(scene, member, lay, identifier):
     return host
 
 
-def mount_landscape(scene, member, sources):
-    direction=member['id'].rsplit('-',1)[1]
+def mount_landscape(scene, member, sources, *, model_side=None):
+    """Mount on an explicit model-side face, or the legacy garden-side suffix.
+
+    A rear-garden espalier can use its east boundary without naming the
+    entire assembly as the east yard. model_side is +x, -x, +y or -y.
+    """
     from ..orientation import side_name
+    direction=side_name(model_side) if model_side is not None else member['id'].rsplit('-',1)[1]
     outward={side_name('+x'):(-1,0,0),side_name('-x'):(1,0,0),side_name('+y'):(0,-1,0),side_name('-y'):(0,1,0)}[direction]
     source,face=finite_face(member,[s for s,h in sources],outward)
     host=next(h for s,h in sources if s['id']==source['id'])

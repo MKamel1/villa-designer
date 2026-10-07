@@ -118,6 +118,17 @@ def garden_camera_findings(view, scene):
     if domain is None:
         return [view['id'] + ': MISSING garden camera standing domain']
     x, y, z = view['camera']['position']
+    if 'standing_ground_m' in view:
+        # A close roof-edge camera must have an actual upward standing
+        # surface below it; yard containment alone admits the sunken void.
+        from .render_support import _Surfaces,_triangles
+        surfaces=[m for m in scene.get('meshes',[])
+                  if m.get('group') in ('shell','ground','context')
+                  and not m.get('material','').startswith('glass')]
+        triangles,owners=_triangles(surfaces)
+        physical=_Surfaces(triangles,owners)
+        supported=physical.meets(physical.up,x,y,view['standing_ground_m'])
+        if not supported:return [view['id']+': no actual standing floor at recorded camera datum']
     ground = domain['upper_datum_m'] if z >= domain['upper_datum_m'] else domain['ground_m']
     point = Point(x, y)
     room_id = view.get('standing_room')
@@ -171,8 +182,13 @@ def plant_form_findings(meshes):
             points=[q for face in mesh['faces'] for q in face]
             bounds=[min(q[k] for q in points) for k in range(3)]+[max(q[k] for q in points) for k in range(3)]
             root=mesh.get('root_z_m')
-            leaves=[z-SIZE['leaf'] for x,y,z,kind in placements(bounds,density_for_coverage(),mesh.get('appearance_seed',sum(map(ord,mesh['id'])))) if kind=='leaf']
-            if mesh.get('species')=='Cissus alata':
+            leaves=[]
+            if mesh.get('explicit_geometry'):
+                indices=mesh.get('leaf_face_indices',[])
+                if any(type(i) is not int or not 0 <= i < len(mesh['faces']) for i in indices):
+                    out.append(mesh['id']+': invalid measured climbing leaf indices');continue
+                leaves=[q[2] for i in indices for q in mesh['faces'][i]]
+            elif mesh.get('species')=='Cissus alata':
                 from ..blender.climber_placement import grape_ivy_geometry,ivy_connection_findings
                 stems=next((m for m in meshes if m['id']==mesh.get('stem_mesh')),None)
                 if stems is None:
@@ -180,6 +196,8 @@ def plant_form_findings(meshes):
                 foliage,petioles,_=grape_ivy_geometry(bounds,stems['faces'],mesh.get('appearance_seed',sum(map(ord,mesh['id']))))
                 out.extend(mesh['id']+': '+f for f in ivy_connection_findings(foliage,petioles,stems['faces']))
                 leaves=[q[2] for f in foliage for q in f]
+            else:
+                leaves=[z-SIZE['leaf'] for x,y,z,kind in placements(bounds,density_for_coverage(),mesh.get('appearance_seed',sum(map(ord,mesh['id'])))) if kind=='leaf']
             if root is None or not leaves:
                 out.append(mesh['id']+': MISSING measured climbing leaves/root soil datum')
             elif min(leaves)-root>LEAF_GAP_M+1e-9:

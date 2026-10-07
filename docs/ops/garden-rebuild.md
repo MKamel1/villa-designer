@@ -162,3 +162,83 @@ mounting and view consumers; normal and fresh empty-HOME portable verification
 must exit zero, with actual unsupported/opening lists empty. A naming-only
 package compares old/new actual coordinates and preserved appearance seeds;
 it requires no presentation render or shared-data writes.
+
+G6 south/east extension (2026-10-07): construct the approved timber pergola,
+physical rooted Petrea/jasmine, bowl/dome/Mona, family seating and flat loquat
+from `garden_g6`, and replace east-yard ground/pot light mismatches through
+`garden_g6_east`. Keep the D4 tree/pit fixed and apply both D2 routes and the
+full actual door passage before integration. A path strip alone missed a
+post. Seated capacity is separate from access: state the measured access
+rectangles, compare their 0.914 m width with the existing 0.900 m card and
+check actual non-surface faces. Beam cantilevers/footings are assumptions
+requiring structural design, never inferred from a support test.
+
+Generate isolated diagnostic inputs with `scripts/garden_g6_evidence.py
+--specimens`, render them through `garden_g6_preview.py`, and have their
+receipts reviewed before authoritative export. The preview script acquires
+the configured graphics lock by a read-only file descriptor; shell `flock 9
+command` treats 9 as a filename and does not lock an already-open descriptor.
+Actual face/material hashes govern reuse; new metadata is explicitly checked.
+All procedural botanical, furniture, bowl and finish appearances remain
+ASSUMED, with procurement/photographic likeness UNVERIFIED.
+
+The south content policy permits only registered client-approved G6 roles,
+not arbitrary tagged objects. Physical beam and rafter bearings, at-grade
+posts, actual recorded clear height, rooted vines, mature tree and route
+exclusion, finite wall wires and live three-date sunniest-wall selection run
+in candidate/export/contract/view/portable checks. East quote matching removes
+full-sun/best-flowering mismatches in beds, trellis AND retained door pots;
+top Ixora stays a disclosed seasonal trial. Missing quotes fail closed;
+indirect-light applicability without neighbouring foliage rays stays unresolved.
+
+Finish subtraction preserves intentional soil AND slim edging; only competing
+architectural/turf/paving caps are cut. Scanning the same landscape list must
+not subtract its own target soil or open closed bed edging. Assembly grounding
+queries use the exact existing non-glass building triangle subset; dense item
+triangles still participate in connectivity and props retain their full
+furniture-support query. All physical tolerances remain unchanged.
+
+Garden subjects establish camera scope without a closed view-ID list. Explicit
+leaf geometry uses actual triangle distance after the conservative box test,
+with the same exterior 1.0 m and interior 0.15 m lens clearances. A root-to-roof
+vine box includes empty air. Framing is separate from sightlines: retain both
+full-width vertex projections and first-hit evidence, and disclose a requested
+view that cannot be taken without moving the accepted design or weakening a
+guard. Export/measure with `scripts/garden_g6_evidence.py`; run the focused G6,
+landscape, render-standard/views, mounting, provenance, garden subjects and
+asset-route tests, then portable verification in normal and initially empty
+HOME. Authoritative unsupported/opening lists must both be empty.
+
+G6 read-back follow-up: sun-wall evidence uses JSON-native coordinates before
+export; run its strict live comparison against the loaded scene, not just the
+in-memory builder. Corner roots inside the recorded south domain use that
+garden identity without changing their solar coordinates. A cross-yard
+caption may name the measured camera garden as well as the subject garden,
+never an arbitrary side. Neutral context review must also assess projected
+subject width/angle, screening and clipping; passing projection and first-hit
+rays alone does not establish an informative frontal view. Preview camera
+candidates with --candidate-view without modifying exported geometry. Report
+an unmatched requested subject set as OPEN rather than interpreting a
+companion detail as fulfilment.
+
+Light reports and quote guards must use the same authored root_z_m, not
+assume yard grade for raised bowl/door-pot/top-soil plants. Record actual
+sampling elevations; fall back to the legacy zone datum only when the input
+has no root datum. Recompute all three dates after changing this consumer.
+
+Upper/sunken camera follow-up: projection through an opaque parapet does not
+establish visibility. Declare actual named plant visibility_targets for a
+changed view and require the existing first-hit screen plus neutral preview.
+A roof-edge view also declares standing_ground_m: the shared physical floor
+query must find a native upward surface at that datum using the existing
+resting tolerance. Yard containment alone cannot support a lens over the
+sunken void. If the complete upper frame cannot fit, retain whole actual
+plant groups and explicitly exclude the complete trellis/bed/side strip, with
+the independently accepted ground-level companion. No design moves, invented
+room declarations, projection/visibility tolerance changes or exposure fixes.
+
+When a new physical requirement reaches a historical reduced fixture, preserve
+the refusal on absent geometry. Supply frozen native faces and materials for
+the clean case; never interpret a cover-only fixture as a standing floor.
+Use authored unresolved cameras for a domain-only test so unrelated furniture
+search cannot hide which physical inputs the fixture actually exercises.

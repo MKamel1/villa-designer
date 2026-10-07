@@ -29,7 +29,10 @@ class LandscapeGuards(unittest.TestCase):
         frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text()))
         self.assertIn('0.660 m',plant_form_findings(frozen['clumps'])[0])
         self.assertEqual(plant_form_findings(self.meshes),[])
-        clump=next(m for m in self.meshes if m.get('species')=='Strelitzia reginae')
+        # G6 retires this full-sun plant from the east yard. Its real builder
+        # remains independently exercised without restoring the placement.
+        clump=L._botanical_clump('historical-paddle-proof','Strelitzia reginae',
+                                (0,0),L.GROUND,L._plant_data(),bed='proof',layer='accent')
         self.assertEqual(len(clump['blade_records']),17)
         self.assertTrue(all(3<=b['measured_length_width_ratio']<=4 for b in clump['blade_records']))
         # Another datum/identifier does not suppress the historical failure.
@@ -89,7 +92,9 @@ class LandscapeGuards(unittest.TestCase):
         self.assertEqual(set(data), {"Aspidistra elatior", "Ixora coccinea", "Strelitzia reginae",
             "Callistemon citrinus", "Ursinia anthemoides", "Salvia rosmarinus Prostrata Group",
             "Aloe vera", "Plumeria rubra", "Trachelospermum jasminoides", "Bougainvillea glabra", "Cissus alata",
-            "Rhapis excelsa", "Fatsia japonica", "Chlorophytum comosum", "Ophiopogon japonicus", "Liriope muscari"})
+            "Rhapis excelsa", "Fatsia japonica", "Chlorophytum comosum", "Ophiopogon japonicus", "Liriope muscari",
+            "Petrea volubilis", "Eriobotrya japonica", "Pittosporum tobira",
+            "Pittosporum tobira 'Wheeler's Dwarf'", "Plectranthus 'Mona Lavender'"})
         for row in data.values():
             self.assertEqual(row["egypt_performance"]["status"], "UNVERIFIED")
             self.assertEqual(row["root_behaviour_over_basement_slab"]["status"], "UNVERIFIED")
@@ -308,7 +313,7 @@ class LandscapeGuards(unittest.TestCase):
             np.testing.assert_allclose(asset_triangles(str(path))[0],[[2,-4,3],[4,-4,3],[2,-4,4]])
 
     def test_g2_three_species_drifts_pots_and_solar_trellis_allocation(self):
-        self.assertEqual(set(self.plan["beds"]), {"east","north"})
+        self.assertEqual(set(self.plan["beds"]), {"east","north","south-foliage","south-rear-a","south-rear-b"})
         for bed in self.plan["beds"]:
             for layer in ("back","mid","front"):
                 drift=[p for p in self.plan["plants"] if p.get("bed")==bed and L.planting_layer(p)==layer]
@@ -316,7 +321,7 @@ class LandscapeGuards(unittest.TestCase):
                 self.assertEqual(len({p["species"] for p in drift}),1)
         by_id={m["id"]:m for m in self.meshes}
         self.assertEqual(by_id["landscape-climber-north"]["species"],"Cissus alata")
-        self.assertEqual(by_id["landscape-climber-east"]["species"],"Bougainvillea glabra")
+        self.assertEqual(by_id["landscape-climber-east"]["species"],"Trachelospermum jasminoides")
         self.assertGreater(len(L.direct_sun_hours(18.75,-20.641)),len(L.direct_sun_hours(-.123,-24.65)))
         pots=[m for m in self.meshes if m["part_kind"]=="planter" and "door-pot" in m["id"]]
         self.assertEqual(len(pots),4)
@@ -386,7 +391,7 @@ class LandscapeGuards(unittest.TestCase):
 
     def test_procedural_clumps_have_recorded_size_and_mutations_fail(self):
         clumps=[m for m in self.meshes if m["part_kind"]=="plant-clump"]
-        self.assertEqual(len(clumps),30)
+        self.assertEqual(len(clumps),74)
         self.assertEqual(L.dimension_violations(clumps), [])
         for source in clumps[:2]:
             altered=copy.deepcopy(source)

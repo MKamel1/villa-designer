@@ -29,6 +29,11 @@ def hfov(v):
     return 2 * math.degrees(math.atan(v["camera"]["sensor_mm"] / 2 / v["camera"]["lens_mm"]))  # sensor = width
 
 
+def garden_camera_view(view):
+    """Physical garden subjects require clearance regardless of camera ID."""
+    return any(subject.startswith("landscape-") for subject in view.get("subjects", []))
+
+
 def door_leaf_near(scene, px, py):
     """Whether the rendered scene actually has a door leaf at this camera (villa-render doorway guard)."""
     return any(m.get("material") == "door-oak" and
@@ -118,12 +123,25 @@ def camera_proximity_violations(view, scene, items, clearance=None):
     # Procedural landscape foliage/containers need the same lens clearance
     # as imported planting. Paving/turf are the standing surface.
     for mesh in scene["meshes"]:
-        if mesh.get("part_kind") not in ("hanging-basket", "swing-cushion", "suspension-line", "ceiling-anchor", "plant-clump", "feature-stone", "climber", "climber-branch", "trellis", "planter", "planter-rim", "steel-trough") or mesh.get("group") not in ("furniture", "dressing"):
+        physical_garden_part = mesh.get("part_kind") in ("hanging-basket", "swing-cushion", "suspension-line", "ceiling-anchor", "plant-clump", "feature-stone", "climber", "climber-branch", "trellis", "planter", "planter-rim", "steel-trough")
+        # New procedural assemblies carry their physical role explicitly;
+        # an exterior camera must not bypass clearance by using a new view
+        # identifier or a previously unseen builder part name.
+        physical_garden_part |= mesh.get("g6_element") in ("pergola", "climber", "centrepiece", "furniture", "espalier", "foliage")
+        if not physical_garden_part or mesh.get("group") not in ("furniture", "dressing", "landscape"):
             continue
         points = [p for f in mesh["faces"] for p in f]
         lo = [min(p[i] for p in points) for i in range(3)]
         hi = [max(p[i] for p in points) for i in range(3)]
         distance = math.sqrt(sum(max(lo[i]-v, 0, v-hi[i])**2 for i,v in enumerate((px,py,pz))))
+        if distance < clearance and (mesh.get('explicit_geometry') or mesh.get('leaf_face_indices')):
+            # A vine's low root and high canopy make its whole-mesh box
+            # enclose empty air. Keep the same clearance and measure the
+            # actual authored triangles within that conservative box.
+            import numpy as np
+            from archpipe.concept.render_support import _triangles, _point_triangle_distance
+            triangles,_=_triangles([mesh])
+            distance=float(_point_triangle_distance(np.array([[px,py,pz]]),triangles).min())
         if distance < clearance:
             failures.append((mesh["id"], round(distance, 3)))
     for item in items.values():
@@ -216,6 +234,10 @@ def storage_front_occlusions(view, items, parts_by_id=None):
 
 def main():
     scene = json.loads((OUT / "scene.json").read_text(encoding="utf-8"))
+    from archpipe.concept.garden_g6 import scene_findings as g6_findings
+    failures=g6_findings(scene)
+    if failures:
+        raise ValueError('G6 physical garden: '+str(failures))
     lay = R.design("D1")
     items = {i["id"]: i for i in F.layout(lay)}
     views = scene["views"]
@@ -240,7 +262,7 @@ def main():
         px, py = cam["position"][:2]
         # The one-metre exterior clearance is calibrated on the v26/v28 canopy/pot
         # failures. Compact interior view selection has its own 0.15 m clearance rule.
-        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v36-", "v37-", "v38-", "v39-")):
+        if garden_camera_view(v):
             for near_id, distance in camera_proximity_violations(v, scene, items):
                 problems.append("%s: camera %.2f m from %s (need >= 1.0 m)" % (v["id"], distance, near_id))
         if v["id"].startswith("v28-"):

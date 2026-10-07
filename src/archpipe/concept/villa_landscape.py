@@ -364,7 +364,11 @@ def dimension_violations(props, tol=1e-6):
         row = require_species(p["species"])
         if p.get("part_kind") in ("climber", "climber-branch", "plant-clump"):
             points = [point for face in p["faces"] for point in face]
-            assumed = row["placement_assumptions"]["procedural-clump" if p.get("part_kind") == "plant-clump" else "procedural-trellis"]
+            appearance = p.get("appearance_key", "procedural-clump" if p.get("part_kind") == "plant-clump" else "procedural-trellis")
+            assumed = row["placement_assumptions"].get(appearance)
+            if assumed is None:
+                out.append((p["id"], "procedural appearance has no recorded ASSUMED envelope"))
+                continue
             achieved = {"height": max(q[2] for q in points)-min(q[2] for q in points),
                         "spread": max(max(q[i] for q in points)-min(q[i] for q in points) for i in (0, 1))}
             for field, got in achieved.items():
@@ -658,15 +662,21 @@ def south_content_violations(meshes, props, objects=()):
             continue
         if item.get("species") == "Plumeria rubra" and item.get("asset") == "sf_frangipani":
             trees.append(item)
+        elif item.get("g6_element"):
+            from .garden_g6 import content_findings
+            out.extend(content_findings([],objects=[item]))
         else:
-            out.append((item["id"], "south permits only lawn, paths, tree pit and one Plumeria"))
+            out.append((item["id"], "south permits only approved G6 contents and one Plumeria"))
     for mesh in meshes:
         pts = [p for face in mesh["faces"] for p in face]
         if min(p[2] for p in pts) >= -.01 or _rect_overlap_area(_mesh_rect(mesh), SOUTH) <= 1e-6:
             continue
         allowed = (mesh["material"] == "artificial-grass" and mesh.get("part_kind") == "finish-layer" or
                    mesh.get("part_kind") == "stepping-stone" or mesh.get("part_kind") == "tree-pit")
-        if not allowed:
+        if mesh.get("g6_element"):
+            from .garden_g6 import content_findings
+            out.extend(content_findings([mesh]))
+        elif not allowed:
             out.append((mesh["id"], "south contains a forbidden surface or object"))
     if len(trees) != 1:
         out.append(("south", "exactly one Plumeria required; found %d" % len(trees)))
@@ -1162,8 +1172,8 @@ def review_candidate(spec, lay=None):
             raise ValueError(name+" bed leaves yard")
         if any(_rect_overlap_area(rect,r[:4]) > 1e-6 for r in garden_level_rooms(lay)):
             raise ValueError(name+" bed enters garden-level room")
-        if name == "north":
-            continue  # G4 soil and slim edging are constructed together below.
+        if name in ("north", "east"):
+            continue  # Each garden builder constructs its ground-level soil.
         meshes.append(_mesh("bed-"+name,"ground","garden-gravel",_quad(*rect,GROUND+.008),
                             "ASSUMED boundary bed, three primary layers; G2 young planting",kind="finish-layer",surface=True,occupied_side=(0,0,1)))
 
@@ -1237,17 +1247,16 @@ def review_candidate(spec, lay=None):
     clump["label"] += "; ASSUMED root barrier; keep centre >=1.0 m from walls and paths"
     meshes.append(clump);plants.append(clump)
     meshes.append(SHADE.stone("north-feature-stone",shade["feature_stone_center_m"],GROUND))
-    for i, center in enumerate(((17.90,-21.75),(18.90,-21.75),(19.60,-22.45))):
-        # Young Ixora at 0.55 m is the recorded default, not the obsolete
-        # east nursery context at 1.0 m, whose canopy would close the path.
-        plant("landscape-east-mid-drift-%02d"%i,"sf_ixora",center,bed="east",layer="mid")
-    for i, x in enumerate((17.90,18.75,19.60)):
-        for species, layer, y in (("Strelitzia reginae","back",-20.95),
-                                  ("Aspidistra elatior","front",-22.43)):
-            clump = _botanical_clump("east-%s-%02d"%(layer,i),species,(x,y),GROUND,data,bed="east",layer=layer)
-            meshes.append(clump); plants.append(clump)
+    from . import garden_g6 as G6, garden_g6_east as EAST
+    east_meshes,east_plants,east_beds,east_light = EAST.build(data)
+    meshes.extend(east_meshes);plants.extend(east_plants)
+    beds['east']=east_beds[0]
+    g6_meshes,g6_plants,g6_objects,g6_plan=G6.build(data)
+    meshes.extend(g6_meshes);plants.extend(g6_plants);objects.extend(g6_objects)
+    beds.update({name:rect for name,rect in g6_plan['beds'].items() if name!='south-espalier'})
+    reveal_ground_soil(meshes,meshes)
 
-    for name, x, y in (("north", *shade["trellis_start_m"]), ("east",18.75,-20.641)):
+    for name, x, y in (("north", *shade["trellis_start_m"]),):
         if name == "south":
             frame = _box(x-.04, y, GROUND, x, y+1.5, GROUND+2.2)
         elif name == "west":
@@ -1299,7 +1308,7 @@ def review_candidate(spec, lay=None):
 
 
     for mesh in meshes:
-        if mesh.get("part_kind") in ("climber", "climber-branch"):
+        if mesh.get("part_kind") in ("climber", "climber-branch") and "species" not in mesh:
             mesh["species"] = "Bougainvillea glabra" if mesh["id"].endswith("east") else "Cissus alata"
             mesh["root_z_m"] = GROUND
             from ..orientation import appearance_seed
@@ -1311,13 +1320,14 @@ def review_candidate(spec, lay=None):
             ("dining-n",(15.882,-22.97)), ("dining-s",(17.896,-22.97)),
             ("living-east-n",(19.55,-22.97)), ("living-east-s",(21.564,-22.97)),
 ):
-        species = "Ixora coccinea" if not name.startswith("lounge") else "Aspidistra elatior"
+        species = EAST.MONA
         potdata = record["design_assumptions"]["door_pot"]
-        if species == "Ixora coccinea":
-            pp = plant("landscape-door-pot-"+name,"sf_ixora",center,bed="door-pot-"+name,ground=GROUND+potdata["height_m"]-.005)
-        else:
-            pp = _botanical_clump("door-pot-"+name,species,center,GROUND+potdata["height_m"]-.005,data,bed="door-pot-"+name,layer="accent")
-            meshes.append(pp); plants.append(pp)
+        pp = G6.clump("door-pot-"+name,species,center,GROUND+potdata["height_m"]-.005,
+                      data,bed="door-pot-"+name,layer="accent")
+        # The east-yard pot is retained; its sun-demanding Ixora is retired.
+        pp.pop('g6_element')
+        pp['label'] += '; lead decision 2026-10-06: replace east-yard Ixora with part-shade flower colour'
+        meshes.append(pp);plants.append(pp)
         rect = (center[0]-.259,center[1]-.259,center[0]+.259,center[1]+.259)
         objects.append(dict(id="landscape-door-pot-"+name+"-planter",rect=rect,bottom_m=GROUND,top_m=GROUND+.4))
         body,rim,soil = _pot(*center,GROUND,potdata["lower_radius_m"],potdata["upper_radius_m"],potdata["height_m"])
@@ -1363,7 +1373,7 @@ def review_candidate(spec, lay=None):
     notes = [zone_name("-x")+" G4: lush shade foliage in ground-level soil beds; gravel under the GF balcony. Bistro and lounge pots removed per client 2026-10-06. Hanging swing restored from GF balcony: client decision 2026-10-06; structural check pending. Cissus alata replaces star jasmine on the open timber trellis; light applicability PARTIAL, Cairo winter suitability UNVERIFIED.",
              "G1/G2 review candidate: artificial turf, stepping stones, one Plumeria in the lawn, offset from centre for a clear door route and ASSUMED 1.2 m gravel tree pit.",
              "Only knowledge/garden-palette.json supplies botanical dimensions, sources and placement assumptions. Egypt performance and root behaviour over the basement slab are UNVERIFIED.",
-             "Retained east-yard boundary bed and terracotta-red glazed door pots; north garden G4 shade beds and grape ivy on open timber. G3 low steel troughs with rosemary/aloe drifts, two benches on slabs and a gate-link path; no shade tree placed.",
+             "G6 east-yard part-shade ground beds, star jasmine and retained glazed door pots replanted with Mona Lavender; north garden G4 shade beds and grape ivy on open timber. G3 low steel troughs with rosemary/aloe drifts, two benches on slabs and a gate-link path; no shade tree placed.",
              "ASSUMED drip irrigation to retained beds/containers; tree-pit watering/drainage needs local nursery and engineering review.",
              "Trough colour: " + TROUGH_COLOUR["name"] + "; authored appearance ASSUMED, not a manufacturer finish. Powder-coat weathering in Egyptian sun and loaded deck weight UNVERIFIED; supplier data sheet and engineer decide before ordering.",
              "Top container roots/deep rooting and waterproofing over the basement slab UNVERIFIED: local nursery and waterproofing/structural consultant must confirm; no deep-rooted tree specified.",
@@ -1379,11 +1389,11 @@ def review_candidate(spec, lay=None):
                           for item in E.spec()["elements"]
                           if item["id"].startswith("fence-") or item["id"] == "yard-wall-ne"]
     plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,accent_beds={"north-accent":shade["accent_bed"],"north-swing-back":shade["swing_back_bed"]},
-                boundary_obstacles=boundary_obstacles,
+                boundary_obstacles=boundary_obstacles,g6=g6_plan,east_g6_light=east_light,
                 south_rect=SOUTH,south_center=SOUTH_CENTER,tree_pit=dict(center=tree_center,diameter_m=radius*2,status="ASSUMED"))
     from .garden_sun import audit_plants, active_study, default_study
     study = active_study.get() or default_study()
-    plan["plant_light_review"] = audit_plants(plants+[m for m in meshes if m.get("part_kind")=="climber"],study)
+    plan["plant_light_review"] = audit_plants(list({p["id"]:p for p in plants+[m for m in meshes if m.get("part_kind")=="climber"]}.values()),study)
     plan["sun_geometry_sha256"] = study.geometry_sha256
     from .garden_render_review import normal
     for item in meshes:
@@ -1391,7 +1401,7 @@ def review_candidate(spec, lay=None):
             item["face_materials"] = ["stone-substrate" if normal(face)[2]<-.7 else item["material"] for face in item["faces"]]
     from ..orientation_guard import scene_findings as orientation_findings
     naming=orientation_findings(dict(meshes=meshes,props=props,garden_zones={**beds,**plan["accent_beds"],**PATHS}))
-    plan["conflicts"] = [("orientation", f) for f in naming]+candidate_violations(meshes,props,plan,lay)
+    plan["conflicts"] = G6.findings(g6_meshes,g6_plan)+EAST.quote_match_findings(east_plants+[p for p in plants if str(p.get("bed","")).startswith("door-pot-")],study=study)+[("orientation", f) for f in naming]+candidate_violations(meshes,props,plan,lay)
     notes += ["UNRESOLVED garden guard: %s: %s" % f for f in plan["conflicts"]]
     return meshes,props,notes,plan
 
@@ -1520,7 +1530,7 @@ def reveal_ground_soil(shell_meshes, soil_meshes):
     from .garden_render_review import normal
     beds=[(Polygon([q[:2] for q in m['faces'][0]]),m['faces'][0][0][2]) for m in soil_meshes if m.get('part_kind')=='soil-bed']
     for m in shell_meshes:
-        if m.get('group') not in ('shell','ground','context'):continue
+        if m.get('part_kind') in ('soil-bed','bed-edge') or m.get('group') not in ('shell','ground','context'):continue
         slots=m.get('face_materials',[m['material']]*len(m['faces']))
         faces=[];materials=[];changed=False
         for face,material in zip(m['faces'],slots):
@@ -1528,7 +1538,10 @@ def reveal_ground_soil(shell_meshes, soil_meshes):
                 faces.append(face);materials.append(material);continue
             z=face[0][2];polygon=Polygon([q[:2] for q in face]);remaining=polygon
             for bed,soil_z in beds:
-                if abs(z-soil_z)<1e-6:remaining=remaining.difference(bed)
+                # The visibility guard also detects thin turf/paving caps
+                # just above soil. Remove that whole competing finish band;
+                # buried backing below soil remains physical substrate.
+                if soil_z-1e-6 <= z <= soil_z+.02:remaining=remaining.difference(bed)
             if abs(remaining.area-polygon.area)<1e-9:
                 faces.append(face);materials.append(material);continue
             changed=True

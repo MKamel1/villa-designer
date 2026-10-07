@@ -74,6 +74,13 @@ def scene_findings(scene, *, building_bounds=None, top_bounds=None):
                 if word!=expected:errors.append(f"{view['id']} {field}: names {word}, expected {expected}")
         for caption in view.get('caption_notes',[]):
             allowed={expected}
+            # Cross-yard captions may describe the photographer's actual
+            # garden as well as the subject garden. Derive it from the
+            # camera position; the annotation grants no arbitrary name.
+            if view.get('caption_camera_garden'):
+                camera_zone=geometry_side(view['camera']['position'],building_bounds)
+                if camera_zone in ('north','east','south','west'):
+                    allowed.add(camera_zone)
             if local:
                 allowed.update(word for subject in subjects for word in named_sides(subject['id']))
             for word in named_sides(re.sub(r'https?://\S+','',caption)):

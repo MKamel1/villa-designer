@@ -194,10 +194,16 @@ def _point_triangle_distance(p, t):
 def unsupported(scene, lay=None):
     meshes = scene["meshes"]
     tris, owner = _triangles(meshes)
-    S = _Surfaces(tris, owner)
+    all_surfaces = _Surfaces(tris, owner)
     is_item = np.array([m["group"] in ITEM_GROUPS for m in meshes])
     glass = np.array([m["material"].startswith("glass") for m in meshes])
     building = (~is_item[owner]) & (~glass[owner])
+    # Item triangles cannot ground an assembly. Restrict these repeated
+    # contact queries to the exact existing building mask, preserving all
+    # faces and tolerances; dense botanical triangles remain in island
+    # connectivity and in the separate prop support query below.
+    S = _Surfaces(tris[building], owner[building])
+    building = np.ones(len(S.t), dtype=bool)
     parts = {}
     for i, m in enumerate(meshes):
         if not is_item[i]:
@@ -232,6 +238,8 @@ def unsupported(scene, lay=None):
     grounded = {find(k) for k in keys if ok[k]}
     out = [(meshes[i]["id"], [round(float(v), 3) for v in parts[(i, k)][0]]) for (i, k) in keys
            if find((i, k)) not in grounded]
+    S = all_surfaces
+    building = (~is_item[owner]) & (~glass[owner])
     for p in scene.get("props", []):
         x, y, z = p["position"]
         if any(S.meets(S.up, x + dx, y + dy, z) for dx, dy in ((0, 0), (0.1, 0), (-0.1, 0), (0, 0.1), (0, -0.1))):

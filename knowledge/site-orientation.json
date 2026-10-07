@@ -202,10 +202,10 @@
     "south": "west"
   },
   "zone_names": {
-    "north": "north garden — street-side sunken garden",
-    "east": "east yard — ramp, top garden deck and open sunken part",
-    "south": "south garden — rear garden with frangipani",
-    "west": "west — sister side"
+    "north": "north garden \u2014 street-side sunken garden",
+    "east": "east yard \u2014 ramp, top garden deck and open sunken part",
+    "south": "south garden \u2014 rear garden with frangipani",
+    "west": "west \u2014 sister side"
   },
   "legacy_prefix_aliases": {
     "landscape-west": "landscape-north",
@@ -238,7 +238,8 @@
       "docs/garden-g4-report.md": "2248527ba92be93f1f685e7061bb1ed02887ff10a2e3ca6d7e11d8270cde983a",
       "docs/garden-g2f-report.md": "c3e692e5249a670d3e790e700579cdf21e6d390114e9589cbdd1af46dbd506d0",
       "docs/garden-g2-report.md": "3f401ab239d9f66a3a48b466323b2e2c7baae842ec2749ed97a2650c9aa90df7",
-      "docs/ops/garden-rebuild.md": "7df7c526b5be97cbc5c6ebd1106dbb1f7c9432aa9c52d30d6c1e1cdf1e7a9aca"
+      "docs/ops/garden-rebuild.md": "275b7e7ee85056f1f09dc61c440ab2128e208e183ab04eda66e124f9a195cf8b",
+      "docs/garden-g6-report.md": "c1d134dda0438643562c916d00fb290727685f44e2db1681c624cc2246c80b6d"
     }
   }
 }

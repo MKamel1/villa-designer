@@ -14,6 +14,7 @@ SCENE = VR.build()
 # Audited presentation finishes, including the explicitly authored luminous
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
+    "g6-lavender-flower", "g6-white-flower", "g6-bowl-glaze", "g6-outdoor-cushion",  # G6 ASSUMED appearances
     "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",
     "terracotta-red-glaze", "garden-soil", "garden-foliage", "star-jasmine-flower", "star-jasmine-leaf",  # round-3 garden finishes
     "strelitzia-foliage", "stone-substrate", "shade-variegation", "grape-ivy-leaf",

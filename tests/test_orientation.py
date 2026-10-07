@@ -112,6 +112,10 @@ class Orientation(unittest.TestCase):
         for kind in ('meshes','props'):
             current={m['id']:m for m in self.scene[kind]}
             for item in old[kind]:
+                # G6 deliberately replants east and adds south assemblies.
+                # Preserve this naming-only comparison for unaffected gardens
+                # and the retained D4 frangipani transform.
+                if item.get('zone')!='top' and item.get('id')!='landscape-tree-south' and (item['id'].startswith(('landscape-east-','landscape-bed-east','landscape-grass-east','landscape-grass-south','landscape-climber-east','landscape-climber-branches-east','landscape-trellis-east','landscape-door-pot-'))):continue
                 new=current[item['id']]
                 for field in ('faces','position','scale','rotation_deg','material'):
                     if field in item:np.testing.assert_equal(new[field],item[field])
@@ -125,9 +129,10 @@ class Orientation(unittest.TestCase):
         mutated['garden_sun_evidence']['plants'].pop()
         self.assertIn('every actual landscape plant',str(sun_findings(mutated)))
         evidence=self.scene['garden_sun_evidence']['plants']
-        self.assertEqual(len(evidence),len(self.before['plan']['plants'])+2)
+        self.assertEqual(len(evidence),len({r["id"] for r in evidence}))
         self.assertTrue(all(set(p['sunlit_local_standard_hours'])==set(DATES) for p in evidence))
         self.assertTrue(any(p['species']=='Ixora coccinea' and p['status']=='MISMATCH' for p in evidence))
-        self.assertTrue(any(p['species']=='Bougainvillea glabra' and p['quote']=='prefer full sun' for p in evidence))
+        self.assertFalse(any(p['species'] in ('Bougainvillea glabra','Strelitzia reginae') and p['zone']=='east' for p in evidence))
+        self.assertTrue(any(p['species']=='Trachelospermum jasminoides' and p['zone']=='east' for p in evidence))
 
 if __name__=='__main__':unittest.main()

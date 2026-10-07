@@ -100,6 +100,8 @@ def main() -> int:
     expect("garden documents use recorded client compass names", not document_findings())
     from archpipe.concept.garden_sun import scene_findings as garden_sun_findings
     expect("garden sun evidence covers all plants and binds actual enclosure rays", not garden_sun_findings(scene))
+    from archpipe.concept.garden_g6 import scene_findings as g6_findings
+    expect("G6 pergola bearings, routes, tree circle and wall espalier", not g6_findings(scene))
     garden_registry = json.loads((ROOT / "knowledge/garden-render-guards.json").read_text(encoding="utf-8"))
     expect("garden render controls have registered proving tests",
            all((ROOT / item["proof_file"]).is_file() and all(

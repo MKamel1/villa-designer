@@ -55,6 +55,9 @@ class NorthShade(unittest.TestCase):
             by_id={m['id']:m for m in frozen_items}
             for item in items:
                 if L._rect_overlap_area(L._rect(item),L.NORTH_COURT)>1e-6:continue
+                # G6 replaces east/south contents; this earlier G4 retention
+                # proof now protects the unchanged top garden and D4 tree.
+                if item.get('zone')!='top' and not item['id'].startswith('landscape-top-') and item['id']!='landscape-tree-south':continue
                 for field in ('faces','rect','position','scale','rotation_deg','material'):
                     if field in item:
                         self.assertEqual(json.loads(json.dumps(item[field])),by_id[item['id']][field])

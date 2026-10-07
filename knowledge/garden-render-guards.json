@@ -210,6 +210,179 @@
         "test_real_scene_reproduces_lead_and_old_proxy_disagrees",
         "test_rename_preserves_actual_geometry_and_climber_appearance"
       ]
+    },
+    {
+      "lesson_id": "garden-g6-physical-assemblies",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "at-grade supported timber with full-door inset post; explicit rooted vines; physical finite-face espalier; species-specific envelopes",
+      "check": "garden_g6.findings / scene_findings; render_support.blocked_openings",
+      "stage": "candidate, scene build/contract, view plan and portable verification",
+      "proof_file": "tests/test_garden_g6.py",
+      "proofs": [
+        "test_real_pergola_move_into_d4_circle_fails",
+        "test_real_posts_lift_and_missing_bearing_fail",
+        "test_real_wire_off_wall_and_root_mutations_fail",
+        "test_renamed_translated_pergola_guard_generalises",
+        "test_actual_post_door_failure_clean_and_renamed_sibling",
+        "test_actual_live_clear_height_and_missing_loquat_fail",
+        "test_actual_wall_evidence_survives_export_readback_and_mutations"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-light-applicability",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "replace east full-sun species at source; exact root-level enclosure rays and quoted-light preference checks",
+      "check": "garden_g6_east.quote_match_findings; garden_sun.audit_plants",
+      "stage": "candidate and authoritative G6 acceptance",
+      "proof_file": "tests/test_garden_g6_east.py",
+      "proofs": [
+        "test_real_committed_sun_mismatch_and_identifier_sibling",
+        "test_general_guard_refuses_real_species_mutation_and_missing_quote",
+        "test_any_zone_and_moved_geometry_use_live_sun_not_identity",
+        "test_real_sloped_basal_cap_failure_and_translated_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-physical-leaves",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "explicit connected exported leaf faces retained by Blender; actual basal leaf gap",
+      "check": "garden_render_review.plant_form_findings; Blender build_climbers",
+      "stage": "isolated preview, scene contract and portable verification",
+      "proof_file": "tests/test_garden_g6_consumers.py",
+      "proofs": [
+        "test_explicit_climber_keeps_exported_geometry_in_blender",
+        "test_explicit_leaf_guard_uses_actual_faces_and_rejects_missing_indices"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-camera-role",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "garden subjects establish camera scope; physical garden roles independent of view IDs; exact explicit plant distance with unchanged lens clearance",
+      "check": "scripts.villa_render_views.camera_proximity_violations",
+      "stage": "view plan",
+      "proof_file": "tests/test_garden_g6_views.py",
+      "proofs": [
+        "test_real_new_chair_and_renamed_sibling_cannot_bypass_clearance",
+        "test_every_new_physical_role_uses_same_clearance",
+        "test_real_roof_vine_empty_box_is_not_lens_contact",
+        "test_actual_camera_context_does_not_grant_arbitrary_names"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-soil-cut",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "cut competing thin caps while preserving intentional soil AND slim closed edging",
+      "check": "villa_landscape.reveal_ground_soil; garden_render_review.soil_visibility_findings",
+      "stage": "candidate and scene construction",
+      "proof_file": "tests/test_garden_g6.py",
+      "proofs": [
+        "test_actual_soil_cut_preserves_soil_and_removes_thin_caps",
+        "test_real_cut_edging_siblings_and_clean_construction"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-support-cost",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "exact building-only triangle subset for grounding; unchanged full prop support query",
+      "check": "render_support.unsupported",
+      "stage": "authoritative scene acceptance and render-standard regression",
+      "proof_file": "tests/test_garden_g6_support.py",
+      "proofs": [
+        "test_actual_building_mask_matches_frozen_support_and_mutations"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-seating-access",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "client permitted bench plus two chairs, four seats; explicit paved access rectangles checked against physical walking geometry",
+      "check": "garden_g6.findings; villa_landscape.route_violations",
+      "stage": "candidate, scene contract and portable verification",
+      "proof_file": "tests/test_garden_g6.py",
+      "proofs": [
+        "test_real_four_chair_aisle_conflict_current_family_seating_and_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-readback-identity",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "JSON-native wall-sample coordinates and actual garden domain for corner-root report labels",
+      "check": "garden_g6.scene_findings; garden_sun.audit_plants",
+      "stage": "authoritative export/read-back and light report",
+      "proof_file": "tests/test_garden_g6.py",
+      "proofs": [
+        "test_actual_wall_evidence_survives_export_readback_and_mutations",
+        "test_actual_corner_root_audit_names_garden_not_nearest_house_face"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-context-composition",
+      "control_tier": [
+        1,
+        3
+      ],
+      "construction": "preview camera-only candidate with actual projected geometry before integration; captions disclose tree screening, sofa clipping and structural assumptions; unmatched requested view remains OPEN",
+      "check": "independent neutral context review; villa_render.VIEWS caption coverage",
+      "stage": "pre-integration candidate and final diagnostic context review",
+      "proof_file": "tests/test_garden_g6_views.py",
+      "proofs": [
+        "test_reviewed_oblique_camera_improves_real_grazing_view_without_geometry_move"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-root-sample",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "solar audit derives root sampling elevation from authored root_z_m, retaining legacy fallback only for absent datum",
+      "check": "garden_sun.audit_plants",
+      "stage": "candidate and final light-applicability report",
+      "proof_file": "tests/test_garden_g6.py",
+      "proofs": [
+        "test_actual_raised_container_sun_sampling_and_translated_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6-upper-occlusion",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "camera-only supported roof-edge three-layer view; explicit trellis companion; declared actual plant first-hit targets and native standing-floor datum",
+      "check": "garden_render_review.subject_visibility_findings / garden_camera_findings",
+      "stage": "camera candidate preview, scene build/contract, view plan and portable verification",
+      "proof_file": "tests/test_garden_g6_views.py",
+      "proofs": [
+        "test_real_upper_projection_can_hide_every_plant_and_translated_sibling",
+        "test_actual_upper_camera_requires_native_floor_and_visible_plant_groups"
+      ]
     }
   ]
 }

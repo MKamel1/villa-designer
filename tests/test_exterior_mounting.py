@@ -15,6 +15,17 @@ class ExteriorMounting(unittest.TestCase):
         self.frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/c4-e-rejected-hosts.json').read_text()))
         self.scene=dict(meshes=deepcopy(self.frozen['meshes']),mounting_hosts={},mounting_movements=[])
 
+    def test_explicit_boundary_side_is_independent_of_garden_name(self):
+        source=next(m for m in self.scene['meshes'] if m['id']=='landscape-trellis-east')
+        sources=yard_sources(self.scene)
+        renamed=deepcopy(source);renamed['id']='landscape-g6-loquat-wires'
+        mount_landscape(self.scene,renamed,sources,model_side='+y')
+        host=self.scene['mounting_hosts'][renamed['mounting']['host_id']]
+        self.assertEqual(list(host['normal']),[0,-1,0])
+        wrong=deepcopy(source);wrong['id']='another-yard-training-wires'
+        with self.assertRaisesRegex(ValueError,'refused host'):
+            mount_landscape(self.scene,wrong,sources,model_side='-y')
+
     def test_real_south_remote_rejected_boundary_resolves_and_translates(self):
         south=next(m for m in self.scene['meshes'] if m['id']=='landscape-trellis-west')
         wrong=next(m for m in self.scene['meshes'] if m.get('source_id')=='fence-west')

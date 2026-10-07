@@ -12,6 +12,7 @@ import math
 
 # Each admitted kind has a physical reason to retain a rectangular solid.
 BOX_KINDS = {
+    "trellis": "Straight timber pergola/trellis members have rectangular physical sections; assembled frames retain open gaps.",
     "cabinet-carcass": "Planar cabinet boards and rectangular enclosure are the finished joinery shape.",
     "shelf": "A straight shelf is a rectangular board with stated thickness.",
     "worktop": "A straight worktop is a rectangular slab with stated thickness.",

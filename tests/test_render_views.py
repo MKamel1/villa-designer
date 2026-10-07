@@ -4,6 +4,7 @@ Client 2026-09-27: "Some of the cameras are looking at the wrong direction and u
 import math
 import unittest
 import json
+import gzip
 from pathlib import Path
 from copy import deepcopy
 from unittest.mock import patch
@@ -33,8 +34,21 @@ class ChosenViews(unittest.TestCase):
         covered['id'] = 'another-garden-view'
         covered['camera']['position'] = [2.6, -28.35, -1.65]
         self.assertIn('under architectural cover', garden_camera_findings(covered, scene)[0])
-        for view in V.VIEWS(LAY):
-            self.assertEqual(garden_camera_findings(view, scene), [], view['id'])
+        # This historical enclosure fixture has only two cover meshes;
+        # it cannot prove a new upper camera's actual standing support.
+        # Preserve that fail-closed result, then supply the frozen native
+        # floor geometry for the clean current camera case.
+        floor = json.loads(gzip.decompress((Path(__file__).parent/
+            'fixtures/garden-g6-v27-occluded-before.json.gz').read_bytes()))
+        supported = deepcopy(scene)
+        supported['meshes'].extend(floor['floor_meshes'])
+        supported['materials'].update(floor['materials'])
+        for view in V.VIEWS(LAY, resolve=False):
+            if 'standing_ground_m' in view:
+                self.assertIn('no actual standing floor', str(garden_camera_findings(view, scene)))
+                self.assertEqual(garden_camera_findings(view, supported), [], view['id'])
+            else:
+                self.assertEqual(garden_camera_findings(view, scene), [], view['id'])
         through = deepcopy(covered)
         through['camera']['position'] = [14.2, -21.6, -1.65]
         through['standing_room'] = 'dirty-kitchen'
@@ -313,7 +327,10 @@ class ChosenViews(unittest.TestCase):
         current=by['v27-east-yard-above']
         self.assertEqual(views.camera_proximity_violations(current,scene,ITEMS),[])
         self.assertEqual(set(current['subjects']),{'landscape-east-back','landscape-east-mid',
-                                                  'landscape-east-front','landscape-trellis-east'})
+                                                  'landscape-east-front'})
+        self.assertEqual(current['standing_ground_m'],0.)
+        self.assertEqual(set(current['visibility_targets']),{'landscape-east-back-01','landscape-east-mid-01','landscape-east-front-01'})
+        self.assertIn('complete trellis',' '.join(current['caption_notes']))
         self.assertIn('Full soil-bed extent is outside the frame',' '.join(current['caption_notes']))
         for subject in current['subjects']:
             self.assertEqual(views.subject_mesh_frame_violations(current,scene,subject),[])

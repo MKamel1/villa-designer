@@ -496,6 +496,10 @@ def build_climbers(mesh_specs, objects, materials, warnings):
     for spec in mesh_specs:
         if spec.get("part_kind") != "climber":
             continue
+        if spec.get("explicit_geometry"):
+            # G6 exports physical connected leaves/stems. Keep the measured
+            # geometry used by route, support and framing review in Blender.
+            continue
         obj = objects[spec["id"]]
         obj.hide_render = True
         points = [v for face in spec["faces"] for v in face]
