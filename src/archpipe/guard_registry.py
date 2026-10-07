@@ -59,7 +59,7 @@ from archpipe.external_claims import (
     check_photometry_fitting_agreement,
     ingest_bytes,
 )
-from archpipe import asset_intake, material_basis, render_qa, safe_io, villa_render_contract
+from archpipe import asset_intake, material_basis, refactor_audit, render_qa, safe_io, villa_render_contract
 from archpipe.concept import (
     physical_part,
     revit_spec,
@@ -108,6 +108,7 @@ __all__ = [
     "check_physical_part_garment_proxy",
     "check_physical_part_solid_winding",
     "check_raw_copy_lint",
+    "check_refactor_silent_deletion",
     "check_render_contract_scene_geometry",
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
@@ -1984,6 +1985,65 @@ register_guard(
     description="Fails closed when architectural glass fails to transmit daylight and blocks Cycles shadow rays (l0059)",
     notes="needs real case: requires frozen pixel render of room where refractive glass slab blocked Cycles shadow rays",
     needs_real_case=True,
+)
+
+# 38. refactor-silent-deletion: Behaviour-preserving refactor silently deleted code
+_OLD_COMPARE_LUX_INCIDENT = """
+def main() -> int:
+    rendered = json.loads(a.rendered.read_text(encoding="utf-8"))
+    extract = json.loads(a.extract.read_text(encoding="utf-8"))
+    return 0
+"""
+
+_NEW_COMPARE_LUX_INCIDENT = """
+def main() -> int:
+    extract = json.loads(a.extract.read_text(encoding="utf-8"))
+    return 0
+"""
+
+_OLD_DEMO_LIGHTING_INCIDENT = """
+IES = ph.revit_ies_dir()
+
+def main() -> int:
+    ies = ph.revit_ies_dir()
+    return 0
+"""
+
+_NEW_DEMO_LIGHTING_INCIDENT = """
+def main() -> int:
+    ies = ph.revit_ies_dir()
+    return 0
+"""
+
+
+def check_refactor_silent_deletion(
+    old_src: str,
+    new_src: str,
+    path: str = "scripts/compare_lux.py",
+    allowed: Any = None,
+) -> list[Any]:
+    """Audits behaviour-preserving refactors and fails closed on un-allowed code removals (refactor-silent-deletion)."""
+    findings = refactor_audit.audit_source(old_src, new_src, path=path, allowed=allowed)
+    removals = [f for f in findings if f.is_removal]
+    if removals:
+        first = removals[0]
+        raise ValueError(
+            f"Un-allowed refactor removal in {first.path}:{first.scope}: "
+            f"{first.name} ({first.detail or first.kind})"
+        )
+    return findings
+
+
+register_guard(
+    fn=check_refactor_silent_deletion,
+    name="refactor_silent_deletion",
+    lesson_ids=("refactor-silent-deletion",),
+    real_case=case(_OLD_COMPARE_LUX_INCIDENT, _NEW_COMPARE_LUX_INCIDENT, "scripts/compare_lux.py"),
+    clean_case=case(_OLD_DEMO_LIGHTING_INCIDENT, _NEW_DEMO_LIGHTING_INCIDENT, "scripts/demo_bedroom_lighting.py"),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Audits behaviour-preserving refactors and fails closed on un-allowed code removals (refactor-silent-deletion)",
 )
 
 

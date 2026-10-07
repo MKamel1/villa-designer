@@ -7,12 +7,14 @@ Document Outline:
   - [2. Holistic Prompt Authoring (No Appended Addenda)](#2-holistic-prompt-authoring-no-appended-addenda)
   - [3. Visual Preview Gate (Look-Before-Integrate)](#3-visual-preview-gate-look-before-integrate)
   - [4. Environment and Runtime Preflight](#4-environment-and-runtime-preflight)
+  - [5. Behaviour-Preserving Refactor Audit](#5-behaviour-preserving-refactor-audit)
   - [Operational Dispatch Checklist](#operational-dispatch-checklist)
 Executive Summary: >
   This document defines mandatory operational rules for dispatching, monitoring, and integrating work
   from autonomous coding agents and remote workstation processes. It establishes bounded polling protocols
   to prevent silent monitor disconnections, whole-prompt rewrite disciplines to eliminate contradictory
-  preconditions, and a strict visual preview artifact requirement before referencing new scene elements.
+  preconditions, a strict visual preview artifact requirement before referencing new scene elements, and
+  mandatory refactor auditing to verify that behaviour-preserving refactorings retain all computed code.
 ---
 
 # Agent Dispatch and Operational Disciplines
@@ -57,6 +59,17 @@ These operational procedures govern task delegation, remote workstation executio
   - Runners refuse execution immediately with exit code 2 and a single clear message naming missing dependencies and `sys.executable` if launched under an unconfigured interpreter.
   - Cross-reference: [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1553) (`execution-context-wrong-interpreter`).
 
+## 5. Behaviour-Preserving Refactor Audit
+
+- **Rule:** After any refactor declared behaviour-preserving, run `scripts/refactor_audit.py --base <base>`; every removal must be allowed with a reason.
+- **Problem:** Automated or manual refactorings declared behaviour-preserving can silently drop intermediate variable assignments, data parsers, or stage result writes (e.g. `rendered = json.loads(...)` deleted in commit 13726cc).
+- **Procedure:**
+  - Execute the refactor audit CLI against the git base reference: `python scripts/refactor_audit.py --base <base>`.
+  - The audit performs AST scope analysis to ensure that every assigned name, call target, and function scope is preserved, moved, or renamed.
+  - If a removal is intentional, declare it in an allowlist dictionary (`{path: [names]}`) where every entry specifies a non-empty justification reason.
+  - Fail closed (exit 1) on any un-allowed removal; unreadable input fails closed (exit 2).
+  - Cross-reference: [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md) (`refactor-silent-deletion`).
+
 ## Operational Dispatch Checklist
 
 Before launching an agent task or remote process, verify:
@@ -65,3 +78,5 @@ Before launching an agent task or remote process, verify:
 3. **Preview Artifact Bound:** If the task creates or modifies visible scene elements, a neutral preview path and hash must be produced before scene referencing.
 4. **Monitoring Bounded:** Any remote execution monitor uses bounded short connections with per-call timeouts (e.g. `timeout 30 ssh`).
 5. **Output Freshness Checked:** Downstream consumption verifies fresh output hashes and non-zero exit codes.
+6. **Refactor Audit Passed:** After any refactor declared behaviour-preserving, run `scripts/refactor_audit.py --base <base>` and confirm zero un-allowed removals.
+

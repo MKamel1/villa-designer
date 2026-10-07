@@ -745,7 +745,20 @@ class TestGuardRegistry(unittest.TestCase):
             self.assertFalse(real_res.fired)
             self.assertIn("needs real case", real_res.error_message.lower())
 
+    def test_refactor_silent_deletion_guard_execution(self) -> None:
+        """Refactor silent deletion guard executes on real (fires) and clean (quiet) cases."""
+        guard = get_guard("refactor_silent_deletion")
+        self.assertFalse(guard.needs_real_case)
+        real_res = guard.run_case("real")
+        self.assertTrue(real_res.passed, f"refactor_silent_deletion real failed: {real_res.error_message}")
+        self.assertTrue(real_res.fired, "refactor_silent_deletion real did not fire")
+
+        clean_res = guard.run_case("clean")
+        self.assertTrue(clean_res.passed, f"refactor_silent_deletion clean failed: {clean_res.error_message}")
+        self.assertFalse(clean_res.fired, "refactor_silent_deletion clean fired unexpectedly")
+
 
 if __name__ == "__main__":
     unittest.main()
+
 
