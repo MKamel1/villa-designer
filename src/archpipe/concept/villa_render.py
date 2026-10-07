@@ -185,6 +185,14 @@ M = {
                         roughness=1.0,note="ASSUMED visible potting soil"),
     "garden-foliage": dict(kind="principled",base_rgb=[0.035,0.15,0.045],reflectance=0.10,
                            roughness=0.72,note="ASSUMED young Aspidistra/Strelitzia blade appearance"),
+    "g6-petrea-leaf": dict(kind="principled",base_rgb=[.025,.11,.035],reflectance=.085,roughness=.88,note="ASSUMED rough Petrea lamina"),
+    "g6-jasmine-leaf": dict(kind="principled",base_rgb=[.022,.09,.029],reflectance=.07,roughness=.30,note="ASSUMED glossy small jasmine leaf"),
+    "g6-pittosporum-leaf": dict(kind="principled",base_rgb=[.025,.10,.028],reflectance=.08,roughness=.34,note="ASSUMED glossy obovate Pittosporum"),
+    "g6-loquat-leaf": dict(kind="principled",base_rgb=[.022,.075,.025],reflectance=.06,roughness=.42,note="ASSUMED leathery dark-green loquat"),
+    "g6-shrub-wood": dict(kind="principled",base_rgb=[.055,.035,.014],reflectance=.035,roughness=.95,note="ASSUMED shaded shrub twigs"),
+    "g6-leaf-vein": dict(kind="principled",base_rgb=[.085,.15,.05],reflectance=.12,roughness=.6,note="ASSUMED raised pinnate loquat veins"),
+    "g6-wire-tie": dict(kind="principled",base_rgb=[.12,.14,.10],reflectance=.12,roughness=.85,note="ASSUMED training tie, capacity UNVERIFIED"),
+    "g6-outdoor-timber": dict(kind="principled",base_rgb=[.30,.17,.075],reflectance=.21,roughness=.55,note="ASSUMED teak-tone original procedural outdoor lounge stand-in"),
     "g6-lavender-flower": dict(kind="principled",base_rgb=[.34,.13,.52],reflectance=.23,
                                roughness=.8,note="ASSUMED Petrea/Mona lavender flower appearance; no measured optical claim"),
     "g6-white-flower": dict(kind="principled",base_rgb=[.80,.78,.70],reflectance=.78,
@@ -2123,8 +2131,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     swing_failures=garden_swing.scene_findings(scene)
     if swing_failures:
         raise ValueError('hanging swing: '+str(swing_failures))
-    from .garden_render_review import subject_visibility_findings
-    visibility_failures=[f for view in scene['views'] for f in subject_visibility_findings(view,scene)]
+    from .garden_render_review import subject_visibility_findings, subject_frame_findings
+    visibility_failures=[f for view in scene['views'] for f in subject_visibility_findings(view,scene)+subject_frame_findings(view,scene)]
     if visibility_failures:
         raise ValueError('garden subject visibility: '+str(visibility_failures))
     final_sun_study=SunStudy(scene)
@@ -2664,10 +2672,15 @@ def _VIEWS(lay=None, resolve=True):
     V[-1]["caption_notes"] = ["Top benches and slim east/west steel troughs planted in rosemary/aloe drifts. trough colour: dark bronze, pending client confirmation; authored appearance ASSUMED. Waterproofing, nursery roots, Egyptian-sun weathering and loaded weight UNVERIFIED."]
     v("v27-east-yard-above", "East yard three-layer planting from the roof edge", "day", [15.29, -21.95, G + 1.35],
       [20.228441702975687, -21.167827674798843, G + 1.35], 24, ["landscape-east-back", "landscape-east-mid", "landscape-east-front"],
-      shift_y=-0.8408016006727672, final_only=True, exposure="exterior-day")
+      shift_y=-1.318892052654511, final_only=True, exposure="exterior-day")
+    # Same full-frame sensor physically rotated; preserve the supported
+    # standing point, level target and 24 mm lens after G6b foliage changes.
+    V[-1]['resolution']=[1280,1920]
+    V[-1]['camera'].update(sensor_mm=24,sensor_size_mm=[24,36],orientation='portrait')
+    V[-1]['require_full_subject_frame']=True
     V[-1]["standing_ground_m"]=G
     V[-1]["visibility_targets"]=["landscape-east-back-01","landscape-east-mid-01","landscape-east-front-01"]
-    V[-1]["caption_notes"] = ["East yard part-shade three-layer Pittosporum/Fatsia/Mona Lavender planting from the existing supported roof garden. Full soil-bed extent is outside the frame; the Aspidistra side strip and complete trellis are also outside this upper detail. v28 shows the actual ground bed and open jasmine timber. Native upward roof paving at z 0.000 m supports this level 1.350 m eye; 24 mm lens and downward lens shift, no plant or furniture move."]
+    V[-1]["caption_notes"] = ["East yard part-shade three-layer Pittosporum/Fatsia/Mona Lavender planting from the existing supported roof garden. Full soil-bed extent is outside the frame; the Aspidistra side strip and complete trellis are also outside this upper detail. v28 shows the actual ground bed and open jasmine timber. Native upward roof paving at z 0.000 m supports this level 1.350 m eye; 24 mm lens, physically rotated full-frame portrait sensor and downward lens shift, no plant or furniture move."]
     # G2f: translate the standing point within the original kitchen-side space
     # so its foreground glazing mullion stays outside the image's middle third.
     v("v28-east-yard-below", "East yard at basement level", "day", [14.2, -21.6, B + 1.35],
@@ -2743,8 +2756,9 @@ def _VIEWS(lay=None, resolve=True):
       ["landscape-g6-loquat-plant"], shift_y=.0011362253635164576,
       final_only=True, exposure="exterior-day")
     V[-1]["visibility_targets"]=["landscape-g6-loquat-plant"]
+    V[-1]["require_full_subject_frame"]=True
     V[-1]["caption_camera_garden"]=True
-    V[-1]["caption_notes"]=["South garden loquat espalier on the east boundary, seen from the east-yard approach. The complete real plant is framed at 24 mm in an oblique diagnostic detail; wall wires and low soil bed remain physical. The pergola/family seating is outside this detail frame. The requested combined nearby 24 mm view remains OPEN after bounded framing, proximity and sightline checks; use the reviewed isolated pergola/centrepiece/seating diagnostics with the existing south views."]
+    V[-1]["caption_notes"]=["South garden loquat espalier on the east boundary, seen from the east-yard approach. The complete densely veined real plant is framed at 24 mm in an oblique detail; wall wires and low soil bed remain physical. This fulfils the loquat part of the G6b view split. A separate terrace view of both climbers, the centrepiece and the complete seating ensemble remains OPEN pending camera and neutral-preview acceptance."]
     # Botanical appearance/procurement scope is shared by every G6 caption.
     for garden_view in V:
         if garden_view["id"].startswith(("v02-", "v07-", "v10-", "v19-", "v27-", "v28-", "v40-")):

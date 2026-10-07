@@ -76,7 +76,24 @@ def raises(exc, fn, *a, **kw) -> bool:
     return False
 
 
+def registered_render_finishes():
+    """Read the independent literal finish register without building a test scene."""
+    import ast
+    tree=ast.parse((ROOT/'tests/test_render_standard.py').read_text(encoding='utf-8'))
+    for node in tree.body:
+        if isinstance(node,ast.Assign) and any(isinstance(target,ast.Name) and target.id=='ALLOWED_MATERIALS' for target in node.targets):
+            return set(ast.literal_eval(node.value))
+    raise ValueError('Missing independent render finish register')
+
+
+def unregistered_render_finishes(materials, approved=None):
+    """Return unreviewed material names; arbitrary new names remain refused."""
+    return sorted(set(materials)-(registered_render_finishes() if approved is None else approved))
+
+
 def main() -> int:
+    expect('authored render materials have independent finish registration',
+           not unregistered_render_finishes(VR.M))
     from archpipe.build_input_guard import build_input_findings
     host_reads = build_input_findings()
     expect("build code has no implicit render-host asset reads" +
@@ -125,6 +142,9 @@ def main() -> int:
     from archpipe.concept.garden_render_review import subject_visibility_findings
     expect("named garden features remain actually visible",
            not [f for v in garden_views for f in subject_visibility_findings(v, scene)])
+    from archpipe.concept.garden_render_review import subject_frame_findings
+    expect("views requiring complete subjects frame every actual vertex",
+           not [f for v in garden_views for f in subject_frame_findings(v, scene)])
     mounting_registry = json.loads((ROOT / "knowledge/mounting-guards.json").read_text(encoding="utf-8"))
     expect("finished-surface controls have registered proving tests",
            all((ROOT / item["proof_file"]).is_file() and all(

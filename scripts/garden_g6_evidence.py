@@ -58,6 +58,8 @@ def acceptance():
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--specimens', action='store_true')
+    parser.add_argument('--output', type=Path, default=OUT)
     args=parser.parse_args()
+    OUT=args.output
     OUT.mkdir(parents=True,exist_ok=True)
     specimens() if args.specimens else acceptance()

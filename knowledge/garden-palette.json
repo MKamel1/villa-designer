@@ -861,6 +861,29 @@
         "value": "listed Poisonous by NC State, details NOT STATED; client accepted 2026-10-06",
         "status": "VERIFIED",
         "details_status": "NOT STATED"
+      },
+      "render_form": {
+        "leaf_length_m": {
+          "value": 0.085,
+          "status": "ASSUMED",
+          "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+          "basis": "Chosen rendered length within sourced species range; not a measured nursery specimen"
+        },
+        "leaf_width_m": {
+          "value": 0.035,
+          "status": "ASSUMED",
+          "basis": "Authored leaf width for species form"
+        },
+        "source_checked": "2026-10-07",
+        "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+        "source_leaf_length_m": {
+          "range_m": [
+            0.0762,
+            0.1524
+          ],
+          "status": "VERIFIED",
+          "basis": "NC State leaf length 3–6 inches, lustrous opposite leaves"
+        }
       }
     },
     {
@@ -1870,6 +1893,29 @@
         "value": null,
         "status": "NOT STATED",
         "reason": "No poison section seen; do not infer non-toxic"
+      },
+      "render_form": {
+        "leaf_length_m": {
+          "value": 0.2,
+          "status": "ASSUMED",
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "basis": "Chosen rendered length within sourced species range; not a measured nursery specimen"
+        },
+        "leaf_width_m": {
+          "value": 0.085,
+          "status": "ASSUMED",
+          "basis": "Authored leaf width for species form"
+        },
+        "source_checked": "2026-10-07",
+        "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+        "source_leaf_length_m": {
+          "range_m": [
+            0.1016,
+            0.2286
+          ],
+          "status": "VERIFIED",
+          "basis": "NC State leaf description: 4–9 inches, rough oblong-elliptic"
+        }
       }
     },
     {
@@ -2028,6 +2074,29 @@
         "value": "Low poison severity; seeds only; large quantities of cracked seed pits",
         "status": "VERIFIED",
         "source_url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/"
+      },
+      "render_form": {
+        "leaf_length_m": {
+          "value": 0.25,
+          "status": "ASSUMED",
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "basis": "Chosen rendered length within sourced species range; not a measured nursery specimen"
+        },
+        "leaf_width_m": {
+          "value": 0.095,
+          "status": "ASSUMED",
+          "basis": "Authored leaf width for species form"
+        },
+        "source_checked": "2026-10-07",
+        "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+        "source_leaf_length_m": {
+          "range_m": [
+            0.2032,
+            0.3048
+          ],
+          "status": "VERIFIED",
+          "basis": "UF/IFAS foliage: blade length 8–12 inches, pinnate veins"
+        }
       }
     },
     {
@@ -2395,6 +2464,21 @@
         "value": null,
         "status": "UNVERIFIED",
         "reason": "Non-toxic pet tags do not establish human safety; no human toxicity statement supplied"
+      },
+      "render_form": {
+        "leaf_length_m": {
+          "value": 0.07,
+          "status": "ASSUMED",
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "basis": "Chosen rendered length within sourced species range; not a measured nursery specimen"
+        },
+        "leaf_width_m": {
+          "value": 0.033,
+          "status": "ASSUMED",
+          "basis": "Authored leaf width for species form"
+        },
+        "source_checked": "2026-10-07",
+        "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
       }
     },
     {

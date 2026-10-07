@@ -31,6 +31,7 @@ def render(args):
     data = json.loads(args.input.read_text())
     args.output.mkdir(parents=True, exist_ok=True)
     evidence = []
+    reference = {row['id']: row for row in json.loads(args.reference_receipt.read_text())} if args.reference_receipt else {}
 
     def setup(meshes, materials):
         bpy.ops.object.select_all(action="SELECT")
@@ -80,6 +81,12 @@ def render(args):
         for view in authored_views:
             if view["id"] not in args.views:
                 continue
+            # Keep the authored physical sensor aspect, including portrait.
+            # Forcing 960x640 silently crops a correctly framed portrait view.
+            width,height=view['resolution']
+            scale=960/max(width,height)
+            scene.render.resolution_x=round(width*scale)
+            scene.render.resolution_y=round(height*scale)
             camera, _ = builder.configure_camera(view)
             scene.camera = camera
             path = args.output / (view["id"] + "-neutral.png")
@@ -87,6 +94,7 @@ def render(args):
             bpy.ops.render.render(write_still=True)
             evidence.append(dict(id=view["id"], image=str(path), neutral=True,
                                  camera=view["camera"], source_geometry_sha256=canonical_hash(data["meshes"]),
+                                 resolution=[scene.render.resolution_x,scene.render.resolution_y],
                                  subjects=builder.subjects(view, data["meshes"], objects, imported), warnings=warnings))
             bpy.data.objects.remove(camera, do_unlink=True)
     else:
@@ -98,10 +106,15 @@ def render(args):
             low = [min(p[k] for p in points) for k in range(3)]
             high = [max(p[k] for p in points) for k in range(3)]
             origin = [(low[0]+high[0])/2, (low[1]+high[1])/2, low[2]]
+            prior = reference.get(specimen['id'])
+            if prior:
+                origin = prior['staging']['origin']
             for mesh in meshes:
                 mesh["faces"] = [[[p[k]-origin[k] for k in range(3)] for p in f] for f in mesh["faces"]]
             scene, objects, warnings = setup(meshes, data["materials"])
             span = [high[k]-low[k] for k in range(3)]
+            if prior:
+                span = prior['staging']['span']
             bpy.ops.mesh.primitive_plane_add(size=max(20, max(span)*4))
             floor = bpy.data.materials.new("neutral diagnostic floor")
             floor.diffuse_color = (.45, .45, .45, 1)
@@ -147,11 +160,17 @@ def render(args):
             camera.location += up*((ymin+ymax)/2-camera.location.dot(up))
             aspect = scene.render.resolution_x / scene.render.resolution_y
             camera_data.ortho_scale = max(xmax-xmin, (ymax-ymin)*aspect)/.88
+            if prior:
+                camera.location = prior['staging']['camera_location']
+                camera.rotation_euler = prior['staging']['camera_rotation']
+                camera_data.ortho_scale = prior['staging']['ortho_scale']
             path = args.output / (specimen["id"]+".png")
             scene.render.filepath = str(path)
             bpy.ops.render.render(write_still=True)
             evidence.append(dict(id=specimen["id"], image=str(path), neutral=True, scale_reference_height_m=1.8,
                                  actual_bounds_m=[low, high], isolation_translation_m=[-v for v in origin],
+                                 staging=dict(origin=origin, span=span, camera_location=list(camera.location),
+                                              camera_rotation=list(camera.rotation_euler), ortho_scale=camera_data.ortho_scale),
                                  source_geometry_sha256=canonical_hash(specimen["meshes"]), warnings=warnings))
     receipt = args.output / ("context-preview-evidence.json" if args.scene else "isolated-preview-evidence.json")
     previous = json.loads(receipt.read_text()) if receipt.exists() else []
@@ -168,6 +187,7 @@ def main():
     parser.add_argument("--samples", type=int, default=32)
     parser.add_argument("--scene", action="store_true")
     parser.add_argument("--candidate-view", type=Path)
+    parser.add_argument("--reference-receipt", type=Path, help="Reuse before-preview camera, scale aid and neutral staging exactly")
     parser.add_argument("--views", nargs="+", default=[])
     parser.add_argument("--specimens", nargs="+", default=[])
     parser.add_argument("--graphics-lock", type=Path,

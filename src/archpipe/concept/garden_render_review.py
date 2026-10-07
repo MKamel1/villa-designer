@@ -12,6 +12,35 @@ GROUND_ONLY = frozenset({'paving', 'travertine', 'oak-floor', 'artificial-grass'
 LEAF_GAP_M = .20
 
 
+def subject_frame_findings(view, scene):
+    """Full physical-vertex framing for views declaring that subject intent.
+
+    Horizontal limits are half a sensor width; vertical limits are half the
+    image height divided by image width. Lens shift uses sensor-width units.
+    Imported appearances use the recorded exact full-height hull vertices.
+    """
+    if not view.get('require_full_subject_frame'):return []
+    import numpy as np
+    from .route_geometry import prop_framing_points
+    c=view['camera'];eye=np.array(c['position']);yaw=math.atan2(c['target'][1]-eye[1],c['target'][0]-eye[0])
+    half=view['resolution'][1]/view['resolution'][0]/2;out=[]
+    for subject in view['subjects']:
+        points=[p for m in scene['meshes'] if m['id'].startswith(subject) or m.get('label')==subject for face in m['faces'] for p in face]
+        for prop in scene.get('props',[]):
+            if prop['id'].startswith(subject) or prop.get('label')==subject:points+=prop_framing_points(prop).tolist()
+        if not points:
+            out.append(view['id']+': unresolved built subject '+subject);continue
+        delta=np.asarray(points)-eye
+        depth=delta[:,0]*math.cos(yaw)+delta[:,1]*math.sin(yaw)
+        if depth.min()<=0:
+            out.append(view['id']+': subject behind camera '+subject);continue
+        horizontal=c['lens_mm']/c['sensor_mm']*(delta[:,0]*math.sin(yaw)-delta[:,1]*math.cos(yaw))/depth-c.get('shift_x',0.)
+        vertical=c['lens_mm']/c['sensor_mm']*delta[:,2]/depth-c.get('shift_y',0.)
+        if abs(horizontal).max()>.5 or vertical.min()<-half or vertical.max()>half:
+            out.append(view['id']+': whole built subject outside frame '+subject)
+    return out
+
+
 def subject_visibility_evidence(view, scene):
     """First-hit mesh rays for explicitly required visible garden subjects.
 

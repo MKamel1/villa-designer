@@ -1,6 +1,6 @@
 # Garden rebuild procedure — G1/G2 follow-up, 2026-10-06
 
-Read `docs/garden-g2-report.md` and the historical G1 checkpoint. The canonical villa-render skill is read-only in this workstation mount; this tracked addendum supplies the changed procedure for the lead to reconcile with that skill.
+Read `docs/garden-g2-report.md` and the historical G1 checkpoint. Use this tracked procedure alongside the canonical `.agents/skills/villa-render/SKILL.md`; G6b updates both and synchronises the generated adapters. Historical workstation mount notes do not establish current filesystem permissions.
 
 1. Use `knowledge/garden-palette.json` as the sole species, dimensions, spacing, botanical source and placement-assumption authority. Do not revive generated/shared palettes or local botanical constants.
 2. Check full canopy bounds against property/building faces separately from walking occupancy. Every prop uses actual asset triangles from route ground to 2.0 m; procedural plants use actual faces. Missing overlapping asset geometry fails closed. Then check actual door passage volumes as well as the narrower garden paths before the first preview.
@@ -221,6 +221,26 @@ candidates with --candidate-view without modifying exported geometry. Report
 an unmatched requested subject set as OPEN rather than interpreting a
 companion detail as fulfilment.
 
+G6b appearance follow-up: species labels and envelope passes do not establish
+plant or outdoor seating form. Use `garden_g6b`'s species-sized folded leaves,
+post twining and hanging Petrea racemes, continuous low branching dwarf
+mounds (shared by both yards), densely veined/tied loquat tiers and original
+slatted outdoor lounge stand-ins. `garden_g6.appearance_findings` runs through
+the authoritative scene guard, including east shrubs. Its controls prove
+construction, not photographic likeness. The frozen first-fix barrel crown
+and timber-screened flowers also fail; a low-leaf minimum alone had admitted
+token basal leaves, and flower presence alone admitted screened blooms.
+
+Generate inputs with `garden_g6_evidence.py --specimens --output
+out/garden-g6b/after`. Preserve the G6 before inputs and receipts. Render
+neutral comparisons with `garden_g6_preview.py --reference-receipt
+out/garden-g6b/before/isolated-preview-evidence.json` so camera, staging,
+scale and the 1.8 m reference remain identical. Review every changed
+assembly before authoritative acceptance. A newly introduced garden camera
+gets full actual-vertex vertical and horizontal checks regardless of its
+identifier. The permitted G6b view split pairs the terrace climbers/bowl/seats
+with v40's loquat detail; never move design geometry for either camera.
+
 Light reports and quote guards must use the same authored root_z_m, not
 assume yard grade for raised bowl/door-pot/top-soil plants. Record actual
 sampling elevations; fall back to the legacy zone datum only when the input
@@ -242,3 +262,33 @@ the refusal on absent geometry. Supply frozen native faces and materials for
 the clean case; never interpret a cover-only fixture as a standing floor.
 Use authored unresolved cameras for a domain-only test so unrelated furniture
 search cannot hide which physical inputs the fixture actually exercises.
+
+G6b upper-view correction: changed foliage can invalidate a previously tight
+camera. v27 uses the same supported standing point, target and 24 mm lens,
+with the physical 36 × 24 mm sensor rotated to portrait. Require full-subject
+intent in build/contract/portable verification, preserve the authored aspect
+in the preview driver, and review actual vertices as well as the actual image.
+A subject receipt's framed flag is insufficient evidence of every vertical
+vertex. Run `scripts/villa_render_views.py --output out/garden-g6b` directly;
+the CLI returns its existing nonzero status on findings, unlike an inline
+wrapper that discards `main()`'s return value.
+
+G6b camera-input correction: use the final authoritative producer's resolved
+`scene.json` for a camera search and final context preview, rather than an
+unstamped geometry-only staging scene. `garden_g6b_camera.py` defaults to that
+export and checks its current source hash before and after tracing; a missing
+or stale stamp refuses. Preserve rejected diagnostics with their input state,
+then reproduce the conclusion on the actual final export. Garden-only equality
+does not prove architectural door state, imported screening or the whole
+context is identical. The final G6 scene comparison must show no change beyond
+the authorised appearance elements; do not reinterpret an equality refusal as
+a pass by silently dropping mismatched architecture.
+
+At material authoring, add the explicitly reviewed appearance to the independent
+`RenderStandard.ALLOWED_MATERIALS` register. Portable verification now checks
+this register before building the scene, so a new named material cannot escape
+until the end of a long suite. Preserve the real old register and unknown-name
+refusal. Compile edited Python files and freeze source APIs before long tests;
+run a fresh process after an API change. Use verbose unbuffered focused-test
+logs for progress. Limiting numerical-library worker threads is an execution
+setting; it does not author new geometry, alter tolerances or certify appearance.

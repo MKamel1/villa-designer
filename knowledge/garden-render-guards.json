@@ -383,6 +383,71 @@
         "test_real_upper_projection_can_hide_every_plant_and_translated_sibling",
         "test_actual_upper_camera_requires_native_floor_and_visible_plant_groups"
       ]
+    },
+    {
+      "lesson_id": "garden-g6b-species-forms",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "Species-sized twining vines with below-beam Petrea racemes; continuous low mound tip whorls shared across yards; dense veined and tied loquat tiers; original slatted cushioned lounge stand-ins; unchanged roots and layout",
+      "check": "garden_g6.appearance_findings through scene_findings; matched neutral preview and independent likeness review",
+      "stage": "candidate neutral review, authoritative build/contract, view plan and portable verification",
+      "proof_file": "tests/test_garden_g6b.py",
+      "proofs": [
+        "test_real_before_fails_each_class_and_clean_siblings_stay_quiet",
+        "test_first_fix_barrel_and_hidden_racemes_fail_clean_forms_stay_quiet",
+        "test_renamed_translated_mounds_and_missing_low_foliage",
+        "test_leaf_size_hanging_sprays_veins_and_lounge_parts_mutations",
+        "test_fixed_roots_positions_and_seat_facing",
+        "test_full_subject_intent_uses_real_vertices_and_translated_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6b-upper-frame",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "Unchanged supported camera position/target and24 mm lens; physically rotated full-frame portrait sensor; explicit full-subject intent; direct output-scoped CLI returns diagnostic failures",
+      "check": "garden_render_review.subject_frame_findings in build/contract/portable verification; actual view-plan projection and independent neutral review",
+      "stage": "changed geometry context checkpoint, authoritative export and view plan",
+      "proof_file": "tests/test_garden_g6b.py",
+      "proofs": [
+        "test_real_upper_crop_refused_current_portrait_and_translated_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6b-camera-input",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "Camera search uses authoritative export and checks current producer source hash before tracing; actual resolved scene supplies final previews",
+      "check": "garden_g6b_camera.require_current_scene with source_provenance",
+      "stage": "camera search input and final diagnostic read-back",
+      "proof_file": "tests/test_garden_g6b.py",
+      "proofs": [
+        "test_real_unstamped_camera_input_and_stale_siblings_refused"
+      ]
+    },
+    {
+      "lesson_id": "garden-g6b-finish-registration",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "Author appearance and independent explicit finish registration together; early portable check avoids expensive test-scene imports",
+      "check": "scripts.verify.unregistered_render_finishes and RenderStandard.test_every_mesh_has_an_explicit_finish",
+      "stage": "first appearance checkpoint and portable verification before scene build",
+      "proof_file": "tests/test_garden_g6b.py",
+      "proofs": [
+        "test_real_finish_register_omission_and_arbitrary_sibling_refused"
+      ]
     }
   ]
 }

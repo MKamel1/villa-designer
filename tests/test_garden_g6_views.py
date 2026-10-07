@@ -50,8 +50,10 @@ class ExplicitPlantDistance(unittest.TestCase):
         from archpipe.concept import garden_g6 as G
         from archpipe.concept.render_support import _triangles,_point_triangle_distance
         import numpy as np
-        meshes,_,_,_=G.build()
-        vine=deepcopy(next(m for m in meshes if m.get('g6_element')=='climber'))
+        # Freeze the real G6 empty-box reproduction: G6b correctly hangs
+        # new flowers into some of that formerly empty air.
+        before=json.loads(gzip.decompress(Path('tests/fixtures/garden-g6b-appearance-before.json.gz').read_bytes()))
+        vine=deepcopy(next(m for m in before if m.get('g6_element')=='climber'))
         camera=dict(subjects=[vine['id']],camera=dict(position=[24.25,-28.31,-1.65]))
         # This point lies within the full root-to-roof box but is over one
         # metre from the actual vine surface. No clearance was relaxed.
@@ -120,7 +122,11 @@ class ReviewedComposition(unittest.TestCase):
         frozen=json.loads(gzip.decompress(Path('tests/fixtures/garden-g6-loquat-camera-before.json.gz').read_bytes()))
         mesh=frozen['mesh'];current=next(v for v in V.VIEWS(resolve=False) if v['id']=='v40-south-garden-espalier')
         meshes,_,_,_=G.build()
-        self.assertEqual(next(m for m in meshes if m['id']==mesh['id'])['faces'],mesh['faces'])
+        # G6b changes the plant's appearance inside its fixed trained envelope.
+        # The old image's framing comparison still uses frozen G6 geometry.
+        plant=next(m for m in meshes if m['id']==mesh['id'])
+        self.assertEqual(plant['center'],mesh['center'])
+        self.assertEqual(plant['root_z_m'],mesh['root_z_m'])
         scene=dict(meshes=[mesh],props=[])
         points=np.unique(np.array([p for f in mesh['faces'] for p in f]),axis=0)
         def width(view):

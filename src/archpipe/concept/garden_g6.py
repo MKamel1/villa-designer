@@ -40,24 +40,10 @@ def _mesh(identifier,material,faces,kind,element,label,**fields):
 
 
 def _dome_geometry(dense=True):
-    """Woody fork supports a rounded dense crown of independently attached leaves."""
-    faces=tube((0,0,0),(0,0,.28),.035);indices=[]
-    rng=np.random.default_rng(606)
-    for branch in range(24 if dense else 16):
-        angle=branch*pi*(3-5**.5);node=np.array([.16*cos(angle),.16*sin(angle),.28+.08*(branch%3)])
-        faces+=tube((0,0,.15+.025*(branch%4)),node,.009)
-        for k in range(16 if dense else 12):
-            a=angle+.48*sin(k*2.4);elevation=.15+.78*(k/(15 if dense else 11))
-            radius=.30*cos(elevation);height=.25+.40*sin(elevation)
-            p=np.array([radius*cos(a),radius*sin(a),height])
-            p+=rng.uniform(-.018,.018,3)
-            faces+=tube(node,p,.0025,count=6)
-            f=leaf(p,.074+rng.uniform(-.012,.012),.033+rng.uniform(-.006,.006),a+rng.uniform(-.7,.7),rng.uniform(-.45,.45))
-            indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
-    # Leafy low side shoot is botanical growth, not a guard exception.
-    p=[.10,0,.14];faces+=tube((0,0,.10),p,.005)
-    f=leaf(p,.075,.035,.5,.2);indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
-    return faces,indices
+    """Species-specific low mound, shared by south and east planting."""
+    from .garden_g6b import mound
+    growth=mound(dense)
+    return growth.faces,growth.leaves
 
 
 def clump(identifier,species,center,ground,data,*,bed,layer,context=None):
@@ -70,7 +56,8 @@ def clump(identifier,species,center,ground,data,*,bed,layer,context=None):
     height=.4 if species.startswith('Plectranthus') else .7 if context else .75 if layer=='back' else .65;spread=.35 if species.startswith('Plectranthus') else .65
     faces=[];leaf_indices=[];flower_indices=[]
     if not species.startswith('Plectranthus'):
-        faces,leaf_indices=_dome_geometry(dense=bool(context))
+        from .garden_g6b import mound
+        growth=mound(dense=bool(context));faces,leaf_indices=growth.faces,growth.leaves
     for i in range(17 if species.startswith('Plectranthus') else 0):
         a=i*pi*(3-5**.5);radial=.12+.035*(i%4);z=.26+.035*(i%6)
         tip=(radial*cos(a),radial*sin(a),z)
@@ -92,7 +79,9 @@ def clump(identifier,species,center,ground,data,*,bed,layer,context=None):
         species=species,center=list(center),root_z_m=ground,bed=bed,planting_layer=layer,
         spread_m=spread,appearance_key=key,leaf_face_indices=leaf_indices,explicit_geometry=True)
     if not species.startswith('Plectranthus'):
-        leaves=set(leaf_indices);m['face_materials']=['garden-foliage' if i in leaves else 'trellis' for i in range(len(faces))]
+        m['face_materials']=growth.materials
+        m['leaf_records']=growth.records
+        m['plant_form']='dense-low-mound'
     if flower_indices:
         m['face_materials']=['g6-lavender-flower' if i in set(flower_indices) else 'garden-foliage' for i in range(len(faces))]
     return m
@@ -138,38 +127,10 @@ def _pergola(assumptions):
     return meshes,post_centers
 
 
-def _roof_climbers(assumptions,posts):
+def _roof_climbers(assumptions,posts,data=None):
     from . import villa_landscape as L
-    x0,y0,x1,y1=assumptions['pergola_rect_m'];g=L.GROUND;z=g+2.85
-    meshes=[]
-    # Alternating connected vines retain real leaves instead of exporter proxies.
-    for index,species in enumerate(('Petrea volubilis','Trachelospermum jasminoides')):
-        root=[posts[index][0],posts[index][1],g];crown=[root[0],root[1],z-.015];faces=tube(root,crown,.015);leaf_indices=[];flower_indices=[]
-        for k,height in enumerate((.13,.4,.8,1.2,1.6,2.,2.4)):
-            p=[root[0]+.035,root[1],g+height];faces+=tube([root[0],root[1],g+height],p,.004)
-            f=leaf(p,.17,.075,k*.7,1.0);leaf_indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
-        for iy in range(14):
-            y=y0+.15+(y1-y0-.30)*iy/13
-            start=[root[0],y,z-.015];faces+=tube(crown,start,.008)
-            end=[x0+.15 if index else x1-.15,y,z-.015];faces+=tube(start,end,.006)
-            for ix in range(index,14,2):
-                x=x0+.15+(x1-x0-.30)*ix/13+.025*sin(ix*7+iy*3);leaf_y=y+.025*cos(ix*3+iy*5);p=[x,leaf_y,z+.025*sin(ix+2*iy)]
-                faces+=tube([x,y,z-.015],p,.003)
-                f=leaf(p,.225+.022*sin(ix*2+iy),.17+.015*cos(ix+iy*3),.7*sin(ix+iy*2),.28*sin(ix*3+iy));leaf_indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
-                if (ix+iy)%7==0:
-                    # Flowers are attached to the vine leaf node, not floating.
-                    for k in range(5):
-                        q=[x+.025*cos(k*2*pi/5),y+.025*sin(k*2*pi/5),z+.002]
-                        faces+=tube(p,q,.002)
-                        f=leaf(q,.032,.022,k);flower_indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
-        mesh=_mesh('g6-'+('petrea' if index==0 else 'jasmine')+'-roof','garden-foliage',faces,'climber','climber','ASSUMED trained roof vine; exact coverage measured in projected real leaves; frame remains visible',
-            species=species,center=root[:2],root_z_m=g,bed='south-pergola',planting_layer='accent',spread_m=3.,appearance_key='procedural-pergola',
-            leaf_face_indices=leaf_indices,explicit_geometry=True,post_index=index)
-        flowers=set(flower_indices);mesh['face_materials']=['g6-lavender-flower' if species.startswith('Petrea') else 'g6-white-flower' if i in flowers else 'garden-foliage' for i in range(len(faces))]
-        # Correct both flower branches: Petrea purple only on flower geometry.
-        mesh['face_materials']=[('g6-lavender-flower' if index==0 else 'g6-white-flower') if i in flowers else 'garden-foliage' if i in set(leaf_indices) else 'trellis' for i in range(len(faces))]
-        meshes.append(mesh)
-    return meshes
+    from .garden_g6b import vines
+    return vines(assumptions,posts,L.GROUND,L._plant_data() if data is None else data)
 
 
 def build(data=None,assumptions=None,study=None):
@@ -179,7 +140,7 @@ def build(data=None,assumptions=None,study=None):
     data=L._plant_data() if data is None else data
     assumptions=json.loads(L.PALETTE.read_text())['design_assumptions']['south_garden_g6'] if assumptions is None else assumptions
     study=(active_study.get() or default_study()) if study is None else study
-    meshes,posts=_pergola(assumptions);plants=_roof_climbers(assumptions,posts);meshes+=plants
+    meshes,posts=_pergola(assumptions);plants=_roof_climbers(assumptions,posts,data);meshes+=plants
     g=L.GROUND;cx,cy=assumptions['bowl_center_m'];h=assumptions['bowl_height_m'];r=assumptions['bowl_diameter_m']/2
     # Continuous at-grade terrace: shell remains authoritative supporting ground.
     paving=L._mesh('g6-terrace','ground','stepping-stone',L._quad(L.SOUTH[0],L.SOUTH[1],27.4,-26.72,g),'ASSUMED terrace paving at court grade; 1.65 m east bypass beside pergola',kind='finish-layer',surface=True,occupied_side=(0,0,1));paving['g6_element']='pergola';meshes.append(paving)
@@ -194,30 +155,21 @@ def build(data=None,assumptions=None,study=None):
     for piece in assumptions['furniture_pieces']:
         x,y=piece['center_m'];rotation=piece['rotation_deg']
         item=dict(id='g6-'+piece['id'],type='outdoor-chair',w=piece['width_m'],d=piece['depth_m'],h=.8,cx=x,cy=y,rot=rotation)
-        parts=FD.world_parts(item,g,FD._chair(piece['width_m']*1000,piece['depth_m']*1000,seat=420,back=800));faces=[f for fs in parts.values() for f in fs]
+        from .garden_g6b import lounge_parts
+        parts=FD.world_parts(item,g,lounge_parts(piece['width_m']*1000,piece['depth_m']*1000,piece['seats']));faces=[f for fs in parts.values() for f in fs]
         angle=rotation*pi/180
         mesh=_mesh('g6-seating-'+piece['id'],'trellis',faces,'outdoor-seating','furniture','ASSUMED procedural outdoor timber/cushion seating; %d seats; no manufacturer or rated weather-performance claim'%piece['seats'],facing=[-sin(angle),cos(angle)],seats=piece['seats'])
         slots=[]
-        for name,fs in parts.items():slots += ['g6-outdoor-cushion' if name=='seat' else 'trellis']*len(fs)
-        mesh['face_materials']=slots;meshes.append(mesh);chairs.append(mesh)
+        for name,fs in parts.items():slots += ['g6-outdoor-cushion' if name.endswith('cushion') else 'g6-outdoor-timber']*len(fs)
+        mesh['face_materials']=slots;mesh['seating_parts']={name:list(range(sum(len(v) for n,v in list(parts.items())[:i]),sum(len(v) for n,v in list(parts.items())[:i+1]))) for i,(name,fs) in enumerate(parts.items())};meshes.append(mesh);chairs.append(mesh)
     evidence=wall_sun_evidence(study)
     if evidence['selected_wall']!='east':raise ValueError('G6 sunniest boundary changed; redraw loquat on measured winning wall')
-    x0,x1=assumptions['espalier_run_m'];wall=L.SOUTH[3]-.25;trunk=[(x0+x1)/2,wall-.2,g];top=g+assumptions['espalier_height_m'];faces=tube(trunk,[trunk[0],trunk[1],top],.035);leaf_indices=[]
-    tiers=[];wires=[]
-    # Retained low shoots give the young espalier grounded leafy growth.
-    for k in range(3):
-        p=[trunk[0]+(k-1)*.09,trunk[1]-.04,g+.13];faces+=tube([trunk[0],trunk[1],g+.10],p,.004)
-        f=leaf(p,.18,.085,k*.5,.4);leaf_indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
-    for i in range(1,int(assumptions['espalier_height_m']/assumptions['wire_tier_spacing_m'])+1):
-        z=g+i*assumptions['wire_tier_spacing_m'];tiers.append(z)
-        wires+=tube([x0,wall-.009,z],[x1,wall-.009,z],.009)
-        faces+=tube([x0+.115,trunk[1],z],[x1-.115,trunk[1],z],.012)
-        for j in range(13):
-            x=x0+.15+(x1-x0-.30)*j/12;p=[x+.018*sin(j+i),trunk[1]-.04-.022*cos(j*3+i),z+.04+.06*sin(j*2+i)]
-            faces+=tube([x,trunk[1],z],p,.004)
-            f=leaf(p,.23+.022*cos(i+j),.10+.02*sin(j),pi/2+.5*sin(j*3+i),.55+.3*cos(j+i));leaf_indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
-    loquat=_mesh('g6-loquat-plant','garden-foliage',faces,'plant-clump','espalier','ASSUMED flat trained loquat envelope; source supports sunny-wall espalier; horizontal tiers are design assumptions',species='Eriobotrya japonica',center=trunk[:2],root_z_m=g,bed='south-espalier',planting_layer='accent',spread_m=x1-x0,appearance_key='procedural-espalier',leaf_face_indices=leaf_indices,explicit_geometry=True)
-    loquat_leaves=set(leaf_indices);loquat['face_materials']=['garden-foliage' if i in loquat_leaves else 'trellis' for i in range(len(faces))]
+    from .garden_g6b import espalier
+    x0,x1=assumptions['espalier_run_m'];wall=L.SOUTH[3]-.25
+    growth,trunk,tiers,wires=espalier(x0,x1,wall,g,assumptions['espalier_height_m'],assumptions['wire_tier_spacing_m'],L.require_species('Eriobotrya japonica',data))
+    loquat=_mesh('g6-loquat-plant','garden-foliage',growth.faces,'plant-clump','espalier',
+        'ASSUMED densely trained loquat; sourced leaf length, folded veined terminal clusters, horizontal tiers tied to unchanged wires',
+        species='Eriobotrya japonica',center=trunk[:2].tolist(),root_z_m=g,bed='south-espalier',planting_layer='accent',spread_m=x1-x0,appearance_key='procedural-espalier',**growth.fields())
     meshes.append(loquat);plants.append(loquat)
     wire=_mesh('g6-loquat-wires','trellis',wires,'trellis','espalier','ASSUMED wall-fixed horizontal training wires; fixings and capacity UNVERIFIED',espalier_role='wire');meshes.append(wire)
     # Ground foliage three strata in one bed, plus root bed for espalier.
@@ -362,7 +314,7 @@ def scene_findings(scene):
     if not meshes and plan is None:return []
     if plan is None:return [('G6','missing G6 authored plan')]
     if not meshes:return [('G6','missing all authored G6 geometry')]
-    out=findings(meshes,plan)+content_findings(meshes,plan=plan)
+    out=findings(meshes,plan)+content_findings(meshes,plan=plan)+appearance_findings(scene['meshes'])
     fresh=wall_sun_evidence(SunStudy(scene))
     if plan.get('sun_evidence')!=fresh:out.append(('espalier','wall sun evidence stale or not reproduced from actual scene'))
     if fresh['selected_wall']!=plan['assumptions']['espalier_wall']:out.append(('espalier','selected wall is not sunniest'))
@@ -371,4 +323,80 @@ def scene_findings(scene):
         if m.get('espalier_role')=='wire':
             host=scene.get('mounting_hosts',{}).get(m.get('mounting',{}).get('host_id'),{})
             if host.get('yard_edge_index') is None and not host.get('source_mesh','').startswith('yard-boundary-edge-'):out.append((m['id'],'missing exterior finite-wall mounting contract'))
+    return out
+
+def appearance_findings(meshes):
+    """Physical form checks supplement mandatory human likeness review.
+
+    All thresholds refer to authored form (recorded canopy, post radius,
+    leaf sizes and cushion construction), never horticultural approval.
+    """
+    from . import villa_landscape as L
+    from .fitting_mounting import bounds
+    from math import atan2
+    out=[];data=L._plant_data()
+    for mesh in meshes:
+        species=mesh.get('species','');faces=mesh.get('faces',[])
+        if species not in data:continue
+        if species=="Pittosporum tobira 'Wheeler\'s Dwarf'":
+            # A single low shoot passed G6's minimum-height test. Require
+            # real low foliage around the mound, rather than one token leaf.
+            root=mesh.get('root_z_m');center=mesh.get('center');indices=mesh.get('leaf_face_indices',[])
+            sectors=set()
+            if root is not None and center:
+                for i in indices:
+                    p=np.mean(faces[i],axis=0)
+                    if p[2]<=root+.20 and hypot(p[0]-center[0],p[1]-center[1])>.08:
+                        sectors.add(int((atan2(p[1]-center[1],p[0]-center[0])+pi)*4/pi)%8)
+            if len(sectors)!=8:out.append((mesh['id'],'dwarf mound lacks low foliage around all eight sides'))
+            if indices and root is not None and center:
+                tips=np.array([np.mean(faces[i],axis=0) for i in indices])
+                height=tips[:,2].max()-root
+                radial=np.linalg.norm(tips[:,:2]-center,axis=1)
+                lower=radial[tips[:,2]<root+height*.35]
+                upper=radial[tips[:,2]>root+height*.80]
+                if not len(lower) or not len(upper) or np.quantile(upper,.95)>np.quantile(lower,.95)*.85:
+                    out.append((mesh['id'],'dwarf mound crown does not round towards its apex'))
+                records=mesh.get('leaf_records',[])
+                if records:
+                    centers=np.array([np.mean(np.array([faces[i] for i in r['face_indices']]).reshape(-1,3),axis=0) for r in records])
+                    heights=centers[:,2];span=np.ptp(heights)
+                    if span>0:
+                        normalized=(heights-heights.min())/span
+                        # Authored continuity screen: a 4% crown-height slice
+                        # may not hold more than 9% of all leaves. Frozen real
+                        # stacked crowns measured 11.9%; continuous tips 5.1%.
+                        peak=max(np.mean((normalized>=t)&(normalized<t+.04)) for t in np.arange(0.,1.,.005))
+                        if peak>.09:out.append((mesh['id'],'dwarf mound has stacked horizontal foliage rings'))
+        if mesh.get('g6_element')=='climber':
+            records=mesh.get('leaf_records',[]);limit=data[species]['render_form']['source_leaf_length_m']['range_m'][1]
+            if not records:out.append((mesh['id'],'missing species-sized leaf records'))
+            else:
+                for record in records:
+                    vertices=np.unique(np.array([faces[i] for i in record['face_indices']]).reshape(-1,3),axis=0)
+                    diameter=np.linalg.norm(vertices[:,None]-vertices[None,:],axis=2).max()
+                    if diameter>limit+1e-6:out.append((mesh['id'],'measured leaf exceeds sourced species size'));break
+            bark=[p for i,f in enumerate(faces) if mesh.get('face_materials',[])[i]=='trellis' for p in f]
+            root=mesh['root_z_m'];cx,cy=mesh['center']
+            for low,high in ((.3,.8),(.9,1.4),(1.5,2.0),(2.1,2.5)):
+                around={int((atan2(p[1]-cy,p[0]-cx)+pi)*2/pi)%4 for p in bark if root+low<p[2]<root+high and .075<hypot(p[0]-cx,p[1]-cy)<.115}
+                if len(around)<4:out.append((mesh['id'],'stem does not visibly twine around its post'));break
+            if species=='Petrea volubilis':
+                flowers=[p[2] for i in mesh.get('flower_face_indices',[]) for p in faces[i]]
+                if not flowers or min(flowers)>root+2.40 or sum(z<root+2.60 for z in flowers)/len(flowers)<.85:
+                    out.append((mesh['id'],'missing hanging Petrea flower spray clear below beams'))
+        if species=='Eriobotrya japonica':
+            if not mesh.get('leaf_records'):out.append((mesh['id'],'missing clustered loquat leaf records'))
+            if 'g6-leaf-vein' not in mesh.get('face_materials',[]):out.append((mesh['id'],'missing physical loquat veins'))
+            if 'g6-wire-tie' not in mesh.get('face_materials',[]):out.append((mesh['id'],'missing tier training ties'))
+    for mesh in meshes:
+        if mesh.get('g6_element')!='furniture':continue
+        parts=mesh.get('seating_parts',{})
+        if not all(parts.get(k) for k in ('timber-arm','timber-seat-slat','timber-back-slat','seat-cushion','back-cushion')):
+            out.append((mesh['id'],'outdoor seating lacks slats, armrests or separate seat/back cushions'));continue
+        bb=bounds(mesh)
+        if not .76<=bb[5]-bb[2]<=.84:out.append((mesh['id'],'outdoor seating height outside recorded 800 mm ±5 percent'))
+        for key,minimum in (('seat-cushion',.09),('back-cushion',.30)):
+            z=[p[2] for i in parts[key] for p in mesh['faces'][i]]
+            if max(z)-min(z)<minimum:out.append((mesh['id'],'outdoor cushion is thinner than authored lounge form'))
     return out

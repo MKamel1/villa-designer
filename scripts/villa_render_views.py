@@ -305,7 +305,7 @@ def main():
         ax.add_patch(Polygon(wedge, fc="#ffcc00", alpha=0.25, ec="#cc9900"))
         ax.plot([px], [py], "ro", ms=4)
         for s in v["subjects"]:
-            if s in items and items[s]["type"] == "wc" or v["id"].startswith(("v07-", "v19-", "v25-", "v26-", "v27-", "v28-", "v36-", "v37-", "v38-", "v39-")):
+            if s in items and items[s]["type"] == "wc" or garden_camera_view(v):
                 for edge in subject_mesh_frame_violations(v, scene, s):
                     problems.append("%s: built %s crosses %s" % (v["id"], s, edge))
             try:
@@ -350,4 +350,9 @@ def main():
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=OUT,
+                        help='Directory containing scene.json and receiving the diagnostic view plan.')
+    OUT = parser.parse_args().output
     sys.exit(main())

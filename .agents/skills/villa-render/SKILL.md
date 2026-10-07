@@ -64,6 +64,15 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      datum. `garden_render_review.plant_form_findings` measures foliage,
      separately from stems; the authored maximum foliage gap is 0.20 m.
      Preview the real plant form as well as checking the gap.
+     A species label, a token basal leaf or flower presence does not establish
+     likeness. Species-specific builders use measured leaf surfaces and
+     attachment geometry; dwarf mounds fill the low crown continuously,
+     hanging racemes clear timber, and lounge furniture carries separate
+     thick seat/back cushions. `garden_g6.appearance_findings` supplements
+     support and envelope checks. Preserve the rejected real geometry and
+     regenerate neutral comparisons with `garden_g6_preview.py
+     --reference-receipt` to keep the same staging, camera and scale reference.
+     Independent image review remains required after construction checks.
      Species-specific forms also require botanical structure and physical
      continuity: continuous palmate leaf surfaces, distinct fan nodes and
      physical petioles joining ivy leaves to training stems. Use
