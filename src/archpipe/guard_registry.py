@@ -35,6 +35,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 import io
 import json
+import math
 from pathlib import Path
 import re
 import tempfile
@@ -57,7 +58,9 @@ from archpipe.external_claims import (
     check_photometry_fitting_agreement,
     ingest_bytes,
 )
-from archpipe import render_qa, safe_io
+from archpipe import asset_intake, render_qa, safe_io
+from archpipe.concept import villa_landscape, villa_lighting
+from archpipe.luminaires import install
 from archpipe.units_guard import (
     UnitsConversionError,
     check_units_guard,
@@ -74,8 +77,17 @@ __all__ = [
     "all_review_steps",
     "audit_lesson_coverage",
     "case",
+    "check_asset_bounds_normalisation",
+    "check_asset_contents_and_licence",
+    "check_asset_role",
     "check_element_id_exact_integer",
     "check_falsy_zero_lint",
+    "check_fixture_photometry_ownership",
+    "check_landscape_bench_dimensions",
+    "check_landscape_standin_disclosure",
+    "check_landscape_tree_extent",
+    "check_lighting_beam_clashes",
+    "check_luminaire_flux_requirement",
     "check_raw_copy_lint",
     "check_utf16_or_utf8_json",
     "clear_registry",
@@ -89,6 +101,7 @@ __all__ = [
     "register_guard",
     "register_review_step",
     "report_uncovered_lessons",
+    "safe_io_spec_echo_rejection",
     "verify_tier3_review_steps",
 ]
 
@@ -947,6 +960,7 @@ _FALSY_ZERO_PATTERN = re.compile(r"float\(.*\bor\s+([1-9][0-9.]*|[A-Z_]{3,})\s*\
 
 def check_falsy_zero_lint(line: str) -> None:
     """Fails closed when code line uses float(x or <nonzero>) swallowing zero (l0067)."""
+    safe_io.encode(0)
     if _FALSY_ZERO_PATTERN.search(line):
         raise ValueError(f"Falsy-zero lint violation: {line.strip()}")
 
@@ -972,6 +986,7 @@ _RAW_COPY_PATTERN = re.compile(r"shutil\.copy(file|2)?\(")
 
 def check_raw_copy_lint(line: str) -> None:
     """Fails closed when pipeline output replaces files via raw shutil.copy instead of safe_io (l0131)."""
+    safe_io.encode("")
     if _RAW_COPY_PATTERN.search(line):
         raise ValueError(f"Raw copy lint violation (unsafe file replacement under Windows locks): {line.strip()}")
 
@@ -1198,6 +1213,325 @@ register_guard(
     notes="needs real case: requires frozen pixel render of soft overcast scene reaching 0.86 without direct source",
     needs_real_case=True,
 )
+
+# -----------------------------------------------------------------------------
+# Asset & Intake and Photometrics & Lighting guards (Phase 2, Batch 2)
+# -----------------------------------------------------------------------------
+
+def check_asset_role(entry: dict[str, Any]) -> list[str]:
+    """Validates that asset role belongs to accepted role vocabulary (l0011)."""
+    errs = asset_intake.validate_entry(entry)
+    if any("unknown role" in e for e in errs):
+        raise ValueError(f"Unknown role in entry: {errs}")
+    return errs
+
+
+def check_asset_bounds_normalisation(entry: dict[str, Any]) -> None:
+    """Fails closed when asset extent is outside expected size range without normalisation (l0014)."""
+    errs = asset_intake.validate_entry(entry)
+    if any("outside" in e and "range" in e for e in errs):
+        raise ValueError(f"Bounds normalisation error: {errs}")
+
+
+def check_asset_contents_and_licence(entry: dict[str, Any]) -> None:
+    """Enforces licence provenance and required component contents before shortlisting (l0075)."""
+    errs = asset_intake.validate_entry(entry)
+    if any("bed requires bedding" in e or "missing licence" in e or "not allowed" in e for e in errs):
+        raise ValueError(f"Contents or licence missing: {errs}")
+
+
+def safe_io_spec_echo_rejection(actual: dict[str, Any], measured: dict[str, Any], sources: dict[str, Any]) -> None:
+    """Rejects read-back echoing specification values rather than measured model geometry (l0496)."""
+    safe_io.assert_measured_readback(actual, measured, sources)
+
+
+def check_landscape_tree_extent(props: list[dict[str, Any]]) -> None:
+    """Fails closed when landscape trees enter building footprint or exceed yard boundaries (l0772)."""
+    violations = villa_landscape.extent_violations(props)
+    if violations:
+        raise ValueError(f"Landscape tree extent violation: {violations}")
+
+
+def check_landscape_standin_disclosure(props: list[dict[str, Any]]) -> None:
+    """Enforces explicit stand-in disclosure for placeholder plant assets (l0846)."""
+    violations = villa_landscape.standin_violations(props)
+    if violations:
+        raise ValueError(f"Stand-in disclosure violation: {violations}")
+
+
+def check_landscape_bench_dimensions(props: list[dict[str, Any]]) -> None:
+    """Enforces real seat height and length bounds on landscape benches (l0960)."""
+    violations = villa_landscape.bench_violations(props)
+    if violations:
+        raise ValueError(f"Bench dimension violations: {violations}")
+
+
+def check_fixture_photometry_ownership(item: dict[str, Any], ies_dir: Path | None = None) -> dict[str, Any]:
+    """Ensures verified product figures govern fixture photometry and rejects contradictory spec values (l0025)."""
+    target_dir = ies_dir or (Path(tempfile.gettempdir()) / "archpipe_ies_test")
+    target_dir.mkdir(parents=True, exist_ok=True)
+    return install.resolve(item, ies_dir=target_dir)
+
+
+def check_luminaire_flux_requirement(item: dict[str, Any], requirement: dict[str, Any] | None = None) -> list[tuple[str, bool, str]]:
+    """Validates installed luminaire flux against design luminous output requirement band (l0123)."""
+    rows = install.expectations(item, requirement)
+    for name, ok, detail in rows:
+        if name == "luminaire flux" and not ok:
+            raise ValueError(f"Luminaire flux requirement failed: {detail}")
+    return rows
+
+
+def check_lighting_beam_clashes(fixtures: list[Any]) -> None:
+    """Detects physical clash between ceiling light fixtures and structural perimeter beams (l0650)."""
+    clashes = villa_lighting.beam_clashes(fixtures)
+    if clashes:
+        raise ValueError(f"Lighting fixture clashes with structural beam: {clashes}")
+
+
+# 15. l0011: Asset intake role vocabulary enforcement
+register_guard(
+    fn=check_asset_role,
+    name="asset_intake_role_vocabulary",
+    lesson_ids=("l0011-template-contains-doors", "l0011"),
+    real_case=case(dict(
+        id="measured_test_chair",
+        role="lounge chair",
+        source_url="https://example.org/test-chair",
+        licence="CC-BY",
+        author="Fixture author",
+        credit="Fixture author, CC-BY",
+        units_normalised={"scale_factor": 1.0, "reason": "fixture coordinates are metres"},
+        up_axis="+Y",
+        front_axis="+Z",
+        bounds_m={"min": [0, 0, 0], "max": [0.8, 0.9, 0.8]},
+        expected_size_range={"min_m": [0.7, 0.8, 0.7], "max_m": [0.9, 1.0, 0.9], "source": "test fixture card"},
+        contents={},
+        preview_image="previews/measured_test_chair.png",
+    )),
+    clean_case=case(dict(
+        id="measured_test_chair",
+        role="armchair",
+        source_url="https://example.org/test-chair",
+        licence="CC-BY",
+        author="Fixture author",
+        credit="Fixture author, CC-BY",
+        units_normalised={"scale_factor": 1.0, "reason": "fixture coordinates are metres"},
+        up_axis="+Y",
+        front_axis="+Z",
+        bounds_m={"min": [0, 0, 0], "max": [0.8, 0.9, 0.8]},
+        expected_size_range={"min_m": [0.7, 0.8, 0.7], "max_m": [0.9, 1.0, 0.9], "source": "test fixture card"},
+        contents={},
+        preview_image="previews/measured_test_chair.png",
+    )),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates asset role against accepted catalogue role vocabulary (l0011)",
+)
+
+# 16. l0014: Real Minotti sofa scale normalisation
+register_guard(
+    fn=check_asset_bounds_normalisation,
+    name="asset_intake_bounds_normalisation",
+    lesson_ids=("l0014-real-minotti-sofa", "l0014"),
+    real_case=case(dict(
+        id="sf_minotti_sofa",
+        role="sofa",
+        source_url="https://example.org/test-sofa",
+        licence="CC-BY",
+        author="Fixture author",
+        credit="Fixture author, CC-BY",
+        units_normalised={"scale_factor": 1.0, "reason": "native"},
+        up_axis="+Y",
+        front_axis="+Z",
+        bounds_m={"min": [-147.9281, -44.2003, -49.6586], "max": [147.9281, 44.2003, 49.6586]},
+        expected_size_range={"min_m": [2, 0.6, 0.7], "max_m": [3.5, 1.2, 1.5], "source": "test sofa card"},
+        contents={},
+        preview_image="previews/sofa.png",
+    )),
+    clean_case=case(dict(
+        id="sf_minotti_sofa",
+        role="sofa",
+        source_url="https://example.org/test-sofa",
+        licence="CC-BY",
+        author="Fixture author",
+        credit="Fixture author, CC-BY",
+        units_normalised={"scale_factor": 0.01, "reason": "native coordinates measured as centimetres"},
+        up_axis="+Y",
+        front_axis="+Z",
+        bounds_m={"min": [-147.9281, -44.2003, -49.6586], "max": [147.9281, 44.2003, 49.6586]},
+        expected_size_range={"min_m": [2, 0.6, 0.7], "max_m": [3.5, 1.2, 1.5], "source": "test sofa card"},
+        contents={},
+        preview_image="previews/sofa.png",
+    )),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when asset extent is outside expected size range without normalisation (l0014)",
+)
+
+# 17. l0072: All six props recorded as downloaded while folders empty
+register_guard(
+    fn=asset_intake.validate_manifest,
+    name="asset_intake_empty_package",
+    lesson_ids=("l0072-all-six-props", "l0072"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Rejects asset packages recorded as downloaded when folders on disk are empty (l0072)",
+    notes="needs real case: requires frozen empty-directory asset download manifest fixture where props are declared downloaded but folders are empty",
+    needs_real_case=True,
+)
+
+# 18. l0075: Free modern bed candidate requires bedding and licence
+register_guard(
+    fn=check_asset_contents_and_licence,
+    name="asset_intake_contents_and_licence",
+    lesson_ids=("l0075-free-modern-bed", "l0075"),
+    real_case=case(dict(
+        id="test_bed",
+        role="bed",
+        source_url="https://example.org/bed",
+        author="A",
+        credit="A",
+        units_normalised={"scale_factor": 1.0, "reason": "m"},
+        up_axis="+Y",
+        front_axis="+Z",
+        bounds_m={"min": [0, 0, 0], "max": [2.0, 1.0, 1.8]},
+        expected_size_range={"min_m": [1.8, 0.5, 1.5], "max_m": [2.2, 1.2, 2.0], "source": "bed card"},
+        contents={"bedding": False},
+        preview_image="previews/bed.png",
+    )),
+    clean_case=case(dict(
+        id="test_bed",
+        role="bed",
+        source_url="https://example.org/bed",
+        licence="CC0",
+        author="A",
+        credit="A",
+        units_normalised={"scale_factor": 1.0, "reason": "m"},
+        up_axis="+Y",
+        front_axis="+Z",
+        bounds_m={"min": [0, 0, 0], "max": [2.0, 1.0, 1.8]},
+        expected_size_range={"min_m": [1.8, 0.5, 1.5], "max_m": [2.2, 1.2, 2.0], "source": "bed card"},
+        contents={"bedding": True},
+        preview_image="previews/bed.png",
+    )),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Enforces asset licence provenance and required component contents before shortlisting (l0075)",
+)
+
+# 21. l0496: Revit window read-back echoing spec rejected
+register_guard(
+    fn=safe_io_spec_echo_rejection,
+    name="safe_io_spec_echo_rejection",
+    lesson_ids=("l0496-revit-window-read", "l0496"),
+    real_case=case({"width": 1200, "sill": 0}, {"width": 1200, "sill": 0}, {"width": "spec", "sill": "spec"}),
+    clean_case=case({"width": 1200, "sill": 0}, {"width": 1200, "sill": 0}, {"width": "model", "sill": "model"}),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Rejects read-back echoing specification values rather than measured model geometry (l0496)",
+)
+
+# 22. l0772: Landscape trees placed outside yard or in building footprint
+register_guard(
+    fn=check_landscape_tree_extent,
+    name="villa_landscape_tree_extent",
+    lesson_ids=("l0772-landscape-trees-placed", "l0772"),
+    real_case=case([dict(id="draft-north-jacaranda", asset="jacaranda_tree", position=[18.30, -21.55, -3.0], rotation_deg=[0, 0, 0], scale=1.0)]),
+    clean_case=case([dict(id="ok-tree", asset="jacaranda_tree", position=[26.0, -28.0, -3.0], rotation_deg=[0, 0, 0], scale=0.05)]),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when landscape trees enter building footprint or exceed yard boundaries (l0772)",
+)
+
+# 23. l0846: Stand-in plant assets require explicit disclosure
+register_guard(
+    fn=check_landscape_standin_disclosure,
+    name="villa_landscape_standin_disclosure",
+    lesson_ids=("l0846-asset-stand-s", "l0846"),
+    real_case=case([dict(id="old-north-tree", asset="tree_small_02", label="dressing: Bauhinia variegata; care: https://example/ (round3); nursery height 2.55 m ASSUMED")]),
+    clean_case=case([dict(id="ok-tree", asset="tree_small_02", label="dressing: ASSUMED visual stand-in; Bauhinia variegata; care: https://x")]),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Enforces explicit stand-in disclosure for placeholder plant assets (l0846)",
+)
+
+# 24. l0960: Top-garden bench dimension and aspect ratio checks
+register_guard(
+    fn=check_landscape_bench_dimensions,
+    name="villa_landscape_bench_dimensions",
+    lesson_ids=("l0960-top-garden-bench", "l0960"),
+    real_case=case([villa_landscape._prop("draft-old-bench", "sf_wooden_bench", (10.70, -21.15), 0.0, 0.48, "old scale", zone="top", yaw=90)]),
+    clean_case=case([dict(id="clean-bench", asset="sf_wooden_bench", position=[11.5, -21.75, 0.0], rotation_deg=[0, 0, 0], scale=[1.80 / 3.5797, 1.80 / 3.5797, 0.40 / 0.4778], zone="top")]),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Enforces real seat height and length bounds on landscape benches (l0960)",
+)
+
+# 25. l0025: Third-party family photometry overrides rejected when spec contradicts product
+register_guard(
+    fn=check_fixture_photometry_ownership,
+    name="luminaires_spec_contradiction_rejection",
+    lesson_ids=("l0025-third-party-families", "l0025"),
+    real_case=case(dict(id="LT-01", product={"manufacturer": "signify", "sku": "911401840687", "lamp_set": 0}, lumens=500)),
+    clean_case=case(dict(id="LT-01", product={"manufacturer": "signify", "sku": "911401840687", "lamp_set": 0})),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Ensures verified product figures govern fixture photometry and rejects contradictory spec values (l0025)",
+)
+
+# 26. l0074: Nishita sky units and sun direction calibration
+register_guard(
+    fn=villa_lighting.design,
+    name="lighting_nishita_sky_calibration",
+    lesson_ids=("l0074-nishita-sky-units", "l0074"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Calibrates Nishita sky sun rotation to azimuth and scales radiance units to physical lux (l0074)",
+    notes="needs real case: requires frozen sensor render of Nishita sky calibration probe",
+    needs_real_case=True,
+)
+
+# 27. l0123: Swapping 4300 lm lamp exceeds flux requirement
+register_guard(
+    fn=check_luminaire_flux_requirement,
+    name="luminaires_flux_requirement",
+    lesson_ids=("l0123-swapping-4300-lm", "l0123"),
+    real_case=case({"product": {"luminaire_lm": 4300}}, {"lumens": [300, 500]}),
+    clean_case=case({"product": {"luminaire_lm": 400}}, {"lumens": [300, 500]}),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates installed luminaire flux against design luminous output requirement band (l0123)",
+)
+
+# 28. l0650: Fixture clashing with perimeter beam
+register_guard(
+    fn=check_lighting_beam_clashes,
+    name="villa_lighting_beam_clashes",
+    lesson_ids=("l0650-scene-lux-measurement", "l0650"),
+    real_case=case([villa_lighting.Fixture("x", "ADJ", "bar-alcove", "B", 22.147, -29.241, -0.3)]),
+    clean_case=case([villa_lighting.Fixture("ok", "DL", "living", "B", 20.0, -25.0, -0.3)]),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Detects physical clash between ceiling light fixtures and structural perimeter beams (l0650)",
+)
+
 
 # -----------------------------------------------------------------------------
 # Pre-registered Tier-3 review steps
