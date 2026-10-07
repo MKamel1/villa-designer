@@ -1020,7 +1020,7 @@ register_guard(
     description="Enforces text normalization on TextNote records, rejecting un-normalized carriage returns (l0024)",
 )
 
-# 10. l0067: Falsy-zero lint catches float(x or 1.0) swallowing zero
+# 10. l0067: falsy-zero lint catches an or-default that swallows an explicit zero
 register_guard(
     fn=check_falsy_zero_lint,
     name="safe_io_falsy_zero_lint",
