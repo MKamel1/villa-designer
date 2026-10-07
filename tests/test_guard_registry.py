@@ -133,10 +133,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertGreaterEqual(report["covered_by_guard_count"], 6)
-        self.assertGreaterEqual(report["covered_by_review_count"], 21)
-        self.assertGreaterEqual(report["needs_real_case_count"], 1)
-        self.assertGreater(report["uncovered_count"], 0)
+        self.assertEqual(report["covered_by_guard_count"], 20)
+        self.assertEqual(report["covered_by_review_count"], 21)
+        self.assertEqual(report["needs_real_case_count"], 7)
+        self.assertEqual(report["uncovered_count"], 169)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -146,6 +146,13 @@ class TestGuardRegistry(unittest.TestCase):
             "l0113-signify-served-zip",
             "l0118-signify-s-revit",
             "l0098-photometric-file-describ",
+            "l0019-revit-color-channels",
+            "l0024-revit-textnote-stores",
+            "l0067-first-falsy-zero",
+            "l0117-ironpython-read-utf",
+            "l0131-windows-file-lock",
+            "l0272-tests-test-deliverables",
+            "l0466-json-fix-passed",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
@@ -177,8 +184,21 @@ class TestGuardRegistry(unittest.TestCase):
         for lid in expected_review_lessons:
             self.assertIn(lid, report["covered_by_review"], f"Lesson {lid} should be covered by review step")
 
-        # Check needs_real_case
-        self.assertIn("l0061-first-window-view", report["needs_real_case"])
+        # Check needs_real_case lessons
+        expected_needs_real_case = [
+            "l0061-first-window-view",
+            "l0078-thresholds-set-synthetic",
+            "l0079-blue-lamp-lit",
+            "l0081-highlight-priority-meter",
+            "l0082-highlight-priority-then",
+            "l0100-detail-view-named",
+            "l0136-highlights-present-faile",
+        ]
+        for lid in expected_needs_real_case:
+            self.assertIn(lid, report["needs_real_case"], f"Lesson {lid} should be tracked as needs_real_case")
+
+        # Check lesson left uncovered (no guard in code yet)
+        self.assertIn("l0101-look-retry-overwrote", report["uncovered_lessons"])
 
     def test_coverage_audit_reports_unreadable_inputs_as_errors_never_no_guard(self) -> None:
         """Unreadable or missing input files must raise UnreadableInputError, never reported as 'no guard' / 'NONE'."""
@@ -418,6 +438,47 @@ class TestGuardRegistry(unittest.TestCase):
             verify_tier3_review_steps(audit_file="", review_steps_file=valid_review_doc)
         with self.assertRaises(UnreadableInputError):
             verify_tier3_review_steps(audit_file=valid_audit, review_steps_file="")
+
+    def test_phase2_batch1_guards_execution(self) -> None:
+        """Every guard added in Phase 2 Batch 1 executes as expected."""
+        # 1. Safe I/O & Serialization guards run on real (fires) and clean (quiet)
+        batch1_safe_io = [
+            "safe_io_color_channels",
+            "safe_io_textnote_normalization",
+            "safe_io_falsy_zero_lint",
+            "safe_io_utf16_bom_decode",
+            "safe_io_raw_copy_lint",
+            "safe_io_measured_readback_agreement",
+            "safe_io_element_id_exact_integer",
+        ]
+        for name in batch1_safe_io:
+            guard = get_guard(name)
+            self.assertFalse(guard.needs_real_case, f"{name} should not need real case")
+            real_res = guard.run_case("real")
+            self.assertTrue(real_res.passed, f"{name} real failed: {real_res.error_message}")
+            self.assertTrue(real_res.fired, f"{name} real did not fire")
+
+            clean_res = guard.run_case("clean")
+            self.assertTrue(clean_res.passed, f"{name} clean failed: {clean_res.error_message}")
+            self.assertFalse(clean_res.fired, f"{name} clean fired unexpectedly")
+
+        # 2. Render QA guards are registered with needs_real_case=True
+        batch1_render_qa = [
+            "render_qa_window_view_detail",
+            "render_qa_threshold_calibration",
+            "render_qa_cool_lamplit_cast",
+            "render_qa_highlight_clipping",
+            "render_qa_exposure_midtones",
+            "render_qa_view_subject_framing",
+            "render_qa_overcast_highlights",
+        ]
+        for name in batch1_render_qa:
+            guard = get_guard(name)
+            self.assertTrue(guard.needs_real_case, f"{name} should have needs_real_case=True")
+            real_res = guard.run_case("real")
+            self.assertFalse(real_res.passed)
+            self.assertFalse(real_res.fired)
+            self.assertIn("needs real case", real_res.error_message.lower())
 
 
 if __name__ == "__main__":

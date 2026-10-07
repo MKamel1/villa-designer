@@ -34,9 +34,12 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 import io
+import json
 from pathlib import Path
 import re
+import tempfile
 from typing import Any, Callable, Iterable
+import uuid
 import zipfile
 
 from archpipe.evidence import (
@@ -54,6 +57,7 @@ from archpipe.external_claims import (
     check_photometry_fitting_agreement,
     ingest_bytes,
 )
+from archpipe import render_qa, safe_io
 from archpipe.units_guard import (
     UnitsConversionError,
     check_units_guard,
@@ -70,6 +74,10 @@ __all__ = [
     "all_review_steps",
     "audit_lesson_coverage",
     "case",
+    "check_element_id_exact_integer",
+    "check_falsy_zero_lint",
+    "check_raw_copy_lint",
+    "check_utf16_or_utf8_json",
     "clear_registry",
     "coverage_report",
     "find_guards_for_lesson",
@@ -246,10 +254,29 @@ class RegisteredGuard:
         norm = _normalize_case(target_case)
         exc: Exception | None = None
         result: Any = None
+        temp_files: list[Path] = []
         try:
-            result = self.guard_fn(*norm.args, **norm.kwargs)
+            args = list(norm.args)
+            kwargs = dict(norm.kwargs)
+
+            # Case setup: write frozen bytes to a temporary file when guard expects a file path
+            if self.name == "safe_io_utf16_bom_decode" or self.guard_fn in (check_utf16_or_utf8_json, safe_io.load_json):
+                if args and isinstance(args[0], (bytes, bytearray)):
+                    tf = Path(tempfile.gettempdir()) / f"guard_utf16_{uuid.uuid4().hex}.json"
+                    tf.write_bytes(bytes(args[0]))
+                    temp_files.append(tf)
+                    args[0] = tf
+
+            result = self.guard_fn(*args, **kwargs)
         except Exception as e:
             exc = e
+        finally:
+            for tf in temp_files:
+                try:
+                    if tf.exists():
+                        tf.unlink()
+                except OSError:
+                    pass
 
         passed, msg = _evaluate_outcome(result, exc, expected)
 
@@ -911,9 +938,165 @@ register_guard(
     description="Fails closed on raw unit conversion literals (304.8, 0.3048, 3.28084, 25.4) outside units boundary (C9)",
 )
 
+# -----------------------------------------------------------------------------
+# Safe I/O & Serialization guards (Phase 2, Batch 1)
+# -----------------------------------------------------------------------------
+
+_FALSY_ZERO_PATTERN = re.compile(r"float\(.*\bor\s+([1-9][0-9.]*|[A-Z_]{3,})\s*\)")
+
+
+def check_falsy_zero_lint(line: str) -> None:
+    """Fails closed when code line uses float(x or <nonzero>) swallowing zero (l0067)."""
+    if _FALSY_ZERO_PATTERN.search(line):
+        raise ValueError(f"Falsy-zero lint violation: {line.strip()}")
+
+
+def check_utf16_or_utf8_json(raw_input: bytes | Path | str) -> dict[str, Any]:
+    """Decodes UTF-16 or UTF-8 JSON bytes with BOM detection, rejecting empty reads (l0117)."""
+    if isinstance(raw_input, (bytes, bytearray)):
+        tf = Path(tempfile.gettempdir()) / f"utf16_decode_{uuid.uuid4().hex}.json"
+        tf.write_bytes(bytes(raw_input))
+        try:
+            return safe_io.load_json(tf)
+        finally:
+            if tf.exists():
+                try:
+                    tf.unlink()
+                except OSError:
+                    pass
+    return safe_io.load_json(raw_input)
+
+
+_RAW_COPY_PATTERN = re.compile(r"shutil\.copy(file|2)?\(")
+
+
+def check_raw_copy_lint(line: str) -> None:
+    """Fails closed when pipeline output replaces files via raw shutil.copy instead of safe_io (l0131)."""
+    if _RAW_COPY_PATTERN.search(line):
+        raise ValueError(f"Raw copy lint violation (unsafe file replacement under Windows locks): {line.strip()}")
+
+
+def check_element_id_exact_integer(val: Any) -> dict[str, Any]:
+    """Enforces exact integer type representation for element identifiers, preventing float degradation (l0466)."""
+    return safe_io.encode(safe_io.ElementId(val))
+
+
+# 8. l0019: Revit Color channels are .NET bytes
+register_guard(
+    fn=safe_io.encode,
+    name="safe_io_color_channels",
+    lesson_ids=("l0019-revit-color-channels", "l0019"),
+    real_case=case(safe_io.Color(256, 180, 0)),
+    clean_case=case(safe_io.Color(0, 180, 255)),
+    expected_real=ValueError,
+    expected_clean={
+        "type": "Color",
+        "value": [
+            {"type": "int", "value": 0},
+            {"type": "int", "value": 180},
+            {"type": "int", "value": 255},
+        ],
+    },
+    tier=2,
+    description="Validates that Color channels are within byte range (0-255) before JSON serialization (l0019)",
+)
+
+# 9. l0024: Revit TextNote stores carriage returns and trailing newline
+register_guard(
+    fn=safe_io.encode,
+    name="safe_io_textnote_normalization",
+    lesson_ids=("l0024-revit-textnote-stores", "l0024"),
+    real_case=case(safe_io.Text("Review\rRegistered \u00ae\r\n\n", "Review\rRegistered \u00ae\r\n\n")),
+    clean_case=case(safe_io.normalized_text("Review\rRegistered \u00ae\r\n\n")),
+    expected_real=ValueError,
+    expected_clean={
+        "type": "Text",
+        "value": [
+            {"type": "str", "value": "Review\rRegistered \u00ae\r\n\n"},
+            {"type": "str", "value": "Review\nRegistered \u00ae"},
+        ],
+    },
+    tier=2,
+    description="Enforces text normalization on TextNote records, rejecting un-normalized carriage returns (l0024)",
+)
+
+# 10. l0067: Falsy-zero lint catches float(x or 1.0) swallowing zero
+register_guard(
+    fn=check_falsy_zero_lint,
+    name="safe_io_falsy_zero_lint",
+    lesson_ids=("l0067-first-falsy-zero", "l0067"),
+    real_case=case('energy = P * float(fx.get("output") or 1.0)'),  # falsy-ok: l0067 real bug fixture
+    clean_case=case('energy = P * (float(fx["output"]) if fx.get("output") is not None else 1.0)'),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed on code lines using float(x or <nonzero>) that swallow an explicit zero (l0067)",
+)
+
+# 11. l0117: IronPython read UTF-16 as empty and failed on non-ASCII symbols
+register_guard(
+    fn=check_utf16_or_utf8_json,
+    name="safe_io_utf16_bom_decode",
+    lesson_ids=("l0117-ironpython-read-utf", "l0117"),
+    real_case=case(b""),
+    clean_case=case(b'\xff\xfe{\x00"\x00n\x00a\x00m\x00e\x00"\x00:\x00"\x00\xae\x00"\x00}\x00'),
+    expected_real=(json.JSONDecodeError, ValueError),
+    expected_clean={"name": "\u00ae"},
+    tier=2,
+    description="Decodes UTF-16 and UTF-8 JSON bytes with BOM detection and rejects empty stream reads (l0117)",
+)
+
+# 12. l0131: Windows file lock when replacing an open image
+register_guard(
+    fn=check_raw_copy_lint,
+    name="safe_io_raw_copy_lint",
+    lesson_ids=("l0131-windows-file-lock", "l0131"),
+    real_case=case("shutil." "copyfile(folder/'render.png',out/'bedroom.png')"),  # raw_copy.search( fixture
+    clean_case=case("copy_file(folder/'render.png', out/'bedroom.png')"),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when raw shutil.copy is used instead of safe_io for replacing pipeline outputs (l0131)",
+)
+
+# 13. l0272: Tests read deliverables back and reject spec echo
+register_guard(
+    fn=safe_io.assert_measured_readback,
+    name="safe_io_measured_readback_agreement",
+    lesson_ids=("l0272-tests-test-deliverables", "l0272"),
+    real_case=case({"width": 1200}, {"width": 1000}, {"width": "model"}),
+    clean_case=case({"width": 1000}, {"width": 1000}, {"width": "model"}),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Rejects authored specifications echoed over independently measured model geometry (l0272)",
+)
+
+# 14. l0466: Integer bridge degradation to float corrupts element identifiers
+register_guard(
+    fn=check_element_id_exact_integer,
+    name="safe_io_element_id_exact_integer",
+    lesson_ids=("l0466-json-fix-passed", "l0466"),
+    real_case=case(1.25),
+    clean_case=case(9223372036854775807),
+    expected_real=ValueError,
+    expected_clean={
+        "type": "ElementId",
+        "value": [
+            {"type": "int", "value": 9223372036854775807},
+        ],
+    },
+    tier=2,
+    description="Enforces exact integer type representation for element IDs, preventing float degradation (l0466)",
+)
+
+# -----------------------------------------------------------------------------
+# Render QA guards (Phase 1 and Phase 2, Batch 1)
+# -----------------------------------------------------------------------------
+
 # Guard without real case listed as 'needs real case' (l0061: window_view passing void)
 register_guard(
-    fn=lambda img: False,
+    fn=render_qa.check,
     name="render_qa_window_view_detail",
     lesson_ids=("l0061-first-window-view", "l0061"),
     real_case=None,
@@ -923,6 +1106,96 @@ register_guard(
     tier=2,
     description="Requires local detail in window view and fails on smooth void gradients (l0061)",
     notes="needs real case: requires frozen pixel render of void sky gradient",
+    needs_real_case=True,
+)
+
+# l0078: Thresholds set on synthetic images failed on real renders (window detail, colour cast, highlight floor)
+register_guard(
+    fn=render_qa.check,
+    name="render_qa_threshold_calibration",
+    lesson_ids=("l0078-thresholds-set-synthetic", "l0078"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Calibrates render QA thresholds against real measured render data rather than synthetic tests (l0078)",
+    notes="needs real case: requires frozen renders for window void detail (0.0026 vs 0.0365), warm colour cast (0.052-0.070 vs 0.06), and highlight floor",
+    needs_real_case=True,
+)
+
+# l0079: Blue lamp-lit night passed colour cast at 0.036
+register_guard(
+    fn=render_qa.check,
+    name="render_qa_cool_lamplit_cast",
+    lesson_ids=("l0079-blue-lamp-lit", "l0079"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Direction-aware colour cast guard failing cool cast above 0.02 on lamp-lit night views (l0079)",
+    notes="needs real case: requires frozen pixel render of cool lamp-lit night view (measured 0.036 cool cast)",
+    needs_real_case=True,
+)
+
+# l0081: Highlight-priority metering still clipped 4.1%
+register_guard(
+    fn=render_qa.check,
+    name="render_qa_highlight_clipping",
+    lesson_ids=("l0081-highlight-priority-meter", "l0081"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when highlight clipping exceeds 3% under highlight-priority metering (l0081)",
+    notes="needs real case: requires frozen pixel render of view clipping 4.1% under highlight-priority metering",
+    needs_real_case=True,
+)
+
+# l0082: Highlight priority underexposed two views (median 0.18 and 0.23)
+register_guard(
+    fn=render_qa.check,
+    name="render_qa_exposure_midtones",
+    lesson_ids=("l0082-highlight-priority-then", "l0082"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Enforces midtone floor of at least 0.30 median luminance to prevent gloomy underexposure (l0082)",
+    notes="needs real case: requires frozen pixel render of underexposed view (measured 0.18 and 0.23 median)",
+    needs_real_case=True,
+)
+
+# l0100: Detail view named for pendant never framed it (sat at screen height 2.59)
+register_guard(
+    fn=render_qa.check,
+    name="render_qa_view_subject_framing",
+    lesson_ids=("l0100-detail-view-named", "l0100"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when declared view subject is out of frame in rendered camera view (l0100)",
+    notes="needs real case: requires frozen scene render where pendant LT-03 sat at screen height 2.59 outside [0, 1] frame",
+    needs_real_case=True,
+)
+
+# l0136: highlights_present failed soft overcast light
+register_guard(
+    fn=render_qa.check,
+    name="render_qa_overcast_highlights",
+    lesson_ids=("l0136-highlights-present-faile", "l0136"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Treats highlight floor as advisory WARN on soft overcast scenes lacking direct light sources (l0136)",
+    notes="needs real case: requires frozen pixel render of soft overcast scene reaching 0.86 without direct source",
     needs_real_case=True,
 )
 
