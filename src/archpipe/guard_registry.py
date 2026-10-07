@@ -32,6 +32,7 @@ Example Usage:
 """
 from __future__ import annotations
 
+import copy
 from dataclasses import dataclass, field
 import io
 import json
@@ -58,8 +59,15 @@ from archpipe.external_claims import (
     check_photometry_fitting_agreement,
     ingest_bytes,
 )
-from archpipe import asset_intake, material_basis, render_qa, safe_io
-from archpipe.concept import villa_landscape, villa_lighting
+from archpipe import asset_intake, material_basis, render_qa, safe_io, villa_render_contract
+from archpipe.concept import (
+    physical_part,
+    revit_spec,
+    villa_furnish3d,
+    villa_landscape,
+    villa_lighting,
+    villa_r11,
+)
 from archpipe.luminaires import install
 from archpipe.fixture_record import (
     FixtureConsistencyError,
@@ -73,7 +81,6 @@ from archpipe.units_guard import (
 __all__ = [
     "EvidenceStatus",
     "FixtureConsistencyError",
-
     "GuardCase",
     "GuardExecutionResult",
     "RegisteredGuard",
@@ -96,7 +103,14 @@ __all__ = [
     "check_luminaire_flux_requirement",
     "check_fixture_record_consistency",
     "check_material_appearance_basis",
+    "check_physical_part_climber_proxy",
+    "check_physical_part_duvet_footprint",
+    "check_physical_part_garment_proxy",
+    "check_physical_part_solid_winding",
     "check_raw_copy_lint",
+    "check_render_contract_scene_geometry",
+    "check_round2_spec_details",
+    "check_round2_stair_glass_boundary",
     "check_utf16_or_utf8_json",
     "clear_registry",
     "coverage_report",
@@ -1625,6 +1639,351 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Fails closed when material appearance lacks verified basis or violates physical optics (C7)",
+)
+
+
+# -----------------------------------------------------------------------------
+# Scene & geometry builders guards (Phase 2, Batch 3)
+# -----------------------------------------------------------------------------
+
+def check_round2_spec_details(sp: dict[str, Any], rb: dict[str, Any], lay: dict[str, Any]) -> list[str]:
+    """Fails closed when approved option spec details are ignored or missing in Revit readback (l0587)."""
+    problems = villa_furnish3d.round2_postcondition(sp, rb, lay)
+    if any("guest-wc-extract-grille" in p or "built 0 times" in p for p in problems):
+        raise ValueError(f"Option spec details missing in readback: {problems}")
+    elif problems:
+        raise ValueError(f"Round 2 postcondition detail failure: {problems}")
+    return problems
+
+
+def check_round2_stair_glass_boundary(sp: dict[str, Any], rb: dict[str, Any], lay: dict[str, Any]) -> list[str]:
+    """Fails closed when open-side glass extrusion projects outside stair room (l0589)."""
+    problems = villa_furnish3d.round2_postcondition(sp, rb, lay)
+    if any("leaves room" in p for p in problems):
+        raise ValueError(f"Stair glass boundary failure: {problems}")
+    elif problems:
+        raise ValueError(f"Round 2 postcondition failure: {problems}")
+    return problems
+
+
+def check_physical_part_solid_winding(faces: list[Any]) -> list[str]:
+    """Fails closed when closed solid mesh faces are wound inward with negative volume (l0047)."""
+    errors = physical_part.geometry_errors(faces)
+    if any("inward-facing solid" in e for e in errors):
+        raise ValueError(f"Inward-facing solid error: {errors}")
+    elif errors:
+        raise ValueError(f"Solid geometry errors: {errors}")
+    return errors
+
+
+def check_render_contract_scene_geometry(scene: dict[str, Any]) -> list[str]:
+    """Validates scene mesh polygons and fails closed on zero-area or degenerate geometry (l0686)."""
+    errors = villa_render_contract.validate_scene(scene)
+    poly_errors = [e for e in errors if "degenerate polygon" in e or "faces" in e]
+    if poly_errors:
+        raise ValueError(f"Render contract degenerate geometry error: {poly_errors}")
+    return poly_errors
+
+
+def check_physical_part_duvet_footprint(faces: list[Any], support: tuple[float, ...]) -> physical_part.Part:
+    """Fails closed when duvet mesh vertices leave mattress support footprint (l0069)."""
+    return physical_part.Part(
+        kind="duvet",
+        solid=faces,
+        local_axes=("x", "y", "z"),
+        material="linen",
+        basis="authored-procedural",
+        support=support,
+    )
+
+
+def check_physical_part_climber_proxy(faces: list[Any]) -> physical_part.Part:
+    """Fails closed when climbing plant is drawn as a bare rectangular box proxy (l0878)."""
+    return physical_part.Part(
+        kind="climber",
+        solid=faces,
+        local_axes=("x", "y", "z"),
+        material="greenery",
+        basis="authored-procedural",
+    )
+
+
+def check_physical_part_garment_proxy(faces: list[Any]) -> physical_part.Part:
+    """Fails closed when dressing room garment is modeled as a bare rectangular slab proxy (l0923)."""
+    return physical_part.Part(
+        kind="garment",
+        solid=faces,
+        local_axes=("x", "y", "z"),
+        material="cotton",
+        basis="authored-procedural",
+    )
+
+
+def _d1_round2_fixtures() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
+    lay = villa_r11.design("D1")
+    spec = revit_spec.build(lay)
+    spec["furniture"] = villa_furnish3d.spec(lay)
+    hatch = spec["hatches"][0]
+    z = revit_spec.LEVELS_Z[hatch["level"]]
+    suite = next(d for d in spec["doors"] if set(d["rooms"]) == {"parents-bed", "parents-dressing"})
+    rb = {
+        "details": [
+            {
+                "mark": e["mark"],
+                "category": e["category"],
+                "comments": e["comments"],
+                "bbox_mm": [v * 1000 for v in e["bbox"]],
+            }
+            for e in villa_furnish3d.round2_elements(spec)
+        ],
+        "hatches": [
+            {
+                "mark": hatch["id"],
+                "category": "Openings",
+                "comments": hatch["closure"],
+                "host_wall": 81,
+                "expected_host_wall": 81,
+                "host_line_mm": [[3617, hatch["y"] * 1000], [15412, hatch["y"] * 1000]],
+                "bbox_mm": [
+                    hatch["x0"] * 1000,
+                    (hatch["y"] - 0.1) * 1000,
+                    (z + hatch["sill"]) * 1000,
+                    hatch["x1"] * 1000,
+                    (hatch["y"] + 0.1) * 1000,
+                    (z + hatch["head"]) * 1000,
+                ],
+            }
+        ],
+        "doors": [
+            {
+                "rooms": ["kitchen", "dirty-kitchen"],
+                "width": 1.2,
+                "mark": "kitchen-dirty-sliding",
+                "category": "Doors",
+                "comments": "telescopic-pocket-3; 3 leaves",
+                "bbox_mm": [0] * 6,
+            },
+            {
+                "rooms": suite["rooms"],
+                "width": suite["width"],
+                "category": "Doors",
+                "bbox_mm": [0] * 6,
+                "point_mm": [suite["x"] * 1000, suite["y"] * 1000],
+            },
+        ],
+        "windows": [
+            {
+                "mark": "window-study-game-%.3f-%.3f" % (w["x"], w["y"]),
+                "category": "Windows",
+                "bbox_mm": [0] * 6,
+                "sill": w["sill"],
+                "height": w["height"],
+                "width": w["width"],
+            }
+            for w in spec["windows"]
+            if w.get("room") == "study-game"
+        ],
+        "furniture": [
+            {
+                "mark": f["mark"],
+                "bbox": f["envelope"],
+                "comments": f["type"],
+                "bbox_mm": [
+                    (v + (revit_spec.LEVELS_Z[f["level"]] if k in (2, 5) else 0)) * 1000
+                    for k, v in enumerate(f["envelope"])
+                ],
+            }
+            for f in spec["furniture"]
+        ],
+    }
+    return spec, rb, lay
+
+
+def _make_box_faces(x0: float, y0: float, z0: float, x1: float, y1: float, z1: float) -> list[list[list[float]]]:
+    """Six outward CCW quads of an axis-aligned box."""
+    return [
+        [[x0, y0, z0], [x0, y1, z0], [x1, y1, z0], [x1, y0, z0]],
+        [[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]],
+        [[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]],
+        [[x1, y1, z0], [x0, y1, z0], [x0, y1, z1], [x1, y1, z1]],
+        [[x0, y1, z0], [x0, y0, z0], [x0, y0, z1], [x0, y1, z1]],
+        [[x1, y0, z0], [x1, y1, z0], [x1, y1, z1], [x1, y0, z1]],
+    ]
+
+
+def _make_triangular_prism_faces(
+    x0: float = 0.0,
+    y0: float = 0.0,
+    z0: float = 0.0,
+    x1: float = 2.0,
+    y1: float = 1.5,
+    z1: float = 0.7,
+    x_mid: float = 1.0,
+) -> list[list[list[float]]]:
+    """A closed watertight outward-wound triangular prism with 3 distinct x coordinates."""
+    return [
+        [[x0, y0, z0], [x0, y1, z0], [x1, y1, z0], [x1, y0, z0]],
+        [[x0, y0, z0], [x_mid, y0, z1], [x_mid, y1, z1], [x0, y1, z0]],
+        [[x_mid, y0, z1], [x1, y0, z0], [x1, y1, z0], [x_mid, y1, z1]],
+        [[x_mid, y0, z1], [x0, y0, z0], [x1, y0, z0]],
+        [[x1, y1, z0], [x0, y1, z0], [x_mid, y1, z1]],
+    ]
+
+
+_round2_spec, _round2_clean_rb, _round2_lay = _d1_round2_fixtures()
+_round2_missing_grille_rb = copy.deepcopy(_round2_clean_rb)
+_round2_missing_grille_rb["details"] = [
+    x for x in _round2_missing_grille_rb["details"] if x["mark"] != "guest-wc-extract-grille"
+]
+_round2_outside_glass_rb = copy.deepcopy(_round2_clean_rb)
+_glass_panel = next(x for x in _round2_outside_glass_rb["details"] if x["mark"].startswith("stair-open-glass"))
+_glass_panel["bbox_mm"][4] += 10
+
+_headboard_clean_box = _make_box_faces(0.0, 0.0, 0.0, 1.0, 0.2, 1.0)
+_headboard_inward_box = [f[::-1] for f in _headboard_clean_box]
+
+_duvet_clean_faces = _make_triangular_prism_faces(0.0, 0.0, 0.5, 2.0, 1.5, 0.7, 1.0)
+_duvet_slid_faces = [[[p[0] + 0.6, p[1], p[2]] for p in face] for face in _duvet_clean_faces]
+
+_climber_box_faces = _make_box_faces(0.0, 0.0, 0.3, 0.08, 0.08, 0.38)
+_climber_clean_faces = _make_triangular_prism_faces(0.0, 0.0, 0.0, 0.5, 0.5, 0.5, 0.25)
+
+_garment_slab_faces = _make_box_faces(0.0, 0.0, 0.0, 0.30, 0.025, 1.0)
+_garment_clean_faces = _make_triangular_prism_faces(0.0, 0.0, 0.0, 0.30, 0.20, 1.0, 0.15)
+
+
+# 30. l0587: Option spec listed approved details that Revit builder ignored
+register_guard(
+    fn=check_round2_spec_details,
+    name="villa_furnish3d_spec_details",
+    lesson_ids=("l0587-option-spec-listed", "l0587"),
+    real_case=case(_round2_spec, _round2_missing_grille_rb, _round2_lay),
+    clean_case=case(_round2_spec, _round2_clean_rb, _round2_lay),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Fails closed when approved option spec details are ignored or missing in Revit readback (l0587)",
+)
+
+# 31. l0589: First open-side glass extrusion projected outside stair room
+register_guard(
+    fn=check_round2_stair_glass_boundary,
+    name="villa_furnish3d_stair_glass_boundary",
+    lesson_ids=("l0589-first-open-side", "l0589"),
+    real_case=case(_round2_spec, _round2_outside_glass_rb, _round2_lay),
+    clean_case=case(_round2_spec, _round2_clean_rb, _round2_lay),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Fails closed when open-side glass extrusion projects outside stair room (l0589)",
+)
+
+# 32. l0047: Inward-facing triangles on closed solid headboard mesh
+register_guard(
+    fn=check_physical_part_solid_winding,
+    name="physical_part_solid_winding",
+    lesson_ids=("l0047-closed-consistently-conn", "l0047"),
+    real_case=case(_headboard_inward_box),
+    clean_case=case(_headboard_clean_box),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Fails closed when closed solid mesh faces are wound inward with negative volume (l0047)",
+)
+
+# 33. l0686: 1,780 zero-area triangles refused whole draft on workstation
+register_guard(
+    fn=check_render_contract_scene_geometry,
+    name="villa_render_contract_zero_area_triangles",
+    lesson_ids=("l0686-1-780-zero", "l0686"),
+    real_case=case({
+        "schema": "villa-render/1",
+        "id": "scene-degenerate-geometry",
+        "library_root": "assets",
+        "materials": {"metal": {"kind": "principled", "base_rgb": [0.2, 0.2, 0.2]}},
+        "meshes": [
+            {
+                "id": "mesh-zero-area-triangle",
+                "group": "fixture",
+                "material": "metal",
+                "label": "zero area degenerate face",
+                "faces": [[[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [2.0, 0.0, 0.0]]],
+            }
+        ],
+    }),
+    clean_case=case({
+        "schema": "villa-render/1",
+        "id": "scene-clean-geometry",
+        "library_root": "assets",
+        "materials": {"metal": {"kind": "principled", "base_rgb": [0.2, 0.2, 0.2]}},
+        "meshes": [
+            {
+                "id": "mesh-triangle-valid",
+                "group": "fixture",
+                "material": "metal",
+                "label": "valid triangle",
+                "faces": [[[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]],
+            }
+        ],
+    }),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates scene mesh polygons and fails closed on zero-area or degenerate geometry (l0686)",
+)
+
+# 34. l0069: Duvet slid 0.6 m and hung onto floor
+register_guard(
+    fn=check_physical_part_duvet_footprint,
+    name="physical_part_duvet_footprint",
+    lesson_ids=("l0069-duvet-slid-0", "l0069"),
+    real_case=case(_duvet_slid_faces, (0.0, 0.0, 2.0, 1.5)),
+    clean_case=case(_duvet_clean_faces, (0.0, 0.0, 2.0, 1.5)),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when duvet mesh vertices leave mattress support footprint (l0069)",
+)
+
+# 35. l0878: Climbing plant drawn as 80 mm magenta box floating 0.30 m above ground
+register_guard(
+    fn=check_physical_part_climber_proxy,
+    name="physical_part_climber_proxy",
+    lesson_ids=("l0878-climbing-plant-drawn", "l0878"),
+    real_case=case(_climber_box_faces),
+    clean_case=case(_climber_clean_faces),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when climbing plant is drawn as a bare rectangular box proxy (l0878)",
+)
+
+# 36. l0923: Dressing room clothes flat 25 mm vertical slabs
+register_guard(
+    fn=check_physical_part_garment_proxy,
+    name="physical_part_garment_proxy",
+    lesson_ids=("l0923-dressing-room-clothes", "l0923"),
+    real_case=case(_garment_slab_faces),
+    clean_case=case(_garment_clean_faces),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when dressing room garment is modeled as a bare rectangular slab proxy (l0923)",
+)
+
+# 37. l0059: Refractive glass slab blocks Cycles shadow rays (no sunlight enters)
+register_guard(
+    fn=render_qa.check,
+    name="render_qa_glass_daylight_transmission",
+    lesson_ids=("l0059-no-sunlight-entered", "l0059"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when architectural glass fails to transmit daylight and blocks Cycles shadow rays (l0059)",
+    notes="needs real case: requires frozen pixel render of room where refractive glass slab blocked Cycles shadow rays",
+    needs_real_case=True,
 )
 
 

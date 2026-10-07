@@ -137,10 +137,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 48)
+        self.assertEqual(report["covered_by_guard_count"], 55)
         self.assertEqual(report["covered_by_review_count"], 21)
-        self.assertEqual(report["needs_real_case_count"], 9)
-        self.assertEqual(report["uncovered_count"], 139)
+        self.assertEqual(report["needs_real_case_count"], 10)
+        self.assertEqual(report["uncovered_count"], 131)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -188,11 +188,19 @@ class TestGuardRegistry(unittest.TestCase):
             "l0891-artificial-grass-rendere",
             "l0900-island-stair-void",
             "l0910-ensuite-bath-screen",
+            # Phase 2 Batch 3 Scene & Geometry Builders
+            "l0047-closed-consistently-conn",
+            "l0069-duvet-slid-0",
+            "l0587-option-spec-listed",
+            "l0589-first-open-side",
+            "l0686-1-780-zero",
+            "l0878-climbing-plant-drawn",
+            "l0923-dressing-room-clothes",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
 
-        # Lessons whose local re-implementations were deleted and left uncovered (no production guard yet)
+        # Lessons whose local re-implementations were deleted or no production guard exists yet
         deleted_reimplementation_lessons = [
             "l0177-good-texture-poly",
             "l0178-good-model-failed",
@@ -200,6 +208,7 @@ class TestGuardRegistry(unittest.TestCase):
             "l0080-lamps-rendered-far",
             "l0090-window-glass-passed",
             "l0656-glass-verified",
+            "l0046-fine-extraction-exposed",
         ]
         # l0095, l0096 and l0119 lost their batch-2 re-implementations but are now covered by the
         # production fixture_record check (C5 phase 1), so they are asserted covered above.
@@ -244,6 +253,8 @@ class TestGuardRegistry(unittest.TestCase):
             "l0136-highlights-present-faile",
             "l0072-all-six-props",
             "l0074-nishita-sky-units",
+            # Phase 2 Batch 3 Scene & Geometry Builders
+            "l0059-no-sunlight-entered",
         ]
         for lid in expected_needs_real_case:
             self.assertIn(lid, report["needs_real_case"], f"Lesson {lid} should be tracked as needs_real_case")
@@ -698,6 +709,41 @@ class TestGuardRegistry(unittest.TestCase):
         clean_res = guard.run_case("clean")
         self.assertTrue(clean_res.passed, f"fixture_record_consistency clean failed: {clean_res.error_message}")
         self.assertFalse(clean_res.fired, "fixture_record_consistency clean fired unexpectedly")
+
+    def test_phase2_batch3_scene_and_geometry_guards_execution(self) -> None:
+        """Every guard added in Phase 2 Batch 3 executes as expected."""
+        # 1. Active scene and geometry builder guards run on real (fires) and clean (quiet)
+        batch3_active = [
+            "villa_furnish3d_spec_details",
+            "villa_furnish3d_stair_glass_boundary",
+            "physical_part_solid_winding",
+            "villa_render_contract_zero_area_triangles",
+            "physical_part_duvet_footprint",
+            "physical_part_climber_proxy",
+            "physical_part_garment_proxy",
+        ]
+        for name in batch3_active:
+            guard = get_guard(name)
+            self.assertFalse(guard.needs_real_case, f"{name} should not need real case")
+            real_res = guard.run_case("real")
+            self.assertTrue(real_res.passed, f"{name} real failed: {real_res.error_message}")
+            self.assertTrue(real_res.fired, f"{name} real did not fire")
+
+            clean_res = guard.run_case("clean")
+            self.assertTrue(clean_res.passed, f"{name} clean failed: {clean_res.error_message}")
+            self.assertFalse(clean_res.fired, f"{name} clean fired unexpectedly")
+
+        # 2. Batch 3 guards registered with needs_real_case=True
+        batch3_needs_real = [
+            "render_qa_glass_daylight_transmission",
+        ]
+        for name in batch3_needs_real:
+            guard = get_guard(name)
+            self.assertTrue(guard.needs_real_case, f"{name} should have needs_real_case=True")
+            real_res = guard.run_case("real")
+            self.assertFalse(real_res.passed)
+            self.assertFalse(real_res.fired)
+            self.assertIn("needs real case", real_res.error_message.lower())
 
 
 if __name__ == "__main__":
