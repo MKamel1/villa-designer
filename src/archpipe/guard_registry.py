@@ -58,7 +58,7 @@ from archpipe.external_claims import (
     check_photometry_fitting_agreement,
     ingest_bytes,
 )
-from archpipe import asset_intake, render_qa, safe_io
+from archpipe import asset_intake, material_basis, render_qa, safe_io
 from archpipe.concept import villa_landscape, villa_lighting
 from archpipe.luminaires import install
 from archpipe.fixture_record import (
@@ -95,6 +95,7 @@ __all__ = [
     "check_lighting_beam_clashes",
     "check_luminaire_flux_requirement",
     "check_fixture_record_consistency",
+    "check_material_appearance_basis",
     "check_raw_copy_lint",
     "check_utf16_or_utf8_json",
     "clear_registry",
@@ -1558,6 +1559,72 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Detects physical clash between ceiling light fixtures and structural perimeter beams (l0650)",
+)
+
+# -----------------------------------------------------------------------------
+# Material appearance basis guard (Class C7, Phase 1)
+# -----------------------------------------------------------------------------
+
+def check_material_appearance_basis(scene_or_spec: Any = None) -> list[dict[str, Any]]:
+    """Fails closed when material appearance lacks verified basis or violates physical optics (C7)."""
+    findings = material_basis.material_findings(scene_or_spec)
+    errors = [f for f in findings if f.get("severity") == "ERROR"]
+    if errors:
+        first = errors[0]
+        raise ValueError(
+            f"Material appearance basis violation in '{first.get('material')}' "
+            f"[{first.get('category')}]: {first.get('message')} (lesson {first.get('lesson_id')})"
+        )
+    return findings
+
+
+# 29. C7: Material appearance basis (l0016, l0028, l0049, l0062, l0064, l0065, l0083, l0084, l0677, l0724, l0795, l0891, l0900, l0910)
+register_guard(
+    fn=check_material_appearance_basis,
+    name="appearance_basis_phase1",
+    lesson_ids=(
+        "l0016-solid-magenta-box", "l0016",
+        "l0028-revit-paint-hue", "l0028",
+        "l0049-extracted-glass-solid", "l0049",
+        "l0062-whole-room-rendered", "l0062",
+        "l0064-pure-red-lamp", "l0064",
+        "l0065-ivory-bedding-rendered", "l0065",
+        "l0083-oak-grain-ran", "l0083",
+        "l0084-dark-bronze-rendered", "l0084",
+        "l0677-stone-wood-read", "l0677",
+        "l0724-codex-pass-removed", "l0724",
+        "l0795-wood-grain-rotated", "l0795",
+        "l0891-artificial-grass-rendere", "l0891",
+        "l0900-island-stair-void", "l0900",
+        "l0910-ensuite-bath-screen", "l0910",
+    ),
+    real_case=case({
+        "materials": {
+            "lamp-shade-cad": {
+                "kind": "principled",
+                "base_rgb": [1.0, 0.0, 0.0],
+                "reflectance": 0.35,
+                "roughness": 0.5,
+                "note": "Revit shade cad color rescaled to 0.35",
+            }
+        }
+    }),
+    clean_case=case({
+        "materials": {
+            "plaster-white": {
+                "kind": "principled",
+                "base_rgb": [0.82, 0.81, 0.79],
+                "reflectance": 0.72,
+                "roughness": 0.85,
+                "specular": 0.35,
+                "basis": "Dulux Natural White LRV 72",
+            }
+        }
+    }),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed when material appearance lacks verified basis or violates physical optics (C7)",
 )
 
 

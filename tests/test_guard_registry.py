@@ -137,10 +137,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 34)
+        self.assertEqual(report["covered_by_guard_count"], 48)
         self.assertEqual(report["covered_by_review_count"], 21)
         self.assertEqual(report["needs_real_case_count"], 9)
-        self.assertEqual(report["uncovered_count"], 153)
+        self.assertEqual(report["uncovered_count"], 139)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -173,6 +173,21 @@ class TestGuardRegistry(unittest.TestCase):
             "l0096-two-spec-heights",
             "l0119-housing-below-ceiling",
             "l0610-fitting-labelled-wrong",
+            # Phase 1 Class C7 Material Appearance Basis
+            "l0016-solid-magenta-box",
+            "l0028-revit-paint-hue",
+            "l0049-extracted-glass-solid",
+            "l0062-whole-room-rendered",
+            "l0064-pure-red-lamp",
+            "l0065-ivory-bedding-rendered",
+            "l0083-oak-grain-ran",
+            "l0084-dark-bronze-rendered",
+            "l0677-stone-wood-read",
+            "l0724-codex-pass-removed",
+            "l0795-wood-grain-rotated",
+            "l0891-artificial-grass-rendere",
+            "l0900-island-stair-void",
+            "l0910-ensuite-bath-screen",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
@@ -554,6 +569,18 @@ class TestGuardRegistry(unittest.TestCase):
             self.assertFalse(real_res.passed)
             self.assertFalse(real_res.fired)
             self.assertIn("needs real case", real_res.error_message.lower())
+
+    def test_c7_material_appearance_basis_guard_execution(self) -> None:
+        """appearance_basis_phase1 executes on real case (fires) and clean case (quiet)."""
+        guard = get_guard("appearance_basis_phase1")
+        self.assertFalse(guard.needs_real_case, "appearance_basis_phase1 should not need real case")
+        real_res = guard.run_case("real")
+        self.assertTrue(real_res.passed, f"appearance_basis_phase1 real failed: {real_res.error_message}")
+        self.assertTrue(real_res.fired, "appearance_basis_phase1 real did not fire")
+
+        clean_res = guard.run_case("clean")
+        self.assertTrue(clean_res.passed, f"appearance_basis_phase1 clean failed: {clean_res.error_message}")
+        self.assertFalse(clean_res.fired, "appearance_basis_phase1 clean fired unexpectedly")
 
     def _get_production_calls(self, fn: Any) -> list[str]:
         """Parses AST of fn and returns all calls to production modules (archpipe.* != guard_registry, or revit/*)."""

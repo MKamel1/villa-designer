@@ -83,6 +83,17 @@ def window_brightness_status(view_median, room_p90):
     return "FAIL" if view_median < room_p90 else "PASS"
 
 
+def check_textile_reflectance(name: str, reflectance: float | None) -> tuple[bool, str]:
+    """Production textile reflectance check (l0065, docs/LEARNINGS.md:209).
+
+    Returns (passed, detail). A textile must declare an explicit presentation
+    reflectance; omitting it causes generic furniture fallback (0.35) and grey renders.
+    """
+    if reflectance is None:
+        return False, "textile without an explicit presentation reflectance"
+    return True, f"stated presentation reflectance {float(reflectance):.2f}"
+
+
 def check(image_path, qa: dict) -> dict:
     img, px = _pixels(Image.open(image_path))
     w, h = img.size
@@ -242,11 +253,11 @@ def check(image_path, qa: dict) -> dict:
                 f"linear colour spread {mat['saturation']:.2f} with no stated finish",
                 "Revit shading colour [64,0,0] rendered as a pure-red lamp shade.")
     for mat in qa.get("textiles", []):
+        ok, detail = check_textile_reflectance(mat["name"], mat.get("reflectance"))
         add(f"textile_reflectance:{mat['name']}",
-            "FAIL" if mat.get("reflectance") is None else "PASS",
-                "textile without an explicit presentation reflectance" if mat.get("reflectance") is None
-                else f"stated presentation reflectance {mat['reflectance']:.2f}",
-                "Ivory bedding rendered grey at the furniture-wide 0.35.")
+            "PASS" if ok else "FAIL",
+            detail,
+            "Ivory bedding rendered grey at the furniture-wide 0.35.")
 
     for obj in qa.get("soft_goods", []):
         add(f"soft_goods_simulated:{obj['name']}", "PASS" if obj.get("simulated") else "FAIL",

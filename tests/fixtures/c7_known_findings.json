@@ -1,0 +1,35 @@
+{
+  "_metadata": {
+    "description": "Frozen baseline of known material basis findings on current active production villa materials",
+    "structure": "List of findings with material, category, severity, message, lesson_id, reason, and citation",
+    "total_items": 2,
+    "last_updated": "2026-10-06T23:40:00Z"
+  },
+  "findings": [
+    {
+      "material": "brass",
+      "category": "missing_basis",
+      "severity": "WARN",
+      "message": "Material 'brass' lacks verified physical product or alloy optical record",
+      "lesson_id": "l0028",
+      "reason": "Procedural brushed brass lacks physical alloy reflectance sheet or manufacturer finish sample",
+      "value": "NONE",
+      "expected": "Manufacturer alloy cut sheet (e.g. CW614N brushed brass)",
+      "citation": "src/archpipe/concept/villa_render.py:122"
+    },
+    {
+      "material": "glass-guard",
+      "category": "missing_basis",
+      "severity": "WARN",
+      "message": "Material 'glass-guard' states transmittance=0.85 without cited standard or IOR specification",
+      "lesson_id": "l0049",
+      "reason": "Laminated glass guard states transmittance=0.85 without cited standard or IOR specification",
+      "value": {
+        "transmittance": 0.85,
+        "interfaces": 2
+      },
+      "expected": "Manufacturer product cut sheet and verified IOR",
+      "citation": "src/archpipe/concept/villa_render.py:132"
+    }
+  ]
+}
