@@ -427,7 +427,7 @@ class LandscapeGuards(unittest.TestCase):
         chair=dict(id="draft-chair",rect=(x1+.05,y0,x1+.25,y1))
         self.assertTrue(L.swing_violations(swing,[chair]))
         self.assertEqual(L.swing_violations(swing,[swing]), [])
-        self.assertIsNone(self.plan["swing"])
+        self.assertEqual(self.plan["swing"]["decision"], "client decision 2026-10-06; structural check pending")
 
     def test_bench_real_seat_height_and_old_slab_fails(self):
         self.assertEqual(L.bench_violations(self.props), [])

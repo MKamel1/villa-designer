@@ -107,12 +107,17 @@ def main() -> int:
     expect("ground-bed soil has no competing floor finish", not soil_visibility_findings(scene))
     from archpipe.concept.villa_landscape import north_garden_scene_violations
     expect("north garden has only shade landscape in ground-level beds", not north_garden_scene_violations(scene))
+    from archpipe.concept.garden_swing import scene_findings as swing_findings
+    expect("balcony swing support, motion and both view cones", not swing_findings(scene))
     from archpipe.concept import villa_r11
     garden_views = VR.VIEWS(villa_r11.design("D1"))
     view_findings=[f for v in garden_views for f in opening_frame_findings(v,scene)]
     expect("foreground opening frames avoid every view's central third", not view_findings)
     expect("garden cameras stand in open yard or a declared room",
            not [f for v in garden_views for f in garden_camera_findings(v, scene)])
+    from archpipe.concept.garden_render_review import subject_visibility_findings
+    expect("named garden features remain actually visible",
+           not [f for v in garden_views for f in subject_visibility_findings(v, scene)])
     mounting_registry = json.loads((ROOT / "knowledge/mounting-guards.json").read_text(encoding="utf-8"))
     expect("finished-surface controls have registered proving tests",
            all((ROOT / item["proof_file"]).is_file() and all(

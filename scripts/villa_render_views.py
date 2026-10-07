@@ -118,7 +118,7 @@ def camera_proximity_violations(view, scene, items, clearance=None):
     # Procedural landscape foliage/containers need the same lens clearance
     # as imported planting. Paving/turf are the standing surface.
     for mesh in scene["meshes"]:
-        if mesh.get("part_kind") not in ("plant-clump", "feature-stone", "climber", "climber-branch", "trellis", "planter", "planter-rim", "steel-trough") or mesh.get("group") not in ("furniture", "dressing"):
+        if mesh.get("part_kind") not in ("hanging-basket", "swing-cushion", "suspension-line", "ceiling-anchor", "plant-clump", "feature-stone", "climber", "climber-branch", "trellis", "planter", "planter-rim", "steel-trough") or mesh.get("group") not in ("furniture", "dressing"):
             continue
         points = [p for f in mesh["faces"] for p in f]
         lo = [min(p[i] for p in points) for i in range(3)]
@@ -224,6 +224,8 @@ def main():
     rows = (n + cols - 1) // cols
     fig, axs = plt.subplots(rows, cols, figsize=(cols * 6, rows * 3.6))
     problems = []
+    from archpipe.concept.garden_render_review import subject_visibility_findings
+    problems.extend(f for view in views for f in subject_visibility_findings(view, scene))
     for ax, v in zip(axs.flat, views):
         cam = v["camera"]
         lv = "B" if cam["position"][2] < -0.1 else "GF"
@@ -238,7 +240,7 @@ def main():
         px, py = cam["position"][:2]
         # The one-metre exterior clearance is calibrated on the v26/v28 canopy/pot
         # failures. Compact interior view selection has its own 0.15 m clearance rule.
-        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v36-", "v37-", "v38-")):
+        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v36-", "v37-", "v38-", "v39-")):
             for near_id, distance in camera_proximity_violations(v, scene, items):
                 problems.append("%s: camera %.2f m from %s (need >= 1.0 m)" % (v["id"], distance, near_id))
         if v["id"].startswith("v28-"):
@@ -281,7 +283,7 @@ def main():
         ax.add_patch(Polygon(wedge, fc="#ffcc00", alpha=0.25, ec="#cc9900"))
         ax.plot([px], [py], "ro", ms=4)
         for s in v["subjects"]:
-            if s in items and items[s]["type"] == "wc" or v["id"].startswith(("v07-", "v19-", "v25-", "v26-", "v27-", "v28-", "v36-", "v37-", "v38-")):
+            if s in items and items[s]["type"] == "wc" or v["id"].startswith(("v07-", "v19-", "v25-", "v26-", "v27-", "v28-", "v36-", "v37-", "v38-", "v39-")):
                 for edge in subject_mesh_frame_violations(v, scene, s):
                     problems.append("%s: built %s crosses %s" % (v["id"], s, edge))
             try:

@@ -2098,6 +2098,15 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
     from .finish_layers import build as build_finish_layers
     build_finish_layers(scene, {room:F.clear_rect(lay,room) for room in lay["rooms"]})
+    from . import garden_swing
+    garden_swing.mount(scene, lay)
+    swing_failures=garden_swing.scene_findings(scene)
+    if swing_failures:
+        raise ValueError('hanging swing: '+str(swing_failures))
+    from .garden_render_review import subject_visibility_findings
+    visibility_failures=[f for view in scene['views'] for f in subject_visibility_findings(view,scene)]
+    if visibility_failures:
+        raise ValueError('garden subject visibility: '+str(visibility_failures))
     return scene
 
 
@@ -2638,23 +2647,30 @@ def _VIEWS(lay=None, resolve=True):
       [1.75, -26.20, B + 1.35], [.55, -27.70, B + 1.35], 24,
       ["landscape-west-back-00", "landscape-west-mid-00", "landscape-west-front-00", "landscape-west-edge-00"],
       shift_y=-.31, final_only=True, exposure="exterior-day")
-    V[-1]["caption_notes"] = ["North garden: open-sky standing camera, showing the left Fatsia/Aspidistra/spider-plant/mondo grouping in ground-level soil. The full bed cannot be framed from the searched clear open-sky positions; companion v38 shows its full extent through the lounge. Bistro and lounge pots removed per client 2026-10-06. Covered swing omitted; client to confirm removal. Under the GF balcony: gravel only. Authored botanical appearances ASSUMED; Egypt nursery performance UNVERIFIED."]
+    V[-1]["caption_notes"] = ["North garden: open-sky standing camera, showing the left Fatsia/Aspidistra/spider-plant/mondo grouping in ground-level soil. Companion v38 shows the main bed extent through the lounge, with its disclosed partly screened near corner. Bistro and lounge pots removed per client 2026-10-06. Hanging retreat under the GF balcony shown in companion v39: client decision 2026-10-06; structural check pending. Authored botanical appearances ASSUMED; Egypt nursery performance UNVERIFIED."]
     v("v37-west-court-bistro", "North garden — grape ivy and foliage accent through the lounge", "day",
-      [5.35, -25.45, B + 1.35], [.4781496760738273, -24.3252447282807, B + 1.35], 24,
-      ["landscape-trellis-west", "landscape-climber-west", "landscape-west-rhapis-accent", "landscape-west-feature-stone"],
+      [4.00, -27.40, B + 1.35], [.4781496760738273, -24.3252447282807, B + 1.35], 24,
+      ["landscape-trellis-west", "landscape-climber-west", "landscape-west-rhapis-accent", "landscape-west-feature-stone", "landscape-west-back-02"],
       shift_y=-.14415908053594262, final_only=True, exposure="exterior-day")
     V[-1]["standing_room"] = "lounge"
-    V[-1]["caption_notes"] = ["North garden from the lounge: open timber trellis with young Cissus alata, one Rhapis clump and an ASSUMED natural feature stone. Thin training leaves the frame partly visible; target coverage about 35%. Climber light applicability PARTIAL; winter-night and Egypt performance UNVERIFIED. Bistro and raised containers removed per client 2026-10-06. Companions v36/v38 show the layered floor bed."]
+    V[-1]["visibility_targets"] = ["landscape-west-feature-stone", "landscape-west-rhapis-accent", "landscape-west-back-02"]
+    V[-1]["visibility_basis"] = "ASSUMED majority of 13 actual target rays must first hit each named feature; partial foreground foliage is allowed; independent preview required"
+    V[-1]["caption_notes"] = ["North garden from the lounge: open timber trellis with young Cissus alata, one Rhapis clump and an ASSUMED natural feature stone; Fatsia beside the hanging retreat. Thin training leaves the frame partly visible; target coverage about 35%. Climber light applicability PARTIAL; winter-night and Egypt performance UNVERIFIED. Bistro and raised containers removed per client 2026-10-06. Companions v36/v38 show the layered floor bed."]
     v("v38-north-garden-floor-bed", "North garden — floor-bed extent through the lounge", "day",
       [4.10, -25.00, B + 1.35], [1.60, -27.70, B + 1.35], 24,
-      ["landscape-bed-west", "landscape-west-back", "landscape-west-mid", "landscape-west-front", "landscape-west-edge"],
+      ["landscape-bed-west", "landscape-west-back-00", "landscape-west-back-01", "landscape-west-mid-00", "landscape-west-mid-01", "landscape-west-front", "landscape-west-edge"],
       shift_y=-.18, final_only=True, exposure="exterior-day")
     V[-1]["standing_room"] = "lounge"
-    V[-1]["caption_notes"] = ["North garden through the lounge: overall ground-level bed extent and layered shade drifts; its near corner is partly screened by the existing lounge window frame. Slim edging, visible soil and mineral gravel paths; no raised containers or bistro. Companion v36 stands in open sky and v37 shows the grape-ivy trellis, Rhapis accent and feature stone. Authored young/pruned forms ASSUMED; nursery, winter, roots and slab drainage UNVERIFIED."]
+    V[-1]["caption_notes"] = ["North garden through the lounge: overall main ground-level bed extent and retained shade drifts; the third Fatsia and Aspidistra now frame the hanging retreat in the accent and rear beds; its near corner is partly screened by the existing lounge window frame. Slim edging, visible soil and mineral gravel paths; no raised containers or bistro. Companion v36 stands in open sky and v37 shows the grape-ivy trellis, Rhapis accent and feature stone. Authored young/pruned forms ASSUMED; nursery, winter, roots and slab drainage UNVERIFIED."]
     # These three just-declared views share the same evidence scope, whatever
     # their identifiers or individual descriptions. This is no likeness claim.
     for north_view in V[-3:]:
         north_view["caption_notes"].append("Authored botanical appearances ASSUMED; photographic likeness, procurement and Egypt nursery performance UNVERIFIED.")
+    v("v39-north-garden-hanging-retreat", "North garden — balcony hanging retreat", "day",
+      [1.75, -26.20, B + 1.35], [2.40, -24.77, B + 1.35], 24,
+      ["landscape-north-swing-basket", "landscape-north-swing-cushions"],
+      shift_y=-.27, final_only=True, exposure="exterior-day")
+    V[-1]["caption_notes"] = ["North garden: procedural egg basket without stand, suspended by rope from the actual GF balcony soffit. Client decision 2026-10-06; structural check pending. Plate and upper rope extend above this level-eye basket view; isolated preview records the complete suspension. Seat faces into the Fatsia/Rhapis/stone/grape-ivy planting; Aspidistra behind. Chair appearance ASSUMED look-alike-proxy, no manufacturer identity. Balcony dynamic-load capacity and anchor specification UNVERIFIED (structural engineer); chair rated load UNVERIFIED (manufacturer). Authored botanical appearances ASSUMED; photographic likeness, procurement and Egypt nursery performance UNVERIFIED."]
     # v29: RV.choose in stair-b put the camera at x=9.577 and the stair treads blocked both storage modules
     # despite their plan footprints falling inside the lens wedge. Stand northwest of the stair flight in the
     # lounge and aim at the joinery fronts; 16 mm holds both separate modules from this clear point.

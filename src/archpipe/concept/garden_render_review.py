@@ -12,6 +12,78 @@ GROUND_ONLY = frozenset({'paving', 'travertine', 'oak-floor', 'artificial-grass'
 LEAF_GAP_M = .20
 
 
+def subject_visibility_evidence(view, scene):
+    """First-hit mesh rays for explicitly required visible garden subjects.
+
+    Thirteen samples per subject: bounding centre and twelve evenly indexed
+    unique actual vertices (lexicographically sorted, independent of faces).
+    Opaque, camera-visible physical meshes occlude; glass and diagnostic or
+    surface datums do not. Imported props still require image review.
+    Coordinates/distances are metres; direction is a unit vector. This is
+    an authored geometric screen, not projected-area or aesthetic proof.
+    """
+    import numpy as np
+    from .render_support import _triangles
+    targets = view.get('visibility_targets', [])
+    if not targets:
+        return []
+    eye = np.array(view['camera']['position'], dtype=float)
+    meshes = [m for m in scene['meshes'] if not m.get('diagnostic')
+              and not m.get('surface') and m.get('visibility', {}).get('camera', True)
+              and scene['materials'][m['material']]['kind'] not in ('glass', 'translucent')]
+    triangles, owners = _triangles(meshes)
+    results = []
+    for subject in targets:
+        matched = [m for m in meshes if m['id'] == subject]
+        if not matched:
+            results.append(dict(subject=subject, visible=0, samples=13, first_hits=[]))
+            continue
+        points = np.unique(np.array([p for m in matched for f in m['faces'] for p in f]), axis=0)
+        samples = np.vstack([(points.min(axis=0)+points.max(axis=0))/2,
+                             points[np.linspace(0, len(points)-1, 12, dtype=int)]])
+        low = np.minimum(points.min(axis=0), eye)-.03
+        high = np.maximum(points.max(axis=0), eye)+.03
+        nearby = np.all(triangles.min(axis=1) <= high, axis=1) & np.all(triangles.max(axis=1) >= low, axis=1)
+        local, indices = triangles[nearby], owners[nearby]
+        edge1, edge2 = local[:, 1]-local[:, 0], local[:, 2]-local[:, 0]
+        delta = eye-local[:, 0]
+        cross_delta = np.cross(delta, edge1)
+        hits = []
+        for point in samples:
+            direction = point-eye
+            length = np.linalg.norm(direction)
+            if length <= .03:
+                hits.append(None)
+                continue
+            direction /= length
+            cross_direction = np.cross(direction, edge2)
+            determinant = np.einsum('ij,ij->i', edge1, cross_direction)
+            valid = abs(determinant) > 1e-9
+            inverse = np.divide(1., determinant, out=np.zeros_like(determinant), where=valid)
+            along1 = inverse*np.einsum('ij,ij->i', delta, cross_direction)
+            along2 = inverse*(cross_delta@direction)
+            distance = inverse*np.einsum('ij,ij->i', edge2, cross_delta)
+            # Tiny barycentric roundoff allowance retains actual vertex hits.
+            candidates = np.where(valid & (along1 >= -1e-8) & (along2 >= -1e-8)
+                                  & (along1+along2 <= 1+1e-8) & (distance > .03)
+                                  & (distance <= length+1e-6))[0]
+            hits.append(None if not len(candidates) else
+                        meshes[int(indices[candidates[np.argmin(distance[candidates])]])]['id'])
+        results.append(dict(subject=subject, visible=sum(h == subject for h in hits),
+                            samples=len(samples), first_hits=hits))
+    return results
+
+
+def subject_visibility_findings(view, scene):
+    """ASSUMED majority-ray visibility: at least 7 of 13 target rays reach it.
+
+    Partial foreground foliage is acceptable; a hidden named feature is not.
+    This fixed screen accompanies actual preview review and full framing.
+    """
+    return [view['id']+': named subject obscured '+r['subject']
+            for r in subject_visibility_evidence(view, scene) if r['visible']/r['samples'] <= .5]
+
+
 def overhead_cover(scene, ground_m):
     """Plan union of opaque architectural undersides above the garden floor.
 

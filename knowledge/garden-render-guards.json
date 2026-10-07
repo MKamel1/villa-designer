@@ -169,6 +169,29 @@
       "proofs": [
         "test_every_view_subject_matches_scene_content"
       ]
+    },
+    {
+      "lesson_id": "garden-g4c-suspended-retreat",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "project-authored cage with bearing crossbar/back brace; suspension from actual finite balcony soffit; declared garden-facing seat; rear soil outside main-bed subject namespace, camera-only unoccluded garden framing",
+      "check": "garden_swing.scene_findings, cushion_findings, placement_findings, view_findings, seat_findings, garden_render_review.subject_visibility_findings",
+      "stage": "isolated review, landscape candidate, scene build/contract and portable verification",
+      "proof_file": "tests/test_garden_g4c.py",
+      "proofs": [
+        "test_real_clean_support_and_physical_cushion_regressions",
+        "test_real_lounge_door_mutation_and_translated_sibling_cones",
+        "test_real_seat_rotated_to_house_wall",
+        "test_live_soffit_rope_route_and_missing_part_mutations",
+        "test_retreat_view_is_level_open_sky_24mm_and_framed",
+        "test_real_curved_faces_are_triangles_and_new_bed_ids_unique",
+        "test_actual_retreat_bed_cannot_cover_walking_stones",
+        "test_real_rear_soil_cannot_alias_main_bed_subject",
+        "test_real_framed_but_occluded_garden_subjects_and_sibling"
+      ]
     }
   ]
 }

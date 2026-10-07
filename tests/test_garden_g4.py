@@ -53,7 +53,7 @@ class NorthShade(unittest.TestCase):
         self.assertEqual(counts,{'Fatsia japonica':3,'Aspidistra elatior':3,'Chlorophytum comosum':3,'Ophiopogon japonicus':5,'Rhapis excelsa':1})
         self.assertEqual(L.spacing_violations(plants),[]);self.assertEqual(L.layer_violations(plants,{'west':self.plan['beds']['west']}),[])
         self.assertEqual(L.drift_violations(plants,layers=('back','mid','front','edge')),[])
-        self.assertEqual(self.plan['swing'],None)
+        self.assertEqual(self.plan['swing']['decision'],'client decision 2026-10-06; structural check pending')
         self.assertTrue(all(min(q[1] for f in p['faces'] for q in f)>=L.NORTH_BALCONY_EDGE for p in plants))
         self.assertEqual(L.require_species('Cissus alata')['light']['status'],'PARTIAL')
         self.assertEqual(L.require_species('Ophiopogon japonicus')['light']['status'],'PARTIAL')

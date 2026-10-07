@@ -417,14 +417,17 @@ def validate_scene(scene: dict) -> list[str]:
              c.get("open_clear_width_m", -1) >= DOOR_CLEAR_WIDTH_M - 1e-9,
              p+".open_clear_width_m", "a door's open curtains must leave >= %.3f m clear (F.BODY)" % DOOR_CLEAR_WIDTH_M)
     if not errors:
-        from .concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings
+        from .concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings, subject_visibility_findings
         errors.extend(downward_ground_findings(scene))
         errors.extend(plant_form_findings(meshes))
         from .concept.garden_render_review import soil_visibility_findings
         errors.extend(soil_visibility_findings(scene))
         from .concept.villa_landscape import north_garden_scene_violations
         errors.extend("%s: %s" % f for f in north_garden_scene_violations(scene))
+        from .concept.garden_swing import scene_findings as swing_findings
+        errors.extend("%s: %s" % f for f in swing_findings(scene))
         for view in scene.get("views", []):
             errors.extend(f"{f['view']}: {f['mesh']} {f['reason']}" for f in opening_frame_findings(view,scene))
             errors.extend(garden_camera_findings(view, scene))
+            errors.extend(subject_visibility_findings(view, scene))
     return errors

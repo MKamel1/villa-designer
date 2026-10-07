@@ -271,7 +271,7 @@ class ChosenViews(unittest.TestCase):
             for prefix in by[vid]['subjects']:
                 self.assertEqual(views.subject_mesh_frame_violations(by[vid],scene,prefix),[])
         self.assertEqual(set(by['v38-north-garden-floor-bed']['subjects']),
-                         {'landscape-bed-west','landscape-west-back','landscape-west-mid','landscape-west-front','landscape-west-edge'})
+                         {'landscape-bed-west','landscape-west-back-00','landscape-west-back-01','landscape-west-mid-00','landscape-west-mid-01','landscape-west-front','landscape-west-edge'})
         self.assertFalse(any(p['asset'] in ('outdoor_table_chair_set_01','sf_egg_chair') for p in scene['props']))
         bad=deepcopy(west)
         # Reverse the current sightline. The former absolute target points

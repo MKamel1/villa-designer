@@ -593,7 +593,7 @@ def standin_violations(props):
 
 
 def swing_violations(swing, items, envelope_margin=0.25):
-    """The stand footprint plus an ASSUMED 0.25 m motion allowance stays free."""
+    """The physical seating footprint plus an ASSUMED 0.25 m motion allowance stays free."""
     x0, y0, x1, y1 = _rect(swing)
     envelope = (x0 - envelope_margin, y0 - envelope_margin,
                 x1 + envelope_margin, y1 + envelope_margin)
@@ -1224,15 +1224,15 @@ def review_candidate(spec, lay=None):
     from shapely.geometry import box as polygon_box, Polygon
     from shapely.ops import triangulate
     shade = record["design_assumptions"]["north_garden_g4"]
-    ground_beds = {"west": beds["west"], "west-accent": tuple(shade["accent_bed"])}
+    ground_beds = {"west": beds["west"], "west-accent": tuple(shade["accent_bed"]), "west-swing-back": tuple(shade["swing_back_bed"])}
     gravel = polygon_box(*NORTH_COURT).intersection(Polygon(YARD))
     for rect in ground_beds.values():gravel = gravel.difference(polygon_box(*rect))
     gravel_faces = [[[x,y,GROUND+.003] for x,y in list(t.exterior.coords)[:-1]]
                     for t in triangulate(gravel) if gravel.covers(t)]
     meshes.append(_mesh("gravel-west","ground","garden-gravel",gravel_faces,
-                        "ASSUMED mineral gravel paths/mulch; covered GF balcony portion has gravel only",kind="finish-layer",surface=True,occupied_side=(0,0,1)))
+                        "ASSUMED mineral gravel paths/mulch; mineral gravel around the balcony hanging retreat",kind="finish-layer",surface=True,occupied_side=(0,0,1)))
     for name, (x0,y0,x1,y1) in ground_beds.items():
-        meshes.append(_mesh("bed-west" if name=="west" else "accent-bed-west","ground","garden-soil",_quad(x0,y0,x1,y1,GROUND),
+        meshes.append(_mesh("bed-west" if name=="west" else "accent-bed-west" if name=="west-accent" else "soil-"+name,"ground","garden-soil",_quad(x0,y0,x1,y1,GROUND),
                             "North garden: in-ground soil at court datum; root/drainage engineering UNVERIFIED",kind="soil-bed",surface=True,occupied_side=(0,0,1)))
         edge = (_box(x0,y0,GROUND,x1,y0+.015,GROUND+.018)+
                 _box(x0,y1-.015,GROUND,x1,y1,GROUND+.018)+
@@ -1339,7 +1339,9 @@ def review_candidate(spec, lay=None):
                                 "ASSUMED glazed ceramic tapered pot; terracotta-red client decision 2026-10-05; planted " + species + "; directly on turf",kind=kind))
     # G4: bistro/pots removed per client. The old swing is architecturally
     # covered; the shade layout has no accepted open motion envelope.
-    swing = None
+    from . import garden_swing as SWING
+    swing_meshes, swing = SWING.build(shade["hanging_swing"])
+    meshes.extend(swing_meshes)
     # Two existing pot positions redesigned as planted glazed pots, with no plinth.
     # Ixora is the brief's explicit top-zone exception, conditional on sun evidence.
     for i, center in enumerate(((7.40,-21.20),(9.30,-22.95))):
@@ -1370,7 +1372,7 @@ def review_candidate(spec, lay=None):
 
 
     exposure = {name:direct_sun_hours((r[0]+r[2])/2,(r[1]+r[3])/2) for name,r in beds.items()}
-    notes = ["North garden G4: lush shade foliage in ground-level soil beds; gravel under the GF balcony. Bistro and lounge pots removed per client 2026-10-06. Covered swing omitted; client to confirm removal. Cissus alata replaces star jasmine on the open timber trellis; light applicability PARTIAL, Cairo winter suitability UNVERIFIED.",
+    notes = ["North garden G4: lush shade foliage in ground-level soil beds; gravel under the GF balcony. Bistro and lounge pots removed per client 2026-10-06. Hanging swing restored from GF balcony: client decision 2026-10-06; structural check pending. Cissus alata replaces star jasmine on the open timber trellis; light applicability PARTIAL, Cairo winter suitability UNVERIFIED.",
              "G1/G2 review candidate: artificial turf, stepping stones, one Plumeria in the lawn, offset from centre for a clear door route and ASSUMED 1.2 m gravel tree pit.",
              "Only knowledge/garden-palette.json supplies botanical dimensions, sources and placement assumptions. Egypt performance and root behaviour over the basement slab are UNVERIFIED.",
              "Retained east-yard boundary bed and terracotta-red glazed door pots; north garden G4 shade beds and grape ivy on open timber. G3 low steel troughs with rosemary/aloe drifts, two benches on slabs and a gate-link path; no shade tree placed.",
@@ -1388,7 +1390,7 @@ def review_candidate(spec, lay=None):
                                                    max(p[1] for p in item["pts"])/1000))
                           for item in E.spec()["elements"]
                           if item["id"].startswith("fence-") or item["id"] == "yard-wall-ne"]
-    plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,accent_beds={"west-accent":shade["accent_bed"]},
+    plan = dict(paths=PATHS,gate_route=gate_route,top_troughs=troughs,top_benches=benches,trees=trees,beds=beds,sun_hours=exposure,objects=objects,plants=plants,swing=swing,accent_beds={"west-accent":shade["accent_bed"],"west-swing-back":shade["swing_back_bed"]},
                 boundary_obstacles=boundary_obstacles,
                 east_rect=EAST,east_center=EAST_CENTER,tree_pit=dict(center=tree_center,diameter_m=radius*2,status="ASSUMED"))
     from .garden_render_review import normal
@@ -1441,10 +1443,12 @@ def north_garden_violations(meshes, props, objects=(), *, court=NORTH_COURT,
             if envelope[1]<balcony_edge or cover is not None and box(*envelope).intersection(cover).area>1e-6:
                 out.append((item['id'],'north garden swing must be wholly open to sky'))
         else:out.append((item['id'],'north garden forbids containers, table and seating except a flagged open-sky swing'))
-    allowed={'finish-layer','stepping-stone','soil-bed','bed-edge','feature-stone','trellis','climber','climber-branch','plant-clump'}
+    allowed={'hanging-basket','swing-cushion','swing-bearing','suspension-line','ceiling-anchor','finish-layer','stepping-stone','soil-bed','bed-edge','feature-stone','trellis','climber','climber-branch','plant-clump'}
     for item in meshes:
         if not occupies(item):continue
         kind=item.get('part_kind');points=[q for f in item['faces'] for q in f]
+        if kind in {'hanging-basket','swing-cushion','swing-bearing','suspension-line','ceiling-anchor'} and (not item.get('hanging_swing') or item.get('swing_record',{}).get('decision')!='client decision 2026-10-06; structural check pending'):
+            out.append((item['id'],'north garden suspension requires explicit client decision'))
         if kind not in allowed:
             out.append((item['id'],'north garden forbids raised container or non-landscape content'))
         if kind=='soil-bed' and abs(max(q[2] for q in points)-ground)>1e-6:
@@ -1473,10 +1477,16 @@ def candidate_violations(meshes, props, plan, lay):
     rooms = garden_level_rooms(lay)
     plants,objects = plan["plants"],plan["objects"]
     routes, ground = walking_routes(meshes)
-    from .garden_render_review import plant_form_findings
+    from .garden_render_review import plant_form_findings, soil_visibility_findings
     swings = [p for p in props if p["asset"] == "sf_egg_chair"]
     from .render_support import blocked_openings
-    return ([(mid,"door passage "+why) for mid,why in blocked_openings(dict(meshes=meshes),lay)]+north_garden_violations(meshes,props,objects)+extent_violations(props,rooms)+object_extent_violations(objects,rooms)+
+    from . import garden_swing as SWING
+    hanging=[m for m in meshes if m.get('hanging_swing')]
+    suspension=[]
+    if hanging:
+        obstacles=objects+plants+plan.get('boundary_obstacles',[])+[dict(id='bed-'+name,rect=rect) for name,rect in {**plan['beds'],**plan.get('accent_beds',{})}.items()]+[dict(id='route-'+name,rect=rect) for name,rect in routes.items()]
+        suspension=SWING.placement_findings(hanging,plan['swing'],obstacles)+SWING.cushion_findings(hanging)
+    return ([("soil-visibility",f) for f in soil_visibility_findings(dict(meshes=meshes))]+suspension+[(mid,"door passage "+why) for mid,why in blocked_openings(dict(meshes=meshes),lay)]+north_garden_violations(meshes,props,objects)+extent_violations(props,rooms)+object_extent_violations(objects,rooms)+
             [f for swing in swings for f in swing_violations(swing,props+objects+plants+plan.get("boundary_obstacles", [])+[dict(id="bed-"+name,rect=rect) for name,rect in plan["beds"].items()])]+
             [(pid,"door route "+route) for pid,route in route_violations(props+objects+[p for p in plants if "faces" in p], routes, ground)]+
             [(a,"plant spacing to %s: %.3f < %.3f m"%(b,got,need)) for a,b,got,need in spacing_violations(plants)]+

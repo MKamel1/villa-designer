@@ -106,3 +106,29 @@ its separate workflow. In this worktree, `out/villa/render-d1` resolves locally,
 while `out/villa/round3` and `assets/user` resolve to protected shared data.
 Keep every G4 export, preview and log under `out/garden-g4`. Never infer an
 actual mutation from similar folder names or a potentially writing branch.
+
+## Balcony hanging retreat (G4c)
+
+A suspended garden seat requires its explicit client decision and a finite,
+measured downward balcony soffit through the C4 mounting API. Run
+`garden_swing.scene_findings` in build, contract and portable verification:
+actual anchor footprint, rope/basket continuity, cushion bearing contact,
+0.25 m ASSUMED motion clearance, lounge prospect and the seated field are
+separate checks. Containment inside a cage does not prove cushion support.
+Preview and independently review the isolated assembly before integration.
+Keep balcony dynamic-load capacity, anchor selection and manufacturer chair
+rating OPEN/UNVERIFIED. Do not confuse geometrical support with engineering
+approval. Use `tests/test_garden_g4c.py` for frozen physical failures, a real
+chair moved into the lounge-door cone, and a real rotation toward the house.
+The finite lounge cone uses the measured full-height glazed opening centre;
+the seat cone records assumed eye height, front direction and central field.
+List each planting/bed move made for the retreat, retaining palette, spacing,
+drift and layer controls. Cameras move around the accepted design.
+
+Framing alone does not establish visibility: declared named garden features
+need `subject_visibility_findings` (ASSUMED majority of thirteen centre/actual
+vertex first-hit rays) at scene build, contract, view-plan and portable verify,
+plus an independently reviewed neutral preview for glass/imported props and
+aesthetics. Preserve a frozen fully-occluded-but-framed input. Namespace new
+soil independently of existing view subject prefixes; test exact matches.
+Regenerate diagnostic images rather than reusing files solely by filename.

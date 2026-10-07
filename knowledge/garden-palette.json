@@ -1942,20 +1942,20 @@
       "gravel": "ASSUMED mineral mulch and paths",
       "feature_stone": "ASSUMED irregular natural stone appearance",
       "sun_evidence": "lead ray-cast out/villa/garden-sun-hours.json; 20 open / 8 balcony samples; June/March/December",
-      "removed": "bistro, lounge door pots, covered swing: removed per client 2026-10-06; swing cannot remain at covered placement",
+      "removed": "bistro and raised containers removed; hanging swing restored per client 2026-10-06",
       "accent_bed": [
-        0.5,
+        0.05,
         -25.2,
-        1.9,
-        -24.1
+        1.6,
+        -23.86
       ],
       "accent_center_m": [
-        1.2,
+        1.02,
         -24.65
       ],
       "feature_stone_center_m": [
-        2.65,
-        -24.05
+        1.02,
+        -24.16
       ],
       "trellis_start_m": [
         -0.123,
@@ -1976,8 +1976,8 @@
               -27.7
             ],
             [
-              2.8,
-              -27.7
+              1.1,
+              -24.5
             ]
           ]
         },
@@ -1994,8 +1994,8 @@
               -28.25
             ],
             [
-              2.8,
-              -28.25
+              3.4,
+              -24.17
             ]
           ]
         },
@@ -2367,6 +2367,53 @@
           "december_mean_h": 1.1
         },
         "limit": "Scene enclosure screen, no nursery/Egypt performance verification"
+      },
+      "swing_back_bed": [
+        3.18,
+        -24.39,
+        3.61,
+        -23.92
+      ],
+      "hanging_swing": {
+        "id": "landscape-north-swing",
+        "center": [
+          2.4,
+          -24.77
+        ],
+        "yaw_deg": 90.0,
+        "width_m": 1.2,
+        "depth_m": 1.0,
+        "height_m": 1.2,
+        "ground_m": -3.0,
+        "seat_height_m": 0.45,
+        "basket_bottom_m": -2.85,
+        "soffit_m": -0.2,
+        "eye_height_m": 1.2,
+        "motion_allowance_m": 0.25,
+        "decision": "client decision 2026-10-06; structural check pending",
+        "source": "original project-authored procedural basket; no imported geometry",
+        "appearance": "ASSUMED look-alike-proxy, no manufacturer identity",
+        "size_basis": "Comparable to measured sf_egg_chair basket 1.216 x 1.068 x 1.193 m; no stand",
+        "seat_basis": "ASSUMED 0.45 m for feet near ground and relaxed sitting; not a cited standard",
+        "eye_basis": "ASSUMED eye 1.20 m above court, 0.75 m above seat, for a seated adult screen",
+        "open_construction_items": [
+          {
+            "item": "Balcony slab capacity for dynamic hanging point load",
+            "status": "UNVERIFIED",
+            "owner": "structural engineer"
+          },
+          {
+            "item": "Anchor type and installation",
+            "status": "UNVERIFIED",
+            "owner": "structural engineer"
+          },
+          {
+            "item": "Chair rated load",
+            "status": "UNVERIFIED",
+            "owner": "manufacturer"
+          }
+        ],
+        "licence": "Original project geometry; no third-party mesh licence applies; no standalone redistribution grant declared"
       }
     }
   },
