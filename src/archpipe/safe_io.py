@@ -39,7 +39,8 @@ def normalized_text(value):
 def convert_length(quantity, unit):
     """Convert an explicitly unit-tagged length; feet are exactly 304.8 mm."""
     encode(quantity)
-    scales = {'ft': 304.8, 'mm': 1.0, 'm': 1000.0}
+    from .units import MM_PER_FOOT, MM_PER_M
+    scales = {'ft': MM_PER_FOOT, 'mm': 1.0, 'm': MM_PER_M}
     if not isinstance(quantity, Quantity) or unit not in scales:
         raise ValueError('conversion requires a Quantity and known length unit')
     return Quantity(quantity.value * scales[quantity.unit] / scales[unit], unit)

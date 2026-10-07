@@ -2,37 +2,9 @@
   "_metadata": {
     "description": "Allow-list of pre-existing raw unit conversion literals scheduled for Phase 2 migration to archpipe.units.",
     "structure": "Array of entries, each with file, line_number, line_text, reason, and migration_target",
-    "total_items": 4,
-    "last_updated": "2026-10-06T13:31:00Z"
+    "total_items": 0,
+    "last_updated": "2026-10-06",
+    "phase2": "All four phase-1 sites migrated to archpipe.units on 2026-10-06 (build_sheet PT_PER_MM, rules TV-01 inches, safe_io.convert_length, photometry FEET_TO_M). New entries need a reason and a migration target."
   },
-  "entries": [
-    {
-      "file": "scripts/build_sheet.py",
-      "line_number": 26,
-      "line_text": "PT_PER_MM = 72.0 / 25.4",
-      "reason": "Points per mm calculation (72 pt per inch / 25.4 mm per inch)",
-      "migration_target": "src/archpipe/units.py (INCHES_PER_MM / MM_PER_INCH)"
-    },
-    {
-      "file": "src/archpipe/rules.py",
-      "line_number": 1212,
-      "line_text": "                f\"{s.id} sits {d:.0f} mm from the {diag / 25.4:.0f} in screen {tv.id}; UHD viewing wants \"",
-      "reason": "Screen diagonal inches calculation in TV viewing distance rule (diag / 25.4)",
-      "migration_target": "src/archpipe/units.py (mm_to_in or MM_PER_INCH)"
-    },
-    {
-      "file": "src/archpipe/safe_io.py",
-      "line_number": 42,
-      "line_text": "    scales = {'ft': 304.8, 'mm': 1.0, 'm': 1000.0}",
-      "reason": "Legacy conversion scales dictionary in convert_length",
-      "migration_target": "src/archpipe/units.py (MM_PER_FOOT, MM_PER_M)"
-    },
-    {
-      "file": "src/archpipe/photometry.py",
-      "line_number": 51,
-      "line_text": "FEET_TO_M = 0.3048",
-      "reason": "Conversion constant in IES LM-63 luminaire opening parser",
-      "migration_target": "src/archpipe/units.py (M_PER_FOOT)"
-    }
-  ]
+  "entries": []
 }
