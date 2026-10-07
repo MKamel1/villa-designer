@@ -61,6 +61,10 @@ from archpipe.external_claims import (
 from archpipe import asset_intake, render_qa, safe_io
 from archpipe.concept import villa_landscape, villa_lighting
 from archpipe.luminaires import install
+from archpipe.fixture_record import (
+    FixtureConsistencyError,
+    check_fixture_record_consistency,
+)
 from archpipe.units_guard import (
     UnitsConversionError,
     check_units_guard,
@@ -68,6 +72,8 @@ from archpipe.units_guard import (
 
 __all__ = [
     "EvidenceStatus",
+    "FixtureConsistencyError",
+
     "GuardCase",
     "GuardExecutionResult",
     "RegisteredGuard",
@@ -88,6 +94,7 @@ __all__ = [
     "check_landscape_tree_extent",
     "check_lighting_beam_clashes",
     "check_luminaire_flux_requirement",
+    "check_fixture_record_consistency",
     "check_raw_copy_lint",
     "check_utf16_or_utf8_json",
     "clear_registry",
@@ -949,6 +956,27 @@ register_guard(
     expected_clean=True,
     tier=2,
     description="Fails closed on raw unit conversion literals (304.8, 0.3048, 3.28084, 25.4) outside units boundary (C9)",
+)
+
+# -----------------------------------------------------------------------------
+# C5: Emitter and fitting disconnected (l0095, l0096, l0119, l0123, l0610)
+# -----------------------------------------------------------------------------
+register_guard(
+    fn=check_fixture_record_consistency,
+    name="fixture_record_consistency",
+    lesson_ids=(
+        "l0095-lamp-sources-sat", "l0095",
+        "l0096-two-spec-heights", "l0096",
+        "l0119-housing-below-ceiling", "l0119",
+        "l0123-swapping-4300-lm", "l0123",
+        "l0610-fitting-labelled-wrong", "l0610",
+    ),
+    real_case=case(ROOT / "tests/fixtures/c5_failing_case.json"),
+    clean_case=case(ROOT / "tests/fixtures/c5_clean_case.json"),
+    expected_real=FixtureConsistencyError,
+    expected_clean=None,
+    tier=2,
+    description="Cross-checks photometry declared flux/CCT, emitter position, housing geometry, spec mounting height, and room containment (C5)",
 )
 
 # -----------------------------------------------------------------------------

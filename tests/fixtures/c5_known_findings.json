@@ -1,0 +1,22 @@
+{
+  "_metadata": {
+    "description": "Frozen known-findings baseline for current villa fixture inconsistencies",
+    "structure": "List of known fixture finding records with fixture_id, rule, lesson_id, and reason",
+    "total_items": 2,
+    "last_updated": "2026-10-06T21:35:00Z"
+  },
+  "known_findings": [
+    {
+      "fixture_id": "SCONCE-guest-wc-03",
+      "rule": "fitting_room_containment",
+      "lesson_id": "l0610-fitting-labelled-wrong",
+      "reason": "spec mount point differs from the built emitter; phase 2 single fixture record resolves"
+    },
+    {
+      "fixture_id": "VSCONCE-parents-ensuite-05",
+      "rule": "fitting_room_containment",
+      "lesson_id": "l0610-fitting-labelled-wrong",
+      "reason": "spec mount point differs from the built emitter; phase 2 single fixture record resolves"
+    }
+  ]
+}

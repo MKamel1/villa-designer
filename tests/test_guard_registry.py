@@ -137,10 +137,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 30)
+        self.assertEqual(report["covered_by_guard_count"], 34)
         self.assertEqual(report["covered_by_review_count"], 21)
         self.assertEqual(report["needs_real_case_count"], 9)
-        self.assertEqual(report["uncovered_count"], 157)
+        self.assertEqual(report["uncovered_count"], 153)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -169,6 +169,10 @@ class TestGuardRegistry(unittest.TestCase):
             "l0025-third-party-families",
             "l0123-swapping-4300-lm",
             "l0650-scene-lux-measurement",
+            "l0095-lamp-sources-sat",
+            "l0096-two-spec-heights",
+            "l0119-housing-below-ceiling",
+            "l0610-fitting-labelled-wrong",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
@@ -180,11 +184,10 @@ class TestGuardRegistry(unittest.TestCase):
             "l0026-blender-ies-azimuth",
             "l0080-lamps-rendered-far",
             "l0090-window-glass-passed",
-            "l0095-lamp-sources-sat",
-            "l0096-two-spec-heights",
-            "l0119-housing-below-ceiling",
             "l0656-glass-verified",
         ]
+        # l0095, l0096 and l0119 lost their batch-2 re-implementations but are now covered by the
+        # production fixture_record check (C5 phase 1), so they are asserted covered above.
         for lid in deleted_reimplementation_lessons:
             self.assertIn(lid, report["uncovered_lessons"], f"Lesson {lid} should be uncovered (no production guard yet)")
 
@@ -657,7 +660,19 @@ class TestGuardRegistry(unittest.TestCase):
         with self.assertRaises(AssertionError) as ctx_stdlib:
             self._assert_calls_production_module(dummy_stdlib_only_check)
         self.assertIn("does not call any production module", str(ctx_stdlib.exception))
+    def test_c5_fixture_record_guard_execution(self) -> None:
+        """Class C5 fixture record consistency guard executes on real and clean cases."""
+        guard = get_guard("fixture_record_consistency")
+        self.assertFalse(guard.needs_real_case)
+        real_res = guard.run_case("real")
+        self.assertTrue(real_res.passed, f"fixture_record_consistency real failed: {real_res.error_message}")
+        self.assertTrue(real_res.fired, "fixture_record_consistency real did not fire")
+
+        clean_res = guard.run_case("clean")
+        self.assertTrue(clean_res.passed, f"fixture_record_consistency clean failed: {clean_res.error_message}")
+        self.assertFalse(clean_res.fired, "fixture_record_consistency clean fired unexpectedly")
 
 
 if __name__ == "__main__":
     unittest.main()
+
