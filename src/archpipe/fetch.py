@@ -22,6 +22,31 @@ import urllib.request
 import urllib.robotparser
 from pathlib import Path
 
+from archpipe import external_claims
+
+# Extensions whose content external_claims.sniff_content can identify. Others
+# (.exr, .bin, .blend, .gltf JSON, ...) are only screened for empty payloads and
+# HTML error pages, so valid Poly Haven assets are not refused (lead review of
+# C11 phase 2 batch 1, 2026-10-08).
+SNIFFABLE = {"pdf", "zip", "png", "jpg", "jpeg", "glb", "ies", "ldt", "rfa", "json"}
+BINARY_TYPES = {"zip", "gldf", "corrupt_zip", "rfa", "pdf", "image/png", "image/jpeg", "gltf"}
+
+
+def _refuse_payload(data: bytes, url: str, declared=None, refuse_html: bool = False,
+                    refuse_binary: bool | None = None) -> None:
+    """Fail closed on an empty, mistyped or error-page payload (l0072, l0113)."""
+    rec = external_claims.ingest_bytes(data, declared_type=declared, url=url)
+    sniffed = rec.value.get("provenance", {}).get("sniffed_type")
+    if sniffed == "empty":
+        raise external_claims.EmptyContentError(rec.reasons[0] if rec.reasons else f"{url}: empty payload")
+    if declared is not None and rec.status != external_claims.VERIFIED:
+        raise external_claims.ContentTypeMismatchError(rec.reasons[0] if rec.reasons else f"{url}: type mismatch")
+    if refuse_html and sniffed == "html":
+        raise external_claims.ContentTypeMismatchError(f"{url}: an HTML page was served instead of the file (l0113)")
+    if (declared is None and not refuse_html if refuse_binary is None else refuse_binary) and sniffed in BINARY_TYPES:
+        raise external_claims.ContentTypeMismatchError(f"{url}: binary {sniffed} payload where text was expected (l0113)")
+
+
 UA = "archpipe-research/1.0 (architectural design research; robots.txt respected)"
 DELAY_S = 2.0
 MAX_BYTES = 2_000_000_000
@@ -80,7 +105,9 @@ def get_text(url: str, cache_dir: Path, refresh: bool = False) -> str:
         raise Disallowed(f"robots.txt disallows {url}")
     _wait()
     with _open(url) as r:
-        text = r.read().decode("utf-8", "replace")
+        data = r.read()
+    _refuse_payload(data, url, declared=None)
+    text = data.decode("utf-8", "replace")
     f.write_text(text, encoding="utf-8")
     return text
 
@@ -101,5 +128,14 @@ def download(url: str, dest: Path, refresh: bool = False) -> Path:
             if n > MAX_BYTES:
                 raise ValueError(f"{url} exceeds {MAX_BYTES} bytes")
             out.write(chunk)
+    data = part.read_bytes()
+    expected_type = dest.suffix.lstrip(".").lower() or None
+    try:
+        _refuse_payload(data, url, declared=expected_type if expected_type in SNIFFABLE else None,
+                        refuse_html=expected_type not in ("html", "htm"))
+    except ValueError:
+        if part.is_file():
+            part.unlink()
+        raise
     part.replace(dest)
     return dest
