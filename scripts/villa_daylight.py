@@ -16,7 +16,10 @@ import sys
 import tarfile
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(Path(__file__).parent))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from render_remote import DEFAULT_HOST, _ssh                         # noqa: E402
 
 from archpipe import daylight as D                                   # noqa: E402
@@ -149,6 +152,24 @@ def fetch_views(host=DEFAULT_HOST):
     return 0
 
 
+def main(argv=None) -> int:
+    args = list(sys.argv[1:] if argv is None else argv)
+    cmd = args[0] if args else "run"
+    if cmd not in ("run", "fetch", "render", "fetch-views"):
+        return {"run": run, "fetch": fetch, "render": render, "fetch-views": fetch_views}[cmd]()
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-daylight",
+            output=LOCAL.parent,
+            modules=["numpy", "PIL", "matplotlib"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
+    return {"run": run, "fetch": fetch, "render": render, "fetch-views": fetch_views}[cmd]()
+
+
 if __name__ == "__main__":
-    cmd = sys.argv[1] if len(sys.argv) > 1 else "run"
-    sys.exit({"run": run, "fetch": fetch, "render": render, "fetch-views": fetch_views}[cmd]())
+    sys.exit(main())

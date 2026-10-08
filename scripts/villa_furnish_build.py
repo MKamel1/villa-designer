@@ -13,16 +13,34 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 from archpipe.concept import revit_spec as RS
 from archpipe.concept import villa_furnish3d as F3
 from archpipe.concept import villa_r11 as R
+from archpipe.execution_context import ContextError, project_context
 
 OUT = Path("out/villa/furnish-d1/revit")
 
 
-def main():
+def main(argv=None) -> int:
+    args = sys.argv[1:] if argv is None else argv[1:]
+    is_spec = "spec" in args
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-furnish-build",
+            inputs=[] if is_spec else [OUT / "readback.json", OUT / "options-spec.json"],
+            output=OUT,
+            modules=["shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     lay = R.design("D1")
-    if "spec" in sys.argv[1:]:
+    if is_spec:
         OUT.mkdir(parents=True, exist_ok=True)
         sp = RS.build(lay)
         sp["id"] = "D1F"

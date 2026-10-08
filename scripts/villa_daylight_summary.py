@@ -15,6 +15,8 @@ import tarfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 from render_remote import DEFAULT_HOST, _ssh                          # noqa: E402
 
 from archpipe import daylight as D                                    # noqa: E402
@@ -22,6 +24,7 @@ from archpipe.concept import villa as V                               # noqa: E4
 from archpipe.concept import villa_daylight as VD                     # noqa: E402
 from archpipe.concept import villa_options as VO                      # noqa: E402
 from archpipe.concept import villa_parking as P                       # noqa: E402
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 OUT = Path("out/villa/daylight")
 R11 = "r11" in sys.argv
@@ -38,7 +41,25 @@ def pull_annual():
         tar.extractall(LUX_JOB, filter="data")
 
 
-def main():
+def main(argv=None) -> int:
+    global R11, DF_JOB, LUX_JOB, CASES, OPTIONS, SUMMARY
+    if argv is not None:
+        R11 = "r11" in argv
+        DF_JOB, LUX_JOB = (OUT / "villa-df-r12", OUT / "villa-lux-r12") if R11 else (OUT / "villa-df-r10", OUT / "villa-lux-r10")
+        CASES = {(l["id"] if not v or l.get("daylight_variant") == v else v["_case"]): (l, v) for l, v in VD.round_cases(R11)}
+        OPTIONS = list(CASES)
+        SUMMARY = OUT / ("summary-r12.json" if R11 else "summary.json")
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-daylight-summary",
+            inputs=[LUX_JOB / "report.json", DF_JOB / "report.json", OUT / "views" / "stats.json"],
+            output=OUT,
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     if not (LUX_JOB / "cases" / "P3" / "annual_stats.json").exists():
         pull_annual()
     lux = json.loads((LUX_JOB / "report.json").read_text(encoding="utf-8"))
@@ -101,7 +122,8 @@ def main():
         print(opt, " | ".join("%s DF %.2f sDA %s%% UDI %s/%s/%s noon-Mar %s lx" % (
             k, rs[k].get("df", 0), rs[k].get("sda300"), rs[k].get("udi_lt100"), rs[k].get("udi_useful"),
             rs[k].get("udi_gt2000"), rs[k]["lux"]["0.85"][1] if "lux" in rs[k] else "-") for k in keep))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

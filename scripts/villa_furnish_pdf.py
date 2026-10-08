@@ -9,11 +9,15 @@ import sys
 import textwrap
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 from archpipe import catalogue as cat
 from archpipe.concept import revit_spec as RS
 from archpipe.concept import villa as V
 from archpipe.concept import villa_furnish as F
 from archpipe.concept import villa_r11 as R
+from archpipe.execution_context import ContextError, project_context
 
 OUT = Path("out/villa/furnish-d1")
 FILL = {"living": "#f4ead8", "dining": "#f2e3c6", "kitchen": "#efdcc6", "media": "#dcdcea", "wc": "#e0ecf3",
@@ -114,7 +118,18 @@ def plan(ax, lay, items, sp, level):
     ax.axis("off")
 
 
-def main():
+def main(argv=None) -> int:
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-furnish-pdf",
+            output=OUT,
+            modules=["matplotlib", "shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt

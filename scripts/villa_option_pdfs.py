@@ -12,6 +12,9 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 import numpy as np
 
 from archpipe.concept import stair_options as SO
@@ -21,6 +24,7 @@ from archpipe.concept import villa_options as VO
 from archpipe.concept import villa_parking as VP
 
 from archpipe.concept import villa_r11 as VR                          # noqa: E402
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 SETS = {"s": (VO.options, Path("out/villa/options")), "r7": (VP.options, Path("out/villa/options-r7")),
         "r11": (VR.designs, Path("out/villa/designs-r12"))}
@@ -235,11 +239,24 @@ def checks_page(pdf, lay, res, rb, op):
     plt.close(fig)
 
 
-def main():
+def main(argv=None) -> int:
     global OPT
-    args = sys.argv[1:]
+    args = sys.argv[1:] if argv is None else argv[1:]
     make, OPT = SETS["r11" if "r11" in args else "r7" if "r7" in args else "s"]
-    if "spec" in args:
+    is_spec = "spec" in args
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-option-pdfs",
+            inputs=[] if is_spec else [OPT / "readback.json"],
+            output=OPT,
+            modules=["numpy", "PIL", "matplotlib"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
+    if is_spec:
         OPT.mkdir(parents=True, exist_ok=True)
         path = OPT / "options-spec.json"
         path.write_text(json.dumps([RS.build(l) for l in make()], indent=1), encoding="utf-8")

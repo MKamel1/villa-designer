@@ -11,8 +11,12 @@ import sys
 import textwrap
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 from archpipe.concept import villa as V
 from archpipe.concept import villa_r11 as R
+from archpipe.execution_context import ContextError, project_context
 
 OUT = Path("out/villa/designs-r12")
 SUM = Path("out/villa/daylight/summary-r12.json")
@@ -39,7 +43,19 @@ def plan(ax, lay, level):
     ax.axis("off")
 
 
-def main():
+def main(argv=None) -> int:
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-r11-compare",
+            inputs=[SUM] if SUM.is_file() else [],
+            output=OUT,
+            modules=["matplotlib"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt

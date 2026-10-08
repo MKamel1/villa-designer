@@ -61,25 +61,25 @@ Before Phase 1, none of these entry points used a complete shared context. The t
 | `scripts/verify.py` | shared preflight bootstrap before third-party/domain imports; declared requirements check (`requirements.txt`); result and context records; relative native-path registry checks; unconditional recorded dependency check |
 | `scripts/villa_climate.py` | Shared: launch preflight in main(); declared inputs (EPW for run mode); requirements check (shapely); invalid context exits 2 |
 | `scripts/villa_concepts.py` | Shared: launch preflight; declared outputs; requirements check (matplotlib, numpy); invalid context exits 2 |
-| `scripts/villa_daylight.py` | Phase 2: no shared preflight |
-| `scripts/villa_daylight_finished.py` | Phase 2: no shared preflight |
-| `scripts/villa_daylight_pdf.py` | Phase 2: no shared preflight |
-| `scripts/villa_daylight_summary.py` | Phase 2: no shared preflight |
-| `scripts/villa_env.py` | Phase 2: no shared preflight |
-| `scripts/villa_furnish_build.py` | Phase 2: no shared preflight |
-| `scripts/villa_furnish_pdf.py` | Phase 2: no shared preflight |
-| `scripts/villa_lighting_pdf.py` | Phase 2: no shared preflight |
-| `scripts/villa_option_pdfs.py` | Phase 2: no shared preflight |
-| `scripts/villa_r11_compare.py` | Phase 2: no shared preflight |
+| `scripts/villa_daylight.py` | Shared: launch preflight; requirements check (numpy, PIL, matplotlib); invalid context exits 2 |
+| `scripts/villa_daylight_finished.py` | Shared: launch preflight; declared outputs; invalid context exits 2 |
+| `scripts/villa_daylight_pdf.py` | Shared: launch preflight; declared inputs (report.json); declared outputs; requirements check (matplotlib); invalid context exits 2 |
+| `scripts/villa_daylight_summary.py` | Shared: launch preflight; declared inputs (report.json, stats.json); declared outputs; invalid context exits 2 |
+| `scripts/villa_env.py` | Shared: launch preflight in main(); declared inputs (env-spec.json, env-readback.json for check/plan); requirements check (matplotlib for plan); declared outputs; invalid context exits 2 |
+| `scripts/villa_furnish_build.py` | Shared: launch preflight; declared inputs (readback.json, options-spec.json for check); requirements check (shapely); declared outputs; invalid context exits 2 |
+| `scripts/villa_furnish_pdf.py` | Shared: launch preflight; requirements check (matplotlib, shapely); declared outputs; invalid context exits 2 |
+| `scripts/villa_lighting_pdf.py` | Shared: launch preflight; requirements check (matplotlib, shapely); declared outputs; invalid context exits 2 |
+| `scripts/villa_option_pdfs.py` | Shared: launch preflight; declared inputs (readback.json for non-spec); requirements check (numpy, PIL, matplotlib); declared outputs; invalid context exits 2 |
+| `scripts/villa_r11_compare.py` | Shared: launch preflight; declared inputs (summary-r12.json when present); requirements check (matplotlib); declared outputs; invalid context exits 2 |
 | `scripts/villa_render.py` | shared local preflight and remote preflight before Blender launch/reuse; context in result and image reports |
 | `scripts/villa_render_selftest.py` | Phase 2: no shared preflight |
 | `scripts/villa_render_views.py` | Phase 2: no shared preflight |
 | `scripts/villa_review_page.py` | Phase 2: no shared preflight |
-| `scripts/villa_stair_options.py` | Phase 2: no shared preflight |
-| `scripts/villa_stairs.py` | Phase 2: no shared preflight |
+| `scripts/villa_stair_options.py` | Shared: launch preflight; requirements check (matplotlib); declared outputs; invalid context exits 2 |
+| `scripts/villa_stairs.py` | Shared: launch preflight in main(); declared inputs (stairs-readback.json for compare); declared outputs; invalid context exits 2 |
 | `scripts/worker_entry.py` | partial: explicit cwd/environment, process exit status, runtime fingerprints |
 | `scripts/workstation.py` | partial: explicit local cwd, deployed release paths, worker runtime identity |
-| `scripts/yard_wall_pdf.py` | Phase 2: no shared preflight |
+| `scripts/yard_wall_pdf.py` | Shared: launch preflight; declared inputs (yard-wall-readback.json); requirements check (numpy, PIL, matplotlib); declared outputs; invalid context exits 2 |
 
 All scripts marked Phase 2 or partial above remain outstanding, not silently exempted. Migrate worker/deployment, remote/hyperreal render, model review/build/export, and agent dispatch first; then the remaining report, intake, calibration and demonstration commands.
 
@@ -144,6 +144,16 @@ Native Revit Python inventory:
   - Import-isolation check verifying that importing all 13 Batch B modules does not invoke preflight (`test_importing_batch_b_scripts_does_not_run_preflight`).
   - Subprocess exit-2 check on `scripts/handoff.py` when a declared input file is missing (`test_handoff_subprocess_exits_2_on_missing_input`).
   - Subprocess exit-2 check on `scripts/swiss_calibrate.py` when a required dependency is missing via the test hook (`test_swiss_calibrate_subprocess_exits_2_on_missing_dependency`).
+
+### Completed Phase 2 item: Phase 2 Batch C entry points
+- **Scope**: Migrated 13 command-line entry points to the shared `project_context` launch preflight: `villa_daylight.py`, `villa_daylight_finished.py`, `villa_daylight_pdf.py`, `villa_daylight_summary.py`, `villa_env.py`, `villa_furnish_build.py`, `villa_furnish_pdf.py`, `villa_lighting_pdf.py`, `villa_option_pdfs.py`, `villa_r11_compare.py`, `villa_stair_options.py`, `villa_stairs.py`, `yard_wall_pdf.py`. (Explicitly excluded: `villa_render_views.py`, `villa_review_page.py`, and `villa_render_selftest.py` which are edited concurrently elsewhere).
+- **Preflight and import safety**: Each script invokes `project_context` strictly within its CLI entry point (`main()` or `__main__` guard) and never at module top level. Modules can be imported safely by tests and tools without preflight side effects. Top-level CLI blocks (`villa_daylight.py`, `villa_daylight_finished.py`, `villa_stairs.py`) were wrapped into guarded `main()` entry points while strictly preserving statement definitions, assignments, and execution order.
+- **Fail-closed contract**: Declared inputs, outputs, and required third-party packages (mapped from `requirements.txt` via `requirements_import_names`, e.g. `numpy`, `PIL`, `shapely`, `matplotlib`) are verified before execution. Any missing file or module raises `ContextError`, which each script catches to print `PREFLIGHT FAILED: <reason>` to stderr and exit with code 2 without tracebacks.
+- **Proofs**: Added 4 tests in `tests/test_execution_context.py`:
+  - AST check verifying that all 13 Batch C scripts invoke preflight inside `main()` or `__main__` and never at module top level (`test_batch_c_scripts_call_preflight_in_main_and_not_at_module_top_level`).
+  - Import-isolation check verifying that importing all 13 Batch C modules does not invoke preflight (`test_importing_batch_c_scripts_does_not_run_preflight`).
+  - Subprocess exit-2 check on `scripts/yard_wall_pdf.py` when a declared input file is missing (`test_yard_wall_pdf_subprocess_exits_2_on_missing_input`).
+  - Subprocess exit-2 check on `scripts/villa_furnish_pdf.py` when a required dependency is missing via the test hook (`test_villa_furnish_pdf_subprocess_exits_2_on_missing_dependency`).
 
 ## Defect controls and proving tests
 

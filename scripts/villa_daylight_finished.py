@@ -20,6 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from render_remote import DEFAULT_HOST, _ssh                         # noqa: E402
 
 from archpipe import daylight as D                                   # noqa: E402
@@ -96,5 +97,26 @@ def fetch(host=DEFAULT_HOST):
     return 0 if val["all_pass"] else 1
 
 
+def main(argv=None) -> int:
+    args = list(sys.argv[1:] if argv is None else argv)
+    if not args:
+        cmd = sys.argv[1]  # raises IndexError exactly as before
+    else:
+        cmd = args[0]
+    if cmd not in ("run", "fetch"):
+        return {"run": run, "fetch": fetch}[cmd]()
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-daylight-finished",
+            output=LOCAL.parent,
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
+    return {"run": run, "fetch": fetch}[cmd]()
+
+
 if __name__ == "__main__":
-    sys.exit({"run": run, "fetch": fetch}[sys.argv[1]]())
+    sys.exit(main())

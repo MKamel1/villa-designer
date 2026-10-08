@@ -15,7 +15,10 @@ from archpipe import daylight as D
 from archpipe.concept import villa as V
 from archpipe.safe_io import writable_path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(Path(__file__).parent))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from villa_daylight import JOB, LOCAL                                 # noqa: E402
 
 TARGET = {"bedroom": "sll-min-adf-bedroom", "living": "sll-min-adf-living", "dining": "sll-min-adf-living",
@@ -28,7 +31,19 @@ def target(occ):
     return (V._card(cid)[0], cid) if cid else (None, None)
 
 
-def main():
+def main(argv=None) -> int:
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-daylight-pdf",
+            inputs=[LOCAL / "report.json"],
+            output=LOCAL.parent,
+            modules=["matplotlib"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -118,7 +133,8 @@ def main():
             pdf.savefig(fig)
             plt.close(fig)
     print(out)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

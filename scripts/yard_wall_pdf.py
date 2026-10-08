@@ -9,10 +9,14 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 from matplotlib.patches import Rectangle
 
 sys.path.insert(0, str(Path(__file__).parent))
 from villa_option_pdfs import light                                  # noqa: E402
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 DIR = Path("out/villa/yard-wall")
 STREET = -1200.0                       # model z of street +-0.00 (mm)
@@ -28,7 +32,19 @@ def dim(ax, p, q, text, off=(0, 0), **kw):
             color=kw.get("c", "k"), bbox=dict(fc="white", ec="none", pad=0.5))
 
 
-def main():
+def main(argv=None) -> int:
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "yard-wall-pdf",
+            inputs=[DIR / "yard-wall-readback.json"],
+            output=DIR,
+            modules=["numpy", "PIL", "matplotlib"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -159,7 +175,8 @@ def main():
         pdf.savefig(fig)
         plt.close(fig)
     print(DIR / "NE-yard-wall-confirmed.pdf")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

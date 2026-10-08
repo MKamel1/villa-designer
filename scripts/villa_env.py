@@ -12,7 +12,11 @@ import math
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 from archpipe import villa_env as V
+from archpipe.execution_context import ContextError, project_context
 
 OUT = Path("out/villa")
 TOL = 2.0     # mm
@@ -144,8 +148,32 @@ def plan():
     return OUT / "env-site-plan.pdf"
 
 
-def main(argv):
+def main(argv=None) -> int:
+    if argv is None:
+        argv = sys.argv
     cmd = argv[1] if len(argv) > 1 else "spec"
+    if cmd not in ("spec", "check", "plan"):
+        raise SystemExit(__doc__)
+    inputs = []
+    modules = []
+    if cmd == "check":
+        rb_path = Path(argv[argv.index("--readback") + 1]) if "--readback" in argv else OUT / "env-readback.json"
+        inputs = [OUT / "env-spec.json", rb_path]
+    elif cmd == "plan":
+        inputs = [OUT / "env-spec.json", OUT / "env-readback.json"]
+        modules = ["matplotlib"]
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-env",
+            inputs=inputs,
+            output=OUT,
+            modules=modules,
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     if cmd == "spec":
         print(V.write(OUT / "env-spec.json"))
         return 0

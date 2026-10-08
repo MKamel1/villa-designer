@@ -10,7 +10,11 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 from archpipe.concept import stairs as S
+from archpipe.execution_context import ContextError, project_context
 
 OUT = Path("out/villa")
 
@@ -46,9 +50,27 @@ def compare():
     return bad
 
 
-if __name__ == "__main__":
-    cmd = sys.argv[1] if len(sys.argv) > 1 else "spec"
+def main(argv=None) -> int:
+    if argv is None:
+        argv = sys.argv
+    cmd = argv[1] if len(argv) > 1 else "spec"
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-stairs",
+            inputs=[OUT / "stairs-readback.json"] if cmd != "spec" else [],
+            output=OUT,
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     if cmd == "spec":
         print(spec())
+        return 0
     else:
-        sys.exit(1 if compare() else 0)
+        return 1 if compare() else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

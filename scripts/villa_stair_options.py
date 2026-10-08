@@ -8,8 +8,12 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
 from archpipe.concept import stair_options as O
 from archpipe.concept import villa as V
+from archpipe.execution_context import ContextError, project_context
 
 OUT = Path("out/villa/concepts")
 
@@ -18,7 +22,18 @@ def T(x, y):
     return y, -x                     # street at the top, east to the right (as the plan sheets)
 
 
-def main():
+def main(argv=None) -> int:
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-stair-options",
+            output=OUT,
+            modules=["matplotlib"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt

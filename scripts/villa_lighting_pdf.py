@@ -23,6 +23,7 @@ from archpipe.concept import villa_furnish as F                      # noqa: E40
 from archpipe.concept import villa_lighting as VL                    # noqa: E402
 from archpipe.concept import villa_r11 as R                          # noqa: E402
 from archpipe.concept import villa_render as VR                      # noqa: E402
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 OUT = ROOT / "out" / "villa" / "render-d1"
 STYLE = {"DL": ("o", "#333333", 16), "DLN": ("o", "#d62728", 22), "ADJ": ("D", "#ff7f0e", 18),
@@ -85,7 +86,18 @@ def plan(ax, lay, level, fx):
     ax.axis("off")
 
 
-def main():
+def main(argv=None) -> int:
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-lighting-pdf",
+            output=OUT,
+            modules=["matplotlib", "shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     lay = R.design("D1")
     VL.bind_products()
     fx = VL.design(lay)
@@ -193,7 +205,8 @@ def main():
         pdf.savefig(fig)
         plt.close(fig)
     print(path)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
