@@ -153,10 +153,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 110)
+        self.assertEqual(report["covered_by_guard_count"], 116)
         self.assertEqual(report["covered_by_review_count"], 21)
-        self.assertEqual(report["needs_real_case_count"], 10)
-        self.assertEqual(report["uncovered_count"], 76)
+        self.assertEqual(report["needs_real_case_count"], 11)
+        self.assertEqual(report["uncovered_count"], 69)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -272,6 +272,13 @@ class TestGuardRegistry(unittest.TestCase):
             "l0973-v26-camera-stood",
             "l0984-v29-missed-under",
             "l0989-v30-read-black",
+            # Phase 2 Batch 9 Evidence Scope / Composition & Execution Context
+            "l0020-isolated-room-not",
+            "l0092-invented-dressing-stand",
+            "l0661-render-daylight-analysis",
+            "l0763-render-side-fix",
+            "l0009-relative-script-path",
+            "l0076-project-s-agents",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")

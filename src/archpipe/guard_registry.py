@@ -53,9 +53,14 @@ from archpipe.evidence import (
     EvidenceStatus,
     GeometryDisagreementError,
     PageMismatchError,
+    ScopeWideningError,
+    SourceRef,
     assert_geometry_matches_metadata,
     assert_page_agreement,
     check_book_edition,
+    check_render_vs_design,
+    check_shared_model,
+    combine,
 )
 from archpipe.external_claims import (
     check_cct_and_watts_agreement,
@@ -64,6 +69,8 @@ from archpipe.external_claims import (
 )
 from archpipe import (
     asset_intake,
+    evidence,
+    execution_context,
     material_basis,
     refactor_audit,
     render_qa,
@@ -72,6 +79,7 @@ from archpipe import (
     stage_result,
     villa_render_contract,
 )
+from archpipe.execution_context import ContextError
 from archpipe.concept import (
     authored_guard,
     authored_values,
@@ -120,6 +128,13 @@ __all__ = [
     "check_authored_values_override_existing_field",
     "check_concept_critic_upper_supported",
     "check_element_id_exact_integer",
+    "check_evidence_composition_verified",
+    "check_evidence_render_vs_design",
+    "check_evidence_scope_promotion",
+    "check_evidence_shared_model",
+    "check_execution_context_absolute_path",
+    "check_execution_context_dependencies",
+    "check_execution_context_roles",
     "check_falsy_zero_lint",
     "check_fixture_photometry_ownership",
     "check_landscape_bench_dimensions",
@@ -3772,6 +3787,233 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Validates that windowless storage rooms achieve required maintained lux target (ies-res-storage-frequent-50) (l0989)",
+)
+
+
+# -----------------------------------------------------------------------------
+# Phase 2, Batch 9: Evidence Integrity & Execution Context Boundaries
+# -----------------------------------------------------------------------------
+
+# 83. l0020: Scope promotion guard (isolated room is not a dwelling)
+def check_evidence_scope_promotion(
+    record: EvidenceRecord,
+    target_scope: str,
+) -> EvidenceRecord:
+    """Validates that a room-scoped evidence record cannot widen silently to dwelling scope (l0020)."""
+    return evidence.EvidenceRecord.apply_to(record, target_scope)
+
+
+_rec_bedroom_lux = EvidenceRecord(
+    value={"maintained_lux": 320},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(title="Bedroom Lighting Calc", verified=True),
+    scope="room",
+)
+
+register_guard(
+    fn=check_evidence_scope_promotion,
+    name="evidence_scope_promotion",
+    lesson_ids=("l0020-isolated-room-not", "l0020"),
+    real_case=case(_rec_bedroom_lux, "dwelling"),
+    clean_case=case(_rec_bedroom_lux, "room"),
+    expected_real=ScopeWideningError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that a room-scoped evidence record cannot widen silently to dwelling scope (l0020)",
+)
+
+
+# 84. l0092: Dressing and stand-in combination guard (ASSUMED items weaken composite status)
+def check_evidence_composition_verified(
+    *records: EvidenceRecord,
+    value: Any = None,
+) -> EvidenceRecord:
+    """Validates that composite evidence records achieve VERIFIED status without assumed stand-ins (l0092)."""
+    res = evidence.combine(*records, value=value)
+    if res.status != EvidenceStatus.VERIFIED:
+        raise ValueError(
+            f"Composite evidence status is {res.status.value}, expected VERIFIED: {res.reasons}"
+        )
+    return res
+
+
+_rec_bed_design = EvidenceRecord(
+    value={"name": "bed_king", "width_mm": 1930, "depth_mm": 2030},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(title="Revit Model Extract", edition="2027", verified=True),
+    scope="room:bedroom",
+)
+_rec_table_design = EvidenceRecord(
+    value={"name": "bedside_table", "width_mm": 500, "depth_mm": 450},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(title="Revit Model Extract", edition="2027", verified=True),
+    scope="room:bedroom",
+)
+_rec_vase_assumed = EvidenceRecord(
+    value={"name": "decor_vase", "bounds_m": [0.2, 0.3, 0.2]},
+    status=EvidenceStatus.ASSUMED,
+    source=SourceRef(title="Procedural Stand-in", verified=False),
+    scope="room:bedroom",
+    reasons=("Invented dressing stand-in, not design content (l0092)",),
+)
+
+register_guard(
+    fn=check_evidence_composition_verified,
+    name="evidence_composition_verified",
+    lesson_ids=("l0092-invented-dressing-stand", "l0092"),
+    real_case=case(_rec_bed_design, _rec_table_design, _rec_vase_assumed, value="bedroom_furnishing_cluster"),
+    clean_case=case(_rec_bed_design, _rec_table_design, value="bedroom_furnishing_cluster"),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that composite evidence records achieve VERIFIED status without assumed stand-ins (l0092)",
+)
+
+
+# 85. l0661: Shared model hash agreement between render and daylight analysis
+def check_evidence_shared_model(
+    model_sha256_render: str,
+    model_sha256_analysis: str,
+) -> dict[str, Any]:
+    """Validates that daylight analysis and rendering describe the same model hash (l0661)."""
+    res = evidence.check_shared_model(model_sha256_render, model_sha256_analysis)
+    if not res.get("matches"):
+        raise ValueError(res.get("reason", "Model hashes disagree"))
+    return res
+
+
+_hash_render_case = "a" * 64
+_hash_analysis_diff = "b" * 64
+
+register_guard(
+    fn=check_evidence_shared_model,
+    name="evidence_shared_model",
+    lesson_ids=("l0661-render-daylight-analysis", "l0661"),
+    real_case=case(_hash_render_case, _hash_analysis_diff),
+    clean_case=case(_hash_render_case, _hash_render_case),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that daylight analysis and rendering describe the same model hash (l0661)",
+)
+
+
+# 86. l0763: Render-side compensation vs design spec consistency
+def check_evidence_render_vs_design(
+    design_value: float,
+    render_value: float,
+    tolerance: float = 0.001,
+) -> dict[str, Any]:
+    """Validates that render-side adjustments do not diverge from the design model (l0763)."""
+    res = evidence.check_render_vs_design(design_value, render_value, tolerance=tolerance)
+    if not res.get("matches"):
+        raise ValueError(res.get("reason", "Render-side fix diverges from design"))
+    return res
+
+
+_design_fitting_z = 2545.0
+_render_fitting_z = 2700.0
+
+register_guard(
+    fn=check_evidence_render_vs_design,
+    name="evidence_render_vs_design",
+    lesson_ids=("l0763-render-side-fix", "l0763"),
+    real_case=case(_design_fitting_z, _render_fitting_z, tolerance=1.0),
+    clean_case=case(_render_fitting_z, _render_fitting_z, tolerance=1.0),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that render-side adjustments do not diverge from the design model (l0763)",
+)
+
+
+# 87. l0009: Strict absolute path requirements for execution boundaries
+def check_execution_context_absolute_path(
+    path: Path | str,
+    label: str = "script",
+    *,
+    file: bool = True,
+) -> Path:
+    """Validates that script and tool execution paths are strictly absolute (l0009)."""
+    return execution_context.absolute(path, label, file=file)
+
+
+register_guard(
+    fn=check_execution_context_absolute_path,
+    name="execution_context_absolute_path",
+    lesson_ids=("l0009-relative-script-path", "l0009"),
+    real_case=case(Path("revit/build_bedroom.py"), "script", file=True),
+    clean_case=case(ROOT / "scripts/verify.py", "script", file=True),
+    expected_real=ContextError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that script and tool execution paths are strictly absolute (l0009)",
+)
+
+
+# 88. l0076: Required agent roles presence in live session context
+_test_ctx_out = Path(tempfile.gettempdir()) / "archpipe_ctx_out"
+_test_ctx_tmp = Path(tempfile.gettempdir()) / "archpipe_ctx_tmp"
+
+
+def check_execution_context_roles(
+    required_roles: Iterable[str],
+    available_roles: Iterable[str],
+    *,
+    root: Path = ROOT,
+    output: Path | None = None,
+    temp: Path | None = None,
+) -> dict[str, Any]:
+    """Validates that required agent roles are present in the live session (l0076)."""
+    out_dir = output or _test_ctx_out
+    tmp_dir = temp or _test_ctx_tmp
+    return execution_context.preflight(
+        root=root,
+        output=out_dir,
+        temp=tmp_dir,
+        required_roles=tuple(required_roles),
+        available_roles=tuple(available_roles),
+    )
+
+
+register_guard(
+    fn=check_execution_context_roles,
+    name="execution_context_roles",
+    lesson_ids=("l0076-project-s-agents", "l0076"),
+    real_case=case(["render_critic"], []),
+    clean_case=case(["render_critic"], ["render_critic"]),
+    expected_real=ContextError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that required agent roles are present in the live session (l0076)",
+)
+
+
+# 89. l0134: Python dependency verification without import side-effects
+def check_execution_context_dependencies(
+    modules: Iterable[str],
+    *,
+    root: Path = ROOT,
+    interpreter: str | Path | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Validates that declared Python dependencies can be located without import side-effects (l0134)."""
+    return execution_context.check_dependencies(modules, root=root, interpreter=interpreter)
+
+
+register_guard(
+    fn=check_execution_context_dependencies,
+    name="execution_context_dependencies",
+    lesson_ids=("l0134-tests-could-not", "l0134"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that declared Python dependencies can be located without import side-effects (l0134)",
+    notes="needs real case: the recorded failure is a Windows PYTHONPATH joined with ':' instead of ';' "
+          "(docs/LEARNINGS.md 'could not import archpipe'); a made-up module name is a sibling, not that case "
+          "(lead review of batch 9, 2026-10-08)",
+    needs_real_case=True,
 )
 
 
