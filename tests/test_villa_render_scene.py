@@ -24,7 +24,9 @@ def blender_function(name):
     source = (ROOT / "src/archpipe/blender/villa_scene.py").read_text(encoding="utf-8")
     tree = ast.parse(source)
     function = next(node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == name)
-    namespace = {"contract": render_contract}
+    from importlib import import_module
+    namespace = {"contract": render_contract,
+                 "sibling": lambda module: import_module("archpipe.blender."+module)}
     exec(compile(ast.Module(body=[function], type_ignores=[]), str(ROOT / "src/archpipe/blender/villa_scene.py"), "exec"), namespace)
     return namespace[name]
 
@@ -213,7 +215,7 @@ class VillaRenderContractTest(unittest.TestCase):
         batches = []
         detailed = []
         build = blender_function("build_meshes")
-        build.__globals__["add_mesh_batch"] = lambda specs, name, material, warnings: batches.append(
+        build.__globals__["add_mesh_batch"] = lambda specs, name, material, warnings, materials=None: batches.append(
             ([spec["id"] for spec in specs], name)) or SimpleNamespace(name=name)
         build.__globals__["add_mesh_detail"] = lambda obj, spec: detailed.append((obj.name, spec["id"]))
         objects = build([plain, other, detail], {"white": object()},
@@ -392,6 +394,25 @@ class VillaRenderContractTest(unittest.TestCase):
         self.assertEqual(select_views(views, "all", False), ["v01", "v02"])
         with self.assertRaises(ValueError):
             select_views(views, "none", False)
+
+    def test_retirement_contract_requires_explicit_boolean_and_reason(self):
+        scene = copy.deepcopy(self.valid)
+        view = scene['views'][0]
+        view['presentation_retired'] = True
+        self.assertIn('retirement reason required', ' '.join(validate_scene(scene)))
+        view['presentation_decision'] = 'Lead reviewed a faithful physical limitation.'
+        self.assertEqual(validate_scene(scene), [])
+        view['presentation_retired'] = 'true'
+        self.assertIn('presentation_retired', ' '.join(validate_scene(scene)))
+
+    def test_retired_views_are_diagnostic_only_in_both_presentation_batches(self):
+        views = {"v01": {}, "v02": {"final_only": True},
+                 "v07-terrace-dusk": {"presentation_retired": True},
+                 "v38-north-garden-floor-bed": {"presentation_retired": True, "final_only": True}}
+        self.assertEqual(select_views(views, "all", False), ["v01", "v02"])
+        self.assertEqual(select_views(views, "review", False), ["v01"])
+        self.assertEqual(select_views(views, "v07-terrace-dusk,v38-north-garden-floor-bed", False),
+                         ["v07-terrace-dusk", "v38-north-garden-floor-bed"])
 
 
 if __name__ == "__main__":

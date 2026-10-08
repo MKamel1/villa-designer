@@ -12,6 +12,7 @@ import math
 
 # Each admitted kind has a physical reason to retain a rectangular solid.
 BOX_KINDS = {
+    "trellis": "Straight timber pergola/trellis members have rectangular physical sections; assembled frames retain open gaps.",
     "cabinet-carcass": "Planar cabinet boards and rectangular enclosure are the finished joinery shape.",
     "shelf": "A straight shelf is a rectangular board with stated thickness.",
     "worktop": "A straight worktop is a rectangular slab with stated thickness.",
@@ -28,6 +29,7 @@ BOX_KINDS = {
     "mirror-panel": "A silvered mirror panel has a rectangular substrate.",
     "appliance-front": "An integrated appliance front is a rectangular fascia.",
     "stepping-stone": "A cut rectangular paving stone has a rectangular solid body.",
+    "bench-slab": "A thin rectangular paving slab physically supports a garden bench without a plinth.",
     "planter-soil": "Soil fill in a straight rectangular raised bed has a closed rectangular volume.",
 }
 
@@ -45,10 +47,14 @@ def _cross(a, b):
 
 
 def _sub(a, b):
+    if len(a) == len(b) == 3:
+        return a[0]-b[0], a[1]-b[1], a[2]-b[2]
     return tuple(x-y for x, y in zip(a, b))
 
 
 def _dot(a, b):
+    if len(a) == len(b) == 3:
+        return sum((a[0]*b[0], a[1]*b[1], a[2]*b[2]))
     return sum(x*y for x, y in zip(a, b))
 
 
@@ -56,8 +62,24 @@ def _key(p):
     return tuple(round(x, 6) for x in p)
 
 
+class _FrozenFaces(tuple):
+    """Immutable face snapshot shared by a part's geometry and proxy checks."""
+    def __new__(cls, faces):
+        return super().__new__(cls, (tuple(tuple(p) for p in face) for face in faces))
+
+
+def _freeze_faces(faces):
+    return faces if isinstance(faces, _FrozenFaces) else _FrozenFaces(faces)
+
+
 def _rectangular_proxy(faces):
-    points = _points(faces)
+    from .build_cache import immutable
+    frozen = _freeze_faces(faces)
+    return immutable("rectangular-proxy", frozen, lambda: _is_rectangular_proxy(frozen))
+
+
+def _is_rectangular_proxy(faces):
+    points = {tuple(map(float, p)) for face in faces for p in face}
     if not points:
         return False
     axes = [set(round(p[i], 6) for p in points) for i in range(3)]
@@ -69,20 +91,36 @@ def geometry_errors(faces, *, surface=False, occupied_side=None):
     """Check triangle area, closed directed edges, and outward signed volume."""
     if not faces:
         return ["no faces"]
+    from .build_cache import immutable
+    frozen = _freeze_faces(faces)
+    side = None if occupied_side is None else tuple(occupied_side)
+    return list(immutable("geometry-errors", (frozen, surface, side),
+                         lambda: tuple(_geometry_errors(frozen, surface=surface, occupied_side=side))))
+
+
+def _geometry_errors(faces, *, surface=False, occupied_side=None):
+    if not faces:
+        return ["no faces"]
     errors = []
     edges = Counter()
     volume = 0.0
+    point_keys = {}
     for face in faces:
         if len(face) < 3:
             errors.append("face has fewer than three vertices")
             continue
         pts = [tuple(map(float, p)) for p in face]
-        for a, b in zip(pts, pts[1:] + pts[:1]):
-            edges[(_key(a), _key(b))] += 1
+        keys = []
+        for point in pts:
+            if point not in point_keys:
+                point_keys[point] = _key(point)
+            keys.append(point_keys[point])
+        for a, b in zip(keys, keys[1:] + keys[:1]):
+            edges[(a, b)] += 1
         for i in range(1, len(pts)-1):
             a, b, c = pts[0], pts[i], pts[i+1]
-            area2 = math.sqrt(_dot(_cross(_sub(b, a), _sub(c, a)),
-                                        _cross(_sub(b, a), _sub(c, a))))
+            cross = _cross(_sub(b, a), _sub(c, a))
+            area2 = math.sqrt(_dot(cross, cross))
             if area2 <= 1e-10:
                 errors.append("zero-area triangle")
             volume += _dot(a, _cross(b, c)) / 6.0
@@ -126,8 +164,9 @@ class Part:
             raise PartError("glass pane must be a closed solid")
         if self.basis == "measured-gltf":
             return  # C2 asset intake owns mesh validation and measured dimensions.
-        errors = geometry_errors(self.solid, surface=self.surface, occupied_side=self.occupied_side)
-        if not self.surface and _rectangular_proxy(self.solid) and self.kind not in BOX_KINDS:
+        faces = _freeze_faces(self.solid) if self.solid else self.solid
+        errors = geometry_errors(faces, surface=self.surface, occupied_side=self.occupied_side)
+        if not self.surface and _rectangular_proxy(faces) and self.kind not in BOX_KINDS:
             errors.insert(0, "bare rectangular proxy for " + self.kind)
         if self.support and self.kind == "duvet":
             points = _points(self.solid)

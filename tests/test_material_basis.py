@@ -178,6 +178,15 @@ class TestMaterialBasis(unittest.TestCase):
         sib_findings = material_findings(sibling_case)
         self.assertTrue(any(f["lesson_id"] == "l0083" and f["severity"] == "ERROR" for f in sib_findings))
 
+    def test_l0083_untextured_wood_colour_has_no_grain_to_orient(self) -> None:
+        """l0083 applies to box-projected textures only; the flat-colour shrub twigs stay quiet."""
+        flat = {"materials": {"g6-shrub-wood": {"kind": "principled", "base_rgb": [0.055, 0.035, 0.014],
+                                                 "reflectance": 0.035, "roughness": 0.95,
+                                                 "note": "ASSUMED shaded shrub twigs"}}}
+        self.assertFalse(any(f["category"] == "grain_orientation" for f in material_findings(flat)))
+        textured = {"materials": {"g6-shrub-wood": dict(flat["materials"]["g6-shrub-wood"], asset="bark_scan")}}
+        self.assertTrue(any(f["lesson_id"] == "l0083" for f in material_findings(textured)))
+
     def test_l0795_wood_grain_collapsed_span_fires_and_sibling(self) -> None:
         """l0795: grain_axis='z' on horizontal surface collapses mapping span to texel smear."""
         real_case = {

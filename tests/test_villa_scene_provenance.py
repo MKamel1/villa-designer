@@ -25,7 +25,7 @@ class VillaSceneProvenance(unittest.TestCase):
             "src/archpipe/blender/photoreal.py", "src/archpipe/blender/build_scene.py",
             "src/archpipe/blender/presentation.py", "src/archpipe/villa_render_contract.py",
             "src/archpipe/furniture_orientation.py", "ops/workstation/library-manifest.json",
-            "out/villa/round3/plant-palette.json", "spec/villa-site.yaml",
+            "knowledge/garden-palette.json", "knowledge/site-orientation.json", "knowledge/c4-final-approvals.json", "spec/villa-site.yaml",
             "knowledge/library.json", "knowledge/projects/villa-01/brief-requirements.json",
             "knowledge/projects/villa-01/taste.json"]
         for relative in paths:
@@ -87,8 +87,15 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
         self.assertEqual(json.loads(self.scene.read_text())["provenance"]["source_hash"],
                          result["scene_source_hash"])
 
+    def test_orientation_record_change_makes_scene_stale(self):
+        authority=self.root/'knowledge/site-orientation.json'
+        authority.write_bytes(authority.read_bytes()+b' ')
+        result=self._driver('--scene',str(self.scene),'--dry-run')
+        self.assertNotEqual(result.returncode,0)
+        self.assertIn('Scene provenance mismatch',result.stderr)
+
     def test_data_change_is_stale_and_override_is_labelled(self):
-        palette = self.root / "out/villa/round3/plant-palette.json"
+        palette = self.root / "knowledge/garden-palette.json"
         palette.write_bytes(palette.read_bytes() + b" ")
         result = self._driver("--scene", str(self.scene), "--allow-stale-scene", "--dry-run")
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -96,6 +103,13 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
         self.assertTrue(data["stale_scene"])
         self.assertEqual(data["label"], "STALE-SCENE")
         self.assertNotEqual(data["scene_source_hash"], source_provenance(self.root)["source_hash"])
+
+    def test_changed_garden_approval_retirement_makes_scene_stale(self):
+        authority = self.root / "knowledge/c4-final-approvals.json"
+        authority.write_bytes(authority.read_bytes() + b" ")
+        result = self._driver("--scene", str(self.scene), "--dry-run")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Scene provenance mismatch", result.stderr)
 
     def test_historical_unstamped_scene_refuses_before_render(self):
         # Frozen by value from the lead's 2026-10-01 D1 evidence: villa-render/1,
@@ -109,7 +123,7 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
 
     def test_write_stamps_scene_and_refuses_source_change_during_build(self):
         target = self.root / "export.json"
-        with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1"}), \
+        with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1", "lights": []}), \
              patch("archpipe.villa_render_contract.validate_scene", lambda scene: []), \
              patch.object(scene_builder, "source_provenance", lambda: source_provenance(self.root)):
             scene_builder.write(target)
@@ -117,7 +131,7 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
         self.assertEqual(stamped["provenance"]["source_hash"], source_provenance(self.root)["source_hash"])
         old_bytes = target.read_bytes()
         hashes = iter(({"source_hash": "before"}, {"source_hash": "after"}))
-        with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1"}), \
+        with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1", "lights": []}), \
              patch("archpipe.villa_render_contract.validate_scene", lambda scene: []), \
              patch.object(scene_builder, "source_provenance", lambda: next(hashes)):
             with self.assertRaisesRegex(RuntimeError, "changed during build"):

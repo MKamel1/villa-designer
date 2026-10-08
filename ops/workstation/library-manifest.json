@@ -2078,7 +2078,11 @@
         1.225490196,
         0.980392157
       ],
-      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "source_sha256": "3ddf67499b5a3a25d11ff6009d91457eeef4cc5a407e68e2c70805860f03bb55",
+      "geometry_buffer_sha256": {
+        "scene.bin": "e32a5ba885cad13dab98b93c6b897c5f595ec6c5e1a7c887056c8a1320333f3a"
+      }
     },
     {
       "id": "sf_chelsea_bed",
@@ -2183,7 +2187,7 @@
       "author": "burakbudakdesign",
       "author_url": "https://sketchfab.com/burakbudakdesign",
       "licence": "CC Attribution",
-      "credit": "Modern Bouclé Wooden Chair by burakbudakdesign (https://sketchfab.com/3d-models/modern-boucle-wooden-chair-47fc798d59d1442d9922e034ed9565d4), CC Attribution",
+      "credit": "Modern Boucl\u00e9 Wooden Chair by burakbudakdesign (https://sketchfab.com/3d-models/modern-boucle-wooden-chair-47fc798d59d1442d9922e034ed9565d4), CC Attribution",
       "role": "dining-chair",
       "faces": 14842,
       "bounds_m": {
@@ -2284,7 +2288,11 @@
       "placed_scale": 1.002720951,
       "front_axis": "+Z",
       "front_axis_basis": "lead-verified preview 2026-09-30",
-      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "source_sha256": "5bd67cbed74b27af56595c93666086658de86c6feb30f13e500a2967ec2cb0f2",
+      "geometry_buffer_sha256": {
+        "scene.bin": "d6d513f05b3581fe563eda52793d8b339fa6a767d07d94054901a7dfbd8c5c3d"
+      }
     },
     {
       "id": "sf_frangipani",
@@ -2354,11 +2362,15 @@
         3.537
       ],
       "placement_scale_factors": [
-        0.830774788
+        1.1838603916174273
       ],
-      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
-      "placed_scale": 0.830774788,
-      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      "placement_scale_source": "knowledge/garden-palette.json: Plumeria rubra appearance_measurements.sf_frangipani.scale (lead D1, 2026-10-06); villa_landscape.review_candidate; villa_scene.import_props",
+      "placed_scale": 1.1838603916174273,
+      "placed_scale_reason": "D1 approved uniform placement scale holds actual maximum horizontal span at 4.6 m; young pruned stage ASSUMED in the sole palette. D4 moves the trunk/pit only and preserves this scale. Independent intake record reconciled against authoritative scene 2026-10-06.",
+      "source_sha256": "03d79d7028bf53cd330f1f5f3d55c592004db1a6714392f801a0dd853ee14d1a",
+      "geometry_buffer_sha256": {
+        "scene.bin": "20b0305d3f6ed8f2897fb7b3464d51579a122619a8e30a40e6e3a64c30cbbab7"
+      }
     },
     {
       "id": "sf_garden_flower_clump",
@@ -2579,7 +2591,11 @@
         0.928720687,
         0.638495472
       ],
-      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props"
+      "placement_scale_source": "src/archpipe/concept/villa_landscape.py:_prop; src/archpipe/blender/villa_scene.py:import_props",
+      "source_sha256": "00f224e8f7c5047852a98baa61a46f7065a0474abee855067a89e92d059dc2ef",
+      "geometry_buffer_sha256": {
+        "scene.bin": "94d654f1dbd8f7a3c11b21ac9f6d15c8a41fe131e424e3f18f7069a659a44fd7"
+      }
     },
     {
       "id": "sf_jacaranda",
@@ -2933,7 +2949,7 @@
       "author": "avilov",
       "author_url": "https://sketchfab.com/avilov",
       "licence": "CC Attribution",
-      "credit": "Мodern sofa by avilov (https://sketchfab.com/3d-models/odern-sofa-dfed5023ec614799a68d392a6a4199ed), CC Attribution",
+      "credit": "\u041codern sofa by avilov (https://sketchfab.com/3d-models/odern-sofa-dfed5023ec614799a68d392a6a4199ed), CC Attribution",
       "role": "sofa",
       "faces": 100657,
       "bounds_m": {
@@ -3217,7 +3233,7 @@
       "author": "marcosnegrao",
       "author_url": "https://sketchfab.com/marcosnegrao",
       "licence": "CC Attribution",
-      "credit": "Modern Wooden Bench – Low Poly / Free by marcosnegrao (https://sketchfab.com/3d-models/modern-wooden-bench-low-poly-free-84813ace7a3a4f1bbf17526d3e83e413), CC Attribution",
+      "credit": "Modern Wooden Bench \u2013 Low Poly / Free by marcosnegrao (https://sketchfab.com/3d-models/modern-wooden-bench-low-poly-free-84813ace7a3a4f1bbf17526d3e83e413), CC Attribution",
       "role": "bench-outdoor",
       "faces": 16934,
       "bounds_m": {
@@ -3281,7 +3297,11 @@
       "placement_scale_source": "src/archpipe/concept/villa_landscape.py:build (BENCH_LENGTH_M/BENCH_HEIGHT_M over native extents); src/archpipe/blender/villa_scene.py:import_props",
       "front_axis": "none",
       "front_axis_basis": "lead-verified preview 2026-09-30",
-      "front_axis_reason": "Backless symmetric bench has no functional front."
+      "front_axis_reason": "Backless symmetric bench has no functional front.",
+      "source_sha256": "4d039ae8a138e6f8cd7b7be12730f9698389dfc412f4415ef666710919e4b316",
+      "geometry_buffer_sha256": {
+        "scene.bin": "fb90affe82d8852bd4a187d15d3126e59980763452708339ff7cf444d688d977"
+      }
     },
     {
       "id": "outdoor_table_chair_set_01",
@@ -3335,7 +3355,11 @@
       "preview_image": "previews/outdoor_table_chair_set_01.png",
       "front_axis": "none",
       "front_axis_basis": "lead-verified preview 2026-09-30",
-      "front_axis_reason": "Table and surrounding chairs face each other; set has no single front."
+      "front_axis_reason": "Table and surrounding chairs face each other; set has no single front.",
+      "source_sha256": "2e2376efc210d849a22bd352b40442d38985c74953fc8020bb01ca94c66c68ca",
+      "geometry_buffer_sha256": {
+        "outdoor_table_chair_set_01.bin": "d62458c79c6c902d1195bff875e42bf7579c6b309c6b96f9cd7543af43170220"
+      }
     },
     {
       "id": "flower_ursinia",
@@ -3394,7 +3418,11 @@
         "published_size": "RHS: max height 0.1-0.5 m; max spread 0.1-0.5 m; multi-plant clump width is checked against spacing"
       },
       "author": "Jenelle van Heerden, Rico Cilliers",
-      "preview_image": "previews/flower_ursinia.png"
+      "preview_image": "previews/flower_ursinia.png",
+      "source_sha256": "0bca33893025bf18adcf6b813b714f1d6d6e3497bd34af637189824efca7fe1a",
+      "geometry_buffer_sha256": {
+        "flower_ursinia.bin": "40ff08d800264713ef4895c01fbb1cdf1979d8d27a80e392e8669623da2c2ab8"
+      }
     },
     {
       "id": "flower_heliophila",

@@ -1,0 +1,27 @@
+{
+  "id": "island-bowl",
+  "asset": "wooden_bowl_01",
+  "position": [
+    13.675,
+    -25.91,
+    -2.0780000000000003
+  ],
+  "rotation_deg": [
+    0,
+    0,
+    0.0
+  ],
+  "scale": 1.0,
+  "label": "dressing: bowl on the island",
+  "mounting": {
+    "host_id": "support-k-island",
+    "kind": "floor-standing",
+    "offset_m": 0,
+    "housing_depth_m": 0.0,
+    "finished_face": [
+      11.197,
+      -26.671,
+      -2.998
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-﻿"""Environment model of the real villa (Sheikh Zayed): plot, sunken yard, fence, neighbours, sister villa, the
+"""Environment model of the real villa (Sheikh Zayed): plot, sunken yard, fence, neighbours, sister villa, the
 apartment above, and the structure to keep. It generates the spec that `revit/build_villa_env.py` builds in a COPY
 of omar.rvt.
 
@@ -18,6 +18,7 @@ docs/villa/brief-2026-09.md) or ASSUMED (listed in ASSUMPTIONS for the client to
 from __future__ import annotations
 
 import json
+from .orientation import record as orientation_record
 from pathlib import Path
 
 # --- measured -------------------------------------------------------------------------------------------------
@@ -65,7 +66,7 @@ LEVELS = [("Street +-0.00", STREET), ("B -1.80", B), ("GF +1.20", GF), ("APT +4.
 
 # --- site -----------------------------------------------------------------------------------------------------
 LATITUDE, LONGITUDE, TIME_ZONE = 30.040260, 30.961099, 2.0   # BRIEF maps link, resolved 2026-09-25
-STREET_FACADE_AZIMUTH = 290.0                 # BRIEF: the street (model -x) facade faces true azimuth ~290
+STREET_FACADE_AZIMUTH = float(orientation_record()["true_north"]["street_facade_azimuth"])                 # BRIEF: the street (model -x) facade faces true azimuth ~290
 # Building face to the fence's INNER face, measured on the old GF PDF (client: "the fence offset can be used from the
 # pdf"); the PDF's own 4.02 front dimension runs to the fence's outer face (3.74 + 0.25 = 3.99).
 OFFSET_N, OFFSET_E, OFFSET_S = 3740, 2990, 5710

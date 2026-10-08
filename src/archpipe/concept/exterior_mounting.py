@@ -120,9 +120,15 @@ def exterior_host(scene, member, lay, identifier):
     return host
 
 
-def mount_landscape(scene, member, sources):
-    direction=member['id'].rsplit('-',1)[1]
-    outward={'east':(-1,0,0),'west':(1,0,0),'north':(0,-1,0),'south':(0,1,0)}[direction]
+def mount_landscape(scene, member, sources, *, model_side=None):
+    """Mount on an explicit model-side face, or the legacy garden-side suffix.
+
+    A rear-garden espalier can use its east boundary without naming the
+    entire assembly as the east yard. model_side is +x, -x, +y or -y.
+    """
+    from ..orientation import side_name
+    direction=side_name(model_side) if model_side is not None else member['id'].rsplit('-',1)[1]
+    outward={side_name('+x'):(-1,0,0),side_name('-x'):(1,0,0),side_name('+y'):(0,-1,0),side_name('-y'):(0,1,0)}[direction]
     source,face=finite_face(member,[s for s,h in sources],outward)
     host=next(h for s,h in sources if s['id']==source['id'])
     fixing=min(sum(p[i]*outward[i] for i in range(3)) for p in points(member))
@@ -136,6 +142,8 @@ def apply_lead_review(scene):
     import json
     from pathlib import Path
     authority=json.loads((Path(__file__).resolve().parents[3]/'knowledge/c4-e-lead-approvals.json').read_text())
+    from ..orientation import historical_aliases
+    authority = historical_aliases(authority)
     retired={'host-face-support-detail-vent-'+room+'-grille' for room in ('guest-wc','dirty-kitchen')}
     rows = {r['id']: r for r in scene['mounting_movements']}
     render_meshes = {m['id']: m for m in scene['meshes']}

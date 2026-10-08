@@ -30,6 +30,7 @@ from . import villa_furnish as F
 from . import villa_furnish3d as F3
 from . import villa_lighting as VL
 from . import villa_r11 as R
+from .villa_landscape import TROUGH_COLOUR
 from .authored_values import fill_defaults, override
 from .physical_part import PartMeshList
 from .mounting import MountItem, binding, check_mesh, Host, Finish, stacked_finish_bridge
@@ -159,6 +160,10 @@ M = {
                              roughness=0.92, tile_m=1.0,
                              note="ASSUMED drained artificial grass, short turf (ambientCG Grass002 CC0 scan, "
                                   "mapped tile 1.0 m); client 2026-09-29"),
+    "strelitzia-foliage": dict(kind="principled",base_rgb=[.08,.20,.16],reflectance=.18,roughness=.58,
+                                note="ASSUMED authored leathery blue-green Strelitzia foliage"),
+    "stone-substrate": dict(kind="principled",base_rgb=[.48,.46,.42],reflectance=.45,roughness=.9,
+                            note="ASSUMED unpolished mineral stone body, including buried underside; no floor texture"),
     "stepping-stone": dict(kind="principled", base_rgb=[0.62, 0.58, 0.50], reflectance=0.45,
                            roughness=0.85, note="ASSUMED flush honed sandstone stepping stones"),
     "trellis": dict(kind="principled", base_rgb=[0.16, 0.12, 0.08], reflectance=0.13,
@@ -167,6 +172,43 @@ M = {
                                 roughness=0.85, note="ASSUMED procedural Bougainvillea glabra magenta bract mass"),
     "bougainvillea-leaf": dict(kind="principled", base_rgb=[0.07, 0.22, 0.055], reflectance=0.17,
                                roughness=0.78, note="ASSUMED procedural Bougainvillea glabra foliage"),
+    "terracotta-red-glaze": dict(kind="principled",base_rgb=[0.42,0.075,0.035],reflectance=0.17,
+                                 roughness=0.22,note="ASSUMED terracotta-red glazed ceramic; client decision 2026-10-05"),
+    "top-trough-coating": dict(kind="principled",base_rgb=TROUGH_COLOUR["base_rgb"],reflectance=.08,
+                              roughness=.48,metallic=0.0,
+                              note=TROUGH_COLOUR["name"]+"; ASSUMED authored powder coating, not a manufacturer finish; weathering/loaded weight UNVERIFIED"),
+    "top-rosemary-foliage": dict(kind="principled",base_rgb=[.065,.14,.075],reflectance=.10,roughness=.8,
+                                note="ASSUMED authored prostrate rosemary needles"),
+    "top-aloe-foliage": dict(kind="principled",base_rgb=[.15,.25,.17],reflectance=.20,roughness=.6,
+                            note="ASSUMED authored Aloe vera rosette"),
+    "garden-soil": dict(kind="principled",base_rgb=[0.065,0.038,0.018],reflectance=0.04,
+                        roughness=1.0,note="ASSUMED visible potting soil"),
+    "garden-foliage": dict(kind="principled",base_rgb=[0.035,0.15,0.045],reflectance=0.10,
+                           roughness=0.72,note="ASSUMED young Aspidistra/Strelitzia blade appearance"),
+    "g6-petrea-leaf": dict(kind="principled",base_rgb=[.025,.11,.035],reflectance=.085,roughness=.88,note="ASSUMED rough Petrea lamina"),
+    "g6-jasmine-leaf": dict(kind="principled",base_rgb=[.022,.09,.029],reflectance=.07,roughness=.30,note="ASSUMED glossy small jasmine leaf"),
+    "g6-pittosporum-leaf": dict(kind="principled",base_rgb=[.025,.10,.028],reflectance=.08,roughness=.34,note="ASSUMED glossy obovate Pittosporum"),
+    "g6-loquat-leaf": dict(kind="principled",base_rgb=[.022,.075,.025],reflectance=.06,roughness=.42,note="ASSUMED leathery dark-green loquat"),
+    "g6-shrub-wood": dict(kind="principled",base_rgb=[.055,.035,.014],reflectance=.035,roughness=.95,note="ASSUMED shaded shrub twigs"),
+    "g6-leaf-vein": dict(kind="principled",base_rgb=[.085,.15,.05],reflectance=.12,roughness=.6,note="ASSUMED raised pinnate loquat veins"),
+    "g6-wire-tie": dict(kind="principled",base_rgb=[.12,.14,.10],reflectance=.12,roughness=.85,note="ASSUMED training tie, capacity UNVERIFIED"),
+    "g6-outdoor-timber": dict(kind="principled",base_rgb=[.30,.17,.075],reflectance=.21,roughness=.55,note="ASSUMED teak-tone original procedural outdoor lounge stand-in"),
+    "g6-lavender-flower": dict(kind="principled",base_rgb=[.34,.13,.52],reflectance=.23,
+                               roughness=.8,note="ASSUMED Petrea/Mona lavender flower appearance; no measured optical claim"),
+    "g6-white-flower": dict(kind="principled",base_rgb=[.80,.78,.70],reflectance=.78,
+                            roughness=.8,note="ASSUMED creamy star jasmine flower appearance"),
+    "g6-bowl-glaze": dict(kind="principled",base_rgb=[.23,.28,.23],reflectance=.24,
+                          roughness=.25,note="ASSUMED grey-green glazed ceramic bowl; client single-bowl exception; supplier UNVERIFIED"),
+    "g6-outdoor-cushion": dict(kind="principled",base_rgb=[.62,.58,.50],reflectance=.55,
+                               roughness=.95,note="ASSUMED sand outdoor cushion appearance; weather performance and product UNVERIFIED"),
+    "shade-variegation": dict(kind="principled",base_rgb=[.55,.64,.39],reflectance=.5,roughness=.75,
+                              note="ASSUMED cream variegation on spider-plant leaves"),
+    "grape-ivy-leaf": dict(kind="principled",base_rgb=[.045,.16,.055],reflectance=.11,roughness=.68,
+                           note="ASSUMED young Cissus alata trifoliate foliage; no bloom claim"),
+    "star-jasmine-flower": dict(kind="principled",base_rgb=[0.80,0.78,0.70],reflectance=0.78,
+                               roughness=0.80,note="ASSUMED young star jasmine white flowers"),
+    "star-jasmine-leaf": dict(kind="principled",base_rgb=[0.035,0.15,0.045],reflectance=0.10,
+                             roughness=0.65,note="ASSUMED young star jasmine foliage"),
     "garden-pebbles": dict(kind="principled", asset="floor_pebbles_01", base_rgb=[0.48, 0.46, 0.41],
                            reflectance=0.36, roughness=0.9, tile_m=1.5, note="ASSUMED pebble path joints, CC0 scan"),
     "garden-sandstone": dict(kind="principled", asset="sandstone_cracks", base_rgb=[0.60, 0.52, 0.40],
@@ -210,6 +252,8 @@ M = {
                                       "0.266 m"),
 }
 M["oak-grain-x"] = dict(M["oak"], grain_axis="x", note="ASSUMED light oak veneer, grain along horizontal bed frame")
+from . import garden_g4d
+M.update(garden_g4d.materials())
 M["walnut-grain-x"] = dict(M["walnut"], grain_axis="x", note="ASSUMED walnut veneer, grain along horizontal tops and shelves")
 # Client (2026-09-28): tread wood and the ensuite vanity front read as long smeared streaks, "annoyingly fake".
 # Confirmed by archpipe.blender.grain.mapping_rotated_span (pure-Python, tests/test_render_standard.py): plain
@@ -542,6 +586,11 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             n = _normal(pts)
             room = _room_at(lay, cx + 0.06 * n[0], cy + 0.06 * n[1], cz)
             mat = FINISH[room][1] if room in FINISH else "paint-exterior-grey-green"
+        # Ground finishes are only eligible on upward/side surfaces. Apply
+        # this after semantic classification so context steps cannot bypass it.
+        from .garden_render_review import GROUND_ONLY
+        if mat in GROUND_ONLY and _normal(pts)[2] < -.7:
+            mat = "ceiling-white"
         # Apply the authored plaster layer to the occupied party-wall face.
         # Structural shell and treads retain their common CAD datum. Keep this
         # small package separate in the export so its finish is measurable.
@@ -1772,19 +1821,21 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                 fill_defaults(v, {"hide_meshes": hidden})
 
     from . import villa_landscape as LAND
-    land_meshes, land_props, land_notes, _ = LAND.build(sp, lay)
+    from .garden_sun import SunStudy, active_study, DATES, audit_plants
+    from ..orientation import record as orientation_record
+    sun_study = SunStudy(dict(meshes=meshes, materials=mats))
+    sun_token = active_study.set(sun_study)
+    try:
+        land_meshes, land_props, land_notes, land_plan = LAND.build(sp, lay)
+    finally:
+        active_study.reset(sun_token)
+    LAND.reveal_ground_soil(meshes,land_meshes)
     meshes.extend(land_meshes)
     notes.extend(land_notes)
 
     # ---- lights and fixture bodies
     products = VL.products()
     lights = []
-    ies_dir = OUT / "ies"
-    for k in VL.KINDS:
-        if k not in products and VL.KINDS[k]["mount"] in ("recessed", "task-lamp"):
-            p = ies_dir / "generic" / (k + ".ies")
-            p.parent.mkdir(parents=True, exist_ok=True)
-            p.write_text(VL.generic_ies(VL.KINDS[k]["lm"], VL.KINDS[k]["beam"], k), encoding="utf-8")
     walls_by_level = {lv: F._walls(RS.build(lay), lv) for lv in ("B", "GF")}
     for f in VL.design(lay):
         k = VL.KINDS[f.kind]
@@ -2024,7 +2075,14 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                  "washer positions use AAK3EW as a stated substitute; strips, pendants, sconces and markers are "
                  "GENERIC (named in each caption).")
 
-    scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": 20.0},
+    scene = {"schema": "villa-render/1", "id": "D1", "north": {"model_y_bearing_deg": orientation_record()["true_north"]["model_y_bearing_deg"]},
+             "garden_g6": land_plan["g6"],
+             "garden_zones": {**land_plan["beds"], **land_plan["accent_beds"], **land_plan["paths"]},
+             "garden_sun_evidence": {"geometry_sha256": sun_study.geometry_sha256, "dates": list(DATES), "step_hours": 1, "timezone": "UTC+02:00", "plants": land_plan["plant_light_review"]},
+             "garden_camera_domain": {
+                 "yard_polygon_m": LAND.YARD, "ground_m": LAND.GROUND, "upper_datum_m": 0.0,
+                 "rooms": {name: {"rect_m": room["rect"], "ground_m": LZ[room["level"]], "height_m": 2.8}
+                           for name, room in lay["rooms"].items()}},
              "mounting_hosts": {hid: asdict(host) for hid, host in stair_hosts.items()},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes,
              "diagnostic_meshes": diagnostic_meshes, "lights": lights,
@@ -2053,6 +2111,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     migrate_ceiling(scene, lay)
     from .mounting_resume import APPROVALS
     apply_approvals(scene, APPROVALS.with_name('c4-d-lead-approvals.json'))
+    from . import garden_g6
+    garden_g6.mount(scene, lay)
     from .support_mounting import migrate as migrate_support
     migrate_support(scene, lay)
     from .exterior_mounting import apply_lead_review
@@ -2068,6 +2128,28 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
     from .finish_layers import build as build_finish_layers
     build_finish_layers(scene, {room:F.clear_rect(lay,room) for room in lay["rooms"]})
+    from . import garden_swing
+    garden_swing.mount(scene, lay)
+    garden_g4d.integrate(scene)
+    g4d_failures=garden_g4d.scene_findings(scene)
+    if g4d_failures:raise ValueError('G4d garden records: '+ '; '.join(g4d_failures))
+    swing_failures=garden_swing.scene_findings(scene)
+    if swing_failures:
+        raise ValueError('hanging swing: '+str(swing_failures))
+    from .garden_render_review import subject_visibility_findings, subject_frame_findings
+    visibility_failures=[f for view in scene['views'] for f in subject_visibility_findings(view,scene)+subject_frame_findings(view,scene)]
+    if visibility_failures:
+        raise ValueError('garden subject visibility: '+str(visibility_failures))
+    final_sun_study=SunStudy(scene)
+    scene["garden_sun_evidence"]["geometry_sha256"]=final_sun_study.geometry_sha256
+    scene["garden_sun_evidence"]["plants"]=audit_plants(list({p["id"]:p for p in land_plan["plants"]+[m for m in land_meshes if m.get("part_kind")=="climber"]}.values()),final_sun_study)
+    scene['garden_g6']['sun_evidence']=garden_g6.wall_sun_evidence(final_sun_study)
+    g6_failures=garden_g6.scene_findings(scene)
+    if g6_failures:raise ValueError('G6 physical garden: '+str(g6_failures))
+    from ..orientation_guard import scene_findings as orientation_findings
+    naming_failures=orientation_findings(scene)
+    if naming_failures:
+        raise ValueError("garden orientation: "+str(naming_failures))
     return scene
 
 
@@ -2523,6 +2605,7 @@ def _VIEWS(lay=None, resolve=True):
       room="kitchen", **BASEMENT_DAY)
     v("v02-garden-living", "Garden living", "day", I, I, 24, ["living-sofa", "library-daybed"], room="living",
       **BASEMENT_DAY)
+    V[-1]["caption_notes"] = ['South garden through the living openings: timber pergola with Petrea and star jasmine, planted sculptural Pittosporum/Mona Lavender bowl and family bench and two lounge chairs; boundary loquat espalier and dense ground beds. Young frangipani remains in the lawn, offset from centre for a clear door route. The interior camera prioritises the library; lower sofa parts are out of frame. Exterior features are partly screened through the left opening.']
     v("v03-street-lounge", "Street lounge", "day", I, I, 24, ["lounge-sofa", "lounge-tv"], room="lounge",
       **BASEMENT_DAY)
     v("v04-study-deck", "GF study: desks at the windows", "day", I, I, 24, ["study-desk", "study-adult-desk"],
@@ -2530,14 +2613,23 @@ def _VIEWS(lay=None, resolve=True):
     v("v05-parents-bedroom", "Parents' bedroom", "evening", I, I, 24, ["pb-bed"], room="parents-bed",
       dimmers={"ambient": 0.3, "accent": 0.4, "task": 0.5})
     v("v06-kids-room", "Kids' room A", "day", I, I, 24, ["ka-bunk", "ka-desk-1"], room="kids-a")
-    v("v07-terrace-dusk", "Garden and terrace at dusk", "exterior-dusk", [28.2, -21.2, B + 1.35], [21.0, -26.4, B + 1.35],
-      24, ["landscape-sofa", "living-sofa"], shift_y=0.10, layers=["ambient", "task", "accent", "decorative"],
+    v("v07-terrace-dusk", "South garden pergola and retained frangipani at dusk", "exterior-dusk", [28.1, -20.81, B + 1.35], [25.6363, -25.1509, B + 1.35],
+      24, ["landscape-tree-south", "living-sofa"], shift_y=0.073, layers=["ambient", "task", "accent", "decorative"],
       dimmers={"ambient": 0.5, "task": 0.4})
+    V[-1]["caption_notes"] = ['South garden at dusk: timber pergola with Petrea and star jasmine, planted bowl, outdoor two-seat bench and two lounge chairs, loquat espalier and dense low beds; artificial lawn and stepping routes retained. Young frangipani remains offset from centre for a clear door route; it screens much of the new roof and bowl.']
+    V[-1]['caption_notes'].append('Specified dusk sky produces a faithful cool cast; the saved whole-set exposure clips part of that sky. Neither white balance nor exposure is compensated for this view.')
+    V[-1]['presentation_retired'] = True
+    V[-1]['presentation_decision'] = ('Lead decision 2026-10-07: retire from review/final presentation. '
+        'Highlight clipping 4.456%; 89.87% of sampled clipped rays miss all geometry (specified dusk sky). '
+        'Best cameras retain 3.9-4.1% clipping with frangipani framed, above the unchanged 3% limit; '
+        'the dusk cool cast is faithful. Keep QA, exposure and sky unchanged. '
+        'South garden presentation: v19, v40 and v41-south-garden-terrace.')
     v("v08-cinema", "Cinema: seating and screen", "evening", I, I, 24, ["cinema-sofa", "cinema-tv"], room="cinema")
     v("v09-dining-evening", "Dining and island at night", "evening", I, I, 24, ["dining-table", "k-island"],
       room="dining", dimmers={"ambient": 0.35, "task": 0.5})
     v("v10-living-evening", "Garden living at night: cove and library", "evening", I, I, 24,
       ["library-daybed", "living-sofa"], room="living", dimmers={"ambient": 0.25, "task": 0.5})
+    V[-1]["caption_notes"] = ['South garden beyond the living openings at night: pergola climbers, planted Pittosporum/Mona Lavender bowl with a bench and two lounge chairs, loquat espalier and dense boundary foliage. Young frangipani remains offset from centre for a clear door route. The interior camera prioritises the cove and library; lower sofa parts are out of frame. Garden features are partly screened through the left opening.']
     # the definition now states what has always been rendered (and was approved): 24 mm, level, shift 0.12 -- the
     # authored 14 mm / 0.30 / tilted target were silently overridden by the camera pass until 2026-09-29
     v("v11-stair-void", "The stair up to the globe cluster in the void", "evening", [10.45, -27.95, B + 1.35],
@@ -2563,8 +2655,11 @@ def _VIEWS(lay=None, resolve=True):
     # front yard only the ramp enclosure): deferred; the study's other side instead
     v("v18-study-evening", "Study at night: sofa and TV from the desks", "evening", I, I, 24,
       ["study-sofa", "study-tv"], room="study-game", final_only=True, dimmers={"ambient": 0.4, "task": 0.6})
-    v("v19-garden-facade", "Garden elevation by day", "day", [28.2, -31.0, B + 1.35], [20.0, -24.0, B + 1.35], 24,
-      ["living-sofa"], final_only=True, shift_y=0.12, exposure="exterior-day")
+    v("v19-garden-facade", "South Garden pergola, lawn and retained frangipani by day", "day", [28.30, -20.95, B + 1.35], [25.724809625449726, -25.23583650351056, B + 1.35], 24,
+      ["landscape-tree-south", "living-sofa"], final_only=True, shift_y=0.07452903963658022, exposure="exterior-day")
+    V[-1]["caption_notes"] = ['South Garden facade, timber pergola, planted bowl and lounge chairs, loquat espalier and dense low boundary beds; lawn and stepping approach retained. Young frangipani stays offset from centre for a clear door route. The retained tree screens much of the new roof and bowl. The living-room sofa is partly screened through glazing and planting.']
+    V[-1]['require_full_subject_frame']=True
+    V[-1]['caption_notes'].append('Camera aim rotated two degrees toward the open garden: the far-right upper-floor panes previously sampled mostly blank ceiling/interior wall and facade at grazing angle. They are now an incidental edge, while the actual frangipani and living sofa stay wholly framed.')
     v("v20-kitchen-run", "Kitchen run and island at night", "evening", I, I, 24, ["k-run", "k-island"],
       room="kitchen", final_only=True, dimmers={"ambient": 0.4, "task": 0.8})
     v("v21-lounge-evening", "Street lounge at night", "evening", I, I, 24, ["lounge-sofa", "lounge-tv"],
@@ -2581,26 +2676,65 @@ def _VIEWS(lay=None, resolve=True):
     # Client additions, 2026-09-29. Garden overlooks and views through several rooms have explicit standing points;
     # the single-room views below are placed by intent using render_views.choose.
     v("v25-top-garden-gate", "Top garden from the street gate", "day", [4.4, -21.7, G + 1.35],
-      [12.4, -22.0, G + 1.35], 24, ["landscape-top-planter-deck", "landscape-top-planter-roof"],
+      [12.4, -22.0, G + 1.35], 24, ["landscape-top-bench", "landscape-top-trough", "landscape-top-deck-east", "landscape-top-roof"],
       final_only=True, exposure="exterior-day")
-    # v26 re-placed (round 4): the old camera at (14.5, -22.0) stood inside the potted olive's canopy world box
-    # (villa_landscape.prop_world_box, roughly x 12.96-15.24, y -23.33 to -20.87 at the olive's 2.0 m height --
-    # the whole roof, so no roof standing point clears it). Moved to the deck edge, at the deck/roof rail corner,
-    # >= 1.0 m clear of the olive, the relocated bench and every other top-garden prop (checked by
-    # scripts/villa_render_views.py's camera-proximity guard).
-    v("v26-top-garden-north", "Top garden over the north garden", "day", [9.0, -20.80, G + 1.35],
-      [19.0, -21.0, G + 1.35], 24, ["landscape-bed-north", "landscape-lemon-pot"],
-      shift_y=-0.22, final_only=True, exposure="exterior-day")
-    v("v27-north-garden-above", "North garden from the study deck", "day", [8.7, -22.3, G + 1.35],
-      [19.0, -21.8, G + 1.35], 24, ["landscape-bed-north", "landscape-lemon-pot"],
-      shift_y=-0.18, final_only=True, exposure="exterior-day")
-    # v28 re-placed (round 4): the old camera at (16.1, -21.0) let the lemon pot occupy 41.5 degrees of a
-    # 74-degree frame. A westward standing point in the sunken strip holds the garden doors, bed and trellis
-    # along one sightline with the lemon pot no longer filling the foreground.
-    v("v28-north-garden-below", "North garden at basement level", "day", [14.2, -22.5, B + 1.35],
-      [25.0, -22.3, B + 1.35], 24, ["landscape-bed-north", "landscape-trellis-north"],
-      final_only=True, exposure="exterior-day")
-    V[-1]["caption_notes"] = ["North garden at basement level: view along the planted strip toward its trellis and doors."]
+    V[-1]["caption_notes"] = ["Top benches on slabs, low steel troughs with rosemary/aloe drifts and central artificial turf; paved study-to-gate approach. trough colour: dark bronze, pending client confirmation. No potted shade tree: no verified top species fits."]
+    # G3 view looks along the fixed top-garden planting from the ramp approach.
+    v("v26-top-garden-east", "Top garden east troughs and benches", "day", [6.95, -23.20, G + 1.35],
+      [13.4, -21.8, G + 1.35], 24, ["landscape-top-bench", "landscape-top-trough", "landscape-top-deck-east", "landscape-top-roof"],
+      shift_y=-0.10, final_only=True, exposure="exterior-day")
+    V[-1]["caption_notes"] = ["Top benches and slim east/west steel troughs planted in rosemary/aloe drifts. trough colour: dark bronze, pending client confirmation; authored appearance ASSUMED. Waterproofing, nursery roots, Egyptian-sun weathering and loaded weight UNVERIFIED."]
+    # Legacy identifier retained; this is now a level whole-court view.
+    # Declare all former planting subjects plus the omitted garden context.
+    v("v27-east-yard-above", "East court: beds, jasmine trellis and stepping route from the dirty kitchen", "day", [15.2, -22.5, B + 1.35],
+      [20.063115159606923, -21.33805725424988, B + 1.35], 24,
+      ["landscape-east-back", "landscape-east-mid", "landscape-east-front",
+       "landscape-bed-east", "landscape-trellis-east", "landscape-climber-east", "landscape-stone-living-east"],
+      shift_y=-0.1199636541821582, final_only=True, exposure="exterior-day")
+    V[-1]['require_full_subject_frame']=True
+    V[-1]['standing_room']='dirty-kitchen'
+    V[-1]['visibility_targets']=["landscape-east-back-01","landscape-east-mid-01","landscape-east-front-01"]
+    V[-1]['caption_notes']=["Level east-court view from the dirty kitchen, 24 mm and 1.35 m eye above its floor. The legacy above-view identifier is retained only for delivery continuity. Part-shade planting, complete star-jasmine trellis and living stepping approach form one court; the foreground dining approach is secondary and may be cropped by the frame. The closer window standing point clears the kitchen counter and retains the original three required planting sightlines. Young authored planting ASSUMED; nursery, roots, drainage and photographic likeness UNVERIFIED. All original planting groups remain framing subjects. Open-court candidates that framed this context came within 1 m of fixed door planting; supported roof alternatives met crop, foliage-proximity or foreground-frame constraints. No design content moved."]
+    # G2f: translate the standing point within the original kitchen-side space
+    # so its foreground glazing mullion stays outside the image's middle third.
+    v("v28-east-yard-below", "East yard at basement level", "day", [14.2, -21.6, B + 1.35],
+      [19.0, -21.8, B + 1.35], 24, ["landscape-bed-east", "landscape-trellis-east"],
+      shift_y=-.065, final_only=True, exposure="exterior-day")
+    V[-1]["standing_room"] = "dirty-kitchen"
+    V[-1]["caption_notes"] = ["East yard at basement level, from the dirty kitchen: part-shade three-layer Pittosporum/Fatsia/Aspidistra/Mona Lavender bed, star jasmine on an open timber trellis and retained terracotta-red glazed door pots."]
+    v("v36-north-garden", "North garden — shade planting from open sky", "day",
+      [1.75, -26.20, B + 1.35], [.55, -27.70, B + 1.35], 24,
+      ["landscape-north-back-00", "landscape-north-mid-00", "landscape-north-front-00", "landscape-north-edge-00"],
+      shift_y=-.31, final_only=True, exposure="exterior-day")
+    V[-1]["caption_notes"] = ["North garden: open-sky standing camera, showing the left Fatsia/Aspidistra/spider-plant/mondo grouping in ground-level soil. Presentation companions v37, v39 and the G4d evening view show the accent planting and hanging retreat. Bistro and lounge pots removed per client 2026-10-06. Hanging retreat under the GF balcony shown in companion v39: client decision 2026-10-06; structural check pending. Authored botanical appearances ASSUMED; Egypt nursery performance UNVERIFIED."]
+    v("v37-north-garden-lounge", "North garden — grape ivy and foliage accent through the lounge", "day",
+      [4.00, -27.40, B + 1.35], [.4781496760738273, -24.3252447282807, B + 1.35], 24,
+      ["landscape-trellis-north", "landscape-climber-north", "landscape-north-rhapis-accent", "landscape-north-feature-stone", "landscape-north-back-02"],
+      shift_y=-.14415908053594262, final_only=True, exposure="exterior-day")
+    V[-1]["standing_room"] = "lounge"
+    V[-1]["visibility_targets"] = ["landscape-north-feature-stone", "landscape-north-rhapis-accent", "landscape-north-back-02"]
+    V[-1]["visibility_basis"] = "ASSUMED majority of 13 actual target rays must first hit each named feature; partial foreground foliage is allowed; independent preview required"
+    V[-1]["caption_notes"] = ["North garden from the lounge: open timber trellis with young Cissus alata, one Rhapis clump and an ASSUMED natural feature stone; Fatsia beside the hanging retreat. Thin training leaves the frame partly visible; target coverage about 35%. Climber light applicability PARTIAL; winter-night and Egypt performance UNVERIFIED. Bistro and raised containers removed per client 2026-10-06. Companion v36 shows the layered floor bed; v39 and the G4d evening view show the hanging retreat."]
+    v("v38-north-garden-floor-bed", "North garden — floor-bed extent through the lounge", "day",
+      [4.10, -25.00, B + 1.35], [1.60, -27.70, B + 1.35], 24,
+      ["landscape-bed-north", "landscape-north-back-00", "landscape-north-back-01", "landscape-north-mid-00", "landscape-north-mid-01", "landscape-north-front", "landscape-north-edge"],
+      shift_y=-.18, final_only=True, exposure="exterior-day")
+    V[-1]["standing_room"] = "lounge"
+    V[-1]["caption_notes"] = ["North garden through the lounge: overall main ground-level bed extent and retained shade drifts; the third Fatsia and Aspidistra now frame the hanging retreat in the accent and rear beds; its near corner is partly screened by the existing lounge window frame. Slim edging, visible soil and mineral gravel paths; no raised containers or bistro. Companion v36 stands in open sky and v37 shows the grape-ivy trellis, Rhapis accent and feature stone. Authored young/pruned forms ASSUMED; nursery, winter, roots and slab drainage UNVERIFIED."]
+    V[-1]['presentation_retired'] = True
+    V[-1]['presentation_decision'] = ('Lead decision 2026-10-07: retire from review/final presentation. '
+        'After G4d, midtone median 0.21 is below 0.30 at the set-locked daylight exposure; '
+        'lower-ground framing worsens it to 0.19. The deep-shade court is faithful. '
+        'North garden presentation: v36, v37, v39 and the G4d evening view. Exposure stays unchanged.')
+    # These three just-declared views share the same evidence scope, whatever
+    # their identifiers or individual descriptions. This is no likeness claim.
+    for north_view in V[-3:]:
+        north_view["caption_notes"].append("Authored botanical appearances ASSUMED; photographic likeness, procurement and Egypt nursery performance UNVERIFIED.")
+    v("v39-north-garden-hanging-retreat", "North garden — balcony hanging retreat", "day",
+      [1.75, -26.20, B + 1.35], [2.40, -24.77, B + 1.35], 24,
+      ["landscape-north-swing-basket", "landscape-north-swing-cushions"],
+      shift_y=-.27, final_only=True, exposure="exterior-day")
+    V[-1]["caption_notes"] = ["North garden: procedural egg basket without stand, suspended by rope from the actual GF balcony soffit. Client decision 2026-10-06; structural check pending. Plate and upper rope extend above this level-eye basket view; isolated preview records the complete suspension. Seat faces into the Fatsia/Rhapis/stone/grape-ivy planting; Aspidistra behind. Chair appearance ASSUMED look-alike-proxy, no manufacturer identity. Balcony dynamic-load capacity and anchor specification UNVERIFIED (structural engineer); chair rated load UNVERIFIED (manufacturer). Authored botanical appearances ASSUMED; photographic likeness, procurement and Egypt nursery performance UNVERIFIED."]
     # v29: RV.choose in stair-b put the camera at x=9.577 and the stair treads blocked both storage modules
     # despite their plan footprints falling inside the lens wedge. Stand northwest of the stair flight in the
     # lounge and aim at the joinery fronts; 16 mm holds both separate modules from this clear point.
@@ -2636,6 +2770,37 @@ def _VIEWS(lay=None, resolve=True):
       [20.3, -28.5, B + 1.35], 24, ["living-sofa", "library-daybed"], final_only=True, **BASEMENT_DAY)
     v("v34-basement-south-north", "Basement open space, south to north", "day", [17.8, -28.9, B + 1.35],
       [19.85, -27.2, B + 1.35], 24, ["living-sofa"], final_only=True, **BASEMENT_DAY)
+    v("v40-south-garden-espalier", "South garden: sunny-wall loquat espalier", "day",
+      [22.0,-21.8,B+1.35], [25.70004389144623,-20.829635934571048,B+1.35], 24,
+      ["landscape-g6-loquat-plant"], shift_y=.0011362253635164576,
+      final_only=True, exposure="exterior-day")
+    V[-1]["visibility_targets"]=["landscape-g6-loquat-plant"]
+    V[-1]["require_full_subject_frame"]=True
+    V[-1]["caption_camera_garden"]=True
+    V[-1]["caption_notes"]=["South garden loquat espalier on the east boundary, seen from the east-yard approach. The complete densely veined real plant is framed at 24 mm in an oblique detail; wall wires and low soil bed remain physical. This fulfils the loquat part of the G6b view split. Companion v41-south-garden-terrace presents both climbers, the centrepiece and seating, with natural lower rear-chair screening disclosed."]
+    v('v41-south-garden-terrace', 'South garden terrace: pergola, climbers, centrepiece and seating', 'day',
+      [22.8, -21.6, B + 1.35], [25.570816153166287, -25.76204010616822, B + 1.35], 24,
+      ['landscape-g6-pergola', 'landscape-g6-petrea-roof', 'landscape-g6-jasmine-roof',
+       'landscape-g6-centrepiece', 'landscape-g6-seating'],
+      shift_y=0.025046575578505634, final_only=True, exposure='exterior-day')
+    V[-1]['require_full_subject_frame'] = True
+    V[-1]['caption_camera_garden'] = True
+    V[-1]['visibility_targets'] = ['landscape-g6-centrepiece-dome', 'landscape-g6-seating-bench',
+        'landscape-g6-seating-chair-0', 'landscape-g6-seating-chair-1',
+        'landscape-g6-petrea-roof', 'landscape-g6-jasmine-roof']
+    V[-1]['visibility_allowances'] = {'landscape-g6-seating-chair-1': {
+        'view_id': 'v41-south-garden-terrace', 'minimum_visible_rays': 6, 'samples': 13,
+        'reason': 'rear chair lower parts naturally screened by the centrepiece bowl and planting; seat and back visible; minimum visible feature rays 6 of 13 for this subject only (lead decision 2026-10-07)'}}
+    V[-1]['presentation_decision'] = ('Lead decision 2026-10-07: integrate the independently reviewed final candidate; '
+        'turned 20 degrees away from the house, right wall band approximately 3%. '
+        'Approved caption and natural rear-chair screening; all other subjects retain 7 of 13 rays.')
+    V[-1]['caption_notes'] = ['South terrace from the open east-yard approach: timber pergola with Petrea and star jasmine, planted centrepiece, bench and two lounge chairs. Bench and lower rear-chair parts are naturally screened by the centrepiece. The retained frangipani canopy is incidental; the house is a thin right edge. Authored botanical/furniture appearances and pergola dimensions are assumed; structure, roots and procurement remain unverified.']
+    # Botanical appearance/procurement scope is shared by every G6 caption.
+    for garden_view in V:
+        if garden_view["id"].startswith(("v02-", "v07-", "v10-", "v19-", "v27-", "v28-", "v40-")):
+            garden_view.setdefault("caption_notes", []).append(
+                "Client/lead decisions 2026-10-06. Procedural botanical and furniture appearances ASSUMED look-alike proxies; photographic likeness, procurement and Egypt nursery performance UNVERIFIED. Bowl is the client-approved no-pots exception. Pergola dimensions and climber cover ASSUMED; structural footings, both beam cantilevers, roots and drainage UNVERIFIED.")
+    V.append(garden_g4d.evening_view())
     if not resolve:
         return V
     # The old shared BASEMENT_DAY dictionary made v29's full accent setting leak into six other views, whose
@@ -2653,8 +2818,8 @@ def _VIEWS(lay=None, resolve=True):
                    if any(abs(pr["position"][2] - z_) < 0.02 for z_ in LZ.values())]
     for x in V:
         c = x["camera"]
-        if x["state"] == "exterior-dusk" or x["id"] in ("v18-street-facade", "v19-garden-facade") or \
-                x["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v33-", "v34-")):
+        if x["state"] == "exterior-dusk" or x["id"] in ("v18-street-facade", "v19-garden-facade", "v41-south-garden-terrace") or \
+                x["id"].startswith(("v25-", "v26-", "v27-", "v28-", "v33-", "v34-", "v36-", "v37-", "v38-")):
             continue
         room = x.get("room")
         lvz = LZ[lay["rooms"][room]["level"]] if room else (LZ["B"] if c["position"][2] < -0.1 else LZ["GF"])
@@ -2740,7 +2905,8 @@ def source_provenance(root=None):
     root = Path(root or ROOT).resolve()
     inputs = sorted((root / "src/archpipe").rglob("*.py"))
     inputs += [root / name for name in (
-        "ops/workstation/library-manifest.json", "out/villa/round3/plant-palette.json",
+        "ops/workstation/library-manifest.json", "knowledge/garden-palette.json", "knowledge/site-orientation.json",
+        "knowledge/c4-final-approvals.json",
         "spec/villa-site.yaml", "knowledge/library.json",
         "knowledge/projects/villa-01/brief-requirements.json",
         "knowledge/projects/villa-01/taste.json")]
@@ -2770,6 +2936,18 @@ def write(path=None, views=None):
     scene["provenance"] = after
     path = Path(path or OUT / "scene.json")
     path.parent.mkdir(parents=True, exist_ok=True)
+    # Generate generic photometry
+    # only beside this explicitly requested export, never in global OUT.
+    for light in scene["lights"]:
+        ies = light.get("ies", "")
+        if ies.startswith("generic/"):
+            kind = Path(ies).stem
+            target = path.parent / "ies" / ies
+            target.parent.mkdir(parents=True, exist_ok=True)
+            record=light.get('fixture_record')
+            flux=record['flux_lm'] if light.get('garden_g4d') else VL.KINDS[kind]['lm']
+            beam=record['beam_deg'] if light.get('garden_g4d') else VL.KINDS[kind]['beam']
+            target.write_text(VL.generic_ies(flux, beam, kind),encoding="utf-8")
     from archpipe.safe_io import save_bytes
     save_bytes(path, json.dumps(scene).encode("utf-8"))
     return path, scene

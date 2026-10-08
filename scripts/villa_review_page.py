@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from archpipe.concept import villa_brief as B                       # noqa: E402
 from archpipe.concept import villa_lighting as VL                   # noqa: E402
+from archpipe.villa_render_contract import presentation_view_ids    # noqa: E402
 
 R = ROOT / "out" / "villa" / "render-d1"
 OUT = R / "review"
@@ -75,7 +76,10 @@ def main():
     scene = json.loads((R / "scene.json").read_text(encoding="utf-8"))
     (OUT / "renders").mkdir(parents=True, exist_ok=True)
     plates = []
+    presented = set(presentation_view_ids({v["id"]: v for v in scene["views"]}))
     for v in scene["views"]:
+        if v["id"] not in presented:
+            continue
         png = R / (v["id"] + ".png")
         rep = json.loads((R / (v["id"] + ".json")).read_text(encoding="utf-8"))
         qa = json.loads((R / (v["id"] + ".qa.json")).read_text(encoding="utf-8"))

@@ -1,0 +1,306 @@
+{
+  "schema": "asset-framing-proof/1",
+  "generator_command": "PYTHONPATH=src python scripts/generate_asset_framing_proof.py --library-root /home/omar/archpipe/assets/library",
+  "assets": {
+    "sf_frangipani": {
+      "source_sha256": "03d79d7028bf53cd330f1f5f3d55c592004db1a6714392f801a0dd853ee14d1a",
+      "buffer_sha256": {
+        "scene.bin": "20b0305d3f6ed8f2897fb7b3464d51579a122619a8e30a40e6e3a64c30cbbab7"
+      },
+      "full_vertex_count": 53342,
+      "prop": {
+        "id": "proof-asset",
+        "asset": "sf_frangipani",
+        "position": [
+          -0.7364487423141166,
+          -0.4694838257980276,
+          0
+        ],
+        "scale": 1.44,
+        "rotation_deg": [
+          0,
+          0,
+          23
+        ]
+      },
+      "cases": {
+        "in-frame": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.9933015251159667
+              ],
+              "target": [
+                0,
+                0,
+                1.9933015251159667
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24
+            }
+          },
+          "all_vertex_result": []
+        },
+        "clipped-top": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.9933015251159667
+              ],
+              "target": [
+                0,
+                0,
+                1.9933015251159667
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24,
+              "shift_y": -0.1769197008791867
+            }
+          },
+          "all_vertex_result": [
+            "top edge"
+          ]
+        },
+        "clipped-bottom": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.9933015251159667
+              ],
+              "target": [
+                0,
+                0,
+                1.9933015251159667
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24,
+              "shift_y": 0.172073908238521
+            }
+          },
+          "all_vertex_result": [
+            "bottom edge"
+          ]
+        },
+        "clipped-horizontal": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.9933015251159667
+              ],
+              "target": [
+                0,
+                0,
+                1.9933015251159667
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24,
+              "shift_x": 2
+            }
+          },
+          "all_vertex_result": [
+            "horizontal edge"
+          ]
+        },
+        "behind-camera": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.9933015251159667
+              ],
+              "target": [
+                0,
+                -20,
+                1.9933015251159667
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24
+            }
+          },
+          "all_vertex_result": [
+            "behind camera"
+          ]
+        }
+      }
+    },
+    "sf_egg_chair": {
+      "source_sha256": "5bd67cbed74b27af56595c93666086658de86c6feb30f13e500a2967ec2cb0f2",
+      "buffer_sha256": {
+        "scene.bin": "d6d513f05b3581fe563eda52793d8b339fa6a767d07d94054901a7dfbd8c5c3d"
+      },
+      "full_vertex_count": 33677,
+      "prop": {
+        "id": "proof-asset",
+        "asset": "sf_egg_chair",
+        "position": [
+          0.6072933738070884,
+          -4.257321007232987,
+          0
+        ],
+        "scale": 1.05,
+        "rotation_deg": [
+          0,
+          0,
+          23
+        ]
+      },
+      "cases": {
+        "in-frame": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.0419121541432106
+              ],
+              "target": [
+                0,
+                0,
+                1.0419121541432106
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24
+            }
+          },
+          "all_vertex_result": []
+        },
+        "clipped-top": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.0419121541432106
+              ],
+              "target": [
+                0,
+                0,
+                1.0419121541432106
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24,
+              "shift_y": -0.24289643917219506
+            }
+          },
+          "all_vertex_result": [
+            "top edge"
+          ]
+        },
+        "clipped-bottom": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.0419121541432106
+              ],
+              "target": [
+                0,
+                0,
+                1.0419121541432106
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24,
+              "shift_y": 0.24024087674342273
+            }
+          },
+          "all_vertex_result": [
+            "bottom edge"
+          ]
+        },
+        "clipped-horizontal": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.0419121541432106
+              ],
+              "target": [
+                0,
+                0,
+                1.0419121541432106
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24,
+              "shift_x": 2
+            }
+          },
+          "all_vertex_result": [
+            "horizontal edge"
+          ]
+        },
+        "behind-camera": {
+          "view": {
+            "resolution": [
+              1600,
+              1000
+            ],
+            "camera": {
+              "position": [
+                0,
+                -10,
+                1.0419121541432106
+              ],
+              "target": [
+                0,
+                -20,
+                1.0419121541432106
+              ],
+              "sensor_mm": 36,
+              "lens_mm": 24
+            }
+          },
+          "all_vertex_result": [
+            "behind camera"
+          ]
+        }
+      }
+    }
+  }
+}

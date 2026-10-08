@@ -1,0 +1,68 @@
+{
+  "id": "landscape-tree-east",
+  "asset": "sf_frangipani",
+  "position": [
+    25.58094171675479,
+    -25.132095719532664,
+    -3.0
+  ],
+  "rotation_deg": [
+    0,
+    0,
+    0
+  ],
+  "scale": 1.1838603916174273,
+  "zone": "lower",
+  "label": "dressing: Plumeria rubra; care: https://plantfinder.mobot.org/PlantFinderDetails.aspx?kempercode=d451 (knowledge/garden-palette.json); Realistic HD Frangipani tree (13/50) by PlantCatalog (https://sketchfab.com/3d-models/realistic-hd-frangipani-tree-1350-6afe1892d9fb419993cdfe54721110e9), CC Attribution; dimensions per tracked evidence/ASSUMED nursery intent; ASSUMED rendered stage: young pruned tree; stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread; lead decision 2026-10-06",
+  "species": "Plumeria rubra",
+  "center": [
+    25.576999999999998,
+    -25.13333
+  ],
+  "spread_m": 4.6,
+  "bed": "east",
+  "planting_layer": "tree",
+  "asset_measurement": {
+    "native_gltf_y_up_bounds_m": {
+      "min": [
+        -1.5851744413375854,
+        -4.496876211753807e-16,
+        -2.0063219070434566
+      ],
+      "max": [
+        2.3004188537597656,
+        2.7684743404388437,
+        1.5306861400604261
+      ]
+    },
+    "uniform_scale": 1.1838603916174273,
+    "height_m": 3.2773871168547286,
+    "trunk_base_gltf_m": [
+      -0.003329545259475708,
+      0.0,
+      0.001042589545249939
+    ]
+  },
+  "overrides": [
+    {
+      "field": "scale",
+      "prior": 1.183813298484641,
+      "new": 1.1838603916174273,
+      "reason": "lead decision 2026-10-06: uniform scale holds measured maximum canopy span to verified lower spread 4.6 m"
+    },
+    {
+      "field": "position",
+      "prior": [
+        25.15366836446189,
+        -25.414840802379647,
+        -3.0
+      ],
+      "new": [
+        25.58094171675479,
+        -25.132095719532664,
+        -3.0
+      ],
+      "reason": "centre the measured trunk base in the lawn tree pit instead of centring its asymmetric canopy"
+    }
+  ]
+}

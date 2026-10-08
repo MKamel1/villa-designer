@@ -24,10 +24,73 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
    ASSUMED in the scene notes. Every surface is finished, exterior and fence
    included.
 
+For geometry relationship review, snapshot the matching existing layout,
+scene, specification and furniture in `archpipe.geometry_topology.GeometryTopology`.
+Use saved specifications for historical passage checks; regenerating today's
+openings can erase a past obstruction. Keep the existing support, passage,
+finish-layer and furnishing controls running. Window motion envelopes and
+assumed clearances remain `needs-source` until measured or sourced; a topology
+pass alone does not establish structural support capacity or client approval.
+Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.md).
+
 ## Order
 
 1. **Export the scene**: `villa_render.write()` → `scene.json`.
+   - Scene build uses tracked inputs. Walking-envelope asset triangles come
+     from `knowledge/asset-route-geometry.json.gz`, not the build machine's HOME
+     or the render library. On the render host, measure new/replaced landscape
+     assets with `PYTHONPATH=src python scripts/generate_asset_route_geometry.py
+     --library-root /path/to/library --assets <asset ids>`; this updates both
+     the compressed record and manifest source/buffer hashes. The tracked
+     `knowledge/asset-route-policy.json` records admissible scale ranges and
+     the walking-height margin. Keep exact triangles intersecting that native
+     band with original face order, winding and connectivity; never hull or
+     decimate walking triangles. Framing uses only unrounded full-height 3D
+     convex-hull vertices. The policy declares route coordinate precision:
+     frangipani stays lossless for micrometre translation; other assets admit
+     at most 1 mm scene grid steps (0.866026 mm Euclidean rounding error).
+     Do not relax collision tolerances. Keep the gzip record below 1.5 MB;
+     generation and portable verification enforce this budget. Compare
+     hull-only and all-vertex results with
+     `scripts/generate_asset_framing_proof.py --library-root /path/to/library
+     --check` for real assets. Measure bytes, before/after counts and errors. Upright uniform scales
+     are required except the recorded axiswise bench exception. Scales or
+     walking tops outside coverage fail closed; widen the policy and regenerate
+     instead of extrapolating. Review the policy, record and manifest together.
+     Missing or stale records stop build even for nonoverlapping props.
+     Run `tests.test_asset_route_geometry` and portable verification
+     with HOME pointing at an empty directory before returning the package.
    - Shell faces are classified by their real normal, not by tags.
+     Ground-only finishes cannot occur on downward faces (normal z < -0.7,
+     where z is vertical). Closed ground solids carry mineral substrate on
+     their undersides using explicit per-face slots, preserved by Blender.
+     At ground-level soil beds, retire the architectural paving cap at the
+     actual bed boundary using `villa_landscape.reveal_ground_soil`; never
+     raise soil to hide a competing finish. Contract and portable verification
+     run `garden_render_review.soil_visibility_findings` against real faces.
+     Review the bed in architectural context after its isolated preview.
+   - Procedural basal plants identify actual leaf faces and the root-soil
+     datum. `garden_render_review.plant_form_findings` measures foliage,
+     separately from stems; the authored maximum foliage gap is 0.20 m.
+     Preview the real plant form as well as checking the gap.
+     A species label, a token basal leaf or flower presence does not establish
+     likeness. Species-specific builders use measured leaf surfaces and
+     attachment geometry; dwarf mounds fill the low crown continuously,
+     hanging racemes clear timber, and lounge furniture carries separate
+     thick seat/back cushions. `garden_g6.appearance_findings` supplements
+     support and envelope checks. Preserve the rejected real geometry and
+     regenerate neutral comparisons with `garden_g6_preview.py
+     --reference-receipt` to keep the same staging, camera and scale reference.
+     Independent image review remains required after construction checks.
+     Species-specific forms also require botanical structure and physical
+     continuity: continuous palmate leaf surfaces, distinct fan nodes and
+     physical petioles joining ivy leaves to training stems. Use
+     `garden_shade.form_findings` and `climber_placement.ivy_connection_findings`
+     with the real rejected preview geometry frozen in a regression fixture.
+     These checks prove authored construction, not photographic likeness.
+     Climber coverage uses projected leaf-area union. State whether the
+     denominator is the training envelope or the whole timber-frame rectangle;
+     a percentage measured in one cannot be claimed for the other.
    - Furniture: generator pieces (`archpipe.furniture`) through
      `generator_rotation`; other types through `villa_furniture_detail`;
      boxes only where neither exists. Every vertex stays inside the checked
@@ -58,6 +121,32 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      check the failed 24 mm constraint and every successful 16 mm constraint;
      never infer the reason from a view identifier or parse caption prose. Exteriors
      and the stair keep authored, level cameras (lens shift, never tilt).
+     Exterior garden cameras stand inside the measured yard polygon
+     and outside all architectural overhead cover. Through-door/window
+     cameras declare `standing_room`, which must contain the camera on the
+     same level; these use the existing 0.15 m interior clearance. The yard
+     polygon alone does not establish open sky: report roofed strips and
+     actual overhead cover separately, using the camera's garden storey.
+     Swing motion envelopes include the
+     measured fence/wall thickness, rather than trusting the outer yard line.
+     Foreground opening frame members
+     must avoid the image's central third. Contract, plan review and portable
+     verification run the garden checks recorded in
+     `knowledge/garden-render-guards.json`.
+     Include procedural ground foliage and feature stones in lens clearance,
+     just like imported props and top-garden planting. Landscape candidates
+     also check the full physical door passage with `blocked_openings`, not
+     only the authored path strip. Street-based client garden names and
+     true-north solar bearing have separate roles; keep legacy identifiers
+     until an explicitly scoped migration.
+     Presentation retirement is explicit: record `presentation_retired` and
+     its `presentation_decision`; both review/all batches and the review page
+     exclude it while explicit diagnostic view requests remain available.
+     A lead-approved natural screening allowance must be keyed by one exact
+     subject in `visibility_allowances`, bound to its view identifier, with
+     sample count, minimum visible rays and reason. Other subjects retain
+     seven of thirteen rays; copied or invalid allowances fail closed.
+     Never lower global visibility or QA limits to accommodate a local decision.
    - Exposure is metered per view and LOCKED per state across the whole
      set: `day`, `evening`, `exterior-dusk`, `exterior-day`. Rendering a
      subset re-meters that subset, so a state's lock is only comparable when
@@ -91,7 +180,7 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
    - `tests/test_villa_lighting.py`, and the render report must carry
      `qa_scene` so every render_qa check runs (none silently skipped).
 3. **Draft**: `scripts/villa_render.py --views review --samples 256
-   --res 960x640` (`review` skips `final_only` views). Every final-only
+   --res 960x640` (`review` skips `final_only` and retired views). Every final-only
    view needs one draft of its own before the final set. `render_qa` runs
    on every view; then look at every image next to the bedroom reference,
    and let a `render_critic` pass (a cheaper model is fine) list defects,
@@ -105,7 +194,7 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
 5. **Re-measure lighting in the scene** after any fixture or furniture move
    (`--views none --measure-lighting`); a lamp base, an appliance or a hood
    on a task point shows up here and nowhere else.
-6. **Finals**: `--views all --samples 1024 --res 1920x1280`; if the driver
+6. **Finals**: `--views all --samples 1024 --res 1920x1280` (retired views excluded); if the driver
    loses the job, rerun the identical command to resume it. Then the review
    page (`scripts/villa_review_page.py`: QA flags explained per view state,
    decisions awaiting the client) and publish.
@@ -119,6 +208,11 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
   `render_views.choose` place it; never hand-tune a camera to hide a
   problem. If the subjects cannot fit, choose honest subjects and say what
   is out of frame in `caption_notes`.
+  Projecting a bed footprint inside the frame does not prove all corners
+  visible: measure camera-to-corner sightlines and disclose unavoidable
+  window-frame screening. Carry shared authored-appearance and photographic /
+  procurement limits into every related caption; scene metadata alone is
+  insufficient when a caption names a species.
 - **New finish**: stated colour + reflectance; textures supply pattern only
   (per-channel mean matching). Check the tint survives in the final image
   (the first grey-green exterior read warm grey under the sun).
@@ -142,6 +236,12 @@ asset or view:
    asset gets an isolated preview render (close-up, neutral light, a 1.8 m
    scale figure) that the lead reviews BEFORE it joins the scene. A report of
    "tests pass" without the preview image is not accepted.
+   Bind the accepted receipt to actual geometry, used materials and light
+   records; a later shield/aim/finish edit invalidates that preview. Resolve
+   runtime material slots and complete fixture identity/colour-rendering
+   metadata before rendering. Neutral staging must sit below authored ground
+   surfaces, never coincide with them. Keep close swatches alongside the
+   scale-reference view. See [G4d procedure](../../../docs/ops/garden-g4d.md).
 2. **No placeholder shapes in presentation renders.** A box, slab or flat
    colour standing in for a plant, garment, lamp or trellis is a defect even
    when labelled; if the real thing cannot be built, leave it out and say so.

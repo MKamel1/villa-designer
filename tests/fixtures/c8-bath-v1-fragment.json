@@ -1,0 +1,12 @@
+{
+  "provenance": "docs/LEARNINGS.md, Concept generator defect 1: actual 6 m2 bath, 5 m band, 1.2 m corridor edge. Relationship reconstructed in local coordinates; original absolute coordinates and full plan were not retained.",
+  "id": "historical-1.2m-bath-edge",
+  "levels": {"L00": 0},
+  "rooms": {
+    "corridor": {"level": "L00", "rect": [0, 0, 5, 3], "occupancy": "corridor"},
+    "bath": {"level": "L00", "rect": [0, 3, 1.2, 8], "occupancy": "bathroom"}
+  },
+  "links": [["corridor", "bath"]],
+  "vertical": [],
+  "entrance": "corridor"
+}

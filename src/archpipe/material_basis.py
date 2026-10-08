@@ -434,7 +434,9 @@ def material_findings(scene: dict[str, Any] | Path | str | None = None) -> list[
         # 4. Grain/texture orientation on oriented materials (l0083, l0795)
         # ---------------------------------------------------------------------
         is_wood = any(k in name.lower() for k in ("oak", "walnut", "teak", "wood", "veneer"))
-        if is_wood and kind in ("principled", "translucent"):
+        # grain_axis only rotates the box-projected photo-texture (villa_scene.add_material applies it inside
+        # the `asset` branch); a flat-colour material has no projection to orient (merge 2026-10-08, g6-shrub-wood).
+        if is_wood and spec.get("asset") and kind in ("principled", "translucent"):
             grain_axis = spec.get("grain_axis")
             if not grain_axis or str(grain_axis).lower() not in ("x", "y", "z"):
                 findings.append({

@@ -94,6 +94,21 @@ def raises(exc, fn, *a, **kw) -> bool:
     return False
 
 
+def registered_render_finishes():
+    """Read the independent literal finish register without building a test scene."""
+    import ast
+    tree=ast.parse((ROOT/'tests/test_render_standard.py').read_text(encoding='utf-8'))
+    for node in tree.body:
+        if isinstance(node,ast.Assign) and any(isinstance(target,ast.Name) and target.id=='ALLOWED_MATERIALS' for target in node.targets):
+            return set(ast.literal_eval(node.value))
+    raise ValueError('Missing independent render finish register')
+
+
+def unregistered_render_finishes(materials, approved=None):
+    """Return unreviewed material names; arbitrary new names remain refused."""
+    return sorted(set(materials)-(registered_render_finishes() if approved is None else approved))
+
+
 def main() -> int:
     expect("execution context refuses relative pyRevit and AutoCAD scripts",
            all(raises(ContextError, absolute, pathlib.Path(path), "script", file=True)
@@ -128,8 +143,68 @@ def main() -> int:
     expect("native serializer preserves large bridge integers and ordinary values",
            json.loads(native_dumps([Int64(), 22.04, False, None])) ==
            [9223372036854775807, 22.04, False, None])
+    expect('authored render materials have independent finish registration',
+           not unregistered_render_finishes(VR.M))
+    from archpipe.build_input_guard import build_input_findings
+    host_reads = build_input_findings()
+    expect("build code has no implicit render-host asset reads" +
+           (": " + "; ".join(host_reads) if host_reads else ""), not host_reads)
+    build_registry = json.loads((ROOT / "knowledge/build-input-guards.json").read_text(encoding="utf-8"))
+    expect("portable build-input controls have registered proving tests",
+           all((ROOT / item["proof_file"]).is_file() and all(
+               "def " + name + "(" in (ROOT / item["proof_file"]).read_text(encoding="utf-8")
+               for name in item["proofs"]) for item in build_registry["records"]))
+    from archpipe.asset_route_record import RECORD, recorded_geometry, read_record
+    route_record = read_record()
+    expect("route records validate walking topology, precision, hulls and scale ranges",
+           all(recorded_geometry(asset)[2]["triangle_count_after"] <= row["triangle_count_before"]
+               for asset, row in route_record["assets"].items()))
+    expect("compressed route record stays below 1.5 MB",
+           RECORD.stat().st_size < 1500000)
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
     scene = VR.build(views=[])
+    from archpipe.orientation_guard import scene_findings as orientation_findings, document_findings
+    expect("client garden compass names agree with geometry", not orientation_findings(scene))
+    expect("garden documents use recorded client compass names", not document_findings())
+    from archpipe.concept.garden_sun import scene_findings as garden_sun_findings
+    expect("garden sun evidence covers all plants and binds actual enclosure rays", not garden_sun_findings(scene))
+    from archpipe.concept.garden_g6 import scene_findings as g6_findings
+    expect("G6 pergola bearings, routes, tree circle and wall espalier", not g6_findings(scene))
+    garden_registry = json.loads((ROOT / "knowledge/garden-render-guards.json").read_text(encoding="utf-8"))
+    expect("garden render controls have registered proving tests",
+           all((ROOT / item["proof_file"]).is_file() and all(
+               "def " + name + "(" in (ROOT / item["proof_file"]).read_text(encoding="utf-8")
+               for name in item["proofs"]) for item in garden_registry["records"]))
+    from archpipe.concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings
+    expect("scene contains no ground-only downward faces", not downward_ground_findings(scene))
+    expect("procedural leaf mass reaches root soil", not plant_form_findings(scene["meshes"]))
+    from archpipe.blender.stone_union import prepare as prepare_stones, overlap_findings
+    rendered_stones, aliases = prepare_stones(scene['meshes'])
+    expect('rendered stepping-stone solids remove coincident box overlaps', not overlap_findings(rendered_stones))
+    from archpipe.concept.garden_render_review import soil_visibility_findings
+    expect("ground-bed soil has no competing floor finish", not soil_visibility_findings(scene))
+    from archpipe.concept.villa_landscape import north_garden_scene_violations
+    expect("north garden has only shade landscape in ground-level beds", not north_garden_scene_violations(scene))
+    from archpipe.concept.garden_swing import scene_findings as swing_findings
+    expect("balcony swing support, motion and both view cones", not swing_findings(scene))
+    from archpipe.concept.garden_g4d import scene_findings as g4d_findings, fixture_record, material_basis
+    expect('G4d fixture_record (C5): emitter, photometry, shield and finite ground mount', not fixture_record(scene))
+    expect('G4d material_basis (C7): recorded optical assumptions and chip scale', not material_basis(scene))
+    expect('G4d direct lens screening and evening-only layer', not g4d_findings(scene))
+    from archpipe.concept import villa_r11
+    garden_views = VR.VIEWS(villa_r11.design("D1"))
+    expect("garden view captions agree with measured subjects and camera sides",
+           not orientation_findings(dict(scene, views=garden_views)))
+    view_findings=[f for v in garden_views for f in opening_frame_findings(v,scene)]
+    expect("foreground opening frames avoid every view's central third", not view_findings)
+    expect("garden cameras stand in open yard or a declared room",
+           not [f for v in garden_views for f in garden_camera_findings(v, scene)])
+    from archpipe.concept.garden_render_review import subject_visibility_findings
+    expect("named garden features remain actually visible",
+           not [f for v in garden_views for f in subject_visibility_findings(v, scene)])
+    from archpipe.concept.garden_render_review import subject_frame_findings
+    expect("views requiring complete subjects frame every actual vertex",
+           not [f for v in garden_views for f in subject_frame_findings(v, scene)])
     mounting_registry = json.loads((ROOT / "knowledge/mounting-guards.json").read_text(encoding="utf-8"))
     expect("finished-surface controls have registered proving tests",
            all((ROOT / item["proof_file"]).is_file() and all(

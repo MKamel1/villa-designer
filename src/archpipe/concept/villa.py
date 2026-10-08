@@ -418,19 +418,8 @@ def critique(lay):
 
     unreached = sorted(set(rooms) - reach())
     out.append(_chk("reachability", "fail" if unreached else "pass", rooms=unreached))
-    blocked_ends = []
-    for rid, r in rooms.items():
-        if r["occupancy"] != "stair":
-            continue
-        if not r.get("ends"):
-            blocked_ends.append({"stair": rid, "problem": "ends not declared"})
-            continue
-        for end in r["ends"]:
-            seg = tuple(end)
-            across = [o for o, v in rooms.items() if o != rid and v["level"] == r["level"] and
-                      max(overlap_len(e, seg) for e in edges(v["rect"])) >= 0.8]   # a 0.9 m flight, float-safe
-            if not any(rooms[o]["occupancy"] in vocab.CIRCULATION for o in across):
-                blocked_ends.append({"stair": rid, "end": list(seg), "opens_onto": across or ["nothing"]})
+    from ..geometry_topology import GeometryTopology
+    blocked_ends = GeometryTopology.from_inputs(layout=lay).legacy_stair_ends()
     out.append(_chk("stair_access", "fail" if blocked_ends else "pass", ends=blocked_ends))
     from . import stairs as S
     cl = S.clashes(stair_model(lay.get("stair", "u")))
@@ -513,7 +502,7 @@ def RS_build_opening(lay):
     return RS.build(lay).get("gf_opening")
 
 
-def gf_route_width(lay, cell=0.02, wall=0.05, rail=0.05):
+def gf_route_width(lay, cell=0.02, wall=0.05, rail=0.05, *, specification=None):
     """The widest square body (m) that can travel on the GF from the stair top (the landing) to the bedroom
     corridor's far end, through the open rooms only (revit_spec.is_open), round the stair void (the GF slab opening,
     less a balustrade `rail`) and clear of the walls of closed rooms (half a partition, `wall`). Independent of how
@@ -539,7 +528,7 @@ def gf_route_width(lay, cell=0.02, wall=0.05, rail=0.05):
         if not RS.is_open(r):
             a, b, c, d = r["rect"]
             free &= ~((X > a - wall) & (X < c + wall) & (Y > b - wall) & (Y < d + wall))
-    sp_ = RS.build(lay)
+    sp_ = RS.build(lay) if specification is None else specification
     for op in ([sp_["gf_opening"]] if sp_.get("gf_opening") else []) + sp_.get("gf_voids", []):
         free &= ~((X > op[0] - rail) & (X < op[2] + rail) & (Y > op[1] - rail) & (Y < op[3] + rail))
     free[[0, -1], :] = False                            # the outer walls

@@ -8,12 +8,19 @@ from pathlib import PurePosixPath
 
 KINDS = {"principled", "glass", "emissive", "translucent"}
 GROUPS = {"shell", "context", "furniture", "fixture", "dressing", "ground"}
-LAYERS = {"ambient", "task", "accent", "decorative", "night"}
+LAYERS = {"ambient", "task", "accent", "decorative", "night", "evening-garden"}
 RAY_VISIBILITY = ("camera", "shadow", "diffuse", "glossy", "transmission")
 # archpipe.concept.villa_furnish.BODY: card mitton-path-of-travel-min, paths of travel at least 36 in (914 mm).
 # Duplicated as a literal (not imported) so this generic contract module stays free of a concept-package
 # dependency; villa_render.py's curtain loop cites the same card and constant name when it computes the field.
 DOOR_CLEAR_WIDTH_M = 0.914
+
+
+def presentation_view_ids(by_id, review=False):
+    """Batch view identifiers; retired definitions remain usable explicitly."""
+    return [ident for ident, view in by_id.items()
+            if not view.get("presentation_retired")
+            and not (review and view.get("final_only"))]
 
 
 def _number(value, positive=False):
@@ -65,7 +72,7 @@ def emission_strength(exitance_lm_per_m2: float) -> float:
 
 def mesh_batch_key(mesh: dict, material_kind: str):
     """Only merge non-emitting architectural meshes with identical ray flags."""
-    if (mesh.get("keep_object") or "bevel_m" in mesh or "subdivide" in mesh or
+    if (mesh.get("keep_object") or "face_materials" in mesh or "bevel_m" in mesh or "subdivide" in mesh or
             mesh.get("group") in ("furniture", "fixture", "dressing") or material_kind == "emissive"):
         return None
     visibility = mesh.get("visibility", {})
@@ -169,6 +176,10 @@ def validate_scene(scene: dict) -> list[str]:
             errors.append(f"{p}: render mesh {ident!r} must not be a diagnostic or host/support bookkeeping mesh")
         need(mesh.get("group") in GROUPS, p+".group", "unknown group")
         need(mesh.get("material") in materials, p+".material", "unknown material")
+        if "face_materials" in mesh:
+            assigned=mesh["face_materials"]
+            need(isinstance(assigned,list) and len(assigned)==len(mesh.get("faces",[])) and all(m in materials for m in assigned),
+                 p+".face_materials", "one registered finish per authored face required")
         need(mesh.get("room") is None or isinstance(mesh.get("room"), str), p+".room", "string or null required")
         need(isinstance(mesh.get("label"), str), p+".label", "string required")
         if "layer" in mesh:
@@ -322,6 +333,11 @@ def validate_scene(scene: dict) -> list[str]:
         ident = view.get("id")
         need(isinstance(ident, str) and bool(ident) and ident not in view_ids and "/" not in ident and "\\" not in ident, p+".id", "unique safe id required")
         view_ids.add(ident)
+        if "presentation_retired" in view:
+            need(type(view["presentation_retired"]) is bool, p+".presentation_retired", "boolean required")
+        if view.get("presentation_retired"):
+            need(isinstance(view.get("presentation_decision"), str) and bool(view["presentation_decision"].strip()),
+                 p+".presentation_decision", "retirement reason required")
         need(view.get("state") in ("day", "evening", "night", "exterior-dusk"), p+".state",
              "day, evening, night or exterior-dusk required")
         sky_state = sky_state_for_view(view.get("state"))
@@ -412,4 +428,27 @@ def validate_scene(scene: dict) -> list[str]:
             need(_number(c.get("open_clear_width_m"), positive=True) and
              c.get("open_clear_width_m", -1) >= DOOR_CLEAR_WIDTH_M - 1e-9,
              p+".open_clear_width_m", "a door's open curtains must leave >= %.3f m clear (F.BODY)" % DOOR_CLEAR_WIDTH_M)
+    if not errors:
+        from .concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings, subject_visibility_findings, subject_frame_findings
+        errors.extend(downward_ground_findings(scene))
+        errors.extend(plant_form_findings(meshes))
+        from .concept.garden_render_review import soil_visibility_findings
+        errors.extend(soil_visibility_findings(scene))
+        from .orientation_guard import scene_findings as orientation_findings
+        errors.extend(orientation_findings(scene))
+        from .concept.garden_sun import scene_findings as garden_sun_findings
+        errors.extend(garden_sun_findings(scene))
+        from .concept.garden_g6 import scene_findings as g6_findings
+        errors.extend("%s: %s" % f for f in g6_findings(scene))
+        from .concept.villa_landscape import north_garden_scene_violations
+        errors.extend("%s: %s" % f for f in north_garden_scene_violations(scene))
+        from .concept.garden_swing import scene_findings as swing_findings
+        errors.extend("%s: %s" % f for f in swing_findings(scene))
+        from .concept.garden_g4d import scene_findings as g4d_findings
+        errors.extend(g4d_findings(scene))
+        for view in scene.get("views", []):
+            errors.extend(f"{f['view']}: {f['mesh']} {f['reason']}" for f in opening_frame_findings(view,scene))
+            errors.extend(garden_camera_findings(view, scene))
+            errors.extend(subject_visibility_findings(view, scene))
+            errors.extend(subject_frame_findings(view, scene))
     return errors

@@ -1,0 +1,104 @@
+{
+  "schema": "build-input-guards/1",
+  "records": [
+    {
+      "lesson_id": "asset-route-build-host-input",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "asset_route_record.recorded_triangles replaces raw library reads; villa_landscape validates every placed landscape asset",
+      "check": "build_input_guard.build_input_findings; scripts/verify.py",
+      "stage": "scene build and portable verification",
+      "proof_file": "tests/test_asset_route_geometry.py",
+      "proofs": [
+        "test_frozen_ec0bc39_fails_with_empty_home_and_scene_now_builds",
+        "test_missing_stale_corrupt_record_and_manifest_fail_closed",
+        "test_missing_nonoverlapping_placed_asset_fails_closed",
+        "test_generator_lossless_sibling_full_height_and_buffer_hash",
+        "test_static_guard_real_old_path_siblings_and_clean_build"
+      ],
+      "closure": "Portable build-input proof only; no rendering or native-model acceptance"
+    },
+    {
+      "lesson_id": "asset-route-record-unbounded",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "generator keeps walking triangle order/winding/connectivity, separate full-height framing hull and declared precision; placement validates coverage",
+      "check": "asset_route_record.recorded_geometry and concept.route_geometry._placed_geometry; scripts/verify.py",
+      "stage": "record generation, scene build and portable verification",
+      "proof_file": "tests/test_asset_route_geometry.py",
+      "proofs": [
+        "test_exact_band_boundary_and_scale_range_generalise",
+        "test_real_scale_and_lowering_outside_band_fail_closed",
+        "test_record_storage_contract"
+      ],
+      "closure": "Superseded 5.9 MB representation; version 3 stays below 1.5 MB with zero frangipani error and at most 0.866026 mm scene error elsewhere"
+    },
+    {
+      "lesson_id": "asset-route-record-size-budget",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "separate unrounded framing hull; first-use indexed walking vertices at declared precision; generator refuses storage overflow before writes",
+      "check": "asset_route_record.recorded_geometry and write_record; scripts/verify.py",
+      "stage": "record generation, scene build and portable verification",
+      "proof_file": "tests/test_asset_route_geometry.py",
+      "proofs": [
+        "test_record_storage_contract",
+        "test_size_budget_refuses_real_record_before_writing",
+        "test_real_hull_only_matches_all_vertex_frame_results",
+        "test_hull_degenerate_and_transformed_siblings_generalise",
+        "test_quantised_branch_one_mm_inside_stays_detected",
+        "test_missing_stale_corrupt_record_and_manifest_fail_closed"
+      ],
+      "closure": "Below 1.5 MB; hull equivalence and 1 mm envelope boundary proved; no render or native-model acceptance"
+    },
+    {
+      "lesson_id": "scene-build-repeated-geometry",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Build-local immutable geometry validation; scalar-confirmed camera batches; copy-on-write WC trials; one route rectangle per item; exact botanical placement batches and shared-coordinate yard checks; value-keyed mound templates; shared-vertex island keys with unchanged union order; exact face-keyed immutable triangles with fresh caller arrays; one immutable geometry snapshot per Part",
+      "check": "tests/test_build_cache.py real full-build budget; scripts/verify.py proving-test registry",
+      "stage": "scene construction and portable verification",
+      "proof_file": "tests/test_scene_build_performance.py",
+      "proofs": [
+        "test_whole_camera_batch_matches_scalar_all_yaws_on_real_wc_and_siblings",
+        "test_validation_cache_follows_values_and_keeps_kind_side_support_guards",
+        "test_wc_trial_copies_only_mutated_members_and_matches_deepcopy",
+        "test_route_rect_computed_once_per_mesh_for_many_routes",
+        "test_botanical_batch_preserves_face_values_lengths_and_winding",
+        "test_mesh_rectangle_cache_follows_exact_live_xy_values",
+        "test_shared_vertex_islands_match_frozen_algorithm_and_disconnected_siblings",
+        "test_bearing_batches_match_scalar_at_frame_edges_and_real_wc_points",
+        "test_dot_product_retains_python_sum_compensation",
+        "test_mound_template_is_local_value_keyed_and_caller_records_are_independent",
+        "test_triangles_preserve_frozen_order_owners_and_mutable_caller_isolation",
+        "test_triangle_cache_preserves_signed_zero_content_bits",
+        "test_part_snapshots_geometry_once_for_both_validations"
+      ],
+      "closure": "Performance only; exact scene equality and existing frozen guards required; no render acceptance"
+    },
+    {
+      "lesson_id": "scene-build-profile-source-drift",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Archive starting source; benchmark fingerprints declared source before/after construction and compares every baseline byte",
+      "check": "scripts/benchmark_scene_build.py; scripts/verify.py proving-test registry",
+      "stage": "performance baseline capture and comparison",
+      "proof_file": "tests/test_scene_build_benchmark.py",
+      "proofs": [
+        "test_real_frozen_source_change_refuses_before_writing_a_baseline",
+        "test_stable_source_accepts_exact_bytes_and_refuses_changed_scene_or_truncation"
+      ],
+      "closure": "Exclude contaminated live-tree profile; no rendering or design approval"
+    }
+  ]
+}

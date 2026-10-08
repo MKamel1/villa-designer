@@ -75,3 +75,116 @@ def placements(box, density=120, seed=7):
                        "leaf" if index % 10 < 7 else "bract"))
     rng.shuffle(result)
     return result
+
+
+def grape_ivy_faces(box, seed=7):
+    """Young trifoliate grape-ivy leaves, no blossom/bract fallback.
+
+    Three serrated leaflets meet at each petiole on the large vertical
+    plane. Coordinates are metres; the complete leaves stay in the measured
+    source envelope. Coverage remains the ASSUMED 35 percent young intent.
+    """
+    x0,y0,z0,x1,y1,z1=box
+    along_y=(y1-y0)>(x1-x0)
+    result=[]
+    # Triplets occupy approximately three ordinary leaf areas.
+    density=density_for_coverage(leaf_fraction=1.)/3
+    for x,y,z,_ in placements(box,density,seed):
+        across=y if along_y else x
+        centre=(y0+y1)/2 if along_y else (x0+x1)/2
+        across=centre+(across-centre)*.94
+        z=(z0+z1)/2+(z-(z0+z1)/2)*.94
+        for leaflet in range(3):
+            angle=(leaflet-1)*.9
+            # Serrated lanceolate perimeter, with narrow base at petiole.
+            shape=[(0,0),(-.012,.013),(-.021,.025),(-.017,.032),(-.022,.041),(-.015,.049),(0,.070),(.015,.049),(.022,.041),(.017,.032),(.021,.025),(.012,.013)]
+            polygon=[]
+            for u,v in shape:
+                aa=across+u*math.cos(angle)+v*math.sin(angle)
+                zz=z-u*math.sin(angle)+v*math.cos(angle)
+                if along_y:polygon.append([x,min(y1,max(y0,aa)),min(z1,max(z0,zz))])
+                else:polygon.append([min(x1,max(x0,aa)),y,min(z1,max(z0,zz))])
+            # Ear clipping is handled by Blender for the visible thin leaf.
+            result.append(polygon)
+    return result
+
+
+def _closest_triangle(point, a, b, c):
+    """Closest point on a physical triangle, including its edges."""
+    sub=lambda u,v:tuple(x-y for x,y in zip(u,v))
+    dot=lambda u,v:sum(x*y for x,y in zip(u,v))
+    add=lambda u,v,s:tuple(x+s*y for x,y in zip(u,v))
+    ab,ac,ap=sub(b,a),sub(c,a),sub(point,a)
+    d1,d2=dot(ab,ap),dot(ac,ap)
+    if d1<=0 and d2<=0:return a
+    bp=sub(point,b);d3,d4=dot(ab,bp),dot(ac,bp)
+    if d3>=0 and d4<=d3:return b
+    vc=d1*d4-d3*d2
+    if vc<=0 and d1>=0 and d3<=0:return add(a,ab,d1/(d1-d3))
+    cp=sub(point,c);d5,d6=dot(ab,cp),dot(ac,cp)
+    if d6>=0 and d5<=d6:return c
+    vb=d5*d2-d1*d6
+    if vb<=0 and d2>=0 and d6<=0:return add(a,ac,d2/(d2-d6))
+    va=d3*d6-d5*d4
+    if va<=0 and d4-d3>=0 and d5-d6>=0:return add(b,sub(c,b),(d4-d3)/(d4-d3+d5-d6))
+    denominator=va+vb+vc
+    if abs(denominator)<1e-18:return a
+    return add(add(a,ab,vb/denominator),ac,vc/denominator)
+
+
+def grape_ivy_geometry(box, branch_faces, seed=7):
+    """Connect every trifoliate petiole to the actual training-stem surface.
+
+    Returns leaf polygons, closed metre-native petiole solids and measured
+    root/contact pairs. No botanical topology is left to random scattering.
+    """
+    if not branch_faces:raise ValueError('Cissus foliage requires physical training stems')
+    leaves=grape_ivy_faces(box,seed);petioles=[];contacts=[]
+    triangles=[(f[0],f[k],f[k+1]) for f in branch_faces for k in range(1,len(f)-1)]
+    for leaf in leaves[::3]:
+        root=leaf[0]
+        candidates=[_closest_triangle(root,*t) for t in triangles]
+        contact=min(candidates,key=lambda q:sum((q[k]-root[k])**2 for k in range(3)))
+        contacts.append(dict(root=root,contact=contact))
+        axis=[root[k]-contact[k] for k in range(3)];length=math.sqrt(sum(v*v for v in axis))
+        if length<1e-7:continue
+        axis=[v/length for v in axis]
+        helper=[0,0,1] if abs(axis[2])<.9 else [1,0,0]
+        u=[axis[1]*helper[2]-axis[2]*helper[1],axis[2]*helper[0]-axis[0]*helper[2],axis[0]*helper[1]-axis[1]*helper[0]]
+        norm=math.sqrt(sum(v*v for v in u));u=[v/norm for v in u]
+        v=[axis[1]*u[2]-axis[2]*u[1],axis[2]*u[0]-axis[0]*u[2],axis[0]*u[1]-axis[1]*u[0]]
+        # Embed into both stem and lamina by 1 mm.
+        rings=[[[point[k]+.0012*(u[k]*math.cos(i*math.pi/3)+v[k]*math.sin(i*math.pi/3)) for k in range(3)] for i in range(6)] for point in ([contact[k]-.001*axis[k] for k in range(3)],[root[k]+.001*axis[k] for k in range(3)])]
+        a,b=rings;petioles += [a[::-1],b]+[[a[i],a[(i+1)%6],b[(i+1)%6],b[i]] for i in range(6)]
+    return leaves,petioles,contacts
+
+
+def ivy_connection_findings(leaves, petioles, branch_faces):
+    """Measure lamina-root contact with physical stems and petiole solids."""
+    findings=[]
+    triangles=[(f[0],f[k],f[k+1]) for f in branch_faces for k in range(1,len(f)-1)]
+    def close(point):
+        return any(sum((q[k]-point[k])**2 for k in range(3))<=1e-12 for q in (_closest_triangle(point,*t) for t in triangles))
+    supports=[]
+    for i in range(0,len(petioles),8):
+        low,high=petioles[i:i+2]
+        a=[sum(q[k] for q in low)/len(low) for k in range(3)]
+        b=[sum(q[k] for q in high)/len(high) for k in range(3)]
+        radius=min(math.sqrt(sum((q[k]-a[k])**2 for k in range(3))) for q in low)
+        supports.append((a,b,radius))
+    for i,leaf in enumerate(leaves[::3]):
+        root=leaf[0]
+        if close(root):continue
+        connected=False
+        for a,b,radius in supports:
+            axis=[b[k]-a[k] for k in range(3)];den=sum(v*v for v in axis)
+            if not den:continue
+            t=sum((root[k]-a[k])*axis[k] for k in range(3))/den
+            radial=math.sqrt(sum((root[k]-a[k]-t*axis[k])**2 for k in range(3)))
+            if 0<=t<=1 and radial<=radius+1e-9:
+                # The near end is embedded 1 mm inside a real stem; measure
+                # proximity at that endpoint, not a declared contact token.
+                if any(math.sqrt(sum((q[k]-a[k])**2 for k in range(3)))<=.00101 for q in (_closest_triangle(a,*tri) for tri in triangles)):
+                    connected=True;break
+        if not connected:findings.append('leaf triplet %d is disconnected from training stems'%i)
+    return findings

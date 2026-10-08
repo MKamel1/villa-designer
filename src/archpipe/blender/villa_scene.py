@@ -378,6 +378,25 @@ def add_material(name, spec, library_root, warnings):
                 normal_image = bpy.data.images.load(normal, check_existing=True)
                 normal_image.colorspace_settings.name = "Non-Color"
                 nt.links.new(triplanar_normal(nt, mapping.outputs["Vector"], normal_image), bsdf.inputs["Normal"])
+    if spec.get('procedural_gravel_m') or spec.get('procedural_stone_m'):
+        # Geometry Position is metre-native world space: mesh dimensions and
+        # object transforms never stretch the nominal mineral chip size.
+        geometry = nt.nodes.new('ShaderNodeNewGeometry')
+        pattern = nt.nodes.new('ShaderNodeTexVoronoi' if spec.get('procedural_gravel_m') else 'ShaderNodeTexNoise')
+        size = spec.get('procedural_gravel_m', spec.get('procedural_stone_m'))
+        pattern.inputs['Scale'].default_value = 1. / size
+        nt.links.new(geometry.outputs['Position'], pattern.inputs['Vector'])
+        if spec.get('procedural_gravel_m'):
+            pattern.feature = 'DISTANCE_TO_EDGE'
+            height = pattern.outputs['Distance']
+        else:
+            height = pattern.outputs['Fac']
+        bump = nt.nodes.new('ShaderNodeBump')
+        bump.inputs['Strength'].default_value = .65 if spec.get('procedural_gravel_m') else .12
+        bump.inputs['Distance'].default_value = .004 if spec.get('procedural_gravel_m') else .0003
+        nt.links.new(height, bump.inputs['Height'])
+        nt.links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])
+        mat['mineral_pattern_scale_m'] = size
     return mat
 
 
@@ -386,16 +405,22 @@ def apply_visibility(obj, visibility):
         setattr(obj, "visible_" + key, visibility.get(key, True))
 
 
-def add_mesh_batch(specs, name, material, warnings):
+def add_mesh_batch(specs, name, material, warnings, materials=None):
     """Build one Blender object from one or more authored mesh records."""
     mesh = bpy.data.meshes.new(name)
     obj = bpy.data.objects.new(name, mesh)
     bpy.context.collection.objects.link(obj)
     bm = bmesh.new()
+    material_names = [specs[0]["material"]]
+    if materials is not None:
+        for spec in specs:
+            for key in spec.get("face_materials", []):
+                if key not in material_names:
+                    material_names.append(key)
     for spec in specs:
         index = {}
         source_faces = []
-        for polygon in spec["faces"]:
+        for face_index, polygon in enumerate(spec["faces"]):
             # A keyhole polygon (a wall with its openings, daylight.with_holes) revisits vertices along its bridge:
             # a repeat inside one face gets its own vertex; a face that already exists (coincident faces) is built
             # from fresh vertices. Both made faces.new raise on the villa shell.
@@ -413,6 +438,8 @@ def add_mesh_batch(specs, name, material, warnings):
                 source_faces.append(bm.faces.new(vertices))
             except ValueError:
                 source_faces.append(bm.faces.new([bm.verts.new(tuple(p)) for p in polygon]))
+            if "face_materials" in spec:
+                source_faces[-1].material_index = material_names.index(spec["face_materials"][face_index])
         source_edges = {edge for face in source_faces for edge in face.edges}
         if all(len(edge.link_faces) == 2 for edge in source_edges):
             volume = 0.0
@@ -427,6 +454,8 @@ def add_mesh_batch(specs, name, material, warnings):
     bm.to_mesh(mesh)
     bm.free()
     mesh.materials.append(material)
+    for key in material_names[1:]:
+        mesh.materials.append(materials[key])
     apply_visibility(obj, specs[0].get("visibility", {}))
     if material.get("emission_lm_per_m2") is not None and hasattr(obj, "cycles") and hasattr(obj.cycles, "use_multiple_importance_sampling"):
         obj.cycles.use_multiple_importance_sampling = True
@@ -463,8 +492,10 @@ def add_mesh_detail(obj, spec):
 
 
 def build_meshes(mesh_specs, materials, material_specs, warnings):
+    stone_union = sibling('stone_union')
+    render_specs, stone_aliases = stone_union.prepare(mesh_specs)
     batches = {}
-    for spec in mesh_specs:
+    for spec in render_specs:
         key = contract.mesh_batch_key(spec, material_specs[spec["material"]]["kind"])
         if key is None:
             key = ("one", spec["id"])
@@ -472,11 +503,13 @@ def build_meshes(mesh_specs, materials, material_specs, warnings):
     objects = {}
     for index, specs in enumerate(batches.values()):
         name = specs[0]["id"] if len(specs) == 1 else "villa-merged-%04d" % index
-        obj = add_mesh_batch(specs, name, materials[specs[0]["material"]], warnings)
+        obj = add_mesh_batch(specs, name, materials[specs[0]["material"]], warnings, materials)
         if len(specs) == 1:
             add_mesh_detail(obj, specs[0])
         for spec in specs:
             objects[spec["id"]] = obj
+    for source_id, rendered_id in stone_aliases.items():
+        objects[source_id] = objects[rendered_id]
     return objects
 
 
@@ -484,18 +517,38 @@ def build_climbers(mesh_specs, objects, materials, warnings):
     """Replace each box mass with dense individual leaf and bract polygons."""
     placing = sibling("climber_placement")
     for spec in mesh_specs:
-        if spec["material"] != "bougainvillea-bract" or "climber-" not in spec["id"]:
+        if spec.get("part_kind") != "climber":
+            continue
+        if spec.get("explicit_geometry"):
+            # G6 exports physical connected leaves/stems. Keep the measured
+            # geometry used by route, support and framing review in Blender.
             continue
         obj = objects[spec["id"]]
         obj.hide_render = True
         points = [v for face in spec["faces"] for v in face]
         box = (min(v[0] for v in points), min(v[1] for v in points), min(v[2] for v in points),
                max(v[0] for v in points), max(v[1] for v in points), max(v[2] for v in points))
+        if spec.get('species') == 'Cissus alata':
+            stems=next((m for m in mesh_specs if m['id']==spec.get('stem_mesh')),None)
+            if stems is None:raise ValueError('Cissus foliage is missing its physical stem mesh')
+            leaves,petioles,contacts=placing.grape_ivy_geometry(box,stems['faces'],seed=spec.get('appearance_seed',sum(map(ord,spec['id']))))
+            polygons=leaves+petioles
+            verts=[];faces=[]
+            for polygon in polygons:
+                start=len(verts);verts.extend(polygon);faces.append(tuple(range(start,len(verts))))
+            mesh=bpy.data.meshes.new(spec['id']+'-trifoliate-leaves')
+            mesh.from_pydata(verts,[],faces);mesh.update()
+            leaf_obj=bpy.data.objects.new(mesh.name,mesh);bpy.context.collection.objects.link(leaf_obj)
+            mesh.materials.append(materials[spec['material']]);mesh.materials.append(materials[stems['material']])
+            for polygon in mesh.polygons:polygon.material_index=int(polygon.index>=len(leaves))
+            warnings.append(spec['id']+': young trifoliate foliage; ASSUMED 35% training target; no flowers')
+            continue
         # ASSUMED young planting: target 35% face coverage so the open trellis reads clearly.
         # The density follows the measured leaf and bract sizes in climber_placement.
         density = placing.density_for_coverage()
-        positions = placing.placements(box, density=density, seed=sum(map(ord, spec["id"])))
-        for kind, matname in (("leaf", "bougainvillea-leaf"), ("bract", "bougainvillea-bract")):
+        positions = placing.placements(box, density=density, seed=spec.get("appearance_seed",sum(map(ord, spec["id"]))))
+        leaf_material = "star-jasmine-leaf" if spec.get("species") == "Trachelospermum jasminoides" else "bougainvillea-leaf"
+        for kind, matname in (("leaf", leaf_material), ("bract", spec["material"])):
             verts, faces = [], []
             for x, y, z, label in positions:
                 if label != kind:
@@ -658,21 +711,32 @@ def configure_camera(view):
     return obj, pitch
 
 
-def subjects(view, mesh_specs, objects):
+def subjects(view, mesh_specs, objects, imported_props=()):
     result = []
     scene = bpy.context.scene
     for subject in view["subjects"]:
         matches = [m for m in mesh_specs if m["id"] == subject or m["id"].startswith(subject) or m.get("room") == subject or m.get("label") == subject]
-        coords = [world_to_camera_view(scene, scene.camera, objects[m["id"]].matrix_world @ Vector(corner))
-                  for m in matches for corner in contract.mesh_bbox_corners(m)]
+        full_intent = view.get('require_full_subject_frame', False)
+        coords = [world_to_camera_view(scene, scene.camera, objects[m["id"]].matrix_world @ Vector(point))
+                  for m in matches for point in
+                  ([p for face in m['faces'] for p in face] if full_intent else contract.mesh_bbox_corners(m))]
+        # Imported props are measured from the actual Blender meshes after
+        # axis conversion, scaling and floor seating; never marker proxies.
+        prop_matches = [record for record in imported_props if record["id"] == subject
+                        or record["id"].startswith(subject) or record.get("label") == subject]
+        coords += [world_to_camera_view(scene, scene.camera, obj.matrix_world @ vertex.co)
+                   for record in prop_matches for obj in record["objects"] for vertex in obj.data.vertices]
         rect = [min((p.x for p in coords), default=0), min((p.y for p in coords), default=0),
                 max((p.x for p in coords), default=0), max((p.y for p in coords), default=0)]
         overlap = max(0, min(1, rect[2])-max(0, rect[0])) * max(0, min(1, rect[3])-max(0, rect[1]))
         area = max(1e-9, (rect[2]-rect[0])*(rect[3]-rect[1]))
         visible = bool(coords) and any(p.z >= 0 for p in coords) and overlap > 0
         result.append({"id": subject, "in_frame": visible, "coverage": overlap/area,
+                       "full_frame": bool(coords) and all(p.z > 0 for p in coords) and
+                                     rect[0] >= 0 and rect[1] >= 0 and rect[2] <= 1 and rect[3] <= 1,
+                       "projection_basis": 'actual authored vertices' if full_intent else 'conservative mesh bounds',
                        "screen": rect,
-                       "matched_objects": [m["id"] for m in matches]})
+                       "matched_objects": [m["id"] for m in matches] + [r["id"] for r in prop_matches]})
     return result
 
 
@@ -1353,7 +1417,9 @@ def render(scene_data, args):
     if args.measure_lighting:
         measure_lighting(scene_data, args, lights, full_power, emissive_sources, mesh_by_id, switched_emitters)
         return
-    selected = {v["id"] for v in scene_data["views"]} if args.views == "all" else set(args.views.split(","))
+    selected = (set(contract.presentation_view_ids({v["id"]: v for v in scene_data["views"]},
+                                                  review=args.views == "review"))
+                if args.views in ("all", "review") else set(args.views.split(",")))
 
     hideable = {m for v in scene_data["views"] for m in v.get("hide_meshes", [])}
 
@@ -1419,7 +1485,7 @@ def render(scene_data, args):
         if not wb:
             current_warnings.append("Blender does not support stated white balance")
         bpy.context.view_layer.update()
-        subject_result = subjects(view, scene_data["meshes"], objects)
+        subject_result = subjects(view, scene_data["meshes"], objects, imported_props)
         prop_result = visible_props(imported_props)
         path = os.path.join(args.out, view["id"] + ".png")
         s.render.filepath = path

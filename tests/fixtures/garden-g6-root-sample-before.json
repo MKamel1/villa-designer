@@ -1,0 +1,112 @@
+[
+  {
+    "id": "landscape-g6-centrepiece-dome",
+    "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+    "center": [
+      24.25,
+      -28.31
+    ],
+    "root_z_m": -2.655,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.655
+  },
+  {
+    "id": "landscape-g6-centrepiece-mona-0",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      24.56,
+      -28.31
+    ],
+    "root_z_m": -2.655,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.655
+  },
+  {
+    "id": "landscape-g6-centrepiece-mona-1",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      24.345795268256232,
+      -28.0151724799485
+    ],
+    "root_z_m": -2.655,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.655
+  },
+  {
+    "id": "landscape-g6-centrepiece-mona-2",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      23.999204731743767,
+      -28.127786571789333
+    ],
+    "root_z_m": -2.655,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.655
+  },
+  {
+    "id": "landscape-g6-centrepiece-mona-3",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      23.999204731743767,
+      -28.492213428210665
+    ],
+    "root_z_m": -2.655,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.655
+  },
+  {
+    "id": "landscape-g6-centrepiece-mona-4",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      24.345795268256232,
+      -28.604827520051497
+    ],
+    "root_z_m": -2.655,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.655
+  },
+  {
+    "id": "landscape-door-pot-dining-n",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      15.882,
+      -22.97
+    ],
+    "root_z_m": -2.605,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.605
+  },
+  {
+    "id": "landscape-door-pot-dining-s",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      17.896,
+      -22.97
+    ],
+    "root_z_m": -2.605,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.605
+  },
+  {
+    "id": "landscape-door-pot-living-east-n",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      19.55,
+      -22.97
+    ],
+    "root_z_m": -2.605,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.605
+  },
+  {
+    "id": "landscape-door-pot-living-east-s",
+    "species": "Plectranthus 'Mona Lavender'",
+    "center": [
+      21.564,
+      -22.97
+    ],
+    "root_z_m": -2.605,
+    "reported_ground_m": -3.0,
+    "actual_base_m": -2.605
+  }
+]
