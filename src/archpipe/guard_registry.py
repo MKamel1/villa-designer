@@ -3691,9 +3691,15 @@ def check_villa_landscape_camera_canopy_clearance(
     return dist
 
 
-_prop_top_olive = villa_landscape._prop(
-    "landscape-top-olive", "sf_olive_old", (14.10, -22.10), 0.0, 2.00, "olive"
-)
+# Frozen by value: the v26 top-garden olive prop as villa_landscape._prop built
+# it at agy/reg8 (da18c72). Olive has since left the garden palette, so the
+# builder now refuses it; the historical case must not be rebuilt (merge
+# review 2026-10-08).
+_prop_top_olive = {
+    "asset": "sf_olive_old", "id": "landscape-top-olive", "label": "dressing: olive",
+    "position": [14.118627876682588, -22.412744246634826, 0.0], "rotation_deg": [0, 0, 0],
+    "scale": 0.43421623968736434, "zone": "lower",
+}
 
 register_guard(
     fn=check_villa_landscape_camera_canopy_clearance,
