@@ -1,0 +1,245 @@
+[
+  {
+    "id": "v07-terrace-dusk",
+    "title": "South garden pergola and retained frangipani at dusk",
+    "state": "exterior-dusk",
+    "when": "2026-10-15T18:35:00+03:00",
+    "camera": {
+      "position": [
+        28.1,
+        -20.81,
+        -1.65
+      ],
+      "target": [
+        25.6363,
+        -25.1509,
+        -1.65
+      ],
+      "lens_mm": 24,
+      "sensor_mm": 36,
+      "shift_x": 0.0,
+      "shift_y": 0.073
+    },
+    "resolution": [
+      1920,
+      1280
+    ],
+    "layers_on": [
+      "ambient",
+      "task",
+      "accent",
+      "decorative"
+    ],
+    "dimmers": {
+      "ambient": 0.5,
+      "task": 0.4
+    },
+    "exposure": "exterior-dusk",
+    "subjects": [
+      "landscape-tree-south",
+      "living-sofa"
+    ],
+    "samples": 1024,
+    "room": null,
+    "final_only": false,
+    "seated": false,
+    "caption_notes": [
+      "South garden at dusk: timber pergola with Petrea and star jasmine, planted bowl, outdoor two-seat bench and two lounge chairs, loquat espalier and dense low beds; artificial lawn and stepping routes retained. Young frangipani remains offset from centre for a clear door route; it screens much of the new roof and bowl.",
+      "Client/lead decisions 2026-10-06. Procedural botanical and furniture appearances ASSUMED look-alike proxies; photographic likeness, procurement and Egypt nursery performance UNVERIFIED. Bowl is the client-approved no-pots exception. Pergola dimensions and climber cover ASSUMED; structural footings, both beam cantilevers, roots and drainage UNVERIFIED."
+    ],
+    "sun": {
+      "altitude_deg": -2.89,
+      "azimuth_true_deg": 261.64
+    }
+  },
+  {
+    "id": "v19-garden-facade",
+    "title": "South Garden pergola, lawn and retained frangipani by day",
+    "state": "day",
+    "when": "2026-10-15T10:30:00+03:00",
+    "camera": {
+      "position": [
+        28.3,
+        -20.95,
+        -1.65
+      ],
+      "target": [
+        25.576804824924878,
+        -25.143352839727097,
+        -1.65
+      ],
+      "lens_mm": 24,
+      "sensor_mm": 36,
+      "shift_x": 0.0,
+      "shift_y": 0.07514311046151044
+    },
+    "resolution": [
+      1920,
+      1280
+    ],
+    "layers_on": [],
+    "dimmers": {},
+    "exposure": "exterior-day",
+    "subjects": [
+      "landscape-tree-south",
+      "living-sofa"
+    ],
+    "samples": 1024,
+    "room": null,
+    "final_only": true,
+    "seated": false,
+    "caption_notes": [
+      "South Garden facade, timber pergola, planted bowl and lounge chairs, loquat espalier and dense low boundary beds; lawn and stepping approach retained. Young frangipani stays offset from centre for a clear door route. The retained tree screens much of the new roof and bowl. The living-room sofa is partly screened through glazing and planting.",
+      "Client/lead decisions 2026-10-06. Procedural botanical and furniture appearances ASSUMED look-alike proxies; photographic likeness, procurement and Egypt nursery performance UNVERIFIED. Bowl is the client-approved no-pots exception. Pergola dimensions and climber cover ASSUMED; structural footings, both beam cantilevers, roots and drainage UNVERIFIED."
+    ],
+    "sun": {
+      "altitude_deg": 40.07,
+      "azimuth_true_deg": 135.34
+    },
+    "hide_meshes": [
+      "curtain-study-game-01-heavy-closed",
+      "curtain-study-game-02-heavy-closed",
+      "curtain-kids-a-01-heavy-closed",
+      "curtain-kids-b-01-heavy-closed",
+      "curtain-parents-bed-01-heavy-closed",
+      "curtain-parents-bed-02-heavy-closed",
+      "curtain-dining-01-heavy-closed",
+      "curtain-living-01-heavy-closed",
+      "curtain-living-02-heavy-closed",
+      "curtain-lounge-01-heavy-closed"
+    ]
+  },
+  {
+    "id": "v27-east-yard-above",
+    "title": "East yard three-layer planting from the roof edge",
+    "state": "day",
+    "when": "2026-10-15T10:30:00+03:00",
+    "camera": {
+      "position": [
+        15.29,
+        -21.95,
+        1.35
+      ],
+      "target": [
+        20.228441702975687,
+        -21.167827674798843,
+        1.35
+      ],
+      "lens_mm": 24,
+      "sensor_mm": 24,
+      "shift_x": 0.0,
+      "shift_y": -1.318892052654511,
+      "sensor_size_mm": [
+        24,
+        36
+      ],
+      "orientation": "portrait"
+    },
+    "resolution": [
+      1280,
+      1920
+    ],
+    "layers_on": [],
+    "dimmers": {},
+    "exposure": "exterior-day",
+    "subjects": [
+      "landscape-east-back",
+      "landscape-east-mid",
+      "landscape-east-front"
+    ],
+    "samples": 1024,
+    "room": null,
+    "final_only": true,
+    "seated": false,
+    "require_full_subject_frame": true,
+    "standing_ground_m": 0.0,
+    "visibility_targets": [
+      "landscape-east-back-01",
+      "landscape-east-mid-01",
+      "landscape-east-front-01"
+    ],
+    "caption_notes": [
+      "East yard part-shade three-layer Pittosporum/Fatsia/Mona Lavender planting from the existing supported roof garden. Full soil-bed extent is outside the frame; the Aspidistra side strip and complete trellis are also outside this upper detail. v28 shows the actual ground bed and open jasmine timber. Native upward roof paving at z 0.000 m supports this level 1.350 m eye; 24 mm lens, physically rotated full-frame portrait sensor and downward lens shift, no plant or furniture move.",
+      "Client/lead decisions 2026-10-06. Procedural botanical and furniture appearances ASSUMED look-alike proxies; photographic likeness, procurement and Egypt nursery performance UNVERIFIED. Bowl is the client-approved no-pots exception. Pergola dimensions and climber cover ASSUMED; structural footings, both beam cantilevers, roots and drainage UNVERIFIED."
+    ],
+    "sun": {
+      "altitude_deg": 40.07,
+      "azimuth_true_deg": 135.34
+    },
+    "hide_meshes": [
+      "curtain-study-game-01-heavy-closed",
+      "curtain-study-game-02-heavy-closed",
+      "curtain-kids-a-01-heavy-closed",
+      "curtain-kids-b-01-heavy-closed",
+      "curtain-parents-bed-01-heavy-closed",
+      "curtain-parents-bed-02-heavy-closed",
+      "curtain-dining-01-heavy-closed",
+      "curtain-living-01-heavy-closed",
+      "curtain-living-02-heavy-closed",
+      "curtain-lounge-01-heavy-closed"
+    ]
+  },
+  {
+    "id": "v38-north-garden-floor-bed",
+    "title": "North garden \u2014 floor-bed extent through the lounge",
+    "state": "day",
+    "when": "2026-10-15T10:30:00+03:00",
+    "camera": {
+      "position": [
+        4.1,
+        -25.0,
+        -1.65
+      ],
+      "target": [
+        1.6,
+        -27.7,
+        -1.65
+      ],
+      "lens_mm": 24,
+      "sensor_mm": 36,
+      "shift_x": 0.0,
+      "shift_y": -0.18
+    },
+    "resolution": [
+      1920,
+      1280
+    ],
+    "layers_on": [],
+    "dimmers": {},
+    "exposure": "exterior-day",
+    "subjects": [
+      "landscape-bed-north",
+      "landscape-north-back-00",
+      "landscape-north-back-01",
+      "landscape-north-mid-00",
+      "landscape-north-mid-01",
+      "landscape-north-front",
+      "landscape-north-edge"
+    ],
+    "samples": 1024,
+    "room": null,
+    "final_only": true,
+    "seated": false,
+    "standing_room": "lounge",
+    "caption_notes": [
+      "North garden through the lounge: overall main ground-level bed extent and retained shade drifts; the third Fatsia and Aspidistra now frame the hanging retreat in the accent and rear beds; its near corner is partly screened by the existing lounge window frame. Slim edging, visible soil and mineral gravel paths; no raised containers or bistro. Companion v36 stands in open sky and v37 shows the grape-ivy trellis, Rhapis accent and feature stone. Authored young/pruned forms ASSUMED; nursery, winter, roots and slab drainage UNVERIFIED.",
+      "Authored botanical appearances ASSUMED; photographic likeness, procurement and Egypt nursery performance UNVERIFIED."
+    ],
+    "sun": {
+      "altitude_deg": 40.07,
+      "azimuth_true_deg": 135.34
+    },
+    "hide_meshes": [
+      "curtain-study-game-01-heavy-closed",
+      "curtain-study-game-02-heavy-closed",
+      "curtain-kids-a-01-heavy-closed",
+      "curtain-kids-b-01-heavy-closed",
+      "curtain-parents-bed-01-heavy-closed",
+      "curtain-parents-bed-02-heavy-closed",
+      "curtain-dining-01-heavy-closed",
+      "curtain-living-01-heavy-closed",
+      "curtain-living-02-heavy-closed",
+      "curtain-lounge-01-heavy-closed"
+    ]
+  }
+]

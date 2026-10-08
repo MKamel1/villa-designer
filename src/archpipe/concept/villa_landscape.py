@@ -1458,7 +1458,8 @@ def north_garden_violations(meshes, props, objects=(), *, court=NORTH_COURT,
         kind=item.get('part_kind');points=[q for f in item['faces'] for q in f]
         if kind in {'hanging-basket','swing-cushion','swing-bearing','suspension-line','ceiling-anchor'} and (not item.get('hanging_swing') or item.get('swing_record',{}).get('decision')!='client decision 2026-10-06; structural check pending'):
             out.append((item['id'],'north garden suspension requires explicit client decision'))
-        if kind not in allowed:
+        approved_uplight = item.get('garden_g4d') and item.get('fixture_id') and kind in ('lamp-housing','light-lens')
+        if kind not in allowed and not approved_uplight:
             out.append((item['id'],'north garden forbids raised container or non-landscape content'))
         if kind=='soil-bed' and abs(max(q[2] for q in points)-ground)>1e-6:
             out.append((item['id'],'north garden soil surface must be at court ground level'))

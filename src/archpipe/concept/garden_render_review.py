@@ -107,10 +107,32 @@ def subject_visibility_findings(view, scene):
     """ASSUMED majority-ray visibility: at least 7 of 13 target rays reach it.
 
     Partial foreground foliage is acceptable; a hidden named feature is not.
-    This fixed screen accompanies actual preview review and full framing.
+    An explicit reviewed allowance is bound to one view and one subject.
+    All other subjects retain seven rays. Invalid or copied allowances fail
+    closed. This screen accompanies actual preview review and full framing.
     """
-    return [view['id']+': named subject obscured '+r['subject']
-            for r in subject_visibility_evidence(view, scene) if r['visible']/r['samples'] <= .5]
+    allowances = view.get('visibility_allowances', {})
+    findings = []
+    if not isinstance(allowances, dict):
+        findings.append(view['id']+': invalid visibility allowances')
+        allowances = {}
+    minima = {}
+    for subject, allowance in allowances.items():
+        if (not isinstance(allowance, dict)
+                or allowance.get('view_id') != view['id']
+                or subject not in view.get('visibility_targets', [])
+                or type(allowance.get('minimum_visible_rays')) is not int
+                or not 1 <= allowance['minimum_visible_rays'] <= 13
+                or allowance.get('samples') != 13
+                or not isinstance(allowance.get('reason'), str)
+                or not allowance['reason'].strip()):
+            findings.append(view['id']+': invalid visibility allowance for '+subject)
+        else:
+            minima[subject] = allowance['minimum_visible_rays']
+    for result in subject_visibility_evidence(view, scene):
+        if result['samples'] != 13 or result['visible'] < minima.get(result['subject'], 7):
+            findings.append(view['id']+': named subject obscured '+result['subject'])
+    return findings
 
 
 def overhead_cover(scene, ground_m):

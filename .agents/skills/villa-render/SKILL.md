@@ -130,6 +130,14 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
      only the authored path strip. Street-based client garden names and
      true-north solar bearing have separate roles; keep legacy identifiers
      until an explicitly scoped migration.
+     Presentation retirement is explicit: record `presentation_retired` and
+     its `presentation_decision`; both review/all batches and the review page
+     exclude it while explicit diagnostic view requests remain available.
+     A lead-approved natural screening allowance must be keyed by one exact
+     subject in `visibility_allowances`, bound to its view identifier, with
+     sample count, minimum visible rays and reason. Other subjects retain
+     seven of thirteen rays; copied or invalid allowances fail closed.
+     Never lower global visibility or QA limits to accommodate a local decision.
    - Exposure is metered per view and LOCKED per state across the whole
      set: `day`, `evening`, `exterior-dusk`, `exterior-day`. Rendering a
      subset re-meters that subset, so a state's lock is only comparable when
@@ -163,7 +171,7 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
    - `tests/test_villa_lighting.py`, and the render report must carry
      `qa_scene` so every render_qa check runs (none silently skipped).
 3. **Draft**: `scripts/villa_render.py --views review --samples 256
-   --res 960x640` (`review` skips `final_only` views). Every final-only
+   --res 960x640` (`review` skips `final_only` and retired views). Every final-only
    view needs one draft of its own before the final set. `render_qa` runs
    on every view; then look at every image next to the bedroom reference,
    and let a `render_critic` pass (a cheaper model is fine) list defects,
@@ -177,7 +185,7 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
 5. **Re-measure lighting in the scene** after any fixture or furniture move
    (`--views none --measure-lighting`); a lamp base, an appliance or a hood
    on a task point shows up here and nowhere else.
-6. **Finals**: `--views all --samples 1024 --res 1920x1280`; if the driver
+6. **Finals**: `--views all --samples 1024 --res 1920x1280` (retired views excluded); if the driver
    loses the job, rerun the identical command to resume it. Then the review
    page (`scripts/villa_review_page.py`: QA flags explained per view state,
    decisions awaiting the client) and publish.
@@ -219,6 +227,12 @@ asset or view:
    asset gets an isolated preview render (close-up, neutral light, a 1.8 m
    scale figure) that the lead reviews BEFORE it joins the scene. A report of
    "tests pass" without the preview image is not accepted.
+   Bind the accepted receipt to actual geometry, used materials and light
+   records; a later shield/aim/finish edit invalidates that preview. Resolve
+   runtime material slots and complete fixture identity/colour-rendering
+   metadata before rendering. Neutral staging must sit below authored ground
+   surfaces, never coincide with them. Keep close swatches alongside the
+   scale-reference view. See [G4d procedure](../../../docs/ops/garden-g4d.md).
 2. **No placeholder shapes in presentation renders.** A box, slab or flat
    colour standing in for a plant, garment, lamp or trellis is a defect even
    when labelled; if the real thing cannot be built, leave it out and say so.

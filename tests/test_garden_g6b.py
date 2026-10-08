@@ -89,7 +89,8 @@ class AppearanceTests(unittest.TestCase):
         from archpipe.concept.garden_render_review import subject_frame_findings
         from archpipe.concept import villa_render as V
         before=json.loads(gzip.decompress(Path('tests/fixtures/garden-g6b-upper-frame-before.json.gz').read_bytes()))
-        current=next(v for v in V.VIEWS(resolve=False) if v['id']=='v27-east-yard-above')
+        # The accepted G6b portrait is historical evidence after the view-intent change.
+        current=next(v for v in json.loads(Path('tests/fixtures/garden-views-cameras-before.json').read_text()) if v['id']=='v27-east-yard-above')
         self.assertTrue(current['require_full_subject_frame'])
         for offset in (0.,40.):
             scene=deepcopy(before);old=scene['view'];new=deepcopy(current)
@@ -127,8 +128,16 @@ class AppearanceTests(unittest.TestCase):
         old=set(json.loads(Path('tests/fixtures/garden-g6b-finish-register-before.json').read_text()))
         self.assertEqual(set(unregistered_render_finishes(V.M,old)),{
             'g6-jasmine-leaf','g6-petrea-leaf','g6-pittosporum-leaf','g6-leaf-vein',
-            'g6-wire-tie','g6-loquat-leaf','g6-outdoor-timber','g6-shrub-wood'})
+            'g6-wire-tie','g6-loquat-leaf','g6-outdoor-timber','g6-shrub-wood',
+            'north-light-stone','north-pale-gravel'})
         self.assertEqual(unregistered_render_finishes(V.M),[])
+        for name in ('north-light-stone','north-pale-gravel'):
+            # Reviewed G4d names must be independently registered; omission
+            # of either real new finish and an unlisted replacement refuse.
+            from scripts.verify import registered_render_finishes
+            self.assertEqual(unregistered_render_finishes(V.M,registered_render_finishes()-{name}),[name])
+            mutant=dict(V.M);mutant['unlisted-'+name]=mutant.pop(name)
+            self.assertEqual(unregistered_render_finishes(mutant),['unlisted-'+name])
         self.assertEqual(unregistered_render_finishes({'another-villa-finish':{}}),['another-villa-finish'])
 
 if __name__=='__main__':unittest.main()

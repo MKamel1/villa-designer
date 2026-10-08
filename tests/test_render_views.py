@@ -327,18 +327,23 @@ class ChosenViews(unittest.TestCase):
         current=by['v27-east-yard-above']
         self.assertEqual(views.camera_proximity_violations(current,scene,ITEMS),[])
         self.assertEqual(set(current['subjects']),{'landscape-east-back','landscape-east-mid',
-                                                  'landscape-east-front'})
-        self.assertEqual(current['standing_ground_m'],0.)
+                                                  'landscape-east-front','landscape-bed-east',
+                                                  'landscape-trellis-east','landscape-climber-east',
+                                                  'landscape-stone-living-east'})
+        self.assertEqual(current['standing_room'],'dirty-kitchen')
         self.assertEqual(set(current['visibility_targets']),{'landscape-east-back-01','landscape-east-mid-01','landscape-east-front-01'})
-        self.assertIn('complete trellis',' '.join(current['caption_notes']))
-        self.assertIn('Full soil-bed extent is outside the frame',' '.join(current['caption_notes']))
+        self.assertIn('complete star-jasmine trellis',' '.join(current['caption_notes']))
+        self.assertIn('original three required planting sightlines',' '.join(current['caption_notes']))
         for subject in current['subjects']:
             self.assertEqual(views.subject_mesh_frame_violations(current,scene,subject),[])
         # Procedural appearances cannot bypass a guard that once checked
         # only imported props. A renamed real aloe leaf mesh still fires.
         source=next(m for m in scene['meshes'] if m.get('species')=='Aloe vera')
         points=[p for f in source['faces'] for p in f]
-        close=deepcopy(current)
+        # This historical mutation tests the exterior 1 m plant policy.
+        # The live whole-court view now declares an indoor window role;
+        # retain the frozen exterior role instead of inheriting its 0.15 m.
+        close=deepcopy(before)
         close['camera']['position']=[sum(p[0] for p in points)/len(points),
                                      sum(p[1] for p in points)/len(points),1.35]
         renamed=dict(source,id='unrelated-procedural-rosette')

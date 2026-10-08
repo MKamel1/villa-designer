@@ -378,6 +378,25 @@ def add_material(name, spec, library_root, warnings):
                 normal_image = bpy.data.images.load(normal, check_existing=True)
                 normal_image.colorspace_settings.name = "Non-Color"
                 nt.links.new(triplanar_normal(nt, mapping.outputs["Vector"], normal_image), bsdf.inputs["Normal"])
+    if spec.get('procedural_gravel_m') or spec.get('procedural_stone_m'):
+        # Geometry Position is metre-native world space: mesh dimensions and
+        # object transforms never stretch the nominal mineral chip size.
+        geometry = nt.nodes.new('ShaderNodeNewGeometry')
+        pattern = nt.nodes.new('ShaderNodeTexVoronoi' if spec.get('procedural_gravel_m') else 'ShaderNodeTexNoise')
+        size = spec.get('procedural_gravel_m', spec.get('procedural_stone_m'))
+        pattern.inputs['Scale'].default_value = 1. / size
+        nt.links.new(geometry.outputs['Position'], pattern.inputs['Vector'])
+        if spec.get('procedural_gravel_m'):
+            pattern.feature = 'DISTANCE_TO_EDGE'
+            height = pattern.outputs['Distance']
+        else:
+            height = pattern.outputs['Fac']
+        bump = nt.nodes.new('ShaderNodeBump')
+        bump.inputs['Strength'].default_value = .65 if spec.get('procedural_gravel_m') else .12
+        bump.inputs['Distance'].default_value = .004 if spec.get('procedural_gravel_m') else .0003
+        nt.links.new(height, bump.inputs['Height'])
+        nt.links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])
+        mat['mineral_pattern_scale_m'] = size
     return mat
 
 
@@ -473,8 +492,10 @@ def add_mesh_detail(obj, spec):
 
 
 def build_meshes(mesh_specs, materials, material_specs, warnings):
+    stone_union = sibling('stone_union')
+    render_specs, stone_aliases = stone_union.prepare(mesh_specs)
     batches = {}
-    for spec in mesh_specs:
+    for spec in render_specs:
         key = contract.mesh_batch_key(spec, material_specs[spec["material"]]["kind"])
         if key is None:
             key = ("one", spec["id"])
@@ -487,6 +508,8 @@ def build_meshes(mesh_specs, materials, material_specs, warnings):
             add_mesh_detail(obj, specs[0])
         for spec in specs:
             objects[spec["id"]] = obj
+    for source_id, rendered_id in stone_aliases.items():
+        objects[source_id] = objects[rendered_id]
     return objects
 
 
@@ -693,8 +716,10 @@ def subjects(view, mesh_specs, objects, imported_props=()):
     scene = bpy.context.scene
     for subject in view["subjects"]:
         matches = [m for m in mesh_specs if m["id"] == subject or m["id"].startswith(subject) or m.get("room") == subject or m.get("label") == subject]
-        coords = [world_to_camera_view(scene, scene.camera, objects[m["id"]].matrix_world @ Vector(corner))
-                  for m in matches for corner in contract.mesh_bbox_corners(m)]
+        full_intent = view.get('require_full_subject_frame', False)
+        coords = [world_to_camera_view(scene, scene.camera, objects[m["id"]].matrix_world @ Vector(point))
+                  for m in matches for point in
+                  ([p for face in m['faces'] for p in face] if full_intent else contract.mesh_bbox_corners(m))]
         # Imported props are measured from the actual Blender meshes after
         # axis conversion, scaling and floor seating; never marker proxies.
         prop_matches = [record for record in imported_props if record["id"] == subject
@@ -707,6 +732,9 @@ def subjects(view, mesh_specs, objects, imported_props=()):
         area = max(1e-9, (rect[2]-rect[0])*(rect[3]-rect[1]))
         visible = bool(coords) and any(p.z >= 0 for p in coords) and overlap > 0
         result.append({"id": subject, "in_frame": visible, "coverage": overlap/area,
+                       "full_frame": bool(coords) and all(p.z > 0 for p in coords) and
+                                     rect[0] >= 0 and rect[1] >= 0 and rect[2] <= 1 and rect[3] <= 1,
+                       "projection_basis": 'actual authored vertices' if full_intent else 'conservative mesh bounds',
                        "screen": rect,
                        "matched_objects": [m["id"] for m in matches] + [r["id"] for r in prop_matches]})
     return result
@@ -1389,7 +1417,9 @@ def render(scene_data, args):
     if args.measure_lighting:
         measure_lighting(scene_data, args, lights, full_power, emissive_sources, mesh_by_id, switched_emitters)
         return
-    selected = {v["id"] for v in scene_data["views"]} if args.views == "all" else set(args.views.split(","))
+    selected = (set(contract.presentation_view_ids({v["id"]: v for v in scene_data["views"]},
+                                                  review=args.views == "review"))
+                if args.views in ("all", "review") else set(args.views.split(",")))
 
     hideable = {m for v in scene_data["views"] for m in v.get("hide_meshes", [])}
 

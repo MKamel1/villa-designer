@@ -1,0 +1,51 @@
+[
+  {
+    "item_id": "landscape-stone-lounge-north-end-0",
+    "field": "material",
+    "old": "stepping-stone",
+    "new": "north-light-stone",
+    "decision": "G4d, client 2026-10-07: pale gravel and light stepping stones"
+  },
+  {
+    "item_id": "landscape-stone-lounge-north-end-1",
+    "field": "material",
+    "old": "stepping-stone",
+    "new": "north-light-stone",
+    "decision": "G4d, client 2026-10-07: pale gravel and light stepping stones"
+  },
+  {
+    "item_id": "landscape-stone-lounge-north-00",
+    "field": "material",
+    "old": "stepping-stone",
+    "new": "north-light-stone",
+    "decision": "G4d, client 2026-10-07: pale gravel and light stepping stones"
+  },
+  {
+    "item_id": "landscape-stone-lounge-north-01",
+    "field": "material",
+    "old": "stepping-stone",
+    "new": "north-light-stone",
+    "decision": "G4d, client 2026-10-07: pale gravel and light stepping stones"
+  },
+  {
+    "item_id": "landscape-stone-lounge-north-02",
+    "field": "material",
+    "old": "stepping-stone",
+    "new": "north-light-stone",
+    "decision": "G4d, client 2026-10-07: pale gravel and light stepping stones"
+  },
+  {
+    "item_id": "landscape-stone-lounge-north-03",
+    "field": "material",
+    "old": "stepping-stone",
+    "new": "north-light-stone",
+    "decision": "G4d, client 2026-10-07: pale gravel and light stepping stones"
+  },
+  {
+    "item_id": "landscape-gravel-north",
+    "field": "material",
+    "old": "garden-gravel",
+    "new": "north-pale-gravel",
+    "decision": "G4d, client 2026-10-07: pale gravel and light stepping stones"
+  }
+]

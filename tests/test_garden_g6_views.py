@@ -85,7 +85,9 @@ class ReviewedComposition(unittest.TestCase):
         from archpipe.concept import villa_render as V
         from archpipe.concept.garden_render_review import garden_camera_findings,subject_visibility_findings
         frozen=json.loads(gzip.decompress(Path('tests/fixtures/garden-g6-v27-occluded-before.json.gz').read_bytes()))
-        view=next(v for v in V.VIEWS(resolve=False) if v['id']=='v27-east-yard-above')
+        # Preserve the historical supported upper-view regression independently
+        # of the new level whole-court intent, tested in test_garden_views.
+        view=next(v for v in json.loads(Path('tests/fixtures/garden-views-cameras-before.json').read_text()) if v['id']=='v27-east-yard-above')
         self.assertEqual(view['standing_ground_m'],0.)
         self.assertEqual(len(view['visibility_targets']),3)
         for shift in (0.,40.):

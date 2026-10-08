@@ -8,12 +8,19 @@ from pathlib import PurePosixPath
 
 KINDS = {"principled", "glass", "emissive", "translucent"}
 GROUPS = {"shell", "context", "furniture", "fixture", "dressing", "ground"}
-LAYERS = {"ambient", "task", "accent", "decorative", "night"}
+LAYERS = {"ambient", "task", "accent", "decorative", "night", "evening-garden"}
 RAY_VISIBILITY = ("camera", "shadow", "diffuse", "glossy", "transmission")
 # archpipe.concept.villa_furnish.BODY: card mitton-path-of-travel-min, paths of travel at least 36 in (914 mm).
 # Duplicated as a literal (not imported) so this generic contract module stays free of a concept-package
 # dependency; villa_render.py's curtain loop cites the same card and constant name when it computes the field.
 DOOR_CLEAR_WIDTH_M = 0.914
+
+
+def presentation_view_ids(by_id, review=False):
+    """Batch view identifiers; retired definitions remain usable explicitly."""
+    return [ident for ident, view in by_id.items()
+            if not view.get("presentation_retired")
+            and not (review and view.get("final_only"))]
 
 
 def _number(value, positive=False):
@@ -326,6 +333,11 @@ def validate_scene(scene: dict) -> list[str]:
         ident = view.get("id")
         need(isinstance(ident, str) and bool(ident) and ident not in view_ids and "/" not in ident and "\\" not in ident, p+".id", "unique safe id required")
         view_ids.add(ident)
+        if "presentation_retired" in view:
+            need(type(view["presentation_retired"]) is bool, p+".presentation_retired", "boolean required")
+        if view.get("presentation_retired"):
+            need(isinstance(view.get("presentation_decision"), str) and bool(view["presentation_decision"].strip()),
+                 p+".presentation_decision", "retirement reason required")
         need(view.get("state") in ("day", "evening", "night", "exterior-dusk"), p+".state",
              "day, evening, night or exterior-dusk required")
         sky_state = sky_state_for_view(view.get("state"))
@@ -432,6 +444,8 @@ def validate_scene(scene: dict) -> list[str]:
         errors.extend("%s: %s" % f for f in north_garden_scene_violations(scene))
         from .concept.garden_swing import scene_findings as swing_findings
         errors.extend("%s: %s" % f for f in swing_findings(scene))
+        from .concept.garden_g4d import scene_findings as g4d_findings
+        errors.extend(g4d_findings(scene))
         for view in scene.get("views", []):
             errors.extend(f"{f['view']}: {f['mesh']} {f['reason']}" for f in opening_frame_findings(view,scene))
             errors.extend(garden_camera_findings(view, scene))

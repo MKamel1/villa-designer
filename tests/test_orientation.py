@@ -106,21 +106,62 @@ class Orientation(unittest.TestCase):
         rect=zones['north'];old=[len(scope['direct_sun_hours'](float(x),float(y))) for x in np.arange(rect[0]+.5,rect[2],1) for y in np.arange(rect[1]+.5,rect[3],1)]
         self.assertGreater(np.mean(old)-measured['north'][DATES[0]],1.)
 
-    def test_rename_preserves_actual_geometry_and_climber_appearance(self):
-        # Comparisons intentionally exclude revised light metadata and naming only.
+    def assert_rename_snapshot(self, scene):
+        # Keep the frozen baseline. Later decisions permit only exact material
+        # transitions, never geometry, transforms or arbitrary current values.
+        changes=json.loads(Path('tests/fixtures/orientation-approved-appearance-changes.json').read_text())
+        approved={}
+        for row in changes:
+            self.assertEqual(row['field'],'material')
+            self.assertTrue(row['decision'])
+            key=(row['item_id'],row['field'])
+            self.assertNotIn(key,approved)
+            approved[key]=row
+        used=set()
         old=O.historical_aliases(dict(meshes=self.before['meshes'],props=self.before['props']))
         for kind in ('meshes','props'):
-            current={m['id']:m for m in self.scene[kind]}
+            current={m['id']:m for m in scene[kind]}
             for item in old[kind]:
-                # G6 deliberately replants east and adds south assemblies.
-                # Preserve this naming-only comparison for unaffected gardens
-                # and the retained D4 frangipani transform.
+                # Existing G6 scope: replanted east/south assemblies have their
+                # own fixed-geometry proofs; retained gardens/tree stay here.
                 if item.get('zone')!='top' and item.get('id')!='landscape-tree-south' and (item['id'].startswith(('landscape-east-','landscape-bed-east','landscape-grass-east','landscape-grass-south','landscape-climber-east','landscape-climber-branches-east','landscape-trellis-east','landscape-door-pot-'))):continue
                 new=current[item['id']]
                 for field in ('faces','position','scale','rotation_deg','material'):
-                    if field in item:np.testing.assert_equal(new[field],item[field])
+                    if field not in item:continue
+                    key=(item['id'],field)
+                    if key in approved:
+                        row=approved[key]
+                        np.testing.assert_equal(item[field],row['old'])
+                        np.testing.assert_equal(new[field],row['new'])
+                        used.add(key)
+                    else:
+                        np.testing.assert_equal(new[field],item[field],err_msg=str(key))
                 if item.get('part_kind') in ('climber','climber-branch'):
                     self.assertEqual(new['appearance_seed'],O.appearance_seed(new['id']))
+        self.assertEqual(used,set(approved),'stale or mistyped approved transition')
+
+    def test_unlisted_appearance_and_geometry_changes_still_fail(self):
+        # Mutate actual current items without copying the entire large scene.
+        self.assert_rename_snapshot(self.scene)
+        for item_id,field in (('landscape-stone-lounge-north-end-0','material'),
+                              ('landscape-gravel-north','material'),
+                              ('landscape-stone-lounge-north-end-0','faces')):
+            original=next(m for m in self.scene['meshes'] if m['id']==item_id)
+            changed=copy.deepcopy(original)
+            if field=='material':changed[field]='unlisted-finish'
+            else:changed['faces'][0][0][0]+=.001
+            mutant=dict(self.scene,meshes=[changed if m['id']==item_id else m for m in self.scene['meshes']])
+            with self.assertRaises(AssertionError):self.assert_rename_snapshot(mutant)
+        # An item absent from the decision must still compare to the baseline.
+        old=O.historical_aliases(dict(meshes=self.before['meshes'],props=[]))
+        source=next(m for m in old['meshes'] if m.get('part_kind')=='climber')
+        original=next(m for m in self.scene['meshes'] if m['id']==source['id'])
+        changed=dict(original,material='unlisted-finish')
+        mutant=dict(self.scene,meshes=[changed if m['id']==source['id'] else m for m in self.scene['meshes']])
+        with self.assertRaises(AssertionError):self.assert_rename_snapshot(mutant)
+
+    def test_rename_preserves_actual_geometry_and_climber_appearance(self):
+        self.assert_rename_snapshot(self.scene)
         from archpipe.concept.garden_sun import scene_findings as sun_findings
         self.assertEqual(sun_findings(self.scene),[])
         mutated=copy.deepcopy(self.scene)

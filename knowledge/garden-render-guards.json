@@ -448,6 +448,191 @@
       "proofs": [
         "test_real_finish_register_omission_and_arbitrary_sibling_refused"
       ]
+    },
+    {
+      "lesson_id": "garden-g4d-preview-contract",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Complete actual material/fixture metadata before rendering",
+      "check": "G.fixture_metadata_findings and scripts.garden_g6_preview.input_findings",
+      "stage": "isolated preview, scene build/contract and portable verification",
+      "proof_file": "tests/test_garden_g4d.py",
+      "proofs": [
+        "test_actual_fixture_consumer_metadata_omission_and_sibling",
+        "test_real_coincident_floor_and_missing_runtime_material_siblings"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4d-neutral-staging",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Lower staging floor by construction; bind current geometry/material/light receipts",
+      "check": "scripts.garden_g6_preview.staging_findings and receipt_findings",
+      "stage": "isolated preview, scene build/contract and portable verification",
+      "proof_file": "tests/test_garden_g4d.py",
+      "proofs": [
+        "test_real_coincident_floor_and_missing_runtime_material_siblings",
+        "test_preview_receipt_rejects_changed_geometry_light_and_material"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4d-bound-crop",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Project actual vertices for declared complete view receipts",
+      "check": "archpipe.blender.villa_scene.subjects and subject_frame_findings",
+      "stage": "isolated preview, scene build/contract and portable verification",
+      "proof_file": "tests/test_garden_g4d.py",
+      "proofs": [
+        "test_actual_vertex_consumer_does_not_project_empty_bound_corners",
+        "test_new_camera_full_actual_frame_open_sky_and_evening_only"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4d-approved-brightening",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "One record owns foliage target, source, shielding and finite ground support; normalized assumed optical targets",
+      "check": "garden_g4d.scene_findings, fixture_record (C5), material_basis (C7)",
+      "stage": "isolated preview, scene build/contract and portable verification",
+      "proof_file": "tests/test_garden_g4d.py",
+      "proofs": [
+        "test_real_layout_faces_routes_plants_swing_and_undersides_unchanged",
+        "test_live_fixture_material_and_c4_mount_records_clean",
+        "test_shifted_missing_lens_shield_and_light_record_fire",
+        "test_reflectance_basis_and_texture_scale_fail_closed",
+        "test_glare_eye_envelopes_and_on_axis_negative_control",
+        "test_renamed_translated_fixture_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4d-delivery-comparison",
+      "control_tier": [
+        1
+      ],
+      "construction": "Compare exact decoded JSON deliveries instead of native tuple/list equality",
+      "check": "scripts.garden_g4d_evidence.delivery_value",
+      "stage": "acceptance before reporting design preservation",
+      "proof_file": "tests/test_garden_g4d.py",
+      "proofs": [
+        "test_real_prop_delivery_boundary_preserves_coordinates_and_refuses_moves"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4d-source-vs-output",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Record pre-snoot source flux and assumed emitted interval separately using actual polygon aperture",
+      "check": "garden_g4d.shield_output and fixture_record (C5)",
+      "stage": "fixture construction, scene contract and portable verification",
+      "proof_file": "tests/test_garden_g4d.py",
+      "proofs": [
+        "test_actual_source_flux_is_not_shielded_fitting_output",
+        "test_renamed_translated_fixture_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-views-snapshot-decisions",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Retain frozen migration baseline with exact item/field/old/new reviewed appearance decisions",
+      "check": "Orientation.assert_rename_snapshot and unregistered_render_finishes",
+      "stage": "migration regression and portable finish verification",
+      "proof_file": "tests/test_orientation.py",
+      "proofs": [
+        "test_rename_preserves_actual_geometry_and_climber_appearance",
+        "test_unlisted_appearance_and_geometry_changes_still_fail"
+      ]
+    },
+    {
+      "lesson_id": "garden-views-context-and-stone-seams",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Fuse same-datum mineral box unions at render assembly, retaining every authored coordinate and source identifier alias",
+      "check": "stone_union.prepare and overlap_findings; villa_scene.build_meshes",
+      "stage": "Blender assembly and portable verification",
+      "proof_file": "tests/test_garden_views.py",
+      "proofs": [
+        "test_actual_black_stripe_overlap_and_all_route_siblings",
+        "test_renamed_translated_stones_and_isolated_clean_case"
+      ]
+    },
+    {
+      "lesson_id": "garden-views-whole-court-intent",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "Declare whole bed, trellis, climber and route alongside all former planting subjects; retain original three visibility targets",
+      "check": "garden_render_review subject_frame_findings and subject_visibility_findings, garden_camera_findings and opening_frame_findings",
+      "stage": "camera authoring, neutral review, scene build/contract and portable verification",
+      "proof_file": "tests/test_garden_views.py",
+      "proofs": [
+        "test_whole_court_intent_keeps_old_plants_and_frames_context",
+        "test_court_guards_generalise_to_translated_renamed_sibling"
+      ]
+    },
+    {
+      "lesson_id": "garden-views-probe-inputs",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Resolve all actual manufacturer/generated photometry before assembly, with current generated precedence and path containment",
+      "check": "garden_view_probes.resolve_probe_photometry",
+      "stage": "numerical diagnostic preflight",
+      "proof_file": "tests/test_garden_views.py",
+      "proofs": [
+        "test_actual_missing_manufacturer_bundle_and_generated_precedence"
+      ]
+    },
+    {
+      "lesson_id": "garden-views-camera-scope-fixtures",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Historical exterior foliage mutation owns its frozen exterior role; live whole-court indoor intent is independently tested",
+      "check": "villa_render_views.camera_proximity_violations",
+      "stage": "historical camera-policy regression",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_g3_top_views_name_physical_troughs_drifts_benches_and_open_colour"
+      ]
+    },
+    {
+      "lesson_id": "garden-views-presentation-decisions",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Retired definitions excluded by shared presentation selection; reviewed visibility allowance bound to exact view and subject with reason",
+      "check": "presentation_view_ids and garden_render_review.subject_visibility_findings",
+      "stage": "authored view definition, batch selection, scene build/contract and portable verification",
+      "proof_file": "tests/test_garden_views.py",
+      "proofs": [
+        "test_retirements_and_final_candidate_keep_diagnostic_definitions",
+        "test_actual_candidate_has_only_reviewed_rear_chair_allowance",
+        "test_five_rays_fail_and_every_other_subject_still_requires_seven",
+        "test_blender_direct_batches_share_retirement_selection",
+        "test_integrated_caption_uses_measured_camera_side_without_waiver",
+        "test_integrated_candidate_retains_reviewed_preview_geometry"
+      ]
     }
   ]
 }

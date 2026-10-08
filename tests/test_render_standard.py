@@ -14,6 +14,7 @@ SCENE = VR.build()
 # Audited presentation finishes, including the explicitly authored luminous
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
+    "north-pale-gravel", "north-light-stone",  # G4d reviewed ASSUMED mineral appearances
     "g6-jasmine-leaf", "g6-petrea-leaf", "g6-pittosporum-leaf", "g6-leaf-vein",
     "g6-wire-tie", "g6-loquat-leaf", "g6-outdoor-timber", "g6-shrub-wood",  # G6b reviewed ASSUMED appearances
     "g6-lavender-flower", "g6-white-flower", "g6-bowl-glaze", "g6-outdoor-cushion",  # G6 ASSUMED appearances

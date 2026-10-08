@@ -127,14 +127,23 @@ def main() -> int:
     from archpipe.concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings
     expect("scene contains no ground-only downward faces", not downward_ground_findings(scene))
     expect("procedural leaf mass reaches root soil", not plant_form_findings(scene["meshes"]))
+    from archpipe.blender.stone_union import prepare as prepare_stones, overlap_findings
+    rendered_stones, aliases = prepare_stones(scene['meshes'])
+    expect('rendered stepping-stone solids remove coincident box overlaps', not overlap_findings(rendered_stones))
     from archpipe.concept.garden_render_review import soil_visibility_findings
     expect("ground-bed soil has no competing floor finish", not soil_visibility_findings(scene))
     from archpipe.concept.villa_landscape import north_garden_scene_violations
     expect("north garden has only shade landscape in ground-level beds", not north_garden_scene_violations(scene))
     from archpipe.concept.garden_swing import scene_findings as swing_findings
     expect("balcony swing support, motion and both view cones", not swing_findings(scene))
+    from archpipe.concept.garden_g4d import scene_findings as g4d_findings, fixture_record, material_basis
+    expect('G4d fixture_record (C5): emitter, photometry, shield and finite ground mount', not fixture_record(scene))
+    expect('G4d material_basis (C7): recorded optical assumptions and chip scale', not material_basis(scene))
+    expect('G4d direct lens screening and evening-only layer', not g4d_findings(scene))
     from archpipe.concept import villa_r11
     garden_views = VR.VIEWS(villa_r11.design("D1"))
+    expect("garden view captions agree with measured subjects and camera sides",
+           not orientation_findings(dict(scene, views=garden_views)))
     view_findings=[f for v in garden_views for f in opening_frame_findings(v,scene)]
     expect("foreground opening frames avoid every view's central third", not view_findings)
     expect("garden cameras stand in open yard or a declared room",
