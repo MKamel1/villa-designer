@@ -1,0 +1,123 @@
+{
+  "starting_commit": "f8f8cc604aa427eaa17348f8a349f69fc9c20399",
+  "records": {
+    "hosts": 512,
+    "openings": 26,
+    "obstacles": 902,
+    "supports": 646,
+    "routes": 31
+  },
+  "seconds": 326.65232920087874,
+  "findings": {
+    "opening-host": [],
+    "stair-access": [],
+    "module-run": [],
+    "furnished-routes-B": [],
+    "furnished-routes-GF": [],
+    "host-penetration": [],
+    "unsupported": [],
+    "needs-source": [
+      {
+        "query": "opening-motion",
+        "source_id": "window:0",
+        "reference_id": "measured motion envelope",
+        "achieved": null,
+        "required": null,
+        "source": "Window motion envelope absent from input: needs-source",
+        "unit": "m",
+        "status": "needs-source",
+        "detail": ""
+      },
+      {
+        "query": "opening-motion",
+        "source_id": "window:1",
+        "reference_id": "measured motion envelope",
+        "achieved": null,
+        "required": null,
+        "source": "Window motion envelope absent from input: needs-source",
+        "unit": "m",
+        "status": "needs-source",
+        "detail": ""
+      },
+      {
+        "query": "opening-motion",
+        "source_id": "window:2",
+        "reference_id": "measured motion envelope",
+        "achieved": null,
+        "required": null,
+        "source": "Window motion envelope absent from input: needs-source",
+        "unit": "m",
+        "status": "needs-source",
+        "detail": ""
+      },
+      {
+        "query": "opening-motion",
+        "source_id": "window:3",
+        "reference_id": "measured motion envelope",
+        "achieved": null,
+        "required": null,
+        "source": "Window motion envelope absent from input: needs-source",
+        "unit": "m",
+        "status": "needs-source",
+        "detail": ""
+      },
+      {
+        "query": "opening-motion",
+        "source_id": "window:4",
+        "reference_id": "measured motion envelope",
+        "achieved": null,
+        "required": null,
+        "source": "Window motion envelope absent from input: needs-source",
+        "unit": "m",
+        "status": "needs-source",
+        "detail": ""
+      },
+      {
+        "query": "opening-motion",
+        "source_id": "window:5",
+        "reference_id": "measured motion envelope",
+        "achieved": null,
+        "required": null,
+        "source": "Window motion envelope absent from input: needs-source",
+        "unit": "m",
+        "status": "needs-source",
+        "detail": ""
+      },
+      {
+        "query": "opening-motion",
+        "source_id": "window:6",
+        "reference_id": "measured motion envelope",
+        "achieved": null,
+        "required": null,
+        "source": "Window motion envelope absent from input: needs-source",
+        "unit": "m",
+        "status": "needs-source",
+        "detail": ""
+      },
+      {
+        "query": "opening-motion",
+        "source_id": "window:7",
+        "reference_id": "measured motion envelope",
+        "achieved": null,
+        "required": null,
+        "source": "Window motion envelope absent from input: needs-source",
+        "unit": "m",
+        "status": "needs-source",
+        "detail": ""
+      }
+    ],
+    "landscape-routes": [],
+    "occupied-rooms": [],
+    "hall-route": [],
+    "furniture-opening-motion": []
+  },
+  "measurements": {
+    "hall-route-achieved-m": 1.03,
+    "hall-route-required-m": 0.9,
+    "source": "ukadm-hall-min-m42"
+  },
+  "scope_notes": {
+    "furniture-opening-motion": "Authored furniture only, same-storey vertical envelopes. No claim of every scene detail being clear of actual swept leaves.",
+    "full-scene": "Earlier fresh full-scene relationship review; subsequent changes only add saved-specification hall review, achieved-width metadata and vertical filtering of motion envelopes."
+  }
+}

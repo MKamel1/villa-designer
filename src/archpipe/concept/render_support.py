@@ -287,7 +287,7 @@ def unsupported(scene, lay=None):
     return out
 
 
-def blocked_openings(scene, lay=None):
+def blocked_openings(scene, lay=None, *, specification=None):
     """Every door must be passable: no furniture, dressing or render detail inside a door's passage (its clear width
     less 20 mm, 0.35 m either side of the wall line, from 50 mm to 2.0 m above the floor). Found after the client saw
     the parents' entrance closed by a slatted headboard panel that also covered the dressing door."""
@@ -296,7 +296,7 @@ def blocked_openings(scene, lay=None):
     from . import villa_r11 as R
     from .villa_render import LZ
     lay = lay or R.design("D1")
-    sp = RS.build(lay)
+    sp = RS.build(lay) if specification is None else specification
     out = []
     parts = []
     for m in scene["meshes"]:

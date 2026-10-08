@@ -24,6 +24,15 @@ For single-room diagnosis and the order of causes, use `photoreal-render`.
    ASSUMED in the scene notes. Every surface is finished, exterior and fence
    included.
 
+For geometry relationship review, snapshot the matching existing layout,
+scene, specification and furniture in `archpipe.geometry_topology.GeometryTopology`.
+Use saved specifications for historical passage checks; regenerating today's
+openings can erase a past obstruction. Keep the existing support, passage,
+finish-layer and furnishing controls running. Window motion envelopes and
+assumed clearances remain `needs-source` until measured or sourced; a topology
+pass alone does not establish structural support capacity or client approval.
+Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.md).
+
 ## Order
 
 1. **Export the scene**: `villa_render.write()` → `scene.json`.
