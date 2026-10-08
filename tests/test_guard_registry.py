@@ -137,10 +137,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 81)
+        self.assertEqual(report["covered_by_guard_count"], 93)
         self.assertEqual(report["covered_by_review_count"], 21)
         self.assertEqual(report["needs_real_case_count"], 10)
-        self.assertEqual(report["uncovered_count"], 105)
+        self.assertEqual(report["uncovered_count"], 93)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -224,6 +224,19 @@ class TestGuardRegistry(unittest.TestCase):
             "l0606-first-drafts-failed",
             "l0029-script-printing-fail",
             "l0040-three-unchanged-camera",
+            # Phase 2 Batch 6 Revit Families, Geometry Critics, Authored Values & Render QA
+            "l0042-installed-native-revit",
+            "l0200-critic-caught-through",
+            "l0209-guards",
+            "l0999-v01-interior-draft",
+            "l0992-v25-exterior-draft",
+            "l1004-later-pass-overwrote",
+            "l0555-pinned-doors-re",
+            "l0682-forcing-24-mm",
+            "l0018-falling-back-comments",
+            "l0528-20-mm-grid",
+            "l0534-corner-not-side",
+            "l0720-codex-fix-cut",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
@@ -844,8 +857,35 @@ class TestGuardRegistry(unittest.TestCase):
                 self.assertTrue(clean_res.passed, f"{name} clean failed: {clean_res.error_message}")
                 self.assertFalse(clean_res.fired, f"{name} clean fired unexpectedly")
 
+    def test_phase2_batch6_guards_execution(self) -> None:
+        """Every guard added in Phase 2 Batch 6 executes on real (fires) and clean (quiet) cases."""
+        batch6_guards = [
+            "rfa_portable_compatibility",
+            "villa_concept_reachability_and_links",
+            "concept_critic_upper_supported",
+            "render_qa_window_brightness",
+            "authored_values_override_audit",
+            "authored_values_override_existing_field",
+            "villa_furnish_room_route_connectivity",
+            "villa_furnish_coffee_table_clearance",
+        ]
+        self.assertEqual(len(batch6_guards), 8, "Expected exactly 8 new guards in Batch 6")
+
+        for name in batch6_guards:
+            with self.subTest(guard=name):
+                guard = get_guard(name)
+                self.assertFalse(guard.needs_real_case, f"{name} should not need real case")
+                real_res = guard.run_case("real")
+                self.assertTrue(real_res.passed, f"{name} real failed: {real_res.error_message}")
+                self.assertTrue(real_res.fired, f"{name} real did not fire")
+
+                clean_res = guard.run_case("clean")
+                self.assertTrue(clean_res.passed, f"{name} clean failed: {clean_res.error_message}")
+                self.assertFalse(clean_res.fired, f"{name} clean fired unexpectedly")
+
 
 if __name__ == "__main__":
     unittest.main()
+
 
 

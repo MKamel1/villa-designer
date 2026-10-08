@@ -64,11 +64,15 @@ from archpipe import (
     material_basis,
     refactor_audit,
     render_qa,
+    rfa,
     safe_io,
     stage_result,
     villa_render_contract,
 )
 from archpipe.concept import (
+    authored_guard,
+    authored_values,
+    critic,
     physical_part,
     render_support,
     revit_spec,
@@ -106,6 +110,9 @@ __all__ = [
     "check_asset_bounds_normalisation",
     "check_asset_contents_and_licence",
     "check_asset_role",
+    "check_authored_values_override_audit",
+    "check_authored_values_override_existing_field",
+    "check_concept_critic_upper_supported",
     "check_element_id_exact_integer",
     "check_falsy_zero_lint",
     "check_fixture_photometry_ownership",
@@ -123,26 +130,31 @@ __all__ = [
     "check_raw_copy_lint",
     "check_refactor_silent_deletion",
     "check_render_contract_scene_geometry",
+    "check_render_qa_window_brightness",
     "check_render_support_blocked_openings",
     "check_render_support_unsupported",
     "check_revit_spec_clearance_problems",
     "check_revit_spec_wp1_detail_constraints",
+    "check_rfa_portable_compatibility",
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
     "check_stage_result_fail_verdict_rejection",
     "check_stage_result_stale_input_invalidation",
     "check_stair_pitch_headroom",
     "check_utf16_or_utf8_json",
+    "check_villa_concept_reachability_and_links",
     "check_villa_concept_stair_access",
     "check_villa_concept_stair_structure",
     "check_villa_furnish3d_opening_spec_id",
     "check_villa_furnish_bedside_zone_a",
+    "check_villa_furnish_coffee_table_clearance",
     "check_villa_furnish_door_wall_clearance",
     "check_villa_furnish_inside_room_boundary",
     "check_villa_furnish_kitchen_run_modules",
     "check_villa_furnish_kitchen_work_aisle",
     "check_villa_furnish_pocket_door_approach",
     "check_villa_furnish_principal_window_reachable",
+    "check_villa_furnish_room_route_connectivity",
     "check_villa_furnish_route_corner_disc",
     "check_villa_furnish_stair_foot_reachable",
     "check_villa_landscape_prop_room_extent",
@@ -2192,13 +2204,13 @@ _lay_door_wall_bad["rooms"]["parents-dressing"]["door_at"]["parents-bed"] = 22.1
 register_guard(
     fn=check_villa_furnish_door_wall_clearance,
     name="villa_furnish_door_wall_clearance",
-    lesson_ids=("l0557-door-can-run", "l0557"),
+    lesson_ids=("l0557-door-can-run", "l0557", "l0720-codex-fix-cut", "l0720"),
     real_case=case(None, _lay_door_wall_bad),
     clean_case=case(None, villa_r11.design("D1")),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
-    description="Validates that doors do not run into intersecting walls across openings (l0557)",
+    description="Validates that doors do not run into intersecting walls across openings (l0557, l0720)",
 )
 
 
@@ -3000,6 +3012,295 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Fails closed with StaleInputError when cached stage inputs differ from recorded hashes (l0040)",
+)
+
+
+# -----------------------------------------------------------------------------
+# Phase 2 Batch 6: Revit Families, Geometry Critics, Authored Values & Render QA
+# -----------------------------------------------------------------------------
+
+# 62. l0042: Revit family format version compatibility without opening Revit
+def check_rfa_portable_compatibility(
+    family_path_or_bytes: Path | str | bytes,
+    target_year: int = 2025,
+) -> bool:
+    """Validates that a Revit family file is compatible with target Revit release (l0042)."""
+    if isinstance(family_path_or_bytes, bytes):
+        with tempfile.NamedTemporaryFile(suffix=".rfa", delete=False) as tf:
+            tf.write(family_path_or_bytes)
+            tf_path = Path(tf.name)
+        try:
+            info = rfa.read(tf_path)
+        finally:
+            tf_path.unlink(missing_ok=True)
+    else:
+        info = rfa.read(family_path_or_bytes)
+
+    usable = info.usable_in(target_year)
+    if usable is not True:
+        raise ValueError(
+            f"Family {info.path.name} is not usable in Revit {target_year}: {info.describe(target_year)}"
+        )
+    return True
+
+
+_rfa_2027_bytes = (
+    rfa.OLE_MAGIC
+    + b"\0" * 512
+    + "Revit Build: Autodesk Revit 2027 (Build: 27.0.1)\nFormat: 2027".encode("utf-16-le")
+    + b"\0" * 512
+)
+_rfa_2025_bytes = (
+    rfa.OLE_MAGIC
+    + b"\0" * 512
+    + "Revit Build: Autodesk Revit 2025 (Build: 25.0.1)\nFormat: 2025".encode("utf-16-le")
+    + b"\0" * 512
+)
+
+register_guard(
+    fn=check_rfa_portable_compatibility,
+    name="rfa_portable_compatibility",
+    lesson_ids=("l0042-installed-native-revit", "l0042"),
+    real_case=case(_rfa_2027_bytes, 2025),
+    clean_case=case(_rfa_2025_bytes, 2025),
+    expected_real=ValueError,
+    expected_clean=True,
+    tier=2,
+    description="Validates Revit family version compatibility without Revit and rejects forward-incompatible files (l0042)",
+)
+
+
+# 63. l0200: Villa concept room reachability and link buildability
+def check_villa_concept_reachability_and_links(layout: dict[str, Any]) -> dict[str, Any]:
+    """Validates that room adjacency links can build real doors and all rooms are reachable (l0200)."""
+    res = villa.critique(layout)
+    failed = [
+        c
+        for c in res.get("checks", [])
+        if c.get("check") in ("links_built", "reachability") and c.get("status") == "fail"
+    ]
+    if failed:
+        raise ValueError(f"Villa concept reachability or links check failed: {failed}")
+    return res
+
+
+_lay_reach_bad = copy.deepcopy(villa.concept_a())
+_lay_reach_bad["links"].append(["kids-a", "parents-bed"])
+
+register_guard(
+    fn=check_villa_concept_reachability_and_links,
+    name="villa_concept_reachability_and_links",
+    lesson_ids=("l0200-critic-caught-through", "l0200"),
+    real_case=case(_lay_reach_bad),
+    clean_case=case(villa.concept_a()),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that room adjacency links can build doors and all rooms remain reachable (l0200)",
+)
+
+
+# 64. l0209: Multi-level upper rooms supported by ground floor footprint
+def check_concept_critic_upper_supported(layout: dict[str, Any]) -> dict[str, Any]:
+    """Validates that upper level rooms are supported by ground floor footprint (l0209)."""
+    res = critic.critique(layout)
+    check = next((c for c in res.get("checks", []) if c.get("check") == "upper_supported"), None)
+    if not check or check.get("status") == "fail":
+        raise ValueError(f"Upper supported check failed: {check}")
+    return check
+
+
+_lay_upper_clean = {
+    "id": "concept_upper_clean",
+    "parti": "bar",
+    "plot": {"width_m": 30.0, "depth_m": 40.0},
+    "levels": {"L00": 0.0, "L01": 3.0},
+    "entrance": "entry",
+    "rooms": {
+        "entry": {"level": "L00", "rect": [5.0, 5.0, 9.0, 9.0], "occupancy": "entrance"},
+        "living": {"level": "L00", "rect": [9.0, 5.0, 15.0, 9.0], "occupancy": "living"},
+        "bed-1": {"level": "L01", "rect": [5.0, 5.0, 9.0, 9.0], "occupancy": "bedroom"},
+    },
+    "links": [["entry", "living"]],
+    "vertical": [],
+}
+_lay_upper_bad = copy.deepcopy(_lay_upper_clean)
+_lay_upper_bad["rooms"]["bed-1"]["rect"] = [5.0, 5.0, 11.0, 11.0]
+
+register_guard(
+    fn=check_concept_critic_upper_supported,
+    name="concept_critic_upper_supported",
+    lesson_ids=("l0209-guards", "l0209"),
+    real_case=case(_lay_upper_bad),
+    clean_case=case(_lay_upper_clean),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that upper level rooms are supported by ground floor structure below (l0209)",
+)
+
+
+# 65. l0999, l0992: Window daylight brightness vs interior room luminance
+def check_render_qa_window_brightness(
+    view_median: float,
+    room_p90: float,
+    *,
+    exterior_camera: bool = False,
+) -> str:
+    """Validates that daylight through windows exceeds room interior brightness (l0999, l0992)."""
+    if exterior_camera:
+        return "PASS"
+    status = render_qa.window_brightness_status(view_median, room_p90)
+    if status != "PASS":
+        raise ValueError(
+            f"Window brightness failed: view median {view_median:.2f} < room 90th percentile {room_p90:.2f}"
+        )
+    return status
+
+
+register_guard(
+    fn=check_render_qa_window_brightness,
+    name="render_qa_window_brightness",
+    lesson_ids=(
+        "l0999-v01-interior-draft",
+        "l0999",
+        "l0992-v25-exterior-draft",
+        "l0992",
+    ),
+    real_case=case(0.80, 0.81, exterior_camera=False),
+    clean_case=case(0.85, 0.81, exterior_camera=False),
+    expected_real=ValueError,
+    expected_clean="PASS",
+    tier=2,
+    description="Validates daylight window view median brightness against interior room 90th percentile (l0999, l0992)",
+)
+
+
+# 66. l1004, l0555, l0682: Authored record fields override require reason and audit trail
+def check_authored_values_override_audit(
+    record: dict[str, Any],
+    key: str,
+    value: Any,
+    reason: str,
+) -> dict[str, Any]:
+    """Validates that authored records cannot be overwritten without a reasoned audit chain (l1004, l0555, l0682)."""
+    rec = copy.deepcopy(record)
+    res = authored_values.override(rec, key, value, reason)
+    unexplained = authored_guard.unexplained_changes(record, res, (key,))
+    if unexplained:
+        raise ValueError(f"Unexplained change detected for authored fields: {unexplained}")
+    return res
+
+
+_record_authored_clean = {"lens_mm": 16, "pinned_door": 21.847}
+
+register_guard(
+    fn=check_authored_values_override_audit,
+    name="authored_values_override_audit",
+    lesson_ids=(
+        "l1004-later-pass-overwrote",
+        "l1004",
+        "l0555-pinned-doors-re",
+        "l0555",
+        "l0682-forcing-24-mm",
+        "l0682",
+    ),
+    real_case=case(_record_authored_clean, "lens_mm", 24, ""),
+    clean_case=case(_record_authored_clean, "lens_mm", 24, "camera normalisation"),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that authored fields require a non-empty audit reason to override without silent overwrites (l1004, l0555, l0682)",
+)
+
+
+# 67. l0018: Override requires an existing field rather than unauthored fallback creation
+def check_authored_values_override_existing_field(
+    record: dict[str, Any],
+    key: str,
+    value: Any,
+    reason: str,
+) -> dict[str, Any]:
+    """Validates that override requires an existing field rather than fallback creation (l0018)."""
+    rec = copy.deepcopy(record)
+    return authored_values.override(rec, key, value, reason)
+
+
+_record_missing_field = {"id": "item-01"}
+_record_existing_field = {"id": "item-01", "comments": "authored-notes"}
+
+register_guard(
+    fn=check_authored_values_override_existing_field,
+    name="authored_values_override_existing_field",
+    lesson_ids=("l0018-falling-back-comments", "l0018"),
+    real_case=case(_record_missing_field, "comments", "metadata", "fallback"),
+    clean_case=case(_record_existing_field, "comments", "metadata", "explicit revision"),
+    expected_real=KeyError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that override requires an existing authored field rather than fallback creation (l0018)",
+)
+
+
+# 68. l0528: Room route connectivity check
+def check_villa_furnish_room_route_connectivity(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that room interior furniture does not sever circulation route connectivity (l0528)."""
+    res = villa_furnish.check(items, lay)
+    routes = res.get("routes", {})
+    if routes.get("status") != "pass" or routes.get("problems"):
+        raise ValueError(f"Room route connectivity check failed: {routes.get('problems')}")
+    return routes
+
+
+_items_route_conn_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_by_id_route_conn = {it["id"]: it for it in _items_route_conn_bad}
+_by_id_route_conn["ka-wardrobe"]["cx"] = 13.4
+
+register_guard(
+    fn=check_villa_furnish_room_route_connectivity,
+    name="villa_furnish_room_route_connectivity",
+    lesson_ids=("l0528-20-mm-grid", "l0528"),
+    real_case=case(_items_route_conn_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that interior furniture arrangement maintains circulation route connectivity between doors and pieces (l0528)",
+)
+
+
+# 69. l0534: Coffee table clearance from seating
+def check_villa_furnish_coffee_table_clearance(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that coffee tables maintain minimum required clearance (457 mm) from sofa fronts (l0534)."""
+    res = villa_furnish.check(items, lay)
+    clearances = res.get("clearances", {})
+    if clearances.get("status") != "pass" or clearances.get("problems"):
+        raise ValueError(f"Furniture clearance check failed: {clearances.get('problems')}")
+    return clearances
+
+
+_items_coffee_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_by_id_coffee = {it["id"]: it for it in _items_coffee_bad}
+_l_sofa = _by_id_coffee["lounge-sofa"]
+_l_coffee = _by_id_coffee["lounge-coffee"]
+_l_coffee["cy"] = _l_sofa["cy"] + _l_sofa["d"] / 2 + 0.44 + _l_coffee["d"] / 2
+
+register_guard(
+    fn=check_villa_furnish_coffee_table_clearance,
+    name="villa_furnish_coffee_table_clearance",
+    lesson_ids=("l0534-corner-not-side", "l0534"),
+    real_case=case(_items_coffee_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that coffee tables maintain at least 457 mm clearance from seating fronts (l0534)",
 )
 
 
