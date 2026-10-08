@@ -63,6 +63,8 @@ from archpipe.evidence import (
     combine,
 )
 from archpipe.external_claims import (
+    CompletenessShortfallError,
+    UnsafeDestinationError,
     check_cct_and_watts_agreement,
     check_photometry_fitting_agreement,
     ingest_bytes,
@@ -71,6 +73,7 @@ from archpipe import (
     asset_intake,
     evidence,
     execution_context,
+    external_claims,
     material_basis,
     refactor_audit,
     render_qa,
@@ -135,6 +138,9 @@ __all__ = [
     "check_execution_context_absolute_path",
     "check_execution_context_dependencies",
     "check_execution_context_roles",
+    "check_external_claims_manifest_completeness",
+    "check_external_claims_safe_destination",
+    "check_external_claims_search_relevance",
     "check_falsy_zero_lint",
     "check_fixture_photometry_ownership",
     "check_landscape_bench_dimensions",
@@ -165,8 +171,10 @@ __all__ = [
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
     "check_stage_result_fail_verdict_rejection",
+    "check_stage_result_failed_exit_refusal",
     "check_stage_result_output_integrity",
     "check_stage_result_stale_input_invalidation",
+    "check_stage_result_stale_upstream_source",
     "check_stair_pitch_headroom",
     "check_utf16_or_utf8_json",
     "check_villa_concept_reachability_and_links",
@@ -4013,6 +4021,172 @@ register_guard(
     notes="needs real case: the recorded failure is a Windows PYTHONPATH joined with ':' instead of ';' "
           "(docs/LEARNINGS.md 'could not import archpipe'); a made-up module name is a sibling, not that case "
           "(lead review of batch 9, 2026-10-08)",
+    needs_real_case=True,
+)
+
+
+
+# -----------------------------------------------------------------------------
+# Phase 2, Batch 10: External Claims Ingestion & Stage Result Proofs
+# -----------------------------------------------------------------------------
+
+# 90. l0122: Manifest and catalogue crawl completeness verification
+def check_external_claims_manifest_completeness(
+    expected_count: int,
+    received_count: int,
+    label: str = "Manifest",
+    min_coverage_ratio: float = 1.0,
+) -> None:
+    """Validates that catalogue crawl or manifest contains all expected items without shortfall (l0122)."""
+    return external_claims.assert_manifest_complete(
+        expected_count, received_count, label=label, min_coverage_ratio=min_coverage_ratio
+    )
+
+
+register_guard(
+    fn=check_external_claims_manifest_completeness,
+    name="external_claims_manifest_completeness",
+    lesson_ids=("l0122-catalogue-crawl-lost", "l0122"),
+    real_case=case(381, 223, label="Luminaire Catalogue Crawl"),
+    clean_case=case(381, 381, label="Luminaire Catalogue Crawl"),
+    expected_real=CompletenessShortfallError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that catalogue crawl or manifest contains all expected items without shortfall (l0122)",
+)
+
+
+# 91. l0191: Search query relevance and nonsense query filtering
+def check_external_claims_search_relevance(
+    query: str,
+    text: str,
+) -> EvidenceRecord:
+    """Validates that search results satisfy term relevance thresholds to prevent spurious hits (l0191)."""
+    return external_claims.check_search_relevance(query, text)
+
+
+register_guard(
+    fn=check_external_claims_search_relevance,
+    name="external_claims_search_relevance",
+    lesson_ids=("l0191-fallback-then-returned", "l0191"),
+    real_case=case(
+        "xylophonic quasar marmalade",
+        "The breakfast dining table is served with toast and citrus marmalade preserve.",
+    ),
+    clean_case=case(
+        "overheating criteria operative temperature",
+        "Thermal comfort assessment relies on criteria for operative temperature to prevent summer overheating in residential rooms.",
+    ),
+    expected_real=EvidenceStatus.UNVERIFIED,
+    expected_clean=EvidenceStatus.VERIFIED,
+    tier=2,
+    description="Validates that search results satisfy term relevance thresholds to prevent spurious hits (l0191)",
+)
+
+
+# 92. l0120: Destination isolation from deployed asset repositories
+_safe_temp_dir_l0120 = Path(tempfile.gettempdir()) / "archpipe_safe_dest_check"
+_safe_temp_dest_l0120 = _safe_temp_dir_l0120 / "test.ies"
+
+
+def check_external_claims_safe_destination(
+    dest: Path | str,
+    forbidden_roots: list[Path] | None = None,
+    allowed_roots: list[Path] | None = None,
+) -> Path:
+    """Validates that output destinations are isolated from deployed asset stores (l0120)."""
+    return external_claims.check_safe_destination(
+        dest, forbidden_roots=forbidden_roots, allowed_roots=allowed_roots
+    )
+
+
+register_guard(
+    fn=check_external_claims_safe_destination,
+    name="external_claims_safe_destination",
+    lesson_ids=("l0120-unit-test-exported", "l0120"),
+    real_case=case(ROOT / "assets/user/luminaires/signify/test_sku/test.ies"),
+    clean_case=case(_safe_temp_dest_l0120, allowed_roots=[_safe_temp_dir_l0120]),
+    expected_real=UnsafeDestinationError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that output destinations are isolated from deployed asset stores (l0120)",
+)
+
+
+# 93. l0287: Non-zero exit code or failed status stage result refusal
+def check_stage_result_failed_exit_refusal(
+    record_or_path: dict[str, Any] | Path | str,
+    root: Path | str | None = None,
+) -> tuple[bool, str, dict[str, Any]]:
+    """Validates that stage results with failed status or non-zero exit refuse consumption (l0287)."""
+    return stage_result.validate_stage_result(
+        record_or_path,
+        root=root,
+        raise_on_error=True,
+    )
+
+
+_record_l0287_failed: dict[str, Any] = {
+    "stage": "expensive_simulation_stage",
+    "status": "fail",
+    "exit_code": 1,
+    "completeness": {"complete": True, "missing_outputs": [], "empty_outputs": []},
+    "inputs": {},
+    "outputs": {},
+}
+_record_l0287_clean: dict[str, Any] = {
+    "stage": "expensive_simulation_stage",
+    "status": "ok",
+    "exit_code": 0,
+    "completeness": {"complete": True, "missing_outputs": [], "empty_outputs": []},
+    "inputs": {},
+    "outputs": {},
+}
+
+register_guard(
+    fn=check_stage_result_failed_exit_refusal,
+    name="stage_result_failed_exit_refusal",
+    lesson_ids=("l0287-slow-session-persist", "l0287"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that stage results with failed status or non-zero exit refuse consumption (l0287)",
+    notes="needs real case: l0287's recorded failure is losing an expensive Revit upgrade because serialisation failed before the result was saved (docs/LEARNINGS.md 'persist the expensive result first'); a failed exit status is a different lesson (lead review of batch 10, 2026-10-08)",
+    needs_real_case=True,
+)
+
+
+# 94. l0619: Render job upstream input staleness invalidation
+def check_stage_result_stale_upstream_source(
+    record_or_path: dict[str, Any] | Path | str,
+    root: Path | str | None = None,
+    current_inputs: Iterable[Path | str] | None = None,
+) -> tuple[bool, str, dict[str, Any]]:
+    """Validates that render jobs fail closed when upstream source inputs have changed (l0619)."""
+    return stage_result.validate_stage_result(
+        record_or_path,
+        root=root,
+        current_inputs=current_inputs,
+        raise_on_error=True,
+    )
+
+
+_record_l0619_stale = copy.deepcopy(_record_clean)
+_record_l0619_stale["inputs"]["spec/villa-site.yaml"]["sha256"] = "a" * 64
+
+register_guard(
+    fn=check_stage_result_stale_upstream_source,
+    name="stage_result_stale_upstream_source",
+    lesson_ids=("l0619-render-job-resumed", "l0619"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that render jobs fail closed when upstream source inputs have changed (l0619)",
+    notes="needs real case: l0619's recorded failure is a resumed render whose job id hashed the scene and IES files but not the renderer (docs/LEARNINGS.md 'A render job resumed a stale result'); a tampered input digest is a sibling (lead review of batch 10, 2026-10-08)",
     needs_real_case=True,
 )
 
