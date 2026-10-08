@@ -12,6 +12,8 @@ from datetime import date
 from pathlib import Path
 from typing import Callable
 
+from archpipe.evidence import check_geometry_against_metadata
+
 
 REQUIRED = ("id", "role", "source_url", "licence", "author", "credit",
             "units_normalised", "up_axis", "front_axis", "bounds_m",
@@ -205,7 +207,7 @@ def validate_entry(entry: dict, model_path: Path | None = None,
                 measured = (measure or measure_gltf_bounds)(model_path)
                 drift = max(abs(float(a) - float(b)) for key in ("min", "max")
                             for a, b in zip(entry["bounds_m"][key], measured[key]))
-                if drift > BOUNDS_TOLERANCE_M:
+                if check_geometry_against_metadata(drift, 0.0, tolerance=BOUNDS_TOLERANCE_M)["flagged"]:
                     errors.append(f"bounds_m disagrees with local file by {drift:.4f} m")
             except (OSError, ValueError, KeyError, IndexError, TypeError) as exc:
                 errors.append(f"could not re-measure local model: {exc}")
