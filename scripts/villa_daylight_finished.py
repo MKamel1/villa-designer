@@ -27,6 +27,7 @@ from archpipe import daylight as D                                   # noqa: E40
 from archpipe.concept import villa_daylight as VD                    # noqa: E402
 from archpipe.concept import villa_r11 as R                          # noqa: E402
 from archpipe.concept import villa_render as VR                      # noqa: E402
+from archpipe.evidence import check_shared_model                     # noqa: E402
 
 JOB = "villa-df-d1-finished"
 LOCAL = ROOT / "out" / "villa" / "daylight" / JOB
@@ -55,7 +56,34 @@ def finished_scene():
     return s
 
 
-def run(host=DEFAULT_HOST):
+def verify_shared_model(render_scene_hash: str | None = None) -> dict:
+    """Verify daylight simulation describes the same model as the render scene (l0661)."""
+    analysis_hash = VR.source_provenance(ROOT)["source_hash"]
+    if render_scene_hash is None:
+        scene_json = VR.OUT / "scene.json"
+        if scene_json.is_file():
+            try:
+                render_data = json.loads(scene_json.read_text(encoding="utf-8"))
+                render_scene_hash = render_data.get("provenance", {}).get("source_hash")
+            except Exception:
+                render_scene_hash = None
+    if not render_scene_hash:
+        print("Report: no render-scene hash is available to verify shared model (l0661)", file=sys.stderr)
+        return {
+            "matches": False,
+            "render_model_hash": None,
+            "analysis_model_hash": analysis_hash,
+            "flagged": True,
+            "reason": "No render-scene hash is available to verify shared model against daylight analysis (l0661)",
+        }
+    check = check_shared_model(render_scene_hash, analysis_hash)
+    if check["flagged"]:
+        raise RuntimeError(f"Daylight simulation refused: {check['reason']}")
+    return check
+
+
+def run(host=DEFAULT_HOST, render_scene_hash=None):
+    verify_shared_model(render_scene_hash)
     if LOCAL.exists():
         shutil.rmtree(LOCAL)
     val, expect = D.validation_cases()
