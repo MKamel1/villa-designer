@@ -76,6 +76,7 @@ from archpipe.concept import (
     authored_guard,
     authored_values,
     critic,
+    mounting,
     physical_part,
     render_support,
     render_views,
@@ -114,6 +115,7 @@ __all__ = [
     "check_asset_bounds_normalisation",
     "check_asset_contents_and_licence",
     "check_asset_role",
+    "check_authored_guard_unexplained_changes",
     "check_authored_values_override_audit",
     "check_authored_values_override_existing_field",
     "check_concept_critic_upper_supported",
@@ -127,6 +129,7 @@ __all__ = [
     "check_luminaire_flux_requirement",
     "check_fixture_record_consistency",
     "check_material_appearance_basis",
+    "check_mounting_handrail_finished_face",
     "check_physical_part_climber_proxy",
     "check_physical_part_duvet_footprint",
     "check_physical_part_garment_proxy",
@@ -140,6 +143,7 @@ __all__ = [
     "check_render_support_blocked_openings",
     "check_render_support_unsupported",
     "check_render_views_subject_framing",
+    "check_render_views_subject_presence",
     "check_revit_spec_clearance_problems",
     "check_revit_spec_wp1_detail_constraints",
     "check_rfa_portable_compatibility",
@@ -166,11 +170,14 @@ __all__ = [
     "check_villa_furnish_room_route_connectivity",
     "check_villa_furnish_route_corner_disc",
     "check_villa_furnish_stair_foot_reachable",
+    "check_villa_furnish_under_stair_storage_profile",
+    "check_villa_landscape_camera_canopy_clearance",
     "check_villa_landscape_plant_spacing",
     "check_villa_landscape_prop_room_extent",
     "check_villa_landscape_route_obstruction",
     "check_villa_lighting_grooming_task",
     "check_villa_lighting_prep_task",
+    "check_villa_lighting_windowless_store_target",
     "check_villa_route_width_stair_void",
     "clear_registry",
     "coverage_report",
@@ -1139,17 +1146,20 @@ register_guard(
     description="Enforces text normalization on TextNote records, rejecting un-normalized carriage returns (l0024)",
 )
 
-# 10. l0067: falsy-zero lint catches an or-default that swallows an explicit zero
+# 10. l0067, l0066: falsy-zero lint catches an or-default that swallows an explicit zero
 register_guard(
     fn=check_falsy_zero_lint,
     name="safe_io_falsy_zero_lint",
-    lesson_ids=("l0067-first-falsy-zero", "l0067"),
+    lesson_ids=(
+        "l0067-first-falsy-zero", "l0067",
+        "l0066-lights-could-not", "l0066",
+    ),
     real_case=case('energy = P * float(fx.get("output") or 1.0)'),  # falsy-ok: l0067 real bug fixture
     clean_case=case('energy = P * (float(fx["output"]) if fx.get("output") is not None else 1.0)'),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
-    description="Fails closed on code lines using float(x or <nonzero>) that swallow an explicit zero (l0067)",
+    description="Fails closed on code lines using float(x or <nonzero>) that swallow an explicit zero (l0066, l0067)",
 )
 
 # 11. l0117: IronPython read UTF-16 as empty and failed on non-ASCII symbols
@@ -3527,6 +3537,241 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Validates that placed furniture pieces do not clash with structural columns (l0013)",
+)
+
+
+# -----------------------------------------------------------------------------
+# Phase 2 Batch 8: Stair / Opening / Route Geometry, Revit Mounting & Lighting
+# -----------------------------------------------------------------------------
+
+# 77. l0856: Handrail mounting to finished face
+def check_mounting_handrail_finished_face(
+    mesh: dict[str, Any],
+    hosts: dict[str, Any],
+) -> list[str]:
+    """Validates that wall handrails are mounted clear of plaster face within tolerance (l0856)."""
+    errors = mounting.check_mesh(mesh, hosts)
+    if errors:
+        raise ValueError(f"Mounting finished-face error: {errors}")
+    return errors
+
+
+_host_l0856 = mounting.Host(
+    "historic-wall", "wall", (0, -28.471, 0), (0, 1, 0), mounting.Finish("historic-modeled-face", 0)
+)
+_rail_l0856_bad = dict(
+    id="frozen-l0856",
+    part_kind="handrail",
+    faces=[
+        [[5.317, -28.611, 0.70], [9.517, -28.611, -1.95],
+         [9.517, -28.581, -1.95], [5.317, -28.581, 0.70]]
+    ],
+)
+_rail_l0856_bad["mounting"] = mounting.binding(
+    mounting.MountItem(_rail_l0856_bad["id"]), _host_l0856, 0.085, "wall-hung"
+)
+
+_rail_l0856_clean = dict(
+    id="clean-l0856",
+    part_kind="handrail",
+    faces=[
+        [[5.317, -28.386, 0.70], [9.517, -28.386, -1.95],
+         [9.517, -28.356, -1.95], [5.317, -28.356, 0.70]]
+    ],
+)
+_rail_l0856_clean["mounting"] = mounting.binding(
+    mounting.MountItem(_rail_l0856_clean["id"]), _host_l0856, 0.085, "wall-hung"
+)
+
+register_guard(
+    fn=check_mounting_handrail_finished_face,
+    name="mounting_handrail_finished_face",
+    lesson_ids=("l0856-stair-s-wall", "l0856"),
+    real_case=case(_rail_l0856_bad, {_host_l0856.id: _host_l0856}),
+    clean_case=case(_rail_l0856_clean, {_host_l0856.id: _host_l0856}),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that stair wall handrails are mounted clear of plaster face within 1 mm tolerance (l0856)",
+)
+
+
+# 78. l0099: Authored design dimensions preserved without unexplained modifications
+def check_authored_guard_unexplained_changes(
+    declared: dict[str, Any],
+    written: dict[str, Any],
+    fields: tuple[str, ...],
+) -> list[str]:
+    """Validates that authored fields are preserved without unexplained changes or silent defaults (l0099)."""
+    changes = authored_guard.unexplained_changes(declared, written, fields)
+    if changes:
+        raise ValueError(f"Authored fields modified without explanation: {changes}")
+    return changes
+
+
+_declared_dim_clean = {"mounting_height": 0, "ceiling_height": 2700}
+_written_dim_bad = {"mounting_height": 2400, "ceiling_height": 2700}
+_written_dim_clean = {
+    "mounting_height": 2400,
+    "ceiling_height": 2700,
+    "overrides": [
+        {"field": "mounting_height", "prior": 0, "new": 2400, "reason": "ADR-0012 updated mounting height"}
+    ],
+}
+
+register_guard(
+    fn=check_authored_guard_unexplained_changes,
+    name="authored_guard_unexplained_changes",
+    lesson_ids=("l0099-design-dimensions-silent", "l0099"),
+    real_case=case(_declared_dim_clean, _written_dim_bad, ("mounting_height", "ceiling_height")),
+    clean_case=case(_declared_dim_clean, _written_dim_clean, ("mounting_height", "ceiling_height")),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that authored dimensions cannot be modified or defaulted without an override audit trail (l0099)",
+)
+
+
+# 79. l0830: View subject existence and frameability in layout
+def check_render_views_subject_presence(
+    layout: dict[str, Any],
+    room: str,
+    subjects: list[str],
+    lens_mm: float = 24.0,
+    sp: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that declared view subjects exist and are frameable within the room layout (l0830)."""
+    items = {i["id"]: i for i in villa_furnish.layout(layout)}
+    missing = [s for s in subjects if s not in items and not s.startswith("detail-")]
+    if missing:
+        raise ValueError(f"View subjects not found in room layout: {missing}")
+    res = render_views.choose(layout, room, subjects, lens_mm=lens_mm, sp=sp)
+    if not res.get("subjects_in_frame"):
+        raise ValueError(f"View subjects not in frame for room '{room}': {subjects}")
+    return res
+
+
+register_guard(
+    fn=check_render_views_subject_presence,
+    name="render_views_subject_presence",
+    lesson_ids=("l0830-view-subject-can", "l0830"),
+    real_case=case(_lay_d1_base, "parents-dressing", ["historical-stale-wardrobe"], 24.0, _cached_spec()),
+    clean_case=case(_lay_d1_base, "parents-dressing", ["pd-hang-1"], 24.0, _cached_spec()),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that declared view subjects exist in layout and are fully in frame (l0830)",
+)
+
+
+# 80. l0973: Camera proximity to prop foliage canopies
+def check_villa_landscape_camera_canopy_clearance(
+    camera_pos: tuple[float, float, float] | list[float],
+    prop: dict[str, Any],
+    min_clearance_m: float = 1.0,
+) -> float:
+    """Validates that a camera does not stand inside or within clearance distance of a prop canopy (l0973)."""
+    px, py, pz = camera_pos
+    x0, y0, z0, x1, y1, z1 = villa_landscape.prop_world_box(
+        prop["asset"],
+        prop["position"],
+        prop.get("rotation_deg", [0, 0, 0]),
+        prop.get("scale", 1.0),
+    )
+    dist = math.sqrt(sum(d * d for d in (
+        max(x0 - px, 0, px - x1),
+        max(y0 - py, 0, py - y1),
+        max(z0 - pz, 0, pz - z1),
+    )))
+    if dist < min_clearance_m:
+        raise ValueError(
+            f"Camera at ({px:.2f}, {py:.2f}, {pz:.2f}) stands within {dist:.3f} m "
+            f"of prop canopy '{prop.get('id', prop['asset'])}' (minimum clearance {min_clearance_m:.2f} m)"
+        )
+    return dist
+
+
+_prop_top_olive = villa_landscape._prop(
+    "landscape-top-olive", "sf_olive_old", (14.10, -22.10), 0.0, 2.00, "olive"
+)
+
+register_guard(
+    fn=check_villa_landscape_camera_canopy_clearance,
+    name="villa_landscape_camera_canopy_clearance",
+    lesson_ids=("l0973-v26-camera-stood", "l0973"),
+    real_case=case([14.5, -22.0, 1.35], _prop_top_olive, 1.0),
+    clean_case=case([9.0, -20.80, 1.35], _prop_top_olive, 1.0),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that camera positions maintain minimum clearance from prop foliage canopies (l0973)",
+)
+
+
+# 81. l0984: Under-stair storage joinery presence and soffit clearance
+def check_villa_furnish_under_stair_storage_profile(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that under-stair storage casework and modules are present and fit the stair soffit (l0984)."""
+    res = villa_furnish.check(items, lay)
+    chk = res.get("under_stair_storage", {})
+    if chk.get("status") != "pass" or chk.get("problems"):
+        raise ValueError(f"Under-stair storage check failed: {chk.get('problems')}")
+    return chk
+
+
+_items_no_stair_store = [
+    it for it in _cached_furnish_layout()
+    if it["id"] != "stair-flight-store"
+]
+
+register_guard(
+    fn=check_villa_furnish_under_stair_storage_profile,
+    name="villa_furnish_under_stair_storage_profile",
+    lesson_ids=("l0984-v29-missed-under", "l0984"),
+    real_case=case(_items_no_stair_store, _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that under-stair storage modules are present and fit within stair soffit headroom (l0984)",
+)
+
+
+# 82. l0989: Maintained illuminance for windowless storage rooms
+def check_villa_lighting_windowless_store_target(
+    lay: dict[str, Any] | None = None,
+    fixtures: list[Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that windowless storage rooms achieve maintained illuminance targets (ies-res-storage-frequent-50) (l0989)."""
+    res = villa_lighting.check(lay, fixtures)
+    store_room = next((r for r in res.get("rooms", []) if r.get("room") == "store-ramp"), None)
+    if store_room is None:
+        raise ValueError("Room 'store-ramp' not found in lighting check")
+    if store_room.get("avg_floor_lx_direct", 0.0) < store_room.get("required_lx", 50.0):
+        raise ValueError(
+            f"Store room illuminance {store_room.get('avg_floor_lx_direct')} lx is below required "
+            f"{store_room.get('required_lx')} lx"
+        )
+    return store_room
+
+
+_fx_lighting_no_store = [
+    f for f in _fx_lighting_clean
+    if f.room != "store-ramp"
+]
+
+register_guard(
+    fn=check_villa_lighting_windowless_store_target,
+    name="villa_lighting_windowless_store_target",
+    lesson_ids=("l0989-v30-read-black", "l0989"),
+    real_case=case(_lay_d1_base, _fx_lighting_no_store),
+    clean_case=case(_lay_d1_base, _fx_lighting_clean),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that windowless storage rooms achieve required maintained lux target (ies-res-storage-frequent-50) (l0989)",
 )
 
 

@@ -153,10 +153,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 103)
+        self.assertEqual(report["covered_by_guard_count"], 110)
         self.assertEqual(report["covered_by_review_count"], 21)
         self.assertEqual(report["needs_real_case_count"], 10)
-        self.assertEqual(report["uncovered_count"], 83)
+        self.assertEqual(report["uncovered_count"], 76)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -264,6 +264,14 @@ class TestGuardRegistry(unittest.TestCase):
             "l0133-open-right-after",
             "l0741-plants-placed-without",
             "l0013-dropping-unknown-chairs",
+            # Phase 2 Batch 8 Stair / Opening / Route Geometry, Revit Mounting & Lighting
+            "l0066-lights-could-not",
+            "l0856-stair-s-wall",
+            "l0099-design-dimensions-silent",
+            "l0830-view-subject-can",
+            "l0973-v26-camera-stood",
+            "l0984-v29-missed-under",
+            "l0989-v30-read-black",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
