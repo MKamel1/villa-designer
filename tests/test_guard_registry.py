@@ -153,10 +153,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 110)
+        self.assertEqual(report["covered_by_guard_count"], 120)
         self.assertEqual(report["covered_by_review_count"], 21)
-        self.assertEqual(report["needs_real_case_count"], 10)
-        self.assertEqual(report["uncovered_count"], 76)
+        self.assertEqual(report["needs_real_case_count"], 17)
+        self.assertEqual(report["uncovered_count"], 59)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -272,6 +272,19 @@ class TestGuardRegistry(unittest.TestCase):
             "l0973-v26-camera-stood",
             "l0984-v29-missed-under",
             "l0989-v30-read-black",
+            # Phase 2 Batch 9 Evidence Scope / Composition & Execution Context
+            "l0020-isolated-room-not",
+            "l0092-invented-dressing-stand",
+            "l0661-render-daylight-analysis",
+            "l0763-render-side-fix",
+            "l0009-relative-script-path",
+            "l0076-project-s-agents",
+            # Phase 2 Batch 10 External Claims Ingestion & Stage Result Proofs
+            "l0122-catalogue-crawl-lost",
+            "l0191-fallback-then-returned",
+            "l0120-unit-test-exported",
+            # Phase 2 Batch 11 Execution Context & Evidence Boundaries
+            "l0030-current-extract-lacks",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
@@ -331,6 +344,15 @@ class TestGuardRegistry(unittest.TestCase):
             "l0074-nishita-sky-units",
             # Phase 2 Batch 3 Scene & Geometry Builders
             "l0059-no-sunlight-entered",
+            # Phase 2 Batch 9 & 10
+            "l0134-tests-could-not",
+            "l0287-slow-session-persist",
+            "l0619-render-job-resumed",
+            # Phase 2 Batch 11 Execution Context & Evidence Boundaries
+            "l0015-python-3-14",
+            "l0031-windows-python-3",
+            "l0135-python-not-found",
+            "l0622-blender-exited-0",
         ]
         for lid in expected_needs_real_case:
             self.assertIn(lid, report["needs_real_case"], f"Lesson {lid} should be tracked as needs_real_case")

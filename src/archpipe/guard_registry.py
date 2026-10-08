@@ -53,17 +53,27 @@ from archpipe.evidence import (
     EvidenceStatus,
     GeometryDisagreementError,
     PageMismatchError,
+    ScopeWideningError,
+    SourceRef,
     assert_geometry_matches_metadata,
     assert_page_agreement,
     check_book_edition,
+    check_render_vs_design,
+    check_shared_model,
+    combine,
 )
 from archpipe.external_claims import (
+    CompletenessShortfallError,
+    UnsafeDestinationError,
     check_cct_and_watts_agreement,
     check_photometry_fitting_agreement,
     ingest_bytes,
 )
 from archpipe import (
     asset_intake,
+    evidence,
+    execution_context,
+    external_claims,
     material_basis,
     refactor_audit,
     render_qa,
@@ -72,6 +82,7 @@ from archpipe import (
     stage_result,
     villa_render_contract,
 )
+from archpipe.execution_context import ContextError
 from archpipe.concept import (
     authored_guard,
     authored_values,
@@ -120,6 +131,21 @@ __all__ = [
     "check_authored_values_override_existing_field",
     "check_concept_critic_upper_supported",
     "check_element_id_exact_integer",
+    "check_evidence_composition_verified",
+    "check_evidence_door_swing_certification",
+    "check_evidence_render_vs_design",
+    "check_evidence_scope_promotion",
+    "check_evidence_shared_model",
+    "check_execution_context_absolute_path",
+    "check_execution_context_dependencies",
+    "check_execution_context_fresh_artifact_check",
+    "check_execution_context_noninteractive_stdin",
+    "check_execution_context_python_interpreter_path",
+    "check_execution_context_roles",
+    "check_execution_context_writable_directory",
+    "check_external_claims_manifest_completeness",
+    "check_external_claims_safe_destination",
+    "check_external_claims_search_relevance",
     "check_falsy_zero_lint",
     "check_fixture_photometry_ownership",
     "check_landscape_bench_dimensions",
@@ -150,8 +176,10 @@ __all__ = [
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
     "check_stage_result_fail_verdict_rejection",
+    "check_stage_result_failed_exit_refusal",
     "check_stage_result_output_integrity",
     "check_stage_result_stale_input_invalidation",
+    "check_stage_result_stale_upstream_source",
     "check_stair_pitch_headroom",
     "check_utf16_or_utf8_json",
     "check_villa_concept_reachability_and_links",
@@ -3778,6 +3806,564 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Validates that windowless storage rooms achieve required maintained lux target (ies-res-storage-frequent-50) (l0989)",
+)
+
+
+# -----------------------------------------------------------------------------
+# Phase 2, Batch 9: Evidence Integrity & Execution Context Boundaries
+# -----------------------------------------------------------------------------
+
+# 83. l0020: Scope promotion guard (isolated room is not a dwelling)
+def check_evidence_scope_promotion(
+    record: EvidenceRecord,
+    target_scope: str,
+) -> EvidenceRecord:
+    """Validates that a room-scoped evidence record cannot widen silently to dwelling scope (l0020)."""
+    return evidence.EvidenceRecord.apply_to(record, target_scope)
+
+
+_rec_bedroom_lux = EvidenceRecord(
+    value={"maintained_lux": 320},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(title="Bedroom Lighting Calc", verified=True),
+    scope="room",
+)
+
+register_guard(
+    fn=check_evidence_scope_promotion,
+    name="evidence_scope_promotion",
+    lesson_ids=("l0020-isolated-room-not", "l0020"),
+    real_case=case(_rec_bedroom_lux, "dwelling"),
+    clean_case=case(_rec_bedroom_lux, "room"),
+    expected_real=ScopeWideningError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that a room-scoped evidence record cannot widen silently to dwelling scope (l0020)",
+)
+
+
+# 84. l0092: Dressing and stand-in combination guard (ASSUMED items weaken composite status)
+def check_evidence_composition_verified(
+    *records: EvidenceRecord,
+    value: Any = None,
+) -> EvidenceRecord:
+    """Validates that composite evidence records achieve VERIFIED status without assumed stand-ins (l0092)."""
+    res = evidence.combine(*records, value=value)
+    if res.status != EvidenceStatus.VERIFIED:
+        raise ValueError(
+            f"Composite evidence status is {res.status.value}, expected VERIFIED: {res.reasons}"
+        )
+    return res
+
+
+_rec_bed_design = EvidenceRecord(
+    value={"name": "bed_king", "width_mm": 1930, "depth_mm": 2030},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(title="Revit Model Extract", edition="2027", verified=True),
+    scope="room:bedroom",
+)
+_rec_table_design = EvidenceRecord(
+    value={"name": "bedside_table", "width_mm": 500, "depth_mm": 450},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(title="Revit Model Extract", edition="2027", verified=True),
+    scope="room:bedroom",
+)
+_rec_vase_assumed = EvidenceRecord(
+    value={"name": "decor_vase", "bounds_m": [0.2, 0.3, 0.2]},
+    status=EvidenceStatus.ASSUMED,
+    source=SourceRef(title="Procedural Stand-in", verified=False),
+    scope="room:bedroom",
+    reasons=("Invented dressing stand-in, not design content (l0092)",),
+)
+
+register_guard(
+    fn=check_evidence_composition_verified,
+    name="evidence_composition_verified",
+    lesson_ids=("l0092-invented-dressing-stand", "l0092"),
+    real_case=case(_rec_bed_design, _rec_table_design, _rec_vase_assumed, value="bedroom_furnishing_cluster"),
+    clean_case=case(_rec_bed_design, _rec_table_design, value="bedroom_furnishing_cluster"),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that composite evidence records achieve VERIFIED status without assumed stand-ins (l0092)",
+)
+
+
+# 85. l0661: Shared model hash agreement between render and daylight analysis
+def check_evidence_shared_model(
+    model_sha256_render: str,
+    model_sha256_analysis: str,
+) -> dict[str, Any]:
+    """Validates that daylight analysis and rendering describe the same model hash (l0661)."""
+    res = evidence.check_shared_model(model_sha256_render, model_sha256_analysis)
+    if not res.get("matches"):
+        raise ValueError(res.get("reason", "Model hashes disagree"))
+    return res
+
+
+_hash_render_case = "a" * 64
+_hash_analysis_diff = "b" * 64
+
+register_guard(
+    fn=check_evidence_shared_model,
+    name="evidence_shared_model",
+    lesson_ids=("l0661-render-daylight-analysis", "l0661"),
+    real_case=case(_hash_render_case, _hash_analysis_diff),
+    clean_case=case(_hash_render_case, _hash_render_case),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that daylight analysis and rendering describe the same model hash (l0661)",
+)
+
+
+# 86. l0763: Render-side compensation vs design spec consistency
+def check_evidence_render_vs_design(
+    design_value: float,
+    render_value: float,
+    tolerance: float = 0.001,
+) -> dict[str, Any]:
+    """Validates that render-side adjustments do not diverge from the design model (l0763)."""
+    res = evidence.check_render_vs_design(design_value, render_value, tolerance=tolerance)
+    if not res.get("matches"):
+        raise ValueError(res.get("reason", "Render-side fix diverges from design"))
+    return res
+
+
+_design_fitting_z = 2545.0
+_render_fitting_z = 2700.0
+
+register_guard(
+    fn=check_evidence_render_vs_design,
+    name="evidence_render_vs_design",
+    lesson_ids=("l0763-render-side-fix", "l0763"),
+    real_case=case(_design_fitting_z, _render_fitting_z, tolerance=1.0),
+    clean_case=case(_render_fitting_z, _render_fitting_z, tolerance=1.0),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that render-side adjustments do not diverge from the design model (l0763)",
+)
+
+
+# 87. l0009: Strict absolute path requirements for execution boundaries
+def check_execution_context_absolute_path(
+    path: Path | str,
+    label: str = "script",
+    *,
+    file: bool = True,
+) -> Path:
+    """Validates that script and tool execution paths are strictly absolute (l0009)."""
+    return execution_context.absolute(path, label, file=file)
+
+
+register_guard(
+    fn=check_execution_context_absolute_path,
+    name="execution_context_absolute_path",
+    lesson_ids=("l0009-relative-script-path", "l0009"),
+    real_case=case(Path("revit/build_bedroom.py"), "script", file=True),
+    clean_case=case(ROOT / "scripts/verify.py", "script", file=True),
+    expected_real=ContextError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that script and tool execution paths are strictly absolute (l0009)",
+)
+
+
+# 88. l0076: Required agent roles presence in live session context
+_test_ctx_out = Path(tempfile.gettempdir()) / "archpipe_ctx_out"
+_test_ctx_tmp = Path(tempfile.gettempdir()) / "archpipe_ctx_tmp"
+
+
+def check_execution_context_roles(
+    required_roles: Iterable[str],
+    available_roles: Iterable[str],
+    *,
+    root: Path = ROOT,
+    output: Path | None = None,
+    temp: Path | None = None,
+) -> dict[str, Any]:
+    """Validates that required agent roles are present in the live session (l0076)."""
+    out_dir = output or _test_ctx_out
+    tmp_dir = temp or _test_ctx_tmp
+    return execution_context.preflight(
+        root=root,
+        output=out_dir,
+        temp=tmp_dir,
+        required_roles=tuple(required_roles),
+        available_roles=tuple(available_roles),
+    )
+
+
+register_guard(
+    fn=check_execution_context_roles,
+    name="execution_context_roles",
+    lesson_ids=("l0076-project-s-agents", "l0076"),
+    real_case=case(["render_critic"], []),
+    clean_case=case(["render_critic"], ["render_critic"]),
+    expected_real=ContextError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that required agent roles are present in the live session (l0076)",
+)
+
+
+# 89. l0134: Python dependency verification without import side-effects
+def check_execution_context_dependencies(
+    modules: Iterable[str],
+    *,
+    root: Path = ROOT,
+    interpreter: str | Path | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Validates that declared Python dependencies can be located without import side-effects (l0134)."""
+    return execution_context.check_dependencies(modules, root=root, interpreter=interpreter)
+
+
+register_guard(
+    fn=check_execution_context_dependencies,
+    name="execution_context_dependencies",
+    lesson_ids=("l0134-tests-could-not", "l0134"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that declared Python dependencies can be located without import side-effects (l0134)",
+    notes="needs real case: the recorded failure is a Windows PYTHONPATH joined with ':' instead of ';' "
+          "(docs/LEARNINGS.md 'could not import archpipe'); a made-up module name is a sibling, not that case "
+          "(lead review of batch 9, 2026-10-08)",
+    needs_real_case=True,
+)
+
+
+
+# -----------------------------------------------------------------------------
+# Phase 2, Batch 10: External Claims Ingestion & Stage Result Proofs
+# -----------------------------------------------------------------------------
+
+# 90. l0122: Manifest and catalogue crawl completeness verification
+def check_external_claims_manifest_completeness(
+    expected_count: int,
+    received_count: int,
+    label: str = "Manifest",
+    min_coverage_ratio: float = 1.0,
+) -> None:
+    """Validates that catalogue crawl or manifest contains all expected items without shortfall (l0122)."""
+    return external_claims.assert_manifest_complete(
+        expected_count, received_count, label=label, min_coverage_ratio=min_coverage_ratio
+    )
+
+
+register_guard(
+    fn=check_external_claims_manifest_completeness,
+    name="external_claims_manifest_completeness",
+    lesson_ids=("l0122-catalogue-crawl-lost", "l0122"),
+    real_case=case(381, 223, label="Luminaire Catalogue Crawl"),
+    clean_case=case(381, 381, label="Luminaire Catalogue Crawl"),
+    expected_real=CompletenessShortfallError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that catalogue crawl or manifest contains all expected items without shortfall (l0122)",
+)
+
+
+# 91. l0191: Search query relevance and nonsense query filtering
+def check_external_claims_search_relevance(
+    query: str,
+    text: str,
+) -> EvidenceRecord:
+    """Validates that search results satisfy term relevance thresholds to prevent spurious hits (l0191)."""
+    return external_claims.check_search_relevance(query, text)
+
+
+register_guard(
+    fn=check_external_claims_search_relevance,
+    name="external_claims_search_relevance",
+    lesson_ids=("l0191-fallback-then-returned", "l0191"),
+    real_case=case(
+        "xylophonic quasar marmalade",
+        "The breakfast dining table is served with toast and citrus marmalade preserve.",
+    ),
+    clean_case=case(
+        "overheating criteria operative temperature",
+        "Thermal comfort assessment relies on criteria for operative temperature to prevent summer overheating in residential rooms.",
+    ),
+    expected_real=EvidenceStatus.UNVERIFIED,
+    expected_clean=EvidenceStatus.VERIFIED,
+    tier=2,
+    description="Validates that search results satisfy term relevance thresholds to prevent spurious hits (l0191)",
+)
+
+
+# 92. l0120: Destination isolation from deployed asset repositories
+_safe_temp_dir_l0120 = Path(tempfile.gettempdir()) / "archpipe_safe_dest_check"
+_safe_temp_dest_l0120 = _safe_temp_dir_l0120 / "test.ies"
+
+
+def check_external_claims_safe_destination(
+    dest: Path | str,
+    forbidden_roots: list[Path] | None = None,
+    allowed_roots: list[Path] | None = None,
+) -> Path:
+    """Validates that output destinations are isolated from deployed asset stores (l0120)."""
+    return external_claims.check_safe_destination(
+        dest, forbidden_roots=forbidden_roots, allowed_roots=allowed_roots
+    )
+
+
+register_guard(
+    fn=check_external_claims_safe_destination,
+    name="external_claims_safe_destination",
+    lesson_ids=("l0120-unit-test-exported", "l0120"),
+    real_case=case(ROOT / "assets/user/luminaires/signify/test_sku/test.ies"),
+    clean_case=case(_safe_temp_dest_l0120, allowed_roots=[_safe_temp_dir_l0120]),
+    expected_real=UnsafeDestinationError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that output destinations are isolated from deployed asset stores (l0120)",
+)
+
+
+# 93. l0287: Non-zero exit code or failed status stage result refusal
+def check_stage_result_failed_exit_refusal(
+    record_or_path: dict[str, Any] | Path | str,
+    root: Path | str | None = None,
+) -> tuple[bool, str, dict[str, Any]]:
+    """Validates that stage results with failed status or non-zero exit refuse consumption (l0287)."""
+    return stage_result.validate_stage_result(
+        record_or_path,
+        root=root,
+        raise_on_error=True,
+    )
+
+
+_record_l0287_failed: dict[str, Any] = {
+    "stage": "expensive_simulation_stage",
+    "status": "fail",
+    "exit_code": 1,
+    "completeness": {"complete": True, "missing_outputs": [], "empty_outputs": []},
+    "inputs": {},
+    "outputs": {},
+}
+_record_l0287_clean: dict[str, Any] = {
+    "stage": "expensive_simulation_stage",
+    "status": "ok",
+    "exit_code": 0,
+    "completeness": {"complete": True, "missing_outputs": [], "empty_outputs": []},
+    "inputs": {},
+    "outputs": {},
+}
+
+register_guard(
+    fn=check_stage_result_failed_exit_refusal,
+    name="stage_result_failed_exit_refusal",
+    lesson_ids=("l0287-slow-session-persist", "l0287"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that stage results with failed status or non-zero exit refuse consumption (l0287)",
+    notes="needs real case: l0287's recorded failure is losing an expensive Revit upgrade because serialisation failed before the result was saved (docs/LEARNINGS.md 'persist the expensive result first'); a failed exit status is a different lesson (lead review of batch 10, 2026-10-08)",
+    needs_real_case=True,
+)
+
+
+# 94. l0619: Render job upstream input staleness invalidation
+def check_stage_result_stale_upstream_source(
+    record_or_path: dict[str, Any] | Path | str,
+    root: Path | str | None = None,
+    current_inputs: Iterable[Path | str] | None = None,
+) -> tuple[bool, str, dict[str, Any]]:
+    """Validates that render jobs fail closed when upstream source inputs have changed (l0619)."""
+    return stage_result.validate_stage_result(
+        record_or_path,
+        root=root,
+        current_inputs=current_inputs,
+        raise_on_error=True,
+    )
+
+
+_record_l0619_stale = copy.deepcopy(_record_clean)
+_record_l0619_stale["inputs"]["spec/villa-site.yaml"]["sha256"] = "a" * 64
+
+register_guard(
+    fn=check_stage_result_stale_upstream_source,
+    name="stage_result_stale_upstream_source",
+    lesson_ids=("l0619-render-job-resumed", "l0619"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that render jobs fail closed when upstream source inputs have changed (l0619)",
+    notes="needs real case: l0619's recorded failure is a resumed render whose job id hashed the scene and IES files but not the renderer (docs/LEARNINGS.md 'A render job resumed a stale result'); a tampered input digest is a sibling (lead review of batch 10, 2026-10-08)",
+    needs_real_case=True,
+)
+
+
+
+# -----------------------------------------------------------------------------
+# Phase 2, Batch 11: Execution Context & Evidence Boundaries
+# -----------------------------------------------------------------------------
+
+# 95. l0015: Temporary directory writability in restricted sandbox environments
+def check_execution_context_writable_directory(
+    path: Path | str,
+    label: str = "temporary directory",
+) -> Path:
+    """Validates that execution context directories are writable, readable, and removable (l0015)."""
+    return execution_context.writable_directory(path, label)
+
+
+register_guard(
+    fn=check_execution_context_writable_directory,
+    name="execution_context_writable_directory",
+    lesson_ids=("l0015-python-3-14", "l0015"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that execution context directories are writable, readable, and removable (l0015)",
+    notes="needs real case: l0015's recorded failure is a Python 3.14 sandbox environment where tempfile.mkdtemp created a directory under out/tmp that child processes could not write into (docs/LEARNINGS.md line 182); live OS sandbox permissions cannot be reproduced statically as a frozen file without OS container isolation",
+    needs_real_case=True,
+)
+
+
+# 96. l0031: Non-interactive stdin for child tool processes under Windows protocol servers
+def check_execution_context_noninteractive_stdin(
+    tool: execution_context.Tool,
+    env: dict[str, str],
+    cwd: Path,
+) -> dict[str, Any]:
+    """Validates that external tool probing runs with non-interactive stdin (l0031)."""
+    return execution_context.resolve_tool(tool, env, cwd)
+
+
+register_guard(
+    fn=check_execution_context_noninteractive_stdin,
+    name="execution_context_noninteractive_stdin",
+    lesson_ids=("l0031-windows-python-3", "l0031"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that external tool probing runs with non-interactive stdin (l0031)",
+    notes="needs real case: l0031's recorded failure is a non-interactive subprocess inheriting the live MCP protocol stdin pipe under Python 3.14.7 on Windows and hanging on lock acquisition (docs/LEARNINGS.md line 198); live process stdin pipe inheritance cannot be frozen statically as a file",
+    needs_real_case=True,
+)
+
+
+# 97. l0135: Explicit Python interpreter path resolution avoiding bash PATH confusion
+def check_execution_context_python_interpreter_path(
+    modules: Iterable[str],
+    *,
+    root: Path = ROOT,
+    interpreter: str | Path | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Validates that declared Python dependencies locate the correct interpreter without bash PATH confusion (l0135)."""
+    return execution_context.check_dependencies(modules, root=root, interpreter=interpreter)
+
+
+register_guard(
+    fn=check_execution_context_python_interpreter_path,
+    name="execution_context_python_interpreter_path",
+    lesson_ids=("l0135-python-not-found", "l0135"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that declared Python dependencies locate the correct interpreter without bash PATH confusion (l0135)",
+    notes="needs real case: l0135's recorded failure is invoking 'python' from bash on Windows where .venv is not on the bash PATH (docs/LEARNINGS.md line 302); shell PATH absence is an OS shell process state, not a static fixture",
+    needs_real_case=True,
+)
+
+
+# 98. l0622: Fresh artifact verification on zero-exit child processes
+def check_execution_context_fresh_artifact_check(
+    argv: list[str],
+    *,
+    context: dict[str, Any],
+    scripts: list[Path | str],
+    record: Path,
+    expected: Path | None = None,
+) -> Any:
+    """Validates that native tool commands produce fresh output artifacts upon exit zero (l0622)."""
+    return execution_context.run_checked(argv, context=context, scripts=scripts, record=record, expected=expected)
+
+
+register_guard(
+    fn=check_execution_context_fresh_artifact_check,
+    name="execution_context_fresh_artifact_check",
+    lesson_ids=("l0622-blender-exited-0", "l0622"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that native tool commands produce fresh output artifacts upon exit zero (l0622)",
+    notes="needs real case: l0622's recorded failure is Blender exiting 0 after a Python exception during mesh construction with keyhole polygons, producing no render image (docs/LEARNINGS.md lines 789-791); running external Blender binary with crash reproduction is not frozen as a static fixture",
+    needs_real_case=True,
+)
+
+
+# 99. l0030: Handedness/swing assumption demotion guard
+def check_evidence_door_swing_certification(
+    door_extract: EvidenceRecord,
+    room_geometry: EvidenceRecord,
+) -> EvidenceRecord:
+    """Validates that door swing extract achieves VERIFIED status without provisional handedness assumptions (l0030)."""
+    res = evidence.combine(door_extract, room_geometry, value="door_swing_certification")
+    if res.status != EvidenceStatus.VERIFIED:
+        raise ValueError(
+            f"Door swing evidence status is {res.status.value}, expected VERIFIED (l0030): {res.reasons}"
+        )
+    return res
+
+
+_rec_door_extract_assumed_l0030 = EvidenceRecord(
+    value={"door_id": "D-01", "family": "Single-Flush", "swing": "left", "handedness": "assumed_default_left"},
+    status=EvidenceStatus.ASSUMED,
+    source=SourceRef(
+        title="Revit Model Extract",
+        edition="2027",
+        verified=False,
+        notes="Extract lacks actual hinge/facing handedness; adapter uses default left hinge (l0030)",
+    ),
+    scope="room:bedroom",
+    reasons=("Provisional handedness assumption: extract lacks hinge/facing handedness (l0030)",),
+)
+_rec_door_extract_verified_l0030 = EvidenceRecord(
+    value={"door_id": "D-01", "family": "Single-Flush", "swing": "left", "handedness": "left_hand_reverse"},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(
+        title="Revit Native View Extract",
+        edition="2027",
+        verified=True,
+        notes="Handedness extracted from authored native view (l0030)",
+    ),
+    scope="room:bedroom",
+)
+_rec_room_geometry_verified_l0030 = EvidenceRecord(
+    value={"room": "bedroom", "width_mm": 4200, "length_mm": 5100},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(title="Revit Model Extract", edition="2027", verified=True),
+    scope="room:bedroom",
+)
+
+register_guard(
+    fn=check_evidence_door_swing_certification,
+    name="evidence_door_swing_certification",
+    lesson_ids=("l0030-current-extract-lacks", "l0030"),
+    real_case=case(_rec_door_extract_assumed_l0030, _rec_room_geometry_verified_l0030),
+    clean_case=case(_rec_door_extract_verified_l0030, _rec_room_geometry_verified_l0030),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that door swing extract achieves VERIFIED status without provisional handedness assumptions (l0030)",
 )
 
 
