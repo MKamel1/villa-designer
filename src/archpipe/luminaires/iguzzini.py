@@ -16,6 +16,7 @@ import urllib.request
 import urllib.robotparser
 from pathlib import Path
 
+from archpipe import external_claims
 from archpipe.luminaires import library
 from archpipe.luminaires.signify import write_coverage
 
@@ -194,6 +195,13 @@ def crawl_products(codes=None, family_paths=None, *, lib: Path = library.LIBRARY
             log(f"{code}: {exc}")
     write_catalogue(rows, lib)
     write_coverage("iguzzini", len(requested), len(rows), len(rows), unread, lib)
+    external_claims.assert_manifest_complete(
+        len(requested),
+        len(rows),
+        label="iGuzzini product crawl",
+        min_coverage_ratio=1.0,
+        missing_items=unread,
+    )
     return rows
 
 
@@ -212,7 +220,8 @@ def fetch_photometry(sku: str, *, lib: Path = library.LIBRARY, log=print) -> dic
     for kind in ("ldt", "ies"):
         if kind in row["files"]:
             data = fetch(row["files"][kind], rules=rules)
-            if library.sniff(data) != kind:
+            rec = external_claims.ingest_bytes(data, declared_type=kind, url=row["files"][kind])
+            if rec.status != external_claims.VERIFIED:
                 raise ValueError(f"{code} {kind}: downloaded content is not {kind}")
             (dest / f"{code}.{kind}").write_bytes(data)
             log(f"{code}: saved {kind} ({len(data)} bytes)")
