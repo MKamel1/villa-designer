@@ -56,6 +56,49 @@
         "test_missing_stale_corrupt_record_and_manifest_fail_closed"
       ],
       "closure": "Below 1.5 MB; hull equivalence and 1 mm envelope boundary proved; no render or native-model acceptance"
+    },
+    {
+      "lesson_id": "scene-build-repeated-geometry",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Build-local immutable geometry validation; scalar-confirmed camera batches; copy-on-write WC trials; one route rectangle per item; exact botanical placement batches and shared-coordinate yard checks; value-keyed mound templates; shared-vertex island keys with unchanged union order; exact face-keyed immutable triangles with fresh caller arrays; one immutable geometry snapshot per Part",
+      "check": "tests/test_build_cache.py real full-build budget; scripts/verify.py proving-test registry",
+      "stage": "scene construction and portable verification",
+      "proof_file": "tests/test_scene_build_performance.py",
+      "proofs": [
+        "test_whole_camera_batch_matches_scalar_all_yaws_on_real_wc_and_siblings",
+        "test_validation_cache_follows_values_and_keeps_kind_side_support_guards",
+        "test_wc_trial_copies_only_mutated_members_and_matches_deepcopy",
+        "test_route_rect_computed_once_per_mesh_for_many_routes",
+        "test_botanical_batch_preserves_face_values_lengths_and_winding",
+        "test_mesh_rectangle_cache_follows_exact_live_xy_values",
+        "test_shared_vertex_islands_match_frozen_algorithm_and_disconnected_siblings",
+        "test_bearing_batches_match_scalar_at_frame_edges_and_real_wc_points",
+        "test_dot_product_retains_python_sum_compensation",
+        "test_mound_template_is_local_value_keyed_and_caller_records_are_independent",
+        "test_triangles_preserve_frozen_order_owners_and_mutable_caller_isolation",
+        "test_triangle_cache_preserves_signed_zero_content_bits",
+        "test_part_snapshots_geometry_once_for_both_validations"
+      ],
+      "closure": "Performance only; exact scene equality and existing frozen guards required; no render acceptance"
+    },
+    {
+      "lesson_id": "scene-build-profile-source-drift",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Archive starting source; benchmark fingerprints declared source before/after construction and compares every baseline byte",
+      "check": "scripts/benchmark_scene_build.py; scripts/verify.py proving-test registry",
+      "stage": "performance baseline capture and comparison",
+      "proof_file": "tests/test_scene_build_benchmark.py",
+      "proofs": [
+        "test_real_frozen_source_change_refuses_before_writing_a_baseline",
+        "test_stable_source_accepts_exact_bytes_and_refuses_changed_scene_or_truncation"
+      ],
+      "closure": "Exclude contaminated live-tree profile; no rendering or design approval"
     }
   ]
 }

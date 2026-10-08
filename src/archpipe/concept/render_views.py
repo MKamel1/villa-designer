@@ -15,6 +15,8 @@ from __future__ import annotations
 
 import math
 
+import numpy as np
+
 from . import revit_spec as RS
 from . import villa_furnish as F
 
@@ -42,6 +44,54 @@ def _angle(px, py, qx, qy, yaw):
 
 def _bearing_angle(bearing, yaw):
     return (bearing - yaw + math.pi) % (2 * math.pi) - math.pi
+
+
+def _whole_needs(vertices, x, y, eye_m, yaws):
+    """Same scalar maximum for every yaw, pruning only distant angle values.
+
+    vertices is the whole subject's immutable world-point array; x/y are the
+    standing coordinates. yaws holds angle, cosine and sine in search order.
+    NumPy selects contenders within 1e-14 radians of its maximum; Python
+    evaluates those contenders with the original arithmetic. That band is
+    wider than the scalar/vector atan2 rounding difference over [-pi, pi],
+    and preserves equal maxima without altering any framing tolerance.
+    """
+    if len(vertices) == 0:
+        return [0.0] * len(yaws)
+    cosines = np.array([c for _, c, _ in yaws])
+    sines = np.array([s for _, _, s in yaws])
+    forward = ((vertices[:, 0]-x)[:, None]*cosines +
+               (vertices[:, 1]-y)[:, None]*sines)
+    angles = np.abs(np.arctan2((vertices[:, 2]-eye_m)[:, None], forward))
+    contenders = angles >= angles.max(axis=0)-1e-14
+    result = []
+    for index, (_, cosine, sine) in enumerate(yaws):
+        result.append(max(abs(math.atan2(p[2]-eye_m, (p[0]-x)*cosine+(p[1]-y)*sine))
+                          for p in vertices[contenders[:, index]]))
+    return result
+
+
+def _bearing_batches(subjects, room, openings, nearby, yaws, half):
+    """Original yaw-order miss sums and visible counts, batched per point.
+
+    subjects, room and openings hold their scalar atan2 bearings; nearby
+    holds one bearing list per close obstacle. yaws holds the candidate
+    angle/cosine/sine triples. half is the horizontal half-field in radians.
+    Python's original sum combines each yaw's penalties, preserving its
+    compensated summation. Returned lists hold Python floats/integers.
+    """
+    angles = np.array([yaw for yaw, _, _ in yaws])
+
+    def deviations(bearings):
+        return np.abs((np.asarray(bearings)[:, None]-angles+math.pi) % (2*math.pi)-math.pi)
+
+    miss = [sum(row) for row in np.maximum(0.0, deviations(subjects)-half).T.tolist()]
+    seen = np.count_nonzero(deviations(room) <= half, axis=0).tolist()
+    wins = np.count_nonzero(deviations(openings) <= half, axis=0).tolist()
+    looming = np.zeros(len(yaws), dtype=int)
+    for bearings in nearby:
+        looming += np.any(deviations(bearings) < half, axis=0)
+    return miss, seen, wins, looming.tolist()
 
 
 def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=None, extra=(),
@@ -174,6 +224,13 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
                     ts.append(t)
         return min(ts) if ts else 0.0
 
+    # Keep every original standing point and yaw, including traversal/tie order.
+    # A vector batch only finds the worst whole-subject vertex. Recompute its
+    # angle with the original scalar arithmetic for the actual score.
+    yaws = [(math.radians(deg), math.cos(math.radians(deg)), math.sin(math.radians(deg)))
+            for deg in range(0, 360, YAW_STEP)]
+    if whole_vertices:
+        vertices = np.asarray(whole_vertices)
     best = None
     framed_candidates = 0
     x = rect[0] - 0.3
@@ -200,19 +257,19 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
                 if front:
                     mx, my = (mq[0] + mq[2]) / 2, (mq[1] + mq[3]) / 2
                     facing = 1.0 if (x - mx) * front[0] + (y - my) * front[1] > 0 else 0.0
-                for deg in range(0, 360, YAW_STEP):
-                    yaw = math.radians(deg)
-                    miss = sum(max(0.0, abs(_bearing_angle(b, yaw)) - half) for b in subj_bearings) + low
-                    whole = max((abs(math.atan2(p[2]-eye_m,
-                                 (p[0]-x)*math.cos(yaw)+(p[1]-y)*math.sin(yaw)))
-                                 for p in whole_vertices), default=0.0)
+                whole_needs = _whole_needs(vertices, x, y, eye_m, yaws) if whole_vertices else [0.0]*len(yaws)
+                misses, seen_counts, win_counts, looming_counts = _bearing_batches(
+                    subj_bearings, room_bearings, opening_bearings, nearby, yaws, half)
+                for index, (yaw, cosine, sine) in enumerate(yaws):
+                    miss = misses[index] + low
+                    whole = whole_needs[index]
                     miss += max(0.0, whole-vhalf)
                     framed_candidates += miss == 0.0
-                    seen = sum(abs(_bearing_angle(b, yaw)) <= half for b in room_bearings)
-                    wins = sum(abs(_bearing_angle(b, yaw)) <= half for b in opening_bearings)
+                    seen = seen_counts[index]
+                    wins = win_counts[index]
                     score = (-100.0 * miss + (seen / max(1, len(room_items))) + 0.4 * min(wins, 1)
                              + 0.6 * depth(x, y, yaw) / max(diag, 1e-6) - 0.15 * edge
-                             + 0.6 * facing - 1.0 * occluded - 1.0 * looming(x, y, yaw, nearby))
+                             + 0.6 * facing - 1.0 * occluded - 1.0 * looming_counts[index])
                     # Framing is hard: aesthetic score must never displace a
                     # fully framed candidate with a slightly clipped candidate.
                     if best is None or (miss == 0.0, score) > (best[4] == 0.0, best[0]):

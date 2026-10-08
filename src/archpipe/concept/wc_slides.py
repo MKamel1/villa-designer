@@ -1,5 +1,4 @@
 """Bounded same-wall WC slides; all carded fronts, sides, doors/routes rerun."""
-from copy import deepcopy
 
 from . import villa_furnish as F
 from .fitting_mounting import bounds
@@ -31,6 +30,21 @@ def continuous_candidates(item, obstacles, rect):
     return side,candidates
 
 
+def _trial(scene, identifier, side, travel):
+    """Own translated faces and trial slide state; all review inputs are read-only."""
+    trial = dict(scene)
+    delta = [0, 0, 0]
+    delta[side] = travel
+    trial['wc_slides'] = dict(scene['wc_slides'])
+    trial['wc_slides'][identifier] = dict(delta=delta)
+    members = [dict(m) for m in scene['meshes'] if m['id'].startswith('furn-'+identifier+'-')]
+    for member in members:
+        member['faces'] = [[[p[i]+delta[i] for i in range(3)] for p in f] for f in member['faces']]
+    by = {m['id']: m for m in members}
+    trial['meshes'] = [by.get(m['id'], m) for m in scene['meshes']]
+    return trial, delta, members
+
+
 def apply(scene, lay):
     scene['wc_slides']={}
     initial=review(scene,lay)
@@ -49,11 +63,7 @@ def apply(scene, lay):
         decision=dict(id=identifier,room=room,old_centre=[item['cx'],item['cy']],
                       new_centre=[item['cx'],item['cy']],status='NO FEASIBLE SLIDE',attempts=[])
         for travel in candidates:
-            trial=deepcopy(scene);delta=[0,0,0];delta[side]=travel
-            trial['wc_slides'][identifier]=dict(delta=delta)
-            members=[m for m in trial['meshes'] if m['id'].startswith('furn-'+identifier+'-')]
-            for member in members:
-                member['faces']=[[[p[i]+delta[i] for i in range(3)] for p in f] for f in member['faces']]
+            trial,delta,members=_trial(scene,identifier,side,travel)
             result=review(trial,lay)
             affected=[r for r in result['rows'] if r['room']==room]
             failures=[r for r in affected if r['status'] in ('FAIL','UNRESOLVED')]

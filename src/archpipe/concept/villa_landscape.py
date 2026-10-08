@@ -467,8 +467,9 @@ def route_violations(items, routes=PATHS, route_ground=None):
     for item in items:
         # Validate every placed asset, including props clear of all routes.
         triangles = prop_triangles(item) if "asset" in item else None
+        rect = _rect(item)
         candidates = [(name, route) for name, route in routes.items()
-                      if _rect_overlap_area(_rect(item), route) > 1e-6]
+                      if _rect_overlap_area(rect, route) > 1e-6]
         if not candidates:
             continue
         if "faces" in item and "asset" not in item:
@@ -637,8 +638,12 @@ SOUTH_CENTER = ((SOUTH[0]+SOUTH[2])/2, (SOUTH[1]+SOUTH[3])/2)
 
 
 def _mesh_rect(mesh):
-    pts = [p for face in mesh["faces"] for p in face]
-    return min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
+    from .build_cache import immutable
+    # Exact live point values, never an identifier or a mutable mesh object.
+    points = frozenset((p[0], p[1]) for face in mesh["faces"] for p in face)
+    return immutable("mesh-rect", points, lambda: (
+        min(p[0] for p in points), min(p[1] for p in points),
+        max(p[0] for p in points), max(p[1] for p in points)))
 
 
 def _covers_point(face, x, y):

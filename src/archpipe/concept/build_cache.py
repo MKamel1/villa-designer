@@ -30,3 +30,18 @@ def derived(name, inputs, compute):
     if key not in cache:
         cache[key] = copy.deepcopy(compute())
     return copy.deepcopy(cache[key])
+
+
+def immutable(name, inputs, compute):
+    """Reuse an immutable result by its complete hashable input value.
+
+    Unlike derived records, tuples of validation errors need no copy. The
+    caller must supply an immutable key and return an immutable result.
+    """
+    cache = _cache.get()
+    if cache is None:
+        return compute()
+    key = (name, inputs)
+    if key not in cache:
+        cache[key] = compute()
+    return cache[key]

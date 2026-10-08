@@ -46,6 +46,35 @@ def _dome_geometry(dense=True):
     return growth.faces,growth.leaves
 
 
+def _mound_template(dense):
+    """Build-local immutable local geometry for the exact generator arguments."""
+    from .garden_g6b import mound
+    from .build_cache import immutable
+
+    def compute():
+        growth = mound(dense=dense)
+        return (tuple(tuple(tuple(p) for p in face) for face in growth.faces),
+                tuple(growth.leaves), tuple(growth.materials), json.dumps(growth.records))
+    return immutable("g6-mound-template", dense, compute)
+
+
+def _transform_faces(faces, points, origin, factors, offset):
+    """Place each vertex with the original subtract, scale, then add order.
+
+    points is the face-order flattened point array; origin is the local
+    reference point, factors the three axis scales, offset the world position.
+    Face lengths and winding are preserved, including non-triangle faces.
+    """
+    placed = (offset + (points-origin)*factors).tolist()
+    result = []
+    start = 0
+    for face in faces:
+        stop = start + len(face)
+        result.append(placed[start:stop])
+        start = stop
+    return result
+
+
 def clump(identifier,species,center,ground,data,*,bed,layer,context=None):
     """Connected authored dome or lavender leaves, driven by palette envelope."""
     from . import villa_landscape as L
@@ -56,8 +85,8 @@ def clump(identifier,species,center,ground,data,*,bed,layer,context=None):
     height=.4 if species.startswith('Plectranthus') else .7 if context else .75 if layer=='back' else .65;spread=.35 if species.startswith('Plectranthus') else .65
     faces=[];leaf_indices=[];flower_indices=[]
     if not species.startswith('Plectranthus'):
-        from .garden_g6b import mound
-        growth=mound(dense=bool(context));faces,leaf_indices=growth.faces,growth.leaves
+        template=_mound_template(bool(context))
+        faces,leaf_indices=template[0],list(template[1])
     for i in range(17 if species.startswith('Plectranthus') else 0):
         a=i*pi*(3-5**.5);radial=.12+.035*(i%4);z=.26+.035*(i%6)
         tip=(radial*cos(a),radial*sin(a),z)
@@ -73,14 +102,14 @@ def clump(identifier,species,center,ground,data,*,bed,layer,context=None):
                 f=leaf(p,.035,.025,k);flower_indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
     points=np.array([p for f in faces for p in f]);lo=points.min(axis=0);hi=points.max(axis=0)
     factors=np.array([spread/max((hi-lo)[:2])]*2+[height/(hi[2]-lo[2])]);origin=np.array([(lo[0]+hi[0])/2,(lo[1]+hi[1])/2,lo[2]])
-    offset=np.array([*center,ground]);faces=[[(offset+(np.array(p)-origin)*factors).tolist() for p in f] for f in faces]
+    offset=np.array([*center,ground]);faces=_transform_faces(faces,points,origin,factors,offset)
     m=_mesh(identifier,'garden-foliage',faces,'plant-clump','centrepiece' if context else 'foliage',
         'ASSUMED clipped dome' if not species.startswith('Plectranthus') else 'ASSUMED lavender-flowered underplanting',
         species=species,center=list(center),root_z_m=ground,bed=bed,planting_layer=layer,
         spread_m=spread,appearance_key=key,leaf_face_indices=leaf_indices,explicit_geometry=True)
     if not species.startswith('Plectranthus'):
-        m['face_materials']=growth.materials
-        m['leaf_records']=growth.records
+        m['face_materials']=list(template[2])
+        m['leaf_records']=json.loads(template[3])
         m['plant_form']='dense-low-mound'
     if flower_indices:
         m['face_materials']=['g6-lavender-flower' if i in set(flower_indices) else 'garden-foliage' for i in range(len(faces))]
@@ -250,7 +279,9 @@ def findings(meshes,plan,tree_center=None,routes=None,ground=-3.):
             bb=bounds(m)
             if abs(bb[4]-(L.SOUTH[3]-.25))>1e-6:out.append((m['id'],'espalier wires not on physical wall face'))
         if m.get('g6_element') in ('pergola','centrepiece','furniture','espalier','climber','foliage'):
-            if any(not L.inside_yard(*p[:2]) for f in m['faces'] for p in f):out.append((m['id'],'G6 geometry leaves yard'))
+            # Shared face vertices have the same yard classification.
+            points={(p[0],p[1]) for f in m['faces'] for p in f}
+            if any(not L.inside_yard(*p) for p in points):out.append((m['id'],'G6 geometry leaves yard'))
         if m.get('g6_element')=='espalier':
             rect=box(*L._mesh_rect(m))
             if rect.intersects(circle):out.append((m['id'],'espalier intersects mature tree circle'))
