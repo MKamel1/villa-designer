@@ -16,12 +16,23 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from render_remote import _ssh
 from workstation import deploy
 
 
-def main():
-    host = sys.argv[1] if len(sys.argv) > 1 else "ai-workstation"
+def main(argv=None):
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "fetch-asset-library",
+            inputs=[ROOT / "ops/workstation/library-manifest.json"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
+    host = (argv[0] if argv else sys.argv[1]) if (argv or len(sys.argv) > 1) else "ai-workstation"
     root, release, release_id = deploy(host)
     manifest = f"{release}/ops/workstation/library-manifest.json"
     script = f"{release}/ops/workstation/fetch_asset_library.py"

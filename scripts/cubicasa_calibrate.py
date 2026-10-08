@@ -49,7 +49,10 @@ import json
 import sys
 from pathlib import Path
 
-from archpipe.concept import critic, cubicasa as C
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
+from archpipe.concept import critic, cubicasa as C  # noqa: E402
 
 GATE = 0.90
 
@@ -116,6 +119,17 @@ def main(argv=None) -> int:
     ap.add_argument("--skip", type=int, default=0, help="eligible plans to skip (held-out sample)")
     ap.add_argument("--out", type=Path, default=Path("out/cubicasa-calibration.json"))
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "cubicasa-calibrate",
+            output=a.out.parent,
+            modules=["numpy", "PIL"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     folders = sorted({p.parent for p in a.root.rglob("model.svg")})
     rows, skipped = evaluate(folders, a.n, a.skip)
     s = summarise(rows, skipped)

@@ -5,9 +5,14 @@ import json
 import math
 from pathlib import Path
 
+import argparse
+import sys
+
 from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 
 def draw(scene_path: Path, output: Path, room: str = "living") -> Path:
@@ -53,6 +58,27 @@ def draw(scene_path: Path, output: Path, room: str = "living") -> Path:
     return output
 
 
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    ap.add_argument("--scene", type=Path, default=ROOT / "out/villa/render-d1/scene.json")
+    ap.add_argument("--out", type=Path, default=ROOT / "out/villa/render-d1/preview-r3b1-orientation.png")
+    ap.add_argument("--room", default="living")
+    a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "preview-furniture-orientation",
+            inputs=[a.scene],
+            modules=["PIL"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
+    res = draw(a.scene, a.out, a.room)
+    print(res)
+    return 0
+
+
 if __name__ == "__main__":
-    print(draw(ROOT / "out/villa/render-d1/scene.json",
-               ROOT / "out/villa/render-d1/preview-r3b1-orientation.png"))
+    raise SystemExit(main())

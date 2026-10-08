@@ -35,6 +35,10 @@ from pathlib import Path
 from shapely import affinity, wkt
 from shapely.ops import unary_union
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import swiss_calibrate as S                      # noqa: E402
 
@@ -138,6 +142,18 @@ def main(argv=None) -> int:
     ap.add_argument("--skip", type=int, default=0)
     ap.add_argument("--out", type=Path, required=True)
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "swiss-stack-calibrate",
+            inputs=[a.root / "geometries.csv"],
+            output=a.out.parent,
+            modules=["shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     if a.mode == "stack":
         rows = run_stack(a.root, a.n, a.skip)
         n = len(rows)

@@ -26,15 +26,15 @@ Before Phase 1, none of these entry points used a complete shared context. The t
 | `scripts/check_bedroom.py` | Shared: launch preflight; declared inputs (spec, extract); requirements check (yaml); invalid context exits 2 |
 | `scripts/compare_lux.py` | Shared: launch preflight; declared inputs (rendered, extract); invalid context exits 2 |
 | `scripts/concept.py` | Shared: launch preflight; declared inputs (pilot project); requirements check (matplotlib, yaml, shapely); invalid context exits 2 |
-| `scripts/configure_assistants.py` | Phase 2: no shared preflight |
-| `scripts/cubicasa_calibrate.py` | Phase 2: no shared preflight |
-| `scripts/delegate_implementation.py` | Phase 2: no shared preflight |
+| `scripts/configure_assistants.py` | Shared: launch preflight in main(); declared inputs (archpipe_mcp.py); invalid context exits 2 |
+| `scripts/cubicasa_calibrate.py` | Shared: launch preflight; declared outputs; requirements check (numpy, PIL); invalid context exits 2 |
+| `scripts/delegate_implementation.py` | Shared: launch preflight; declared inputs (task file); invalid context exits 2 |
 | `scripts/demo_bedroom_lighting.py` | Shared: launch preflight in main(); safe import without side effects; invalid context exits 2 |
 | `scripts/demo_guidance.py` | Shared: launch preflight; declared inputs (pilot project); requirements check (yaml, shapely); invalid context exits 2 |
 | `scripts/export_bedroom_glb.py` | Shared: launch preflight; declared inputs (input glb/mesh); invalid context exits 2 |
-| `scripts/fetch_asset_library.py` | Phase 2: no shared preflight |
-| `scripts/fetch_families.py` | Phase 2: no shared preflight |
-| `scripts/handoff.py` | Phase 2: no shared preflight |
+| `scripts/fetch_asset_library.py` | Shared: launch preflight; declared inputs (library-manifest.json); invalid context exits 2 |
+| `scripts/fetch_families.py` | Shared: launch preflight; declared outputs; invalid context exits 2 |
+| `scripts/handoff.py` | Shared: launch preflight; declared inputs (spec); requirements check (yaml, shapely, ifcopenshell, numpy); invalid context exits 2 |
 | `scripts/knowledge.py` | Shared: launch preflight; requirements check (pymupdf); invalid context exits 2 |
 | `scripts/lighting_report.py` | Shared: launch preflight; declared inputs (input); invalid context exits 2 |
 | `scripts/luminaire_demo.py` | Skipped in Phase 2 Batch A: raw pyRevit subprocess runner handled via run_bedroom |
@@ -43,9 +43,9 @@ Before Phase 1, none of these entry points used a complete shared context. The t
 | `scripts/make_bedroom_spec.py` | Shared: launch preflight; declared inputs (spec); requirements check (yaml); invalid context exits 2 |
 | `scripts/make_render_input.py` | Shared: launch preflight; declared inputs (extract, spec); requirements check (yaml); invalid context exits 2 |
 | `scripts/preflight.py` | thin shared preflight command; context record; invalid context exits 2 |
-| `scripts/preview_furniture_orientation.py` | Phase 2: no shared preflight |
+| `scripts/preview_furniture_orientation.py` | Shared: launch preflight in main(); declared inputs (scene); requirements check (PIL); invalid context exits 2 |
 | `scripts/products.py` | Shared: launch preflight; requirements check (PIL); invalid context exits 2 |
-| `scripts/products_worker.py` | Phase 2: no shared preflight |
+| `scripts/products_worker.py` | Skipped in Phase 2 Batch B: workstation dual-interpreter worker script run inside Blender -P in render mode; native Blender boundary |
 | `scripts/render_hyperreal.py` | partial: worker environment paths and render quality checks |
 | `scripts/render_remote.py` | partial: absolute scene script, SSH status and returned artifacts |
 | `scripts/review_model.py` | Shared: launch preflight; declared inputs (extract); requirements check (shapely); invalid context exits 2 |
@@ -53,14 +53,14 @@ Before Phase 1, none of these entry points used a complete shared context. The t
 | `scripts/run_tests.py` | shared preflight; declared requirements check (`requirements.txt`); focused modules; accessible Windows temp allocator; exit-status result record |
 | `scripts/semantic.py` | Shared: launch preflight; context record; invalid context exits 2 |
 | `scripts/sources.py` | Shared: launch preflight; declared inputs (library.json); invalid context exits 2 |
-| `scripts/swiss_calibrate.py` | Phase 2: no shared preflight |
-| `scripts/swiss_stack_calibrate.py` | Phase 2: no shared preflight |
-| `scripts/sync_agent_assets.py` | Phase 2: no shared preflight |
+| `scripts/swiss_calibrate.py` | Shared: launch preflight; declared inputs (geometries.csv); declared outputs; requirements check (shapely); invalid context exits 2 |
+| `scripts/swiss_stack_calibrate.py` | Shared: launch preflight; declared inputs (geometries.csv); declared outputs; requirements check (shapely); invalid context exits 2 |
+| `scripts/sync_agent_assets.py` | Shared: launch preflight; declared inputs (roles.json); invalid context exits 2 |
 | `scripts/test_mcp.py` | partial: protocol/subprocess checks |
-| `scripts/thermal_job.py` | Phase 2: no shared preflight |
+| `scripts/thermal_job.py` | Shared: launch preflight; declared inputs (input, epw); declared outputs; invalid context exits 2 |
 | `scripts/verify.py` | shared preflight bootstrap before third-party/domain imports; declared requirements check (`requirements.txt`); result and context records; relative native-path registry checks; unconditional recorded dependency check |
-| `scripts/villa_climate.py` | Phase 2: no shared preflight |
-| `scripts/villa_concepts.py` | Phase 2: no shared preflight |
+| `scripts/villa_climate.py` | Shared: launch preflight in main(); declared inputs (EPW for run mode); requirements check (shapely); invalid context exits 2 |
+| `scripts/villa_concepts.py` | Shared: launch preflight; declared outputs; requirements check (matplotlib, numpy); invalid context exits 2 |
 | `scripts/villa_daylight.py` | Phase 2: no shared preflight |
 | `scripts/villa_daylight_finished.py` | Phase 2: no shared preflight |
 | `scripts/villa_daylight_pdf.py` | Phase 2: no shared preflight |
@@ -133,6 +133,18 @@ Native Revit Python inventory:
   - Subprocess exit-2 check on `scripts/check_bedroom.py` when a dependency is missing.
   - Subprocess exit-2 check on `scripts/make_render_input.py` when a declared input file is missing.
 
+### Completed Phase 2 item: Phase 2 Batch B entry points
+- **Scope**: Migrated 13 command-line entry points to the shared `project_context` launch preflight: `configure_assistants.py`, `cubicasa_calibrate.py`, `delegate_implementation.py`, `fetch_asset_library.py`, `fetch_families.py`, `handoff.py`, `preview_furniture_orientation.py`, `swiss_calibrate.py`, `swiss_stack_calibrate.py`, `sync_agent_assets.py`, `thermal_job.py`, `villa_climate.py`, `villa_concepts.py`.
+- **Preflight and import safety**: Each script invokes `project_context` strictly within its CLI entry point (`main()` or `__main__` guard) and never at module top level. Modules can be imported safely by tests and tools without preflight side effects. Top-level scripts (`configure_assistants.py`, `preview_furniture_orientation.py`, `villa_climate.py`) were wrapped into guarded `main()` entry points while strictly preserving all statement definitions, assignments, and execution order.
+- **Fail-closed contract**: Declared inputs, outputs, and required third-party packages (mapped from `requirements.txt` via `requirements_import_names`, e.g. `numpy`, `PIL`, `shapely`, `yaml`, `ifcopenshell`, `matplotlib`) are verified before execution. Any missing file or module raises `ContextError`, which each script catches to print `PREFLIGHT FAILED: <reason>` to stderr and exit with code 2 without tracebacks.
+- **Skipped scripts**:
+  - `scripts/products_worker.py`: Dual-interpreter worker executed on the workstation in two modes: `fetch` (Python) and `render` (directly inside headless Blender via `blender -b --factory-startup -P products_worker.py -- render ...`). Workstation Blender jobs are managed via driver boundaries (`scripts/products.py` and `scripts/villa_render.py`), and running local `project_context` inside Blender's embedded runtime belongs to the native Blender headless tool boundary.
+- **Proofs**: Added 4 tests in `tests/test_execution_context.py`:
+  - AST check verifying that all 13 Batch B scripts invoke preflight inside `main()` or `__main__` and never at module top level (`test_batch_b_scripts_call_preflight_in_main_and_not_at_module_top_level`).
+  - Import-isolation check verifying that importing all 13 Batch B modules does not invoke preflight (`test_importing_batch_b_scripts_does_not_run_preflight`).
+  - Subprocess exit-2 check on `scripts/handoff.py` when a declared input file is missing (`test_handoff_subprocess_exits_2_on_missing_input`).
+  - Subprocess exit-2 check on `scripts/swiss_calibrate.py` when a required dependency is missing via the test hook (`test_swiss_calibrate_subprocess_exits_2_on_missing_dependency`).
+
 ## Defect controls and proving tests
 
 Guard registry: `execution-context-implicit-phase1` -> `execution_context.preflight`, `run_checked`, the four migrated entry points and two unconditional `verify.py` checks -> `tests/test_execution_context.py`, `tests/test_villa_render_scene.py`, `tests/test_villa_scene_provenance.py` -> launch boundary.
@@ -166,3 +178,5 @@ Canonical workflow follow-up: `.agents/skills` is read-only in this session and 
 - Interpreter-environment correction (2026-10-06): Phase 2 item "interpreter environment, not just version" completed after lead's Windows full suite incident. `scripts/run_tests.py` and `scripts/verify.py` enforce declared module dependency preflights before importing third-party or domain packages. `tests/test_execution_context.py` reproduces the missing-shapely incident by value and verifies subprocess exit code 2 on missing dependencies. See `execution-context-wrong-interpreter` in `docs/LEARNINGS.md`.
 
 - Phase 2 Batch A entry points (2026-10-07): Migrated 16 entry points to `project_context` with declared inputs and requirements; skipped 4 scripts at distinct boundaries (`archpipe_mcp.py`, `build_sheet.py`, `capture_plot_prompts.py`, `luminaire_demo.py`). AST, import-isolation, and subprocess exit-2 proofs in `tests/test_execution_context.py`.
+
+- Phase 2 Batch B entry points (2026-10-07): Migrated 13 entry points to `project_context` with declared inputs, outputs, and requirements; skipped 1 script at distinct boundary (`products_worker.py`). AST, import-isolation, and subprocess exit-2 proofs in `tests/test_execution_context.py`.

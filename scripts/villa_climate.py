@@ -16,6 +16,10 @@ import sys
 import tarfile
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
+
 sys.path.insert(0, str(Path(__file__).parent))
 from render_remote import DEFAULT_HOST, _ssh                          # noqa: E402
 
@@ -113,5 +117,25 @@ def fetch(host=DEFAULT_HOST):
     return 0 if ok else 1
 
 
+def main(argv=None) -> int:
+    args = list(sys.argv[1:] if argv is None else argv)
+    cmd = args[0] if args else "run"  # an unknown command still fails (KeyError) exactly as before
+    if cmd not in ("run", "fetch"):
+        return {"run": run, "fetch": fetch}[cmd]()
+    try:
+        inputs = [EPW] if cmd == "run" else []
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-climate",
+            inputs=inputs,
+            modules=["shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
+    return {"run": run, "fetch": fetch}[cmd]()
+
+
 if __name__ == "__main__":
-    sys.exit({"run": run, "fetch": fetch}[sys.argv[1] if len(sys.argv) > 1 else "run"]())
+    sys.exit(main())

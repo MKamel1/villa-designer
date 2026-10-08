@@ -34,8 +34,9 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import rfa  # noqa: E402
 
 BASE = "https://bimlibrary.co"
@@ -90,7 +91,7 @@ def download_link(product_url: str) -> tuple[str, str] | None:
     return url, name
 
 
-def main() -> int:
+def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--category",
                     help="doors, windows, furniture, lighting-fixtures, ...")
@@ -100,7 +101,17 @@ def main() -> int:
     ap.add_argument("--target", type=int, default=2025,
                     help="the Revit release these must load into")
     ap.add_argument("--out", type=Path, default=Path("out/families"))
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "fetch-families",
+            output=a.out,
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
 
     pages = list(a.url)
     if a.category:

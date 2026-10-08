@@ -12,7 +12,9 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import thermal as t  # noqa: E402
 
 
@@ -76,14 +78,25 @@ def validate_daylight(radiance: Path, out: Path) -> dict:
     return {"passed": all(c["passed"] for c in checks), "checks": checks}
 
 
-def main() -> int:
+def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", type=Path, required=True)
     ap.add_argument("--epw", type=Path, required=True)
     ap.add_argument("--energyplus", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--radiance", type=Path)
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "thermal-job",
+            inputs=[a.input, a.epw],
+            output=a.out,
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     job = json.loads(a.input.read_text())
     a.out.mkdir(parents=True, exist_ok=True)
     kind = job.get("kind")

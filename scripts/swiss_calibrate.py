@@ -29,6 +29,9 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from shapely import affinity, wkt
 
 from archpipe import model, rules
@@ -108,6 +111,18 @@ def main(argv=None) -> int:
     ap.add_argument("--skip", type=int, default=0)
     ap.add_argument("--out", type=Path, default=Path("out/swiss-calibration.json"))
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "swiss-calibrate",
+            inputs=[a.root / "geometries.csv"],
+            output=a.out.parent,
+            modules=["shapely"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     plans = []
     for aid, rooms in apartments(a.root, a.n, a.skip):
         ang = dominant_angle([p for _, p in rooms])

@@ -12,16 +12,30 @@ import subprocess
 import time
 import uuid
 
+import sys
+
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('task',type=Path)
     parser.add_argument('--name',required=True)
     parser.add_argument('--owns',nargs='+',required=True)
     parser.add_argument('--resume')
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "delegate-implementation",
+            inputs=[args.task],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     if not args.name.replace('-','').replace('_','').isalnum():
         parser.error('name must contain letters, digits, hyphens or underscores')
     task = args.task.resolve()

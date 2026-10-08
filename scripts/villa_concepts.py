@@ -11,11 +11,13 @@ import math
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import villa_env as E
 from archpipe import vocabulary as vocab
 from archpipe.concept import villa as V
 
-ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "out" / "villa" / "concepts"
 SPEC = ROOT / "spec" / "concepts" / "villa"
 
@@ -260,7 +262,18 @@ def draw_section(lay, checks, path, x_cut=5.5):
     plt.close(fig)
 
 
-def main():
+def main(argv=None) -> int:
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-concepts",
+            output=OUT,
+            modules=["matplotlib", "numpy"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     OUT.mkdir(parents=True, exist_ok=True)
     rows = []
     for lay in V.concepts():

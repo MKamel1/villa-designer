@@ -1,15 +1,28 @@
 """Generate Claude/Codex adapters from shared skill sources and role records."""
 import argparse
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 
-def main():
+def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--check', action='store_true')
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "sync-agent-assets",
+            inputs=[ROOT / "agents/roles.json"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     outputs = {}
     # Copy every file of each skill, not only SKILL.md: skills link to their own templates and examples, and a
     # SKILL.md-only copy left those links dangling in the Claude adapter (defect-learning, 2026-09-29).

@@ -13,10 +13,11 @@ import json
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from archpipe import deliverables as D, model, rules
 from archpipe.safe_io import save_json, save_text
-
-ROOT = Path(__file__).resolve().parents[1]
 
 MISSING = [
     ("Glare (DGP) and detailed daylight compliance", "daylight consultant", "room window sizes and orientations (windows.csv); TM59 screen"),
@@ -35,6 +36,17 @@ def main(argv=None) -> int:
     ap.add_argument("--name", required=True)
     ap.add_argument("--thermal-label", help="concept id prefix in out/workstation/thermal-cases-latest.json")
     a = ap.parse_args(argv)
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "handoff",
+            inputs=[a.spec],
+            modules=["yaml", "shapely", "ifcopenshell", "numpy"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     p = model.load(a.spec)
     out = ROOT / "docs" / "handoff" / a.name
     out.mkdir(parents=True, exist_ok=True)
