@@ -284,7 +284,44 @@ def main(argv=None) -> int:
         draw_section(lay, res["elevation_checks"], OUT / f"section-{lay['id']}-r4")
         rows.append((lay["id"], res["fails"], res["warnings"]))
         print(lay["id"], "fails", res["fails"], "warnings", res["warnings"])
-    return 0
+    all_failures = []
+    for lay_id, fails, _ in rows:
+        if isinstance(fails, (list, tuple)):
+            if fails:
+                all_failures.extend([f"{lay_id}: {f}" for f in fails])
+        elif isinstance(fails, int) and fails > 0:
+            all_failures.append(f"{lay_id}: {fails} fails")
+        elif fails:
+            all_failures.append(f"{lay_id}: {fails}")
+    bad = len(all_failures) > 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = OUT / "villa-concepts.stage-result.json"
+    outputs = []
+    for lay_id, _, _ in rows:
+        outputs.extend([
+            SPEC / f"concept-{lay_id}.json",
+            OUT / f"concept-{lay_id}-r4.pdf",
+            OUT / f"concept-{lay_id}-r4.png",
+            OUT / f"section-{lay_id}-r4.pdf",
+            OUT / f"section-{lay_id}-r4.png",
+        ])
+    inputs = [p for p in [ROOT / "spec/villa-site.yaml"] if p.is_file()]
+    write_stage_result(
+        "villa-concepts",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=outputs,
+        exit_code=1 if bad else 0,
+        metadata={
+            "concepts": [r[0] for r in rows],
+            "failures": all_failures,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {"passed": not bad, "failures": all_failures, "concepts": [r[0] for r in rows]},
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":
