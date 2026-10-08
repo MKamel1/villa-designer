@@ -132,12 +132,17 @@ __all__ = [
     "check_concept_critic_upper_supported",
     "check_element_id_exact_integer",
     "check_evidence_composition_verified",
+    "check_evidence_door_swing_certification",
     "check_evidence_render_vs_design",
     "check_evidence_scope_promotion",
     "check_evidence_shared_model",
     "check_execution_context_absolute_path",
     "check_execution_context_dependencies",
+    "check_execution_context_fresh_artifact_check",
+    "check_execution_context_noninteractive_stdin",
+    "check_execution_context_python_interpreter_path",
     "check_execution_context_roles",
+    "check_execution_context_writable_directory",
     "check_external_claims_manifest_completeness",
     "check_external_claims_safe_destination",
     "check_external_claims_search_relevance",
@@ -4188,6 +4193,171 @@ register_guard(
     description="Validates that render jobs fail closed when upstream source inputs have changed (l0619)",
     notes="needs real case: l0619's recorded failure is a resumed render whose job id hashed the scene and IES files but not the renderer (docs/LEARNINGS.md 'A render job resumed a stale result'); a tampered input digest is a sibling (lead review of batch 10, 2026-10-08)",
     needs_real_case=True,
+)
+
+
+
+# -----------------------------------------------------------------------------
+# Phase 2, Batch 11: Execution Context & Evidence Boundaries
+# -----------------------------------------------------------------------------
+
+# 95. l0015: Temporary directory writability in restricted sandbox environments
+def check_execution_context_writable_directory(
+    path: Path | str,
+    label: str = "temporary directory",
+) -> Path:
+    """Validates that execution context directories are writable, readable, and removable (l0015)."""
+    return execution_context.writable_directory(path, label)
+
+
+register_guard(
+    fn=check_execution_context_writable_directory,
+    name="execution_context_writable_directory",
+    lesson_ids=("l0015-python-3-14", "l0015"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that execution context directories are writable, readable, and removable (l0015)",
+    notes="needs real case: l0015's recorded failure is a Python 3.14 sandbox environment where tempfile.mkdtemp created a directory under out/tmp that child processes could not write into (docs/LEARNINGS.md line 182); live OS sandbox permissions cannot be reproduced statically as a frozen file without OS container isolation",
+    needs_real_case=True,
+)
+
+
+# 96. l0031: Non-interactive stdin for child tool processes under Windows protocol servers
+def check_execution_context_noninteractive_stdin(
+    tool: execution_context.Tool,
+    env: dict[str, str],
+    cwd: Path,
+) -> dict[str, Any]:
+    """Validates that external tool probing runs with non-interactive stdin (l0031)."""
+    return execution_context.resolve_tool(tool, env, cwd)
+
+
+register_guard(
+    fn=check_execution_context_noninteractive_stdin,
+    name="execution_context_noninteractive_stdin",
+    lesson_ids=("l0031-windows-python-3", "l0031"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that external tool probing runs with non-interactive stdin (l0031)",
+    notes="needs real case: l0031's recorded failure is a non-interactive subprocess inheriting the live MCP protocol stdin pipe under Python 3.14.7 on Windows and hanging on lock acquisition (docs/LEARNINGS.md line 198); live process stdin pipe inheritance cannot be frozen statically as a file",
+    needs_real_case=True,
+)
+
+
+# 97. l0135: Explicit Python interpreter path resolution avoiding bash PATH confusion
+def check_execution_context_python_interpreter_path(
+    modules: Iterable[str],
+    *,
+    root: Path = ROOT,
+    interpreter: str | Path | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Validates that declared Python dependencies locate the correct interpreter without bash PATH confusion (l0135)."""
+    return execution_context.check_dependencies(modules, root=root, interpreter=interpreter)
+
+
+register_guard(
+    fn=check_execution_context_python_interpreter_path,
+    name="execution_context_python_interpreter_path",
+    lesson_ids=("l0135-python-not-found", "l0135"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that declared Python dependencies locate the correct interpreter without bash PATH confusion (l0135)",
+    notes="needs real case: l0135's recorded failure is invoking 'python' from bash on Windows where .venv is not on the bash PATH (docs/LEARNINGS.md line 302); shell PATH absence is an OS shell process state, not a static fixture",
+    needs_real_case=True,
+)
+
+
+# 98. l0622: Fresh artifact verification on zero-exit child processes
+def check_execution_context_fresh_artifact_check(
+    argv: list[str],
+    *,
+    context: dict[str, Any],
+    scripts: list[Path | str],
+    record: Path,
+    expected: Path | None = None,
+) -> Any:
+    """Validates that native tool commands produce fresh output artifacts upon exit zero (l0622)."""
+    return execution_context.run_checked(argv, context=context, scripts=scripts, record=record, expected=expected)
+
+
+register_guard(
+    fn=check_execution_context_fresh_artifact_check,
+    name="execution_context_fresh_artifact_check",
+    lesson_ids=("l0622-blender-exited-0", "l0622"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that native tool commands produce fresh output artifacts upon exit zero (l0622)",
+    notes="needs real case: l0622's recorded failure is Blender exiting 0 after a Python exception during mesh construction with keyhole polygons, producing no render image (docs/LEARNINGS.md lines 789-791); running external Blender binary with crash reproduction is not frozen as a static fixture",
+    needs_real_case=True,
+)
+
+
+# 99. l0030: Handedness/swing assumption demotion guard
+def check_evidence_door_swing_certification(
+    door_extract: EvidenceRecord,
+    room_geometry: EvidenceRecord,
+) -> EvidenceRecord:
+    """Validates that door swing extract achieves VERIFIED status without provisional handedness assumptions (l0030)."""
+    res = evidence.combine(door_extract, room_geometry, value="door_swing_certification")
+    if res.status != EvidenceStatus.VERIFIED:
+        raise ValueError(
+            f"Door swing evidence status is {res.status.value}, expected VERIFIED (l0030): {res.reasons}"
+        )
+    return res
+
+
+_rec_door_extract_assumed_l0030 = EvidenceRecord(
+    value={"door_id": "D-01", "family": "Single-Flush", "swing": "left", "handedness": "assumed_default_left"},
+    status=EvidenceStatus.ASSUMED,
+    source=SourceRef(
+        title="Revit Model Extract",
+        edition="2027",
+        verified=False,
+        notes="Extract lacks actual hinge/facing handedness; adapter uses default left hinge (l0030)",
+    ),
+    scope="room:bedroom",
+    reasons=("Provisional handedness assumption: extract lacks hinge/facing handedness (l0030)",),
+)
+_rec_door_extract_verified_l0030 = EvidenceRecord(
+    value={"door_id": "D-01", "family": "Single-Flush", "swing": "left", "handedness": "left_hand_reverse"},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(
+        title="Revit Native View Extract",
+        edition="2027",
+        verified=True,
+        notes="Handedness extracted from authored native view (l0030)",
+    ),
+    scope="room:bedroom",
+)
+_rec_room_geometry_verified_l0030 = EvidenceRecord(
+    value={"room": "bedroom", "width_mm": 4200, "length_mm": 5100},
+    status=EvidenceStatus.VERIFIED,
+    source=SourceRef(title="Revit Model Extract", edition="2027", verified=True),
+    scope="room:bedroom",
+)
+
+register_guard(
+    fn=check_evidence_door_swing_certification,
+    name="evidence_door_swing_certification",
+    lesson_ids=("l0030-current-extract-lacks", "l0030"),
+    real_case=case(_rec_door_extract_assumed_l0030, _rec_room_geometry_verified_l0030),
+    clean_case=case(_rec_door_extract_verified_l0030, _rec_room_geometry_verified_l0030),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that door swing extract achieves VERIFIED status without provisional handedness assumptions (l0030)",
 )
 
 
