@@ -8,6 +8,9 @@ import numpy as np
 
 
 def clump(identifier, species, center, ground, data, *, bed, layer):
+    if species=='Rhapis excelsa':
+        from .garden_g4e import clump as botanical
+        return botanical(identifier,species,center,ground,data,bed=bed,layer=layer)
     from . import villa_landscape as L
     row=L.require_species(species,data)
     size=row['placement_assumptions']['procedural-clump']
@@ -62,16 +65,6 @@ def clump(identifier, species, center, ground, data, *, bed, layer):
                 [[bottom,lower[(k+1)%42],lower[k]] for k in range(42)]+
                 [[upper[k],lower[k],lower[(k+1)%42],upper[(k+1)%42]] for k in range(42)],True)
             laminae.append(dict(face_indices=list(range(start,len(faces))),outline=upper,petiole=top))
-    elif species=='Rhapis excelsa':
-        for cane in range(5):
-            angle=cane*2*pi/5;root=(.07*cos(angle),.07*sin(angle),0)
-            tip=(root[0],root[1],.65+.075*cane);tube(root,tip,.013)
-            for level in (.08+.011*cane,.29+.043*((cane*3)%5),tip[2]):
-                end=(root[0]+.32*cos(angle),root[1]+.32*sin(angle),level)
-                tube((root[0],root[1],max(0,level-.09)),end,.006)
-                crown_nodes.append(dict(cane=cane,point=end))
-                for segment in range(9):
-                    blade(end,angle+(segment-4)*.19,.31,.024,.18,.07,truncate=True)
     else:
         raise ValueError('No shade botanical builder for '+species)
     points=[q for f in faces for q in f];lo=np.min(points,axis=0);hi=np.max(points,axis=0)

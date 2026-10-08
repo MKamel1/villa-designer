@@ -165,6 +165,8 @@ def garden_camera_findings(view, scene):
     from shapely.geometry import Point, Polygon, box
     if not any(subject.startswith('landscape-') for subject in view.get('subjects', [])):
         return []
+    from .garden_g4e import foreground_fixture_findings
+    foreground=foreground_fixture_findings(view,scene) if 'evening-garden' in view.get('layers_on',[]) else []
     domain = scene.get('garden_camera_domain')
     if domain is None:
         return [view['id'] + ': MISSING garden camera standing domain']
@@ -186,13 +188,13 @@ def garden_camera_findings(view, scene):
     if room_id:
         room = domain['rooms'].get(room_id)
         if room and room['ground_m'] < z < room['ground_m'] + room['height_m'] and box(*room['rect_m']).covers(point):
-            return []
+            return foreground
         return [view['id'] + ': camera outside declared standing room']
     if not Polygon(domain['yard_polygon_m']).covers(point):
         return [view['id'] + ': exterior garden camera outside yard polygon']
     if overhead_cover(scene, ground).covers(point):
         return [view['id'] + ': exterior garden camera under architectural cover']
-    return []
+    return foreground
 
 
 def normal(face):
@@ -226,7 +228,8 @@ def plant_form_findings(meshes):
     separately and checked from its actual deterministic leaf placements.
     """
     from .garden_shade import form_findings
-    out = form_findings(meshes)
+    from .garden_g4e import habit_findings
+    out = form_findings(meshes) + habit_findings(meshes)
     for mesh in meshes:
         if mesh.get('part_kind') == 'climber':
             from ..blender.climber_placement import placements,density_for_coverage,SIZE

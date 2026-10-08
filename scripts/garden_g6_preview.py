@@ -51,6 +51,34 @@ def receipt_findings(data, receipt):
     return out
 
 
+def disable_material_emission(materials):
+    """Neutral context needs neutral light, including all luminous shaders."""
+    for material in materials.values():
+        if not material.use_nodes:continue
+        for node in material.node_tree.nodes:
+            if node.type=='EMISSION':node.inputs['Strength'].default_value=0
+            elif node.type=='BSDF_PRINCIPLED' and 'Emission Strength' in node.inputs:
+                node.inputs['Emission Strength'].default_value=0
+
+
+def ortho_specimen_frame_findings(points, location, target, width_m, aspect):
+    """Whole-specimen diagnostic crop screen, independent of Blender.
+
+    Points, camera location/target and image width are metres. Aspect is
+    image width divided by height. Right and up are unit camera directions;
+    dot products project actual vertices onto those directions.
+    """
+    import numpy as np
+    direction=np.asarray(target,dtype=float)-location
+    direction/=np.linalg.norm(direction)
+    right=np.cross(direction,[0.,0.,1.]);right/=np.linalg.norm(right)
+    up=np.cross(right,direction)
+    delta=np.asarray(points)-location
+    return [name+' outside whole-specimen detail frame' for name,extent,limit in
+            (('horizontal',np.abs(delta@right).max(),width_m/2),
+             ('vertical',np.abs(delta@up).max(),width_m/aspect/2)) if extent>limit+1e-6]
+
+
 def render(args):
     import bpy
     from mathutils import Vector
@@ -71,6 +99,7 @@ def render(args):
         names = {m["material"] for m in meshes} | {n for m in meshes for n in m.get("face_materials", [])}
         built_materials = {name: builder.add_material(name, materials[name], str(args.library), warnings)
                            for name in names}
+        builder.configure_glass(built_materials, {name:materials[name] for name in names})
         objects = builder.build_meshes(meshes, built_materials, materials, warnings)
         builder.build_climbers(meshes, objects, built_materials, warnings)
         scene = bpy.context.scene
@@ -107,6 +136,12 @@ def render(args):
     if args.scene:
         scene, objects, warnings = setup(data["meshes"], data["materials"])
         imported = builder.import_props(data.get("props", []), str(args.library))
+        disable_material_emission({m.name:m for m in bpy.data.materials})
+        for i,fill in enumerate(data.get('neutral_preview_fill',[])):
+            light=bpy.data.lights.new('diagnostic neutral context fill '+str(i),'AREA')
+            light.energy=fill['watts'];light.size=fill['size_m'];light.color=(1,1,1)
+            obj=bpy.data.objects.new(light.name,light);bpy.context.collection.objects.link(obj)
+            obj.location=fill['position_m'];obj.rotation_euler=(Vector(fill['target_m'])-obj.location).to_track_quat('-Z','Y').to_euler()
         # Candidate camera preview keeps the exported geometry untouched.
         authored_views = json.loads(args.candidate_view.read_text()) if args.candidate_view else data["views"]
         if isinstance(authored_views, dict):
@@ -126,7 +161,7 @@ def render(args):
             scene.render.filepath = str(path)
             bpy.ops.render.render(write_still=True)
             evidence.append(dict(id=view["id"], image=str(path), neutral=True,
-                                 camera=view["camera"], source_geometry_sha256=canonical_hash(data["meshes"]),
+                                 camera=view["camera"], neutral_material_emission_off=True, neutral_preview_fill=data.get('neutral_preview_fill',[]), source_geometry_sha256=canonical_hash(data["meshes"]),
                                  resolution=[scene.render.resolution_x,scene.render.resolution_y],
                                  subjects=builder.subjects(view, data["meshes"], objects, imported), warnings=warnings))
             bpy.data.objects.remove(camera, do_unlink=True)
@@ -225,13 +260,19 @@ def render(args):
             evidence[-1]['source_materials_sha256'] = canonical_hash({n:data['materials'][n] for n in sorted(used)})
             if specimen.get('detail_swatch'):
                 camera.location = (.7,-.9,.85)
-                target = Vector((0,0,.02))
+                target = Vector(specimen.get("detail_target_m", (0,0,.02)))
                 camera.rotation_euler = (target-camera.location).to_track_quat('-Z','Y').to_euler()
-                camera_data.ortho_scale = .65
+                camera_data.ortho_scale = specimen.get("detail_ortho_scale_m", .65)
+                if specimen.get('detail_full_specimen'):
+                    staged_points=[p for m in meshes for f in m['faces'] for p in f]
+                    failures=ortho_specimen_frame_findings(staged_points,list(camera.location),list(target),
+                                                          camera_data.ortho_scale,aspect)
+                    if failures:raise ValueError(specimen['id']+': '+'; '.join(failures))
                 detail = args.output/(specimen['id']+'-detail.png')
                 scene.render.filepath = str(detail)
                 bpy.ops.render.render(write_still=True)
                 evidence[-1]['detail_image'] = str(detail)
+                evidence[-1]['detail_full_specimen_checked'] = bool(specimen.get('detail_full_specimen'))
     receipt = args.output / ("context-preview-evidence.json" if args.scene else "isolated-preview-evidence.json")
     previous = json.loads(receipt.read_text()) if receipt.exists() else []
     by_identifier = {row["id"]: row for row in previous}

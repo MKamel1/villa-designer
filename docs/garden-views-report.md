@@ -1,5 +1,11 @@
 # Garden view corrections — 2026-10-07
 
+2026-10-08 current-state note: [G4e](garden-g4e-report.md) supersedes the
+north evening identifier with v42 (recorded v41 alias), rebuilds ten shade
+plant appearances and adjusts the affected v37 camera. The measured G4e
+geometry digest supersedes the earlier whole-scene digest below. South v41
+and the historical review evidence in this report are retained.
+
 Item 0 is repaired without replacing the frozen snapshot. v19 and v27
 have independently reviewed camera corrections. The two terrace stone
 stripes are removed at the renderer's construction boundary. G4d is

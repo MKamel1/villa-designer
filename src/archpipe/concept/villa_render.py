@@ -35,6 +35,7 @@ from .authored_values import fill_defaults, override
 from .physical_part import PartMeshList
 from .mounting import MountItem, binding, check_mesh, Host, Finish, stacked_finish_bridge
 from . import stair_mounting as SM
+from . import garden_g4e
 from dataclasses import asdict
 
 LZ = {"B": -3.0, "GF": 0.0}
@@ -43,6 +44,7 @@ OUT = ROOT / "out" / "villa" / "render-d1"
 
 # ------------------------------------------------------------------ materials (linear rgb; reflectance = target mean)
 M = {
+    **garden_g4e.materials(),
     "plaster-warm-white": dict(kind="principled", base_rgb=[0.80, 0.785, 0.755], reflectance=0.80,
                                roughness=0.85, note="warm white matt emulsion on smooth gypsum plaster (0.80); "
                                                     "the first version used a rough plaster photo-texture: painted "
@@ -2714,7 +2716,10 @@ def _VIEWS(lay=None, resolve=True):
     V[-1]["standing_room"] = "lounge"
     V[-1]["visibility_targets"] = ["landscape-north-feature-stone", "landscape-north-rhapis-accent", "landscape-north-back-02"]
     V[-1]["visibility_basis"] = "ASSUMED majority of 13 actual target rays must first hit each named feature; partial foreground foliage is allowed; independent preview required"
-    V[-1]["caption_notes"] = ["North garden from the lounge: open timber trellis with young Cissus alata, one Rhapis clump and an ASSUMED natural feature stone; Fatsia beside the hanging retreat. Thin training leaves the frame partly visible; target coverage about 35%. Climber light applicability PARTIAL; winter-night and Egypt performance UNVERIFIED. Bistro and raised containers removed per client 2026-10-06. Companion v36 shows the layered floor bed; v39 and the G4d evening view show the hanging retreat."]
+    V[-1]['visibility_allowances'] = {'landscape-north-feature-stone': {
+        'view_id': 'v37-north-garden-lounge', 'samples': 13, 'minimum_visible_rays': 6,
+        'reason': 'feature stone partly screened by the approved denser lady palm (G4e); minimum visible feature rays 6 of 13 for this subject only (lead decision 2026-10-08)'}}
+    V[-1]["caption_notes"] = ["North garden from the lounge, restored to the retained pre-G4e camera: open timber trellis with young Cissus alata, one Rhapis clump and an ASSUMED natural feature stone; Fatsia beside the hanging retreat. The feature stone is partly screened by the approved denser lady palm (G4e); minimum visible feature rays 6 of 13 for this subject only (lead decision 2026-10-08). Thin training leaves the frame partly visible; target coverage about 35%. Climber light applicability PARTIAL; winter-night and Egypt performance UNVERIFIED. Bistro and raised containers removed per client 2026-10-06. Companion v36 shows the layered floor bed; v39 and the G4d evening view show the hanging retreat."]
     v("v38-north-garden-floor-bed", "North garden — floor-bed extent through the lounge", "day",
       [4.10, -25.00, B + 1.35], [1.60, -27.70, B + 1.35], 24,
       ["landscape-bed-north", "landscape-north-back-00", "landscape-north-back-01", "landscape-north-mid-00", "landscape-north-mid-01", "landscape-north-front", "landscape-north-edge"],

@@ -27,7 +27,7 @@ class LandscapeGuards(unittest.TestCase):
         from archpipe.concept.garden_render_review import plant_form_findings
         from archpipe.concept.physical_part import Part
         frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text()))
-        self.assertIn('0.660 m',plant_form_findings(frozen['clumps'])[0])
+        self.assertTrue(any('0.660 m' in finding for finding in plant_form_findings(frozen['clumps'])))
         self.assertEqual(plant_form_findings(self.meshes),[])
         # G6 retires this full-sun plant from the east yard. Its real builder
         # remains independently exercised without restoring the placement.

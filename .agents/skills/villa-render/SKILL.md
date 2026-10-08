@@ -233,6 +233,21 @@ asset or view:
    metadata before rendering. Neutral staging must sit below authored ground
    surfaces, never coincide with them. Keep close swatches alongside the
    scale-reference view. See [G4d procedure](../../../docs/ops/garden-g4d.md).
+   G4f morphology checks use actual blade faces for broadness, outward tip
+   lean and arch-over drop; counts or a small local bend do not establish a
+   species habit. State numerical morphology screens as authored assumptions.
+   For an evening camera change, compare linear uplights-only foliage peaks
+   AND screen population, with the same surface masks and source isolations;
+   framing and first-hit rays alone do not prove the intended lit faces show.
+   Disclose a faithful specified-sky cast in the live view/caption while
+   retaining its QA failure and locked camera policy. Keep rebuilt geometry
+   receipts explicitly pending until the lead accepts the neutral previews.
+   Neutral context must disable every design emissive shader, including
+   runtime lenses. Any diagnostic softbox is recorded separately and held
+   identical across the comparison. A neutral world alone does not cancel
+   existing luminous materials. After a plant-habit rebuild, recheck every
+   existing named feature's first-hit visibility before integration; envelope
+   equality cannot establish that foliage still leaves the same sightlines.
 2. **No placeholder shapes in presentation renders.** A box, slab or flat
    colour standing in for a plant, garment, lamp or trellis is a defect even
    when labelled; if the real thing cannot be built, leave it out and say so.

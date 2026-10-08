@@ -79,7 +79,7 @@ def acceptance():
     save('preview-authority-comparison.json',authority)
     from villa_render_views import camera_proximity_violations
     from archpipe.concept.garden_render_review import subject_frame_findings,subject_visibility_evidence
-    view=next(v for v in scene['views'] if v['id']=='v41-north-garden-evening')
+    view=next(v for v in scene['views'] if v['id']=='v42-north-garden-evening')
     camera_check=dict(camera_proximity=camera_proximity_violations(view,scene,{}),
         complete_frame=subject_frame_findings(view,scene),garden_camera=garden_camera_findings(view,scene),
         visibility=subject_visibility_evidence(view,scene),glare_pairs=len(glare),

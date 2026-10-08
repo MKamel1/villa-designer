@@ -331,22 +331,34 @@ def scene_findings(scene):
 
 
 def evening_view():
-    """Reviewed open-sky camera; fixed 24 mm level eye, no design moves."""
+    """Reviewed lounge-window camera; fixed 24 mm level eye, no design moves."""
     subjects=['landscape-north-rhapis-accent','landscape-north-back-02',
               'landscape-north-swing-basket','landscape-north-swing-cushions']
-    return dict(id='v41-north-garden-evening',title='North garden — soft evening uplights and hanging retreat',
+    return dict(id='v42-north-garden-evening',aliases=['v41-north-garden-evening'],title='North garden — soft evening uplights and hanging retreat',
                 state='exterior-dusk',when='2026-10-15T18:35:00+03:00',
-                camera=dict(position=[0.,-26.4,-1.65],target=[1.9870534340688457,-24.152419378497132,-1.65],
-                            lens_mm=24,sensor_mm=36,shift_x=0.,shift_y=-.16185268778297973),
+                camera=dict(position=[3.9,-26.55,-1.65],target=[1.739460010201047,-24.468638197602477,-1.65],
+                            lens_mm=24,sensor_mm=36,shift_x=0.,shift_y=-.15420195429557562),
                 resolution=[1920,1280],subjects=subjects,require_full_subject_frame=True,
                 visibility_targets=subjects[:3],visibility_basis='ASSUMED majority of 13 actual first-hit rays, plus independent neutral review',
                 layers_on=[LAYER],dimmers={LAYER:1.},exposure='exterior-dusk',samples=1024,
-                room=None,final_only=True,seated=False,
-                caption_notes=['North garden: open-sky standing camera near the swing, 1.35 m eye above the court; level 24 mm lens and downward shift. '
-                               'Rhapis, Fatsia and swing basket/cushions are wholly framed; partial foliage screens the basket. Upper rope and fixing plate lie outside this view. '
+                room=None,final_only=True,seated=False,standing_room='lounge',
+                presentation_retired=True,
+                presentation_decision=('Lead decision 2026-10-08: retire from review/final presentation; keep for diagnostics. '
+                    'The view exists to show the approved palm uplighting. The in-lounge camera above was rejected (looks through glazing at the back of the swing; '
+                    'uplights-only foliage 99.5th-percentile linear luminance 0.437 against 14.30 from the original camera). '
+                    'Bounded camera-only searches (320 western, 96 transition poses; out/garden-g4f/resume-*-search-evidence.json) found no pose passing every unchanged '
+                    'standing, lens-clearance, opening-frame, foreground-fitting and subject-visibility check; the best open-court candidate kept 3.6% of the original '
+                    'uplit peak and 22.8% of the uplit screen population (out/garden-g4f/resume-preview-review.md). Lights, aim, flux, sky, exposure and QA limits unchanged. '
+                    'The original camera shows the uplighting but frames a spike housing in the foreground: client choice pending.'),
+                faithful_colour_cast=dict(source='specified dusk sky amplified by pale gravel',sky_blue_red_ratio=1.379,
+                    lamp_blue_red_ratio=.0996,retained_colour_cast=.105,colour_cast_limit=.02,
+                    colour_cast_status='FAIL',highlights_status='WARN',
+                    diagnosis='docs/garden-g4e-report.md#evening-diagnosis',decision='lead 2026-10-08; v07 precedent'),
+                caption_notes=['North garden from inside the lounge through its existing window, 1.35 m eye above the court; level 24 mm lens and downward shift. G4e camera-only relocation keeps uplight housings incidental; v41-north-garden-evening is the recorded historical alias. '
+                               'Rhapis, Fatsia and rear of the swing basket/cushions are wholly framed through glazing; the basket partly screens the planting. The seating face is shown separately in v39. Upper rope and fixing plate lie outside this view. '
                                'Foreground pale gravel is a visible portion of the retained path/mulch, not the complete court. '
                                'Four ground-bearing shielded uplights: each ASSUMED 120 source lumens BEFORE the snoot, approximately 93 emitted fitting lumens, 30 degree beam and 2700 K; source cosine-power photometry plus physical shield. Only the evening garden layer is on. '
                                'Pale gravel diffuse reflectance 0.70 and light stone 0.65 ASSUMED, no product; 10–20 mm gravel with nominal 15 mm metre-native pattern proxy. '
                                'Authored botanical/furniture appearances ASSUMED; photographic likeness, procurement and nursery performance UNVERIFIED. '
                                'Swing dynamic load and anchorage remain UNVERIFIED; outdoor fixture/IP/drainage/electrical product specification pending. '
-                               'Neutral camera preview and isolated uplight preview reviewed; evening presentation brightness has not been rendered or approved.'])
+                               'Faithful cool cast from the specified dusk sky: horizontal-weighted linear blue/red 1.379; warm uplight source blue/red 0.0996. Pale gravel amplifies the sky. Retained colour_cast FAIL (0.105 against 0.02) is disclosed, with highlights WARN (0.76 against 0.9); exposure and white balance were not compensated. Diagnosis: docs/garden-g4e-report.md, Evening diagnosis; lead decision 2026-10-08 following v07. Linear probes and neutral previews do not constitute new presentation QA.'])

@@ -326,6 +326,7 @@ def validate_scene(scene: dict) -> list[str]:
     if not isinstance(views, list) or not views:
         errors.append("views: nonempty array required"); views = []
     view_ids = set()
+    view_numbers = set()
     for i, view in enumerate(views):
         p = f"views[{i}]"
         if not isinstance(view, dict):
@@ -333,6 +334,13 @@ def validate_scene(scene: dict) -> list[str]:
         ident = view.get("id")
         need(isinstance(ident, str) and bool(ident) and ident not in view_ids and "/" not in ident and "\\" not in ident, p+".id", "unique safe id required")
         view_ids.add(ident)
+        # The display/order number must be unique too, even with different titles.
+        import re
+        match=re.match(r"v(\d+)-",ident) if isinstance(ident,str) else None
+        if match:
+            number=int(match.group(1))
+            need(number not in view_numbers,p+".id","unique view number required")
+            view_numbers.add(number)
         if "presentation_retired" in view:
             need(type(view["presentation_retired"]) is bool, p+".presentation_retired", "boolean required")
         if view.get("presentation_retired"):
