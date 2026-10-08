@@ -65,11 +65,11 @@ Rather than inventing duplicate data models or sniffing logic, Phase 1 directly 
 The following call sites currently ingest external data or assert claims without the centralized external claims guards. They are scheduled for migration in Phase 2:
 
 ### 1. HTTP Fetch & Download Pipeline
-- **[`src/archpipe/fetch.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py#L88-L106)** (`download`):
-  - *Current*: Streams HTTP response bytes directly to `dest` with only a size limit check (`st_size > 0`).
-  - *Target*: Ingest via `external_claims.ingest_bytes`; verify sniffed type matches expected extension before replacing `.part` file; record SHA-256 and retrieval timestamp into an intake receipt.
-- **[`src/archpipe/fetch.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py#L73-L86)** (`get_text`):
-  - *Current*: Reads UTF-8 text from cache or network without validating content type.
+- **[`src/archpipe/fetch.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py#L88-L106)** (`download`) **[MIGRATED Phase 2 Batch 1]**:
+  - *Current*: Ingests downloaded bytes via `external_claims.ingest_bytes` before staging `.part` file replaces `dest`; fails closed on content-type mismatch or empty payload.
+  - *Target*: Ingest via `external_claims.ingest_bytes`; verify sniffed type matches expected extension before replacing `.part` file; record SHA-256 and retrieval timestamp into an intake receipt (public Path return type preserved).
+- **[`src/archpipe/fetch.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py#L73-L86)** (`get_text`) **[MIGRATED Phase 2 Batch 1]**:
+  - *Current*: Reads UTF-8 text from cache or network; validates response bytes through `external_claims.ingest_bytes`, rejecting empty payloads and non-HTML content before writing cache.
   - *Target*: Pass through `external_claims.ingest_bytes` to verify non-empty, non-HTML error payload.
 
 ### 2. Luminaire Ingestion & Catalogue Crawl
@@ -79,11 +79,11 @@ The following call sites currently ingest external data or assert claims without
 - **[`src/archpipe/luminaires/library.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L201-L278)** (`import_inbox`):
   - *Current*: Loops through inbox and writes product folders and `product.json` records without verifying declared vs sniffed type or cross-source parameter agreement.
   - *Target*: Ingest incoming assets using `external_claims.ingest_bytes`; record provenance records into `product.json`; run `check_cct_and_watts_agreement` before marking product verified.
-- **[`src/archpipe/luminaires/iguzzini.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/iguzzini.py#L172-L198)** (`crawl_products`):
-  - *Current*: Crawls product pages and writes coverage statistics via `write_coverage`, but does not gate or halt when coverage falls below threshold.
+- **[`src/archpipe/luminaires/iguzzini.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/iguzzini.py#L172-L198)** (`crawl_products`) **[MIGRATED Phase 2 Batch 1]**:
+  - *Current*: Crawls product pages, writes catalogue and coverage statistics, and gates completion via `external_claims.assert_manifest_complete` against requested family count (l0122).
   - *Target*: Gate crawl completion with `external_claims.assert_manifest_complete` against requested family count ([`l0122`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L225)).
-- **[`src/archpipe/luminaires/iguzzini.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/iguzzini.py#L200-L220)** (`fetch_photometry`):
-  - *Current*: Checks `library.sniff(data) != kind` on raw downloaded bytes.
+- **[`src/archpipe/luminaires/iguzzini.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/iguzzini.py#L200-L220)** (`fetch_photometry`) **[MIGRATED Phase 2 Batch 1]**:
+  - *Current*: Verifies downloaded photometry bytes via `external_claims.ingest_bytes(data, declared_type=kind, url=...)` before saving to inbox, preserving `ValueError` contract.
   - *Target*: Replace with `external_claims.ingest_bytes(data, declared_type=kind, url=...)`.
 
 ### 3. Asset Intake & 3D Prop Manifest
