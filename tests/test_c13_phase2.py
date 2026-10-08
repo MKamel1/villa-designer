@@ -32,6 +32,11 @@ ROOT = Path(__file__).resolve().parents[1]
 # Format: (relative_file_path, enclosing_function_name, call_type) -> reason
 # Every entry MUST have an explicit rationale explaining why safe_io cannot or need not be used.
 EXCEPTIONS: dict[tuple[str, str, str], str] = {
+    # thermal.py: subprocess stdout handle for oconv in daylight_factor (same as daylight_grid)
+    ("src/archpipe/thermal.py", "daylight_factor", "write_text"): "Temporary scratch scene file immediately read by Radiance oconv in the same function",
+    ("src/archpipe/thermal.py", "daylight_factor", "open"): "Subprocess stdout redirection handle for oconv",
+    # radiance.py: os.environ.copy() builds a child environment dictionary; not a file copy
+    ("src/archpipe/radiance.py", "_child_env", "copy"): "Dictionary copy of os.environ, not a file write",
     # thermal.py: process log redirection via os.dup2 requires raw fd in append mode; safe_io has no append mode
     (
         "src/archpipe/thermal.py",
@@ -44,18 +49,6 @@ EXCEPTIONS: dict[tuple[str, str, str], str] = {
         "run_case",
         "write_text",
     ): "Temporary scratch IDF file immediately read by EnergyPlus run_idf in the same function",
-    # thermal.py: temporary scratch scene file immediately read by Radiance oconv in the same function
-    (
-        "src/archpipe/thermal.py",
-        "daylight_grid",
-        "write_text",
-    ): "Temporary scratch scene file immediately read by Radiance oconv in the same function",
-    # thermal.py: stdout redirection handle for oconv subprocess
-    (
-        "src/archpipe/thermal.py",
-        "daylight_grid",
-        "open",
-    ): "Subprocess stdout redirection handle for oconv",
     # radiance.py: stdout and stderr redirection handles for Radiance child processes in _run
     (
         "src/archpipe/radiance.py",

@@ -11,6 +11,8 @@ import numpy as np
 from archpipe import orientation as O, solar, villa_env as E
 from archpipe.orientation_guard import scene_findings, document_findings, geometry_side
 from archpipe.concept import villa_render as V,villa_landscape as L
+REBUILT_SHADE_PLANTS={'landscape-north-rhapis-accent','landscape-north-mid-00',
+                      'landscape-north-mid-01','landscape-north-mid-02'}
 from archpipe.concept.garden_sun import SunStudy,DATES
 
 
@@ -128,6 +130,10 @@ class Orientation(unittest.TestCase):
                 new=current[item['id']]
                 for field in ('faces','position','scale','rotation_deg','material'):
                     if field not in item:continue
+                    # G4e/G4f rebuilt these shade plants' faces (lead-accepted previews;
+                    # habit/plant-form proofs in tests/test_garden_g4e.py). Their
+                    # position, scale, rotation and material stay checked here.
+                    if field=='faces' and item['id'] in REBUILT_SHADE_PLANTS:continue
                     key=(item['id'],field)
                     if key in approved:
                         row=approved[key]

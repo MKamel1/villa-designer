@@ -47,5 +47,26 @@
     "old": "garden-gravel",
     "new": "north-pale-gravel",
     "decision": "G4d, client 2026-10-07: pale gravel and light stepping stones"
+  },
+  {
+    "item_id": "landscape-north-mid-00",
+    "field": "material",
+    "old": "garden-foliage",
+    "new": "aspidistra-leaf",
+    "decision": "G4e/G4f, lead 2026-10-08: Aspidistra rebuilt as broad arching blades; previews accepted"
+  },
+  {
+    "item_id": "landscape-north-mid-01",
+    "field": "material",
+    "old": "garden-foliage",
+    "new": "aspidistra-leaf",
+    "decision": "G4e/G4f, lead 2026-10-08: Aspidistra rebuilt as broad arching blades; previews accepted"
+  },
+  {
+    "item_id": "landscape-north-mid-02",
+    "field": "material",
+    "old": "garden-foliage",
+    "new": "aspidistra-leaf",
+    "decision": "G4e/G4f, lead 2026-10-08: Aspidistra rebuilt as broad arching blades; previews accepted"
   }
 ]

@@ -224,7 +224,8 @@ class TestSourcesEditionScreeningEvidence(unittest.TestCase):
         import pymupdf
         doc = pymupdf.open()
         page = doc.new_page()
-        page.insert_textbox(pymupdf.Rect(40, 40, 560, 800), text, fontsize=9)
+        filler = "\nPlanning data reference text for the readability threshold." * 6
+        page.insert_textbox(pymupdf.Rect(40, 40, 560, 800), text + filler, fontsize=9)
         doc.save(path)
 
     def test_l0188_real_recorded_failure_fails_closed(self) -> None:
