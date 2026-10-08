@@ -44,6 +44,8 @@ from typing import Any, Callable, Iterable
 import uuid
 import zipfile
 
+from PIL import Image
+
 from archpipe.evidence import (
     EvidenceError,
     EvidenceRecord,
@@ -75,6 +77,7 @@ from archpipe.concept import (
     critic,
     physical_part,
     render_support,
+    render_views,
     revit_spec,
     stairs,
     villa,
@@ -130,15 +133,19 @@ __all__ = [
     "check_raw_copy_lint",
     "check_refactor_silent_deletion",
     "check_render_contract_scene_geometry",
+    "check_render_qa_photometry_bound",
+    "check_render_qa_verticals_level",
     "check_render_qa_window_brightness",
     "check_render_support_blocked_openings",
     "check_render_support_unsupported",
+    "check_render_views_subject_framing",
     "check_revit_spec_clearance_problems",
     "check_revit_spec_wp1_detail_constraints",
     "check_rfa_portable_compatibility",
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
     "check_stage_result_fail_verdict_rejection",
+    "check_stage_result_output_integrity",
     "check_stage_result_stale_input_invalidation",
     "check_stair_pitch_headroom",
     "check_utf16_or_utf8_json",
@@ -148,6 +155,7 @@ __all__ = [
     "check_villa_furnish3d_opening_spec_id",
     "check_villa_furnish_bedside_zone_a",
     "check_villa_furnish_coffee_table_clearance",
+    "check_villa_furnish_column_clearance",
     "check_villa_furnish_door_wall_clearance",
     "check_villa_furnish_inside_room_boundary",
     "check_villa_furnish_kitchen_run_modules",
@@ -157,9 +165,11 @@ __all__ = [
     "check_villa_furnish_room_route_connectivity",
     "check_villa_furnish_route_corner_disc",
     "check_villa_furnish_stair_foot_reachable",
+    "check_villa_landscape_plant_spacing",
     "check_villa_landscape_prop_room_extent",
     "check_villa_landscape_route_obstruction",
     "check_villa_lighting_grooming_task",
+    "check_villa_lighting_prep_task",
     "check_villa_route_width_stair_void",
     "clear_registry",
     "coverage_report",
@@ -3301,6 +3311,255 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Validates that coffee tables maintain at least 457 mm clearance from seating fronts (l0534)",
+)
+
+
+# -----------------------------------------------------------------------------
+# Phase 2 Batch 7: Render QA, Camera Intent, Lighting Tasks, Output Integrity & Plant Spacing
+# -----------------------------------------------------------------------------
+
+# 70. l0093, l0063: Camera verticals level check
+_qa_sample_img_path = Path(tempfile.gettempdir()) / "archpipe_render_qa_sample.png"
+if not _qa_sample_img_path.exists() or _qa_sample_img_path.stat().st_size == 0:
+    _im_sample = Image.new("RGB", (20, 20), (128, 128, 128))
+    _im_sample.putpixel((0, 0), (255, 255, 255))
+    _im_sample.putpixel((0, 1), (255, 255, 255))
+    for _k in range(5):
+        _im_sample.putpixel((19, _k), (5, 5, 5))
+    _im_sample.save(_qa_sample_img_path)
+
+
+def check_render_qa_verticals_level(
+    image_path: Path | str,
+    qa: dict[str, Any],
+) -> dict[str, Any]:
+    """Validates that camera pitch maintains level verticals within tolerance (l0093, l0063)."""
+    report = render_qa.check(image_path, qa)
+    if "verticals_level" in report.get("failed", []):
+        raise ValueError(f"Camera pitch departs from level: {report.get('failed')}")
+    return report
+
+
+_qa_verticals_bad = {
+    "camera": {"pitch_deg": 81.0, "shift_y": 0.0},
+}
+_qa_verticals_clean = {
+    "camera": {"pitch_deg": 90.0, "shift_y": -0.05},
+}
+
+register_guard(
+    fn=check_render_qa_verticals_level,
+    name="render_qa_verticals_level",
+    lesson_ids=(
+        "l0093-verticals-level-reported",
+        "l0093",
+        "l0063-walls-leaned",
+        "l0063",
+    ),
+    real_case=case(_qa_sample_img_path, _qa_verticals_bad),
+    clean_case=case(_qa_sample_img_path, _qa_verticals_clean),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that camera pitch maintains level verticals within tolerance (l0093, l0063)",
+)
+
+
+# 71. l0068: Light fixture photometry bound with measured IES
+def check_render_qa_photometry_bound(
+    image_path: Path | str,
+    qa: dict[str, Any],
+) -> dict[str, Any]:
+    """Validates that all light fixtures in the render have bound measured IES photometry (l0068)."""
+    report = render_qa.check(image_path, qa)
+    if "photometry_bound" in report.get("failed", []):
+        raise ValueError(f"Render fixtures missing measured IES photometry: {report.get('failed')}")
+    return report
+
+
+_qa_photometry_bad = {
+    "lights": {"on": True, "count": 5, "with_ies": 0},
+}
+_qa_photometry_clean = {
+    "lights": {"on": True, "count": 5, "with_ies": 5},
+}
+
+register_guard(
+    fn=check_render_qa_photometry_bound,
+    name="render_qa_photometry_bound",
+    lesson_ids=("l0068-fixtures-rendered-as", "l0068"),
+    real_case=case(_qa_sample_img_path, _qa_photometry_bad),
+    clean_case=case(_qa_sample_img_path, _qa_photometry_clean),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that all active render light fixtures have bound measured IES photometry (l0068)",
+)
+
+
+# 72. l0731: Camera view intent subject framing
+def check_render_views_subject_framing(
+    layout: dict[str, Any],
+    room: str,
+    subjects: list[str],
+    lens_mm: float = 24.0,
+    sp: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that chosen camera view frames all declared subjects within sensor bounds (l0731)."""
+    res = render_views.choose(layout, room, subjects, lens_mm=lens_mm, sp=sp)
+    if not res.get("subjects_in_frame"):
+        raise ValueError(
+            f"Subjects not in frame for {room} with {lens_mm}mm lens: "
+            f"framed_candidates={res.get('framed_candidates')}"
+        )
+    return res
+
+
+register_guard(
+    fn=check_render_views_subject_framing,
+    name="render_views_subject_framing",
+    lesson_ids=("l0731-hand-typed-cameras", "l0731"),
+    real_case=case(_lay_d1_base, "family-bath", ["fb-wc"], 24.0),
+    clean_case=case(_lay_d1_base, "family-bath", ["fb-wc"], 16.0),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that chosen camera view frames all declared subjects within sensor bounds (l0731)",
+)
+
+
+# 73. l0689, l0874: Kitchen prep task illuminance target
+def check_villa_lighting_prep_task(
+    lay: dict[str, Any] | None = None,
+    fixtures: list[Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Validates kitchen prep task illuminance target (ies-res-kitchen-prep-500) (l0689, l0874)."""
+    res = villa_lighting.check(lay, fixtures)
+    failed_prep = [
+        t for t in res.get("tasks", [])
+        if t.get("card") == "ies-res-kitchen-prep-500" and t.get("status") == "fail"
+    ]
+    if failed_prep:
+        raise ValueError(f"Kitchen prep task illumination check failed: {failed_prep}")
+    return failed_prep
+
+
+_fx_lighting_no_prep = [
+    f for f in _fx_lighting_clean
+    if not (f.kind == "DLN" and f.room == "kitchen")
+]
+
+register_guard(
+    fn=check_villa_lighting_prep_task,
+    name="villa_lighting_prep_task_illuminance",
+    lesson_ids=(
+        "l0689-lighting-negative-test",
+        "l0689",
+        "l0874-per-point-recomputation",
+        "l0874",
+    ),
+    real_case=case(_lay_d1_base, _fx_lighting_no_prep),
+    clean_case=case(_lay_d1_base, _fx_lighting_clean),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates kitchen prep task illuminance target fails closed when task downlights are omitted (l0689, l0874)",
+)
+
+
+# 74. l0089, l0133: Stage result output integrity check
+def check_stage_result_output_integrity(
+    record_or_path: dict[str, Any] | Path | str,
+    root: Path | str | None = None,
+) -> tuple[bool, str, dict[str, Any]]:
+    """Validates that stage result outputs match recorded SHA-256 digests without modification (l0089, l0133)."""
+    return stage_result.validate_stage_result(
+        record_or_path,
+        root=root,
+        raise_on_error=True,
+    )
+
+
+_record_tampered_output = copy.deepcopy(_record_clean)
+_record_tampered_output["outputs"]["spec/villa-site.yaml"]["sha256"] = "0" * 64
+
+register_guard(
+    fn=check_stage_result_output_integrity,
+    name="stage_result_output_integrity",
+    lesson_ids=(
+        "l0089-another-session-edited",
+        "l0089",
+        "l0133-open-right-after",
+        "l0133",
+    ),
+    real_case=case(_record_tampered_output),
+    clean_case=case(_record_clean),
+    expected_real=stage_result.IncompleteOutputError,
+    expected_clean=None,
+    tier=2,
+    description="Validates stage result output file integrity, failing closed when outputs are modified or tampered on disk (l0089, l0133)",
+)
+
+
+# 75. l0741: Landscape plant neighbour spacing
+def check_villa_landscape_plant_spacing(
+    plants: list[dict[str, Any]],
+) -> list[tuple[str, str, float, float]]:
+    """Validates that planting arrangements maintain minimum neighbour spacing (l0741)."""
+    violations = villa_landscape.spacing_violations(plants)
+    if violations:
+        raise ValueError(f"Landscape plant spacing violations: {violations}")
+    return violations
+
+
+_plants_spacing_bad = [
+    {"id": "plant-a", "bed": "east", "layer": "mid", "spread_m": 0.9, "center": (27.0, -25.0)},
+    {"id": "plant-b", "bed": "east", "layer": "mid", "spread_m": 0.9, "center": (27.0, -24.73)},
+]
+_plants_spacing_clean = [
+    {"id": "plant-a", "bed": "east", "layer": "mid", "spread_m": 0.9, "center": (27.0, -25.0)},
+    {"id": "plant-b", "bed": "east", "layer": "mid", "spread_m": 0.9, "center": (27.0, -24.20)},
+]
+
+register_guard(
+    fn=check_villa_landscape_plant_spacing,
+    name="villa_landscape_plant_spacing",
+    lesson_ids=("l0741-plants-placed-without", "l0741"),
+    real_case=case(_plants_spacing_bad),
+    clean_case=case(_plants_spacing_clean),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that landscape plants maintain required minimum spacing (0.8 * max spread) between neighbours (l0741)",
+)
+
+
+# 76. l0013: Furniture placement clear of structural columns
+def check_villa_furnish_column_clearance(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that placed furniture items do not clash with structural columns (l0013)."""
+    res = villa_furnish.check(items, lay)
+    col = res.get("columns", {})
+    if col.get("status") != "pass" or col.get("problems"):
+        raise ValueError(f"Furniture piece clashes with structural column: {col.get('problems')}")
+    return col
+
+
+_items_column_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+next(i for i in _items_column_bad if i["id"] == "kb-desk")["cx"] = 15.0
+
+register_guard(
+    fn=check_villa_furnish_column_clearance,
+    name="villa_furnish_column_clearance",
+    lesson_ids=("l0013-dropping-unknown-chairs", "l0013"),
+    real_case=case(_items_column_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that placed furniture pieces do not clash with structural columns (l0013)",
 )
 
 
