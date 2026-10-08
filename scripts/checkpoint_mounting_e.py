@@ -29,7 +29,7 @@ def preview(scene,folder):
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     from archpipe.concept.fitting_mounting import points
-    ids=['furn-study-desk-1','fix-DLN-bar-alcove-11','landscape-trellis-south','marker-STEP-stair-b-04']
+    ids=['furn-study-desk-1','fix-DLN-bar-alcove-11','landscape-trellis-west','marker-STEP-stair-b-04']
     fig,axes=plt.subplots(1,4,figsize=(16,5))
     for ax,mid in zip(axes,ids):
         mesh=next(m for m in scene['meshes'] if m['id']==mid)

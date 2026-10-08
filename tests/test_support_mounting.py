@@ -1,3 +1,4 @@
+from archpipe.orientation import historical_aliases
 """Real C4(e) reproduction, independent roots, pending authority and slides."""
 from copy import deepcopy
 import json
@@ -20,9 +21,9 @@ class SupportMounting(unittest.TestCase):
             cls.scene=VR.build(views=[])
 
     def test_real_missing_sites_now_bound_and_only_pending_findings(self):
-        frozen=json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text())
+        frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text()))
         self.assertTrue(any('MISSING mounting host' in f for f in scene_findings(frozen)))
-        self.assertEqual(len(self.scene['support_inventory_before']),300)
+        self.assertEqual(len(self.scene['support_inventory_before']),294)
         findings=scene_findings(self.scene)
         self.assertFalse(any('MISSING mounting host' in f for f in findings))
         pending={r['id'] for r in self.scene['mounting_movements'] if r['approval']=='PENDING'}
@@ -56,7 +57,7 @@ class SupportMounting(unittest.TestCase):
         self.assertEqual(sum('associated assembly body penetrates' in f for f in proposed_findings),2)
 
     def test_generated_child_cannot_invent_floor_support_and_generalises(self):
-        frozen=json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text())
+        frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text()))
         originals=[m for m in frozen['meshes'] if m['id'] in ('furn-study-desk-0','furn-study-desk-1')]
         for travel in (.005,.005001):
             scene=dict(meshes=deepcopy(originals),mounting_hosts={},mounting_movements=[])
@@ -101,7 +102,7 @@ class SupportMounting(unittest.TestCase):
         self.assertEqual(len(report['failures']),3)
         self.assertEqual(report['unresolved'],[])
         self.assertTrue(all(r['status'] in ('PASS','CONSTRUCTION REQUIREMENT') for r in report['rows'] if r['room']!='family-bath'))
-        old=json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text())
+        old=historical_aliases(json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text()))
         # Shell ordinal IDs vary when doors open for a different view set;
         # stable authored fixtures/floors identify the unchanged family case.
         before={m['id']:m for m in old['family_meshes'] if not m['id'].startswith('shell-')}
@@ -154,18 +155,34 @@ class SupportMounting(unittest.TestCase):
             self.assertTrue(any(f.startswith(child['id']+': associated assembly body penetrates') for f in scene_findings(mutant)))
 
     def test_actual_boundary_mismatch_stays_pending_and_full_span_edges_generalise(self):
-        frozen=json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text())
+        frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text()))
         before={m['id']:m for m in frozen['trellis_meshes']}
         for m in self.scene['meshes']:
             if m['id'].startswith(('landscape-trellis-','landscape-climber')):
-                self.assertEqual(m['faces'],before[m['id']]['faces'])
+                self.assertNotEqual(m['faces'],before[m['id']]['faces'])
                 host=self.scene['mounting_hosts'][m['mounting']['host_id']]
                 source=next(mm for mm in self.scene['meshes']+self.scene.get('diagnostic_meshes', []) if mm['id']==host['source_mesh'])
                 self.assertTrue(source['id'].startswith('yard-boundary-edge-'))
                 self.assertLessEqual(host['maximum_authored_travel_m'],.300)
-                self.assertEqual(m['mounting']['approval'],'PENDING')
-        south=next(r for r in self.scene['mounting_movements'] if r['id']=='landscape-trellis-south')
+                self.assertNotEqual(m['mounting'].get('approval'),'PENDING')
+        # Retain the real pre-rebuild mounting mismatch as a frozen proof,
+        # independently of the two new face-authored assemblies.
+        from archpipe.concept.exterior_mounting import yard_sources, mount_landscape
+        historical=dict(meshes=deepcopy([m for m in self.scene['meshes'] if
+            str(m.get('source_id','')).startswith('fence-')]),mounting_hosts={},mounting_movements=[])
+        sources=yard_sources(historical)
+        for member in deepcopy(frozen['trellis_meshes']):
+            if not member['id'].startswith(('landscape-trellis-','landscape-climber')): continue
+            member.pop('mounting',None)
+            historical['meshes'].append(member)
+            mount_landscape(historical,member,sources)
+        south=next(r for r in historical['mounting_movements'] if r['id']=='landscape-trellis-west')
         self.assertAlmostEqual(south['mm'],135.66)
+        self.assertEqual(south['approval'],'PENDING')
+        for row in self.scene['mounting_movements']:
+            if row['id'].startswith(('landscape-trellis','landscape-climber')):
+                self.assertAlmostEqual(row['mm'],0)
+                self.assertEqual(row['approval'],'APPLIED <=5 mm')
         for travel in (0,8):
             members=deepcopy(frozen['pantry_meshes'][:1]);floor=deepcopy(frozen['pantry_meshes'][1])
             for m in members+[floor]:

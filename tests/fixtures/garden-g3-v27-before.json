@@ -1,0 +1,40 @@
+{
+  "id": "v27-north-garden-above",
+  "title": "North garden from the study deck",
+  "state": "day",
+  "when": "2026-10-15T10:30:00+03:00",
+  "camera": {
+    "position": [
+      8.7,
+      -22.3,
+      1.35
+    ],
+    "target": [
+      19.0,
+      -21.8,
+      1.35
+    ],
+    "lens_mm": 24,
+    "sensor_mm": 36,
+    "shift_x": 0.0,
+    "shift_y": -0.18
+  },
+  "resolution": [
+    1920,
+    1280
+  ],
+  "layers_on": [],
+  "dimmers": {},
+  "exposure": "exterior-day",
+  "subjects": [
+    "landscape-bed-north",
+    "landscape-trellis-north"
+  ],
+  "samples": 1024,
+  "room": null,
+  "final_only": true,
+  "seated": false,
+  "caption_notes": [
+    "North young three-layer bed and thin bougainvillea on open timber; no lemon-pot subject."
+  ]
+}

@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from archpipe.render_qa import check
 from archpipe.safe_io import save_bytes
 from archpipe.stage_result import enforce_clean_verdict, validate_stage_result, write_stage_result
-from archpipe.villa_render_contract import validate_scene
+from archpipe.villa_render_contract import validate_scene, presentation_view_ids
 from archpipe.concept.villa_render import source_provenance, write as write_scene
 from archpipe.execution_context import ContextError, project_context, write_record
 from render_remote import _ssh, _push
@@ -132,9 +132,9 @@ def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dic
 def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
     if requested == "none" and calibrate:
         return []
-    # "review" = every view not marked final_only (the client's review drafts); "all" includes the final-only set
-    selected = (list(by_id) if requested == "all" else
-                [k for k, v in by_id.items() if not v.get("final_only")] if requested == "review" else
+    # Both presentation batches exclude retired views; explicit ids permit diagnostics.
+    selected = (presentation_view_ids(by_id) if requested == "all" else
+                presentation_view_ids(by_id, review=True) if requested == "review" else
                 requested.split(","))
     unknown = sorted(set(selected) - set(by_id))
     if unknown:

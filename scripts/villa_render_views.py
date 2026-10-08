@@ -29,6 +29,11 @@ def hfov(v):
     return 2 * math.degrees(math.atan(v["camera"]["sensor_mm"] / 2 / v["camera"]["lens_mm"]))  # sensor = width
 
 
+def garden_camera_view(view):
+    """Physical garden subjects require clearance regardless of camera ID."""
+    return any(subject.startswith("landscape-") for subject in view.get("subjects", []))
+
+
 def door_leaf_near(scene, px, py):
     """Whether the rendered scene actually has a door leaf at this camera (villa-render doorway guard)."""
     return any(m.get("material") == "door-oak" and
@@ -38,30 +43,42 @@ def door_leaf_near(scene, px, py):
                for m in scene["meshes"])
 
 
+def subject_points(subject, scene):
+    """Built mesh vertices plus transformed imported-prop convex-hull vertices.
+
+    Imported assets are subjects in their own right; no invisible mesh
+    marker may stand in for a removed assembly or a rendered prop.
+    """
+    from archpipe.concept.route_geometry import prop_framing_points
+    points = [p for m in scene["meshes"]
+              if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
+              for face in m["faces"] for p in face]
+    for prop in scene.get("props", []):
+        if prop["id"] == subject or prop["id"].startswith(subject) or prop.get("label") == subject:
+            points += prop_framing_points(prop).tolist()
+    return points
+
+
 def subject_footprint(subject, items, rooms, scene):
     """Plan bounds of a declared view subject, from furniture or matching built meshes."""
     if subject in items:
         return F.footprint(items[subject])
     if subject in rooms:
         return None  # stair void is a space, not a bounded furniture piece
-    pts = [p for m in scene["meshes"]
-           if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
-           for face in m["faces"] for p in face]
+    pts = subject_points(subject, scene)
     if pts:
         return min(p[0] for p in pts), min(p[1] for p in pts), max(p[0] for p in pts), max(p[1] for p in pts)
     raise ValueError("unresolved view subject: " + subject)
 
 
 def subject_mesh_frame_violations(view, scene, subject):
-    """Project every built vertex through a level camera, including sensor-width lens shift.
+    """Project built vertices and exact asset hulls through a level camera.
 
     Horizontal coordinates span -0.5 to 0.5 sensor widths; vertical coordinates
     span half the image height/width ratio either side of the shifted centre.
     Returns failed frame edges; unresolved subjects fail closed.
     """
-    points = [p for m in scene["meshes"]
-              if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
-              for face in m["faces"] for p in face]
+    points = subject_points(subject, scene)
     if not points:
         return ["unresolved built subject"]
     camera = view["camera"]
@@ -87,8 +104,10 @@ def subject_mesh_frame_violations(view, scene, subject):
     return sorted(failed)
 
 
-def camera_proximity_violations(view, scene, items, clearance=1.0):
+def camera_proximity_violations(view, scene, items, clearance=None):
     """Return props and furniture closer than the required camera clearance in metres."""
+    if clearance is None:
+        clearance = .15 if view.get("standing_room") else 1.0
     px, py, pz = view["camera"]["position"]
     level = "B" if pz < -0.1 else "GF"
     failures = []
@@ -101,6 +120,30 @@ def camera_proximity_violations(view, scene, items, clearance=1.0):
             max(x0 - px, 0, px - x1), max(y0 - py, 0, py - y1), max(z0 - pz, 0, pz - z1))))
         if distance < clearance:
             failures.append((prop["id"], round(distance, 3)))
+    # Procedural landscape foliage/containers need the same lens clearance
+    # as imported planting. Paving/turf are the standing surface.
+    for mesh in scene["meshes"]:
+        physical_garden_part = mesh.get("part_kind") in ("hanging-basket", "swing-cushion", "suspension-line", "ceiling-anchor", "plant-clump", "feature-stone", "climber", "climber-branch", "trellis", "planter", "planter-rim", "steel-trough")
+        # New procedural assemblies carry their physical role explicitly;
+        # an exterior camera must not bypass clearance by using a new view
+        # identifier or a previously unseen builder part name.
+        physical_garden_part |= mesh.get("g6_element") in ("pergola", "climber", "centrepiece", "furniture", "espalier", "foliage")
+        if not physical_garden_part or mesh.get("group") not in ("furniture", "dressing", "landscape"):
+            continue
+        points = [p for f in mesh["faces"] for p in f]
+        lo = [min(p[i] for p in points) for i in range(3)]
+        hi = [max(p[i] for p in points) for i in range(3)]
+        distance = math.sqrt(sum(max(lo[i]-v, 0, v-hi[i])**2 for i,v in enumerate((px,py,pz))))
+        if distance < clearance and (mesh.get('explicit_geometry') or mesh.get('leaf_face_indices')):
+            # A vine's low root and high canopy make its whole-mesh box
+            # enclose empty air. Keep the same clearance and measure the
+            # actual authored triangles within that conservative box.
+            import numpy as np
+            from archpipe.concept.render_support import _triangles, _point_triangle_distance
+            triangles,_=_triangles([mesh])
+            distance=float(_point_triangle_distance(np.array([[px,py,pz]]),triangles).min())
+        if distance < clearance:
+            failures.append((mesh["id"], round(distance, 3)))
     for item in items.values():
         if item["level"] != level:
             continue
@@ -191,6 +234,10 @@ def storage_front_occlusions(view, items, parts_by_id=None):
 
 def main():
     scene = json.loads((OUT / "scene.json").read_text(encoding="utf-8"))
+    from archpipe.concept.garden_g6 import scene_findings as g6_findings
+    failures=g6_findings(scene)
+    if failures:
+        raise ValueError('G6 physical garden: '+str(failures))
     lay = R.design("D1")
     items = {i["id"]: i for i in F.layout(lay)}
     views = scene["views"]
@@ -199,6 +246,8 @@ def main():
     rows = (n + cols - 1) // cols
     fig, axs = plt.subplots(rows, cols, figsize=(cols * 6, rows * 3.6))
     problems = []
+    from archpipe.concept.garden_render_review import subject_visibility_findings
+    problems.extend(f for view in views for f in subject_visibility_findings(view, scene))
     for ax, v in zip(axs.flat, views):
         cam = v["camera"]
         lv = "B" if cam["position"][2] < -0.1 else "GF"
@@ -213,7 +262,7 @@ def main():
         px, py = cam["position"][:2]
         # The one-metre exterior clearance is calibrated on the v26/v28 canopy/pot
         # failures. Compact interior view selection has its own 0.15 m clearance rule.
-        if v["id"].startswith(("v25-", "v26-", "v27-", "v28-")):
+        if garden_camera_view(v):
             for near_id, distance in camera_proximity_violations(v, scene, items):
                 problems.append("%s: camera %.2f m from %s (need >= 1.0 m)" % (v["id"], distance, near_id))
         if v["id"].startswith("v28-"):
@@ -224,6 +273,10 @@ def main():
         if v["id"].startswith("v29-"):
             for item_id, bay, front in storage_front_occlusions(v, items):
                 problems.append("%s: %s %s interior centre blocked by %s" % (v["id"], item_id, bay, front))
+        from archpipe.concept.garden_render_review import opening_frame_findings, garden_camera_findings
+        problems.extend(garden_camera_findings(v, scene))
+        for failure in opening_frame_findings(v,scene):
+            problems.append(v["id"]+": "+failure["reason"])
         tx, ty = cam["target"][:2]
         pz = cam["position"][2] - (-3.0 if lv == "B" else 0.0)
         # the camera must stand in the open: not inside a piece (two draft views were inside wardrobes and rendered
@@ -252,7 +305,7 @@ def main():
         ax.add_patch(Polygon(wedge, fc="#ffcc00", alpha=0.25, ec="#cc9900"))
         ax.plot([px], [py], "ro", ms=4)
         for s in v["subjects"]:
-            if s in items and items[s]["type"] == "wc":
+            if s in items and items[s]["type"] == "wc" or garden_camera_view(v):
                 for edge in subject_mesh_frame_violations(v, scene, s):
                     problems.append("%s: built %s crosses %s" % (v["id"], s, edge))
             try:
@@ -266,7 +319,12 @@ def main():
                 # that showed a corner of the ensuite and half a bed once the lens went to 24 mm (client: "limited
                 # coverage")
                 worst = 0.0
-                for qx, qy in ((q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3])):
+                # Imported/constructed garden subjects use their actual vertices;
+                # empty corners of an asymmetric canopy box are not geometry.
+                actual = subject_points(s, scene) if s not in items else []
+                projected = [(p[0],p[1]) for p in actual] if actual else (
+                    (q[0], q[1]), (q[2], q[1]), (q[0], q[3]), (q[2], q[3]))
+                for qx, qy in projected:
                     ang = math.atan2(qy - py, qx - px) - yaw
                     ang = (ang + math.pi) % (2 * math.pi) - math.pi
                     worst = max(worst, abs(ang))
@@ -278,8 +336,8 @@ def main():
         ax.set_title("%s  %s  %.0f mm (HFOV %.0f)" % (v["id"], lv, cam["lens_mm"], hfov(v)), fontsize=7)
         ax.set_aspect("equal")
         xs = [r["rect"][0] for r in lay["rooms"].values()] + [r["rect"][2] for r in lay["rooms"].values()]
-        ax.set_xlim(min(xs) - 0.5, 29)
-        ax.set_ylim(-31.5, -20.0)
+        ax.set_xlim(min(min(xs) - 0.5, px - 0.5), max(29, px + 0.5))
+        ax.set_ylim(min(-31.5, py - 0.5), max(-20.0, py + 0.5))
         ax.tick_params(labelsize=5)
     for ax in list(axs.flat)[n:]:
         ax.axis("off")
@@ -292,4 +350,9 @@ def main():
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=OUT,
+                        help='Directory containing scene.json and receiving the diagnostic view plan.')
+    OUT = parser.parse_args().output
     sys.exit(main())

@@ -4,7 +4,10 @@
   "records": [
     {
       "lesson_id": "c4-lens-basis-missing-vertical",
-      "control_tier": [1, 2],
+      "control_tier": [
+        1,
+        2
+      ],
       "construction": "src/archpipe/concept/render_views.py::choose; structured lens_basis in villa_render.VIEWS",
       "check": "scripts/villa_render_views.py::subject_mesh_frame_violations",
       "stage": "view selection and exported-scene subject projection",
@@ -324,6 +327,156 @@
         "test_support_finish_layers_remain_and_wc_view_has_measured_subject"
       ],
       "closure": "Client east-wall WC candidate; full clearance, diagnostic preview and support proof. Native/render acceptance pending."
+    },
+    {
+      "lesson_id": "garden-g2-walking-envelope",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "src/archpipe/concept/route_geometry.py::prop_triangles; villa_landscape.route_violations; layer scope from actual beds; final_mounting retired approval data; D4 continuous whole-lawn minimum translation and moving trunk/pit from palette; walking routes include every built stone at its measured ground",
+      "check": "villa_landscape.candidate_violations; build refuses low branches; whole-scene blocked_openings and unsupported",
+      "stage": "Stage 7 scene construction, scripts/verify.py and lead preview",
+      "proof_file": "tests/test_landscape.py",
+      "proofs": [
+        "test_route_geometry_uses_actual_asset_below_passage_height",
+        "test_export_refuses_real_low_branch_conflict_and_layers_follow_beds",
+        "test_g2_three_species_drifts_pots_and_solar_trellis_allocation",
+        "test_g2_sun_screen_and_drift_upper_limit_fail_closed",
+        "test_procedural_clumps_have_recorded_size_and_mutations_fail",
+        "test_real_clump_nonplanar_and_lighting_namespace_defects_cannot_recur",
+        "test_route_reader_node_chain_strided_buffer_and_cache_change_generalise",
+        "test_d4_whole_lawn_minimum_and_sibling_translation_search"
+      ],
+      "closure": "D4 clears the real low branches on the authoritative build; photographic lead review remains open."
+    },
+    {
+      "lesson_id": "garden-g2-clump-contract",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "villa_landscape._botanical_clump: metre-scale closed petioles, fresh coordinates, triangulated swept blades and distinct planting_layer metadata",
+      "check": "physical_part.Part and villa_render_contract.validate_scene",
+      "stage": "Isolated procedural plant construction before scene integration",
+      "proof_file": "tests/test_landscape.py",
+      "proofs": [
+        "test_real_clump_nonplanar_and_lighting_namespace_defects_cannot_recur",
+        "test_procedural_clumps_have_recorded_size_and_mutations_fail"
+      ],
+      "closure": "Numerical real-case and sibling proofs pass; photographic lead review remains open."
+    },
+    {
+      "lesson_id": "garden-g2-prop-subjects",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "scripts.villa_render_views.subject_points; villa_scene.subjects imported-prop vertices; camera-only v07 correction; actual-vertex framing in plan checker; D4 camera-only v07/v19 corrections and declared v36 west view",
+      "check": "subject resolution, camera proximity and whole-subject framing",
+      "stage": "View intent and presentation QA",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_imported_garden_subjects_resolve_from_measured_props_without_markers",
+        "test_v07_reframed_tree_and_living_sofa_without_design_movement",
+        "test_every_view_subject_matches_scene_content",
+        "test_d4_garden_handoff_and_west_view_hold_actual_geometry"
+      ],
+      "closure": "Authoritative subject/framing acceptance restored with D4; lead photographic review remains open."
+    },
+    {
+      "lesson_id": "garden-g2-imported-qa-wiring",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "villa_scene.render passes its imported_props result to subjects; subjects consumes actual imported vertices",
+      "check": "Execute actual QA function and actual render call expression with projection stub, without bpy/render",
+      "stage": "Render consumer wiring before lead preview",
+      "proof_file": "tests/test_garden_render_subjects.py",
+      "proofs": [
+        "test_actual_render_call_resolves_imported_vertex_subject",
+        "test_frozen_wrong_import_result_name_fires_before_qa"
+      ],
+      "closure": "Actual call/function wiring proofs pass; Blender rendering and photographic acceptance remain unexecuted."
+    },
+    {
+      "lesson_id": "garden-d4-stale-placement-scale",
+      "control_tier": [
+        2
+      ],
+      "construction": "ops/workstation/library-manifest.json: independent placed scale reconciled to the approved garden-palette D1 measurement; D4 preserves scale",
+      "check": "asset_intake.audit_scene_manifest called unconditionally by scripts/verify.py",
+      "stage": "Authoritative scene verification before lead render handoff",
+      "proof_file": "tests/test_asset_intake.py",
+      "proofs": [
+        "test_d4_real_stale_scale_fires_current_quiet_and_renamed_sibling"
+      ],
+      "closure": "Real stale record and renamed drift fire; current independent record and native units stay quiet. Lead photographic review remains open."
+    },
+    {
+      "lesson_id": "garden-g3-built-top-envelope",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "villa_landscape._steel_trough; _top_garden physical soil/root/deck and slab datums; _top_clump solid tips; palette-owned dimensions",
+      "check": "villa_landscape.top_garden_violations; gate_route_violations; candidate_violations; physical_part.Part; villa_render_contract.validate_scene",
+      "stage": "Scene construction, portable verification and lead preview before rendering",
+      "proof_file": "tests/test_landscape.py",
+      "proofs": [
+        "test_g3_actual_rim_reproduction_surface_route_and_renamed_siblings",
+        "test_g3_trough_drifts_seating_palette_and_material_intent",
+        "test_g3_ixora_requires_quote_and_sun_otherwise_top_palette_replaces",
+        "test_g3_tapered_leaf_tip_real_degenerate_control",
+        "test_g3_study_gate_chain_and_sloped_d2_volume_keep_driveway"
+      ],
+      "closure": "Built-outline, support, route and plant-geometry numerical proofs; lead photographic/client/nursery acceptance remains open."
+    },
+    {
+      "lesson_id": "garden-g3-solid-leaf-tip",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "villa_landscape._top_clump: nonzero tapered blade tip thickness",
+      "check": "physical_part.geometry_errors; villa_render_contract.validate_scene",
+      "stage": "Isolated plant construction before lead preview",
+      "proof_file": "tests/test_landscape.py",
+      "proofs": [
+        "test_g3_tapered_leaf_tip_real_degenerate_control",
+        "test_real_clump_nonplanar_and_lighting_namespace_defects_cannot_recur"
+      ],
+      "closure": "Real tip, clean aloe/rosemary and renamed degeneration proofs; photographic review remains open."
+    },
+    {
+      "lesson_id": "garden-g3-finish-consumer",
+      "control_tier": [
+        2
+      ],
+      "construction": "villa_render.M definitions and explicit independent ALLOWED_MATERIALS registrations for the three assumed G3 appearances",
+      "check": "tests.test_render_standard.RenderStandard.test_every_mesh_has_an_explicit_finish",
+      "stage": "Whole-scene appearance contract before lead preview",
+      "proof_file": "tests/test_render_standard.py",
+      "proofs": [
+        "test_g3_frozen_finish_consumer_and_renamed_missing_registration"
+      ],
+      "closure": "Real prior list and renamed unknown finish refused; registered assumed appearances accepted; lead photographic review pending."
+    },
+    {
+      "lesson_id": "garden-g3-camera-neighbour",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "camera-only v27 roof-edge correction; actual planting subjects and explicit soil-bed crop caption; design fixed",
+      "check": "scripts.villa_render_views.camera_proximity_violations includes procedural top meshes; subject_mesh_frame_violations",
+      "stage": "Whole view set before lead preview/render",
+      "proof_file": "tests/test_render_views.py",
+      "proofs": [
+        "test_g3_top_views_name_physical_troughs_drifts_benches_and_open_colour"
+      ],
+      "closure": "Real adjacent-camera and renamed procedural-mesh failures; clean current numerical framing/proximity; lead photographic review pending."
     }
   ]
 }

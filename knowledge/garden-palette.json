@@ -1,0 +1,3840 @@
+{
+  "schema": "garden-palette/1",
+  "brief_date": "2026-10-06",
+  "evidence_origin": "Client-agreed verified table supplied for G1; no independent local-nursery confirmation. VERIFIED denotes evidence in that table, ASSUMED denotes design/legacy rendering intent, UNVERIFIED denotes missing evidence. All dimensions are metres. MEASURED denotes a local geometry read-back, not botanical evidence. G6 botanical statements supplied by lead who opened sources 2026-10-06; NOT STATED means source is silent, not non-toxic. Research tree parasol and safety extrapolations are superseded by client timber-pergola decision and exact lead corrections.",
+  "species": [
+    {
+      "species": "Aspidistra elatior",
+      "zones": {
+        "value": [
+          "east",
+          "north",
+          "north garden (deep shade)",
+          "south garden (part sun)",
+          "east yard (part shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones; lead decision 2026-10-06: G6 south part-sun / east shade-strip palette"
+      },
+      "height": {
+        "range_m": [
+          0.5,
+          1
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.1,
+          0.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "bright, indirect light or a shaded spot",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/aspidistra-elatior",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.5,
+              0.5
+            ],
+            "status": "ASSUMED",
+            "reason": "Young planting appearance within verified range; explicit shaped leaves and petioles, not a species-labelled imported look-alike."
+          },
+          "spread": {
+            "range_m": [
+              0.4,
+              0.4
+            ],
+            "status": "ASSUMED",
+            "reason": "Young planting appearance within verified range; spacing remains based on recorded spread."
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        }
+      },
+      "shade_evidence": {
+        "light_tolerance": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Deep shade (Less than 2 hours to no direct sunlight), Dappled Sunlight (Shade through upper canopy all day), Cast iron plants are intolerant of direct sun, which can scorch and bleach the leaves. (NC State)",
+            "The plant does equally well in filtered and deep shade—just don’t plant it in full sun, which will bleach and burn the leaves. (UF/IFAS)"
+          ]
+        },
+        "toxicity": {
+          "status": "VERIFIED",
+          "child_safe": true,
+          "quotes": [
+            "#non-toxic-for-cats #non-toxic-for-horses #non-toxic-for-dogs #pet friendly. No toxic principle or human poison symptoms listed. (NC State)"
+          ]
+        },
+        "source_urls": [
+          "https://plants.ces.ncsu.edu/plants/aspidistra-elatior/",
+          "https://gardeningsolutions.ifas.ufl.edu/plants/foliage/cast-iron-plant.html"
+        ]
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Pet non-toxic tags / no human poison entry do not establish human safety"
+      }
+    },
+    {
+      "species": "Ixora coccinea",
+      "zones": {
+        "value": [
+          "east",
+          "north"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          1.2,
+          1.8
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "reason": "Spread not stated in the agreed source table.",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": "full sun for best flowering, though it can tolerate some light shade",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=286675",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "spacing_spread": {
+          "value": 1.2,
+          "status": "ASSUMED",
+          "reason": "Retains explicit legacy nursery spacing envelope pending local nursery confirmation; not a sourced spread."
+        },
+        "sf_ixora": {
+          "height": {
+            "range_m": [
+              0.55,
+              1.0
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "spread": {
+            "range_m": [
+              0.7945437659623871,
+              1.4446250290225218
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "contexts": {
+            "landscape-east-mid-00": {
+              "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-mid-01": {
+              "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-mid-02": {
+              "height_m": 1.0,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-mid-00": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-mid-01": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-mid-02": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-top-pot-ixora-0": {
+              "height_m": 0.55,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-top-pot-ixora-1": {
+              "height_m": 0.55,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            }
+          }
+        }
+      }
+    },
+    {
+      "species": "Strelitzia reginae",
+      "zones": {
+        "value": [
+          "east",
+          "north"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          1,
+          1.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.5,
+          1
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "bright, sunny positions",
+        "status": "VERIFIED",
+        "kind": "lead-supplied RHS source quote for G6 east-yard replant",
+        "checked": "lead decision 2026-10-06",
+        "applicability": "full-sun preference screen per lead G6 decision, not a survival threshold"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/strelitzia-reginae",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              1.1,
+              1.1
+            ],
+            "status": "ASSUMED",
+            "reason": "Young planting appearance within verified range; explicit shaped leaves and petioles, not a species-labelled imported look-alike."
+          },
+          "spread": {
+            "range_m": [
+              0.5,
+              0.5
+            ],
+            "status": "ASSUMED",
+            "reason": "Young planting appearance within verified range; spacing remains based on recorded spread."
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        }
+      }
+    },
+    {
+      "species": "Callistemon citrinus",
+      "zones": {
+        "value": [
+          "gf-beds"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          4,
+          8
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          2.5,
+          4
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "full sun",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/2687/callistemon-citrinus/details",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "sf_bottlebrush": {
+          "height": {
+            "range_m": [
+              0.9,
+              0.9
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "spread": {
+            "range_m": [
+              1.037459807073955,
+              1.037459807073955
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "contexts": {
+            "landscape-east-back-00": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-back-01": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-back-02": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-east-back-03": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-back-00": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-back-01": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-back-02": {
+              "height_m": 0.9,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            }
+          }
+        },
+        "spacing_spread": {
+          "value": 0.9,
+          "status": "ASSUMED",
+          "reason": "Retains legacy maintained spacing envelope for existing G2/G3 placement; nursery confirmation pending."
+        }
+      }
+    },
+    {
+      "species": "Ursinia anthemoides",
+      "zones": {
+        "value": [
+          "gf-beds"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          0.1,
+          0.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.1,
+          0.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "kind": "no checked light quote in brief"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/161741/ursinia-anthemoides/details",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "flower_ursinia": {
+          "height": {
+            "range_m": [
+              0.18,
+              0.18
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "spread": {
+            "range_m": [
+              2.2985098952270078,
+              2.2985098952270078
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim. Multi-plant appearance pack, not single-plant spread."
+          },
+          "contexts": {
+            "landscape-top-west-ursinia": {
+              "height_m": 0.18,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            }
+          }
+        }
+      }
+    },
+    {
+      "species": "Salvia rosmarinus Prostrata Group",
+      "zones": {
+        "value": [
+          "top"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          0.1,
+          0.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          1,
+          1.5
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "kind": "no checked light quote in brief"
+      },
+      "source_url": {
+        "value": "https://www.rhs.org.uk/plants/salvia-rosmarinus-prostrata-group",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.3,
+              0.3
+            ],
+            "status": "ASSUMED",
+            "reason": "G3 authored prostrate shoots including trailing stems; within verified height range."
+          },
+          "spread": {
+            "range_m": [
+              1.0,
+              1.0
+            ],
+            "status": "ASSUMED",
+            "reason": "G3 longitudinal spread at verified lower mature range; narrow young growth trails inward over the trough edge."
+          }
+        }
+      }
+    },
+    {
+      "species": "Aloe vera",
+      "zones": {
+        "value": [
+          "top"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": null,
+        "status": "VERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": [
+          "Prefers full sun but can adapt to partial shade",
+          "drought-tolerant"
+        ],
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=282054",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.55,
+              0.55
+            ],
+            "status": "ASSUMED",
+            "reason": "G3 young rosette appearance; client brief up to 0.9 m, numerical source range still missing in record; nursery confirmation required."
+          },
+          "spread": {
+            "range_m": [
+              0.36,
+              0.36
+            ],
+            "status": "ASSUMED",
+            "reason": "G3 young nursery rosette envelope; mature spread UNVERIFIED."
+          }
+        },
+        "spacing_spread": {
+          "value": 0.5,
+          "status": "ASSUMED",
+          "reason": "G3 nursery centre-spacing envelope; mature spread UNVERIFIED."
+        }
+      }
+    },
+    {
+      "species": "Plumeria rubra",
+      "zones": {
+        "value": [
+          "south"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": [
+          4.6,
+          7.6
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          4.6,
+          7.6
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "kind": "no checked light quote in brief"
+      },
+      "source_url": {
+        "value": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?kempercode=d451",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "sf_frangipani": {
+          "rendered_stage": {
+            "value": "young pruned tree",
+            "status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread"
+          },
+          "height": {
+            "range_m": [
+              3.2773871168547286,
+              3.277587116854729
+            ],
+            "status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread"
+          },
+          "spread": {
+            "range_m": [
+              4.5999,
+              4.600099999999999
+            ],
+            "status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread"
+          }
+        }
+      },
+      "habit": {
+        "value": "small rounded deciduous tree",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "appearance_measurements": {
+        "sf_frangipani": {
+          "status": "MEASURED",
+          "measured_on": "2026-10-06",
+          "source": "Local glTF POSITION accessor bounds plus node transforms; agrees with tracked manifest within 0.00003 m.",
+          "native_gltf_y_up_bounds_m": {
+            "min": [
+              -1.5851744413375854,
+              -4.496876211753807e-16,
+              -2.0063219070434566
+            ],
+            "max": [
+              2.3004188537597656,
+              2.7684743404388437,
+              1.5306861400604261
+            ]
+          },
+          "trunk_base_gltf_m": [
+            -0.003329545259475708,
+            0.0,
+            0.001042589545249939
+          ],
+          "trunk_measurement": "Centre of bark POSITION vertices at <=0.01 m height; 26 vertices, all at ground; glTF node chain transforms original (x,y,z) to (x,z,-y).",
+          "model_gltf_sha256": "03d79d7028bf53cd330f1f5f3d55c592004db1a6714392f801a0dd853ee14d1a",
+          "scene_bin_sha256": "20b0305d3f6ed8f2897fb7b3464d51579a122619a8e30a40e6e3a64c30cbbab7",
+          "scale": 1.1838603916174273,
+          "scale_basis": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread; uniform scale = 4.6 m / measured maximum horizontal native span",
+          "up_axis": "+Y (glTF), +Z (scene)",
+          "front_axis": "none; nondirectional tree",
+          "appearance_claim": "named species appearance; not procurement/local nursery performance evidence",
+          "licence": "CC Attribution",
+          "credit": "Realistic HD Frangipani tree (13/50) by PlantCatalog; see library manifest for attribution URL"
+        }
+      }
+    },
+    {
+      "species": "Trachelospermum jasminoides",
+      "zones": {
+        "value": [
+          "shadier-trellises",
+          "south garden (part sun)",
+          "east yard (part shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones; lead decision 2026-10-06: G6 south part-sun / east shade-strip palette"
+      },
+      "height": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": "Full sun (6 or more hours of direct sunlight a day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+        "status": "VERIFIED",
+        "checked": "lead opened NC State 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-trellis": {
+          "height": {
+            "range_m": [
+              0,
+              2.95
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: trained frame appearance, east trellis or south pergola, not mature free-growing size"
+          },
+          "spread": {
+            "range_m": [
+              0,
+              3.2
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: trained frame appearance, east trellis or south pergola, not mature free-growing size"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "procedural-pergola": {
+          "height": {
+            "range_m": [
+              0,
+              2.95
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young-to-established growth trained to pergola frame; not mature free-growing size"
+          },
+          "spread": {
+            "range_m": [
+              0,
+              3.2
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young-to-established growth trained to pergola frame; not mature free-growing size"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        }
+      },
+      "growth": {
+        "value": "can reach 4m (14ft) or more; twining",
+        "status": "VERIFIED",
+        "kind": "brief quote and description; no upper size bound"
+      },
+      "source_evidence": {
+        "bloom": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Abundant creamy white flowers bloom in late spring and sporadically in summer"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "foliage": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Glossy dark green leaves are bronze-red where it is an evergreen"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "climbing_method": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Twining"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "light": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Full sun (6 or more hours of direct sunlight a day)",
+            "Partial Shade (Direct sunlight only part of the day, 2-6 hours)",
+            "For best flowers, grow in fertile, well-drained soil in a sheltered, sunny spot"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "toxicity": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Poisonous"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+          "checked": "lead opened source 2026-10-06",
+          "details_status": "NOT STATED",
+          "reason": "Plant Type Traits lists Poisonous; severity, symptoms and parts NOT STATED; non-toxic animal tags do not establish human safety",
+          "client_acceptance": "client accepted 2026-10-06; south garden; east-yard lead replant extends accepted species use"
+        }
+      },
+      "human_toxicity": {
+        "value": "listed Poisonous by NC State, details NOT STATED; client accepted 2026-10-06",
+        "status": "VERIFIED",
+        "details_status": "NOT STATED"
+      },
+      "render_form": {
+        "leaf_length_m": {
+          "value": 0.085,
+          "status": "ASSUMED",
+          "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+          "basis": "Chosen rendered length within sourced species range; not a measured nursery specimen"
+        },
+        "leaf_width_m": {
+          "value": 0.035,
+          "status": "ASSUMED",
+          "basis": "Authored leaf width for species form"
+        },
+        "source_checked": "2026-10-07",
+        "source_url": "https://plants.ces.ncsu.edu/plants/trachelospermum-jasminoides/",
+        "source_leaf_length_m": {
+          "range_m": [
+            0.0762,
+            0.1524
+          ],
+          "status": "VERIFIED",
+          "basis": "NC State leaf length 3–6 inches, lustrous opposite leaves"
+        }
+      }
+    },
+    {
+      "species": "Bougainvillea glabra",
+      "zones": {
+        "value": [
+          "sunniest-trellis"
+        ],
+        "status": "VERIFIED",
+        "basis": "client-agreed placement zones"
+      },
+      "height": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": "prefer full sun",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "source_url": {
+        "value": "https://plantfinder.mobot.org/PlantFinderDetails.aspx?taxonid=282937",
+        "status": "VERIFIED"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "sf_bougainvillea": {
+          "height": {
+            "range_m": [
+              0.4,
+              0.6
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "spread": {
+            "range_m": [
+              1.0589215686274511,
+              1.5883823529411765
+            ],
+            "status": "ASSUMED",
+            "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+          },
+          "contexts": {
+            "landscape-east-mid-accent": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-north-mid-accent": {
+              "height_m": 0.6,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-door-pot-dining-w": {
+              "height_m": 0.5,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-door-pot-living-east-e": {
+              "height_m": 0.5,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-door-pot-lounge-north-s": {
+              "height_m": 0.5,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-top-boug-deck": {
+              "height_m": 0.4,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            },
+            "landscape-top-boug-roof": {
+              "height_m": 0.5,
+              "status": "ASSUMED",
+              "reason": "ASSUMED retained nursery/pruned rendering envelope pending G2/G3 and local nursery review; not the mature-size claim."
+            }
+          }
+        },
+        "spacing_spread": {
+          "value": 0.9,
+          "status": "ASSUMED",
+          "reason": "Retains legacy maintained spacing envelope for existing G2/G3 placement; nursery confirmation pending."
+        },
+        "procedural-trellis": {
+          "height": {
+            "range_m": [
+              0,
+              2.2
+            ],
+            "status": "ASSUMED",
+            "reason": "Young trained planting on open 1.5 m long, 2.2 m high timber frame; mature size not claimed."
+          },
+          "spread": {
+            "range_m": [
+              0,
+              1.5
+            ],
+            "status": "ASSUMED",
+            "reason": "Young trained planting on open 1.5 m long, 2.2 m high timber frame; mature size not claimed."
+          }
+        }
+      },
+      "habit": {
+        "value": "scrambling shrubs or woody climbers",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      }
+    },
+    {
+      "species": "Cissus alata",
+      "common_name": "grape ivy (syn. Cissus rhombifolia)",
+      "zones": {
+        "value": [
+          "north garden (deep shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "client decision 2026-10-06: swap the jasmine for a shade climber; yes, go with the grape ivy"
+      },
+      "role": "climber on the north-garden open timber trellis",
+      "height": {
+        "range_m": [
+          1.2192,
+          3.048
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED",
+        "quote": "Height: 4 ft. 0 in. - 10 ft. 0 in."
+      },
+      "spread": {
+        "range_m": [
+          0.9144,
+          1.8288
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED",
+        "quote": "Width: 3 ft. 0 in. - 6 ft. 0 in."
+      },
+      "light": {
+        "value": "Dappled Sunlight (Shade through upper canopy all day); Partial Shade (Direct sunlight only part of the day, 2-6 hours)",
+        "status": "PARTIAL",
+        "kind": "source quote",
+        "applicability": "site measures ~0.9 h direct sun on 21 Jun and ~0.3 h on 21 Dec (lead ray-cast, out/villa/garden-sun-hours.json); deep shade is not listed by the source; client accepted the risk of sparser growth 2026-10-06"
+      },
+      "climbing_method": {
+        "value": "Tendrils",
+        "status": "VERIFIED",
+        "kind": "source quote"
+      },
+      "growth": {
+        "value": "Rapid",
+        "status": "VERIFIED",
+        "kind": "source quote",
+        "note": "light pruning keeps the trellis frame partly visible"
+      },
+      "toxicity": {
+        "value": "non-toxic for cats, dogs and horses (source tags)",
+        "status": "VERIFIED",
+        "kind": "source tags"
+      },
+      "cold": {
+        "value": "keep above 50 F",
+        "status": "VERIFIED",
+        "kind": "source quote",
+        "applicability": "Cairo winter-night suitability UNVERIFIED: confirm with local nursery"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/cissus-alata/",
+        "status": "VERIFIED",
+        "checked": "lead opened the page 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-trellis": {
+          "height": {
+            "range_m": [
+              0,
+              2.2
+            ],
+            "status": "ASSUMED",
+            "reason": "Young trained planting on the open 1.5 m x 2.2 m timber frame; mature size not claimed."
+          },
+          "spread": {
+            "range_m": [
+              0,
+              1.5
+            ],
+            "status": "ASSUMED",
+            "reason": "Young trained planting on the open 1.5 m x 2.2 m timber frame; mature size not claimed."
+          }
+        }
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Pet non-toxic tags / no human poison entry do not establish human safety"
+      }
+    },
+    {
+      "species": "Rhapis excelsa",
+      "zones": {
+        "value": [
+          "north garden (deep shade)",
+          "south garden (part sun)"
+        ],
+        "status": "VERIFIED",
+        "basis": "client Decision 2, 2026-10-06; lead decision 2026-10-06: G6 south part-sun / east shade-strip palette"
+      },
+      "role": {
+        "value": "tall accent, one clump",
+        "status": "VERIFIED"
+      },
+      "height": {
+        "range_m": [
+          1.2192,
+          3.6576000000000004
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          1.8288000000000002,
+          4.572
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "Deep shade (Less than 2 hours to no direct sunlight), Partial Shade (Direct sunlight only part of the day, 2-6 hours) (NC State)",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote",
+        "applicability": "lead-verified shade applicability"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/rhapis-excelsa/",
+        "status": "VERIFIED",
+        "checked": "lead opened NC State 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              1.7,
+              1.7
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young/pruned authored appearance; not mature-size claim"
+          },
+          "spread": {
+            "range_m": [
+              1.0,
+              1.0
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young managed envelope; nursery review required"
+          },
+          "appearance_claim": "authored botanical appearance; photographic likeness UNVERIFIED"
+        },
+        "root_barrier": {
+          "value": "Contained rhizome clump with root barrier; centre >=1.0 m from walls and paths",
+          "status": "ASSUMED",
+          "reason": "client placement instruction; engineer/nursery to specify"
+        }
+      },
+      "water_needs": {
+        "status": "VERIFIED",
+        "quotes": [
+          "Lady palm needs well-drained potting soil and regular watering except in the winter when watering can be reduced. (NC State)",
+          "Water regularly to maintain regular and consistent moisture, especially in summer, with reduced watering in the winter. (Missouri Botanical Garden)"
+        ]
+      },
+      "hardiness": {
+        "status": "VERIFIED",
+        "quotes": [
+          "USDA Plant Hardiness Zone: 9a, 9b, 10a, 10b, 11a, 11b. Plants must be brought when the temperature threatens to drop below 50 degrees Fahrenheit, as they are tender, tropical palms. (NC State)",
+          "winter minimum temperature of 12–15ºC (54–59ºF) (RHS)"
+        ]
+      },
+      "root_spread_habit": {
+        "status": "VERIFIED",
+        "quotes": [
+          "These are clustering palms that produce individual stems along underground rhizomes. When planted in the ground, the stems are not produced in a tight cluster, giving the impression of a copse of small palms. (NC State)",
+          "dense, multi-stemmed fan palm (Missouri Botanical Garden)"
+        ]
+      },
+      "toxicity": {
+        "status": "VERIFIED",
+        "child_safe": true,
+        "quotes": [
+          "#non-toxic-for-cats #non-toxic-for-horses #non-toxic-for-dogs. No toxic principle or human poison symptoms listed. (NC State)"
+        ]
+      },
+      "invasiveness": {
+        "status": "NOT STATED",
+        "quotes": []
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Pet non-toxic tags / no human poison entry do not establish human safety"
+      }
+    },
+    {
+      "species": "Fatsia japonica",
+      "zones": {
+        "value": [
+          "north garden (deep shade)",
+          "south garden (part sun)",
+          "east yard (part shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "client Decision 2, 2026-10-06; lead decision 2026-10-06: G6 south part-sun / east shade-strip palette"
+      },
+      "role": {
+        "value": "bold mid layer",
+        "status": "VERIFIED"
+      },
+      "height": {
+        "range_m": [
+          1.8288000000000002,
+          5.9436
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          1.2192,
+          1.8288000000000002
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "Deep shade (Less than 2 hours to no direct sunlight), Partial Shade (Direct sunlight only part of the day, 2-6 hours). The leaves will brown if it is sited in full sun or with wind exposure. (NC State)",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote",
+        "applicability": "lead-verified shade applicability"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/fatsia-japonica/",
+        "status": "VERIFIED",
+        "checked": "lead opened NC State 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              1.4,
+              1.4
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young/pruned authored appearance; not mature-size claim"
+          },
+          "spread": {
+            "range_m": [
+              0.85,
+              0.85
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young managed envelope; nursery review required"
+          },
+          "appearance_claim": "authored botanical appearance; photographic likeness UNVERIFIED"
+        },
+        "procedural-east-clump": {
+          "height": {
+            "range_m": [
+              0.8,
+              0.8
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "spread": {
+            "range_m": [
+              0.65,
+              0.65
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        }
+      },
+      "water_needs": {
+        "status": "VERIFIED",
+        "quotes": [
+          "It grows best in acidic, moist, well-drained, humus-rich, fertile soils but tolerates sandy and clay soils. It tolerates drought once established. Too much moisture in the soil can cause root rot. (NC State)"
+        ]
+      },
+      "hardiness": {
+        "status": "VERIFIED",
+        "quotes": [
+          "USDA Plant Hardiness Zone: 7b, 8a, 8b, 9a, 9b, 10a, 10b (NC State)"
+        ]
+      },
+      "root_spread_habit": {
+        "status": "VERIFIED",
+        "quotes": [
+          "semi-dense, broadleaf, evergreen shrub or small tree, rounded and spreading (NC State)"
+        ]
+      },
+      "toxicity": {
+        "status": "VERIFIED",
+        "child_safe": true,
+        "quotes": [
+          "#non-toxic-for-cats #non-toxic-for-horses #non-toxic-for-dogs. No toxic principle or human poison symptoms listed. (NC State)"
+        ]
+      },
+      "invasiveness": {
+        "status": "NOT STATED",
+        "quotes": []
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Pet non-toxic tags / no human poison entry do not establish human safety"
+      }
+    },
+    {
+      "species": "Chlorophytum comosum",
+      "zones": {
+        "value": [
+          "north garden (deep shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "client Decision 2, 2026-10-06"
+      },
+      "role": {
+        "value": "variegated ground cover",
+        "status": "VERIFIED"
+      },
+      "height": {
+        "range_m": [
+          0.3048,
+          0.45720000000000005
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.3048,
+          0.6096
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "This plant prefers medium light levels yet can tolerate deep shade. It is intolerant of direct sunlight. (NC State)",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote",
+        "applicability": "lead-verified shade applicability"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/chlorophytum-comosum/",
+        "status": "VERIFIED",
+        "checked": "lead opened NC State 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.4,
+              0.4
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young/pruned authored appearance; not mature-size claim"
+          },
+          "spread": {
+            "range_m": [
+              0.5,
+              0.5
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young managed envelope; nursery review required"
+          },
+          "appearance_claim": "authored botanical appearance; photographic likeness UNVERIFIED"
+        }
+      },
+      "water_needs": {
+        "status": "VERIFIED",
+        "quotes": [
+          "Spider plants prefer moist soil and medium air humidity, though it is tolerant of drought and dry soil. Reduce watering during winter. (NC State)"
+        ]
+      },
+      "hardiness": {
+        "status": "VERIFIED",
+        "quotes": [
+          "USDA Plant Hardiness Zone: 9a, 9b, 10a, 10b, 11a, 11b, Keep temperatures above 45 degrees F. (NC State)"
+        ]
+      },
+      "root_spread_habit": {
+        "status": "VERIFIED",
+        "quotes": [
+          "Habit/Form: Arching, Cascading, fleshy, tuberous roots, Long stolons produce plantlets and flowers (NC State)"
+        ]
+      },
+      "toxicity": {
+        "status": "VERIFIED",
+        "child_safe": true,
+        "quotes": [
+          "#non-toxic-for-cats #non-toxic-for-horses #non-toxic-for-dogs. No toxic principles or symptoms listed. (NC State)"
+        ]
+      },
+      "invasiveness": {
+        "status": "NOT STATED",
+        "quotes": []
+      },
+      "cold": {
+        "value": "Keep temperatures above 45 F",
+        "status": "VERIFIED",
+        "applicability": "Cairo winter nights UNVERIFIED; nursery"
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Pet non-toxic tags / no human poison entry do not establish human safety"
+      }
+    },
+    {
+      "species": "Ophiopogon japonicus",
+      "zones": {
+        "value": [
+          "north garden (deep shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "client Decision 2, 2026-10-06"
+      },
+      "role": {
+        "value": "fine carpet, open portion only",
+        "status": "VERIFIED"
+      },
+      "height": {
+        "range_m": [
+          0.1524,
+          0.3048
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.1524,
+          0.3048
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "Dappled Sunlight, Full sun, Partial Shade, prefers shade and moist, well-drained soils (NC State)",
+        "status": "PARTIAL",
+        "kind": "lead-verified source quote",
+        "applicability": "Deep shade not listed; conditional open-part trial"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/ophiopogon-japonicus/",
+        "status": "VERIFIED",
+        "checked": "lead opened NC State 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.22,
+              0.22
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young/pruned authored appearance; not mature-size claim"
+          },
+          "spread": {
+            "range_m": [
+              0.3,
+              0.3
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young managed envelope; nursery review required"
+          },
+          "appearance_claim": "authored botanical appearance; photographic likeness UNVERIFIED"
+        }
+      },
+      "water_needs": {
+        "status": "VERIFIED",
+        "quotes": [
+          "prefers shade and moist, well-drained soils (NC State)",
+          "prefers consistent moisture and should not be allowed to dry out (Missouri Botanical Garden)"
+        ]
+      },
+      "hardiness": {
+        "status": "VERIFIED",
+        "quotes": [
+          "USDA Plant Hardiness Zone: 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b (NC State)",
+          "USDA Zones 7–10 (Missouri Botanical Garden)"
+        ]
+      },
+      "root_spread_habit": {
+        "status": "VERIFIED",
+        "quotes": [
+          "Habit/Form: Clumping, Mounding, forms a mat by runners (stolons), stoloniferous (NC State)",
+          "rhizomatous perennial (Missouri Botanical Garden)"
+        ]
+      },
+      "toxicity": {
+        "status": "NOT STATED",
+        "child_safe": true,
+        "quotes": [
+          "Neither NC State nor Missouri Botanical Garden lists toxic principles or symptoms for humans or pets."
+        ]
+      },
+      "invasiveness": {
+        "status": "NOT STATED",
+        "quotes": []
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Pet non-toxic tags / no human poison entry do not establish human safety"
+      }
+    },
+    {
+      "species": "Liriope muscari",
+      "zones": {
+        "value": [
+          "north garden (deep shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "client Decision 2, 2026-10-06"
+      },
+      "role": {
+        "value": "optional edging; omitted with young child",
+        "status": "VERIFIED"
+      },
+      "height": {
+        "range_m": [
+          0.3048,
+          0.45720000000000005
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.3048,
+          0.45720000000000005
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "Deep shade (Less than 2 hours to no direct sunlight), Full sun, Partial Shade, will tolerate almost full shade but growth is slower and leaves are elongated (NC State)",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote",
+        "applicability": "lead-verified shade applicability"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/liriope-muscari/",
+        "status": "VERIFIED",
+        "checked": "lead opened NC State 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.35,
+              0.35
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young/pruned authored appearance; not mature-size claim"
+          },
+          "spread": {
+            "range_m": [
+              0.4,
+              0.4
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "Young managed envelope; nursery review required"
+          },
+          "appearance_claim": "authored botanical appearance; photographic likeness UNVERIFIED"
+        }
+      },
+      "water_needs": {
+        "status": "VERIFIED",
+        "quotes": [
+          "In their first year, they will need regular watering to keep soils moist but once they are established they require very little supplemental irrigation, drought and deer tolerant (NC State)"
+        ]
+      },
+      "hardiness": {
+        "status": "VERIFIED",
+        "quotes": [
+          "USDA Plant Hardiness Zone: 5a, 5b, 6a, 6b, 7a, 7b, 8a, 8b, 9a, 9b, 10a, 10b (NC State)"
+        ]
+      },
+      "root_spread_habit": {
+        "status": "VERIFIED",
+        "quotes": [
+          "forms dense basal clumps, The roots are fleshy and tuberous, grown in a clump form and is better suited for edging (NC State)"
+        ]
+      },
+      "toxicity": {
+        "status": "VERIFIED",
+        "child_safe": true,
+        "quotes": [
+          "Poison Severity: Low, Poison Symptoms: No cases are known, but caution due to a relationship with known toxic plants, Causes Contact Dermatitis: No, Poison Part: Fruits. Tags: #non-toxic-for-cats #non-toxic-for-horses #non-toxic-for-dogs (NC State)"
+        ]
+      },
+      "invasiveness": {
+        "status": "VERIFIED",
+        "quotes": [
+          "aggressive growers though this plant is less aggressive than Liriope spicata or creeping lily turf. Lily turf is grown in a clump form (NC State)"
+        ]
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Pet non-toxic tags / no human poison entry do not establish human safety"
+      }
+    },
+    {
+      "species": "Petrea volubilis",
+      "zones": {
+        "value": [
+          "south garden (part sun)"
+        ],
+        "status": "VERIFIED",
+        "basis": "lead decision 2026-10-06: client-approved south palette"
+      },
+      "height": {
+        "range_m": [
+          1.8288000000000002,
+          3.6576000000000004
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.9144000000000001,
+          1.8288000000000002
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "Full sun (6 or more hours of direct sunlight a day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+        "status": "VERIFIED",
+        "checked": "lead opened source 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery; source does not verify Sheikh Zayed performance"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer; general root statement is not basement engineering"
+      },
+      "placement_assumptions": {
+        "procedural-pergola": {
+          "height": {
+            "range_m": [
+              0,
+              2.95
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young-to-established growth trained to pergola frame; not mature free-growing size"
+          },
+          "spread": {
+            "range_m": [
+              0,
+              3.2
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young-to-established growth trained to pergola frame; not mature free-growing size"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "procedural-trellis": {
+          "height": {
+            "range_m": [
+              0,
+              2.95
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: trained frame appearance, east trellis or south pergola, not mature free-growing size"
+          },
+          "spread": {
+            "range_m": [
+              0,
+              3.2
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: trained frame appearance, east trellis or south pergola, not mature free-growing size"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        }
+      },
+      "source_evidence": {
+        "bloom": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Spring, Summer, Winter",
+            "blossom through most of the year"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "flower_colour": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Purple/Lavender"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "climbing_method": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Twining"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "light": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Full sun (6 or more hours of direct sunlight a day)",
+            "Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "height": {
+          "status": "VERIFIED",
+          "quotes": [
+            "6-12 ft"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06",
+          "transcription": "lead-provided dimensions; conversion 1 foot = 0.3048 metre"
+        },
+        "spread": {
+          "status": "VERIFIED",
+          "quotes": [
+            "3-6 ft"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06",
+          "transcription": "lead-provided dimensions; conversion 1 foot = 0.3048 metre"
+        },
+        "cold": {
+          "status": "VERIFIED",
+          "quotes": [
+            "10a-11b",
+            "cannot tolerate temperatures below 35 F"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "drought_wind_salt": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Highly drought and wind tolerant and moderately tolerant of salt"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "toxicity": {
+          "status": "NOT STATED",
+          "quotes": [],
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "checked": "lead opened source 2026-10-06",
+          "reason": "No poison section seen; absence is not a non-toxic claim"
+        }
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "NOT STATED",
+        "reason": "No poison section seen; do not infer non-toxic"
+      },
+      "render_form": {
+        "leaf_length_m": {
+          "value": 0.2,
+          "status": "ASSUMED",
+          "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+          "basis": "Chosen rendered length within sourced species range; not a measured nursery specimen"
+        },
+        "leaf_width_m": {
+          "value": 0.085,
+          "status": "ASSUMED",
+          "basis": "Authored leaf width for species form"
+        },
+        "source_checked": "2026-10-07",
+        "source_url": "https://plants.ces.ncsu.edu/plants/petrea-volubilis/",
+        "source_leaf_length_m": {
+          "range_m": [
+            0.1016,
+            0.2286
+          ],
+          "status": "VERIFIED",
+          "basis": "NC State leaf description: 4–9 inches, rough oblong-elliptic"
+        }
+      }
+    },
+    {
+      "species": "Eriobotrya japonica",
+      "zones": {
+        "value": [
+          "south garden (part sun)"
+        ],
+        "status": "VERIFIED",
+        "basis": "lead decision 2026-10-06: client-approved south palette"
+      },
+      "height": {
+        "range_m": [
+          6.096,
+          9.144
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          9.144,
+          10.668000000000001
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "Light requirement: full sun to partial shade",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote"
+      },
+      "source_url": {
+        "value": "https://ask.ifas.ufl.edu/publication/ST235",
+        "status": "VERIFIED",
+        "checked": "lead opened source 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery; source does not verify Sheikh Zayed performance"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer; general root statement is not basement engineering"
+      },
+      "placement_assumptions": {
+        "procedural-espalier": {
+          "height": {
+            "range_m": [
+              2.5,
+              3.0
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: flat maintained wall training; height/wall run/depth ASSUMED, not untrained botanical spread"
+          },
+          "spread": {
+            "range_m": [
+              0,
+              2.3
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: flat maintained wall training; height/wall run/depth ASSUMED, not untrained botanical spread"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED",
+          "depth_m": {
+            "value": 0.4,
+            "status": "ASSUMED",
+            "reason": "flat wall-trained envelope chosen by lead; not sourced nursery measurement"
+          }
+        }
+      },
+      "source_evidence": {
+        "espalier": {
+          "status": "VERIFIED",
+          "quotes": [
+            "It espaliers well against a sunny wall, and makes a good screen due to its dense canopy",
+            "espalier"
+          ],
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "light": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Light requirement: full sun to partial shade",
+            "It often looks best in the southern portion of its range when given some shade in the afternoon"
+          ],
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "roots": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Roots: not a problem"
+          ],
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "checked": "lead opened source 2026-10-06",
+          "applicability": "general UF/IFAS species descriptor; not a guarantee for this basement, footing or waterproofing"
+        },
+        "thorns": {
+          "status": "VERIFIED",
+          "quotes": [
+            "no thorns"
+          ],
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "litter": {
+          "status": "VERIFIED",
+          "quotes": [
+            "fruit/leaves a litter problem"
+          ],
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "untrained_size": {
+          "status": "VERIFIED",
+          "quotes": [
+            "20-30 ft",
+            "30-35 ft"
+          ],
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "checked": "lead opened source 2026-10-06",
+          "transcription": "lead-provided dimensions; untrained species, not espalier size"
+        },
+        "invasive_assessment": {
+          "status": "VERIFIED",
+          "quotes": [
+            "caution, may be recommended but manage to prevent escape (Central, South)"
+          ],
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "checked": "lead opened source 2026-10-06",
+          "applicability": "Florida assessment geography; not an Egypt invasive classification"
+        },
+        "toxicity": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Low",
+            "If large quantities of cracked seed pits are eaten: weakness, vomiting, ..."
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/",
+          "checked": "lead opened source 2026-10-06",
+          "poison_part": "seeds only",
+          "excerpt_note": "ellipsis retained from lead-supplied excerpt; no omitted symptom invented"
+        }
+      },
+      "human_toxicity": {
+        "value": "Low poison severity; seeds only; large quantities of cracked seed pits",
+        "status": "VERIFIED",
+        "source_url": "https://plants.ces.ncsu.edu/plants/eriobotrya-japonica/"
+      },
+      "render_form": {
+        "leaf_length_m": {
+          "value": 0.25,
+          "status": "ASSUMED",
+          "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+          "basis": "Chosen rendered length within sourced species range; not a measured nursery specimen"
+        },
+        "leaf_width_m": {
+          "value": 0.095,
+          "status": "ASSUMED",
+          "basis": "Authored leaf width for species form"
+        },
+        "source_checked": "2026-10-07",
+        "source_url": "https://ask.ifas.ufl.edu/publication/ST235",
+        "source_leaf_length_m": {
+          "range_m": [
+            0.2032,
+            0.3048
+          ],
+          "status": "VERIFIED",
+          "basis": "UF/IFAS foliage: blade length 8–12 inches, pinnate veins"
+        }
+      }
+    },
+    {
+      "species": "Pittosporum tobira",
+      "zones": {
+        "value": [
+          "south garden (part sun)",
+          "east yard (part shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "lead decision 2026-10-06: client-approved south palette"
+      },
+      "height": {
+        "range_m": [
+          2.4384,
+          3.9624
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          1.2192,
+          2.4384
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "Plant in full sun to heavy shade",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+        "status": "VERIFIED",
+        "checked": "lead opened source 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery; source does not verify Sheikh Zayed performance"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer; general root statement is not basement engineering"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.6,
+              0.8
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "spread": {
+            "range_m": [
+              0.6,
+              0.7
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "procedural-pittosporum": {
+          "height": {
+            "range_m": [
+              0.6,
+              0.8
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "spread": {
+            "range_m": [
+              0.6,
+              0.7
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "procedural-pittosporum-bowl": {
+          "height": {
+            "range_m": [
+              0.6,
+              0.8
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "client choice 2026-10-06: clipped sculptural bowl specimen; geometry ASSUMED"
+          },
+          "spread": {
+            "range_m": [
+              0.6,
+              0.7
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "client choice 2026-10-06: clipped sculptural bowl specimen; geometry ASSUMED"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "spacing_spread": {
+          "value": 0.65,
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+        }
+      },
+      "source_evidence": {
+        "light": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Plant in full sun to heavy shade"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "size": {
+          "status": "VERIFIED",
+          "quotes": [
+            "8-13 ft",
+            "4-8 ft"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06",
+          "transcription": "lead-provided species dimensions; dwarf maintained size separate"
+        },
+        "cultivars": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Wheeler's Dwarf",
+            "Compacta"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "drought_heat_salt": {
+          "status": "VERIFIED",
+          "quotes": [
+            "tolerates drought, heat, and salt spray"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "drainage": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Avoid wet or poorly-drained soils where root rot is more likely to develop"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "animal_toxicity": {
+          "status": "VERIFIED",
+          "quotes": [
+            "#non-toxic for dogs",
+            "#non-toxic for cats",
+            "#non-toxic for horses"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        }
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Non-toxic pet tags do not establish human safety; no human toxicity statement supplied"
+      }
+    },
+    {
+      "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+      "zones": {
+        "value": [
+          "south garden (part sun)",
+          "east yard (part shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "lead decision 2026-10-06: client-approved south palette"
+      },
+      "height": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "spread": {
+        "range_m": null,
+        "status": "UNVERIFIED",
+        "lower_status": "UNVERIFIED",
+        "upper_status": "UNVERIFIED"
+      },
+      "light": {
+        "value": "Plant in full sun to heavy shade",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+        "status": "VERIFIED",
+        "checked": "lead opened source 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery; source does not verify Sheikh Zayed performance"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer; general root statement is not basement engineering"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.6,
+              0.8
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "spread": {
+            "range_m": [
+              0.6,
+              0.7
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "procedural-pittosporum": {
+          "height": {
+            "range_m": [
+              0.6,
+              0.8
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "spread": {
+            "range_m": [
+              0.6,
+              0.7
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "procedural-pittosporum-bowl": {
+          "height": {
+            "range_m": [
+              0.6,
+              0.8
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "client choice 2026-10-06: clipped sculptural bowl specimen; geometry ASSUMED"
+          },
+          "spread": {
+            "range_m": [
+              0.6,
+              0.7
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "client choice 2026-10-06: clipped sculptural bowl specimen; geometry ASSUMED"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "spacing_spread": {
+          "value": 0.65,
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+        }
+      },
+      "source_evidence": {
+        "light": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Plant in full sun to heavy shade"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "cultivars": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Wheeler's Dwarf",
+            "Compacta"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "drought_heat_salt": {
+          "status": "VERIFIED",
+          "quotes": [
+            "tolerates drought, heat, and salt spray"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "drainage": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Avoid wet or poorly-drained soils where root rot is more likely to develop"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "animal_toxicity": {
+          "status": "VERIFIED",
+          "quotes": [
+            "#non-toxic for dogs",
+            "#non-toxic for cats",
+            "#non-toxic for horses"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "container_form": {
+          "status": "VERIFIED",
+          "quotes": [
+            "It is a 3- to 4-foot-tall shrub",
+            "rounded, compact, mounded form",
+            "With age, the plant can be pruned to create a picturesque, miniature tree in a container.",
+            "The plant is well-suited for raised planters and containers."
+          ],
+          "source_url": "https://edis.ifas.ufl.edu/publication/FP485",
+          "checked": "lead opened source 2026-10-06",
+          "research_path": "out/agy-research/centrepiece.md",
+          "applicability": "research quotation supplied by lead; clipped 0.6-0.8m render envelope is separately ASSUMED"
+        }
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Non-toxic pet tags do not establish human safety; no human toxicity statement supplied"
+      },
+      "render_form": {
+        "leaf_length_m": {
+          "value": 0.07,
+          "status": "ASSUMED",
+          "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/",
+          "basis": "Chosen rendered length within sourced species range; not a measured nursery specimen"
+        },
+        "leaf_width_m": {
+          "value": 0.033,
+          "status": "ASSUMED",
+          "basis": "Authored leaf width for species form"
+        },
+        "source_checked": "2026-10-07",
+        "source_url": "https://plants.ces.ncsu.edu/plants/pittosporum-tobira/"
+      }
+    },
+    {
+      "species": "Plectranthus 'Mona Lavender'",
+      "zones": {
+        "value": [
+          "south garden (part sun)",
+          "east yard (part shade)"
+        ],
+        "status": "VERIFIED",
+        "basis": "lead decision 2026-10-06: client-approved south palette"
+      },
+      "height": {
+        "range_m": [
+          0.3048,
+          0.6096
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "spread": {
+        "range_m": [
+          0.3048,
+          0.6096
+        ],
+        "status": "VERIFIED",
+        "lower_status": "VERIFIED",
+        "upper_status": "VERIFIED"
+      },
+      "light": {
+        "value": "Partial Shade (Direct sunlight only part of the day, 2-6 hours)",
+        "status": "VERIFIED",
+        "kind": "lead-verified source quote"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/plectranthus-mona-lavender/",
+        "status": "VERIFIED",
+        "checked": "lead opened source 2026-10-06"
+      },
+      "egypt_performance": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery; source does not verify Sheikh Zayed performance"
+      },
+      "root_behaviour_over_basement_slab": {
+        "value": null,
+        "status": "UNVERIFIED",
+        "reason": "Confirm with local nursery and engineer; general root statement is not basement engineering"
+      },
+      "placement_assumptions": {
+        "procedural-clump": {
+          "height": {
+            "range_m": [
+              0.35,
+              0.45
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "spread": {
+            "range_m": [
+              0.3,
+              0.4
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "procedural-mona-lavender": {
+          "height": {
+            "range_m": [
+              0.35,
+              0.45
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "spread": {
+            "range_m": [
+              0.3,
+              0.4
+            ],
+            "status": "ASSUMED",
+            "lower_status": "ASSUMED",
+            "upper_status": "ASSUMED",
+            "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+          },
+          "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
+        },
+        "spacing_spread": {
+          "value": 0.35,
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: young maintained planting appearance; mature botanical spread unchanged, nursery/pruning confirmation open; not a standard"
+        }
+      },
+      "source_evidence": {
+        "light": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Partial Shade (Direct sunlight only part of the day, 2-6 hours)"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/plectranthus-mona-lavender/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "bloom": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Fall, Spring, Winter"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/plectranthus-mona-lavender/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "colour": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Purple/Lavender"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/plectranthus-mona-lavender/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "size": {
+          "status": "VERIFIED",
+          "quotes": [
+            "1-2 ft",
+            "1-2 ft"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/plectranthus-mona-lavender/",
+          "checked": "lead opened source 2026-10-06",
+          "transcription": "lead-provided height and spread"
+        },
+        "cold": {
+          "status": "VERIFIED",
+          "quotes": [
+            "10a-11b",
+            "It requires zones 10 or 11 for full-time outside growth"
+          ],
+          "source_url": "https://plants.ces.ncsu.edu/plants/plectranthus-mona-lavender/",
+          "checked": "lead opened source 2026-10-06"
+        },
+        "toxicity": {
+          "status": "NOT STATED",
+          "quotes": [],
+          "source_url": "https://plants.ces.ncsu.edu/plants/plectranthus-mona-lavender/",
+          "checked": "lead opened source 2026-10-06",
+          "reason": "No page toxicity statement supplied; do not infer non-toxic"
+        }
+      },
+      "human_toxicity": {
+        "value": null,
+        "status": "NOT STATED",
+        "reason": "No toxicity statement on lead-opened page; do not claim non-toxic"
+      }
+    }
+  ],
+  "excluded": [
+    {
+      "species": "Pennisetum setaceum",
+      "reason": "Invasive",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Clivia miniata",
+      "reason": "Toxic alkaloids",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-palette.md",
+      "source_url": "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/clivia.html",
+      "evidence": {
+        "toxicity": {
+          "status": "VERIFIED",
+          "child_safe": false,
+          "quotes": [
+            "Clivia, like many other types of garden lilies grown in Florida, contains various toxic alkaloids and can cause poisoning if consumed. (UF/IFAS)"
+          ]
+        },
+        "invasiveness": {
+          "status": "NOT STATED",
+          "quotes": []
+        },
+        "light_tolerance": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Clivia needs filtered bright light, and will scorch in direct sunlight, cool, shady spot (UF/IFAS)"
+          ]
+        }
+      },
+      "source_urls": [
+        "https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/clivia.html"
+      ]
+    },
+    {
+      "species": "Acanthus mollis",
+      "reason": "Spreads from root fragments",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Agave attenuata",
+      "reason": "Flower spike 1.5–3 m",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Delonix regia",
+      "reason": "Too tall or wide for the courts",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Jacaranda mimosifolia",
+      "reason": "Too tall or wide for the courts",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Cassia fistula",
+      "reason": "Too tall or wide for the courts",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Bauhinia variegata",
+      "reason": "Too tall or wide for the courts",
+      "status": "VERIFIED",
+      "basis": "client exclusion decision; not an independently checked botanical claim"
+    },
+    {
+      "species": "Zamioculcas zamiifolia",
+      "reason": "Calcium oxalate; medium poison severity",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-palette.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia/",
+      "evidence": {
+        "toxicity": {
+          "status": "VERIFIED",
+          "child_safe": false,
+          "quotes": [
+            "Poisonous to Humans: Poison Severity: Medium, Poison Symptoms: diarrhea, vomiting if leaves are consumed in quantity., Poison Toxic Principle: calcium oxalate, Poison Part: Leaves, Causes Contact Dermatitis: No. Tags: #problem-for-dogs #problem-for-cats (NC State)"
+          ]
+        },
+        "invasiveness": {
+          "status": "NOT STATED",
+          "quotes": []
+        },
+        "light_tolerance": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Deep shade (Less than 2 hours to no direct sunlight), Partial Shade, Scalding and browning of leaves can occur if the plant is placed in direct sunlight. (NC State)"
+          ]
+        }
+      },
+      "source_urls": [
+        "https://plants.ces.ncsu.edu/plants/zamioculcas-zamiifolia/"
+      ]
+    },
+    {
+      "species": "Monstera deliciosa",
+      "reason": "Calcium oxalate toxicity; coarse climber foliage",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-climber.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/",
+      "evidence": {
+        "toxicity": {
+          "status": "VERIFIED",
+          "child_safe": false,
+          "quotes": [
+            "Poisonous to Humans: Poison Severity: Low, Poison Symptoms: Intense burning of mouth, tongue, and throat; nausea, vomiting, difficulty swallowing, drooling, and diarrhea may also occur; contact with cell sap may cause skin irritation. Only if eaten in large quantities., Poison Toxic Principle: Needle-like calcium oxalate crystals, Causes Contact Dermatitis: Yes, Poison Part: Bark, Flowers, Fruits, Leaves, Roots, Seeds, Stems. Tags: #problem-for-cats #problem-for-dogs (NC State)"
+          ]
+        },
+        "invasiveness": {
+          "status": "NOT STATED",
+          "quotes": []
+        },
+        "light_tolerance": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Dappled Sunlight (Shade through upper canopy all day), Partial Shade, moderate brightness but not direct sunlight (NC State)"
+          ]
+        }
+      },
+      "source_urls": [
+        "https://plants.ces.ncsu.edu/plants/monstera-deliciosa/"
+      ],
+      "lead_research_excerpt": "10. Monstera deliciosa — Split-leaf Philodendron / Swiss Cheese Plant\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/monstera-deliciosa/](https://plants.ces.ncsu.edu/plants/monstera-deliciosa/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Climbing Method: Clinging\"`, `\"In its native habitat it starts its life as a terrestrial plant, turning epiphytic once it comes into contact with a sturdy tree it can climb... Sturdy support is necessary to prevent the stems from breaking.\"`\n  * *Status*: **VERIFIED** (Requires heavy anchoring).\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"can grow to 70 feet tall, though it stays between 6 to 8 feet in most home environments\"`, `\"Leaves are gigantic, up to 1 foot or more\"`, `\"Available Space To Plant: 6-feet-12 feet\"`\n  * *Status*: **MISMATCH (Gigantic foliage obscures trellis framework completely)**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Dappled Sunlight (Shade through upper canopy all day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`, `\"moderate brightness but not direct sunlight\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Water this plant thoroughly, then allow the top quarter to one-third part to dry between watering. Using a humidifier or setting in the plant container on a tray of wet pebbles helps increase the humidity in dry interior settings.\"`\n  * *Status*: **MISMATCH (Demands high ambient humidity; suffers leaf desiccations in dry desert air)**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`, `\"prefers an average warm temperature of 60 to 85 degrees F.\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: `\"Poison Severity: Low\"`, `\"Poison Toxic Principle: Needle-like calcium oxalate crystals; possibly other unidentified toxins\"`, `\"Poison Symptoms: Intense burning of mouth, tongue, and throat; nausea, vomiting, difficulty swallowing, drooling, and diarrhea may also occur; contact with cell sap may cause skin irritation.\"`\n  * *Status*: **MISMATCH (Oxalate crystal toxicity dangerous to curious toddlers)**\n"
+    },
+    {
+      "species": "Philodendron xanadu",
+      "reason": "Calcium oxalate; wants more sun",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-palette.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/philodendron-xanadu/",
+      "evidence": {
+        "toxicity": {
+          "status": "VERIFIED",
+          "child_safe": false,
+          "quotes": [
+            "Poison Severity: Low, Poison Symptoms: If the leaves or stems are eaten or chewed, swelling of the lips, tongue, and mouth can occur. It may also cause mouth pain and drooling. The sap can cause skin irritation., Poison Toxic Principle: Calcium oxalate, Causes Contact Dermatitis: Yes. Tags: #problem-for-children #problem-for-cats #problem-for-dogs (NC State)"
+          ]
+        },
+        "invasiveness": {
+          "status": "NOT STATED",
+          "quotes": []
+        },
+        "light_tolerance": {
+          "status": "MISMATCH FOR DEEP SHADE",
+          "quotes": [
+            "prefers full sun to partial shade (NC State)"
+          ]
+        }
+      },
+      "source_urls": [
+        "https://plants.ces.ncsu.edu/plants/philodendron-xanadu/"
+      ]
+    },
+    {
+      "species": "Nephrolepis exaltata",
+      "reason": "Invasive tendencies in warm climates; high humidity",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-palette.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/nephrolepis-exaltata/",
+      "evidence": {
+        "toxicity": {
+          "status": "VERIFIED",
+          "child_safe": true,
+          "quotes": [
+            "#non-toxic-for-cats #non-toxic-for-horses #non-toxic-for-dogs (NC State)"
+          ]
+        },
+        "invasiveness": {
+          "status": "VERIFIED",
+          "quotes": [
+            "This plant shows invasive tenancies in warm climates. (NC State)"
+          ]
+        },
+        "light_tolerance": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Deep shade (Less than 2 hours to no direct sunlight), Dappled Sunlight (Shade through upper canopy all day), bright, indirect light (NC State)"
+          ]
+        }
+      },
+      "source_urls": [
+        "https://plants.ces.ncsu.edu/plants/nephrolepis-exaltata/"
+      ]
+    },
+    {
+      "species": "Chamaedorea elegans",
+      "reason": "Fruit juice skin irritation",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-palette.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/chamaedorea-elegans/",
+      "evidence": {
+        "toxicity": {
+          "status": "VERIFIED",
+          "child_safe": false,
+          "quotes": [
+            "Poison Severity: Low, Poison Symptoms: Juice from the fruit may cause skin irritation., Poison Toxic Principle: Unknown, Causes Contact Dermatitis: Yes, Poison Part: Fruits, Sap/Juice. Tags: #non-toxic-for-cats #non-toxic-for-horses #non-toxic-for-dogs #pet friendly (NC State)"
+          ]
+        },
+        "invasiveness": {
+          "status": "NOT STATED",
+          "quotes": []
+        },
+        "light_tolerance": {
+          "status": "VERIFIED",
+          "quotes": [
+            "Deep shade (Less than 2 hours to no direct sunlight), Dappled Sunlight (Shade through upper canopy all day), tolerates low-light conditions (NC State)"
+          ]
+        }
+      },
+      "source_urls": [
+        "https://plants.ces.ncsu.edu/plants/chamaedorea-elegans/"
+      ]
+    },
+    {
+      "species": "Hedera helix",
+      "reason": "Toxic saponins, invasive; aerial roots damage mortar",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-climber.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/hedera-helix/",
+      "lead_research_excerpt": "5. Hedera helix — English Ivy\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/hedera-helix/](https://plants.ces.ncsu.edu/plants/hedera-helix/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/hedera-helix/](https://assessment.ifas.ufl.edu/assessments/hedera-helix/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Stem Description: Vine climbs by adventitious roots... Aerial roots can damage painted surfaces, loose mortar and aluminum siding.\"`\n  * *Status*: **MISMATCH (Directly damages mortar joints and painted masonry)**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 20 ft. 0 in. - 80 ft. 0 in.\", \"Width: 3 ft. 0 in. - 50 ft. 0 in.\"`\n  * *Status*: **MISMATCH (Massive 20–80 ft vine completely overwhelms a 1.5 m × 2.2 m screen)**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Deep shade (Less than 2 hours to no direct sunlight)\", \"Resistance To Challenges: Heavy Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Resistance To Challenges: Drought, Dry Soil\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 4a through 13b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\", \"Maintenance: High\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 11\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Highly invasive weed)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Saponins, including hederagenin, and polyacetylenes, including didehydrofalcarinol and falcarinol\"`, `\"Poison Symptoms: Burning in mouth, throat; severe stomach pain, vomiting, diarrhea, convulsions, delirium, dermatitis with redness, itching and blisters.\"`, Tag: `#problem for children`\n  * *Status*: **MISMATCH (Hazardous to children aged 3, 6, and 10)**\n"
+    },
+    {
+      "species": "Ficus pumila",
+      "reason": "High invasion risk; surface damage; sap dermatitis",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-climber.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/ficus-pumila/",
+      "lead_research_excerpt": "4. Ficus pumila — Creeping Fig\n\n* **Sources**: UF/IFAS Gardening Solutions, UF/IFAS Assessment & NC State Plant Toolbox\n  * URL (UF/IFAS GS): [https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/creeping-fig.html](https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/creeping-fig.html)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/ficus-pumila/](https://assessment.ifas.ufl.edu/assessments/ficus-pumila/)\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/ficus-pumila/](https://plants.ces.ncsu.edu/plants/ficus-pumila/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"The vine’s adhesive pads make it hard to remove, so consider planting it on privacy walls, but avoid the walls of your home. It can damage wooden structures.\"`\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls, clusters of adventitious roots (holdfasts)\"`\n  * *Status*: **MISMATCH (Severely damages wooden trellis structures and adheres aggressively)**\n* **Mature Dimensions**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"It climbs 25 to 30 feet or more\"`\n  * *Verbatim Quote (NC State)*: `\"Height: 10 ft. 0 in. - 15 ft. 0 in.\", \"Width: 3 ft. 0 in. - 6 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Full sun (6 or more hours of direct sunlight a day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Verbatim Quote (UF/IFAS GS)*: `\"Creeping fig can grow in full sun or part shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"Once established, it is fairly drought tolerant\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 8a, 8b, 9a, 9b, 10a, 10b, 11a, 11b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (UF/IFAS GS)*: `\"It grows vigorously, requiring frequent pruning to keep it tidy.\"`\n  * *Status*: **VERIFIED** (Overwhelming growth covers entire trellis, obscuring woodwork).\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 10\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Invasive risk)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Problems: Problem for Cats, Problem for Dogs\"`, `\"Milky sap causes mild dermatitis in some individuals.\"`\n  * *Status*: **MISMATCH**\n"
+    },
+    {
+      "species": "Epipremnum aureum",
+      "reason": "Invasive; calcium oxalate",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-climber.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/epipremnum-aureum/",
+      "lead_research_excerpt": "6. Epipremnum aureum — Golden Pothos\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/epipremnum-aureum/](https://plants.ces.ncsu.edu/plants/epipremnum-aureum/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/epipremnum-aureum/](https://assessment.ifas.ufl.edu/assessments/epipremnum-aureum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 20 ft. 0 in. - 40 ft. 0 in.\", \"Width: 3 ft. 0 in. - 6 ft. 0 in.\"`\n  * *Status*: **MISMATCH**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Deep shade (Less than 2 hours to no direct sunlight), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"High Invasion Risk\"`, `\"Predictive Tool Score: 17\"`, `\"Predicted to be invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Severe invasive risk)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Calcium oxalate crystals\"`, `\"Poison Symptoms: Chewing on this plant can result in severe pain and swelling of the mouth, lips, tongue and throat. Other symptoms include excessive drooling, difficulty swallowing, vomiting, diarrhea, and decreased appetite. Can also cause skin irritation.\"`\n  * *Status*: **MISMATCH (Unsafe for young children)**\n"
+    },
+    {
+      "species": "Syngonium podophyllum",
+      "reason": "Invasive; calcium oxalate",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-climber.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/",
+      "lead_research_excerpt": "8. Syngonium podophyllum — Arrowhead Vine\n\n* **Sources**: NC State Plant Toolbox & UF/IFAS Assessment\n  * URL (NC State): [https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/](https://plants.ces.ncsu.edu/plants/syngonium-podophyllum/)\n  * URL (UF/IFAS Assessment): [https://assessment.ifas.ufl.edu/assessments/syngonium-podophyllum/](https://assessment.ifas.ufl.edu/assessments/syngonium-podophyllum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote (NC State)*: `\"Climbing Method: Clinging\"`, `\"Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote (NC State)*: `\"Height: 10 ft. 0 in. - 20 ft. 0 in.\", \"Width: 1 ft. 0 in. - 2 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"Light: Dappled Sunlight, Deep shade (Less than 2 hours to no direct sunlight), Partial Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote (NC State)*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote (NC State)*: `\"USDA Plant Hardiness Zone: 10a, 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote (NC State)*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *Verbatim Quote (UF/IFAS Assessment)*: `\"Conclusions by Zone: Central: Invasive (No Uses), South: Invasive (No Uses)\"`, `\"Predictive Tool Score: 16\"`, `\"Invasive and not recommended by IFAS.\"`\n  * *Status*: **MISMATCH (Category 1 Invasive)**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote (NC State)*: `\"Poison Severity: Medium\"`, `\"Poison Toxic Principle: Calcium oxalate crystals\"`, `\"Poison Symptoms: Swelling and pain of lips, mouth, tongue; excessive drooling; difficulty swallowing; vomiting; diarrhea. Skin irritation.\"`, `\"Problems: Poisonous to Humans, Problem for Cats, Problem for Dogs\"`\n  * *Status*: **MISMATCH (Toxic to children)**\n"
+    },
+    {
+      "species": "Philodendron hederaceum",
+      "reason": "Problem for Children",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-climber.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/",
+      "lead_research_excerpt": "7. Philodendron hederaceum — Heartleaf Philodendron\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/](https://plants.ces.ncsu.edu/plants/philodendron-hederaceum/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Climbing Method: Clinging\"`, `\"Stem Description: Vines climb by adventitious roots. Aerial roots that stick to walls\"`\n  * *Status*: **VERIFIED**\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"Height: 10 ft. 0 in. - 20 ft. 0 in.\", \"Width: 1 ft. 0 in. - 3 ft. 0 in.\"`\n  * *Status*: **VERIFIED**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Dappled Sunlight, Deep shade (Less than 2 hours to no direct sunlight), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Soil Drainage: Good Drainage, Moist\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 10b, 11a, 11b, 12a, 12b\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: `\"Poison Severity: Low\"`, `\"Poison Toxic Principle: Needle-like calcium oxalate crystals (oxalate crystals and toxic protein)\"`, `\"Poison Symptoms: Pain and swelling of the lips, tongue, and palate; skin irritation from contact with cell sap\"`, `\"Problems: Problem for Children, Problem for Cats, Problem for Dogs\"`\n  * *Status*: **MISMATCH (Explicitly documented as \"Problem for Children\")**\n"
+    },
+    {
+      "species": "Parthenocissus tricuspidata",
+      "reason": "Holdfast damage; excessive mature size",
+      "status": "VERIFIED",
+      "basis": "lead-verified research 2026-10-06",
+      "research": "out/agy-research/shade-climber.md",
+      "source_url": "https://plants.ces.ncsu.edu/plants/parthenocissus-tricuspidata/",
+      "lead_research_excerpt": "9. Parthenocissus tricuspidata — Boston Ivy\n\n* **Source**: North Carolina Extension Gardener Plant Toolbox\n  * URL: [https://plants.ces.ncsu.edu/plants/parthenocissus-tricuspidata/](https://plants.ces.ncsu.edu/plants/parthenocissus-tricuspidata/)\n* **Climbing Method & Wall/Mortar Damage**:\n  * *Verbatim Quote*: `\"Boston ivy climbs by short tendrils branched with terminal sucker-like adhesive discs.\"`, `\"It should not be grown up wood or shingle walls because the holdfasts are difficult to remove, can creep under shingles and will ruin the paint. Vines can also attach to and damage such objects as gutters, shutters or wiring around homes and buildings.\"`\n  * *Status*: **MISMATCH (Adhesive discs damage wood surfaces, paint, and mortar)**\n* **Mature Dimensions**:\n  * *Verbatim Quote*: `\"Dimensions: Height: 30 ft. 0 in. - 60 ft. 0 in., Width: 5 ft. 0 in. - 10 ft. 0 in.\"`\n  * *Status*: **MISMATCH (30–60 ft is massively excessive for a 2.2 m high trellis)**\n* **Shade Tolerance**:\n  * *Verbatim Quote*: `\"Light: Full sun (6 or more hours of direct sunlight a day), Partial Shade (Direct sunlight only part of the day, 2-6 hours)\"`, `\"Resistance To Challenges: Heavy Shade\"`\n  * *Status*: **VERIFIED**\n* **Water Requirements**:\n  * *Verbatim Quote*: `\"Soil Drainage: Good Drainage, Moist, Occasionally Dry\"`, `\"Resistance To Challenges: Drought, Dry Soil\"`\n  * *Status*: **VERIFIED**\n* **Cold Tolerance**:\n  * *Verbatim Quote*: `\"USDA Plant Hardiness Zone: 4a through 8b\"`, `\"cold hardy to about 15 degrees F.\"`\n  * *Status*: **VERIFIED**\n* **Growth Rate & Vigour**:\n  * *Verbatim Quote*: `\"Growth Rate: Rapid\"`\n  * *Status*: **VERIFIED**\n* **Invasiveness**:\n  * *UF/IFAS Assessment*: Not listed.\n  * *Status*: **NOT STATED**\n* **Toxicity to People & Pets**:\n  * *Verbatim Quote*: Tags: `#childrens-garden`, `#playground plant`. No poison characteristics or toxic principles listed.\n  * *Status*: **VERIFIED** (Non-toxic).\n"
+    }
+  ],
+  "design_assumptions": {
+    "east_tree_target": {
+      "height_m": 3.277487116854729,
+      "spread_m": 4.6,
+      "status": "ASSUMED",
+      "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread",
+      "rendered_stage": "young pruned tree"
+    },
+    "trellis_coverage": {
+      "value": 0.35,
+      "status": "ASSUMED",
+      "reason": "Client young-planting brief: timber frame stays visible"
+    },
+    "door_pot": {
+      "height_m": 0.4,
+      "lower_radius_m": 0.18,
+      "upper_radius_m": 0.25,
+      "status": "ASSUMED",
+      "reason": "client decision 2026-10-05: terracotta-red glazed tapered ceramic with rim and visible soil, directly on turf/paving; no base"
+    },
+    "full_sun_screen": {
+      "hours": 6,
+      "comparison": "strictly_more_than",
+      "status": "VERIFIED",
+      "source_url": "https://www.rhs.org.uk/garden-design/shade-gardening",
+      "source_quote": "Full sun: More than six hours of direct sun per day at midsummer.",
+      "checked_on": "2026-10-06",
+      "applicability": "Hourly June-solstice actual opaque scene ray-cast with recorded true-north rotation; detailed site climate, leaf-level light and planting performance UNVERIFIED"
+    },
+    "north_garden_g4": {
+      "status": "ASSUMED",
+      "beds": {
+        "north": [
+          -0.05,
+          -28.5,
+          3.45,
+          -26.9
+        ]
+      },
+      "soil_z_m": -3.0,
+      "edging_height_m": 0.018,
+      "gravel": "ASSUMED mineral mulch and paths",
+      "feature_stone": "ASSUMED irregular natural stone appearance",
+      "sun_evidence": "lead ray-cast out/villa/garden-sun-hours.json; 20 open / 8 balcony samples; June/March/December",
+      "removed": "bistro and raised containers removed; hanging swing restored per client 2026-10-06",
+      "accent_bed": [
+        0.05,
+        -25.2,
+        1.6,
+        -23.86
+      ],
+      "accent_center_m": [
+        1.02,
+        -24.65
+      ],
+      "feature_stone_center_m": [
+        1.02,
+        -24.16
+      ],
+      "trellis_start_m": [
+        -0.123,
+        -25.24
+      ],
+      "trellis_sun_samples": "out/garden-g4/trellis-sun.json",
+      "drifts": [
+        {
+          "species": "Fatsia japonica",
+          "layer": "back",
+          "centers_m": [
+            [
+              0.65,
+              -27.7
+            ],
+            [
+              1.8,
+              -27.7
+            ],
+            [
+              1.1,
+              -24.5
+            ]
+          ]
+        },
+        {
+          "species": "Aspidistra elatior",
+          "layer": "mid",
+          "centers_m": [
+            [
+              0.45,
+              -28.25
+            ],
+            [
+              1.6,
+              -28.25
+            ],
+            [
+              3.4,
+              -24.17
+            ]
+          ]
+        },
+        {
+          "species": "Chlorophytum comosum",
+          "layer": "front",
+          "centers_m": [
+            [
+              0.4,
+              -27.15
+            ],
+            [
+              1.5,
+              -27.15
+            ],
+            [
+              2.7,
+              -27.15
+            ]
+          ]
+        },
+        {
+          "species": "Ophiopogon japonicus",
+          "layer": "edge",
+          "centers_m": [
+            [
+              0.2,
+              -28.33
+            ],
+            [
+              0.9,
+              -28.33
+            ],
+            [
+              1.6,
+              -28.33
+            ],
+            [
+              2.3,
+              -28.33
+            ],
+            [
+              3,
+              -28.33
+            ]
+          ]
+        }
+      ],
+      "trellis_boundary_sun": {
+        "status": "MEASURED",
+        "method": "10-minute midpoint ray cast against opaque shell/context, Cairo city latitude 30.05/longitude 31; true bearing from scene north.model_y_bearing_deg; ground sample z=-2.9 m; sky 512 rays",
+        "samples": [
+          {
+            "y_m": -28.0,
+            "days": [
+              {
+                "day": "2026-06-21",
+                "sun_hours": 1.1666666666666667,
+                "sunlit_intervals": [
+                  "2026-06-21T11:05:00+02:00",
+                  "2026-06-21T11:15:00+02:00",
+                  "2026-06-21T11:25:00+02:00",
+                  "2026-06-21T11:35:00+02:00",
+                  "2026-06-21T11:45:00+02:00",
+                  "2026-06-21T11:55:00+02:00",
+                  "2026-06-21T12:05:00+02:00"
+                ],
+                "sky_view_fraction": 0.060546875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -28.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-03-20",
+                "sun_hours": 0.0,
+                "sunlit_intervals": [],
+                "sky_view_fraction": 0.060546875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -28.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-12-21",
+                "sun_hours": 0.0,
+                "sunlit_intervals": [],
+                "sky_view_fraction": 0.060546875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -28.0,
+                  -2.9
+                ]
+              }
+            ]
+          },
+          {
+            "y_m": -27.0,
+            "days": [
+              {
+                "day": "2026-06-21",
+                "sun_hours": 1.1666666666666667,
+                "sunlit_intervals": [
+                  "2026-06-21T11:05:00+02:00",
+                  "2026-06-21T11:15:00+02:00",
+                  "2026-06-21T11:25:00+02:00",
+                  "2026-06-21T11:35:00+02:00",
+                  "2026-06-21T11:45:00+02:00",
+                  "2026-06-21T11:55:00+02:00",
+                  "2026-06-21T12:05:00+02:00"
+                ],
+                "sky_view_fraction": 0.068359375,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -27.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-03-20",
+                "sun_hours": 1.0,
+                "sunlit_intervals": [
+                  "2026-03-20T11:25:00+02:00",
+                  "2026-03-20T11:35:00+02:00",
+                  "2026-03-20T11:45:00+02:00",
+                  "2026-03-20T11:55:00+02:00",
+                  "2026-03-20T12:05:00+02:00",
+                  "2026-03-20T12:15:00+02:00"
+                ],
+                "sky_view_fraction": 0.068359375,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -27.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-12-21",
+                "sun_hours": 0.0,
+                "sunlit_intervals": [],
+                "sky_view_fraction": 0.068359375,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -27.0,
+                  -2.9
+                ]
+              }
+            ]
+          },
+          {
+            "y_m": -26.0,
+            "days": [
+              {
+                "day": "2026-06-21",
+                "sun_hours": 1.1666666666666667,
+                "sunlit_intervals": [
+                  "2026-06-21T11:05:00+02:00",
+                  "2026-06-21T11:15:00+02:00",
+                  "2026-06-21T11:25:00+02:00",
+                  "2026-06-21T11:35:00+02:00",
+                  "2026-06-21T11:45:00+02:00",
+                  "2026-06-21T11:55:00+02:00",
+                  "2026-06-21T12:05:00+02:00"
+                ],
+                "sky_view_fraction": 0.07421875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -26.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-03-20",
+                "sun_hours": 1.5,
+                "sunlit_intervals": [
+                  "2026-03-20T11:25:00+02:00",
+                  "2026-03-20T11:35:00+02:00",
+                  "2026-03-20T11:45:00+02:00",
+                  "2026-03-20T11:55:00+02:00",
+                  "2026-03-20T12:05:00+02:00",
+                  "2026-03-20T12:15:00+02:00",
+                  "2026-03-20T12:25:00+02:00",
+                  "2026-03-20T12:35:00+02:00",
+                  "2026-03-20T12:45:00+02:00"
+                ],
+                "sky_view_fraction": 0.07421875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -26.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-12-21",
+                "sun_hours": 0.0,
+                "sunlit_intervals": [],
+                "sky_view_fraction": 0.07421875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -26.0,
+                  -2.9
+                ]
+              }
+            ]
+          },
+          {
+            "y_m": -25.0,
+            "days": [
+              {
+                "day": "2026-06-21",
+                "sun_hours": 1.1666666666666667,
+                "sunlit_intervals": [
+                  "2026-06-21T11:05:00+02:00",
+                  "2026-06-21T11:15:00+02:00",
+                  "2026-06-21T11:25:00+02:00",
+                  "2026-06-21T11:35:00+02:00",
+                  "2026-06-21T11:45:00+02:00",
+                  "2026-06-21T11:55:00+02:00",
+                  "2026-06-21T12:05:00+02:00"
+                ],
+                "sky_view_fraction": 0.072265625,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -25.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-03-20",
+                "sun_hours": 1.0,
+                "sunlit_intervals": [
+                  "2026-03-20T11:55:00+02:00",
+                  "2026-03-20T12:05:00+02:00",
+                  "2026-03-20T12:15:00+02:00",
+                  "2026-03-20T12:25:00+02:00",
+                  "2026-03-20T12:35:00+02:00",
+                  "2026-03-20T12:45:00+02:00"
+                ],
+                "sky_view_fraction": 0.072265625,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -25.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-12-21",
+                "sun_hours": 0.0,
+                "sunlit_intervals": [],
+                "sky_view_fraction": 0.072265625,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -25.0,
+                  -2.9
+                ]
+              }
+            ]
+          },
+          {
+            "y_m": -24.0,
+            "days": [
+              {
+                "day": "2026-06-21",
+                "sun_hours": 1.5,
+                "sunlit_intervals": [
+                  "2026-06-21T10:05:00+02:00",
+                  "2026-06-21T10:15:00+02:00",
+                  "2026-06-21T11:05:00+02:00",
+                  "2026-06-21T11:15:00+02:00",
+                  "2026-06-21T11:25:00+02:00",
+                  "2026-06-21T11:35:00+02:00",
+                  "2026-06-21T11:45:00+02:00",
+                  "2026-06-21T11:55:00+02:00",
+                  "2026-06-21T12:05:00+02:00"
+                ],
+                "sky_view_fraction": 0.046875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -24.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-03-20",
+                "sun_hours": 1.0,
+                "sunlit_intervals": [
+                  "2026-03-20T11:55:00+02:00",
+                  "2026-03-20T12:05:00+02:00",
+                  "2026-03-20T12:15:00+02:00",
+                  "2026-03-20T12:25:00+02:00",
+                  "2026-03-20T12:35:00+02:00",
+                  "2026-03-20T12:45:00+02:00"
+                ],
+                "sky_view_fraction": 0.046875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -24.0,
+                  -2.9
+                ]
+              },
+              {
+                "day": "2026-12-21",
+                "sun_hours": 1.1666666666666667,
+                "sunlit_intervals": [
+                  "2026-12-21T12:05:00+02:00",
+                  "2026-12-21T12:15:00+02:00",
+                  "2026-12-21T12:25:00+02:00",
+                  "2026-12-21T12:35:00+02:00",
+                  "2026-12-21T12:45:00+02:00",
+                  "2026-12-21T12:55:00+02:00",
+                  "2026-12-21T13:05:00+02:00"
+                ],
+                "sky_view_fraction": 0.046875,
+                "sky_ray_count": 512,
+                "sun_step_minutes": 10,
+                "point_m": [
+                  -0.06,
+                  -24.0,
+                  -2.9
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "court_sun_summary": {
+        "status": "MEASURED",
+        "source": "lead ray-cast out/villa/garden-sun-hours.json, 2026-10-06",
+        "open": {
+          "samples": 20,
+          "june_mean_h": 0.9,
+          "march_mean_h": 0.8,
+          "december_mean_h": 0.3
+        },
+        "balcony": {
+          "samples": 8,
+          "june_mean_h": 0,
+          "march_mean_h": 0,
+          "december_mean_h": 1.1
+        },
+        "limit": "Scene enclosure screen, no nursery/Egypt performance verification"
+      },
+      "swing_back_bed": [
+        3.18,
+        -24.39,
+        3.61,
+        -23.92
+      ],
+      "hanging_swing": {
+        "id": "landscape-north-swing",
+        "center": [
+          2.4,
+          -24.77
+        ],
+        "yaw_deg": 90.0,
+        "width_m": 1.2,
+        "depth_m": 1.0,
+        "height_m": 1.2,
+        "ground_m": -3.0,
+        "seat_height_m": 0.45,
+        "basket_bottom_m": -2.85,
+        "soffit_m": -0.2,
+        "eye_height_m": 1.2,
+        "motion_allowance_m": 0.25,
+        "decision": "client decision 2026-10-06; structural check pending",
+        "source": "original project-authored procedural basket; no imported geometry",
+        "appearance": "ASSUMED look-alike-proxy, no manufacturer identity",
+        "size_basis": "Comparable to measured sf_egg_chair basket 1.216 x 1.068 x 1.193 m; no stand",
+        "seat_basis": "ASSUMED 0.45 m for feet near ground and relaxed sitting; not a cited standard",
+        "eye_basis": "ASSUMED eye 1.20 m above court, 0.75 m above seat, for a seated adult screen",
+        "open_construction_items": [
+          {
+            "item": "Balcony slab capacity for dynamic hanging point load",
+            "status": "UNVERIFIED",
+            "owner": "structural engineer"
+          },
+          {
+            "item": "Anchor type and installation",
+            "status": "UNVERIFIED",
+            "owner": "structural engineer"
+          },
+          {
+            "item": "Chair rated load",
+            "status": "UNVERIFIED",
+            "owner": "manufacturer"
+          }
+        ],
+        "licence": "Original project geometry; no third-party mesh licence applies; no standalone redistribution grant declared"
+      }
+    },
+    "south_tree_pit": {
+      "diameter_m": 1.2,
+      "status": "ASSUMED",
+      "reason": "Client G1 instruction; nursery/root and drainage review outstanding.",
+      "surface": "gravel"
+    },
+    "south_tree_position": {
+      "center_m": [
+        25.576999999999998,
+        -24.41111528638369
+      ],
+      "status": "MEASURED",
+      "decision": "D4",
+      "description": "in the lawn, offset from centre for a clear door route",
+      "search": {
+        "translation_m": [
+          0.0,
+          0.7222147136163092
+        ],
+        "distance_m": 0.7222147136163092,
+        "boundary_distance_m": 0.7222137136163093,
+        "clearance_m": 1e-06,
+        "bounds_m": [
+          -0.5,
+          -2.4823299999999975,
+          0.0027058383684810394,
+          2.1559166158306198
+        ],
+        "forbidden_polygons": 5359
+      }
+    },
+    "south_garden_g6": {
+      "status": "ASSUMED",
+      "decision": "lead decision 2026-10-06",
+      "reason": "client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved",
+      "pergola_rect_m": [
+        22.75,
+        -29.81,
+        25.75,
+        -26.81
+      ],
+      "post_width_m": 0.12,
+      "clear_height_m": 2.6,
+      "beam_depth_m": 0.16,
+      "rafter_depth_m": 0.09,
+      "rafter_spacing_m": 0.4,
+      "target_cover_fraction": [
+        0.5,
+        0.6
+      ],
+      "bowl_center_m": [
+        24.25,
+        -28.31
+      ],
+      "bowl_diameter_m": 1.0,
+      "bowl_height_m": 0.35,
+      "bowl_reason": "client decision 2026-10-06: deliberate no-pots exception; low wide glazed ceramic or stone appearance ASSUMED",
+      "espalier_wall": "east",
+      "espalier_run_m": [
+        24.55,
+        26.85
+      ],
+      "espalier_height_m": 2.5,
+      "espalier_depth_m": 0.4,
+      "wire_tier_spacing_m": 0.45,
+      "furniture": "one two-seat procedural timber/cushion bench plus two lounge chairs, four family seats; client permitted arrangement; weather performance/procurement UNVERIFIED",
+      "furniture_size_m": [
+        0.65,
+        0.65,
+        0.8
+      ],
+      "furniture_centers_m": [
+        [
+          23.15,
+          -28.31
+        ],
+        [
+          24.9,
+          -27.5
+        ],
+        [
+          24.9,
+          -29.12
+        ]
+      ],
+      "field_evidence": {
+        "pergola_rect_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "post_width_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "clear_height_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "beam_depth_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "rafter_depth_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "rafter_spacing_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "target_cover_fraction": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "bowl_center_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "bowl_diameter_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "bowl_height_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "bowl_reason": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "espalier_wall": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "espalier_run_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "espalier_height_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "espalier_depth_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "wire_tier_spacing_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "furniture": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "furniture_size_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "furniture_centers_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client timber shade, approved bowl and family furniture; D4 tree/pit and D2 routes preserved; authored figure is design intent, no invented standard"
+        },
+        "post_insets_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: house-side north post inset 0.85 m along beam to clear the actual full door passage. Beam end cantilever, footing and timber capacity require structural design; no capacity claimed. Opposite north beam post also inset 0.79 m to keep the new east-side paved seating aisle continuous; both beam-end cantilevers require structural design."
+        },
+        "furniture_pieces": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client permitted bench plus two lounge chairs around bowl; achieved continuous 0.914 m one-way aisle follows existing Time-Saver path card, not a new seating standard"
+        },
+        "seating_access_rect_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client permitted bench plus two lounge chairs around bowl; achieved continuous 0.914 m one-way aisle follows existing Time-Saver path card, not a new seating standard"
+        },
+        "seating_cross_access_rect_m": {
+          "status": "ASSUMED",
+          "reason": "lead decision 2026-10-06: client permitted bench plus two lounge chairs around bowl; achieved continuous 0.914 m one-way aisle follows existing Time-Saver path card, not a new seating standard"
+        }
+      },
+      "post_insets_m": {
+        "2": [
+          0.85,
+          0.0
+        ],
+        "3": [
+          -0.79,
+          0.0
+        ]
+      },
+      "furniture_pieces": [
+        {
+          "id": "bench",
+          "center_m": [
+            23.15,
+            -28.31
+          ],
+          "width_m": 1.4,
+          "depth_m": 0.65,
+          "rotation_deg": -90,
+          "seats": 2
+        },
+        {
+          "id": "chair-0",
+          "center_m": [
+            24.9,
+            -27.5
+          ],
+          "width_m": 0.65,
+          "depth_m": 0.65,
+          "rotation_deg": 180,
+          "seats": 1
+        },
+        {
+          "id": "chair-1",
+          "center_m": [
+            24.9,
+            -29.12
+          ],
+          "width_m": 0.65,
+          "depth_m": 0.65,
+          "rotation_deg": 0,
+          "seats": 1
+        }
+      ],
+      "seating_access_rect_m": [
+        25.23,
+        -28.77,
+        26.144,
+        -25.593
+      ],
+      "seating_cross_access_rect_m": [
+        24.85,
+        -28.77,
+        26.144,
+        -27.856
+      ]
+    },
+    "east_yard_g6": {
+      "status": "ASSUMED",
+      "decision": "lead decision 2026-10-06",
+      "reason": "corrected G5 enclosure rays show part shade; replace sun-preferring flowering palette while preserving routes, open timber and lawn",
+      "removed": [
+        {
+          "species": "Bougainvillea glabra",
+          "reason": "best flowering full sun >6 h; east June only about 4-5 h"
+        },
+        {
+          "species": "Ixora coccinea",
+          "reason": "full sun for best flowering unmet; top pots retained with partial applicability"
+        },
+        {
+          "species": "Strelitzia reginae",
+          "reason": "RHS bright sunny positions unmet by part-shade yard"
+        }
+      ],
+      "retained_top_ixora": "top-garden Ixora pots retained; seasonal screen remains PARTIAL; no south/east ground Ixora",
+      "soil_rects_m": [
+        [
+          17.45,
+          -22.7,
+          20.05,
+          -20.65
+        ],
+        [
+          15.5,
+          -21.28,
+          17.45,
+          -20.601
+        ]
+      ],
+      "drifts": [
+        {
+          "species": "Fatsia japonica",
+          "layer": "back",
+          "centers_m": [
+            [
+              17.9,
+              -21.05
+            ],
+            [
+              18.75,
+              -21.05
+            ],
+            [
+              19.6,
+              -21.05
+            ]
+          ]
+        },
+        {
+          "species": "Pittosporum tobira 'Wheeler's Dwarf'",
+          "layer": "mid",
+          "centers_m": [
+            [
+              17.9,
+              -21.65
+            ],
+            [
+              18.75,
+              -21.65
+            ],
+            [
+              19.6,
+              -21.65
+            ]
+          ]
+        },
+        {
+          "species": "Plectranthus 'Mona Lavender'",
+          "layer": "front",
+          "centers_m": [
+            [
+              17.9,
+              -22.3
+            ],
+            [
+              18.75,
+              -22.3
+            ],
+            [
+              19.6,
+              -22.3
+            ]
+          ]
+        },
+        {
+          "species": "Aspidistra elatior",
+          "layer": "edge",
+          "centers_m": [
+            [
+              15.75,
+              -20.95
+            ],
+            [
+              16.4,
+              -20.95
+            ],
+            [
+              17.05,
+              -20.95
+            ]
+          ]
+        }
+      ],
+      "shade_limit": "Aspidistra strip measures 2-3 h June rays before foliage shade; enclosure excludes neighbouring foliage so indirect-light applicability UNRESOLVED. Nursery review or measured foliage shade needed; no implied non-toxic or winter part-shade approval."
+    }
+  },
+  "lead_decisions": [
+    {
+      "id": "D1",
+      "decision": "lead decision 2026-10-06",
+      "reason": "lead decision 2026-10-06: stand-in model proportions wider than the species; canopy span held to the verified 4.6 m spread"
+    },
+    {
+      "id": "D2",
+      "decision": "lead decision 2026-10-06",
+      "reason": "Only geometry from ground to 2.0 m obstructs walking, consistent with render_support.blocked_openings passage height; whole canopy footprints falsely blocked head-clear routes."
+    },
+    {
+      "id": "D3",
+      "decision": "lead decision 2026-10-06",
+      "reason": "client decision 2026-10-05: east has lawn, paths and one tree only; layer scope is the beds actually built in north and west."
+    },
+    {
+      "id": "D4",
+      "decision": "lead decision 2026-10-06",
+      "reason": "Real young frangipani branches enter the living-east walking envelope at about 1.71 m. One tree in the lawn is the brief intent; exact centring is secondary to a clear door route. The long court axis offers relocation slack.",
+      "constraints": "Search the whole lawn, x within 0.5 m of the court centre line, y bounded by fence inner faces and plot; trunk and pit move together; same uniform scale, no rotation or mesh pruning; every guard retained."
+    },
+    {
+      "id": "north-garden-climber-2026-10-06",
+      "decision": "Cissus alata replaces Trachelospermum jasminoides on the north-garden trellis (client approved). Trachelospermum jasminoides stays recorded for the south garden (part sun).",
+      "recorded_by": "lead"
+    }
+  ],
+  "unplanted_alternates": [
+    {
+      "species": "Trachelospermum asiaticum",
+      "climbing_method": {
+        "value": "Twining",
+        "status": "VERIFIED"
+      },
+      "light": {
+        "value": "Full sun / Partial Shade",
+        "status": "PARTIAL"
+      },
+      "hardiness": {
+        "value": "7a-11b",
+        "status": "VERIFIED"
+      },
+      "source_url": {
+        "value": "https://plants.ces.ncsu.edu/plants/trachelospermum-asiaticum/",
+        "status": "VERIFIED"
+      },
+      "decision": "runner-up, not planted"
+    }
+  ]
+}

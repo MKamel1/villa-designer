@@ -34,11 +34,20 @@ def _islands(faces):
             a = parent[a]
         return a
     keys = []
+    rounded = {}
     for f in faces:
-        ks = [tuple(round(c * 10000) for c in v) for v in f]
+        ks = []
+        for v in f:
+            point = tuple(v)
+            if point not in rounded:
+                rounded[point] = tuple(round(c * 10000) for c in v)
+            ks.append(rounded[point])
         keys.append(ks[0])
+        root = find(ks[0])
         for k in ks[1:]:
-            parent[find(ks[0])] = find(k)
+            target = find(k)
+            parent[root] = target
+            root = target
     groups = {}
     for f, k in zip(faces, keys):
         groups.setdefault(find(k), []).append(f)
@@ -89,14 +98,42 @@ def _ear_clip(face):
     return out
 
 
+def _triangle_faces(faces):
+    """Immutable triangles keyed by exact live float bits and face boundaries."""
+    from .build_cache import immutable
+    lengths = tuple(len(face) for face in faces)
+    points = np.array([p for face in faces for p in face], dtype=float)
+    # Binary values retain signed zero, which matters to geometry content
+    # hashes even when coordinates compare numerically equal.
+    key = (lengths, points.shape, points.tobytes())
+
+    def compute():
+        if all(length == 3 for length in lengths):
+            result = points.reshape(-1,3,3)
+        else:
+            triangles = []
+            start = 0
+            for length in lengths:
+                face = points[start:start+length]
+                triangles.extend([(face[0], face[k], face[k+1]) for k in range(1,length-1)]
+                                 if length <= 4 else _ear_clip(face))
+                start += length
+            result = np.array(triangles, dtype=float).reshape(-1,3,3)
+        result.setflags(write=False)
+        return result
+    return immutable("face-triangles", key, compute)
+
+
 def _triangles(meshes):
-    tris, owner = [], []
-    for i, m in enumerate(meshes):
-        for f in m["faces"]:
-            ts = [(f[0], f[k], f[k + 1]) for k in range(1, len(f) - 1)] if len(f) <= 4 else _ear_clip(f)
-            tris.extend(ts)
-            owner.extend([i] * len(ts))
-    return np.array(tris, dtype=float).reshape(-1, 3, 3), np.array(owner, dtype=int)
+    # Each call owns fresh writable arrays; cached per-mesh geometry never
+    # leaks to a caller. Mesh order, face order and owner indices are unchanged.
+    triangles, owners = [], []
+    for index, mesh in enumerate(meshes):
+        array = _triangle_faces(mesh["faces"])
+        triangles.append(array)
+        owners.append(np.full(len(array), index, dtype=int))
+    return (np.concatenate(triangles) if triangles else np.empty((0,3,3)),
+            np.concatenate(owners) if owners else np.empty(0,dtype=int))
 
 
 class _Surfaces:
@@ -194,10 +231,16 @@ def _point_triangle_distance(p, t):
 def unsupported(scene, lay=None):
     meshes = scene["meshes"]
     tris, owner = _triangles(meshes)
-    S = _Surfaces(tris, owner)
+    all_surfaces = _Surfaces(tris, owner)
     is_item = np.array([m["group"] in ITEM_GROUPS for m in meshes])
     glass = np.array([m["material"].startswith("glass") for m in meshes])
     building = (~is_item[owner]) & (~glass[owner])
+    # Item triangles cannot ground an assembly. Restrict these repeated
+    # contact queries to the exact existing building mask, preserving all
+    # faces and tolerances; dense botanical triangles remain in island
+    # connectivity and in the separate prop support query below.
+    S = _Surfaces(tris[building], owner[building])
+    building = np.ones(len(S.t), dtype=bool)
     parts = {}
     for i, m in enumerate(meshes):
         if not is_item[i]:
@@ -232,6 +275,8 @@ def unsupported(scene, lay=None):
     grounded = {find(k) for k in keys if ok[k]}
     out = [(meshes[i]["id"], [round(float(v), 3) for v in parts[(i, k)][0]]) for (i, k) in keys
            if find((i, k)) not in grounded]
+    S = all_surfaces
+    building = (~is_item[owner]) & (~glass[owner])
     for p in scene.get("props", []):
         x, y, z = p["position"]
         if any(S.meets(S.up, x + dx, y + dy, z) for dx, dy in ((0, 0), (0.1, 0), (-0.1, 0), (0, 0.1), (0, -0.1))):

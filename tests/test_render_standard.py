@@ -14,7 +14,14 @@ SCENE = VR.build()
 # Audited presentation finishes, including the explicitly authored luminous
 # surfaces. A new CAD fallback or unassigned material fails this list.
 ALLOWED_MATERIALS = {
-    "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",  # round-3 garden finishes
+    "north-pale-gravel", "north-light-stone",  # G4d reviewed ASSUMED mineral appearances
+    "g6-jasmine-leaf", "g6-petrea-leaf", "g6-pittosporum-leaf", "g6-leaf-vein",
+    "g6-wire-tie", "g6-loquat-leaf", "g6-outdoor-timber", "g6-shrub-wood",  # G6b reviewed ASSUMED appearances
+    "g6-lavender-flower", "g6-white-flower", "g6-bowl-glaze", "g6-outdoor-cushion",  # G6 ASSUMED appearances
+    "artificial-grass", "stepping-stone", "trellis", "bougainvillea-bract",
+    "terracotta-red-glaze", "garden-soil", "garden-foliage", "star-jasmine-flower", "star-jasmine-leaf",  # round-3 garden finishes
+    "strelitzia-foliage", "stone-substrate", "shade-variegation", "grape-ivy-leaf",
+    "top-trough-coating", "top-rosemary-foliage", "top-aloe-foliage",  # G3 explicitly ASSUMED appearances
     "plaster-warm-white", "ceiling-white", "travertine", "oak-floor", "marble-ensuite", "marble-bath", "marble-wet",
     "marble-white", "walnut", "walnut-grain-x", "walnut-grain-y", "oak", "oak-grain-x", "greige-lacquer", "boucle", "linen", "sage-fabric",
     "charcoal-fabric", "taupe-fabric", "bedding-white", "throw-taupe", "rug", "leather-brown", "brass",
@@ -30,6 +37,31 @@ ALLOWED_MATERIALS = {
 
 
 class RenderStandard(unittest.TestCase):
+    def test_g2f_real_steps_and_ground_siblings_have_no_paved_soffits(self):
+        from copy import deepcopy
+        import json
+        from pathlib import Path
+        from archpipe.concept.garden_render_review import downward_ground_findings,normal
+        from archpipe.villa_render_contract import validate_scene,mesh_batch_key
+        frozen=json.loads((Path(__file__).parent/'fixtures/garden-g2f-before.json').read_text())
+        bad={'meshes':frozen['shell']+frozen['ground_siblings'],'materials':VR.M}
+        self.assertEqual(len(downward_ground_findings(bad)),3)
+        self.assertEqual(downward_ground_findings(SCENE),[])
+        self.assertEqual(validate_scene(SCENE),[])
+        # Independent class mutation and renamed floor-only material.
+        renamed=deepcopy(frozen['shell'][0]);renamed['id']='another-sloping-deck';renamed['material']='other-floor'
+        for f in renamed['faces']:
+            for q in f:q[2]+=.1*q[0]
+        self.assertTrue(downward_ground_findings({'meshes':[renamed],'materials':{'other-floor':{'surface_use':'ground-only'}}}))
+        clean=deepcopy(SCENE);stone=next(m for m in clean['meshes'] if m['id']=='landscape-stone-study-00')
+        self.assertIsNone(mesh_batch_key(stone,'principled'))
+        for i,face in enumerate(stone['faces']):
+            if normal(face)[2]<-.7:self.assertEqual(stone['face_materials'][i],'stone-substrate')
+        stone['face_materials']=[stone['material']]*len(stone['faces'])
+        self.assertTrue(any(stone['id'] in f for f in validate_scene(clean)))
+        stone['face_materials']=[]
+        self.assertTrue(any('one registered finish per authored face' in f for f in validate_scene(clean)))
+
     def test_c4_frozen_plant_support_datums(self):
         from copy import deepcopy
         import json
@@ -116,6 +148,8 @@ class RenderStandard(unittest.TestCase):
             self.assertTrue(members, kind)
             for m in members:
                 Part(kind, m["faces"], ("x", "y", "z"), m["material"], "authored-procedural")
+        # G1 removes the former north trellis because it occupied the full
+        # east court. The retained west assembly still needs real members.
         self.assertGreaterEqual(len(by_id["landscape-trellis-north"]["faces"]), 48)
         cases = [m for m in SCENE["meshes"] if m["part_kind"] == "suitcase" and m["id"].startswith("furn-")]
         self.assertTrue(cases)
@@ -293,7 +327,7 @@ class RenderStandard(unittest.TestCase):
         from archpipe.concept import villa_landscape as LAND, revit_spec as RS, render_support as S
         sp = RS.build(VR.R.design("D1"))
         meshes, props, notes, plan = LAND.build(sp)
-        self.assertEqual(set(plan["paths"]), {"dining", "living-north", "living-east", "lounge-west", "study"})
+        self.assertEqual(set(plan["paths"]), {"dining", "living-east", "living-south", "lounge-north", "study", "gate-link"})
         for m in meshes:
             for face in m["faces"]:
                 for x, y, _ in face:
@@ -320,12 +354,18 @@ class RenderStandard(unittest.TestCase):
             self.assertTrue(any(x0 - 0.001 <= d["x"] <= x1 + 0.001 and
                                 y0 - 0.001 <= d["y"] <= y1 + 0.001
                                 for x0, y0, x1, y1 in plan["paths"].values()), d)
-        # round 3 (client 2026-09-29) replaced the round-2 planting; test_landscape.py holds its species guards
-        self.assertTrue({"sf_bauhinia", "sf_frangipani", "sf_egg_chair", "sf_wooden_bench"} <= {p["asset"] for p in props})
+        # G1's client-agreed palette excludes Bauhinia and east furniture.
+        assets = {p["asset"] for p in props}
+        self.assertTrue({"sf_frangipani", "sf_wooden_bench"} <= assets)
+        self.assertNotIn("sf_bauhinia",assets)
+        self.assertFalse({"sf_egg_chair", "outdoor_table_chair_set_01"} & assets)
+        for prop in props:
+            if prop["asset"] in ("sf_egg_chair", "outdoor_table_chair_set_01"):
+                self.assertLess(LAND._rect(prop)[2],LAND.EAST[0])
         self.assertTrue(all(p["position"][2] >= LAND.GROUND for p in props))
         self.assertEqual(S.unsupported(SCENE), [])
         self.assertEqual(S.blocked_openings(SCENE), [])
-        self.assertTrue(any("09:00-17:00" in n and "direct hours" in n for n in notes))   # round 3 per-bed sun screen
+        self.assertTrue(any("Hourly June scene ray-cast" in n and "UTC+02" in n for n in notes))   # round 3 per-bed sun screen
         self.assertTrue(any("Drip" in n or "drip" in n for n in notes))
 
     def test_lighting_spec_needs_no_render_ceiling_moves(self):
@@ -362,6 +402,22 @@ class RenderStandard(unittest.TestCase):
         self.assertEqual({m.get("material") for m in SCENE["meshes"]} - ALLOWED_MATERIALS, set())
         self.assertTrue(all(m["material"] in SCENE["materials"] for m in SCENE["meshes"]))
         self.assertEqual(set(SCENE["materials"]) - ALLOWED_MATERIALS, set())
+
+    def test_g3_frozen_finish_consumer_and_renamed_missing_registration(self):
+        import json
+        from pathlib import Path
+        from unittest.mock import patch
+        old=set(json.loads((Path(__file__).parent/'fixtures/garden-g3-material-list-before.json').read_text()))
+        self.test_every_mesh_has_an_explicit_finish()
+        # Execute the actual consumer guard with its real prior input.
+        with patch.dict(globals(),ALLOWED_MATERIALS=old):
+            with self.assertRaises(AssertionError):
+                self.test_every_mesh_has_an_explicit_finish()
+        sibling=dict(meshes=[dict(material='unregistered-sibling-finish')],
+                     materials={'unregistered-sibling-finish':{}})
+        with patch.dict(globals(),SCENE=sibling):
+            with self.assertRaises(AssertionError):
+                self.test_every_mesh_has_an_explicit_finish()
 
     def test_parents_pillows_are_seated_and_lean_against_headboard(self):
         from archpipe.concept import villa_furnish as F
