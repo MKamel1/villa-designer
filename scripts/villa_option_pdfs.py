@@ -261,7 +261,17 @@ def main(argv=None) -> int:
         path = OPT / "options-spec.json"
         path.write_text(json.dumps([RS.build(l) for l in make()], indent=1), encoding="utf-8")
         print(path)
-        return 0
+        from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+        stage_record = OPT / "villa-option-pdfs.stage-result.json"
+        write_stage_result(
+            "villa-option-pdfs",
+            record_path=stage_record,
+            inputs=[],
+            outputs=[path],
+            exit_code=0,
+            metadata={"mode": "spec"},
+        )
+        return enforce_clean_verdict(True, exit_code=1)
     import matplotlib
     matplotlib.use("Agg")
     from matplotlib.backends.backend_pdf import PdfPages
@@ -283,7 +293,29 @@ def main(argv=None) -> int:
             checks_page(pdf, lay, res, rb, op)
         made.append(path)
         print(path, "built:", rb["built"], "failed:", len(rb["failed"]))
-    return 0
+    failed_items = [
+        f"{lay['id']}: {f}"
+        for lay in make()
+        for f in (rbs.get(lay["id"]) or {}).get("failed", [])
+    ]
+    bad = len(failed_items) > 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = OPT / "villa-option-pdfs.stage-result.json"
+    inputs = [p for p in [OPT / "readback.json", OPT / "options-spec.json", *sorted(OPT.glob("*.png"))] if p.is_file()]
+    write_stage_result(
+        "villa-option-pdfs",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=made,
+        exit_code=1 if bad else 0,
+        metadata={
+            "options_made": [p.name for p in made],
+            "failed_count": len(failed_items),
+            "failed": failed_items,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict({"passed": not bad, "failed": failed_items}, exit_code=1)
 
 
 if __name__ == "__main__":

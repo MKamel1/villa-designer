@@ -197,7 +197,38 @@ def main(argv=None) -> int:
         fig.suptitle("D1 furnished: what changed and what the layout needs from you", fontsize=11)
         pdf.savefig(fig); plt.close(fig)
     print(path, {k: v["status"] for k, v in res.items()})
-    return 0
+    failed_checks = [
+        f"{k}: {'; '.join(v['problems']) if v.get('problems') else v['status']}"
+        for k, v in res.items()
+        if v.get("status") == "fail"
+    ]
+    bad = len(failed_checks) > 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = OUT / "villa-furnish-pdf.stage-result.json"
+    inputs = [p for p in [OUT / "readback.json", OUT / "options-spec.json", ROOT / "spec/villa-site.yaml"] if p.is_file()]
+    write_stage_result(
+        "villa-furnish-pdf",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[path],
+        exit_code=1 if bad else 0,
+        metadata={
+            "checks": {k: v["status"] for k, v in res.items()},
+            "failed_checks": failed_checks,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {
+            "passed": not bad,
+            "failures": failed_checks,
+            "checks": [
+                {"check": k, "status": v["status"].upper(), "passed": v.get("status") != "fail"}
+                for k, v in res.items()
+            ],
+        },
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":
