@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import copy
 from dataclasses import dataclass, field
+import functools
 import io
 import json
 import math
@@ -1779,6 +1780,42 @@ def check_physical_part_garment_proxy(faces: list[Any]) -> physical_part.Part:
     )
 
 
+@functools.lru_cache(maxsize=1)
+def _cached_villa_layout() -> dict[str, Any]:
+    return _d1_round2_fixtures()[2]
+
+
+@functools.lru_cache(maxsize=1)
+def _cached_spec() -> dict[str, Any]:
+    return _d1_round2_fixtures()[0]
+
+
+@functools.lru_cache(maxsize=1)
+def _cached_furnish_layout() -> list[dict[str, Any]]:
+    return villa_furnish.layout(_cached_villa_layout())
+
+
+@functools.lru_cache(maxsize=1)
+def _cached_landscape_build() -> tuple[Any, list[dict[str, Any]], Any, dict[str, Any]]:
+    return villa_landscape.build(_cached_spec(), _cached_villa_layout())
+
+
+@functools.lru_cache(maxsize=1)
+def _cached_lighting_design() -> list[Any]:
+    return villa_lighting.design(_cached_villa_layout())
+
+
+@functools.lru_cache(maxsize=1)
+def _cached_parking_layout() -> dict[str, Any]:
+    return copy.deepcopy(villa_parking.options()[0])
+
+
+@functools.lru_cache(maxsize=1)
+def _cached_parking_spec() -> dict[str, Any]:
+    return revit_spec.build(_cached_parking_layout())
+
+
+@functools.lru_cache(maxsize=1)
 def _d1_round2_fixtures() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
     lay = villa_r11.design("D1")
     spec = revit_spec.build(lay)
@@ -2175,7 +2212,7 @@ def check_villa_route_width_stair_void(lay: dict[str, Any], min_width_m: float =
     return width
 
 
-_lay_route_pinch_bad = copy.deepcopy(villa_parking.options()[0])
+_lay_route_pinch_bad = copy.deepcopy(_cached_parking_layout())
 _r_pinch = _lay_route_pinch_bad["rooms"]
 _r_pinch["kids-a"]["rect"][0] = _r_pinch["study-game"]["rect"][2] = 9.227
 _r_pinch["gallery-end"]["rect"] = [8.657, -27.371, 9.227, -26.371]
@@ -2187,7 +2224,7 @@ register_guard(
     name="villa_route_width_stair_void",
     lesson_ids=("l0512-way-from-stair", "l0512"),
     real_case=case(_lay_route_pinch_bad),
-    clean_case=case(villa_parking.options()[0]),
+    clean_case=case(_cached_parking_layout()),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
@@ -2208,15 +2245,16 @@ def check_villa_furnish_door_wall_clearance(
     return door_res
 
 
-_lay_door_wall_bad = copy.deepcopy(villa_r11.design("D1"))
+_lay_d1_base = _cached_villa_layout()
+_lay_door_wall_bad = copy.deepcopy(_lay_d1_base)
 _lay_door_wall_bad["rooms"]["parents-dressing"]["door_at"]["parents-bed"] = 22.10
 
 register_guard(
     fn=check_villa_furnish_door_wall_clearance,
     name="villa_furnish_door_wall_clearance",
     lesson_ids=("l0557-door-can-run", "l0557", "l0720-codex-fix-cut", "l0720"),
-    real_case=case(None, _lay_door_wall_bad),
-    clean_case=case(None, villa_r11.design("D1")),
+    real_case=case(_cached_furnish_layout(), _lay_door_wall_bad),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
@@ -2237,8 +2275,7 @@ def check_villa_furnish_route_corner_disc(
     return routes_res
 
 
-_lay_d1_base = villa_r11.design("D1")
-_items_disc_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_disc_bad = copy.deepcopy(_cached_furnish_layout())
 _by_id_disc = {it["id"]: it for it in _items_disc_bad}
 _by_id_disc["pd-hang-2"]["cy"] += 0.24
 
@@ -2247,7 +2284,7 @@ register_guard(
     name="villa_furnish_route_corner_disc",
     lesson_ids=("l0576-square-body-failed", "l0576", "l0531-body-rounded-down", "l0531"),
     real_case=case(_items_disc_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
@@ -2268,7 +2305,7 @@ def check_villa_furnish_kitchen_run_modules(
     return k_res
 
 
-_items_k_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_k_bad = copy.deepcopy(_cached_furnish_layout())
 _by_id_k = {it["id"]: it for it in _items_k_bad}
 _by_id_k["dk-run"]["modules"][-1] = ("counter", 0.4)
 
@@ -2277,7 +2314,7 @@ register_guard(
     name="villa_furnish_kitchen_run_modules",
     lesson_ids=("l0591-run-s-modules", "l0591"),
     real_case=case(_items_k_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
@@ -2307,9 +2344,7 @@ _draft_searsia_prop = [
         "scale": 0.7,
     }
 ]
-_meshes_land, _props_land, _notes_land, _plan_land = villa_landscape.build(
-    revit_spec.build(_lay_d1_base), _lay_d1_base
-)
+_meshes_land, _props_land, _notes_land, _plan_land = _cached_landscape_build()
 
 register_guard(
     fn=check_villa_landscape_prop_room_extent,
@@ -2513,84 +2548,16 @@ def check_villa_furnish3d_opening_spec_id(
     return problems
 
 
-_spec_d1_wp5 = revit_spec.build(_lay_d1_base)
-_spec_d1_wp5["furniture"] = villa_furnish3d.spec(_lay_d1_base)
+_spec_d1_wp5 = _round2_spec
 _hatch_wp5 = _spec_d1_wp5["hatches"][0]
 _hatch_z_wp5 = revit_spec.LEVELS_Z[_hatch_wp5["level"]]
 _suite_door_wp5 = next(
     d for d in _spec_d1_wp5["doors"] if set(d["rooms"]) == {"parents-bed", "parents-dressing"}
 )
 
-_readback_base = {
-    "details": [
-        {
-            "mark": e["mark"],
-            "category": e["category"],
-            "comments": e["comments"],
-            "bbox_mm": [v * 1000 for v in e["bbox"]],
-        }
-        for e in villa_furnish3d.round2_elements(_spec_d1_wp5)
-    ],
-    "hatches": [
-        {
-            "mark": None,
-            "category": "Rectangular Straight Wall Opening",
-            "comments": _hatch_wp5["closure"],
-            "host_wall": 81,
-            "expected_host_wall": 81,
-            "host_line_mm": [[3617, _hatch_wp5["y"] * 1000], [15412, _hatch_wp5["y"] * 1000]],
-            "bbox_mm": [
-                _hatch_wp5["x0"] * 1000,
-                (_hatch_wp5["y"] - 0.1) * 1000,
-                (_hatch_z_wp5 + _hatch_wp5["sill"]) * 1000,
-                _hatch_wp5["x1"] * 1000,
-                (_hatch_wp5["y"] + 0.1) * 1000,
-                (_hatch_z_wp5 + _hatch_wp5["head"]) * 1000,
-            ],
-        }
-    ],
-    "doors": [
-        {
-            "rooms": ["kitchen", "dirty-kitchen"],
-            "width": 1.2,
-            "mark": "kitchen-dirty-sliding",
-            "category": "Doors",
-            "comments": "telescopic-pocket-3; 3 leaves",
-            "bbox_mm": [0] * 6,
-        },
-        {
-            "rooms": _suite_door_wp5["rooms"],
-            "width": _suite_door_wp5["width"],
-            "category": "Doors",
-            "bbox_mm": [0] * 6,
-            "point_mm": [_suite_door_wp5["x"] * 1000, _suite_door_wp5["y"] * 1000],
-        },
-    ],
-    "windows": [
-        {
-            "mark": f"window-study-game-{w['x']:.3f}-{w['y']:.3f}",
-            "category": "Windows",
-            "bbox_mm": [0] * 6,
-            "sill": w["sill"],
-            "height": w["height"],
-            "width": w["width"],
-        }
-        for w in _spec_d1_wp5["windows"]
-        if w.get("room") == "study-game"
-    ],
-    "furniture": [
-        {
-            "mark": f["mark"],
-            "bbox": f["envelope"],
-            "comments": f["type"],
-            "bbox_mm": [
-                (v + (revit_spec.LEVELS_Z[f["level"]] if k in (2, 5) else 0)) * 1000
-                for k, v in enumerate(f["envelope"])
-            ],
-        }
-        for f in _spec_d1_wp5["furniture"]
-    ],
-}
+_readback_base = copy.deepcopy(_round2_clean_rb)
+_readback_base["hatches"][0]["mark"] = None
+_readback_base["hatches"][0]["category"] = "Rectangular Straight Wall Opening"
 
 _readback_opening_bad = copy.deepcopy(_readback_base)
 _readback_opening_clean = copy.deepcopy(_readback_base)
@@ -2654,8 +2621,8 @@ def check_revit_spec_clearance_problems(
     return problems
 
 
-_lay_p_opt = copy.deepcopy(villa_parking.options()[0])
-_sp_p_opt = revit_spec.build(_lay_p_opt)
+_lay_p_opt = _cached_parking_layout()
+_sp_p_opt = _cached_parking_spec()
 _sp_clearance_bad = copy.deepcopy(_sp_p_opt)
 _cross_wall = next(
     w for w in _sp_clearance_bad["walls"]
@@ -2690,7 +2657,7 @@ def check_villa_furnish_kitchen_work_aisle(
     return k.get("problems", [])
 
 
-_items_aisle_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_aisle_bad = copy.deepcopy(_cached_furnish_layout())
 next(i for i in _items_aisle_bad if i["id"] == "k-island")["cy"] += 0.05
 
 register_guard(
@@ -2698,7 +2665,7 @@ register_guard(
     name="villa_furnish_kitchen_work_aisle",
     lesson_ids=("l0536-seating-card-assumed", "l0536"),
     real_case=case(_items_aisle_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=[],
     tier=2,
@@ -2719,7 +2686,7 @@ def check_villa_furnish_stair_foot_reachable(
     return r.get("problems", [])
 
 
-_items_stair_foot_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_stair_foot_bad = copy.deepcopy(_cached_furnish_layout())
 _items_stair_foot_bad.append(
     villa_furnish.item("console", "hall-b", "sideboard", 10.1, -28.0, 90, w=1.2, d=0.45, h=0.8, why="x", level="B")
 )
@@ -2729,7 +2696,7 @@ register_guard(
     name="villa_furnish_stair_foot_reachable",
     lesson_ids=("l0542-stair-flight-counted", "l0542"),
     real_case=case(_items_stair_foot_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=[],
     tier=2,
@@ -2750,7 +2717,7 @@ def check_villa_furnish_principal_window_reachable(
     return r.get("problems", [])
 
 
-_items_win_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_win_bad = copy.deepcopy(_cached_furnish_layout())
 _ids_win_bad = {it["id"]: it for it in _items_win_bad}
 _items_win_bad.remove(_ids_win_bad["pb-vanity"])
 _items_win_bad.append(
@@ -2764,7 +2731,7 @@ register_guard(
     name="villa_furnish_principal_window_reachable",
     lesson_ids=("l0566-principal-bedroom-window", "l0566"),
     real_case=case(_items_win_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=[],
     tier=2,
@@ -2785,7 +2752,7 @@ def check_villa_furnish_pocket_door_approach(
     return r.get("problems", [])
 
 
-_items_pocket_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_pocket_bad = copy.deepcopy(_cached_furnish_layout())
 _items_pocket_bad.append(
     villa_furnish.item(
         "chest", "parents-entry", "sideboard", 18.977, -26.95, 0, w=0.9, d=0.45, h=0.8, why="x", level="GF"
@@ -2797,7 +2764,7 @@ register_guard(
     name="villa_furnish_pocket_door_approach",
     lesson_ids=("l0570-pocket-door-gave", "l0570"),
     real_case=case(_items_pocket_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=[],
     tier=2,
@@ -2818,7 +2785,7 @@ def check_villa_furnish_inside_room_boundary(
     return ir
 
 
-_items_inside_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_inside_bad = copy.deepcopy(_cached_furnish_layout())
 next(i for i in _items_inside_bad if i["id"] == "kb-desk")["cy"] = -23.4
 
 register_guard(
@@ -2826,7 +2793,7 @@ register_guard(
     name="villa_furnish_inside_room_boundary",
     lesson_ids=("l0551-furniture-placed-against", "l0551"),
     real_case=case(_items_inside_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
@@ -2847,7 +2814,7 @@ def check_villa_furnish_bedside_zone_a(
     return c
 
 
-_items_bedside_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_bedside_bad = copy.deepcopy(_cached_furnish_layout())
 _pb_bedside = next(i for i in _items_bedside_bad if i["id"] == "pb-bedside")
 _pb_bedside["cy"] += 0.9
 
@@ -2856,7 +2823,7 @@ register_guard(
     name="villa_furnish_bedside_zone_a",
     lesson_ids=("l0017-desk-chair-occupies", "l0017"),
     real_case=case(_items_bedside_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
@@ -2876,7 +2843,7 @@ def check_revit_spec_wp1_detail_constraints(
     return errors
 
 
-_spec_wp1_bad = copy.deepcopy(revit_spec.build(_lay_d1_base))
+_spec_wp1_bad = copy.deepcopy(_cached_spec())
 _spec_wp1_bad["ventilation"][0]["duct_route"][-1] = _spec_wp1_bad["ventilation"][0]["fan"]
 
 register_guard(
@@ -2884,7 +2851,7 @@ register_guard(
     name="revit_spec_wp1_detail_constraints",
     lesson_ids=("l0849-dirty-kitchen-duct", "l0849"),
     real_case=case(_lay_d1_base, _spec_wp1_bad),
-    clean_case=case(_lay_d1_base, revit_spec.build(_lay_d1_base)),
+    clean_case=case(_lay_d1_base, _cached_spec()),
     expected_real=ValueError,
     expected_clean=[],
     tier=2,
@@ -2905,7 +2872,7 @@ def check_villa_lighting_grooming_task(
     return failed
 
 
-_fx_lighting_clean = villa_lighting.design(_lay_d1_base)
+_fx_lighting_clean = _cached_lighting_design()
 _fx_lighting_bad = [
     f for f in _fx_lighting_clean
     if not (
@@ -3265,7 +3232,7 @@ def check_villa_furnish_room_route_connectivity(
     return routes
 
 
-_items_route_conn_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_route_conn_bad = copy.deepcopy(_cached_furnish_layout())
 _by_id_route_conn = {it["id"]: it for it in _items_route_conn_bad}
 _by_id_route_conn["ka-wardrobe"]["cx"] = 13.4
 
@@ -3274,7 +3241,7 @@ register_guard(
     name="villa_furnish_room_route_connectivity",
     lesson_ids=("l0528-20-mm-grid", "l0528"),
     real_case=case(_items_route_conn_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
@@ -3295,7 +3262,7 @@ def check_villa_furnish_coffee_table_clearance(
     return clearances
 
 
-_items_coffee_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_coffee_bad = copy.deepcopy(_cached_furnish_layout())
 _by_id_coffee = {it["id"]: it for it in _items_coffee_bad}
 _l_sofa = _by_id_coffee["lounge-sofa"]
 _l_coffee = _by_id_coffee["lounge-coffee"]
@@ -3306,7 +3273,7 @@ register_guard(
     name="villa_furnish_coffee_table_clearance",
     lesson_ids=("l0534-corner-not-side", "l0534"),
     real_case=case(_items_coffee_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,
@@ -3547,7 +3514,7 @@ def check_villa_furnish_column_clearance(
     return col
 
 
-_items_column_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_column_bad = copy.deepcopy(_cached_furnish_layout())
 next(i for i in _items_column_bad if i["id"] == "kb-desk")["cx"] = 15.0
 
 register_guard(
@@ -3555,7 +3522,7 @@ register_guard(
     name="villa_furnish_column_clearance",
     lesson_ids=("l0013-dropping-unknown-chairs", "l0013"),
     real_case=case(_items_column_bad, _lay_d1_base),
-    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    clean_case=case(_cached_furnish_layout(), _lay_d1_base),
     expected_real=ValueError,
     expected_clean=None,
     tier=2,

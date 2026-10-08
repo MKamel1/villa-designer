@@ -21,6 +21,7 @@ Example Usage:
 from __future__ import annotations
 
 import ast
+import functools
 import inspect
 import io
 from pathlib import Path
@@ -29,6 +30,7 @@ import sys
 import tempfile
 import textwrap
 import types
+from typing import Any
 import unittest
 import uuid
 import zipfile
@@ -59,6 +61,20 @@ from archpipe.guard_registry import (
     report_uncovered_lessons,
     verify_tier3_review_steps,
 )
+
+_GUARD_CASE_CACHE: dict[tuple[str, str], Any] = {}
+_orig_run_case = RegisteredGuard.run_case
+
+
+@functools.wraps(_orig_run_case)
+def _memoized_run_case(self: RegisteredGuard, case_type: str = "real") -> Any:
+    key = (self.name, case_type)
+    if key not in _GUARD_CASE_CACHE:
+        _GUARD_CASE_CACHE[key] = _orig_run_case(self, case_type)
+    return _GUARD_CASE_CACHE[key]
+
+
+RegisteredGuard.run_case = _memoized_run_case
 
 
 class TestGuardRegistry(unittest.TestCase):
