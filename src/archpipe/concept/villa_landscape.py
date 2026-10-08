@@ -841,60 +841,11 @@ def _paddle_clump(identifier, species, center, ground, data, *, bed, layer):
 
 
 def _botanical_clump(identifier, species, center, ground, data, *, bed, layer):
-    """Authored leaves on connected petioles, not an imported species stand-in.
-
-    Aspidistra has basal lanceolate blades; Strelitzia has longer upright
-    petioles and broad paddle blades. Young size is authored only in the
-    palette. Photographic likeness and nursery supply need lead review.
-    """
+    """Species habit construction shared by all garden placements."""
     if species == "Strelitzia reginae":
         return _paddle_clump(identifier,species,center,ground,data,bed=bed,layer=layer)
-    row = require_species(species, data)
-    assumed = row["placement_assumptions"]["procedural-clump"]
-    height, spread = assumed["height"]["range_m"][0], assumed["spread"]["range_m"][0]
-    faces = []
-    leaf_indices = []
-    for index in range(10):
-        angle = index*2*pi/10
-        c, sn = cos(angle), sin(angle)
-        blade_base = .28 if species == "Aspidistra elatior" else .60
-        rings = []
-        # Horizontal sections describe a swept, tapered blade with a
-        # midrib bend. The four points close real thickness, in order.
-        for t, width in ((0,.003),(.2,.08),(.55,.10),(.85,.06),(1,.002)):
-            z = blade_base + t*(1-blade_base)
-            reach = .03 + .14*t + .035*sin(pi*t)
-            rings.append([[c*reach-sn*width,sn*reach+c*width,z],
-                          [c*(reach-.003),sn*(reach-.003),z],
-                          [c*reach+sn*width,sn*reach-c*width,z],
-                          [c*(reach+.003),sn*(reach+.003),z]])
-        start=len(faces)
-        faces += [rings[0][::-1],rings[-1]]
-        for a,b in zip(rings,rings[1:]):
-            faces += [[a[k],a[(k+1)%4],b[(k+1)%4],b[k]] for k in range(4)]
-        leaf_indices.extend(range(start,len(faces)))
-        stem_rings = [[[c*.03 + .003*cos(k*2*pi/8),sn*.03 + .003*sin(k*2*pi/8),zz]
-                       for k in range(8)] for zz in (0,blade_base+.02)]
-        a,b = stem_rings
-        faces += [a[::-1],b] + [[a[k],a[(k+1)%8],b[(k+1)%8],b[k]] for k in range(8)]
-    # Normalize the authored appearance to its recorded young size; this
-    # does not edit an external mesh or introduce another species authority.
-    points = [q for f in faces for q in f]
-    lo = [min(q[i] for q in points) for i in range(3)]
-    hi = [max(q[i] for q in points) for i in range(3)]
-    plan_scale = spread/max(hi[i]-lo[i] for i in (0,1))
-    faces = [[[center[0] + (q[0]-(hi[0]+lo[0])/2)*plan_scale,
-               center[1] + (q[1]-(hi[1]+lo[1])/2)*plan_scale,
-               ground + (q[2]-lo[2])*height/(hi[2]-lo[2])] for q in f] for f in faces]
-    # Swept blade rings are not coplanar quads. Triangulate their actual
-    # closed surfaces before exporting; no render-side geometry repair.
-    source_faces=faces
-    leaf_indices=[j for j,(i,_) in enumerate((i,k) for i,f in enumerate(source_faces) for k in range(1,len(f)-1)) if i in leaf_indices]
-    faces = [[face[0],face[k],face[k+1]] for face in faces for k in range(1,len(face)-1)]
-    mesh = _mesh(identifier,"dressing","garden-foliage",faces,
-                 "ASSUMED authored young " + species + " botanical appearance; photographic likeness UNVERIFIED; care: " + row["source_url"]["value"],kind="plant-clump")
-    mesh.update(species=species,center=center,spread_m=row["spread"]["range_m"][1],bed=bed,planting_layer=layer,root_z_m=ground,leaf_face_indices=leaf_indices)
-    return mesh
+    from .garden_g4e import clump
+    return clump(identifier,species,center,ground,data,bed=bed,layer=layer)
 
 
 def _top_clump(identifier, species, center, soil_z, data, bed):

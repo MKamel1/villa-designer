@@ -79,7 +79,9 @@ class HangingRetreat(unittest.TestCase):
         self.assertEqual(view['visibility_targets'],targets)
         self.assertEqual(subject_visibility_findings(view,self.scene),[])
         rows=subject_visibility_evidence(view,self.scene)
-        self.assertEqual([r['visible'] for r in rows],[8,12,13])
+        # G4e denser Rhapis requires the independently previewed lounge-nook
+        # camera; the original majority-ray threshold remains unchanged.
+        self.assertEqual([r['visible'] for r in rows],[7,12,9])
         # Rename and translate real failing geometry: no villa IDs/coordinates
         # participate in the ray guard's rule.
         sibling=deepcopy(frozen)

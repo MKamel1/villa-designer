@@ -633,6 +633,52 @@
         "test_integrated_caption_uses_measured_camera_side_without_waiver",
         "test_integrated_candidate_retains_reviewed_preview_geometry"
       ]
+    },
+    {
+      "lesson_id": "garden-g4e-shade-habit",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "species-specific fibrous multi-cane fans and independent arched basal laminae; all shared placement builders migrated",
+      "check": "archpipe.concept.garden_g4e.habit_findings",
+      "stage": "landscape candidate, scene contract and portable verification",
+      "proof_file": "tests/test_garden_g4e.py",
+      "proofs": [
+        "test_actual_old_habits_fire_and_all_shared_builder_siblings_stay_quiet",
+        "test_actual_cane_tip_and_basal_stalk_mutations_fire",
+        "test_identity_boundary_and_translated_other_villa_generalise"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4e-evening-view",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "bounded camera-only search; historical alias; numeric view sequence uniqueness",
+      "check": "archpipe.concept.garden_g4e.foreground_fixture_findings",
+      "stage": "garden camera validation and scene contract",
+      "proof_file": "tests/test_garden_g4e.py",
+      "proofs": [
+        "test_real_foreground_fitting_camera_mutation_and_clear_other_name",
+        "test_view_number_alias_and_duplicate_sibling_fail_closed",
+        "test_fixture_record_material_basis_and_locked_inputs_unchanged"
+      ]
+    },
+    {
+      "lesson_id": "garden-g4e-neutral-emission",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "neutral context disables luminous shaders and records identical diagnostic fill separately from design lights",
+      "check": "scripts.garden_g6_preview.disable_material_emission",
+      "stage": "neutral preview preparation",
+      "proof_file": "tests/test_garden_g4e.py",
+      "proofs": [
+        "test_neutral_context_disables_actual_emission_and_principled_sibling"
+      ]
     }
   ]
 }

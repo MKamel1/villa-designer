@@ -1,5 +1,11 @@
 # G4d — brighten the north garden
 
+2026-10-08 current-state note: [G4e](garden-g4e-report.md) renumbers the north
+evening view to v42, records its v41 alias, rebuilds Rhapis/Aspidistra
+appearance and corrects cameras. The G4d fixtures, aims, finishes and sky
+remain unchanged. G4e reproduces the retained evening QA failure; the G4d
+diagnostic evidence below remains historical.
+
 Client approval 2026-10-07: pale gravel, light stepping stones and soft palm
 uplighting. North means the street-side sunken garden, model negative x;
 the corrected enclosure study records approximately 1.1 hours of direct June

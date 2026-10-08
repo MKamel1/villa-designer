@@ -118,16 +118,15 @@ class PresentationDecisions(unittest.TestCase):
 
     def test_retirements_and_final_candidate_keep_diagnostic_definitions(self):
         from archpipe.villa_render_contract import presentation_view_ids
-        retired = {'v07-terrace-dusk', 'v38-north-garden-floor-bed'}
+        retired = {'v07-terrace-dusk', 'v38-north-garden-floor-bed', 'v42-north-garden-evening'}
         self.assertEqual({k for k, v in self.views.items() if v.get('presentation_retired')}, retired)
         for review in (False, True):
             self.assertFalse(retired.intersection(presentation_view_ids(self.views, review=review)))
         for ident in retired:
-            self.assertIn('Lead decision 2026-10-07', self.views[ident]['presentation_decision'])
+            self.assertRegex(self.views[ident]['presentation_decision'], r'^Lead decision 2026-10-0[78]')
         for ident in ('v19-garden-facade', 'v40-south-garden-espalier',
                       'v41-south-garden-terrace', 'v36-north-garden',
-                      'v37-north-garden-lounge', 'v39-north-garden-hanging-retreat',
-                      'v41-north-garden-evening'):
+                      'v37-north-garden-lounge', 'v39-north-garden-hanging-retreat'):
             self.assertIn(ident, presentation_view_ids(self.views))
         proposal = json.loads(Path('knowledge/garden-views-terrace-proposal.json').read_text())
         view = self.views['v41-south-garden-terrace']
@@ -140,7 +139,10 @@ class PresentationDecisions(unittest.TestCase):
         import hashlib
         # Frozen by value from the accepted neutral preview receipt, rather
         # than regenerated from the current scene or an optional output path.
-        reviewed = '9e03d4414b2f9c21e4349e03bcb9cb4bc80452ace9ccff8d1474098069f3a01f'
+        # G4e replaced the Rhapis and Aspidistra appearances; G4f rebuilt the
+        # nine Aspidistra as the oval loose fountain. Lead accepted the G4f
+        # neutral previews (out/garden-g4f/after-oval-*) on 2026-10-08.
+        reviewed = '172370e5b14a4711d4f11a4036dc44232596c0c8749ccb9a387abb46e24bc838'
         data = json.dumps(self.scene['meshes'], sort_keys=True, separators=(',', ':')).encode()
         self.assertEqual(hashlib.sha256(data).hexdigest(), reviewed)
 
@@ -149,7 +151,7 @@ class PresentationDecisions(unittest.TestCase):
         view = self.views['v41-south-garden-terrace']
         chair = 'landscape-g6-seating-chair-1'
         self.assertEqual([(v['id'], list(v['visibility_allowances']))
-                          for v in self.scene['views'] if v.get('visibility_allowances')], [(view['id'], [chair])])
+                          for v in self.scene['views'] if v.get('visibility_allowances')], [('v37-north-garden-lounge', ['landscape-north-feature-stone']), (view['id'], [chair])])
         evidence = subject_visibility_evidence(view, self.scene)
         self.assertEqual([r['visible'] for r in evidence], [11, 13, 13, 6, 8, 7])
         self.assertEqual(subject_visibility_findings(view, self.scene), [])
@@ -190,6 +192,26 @@ class PresentationDecisions(unittest.TestCase):
             other.pop('visibility_allowances')
             self.assertEqual(review.subject_visibility_findings(other, self.scene),
                              [other['id']+': named subject obscured landscape-g6-seating-chair-1'])
+
+    def test_v37_stone_allowance_is_subject_and_view_bound_and_five_still_fails(self):
+        from unittest.mock import patch
+        from archpipe.concept import garden_render_review as review
+        view=self.views['v37-north-garden-lounge'];stone='landscape-north-feature-stone'
+        self.assertEqual(list(view['visibility_allowances']),[stone])
+        self.assertIn('lead decision 2026-10-08',view['visibility_allowances'][stone]['reason'])
+        evidence=review.subject_visibility_evidence(view,self.scene)
+        self.assertEqual(next(r['visible'] for r in evidence if r['subject']==stone),6)
+        self.assertEqual(review.subject_visibility_findings(view,self.scene),[])
+        for record in evidence:
+            altered=deepcopy(evidence)
+            next(r for r in altered if r['subject']==record['subject'])['visible']=5 if record['subject']==stone else 6
+            with patch.object(review,'subject_visibility_evidence',return_value=altered):
+                self.assertEqual(review.subject_visibility_findings(view,self.scene),[view['id']+': named subject obscured '+record['subject']])
+        copied=deepcopy(view);copied['id']='other-view'
+        with patch.object(review,'subject_visibility_evidence',return_value=evidence):
+            self.assertTrue(any('invalid visibility allowance' in f for f in review.subject_visibility_findings(copied,self.scene)))
+            copied.pop('visibility_allowances')
+            self.assertEqual(review.subject_visibility_findings(copied,self.scene),[copied['id']+': named subject obscured '+stone])
 
     def test_blender_direct_batches_share_retirement_selection(self):
         import ast

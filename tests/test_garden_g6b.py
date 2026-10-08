@@ -129,10 +129,10 @@ class AppearanceTests(unittest.TestCase):
         self.assertEqual(set(unregistered_render_finishes(V.M,old)),{
             'g6-jasmine-leaf','g6-petrea-leaf','g6-pittosporum-leaf','g6-leaf-vein',
             'g6-wire-tie','g6-loquat-leaf','g6-outdoor-timber','g6-shrub-wood',
-            'north-light-stone','north-pale-gravel'})
+            'north-light-stone','north-pale-gravel','aspidistra-leaf'})
         self.assertEqual(unregistered_render_finishes(V.M),[])
-        for name in ('north-light-stone','north-pale-gravel'):
-            # Reviewed G4d names must be independently registered; omission
+        for name in ('north-light-stone','north-pale-gravel','aspidistra-leaf'):
+            # Reviewed G4d/G4e names must be independently registered; omission
             # of either real new finish and an unlisted replacement refuse.
             from scripts.verify import registered_render_finishes
             self.assertEqual(unregistered_render_finishes(V.M,registered_render_finishes()-{name}),[name])

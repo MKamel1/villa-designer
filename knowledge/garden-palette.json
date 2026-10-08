@@ -65,11 +65,11 @@
           },
           "spread": {
             "range_m": [
-              0.4,
-              0.4
+              0.5,
+              0.5
             ],
             "status": "ASSUMED",
-            "reason": "Young planting appearance within verified range; spacing remains based on recorded spread."
+            "reason": "Lead G4f decision 2026-10-08: young loose-fountain foliage uses the recorded 0.5 m spread and 0.5 m height; oval 0.43 m across the fixed narrow beds by 0.5 m along them. Plant centres, soil datum and spacing stay fixed. Authored appearance assumption, not a botanical standard."
           },
           "appearance_claim": "authored botanical appearance; nursery procurement and photographic likeness UNVERIFIED"
         }
