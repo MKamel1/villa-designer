@@ -27,6 +27,8 @@ import re
 import shutil
 from pathlib import Path
 
+from archpipe.evidence import EditionMismatchError, check_book_edition
+
 ROOT = Path(__file__).resolve().parents[2]
 REGISTRY = ROOT / "knowledge" / "library.json"
 SOURCES_ROOT = Path(os.environ.get("ARCHPIPE_SOURCES", Path.home() / "archpipe-sources"))
@@ -263,6 +265,9 @@ def intake(lib: dict, root: Path = SOURCES_ROOT, log=print) -> dict:
                      "image_only": r["image_only"]})
         s["held_files"] = held
         s["access_location"] = "archpipe-sources"
+        edition_check = check_book_edition(f.name, copyright_edition=s.get("edition") or "")
+        if edition_check["flagged"]:
+            raise EditionMismatchError(edition_check["reason"])
         if s.get("status") == "identified":
             s["status"] = "held"          # content_verified only after the edition is read
         report["held"].append({"file": f.name, "id": sid, "pages": r["pages"], "image_only": r["image_only"]})

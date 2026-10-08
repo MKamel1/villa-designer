@@ -370,6 +370,8 @@ strip; graph checks alone cannot establish plan geometry. Keep an explicit
 diagram/graph comparison in the Order review, and mark incomplete narrative
 facts missing or assumed rather than calling a generic pointer a known input.
 
+Phase 2 Batch 1 wired evidence.py authority into asset_intake.py (drift tolerance l0179), sources.py (intake edition screening l0188) and villa_daylight_finished.py (shared model hash l0661); tests/test_c12_phase2.py proves fail-closed behavior on frozen defect cases. The knowledge_index.py page-label attempt was rejected in lead review (state stored on the function object; page detection re-implemented).
+
 ## Product library and thermal (2026-09-24)
 
 | Observed | Why it was missed | Guard now |
