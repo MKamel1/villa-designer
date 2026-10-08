@@ -59,7 +59,15 @@ from archpipe.external_claims import (
     check_photometry_fitting_agreement,
     ingest_bytes,
 )
-from archpipe import asset_intake, material_basis, refactor_audit, render_qa, safe_io, villa_render_contract
+from archpipe import (
+    asset_intake,
+    material_basis,
+    refactor_audit,
+    render_qa,
+    safe_io,
+    stage_result,
+    villa_render_contract,
+)
 from archpipe.concept import (
     physical_part,
     render_support,
@@ -117,17 +125,29 @@ __all__ = [
     "check_render_contract_scene_geometry",
     "check_render_support_blocked_openings",
     "check_render_support_unsupported",
+    "check_revit_spec_clearance_problems",
+    "check_revit_spec_wp1_detail_constraints",
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
+    "check_stage_result_fail_verdict_rejection",
+    "check_stage_result_stale_input_invalidation",
     "check_stair_pitch_headroom",
     "check_utf16_or_utf8_json",
     "check_villa_concept_stair_access",
+    "check_villa_concept_stair_structure",
     "check_villa_furnish3d_opening_spec_id",
+    "check_villa_furnish_bedside_zone_a",
     "check_villa_furnish_door_wall_clearance",
+    "check_villa_furnish_inside_room_boundary",
     "check_villa_furnish_kitchen_run_modules",
+    "check_villa_furnish_kitchen_work_aisle",
+    "check_villa_furnish_pocket_door_approach",
+    "check_villa_furnish_principal_window_reachable",
     "check_villa_furnish_route_corner_disc",
+    "check_villa_furnish_stair_foot_reachable",
     "check_villa_landscape_prop_room_extent",
     "check_villa_landscape_route_obstruction",
+    "check_villa_lighting_grooming_task",
     "check_villa_route_width_stair_void",
     "clear_registry",
     "coverage_report",
@@ -143,6 +163,7 @@ __all__ = [
     "safe_io_spec_echo_rejection",
     "verify_tier3_review_steps",
 ]
+
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -2564,6 +2585,423 @@ register_guard(
     tier=2,
     description="Validates that Revit wall openings lacking mark and comments are matched via spec_id (l0863)",
 )
+
+
+# -----------------------------------------------------------------------------
+# Phase 2 Batch 5: Geometry, Routes, Spec Clearances & Execution Proof Guards
+# -----------------------------------------------------------------------------
+
+# 50. l0307: Straight flight clash with structural column
+def check_villa_concept_stair_structure(lay: dict[str, Any]) -> dict[str, Any]:
+    """Validates that stair geometry does not clash with structural columns or beams (l0307)."""
+    res = villa.critique(lay)
+    chk = next((c for c in res.get("checks", []) if c.get("check") == "stair_structure"), None)
+    if chk and chk.get("status") == "fail":
+        clashes = chk.get("clashes", [])
+        raise ValueError(f"Stair structure clash detected: {clashes}")
+    return chk or {}
+
+
+_lay_stair_structure_bad = copy.deepcopy(villa.concept_a())
+_lay_stair_structure_bad["stair"] = "r3"
+
+register_guard(
+    fn=check_villa_concept_stair_structure,
+    name="villa_concept_stair_structure",
+    lesson_ids=("l0307-villa-concept-round", "l0307"),
+    real_case=case(_lay_stair_structure_bad),
+    clean_case=case(villa.concept_a()),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that stair geometry does not clash with kept columns/beams such as column 1590377 (l0307)",
+)
+
+
+# 51. l0518: Clearance under ramp/deck soffit
+def check_revit_spec_clearance_problems(
+    lay: dict[str, Any],
+    walls: list[dict[str, Any]],
+    doors: list[dict[str, Any]],
+    infills: tuple[Any, ...] | list[Any] = (),
+) -> list[str]:
+    """Validates that walls and doors under ramp and deck clear soffits without breaches (l0518)."""
+    problems = revit_spec.clearance_problems(lay, walls, doors, infills)
+    if problems:
+        raise ValueError(f"Clearance problems detected under ramp/deck: {problems}")
+    return problems
+
+
+_lay_p_opt = copy.deepcopy(villa_parking.options()[0])
+_sp_p_opt = revit_spec.build(_lay_p_opt)
+_sp_clearance_bad = copy.deepcopy(_sp_p_opt)
+_cross_wall = next(
+    w for w in _sp_clearance_bad["walls"]
+    if w["level"] == "B" and abs(w["y0"] - w["y1"]) > 1e-6
+    and w["y1"] > villa.YE + 0.3 and w["x0"] < villa_parking.RAMP_X1
+)
+_cross_wall["height"] = revit_spec.WALL_H
+
+register_guard(
+    fn=check_revit_spec_clearance_problems,
+    name="revit_spec_clearance_problems",
+    lesson_ids=("l0518-r9-follow-ups", "l0518"),
+    real_case=case(_lay_p_opt, _sp_clearance_bad["walls"], _sp_clearance_bad["doors"], _sp_clearance_bad["infills"]),
+    clean_case=case(_lay_p_opt, _sp_p_opt["walls"], _sp_p_opt["doors"], _sp_p_opt["infills"]),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that under-ramp/deck cross walls and doors do not breach soffits or leave gaps (l0518)",
+)
+
+
+# 52. l0536: Kitchen island multi-cook work aisle clearance
+def check_villa_furnish_kitchen_work_aisle(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> list[str]:
+    """Validates that opposing kitchen counters maintain multi-cook work aisle clearance (l0536)."""
+    res = villa_furnish.check(items, lay)
+    k = res.get("kitchen", {})
+    if k.get("status") == "fail":
+        raise ValueError(f"Kitchen work aisle clearance failure: {k.get('problems')}")
+    return k.get("problems", [])
+
+
+_items_aisle_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+next(i for i in _items_aisle_bad if i["id"] == "k-island")["cy"] += 0.05
+
+register_guard(
+    fn=check_villa_furnish_kitchen_work_aisle,
+    name="villa_furnish_kitchen_work_aisle",
+    lesson_ids=("l0536-seating-card-assumed", "l0536"),
+    real_case=case(_items_aisle_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that kitchen island keeps 1219 mm multi-cook work aisle clearance (l0536)",
+)
+
+
+# 53. l0542: Stair foot must remain reachable on circulation routes
+def check_villa_furnish_stair_foot_reachable(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> list[str]:
+    """Validates that stair foot remains reached by circulation routes without obstruction (l0542)."""
+    res = villa_furnish.check(items, lay)
+    r = res.get("routes", {})
+    if r.get("status") == "fail":
+        raise ValueError(f"Stair foot route obstruction: {r.get('problems')}")
+    return r.get("problems", [])
+
+
+_items_stair_foot_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_stair_foot_bad.append(
+    villa_furnish.item("console", "hall-b", "sideboard", 10.1, -28.0, 90, w=1.2, d=0.45, h=0.8, why="x", level="B")
+)
+
+register_guard(
+    fn=check_villa_furnish_stair_foot_reachable,
+    name="villa_furnish_stair_foot_reachable",
+    lesson_ids=("l0542-stair-flight-counted", "l0542"),
+    real_case=case(_items_stair_foot_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that stair foot is reachable and not blocked by furniture on circulation routes (l0542)",
+)
+
+
+# 54. l0566: Principal bedroom window route access
+def check_villa_furnish_principal_window_reachable(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> list[str]:
+    """Validates that principal bedroom window route access remains enforced across bed types (l0566)."""
+    res = villa_furnish.check(items, lay)
+    r = res.get("routes", {})
+    if r.get("status") == "fail":
+        raise ValueError(f"Principal bedroom window route obstruction: {r.get('problems')}")
+    return r.get("problems", [])
+
+
+_items_win_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_ids_win_bad = {it["id"]: it for it in _items_win_bad}
+_items_win_bad.remove(_ids_win_bad["pb-vanity"])
+_items_win_bad.append(
+    villa_furnish.item(
+        "robe", "parents-bed", "wardrobe", 22.397 - 0.275, -25.4, 90, w=2.6, d=0.55, h=2.2, why="x", level="GF"
+    )
+)
+
+register_guard(
+    fn=check_villa_furnish_principal_window_reachable,
+    name="villa_furnish_principal_window_reachable",
+    lesson_ids=("l0566-principal-bedroom-window", "l0566"),
+    real_case=case(_items_win_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that principal bedroom window has clear 750 mm access route regardless of bed type (l0566)",
+)
+
+
+# 55. l0570: Pocket door approach route node access
+def check_villa_furnish_pocket_door_approach(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> list[str]:
+    """Validates that pocket door approaches provide route node connectivity without obstruction (l0570)."""
+    res = villa_furnish.check(items, lay)
+    r = res.get("routes", {})
+    if r.get("status") == "fail":
+        raise ValueError(f"Pocket door approach route obstruction: {r.get('problems')}")
+    return r.get("problems", [])
+
+
+_items_pocket_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_items_pocket_bad.append(
+    villa_furnish.item(
+        "chest", "parents-entry", "sideboard", 18.977, -26.95, 0, w=0.9, d=0.45, h=0.8, why="x", level="GF"
+    )
+)
+
+register_guard(
+    fn=check_villa_furnish_pocket_door_approach,
+    name="villa_furnish_pocket_door_approach",
+    lesson_ids=("l0570-pocket-door-gave", "l0570"),
+    real_case=case(_items_pocket_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that pocket door entry vestibules maintain clear route approach nodes (l0570)",
+)
+
+
+# 56. l0551: Furniture placed against room boundaries (inside room)
+def check_villa_furnish_inside_room_boundary(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that furniture items sit fully within room interior outlines (l0551)."""
+    res = villa_furnish.check(items, lay)
+    ir = res.get("inside_room", {})
+    if ir.get("status") != "pass" or ir.get("problems"):
+        raise ValueError(f"Furniture placed outside room boundary: {ir.get('problems')}")
+    return ir
+
+
+_items_inside_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+next(i for i in _items_inside_bad if i["id"] == "kb-desk")["cy"] = -23.4
+
+register_guard(
+    fn=check_villa_furnish_inside_room_boundary,
+    name="villa_furnish_inside_room_boundary",
+    lesson_ids=("l0551-furniture-placed-against", "l0551"),
+    real_case=case(_items_inside_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that furniture pieces sit inside room boundary rather than overlapping walls (l0551)",
+)
+
+
+# 57. l0017: Bedside table placement within head-end Zone A clearance
+def check_villa_furnish_bedside_zone_a(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates bedside table placement within head-end Zone A clearance (l0017)."""
+    res = villa_furnish.check(items, lay)
+    c = res.get("clearances", {})
+    if c.get("status") != "pass" or c.get("problems"):
+        raise ValueError(f"Bedside clearance violation: {c.get('problems')}")
+    return c
+
+
+_items_bedside_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_pb_bedside = next(i for i in _items_bedside_bad if i["id"] == "pb-bedside")
+_pb_bedside["cy"] += 0.9
+
+register_guard(
+    fn=check_villa_furnish_bedside_zone_a,
+    name="villa_furnish_bedside_zone_a",
+    lesson_ids=("l0017-desk-chair-occupies", "l0017"),
+    real_case=case(_items_bedside_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that bedside tables occupy only head-end Zone A and do not block bed side use zones (l0017)",
+)
+
+
+# 58. l0849: Dirty kitchen ventilation duct and detail constraints
+def check_revit_spec_wp1_detail_constraints(
+    lay: dict[str, Any],
+    spec: dict[str, Any],
+) -> list[str]:
+    """Validates WP1 specification detail constraints including ventilation ducts and clearances (l0849)."""
+    errors = revit_spec.check_wp1_spec(lay, spec)
+    if errors:
+        raise ValueError(f"WP1 spec constraint errors: {errors}")
+    return errors
+
+
+_spec_wp1_bad = copy.deepcopy(revit_spec.build(_lay_d1_base))
+_spec_wp1_bad["ventilation"][0]["duct_route"][-1] = _spec_wp1_bad["ventilation"][0]["fan"]
+
+register_guard(
+    fn=check_revit_spec_wp1_detail_constraints,
+    name="revit_spec_wp1_detail_constraints",
+    lesson_ids=("l0849-dirty-kitchen-duct", "l0849"),
+    real_case=case(_lay_d1_base, _spec_wp1_bad),
+    clean_case=case(_lay_d1_base, revit_spec.build(_lay_d1_base)),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that ventilation extract ducts rise from hood chimney to external wall (l0849)",
+)
+
+
+# 59. l0606: Vanity grooming and task illumination check
+def check_villa_lighting_grooming_task(
+    lay: dict[str, Any] | None = None,
+    fixtures: list[Any] | None = None,
+) -> list[dict[str, Any]]:
+    """Validates task illumination requirements for grooming and work planes (l0606)."""
+    res = villa_lighting.check(lay, fixtures)
+    failed = [t for t in res.get("tasks", []) if t.get("status") == "fail"]
+    if failed:
+        raise ValueError(f"Lighting task targets failed: {failed}")
+    return failed
+
+
+_fx_lighting_clean = villa_lighting.design(_lay_d1_base)
+_fx_lighting_bad = [
+    f for f in _fx_lighting_clean
+    if not (
+        f.card == "ies-res-vanity-grooming-300"
+        or (f.kind in ("SCONCE", "VSCONCE") and f.room in ("family-bath", "parents-ensuite", "guest-wc"))
+    )
+]
+
+register_guard(
+    fn=check_villa_lighting_grooming_task,
+    name="villa_lighting_grooming_task",
+    lesson_ids=("l0606-first-drafts-failed", "l0606"),
+    real_case=case(_lay_d1_base, _fx_lighting_bad),
+    clean_case=case(_lay_d1_base, _fx_lighting_clean),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates vanity grooming task illumination and fails closed when task downlights are omitted (l0606)",
+)
+
+
+# 60. l0029: Non-zero exit when stage report or verdict indicates failure
+def check_stage_result_fail_verdict_rejection(report_or_verdict: Any) -> int:
+    """Enforces non-zero exit when report or verdict contains any failure (l0029).
+
+    The production helper exits the process (SystemExit, a BaseException the guard runner does not
+    catch); translate a non-zero exit into a ValueError so the registry can observe it.
+    """
+    try:
+        return stage_result.enforce_clean_verdict(report_or_verdict)
+    except SystemExit as exc:
+        if exc.code not in (0, None):
+            raise ValueError(f"stage verdict FAIL: production enforce_clean_verdict exited {exc.code}") from exc
+        return 0
+
+
+_bad_report_incident = {
+    "stage": "photometry_agreement",
+    "passed": False,
+    "verdict": "FAIL -- direct-light agreement outside 5%",
+    "failures": ["clear-point median 1.0820 outside 5% band"],
+    "checks": [{"check": "clear_point_agreement", "passed": False}],
+}
+_clean_report_incident = {
+    "stage": "photometry_agreement",
+    "passed": True,
+    "verdict": "PASS -- direct-light median ratio within 5%",
+    "failures": [],
+    "checks": [{"check": "clear_point_agreement", "passed": True}],
+}
+
+register_guard(
+    fn=check_stage_result_fail_verdict_rejection,
+    name="stage_result_fail_verdict_rejection",
+    lesson_ids=("l0029-script-printing-fail", "l0029"),
+    real_case=case(_bad_report_incident),
+    clean_case=case(_clean_report_incident),
+    expected_real=ValueError,
+    expected_clean=0,
+    tier=2,
+    description="Fails closed (production enforce_clean_verdict exits non-zero) when script verdict indicates FAIL (l0029)",
+)
+
+
+# 61. l0040: Cached stage result invalidation upon stale/modified inputs
+def check_stage_result_stale_input_invalidation(
+    record_or_path: dict[str, Any] | Path | str,
+    root: Path | str | None = None,
+    current_inputs: Iterable[Path | str] | None = None,
+) -> tuple[bool, str, dict[str, Any]]:
+    """Validates that cached stage results fail closed when inputs are modified or stale (l0040)."""
+    return stage_result.validate_stage_result(
+        record_or_path,
+        root=root,
+        current_inputs=current_inputs,
+        raise_on_error=True,
+    )
+
+
+_site_spec_file = ROOT / "spec/villa-site.yaml"
+_site_sha, _site_size = stage_result.digest_file(_site_spec_file)
+
+_record_clean = {
+    "stage": "site_stage",
+    "status": "ok",
+    "exit_code": 0,
+    "completeness": {"complete": True, "missing_outputs": [], "empty_outputs": []},
+    "outputs": {
+        "spec/villa-site.yaml": {
+            "path": str(_site_spec_file),
+            "sha256": _site_sha,
+            "size_bytes": _site_size,
+        }
+    },
+    "inputs": {
+        "spec/villa-site.yaml": {
+            "path": str(_site_spec_file),
+            "sha256": _site_sha,
+            "size_bytes": _site_size,
+        }
+    },
+}
+
+_record_stale_bad = copy.deepcopy(_record_clean)
+_record_stale_bad["inputs"]["spec/villa-site.yaml"]["sha256"] = "0" * 64
+
+register_guard(
+    fn=check_stage_result_stale_input_invalidation,
+    name="stage_result_stale_input_invalidation",
+    lesson_ids=("l0040-three-unchanged-camera", "l0040"),
+    real_case=case(_record_stale_bad, root=ROOT),
+    clean_case=case(_record_clean, root=ROOT),
+    expected_real=stage_result.StaleInputError,
+    expected_clean=None,
+    tier=2,
+    description="Fails closed with StaleInputError when cached stage inputs differ from recorded hashes (l0040)",
+)
+
 
 
 # -----------------------------------------------------------------------------
