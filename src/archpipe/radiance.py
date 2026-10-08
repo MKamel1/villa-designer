@@ -115,6 +115,8 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 
+from .safe_io import save_text
+
 MM_TO_M = 0.001
 
 # Optical reflectance assumptions, stated rather than read from any Revit
@@ -280,7 +282,7 @@ def _run(argv: list, *, cwd: Path, timeout: int, stdout_path: Path,
 
 def _write(path: Path, text: str) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text)
+    save_text(path, text)
     return path
 
 

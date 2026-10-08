@@ -36,6 +36,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .radiance import CIE_BF, CIE_GF, CIE_RF, WHTEFFICACY, tn_to_transmissivity
+from .safe_io import load_json, save_bytes, save_json, save_text
 
 SKY_B = 55.866                 # W/m2 horizontal diffuse: 10 000 lx at 179 lm/W (gensky -B)
 HORIZONTAL_LUX = 10000.0
@@ -290,32 +291,30 @@ def write_job(cases: dict, folder: Path, workers: int = 30, fine=(), views=None)
         cases[name + "-fine"] = cases[name]
     folder = Path(folder)
     (folder / "cases").mkdir(parents=True, exist_ok=True)
-    (folder / "sky_glow.rad").write_text(SKY_GLOW, encoding="ascii")
-    (folder / "run.sh").write_text(RUN_SH.format(B=SKY_B, n=workers, render=" ".join(RPICT_OPTS)), encoding="ascii",
-                                   newline="\n")
+    save_text(folder / "sky_glow.rad", SKY_GLOW)
+    save_text(folder / "run.sh", RUN_SH.format(B=SKY_B, n=workers, render=" ".join(RPICT_OPTS)))
     vlines = [f"{c} {v} {view.args()}" for c, vs in (views or {}).items() for v, view in vs.items()]
-    (folder / "views.txt").write_text("\n".join(vlines) + ("\n" if vlines else ""), encoding="ascii", newline="\n")
+    save_text(folder / "views.txt", "\n".join(vlines) + ("\n" if vlines else ""))
     order = sorted(cases, key=lambda n: (not n.startswith("v-"), n))
-    (folder / "order.txt").write_text("\n".join(order) + "\n", encoding="ascii", newline="\n")
+    save_text(folder / "order.txt", "\n".join(order) + "\n")
     for name, scene in cases.items():
         d = folder / "cases" / name
         d.mkdir(parents=True, exist_ok=True)
-        (d / "scene.rad").write_text(scene_rad(scene), encoding="ascii")
+        save_text(d / "scene.rad", scene_rad(scene))
         rooms, lines = [], []
         for r in scene.rooms:
             pts = grid(r, **r.get("grid", {}))
             rooms.append(dict({k: v for k, v in r.items() if k != "polygon"}, polygon=[list(p) for p in r["polygon"]],
                               first=len(lines), count=len(pts)))
             lines += [f"{x:.4f} {y:.4f} {z:.4f} 0 0 1" for x, y, z in pts]
-        (d / "points.txt").write_text("\n".join(lines) + "\n", encoding="ascii")
-        (d / "opts.txt").write_text(" ".join(RTRACE_FINE if name.endswith("-fine") else RTRACE_OPTS),
-                                    encoding="ascii")
-        (d / "rooms.json").write_text(json.dumps({"rooms": rooms, "notes": scene.notes}, indent=1), encoding="utf-8")
+        save_text(d / "points.txt", "\n".join(lines) + "\n")
+        save_text(d / "opts.txt", " ".join(RTRACE_FINE if name.endswith("-fine") else RTRACE_OPTS))
+        save_json(d / "rooms.json", {"rooms": rooms, "notes": scene.notes}, indent=1)
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w:gz") as tar:
         tar.add(folder, arcname=".")
     tgz = folder.with_suffix(".tar.gz")
-    tgz.write_bytes(buf.getvalue())
+    save_bytes(tgz, buf.getvalue())
     return tgz
 
 
@@ -388,7 +387,7 @@ def df_percent(r, g, b):
 
 def read_case(case_dir: Path) -> dict:
     """Per-room daylight factor from a finished case folder."""
-    meta = json.loads((case_dir / "rooms.json").read_text(encoding="utf-8"))
+    meta = load_json(case_dir / "rooms.json")
     vals = [float(v) for v in (case_dir / "out.txt").read_text().split()]
     n = sum(r["count"] for r in meta["rooms"])
     if len(vals) != 3 * n:

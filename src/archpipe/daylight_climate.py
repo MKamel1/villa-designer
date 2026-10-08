@@ -25,6 +25,7 @@ import zipfile
 from pathlib import Path
 
 from . import daylight as D
+from .safe_io import save_bytes, save_json, save_text
 
 MF = 2
 DC_OPTS = ["-I+", "-y", "{n}", "-n", "30", "-ab", "5", "-ad", "4096", "-lw", "5e-5", "-c", "1"]
@@ -103,33 +104,33 @@ def write_job(cases, folder, head, rows, stamps, rotation_deg, pit=None):
     pit: {case: [(tag, month, day, hour)]} point-in-time rtrace checks."""
     folder = Path(folder)
     (folder / "cases").mkdir(parents=True, exist_ok=True)
-    (folder / "receiver.rad").write_text(SKY_RECEIVER.format(mf=MF), encoding="ascii")
-    (folder / "sky_glow.rad").write_text(D.SKY_GLOW, encoding="ascii")
-    (folder / "sky.wea").write_text(wea_text(head, rows, stamps), encoding="ascii", newline="\n")
-    (folder / "dc_opts.txt").write_text(" ".join(DC_OPTS), encoding="ascii")
-    (folder / "run.sh").write_text(RUN_DC.format(mf=MF, rot=rotation_deg, c=" ".join(map(str, LUX_COEF)),
-                                                 rt=" ".join(D.RTRACE_OPTS)), encoding="ascii", newline="\n")
+    save_text(folder / "receiver.rad", SKY_RECEIVER.format(mf=MF))
+    save_text(folder / "sky_glow.rad", D.SKY_GLOW)
+    save_text(folder / "sky.wea", wea_text(head, rows, stamps))
+    save_text(folder / "dc_opts.txt", " ".join(DC_OPTS))
+    save_text(folder / "run.sh", RUN_DC.format(mf=MF, rot=rotation_deg, c=" ".join(map(str, LUX_COEF)),
+                                                 rt=" ".join(D.RTRACE_OPTS)))
     order = sorted(cases, key=lambda n: (not n.startswith("v-"), n))
-    (folder / "order.txt").write_text("\n".join(order) + "\n", encoding="ascii", newline="\n")
+    save_text(folder / "order.txt", "\n".join(order) + "\n")
     by = {(r["month"], r["day"], r["hour"]): r for r in rows}
     for name, (scene, sensors) in cases.items():
         d = folder / "cases" / name
         d.mkdir(parents=True, exist_ok=True)
-        (d / "scene.rad").write_text(D.scene_rad(scene), encoding="ascii")
-        (d / "points.txt").write_text("\n".join("%.4f %.4f %.4f %.4f %.4f %.4f" % ((s["x"], s["y"], s["z"]) + tuple(s["n"]))
-                                                for s in sensors) + "\n", encoding="ascii", newline="\n")
-        (d / "sensors.json").write_text(json.dumps({"sensors": sensors, "stamps": stamps}), encoding="utf-8")
+        save_text(d / "scene.rad", D.scene_rad(scene))
+        save_text(d / "points.txt", "\n".join("%.4f %.4f %.4f %.4f %.4f %.4f" % ((s["x"], s["y"], s["z"]) + tuple(s["n"]))
+                                                for s in sensors) + "\n")
+        save_json(d / "sensors.json", {"sensors": sensors, "stamps": stamps})
         lines = []
         for tag, m, dd, h in (pit or {}).get(name, []):
             r = by[(m, dd, int(h) + 1)]
             lines.append("%s %d %d %.3f -a %.4f -o %.4f -m %.1f -W %.1f %.1f" %
                          (tag, m, dd, h, head["lat"], -head["lon"], -15 * head["tz"], r["dni"], r["dhi"]))
-        (d / "pit.txt").write_text("\n".join(lines) + ("\n" if lines else ""), encoding="ascii", newline="\n")
+        save_text(d / "pit.txt", "\n".join(lines) + ("\n" if lines else ""))
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w:gz") as tar:
         tar.add(folder, arcname=".")
     tgz = folder.with_suffix(".tar.gz")
-    tgz.write_bytes(buf.getvalue())
+    save_bytes(tgz, buf.getvalue())
     return tgz
 
 
