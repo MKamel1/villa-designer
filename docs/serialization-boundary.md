@@ -53,6 +53,11 @@ actual or specification values are not independent measurement evidence.
 | `concept/villa_render.write` | Already `safe_io.save_bytes`, scene validation/source fingerprint | No call-site edit; strengthened shared writer applies |
 | `execution_context.write_record` | Direct JSON overwrite | Atomic shared JSON writer |
 | `revit/jsonsafe.clean` | Integral wrappers passed through float | Exact integer conversion before numeric fallback |
+| `daylight.write_job`, `read_case` | Direct `write_text`/`write_bytes`, direct `json.loads` | Atomic `save_text`, `save_json`, `save_bytes`, and `load_json` via `safe_io` |
+| `daylight_climate.write_job` | Direct `write_text`/`write_bytes` | Atomic `save_text`, `save_json`, and `save_bytes` via `safe_io` |
+| `radiance._write` | Direct `Path.write_text` in helper | Atomic `save_text` via `safe_io` covers all scenes, points, grids, and reports |
+| `cli._design` | Direct `Path.write_text(json.dumps(...))` for markup notes | Atomic `save_json` via `safe_io` |
+| `thermal.py` | Direct `write_text`/`open` | Audited: process log redirection requires append mode; scratch IDF and scene files immediately consumed by child processes are listed exceptions |
 
 Legacy extract fields remain compatible. The current extractor still casts Color
 channels manually and exports legacy TextNote fields; native typed adapter wiring
@@ -76,10 +81,10 @@ Local JSON input readers: `build_bedroom.py`, `build_villa_env.py`,
 `export_views` need staged native publication and independent acceptance.
 
 Other siblings: generated photometry in `concept/villa_render.py`; Blender reports
-in `blender/measure_lux.py`, `blender/villa_scene.py`; scene/room files in
-`daylight.py`, `daylight_climate.py`, `thermal.py`, `radiance.py`; CLI markup notes
-in `cli.py`. Dict review callers still own decoding. Audit command/Model Context
-Protocol loaders and deploy the shared module with remote workers before expanding.
+in `blender/measure_lux.py`, `blender/villa_scene.py`. (`daylight.py`, `daylight_climate.py`,
+`thermal.py`, `radiance.py`, and `cli.py` markup notes migrated in Phase 2 Batch 1).
+Dict review callers still own decoding. Audit command/Model Context Protocol loaders
+and deploy the shared module with remote workers before expanding.
 
 The retry, stale cache, status-read race, fatal EnergyPlus and untaggable Opening
 lessons also require lifecycle/provenance controls. Existing retry promotion,
