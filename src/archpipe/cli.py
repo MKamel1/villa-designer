@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 from .model import SpecError, load
+from .safe_io import save_json
 
 
 def _check(args) -> int:
@@ -253,7 +254,7 @@ def _design(args) -> int:
     if args.notes:
         rows = [f.as_note() for f in findings]
         Path(args.notes).parent.mkdir(parents=True, exist_ok=True)
-        Path(args.notes).write_text(_json.dumps(rows, indent=2), encoding="utf-8")
+        save_json(args.notes, rows, indent=2)
         print(f"wrote {len(rows)} note rows -> {args.notes}")
 
     # Violations fail the gate; warnings and advisories do not.
