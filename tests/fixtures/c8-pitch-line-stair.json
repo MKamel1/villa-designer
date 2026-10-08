@@ -1,0 +1,914 @@
+{
+  "commit": "1276e08",
+  "provenance": "Actual party-flight geometry immediately after independent pitch-line guard; same r8 flight, before later datum migrations",
+  "payload": {
+    "name": "party-wall flight (r8, landing 1.2 m)",
+    "parts": [
+      {
+        "box": [
+          9377.0,
+          -28421,
+          -2883.529411764706,
+          9657.0,
+          -27471,
+          -2823.529411764706
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 1"
+      },
+      {
+        "box": [
+          9587.0,
+          -28421,
+          -2823.529411764706,
+          9657.0,
+          -27471,
+          -779.4117647058824
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 1.0"
+      },
+      {
+        "box": [
+          9517.0,
+          -28421,
+          -2823.529411764706,
+          9587.0,
+          -27471,
+          -735.294117647059
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 1.1"
+      },
+      {
+        "box": [
+          9447.0,
+          -28421,
+          -2823.529411764706,
+          9517.0,
+          -27471,
+          -691.1764705882351
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 1.2"
+      },
+      {
+        "box": [
+          9377.0,
+          -28421,
+          -2823.529411764706,
+          9447.0,
+          -27471,
+          -647.0588235294117
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 1.3"
+      },
+      {
+        "box": [
+          9097.0,
+          -28421,
+          -2707.0588235294117,
+          9377.0,
+          -27471,
+          -2647.0588235294117
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 2"
+      },
+      {
+        "box": [
+          9307.0,
+          -28421,
+          -2647.0588235294117,
+          9377.0,
+          -27471,
+          -602.9411764705883
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 2.0"
+      },
+      {
+        "box": [
+          9237.0,
+          -28421,
+          -2647.0588235294117,
+          9307.0,
+          -27471,
+          -558.8235294117649
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 2.1"
+      },
+      {
+        "box": [
+          9167.0,
+          -28421,
+          -2647.0588235294117,
+          9237.0,
+          -27471,
+          -514.705882352941
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 2.2"
+      },
+      {
+        "box": [
+          9097.0,
+          -28421,
+          -2647.0588235294117,
+          9167.0,
+          -27471,
+          -470.58823529411757
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 2.3"
+      },
+      {
+        "box": [
+          8817.0,
+          -28421,
+          -2530.5882352941176,
+          9097.0,
+          -27471,
+          -2470.5882352941176
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 3"
+      },
+      {
+        "box": [
+          9027.0,
+          -28421,
+          -2470.5882352941176,
+          9097.0,
+          -27471,
+          -426.47058823529414
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 3.0"
+      },
+      {
+        "box": [
+          8957.0,
+          -28421,
+          -2470.5882352941176,
+          9027.0,
+          -27471,
+          -382.3529411764707
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 3.1"
+      },
+      {
+        "box": [
+          8887.0,
+          -28421,
+          -2470.5882352941176,
+          8957.0,
+          -27471,
+          -338.23529411764684
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 3.2"
+      },
+      {
+        "box": [
+          8817.0,
+          -28421,
+          -2470.5882352941176,
+          8887.0,
+          -27471,
+          -294.1176470588234
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 3.3"
+      },
+      {
+        "box": [
+          8537.0,
+          -28421,
+          -2354.1176470588234,
+          8817.0,
+          -27471,
+          -2294.1176470588234
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 4"
+      },
+      {
+        "box": [
+          8747.0,
+          -28421,
+          -2294.1176470588234,
+          8817.0,
+          -27471,
+          -250.0
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 4.0"
+      },
+      {
+        "box": [
+          8677.0,
+          -28421,
+          -2294.1176470588234,
+          8747.0,
+          -27471,
+          -205.88235294117658
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 4.1"
+      },
+      {
+        "box": [
+          8607.0,
+          -28421,
+          -2294.1176470588234,
+          8677.0,
+          -27471,
+          -161.76470588235316
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 4.2"
+      },
+      {
+        "box": [
+          8537.0,
+          -28421,
+          -2294.1176470588234,
+          8607.0,
+          -27471,
+          -117.64705882352928
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 4.3"
+      },
+      {
+        "box": [
+          8257.0,
+          -28421,
+          -2177.6470588235293,
+          8537.0,
+          -27471,
+          -2117.6470588235293
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 5"
+      },
+      {
+        "box": [
+          8467.0,
+          -28421,
+          -2117.6470588235293,
+          8537.0,
+          -27471,
+          -73.52941176470586
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 5.0"
+      },
+      {
+        "box": [
+          8397.0,
+          -28421,
+          -2117.6470588235293,
+          8467.0,
+          -27471,
+          -29.411764705882433
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 5.1"
+      },
+      {
+        "box": [
+          8327.0,
+          -28421,
+          -2117.6470588235293,
+          8397.0,
+          -27471,
+          14.705882352941217
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 5.2"
+      },
+      {
+        "box": [
+          8257.0,
+          -28421,
+          -2117.6470588235293,
+          8327.0,
+          -27471,
+          58.82352941176464
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 5.3"
+      },
+      {
+        "box": [
+          7977.0,
+          -28421,
+          -2001.1764705882354,
+          8257.0,
+          -27471,
+          -1941.1764705882354
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 6"
+      },
+      {
+        "box": [
+          8187.0,
+          -28421,
+          -1941.1764705882354,
+          8257.0,
+          -27471,
+          102.94117647058829
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 6.0"
+      },
+      {
+        "box": [
+          8117.0,
+          -28421,
+          -1941.1764705882354,
+          8187.0,
+          -27471,
+          147.0588235294117
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 6.1"
+      },
+      {
+        "box": [
+          8047.0,
+          -28421,
+          -1941.1764705882354,
+          8117.0,
+          -27471,
+          191.17647058823536
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 6.2"
+      },
+      {
+        "box": [
+          7977.0,
+          -28421,
+          -1941.1764705882354,
+          8047.0,
+          -27471,
+          235.29411764705878
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 6.3"
+      },
+      {
+        "box": [
+          7697.0,
+          -28421,
+          -1824.7058823529412,
+          7977.0,
+          -27471,
+          -1764.7058823529412
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 7"
+      },
+      {
+        "box": [
+          7907.0,
+          -28421,
+          -1764.7058823529412,
+          7977.0,
+          -27471,
+          279.41176470588243
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 7.0"
+      },
+      {
+        "box": [
+          7837.0,
+          -28421,
+          -1764.7058823529412,
+          7907.0,
+          -27471,
+          323.52941176470586
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 7.1"
+      },
+      {
+        "box": [
+          7767.0,
+          -28421,
+          -1764.7058823529412,
+          7837.0,
+          -27471,
+          367.6470588235295
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 7.2"
+      },
+      {
+        "box": [
+          7697.0,
+          -28421,
+          -1764.7058823529412,
+          7767.0,
+          -27471,
+          411.7647058823529
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 7.3"
+      },
+      {
+        "box": [
+          7417.0,
+          -28421,
+          -1648.235294117647,
+          7697.0,
+          -27471,
+          -1588.235294117647
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 8"
+      },
+      {
+        "box": [
+          7627.0,
+          -28421,
+          -1588.235294117647,
+          7697.0,
+          -27471,
+          455.88235294117635
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 8.0"
+      },
+      {
+        "box": [
+          7557.0,
+          -28421,
+          -1588.235294117647,
+          7627.0,
+          -27471,
+          500.0
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 8.1"
+      },
+      {
+        "box": [
+          7487.0,
+          -28421,
+          -1588.235294117647,
+          7557.0,
+          -27471,
+          544.1176470588234
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 8.2"
+      },
+      {
+        "box": [
+          7417.0,
+          -28421,
+          -1588.235294117647,
+          7487.0,
+          -27471,
+          588.2352941176471
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 8.3"
+      },
+      {
+        "box": [
+          7137.0,
+          -28421,
+          -1471.764705882353,
+          7417.0,
+          -27471,
+          -1411.764705882353
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 9"
+      },
+      {
+        "box": [
+          7347.0,
+          -28421,
+          -1411.764705882353,
+          7417.0,
+          -27471,
+          632.3529411764705
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 9.0"
+      },
+      {
+        "box": [
+          7277.0,
+          -28421,
+          -1411.764705882353,
+          7347.0,
+          -27471,
+          676.4705882352941
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 9.1"
+      },
+      {
+        "box": [
+          7207.0,
+          -28421,
+          -1411.764705882353,
+          7277.0,
+          -27471,
+          720.5882352941176
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 9.2"
+      },
+      {
+        "box": [
+          7137.0,
+          -28421,
+          -1411.764705882353,
+          7207.0,
+          -27471,
+          764.7058823529412
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 9.3"
+      },
+      {
+        "box": [
+          6857.0,
+          -28421,
+          -1295.2941176470588,
+          7137.0,
+          -27471,
+          -1235.2941176470588
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 10"
+      },
+      {
+        "box": [
+          7067.0,
+          -28421,
+          -1235.2941176470588,
+          7137.0,
+          -27471,
+          808.8235294117646
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 10.0"
+      },
+      {
+        "box": [
+          6997.0,
+          -28421,
+          -1235.2941176470588,
+          7067.0,
+          -27471,
+          852.9411764705883
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 10.1"
+      },
+      {
+        "box": [
+          6927.0,
+          -28421,
+          -1235.2941176470588,
+          6997.0,
+          -27471,
+          897.0588235294117
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 10.2"
+      },
+      {
+        "box": [
+          6857.0,
+          -28421,
+          -1235.2941176470588,
+          6927.0,
+          -27471,
+          941.1764705882354
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 10.3"
+      },
+      {
+        "box": [
+          6577.0,
+          -28421,
+          -1118.8235294117646,
+          6857.0,
+          -27471,
+          -1058.8235294117646
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 11"
+      },
+      {
+        "box": [
+          6787.0,
+          -28421,
+          -1058.8235294117646,
+          6857.0,
+          -27471,
+          985.2941176470588
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 11.0"
+      },
+      {
+        "box": [
+          6717.0,
+          -28421,
+          -1058.8235294117646,
+          6787.0,
+          -27471,
+          1029.4117647058824
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 11.1"
+      },
+      {
+        "box": [
+          6647.0,
+          -28421,
+          -1058.8235294117646,
+          6717.0,
+          -27471,
+          1073.5294117647059
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 11.2"
+      },
+      {
+        "box": [
+          6577.0,
+          -28421,
+          -1058.8235294117646,
+          6647.0,
+          -27471,
+          1117.6470588235293
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 11.3"
+      },
+      {
+        "box": [
+          6297.0,
+          -28421,
+          -942.3529411764707,
+          6577.0,
+          -27471,
+          -882.3529411764707
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 12"
+      },
+      {
+        "box": [
+          6507.0,
+          -28421,
+          -882.3529411764707,
+          6577.0,
+          -27471,
+          1161.7647058823527
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 12.0"
+      },
+      {
+        "box": [
+          6437.0,
+          -28421,
+          -882.3529411764707,
+          6507.0,
+          -27471,
+          1205.8823529411766
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 12.1"
+      },
+      {
+        "box": [
+          6367.0,
+          -28421,
+          -882.3529411764707,
+          6437.0,
+          -27471,
+          1250.0
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 12.2"
+      },
+      {
+        "box": [
+          6297.0,
+          -28421,
+          -882.3529411764707,
+          6367.0,
+          -27471,
+          1294.1176470588234
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 12.3"
+      },
+      {
+        "box": [
+          6017.0,
+          -28421,
+          -765.8823529411766,
+          6297.0,
+          -27471,
+          -705.8823529411766
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 13"
+      },
+      {
+        "box": [
+          6227.0,
+          -28421,
+          -705.8823529411766,
+          6297.0,
+          -27471,
+          1338.2352941176468
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 13.0"
+      },
+      {
+        "box": [
+          6157.0,
+          -28421,
+          -705.8823529411766,
+          6227.0,
+          -27471,
+          1382.3529411764707
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 13.1"
+      },
+      {
+        "box": [
+          6087.0,
+          -28421,
+          -705.8823529411766,
+          6157.0,
+          -27471,
+          1426.4705882352941
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 13.2"
+      },
+      {
+        "box": [
+          6017.0,
+          -28421,
+          -705.8823529411766,
+          6087.0,
+          -27471,
+          1470.5882352941176
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 13.3"
+      },
+      {
+        "box": [
+          5737.0,
+          -28421,
+          -589.4117647058824,
+          6017.0,
+          -27471,
+          -529.4117647058824
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 14"
+      },
+      {
+        "box": [
+          5947.0,
+          -28421,
+          -529.4117647058824,
+          6017.0,
+          -27471,
+          1514.705882352941
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 14.0"
+      },
+      {
+        "box": [
+          5877.0,
+          -28421,
+          -529.4117647058824,
+          5947.0,
+          -27471,
+          1558.8235294117649
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 14.1"
+      },
+      {
+        "box": [
+          5807.0,
+          -28421,
+          -529.4117647058824,
+          5877.0,
+          -27471,
+          1602.9411764705883
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 14.2"
+      },
+      {
+        "box": [
+          5737.0,
+          -28421,
+          -529.4117647058824,
+          5807.0,
+          -27471,
+          1647.0588235294117
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 14.3"
+      },
+      {
+        "box": [
+          5457.0,
+          -28421,
+          -412.9411764705883,
+          5737.0,
+          -27471,
+          -352.9411764705883
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 15"
+      },
+      {
+        "box": [
+          5667.0,
+          -28421,
+          -352.9411764705883,
+          5737.0,
+          -27471,
+          1691.1764705882351
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 15.0"
+      },
+      {
+        "box": [
+          5597.0,
+          -28421,
+          -352.9411764705883,
+          5667.0,
+          -27471,
+          1735.294117647059
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 15.1"
+      },
+      {
+        "box": [
+          5527.0,
+          -28421,
+          -352.9411764705883,
+          5597.0,
+          -27471,
+          1779.4117647058824
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 15.2"
+      },
+      {
+        "box": [
+          5457.0,
+          -28421,
+          -352.9411764705883,
+          5527.0,
+          -27471,
+          1823.5294117647059
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 15.3"
+      },
+      {
+        "box": [
+          5177.0,
+          -28421,
+          -236.47058823529414,
+          5457.0,
+          -27471,
+          -176.47058823529414
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) tread 16"
+      },
+      {
+        "box": [
+          5387.0,
+          -28421,
+          -176.47058823529414,
+          5457.0,
+          -27471,
+          1867.6470588235293
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 16.0"
+      },
+      {
+        "box": [
+          5317.0,
+          -28421,
+          -176.47058823529414,
+          5387.0,
+          -27471,
+          1911.7647058823527
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 16.1"
+      },
+      {
+        "box": [
+          5247.0,
+          -28421,
+          -176.47058823529414,
+          5317.0,
+          -27471,
+          1955.8823529411766
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 16.2"
+      },
+      {
+        "box": [
+          5177.0,
+          -28421,
+          -176.47058823529414,
+          5247.0,
+          -27471,
+          2000.0
+        ],
+        "what": "party-wall flight (r8, landing 1.2 m) headroom over tread 16.3"
+      }
+    ],
+    "rise": 176.47058823529412,
+    "going": 280.0,
+    "risers": 17,
+    "ends": {
+      "foot": [
+        "v",
+        9657,
+        -28421,
+        -27471
+      ],
+      "top": [
+        "v",
+        5177,
+        -28421,
+        -27471
+      ]
+    },
+    "pitch_line": {
+      "x_low": 9937.0,
+      "x_high": 5177,
+      "y0": -28421,
+      "y1": -27471,
+      "z_low": -3000,
+      "z_high": 0
+    }
+  }
+}

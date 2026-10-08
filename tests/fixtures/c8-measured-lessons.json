@@ -1,0 +1,20 @@
+{
+  "provenance": "Measured historical figures transcribed by value from docs/LEARNINGS.md; these are measurements, not recovered complete layouts.",
+  "l0200": {"bath_area_m2": 6, "band_depth_m": 5, "bath_width_m": 1.2},
+  "l0504": {"opening_mm": [5177, -28421, 8537, -27471], "soffit_m": -0.3},
+  "l0512": {"reported_turn_m": 0.69},
+  "l0531": {"achieved_m": 0.909, "old_grid_m": 0.05, "old_body_m": 0.9},
+  "l0534": {"overlap_m": 0.01},
+  "l0536": {"old_requirement_m": 0.813, "required_card": "nkba-seating-walk-past-1118"},
+  "l0542": {"sliver_overlap_m": 0.009},
+  "l0551": {"buried_min_m": 0.05, "buried_max_m": 0.2},
+  "l0557": {"center_x_m": 22.1, "original_width_loss_m": 0.153},
+  "l0591": {"overrun_m": 0.04},
+  "l0692": {"gap_east_m": 0.05, "gap_west_m": 0.2},
+  "l0713": {"panel_extension_m": 0.6, "door_clear_m": 0.67, "door_width_m": 0.9, "pendant_bottom_m": 1.15},
+  "l0720": {"door_center_x_m": 22.05, "door_width_m": 0.8, "wall_penetration_m": 0.053},
+  "l0820": {"id": "draft-searsia", "asset": "searsia_lucida", "position": [13.25, -21.65, -2.62], "rotation_deg": [0, 0, 0], "scale": 0.7, "provenance": "tests/test_landscape.py::test_old_north_bed_enters_basement_room"},
+  "l0834": {"id": "draft-teak-sofa", "rect": [24, -26.25, 26.1, -25.4], "provenance": "tests/test_landscape.py::test_route_real_furniture_footprint_and_quiet"},
+  "l0849": {"old_fan_x_m": 13.3, "chimney_center_x_m": 13.827, "half_width_m": 0.115, "depth_m": 0.16},
+  "l0856": {"rail_box_m": [5.317, -28.611, -1.95, 9.517, -28.581, 0.7], "finished_wall_y_m": -28.471, "provenance": "tests/test_render_standard.py::BuriedFixtures; historical rail polygon frozen separately"}
+}

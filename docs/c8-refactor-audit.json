@@ -1,0 +1,1203 @@
+{
+  "base": "f8f8cc604aa427eaa17348f8a349f69fc9c20399",
+  "route_body_ast_identical": true,
+  "removals": [
+    {
+      "path": "src/archpipe/concept/villa.py",
+      "scope": "critique",
+      "kind": "removed",
+      "name": "end",
+      "call": null,
+      "detail": "removed assignment 'end'",
+      "reason": "Stair end iteration, edge overlap matching, circulation ownership and undeclared-end reporting moved to GeometryTopology.stair_end_access/legacy_stair_ends; original messages retained. Frozen eb3283b stair and translated sibling plus concept regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa.py",
+      "scope": "critique",
+      "kind": "removed",
+      "name": "across",
+      "call": "rooms.items",
+      "detail": "removed assignment 'across' (call: rooms.items)",
+      "reason": "Stair end iteration, edge overlap matching, circulation ownership and undeclared-end reporting moved to GeometryTopology.stair_end_access/legacy_stair_ends; original messages retained. Frozen eb3283b stair and translated sibling plus concept regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa.py",
+      "scope": "critique",
+      "kind": "removed_call",
+      "name": "blocked_ends.append",
+      "call": "blocked_ends.append",
+      "detail": "removed call 'blocked_ends.append'",
+      "reason": "Stair end iteration, edge overlap matching, circulation ownership and undeclared-end reporting moved to GeometryTopology.stair_end_access/legacy_stair_ends; original messages retained. Frozen eb3283b stair and translated sibling plus concept regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems.touching",
+      "kind": "removed_scope",
+      "name": "route_problems.touching",
+      "call": null,
+      "detail": "Scope 'route_problems.touching' was removed",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_ov",
+      "kind": "removed_call",
+      "name": "max",
+      "call": "max",
+      "detail": "removed call 'max'",
+      "reason": "Identical strict two-axis rectangle overlap arithmetic and caller tolerance moved to geometry_topology.rectangle_overlap; public _ov forwards arguments. Existing furnishing/native read-back tests retain touching versus penetration outcomes."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_ov",
+      "kind": "removed_call",
+      "name": "min",
+      "call": "min",
+      "detail": "removed call 'min'",
+      "reason": "Identical strict two-axis rectangle overlap arithmetic and caller tolerance moved to geometry_topology.rectangle_overlap; public _ov forwards arguments. Existing furnishing/native read-back tests retain touching versus penetration outcomes."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_check",
+      "kind": "removed",
+      "name": "d",
+      "call": null,
+      "detail": "removed assignment 'd'",
+      "reason": "Door-width-loss loop moved to GeometryTopology.opening_host_collisions: same _door_axis, 10 mm sampling strip, 1 mm overlap comparison, parallel-cut _walls and lost-width calculation; exact original messages returned at same per-level location. Current clean and historical/renamed door-position regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_check",
+      "kind": "removed",
+      "name": "h_",
+      "call": "_door_axis",
+      "detail": "removed assignment 'h_' (call: _door_axis)",
+      "reason": "Door-width-loss loop moved to GeometryTopology.opening_host_collisions: same _door_axis, 10 mm sampling strip, 1 mm overlap comparison, parallel-cut _walls and lost-width calculation; exact original messages returned at same per-level location. Current clean and historical/renamed door-position regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_check",
+      "kind": "removed",
+      "name": "o",
+      "call": null,
+      "detail": "removed assignment 'o'",
+      "reason": "Door-width-loss loop moved to GeometryTopology.opening_host_collisions: same _door_axis, 10 mm sampling strip, 1 mm overlap comparison, parallel-cut _walls and lost-width calculation; exact original messages returned at same per-level location. Current clean and historical/renamed door-position regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_check",
+      "kind": "removed",
+      "name": "q",
+      "call": null,
+      "detail": "removed assignment 'q'",
+      "reason": "Door-width-loss loop moved to GeometryTopology.opening_host_collisions: same _door_axis, 10 mm sampling strip, 1 mm overlap comparison, parallel-cut _walls and lost-width calculation; exact original messages returned at same per-level location. Current clean and historical/renamed door-position regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_check",
+      "kind": "removed",
+      "name": "lost",
+      "call": "min",
+      "detail": "removed assignment 'lost' (call: min)",
+      "reason": "Door-width-loss loop moved to GeometryTopology.opening_host_collisions: same _door_axis, 10 mm sampling strip, 1 mm overlap comparison, parallel-cut _walls and lost-width calculation; exact original messages returned at same per-level location. Current clean and historical/renamed door-position regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_check",
+      "kind": "removed_call",
+      "name": "'/'.join",
+      "call": "'/'.join",
+      "detail": "removed call ''/'.join'",
+      "reason": "Door-width-loss loop moved to GeometryTopology.opening_host_collisions: same _door_axis, 10 mm sampling strip, 1 mm overlap comparison, parallel-cut _walls and lost-width calculation; exact original messages returned at same per-level location. Current clean and historical/renamed door-position regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "_check",
+      "kind": "removed_call",
+      "name": "d.get",
+      "call": "d.get",
+      "detail": "removed call 'd.get'",
+      "reason": "Door-width-loss loop moved to GeometryTopology.opening_host_collisions: same _door_axis, 10 mm sampling strip, 1 mm overlap comparison, parallel-cut _walls and lost-width calculation; exact original messages returned at same per-level location. Current clean and historical/renamed door-position regressions prove parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "out",
+      "call": null,
+      "detail": "removed assignment 'out'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "done",
+      "call": "set",
+      "detail": "removed assignment 'done' (call: set)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "zones",
+      "call": "_door_approaches",
+      "detail": "removed assignment 'zones' (call: _door_approaches)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "rid",
+      "call": "lay['rooms'].items",
+      "detail": "removed assignment 'rid' (call: lay['rooms'].items)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "r",
+      "call": "lay['rooms'].items",
+      "detail": "removed assignment 'r' (call: lay['rooms'].items)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "cl",
+      "call": "_cluster",
+      "detail": "removed assignment 'cl' (call: _cluster)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "done",
+      "call": null,
+      "detail": "removed assignment 'done'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "rects",
+      "call": null,
+      "detail": "removed assignment 'rects'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "x0",
+      "call": "min",
+      "detail": "removed assignment 'x0' (call: min)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "y0",
+      "call": "min",
+      "detail": "removed assignment 'y0' (call: min)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "x1",
+      "call": "max",
+      "detail": "removed assignment 'x1' (call: max)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "y1",
+      "call": "max",
+      "detail": "removed assignment 'y1' (call: max)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "nx",
+      "call": "int",
+      "detail": "removed assignment 'nx' (call: int)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "ny",
+      "call": "int",
+      "detail": "removed assignment 'ny' (call: int)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "gx",
+      "call": "np.arange",
+      "detail": "removed assignment 'gx' (call: np.arange)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "gy",
+      "call": "np.arange",
+      "detail": "removed assignment 'gy' (call: np.arange)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "X",
+      "call": "np.meshgrid",
+      "detail": "removed assignment 'X' (call: np.meshgrid)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "Y",
+      "call": "np.meshgrid",
+      "detail": "removed assignment 'Y' (call: np.meshgrid)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "free",
+      "call": "np.zeros",
+      "detail": "removed assignment 'free' (call: np.zeros)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "a",
+      "call": null,
+      "detail": "removed assignment 'a'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "b",
+      "call": null,
+      "detail": "removed assignment 'b'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "c",
+      "call": null,
+      "detail": "removed assignment 'c'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "d",
+      "call": null,
+      "detail": "removed assignment 'd'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "free",
+      "call": null,
+      "detail": "removed assignment 'free'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "walls_l",
+      "call": "_walls",
+      "detail": "removed assignment 'walls_l' (call: _walls)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "obst",
+      "call": "_columns",
+      "detail": "removed assignment 'obst' (call: _columns)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "chairs",
+      "call": "_cinema_chair_rects",
+      "detail": "removed assignment 'chairs' (call: _cinema_chair_rects)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "obst",
+      "call": "chairs.values",
+      "detail": "removed assignment 'obst' (call: chairs.values)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "obst",
+      "call": null,
+      "detail": "removed assignment 'obst'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "obst",
+      "call": "sp.get",
+      "detail": "removed assignment 'obst' (call: sp.get)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "a",
+      "call": null,
+      "detail": "removed assignment 'a'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "b",
+      "call": null,
+      "detail": "removed assignment 'b'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "c",
+      "call": null,
+      "detail": "removed assignment 'c'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "d",
+      "call": null,
+      "detail": "removed assignment 'd'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "free",
+      "call": null,
+      "detail": "removed assignment 'free'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "bedroom",
+      "call": "all",
+      "detail": "removed assignment 'bedroom' (call: all)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "suite_dressing",
+      "call": null,
+      "detail": "removed assignment 'suite_dressing'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "width",
+      "call": "min",
+      "detail": "removed assignment 'width' (call: min)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "clear",
+      "call": "np.full",
+      "detail": "removed assignment 'clear' (call: np.full)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "a",
+      "call": "_outside",
+      "detail": "removed assignment 'a' (call: _outside)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "b",
+      "call": "_outside",
+      "detail": "removed assignment 'b' (call: _outside)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "c",
+      "call": "_outside",
+      "detail": "removed assignment 'c' (call: _outside)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "d",
+      "call": "_outside",
+      "detail": "removed assignment 'd' (call: _outside)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "dx",
+      "call": "np.maximum",
+      "detail": "removed assignment 'dx' (call: np.maximum)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "dy",
+      "call": "np.maximum",
+      "detail": "removed assignment 'dy' (call: np.maximum)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "clear",
+      "call": "np.minimum",
+      "detail": "removed assignment 'clear' (call: np.minimum)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "ok",
+      "call": null,
+      "detail": "removed assignment 'ok'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "nodes",
+      "call": null,
+      "detail": "removed assignment 'nodes'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "z",
+      "call": null,
+      "detail": "removed assignment 'z'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "zc",
+      "call": null,
+      "detail": "removed assignment 'zc'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "sid",
+      "call": null,
+      "detail": "removed assignment 'sid'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "srm",
+      "call": null,
+      "detail": "removed assignment 'srm'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "end",
+      "call": "srm.get",
+      "detail": "removed assignment 'end' (call: srm.get)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "ax_",
+      "call": null,
+      "detail": "removed assignment 'ax_'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "c",
+      "call": null,
+      "detail": "removed assignment 'c'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "a",
+      "call": null,
+      "detail": "removed assignment 'a'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "b",
+      "call": null,
+      "detail": "removed assignment 'b'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "x0s",
+      "call": null,
+      "detail": "removed assignment 'x0s'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "y0s",
+      "call": null,
+      "detail": "removed assignment 'y0s'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "x1s",
+      "call": null,
+      "detail": "removed assignment 'x1s'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "y1s",
+      "call": null,
+      "detail": "removed assignment 'y1s'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "z",
+      "call": "abs",
+      "detail": "removed assignment 'z' (call: abs)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "z",
+      "call": "abs",
+      "detail": "removed assignment 'z' (call: abs)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "rid",
+      "call": null,
+      "detail": "removed assignment 'rid'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "w",
+      "call": null,
+      "detail": "removed assignment 'w'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "half",
+      "call": null,
+      "detail": "removed assignment 'half'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "ax_",
+      "call": "w.get",
+      "detail": "removed assignment 'ax_' (call: w.get)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "rr",
+      "call": null,
+      "detail": "removed assignment 'rr'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "wr",
+      "call": "next",
+      "detail": "removed assignment 'wr' (call: next)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "hi",
+      "call": "abs",
+      "detail": "removed assignment 'hi' (call: abs)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "y",
+      "call": null,
+      "detail": "removed assignment 'y'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "z",
+      "call": null,
+      "detail": "removed assignment 'z'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "hi",
+      "call": "abs",
+      "detail": "removed assignment 'hi' (call: abs)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "x",
+      "call": null,
+      "detail": "removed assignment 'x'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "z",
+      "call": null,
+      "detail": "removed assignment 'z'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "it",
+      "call": null,
+      "detail": "removed assignment 'it'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "t",
+      "call": "cat.get",
+      "detail": "removed assignment 't' (call: cat.get)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "seen",
+      "call": "np.zeros",
+      "detail": "removed assignment 'seen' (call: np.zeros)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "start",
+      "call": "touching",
+      "detail": "removed assignment 'start' (call: touching)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "q",
+      "call": "collections.deque",
+      "detail": "removed assignment 'q' (call: collections.deque)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "i",
+      "call": "q.popleft",
+      "detail": "removed assignment 'i' (call: q.popleft)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "j",
+      "call": "q.popleft",
+      "detail": "removed assignment 'j' (call: q.popleft)",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "di",
+      "call": null,
+      "detail": "removed assignment 'di'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "dj",
+      "call": null,
+      "detail": "removed assignment 'dj'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "a",
+      "call": null,
+      "detail": "removed assignment 'a'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "b",
+      "call": null,
+      "detail": "removed assignment 'b'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "name",
+      "call": null,
+      "detail": "removed assignment 'name'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed",
+      "name": "rs_",
+      "call": null,
+      "detail": "removed assignment 'rs_'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "'+'.join",
+      "call": "'+'.join",
+      "detail": "removed call ''+'.join'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "(touching(rect) & seen).any",
+      "call": "(touching(rect) & seen).any",
+      "detail": "removed call '(touching(rect) & seen).any'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "_middle",
+      "call": "_middle",
+      "detail": "removed call '_middle'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "any",
+      "call": "any",
+      "detail": "removed call 'any'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "cl.intersection",
+      "call": "cl.intersection",
+      "detail": "removed call 'cl.intersection'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "dict",
+      "call": "dict",
+      "detail": "removed call 'dict'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "it.get",
+      "call": "it.get",
+      "detail": "removed call 'it.get'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "len",
+      "call": "len",
+      "detail": "removed call 'len'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "n[0].startswith",
+      "call": "n[0].startswith",
+      "detail": "removed call 'n[0].startswith'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "nodes.append",
+      "call": "nodes.append",
+      "detail": "removed call 'nodes.append'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "nodes.sort",
+      "call": "nodes.sort",
+      "detail": "removed call 'nodes.sort'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "out.append",
+      "call": "out.append",
+      "detail": "removed call 'out.append'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "q.append",
+      "call": "q.append",
+      "detail": "removed call 'q.append'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "round",
+      "call": "round",
+      "detail": "removed call 'round'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "side_zone",
+      "call": "side_zone",
+      "detail": "removed call 'side_zone'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "scope": "route_problems",
+      "kind": "removed_call",
+      "name": "sorted",
+      "call": "sorted",
+      "detail": "removed call 'sorted'",
+      "reason": "Entire original route_problems body, including nested touching function, moved unchanged to _route_problems. AST equality verified by c8 audit and regression. Public function builds read-only topology and converts its findings back to the original (message, {}) tuples; no destination, raster fill, disc distance, furniture, flight/void or source-width logic removed."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "out",
+      "call": null,
+      "detail": "removed assignment 'out'",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "item",
+      "call": null,
+      "detail": "removed assignment 'item'",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "triangles",
+      "call": "prop_triangles",
+      "detail": "removed assignment 'triangles' (call: prop_triangles)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "rect",
+      "call": "_rect",
+      "detail": "removed assignment 'rect' (call: _rect)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "candidates",
+      "call": "routes.items",
+      "detail": "removed assignment 'candidates' (call: routes.items)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "triangles",
+      "call": "_triangles",
+      "detail": "removed assignment 'triangles' (call: _triangles)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "_",
+      "call": "_triangles",
+      "detail": "removed assignment '_' (call: _triangles)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "name",
+      "call": null,
+      "detail": "removed assignment 'name'",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "route",
+      "call": null,
+      "detail": "removed assignment 'route'",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "ground",
+      "call": "(route_ground or {}).get",
+      "detail": "removed assignment 'ground' (call: (route_ground or {}).get)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "low",
+      "call": "np.array",
+      "detail": "removed assignment 'low' (call: np.array)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "high",
+      "call": "np.array",
+      "detail": "removed assignment 'high' (call: np.array)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "nearby",
+      "call": "np.all",
+      "detail": "removed assignment 'nearby' (call: np.all)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "blocked",
+      "call": "nearby.any",
+      "detail": "removed assignment 'blocked' (call: nearby.any)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed",
+      "name": "blocked",
+      "call": "item.get",
+      "detail": "removed assignment 'blocked' (call: item.get)",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    },
+    {
+      "path": "src/archpipe/concept/villa_landscape.py",
+      "scope": "route_violations",
+      "kind": "removed_call",
+      "name": "out.append",
+      "call": "out.append",
+      "detail": "removed call 'out.append'",
+      "reason": "Walking intersection moved to GeometryTopology.object_in_route; same measured route triangles, rectangle prefilter, vertical band, exact triangle-box overlap, scale/band validation and result order. Frozen c8-route-before.py differential tests include low branches, high canopy, historical props, rect objects and failure parity."
+    }
+  ]
+}

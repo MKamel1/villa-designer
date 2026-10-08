@@ -153,7 +153,8 @@ def head_zone(it, length):
 
 
 def _ov(a, b, tol=1e-3):            # 1 mm: a piece set against a wall touches it, it does not overlap
-    return min(a[2], b[2]) - max(a[0], b[0]) > tol and min(a[3], b[3]) - max(a[1], b[1]) > tol
+    from ..geometry_topology import rectangle_overlap
+    return rectangle_overlap(a, b, tol)
 
 
 # ---- the D1 layout ----------------------------------------------------------------------------------------------
@@ -683,17 +684,11 @@ def _check(items=None, lay=None, _extended=False):
                 if _ov(z["rect"], footprint(it)):
                     probs["doors"].append("%s blocks the door %s" % (it["id"], z["door"]))
         wl = _walls(sp, lv)
-        for d in sp["doors"]:                       # an opening must not run into a wall across it (the dressing
-            if d["level"] != lv:                    # door at 22.10 ran 0.15 m into the south wall)
-                continue
-            h_ = _door_axis(d) == "h"
-            o = (d["x"] - d["width"] / 2, d["y"] - 0.01, d["x"] + d["width"] / 2, d["y"] + 0.01) if h_ else \
-                (d["x"] - 0.01, d["y"] - d["width"] / 2, d["x"] + 0.01, d["y"] + d["width"] / 2)
-            for q in wl:
-                if _ov(o, q):
-                    lost = (min(o[2], q[2]) - max(o[0], q[0])) if h_ else (min(o[3], q[3]) - max(o[1], q[1]))
-                    probs["doors"].append("door %s runs %d mm into a wall" % ("/".join(d.get("rooms") or []),
-                                                                            round(lost * 1000)))
+        from ..geometry_topology import GeometryTopology
+        topology = GeometryTopology.from_inputs(layout=lay, specification=sp)
+        for finding in topology.opening_host_collisions():
+            if finding.reference_id.startswith(lv+':'):
+                probs["doors"].append(finding.detail)
         for w in sp["windows"]:
             if w["level"] != lv:
                 continue
@@ -975,6 +970,13 @@ TRACE = None   # set to {} to keep each cluster's raster
 
 
 def route_problems(lay, sp, items, level, cell=0.02, room_ids=None):
+    """Review the existing route raster through the shared read-only topology."""
+    from ..geometry_topology import GeometryTopology
+    model = GeometryTopology.from_inputs(layout=lay, specification=sp, furniture=items)
+    return [(finding.detail, {}) for finding in model.furnished_routes(level, cell, room_ids)]
+
+
+def _route_problems(lay, sp, items, level, cell=0.02, room_ids=None):
     """In each open cluster of rooms, a 914 mm body (card mitton-path-of-travel-min) must get from every door of
     the cluster to every other door and to every piece's working side. Furniture over 0.3 m and the columns are
     obstacles; walls are the cluster's own edges. Returns [(problem, measured)]."""
