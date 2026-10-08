@@ -62,10 +62,15 @@ from archpipe.external_claims import (
 from archpipe import asset_intake, material_basis, refactor_audit, render_qa, safe_io, villa_render_contract
 from archpipe.concept import (
     physical_part,
+    render_support,
     revit_spec,
+    stairs,
+    villa,
+    villa_furnish,
     villa_furnish3d,
     villa_landscape,
     villa_lighting,
+    villa_parking,
     villa_r11,
 )
 from archpipe.luminaires import install
@@ -110,9 +115,20 @@ __all__ = [
     "check_raw_copy_lint",
     "check_refactor_silent_deletion",
     "check_render_contract_scene_geometry",
+    "check_render_support_blocked_openings",
+    "check_render_support_unsupported",
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
+    "check_stair_pitch_headroom",
     "check_utf16_or_utf8_json",
+    "check_villa_concept_stair_access",
+    "check_villa_furnish3d_opening_spec_id",
+    "check_villa_furnish_door_wall_clearance",
+    "check_villa_furnish_kitchen_run_modules",
+    "check_villa_furnish_route_corner_disc",
+    "check_villa_landscape_prop_room_extent",
+    "check_villa_landscape_route_obstruction",
+    "check_villa_route_width_stair_void",
     "clear_registry",
     "coverage_report",
     "find_guards_for_lesson",
@@ -2044,6 +2060,509 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Audits behaviour-preserving refactors and fails closed on un-allowed code removals (refactor-silent-deletion)",
+)
+
+
+# -----------------------------------------------------------------------------
+# Phase 2 Batch 4: Geometry, Stairs, Openings, Routes & Readback Guards
+# -----------------------------------------------------------------------------
+
+# 39. l0312, l0310, l0319: Stair access and circulation connectivity
+def check_villa_concept_stair_access(lay: dict[str, Any]) -> dict[str, Any]:
+    """Validates that all stair ends open onto circulation in villa concept layout (l0312, l0310, l0319)."""
+    res = villa.critique(lay)
+    chk = next((c for c in res.get("checks", []) if c.get("check") == "stair_access"), None)
+    if chk is None or chk.get("status") == "fail":
+        raise ValueError(f"Stair access check failed: {chk}")
+    return chk
+
+
+_lay_stair_access_bad = copy.deepcopy(villa.concept_a())
+_lay_stair_access_bad["rooms"]["stair-b"]["ends"] = [["h", villa.YE, villa.SX0, villa.SX0 + 0.9]]
+
+register_guard(
+    fn=check_villa_concept_stair_access,
+    name="villa_concept_stair_access",
+    lesson_ids=("l0312-stair-access-check", "l0312", "l0310-critic-treated-stair", "l0310", "l0319-check-stair-by", "l0319"),
+    real_case=case(_lay_stair_access_bad),
+    clean_case=case(villa.concept_a()),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that all stair ends open onto circulation rather than walls or unreached rooms (l0312, l0310, l0319)",
+)
+
+
+# 40. l0504: Headroom measured from pitch line under slab soffit
+def check_stair_pitch_headroom(
+    stair: dict[str, Any],
+    opening_mm: list[float] | None,
+    min_headroom_mm: float = 2000.0,
+) -> float:
+    """Validates that stair pitch line headroom under slab soffit and beams meets minimum clearance (l0504)."""
+    least_clearance, _ = stairs.pitch_headroom(stair, opening_mm)
+    if least_clearance < min_headroom_mm:
+        raise ValueError(
+            f"Stair pitch headroom {least_clearance:.1f} mm is below required {min_headroom_mm:.1f} mm"
+        )
+    return least_clearance
+
+
+register_guard(
+    fn=check_stair_pitch_headroom,
+    name="stair_pitch_headroom",
+    lesson_ids=("l0504-headroom-measured-from", "l0504"),
+    real_case=case(stairs.party_flight_r8(), [5177, -28421, 8537, -27471]),
+    clean_case=case(stairs.party_flight_r8(), [5177, -28421, 8887, -27471]),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that stair pitch line headroom under slab soffit and beams meets minimum 2000 mm clearance (l0504)",
+)
+
+
+# 41. l0512: Clear route width from stair top around void
+def check_villa_route_width_stair_void(lay: dict[str, Any], min_width_m: float = 0.90) -> float:
+    """Validates clear route width from stair top around void to bedroom corridor (l0512)."""
+    width = villa.gf_route_width(lay)
+    if width < min_width_m:
+        raise ValueError(
+            f"GF route width around stair void {width:.2f} m is below minimum {min_width_m:.2f} m"
+        )
+    return width
+
+
+_lay_route_pinch_bad = copy.deepcopy(villa_parking.options()[0])
+_r_pinch = _lay_route_pinch_bad["rooms"]
+_r_pinch["kids-a"]["rect"][0] = _r_pinch["study-game"]["rect"][2] = 9.227
+_r_pinch["gallery-end"]["rect"] = [8.657, -27.371, 9.227, -26.371]
+_r_pinch["stair-gf"]["rect"][2] = _r_pinch["corridor"]["rect"][0] = 8.657
+_r_pinch["study-game"].pop("open", None)
+
+register_guard(
+    fn=check_villa_route_width_stair_void,
+    name="villa_route_width_stair_void",
+    lesson_ids=("l0512-way-from-stair", "l0512"),
+    real_case=case(_lay_route_pinch_bad),
+    clean_case=case(villa_parking.options()[0]),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates clear route width from stair top around void into bedroom corridor meets 0.90 m requirement (l0512)",
+)
+
+
+# 42. l0557: Door running into cross wall
+def check_villa_furnish_door_wall_clearance(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that doors do not run into intersecting walls across openings (l0557)."""
+    res = villa_furnish.check(items, lay)
+    door_res = res.get("doors", {})
+    if door_res.get("status") != "pass" or door_res.get("problems"):
+        raise ValueError(f"Door clearance check failed: {door_res.get('problems')}")
+    return door_res
+
+
+_lay_door_wall_bad = copy.deepcopy(villa_r11.design("D1"))
+_lay_door_wall_bad["rooms"]["parents-dressing"]["door_at"]["parents-bed"] = 22.10
+
+register_guard(
+    fn=check_villa_furnish_door_wall_clearance,
+    name="villa_furnish_door_wall_clearance",
+    lesson_ids=("l0557-door-can-run", "l0557"),
+    real_case=case(None, _lay_door_wall_bad),
+    clean_case=case(None, villa_r11.design("D1")),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that doors do not run into intersecting walls across openings (l0557)",
+)
+
+
+# 43. l0576, l0531: Route corner disc path sweep
+def check_villa_furnish_route_corner_disc(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that circulation routes admit clear disc path sweep round corners without pinch (l0576, l0531)."""
+    res = villa_furnish.check(items, lay)
+    routes_res = res.get("routes", {})
+    if routes_res.get("status") != "pass" or routes_res.get("problems"):
+        raise ValueError(f"Route corner disc clearance check failed: {routes_res.get('problems')}")
+    return routes_res
+
+
+_lay_d1_base = villa_r11.design("D1")
+_items_disc_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_by_id_disc = {it["id"]: it for it in _items_disc_bad}
+_by_id_disc["pd-hang-2"]["cy"] += 0.24
+
+register_guard(
+    fn=check_villa_furnish_route_corner_disc,
+    name="villa_furnish_route_corner_disc",
+    lesson_ids=("l0576-square-body-failed", "l0576", "l0531-body-rounded-down", "l0531"),
+    real_case=case(_items_disc_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that circulation routes admit clear disc path sweep round corners without pinch (l0576, l0531)",
+)
+
+
+# 44. l0591: Kitchen run modules overrunning run length
+def check_villa_furnish_kitchen_run_modules(
+    items: list[dict[str, Any]] | None = None,
+    lay: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Validates that kitchen counter run modules match run length and spacing requirements (l0591)."""
+    res = villa_furnish.check(items, lay)
+    k_res = res.get("kitchen", {})
+    if k_res.get("status") != "pass" or k_res.get("problems"):
+        raise ValueError(f"Kitchen module checks failed: {k_res.get('problems')}")
+    return k_res
+
+
+_items_k_bad = copy.deepcopy(villa_furnish.layout(_lay_d1_base))
+_by_id_k = {it["id"]: it for it in _items_k_bad}
+_by_id_k["dk-run"]["modules"][-1] = ("counter", 0.4)
+
+register_guard(
+    fn=check_villa_furnish_kitchen_run_modules,
+    name="villa_furnish_kitchen_run_modules",
+    lesson_ids=("l0591-run-s-modules", "l0591"),
+    real_case=case(_items_k_bad, _lay_d1_base),
+    clean_case=case(villa_furnish.layout(_lay_d1_base), _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that kitchen counter run modules do not overrun available run length (l0591)",
+)
+
+
+# 45. l0820: Prop extent checked against basement rooms
+def check_villa_landscape_prop_room_extent(
+    props: list[dict[str, Any]],
+    rooms: tuple[Any, ...] | list[Any] = (),
+) -> list[tuple[str, str]]:
+    """Validates that landscape props do not enter building footprint or basement rooms (l0820)."""
+    violations = villa_landscape.extent_violations(props, rooms)
+    if violations:
+        raise ValueError(f"Landscape prop extent violations: {violations}")
+    return violations
+
+
+_rooms_garden_b = villa_landscape.garden_level_rooms(_lay_d1_base)
+_draft_searsia_prop = [
+    {
+        "id": "draft-searsia",
+        "asset": "searsia_lucida",
+        "position": [13.25, -21.65, villa_landscape.GROUND + 0.38],
+        "rotation_deg": [0, 0, 0],
+        "scale": 0.7,
+    }
+]
+_meshes_land, _props_land, _notes_land, _plan_land = villa_landscape.build(
+    revit_spec.build(_lay_d1_base), _lay_d1_base
+)
+
+register_guard(
+    fn=check_villa_landscape_prop_room_extent,
+    name="villa_landscape_prop_room_extent",
+    lesson_ids=("l0820-prop-extent-guard", "l0820"),
+    real_case=case(_draft_searsia_prop, _rooms_garden_b),
+    clean_case=case(_props_land, _rooms_garden_b),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that landscape props do not enter building footprint or basement rooms (l0820)",
+)
+
+
+# 46. l0834: Landscape route obstruction check
+def check_villa_landscape_route_obstruction(
+    items: list[dict[str, Any]],
+    routes: dict[str, Any] | None = None,
+) -> list[tuple[str, str]]:
+    """Validates that landscape props and furniture keep clear routes (l0834)."""
+    violations = villa_landscape.route_violations(items, routes=routes or villa_landscape.PATHS)
+    if violations:
+        raise ValueError(f"Landscape route violations: {violations}")
+    return violations
+
+
+_draft_teak_sofa_item = [{"id": "draft-teak-sofa", "rect": (24.0, -26.25, 26.1, -25.40)}]
+
+register_guard(
+    fn=check_villa_landscape_route_obstruction,
+    name="villa_landscape_route_obstruction",
+    lesson_ids=("l0834-landscape-change-must", "l0834"),
+    real_case=case(_draft_teak_sofa_item),
+    clean_case=case(_props_land + _plan_land["objects"]),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that landscape props and furniture keep required clear walking routes (l0834)",
+)
+
+
+# 47. l0695: Render support unsupported items check
+def check_render_support_unsupported(
+    scene: dict[str, Any],
+    lay: dict[str, Any] | None = None,
+) -> list[Any]:
+    """Validates that all furniture, fixtures, dressing parts and props have physical support (l0695)."""
+    floating = render_support.unsupported(scene, lay=lay)
+    if floating:
+        raise ValueError(f"Floating unsupported scene items detected: {floating}")
+    return floating
+
+
+_unsupported_real_scene = {
+    "meshes": [
+        {
+            "id": "lamp-floating-shade",
+            "group": "fixture",
+            "material": "black-metal",
+            "faces": [
+                [[0.0, 0.0, 2.5], [1.0, 0.0, 2.5], [1.0, 1.0, 2.5], [0.0, 1.0, 2.5]],
+            ],
+        }
+    ],
+    "props": [],
+}
+
+_unsupported_clean_scene = {
+    "meshes": [
+        {
+            "id": "floor-slab",
+            "group": "building",
+            "material": "plaster",
+            "faces": [
+                [[0.0, 0.0, 0.0], [2.0, 0.0, 0.0], [2.0, 2.0, 0.0], [0.0, 2.0, 0.0]],
+            ],
+        },
+        {
+            "id": "table-resting",
+            "group": "furniture",
+            "material": "oak",
+            "faces": [
+                [[0.5, 0.5, 0.0], [0.5, 1.5, 0.0], [1.5, 1.5, 0.0], [1.5, 0.5, 0.0]],
+                [[0.5, 0.5, 0.8], [1.5, 0.5, 0.8], [1.5, 1.5, 0.8], [0.5, 1.5, 0.8]],
+                [[0.5, 0.5, 0.0], [1.5, 0.5, 0.0], [1.5, 0.5, 0.8], [0.5, 0.5, 0.8]],
+                [[1.5, 1.5, 0.0], [0.5, 1.5, 0.0], [0.5, 1.5, 0.8], [1.5, 1.5, 0.8]],
+                [[0.5, 1.5, 0.0], [0.5, 0.5, 0.0], [0.5, 0.5, 0.8], [0.5, 1.5, 0.8]],
+                [[1.5, 0.5, 0.0], [1.5, 1.5, 0.0], [1.5, 1.5, 0.8], [1.5, 0.5, 0.8]],
+            ],
+        },
+    ],
+    "props": [],
+}
+
+register_guard(
+    fn=check_render_support_unsupported,
+    name="render_support_unsupported_objects",
+    lesson_ids=("l0695-floating-objects-found", "l0695"),
+    real_case=case(_unsupported_real_scene),
+    clean_case=case(_unsupported_clean_scene),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that all furniture, fixtures, dressing parts and props have physical support (l0695)",
+)
+
+
+# 48. l0713: Render support blocked openings check
+def check_render_support_blocked_openings(
+    scene: dict[str, Any],
+    lay: dict[str, Any] | None = None,
+) -> list[Any]:
+    """Validates that doors and room entrances remain passable without obstructive render geometry (l0713)."""
+    blocked = render_support.blocked_openings(scene, lay=lay)
+    if blocked:
+        raise ValueError(f"Blocked openings detected in scene: {blocked}")
+    return blocked
+
+
+# Historical defect (l0713): The slatted headboard panel ran 0.6 m past the bed
+# each way without checking for solid wall backing, blocking both the doorless
+# parents' entry opening (y = -26.591, x in [18.427, 19.527]) and the dressing
+# door (y = -26.591, x centred at 21.897).
+_blocked_real_faces = []
+for _k in range(int((21.13 + 0.9 - (19.53 - 0.6)) / 0.05)):
+    _xa = round(19.53 - 0.6 + _k * 0.05, 3)
+    _x0, _x1 = _xa, _xa + 0.03
+    _y0, _y1 = -26.591, -26.561
+    _z0, _z1 = 0.0, 2.10
+    _blocked_real_faces.extend([
+        [[_x0, _y0, _z0], [_x0, _y1, _z0], [_x1, _y1, _z0], [_x1, _y0, _z0]],
+        [[_x0, _y0, _z1], [_x1, _y0, _z1], [_x1, _y1, _z1], [_x0, _y1, _z1]],
+        [[_x0, _y0, _z0], [_x1, _y0, _z0], [_x1, _y0, _z1], [_x0, _y0, _z1]],
+        [[_x1, _y1, _z0], [_x0, _y1, _z0], [_x0, _y1, _z1], [_x1, _y1, _z1]],
+        [[_x0, _y1, _z0], [_x0, _y0, _z0], [_x0, _y0, _z1], [_x0, _y1, _z1]],
+        [[_x1, _y0, _z0], [_x1, _y1, _z0], [_x1, _y1, _z1], [_x1, _y0, _z1]],
+    ])
+
+_blocked_real_scene = {
+    "meshes": [
+        {
+            "id": "detail-headboard-slats",
+            "group": "furniture",
+            "material": "oak",
+            "faces": _blocked_real_faces,
+        }
+    ]
+}
+
+# Clean case: headboard slats constrained to the solid wall backing (x in [19.60, 21.40]),
+# leaving both the entry opening (x < 19.527) and dressing door (x > 21.497) completely clear.
+_blocked_clean_faces = []
+for _k in range(int((21.40 - 19.60) / 0.05)):
+    _xa = round(19.60 + _k * 0.05, 3)
+    _x0, _x1 = _xa, _xa + 0.03
+    _y0, _y1 = -26.591, -26.561
+    _z0, _z1 = 0.0, 2.10
+    _blocked_clean_faces.extend([
+        [[_x0, _y0, _z0], [_x0, _y1, _z0], [_x1, _y1, _z0], [_x1, _y0, _z0]],
+        [[_x0, _y0, _z1], [_x1, _y0, _z1], [_x1, _y1, _z1], [_x0, _y1, _z1]],
+        [[_x0, _y0, _z0], [_x1, _y0, _z0], [_x1, _y0, _z1], [_x0, _y0, _z1]],
+        [[_x1, _y1, _z0], [_x0, _y1, _z0], [_x0, _y1, _z1], [_x1, _y1, _z1]],
+        [[_x0, _y1, _z0], [_x0, _y0, _z0], [_x0, _y0, _z1], [_x0, _y1, _z1]],
+        [[_x1, _y0, _z0], [_x1, _y1, _z0], [_x1, _y1, _z1], [_x1, _y0, _z1]],
+    ])
+
+_blocked_clean_scene = {
+    "meshes": [
+        {
+            "id": "detail-headboard-slats",
+            "group": "furniture",
+            "material": "oak",
+            "faces": _blocked_clean_faces,
+        }
+    ]
+}
+
+register_guard(
+    fn=check_render_support_blocked_openings,
+    name="render_support_blocked_openings",
+    lesson_ids=("l0713-parents-entrance-closed", "l0713"),
+    real_case=case(_blocked_real_scene, _lay_d1_base),
+    clean_case=case(_blocked_clean_scene, _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that doors and room entrances remain passable without obstructive render geometry (l0713)",
+)
+
+
+# 49. l0863: Revit wall opening spec_id match check
+def check_villa_furnish3d_opening_spec_id(
+    spec: dict[str, Any],
+    readback: dict[str, Any],
+    layout: dict[str, Any],
+) -> list[str]:
+    """Validates that wall openings without mark/comments are correctly matched via spec_id (l0863)."""
+    problems = villa_furnish3d.round2_postcondition(spec, readback, layout)
+    if problems:
+        raise ValueError(f"Revit wall opening readback postcondition failed: {problems}")
+    return problems
+
+
+_spec_d1_wp5 = revit_spec.build(_lay_d1_base)
+_spec_d1_wp5["furniture"] = villa_furnish3d.spec(_lay_d1_base)
+_hatch_wp5 = _spec_d1_wp5["hatches"][0]
+_hatch_z_wp5 = revit_spec.LEVELS_Z[_hatch_wp5["level"]]
+_suite_door_wp5 = next(
+    d for d in _spec_d1_wp5["doors"] if set(d["rooms"]) == {"parents-bed", "parents-dressing"}
+)
+
+_readback_base = {
+    "details": [
+        {
+            "mark": e["mark"],
+            "category": e["category"],
+            "comments": e["comments"],
+            "bbox_mm": [v * 1000 for v in e["bbox"]],
+        }
+        for e in villa_furnish3d.round2_elements(_spec_d1_wp5)
+    ],
+    "hatches": [
+        {
+            "mark": None,
+            "category": "Rectangular Straight Wall Opening",
+            "comments": _hatch_wp5["closure"],
+            "host_wall": 81,
+            "expected_host_wall": 81,
+            "host_line_mm": [[3617, _hatch_wp5["y"] * 1000], [15412, _hatch_wp5["y"] * 1000]],
+            "bbox_mm": [
+                _hatch_wp5["x0"] * 1000,
+                (_hatch_wp5["y"] - 0.1) * 1000,
+                (_hatch_z_wp5 + _hatch_wp5["sill"]) * 1000,
+                _hatch_wp5["x1"] * 1000,
+                (_hatch_wp5["y"] + 0.1) * 1000,
+                (_hatch_z_wp5 + _hatch_wp5["head"]) * 1000,
+            ],
+        }
+    ],
+    "doors": [
+        {
+            "rooms": ["kitchen", "dirty-kitchen"],
+            "width": 1.2,
+            "mark": "kitchen-dirty-sliding",
+            "category": "Doors",
+            "comments": "telescopic-pocket-3; 3 leaves",
+            "bbox_mm": [0] * 6,
+        },
+        {
+            "rooms": _suite_door_wp5["rooms"],
+            "width": _suite_door_wp5["width"],
+            "category": "Doors",
+            "bbox_mm": [0] * 6,
+            "point_mm": [_suite_door_wp5["x"] * 1000, _suite_door_wp5["y"] * 1000],
+        },
+    ],
+    "windows": [
+        {
+            "mark": f"window-study-game-{w['x']:.3f}-{w['y']:.3f}",
+            "category": "Windows",
+            "bbox_mm": [0] * 6,
+            "sill": w["sill"],
+            "height": w["height"],
+            "width": w["width"],
+        }
+        for w in _spec_d1_wp5["windows"]
+        if w.get("room") == "study-game"
+    ],
+    "furniture": [
+        {
+            "mark": f["mark"],
+            "bbox": f["envelope"],
+            "comments": f["type"],
+            "bbox_mm": [
+                (v + (revit_spec.LEVELS_Z[f["level"]] if k in (2, 5) else 0)) * 1000
+                for k, v in enumerate(f["envelope"])
+            ],
+        }
+        for f in _spec_d1_wp5["furniture"]
+    ],
+}
+
+_readback_opening_bad = copy.deepcopy(_readback_base)
+_readback_opening_clean = copy.deepcopy(_readback_base)
+_readback_opening_clean["hatches"][0]["spec_id"] = _hatch_wp5["id"]
+
+register_guard(
+    fn=check_villa_furnish3d_opening_spec_id,
+    name="villa_furnish3d_opening_spec_id",
+    lesson_ids=("l0863-revit-wall-opening", "l0863"),
+    real_case=case(_spec_d1_wp5, _readback_opening_bad, _lay_d1_base),
+    clean_case=case(_spec_d1_wp5, _readback_opening_clean, _lay_d1_base),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates that Revit wall openings lacking mark and comments are matched via spec_id (l0863)",
 )
 
 

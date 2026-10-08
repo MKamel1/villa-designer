@@ -137,10 +137,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 55)
+        self.assertEqual(report["covered_by_guard_count"], 69)
         self.assertEqual(report["covered_by_review_count"], 21)
         self.assertEqual(report["needs_real_case_count"], 10)
-        self.assertEqual(report["uncovered_count"], 131)
+        self.assertEqual(report["uncovered_count"], 117)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -196,6 +196,21 @@ class TestGuardRegistry(unittest.TestCase):
             "l0686-1-780-zero",
             "l0878-climbing-plant-drawn",
             "l0923-dressing-room-clothes",
+            # Phase 2 Batch 4 Geometry, Stairs, Openings, Routes & Readback
+            "l0312-stair-access-check",
+            "l0310-critic-treated-stair",
+            "l0319-check-stair-by",
+            "l0504-headroom-measured-from",
+            "l0512-way-from-stair",
+            "l0557-door-can-run",
+            "l0576-square-body-failed",
+            "l0531-body-rounded-down",
+            "l0591-run-s-modules",
+            "l0820-prop-extent-guard",
+            "l0834-landscape-change-must",
+            "l0695-floating-objects-found",
+            "l0713-parents-entrance-closed",
+            "l0863-revit-wall-opening",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
@@ -756,6 +771,35 @@ class TestGuardRegistry(unittest.TestCase):
         clean_res = guard.run_case("clean")
         self.assertTrue(clean_res.passed, f"refactor_silent_deletion clean failed: {clean_res.error_message}")
         self.assertFalse(clean_res.fired, "refactor_silent_deletion clean fired unexpectedly")
+
+    def test_phase2_batch4_guards_execution(self) -> None:
+        """Every guard added in Phase 2 Batch 4 executes on real (fires) and clean (quiet) cases."""
+        batch4_guards = [
+            "villa_concept_stair_access",
+            "stair_pitch_headroom",
+            "villa_route_width_stair_void",
+            "villa_furnish_door_wall_clearance",
+            "villa_furnish_route_corner_disc",
+            "villa_furnish_kitchen_run_modules",
+            "villa_landscape_prop_room_extent",
+            "villa_landscape_route_obstruction",
+            "render_support_unsupported_objects",
+            "render_support_blocked_openings",
+            "villa_furnish3d_opening_spec_id",
+        ]
+        self.assertEqual(len(batch4_guards), 11, "Expected exactly 11 guards in Batch 4")
+
+        for name in batch4_guards:
+            with self.subTest(guard=name):
+                guard = get_guard(name)
+                self.assertFalse(guard.needs_real_case, f"{name} should not need real case")
+                real_res = guard.run_case("real")
+                self.assertTrue(real_res.passed, f"{name} real failed: {real_res.error_message}")
+                self.assertTrue(real_res.fired, f"{name} real did not fire")
+
+                clean_res = guard.run_case("clean")
+                self.assertTrue(clean_res.passed, f"{name} clean failed: {clean_res.error_message}")
+                self.assertFalse(clean_res.fired, f"{name} clean fired unexpectedly")
 
 
 if __name__ == "__main__":
