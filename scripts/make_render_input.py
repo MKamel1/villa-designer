@@ -183,7 +183,49 @@ def main(argv=None) -> int:
         print(f"  WARNING {k}: photometric file is not this fitting -- {'; '.join(v)}")
     if no_source:
         print(f"  {len(no_source)} fixture(s) with no source geometry, insertion point used: {no_source}")
-    return 1 if (orphans or unmatched or no_source) else 0
+    bad = bool(orphans or unmatched or no_source)
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = a.out.parent / "make-render-input.stage-result.json"
+    ies_paths = []
+    for s in spec.get("lighting", []):
+        if "ies" in s:
+            try:
+                ip = ph.find_ies(s["ies"], local_ies)
+                if ip.is_file():
+                    ies_paths.append(ip)
+            except Exception:
+                pass
+    inputs = [p for p in [a.extract, a.spec, *ies_paths] if p.is_file()]
+    write_stage_result(
+        "make-render-input",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[a.out],
+        exit_code=1 if bad else 0,
+        metadata={
+            "matched": len(joined),
+            "orphan_fixtures": orphans,
+            "spec_items_not_in_model": unmatched,
+            "fixtures_without_source_geometry": no_source,
+            "photometry_fitting_mismatch": mismatch,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {
+            "passed": not bad,
+            "exit_code": 1 if bad else 0,
+            "orphans": orphans,
+            "unmatched": unmatched,
+            "no_source": no_source,
+            "failures": (
+                ([f"Orphan fixtures in model: {orphans}"] if orphans else [])
+                + ([f"Spec items not found in model: {unmatched}"] if unmatched else [])
+                + ([f"Fixtures without source geometry: {no_source}"] if no_source else [])
+            ),
+        },
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":
