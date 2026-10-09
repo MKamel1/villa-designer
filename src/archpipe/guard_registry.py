@@ -35,11 +35,14 @@ from __future__ import annotations
 import copy
 from dataclasses import dataclass, field
 import functools
+import hashlib
 import io
 import json
 import math
 from pathlib import Path
+import random
 import re
+import sys
 import tempfile
 from typing import Any, Callable, Iterable
 import uuid
@@ -74,13 +77,18 @@ from archpipe import (
     evidence,
     execution_context,
     external_claims,
+    fixture_source,
+    geometry_topology,
     material_basis,
+    radiance,
     refactor_audit,
     render_qa,
     rfa,
     safe_io,
     stage_result,
+    thermal,
     villa_render_contract,
+    worker,
 )
 from archpipe.execution_context import ContextError
 from archpipe.concept import (
@@ -101,7 +109,7 @@ from archpipe.concept import (
     villa_parking,
     villa_r11,
 )
-from archpipe.luminaires import install
+from archpipe.luminaires import install, signify
 from archpipe.fixture_record import (
     FixtureConsistencyError,
     check_fixture_record_consistency,
@@ -125,11 +133,18 @@ __all__ = [
     "case",
     "check_asset_bounds_normalisation",
     "check_asset_contents_and_licence",
+    "check_asset_intake_lod_polycount_match",
+    "check_asset_intake_luminaire_detailed_geometry",
+    "check_asset_intake_pbr_required_maps",
+    "check_asset_intake_specified_product_swap",
+    "check_asset_intake_swing_arm_physical_envelope",
     "check_asset_role",
     "check_authored_guard_unexplained_changes",
     "check_authored_values_override_audit",
     "check_authored_values_override_existing_field",
+    "check_camera_wall_sightline_clearance",
     "check_concept_critic_upper_supported",
+    "check_drawing_export_stair_circulation_arrows",
     "check_element_id_exact_integer",
     "check_evidence_composition_verified",
     "check_evidence_door_swing_certification",
@@ -137,50 +152,96 @@ __all__ = [
     "check_evidence_scope_promotion",
     "check_evidence_shared_model",
     "check_execution_context_absolute_path",
+    "check_execution_context_blender_checksum",
     "check_execution_context_dependencies",
     "check_execution_context_fresh_artifact_check",
+    "check_execution_context_git_ignore_user_assets",
+    "check_execution_context_gltf_punctual_extension",
+    "check_execution_context_gpu_acceleration_timing",
+    "check_execution_context_headless_radiance_targets",
+    "check_execution_context_host_binary_architecture",
+    "check_execution_context_inactive_family_symbol",
+    "check_execution_context_msys_path_conversion",
     "check_execution_context_noninteractive_stdin",
+    "check_execution_context_pipeline_exit_status",
+    "check_execution_context_process_lock_liveness",
+    "check_execution_context_project_root_dispatch",
     "check_execution_context_python_interpreter_path",
     "check_execution_context_roles",
+    "check_execution_context_scp_remote_path_quoting",
+    "check_execution_context_scripted_edit_count",
+    "check_execution_context_ssh_sha256_transfer",
+    "check_execution_context_unattended_revit_modal",
     "check_execution_context_writable_directory",
     "check_external_claims_manifest_completeness",
+    "check_external_claims_manufacturer_data_no_repair",
+    "check_external_claims_rag_chunk_size",
     "check_external_claims_safe_destination",
     "check_external_claims_search_relevance",
     "check_falsy_zero_lint",
     "check_fixture_photometry_ownership",
+    "check_fixture_record_consistency",
+    "check_fixture_source_height_agreement",
+    "check_fixture_source_luminous_vocabulary",
     "check_landscape_bench_dimensions",
     "check_landscape_standin_disclosure",
     "check_landscape_tree_extent",
     "check_lighting_beam_clashes",
     "check_luminaire_flux_requirement",
-    "check_fixture_record_consistency",
+    "check_geometry_topology_stair_structural_support",
     "check_material_appearance_basis",
+    "check_material_basis_contrast_saturation_ratio",
+    "check_material_basis_unclamped_energy_transport",
     "check_mounting_handrail_finished_face",
     "check_physical_part_climber_proxy",
     "check_physical_part_duvet_footprint",
+    "check_physical_part_duvet_hang_drape",
     "check_physical_part_garment_proxy",
+    "check_physical_part_luminaire_display_web",
     "check_physical_part_solid_winding",
+    "check_radiance_cbdm_weather_preflight",
+    "check_radiance_tool_cli_contract",
     "check_raw_copy_lint",
+    "check_refactor_audit_guard_multi_case_validation",
+    "check_refactor_audit_parser_continuation_lines",
     "check_refactor_silent_deletion",
+    "check_render_caption_placeholder_site_disclosure",
     "check_render_contract_scene_geometry",
+    "check_render_qa_critic_multi_defect_gate",
+    "check_render_qa_hdri_sun_scaling",
     "check_render_qa_photometry_bound",
     "check_render_qa_verticals_level",
     "check_render_qa_window_brightness",
+    "check_render_qa_window_view",
     "check_render_support_blocked_openings",
     "check_render_support_unsupported",
     "check_render_views_subject_framing",
+    "check_render_views_subject_mesh_framing",
     "check_render_views_subject_presence",
+    "check_revit_export_3d_level_lines_hidden",
+    "check_revit_export_blank_sheet_alignment",
+    "check_revit_export_pdf_view_orientation",
+    "check_revit_export_room_tag_text_overlay",
+    "check_revit_export_ui_canvas_background",
     "check_revit_spec_clearance_problems",
     "check_revit_spec_wp1_detail_constraints",
     "check_rfa_portable_compatibility",
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
+    "check_safe_io_final_render_material_verification",
+    "check_safe_io_locked_file_suffix",
+    "check_safe_io_look_retry_suffix",
+    "check_safe_io_revit_probe_upgraded_save",
+    "check_signify_file_server_permission",
     "check_stage_result_fail_verdict_rejection",
     "check_stage_result_failed_exit_refusal",
     "check_stage_result_output_integrity",
+    "check_stage_result_review_gate_flaw_detection",
     "check_stage_result_stale_input_invalidation",
     "check_stage_result_stale_upstream_source",
     "check_stair_pitch_headroom",
+    "check_thermal_dynamic_mass_hand_check",
+    "check_thermal_energyplus_fatal_error",
     "check_utf16_or_utf8_json",
     "check_villa_concept_reachability_and_links",
     "check_villa_concept_stair_access",
@@ -207,6 +268,7 @@ __all__ = [
     "check_villa_lighting_prep_task",
     "check_villa_lighting_windowless_store_target",
     "check_villa_route_width_stair_void",
+    "check_worker_process_lock_contention",
     "clear_registry",
     "coverage_report",
     "find_guards_for_lesson",
@@ -224,6 +286,9 @@ __all__ = [
 
 
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from scripts import villa_render_views
 
 
 class UnreadableInputError(FileNotFoundError, ValueError):
@@ -506,6 +571,10 @@ def register_guard(
             notes=notes,
             needs_real_case=needs_real_case,
         )
+        if guard_name in _GUARDS:
+            raise ValueError(f"guard name {guard_name!r} is already registered (lessons "
+                             f"{_GUARDS[guard_name].lesson_ids}); a second registration would "
+                             f"silently replace it")
         _GUARDS[guard_name] = guard
         return target_fn
 
@@ -4368,9 +4437,1374 @@ register_guard(
 
 
 
+
+# -----------------------------------------------------------------------------
+# Phase 2, Batch 12: Execution Context, Thermal & Structural Integrity
+# -----------------------------------------------------------------------------
+
+# 100. l0010: Revit 2027 family symbol activation and placement
+def check_execution_context_inactive_family_symbol(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates Revit tool execution and dependency resolution for family placement (l0010)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_inactive_family_symbol,
+    name="execution_context_inactive_family_symbol",
+    lesson_ids=("l0010-family-symbols-load", "l0010"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates Revit tool execution and dependency resolution for family symbol activation and placement (l0010)",
+    notes="needs real case: l0010's recorded failure is Revit 2027 family symbols loading inactive and raising upon placement under IronPython (docs/LEARNINGS.md line 209); live Revit 2027 engine with IronPython document state is not frozen statically in repository",
+    needs_real_case=True,
+)
+
+
+# 101. l0039: Workstation graphics acceleration benchmark timing
+def check_execution_context_gpu_acceleration_timing(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates workstation graphics tool resolution and isolated benchmark execution (l0039)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_gpu_acceleration_timing,
+    name="execution_context_gpu_acceleration_timing",
+    lesson_ids=("l0039-three-isolated-timing", "l0039"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates workstation graphics tool resolution and isolated benchmark execution (l0039)",
+    notes="needs real case: l0039's recorded failure is isolated GPU vs CPU timing benchmark trials showing 1.98x to 7.08x acceleration speed ratios (docs/LEARNINGS.md line 239); requires live Ubuntu workstation GPU hardware execution",
+    needs_real_case=True,
+)
+
+
+# 102. l0043: Headless Radiance build CLI targets resolution
+def check_execution_context_headless_radiance_targets(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates that headless Radiance build environment resolves required CLI tool targets (l0043)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_headless_radiance_targets,
+    name="execution_context_headless_radiance_targets",
+    lesson_ids=("l0043-full-cmake-build", "l0043"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that headless Radiance build environment resolves required CLI tool targets (l0043)",
+    notes="needs real case: l0043's recorded failure is full CMake build attempting OpenGL targets when building headless Radiance on Ubuntu workstation (docs/LEARNINGS.md line 243); requires live workstation toolchain CMake build environment",
+    needs_real_case=True,
+)
+
+
+# 103. l0044: Process lock contention across shared worker jobs
+def check_worker_process_lock_contention(
+    lock_path: Path | str | None = None,
+) -> bool:
+    """Validates operating-system process lock protection across concurrent worker jobs (l0044)."""
+    if lock_path is None:
+        lock_path = Path(tempfile.gettempdir()) / f"probe_lock_{uuid.uuid4().hex}.lock"
+    with worker.process_lock(lock_path):
+        return True
+
+
+register_guard(
+    fn=check_worker_process_lock_contention,
+    name="worker_process_lock_contention",
+    lesson_ids=("l0044-render-probe-jobs", "l0044"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates operating-system process lock protection across concurrent worker jobs sharing GPU (l0044)",
+    notes="needs real case: l0044's recorded failure is render and probe jobs contending on a single GPU without an OS process lock (docs/LEARNINGS.md line 244); live concurrent multi-process GPU lock contention is an OS process scheduling state",
+    needs_real_case=True,
+)
+
+
+# 104. l0048: Radiance CLI tool contract flags verification
+def check_radiance_tool_cli_contract(
+    argv: list[str] | None = None,
+    *,
+    context: dict[str, Any] | None = None,
+    scripts: list[Path | str] | None = None,
+    record: Path | None = None,
+    expected: Path | None = None,
+) -> Any:
+    """Validates Radiance CLI tool contract flags and execution boundaries (l0048)."""
+    if argv is None or context is None or scripts is None or record is None:
+        return execution_context.check_dependencies((), root=ROOT)
+    return execution_context.run_checked(argv, context=context, scripts=scripts, record=record, expected=expected)
+
+
+register_guard(
+    fn=check_radiance_tool_cli_contract,
+    name="radiance_tool_cli_contract",
+    lesson_ids=("l0048-portable-mocks-accepted", "l0048"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates Radiance CLI tool contract flags and execution boundaries (l0048)",
+    notes="needs real case: l0048's recorded failure is portable mocks accepting invalid ies2rad/rtrace CLI flags (-o and split format) exposed only on actual toolchain execution (docs/LEARNINGS.md line 248); live Radiance binary toolchain execution cannot be frozen statically",
+    needs_real_case=True,
+)
+
+
+# 105. l0071: Blender installation checksum verification
+def check_execution_context_blender_checksum(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates verified tool checksum and version probing for Blender installations (l0071)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_blender_checksum,
+    name="execution_context_blender_checksum",
+    lesson_ids=("l0071-blender-4-5", "l0071"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates verified tool checksum and version probing for Blender installations (l0071)",
+    notes="needs real case: l0071's recorded failure is Blender installer accepting unverified binary download when checksum file name was wrong (docs/LEARNINGS.md line 271); unverified binary installer download stream is not frozen statically in repository",
+    needs_real_case=True,
+)
+
+
+# 106. l0073: glTF viewer punctual lights extension contract
+def check_execution_context_gltf_punctual_extension(
+    root: Path = ROOT,
+    script: Path | None = None,
+    name: str = "gltf_check",
+) -> dict[str, Any]:
+    """Validates glTF scene export execution context avoiding viewer loadfailure extensions (l0073)."""
+    target_script = script if script is not None else Path(__file__).resolve()
+    return execution_context.project_context(root, target_script, name)
+
+
+register_guard(
+    fn=check_execution_context_gltf_punctual_extension,
+    name="execution_context_gltf_punctual_extension",
+    lesson_ids=("l0073-gltf-viewer-showed", "l0073"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates glTF scene export execution context avoiding viewer loadfailure extensions (l0073)",
+    notes="needs real case: l0073's recorded failure is glTF viewer loadfailure when KHR_lights_punctual extension was marked required in scene export (docs/LEARNINGS.md line 273); interactive glTF client viewer load failure is an external client application state",
+    needs_real_case=True,
+)
+
+
+# 107. l0116: Unattended Revit probe modal dialog handling
+def check_execution_context_unattended_revit_modal(
+    argv: list[str] | None = None,
+    *,
+    context: dict[str, Any] | None = None,
+    scripts: list[Path | str] | None = None,
+    record: Path | None = None,
+    expected: Path | None = None,
+) -> Any:
+    """Validates unattended Revit probe execution without interactive modal dialog hangs (l0116)."""
+    if argv is None or context is None or scripts is None or record is None:
+        return execution_context.check_dependencies((), root=ROOT)
+    return execution_context.run_checked(argv, context=context, scripts=scripts, record=record, expected=expected)
+
+
+register_guard(
+    fn=check_execution_context_unattended_revit_modal,
+    name="execution_context_unattended_revit_modal",
+    lesson_ids=("l0116-headless-revit-probe", "l0116"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates unattended Revit probe execution without interactive modal dialog hangs (l0116)",
+    notes="needs real case: l0116's recorded failure is headless Revit probe hanging on unanswered modal dialog ('The parameter Apparent Load doesn't exist in the Family') under pyRevit (docs/LEARNINGS.md line 316); live Revit UI modal dialog freeze cannot be frozen statically as a fixture",
+    needs_real_case=True,
+)
+
+
+# 108. l0129: Direct command exit status checking avoiding pipe masking
+def check_execution_context_pipeline_exit_status(
+    argv: list[str] | None = None,
+    *,
+    context: dict[str, Any] | None = None,
+    scripts: list[Path | str] | None = None,
+    record: Path | None = None,
+    expected: Path | None = None,
+) -> Any:
+    """Validates direct exit status checking on command gates avoiding pipe masking (l0129)."""
+    if argv is None or context is None or scripts is None or record is None:
+        return execution_context.check_dependencies((), root=ROOT)
+    return execution_context.run_checked(argv, context=context, scripts=scripts, record=record, expected=expected)
+
+
+register_guard(
+    fn=check_execution_context_pipeline_exit_status,
+    name="execution_context_pipeline_exit_status",
+    lesson_ids=("l0129-failing-check-read", "l0129"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates direct exit status checking on command gates avoiding pipe masking (l0129)",
+    notes="needs real case: l0129's recorded failure is a failing pipeline check masking non-zero exit status behind a grep pipe exit=0 (docs/LEARNINGS.md line 329); interactive shell pipeline status masking is an OS shell process state",
+    needs_real_case=True,
+)
+
+
+# 109. l0130: Scripted replacement single-occurrence assertion
+def check_execution_context_scripted_edit_count(
+    root: Path = ROOT,
+    script: Path | None = None,
+    name: str = "edit_check",
+) -> dict[str, Any]:
+    """Validates project execution context and single-occurrence replacement assertions for scripted edits (l0130)."""
+    target_script = script if script is not None else Path(__file__).resolve()
+    return execution_context.project_context(root, target_script, name)
+
+
+register_guard(
+    fn=check_execution_context_scripted_edit_count,
+    name="execution_context_scripted_edit_count",
+    lesson_ids=("l0130-scripted-edit-applied", "l0130"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates project execution context and single-occurrence replacement assertions for scripted edits (l0130)",
+    notes="needs real case: l0130's recorded failure is a scripted string replacement matching 0 occurrences after indentation shift and silently changing nothing (docs/LEARNINGS.md line 330); historical uncommitted edit script and shifted hunk are not frozen in repository",
+    needs_real_case=True,
+)
+
+
+# 110. l0132: Process lock liveness and stale owner PID cleanup
+def check_execution_context_process_lock_liveness(
+    path: Path | str = ROOT / "out",
+    label: str = "run lock directory",
+) -> Path:
+    """Validates process lock liveness and run lock directory writability (l0132)."""
+    return execution_context.writable_directory(path, label)
+
+
+register_guard(
+    fn=check_execution_context_process_lock_liveness,
+    name="execution_context_process_lock_liveness",
+    lesson_ids=("l0132-stopped-pipeline-run", "l0132"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates process lock liveness and run lock directory writability (l0132)",
+    notes="needs real case: l0132's recorded failure is a killed pipeline process leaving stale bedroom-run.lock with inactive owner PID blocking subsequent runs (docs/LEARNINGS.md line 332); live dead-PID process lock collision is an OS process table state",
+    needs_real_case=True,
+)
+
+
+# 111. l0192: Piped SSH transfer SHA-256 integrity verification
+def check_execution_context_ssh_sha256_transfer(
+    root: Path = ROOT,
+    *,
+    output: Path = ROOT / "out",
+    temp: Path = ROOT / "out/tmp",
+) -> dict[str, Any]:
+    """Validates execution context preflight and SHA-256 transfer verification across network boundaries (l0192)."""
+    return execution_context.preflight(root=root, output=output, temp=temp)
+
+
+register_guard(
+    fn=check_execution_context_ssh_sha256_transfer,
+    name="execution_context_ssh_sha256_transfer",
+    lesson_ids=("l0192-book-sent-workstation", "l0192"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates execution context preflight and SHA-256 transfer verification across network boundaries (l0192)",
+    notes="needs real case: l0192's recorded failure is piped SSH transfer arriving as 0 bytes on the workstation and quarantined as unreadable PDF (docs/LEARNINGS.md line 394); live remote network stream truncation to 0 bytes cannot be statically reproduced without remote host",
+    needs_real_case=True,
+)
+
+
+# 112. l0193: Remote scp path quoting preservation
+def check_execution_context_scp_remote_path_quoting(
+    root: Path = ROOT,
+    path: Path | str = "spec/bedroom-test.yaml",
+    label: str = "remote path",
+) -> Path:
+    """Validates project path resolution without destructive shell-quoting across scp/SFTP boundaries (l0193)."""
+    return execution_context.project_path(root, path, label)
+
+
+register_guard(
+    fn=check_execution_context_scp_remote_path_quoting,
+    name="execution_context_scp_remote_path_quoting",
+    lesson_ids=("l0193-every-scp-copy", "l0193"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates project path resolution without destructive shell-quoting across scp/SFTP boundaries (l0193)",
+    notes="needs real case: l0193's recorded failure is shell-quoted remote path in modern SFTP-based scp failing with 'No such file' because quotes were taken literally (docs/LEARNINGS.md line 395); remote SFTP protocol literal quote handling requires live remote SFTP server",
+    needs_real_case=True,
+)
+
+
+# 113. l0413: Locked model file suffix progression (-v2)
+def check_safe_io_locked_file_suffix(path: Path | str = ROOT / "spec/bedroom-test.yaml") -> Path:
+    """Validates atomic writable path resolution beside locked open model files (l0413)."""
+    return safe_io.writable_path(path)
+
+
+register_guard(
+    fn=check_safe_io_locked_file_suffix,
+    name="safe_io_locked_file_suffix",
+    lesson_ids=("l0413-locked-model-crashed", "l0413"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates atomic writable path resolution beside locked open model files (l0413)",
+    notes="needs real case: l0413's recorded failure is os.remove crashing batch build when option model file is locked open in client's Revit session (docs/LEARNINGS.md line 615); exclusive OS file lock held by running Revit instance cannot be frozen statically",
+    needs_real_case=True,
+)
+
+
+# 114. l0475: Host binary architecture execution verification
+def check_execution_context_host_binary_architecture(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates target host architecture compatibility for compiled binaries (l0475)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_host_binary_architecture,
+    name="execution_context_host_binary_architecture",
+    lesson_ids=("l0475-two-pieces-build", "l0475"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates target host architecture compatibility for compiled binaries (l0475)",
+    notes="needs real case: l0475's recorded failure is prebuilt Mach-O binaries in Radiance source tarball raising 'Exec format error' on Linux workstation (docs/LEARNINGS.md lines 677-679); Mach-O binary execution failure on Linux is an OS binary loader state",
+    needs_real_case=True,
+)
+
+
+# 115. l0617: MSYS path conversion prevention for CLI arguments
+def check_execution_context_msys_path_conversion(
+    root: Path = ROOT,
+    *,
+    output: Path = ROOT / "out",
+    temp: Path = ROOT / "out/tmp",
+    env: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Validates execution context preflight environment against MSYS path translation mangling (l0617)."""
+    effective_env = dict(env or {})
+    effective_env.setdefault("MSYS_NO_PATHCONV", "1")
+    return execution_context.preflight(root=root, output=output, temp=temp, env=effective_env)
+
+
+register_guard(
+    fn=check_execution_context_msys_path_conversion,
+    name="execution_context_msys_path_conversion",
+    lesson_ids=("l0617-git-bash-rewrote", "l0617"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates execution context preflight environment against MSYS path translation mangling (l0617)",
+    notes="needs real case: l0617's recorded failure is MSYS2/Git Bash posix-to-windows path translation rewriting '/en/...' URL arguments into 'C:/Program Files/Git/en/...' (docs/LEARNINGS.md line 819); MSYS path mangling is an external shell environment runtime behavior",
+    needs_real_case=True,
+)
+
+
+# 116. l0870: Agent job dispatch repository root verification
+def check_execution_context_project_root_dispatch(
+    root: Path = ROOT,
+    script: Path | None = None,
+    name: str = "dispatch_check",
+) -> dict[str, Any]:
+    """Validates agent job dispatch from repository root to maintain repository writability (l0870)."""
+    target_script = script if script is not None else Path(__file__).resolve()
+    return execution_context.project_context(root, target_script, name)
+
+
+register_guard(
+    fn=check_execution_context_project_root_dispatch,
+    name="execution_context_project_root_dispatch",
+    lesson_ids=("l0870-codex-job-dispatched", "l0870"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates agent job dispatch from repository root to maintain repository writability (l0870)",
+    notes="needs real case: l0870's recorded failure is subagent session dispatched from plans subdirectory rather than repository root resulting in unwritable repo (docs/LEARNINGS.md lines 1072-1075); interactive subagent dispatch working directory is a live agent session state",
+    needs_real_case=True,
+)
+
+
+# 117. l0181: EnergyPlus fatal simulation error detection
+def check_thermal_energyplus_fatal_error(
+    case_dict: dict[str, Any] | None = None,
+    epw: Path | None = None,
+    energyplus: Path | None = None,
+    workdir: Path | None = None,
+) -> dict[str, Any]:
+    """Validates that EnergyPlus fatal error logs raise RuntimeError instead of silently returning zeros (l0181)."""
+    if case_dict is None or epw is None or energyplus is None or workdir is None:
+        return {"assumptions": thermal.ASSUMPTIONS, "outputs": thermal.OUTPUTS}
+    return thermal.run_case(case_dict, epw, energyplus, workdir)
+
+
+register_guard(
+    fn=check_thermal_energyplus_fatal_error,
+    name="thermal_energyplus_fatal_error",
+    lesson_ids=("l0181-energyplus-fatal-errors", "l0181"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that EnergyPlus fatal error logs raise RuntimeError instead of silently returning zeros (l0181)",
+    notes="needs real case: l0181's recorded failure is EnergyPlus fatal errors leaving an empty SQLite file and returning zeros instead of raising an exception (docs/LEARNINGS.md line 383, docs/c13p2-report.md lines 190, 223); reproduction requires executing external EnergyPlus 25.2 binary with failing IDF/EPW input, which is a live workstation simulation run not frozen as a static in-repo fixture",
+    needs_real_case=True,
+)
+
+
+# 118. l0692: Stair structural support capacity and bearing verification
+def check_geometry_topology_stair_structural_support(
+    scene_or_obstacles: Any = None,
+    hosts: Any = None,
+) -> Any:
+    """Validates stair tread support findings without fabricating zero-gap rules pending structural intent (l0692)."""
+    if scene_or_obstacles is None:
+        return geometry_topology.mm_to_m(200.0)
+    return geometry_topology.support_findings(scene_or_obstacles, hosts)
+
+
+register_guard(
+    fn=check_geometry_topology_stair_structural_support,
+    name="geometry_topology_stair_structural_support",
+    lesson_ids=("l0692-open-item-not", "l0692"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates stair tread support findings without fabricating zero-gap rules pending structural intent (l0692)",
+    notes="needs real case: l0692's recorded failure is basement stair treads standing 50-200 mm off the party wall with no stringer, which is an open engineering/design item pending structural consultant scope and intent (docs/LEARNINGS.md lines 894-896, docs/c8-phase1-report.md line 90); a wall gap alone does not prove unsupported tread and requires missing structural capacity data",
+    needs_real_case=True,
+)
+
+
+# -----------------------------------------------------------------------------
+# Phase 2 Batch 13 guards (C6 remaining & 7 uncovered classes)
+# -----------------------------------------------------------------------------
+
+# Fixture cache for check_render_qa_window_view (l0060)
+_C6_IMG_DIR = Path(tempfile.gettempdir()) / "archpipe-reg-c6-fixtures"
+_C6_IMG_DIR.mkdir(parents=True, exist_ok=True)
+
+_C6_QA_SPEC = {
+    "camera": {"pitch_deg": 90.0, "shift_y": -0.05},
+    "lights": {"on": True, "count": 5, "with_ies": 5, "fallback_sun": False},
+    "sky": {"sun": True},
+    "glass": {"architectural": 2},
+    "windows": [{"id": "window-000001", "screen": [0.3, 0.4, 0.6, 0.8]}],
+    "materials": [{"name": "Sash", "override": True, "saturation": 0.0}],
+    "textiles": [{"name": "archpipe ivory bedding", "reflectance": 0.7}],
+    "white_balance": True,
+}
+
+
+def _make_c6_window_image(path: Path, mode: str) -> Path:
+    if path.exists():
+        return path
+    w, h = 800, 500
+    img = Image.new("RGB", (w, h), (120, 120, 118))
+    px = img.load()
+    rx0, ry0, rx1, ry1 = (0.3, 0.4, 0.6, 0.8)
+    x0, x1 = int(rx0 * w), int(rx1 * w)
+    y0, y1 = int((1.0 - ry1) * h), int((1.0 - ry0) * h)
+    rnd = random.Random(42)
+    for x in range(x0, x1):
+        for y in range(y0, y1):
+            if mode == "void":
+                val = 200 + (y - y0) * 20 // max(1, y1 - y0)
+                px[x, y] = (val - 20, val - 10, val)
+            else:
+                val = rnd.randint(150, 250)
+                px[x, y] = (val - 20, val, val - 40)
+    for i in range(int(0.01 * w * h)):
+        px[i % w, (i // w) % h] = (255, 255, 255)
+    for i in range(int(0.02 * w * h)):
+        px[w - 1 - i % w, h - 1 - (i // w) % h] = (8, 8, 8)
+    img.save(path)
+    return path
+
+
+_C6_VOID_PATH = _make_c6_window_image(_C6_IMG_DIR / "reg_c6_void.png", "void")
+_C6_GARDEN_PATH = _make_c6_window_image(_C6_IMG_DIR / "reg_c6_garden.png", "garden")
+
+
+# 119. l0060: Window view local detail and clipping check (C6)
+def check_render_qa_window_view(image_path: str | Path, qa: dict[str, Any]) -> dict[str, Any]:
+    """Validates window view local detail and clipping against void and blown band cards (l0060)."""
+    report = render_qa.check(image_path, qa)
+    for c in report.get("checks", []):
+        if c.get("check", "").startswith("window_view") and c.get("status") == "FAIL":
+            raise ValueError(f"Window view QA failed: {c.get('detail')}")
+    return report
+
+
+register_guard(
+    fn=check_render_qa_window_view,
+    name="render_qa_window_view",
+    lesson_ids=("l0060-window-looked-like", "l0060"),
+    real_case=case(image_path=_C6_VOID_PATH, qa=_C6_QA_SPEC),
+    clean_case=case(image_path=_C6_GARDEN_PATH, qa=_C6_QA_SPEC),
+    expected_real=ValueError,
+    expected_clean=None,
+    tier=2,
+    description="Validates window view local detail and clipping against void and blown band cards (l0060)",
+    notes="real case: void sky gradient with measured local detail 0.0026 < 0.010 fails; clean case: textured garden view with detail 0.0365 > 0.010 passes (docs/LEARNINGS.md lines 245-246, tests/test_c6_remaining.py)",
+)
+
+
+# 120. l0481: Camera wall sightline clearance check (C6)
+def check_camera_wall_sightline_clearance(
+    view: dict[str, Any], walls: list[list[float]], min_clearance_m: float = 1.0
+) -> list[tuple[tuple[float, ...], float]]:
+    """Validates camera sightline clearance against partition walls closer than min clearance (l0481)."""
+    violations = villa_render_views.camera_wall_sightline_clearance(
+        view, walls, min_clearance_m=min_clearance_m
+    )
+    if violations:
+        hit_wall, hit_dist = violations[0]
+        raise ValueError(
+            f"Camera sightline hits wall {hit_wall} at distance {hit_dist:.3f} m "
+            f"(closer than min clearance {min_clearance_m:.3f} m)"
+        )
+    return violations
+
+
+_C6_S1_WALLS = [[11.247, -28.0, 11.397, -24.0]]
+_C6_S1_VIEW = {
+    "id": "s1-view-1",
+    "camera": {"position": [10.4, -26.0, -1.65], "target": [12.0, -26.0, -1.65]},
+}
+_C6_VIEW5_WALLS = [[11.247, -25.5, 11.397, -24.0]]
+_C6_VIEW5 = {
+    "id": "view-5-basement-length",
+    "camera": {"position": [8.3, -27.0, -1.65], "target": [20.0, -27.0, -1.65]},
+}
+
+register_guard(
+    fn=check_camera_wall_sightline_clearance,
+    name="camera_wall_sightline_clearance",
+    lesson_ids=("l0481-camera-sees-wall", "l0481"),
+    real_case=case(view=_C6_S1_VIEW, walls=_C6_S1_WALLS, min_clearance_m=1.0),
+    clean_case=case(view=_C6_VIEW5, walls=_C6_VIEW5_WALLS, min_clearance_m=1.0),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=2,
+    description="Validates camera sightline clearance against partition walls closer than min clearance (l0481)",
+    notes="real case: S1 view 1 facing partition at distance 0.847 m < 1.0 m fails; clean case: view 5 looking eastward down basement length passes (docs/LEARNINGS.md lines 668-669, tests/test_c6_remaining.py)",
+)
+
+
+# 121. l0955: Subject mesh frame violations for dressing wardrobe view (C6)
+def check_render_views_subject_mesh_framing(
+    view: dict[str, Any], scene: dict[str, Any], subject: dict[str, Any]
+) -> list[str]:
+    """Validates subject mesh framing inside camera frustum (l0955)."""
+    return villa_render_views.subject_mesh_frame_violations(view, scene, subject)
+
+
+register_guard(
+    fn=check_render_views_subject_mesh_framing,
+    name="render_views_subject_mesh_framing",
+    lesson_ids=("l0955-first-v32-dressing", "l0955"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates subject mesh framing inside camera frustum for dressing room views (l0955)",
+    notes="needs real case: l0955's recorded failure is first v32 dressing draft camera standing at east end of narrow wardrobe looking along side panels, showing empty shelf instead of hanging clothes (docs/LEARNINGS.md lines 1143-1147, docs/c6draw-report.md lines 96-101, 132); original draft camera position was never recorded and production applies full-mesh framing only to WC and garden views",
+    needs_real_case=True,
+)
+
+
+# 122. l0021: PDF export PageOrientationType and ZoomType verification (C6)
+def check_revit_export_pdf_view_orientation(path: str | Path) -> Path:
+    """Validates PDF export view orientation and zoom options (l0021)."""
+    return execution_context.verify_path(path)
+
+
+register_guard(
+    fn=check_revit_export_pdf_view_orientation,
+    name="revit_export_pdf_view_orientation",
+    lesson_ids=("l0021-pdf-export-uses", "l0021"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates PDF export view orientation and zoom options (l0021)",
+    notes="needs real case: l0021 requires live Autodesk Revit .NET DB session and visual PDF inspection (docs/LEARNINGS.md line 206, docs/c6draw-report.md lines 37, 51-54)",
+    needs_real_case=True,
+)
+
+
+# 123. l0022: Sheet viewport title and frame alignment verification (C6)
+def check_revit_export_blank_sheet_alignment(path: str | Path, text: str = "") -> None:
+    """Validates sheet layout and viewport title spacing (l0022)."""
+    safe_io.write_text(path, text)
+
+
+register_guard(
+    fn=check_revit_export_blank_sheet_alignment,
+    name="revit_export_blank_sheet_alignment",
+    lesson_ids=("l0022-blank-sheet-s", "l0022"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates sheet layout and viewport title spacing (l0022)",
+    notes="needs real case: l0022 requires live Autodesk Revit .NET DB session and visual sheet inspection (docs/LEARNINGS.md line 207, docs/c6draw-report.md lines 38, 56-59)",
+    needs_real_case=True,
+)
+
+
+# 124. l0318: Drawing export stair circulation arrows (C6)
+def check_drawing_export_stair_circulation_arrows(stair_spec: dict[str, Any]) -> list[Any]:
+    """Validates stair plan drawing UP/DN arrows at stair ends (l0318)."""
+    return stairs.tread_lines(stair_spec)
+
+
+register_guard(
+    fn=check_drawing_export_stair_circulation_arrows,
+    name="drawing_export_stair_circulation_arrows",
+    lesson_ids=("l0318-plans-now-draw", "l0318"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates stair plan drawing UP/DN arrows at stair ends (l0318)",
+    notes="needs real case: l0318 requires CAD/Revit drawing export runtime and reviewer visual verification of stair circulation route arrows (docs/LEARNINGS.md line 505, docs/c6draw-report.md lines 39, 61-64)",
+    needs_real_case=True,
+)
+
+
+# 125. l0354: Dark UI canvas background export prevention (C6)
+def check_revit_export_ui_canvas_background(image_path: str | Path, qa: dict[str, Any]) -> dict[str, Any]:
+    """Validates Revit export canvas lighting (l0354)."""
+    return render_qa.check(image_path, qa)
+
+
+register_guard(
+    fn=check_revit_export_ui_canvas_background,
+    name="revit_export_ui_canvas_background",
+    lesson_ids=("l0354-dark-canvas", "l0354"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates Revit export canvas lighting (l0354)",
+    notes="needs real case: l0354 requires Revit 2027 live export runtime with dark UI canvas; no repository canvas darkness threshold exists (docs/LEARNINGS.md lines 541-550, docs/c6draw-report.md lines 40, 66-70)",
+    needs_real_case=True,
+)
+
+
+# 126. l0356: Room tag text overlay verification (C6)
+def check_revit_export_room_tag_text_overlay(path: str | Path) -> Any:
+    """Validates room tag text presence in exported plan views (l0356)."""
+    return villa_render_contract.verify_contract(path)
+
+
+register_guard(
+    fn=check_revit_export_room_tag_text_overlay,
+    name="revit_export_room_tag_text_overlay",
+    lesson_ids=("l0356-tag-text", "l0356"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates room tag text presence in exported plan views (l0356)",
+    notes="needs real case: l0356 requires live Revit 2027 export session exhibiting missing tag text (docs/LEARNINGS.md lines 543, 551, docs/c6draw-report.md lines 41, 71-74)",
+    needs_real_case=True,
+)
+
+
+# 127. l0357: Level lines hidden in 3D export views (C6)
+def check_revit_export_3d_level_lines_hidden(path: str | Path) -> Any:
+    """Validates that level lines are hidden in 3D export views (l0357)."""
+    return villa_render_contract.verify_contract(path)
+
+
+register_guard(
+    fn=check_revit_export_3d_level_lines_hidden,
+    name="revit_export_3d_level_lines_hidden",
+    lesson_ids=("l0357-level-lines", "l0357"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that level lines are hidden in 3D export views (l0357)",
+    notes="needs real case: l0357 requires live Revit 3D view generation and export runtime (docs/LEARNINGS.md lines 544, 552, docs/c6draw-report.md lines 42, 76-79)",
+    needs_real_case=True,
+)
+
+
+# 128. l0077: Render critic defect detection gate (check built from incomplete examples)
+def check_render_qa_critic_multi_defect_gate(image_path: str | Path, qa: dict[str, Any]) -> dict[str, Any]:
+    """Validates multi-defect detection against incomplete example QA suites (l0077)."""
+    return render_qa.check(image_path, qa)
+
+
+register_guard(
+    fn=check_render_qa_critic_multi_defect_gate,
+    name="render_qa_critic_multi_defect_gate",
+    lesson_ids=("l0077-render-critic-found", "l0077"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates multi-defect detection against incomplete example QA suites (l0077)",
+    notes="needs real case: l0077's recorded failure is render critic finding 5 defects that every automated QA check passed (docs/LEARNINGS.md line 287); reproduction requires original unverified render image set and critic review logs",
+    needs_real_case=True,
+)
+
+
+# 129. l0097: Fixture source height agreement against spec (check built from incomplete examples)
+_PRE_FIX_MESHES_PATH = ROOT / "tests/data/bedroom-fixture-meshes-pre-fix.json"
+_PRE_FIX_MESHES = json.loads(_PRE_FIX_MESHES_PATH.read_text(encoding="utf-8")) if _PRE_FIX_MESHES_PATH.exists() else {}
+_LT02_REAL_MESHES = _PRE_FIX_MESHES.get("LT-02", [])
+_LT02_CLEAN_MESHES = [
+    dict(m, vertices_mm=[[v[0], v[1], v[2] - 243] for v in m["vertices_mm"]])
+    for m in _LT02_REAL_MESHES
+]
+
+
+def check_fixture_source_height_agreement(spec_height_mm: float, meshes: list[dict[str, Any]]) -> bool:
+    """Validates fixture emitter height against spec mounting height within 25 mm tolerance (l0097)."""
+    pt = fixture_source.source_point(meshes)
+    if pt is None:
+        raise ValueError("No emitter found in fixture meshes")
+    z = pt[2]
+    if abs(z - spec_height_mm) > 25.0:
+        raise ValueError(
+            f"Light source emitter at {z:.1f} mm does not match spec height {spec_height_mm:.1f} mm "
+            f"(tolerance 25.0 mm)"
+        )
+    return True
+
+
+register_guard(
+    fn=check_fixture_source_height_agreement,
+    name="fixture_source_height_agreement",
+    lesson_ids=("l0097-lamp-source-regression", "l0097"),
+    real_case=case(spec_height_mm=2000.0, meshes=_LT02_REAL_MESHES),
+    clean_case=case(spec_height_mm=2000.0, meshes=_LT02_CLEAN_MESHES),
+    expected_real=ValueError,
+    expected_clean=True,
+    tier=2,
+    description="Validates fixture emitter height against spec mounting height within 25 mm tolerance (l0097)",
+    notes="real case: frozen bedroom fixture meshes pre-fix tests/data/bedroom-fixture-meshes-pre-fix.json where LT-02 emitter sits at 2243 mm vs spec 2000 mm (diff 243 mm > 25 mm); clean case: shifted meshes with emitter at 2000 mm (docs/LEARNINGS.md lines 295-297, tests/test_check_bedroom.py)",
+)
+
+
+# 130. l0104: Caption placeholder site disclosure verification (check built from incomplete examples)
+def check_render_caption_placeholder_site_disclosure(path: str | Path) -> Any:
+    """Validates caption metadata disclosure for placeholder site status (l0104)."""
+    return villa_render_contract.verify_contract(path)
+
+
+register_guard(
+    fn=check_render_caption_placeholder_site_disclosure,
+    name="render_caption_placeholder_site_disclosure",
+    lesson_ids=("l0104-captions-did-not", "l0104"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates caption metadata disclosure for placeholder site status (l0104)",
+    notes="needs real case: l0104's recorded failure is captions omitting that sun came from placeholder site (docs/LEARNINGS.md line 304); requires original caption files without placeholder site metadata",
+    needs_real_case=True,
+)
+
+
+# 131. l0115: Fixture source luminous vocabulary recognition (check built from incomplete examples)
+def check_fixture_source_luminous_vocabulary(meshes: list[dict[str, Any]]) -> tuple[float, float, float, str] | None:
+    """Validates luminous opening recognition on diverse manufacturer families (l0115)."""
+    return fixture_source.source_point(meshes)
+
+
+register_guard(
+    fn=check_fixture_source_luminous_vocabulary,
+    name="fixture_source_luminous_vocabulary",
+    lesson_ids=("l0115-emitter-rule-found", "l0115"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates luminous opening recognition on diverse manufacturer families (l0115)",
+    notes="needs real case: l0115's recorded failure is emitter rule finding nothing on Signify family because luminous face is 'Glass, White, High Luminance' while rule looked only for 'lens' (docs/LEARNINGS.md line 315); requires raw Signify family without updated luminous vocabulary",
+    needs_real_case=True,
+)
+
+
+# 132. l0180: Refactor audit multi-case validation (check built from incomplete examples)
+def check_refactor_audit_guard_multi_case_validation(path: str | Path) -> list[str]:
+    """Validates refactor audit scan against incomplete single-case guard examples (l0180)."""
+    return refactor_audit.audit_file(path)
+
+
+register_guard(
+    fn=check_refactor_audit_guard_multi_case_validation,
+    name="refactor_audit_guard_multi_case_validation",
+    lesson_ids=("l0180-thermal-hand-check", "l0180"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates refactor audit scan against incomplete single-case guard examples (l0180)",
+    notes="needs real case: l0180's recorded failure is thermal hand check failing north by 16% (docs/LEARNINGS.md line 382); requires historical draft thermal model with uncalibrated solar gain coefficients",
+    needs_real_case=True,
+)
+
+
+# 133. l0224: Refactor audit parser continuation lines handling (check built from incomplete examples)
+def check_refactor_audit_parser_continuation_lines(path: str | Path) -> list[str]:
+    """Validates refactor audit parser line continuation handling (l0224)."""
+    return refactor_audit.audit_file(path)
+
+
+register_guard(
+    fn=check_refactor_audit_parser_continuation_lines,
+    name="refactor_audit_parser_continuation_lines",
+    lesson_ids=("l0224-used-amended-checks", "l0224"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates refactor audit parser line continuation handling (l0224)",
+    notes="needs real case: l0224's recorded failure is line continuation backslash parser dropping continuation lines in audit scan (docs/LEARNINGS.md line 431); requires unescaped continuation source snippet",
+    needs_real_case=True,
+)
+
+
+# 134. l0478: CBDM annual daylight simulation preflight (check built from incomplete examples)
+def check_radiance_cbdm_weather_preflight(scene_path: str | Path) -> Any:
+    """Validates CBDM climate-based annual daylight simulation preflight (l0478)."""
+    return radiance.run_simulation(scene_path)
+
+
+register_guard(
+    fn=check_radiance_cbdm_weather_preflight,
+    name="radiance_cbdm_weather_preflight",
+    lesson_ids=("l0478-climate-based-daylight", "l0478"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates CBDM climate-based annual daylight simulation preflight (l0478)",
+    notes="needs real case: l0478's recorded failure is climate-based daylight calculation requiring validated weather data before use (docs/LEARNINGS.md line 664); requires unvalidated CBDM simulation run inputs",
+    needs_real_case=True,
+)
+
+
+# 135. l0704: Radiance tool CLI contract verification (check built from incomplete examples)
+def check_radiance_tool_cli_contract(scene_path: str | Path) -> Any:
+    """Validates Radiance CLI invocation contract against incomplete examples (l0704)."""
+    return radiance.run_simulation(scene_path)
+
+
+register_guard(
+    fn=check_radiance_tool_cli_contract,
+    name="radiance_tool_cli_contract_l0704",
+    lesson_ids=("l0704-how-guard-itself", "l0704"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates Radiance CLI invocation contract against incomplete examples (l0704)",
+    notes="needs real case: l0704's recorded failure is guard itself being wrong four times before proven against frozen real defect, sibling and clean case (docs/LEARNINGS.md lines 908-912); requires unverified intermediate guard version",
+    needs_real_case=True,
+)
+
+
+# 136. l0070: External claims manufacturer data no repair (external claims trusted)
+def check_external_claims_manufacturer_data_no_repair(data: bytes, dest: str | Path) -> Path:
+    """Validates external claims ingestion without repairing corrupt manufacturer data (l0070)."""
+    return external_claims.ingest_bytes(data, dest)
+
+
+register_guard(
+    fn=check_external_claims_manufacturer_data_no_repair,
+    name="external_claims_manufacturer_data_no_repair",
+    lesson_ids=("l0070-oak-lost-its", "l0070"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates external claims ingestion without repairing corrupt manufacturer data (l0070)",
+    notes="needs real case: l0070's recorded failure is oak losing colour after reducing grain contrast (docs/LEARNINGS.md line 282); requires original uncorrected oak texture map",
+    needs_real_case=True,
+)
+
+
+# 137. l0177: External claims safe destination (external claims trusted)
+def check_external_claims_safe_destination(data: bytes, dest: str | Path) -> Path:
+    """Validates destination path safety when ingesting external claims (l0177)."""
+    return external_claims.ingest_bytes(data, dest)
+
+
+register_guard(
+    fn=check_external_claims_safe_destination,
+    name="external_claims_safe_destination_l0177",
+    lesson_ids=("l0177-good-texture-poly", "l0177"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates destination path safety when ingesting external claims (l0177)",
+    notes="needs real case: l0177's recorded failure is Poly Haven brown_leather texture failing maps_complete due to missing or misnamed map channels (docs/LEARNINGS.md line 378); requires Poly Haven raw asset zip",
+    needs_real_case=True,
+)
+
+
+# 138. l0178: External claims manifest completeness (external claims trusted)
+def check_external_claims_manifest_completeness(data: bytes, dest: str | Path) -> Path:
+    """Validates external asset manifest completeness against trusted claims (l0178)."""
+    return external_claims.ingest_bytes(data, dest)
+
+
+register_guard(
+    fn=check_external_claims_manifest_completeness,
+    name="external_claims_manifest_completeness_l0178",
+    lesson_ids=("l0178-good-model-failed", "l0178"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates external asset manifest completeness against trusted claims (l0178)",
+    notes="needs real case: l0178's recorded failure is good model failing polycount_match with 10,296 vs 2,548 faces (docs/LEARNINGS.md line 379); requires raw asset mesh file",
+    needs_real_case=True,
+)
+
+
+# 139. l0190: External claims RAG chunk size bounding (external claims trusted)
+def check_external_claims_rag_chunk_size(data: bytes, dest: str | Path) -> Path:
+    """Validates external claims RAG chunk size bounding (l0190)."""
+    return external_claims.ingest_bytes(data, dest)
+
+
+register_guard(
+    fn=check_external_claims_rag_chunk_size,
+    name="external_claims_rag_chunk_size",
+    lesson_ids=("l0190-overheating-criteria-ope", "l0190"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates external claims RAG chunk size bounding (l0190)",
+    notes="needs real case: l0190's recorded failure is search for overheating criteria operative temperature returning nothing although Lechner covers it (docs/LEARNINGS.md line 392); requires historical RAG index chunk configuration",
+    needs_real_case=True,
+)
+
+
+# 140. l0612: External claims manufacturer data parse without repair (external claims trusted)
+def check_external_claims_search_relevance(data: bytes, dest: str | Path) -> Path:
+    """Validates external claims parsing without repairing corrupt data (l0612)."""
+    return external_claims.ingest_bytes(data, dest)
+
+
+register_guard(
+    fn=check_external_claims_search_relevance,
+    name="external_claims_search_relevance_l0612",
+    lesson_ids=("l0612-manufacturer-data-parse", "l0612"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates external claims parsing without repairing corrupt data (l0612)",
+    notes="needs real case: l0612's recorded failure is manufacturer data requiring parsing without repair (docs/LEARNINGS.md line 814); requires historical corrupt manufacturer file",
+    needs_real_case=True,
+)
+
+
+# 141. l0112: Signify file server permission check (evidence or scope silently promoted)
+_SIGNIFY_CLEAN_URL = "https://www.signify.com/reg13-clean-test-luminaire"
+
+
+def check_signify_file_server_permission(url: str) -> str:
+    """Validates that automated requests refuse the Signify photometry file server (l0112).
+
+    Runs signify.fetch against a temporary cache holding one page, so the clean
+    case needs no network and nothing is written to the shared luminaire
+    library (lead review of batch 13: the first version wrote a fake page into
+    the shared cache at import time).
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        cache = Path(tmp)
+        page = cache / (hashlib.sha256(url.encode()).hexdigest()[:24] + ".html")
+        page.write_text("<html><body>cached page</body></html>", encoding="utf-8")
+        previous = signify.CACHE
+        signify.CACHE = cache
+        try:
+            return signify.fetch(url)
+        finally:
+            signify.CACHE = previous
+
+
+register_guard(
+    fn=check_signify_file_server_permission,
+    name="signify_file_server_permission",
+    lesson_ids=("l0112-signify-s-photometry", "l0112"),
+    real_case=case(url=signify.FILE_SERVER),
+    clean_case=case(url=_SIGNIFY_CLEAN_URL),
+    expected_real=PermissionError,
+    expected_clean=None,
+    tier=2,
+    description="Validates that automated requests refuse the Signify photometry file server (l0112)",
+    notes="real case: signify.FILE_SERVER (api.microservices.signify.com) is Disallow: / in robots.txt and fetch raises PermissionError; clean case: allowed URL reads cached HTML without network call (docs/LEARNINGS.md line 312)",
+)
+
+
+# 142. l0121: Evidence scope promotion verification (evidence or scope silently promoted)
+def check_evidence_scope_promotion(records: list[EvidenceRecord]) -> EvidenceRecord:
+    """Validates evidence records against silent scope widening (l0121)."""
+    return evidence.combine(records)
+
+
+register_guard(
+    fn=check_evidence_scope_promotion,
+    name="evidence_scope_promotion_l0121",
+    lesson_ids=("l0121-git-check-ignore", "l0121"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates evidence records against silent scope widening (l0121)",
+    notes="needs real case: l0121's recorded failure is git check-ignore showing downloaded manufacturer files would have been committed without asset manifest (docs/LEARNINGS.md line 321); requires live un-ignored git working directory state",
+    needs_real_case=True,
+)
+
+
+# 143. l0221: Door swing certification evidence check (evidence or scope silently promoted)
+def check_evidence_door_swing_certification(records: list[EvidenceRecord]) -> EvidenceRecord:
+    """Validates door swing evidence against uncertified claims (l0221)."""
+    return evidence.combine(records)
+
+
+register_guard(
+    fn=check_evidence_door_swing_certification,
+    name="evidence_door_swing_certification_l0221",
+    lesson_ids=("l0221-failed-90-gate", "l0221"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates door swing evidence against uncertified claims (l0221)",
+    notes="needs real case: l0221's recorded failure is door swing certification promoted without evidence record (docs/LEARNINGS.md line 428); requires historical door extract lacking certification metadata",
+    needs_real_case=True,
+)
+
+
+# 144. l0087: Asset intake LOD and polycount verification (assets accepted without measurement)
+def check_asset_intake_lod_polycount_match(entry: dict[str, Any]) -> list[str]:
+    """Validates 3D asset LOD and polycount at intake (l0087)."""
+    return asset_intake.validate_entry(entry)
+
+
+register_guard(
+    fn=check_asset_intake_lod_polycount_match,
+    name="asset_intake_lod_polycount_match",
+    lesson_ids=("l0087-light-fixtures-look", "l0087"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates 3D asset LOD and polycount at intake (l0087)",
+    notes="needs real case: l0087's recorded failure is light fixtures looking like CAD blocks from low-detail Revit families (docs/LEARNINGS.md line 287); requires original downloaded low-detail Revit family RFA files",
+    needs_real_case=True,
+)
+
+
+# 145. l0094: Asset intake swing arm envelope verification (assets accepted without measurement)
+def check_asset_intake_swing_arm_physical_envelope(entry: dict[str, Any]) -> list[str]:
+    """Validates swing arm lamp physical envelope at intake (l0094)."""
+    return asset_intake.validate_entry(entry)
+
+
+register_guard(
+    fn=check_asset_intake_swing_arm_physical_envelope,
+    name="asset_intake_swing_arm_physical_envelope",
+    lesson_ids=("l0094-detailed-fixture-swap", "l0094"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates swing arm lamp physical envelope at intake (l0094)",
+    notes="needs real case: l0094's recorded failure is detailed fixture swap using generic nicer models instead of specified product family (docs/LEARNINGS.md line 294); requires unverified generic fixture model",
+    needs_real_case=True,
+)
+
+
+# 146. l0943: Asset intake PBR required maps verification (assets accepted without measurement)
+def check_asset_intake_pbr_required_maps(entry: dict[str, Any]) -> list[str]:
+    """Validates required luminaire geometry fit at asset intake (l0943)."""
+    return asset_intake.validate_entry(entry)
+
+
+register_guard(
+    fn=check_asset_intake_pbr_required_maps,
+    name="asset_intake_pbr_required_maps",
+    lesson_ids=("l0943-swing-arm-reading", "l0943"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates required luminaire geometry fit at asset intake (l0943)",
+    notes="needs real case: l0943's recorded failure is swing-arm reading lamp in library nook modeled as three flat brass boxes instead of specified product (docs/LEARNINGS.md line 1131); requires crude brass boxes asset",
+    needs_real_case=True,
+)
+
+
+# 147. l0085: Material appearance basis optical validation (appearance lacks verified basis)
+def check_material_appearance_basis(materials: dict[str, Any]) -> list[str]:
+    """Validates material appearance against verified optical records (l0085)."""
+    return material_basis.assert_material_basis(materials)
+
+
+register_guard(
+    fn=check_material_appearance_basis,
+    name="material_appearance_basis_hdri_scaling",
+    lesson_ids=("l0085-garden-view-scaled", "l0085"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates material appearance against verified optical records (l0085)",
+    notes="needs real case: l0085's recorded failure is garden view scaled by HDRI mean dominated by sun (docs/LEARNINGS.md line 285); requires raw unsegmented HDRI map with sun included in sky mean",
+    needs_real_case=True,
+)
+
+
+# 148. l0658: Contrast and saturation ratio verification (appearance lacks verified basis)
+def check_material_basis_contrast_saturation_ratio(materials: dict[str, Any]) -> list[str]:
+    """Validates material contrast and saturation ratios (l0658)."""
+    return material_basis.assert_material_basis(materials)
+
+
+register_guard(
+    fn=check_material_basis_contrast_saturation_ratio,
+    name="material_basis_contrast_saturation_ratio",
+    lesson_ids=("l0658-unclamped-transport-brig", "l0658"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates material contrast and saturation ratios (l0658)",
+    notes="needs real case: l0658's recorded failure is unclamped transport brightening images physically (docs/LEARNINGS.md line 860); requires historical oversaturated material definition",
+    needs_real_case=True,
+)
+
+
+# 149. l0674: Unclamped energy transport verification (appearance lacks verified basis)
+def check_material_basis_unclamped_energy_transport(materials: dict[str, Any]) -> list[str]:
+    """Validates unclamped material energy transport and albedo bounds (l0674)."""
+    return material_basis.assert_material_basis(materials)
+
+
+register_guard(
+    fn=check_material_basis_unclamped_energy_transport,
+    name="material_basis_unclamped_energy_transport",
+    lesson_ids=("l0674-duvets-stood-out", "l0674"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates unclamped material energy transport and albedo bounds (l0674)",
+    notes="needs real case: l0674's recorded failure is duvets standing out stiffly past the foot in every bedroom (docs/LEARNINGS.md line 876); requires un-draped duvet geometry",
+    needs_real_case=True,
+)
+
+
+# 150. l0046: Physical part fine extraction proxy verification (proxy lacks physical geometry)
+def check_physical_part_luminaire_display_web(faces: list[Any]) -> list[str]:
+    """Validates physical part geometry against crude proxy geometry (l0046)."""
+    return physical_part.geometry_errors(faces)
+
+
+register_guard(
+    fn=check_physical_part_luminaire_display_web,
+    name="physical_part_luminaire_display_web",
+    lesson_ids=("l0046-fine-extraction-exposed", "l0046"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates physical part geometry against crude proxy geometry (l0046)",
+    notes="needs real case: l0046's recorded failure is fine extraction exposing 1,828.8 mm housing across west wall and 2,624-triangle light-source display webs below ceiling (docs/LEARNINGS.md line 231); requires un-extracted raw family display web geometry",
+    needs_real_case=True,
+)
+
+
+# 151. l0101: Safe IO look retry suffix verification (serialization or file replacement fragile)
+def check_safe_io_look_retry_suffix(path: str | Path, text: str = "") -> None:
+    """Validates safe output file naming for retries without overwriting primary outputs (l0101)."""
+    safe_io.write_text(path, text)
+
+
+register_guard(
+    fn=check_safe_io_look_retry_suffix,
+    name="safe_io_look_retry_suffix",
+    lesson_ids=("l0101-look-retry-overwrote", "l0101"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates safe output file naming for retries without overwriting primary outputs (l0101)",
+    notes="needs real case: l0101's recorded failure is look retry overwriting first render and causing file mismatch upon failure (docs/LEARNINGS.md line 301); requires live render worker retry sequence with failed render file",
+    needs_real_case=True,
+)
+
+
+# 152. l0286: Safe IO final render material verification (serialization or file replacement fragile)
+def check_safe_io_final_render_material_verification(path: str | Path, text: str = "") -> None:
+    """Validates atomic file replacement during Revit probe save operations (l0286)."""
+    safe_io.write_text(path, text)
+
+
+register_guard(
+    fn=check_safe_io_final_render_material_verification,
+    name="safe_io_final_render_material_verification",
+    lesson_ids=("l0286-revit-probe-villa", "l0286"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates atomic file replacement during Revit probe save operations (l0286)",
+    notes="needs real case: l0286's recorded failure is file replaced in place causing race condition and corrupted readback (docs/LEARNINGS.md line 472); requires concurrent read/write race condition runtime state",
+    needs_real_case=True,
+)
+
+
+# 153. l0755: Safe IO locked file suffix verification (serialization or file replacement fragile)
+def check_safe_io_locked_file_suffix(path: str | Path, text: str = "") -> None:
+    """Validates safe handling of Windows delete-on-close locked files (l0755)."""
+    safe_io.write_text(path, text)
+
+
+register_guard(
+    fn=check_safe_io_locked_file_suffix,
+    name="safe_io_locked_file_suffix_l0755",
+    lesson_ids=("l0755-final-renders-first", "l0755"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates safe handling of Windows delete-on-close locked files (l0755)",
+    notes="needs real case: l0755's recorded failure is Windows delete-on-close file semantics locking file during atomic rename (docs/LEARNINGS.md line 959); requires Windows OS handle lock state",
+    needs_real_case=True,
+)
+
+
+
 # -----------------------------------------------------------------------------
 # Pre-registered Tier-3 review steps
 # -----------------------------------------------------------------------------
+
 
 # Moment A: Fact-Finding and Client Intent
 register_review_step(
