@@ -77,9 +77,11 @@ from archpipe import (
     evidence,
     execution_context,
     external_claims,
+    fixture_record,
     fixture_source,
     geometry_topology,
     material_basis,
+    photometry,
     radiance,
     refactor_audit,
     render_qa,
@@ -187,12 +189,16 @@ __all__ = [
     "check_landscape_standin_disclosure",
     "check_landscape_tree_extent",
     "check_lighting_beam_clashes",
+    "check_lighting_kelvin_blackbody_locus",
     "check_luminaire_flux_requirement",
     "check_geometry_topology_stair_structural_support",
+    "check_glazing_calibrated_transmission_probe",
+    "check_glazing_two_face_transmission",
     "check_material_appearance_basis",
     "check_material_basis_contrast_saturation_ratio",
     "check_material_basis_unclamped_energy_transport",
     "check_mounting_handrail_finished_face",
+    "check_photometry_ies_azimuth_interpolation",
     "check_physical_part_climber_proxy",
     "check_physical_part_duvet_footprint",
     "check_physical_part_duvet_hang_drape",
@@ -232,6 +238,7 @@ __all__ = [
     "check_safe_io_locked_file_suffix",
     "check_safe_io_look_retry_suffix",
     "check_safe_io_revit_probe_upgraded_save",
+    "check_scene_exposure_lock_mode",
     "check_signify_file_server_permission",
     "check_stage_result_fail_verdict_rejection",
     "check_stage_result_failed_exit_refusal",
@@ -692,6 +699,7 @@ def find_review_steps_for_lesson(lesson_id: str) -> list[RegisteredReviewStep]:
 
 def audit_lesson_coverage(
     audit_file: Path | str | None = None,
+    strict: bool = False,
 ) -> dict[str, Any]:
     """Audit coverage of lessons from docs/lessons-audit.md.
     
@@ -700,6 +708,7 @@ def audit_lesson_coverage(
     
     Args:
         audit_file: Path to docs/lessons-audit.md. If None, uses default project path.
+        strict: If True, appends an error when any uncovered lessons exist.
         
     Returns:
         dict containing total_lessons, covered_by_guard_count, covered_by_review_count,
@@ -824,6 +833,9 @@ def audit_lesson_coverage(
         else:
             uncovered.append(lid)
 
+    if strict and uncovered:
+        errors.append(f"Strict mode failure: {len(uncovered)} uncovered lessons in inventory: {', '.join(uncovered)}")
+
     return {
         "total_lessons": len(parsed_lessons),
         "covered_by_guard_count": len(covered_by_guard),
@@ -843,13 +855,14 @@ def audit_lesson_coverage(
 
 def report_uncovered_lessons(
     audit_file: Path | str | None = None,
+    strict: bool = False,
 ) -> list[dict[str, Any]]:
     """Return list of lesson records from docs/lessons-audit.md with neither a guard nor a review step.
     
     Raises UnreadableInputError if the audit file is missing, unreadable, or contains errors.
     Never returns an empty list on bad input.
     """
-    audit = audit_lesson_coverage(audit_file=audit_file)
+    audit = audit_lesson_coverage(audit_file=audit_file, strict=strict)
     if audit.get("errors"):
         raise UnreadableInputError(f"Unreadable audit input: {'; '.join(audit['errors'])}")
     uncovered_ids = audit["uncovered_lessons"]
@@ -858,6 +871,7 @@ def report_uncovered_lessons(
 
 def format_coverage_report(
     audit_file: Path | str | None = None,
+    strict: bool = False,
 ) -> str:
     """Generate a human-readable text coverage report of lessons audit.
     
@@ -865,7 +879,7 @@ def format_coverage_report(
     states the error and which never shows covered/uncovered counts.
     """
     try:
-        audit = audit_lesson_coverage(audit_file=audit_file)
+        audit = audit_lesson_coverage(audit_file=audit_file, strict=strict)
         if audit.get("errors"):
             raise UnreadableInputError(f"Audit input contains errors: {'; '.join(audit['errors'])}")
     except UnreadableInputError as exc:
@@ -5796,6 +5810,130 @@ register_guard(
     tier=2,
     description="Validates safe handling of Windows delete-on-close locked files (l0755)",
     notes="needs real case: l0755's recorded failure is Windows delete-on-close file semantics locking file during atomic rename (docs/LEARNINGS.md line 959); requires Windows OS handle lock state",
+    needs_real_case=True,
+)
+
+
+# -----------------------------------------------------------------------------
+# Phase 2 Batch 14: Emitter Class & Scene Exposure Mode Guards
+# -----------------------------------------------------------------------------
+
+@functools.lru_cache(maxsize=1)
+def _cached_render_scene() -> dict[str, Any]:
+    from archpipe.concept import villa_render
+    return villa_render.build()
+
+
+# 154. l0091: Scene exposure mode set-metered lock verification
+def check_scene_exposure_lock_mode(scene: dict[str, Any]) -> list[str]:
+    """Validates that exposure mode is locked across view set and not metered individually (l0091)."""
+    errors = villa_render_contract.validate_scene(scene)
+    mode_errors = [e for e in errors if "exposure_mode" in e]
+    if mode_errors:
+        raise ValueError(f"Exposure mode error: {mode_errors}")
+    return errors
+
+
+_real_scene_l0091 = dict(
+    _cached_render_scene(),
+    views=[next(v for v in _cached_render_scene()["views"] if v["id"] == "v12-ensuite")],
+    exposure_mode="per-view-metered",
+)
+_clean_scene_l0091 = _cached_render_scene()
+
+register_guard(
+    fn=check_scene_exposure_lock_mode,
+    name="scene_exposure_lock_mode",
+    lesson_ids=("l0091-every-view-metered", "l0091"),
+    real_case=case(_real_scene_l0091),
+    clean_case=case(_clean_scene_l0091),
+    expected_real=ValueError,
+    expected_clean=[],
+    tier=1,
+    description="Validates scene exposure mode is locked across set and not individually metered (l0091)",
+)
+
+
+# 155. l0026: Blender IES azimuth interpolation verification
+def check_photometry_ies_azimuth_interpolation(path: str | Path) -> photometry.Photometry:
+    """Validates IES photometric file azimuth angles and angular interpolation (l0026)."""
+    return photometry.read_file(path)
+
+
+register_guard(
+    fn=check_photometry_ies_azimuth_interpolation,
+    name="photometry_ies_azimuth_interpolation",
+    lesson_ids=("l0026-blender-ies-azimuth", "l0026"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates IES photometric file azimuth angles and angular interpolation (l0026)",
+    notes="needs real case: l0026's recorded failure is Blender IES azimuth differs, finite sphere sizing washing out strip light and coarse angular interpolation biasing narrow beams (docs/LEARNINGS.md line 226); requires live Cycles angular interpolation probe with radiance sensor plane",
+    needs_real_case=True,
+)
+
+
+# 156. l0080: Lighting Kelvin blackbody locus verification
+def check_lighting_kelvin_blackbody_locus(scene_or_spec: dict[str, Any]) -> list[str]:
+    """Validates lighting Kelvin CCT to RGB conversion against blackbody locus (l0080)."""
+    return fixture_record.fixture_findings(scene_or_spec)
+
+
+register_guard(
+    fn=check_lighting_kelvin_blackbody_locus,
+    name="lighting_kelvin_blackbody_locus",
+    lesson_ids=("l0080-lamps-rendered-far", "l0080"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates lighting Kelvin CCT to RGB conversion against blackbody locus (l0080)",
+    notes="needs real case: l0080's recorded failure is lamps rendering far cooler than 2700 K spec with night coming out blue due to Tanner Helland display-sRGB fit used as linear light (docs/LEARNINGS.md line 280); requires live Blender Cycles Kelvin conversion runtime state",
+    needs_real_case=True,
+)
+
+
+# 157. l0090: Window glass two-face transmission verification
+def check_glazing_two_face_transmission(scene: dict[str, Any]) -> list[str]:
+    """Validates that window glazing transmittance accounts for both faces without double-attenuation (l0090)."""
+    return villa_render_contract.validate_scene(scene)
+
+
+register_guard(
+    fn=check_glazing_two_face_transmission,
+    name="glazing_two_face_transmission",
+    lesson_ids=("l0090-window-glass-passed", "l0090"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that window glazing transmittance accounts for both faces without double-attenuation (l0090)",
+    notes="needs real case: l0090's recorded failure is window glass passing 100% of sunlight instead of 85% due to single-face glass or shadow ray pass-through (docs/LEARNINGS.md line 290); requires live optical simulation probe of Cycles shadow rays",
+    needs_real_case=True,
+)
+
+
+# 158. l0656: Calibrated glass transmission probe verification
+def check_glazing_calibrated_transmission_probe(scene: dict[str, Any]) -> list[str]:
+    """Validates calibrated glass transmission probe readings against stated window specifications (l0656)."""
+    return villa_render_contract.validate_scene(scene)
+
+
+register_guard(
+    fn=check_glazing_calibrated_transmission_probe,
+    name="glazing_calibrated_transmission_probe",
+    lesson_ids=("l0656-glass-verified", "l0656"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates calibrated glass transmission probe readings against stated window specifications (l0656)",
+    notes="needs real case: l0656 records a verified calibration benchmark (single-sheet 0.700, slab 0.850) rather than a failing defect fixture (docs/LEARNINGS.md lines 858-859); requires live optical simulation calibration probe readings",
     needs_real_case=True,
 )
 

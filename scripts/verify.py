@@ -109,6 +109,16 @@ def unregistered_render_finishes(materials, approved=None):
     return sorted(set(materials)-(registered_render_finishes() if approved is None else approved))
 
 
+def audit_lesson_inventory(audit_path: pathlib.Path | None = None) -> bool:
+    """Audit lesson coverage; fails closed if any lesson is uncovered or errors exist (Step 3)."""
+    from archpipe.guard_registry import audit_lesson_coverage
+    target = audit_path if audit_path is not None else (ROOT / "docs/lessons-audit.md")
+    report = audit_lesson_coverage(target, strict=True)
+    expect("lesson coverage audit has no errors", len(report["errors"]) == 0)
+    expect("zero uncovered lessons", report["uncovered_count"] == 0)
+    return len(report["errors"]) == 0 and report["uncovered_count"] == 0
+
+
 def main() -> int:
     expect("execution context refuses relative pyRevit and AutoCAD scripts",
            all(raises(ContextError, absolute, pathlib.Path(path), "script", file=True)
@@ -958,6 +968,9 @@ def main() -> int:
     }
     expect("validate_scene rejects host-face bookkeeping mesh in render meshes",
            any("bookkeeping" in e or "host-face" in e for e in validate_scene(mock_bad_scene)))
+
+    # Step 3 (docs/guard-registry.md): Fail closed if any lesson in inventory is uncovered
+    audit_lesson_inventory()
 
     print("\nRESULT:", "ALL PASS" if not FAILS else "FAILURES: " + ", ".join(FAILS))
     record_path = ROOT / "out/verify-result.json"

@@ -77,6 +77,15 @@ def _memoized_run_case(self: RegisteredGuard, case_type: str = "real") -> Any:
 RegisteredGuard.run_case = _memoized_run_case
 
 
+
+def _audit_with_fabricated_lesson(real_text: str) -> str:
+    """Insert one uncovered lesson row directly after the last inventory row (lead fix, batch 14)."""
+    lines = real_text.splitlines(keepends=True)
+    last = max(i for i, line in enumerate(lines) if line.startswith("| l0"))
+    row = "| l9998-fabricated-uncovered | Fabricated test lesson | test class | 1 | NONE | None | None |\n"
+    return "".join(lines[:last + 1] + [row] + lines[last + 1:])
+
+
 class TestGuardRegistry(unittest.TestCase):
     """Test suite for guard and review step registry and coverage auditing."""
 
@@ -153,10 +162,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 124)
+        self.assertEqual(report["covered_by_guard_count"], 125)
         self.assertEqual(report["covered_by_review_count"], 21)
-        self.assertEqual(report["needs_real_case_count"], 67)
-        self.assertEqual(report["uncovered_count"], 5)
+        self.assertEqual(report["needs_real_case_count"], 71)
+        self.assertEqual(report["uncovered_count"], 0)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -290,21 +299,11 @@ class TestGuardRegistry(unittest.TestCase):
             "l0481-camera-sees-wall",
             "l0097-lamp-source-regression",
             "l0112-signify-s-photometry",
+            # Phase 2 Batch 14 Scene Exposure Mode
+            "l0091-every-view-metered",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
-
-        # Lessons whose local re-implementations were deleted or no production guard exists yet
-        deleted_reimplementation_lessons = [
-            "l0026-blender-ies-azimuth",
-            "l0080-lamps-rendered-far",
-            "l0090-window-glass-passed",
-            "l0656-glass-verified",
-        ]
-        # l0095, l0096 and l0119 lost their batch-2 re-implementations but are now covered by the
-        # production fixture_record check (C5 phase 1), so they are asserted covered above.
-        for lid in deleted_reimplementation_lessons:
-            self.assertIn(lid, report["uncovered_lessons"], f"Lesson {lid} should be uncovered (no production guard yet)")
 
         # Check Tier-3 review step lessons (all 21 must be covered)
         expected_review_lessons = [
@@ -407,12 +406,17 @@ class TestGuardRegistry(unittest.TestCase):
             "l0101-look-retry-overwrote",
             "l0286-revit-probe-villa",
             "l0755-final-renders-first",
+            # Phase 2 Batch 14 Emitter Class
+            "l0026-blender-ies-azimuth",
+            "l0080-lamps-rendered-far",
+            "l0090-window-glass-passed",
+            "l0656-glass-verified",
         ]
         for lid in expected_needs_real_case:
             self.assertIn(lid, report["needs_real_case"], f"Lesson {lid} should be tracked as needs_real_case")
 
-        # Check lesson left uncovered (no guard in code yet)
-        self.assertIn("l0091-every-view-metered", report["uncovered_lessons"])
+        # Zero uncovered lessons remaining across all 217 lessons
+        self.assertEqual(report["uncovered_lessons"], [])
 
     def test_coverage_audit_reports_unreadable_inputs_as_errors_never_no_guard(self) -> None:
         """Unreadable or missing input files must raise UnreadableInputError, never reported as 'no guard' / 'NONE'."""
@@ -482,9 +486,15 @@ class TestGuardRegistry(unittest.TestCase):
 
     def test_coverage_reporting_functions(self) -> None:
         """Test report_uncovered_lessons and format_coverage_report."""
-        uncovered = report_uncovered_lessons()
+        # Batch 14 brought the real inventory to zero uncovered lessons; check the
+        # report shape on an inventory with one fabricated uncovered row.
+        self.assertEqual(report_uncovered_lessons(), [])
+        fabricated = Path(tempfile.mkdtemp()) / "fabricated-lessons-audit.md"
+        fabricated.write_text(_audit_with_fabricated_lesson(
+            (ROOT / "docs/lessons-audit.md").read_text(encoding="utf-8")), encoding="utf-8")
+        uncovered = report_uncovered_lessons(audit_file=fabricated)
         self.assertIsInstance(uncovered, list)
-        self.assertGreater(len(uncovered), 0)
+        self.assertEqual(len(uncovered), 1)
         # Each item is a lesson dict
         first = uncovered[0]
         self.assertIn("id", first)
@@ -1019,6 +1029,72 @@ class TestGuardRegistry(unittest.TestCase):
                 clean_res = guard.run_case("clean")
                 self.assertTrue(clean_res.passed, f"{name} clean failed: {clean_res.error_message}")
                 self.assertFalse(clean_res.fired, f"{name} clean fired unexpectedly")
+
+    def test_phase2_batch14_guards_execution(self) -> None:
+        """Every guard added in Phase 2 Batch 14 executes as expected."""
+        # Active guard: scene_exposure_lock_mode runs on real (fires) and clean (quiet)
+        guard_l0091 = get_guard("scene_exposure_lock_mode")
+        self.assertFalse(guard_l0091.needs_real_case)
+        real_res = guard_l0091.run_case("real")
+        self.assertTrue(real_res.passed, f"scene_exposure_lock_mode real failed: {real_res.error_message}")
+        self.assertTrue(real_res.fired, "scene_exposure_lock_mode real did not fire")
+
+        clean_res = guard_l0091.run_case("clean")
+        self.assertTrue(clean_res.passed, f"scene_exposure_lock_mode clean failed: {clean_res.error_message}")
+        self.assertFalse(clean_res.fired, "scene_exposure_lock_mode clean fired unexpectedly")
+
+        # Guards registered with needs_real_case=True
+        batch14_needs_real = [
+            "photometry_ies_azimuth_interpolation",
+            "lighting_kelvin_blackbody_locus",
+            "glazing_two_face_transmission",
+            "glazing_calibrated_transmission_probe",
+        ]
+        for name in batch14_needs_real:
+            guard = get_guard(name)
+            self.assertTrue(guard.needs_real_case, f"{name} should have needs_real_case=True")
+            r_res = guard.run_case("real")
+            self.assertFalse(r_res.passed)
+            self.assertFalse(r_res.fired)
+            self.assertIn("needs real case", r_res.error_message.lower())
+
+    def test_verify_fails_on_uncovered_lesson(self) -> None:
+        """scripts/verify.py audit_lesson_inventory fails closed on an uncovered lesson while real inventory passes."""
+        if str(ROOT) not in sys.path:
+            sys.path.insert(0, str(ROOT))
+        from scripts import verify as verify_script
+
+        # 1. Real lessons inventory passes with zero errors and zero uncovered
+        self.assertTrue(
+            verify_script.audit_lesson_inventory(),
+            "audit_lesson_inventory must pass on the real docs/lessons-audit.md inventory",
+        )
+
+        # 2. Fabricated inventory with an uncovered lesson causes audit to report uncovered and verify check to fail
+        real_audit_text = (ROOT / "docs/lessons-audit.md").read_text(encoding="utf-8")
+        fabricated_audit = self.temp_dir / "fabricated-lessons-audit.md"
+        fabricated_row = (
+            "| l9998-fabricated-uncovered | Fabricated test lesson | test class | 1 | "
+            "NONE | None | None |\n"
+        )
+        fabricated_audit.write_text(_audit_with_fabricated_lesson(real_audit_text), encoding="utf-8")
+
+        # Verify audit_lesson_coverage detects the uncovered lesson
+        fab_report = audit_lesson_coverage(fabricated_audit)
+        self.assertEqual(fab_report["uncovered_count"], 1)
+        self.assertIn("l9998-fabricated-uncovered", fab_report["uncovered_lessons"])
+
+        # Verify audit_lesson_inventory fails on the fabricated inventory
+        orig_fails = list(verify_script.FAILS)
+        try:
+            ok = verify_script.audit_lesson_inventory(fabricated_audit)
+            self.assertFalse(ok, "audit_lesson_inventory must return False on uncovered lesson")
+            self.assertTrue(
+                any("zero uncovered lessons" in f for f in verify_script.FAILS),
+                "verify_script.FAILS must record failure for uncovered lesson",
+            )
+        finally:
+            verify_script.FAILS[:] = orig_fails
 
 
 if __name__ == "__main__":
