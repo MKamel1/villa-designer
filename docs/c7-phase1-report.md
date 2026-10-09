@@ -28,12 +28,12 @@ executive_summary: >
 
 ## Executive Summary
 
-Phase 1 of Lessons Class C7 ("appearance lacks verified basis") establishes the optical basis inventory and fail-closed verification tooling for all visible surfaces in the villa pipeline. Guided by the class rule in [docs/lessons-audit.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md) ("Bind visible surfaces and models to verified product and optical records"), this phase:
-1. Conducted an inventory of all 54 static scene materials in [`archpipe.concept.villa_render.M`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/concept/villa_render.py#L90-L150), dynamic emitters, detail element specifications in [`revit_spec.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/concept/revit_spec.py), and 37 asset library textures, documenting status as `VERIFIED`, `ASSUMED`, or `NONE` in [docs/material-basis.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/material-basis.md).
-2. Implemented the single fail-closed check [`material_findings`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/material_basis.py#L220) and [`assert_material_basis`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/material_basis.py#L619) in [`src/archpipe/material_basis.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/material_basis.py), strictly calling production data authorities ([`archpipe.concept.villa_render.M`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/concept/villa_render.py#L90), [`archpipe.blender.grain.mapping_rotated_span`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/blender/grain.py#L27), [`archpipe.blender.build_scene.kelvin_to_rgb`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/blender/build_scene.py#L165), and [`archpipe.villa_render_contract.emission_strength`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/villa_render_contract.py#L34)).
-3. Froze a baseline of 5 known non-fatal warnings on active production materials by value in [tests/fixtures/c7_known_findings.json](file:///C:/Users/mmbka/arch-pipeline-agy/tests/fixtures/c7_known_findings.json) so current models stay quiet while any new optical violations fail closed.
-4. Created comprehensive regression proofs in [tests/test_material_basis.py](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py) validating 12 frozen historical defects and renamed/translated siblings.
-5. Registered the guard [`appearance_basis_phase1`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L1553) in [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py) covering 14 lesson IDs, updating audit coverage arithmetic from 30 to 44 covered guards and 157 to 143 uncovered lessons.
+Phase 1 of Lessons Class C7 ("appearance lacks verified basis") establishes the optical basis inventory and fail-closed verification tooling for all visible surfaces in the villa pipeline. Guided by the class rule in [docs/lessons-audit.md](lessons-audit.md) ("Bind visible surfaces and models to verified product and optical records"), this phase:
+1. Conducted an inventory of all 54 static scene materials in [`archpipe.concept.villa_render.M`](../src/archpipe/concept/villa_render.py#L90-L150), dynamic emitters, detail element specifications in [`revit_spec.py`](../src/archpipe/concept/revit_spec.py), and 37 asset library textures, documenting status as `VERIFIED`, `ASSUMED`, or `NONE` in [docs/material-basis.md](material-basis.md).
+2. Implemented the single fail-closed check [`material_findings`](../src/archpipe/material_basis.py#L220) and [`assert_material_basis`](../src/archpipe/material_basis.py#L619) in [`src/archpipe/material_basis.py`](../src/archpipe/material_basis.py), strictly calling production data authorities ([`archpipe.concept.villa_render.M`](../src/archpipe/concept/villa_render.py#L90), [`archpipe.blender.grain.mapping_rotated_span`](../src/archpipe/blender/grain.py#L27), [`archpipe.blender.build_scene.kelvin_to_rgb`](../src/archpipe/blender/build_scene.py#L165), and [`archpipe.villa_render_contract.emission_strength`](../src/archpipe/villa_render_contract.py#L34)).
+3. Froze a baseline of 5 known non-fatal warnings on active production materials by value in [tests/fixtures/c7_known_findings.json](../tests/fixtures/c7_known_findings.json) so current models stay quiet while any new optical violations fail closed.
+4. Created comprehensive regression proofs in [tests/test_material_basis.py](../tests/test_material_basis.py) validating 12 frozen historical defects and renamed/translated siblings.
+5. Registered the guard [`appearance_basis_phase1`](../src/archpipe/guard_registry.py#L1553) in [`src/archpipe/guard_registry.py`](../src/archpipe/guard_registry.py) covering 14 lesson IDs, updating audit coverage arithmetic from 30 to 44 covered guards and 157 to 143 uncovered lessons.
 
 Per Phase 1 constraints, zero active production material values were modified.
 
@@ -41,7 +41,7 @@ Per Phase 1 constraints, zero active production material values were modified.
 
 ## Class C7 Audit and Inventory Summary
 
-The material inventory conducted in [docs/material-basis.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/material-basis.md) analyzed all surface definitions across the codebase:
+The material inventory conducted in [docs/material-basis.md](material-basis.md) analyzed all surface definitions across the codebase:
 
 | Category | Total Count | VERIFIED | ASSUMED | NONE (Flagged) |
 |---|---:|---:|---:|---:|
@@ -63,7 +63,7 @@ The material inventory conducted in [docs/material-basis.md](file:///C:/Users/mm
 
 ## Material Basis Check Rules and Lesson Mapping
 
-The validation function [`material_findings`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/material_basis.py#L220) executes seven physical validation rules mapped to Class C7 lessons:
+The validation function [`material_findings`](../src/archpipe/material_basis.py#L220) executes seven physical validation rules mapped to Class C7 lessons:
 
 | Rule Category | Lesson IDs | Enforcement Mechanism | Production Authority Called |
 |---|---|---|---|
@@ -81,24 +81,24 @@ The validation function [`material_findings`](file:///C:/Users/mmbka/arch-pipeli
 
 Every rule is proved against a frozen reproduction by value from historical defect records, paired with a renamed/translated sibling:
 
-1. **`l0016-solid-magenta-box`**: Frozen CAD display color $[1.0, 0.0, 1.0]$ used on plant box placeholder. Proved on `trellis-plant-box` and sibling `creeper-foliage-proxy` ([tests/test_material_basis.py:69](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L69)).
-2. **`l0028-revit-paint-hue`**: Raw Revit viewport hue substituted for measured reflectance without product record ([tests/test_material_basis.py:126](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L126)).
-3. **`l0049-extracted-glass-solid`**: Glass slab lacking declared whole-pane optical transmittance and interface count ([tests/test_material_basis.py:175](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L175)).
-4. **`l0062-whole-room-rendered`**: Emissive fixture specifying warm CCT (2700 K) with contradictory saturated purple RGB or zero exitance ([tests/test_material_basis.py:228](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L228)).
-5. **`l0064-pure-red-lamp`**: Revit display shade $[1.0, 0.0, 0.0]$ rendering as saturated CAD lamp ([tests/test_material_basis.py:106](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L106)).
-6. **`l0065-ivory-bedding-rendered`**: Authored ivory bedding with unphysical low reflectance $\rho = 0.12$ rendering as dingy dark grey ([tests/test_material_basis.py:280](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L280)).
-7. **`l0083-oak-grain-ran`**: Vertical wardrobe door specifying horizontal grain axis `y` ([tests/test_material_basis.py:328](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L328)).
-8. **`l0084-dark-bronze-rendered`**: "Dark bronze" specified with pale tan albedo $\rho = 0.58$, exceeding physical bronze ceiling of 0.40 ([tests/test_material_basis.py:375](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L375)).
-9. **`l0795-wood-grain-rotated`**: Box-projection coordinate Euler rotation collapsing texel mapping span ($u_{\text{span}} = 0.0$) on horizontal member ([tests/test_material_basis.py:422](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L422)).
-10. **`l0891-artificial-grass-rendere`**: Ground cover material lacking real-world texture repeat dimensions ([tests/test_material_basis.py:469](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L469)).
-11. **`l0900-island-stair-void`**: Pendant diffuser globe with low transmittance $\tau = 0.25 \le 0.40$ rendering as smoky glass ([tests/test_material_basis.py:516](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L516)).
-12. **`l0910-ensuite-bath-screen`**: Zero-thickness single-interface glass mesh causing total internal reflection ([tests/test_material_basis.py:563](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py#L563)).
+1. **`l0016-solid-magenta-box`**: Frozen CAD display color $[1.0, 0.0, 1.0]$ used on plant box placeholder. Proved on `trellis-plant-box` and sibling `creeper-foliage-proxy` ([tests/test_material_basis.py:69](../tests/test_material_basis.py#L69)).
+2. **`l0028-revit-paint-hue`**: Raw Revit viewport hue substituted for measured reflectance without product record ([tests/test_material_basis.py:126](../tests/test_material_basis.py#L126)).
+3. **`l0049-extracted-glass-solid`**: Glass slab lacking declared whole-pane optical transmittance and interface count ([tests/test_material_basis.py:175](../tests/test_material_basis.py#L175)).
+4. **`l0062-whole-room-rendered`**: Emissive fixture specifying warm CCT (2700 K) with contradictory saturated purple RGB or zero exitance ([tests/test_material_basis.py:228](../tests/test_material_basis.py#L228)).
+5. **`l0064-pure-red-lamp`**: Revit display shade $[1.0, 0.0, 0.0]$ rendering as saturated CAD lamp ([tests/test_material_basis.py:106](../tests/test_material_basis.py#L106)).
+6. **`l0065-ivory-bedding-rendered`**: Authored ivory bedding with unphysical low reflectance $\rho = 0.12$ rendering as dingy dark grey ([tests/test_material_basis.py:280](../tests/test_material_basis.py#L280)).
+7. **`l0083-oak-grain-ran`**: Vertical wardrobe door specifying horizontal grain axis `y` ([tests/test_material_basis.py:328](../tests/test_material_basis.py#L328)).
+8. **`l0084-dark-bronze-rendered`**: "Dark bronze" specified with pale tan albedo $\rho = 0.58$, exceeding physical bronze ceiling of 0.40 ([tests/test_material_basis.py:375](../tests/test_material_basis.py#L375)).
+9. **`l0795-wood-grain-rotated`**: Box-projection coordinate Euler rotation collapsing texel mapping span ($u_{\text{span}} = 0.0$) on horizontal member ([tests/test_material_basis.py:422](../tests/test_material_basis.py#L422)).
+10. **`l0891-artificial-grass-rendere`**: Ground cover material lacking real-world texture repeat dimensions ([tests/test_material_basis.py:469](../tests/test_material_basis.py#L469)).
+11. **`l0900-island-stair-void`**: Pendant diffuser globe with low transmittance $\tau = 0.25 \le 0.40$ rendering as smoky glass ([tests/test_material_basis.py:516](../tests/test_material_basis.py#L516)).
+12. **`l0910-ensuite-bath-screen`**: Zero-thickness single-interface glass mesh causing total internal reflection ([tests/test_material_basis.py:563](../tests/test_material_basis.py#L563)).
 
 ---
 
 ## Known-Findings Baseline
 
-To ensure new optical regressions fail closed while existing active production materials remain usable pending Phase 2, the current findings are frozen in [tests/fixtures/c7_known_findings.json](file:///C:/Users/mmbka/arch-pipeline-agy/tests/fixtures/c7_known_findings.json):
+To ensure new optical regressions fail closed while existing active production materials remain usable pending Phase 2, the current findings are frozen in [tests/fixtures/c7_known_findings.json](../tests/fixtures/c7_known_findings.json):
 
 1. `walnut`: Warning on base `grain_axis="z"` collapsing on horizontal members ($u_{\text{span}} = 0.0$); horizontal faces require `walnut-grain-x`/`y`.
 2. `oak`: Warning on base `grain_axis="z"` collapsing on horizontal members; horizontal faces require `oak-grain-x`/`y`.
@@ -130,14 +130,14 @@ Phase 2 will replace assumed and procedural values with verified manufacturer pr
 
 The following 8 files were created or modified during Phase 1:
 
-1. [`docs/material-basis.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/material-basis.md) (Created: full material inventory audit across 109 surfaces).
-2. [`src/archpipe/material_basis.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/material_basis.py) (Created: optical basis validation functions calling production authorities).
-3. [`tests/fixtures/c7_known_findings.json`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/fixtures/c7_known_findings.json) (Created: frozen baseline of 5 known findings on active materials).
-4. [`tests/test_material_basis.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py) (Created: regression test suite with 12 frozen defect fixtures and siblings).
-5. [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py) (Modified: imported `material_basis`, exported `check_material_appearance_basis`, registered `appearance_basis_phase1`).
-6. [`tests/test_guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_guard_registry.py) (Modified: updated coverage counts to 44 covered / 143 uncovered, added 14 lesson IDs, added execution test).
-7. [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md) (Modified: appended `appearance-basis-phase1` learning entry).
-8. [`docs/c7-phase1-report.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/c7-phase1-report.md) (Created: this Phase 1 close-out report).
+1. [`docs/material-basis.md`](material-basis.md) (Created: full material inventory audit across 109 surfaces).
+2. [`src/archpipe/material_basis.py`](../src/archpipe/material_basis.py) (Created: optical basis validation functions calling production authorities).
+3. [`tests/fixtures/c7_known_findings.json`](../tests/fixtures/c7_known_findings.json) (Created: frozen baseline of 5 known findings on active materials).
+4. [`tests/test_material_basis.py`](../tests/test_material_basis.py) (Created: regression test suite with 12 frozen defect fixtures and siblings).
+5. [`src/archpipe/guard_registry.py`](../src/archpipe/guard_registry.py) (Modified: imported `material_basis`, exported `check_material_appearance_basis`, registered `appearance_basis_phase1`).
+6. [`tests/test_guard_registry.py`](../tests/test_guard_registry.py) (Modified: updated coverage counts to 44 covered / 143 uncovered, added 14 lesson IDs, added execution test).
+7. [`docs/LEARNINGS.md`](LEARNINGS.md) (Modified: appended `appearance-basis-phase1` learning entry).
+8. [`docs/c7-phase1-report.md`](c7-phase1-report.md) (Created: this Phase 1 close-out report).
 
 ---
 
@@ -146,27 +146,27 @@ The following 8 files were created or modified during Phase 1:
 Following test execution outside Blender and Lead audit of initial Phase 1 changes, four findings were addressed in Fix Round 1:
 
 1. **bpy Module-Level Import Isolation (Finding A)**:
-   Retained Lead's fix in [`src/archpipe/material_basis.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/material_basis.py), using `_load_blender_functions()` to extract and compile the pure mathematical functions `kelvin_to_rgb` and `_cie1931` directly from production source AST without importing `bpy` at module level.
+   Retained Lead's fix in [`src/archpipe/material_basis.py`](../src/archpipe/material_basis.py), using `_load_blender_functions()` to extract and compile the pure mathematical functions `kelvin_to_rgb` and `_cie1931` directly from production source AST without importing `bpy` at module level.
 
 2. **Replaced Invented Threshold with Production Textile Control (Finding B)**:
-   Removed the hard-coded 0.60 reflectance floor on light/ivory textiles, which appeared in no cited source. Connected the check directly to the production [`check_textile_reflectance`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/render_qa.py#L86) control from [`src/archpipe/render_qa.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/render_qa.py) (Lesson `l0065`, [docs/LEARNINGS.md:209](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L209)), which verifies explicit presentation reflectance on textiles and prevents unbacked generic furniture fallback (0.35).
-   - Honest re-evaluation of `garment-ivory`: Declares explicit presentation reflectance `rho = 0.55` and natural color `[0.86, 0.83, 0.76]` with documented note (`ASSUMED hanging garment fabric, ivory`). Evaluated under [`check_textile_reflectance`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/render_qa.py#L86), it passes and stays quiet with zero findings.
+   Removed the hard-coded 0.60 reflectance floor on light/ivory textiles, which appeared in no cited source. Connected the check directly to the production [`check_textile_reflectance`](../src/archpipe/render_qa.py#L86) control from [`src/archpipe/render_qa.py`](../src/archpipe/render_qa.py) (Lesson `l0065`, [docs/LEARNINGS.md:209](LEARNINGS.md#L209)), which verifies explicit presentation reflectance on textiles and prevents unbacked generic furniture fallback (0.35).
+   - Honest re-evaluation of `garment-ivory`: Declares explicit presentation reflectance `rho = 0.55` and natural color `[0.86, 0.83, 0.76]` with documented note (`ASSUMED hanging garment fabric, ivory`). Evaluated under [`check_textile_reflectance`](../src/archpipe/render_qa.py#L86), it passes and stays quiet with zero findings.
 
 3. **Scene-Based Grain Orientation Verification (Finding C)**:
    Eliminated speculative warnings on base wood materials (`oak`, `walnut`, `door-oak`) which were previously flagged without confirming usage on horizontal faces. Made the rule strictly scene-based:
-   - Audits meshes from the scene definition using [`mapping_rotated_span`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/blender/grain.py#L53).
+   - Audits meshes from the scene definition using [`mapping_rotated_span`](../src/archpipe/blender/grain.py#L53).
    - Only meshes possessing horizontal faces (face normal predominantly aligned with Z) while specifying vertical grain axis (`z`) are flagged as errors, reporting the failing mesh IDs.
    - Base materials used only on vertical faces (or unattached to horizontal scene geometry) stay quiet.
 
 4. **Re-Frozen Known-Findings Baseline (Finding D)**:
-   Re-evaluated [`material_findings`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/material_basis.py#L182) against active production villa materials [`archpipe.concept.villa_render.M`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/concept/villa_render.py#L44). Corrected baseline in [tests/fixtures/c7_known_findings.json](file:///C:/Users/mmbka/arch-pipeline-agy/tests/fixtures/c7_known_findings.json) to exactly 2 known warnings (`brass` lacking manufacturer alloy cut sheet and `glass-guard` lacking cited standard/IOR specification).
+   Re-evaluated [`material_findings`](../src/archpipe/material_basis.py#L182) against active production villa materials [`archpipe.concept.villa_render.M`](../src/archpipe/concept/villa_render.py#L44). Corrected baseline in [tests/fixtures/c7_known_findings.json](../tests/fixtures/c7_known_findings.json) to exactly 2 known warnings (`brass` lacking manufacturer alloy cut sheet and `glass-guard` lacking cited standard/IOR specification).
 
 ### Files Actually Changed in Fix Round 1
 
 The following 5 files were modified during Fix Round 1:
 
-1. [`src/archpipe/render_qa.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/render_qa.py) (Extracted and exported [`check_textile_reflectance`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/render_qa.py#L86)).
-2. [`src/archpipe/material_basis.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/material_basis.py) (Bound to [`check_textile_reflectance`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/render_qa.py#L86), implemented scene-based mesh grain check with `_face_normal` and `_resolve_scene_meshes`, removed speculative grain warnings).
-3. [`tests/fixtures/c7_known_findings.json`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/fixtures/c7_known_findings.json) (Re-froze baseline to 2 findings matching actual corrected production output).
-4. [`tests/test_material_basis.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_material_basis.py) (Added mesh grain horizontal vs. vertical scene test, updated `l0065` sibling to test missing reflectance, added test verifying `garment-ivory` passes).
-5. [`docs/c7-phase1-report.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/c7-phase1-report.md) (Updated frontmatter outline and added Fix Round 1 report section).
+1. [`src/archpipe/render_qa.py`](../src/archpipe/render_qa.py) (Extracted and exported [`check_textile_reflectance`](../src/archpipe/render_qa.py#L86)).
+2. [`src/archpipe/material_basis.py`](../src/archpipe/material_basis.py) (Bound to [`check_textile_reflectance`](../src/archpipe/render_qa.py#L86), implemented scene-based mesh grain check with `_face_normal` and `_resolve_scene_meshes`, removed speculative grain warnings).
+3. [`tests/fixtures/c7_known_findings.json`](../tests/fixtures/c7_known_findings.json) (Re-froze baseline to 2 findings matching actual corrected production output).
+4. [`tests/test_material_basis.py`](../tests/test_material_basis.py) (Added mesh grain horizontal vs. vertical scene test, updated `l0065` sibling to test missing reflectance, added test verifying `garment-ivory` passes).
+5. [`docs/c7-phase1-report.md`](c7-phase1-report.md) (Updated frontmatter outline and added Fix Round 1 report section).

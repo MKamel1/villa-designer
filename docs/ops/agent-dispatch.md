@@ -29,7 +29,7 @@ These operational procedures govern task delegation, remote workstation executio
   - Execute remote checks via bounded commands: `timeout 30 ssh <host> '<status-check>'`.
   - Maintain the wait loop in the local shell or Python script with an explicit sleep interval (e.g. `sleep 10` or `time.sleep(10)`).
   - Explicitly handle per-iteration connection timeouts and retries with a maximum retry counter and timestamped logging.
-  - Cross-reference: [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1564) (`ssh-monitor-silent-drop`).
+  - Cross-reference: [docs/LEARNINGS.md](../LEARNINGS.md#L1564) (`ssh-monitor-silent-drop`).
 
 ## 2. Holistic Prompt Authoring (No Appended Addenda)
 
@@ -39,7 +39,7 @@ These operational procedures govern task delegation, remote workstation executio
   - Never append postscripts or contradictory overrides to an active or template prompt.
   - When design parameters, constraints, or decisions evolve, re-author the complete task specification from scratch.
   - Prior to dispatch, perform a systematic line-by-line check comparing newly authored instructions against every `STOP`, gate, precondition, and waiver in the prompt.
-  - Cross-reference: [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1597) (`agent-prompt-appended-contradiction`).
+  - Cross-reference: [docs/LEARNINGS.md](../LEARNINGS.md#L1597) (`agent-prompt-appended-contradiction`).
 
 ## 3. Visual Preview Gate (Look-Before-Integrate)
 
@@ -49,7 +49,7 @@ These operational procedures govern task delegation, remote workstation executio
   - Before any newly authored mesh builder, procedural component, or material binding is imported into scene assembly (`villa_render.build` or `villa_landscape.build`), generate an isolated neutral preview image.
   - Record the absolute artifact file path (e.g. `out/previews/<component>-preview.png`) and its SHA-256 content hash in the component deliverable metadata.
   - Inspect the preview against photographic realism, botanical morphology, and surface orientation rules before wiring the builder into the villa scene.
-  - Cross-reference: [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1575) (`visible-element-unpreviewed-integration`) and [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1586) (`procedural-plant-and-soffit-guards`).
+  - Cross-reference: [docs/LEARNINGS.md](../LEARNINGS.md#L1575) (`visible-element-unpreviewed-integration`) and [docs/LEARNINGS.md](../LEARNINGS.md#L1586) (`procedural-plant-and-soffit-guards`).
 
 ## 4. Environment and Runtime Preflight
 
@@ -57,7 +57,7 @@ These operational procedures govern task delegation, remote workstation executio
 - **Procedure:**
   - Preflight checks verify required domain dependencies (e.g. `shapely`, `yaml`) using `importlib.util.find_spec` before running test discovery or domain modules.
   - Runners refuse execution immediately with exit code 2 and a single clear message naming missing dependencies and `sys.executable` if launched under an unconfigured interpreter.
-  - Cross-reference: [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L1553) (`execution-context-wrong-interpreter`).
+  - Cross-reference: [docs/LEARNINGS.md](../LEARNINGS.md#L1553) (`execution-context-wrong-interpreter`).
 
 ## 5. Behaviour-Preserving Refactor Audit
 
@@ -68,7 +68,7 @@ These operational procedures govern task delegation, remote workstation executio
   - The audit performs AST scope analysis to ensure that every assigned name, call target, and function scope is preserved, moved, or renamed.
   - If a removal is intentional, declare it in an allowlist dictionary (`{path: [names]}`) where every entry specifies a non-empty justification reason.
   - Fail closed (exit 1) on any un-allowed removal; unreadable input fails closed (exit 2).
-  - Cross-reference: [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md) (`refactor-silent-deletion`).
+  - Cross-reference: [docs/LEARNINGS.md](../LEARNINGS.md) (`refactor-silent-deletion`).
 
 ## Operational Dispatch Checklist
 

@@ -9,18 +9,18 @@ Document Outline:
   - "[7. Coverage Auditing & Reporting](#7-coverage-auditing--reporting)"
   - "[8. Phase 2 Migration & scripts/verify.py Integration Plan](#8-phase-2-migration--scriptsverifypy-integration-plan)"
 Executive Summary: |
-  This document details the Lesson Guard and Review Step Registry ([guard_registry.py](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py)).
+  This document details the Lesson Guard and Review Step Registry ([guard_registry.py](../src/archpipe/guard_registry.py)).
   It provides the mechanism by which pipeline checks and tests declare the lesson IDs they enforce, proving each against frozen real incident fixtures and clean negative cases.
-  It also details coverage auditing against [lessons-audit.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md) and lays out the Phase 2 plan to fail scripts/verify.py on uncovered lessons.
+  It also details coverage auditing against [lessons-audit.md](lessons-audit.md) and lays out the Phase 2 plan to fail scripts/verify.py on uncovered lessons.
 ---
 
 # Lesson Guard and Review Step Registry
 
 ## 1. Executive Summary
 
-The Guard Registry ([`guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py)) operationalizes the defect-learning discipline defined in [`.agents/skills/defect-learning/SKILL.md`](file:///C:/Users/mmbka/arch-pipeline-agy/.agents/skills/defect-learning/SKILL.md) and [`CLAUDE.md`](file:///C:/Users/mmbka/arch-pipeline-agy/CLAUDE.md) Non-Negotiable Discipline 7: **Every defect leaves a guard behind.**
+The Guard Registry ([`guard_registry.py`](../src/archpipe/guard_registry.py)) operationalizes the defect-learning discipline defined in [`.agents/skills/defect-learning/SKILL.md`](../.agents/skills/defect-learning/SKILL.md) and [`CLAUDE.md`](../CLAUDE.md) Non-Negotiable Discipline 7: **Every defect leaves a guard behind.**
 
-Instead of relying on prose claims or unverified assertions, every registered guard explicitly binds one or more lesson IDs from [`docs/lessons-audit.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md) and [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md) to:
+Instead of relying on prose claims or unverified assertions, every registered guard explicitly binds one or more lesson IDs from [`docs/lessons-audit.md`](lessons-audit.md) and [`docs/LEARNINGS.md`](LEARNINGS.md) to:
 1. A **real failing case** frozen by value from the actual incident (or explicitly flagged as `needs_real_case=True` if awaiting a frozen incident asset);
 2. A **clean case** that proves the guard stays quiet on correct work (negative test discipline);
 3. Expected outcomes defining what constitutes firing and staying quiet.
@@ -33,7 +33,7 @@ For Tier 3 lessons where numerical automation is inappropriate (aesthetic qualit
 
 ### The "Check Built from Incomplete Examples" Defect Pattern
 
-An audit of project defect records ([`docs/lessons-audit.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md), Root Class: *check built from incomplete examples*, 18 lessons) identified a systematic recurring failure mode:
+An audit of project defect records ([`docs/lessons-audit.md`](lessons-audit.md), Root Class: *check built from incomplete examples*, 18 lessons) identified a systematic recurring failure mode:
 * Checks and tests written and "proven" solely on synthetic, positive-only, or idealized inputs repeatedly missed the actual defect in production or broke on valid work.
 * Notable real incidents:
   - `l0061`: The first `window_view` check passed an empty void because it checked global standard deviation rather than local pixel gradient detail.
@@ -55,7 +55,7 @@ To eliminate this class of error:
 
 ## 3. Hierarchy of Controls & Lesson Mapping
 
-The registry maps each lesson according to the hierarchy of controls defined in [`.agents/skills/defect-learning/SKILL.md`](file:///C:/Users/mmbka/arch-pipeline-agy/.agents/skills/defect-learning/SKILL.md):
+The registry maps each lesson according to the hierarchy of controls defined in [`.agents/skills/defect-learning/SKILL.md`](../.agents/skills/defect-learning/SKILL.md):
 
 | Control Tier | Description | Registry Mechanism | Example Lessons |
 |---|---|---|---|
@@ -67,38 +67,38 @@ The registry maps each lesson according to the hierarchy of controls defined in 
 
 ## 4. Registry API Reference
 
-The registry module is located at [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py).
+The registry module is located at [`src/archpipe/guard_registry.py`](../src/archpipe/guard_registry.py).
 
 ### Core Data Structures
 
-- [`GuardCase`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L61-L67): Frozen container for input arguments `args` (tuple) and `kwargs` (dict).
-- [`case(*args, **kwargs)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L69-L72): Convenience constructor factory.
-- [`GuardExecutionResult`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L84-L93): Execution report containing `guard_name`, `case_type` ("real" or "clean"), `passed` (bool), `fired` (bool), `error_message` (str), and `detail`.
-- [`RegisteredGuard`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L168-L245): Encapsulates the guard function, associated lesson IDs, real case, clean case, expected outcomes, tier, and `needs_real_case` flag.
+- [`GuardCase`](../src/archpipe/guard_registry.py#L61-L67): Frozen container for input arguments `args` (tuple) and `kwargs` (dict).
+- [`case(*args, **kwargs)`](../src/archpipe/guard_registry.py#L69-L72): Convenience constructor factory.
+- [`GuardExecutionResult`](../src/archpipe/guard_registry.py#L84-L93): Execution report containing `guard_name`, `case_type` ("real" or "clean"), `passed` (bool), `fired` (bool), `error_message` (str), and `detail`.
+- [`RegisteredGuard`](../src/archpipe/guard_registry.py#L168-L245): Encapsulates the guard function, associated lesson IDs, real case, clean case, expected outcomes, tier, and `needs_real_case` flag.
   - Method `run_case(case_type)`: Executes the guard against either "real" or "clean" case.
   - Method `run()`: Executes both cases and returns `(real_result, clean_result)`.
-- [`RegisteredReviewStep`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L247-L257): Encapsulates a Tier 3 review checkpoint: `name`, `lesson_ids`, `text`, `location`, `reviewer`, and `notes`.
+- [`RegisteredReviewStep`](../src/archpipe/guard_registry.py#L247-L257): Encapsulates a Tier 3 review checkpoint: `name`, `lesson_ids`, `text`, `location`, `reviewer`, and `notes`.
 
 ### Registration Functions
 
-- [`register_guard(...)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L264-L315) / [`register(...)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L318): Decorator or direct callable to register a Tier 1 or Tier 2 guard.
-- [`register_review_step(...)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L321-L349): Registers a Tier 3 review step.
+- [`register_guard(...)`](../src/archpipe/guard_registry.py#L264-L315) / [`register(...)`](../src/archpipe/guard_registry.py#L318): Decorator or direct callable to register a Tier 1 or Tier 2 guard.
+- [`register_review_step(...)`](../src/archpipe/guard_registry.py#L321-L349): Registers a Tier 3 review step.
 
 ### Lookup & Inspection Functions
 
-- [`get_guard(name)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L351-L356): Retrieves a registered guard by name.
-- [`all_guards()`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L365-L368): Returns list of all registered guards.
-- [`find_guards_for_lesson(lesson_id)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L381-L392): Returns guards matching a lesson ID (exact slug or base prefix, e.g. "l0188").
-- [`get_review_step(name)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L358-L363): Retrieves a review step by name.
-- [`all_review_steps()`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L370-L373): Returns list of all registered review steps.
-- [`find_review_steps_for_lesson(lesson_id)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L394-L405): Returns review steps matching a lesson ID.
-- [`clear_registry()`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L375-L379): Clears in-memory registry (used for test isolation).
+- [`get_guard(name)`](../src/archpipe/guard_registry.py#L351-L356): Retrieves a registered guard by name.
+- [`all_guards()`](../src/archpipe/guard_registry.py#L365-L368): Returns list of all registered guards.
+- [`find_guards_for_lesson(lesson_id)`](../src/archpipe/guard_registry.py#L381-L392): Returns guards matching a lesson ID (exact slug or base prefix, e.g. "l0188").
+- [`get_review_step(name)`](../src/archpipe/guard_registry.py#L358-L363): Retrieves a review step by name.
+- [`all_review_steps()`](../src/archpipe/guard_registry.py#L370-L373): Returns list of all registered review steps.
+- [`find_review_steps_for_lesson(lesson_id)`](../src/archpipe/guard_registry.py#L394-L405): Returns review steps matching a lesson ID.
+- [`clear_registry()`](../src/archpipe/guard_registry.py#L375-L379): Clears in-memory registry (used for test isolation).
 
 ### Coverage Auditing Functions
 
-- [`audit_lesson_coverage(audit_file=None, strict=False)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L411-L618): Parses [`docs/lessons-audit.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md), matches lessons against registered guards and review steps, and reports coverage counts. Reports unreadable inputs as explicit errors.
-- [`report_uncovered_lessons(audit_file=None, strict=False)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L621-L634): Returns list of lesson dictionaries that have neither a registered guard nor a review step.
-- [`format_coverage_report(audit_file=None, strict=False)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L637-L670) / [`coverage_report(...)`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L673): Returns a formatted human-readable audit text summary.
+- [`audit_lesson_coverage(audit_file=None, strict=False)`](../src/archpipe/guard_registry.py#L411-L618): Parses [`docs/lessons-audit.md`](lessons-audit.md), matches lessons against registered guards and review steps, and reports coverage counts. Reports unreadable inputs as explicit errors.
+- [`report_uncovered_lessons(audit_file=None, strict=False)`](../src/archpipe/guard_registry.py#L621-L634): Returns list of lesson dictionaries that have neither a registered guard nor a review step.
+- [`format_coverage_report(audit_file=None, strict=False)`](../src/archpipe/guard_registry.py#L637-L670) / [`coverage_report(...)`](../src/archpipe/guard_registry.py#L673): Returns a formatted human-readable audit text summary.
 
 ---
 
@@ -208,30 +208,30 @@ register_review_step(
 
 ## 6. Pre-Registered Phase 1 Guards
 
-The following 7 guards with frozen real incident fixtures, 1 guard flagged as `needs_real_case`, and 3 Tier 3 review steps are pre-registered in [`guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/guard_registry.py):
+The following 7 guards with frozen real incident fixtures, 1 guard flagged as `needs_real_case`, and 3 Tier 3 review steps are pre-registered in [`guard_registry.py`](../src/archpipe/guard_registry.py):
 
 | Guard Name | Lesson ID | Guard Target | Real Failing Case | Clean Quiet Case | Expected Outcome |
 |---|---|---|---|---|---|
-| `evidence_book_edition` | `l0188` | [`check_book_edition`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/evidence.py) | "Neufert Architects Data 6th ed. 2023.pdf", "2nd English edition 1980" | "Metric_Handbook_7th_ed_2022.pdf", "7th edition 2022" | Real: `UNVERIFIED` (`matches=False`)<br>Clean: `VERIFIED` (`matches=True`) |
-| `evidence_page_locator_agreement` | `l0189` | [`assert_page_agreement`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/evidence.py) | PDF sequence `191` vs printed `"5.45"` | PDF sequence `"17"` vs printed `"17"` | Real: raises [`PageMismatchError`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/evidence.py)<br>Clean: `None` |
-| `evidence_geometry_metadata_agreement` | `l0179` | [`assert_geometry_matches_metadata`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/evidence.py) | Declared depth `408.0` mm vs measured `202.0` mm (tol `5.0`) | Declared `408.0` mm vs measured `408.2` mm (tol `1.0`) | Real: raises [`GeometryDisagreementError`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/evidence.py)<br>Clean: `None` |
-| `external_claims_content_sniffing` | `l0113` | [`ingest_bytes`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/external_claims.py) | Zip bytes declared as `application/json` | Zip bytes declared as `application/zip` | Real: `UNVERIFIED`<br>Clean: `VERIFIED` |
-| `external_claims_cct_and_watts_agreement` | `l0118` | [`check_cct_and_watts_agreement`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/external_claims.py) | Revit `3200 K / 3 W` vs LDT `3000 K / 23 W` | Revit `3000 K / 23 W` vs LDT `3000 K / 23.2 W` | Real: `UNVERIFIED`<br>Clean: `VERIFIED` |
-| `external_claims_photometry_fitting_agreement` | `l0098` | [`check_photometry_fitting_agreement`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/external_claims.py) | `(594, 24)` mm strip on `(276, 276)` mm round drum | `(280, 280)` mm round on `(276, 276)` mm round drum | Real: `UNVERIFIED`<br>Clean: `VERIFIED` |
-| `units_conversion_guard` | `l0012`, `l0023`, `l0114`, `l0182`, `l0409`, `l0473`, `l0669` | [`check_units_guard`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units_guard.py) | Raw literal `304.8` in [`bad_code.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c9_unallowlisted_case/bad_code.py) | Active repository root | Real: raises [`UnitsConversionError`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units_guard.py)<br>Clean: `True` |
+| `evidence_book_edition` | `l0188` | [`check_book_edition`](../src/archpipe/evidence.py) | "Neufert Architects Data 6th ed. 2023.pdf", "2nd English edition 1980" | "Metric_Handbook_7th_ed_2022.pdf", "7th edition 2022" | Real: `UNVERIFIED` (`matches=False`)<br>Clean: `VERIFIED` (`matches=True`) |
+| `evidence_page_locator_agreement` | `l0189` | [`assert_page_agreement`](../src/archpipe/evidence.py) | PDF sequence `191` vs printed `"5.45"` | PDF sequence `"17"` vs printed `"17"` | Real: raises [`PageMismatchError`](../src/archpipe/evidence.py)<br>Clean: `None` |
+| `evidence_geometry_metadata_agreement` | `l0179` | [`assert_geometry_matches_metadata`](../src/archpipe/evidence.py) | Declared depth `408.0` mm vs measured `202.0` mm (tol `5.0`) | Declared `408.0` mm vs measured `408.2` mm (tol `1.0`) | Real: raises [`GeometryDisagreementError`](../src/archpipe/evidence.py)<br>Clean: `None` |
+| `external_claims_content_sniffing` | `l0113` | [`ingest_bytes`](../src/archpipe/external_claims.py) | Zip bytes declared as `application/json` | Zip bytes declared as `application/zip` | Real: `UNVERIFIED`<br>Clean: `VERIFIED` |
+| `external_claims_cct_and_watts_agreement` | `l0118` | [`check_cct_and_watts_agreement`](../src/archpipe/external_claims.py) | Revit `3200 K / 3 W` vs LDT `3000 K / 23 W` | Revit `3000 K / 23 W` vs LDT `3000 K / 23.2 W` | Real: `UNVERIFIED`<br>Clean: `VERIFIED` |
+| `external_claims_photometry_fitting_agreement` | `l0098` | [`check_photometry_fitting_agreement`](../src/archpipe/external_claims.py) | `(594, 24)` mm strip on `(276, 276)` mm round drum | `(280, 280)` mm round on `(276, 276)` mm round drum | Real: `UNVERIFIED`<br>Clean: `VERIFIED` |
+| `units_conversion_guard` | `l0012`, `l0023`, `l0114`, `l0182`, `l0409`, `l0473`, `l0669` | [`check_units_guard`](../src/archpipe/units_guard.py) | Raw literal `304.8` in [`bad_code.py`](../tests/fixtures/c9_unallowlisted_case/bad_code.py) | Active repository root | Real: raises [`UnitsConversionError`](../src/archpipe/units_guard.py)<br>Clean: `True` |
 | `render_qa_window_view_detail` | `l0061` | `render_qa` detail | `None` (`needs_real_case=True`) | `None` | Marked `needs_real_case=True` pending frozen void render |
 
 ### Pre-Registered Tier 3 Review Steps
 
-1. `review_direct_lighting_interreflection` ([`l0027`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md)): Direct calculations omit shadows and inter-reflection; an empty-room probe is calibration. Location: [`docs/method/stage5-lighting.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/method/stage5-lighting.md), Reviewer: `lead`.
-2. `review_negative_bed_shifts` ([`l0041`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md)): Both negative bed shifts failed design review while worker batch completed successfully. Location: [`scripts/worker_entry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/worker_entry.py), Reviewer: `lead`.
-3. `review_render_photorealism` ([`l0058`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md)): Five render rounds changed samples, textures and HDRI strength, and images still read as CG. Location: [`.agents/skills/photoreal-render/SKILL.md`](file:///C:/Users/mmbka/arch-pipeline-agy/.agents/skills/photoreal-render/SKILL.md), Reviewer: `client`.
+1. `review_direct_lighting_interreflection` ([`l0027`](lessons-audit.md)): Direct calculations omit shadows and inter-reflection; an empty-room probe is calibration. Location: `docs/method/stage5-lighting.md` (`docs/method/stage5-lighting.md`, not in the repo), Reviewer: `lead`.
+2. `review_negative_bed_shifts` ([`l0041`](lessons-audit.md)): Both negative bed shifts failed design review while worker batch completed successfully. Location: [`scripts/worker_entry.py`](../scripts/worker_entry.py), Reviewer: `lead`.
+3. `review_render_photorealism` ([`l0058`](lessons-audit.md)): Five render rounds changed samples, textures and HDRI strength, and images still read as CG. Location: [`.agents/skills/photoreal-render/SKILL.md`](../.agents/skills/photoreal-render/SKILL.md), Reviewer: `client`.
 
 ---
 
 ## 7. Coverage Auditing & Reporting
 
-The function [`audit_lesson_coverage`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py#L411-L618) parses the lesson table from [`docs/lessons-audit.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md):
+The function [`audit_lesson_coverage`](../src/archpipe/guard_registry.py#L411-L618) parses the lesson table from [`docs/lessons-audit.md`](lessons-audit.md):
 - Total lessons tracked: **217** (61 Tier 1, 135 Tier 2, 21 Tier 3).
 - Lessons are classified into:
   - `covered_by_guard`: Mapped to at least one registered guard with a verified real failing case.
@@ -246,16 +246,16 @@ The function [`audit_lesson_coverage`](file:///C:/Users/mmbka/arch-pipeline-agy/
 
 ### Objective
 
-Achieve 100% accountable coverage of all 217 lessons in [`docs/lessons-audit.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/lessons-audit.md), and make [`scripts/verify.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/verify.py) fail closed on any lesson lacking an active guard or review step.
+Achieve 100% accountable coverage of all 217 lessons in [`docs/lessons-audit.md`](lessons-audit.md), and make [`scripts/verify.py`](../scripts/verify.py) fail closed on any lesson lacking an active guard or review step.
 
 ### Step-by-Step Execution Plan
 
 1. **Step 1: Batch Registration by Subsystem**
-   - **Asset & Intake Modules** ([`asset_intake.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/asset_intake.py), [`products.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/products.py)): Register guards for `l0011`, `l0014`, `l0072`, `l0075`, `l0177`, `l0178`, `l0496`, `l0772`, `l0846`, `l0960` freezing bounds from [`tests/test_asset_intake.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_asset_intake.py) (`jacaranda_tree`, `sf_minotti_sofa`).
-   - **Scene & Geometry Builders** ([`villa_render.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/concept/villa_render.py), [`villa_furnish3d.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/concept/villa_furnish3d.py), [`physical_part.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/concept/physical_part.py)): Register guards for `l0046`, `l0047`, `l0059`, `l0069`, `l0587`, `l0589`, `l0686`, `l0878`, `l0923`.
-   - **Photometrics & Lighting** ([`photometry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/photometry.py), [`lighting.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/lighting.py)): Register guards for `l0025`, `l0026`, `l0074`, `l0080`, `l0090`, `l0095`, `l0096`, `l0114`, `l0119`, `l0123`, `l0650`, `l0656`.
-   - **Safe I/O & Serialization** ([`safe_io.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/safe_io.py), [`jsonsafe.py`](file:///C:/Users/mmbka/arch-pipeline-agy/revit/jsonsafe.py)): Register guards for `l0019`, `l0024`, `l0067`, `l0101`, `l0117`, `l0131`, `l0272`, `l0466`.
-   - **Render QA Checks** ([`render_qa.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/render_qa.py)): Register guards for `l0061`, `l0078`, `l0079`, `l0081`, `l0082`, `l0100`, `l0136`.
+   - **Asset & Intake Modules** ([`asset_intake.py`](../src/archpipe/asset_intake.py), `products.py` (`src/archpipe/products.py`, not in the repo)): Register guards for `l0011`, `l0014`, `l0072`, `l0075`, `l0177`, `l0178`, `l0496`, `l0772`, `l0846`, `l0960` freezing bounds from [`tests/test_asset_intake.py`](../tests/test_asset_intake.py) (`jacaranda_tree`, `sf_minotti_sofa`).
+   - **Scene & Geometry Builders** ([`villa_render.py`](../src/archpipe/concept/villa_render.py), [`villa_furnish3d.py`](../src/archpipe/concept/villa_furnish3d.py), [`physical_part.py`](../src/archpipe/concept/physical_part.py)): Register guards for `l0046`, `l0047`, `l0059`, `l0069`, `l0587`, `l0589`, `l0686`, `l0878`, `l0923`.
+   - **Photometrics & Lighting** ([`photometry.py`](../src/archpipe/photometry.py), [`lighting.py`](../src/archpipe/lighting.py)): Register guards for `l0025`, `l0026`, `l0074`, `l0080`, `l0090`, `l0095`, `l0096`, `l0114`, `l0119`, `l0123`, `l0650`, `l0656`.
+   - **Safe I/O & Serialization** ([`safe_io.py`](../src/archpipe/safe_io.py), [`jsonsafe.py`](../revit/jsonsafe.py)): Register guards for `l0019`, `l0024`, `l0067`, `l0101`, `l0117`, `l0131`, `l0272`, `l0466`.
+   - **Render QA Checks** ([`render_qa.py`](../src/archpipe/render_qa.py)): Register guards for `l0061`, `l0078`, `l0079`, `l0081`, `l0082`, `l0100`, `l0136`.
    - **Tier 3 Review Steps**: Register remaining Tier 3 review checkpoints (all 21 lessons) across `docs/method/` and skill guides.
 
 2. **Step 2: Real Fixture Freezing**
@@ -263,7 +263,7 @@ Achieve 100% accountable coverage of all 217 lessons in [`docs/lessons-audit.md`
    - Once frozen, update the registration to bind `real_case` and remove `needs_real_case=True`.
 
 3. **Step 3: Integration into scripts/verify.py**
-   - Add a preflight gate to [`scripts/verify.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/verify.py):
+   - Add a preflight gate to [`scripts/verify.py`](../scripts/verify.py):
      ```python
      from archpipe.guard_registry import all_guards, audit_lesson_coverage
      
@@ -280,4 +280,4 @@ Achieve 100% accountable coverage of all 217 lessons in [`docs/lessons-audit.md`
      # In Phase 2 strict mode:
      expect("zero uncovered lessons", audit["uncovered_count"] == 0)
      ```
-   - Any lesson with neither a guard nor a review step causes [`scripts/verify.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/verify.py) to exit with non-zero exit code.
+   - Any lesson with neither a guard nor a review step causes [`scripts/verify.py`](../scripts/verify.py) to exit with non-zero exit code.

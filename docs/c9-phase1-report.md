@@ -23,35 +23,35 @@ Executive Summary: |
 Phase 1 of Defect Class C9 (*coordinate or unit conversion scattered*) has been completed following the project discipline: **prevent by construction > fail-closed check > process step**.
 
 All requirements of the Phase 1 specification have been implemented and documented:
-1. **Inventory**: Audited [`src/archpipe`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe), [`revit/`](file:///C:/Users/mmbka/arch-pipeline-agy2/revit), and [`scripts/`](file:///C:/Users/mmbka/arch-pipeline-agy2/scripts) for all conversion sites (length, energy, photometric azimuth, solar time, and coordinate frames). Documented findings in [`docs/units-and-frames.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/units-and-frames.md).
-2. **Single Typed Boundary**: Implemented [`src/archpipe/units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units.py) containing exact definitions based on the 1959 International Yard and Pound Agreement (NIST SP 811), typed conversion helpers, timezone validator `require_utc(dt)`, and glTF-to-scene frame transformer `gltf_yup_to_scene_zup(x, y, z)`.
-3. **Fail-Closed Static Guard**: Implemented [`src/archpipe/units_guard.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units_guard.py) and seeded [`knowledge/unit-conversion-allowlist.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/knowledge/unit-conversion-allowlist.json) with current historical sites. Unallowlisted literals fail closed; unreadable or corrupt files raise `UnreadableInputError`.
-4. **Real-Case Proofs**: Implemented [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_units.py) with exact mathematical reconstructions for thermal energy scaling ($3.6 \times 10^6$ ratio, `l0182`), solar UTC hour angle error (`l0473`), glTF axis mapping on real `sf_frangipani` bounds, and guard mutation/allowlist/error proofs.
-5. **Registry Integration**: Registered `units_conversion_guard` in [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/guard_registry.py) covering all 7 C9 lessons (`l0012`, `l0023`, `l0114`, `l0182`, `l0409`, `l0473`, `l0669`).
-6. **Learnings Record**: Added entry `units-and-frames-phase1` to [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/LEARNINGS.md).
+1. **Inventory**: Audited [`src/archpipe`](../src/archpipe), [`revit/`](../revit), and [`scripts/`](../scripts) for all conversion sites (length, energy, photometric azimuth, solar time, and coordinate frames). Documented findings in [`docs/units-and-frames.md`](units-and-frames.md).
+2. **Single Typed Boundary**: Implemented [`src/archpipe/units.py`](../src/archpipe/units.py) containing exact definitions based on the 1959 International Yard and Pound Agreement (NIST SP 811), typed conversion helpers, timezone validator `require_utc(dt)`, and glTF-to-scene frame transformer `gltf_yup_to_scene_zup(x, y, z)`.
+3. **Fail-Closed Static Guard**: Implemented [`src/archpipe/units_guard.py`](../src/archpipe/units_guard.py) and seeded [`knowledge/unit-conversion-allowlist.json`](../knowledge/unit-conversion-allowlist.json) with current historical sites. Unallowlisted literals fail closed; unreadable or corrupt files raise `UnreadableInputError`.
+4. **Real-Case Proofs**: Implemented [`tests/test_units.py`](../tests/test_units.py) with exact mathematical reconstructions for thermal energy scaling ($3.6 \times 10^6$ ratio, `l0182`), solar UTC hour angle error (`l0473`), glTF axis mapping on real `sf_frangipani` bounds, and guard mutation/allowlist/error proofs.
+5. **Registry Integration**: Registered `units_conversion_guard` in [`src/archpipe/guard_registry.py`](../src/archpipe/guard_registry.py) covering all 7 C9 lessons (`l0012`, `l0023`, `l0114`, `l0182`, `l0409`, `l0473`, `l0669`).
+6. **Learnings Record**: Added entry `units-and-frames-phase1` to [`docs/LEARNINGS.md`](LEARNINGS.md).
 
 ---
 
 ## 2. Inventory Counts & Findings
 
 ### Summary Counts
-- **Total Conversion Sites Inventoried**: 21 sites across [`src/archpipe`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe), [`revit/`](file:///C:/Users/mmbka/arch-pipeline-agy2/revit), and [`scripts/`](file:///C:/Users/mmbka/arch-pipeline-agy2/scripts).
+- **Total Conversion Sites Inventoried**: 21 sites across [`src/archpipe`](../src/archpipe), [`revit/`](../revit), and [`scripts/`](../scripts).
 - **Sites Currently Outside a Shared Typed Boundary**: 15 sites (using local helper functions, module constants, or inline arithmetic).
 - **Raw Literal Occurrences Scanned**: 5 occurrences of `304.8` and `0.3048` across 4 files (no occurrences of `3.28084` or `25.4` exist in active code).
-- **Allow-list Entries Seeded**: 5 entries in [`knowledge/unit-conversion-allowlist.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/knowledge/unit-conversion-allowlist.json).
+- **Allow-list Entries Seeded**: 5 entries in [`knowledge/unit-conversion-allowlist.json`](../knowledge/unit-conversion-allowlist.json).
 
 ### The Five Allow-Listed Raw Literal Sites
-1. [`src/archpipe/safe_io.py:40`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/safe_io.py#L40): Docstring mentioning `304.8 mm`.
-2. [`src/archpipe/safe_io.py:42`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/safe_io.py#L42): `scales = {'ft': 304.8, 'mm': 1.0, 'm': 1000.0}` in `convert_length`.
-3. [`src/archpipe/photometry.py:51`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/photometry.py#L51): `FEET_TO_M = 0.3048` constant in IES parser.
-4. [`revit/build_bedroom.py:41`](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/build_bedroom.py#L41): Docstring explaining `304.8x wrong` Revit internal units trap.
-5. [`scripts/verify.py:560`](file:///C:/Users/mmbka/arch-pipeline-agy2/scripts/verify.py#L560): Comment explaining `304.8x wrong` Revit extract check.
+1. [`src/archpipe/safe_io.py:40`](../src/archpipe/safe_io.py#L40): Docstring mentioning `304.8 mm`.
+2. [`src/archpipe/safe_io.py:42`](../src/archpipe/safe_io.py#L42): `scales = {'ft': 304.8, 'mm': 1.0, 'm': 1000.0}` in `convert_length`.
+3. [`src/archpipe/photometry.py:51`](../src/archpipe/photometry.py#L51): `FEET_TO_M = 0.3048` constant in IES parser.
+4. [`revit/build_bedroom.py:41`](../revit/build_bedroom.py#L41): Docstring explaining `304.8x wrong` Revit internal units trap.
+5. [`scripts/verify.py:560`](../scripts/verify.py#L560): Comment explaining `304.8x wrong` Revit extract check.
 
 ### Semantic Collision Identified
 The inventory revealed a severe naming collision between Revit extraction and daylight simulation:
-- [`revit/extract_model.py:52`](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/extract_model.py#L52): `def mm(value)` converts **decimal feet to millimetres**.
-- [`src/archpipe/radiance.py:172`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/radiance.py#L172): `def mm(v)` converts **millimetres to metres**.
-- [`src/archpipe/blender/build_scene.py:36`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/blender/build_scene.py#L36): `def m(mm)` converts **millimetres to metres**.
+- [`revit/extract_model.py:52`](../revit/extract_model.py#L52): `def mm(value)` converts **decimal feet to millimetres**.
+- [`src/archpipe/radiance.py:172`](../src/archpipe/radiance.py#L172): `def mm(v)` converts **millimetres to metres**.
+- [`src/archpipe/blender/build_scene.py:36`](../src/archpipe/blender/build_scene.py#L36): `def m(mm)` converts **millimetres to metres**.
 
 Both modules claim to be "the only place this conversion happens", creating confusion across subsystems.
 
@@ -59,7 +59,7 @@ Both modules claim to be "the only place this conversion happens", creating conf
 
 ## 3. Single Typed Boundary API (`archpipe.units`)
 
-[`src/archpipe/units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units.py) establishes the authoritative boundary:
+[`src/archpipe/units.py`](../src/archpipe/units.py) establishes the authoritative boundary:
 
 ### Physical Constants (NIST SP 811 / International Agreement 1959)
 ```python
@@ -102,16 +102,16 @@ def gltf_yup_to_scene_zup(x: float, y: float, z: float) -> tuple[float, float, f
     """Right-handed glTF Y-up (x, y, z) to right-handed scene Z-up (x, -z, y)."""
     return (float(x), -float(z), float(y))
 ```
-Matches the convention cited from [`src/archpipe/concept/villa_landscape.py:78-80`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_landscape.py#L78-L80).
+Matches the convention cited from [`src/archpipe/concept/villa_landscape.py:78-80`](../src/archpipe/concept/villa_landscape.py#L78-L80).
 
 ---
 
 ## 4. Static Guard Behaviour (`archpipe.units_guard`)
 
-[`src/archpipe/units_guard.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units_guard.py) enforces that no new scattered conversion literals enter the codebase:
-- **Scan Targets**: Scans all `.py` files under `src/archpipe`, `revit`, and `scripts`. Excludes [`src/archpipe/units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units.py).
+[`src/archpipe/units_guard.py`](../src/archpipe/units_guard.py) enforces that no new scattered conversion literals enter the codebase:
+- **Scan Targets**: Scans all `.py` files under `src/archpipe`, `revit`, and `scripts`. Excludes [`src/archpipe/units.py`](../src/archpipe/units.py).
 - **Regex**: `(?<![0-9.])(?:304\.8|0\.3048|3\.28084|25\.4)(?![0-9.])`.
-- **Allowlist Matching**: Compares `(relative_file_path, line.strip())` against [`knowledge/unit-conversion-allowlist.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/knowledge/unit-conversion-allowlist.json).
+- **Allowlist Matching**: Compares `(relative_file_path, line.strip())` against [`knowledge/unit-conversion-allowlist.json`](../knowledge/unit-conversion-allowlist.json).
 - **Fail Closed Discipline**:
   - Missing or unreadable root directory raises `UnreadableInputError`.
   - Missing, unreadable, or invalid allowlist JSON raises `UnreadableInputError`.
@@ -122,7 +122,7 @@ Matches the convention cited from [`src/archpipe/concept/villa_landscape.py:78-8
 
 ## 5. Real-Case Proofs & Reconstruction Arithmetic
 
-All proofs in [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_units.py) use exact mathematical reconstructions from project defect records:
+All proofs in [`tests/test_units.py`](../tests/test_units.py) use exact mathematical reconstructions from project defect records:
 
 ### 1. Thermal 3.6 Million Error Reconstruction (`l0182`)
 - **Physics**: EnergyPlus records energy consumption in Joules ($\text{J}$).
@@ -146,7 +146,7 @@ All proofs in [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/
 - **Proof**: `test_thermal_3_6_million_error_reconstruction` proves that `joules_to_kwh` and `kwh_to_joules` preserve exact physical equivalence and prevent redundant conversions.
 
 ### 2. Solar UTC Contract Reconstruction (`l0473`)
-- **Cause**: [`src/archpipe/solar.py:91`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/solar.py#L91) computed `minutes_utc = when.hour * 60 + when.minute + when.second / 60` directly from `when.hour`.
+- **Cause**: [`src/archpipe/solar.py:91`](../src/archpipe/solar.py#L91) computed `minutes_utc = when.hour * 60 + when.minute + when.second / 60` directly from `when.hour`.
 - **Reconstruction**:
   - Passing Cairo local time (UTC+2) at 09:30 AM (`2026-06-21 09:30:00+02:00`):
     - Caller local hour: $9$
@@ -157,7 +157,7 @@ All proofs in [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/
 - **Proof**: `test_solar_utc_contract_reconstruction` proves that `require_utc(dt)` accepts valid UTC datetimes, raises `ValueError` on naive datetimes, and raises `ValueError` on aware non-UTC datetimes.
 
 ### 3. glTF Frame Conversion on Real `sf_frangipani` Asset
-- **Asset**: `sf_frangipani` from [`ops/workstation/library-manifest.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/ops/workstation/library-manifest.json).
+- **Asset**: `sf_frangipani` from [`ops/workstation/library-manifest.json`](../ops/workstation/library-manifest.json).
 - **Native Bounds (glTF Y-up)**:
   - min: `[-1.5852, 0.0, -2.0063]`
   - max: `[2.3004, 2.7685, 1.5307]`
@@ -166,7 +166,7 @@ All proofs in [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/
   - $x_{\text{scene}} = x_{\text{gltf}} \in [-1.5852, 2.3004]$ (width $3.8856\text{ m}$)
   - $y_{\text{scene}} = -z_{\text{gltf}} \in [-1.5307, 2.0063]$ (depth $3.537\text{ m}$)
   - $z_{\text{scene}} = y_{\text{gltf}} \in [0.0, 2.7685]$ (height $2.7685\text{ m}$)
-- **Proof**: `test_gltf_yup_to_scene_zup_real_frangipani_bounds` verifies exact mathematical agreement with [`src/archpipe/concept/villa_landscape.py:78-80`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_landscape.py#L78-L80).
+- **Proof**: `test_gltf_yup_to_scene_zup_real_frangipani_bounds` verifies exact mathematical agreement with [`src/archpipe/concept/villa_landscape.py:78-80`](../src/archpipe/concept/villa_landscape.py#L78-L80).
 
 ### 4. Static Guard Proofs
 - `test_guard_catches_unallowlisted_literal`: Temp directory with `x = 304.8` raises `UnitsConversionError`.
@@ -179,7 +179,7 @@ All proofs in [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/
 
 ## 6. Guard Registry Registration
 
-Registered in [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/guard_registry.py):
+Registered in [`src/archpipe/guard_registry.py`](../src/archpipe/guard_registry.py):
 ```python
 register_guard(
     fn=_guard_c9_units_conversion,
@@ -201,7 +201,7 @@ register_guard(
     description="Fails closed on raw unit conversion literals (304.8, 0.3048, 3.28084, 25.4) outside units boundary (C9)",
 )
 ```
-- Real failing case uses frozen fixture [`tests/fixtures/c9_unallowlisted_case/bad_code.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c9_unallowlisted_case/bad_code.py).
+- Real failing case uses frozen fixture [`tests/fixtures/c9_unallowlisted_case/bad_code.py`](../tests/fixtures/c9_unallowlisted_case/bad_code.py).
 - Clean case uses repository `ROOT` which passes quietly.
 - Coverage audit in `guard_registry` now tracks all 7 C9 lessons as covered by `units_conversion_guard`.
 
@@ -235,18 +235,18 @@ Phase 1 established the boundary and static guard without refactoring existing c
 The following 10 files were created or modified during Phase 1:
 
 ### Created Files
-1. [`src/archpipe/units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units.py)
-2. [`src/archpipe/units_guard.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units_guard.py)
-3. [`knowledge/unit-conversion-allowlist.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/knowledge/unit-conversion-allowlist.json)
-4. [`tests/fixtures/c9_unallowlisted_case/bad_code.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c9_unallowlisted_case/bad_code.py)
-5. [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_units.py)
-6. [`docs/units-and-frames.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/units-and-frames.md)
-7. [`docs/c9-phase1-report.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/c9-phase1-report.md)
+1. [`src/archpipe/units.py`](../src/archpipe/units.py)
+2. [`src/archpipe/units_guard.py`](../src/archpipe/units_guard.py)
+3. [`knowledge/unit-conversion-allowlist.json`](../knowledge/unit-conversion-allowlist.json)
+4. [`tests/fixtures/c9_unallowlisted_case/bad_code.py`](../tests/fixtures/c9_unallowlisted_case/bad_code.py)
+5. [`tests/test_units.py`](../tests/test_units.py)
+6. [`docs/units-and-frames.md`](units-and-frames.md)
+7. [`docs/c9-phase1-report.md`](c9-phase1-report.md)
 
 ### Modified Files
-8. [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/guard_registry.py)
-9. [`docs/guard-registry.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/guard-registry.md)
-10. [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/LEARNINGS.md)
+8. [`src/archpipe/guard_registry.py`](../src/archpipe/guard_registry.py)
+9. [`docs/guard-registry.md`](guard-registry.md)
+10. [`docs/LEARNINGS.md`](LEARNINGS.md)
 
 ---
 
@@ -268,18 +268,18 @@ During verification of the initial Phase 1 delivery, running `scripts/run_tests.
 
 ### 10.2 Implemented Design Changes
 1. **Code Tokenization via `tokenize`**:
-   [`src/archpipe/units_guard.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units_guard.py) now parses source code with Python's standard `tokenize` module, evaluating only `NUMBER` tokens. Comments, docstrings, ordinary string literals, and function annotations are represented as `COMMENT` or `STRING` tokens and stay completely quiet. On Python 3.12+, expression parts of f-strings yield `NUMBER` tokens and are properly inspected. Any file that cannot be read or tokenized raises `UnreadableInputError` (fail closed).
+   [`src/archpipe/units_guard.py`](../src/archpipe/units_guard.py) now parses source code with Python's standard `tokenize` module, evaluating only `NUMBER` tokens. Comments, docstrings, ordinary string literals, and function annotations are represented as `COMMENT` or `STRING` tokens and stay completely quiet. On Python 3.12+, expression parts of f-strings yield `NUMBER` tokens and are properly inspected. Any file that cannot be read or tokenized raises `UnreadableInputError` (fail closed).
 2. **Multiplication and Division Operand Rule**:
    A target `NUMBER` token is flagged if and only if it is an operand of multiplication or division:
    - The previous or next significant token (skipping `NL` and `COMMENT`) is in `CONVERSION_OPERATORS = {"*", "/", "//", "*=", "/="}`.
    - Unary signs (`+`, `-`) are inspected: a coordinate such as `-25.4` passed to a function call has previous token `-` and next token `,` (neither being a multiplicative operator) and stays quiet.
-   - Known blind spot documented in [`docs/units-and-frames.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/units-and-frames.md): an isolated constant assigned alone without arithmetic (e.g. `FEET_TO_M = 0.3048`) is not an operand of `*` or `/` at assignment and stays quiet until used in arithmetic.
+   - Known blind spot documented in [`docs/units-and-frames.md`](units-and-frames.md): an isolated constant assigned alone without arithmetic (e.g. `FEET_TO_M = 0.3048`) is not an operand of `*` or `/` at assignment and stays quiet until used in arithmetic.
 3. **Inventory Re-check and Allow-listing**:
    - `scripts/build_sheet.py:26`: `PT_PER_MM = 72.0 / 25.4` allowlisted with reason and migration target.
    - `src/archpipe/rules.py:1212`: `f"{s.id} sits {d:.0f} mm from the {diag / 25.4:.0f} in screen {tv.id}; UHD viewing wants "` allowlisted with reason and migration target.
    - Full repository re-scan confirmed that no other multiplicative conversion literals exist outside the typed boundary.
 4. **Exact Defining Arithmetic in `archpipe.units`**:
-   Updated all functions in [`src/archpipe/units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units.py) to divide or multiply by the exact defining constants (`MM_PER_INCH = 25.4`, `MM_PER_FOOT = 304.8`, `M_PER_FOOT = 0.3048`, `MM_PER_M = 1000.0`):
+   Updated all functions in [`src/archpipe/units.py`](../src/archpipe/units.py) to divide or multiply by the exact defining constants (`MM_PER_INCH = 25.4`, `MM_PER_FOOT = 304.8`, `M_PER_FOOT = 0.3048`, `MM_PER_M = 1000.0`):
    - `mm_to_in(val)`: `val / MM_PER_INCH` -> `mm_to_in(25.4) == 1.0` exactly.
    - `in_to_mm(val)`: `val * MM_PER_INCH` -> `in_to_mm(1.0) == 25.4` exactly.
    - `m_to_ft(val)`: `val / M_PER_FOOT` -> `m_to_ft(0.3048) == 1.0` exactly.
@@ -287,7 +287,7 @@ During verification of the initial Phase 1 delivery, running `scripts/run_tests.
    - `mm_to_m(val)`: `val / MM_PER_M` -> `mm_to_m(1000.0) == 1.0` exactly.
    - `assertAlmostEqual` is preserved exclusively for inexact reciprocal constants (`FEET_PER_M`, `INCHES_PER_MM`, `KWH_PER_JOULE`).
 5. **New Unit Tests**:
-   Added regression coverage to [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_units.py):
+   Added regression coverage to [`tests/test_units.py`](../tests/test_units.py):
    - `test_coordinate_argument_is_quiet`: `-25.4` in function call produces 0 findings.
    - `test_comment_and_docstring_literals_are_quiet`: Literals in comments/docstrings produce 0 findings.
    - `test_guard_catches_unallowlisted_multiplication`: `x = y * 304.8` is flagged and raises `UnitsConversionError`.
@@ -299,17 +299,17 @@ During verification of the initial Phase 1 delivery, running `scripts/run_tests.
 
 ### 10.3 Clean Repository Allow-List Walkthrough
 Reading through each allow-listed site against the active repository confirms zero findings:
-- [`scripts/build_sheet.py:26`](file:///C:/Users/mmbka/arch-pipeline-agy2/scripts/build_sheet.py#L26): Line `PT_PER_MM = 72.0 / 25.4` matches allowlist entry; bypassed.
-- [`src/archpipe/rules.py:1212`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/rules.py#L1212): Line `f"{s.id} sits {d:.0f} mm from the {diag / 25.4:.0f} in screen {tv.id}; UHD viewing wants "` matches allowlist entry; bypassed.
-- [`src/archpipe/safe_io.py:42`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/safe_io.py#L42): `scales = {'ft': 304.8, 'mm': 1.0, 'm': 1000.0}` is an isolated dictionary definition (not operand of `*` or `/`) and matches allowlist entry; bypassed.
-- [`src/archpipe/photometry.py:51`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/photometry.py#L51): `FEET_TO_M = 0.3048` is an isolated constant assignment (not operand of `*` or `/`) and matches allowlist entry; bypassed.
+- [`scripts/build_sheet.py:26`](../scripts/build_sheet.py#L26): Line `PT_PER_MM = 72.0 / 25.4` matches allowlist entry; bypassed.
+- [`src/archpipe/rules.py:1212`](../src/archpipe/rules.py#L1212): Line `f"{s.id} sits {d:.0f} mm from the {diag / 25.4:.0f} in screen {tv.id}; UHD viewing wants "` matches allowlist entry; bypassed.
+- [`src/archpipe/safe_io.py:42`](../src/archpipe/safe_io.py#L42): `scales = {'ft': 304.8, 'mm': 1.0, 'm': 1000.0}` is an isolated dictionary definition (not operand of `*` or `/`) and matches allowlist entry; bypassed.
+- [`src/archpipe/photometry.py:51`](../src/archpipe/photometry.py#L51): `FEET_TO_M = 0.3048` is an isolated constant assignment (not operand of `*` or `/`) and matches allowlist entry; bypassed.
 
 ### 10.4 Files Actually Changed in Fix Round 1
 The following 6 files were modified during Fix Round 1:
-1. [`src/archpipe/units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units.py)
-2. [`src/archpipe/units_guard.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/units_guard.py)
-3. [`knowledge/unit-conversion-allowlist.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/knowledge/unit-conversion-allowlist.json)
-4. [`tests/test_units.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_units.py)
-5. [`docs/units-and-frames.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/units-and-frames.md)
-6. [`docs/c9-phase1-report.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/c9-phase1-report.md)
+1. [`src/archpipe/units.py`](../src/archpipe/units.py)
+2. [`src/archpipe/units_guard.py`](../src/archpipe/units_guard.py)
+3. [`knowledge/unit-conversion-allowlist.json`](../knowledge/unit-conversion-allowlist.json)
+4. [`tests/test_units.py`](../tests/test_units.py)
+5. [`docs/units-and-frames.md`](units-and-frames.md)
+6. [`docs/c9-phase1-report.md`](c9-phase1-report.md)
 
