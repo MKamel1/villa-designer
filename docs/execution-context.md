@@ -16,6 +16,15 @@ Role checks require explicit live-session availability, not files in `agents/rol
 
 ## Entry-point inventory and Phase 2 list
 
+Test loading correction, 2026-10-09: `scripts/run_tests.py` uses a fresh
+`unittest.TestLoader`. If that loader collects selection or import errors,
+the runner saves their traces in `out/tests-result.json`, records zero tests
+executed and exits 1 before running any valid suites. This covers focused
+module/class/method names and discovery imports. Valid selections retain
+normal execution; dependency preflight failures still exit 2. See
+`beds-focused-test-loader-errors` in `docs/LEARNINGS.md` for the real failed
+invocation, historical reproduction, clean/renamed proofs and corrected run.
+
 Before Phase 1, none of these entry points used a complete shared context. The test runner already created accessible sandbox temp directories; verification used `Path.mkdir`; the bedroom runner used absolute Revit scripts, an explicit cwd, exit status and fresh artifacts; villa rendering used absolute remote scripts and Blender Python exception exit codes. Those protections are retained.
 
 | Entry point | Current coverage |

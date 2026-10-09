@@ -1,0 +1,316 @@
+{
+  "schema": "bed-guards/1",
+  "scope": "Historical source-size and current bounded independent-factor bed acceptance (client decision 2026-10-09); immutable measured geometry, fixed-room review, model-first cloth, physical fallback and neutral diagnostics.",
+  "control_tier_definitions": {
+    "1": "Prevent the defect by construction",
+    "2": "Check the invariant before placing geometry"
+  },
+  "records": [
+    {
+      "lesson_id": "beds-selection-fit-bypass",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "archpipe.concept.villa_render.build/place_model calls archpipe.beds.fit_bed before selecting a bed; selection cannot set fit ok",
+      "check": "archpipe.beds.fit_bed; archpipe.beds.placed_bed_findings",
+      "stage": "scene furniture selection; scripts/verify.py",
+      "proof_file": "tests/test_beds.py",
+      "proofs": [
+        "test_real_chelsea_rejected_without_changing_d1_footprint",
+        "test_real_axis_distortion_fires_translated_sibling_and_clean_control_quiet",
+        "test_absolute_twenty_mm_guard_not_relative_two_percent"
+      ]
+    },
+    {
+      "lesson_id": "beds-fallback-subject-identity",
+      "control_tier": [
+        1
+      ],
+      "construction": "archpipe.beds.label_fallbacks preserves label and writes fallback_label plus asset_status",
+      "check": "scripts/verify.py fallback disclosure and subject identity",
+      "stage": "furniture export before camera placement",
+      "proof_file": "tests/test_beds.py",
+      "proofs": [
+        "test_real_fallback_label_escape_and_renamed_sibling_preserve_subject_identity",
+        "test_all_four_beds_keep_layout_sizes_and_explicit_fallbacks",
+        "test_fallback_labels_generalise_without_mutating_geometry"
+      ]
+    },
+    {
+      "lesson_id": "beds-transformed-envelope-as-contact",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Exact indexed/Blender vertices drive bed fit, preview staging and model anchoring; conservative accessor bounds are labelled separately.",
+      "check": "archpipe.beds; scripts/check_bed_import.py",
+      "stage": "before activation and cloth simulation; topology review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_actual_preview_floor_datums_ignore_rotated_envelope",
+        "test_real_candidates_reject_after_semantic_axis_correction"
+      ]
+    },
+    {
+      "lesson_id": "beds-imported-geometry-consumer-gap",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Import before cloth; independent lower/upper mattress bindings; actual instance faces enter C8 and render_support; evaluated cloth crossings/enclosed vertices refuse render.",
+      "check": "archpipe.beds; scripts/check_bed_import.py",
+      "stage": "before activation and cloth simulation; topology review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_actual_geometry_c8_support_quiet_lifted_and_renamed_sibling_fire",
+        "test_model_faces_in_route_and_outside_route_quiet",
+        "test_real_forssa_mattress_cut_rotated_sibling",
+        "test_both_bunk_mattresses_require_independent_measured_bindings"
+      ]
+    },
+    {
+      "lesson_id": "beds-semantic-axis-before-fit",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Bed activation requires actual geometry and accepted neutral review bound to unchanged source hashes and measured orientation; bed fit uses semantic length separately from bunk access.",
+      "check": "archpipe.beds; scripts/check_bed_import.py",
+      "stage": "before activation and cloth simulation; topology review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_candidates_reject_after_semantic_axis_correction",
+        "test_bed_missing_receipt_and_pending_review_fail_closed",
+        "test_real_review_binding_invalidates_changed_axis_or_source"
+      ]
+    },
+    {
+      "lesson_id": "beds-model-anchor-envelope",
+      "control_tier": [
+        1
+      ],
+      "construction": "GeometryTopology centres legacy whole-model envelopes on placement X/Y and seats their bottom at placement Z, independently of source origin.",
+      "check": "GeometryTopology.from_inputs",
+      "stage": "model instance route review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_legacy_model_envelope_uses_centred_floor_anchor"
+      ]
+    },
+    {
+      "lesson_id": "beds-real-size-mattress-contract",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Source-unit-only scale; measure every mattress; omit separately reviewed extras; anchor mattress centre; shared portable/Blender transform; real-frame C8 review without layout edits.",
+      "check": "archpipe.beds.real_size_findings/fit_bed/require_bed_geometry/model_transform/bed_room_review; scripts/verify.py",
+      "stage": "before activation and cloth; fixed room topology",
+      "proof_file": "tests/test_beds.py",
+      "proofs": [
+        "test_round2_scales_are_refused_in_fit_and_portable_review_renamed_sibling",
+        "test_real_mattress_forty_mm_short_fails_correct_and_renamed_pass",
+        "test_source_unit_conversion_is_only_permitted_scale",
+        "test_real_asymmetric_frame_anchors_mattress_and_frame_proxy_preserves_other_items",
+        "test_separable_extras_omitted_in_every_consumer_inseparable_or_unrecorded_refused",
+        "test_native_frame_c8_reports_shortfall_and_clean_room_stays_quiet",
+        "test_each_bunk_berth_required_and_measured"
+      ]
+    },
+    {
+      "lesson_id": "beds-mechanical-partial-success",
+      "control_tier": [
+        2
+      ],
+      "construction": "Mechanical importer proof raises after writing evidence if evaluated cloth is refused; successful geometry and fallback probes cannot override cloth failure.",
+      "check": "scripts.check_bed_import.require_complete_proof",
+      "stage": "mechanical importer proof before preview",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_cloth_refusal_cannot_report_success_renamed_or_clean"
+      ]
+    },
+    {
+      "lesson_id": "beds-neutral-preview-clipping",
+      "control_tier": [
+        1
+      ],
+      "construction": "Camera near/far clipping derives from actual camera-space vertex depths; staging-plane size derives from actual extents.",
+      "check": "archpipe.beds.preview_clip_range",
+      "stage": "isolated diagnostic preview before visual review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_oversize_preview_clipping_and_translated_small_siblings"
+      ]
+    },
+    {
+      "lesson_id": "beds-neutral-preview-relative-staging",
+      "control_tier": [
+        1
+      ],
+      "construction": "Floor gap is min(5 mm, 0.25 percent of longest actual extent); bed and figure feet retain actual source datum.",
+      "check": "archpipe.beds.preview_datums",
+      "stage": "isolated diagnostic preview before visual review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_tiny_preview_floor_gap_and_scale_siblings"
+      ]
+    },
+    {
+      "lesson_id": "beds-neutral-preview-emitter-intersection",
+      "control_tier": [
+        1
+      ],
+      "construction": "Diagnostic emitter centre is one measured span above highest model/figure vertex; square side 0.75 span cannot intersect a subject.",
+      "check": "archpipe.beds.preview_neutral_light",
+      "stage": "isolated diagnostic preview before visual review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_embedded_softbox_reproduction_and_clear_scaled_siblings"
+      ]
+    },
+    {
+      "lesson_id": "beds-scaled-client-contract-20261009",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Explicit width/length factors from actual mattresses, symmetric 15% distortion and 0.5\u20132.0 bounds; independent vertical factor; all design berth heights and fixed placement gate activation; separable contents and immutable review snapshots.",
+      "check": "archpipe.beds.scaled_bed_fit/scaled_model_fit/require_bed_geometry/integrate_bed_models",
+      "stage": "scaled intake, neutral diagnostic, before activation",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_chosen_real_scaled_fits_accept_original_renamed_and_rotated_siblings",
+        "test_real_worst_round4_anisotropy_refused_and_renamed_translated_sibling",
+        "test_real_fused_extras_refused_in_original_and_renamed_consumers",
+        "test_height_uses_vertical_factor_not_plan_and_reports_bunk_upper_shortfall",
+        "test_activation_cannot_override_real_upper_height_shortfall_or_failed_room"
+      ]
+    },
+    {
+      "lesson_id": "beds-scaled-review-snapshot",
+      "control_tier": [
+        1
+      ],
+      "construction": "Deep snapshot of selection; scaled receipts bind actual geometry digest, contents, factors and placement.",
+      "check": "archpipe.beds.review_selection/require_bed_geometry",
+      "stage": "before activation",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_scaled_receipt_invalidates_factor_content_face_and_placement_mutations"
+      ]
+    },
+    {
+      "lesson_id": "beds-cloth-nearest-face-sign",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Closed connected-shell containment replaces nearest-face plane sign; open negative-side points remain unresolved refusals, exact surface crossings unchanged.",
+      "check": "archpipe.bed_containment; archpipe.blender.villa_scene.cloth_model_clearance",
+      "stage": "evaluated cloth before render",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_real_upper_duvet_outside_concave_shell_quiet_inside_and_siblings_fire"
+      ]
+    },
+    {
+      "lesson_id": "beds-cloth-source-envelope-initialization",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Initialize above retained surfaces over actual mattress cut, separated from overhead bunk surfaces by the midpoint between lower top and upper underside; all colliders remain; lower evaluated cloth cannot enter upper berth.",
+      "check": "archpipe.beds.mattress_cloth; archpipe.blender.villa_scene.drape_cloth",
+      "stage": "before simulation, evaluated cloth before render",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_source_bedding_initial_height_clears_real_faces_and_rotated_siblings"
+      ]
+    },
+    {
+      "lesson_id": "beds-review-live-vs-proxy",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Actual bed/pillow faces replace owned fallback; body checks exclude own route proxy, and bed-specific routes use actual new faces without re-intaking unrelated decor.",
+      "check": "archpipe.beds.scene_with_model_geometry/bed_room_review",
+      "stage": "neutral and fixed-room review before integration",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_scoped_c8_preserves_real_body_conflicts_without_own_proxy_or_unrelated_route_intake"
+      ]
+    },
+    {
+      "lesson_id": "beds-neutral-preview-partial-success",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Neutral diagnostic writes failed cloth evidence then exits nonzero; raw source image is not acceptance.",
+      "check": "scripts.preview_beds.require_neutral_cloth",
+      "stage": "neutral and fixed-room review before integration",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_real_neutral_preview_refusal_cannot_report_success_renamed_or_clean"
+      ]
+    },
+    {
+      "lesson_id": "beds-cloth-pinned-initial-plane",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Mattress-width anchors use local one-cell support envelopes; inset sheets start supported, hanging sheets preserve free collision-safe overhangs; evaluated intersections still refuse.",
+      "check": "archpipe.beds.cloth_support_envelope/mattress_pin_indices; archpipe.blender.villa_scene.drape_cloth",
+      "stage": "before simulation/integration; neutral review; portable verification",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_heading_envelope_removes_real_suspended_pins_and_covers_subdivision_ring"
+      ]
+    },
+    {
+      "lesson_id": "beds-cloth-throw-model-clearance",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Every imported-bed throw binds actual mattress and all retained model colliders plus evaluated duvet; unchanged authored cut; missing support and evaluated defects refuse.",
+      "check": "archpipe.beds.bind_model_cloth; archpipe.blender.villa_scene.drape_cloth",
+      "stage": "before simulation/integration; neutral review; portable verification",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_throw_and_renamed_soft_goods_bind_real_model_without_changing_authored_cut"
+      ]
+    },
+    {
+      "lesson_id": "beds-scoped-builder-option",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Public build wrapper and scoped implementation declare and forward replacement options explicitly; default remains exercised by complete scene checks.",
+      "check": "archpipe.concept.villa_render.build/_build",
+      "stage": "before simulation/integration; neutral review; portable verification",
+      "proof_file": "tests/test_bed_scaling.py",
+      "proofs": [
+        "test_replacement_option_is_forwarded_through_scoped_scene_builder"
+      ]
+    },
+    {
+      "lesson_id": "beds-focused-test-loader-errors",
+      "control_tier": [
+        2
+      ],
+      "construction": "Fresh test loader refuses collected selection/import errors before executing any valid suite; exit 1 and zero-test evidence preserve traces.",
+      "check": "scripts.run_tests.main",
+      "stage": "focused test loading before execution",
+      "proof_file": "tests/test_execution_context.py",
+      "proofs": [
+        "test_real_missing_test_selection_refuses_before_clean_suite_and_renamed_sibling"
+      ]
+    }
+  ]
+}

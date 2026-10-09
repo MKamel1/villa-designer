@@ -1,0 +1,247 @@
+{
+  "schema": "beds-candidates-round3/1",
+  "date": "2026-10-08",
+  "decision_source": "Client decision 2026-10-08 in task BEDS ROUND 3",
+  "units": "All planned dimensions below are metres; UID is Sketchfab unique model identifier.",
+  "robots": {
+    "url": "https://sketchfab.com/robots.txt",
+    "checked": "2026-10-09",
+    "status": "allowed public /3d-models and /v3/search",
+    "content": "User-agent: *; Disallow: /admin*; Disallow: /i/*; Disallow: /models/*/ar-redirect; bingbot crawl-delay: 1, Allow: /",
+    "receipts": [
+      "out/beds/round3/robots-sketchfab.txt",
+      "out/beds/round3/robots-api.txt"
+    ]
+  },
+  "search": {
+    "method": "Public unauthenticated Sketchfab Data API search plus web search; listing metadata and public thumbnails only.",
+    "queries": [
+      "upholstered bed",
+      "wood bed",
+      "bunk bed",
+      "bed 160",
+      "120x200",
+      "160x200",
+      "boucle bed",
+      "scandinavian bed"
+    ],
+    "model_downloads": 0,
+    "authentication_used": false,
+    "limitation": "No new eligible listing states the required mattress dimensions. All are download-and-measure leads, none is an asserted fit or procurement specification. Published full-frame dimensions do not establish mattress size.",
+    "resumed_verification_date": "2026-10-09"
+  },
+  "beds": {
+    "parents": {
+      "planned_mattress_m": [
+        1.6,
+        2.0
+      ],
+      "berths": 1,
+      "candidates": [
+        {
+          "uid": "dff77bbdb8854ba4afe502af5068d8f9",
+          "url": "https://sketchfab.com/3d-models/modern-bed-dff77bbdb8854ba4afe502af5068d8f9",
+          "name": "Modern bed",
+          "author": "ArchVibe 3D",
+          "author_username": "super-valentin",
+          "licence": "CC Attribution",
+          "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/dff77bbdb8854ba4afe502af5068d8f9",
+          "stated_dimensions": null,
+          "stated_mattress_dimensions": null,
+          "style_and_reservations": "Padded fabric headboard and upholstered base; best new parents appearance. Neutral upholstery; walnut/brass absent, retain existing room accents.",
+          "bed_only_screen": "Public thumbnail shows bed, mattress and bedding only; no freestanding tables, benches or rugs. Mesh contents/separability must be verified after lead download.",
+          "thumbnail": "https://media.sketchfab.com/models/dff77bbdb8854ba4afe502af5068d8f9/thumbnails/31b44b0a7746464aa4d75057fa7dff9d/a85353b03c6440cba69ce93d0a40058d.jpeg",
+          "thumbnail_review": "out/beds/round3/listing-contact-sheet.png",
+          "why_it_should_fit": "Potential bed-only form suitable for this room style; required mattress 1.6 x 2.0 m must be measured at source size. No numerical fit can be predicted from unstated mattress dimensions.",
+          "status": "awaiting lead download and real-size mattress/bed-only/C8/neutral review; no fit scale allowed",
+          "metadata_receipt": "out/beds/round3/dff77bbdb8854ba4afe502af5068d8f9-metadata.json"
+        },
+        {
+          "uid": "d3aeb724e09c44af96ef09cd20885220",
+          "url": "https://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220",
+          "name": "Dark Modern Bed",
+          "author": "Ren Viro Store",
+          "author_username": "renviros",
+          "licence": "CC Attribution",
+          "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/d3aeb724e09c44af96ef09cd20885220",
+          "stated_dimensions": {
+            "type": "original overall model measurements, not mattress",
+            "unit": "cm",
+            "width": 214,
+            "depth": 200,
+            "height": 90,
+            "source": "https://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220",
+            "source_unit_status": "Original FBX stated in cm; downloaded glTF still defaults to metres unless export declares otherwise"
+          },
+          "stated_mattress_dimensions": null,
+          "style_and_reservations": "Upholstered base, timber headboard and neutral bedding; darker alternate, headboard is not boucl\u00e9.",
+          "bed_only_screen": "Public thumbnail shows bed, mattress and bedding only; no freestanding tables, benches or rugs. Mesh contents/separability must be verified after lead download.",
+          "thumbnail": "https://media.sketchfab.com/models/d3aeb724e09c44af96ef09cd20885220/thumbnails/2ab99514d983495db8505c7c1322eaad/e69175c575e544549cf4213d61e97f7c.jpeg",
+          "thumbnail_review": "out/beds/round3/listing-contact-sheet.png",
+          "why_it_should_fit": "Potential bed-only form suitable for this room style; required mattress 1.6 x 2.0 m must be measured at source size. No numerical fit can be predicted from unstated mattress dimensions.",
+          "status": "awaiting lead download and real-size mattress/bed-only/C8/neutral review; no fit scale allowed",
+          "metadata_receipt": "out/beds/round3/d3aeb724e09c44af96ef09cd20885220-metadata.json"
+        }
+      ]
+    },
+    "kids_a": {
+      "planned_mattress_m": [
+        0.9,
+        2.0
+      ],
+      "berths": 2,
+      "candidates": [
+        {
+          "uid": "9fb7c54715dd41b98b3dc67b367cf81d",
+          "url": "https://sketchfab.com/3d-models/simple-bunk-bed-9fb7c54715dd41b98b3dc67b367cf81d",
+          "name": "Simple Bunk Bed",
+          "author": "Blender3D",
+          "author_username": "Blender3D",
+          "licence": "CC Attribution",
+          "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/9fb7c54715dd41b98b3dc67b367cf81d",
+          "stated_dimensions": null,
+          "stated_mattress_dimensions": null,
+          "style_and_reservations": "Light/golden timber bunk, open rails and visible ladder; simplest Scandinavian form. Source bedding looks coarse.",
+          "bed_only_screen": "Public thumbnail shows bed, mattress and bedding only; no freestanding tables, benches or rugs. Mesh contents/separability must be verified after lead download.",
+          "thumbnail": "https://media.sketchfab.com/models/9fb7c54715dd41b98b3dc67b367cf81d/thumbnails/402e49fc58ff4a47a50ae7cc9c8a0120/50342c7740e44b5da4c4ff355a79084c.jpeg",
+          "thumbnail_review": "out/beds/round3/listing-contact-sheet.png",
+          "why_it_should_fit": "Potential bed-only form suitable for this room style; required mattress 0.9 x 2.0 m must be measured at source size. No numerical fit can be predicted from unstated mattress dimensions.",
+          "status": "awaiting lead download and real-size mattress/bed-only/C8/neutral review; no fit scale allowed",
+          "metadata_receipt": "out/beds/round3/9fb7c54715dd41b98b3dc67b367cf81d-metadata.json"
+        },
+        {
+          "uid": "0e13482338344239abd8b697def3b20c",
+          "url": "https://sketchfab.com/3d-models/bunk-bed-0e13482338344239abd8b697def3b20c",
+          "name": "bunk bed",
+          "author": "AM ARCHITECTURE",
+          "author_username": "abir_sd",
+          "licence": "CC Attribution",
+          "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/0e13482338344239abd8b697def3b20c",
+          "stated_dimensions": null,
+          "stated_mattress_dimensions": null,
+          "style_and_reservations": "Timber bunk with inclined ladder and two berths; warmer/darker than desired light oak. Built-in storage drawers require opening checks.",
+          "bed_only_screen": "Public thumbnail shows bed, mattress and bedding only; no freestanding tables, benches or rugs. Mesh contents/separability must be verified after lead download.",
+          "thumbnail": "https://media.sketchfab.com/models/0e13482338344239abd8b697def3b20c/thumbnails/b0f1587940d0470192f924c6fbbcbe2b/669b777d19544a998f7f5e4c09f550a1.jpeg",
+          "thumbnail_review": "out/beds/round3/listing-contact-sheet.png",
+          "why_it_should_fit": "Potential bed-only form suitable for this room style; required mattress 0.9 x 2.0 m must be measured at source size. No numerical fit can be predicted from unstated mattress dimensions.",
+          "status": "awaiting lead download and real-size mattress/bed-only/C8/neutral review; no fit scale allowed",
+          "metadata_receipt": "out/beds/round3/0e13482338344239abd8b697def3b20c-metadata.json"
+        },
+        {
+          "uid": "2cabd354ef2e4293ae817b01a8fdbf10",
+          "url": "https://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10",
+          "name": "Simple Bunk Bed 3D Model",
+          "author": "sparshgupta",
+          "author_username": "SPARSHGUPTA",
+          "licence": "CC Attribution",
+          "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/2cabd354ef2e4293ae817b01a8fdbf10",
+          "stated_dimensions": null,
+          "stated_mattress_dimensions": null,
+          "style_and_reservations": "White/light bunk with inclined ladder and two berths; clean Scandinavian alternate, painted rather than oak.",
+          "bed_only_screen": "Public thumbnail shows bed, mattress and bedding only; no freestanding tables, benches or rugs. Mesh contents/separability must be verified after lead download.",
+          "thumbnail": "https://media.sketchfab.com/models/2cabd354ef2e4293ae817b01a8fdbf10/thumbnails/c456e8e52c6c41f58bb55038c385694c/4cc16538cd454fe9986a6cec4fbac7f2.jpeg",
+          "thumbnail_review": "out/beds/round3/listing-contact-sheet.png",
+          "why_it_should_fit": "Potential bed-only form suitable for this room style; required mattress 0.9 x 2.0 m must be measured at source size. No numerical fit can be predicted from unstated mattress dimensions.",
+          "status": "awaiting lead download and real-size mattress/bed-only/C8/neutral review; no fit scale allowed",
+          "metadata_receipt": "out/beds/round3/2cabd354ef2e4293ae817b01a8fdbf10-metadata.json"
+        }
+      ]
+    },
+    "kids_b": {
+      "planned_mattress_m": [
+        1.2,
+        2.0
+      ],
+      "berths": 1,
+      "candidates": [
+        {
+          "uid": "28a8b7050a5e4951abbfb588015abf41",
+          "url": "https://sketchfab.com/3d-models/bed-wood-oak-pbr-28a8b7050a5e4951abbfb588015abf41",
+          "name": "Bed Wood Oak PBR",
+          "author": "AK STUDIO",
+          "author_username": "inven2000",
+          "licence": "CC Attribution",
+          "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/28a8b7050a5e4951abbfb588015abf41",
+          "stated_dimensions": null,
+          "stated_mattress_dimensions": null,
+          "style_and_reservations": "Light oak frame and simple timber headboard; restrained Scandinavian form, dark source bedding.",
+          "bed_only_screen": "Public thumbnail shows bed, mattress and bedding only; no freestanding tables, benches or rugs. Mesh contents/separability must be verified after lead download.",
+          "thumbnail": "https://media.sketchfab.com/models/28a8b7050a5e4951abbfb588015abf41/thumbnails/cd1cc8ac00af4d48a754fe2de8e26f1e/8baab2205bd74d93bc6045d8861b80ba.jpeg",
+          "thumbnail_review": "out/beds/round3/listing-contact-sheet.png",
+          "why_it_should_fit": "Potential bed-only form suitable for this room style; required mattress 1.2 x 2.0 m must be measured at source size. No numerical fit can be predicted from unstated mattress dimensions.",
+          "status": "awaiting lead download and real-size mattress/bed-only/C8/neutral review; no fit scale allowed",
+          "metadata_receipt": "out/beds/round3/28a8b7050a5e4951abbfb588015abf41-metadata.json"
+        },
+        {
+          "uid": "fe3c50e1eb7b4b0eafa647598ca53f11",
+          "url": "https://sketchfab.com/3d-models/engi-bed-fe3c50e1eb7b4b0eafa647598ca53f11",
+          "name": "Engi bed",
+          "author": "WOODPORT",
+          "author_username": "woodport",
+          "licence": "CC Attribution",
+          "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/fe3c50e1eb7b4b0eafa647598ca53f11",
+          "stated_dimensions": null,
+          "stated_mattress_dimensions": null,
+          "style_and_reservations": "Oak described by author; light timber frame, simple headboard and blue bedding in thumbnail. Most relevant kids B timber alternate.",
+          "bed_only_screen": "Public thumbnail shows bed, mattress and bedding only; no freestanding tables, benches or rugs. Mesh contents/separability must be verified after lead download.",
+          "thumbnail": "https://media.sketchfab.com/models/fe3c50e1eb7b4b0eafa647598ca53f11/thumbnails/4d31529c83e3460e816d2cd9a04eb7c2/d2f74a6e9c07400bb2c8b3bf71bed5ce.jpeg",
+          "thumbnail_review": "out/beds/round3/listing-contact-sheet.png",
+          "why_it_should_fit": "Potential bed-only form suitable for this room style; required mattress 1.2 x 2.0 m must be measured at source size. No numerical fit can be predicted from unstated mattress dimensions.",
+          "status": "awaiting lead download and real-size mattress/bed-only/C8/neutral review; no fit scale allowed",
+          "metadata_receipt": "out/beds/round3/fe3c50e1eb7b4b0eafa647598ca53f11-metadata.json"
+        }
+      ]
+    }
+  },
+  "excluded_examples": [
+    {
+      "uid": "10838a0bfa0c4ab99e0b20a7236ef6d6",
+      "reason": "Free Standard / NoAI, not CC0 or CC-BY."
+    },
+    {
+      "uid": "cf09fda5ae3d45d8b180279bd0e3e4b3",
+      "reason": "Includes wardrobe/storage/desk, no separable-bed proof."
+    },
+    {
+      "uid": "e3f81d29bf234b728a154b41f50bbb9b",
+      "reason": "Thumbnail includes loose laptops/toys, no separable-extra proof."
+    },
+    {
+      "uid": "2f44845622984661b034fdcc71d836d5",
+      "reason": "Listing thumbnail uses bright placeholder material colours; appearance unsuitable for parents."
+    },
+    {
+      "uid": "81ada0e24e1647d8a0d6d0708a696f84",
+      "reason": "Dark rustic bed and plaid dressing, not light oak Scandinavian."
+    },
+    {
+      "uid": "02615367dc9745e188861f7d6a0a94c0",
+      "reason": "120x200 dimensions stated, paid/store model, no CC0/CC-BY download."
+    },
+    {
+      "uid": "346a5535b059477abd9ac5e0483462a7",
+      "reason": "Title Hopen Bed 160 gives width only; timber design does not satisfy upholstered parents headboard."
+    }
+  ]
+}

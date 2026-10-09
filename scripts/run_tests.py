@@ -55,8 +55,18 @@ def main():
         test_temp.mkdir(parents=True, exist_ok=True)
         tempfile.tempdir = str(test_temp)
         tempfile.mkdtemp = _accessible_mkdtemp
-    suite = (unittest.defaultTestLoader.loadTestsFromNames(args.modules) if args.modules else
-             unittest.defaultTestLoader.discover(str(ROOT / "tests")))
+    loader = unittest.TestLoader()
+    suite = (loader.loadTestsFromNames(args.modules) if args.modules else
+             loader.discover(str(ROOT / "tests")))
+    if loader.errors:
+        # Loading errors are otherwise queued as test cases behind potentially
+        # expensive valid suites. Refuse before executing any selected test.
+        for error in loader.errors:
+            print(error, file=sys.stderr)
+        write_record({"execution_context": context, "modules": args.modules,
+                      "tests_run": 0, "exit_code": 1, "passed": False,
+                      "loader_errors": loader.errors}, ROOT / "out/tests-result.json")
+        return 1
     result = unittest.TextTestRunner().run(suite)
     code = 0 if result.wasSuccessful() else 1
     write_record({"execution_context": context, "modules": args.modules,

@@ -1,0 +1,93 @@
+{
+  "asset": "sf_bed3_9fb7c547",
+  "source_sha256": {
+    "model.gltf": "3f13fa3c7ebd8cbd2df0ee22ba266a2daa5ed7fdabe539830a3600468258c791",
+    "scene.bin": "42a15dc554fdc718bcad8c9c16757b6195890cd49b0d1bc171e08a937628ef24",
+    "textures/None_diffuse.jpeg": "1763541998ae9884a2512c4f72ce658de276dfa77df531d5878e8674ccb4f3da",
+    "textures/None_occlusion.png": "9da2c47e83c9a05152d0d04ac6d6ea2f65c0c0c54a2ab530e1cf52b2e1c2520f",
+    "textures/None_Blanket_Bottom_Diffuse_diffuse.jpeg": "009a31744d442c9cdfe2ae239947292352fbbdacab6a8ff2a7856afc4c164b17",
+    "textures/None_Blanket_Bottom_Diffuse_occlusion.png": "d0150865055eddb0856b7be55de7f0e018226bf5a65534f1904a0fa8bcdd9f7d",
+    "textures/None_Blanket_Top_Diffuse_diffuse.jpeg": "dd2f26ea9857d0f36fb69ed739b0dd49bc4b84e56700ed75229057cdbf18be39",
+    "textures/None_Blanket_Top_Diffuse_occlusion.png": "72513fdc01c2642b9d41f3267ed24b3393f2b5e8f2068f02056a73fb175537b4",
+    "textures/None_Matress_Top_Diffuse_diffuse.jpeg": "0bd747635e33959ef430bdf43a8e7d806dfb72721f9a003303c9f4524763fff3",
+    "textures/None_Matress_Top_Diffuse_occlusion.png": "cf499e5071921645c7374371b78640e7fffcd1a82b9400068497b818efdadea0",
+    "textures/None_Pillows_Bottom_Diffuse_diffuse.jpeg": "78a1411e7a1e28aef9d9284d09d66788edc1be3920a53173b593d9ea38f2fb02",
+    "textures/None_Pillows_Bottom_Diffuse_occlusion.png": "b61f075316114750b44912330cf9c32fd6719855a6cbf863bd535bdd520d3a07",
+    "textures/None_Pillows_Top_Diffuse_diffuse.jpeg": "78a1411e7a1e28aef9d9284d09d66788edc1be3920a53173b593d9ea38f2fb02",
+    "textures/None_Pillows_Top_Diffuse_occlusion.png": "ebbaf5eb2b8238bea13b04d8e1b919d45260a260df4bace07c3a2804d38d9fa1",
+    "textures/None_Untitled_diffuse.jpeg": "d66ac867f198d7e841ada7bc2fded34be6b42340c4192fe3145db43112206bd3",
+    "textures/None_Untitled_occlusion.png": "77bef926d6ead31c925be6754e26cead77badc0081835e7d66d8abd9ae887349"
+  },
+  "triangle": [
+    [
+      0.21234199404716492,
+      2.821176767349243,
+      -3.0668230056762695
+    ],
+    [
+      0.23852400481700897,
+      2.483668804168701,
+      -3.0676066875457764
+    ],
+    [
+      0.6590030193328857,
+      2.5170366764068604,
+      -3.068192720413208
+    ]
+  ],
+  "old_emitter_corners_m": [
+    [
+      2.7604178813450906,
+      3.5378371537827027,
+      -4.755904833806713
+    ],
+    [
+      -0.08563201280645066,
+      4.486520451833217,
+      -4.755904833806713
+    ],
+    [
+      -0.7604178813450904,
+      2.4621628462172973,
+      -2.647198994623463
+    ],
+    [
+      2.0856320128064505,
+      1.5134795481667833,
+      -2.647198994623463
+    ]
+  ],
+  "extreme_vertices_m": [
+    [
+      -8.599634170532227,
+      4.657204627990723,
+      -7.7015485763549805
+    ],
+    [
+      -8.299633026123047,
+      -5.342796325683594,
+      -7.701547145843506
+    ],
+    [
+      8.299633026123047,
+      5.330796718597412,
+      -7.701551914215088
+    ],
+    [
+      8.599634170532227,
+      4.657204627990723,
+      -7.7015485763549805
+    ],
+    [
+      4.028931140899658,
+      5.342796325683594,
+      7.4893951416015625
+    ],
+    [
+      -8.599632263183594,
+      -4.669203758239746,
+      7.70155143737793
+    ]
+  ],
+  "before_image": "out/beds/round4/candidate-previews-corrected/sf_bed3_9fb7c547-plus-y-close.png"
+}

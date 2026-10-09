@@ -1,0 +1,8 @@
+{
+  "bed": "pb-bed",
+  "cloth_report": {
+    "passed": false,
+    "refused": "duvet-pb-bed: evaluated duvet intersects actual model: {'intersections': 2082, 'inside_vertices': 4201, 'minimum_surface_distance_m': 7.152557373046875e-07, 'evaluated_cloth_vertices': 32938, 'model_triangles': 29358, 'numerical_tolerance_m': 0.0001}"
+  },
+  "cloth_status": "refused; raw imported bedding shown; candidate cannot activate"
+}

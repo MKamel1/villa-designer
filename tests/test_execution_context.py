@@ -67,6 +67,36 @@ BATCH_C_MIGRATED_SCRIPTS = (
 
 
 class ExecutionContextTests(unittest.TestCase):
+    def test_real_missing_test_selection_refuses_before_clean_suite_and_renamed_sibling(self):
+        import contextlib
+        import io
+        import runpy
+        import types
+        main=runpy.run_path(str(ROOT/'scripts/run_tests.py'))['main']
+        (self.base/'out').mkdir()  # Normally created by project_context preflight.
+        actual=json.loads((ROOT/'tests/fixtures/bed-round5-test-selection-refusal.json').read_text())
+        missing=actual['modules'][-2:]
+        executed=[]
+        class Probe(unittest.TestCase):
+            def test_probe(self):executed.append('ran')
+        module=types.ModuleType('selection_clean_probe');module.Probe=Probe
+        with patch.dict(sys.modules,selection_clean_probe=module),patch.dict(main.__globals__,
+                ROOT=self.base,project_context=lambda *a,**k: {},requirements_import_names=lambda *a: []):
+            for names in (missing,['tests.renamed_missing_suite','renamed_missing_suite']):
+                with patch.object(sys,'argv',['run_tests.py',*names,'selection_clean_probe']),\
+                        contextlib.redirect_stderr(io.StringIO()) as errors:
+                    self.assertEqual(main(),1)
+                self.assertEqual(executed,[])
+                record=json.loads((self.base/'out/tests-result.json').read_text())
+                self.assertEqual(record['tests_run'],0)
+                self.assertEqual(len(record['loader_errors']),2)
+                self.assertIn('ModuleNotFoundError',errors.getvalue())
+            for name in ('selection_clean_probe','selection_clean_probe.Probe.test_probe'):
+                with patch.object(sys,'argv',['run_tests.py',name]),contextlib.redirect_stderr(io.StringIO()):
+                    self.assertEqual(main(),0)
+                self.assertEqual(json.loads((self.base/'out/tests-result.json').read_text())['tests_run'],1)
+            self.assertEqual(executed,['ran','ran'])
+
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)

@@ -496,14 +496,14 @@ def _environment_face_sources():
 
 
 # ------------------------------------------------------------------ the scene
-def build(lay=None, views=None, *, collect_part_failures=False):
+def build(lay=None, views=None, *, collect_part_failures=False, bed_replacements=()):
     from .build_cache import scope
     from .sanitary_relocation import input_revision
     with scope(), input_revision(True):
-        return _build(lay, views, collect_part_failures=collect_part_failures)
+        return _build(lay, views, collect_part_failures=collect_part_failures,bed_replacements=bed_replacements)
 
 
-def _build(lay=None, views=None, *, collect_part_failures=False):
+def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacements=()):
     lay = lay or R.design("D1")
     sp = RS.build(lay)
     stair_host = SM.wall_host(sp)
@@ -1019,7 +1019,24 @@ def _build(lay=None, views=None, *, collect_part_failures=False):
     def place_model(mark, asset, w, d, href, cx, cy, z, rot, room, selected=True, rejection=""):
         bounds = MANIFEST_BOUNDS.get(asset)
         fit = fit_uniform_scale(w, d, href, bounds, aspect_tol=0.02, height_tol=0.05)
-        if selected:
+        is_bed = it_all.get(mark, {}).get("type", "").startswith("bed_")
+        if is_bed:
+            from archpipe.beds import fit_bed
+            piece = it_all[mark]
+            asset_record = next(p for p in json.loads(_MANIFEST_PATH.read_text())['props'] if p['id']==asset)
+            bounds = asset_record.get('measured_bounds_m', bounds)
+            # Client 2026-10-08: actual mattress size, no whole-frame fit scale.
+            from archpipe.beds import model_mattress_bounds, model_native_bounds, unit_scale
+            contract = dict(asset_record, role='bed', scale=unit_scale(asset_record.get('unit_evidence')), position=[0,0,0], rotation_deg=[0,0,0])
+            mattresses = None
+            if asset_record.get('review_geometry'):
+                mattresses = model_mattress_bounds(contract)
+                bounds = model_native_bounds(contract)
+            fit = fit_bed(bounds, piece["w"], piece["d"], None, MANIFEST_FRONTS.get(asset),
+                asset_record.get('length_axis'), mattress_bounds=mattresses,
+                scale=F.product(asset)["scale"], unit_evidence=asset_record.get('unit_evidence'),
+                required_berths=piece.get('berths',1))
+        elif selected:
             fit["scale"] = F.product(asset)["scale"]
             fit["ok"] = True
         prefix = "furn-" + mark.replace("#", "-") + "-"
@@ -1027,7 +1044,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False):
                  "reference_h": round(href, 3), "scale": round(fit.get("scale", 0), 5),
                  "aspect_mismatch": round(fit.get("aspect_mismatch", 0), 3),
                  "height_err": round(fit.get("height_err", 0), 3), "ok": fit["ok"] and selected,
-                 "reason": rejection or fit.get("reason", "fits")}
+                 "reason": (fit["reason"] if is_bed and not fit["ok"] else
+                            rejection or fit.get("reason", "fits"))}
         if fit["ok"] and selected:
             front = MANIFEST_FRONTS.get(asset)
             yaw = model_yaw(rot, front)
@@ -1039,6 +1057,25 @@ def _build(lay=None, views=None, *, collect_part_failures=False):
                            "reference_h": round(href, 3),
                            "replaces": prefix, "room": room,
                            "label": "furniture model: " + asset})
+            if is_bed:
+                # Activating a fitting bed also activates the actual-face and
+                # bedding contracts. Missing review data fails before hiding
+                # the procedural fallback or starting any simulation.
+                from archpipe.beds import require_bed_geometry
+                models[-1].update(role='bed',native_bounds=bounds,
+                    position=[float(cx),float(cy),float(z)],
+                    footprint_w=float(w),footprint_d=float(d),
+                    orientation_evidence=asset_record.get('orientation_evidence'),
+                    neutral_review=asset_record.get('neutral_review'),
+                    review_geometry=asset_record.get('review_geometry'),
+                    mattress_bindings=asset_record.get('mattress_bindings'),
+                    length_axis=asset_record.get('length_axis'),
+                    planned_mattress_m=[piece['w'],piece['d']],
+                    required_berths=piece.get('berths',1),
+                    unit_evidence=asset_record.get('unit_evidence'),
+                    omitted_meshes=asset_record.get('omitted_meshes',[]),
+                    contents_review=asset_record.get('contents_review'))
+                require_bed_geometry(models[-1])
             hidden_prefixes.add(prefix)
         return entry
 
@@ -1125,6 +1162,13 @@ def _build(lay=None, views=None, *, collect_part_failures=False):
         for m in meshes:
             if any(m["id"] == p or m["id"].startswith(p) for p in hidden_prefixes):
                 m["visibility"] = hide_vis
+
+    from archpipe.beds import label_fallbacks
+    label_fallbacks(meshes, it_all.values(),
+                    [r["mark"] for r in fit_report if r["ok"]])
+    notes.append("BEDS: PROCEDURAL BED FALLBACK (stand-in) retained for parents, both kids' rooms and library "
+                 "daybed until a measured, uniformly fitting, neutral-preview-reviewed model is available. "
+                 "Per-part fallback_label records the disclosure without changing view subject identity.")
 
     cloth = []
     # ---- dressing: clothes on the dressing rails, duvets and pillows on the beds (NOT design)
@@ -2188,6 +2232,14 @@ def _build(lay=None, views=None, *, collect_part_failures=False):
         emitter_failures = vanity_scene_findings(scene, [f.record for f in VL.design(lay)])
     if emitter_failures:
         raise ValueError("Final fixture records: " + "; ".join(emitter_failures))
+    if bed_replacements:
+        from ..beds import integrate_bed_models
+        scene=integrate_bed_models(scene,bed_replacements,lay,sp,list(it_all.values()))
+    elif any(m.get('role')=='bed' for m in scene['models']):
+        from ..beds import bed_room_review
+        scene['bed_room_review'] = bed_room_review(scene,lay,sp,list(it_all.values()))
+        if not scene['bed_room_review']['ok']:
+            raise ValueError('real bed frame fails fixed room: '+json.dumps(scene['bed_room_review']))
     # Mounting and assembly passes can mutate faces or replace the working
     # list. Re-admit the actual final values; a cached historical collection
     # cannot certify the exported scene. Keep the strict sink on the result.

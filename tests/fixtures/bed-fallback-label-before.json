@@ -1,0 +1,152 @@
+{
+  "observed": "Adding fallback prose to mesh label broke built-subject lookup. Before/after camera records were identical; the existing parent view crops the lower bed.",
+  "meshes": [
+    {
+      "id": "furn-pb-bed-0",
+      "label": "PROCEDURAL BED FALLBACK (stand-in): pb-bed",
+      "group": "furniture",
+      "room": "parents-bed"
+    },
+    {
+      "id": "furn-pb-bed-1",
+      "label": "PROCEDURAL BED FALLBACK (stand-in): pb-bed",
+      "group": "furniture",
+      "room": "parents-bed"
+    },
+    {
+      "id": "furn-pb-bed-2",
+      "label": "PROCEDURAL BED FALLBACK (stand-in): pb-bed",
+      "group": "furniture",
+      "room": "parents-bed"
+    },
+    {
+      "id": "furn-pb-bed-3",
+      "label": "PROCEDURAL BED FALLBACK (stand-in): pb-bed",
+      "group": "furniture",
+      "room": "parents-bed"
+    },
+    {
+      "id": "furn-pb-bed-4",
+      "label": "PROCEDURAL BED FALLBACK (stand-in): pb-bed dressing: pillow",
+      "group": "furniture",
+      "room": "parents-bed"
+    },
+    {
+      "id": "furn-pb-bed-5",
+      "label": "PROCEDURAL BED FALLBACK (stand-in): pb-bed dressing: pillow",
+      "group": "furniture",
+      "room": "parents-bed"
+    }
+  ],
+  "view": {
+    "id": "v22-parents-day",
+    "title": "Parents' bedroom by day",
+    "state": "day",
+    "when": "2026-10-15T10:30:00+03:00",
+    "camera": {
+      "position": [
+        18.827,
+        -26.641,
+        1.35
+      ],
+      "target": [
+        21.284,
+        -24.92,
+        1.35
+      ],
+      "lens_mm": 24,
+      "sensor_mm": 36,
+      "shift_x": 0.0,
+      "shift_y": 0.0,
+      "overrides": [
+        {
+          "field": "position",
+          "prior": null,
+          "new": [
+            18.827,
+            -26.641,
+            1.35
+          ],
+          "reason": "room chooser positions the camera to include declared subjects"
+        },
+        {
+          "field": "target",
+          "prior": null,
+          "new": [
+            21.284,
+            -24.92,
+            1.35
+          ],
+          "reason": "room chooser aims the camera at declared subjects"
+        }
+      ],
+      "home_room": "parents-bed",
+      "reframed": "doorway"
+    },
+    "resolution": [
+      1920,
+      1280
+    ],
+    "layers_on": [],
+    "dimmers": {},
+    "exposure": "day",
+    "subjects": [
+      "pb-bed",
+      "pb-vanity"
+    ],
+    "samples": 1024,
+    "room": "parents-bed",
+    "final_only": true,
+    "seated": false,
+    "sun": {
+      "altitude_deg": 40.07,
+      "azimuth_true_deg": 135.34
+    },
+    "hide_meshes": [
+      "door-open-015",
+      "curtain-study-game-01-heavy-closed",
+      "curtain-study-game-02-heavy-closed",
+      "curtain-kids-a-01-heavy-closed",
+      "curtain-kids-b-01-heavy-closed",
+      "curtain-parents-bed-01-heavy-closed",
+      "curtain-parents-bed-02-heavy-closed",
+      "curtain-dining-01-heavy-closed",
+      "curtain-living-01-heavy-closed",
+      "curtain-living-02-heavy-closed",
+      "curtain-lounge-01-heavy-closed"
+    ],
+    "caption_notes": [
+      "Taken from the doorway with the door open (its leaf not shown)."
+    ],
+    "overrides": [
+      {
+        "field": "caption_notes",
+        "prior": [],
+        "new": [
+          "Taken from the doorway with the door open (its leaf not shown)."
+        ],
+        "reason": "explain the hidden open doorway leaf in the view caption"
+      },
+      {
+        "field": "hide_meshes",
+        "prior": [
+          "door-open-015"
+        ],
+        "new": [
+          "door-open-015",
+          "curtain-study-game-01-heavy-closed",
+          "curtain-study-game-02-heavy-closed",
+          "curtain-kids-a-01-heavy-closed",
+          "curtain-kids-b-01-heavy-closed",
+          "curtain-parents-bed-01-heavy-closed",
+          "curtain-parents-bed-02-heavy-closed",
+          "curtain-dining-01-heavy-closed",
+          "curtain-living-01-heavy-closed",
+          "curtain-living-02-heavy-closed",
+          "curtain-lounge-01-heavy-closed"
+        ],
+        "reason": "hide curtain leaves that are open in this view state"
+      }
+    ]
+  }
+}

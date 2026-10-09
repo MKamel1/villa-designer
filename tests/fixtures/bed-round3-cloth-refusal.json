@@ -1,0 +1,10 @@
+{
+  "scope": "mechanical capability only; Scandi remains rejected for D1",
+  "source": "out/beds/round3/importer-proof.json from interrupted run, inspected 2026-10-09",
+  "portable_vs_blender_max_error_m": 1.1920928955078125e-07,
+  "cloth": {
+    "passed": false,
+    "refused": "duvet-mechanical-scandi: evaluated duvet intersects actual model: intersections 1347, inside_vertices 2899"
+  },
+  "missing_file_fallback": "passed"
+}
