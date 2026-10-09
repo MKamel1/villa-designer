@@ -1,0 +1,102 @@
+{
+  "schema": "bed-guards/1",
+  "scope": "Fixed bed fit, fallback disclosure, measured model geometry and neutral staging. No round-2 candidate accepted for D1; central Python registry remains with lead/agy.",
+  "control_tier_definitions": {
+    "1": "Prevent the defect by construction",
+    "2": "Check the invariant before placing geometry"
+  },
+  "records": [
+    {
+      "lesson_id": "beds-selection-fit-bypass",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "archpipe.concept.villa_render.build/place_model calls archpipe.beds.fit_bed before selecting a bed; selection cannot set fit ok",
+      "check": "archpipe.beds.fit_bed; archpipe.beds.placed_bed_findings",
+      "stage": "scene furniture selection; scripts/verify.py",
+      "proof_file": "tests/test_beds.py",
+      "proofs": [
+        "test_real_chelsea_rejected_without_changing_d1_footprint",
+        "test_real_axis_distortion_fires_translated_sibling_and_clean_control_quiet",
+        "test_absolute_twenty_mm_guard_not_relative_two_percent"
+      ]
+    },
+    {
+      "lesson_id": "beds-fallback-subject-identity",
+      "control_tier": [
+        1
+      ],
+      "construction": "archpipe.beds.label_fallbacks preserves label and writes fallback_label plus asset_status",
+      "check": "scripts/verify.py fallback disclosure and subject identity",
+      "stage": "furniture export before camera placement",
+      "proof_file": "tests/test_beds.py",
+      "proofs": [
+        "test_real_fallback_label_escape_and_renamed_sibling_preserve_subject_identity",
+        "test_all_four_beds_keep_layout_sizes_and_explicit_fallbacks",
+        "test_fallback_labels_generalise_without_mutating_geometry"
+      ]
+    },
+    {
+      "lesson_id": "beds-transformed-envelope-as-contact",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Exact indexed/Blender vertices drive bed fit, preview staging and model anchoring; conservative accessor bounds are labelled separately.",
+      "check": "archpipe.beds; scripts/check_bed_import.py",
+      "stage": "before activation and cloth simulation; topology review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_actual_preview_floor_datums_ignore_rotated_envelope",
+        "test_real_candidates_reject_after_semantic_axis_correction"
+      ]
+    },
+    {
+      "lesson_id": "beds-imported-geometry-consumer-gap",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Import before cloth; independent lower/upper mattress bindings; actual instance faces enter C8 and render_support; evaluated cloth crossings/enclosed vertices refuse render.",
+      "check": "archpipe.beds; scripts/check_bed_import.py",
+      "stage": "before activation and cloth simulation; topology review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_actual_geometry_c8_support_quiet_lifted_and_renamed_sibling_fire",
+        "test_model_faces_in_route_and_outside_route_quiet",
+        "test_real_forssa_mattress_cut_rotated_sibling",
+        "test_both_bunk_mattresses_require_independent_measured_bindings"
+      ]
+    },
+    {
+      "lesson_id": "beds-semantic-axis-before-fit",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Bed activation requires actual geometry and accepted neutral review bound to unchanged source hashes and measured orientation; bed fit uses semantic length separately from bunk access.",
+      "check": "archpipe.beds; scripts/check_bed_import.py",
+      "stage": "before activation and cloth simulation; topology review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_candidates_reject_after_semantic_axis_correction",
+        "test_bed_missing_receipt_and_pending_review_fail_closed",
+        "test_real_review_binding_invalidates_changed_axis_or_source"
+      ]
+    },
+    {
+      "lesson_id": "beds-model-anchor-envelope",
+      "control_tier": [
+        1
+      ],
+      "construction": "GeometryTopology centres legacy whole-model envelopes on placement X/Y and seats their bottom at placement Z, independently of source origin.",
+      "check": "GeometryTopology.from_inputs",
+      "stage": "model instance route review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_legacy_model_envelope_uses_centred_floor_anchor"
+      ]
+    }
+  ]
+}

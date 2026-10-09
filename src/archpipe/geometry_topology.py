@@ -186,6 +186,9 @@ class GeometryTopology:
         """
         from .concept import villa_landscape as landscape
         from .concept import villa_furnish as furnishing
+        if scene is not None:
+            from .beds import scene_with_model_geometry
+            scene = scene_with_model_geometry(scene)
         scene = _freeze(scene)
         hosts, openings, obstacles, supports, paths = [], [], [], [], []
         if scene is not None:
@@ -237,6 +240,21 @@ class GeometryTopology:
                     supports.append(Support(mesh['id'], mesh['id'], None, tuple(mesh['support']),
                                             'physical-part', None, 'physical_part.Part.support'))
             items = tuple(items) + tuple(scene.get('props', ()))
+            # Exact model faces are already obstacles above. Legacy model
+            # instances still enter route review via their conservative
+            # envelopes; these envelopes are never claimed as support faces.
+            for model in scene.get('models', ()):
+                if model.get('review_geometry') or model.get('status')=='procedural-bed-fallback':
+                    continue
+                bb = landscape.prop_world_box(model['asset'], model['position'],
+                    model.get('rotation_deg', [0,0,0]), model.get('scale', 1.0))
+                # A complete model is centred in X/Y and seated by its
+                # bottom, unlike a prop placed at its native source origin.
+                half_x,half_y=(bb[3]-bb[0])/2,(bb[4]-bb[1])/2
+                x,y,z=model['position']
+                bb=(x-half_x,y-half_y,z,x+half_x,y+half_y,z+bb[5]-bb[2])
+                obstacles.append(Obstacle(model['id'], 'legacy-model-envelope', tuple(bb),
+                    record=_freeze({'id':model['id'], 'rect':[bb[0],bb[1],bb[3],bb[4]]})))
         for item in items:
             if 'asset' in item:
                 bb = landscape.prop_world_box(item['asset'], item['position'], item.get('rotation_deg', [0,0,0]), item.get('scale', 1.0))

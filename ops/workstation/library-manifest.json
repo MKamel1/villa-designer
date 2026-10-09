@@ -2135,7 +2135,18 @@
         "basis": "product",
         "source": "https://www.bertosalotti.it/letto_moderno/letto-matrimoniale-imbottito-con-contenitore-chelsea.html"
       },
-      "preview_image": "previews/sf_chelsea_bed.png"
+      "preview_image": "previews/sf_chelsea_bed.png",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "Measured glTF metre coordinates: 1.974212 x 1.054370 x 2.270893 m; manufacturer size comparison remains failed, no corrective rescale"
+      },
+      "contents": {
+        "bedding": true,
+        "mattress": true,
+        "headboard": true
+      },
+      "measured_triangle_count": 105298,
+      "bed_status": "REJECTED for D1: uniform fit violates fixed footprint and overall height; manufacturer bounds also disagree"
     },
     {
       "id": "sf_cinema_sofa_velvet",
@@ -3648,6 +3659,381 @@
       },
       "author": "Yann Kervran, Kuutti Siitonen",
       "preview_image": "previews/desk_lamp_arm_01.png"
+    },
+    {
+      "id": "sf_bed_forssa",
+      "url": "https://sketchfab.com/3d-models/bed-forssa-0e4ec2bb5aff42d8a324b3f8ab9ac9de",
+      "source_url": "https://sketchfab.com/3d-models/bed-forssa-0e4ec2bb5aff42d8a324b3f8ab9ac9de",
+      "role": "bed",
+      "author": "leonardgraylar",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tBed FORSSA\n* source:\thttps://sketchfab.com/3d-models/bed-forssa-0e4ec2bb5aff42d8a324b3f8ab9ac9de\n* author:\tleonardgraylar (https://sketchfab.com/leonardgraylar)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Bed FORSSA\" (https://sketchfab.com/3d-models/bed-forssa-0e4ec2bb5aff42d8a324b3f8ab9ac9de) by leonardgraylar (https://sketchfab.com/leonardgraylar) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "front_axis_source": "Headboard Plane003 and Shape014 at native Z -1.491849 to -1.382881; all main pillows at negative Z.",
+      "length_axis": "Z",
+      "orientation_evidence": {
+        "front_axis": "+Z",
+        "length_axis": "Z",
+        "access_axis": null,
+        "basis": "Headboard Plane003 and Shape014 at native Z -1.491849 to -1.382881; all main pillows at negative Z.",
+        "review": "out/beds/round2/preview-review.md",
+        "status": "measured, lead-verifiable; not lead approval"
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre coordinate contract; fitted with one uniform scale only"
+      },
+      "bounds_m": {
+        "min": [
+          -1.1900374337277384,
+          -0.005809456773687385,
+          -1.4918495106531005
+        ],
+        "max": [
+          1.2085797611941445,
+          1.0998265534327623,
+          0.6832575537288137
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -1.1900374337277384,
+          -0.005809456687772189,
+          -1.4918494981053054
+        ],
+        "max": [
+          1.2085797611941445,
+          1.0998265527642597,
+          0.6832575119517171
+        ]
+      },
+      "bounds_basis": "conservative transformed accessor envelope for existing C2 validator; measured_bounds_m contains exact indexed vertices for bed fitting",
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round2/candidates-preview-corrected/sf_bed_forssa-plus-y.png",
+      "status": "rejected-fixed-envelope",
+      "fit": {
+        "ok": false,
+        "scale": 0.500288250472198,
+        "scaled_size_m": [
+          1.2,
+          1.0881804806512414,
+          0.5531367048278196
+        ],
+        "footprint_error_m": [
+          0.0,
+          0.9118195193487586
+        ],
+        "height_err": 0.4177508370233477,
+        "reason": "scale-distortion: depth misses fixed footprint by 911.820 mm (>20 mm); overall height 0.553137 m misses 0.950000 m by 41.775% (>5%)"
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed_forssa/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed_forssa/license.txt"
+      }
+    },
+    {
+      "id": "sf_bed_scandi_bare",
+      "url": "https://sketchfab.com/3d-models/stained-bare-scandinavian-bed-3af9fc8452ca4c1180ce9ae7a9600b79",
+      "source_url": "https://sketchfab.com/3d-models/stained-bare-scandinavian-bed-3af9fc8452ca4c1180ce9ae7a9600b79",
+      "role": "bed",
+      "author": "JudeNavarre",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tStained Bare Scandinavian Bed\n* source:\thttps://sketchfab.com/3d-models/stained-bare-scandinavian-bed-3af9fc8452ca4c1180ce9ae7a9600b79\n* author:\tJudeNavarre (https://sketchfab.com/JudeNavarre)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Stained Bare Scandinavian Bed\" (https://sketchfab.com/3d-models/stained-bare-scandinavian-bed-3af9fc8452ca4c1180ce9ae7a9600b79) by JudeNavarre (https://sketchfab.com/JudeNavarre) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "+X",
+      "front_axis_source": "Pillow Object_12 at native X -1.9848 to -1.0247; mattress length axis X.",
+      "length_axis": "X",
+      "orientation_evidence": {
+        "front_axis": "+X",
+        "length_axis": "X",
+        "access_axis": null,
+        "basis": "Pillow Object_12 at native X -1.9848 to -1.0247; mattress length axis X.",
+        "review": "out/beds/round2/preview-review.md",
+        "status": "measured, lead-verifiable; not lead approval"
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre coordinate contract; fitted with one uniform scale only"
+      },
+      "bounds_m": {
+        "min": [
+          -2.1641100637759507,
+          0.017163277949881817,
+          -1.3041349452015254
+        ],
+        "max": [
+          2.2839926152958867,
+          1.3175854654993415,
+          1.2258147554728964
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -2.1641100637759507,
+          0.017163277949881817,
+          -1.3041349452015254
+        ],
+        "max": [
+          2.2839926152958867,
+          1.3175854654993415,
+          1.2258147554728964
+        ]
+      },
+      "bounds_basis": "conservative transformed accessor envelope for existing C2 validator; measured_bounds_m contains exact indexed vertices for bed fitting",
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round2/candidates-preview-corrected/sf_bed_scandi_bare-plus-y.png",
+      "status": "rejected-fixed-envelope",
+      "fit": {
+        "ok": false,
+        "scale": 0.4496299083674322,
+        "scaled_size_m": [
+          1.1375410520884528,
+          2.0,
+          0.5847087090268394
+        ],
+        "footprint_error_m": [
+          0.06245894791154716,
+          0.0
+        ],
+        "height_err": 0.3845171483928006,
+        "reason": "scale-distortion: width misses fixed footprint by 62.459 mm (>20 mm); overall height 0.584709 m misses 0.950000 m by 38.452% (>5%)"
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed_scandi_bare/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed_scandi_bare/license.txt"
+      }
+    },
+    {
+      "id": "sf_bed_upholstered_cyberfox",
+      "url": "https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be",
+      "source_url": "https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be",
+      "role": "bed",
+      "author": "cyberfox3d",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tUpholstered Bed || Free model\n* source:\thttps://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be\n* author:\tCyberFox 3D Studio (https://sketchfab.com/cyberfox3d)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Upholstered Bed || Free model\" (https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be) by CyberFox 3D Studio (https://sketchfab.com/cyberfox3d) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "-X",
+      "front_axis_source": "Upper 20% vertices at native X 1.050701 to 1.195498, Z -0.991287 to 0.980353 form headboard at +X.",
+      "length_axis": "X",
+      "orientation_evidence": {
+        "front_axis": "-X",
+        "length_axis": "X",
+        "access_axis": null,
+        "basis": "Upper 20% vertices at native X 1.050701 to 1.195498, Z -0.991287 to 0.980353 form headboard at +X.",
+        "review": "out/beds/round2/preview-review.md",
+        "status": "measured, lead-verifiable; not lead approval"
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre coordinate contract; fitted with one uniform scale only"
+      },
+      "bounds_m": {
+        "min": [
+          -1.0499999523162842,
+          -0.0001455545425415039,
+          -1.2844038009643555
+        ],
+        "max": [
+          1.1970534324645996,
+          1.5065058469772339,
+          1.270896077156067
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -1.0499999523162842,
+          -0.0001455545425415039,
+          -1.2844038009643555
+        ],
+        "max": [
+          1.1970534324645996,
+          1.5065058469772339,
+          1.270896077156067
+        ]
+      },
+      "bounds_basis": "conservative transformed accessor envelope for existing C2 validator; measured_bounds_m contains exact indexed vertices for bed fitting",
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round2/candidates-preview-corrected/sf_bed_upholstered_cyberfox-plus-y.png",
+      "status": "rejected-fixed-envelope",
+      "fit": {
+        "ok": false,
+        "scale": 0.6261496013442058,
+        "scaled_size_m": [
+          1.6000000000000003,
+          1.4069915810796987,
+          0.9433891744262963
+        ],
+        "footprint_error_m": [
+          2.220446049250313e-16,
+          0.5930084189203013
+        ],
+        "height_err": 0.10153411959400349,
+        "reason": "scale-distortion: depth misses fixed footprint by 593.008 mm (>20 mm); overall height 0.943389 m misses 1.050000 m by 10.153% (>5%)"
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed_upholstered_cyberfox/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed_upholstered_cyberfox/license.txt"
+      }
+    },
+    {
+      "id": "sf_bunk_home_series",
+      "url": "https://sketchfab.com/3d-models/home-series-bunk-bed-2ba8ccae518d4dc1be00dcdff0d4ac01",
+      "source_url": "https://sketchfab.com/3d-models/home-series-bunk-bed-2ba8ccae518d4dc1be00dcdff0d4ac01",
+      "role": "bed",
+      "author": "spazio_silvestre",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tHome Series \u2013 Bunk Bed\n* source:\thttps://sketchfab.com/3d-models/home-series-bunk-bed-2ba8ccae518d4dc1be00dcdff0d4ac01\n* author:\tSpazio Silvestre (https://sketchfab.com/spazio_silvestre)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Home Series \u2013 Bunk Bed\" (https://sketchfab.com/3d-models/home-series-bunk-bed-2ba8ccae518d4dc1be00dcdff0d4ac01) by Spazio Silvestre (https://sketchfab.com/spazio_silvestre) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "-Z",
+      "front_axis_source": "Upper pillow connected components at native Z 1.013 to 3.078 and Y 5.813 to 6.671: upper head +Z. Lower pillows at both ends: lower head unresolved. Ladder extends to X 3.3773 beyond mattress X +/-1.5797: access +X.",
+      "length_axis": "Z",
+      "orientation_evidence": {
+        "front_axis": "-Z",
+        "length_axis": "Z",
+        "access_axis": "+X",
+        "basis": "Upper pillow connected components at native Z 1.013 to 3.078 and Y 5.813 to 6.671: upper head +Z. Lower pillows at both ends: lower head unresolved. Ladder extends to X 3.3773 beyond mattress X +/-1.5797: access +X.",
+        "review": "out/beds/round2/preview-review.md",
+        "status": "measured, lead-verifiable; not lead approval"
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre coordinate contract; fitted with one uniform scale only"
+      },
+      "bounds_m": {
+        "min": [
+          -4.500698189510364,
+          -1.2018396284797728,
+          -3.762647563673703
+        ],
+        "max": [
+          5.202087486139783,
+          7.416956376164343,
+          5.4808240816843306
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -1.7927380399539006,
+          -0.03053115078101154,
+          -3.311193852698012
+        ],
+        "max": [
+          3.3773345192372517,
+          6.922247985618178,
+          3.376923932447675
+        ]
+      },
+      "bounds_basis": "conservative transformed accessor envelope for existing C2 validator; measured_bounds_m contains exact indexed vertices for bed fitting",
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round2/candidates-preview-corrected/sf_bunk_home_series-plus-y.png",
+      "status": "rejected-fixed-envelope",
+      "fit": {
+        "ok": false,
+        "scale": 0.17407879477436256,
+        "scaled_size_m": [
+          0.9,
+          1.1642594833471402,
+          1.2103314123967042
+        ],
+        "footprint_error_m": [
+          0.0,
+          0.8357405166528598
+        ],
+        "height_err": 0.2880403456489975,
+        "reason": "scale-distortion: depth misses fixed footprint by 835.741 mm (>20 mm); overall height 1.210331 m misses 1.700000 m by 28.804% (>5%)"
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bunk_home_series/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bunk_home_series/license.txt"
+      }
+    },
+    {
+      "id": "sf_bunk_simple_3dworkbench",
+      "url": "https://sketchfab.com/3d-models/simple-wooden-bunk-bed-a7685bd7b2354157b4c1a8264892acf0",
+      "source_url": "https://sketchfab.com/3d-models/simple-wooden-bunk-bed-a7685bd7b2354157b4c1a8264892acf0",
+      "role": "bed",
+      "author": "3DWorkbench",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tsimple wooden bunk bed\n* source:\thttps://sketchfab.com/3d-models/simple-wooden-bunk-bed-a7685bd7b2354157b4c1a8264892acf0\n* author:\tlionarts3d (https://sketchfab.com/lionarts3d)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"simple wooden bunk bed\" (https://sketchfab.com/3d-models/simple-wooden-bunk-bed-a7685bd7b2354157b4c1a8264892acf0) by lionarts3d (https://sketchfab.com/lionarts3d) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "+X",
+      "front_axis_source": "Native low-X end maximum Y 10.4000 versus high-X end 2.8300: tall head -X, foot +X. Open long side +Z, opposite closed. No ladder component visible; access unresolved beyond open-side direction.",
+      "length_axis": "X",
+      "orientation_evidence": {
+        "front_axis": "+X",
+        "length_axis": "X",
+        "access_axis": "+Z",
+        "basis": "Native low-X end maximum Y 10.4000 versus high-X end 2.8300: tall head -X, foot +X. Open long side +Z, opposite closed. No ladder component visible; access unresolved beyond open-side direction.",
+        "review": "out/beds/round2/preview-review.md",
+        "status": "measured, lead-verifiable; not lead approval"
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre coordinate contract; fitted with one uniform scale only"
+      },
+      "bounds_m": {
+        "min": [
+          -7.674592113615745,
+          -1.000000282824034,
+          -6.464382332316433
+        ],
+        "max": [
+          11.292937980005036,
+          10.400000072717662,
+          5.749197106602852
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -7.674592113615745,
+          -1.0000002828240313,
+          -6.464382332316432
+        ],
+        "max": [
+          11.292937980005036,
+          10.400000072717662,
+          5.74919710660285
+        ]
+      },
+      "bounds_basis": "conservative transformed accessor envelope for existing C2 validator; measured_bounds_m contains exact indexed vertices for bed fitting",
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round2/candidates-preview-corrected/sf_bunk_simple_3dworkbench-plus-y.png",
+      "status": "rejected-fixed-envelope",
+      "fit": {
+        "ok": false,
+        "scale": 0.07368847146743056,
+        "scaled_size_m": [
+          0.9,
+          1.3976883001114053,
+          0.8400486009280322
+        ],
+        "footprint_error_m": [
+          0.0,
+          0.6023116998885947
+        ],
+        "height_err": 0.505853764159981,
+        "reason": "scale-distortion: depth misses fixed footprint by 602.312 mm (>20 mm); overall height 0.840049 m misses 1.700000 m by 50.585% (>5%)"
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bunk_simple_3dworkbench/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bunk_simple_3dworkbench/license.txt"
+      }
     }
   ],
   "_bounds_note": "bounds_m: native glTF (Y-up, metres) world AABB per prop, node-hierarchy-aware (handles multi-root variant packs e.g. shrub_02). Measured 2026-09-28 on ai-workstation via ops/workstation/fetch_asset_library.py bounds(); verified against one headless Blender 4.2.9 import (tree_small_02, shrub_02) matching to 1e-4 m. Blender glTF import maps (x,y,z)_gltf -> (x,-z,y)_scene."

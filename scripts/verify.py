@@ -243,6 +243,26 @@ def main() -> int:
         print("  ASSET INTAKE CANDIDATE %s status: candidate: %s" %
               (asset_id, "; ".join(violations)))
     expect("all placed manifest props pass asset intake", not intake["placed"])
+    from archpipe.beds import fit_bed, bed_items
+    bed_case = json.loads((ROOT / "tests/fixtures/bed-chelsea-measured-rejection.json").read_text())
+    bed_fit = fit_bed(bed_case['bounds_m'], **bed_case['target'], front_axis=bed_case['front_axis'])
+    expect("measured Chelsea bed refuses fixed-footprint scale distortion", not bed_fit['ok'])
+    bed_dimensions = [b-a for a,b in zip(bed_case['bounds_m']['min'],bed_case['bounds_m']['max'])]
+    expect("measured bed guard stays quiet at the real model's own envelope",
+           fit_bed(bed_case['bounds_m'], bed_dimensions[0], bed_dimensions[2], bed_dimensions[1], '+Z')['ok'])
+    from archpipe.concept import villa_furnish
+    fallback_ids = {b['id'] for b in bed_items(villa_furnish.layout(villa_r11.design('D1')))}
+    expect("bed fallback disclosures preserve camera subject identity",
+           all(m.get('fallback_label') == 'PROCEDURAL BED FALLBACK (stand-in): ' + m['label']
+               and not m['label'].startswith('PROCEDURAL BED FALLBACK')
+               and m.get('asset_status') == 'procedural-bed-fallback'
+               for mark in fallback_ids for m in scene['meshes']
+               if m['id'].startswith('furn-' + mark + '-')))
+    bed_registry = json.loads((ROOT / "knowledge/bed-guards.json").read_text())
+    expect("bed controls have registered proving tests",
+           all((ROOT / item['proof_file']).is_file() and all(
+               'def '+name+'(' in (ROOT / item['proof_file']).read_text()
+               for name in item['proofs']) for item in bed_registry['records']))
     brief_src = yaml.safe_load((ROOT / "spec/villa-brief.yaml").read_text(encoding="utf-8"))
     site_src = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))
 

@@ -229,6 +229,8 @@ def _point_triangle_distance(p, t):
 
 
 def unsupported(scene, lay=None):
+    from ..beds import scene_with_model_geometry
+    scene = scene_with_model_geometry(scene)
     meshes = scene["meshes"]
     tris, owner = _triangles(meshes)
     all_surfaces = _Surfaces(tris, owner)

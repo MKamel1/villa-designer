@@ -1007,7 +1007,18 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     def place_model(mark, asset, w, d, href, cx, cy, z, rot, room, selected=True, rejection=""):
         bounds = MANIFEST_BOUNDS.get(asset)
         fit = fit_uniform_scale(w, d, href, bounds, aspect_tol=0.02, height_tol=0.05)
-        if selected:
+        is_bed = it_all.get(mark, {}).get("type", "").startswith("bed_")
+        if is_bed:
+            from archpipe.beds import fit_bed
+            piece = it_all[mark]
+            asset_record = next(p for p in json.loads(_MANIFEST_PATH.read_text())['props'] if p['id']==asset)
+            bounds = asset_record.get('measured_bounds_m', bounds)
+            # Beds retain the approved footprint. Product selection cannot
+            # override fit or reinterpret mattress top as headboard height.
+            overall_h = GEN.get(piece["type"], (None, piece["h"]))[1]
+            href = overall_h
+            fit = fit_bed(bounds, piece["w"], piece["d"], href, MANIFEST_FRONTS.get(asset),asset_record.get('length_axis'))
+        elif selected:
             fit["scale"] = F.product(asset)["scale"]
             fit["ok"] = True
         prefix = "furn-" + mark.replace("#", "-") + "-"
@@ -1015,7 +1026,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                  "reference_h": round(href, 3), "scale": round(fit.get("scale", 0), 5),
                  "aspect_mismatch": round(fit.get("aspect_mismatch", 0), 3),
                  "height_err": round(fit.get("height_err", 0), 3), "ok": fit["ok"] and selected,
-                 "reason": rejection or fit.get("reason", "fits")}
+                 "reason": (fit["reason"] if is_bed and not fit["ok"] else
+                            rejection or fit.get("reason", "fits"))}
         if fit["ok"] and selected:
             front = MANIFEST_FRONTS.get(asset)
             yaw = model_yaw(rot, front)
@@ -1027,6 +1039,17 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                            "reference_h": round(href, 3),
                            "replaces": prefix, "room": room,
                            "label": "furniture model: " + asset})
+            if is_bed:
+                # Activating a fitting bed also activates the actual-face and
+                # bedding contracts. Missing review data fails before hiding
+                # the procedural fallback or starting any simulation.
+                from archpipe.beds import require_bed_geometry
+                models[-1].update(role='bed',native_bounds=bounds,
+                    orientation_evidence=asset_record.get('orientation_evidence'),
+                    neutral_review=asset_record.get('neutral_review'),
+                    review_geometry=asset_record.get('review_geometry'),
+                    mattress_bindings=asset_record.get('mattress_bindings'))
+                require_bed_geometry(models[-1])
             hidden_prefixes.add(prefix)
         return entry
 
@@ -1113,6 +1136,13 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         for m in meshes:
             if any(m["id"] == p or m["id"].startswith(p) for p in hidden_prefixes):
                 m["visibility"] = hide_vis
+
+    from archpipe.beds import label_fallbacks
+    label_fallbacks(meshes, it_all.values(),
+                    [r["mark"] for r in fit_report if r["ok"]])
+    notes.append("BEDS: PROCEDURAL BED FALLBACK (stand-in) retained for parents, both kids' rooms and library "
+                 "daybed until a measured, uniformly fitting, neutral-preview-reviewed model is available. "
+                 "Per-part fallback_label records the disclosure without changing view subject identity.")
 
     cloth = []
     # ---- dressing: clothes on the dressing rails, duvets and pillows on the beds (NOT design)

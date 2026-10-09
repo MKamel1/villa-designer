@@ -1,0 +1,44 @@
+{
+  "schema": "bed-measured-rejection/1",
+  "asset": "sf_chelsea_bed",
+  "source_url": "https://sketchfab.com/3d-models/chelsea-bed-with-storage-3d-model-cbe6e0dcc10a414a84acc5cc08171b87",
+  "author": "bertosalotti",
+  "licence": "CC Attribution",
+  "credit": "Chelsea bed with storage - 3D Model by bertosalotti (https://sketchfab.com/3d-models/chelsea-bed-with-storage-3d-model-cbe6e0dcc10a414a84acc5cc08171b87), CC Attribution",
+  "bounds_m": {
+    "min": [
+      -0.9800649881362915,
+      0.0004509999998842531,
+      -1.0649039745330808
+    ],
+    "max": [
+      0.994147002696991,
+      1.054821014404297,
+      1.2059890031814577
+    ]
+  },
+  "up_axis": "+Y",
+  "front_axis": "+Z",
+  "units_normalised": {
+    "scale_factor": 1,
+    "reason": "Measured glTF coordinates in metres; native dimensions agree with the cited manufacturer product envelope order of magnitude"
+  },
+  "triangle_count": 105298,
+  "vertex_count": 56112,
+  "sha256": {
+    "model.gltf": "9fc084a78bb6b98a1bcc971f9462cc97251a6686d0bc6025b29f0dc74923d379",
+    "scene.bin": "abc4ec568ef35afee707dc3039683c7efd581a40600dcdc34e25915620222da9"
+  },
+  "target": {
+    "width_m": 1.6,
+    "depth_m": 2.0,
+    "overall_height_m": 1.05
+  },
+  "target_source": "Frozen D1 parents bed footprint and generated headboard height, measured 2026-10-08; client furniture-phase tolerances",
+  "intake_violations": [
+    "missing units_normalised",
+    "missing contents"
+  ],
+  "status": "rejected; not approved for placement",
+  "vertex_count_basis": "Measured POSITION accessors only; normals are not vertices"
+}

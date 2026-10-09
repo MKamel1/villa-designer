@@ -1,0 +1,45 @@
+{
+  "schema": "bed-real-distortion/1",
+  "asset": "sf_chelsea_bed",
+  "source_sha256": "9fc084a78bb6b98a1bcc971f9462cc97251a6686d0bc6025b29f0dc74923d379",
+  "diagnostic_path": "out/beds/distorted-case/model.gltf",
+  "native_axis_scale_factors": [
+    0.8104499453094023,
+    0.995855331292894,
+    0.8807108127186296
+  ],
+  "measured_distorted_native_bounds": {
+    "min": [
+      -0.7942936160347175,
+      0.00044913075429782803,
+      -0.9378724448783284
+    ],
+    "max": [
+      0.8057063839652825,
+      1.0504491307542978,
+      1.0621275551216716
+    ]
+  },
+  "measured_distorted_world_bounds": {
+    "min": [
+      19.529999999999998,
+      -26.591,
+      0.0
+    ],
+    "max": [
+      21.13,
+      -24.591,
+      1.05
+    ]
+  },
+  "measured_triangle_count": 105298,
+  "footprint": [
+    19.53,
+    -26.591,
+    21.13,
+    -24.591
+  ],
+  "reference_height_m": 1.05,
+  "declared_uniform_scale": 0.8104499453094023,
+  "status": "injected distortion of real measured geometry; never integrated"
+}

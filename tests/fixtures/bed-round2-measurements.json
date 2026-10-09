@@ -1,0 +1,227 @@
+[
+  {
+    "id": "sf_bed_forssa",
+    "bounds_m": {
+      "min": [
+        -1.1900374337277384,
+        -0.005809456687772189,
+        -1.4918494981053054
+      ],
+      "max": [
+        1.2085797611941445,
+        1.0998265527642597,
+        0.6832575119517171
+      ]
+    },
+    "front_axis": "+Z",
+    "length_axis": "Z",
+    "orientation_evidence": {
+      "front_axis": "+Z",
+      "length_axis": "Z",
+      "access_axis": null,
+      "basis": "Headboard Plane003 and Shape014 at native Z -1.491849 to -1.382881; all main pillows at negative Z.",
+      "review": "out/beds/round2/preview-review.md",
+      "status": "measured, lead-verifiable; not lead approval"
+    },
+    "target": [
+      1.2,
+      2,
+      0.95
+    ],
+    "fit": {
+      "ok": false,
+      "scale": 0.500288250472198,
+      "scaled_size_m": [
+        1.2,
+        1.0881804806512414,
+        0.5531367048278196
+      ],
+      "footprint_error_m": [
+        0.0,
+        0.9118195193487586
+      ],
+      "height_err": 0.4177508370233477,
+      "reason": "scale-distortion: depth misses fixed footprint by 911.820 mm (>20 mm); overall height 0.553137 m misses 0.950000 m by 41.775% (>5%)"
+    }
+  },
+  {
+    "id": "sf_bed_scandi_bare",
+    "bounds_m": {
+      "min": [
+        -2.1641100637759507,
+        0.017163277949881817,
+        -1.3041349452015254
+      ],
+      "max": [
+        2.2839926152958867,
+        1.3175854654993415,
+        1.2258147554728964
+      ]
+    },
+    "front_axis": "+X",
+    "length_axis": "X",
+    "orientation_evidence": {
+      "front_axis": "+X",
+      "length_axis": "X",
+      "access_axis": null,
+      "basis": "Pillow Object_12 at native X -1.9848 to -1.0247; mattress length axis X.",
+      "review": "out/beds/round2/preview-review.md",
+      "status": "measured, lead-verifiable; not lead approval"
+    },
+    "target": [
+      1.2,
+      2,
+      0.95
+    ],
+    "fit": {
+      "ok": false,
+      "scale": 0.4496299083674322,
+      "scaled_size_m": [
+        1.1375410520884528,
+        2.0,
+        0.5847087090268394
+      ],
+      "footprint_error_m": [
+        0.06245894791154716,
+        0.0
+      ],
+      "height_err": 0.3845171483928006,
+      "reason": "scale-distortion: width misses fixed footprint by 62.459 mm (>20 mm); overall height 0.584709 m misses 0.950000 m by 38.452% (>5%)"
+    }
+  },
+  {
+    "id": "sf_bed_upholstered_cyberfox",
+    "bounds_m": {
+      "min": [
+        -1.0499999523162842,
+        -0.0001455545425415039,
+        -1.2844038009643555
+      ],
+      "max": [
+        1.1970534324645996,
+        1.5065058469772339,
+        1.270896077156067
+      ]
+    },
+    "front_axis": "-X",
+    "length_axis": "X",
+    "orientation_evidence": {
+      "front_axis": "-X",
+      "length_axis": "X",
+      "access_axis": null,
+      "basis": "Upper 20% vertices at native X 1.050701 to 1.195498, Z -0.991287 to 0.980353 form headboard at +X.",
+      "review": "out/beds/round2/preview-review.md",
+      "status": "measured, lead-verifiable; not lead approval"
+    },
+    "target": [
+      1.6,
+      2,
+      1.05
+    ],
+    "fit": {
+      "ok": false,
+      "scale": 0.6261496013442058,
+      "scaled_size_m": [
+        1.6000000000000003,
+        1.4069915810796987,
+        0.9433891744262963
+      ],
+      "footprint_error_m": [
+        2.220446049250313e-16,
+        0.5930084189203013
+      ],
+      "height_err": 0.10153411959400349,
+      "reason": "scale-distortion: depth misses fixed footprint by 593.008 mm (>20 mm); overall height 0.943389 m misses 1.050000 m by 10.153% (>5%)"
+    }
+  },
+  {
+    "id": "sf_bunk_home_series",
+    "bounds_m": {
+      "min": [
+        -1.7927380399539006,
+        -0.03053115078101154,
+        -3.311193852698012
+      ],
+      "max": [
+        3.3773345192372517,
+        6.922247985618178,
+        3.376923932447675
+      ]
+    },
+    "front_axis": "-Z",
+    "length_axis": "Z",
+    "orientation_evidence": {
+      "front_axis": "-Z",
+      "length_axis": "Z",
+      "access_axis": "+X",
+      "basis": "Upper pillow connected components at native Z 1.013 to 3.078 and Y 5.813 to 6.671: upper head +Z. Lower pillows at both ends: lower head unresolved. Ladder extends to X 3.3773 beyond mattress X +/-1.5797: access +X.",
+      "review": "out/beds/round2/preview-review.md",
+      "status": "measured, lead-verifiable; not lead approval"
+    },
+    "target": [
+      0.9,
+      2,
+      1.7
+    ],
+    "fit": {
+      "ok": false,
+      "scale": 0.17407879477436256,
+      "scaled_size_m": [
+        0.9,
+        1.1642594833471402,
+        1.2103314123967042
+      ],
+      "footprint_error_m": [
+        0.0,
+        0.8357405166528598
+      ],
+      "height_err": 0.2880403456489975,
+      "reason": "scale-distortion: depth misses fixed footprint by 835.741 mm (>20 mm); overall height 1.210331 m misses 1.700000 m by 28.804% (>5%)"
+    }
+  },
+  {
+    "id": "sf_bunk_simple_3dworkbench",
+    "bounds_m": {
+      "min": [
+        -7.674592113615745,
+        -1.0000002828240313,
+        -6.464382332316432
+      ],
+      "max": [
+        11.292937980005036,
+        10.400000072717662,
+        5.74919710660285
+      ]
+    },
+    "front_axis": "+X",
+    "length_axis": "X",
+    "orientation_evidence": {
+      "front_axis": "+X",
+      "length_axis": "X",
+      "access_axis": "+Z",
+      "basis": "Native low-X end maximum Y 10.4000 versus high-X end 2.8300: tall head -X, foot +X. Open long side +Z, opposite closed. No ladder component visible; access unresolved beyond open-side direction.",
+      "review": "out/beds/round2/preview-review.md",
+      "status": "measured, lead-verifiable; not lead approval"
+    },
+    "target": [
+      0.9,
+      2,
+      1.7
+    ],
+    "fit": {
+      "ok": false,
+      "scale": 0.07368847146743056,
+      "scaled_size_m": [
+        0.9,
+        1.3976883001114053,
+        0.8400486009280322
+      ],
+      "footprint_error_m": [
+        0.0,
+        0.6023116998885947
+      ],
+      "height_err": 0.505853764159981,
+      "reason": "scale-distortion: depth misses fixed footprint by 602.312 mm (>20 mm); overall height 0.840049 m misses 1.700000 m by 50.585% (>5%)"
+    }
+  }
+]

@@ -740,16 +740,36 @@ def subjects(view, mesh_specs, objects, imported_props=()):
     return result
 
 
-def drape_cloth(cloth_specs, materials):
+def drape_cloth(cloth_specs, materials, imported_models=()):
     """Bedding as cloth (render review: box duvets read as rigid slabs). Each spec is a sheet dropped onto the
     authored bed parts and settled with the bedroom's tested settings (photoreal._grid / _simulate: cotton that
     barely stretches, pinned under the pillows), then given loft and thickness like photoreal.cloth_bedding. The
     bed frame, mattress and footprint are untouched: only the soft goods are simulated."""
     import random
+    from archpipe.beds import bind_model_cloth
+    cloth_specs=bind_model_cloth(cloth_specs,imported_models)
     report = []
     for spec in cloth_specs:
-        colliders = [o for o in bpy.data.objects if o.type == "MESH" and
-                     any(o.name.startswith(pfx) for pfx in spec["colliders"])]
+        instance=next((m for m in imported_models if m['id']==spec.get('model_instance')),None)
+        if spec.get('model_instance') and instance is None:
+            raise ValueError(spec['id']+': model must be imported before cloth')
+        if instance is not None and instance.get('status')!='procedural-bed-fallback':
+            from archpipe.beds import mattress_cloth
+            names=spec.get('mattress_parts',[])
+            mattress=[o for o in instance['objects'] if o.get('source_part') in names]
+            if not names or len(mattress)!=len(names):
+                raise ValueError(spec['id']+': actual mattress part binding is missing or ambiguous')
+            faces=[[list(o.matrix_world@o.data.vertices[i].co) for i in p.vertices]
+                   for o in mattress for p in o.data.polygons]
+            spec=mattress_cloth(spec,faces,spec['head_at_max'])
+            # Every real part participates, including frame, rails, pillows
+            # and any source bedding. Procedural replacements never collide.
+            colliders=instance['objects']
+        else:
+            colliders = [o for o in bpy.data.objects if o.type == "MESH" and
+                         any(o.name.startswith(pfx) for pfx in spec["colliders"]) and not o.get("replaced_by_model")]
+        if not colliders:
+            raise ValueError(spec['id']+': cloth has no physical colliders')
         sheet = photoreal._grid("cloth-" + spec["id"], spec["size"][0], spec["size"][1],
                                 max(8, int(spec["size"][0] / 0.03)), max(8, int(spec["size"][1] / 0.03)),
                                 tuple(spec["center"]), spec["z_start"])
@@ -775,11 +795,49 @@ def drape_cloth(cloth_specs, materials):
         for poly in sheet.data.polygons:
             poly.use_smooth = True
         pts = [sheet.matrix_world @ v.co for v in sheet.data.vertices]
+        measurement=cloth_model_clearance(sheet,colliders) if instance and instance.get('status')!='procedural-bed-fallback' else None
+        if measurement and (measurement['intersections'] or measurement['inside_vertices']):
+            raise ValueError(spec['id']+': evaluated duvet intersects actual model: '+str(measurement))
         report.append({"id": spec["id"], "colliders": len(colliders),
+                       "collider_objects": [o.name for o in colliders],
+                       "model_clearance": measurement,
+                       "cut_geometry_basis": spec.get('geometry_basis','procedural mattress'),
                        "bounds": [round(min(q.x for q in pts), 3), round(min(q.y for q in pts), 3),
                                   round(min(q.z for q in pts), 3), round(max(q.x for q in pts), 3),
                                   round(max(q.y for q in pts), 3), round(max(q.z for q in pts), 3)]})
     return report
+
+
+def cloth_model_clearance(sheet, colliders):
+    """Measure evaluated duvet/model surface crossings and enclosed vertices.
+
+    BVH means bounding volume hierarchy, Blender's triangle spatial index.
+    All thickness/loft/subdivision modifiers participate. A surface crossing
+    or a duvet vertex behind its nearest outward model face refuses the render.
+    The 0.1 mm signed-distance tolerance is numerical, not design clearance.
+    """
+    from mathutils.bvhtree import BVHTree
+    dg=bpy.context.evaluated_depsgraph_get()
+    def triangles(objects):
+        points=[];faces=[]
+        for obj in objects:
+            evaluated=obj.evaluated_get(dg);mesh=evaluated.to_mesh()
+            mesh.calc_loop_triangles();base=len(points)
+            points.extend(evaluated.matrix_world@v.co for v in mesh.vertices)
+            faces.extend(tuple(base+i for i in t.vertices) for t in mesh.loop_triangles)
+            evaluated.to_mesh_clear()
+        return points,faces
+    cp,cf=triangles([sheet]);mp,mf=triangles(colliders)
+    cloth_tree=BVHTree.FromPolygons(cp,cf,all_triangles=True)
+    model_tree=BVHTree.FromPolygons(mp,mf,all_triangles=True)
+    crossings=len(cloth_tree.overlap(model_tree));minimum=float('inf');inside=0
+    for point in cp:
+        location,normal,index,distance=model_tree.find_nearest(point)
+        minimum=min(minimum,distance)
+        if (point-location).dot(normal)<-.0001:inside+=1
+    return dict(intersections=crossings,inside_vertices=inside,
+                minimum_surface_distance_m=minimum,evaluated_cloth_vertices=len(cp),
+                model_triangles=len(mf),numerical_tolerance_m=.0001)
 
 
 def build_curtains(curtain_specs, materials):
@@ -1029,6 +1087,24 @@ def import_models(model_specs, library_root):
     for spec in model_specs:
         from archpipe.asset_intake import require_registered_asset
         from pathlib import Path
+        path = os.path.join(library_root, "props", spec["asset"], "model.gltf")
+        if not os.path.isfile(path) and spec.get('role')=='bed':
+            fallback=[o for o in bpy.data.objects if o.type=='MESH' and o.name.startswith(spec['replaces'])]
+            if not fallback:
+                raise ValueError(spec['id']+': missing model and physical procedural fallback')
+            for obj in fallback:
+                apply_visibility(obj,{})
+                obj.hide_render=False
+                if 'replaced_by_model' in obj:
+                    del obj['replaced_by_model']
+                obj['asset_status']='procedural-bed-fallback'
+                obj['fallback_label']='PROCEDURAL BED FALLBACK (stand-in): '+obj.name
+            imported.append(dict(id=spec['id'],asset=spec['asset'],objects=[],
+                status='procedural-bed-fallback',fallback_objects=[o.name for o in fallback]))
+            continue
+        if spec.get('role')=='bed':
+            from archpipe.beds import require_bed_geometry
+            require_bed_geometry(spec,library_root)
         require_registered_asset(spec["asset"], Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
                                  Path(library_root) / "props" / spec["asset"] / "model.gltf")
         from archpipe.furniture_orientation import check_model_orientation
@@ -1052,7 +1128,7 @@ def import_models(model_specs, library_root):
         anchor.scale = (spec["scale"],) * 3
         bpy.context.view_layer.update()
         def corners():
-            return [obj.matrix_world @ Vector(c) for obj in meshes for c in obj.bound_box]
+            return [obj.matrix_world @ v.co for obj in meshes for v in obj.data.vertices]
         xyz = corners()
         anchor.location = (spec["position"][0] - (min(v.x for v in xyz) + max(v.x for v in xyz))/2,
                            spec["position"][1] - (min(v.y for v in xyz) + max(v.y for v in xyz))/2,
@@ -1061,22 +1137,45 @@ def import_models(model_specs, library_root):
         total_faces = sum(len(obj.data.polygons) for obj in meshes)
         asset_ratio = min(1.0, 500000 / max(total_faces, 1))
         for obj in meshes:
+            obj['source_part']=obj.name
             faces = len(obj.data.polygons)
-            ratio = min(spec.get("decimate_ratio", 1.0), asset_ratio)
+            ratio = 1.0 if spec.get("role")=="bed" else min(spec.get("decimate_ratio", 1.0), asset_ratio)
             if ratio < 1.0 and faces > 10:
                 mod = obj.modifiers.new("bounded product decimation", "DECIMATE")
                 mod.ratio = ratio
             obj.name = "model-%s-%s" % (spec["id"], obj.name)
+        if spec.get('role')=='bed':
+            # Keep procedural fallback objects for a later missing-file run,
+            # but remove them from both rendering and cloth collision now.
+            for obj in bpy.data.objects:
+                if obj.type=='MESH' and obj.name.startswith(spec['replaces']):
+                    obj.hide_render=True
+                    obj['replaced_by_model']=spec['id']
         xyz = corners()
         box = (min(v.x for v in xyz), min(v.y for v in xyz), min(v.z for v in xyz),
                max(v.x for v in xyz), max(v.y for v in xyz), max(v.z for v in xyz))
+        if spec.get('role')=='bed' and spec.get('native_bounds'):
+            from archpipe.beds import placed_bed_findings
+            # Derive the native-axis permutation from the measured yaw.
+            yaw=spec['rotation_deg'][2] % 180
+            if min(abs(yaw),abs(yaw-90),abs(yaw-180))>1e-6:
+                raise ValueError(spec['id']+': fixed bed envelope needs orthogonal yaw')
+            axes=(0,2,1) if min(abs(yaw),abs(yaw-180))<1e-6 else (2,0,1)
+            footprint=[spec['position'][0]-spec['footprint_w']/2,
+                       spec['position'][1]-spec['footprint_d']/2,
+                       spec['position'][0]+spec['footprint_w']/2,
+                       spec['position'][1]+spec['footprint_d']/2]
+            findings=placed_bed_findings(spec['native_bounds'],dict(min=list(box[:3]),max=list(box[3:])),
+                footprint,spec['reference_h'],spec['scale'],axes)
+            if findings:
+                raise ValueError(spec['id']+': '+ '; '.join(findings))
         if "footprint_w" in spec:
             if box[3]-box[0] > spec["footprint_w"] + 0.020 or box[4]-box[1] > spec["footprint_d"] + 0.020:
                 raise ValueError("model exceeds product footprint: " + spec["id"])
             if abs((box[5]-box[2]) / spec["reference_h"] - 1) > 0.05:
                 raise ValueError("model height exceeds five percent tolerance: " + spec["id"])
-        imported.append({"id": spec["id"], "asset": spec["asset"], "bounds": box,
-                         "objects": meshes, "material_qa": material_qa})
+        imported.append({**spec, "id": spec["id"], "asset": spec["asset"], "bounds": box,
+                         "objects": meshes, "material_qa": material_qa, "status": "imported"})
     return imported
 
 
@@ -1402,14 +1501,18 @@ def render(scene_data, args):
             emissive_sources.append({"id": spec["id"], "layer": spec.get("layer"), "area_m2": area,
                                      "exitance_lm_per_m2": mat_spec["emission_lm_per_m2"],
                                      "emitted_lumens": area * mat_spec["emission_lm_per_m2"]})
-    cloth_report = drape_cloth(scene_data.get("cloth", []), materials)
+    imported_models = import_models(scene_data.get("models", []), library_root)
+    absent={m['id'] for m in imported_models if m.get('status')=='procedural-bed-fallback'}
+    if absent:
+        scene_data=dict(scene_data,models=[dict(m,status='procedural-bed-fallback') if m['id'] in absent else m
+                                         for m in scene_data.get('models',[])])
+    cloth_report = drape_cloth(scene_data.get("cloth", []), materials, imported_models)
     # Curtains (client 2026-09-28) are cloth-simulated like the duvets above, not static meshes; their objects are
     # merged into `objects` so the per-view hide mechanism below (villa_render's authored hide_meshes, the same
     # doorway-open-door path) can toggle the heavy layer's open/closed pair per view.
     curtain_objects, curtain_report = build_curtains(scene_data.get("curtains", []), materials)
     objects.update(curtain_objects)
     imported_props = import_props(scene_data.get("props", []), library_root)
-    imported_models = import_models(scene_data.get("models", []), library_root)
     lights = {l["id"]: add_light(l, args.ies_dir) for l in scene_data["lights"]}
     full_power = {ident: obj.data.energy for ident, obj in lights.items()}
     mesh_by_id = {mesh["id"]: mesh for mesh in scene_data["meshes"]}
