@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from archpipe.concept import villa_brief as B                       # noqa: E402
 from archpipe.concept import villa_lighting as VL                   # noqa: E402
 from archpipe.villa_render_contract import presentation_view_ids    # noqa: E402
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 R = ROOT / "out" / "villa" / "render-d1"
 OUT = R / "review"
@@ -72,7 +73,23 @@ DECISIONS = [
 ]
 
 
-def main():
+def main(argv=None) -> int:
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-review-page",
+            inputs=[
+                R / "scene.json",
+                R / "lighting-measurements.json",
+                ROOT / "out" / "villa" / "daylight" / "villa-df-d1-finished" / "report.json",
+            ],
+            output=OUT,
+            modules=["PIL"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     scene = json.loads((R / "scene.json").read_text(encoding="utf-8"))
     (OUT / "renders").mkdir(parents=True, exist_ok=True)
     plates = []
@@ -181,6 +198,7 @@ you never specified it.</p><details><summary>All %d targets</summary><div class=
     parts.append('</main>')
     (OUT / "index.html").write_text("\n".join(parts), encoding="utf-8")
     print(OUT / "index.html")
+    return 0
 
 
 HEAD = '''<title>D1 Render Review</title>
@@ -219,4 +237,5 @@ details summary{cursor:pointer;font-weight:600;margin:6px 0}summary:focus-visibl
 <main>'''
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
+

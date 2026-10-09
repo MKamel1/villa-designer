@@ -190,3 +190,5 @@ Canonical workflow follow-up: `.agents/skills` is read-only in this session and 
 - Phase 2 Batch A entry points (2026-10-07): Migrated 16 entry points to `project_context` with declared inputs and requirements; skipped 4 scripts at distinct boundaries (`archpipe_mcp.py`, `build_sheet.py`, `capture_plot_prompts.py`, `luminaire_demo.py`). AST, import-isolation, and subprocess exit-2 proofs in `tests/test_execution_context.py`.
 
 - Phase 2 Batch B entry points (2026-10-07): Migrated 13 entry points to `project_context` with declared inputs, outputs, and requirements; skipped 1 script at distinct boundary (`products_worker.py`). AST, import-isolation, and subprocess exit-2 proofs in `tests/test_execution_context.py`.
+
+- Phase 2 batch D (2026-10-08, final): `villa_render_views.py`, `villa_review_page.py` and `villa_render_selftest.py` call `project_context` on the command-line path (agy migrated the first two; the lead finished the self-test after agy stopped on a denied read). All entry scripts in the inventory now use the shared preflight.

@@ -20,6 +20,7 @@ from archpipe.concept import villa_furnish as F                      # noqa: E40
 from archpipe.concept import villa_r11 as R                          # noqa: E402
 from archpipe.concept import revit_spec as RS                        # noqa: E402
 from archpipe.concept import villa_landscape as LAND                  # noqa: E402
+from archpipe.execution_context import ContextError, project_context  # noqa: E402
 
 OUT = ROOT / "out" / "villa" / "render-d1"
 
@@ -232,7 +233,25 @@ def storage_front_occlusions(view, items, parts_by_id=None):
     return blocked
 
 
-def main():
+def main(argv=None) -> int:
+    global OUT
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=OUT,
+                        help='Directory containing scene.json and receiving the diagnostic view plan.')
+    OUT = parser.parse_args(sys.argv[1:] if argv is None else argv).output
+    try:
+        project_context(
+            ROOT,
+            Path(__file__).resolve(),
+            "villa-render-views",
+            inputs=[OUT / "scene.json"],
+            output=OUT,
+            modules=["matplotlib"],
+        )
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     scene = json.loads((OUT / "scene.json").read_text(encoding="utf-8"))
     from archpipe.concept.garden_g6 import scene_findings as g6_findings
     failures=g6_findings(scene)
@@ -350,9 +369,4 @@ def main():
 
 
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=Path, default=OUT,
-                        help='Directory containing scene.json and receiving the diagnostic view plan.')
-    OUT = parser.parse_args().output
     sys.exit(main())
