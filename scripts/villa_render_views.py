@@ -232,6 +232,47 @@ def storage_front_occlusions(view, items, parts_by_id=None):
     return blocked
 
 
+def camera_wall_sightline_clearance(view, walls, min_clearance_m=1.0):
+    """Return wall partitions intersecting the camera sightline closer than min_clearance_m (l0481).
+
+    A camera facing a partition wall closer than 1.0 m has its view blocked by
+    construction (LEARNINGS.md:668, 'One render spot (S1 view 1) faced a partition
+    1 m away'; camera clearance standard: scripts/villa_render_views.py:110).
+    """
+    px, py = view["camera"]["position"][:2]
+    tx, ty = view["camera"]["target"][:2]
+    dx, dy = tx - px, ty - py
+    length = math.hypot(dx, dy)
+    if length < 1e-9:
+        return []
+    ux, uy = dx / length, dy / length
+    failures = []
+    for wall in walls:
+        x0, y0, x1, y1 = wall[:4]
+        # Ray-box intersection for ray (px + t * ux, py + t * uy) with t in [0.05, min_clearance_m]
+        t0, t1 = 0.05, float(min_clearance_m)
+        hit = True
+        for p_val, d_val, b_min, b_max in ((px, ux, x0, x1), (py, uy, y0, y1)):
+            if abs(d_val) < 1e-12:
+                if p_val < b_min or p_val > b_max:
+                    hit = False
+                    break
+            else:
+                ta = (b_min - p_val) / d_val
+                tb = (b_max - p_val) / d_val
+                if ta > tb:
+                    ta, tb = tb, ta
+                t0 = max(t0, ta)
+                t1 = min(t1, tb)
+                if t0 > t1:
+                    hit = False
+                    break
+        if hit and t0 <= min_clearance_m:
+            failures.append((tuple(wall[:4]), round(t0, 3)))
+    return failures
+
+
+
 def main():
     scene = json.loads((OUT / "scene.json").read_text(encoding="utf-8"))
     from archpipe.concept.garden_g6 import scene_findings as g6_findings
