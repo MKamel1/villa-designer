@@ -18,12 +18,12 @@ executive_summary: >
 
 ## Executive Summary
 
-This report establishes verified optical property baselines for architectural materials in the villa render pipeline that were identified in the [Phase 1 Material Audit Report](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/c7-phase1-report.md) as lacking empirical physical records. The research directly addresses open warnings frozen in [`tests/fixtures/c7_known_findings.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c7_known_findings.json):
+This report establishes verified optical property baselines for architectural materials in the villa render pipeline that were identified in the [Phase 1 Material Audit Report](c7-phase1-report.md) as lacking empirical physical records. The research directly addresses open warnings frozen in [`tests/fixtures/c7_known_findings.json`](../tests/fixtures/c7_known_findings.json):
 1. Material `brass` lacking an alloy sheet or measured optical reflectance record.
 2. Material `glass-guard` specifying an unanchored transmittance ($\tau = 0.85$) without a cited standard or refractive index ($\text{IOR}$).
 3. Supporting villa glazing and metal materials (`glass-bath-screen` / low-iron 10 mm, `glass-clear` monolithic float / DGU, and `alu-bronze` dark anodised aluminium).
 
-Thirteen optical evidence cards have been authored and stored in [`knowledge/c7-optical-cards.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/knowledge/c7-optical-cards.json). Each card is grounded in public documentation that was directly fetched, read, and verified, with exact quotes strictly constrained to under 40 words.
+Thirteen optical evidence cards have been authored and stored in [`knowledge/c7-optical-cards.json`](../knowledge/c7-optical-cards.json). Each card is grounded in public documentation that was directly fetched, read, and verified, with exact quotes strictly constrained to under 40 words.
 
 ---
 
@@ -45,8 +45,8 @@ To guarantee compliance with the project's zero-hallucination standard, the foll
 ### 1. Brass (Yellow Brushed Brass Alloy)
 
 #### Pipeline Context
-- Active production entry: [`src/archpipe/concept/villa_render.py:122`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L122)
-- Current status: `NONE` / `missing_basis` warning in [`tests/fixtures/c7_known_findings.json:10-19`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c7_known_findings.json#L10-L19).
+- Active production entry: [`src/archpipe/concept/villa_render.py:122`](../src/archpipe/concept/villa_render.py#L122)
+- Current status: `NONE` / `missing_basis` warning in [`tests/fixtures/c7_known_findings.json:10-19`](../tests/fixtures/c7_known_findings.json#L10-L19).
 - Active parameter values: Base color RGB `[0.80, 0.62, 0.34]`, scalar reflectance $\rho = 0.62$, microfacet roughness $\sigma = 0.30$, `metallic = 1.0`.
 
 #### Cards Found
@@ -80,18 +80,18 @@ To guarantee compliance with the project's zero-hallucination standard, the foll
 Commercial brass mills (e.g., Wieland, KME, Aurubis) do not measure spectrophotometric reflectance on mechanical mill certificates. However, the physical optical constant measurements of Querry (1985) for 70/30 alpha-brass provide the required empirical basis for optical simulation.
 
 #### Recommendation
-Bind `brass` in [`src/archpipe/concept/villa_render.py:122`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L122) to Card `brass-specular-reflectance` and Card `brass-specular-gloss-60deg`:
+Bind `brass` in [`src/archpipe/concept/villa_render.py:122`](../src/archpipe/concept/villa_render.py#L122) to Card `brass-specular-reflectance` and Card `brass-specular-gloss-60deg`:
 - Update base reflectance $\rho$ from the assumed scalar `0.62` to the photopically verified range $\rho = 0.72\text{--}0.74$, or preserve the active tinted base RGB while explicitly documenting Querry (1985) as the physical authority.
 - Retain roughness $\sigma = 0.30$, which is confirmed to sit exactly in the center of the ASTM D523 / ISO 2813 satin gloss range ($10\text{--}30\,\text{GU}$, mapping to $\sigma \in [0.25, 0.35]$).
-- This replaces the `NONE` status with `VERIFIED` and eliminates finding `l0028` in [`tests/fixtures/c7_known_findings.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c7_known_findings.json).
+- This replaces the `NONE` status with `VERIFIED` and eliminates finding `l0028` in [`tests/fixtures/c7_known_findings.json`](../tests/fixtures/c7_known_findings.json).
 
 ---
 
 ### 2. Glass-Guard (Laminated Safety Glass Balustrade)
 
 #### Pipeline Context
-- Active production entry: [`src/archpipe/concept/villa_render.py:132`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L132)
-- Current status: `ASSUMED` / `missing_basis` warning in [`tests/fixtures/c7_known_findings.json:20-33`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c7_known_findings.json#L20-L33).
+- Active production entry: [`src/archpipe/concept/villa_render.py:132`](../src/archpipe/concept/villa_render.py#L132)
+- Current status: `ASSUMED` / `missing_basis` warning in [`tests/fixtures/c7_known_findings.json:20-33`](../tests/fixtures/c7_known_findings.json#L20-L33).
 - Active parameter values: $\tau = 0.85$, $\text{interfaces} = 2$, $\sigma = 0.0$, implicit $\text{IOR} = 1.50$.
 
 #### Cards Found
@@ -111,19 +111,19 @@ Bind `brass` in [`src/archpipe/concept/villa_render.py:122`](file:///C:/Users/mm
 The assumed villa transmittance of `0.85` represents a conservative reduction from the clean manufacturer laboratory value of `0.89`, typically introduced by specifiers to account for field dust or a slightly thicker PVB acoustic interlayer.
 
 #### Recommendation
-Bind `glass-guard` in [`src/archpipe/concept/villa_render.py:132`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L132) to Card `glass-guard-transmittance` and Card `glass-guard-refractive-index`:
+Bind `glass-guard` in [`src/archpipe/concept/villa_render.py:132`](../src/archpipe/concept/villa_render.py#L132) to Card `glass-guard-transmittance` and Card `glass-guard-refractive-index`:
 - Upgrade optical declaration to cite Pilkington Optilam™ 10.8 mm (EN 410 / EN 12600 Class 1(B)1).
 - Set transmittance $\tau_v = 0.89$ (clean product rating) or document the active `0.85` as an explicit safety/dirt allowance against the $0.89$ nominal rating.
 - Formally declare $\text{IOR} = 1.50$ (EN 572-1) or $1.52$ (Seward & Vascott 2005).
-- This resolves finding `l0049` in [`tests/fixtures/c7_known_findings.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c7_known_findings.json).
+- This resolves finding `l0049` in [`tests/fixtures/c7_known_findings.json`](../tests/fixtures/c7_known_findings.json).
 
 ---
 
 ### 3. Glass-Bath-Screen (10 mm Low-Iron Monolithic Float)
 
 #### Pipeline Context
-- Active production entry: [`src/archpipe/concept/revit_spec.py:434`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/revit_spec.py#L434), [`src/archpipe/concept/villa_render.py:1543`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L1543)
-- Current status: `ASSUMED` in [`docs/material-basis.md:141`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/material-basis.md#L141) (`"ASSUMED 10 mm low-iron glass: 0.91 transmittance, 1.52 index of refraction; TODO low-iron-glass-optics"`).
+- Active production entry: [`src/archpipe/concept/revit_spec.py:434`](../src/archpipe/concept/revit_spec.py#L434), [`src/archpipe/concept/villa_render.py:1543`](../src/archpipe/concept/villa_render.py#L1543)
+- Current status: `ASSUMED` in [`docs/material-basis.md:141`](material-basis.md#L141) (`"ASSUMED 10 mm low-iron glass: 0.91 transmittance, 1.52 index of refraction; TODO low-iron-glass-optics"`).
 - Active parameter values: $\tau = 0.91$, $\eta = 1.52$, $\text{interfaces} = 2$, $\sigma = 0.0$.
 
 #### Cards Found
@@ -139,10 +139,10 @@ Bind `glass-guard` in [`src/archpipe/concept/villa_render.py:132`](file:///C:/Us
   - *Quoted Source Text*: `"The refractive index and extinction coefficient was extracted for NSG Opti-White (low-Fe) glass from a multi-oscillator model fit to the ellipsometry data, as a function of wavelength, from 300 to 1500 nm"` (data line: `0.58728204 1.5056078 0.000000277`).
 
 #### Gaps and Limitations
-The existing note in [`src/archpipe/concept/revit_spec.py:434`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/revit_spec.py#L434) assumed $\tau = 0.91$. Spectrophotometric testing across all major manufacturers (Pilkington, Guardian, Saint-Gobain) confirms that 91% applies to 4 mm and 6 mm panes, whereas 10 mm low-iron panes attenuate light to exactly 90% ($\tau = 0.90$) due to increased path length.
+The existing note in [`src/archpipe/concept/revit_spec.py:434`](../src/archpipe/concept/revit_spec.py#L434) assumed $\tau = 0.91$. Spectrophotometric testing across all major manufacturers (Pilkington, Guardian, Saint-Gobain) confirms that 91% applies to 4 mm and 6 mm panes, whereas 10 mm low-iron panes attenuate light to exactly 90% ($\tau = 0.90$) due to increased path length.
 
 #### Recommendation
-Update [`src/archpipe/concept/revit_spec.py:434`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/revit_spec.py#L434) and [`src/archpipe/concept/villa_render.py:1543`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L1543):
+Update [`src/archpipe/concept/revit_spec.py:434`](../src/archpipe/concept/revit_spec.py#L434) and [`src/archpipe/concept/villa_render.py:1543`](../src/archpipe/concept/villa_render.py#L1543):
 - Change transmittance $\tau$ from `0.91` to `0.90` (Card `glass-low-iron-transmittance-10mm`).
 - Change $\eta$ from `1.52` to `1.506` (or standard EN 572-1 `1.50`, Card `glass-low-iron-refractive-index`).
 - Resolve the pending `TODO low-iron-glass-optics` annotation with citation to Pilkington Optiwhite™ EN 410 and Treharne (2011).
@@ -152,8 +152,8 @@ Update [`src/archpipe/concept/revit_spec.py:434`](file:///C:/Users/mmbka/arch-pi
 ### 4. Glass-Clear (Float Glazing & Insulated Units)
 
 #### Pipeline Context
-- Active production entry: [`src/archpipe/concept/villa_render.py:130`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L130)
-- Current status: `VERIFIED` in [`docs/material-basis.md:83`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/material-basis.md#L83) citing *Metric Handbook* p. 9-8.
+- Active production entry: [`src/archpipe/concept/villa_render.py:130`](../src/archpipe/concept/villa_render.py#L130)
+- Current status: `VERIFIED` in [`docs/material-basis.md:83`](material-basis.md#L83) citing *Metric Handbook* p. 9-8.
 - Active parameter values: $\tau = 0.70$, $\eta = 1.50$, $\text{interfaces} = 2$, $\sigma = 0.0$.
 
 #### Cards Found
@@ -165,7 +165,7 @@ Update [`src/archpipe/concept/revit_spec.py:434`](file:///C:/Users/mmbka/arch-pi
 - **Card `glass-clear-dgu-transmittance`**:
   - *Quantity*: Double glazing unit (DGU) light transmittance ($\tau_v$).
   - *Value*: $\tau_v = 0.70$ (70%) for standard clear double glazing unit (6 mm float + 16 mm gas cavity + 6 mm float).
-  - *Source*: *Metric Handbook: Planning and Design Data*, Chapter 9, Section 8, Table 9.3; cited in [`docs/material-basis.md:83`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/material-basis.md#L83).
+  - *Source*: *Metric Handbook: Planning and Design Data*, Chapter 9, Section 8, Table 9.3; cited in [`docs/material-basis.md:83`](material-basis.md#L83).
   - *Quoted Source Text*: `"Metric Handbook p. 9-8: clear double glazing tau = 0.70, interfaces = 2."`
 - **Card `glass-clear-refractive-index`**:
   - *Quantity*: Refractive index ($n$).
@@ -181,8 +181,8 @@ Retain the verified active production parameters $\tau = 0.70$ and $\eta = 1.50$
 ### 5. Alu-Bronze (Dark Bronze Anodised Aluminium)
 
 #### Pipeline Context
-- Active production entry: [`src/archpipe/concept/villa_render.py:180`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L180)
-- Current status: `ASSUMED` in [`docs/material-basis.md:103`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/material-basis.md#L103) (fixed from `l0084` pale tan defect).
+- Active production entry: [`src/archpipe/concept/villa_render.py:180`](../src/archpipe/concept/villa_render.py#L180)
+- Current status: `ASSUMED` in [`docs/material-basis.md:103`](material-basis.md#L103) (fixed from `l0084` pale tan defect).
 - Active parameter values: Base color RGB `[0.10, 0.09, 0.08]`, $\rho = 0.09$, $\sigma = 0.35$.
 
 #### Cards Found
@@ -206,7 +206,7 @@ Retain the verified active production parameters $\tau = 0.70$ and $\eta = 1.50$
   - *Quoted Source Text*: `"In the paint industry, measurements of the specular gloss are made according to International Standard ISO 2813... This standard is essentially the same as ASTM D523 although differently drafted."`
 
 #### Recommendation
-Retain the active parameters $\rho = 0.09$ and $\sigma = 0.35$ in [`src/archpipe/concept/villa_render.py:180`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py#L180), and upgrade status from `ASSUMED` to `VERIFIED` citing Qualanod C34 colorimetry and ISO 2813 satin gloss.
+Retain the active parameters $\rho = 0.09$ and $\sigma = 0.35$ in [`src/archpipe/concept/villa_render.py:180`](../src/archpipe/concept/villa_render.py#L180), and upgrade status from `ASSUMED` to `VERIFIED` citing Qualanod C34 colorimetry and ISO 2813 satin gloss.
 
 ---
 
@@ -243,10 +243,10 @@ This negative result is documented in Card `brass-cut-sheet` (`knowledge/c7-opti
 
 ### Impact on Pipeline Defect Baseline
 
-When these verified cards are integrated into [`src/archpipe/concept/villa_render.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/villa_render.py) and [`src/archpipe/concept/revit_spec.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/concept/revit_spec.py) in Phase 3:
+When these verified cards are integrated into [`src/archpipe/concept/villa_render.py`](../src/archpipe/concept/villa_render.py) and [`src/archpipe/concept/revit_spec.py`](../src/archpipe/concept/revit_spec.py) in Phase 3:
 1. Finding 1 (`brass` lacking alloy sheet) will be resolved by binding to Card `brass-specular-reflectance` (Querry 1985).
 2. Finding 2 (`glass-guard` transmittance/IOR unstated) will be resolved by binding to Cards `glass-guard-transmittance` and `glass-guard-refractive-index` (Pilkington Optilam / EN 410 / EN 572-1).
-3. The baseline count in [`tests/fixtures/c7_known_findings.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/c7_known_findings.json) will reduce from 2 to 0 known findings.
+3. The baseline count in [`tests/fixtures/c7_known_findings.json`](../tests/fixtures/c7_known_findings.json) will reduce from 2 to 0 known findings.
 
 ## Lead review (2026-10-08): not usable as verified basis
 

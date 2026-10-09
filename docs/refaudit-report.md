@@ -32,7 +32,7 @@ The manual audit demonstrated the need for an automated, fail-closed AST tool to
 
 ## Implementation Architecture
 
-### 1. Pure Python Engine: [src/archpipe/refactor_audit.py](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/refactor_audit.py)
+### 1. Pure Python Engine: [src/archpipe/refactor_audit.py](../src/archpipe/refactor_audit.py)
 
 The core analysis function `audit_source(old_src: str, new_src: str, path: str = "", allowed: Any = None, removals_only: bool = False) -> list[Finding]` operates purely in Python without invoking git or shell commands:
 - **Scope Extraction:** Traverses AST definitions to identify lexical scopes (`<module>`, functions, methods, and nested functions).
@@ -43,7 +43,7 @@ The core analysis function `audit_source(old_src: str, new_src: str, path: str =
 - **Allowlist Mechanism:** Allows intentional removals declared via `{path: [names]}` or `{path: {name: reason}}`. Every intentional removal strictly requires a non-empty reason; entries without a justification fail closed by raising `ValueError`.
 - **Syntax Error Handling:** Invalid Python syntax raises `SyntaxError`.
 
-### 2. CLI Tool: [scripts/refactor_audit.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/refactor_audit.py)
+### 2. CLI Tool: [scripts/refactor_audit.py](../scripts/refactor_audit.py)
 
 A thin CLI script that integrates with git and project execution preflight:
 - Preflight enforcement using `project_context(ROOT, Path(__file__).resolve(), "refactor-audit")`.
@@ -53,7 +53,7 @@ A thin CLI script that integrates with git and project execution preflight:
 - Fails closed with exit code 2 if inputs are unreadable, allowlists are invalid, or preflight checks fail.
 - Exits with 0 when all changes are verified behaviour-preserving or legitimately allowed.
 
-### 3. Guard Registry Integration: [src/archpipe/guard_registry.py](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py)
+### 3. Guard Registry Integration: [src/archpipe/guard_registry.py](../src/archpipe/guard_registry.py)
 
 Registered `refactor_silent_deletion` under Tier 2 controls:
 - Adapter function `check_refactor_silent_deletion` calls `refactor_audit.audit_source` directly, satisfying the meta-guard requiring calls to production modules.
@@ -62,7 +62,7 @@ Registered `refactor_silent_deletion` under Tier 2 controls:
 
 ## Verification Proofs and Frozen Fixtures
 
-Test suite [tests/test_refactor_audit.py](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_refactor_audit.py) freezes the real incident cases by value and tests sibling classes:
+Test suite [tests/test_refactor_audit.py](../tests/test_refactor_audit.py) freezes the real incident cases by value and tests sibling classes:
 1. `test_real_defect_compare_lux_finds_dropped_assignment_and_call`: Verifies that dropping `rendered = json.loads(...)` from `compare_lux.py` produces exactly one finding naming `rendered` and `json.loads`.
 2. `test_real_harmless_case_demo_bedroom_lighting_is_quiet`: Verifies that moving and renaming `IES = ph.revit_ies_dir()` into `main()` as `ies = ph.revit_ies_dir()` produces 0 removal findings.
 3. `test_sibling_translated_defect_fires`: Validates a translated defect where `processed = parser.parse(...)` was deleted.
@@ -73,13 +73,13 @@ Test suite [tests/test_refactor_audit.py](file:///C:/Users/mmbka/arch-pipeline-a
 8. `test_unparsable_source_raises`: Confirms unparsable syntax raises `SyntaxError`.
 9. `test_scope_disappeared_reported`: Confirms deleted function scopes are flagged as removals.
 
-In addition, [tests/test_guard_registry.py](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_guard_registry.py) includes `test_refactor_silent_deletion_guard_execution` verifying real firing and clean quietness.
+In addition, [tests/test_guard_registry.py](../tests/test_guard_registry.py) includes `test_refactor_silent_deletion_guard_execution` verifying real firing and clean quietness.
 
 ## Operational Rules and Learnings Updates
 
-1. **Operating Rule Added:** [docs/ops/agent-dispatch.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/ops/agent-dispatch.md) updated with Section 5 ("Behaviour-Preserving Refactor Audit") requiring:
+1. **Operating Rule Added:** [docs/ops/agent-dispatch.md](ops/agent-dispatch.md) updated with Section 5 ("Behaviour-Preserving Refactor Audit") requiring:
    > "after any refactor declared behaviour-preserving, run `scripts/refactor_audit.py --base <base>`; every removal must be allowed with a reason"
-2. **Learnings Entry Added:** [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md) updated with entry `refactor-silent-deletion` documenting the 2026-10-07 incident, root cause, escape mechanism, control tiers, proofs, and guard registration.
+2. **Learnings Entry Added:** [docs/LEARNINGS.md](LEARNINGS.md) updated with entry `refactor-silent-deletion` documenting the 2026-10-07 incident, root cause, escape mechanism, control tiers, proofs, and guard registration.
 
 ## Files Changed
 

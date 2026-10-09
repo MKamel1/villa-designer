@@ -28,7 +28,7 @@ This document provides a comprehensive inventory of luminaire definitions across
 
 # Overview and Authority
 
-In accordance with the Class C5 rule established in [docs/lessons-audit.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/lessons-audit.md), "One fixture record owns photometry, emitter, housing and mount." Historical defects across the project (`l0025`, `l0026`, `l0074`, `l0080`, `l0090`, `l0095`, `l0096`, `l0119`, `l0123`, `l0606`, `l0610`, `l0650`, `l0656`, `l0874`) stemmed from architectural disconnects between:
+In accordance with the Class C5 rule established in [docs/lessons-audit.md](lessons-audit.md), "One fixture record owns photometry, emitter, housing and mount." Historical defects across the project (`l0025`, `l0026`, `l0074`, `l0080`, `l0090`, `l0095`, `l0096`, `l0119`, `l0123`, `l0606`, `l0610`, `l0650`, `l0656`, `l0874`) stemmed from architectural disconnects between:
 1. Photometric files declaring flux, distribution, and geometry.
 2. Revit families declaring BIM parameters, insertion datums, and symbolic webs.
 3. Authored layout and spec files declaring nominal heights, targets, and roles.

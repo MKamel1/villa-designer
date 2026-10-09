@@ -24,59 +24,59 @@ The migration follows the established pattern from Batch A and Batch B while adh
 
 The following 13 scripts were migrated:
 
-1. [scripts/villa_daylight.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_daylight.py)
+1. [scripts/villa_daylight.py](../scripts/villa_daylight.py)
    - **Invocation**: Wrapped CLI logic into `main(argv=None) -> int`.
    - **Preflight Parameters**: Declared root `ROOT`, output `LOCAL.parent`, required modules `["numpy", "PIL", "matplotlib"]`.
    - **Dispatch**: Preserved command dispatch dictionary `{"run": run, "fetch": fetch}[cmd]()` retaining standard `KeyError` on invalid commands.
 
-2. [scripts/villa_daylight_finished.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_daylight_finished.py)
+2. [scripts/villa_daylight_finished.py](../scripts/villa_daylight_finished.py)
    - **Invocation**: Wrapped CLI logic into `main(argv=None) -> int`.
    - **Preflight Parameters**: Declared root `ROOT`, output `LOCAL.parent`.
    - **Dispatch**: Preserved command dispatch `{"report": report, "fetch": fetch}[cmd]()` retaining standard `KeyError` on invalid commands and `IndexError` on missing arguments.
 
-3. [scripts/villa_daylight_pdf.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_daylight_pdf.py)
+3. [scripts/villa_daylight_pdf.py](../scripts/villa_daylight_pdf.py)
    - **Invocation**: Updated existing `main(argv=None) -> int` to invoke `project_context` before generating PDF.
    - **Preflight Parameters**: Declared root `ROOT`, inputs `[LOCAL / "report.json"]`, output `LOCAL.parent`, required modules `["matplotlib"]`.
 
-4. [scripts/villa_daylight_summary.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_daylight_summary.py)
+4. [scripts/villa_daylight_summary.py](../scripts/villa_daylight_summary.py)
    - **Invocation**: Updated `main(argv=None) -> int` to invoke `project_context` before loading report files.
    - **Preflight Parameters**: Declared root `ROOT`, inputs `[LUX_JOB / "report.json", DF_JOB / "report.json", OUT / "views" / "stats.json"]`, output `OUT`.
    - **Variables**: Maintained module-level constants `OUT`, `DF_JOB`, `LUX_JOB`, `CASES`, `OPTIONS`, `SUMMARY`.
 
-5. [scripts/villa_env.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_env.py)
+5. [scripts/villa_env.py](../scripts/villa_env.py)
    - **Invocation**: Updated `main(argv=None) -> int` with command validation before dispatch.
    - **Preflight Parameters**: Conditioned on command: `check` verifies `[OUT / "env-spec.json", rb_path]`; `plan` verifies `[OUT / "env-spec.json", OUT / "env-readback.json"]` and requires `["matplotlib"]`; `spec` declares output `OUT`.
    - **Unknown Commands**: Retained `raise SystemExit(__doc__)` for unrecognized commands.
 
-6. [scripts/villa_furnish_build.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_furnish_build.py)
+6. [scripts/villa_furnish_build.py](../scripts/villa_furnish_build.py)
    - **Invocation**: Updated `main(argv=None) -> int` with `project_context` call.
    - **Preflight Parameters**: Declared root `ROOT`, output `OUT`, required modules `["shapely"]`. In non-spec check mode, inputs include `[OUT / "readback.json", OUT / "options-spec.json"]`.
 
-7. [scripts/villa_furnish_pdf.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_furnish_pdf.py)
+7. [scripts/villa_furnish_pdf.py](../scripts/villa_furnish_pdf.py)
    - **Invocation**: Updated `main(argv=None) -> int` to invoke `project_context` before generating floor plans.
    - **Preflight Parameters**: Declared root `ROOT`, output `OUT`, required modules `["matplotlib", "shapely"]`.
 
-8. [scripts/villa_lighting_pdf.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_lighting_pdf.py)
+8. [scripts/villa_lighting_pdf.py](../scripts/villa_lighting_pdf.py)
    - **Invocation**: Updated `main(argv=None) -> int` to invoke `project_context` before rendering lighting layouts.
    - **Preflight Parameters**: Declared root `ROOT`, output `OUT`, required modules `["matplotlib", "shapely"]`.
 
-9. [scripts/villa_option_pdfs.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_option_pdfs.py)
+9. [scripts/villa_option_pdfs.py](../scripts/villa_option_pdfs.py)
    - **Invocation**: Updated `main(argv=None) -> int` with `project_context` call.
    - **Preflight Parameters**: Declared root `ROOT`, output `OPT`, required modules `["numpy", "PIL", "matplotlib"]`. Inputs in PDF generation mode require `[OPT / "readback.json"]`.
 
-10. [scripts/villa_r11_compare.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_r11_compare.py)
+10. [scripts/villa_r11_compare.py](../scripts/villa_r11_compare.py)
     - **Invocation**: Updated `main(argv=None) -> int` to invoke `project_context`.
     - **Preflight Parameters**: Declared root `ROOT`, output `OUT`, required modules `["matplotlib"]`. Input `[SUM]` is declared when present on disk, preserving existing fallback behavior (`(daylight pending)`).
 
-11. [scripts/villa_stair_options.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_stair_options.py)
+11. [scripts/villa_stair_options.py](../scripts/villa_stair_options.py)
     - **Invocation**: Updated `main(argv=None) -> int` to invoke `project_context`.
     - **Preflight Parameters**: Declared root `ROOT`, output `OUT`, required modules `["matplotlib"]`.
 
-12. [scripts/villa_stairs.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_stairs.py)
+12. [scripts/villa_stairs.py](../scripts/villa_stairs.py)
     - **Invocation**: Wrapped CLI execution block into `main(argv=None) -> int`.
     - **Preflight Parameters**: Declared root `ROOT`, output `OUT`. Inputs for `compare` mode require `[OUT / "stairs-readback.json"]`.
 
-13. [scripts/yard_wall_pdf.py](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/yard_wall_pdf.py)
+13. [scripts/yard_wall_pdf.py](../scripts/yard_wall_pdf.py)
     - **Invocation**: Updated `main(argv=None) -> int` to invoke `project_context`.
     - **Preflight Parameters**: Declared root `ROOT`, inputs `[DIR / "yard-wall-readback.json"]`, output `DIR`, required modules `["numpy", "PIL", "matplotlib"]`.
 
@@ -84,7 +84,7 @@ The following 13 scripts were migrated:
 
 ## Defect Controls and Verification Proofs
 
-Four proving tests were added to [tests/test_execution_context.py](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_execution_context.py):
+Four proving tests were added to [tests/test_execution_context.py](../tests/test_execution_context.py):
 
 1. **`test_batch_c_scripts_call_preflight_in_main_and_not_at_module_top_level`**:
    - Parses the abstract syntax tree of all 13 Batch C scripts.
@@ -108,10 +108,10 @@ Four proving tests were added to [tests/test_execution_context.py](file:///C:/Us
 
 ## Documentation Updates
 
-- [docs/execution-context.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/execution-context.md):
+- [docs/execution-context.md](execution-context.md):
   - Updated the inventory table rows for all 13 Batch C scripts from `Phase 2: no shared preflight` to `Shared: ...`.
   - Added section `### Completed Phase 2 item: Phase 2 Batch C entry points`.
-- [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md):
+- [docs/LEARNINGS.md](LEARNINGS.md):
   - Appended the Phase 2 Batch C summary line under the existing `### execution-context-wrong-interpreter — interpreter environment, not just version` entry without creating a duplicate section.
 
 ## Changed Files List
