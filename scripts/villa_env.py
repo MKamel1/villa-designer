@@ -175,8 +175,19 @@ def main(argv=None) -> int:
         print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
         return 2
     if cmd == "spec":
-        print(V.write(OUT / "env-spec.json"))
-        return 0
+        res_path = V.write(OUT / "env-spec.json")
+        print(res_path)
+        from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+        stage_record = OUT / "villa-env-spec.stage-result.json"
+        write_stage_result(
+            "villa-env-spec",
+            record_path=stage_record,
+            inputs=[],
+            outputs=[OUT / "env-spec.json"],
+            exit_code=0,
+            metadata={"passed": True},
+        )
+        return enforce_clean_verdict({"passed": True}, exit_code=1)
     if cmd == "check":                   # check [--readback <path>]: the default is out/villa/env-readback.json
         rb = None
         if "--readback" in argv:
@@ -187,10 +198,31 @@ def main(argv=None) -> int:
         for b in bad:
             print("FAIL", b)
         print("ENV CHECK:", "PASS" if not bad else "%d FAIL" % len(bad))
-        return 1 if bad else 0
+        from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+        stage_record = OUT / "villa-env-check.stage-result.json"
+        write_stage_result(
+            "villa-env-check",
+            record_path=stage_record,
+            inputs=[p for p in inputs if p.is_file()],
+            outputs=[],
+            exit_code=1 if bad else 0,
+            metadata={"failures": bad, "passed": not bool(bad)},
+        )
+        return enforce_clean_verdict({"passed": not bool(bad), "failures": bad}, exit_code=1)
     if cmd == "plan":
-        print(plan())
-        return 0
+        plan_pdf = plan()
+        print(plan_pdf)
+        from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+        stage_record = OUT / "villa-env-plan.stage-result.json"
+        write_stage_result(
+            "villa-env-plan",
+            record_path=stage_record,
+            inputs=[p for p in inputs if p.is_file()],
+            outputs=[p for p in [OUT / "env-site-plan.pdf", OUT / "env-site-plan.png"] if p.is_file()],
+            exit_code=0,
+            metadata={"passed": True},
+        )
+        return enforce_clean_verdict({"passed": True}, exit_code=1)
     raise SystemExit(__doc__)
 
 

@@ -87,7 +87,33 @@ def main(argv=None) -> int:
     lines += [f"| {s_} | {w} | {h} |" for s_, w, h in MISSING] + [""]
     save_text(out / "README.md", "\n".join(lines))
     print(f"  handoff: {out.relative_to(ROOT)} ({len(findings)} findings, {len(s['rooms'])} rooms)")
-    return 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = out / "handoff.stage-result.json"
+    outputs = [
+        out / "quantities.json",
+        out / "model.ifc",
+        out / "findings.json",
+        out / "README.md",
+        *[out / f"{k}.csv" for k in s.keys()],
+    ]
+    inputs = [p for p in [a.spec, tfile if (a.thermal_label and tfile.is_file()) else None] if p is not None and p.is_file()]
+    write_stage_result(
+        "handoff",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=outputs,
+        exit_code=0,
+        metadata={
+            "package": a.name,
+            "findings_count": len(findings),
+            "rooms_count": len(s.get("rooms", [])),
+            "passed": True,
+        },
+    )
+    return enforce_clean_verdict(
+        {"passed": True, "findings": len(findings), "rooms": len(s.get("rooms", []))},
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":
