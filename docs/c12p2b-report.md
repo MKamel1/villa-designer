@@ -28,7 +28,7 @@ executive_summary: >
 # Phase 2 Batch 2 Migration Report: Evidence Status Class (C12)
 
 ## Executive Summary
-Phase 2 Batch 2 connects two authoritative call sites to the single authority of [`src/archpipe/evidence.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/evidence.py):
+Phase 2 Batch 2 connects two authoritative call sites to the single authority of [`src/archpipe/evidence.py`](../src/archpipe/evidence.py):
 - `knowledge_index.py`: PDF sequence labels disagreeing with printed page numbers are detected using `check_page_locator` via a new sibling function `page_label_findings()` without storing state on function or document objects and without mutating the public return type of `page_labels()`. Disagreements are recorded in the index report dictionary in `build()` without altering the SQLite schema.
 - `guidance.py`: Model review scope is routed through `EvidenceRecord.apply_to` so room-scoped model results cannot silently widen to dwelling scope (lesson l0020). Existing public signature and return shapes are preserved.
 
@@ -39,18 +39,18 @@ All existing public signatures, return types, and schemas were preserved.
 ## Files Changed
 
 Only the following files were modified or created in this worktree:
-1. [`src/archpipe/knowledge_index.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/knowledge_index.py)
-2. [`src/archpipe/guidance.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/guidance.py)
-3. [`tests/test_c12_phase2b.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_c12_phase2b.py)
-4. [`docs/evidence-status.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/evidence-status.md)
-5. [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/LEARNINGS.md)
-6. [`docs/c12p2b-report.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/c12p2b-report.md)
+1. [`src/archpipe/knowledge_index.py`](../src/archpipe/knowledge_index.py)
+2. [`src/archpipe/guidance.py`](../src/archpipe/guidance.py)
+3. [`tests/test_c12_phase2b.py`](../tests/test_c12_phase2b.py)
+4. [`docs/evidence-status.md`](evidence-status.md)
+5. [`docs/LEARNINGS.md`](LEARNINGS.md)
+6. [`docs/c12p2b-report.md`](c12p2b-report.md)
 
 ---
 
 ## Call Site Migrations and Invariants
 
-### Site 1: [`src/archpipe/knowledge_index.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/knowledge_index.py) `page_label_findings()` and `build()`
+### Site 1: [`src/archpipe/knowledge_index.py`](../src/archpipe/knowledge_index.py) `page_label_findings()` and `build()`
 - **Context & Defect**: In lesson `l0189`, Building Construction Illustrated's PDF page labels were plain sequence numbers (`191` where the page prints `5.45`). Trusting PDF labels caused citation errors. A prior attempt in Batch 1 was rejected because it stored hidden state on `page_labels.flags` and `doc.page_label_flags` and re-implemented page-number detection.
 - **Implementation**:
   - Maintained `page_labels(doc, texts)` return signature completely untouched (`tuple[list[str], str]`).
@@ -61,13 +61,13 @@ Only the following files were modified or created in this worktree:
   - The SQLite database table `books` has a fixed DDL schema: `(id, title, edition, file, kind, pages, label_basis, sha256)`. Adding a column would mutate database schema.
   - Failing closed (raising an exception) during `build()` would completely block indexing of books like Building Construction Illustrated where sequence-number PDF labels exist but candidate agreement successfully resolves printed chapter-page numbers.
   - Therefore, recording `label_findings` count in the index build report dictionary (`report[key]["label_findings"]`) was selected: it preserves schema integrity, keeps indexing functional for disambiguated books, and records finding counts transparently.
-- **Tests**: [`tests/test_c12_phase2b.py::TestKnowledgeIndexPageLabelFindings`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_c12_phase2b.py)
+- **Tests**: [`tests/test_c12_phase2b.py::TestKnowledgeIndexPageLabelFindings`](../tests/test_c12_phase2b.py)
   - `test_l0189_real_recorded_failure_flagged`: Frozen sequence number `191` vs printed `5.45` from Building Construction Illustrated is flagged with `check_page_locator` result citing `l0189`, while `page_labels` returns `(labels, basis)` unchanged and stores no state on function or document objects.
   - `test_clean_input_stays_quiet`: Document where PDF labels match printed pages (`17`) returns 0 findings.
   - `test_sibling_failure_flagged`: Sibling sequence label `42` vs printed `3.10` is flagged.
   - `test_schema_preservation_and_record_findings`: Proves `books` SQLite schema is unmodified.
 
-### Site 2: [`src/archpipe/guidance.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/guidance.py) `review_stage()`
+### Site 2: [`src/archpipe/guidance.py`](../src/archpipe/guidance.py) `review_stage()`
 - **Context & Defect**: In lesson `l0020`, an isolated room is not a dwelling. A pass in one room (e.g. bedroom layout) cannot be silently applied at dwelling scope. In `guidance.py` lines 320-327, `review_model` was called with `scope=project.get('scope', 'dwelling')` as a plain string, allowing room-scoped models to be evaluated at dwelling scope without enforcement.
 - **Implementation**:
   - Derived `model_scope` from `model_record.get('scope') or model_data.get('scope') or ('room' if len(model_data.get('rooms', [])) <= 1 else 'dwelling')`.
@@ -80,8 +80,8 @@ Only the following files were modified or created in this worktree:
   - Function signature `review_stage(stage, project_path, root)` is unchanged.
   - Return structure of `review_stage()` is identical.
   - Shape of diagnostic check `checks.append({'check': 'legacy_geometry', 'status': 'diagnostic', 'result': result})` is preserved.
-- **Tests**: [`tests/test_c12_phase2b.py::TestGuidanceReviewStageScopeEvidence`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_c12_phase2b.py)
-  - `test_l0020_real_recorded_failure_raises_scope_widening`: Real bedroom model extract ([`tests/fixtures/bedroom-from-revit.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/fixtures/bedroom-from-revit.json)) evaluated under `project['scope'] = 'dwelling'` fails closed with `ScopeWideningError` citing `l0020`.
+- **Tests**: [`tests/test_c12_phase2b.py::TestGuidanceReviewStageScopeEvidence`](../tests/test_c12_phase2b.py)
+  - `test_l0020_real_recorded_failure_raises_scope_widening`: Real bedroom model extract ([`tests/fixtures/bedroom-from-revit.json`](../tests/fixtures/bedroom-from-revit.json)) evaluated under `project['scope'] = 'dwelling'` fails closed with `ScopeWideningError` citing `l0020`.
   - `test_clean_room_scope_stays_quiet`: Real bedroom model extract evaluated under `project['scope'] = 'room'` succeeds quietly with diagnostic legacy geometry check intact.
   - `test_sibling_scope_widening_fails_closed`: Sibling explicit `scope: room:bedroom` applied to dwelling fails closed with `ScopeWideningError`.
 
@@ -91,7 +91,7 @@ Only the following files were modified or created in this worktree:
 
 An audit of all callers of `review_stage` across the repository was conducted:
 1. `tests/test_guidance.py::test_each_stage_has_usable_evidence_and_methods`:
-   - Runs `review_stage(stage)` for stages 0-7 against [`knowledge/projects/villa-pilot.json`](file:///C:/Users/mmbka/arch-pipeline-agy2/knowledge/projects/villa-pilot.json).
+   - Runs `review_stage(stage)` for stages 0-7 against [`knowledge/projects/villa-pilot.json`](../knowledge/projects/villa-pilot.json).
    - In `villa-pilot.json`, `project.get('model')` is empty (`{}`).
    - Line 268 sets `model_fresh = False`, so the model review block (`if model_fresh:`) is skipped. Does not raise.
 2. `tests/test_guidance.py::test_cached_presentation_rechecks_image_and_requirement_content`:
@@ -105,7 +105,7 @@ An audit of all callers of `review_stage` across the repository was conducted:
 
 ## Non-Migrated Sites and Scope Boundaries
 
-The following call sites from [`docs/evidence-status.md`](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/evidence-status.md) remain unmigrated or excluded per instructions:
+The following call sites from [`docs/evidence-status.md`](evidence-status.md) remain unmigrated or excluded per instructions:
 1. `src/archpipe/rules.py` `Rule` dataclass: Changes public dataclass types.
 2. `src/archpipe/guidance.py` `evidence_status()` and `numerical_target()`: Changes public dictionary shapes.
 3. `src/archpipe/concept/*`: Reserved for concept generator migrations.
@@ -117,8 +117,8 @@ The following call sites from [`docs/evidence-status.md`](file:///C:/Users/mmbka
 
 | Lesson ID | Module / Call Site | Defect Behavior | Enforcement Mechanism |
 |---|---|---|---|
-| `l0189` | [`src/archpipe/knowledge_index.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/knowledge_index.py) `page_label_findings()` | PDF page labels were plain sequence numbers (`191` where page prints `5.45`), causing false citations | Sibling `page_label_findings()` flags sequence mismatches with `check_page_locator`, keeping `page_labels` return type unchanged and recording counts in `build()` report |
-| `l0020` | [`src/archpipe/guidance.py`](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/guidance.py) `review_stage()` | Room-scoped capability examples silently applied at dwelling scope, bypassing whole-dwelling checks | Model review scope is routed through `EvidenceRecord.apply_to()`, raising `ScopeWideningError` fail-closed on un-rescoped dwelling application |
+| `l0189` | [`src/archpipe/knowledge_index.py`](../src/archpipe/knowledge_index.py) `page_label_findings()` | PDF page labels were plain sequence numbers (`191` where page prints `5.45`), causing false citations | Sibling `page_label_findings()` flags sequence mismatches with `check_page_locator`, keeping `page_labels` return type unchanged and recording counts in `build()` report |
+| `l0020` | [`src/archpipe/guidance.py`](../src/archpipe/guidance.py) `review_stage()` | Room-scoped capability examples silently applied at dwelling scope, bypassing whole-dwelling checks | Model review scope is routed through `EvidenceRecord.apply_to()`, raising `ScopeWideningError` fail-closed on un-rescoped dwelling application |
 
 ## Lead review (2026-10-09)
 

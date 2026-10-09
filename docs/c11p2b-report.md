@@ -23,7 +23,7 @@ executive_summary: >
 
 ## Executive Summary
 
-Phase 2 Batch 2 migrates the remaining call sites from sections 2 and 3 of [`docs/external-claims.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/external-claims.md) into the centralized external claims defense module [`src/archpipe/external_claims.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/external_claims.py). The migrations eliminate byte sniffing duplication and bypasses in luminaire file identification ([`l0113`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L314)), prevent ingestion and filing of empty payloads or HTML error pages disguised as photometry or BIM assets ([`l0072`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L273), [`l0113`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L314)), gate product verification on cross-source agreement between manufacturer BIM claims and photometric measurements ([`l0118`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L319)), and enforce directory/file non-emptiness validation during 3D asset intake ([`l0072`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L273)). Public function signatures and return types are strictly preserved, no invented thresholds were introduced, and all tests execute in temporary folders without network access.
+Phase 2 Batch 2 migrates the remaining call sites from sections 2 and 3 of [`docs/external-claims.md`](external-claims.md) into the centralized external claims defense module [`src/archpipe/external_claims.py`](../src/archpipe/external_claims.py). The migrations eliminate byte sniffing duplication and bypasses in luminaire file identification ([`l0113`](LEARNINGS.md#L314)), prevent ingestion and filing of empty payloads or HTML error pages disguised as photometry or BIM assets ([`l0072`](LEARNINGS.md#L273), [`l0113`](LEARNINGS.md#L314)), gate product verification on cross-source agreement between manufacturer BIM claims and photometric measurements ([`l0118`](LEARNINGS.md#L319)), and enforce directory/file non-emptiness validation during 3D asset intake ([`l0072`](LEARNINGS.md#L273)). Public function signatures and return types are strictly preserved, no invented thresholds were introduced, and all tests execute in temporary folders without network access.
 
 ---
 
@@ -31,12 +31,12 @@ Phase 2 Batch 2 migrates the remaining call sites from sections 2 and 3 of [`doc
 
 Only the following six files were modified or created for this batch:
 
-1. [`src/archpipe/luminaires/library.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py): Delegated `sniff()` to `external_claims.sniff_content` preserving accepted luminaire types; audited incoming payloads in `import_inbox()` via `external_claims.ingest_bytes` attaching provenance records; enforced `external_claims.check_cct_and_watts_agreement` in `verify_product()` when product metadata already records both CCT and power.
-2. [`src/archpipe/asset_intake.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/asset_intake.py): Added `external_claims.check_found_content` verification on downloaded asset folders and model files in `validate_entry()`, failing closed on empty folders or 0-byte models.
-3. [`tests/test_c11_phase2b.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_c11_phase2b.py): New unit test suite with 10 isolated tests verifying all three call sites against frozen historical defects, quiet clean inputs, and sibling mutations.
-4. [`docs/external-claims.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/external-claims.md): Marked the migrated rows in Section 2 (`library.py:sniff`, `library.py:import_inbox`) and Section 3 (`asset_intake.py:validate_entry`) as migrated in Phase 2 Batch 2.
-5. [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md): Appended the Phase 2 Batch 2 migration record under `external-claims-phase1`.
-6. [`docs/c11p2b-report.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/c11p2b-report.md): This report document.
+1. [`src/archpipe/luminaires/library.py`](../src/archpipe/luminaires/library.py): Delegated `sniff()` to `external_claims.sniff_content` preserving accepted luminaire types; audited incoming payloads in `import_inbox()` via `external_claims.ingest_bytes` attaching provenance records; enforced `external_claims.check_cct_and_watts_agreement` in `verify_product()` when product metadata already records both CCT and power.
+2. [`src/archpipe/asset_intake.py`](../src/archpipe/asset_intake.py): Added `external_claims.check_found_content` verification on downloaded asset folders and model files in `validate_entry()`, failing closed on empty folders or 0-byte models.
+3. [`tests/test_c11_phase2b.py`](../tests/test_c11_phase2b.py): New unit test suite with 10 isolated tests verifying all three call sites against frozen historical defects, quiet clean inputs, and sibling mutations.
+4. [`docs/external-claims.md`](external-claims.md): Marked the migrated rows in Section 2 (`library.py:sniff`, `library.py:import_inbox`) and Section 3 (`asset_intake.py:validate_entry`) as migrated in Phase 2 Batch 2.
+5. [`docs/LEARNINGS.md`](LEARNINGS.md): Appended the Phase 2 Batch 2 migration record under `external-claims-phase1`.
+6. [`docs/c11p2b-report.md`](c11p2b-report.md): This report document.
 
 ---
 
@@ -128,9 +128,9 @@ In accordance with batch boundary rules, the remaining candidate call sites from
 
 | Lesson ID | Quoted Historical Learning | Registered Call-Site Function |
 |---|---|---|
-| [`l0072`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L273) | *"All six props were recorded as downloaded while their folders were empty"* | [`archpipe.luminaires.library.import_inbox`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L203-L295), [`archpipe.asset_intake.validate_entry`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/asset_intake.py#L96-L235) |
-| [`l0113`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L314) | *"Signify served a zip labelled application/json; Revit type catalogues are UTF-16 with a BOM"* | [`archpipe.luminaires.library.sniff`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L122-L137), [`archpipe.luminaires.library.import_inbox`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L203-L295) |
-| [`l0118`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L319) | *"Signify's Revit family says 3200 K and 3 W; its LDT says 3000 K and 23 W"* | [`archpipe.luminaires.library.verify_product`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L313-L370) |
+| [`l0072`](LEARNINGS.md#L273) | *"All six props were recorded as downloaded while their folders were empty"* | [`archpipe.luminaires.library.import_inbox`](../src/archpipe/luminaires/library.py#L203-L295), [`archpipe.asset_intake.validate_entry`](../src/archpipe/asset_intake.py#L96-L235) |
+| [`l0113`](LEARNINGS.md#L314) | *"Signify served a zip labelled application/json; Revit type catalogues are UTF-16 with a BOM"* | [`archpipe.luminaires.library.sniff`](../src/archpipe/luminaires/library.py#L122-L137), [`archpipe.luminaires.library.import_inbox`](../src/archpipe/luminaires/library.py#L203-L295) |
+| [`l0118`](LEARNINGS.md#L319) | *"Signify's Revit family says 3200 K and 3 W; its LDT says 3000 K and 23 W"* | [`archpipe.luminaires.library.verify_product`](../src/archpipe/luminaires/library.py#L313-L370) |
 
 ## Lead review (2026-10-08)
 

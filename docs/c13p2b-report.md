@@ -65,26 +65,26 @@ summary: |
 
 # Executive Summary
 
-This report documents the completion of Serialization Class (C13), Phase 2, Batch 2. The ten IronPython 2.7 direct report writers in `revit/` listed in [docs/serialization-boundary.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/serialization-boundary.md) (`build_bedroom.py`, `diag_context.py`, `dump_mcp_tools.py`, `export_views.py`, `place_families_test.py`, `probe.py`, `probe_fixture_drop.py`, `probe_fixture_geometry.py`, `probe_product_family.py`, and `probe_villa_inventory.py`) were migrated to route all report writes through `safe_io.save_json`. Python 2.7 syntax compatibility (no f-strings, no type annotations, no pathlib imports) was strictly preserved across all ten files, alongside specialized serialization handling (`default=str` with ASCII escaping in `probe_product_family.py`, and `_clean` via `jsonsafe.clean` in `probe_villa_inventory.py`), with native Revit model saves and PDF exports left untouched for later staged publication.
+This report documents the completion of Serialization Class (C13), Phase 2, Batch 2. The ten IronPython 2.7 direct report writers in `revit/` listed in [docs/serialization-boundary.md](serialization-boundary.md) (`build_bedroom.py`, `diag_context.py`, `dump_mcp_tools.py`, `export_views.py`, `place_families_test.py`, `probe.py`, `probe_fixture_drop.py`, `probe_fixture_geometry.py`, `probe_product_family.py`, and `probe_villa_inventory.py`) were migrated to route all report writes through `safe_io.save_json`. Python 2.7 syntax compatibility (no f-strings, no type annotations, no pathlib imports) was strictly preserved across all ten files, alongside specialized serialization handling (`default=str` with ASCII escaping in `probe_product_family.py`, and `_clean` via `jsonsafe.clean` in `probe_villa_inventory.py`), with native Revit model saves and PDF exports left untouched for later staged publication.
 
 # Files Actually Changed
 
 The following files were modified or created in this batch:
 
-1. [revit/build_bedroom.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/build_bedroom.py)
-2. [revit/diag_context.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/diag_context.py)
-3. [revit/dump_mcp_tools.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/dump_mcp_tools.py)
-4. [revit/export_views.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/export_views.py)
-5. [revit/place_families_test.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/place_families_test.py)
-6. [revit/probe.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/probe.py)
-7. [revit/probe_fixture_drop.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/probe_fixture_drop.py)
-8. [revit/probe_fixture_geometry.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/probe_fixture_geometry.py)
-9. [revit/probe_product_family.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/probe_product_family.py)
-10. [revit/probe_villa_inventory.py](file:///C:/Users/mmbka/arch-pipeline-agy2/revit/probe_villa_inventory.py)
-11. [tests/test_c13_phase2b.py](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_c13_phase2b.py)
-12. [docs/serialization-boundary.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/serialization-boundary.md)
-13. [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/LEARNINGS.md)
-14. [docs/c13p2b-report.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/c13p2b-report.md)
+1. [revit/build_bedroom.py](../revit/build_bedroom.py)
+2. [revit/diag_context.py](../revit/diag_context.py)
+3. [revit/dump_mcp_tools.py](../revit/dump_mcp_tools.py)
+4. [revit/export_views.py](../revit/export_views.py)
+5. [revit/place_families_test.py](../revit/place_families_test.py)
+6. [revit/probe.py](../revit/probe.py)
+7. [revit/probe_fixture_drop.py](../revit/probe_fixture_drop.py)
+8. [revit/probe_fixture_geometry.py](../revit/probe_fixture_geometry.py)
+9. [revit/probe_product_family.py](../revit/probe_product_family.py)
+10. [revit/probe_villa_inventory.py](../revit/probe_villa_inventory.py)
+11. [tests/test_c13_phase2b.py](../tests/test_c13_phase2b.py)
+12. [docs/serialization-boundary.md](serialization-boundary.md)
+13. [docs/LEARNINGS.md](LEARNINGS.md)
+14. [docs/c13p2b-report.md](c13p2b-report.md)
 
 # Per-File Migration Details
 
@@ -275,7 +275,7 @@ Across all ten migrated files, replacing direct open/json.dump/fh.write calls wi
 
 # Verification and Proofs
 
-Tests were added in [tests/test_c13_phase2b.py](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_c13_phase2b.py), runnable under CPython without Revit:
+Tests were added in [tests/test_c13_phase2b.py](../tests/test_c13_phase2b.py), runnable under CPython without Revit:
 
 1. **Proof (a) - AST Scan (`test_ast_no_unlisted_direct_writes`)**:
    Parses the abstract syntax trees of all ten files. Verifies that no `.write_text()`, `.write_bytes()`, `open(mode="w"/"a"/"x")`, `.open(mode="w"/"a"/"x")`, `json.dump()`, `codecs.open()`, or `shutil.copy*()` calls exist outside `EXCEPTIONS`. Since all ten direct report writes were migrated, `EXCEPTIONS` is verified empty with zero remaining direct report writes.
@@ -295,7 +295,7 @@ Tests were added in [tests/test_c13_phase2b.py](file:///C:/Users/mmbka/arch-pipe
 # Lessons to Register
 
 - **Lessons to Register**: `none`
-  *(The existing registry entry `serialization-file-boundary-phase1` in [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/LEARNINGS.md) was updated with an appended line recording the Phase 2 Batch 2 migration of the ten IronPython 2.7 direct report writers in `revit/`, preserving historical lessons for sibling components without modifying `guard_registry.py`).*
+  *(The existing registry entry `serialization-file-boundary-phase1` in [docs/LEARNINGS.md](LEARNINGS.md) was updated with an appended line recording the Phase 2 Batch 2 migration of the ten IronPython 2.7 direct report writers in `revit/`, preserving historical lessons for sibling components without modifying `guard_registry.py`).*
 
 ## Lead review (2026-10-08)
 
