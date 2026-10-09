@@ -238,8 +238,17 @@ class GeometryTopology:
                                             'physical-part', None, 'physical_part.Part.support'))
             items = tuple(items) + tuple(scene.get('props', ()))
         for item in items:
-            if 'asset' in item:
+            if 'asset' in item and item['asset'] in landscape.PROP_BOUNDS:
                 bb = landscape.prop_world_box(item['asset'], item['position'], item.get('rotation_deg', [0,0,0]), item.get('scale', 1.0))
+            elif 'asset' in item:
+                # Assets known only to the route-geometry record (no PROP_BOUNDS
+                # entry) take their extent from the same placed walking triangles
+                # route collision uses (integration review 2026-10-08).
+                # An asset in neither table fails closed in recorded_geometry
+                # (ValueError naming the generator remedy).
+                from .concept.route_geometry import prop_triangles
+                placed = prop_triangles(item).reshape(-1, 3)
+                bb = (*placed.min(axis=0), *placed.max(axis=0))
             elif 'faces' in item:
                 bb = bounds_of(item['faces'])
             else:

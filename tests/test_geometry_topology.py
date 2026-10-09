@@ -137,8 +137,10 @@ class RecordsAndQueries(unittest.TestCase):
         item['rotation_deg']=[10,0,0]
         with self.assertRaisesRegex(ValueError,'tilted'):
             landscape_route_findings([item],{'far':(100,100,101,101)})
-        with self.assertRaises(KeyError):
-            Topology.from_inputs(items=[dict(item,asset='unmeasured-asset')])
+        # Unknown to PROP_BOUNDS and to the tracked route record: fails closed
+        # (the record's ValueError carries the generator remedy).
+        with self.assertRaises((KeyError, ValueError)):
+            Topology.from_inputs(items=[dict(item,asset='unmeasured-asset',rotation_deg=[0,0,0])])
         with self.assertRaisesRegex(ValueError,'finite'):
             bounds_of([[[float('nan'),0,0],[1,0,0],[0,1,0]]])
 
