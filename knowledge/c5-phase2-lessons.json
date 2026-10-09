@@ -1,0 +1,38 @@
+{
+  "l0025-third-party-families": {
+    "status": "open",
+    "reason": "LEARNINGS.md:225: \"Third-party families may override photometry even when writes appear successful\". No frozen parameter-write values or saved family read-back accompany this line. The villa records and native adapter cannot prove a third-party family retained its light definition; live Windows family save/read-back remains required."
+  },
+  "l0026-blender-ies-azimuth": {
+    "status": "open",
+    "reason": "LEARNINGS.md:226: \"Blender IES azimuth differs, finite sphere sizing can wash out a strip light, coarse angular interpolation biases narrow beams\". Record paths and datum do not control Cycles angular interpolation, orientation or finite source transport. No by-value angular failure measurements recovered in this scoped report; calibration remains a renderer probe."
+  },
+  "l0074-nishita-sky-units": {
+    "status": "open",
+    "reason": "LEARNINGS.md:274: \"Nishita sky units and sun direction were unknown\"; recorded correction \"x800 scale to lux, measured at three elevations\". A fixture record cannot govern a sky source. Keep calibrate_sky.py; no new C5 record guard claimed."
+  },
+  "l0080-lamps-rendered-far": {
+    "status": "open",
+    "reason": "LEARNINGS.md:280: \"2700 K came out as (1, 0.65, 0.34), not (1, 0.39, 0.10)\". The immutable record supplies 2700 K consistently but the real failure is display-sRGB interpreted as linear light downstream. build_scene.kelvin_to_rgb and the existing Planckian-locus verifier control that conversion; CCT agreement alone does not reproduce or retire this failure."
+  },
+  "l0090-window-glass-passed": {
+    "status": "open",
+    "reason": "LEARNINGS.md:290: \"Window glass passed 100% of sunlight; the model says 85%\". Lamp records do not own glass BSDF or two-face optical transmission. Existing architectural_glass transport and a real slab probe remain necessary."
+  },
+  "l0606-first-drafts-failed": {
+    "status": "open",
+    "reason": "LEARNINGS.md:808-810: \"Sconces alone gave 87-142 lx on the basin counters (300 needed)\". The unified source retains the task downlight and all task-plane checks, but neither housing nor photometry identity guarantees task illuminance. Exact historical scene values are not available here; the existing current-design removal test remains, not a fabricated frozen 87-142 reproduction."
+  },
+  "l0650-scene-lux-measurement": {
+    "status": "open",
+    "reason": "LEARNINGS.md:852-855: \"0 lx on every surface\"; \"25 mm above the sensor\" and \"100 mm near clip\"; fixed island \"1473 vs 1419 lx\". Fixture datums do not control sensor-camera clipping. This needs the actual Blender measurement camera and depth test, not a record mismatch surrogate."
+  },
+  "l0656-glass-verified": {
+    "status": "open",
+    "reason": "LEARNINGS.md:858-859: \"single-sheet window transmits 0.700 (stated 0.70), a closed slab 0.850 (stated 0.85)\". These are successful optical probe readings, not a frozen failure; no invented failure is registered. Fixture unification cannot control glazing transport."
+  },
+  "l0874-per-point-recomputation": {
+    "status": "open",
+    "reason": "LEARNINGS.md:1076-1079: \"110x slower\"; \"334k calls, 171 of 180 s\", corrected \"1.6 s\". The cause is room-cluster recomputation per grid sample, independent of record ownership. Preserve check's per-room cluster cache and per-kind photometry cache. A genuine historical workload/timing harness remains open; a call-count mock is not the recorded 180 s failure."
+  }
+}
