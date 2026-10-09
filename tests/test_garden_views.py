@@ -142,7 +142,9 @@ class PresentationDecisions(unittest.TestCase):
         # G4e replaced the Rhapis and Aspidistra appearances; G4f rebuilt the
         # nine Aspidistra as the oval loose fountain. Lead accepted the G4f
         # neutral previews (out/garden-g4f/after-oval-*) on 2026-10-08.
-        reviewed = '172370e5b14a4711d4f11a4036dc44232596c0c8749ccb9a387abb46e24bc838'
+        # C5 phase 2 (2026-10-08) replaced the two vanity sconce pairs with
+        # over-mirror bars (lead-accepted previews); garden faces unchanged.
+        reviewed = '757fe69adf8afcc32588e6354abb46230fa8c5828775f6b5a29469ff120e62aa'
         data = json.dumps(self.scene['meshes'], sort_keys=True, separators=(',', ':')).encode()
         self.assertEqual(hashlib.sha256(data).hexdigest(), reviewed)
 

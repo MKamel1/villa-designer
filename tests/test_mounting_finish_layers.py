@@ -27,8 +27,17 @@ class FinishLayers(unittest.TestCase):
     def test_real_suppressed_finish_fires_and_clean_scene_stays_quiet(self):
         frozen_ids = json.loads(Path('tests/fixtures/c4i-floating-ids.json').read_text())
         floating = unsupported(self.before)
-        self.assertEqual(len(floating), 51)
-        self.assertEqual({mid for mid,_ in floating}, set(frozen_ids))
+        # C5 phase 2 client decision (2026-10-08): the side sconces in the guest WC
+        # and parents ensuite became one over-mirror bar each, also mounted on the
+        # finished wall face. Exactly those ids change; everything else is the
+        # frozen C4i case.
+        removed = {'bracket-VSCONCE-parents-ensuite-04', 'lamp-SCONCE-guest-wc-04',
+                   'lamp-VSCONCE-parents-ensuite-04'}
+        added = {'body-VANITY-LIN-guest-wc-03', 'lamp-VANITY-LIN-guest-wc-03',
+                 'body-VANITY-LIN-parents-ensuite-04', 'lamp-VANITY-LIN-parents-ensuite-04'}
+        self.assertEqual(len(floating), 52)
+        self.assertEqual({mid for mid,_ in floating}, (set(frozen_ids) - removed) | added)
+        frozen_ids = sorted((set(frozen_ids) - removed) | added)
         failures = surface_findings(self.before)
         failed_ids = {f.split(':')[0] for f in failures}
         self.assertTrue(set(frozen_ids) <= failed_ids, set(frozen_ids)-failed_ids)
