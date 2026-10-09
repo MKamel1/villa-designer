@@ -133,7 +133,35 @@ def main(argv=None) -> int:
             pdf.savefig(fig)
             plt.close(fig)
     print(out)
-    return 0
+    failed_checks = [
+        f"{k}: Radiance {c.get('radiance')} vs {c.get('formula')}"
+        for k, c in val.get("checks", {}).items()
+        if not c.get("pass", False)
+    ]
+    is_fail = rep.get("status") in ("FAIL", "FAILED", "fail") or not val.get("all_pass", True)
+    if is_fail and not failed_checks:
+        failed_checks.append(f"Report status is {rep.get('status')}")
+    bad = len(failed_checks) > 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = LOCAL.parent / "villa-daylight-pdf.stage-result.json"
+    inputs = [p for p in [LOCAL / "report.json"] if p.is_file()]
+    write_stage_result(
+        "villa-daylight-pdf",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[out],
+        exit_code=1 if bad else 0,
+        metadata={
+            "status": rep.get("status"),
+            "all_pass": val.get("all_pass"),
+            "failed_checks": failed_checks,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {"passed": not bad, "failed": failed_checks, "failures": failed_checks},
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":

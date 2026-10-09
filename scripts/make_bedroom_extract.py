@@ -84,12 +84,12 @@ def build(ies_dir: str) -> dict:
     }
 
 
-def main() -> int:
+def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--ies-dir", required=True,
                     help="IES folder path ON THE RENDERING MACHINE")
     ap.add_argument("--out", type=Path, default=Path("out/bedroom.json"))
-    a = ap.parse_args()
+    a = ap.parse_args(argv)
     try:
         project_context(
             ROOT,
@@ -106,7 +106,34 @@ def main() -> int:
     print(f"{a.out}  {len(data['walls'])} walls, {len(data['rooms'])} room, "
           f"{len(data['openings'])} openings, "
           f"{len(data['lighting'])} fixtures")
-    return 0
+    bad = not (data.get("walls") and data.get("rooms") and data.get("lighting"))
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = a.out.parent / "make-bedroom-extract.stage-result.json"
+    inputs = [p for p in [Path(__file__).resolve()] if p.is_file()]
+    write_stage_result(
+        "make-bedroom-extract",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[a.out],
+        exit_code=1 if bad else 0,
+        metadata={
+            "walls": len(data.get("walls", [])),
+            "rooms": len(data.get("rooms", [])),
+            "openings": len(data.get("openings", [])),
+            "lighting": len(data.get("lighting", [])),
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {
+            "passed": not bad,
+            "walls": len(data.get("walls", [])),
+            "rooms": len(data.get("rooms", [])),
+            "lighting": len(data.get("lighting", [])),
+            "failures": ["Empty walls, rooms, or lighting in extract"] if bad else [],
+        },
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":

@@ -122,7 +122,35 @@ def main(argv=None) -> int:
         print(opt, " | ".join("%s DF %.2f sDA %s%% UDI %s/%s/%s noon-Mar %s lx" % (
             k, rs[k].get("df", 0), rs[k].get("sda300"), rs[k].get("udi_lt100"), rs[k].get("udi_useful"),
             rs[k].get("udi_gt2000"), rs[k]["lux"]["0.85"][1] if "lux" in rs[k] else "-") for k in keep))
-    return 0
+    failed_checks = [
+        f"{k}: check failed"
+        for k, c in df.get("validation", {}).get("checks", {}).items()
+        if not c.get("pass", True)
+    ]
+    if df.get("status") in ("FAIL", "FAILED", "fail"):
+        failed_checks.append(f"DF report status is {df.get('status')}")
+    if len(data.get("options", {})) == 0:
+        failed_checks.append("No options processed in summary")
+    bad = len(failed_checks) > 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = SUMMARY.parent / (SUMMARY.stem + ".stage-result.json")
+    inputs = [p for p in [LUX_JOB / "report.json", DF_JOB / "report.json", OUT / "views" / "stats.json"] if p.is_file()]
+    write_stage_result(
+        "villa-daylight-summary",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[SUMMARY],
+        exit_code=1 if bad else 0,
+        metadata={
+            "options": list(data.get("options", {}).keys()),
+            "failed_checks": failed_checks,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {"passed": not bad, "failed": failed_checks, "failures": failed_checks},
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":
