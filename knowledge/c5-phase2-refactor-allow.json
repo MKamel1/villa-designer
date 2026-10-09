@@ -1,0 +1,28 @@
+{
+  "src/archpipe/concept/villa_lighting.py": {
+    "bind_products": "Moved to fixture_record.bind_products, preserving exported files, verified-only binding, generic fallback and one-time binding. Frozen before/unified comparison is exact.",
+    "KINDS": "All 23 declarations moved verbatim to fixture_record.FixtureKind registry; the imported read-only compatibility view retains every requirement.",
+    "PRODUCT_CHOICE": "Four product choices moved verbatim to FixtureKind.product_choice; imported compatibility view remains available.",
+    "_products_bound": "Cache lifetime and flag moved with bind_products to its sole owning module.",
+    "dimmer": "Multiplication is now in fixture_record.record_for; dimmer zero and explicit overrides retain old behavior.",
+    "product": "Record binding replaces both Fixture.lumens and photometry_for local product copies, retaining product priority over fixture overrides.",
+    "k": "The requirement now comes from FixtureKind.spec via record_for/FixtureRecord.photometry rather than duplicated per-consumer reads.",
+    "lm": "Generic flux selection moved unchanged to FixtureRecord.photometry.",
+    "beam": "Generic strip spread and kind beam selection moved unchanged to FixtureRecord.photometry.",
+    "generic_ies": "photometry_for delegates to kind_photometry, which still calls the same villa_lighting.generic_ies in FixtureRecord.photometry.",
+    "ph.load": "Verified photometry still loads in FixtureRecord.photometry; delegation replaces the duplicate branch.",
+    "ph.parse": "Generic photometry still parses in FixtureRecord.photometry; delegation replaces the duplicate branch."
+  },
+  "src/archpipe/concept/villa_render.py": {
+    "products": "Per-fixture immutable record.product replaces the render-local product registry copy.",
+    "k.get": "Globe radius is now housing.radius in the unified kind record; the old fallback was unreachable for these four declared kinds. Exact pre-fix mesh comparison proves equality.",
+    "products.get": "record_for resolves the same binding once per fixture; renderer consumes immutable record.product."
+  },
+  "tests/test_fixture_record.py": {
+    "c5_lessons": "Replace the test-local invented lesson-status dictionary with the explicit source-quoted knowledge/c5-phase2-lessons.json audit. Same nine open lessons are asserted; no false closure.",
+    "proven": "Phase-1 proven-count assertion is redundant; existing real-failure tests stay intact. New test reads actual Phase-2 remaining statuses rather than asserting a hardcoded count."
+  },
+  "tests/test_mounting_scene.py": {
+    "__import__('unittest.mock', fromlist=['patch']).patch.dict": "FixtureKind choices are immutable. This existing missing-depth test replaces the compatibility attribute temporarily with patch.object instead of mutating the read-only mapping; identical NO-DEPTH-RECORD input and UNRESOLVED assertions retained."
+  }
+}

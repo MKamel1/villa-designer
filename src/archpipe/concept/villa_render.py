@@ -1836,33 +1836,34 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     notes.extend(land_notes)
 
     # ---- lights and fixture bodies
-    products = VL.products()
     lights = []
     walls_by_level = {lv: F._walls(RS.build(lay), lv) for lv in ("B", "GF")}
     for f in VL.design(lay):
-        k = VL.KINDS[f.kind]
-        prod = products.get(f.kind)
-        cct = int(prod["cct"]) if prod else k["cct"]
+        record = f.record
+        k = record.definition.spec
+        housing = record.housing
+        prod = dict(record.product) or None
+        cct = record.cct_k
         pinfo = ({"manufacturer": prod["manufacturer"], "code": prod["code"], "generic": False,
                   "substitute": prod["substitute"]} if prod else {"manufacturer": "generic", "code": f.kind,
                                                                   "generic": True})
-        if k["mount"] == "recessed":
-            ies = ("iguzzini/%s.ies" % prod["code"]) if prod else ("generic/%s.ies" % f.kind)
-            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="ies", position=[f.x, f.y, f.z - 0.03],
-                               aim=_unit(f.aim), spin_deg=0.0, ies=ies, lumens=round(f.lumens, 1), cct_k=cct, cri=90,
+        if record.mount == "recessed":
+            ies = record.ies_relative
+            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="ies", position=list(record.render_position),
+                               aim=_unit(f.aim), spin_deg=0.0, ies=ies, lumens=round(record.flux_lm, 1), cct_k=cct, cri=k["cri"],
                                product=pinfo, dimmer=1.0))
-            mesh("fix-" + f.id, "black-metal", disc_down(f.x, f.y, f.z - 0.0015, 0.0415), "fixture", room=f.room,
+            mesh("fix-" + f.id, "black-metal", disc_down(f.x, f.y, f.z + housing["trim_z"], housing["trim_radius"]), "fixture", room=f.room,
                  label="fitting " + f.id, kind="downlight-trim")
             mats.setdefault("lens-%d" % cct, dict(kind="emissive", base_rgb=[1, 1, 1], emission_lm_per_m2=40000.0,
                                                   cct_k=cct, note="visible lens glow (no light contribution)"))
-            mesh("lens-" + f.id, "lens-%d" % cct, disc_down(f.x, f.y, f.z - 0.002, 0.018), "fixture",
+            mesh("lens-" + f.id, "lens-%d" % cct, disc_down(f.x, f.y, f.z + housing["lens_z"], housing["lens_radius"]), "fixture",
                  room=f.room, label="fitting " + f.id,
                  visibility={"camera": True, "glossy": True, "diffuse": False, "shadow": False,
                              "transmission": False}, layer=f.layer, kind="light-lens")
         elif f.kind == "DESK":
-            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="ies", position=[f.x, f.y, f.z - 0.03],
-                               aim=[0.0, 0.0, -1.0], spin_deg=0.0, ies="generic/DESK.ies", lumens=round(f.lumens, 1),
-                               cct_k=cct, cri=90, product=pinfo, dimmer=1.0))
+            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="ies", position=list(record.render_position),
+                               aim=[0.0, 0.0, -1.0], spin_deg=0.0, ies=record.ies_relative, lumens=round(record.flux_lm, 1),
+                               cct_k=cct, cri=k["cri"], product=pinfo, dimmer=1.0))
             # a TABLE lamp on the desk it serves: weighted base on the desktop, a stem, the open shade (a hood over
             # the lamp, open below). The first version bracketed an arm to the nearest wall in y; over the kids'
             # desks that wall is the window, so the shades hung in the glass (client: "flying" objects).
@@ -1881,33 +1882,33 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             # Draft 10's base stood ON the task point and shaded it (kids' desks measured 1 lx of 400).
             bx, by = {0: (0, -1), 180: (0, 1), -90: (-1, 0), 90: (1, 0)}[desk["rot"]]
             q_ = F.footprint(desk)
-            reach = 0.28
+            reach = housing["reach"]
             base_x = min(max(f.x + bx * reach, q_[0] + 0.09), q_[2] - 0.09)
             base_y = min(max(f.y + by * reach, q_[1] + 0.09), q_[3] - 0.09)
-            top = f.z + 0.12
-            arm = box_faces(min(base_x, f.x) - 0.007, min(base_y, f.y) - 0.007, top - 0.007,
-                            max(base_x, f.x) + 0.007, max(base_y, f.y) + 0.007, top + 0.007)
+            top = f.z + housing["arm_top"]
+            arm = box_faces(min(base_x, f.x) - housing["stem_radius"], min(base_y, f.y) - housing["stem_radius"], top - housing["stem_radius"],
+                            max(base_x, f.x) + housing["stem_radius"], max(base_y, f.y) + housing["stem_radius"], top + housing["stem_radius"])
             mesh("lamp-shade-" + f.id, "black-metal",
-                 box_faces(f.x - 0.08, f.y - 0.08, f.z - 0.01, f.x + 0.08, f.y + 0.08, f.z + 0.05)
-                 + cyl(f.x, f.y, 0.007, f.z + 0.05, top), "fixture", room=f.room, label="fitting " + f.id, kind="lamp-head")
+                 box_faces(f.x - housing["shade_half"], f.y - housing["shade_half"], f.z + housing["shade_bottom"], f.x + housing["shade_half"], f.y + housing["shade_half"], f.z + housing["shade_top"])
+                 + cyl(f.x, f.y, housing["stem_radius"], f.z + housing["shade_top"], top), "fixture", room=f.room, label="fitting " + f.id, kind="lamp-head")
             mesh("lamp-arm-" + f.id, "black-metal",
-                 cyl(base_x, base_y, 0.07, ztop, ztop + 0.015) + cyl(base_x, base_y, 0.007, ztop + 0.015, top + 0.007)
+                 cyl(base_x, base_y, housing["base_radius"], ztop, ztop + housing["base_height"]) + cyl(base_x, base_y, housing["stem_radius"], ztop + housing["base_height"], top + housing["stem_radius"])
                  + arm, "fixture", room=f.room, label="fitting " + f.id + " (base, stem and arm)", kind="lamp-arm")
         elif f.kind == "VSCONCE":
-            area = 4 * 0.06 * 0.5
+            area = housing["emitting_area"]
             mname = "opal-vsconce-%d" % cct
             mats[mname] = dict(kind="emissive", base_rgb=[0.95, 0.93, 0.90],
-                               emission_lm_per_m2=round(f.lumens / area, 1), cct_k=cct,
+                               emission_lm_per_m2=round(record.flux_lm / area, 1), cct_k=cct,
                                note="vertical opal sconce, %d lm (GENERIC)" % f.lumens)
-            mesh("lamp-" + f.id, mname, box_faces(f.x - 0.03, f.y - 0.03, f.z - 0.25, f.x + 0.03, f.y + 0.03,
-                                                  f.z + 0.25), "fixture", room=f.room, label="fitting " + f.id,
+            mesh("lamp-" + f.id, mname, box_faces(f.x - housing["half_width"], f.y - housing["half_width"], f.z - housing["half_height"], f.x + housing["half_width"], f.y + housing["half_width"],
+                                                  f.z + housing["half_height"]), "fixture", room=f.room, label="fitting " + f.id,
                  layer=f.layer, kind="light-diffuser")
             # its wall bracket: the design sets the tube 60 mm off the wall (to its axis); the first version left a
             # 30 mm air gap behind it
             ax_ = 1 if f.aim[0] > 0 else -1
-            wall_x = f.x - ax_ * 0.06
-            mesh("bracket-" + f.id, "brass", box_faces(min(wall_x, f.x - ax_ * 0.03), f.y - 0.015, f.z - 0.02,
-                                                       max(wall_x, f.x - ax_ * 0.03), f.y + 0.015, f.z + 0.02),
+            wall_x = f.x - ax_ * housing["wall_offset"]
+            mesh("bracket-" + f.id, "brass", box_faces(min(wall_x, f.x - ax_ * housing["half_width"]), f.y - housing["bracket_half_width"], f.z - housing["bracket_half_height"],
+                                                       max(wall_x, f.x - ax_ * housing["half_width"]), f.y + housing["bracket_half_width"], f.z + housing["bracket_half_height"]),
                  "fixture", room=f.room, label="fitting " + f.id + " (bracket)", kind="rail-bracket")
         elif f.kind == "SWING":
             # Client round-3 (v02/v24, library nook): the previous swing lamp was three flat brass BOXES --
@@ -1917,7 +1918,7 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             # conical shade D120 angled down over the existing emissive disc, in brass (plate, arm) + black
             # (knuckle, shade).
             wall_x, wall_y = f.extra["wall_plate"]
-            arm_l = 0.30
+            arm_l = housing["arm_length"]
             span = abs(f.x - wall_x)
             half = span / 2
             kick = math.sqrt(max(arm_l * arm_l - half * half, 0.0))
@@ -1934,25 +1935,25 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                          f.z + r * math.sin(2 * math.pi * k / n)]
                         for k in range(n)]
             toward = 1 if f.x > wall_x else -1
-            plate_front = wall_disc(wall_x + toward * 0.012, 0.05)
-            plate_back = wall_disc(wall_x, 0.05)
+            plate_front = wall_disc(wall_x + toward * housing["plate_depth"], housing["plate_radius"])
+            plate_back = wall_disc(wall_x, housing["plate_radius"])
             if toward < 0:
                 plate_front.reverse()
                 plate_back.reverse()
             mesh("swing-plate-" + f.id, "brass", pane_faces(plate_front, plate_back),
                  "fixture", room=f.room, label="SWING round wall plate, D100", kind="wall-plate")
-            mesh("swing-arm-" + f.id, "brass", rod_faces(base_pt, elbow_pt, 0.018) + rod_faces(elbow_pt, head_pt, 0.018),
+            mesh("swing-arm-" + f.id, "brass", rod_faces(base_pt, elbow_pt, housing["arm_radius"]) + rod_faces(elbow_pt, head_pt, housing["arm_radius"]),
                  "fixture", room=f.room, label="SWING articulated arm, two 0.30 m knuckle-jointed segments", kind="lamp-arm")
-            mesh("swing-knuckle-" + f.id, "black-metal", sphere(*elbow_pt, 0.022),
+            mesh("swing-knuckle-" + f.id, "black-metal", sphere(*elbow_pt, housing["knuckle_radius"]),
                  "fixture", room=f.room, label="SWING knuckle joint", kind="lamp-joint")
-            shade_r, shade_h, tilt, seg = 0.06, 0.10, 0.03, 16
+            shade_r, shade_h, tilt, seg = housing["shade_radius"], housing["shade_height"], housing["shade_tilt"], 16
             apex = (f.x, f.y - tilt, f.z + shade_h)
             ring = [[f.x + shade_r * math.cos(2 * math.pi * k / seg), f.y + shade_r * math.sin(2 * math.pi * k / seg), f.z]
                     for k in range(seg)]
             # A thin closed shade has outer and inner walls joined around its lip.
-            inner_apex = (apex[0], apex[1], apex[2] - 0.008)
-            inner_ring = [[f.x + (shade_r - 0.006) * math.cos(2 * math.pi * k / seg),
-                           f.y + (shade_r - 0.006) * math.sin(2 * math.pi * k / seg), f.z + 0.002]
+            inner_apex = (apex[0], apex[1], apex[2] - housing["shade_inner_drop"])
+            inner_ring = [[f.x + (shade_r - housing["shade_wall"]) * math.cos(2 * math.pi * k / seg),
+                           f.y + (shade_r - housing["shade_wall"]) * math.sin(2 * math.pi * k / seg), f.z + housing["shade_lip"]]
                           for k in range(seg)]
             shade_faces = ([[apex, ring[(i + 1) % seg], ring[i]] for i in range(seg)] +
                            [[inner_apex, inner_ring[i], inner_ring[(i + 1) % seg]] for i in range(seg)] +
@@ -1963,11 +1964,11 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                  label="SWING conical shade D120, angled down", kind="lamp-head")
             name = "swing-disc-%d" % cct
             mats[name] = dict(kind="emissive", base_rgb=[1, 0.94, 0.82],
-                              emission_lm_per_m2=round(f.lumens / (math.pi * 0.055**2), 1), cct_k=cct)
-            mesh("swing-emitter-" + f.id, name, disc_down(f.x, f.y, f.z - 0.002, 0.055),
+                              emission_lm_per_m2=round(record.flux_lm / (math.pi * housing["emitter_radius"]**2), 1), cct_k=cct)
+            mesh("swing-emitter-" + f.id, name, disc_down(f.x, f.y, f.z + housing["emitter_z"], housing["emitter_radius"]),
                  "fixture", room=f.room, label="SWING emitting disc", layer=f.layer, kind="light-lens")
         elif f.kind in ("PEN-GLOBE", "PEN-SMALL", "SCONCE", "WALL-READ"):
-            r = k.get("diameter", 0.2) / 2
+            r = housing["radius"]
             area = 4 * math.pi * r * r
             mname = "opal-%s-%d" % (f.kind.lower(), cct)
             # Client round-3 (v01-stair-void.png): the island/stair-void globes read as "smoky grey glass". Cause:
@@ -1982,92 +1983,92 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             mats[mname] = (dict(kind="translucent", base_rgb=[0.97, 0.96, 0.92], reflectance=0.85,
                                 transmittance=0.65, roughness=0.22,
                                 note="ASSUMED milky white opal glass shade, lit from inside") if f.kind == "PEN-GLOBE" else
-                           dict(kind="emissive", base_rgb=[0.95, 0.93, 0.90], emission_lm_per_m2=round(f.lumens / area, 1),
+                           dict(kind="emissive", base_rgb=[0.95, 0.93, 0.90], emission_lm_per_m2=round(record.flux_lm / area, 1),
                                 cct_k=cct, note="opal diffuse emitter, %d lm (GENERIC)" % f.lumens))
             cz = f.z + r if f.kind not in ("SCONCE", "WALL-READ") else f.z
             mesh("lamp-" + f.id, mname, sphere(f.x, f.y, cz, r), "fixture", room=f.room,
                  label="fitting " + f.id, layer=f.layer, kind="light-diffuser")
             if f.kind == "PEN-GLOBE":
-                inner = r * 0.55
+                inner = r * housing["inner_ratio"]
                 ename = "opal-inner-%d" % cct
                 mats[ename] = dict(kind="emissive", base_rgb=[1, 0.96, 0.88],
-                                   emission_lm_per_m2=round(f.lumens / (4 * math.pi * inner**2), 1), cct_k=cct)
+                                   emission_lm_per_m2=round(record.flux_lm / (4 * math.pi * inner**2), 1), cct_k=cct)
                 mesh("bulb-" + f.id, ename, sphere(f.x, f.y, cz, inner), "fixture", room=f.room,
                      label="lamp inside opal globe", layer=f.layer, kind="light-bulb")
             if f.kind == "WALL-READ":
                 wall_y = (F.footprint(it_all["library-daybed"])[1] if f.room == "bar-alcove" else
                           lay["rooms"]["parents-bed"]["rect"][1])
-                mesh("bracket-" + f.id, "brass", box_faces(f.x - 0.012, wall_y, f.z - 0.012,
-                     f.x + 0.012, f.y, f.z + 0.012), "fixture", room=f.room,
+                mesh("bracket-" + f.id, "brass", box_faces(f.x - housing["bracket_half_width"], wall_y, f.z - housing["bracket_half_width"],
+                     f.x + housing["bracket_half_width"], f.y, f.z + housing["bracket_half_width"]), "fixture", room=f.room,
                      label="ASSUMED wall swing arm " + f.id, kind="rail-bracket")
             top = f.extra.get("hang_from")
             if top:
                 zb = LZ[f.level] + top if top < 2.9 and f.level == "B" else top
                 if f.level == "B":
                     zb = LZ["B"] + VL.CEILING if top > 0 else top
-                mesh("cord-" + f.id, "black-metal", box_faces(f.x - 0.003, f.y - 0.003, cz + r, f.x + 0.003,
-                                                              f.y + 0.003, zb), "fixture", room=f.room,
+                mesh("cord-" + f.id, "black-metal", box_faces(f.x - housing["cord_radius"], f.y - housing["cord_radius"], cz + r, f.x + housing["cord_radius"],
+                                                              f.y + housing["cord_radius"], zb), "fixture", room=f.room,
                      label="fitting " + f.id, kind="lamp-cord")
-                mesh("canopy-" + f.id, "brass", box_faces(f.x - 0.05, f.y - 0.05, zb - 0.02, f.x + 0.05, f.y + 0.05,
+                mesh("canopy-" + f.id, "brass", box_faces(f.x - housing["canopy_radius"], f.y - housing["canopy_radius"], zb - housing["canopy_depth"], f.x + housing["canopy_radius"], f.y + housing["canopy_radius"],
                                                           zb), "fixture", room=f.room, label="fitting " + f.id, kind="wall-plate")
         elif f.kind == "PEN-LIN":
             Lg = k["length"]
             zb = f.z
-            mesh("lamp-body-" + f.id, "black-metal", box_faces(f.x - Lg / 2, f.y - 0.03, zb, f.x + Lg / 2, f.y + 0.03,
-                                                              zb + 0.06), "fixture", room=f.room,
+            mesh("lamp-body-" + f.id, "black-metal", box_faces(f.x - Lg / 2, f.y - housing["half_width"], zb, f.x + Lg / 2, f.y + housing["half_width"],
+                                                              zb + housing["height"]), "fixture", room=f.room,
                  label="fitting " + f.id, kind="lamp-housing")
             mname = "led-lin-%d" % cct
             mats[mname] = dict(kind="emissive", base_rgb=[1, 1, 1], emission_lm_per_m2=round(
-                f.lumens / ((Lg - 0.1) * 0.03), 1), cct_k=cct, note="linear pendant diffuser, %d lm (GENERIC)" %
+                record.flux_lm / ((Lg - 2 * housing["diffuser_end"]) * housing["half_width"]), 1), cct_k=cct, note="linear pendant diffuser, %d lm (GENERIC)" %
                 f.lumens)
-            mesh("lamp-" + f.id, mname, [quad_down(f.x - Lg / 2 + 0.05, f.y - 0.015, f.x + Lg / 2 - 0.05,
-                                                   f.y + 0.015, zb - 0.001)], "fixture", room=f.room,
+            mesh("lamp-" + f.id, mname, [quad_down(f.x - Lg / 2 + housing["diffuser_end"], f.y - housing["diffuser_half_width"], f.x + Lg / 2 - housing["diffuser_end"],
+                                                   f.y + housing["diffuser_half_width"], zb + housing["diffuser_z"])], "fixture", room=f.room,
                  label="fitting " + f.id, layer=f.layer, kind="light-diffuser", surface=True, occupied_side=(0,0,-1))
             ceil = LZ["B"] + VL.CEILING
             for s in (-1, 1):
-                mesh("wire-%s-%d" % (f.id, s), "black-metal", box_faces(f.x + s * 0.6 - 0.002, f.y - 0.002, zb + 0.06,
-                                                                         f.x + s * 0.6 + 0.002, f.y + 0.002, ceil),
+                mesh("wire-%s-%d" % (f.id, s), "black-metal", box_faces(f.x + s * housing["wire_span"] - housing["wire_radius"], f.y - housing["wire_radius"], zb + housing["height"],
+                                                                         f.x + s * housing["wire_span"] + housing["wire_radius"], f.y + housing["wire_radius"], ceil),
                      "fixture", room=f.room, label="fitting " + f.id, kind="lamp-wire")
-        elif k["mount"] == "strip":
-            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="line", position=[f.x, f.y, f.z],
-                               aim=_unit(f.aim), size=[0.012, f.length], length_dir=list(f.along), spread_deg=120,
-                               lumens=round(f.lumens, 1), cct_k=cct, cri=90, product=pinfo, dimmer=1.0))
+        elif record.mount == "strip":
+            lights.append(dict(id=f.id, room=f.room, layer=f.layer, type="line", position=list(record.render_position),
+                               aim=_unit(f.aim), size=[housing["width"], f.length], length_dir=list(f.along), spread_deg=housing["spread"],
+                               lumens=round(record.flux_lm, 1), cct_k=cct, cri=k["cri"], product=pinfo, dimmer=1.0))
             if f.kind == "STORE-BATTEN":
                 mesh("batten-body-" + f.id, "white-paint-joinery",
-                     box_faces(f.x - f.length / 2, f.y - 0.025, f.z,
-                               f.x + f.length / 2, f.y + 0.025, f.z + 0.035),
+                     box_faces(f.x - f.length / 2, f.y - housing["half_width"], f.z,
+                               f.x + f.length / 2, f.y + housing["half_width"], f.z + housing["height"]),
                      "fixture", room=f.room, label="ASSUMED opal LED storage batten body", layer=f.layer, kind="lamp-housing")
-                for end, sx in enumerate((f.x - f.length / 2 + 0.04, f.x + f.length / 2 - 0.04)):
+                for end, sx in enumerate((f.x - f.length / 2 + housing["mount_end"], f.x + f.length / 2 - housing["mount_end"])):
                     top = VL.ceiling_z(f.level, sx, f.room, f.y, lay, sp)
                     mesh("batten-mount-%s-%d" % (f.id, end), "white-paint-joinery",
-                         box_faces(sx - 0.012, f.y - 0.012, f.z + 0.03,
-                                   sx + 0.012, f.y + 0.012, top),
+                         box_faces(sx - housing["mount_half_width"], f.y - housing["mount_half_width"], f.z + housing["mount_z"],
+                                   sx + housing["mount_half_width"], f.y + housing["mount_half_width"], top),
                          "fixture", room=f.room, label="ASSUMED batten soffit mount", layer=f.layer, kind="rail-bracket")
                 mesh("batten-diffuser-" + f.id, "opal-strip",
-                     [quad_down(f.x - f.length / 2 + 0.015, f.y - 0.018,
-                                f.x + f.length / 2 - 0.015, f.y + 0.018, f.z - 0.001)],
+                     [quad_down(f.x - f.length / 2 + housing["diffuser_end"], f.y - housing["diffuser_half_width"],
+                                f.x + f.length / 2 - housing["diffuser_end"], f.y + housing["diffuser_half_width"], f.z + housing["diffuser_z"])],
                      "fixture", room=f.room, label="ASSUMED opal LED storage batten diffuser", layer=f.layer, kind="light-diffuser", surface=True, occupied_side=(0,0,-1))
             if f.kind == "BACK" and f.room == "bar-alcove":
                 mesh("detail-cabinet-led-" + f.id, "opal-strip", box_faces(
-                    f.x - f.length / 2, f.y - 0.04, f.z - 0.012,
-                    f.x + f.length / 2, f.y + 0.006, f.z + 0.002), "fixture", room=f.room,
+                    f.x - f.length / 2, f.y + housing["cabinet_rear"], f.z + housing["body_bottom"],
+                    f.x + f.length / 2, f.y + housing["cabinet_front"], f.z + housing["body_top"]), "fixture", room=f.room,
                     label="ASSUMED concealed LED strip behind library shelf books", kind="led-strip")
             if f.kind == "BACK" and "under-stair bay" in f.why:
                 mesh("detail-store-led-" + f.id, "opal-strip", box_faces(
-                    f.x - f.length / 2, f.y - 0.008, f.z - 0.012,
-                    f.x + f.length / 2, f.y + 0.008, f.z + 0.002), "fixture", room=f.room,
+                    f.x - f.length / 2, f.y - housing["storage_half_width"], f.z + housing["body_bottom"],
+                    f.x + f.length / 2, f.y + housing["storage_half_width"], f.z + housing["body_top"]), "fixture", room=f.room,
                     label="ASSUMED internal LED strip in open storage bay", layer=f.layer, kind="led-strip")
-        elif k["mount"] == "wall-marker":
-            w, h = 0.10, 0.04
+        elif record.mount == "wall-marker":
+            w, h = housing["width"], housing["height"]
             mname = "marker-%d" % cct
-            mats[mname] = dict(kind="emissive", base_rgb=[1, 1, 1], emission_lm_per_m2=round(f.lumens / (w * h), 1),
+            mats[mname] = dict(kind="emissive", base_rgb=[1, 1, 1], emission_lm_per_m2=round(record.flux_lm / (w * h), 1),
                                cct_k=cct, note="recessed wall marker, %d lm (GENERIC)" % f.lumens)
             ay = f.aim[1]
             # flush on the wall face behind it (the design's offset left path markers 21 mm proud of the wall)
             faces_ = [w[3] if ay > 0 else w[1] for w in walls_by_level[f.level] if w[0] <= f.x <= w[2] and
                       abs((w[3] if ay > 0 else w[1]) - f.y) < 0.1]
             fy = min(faces_, key=lambda v: abs(v - f.y)) if faces_ else f.y
-            yy = fy + (0.001 if ay > 0 else -0.001)
+            yy = fy + (housing["face_offset"] if ay > 0 else -housing["face_offset"])
             face = [[f.x - w / 2, yy, f.z - h / 2], [f.x + w / 2, yy, f.z - h / 2], [f.x + w / 2, yy, f.z + h / 2],
                     [f.x - w / 2, yy, f.z + h / 2]]
             if ay < 0:
@@ -2109,6 +2110,11 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     from .mounting_resume import apply_approvals, guest_fixes
     apply_approvals(scene)
     guest_fixes(scene, sp)
+    # Current lighting records replace historical C4 pair placements only.
+    from ..fixture_record import reconcile_vanity_emitters
+    from .sanitary_relocation import input_revision
+    with input_revision(False):
+        reconcile_vanity_emitters(scene, VL.design(lay))
     from .ceiling_mounting import migrate as migrate_ceiling
     migrate_ceiling(scene, lay)
     from .mounting_resume import APPROVALS
@@ -2125,6 +2131,10 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     apply_wc_slides(scene, lay)
     from .sanitary_relocation import apply_family
     apply_family(scene, lay)
+    # Frozen C4 migration remains reproducible. The client's current fixture
+    # decision replaces its retired fittings only after those approvals.
+    with input_revision(False):
+        apply_vanity_decision(scene, VL.design(lay))
     failures = indoor_plant_violations(scene['props'], lay, scene)
     if failures:
         raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
@@ -2152,7 +2162,89 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     naming_failures=orientation_findings(scene)
     if naming_failures:
         raise ValueError("garden orientation: "+str(naming_failures))
+    # Check the lighting handoff again after every later assembly migration.
+    from ..fixture_record import vanity_scene_findings
+    with input_revision(False):
+        emitter_failures = vanity_scene_findings(scene, [f.record for f in VL.design(lay)])
+    if emitter_failures:
+        raise ValueError("Final fixture records: " + "; ".join(emitter_failures))
     return scene
+
+
+def apply_vanity_decision(scene, fixtures):
+    """Replace side pairs through the shared records, on measured wall hosts.
+
+    Dimensions are metres; flux is lumens. The casing is a closed rear plate
+    and four closed perimeter rails surrounding a closed opal diffuser.
+    This generic bar and its optical distribution remain ASSUMED.
+    Historical migration receipts retain their original identifiers.
+    """
+    from .mounting import Host, Finish, MountItem, binding
+    from .fitting_mounting import points
+    from ..fixture_record import VANITY_DECISION_SOURCE, vanity_scene_findings
+    by = {m['id']:m for m in scene['meshes']}
+    replacements = []
+    for fixture in fixtures:
+        record = fixture.record
+        extra = dict(record.extra)
+        if not extra.get('over_mirror'):
+            continue
+        retired = extra['retired_fixture_ids']
+        # Reuse the actual finite host already built for this wall, including
+        # its physical finish layer; never infer support from a room outline.
+        root = by['lamp-'+retired[0]]
+        host_record = scene['mounting_hosts'][root['mounting']['host_id']]
+        host = Host(host_record['id'],host_record['kind'],tuple(host_record['structural_point']),
+                    tuple(host_record['normal']),Finish(**host_record['finish']))
+        normal = record.aim[0]
+        wall = host.structural_point[0]+host.normal[0]*host.finish.thickness_m
+        if abs(wall-extra['finished_wall']) > 1e-6 or host.normal != (normal,0,0):
+            raise ValueError(record.id+': authored and measured finished wall disagree')
+        h = record.housing
+        x,y,z = record.position
+        half_length, depth, height, inset = h['length']/2,h['half_depth'],h['half_height'],h['diffuser_inset']
+        def box(a,b,c,d,e,f):
+            return box_faces(min(a,d),b,c,max(a,d),e,f)
+        back, front = x-normal*depth, x+normal*depth
+        rear_end = back+normal*inset
+        body_faces = box(back,y-half_length,z-height,rear_end,y+half_length,z+height)
+        for low,high in ((z-height,z-height+inset),(z+height-inset,z+height)):
+            body_faces += box(rear_end,y-half_length,low,front,y+half_length,high)
+        for low,high in ((y-half_length,y-half_length+inset),(y+half_length-inset,y+half_length)):
+            body_faces += box(rear_end,low,z-height+inset,front,high,z+height-inset)
+        diffuser_faces = box(x-depth+inset,y-half_length+inset,z-height+inset,
+                             x+depth-inset,y+half_length-inset,z+height-inset)
+        area = 2*((h['length']-2*inset)*(2*depth-2*inset)
+                  +(h['length']-2*inset)*(2*height-2*inset)
+                  +(2*depth-2*inset)*(2*height-2*inset))
+        material = 'opal-'+record.id
+        scene['materials'][material] = dict(kind='emissive',base_rgb=[.95,.93,.90],
+            emission_lm_per_m2=record.flux_lm/area,cct_k=record.cct_k,
+            note=f'ASSUMED generic linear bar; {record.flux_lm:g} lm effective; '+VANITY_DECISION_SOURCE)
+        members = []
+        for prefix,faces,mat,kind in (('body-',body_faces,'black-metal','lamp-housing'),
+                                     ('lamp-',diffuser_faces,material,'light-diffuser')):
+            mid = prefix+record.id
+            projection = min((p[0]-wall)*normal for p in points(dict(faces=faces)))
+            members.append(dict(id=mid,faces=faces,material=mat,group='fixture',room=record.room,
+                label='ASSUMED generic over-mirror LED bar '+record.id,part_kind=kind,layer=fixture.layer,
+                mounting=dict(binding(MountItem(mid),host,max(0,projection),
+                                      'surface-mounted' if projection < 1e-9 else 'wall-hung'),
+                              assembly_root='body-'+record.id,
+                              projection_basis='Complete bar authored from the measured finished wall'),
+                decision_source=VANITY_DECISION_SOURCE))
+        scene['meshes'][:] = [m for m in scene['meshes'] if not any(m['id'].endswith('-'+fid) for fid in retired)]
+        scene['lights'][:] = [light for light in scene['lights'] if light['id'] not in retired]
+        scene['meshes'].extend(members)
+        replacements.append(dict(id=record.id,retired=list(retired),source=VANITY_DECISION_SOURCE,
+                                 effective_lumens=record.flux_lm,kelvin=record.cct_k))
+    scene['vanity_client_decisions'] = replacements
+    scene['notes'].append('CLIENT DECISION 2026-10-08: two ASSUMED generic over-mirror linear LED bars; '
+                          'no manufacturer product verified; existing generic isotropic photometry family. '
+                          'Finite diffuser/casing transport has not been independently calibrated.')
+    failures = vanity_scene_findings(scene,[f.record for f in fixtures])
+    if failures:
+        raise ValueError('; '.join(failures))
 
 
 def _seat_recessed_on_soffit(scene):

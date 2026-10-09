@@ -815,3 +815,14 @@ def window_credit_problems(lay, windows, doors):
         if r["occupancy"] in vocab.HABITABLE and rid not in unlit and rid not in have:
             out.append("%s (%s) is credited with a window but none is built" % (rid, r["level"]))
     return out
+
+
+def lighting_spec(lay):
+    """Export lighting from unified records; the existing shell spec is unchanged.
+
+    Villa native authoring currently has no lighting-family placement. This
+    explicit adapter supplies authored emitter heights in millimetres and
+    generic/verified photometry without inventing a native family mapping.
+    """
+    from .villa_lighting import design
+    return [fixture.record.native_spec() for fixture in design(lay)]

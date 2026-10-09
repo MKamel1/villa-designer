@@ -103,6 +103,14 @@ Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.m
      each recessed fitting's height from the finished ceiling above it (cove
      field, ramp soffit); `_seat_recessed_on_soffit` is then a CHECK that
      moves nothing. Pendant cords reach the real ceiling; markers are flush.
+     A vanity side pair stays centred on its fixed mirror/basin axis; refuse
+     infeasible envelopes instead of clamping the pair centre. A dated client
+     over-mirror decision may replace it with one explicitly declared centred
+     fitting; check the complete casing against the actual mirror top/width
+     and measured finished wall. Preserve retired approval receipts as history.
+     Compare current-source exports with the final completed record snapshot,
+     normalizing both sides through the JSON contract before exact equality.
+     Do not permit unrelated changes or round away measured displacement.
    - Views are declared by INTENT (room + subjects + state) and placed by
      `render_views.choose`: standing points 0.30 m off walls, 0.15 m off
      furniture and floor props, or in one of the room's own door openings

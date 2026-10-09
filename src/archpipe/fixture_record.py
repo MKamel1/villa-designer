@@ -29,10 +29,446 @@ from typing import Any
 
 from archpipe import fixture_source
 from archpipe.concept import villa_furnish as F
-from archpipe.concept import villa_lighting as VL
 from archpipe.luminaires import install
 from archpipe.luminaires import library as lib
 from archpipe import photometry as ph
+
+
+
+from types import MappingProxyType
+
+# kind -> the requirement (what a product must meet) and its generic stand-in
+KINDS = {
+    "DL":   dict(what="flush trimless downlight, wide", mount="recessed", lm=650, beam=55, cct=2700, cri=90,
+                 layer="ambient", aperture=0.075),
+    "DLN":  dict(what="flush trimless downlight, medium (task)", mount="recessed", lm=750, beam=36, cct=3000,
+                 cri=90, layer="task", aperture=0.075),
+    "ADJ":  dict(what="flush trimless adjustable accent", mount="recessed", lm=500, beam=24, cct=2700, cri=90,
+                 layer="accent", aperture=0.075),
+    "WW":   dict(what="flush trimless wall washer", mount="recessed", lm=650, beam=70, cct=2700, cri=90,
+                 layer="accent", aperture=0.075),
+    "PEN-GLOBE": dict(what="opal glass globe pendant D300", mount="pendant", lm=800, beam=None, cct=2700, cri=90,
+                      layer="decorative", diameter=0.30),
+    "PEN-SMALL": dict(what="opal glass globe pendant D200 (bedside)", mount="pendant", lm=350, beam=None, cct=2700,
+                      cri=90, layer="decorative", diameter=0.20),
+    "WALL-READ": dict(what="adjustable wall-mounted swing-arm reading light (ASSUMED product)", mount="wall",
+                      lm=350, beam=None, cct=2700, cri=90, layer="decorative", diameter=0.12),
+    "SWING": dict(what="movable wall reading light: wall plate, articulated 0.6 m reach and rotating head "
+                  "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=None,
+                  cct=2700, cri=90, layer="task", diameter=0.12, reach=0.6),
+    "PEN-LIN": dict(what="linear pendant 1.6 m, direct/indirect", mount="pendant", lm=1200, beam=90, cct=2700,
+                    cri=90, layer="task", length=1.6),
+    "SCONCE": dict(what="vanity wall light, opal, each side of the mirror", mount="wall", lm=450, beam=None,
+                   cct=3000, cri=90, layer="task", diameter=0.12),
+    "COVE": dict(what="LED strip in the cove, 2700 K", mount="strip", lm_per_m=900, cct=2700, cri=90,
+                 layer="decorative"),
+    "BACK": dict(what="LED strip inside glass-door book cabinet", mount="strip", lm_per_m=400, cct=2700, cri=90,
+                 layer="accent"),
+    "UC":   dict(what="under-cabinet LED strip", mount="strip", lm_per_m=1000, cct=3000, cri=90, layer="task"),
+    "RAIL": dict(what="LED strip over the hanging rail (in-wardrobe)", mount="strip", lm_per_m=500, cct=3000, cri=90,
+                 layer="task"),
+    "TOE":  dict(what="toe-kick LED strip", mount="strip", lm_per_m=150, cct=2200, cri=90, layer="night"),
+    "NL":   dict(what="night-light strip under the bed / plinth", mount="strip", lm_per_m=100, cct=2200, cri=90,
+                 layer="night"),
+    "DESK": dict(what="adjustable wall-arm desk lamp, shielded head, 3000 K", mount="task-lamp", lm=450, beam=70,
+                 cct=3000, cri=90, layer="task"),
+    "VSTRIP": dict(what="vertical LED strip at a hanging-section edge (shadow-free dressing light)", mount="strip",
+                   lm_per_m=500, cct=3000, cri=90, layer="task"),
+    "STORE-BATTEN": dict(what="ASSUMED opal LED storage batten, 0.70 m per shelving bay", mount="strip",
+                          lm_per_m=900, cct=3000, cri=90, layer="task"),
+    "MIRROR": dict(what="backlit mirror halo, 3000 K", mount="strip", lm_per_m=250, cct=3000, cri=90, layer="task"),
+    "VANITY-LIN": dict(what="ASSUMED generic linear LED bar over the mirror", mount="wall",
+                       lm=100, beam=None, cct=3000, cri=90, layer="task"),
+    "VSCONCE": dict(what="vertical opal sconce 0.5 m, each side of the mirror", mount="wall", lm=450, beam=None,
+                    cct=3000, cri=90, layer="task", diameter=0.12),
+    "STEP": dict(what="recessed step marker in the stair wall", mount="wall-marker", lm=60, beam=None, cct=2200,
+                 cri=90, layer="night"),
+    "PATH": dict(what="low recessed path marker (0.3 m AFF)", mount="wall-marker", lm=60, beam=None, cct=2200,
+                 cri=90, layer="night"),
+}
+
+# kind -> the verified library product that meets it (lighting-library: imported, flux vs LORL and LDT vs the
+# manufacturer's IES checked). Strips, pendants, sconces and markers stay GENERIC: iGuzzini Underscore ST49 failed
+# its LDT/IES pair check (59.8 %), the Laser Evo wall washer LSEVO-AAKR2I failed it (100 %, asymmetric), and no
+# decorative globe pendant with photometry was found. WW is served meanwhile by the soft flood placed 0.3 m off the
+# wall (grazing), stated as a substitute.
+PRODUCT_CHOICE = {
+    "DL": ("iguzzini", "LSEVO-AAK3EW", "Laser Evo recessed D75 Soft, Flood 33 deg, 2700 K CRI97, phase-cut; "
+                                       "flush (trimless) accessory"),
+    "DLN": ("iguzzini", "LSEVO-AAIIA6", "Laser Evo recessed D75 Cone, Medium 29 deg, 2700 K CRI90, phase-cut; "
+                                        "flush (trimless) accessory"),
+    "ADJ": ("iguzzini", "LSEVO-AAHENX", "Laser Evo recessed D75 Cone Easy Adjustable, Spot 18 deg, 2700 K CRI97, "
+                                        "phase-cut; flush (trimless) accessory"),
+    "WW": ("iguzzini", "LSEVO-AAK3EW", "SUBSTITUTE for the wall washer LSEVO-AAKR2I (files failed the pair check): "
+                                       "Laser Evo D75 Soft Flood 33 deg grazing from 0.3 m"),
+}
+
+@dataclass(frozen=True)
+class FixtureKind:
+    """Authored requirement and procedural housing; all dimensions metres.
+
+    lm means lumens, lm_per_m lumens per metre, cct colour temperature in
+    kelvin, cri colour rendering index, beam full width at half maximum in
+    degrees. None beam means isotropic. Unknown native family, measured
+    housing and recess depth remain unknown rather than fabricated.
+    """
+    kind: str
+    requirement: tuple
+    geometry: tuple
+    product_choice: tuple | None = None
+
+    @property
+    def spec(self):
+        return MappingProxyType(dict(self.requirement))
+
+    @property
+    def housing(self):
+        return MappingProxyType(dict(self.geometry))
+
+    @property
+    def mount(self):
+        return self.spec['mount']
+
+
+# Frozen existing procedural dimensions: re-expression, not new product claims.
+_GEOMETRY = {
+    'recessed': dict(trim_radius=.0415, trim_z=-.0015, lens_radius=.018, lens_z=-.002, render_z=-.03),
+    'DESK': dict(render_z=-.03, shade_half=.08, shade_bottom=-.01, shade_top=.05,
+                 stem_radius=.007, arm_top=.12, base_radius=.07, base_height=.015, reach=.28),
+    'BACK': dict(cabinet_rear=-.04, cabinet_front=.006, body_bottom=-.012, body_top=.002, storage_half_width=.008),
+    'WALL-READ': dict(bracket_half_width=.012),
+    'VANITY-LIN': dict(length=.50, half_depth=.02, half_height=.02, centre_above_mirror=.10,
+                       diffuser_inset=.004, edge_margin=.005),
+    'VSCONCE': dict(half_width=.03, half_height=.25, wall_offset=.06,
+                    bracket_half_width=.015, bracket_half_height=.02, emitting_area=.12),
+    'SWING': dict(arm_length=.30, plate_depth=.012, plate_radius=.05, arm_radius=.018,
+                  knuckle_radius=.022, shade_radius=.06, shade_height=.10, shade_tilt=.03,
+                  shade_inner_drop=.008, shade_wall=.006, shade_lip=.002, emitter_radius=.055, emitter_z=-.002),
+    'PEN-LIN': dict(half_width=.03, height=.06, diffuser_end=.05, diffuser_half_width=.015,
+                    diffuser_z=-.001, wire_span=.6, wire_radius=.002),
+    'strip': dict(width=.012, spread=120),
+    'wall-marker': dict(width=.10, height=.04, face_offset=.001),
+    'globe': dict(inner_ratio=.55, cord_radius=.003, canopy_radius=.05, canopy_depth=.02),
+    'STORE-BATTEN': dict(half_width=.025, height=.035, mount_end=.04, mount_half_width=.012,
+                        mount_z=.03, diffuser_end=.015, diffuser_half_width=.018, diffuser_z=-.001),
+}
+
+
+def _kind_record(kind, requirement):
+    geometry = dict(_GEOMETRY.get(requirement['mount'], {}))
+    geometry.update(_GEOMETRY.get(kind, {}))
+    if kind in ('PEN-GLOBE', 'PEN-SMALL', 'SCONCE', 'WALL-READ'):
+        geometry.update(_GEOMETRY['globe'])
+        geometry['radius'] = requirement['diameter']/2
+        if requirement['mount'] == 'wall':
+            geometry['wall_offset'] = geometry['radius']
+    if kind in ('SCONCE','VSCONCE'):
+        geometry.update(vanity_half_spacing=.475, edge_margin=.005)
+    return FixtureKind(kind, tuple(requirement.items()), tuple(geometry.items()), PRODUCT_CHOICE.get(kind))
+
+
+FIXTURE_KINDS = MappingProxyType({kind: _kind_record(kind, spec) for kind, spec in KINDS.items()})
+KINDS = MappingProxyType({kind: record.spec for kind, record in FIXTURE_KINDS.items()})
+PRODUCT_CHOICE = MappingProxyType({kind: record.product_choice for kind, record in FIXTURE_KINDS.items()
+                                   if record.product_choice is not None})
+PRODUCTS = {}
+_products_bound = False
+
+
+def bind_products(ies_dir=None):
+    """Bind measured library photometry once, retaining original generic fallback."""
+    global _products_bound
+    if _products_bound:
+        return PRODUCTS
+    ies_dir = Path(ies_dir or Path(__file__).resolve().parents[2] / 'out/villa/render-d1/ies')
+    for kind, (mfr, sku, what) in PRODUCT_CHOICE.items():
+        row = lib.get(mfr, sku, 0)
+        if not row or not row.get('verified'):
+            continue
+        path = lib.export_ies(mfr, sku, 0, ies_dir / mfr / (sku + '.ies'))
+        PRODUCTS[kind] = dict(manufacturer=mfr, code=sku, ies=str(path), lm=float(row['luminaire_lm']),
+                              watts=row['watts'], cct=row['cct_k'], beam=row['beam_deg'], what=what,
+                              substitute=what.startswith('SUBSTITUTE'))
+    _products_bound = True
+    return PRODUCTS
+
+
+@dataclass(frozen=True)
+class FixtureRecord:
+    """Placed identity, photometry, emitter datum, housing and mount.
+
+    position is authored x/y/z in model metres. aim and along are unit
+    directions. length is metres; flux_lm is luminous flux in lumens.
+    The analytic datum and legacy render offset remain explicitly distinct;
+    unification preserves calibration. Product metadata is immutable.
+    """
+    id: str
+    definition: FixtureKind
+    room: str
+    level: str
+    position: tuple
+    aim: tuple
+    length: float
+    along: tuple
+    flux_lm: float
+    product: tuple
+    extra: tuple
+
+    @property
+    def housing(self):
+        return self.definition.housing
+
+    @property
+    def mount(self):
+        return self.definition.mount
+
+    @property
+    def cct_k(self):
+        return int(dict(self.product)['cct']) if self.product else self.definition.spec['cct']
+
+    @property
+    def ies_relative(self):
+        product = dict(self.product)
+        return (product['manufacturer']+'/'+product['code']+'.ies') if product else 'generic/'+self.definition.kind+'.ies'
+
+    @property
+    def render_position(self):
+        x,y,z = self.position
+        return (x,y,z+self.housing.get('render_z',0))
+
+    def photometry(self):
+        product = dict(self.product)
+        if product:
+            return ph.load(product['ies']), False
+        from archpipe.concept.villa_lighting import generic_ies
+        spec = self.definition.spec
+        flux = spec.get('lm') or spec.get('lm_per_m',100)
+        beam = 120 if self.mount == 'strip' else spec.get('beam',120)
+        return ph.parse(generic_ies(flux,beam), name=self.definition.kind), True
+
+    def native_spec(self):
+        """Native lighting adapter; convert authored metres to millimetres."""
+        result = dict(id=self.id,kind=self.definition.kind,room=self.room,level=self.level,
+                    at=[1000*v for v in self.position[:2]],mounting_height=1000*self.position[2],
+                    lumens=self.flux_lm,kelvin=self.cct_k,mount=self.mount,ies=self.ies_relative,
+                    housing=dict(self.housing))
+        extra = dict(self.extra)
+        if extra.get('over_mirror'):
+            result.update(assumptions=extra['assumptions'],decision_source=extra['decision_source'])
+        return result
+
+
+def _freeze_value(value):
+    """Own nested metadata so an authored Fixture cannot mutate a frozen record."""
+    if isinstance(value, dict):
+        return tuple((key,_freeze_value(item)) for key,item in value.items())
+    if isinstance(value, (list,tuple)):
+        return tuple(_freeze_value(item) for item in value)
+    return value
+
+
+def record_for(fixture):
+    """Resolve a placed compatibility Fixture without copying declarations."""
+    definition = FIXTURE_KINDS[fixture.kind]
+    product = bind_products().get(fixture.kind)
+    spec = definition.spec
+    if product:
+        flux = product['lm']
+    elif fixture.lm is not None:
+        flux = fixture.lm
+    else:
+        flux = spec['lm_per_m']*fixture.length if 'lm_per_m' in spec else spec['lm']
+    flux *= fixture.extra.get('dimmer',1.0)
+    return FixtureRecord(fixture.id,definition,fixture.room,fixture.level,
+                         (fixture.x,fixture.y,fixture.z),tuple(fixture.aim),fixture.length,
+                         tuple(fixture.along),flux,tuple(product.items()) if product else (),
+                         _freeze_value(fixture.extra))
+
+
+def kind_photometry(kind):
+    """The same immutable kind definition serves calculations and exporters."""
+    definition = FIXTURE_KINDS[kind]
+    product = bind_products().get(kind)
+    record = FixtureRecord(kind,definition,'','',(0,0,0),(0,0,-1),0,(1,0,0),0,
+                           tuple(product.items()) if product else (),())
+    return record.photometry()
+
+
+
+# Client decision is authored input, separate from the frozen migration history.
+VANITY_DECISIONS = MappingProxyType({
+    'guest-wc': ('SCONCE-guest-wc-03', 'SCONCE-guest-wc-04'),
+    'parents-ensuite': ('VSCONCE-parents-ensuite-04', 'VSCONCE-parents-ensuite-05'),
+})
+VANITY_DECISION_SOURCE = 'CLIENT DECISION 2026-10-08'
+
+
+def over_mirror_datum(room_rect, basin, mirror_width, mirror_top, finished_wall, normal):
+    """Construct a centred wall bar without moving the mirror/basin axis.
+
+    All distances are model metres. basin is its plan rectangle; normal is
+    +1 or -1 along x into the room. finished_wall is the finished x face.
+    Size, 100 mm centre offset and 100 lumen raw output are ASSUMED authored;
+    held cards supply neither an over-mirror offset nor a bar lumen output.
+    """
+    housing = FIXTURE_KINDS['VANITY-LIN'].housing
+    axis = (basin[1]+basin[3])/2
+    length = housing['length']
+    z = mirror_top+housing['centre_above_mirror']
+    failures = vanity_pair_findings([axis], (room_rect[1],room_rect[3]), axis,
+        (axis-mirror_width/2,axis+mirror_width/2), length/2, 0,
+        housing['edge_margin'], over_mirror=(z,mirror_top,housing['half_height']))
+    x = finished_wall+normal*housing['half_depth']
+    if (x-housing['half_depth'] < room_rect[0]+housing['edge_margin']-1e-6
+            or x+housing['half_depth'] > room_rect[2]-housing['edge_margin']+1e-6):
+        failures.append('over-mirror depth exceeds room clear boundary')
+    if failures:
+        raise ValueError('; '.join(failures))
+    return x, axis, z
+
+
+def centred_vanity_pair(clear_interval, axis, mirror_interval, half_width,
+                        minimum_gap, authored_separation=.950, edge_allowance=.005):
+    """Return the largest feasible separation without moving the mirror axis.
+
+    All values are metres along the mounting wall. clear_interval and
+    mirror_interval are their lower/upper edges; axis is the fixed basin and
+    mirror centre. half_width covers the complete fitting envelope.
+    minimum_gap must carry an external source or an explicit authored
+    assumption at the call site. The 950 mm preference and 5 mm allowance
+    are authored design values, not standards. Refuse an infeasible pair.
+    """
+    values = (*clear_interval, axis, *mirror_interval, half_width,
+              minimum_gap, authored_separation, edge_allowance)
+    if not all(math.isfinite(v) for v in values):
+        raise ValueError('Vanity dimensions must be finite')
+    low, high = clear_interval
+    mirror_low, mirror_high = mirror_interval
+    if (low >= high or mirror_low >= mirror_high or half_width <= 0
+            or minimum_gap <= 0 or authored_separation <= 0 or edge_allowance < 0):
+        raise ValueError('Vanity intervals, widths and clear gap must be positive')
+    if abs((mirror_low+mirror_high)/2-axis) > 1e-6:
+        raise ValueError('Mirror and basin axes disagree; do not move either')
+    maximum = min(authored_separation,
+                  2*(axis-low-half_width-edge_allowance),
+                  2*(high-axis-half_width-edge_allowance))
+    minimum = 2*max(axis-mirror_low+half_width+minimum_gap,
+                    mirror_high-axis+half_width+minimum_gap)
+    if minimum > maximum+1e-12:
+        raise ValueError(f'No centred vanity pair: requires {minimum*1000:.3f} mm separation; '
+                         f'maximum {maximum*1000:.3f} mm; '
+                         f'shortfall {(minimum-maximum)*1000:.3f} mm')
+    return axis-maximum/2, axis+maximum/2
+
+
+def vanity_pair_findings(centres, clear_interval, axis, mirror_interval,
+                         half_width, minimum_gap, edge_allowance=.005, *, over_mirror=None):
+    """Review an actual pair independently of its placement solver.
+
+    Inputs are metres along the wall, as defined by centred_vanity_pair.
+    The two centres come from authored datums or measured complete fitting
+    bounds. A 1 micrometre arithmetic tolerance absorbs floating point only.
+    """
+    if over_mirror is not None:
+        # Explicit type prevents a missing side-pair member becoming a pass.
+        # over_mirror gives centre z, mirror top z and fitting half-height.
+        if len(centres) != 1:
+            return ['vanity_single_members: expected one complete over-mirror fitting']
+        centre_z, mirror_top, half_height = over_mirror
+        centre = centres[0]
+        values = (centre, *clear_interval, axis, *mirror_interval, half_width,
+                  edge_allowance, centre_z, mirror_top, half_height)
+        if (not all(math.isfinite(v) for v in values) or half_width <= 0 or half_height <= 0
+                or clear_interval[0] >= clear_interval[1] or mirror_interval[0] >= mirror_interval[1]
+                or edge_allowance < 0):
+            return ['vanity_single_dimensions: invalid complete fitting or mirror bounds']
+        findings = []
+        if abs(centre-axis) > 1e-6:
+            findings.append('vanity_pair_symmetry: single fitting differs from fixed mirror/basin axis')
+        if centre-half_width < clear_interval[0]+edge_allowance-1e-6 or centre+half_width > clear_interval[1]-edge_allowance+1e-6:
+            findings.append('vanity_pair_boundary: complete fitting envelope exceeds clear boundary allowance')
+        if centre-half_width < mirror_interval[0]-1e-6 or centre+half_width > mirror_interval[1]+1e-6:
+            findings.append('vanity_single_length: fitting exceeds mirror width')
+        if centre_z-half_height <= mirror_top+1e-6:
+            findings.append('vanity_single_mirror_overlap: fitting must clear mirror top')
+        return findings
+    if len(centres) != 2:
+        return ['vanity_pair_members: expected exactly two complete fittings']
+    left, right = sorted(centres)
+    low, high = clear_interval
+    mirror_low, mirror_high = mirror_interval
+    findings = []
+    offset = (left+right)/2-axis
+    if abs(offset) > 1e-6:
+        findings.append(f'vanity_pair_symmetry: midpoint differs from fixed mirror/basin axis '
+                        f'by {offset*1000:.3f} mm')
+    if left-half_width < low+edge_allowance-1e-6 or right+half_width > high-edge_allowance+1e-6:
+        findings.append('vanity_pair_boundary: complete fitting envelope exceeds clear boundary allowance')
+    gaps = (mirror_low-left-half_width, right-half_width-mirror_high)
+    if min(gaps) < minimum_gap-1e-6:
+        findings.append(f'vanity_pair_mirror_gap: {gaps[0]*1000:.3f}/{gaps[1]*1000:.3f} mm; '
+                        f'requires {minimum_gap*1000:.3f} mm each side')
+    return findings
+
+
+def vanity_pair_datum(room_rect, centre, kind):
+    """Prevent a mirror pair crossing a room end, preserving authored spacing.
+
+    LEAD-REJECTED historical Phase-2 placement. Do not integrate this
+    result as an accepted correction; use centred_vanity_pair for proposals
+    and vanity_pair_findings for review (docs/c5-phase2-report.md).
+
+    room_rect is the wall-clear rectangle in metres. centre is the original
+    centre along the wall. The authored separation is 0.95 metre. The 5 mm
+    edge margin is the existing lead-approved mounting envelope allowance,
+    not a new standard. Return the centre and whether correction is needed.
+    """
+    definition = FIXTURE_KINDS[kind]
+    housing = definition.housing
+    half_width = housing['half_width'] if kind == 'VSCONCE' else housing['radius']
+    half_span = housing['vanity_half_spacing'] + half_width + housing['edge_margin']
+    low, high = room_rect[1]+half_span, room_rect[3]-half_span
+    if low > high:
+        raise ValueError('Vanity wall cannot hold the authored sconce pair and fixing envelopes')
+    corrected = min(max(centre,low),high)
+    return corrected, abs(corrected-centre)>1e-9
+
+
+def reconcile_vanity_emitters(scene, fixtures):
+    """Carry complete fitting assemblies to current authored emitter datums.
+
+    C4 frozen approval inputs remain unchanged. This lighting-only final
+    step resolves the current record after those historical moves, without
+    moving furniture, hosts, cameras, meters or altering luminous flux.
+    """
+    from archpipe.concept.attached_assembly import translate
+    by = {m['id']:m for m in scene['meshes']}
+    changes = []
+    for fixture in fixtures:
+        if not fixture.extra.get('vanity_pair_source_correction'):
+            continue
+        record = fixture.record
+        root = by['lamp-'+record.id]
+        points = [p for face in root['faces'] for p in face]
+        centre = [(min(p[i] for p in points)+max(p[i] for p in points))/2 for i in range(3)]
+        delta = [record.position[i]-centre[i] for i in range(3)]
+        # Lamp and bracket are one assembly; translate both exactly once.
+        members = [m for m in scene['meshes'] if m['id'].endswith('-'+record.id)]
+        member_ids = {m['id'] for m in members}
+        for member in members:
+            translate(scene,member['id'],delta,deferred_ids=member_ids-{member['id']})
+            if 'mounting' in member:
+                footprint = member['mounting'].get('fixing_footprint')
+                if footprint:
+                    member['mounting']['fixing_footprint'] = [[p[i]+delta[i] for i in range(3)] for p in footprint]
+        changes.append(dict(id=record.id,delta_mm=[round(1000*v,6) for v in delta],
+                            source='current authored pair, retained 950 mm separation'))
+    scene['fixture_source_corrections'] = changes
+    failures = vanity_scene_findings(scene, [fixture.record for fixture in fixtures
+                                           if fixture.extra.get('vanity_pair_source_correction')])
+    if failures:
+        raise FixtureConsistencyError('; '.join(failures))
+    return changes
 
 
 class UnreadableFixtureRecordError(FileNotFoundError, ValueError):
@@ -161,6 +597,8 @@ def fixture_findings(
         # If scene_or_spec itself is a scene dict (e.g. contains lights list)
         if "lights" in scene_or_spec and scene is None:
             scene = scene_or_spec
+
+    from archpipe.concept import villa_lighting as VL
 
     findings: list[FixtureFinding] = []
 
@@ -536,4 +974,56 @@ def check_fixture_record_consistency(target: Any = None, **kwargs) -> list[Fixtu
         raise FixtureConsistencyError(
             f"Fixture consistency guard failed ({len(fails)} issues): {msg}"
         )
+    return findings
+
+
+def vanity_scene_findings(scene, records):
+    """Check corrected pair emitters independently from final mesh bounds.
+
+    records are immutable FixtureRecords. A 1 micrometre arithmetic tolerance
+    only absorbs floating point translations; it is not a design allowance.
+    The correction marker identifies a construction rule, never room names.
+    """
+    meshes = {m['id']:m for m in scene['meshes']}
+    findings = []
+    for record in records:
+        extra = dict(record.extra)
+        if not (extra.get('vanity_pair_source_correction') or extra.get('over_mirror')):
+            continue
+        mesh = meshes.get('lamp-'+record.id)
+        if mesh is None:
+            findings.append(record.id+': missing built vanity emitter')
+            continue
+        points = [p for face in mesh['faces'] for p in face]
+        centre = [(min(p[i] for p in points)+max(p[i] for p in points))/2 for i in range(3)]
+        error = math.dist(centre,record.position)*1000
+        if error > .001:
+            findings.append(record.id+f': built emitter differs from record by {error:.3f} mm')
+        if extra.get('over_mirror'):
+            from archpipe.concept.fitting_mounting import bounds
+            mirror = meshes.get(extra['mirror_id'])
+            body = meshes.get('body-'+record.id)
+            if mirror is None or body is None:
+                findings.append(record.id+': missing mirror or complete fitting body')
+                continue
+            mb, bb = bounds(mirror), bounds(body)
+            rect = extra['room_rect']
+            issues = vanity_pair_findings([(bb[1]+bb[4])/2], (rect[1],rect[3]),
+                (mb[1]+mb[4])/2, (mb[1],mb[4]), (bb[4]-bb[1])/2, 0,
+                record.housing['edge_margin'], over_mirror=((bb[2]+bb[5])/2,mb[5],(bb[5]-bb[2])/2))
+            if bb[0] < rect[0]+record.housing['edge_margin']-1e-6 or bb[3] > rect[2]-record.housing['edge_margin']+1e-6:
+                issues.append('vanity_single_depth: fitting exceeds room clear boundary')
+            if abs((bb[2]+bb[5])/2-mb[5]-record.housing['centre_above_mirror']) > 1e-6:
+                issues.append('vanity_single_height: centre differs from authored mirror-top offset')
+            fixing = bb[0] if record.aim[0] > 0 else bb[3]
+            if abs(fixing-extra['finished_wall']) > 1e-6:
+                issues.append('vanity_single_mount: body fixing face differs from finished wall')
+            if any(abs((bb[i]+bb[i+3])/2-record.position[i]) > 1e-6 for i in (1,2)):
+                issues.append('vanity_single_emitter: body and emitter axes disagree')
+            expected = (2*record.housing['half_depth'],record.housing['length'],2*record.housing['half_height'])
+            if any(abs(bb[i+3]-bb[i]-expected[i]) > 1e-6 for i in range(3)):
+                issues.append('vanity_single_envelope: complete body differs from recorded dimensions')
+            if bb[5] > extra['ceiling_z']-record.housing['edge_margin']+1e-6:
+                issues.append('vanity_single_ceiling: fitting exceeds room height allowance')
+            findings.extend(record.id+': '+issue for issue in issues)
     return findings

@@ -32,6 +32,7 @@ ALLOWED_MATERIALS = {
     "alu-bronze", "stainless", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
     "marker-2200", "opal-pen-globe-2700", "opal-inner-2700", "swing-disc-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
     "opal-vsconce-3000", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout",
+    "opal-VANITY-LIN-guest-wc-03", "opal-VANITY-LIN-parents-ensuite-04",  # client 2026-10-08, ASSUMED opal bars
     "garment-ivory", "garment-blush", "garment-terracotta", "garment-sage-soft",
     "garment-navy", "garment-charcoal", "garment-stone", "garment-olive",
 }
@@ -776,9 +777,20 @@ class RenderStandard(unittest.TestCase):
             self.assertAlmostEqual(min(p[2] for p in pts) - floor - items[basin_id]["h"], 0.20)
             sconces = [m for m in SCENE["meshes"] if m["id"].startswith(("lamp-SCONCE-" + room,
                                                                            "lamp-VSCONCE-" + room))]
-            self.assertEqual(len(sconces), 2)
             axis = 0 if max(p[0] for p in pts) - min(p[0] for p in pts) > 0.1 else 1
             mirror_lo = min(p[axis] for p in pts); mirror_hi = max(p[axis] for p in pts)
+            if room in ('guest-wc','parents-ensuite'):
+                self.assertEqual(sconces,[])
+                bars = [m for m in SCENE['meshes'] if m['id'].startswith('body-VANITY-LIN-'+room)]
+                self.assertEqual(len(bars),1)
+                bar_pts = [p for face in bars[0]['faces'] for p in face]
+                self.assertAlmostEqual((min(p[axis] for p in bar_pts)+max(p[axis] for p in bar_pts))/2,
+                                       (mirror_lo+mirror_hi)/2)
+                self.assertGreater(min(p[2] for p in bar_pts),max(p[2] for p in pts))
+                self.assertGreaterEqual(min(p[axis] for p in bar_pts),mirror_lo)
+                self.assertLessEqual(max(p[axis] for p in bar_pts),mirror_hi)
+                continue
+            self.assertEqual(len(sconces), 2)
             centres = [sum(p[axis] for face in m["faces"] for p in face) /
                        sum(len(face) for face in m["faces"]) for m in sconces]
             self.assertLess(min(centres), mirror_lo)

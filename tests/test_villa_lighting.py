@@ -78,10 +78,16 @@ class Cards(unittest.TestCase):
         for f in FX:
             if f.kind in ("SCONCE", "VSCONCE"):
                 by.setdefault(f.room, []).append(f)
-        self.assertEqual(set(by), {"guest-wc", "family-bath", "parents-ensuite"})
+        self.assertEqual(set(by), {"family-bath"})
         for room, (a, b) in by.items():
             d = ((a.x - b.x) ** 2 + (a.y - b.y) ** 2) ** 0.5
             self.assertTrue(0.914 <= d <= 1.016, (room, d))
+        bars = [f for f in FX if f.kind == 'VANITY-LIN']
+        self.assertEqual({f.room for f in bars}, {'guest-wc','parents-ensuite'})
+        for f in bars:
+            self.assertEqual(f.extra['decision_source'],'CLIENT DECISION 2026-10-08')
+            self.assertEqual(f.record.cct_k,3000)
+            self.assertTrue(VL.photometry_for(f.kind)[1])
 
     def test_every_task_and_room_target_is_met(self):
         res = VL.check(LAY, FX)

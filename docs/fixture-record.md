@@ -188,3 +188,97 @@ To eliminate these systematic escapes, Phase 2 will introduce a single typed `Fi
 ```
 
 Every downstream consumer (Revit model builder, Blender scene exporter, Radiance daylight engine, and analytic lux verifier) will read solely from this authoritative record.
+
+# Phase 2 implementation (2026-10-08)
+
+The inventory above is historical Phase 1 evidence. Current declarations live
+in `archpipe.fixture_record.FIXTURE_KINDS`: 23 immutable `FixtureKind` records.
+`villa_lighting.KINDS` and `PRODUCT_CHOICE` are read-only compatibility views.
+A placed `FixtureRecord` owns the effective product photometry, actual flux
+and colour temperature, authored emitter datum, procedural housing dimensions
+and mount. Requirements remain separate from selected product performance:
+the existing 750-lumen / 3000-kelvin DLN requirement and its selected
+current 1343.2-lumen / 2700-kelvin bound product are retained, explicitly, without recalibration. The phase-1 inventory's 780-lumen product summary is historical; it is not the current library measurement.
+Unknown native-family, installation and measured housing data remain unknown;
+procedural dimensions are not manufacturer certification.
+
+Calculations use `record_for`, `kind_photometry` and `_emitters`; the renderer
+uses `FixtureRecord.render_position`, housing dimensions and product metadata.
+`revit_spec.lighting_spec` exports those same records in millimetres.
+`revit_spec.build` still exports its existing shell/detail specification: it
+never previously exported villa luminaires, and no native lighting placement
+or saved Revit read-back is claimed by this migration.
+
+For a placement change, capture the actual before records, lighting check,
+scene lights, fitting geometry and shell specification first. Run
+`scripts/checkpoint_c5_phase2.py` on the captured before/unified/after snapshots:
+re-expression must compare exactly; source corrections must have explicit
+numeric exceptions. Keep frozen C4 approval inputs intact. Current corrected
+vanity pairs are reconciled as complete fitting assemblies after those
+historical approvals, and `vanity_scene_findings` checks final emitter bounds
+against the immutable current records. Do not move a single member of a pair
+while claiming its authored separation is preserved.
+
+Render neutral corner previews with the complete production camera schema
+copied by `neutral_input`; do not rebuild a partial camera dictionary. Retain
+one receipt per room, inspect the actual image, and leave presentation
+rendering to the lead. Remaining lesson coverage and its limits are in
+`knowledge/c5-phase2-lessons.json` and `docs/c5-phase2-report.md`.
+
+## Lead review: vanity symmetry and infeasible layouts
+
+The Phase-2 block-shift placements are **rejected**. Pair containment and
+record agreement cannot establish symmetric flanking of a fixed mirror.
+Before accepting any pair correction, run
+`scripts/checkpoint_c5_phase2.py --lead-review`. This measures symmetry and
+complete envelopes separately from the exact numeric preservation audit,
+and exits nonzero on a failed design even if preservation passes.
+
+`centred_vanity_pair` takes the fixed basin/mirror axis, clear wall interval,
+mirror edges, complete fitting half-width, explicit sourced or ASSUMED
+minimum gap, authored preferred separation and boundary allowance. It
+returns the largest feasible symmetric separation or refuses with the
+measured separation shortfall. Never silently clamp the axis. Review the
+measured fitting centres independently with `vanity_pair_findings`.
+The historical `vanity_pair_datum` is retained solely to preserve the
+uncommitted rejected result while the lead decides a feasible design; do
+not integrate it as an accepted correction.
+
+The current guest and parents rooms have no feasible result under the lead
+instruction. Do not wire a refusing solver into their production scene and
+then substitute another placement. Retain the rejection, stop placement
+work, report shortfalls and label any renewed neutral previews as rejected
+unchanged geometry. Clean synthetic proofs demonstrate the solver, not a
+real-room correction. See the Lead review round in `c5-phase2-report.md`.
+
+For renewed diagnostics through `garden_g6_preview.py`, pass the room name
+explicitly with `--views`; the driver's empty default selects no views.
+Check `preview_receipt_findings` on each receipt and require the requested
+PNG to exist before accepting execution. Retain matching source geometry,
+camera and fill across comparisons, then inspect the PNGs.
+
+## Client decision revision (2026-10-08)
+
+The preceding pair correction is lead-rejected history. CLIENT DECISION
+2026-10-08 replaces the guest WC and parents ensuite side pairs with one
+`VANITY-LIN` per room; there are now 24 shared kind definitions and 142
+placed fixtures. The family-bath pair and all other 140 fixtures stay as
+recorded. Each ASSUMED bar is 500 by 40 by 40 mm, centred 100 mm above the
+fixed 560 mm mirror, with 100 lumens raw output at 3000 kelvin. The parents'
+existing 0.4 dimmer remains in force. Dimensions and offset are authored
+assumptions, not manufacturer claims or sourced standards.
+
+`over_mirror_datum` preserves the basin axis; `apply_vanity_decision` replaces
+both complete historical assemblies after their frozen C4 approval chain,
+using the measured finite finished wall host. `vanity_scene_findings`
+independently checks the complete casing and diffuser against the record and
+actual mirror geometry. A single is symmetric only under an explicitly
+specified over-mirror configuration; a missing side-pair member still fails.
+The native adapter carries the assumption and dated decision labels.
+
+Use `scripts/checkpoint_c5_phase2.py --client-decision` for this revision.
+It reads the completed `final-after.json` record/native baseline, preserves
+`after-scene.json` as physical before evidence, generates current-source
+lighting and same-camera preview inputs, and refuses unrelated changes.
+See the Client decision round in `docs/c5-phase2-report.md` for lux results,
+retained excess, neutral preview review and Linux/native limitations.
