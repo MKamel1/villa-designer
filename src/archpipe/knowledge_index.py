@@ -32,6 +32,7 @@ import re
 import sqlite3
 from pathlib import Path
 
+from archpipe.evidence import check_page_locator
 from archpipe import sources as src
 
 DB = src.SOURCES_ROOT / "_index" / "knowledge.sqlite"
@@ -153,6 +154,33 @@ def page_labels(doc, texts: list[str]) -> tuple[list[str], str]:
     return labels, f"{best} (agrees {best_score:.0%} with printed numbers)"
 
 
+def page_label_findings(doc, texts: list[str]) -> list[dict]:
+    """Findings for PDF sequence-number page labels that disagree with printed numbers.
+
+    Reuses candidate page labels and edge numbers extracted by page_labels().
+    Flags sequence-number labels using evidence.check_page_locator (lesson l0189).
+    """
+    n = len(texts)
+    labels, _ = page_labels(doc, texts)
+    findings = []
+    for i in range(n):
+        pdf_label = ""
+        if hasattr(doc[i], "get_label"):
+            pdf_label = _decode_label(doc[i].get_label())
+        printed = labels[i] if i < len(labels) and labels[i] else ""
+        if not printed:
+            printed = _running_head(texts[i])
+        if not printed:
+            edge_nums = _edge_numbers(texts[i])
+            if edge_nums:
+                printed = str(edge_nums[0])
+        if pdf_label and printed:
+            chk = check_page_locator(pdf_label, printed)
+            if chk.get("flagged"):
+                findings.append(dict(chk, page=i))
+    return findings
+
+
 # ------------------------------------------------------------------ contents and index
 
 _CONTENTS_LINE = re.compile(r"^(?P<title>[A-Za-z][^\n]{2,90}?)[\s.·…]{1,}(?P<page>\d{1,4})\s*$")
@@ -250,8 +278,10 @@ def build(lib: dict | None = None, db: Path = DB, only: list[str] | None = None,
             texts = [doc[i].get_text() for i in range(doc.page_count)]
             if kind == "epub":
                 labels, basis = [""] * len(texts), "epub: cite by section, not page"
+                label_findings = []
             else:
                 labels, basis = page_labels(doc, texts)
+                label_findings = page_label_findings(doc, texts)
             outline = doc.get_toc()
             toc = [{"level": lv, "title": ti.replace("\x00", "").strip(), "pdf_page": p - 1, "label": labels[p - 1] if 0 < p <= len(labels) else "",
                     "basis": "pdf outline"} for lv, ti, p in outline]
@@ -295,7 +325,8 @@ def build(lib: dict | None = None, db: Path = DB, only: list[str] | None = None,
             con.execute("insert or replace into books values(?,?,?,?,?,?,?,?)",
                         (key, s["title"], s.get("edition"), h["file"], kind, len(texts), basis, h["sha256"]))
             con.commit()
-            report[key] = {"pages": len(texts), "label_basis": basis, "toc": len(toc), "terms": len(terms),
+            report[key] = {"pages": len(texts), "label_basis": basis, "label_findings": len(label_findings),
+                           "toc": len(toc), "terms": len(terms),
                            "figure_heavy": sum(1 for i in range(len(texts)) if con.execute(
                                "select figure_heavy from pages where book=? and pdf_page=?", (key, i)).fetchone()[0])}
             log(f"  {key:34s} {len(texts):5d}p toc={len(toc):4d} terms={len(terms):5d} "
