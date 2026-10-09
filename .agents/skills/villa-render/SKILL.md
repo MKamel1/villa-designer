@@ -155,10 +155,13 @@ Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.m
      sample count, minimum visible rays and reason. Other subjects retain
      seven of thirteen rays; copied or invalid allowances fail closed.
      Never lower global visibility or QA limits to accommodate a local decision.
-   - Exposure is metered per view and LOCKED per state across the whole
-     set: `day`, `evening`, `exterior-dusk`, `exterior-day`. Rendering a
-     subset re-meters that subset, so a state's lock is only comparable when
-     the whole set (or a state rendered alone) is rendered together.
+   - The contract requires `exposure_mode: set-metered`; independent
+     per-view metering and missing modes refuse before rendering. Exposure
+     is LOCKED per state across the whole set: `day`, `evening`,
+     `exterior-dusk`, `exterior-day`. A subset request still meters every
+     scene view in each requested exposure state, preserving its whole-set
+     lock (`villa_scene.exposure_locks`). Never trim the authored scene's
+     view cohort to meter an individual render request.
    - Rooms without daylight (a windowless corridor) use the lamp white
      balance; bathrooms and basement rooms by day have their lights on,
      stated in the caption. Never correct a physical cast in camera.
@@ -184,7 +187,13 @@ Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.m
      door-band rules, each proven on the draft that broke it.
    - `scripts/villa_render_views.py`: whole subject in frame (built WC vertices
      horizontally and vertically, including lens shift), clearances,
-     doorway doors opened.
+     doorway doors opened. Plan review, scene build and exported-scene
+     contract also reject an opaque architectural face less than 1.0 m
+     along the camera's forward sightline, using C8 finite host faces
+     (C8 is the shared geometry-topology interface). Window holes and glass
+     remain open; a lens exactly on an outward face looking away is quiet,
+     while the same lens looking into it refuses. Report measured failing
+     views before camera edits; do not lower the shared clearance to pass.
    - `tests/test_villa_lighting.py`, and the render report must carry
      `qa_scene` so every render_qa check runs (none silently skipped).
 3. **Draft**: `scripts/villa_render.py --views review --samples 256
@@ -278,6 +287,23 @@ asset or view:
 4. **Physics before looks.** Refractive glass is a closed solid with
    thickness; emitters sit inside diffusers; materials carry textures at
    real-world scale. Guard each of these as a geometric/data check.
+   C3 scene export defaults to strict `PartMeshList` admission after mounting
+   and construction-zone clipping, and returns that strict collection.
+   Working shell interfaces are completed by `construction_solids` at the
+   finish builder boundary; retain their front datum and opening bridges.
+   Orient stacked finish bridges from the measured host's occupied side
+   before closure; backing must extend into that host, not into the room.
+   Carry each front's actual per-face finish through closure. Added floor
+   backing/edges use the physical substrate; never leave a stale material
+   array after adding faces. Physical admission rejects cardinality drift.
+   Preserve assembly intent separately when typing material-batched furniture
+   components. A final admission pass is required after every mutation pass.
+   Collection mode is an explicit diagnostic only. Surface exemptions have
+   registered physical reasons; retained legacy dressing/cable exceptions are
+   bound to frozen translated shape values in `knowledge/c3-part-exemptions.json`
+   and remain visibly unresolved. Never use either path for a new proxy.
+   Include exemption policy in scene provenance; revoking permission must
+   invalidate any cached scene before a renderer can consume it.
 5. **Cameras need line of sight, not just framing.** Subjects in frame is not
    enough: nothing (prop canopy, pot, wall edge, trellis) may stand between
    the lens and its subjects, and the lens may not start inside or within

@@ -164,7 +164,13 @@ def stacked_finish_bridge(lower: Host, upper: Host, lower_faces, upper_faces, sl
         edge = [p for p in face if abs(p[2] - high_bottom) < 1e-9]
         if len(edge) == 2:
             a, b = edge
-            bridges.append([list(a), list(b), [*b[:2], low_top], [*a[:2], low_top]])
+            bridge = [list(a), list(b), [*b[:2], low_top], [*a[:2], low_top]]
+            u = [bridge[1][i]-bridge[0][i] for i in range(3)]
+            v = [bridge[2][i]-bridge[0][i] for i in range(3)]
+            oriented = (u[1]*v[2]-u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0])
+            if sum(oriented[i]*upper.normal[i] for i in range(3)) < 0:
+                bridge.reverse()
+            bridges.append(bridge)
     return bridges
 
 

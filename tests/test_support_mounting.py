@@ -106,8 +106,18 @@ class SupportMounting(unittest.TestCase):
         # Shell ordinal IDs vary when doors open for a different view set;
         # stable authored fixtures/floors identify the unchanged family case.
         before={m['id']:m for m in old['family_meshes'] if not m['id'].startswith('shell-')}
+        from archpipe.concept.construction_solids import close_skin
+        from archpipe.concept.physical_part import PartMeshList
         for m in scene['meshes']:
-            if m['id'] in before:self.assertEqual(m['faces'],before[m['id']]['faces'])
+            if m['id'] in before:
+                original = before[m['id']]['faces']
+                if m.get('construction_backing_m'):
+                    # C3 completes the historical open floor at its exact
+                    # front datum. Only its declared backing may be added.
+                    self.assertEqual(m['faces'], close_skin(original))
+                    PartMeshList().append(m)
+                else:
+                    self.assertEqual(m['faces'], original)
         # Narrow room has no continuous interval, so no search step hides a
         # result; translated unrelated room retains the same feasible slide.
         item=dict(cx=2,cy=2,rot=180,w=.4,d=.55)

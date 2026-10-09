@@ -33,6 +33,8 @@ from . import villa_r11 as R
 from .villa_landscape import TROUGH_COLOUR
 from .authored_values import fill_defaults, override
 from .physical_part import PartMeshList
+from .component_kinds import component_kind
+from .part_exemptions import annotate as annotate_part
 from .mounting import MountItem, binding, check_mesh, Host, Finish, stacked_finish_bridge
 from . import stair_mounting as SM
 from . import garden_g4e
@@ -494,23 +496,23 @@ def _environment_face_sources():
 
 
 # ------------------------------------------------------------------ the scene
-def build(lay=None, views=None, *, collect_part_failures=True):
+def build(lay=None, views=None, *, collect_part_failures=False):
     from .build_cache import scope
     from .sanitary_relocation import input_revision
     with scope(), input_revision(True):
         return _build(lay, views, collect_part_failures=collect_part_failures)
 
 
-def _build(lay=None, views=None, *, collect_part_failures=True):
+def _build(lay=None, views=None, *, collect_part_failures=False):
     lay = lay or R.design("D1")
     sp = RS.build(lay)
     stair_host = SM.wall_host(sp)
     stair_finished_y = SM.finished_y(stair_host)
     return_host, return_end = SM.return_host(sp)
     stair_hosts = {h.id: h for h in (stair_host, return_host)}
-    # C3 phase 1: collect all legacy failures for the lead's checkpoint.
-    # Strict construction is available with collect_part_failures=False.
-    meshes, notes = PartMeshList(collect=collect_part_failures), []
+    # Working construction interfaces are clipped by mounting/finish builders
+    # below. Strict Part admission applies to their completed exported solids.
+    meshes, notes = PartMeshList(collect=True), []
     diagnostic_meshes = []
     mats = dict(M)
 
@@ -525,8 +527,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                 kw.update(bevel_m=0.02, subdivide=1)
             else:
                 kw.update(bevel_m=0.004)
-        meshes.append(dict(id=mid, group=group, material=mat, room=room, label=label or mid,
-                           faces=faces, part_kind=kind, **kw))
+        meshes.append(annotate_part(dict(id=mid, group=group, material=mat, room=room, label=label or mid,
+                           faces=faces, part_kind=kind, **kw)))
 
     # ---- shell: the daylight scene's faces, re-materialised
     shell = VD.scene(lay)
@@ -916,21 +918,27 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                     detail.setdefault("screen", []).extend(box_faces(b[0], b[1], z + b[2], b[3], b[4], z + b[5]))
         if detail is not None:
             by = {}
+            names = {}
             for part, faces in detail.items():
                 mat = part_material(f, part)
                 if part in ("top", "shelf", "apron") and mat == "walnut":
                     mat = "walnut-grain-x"
-                by.setdefault((mat, part if part == "microwave-glass" else "body"), []).extend(faces)
+                key = (mat, part if part == "microwave-glass" else "body")
+                by.setdefault(key, []).extend(faces)
+                names.setdefault(key, []).append(part)
             for k, ((mat, component), faces) in enumerate(by.items()):
                 meshes.append(dict(id="furn-%s-%d" % (f["mark"].replace("#", "-"), k), group="furniture",
                                    material=mat, room=f["room"], label=f["mark"].split("#")[0] +
                                    (" ASSUMED island microwave drawer front" if component == "microwave-glass" else ""),
-                                   faces=faces, part_kind="appliance-front" if component == "microwave-glass" else f["type"],
+                                   faces=faces, part_kind=component_kind(f["type"], names[(mat, component)]),
+                                   assembly_kind=f['type'],
+                                   physical_components=names[(mat, component)],
                                    keep_object=True, subdivide=1 if mat in SOFT else 0,
                                    bevel_m=0.006 if mat in SOFT else 0.0015))
             detailed.add(f["mark"])
             continue
         parts = {}
+        component_names = {}
         for part_index, (name, b) in enumerate(zip(f["parts"], f["boxes"])):
             if f["mark"] == "gwc-shower" and name == "linear-drain":
                 continue  # The bath-fitting record below owns the one visible drain.
@@ -978,6 +986,7 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                 mat = "walnut-grain-x"
             key = (mat, name) if f["type"] in ("under_stair_storage", "store_shelving") else (mat, "body")
             parts.setdefault(key, []).extend(box_faces(b[0], b[1], z + b[2], b[3], b[4], z + b[5]))
+            component_names.setdefault(key, []).append(name)
         for k, ((mat, name), faces) in enumerate(parts.items()):
             label = f["mark"].split("#")[0]
             if f["type"] in ("under_stair_storage", "store_shelving") and k:
@@ -985,7 +994,10 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                          ("vacuum-body", "vacuum-wand", "suitcase", "suitcase-handle", "storage-box",
                           "folded-linens", "tool-case") else "")
             mesh("furn-%s-%d" % (f["mark"].replace("#", "-"), k), mat, faces, "furniture", room=f["room"],
-                 label=label, kind=name if name != "body" else f["type"])
+                 label=label, kind=component_kind(f["type"], component_names[(mat, name)],
+                                                fallback=name if name != "body" else f["type"]),
+                 assembly_kind=f['type'],
+                 physical_components=component_names[(mat, name)])
     # ---- WP4-A: real furniture models, replacing the procedural stand-in where a checked fit rule allows it.
     # Mapping id -> (asset, footprint (w, d), reference height for the +-5% guard, position, rot, room). The
     # reference height is the piece's own catalogue `h` for a whole item; this codebase's catalogue.py carries no
@@ -1403,7 +1415,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             ("water-tank", "glass-guard", (x-.063, y-.108, floor+.055, x+.063, y-.088, floor+.235)),
         ):
             mesh(mid + "-" + suffix, material, box_faces(*bounds), "fixture", room=item["room"],
-                 label="ASSUMED coffee machine " + suffix + "; add to Revit", bevel_m=0.005, kind="glass-pane" if suffix == "water-tank" else "appliance-component")
+                 label="ASSUMED coffee machine " + suffix + "; add to Revit", bevel_m=0.005,
+                 kind={"water-tank": "glass-pane", "drip-tray": "appliance-tray", "spout": "appliance-spout"}[suffix])
 
         from .attached_assembly import bind
         bind(dict(meshes=meshes), mid+"-body", [mid+"-"+suffix for suffix in ("drip-tray", "spout", "water-tank")])
@@ -1423,7 +1436,7 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     else:
         vent = box_faces(hx + back * 0.30 - 0.04, hy - 0.175, ztop_i, hx + back * 0.30 + 0.04, hy + 0.175, ztop_i + 0.012)
     mesh("appliance-downdraft-island", "black-metal", vent, "fixture", room="kitchen",
-         label="ASSUMED 350 mm downdraft local capture for cooking fumes from single induction zone; duct/discharge pending", kind="appliance-component")
+         label="ASSUMED 350 mm downdraft local capture for cooking fumes from single induction zone; duct/discharge pending", kind="vent-slot")
     dirty = it_all["dk-run"]
     hob = next((a, b) for kind, a, b in F3._local_modules(dirty) if kind == "hob")
     hx, hy, _ = FD.to_world_point(dirty, sum(hob) / 2, 0, 0, LZ["B"])
@@ -2071,7 +2084,7 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             yy = fy + (housing["face_offset"] if ay > 0 else -housing["face_offset"])
             face = [[f.x - w / 2, yy, f.z - h / 2], [f.x + w / 2, yy, f.z - h / 2], [f.x + w / 2, yy, f.z + h / 2],
                     [f.x - w / 2, yy, f.z + h / 2]]
-            if ay < 0:
+            if ay > 0:
                 face = face[::-1]
             mesh("marker-" + f.id, mname, [face], "fixture", room=f.room, label="fitting " + f.id, layer=f.layer, kind="wall-marker", surface=True, occupied_side=(0,ay,0))
     notes.append("Photometry: iGuzzini Laser Evo D75 (DL AAK3EW, DLN AAIIA6, ADJ AAHENX; verified LDTs); wall "
@@ -2140,6 +2153,8 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
     from .finish_layers import build as build_finish_layers
     build_finish_layers(scene, {room:F.clear_rect(lay,room) for room in lay["rooms"]})
+    from .construction_solids import complete_shell
+    complete_shell(scene)
     from . import garden_swing
     garden_swing.mount(scene, lay)
     garden_g4d.integrate(scene)
@@ -2152,6 +2167,11 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     visibility_failures=[f for view in scene['views'] for f in subject_visibility_findings(view,scene)+subject_frame_findings(view,scene)]
     if visibility_failures:
         raise ValueError('garden subject visibility: '+str(visibility_failures))
+    from .render_views import scene_wall_hosts, wall_sightline_findings
+    walls = scene_wall_hosts(scene)
+    wall_failures = [f for view in scene['views'] for f in wall_sightline_findings(view, walls)]
+    if wall_failures:
+        raise ValueError('camera wall sightline: ' + '; '.join(wall_failures))
     final_sun_study=SunStudy(scene)
     scene["garden_sun_evidence"]["geometry_sha256"]=final_sun_study.geometry_sha256
     scene["garden_sun_evidence"]["plants"]=audit_plants(list({p["id"]:p for p in land_plan["plants"]+[m for m in land_meshes if m.get("part_kind")=="climber"]}.values()),final_sun_study)
@@ -2168,6 +2188,15 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
         emitter_failures = vanity_scene_findings(scene, [f.record for f in VL.design(lay)])
     if emitter_failures:
         raise ValueError("Final fixture records: " + "; ".join(emitter_failures))
+    # Mounting and assembly passes can mutate faces or replace the working
+    # list. Re-admit the actual final values; a cached historical collection
+    # cannot certify the exported scene. Keep the strict sink on the result.
+    admitted = PartMeshList(collect=collect_part_failures)
+    admitted.extend(scene['meshes'])
+    scene['meshes'] = admitted
+    scene['part_failures'] = admitted.failures
+    scene['part_exemptions'] = [dict(id=m['id'], kind=m['part_kind'], **m['proxy_exemption'])
+                               for m in admitted if m.get('proxy_exemption')]
     return scene
 
 
@@ -3004,6 +3033,7 @@ def source_provenance(root=None):
     inputs += [root / name for name in (
         "ops/workstation/library-manifest.json", "knowledge/garden-palette.json", "knowledge/site-orientation.json",
         "knowledge/c4-final-approvals.json",
+        "knowledge/c3-part-exemptions.json",
         "spec/villa-site.yaml", "knowledge/library.json",
         "knowledge/projects/villa-01/brief-requirements.json",
         "knowledge/projects/villa-01/taste.json")]

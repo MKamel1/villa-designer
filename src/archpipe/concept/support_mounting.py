@@ -11,6 +11,7 @@ import re
 
 from .mounting import Host, Finish, MountItem, binding, SITE_KINDS, _on_polygon
 from .fitting_mounting import points, bounds, normal, package, measured_host
+from .component_kinds import assembly_kind
 
 
 def plant_support_face(scene, prop):
@@ -180,9 +181,10 @@ def migrate(scene, lay):
         root=min(members,key=lambda m:bounds(m)[2]); bb=bounds(root);room=root['room']
         anchor=[(bb[0]+bb[3])/2,(bb[1]+bb[4])/2,bb[2]]
         item=next((it for it in furniture if it['id']==key),None)
-        if root.get('part_kind') in wall_types and item:
+        assembly = assembly_kind(root)
+        if assembly in wall_types and item:
             front=F.DIRS[item['rot']]['front'];outward=(*front,0)
-            if root.get('part_kind')=='screen':
+            if assembly=='screen':
                 host=nearest(scene,anchor,outward,[m for m in original if m['group']=='shell'
                     and m.get('room')==room and m['material']=='taupe-fabric'],'support-'+key,'wall')
             else:
@@ -297,7 +299,7 @@ def migrate(scene, lay):
                 outward=(0,0,-1);anchor[2]=bb[5]
             elif kind in ('lamp-head','lamp-arm') or 'coffee-' in mid:
                 outward=(0,0,1);anchor[2]=bb[2] if kind!='lamp-head' else bb[2]-.44
-                sources=[m for m in sources if m.get('part_kind') in ('desk','base_run')]
+                sources=[m for m in sources if assembly_kind(m) in ('desk','base_run')]
             elif kind=='appliance-housing': outward=(0,-1,0)
             else: outward=(0,1,0)
             # Lamp heads use the arm's table fixing as their assembly datum.
@@ -305,7 +307,7 @@ def migrate(scene, lay):
             if kind=='downlight-trim':
                 members=[member,next(m for m in missing if m['id']==mid.replace('fix-','lens-'))]
             if mid.startswith('dress-'):
-                sources=[m for m in sources if m.get('part_kind')=='wardrobe']
+                sources=[m for m in sources if assembly_kind(m)=='wardrobe']
                 outward=(-1,0,0) if mid.endswith('bracket-right') else (1,0,0)
                 anchor[0]=bb[3] if outward[0]<0 else bb[0]
             if kind=='lamp-head':

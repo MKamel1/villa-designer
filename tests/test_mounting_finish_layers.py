@@ -1,5 +1,6 @@
 """C4i render finish construction: real omission, topology and siblings."""
 from copy import deepcopy
+import gzip
 import json
 from pathlib import Path
 import unittest
@@ -16,8 +17,8 @@ from archpipe.concept.render_support import _triangles, _point_triangle_distance
 class FinishLayers(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        # Build the actual 9069c24 failure with construction suppressed, not a
-        # synthetic wall invented to make the new check pass.
+        # Reproduce the omitted-finish failure on current geometry. The frozen
+        # C4 inventory is reconciled explicitly with the later C5 replacement.
         with patch('archpipe.concept.finish_layers.build'):
             cls.before = VR.build(views=[])
         cls.scene = deepcopy(cls.before)
@@ -26,21 +27,24 @@ class FinishLayers(unittest.TestCase):
 
     def test_real_suppressed_finish_fires_and_clean_scene_stays_quiet(self):
         frozen_ids = json.loads(Path('tests/fixtures/c4i-floating-ids.json').read_text())
+        migration = json.loads(gzip.decompress(Path(
+            'tests/fixtures/c3-phase2c-suppressed-extra.json.gz').read_bytes()))
+        expected = (set(frozen_ids)-set(migration['missing_ids'])) | set(migration['extra_ids'])
+        # The legacy collector repeats some assembly members: 51 records,
+        # but only 35 identifiers in its retained inventory.
+        self.assertEqual(len(frozen_ids), 35)
+        self.assertEqual(len(migration['missing_ids']), 3)
+        self.assertEqual(len(migration['extra_ids']), 4)
         floating = unsupported(self.before)
-        # C5 phase 2 client decision (2026-10-08): the side sconces in the guest WC
-        # and parents ensuite became one over-mirror bar each, also mounted on the
-        # finished wall face. Exactly those ids change; everything else is the
-        # frozen C4i case.
-        removed = {'bracket-VSCONCE-parents-ensuite-04', 'lamp-SCONCE-guest-wc-04',
-                   'lamp-VSCONCE-parents-ensuite-04'}
-        added = {'body-VANITY-LIN-guest-wc-03', 'lamp-VANITY-LIN-guest-wc-03',
-                 'body-VANITY-LIN-parents-ensuite-04', 'lamp-VANITY-LIN-parents-ensuite-04'}
-        self.assertEqual(len(floating), 52)
-        self.assertEqual({mid for mid,_ in floating}, (set(frozen_ids) - removed) | added)
-        frozen_ids = sorted((set(frozen_ids) - removed) | added)
+        self.assertEqual(json.loads(json.dumps(floating)), migration['floating'])
+        self.assertEqual({mid for mid,_ in floating}, expected)
+        before = {m['id']:m for m in self.before['meshes']}
+        for frozen in migration['meshes']:
+            # Bind the new failures to actual C5 geometry, beyond their names.
+            self.assertEqual(json.loads(json.dumps(before[frozen['id']])), frozen)
         failures = surface_findings(self.before)
         failed_ids = {f.split(':')[0] for f in failures}
-        self.assertTrue(set(frozen_ids) <= failed_ids, set(frozen_ids)-failed_ids)
+        self.assertTrue(expected <= failed_ids, expected-failed_ids)
         # Plaster is a sibling that the older 15 mm float tolerance missed.
         self.assertIn('detail-headboard-slats', failed_ids)
         self.assertEqual(surface_findings(self.scene), [])
