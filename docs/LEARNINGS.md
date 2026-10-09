@@ -412,6 +412,7 @@ diagram/graph comparison in the Order review, and mark incomplete narrative
 facts missing or assumed rather than calling a generic pointer a known input.
 
 Phase 2 Batch 1 wired evidence.py authority into asset_intake.py (drift tolerance l0179), sources.py (intake edition screening l0188) and villa_daylight_finished.py (shared model hash l0661); tests/test_c12_phase2.py proves fail-closed behavior on frozen defect cases. The knowledge_index.py page-label attempt was rejected in lead review (state stored on the function object; page detection re-implemented).
+Phase 2 Batch 2 wired evidence.py authority into knowledge_index.py (sibling page_label_findings using check_page_locator without function/doc state, recorded in index build report; l0189) and guidance.py review_stage (routing scope through EvidenceRecord.apply_to so room-scoped model results cannot silently widen to dwelling scope; l0020); tests/test_c12_phase2b.py proves fail-closed defect reproduction, clean quietness, and sibling detection.
 
 ## Product library and thermal (2026-09-24)
 
