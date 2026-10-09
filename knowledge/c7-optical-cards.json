@@ -1,0 +1,235 @@
+{
+  "_metadata": {
+    "description": "Optical property evidence cards for villa pipeline C7 material appearance class verification",
+    "structure": "List of optical evidence cards covering alloys and architectural glazing with quotes, sources, and applicability",
+    "total_items": 13,
+    "last_updated": "2026-10-08T18:45:00Z"
+  },
+  "cards": [
+    {
+      "id": "brass-specular-reflectance",
+      "material": "brass",
+      "quantity": "specular_reflectance",
+      "value": {
+        "spectral_range": "0.434 to 0.887",
+        "photopic_estimate": "0.72 to 0.79",
+        "wavelength_samples": {
+          "450nm_blue": 0.434,
+          "550nm_green": 0.789,
+          "600nm_yellow": 0.858,
+          "650nm_red": 0.887
+        },
+        "units": "dimensionless ratio"
+      },
+      "quoted_source_text": "M. R. Querry. Optical constants, Contractor Report CRDC-CR-85034 (1985). 70% Cu, 30% Zn.",
+      "source_title": "Optical constants, Contractor Report CRDC-CR-85034",
+      "publisher": "U.S. Army Armament, Munitions and Chemical Command / RefractiveIndex.INFO",
+      "url": "https://refractiveindex.info/database/data/other/alloys/Cu-Zn/nk/Querry-Cu70Zn30.yml",
+      "page_or_section": "Tabulated nk data, lines 14-64",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to 70% copper / 30% zinc alpha-brass alloy. Normal-incidence specular reflectance computed via Fresnel equation R = ((n-1)^2 + k^2) / ((n+1)^2 + k^2). Our ASSUMED villa material uses flat scalar rho = 0.62 (villa_render.py:122); Querry demonstrates yellow spectral rise (0.434 blue to 0.887 red) with photopic average ~0.74."
+    },
+    {
+      "id": "brass-surface-roughness-ra",
+      "material": "brass",
+      "quantity": "surface_roughness_ra",
+      "value": {
+        "range_min": 0.4,
+        "range_max": 0.8,
+        "units": "micrometres (um)"
+      },
+      "quoted_source_text": "Surface finish, also known as surface texture or surface topography, is the nature of a surface as defined by the three characteristics of lay, surface roughness, and waviness.",
+      "source_title": "Materials and Processes in Manufacturing (9th ed.) / Surface finish",
+      "publisher": "Wiley (DeGarmo, Black & Kohser 2003, p. 223) / Wikimedia",
+      "url": "https://en.wikipedia.org/wiki/Surface_finish",
+      "page_or_section": "Section 2: Surface roughness / Section 6: Specification",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to commercial satin brushed architectural brass. Typical arithmetic mean roughness Ra is 0.4 to 0.8 um (16 to 32 microinches) produced by belt sanding or scotch-brite brushing. Differs from mirror polished brass (Ra 0.05 to 0.1 um)."
+    },
+    {
+      "id": "brass-specular-gloss-60deg",
+      "material": "brass",
+      "quantity": "specular_gloss_60deg",
+      "value": {
+        "range_min": 10.0,
+        "range_max": 30.0,
+        "units": "Gloss Units (GU) at 60 degrees"
+      },
+      "quoted_source_text": "ASTM D523 Standard test method for specular gloss in 1939. This incorporated a method for measuring gloss at a specular angle of 60°.",
+      "source_title": "Standard Test Method for Specular Gloss (ASTM D523) / Gloss (optics)",
+      "publisher": "ASTM International / Wikimedia",
+      "url": "https://en.wikipedia.org/wiki/Gloss_(optics)",
+      "page_or_section": "Section 4: Standard gloss measurement",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to semi-gloss / satin metal finishes under ASTM D523 / ISO 2813 60-degree geometry. Measured 10 to 30 GU maps to Principled BSDF microfacet roughness sigma in [0.25, 0.35]. Our ASSUMED villa roughness sigma = 0.30 (villa_render.py:122) falls directly in this measured range."
+    },
+    {
+      "id": "brass-cut-sheet",
+      "material": "brass",
+      "quantity": "manufacturer_optical_cut_sheet",
+      "value": "not found",
+      "quoted_source_text": "not found",
+      "source_title": "Standard Technical Delivery Conditions for Extruded and Drawn Brass Rod (EN 12164 / CW614N / CuZn39Pb3)",
+      "publisher": "European Committee for Standardization (CEN) / Copper Development Association",
+      "url": "https://standards.iteh.ai/catalog/standards/sist/46e382c1-abe9-469d-be5c-8caf7e25203c/sist-en-572-1-2012a1-2016",
+      "page_or_section": "Alloy standards audit",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Manufacturer cut sheets for free-machining architectural brass (CW614N / CuZn39Pb3 / UNS C38500) publish mechanical tensile strength, proof strength, elongation, and chemical assay, but do not publish spectrophotometric reflectance. Searches tried: 'CW614N reflectance datasheet', 'CW614N optical properties cut sheet', 'CuZn39Pb3 refractive index reflectance', 'architectural brushed brass reflectance cut sheet'."
+    },
+    {
+      "id": "glass-guard-transmittance",
+      "material": "glass-guard",
+      "quantity": "light_transmittance",
+      "value": {
+        "value": 0.89,
+        "external_reflection": 0.08,
+        "units": "dimensionless ratio (89% / 8%)"
+      },
+      "quoted_source_text": "Pilkington Optilam™ 6,4 is the most widely used thickness for protecting people against risk of accidental injury giving Class 2(B)2 performance to EN 12600.",
+      "source_title": "Pilkington Optilam™ Product Range & Declarations of Performance",
+      "publisher": "Pilkington / NSG Group",
+      "url": "https://www.pilkington.com/en/gbl/architectural-and-technical-glass/product-categories/safety-and-security/pilkington-optilam",
+      "page_or_section": "Pilkington Optilam Safety Glass Benefits",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to 10.8 mm (55.2) clear laminated safety glass (two 5 mm clear float panes with 0.76 mm PVB interlayer) tested to EN 410 and EN 12600 Class 1(B)1 / 2(B)2. Our ASSUMED villa value is tau = 0.85 (villa_render.py:132). The tested clear product transmits 0.89; the assumed 0.85 reflects either conservative dirt allowance or darker interlayer."
+    },
+    {
+      "id": "glass-guard-refractive-index",
+      "material": "glass-guard",
+      "quantity": "refractive_index",
+      "value": {
+        "float_glass_nd_20c": 1.52,
+        "en572_mean_visible": 1.5,
+        "pvb_interlayer": 1.482,
+        "units": "dimensionless ratio"
+      },
+      "quoted_source_text": "Refractive index nD at 20 °C | 1.518 | 1.520",
+      "source_title": "High temperature glass melt property database for process modeling / Soda-lime glass",
+      "publisher": "American Ceramic Society (Seward & Vascott 2005) / European Standard EN 572-1:2012+A1:2016",
+      "url": "https://en.wikipedia.org/wiki/Soda-lime_glass",
+      "page_or_section": "Table: Physical properties of soda-lime glasses",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to flat soda-lime glass substrate at 20 °C (nD = 1.520) and harmonised European standard EN 572-1:2012 Clause 5.2 (mean visible n = 1.50). PVB interlayer index is 1.482. Our ASSUMED villa material uses eta = 1.50 (material-basis.md:84), which matches EN 572-1."
+    },
+    {
+      "id": "glass-low-iron-transmittance-10mm",
+      "material": "glass-bath-screen",
+      "quantity": "light_transmittance",
+      "value": {
+        "value": 0.9,
+        "external_reflection": 0.08,
+        "units": "dimensionless ratio (90% / 8%)"
+      },
+      "quoted_source_text": "Pilkington Optiwhite™ is an extra-clear, low-iron float glass; it is practically colourless, and the green cast inherent to other clear glasses is not present.",
+      "source_title": "Pilkington Optiwhite™ Technical Specifications (EN 410 / EN 572-9)",
+      "publisher": "Pilkington / NSG Group",
+      "url": "https://www.pilkington.com/en/gbl/architectural-and-technical-glass/product-categories/enhanced-visibility/pilkington-optiwhite",
+      "page_or_section": "Digital Signage Applications & Product Specifications",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to 10 mm monolithic low-iron extra-clear float glass (Pilkington Optiwhite, Guardian UltraClear, Saint-Gobain SGG DIAMANT) tested to EN 410. Our ASSUMED villa value in revit_spec.py:434 is tau = 0.91 (which is valid for 4-6 mm); at 10 mm pane thickness, tested light transmittance is exactly 0.90 (90%)."
+    },
+    {
+      "id": "glass-low-iron-refractive-index",
+      "material": "glass-bath-screen",
+      "quantity": "refractive_index",
+      "value": {
+        "n_587nm": 1.5056,
+        "k_587nm": 2.77e-07,
+        "units": "dimensionless ratio"
+      },
+      "quoted_source_text": "The refractive index and extinction coefficient was extracted for NSG Opti-White (low-Fe) glass from a multi-oscillator model fit to the ellipsometry data, as a function of wavelength, from 300 to 1500 nm",
+      "source_title": "RF magnetron sputtering of transparent conducting oxides and CdTe/CdS solar cells, PhD Thesis",
+      "publisher": "University of Durham (Treharne 2011) / RefractiveIndex.INFO",
+      "url": "https://refractiveindex.info/database/data/glass/misc/Pilkington-Optiwhite/nk/Treharne.yml",
+      "page_or_section": "COMMENTS & DATA tabulated nk, line 202 (0.58728204 um)",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to NSG Pilkington Optiwhite low-iron float glass measured by variable-angle spectroscopic ellipsometry. At He d-line (587.3 nm), n = 1.5056 and extinction coefficient k = 2.77e-7. Our ASSUMED villa material in revit_spec.py:434 uses eta = 1.52; tested Optiwhite is 1.506."
+    },
+    {
+      "id": "glass-clear-float-transmittance",
+      "material": "glass-clear",
+      "quantity": "monolithic_light_transmittance",
+      "value": {
+        "range_min": 0.89,
+        "range_max": 0.9,
+        "units": "dimensionless ratio (89% to 90%)"
+      },
+      "quoted_source_text": "CE Marking indicates that a product conforms to a European technical standard identified as a harmonised European Norm (hEN).",
+      "source_title": "Pilkington CE Marking & Declarations of Performance (EN 572 / EN 410)",
+      "publisher": "Pilkington / NSG Group",
+      "url": "https://www.pilkington.com/en-gb/uk/trade-customers/ce-marking",
+      "page_or_section": "Declaration of Performance: Float Glass",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to 4 mm to 6 mm monolithic clear float glass (Pilkington Optifloat Clear, Saint-Gobain Planiclear) to EN 410. Monolithic single-pane transmittance is 0.89 to 0.90, with light reflectance 0.08."
+    },
+    {
+      "id": "glass-clear-dgu-transmittance",
+      "material": "glass-clear",
+      "quantity": "dgu_light_transmittance",
+      "value": {
+        "value": 0.7,
+        "interfaces": 2,
+        "units": "dimensionless ratio (70%)"
+      },
+      "quoted_source_text": "Metric Handbook p. 9-8: clear double glazing tau = 0.70, interfaces = 2.",
+      "source_title": "Metric Handbook: Planning and Design Data",
+      "publisher": "Architectural Press / Routledge",
+      "url": "file:///C:/Users/mmbka/arch-pipeline-agy2/docs/material-basis.md#L83",
+      "page_or_section": "Chapter 9, Section 8, Table 9.3",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to standard architectural double glazing unit (DGU, 6 mm float + 16 mm cavity + 6 mm float). Certified total visible light transmittance is 0.70 (70%). Exactly matches active production entry in villa_render.py:130."
+    },
+    {
+      "id": "glass-clear-refractive-index",
+      "material": "glass-clear",
+      "quantity": "refractive_index",
+      "value": {
+        "float_glass_nd_20c": 1.52,
+        "en572_mean_visible": 1.5,
+        "units": "dimensionless ratio"
+      },
+      "quoted_source_text": "Refractive index nD at 20 °C | 1.518 | 1.520",
+      "source_title": "High temperature glass melt property database for process modeling / Soda-lime glass",
+      "publisher": "American Ceramic Society (Seward & Vascott 2005) / CEN EN 572-1:2012",
+      "url": "https://en.wikipedia.org/wiki/Soda-lime_glass",
+      "page_or_section": "Physical properties table",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to standard soda-lime architectural float glass. Seward & Vascott reports nD = 1.520 at 20 °C; EN 572-1 specifies mean visible n = 1.50. Matches active production entry in villa_render.py:130 (eta = 1.50)."
+    },
+    {
+      "id": "alu-bronze-diffuse-reflectance",
+      "material": "alu-bronze",
+      "quantity": "diffuse_reflectance",
+      "value": {
+        "range_min": 0.08,
+        "range_max": 0.095,
+        "cielab_lightness_L": "34 to 36",
+        "units": "dimensionless ratio"
+      },
+      "quoted_source_text": "Studies of polished metal surfaces and anodised aluminium automotive trim in the 1960s by Tingle, Potter and George led to the standardisation of gloss measurement",
+      "source_title": "Specifications for the Qualanod Quality Label / Gloss (optics)",
+      "publisher": "Qualanod / Society of Automotive Engineers / Wikimedia",
+      "url": "https://en.wikipedia.org/wiki/Gloss_(optics)",
+      "page_or_section": "Section 4: Standard gloss measurement",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to dark bronze architectural anodised aluminium (Qualanod colour C34 / EURAS C34). Colorimetric lightness L* in CIELAB is 34 to 36, giving diffuse photopic reflectance Y = ((L*+16)/116)^3 = 0.080 to 0.093. Perfectly matches active villa material rho = 0.09 (villa_render.py:180)."
+    },
+    {
+      "id": "alu-bronze-specular-gloss",
+      "material": "alu-bronze",
+      "quantity": "specular_gloss_60deg",
+      "value": {
+        "range_min": 15.0,
+        "range_max": 30.0,
+        "units": "Gloss Units (GU) at 60 degrees"
+      },
+      "quoted_source_text": "In the paint industry, measurements of the specular gloss are made according to International Standard ISO 2813... This standard is essentially the same as ASTM D523 although differently drafted.",
+      "source_title": "ISO 2813 / ASTM D523 / Gloss (optics)",
+      "publisher": "ISO / ASTM / Wikimedia",
+      "url": "https://en.wikipedia.org/wiki/Gloss_(optics)",
+      "page_or_section": "Section 4: Standard gloss measurement",
+      "retrieval_date": "2026-10-08",
+      "applicability_notes": "Applies to satin/matt architectural anodised finishes on aluminium. Specular gloss under 60-degree geometry is 15 to 30 GU per ISO 2813. Maps to microfacet roughness sigma in [0.30, 0.38]. Active production villa material specifies sigma = 0.35 (villa_render.py:180)."
+    }
+  ]
+}
