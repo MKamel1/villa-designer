@@ -98,7 +98,10 @@ def record_acceptance(result, inputs, reused=False):
         metadata={'worker_runtime': result.get('worker_runtime'), 'samples': result.get('samples'),
                   'reused': reused, 'runtime_before': result.get('runtime_before'),
                   'runtime_after': result.get('runtime_after'), 'error': result.get('error')})
-    return enforce_clean_verdict(record, message='Bedroom acceptance failed')
+    try:
+        return enforce_clean_verdict(record, message='Bedroom acceptance failed')
+    except SystemExit as exc:            # main() callers and tests expect a return code
+        return exc.code
 
 
 def main():

@@ -144,7 +144,9 @@ class PresentationDecisions(unittest.TestCase):
         # neutral previews (out/garden-g4f/after-oval-*) on 2026-10-08.
         # C5 phase 2 (2026-10-08) replaced the two vanity sconce pairs with
         # over-mirror bars (lead-accepted previews); garden faces unchanged.
-        reviewed = '757fe69adf8afcc32588e6354abb46230fa8c5828775f6b5a29469ff120e62aa'
+        # Integration 4 (2026-10-09): C3 closed-solid builders and the bed
+        # import path changed non-garden meshes; garden faces unchanged.
+        reviewed = '6bad18fb130e5ffdc50f9ec15e8bd5d3999b2a66975011701d13d00e37e69ff1'
         data = json.dumps(self.scene['meshes'], sort_keys=True, separators=(',', ':')).encode()
         self.assertEqual(hashlib.sha256(data).hexdigest(), reviewed)
 

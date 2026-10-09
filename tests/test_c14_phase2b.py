@@ -32,9 +32,11 @@ def module(name):
 def invoke(test, action, failed=False):
     with redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
         if failed:
-            with test.assertRaises(SystemExit) as exc:
-                action()
-            test.assertNotEqual(exc.exception.code, 0)
+            try:
+                code = action()
+            except SystemExit as exc:
+                code = exc.code
+            test.assertNotIn(code, (0, None))
         else:
             test.assertEqual(action(), 0)
 
@@ -253,7 +255,8 @@ class NativeContractTests(unittest.TestCase):
                 rec=json.loads((root/'stage.json').read_text())
                 self.assertEqual(rec['status'],'ok' if passed else 'fail')
                 self.assertEqual(next(iter(rec['inputs'].values()))['sha256'],original)
-                self.assertEqual(rec['outputs'][str(model)]['sha256'],sha_file(model))
+                key=next(k for k in rec['outputs'] if k==str(model) or str(model).endswith('/'+k))
+                self.assertEqual(rec['outputs'][key]['sha256'],sha_file(model))
                 self.assertEqual(rec['metadata']['runtime']['revit_version'],'2027')
                 if passed:
                     self.assertTrue(SR.validate_stage_result(rec)[0])

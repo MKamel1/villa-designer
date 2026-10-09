@@ -84,7 +84,7 @@ class WallSightlineTest(unittest.TestCase):
             output = io.StringIO()
             with patch.object(review, 'OUT', Path(folder)), contextlib.redirect_stdout(output), \
                     patch('archpipe.concept.garden_g6.scene_findings', return_value=[]):
-                self.assertEqual(review.main(), 1)
+                self.assertEqual(review.main([]), 1)
             self.assertIn('v30-under-ramp-store: camera faces wall', output.getvalue())
             self.assertTrue(Path(folder, 'views-plan.png').is_file())
 

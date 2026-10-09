@@ -164,7 +164,7 @@ class TestC6CameraSeesWall(unittest.TestCase):
         violations = camera_wall_sightline_clearance(view, walls, min_clearance_m=1.0)
         self.assertEqual(len(violations), 1)
         hit_wall, hit_dist = violations[0]
-        self.assertEqual(hit_wall, tuple(partition_wall))
+        self.assertEqual(tuple(hit_wall), tuple(partition_wall))
         self.assertAlmostEqual(hit_dist, 0.847, places=3)
         self.assertLess(hit_dist, 1.0)
 

@@ -79,6 +79,7 @@ class VillaRenderContractTest(unittest.TestCase):
                                   "lens_mm": 24, "sensor_mm": 36},
                        "resolution": [640,400], "samples": 64, "layers_on": ["ambient"],
                        "dimmers": {}, "subjects": ["floor"], "exposure": "day"}],
+            "exposure_mode": "set-metered",
             "exposure": {"day": {"ev100": 9, "white_balance_k": 5500},
                          "evening": {"ev100": 3.5, "white_balance_k": 3200}},
             "sky": {"day": "nishita", "evening": {"hdri": "sky.exr", "horizontal_lux": 400}},
