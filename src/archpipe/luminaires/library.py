@@ -34,6 +34,7 @@ import zipfile
 from dataclasses import asdict, dataclass
 from pathlib import Path, PurePath, PureWindowsPath
 
+from archpipe import external_claims
 from archpipe import photometry as ph
 from archpipe.luminaires import eulumdat as eu
 
@@ -120,32 +121,19 @@ class Row:
 # ------------------------------------------------------------------ identify
 def sniff(data: bytes) -> str | None:
     """'zip' | 'rfa' | 'ies' | 'ldt' | 'gldf' | 'txt' | None, by content."""
-    if data[:4] == b"PK\x03\x04":
-        try:
-            names = zipfile.ZipFile(io.BytesIO(data)).namelist()
-        except zipfile.BadZipFile:
-            return None
-        return "gldf" if any(n.lower().endswith("product.xml") for n in names) else "zip"
-    if data[:8] == OLE_MAGIC:
-        return "rfa"
-    if data[:2] in (b"\xff\xfe", b"\xfe\xff"):          # Revit type catalogues are UTF-16
-        try:
-            if "##" in data.decode("utf-16")[:400]:
-                return "txt"
-        except UnicodeDecodeError:
-            return None
-    head = data[:400].decode("latin-1", "replace")
-    if head.lstrip().upper().startswith("IESNA") or "TILT=" in head.upper()[:400]:
-        return "ies"
-    try:
-        eu.parse(data.decode("latin-1"))
-        return "ldt"
-    except eu.LDTError:
-        pass
-    except Exception:
-        pass
-    if head.count(",") > 3 and "##" in head:          # Revit type catalogue
-        return "txt"
+    kind, encoding = external_claims.sniff_content(data)
+    if kind in ("zip", "gldf", "rfa", "ies", "ldt"):
+        return kind
+    if kind == "txt":
+        if encoding in ("utf-16-le", "utf-16-be"):
+            try:
+                if "##" in data.decode(encoding)[:400]:
+                    return "txt"
+            except UnicodeDecodeError:
+                return None
+        head = data[:400].decode("latin-1", "replace")
+        if head.count(",") > 3 and "##" in head:
+            return "txt"
     return None
 
 
@@ -221,6 +209,10 @@ def import_inbox(library: Path = LIBRARY, log=print) -> dict:
         {"ldt": ldts, "ies": iess, "rfa": rfas, "txt": txts}.get(kind, skipped).append((origin, data, kind))
     products = {}
     for origin, data, _ in ldts:
+        rec = external_claims.ingest_bytes(data, declared_type="ldt", url=origin)
+        if rec.status != external_claims.VERIFIED:
+            skipped.append((origin, data, f"ingest unverified: {rec.reasons[0] if rec.reasons else 'unverified'}"))
+            continue
         try:
             L = eu.parse(data.decode("latin-1"))
         except eu.LDTError as exc:
@@ -234,8 +226,13 @@ def import_inbox(library: Path = LIBRARY, log=print) -> dict:
         (folder / f"{sku}.ldt").write_bytes(data)
         products.setdefault(key, {"folder": folder, "ies": [], "rfa": [], "sources": []})
         products[key]["sources"].append({"origin": origin, "sha256": hashlib.sha256(data).hexdigest(),
-                                         "kind": "ldt", "imported": time.strftime("%Y-%m-%d")})
+                                         "kind": "ldt", "imported": time.strftime("%Y-%m-%d"),
+                                         "provenance": rec.value.get("provenance")})
     for origin, data, _ in iess:
+        rec = external_claims.ingest_bytes(data, declared_type="ies", url=origin)
+        if rec.status != external_claims.VERIFIED:
+            skipped.append((origin, data, f"ingest unverified: {rec.reasons[0] if rec.reasons else 'unverified'}"))
+            continue
         text = data.decode("latin-1", "replace")
         cat = re.search(r"\[LUMCAT\]\s*(.+)", text)
         mfr = _manufacturer(origin, (re.search(r"\[MANUFAC\]\s*(.+)", text) or [None, ""])[1] or "")
@@ -250,9 +247,16 @@ def import_inbox(library: Path = LIBRARY, log=print) -> dict:
         f.write_bytes(data)
         products[match]["ies"].append(f)
         products[match]["sources"].append({"origin": origin, "sha256": hashlib.sha256(data).hexdigest(),
-                                           "kind": "ies", "imported": time.strftime("%Y-%m-%d")})
+                                           "kind": "ies", "imported": time.strftime("%Y-%m-%d"),
+                                           "provenance": rec.value.get("provenance")})
     for origin, data, _ in rfas + txts:
         stem = Path(origin.split("!")[-1]).stem
+        name = Path(origin.split("!")[-1]).name
+        decl = "rfa" if name.lower().endswith(".rfa") else ("txt" if name.lower().endswith(".txt") else None)
+        rec = external_claims.ingest_bytes(data, declared_type=decl, url=origin)
+        if rec.status != external_claims.VERIFIED:
+            skipped.append((origin, data, f"ingest unverified: {rec.reasons[0] if rec.reasons else 'unverified'}"))
+            continue
         match = next((k for k in products if k[1] in origin or k[1] in stem), None)
         if match is None:
             # A zip named by product (Signify: "<name>.zip" holding "<name>.RFA") is
@@ -262,13 +266,13 @@ def import_inbox(library: Path = LIBRARY, log=print) -> dict:
         if match is None:
             skipped.append((origin, data, "rfa/txt without a matching product"))
             continue
-        name = Path(origin.split("!")[-1]).name
         (products[match]["folder"] / name).write_bytes(data)
         if name.lower().endswith(".rfa"):
             products[match]["rfa"].append(products[match]["folder"] / name)
         products[match]["sources"].append({"origin": origin, "sha256": hashlib.sha256(data).hexdigest(),
                                            "kind": "rfa" if name.lower().endswith(".rfa") else "txt",
-                                           "imported": time.strftime("%Y-%m-%d")})
+                                           "imported": time.strftime("%Y-%m-%d"),
+                                           "provenance": rec.value.get("provenance")})
     catalogue_db = library / "catalogue.sqlite"
     for key, prod in products.items():
         if key[0] == "iguzzini" and catalogue_db.is_file():
@@ -313,6 +317,11 @@ def verify_product(folder: Path) -> tuple[eu.Eulumdat, list[dict]]:
     flux_ok = abs(flux - L.lorl * 10) <= max(30.0, 0.03 * L.lorl * 10)
     flux_check = f"{'ok' if flux_ok else 'FAIL'}: distribution {flux:.0f} lm/klm vs LORL {L.lorl * 10:.0f}"
     mfr_ies = sorted(folder.glob("mfr_*.ies")) + sorted(folder.glob("mfr_*.IES"))
+    meta_path = folder / "product.json"
+    meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.is_file() else {}
+    has_meta_cct = any(meta.get(k) is not None for k in ("cct_k", "cct", "colour_temperature"))
+    has_meta_watts = any(meta.get(k) is not None for k in ("watts", "w", "power"))
+    check_agreement = has_meta_cct and has_meta_watts
     out = []
     for k, ls in enumerate(L.lamp_sets):
         conv = L.to_photometry(k)
@@ -341,9 +350,20 @@ def verify_product(folder: Path) -> tuple[eu.Eulumdat, list[dict]]:
             problems.append("no luminaire size")
         if ls.cct_k is None:
             problems.append(f"colour temperature not a single value ({ls.cct!r})")
+        agreement_ok = True
+        if check_agreement:
+            rec = external_claims.check_cct_and_watts_agreement(
+                meta,
+                {"cct_k": ls.cct_k, "watts": ls.watts},
+                source_a_label="product_record",
+                source_b_label="ldt",
+            )
+            if rec.status != external_claims.VERIFIED:
+                agreement_ok = False
+                problems.append("; ".join(rec.reasons))
         sanity = "ok" if not problems else "; ".join(problems)
         out.append({"lamp_set": k, "flux_check": flux_check, "pair_check": pair, "sanity": sanity,
-                    "verified": int(flux_ok and not pair.startswith("FAIL") and not problems),
+                    "verified": int(flux_ok and not pair.startswith("FAIL") and not problems and agreement_ok),
                     "beam": beam_angle(conv), "luminaire_lm": lm, "efficacy": eff})
     return L, out
 

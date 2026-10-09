@@ -73,11 +73,11 @@ The following call sites currently ingest external data or assert claims without
   - *Target*: Pass through `external_claims.ingest_bytes` to verify non-empty, non-HTML error payload.
 
 ### 2. Luminaire Ingestion & Catalogue Crawl
-- **[`src/archpipe/luminaires/library.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L107-L136)** (`sniff`):
-  - *Current*: Local luminaire-only sniffing function.
+- **[`src/archpipe/luminaires/library.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L121-L136)** (`sniff`) **[MIGRATED Phase 2 Batch 2]**:
+  - *Current*: Delegates to `external_claims.sniff_content`, preserving accepted luminaire types ('zip', 'rfa', 'ies', 'ldt', 'gldf', 'txt') and returning None for other or unverified formats (l0113, l0072).
   - *Target*: Replace implementation with delegation to `external_claims.sniff_content`.
-- **[`src/archpipe/luminaires/library.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L201-L278)** (`import_inbox`):
-  - *Current*: Loops through inbox and writes product folders and `product.json` records without verifying declared vs sniffed type or cross-source parameter agreement.
+- **[`src/archpipe/luminaires/library.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/library.py#L215-L278)** (`import_inbox`) **[MIGRATED Phase 2 Batch 2]**:
+  - *Current*: Ingests incoming files through `external_claims.ingest_bytes` before filing; attaches provenance records to `product.json` sources; runs `check_cct_and_watts_agreement` in `verify_product` when `product.json` already has both values, refusing to mark the product verified on divergence (l0118).
   - *Target*: Ingest incoming assets using `external_claims.ingest_bytes`; record provenance records into `product.json`; run `check_cct_and_watts_agreement` before marking product verified.
 - **[`src/archpipe/luminaires/iguzzini.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/iguzzini.py#L172-L198)** (`crawl_products`) **[MIGRATED Phase 2 Batch 1]**:
   - *Current*: Crawls product pages, writes catalogue and coverage statistics, and gates completion via `external_claims.assert_manifest_complete` against requested family count (l0122).
@@ -87,8 +87,8 @@ The following call sites currently ingest external data or assert claims without
   - *Target*: Replace with `external_claims.ingest_bytes(data, declared_type=kind, url=...)`.
 
 ### 3. Asset Intake & 3D Prop Manifest
-- **[`src/archpipe/asset_intake.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/asset_intake.py#L93-L213)** (`validate_entry`):
-  - *Current*: Evaluates bounds and metadata when local model file exists, but missing local files are reported as warnings or ignored for candidates.
+- **[`src/archpipe/asset_intake.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/asset_intake.py#L95-L235)** (`validate_entry`) **[MIGRATED Phase 2 Batch 2]**:
+  - *Current*: Evaluates bounds and metadata when local model file exists, and enforces `external_claims.check_found_content` on downloaded asset folders and files, rejecting empty directories or 0-byte models (l0072).
   - *Target*: Enforce `external_claims.check_found_content` for every downloaded asset folder to catch 0-byte or empty directories ([`l0072`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L175)).
   - *Target*: Integrate `check_photometry_fitting_agreement` during lighting asset intake ([`l0098`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L201)).
 
