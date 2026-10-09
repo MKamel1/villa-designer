@@ -155,8 +155,8 @@ class TestGuardRegistry(unittest.TestCase):
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
         self.assertEqual(report["covered_by_guard_count"], 120)
         self.assertEqual(report["covered_by_review_count"], 21)
-        self.assertEqual(report["needs_real_case_count"], 17)
-        self.assertEqual(report["uncovered_count"], 59)
+        self.assertEqual(report["needs_real_case_count"], 36)
+        self.assertEqual(report["uncovered_count"], 40)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -353,6 +353,26 @@ class TestGuardRegistry(unittest.TestCase):
             "l0031-windows-python-3",
             "l0135-python-not-found",
             "l0622-blender-exited-0",
+            # Phase 2 Batch 12 Execution Context, Thermal & Structural
+            "l0010-family-symbols-load",
+            "l0039-three-isolated-timing",
+            "l0043-full-cmake-build",
+            "l0044-render-probe-jobs",
+            "l0048-portable-mocks-accepted",
+            "l0071-blender-4-5",
+            "l0073-gltf-viewer-showed",
+            "l0116-headless-revit-probe",
+            "l0129-failing-check-read",
+            "l0130-scripted-edit-applied",
+            "l0132-stopped-pipeline-run",
+            "l0192-book-sent-workstation",
+            "l0193-every-scp-copy",
+            "l0413-locked-model-crashed",
+            "l0475-two-pieces-build",
+            "l0617-git-bash-rewrote",
+            "l0870-codex-job-dispatched",
+            "l0181-energyplus-fatal-errors",
+            "l0692-open-item-not",
         ]
         for lid in expected_needs_real_case:
             self.assertIn(lid, report["needs_real_case"], f"Lesson {lid} should be tracked as needs_real_case")

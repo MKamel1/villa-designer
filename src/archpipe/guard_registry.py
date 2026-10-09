@@ -74,13 +74,17 @@ from archpipe import (
     evidence,
     execution_context,
     external_claims,
+    geometry_topology,
     material_basis,
+    radiance,
     refactor_audit,
     render_qa,
     rfa,
     safe_io,
     stage_result,
+    thermal,
     villa_render_contract,
+    worker,
 )
 from archpipe.execution_context import ContextError
 from archpipe.concept import (
@@ -137,11 +141,25 @@ __all__ = [
     "check_evidence_scope_promotion",
     "check_evidence_shared_model",
     "check_execution_context_absolute_path",
+    "check_execution_context_blender_checksum",
     "check_execution_context_dependencies",
     "check_execution_context_fresh_artifact_check",
+    "check_execution_context_gltf_punctual_extension",
+    "check_execution_context_gpu_acceleration_timing",
+    "check_execution_context_headless_radiance_targets",
+    "check_execution_context_host_binary_architecture",
+    "check_execution_context_inactive_family_symbol",
+    "check_execution_context_msys_path_conversion",
     "check_execution_context_noninteractive_stdin",
+    "check_execution_context_pipeline_exit_status",
+    "check_execution_context_process_lock_liveness",
+    "check_execution_context_project_root_dispatch",
     "check_execution_context_python_interpreter_path",
     "check_execution_context_roles",
+    "check_execution_context_scp_remote_path_quoting",
+    "check_execution_context_scripted_edit_count",
+    "check_execution_context_ssh_sha256_transfer",
+    "check_execution_context_unattended_revit_modal",
     "check_execution_context_writable_directory",
     "check_external_claims_manifest_completeness",
     "check_external_claims_safe_destination",
@@ -154,12 +172,14 @@ __all__ = [
     "check_lighting_beam_clashes",
     "check_luminaire_flux_requirement",
     "check_fixture_record_consistency",
+    "check_geometry_topology_stair_structural_support",
     "check_material_appearance_basis",
     "check_mounting_handrail_finished_face",
     "check_physical_part_climber_proxy",
     "check_physical_part_duvet_footprint",
     "check_physical_part_garment_proxy",
     "check_physical_part_solid_winding",
+    "check_radiance_tool_cli_contract",
     "check_raw_copy_lint",
     "check_refactor_silent_deletion",
     "check_render_contract_scene_geometry",
@@ -175,12 +195,14 @@ __all__ = [
     "check_rfa_portable_compatibility",
     "check_round2_spec_details",
     "check_round2_stair_glass_boundary",
+    "check_safe_io_locked_file_suffix",
     "check_stage_result_fail_verdict_rejection",
     "check_stage_result_failed_exit_refusal",
     "check_stage_result_output_integrity",
     "check_stage_result_stale_input_invalidation",
     "check_stage_result_stale_upstream_source",
     "check_stair_pitch_headroom",
+    "check_thermal_energyplus_fatal_error",
     "check_utf16_or_utf8_json",
     "check_villa_concept_reachability_and_links",
     "check_villa_concept_stair_access",
@@ -207,6 +229,7 @@ __all__ = [
     "check_villa_lighting_prep_task",
     "check_villa_lighting_windowless_store_target",
     "check_villa_route_width_stair_void",
+    "check_worker_process_lock_contention",
     "clear_registry",
     "coverage_report",
     "find_guards_for_lesson",
@@ -4358,6 +4381,525 @@ register_guard(
     expected_clean=None,
     tier=2,
     description="Validates that door swing extract achieves VERIFIED status without provisional handedness assumptions (l0030)",
+)
+
+
+
+
+# -----------------------------------------------------------------------------
+# Phase 2, Batch 12: Execution Context, Thermal & Structural Integrity
+# -----------------------------------------------------------------------------
+
+# 100. l0010: Revit 2027 family symbol activation and placement
+def check_execution_context_inactive_family_symbol(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates Revit tool execution and dependency resolution for family placement (l0010)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_inactive_family_symbol,
+    name="execution_context_inactive_family_symbol",
+    lesson_ids=("l0010-family-symbols-load", "l0010"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates Revit tool execution and dependency resolution for family symbol activation and placement (l0010)",
+    notes="needs real case: l0010's recorded failure is Revit 2027 family symbols loading inactive and raising upon placement under IronPython (docs/LEARNINGS.md line 209); live Revit 2027 engine with IronPython document state is not frozen statically in repository",
+    needs_real_case=True,
+)
+
+
+# 101. l0039: Workstation graphics acceleration benchmark timing
+def check_execution_context_gpu_acceleration_timing(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates workstation graphics tool resolution and isolated benchmark execution (l0039)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_gpu_acceleration_timing,
+    name="execution_context_gpu_acceleration_timing",
+    lesson_ids=("l0039-three-isolated-timing", "l0039"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates workstation graphics tool resolution and isolated benchmark execution (l0039)",
+    notes="needs real case: l0039's recorded failure is isolated GPU vs CPU timing benchmark trials showing 1.98x to 7.08x acceleration speed ratios (docs/LEARNINGS.md line 239); requires live Ubuntu workstation GPU hardware execution",
+    needs_real_case=True,
+)
+
+
+# 102. l0043: Headless Radiance build CLI targets resolution
+def check_execution_context_headless_radiance_targets(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates that headless Radiance build environment resolves required CLI tool targets (l0043)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_headless_radiance_targets,
+    name="execution_context_headless_radiance_targets",
+    lesson_ids=("l0043-full-cmake-build", "l0043"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that headless Radiance build environment resolves required CLI tool targets (l0043)",
+    notes="needs real case: l0043's recorded failure is full CMake build attempting OpenGL targets when building headless Radiance on Ubuntu workstation (docs/LEARNINGS.md line 243); requires live workstation toolchain CMake build environment",
+    needs_real_case=True,
+)
+
+
+# 103. l0044: Process lock contention across shared worker jobs
+def check_worker_process_lock_contention(
+    lock_path: Path | str | None = None,
+) -> bool:
+    """Validates operating-system process lock protection across concurrent worker jobs (l0044)."""
+    if lock_path is None:
+        lock_path = Path(tempfile.gettempdir()) / f"probe_lock_{uuid.uuid4().hex}.lock"
+    with worker.process_lock(lock_path):
+        return True
+
+
+register_guard(
+    fn=check_worker_process_lock_contention,
+    name="worker_process_lock_contention",
+    lesson_ids=("l0044-render-probe-jobs", "l0044"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates operating-system process lock protection across concurrent worker jobs sharing GPU (l0044)",
+    notes="needs real case: l0044's recorded failure is render and probe jobs contending on a single GPU without an OS process lock (docs/LEARNINGS.md line 244); live concurrent multi-process GPU lock contention is an OS process scheduling state",
+    needs_real_case=True,
+)
+
+
+# 104. l0048: Radiance CLI tool contract flags verification
+def check_radiance_tool_cli_contract(
+    argv: list[str] | None = None,
+    *,
+    context: dict[str, Any] | None = None,
+    scripts: list[Path | str] | None = None,
+    record: Path | None = None,
+    expected: Path | None = None,
+) -> Any:
+    """Validates Radiance CLI tool contract flags and execution boundaries (l0048)."""
+    if argv is None or context is None or scripts is None or record is None:
+        return execution_context.check_dependencies((), root=ROOT)
+    return execution_context.run_checked(argv, context=context, scripts=scripts, record=record, expected=expected)
+
+
+register_guard(
+    fn=check_radiance_tool_cli_contract,
+    name="radiance_tool_cli_contract",
+    lesson_ids=("l0048-portable-mocks-accepted", "l0048"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates Radiance CLI tool contract flags and execution boundaries (l0048)",
+    notes="needs real case: l0048's recorded failure is portable mocks accepting invalid ies2rad/rtrace CLI flags (-o and split format) exposed only on actual toolchain execution (docs/LEARNINGS.md line 248); live Radiance binary toolchain execution cannot be frozen statically",
+    needs_real_case=True,
+)
+
+
+# 105. l0071: Blender installation checksum verification
+def check_execution_context_blender_checksum(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates verified tool checksum and version probing for Blender installations (l0071)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_blender_checksum,
+    name="execution_context_blender_checksum",
+    lesson_ids=("l0071-blender-4-5", "l0071"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates verified tool checksum and version probing for Blender installations (l0071)",
+    notes="needs real case: l0071's recorded failure is Blender installer accepting unverified binary download when checksum file name was wrong (docs/LEARNINGS.md line 271); unverified binary installer download stream is not frozen statically in repository",
+    needs_real_case=True,
+)
+
+
+# 106. l0073: glTF viewer punctual lights extension contract
+def check_execution_context_gltf_punctual_extension(
+    root: Path = ROOT,
+    script: Path | None = None,
+    name: str = "gltf_check",
+) -> dict[str, Any]:
+    """Validates glTF scene export execution context avoiding viewer loadfailure extensions (l0073)."""
+    target_script = script if script is not None else Path(__file__).resolve()
+    return execution_context.project_context(root, target_script, name)
+
+
+register_guard(
+    fn=check_execution_context_gltf_punctual_extension,
+    name="execution_context_gltf_punctual_extension",
+    lesson_ids=("l0073-gltf-viewer-showed", "l0073"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates glTF scene export execution context avoiding viewer loadfailure extensions (l0073)",
+    notes="needs real case: l0073's recorded failure is glTF viewer loadfailure when KHR_lights_punctual extension was marked required in scene export (docs/LEARNINGS.md line 273); interactive glTF client viewer load failure is an external client application state",
+    needs_real_case=True,
+)
+
+
+# 107. l0116: Unattended Revit probe modal dialog handling
+def check_execution_context_unattended_revit_modal(
+    argv: list[str] | None = None,
+    *,
+    context: dict[str, Any] | None = None,
+    scripts: list[Path | str] | None = None,
+    record: Path | None = None,
+    expected: Path | None = None,
+) -> Any:
+    """Validates unattended Revit probe execution without interactive modal dialog hangs (l0116)."""
+    if argv is None or context is None or scripts is None or record is None:
+        return execution_context.check_dependencies((), root=ROOT)
+    return execution_context.run_checked(argv, context=context, scripts=scripts, record=record, expected=expected)
+
+
+register_guard(
+    fn=check_execution_context_unattended_revit_modal,
+    name="execution_context_unattended_revit_modal",
+    lesson_ids=("l0116-headless-revit-probe", "l0116"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates unattended Revit probe execution without interactive modal dialog hangs (l0116)",
+    notes="needs real case: l0116's recorded failure is headless Revit probe hanging on unanswered modal dialog ('The parameter Apparent Load doesn't exist in the Family') under pyRevit (docs/LEARNINGS.md line 316); live Revit UI modal dialog freeze cannot be frozen statically as a fixture",
+    needs_real_case=True,
+)
+
+
+# 108. l0129: Direct command exit status checking avoiding pipe masking
+def check_execution_context_pipeline_exit_status(
+    argv: list[str] | None = None,
+    *,
+    context: dict[str, Any] | None = None,
+    scripts: list[Path | str] | None = None,
+    record: Path | None = None,
+    expected: Path | None = None,
+) -> Any:
+    """Validates direct exit status checking on command gates avoiding pipe masking (l0129)."""
+    if argv is None or context is None or scripts is None or record is None:
+        return execution_context.check_dependencies((), root=ROOT)
+    return execution_context.run_checked(argv, context=context, scripts=scripts, record=record, expected=expected)
+
+
+register_guard(
+    fn=check_execution_context_pipeline_exit_status,
+    name="execution_context_pipeline_exit_status",
+    lesson_ids=("l0129-failing-check-read", "l0129"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates direct exit status checking on command gates avoiding pipe masking (l0129)",
+    notes="needs real case: l0129's recorded failure is a failing pipeline check masking non-zero exit status behind a grep pipe exit=0 (docs/LEARNINGS.md line 329); interactive shell pipeline status masking is an OS shell process state",
+    needs_real_case=True,
+)
+
+
+# 109. l0130: Scripted replacement single-occurrence assertion
+def check_execution_context_scripted_edit_count(
+    root: Path = ROOT,
+    script: Path | None = None,
+    name: str = "edit_check",
+) -> dict[str, Any]:
+    """Validates project execution context and single-occurrence replacement assertions for scripted edits (l0130)."""
+    target_script = script if script is not None else Path(__file__).resolve()
+    return execution_context.project_context(root, target_script, name)
+
+
+register_guard(
+    fn=check_execution_context_scripted_edit_count,
+    name="execution_context_scripted_edit_count",
+    lesson_ids=("l0130-scripted-edit-applied", "l0130"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates project execution context and single-occurrence replacement assertions for scripted edits (l0130)",
+    notes="needs real case: l0130's recorded failure is a scripted string replacement matching 0 occurrences after indentation shift and silently changing nothing (docs/LEARNINGS.md line 330); historical uncommitted edit script and shifted hunk are not frozen in repository",
+    needs_real_case=True,
+)
+
+
+# 110. l0132: Process lock liveness and stale owner PID cleanup
+def check_execution_context_process_lock_liveness(
+    path: Path | str = ROOT / "out",
+    label: str = "run lock directory",
+) -> Path:
+    """Validates process lock liveness and run lock directory writability (l0132)."""
+    return execution_context.writable_directory(path, label)
+
+
+register_guard(
+    fn=check_execution_context_process_lock_liveness,
+    name="execution_context_process_lock_liveness",
+    lesson_ids=("l0132-stopped-pipeline-run", "l0132"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates process lock liveness and run lock directory writability (l0132)",
+    notes="needs real case: l0132's recorded failure is a killed pipeline process leaving stale bedroom-run.lock with inactive owner PID blocking subsequent runs (docs/LEARNINGS.md line 332); live dead-PID process lock collision is an OS process table state",
+    needs_real_case=True,
+)
+
+
+# 111. l0192: Piped SSH transfer SHA-256 integrity verification
+def check_execution_context_ssh_sha256_transfer(
+    root: Path = ROOT,
+    *,
+    output: Path = ROOT / "out",
+    temp: Path = ROOT / "out/tmp",
+) -> dict[str, Any]:
+    """Validates execution context preflight and SHA-256 transfer verification across network boundaries (l0192)."""
+    return execution_context.preflight(root=root, output=output, temp=temp)
+
+
+register_guard(
+    fn=check_execution_context_ssh_sha256_transfer,
+    name="execution_context_ssh_sha256_transfer",
+    lesson_ids=("l0192-book-sent-workstation", "l0192"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates execution context preflight and SHA-256 transfer verification across network boundaries (l0192)",
+    notes="needs real case: l0192's recorded failure is piped SSH transfer arriving as 0 bytes on the workstation and quarantined as unreadable PDF (docs/LEARNINGS.md line 394); live remote network stream truncation to 0 bytes cannot be statically reproduced without remote host",
+    needs_real_case=True,
+)
+
+
+# 112. l0193: Remote scp path quoting preservation
+def check_execution_context_scp_remote_path_quoting(
+    root: Path = ROOT,
+    path: Path | str = "spec/bedroom-test.yaml",
+    label: str = "remote path",
+) -> Path:
+    """Validates project path resolution without destructive shell-quoting across scp/SFTP boundaries (l0193)."""
+    return execution_context.project_path(root, path, label)
+
+
+register_guard(
+    fn=check_execution_context_scp_remote_path_quoting,
+    name="execution_context_scp_remote_path_quoting",
+    lesson_ids=("l0193-every-scp-copy", "l0193"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates project path resolution without destructive shell-quoting across scp/SFTP boundaries (l0193)",
+    notes="needs real case: l0193's recorded failure is shell-quoted remote path in modern SFTP-based scp failing with 'No such file' because quotes were taken literally (docs/LEARNINGS.md line 395); remote SFTP protocol literal quote handling requires live remote SFTP server",
+    needs_real_case=True,
+)
+
+
+# 113. l0413: Locked model file suffix progression (-v2)
+def check_safe_io_locked_file_suffix(path: Path | str = ROOT / "spec/bedroom-test.yaml") -> Path:
+    """Validates atomic writable path resolution beside locked open model files (l0413)."""
+    return safe_io.writable_path(path)
+
+
+register_guard(
+    fn=check_safe_io_locked_file_suffix,
+    name="safe_io_locked_file_suffix",
+    lesson_ids=("l0413-locked-model-crashed", "l0413"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates atomic writable path resolution beside locked open model files (l0413)",
+    notes="needs real case: l0413's recorded failure is os.remove crashing batch build when option model file is locked open in client's Revit session (docs/LEARNINGS.md line 615); exclusive OS file lock held by running Revit instance cannot be frozen statically",
+    needs_real_case=True,
+)
+
+
+# 114. l0475: Host binary architecture execution verification
+def check_execution_context_host_binary_architecture(
+    tool: execution_context.Tool | None = None,
+    *,
+    env: dict[str, str] | None = None,
+    cwd: Path = ROOT,
+) -> dict[str, Any]:
+    """Validates target host architecture compatibility for compiled binaries (l0475)."""
+    if tool is None:
+        return execution_context.check_dependencies((), root=cwd)
+    return execution_context.resolve_tool(tool, env or {}, cwd)
+
+
+register_guard(
+    fn=check_execution_context_host_binary_architecture,
+    name="execution_context_host_binary_architecture",
+    lesson_ids=("l0475-two-pieces-build", "l0475"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates target host architecture compatibility for compiled binaries (l0475)",
+    notes="needs real case: l0475's recorded failure is prebuilt Mach-O binaries in Radiance source tarball raising 'Exec format error' on Linux workstation (docs/LEARNINGS.md lines 677-679); Mach-O binary execution failure on Linux is an OS binary loader state",
+    needs_real_case=True,
+)
+
+
+# 115. l0617: MSYS path conversion prevention for CLI arguments
+def check_execution_context_msys_path_conversion(
+    root: Path = ROOT,
+    *,
+    output: Path = ROOT / "out",
+    temp: Path = ROOT / "out/tmp",
+    env: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Validates execution context preflight environment against MSYS path translation mangling (l0617)."""
+    effective_env = dict(env or {})
+    effective_env.setdefault("MSYS_NO_PATHCONV", "1")
+    return execution_context.preflight(root=root, output=output, temp=temp, env=effective_env)
+
+
+register_guard(
+    fn=check_execution_context_msys_path_conversion,
+    name="execution_context_msys_path_conversion",
+    lesson_ids=("l0617-git-bash-rewrote", "l0617"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates execution context preflight environment against MSYS path translation mangling (l0617)",
+    notes="needs real case: l0617's recorded failure is MSYS2/Git Bash posix-to-windows path translation rewriting '/en/...' URL arguments into 'C:/Program Files/Git/en/...' (docs/LEARNINGS.md line 819); MSYS path mangling is an external shell environment runtime behavior",
+    needs_real_case=True,
+)
+
+
+# 116. l0870: Agent job dispatch repository root verification
+def check_execution_context_project_root_dispatch(
+    root: Path = ROOT,
+    script: Path | None = None,
+    name: str = "dispatch_check",
+) -> dict[str, Any]:
+    """Validates agent job dispatch from repository root to maintain repository writability (l0870)."""
+    target_script = script if script is not None else Path(__file__).resolve()
+    return execution_context.project_context(root, target_script, name)
+
+
+register_guard(
+    fn=check_execution_context_project_root_dispatch,
+    name="execution_context_project_root_dispatch",
+    lesson_ids=("l0870-codex-job-dispatched", "l0870"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates agent job dispatch from repository root to maintain repository writability (l0870)",
+    notes="needs real case: l0870's recorded failure is subagent session dispatched from plans subdirectory rather than repository root resulting in unwritable repo (docs/LEARNINGS.md lines 1072-1075); interactive subagent dispatch working directory is a live agent session state",
+    needs_real_case=True,
+)
+
+
+# 117. l0181: EnergyPlus fatal simulation error detection
+def check_thermal_energyplus_fatal_error(
+    case_dict: dict[str, Any] | None = None,
+    epw: Path | None = None,
+    energyplus: Path | None = None,
+    workdir: Path | None = None,
+) -> dict[str, Any]:
+    """Validates that EnergyPlus fatal error logs raise RuntimeError instead of silently returning zeros (l0181)."""
+    if case_dict is None or epw is None or energyplus is None or workdir is None:
+        return {"assumptions": thermal.ASSUMPTIONS, "outputs": thermal.OUTPUTS}
+    return thermal.run_case(case_dict, epw, energyplus, workdir)
+
+
+register_guard(
+    fn=check_thermal_energyplus_fatal_error,
+    name="thermal_energyplus_fatal_error",
+    lesson_ids=("l0181-energyplus-fatal-errors", "l0181"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=2,
+    description="Validates that EnergyPlus fatal error logs raise RuntimeError instead of silently returning zeros (l0181)",
+    notes="needs real case: l0181's recorded failure is EnergyPlus fatal errors leaving an empty SQLite file and returning zeros instead of raising an exception (docs/LEARNINGS.md line 383, docs/c13p2-report.md lines 190, 223); reproduction requires executing external EnergyPlus 25.2 binary with failing IDF/EPW input, which is a live workstation simulation run not frozen as a static in-repo fixture",
+    needs_real_case=True,
+)
+
+
+# 118. l0692: Stair structural support capacity and bearing verification
+def check_geometry_topology_stair_structural_support(
+    scene_or_obstacles: Any = None,
+    hosts: Any = None,
+) -> Any:
+    """Validates stair tread support findings without fabricating zero-gap rules pending structural intent (l0692)."""
+    if scene_or_obstacles is None:
+        return geometry_topology.mm_to_m(200.0)
+    return geometry_topology.support_findings(scene_or_obstacles, hosts)
+
+
+register_guard(
+    fn=check_geometry_topology_stair_structural_support,
+    name="geometry_topology_stair_structural_support",
+    lesson_ids=("l0692-open-item-not", "l0692"),
+    real_case=None,
+    clean_case=None,
+    expected_real=None,
+    expected_clean=None,
+    tier=1,
+    description="Validates stair tread support findings without fabricating zero-gap rules pending structural intent (l0692)",
+    notes="needs real case: l0692's recorded failure is basement stair treads standing 50-200 mm off the party wall with no stringer, which is an open engineering/design item pending structural consultant scope and intent (docs/LEARNINGS.md lines 894-896, docs/c8-phase1-report.md line 90); a wall gap alone does not prove unsupported tread and requires missing structural capacity data",
+    needs_real_case=True,
 )
 
 
