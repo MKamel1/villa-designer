@@ -8,6 +8,12 @@ this dumps every plausible route to the document.
 """
 import json
 import os
+import sys
+
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
 
 out = {}
 
@@ -56,6 +62,5 @@ out["env_pyrevit"] = dict(
 
 dest = os.environ.get("ARCHPIPE_PROBE_OUT") or os.path.join(
     os.path.expanduser("~"), "archpipe_diag.json")
-with open(dest, "w") as fh:
-    json.dump(out, fh, indent=2, sort_keys=True)
+safe_io.save_json(dest, out, indent=2, sort_keys=True)
 print("archpipe: diag -> %s" % dest)
