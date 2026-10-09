@@ -761,10 +761,32 @@ def drape_cloth(cloth_specs, materials, imported_models=()):
                 raise ValueError(spec['id']+': actual mattress part binding is missing or ambiguous')
             faces=[[list(o.matrix_world@o.data.vertices[i].co) for i in p.vertices]
                    for o in mattress for p in o.data.polygons]
-            spec=mattress_cloth(spec,faces,spec['head_at_max'])
             # Every real part participates, including frame, rails, pillows
             # and any source bedding. Procedural replacements never collide.
-            colliders=instance['objects']
+            colliders=list(instance['objects'])
+            if spec.get('model_cloth_kind')=='throw':
+                supports=[o for o in bpy.data.objects if o.type=='MESH' and
+                          any(o.name.startswith(pfx) for pfx in spec['colliders']) and not o.get('replaced_by_model')]
+                if not supports:raise ValueError(spec['id']+': throw requires its already simulated duvet support')
+                colliders+=supports
+            collider_faces=[[list(o.matrix_world@o.data.vertices[i].co) for i in p.vertices]
+                            for o in colliders for p in o.data.polygons]
+            this_top=max(p[2] for f in faces for p in f)
+            other_bottoms=[min((o.matrix_world@v.co).z for o in colliders
+                if o.get('source_part') in binding['parts'] for v in o.data.vertices)
+                for binding in instance['mattress_bindings'].values() if binding['parts']!=names]
+            ceilings=[z for z in other_bottoms if z>this_top]
+            if spec.get('model_cloth_kind')=='throw':
+                lo=[c-s/2 for c,s in zip(spec['center'],spec['size'])]
+                hi=[c+s/2 for c,s in zip(spec['center'],spec['size'])]
+                support_top=max(p[2] for f in collider_faces if all(max(p[i] for p in f)>=lo[i]
+                    and min(p[i] for p in f)<=hi[i] for i in (0,1)) for p in f)
+                spec=dict(spec,z_start=support_top+.08,mattress_top=this_top,
+                          initial_collider_top_m=support_top,geometry_basis='authored throw cut over actual imported mattress and evaluated duvet')
+            else:
+                spec=mattress_cloth(spec,faces,spec['head_at_max'],collider_faces=collider_faces,
+                    collider_ceiling_m=min(ceilings) if ceilings else None,
+                    initialization_ceiling_m=(this_top+min(ceilings))/2 if ceilings else None)
         else:
             colliders = [o for o in bpy.data.objects if o.type == "MESH" and
                          any(o.name.startswith(pfx) for pfx in spec["colliders"]) and not o.get("replaced_by_model")]
@@ -777,8 +799,42 @@ def drape_cloth(cloth_specs, materials, imported_models=()):
         for v in sheet.data.vertices:
             v.co.z += rnd.uniform(0.0, 0.015)
         pin = spec.get("pin")
+        pin_indices=None;pin_support_gaps=[]
+        if instance is not None and instance.get('status')!='procedural-bed-fallback' and pin:
+            from archpipe.beds import mattress_pin_indices, cloth_support_envelope
+            from mathutils.bvhtree import BVHTree
+            pin_indices=mattress_pin_indices(spec,faces,[list(sheet.matrix_world@v.co) for v in sheet.data.vertices])
+            if not pin_indices:raise ValueError(spec['id']+': no actual mattress-supported pin vertices')
+            limit=spec.get('initialization_ceiling_m')
+            surfaces=[f for f in collider_faces if limit is None or max(p[2] for p in f)<limit]
+            support_points=[];support_faces=[]
+            for face in surfaces:
+                base=len(support_points);support_points.extend(face);support_faces.append(tuple(range(base,len(support_points))))
+            support_tree=BVHTree.FromPolygons(support_points,support_faces)
+            # Existing _simulate collision offsets: collider outer 4 mm plus
+            # cloth distance_min 4 mm. This is a construction datum, not a
+            # relaxed evaluation threshold; loft/thickness remain unchanged.
+            gap=.004+.004
+            world_points=[list(sheet.matrix_world@v.co) for v in sheet.data.vertices]
+            cell=[spec['size'][i]/max(8,int(spec['size'][i]/.03)) for i in (0,1)]
+            heights=cloth_support_envelope(world_points,collider_faces,cell,ceiling_m=limit,gap_m=gap)
+            mattress_low=[min(p[i] for f in faces for p in f) for i in (0,1)]
+            mattress_high=[max(p[i] for f in faces for p in f) for i in (0,1)]
+            inset=all(mattress_low[i]<=p[i]<=mattress_high[i] for p in world_points for i in (0,1))
+            # Inset covers start on their support envelope. Hanging cuts need
+            # the collision-safe free plane so the unsupported drops can fall;
+            # only their supported heading is anchored to the envelope.
+            if inset:
+                for vertex,height in zip(sheet.data.vertices,heights):vertex.co.z=height
+            spec['initialization_shape']='supported inset sheet' if inset else 'free overhang with supported heading'
+            for i in pin_indices:
+                sheet.data.vertices[i].co.z=heights[i]
+                point=sheet.matrix_world@sheet.data.vertices[i].co
+                location,_,_,_=support_tree.ray_cast(point,Vector((0,0,-1)))
+                if location is None:raise ValueError(spec['id']+': pinned heading has no actual source support')
+                pin_support_gaps.append(point.z-location.z)
         photoreal._simulate(sheet, colliders, spec.get("frames", 50), mass=spec.get("mass", 0.4),
-                            bending=spec.get("bending", 0.6), pin_band=tuple(pin) if pin else None)
+                            bending=spec.get("bending", 0.6), pin_band=tuple(pin) if pin else None,pin_indices=pin_indices)
         if spec.get("loft", 0) > 0:
             tex = bpy.data.textures.new("loft-" + spec["id"], type="CLOUDS")
             tex.noise_scale = 0.55
@@ -796,12 +852,23 @@ def drape_cloth(cloth_specs, materials, imported_models=()):
             poly.use_smooth = True
         pts = [sheet.matrix_world @ v.co for v in sheet.data.vertices]
         measurement=cloth_model_clearance(sheet,colliders) if instance and instance.get('status')!='procedural-bed-fallback' else None
-        if measurement and (measurement['intersections'] or measurement['inside_vertices']):
+        if measurement and (measurement['intersections'] or measurement['inside_vertices'] or measurement['uncertain_vertices']):
             raise ValueError(spec['id']+': evaluated duvet intersects actual model: '+str(measurement))
+        if spec.get('collider_ceiling_m') is not None:
+            evaluated=sheet.evaluated_get(bpy.context.evaluated_depsgraph_get())
+            if any((evaluated.matrix_world@v.co).z>=spec['collider_ceiling_m'] for v in evaluated.data.vertices):
+                raise ValueError(spec['id']+': lower duvet entered another bunk berth')
         report.append({"id": spec["id"], "colliders": len(colliders),
                        "collider_objects": [o.name for o in colliders],
                        "model_clearance": measurement,
                        "cut_geometry_basis": spec.get('geometry_basis','procedural mattress'),
+                       "mattress_top_m": spec.get('mattress_top'),
+                       "initial_collider_top_m": spec.get('initial_collider_top_m'),
+                       "collider_ceiling_m": spec.get('collider_ceiling_m'),
+                       "initialization_ceiling_m": spec.get('initialization_ceiling_m'),
+                       "initialization_shape": spec.get('initialization_shape'),
+                       "model_pin_vertices":len(pin_indices) if pin_indices is not None else None,
+                       "model_pin_support_gaps_m":sorted(set(pin_support_gaps)),
                        "bounds": [round(min(q.x for q in pts), 3), round(min(q.y for q in pts), 3),
                                   round(min(q.z for q in pts), 3), round(max(q.x for q in pts), 3),
                                   round(max(q.y for q in pts), 3), round(max(q.z for q in pts), 3)]})
@@ -813,7 +880,9 @@ def cloth_model_clearance(sheet, colliders):
 
     BVH means bounding volume hierarchy, Blender's triangle spatial index.
     All thickness/loft/subdivision modifiers participate. A surface crossing
-    or a duvet vertex behind its nearest outward model face refuses the render.
+    or a duvet vertex contained in a closed model shell refuses the render.
+    Open-shell negative-side points and inconsistent rays remain unresolved
+    refusals; a nearest-face plane alone never establishes containment.
     The 0.1 mm signed-distance tolerance is numerical, not design clearance.
     """
     from mathutils.bvhtree import BVHTree
@@ -830,14 +899,53 @@ def cloth_model_clearance(sheet, colliders):
     cp,cf=triangles([sheet]);mp,mf=triangles(colliders)
     cloth_tree=BVHTree.FromPolygons(cp,cf,all_triangles=True)
     model_tree=BVHTree.FromPolygons(mp,mf,all_triangles=True)
-    crossings=len(cloth_tree.overlap(model_tree));minimum=float('inf');inside=0
-    for point in cp:
+    from archpipe.bed_containment import face_shells, RAY_DIRECTIONS
+    import numpy as np
+    shells=face_shells(mp,mf);closed=[];face_shell={}
+    for shell in shells:
+        for i in shell['face_indices']:face_shell[i]=shell
+        if shell['closed']:
+            indices=[mf[i] for i in shell['face_indices']]
+            points=np.asarray([list(mp[i]) for f in indices for i in f])
+            closed.append((BVHTree.FromPolygons(mp,indices,all_triangles=True),points.min(0),points.max(0)))
+    directions=[Vector(d).normalized() for d in RAY_DIRECTIONS]
+    def contains(tree,point):
+        votes=[]
+        for direction in directions:
+            origin=point.copy();hits=0
+            for _ in range(len(mf)+1):
+                location,_,_,_=tree.ray_cast(origin,direction)
+                if location is None:break
+                hits+=1;origin=location+direction*.00001
+            votes.append(hits%2==1)
+        return votes[0] if len(set(votes))==1 else None
+    overlaps=cloth_tree.overlap(model_tree)
+    crossings=len(overlaps);minimum=float('inf');inside=0;uncertain=0;inside_samples=[]
+    for vertex_index,point in enumerate(cp):
         location,normal,index,distance=model_tree.find_nearest(point)
         minimum=min(minimum,distance)
-        if (point-location).dot(normal)<-.0001:inside+=1
+        signed=(point-location).dot(normal)
+        contained=False;unresolved=False
+        for tree,low,high in closed:
+            if all(low[i]<=point[i]<=high[i] for i in range(3)):
+                verdict=contains(tree,point)
+                if verdict is True:contained=True;break
+                if verdict is None:unresolved=True
+        # Do not certify volume containment for an open collider. Keep the
+        # old conservative refusal explicitly unresolved in that case.
+        if signed<-.0001 and not face_shell[index]['closed']:unresolved=True
+        if unresolved and not contained:uncertain+=1
+        if contained:
+            inside+=1
+            if len(inside_samples)<8:
+                inside_samples.append(dict(vertex_index=vertex_index,point_m=list(point),nearest_m=list(location),
+                    normal=list(normal),signed_distance_m=signed,model_triangle=[list(mp[i]) for i in mf[index]]))
     return dict(intersections=crossings,inside_vertices=inside,
                 minimum_surface_distance_m=minimum,evaluated_cloth_vertices=len(cp),
-                model_triangles=len(mf),numerical_tolerance_m=.0001)
+                model_triangles=len(mf),numerical_tolerance_m=.0001,inside_samples=inside_samples,
+                uncertain_vertices=uncertain,closed_shells=len(closed),open_shells=sum(not s['closed'] for s in shells),
+                crossing_samples=[dict(cloth_triangle=[list(cp[i]) for i in cf[a]],
+                    model_triangle=[list(mp[i]) for i in mf[b]]) for a,b in overlaps[:8]])
 
 
 def build_curtains(curtain_specs, materials):
@@ -1081,15 +1189,16 @@ def import_props(prop_specs, library_root):
     return imported
 
 
-def import_models(model_specs, library_root):
-    """Import complete glTF products at one uniform scale, centred and seated on the floor."""
+def import_models(model_specs, library_root, *, neutral_diagnostic=False):
+    """Import reviewed products; beds share the measured plan/height transform."""
     imported = []
     for spec in model_specs:
         from archpipe.asset_intake import require_registered_asset
         from pathlib import Path
         path = os.path.join(library_root, "props", spec["asset"], "model.gltf")
+        bed_pillow_prefix=('dress-pillow-'+spec.get('replaces','').removeprefix('furn-').removesuffix('-')+'-')
         if not os.path.isfile(path) and spec.get('role')=='bed':
-            fallback=[o for o in bpy.data.objects if o.type=='MESH' and o.name.startswith(spec['replaces'])]
+            fallback=[o for o in bpy.data.objects if o.type=='MESH' and o.name.startswith((spec['replaces'],bed_pillow_prefix))]
             if not fallback:
                 raise ValueError(spec['id']+': missing model and physical procedural fallback')
             for obj in fallback:
@@ -1104,7 +1213,7 @@ def import_models(model_specs, library_root):
             continue
         if spec.get('role')=='bed':
             from archpipe.beds import require_bed_geometry
-            require_bed_geometry(spec,library_root)
+            require_bed_geometry(spec,library_root,neutral_diagnostic=neutral_diagnostic)
         require_registered_asset(spec["asset"], Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
                                  Path(library_root) / "props" / spec["asset"] / "model.gltf")
         from archpipe.furniture_orientation import check_model_orientation
@@ -1119,6 +1228,38 @@ def import_models(model_specs, library_root):
         if not meshes:
             raise ValueError("model has no meshes: " + spec["asset"])
         if spec.get('role')=='bed':
+            # Generated semantic mattress cuts preserve every source face and
+            # material. They identify colliders, never remove fused extras.
+            selections=spec.get('part_selections',{})
+            by_source={}
+            for name,selection in selections.items():
+                by_source.setdefault(selection['source_mesh'],[]).append((name,selection['face_indices']))
+            for source,parts in by_source.items():
+                matches=[o for o in meshes if o.name==source]
+                if len(matches)!=1:
+                    raise ValueError(spec['id']+': ambiguous semantic source mesh '+source)
+                original=matches[0]
+                count=len(original.data.polygons)
+                assigned=[i for _,indices in parts for i in indices]
+                if len(assigned)!=len(set(assigned)) or not assigned or min(assigned)<0 or max(assigned)>=count:
+                    raise ValueError(spec['id']+': invalid/overlapping measured mattress face selection')
+                source_data=original.data.copy()
+                def cut(obj,indices):
+                    obj.data=source_data.copy()
+                    bm=bmesh.new();bm.from_mesh(obj.data);bm.faces.ensure_lookup_table()
+                    bmesh.ops.delete(bm,geom=[f for f in bm.faces if f.index not in indices],context='FACES')
+                    bmesh.ops.delete(bm,geom=[v for v in bm.verts if not v.link_faces],context='VERTS')
+                    bm.to_mesh(obj.data);bm.free()
+                for name,indices in parts:
+                    obj=original.copy();obj.name=name
+                    bpy.context.collection.objects.link(obj)
+                    cut(obj,set(indices));meshes.append(obj)
+                remaining=set(range(count))-set(assigned)
+                if remaining:
+                    cut(original,remaining)
+                else:
+                    meshes.remove(original);bpy.data.objects.remove(original,do_unlink=True)
+                bpy.data.meshes.remove(source_data)
             omitted = set(spec.get('omitted_meshes',[]))
             missing = omitted-{obj.name for obj in meshes}
             if missing:
@@ -1135,7 +1276,7 @@ def import_models(model_specs, library_root):
             root.parent = anchor
         anchor.rotation_mode = "XYZ"
         anchor.rotation_euler = tuple(math.radians(v) for v in spec["rotation_deg"])
-        anchor.scale = (spec["scale"],) * 3
+        anchor.scale = tuple(spec['scale_xyz']) if spec.get('scaling') else (spec["scale"],) * 3
         bpy.context.view_layer.update()
         def corners():
             return [obj.matrix_world @ v.co for obj in meshes for v in obj.data.vertices]
@@ -1163,7 +1304,7 @@ def import_models(model_specs, library_root):
             # Keep procedural fallback objects for a later missing-file run,
             # but remove them from both rendering and cloth collision now.
             for obj in bpy.data.objects:
-                if obj.type=='MESH' and obj.name.startswith(spec['replaces']):
+                if obj.type=='MESH' and obj.name.startswith((spec['replaces'],bed_pillow_prefix)):
                     obj.hide_render=True
                     obj['replaced_by_model']=spec['id']
         xyz = corners()
@@ -1186,7 +1327,7 @@ def import_models(model_specs, library_root):
                     min=[min((obj.matrix_world@v.co)[i] for obj in meshes if obj.get('source_part') in binding['parts'] for v in obj.data.vertices) for i in range(3)],
                     max=[max((obj.matrix_world@v.co)[i] for obj in meshes if obj.get('source_part') in binding['parts'] for v in obj.data.vertices) for i in range(3)])
                     for key,binding in spec['mattress_bindings'].items()},
-                unit_evidence=spec.get('unit_evidence'))
+                unit_evidence=spec.get('unit_evidence'),scaled_model=spec if spec.get('scaling') else None)
             if findings:
                 raise ValueError(spec['id']+': '+ '; '.join(findings))
         if "footprint_w" in spec and spec.get("role") != "bed":

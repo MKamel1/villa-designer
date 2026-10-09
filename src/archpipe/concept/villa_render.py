@@ -494,14 +494,14 @@ def _environment_face_sources():
 
 
 # ------------------------------------------------------------------ the scene
-def build(lay=None, views=None, *, collect_part_failures=True):
+def build(lay=None, views=None, *, collect_part_failures=True, bed_replacements=()):
     from .build_cache import scope
     from .sanitary_relocation import input_revision
     with scope(), input_revision(True):
-        return _build(lay, views, collect_part_failures=collect_part_failures)
+        return _build(lay, views, collect_part_failures=collect_part_failures,bed_replacements=bed_replacements)
 
 
-def _build(lay=None, views=None, *, collect_part_failures=True):
+def _build(lay=None, views=None, *, collect_part_failures=True, bed_replacements=()):
     lay = lay or R.design("D1")
     sp = RS.build(lay)
     stair_host = SM.wall_host(sp)
@@ -2196,7 +2196,10 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     naming_failures=orientation_findings(scene)
     if naming_failures:
         raise ValueError("garden orientation: "+str(naming_failures))
-    if any(m.get('role')=='bed' for m in scene['models']):
+    if bed_replacements:
+        from ..beds import integrate_bed_models
+        scene=integrate_bed_models(scene,bed_replacements,lay,sp,list(it_all.values()))
+    elif any(m.get('role')=='bed' for m in scene['models']):
         from ..beds import bed_room_review
         scene['bed_room_review'] = bed_room_review(scene,lay,sp,list(it_all.values()))
         if not scene['bed_room_review']['ok']:

@@ -290,6 +290,28 @@ def main() -> int:
            len(round4)==7 and all(not fit_bed(row['bounds_m'],*row['target_m'],None,
                row['front_axis'],row['length_axis'],mattress_bounds=row['mattress_bounds'],
                required_berths=row['required_berths'])['ok'] for row in round4))
+    from archpipe.beds import scaled_model_fit, plan_scale_findings
+    scaled=json.loads((ROOT/'tests/fixtures/bed-round5-measurements.json').read_text())
+    expect('round-5 real measured parents/bunk plan fits pass independent-factor guard',
+           len(scaled)==2 and all(scaled_model_fit(m)['ok'] for m in scaled))
+    worst=next(row for row in round4 if row['asset']=='sf_bed3_0e134823')
+    mattress=worst['mattress_bounds']['lower']
+    extent=[b-a for a,b in zip(mattress['min'],mattress['max'])]
+    expect('real worst round-4 stretch exceeds 15 percent and refuses',
+           any('exceeds 15%' in f for f in plan_scale_findings(.9/extent[2],2./extent[0])))
+    from copy import deepcopy
+    refused=[]
+    for model in scaled:
+        bad=deepcopy(model);bad['contents_review']['fused_extras']=['fused bench']
+        try:scaled_model_fit(bad);refused.append(False)
+        except ValueError:refused.append(True)
+    expect('fused-extras bed refuses even with a valid scaled fit',all(refused))
+    import gzip
+    from archpipe.bed_containment import closed_shell_contains
+    shell=json.loads(gzip.decompress((ROOT/'tests/fixtures/bed-round5-upper-containment.json.gz').read_bytes()))
+    expect('real concave source blanket outside quiet, contained point fires',
+           closed_shell_contains(shell['triangles'],shell['outside_point']) is False and
+           closed_shell_contains(shell['triangles'],shell['inside_point']) is True)
     brief_src = yaml.safe_load((ROOT / "spec/villa-brief.yaml").read_text(encoding="utf-8"))
     site_src = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))
 

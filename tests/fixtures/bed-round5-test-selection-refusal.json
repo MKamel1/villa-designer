@@ -1,0 +1,14 @@
+{
+  "modules": [
+    "tests.test_render_standard",
+    "tests.test_render_views",
+    "tests.test_geometry_topology",
+    "tests.test_asset_intake",
+    "tests.test_villa_furnish",
+    "tests.test_geometry",
+    "relationships"
+  ],
+  "tests_run": 161,
+  "exit_code": 1,
+  "passed": false
+}

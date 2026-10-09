@@ -3832,7 +3832,7 @@
       },
       "units_normalised": {
         "scale_factor": 1.0,
-        "reason": "glTF metre coordinate contract; fitted with one uniform scale only"
+        "reason": "glTF 2.0 metre source coordinates; dimensionless plan/height factors recorded separately under client decision 2026-10-09"
       },
       "bounds_m": {
         "min": [
@@ -3862,7 +3862,7 @@
       "contents": {
         "bedding": true
       },
-      "preview_image": null,
+      "preview_image": "previews/beds-round5-intake/sf_bed_upholstered_cyberfox.png",
       "neutral_preview": "out/beds/round2/candidates-preview-corrected/sf_bed_upholstered_cyberfox-plus-y.png",
       "status": "rejected-fixed-envelope",
       "fit": {
@@ -3883,6 +3883,68 @@
       "intake_sources": {
         "provenance": "/home/omar/archpipe/assets/library/props/sf_bed_upholstered_cyberfox/provenance.json",
         "licence": "/home/omar/archpipe/assets/library/props/sf_bed_upholstered_cyberfox/license.txt"
+      },
+      "expected_size_range": {
+        "min_m": [
+          1.123526692390442,
+          null,
+          1.2776499390602112
+        ],
+        "max_m": [
+          4.494106769561768,
+          null,
+          5.110599756240845
+        ],
+        "basis": "client-decision",
+        "source": "Client bed scaling decision 2026-10-09: horizontal factors 0.5\u20132.0; exact mattress, distortion and height checked by archpipe.beds. This range covers retained frame overhang; C8 still required."
+      },
+      "placement_scale_factors": [
+        [
+          1.0003897874379446,
+          0.8979948556776004,
+          0.905497480651127
+        ]
+      ],
+      "round5": {
+        "status": "scaled-plan-fit; neutral cloth reviewed; fixed-room refusal",
+        "fit": {
+          "ok": true,
+          "reason": "scaled mattresses fit exactly",
+          "sx": 0.8979948556776004,
+          "sy": 1.0003897874379446,
+          "sz": 0.905497480651127,
+          "scale_xyz": [
+            1.0003897874379446,
+            0.8979948556776004,
+            0.905497480651127
+          ],
+          "source_unit_factor": 1.0,
+          "plan_distortion": 0.1140261896969108,
+          "mattresses": {
+            "lower": {
+              "size_m": [
+                1.6,
+                2.0
+              ],
+              "error_m": [
+                0.0,
+                0.0
+              ],
+              "top_m": 0.525
+            }
+          },
+          "headboard_height_m": 1.3642693721531338,
+          "headboard_limit_m": 1.8,
+          "height_source": "ASSUMED design: unchanged procedural duvet-pb-bed mattress_top 0.527 m minus finished floor 0.002 m; villa_render.build bedding and furniture generator/detail",
+          "headboard_limit_source": "ASSUMED diagnostic cap: single 1.8 m, bunk 2.4 m; generous compared with existing authored heads 0.95/1.05/1.70 m, below room ceiling; not a standard",
+          "source": "Client bed scaling decision 2026-10-09"
+        },
+        "bed": "pb-bed",
+        "omitted_meshes": [],
+        "neutral_preview": "out/beds/round5/previews-supported/pb-bed-isolated-neutral.png",
+        "room_preview": "out/beds/round5/previews-supported/pb-bed-room-neutral.png",
+        "cloth_proof": "out/beds/round5/importer-cloth-support-final.json",
+        "integrated": false
       }
     },
     {
@@ -4488,7 +4550,7 @@
       },
       "units_normalised": {
         "scale_factor": 1.0,
-        "reason": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+        "reason": "glTF 2.0 metre source coordinates; dimensionless plan/height factors recorded separately under client decision 2026-10-09"
       },
       "bounds_m": {
         "min": [
@@ -4515,11 +4577,24 @@
         ]
       },
       "bounds_basis": "bounds_m is conservative accessor envelope; measured_bounds_m is actual imported vertices",
-      "expected_size_range": null,
+      "expected_size_range": {
+        "min_m": [
+          0.815747689848817,
+          null,
+          0.9816242914471061
+        ],
+        "max_m": [
+          3.262990759395268,
+          null,
+          3.9264971657884242
+        ],
+        "basis": "client-decision",
+        "source": "Client bed scaling decision 2026-10-09: horizontal factors 0.5\u20132.0; exact mattress, distortion and height checked by archpipe.beds. This range covers retained frame overhang; C8 still required."
+      },
       "contents": {
         "bedding": true
       },
-      "preview_image": null,
+      "preview_image": "previews/beds-round5-intake/sf_bed3_2cabd354.png",
       "neutral_preview": "out/beds/round4/candidate-previews-final/sf_bed3_2cabd354-plus-y.png",
       "status": "rejected-real-size-mattress",
       "fit": {
@@ -4584,6 +4659,66 @@
       "intake_sources": {
         "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_2cabd354/provenance.json",
         "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_2cabd354/license.txt"
+      },
+      "placement_scale_factors": [
+        [
+          1.0784696046733724,
+          1.0930191847577353,
+          0.6914099106242676
+        ]
+      ],
+      "round5": {
+        "status": "scaled-plan-fit; neutral cloth reviewed; fixed-room refusal",
+        "fit": {
+          "ok": true,
+          "reason": "scaled mattresses fit exactly",
+          "sx": 1.0784696046733724,
+          "sy": 1.0930191847577353,
+          "sz": 0.6914099106242676,
+          "scale_xyz": [
+            1.0784696046733724,
+            1.0930191847577353,
+            0.6914099106242676
+          ],
+          "source_unit_factor": 1.0,
+          "plan_distortion": 0.01349095052963456,
+          "mattresses": {
+            "lower": {
+              "size_m": [
+                0.9,
+                2.0
+              ],
+              "error_m": [
+                0.0,
+                0.0
+              ],
+              "top_m": 0.4
+            },
+            "upper": {
+              "size_m": [
+                0.8999999035773034,
+                1.9999999348509798
+              ],
+              "error_m": [
+                9.64226966049253e-08,
+                6.514902017862312e-08
+              ],
+              "top_m": 1.1226365342123605
+            }
+          },
+          "headboard_height_m": 1.3338529692675118,
+          "headboard_limit_m": 2.4,
+          "height_source": "ASSUMED design: unchanged procedural duvet-ka-bunk mattress_top 0.402 m minus finished floor 0.002 m; villa_render.build bedding and furniture generator/detail",
+          "headboard_limit_source": "ASSUMED diagnostic cap: single 1.8 m, bunk 2.4 m; generous compared with existing authored heads 0.95/1.05/1.70 m, below room ceiling; not a standard",
+          "source": "Client bed scaling decision 2026-10-09"
+        },
+        "bed": "ka-bunk",
+        "omitted_meshes": [],
+        "neutral_preview": "out/beds/round5/previews-supported/ka-bunk-isolated-neutral.png",
+        "room_preview": "out/beds/round5/previews-supported/ka-bunk-room-neutral.png",
+        "cloth_proof": "out/beds/round5/importer-cloth-support-final.json",
+        "integrated": false,
+        "upper_mattress_height_shortfall_m": 0.2773634657876396
       }
     },
     {

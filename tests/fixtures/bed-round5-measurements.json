@@ -1,0 +1,1215 @@
+[
+  {
+    "id": "model-pb-bed",
+    "asset": "sf_bed_upholstered_cyberfox",
+    "role": "bed",
+    "scale": 1.0,
+    "scale_xyz": [
+      1.0003897874379446,
+      0.8979948556776004,
+      0.905497480651127
+    ],
+    "position": [
+      20.33,
+      -25.591,
+      0.002
+    ],
+    "rotation_deg": [
+      0,
+      0,
+      -90.0
+    ],
+    "layout_rotation_deg": 0.0,
+    "front_axis": "-X",
+    "length_axis": "X",
+    "replaces": "furn-pb-bed-",
+    "room": "parents-bed",
+    "label": "pb-bed",
+    "planned_mattress_m": [
+      1.6,
+      2.0
+    ],
+    "required_berths": 1,
+    "mattress_bindings": {
+      "lower": {
+        "parts": [
+          "measured-lower-mattress"
+        ],
+        "head_at_max": false
+      }
+    },
+    "review_geometry": {
+      "schema": "bed-model-geometry/1",
+      "asset": "sf_bed_upholstered_cyberfox",
+      "coordinates": "Blender converted glTF metres, X across, Y horizontal, Z up",
+      "source_sha256": {
+        "model.gltf": "7a4a12f0986407fed871bc777a17fca73a30c11893746a3448dcd7c238019991",
+        "scene.bin": "95876e63d5f9dcab017d624cf30782295d1b2db675c9646ec2c07f2816525bf0",
+        "textures/MAT_Bed_Body_baseColor.png": "eca987c14191111980da1e297acc29921d212a6aad1e993a71f68eef6cd686e9",
+        "textures/MAT_Bed_Body_metallicRoughness.png": "87c5d8bba0382434aebf8325b14b8ef6388dee689db6f6ae3d50548035584961",
+        "textures/MAT_Bed_Body_normal.png": "8a8c25297e1ae29dd3372d6e5e340e786687896e868b0c15e08bf4a5859301f7",
+        "textures/MAT_Bed_blanket_baseColor.png": "24b3923d140705e8ad9f97f166cd4d71065db7f179001184c54b4c9ada5394bc",
+        "textures/MAT_Bed_blanket_normal.png": "dbd0aab98326555d27fdb860a59408a1c8ebeba50a0f3c5b243f852dc2b5063e"
+      },
+      "meshes": [
+        {
+          "name": "Object_4",
+          "faces": [
+            [
+              [
+                -1.0499999523162842,
+                -0.929597020149231,
+                0.1532052755355835
+              ],
+              [
+                -1.0499999523162842,
+                -0.929597020149231,
+                0.4423992335796356
+              ],
+              [
+                -1.0499999523162842,
+                0.9295972585678101,
+                0.4423992335796356
+              ]
+            ],
+            [
+              [
+                1.1455177068710327,
+                0.851921021938324,
+                1.5051748752593994
+              ],
+              [
+                1.123099684715271,
+                0.8517984747886658,
+                1.5065062046051025
+              ],
+              [
+                1.123099684715271,
+                0.781073808670044,
+                1.506422996520996
+              ]
+            ],
+            [
+              [
+                1.123099684715271,
+                0.9912869334220886,
+                1.457367181777954
+              ],
+              [
+                1.144971251487732,
+                0.9919384121894836,
+                0.11747542023658752
+              ],
+              [
+                1.123099684715271,
+                0.9949820637702942,
+                0.11718758940696716
+              ]
+            ],
+            [
+              [
+                1.123099684715271,
+                -0.980353057384491,
+                1.4369316101074219
+              ],
+              [
+                1.123099684715271,
+                -0.9831416010856628,
+                0.1224883496761322
+              ],
+              [
+                1.1451678276062012,
+                -0.9799315929412842,
+                0.12245902419090271
+              ]
+            ],
+            [
+              [
+                1.144348382949829,
+                -0.262889564037323,
+                0.0011252167169004679
+              ],
+              [
+                1.1443654298782349,
+                -0.3293125033378601,
+                0.0010842087212949991
+              ],
+              [
+                1.123099684715271,
+                -0.32935550808906555,
+                -0.00014555457164533436
+              ]
+            ],
+            [
+              [
+                1.1947256326675415,
+                0.7087753415107727,
+                1.4463012218475342
+              ],
+              [
+                1.1970534324645996,
+                0.7103269696235657,
+                0.1184629499912262
+              ],
+              [
+                1.1969521045684814,
+                0.7811083197593689,
+                0.1182996928691864
+              ]
+            ]
+          ],
+          "bounds_m": [
+            [
+              -1.0499999523162842,
+              -0.9831416010856628,
+              -0.00014555457164533436
+            ],
+            [
+              1.1970534324645996,
+              0.9949820637702942,
+              1.5065062046051025
+            ]
+          ],
+          "material_slots": [
+            "MAT_Bed_Body"
+          ]
+        },
+        {
+          "name": "Object_6",
+          "faces": [
+            [
+              [
+                -1.0039050579071045,
+                1.1014398336410522,
+                0.06512884795665741
+              ],
+              [
+                -1.0042905807495117,
+                1.0931668281555176,
+                0.06401045620441437
+              ],
+              [
+                -1.002967357635498,
+                1.0845311880111694,
+                0.10080113261938095
+              ]
+            ],
+            [
+              [
+                0.14689821004867554,
+                1.2802894115447998,
+                0.40958619117736816
+              ],
+              [
+                0.15761829912662506,
+                1.2809514999389648,
+                0.4144830107688904
+              ],
+              [
+                0.17289187014102936,
+                1.2844041585922241,
+                0.38519465923309326
+              ]
+            ],
+            [
+              [
+                -0.9023324847221375,
+                -1.0404225587844849,
+                0.02586997114121914
+              ],
+              [
+                -0.9015163779258728,
+                -1.0519405603408813,
+                0.02149186097085476
+              ],
+              [
+                -0.9256609678268433,
+                -1.055315613746643,
+                0.02132475934922695
+              ]
+            ],
+            [
+              [
+                0.17041021585464478,
+                -1.2656054496765137,
+                0.3300091028213501
+              ],
+              [
+                0.1869167685508728,
+                -1.270554780960083,
+                0.35014069080352783
+              ],
+              [
+                0.16310684382915497,
+                -1.2708964347839355,
+                0.3770468235015869
+              ]
+            ],
+            [
+              [
+                0.9719786047935486,
+                -0.4100673496723175,
+                0.8445478081703186
+              ],
+              [
+                0.9718427062034607,
+                -0.38582926988601685,
+                0.8446462750434875
+              ],
+              [
+                0.9407714605331421,
+                -0.3854028284549713,
+                0.8490031361579895
+              ]
+            ],
+            [
+              [
+                1.0450999736785889,
+                0.10381025075912476,
+                0.8277768492698669
+              ],
+              [
+                1.0434699058532715,
+                0.10139364004135132,
+                0.8329482674598694
+              ],
+              [
+                1.0433070659637451,
+                0.0952109843492508,
+                0.8332721590995789
+              ]
+            ]
+          ],
+          "bounds_m": [
+            [
+              -1.0042905807495117,
+              -1.2708964347839355,
+              0.02132475934922695
+            ],
+            [
+              1.0450999736785889,
+              1.2844041585922241,
+              0.8490031361579895
+            ]
+          ],
+          "material_slots": [
+            "MAT_Bed_blanket"
+          ]
+        },
+        {
+          "name": "measured-lower-mattress",
+          "faces": [
+            [
+              [
+                0.999610424041748,
+                -0.6798102259635925,
+                0.5458076000213623
+              ],
+              [
+                0.9985136985778809,
+                0.7352278828620911,
+                0.547613263130188
+              ],
+              [
+                0.9978625774383545,
+                0.7359426617622375,
+                0.5679378509521484
+              ]
+            ],
+            [
+              [
+                -0.9996103048324585,
+                -0.6798102855682373,
+                0.3763881325721741
+              ],
+              [
+                -0.9989393949508667,
+                -0.6742548942565918,
+                0.3554711937904358
+              ],
+              [
+                -0.9937796592712402,
+                -0.7826949954032898,
+                0.3559266924858093
+              ]
+            ],
+            [
+              [
+                0.9867345690727234,
+                -0.6705895662307739,
+                0.34262222051620483
+              ],
+              [
+                0.9549881219863892,
+                -0.6689342856407166,
+                0.3357709050178528
+              ],
+              [
+                0.9559560418128967,
+                0.736720085144043,
+                0.3361138701438904
+              ]
+            ],
+            [
+              [
+                -0.9848215579986572,
+                0.8175070881843567,
+                0.5680290460586548
+              ],
+              [
+                -0.9978624582290649,
+                0.7359426617622375,
+                0.5679378509521484
+              ],
+              [
+                -0.9853140711784363,
+                0.7364564538002014,
+                0.5796462297439575
+              ]
+            ],
+            [
+              [
+                0.881746232509613,
+                -0.8928894996643066,
+                0.5443999767303467
+              ],
+              [
+                -0.8817461133003235,
+                -0.8928894996643066,
+                0.5443999767303467
+              ],
+              [
+                -0.8817461133003235,
+                -0.8928895592689514,
+                0.37779587507247925
+              ]
+            ],
+            [
+              [
+                -0.9012730121612549,
+                0.8888578414916992,
+                0.5473322868347168
+              ],
+              [
+                -0.955032229423523,
+                0.8637750744819641,
+                0.5471463203430176
+              ],
+              [
+                -0.9556877017021179,
+                0.8622626662254333,
+                0.5680997371673584
+              ]
+            ]
+          ],
+          "bounds_m": [
+            [
+              -1.0499999523162842,
+              -0.9831416010856628,
+              -0.00014555457164533436
+            ],
+            [
+              1.1970534324645996,
+              0.9949820637702942,
+              1.5065062046051025
+            ]
+          ],
+          "material_slots": [
+            "MAT_Bed_Body"
+          ]
+        },
+        {
+          "name": "frozen-source-bedding-envelope",
+          "faces": [
+            [
+              [
+                0.41663283109664917,
+                -0.04643342271447182,
+                0.7562099099159241
+              ],
+              [
+                0.45573171973228455,
+                -0.04675096273422241,
+                0.7618568539619446
+              ],
+              [
+                0.45573171973228455,
+                0.0601298063993454,
+                0.761856734752655
+              ]
+            ]
+          ],
+          "material_slots": [
+            "MAT_Bed_blanket"
+          ],
+          "source_mesh": "Object_6",
+          "source_face_index": 5922
+        }
+      ],
+      "derivation": "generated semantic connected-component selections; every source face retained exactly once"
+    },
+    "unit_evidence": {
+      "unit": "m",
+      "source": "glTF 2.0 metres; downloaded files unmodified"
+    },
+    "contents_review": {
+      "status": "bed-only",
+      "basis": "Round 2/4 full-size opposing neutral images and actual connected parts; no bedside tables, benches or rugs",
+      "extras": [],
+      "fused_extras": []
+    },
+    "omitted_meshes": [],
+    "footprint_w": 1.6000000000000014,
+    "footprint_d": 2.0,
+    "reference_h": 0.5,
+    "scaling": {
+      "decision_date": "2026-10-09",
+      "mattress_top_m": 0.525,
+      "height_source": "ASSUMED design: unchanged procedural duvet-pb-bed mattress_top 0.527 m minus finished floor 0.002 m; villa_render.build bedding and furniture generator/detail",
+      "headboard_parts": [
+        "Object_4"
+      ],
+      "headboard_limit_m": 1.8,
+      "headboard_limit_source": "ASSUMED diagnostic cap: single 1.8 m, bunk 2.4 m; generous compared with existing authored heads 0.95/1.05/1.70 m, below room ceiling; not a standard"
+    },
+    "native_bounds": {
+      "min": [
+        -1.0499999523162842,
+        -0.00014555457164533436,
+        -1.2844041585922241
+      ],
+      "max": [
+        1.1970534324645996,
+        1.5065062046051025,
+        1.2708964347839355
+      ]
+    },
+    "orientation_evidence": {
+      "front_axis": "-X",
+      "basis": "Round 2/4 actual headboard/pillow component placement and opposing neutral previews; both bunk heads at source positive Blender Y"
+    },
+    "attribution": {
+      "credit": "Model Information:\n* title:\tUpholstered Bed || Free model\n* source:\thttps://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be\n* author:\tCyberFox 3D Studio (https://sketchfab.com/cyberfox3d)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Upholstered Bed || Free model\" (https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be) by CyberFox 3D Studio (https://sketchfab.com/cyberfox3d) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "author": "cyberfox3d",
+      "licence": "CC Attribution",
+      "source_url": "https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be"
+    },
+    "scaled_fit": {
+      "ok": true,
+      "reason": "scaled mattresses fit exactly",
+      "sx": 0.8979948556776004,
+      "sy": 1.0003897874379446,
+      "sz": 0.905497480651127,
+      "scale_xyz": [
+        1.0003897874379446,
+        0.8979948556776004,
+        0.905497480651127
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.1140261896969108,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            1.6,
+            2.0
+          ],
+          "error_m": [
+            0.0,
+            0.0
+          ],
+          "top_m": 0.525
+        }
+      },
+      "headboard_height_m": 1.3642693721531338,
+      "headboard_limit_m": 1.8,
+      "height_source": "ASSUMED design: unchanged procedural duvet-pb-bed mattress_top 0.527 m minus finished floor 0.002 m; villa_render.build bedding and furniture generator/detail",
+      "headboard_limit_source": "ASSUMED diagnostic cap: single 1.8 m, bunk 2.4 m; generous compared with existing authored heads 0.95/1.05/1.70 m, below room ceiling; not a standard",
+      "source": "Client bed scaling decision 2026-10-09"
+    },
+    "diagnostic_status": "proposed scaled candidate; neutral, C8 and cloth review required",
+    "resulting_mattresses_world_m": {
+      "lower": {
+        "min": [
+          19.529999999999998,
+          -26.591,
+          0.30617150786753666
+        ],
+        "max": [
+          21.13,
+          -24.591,
+          0.5269999999999999
+        ]
+      }
+    },
+    "regression_scope": "Frozen actual extremal triangles only; full receipt in out/beds/round5. Not a production asset receipt."
+  },
+  {
+    "id": "model-ka-bunk",
+    "asset": "sf_bed3_2cabd354",
+    "role": "bed",
+    "scale": 1.0,
+    "scale_xyz": [
+      1.0784696046733724,
+      1.0930191847577353,
+      0.6914099106242676
+    ],
+    "position": [
+      11.977,
+      -25.45,
+      0.002
+    ],
+    "rotation_deg": [
+      0,
+      0,
+      180.0
+    ],
+    "layout_rotation_deg": 0.0,
+    "front_axis": "+Z",
+    "length_axis": "Z",
+    "replaces": "furn-ka-bunk-",
+    "room": "kids-a",
+    "label": "ka-bunk",
+    "planned_mattress_m": [
+      0.9,
+      2.0
+    ],
+    "required_berths": 2,
+    "mattress_bindings": {
+      "lower": {
+        "parts": [
+          "measured-lower-mattress"
+        ],
+        "head_at_max": false
+      },
+      "upper": {
+        "parts": [
+          "measured-upper-mattress"
+        ],
+        "head_at_max": false
+      }
+    },
+    "review_geometry": {
+      "schema": "bed-model-geometry/1",
+      "asset": "sf_bed3_2cabd354",
+      "coordinates": "Blender converted glTF metres, X across, Y horizontal, Z up",
+      "source_sha256": {
+        "model.gltf": "cdb5d9402a76ca12746dca7e8a8779b7942dec797f18f5034e1cf8ac307e4ee1",
+        "scene.bin": "2ae6a54f2bde5a06d1641805270262f682aa635dab8113d3d84e7fc35d47815e",
+        "textures/cgt_bunk_bed_f_house_wood_baseColor.jpeg": "8ba9f4012b82f0d38607193e71ade07673fe48dfc8369b04b4716eb2a3cd787e",
+        "textures/cgt_bunk_bed_f_house_wood_metallicRoughness.png": "cf78fb0ebdd0e1059d36bc80e32eec4275a8f4b463bb0f08ea1c7ce658527b83",
+        "textures/cgt_bunk_bed_f_house_wood_normal.png": "181162e519e0bd173200fcee62ec589c1370ecf0505111e11f1b788827a2d0fd",
+        "textures/cgt_bunk_bed_f_house_carpet_baseColor.jpeg": "188114408f370e935bc54ab62f7c0592e44c675af9266e7ccdf48e9f2e5023df",
+        "textures/cgt_bunk_bed_f_house_carpet_metallicRoughness.png": "75e56adaf55aa916d5487246972b1c96de812519cc64aee0d69a0559905d70a2"
+      },
+      "meshes": [
+        {
+          "name": "Bunk_cgt_bunk_bed_f_house_carpet_0",
+          "faces": [
+            [
+              [
+                -0.17299923300743103,
+                0.9579049348831177,
+                1.771469235420227
+              ],
+              [
+                -0.1591029167175293,
+                0.9609658122062683,
+                1.754625916481018
+              ],
+              [
+                -0.1815958470106125,
+                0.959441602230072,
+                1.7497354745864868
+              ]
+            ],
+            [
+              [
+                0.04192715883255005,
+                0.7018411159515381,
+                1.9462549686431885
+              ],
+              [
+                0.03125293180346489,
+                0.7047988176345825,
+                1.9506189823150635
+              ],
+              [
+                0.02464335970580578,
+                0.7011109590530396,
+                1.956217885017395
+              ]
+            ],
+            [
+              [
+                -0.49201419949531555,
+                0.5493999719619751,
+                1.5286083221435547
+              ],
+              [
+                -0.4917493164539337,
+                0.5374827980995178,
+                1.5287816524505615
+              ],
+              [
+                -0.4914320111274719,
+                0.5373087525367737,
+                1.5322343111038208
+              ]
+            ],
+            [
+              [
+                0.5747830271720886,
+                0.5356822609901428,
+                1.5294959545135498
+              ],
+              [
+                0.5736739635467529,
+                0.5487167835235596,
+                1.528552532196045
+              ],
+              [
+                0.571535587310791,
+                0.5497690439224243,
+                1.5341510772705078
+              ]
+            ],
+            [
+              [
+                0.5332151055335999,
+                0.0008305400260724127,
+                0.4561053514480591
+              ],
+              [
+                0.5315042734146118,
+                -0.02075709030032158,
+                0.45368027687072754
+              ],
+              [
+                0.5314505696296692,
+                0.0007564023253507912,
+                0.4536101222038269
+              ]
+            ],
+            [
+              [
+                0.5047388076782227,
+                -0.846324622631073,
+                0.518419086933136
+              ],
+              [
+                0.4971548318862915,
+                -0.8463510274887085,
+                0.5285418033599854
+              ],
+              [
+                0.49542465806007385,
+                -0.8488701581954956,
+                0.5264971256256104
+              ]
+            ]
+          ],
+          "bounds_m": [
+            [
+              -0.49201419949531555,
+              -0.8680909276008606,
+              0.4536101222038269
+            ],
+            [
+              0.5747830271720886,
+              0.961703360080719,
+              1.956217885017395
+            ]
+          ],
+          "material_slots": [
+            "cgt_bunk_bed_f_house_carpet"
+          ]
+        },
+        {
+          "name": "Bunk_cgt_bunk_bed_f_house_wood_0",
+          "faces": [
+            [
+              [
+                -0.4653705954551697,
+                1.02029550075531,
+                -3.810761768363591e-07
+              ],
+              [
+                -0.4653705954551697,
+                0.9443557262420654,
+                -3.6380382084644225e-07
+              ],
+              [
+                -0.4653705954551697,
+                0.9443559646606445,
+                1.0040130615234375
+              ]
+            ],
+            [
+              [
+                -0.47104573249816895,
+                -0.9333456158638,
+                1.9291778802871704
+              ],
+              [
+                0.5506007075309753,
+                -0.9333455562591553,
+                1.9291778802871704
+              ],
+              [
+                0.5506007075309753,
+                -0.851552426815033,
+                1.9291778802871704
+              ]
+            ],
+            [
+              [
+                0.5680204629898071,
+                0.31209731101989746,
+                1.899990439414978
+              ],
+              [
+                0.5680789947509766,
+                0.3130699694156647,
+                1.9003490209579468
+              ],
+              [
+                0.5681387186050415,
+                0.3126938045024872,
+                1.9013696908950806
+              ]
+            ],
+            [
+              [
+                -0.43475767970085144,
+                -0.9364475011825562,
+                0.48527565598487854
+              ],
+              [
+                -0.43471667170524597,
+                -0.9365655779838562,
+                0.48720642924308777
+              ],
+              [
+                -0.43685024976730347,
+                -0.9366859793663025,
+                0.48720651865005493
+              ]
+            ],
+            [
+              [
+                -0.43475785851478577,
+                1.0263242721557617,
+                1.5170470476150513
+              ],
+              [
+                -0.4368504285812378,
+                1.026442289352417,
+                1.5170470476150513
+              ],
+              [
+                -0.4368504285812378,
+                1.0265626907348633,
+                1.5189777612686157
+              ]
+            ],
+            [
+              [
+                -0.5087324976921082,
+                -0.379963755607605,
+                1.5113039016723633
+              ],
+              [
+                -0.5087324976921082,
+                -0.3511498272418976,
+                1.5113039016723633
+              ],
+              [
+                -1.0567123889923096,
+                -0.3511502146720886,
+                0.024585777893662453
+              ]
+            ]
+          ],
+          "bounds_m": [
+            [
+              -1.0567123889923096,
+              -0.9366859793663025,
+              -3.810761768363591e-07
+            ],
+            [
+              0.5681387186050415,
+              1.0265626907348633,
+              1.9291778802871704
+            ]
+          ],
+          "material_slots": [
+            "cgt_bunk_bed_f_house_wood"
+          ]
+        },
+        {
+          "name": "measured-lower-mattress",
+          "faces": [
+            [
+              [
+                -0.24171173572540283,
+                0.9616121649742126,
+                0.49001485109329224
+              ],
+              [
+                -0.24170571565628052,
+                0.9615216851234436,
+                0.511908769607544
+              ],
+              [
+                -0.16723281145095825,
+                0.9616122245788574,
+                0.51191246509552
+              ]
+            ],
+            [
+              [
+                0.24678753316402435,
+                -0.5414632558822632,
+                0.5785276293754578
+              ],
+              [
+                0.32126644253730774,
+                -0.5414632558822632,
+                0.5782970786094666
+              ],
+              [
+                0.32126641273498535,
+                -0.27252504229545593,
+                0.5782970190048218
+              ]
+            ],
+            [
+              [
+                0.4570353031158447,
+                -0.541463315486908,
+                0.49001529812812805
+              ],
+              [
+                0.45666468143463135,
+                -0.5414632558822632,
+                0.5119128227233887
+              ],
+              [
+                0.4562956988811493,
+                -0.7166598439216614,
+                0.5119091868400574
+              ]
+            ],
+            [
+              [
+                -0.37748056650161743,
+                0.6403307914733887,
+                0.4900150001049042
+              ],
+              [
+                -0.3771098852157593,
+                0.6403308510780334,
+                0.5119125843048096
+              ],
+              [
+                -0.3767409920692444,
+                0.8145751953125,
+                0.5119088292121887
+              ]
+            ],
+            [
+              [
+                -0.2417115718126297,
+                -0.8679835200309753,
+                0.49001529812812805
+              ],
+              [
+                -0.16723264753818512,
+                -0.8680909276008606,
+                0.4900153577327728
+              ],
+              [
+                -0.16723264753818512,
+                -0.8679836988449097,
+                0.5119128823280334
+              ]
+            ],
+            [
+              [
+                0.2467873990535736,
+                0.9617031216621399,
+                0.490014910697937
+              ],
+              [
+                0.24678729474544525,
+                0.9616122841835022,
+                0.51191246509552
+              ],
+              [
+                0.3212602436542511,
+                0.9615217447280884,
+                0.511908769607544
+              ]
+            ]
+          ],
+          "bounds_m": [
+            [
+              -0.49201419949531555,
+              -0.8680909276008606,
+              0.4536101222038269
+            ],
+            [
+              0.5747830271720886,
+              0.961703360080719,
+              1.956217885017395
+            ]
+          ],
+          "material_slots": [
+            "cgt_bunk_bed_f_house_carpet"
+          ]
+        },
+        {
+          "name": "measured-upper-mattress",
+          "faces": [
+            [
+              [
+                -0.24171173572540283,
+                0.9616124629974365,
+                1.5082672834396362
+              ],
+              [
+                -0.2417057454586029,
+                0.9615219235420227,
+                1.5368179082870483
+              ],
+              [
+                -0.16723281145095825,
+                0.9616124629974365,
+                1.53682279586792
+              ]
+            ],
+            [
+              [
+                -0.24171173572540283,
+                0.9616124629974365,
+                1.5082672834396362
+              ],
+              [
+                -0.16723281145095825,
+                0.9616124629974365,
+                1.53682279586792
+              ],
+              [
+                -0.16723281145095825,
+                0.961703360080719,
+                1.5082674026489258
+              ]
+            ],
+            [
+              [
+                0.24678753316402435,
+                -0.5414630770683289,
+                1.6236913204193115
+              ],
+              [
+                0.32126644253730774,
+                -0.5414630770683289,
+                1.6233906745910645
+              ],
+              [
+                0.32126641273498535,
+                -0.27252477407455444,
+                1.623390793800354
+              ]
+            ],
+            [
+              [
+                0.4570353031158447,
+                -0.5414630174636841,
+                1.5082676410675049
+              ],
+              [
+                0.45666468143463135,
+                -0.5414630174636841,
+                1.536823034286499
+              ],
+              [
+                0.4562956988811493,
+                -0.7166596055030823,
+                1.536818265914917
+              ]
+            ],
+            [
+              [
+                -0.37748047709465027,
+                0.6403310894966125,
+                1.5082672834396362
+              ],
+              [
+                -0.3771098852157593,
+                0.6403310894966125,
+                1.5368226766586304
+              ],
+              [
+                -0.3767409920692444,
+                0.8145754337310791,
+                1.5368179082870483
+              ]
+            ],
+            [
+              [
+                -0.2417115718126297,
+                -0.8679832220077515,
+                1.5082675218582153
+              ],
+              [
+                -0.16723264753818512,
+                -0.8680906295776367,
+                1.5082676410675049
+              ],
+              [
+                -0.16723264753818512,
+                -0.8679834604263306,
+                1.536823034286499
+              ]
+            ]
+          ],
+          "bounds_m": [
+            [
+              -0.49201419949531555,
+              -0.8680909276008606,
+              0.4536101222038269
+            ],
+            [
+              0.5747830271720886,
+              0.961703360080719,
+              1.956217885017395
+            ]
+          ],
+          "material_slots": [
+            "cgt_bunk_bed_f_house_carpet"
+          ]
+        }
+      ],
+      "derivation": "generated semantic connected-component selections; every source face retained exactly once"
+    },
+    "unit_evidence": {
+      "unit": "m",
+      "source": "glTF 2.0 metres; downloaded files unmodified"
+    },
+    "contents_review": {
+      "status": "bed-only",
+      "basis": "Round 2/4 full-size opposing neutral images and actual connected parts; no bedside tables, benches or rugs",
+      "extras": [],
+      "fused_extras": []
+    },
+    "omitted_meshes": [],
+    "footprint_w": 0.8999999999999986,
+    "footprint_d": 2.0,
+    "reference_h": 1.7,
+    "scaling": {
+      "decision_date": "2026-10-09",
+      "mattress_top_m": 0.4,
+      "height_source": "ASSUMED design: unchanged procedural duvet-ka-bunk mattress_top 0.402 m minus finished floor 0.002 m; villa_render.build bedding and furniture generator/detail",
+      "headboard_parts": [
+        "Bunk_cgt_bunk_bed_f_house_wood_0"
+      ],
+      "headboard_limit_m": 2.4,
+      "headboard_limit_source": "ASSUMED diagnostic cap: single 1.8 m, bunk 2.4 m; generous compared with existing authored heads 0.95/1.05/1.70 m, below room ceiling; not a standard"
+    },
+    "native_bounds": {
+      "min": [
+        -1.0567123889923096,
+        -3.810761768363591e-07,
+        -1.0265626907348633
+      ],
+      "max": [
+        0.5747830271720886,
+        1.956217885017395,
+        0.9366859793663025
+      ]
+    },
+    "orientation_evidence": {
+      "front_axis": "+Z",
+      "basis": "Round 2/4 actual headboard/pillow component placement and opposing neutral previews; both bunk heads at source positive Blender Y"
+    },
+    "attribution": {
+      "credit": "Model Information:\n* title:\tSimple Bunk Bed 3D Model\n* source:\thttps://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10\n* author:\tsparshgupta (https://sketchfab.com/SPARSHGUPTA)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Simple Bunk Bed 3D Model\" (https://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10) by sparshgupta (https://sketchfab.com/SPARSHGUPTA) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "author": "sparshgupta (https://sketchfab.com/SPARSHGUPTA)",
+      "licence": "CC Attribution",
+      "source_url": "https://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10"
+    },
+    "scaled_fit": {
+      "ok": true,
+      "reason": "scaled mattresses fit exactly",
+      "sx": 1.0784696046733724,
+      "sy": 1.0930191847577353,
+      "sz": 0.6914099106242676,
+      "scale_xyz": [
+        1.0784696046733724,
+        1.0930191847577353,
+        0.6914099106242676
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.01349095052963456,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.9,
+            2.0
+          ],
+          "error_m": [
+            0.0,
+            0.0
+          ],
+          "top_m": 0.4
+        },
+        "upper": {
+          "size_m": [
+            0.8999999035773034,
+            1.9999999348509798
+          ],
+          "error_m": [
+            9.64226966049253e-08,
+            6.514902017862312e-08
+          ],
+          "top_m": 1.1226365342123605
+        }
+      },
+      "headboard_height_m": 1.3338529692675118,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED design: unchanged procedural duvet-ka-bunk mattress_top 0.402 m minus finished floor 0.002 m; villa_render.build bedding and furniture generator/detail",
+      "headboard_limit_source": "ASSUMED diagnostic cap: single 1.8 m, bunk 2.4 m; generous compared with existing authored heads 0.95/1.05/1.70 m, below room ceiling; not a standard",
+      "source": "Client bed scaling decision 2026-10-09"
+    },
+    "diagnostic_status": "proposed scaled candidate; neutral, C8 and cloth review required",
+    "resulting_mattresses_world_m": {
+      "lower": {
+        "min": [
+          11.527000000000001,
+          -26.45,
+          0.34080138787882236
+        ],
+        "max": [
+          12.427000000000001,
+          -24.45,
+          0.402
+        ]
+      },
+      "upper": {
+        "min": [
+          11.527000000000001,
+          -26.45000026059608,
+          1.044831211120351
+        ],
+        "max": [
+          12.426999903577304,
+          -24.450000325745098,
+          1.1246365342123605
+        ]
+      }
+    },
+    "upper_height_shortfall_m": 0.2773634657876394,
+    "regression_scope": "Frozen actual extremal triangles only; full receipt in out/beds/round5. Not a production asset receipt."
+  }
+]

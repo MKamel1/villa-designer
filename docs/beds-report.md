@@ -1,5 +1,13 @@
 # Furniture phase, step 1: beds
 
+**Round 5 client decision, 2026-10-09: bounded model scaling is permitted.**
+Cyberfox parents and sparshgupta ladder bunk fit the exact planned mattress
+sizes with eligible plan factors, and their generated cloth passes actual
+model clearance. Both fail unchanged room checks; the bunk also misses its
+upper design height. No kids B candidate has a verified eligible scale fit.
+Retain the procedural beds pending those failures; the library daybed stays
+procedural. Full round-5 measurements, neutral previews and checks are below.
+
 **Round 4 decision: retain the labelled procedural beds.** All seven new
 downloads fail source-size mattress dimensions or complete identification.
 No replacement is integrated. Exact measurements and reviewed neutral previews
@@ -635,3 +643,229 @@ preview review is presented as replacement acceptance.
 No full-suite, native Revit or real-villa design-gate claim; the lead owns the
 full suite. No commit. Shared symlink targets and original library folders are
 unchanged; round-3 work is preserved.
+
+## Round 5 — client permits bounded scaling, 2026-10-09
+
+This **client decision dated 2026-10-09 supersedes the 2026-10-08 no-scaling
+rule** after all twelve candidates missed. Work resumed from the interrupted
+run's uncommitted changes and actual round-5 evidence. Source library files,
+shared symlink targets, layout, other furniture and existing room cameras
+remain unchanged. No presentation render or replacement approval is claimed.
+
+Width factor **sx** is planned mattress width divided by measured width;
+length factor **sy** is planned mattress length divided by measured length.
+Both are dimensionless after source-unit conversion. Distortion is the larger
+factor divided by the smaller, minus one: this symmetric percentage cannot
+exceed 15%, and each factor must be in 0.5–2.0. Vertical factor **sz** is design
+mattress-top height above floor divided by measured lower mattress-top height
+above the retained frame's lowest vertex. It is independent of the plan
+factors. The whole retained model receives one transform about the measured
+mattress plan centre, seats at the finished floor, and preserves head direction.
+Bunk berths share that transform; no berth is independently reshaped.
+World X and Y are horizontal coordinate axes; world Z is vertical elevation.
+
+`archpipe.beds.scaled_bed_fit`, `scaled_model_fit` and `model_transform` enforce
+this contract. `require_bed_geometry` binds source hashes, measured orientation,
+contents, omissions, face selections, geometry digest, factors and placement to
+an independent review snapshot. Pending models import only into explicit
+neutral diagnostics. `villa_render.build(bed_replacements=...)` requires accepted
+review, unchanged placement, every design berth height and passing real-frame
+C8 before activation. C8 means the existing geometry-topology review.
+
+### Appearance-first selection and measured factors
+
+| Bed | Appearance choice / credit | Actual mattress at source size, metres | sx / sy / sz | Distortion | Scaled headboard height above floor | Omitted meshes / outcome |
+|---|---|---|---|---|---|---|
+| Parents queen | **Upholstered Bed / Free model**, `sf_bed_upholstered_cyberfox`, CyberFox 3D Studio (`cyberfox3d`), CC-BY-4.0 | 1.781747 × 1.999221 | 0.897994856 / 1.000389787 / 0.905497481 | 11.402619% | 1.364269 m; permitted diagnostic range 0.525–1.800 m | None. Exact 1.600 × 2.000 m mattress; unchanged-room C8 fails. |
+| Kids A bunk | **Simple Bunk Bed 3D Model**, `sf_bed3_2cabd354`, `sparshgupta`, CC-BY-4.0 | Both approximately 0.834516 × 1.829794 | 1.078469605 / 1.093019185 / 0.691409911 | 1.349095% | 1.333853 m; permitted diagnostic range 1.122637–2.400 m | None. Each 0.900 × 2.000 m mattress within numerical precision; C8 and upper height fail. |
+| Kids B | **No eligible downloaded model.** Appearance preference is Stained Bare Scandinavian Bed, `sf_bed_scandi_bare`, `JudeNavarre`, CC-BY-4.0, but it is refused. | 2.412432 × 4.241483 | Refused proposal: 0.497423405 / 0.471533138 / 0.453999812 | 5.490657% | No accepted transformed headboard | None. Both plan factors below 0.5; retain labelled procedural 1.200 × 2.000 m bed. |
+
+Source credits and permitted modifications are retained in
+`ops/workstation/library-manifest.json` and the regression credit record.
+CC-BY-4.0 means Creative Commons Attribution 4.0.
+The downloaded models are appearance proxies, not verified buyable products.
+Parents' detailed upholstered head and bedding are the closest eligible
+appearance; bouclé, walnut/brass accents and procurement correspondence are
+not established by this grey fabric model. Modern bed's plan distortion is
+19.610451%; Dark Modern Bed needs factors about 0.001. The ladder bunk has
+the required visible ladder and the smallest eligible distortion; its source
+painted timber appearance is preserved. Kids B's bare Scandinavian form is
+the closest style but is distressed rather than verified light oak, and its
+scale refusal takes precedence. No third downloaded fit can truthfully be
+accepted from this library under the client's bounds.
+
+The remaining nine candidates' outcomes, together with the three above,
+are reproduced in `out/beds/round5/intake.json` by
+`scripts/prepare_beds_round5.py` from the unchanged round-3/4 measurements:
+
+| Candidate | Intended bed | sx / sy | Refusal |
+|---|---|---|---|
+| FORSSA | Kids B | 0.595756307 / 0.994542211 | 66.937756% distortion, above 15%. |
+| Home Series bunk | Kids A | 0.284861228 / 0.321344689 | Both factors below 0.5. |
+| Simple wooden bunk, 3DWorkbench | Kids A | Unresolved | No verified complete naked mattresses for both berths. |
+| Modern bed, `dff77bbd` | Parents | 0.436880812 / 0.522555109 | Width below 0.5; 19.610451% distortion. |
+| Dark Modern Bed, `d3aeb724` | Parents | 0.000936240 / 0.001065604 | Both factors below 0.5. |
+| Simple Bunk Bed, `9fb7c547` | Kids A | 0.094195713 / 0.121783185 | Both below 0.5; 29.287397% distortion. |
+| AM bunk, `0e134823` | Kids A | 63.405459016 / 88.583440328 | Both above 2.0; **39.709485% distortion**; common factors also miss upper width by 234.337 mm and length by 10.524 mm. |
+| Bed Wood Oak PBR, `28a8b705` | Kids B | Unresolved | No verified complete naked mattress; its roughly 59 × 79 m source base is not a mattress. |
+| Engi bed, `fe3c50e1` | Kids B | Unresolved | Exposed patch 1.829067 × 0.571583 m does not measure the whole mattress; frame/name cannot supply its missing length. |
+
+All selected contents are bed, frame and source bedding; no separable tables,
+benches or rugs were present to omit. Generated connected-component mattress
+cuts identify existing faces while retaining every source triangle once:
+**29,358 parents / 88,208 bunk triangles**. This is a semantic binding, never
+permission to cut fused accessories away. A fused-extras declaration refuses
+before import, even on an otherwise valid fit and a renamed model. The
+regression injects that declaration into real measured candidate geometry;
+it does not claim an actual bundled bench was found in these downloads.
+
+### Height basis, placement and fixed-room C8 results
+
+The height targets are **ASSUMED authored design values**, not published
+bed-height requirements. `src/archpipe/concept/villa_render.py`, generated-bed
+mapping and bedding block, reads parents/kids B mattress vertices from
+`src/archpipe/furniture.py`: generated total heights 1.05/0.95 m use a
+mattress top at half the total height. The finished-floor datum is 0.002 m.
+Thus parents top is **0.527 m world / 0.525 m above floor**; kids B fallback
+is **0.477 / 0.475 m**. The bunk bedding block uses **0.402 / 0.400 m lower**
+and **1.402 / 1.400 m upper**. These exact datums are recorded in the unchanged
+`out/beds/round4/scene.json` cloth specification.
+
+The headboard upper caps, **ASSUMED 1.8 m single / 2.4 m bunk**, are explicit
+visual plausibility screens, not safety standards. They are generous relative
+to existing authored heads of 0.95/1.05 m and the 1.70 m procedural bunk and
+remain below the room ceiling. A head below the highest actual mattress top
+or above its cap refuses. Source part maxima supply the reported head heights.
+The unchanged ceiling faces in all three rooms are at 2.700 m world height.
+
+Parents mattress centre is **(20.330, −25.591) m**, bunk centre
+**(11.977, −25.450) m**, both on floor **0.002 m**. These are the unchanged
+layout coordinates; the heads remain at the planned head walls. Scaled
+parents top is **0.527000 m**. Scaled bunk tops are **0.402000 / 1.124637 m**:
+the upper misses its unchanged target by **277.363 mm**. Upper underside is
+1.044831 m, leaving 642.831 mm above the lower naked mattress; this is a
+measured gap, not a bunk safety certification. Exact arithmetic allows only
+about 0.0001 mm residual plan error from the source's unequal berth vertices.
+
+`scripts/review_beds_round5.py` regenerates both complete per-bed reports
+against the unchanged room, specification and furniture. Fresh output is
+`out/beds/round5/c8-complete.json`: parents **28 findings** (22 conservative
+body screens, four route destinations, two access shortfalls), kids A
+**15 findings** (11 body screens, two access shortfalls, one real-frame swing,
+one boundary intrusion). Both report `activation_allowed: false`. Actual retained
+parts replace their procedural bed/pillow faces. Route proxies participate in
+route/access grids but are excluded from physical collision/swing/support
+queries, so the proxy is not counted as a second manufactured bed. Unrelated
+existing props are preserved without a new unrelated route intake.
+
+| Review | Parents | Kids A |
+|---|---|---|
+| Bedside access | Foot **750.000 / 750 mm**, passes; left **714.552 / 750 mm**, **35.448 mm short**; right effectively **0 / 750 mm**, **750 mm short** | Best side **1.000 / 750 mm**, **749 mm short**; other side effectively 0. Only one passing side is required, but neither passes. |
+| Routes | Four destinations newly unreachable by a **750 mm** route: corridor/parents entry, window, bed and vanity | No additional route-connectivity failure reported; this does not waive failed side access or door swing. |
+| Door swing | No new swing-envelope failure reported | Real timber frame overlaps corridor/kids-A conservative swing envelope by **0.019684 m²**, required **0 m²**. |
+| Room boundary | No frame-boundary finding | Frame extends **76.987 mm beyond the minimum-X room boundary**, required zero intrusion. |
+| Body conflicts | Conservative part-envelope overlap screens remain; e.g. fixed headboard slats **30 mm / 0 mm** | Conservative screens remain; e.g. desk/frame **15.976 mm / 0 mm**. |
+| Wardrobe/drawers | Storage-front planning screen reports no new affected-front shortfall | No new affected-front shortfall reported |
+| Support | No unsupported-bed finding; real frame bottom meets the floor | Same |
+| Activation | **Refused by fixed-room review** | **Refused by fixed-room review and upper mattress height** |
+
+The access source is the held **UK Approved Document M, Volume 1 Dwellings,
+2015 edition incorporating 2016 amendments**, printed p.18: paragraph 2.25a
+for doorway-to-window routes, 2.25b for principal-bed sides/foot, 2.25d for
+single/twin beds. Storage uses **Time-Saver Standards for Interior Design and
+Space Planning, 2nd edition**, printed p.87, 36 inches in front of dresser,
+closet and drawers; the verified project card rounds 914.4 to 914 mm.
+Read page text and images are retained in `round5/source-ukadm.*` and
+`round5/source-storage.*`, with verified cards in `knowledge/library.json`.
+This is adopted planning guidance under the ageing-in-place brief, not a claim
+of local code compliance.
+
+Body-envelope depths are conservative screens, **not confirmed solid
+penetration**. Door squares are not measured animated leaf sweeps. Actual
+wardrobe-door/drawer motion geometry is still absent, so front access is not a
+proof of opening travel. Geometric floor contact does not prove load capacity.
+Kids B fails mattress intake and therefore receives no invented scaled-frame
+C8 result; its existing fallback is shown honestly. No other item was moved.
+
+### Model-first cloth and neutral review
+
+Fresh mechanical proof: `out/beds/round5/importer-cloth-support-final.json`.
+Actual imported/portable bounds agree to **0.001064 mm parents / 0.000642 mm
+bunk**, every source triangle is retained, the procedural fallback hides
+only after real import, and a forced missing-file test restores it physically.
+Duvets are cut from the real scaled mattress; all retained frame, mattress,
+pillows and source blankets collide. Source quilts/throws remain beneath the
+added cloth, explicitly layered rather than claimed removed.
+
+| Generated soft good | Surface crossings / enclosed / unresolved vertices | Minimum evaluated surface distance |
+|---|---|---|
+| Parents duvet | **0 / 0 / 0** | **5.003 mm** |
+| Parents throw, checked against actual bed and evaluated duvet | **0 / 0 / 0** | **7.173 mm** |
+| Bunk lower duvet | **0 / 0 / 0** | **7.513 mm** |
+| Bunk upper duvet | **0 / 0 / 0** | **8.381 mm** |
+
+The interrupted run exposed three cloth construction issues: naked-top
+initialization inside source quilts; a concave nearest-face sign mistaken for
+containment; and source-clear initial planes becoming permanently raised pin
+headings. Frozen real inputs and failed attempts remain. Final construction
+uses measured source-clear starts, lower-bunk initialization below the midpoint
+to the upper underside, closed-shell ray containment, and local one-cell
+support envelopes for mattress-width anchors. Inset bunk covers begin on
+that envelope; free parents overhangs retain their collision-safe plane.
+Existing cloth cut, physics, loft, thickness and crossing tolerance are
+preserved. Throws now bind to real model geometry and evaluated duvet too.
+These controls are documented with reproductions, sibling/clean proofs and
+registration in `docs/LEARNINGS.md`, `knowledge/bed-guards.json` and the updated
+villa-render skill/adapters. Image review remains independent of test success.
+
+All six fresh neutral images are under **`out/beds/round5/previews-supported`**:
+
+- Parents: `pb-bed-isolated-neutral.png` with the **1.8 m figure**, and
+  `pb-bed-room-neutral.png` from unchanged **v22-parents-day**.
+- Kids A: `ka-bunk-isolated-neutral.png` with the **1.8 m figure**, and
+  `ka-bunk-room-neutral.png` from unchanged **v06-kids-room**.
+- Kids B labelled procedural fallback: `kb-bed-isolated-neutral.png` with the
+  **1.8 m figure**, and `kb-bed-room-neutral.png` from unchanged **v13-kids-b**.
+
+`evidence.json` binds selection/source/material/cloth hashes, actual imported
+bounds, simulation measurements, camera and diagnostic staging. The isolates
+show the complete beds. Existing room views crop bed feet/lower frames; parents'
+headboard is not displayed by its existing room camera. These are disclosed
+comparison limitations; the cameras were not changed. Neutral world/fill,
+disabled design emission and omitted incidental props/curtains are recorded.
+Visible diagnostic softbox reflections are lighting aids, not design fixtures.
+Independent final review is `out/beds/round5/preview-review-supported.md`.
+The reviewer verified all six image hashes, both current model selections and
+source bindings against `out/beds/round5/source-preview-bindings-current.json`
+and the fresh C8 report; the raised-heading repair is visibly improved. These
+are neutral comparison reviews, without integration or presentation approval.
+
+### Round-5 verification and limits
+
+Final execution receipt and exact test/check counts are recorded in
+`out/beds/round5/acceptance.json`. **55 bed/scaling/fallback/clearance/adapter
+tests passed, exit 0** (`bed-tests-current.log`); **159 affected scene, camera,
+topology, intake and furnishing tests passed, exit 0**
+(`affected-tests-current.log`). The **19 final changed tests passed, exit 0**
+(`final-changed-tests.log`); this repeats the scale/adapter subset and adds
+the two focused runner controls. **Portable verification passed all 170
+checks, exit 0**, under both normal and empty HOME (`verify-normal-final.log`,
+`verify-empty-home-final.log`). Adapter synchronization checked all 38 adapters
+and `git diff --check` passed.
+
+The preliminary affected command included two nonexistent module names and
+exited 1 after 159 valid tests plus two loader errors; that failed invocation
+is retained, not counted as acceptance. `run_tests.py` now refuses collected
+loader errors before executing valid suites, with exit 1 and zero executed
+tests. Frozen actual missing names, renamed siblings, clean module/method
+controls and an expected failure against the unchanged historical runner
+prove this procedural fix. The initial regression harness lacked the output
+directory normally created by preflight; its fixture was corrected and final
+controls pass. The workflow and execution-context documentation were updated.
+
+Historical failed logs remain, including
+undefined scoped-builder option, initial cloth refusals and raised-heading
+experiments; current logs are separately named. Full-suite and native Revit
+claims are outside this package. No commit; the lead owns the full suite and
+integration decision. Shared data and the procedural library daybed remain
+unchanged. Numerical guard acceptance is not room-fit or client approval.

@@ -17,6 +17,13 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def require_neutral_cloth(receipts):
+    """Diagnostic raw-model images may exist, but refusal cannot exit zero."""
+    failures=[r['bed'] for r in receipts if isinstance(r.get('cloth_report'),dict)
+              and r['cloth_report'].get('passed') is False]
+    if failures:raise ValueError('neutral cloth preview refused: '+', '.join(failures))
+
+
 def render(args):
     import bpy
     from mathutils import Vector
@@ -26,6 +33,9 @@ def render(args):
     from garden_g6_preview import disable_material_emission, canonical_hash
 
     data=json.loads(args.scene.read_text())
+    if args.scaled_models:
+        scaled=json.loads(args.scaled_models.read_text())
+        data['models']=[m for m in data['models'] if m.get('replaces') not in {s['replaces'] for s in scaled}]+scaled
     args.output.mkdir(parents=True,exist_ok=True)
     requests=[('pb-bed','parents-bed','v22-parents-day'),
               ('kb-bed','kids-b','v13-kids-b'),('ka-bunk','kids-a','v06-kids-room'),
@@ -172,11 +182,21 @@ def render(args):
         meshes=[m for m in data['meshes'] if m['group'] in ('shell','context') or m.get('room')==room]
         scene,objects,materials,warnings=setup(meshes)
         # Other accepted room furniture imports retain their real textures.
-        models=builder.import_models([m for m in data['models'] if m.get('room')==room],str(args.library))
+        models=builder.import_models([m for m in data['models'] if m.get('room')==room],str(args.library),
+                                     neutral_diagnostic=bool(args.scaled_models))
         cloth=[c for c in data['cloth'] if c['id'].startswith(('duvet-'+mark,'throw-'+mark))]
         for name in {c['material'] for c in cloth}-materials.keys():
             materials[name]=builder.add_material(name,data['materials'][name],str(args.library),warnings)
-        cloth_report=builder.drape_cloth(cloth,materials,models)
+        try:
+            cloth_report=builder.drape_cloth(cloth,materials,models)
+            cloth_status='passed'
+        except ValueError as error:
+            if not args.scaled_models:raise
+            cloth_report=dict(passed=False,refused=str(error))
+            cloth_status='refused; raw imported bedding shown; candidate cannot activate'
+            for obj in list(bpy.data.objects):
+                if obj.name.startswith(('cloth-duvet-'+mark,'cloth-throw-'+mark)):
+                    bpy.data.objects.remove(obj,do_unlink=True)
         disable_material_emission({m.name:m for m in bpy.data.materials})
         view=next(v for v in data['views'] if v['id']==view_id)
         for mid in view.get('hide_meshes',[]):
@@ -192,16 +212,20 @@ def render(args):
         bpy.ops.render.render(write_still=True)
         bpy.data.objects.remove(camera,do_unlink=True)
         bpy.data.objects.remove(fill,do_unlink=True)
-        keep=[objects[m['id']] for m in bed_meshes]
+        replacement=next((m for m in models if m.get('replaces')==prefix and m.get('status')=='imported'),None)
+        keep=(replacement['objects'] if replacement else [objects[m['id']] for m in bed_meshes])
         keep += [o for o in bpy.data.objects if o.name.startswith(('cloth-duvet-'+mark,'cloth-throw-'+mark))]
         for obj in bpy.data.objects:
             obj.hide_render=obj not in keep
         iso=isolated(scene,keep,args.output/(mark+'-isolated-neutral.png'))
-        receipts.append(dict(bed=mark,status='procedural fallback; imported replacement blocked',
+        receipts.append(dict(bed=mark,status='scaled diagnostic candidate; pending review' if replacement else 'procedural fallback; imported replacement blocked',
             isolated=iso,context_image=str(context),existing_view=view_id,camera=view['camera'],
             source_geometry_sha256=canonical_hash(bed_meshes),
             source_materials_sha256=canonical_hash({n:data['materials'][n] for n in {m['material'] for m in bed_meshes}}),
-            source_cloth_sha256=canonical_hash(cloth),cloth_report=cloth_report,
+            source_cloth_sha256=canonical_hash(cloth),cloth_report=cloth_report,cloth_status=cloth_status,
+            scaled_model_selection=(replacement.get('neutral_review',{}).get('selection') if replacement else None),
+            source_sha256=(replacement['review_geometry']['source_sha256'] if replacement else None),
+            actual_imported_bounds_m=(replacement['bounds'] if replacement else None),
             emission_disabled=True,neutral_softbox_watts=500,warnings=warnings,
             context_scope='Actual architecture and room furniture; diagnostic props/curtains omitted',
             review_status='pending'))
@@ -219,6 +243,8 @@ def render(args):
                              warnings=warnings,review_status='pending'))
         (args.output/'evidence.json').write_text(json.dumps(receipts,indent=2)+'\n')
 
+    require_neutral_cloth(receipts)
+
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -229,6 +255,7 @@ def main():
     parser.add_argument('--beds',nargs='+')
     parser.add_argument('--rejected-model',type=Path)
     parser.add_argument('--candidates',type=Path,help='Measured candidate list for isolated review only')
+    parser.add_argument('--scaled-models',type=Path,help='Pending measured scaled beds for neutral diagnostics only')
     parser.add_argument('--graphics-lock',type=Path,default=Path('/home/omar/archpipe/locks/graphics.lock'))
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv[1:])
     import fcntl

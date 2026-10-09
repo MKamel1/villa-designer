@@ -16,17 +16,23 @@ C8 means the existing geometry-topology review.
    existing exact triangle reader. Record bounds, actual triangles, position
    vertices, units, front/up axes, all buffer/texture hashes and licence/author.
    Intake disagreements stay failures; never normalize away a size mismatch.
-3. Apply the client decision of 2026-10-08: source-size mattresses, with
-   only source-declared unit conversion; no fit scaling. `fit_bed` needs each
-   actual mattress and unchanged planned width/length. The tolerance is
-   20 mm per mattress dimension. Parents require 1.600 × 2.000 m, kids A
-   0.900 × 2.000 m for each berth, kids B 1.200 × 2.000 m. The frame may
-   overhang and must undergo real-frame room checks. Whole-frame footprint
-   and five-percent height fitting in the historical round-1/2 records are
-   superseded. Missing or partial mattress geometry is refused; source
-   bedding bounds and support platforms cannot replace a full mattress.
-   `placed_bed_findings` checks uniform source scale and the unchanged
-   mattress centre using actual imported vertices.
+3. Apply **client decision 2026-10-09**, superseding the 2026-10-08 source-size
+   rule after twelve refusals. `scaled_bed_fit` derives independent width and
+   length factors from each complete measured mattress. Both must be 0.5–2.0;
+   the larger divided by smaller minus one must not exceed 15%. Match parents
+   1.600 × 2.000 m, kids A 0.900 × 2.000 m per berth, kids B 1.200 × 2.000 m
+   exactly with one whole-model transform. Source-unit conversion stays separate.
+   Derive vertical scale independently from retained frame bottom and design
+   mattress top; cite the procedural source and label authored assumptions.
+   Record resulting headboard height and the bound/basis. Record every bunk top:
+   matching the lower cannot silently replace the upper datum. Bed-only contents
+   require reviewed separate omissions; fused extras refuse. Missing/partial
+   mattress geometry still refuses. `real_size_findings` and source-size
+   `fit_bed` calls are retained only to reproduce historical rounds and controls.
+   Current scaled contracts use `scaled_model_fit`; do not reuse an old accepted
+   receipt. `villa_render.build(bed_replacements=...)` admits explicit reviewed
+   models only after fixed placement, every design berth height and real-frame
+   C8 checks. Keep fallbacks when those gates remain closed.
 4. Preview each measured candidate in neutral light with a 1.8 m scale figure,
    then in its room from the existing camera. Disable material emission as
    well as design lights. Preserve the before image and bind receipts to actual
@@ -128,3 +134,55 @@ activation still needs proper production bindings and accepted neutral review.
 Two round-4 candidates have no independently identified full mattress: they
 remain refused, and partial exposed geometry/frame boxes are reported separately.
 Rejected candidates never run fictitious in-room C8 or replacement cloth checks.
+
+Round-5 scaled operations (all source library files remain immutable):
+
+```text
+scripts/prepare_beds_round5.py
+/home/omar/opt/blender/blender -b --python-exit-code 1 -P scripts/check_scaled_beds.py -- --output out/beds/round5/importer-cloth-proof.json
+/home/omar/opt/blender/blender -b --python-exit-code 1 -P scripts/preview_beds.py -- --scene out/beds/round4/scene.json --scaled-models out/beds/round5/models-pending.json --beds pb-bed ka-bunk kb-bed --output out/beds/round5/previews --samples 32
+scripts/run_tests.py tests.test_bed_scaling tests.test_beds tests.test_bed_models
+scripts/verify.py --portable
+```
+
+Generated semantic face selections are reproduced in the importer without
+changing source faces or material assignments. Pending imports are admitted
+only in explicitly neutral diagnostics. A cloth refusal writes evidence;
+raw source bedding may be previewed with the refusal disclosed, but the
+preview script must exit nonzero and cannot certify physical cloth acceptance.
+Start cloth above real retained surfaces over its cut, partitioning lower-bunk
+initialization from overhead surfaces at the midpoint to the upper underside.
+Keep every collider; verify lower evaluated cloth cannot enter the upper berth.
+Containment uses closed connected shells with three independent ray directions;
+open-shell negative-side points or inconsistent rays refuse as unresolved.
+The exact surface-crossing and 0.1 mm numerical thresholds are unchanged.
+Snapshot selections by deep copy, including contents, factors, placement and
+actual geometry digest. Record room crops honestly; never change the existing
+room camera or furniture to make a candidate pass.
+
+Imported-bed headings anchor only across the measured mattress width. Their
+heights use the retained source envelope over one grid-cell ring (the
+neighbors used by subdivision), plus the existing 4 mm collider and 4 mm
+cloth offsets. Inset sheets start on that support envelope; hanging cuts keep
+their free collision-safe plane and anchor only the supported heading. A
+point-only ray anchor on wrinkled bedding can leave adjacent subdivided
+faces intersecting it. Record the construction shape and actual anchor gaps;
+the envelope is conservative support, not exact contact. Bind throws to the
+real mattress and already evaluated duvet; retain the authored throw cut and
+require its own evaluated clearance record against both. Missing duvet
+support refuses. No evaluated crossing, enclosed or unresolved vertex can be
+hidden by a successful importer/fallback result. Review the new neutral
+images before any integration claim.
+
+`scripts/review_beds_round5.py` regenerates both per-bed room reports and
+achieved-versus-design mattress heights from the unchanged scene. A
+diagnostic report can complete successfully with `activation_allowed: false`;
+`integrate_bed_models` enforces the room and every-berth height gates.
+
+Choose focused test module names from existing files (`rg --files tests`)
+before launching. `run_tests.py` uses a fresh loader and refuses any collected
+selection/import error before executing valid suites, recording exit 1 and
+zero tests executed. This also covers discovery-time imports; dependency
+preflight failures still exit 2. Passing valid tests cannot erase a malformed
+selection. Preserve the failed invocation separately and rerun the corrected
+selection, judging the actual process exit status.

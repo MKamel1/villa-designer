@@ -33,14 +33,23 @@ assumed clearances remain `needs-source` until measured or sourced; a topology
 pass alone does not establish structural support capacity or client approval.
 Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.md).
 
-**Beds — client decision 2026-10-08.** Use real source size: glTF metres
-unless the source explicitly declares other units. `archpipe.beds.unit_scale`
-computes that conversion; no uniform fit scale is allowed. Measure each
-actual mattress against the planned size (20 mm per dimension); the frame
-and headboard may extend beyond it. Require a bed-only contents review;
+**Beds — client decision 2026-10-09**, superseding the 2026-10-08 no-scaling
+rule after twelve refusals. Preserve source bytes and source-unit conversion.
+`archpipe.beds.scaled_bed_fit` computes width factor `sx` (planned width divided
+by measured width), length factor `sy` (planned length divided by measured
+length), and independent vertical factor `sz`. These are dimensionless after
+unit conversion. Refuse a plan factor outside 0.5–2.0 or larger/smaller factor
+ratio minus one above 15%. One transform fits every actual berth exactly,
+seats the retained frame at the finished floor and matches the existing lower
+procedural mattress top. Record every resulting bunk top: a lower-top match
+does not authorize changing the upper target. `integrate_bed_models` refuses
+any changed design berth height. Record resulting headboard height and the
+sourced or explicitly ASSUMED maximum. Require a bed-only contents review;
 omit only separately named accessory meshes and record every omission.
 Bind the neutral review to source hashes, orientation, retained meshes,
-mattress bindings and units before activation. Anchor the actual mattress
+mattress bindings, source-face cuts, independent factors, contents, geometry
+digest, placement and units before activation. Save an independent review
+snapshot, never a live dictionary alias. Anchor the actual mattress
 centre at the unchanged layout position and preserve its head direction.
 Run `bed_room_review` on the real frame with unchanged rooms, furniture and
 cameras; report achieved versus required access and each cited shortfall.
@@ -48,6 +57,26 @@ Storage-front clearance is a planning screen, not proof of animated drawer
 or door travel; disclose the existing motion-geometry limitations. Import
 models before cloth; retain actual mattress cuts, all retained colliders,
 evaluated cloth-intersection refusal and physical procedural fallback.
+Imported headings pin only within actual mattress width, on the measured
+local support envelope over a grid-cell subdivision ring plus existing
+collision offsets. Inset covers start on that envelope; hanging cuts retain
+the free collision-safe plane with a supported heading. Point anchors alone
+can cut adjacent subdivided faces through wrinkles. Record construction shape
+and anchor gaps; envelope support is conservative, not exact contact. Bind
+every imported-bed throw to the retained model and its evaluated duvet,
+preserving its authored cut; require clearance for every generated soft good.
+Missing duvet support or any evaluated crossing/enclosed/unresolved vertex
+refuses. Review fresh neutral images after the construction fix.
+Semantic
+connected-component mattress cuts retain every source face exactly once; they
+never authorize separating fused extras. Initialize above actual retained
+surfaces over the cloth cut. Select lower-bunk initialization surfaces below
+the midpoint from its top to the upper underside, keeping every collider in
+simulation; evaluated lower cloth must remain below the upper mattress.
+Use closed connected-shell ray containment, not a nearest-face plane sign.
+Inconsistent rays or negative signs on open components refuse as unresolved;
+exact crossing refusal remains. Pending reviews are admitted only by explicitly
+neutral diagnostic imports; normal imports still require accepted review.
 Candidates rejected at mattress/contents intake never become in-room fit
 passes. Passing candidates need isolated neutral previews with a 1.8 m
 figure and an existing-camera room preview before integration. The

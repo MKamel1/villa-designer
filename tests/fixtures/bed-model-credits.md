@@ -22,3 +22,20 @@ not as selected villa products. The geometry receipts record source-file hashes.
 (https://sketchfab.com/3d-models/a7685bd7b2354157b4c1a8264892acf0).
 All were downloaded under CC Attribution, re-read by the lead at download;
 full source credits are preserved in the asset manifest and library license files.
+
+Round-5 regression data:
+
+- `bed-round5-measurements.json`: unchanged actual extremal triangles (plus
+  Cyberfox source-bedding face 5922 for initialization) from “Upholstered Bed /
+  Free model” by cyberfox3d, https://sketchfab.com/3d-models/7602267cc32e4caf8c92c60b677539be,
+  and “Simple Bunk Bed 3D Model” by sparshgupta,
+  https://sketchfab.com/3d-models/2cabd354ef2e4293ae817b01a8fdbf10.
+  Both CC-BY-4.0, https://creativecommons.org/licenses/by/4.0/.
+  These are bounded regression inputs, not production geometry receipts.
+- `bed-round5-upper-containment.json.gz`: the actual scaled 28,224-triangle
+  upper source duvet shell from sparshgupta's model, same CC-BY attribution.
+  Its outside/inside test points and the previous nearest-plane diagnostic
+  are recorded beside source hashes. No source face was edited.
+
+- `bed-round5-heading-support.json.gz`: actual source triangles near the measured duvet headings from the two same CC-BY-4.0 models above, preserving author credits and source hashes in each record.
+- `bed-round5-heading-refusal.json`: evaluated diagnostic receipts from those models, recording the prior suspended heading and failed point-anchor correction.

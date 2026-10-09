@@ -545,7 +545,7 @@ def _grid(name, sx, sy, nx, ny, center, z):
     return obj
 
 
-def _simulate(obj, colliders, frames, mass, bending, pin_band=None):
+def _simulate(obj, colliders, frames, mass, bending, pin_band=None, pin_indices=None):
     for c in colliders:
         if not any(m.type == "COLLISION" for m in c.modifiers):
             c.modifiers.new("collision", "COLLISION")
@@ -559,7 +559,7 @@ def _simulate(obj, colliders, frames, mass, bending, pin_band=None):
         # whole sheet 0.6 m toward the foot and onto the floor (logged).
         axis, value, width = pin_band
         group = obj.vertex_groups.new(name="pin")
-        idx = [v.index for v in obj.data.vertices
+        idx = pin_indices if pin_indices is not None else [v.index for v in obj.data.vertices
                if abs(getattr(obj.matrix_world @ v.co, axis) - value) <= width]
         group.add(idx, 1.0, "REPLACE")
         st.vertex_group_mass = "pin"
