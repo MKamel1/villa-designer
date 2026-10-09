@@ -59,6 +59,10 @@ BATCH_C_MIGRATED_SCRIPTS = (
     "villa_stair_options.py",
     "villa_stairs.py",
     "yard_wall_pdf.py",
+    # Batch D (final, 2026-10-08): held back while the garden work edited views.
+    "villa_render_views.py",
+    "villa_review_page.py",
+    "villa_render_selftest.py",
 )
 
 
