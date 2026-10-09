@@ -153,10 +153,10 @@ class TestGuardRegistry(unittest.TestCase):
 
         self.assertEqual(report["errors"], [], f"Real audit file should have zero errors: {report['errors']}")
         self.assertEqual(report["total_lessons"], 217, "Expected 217 lessons in docs/lessons-audit.md inventory")
-        self.assertEqual(report["covered_by_guard_count"], 120)
+        self.assertEqual(report["covered_by_guard_count"], 124)
         self.assertEqual(report["covered_by_review_count"], 21)
-        self.assertEqual(report["needs_real_case_count"], 36)
-        self.assertEqual(report["uncovered_count"], 40)
+        self.assertEqual(report["needs_real_case_count"], 67)
+        self.assertEqual(report["uncovered_count"], 5)
 
         # Check specific registered lessons are in covered_by_guard
         expected_guard_lessons = [
@@ -285,19 +285,21 @@ class TestGuardRegistry(unittest.TestCase):
             "l0120-unit-test-exported",
             # Phase 2 Batch 11 Execution Context & Evidence Boundaries
             "l0030-current-extract-lacks",
+            # Phase 2 Batch 13 Window QA, Sightline Clearance, Fixture Height & Signify Server Permission
+            "l0060-window-looked-like",
+            "l0481-camera-sees-wall",
+            "l0097-lamp-source-regression",
+            "l0112-signify-s-photometry",
         ]
         for lid in expected_guard_lessons:
             self.assertIn(lid, report["covered_by_guard"], f"Lesson {lid} should be covered by registered guard")
 
         # Lessons whose local re-implementations were deleted or no production guard exists yet
         deleted_reimplementation_lessons = [
-            "l0177-good-texture-poly",
-            "l0178-good-model-failed",
             "l0026-blender-ies-azimuth",
             "l0080-lamps-rendered-far",
             "l0090-window-glass-passed",
             "l0656-glass-verified",
-            "l0046-fine-extraction-exposed",
         ]
         # l0095, l0096 and l0119 lost their batch-2 re-implementations but are now covered by the
         # production fixture_record check (C5 phase 1), so they are asserted covered above.
@@ -373,12 +375,44 @@ class TestGuardRegistry(unittest.TestCase):
             "l0870-codex-job-dispatched",
             "l0181-energyplus-fatal-errors",
             "l0692-open-item-not",
+            # Phase 2 Batch 13 needs_real_case
+            "l0955-first-v32-dressing",
+            "l0021-pdf-export-uses",
+            "l0022-blank-sheet-s",
+            "l0318-plans-now-draw",
+            "l0354-dark-canvas",
+            "l0356-tag-text",
+            "l0357-level-lines",
+            "l0077-render-critic-found",
+            "l0104-captions-did-not",
+            "l0115-emitter-rule-found",
+            "l0180-thermal-hand-check",
+            "l0224-used-amended-checks",
+            "l0478-climate-based-daylight",
+            "l0704-how-guard-itself",
+            "l0070-oak-lost-its",
+            "l0177-good-texture-poly",
+            "l0178-good-model-failed",
+            "l0190-overheating-criteria-ope",
+            "l0612-manufacturer-data-parse",
+            "l0121-git-check-ignore",
+            "l0221-failed-90-gate",
+            "l0087-light-fixtures-look",
+            "l0094-detailed-fixture-swap",
+            "l0943-swing-arm-reading",
+            "l0085-garden-view-scaled",
+            "l0658-unclamped-transport-brig",
+            "l0674-duvets-stood-out",
+            "l0046-fine-extraction-exposed",
+            "l0101-look-retry-overwrote",
+            "l0286-revit-probe-villa",
+            "l0755-final-renders-first",
         ]
         for lid in expected_needs_real_case:
             self.assertIn(lid, report["needs_real_case"], f"Lesson {lid} should be tracked as needs_real_case")
 
         # Check lesson left uncovered (no guard in code yet)
-        self.assertIn("l0101-look-retry-overwrote", report["uncovered_lessons"])
+        self.assertIn("l0091-every-view-metered", report["uncovered_lessons"])
 
     def test_coverage_audit_reports_unreadable_inputs_as_errors_never_no_guard(self) -> None:
         """Unreadable or missing input files must raise UnreadableInputError, never reported as 'no guard' / 'NONE'."""
@@ -763,8 +797,9 @@ class TestGuardRegistry(unittest.TestCase):
                 and not resolved_module.endswith(".guard_registry")
             )
             is_revit_prod = resolved_module.startswith("revit.") or resolved_module == "revit"
+            is_scripts_prod = resolved_module.startswith("scripts.") or resolved_module == "scripts"
 
-            if is_archpipe_prod or is_revit_prod:
+            if is_archpipe_prod or is_revit_prod or is_scripts_prod:
                 calls.append(f"{resolved_module}:{call_repr}")
 
         return calls
@@ -775,7 +810,7 @@ class TestGuardRegistry(unittest.TestCase):
         if not calls:
             raise AssertionError(
                 f"Function {getattr(fn, '__name__', str(fn))} does not call any production module "
-                f"(archpipe.* != guard_registry, or revit/*)."
+                f"(archpipe.* != guard_registry, revit/*, or scripts/*)."
             )
         return calls
 
