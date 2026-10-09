@@ -278,6 +278,23 @@ asset or view:
 4. **Physics before looks.** Refractive glass is a closed solid with
    thickness; emitters sit inside diffusers; materials carry textures at
    real-world scale. Guard each of these as a geometric/data check.
+   C3 scene export defaults to strict `PartMeshList` admission after mounting
+   and construction-zone clipping, and returns that strict collection.
+   Working shell interfaces are completed by `construction_solids` at the
+   finish builder boundary; retain their front datum and opening bridges.
+   Orient stacked finish bridges from the measured host's occupied side
+   before closure; backing must extend into that host, not into the room.
+   Carry each front's actual per-face finish through closure. Added floor
+   backing/edges use the physical substrate; never leave a stale material
+   array after adding faces. Physical admission rejects cardinality drift.
+   Preserve assembly intent separately when typing material-batched furniture
+   components. A final admission pass is required after every mutation pass.
+   Collection mode is an explicit diagnostic only. Surface exemptions have
+   registered physical reasons; retained legacy dressing/cable exceptions are
+   bound to frozen translated shape values in `knowledge/c3-part-exemptions.json`
+   and remain visibly unresolved. Never use either path for a new proxy.
+   Include exemption policy in scene provenance; revoking permission must
+   invalidate any cached scene before a renderer can consume it.
 5. **Cameras need line of sight, not just framing.** Subjects in frame is not
    enough: nothing (prop canopy, pot, wall edge, trellis) may stand between
    the lens and its subjects, and the lens may not start inside or within

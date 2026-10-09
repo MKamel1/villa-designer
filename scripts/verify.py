@@ -163,6 +163,11 @@ def main() -> int:
            RECORD.stat().st_size < 1500000)
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
     scene = VR.build(views=[])
+    expect('C3 final procedural parts fail closed after mounting and finish construction',
+           not scene['part_failures'] and not scene['meshes'].collect)
+    from archpipe.concept.physical_part import PartMeshList
+    expect('C3 exported geometry survives fresh physical admission',
+           not raises(ValueError, PartMeshList().extend, scene['meshes']))
     from archpipe.orientation_guard import scene_findings as orientation_findings, document_findings
     expect("client garden compass names agree with geometry", not orientation_findings(scene))
     expect("garden documents use recorded client compass names", not document_findings())

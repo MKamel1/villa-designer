@@ -230,6 +230,9 @@ class StairFirstPackage(unittest.TestCase):
         # Reproduce the historical render-channel defect explicitly: this
         # datum now lives only in diagnostics, so replacement was a no-op.
         self.assertIn(frozen['id'], {m['id'] for m in reproduced['diagnostic_meshes']})
+        # Deliberately inject an invalid historical datum into the downstream
+        # schema guard. Production strict Part admission rejects it earlier.
+        reproduced['meshes'] = list(reproduced['meshes'])
         reproduced['meshes'].append(frozen)
         self.assertTrue(any('.label: string required' in f for f in contract.validate_scene(reproduced)))
         sibling=deepcopy(schema_scene)
@@ -361,15 +364,27 @@ class StairFirstPackage(unittest.TestCase):
         self.assertEqual(min(p[2] for face in floor["faces"] for p in face), -3)
 
     def test_visible_wall_face_agrees_with_mounts_and_stays_in_package(self):
+        from archpipe.concept.construction_solids import BACKING_M
+        from archpipe.concept.fitting_mounting import normal
+        from archpipe.concept.physical_part import PartMeshList
         spec = RS.build(R.design("D1"))
         treads = [b for b in spec["stair"] if b[5] - b[2] < 300]
         start, end = min(b[0] for b in treads) / 1000, max(b[3] for b in treads) / 1000
         walls = [m for m in self.scene["meshes"] if m.get("finished_host_id") == "stair-party-wall"]
         self.assertTrue(walls)
         for wall in walls:
-            for face in wall["faces"]:
+            PartMeshList().append(wall)
+            fronts = [face for face in wall['faces'] if normal(face)[1] > .999999]
+            self.assertTrue(fronts)
+            for face in fronts:
                 for point in face:
                     self.assertAlmostEqual(point[1], -28.458)
+            # A closed finish has host-side backing; only its occupied face
+            # is coplanar with the retained finished datum.
+            for face in wall["faces"]:
+                for point in face:
+                    self.assertGreaterEqual(point[1], -28.458-BACKING_M-1e-9)
+                    self.assertLessEqual(point[1], -28.458+1e-9)
                     self.assertLessEqual(start - 1e-9, point[0])
                     self.assertLessEqual(point[0], end + 1e-9)
 
@@ -411,6 +426,9 @@ class StairFirstPackage(unittest.TestCase):
         self.assertIn("stair-basement-floor", self.scene.get("mounting_hosts", {}))
 
         mutant = deepcopy(self.scene)
+        # This test targets write-time channel rejection after bypassing the
+        # earlier physical boundary only for deliberately invalid fixtures.
+        mutant['meshes'] = list(mutant['meshes'])
         mutant["meshes"].append(dict(
             id="host-face-bath-gwc-wc", group="shell", material="marble-bath",
             room="guest-wc", label="Measured finished fixing face",
@@ -420,6 +438,7 @@ class StairFirstPackage(unittest.TestCase):
         self.assertTrue(any("host-face-bath-gwc-wc" in e and "bookkeeping" in e for e in mutant_errors))
 
         mutant2 = deepcopy(self.scene)
+        mutant2['meshes'] = list(mutant2['meshes'])
         mutant2["meshes"].append(dict(
             id="support-detail-test-patch", group="shell", material="ceiling-white",
             room="guest-wc", label="Support patch",
@@ -440,6 +459,7 @@ class StairFirstPackage(unittest.TestCase):
         from archpipe.villa_render_contract import validate_scene
         scene = VR.build()
         mutant = deepcopy(scene)
+        mutant['meshes'] = list(mutant['meshes'])  # Exercise the later write guard on the historical open datum.
         mutant["meshes"].append(dict(
             id="host-face-test-wall", group="shell", material="plaster-warm-white",
             room="lounge", label="Bookkeeping host face",

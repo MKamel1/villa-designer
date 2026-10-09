@@ -1,5 +1,6 @@
 """Regression for the 2026-10-01 stale D1 render scene."""
 import json
+import gzip
 import os
 import shutil
 import subprocess
@@ -26,6 +27,7 @@ class VillaSceneProvenance(unittest.TestCase):
             "src/archpipe/blender/presentation.py", "src/archpipe/villa_render_contract.py",
             "src/archpipe/furniture_orientation.py", "ops/workstation/library-manifest.json",
             "knowledge/garden-palette.json", "knowledge/site-orientation.json", "knowledge/c4-final-approvals.json", "spec/villa-site.yaml",
+            "knowledge/c3-part-exemptions.json",
             "knowledge/library.json", "knowledge/projects/villa-01/brief-requirements.json",
             "knowledge/projects/villa-01/taste.json"]
         for relative in paths:
@@ -110,6 +112,25 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
         result = self._driver("--scene", str(self.scene), "--dry-run")
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("Scene provenance mismatch", result.stderr)
+
+    def test_real_c3_exemption_revocation_invalidates_cached_scene(self):
+        from archpipe.concept import part_exemptions
+        from archpipe.concept.physical_part import PartError, PartMeshList
+        frozen = json.loads(gzip.decompress((ROOT/'tests/fixtures/c3-phase2c-before.json.gz').read_bytes()))
+        member = next(m for m in frozen['meshes'] if m['part_kind']=='vacuum-body')
+        authority = self.root/'knowledge/c3-part-exemptions.json'
+        with patch.object(part_exemptions, 'RECORD', authority):
+            permitted = part_exemptions.annotate(dict(member))
+            PartMeshList().append(permitted)
+            policy = json.loads(authority.read_text())
+            record = next(r for r in policy['records'] if r['kind']=='vacuum-body')
+            record['shape_sha256'] = ['0'*64]  # Revoke the real retained shape.
+            authority.write_text(json.dumps(policy))
+            with self.assertRaisesRegex(PartError, 'changed proxy exemption'):
+                PartMeshList().append(permitted)
+        result = self._driver('--scene', str(self.scene), '--dry-run')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Scene provenance mismatch', result.stderr)
 
     def test_historical_unstamped_scene_refuses_before_render(self):
         # Frozen by value from the lead's 2026-10-01 D1 evidence: villa-render/1,

@@ -1,7 +1,7 @@
 """Typed physical boundary for presentation-scene mesh parts.
 
-Collection mode is used only while migrating the existing scene in C3 phase 1.
-The constructor itself always rejects a malformed or proxy part.
+Collection mode is an explicit diagnostic. Scene export defaults to strict
+admission after construction and mounting have finished.
 """
 from __future__ import annotations
 
@@ -31,6 +31,30 @@ BOX_KINDS = {
     "stepping-stone": "A cut rectangular paving stone has a rectangular solid body.",
     "bench-slab": "A thin rectangular paving slab physically supports a garden bench without a plinth.",
     "planter-soil": "Soil fill in a straight rectangular raised bed has a closed rectangular volume.",
+    "rug": "A rectangular rug has a physical closed textile backing of stated thickness.",
+    "joinery-pull": "A straight cabinet pull is a rectangular metal bar.",
+    "joinery-cable-tray": "The authored desk cable tray is a closed rectangular under-top enclosure.",
+    "appliance-tray": "A flat drip tray is a rectangular manufactured plate.",
+    "appliance-spout": "The authored square spout is a rectangular metal section.",
+    "vent-slot": "A rectangular downdraft slot has a closed rectangular casing.",
+    "appliance-housing": "The authored hood canopy is a rectangular sheet-metal enclosure.",
+    "duct": "A rectangular duct has a closed rectangular external casing.",
+    "shutter-housing": "A roller shutter box is a rectangular enclosure.",
+    "door-track": "A straight pocket-door track has a rectangular extrusion envelope.",
+    "curtain-track": "A straight curtain track has a rectangular extrusion envelope.",
+    "lamp-housing": "Linear pendants and battens have rectangular manufactured housings.",
+    "light-diffuser": "A rectangular opal aperture panel is a closed physical substrate.",
+}
+
+# These are render films/apertures over physical backing or unbounded terrain,
+# not general permission to represent a recognisable object by an open mesh.
+SURFACE_EXEMPTIONS = {
+    "finish-layer": "Ground-cover film on terrain; subterranean extent is outside this render model.",
+    "soil-bed": "In-ground soil interface; closing the below-ground volume invents an unmodelled excavation.",
+    "tree-pit": "Gravel soil interface; below-ground roots and excavation remain unmodelled.",
+    "glass-edge": "Optical edge treatment on an independently closed glass pane, not standalone glazing.",
+    "light-diffuser": "Single Lambertian emitting aperture on a physical housing; adding emitting backs changes the declared flux.",
+    "wall-marker": "Single Lambertian emitting aperture on a wall host; adding emitting backs changes the declared flux.",
 }
 
 
@@ -154,6 +178,7 @@ class Part:
     support: object = None
     surface: bool = False
     occupied_side: object = None
+    proxy_exemption: object = None
 
     def __post_init__(self):
         if not self.kind or not self.material or not self.basis:
@@ -162,11 +187,18 @@ class Part:
             raise PartError("part requires declared local x, y, z axes")
         if self.kind == "glass-pane" and self.surface:
             raise PartError("glass pane must be a closed solid")
+        if self.surface and self.kind not in SURFACE_EXEMPTIONS:
+            raise PartError("unregistered surface exemption for " + self.kind)
         if self.basis == "measured-gltf":
             return  # C2 asset intake owns mesh validation and measured dimensions.
         faces = _freeze_faces(self.solid) if self.solid else self.solid
         errors = geometry_errors(faces, surface=self.surface, occupied_side=self.occupied_side)
-        if not self.surface and _rectangular_proxy(faces) and self.kind not in BOX_KINDS:
+        exempt = False
+        if self.proxy_exemption is not None:
+            from .part_exemptions import validate_exemption
+            validate_exemption(self.kind, faces, self.proxy_exemption)
+            exempt = True
+        if not self.surface and _rectangular_proxy(faces) and self.kind not in BOX_KINDS and not exempt:
             errors.insert(0, "bare rectangular proxy for " + self.kind)
         if self.support and self.kind == "duvet":
             points = _points(self.solid)
@@ -200,10 +232,14 @@ class PartMeshList(list):
         record["part_kind"] = kind
         record.setdefault("local_axes", ["x", "y", "z"])
         record.setdefault("basis", "authored-procedural")
+        if record.get('surface'):
+            record['surface_exemption_reason'] = SURFACE_EXEMPTIONS.get(kind)
         try:
+            if 'face_materials' in record and len(record['face_materials']) != len(record['faces']):
+                raise PartError('face material count does not match faces')
             Part(kind, record["faces"], tuple(record["local_axes"]), record["material"],
                  record["basis"], record.get("support"), record.get("surface", False),
-                 record.get("occupied_side"))
+                 record.get("occupied_side"), record.get('proxy_exemption'))
         except PartError as exc:
             if not self.collect:
                 raise PartError(record["id"] + ": " + str(exc)) from exc

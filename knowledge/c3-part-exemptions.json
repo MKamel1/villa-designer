@@ -1,0 +1,74 @@
+{
+  "schema": "c3-part-exemptions/1",
+  "branch_start": "acee29d",
+  "records": [
+    {
+      "code": "c3-retained-vacuum-body",
+      "kind": "vacuum-body",
+      "reason": "Existing closed storage dressing envelope; modelling the vacuum body changes its authored silhouette, outside the phase 2c appearance constraint. Physical object replacement remains open.",
+      "shape_sha256": [
+        "70f0ff8a0289690ab5a7fed1c43f6c033270c49754f1da0773c107b23cd7464c"
+      ]
+    },
+    {
+      "code": "c3-retained-vacuum-wand",
+      "kind": "vacuum-wand",
+      "reason": "Existing closed storage dressing envelope; circular wand geometry changes the authored section, outside the phase 2c appearance constraint. Physical object replacement remains open.",
+      "shape_sha256": [
+        "0f0852bc9ed6bc1777575a8c356c929d9da2895decd7ce184c12ed43b2b67bc5"
+      ]
+    },
+    {
+      "code": "c3-retained-luggage",
+      "kind": "luggage",
+      "reason": "Existing closed shoes/hat dressing envelopes; replacing them with actual shoes and hats changes authored content and silhouette, outside the phase 2c appearance constraint. Morphology remains open.",
+      "shape_sha256": [
+        "b2dc27dde208c4dcf8cc16b37e4d3418b0476dd4c269d754203fe5a2b15bb071",
+        "c28d8d249387629dca94c6f3dd3c47aab95e50e2d028da53227954625c0c27bb"
+      ]
+    },
+    {
+      "code": "c3-retained-folded-fabric",
+      "kind": "folded-fabric",
+      "reason": "Existing closed folded textile dressing envelope; folds and cloth evaluation change authored silhouette, outside the phase 2c appearance constraint. Morphology remains open.",
+      "shape_sha256": [
+        "8778343e66fcedf13de2193a745e1618aa49e80716e883c5baec9fffe8d6eb3c"
+      ]
+    },
+    {
+      "code": "c3-retained-folded-linens",
+      "kind": "folded-linens",
+      "reason": "Existing closed folded textile storage envelope; folds and cloth evaluation change authored silhouette, outside the phase 2c appearance constraint. Morphology remains open.",
+      "shape_sha256": [
+        "1a0ff5a5ef61b48d67699a98702aa9e683621b0276720d52d4c588cbabee11b9"
+      ]
+    },
+    {
+      "code": "c3-retained-pillow",
+      "kind": "pillow",
+      "reason": "Existing closed bunk pillow dressing envelope; bed and evaluated cloth replacement belongs to the parallel bed package. This retained shape is not morphological approval.",
+      "shape_sha256": [
+        "13795bc8906f225c3416ca06cb82b3f440006bf4246a236130b807ea541fa701"
+      ]
+    },
+    {
+      "code": "c3-retained-lamp-cord",
+      "kind": "lamp-cord",
+      "reason": "Existing closed square suspension envelope; circular cable geometry changes the authored section, outside the phase 2c appearance constraint. Cross-section fidelity remains open.",
+      "shape_sha256": [
+        "190b0205188cccb0732072be22ac81460c6d8481734719ada906000f51d47142",
+        "a8abe0faf878ca7b421682f09279aa0fa2109ae338f8d589b5d7336da5f211f2",
+        "a96ef4955ee6d8e7a36518f2754c1806e7531fc753d261407b631c35d9167d6f",
+        "df66046807bee16e85b02cc20d244d9da9c76832b75b51afb64df54b39c7d4e7"
+      ]
+    },
+    {
+      "code": "c3-retained-lamp-wire",
+      "kind": "lamp-wire",
+      "reason": "Existing closed square suspension envelope; circular cable geometry changes the authored section, outside the phase 2c appearance constraint. Cross-section fidelity remains open.",
+      "shape_sha256": [
+        "172e7aed76785205ff7e9830e10ec1954fcc13df053c0d9b8619b625ddcc9128"
+      ]
+    }
+  ]
+}
