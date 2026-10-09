@@ -1,0 +1,236 @@
+{
+  "schema": "beds-round4-intake-recipes/1",
+  "client_source": "Client bed sizes and real-size rule, 2026-10-08; BEDS ROUND 4",
+  "dimension_definitions": "All dimensions are metres, width then length. Native axes X/Z are horizontal and Y is up; Blender converts to X/Y horizontal and Z up. The dimension_front_axis is used only to measure width/length; unresolved berth heads never authorize placement. Component indices are zero-based frozen extraction order; no component measurement is a production binding.",
+  "unit_evidence": {
+    "unit": "m",
+    "source": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+  },
+  "candidates": [
+    {
+      "asset": "sf_bed3_dff77bbd",
+      "bed": "pb-bed",
+      "target_m": [
+        1.6,
+        2.0
+      ],
+      "required_berths": 1,
+      "length_axis": "X",
+      "dimension_front_axis": "+X",
+      "mattress_selections": {
+        "lower": [
+          {
+            "mesh": "Object_4",
+            "component_index": 1,
+            "expected_vertices": 3036
+          }
+        ]
+      },
+      "measurement_basis": "Rounded mattress component over separate four-vertex under-bed plane; headboard Object_5 at minimum X.",
+      "author_credit": "ArchVibe 3D (https://sketchfab.com/super-valentin)",
+      "source_url": "https://sketchfab.com/3d-models/modern-bed-dff77bbdb8854ba4afe502af5068d8f9",
+      "licence": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "asset": "sf_bed3_d3aeb724",
+      "bed": "pb-bed",
+      "target_m": [
+        1.6,
+        2.0
+      ],
+      "required_berths": 1,
+      "length_axis": "Z",
+      "dimension_front_axis": "+Z",
+      "mattress_selections": {
+        "lower": [
+          {
+            "mesh": "Bed_LP_Default_0",
+            "component_index": 6,
+            "expected_vertices": 942
+          }
+        ]
+      },
+      "measurement_basis": "Rounded full mattress component between frame and duvet; pillows toward positive Blender Y (negative native Z). Whole mesh remains fused; component measurement is diagnostic only.",
+      "author_credit": "Ren Viro Store (https://sketchfab.com/renviros)",
+      "source_url": "https://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220",
+      "licence": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "asset": "sf_bed3_9fb7c547",
+      "bed": "ka-bunk",
+      "target_m": [
+        0.9,
+        2.0
+      ],
+      "required_berths": 2,
+      "length_axis": "X",
+      "dimension_front_axis": "+X",
+      "mattress_selections": {
+        "lower": [
+          {
+            "mesh": "Object_8"
+          }
+        ],
+        "upper": [
+          {
+            "mesh": "Object_5"
+          }
+        ]
+      },
+      "measurement_basis": "Separate full rounded lower/upper mattress solids, source materials None_Untitled and None_Matress_Top_Diffuse; pillow heads at minimum X.",
+      "author_credit": "Blender3D (https://sketchfab.com/Blender3D)",
+      "source_url": "https://sketchfab.com/3d-models/simple-bunk-bed-9fb7c54715dd41b98b3dc67b367cf81d",
+      "licence": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "asset": "sf_bed3_0e134823",
+      "bed": "ka-bunk",
+      "target_m": [
+        0.9,
+        2.0
+      ],
+      "required_berths": 2,
+      "length_axis": "X",
+      "dimension_front_axis": "-X",
+      "mattress_selections": {
+        "lower": [
+          {
+            "mesh": "Mesh2_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh3_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh4_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh5_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh6_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh7_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh8_Bage_Ceramic10_0"
+          }
+        ],
+        "upper": [
+          {
+            "mesh": "Mesh10_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh11_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh12_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh13_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh14_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh15_Bage_Ceramic10_0"
+          },
+          {
+            "mesh": "Mesh16_Bage_Ceramic10_0"
+          }
+        ]
+      },
+      "measurement_basis": "Lower and upper six-face mattress shells; bounds include bevel shell, not source duvets Mesh29/Mesh27. Lower head toward positive X; upper head unresolved.",
+      "author_credit": "AM ARCHITECTURE (https://sketchfab.com/abir_sd)",
+      "source_url": "https://sketchfab.com/3d-models/bunk-bed-0e13482338344239abd8b697def3b20c",
+      "licence": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "orientation_limit": "dimension axis measured; front sign represents lower berth only, not activation orientation"
+    },
+    {
+      "asset": "sf_bed3_2cabd354",
+      "bed": "ka-bunk",
+      "target_m": [
+        0.9,
+        2.0
+      ],
+      "required_berths": 2,
+      "length_axis": "Z",
+      "dimension_front_axis": "+Z",
+      "mattress_selections": {
+        "lower": [
+          {
+            "mesh": "Bunk_cgt_bunk_bed_f_house_carpet_0",
+            "component_index": 4,
+            "expected_vertices": 361
+          }
+        ],
+        "upper": [
+          {
+            "mesh": "Bunk_cgt_bunk_bed_f_house_carpet_0",
+            "component_index": 7,
+            "expected_vertices": 361
+          }
+        ]
+      },
+      "measurement_basis": "Separate rounded mattress components inside one fused fabric mesh, vertically separated from duvet/pillow components. Pillow heads toward positive Blender Y.",
+      "author_credit": "sparshgupta (https://sketchfab.com/SPARSHGUPTA)",
+      "source_url": "https://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10",
+      "licence": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "asset": "sf_bed3_28a8b705",
+      "bed": "kb-bed",
+      "target_m": [
+        1.2,
+        2.0
+      ],
+      "required_berths": 1,
+      "length_axis": "Z",
+      "dimension_front_axis": "+Z",
+      "mattress_selections": {},
+      "measurement_basis": "Three meshes: pillows, fused wooden base/headboard, and cloth; no independent complete naked mattress identified.",
+      "author_credit": "AHMED KCHIKICH (https://sketchfab.com/inven2000)",
+      "source_url": "https://sketchfab.com/3d-models/bed-wood-oak-pbr-28a8b7050a5e4951abbfb588015abf41",
+      "licence": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "identification_failure": "complete actual mattress not identifiable separately from base/bedding; no numeric mattress mismatch claimed",
+      "partial_or_frame_selections": {
+        "base_component": [
+          {
+            "mesh": "defaultMaterial.001",
+            "component_index": 0,
+            "expected_vertices": 192
+          }
+        ]
+      }
+    },
+    {
+      "asset": "sf_bed3_fe3c50e1",
+      "bed": "kb-bed",
+      "target_m": [
+        1.2,
+        2.0
+      ],
+      "required_berths": 1,
+      "length_axis": "X",
+      "dimension_front_axis": "-X",
+      "mattress_selections": {},
+      "measurement_basis": "The only separately identifiable exposed mattress solid pCube3_Fabric1_0 covers the head section; its length is only 0.571583 m. Remaining soft geometry is quilt/folded cloth; no full naked mattress identified.",
+      "author_credit": "WOODPORT (https://sketchfab.com/woodport)",
+      "source_url": "https://sketchfab.com/3d-models/engi-bed-fe3c50e1eb7b4b0eafa647598ca53f11",
+      "licence": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "identification_failure": "complete actual mattress absent/unresolved; exposed head patch is not a full mattress",
+      "partial_or_frame_selections": {
+        "exposed_head_patch": [
+          {
+            "mesh": "pCube3_Fabric1_0"
+          }
+        ],
+        "support_platform": [
+          {
+            "mesh": "pCube1_Engi160x200_0"
+          }
+        ]
+      }
+    }
+  ]
+}

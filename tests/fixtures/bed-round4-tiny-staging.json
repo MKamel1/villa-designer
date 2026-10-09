@@ -1,0 +1,46 @@
+{
+  "asset": "sf_bed3_0e134823",
+  "points_m": [
+    [
+      5.551114999048691e-19,
+      0.004769079387187958,
+      0.0019039643229916692
+    ],
+    [
+      0.02270490862429142,
+      1.1102232066048913e-18,
+      0.0001842640631366521
+    ],
+    [
+      0.022890953347086906,
+      0.000969635380897671,
+      0.0
+    ],
+    [
+      0.02383689023554325,
+      0.0060746511444449425,
+      0.0001578355295350775
+    ],
+    [
+      0.014458654448390007,
+      0.022854045033454895,
+      0.0029706573113799095
+    ],
+    [
+      0.017309648916125298,
+      0.02149813249707222,
+      0.01832469552755356
+    ]
+  ],
+  "source_sha256": {
+    "model.gltf": "2c9bab48e165a4270ebbd675fc6111a23f498617fb29d0d5a9f9266419ef73e2",
+    "scene.bin": "a1660c43531e8937d866081f5c8296121d4392d1ba2a8581a5a2db5c73b88da5",
+    "textures/Bright_Green_Ceramic_baseColor.jpeg": "7ca34b64df6cef6bcdc2c552066ca61e8658276c8abe66340f868e8845c86a77",
+    "textures/Bage_Ceramic10_baseColor.jpeg": "fed95f8756e44d5473df8bacbfa2be6099d371917e445cffeade06efbb7673c5",
+    "textures/Blue_Purple_Ceramic_baseColor.jpeg": "606bbf0d438ad7dcff1db0836453ef1d8e47471656e06d06b04f54f152040aaf",
+    "textures/Baby_Blue_Ceramic1_baseColor.jpeg": "42fbbce5dfdf8d9db06936e3077d8dc43d3129aad996c161906d44e02a4fcd17",
+    "textures/Blue_Black_Ceramic_baseColor.jpeg": "98e9e44dc8946a3247acea79c028752c31fd7da012847335f87e22648bafd072"
+  },
+  "old_gap_m": 0.005,
+  "before_image": "out/beds/round4/candidate-previews-corrected/sf_bed3_0e134823-plus-y-close.png"
+}

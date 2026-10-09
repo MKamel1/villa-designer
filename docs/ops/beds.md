@@ -16,18 +16,27 @@ C8 means the existing geometry-topology review.
    existing exact triangle reader. Record bounds, actual triangles, position
    vertices, units, front/up axes, all buffer/texture hashes and licence/author.
    Intake disagreements stay failures; never normalize away a size mismatch.
-3. Call `archpipe.beds.fit_bed` with the unchanged local width/depth and actual
-   existing overall headboard/bunk height. Mattress-top height is a separate
-   value. There is no published mattress-height range in the current catalogue;
-   record that gap rather than inventing a catalogue rule. Plan tolerance is
-   the client's absolute 20 mm and overall-height tolerance five percent.
-   `placed_bed_findings` independently compares actual world extents and edges
-   against the one uniform scale; this prevents an axiswise distortion from
-   passing merely because its bounding box fits.
+3. Apply the client decision of 2026-10-08: source-size mattresses, with
+   only source-declared unit conversion; no fit scaling. `fit_bed` needs each
+   actual mattress and unchanged planned width/length. The tolerance is
+   20 mm per mattress dimension. Parents require 1.600 × 2.000 m, kids A
+   0.900 × 2.000 m for each berth, kids B 1.200 × 2.000 m. The frame may
+   overhang and must undergo real-frame room checks. Whole-frame footprint
+   and five-percent height fitting in the historical round-1/2 records are
+   superseded. Missing or partial mattress geometry is refused; source
+   bedding bounds and support platforms cannot replace a full mattress.
+   `placed_bed_findings` checks uniform source scale and the unchanged
+   mattress centre using actual imported vertices.
 4. Preview each measured candidate in neutral light with a 1.8 m scale figure,
    then in its room from the existing camera. Disable material emission as
    well as design lights. Preserve the before image and bind receipts to actual
    geometry/material/cloth hashes. Require lead review before selection.
+   Derive clipping, staging plane and diagnostic light from actual extents.
+   Use a floor gap below the lowest vertex of the smaller of 5 mm and
+   0.25 percent of the longest extent; this is diagnostic staging, not a
+   physical tolerance. Every diagnostic emitter corner stays above the
+   model and scale figure. Extreme source sizes need a separate labelled
+   asset close-up alongside the figure view, without scaling the model.
 5. Before activating a replacement, import it BEFORE cloth simulation; select
    its actual mattress/frame meshes as colliders and remove procedural bed
    geometry from the collision set. Derive cloth cut and starting height from
@@ -78,7 +87,7 @@ Its context scope is actual architecture and room furniture; curtains and
 incidental props are omitted and disclosed. It also accepts
 `--rejected-model /path/to/model.gltf` for a native-size rejection diagnostic.
 Selection still requires a fitting, reviewed candidate; every round-2 model
-fails the fixed envelope. The importer capability proof is isolated and does
+fails the current real-size mattress rule. The importer capability proof is isolated and does
 not change that decision.
 
 
@@ -104,3 +113,18 @@ actual vertices, never rotated local bounding boxes. Measure signed native
 end bands and welded pillow components with `bed_axis_evidence.py`, and
 record unresolved semantic directions explicitly. Reviewer interpretation
 is still required for style, stains and missing functional parts.
+
+Round-4 source-size intake is reproducible without changing any source:
+
+```text
+scripts/recheck_beds_round4.py --recipes docs/beds-intake-round4.json --geometry out/beds/round4/geometry --output out/beds/round4/recheck.json
+/home/omar/opt/blender/blender -b --python-exit-code 1 -P scripts/preview_beds.py -- --scene out/beds/round4/scene.json --candidates out/beds/round4/candidates-preview.json --output out/beds/round4/candidate-previews-final
+```
+
+The authored recipe names actual mattress meshes or reviewed frozen connected
+components, with expected vertex counts. Source hashes are rechecked before
+measurement. Component-only identification inside a fused mesh is diagnostic;
+activation still needs proper production bindings and accepted neutral review.
+Two round-4 candidates have no independently identified full mattress: they
+remain refused, and partial exposed geometry/frame boxes are reported separately.
+Rejected candidates never run fictitious in-room C8 or replacement cloth checks.

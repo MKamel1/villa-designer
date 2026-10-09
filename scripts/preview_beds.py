@@ -57,9 +57,9 @@ def render(args):
         scene.render.image_settings.file_format='PNG'
         return scene,objects,materials,warnings
 
-    def softbox(position,target,size=3):
+    def softbox(position,target,size=3,power=500):
         light=bpy.data.lights.new('recorded neutral diagnostic softbox','AREA')
-        light.energy,light.size,light.color=500,size,(1,1,1)
+        light.energy,light.size,light.color=power,size,(1,1,1)
         obj=bpy.data.objects.new(light.name,light)
         bpy.context.collection.objects.link(obj)
         obj.location=position
@@ -84,17 +84,16 @@ def render(args):
             objects.append(obj)
         return objects
 
-    def isolated(scene,objects,path,direction=(1.8,3,1.7)):
+    def isolated(scene,objects,path,direction=(1.8,3,1.7),include_figure=True):
         bpy.context.view_layer.update()
         points=[o.matrix_world@v.co for o in objects for v in o.data.vertices]
-        from archpipe.beds import preview_datums
+        from archpipe.beds import preview_datums, preview_clip_range, preview_neutral_light
         datums=preview_datums([list(p) for p in points])
         low,high=datums['bounds_m']
         cx,cy=(low[0]+high[0])/2,(low[1]+high[1])/2
         span=max(high[0]-low[0],high[1]-low[1],high[2]-low[2])
-        aid=figure(low[0]-.45,high[1]-.3,low[2])
-        bpy.ops.mesh.primitive_plane_add(size=20,location=(cx,cy,low[2]-.005))
-        lamp=softbox((cx+1,cy+3,low[2]+4),(cx,cy,low[2]+.8))
+        aid=figure(low[0]-.45,high[1]-.3,low[2]) if include_figure else []
+        bpy.ops.mesh.primitive_plane_add(size=max(20,span*3),location=(cx,cy,datums['floor_z_m']))
         camera_data=bpy.data.cameras.new('neutral isolated bed camera')
         camera_data.type='ORTHO'
         camera=bpy.data.objects.new(camera_data.name,camera_data)
@@ -106,18 +105,28 @@ def render(args):
         right=camera.rotation_euler.to_matrix()@Vector((1,0,0))
         up=camera.rotation_euler.to_matrix()@Vector((0,1,0))
         points+=[o.matrix_world@Vector(c) for o in aid for c in o.bound_box]
+        light_record=preview_neutral_light([list(p) for p in points])
+        lamp=softbox(light_record['position_m'],light_record['target_m'],
+                     light_record['size_m'],light_record['power_watts'])
         projected=[(p.dot(right),p.dot(up)) for p in points]
         xmin,xmax=min(p[0] for p in projected),max(p[0] for p in projected)
         ymin,ymax=min(p[1] for p in projected),max(p[1] for p in projected)
         camera.location+=right*((xmin+xmax)/2-camera.location.dot(right))
         camera.location+=up*((ymin+ymax)/2-camera.location.dot(up))
+        clips=preview_clip_range([list(p) for p in points],list(camera.location),
+                                 list(camera.location+camera.rotation_euler.to_matrix()@Vector((0,0,-1))))
+        camera_data.clip_start=clips['clip_start_m']
+        camera_data.clip_end=clips['clip_end_m']
         scene.render.resolution_y=720
         camera_data.ortho_scale=max(xmax-xmin,(ymax-ymin)*4/3)/.88
         scene.camera=camera
         scene.render.filepath=str(path)
         bpy.ops.render.render(write_still=True)
-        return dict(image=str(path),scale_reference_height_m=1.8,
+        return dict(image=str(path),scale_reference_height_m=1.8 if include_figure else None,
+                    clipping=clips,scope='figure and bed' if include_figure else 'asset close-up; unchanged source size',
                     floor_z_m=datums['floor_z_m'],figure_foot_z_m=datums['figure_foot_z_m'],camera_location=list(camera.location),
+                    staging_gap_m=datums['staging_gap_m'],
+                    diagnostic_light=light_record,
                     ortho_scale_m=camera_data.ortho_scale,geometry_bounds_m=[low,high])
 
     if args.candidates:
@@ -143,10 +152,15 @@ def render(args):
                 images.append(isolated(scene,objects,args.output/(candidate['id']+'-'+side+'.png'),direction))
                 for o in set(bpy.data.objects)-before:
                     bpy.data.objects.remove(o,do_unlink=True)
+                if candidate.get('close_up'):
+                    before=set(bpy.data.objects)
+                    images.append(isolated(scene,objects,args.output/(candidate['id']+'-'+side+'-close.png'),direction,False))
+                    for o in set(bpy.data.objects)-before:
+                        bpy.data.objects.remove(o,do_unlink=True)
             receipts.append(dict(candidate=candidate,images=images,actual_vertex_bounds_m=measured,
                 source_gltf_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
                 source_materials_sha256=canonical_hash(json.loads(path.read_text()).get('materials',[])),
-                emission_disabled=True,neutral_softbox_watts=500,review_status='pending'))
+                emission_disabled=True,diagnostic_light='per-image measured-span staging; see images',review_status='pending'))
             (args.output/'evidence.json').write_text(json.dumps(receipts,indent=2)+'\n')
         return
 

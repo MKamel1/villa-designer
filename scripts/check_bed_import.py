@@ -14,21 +14,32 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 sys.path.insert(0,str(ROOT/'scripts'))
 
+def require_complete_proof(result):
+    """Refuse partial success even when geometry/fallback probes passed."""
+    if not result['cloth']['passed']:
+        raise ValueError('mechanical cloth proof failed; see importer-proof.json: '+result['cloth']['refused'])
+
 def run():
     import bpy
     from archpipe.blender import villa_scene as builder
     from archpipe.beds import model_review_meshes
-    out=ROOT/'out/beds/round2'
-    geometry=json.loads(gzip.decompress((out/'geometry/sf_bed_scandi_bare.json.gz').read_bytes()))
-    spec=dict(id='mechanical-scandi',asset='sf_bed_scandi_bare',role='bed',scale=.45,
+    out=ROOT/'out/beds/round3'
+    out.mkdir(parents=True,exist_ok=True)
+    geometry=json.loads(gzip.decompress((ROOT/'out/beds/round2/geometry/sf_bed_scandi_bare.json.gz').read_bytes()))
+    spec=dict(id='mechanical-scandi',asset='sf_bed_scandi_bare',role='bed',scale=1.,
+        native_bounds=dict(min=[-2.164110,.017163,-1.304135],max=[2.283993,1.317586,1.225815]),
+        length_axis='X',planned_mattress_m=[2.4124317169189453,4.241483449935913],
+        footprint_w=4.241483449935913,footprint_d=2.4124317169189453,reference_h=1.300423,
+        contents_review=dict(status='bed-only',basis='actual seven bed meshes inspected',extras=[]),
         position=[0,0,0],rotation_deg=[0,0,0],layout_rotation_deg=-90,front_axis='+X',
         replaces='furn-mechanical-scandi-',review_geometry=geometry,
         orientation_evidence=dict(front_axis='+X',basis='actual pillow at negative X'),
-        neutral_review=dict(status='accepted',scope='mechanical harness only, not design approval'),
+        neutral_review=dict(status='accepted',scope='retained source reviewed in round 2; mechanical harness only, not design approval'),
         mattress_bindings=dict(lower=dict(parts=['Object_14'],head_at_max=False)))
     library='/home/omar/archpipe/assets/library'
     spec['neutral_review'].update(source_sha256=geometry['source_sha256'],
-                                orientation_evidence=spec['orientation_evidence'])
+                                orientation_evidence=spec['orientation_evidence'],
+        selection=dict(omitted_meshes=[],mattress_bindings=spec['mattress_bindings'],unit_evidence=None))
     bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
     bpy.ops.mesh.primitive_cube_add(size=1)
     fallback=bpy.context.object;fallback.name=spec['replaces']+'mattress'
@@ -64,12 +75,12 @@ def run():
         scene.view_settings.view_transform='AgX';scene.view_settings.exposure=0
         bpy.ops.mesh.primitive_plane_add(size=20,location=(0,0,-.005))
         # Grey height reference: feet at zero; head top exactly 1.8 metres.
-        bpy.ops.mesh.primitive_cylinder_add(vertices=16,radius=.12,depth=1.56,location=(-1.5,0,.78))
-        bpy.ops.mesh.primitive_uv_sphere_add(segments=16,ring_count=8,radius=.12,location=(-1.5,0,1.68))
+        bpy.ops.mesh.primitive_cylinder_add(vertices=16,radius=.12,depth=1.56,location=(-3,0,.78))
+        bpy.ops.mesh.primitive_uv_sphere_add(segments=16,ring_count=8,radius=.12,location=(-3,0,1.68))
         light=bpy.data.lights.new('neutral diagnostic softbox','AREA');light.energy=500;light.size=3
         lamp=bpy.data.objects.new(light.name,light);bpy.context.collection.objects.link(lamp);lamp.location=(1,-2,4)
         lamp.rotation_euler=(Vector((0,0,.6))-lamp.location).to_track_quat('-Z','Y').to_euler()
-        cam=bpy.data.cameras.new('mechanical cloth camera');cam.type='ORTHO';cam.ortho_scale=4.4
+        cam=bpy.data.cameras.new('mechanical cloth camera');cam.type='ORTHO';cam.ortho_scale=7.5
         camera=bpy.data.objects.new(cam.name,cam);bpy.context.collection.objects.link(camera);camera.location=(3,-4,3)
         camera.rotation_euler=(Vector((-.3,0,.8))-camera.location).to_track_quat('-Z','Y').to_euler()
         scene.camera=camera;scene.render.image_settings.file_format='PNG'
@@ -114,6 +125,7 @@ def run():
         source_sha256=geometry['source_sha256'])
     (out/'importer-proof.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps({k:result[k] for k in ('scope','portable_vs_blender_max_error_m','cloth','missing_file_fallback')}))
+    require_complete_proof(result)
 
 if __name__=='__main__':
     with Path('/home/omar/archpipe/locks/graphics.lock').open('rb') as lock:

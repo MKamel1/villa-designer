@@ -33,6 +33,37 @@ assumed clearances remain `needs-source` until measured or sourced; a topology
 pass alone does not establish structural support capacity or client approval.
 Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.md).
 
+**Beds — client decision 2026-10-08.** Use real source size: glTF metres
+unless the source explicitly declares other units. `archpipe.beds.unit_scale`
+computes that conversion; no uniform fit scale is allowed. Measure each
+actual mattress against the planned size (20 mm per dimension); the frame
+and headboard may extend beyond it. Require a bed-only contents review;
+omit only separately named accessory meshes and record every omission.
+Bind the neutral review to source hashes, orientation, retained meshes,
+mattress bindings and units before activation. Anchor the actual mattress
+centre at the unchanged layout position and preserve its head direction.
+Run `bed_room_review` on the real frame with unchanged rooms, furniture and
+cameras; report achieved versus required access and each cited shortfall.
+Storage-front clearance is a planning screen, not proof of animated drawer
+or door travel; disclose the existing motion-geometry limitations. Import
+models before cloth; retain actual mattress cuts, all retained colliders,
+evaluated cloth-intersection refusal and physical procedural fallback.
+Candidates rejected at mattress/contents intake never become in-room fit
+passes. Passing candidates need isolated neutral previews with a 1.8 m
+figure and an existing-camera room preview before integration. The
+isolated camera's clipping planes must contain actual vertex depths,
+including the reference figure. Derive staging and diagnostic softboxes
+from measured extent, with every emitter corner above all subjects. Keep
+the floor gap at the smaller of 5 mm and 0.25 percent of the longest actual
+extent (diagnostic staging, not a design tolerance). Record the softbox
+position, size and power per image; power scales with staging span squared
+to retain comparable diagnostic fill. Extreme-size rejections also need a
+separately labelled asset close-up without the figure; never rescale the
+model for readability. Review each image: framing checks did not catch an
+emitter cutting oversized bedding. The
+mechanical importer harness must exit nonzero if cloth is refused, even
+when its geometry and fallback probes pass. See [beds report](../../../docs/beds-report.md).
+
 ## Order
 
 1. **Export the scene**: `villa_render.write()` → `scene.json`.

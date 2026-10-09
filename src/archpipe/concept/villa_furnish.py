@@ -359,7 +359,7 @@ def _layout(lay=None, products=True):
         "family-bath")
     # -- kids A (two girls): bunk bed, two desks, a 1.5 m wardrobe
     KA = r["kids-a"]
-    add(item("ka-bunk", None, "bed_single", KA[0] + 0.45, -25.45, 0, h=1.7,
+    add(item("ka-bunk", None, "bed_single", KA[0] + 0.45, -25.45, 0, h=1.7, berths=2,
              why="bunk bed against the west wall (answers)"), "kids-a")
     add(against("ka-desk-1", KA, "y1", 12.62, "desk", w=1.1, d=0.6, h=0.75, why="desk, girl 1"), "kids-a")
     add(against("ka-desk-2", KA, "y1", 13.76, "desk", w=1.1, d=0.6, h=0.75, why="desk, girl 2"), "kids-a")

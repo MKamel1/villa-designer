@@ -246,10 +246,20 @@ def main() -> int:
     from archpipe.beds import fit_bed, bed_items
     bed_case = json.loads((ROOT / "tests/fixtures/bed-chelsea-measured-rejection.json").read_text())
     bed_fit = fit_bed(bed_case['bounds_m'], **bed_case['target'], front_axis=bed_case['front_axis'])
-    expect("measured Chelsea bed refuses fixed-footprint scale distortion", not bed_fit['ok'])
+    expect("measured Chelsea bed refuses missing actual mattress geometry", not bed_fit['ok'])
     bed_dimensions = [b-a for a,b in zip(bed_case['bounds_m']['min'],bed_case['bounds_m']['max'])]
     expect("measured bed guard stays quiet at the real model's own envelope",
-           fit_bed(bed_case['bounds_m'], bed_dimensions[0], bed_dimensions[2], bed_dimensions[1], '+Z')['ok'])
+           fit_bed(bed_case['bounds_m'], bed_dimensions[0], bed_dimensions[2], bed_dimensions[1], '+Z', mattress_bounds={'lower':bed_case['bounds_m']})['ok'])
+    from archpipe.beds import real_size_findings
+    round2_beds = json.loads((ROOT / 'tests/fixtures/bed-round2-measurements.json').read_text())
+    expect('all round-2 bed fit scales refused under real-size client decision',
+           all(real_size_findings(row['fit']['scale']) for row in round2_beds))
+    mattress = {'min':[0,0,0], 'max':[1.6,.25,1.96]}
+    expect('real-size mattress 40 mm short refused', not fit_bed(
+        {'min':[0,0,0], 'max':[1.8,1.2,2.3]},1.6,2.,None,'+Z',mattress_bounds={'lower':mattress})['ok'])
+    mattress['max'][2]=2.
+    expect('correct mattress permits real frame/headboard overhang', fit_bed(
+        {'min':[0,0,0], 'max':[1.8,1.2,2.3]},1.6,2.,None,'+Z',mattress_bounds={'lower':mattress})['ok'])
     from archpipe.concept import villa_furnish
     fallback_ids = {b['id'] for b in bed_items(villa_furnish.layout(villa_r11.design('D1')))}
     expect("bed fallback disclosures preserve camera subject identity",
@@ -263,6 +273,23 @@ def main() -> int:
            all((ROOT / item['proof_file']).is_file() and all(
                'def '+name+'(' in (ROOT / item['proof_file']).read_text()
                for name in item['proofs']) for item in bed_registry['records']))
+    from archpipe.beds import preview_clip_range, preview_datums, preview_neutral_light
+    clip_case=json.loads((ROOT/'tests/fixtures/bed-round4-camera-clipping.json').read_text())
+    clips=preview_clip_range(clip_case['points_m'],clip_case['camera_position_m'],clip_case['camera_target_m'])
+    expect('real oversized bed preview extends beyond default far clipping',
+           clips['clip_end_m']>clip_case['old_clip_end_m'])
+    tiny=json.loads((ROOT/'tests/fixtures/bed-round4-tiny-staging.json').read_text())
+    expect('real tiny bed staging gap scales below old absolute gap',
+           preview_datums(tiny['points_m'])['staging_gap_m']<tiny['old_gap_m']/10)
+    emitter=json.loads((ROOT/'tests/fixtures/bed-round4-softbox-intersection.json').read_text())
+    neutral=preview_neutral_light(emitter['extreme_vertices_m'])
+    expect('diagnostic emitter lies entirely above actual bed vertices',
+           neutral['minimum_emitter_z_bound_m']>max(p[2] for p in emitter['extreme_vertices_m']))
+    round4=json.loads((ROOT/'tests/fixtures/bed-round4-measurements.json').read_text())
+    expect('all seven downloaded round-4 beds refuse mattress intake at source size',
+           len(round4)==7 and all(not fit_bed(row['bounds_m'],*row['target_m'],None,
+               row['front_axis'],row['length_axis'],mattress_bounds=row['mattress_bounds'],
+               required_berths=row['required_berths'])['ok'] for row in round4))
     brief_src = yaml.safe_load((ROOT / "spec/villa-brief.yaml").read_text(encoding="utf-8"))
     site_src = yaml.safe_load((ROOT / "spec/villa-site.yaml").read_text(encoding="utf-8"))
 

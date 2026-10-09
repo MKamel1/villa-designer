@@ -1013,11 +1013,17 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
             piece = it_all[mark]
             asset_record = next(p for p in json.loads(_MANIFEST_PATH.read_text())['props'] if p['id']==asset)
             bounds = asset_record.get('measured_bounds_m', bounds)
-            # Beds retain the approved footprint. Product selection cannot
-            # override fit or reinterpret mattress top as headboard height.
-            overall_h = GEN.get(piece["type"], (None, piece["h"]))[1]
-            href = overall_h
-            fit = fit_bed(bounds, piece["w"], piece["d"], href, MANIFEST_FRONTS.get(asset),asset_record.get('length_axis'))
+            # Client 2026-10-08: actual mattress size, no whole-frame fit scale.
+            from archpipe.beds import model_mattress_bounds, model_native_bounds, unit_scale
+            contract = dict(asset_record, role='bed', scale=unit_scale(asset_record.get('unit_evidence')), position=[0,0,0], rotation_deg=[0,0,0])
+            mattresses = None
+            if asset_record.get('review_geometry'):
+                mattresses = model_mattress_bounds(contract)
+                bounds = model_native_bounds(contract)
+            fit = fit_bed(bounds, piece["w"], piece["d"], None, MANIFEST_FRONTS.get(asset),
+                asset_record.get('length_axis'), mattress_bounds=mattresses,
+                scale=F.product(asset)["scale"], unit_evidence=asset_record.get('unit_evidence'),
+                required_berths=piece.get('berths',1))
         elif selected:
             fit["scale"] = F.product(asset)["scale"]
             fit["ok"] = True
@@ -1045,10 +1051,18 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
                 # the procedural fallback or starting any simulation.
                 from archpipe.beds import require_bed_geometry
                 models[-1].update(role='bed',native_bounds=bounds,
+                    position=[float(cx),float(cy),float(z)],
+                    footprint_w=float(w),footprint_d=float(d),
                     orientation_evidence=asset_record.get('orientation_evidence'),
                     neutral_review=asset_record.get('neutral_review'),
                     review_geometry=asset_record.get('review_geometry'),
-                    mattress_bindings=asset_record.get('mattress_bindings'))
+                    mattress_bindings=asset_record.get('mattress_bindings'),
+                    length_axis=asset_record.get('length_axis'),
+                    planned_mattress_m=[piece['w'],piece['d']],
+                    required_berths=piece.get('berths',1),
+                    unit_evidence=asset_record.get('unit_evidence'),
+                    omitted_meshes=asset_record.get('omitted_meshes',[]),
+                    contents_review=asset_record.get('contents_review'))
                 require_bed_geometry(models[-1])
             hidden_prefixes.add(prefix)
         return entry
@@ -2182,6 +2196,11 @@ def _build(lay=None, views=None, *, collect_part_failures=True):
     naming_failures=orientation_findings(scene)
     if naming_failures:
         raise ValueError("garden orientation: "+str(naming_failures))
+    if any(m.get('role')=='bed' for m in scene['models']):
+        from ..beds import bed_room_review
+        scene['bed_room_review'] = bed_room_review(scene,lay,sp,list(it_all.values()))
+        if not scene['bed_room_review']['ok']:
+            raise ValueError('real bed frame fails fixed room: '+json.dumps(scene['bed_room_review']))
     return scene
 
 

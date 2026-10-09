@@ -48,7 +48,7 @@ def measure(asset, model, manifest):
                         for p in files+images if p.is_file()},
                 missing_textures=missing,intake_violations=validate_entry(entry,model),
                 accepted_for_placement=False,
-                status='measurement only; fixed footprint fit and neutral preview review still required')
+                status='measurement only; actual source-size mattress, real-frame room checks and neutral review still required')
 
 
 def main():

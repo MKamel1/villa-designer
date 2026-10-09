@@ -1,0 +1,55 @@
+{
+  "asset": "sf_bed3_d3aeb724",
+  "points_m": [
+    [
+      -1068.2802734375,
+      -373.1282958984375,
+      92.09599304199219
+    ],
+    [
+      1068.2802734375,
+      -405.2487487792969,
+      126.99474334716797
+    ],
+    [
+      -877.0069580078125,
+      -1022.9330444335938,
+      201.7218475341797
+    ],
+    [
+      -0.53619384765625,
+      970.2872924804688,
+      860.1234741210938
+    ],
+    [
+      -0.53619384765625,
+      970.2871704101562,
+      2.06367826461792
+    ],
+    [
+      919.9070434570312,
+      817.2032470703125,
+      860.12353515625
+    ]
+  ],
+  "camera_position_m": [
+    3759.824951171875,
+    6357.3662109375,
+    3771.978271484375
+  ],
+  "camera_target_m": [
+    0.0,
+    -26.3228759765625,
+    2.91367826461792
+  ],
+  "old_clip_start_m": 0.1,
+  "old_clip_end_m": 1000.0,
+  "source_sha256": {
+    "model.gltf": "ab5dcb515cf1f65faef993b5b5ef69df7e5febc7517e9ded2cf59138dbb6e55d",
+    "scene.bin": "043fcccf1c5090a177734da0bde62810d46e292201374e4aeadd2e5e8ae63139",
+    "textures/Default_baseColor.jpeg": "127c172d0413793df0437506b1389ae27e1add86015d1662dd5c857187c39c37",
+    "textures/Default_metallicRoughness.png": "982fe23c3b5b5391284a117f8d17d10e01178431ff1b56d38cdcd537f899d967",
+    "textures/Default_normal.png": "9a3e2af2510693b2d0fbade2ea82d1a6b9a7eabb5a1f174e4ba9883e6ecd949b"
+  },
+  "before_image": "out/beds/round4/candidate-previews/sf_bed3_d3aeb724-plus-y.png"
+}

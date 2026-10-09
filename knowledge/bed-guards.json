@@ -1,6 +1,6 @@
 {
   "schema": "bed-guards/1",
-  "scope": "Fixed bed fit, fallback disclosure, measured model geometry and neutral staging. No round-2 candidate accepted for D1; central Python registry remains with lead/agy.",
+  "scope": "Real-size bed and mattress acceptance, fixed-layout real-frame topology, fallback disclosure, measured model geometry and neutral staging. Client decision 2026-10-08; no round-3 candidate accepted for D1.",
   "control_tier_definitions": {
     "1": "Prevent the defect by construction",
     "2": "Check the invariant before placing geometry"
@@ -96,6 +96,78 @@
       "proof_file": "tests/test_bed_models.py",
       "proofs": [
         "test_real_legacy_model_envelope_uses_centred_floor_anchor"
+      ]
+    },
+    {
+      "lesson_id": "beds-real-size-mattress-contract",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Source-unit-only scale; measure every mattress; omit separately reviewed extras; anchor mattress centre; shared portable/Blender transform; real-frame C8 review without layout edits.",
+      "check": "archpipe.beds.real_size_findings/fit_bed/require_bed_geometry/model_transform/bed_room_review; scripts/verify.py",
+      "stage": "before activation and cloth; fixed room topology",
+      "proof_file": "tests/test_beds.py",
+      "proofs": [
+        "test_round2_scales_are_refused_in_fit_and_portable_review_renamed_sibling",
+        "test_real_mattress_forty_mm_short_fails_correct_and_renamed_pass",
+        "test_source_unit_conversion_is_only_permitted_scale",
+        "test_real_asymmetric_frame_anchors_mattress_and_frame_proxy_preserves_other_items",
+        "test_separable_extras_omitted_in_every_consumer_inseparable_or_unrecorded_refused",
+        "test_native_frame_c8_reports_shortfall_and_clean_room_stays_quiet",
+        "test_each_bunk_berth_required_and_measured"
+      ]
+    },
+    {
+      "lesson_id": "beds-mechanical-partial-success",
+      "control_tier": [
+        2
+      ],
+      "construction": "Mechanical importer proof raises after writing evidence if evaluated cloth is refused; successful geometry and fallback probes cannot override cloth failure.",
+      "check": "scripts.check_bed_import.require_complete_proof",
+      "stage": "mechanical importer proof before preview",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_cloth_refusal_cannot_report_success_renamed_or_clean"
+      ]
+    },
+    {
+      "lesson_id": "beds-neutral-preview-clipping",
+      "control_tier": [
+        1
+      ],
+      "construction": "Camera near/far clipping derives from actual camera-space vertex depths; staging-plane size derives from actual extents.",
+      "check": "archpipe.beds.preview_clip_range",
+      "stage": "isolated diagnostic preview before visual review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_oversize_preview_clipping_and_translated_small_siblings"
+      ]
+    },
+    {
+      "lesson_id": "beds-neutral-preview-relative-staging",
+      "control_tier": [
+        1
+      ],
+      "construction": "Floor gap is min(5 mm, 0.25 percent of longest actual extent); bed and figure feet retain actual source datum.",
+      "check": "archpipe.beds.preview_datums",
+      "stage": "isolated diagnostic preview before visual review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_tiny_preview_floor_gap_and_scale_siblings"
+      ]
+    },
+    {
+      "lesson_id": "beds-neutral-preview-emitter-intersection",
+      "control_tier": [
+        1
+      ],
+      "construction": "Diagnostic emitter centre is one measured span above highest model/figure vertex; square side 0.75 span cannot intersect a subject.",
+      "check": "archpipe.beds.preview_neutral_light",
+      "stage": "isolated diagnostic preview before visual review",
+      "proof_file": "tests/test_bed_models.py",
+      "proofs": [
+        "test_real_embedded_softbox_reproduction_and_clear_scaled_siblings"
       ]
     }
   ]

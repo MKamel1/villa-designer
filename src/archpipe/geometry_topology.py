@@ -187,7 +187,8 @@ class GeometryTopology:
         from .concept import villa_landscape as landscape
         from .concept import villa_furnish as furnishing
         if scene is not None:
-            from .beds import scene_with_model_geometry
+            from .beds import scene_with_model_geometry, bed_frame_items
+            furniture = bed_frame_items(scene, furniture)
             scene = scene_with_model_geometry(scene)
         scene = _freeze(scene)
         hosts, openings, obstacles, supports, paths = [], [], [], [], []

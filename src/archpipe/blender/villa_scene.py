@@ -1118,6 +1118,16 @@ def import_models(model_specs, library_root):
         meshes = [obj for obj in new if obj.type == "MESH"]
         if not meshes:
             raise ValueError("model has no meshes: " + spec["asset"])
+        if spec.get('role')=='bed':
+            omitted = set(spec.get('omitted_meshes',[]))
+            missing = omitted-{obj.name for obj in meshes}
+            if missing:
+                raise ValueError(spec['id']+': omitted mesh missing from actual import: '+str(sorted(missing)))
+            for obj in list(meshes):
+                if obj.name in omitted:
+                    meshes.remove(obj)
+                    bpy.data.objects.remove(obj,do_unlink=True)
+            new = [obj for obj in bpy.data.objects if obj not in before]
         material_qa = validate_imported_appearance(meshes, spec["asset"], spec.get("asset_kind", "appearance"))
         anchor = bpy.data.objects.new("model-anchor-" + spec["id"], None)
         bpy.context.collection.objects.link(anchor)
@@ -1130,9 +1140,14 @@ def import_models(model_specs, library_root):
         def corners():
             return [obj.matrix_world @ v.co for obj in meshes for v in obj.data.vertices]
         xyz = corners()
-        anchor.location = (spec["position"][0] - (min(v.x for v in xyz) + max(v.x for v in xyz))/2,
-                           spec["position"][1] - (min(v.y for v in xyz) + max(v.y for v in xyz))/2,
-                           spec["position"][2] - min(v.z for v in xyz))
+        if spec.get('role')=='bed':
+            from archpipe.beds import model_transform
+            _, _, offset = model_transform(spec)
+            anchor.location = tuple(offset)
+        else:
+            anchor.location = (spec["position"][0] - (min(v.x for v in xyz) + max(v.x for v in xyz))/2,
+                               spec["position"][1] - (min(v.y for v in xyz) + max(v.y for v in xyz))/2,
+                               spec["position"][2] - min(v.z for v in xyz))
         bpy.context.view_layer.update()
         total_faces = sum(len(obj.data.polygons) for obj in meshes)
         asset_ratio = min(1.0, 500000 / max(total_faces, 1))
@@ -1166,10 +1181,15 @@ def import_models(model_specs, library_root):
                        spec['position'][0]+spec['footprint_w']/2,
                        spec['position'][1]+spec['footprint_d']/2]
             findings=placed_bed_findings(spec['native_bounds'],dict(min=list(box[:3]),max=list(box[3:])),
-                footprint,spec['reference_h'],spec['scale'],axes)
+                footprint,spec['reference_h'],spec['scale'],axes,
+                mattress_world_bounds={key:dict(
+                    min=[min((obj.matrix_world@v.co)[i] for obj in meshes if obj.get('source_part') in binding['parts'] for v in obj.data.vertices) for i in range(3)],
+                    max=[max((obj.matrix_world@v.co)[i] for obj in meshes if obj.get('source_part') in binding['parts'] for v in obj.data.vertices) for i in range(3)])
+                    for key,binding in spec['mattress_bindings'].items()},
+                unit_evidence=spec.get('unit_evidence'))
             if findings:
                 raise ValueError(spec['id']+': '+ '; '.join(findings))
-        if "footprint_w" in spec:
+        if "footprint_w" in spec and spec.get("role") != "bed":
             if box[3]-box[0] > spec["footprint_w"] + 0.020 or box[4]-box[1] > spec["footprint_d"] + 0.020:
                 raise ValueError("model exceeds product footprint: " + spec["id"])
             if abs((box[5]-box[2]) / spec["reference_h"] - 1) > 0.05:

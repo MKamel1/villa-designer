@@ -1,6 +1,16 @@
 # Furniture phase, step 1: beds
 
-**Round 2 decision: retain all four labelled procedural beds.** All five
+**Round 4 decision: retain the labelled procedural beds.** All seven new
+downloads fail source-size mattress dimensions or complete identification.
+No replacement is integrated. Exact measurements and reviewed neutral previews
+are recorded in the round-4 section below.
+
+**Round 3 decision (client source: 2026-10-08): real-size beds only.**
+All five downloaded candidates fail actual mattress size or identification.
+All four labelled procedural fallbacks remain; no replacement is integrated.
+The new download shortlist is in `docs/beds-candidates-round3.json`.
+
+**Historical round 2 decision: retain all four labelled procedural beds.** All five
 downloaded candidates were measured and reviewed; each fails its fixed
 envelope. Importer/cloth/model-topology capability changes are implemented
 and demonstrated separately. See the round-2 evidence below.
@@ -344,3 +354,284 @@ this task changes rendering/import review, and the lead owns the full suite.
 No commit. Round-1 edits are retained. Lessons, bed guard registration and the
 operating workflow were updated together. Canonical `.agents` files were not
 edited, so adapter regeneration is not required.
+
+
+## Round 3 — real-size mattress rule
+
+Source: **client decision 2026-10-08**. Execution resumed on 2026-10-09
+from the interrupted run's uncommitted edits and evidence. Round-1/2 records
+above are historical; their whole-model footprint/height fitting rule is
+superseded. No fit scale is permitted. glTF coordinates use metres unless
+source evidence explicitly declares another unit ([glTF 2.0, coordinate
+system and units](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#coordinate-system-and-units)); the source-unit conversion
+is computed, never inferred from a desired bed size. Original FBX dimensions
+in centimetres do not by themselves authorize shrinking a glTF export.
+The unit keys `m`, `cm`, `mm`, `ft` and `in` mean metres, centimetres,
+millimetres, feet and inches respectively. FBX is the original model-file
+format named by the listing; a glTF export has its own unit contract.
+
+Actual mattress dimensions, not the frame box, must match parents
+1.600 × 2.000 m, kids A 0.900 × 2.000 m **per berth**, and kids B
+1.200 × 2.000 m within 20 mm in each dimension. A frame/headboard may extend
+outside these dimensions. Separate accessory meshes can be omitted only
+with a recorded bed-only contents review. Actual mattress centre, existing
+head direction, layout and cameras remain fixed; the frame is seated at the
+existing finished floor. All other items remain untouched.
+
+### Re-evaluation of the five cached candidates
+
+`scripts/recheck_beds_round3.py` rechecks the unchanged source/buffer/texture
+hashes and measures actual round-2 imported faces. Full receipt:
+`out/beds/round3/recheck.json`. All units below are metres; width precedes
+length. Every old round-2 fit scale is explicitly refused as a scaled bed.
+
+| Candidate / intended bed | Actual mattress width × length at source size | Result against planned mattress |
+|---|---|---|
+| FORSSA / kids B | 2.014246 × 2.010975 | Width mismatch 814.246 mm; length within tolerance |
+| Stained Bare Scandinavian / kids B | 2.412432 × 4.241483 | Width mismatch 1212.432 mm; length mismatch 2241.483 mm |
+| Cyberfox upholstered / parents | 1.781747 × 1.999221 | Width mismatch 181.747 mm; length within tolerance |
+| Home Series bunk / kids A | Both berths 3.159433 × 6.223846 | Per berth: width mismatch 2259.433 mm; length mismatch 4223.846 mm |
+| Simple wooden bunk / kids A | Unresolved naked mattress geometry | Fused bedding/mattress surfaces; no verified ladder in inspected silhouette; refused |
+
+FORSSA's named mattress and Scandi's existing mattress-cut mesh supply their
+measurements. Cyberfox's mattress is a measured connected component inside
+`Object_4`; it is not a production mesh binding. Its two imported meshes and
+eleven connected components, together with the retained neutral silhouette,
+show no bedside tables, benches or rugs to remove: **omitted meshes: none**.
+The reviewed image is `out/beds/round2/candidates-preview-corrected/sf_bed_upholstered_cyberfox-plus-y.png`. Home Series'
+two mattress components share one mesh; lower head direction remains
+unresolved. No unit declaration permits correcting either oversized model.
+Component measurement alone does not activate a fused candidate.
+
+All five fail mattress intake, so no candidate reaches in-room acceptance.
+No replacement is integrated and no passing-bed neutral previews are due.
+Existing labelled procedural fallbacks and round-2 previews remain unchanged.
+The library daybed has no new replacement candidate in this task.
+
+### Construction, placement and room checks
+
+`archpipe.beds` now computes source-unit-only scale, requires each actual
+mattress, reviews retained bed-only meshes and binds acceptance to source
+hashes, orientation, omissions, mattress selections and units. The same
+mattress-centred transform drives portable geometry and Blender. Frame and
+headboard dimensions no longer inherit the old 20 mm frame-edge or five
+percent height limits. Actual Blender vertex read-back still rejects
+axiswise distortion and displacement of the mattress centre.
+
+C8 (geometry-topology review) consumes retained frame faces for contact,
+collisions, room intrusion, passages and conservative door-swing envelopes,
+and real frame envelopes for route/access review. `bed_room_review` reports
+new frame-related findings with achieved, required, cited source and
+signed difference, plus explicit metre-valued clearance shortfalls. It
+compares against the existing scene; unrelated pre-existing findings are
+not presented as bed-induced failures. It never modifies the authored layout.
+
+Frozen real Scandi geometry at its own mattress dimensions exercises another
+room: **441.241 mm achieved against 750 mm required, shortfall 308.759 mm**;
+the larger-room control passes. Source re-read on 2026-10-09: UK Approved
+Document M Volume 1, 2015 incorporating 2016 amendments, paragraph 2.25d,
+printed p.18, one accessible side for each single/twin bed. Principal double
+beds use paragraph 2.25b; other double beds use 2.25c. Storage-front screening
+uses Time-Saver Standards for Interior Design and Space Planning, 2nd edition,
+printed p.87: 36 inches (the existing verified card rounds this to 914 mm).
+These are the project's adopted planning guidance, not an Egyptian code claim.
+
+Door swings retain the existing conservative envelopes. Storage-front access
+is screened; individual animated wardrobe-door/drawer travel requires
+measured motion geometry and remains an explicit limitation. Geometric floor
+contact does not establish structural capacity. No failed mattress candidate
+is assigned an invented in-room clearance pass or shortfall.
+
+### Cloth, collider and fallback evidence
+
+Model-first import, actual mattress cuts, all retained frame/mattress/source
+bedding colliders, evaluated cloth penetration refusal and physical
+missing-file fallback remain in place. Interrupted-run real-size mechanical
+Scandi read-back agrees with portable bounds within 0.0000001192 m; fallback
+and clean/crossing/contained/translated collision probes pass. Its oversized
+cloth stress case **fails**, with 1347 surface crossings and 2899 enclosed
+vertices (`out/beds/round3/importer-proof.json`). It supplies no accepted
+cloth preview. The old harness caught and recorded this failure but exited
+zero. It now raises after writing evidence; a frozen real-failure regression,
+renamed sibling and clean control prove propagation. No model, simulation
+settings or collision tolerance was altered to turn that failure into a pass.
+
+### New download shortlist
+
+`docs/beds-candidates-round3.json` lists **two parents, three kids A and two
+kids B** candidates, each with UID (Sketchfab unique model identifier), direct
+URL, author, licence, downloadable status, stated dimensions when available,
+style and bed-only screen, fit rationale and next gate. Public unauthenticated
+API metadata for all seven was rechecked on 2026-10-09 against robots.txt;
+raw receipts and the inspected listing contact sheet are in `out/beds/round3`.
+No login, token or model download was used.
+
+Modern bed is the primary upholstered parents lead; Dark Modern Bed is the
+alternate and states an overall 214 × 200 × 90 cm model box, **not a mattress
+size**. The kids A leads have visible ladders; the kids B leads have light-oak
+forms. No eligible new listing states the required mattress dimensions;
+paid 120×200 listings were excluded. None has a claimed numeric fit until
+the lead downloads it and its actual source-size mattress is measured.
+Bed-only mesh contents also remain pending download. Keep the neutral
+isolated figure preview and unchanged-camera room preview as gates for any
+candidate that later passes intake and C8.
+
+### Verification
+
+Portable verification on the final code passed with **exit 0** for both normal
+and empty HOME (`out/beds/round3/verify-final-normal.log`,
+`out/beds/round3/verify-final-empty-home.log`). **31 bed tests passed, exit 0** (`out/beds/round3/bed-tests-final.log`).
+An additional 22 final changed-path and adapter tests passed, exit 0
+(`out/beds/round3/changed-paths-final.log`). Both portable runs completed
+162 checks. The affected scene/topology/camera batch passed **149 tests, exit 0**
+(`out/beds/round3/affected-tests-resume.log`). Machine-readable final receipt:
+`out/beds/round3/acceptance.json`. Adapter regeneration and its check passed;
+`git diff --check` passed.
+No full-suite, native Revit or real-villa design gate approval is claimed.
+No commit; shared `assets/user` and `out/villa/round3` are untouched.
+
+
+## Round 4 — seven lead-downloaded beds at source size
+
+Executed 2026-10-09 on the Linux `codex/beds` worktree; round-3 uncommitted
+work is preserved. **No passing replacement for parents, kids A or kids B.**
+Their labelled procedural beds remain, as does the library daybed/joinery.
+No layout, mattress datum, room camera, source geometry or texture changed.
+
+### Library intake and source evidence
+
+All seven inbox folders were copied into **new folders only** under
+`/home/omar/archpipe/assets/library/props/<id>/`. Every inbox file, including
+`scene.gltf`, `scene.bin`, textures, `provenance.json` and `license.txt`, was
+hash-verified against its copy. `model.gltf` is a byte-identical importer alias;
+original files remain intact. Receipt: `out/beds/round4/copy-receipt.json`.
+Only new candidate entries were added to `ops/workstation/library-manifest.json`.
+Each retains the original full CC-BY attribution, author URL and source URL.
+No existing library folder, `assets/user` or `out/villa/round3` was modified.
+No token was accessed or copied. All are appearance candidates, without a
+verified buyable specification.
+
+The embedded author credit for Bed Wood Oak PBR is **AHMED KCHIKICH
+(inven2000)**; the round-3 listing display name was AK STUDIO. The actual
+licence attribution is preserved rather than replaced with the display name.
+Other credits: ArchVibe 3D, Ren Viro Store, Blender3D, AM ARCHITECTURE,
+sparshgupta and WOODPORT.
+
+`scripts/prepare_bed_geometry.py` extracted every actual imported face at
+unchanged source size. `scripts/measure_bed.py` independently measured indexed
+triangles; all referenced textures exist. Exact triangle counts, in table
+order below: **341,838; 21,526; 9,324; 110,385; 88,208; 19,500; 275,209**.
+Per-candidate intake JSON and compressed geometry receipts are under
+`out/beds/round4`. Conservative accessor envelopes remain separate from actual
+physical vertex bounds. Complete measurements and selection recipes:
+`docs/beds-intake-round4.json`, reproducible by `scripts/recheck_beds_round4.py`;
+full result: `out/beds/round4/recheck.json`.
+
+Source-unit multiplier is **1.0 for all seven**. The supplied files and retained
+listing metadata contain no alternate unit declaration authorizing correction
+of the glTF coordinates. Dark Modern Bed's stated overall box in centimetres
+is not a declaration that the downloaded glTF uses millimetres. Oversized
+Simple Bunk Bed and oak geometry, and the tiny AM bunk, remain at their actual
+source sizes. No factor is inferred from the client’s desired mattress.
+
+### Mattress results and exact refusals
+
+Width precedes length. Planned dimensions are parents **1.600 × 2.000 m**,
+kids A **0.900 × 2.000 m per berth**, kids B **1.200 × 2.000 m**. The
+20 mm tolerance applies independently to each complete mattress dimension.
+The signed differences below are achieved minus planned; positive means too
+large and negative means too small. Missing mattress geometry has no invented
+numeric fit verdict. Native glTF axes X/Z are horizontal and Y is up; imported
+Blender axes X/Y are horizontal and Z is up. Front denotes head-to-foot and
+is distinct from a bunk’s ladder/access side.
+
+| Candidate / intended bed | Actual complete mattress width × length (m) | Difference in width / length (mm) | Refusal / measured basis |
+|---|---|---|---|
+| Modern bed, `sf_bed3_dff77bbd` / parents | 3.662326 × 3.827348 | +2062.326 / +1827.348 | Both dimensions fail. `Object_4` rounded mattress component has 3036 welded vertices; separate four-vertex lower plane is excluded. Headboard at minimum X. |
+| Dark Modern Bed, `sf_bed3_d3aeb724` / parents | 1708.963379 × 1876.869080 | +1707363.379 / +1874869.080 | Both fail; millimetre-looking coordinates are still glTF metres. Unique 942-vertex full mattress component inside the fused bed mesh; component measurement is diagnostic, not a production binding. |
+| Simple Bunk Bed, `sf_bed3_9fb7c547` / kids A | Lower 9.554575 × 16.422628; upper 9.554575 × 16.422628 | Each +8654.575 / +14422.628 | Both berths fail. Actual full solids `Object_8` lower and `Object_5` upper; source mattress material and opposing preview silhouettes agree. |
+| bunk bed, `sf_bed3_0e134823` / kids A | Lower 0.014194 × 0.022578; upper 0.010499 × 0.022459 | Lower −885.806 / −1977.422; upper −889.501 / −1977.541 | Both fail. Each bevelled mattress shell comprises seven named meshes: Mesh2–8 lower, Mesh10–16 upper; source duvets are excluded. Upper head direction unresolved; no activation orientation claimed. |
+| Simple Bunk Bed 3D Model, `sf_bed3_2cabd354` / kids A | Lower 0.834516 × 1.829794; upper 0.834516 × 1.829794 | Each −65.484 / −170.206 | Closest new candidate, still fails by **45.484 / 150.206 mm beyond tolerance** per berth. Two separate 361-vertex mattress components within the fused fabric mesh; blankets and pillows excluded. |
+| Bed Wood Oak PBR, `sf_bed3_28a8b705` / kids B | Complete naked mattress unresolved | Not measurable | Three meshes contain pillows, fused wooden base/headboard and cloth. The 59.055119 × 78.740189 m base component is a frame/surface assembly, not a proven mattress. No naked-mattress bounds or unit correction invented. |
+| Engi bed, `sf_bed3_fe3c50e1` / kids B | Complete naked mattress unresolved | Not measurable for a full mattress | The only independent exposed head patch is **1.829067 × 0.571583 m**: already 629.067 mm wider than the target, but its short length does not measure a full mattress. Support platform 1.874794 × 2.332060 m is not a mattress. Source name `Engi160x200` cannot establish an actual 1.200 × 2.000 m mattress. |
+
+All five identified candidates fail at source-size mattress intake. Both
+unidentified candidates fail closed. No candidate is placed in its room, so
+no rejected model receives a made-up C8 clearance/route/door/wardrobe/access/
+support result. No replacement cloth simulation or collider acceptance is
+claimed. The model-first, actual-collider and evaluated-cloth refusal controls
+remain covered by the affected tests and prior mechanical evidence. Existing
+wardrobe-motion and structural-capacity limits from round 3 remain.
+
+No source accessories were removed or meshes modified; **omitted meshes:
+none**. Neutral contents review shows bed/frame/bedding components without
+freestanding bedside tables, benches or rugs. Measurement components within
+fused meshes are not promoted into production part bindings.
+
+### Neutral previews and diagnostic construction fixes
+
+Final seven-candidate isolates, both opposing sides, are in
+`out/beds/round4/candidate-previews-final/<id>-plus-y.png` and `-minus-y.png`.
+Every primary isolate includes an actual **1.8 m figure** at the model’s lowest
+vertex datum. Extreme-size AM, oak, Simple Bunk and Dark candidates also have
+`-plus-y-close.png` / `-minus-y-close.png`; these omit the figure and frame the
+unchanged source-size model. The Dark figure is subpixel at its enormous size;
+the AM model is tiny beside its figure. Close-ups disclose appearance without
+pretending either has credible scale. Receipts bind actual geometry, source
+material hashes, camera clipping, staging and per-image diagnostic lights.
+`out/beds/round4/preview-bindings.json` joins every final image hash to source
+file hashes, geometry receipt hash and authored measurement selection; all
+copied source bytes were rechecked after rendering. The final contact sheet
+is `out/beds/round4/contact-sheet-final.png`.
+These are rejection diagnostics, not approved presentation renders.
+
+Fresh retained-bed previews use the rebuilt current scene
+`out/beds/round4/scene.json` and original cameras. Parents: `pb-bed-room-neutral.png`
+/ `pb-bed-isolated-neutral.png`, camera `v22-parents-day`; kids A:
+`ka-bunk-room-neutral.png` / `ka-bunk-isolated-neutral.png`, `v06-kids-room`;
+kids B: `kb-bed-room-neutral.png` / `kb-bed-isolated-neutral.png`, `v13-kids-b`.
+All six are under `out/beds/round4/retained-previews`. Actual architecture and
+room furniture are present; diagnostic props/curtains are omitted, design
+emission/lights disabled. Room fills are recorded separately. Current fallback
+bounds match the retained round-1/2/3 datums (`round4/fallbacks.json`). The
+unchanged library retains its prior reviewed diagnostic images and known grain
+mapping limitation; it has no new candidate in this round.
+
+Independent reviewer: `out/beds/round4/preview-review.md`. Initial diagnosis
+preserved three real diagnostic defects: default camera far clipping hid Dark
+Modern Bed; a fixed 5 mm floor gap made the tiny AM source visibly float; a
+fixed softbox intersected oversized Simple Bunk bedding (14 blanket triangles
+and one mattress triangle), causing a bright patch. Frozen real inputs, sibling/
+quiet proofs and records are in `tests/fixtures/bed-round4-*.json`,
+`tests/test_bed_models.py`, `knowledge/bed-guards.json` and `docs/LEARNINGS.md`.
+The corrections construct clipping, staging and diagnostic emitter placement
+from actual vertices. Every emitter corner stays above the model/figure.
+Diagnostic power scales with measured span squared; source geometry, exposure,
+world colour, design lighting and client size limits are unchanged. Before,
+first-fix and final previews/logs remain. The workflow and canonical skill were
+updated together and adapters regenerated.
+
+### Verification
+
+Final receipt: `out/beds/round4/acceptance.json`. **38 bed/adapter tests
+passed, exit 0** (`round4/bed-tests-final.log`); **159 affected scene, camera,
+topology and intake tests passed, exit 0** (`round4/affected-tests-final.log`).
+The final changed-guard/adapter batch also passed six tests, exit 0
+(`round4/final-changed-tests.log`). **Portable verification passed all 166
+checks, exit 0**, both under normal and empty HOME (`round4/verify-normal.log`,
+`round4/verify-empty-home.log`). Adapter check passed for all 38 adapters;
+`git diff --check` passed.
+
+The earlier combined batch completed 196 tests, exit 1, with only the stale
+absolute-gap assertion failing. A direct one-test reproduction also exited 1.
+Both failed logs remain; the contact/figure-datum regression was updated and
+all final bed tests passed. No other initial-batch failure occurred.
+
+All **22 final candidate images and six fresh fallback images** were independently
+reviewed at full size. Framing/clipping and diagnostic emitter clearance were
+measured; the three diagnostic construction defects are resolved. No candidate
+passed actual mattress intake, and neither numerical test success nor diagnostic
+preview review is presented as replacement acceptance.
+No full-suite, native Revit or real-villa design-gate claim; the lead owns the
+full suite. No commit. Shared symlink targets and original library folders are
+unchanged; round-3 work is preserved.

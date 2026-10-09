@@ -1,0 +1,530 @@
+[
+  {
+    "asset": "sf_bed3_dff77bbd",
+    "target_m": [
+      1.6,
+      2.0
+    ],
+    "required_berths": 1,
+    "front_axis": "+X",
+    "length_axis": "X",
+    "bounds_m": {
+      "min": [
+        -0.18323411643491738,
+        -0.3232805742505178,
+        -2.1541005106186617
+      ],
+      "max": [
+        4.100528466978233,
+        1.484679477726047,
+        2.155030132242075
+      ]
+    },
+    "mattress_bounds": {
+      "lower": {
+        "min": [
+          0.04690098762512207,
+          0.07890161871910095,
+          -1.831159234046936
+        ],
+        "max": [
+          3.874248504638672,
+          0.5596956014633179,
+          1.8311668634414673
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "scale": 1.0,
+      "real_size_m": [
+        4.309131860733032,
+        4.283762335777283,
+        1.807960569858551
+      ],
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            3.6623260974884033,
+            3.82734751701355
+          ],
+          "error_m": [
+            2.0623260974884032,
+            1.8273475170135498
+          ]
+        }
+      },
+      "reason": "lower mattress width: achieved 3.662326 m, planned 1.600000 m, mismatch 2062.326 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 3.827348 m, planned 2.000000 m, mismatch 1827.348 mm (>20 mm); Client bed fit decision 2026-10-08",
+      "source": "Client bed fit decision 2026-10-08"
+    },
+    "identification_failure": null,
+    "source_sha256": {
+      "model.gltf": "499de9384ad13d251207144a1bf3e462411f6cd8a3ebac118028b22f451aa2eb",
+      "scene.bin": "e1b760ad8553d6388623f436062804008eb78f1251e6cd350930f7caeed41a73",
+      "textures/Material.012_baseColor.jpeg": "41f072adca411f9cfea4655b700643979770919911037546882f94b35ac7c51e",
+      "textures/Material.003_baseColor.jpeg": "d4041b66881e441a811d32aec5802360878e95270199c16e020252d1efcba350",
+      "textures/Material.003_metallicRoughness.png": "106f69911aeb5b51c9cfd81fbfb5159f6161eb1f6d4c1918fa26b8f2929d05a1",
+      "textures/Material.007_baseColor.jpeg": "32f1eacc66fac66cc3caa493a5c30f8a93c06168cb3308b679791c6d6ca49561",
+      "textures/Material.007_metallicRoughness.png": "e9ebc8d8d49efe91de54984e9793d70efa30220d0df80567b880b1b13604d1b3",
+      "textures/Material.009_baseColor.jpeg": "55486214159fabe74ff4a87060e21c57c720444ca41957d30745aef3fb3972c6"
+    },
+    "triangle_count": 341838,
+    "vertex_count": 204341
+  },
+  {
+    "asset": "sf_bed3_d3aeb724",
+    "target_m": [
+      1.6,
+      2.0
+    ],
+    "required_berths": 1,
+    "front_axis": "+Z",
+    "length_axis": "Z",
+    "bounds_m": {
+      "min": [
+        -1068.2802734375,
+        2.0637817382807953,
+        -970.2867965698242
+      ],
+      "max": [
+        1068.2802734375,
+        860.1233215332036,
+        1022.9326858520509
+      ]
+    },
+    "mattress_bounds": {
+      "lower": {
+        "min": [
+          -845.855224609375,
+          187.2538604736328,
+          -931.1693115234375
+        ],
+        "max": [
+          863.108154296875,
+          421.3462829589844,
+          945.6997680664062
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "scale": 1.0,
+      "real_size_m": [
+        2136.560546875,
+        1993.2203369140625,
+        858.0598568916321
+      ],
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            1708.96337890625,
+            1876.8690795898438
+          ],
+          "error_m": [
+            1707.36337890625,
+            1874.8690795898438
+          ]
+        }
+      },
+      "reason": "lower mattress width: achieved 1708.963379 m, planned 1.600000 m, mismatch 1707363.379 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 1876.869080 m, planned 2.000000 m, mismatch 1874869.080 mm (>20 mm); Client bed fit decision 2026-10-08",
+      "source": "Client bed fit decision 2026-10-08"
+    },
+    "identification_failure": null,
+    "source_sha256": {
+      "model.gltf": "ab5dcb515cf1f65faef993b5b5ef69df7e5febc7517e9ded2cf59138dbb6e55d",
+      "scene.bin": "043fcccf1c5090a177734da0bde62810d46e292201374e4aeadd2e5e8ae63139",
+      "textures/Default_baseColor.jpeg": "127c172d0413793df0437506b1389ae27e1add86015d1662dd5c857187c39c37",
+      "textures/Default_metallicRoughness.png": "982fe23c3b5b5391284a117f8d17d10e01178431ff1b56d38cdcd537f899d967",
+      "textures/Default_normal.png": "9a3e2af2510693b2d0fbade2ea82d1a6b9a7eabb5a1f174e4ba9883e6ecd949b"
+    },
+    "triangle_count": 21526,
+    "vertex_count": 12123
+  },
+  {
+    "asset": "sf_bed3_9fb7c547",
+    "target_m": [
+      0.9,
+      2.0
+    ],
+    "required_berths": 2,
+    "front_axis": "+X",
+    "length_axis": "X",
+    "bounds_m": {
+      "min": [
+        -8.599634170532227,
+        -7.701550006866456,
+        -5.342794895172117
+      ],
+      "max": [
+        8.599634170532227,
+        7.701550006866456,
+        5.342794895172121
+      ]
+    },
+    "mattress_bounds": {
+      "lower": {
+        "min": [
+          -8.21131420135498,
+          -5.41635799407959,
+          -4.777287006378174
+        ],
+        "max": [
+          8.21131420135498,
+          -3.1236350536346436,
+          4.77728796005249
+        ]
+      },
+      "upper": {
+        "min": [
+          -8.21131420135498,
+          3.5306389331817627,
+          -4.777288436889648
+        ],
+        "max": [
+          8.21131420135498,
+          5.823361873626709,
+          4.777287006378174
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "scale": 1.0,
+      "real_size_m": [
+        10.685592651367188,
+        17.199268341064453,
+        15.403103351593018
+      ],
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            9.554574966430664,
+            16.42262840270996
+          ],
+          "error_m": [
+            8.654574966430664,
+            14.422628402709961
+          ]
+        },
+        "upper": {
+          "size_m": [
+            9.554575443267822,
+            16.42262840270996
+          ],
+          "error_m": [
+            8.654575443267822,
+            14.422628402709961
+          ]
+        }
+      },
+      "reason": "lower mattress width: achieved 9.554575 m, planned 0.900000 m, mismatch 8654.575 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 16.422628 m, planned 2.000000 m, mismatch 14422.628 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress width: achieved 9.554575 m, planned 0.900000 m, mismatch 8654.575 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress length: achieved 16.422628 m, planned 2.000000 m, mismatch 14422.628 mm (>20 mm); Client bed fit decision 2026-10-08",
+      "source": "Client bed fit decision 2026-10-08"
+    },
+    "identification_failure": null,
+    "source_sha256": {
+      "model.gltf": "3f13fa3c7ebd8cbd2df0ee22ba266a2daa5ed7fdabe539830a3600468258c791",
+      "scene.bin": "42a15dc554fdc718bcad8c9c16757b6195890cd49b0d1bc171e08a937628ef24",
+      "textures/None_diffuse.jpeg": "1763541998ae9884a2512c4f72ce658de276dfa77df531d5878e8674ccb4f3da",
+      "textures/None_occlusion.png": "9da2c47e83c9a05152d0d04ac6d6ea2f65c0c0c54a2ab530e1cf52b2e1c2520f",
+      "textures/None_Blanket_Bottom_Diffuse_diffuse.jpeg": "009a31744d442c9cdfe2ae239947292352fbbdacab6a8ff2a7856afc4c164b17",
+      "textures/None_Blanket_Bottom_Diffuse_occlusion.png": "d0150865055eddb0856b7be55de7f0e018226bf5a65534f1904a0fa8bcdd9f7d",
+      "textures/None_Blanket_Top_Diffuse_diffuse.jpeg": "dd2f26ea9857d0f36fb69ed739b0dd49bc4b84e56700ed75229057cdbf18be39",
+      "textures/None_Blanket_Top_Diffuse_occlusion.png": "72513fdc01c2642b9d41f3267ed24b3393f2b5e8f2068f02056a73fb175537b4",
+      "textures/None_Matress_Top_Diffuse_diffuse.jpeg": "0bd747635e33959ef430bdf43a8e7d806dfb72721f9a003303c9f4524763fff3",
+      "textures/None_Matress_Top_Diffuse_occlusion.png": "cf499e5071921645c7374371b78640e7fffcd1a82b9400068497b818efdadea0",
+      "textures/None_Pillows_Bottom_Diffuse_diffuse.jpeg": "78a1411e7a1e28aef9d9284d09d66788edc1be3920a53173b593d9ea38f2fb02",
+      "textures/None_Pillows_Bottom_Diffuse_occlusion.png": "b61f075316114750b44912330cf9c32fd6719855a6cbf863bd535bdd520d3a07",
+      "textures/None_Pillows_Top_Diffuse_diffuse.jpeg": "78a1411e7a1e28aef9d9284d09d66788edc1be3920a53173b593d9ea38f2fb02",
+      "textures/None_Pillows_Top_Diffuse_occlusion.png": "ebbaf5eb2b8238bea13b04d8e1b919d45260a260df4bace07c3a2804d38d9fa1",
+      "textures/None_Untitled_diffuse.jpeg": "d66ac867f198d7e841ada7bc2fded34be6b42340c4192fe3145db43112206bd3",
+      "textures/None_Untitled_occlusion.png": "77bef926d6ead31c925be6754e26cead77badc0081835e7d66d8abd9ae887349"
+    },
+    "triangle_count": 9324,
+    "vertex_count": 5794
+  },
+  {
+    "asset": "sf_bed3_0e134823",
+    "target_m": [
+      0.9,
+      2.0
+    ],
+    "required_berths": 2,
+    "front_axis": "-X",
+    "length_axis": "X",
+    "bounds_m": {
+      "min": [
+        5.551114999048691e-19,
+        2.4042915933078028e-20,
+        -0.02285404154239501
+      ],
+      "max": [
+        0.023836891118357517,
+        0.01832469303180218,
+        -1.0693081660855456e-18
+      ]
+    },
+    "mattress_bounds": {
+      "lower": {
+        "min": [
+          0.0006426224135793746,
+          0.002784287789836526,
+          -0.020384715870022774
+        ],
+        "max": [
+          0.023220205679535866,
+          0.003937068395316601,
+          -0.006190354470163584
+        ]
+      },
+      "upper": {
+        "min": [
+          0.0007614243077114224,
+          0.01219470240175724,
+          -0.020384715870022774
+        ],
+        "max": [
+          0.023220205679535866,
+          0.013460577465593815,
+          -0.009886202402412891
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "scale": 1.0,
+      "real_size_m": [
+        0.022854045033454895,
+        0.02383689023554325,
+        0.01832469552755356
+      ],
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.01419436139985919,
+            0.02257758326595649
+          ],
+          "error_m": [
+            0.8858056386001408,
+            1.9774224167340435
+          ]
+        },
+        "upper": {
+          "size_m": [
+            0.010498513467609882,
+            0.022458781371824443
+          ],
+          "error_m": [
+            0.8895014865323901,
+            1.9775412186281756
+          ]
+        }
+      },
+      "reason": "lower mattress width: achieved 0.014194 m, planned 0.900000 m, mismatch 885.806 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 0.022578 m, planned 2.000000 m, mismatch 1977.422 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress width: achieved 0.010499 m, planned 0.900000 m, mismatch 889.501 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress length: achieved 0.022459 m, planned 2.000000 m, mismatch 1977.541 mm (>20 mm); Client bed fit decision 2026-10-08",
+      "source": "Client bed fit decision 2026-10-08"
+    },
+    "identification_failure": null,
+    "source_sha256": {
+      "model.gltf": "2c9bab48e165a4270ebbd675fc6111a23f498617fb29d0d5a9f9266419ef73e2",
+      "scene.bin": "a1660c43531e8937d866081f5c8296121d4392d1ba2a8581a5a2db5c73b88da5",
+      "textures/Bright_Green_Ceramic_baseColor.jpeg": "7ca34b64df6cef6bcdc2c552066ca61e8658276c8abe66340f868e8845c86a77",
+      "textures/Bage_Ceramic10_baseColor.jpeg": "fed95f8756e44d5473df8bacbfa2be6099d371917e445cffeade06efbb7673c5",
+      "textures/Blue_Purple_Ceramic_baseColor.jpeg": "606bbf0d438ad7dcff1db0836453ef1d8e47471656e06d06b04f54f152040aaf",
+      "textures/Baby_Blue_Ceramic1_baseColor.jpeg": "42fbbce5dfdf8d9db06936e3077d8dc43d3129aad996c161906d44e02a4fcd17",
+      "textures/Blue_Black_Ceramic_baseColor.jpeg": "98e9e44dc8946a3247acea79c028752c31fd7da012847335f87e22648bafd072"
+    },
+    "triangle_count": 110385,
+    "vertex_count": 209654
+  },
+  {
+    "asset": "sf_bed3_2cabd354",
+    "target_m": [
+      0.9,
+      2.0
+    ],
+    "required_berths": 2,
+    "front_axis": "+Z",
+    "length_axis": "Z",
+    "bounds_m": {
+      "min": [
+        -1.056712365372947,
+        -2.382086648773708e-07,
+        -1.0265624149162915
+      ],
+      "max": [
+        0.5747830143246868,
+        1.956217727067128,
+        0.9366858790537701
+      ]
+    },
+    "mattress_bounds": {
+      "lower": {
+        "min": [
+          -0.37748056650161743,
+          0.49001485109329224,
+          -0.9617031216621399
+        ],
+        "max": [
+          0.4570353031158447,
+          0.5785276293754578,
+          0.8680909276008606
+        ]
+      },
+      "upper": {
+        "min": [
+          -0.37748047709465027,
+          1.5082672834396362,
+          -0.961703360080719
+        ],
+        "max": [
+          0.4570353031158447,
+          1.6236913204193115,
+          0.8680906295776367
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "scale": 1.0,
+      "real_size_m": [
+        1.6314954161643982,
+        1.9632486701011658,
+        1.9562182660935719
+      ],
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.8345158696174622,
+            1.8297940492630005
+          ],
+          "error_m": [
+            0.06548413038253786,
+            0.1702059507369995
+          ]
+        },
+        "upper": {
+          "size_m": [
+            0.834515780210495,
+            1.8297939896583557
+          ],
+          "error_m": [
+            0.06548421978950503,
+            0.1702060103416443
+          ]
+        }
+      },
+      "reason": "lower mattress width: achieved 0.834516 m, planned 0.900000 m, mismatch 65.484 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 1.829794 m, planned 2.000000 m, mismatch 170.206 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress width: achieved 0.834516 m, planned 0.900000 m, mismatch 65.484 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress length: achieved 1.829794 m, planned 2.000000 m, mismatch 170.206 mm (>20 mm); Client bed fit decision 2026-10-08",
+      "source": "Client bed fit decision 2026-10-08"
+    },
+    "identification_failure": null,
+    "source_sha256": {
+      "model.gltf": "cdb5d9402a76ca12746dca7e8a8779b7942dec797f18f5034e1cf8ac307e4ee1",
+      "scene.bin": "2ae6a54f2bde5a06d1641805270262f682aa635dab8113d3d84e7fc35d47815e",
+      "textures/cgt_bunk_bed_f_house_wood_baseColor.jpeg": "8ba9f4012b82f0d38607193e71ade07673fe48dfc8369b04b4716eb2a3cd787e",
+      "textures/cgt_bunk_bed_f_house_wood_metallicRoughness.png": "cf78fb0ebdd0e1059d36bc80e32eec4275a8f4b463bb0f08ea1c7ce658527b83",
+      "textures/cgt_bunk_bed_f_house_wood_normal.png": "181162e519e0bd173200fcee62ec589c1370ecf0505111e11f1b788827a2d0fd",
+      "textures/cgt_bunk_bed_f_house_carpet_baseColor.jpeg": "188114408f370e935bc54ab62f7c0592e44c675af9266e7ccdf48e9f2e5023df",
+      "textures/cgt_bunk_bed_f_house_carpet_metallicRoughness.png": "75e56adaf55aa916d5487246972b1c96de812519cc64aee0d69a0559905d70a2"
+    },
+    "triangle_count": 88208,
+    "vertex_count": 51718
+  },
+  {
+    "asset": "sf_bed3_28a8b705",
+    "target_m": [
+      1.2,
+      2.0
+    ],
+    "required_berths": 1,
+    "front_axis": "+Z",
+    "length_axis": "Z",
+    "bounds_m": {
+      "min": [
+        -29.657992517417966,
+        -0.009962342524316591,
+        -42.155160004349106
+      ],
+      "max": [
+        29.657992517417966,
+        41.710553438830516,
+        39.37007950723621
+      ]
+    },
+    "mattress_bounds": {},
+    "fit": {
+      "ok": false,
+      "scale": 1.0,
+      "real_size_m": [
+        59.31598663330078,
+        81.52527618408203,
+        41.720529556274414
+      ],
+      "mattresses": {},
+      "reason": "actual mattress geometry required for every berth; complete actual mattress not identifiable separately from base/bedding; no numeric mattress mismatch claimed",
+      "source": "Client bed fit decision 2026-10-08"
+    },
+    "identification_failure": "complete actual mattress not identifiable separately from base/bedding; no numeric mattress mismatch claimed",
+    "source_sha256": {
+      "model.gltf": "74e6a5b14a1f60b3c1ae84d5bd896b32def6d88b26f50582a41e262db516d861",
+      "scene.bin": "19a91baf578361d3d99e7b55123f5b3267d961bbd971dd3bec15993432b532c7",
+      "textures/Pillows_baseColor.jpeg": "30eed816d66ff265d9079b0bd2e48474dc73b5feb39c7802836009e38092f400",
+      "textures/Pillows_metallicRoughness.png": "c482586984c737083b1450dec60d9c52312884731fe9fa2699450dc47db644c2",
+      "textures/Pillows_normal.png": "289a4903b6dcea47806e40732e9db9d45f1fbd4f676857a139559582fdfa4434",
+      "textures/BedBase_baseColor.jpeg": "03889651711f66a8da1a508cfc042169edb1a541ab679e4648788e38b5dad608",
+      "textures/BedBase_metallicRoughness.png": "cb4f34e2c802664965185f0a9d800991e6ab383f2356eb6b373a078bbed51126",
+      "textures/BedBase_normal.png": "5913de315e82edcfdb8ff749ab2fa3315d9ab7acdc78e0080341cffe251931d3",
+      "textures/Cloth_baseColor.jpeg": "7819490017b6de83ed39bc648082259f7c2508a0b4ad0879972f184ac9d70e8c",
+      "textures/Cloth_metallicRoughness.png": "72a0aaf827398cb82dfb02c7cf196245a8dd645d74ab858cb62ffd7eba2f06b4",
+      "textures/Cloth_normal.png": "bcdacbfd676ab6b1268384101ff10f333989c1b82680bee34cc387c69ea41688"
+    },
+    "triangle_count": 19500,
+    "vertex_count": 11763
+  },
+  {
+    "asset": "sf_bed3_fe3c50e1",
+    "target_m": [
+      1.2,
+      2.0
+    ],
+    "required_berths": 1,
+    "front_axis": "-X",
+    "length_axis": "X",
+    "bounds_m": {
+      "min": [
+        -1.2118250117405367,
+        -2.220446049250313e-16,
+        -1.0928397960134657
+      ],
+      "max": [
+        1.211756633853391,
+        1.033069206737334,
+        1.074673798828563
+      ]
+    },
+    "mattress_bounds": {},
+    "fit": {
+      "ok": false,
+      "scale": 1.0,
+      "real_size_m": [
+        2.167514204978943,
+        2.4235814809799194,
+        1.0330694913864136
+      ],
+      "mattresses": {},
+      "reason": "actual mattress geometry required for every berth; complete actual mattress absent/unresolved; exposed head patch is not a full mattress",
+      "source": "Client bed fit decision 2026-10-08"
+    },
+    "identification_failure": "complete actual mattress absent/unresolved; exposed head patch is not a full mattress",
+    "source_sha256": {
+      "model.gltf": "3677b4fd86fafc2d691f63021c7451a48780ebf8e1463b7fa538d83ab936ea02",
+      "scene.bin": "cbf70f3d96ff603a89b8a110a426240217309fe49ebc5837bfbb300594f7cea0",
+      "textures/Engi160x200_baseColor.png": "4908f82e86336f5ef4dacffa7a2c8d6d2514e673176e437672135349ab97ad28",
+      "textures/Engi160x200_metallicRoughness.png": "fc7bfe7f6825905ad047f449de97d09f59ec3a7dcd4bc14833fbdc8235759aa7",
+      "textures/Fabric1_metallicRoughness.png": "84d9ecf43ea1da429637e03ea1529317e8409c0c1fa0ac6323beece46588f460",
+      "textures/Fabric1_normal.png": "ad030b9e8190645cbfdefbcfc480e3844a0baf5b367383f1a53b4108ebeb3e91",
+      "textures/Fabric2_baseColor.png": "ef3f048564f05fe636bd82076aea0295e69f99a453f0676e1dda31256caa342f",
+      "textures/Fabric2_normal.png": "a4112f487a49ce8aab79ecaac1d2a278b067484716bd4bee4122aeebf4173732"
+    },
+    "triangle_count": 275209,
+    "vertex_count": 149478
+  }
+]

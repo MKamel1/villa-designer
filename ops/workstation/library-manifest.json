@@ -4034,6 +4034,703 @@
         "provenance": "/home/omar/archpipe/assets/library/props/sf_bunk_simple_3dworkbench/provenance.json",
         "licence": "/home/omar/archpipe/assets/library/props/sf_bunk_simple_3dworkbench/license.txt"
       }
+    },
+    {
+      "id": "sf_bed3_dff77bbd",
+      "url": "https://sketchfab.com/3d-models/modern-bed-dff77bbdb8854ba4afe502af5068d8f9",
+      "source_url": "https://sketchfab.com/3d-models/modern-bed-dff77bbdb8854ba4afe502af5068d8f9",
+      "role": "bed",
+      "author": "ArchVibe 3D (https://sketchfab.com/super-valentin)",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tModern bed\n* source:\thttps://sketchfab.com/3d-models/modern-bed-dff77bbdb8854ba4afe502af5068d8f9\n* author:\tArchVibe 3D (https://sketchfab.com/super-valentin)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Modern bed\" (https://sketchfab.com/3d-models/modern-bed-dff77bbdb8854ba4afe502af5068d8f9) by ArchVibe 3D (https://sketchfab.com/super-valentin) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "+X",
+      "length_axis": "X",
+      "front_axis_source": "Rounded mattress component over separate four-vertex under-bed plane; headboard Object_5 at minimum X.",
+      "orientation_evidence": {
+        "front_axis": "+X",
+        "length_axis": "X",
+        "basis": "Rounded mattress component over separate four-vertex under-bed plane; headboard Object_5 at minimum X.",
+        "status": "measured diagnostics; rejected at mattress intake",
+        "limit": null
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+      },
+      "bounds_m": {
+        "min": [
+          -0.18323411643491738,
+          -0.3232805742505178,
+          -2.1541005106186617
+        ],
+        "max": [
+          4.100528466978233,
+          1.484679477726047,
+          2.155030132242075
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -0.1832340955734253,
+          -0.3232806324958801,
+          -2.1541011333465576
+        ],
+        "max": [
+          4.100528240203857,
+          1.484679937362671,
+          2.1550307273864746
+        ]
+      },
+      "bounds_basis": "bounds_m is conservative accessor envelope; measured_bounds_m is actual imported vertices",
+      "expected_size_range": null,
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round4/candidate-previews-final/sf_bed3_dff77bbd-plus-y.png",
+      "status": "rejected-real-size-mattress",
+      "fit": {
+        "ok": false,
+        "scale": 1.0,
+        "real_size_m": [
+          4.309131860733032,
+          4.283762335777283,
+          1.807960569858551
+        ],
+        "mattresses": {
+          "lower": {
+            "size_m": [
+              3.6623260974884033,
+              3.82734751701355
+            ],
+            "error_m": [
+              2.0623260974884032,
+              1.8273475170135498
+            ]
+          }
+        },
+        "reason": "lower mattress width: achieved 3.662326 m, planned 1.600000 m, mismatch 2062.326 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 3.827348 m, planned 2.000000 m, mismatch 1827.348 mm (>20 mm); Client bed fit decision 2026-10-08",
+        "source": "Client bed fit decision 2026-10-08"
+      },
+      "actual_mattress_bounds_native_m": {
+        "lower": {
+          "min": [
+            0.04690098762512207,
+            0.07890161871910095,
+            -1.831159234046936
+          ],
+          "max": [
+            3.874248504638672,
+            0.5596956014633179,
+            1.8311668634414673
+          ]
+        }
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_dff77bbd/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_dff77bbd/license.txt"
+      }
+    },
+    {
+      "id": "sf_bed3_d3aeb724",
+      "url": "https://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220",
+      "source_url": "https://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220",
+      "role": "bed",
+      "author": "Ren Viro Store (https://sketchfab.com/renviros)",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tDark Modern Bed\n* source:\thttps://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220\n* author:\tRen Viro Store (https://sketchfab.com/renviros)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Dark Modern Bed\" (https://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220) by Ren Viro Store (https://sketchfab.com/renviros) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "length_axis": "Z",
+      "front_axis_source": "Rounded full mattress component between frame and duvet; pillows toward positive Blender Y (negative native Z). Whole mesh remains fused; component measurement is diagnostic only.",
+      "orientation_evidence": {
+        "front_axis": "+Z",
+        "length_axis": "Z",
+        "basis": "Rounded full mattress component between frame and duvet; pillows toward positive Blender Y (negative native Z). Whole mesh remains fused; component measurement is diagnostic only.",
+        "status": "measured diagnostics; rejected at mattress intake",
+        "limit": null
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+      },
+      "bounds_m": {
+        "min": [
+          -1068.2802734375,
+          2.0637817382807953,
+          -970.2867965698242
+        ],
+        "max": [
+          1068.2802734375,
+          860.1233215332036,
+          1022.9326858520512
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -1068.2802734375,
+          2.06367826461792,
+          -970.2872924804688
+        ],
+        "max": [
+          1068.2802734375,
+          860.12353515625,
+          1022.9330444335938
+        ]
+      },
+      "bounds_basis": "bounds_m is conservative accessor envelope; measured_bounds_m is actual imported vertices",
+      "expected_size_range": null,
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round4/candidate-previews-final/sf_bed3_d3aeb724-plus-y.png",
+      "status": "rejected-real-size-mattress",
+      "fit": {
+        "ok": false,
+        "scale": 1.0,
+        "real_size_m": [
+          2136.560546875,
+          1993.2203369140625,
+          858.0598568916321
+        ],
+        "mattresses": {
+          "lower": {
+            "size_m": [
+              1708.96337890625,
+              1876.8690795898438
+            ],
+            "error_m": [
+              1707.36337890625,
+              1874.8690795898438
+            ]
+          }
+        },
+        "reason": "lower mattress width: achieved 1708.963379 m, planned 1.600000 m, mismatch 1707363.379 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 1876.869080 m, planned 2.000000 m, mismatch 1874869.080 mm (>20 mm); Client bed fit decision 2026-10-08",
+        "source": "Client bed fit decision 2026-10-08"
+      },
+      "actual_mattress_bounds_native_m": {
+        "lower": {
+          "min": [
+            -845.855224609375,
+            187.2538604736328,
+            -931.1693115234375
+          ],
+          "max": [
+            863.108154296875,
+            421.3462829589844,
+            945.6997680664062
+          ]
+        }
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_d3aeb724/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_d3aeb724/license.txt"
+      }
+    },
+    {
+      "id": "sf_bed3_9fb7c547",
+      "url": "https://sketchfab.com/3d-models/simple-bunk-bed-9fb7c54715dd41b98b3dc67b367cf81d",
+      "source_url": "https://sketchfab.com/3d-models/simple-bunk-bed-9fb7c54715dd41b98b3dc67b367cf81d",
+      "role": "bed",
+      "author": "Blender3D (https://sketchfab.com/Blender3D)",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tSimple Bunk Bed\n* source:\thttps://sketchfab.com/3d-models/simple-bunk-bed-9fb7c54715dd41b98b3dc67b367cf81d\n* author:\tBlender3D (https://sketchfab.com/Blender3D)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Simple Bunk Bed\" (https://sketchfab.com/3d-models/simple-bunk-bed-9fb7c54715dd41b98b3dc67b367cf81d) by Blender3D (https://sketchfab.com/Blender3D) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "+X",
+      "length_axis": "X",
+      "front_axis_source": "Separate full rounded lower/upper mattress solids, source materials None_Untitled and None_Matress_Top_Diffuse; pillow heads at minimum X.",
+      "orientation_evidence": {
+        "front_axis": "+X",
+        "length_axis": "X",
+        "basis": "Separate full rounded lower/upper mattress solids, source materials None_Untitled and None_Matress_Top_Diffuse; pillow heads at minimum X.",
+        "status": "measured diagnostics; rejected at mattress intake",
+        "limit": null
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+      },
+      "bounds_m": {
+        "min": [
+          -8.599634170532227,
+          -7.701550006866456,
+          -5.342794895172121
+        ],
+        "max": [
+          8.599634170532227,
+          7.701550006866456,
+          5.342794895172121
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -8.599634170532227,
+          -7.701551914215088,
+          -5.342796325683594
+        ],
+        "max": [
+          8.599634170532227,
+          7.70155143737793,
+          5.342796325683594
+        ]
+      },
+      "bounds_basis": "bounds_m is conservative accessor envelope; measured_bounds_m is actual imported vertices",
+      "expected_size_range": null,
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round4/candidate-previews-final/sf_bed3_9fb7c547-plus-y.png",
+      "status": "rejected-real-size-mattress",
+      "fit": {
+        "ok": false,
+        "scale": 1.0,
+        "real_size_m": [
+          10.685592651367188,
+          17.199268341064453,
+          15.403103351593018
+        ],
+        "mattresses": {
+          "lower": {
+            "size_m": [
+              9.554574966430664,
+              16.42262840270996
+            ],
+            "error_m": [
+              8.654574966430664,
+              14.422628402709961
+            ]
+          },
+          "upper": {
+            "size_m": [
+              9.554575443267822,
+              16.42262840270996
+            ],
+            "error_m": [
+              8.654575443267822,
+              14.422628402709961
+            ]
+          }
+        },
+        "reason": "lower mattress width: achieved 9.554575 m, planned 0.900000 m, mismatch 8654.575 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 16.422628 m, planned 2.000000 m, mismatch 14422.628 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress width: achieved 9.554575 m, planned 0.900000 m, mismatch 8654.575 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress length: achieved 16.422628 m, planned 2.000000 m, mismatch 14422.628 mm (>20 mm); Client bed fit decision 2026-10-08",
+        "source": "Client bed fit decision 2026-10-08"
+      },
+      "actual_mattress_bounds_native_m": {
+        "lower": {
+          "min": [
+            -8.21131420135498,
+            -5.41635799407959,
+            -4.777287006378174
+          ],
+          "max": [
+            8.21131420135498,
+            -3.1236350536346436,
+            4.77728796005249
+          ]
+        },
+        "upper": {
+          "min": [
+            -8.21131420135498,
+            3.5306389331817627,
+            -4.777288436889648
+          ],
+          "max": [
+            8.21131420135498,
+            5.823361873626709,
+            4.777287006378174
+          ]
+        }
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_9fb7c547/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_9fb7c547/license.txt"
+      }
+    },
+    {
+      "id": "sf_bed3_0e134823",
+      "url": "https://sketchfab.com/3d-models/bunk-bed-0e13482338344239abd8b697def3b20c",
+      "source_url": "https://sketchfab.com/3d-models/bunk-bed-0e13482338344239abd8b697def3b20c",
+      "role": "bed",
+      "author": "AM ARCHITECTURE (https://sketchfab.com/abir_sd)",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tbunk bed\n* source:\thttps://sketchfab.com/3d-models/bunk-bed-0e13482338344239abd8b697def3b20c\n* author:\tAM ARCHITECTURE (https://sketchfab.com/abir_sd)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"bunk bed\" (https://sketchfab.com/3d-models/bunk-bed-0e13482338344239abd8b697def3b20c) by AM ARCHITECTURE (https://sketchfab.com/abir_sd) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "-X",
+      "length_axis": "X",
+      "front_axis_source": "Lower and upper six-face mattress shells; bounds include bevel shell, not source duvets Mesh29/Mesh27. Lower head toward positive X; upper head unresolved.",
+      "orientation_evidence": {
+        "front_axis": "-X",
+        "length_axis": "X",
+        "basis": "Lower and upper six-face mattress shells; bounds include bevel shell, not source duvets Mesh29/Mesh27. Lower head toward positive X; upper head unresolved.",
+        "status": "measured diagnostics; rejected at mattress intake",
+        "limit": "dimension axis measured; front sign represents lower berth only, not activation orientation"
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+      },
+      "bounds_m": {
+        "min": [
+          5.551114999048691e-19,
+          2.465190273714364e-34,
+          -0.02285404154239501
+        ],
+        "max": [
+          0.023836891118357517,
+          0.01832469303180218,
+          1.8162575033940063e-18
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          5.551114999048691e-19,
+          0.0,
+          -0.022854045033454895
+        ],
+        "max": [
+          0.02383689023554325,
+          0.01832469552755356,
+          -1.1102232066048913e-18
+        ]
+      },
+      "bounds_basis": "bounds_m is conservative accessor envelope; measured_bounds_m is actual imported vertices",
+      "expected_size_range": null,
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round4/candidate-previews-final/sf_bed3_0e134823-plus-y.png",
+      "status": "rejected-real-size-mattress",
+      "fit": {
+        "ok": false,
+        "scale": 1.0,
+        "real_size_m": [
+          0.022854045033454895,
+          0.02383689023554325,
+          0.01832469552755356
+        ],
+        "mattresses": {
+          "lower": {
+            "size_m": [
+              0.01419436139985919,
+              0.02257758326595649
+            ],
+            "error_m": [
+              0.8858056386001408,
+              1.9774224167340435
+            ]
+          },
+          "upper": {
+            "size_m": [
+              0.010498513467609882,
+              0.022458781371824443
+            ],
+            "error_m": [
+              0.8895014865323901,
+              1.9775412186281756
+            ]
+          }
+        },
+        "reason": "lower mattress width: achieved 0.014194 m, planned 0.900000 m, mismatch 885.806 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 0.022578 m, planned 2.000000 m, mismatch 1977.422 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress width: achieved 0.010499 m, planned 0.900000 m, mismatch 889.501 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress length: achieved 0.022459 m, planned 2.000000 m, mismatch 1977.541 mm (>20 mm); Client bed fit decision 2026-10-08",
+        "source": "Client bed fit decision 2026-10-08"
+      },
+      "actual_mattress_bounds_native_m": {
+        "lower": {
+          "min": [
+            0.0006426224135793746,
+            0.002784287789836526,
+            -0.020384715870022774
+          ],
+          "max": [
+            0.023220205679535866,
+            0.003937068395316601,
+            -0.006190354470163584
+          ]
+        },
+        "upper": {
+          "min": [
+            0.0007614243077114224,
+            0.01219470240175724,
+            -0.020384715870022774
+          ],
+          "max": [
+            0.023220205679535866,
+            0.013460577465593815,
+            -0.009886202402412891
+          ]
+        }
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_0e134823/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_0e134823/license.txt"
+      }
+    },
+    {
+      "id": "sf_bed3_2cabd354",
+      "url": "https://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10",
+      "source_url": "https://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10",
+      "role": "bed",
+      "author": "sparshgupta (https://sketchfab.com/SPARSHGUPTA)",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tSimple Bunk Bed 3D Model\n* source:\thttps://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10\n* author:\tsparshgupta (https://sketchfab.com/SPARSHGUPTA)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Simple Bunk Bed 3D Model\" (https://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10) by sparshgupta (https://sketchfab.com/SPARSHGUPTA) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "length_axis": "Z",
+      "front_axis_source": "Separate rounded mattress components inside one fused fabric mesh, vertically separated from duvet/pillow components. Pillow heads toward positive Blender Y.",
+      "orientation_evidence": {
+        "front_axis": "+Z",
+        "length_axis": "Z",
+        "basis": "Separate rounded mattress components inside one fused fabric mesh, vertically separated from duvet/pillow components. Pillow heads toward positive Blender Y.",
+        "status": "measured diagnostics; rejected at mattress intake",
+        "limit": null
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+      },
+      "bounds_m": {
+        "min": [
+          -1.056712365372947,
+          -3.8650452600227257e-07,
+          -1.0265625052551626
+        ],
+        "max": [
+          0.5747830143246868,
+          1.9562179827224622,
+          0.9366860776390497
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -1.0567123889923096,
+          -3.810761768363591e-07,
+          -1.0265626907348633
+        ],
+        "max": [
+          0.5747830271720886,
+          1.956217885017395,
+          0.9366859793663025
+        ]
+      },
+      "bounds_basis": "bounds_m is conservative accessor envelope; measured_bounds_m is actual imported vertices",
+      "expected_size_range": null,
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round4/candidate-previews-final/sf_bed3_2cabd354-plus-y.png",
+      "status": "rejected-real-size-mattress",
+      "fit": {
+        "ok": false,
+        "scale": 1.0,
+        "real_size_m": [
+          1.6314954161643982,
+          1.9632486701011658,
+          1.9562182660935719
+        ],
+        "mattresses": {
+          "lower": {
+            "size_m": [
+              0.8345158696174622,
+              1.8297940492630005
+            ],
+            "error_m": [
+              0.06548413038253786,
+              0.1702059507369995
+            ]
+          },
+          "upper": {
+            "size_m": [
+              0.834515780210495,
+              1.8297939896583557
+            ],
+            "error_m": [
+              0.06548421978950503,
+              0.1702060103416443
+            ]
+          }
+        },
+        "reason": "lower mattress width: achieved 0.834516 m, planned 0.900000 m, mismatch 65.484 mm (>20 mm); Client bed fit decision 2026-10-08; lower mattress length: achieved 1.829794 m, planned 2.000000 m, mismatch 170.206 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress width: achieved 0.834516 m, planned 0.900000 m, mismatch 65.484 mm (>20 mm); Client bed fit decision 2026-10-08; upper mattress length: achieved 1.829794 m, planned 2.000000 m, mismatch 170.206 mm (>20 mm); Client bed fit decision 2026-10-08",
+        "source": "Client bed fit decision 2026-10-08"
+      },
+      "actual_mattress_bounds_native_m": {
+        "lower": {
+          "min": [
+            -0.37748056650161743,
+            0.49001485109329224,
+            -0.9617031216621399
+          ],
+          "max": [
+            0.4570353031158447,
+            0.5785276293754578,
+            0.8680909276008606
+          ]
+        },
+        "upper": {
+          "min": [
+            -0.37748047709465027,
+            1.5082672834396362,
+            -0.961703360080719
+          ],
+          "max": [
+            0.4570353031158447,
+            1.6236913204193115,
+            0.8680906295776367
+          ]
+        }
+      },
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_2cabd354/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_2cabd354/license.txt"
+      }
+    },
+    {
+      "id": "sf_bed3_28a8b705",
+      "url": "https://sketchfab.com/3d-models/bed-wood-oak-pbr-28a8b7050a5e4951abbfb588015abf41",
+      "source_url": "https://sketchfab.com/3d-models/bed-wood-oak-pbr-28a8b7050a5e4951abbfb588015abf41",
+      "role": "bed",
+      "author": "AHMED KCHIKICH (https://sketchfab.com/inven2000)",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tBed Wood Oak PBR\n* source:\thttps://sketchfab.com/3d-models/bed-wood-oak-pbr-28a8b7050a5e4951abbfb588015abf41\n* author:\tAHMED KCHIKICH (https://sketchfab.com/inven2000)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Bed Wood Oak PBR\" (https://sketchfab.com/3d-models/bed-wood-oak-pbr-28a8b7050a5e4951abbfb588015abf41) by AHMED KCHIKICH (https://sketchfab.com/inven2000) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "length_axis": "Z",
+      "front_axis_source": "Three meshes: pillows, fused wooden base/headboard, and cloth; no independent complete naked mattress identified.",
+      "orientation_evidence": {
+        "front_axis": "+Z",
+        "length_axis": "Z",
+        "basis": "Three meshes: pillows, fused wooden base/headboard, and cloth; no independent complete naked mattress identified.",
+        "status": "measured diagnostics; rejected at mattress intake",
+        "limit": null
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+      },
+      "bounds_m": {
+        "min": [
+          -29.657992517417966,
+          -0.00996235112891283,
+          -42.155160018656844
+        ],
+        "max": [
+          29.657992517417966,
+          41.710553447435316,
+          39.370080823226154
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -29.65799331665039,
+          -0.009965896606445312,
+          -42.155181884765625
+        ],
+        "max": [
+          29.65799331665039,
+          41.71056365966797,
+          39.370094299316406
+        ]
+      },
+      "bounds_basis": "bounds_m is conservative accessor envelope; measured_bounds_m is actual imported vertices",
+      "expected_size_range": null,
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round4/candidate-previews-final/sf_bed3_28a8b705-plus-y.png",
+      "status": "rejected-real-size-mattress",
+      "fit": {
+        "ok": false,
+        "scale": 1.0,
+        "real_size_m": [
+          59.31598663330078,
+          81.52527618408203,
+          41.720529556274414
+        ],
+        "mattresses": {},
+        "reason": "actual mattress geometry required for every berth; complete actual mattress not identifiable separately from base/bedding; no numeric mattress mismatch claimed",
+        "source": "Client bed fit decision 2026-10-08"
+      },
+      "actual_mattress_bounds_native_m": {},
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_28a8b705/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_28a8b705/license.txt"
+      }
+    },
+    {
+      "id": "sf_bed3_fe3c50e1",
+      "url": "https://sketchfab.com/3d-models/engi-bed-fe3c50e1eb7b4b0eafa647598ca53f11",
+      "source_url": "https://sketchfab.com/3d-models/engi-bed-fe3c50e1eb7b4b0eafa647598ca53f11",
+      "role": "bed",
+      "author": "WOODPORT (https://sketchfab.com/woodport)",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tEngi bed\n* source:\thttps://sketchfab.com/3d-models/engi-bed-fe3c50e1eb7b4b0eafa647598ca53f11\n* author:\tWOODPORT (https://sketchfab.com/woodport)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Engi bed\" (https://sketchfab.com/3d-models/engi-bed-fe3c50e1eb7b4b0eafa647598ca53f11) by WOODPORT (https://sketchfab.com/woodport) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "up_axis": "+Y",
+      "front_axis": "-X",
+      "length_axis": "X",
+      "front_axis_source": "The only separately identifiable exposed mattress solid pCube3_Fabric1_0 covers the head section; its length is only 0.571583 m. Remaining soft geometry is quilt/folded cloth; no full naked mattress identified.",
+      "orientation_evidence": {
+        "front_axis": "-X",
+        "length_axis": "X",
+        "basis": "The only separately identifiable exposed mattress solid pCube3_Fabric1_0 covers the head section; its length is only 0.571583 m. Remaining soft geometry is quilt/folded cloth; no full naked mattress identified.",
+        "status": "measured diagnostics; rejected at mattress intake",
+        "limit": null
+      },
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF 2.0 coordinate system and units; no alternate unit declaration in supplied scene.gltf/provenance/licence or retained listing metadata"
+      },
+      "bounds_m": {
+        "min": [
+          -1.2118250117405367,
+          -2.220446049250313e-16,
+          -1.0965180430881718
+        ],
+        "max": [
+          1.245372409282596,
+          1.1118075328823624,
+          1.0750528368909653
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -1.211824893951416,
+          0.0,
+          -1.0928399562835693
+        ],
+        "max": [
+          1.2117565870285034,
+          1.0330694913864136,
+          1.0746742486953735
+        ]
+      },
+      "bounds_basis": "bounds_m is conservative accessor envelope; measured_bounds_m is actual imported vertices",
+      "expected_size_range": null,
+      "contents": {
+        "bedding": true
+      },
+      "preview_image": null,
+      "neutral_preview": "out/beds/round4/candidate-previews-final/sf_bed3_fe3c50e1-plus-y.png",
+      "status": "rejected-real-size-mattress",
+      "fit": {
+        "ok": false,
+        "scale": 1.0,
+        "real_size_m": [
+          2.167514204978943,
+          2.4235814809799194,
+          1.0330694913864136
+        ],
+        "mattresses": {},
+        "reason": "actual mattress geometry required for every berth; complete actual mattress absent/unresolved; exposed head patch is not a full mattress",
+        "source": "Client bed fit decision 2026-10-08"
+      },
+      "actual_mattress_bounds_native_m": {},
+      "intake_sources": {
+        "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_fe3c50e1/provenance.json",
+        "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_fe3c50e1/license.txt"
+      }
     }
   ],
   "_bounds_note": "bounds_m: native glTF (Y-up, metres) world AABB per prop, node-hierarchy-aware (handles multi-root variant packs e.g. shrub_02). Measured 2026-09-28 on ai-workstation via ops/workstation/fetch_asset_library.py bounds(); verified against one headless Blender 4.2.9 import (tree_small_02, shrub_02) matching to 1e-4 m. Blender glTF import maps (x,y,z)_gltf -> (x,-z,y)_scene."

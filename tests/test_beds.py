@@ -33,9 +33,8 @@ class BedFit(unittest.TestCase):
         target = FROZEN['target']
         fit = fit_bed(FROZEN['bounds_m'], **target, front_axis=FROZEN['front_axis'])
         self.assertFalse(fit['ok'])
-        self.assertIn('scale-distortion', fit['reason'])
-        self.assertAlmostEqual(fit['footprint_error_m'][1], .1595549104)
-        self.assertGreater(fit['height_err'], .18)
+        self.assertIn('actual mattress geometry required', fit['reason'])
+        self.assertEqual(fit['scale'], 1.)
         sibling = deepcopy(FROZEN['bounds_m'])
         for key in ('min', 'max'):
             sibling[key] = [v + d for v, d in zip(sibling[key], (8, 11, 3))]
@@ -65,8 +64,8 @@ class BedFit(unittest.TestCase):
             low = [origin[0]-dimensions[0]/2, origin[1]-dimensions[2]/2, origin[2]]
             high = [origin[0]+dimensions[0]/2, origin[1]+dimensions[2]/2, origin[2]+dimensions[1]]
             clean = {'min': low, 'max': high}
-            self.assertEqual(placed_bed_findings(native, clean, [low[0],low[1],high[0],high[1]], dimensions[1], 1), [])
-            self.assertTrue(fit_bed(native, dimensions[0], dimensions[2], dimensions[1], '+Z')['ok'])
+            self.assertEqual(placed_bed_findings(native, clean, [low[0],low[1],high[0],high[1]], dimensions[1], 1, mattress_world_bounds={'lower':clean}), [])
+            self.assertTrue(fit_bed(native, dimensions[0], dimensions[2], dimensions[1], '+Z', mattress_bounds={'lower':native})['ok'])
 
     def test_position_and_height_cannot_hide_behind_extent_fit(self):
         native = FROZEN['bounds_m']
@@ -74,16 +73,16 @@ class BedFit(unittest.TestCase):
         clean = {'min': [0,0,0], 'max': [width,depth,height]}
         shifted = {'min': [.021,0,0], 'max': [width+.021,depth,height]}
         self.assertTrue(placed_bed_findings(native, shifted, [0,0,width,depth], height, 1))
-        self.assertTrue(placed_bed_findings(native, clean, [0,0,width,depth], height*.9, 1))
+        self.assertEqual(placed_bed_findings(native, clean, [0,0,width,depth], height*.9, 1, mattress_world_bounds={'lower':clean}), [])
         too_small = {'min': [0,0,0], 'max': [width-.06,depth,height]}
         self.assertTrue(placed_bed_findings(native, too_small, [0,0,width,depth], height, 1))
 
     def test_measured_x_front_is_independent_of_asset_origin(self):
         native = FROZEN['bounds_m']
         width, height, depth = [b-a for a, b in zip(native['min'], native['max'])]
-        self.assertTrue(fit_bed(native, depth, width, height, '-X')['ok'])
+        self.assertTrue(fit_bed(native, depth, width, height, '-X', mattress_bounds={'lower':native})['ok'])
         self.assertEqual(placed_bed_findings(native, {'min':[0,0,0], 'max':[depth,width,height]},
-                                           [0,0,depth,width], height, 1, (2,0,1)), [])
+                                           [0,0,depth,width], height, 1, (2,0,1), mattress_world_bounds={'lower':{'min':[0,0,0],'max':[depth,width,height]}}), [])
 
     def test_unmeasured_nonfinite_axiswise_or_invalid_inputs_refused(self):
         for bounds in (None, {}, {'min':[0,0,0],'max':[1,float('nan'),1]},
@@ -111,8 +110,8 @@ class BedFit(unittest.TestCase):
         # At this real bed's depth, a 30 mm deficit is under two percent;
         # the client required an absolute 20 mm boundary.
         width,height,depth = [b-a for a,b in zip(FROZEN['bounds_m']['min'],FROZEN['bounds_m']['max'])]
-        self.assertFalse(fit_bed(FROZEN['bounds_m'],width,depth+.03,height,'+Z')['ok'])
-        self.assertTrue(fit_bed(FROZEN['bounds_m'],width,depth+.019,height,'+Z')['ok'])
+        self.assertFalse(fit_bed(FROZEN['bounds_m'],width,depth+.03,height,'+Z', mattress_bounds={'lower':FROZEN['bounds_m']})['ok'])
+        self.assertTrue(fit_bed(FROZEN['bounds_m'],width,depth+.019,height,'+Z', mattress_bounds={'lower':FROZEN['bounds_m']})['ok'])
 
 
 class FurnishedBeds(unittest.TestCase):
@@ -129,7 +128,7 @@ class FurnishedBeds(unittest.TestCase):
         self.assertEqual({b['id']:(b['w'],b['d']) for b in beds},
                          {'pb-bed':(1.6,2.0),'kb-bed':(1.2,2.0),'ka-bunk':(.9,2.0),'library-daybed':(2.0,.95)})
         self.assertFalse(any(m['asset']==FROZEN['asset'] for m in self.scene['models']))
-        self.assertIn('scale-distortion', ' '.join(self.scene['notes']))
+        self.assertIn('actual mattress geometry required', ' '.join(self.scene['notes']))
         for bed in beds:
             parts = [m for m in self.scene['meshes'] if m['id'].startswith('furn-'+bed['id']+'-')]
             self.assertTrue(parts, bed['id'])
@@ -175,6 +174,142 @@ class FurnishedBeds(unittest.TestCase):
             bottom_m=LZ[bed['level']],top_m=LZ[bed['level']]+1.05)],
             routes={'other-required-route':rect},route_ground={'other-required-route':LZ[bed['level']]})
         self.assertTrue(topology.object_in_route())
+
+
+
+class RealSizeBeds(unittest.TestCase):
+    def real_model(self, name='other-suite-bed', yaw=0, position=(8,11,3)):
+        import gzip
+        geometry=json.loads(gzip.decompress((Path(__file__).parent/'fixtures/bed-scandi-geometry.json.gz').read_bytes()))
+        return dict(id=name,asset=geometry['asset'],role='bed',scale=1.,position=list(position),
+            rotation_deg=[0,0,yaw],replaces='furn-'+name+'-',review_geometry=geometry,
+            contents_review=dict(status='bed-only',basis='all seven actual bed meshes inspected',extras=[]),
+            mattress_bindings=dict(lower=dict(parts=['Object_14'],head_at_max=False)))
+
+    def test_round2_scales_are_refused_in_fit_and_portable_review_renamed_sibling(self):
+        from archpipe.beds import model_review_meshes
+        rows=json.loads((Path(__file__).parent/'fixtures/bed-round2-measurements.json').read_text())
+        for row in rows:
+            result=fit_bed(row['bounds_m'],*row['target'],row['front_axis'],row['length_axis'],scale=row['fit']['scale'])
+            self.assertFalse(result['ok'])
+            self.assertIn('scaled bed refused',result['reason'])
+            for name in (row['id'],'renamed-'+row['id']):
+                model=self.real_model(name);model['scale']=row['fit']['scale']
+                with self.assertRaisesRegex(ValueError,'scaled bed refused'):
+                    model_review_meshes([model])
+
+    def test_real_mattress_forty_mm_short_fails_correct_and_renamed_pass(self):
+        from archpipe.beds import model_mattress_bounds
+        for name in ('actual-scandi','another-villa-bed'):
+            model=self.real_model(name)
+            mattress=model_mattress_bounds(model)['lower']
+            width=mattress['max'][2]-mattress['min'][2]
+            length=mattress['max'][0]-mattress['min'][0]
+            frame=dict(min=[-2.164110,.017163,-1.304135],max=[2.283993,1.317586,1.225815])
+            good=fit_bed(frame,width,length,None,'+X',mattress_bounds={'lower':mattress})
+            self.assertTrue(good['ok'])
+            short=fit_bed(frame,width,length+.04,None,'+X',mattress_bounds={'lower':mattress})
+            self.assertFalse(short['ok']);self.assertIn('40.000 mm',short['reason'])
+            missing=fit_bed(frame,width,length,None,'+X')
+            self.assertFalse(missing['ok'])
+
+    def test_real_asymmetric_frame_anchors_mattress_and_frame_proxy_preserves_other_items(self):
+        from archpipe.beds import model_mattress_bounds,model_review_meshes,bed_frame_items
+        for yaw in (0,90,180,270):
+            model=self.real_model(yaw=yaw)
+            # Inject an asymmetric head extension sibling into this frozen model.
+            model['review_geometry']['meshes'].append(dict(name='asymmetric-frame-extension',
+                faces=[[[4,-.8,0],[4,.8,0],[4,.8,1]]]))
+            native=deepcopy(model['review_geometry'])
+            world=model_mattress_bounds(model,world=True)['lower']
+            self.assertAlmostEqual((world['min'][0]+world['max'][0])/2,8)
+            self.assertAlmostEqual((world['min'][1]+world['max'][1])/2,11)
+            faces=model_review_meshes([model]);points=[p for row in faces for face in row['faces'] for p in face]
+            self.assertAlmostEqual(min(p[2] for p in points),3)
+            axis=0 if yaw in (0,180) else 1
+            self.assertGreater(abs((min(p[axis] for p in points)+max(p[axis] for p in points))/2-model['position'][axis]),.5)
+            furniture=[dict(id=model['id'],type='bed_single',w=1.,d=2.,cx=8.,cy=11.,rot=0),
+                       dict(id='fixed-wardrobe',type='wardrobe',w=1.5,d=.6,cx=14.,cy=14.,rot=0)]
+            before=deepcopy(furniture)
+            frame_items=bed_frame_items(dict(models=[model]),furniture)
+            self.assertEqual(frame_items[1],before[1]);self.assertEqual(furniture,before)
+            self.assertGreater(frame_items[0]['w']*frame_items[0]['d'],2.)
+            self.assertEqual(native,model['review_geometry'])
+
+    def test_separable_extras_omitted_in_every_consumer_inseparable_or_unrecorded_refused(self):
+        from archpipe.beds import model_review_meshes,model_mattress_bounds,model_native_bounds
+        model=self.real_model()
+        original_bounds=model_native_bounds(model)
+        accessory=dict(name='separate-bedside',faces=[[[20,20,0],[21,20,0],[21,21,1]]])
+        model['review_geometry']['meshes'].append(accessory)
+        with self.assertRaisesRegex(ValueError,'every accessory'):
+            model['contents_review']['extras']=['separate-bedside'];model_review_meshes([model])
+        model['omitted_meshes']=['separate-bedside']
+        rows=model_review_meshes([model])
+        self.assertFalse(any('separate-bedside' in row['id'] for row in rows))
+        self.assertEqual(model_native_bounds(model),original_bounds)
+        self.assertLess(model_mattress_bounds(model,world=True)['lower']['max'][0],20)
+        model['contents_review']['status']='inseparable-extras'
+        with self.assertRaisesRegex(ValueError,'bed-only'):
+            model_review_meshes([model])
+
+    def test_source_unit_conversion_is_only_permitted_scale(self):
+        from archpipe.beds import real_size_findings,unit_scale
+        self.assertEqual(real_size_findings(1),[])
+        self.assertTrue(real_size_findings(.01))
+        evidence=dict(unit='cm',source='Author listing explicitly states centimetres')
+        self.assertEqual(unit_scale(evidence),.01)
+        self.assertEqual(real_size_findings(.01,evidence),[])
+        self.assertTrue(real_size_findings(.0101,evidence))
+        feet=dict(unit='ft',source='Author explicitly states feet for this file')
+        self.assertEqual(real_size_findings(.3048,feet),[])
+        with self.assertRaisesRegex(ValueError,'source'):
+            unit_scale(dict(unit='cm',source=''))
+
+    def test_real_frame_overhang_has_no_old_height_or_edge_limit(self):
+        frame=dict(min=[-1.0,0,-1.3],max=[1.,1.8,1.3])
+        mattress=dict(min=[-.8,.5,-1],max=[.8,.75,1])
+        self.assertTrue(fit_bed(frame,1.6,2,1.05,'+Z',mattress_bounds={'lower':mattress})['ok'])
+        world=dict(min=[-1,-1.3,0],max=[1,1.3,1.8])
+        actual_mattress=dict(min=[-.8,-1,.5],max=[.8,1,.75])
+        self.assertEqual(placed_bed_findings(frame,world,[-.8,-1,.8,1],1.05,1,
+            mattress_world_bounds={'lower':actual_mattress}),[])
+        shifted=deepcopy(actual_mattress);shifted['min'][0]+=.001;shifted['max'][0]+=.001
+        self.assertTrue(placed_bed_findings(frame,world,[-.8,-1,.8,1],1.05,1,mattress_world_bounds={'lower':shifted}))
+
+    def test_native_frame_c8_reports_shortfall_and_clean_room_stays_quiet(self):
+        from archpipe.beds import bed_room_review
+        model=self.real_model(position=(0,0,0));model['room']='another-bedroom'
+        item=dict(id=model['id'],type='bed_small_double',cx=0,cy=0,w=2.4124317169189453,
+            d=4.241483449935913,h=1.3,rot=-90,room='another-bedroom',level='GF')
+        floor=dict(id='floor',group='shell',material='floor-oak',faces=[
+            [[-5,-5,0],[5,-5,0],[5,5,0],[-5,5,0]]])
+        scene=dict(meshes=[floor],models=[model]);spec=dict(walls=[],doors=[],windows=[],stairs=[])
+        layout=dict(rooms={'another-bedroom':dict(rect=[-5,-5,5,5],level='GF',occupancy='room',kind='bedroom')})
+        before=deepcopy((scene,layout,[item]))
+        clean=bed_room_review(scene,layout,spec,[item])
+        self.assertTrue(clean['ok'],clean['findings'])
+        self.assertEqual((scene,layout,[item]),before)
+        layout['rooms']['another-bedroom']['rect']=[-5,-1.7062159,5,1.7062159]
+        tight=bed_room_review(scene,layout,spec,[item])
+        self.assertFalse(tight['ok'])
+        for row in tight['clearances']:
+            self.assertAlmostEqual(row['achieved_m'],.44124077,places=6)
+            self.assertEqual(row['required_m'],.750)
+            self.assertAlmostEqual(row['shortfall_m'],.30875923,places=6)
+            self.assertIn('printed page 18',row['source'])
+        # Only a review proxy grew: the planned mattress and existing camera/layout persist.
+        self.assertEqual(item,before[2][0])
+        self.assertEqual(scene,before[0])
+
+    def test_each_bunk_berth_required_and_measured(self):
+        frame=dict(min=[-.6,0,-1.2],max=[.6,1.7,1.2])
+        lower=dict(min=[-.45,.3,-1],max=[.45,.5,1])
+        upper=dict(min=[-.45,1.3,-1],max=[.45,1.5,1])
+        self.assertFalse(fit_bed(frame,.9,2,None,'+Z',mattress_bounds={'lower':lower},required_berths=2)['ok'])
+        self.assertTrue(fit_bed(frame,.9,2,None,'+Z',mattress_bounds={'lower':lower,'upper':upper},required_berths=2)['ok'])
+        upper['max'][2]-=.04
+        self.assertFalse(fit_bed(frame,.9,2,None,'+Z',mattress_bounds={'lower':lower,'upper':upper},required_berths=2)['ok'])
 
 
 if __name__ == '__main__':
