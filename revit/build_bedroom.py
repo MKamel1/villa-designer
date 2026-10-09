@@ -48,6 +48,10 @@ import sys
 import traceback
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
 import unattended  # noqa: E402  (answers modal dialogs; see its docstring)
 
 from Autodesk.Revit.DB import (
@@ -922,8 +926,7 @@ def main():
     # e.g. a manufacturer type catalogue naming parameters its family lacks.
     report["revit_messages"] = list(unattended.MESSAGES)
     out = os.environ.get("ARCHPIPE_BUILD_REPORT") or (dest + ".build.json")
-    with open(out, "w") as fh:
-        json.dump(report, fh, indent=2, sort_keys=True)
+    safe_io.save_json(out, report, indent=2, sort_keys=True)
 
     print("archpipe: wrote %s" % dest)
     print("archpipe: walls %d  openings %d/%d  furniture %d/%d  lighting %d/%d"

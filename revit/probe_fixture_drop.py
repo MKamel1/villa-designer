@@ -11,6 +11,10 @@ import json
 import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
 import extract_model as extract
 LUMINOUS_WORDS = ("lens", "luminance", "luminous", "diffuser", "opal", "emitting")
 from Autodesk.Revit.DB import (BuiltInCategory, BuiltInParameter, StorageType,
@@ -69,6 +73,5 @@ for fixture in extract._collect(doc, BuiltInCategory.OST_LightingFixtures):
     records.append(rec)
 dest = os.environ.get('ARCHPIPE_DROP_PROBE_OUT') or os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'out', 'fixture-drop-probe.json')
-with open(dest, 'w') as fh:
-    json.dump(records, fh, indent=2)
+safe_io.save_json(dest, records, indent=2)
 print('archpipe: wrote ' + dest)

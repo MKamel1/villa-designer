@@ -25,6 +25,11 @@ from System.Collections.Generic import List
 sys.path.insert(0, os.path.dirname(__file__))
 from extract_model import resolve_doc, mm
 
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
+
 
 def ft(value):
     return UnitUtils.ConvertToInternalUnits(float(value), UnitTypeId.Millimeters)
@@ -175,8 +180,7 @@ def main():
     report['pdf_exported'] = doc.Export(dest, ids, opts)
     report['pdf'] = os.path.join(dest, opts.FileName + '.pdf')
     report['saved_model'] = doc.PathName
-    with open(os.path.join(dest, 'views-report.json'), 'w') as fh:
-        json.dump(report, fh, indent=2, sort_keys=True)
+    safe_io.save_json(os.path.join(dest, 'views-report.json'), report, indent=2, sort_keys=True)
     print('ARCHPIPE VIEWS ' + json.dumps(report, sort_keys=True))
     doc.Close(False)
 

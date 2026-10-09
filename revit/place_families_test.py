@@ -31,7 +31,13 @@ produces geometry 304.8x wrong.
 """
 import json
 import os
+import sys
 import traceback
+
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
 
 from Autodesk.Revit.DB import (BuiltInParameter, BuiltInCategory, Family,
                                FamilySymbol, FilteredElementCollector, Level,
@@ -391,8 +397,7 @@ def main():
 
     dest = os.environ.get("ARCHPIPE_PLACE_OUT") or os.path.join(
         os.environ.get("USERPROFILE", "."), "archpipe_place_families.json")
-    with open(dest, "w") as fh:
-        json.dump(out, fh, indent=2, sort_keys=True)
+    safe_io.save_json(dest, out, indent=2, sort_keys=True)
     print("archpipe: wrote %s" % dest)
     print("archpipe: placed %d of %d tested"
           % (out["placed_count"], len(out["tested"])))

@@ -4,6 +4,10 @@ import json
 import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
 import extract_model as extract
 from Autodesk.Revit.DB import BuiltInCategory, BuiltInParameter, StorageType
 
@@ -27,6 +31,5 @@ for fixture in extract._collect(doc, BuiltInCategory.OST_LightingFixtures):
             'height_bounds_mm':[min(v[2] for v in mesh['vertices_mm']),max(v[2] for v in mesh['vertices_mm'])]})
     records.append(record)
 dest=os.environ['ARCHPIPE_GEOMETRY_PROBE_OUT']
-with open(dest,'w') as output:
-    json.dump(records,output,indent=2)
+safe_io.save_json(dest, records, indent=2)
 print('archpipe: wrote '+dest)
