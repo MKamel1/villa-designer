@@ -13,6 +13,8 @@ import tarfile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from render_remote import _ssh, _push
+from archpipe.stage_result import write_stage_result, enforce_clean_verdict
+from archpipe.safe_io import save_json
 from archpipe import photometry
 
 
@@ -97,10 +99,14 @@ def thermal(host, root, release, job_path, epw_zip):
         return 2
     report = json.loads(text)
     name = 'thermal-'+json.loads(job).get('kind','job')+'-latest.json'
-    (local/name).write_text(json.dumps(report, indent=2), encoding='utf-8')
+    save_json(local / name, report, indent=2)
     print(json.dumps({k: v for k, v in report.items() if k not in ('results', 'assumptions_default')}, indent=2)[:6000])
     print('report:', local/name)
-    return result.returncode
+    record = write_stage_result('workstation-thermal',
+        record_path=local / 'thermal.stage-result.json', inputs=[job_path, epw_zip],
+        outputs=[local / name], root=ROOT, code_paths=[__file__], exit_code=result.returncode,
+        metadata={'release': release, 'worker_report': report})
+    return enforce_clean_verdict(record, exit_code=result.returncode or 1)
 
 
 def main():
@@ -138,13 +144,27 @@ def main():
     local.mkdir(parents=True,exist_ok=True)
     (local/(a.action+'-latest.log')).write_bytes(result.stdout+result.stderr)
     if result.returncode:
+        # Failed workers still emit their persisted result on stdout.
+        try:
+            failed_report = json.loads(result.stdout)
+        except (ValueError, UnicodeDecodeError):
+            failed_report = None
+        if failed_report is not None:
+            save_json(local / (a.action + '-latest.json'), failed_report, indent=2)
+        record = write_stage_result('workstation-' + a.action,
+            record_path=local / (a.action + '.stage-result.json'),
+            inputs=[a.input] if a.action in ('batch','bedroom','benchmark','sweep','radiance') else [],
+            outputs=[local / (a.action + '-latest.log')] +
+                    ([local / (a.action + '-latest.json')] if failed_report is not None else []),
+            root=ROOT, code_paths=[__file__], exit_code=result.returncode,
+            metadata={'release_id': release_id, 'worker_report': failed_report})
         print((result.stdout+result.stderr).decode(errors='replace')[-8000:])
-        return result.returncode
+        return enforce_clean_verdict(record, exit_code=result.returncode)
     text = result.stdout.decode()
     # Worker output is structured JSON; artifacts are fetched as one archive.
     if a.action != 'setup':
         report = json.loads(text)
-        (local/(a.action+'-latest.json')).write_text(json.dumps(report,indent=2),encoding='utf-8')
+        save_json(local / (a.action + '-latest.json'), report, indent=2)
         if report.get('bundle'):
             fetched = _ssh(a.host,'cat '+shlex.quote(report['bundle']))
             if fetched.returncode:
@@ -160,11 +180,23 @@ def main():
             'artifacts':report.get('local_artifacts'),
             'failures':[{'job':r['job_id'][:16],'error':r.get('error')} for r in report.get('jobs',[]) if not r['passed']],
             'comparison':report.get('comparison')},indent=2))
-        if report.get('passed') is False:
-            return 1
     else:
+        report = {}
         print(text)
-    return 0
+    outputs = [local / (a.action + '-latest.log')]
+    if a.action != 'setup':
+        outputs.append(local / (a.action + '-latest.json'))
+    if report.get('local_artifacts'):
+        outputs += sorted(p for p in Path(report['local_artifacts']).rglob('*') if p.is_file())
+    record = write_stage_result('workstation-' + a.action,
+        record_path=local / (a.action + '.stage-result.json'),
+        inputs=[a.input] if a.action in ('batch','bedroom','benchmark','sweep','radiance') else [],
+        outputs=outputs, expected_outputs=[] if a.action == 'setup' else [local / (a.action + '-latest.json')],
+        root=ROOT, code_paths=[__file__, ROOT / 'scripts/worker_entry.py'],
+        exit_code=1 if report.get('passed') is False else 0,
+        metadata={'release_id': release_id, 'worker_runtime': report.get('runtime'),
+                  'jobs': [r.get('manifest') for r in report.get('jobs', [])]})
+    return enforce_clean_verdict(record, message='Workstation operation failed')
 
 
 if __name__ == '__main__':

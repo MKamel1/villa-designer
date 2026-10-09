@@ -185,8 +185,13 @@ def main():
     doc.Close(False)
 
 
-try:
-    main()
-except Exception:
-    print('ARCHPIPE VIEWS FAILED\n' + traceback.format_exc())
-    raise
+if __name__ == '__main__':
+    from stage_command import run as run_stage, report as read_report
+    dest = os.environ['ARCHPIPE_VIEWS_OUT']
+    report_path = os.path.join(dest, 'views-report.json')
+    model = os.environ.get('ARCHPIPE_MODEL') or resolve_doc().PathName
+    raise SystemExit(run_stage('export-views', main,
+        os.path.join(dest, 'export-views.stage-result.json'), [model],
+        lambda value: [model, report_path, os.path.join(dest, 'bedroom-native-views.pdf')],
+        lambda value: bool(read_report(report_path).get('errors')) or
+            not read_report(report_path).get('pdf_exported'), __revit__.Application))

@@ -1,0 +1,141 @@
+{
+  "branch_start": "0943c1bc5b06c92fb65b1cd7338ccaf605e920a2",
+  "unchanged_functions": {
+    "scripts/run_bedroom.py": {
+      "artifacts_match": "3ff8e88cc6edd30cd6815b0069ba04439bd183c94fe122904e74f16ee6e34829",
+      "digest": "1f11e7f042a0e1f3e97091de90104aff47793adb4667f3b412d0623048b6066d",
+      "input_hashes": "11517a8ae8fdaaeb97643caf70ca077c8fa2fb7a72c0494d8a27fb193a0e032c",
+      "pid_alive": "64c23ee9483678a3aed2348a9f6094cb198267ce0d641e3ecfb0306f095ebdb9",
+      "run": "a11dbda3279933a119135703e10be650a7a95e38b06cbe49b346b96201c15609"
+    },
+    "scripts/villa_daylight_finished.py": {
+      "fetch": "bb4fcfe780cfcc26232056cee36bde17cfa4ede479cde13e24fda64f0028c208",
+      "finished_scene": "3c074a9391ba056b20a95b9e4f48bdf142699bfdfae3860d2c75a9a3a013a554",
+      "run": "9850274d742c698de2b65a2ee3a72e737e35f8ad25e167d0413dd1d17cda97f6",
+      "verify_shared_model": "10609351ee708d48aab79ff5dde23f7f07ffeff45846d95d0ee925b85efe7e4e"
+    },
+    "scripts/thermal_job.py": {
+      "validate": "b964d8232e482c8a1cced23fe01fbad0a060cf656d1b825bc2728deffdbef544",
+      "validate_daylight": "d1df144b5cb775df8a76e4df6b9e086819cfea5f06e01c2d4b7c1d0e38735ab3"
+    },
+    "scripts/render_hyperreal.py": {
+      "_site_note": "98269b50ed153f1eaa51164253dd4ba61fdc276ef5aee94e13d5b517bfe96d86",
+      "save": "fc983a26aaf92ddc038fe53a7447b58e558809efd410ef4e978325a5a76cb7fd",
+      "site": "5fad53653bff318d70fa8166b7ca443f7e1b91470c52d6b06b1bf7087fd5ed1d",
+      "write_caption": "44733e1afbca193c710522ebd55393a7a104d9a7595b254a4545e732e26bcf42"
+    },
+    "scripts/worker_entry.py": {
+      "command": "98b92a41b199a78ae90f26ddc73dc51970998e2253991603d7cde70f42420a4e"
+    },
+    "scripts/workstation.py": {
+      "deploy": "d886163847a3ef19cb8fc14d6733548d6fbe7662a1189eeeb2d84a5a47095c8f",
+      "digest": "76d8d324f495a51f83a6b18390dc06d039df7af6cdb0475bf4d0f20fd66ad23c",
+      "package": "63ca83a67e4eac8093490defe90f342c059e0d5ba536b0e09dbd6173df553d71",
+      "remote_root": "8a321cfb45909c79276cc39e4564da7b80e8a02b6f784c0c20b6729003df1aa5"
+    },
+    "revit/build_bedroom.py": {
+      "activate": "8baa59b042b5305cf47277193f3289317948f53832d15a51506e51cff473de29",
+      "best_opening_symbol": "edfa6b6b1bdfd3344c918b3da08179391f5f2391e532357fd03bc92da0689877",
+      "build_ceiling": "bcc8b3aea45f05c9cdee0312791a74ba05e24f18aef1b9730c3436f92e01926c",
+      "build_floor": "c66416f6efa0c1c34e0e7dcb9c617f5ff5476a45b6a53d85843508a62fd7282f",
+      "build_walls": "49af239f089a13db2a5bf1afcc7e9d998854a0623bfe514d3506ec50acfea0c3",
+      "detailed_furniture": "a52ad16337bd3325ecdfa06a11ac59ec216a12526443f10d884032ccbb7fb8bd",
+      "el_name": "88d954bbeada3ffc161496f259af9d42505592d5f47984c2501c36b187564be8",
+      "fail": "44433d3959b4a3b0d3f119b9cb67f4247359f499b8bf71d5c6a5dd66aee6b8f6",
+      "find_template": "9bfb7c0ef41ebb76d97d72315a84a99e3c60716ba20336bd8c175261acb15cd3",
+      "ft": "4374e6a053a6958ee1eb5c986b2498787736c1fb10ecc7068ad95359f06b608e",
+      "light_source_z": "fd672b9f60d09b5e25a858322caa76c0ed32b6750bdf30a7a9daed6ad139f78b",
+      "load_family": "475a8d080927ba5fa4a1459f28eb2663061a20e01e9b867e750f58be2cda95aa",
+      "mm": "17a4b033b1981b10407e64a4c34db4748178ad981f3d719219bf5b42025f513c",
+      "note": "833ff1acd5cfbe8666508b200c7370775c69a8e4c6d9c0a81da67496b3efc835",
+      "proxy_box": "36ea9a5a2ac02f045052918538c544b8709f39c758ff3b0bb3118667f90e40e0",
+      "rect_loop": "a1a85ae1a60ebb94acf86334cbd9d085f7894a7d4671d0c54f824e1da8bcfa87",
+      "set_photometrics": "c60696941dffd533c0a6faec48fd4caf4dca2cf57fe162e52d3d56a2d00a55f2",
+      "source_lever": "17334b2a89c8d7a33d61a591a43547b65ebfadee9306ac89be7ee3f984209276",
+      "stamp_mark": "193cfe2c8a6495e74d3c8b16e8051d7e878a8e78371a0a61e200646a6d4468e9",
+      "symbols": "15fd8ea92afae435b602ed40d2ab66d5bacaa04af4861b9afd3b424d9780b122",
+      "wall_point": "fb3e21c48d18258646bfc4eddf320199b006ac89d880e2a845fedecc073c9998"
+    },
+    "revit/extract_model.py": {
+      "_bbox_centre_and_size": "9bdc301b9b3784e962fae9d89febb59e0dd0e0654473ddc8ac7d4bb1f2b68d77",
+      "_collect": "cbf5aac8147be45edb873150c5f948eb1e617073ff1f1d9310ade0921b10427d",
+      "_distance_along": "6e9d51a96f92a443b3ae4db5db941a88a106437d90d87b3b7f96dc6f548c0ae5",
+      "_instance_rotation": "7a91e6ec55e7ba1955ebbb328b952cf8e661d009b624c2077bffce4c7d85816c",
+      "_model_path_argument": "4ebeb0c3990a912f4200af728e940273504d948491237bb61ecdbb7daeec1baa",
+      "_name": "e2f36e85d2c6419882a5bea7abd15085ae8dc8784ebe36a2dbbc6bab5868aabc",
+      "_param_str": "5d67377daa5d78b6821b9d9e2cf214516907714f39155fcb891645bb2cb0bdde",
+      "_photometrics": "a64f45a0dc59067848adab46725a7001064f313eda8a128da54de0525f87ad47",
+      "_sorted_by_uid": "6c3e927c467b1691f0dae5e164ed27de535fe43d43e65bc3c9c77b734e7b04e3",
+      "build": "cc34be8c75ce40a9e7c64c9420d5e0cf3318acaa51afe476d8fce2009b3fc50c",
+      "destination": "01e3a97cec904713a19efbe8f54c88f8e9b952a584ac8c602123d0e671dee607",
+      "extract_finishes": "12040c21530c2c08802c5876dd998a2396cbdb452a307fb450032f3b5f309d86",
+      "extract_instances": "2d04b64da90d49c566313e88f44627b47c48d9256115b37bd454121aace88d92",
+      "extract_levels": "f5ab5a98fbcf1d7c2b8dc33738e9887db11c07b6448aebd5bcebd1bcc39a6d23",
+      "extract_markup": "bb0f6d3d8c89d52b7b9ff052a634d1180045dea6fa4babe7a8621f20cc3aec4e",
+      "extract_meshes": "06c72ddbaa006e5b67e6167a6e673228ef2bf752e364ccfbb076828c39e029b5",
+      "extract_openings": "bcf45d5df10f725857daffbb1c78e400e41f1c47676174238851617bb2917c53",
+      "extract_rooms": "6554ea4053ad4146cd005477083b6aef4457332131c05e5ab711b58743ff20c2",
+      "extract_site": "1ecd6b0f883c791c09cb3f866d2de4a2ea5c4018393d6d981f99e42e14c3ece5",
+      "extract_wall_types": "f818f90d609ccab0110181d65098cf0a174af894e77356cf4345f2a743b22284",
+      "extract_walls": "91ec6d9f2bc5dc14f313009d060a42c425098af9a76e6ac63cd76f9b94e1962b",
+      "mm": "dbcd9d32daeed354e68bba95e4614e4d0f865e27a935c2f6f77d4f6364e2d339",
+      "pt_mm": "325473c1a500f2e3e22e2910dd32080ab0c7ccc0644208ef20fd7180e549b46e",
+      "resolve_doc": "fc3647d2f1542fa82cfb6e192c0e1cfda730735ad4c3923da5922dd211cae1b1",
+      "write_extract": "b225039863a5e6433add2ecd8095a0210ac619aea0ce3d34e0a7878fed0b3ef0"
+    },
+    "revit/export_views.py": {
+      "box": "88abd0ba16813e67029e9c927b8b657f4413f227f99db3da3cc820e9a7e2b5c9",
+      "ft": "7cbd87616c87b166b6dd08a6f97c88a47e5c593762112f7b89bf4abfe3bc5070"
+    },
+    "revit/build_villa_option.py": {
+      "Swallow": "63634d179a5be8cc5a3da7030d5c3f20e85f4256b33adba3bcc52a0e94bb25f5",
+      "build_furniture": "68f321ececd3f6ac0364320694b698f30b9d250c23ef19f56bfe5ac5ad29ef6c",
+      "build_option": "d95097d1ed46db12d7476bce0cb4c4c56f05f9328feadeefacbea9681f2c9076",
+      "build_round2": "bcd71a5301d680d577626291011ee433d83a948a747c2889cdeedaa414b831f5",
+      "build_round3": "12f0e5f3f80c02562fe0846d689da9c697f3d4e70c6fc21072acc3a50ee54083",
+      "clear_interior": "d2ce29d67320a64392703fabbcd19a3114c1b188f7b2ad028d075807aa174a0a",
+      "ft": "e466d3b2c1fbe85a747e0431f0a74df0c149e9ca157bac39e24f65a2ee6a2bff",
+      "host_at": "2992c9300ece8978a7f61dd47212090075aa91514c551bb7db6e189322313eb7",
+      "is_env": "8bb168568e4bd3ee5c8f82e7517ec947e095089e0813f65022066a6e272acd7b",
+      "measured_comments": "bdc528c01ff4836920b857ca1ef89b4c1088d6c0d48ef5c07c4d51e46f4abfed",
+      "measured_mark": "c3cad4b35b529ef0842564e909cf5f0bcdf7341583217d9aa47a0bb466e75e5e",
+      "nearest_symbol": "5c8428ff21f87c085d33b65bc1dc60ce93906c4c43476e6cef3804265d094ee0",
+      "note": "bf5839ffd56e6eb212e9e1ae8e67d0be1896f68648befd817e284fdb34db457c",
+      "sized_door": "dfee0f98d64e1fc6e959036ea485205ee4e21fe584e4dd109756c5f8d99b0f5b",
+      "solid_box": "eb55a267ad86d3a95058878f7806e1234740eae5b66fcd80f459ab0c0e7dbaa0",
+      "solid_prism_xz": "d5652ef9620ce2898318660a20d4af41d88d7a01783d22c4e3a86d00e739d440",
+      "stamp": "6b31b3bb8894354c5f9425deafacfeb1e8cbe8ec70cbaa5131ad87d67e7ab16a",
+      "sym_dims": "2d69335cfc3cd059e3cf70ac888d2e1a596a70f865fb6fe55dc1fc9a117cfdb4",
+      "symbols": "2b95c8ecb422f69c7e9fc85f1cca89dfb447b945dfb364ed67ef2cbe8544d06b",
+      "tx": "70e6072a70a84ba9149b17f3dfab73239b816e40163447596ffad7d3eb7ad2ef",
+      "wall_types": "760f71e2fcbd59a61e280077833969408cec708e948aaf12a21834013b87fe2a",
+      "world_box_mm": "7286cf0a915e428152d4bcb472836e8076c777f2edc9574d2df35b10a35c1695"
+    },
+    "revit/build_villa_env.py": {
+      "Swallow": "3d94e92ad8c686c555804ac6e9156c15204c299b4b81bc90193ad9c4f1219865",
+      "_bb": "94d6896e1306010cf2a7d9dd6713f0c01276dd9d3158991055b7e328229ec30d",
+      "_comment": "6045a5bcd9fa5f227cd86dd40fe551ece6beeb500ee5f26fd41f992a318d08ee",
+      "_eid": "a2ff04dc78afe02cabf20e810dd6469238db95bc17f4fce4bb5761a0ebf9eb8f",
+      "_mark": "a4fdbcb53884a710d1747f97f16aaa9b6ea64899fba1599b87935c38bc4f7b30",
+      "columns": "5742d3eca5dad73fd768b77350c4d26c28e5fe23b4a6ffbf1e14689af5d7cf65",
+      "direct_shape": "b97aa12ee8206d3a09c2bf6a9a7c6342b4522e985b45de5ba1ff5229921a03e5",
+      "export_images": "44b45b1036b10f4a1ebaf91c803de0e23c879a5cc68f60d7ebca64b3a585fb5a",
+      "floor_type": "878a31401ac7f244f926fe63debcdf6f946cb5ffb78173527cdf8ff63ee90263",
+      "ft": "71380096e063b7c7010c55c2e532b3e1fd2ae5d3dbd92418b35ef0fa80388c1b",
+      "levels": "5ed3276fa7d43c35a45d8d7cd0d46443033d44d9285396192b3d2aafb2f1c668",
+      "loop_of": "0542a0f7907f84dd1a715dc072e959a9b125e3ec38e3c7587b8674f59dd0630f",
+      "make_views": "c6942e76ee7af930c9d1d7c9e7af14d32d786cea37242df8e2e7b05c71ee72fe",
+      "note": "32af4fa6ad8025d0aeab1941e67bf38037e61f6db9fb44d6e1bb1ce4b32e47f6",
+      "readback": "a623c42a524e91285e4aeee844060d5f7d82186e7555c735e855935c81fd5321",
+      "site": "0c5bb639a45f2693cf32adabd4e872602d23b81224ccf1367cec63d034ea1295",
+      "street_azimuth": "b2f8d9f4336c6830e3fad757b8afe828c590fd9aebfbdfac5542833226d8fb47",
+      "tx": "21d1c734354b599a87eb1e28eacd1debcdc8cb198466b039f91a78592f3b5f8e"
+    },
+    "revit/build_villa_stairs.py": {
+      "_comment": "d65e9dda1a9d724a89125f32f449b0505c678199dc3db8737d0a14edf9321805",
+      "ft": "71380096e063b7c7010c55c2e532b3e1fd2ae5d3dbd92418b35ef0fa80388c1b",
+      "shape": "8b30df2dc109bfe042be317f38e6c96ec677fc97326e1c84bea373b7285e2856",
+      "solid": "d50ae133eeb17a3d0c3f459d135662ee86dc3769bceed3ec49a7352238c54a7b"
+    }
+  }
+}

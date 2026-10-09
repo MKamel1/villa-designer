@@ -26,6 +26,8 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from archpipe.stage_result import write_stage_result, enforce_clean_verdict
+from archpipe.safe_io import save_json
 from archpipe import render_qa
 from archpipe.safe_io import save_bytes
 from archpipe.solar import sun_position
@@ -182,6 +184,8 @@ def main():
     library = f"{root}/assets/library"
     script = f"{release}/src/archpipe/blender/build_scene.py"
 
+    renderer_version = _ssh(a.host, shlex.quote(blender) + " --version").stdout.decode(errors="replace").splitlines()[0]
+    artifacts = []
     qa_failed = []
     lock = None
     for view in views:
@@ -273,10 +277,35 @@ def main():
                 print(f"    exposure locked for the set: {lock['ev']:.2f} EV, look '{lock['look']}'")
         if not report["passed"]:
             qa_failed.append(view)
+    for view in views:
+        stamp = f"{a.time}-{view}" + (f"-{a.tag}" if a.tag else "")
+        artifacts += [ROOT / f"out/photoreal/bedroom-{stamp}{ext}"
+                      for ext in (".png", ".log", ".qa.json", ".caption.json")]
+    inputs = [a.input, ROOT / 'spec/villa-site.yaml']
+    ies_references = []
+    # Bind proof to the bytes used by this deployed render, not a guessed local library.
+    for name in sorted({light['ies_file'] for light in payload.get('lighting', [])}):
+        remote_ies = f'{release}/assets/ies/{name}'
+        fetched = _ssh(a.host, 'cat ' + shlex.quote(remote_ies))
+        reference = {'remote_path': remote_ies, 'available': fetched.returncode == 0}
+        if fetched.returncode == 0:
+            local_ies = ROOT / 'out/photoreal/inputs' / digest(fetched.stdout) / name
+            local_ies.parent.mkdir(parents=True, exist_ok=True)
+            save(local_ies, fetched.stdout)
+            inputs.append(local_ies)
+        ies_references.append(reference)
+    record = write_stage_result('render-hyperreal',
+        record_path=ROOT / 'out/photoreal/render-hyperreal.stage-result.json',
+        inputs=inputs, outputs=artifacts, root=ROOT,
+        code_paths=[__file__] + sorted((ROOT / 'src/archpipe/blender').glob('*.py')) + [ROOT / 'src/archpipe/render_qa.py'],
+        exit_code=1 if qa_failed and not a.allow_qa_fail else 0,
+        metadata={'renderer_version': renderer_version, 'release': release,
+                  'parameters': {k: str(v) if isinstance(v, Path) else v for k, v in vars(a).items()},
+                  'qa_failed': qa_failed, 'qa_override': a.allow_qa_fail,
+                  'ies_references': ies_references})
     if qa_failed and not a.allow_qa_fail:
         print(f"QA failed for {qa_failed}; see out/photoreal/*.qa.json", file=sys.stderr)
-        return 1
-    return 0
+    return enforce_clean_verdict(record, message='Presentation render QA failed')
 
 
 if __name__ == "__main__":

@@ -941,10 +941,19 @@ def main():
         print("archpipe: errors %s" % report["errors"][:3])
 
 
-unattended.install(__revit__)                                      # noqa: F821
-try:
-    main()
-except Exception:
-    print("archpipe: BUILD FAILED\n%s" % traceback.format_exc()[-1500:])
-finally:
-    unattended.uninstall(__revit__)                                # noqa: F821
+if __name__ == '__main__':
+    from stage_command import run as run_stage
+    dest = os.environ.get('ARCHPIPE_BEDROOM_OUT') or os.path.join(
+        os.environ.get('USERPROFILE', '.'), 'archpipe_bedroom.rvt')
+    report_path = os.environ.get('ARCHPIPE_BUILD_REPORT') or (dest + '.build.json')
+    unattended.install(__revit__)
+    try:
+        raise SystemExit(run_stage('build-bedroom', main, dest + '.stage-result.json',
+            [os.environ.get('ARCHPIPE_SPEC'), find_template(),
+             os.environ.get('ARCHPIPE_FAMILY_DIR'), os.environ.get('ARCHPIPE_IES_DIR')],
+            lambda value: [dest, report_path],
+            lambda value: bool(report['errors']) or any(not item.get('placed')
+                for key in ('openings', 'furniture', 'lighting') for item in report[key]),
+            __revit__.Application))
+    finally:
+        unattended.uninstall(__revit__)

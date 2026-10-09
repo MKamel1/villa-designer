@@ -775,7 +775,14 @@ def main():
         out.append(build_option(app, os.environ["ARCHPIPE_MODEL"], spec, folder))
     _write(os.path.join(folder, "readback.json"), {"options": out, "log": LOG})
     print("archpipe: wrote readback")
+    return out
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    from stage_command import run as run_stage, images
+    folder = os.environ['ARCHPIPE_OPTIONS_OUT']
+    raise SystemExit(run_stage('build-villa-option', main,
+        os.path.join(folder, 'build-villa-option.stage-result.json'),
+        [os.environ['ARCHPIPE_OPTIONS_SPEC'], os.environ['ARCHPIPE_MODEL']],
+        lambda value: [os.path.join(folder, 'readback.json')] + [item['saved'] for item in (value or [])] + images(folder),
+        lambda value: any(item.get('failed') for item in (value or [])), __revit__.Application))

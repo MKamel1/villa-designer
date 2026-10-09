@@ -160,5 +160,11 @@ def _comment(el):
         return None
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    from stage_command import run as run_stage, report as read_report, images
+    dest = os.environ['ARCHPIPE_STAIRS_OUT']
+    readback_path = os.environ['ARCHPIPE_STAIRS_READBACK']
+    raise SystemExit(run_stage('build-villa-stairs', main, readback_path + '.stage-result.json',
+        [os.environ['ARCHPIPE_STAIRS_SPEC'], os.environ['ARCHPIPE_MODEL']],
+        lambda value: [dest, readback_path] + images(os.path.dirname(readback_path)),
+        lambda value: bool(read_report(readback_path).get('image_errors')), __revit__.Application))
