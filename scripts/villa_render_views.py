@@ -274,7 +274,6 @@ def camera_wall_sightline_clearance(view, walls, min_clearance_m=1.0):
 
 
 
-def main():
 def main(argv=None) -> int:
     global OUT
     import argparse
