@@ -2167,6 +2167,11 @@ def _build(lay=None, views=None, *, collect_part_failures=False):
     visibility_failures=[f for view in scene['views'] for f in subject_visibility_findings(view,scene)+subject_frame_findings(view,scene)]
     if visibility_failures:
         raise ValueError('garden subject visibility: '+str(visibility_failures))
+    from .render_views import scene_wall_hosts, wall_sightline_findings
+    walls = scene_wall_hosts(scene)
+    wall_failures = [f for view in scene['views'] for f in wall_sightline_findings(view, walls)]
+    if wall_failures:
+        raise ValueError('camera wall sightline: ' + '; '.join(wall_failures))
     final_sun_study=SunStudy(scene)
     scene["garden_sun_evidence"]["geometry_sha256"]=final_sun_study.geometry_sha256
     scene["garden_sun_evidence"]["plants"]=audit_plants(list({p["id"]:p for p in land_plan["plants"]+[m for m in land_meshes if m.get("part_kind")=="climber"]}.values()),final_sun_study)

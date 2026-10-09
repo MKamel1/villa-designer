@@ -20,6 +20,8 @@ from archpipe.concept import villa_furnish as F                      # noqa: E40
 from archpipe.concept import villa_r11 as R                          # noqa: E402
 from archpipe.concept import revit_spec as RS                        # noqa: E402
 from archpipe.concept import villa_landscape as LAND                  # noqa: E402
+from archpipe.concept.render_views import (                          # noqa: E402
+    camera_wall_sightline_clearance, scene_wall_hosts, wall_sightline_findings)
 
 OUT = ROOT / "out" / "villa" / "render-d1"
 
@@ -246,6 +248,8 @@ def main():
     rows = (n + cols - 1) // cols
     fig, axs = plt.subplots(rows, cols, figsize=(cols * 6, rows * 3.6))
     problems = []
+    walls = scene_wall_hosts(scene)
+    problems.extend(f for view in views for f in wall_sightline_findings(view, walls))
     from archpipe.concept.garden_render_review import subject_visibility_findings
     problems.extend(f for view in views for f in subject_visibility_findings(view, scene))
     for ax, v in zip(axs.flat, views):

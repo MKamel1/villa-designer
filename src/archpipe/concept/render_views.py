@@ -23,6 +23,91 @@ from . import villa_furnish as F
 STEP, YAW_STEP = 0.1, 5
 
 
+def camera_wall_sightline_clearance(view, walls, min_clearance_m=1.0):
+    """Return (wall identifier or rectangle, distance in metres) for near hits.
+
+    Accepts C8 topology Host records (finite finished faces) or rectangles.
+    C8 is the shared geometry-topology interface. Rectangles are ordered as minimum
+    x, minimum y, maximum x, maximum y in metres. Measure along the level
+    camera's central sightline, including a lens starting inside a wall.
+    A wall behind the lens or beside the sightline is not a forward hit.
+    """
+    position, target = view['camera']['position'], view['camera']['target']
+    direction = [target[i] - position[i] for i in range(2)]
+    length = math.hypot(*direction)
+    if length <= 1e-12:
+        raise ValueError('wall sightline requires a horizontal camera direction')
+    direction = [value / length for value in direction]
+    hits = []
+    for wall in walls:
+        if hasattr(wall, 'finished_faces'):
+            from .render_support import _triangles
+            # Prune from the existing host bounds before triangulating.
+            end = [position[0] + direction[0] * min_clearance_m,
+                   position[1] + direction[1] * min_clearance_m, position[2]]
+            if any(max(position[i], end[i]) < wall.bounds[i] or
+                   min(position[i], end[i]) > wall.bounds[i + 3] for i in range(3)):
+                continue
+            triangles, _ = _triangles([{'faces': wall.finished_faces}])
+            ray = np.array([*direction, 0.0])
+            edge1, edge2 = triangles[:, 1] - triangles[:, 0], triangles[:, 2] - triangles[:, 0]
+            cross_ray = np.cross(ray, edge2)
+            determinant = np.einsum('ij,ij->i', edge1, cross_ray)
+            nonparallel = np.abs(determinant) > 1e-12
+            inverse = np.zeros_like(determinant)
+            inverse[nonparallel] = 1.0 / determinant[nonparallel]
+            delta = np.array(position) - triangles[:, 0]
+            across = np.cross(delta, edge1)
+            along1 = np.einsum('ij,ij->i', delta, cross_ray) * inverse
+            along2 = across @ ray * inverse
+            distance = np.einsum('ij,ij->i', edge2, across) * inverse
+            valid = (nonparallel & (along1 >= -1e-9) & (along2 >= -1e-9) &
+                     (along1 + along2 <= 1 + 1e-9) & (distance >= 0) &
+                     (distance < min_clearance_m))
+            # A doorway lens can sit exactly on an outward face and look
+            # away from it. That is not a wall ahead; looking into the same
+            # face, or starting inside and meeting an exit ahead, still fails.
+            outward = np.cross(edge1, edge2) @ ray
+            valid &= ~((distance <= 1e-9) & (outward > 0))
+            if valid.any():
+                hits.append((wall.source_id, float(distance[valid].min())))
+            continue
+        near, far = 0.0, math.inf
+        for axis in range(2):
+            if abs(direction[axis]) <= 1e-12:
+                if not wall[axis] <= position[axis] <= wall[axis + 2]:
+                    far = -1.0
+                    break
+            else:
+                bounds = [(wall[index] - position[axis]) / direction[axis]
+                          for index in (axis, axis + 2)]
+                near = max(near, min(bounds))
+                far = min(far, max(bounds))
+        if near <= far and near < min_clearance_m:
+            hits.append((wall, near))
+    return sorted(hits, key=lambda hit: hit[1])
+
+
+def scene_wall_hosts(scene):
+    """Reuse actual opaque architectural hosts, preserving window openings."""
+    from ..geometry_topology import GeometryTopology
+    meshes = [mesh for mesh in scene['meshes']
+              if mesh['group'] in ('shell', 'context') and not mesh.get('diagnostic')
+              and mesh.get('visibility', {}).get('camera', True)
+              and scene['materials'][mesh['material']]['kind'] not in ('glass', 'translucent')
+              and mesh.get('part_kind') not in ('door-leaf', 'door-trim', 'window-frame')]
+    # Snapshot just the existing architectural inputs, not every plant and
+    # imported asset in the scene. No replacement wall geometry is authored.
+    return [host for host in GeometryTopology.from_inputs(scene={'meshes': meshes}).hosts
+            if host.kind in ('wall', 'slab')]
+
+
+def wall_sightline_findings(view, walls):
+    """Production diagnostic for the one-metre forward-wall screen."""
+    return [f"{view['id']}: camera faces wall {wall} at {distance:.6f} m (need >= 1.0 m)"
+            for wall, distance in camera_wall_sightline_clearance(view, walls)]
+
+
 def _near(q, x, y, c):
     return q[0] - c < x < q[2] + c and q[1] - c < y < q[3] + c
 

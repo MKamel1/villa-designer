@@ -304,6 +304,8 @@ def validate_scene(scene: dict) -> list[str]:
         if "decimate_ratio" in model:
             need(_number(model["decimate_ratio"]) and 0 < model["decimate_ratio"] <= 1,
                  p+".decimate_ratio", "fraction from 0 (exclusive) to 1 required")
+    need(scene.get('exposure_mode') == 'set-metered', 'exposure_mode',
+         'set-metered required: meter the complete exposure-state cohort and lock it across views')
     exposure = scene.get("exposure")
     if not isinstance(exposure, dict):
         errors.append("exposure: object required"); exposure = {}
@@ -353,6 +355,9 @@ def validate_scene(scene: dict) -> list[str]:
         need(isinstance(view.get("title"), str) and bool(view["title"]), p+".title", "nonempty title required")
         need(_timestamp(view.get("when")), p+".when", "timezone-aware ISO timestamp required")
         need(view.get("exposure") in exposure, p+".exposure", "unknown exposure preset")
+        if 'exposure_mode' in view:
+            need(view['exposure_mode'] == 'set-metered', p+'.exposure_mode',
+                 'per-view metering overrides are forbidden; set-metered required')
         camera = view.get("camera")
         if not isinstance(camera, dict):
             errors.append(p+".camera: object required")
@@ -454,7 +459,10 @@ def validate_scene(scene: dict) -> list[str]:
         errors.extend("%s: %s" % f for f in swing_findings(scene))
         from .concept.garden_g4d import scene_findings as g4d_findings
         errors.extend(g4d_findings(scene))
+        from .concept.render_views import scene_wall_hosts, wall_sightline_findings
+        walls = scene_wall_hosts(scene)
         for view in scene.get("views", []):
+            errors.extend(wall_sightline_findings(view, walls))
             errors.extend(f"{f['view']}: {f['mesh']} {f['reason']}" for f in opening_frame_findings(view,scene))
             errors.extend(garden_camera_findings(view, scene))
             errors.extend(subject_visibility_findings(view, scene))

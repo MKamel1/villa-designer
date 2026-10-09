@@ -155,10 +155,13 @@ Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.m
      sample count, minimum visible rays and reason. Other subjects retain
      seven of thirteen rays; copied or invalid allowances fail closed.
      Never lower global visibility or QA limits to accommodate a local decision.
-   - Exposure is metered per view and LOCKED per state across the whole
-     set: `day`, `evening`, `exterior-dusk`, `exterior-day`. Rendering a
-     subset re-meters that subset, so a state's lock is only comparable when
-     the whole set (or a state rendered alone) is rendered together.
+   - The contract requires `exposure_mode: set-metered`; independent
+     per-view metering and missing modes refuse before rendering. Exposure
+     is LOCKED per state across the whole set: `day`, `evening`,
+     `exterior-dusk`, `exterior-day`. A subset request still meters every
+     scene view in each requested exposure state, preserving its whole-set
+     lock (`villa_scene.exposure_locks`). Never trim the authored scene's
+     view cohort to meter an individual render request.
    - Rooms without daylight (a windowless corridor) use the lamp white
      balance; bathrooms and basement rooms by day have their lights on,
      stated in the caption. Never correct a physical cast in camera.
@@ -184,7 +187,13 @@ Phase-1 coverage and explicit gaps: [C8 report](../../../docs/c8-phase1-report.m
      door-band rules, each proven on the draft that broke it.
    - `scripts/villa_render_views.py`: whole subject in frame (built WC vertices
      horizontally and vertically, including lens shift), clearances,
-     doorway doors opened.
+     doorway doors opened. Plan review, scene build and exported-scene
+     contract also reject an opaque architectural face less than 1.0 m
+     along the camera's forward sightline, using C8 finite host faces
+     (C8 is the shared geometry-topology interface). Window holes and glass
+     remain open; a lens exactly on an outward face looking away is quiet,
+     while the same lens looking into it refuses. Report measured failing
+     views before camera edits; do not lower the shared clearance to pass.
    - `tests/test_villa_lighting.py`, and the render report must carry
      `qa_scene` so every render_qa check runs (none silently skipped).
 3. **Draft**: `scripts/villa_render.py --views review --samples 256
