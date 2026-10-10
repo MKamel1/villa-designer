@@ -26,10 +26,9 @@ class ScaledBeds(unittest.TestCase):
             scene=dict(models=[],meshes=[dict(id=m['replaces']+'fallback',faces=[
                 [[0,0,m['position'][2]],[1,0,m['position'][2]],[0,1,m['position'][2]]]])],cloth=cloth)
             with patch('archpipe.beds.bed_room_review',return_value=dict(ok=False,findings=['unchanged room shortfall'])) as gate:
-                message='every design mattress-top height' if m['required_berths']==2 else 'fails fixed room'
+                message='every design mattress-top height' if m['required_berths']==2 else 'current slim-frame contract'
                 with self.assertRaisesRegex(ValueError,message):integrate_bed_models(scene,[m],{}, {},[item])
-                if m['required_berths']==2:gate.assert_not_called()
-                else:gate.assert_called_once()
+                gate.assert_not_called()
 
     def test_heading_envelope_removes_real_suspended_pins_and_covers_subdivision_ring(self):
         import gzip

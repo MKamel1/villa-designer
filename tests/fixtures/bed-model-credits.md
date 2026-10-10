@@ -39,3 +39,11 @@ Round-5 regression data:
 
 - `bed-round5-heading-support.json.gz`: actual source triangles near the measured duvet headings from the two same CC-BY-4.0 models above, preserving author credits and source hashes in each record.
 - `bed-round5-heading-refusal.json`: evaluated diagnostic receipts from those models, recording the prior suspended heading and failed point-anchor correction.
+
+Round-6 extremal-faces and contract fixtures retain unchanged actual source triangle coordinates from the round-5 Cyberfox and sparshgupta meshes. They are regression excerpts, not complete activation receipts; the same CC-BY-4.0 author credits and source URLs apply.
+
+`bed-round6-boundary-faces.json` contains one actual triangle from each of
+those same models, transformed with the round-6 frame/mattress factors and
+fixed placement. It freezes the parents frame-head and kids A source-bedding
+room-boundary failures. The same CC-BY-4.0 credits and URLs above apply;
+transforming these excerpts does not change or repair the source assets.

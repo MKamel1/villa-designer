@@ -294,6 +294,25 @@ def main() -> int:
     scaled=json.loads((ROOT/'tests/fixtures/bed-round5-measurements.json').read_text())
     expect('round-5 real measured parents/bunk plan fits pass independent-factor guard',
            len(scaled)==2 and all(scaled_model_fit(m)['ok'] for m in scaled))
+    from archpipe.beds import slim_frame_fit, slim_frame_findings, model_review_meshes
+    slim_cases=json.loads((ROOT/'tests/fixtures/bed-round6-extremal-faces.json').read_text())
+    slim_parent,slim_bunk=json.loads((ROOT/'tests/fixtures/bed-round6-contracts.json').read_text())
+    expect('round-6 real broad frame fails 50 mm guard; slim frame stays quiet',
+           bool(slim_frame_findings(slim_parent,model_review_meshes([slim_cases[0]]))) and
+           not slim_frame_findings(slim_parent,model_review_meshes([slim_parent])))
+    expect('round-6 real ladder frame needs factor below client minimum and refuses',
+           not slim_frame_fit(slim_bunk)['ok'] and slim_frame_fit(slim_bunk)['width_factor']<.5)
+    from archpipe.beds import bed_room_boundary_findings
+    boundary_cases=json.loads((ROOT/'tests/fixtures/bed-round6-boundary-faces.json').read_text())
+    expect('real retained frame and source bedding outside room boundary refuse',all(
+        bed_room_boundary_findings(dict(models=[case['model']]),
+            dict(rooms={case['model']['room']:dict(rect=case['room_rect'],level='GF')}),[case['mesh']])
+        for case in boundary_cases))
+    expect('clean retained-part room boundary controls stay quiet',all(
+        not bed_room_boundary_findings(dict(models=[case['model']]),dict(rooms={case['model']['room']:
+            dict(rect=[case['room_rect'][0]-1,case['room_rect'][1]-1,
+                       case['room_rect'][2]+1,case['room_rect'][3]+1],level='GF')}),[case['mesh']])
+        for case in boundary_cases))
     worst=next(row for row in round4 if row['asset']=='sf_bed3_0e134823')
     mattress=worst['mattress_bounds']['lower']
     extent=[b-a for a,b in zip(mattress['min'],mattress['max'])]

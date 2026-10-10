@@ -57,6 +57,27 @@ Storage-front clearance is a planning screen, not proof of animated drawer
 or door travel; disclose the existing motion-geometry limitations. Import
 models before cloth; retain actual mattress cuts, all retained colliders,
 evaluated cloth-intersection refusal and physical procedural fallback.
+Round 6, client decision **2026-10-09**, keeps the layout and mattress fit
+but independently scales every non-mattress, non-bedding frame part in plan
+about the measured source mattress centre. `slim_frame_fit` derives and records
+converted source X/Y factors; `slim_frame_findings` independently measures
+actual transformed frame faces. Sides and foot may extend at most 50 mm beyond
+the mattress; the head may carry at most 100 mm of headboard depth. Refuse a
+frame factor below 0.5. The mattress's 15% ratio limit is not a frame-proportion
+rule; neutral image review must still refuse visible frame distortion. Bind
+the complete disjoint frame/mattress/bedding classification and frame factors
+to the review snapshot. Kids A vertical scale derives from the design upper
+mattress top; report lower top and inter-berth clearance, and require BOTH
+design heights before activation. Pure proposed-geometry review may measure
+an ineligible frame, but neither Blender import nor neutral import can admit
+it. Failed-room or failed-cloth previews are rejection diagnostics, never
+approved replacement previews. Retain the physical fallback when gates close.
+Check every retained bed part, including bedding, against the union of its
+declared indoor room cluster. Never skip boundary checking for joined rooms
+or use only the slim frame's planning envelope. `bed_room_boundary_findings`
+reports conservative plan-bound area outside that union against zero;
+corners alone cannot prove containment in a concave cluster. Disclose this
+as a bounds screen, not exact solid penetration.
 Imported headings pin only within actual mattress width, on the measured
 local support envelope over a grid-cell subdivision ring plus existing
 collision offsets. Inset covers start on that envelope; hanging cuts retain

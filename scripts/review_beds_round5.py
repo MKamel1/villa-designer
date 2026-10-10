@@ -11,7 +11,7 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
-from archpipe.beds import bed_room_review, scaled_model_fit, model_mattress_bounds
+from archpipe.beds import bed_room_review, scaled_model_fit, model_mattress_bounds, slim_frame_fit, slim_frame_findings, model_review_meshes
 from archpipe.concept import villa_r11 as R, villa_furnish as F, revit_spec as RS
 
 
@@ -34,6 +34,12 @@ def review(args):
                 shortfall_m=target-box['max'][2],basis='ASSUMED unchanged procedural mattress top in source scene'))
         result.update(asset=model['asset'],scaled_fit=fit,mattress_heights=heights,
                       activation_allowed=result['ok'] and all(abs(r['shortfall_m'])<=1e-5 for r in heights))
+        if model.get('frame_slimming'):
+            slim=slim_frame_fit(model)
+            failures=slim_frame_findings(model,model_review_meshes([model]))
+            result.update(slim_fit=slim,slim_frame_findings=failures,
+                activation_allowed=result['activation_allowed'] and slim['ok'] and not failures,
+                geometry_status='Measured proposed transform; a refused frame factor is diagnostic only, never importable')
         results[model['id']]=result
         print(model['label'],len(result['findings']),'room findings; activation',result['activation_allowed'])
     args.output.parent.mkdir(parents=True,exist_ok=True)

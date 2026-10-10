@@ -10,10 +10,19 @@ from __future__ import annotations
 
 import math
 
+from .furniture_fit import (MAX_PLAN_DISTORTION, fit_factors,
+                            measured_extents as _extents, unit_scale as _furniture_unit_scale,
+                            retained_model_rows, native_box as _native_box)
+
 PLAN_TOLERANCE_M = 0.020
 CLIENT_SOURCE = 'Client bed fit decision 2026-10-08'
 SCALED_CLIENT_SOURCE = 'Client bed scaling decision 2026-10-09'
-MAX_PLAN_DISTORTION = .15
+SLIM_CLIENT_SOURCE = 'Client slim-frame decision 2026-10-09'
+
+
+def unit_scale(unit_evidence=None):
+    """Preserve historical empty bed evidence as the declared glTF default."""
+    return _furniture_unit_scale(None if unit_evidence == {} else unit_evidence)
 
 
 def plan_scale_findings(sx, sy):
@@ -22,27 +31,20 @@ def plan_scale_findings(sx, sy):
     Distortion is larger factor divided by smaller factor, minus one.
     This symmetric definition refuses stretching regardless of axis order.
     """
-    if not all(isinstance(v, (int, float)) and not isinstance(v, bool)
-               and math.isfinite(v) and v > 0 for v in (sx, sy)):
-        raise ValueError('plan factors require finite positive numbers')
-    findings = []
-    if min(sx, sy) < .5 or max(sx, sy) > 2.:
-        findings.append(f'plan scale outside 0.5–2.0: sx={sx:.9f}, sy={sy:.9f}; {SCALED_CLIENT_SOURCE}')
-    distortion = max(sx, sy)/min(sx, sy)-1
-    if distortion > MAX_PLAN_DISTORTION + 1e-12:
-        findings.append(f'plan distortion {distortion*100:.6f}% exceeds 15%; {SCALED_CLIENT_SOURCE}')
-    return findings
+    from .furniture_fit import plan_scale_findings as shared_findings
+    return shared_findings(sx, sy, source=SCALED_CLIENT_SOURCE)
 
 
 def scaled_bed_fit(bounds, width_m, depth_m, front_axis, *, mattress_bounds,
                    mattress_top_m, height_source, headboard_bounds,
                    headboard_limit_m, headboard_limit_source, length_axis=None,
-                   unit_evidence=None, required_berths=1):
+                   unit_evidence=None, required_berths=1, height_berth='lower'):
     """Solve width sx, length sy and vertical sz independently.
 
     Native bounds use X/Z horizontal, Y up. Mattress-top and headboard
     heights are metres above the retained frame's lowest vertex, seated at
-    the design floor. Lower berth drives sz; report every resulting top.
+    the design floor. The named height_berth drives sz (lower by default);
+    report every resulting top.
     A caller requiring both bunk heights must separately reject a shortfall.
     No source geometry or layout is altered by this arithmetic.
     """
@@ -59,15 +61,17 @@ def scaled_bed_fit(bounds, width_m, depth_m, front_axis, *, mattress_bounds,
         raise ValueError('scaled bed requires sourced or explicitly ASSUMED height and bound')
     if set(mattress_bounds or {}) != ({'lower','upper'} if required_berths==2 else {'lower'}):
         return dict(ok=False,reason='actual mattress geometry required for every berth',source=SCALED_CLIENT_SOURCE)
-    factor = unit_scale(unit_evidence)
+    if height_berth not in mattress_bounds:
+        raise ValueError('height berth must identify an actual measured mattress')
+    common = fit_factors(bounds, width_m, depth_m, front_axis,
+        plan_bounds=mattress_bounds['lower'], length_axis=axis,
+        height_bounds=mattress_bounds[height_berth], height_m=mattress_top_m,
+        height_source=height_source, unit_evidence=None if unit_evidence == {} else unit_evidence,
+        source=SCALED_CLIENT_SOURCE)
+    factor = common['source_unit_factor']
     long, across = (0,2) if axis=='X' else (2,0)
-    dimensions = _extents(mattress_bounds['lower'])
-    sx, sy = width_m/(dimensions[across]*factor), depth_m/(dimensions[long]*factor)
-    reasons = plan_scale_findings(sx,sy)
-    rise = (mattress_bounds['lower']['max'][1]-bounds['min'][1])*factor
-    if rise <= 0:
-        raise ValueError('mattress top must be above retained frame bottom')
-    sz = mattress_top_m/rise
+    sx, sy, sz = common['sx'], common['sy'], common['sz']
+    reasons = [] if common['ok'] else [common['reason']]
     _extents(headboard_bounds)
     headboard_height = (headboard_bounds['max'][1]-bounds['min'][1])*factor*sz
     mattresses = {}
@@ -85,38 +89,12 @@ def scaled_bed_fit(bounds, width_m, depth_m, front_axis, *, mattress_bounds,
         reasons.append(f'headboard height {headboard_height:.6f} m outside mattress top {highest_top:.6f} to bound {headboard_limit_m:.6f} m; {headboard_limit_source}')
     # Converted Blender axes are X/Y/Z. Width may be Blender Y, hence the
     # explicit mapping rather than treating sx as world X at every yaw.
-    scale_xyz = [sy*factor,sx*factor,sz*factor] if axis=='X' else [sx*factor,sy*factor,sz*factor]
+    scale_xyz = common['scale_xyz']
     return dict(ok=not reasons,reason='; '.join(reasons) or 'scaled mattresses fit exactly',
         sx=sx,sy=sy,sz=sz,scale_xyz=scale_xyz,source_unit_factor=factor,
         plan_distortion=max(sx,sy)/min(sx,sy)-1,mattresses=mattresses,
         headboard_height_m=headboard_height,headboard_limit_m=headboard_limit_m,
         height_source=height_source,headboard_limit_source=headboard_limit_source,source=SCALED_CLIENT_SOURCE)
-
-
-def _extents(bounds):
-    try:
-        low, high = list(bounds['min']), list(bounds['max'])
-        if len(low) != 3 or len(high) != 3:
-            raise ValueError
-        dimensions = [float(b) - float(a) for a, b in zip(low, high)]
-        if not all(math.isfinite(v) for v in low + high + dimensions) or min(dimensions) <= 0:
-            raise ValueError
-        return dimensions
-    except (KeyError, TypeError, ValueError):
-        raise ValueError('bed intake requires finite, positive measured bounds') from None
-
-
-def unit_scale(unit_evidence=None):
-    """Only source-declared units convert; absent evidence means glTF metres.
-
-    A non-metre declaration needs a source stating the unit, not an inferred
-    factor from a target size. The factor is computed here, never supplied.
-    """
-    evidence = unit_evidence or {'unit': 'm', 'source': 'glTF 2.0 coordinate system and units'}
-    factors = {'m': 1., 'cm': .01, 'mm': .001, 'ft': .3048, 'in': .0254}
-    if evidence.get('unit') not in factors or not evidence.get('source'):
-        raise ValueError('bed unit conversion requires a source stating m, cm, mm, ft or in')
-    return factors[evidence['unit']]
 
 
 def real_size_findings(scale, unit_evidence=None):
@@ -217,32 +195,6 @@ def placed_bed_findings(native_bounds, world_bounds, footprint, reference_height
     return findings
 
 
-def retained_model_rows(model):
-    """Omit only explicitly reviewed, separately named accessory meshes."""
-    rows = model['review_geometry']['meshes']
-    names = [r['name'] for r in rows]
-    omitted = model.get('omitted_meshes', [])
-    review = model.get('contents_review') or {}
-    if len(names) != len(set(names)) or len(omitted) != len(set(omitted)) or not set(omitted) <= set(names):
-        raise ValueError('bed mesh names/omissions must be unique and measured')
-    if model.get('role') == 'bed':
-        if review.get('status') != 'bed-only' or not review.get('basis') or review.get('fused_extras'):
-            raise ValueError('bed-only contents review required; inseparable tables, benches and rugs refused')
-        if set(review.get('extras', [])) != set(omitted):
-            raise ValueError('every accessory must be a separable omitted mesh')
-    retained = [r for r in rows if r['name'] not in omitted]
-    if not retained:
-        raise ValueError('bed has no retained meshes')
-    return retained
-
-
-def _native_box(rows):
-    import numpy as np
-    points = np.asarray([p for row in rows for f in row['faces'] for p in f])[:,[0,2,1]].copy()
-    points[:,2] *= -1
-    return dict(min=points.min(0).tolist(),max=points.max(0).tolist())
-
-
 def scaled_model_fit(model, rows=None):
     """Recompute an explicit 2026-10-09 contract from actual retained faces."""
     rows = retained_model_rows(model) if rows is None else rows
@@ -259,8 +211,110 @@ def scaled_model_fit(model, rows=None):
         mattress_top_m=contract['mattress_top_m'],height_source=contract['height_source'],
         headboard_bounds=_native_box(heads),headboard_limit_m=contract['headboard_limit_m'],
         headboard_limit_source=contract['headboard_limit_source'],
-        unit_evidence=model.get('unit_evidence'),required_berths=model.get('required_berths',1))
+        unit_evidence=model.get('unit_evidence'),required_berths=model.get('required_berths',1),
+        height_berth=contract.get('height_berth','lower'))
     return result
+
+
+def slim_frame_fit(model, rows=None):
+    """Solve frame-only plan factors about the unscaled mattress centre.
+
+    Converted source X/Y are horizontal; Z is up. Frame means every retained
+    part except explicitly identified mattresses and bedding. Factors are
+    dimensionless after source units, at least 0.5, and never enlarge the
+    round-5 frame. No 15% frame-proportion limit is implied: that is a mattress
+    rule. Visual distortion still requires a neutral image review.
+    """
+    import numpy as np
+    rows = retained_model_rows(model) if rows is None else rows
+    contract = model['frame_slimming']
+    if contract.get('decision_date') != '2026-10-09':
+        raise ValueError('slim frame requires client decision 2026-10-09')
+    names = {r['name'] for r in rows}
+    mattresses = {n for b in model['mattress_bindings'].values() for n in b['parts']}
+    bedding = set(contract.get('bedding_parts',[]))
+    frames = set(contract.get('frame_parts',[]))
+    if not frames or (frames & (mattresses | bedding)) or mattresses & bedding or frames | mattresses | bedding != names:
+        raise ValueError('slim frame requires complete disjoint frame/mattress/bedding identification')
+    def points(parts):
+        return np.asarray([p for r in rows if r['name'] in parts for f in r['faces'] for p in f])
+    mattress = points(model['mattress_bindings']['lower']['parts'])
+    centre = (mattress.min(0)+mattress.max(0))/2
+    frame = points(frames)
+    low, high = frame.min(0), frame.max(0)
+    fit = scaled_model_fit(model,rows)
+    unit = fit['source_unit_factor']
+    long = 0 if model.get('length_axis',model['front_axis'][-1])=='X' else 1
+    across = 1-long
+    # Native +Z is converted -Y; +X remains +X. Front points head to foot.
+    foot_sign = (1 if model['front_axis'][0]=='+' else -1)*(1 if long==0 else -1)
+    half = [0.,0.]
+    half[across],half[long] = (v/2 for v in model['planned_mattress_m'])
+    limits = [[half[i]+.05,half[i]+.05] for i in (0,1)]
+    limits[long][0 if foot_sign>0 else 1] = half[long]+.1
+    factors = []
+    for i in (0,1):
+        candidates = [fit['scale_xyz'][i]/unit]
+        for distance,limit in zip((centre[i]-low[i],high[i]-centre[i]),limits[i]):
+            if distance>0:candidates.append(limit/(distance*unit))
+        factors.append(min(candidates))
+    supplied = contract.get('scale_xy')
+    reasons = []
+    if supplied is not None and (len(supplied)!=2 or any(
+            isinstance(v,bool) or not isinstance(v,(int,float)) or not math.isfinite(v)
+            or abs(v-w)>1e-12 for v,w in zip(supplied,factors))):
+        reasons.append('slim frame factors disagree with measured edge contract')
+    for i,value in enumerate(factors):
+        if value < .5-1e-12:
+            reasons.append(f'frame axis {i} factor {value:.9f} below 0.5; further compression risks visible distortion of frame members and ladder')
+    edges = []
+    for i in (0,1):
+        for side,distance in [('minimum',centre[i]-low[i]),('maximum',high[i]-centre[i])]:
+            head = i==long and ((side=='minimum')==(foot_sign>0))
+            edges.append(dict(axis=i,side=side,edge='head' if head else 'foot' if i==long else 'side',
+                achieved_m=distance*unit*factors[i]-half[i],required_m=.1 if head else .05))
+    return dict(ok=not reasons,reason='; '.join(reasons) or 'slim frame edges fit',
+        scale_xy=factors,width_factor=factors[across],length_factor=factors[long],
+        centre_source_m=centre.tolist(),edges=edges,source=SLIM_CLIENT_SOURCE,
+        visual_review='Neutral preview must be reviewed for visible frame distortion before activation')
+
+
+def slim_frame_findings(model, world_meshes):
+    """Measure transformed FRAME faces, independently of solver predictions."""
+    import numpy as np
+    contract = model['frame_slimming']
+    fit = slim_frame_fit(model)
+    findings = [] if fit['ok'] else [fit['reason']]
+    faces = [f for r in world_meshes if r['id'].split('::')[-1] in contract['frame_parts'] for f in r['faces']]
+    points = np.asarray(faces).reshape(-1,3)
+    yaw = math.radians(model['rotation_deg'][2]);c,s=math.cos(yaw),math.sin(yaw)
+    local = (points[:,:2]-np.asarray(model['position'][:2])) @ np.array([[c,-s],[s,c]])
+    half = [v/2 for v in model['planned_mattress_m']]
+    long = 0 if model.get('length_axis',model['front_axis'][-1])=='X' else 1
+    half = half if long==1 else half[::-1]
+    for edge in fit['edges']:
+        i=edge['axis'];value=(-local[:,i].min() if edge['side']=='minimum' else local[:,i].max())-half[i]
+        if value > edge['required_m']+1e-6:
+            findings.append(f"slim-frame {edge['edge']} axis {i}: {value*1000:.3f} mm beyond mattress edge, required at most {edge['required_m']*1000:.0f} mm; {SLIM_CLIENT_SOURCE}")
+    return findings
+
+
+def _slim_rows(model, rows):
+    """Build proposed frame geometry; intake separately refuses ineligible fits.
+
+    Pure review can measure a refused proposal. Blender import and activation
+    always call require_bed_geometry, including neutral diagnostics.
+    """
+    import numpy as np
+    fit = slim_frame_fit(model,rows)
+    if 'disagree' in fit['reason']:
+        raise ValueError(fit['reason'])
+    mattress_scale = scaled_model_fit(model,rows)['scale_xyz']
+    unit = unit_scale(model.get('unit_evidence'))
+    centre = np.asarray(fit['centre_source_m'])
+    relative = np.array([fit['scale_xy'][i]*unit/mattress_scale[i] for i in (0,1)]+[1.])
+    return [dict(r,faces=[((np.asarray(f)-centre)*relative+centre).tolist() for f in r['faces']])
+            if r['name'] in model['frame_slimming']['frame_parts'] else r for r in rows]
 
 
 def review_selection(model):
@@ -276,6 +330,8 @@ def review_selection(model):
                          position=model['position'],rotation_deg=model['rotation_deg'],
                          geometry_sha256=hashlib.sha256(json.dumps(model['review_geometry'],
                              sort_keys=True,separators=(',',':')).encode()).hexdigest())
+        if model.get('frame_slimming'):
+            selection['frame_slimming']=model['frame_slimming']
     from copy import deepcopy
     return deepcopy(selection)
 
@@ -310,6 +366,8 @@ def model_transform(model):
     yaw = math.radians(model['rotation_deg'][2]); c,s = math.cos(yaw), math.sin(yaw)
     matrix = np.array([[c,-s,0],[s,c,0],[0,0,1]]) @ np.diag(
         model['scale_xyz'] if model.get('role')=='bed' and model.get('scaling') else [scale]*3)
+    if model.get('frame_slimming'):
+        rows = _slim_rows(model,rows)
     points = np.asarray([p for r in rows for f in r['faces'] for p in f],float)
     if points.ndim != 2 or points.shape[1] != 3 or not np.isfinite(points).all():
         raise ValueError('invalid actual model vertices')
@@ -325,8 +383,8 @@ def model_transform(model):
             names = binding.get('parts') or []
             if not names or not set(names) <= {r['name'] for r in rows} or type(binding.get('head_at_max')) is not bool:
                 raise ValueError('measured retained mattress parts and head direction required')
-            mattress = np.asarray([p for r in rows if r['name'] in names for f in r['faces'] for p in f])@matrix.T
-            centres.append((mattress.min(0)+mattress.max(0))/2)
+            mattress = np.asarray([p for r in rows if r['name'] in names for f in r['faces'] for p in f])
+            centres.append(((mattress.min(0)+mattress.max(0))/2)@matrix.T)
         centre = centres[0]
         if any(np.max(np.abs(p[:2]-centre[:2]))>1e-5 for p in centres[1:]):
             raise ValueError('bunk mattress centres disagree; fixed layout cannot align both')
@@ -352,7 +410,7 @@ def model_mattress_bounds(model, *, world=False):
 def model_native_bounds(model):
     """Bounds of retained actual frame faces in native glTF axes."""
     import numpy as np
-    rows, _, _ = model_transform(model)
+    rows = retained_model_rows(model)
     points = np.asarray([p for row in rows for face in row['faces'] for p in face])[:,[0,2,1]].copy()
     points[:,2] *= -1
     return dict(min=points.min(0).tolist(),max=points.max(0).tolist())
@@ -424,6 +482,12 @@ def bed_frame_items(scene, furniture):
             continue
         mark = model['replaces'].removeprefix('furn-').removesuffix('-')
         rows,matrix,offset = model_transform(model)
+        if model.get('frame_slimming'):
+            # Planning furniture uses rigid frame plus mattress, while every
+            # source blanket/pillow remains a physical C8 obstacle below.
+            parts=set(model['frame_slimming']['frame_parts']) | {
+                n for binding in model['mattress_bindings'].values() for n in binding['parts']}
+            rows=[r for r in rows if r['name'] in parts]
         points = np.asarray([p for r in rows for f in r['faces'] for p in f])@matrix.T+offset
         replacements[mark] = (points.min(0),points.max(0))
     result = []
@@ -481,6 +545,8 @@ def integrate_bed_models(scene, models, layout, specification, furniture):
             design=next((c for c in scene.get('cloth',[]) if c['id']==cloth_id),None)
             if design is None or abs(actual[berth]['max'][2]-design['mattress_top'])>1e-5:
                 raise ValueError('scaled bed must retain every design mattress-top height: '+cloth_id)
+        if not model.get('frame_slimming'):
+            raise ValueError('bed activation requires current slim-frame contract dated 2026-10-09')
     prefixes={m['replaces'] for m in models}
     result=dict(scene,models=[m for m in scene.get('models',[]) if m.get('replaces') not in prefixes]+list(models))
     review=bed_room_review(result,layout,specification,furniture)
@@ -584,6 +650,12 @@ def require_bed_geometry(spec, library_root=None, *, neutral_diagnostic=False):
         unit_evidence=spec.get('unit_evidence'), required_berths=spec.get('required_berths',1)))
     if not fit['ok']:
         raise ValueError(spec['id']+': '+fit['reason'])
+    if spec.get('frame_slimming'):
+        slim = slim_frame_fit(spec)
+        if not slim['ok']:
+            raise ValueError(spec['id']+': '+slim['reason'])
+        failures = slim_frame_findings(spec,model_review_meshes([spec]))
+        if failures:raise ValueError('; '.join(failures))
     # Omissions and mattress selection change what was reviewed even with identical files.
     selection = review_selection(spec)
     if review.get('selection') != selection:
@@ -708,6 +780,43 @@ def cloth_support_envelope(points, collider_faces, cell_size_m, *, ceiling_m=Non
     return result
 
 
+def bed_room_boundary_findings(scene, layout, world_meshes=None):
+    """Check every retained bed part against its complete room-cluster union.
+
+    Report conservative plan-bound area outside the union in square metres,
+    required zero. This includes bedding and concave/joined room clusters;
+    corner distance is diagnostic, not an exact solid-penetration claim.
+    """
+    import numpy as np
+    from shapely.geometry import box, Point
+    from shapely.ops import unary_union
+    from .geometry_topology import Finding
+    from .concept.villa_furnish import _cluster
+    models=[m for m in scene.get('models',[]) if m.get('role')=='bed'
+            and m.get('status')!='procedural-bed-fallback']
+    if world_meshes is None:
+        world_meshes=model_review_meshes(models)
+    findings=[]
+    for model in models:
+        rooms=unary_union([box(*layout['rooms'][name]['rect'])
+                          for name in _cluster(layout,model['room'])])
+        parts=[r for r in world_meshes if r['id'].startswith(model['id']+'::')]
+        if not parts:
+            raise ValueError(model['id']+': room boundary requires actual retained bed parts')
+        for part in parts:
+            points=np.asarray([p for face in part['faces'] for p in face],float)
+            low,high=points.min(0),points.max(0)
+            rectangle=box(low[0],low[1],high[0],high[1])
+            outside=rectangle.difference(rooms).area
+            if outside>1e-10:
+                distance=max(Point(x,y).distance(rooms)
+                             for x in (low[0],high[0]) for y in (low[1],high[1]))
+                findings.append(Finding('bed-part-room-boundary',part['id'],model['room'],outside,0.,
+                    'Actual declared room-cluster union; retained-part conservative plan bounds; physical exclusion',
+                    unit='m2',detail=f'Maximum outside bounds-corner distance {distance:.9f} m; not exact solid penetration'))
+    return findings
+
+
 def bed_room_review(scene, layout, specification, furniture):
     """C8 real-frame report, preserving every authored item and room.
 
@@ -727,7 +836,7 @@ def bed_room_review(scene, layout, specification, furniture):
         specification=specification,furniture=furniture)
     baseline = GeometryTopology.from_inputs(scene=dict(scene,models=[m for m in scene.get('models',[]) if m.get('role')!='bed']),
         layout=layout,specification=specification,furniture=furniture)
-    findings = []
+    findings = bed_room_boundary_findings(scene,layout,topology.scene['meshes'])
     bed_marks={m['replaces'].removeprefix('furn-').removesuffix('-') for m in scene.get('models',[])
                if m.get('role')=='bed' and m.get('status')!='procedural-bed-fallback'}
     for query in (topology.unsupported_floating,
@@ -782,13 +891,6 @@ def bed_room_review(scene, layout, specification, furniture):
             either = set(kind.clearance_any[0])
             sides += [(side,kind.clearance_any[1]/1000) for side in either]
         rooms = [layout['rooms'][r]['rect'] for r in furnishing._cluster(layout,item['room'])]
-        if item['id'] in active_marks and len(rooms)==1:
-            frame = furnishing.footprint(item); room = rooms[0]
-            for side,achieved in [('minimum X',frame[0]-room[0]),('minimum Y',frame[1]-room[1]),
-                                  ('maximum X',room[2]-frame[2]),('maximum Y',room[3]-frame[3])]:
-                if achieved < -1e-6:
-                    findings.append(Finding('bed-frame-room-boundary',item['id'],side,achieved,0.,
-                        'Actual room boundary from existing layout; physical exclusion, no layout change'))
         walls = furnishing._walls(specification,item['level'])+furnishing._columns()
         neighbours = [it for it in reviewed if it['id']!=item['id'] and it['level']==item['level']]
         side_rows = []
@@ -831,5 +933,6 @@ def bed_room_review(scene, layout, specification, furniture):
         scope='Real frame support, body/room/route/passage/door-swing and bed/storage access; fixed layout',
         limitations=['Door swing squares are the existing conservative envelopes, not measured animated leaf sweeps.',
             'Body overlap is a conservative measured-part bounding-box screen, not exact solid penetration.',
+            'Bed-part boundary intrusion is conservative plan-bound area outside the actual room-cluster union.',
             'Storage front access is checked; individual animated wardrobe doors/drawers need measured motion geometry.',
             'Floor contact is geometric support, not structural load capacity.'])

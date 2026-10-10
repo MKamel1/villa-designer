@@ -1,0 +1,719 @@
+{
+  "schema": "desks-candidates/1",
+  "date": "2026-10-09",
+  "stage": 1,
+  "option": "D1",
+  "definitions": "UID is the Sketchfab unique model identifier. CC0 is public domain; CC-BY is Creative Commons Attribution. C8 is geometry-topology room review. Metres are used for every planned dimension.",
+  "inventory": "docs/desks-inventory.json",
+  "client_source": "Client 2026-10-08/09 rules recorded in docs/beds-report.md and Stage 1 desks instruction",
+  "robots": {
+    "site_url": "https://sketchfab.com/robots.txt",
+    "checked": "2026-10-09",
+    "site_receipt": "out/desks/robots-sketchfab.txt",
+    "site_policy": "User-agent * disallows /admin*, /i/* and /models/*/ar-redirect. Public /3d-models pages are not excluded.",
+    "api_url": "https://api.sketchfab.com/robots.txt",
+    "api_receipt": "out/desks/robots-api.txt",
+    "api_status_receipt": "out/desks/robots-api-status.txt",
+    "api_limitation": "API robots returned HTTP 202 with an empty body after redirect-following; no readable API policy was recovered. Public metadata endpoints returned listing data. No login, credentials, anti-bot workaround, signed download URL or model download used. Recheck API robots before any later automated batch; public canonical listing URLs are supplied."
+  },
+  "search": {
+    "method": "Public unauthenticated Sketchfab metadata plus web search and inspected listing thumbnails; no downloadable model fetched.",
+    "queries": [
+      "walnut desk",
+      "oak desk",
+      "leather office chair",
+      "scandinavian chair",
+      "dressing table",
+      "eames aluminum chair",
+      "wood swivel chair",
+      "desk WN",
+      "oak office chair",
+      "Leaves OAK",
+      "デスク OAK",
+      "scandinavian office chair"
+    ],
+    "model_downloads": 0,
+    "authentication_used": false,
+    "metadata_directory": "out/desks",
+    "limitation": "Search leads only; source dimensions, physical material, mesh separability, fit, ergonomic suitability and room acceptance remain unverified. No candidate is activated."
+  },
+  "types": {
+    "study_shared_desk": {
+      "item_ids": [
+        "study-desk"
+      ],
+      "style": "mid-century walnut",
+      "style_source": "Client Stage 1 instruction 2026-10-09; villa_render.part_material study-game walnut",
+      "requirements": [
+        {
+          "id": "study-desk",
+          "footprint_m": [
+            1.8,
+            0.7
+          ],
+          "heights_m": {
+            "desktop": 0.75
+          },
+          "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)"
+        }
+      ],
+      "candidates": [
+        {
+          "uid": "1710e30f8c494b2787d04473ef7f4ee2",
+          "url": "https://sketchfab.com/3d-models/leaves-110x45-b-wn-1710e30f8c494b2787d04473ef7f4ee2",
+          "name": "Leaves 110x45デスク B脚 WN",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/1710e30f8c494b2787d04473ef7f4ee2",
+          "metadata_receipt": "out/desks/1710e30f8c494b2787d04473ef7f4ee2-metadata.json",
+          "credit": "Leaves 110x45デスク B脚 WN by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/leaves-110x45-b-wn-1710e30f8c494b2787d04473ef7f4ee2, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 131860,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Slender brown walnut-appearance top and tapered timber legs suit mid-century study. Long, shallow form is a lead for the fixed 1.8 by 0.7 m shared desk; source extents and two usable knee positions must be measured.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "WN is the listing suffix; verify finish/material. Title size is not a measured fit. Desktop must reach authored 0.75 m with one vertical factor.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        }
+      ],
+      "search_gap": null
+    },
+    "study_adult_desk": {
+      "item_ids": [
+        "study-adult-desk"
+      ],
+      "style": "mid-century walnut",
+      "style_source": "Client Stage 1 instruction 2026-10-09; villa_render.part_material study-game walnut",
+      "requirements": [
+        {
+          "id": "study-adult-desk",
+          "footprint_m": [
+            1.4,
+            0.7
+          ],
+          "heights_m": {
+            "desktop": 0.75
+          },
+          "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)"
+        }
+      ],
+      "candidates": [
+        {
+          "uid": "2edb7c9c74b04a30953e11c73a1be815",
+          "url": "https://sketchfab.com/3d-models/leaves-110x60-b-wn-2edb7c9c74b04a30953e11c73a1be815",
+          "name": "Leaves 110x60デスク B脚 WN",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/2edb7c9c74b04a30953e11c73a1be815",
+          "metadata_receipt": "out/desks/2edb7c9c74b04a30953e11c73a1be815-metadata.json",
+          "credit": "Leaves 110x60デスク B脚 WN by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/leaves-110x60-b-wn-2edb7c9c74b04a30953e11c73a1be815, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 135794,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Walnut-appearance clean timber desk, one uninterrupted knee space, for fixed 1.4 by 0.7 m adult station. Measure plan factors and desktop before accepting.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        },
+        {
+          "uid": "6dfafa3b5c36426bb4031ca598729e4e",
+          "url": "https://sketchfab.com/3d-models/ideal-140-30-wn-6dfafa3b5c36426bb4031ca598729e4e",
+          "name": "Ideal 140デスク (脚・30キャビネット) WN",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/6dfafa3b5c36426bb4031ca598729e4e",
+          "metadata_receipt": "out/desks/6dfafa3b5c36426bb4031ca598729e4e-metadata.json",
+          "credit": "Ideal 140デスク (脚・30キャビネット) WN by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/ideal-140-30-wn-6dfafa3b5c36426bb4031ca598729e4e, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 74898,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Brown walnut-appearance desktop, single storage pedestal and open knee position fit adult work use and warm mid-century palette. Title 140 is a possible width lead; depth and actual fit remain unknown.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "Pedestal knee clearance and drawer opening must pass room review; no assumed dimension from title.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        }
+      ],
+      "search_gap": null
+    },
+    "kids_a_desk": {
+      "item_ids": [
+        "ka-desk-1",
+        "ka-desk-2"
+      ],
+      "style": "Scandinavian light oak",
+      "style_source": "Client Stage 1 instruction 2026-10-09; taste.json images 14/15",
+      "requirements": [
+        {
+          "id": "ka-desk-1",
+          "footprint_m": [
+            1.1,
+            0.6
+          ],
+          "heights_m": {
+            "desktop": 0.75
+          },
+          "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)"
+        },
+        {
+          "id": "ka-desk-2",
+          "footprint_m": [
+            1.1,
+            0.6
+          ],
+          "heights_m": {
+            "desktop": 0.75
+          },
+          "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)"
+        }
+      ],
+      "candidates": [
+        {
+          "uid": "6e47547c9ff543819b84aeb495a632ae",
+          "url": "https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae",
+          "name": "Leaves 120x60デスク C脚 OAK",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/6e47547c9ff543819b84aeb495a632ae",
+          "metadata_receipt": "out/desks/6e47547c9ff543819b84aeb495a632ae-metadata.json",
+          "credit": "Leaves 120x60デスク C脚 OAK by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 87606,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Pale oak-appearance simple top and four timber legs follow Scandinavian kids palette. Same type can serve both fixed 1.1 by 0.6 m desks; source-size measurement decides scaling.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        },
+        {
+          "uid": "01f6ba08d39844b1afb149ecbcb81832",
+          "url": "https://sketchfab.com/3d-models/ideal-130-3030-oak-01f6ba08d39844b1afb149ecbcb81832",
+          "name": "Ideal 130デスク (30キャビネット・30ドロワー) OAK",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/01f6ba08d39844b1afb149ecbcb81832",
+          "metadata_receipt": "out/desks/01f6ba08d39844b1afb149ecbcb81832-metadata.json",
+          "credit": "Ideal 130デスク (30キャビネット・30ドロワー) OAK by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/ideal-130-3030-oak-01f6ba08d39844b1afb149ecbcb81832, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 98992,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Pale oak-appearance straight top with integrated drawers/cabinet, Scandinavian storage-led alternate. Functional built-in storage belongs to the desk, not a bundled scene.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "Two pedestals narrow knee space; verify user access, plan factors and drawer swings. Title 130 is not measured size.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        },
+        {
+          "uid": "c51054964ac04d958a90b75c81b86347",
+          "url": "https://sketchfab.com/3d-models/modern-wooden-desk-with-drawer-3d-model-c51054964ac04d958a90b75c81b86347",
+          "name": "Modern Wooden Desk with Drawer | 3D Model",
+          "author": "Hassan Arts",
+          "author_username": "hassanarts1",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/c51054964ac04d958a90b75c81b86347",
+          "metadata_receipt": "out/desks/c51054964ac04d958a90b75c81b86347-metadata.json",
+          "credit": "Modern Wooden Desk with Drawer | 3D Model by Hassan Arts (https://sketchfab.com/hassanarts1), https://sketchfab.com/3d-models/modern-wooden-desk-with-drawer-3d-model-c51054964ac04d958a90b75c81b86347, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 146592,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Author explicitly describes an oak top, one drawer and metal legs. Standalone detailed desk is a restrained modern Scandinavian alternate for fixed kids footprints.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "Black metal legs differ from all-timber primary; tonal oak appearance requires neutral preview.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        }
+      ],
+      "search_gap": null
+    },
+    "kids_b_desk": {
+      "item_ids": [
+        "kb-desk"
+      ],
+      "style": "Scandinavian light oak",
+      "style_source": "Client Stage 1 instruction 2026-10-09; taste.json images 14/15",
+      "requirements": [
+        {
+          "id": "kb-desk",
+          "footprint_m": [
+            1.2,
+            0.6
+          ],
+          "heights_m": {
+            "desktop": 0.75
+          },
+          "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)"
+        }
+      ],
+      "candidates": [
+        {
+          "uid": "6e47547c9ff543819b84aeb495a632ae",
+          "url": "https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae",
+          "name": "Leaves 120x60デスク C脚 OAK",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/6e47547c9ff543819b84aeb495a632ae",
+          "metadata_receipt": "out/desks/6e47547c9ff543819b84aeb495a632ae-metadata.json",
+          "credit": "Leaves 120x60デスク C脚 OAK by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 87606,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Pale oak-appearance four-leg desk matches kids palette; title 120x60 is a useful search hint for the fixed 1.2 by 0.6 m desk, subject to actual geometry measurement.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        },
+        {
+          "uid": "01f6ba08d39844b1afb149ecbcb81832",
+          "url": "https://sketchfab.com/3d-models/ideal-130-3030-oak-01f6ba08d39844b1afb149ecbcb81832",
+          "name": "Ideal 130デスク (30キャビネット・30ドロワー) OAK",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/01f6ba08d39844b1afb149ecbcb81832",
+          "metadata_receipt": "out/desks/01f6ba08d39844b1afb149ecbcb81832-metadata.json",
+          "credit": "Ideal 130デスク (30キャビネット・30ドロワー) OAK by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/ideal-130-3030-oak-01f6ba08d39844b1afb149ecbcb81832, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 98992,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Light oak-appearance storage desk gives a standalone alternate for kids B; fixed footprint, knee opening and desktop must all pass.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        },
+        {
+          "uid": "c51054964ac04d958a90b75c81b86347",
+          "url": "https://sketchfab.com/3d-models/modern-wooden-desk-with-drawer-3d-model-c51054964ac04d958a90b75c81b86347",
+          "name": "Modern Wooden Desk with Drawer | 3D Model",
+          "author": "Hassan Arts",
+          "author_username": "hassanarts1",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/c51054964ac04d958a90b75c81b86347",
+          "metadata_receipt": "out/desks/c51054964ac04d958a90b75c81b86347-metadata.json",
+          "credit": "Modern Wooden Desk with Drawer | 3D Model by Hassan Arts (https://sketchfab.com/hassanarts1), https://sketchfab.com/3d-models/modern-wooden-desk-with-drawer-3d-model-c51054964ac04d958a90b75c81b86347, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 146592,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Standalone oak-top desk with one drawer; detailed modern form fits the light oak room palette after preview.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "Metal legs and oak tone need style review.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        }
+      ],
+      "search_gap": null
+    },
+    "cinema_desk": {
+      "item_ids": [
+        "cinema-desk"
+      ],
+      "style": "warm contemporary, oak desk with charcoal surroundings",
+      "style_source": "taste.json media image18 warm_contemporary; villa_render.part_material uses oak for cinema desks and charcoal-fabric seating",
+      "requirements": [
+        {
+          "id": "cinema-desk",
+          "footprint_m": [
+            1.24,
+            0.55
+          ],
+          "heights_m": {
+            "desktop": 0.75
+          },
+          "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)"
+        }
+      ],
+      "candidates": [
+        {
+          "uid": "6e47547c9ff543819b84aeb495a632ae",
+          "url": "https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae",
+          "name": "Leaves 120x60デスク C脚 OAK",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/6e47547c9ff543819b84aeb495a632ae",
+          "metadata_receipt": "out/desks/6e47547c9ff543819b84aeb495a632ae-metadata.json",
+          "credit": "Leaves 120x60デスク C脚 OAK by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 87606,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Open four-leg oak desk follows existing cinema desktop finish and offers two knee positions behind the sofa. Fixed 1.24 by 0.55 m envelope, two chairs and ramp headroom remain unchanged.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        },
+        {
+          "uid": "c51054964ac04d958a90b75c81b86347",
+          "url": "https://sketchfab.com/3d-models/modern-wooden-desk-with-drawer-3d-model-c51054964ac04d958a90b75c81b86347",
+          "name": "Modern Wooden Desk with Drawer | 3D Model",
+          "author": "Hassan Arts",
+          "author_username": "hassanarts1",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/c51054964ac04d958a90b75c81b86347",
+          "metadata_receipt": "out/desks/c51054964ac04d958a90b75c81b86347-metadata.json",
+          "credit": "Modern Wooden Desk with Drawer | 3D Model by Hassan Arts (https://sketchfab.com/hassanarts1), https://sketchfab.com/3d-models/modern-wooden-desk-with-drawer-3d-model-c51054964ac04d958a90b75c81b86347, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 146592,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Oak desktop with black legs is a contemporary alternate matching existing oak/charcoal finishes. Detailed standalone form; actual factors and two-chair usability remain unverified.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "Single drawer must not prevent one of the two knee positions; C8 and ramp clearance required.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        }
+      ],
+      "search_gap": null
+    },
+    "parents_vanity": {
+      "item_ids": [
+        "pb-vanity"
+      ],
+      "style": "Warm Luxury Minimalism, walnut appearance",
+      "style_source": "taste.json brief_concepts master bedroom; villa_render.part_material parents-bed desk walnut",
+      "requirements": [
+        {
+          "id": "pb-vanity",
+          "footprint_m": [
+            1.0,
+            0.4
+          ],
+          "heights_m": {
+            "desktop": 0.75
+          },
+          "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)"
+        }
+      ],
+      "candidates": [
+        {
+          "uid": "1710e30f8c494b2787d04473ef7f4ee2",
+          "url": "https://sketchfab.com/3d-models/leaves-110x45-b-wn-1710e30f8c494b2787d04473ef7f4ee2",
+          "name": "Leaves 110x45デスク B脚 WN",
+          "author": "classe-saga",
+          "author_username": "classe-saga",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/1710e30f8c494b2787d04473ef7f4ee2",
+          "metadata_receipt": "out/desks/1710e30f8c494b2787d04473ef7f4ee2-metadata.json",
+          "credit": "Leaves 110x45デスク B脚 WN by classe-saga (https://sketchfab.com/classe-saga), https://sketchfab.com/3d-models/leaves-110x45-b-wn-1710e30f8c494b2787d04473ef7f4ee2, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 131860,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Plain walnut-appearance narrow desk can act as the existing 1.0 by 0.4 m garden-window vanity; restrained timber form follows parents warm minimal palette.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "No mirror, chair, cosmetics or lamps bundled. Existing vanity chair remains separately inventoried; source fit and tabletop height require measurement.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        }
+      ],
+      "search_gap": null
+    },
+    "study_task_chair": {
+      "item_ids": [
+        "study-desk#chair-1",
+        "study-desk#chair-2",
+        "study-adult-desk#chair-1"
+      ],
+      "style": "mid-century leather task seating",
+      "style_source": "Client Stage 1 instruction 2026-10-09",
+      "requirements": [
+        {
+          "id": "study-desk#chair-1",
+          "footprint_m": [
+            0.44,
+            0.45
+          ],
+          "heights_m": {
+            "seat": 0.46,
+            "back": 0.85
+          },
+          "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)"
+        },
+        {
+          "id": "study-desk#chair-2",
+          "footprint_m": [
+            0.44,
+            0.45
+          ],
+          "heights_m": {
+            "seat": 0.46,
+            "back": 0.85
+          },
+          "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)"
+        },
+        {
+          "id": "study-adult-desk#chair-1",
+          "footprint_m": [
+            0.44,
+            0.45
+          ],
+          "heights_m": {
+            "seat": 0.46,
+            "back": 0.85
+          },
+          "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)"
+        }
+      ],
+      "candidates": [
+        {
+          "uid": "531bff2f2f884547b941cde26e7d3270",
+          "url": "https://sketchfab.com/3d-models/office-leather-chair-flannigan-531bff2f2f884547b941cde26e7d3270",
+          "name": "Office leather chair- Flannigan",
+          "author": "Yacine3Dz",
+          "author_username": "Yacine3Dz",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/531bff2f2f884547b941cde26e7d3270",
+          "metadata_receipt": "out/desks/531bff2f2f884547b941cde26e7d3270-metadata.json",
+          "credit": "Office leather chair- Flannigan by Yacine3Dz (https://sketchfab.com/Yacine3Dz), https://sketchfab.com/3d-models/office-leather-chair-flannigan-531bff2f2f884547b941cde26e7d3270, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 49596,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Brown leather-appearance curved shell, low back, arms, swivel pedestal and casters suit the walnut mid-century study; standalone task seat.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "Planned whole-item 0.44 by 0.45 m is compact: base/arm projections may make measured fit fail. Require seat 0.46 m and back 0.85 m together, without separate part stretching.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        },
+        {
+          "uid": "4f6c2ce177ff47168c447756b9ed2e82",
+          "url": "https://sketchfab.com/3d-models/herman-miller-eames-aluminum-chair-4f6c2ce177ff47168c447756b9ed2e82",
+          "name": "Herman Miller - Eames Aluminum Chair",
+          "author": "Photonic Studio",
+          "author_username": "Photonic",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/4f6c2ce177ff47168c447756b9ed2e82",
+          "metadata_receipt": "out/desks/4f6c2ce177ff47168c447756b9ed2e82-metadata.json",
+          "credit": "Herman Miller - Eames Aluminum Chair by Photonic Studio (https://sketchfab.com/Photonic), https://sketchfab.com/3d-models/herman-miller-eames-aluminum-chair-4f6c2ce177ff47168c447756b9ed2e82, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 8022,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Recognisable mid-century aluminum-group form, ribbed upholstery and swivel/caster task base. Standalone chair suitable for the study design language.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "Orange leather appearance is stronger than brown primary; leather material is not stated in metadata. Neutral style review required. Name does not verify manufacturer provenance; fit and both height datums remain unmeasured.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        }
+      ],
+      "search_gap": null
+    },
+    "kids_task_chair": {
+      "item_ids": [
+        "ka-desk-1#chair-1",
+        "ka-desk-2#chair-1",
+        "kb-desk#chair-1"
+      ],
+      "style": "Scandinavian light oak",
+      "style_source": "Client Stage 1 instruction 2026-10-09; taste.json images14/15",
+      "requirements": [
+        {
+          "id": "ka-desk-1#chair-1",
+          "footprint_m": [
+            0.44,
+            0.45
+          ],
+          "heights_m": {
+            "seat": 0.46,
+            "back": 0.85
+          },
+          "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)"
+        },
+        {
+          "id": "ka-desk-2#chair-1",
+          "footprint_m": [
+            0.44,
+            0.45
+          ],
+          "heights_m": {
+            "seat": 0.46,
+            "back": 0.85
+          },
+          "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)"
+        },
+        {
+          "id": "kb-desk#chair-1",
+          "footprint_m": [
+            0.44,
+            0.45
+          ],
+          "heights_m": {
+            "seat": 0.46,
+            "back": 0.85
+          },
+          "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)"
+        }
+      ],
+      "candidates": [],
+      "search_gap": "No eligible detailed item-only light-oak task chair found. Scandinavian searches returned dining/lounge chairs or sets; wood-swivel Lamy is dark upholstered, not light oak. White Leather Office Chair is a downloadable CC-BY neutral swivel chair, but has no oak and is a style compromise, so it is excluded. Do not replace with a dining chair or silently recolour a model."
+    },
+    "cinema_task_chair": {
+      "item_ids": [
+        "cinema-desk#chair-1",
+        "cinema-desk#chair-2"
+      ],
+      "style": "warm contemporary task seating",
+      "style_source": "taste.json media image18 warm_contemporary; existing cinema oak desktop and charcoal seating",
+      "requirements": [
+        {
+          "id": "cinema-desk#chair-1",
+          "footprint_m": [
+            0.44,
+            0.45
+          ],
+          "heights_m": {
+            "seat": 0.46,
+            "back": 0.85
+          },
+          "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)"
+        },
+        {
+          "id": "cinema-desk#chair-2",
+          "footprint_m": [
+            0.44,
+            0.45
+          ],
+          "heights_m": {
+            "seat": 0.46,
+            "back": 0.85
+          },
+          "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)"
+        }
+      ],
+      "candidates": [
+        {
+          "uid": "531bff2f2f884547b941cde26e7d3270",
+          "url": "https://sketchfab.com/3d-models/office-leather-chair-flannigan-531bff2f2f884547b941cde26e7d3270",
+          "name": "Office leather chair- Flannigan",
+          "author": "Yacine3Dz",
+          "author_username": "Yacine3Dz",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "verified_on": "2026-10-09",
+          "metadata_source": "https://api.sketchfab.com/v3/models/531bff2f2f884547b941cde26e7d3270",
+          "metadata_receipt": "out/desks/531bff2f2f884547b941cde26e7d3270-metadata.json",
+          "credit": "Office leather chair- Flannigan by Yacine3Dz (https://sketchfab.com/Yacine3Dz), https://sketchfab.com/3d-models/office-leather-chair-flannigan-531bff2f2f884547b941cde26e7d3270, CC Attribution (http://creativecommons.org/licenses/by/4.0/). Record scaling/omissions with this credit after intake.",
+          "claim": "look-alike-proxy; no verified procurement specification",
+          "listed_triangle_count": 49596,
+          "stated_dimensions_m": null,
+          "dimensions_note": "Dimensions are not published in metadata. Numbers in a model title are search hints, not measured extents.",
+          "why_it_should_fit": "Brown leather-appearance compact curved task seat complements the cinema oak desk and dark contemporary seating. Standalone caster/swivel form fits work use.",
+          "item_only_screen": "Inspected public thumbnail shows one desk or chair with its functional parts; no freestanding lamps, computers, shelves, rugs or companions. Actual mesh inventory and fused extras remain unverified.",
+          "thumbnail_review": "out/desks/listing-contact-sheet.jpg; out/desks/listing-contact-sheet-final.jpg; out/desks/listing-chairs-final.jpg",
+          "reservations": "Measured base footprint may be too large for 0.44 by 0.45 m. Require both authored seat and back heights; do not move desk or stretch chair parts to obtain clearance.",
+          "status": "awaiting lead download, measured unit/axis/part intake, bounded whole-item fit, all required heights, neutral/room preview review and C8; not selected"
+        }
+      ],
+      "search_gap": null
+    }
+  },
+  "excluded": [
+    {
+      "uid": "4548bc41237c4fdbaf06025dfe4d0df7",
+      "reason": "Thumbnail has attached shelving/upper frame beyond desk-only scope; separability unverified."
+    },
+    {
+      "uid": "ca9d09ae99ec4b3aaa2e0eb1522982ef",
+      "reason": "Stationary cantilever office chair, not a swivel task chair."
+    },
+    {
+      "uid": "f7c72291cd864c2bb2b340483ef18206",
+      "reason": "Dark upholstered swivel appearance, no light oak; no caster/task suitability verified."
+    },
+    {
+      "uid": "792bb7e8e97b4f6abf2fe5c3c6a24b38",
+      "reason": "Large high-back executive form with visible plank staging; extras separability unresolved and not mid-century."
+    },
+    {
+      "uid": "aee7ef0361b848d6b66bd3588fc2190c",
+      "reason": "Thumbnail shows two chairs together; item-only separability unresolved."
+    },
+    {
+      "uid": "602c91643bbf45138b7966bd77e6bc70",
+      "reason": "Visibly distressed office chair, outside the proposed room finish."
+    },
+    {
+      "uid": "003b00c7cdd348888296b85c40275a50",
+      "reason": "Worn antique stationary leather chair rather than task seating."
+    },
+    {
+      "uid": "c187de2b19014eea850d540fe3ce5a02",
+      "reason": "White neutral leather/chrome caster chair is a possible style compromise, no light oak; not shortlisted for the explicit kids requirement."
+    },
+    {
+      "uid": "b699e3aa3d9149a0a0f3d694205ffb49",
+      "reason": "NonCommercial licence excluded."
+    },
+    {
+      "uid": "95160ce5a52f4e379f66527d2735d96c",
+      "reason": "NonCommercial licence and stylized detail excluded."
+    },
+    {
+      "uid": "f415e04f4bb24221854198727b8f0352",
+      "reason": "Last wooden-office-chair lead: inspected thumbnail shows distressed antique wood, red seat and curved pedestal; outside light-oak Scandinavian palette. Public page returned 403; no workaround used."
+    }
+  ]
+}

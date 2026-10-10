@@ -1,6 +1,6 @@
 {
   "schema": "bed-guards/1",
-  "scope": "Historical source-size and current bounded independent-factor bed acceptance (client decision 2026-10-09); immutable measured geometry, fixed-room review, model-first cloth, physical fallback and neutral diagnostics.",
+  "scope": "Historical source-size and current bounded independent-factor bed acceptance (client decision 2026-10-09); immutable measured geometry, fixed-room review, model-first cloth, physical fallback and neutral diagnostics. Round 6 independently slims measured frame parts, keeps mattress/bedding fit, and gates both bunk heights.",
   "control_tier_definitions": {
     "1": "Prevent the defect by construction",
     "2": "Check the invariant before placing geometry"
@@ -310,6 +310,41 @@
       "proof_file": "tests/test_execution_context.py",
       "proofs": [
         "test_real_missing_test_selection_refuses_before_clean_suite_and_renamed_sibling"
+      ]
+    },
+    {
+      "lesson_id": "beds-mattress-fit-expanded-frame",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Frame-only plan transform about measured source mattress centre; exact source-centre yaw; named vertical berth; mattress and bedding keep common fit. Proposed geometry can be measured but below-bound frames cannot import, including neutral diagnostics. Planning bed rectangles use rigid frame plus mattress; every source bedding face remains in physical C8 checks. Activation requires the current slim-frame contract, invalidating old round-5 selections.",
+      "check": "archpipe.beds.slim_frame_fit/slim_frame_findings/require_bed_geometry; Blender actual frame-face read-back; scripts/verify.py",
+      "stage": "before neutral import and activation; proposed fixed-room diagnostic review",
+      "proof_file": "tests/test_bed_slim_frames.py",
+      "proofs": [
+        "test_real_frame_over_fifty_mm_fails_and_renamed_rotated_sibling",
+        "test_real_frame_factor_below_half_refuses_even_neutral_renamed_and_parent_quiet",
+        "test_bedding_mattress_and_vertical_faces_unchanged_by_frame_plan_fit",
+        "test_upper_drives_vertical_factor_and_one_factor_cannot_meet_both_datums",
+        "test_classification_factor_and_review_mutations_refuse",
+        "test_current_slim_parent_still_requires_passing_fixed_room",
+        "test_slim_planning_frame_excludes_bedding_but_c8_keeps_its_real_faces"
+      ]
+    },
+    {
+      "lesson_id": "beds-room-cluster-boundary",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Unconditional retained bed-part boundary checks include bedding and compare conservative plan bounds to the whole declared room-cluster union, including joined and concave clusters.",
+      "check": "archpipe.beds.bed_room_boundary_findings; unconditionally invoked by bed_room_review; scripts/verify.py",
+      "stage": "fixed-room C8 review before activation",
+      "proof_file": "tests/test_bed_slim_frames.py",
+      "proofs": [
+        "test_real_joined_room_frame_and_bedding_boundary_renamed_clean_and_concave",
+        "test_real_parent_cluster_boundary_runs_in_c8"
       ]
     }
   ]

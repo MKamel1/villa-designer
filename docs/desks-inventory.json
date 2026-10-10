@@ -1,0 +1,470 @@
+{
+  "schema": "desks-inventory/1",
+  "option": "D1",
+  "units": "Metres; footprint is local width/depth. World footprint is minimum X/Y then maximum X/Y. Heights are above the room floor. Rotation is degrees about vertical.",
+  "authority": "Existing furnishing design input, not a new Revit read-back or product approval",
+  "counts": {
+    "desks": 7,
+    "task_chairs": 8,
+    "vanity_chairs": 1
+  },
+  "items": [
+    {
+      "id": "cinema-desk",
+      "room": "cinema",
+      "level": "B",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.24,
+        0.55
+      ],
+      "world_footprint_m": [
+        4.66,
+        -21.351,
+        5.9,
+        -20.801000000000002
+      ],
+      "centre_m": [
+        5.28,
+        -21.076
+      ],
+      "rotation_deg": 180,
+      "heights_m": {
+        "desktop": 0.75
+      },
+      "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
+      "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
+      "native_builder": "villa_furnish3d.body (top and legs)",
+      "why": "two work places behind the cinema sofa, under the ramp soffit; card ies-res-desk-400"
+    },
+    {
+      "id": "cinema-desk#chair-1",
+      "parent_id": "cinema-desk",
+      "room": "cinema",
+      "level": "B",
+      "type": "task_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        5.37,
+        -21.651,
+        5.81,
+        -21.201
+      ],
+      "centre_m": [
+        5.59,
+        -21.426000000000002
+      ],
+      "rotation_deg": 0,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._task_chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    },
+    {
+      "id": "cinema-desk#chair-2",
+      "parent_id": "cinema-desk",
+      "room": "cinema",
+      "level": "B",
+      "type": "task_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        4.75,
+        -21.651,
+        5.19,
+        -21.201
+      ],
+      "centre_m": [
+        4.970000000000001,
+        -21.426000000000002
+      ],
+      "rotation_deg": 0,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._task_chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    },
+    {
+      "id": "study-desk",
+      "room": "study-game",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.8,
+        0.7
+      ],
+      "world_footprint_m": [
+        3.8169999999999997,
+        -26.299999999999997,
+        4.5169999999999995,
+        -24.5
+      ],
+      "centre_m": [
+        4.167,
+        -25.4
+      ],
+      "rotation_deg": -90,
+      "heights_m": {
+        "desktop": 0.75
+      },
+      "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
+      "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
+      "native_builder": "villa_furnish3d.body (top and legs)",
+      "why": "shared homework desk for two, under the street window (sill 0.9)"
+    },
+    {
+      "id": "study-desk#chair-1",
+      "parent_id": "study-desk",
+      "room": "study-game",
+      "level": "GF",
+      "type": "task_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        4.367,
+        -25.17,
+        4.817,
+        -24.73
+      ],
+      "centre_m": [
+        4.5920000000000005,
+        -24.950000000000003
+      ],
+      "rotation_deg": 90,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._task_chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    },
+    {
+      "id": "study-desk#chair-2",
+      "parent_id": "study-desk",
+      "room": "study-game",
+      "level": "GF",
+      "type": "task_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        4.367,
+        -26.07,
+        4.817,
+        -25.63
+      ],
+      "centre_m": [
+        4.5920000000000005,
+        -25.85
+      ],
+      "rotation_deg": 90,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._task_chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    },
+    {
+      "id": "study-adult-desk",
+      "room": "study-game",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.4,
+        0.7
+      ],
+      "world_footprint_m": [
+        4.6,
+        -24.491,
+        6.0,
+        -23.790999999999997
+      ],
+      "centre_m": [
+        5.3,
+        -24.141
+      ],
+      "rotation_deg": 180,
+      "heights_m": {
+        "desktop": 0.75
+      },
+      "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
+      "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
+      "native_builder": "villa_furnish3d.body (top and legs)",
+      "why": "adult work desk (one adult most days) under the high window; plain wall behind for calls"
+    },
+    {
+      "id": "study-adult-desk#chair-1",
+      "parent_id": "study-adult-desk",
+      "room": "study-game",
+      "level": "GF",
+      "type": "task_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        5.08,
+        -24.791,
+        5.52,
+        -24.341
+      ],
+      "centre_m": [
+        5.3,
+        -24.566000000000003
+      ],
+      "rotation_deg": 0,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._task_chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    },
+    {
+      "id": "ka-desk-1",
+      "room": "kids-a",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.1,
+        0.6
+      ],
+      "world_footprint_m": [
+        12.62,
+        -24.391000000000002,
+        13.72,
+        -23.791
+      ],
+      "centre_m": [
+        13.17,
+        -24.091
+      ],
+      "rotation_deg": 180,
+      "heights_m": {
+        "desktop": 0.75
+      },
+      "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
+      "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
+      "native_builder": "villa_furnish3d.body (top and legs)",
+      "why": "desk, girl 1"
+    },
+    {
+      "id": "ka-desk-1#chair-1",
+      "parent_id": "ka-desk-1",
+      "room": "kids-a",
+      "level": "GF",
+      "type": "task_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        12.95,
+        -24.691,
+        13.39,
+        -24.241
+      ],
+      "centre_m": [
+        13.17,
+        -24.466
+      ],
+      "rotation_deg": 0,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._task_chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    },
+    {
+      "id": "ka-desk-2",
+      "room": "kids-a",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.1,
+        0.6
+      ],
+      "world_footprint_m": [
+        13.76,
+        -24.391000000000002,
+        14.860000000000001,
+        -23.791
+      ],
+      "centre_m": [
+        14.31,
+        -24.091
+      ],
+      "rotation_deg": 180,
+      "heights_m": {
+        "desktop": 0.75
+      },
+      "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
+      "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
+      "native_builder": "villa_furnish3d.body (top and legs)",
+      "why": "desk, girl 2"
+    },
+    {
+      "id": "ka-desk-2#chair-1",
+      "parent_id": "ka-desk-2",
+      "room": "kids-a",
+      "level": "GF",
+      "type": "task_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        14.09,
+        -24.691,
+        14.53,
+        -24.241
+      ],
+      "centre_m": [
+        14.309999999999999,
+        -24.466
+      ],
+      "rotation_deg": 0,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._task_chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    },
+    {
+      "id": "kb-desk",
+      "room": "kids-b",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.2,
+        0.6
+      ],
+      "world_footprint_m": [
+        17.049999999999997,
+        -24.391000000000002,
+        18.25,
+        -23.791
+      ],
+      "centre_m": [
+        17.65,
+        -24.091
+      ],
+      "rotation_deg": 180,
+      "heights_m": {
+        "desktop": 0.75
+      },
+      "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
+      "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
+      "native_builder": "villa_furnish3d.body (top and legs)",
+      "why": "desk under the window"
+    },
+    {
+      "id": "kb-desk#chair-1",
+      "parent_id": "kb-desk",
+      "room": "kids-b",
+      "level": "GF",
+      "type": "task_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        17.43,
+        -24.691,
+        17.87,
+        -24.241
+      ],
+      "centre_m": [
+        17.65,
+        -24.466
+      ],
+      "rotation_deg": 0,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._task_chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    },
+    {
+      "id": "pb-vanity",
+      "room": "parents-bed",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.0,
+        0.4
+      ],
+      "world_footprint_m": [
+        21.997,
+        -25.3,
+        22.397,
+        -24.3
+      ],
+      "centre_m": [
+        22.197,
+        -24.8
+      ],
+      "rotation_deg": 90,
+      "heights_m": {
+        "desktop": 0.75
+      },
+      "height_source": "src/archpipe/concept/villa_furnish.py:_layout h (authored design)",
+      "procedural_render_builder": "villa_furniture_detail._desk via local_parts/world_parts",
+      "native_builder": "villa_furnish3d.body (top and legs)",
+      "why": "vanity / dressing table at the garden window (answers), clear of the bed zone"
+    },
+    {
+      "id": "pb-vanity#chair-1",
+      "parent_id": "pb-vanity",
+      "room": "parents-bed",
+      "level": "GF",
+      "type": "vanity_chair",
+      "planned_footprint_m": [
+        0.44,
+        0.45
+      ],
+      "world_footprint_m": [
+        21.697,
+        -25.02,
+        22.147,
+        -24.58
+      ],
+      "centre_m": [
+        21.921999999999997,
+        -24.799999999999997
+      ],
+      "rotation_deg": -90,
+      "heights_m": {
+        "seat": 0.46,
+        "back": 0.85
+      },
+      "height_source": "src/archpipe/concept/villa_furnish3d.py:_chair defaults, via extras/spec (ASSUMED authored design, not verified ergonomics)",
+      "procedural_render_builder": "villa_furniture_detail._chair via seat_parts/world_parts",
+      "native_builder": "villa_furnish3d._chair via extras/spec"
+    }
+  ]
+}

@@ -1268,6 +1268,19 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
                 if obj.name in omitted:
                     meshes.remove(obj)
                     bpy.data.objects.remove(obj,do_unlink=True)
+            if spec.get('frame_slimming'):
+                from archpipe.beds import slim_frame_fit, unit_scale
+                fit = slim_frame_fit(spec)
+                centre = Vector(fit['centre_source_m'])
+                relative = Vector([fit['scale_xy'][i]*unit_scale(spec.get('unit_evidence'))/spec['scale_xyz'][i]
+                                   for i in (0,1)]+[1.])
+                bpy.context.view_layer.update()
+                for obj in meshes:
+                    if obj.name in spec['frame_slimming']['frame_parts']:
+                        inverse = obj.matrix_world.inverted()
+                        for vertex in obj.data.vertices:
+                            point = obj.matrix_world @ vertex.co
+                            vertex.co = inverse @ Vector([centre[i]+(point[i]-centre[i])*relative[i] for i in range(3)])
             new = [obj for obj in bpy.data.objects if obj not in before]
         material_qa = validate_imported_appearance(meshes, spec["asset"], spec.get("asset_kind", "appearance"))
         anchor = bpy.data.objects.new("model-anchor-" + spec["id"], None)
@@ -1330,6 +1343,14 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
                 unit_evidence=spec.get('unit_evidence'),scaled_model=spec if spec.get('scaling') else None)
             if findings:
                 raise ValueError(spec['id']+': '+ '; '.join(findings))
+            if spec.get('frame_slimming'):
+                from archpipe.beds import slim_frame_findings
+                frame_meshes=[dict(id=spec['id']+'::'+obj['source_part'],faces=[
+                    [list(obj.matrix_world@obj.data.vertices[i].co) for i in polygon.vertices]
+                    for polygon in obj.data.polygons]) for obj in meshes
+                    if obj['source_part'] in spec['frame_slimming']['frame_parts']]
+                findings=slim_frame_findings(spec,frame_meshes)
+                if findings:raise ValueError(spec['id']+': '+'; '.join(findings))
         if "footprint_w" in spec and spec.get("role") != "bed":
             if box[3]-box[0] > spec["footprint_w"] + 0.020 or box[4]-box[1] > spec["footprint_d"] + 0.020:
                 raise ValueError("model exceeds product footprint: " + spec["id"])

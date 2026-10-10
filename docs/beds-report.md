@@ -1,5 +1,9 @@
 # Furniture phase, step 1: beds
 
+**Round 6 client decision, 2026-10-09: keep the layout and use slim frames.**
+The mattress scaling rule remains unchanged; frame parts receive their own
+plan factors. No downloaded bed is activated after the round-6 checks below.
+
 **Round 5 client decision, 2026-10-09: bounded model scaling is permitted.**
 Cyberfox parents and sparshgupta ladder bunk fit the exact planned mattress
 sizes with eligible plan factors, and their generated cloth passes actual
@@ -869,3 +873,218 @@ experiments; current logs are separately named. Full-suite and native Revit
 claims are outside this package. No commit; the lead owns the full suite and
 integration decision. Shared data and the procedural library daybed remain
 unchanged. Numerical guard acceptance is not room-fit or client approval.
+
+## Round 6 — slim frames, client decision 2026-10-09
+
+**Keep the layout; use slim frames.** This decision changes frame plan
+scaling only. The round-5 mattress rule remains: exact planned mattress,
+each width/length factor between 0.5 and 2.0, with the larger divided by
+the smaller minus one no greater than 15%. Mattress and source bedding
+share those factors. Every other retained mesh is classified as frame and
+gets separate plan factors about the measured source mattress centre.
+Frame sides and foot may extend at most **50 mm** beyond the mattress;
+the head may extend **100 mm** for headboard depth. Heights retain round-5
+values except the bunk's vertical factor now derives from the upper top.
+
+`slim_frame_fit` derives and records frame factors; `slim_frame_findings`
+independently measures transformed faces, including Blender read-back.
+The minimum frame factor is **0.5**: compression beyond half size refuses
+because it can visibly deform frame members and the complete ladder.
+The mattress's 15% proportion rule is not applied to the frame. Eligible
+factors still need visual review for distortion. No source mesh was removed,
+no mattress was moved, and no layout, furniture or room camera was changed.
+
+### Measured transforms and refusal
+
+Converted source X and Y are horizontal axes before placement; converted
+Z is up. glTF means Graphics Library Transmission Format. Source glTF X
+maps to converted X, source glTF Z to converted
+negative Y. All factors below are dimensionless after conversion to metres.
+Width and length factors refer to the measured mattress axes, not necessarily
+world X and Y after rotation. Vertical factor is independent of plan factors.
+
+| Bed | Mattress width / length factors | Frame converted X / Y factors | Vertical factor | Outcome |
+|---|---|---|---|---|
+| Parents, unchanged CyberFox model | 0.897994856 / 1.000389787 | **0.918923103 / 0.852559449** (length / width) | 0.905497481 | Frame eligible; room and generated-cloth gates refuse. |
+| Kids A, unchanged sparshgupta ladder bunk | 1.078469605 / 1.093019185 | **0.456000612 / 1.067624260** (width / length) | **0.862232651**, upper driven | Width factor below 0.5; diagnostic proposal only, never imported or activated. |
+| Kids B | No eligible mattress transform among twelve sources | No frame transform accepted | Fallback unchanged | Retain procedural bed. |
+
+Parents mattress remains **1.600 × 2.000 m**, top **0.527 m world**;
+headboard remains **1.364269 m above floor**. Its rigid frame extends
+**36.468 / 50.000 mm** at the two sides, against **50 / 50 mm** maxima,
+and **100.000 mm** at the head against **100 mm**. Its foot is **35.131 mm
+inside** the mattress edge, so has no positive extension against the 50 mm
+maximum. The planning envelope including mattress is **1.686468 × 2.100 m**.
+Retained bedding is wider than that frame and remains in physical room checks.
+
+Kids A mattresses remain **0.900 × 2.000 m** per berth within the same
+round-5 numerical precision. The below-bound proposed frame would give
+**50.000 mm** at one side and place the other **209.067 mm inside** its
+mattress edge; foot/head extensions would be **50.000 / 46.012 mm**.
+These edge measurements do not authorize the required **0.456000612**
+width factor. The complete timber mesh includes the ladder; it cannot be
+compressed further or split into separately stretched structural members.
+
+One vertical factor cannot meet both bunk datums. The lower-driven factor
+from round 5 is **0.691409911**; upper-driven factor is **0.862232651**.
+Upper top now reaches **1.402000 / 1.402000 m world**, but lower top becomes
+**0.500826 / 0.402000 m**, **98.826 mm too high**. Upper mattress underside
+is **1.302478 m**; naked lower-berth clearance is **801.652 mm**, compared
+with the authored procedural **850.000 mm**, **48.348 mm less**. The
+procedural underside was measured at 1.252 m in the unchanged scene.
+These are authored design comparisons, not published bunk safety limits;
+bedding and guard/ladder safety need separate proof. The two heights remain
+independent activation gates. Arithmetic is retained in
+`out/beds/round6/height-recheck.json`.
+
+### Fixed-room C8 review
+
+C8 means the geometry-topology room review. The current report is
+`out/beds/round6/c8-accepted-code.json`, regenerated against the unchanged
+round-4 scene, the authored layout identified as D1, and specification.
+The parents and kids A proposals
+are reviewed separately; kids A remains diagnostic because frame intake
+already refuses. Rigid frame plus mattress supplies planning access strips;
+all retained frame, mattress and source-bedding faces supply physical checks.
+Unrelated existing furniture remains present. This is the same scoped
+bed-induced review as round 5; baseline findings are not silently re-approved.
+
+The verified access cards are **`ukadm-bed-principal-750`** (both principal
+bed sides and foot), **`ukadm-bed-single-750`** (one side of each single bed),
+and **`ukadm-bedroom-route-750`** (doorway to window). They cite UK Approved
+Document M, Volume 1 Dwellings, 2015 incorporating 2016 amendments, printed
+p.18, paragraphs 2.25b, 2.25d and 2.25a respectively. The held text and page
+image were read again; receipts remain `round5/source-ukadm.txt` and `.png`.
+Storage card **`tss-front-of-storage-914`** cites Time-Saver Standards for
+Interior Design and Space Planning, 2nd edition, printed p.87: 36 inches
+in front of dresser, closet and drawers, rounded by the verified card to
+914 mm. Its held text and image are `round5/source-storage.txt` and `.png`.
+Cards are in `knowledge/library.json`. This is adopted ageing-in-place
+planning guidance, not local code certification.
+
+| Review | Parents | Kids A proposed frame, intake already refused |
+|---|---|---|
+| Bedside access | Foot **750 / 750 mm**, passes; left **1.000 / 750 mm**, **749 mm short**; right effectively **0 / 750 mm**, **750 mm short**. | Best/right side **750 / 750 mm**, passes the one-side card. Left **1.000 mm**; it need not independently meet 750 mm once the other side passes. |
+| Routes | **0 additional unreachable destinations**, required zero, with **750 mm** route width. The four round-5 route-delta failures are absent with the slim planning frame. | **0 additional unreachable destinations**, required zero, with **750 mm** route width. |
+| Door swings / passages | **0 new conflicts / 0 allowed** in the existing conservative checks. | **0 new conflicts / 0 allowed**; round-5 frame swing conflict is absent. |
+| Room boundary | Head reaches **50.000 mm beyond** the bedroom/entry cluster, required **0 mm**; conservative frame bounds outside area **0.082650 / 0 m²**. | Rigid frame and mattress have no boundary failure. Retained source bedding reaches **76.987 mm beyond** the room, required **0 mm**; outside bound area **0.152295238 / 0 m²**. |
+| Body conflicts | **13 conservative overlap screens**; e.g. fixed headboard slats **30 / 0 mm**, source bedding/bedside table **350 / 0 mm**. | **7 conservative overlap screens**; e.g. retained bedding/adjacent bathroom furniture **3.987 / 0 mm**. |
+| Storage fronts | **0 new affected-front shortfalls**; required planning depth **914 mm**. No affected wardrobe/drawer front was selected by this scoped delta, so no achieved opening-travel width is asserted. | Same. |
+| Support | Frame floor gap **0 / 0 mm**, finished-floor elevation **0.002 m**; no new unsupported-bed finding. | Same for proposed geometry; this does not authorize its below-bound frame factor. |
+| Activation | **Refused**: room access/boundary and generated cloth. | **Refused**: frame factor, competing berth heights and retained-part room findings. |
+
+The final report has **16 parents findings** (13 body screens, two access,
+one boundary) and **8 kids A findings** (seven body screens, one boundary).
+Both record `activation_allowed: false`. The intermediate resumed report
+(`c8-resumed.json`, 15/7 findings) exposed a boundary escape: its old check
+skipped combined rooms and omitted bedding after frame planning was separated.
+The new unconditional retained-part check compares against the complete
+room-cluster union, including concave clusters. The actual pre-fix C8
+dispatcher regression fails; renamed/translated and clean controls pass
+after the fix. Evidence, causes and registration are in
+`LEARNINGS.md`, lesson **`beds-room-cluster-boundary`**. Earlier `c8-complete.json`
+is an intermediate iteration, superseded by the final report above.
+
+The change adds findings without moving or reshaping any design geometry;
+the reviewed images remain current. Boundary/body bounds are conservative
+screens, not exact solid-penetration measurements. Swing squares are not
+animated door sweeps; storage access is not proof of door/drawer travel;
+geometric support is not structural load capacity. Route results are scoped
+bed-induced changes, not blanket approval of unchanged baseline findings.
+
+### Neutral previews and physical limits
+
+All six existing round-6 images in `out/beds/round6/previews` were inspected
+again during resume. `preview-review.md` preserves their independent visual
+review and image hashes; `previews/evidence.json` binds actual geometry,
+source files, materials, cloth, unchanged cameras and diagnostic lights.
+Regenerated proposals match the reviewed proposals byte for byte.
+`preview-review-resumed.json` additionally confirms every image hash, current
+selection/source bindings, original geometry/material/cloth receipts and
+unchanged room cameras.
+
+Parents **`pb-bed-isolated-neutral.png`** shows the complete slim-frame model
+with a **1.8 m figure**; **`pb-bed-room-neutral.png`** uses unchanged
+v22-parents-day. No obvious frame warping was identified in the reviewed
+isolate. Portable and Blender whole-model bounds agree within **0.000838 mm**,
+and all **29,358** source triangles remain. The room camera crops the foot
+and does not show the complete headboard. This limited view cannot prove
+bedside clearance or head depth.
+
+The parents generated throw has **0 crossings, 0 enclosed vertices,
+1 unresolved vertex**, minimum surface distance **7.411 mm**. The preview
+process correctly exited **1**. It saved diagnostic images with **raw source
+bedding**, without the refused generated duvet/throw. They establish frame
+appearance only; physical cloth acceptance remains refused. The actual
+refusal and renamed/clean controls are frozen in
+`bed-round6-throw-refusal.json` and tested. No tolerance was relaxed.
+
+Kids A **`ka-bunk-isolated-neutral.png` / `ka-bunk-room-neutral.png`** and
+kids B **`kb-bed-isolated-neutral.png` / `kb-bed-room-neutral.png`** show
+labelled procedural fallbacks with the same scale figure and unchanged
+v06-kids-room / v13-kids-b cameras. They are not previews of accepted
+downloaded replacements. No imported bed passes every gate in this round;
+therefore none is activated. The procedural library daybed also stays unchanged.
+
+### Kids B: all twelve models tried again
+
+`scripts/prepare_beds_round6.py` re-screens every source against the fixed
+**1.200 × 2.000 m** kids B mattress, including models originally sought
+for parents or kids A. Source-file hashes are checked against unchanged
+round-2/4 measured geometry. Frame proportions are not a mattress refusal.
+Nevertheless **0 of 12** passes the unchanged mattress rule, so none reaches
+eligible frame fitting, replacement room review or imported preview.
+No incomplete mattress is inferred from a frame, quilt or model name.
+
+| Library model | Mattress width / length factors for kids B | Decisive mattress refusal |
+|---|---|---|
+| FORSSA | 0.595756 / 0.994542 | 66.938% distortion, maximum 15%. |
+| Stained Bare Scandinavian Bed | 0.497423 / 0.471533 | Both below 0.5. |
+| CyberFox upholstered bed | 0.673496 / 1.000390 | 48.537% distortion. |
+| Home Series bunk | 0.379815 / 0.321345 | Both below 0.5; also 18.196% distortion. |
+| Simple wooden bunk, 3DWorkbench | Unresolved | Complete naked mattresses not independently identified. |
+| Modern bed, dff77bbd | 0.327661 / 0.522555 | Width below 0.5; also 59.481% distortion. |
+| Dark Modern Bed, d3aeb724 | 0.000702 / 0.001066 | Both below 0.5. |
+| Simple Bunk Bed, 9fb7c547 | 0.125594 / 0.121783 | Both below 0.5. |
+| AM bunk, 0e134823 | 84.540612 / 88.583440 | Both above 2.0; common factors also miss upper width by 312.449 mm and length by 10.524 mm. |
+| Simple Bunk Bed, sparshgupta | 1.437959 / 1.093019 | 31.558% distortion. |
+| Bed Wood Oak PBR, 28a8b705 | Unresolved | No independently identified complete mattress. |
+| Engi bed, fe3c50e1 | Unresolved | Exposed mattress patch does not establish complete length. |
+
+Full numbers, additional refusals and source hashes are in
+`out/beds/round6/kids-b-rescreen.json`. The existing procedural kids B bed
+remains the fallback; relaxing only frame proportions does not make an
+ineligible mattress acceptable.
+
+### Round-6 verification and hand-off
+
+Final bed/fit/clearance/adapter execution: **77 tests passed, exit 0**,
+339.913 seconds (`out/beds/round6/bed-tests-accepted-code.log`). The final
+unmocked joined/concave-room generalisation group also passes **10 tests,
+exit 0** (`boundary-generalization-corrected.log`); it overlaps the slim
+subset rather than representing ten additional unique tests.
+
+The affected scene, camera, geometry-topology, intake, furnishing and legacy
+furniture-model modules passed **179 tests, exit 0**
+(`out/beds/round6/affected-tests-resumed.log`). These modules do not call
+the changed bed-room dispatcher; its actual old-failure/new-success proof
+and bed regressions are in the final focused batch above. Complete execution
+receipts and final artifact hashes are in `out/beds/round6/acceptance.json`.
+
+**Portable verification: 174 checks passed, exit 0 under both normal and
+initially empty HOME.** Current logs are `verify-normal-accepted-code.log`
+and `verify-empty-home-accepted-code.log`; the empty-HOME receipt records
+`initially_empty: true` and `exit_code: 0`. The fresh final C8 script exits
+0 while correctly recording both activation gates closed. Diagnostic
+execution success does not approve a bed. All 38 generated adapters match
+after synchronization; `git diff --check` passes.
+
+The interrupted run's previews and earlier failed attempts are preserved.
+The throw refusal remains open; no physical cloth acceptance is inferred
+from its diagnostic images. The boundary escape is repaired and registered
+with actual dispatcher, sibling and clean proofs. Source meshes, shared
+`assets/user` / `out/villa/round3` data, authored layout and cameras remain
+unchanged. Desks stage-1 work is retained on `codex/desks`. The supplied
+interpreter, `PYTHONPATH=src` and `NO_COLOR=1` were used; no packages installed,
+no native Revit or real design-gate approval claimed, no commit made.
+The lead owns the full suite and any commit.

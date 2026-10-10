@@ -1,0 +1,16 @@
+{
+  "bed": "pb-bed",
+  "cloth_report": {
+    "passed": false,
+    "refused": "throw-pb-bed: evaluated duvet intersects actual model: {'intersections': 0, 'inside_vertices': 0, 'minimum_surface_distance_m': 0.007411121856421232, 'evaluated_cloth_vertices': 10786, 'model_triangles': 95230, 'numerical_tolerance_m': 0.0001, 'inside_samples': [], 'uncertain_vertices': 1, 'closed_shells': 4, 'open_shells': 8, 'crossing_samples': []}"
+  },
+  "source_sha256": {
+    "model.gltf": "7a4a12f0986407fed871bc777a17fca73a30c11893746a3448dcd7c238019991",
+    "scene.bin": "95876e63d5f9dcab017d624cf30782295d1b2db675c9646ec2c07f2816525bf0",
+    "textures/MAT_Bed_Body_baseColor.png": "eca987c14191111980da1e297acc29921d212a6aad1e993a71f68eef6cd686e9",
+    "textures/MAT_Bed_Body_metallicRoughness.png": "87c5d8bba0382434aebf8325b14b8ef6388dee689db6f6ae3d50548035584961",
+    "textures/MAT_Bed_Body_normal.png": "8a8c25297e1ae29dd3372d6e5e340e786687896e868b0c15e08bf4a5859301f7",
+    "textures/MAT_Bed_blanket_baseColor.png": "24b3923d140705e8ad9f97f166cd4d71065db7f179001184c54b4c9ada5394bc",
+    "textures/MAT_Bed_blanket_normal.png": "dbd0aab98326555d27fdb860a59408a1c8ebeba50a0f3c5b243f852dc2b5063e"
+  }
+}

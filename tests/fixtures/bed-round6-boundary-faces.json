@@ -1,0 +1,90 @@
+[
+  {
+    "model": {
+      "id": "model-pb-bed",
+      "room": "parents-bed",
+      "role": "bed",
+      "replaces": "furn-pb-bed-"
+    },
+    "mesh": {
+      "id": "model-pb-bed::Object_4",
+      "faces": [
+        [
+          [
+            20.935991754454417,
+            -26.688860930987023,
+            1.311753911943511
+          ],
+          [
+            20.93731460966394,
+            -26.691,
+            0.10939970206547787
+          ],
+          [
+            20.997659918563862,
+            -26.690906887455267,
+            0.10925187315277249
+          ]
+        ]
+      ],
+      "group": "furniture",
+      "material": "imported-model",
+      "part_kind": "model-part",
+      "room": "parents-bed",
+      "label": "pb-bed",
+      "model_instance": "model-pb-bed"
+    },
+    "room_rect": [
+      18.427,
+      -26.641,
+      22.597,
+      -23.591
+    ],
+    "intrusion_m": 0.05,
+    "source": "actual slim-frame round-6 transformed source triangle; immutable source and proposal hashes in out/beds/round6"
+  },
+  {
+    "model": {
+      "id": "model-ka-bunk",
+      "room": "kids-a",
+      "role": "bed",
+      "replaces": "furn-ka-bunk-"
+    },
+    "mesh": {
+      "id": "model-ka-bunk::Bunk_cgt_bunk_bed_f_house_carpet_0",
+      "faces": [
+        [
+          [
+            11.400012658585874,
+            -25.984351026178505,
+            1.3207816799540175
+          ],
+          [
+            11.401208749995448,
+            -25.998598009371683,
+            1.3199682304282914
+          ],
+          [
+            11.403514923769288,
+            -25.999748150175005,
+            1.324795478788943
+          ]
+        ]
+      ],
+      "group": "furniture",
+      "material": "imported-model",
+      "part_kind": "model-part",
+      "room": "kids-a",
+      "label": "ka-bunk",
+      "model_instance": "model-ka-bunk"
+    },
+    "room_rect": [
+      11.477,
+      -27.371,
+      14.952,
+      -23.591
+    ],
+    "intrusion_m": 0.07698734141412444,
+    "source": "actual slim-frame round-6 transformed source triangle; immutable source and proposal hashes in out/beds/round6"
+  }
+]

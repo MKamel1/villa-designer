@@ -6,6 +6,12 @@ The client requested CC0, CC-BY with credit, or a documented permitted free tier
 C2 means the existing asset-intake control; C4 means finished-face mounting;
 C8 means the existing geometry-topology review.
 
+The shared scaling/unit/contents implementation is now
+`archpipe.furniture_fit`; bed APIs preserve their existing contracts and
+bed-specific datums. See [furniture-fit.md](furniture-fit.md) for desk/chair
+intake, item-only screening and multiple required height datums. Shared
+validators accept read-only mappings from C8 as well as ordinary dictionaries.
+
 1. Prefer Poly Haven, then permitted downloadable Sketchfab models. Check
    robots.txt before accessing a source. Use the existing fetch script and
    an authorized stored token; never print/copy the token or enter a password.
@@ -21,9 +27,9 @@ C8 means the existing geometry-topology review.
    length factors from each complete measured mattress. Both must be 0.5–2.0;
    the larger divided by smaller minus one must not exceed 15%. Match parents
    1.600 × 2.000 m, kids A 0.900 × 2.000 m per berth, kids B 1.200 × 2.000 m
-   exactly with one whole-model transform. Source-unit conversion stays separate.
+   exactly with one mattress/bedding transform. Source-unit conversion stays separate.
    Derive vertical scale independently from retained frame bottom and design
-   mattress top; cite the procedural source and label authored assumptions.
+   mattress top (round 6 kids A uses the upper top); cite the procedural source and label authored assumptions.
    Record resulting headboard height and the bound/basis. Record every bunk top:
    matching the lower cannot silently replace the upper datum. Bed-only contents
    require reviewed separate omissions; fused extras refuse. Missing/partial
@@ -33,6 +39,19 @@ C8 means the existing geometry-topology review.
    receipt. `villa_render.build(bed_replacements=...)` admits explicit reviewed
    models only after fixed placement, every design berth height and real-frame
    C8 checks. Keep fallbacks when those gates remain closed.
+   **Round 6 client decision, 2026-10-09:** classify every retained mesh as
+   frame, mattress or bedding; scale frame parts alone in plan about the actual
+   source mattress centre. Record converted source X/Y factors separately from
+   mattress width/length factors. `slim_frame_fit` enforces a minimum 0.5 frame
+   factor and derives no more than 50 mm side/foot extension, 100 mm at the head.
+   The mattress 15% proportion rule stays unchanged and is not imposed on the
+   frame. Refuse visible frame distortion at neutral review. `slim_frame_findings`
+   measures actual faces after transformation and Blender read-back, independent
+   of predicted edges. Snapshot the classification and factors with the review.
+   Proposed room geometry may be measured after a frame-factor refusal, but
+   `require_bed_geometry` refuses its import even in neutral mode. For kids A,
+   derive vertical scale from upper design top, report lower top and clearance;
+   both authored berth heights must still pass before activation.
 4. Preview each measured candidate in neutral light with a 1.8 m scale figure,
    then in its room from the existing camera. Disable material emission as
    well as design lights. Preserve the before image and bind receipts to actual
@@ -178,6 +197,12 @@ images before any integration claim.
 achieved-versus-design mattress heights from the unchanged scene. A
 diagnostic report can complete successfully with `activation_allowed: false`;
 `integrate_bed_models` enforces the room and every-berth height gates.
+The indoor boundary query is unconditional for every retained bed part,
+including source bedding, against its full room-cluster union. Joined rooms
+do not waive containment; a concave union cannot be checked only at corners.
+`bed_room_boundary_findings` reports conservative outside plan-bound area
+versus zero and keeps all source parts. This is a bounds screen, not an exact
+solid-penetration measurement.
 
 Choose focused test module names from existing files (`rg --files tests`)
 before launching. `run_tests.py` uses a fresh loader and refuses any collected
@@ -186,3 +211,19 @@ zero tests executed. This also covers discovery-time imports; dependency
 preflight failures still exit 2. Passing valid tests cannot erase a malformed
 selection. Preserve the failed invocation separately and rerun the corrected
 selection, judging the actual process exit status.
+
+Round-6 reproducible operations:
+
+```text
+scripts/prepare_beds_round6.py
+scripts/review_beds_round5.py --models out/beds/round6/models-proposed.json --output out/beds/round6/c8-complete.json
+/home/omar/opt/blender/blender -b --python-exit-code 1 -P scripts/preview_beds.py -- --scene out/beds/round4/scene.json --scaled-models out/beds/round6/models-previewable.json --beds pb-bed ka-bunk kb-bed --output out/beds/round6/previews --samples 32
+scripts/run_tests.py tests.test_bed_slim_frames tests.test_bed_scaling tests.test_beds tests.test_bed_models tests.test_bed_clearance tests.test_furniture_fit
+scripts/verify.py --portable
+```
+
+`models-proposed.json` includes ineligible proposals for diagnosis;
+`models-previewable.json` admits only eligible mattress/frame geometry and
+does not waive room, cloth or visual gates. A preview exit 1 remains a failure,
+even if diagnostic images were written. Keep those images and refusal receipts;
+review them as evidence and retain the fallbacks.
