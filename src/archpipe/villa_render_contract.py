@@ -467,4 +467,10 @@ def validate_scene(scene: dict) -> list[str]:
             errors.extend(garden_camera_findings(view, scene))
             errors.extend(subject_visibility_findings(view, scene))
             errors.extend(subject_frame_findings(view, scene))
+    if scene.get('measurement_points') and not errors:
+        from archpipe.task_probe import require_clear_probes
+        try:
+            require_clear_probes(scene)
+        except (ValueError, KeyError, IndexError, TypeError) as exc:
+            errors.append('measurement_points: ' + str(exc))
     return errors

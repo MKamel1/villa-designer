@@ -1553,6 +1553,37 @@ def calibrate(scene_data, args):
     print("VILLA RENDER calibration " + json.dumps(report), flush=True)
 
 
+def evaluated_probe_ray(scene_data):
+    """Return the first visible solid on a probe segment in evaluated geometry.
+
+    Imported assets, cloth, bevels and subdivisions exist only here. The
+    same provider supports both the mandatory guard and obstruction audits.
+    Segment positions and the remaining ray distance are in metres.
+    """
+    dependencies = bpy.context.evaluated_depsgraph_get()
+    def first_solid(start, end):
+        origin, endpoint = Vector(start), Vector(end)
+        direction = endpoint-origin
+        remaining = direction.length
+        direction.normalize()
+        while remaining > 1e-8:
+            found, position, normal, face, obj, matrix = bpy.context.scene.ray_cast(
+                dependencies, origin, direction, distance=remaining-1e-8)
+            if not found:
+                return None
+            # Hidden procedural fallbacks are absent from the actual render.
+            # Every visible solid, including glass, can invalidate a sensor
+            # pixel or its local approach; material never grants an exemption.
+            if not obj.hide_render:
+                return dict(mesh_id=obj.name, face_index=face, position_m=list(position))
+            travelled = (position-origin).length + 1e-7
+            origin = position + direction*1e-7
+            remaining -= travelled
+        return None
+
+    return first_solid
+
+
 def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mesh_by_id, switched_emitters):
     """Read maintained horizontal illuminance from the furnished scene.
 
@@ -1562,6 +1593,10 @@ def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mes
     applied. Direct and reflected-light results are separate. These are
     predictions for the authored fixtures and materials, not installed tests.
     """
+    from archpipe.task_probe import require_clear_probes, require_clear_paths, probe_sources
+    require_clear_probes(scene_data)
+    require_clear_paths(scene_data.get('measurement_points', []), probe_sources(scene_data),
+                        evaluated_probe_ray(scene_data))
     points = scene_data.get("measurement_points", [])
     if not points:
         raise ValueError("No measurement_points authored")
@@ -1647,6 +1682,9 @@ def render(scene_data, args):
         configure_cycles(args.cpu)
         calibrate(scene_data, args)
         return
+    if args.measure_lighting:
+        from archpipe.task_probe import require_clear_probes
+        require_clear_probes(scene_data)
     warnings = []
     library_root = os.path.expandvars(os.path.expanduser(args.library_root or scene_data["library_root"]))
     materials = {name: add_material(name, spec, library_root, warnings) for name, spec in scene_data["materials"].items()}

@@ -577,13 +577,18 @@ def photometry_for(kind):
 
 
 # ------------------------------------------------------------------ the check
-def task_points(lay=None):
-    """(room, card, x, y, plane z absolute, label): the carded task planes of D1."""
+def task_points(lay=None, *, with_hosts=False):
+    """(room, card, x, y, plane z absolute, label): the carded task planes of D1.
+
+    with_hosts appends the authored furniture item identity; x/y/z are metres."""
     lay = lay or R.design("D1")
     it = {i["id"]: i for i in F.layout(lay)}
     fp = {k: F.footprint(v) for k, v in it.items()}
     B, G = LEVEL_Z["B"], LEVEL_Z["GF"]
     pts = []
+
+    def add(host, point):
+        pts.append((*point, host) if with_hosts else point)
 
     def c(k):
         q = fp[k]
@@ -596,32 +601,32 @@ def task_points(lay=None):
               prep_spans[-1][0] + (prep_spans[-1][1] - prep_spans[-1][0]) / 3,
               prep_spans[-1][0] + 2 * (prep_spans[-1][1] - prep_spans[-1][0]) / 3]
     for x in prep_x:
-        pts.append(("kitchen", "ies-res-kitchen-prep-500", x, isl[3] - 0.3, B + 0.92, "island prep side"))
-        pts.append(("kitchen", "ies-res-breakfast-200", x, isl[1] + 0.2, B + 0.92, "island seating side"))
+        add("k-island", ("kitchen", "ies-res-kitchen-prep-500", x, isl[3] - 0.3, B + 0.92, "island prep side"))
+        add("k-island", ("kitchen", "ies-res-breakfast-200", x, isl[1] + 0.2, B + 0.92, "island seating side"))
     burner = next((a, b) for kind, a, b in F.module_spans(it["k-island"]) if kind == "single-induction")
-    pts.append(("kitchen", "ies-res-kitchen-cooktop-300", (burner[0] + burner[1]) / 2,
+    add("k-island", ("kitchen", "ies-res-kitchen-cooktop-300", (burner[0] + burner[1]) / 2,
                 (isl[1] + isl[3]) / 2, B + 0.926, "single induction zone"))
     run = fp["k-run"]
-    pts.append(("kitchen", "ies-res-kitchen-sink-300", (run[0] + run[2]) / 2, run[1] + 0.25, B + 0.9, "sink"))
-    pts.append(("dining", "ies-res-dining-informal-100", *c("dining-table"), B + 0.75, "dining table centre"))
+    add("k-run", ("kitchen", "ies-res-kitchen-sink-300", (run[0] + run[2]) / 2, run[1] + 0.25, B + 0.9, "sink"))
+    add("dining-table", ("dining", "ies-res-dining-informal-100", *c("dining-table"), B + 0.75, "dining table centre"))
     dt = fp["dining-table"]
-    pts.append(("dining", "ies-res-dining-study-200", dt[0] + 0.3, (dt[1] + dt[3]) / 2, B + 0.75, "table end (homework)"))
+    add("dining-table", ("dining", "ies-res-dining-study-200", dt[0] + 0.3, (dt[1] + dt[3]) / 2, B + 0.75, "table end (homework)"))
     dk = fp["dk-run"]
-    pts.append(("dirty-kitchen", "ies-res-kitchen-prep-500", dk[0] + 1.5, dk[1] + 0.3, B + 0.9, "dirty kitchen run"))
+    add("dk-run", ("dirty-kitchen", "ies-res-kitchen-prep-500", dk[0] + 1.5, dk[1] + 0.3, B + 0.9, "dirty kitchen run"))
     for d, lv in (("study-desk", G), ("study-adult-desk", G), ("ka-desk-1", G), ("ka-desk-2", G), ("kb-desk", G)):
-        pts.append((it[d]["room"], "ies-res-desk-400", *c(d), lv + 0.75, d))
+        add(d, (it[d]["room"], "ies-res-desk-400", *c(d), lv + 0.75, d))
     b = fp["pb-bed"]
     for x in (b[0] + 0.4, b[2] - 0.4):
-        pts.append(("parents-bed", "ies-res-bed-reading-200", x, b[1] + 0.35, G + 0.9, "pillow"))
+        add("pb-bed", ("parents-bed", "ies-res-bed-reading-200", x, b[1] + 0.35, G + 0.9, "pillow"))
     for basin, room in (("fb-basin", "family-bath"), ("pe-basin", "parents-ensuite"), ("gwc-basin", "guest-wc")):
         lv = B if room == "guest-wc" else G
-        pts.append((room, "ies-res-vanity-grooming-300", *c(basin), lv + 0.91, basin))
+        add(basin, (room, "ies-res-vanity-grooming-300", *c(basin), lv + 0.91, basin))
     a = fp["lounge-armchair"]
-    pts.append(("lounge", "ies-res-chair-reading-200", *c("lounge-armchair"), B + 0.76, "armchair"))
-    pts.append(("bar-alcove", "ies-res-chair-reading-200", *c("library-daybed"), B + 0.76, "daybed nook"))
+    add("lounge-armchair", ("lounge", "ies-res-chair-reading-200", *c("lounge-armchair"), B + 0.76, "armchair"))
+    add("library-daybed", ("bar-alcove", "ies-res-chair-reading-200", *c("library-daybed"), B + 0.76, "daybed nook"))
     desk = fp["cinema-desk"]
     for x in (desk[0] + 0.31, desk[2] - 0.31):
-        pts.append(("cinema", "ies-res-desk-400", x, (desk[1] + desk[3]) / 2, B + 0.75, "cinema desk"))
+        add("cinema-desk", ("cinema", "ies-res-desk-400", x, (desk[1] + desk[3]) / 2, B + 0.75, "cinema desk"))
     return pts
 
 

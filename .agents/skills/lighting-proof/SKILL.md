@@ -32,6 +32,22 @@ geometry, bounce count and assumed reflectances. Compare direct with
 direct. Empty-room calibration does not validate furnished shadows or
 total-light uniformity. A numerical mismatch must produce a failed gate.
 
+Task probes must own an exported mesh face, including the actual rim datum
+for a sink aperture. Author ownership before mounting, then derive the final
+plane from that face after mounting with its explicit reading/grooming
+clearance; keep the sensor 1 mm above that plane. Export and measurement
+unconditionally refuse hidden metered pixels and solid hits in the local
+source approach, naming the task and hit. Blender checks evaluated geometry
+before any probe render, so imported assets and cloth cannot hide a sensor
+silently. A remote furniture shadow remains legitimate light transport.
+Never repair instrumentation by moving furniture or tuning lights/targets.
+Run `tests/test_task_probe.py` and the pinned Blender background command
+`--python-exit-code 1 --python tests/blender_task_probe.py` for ownership
+changes. If evaluated geometry refuses a production probe, retain its named
+hit and leave its illuminance unavailable. A guarded measurement of the
+remaining clear points is partial evidence; the full measurement gate stays
+failed until every probe is valid.
+
 Inspect the final image as well as the numbers. Check ceiling, openings,
 fixture placement, measured furniture bounds, authored finish hue and
 camera framing. Never retouch a simulation with image generation to make

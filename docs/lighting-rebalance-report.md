@@ -61,7 +61,7 @@ Diagnostic rerun: for just those 17 points, bind the virtual task plane to the a
 
 The diagnostic run meets all 25 minimum targets. Induction changes from invalid apparent 128.6 to **1302.7 lx**, dining homework from invalid 198.4 to **587.7 lx**, and study desks from invalid 447.3/489.8 to **1012.9/975.5 lx**. Some apparent readings were too high rather than too low: the first island seating point changes from invalid 1737.4 to **1097.3 lx**. A hidden sensor can read any host material's reflectance; detecting only zero or low lux would miss siblings. The untouched family basin remains **1616.4 lx**, guest basin **1599.5 lx**, and existing dimmed ensuite basin **757.8 lx**. These are measured functional-scene figures for review, with generic photometry and assumed reflectances still disclosed.
 
-**Production status remains OPEN.** The proposed construction fix is explicit task-host/surface ownership at scene export, with the probe plane derived from that actual surface. The earliest scene/measurement guard should fail closed when a camera pixel or source path hits its host before the sensor. Prove against these frozen island/dining cases, translated or renamed hosts, clear cases and mutations before integrating. No producer, meter or guard is changed in this diagnosis package; the protected guard registry remains untouched. The diagnostic ownership audit is evidence, not a newly enforced production regression.
+**Historical diagnosis status: OPEN at the time of the audit.** The proposed construction fix is explicit task-host/surface ownership at scene export, with the probe plane derived from that actual surface. The earliest scene/measurement guard should fail closed when a camera pixel or source path hits its host before the sensor. Prove against these frozen island/dining cases, translated or renamed hosts, clear cases and mutations before integrating. No producer, meter or guard was changed in the original diagnosis package; the guard registry was left untouched. The diagnostic ownership audit is evidence; the later production repair and its regressions are recorded below.
 
 ## Room and task measurements
 
@@ -228,6 +228,74 @@ Applied lighting fixes: **none**. Before/after design light records, drivers, CC
 
 The final portable checks ran after the report and learning-index changes. Earlier successful check logs remain separately retained. Passing code checks does not resolve the production sensor defect or the retained image failures. `docs/LEARNINGS.md` records both current source attribution and the open measured-host defect; its proposed control is deliberately not registered as implemented.
 
-All execution uses `/home/omar/archpipe/envs/b16842c6f2161c9d/venv/bin/python`, `PYTHONPATH=src`, `NO_COLOR=1`, and `OPENBLAS_NUM_THREADS=1`; Blender is `/home/omar/opt/blender/blender` (4.5.14), bounded to eight CPU threads and the existing read-only-opened graphics lock. No installation, presentation render, full test suite, commit or protected shared-symlink modification was performed. No `.agents` or adapters were edited, so no adapter synchronization is required. The lead owns full-suite execution and commit.
+All execution uses `/home/omar/archpipe/envs/b16842c6f2161c9d/venv/bin/python`, `PYTHONPATH=src`, `NO_COLOR=1`, and `OPENBLAS_NUM_THREADS=1`; Blender is `/home/omar/opt/blender/blender` (4.5.14), bounded to eight CPU threads and the existing read-only-opened graphics lock. No installation, presentation render, full test suite, commit or protected shared-symlink modification was performed. In that diagnosis package, no `.agents` or adapters were edited, so adapter synchronization was not required. The later ownership repair below updates and synchronizes the lighting-proof skill. The lead owns full-suite execution and commit.
 
 The task-owned scripts and evidence live in `out/lighting-rebalance`: `inventory.py` reproduces production-context QA on retained images; `compare_v15.py` compares inputs; `audit_sensors.py` and its `--surface-probes` rerun establish sensor ownership; `task_paths.py` independently traces source-facing segments; `measure_current.py` runs the existing production measurement, and `--surface-probes` records diagnostic placement changes; `probe_v15_current.py` isolates current colour transport; `tables.py` creates the deterministic tables. The complete named cohorts, individual fixture drivers/CCTs, task positions and photometry identities remain in their JSON records. These diagnostics are not a new deployed workflow.
+
+## Production probe ownership fix — 2026-10-09
+
+The repair follows the diagnosed datum through construction. Every task definition declares its owning furniture item. Before mounting, `archpipe.task_probe.author_bindings` records a mesh identity, an upward face index and the task's explicit clearance. After all mounting/assembly migrations, `bind_planes` derives the exported plane from that actual final face. Contact tasks use the measured top with zero clearance; a sink/vanity aperture uses its declared host's rim datum. Reading/grooming points retain their authored task clearance above their host rather than becoming seat/basin-bottom measurements. The existing diffuse sensor remains 1 mm above the resulting plane, and the virtual probe camera retains its existing 25 mm plane offset. No luminaire, target, design mesh, material, presentation camera or QA limit is adjusted.
+
+The earliest guard runs at final scene construction and exported-scene validation, then at measurement entry. It refuses missing/stale/invalid ownership and traces all 256 metered pixel centres plus the local approach from each analytic light and luminous mesh. A hit names the room/task, the solid, its hit position and whether it blocks the upward view or source approach. Every visible solid is included, including glass; material cannot exempt a local obstruction. The source check covers the final 24 mm of approach, equal to the existing camera-to-sensor gap; remote furniture shadows remain part of the physical lighting calculation. The Blender measurement additionally traces its evaluated geometry before creating a sensor or rendering a probe, covering imported objects, cloth, bevels and subdivisions. Renderer reuse includes the new guard code.
+
+The frozen reproduction is [task-probe-hidden-sensors.json.gz](../tests/fixtures/task-probe-hidden-sensors.json.gz): all 17 original failing points and their actual host faces by value from `sensor-audit.json` and the retained scene. [test_task_probe.py](../tests/test_task_probe.py) proves rejection of all 17, silence on corrected placement, construction of their corrected planes after mounting, a renamed/translated sibling, arbitrary host translation, missing/stale/invalid bindings, a foreign solid, a noncentral metered pixel and a grazing source approach. The shared evaluated-ray-provider interface exercises the same actual failing and clean data. `tests/blender_task_probe.py` also runs those 17 failing and 17 clean cases through Blender’s actual evaluated ray provider. The production vase face is separately frozen in `tests/fixtures/task-probe-evaluated-obstructions.json.gz`; Python and Blender tests reject it, accept its clear control, and the Python test rejects a renamed sibling. The frozen readings are retained unchanged; a low-lux screen is never substituted for ownership. First-fix checkpoint: [probe-placement-preview.png](../out/task-probe-fix/probe-placement-preview.png) was inspected against the frozen induction coordinates: the old sensor is 1 mm below the measured hob, the corrected sensor is 1 mm above; the camera-to-sensor gap stays 24 mm.
+
+Lessons to register: `lighting-rebalance-sensor-host` is covered and registered in `knowledge/build-input-guards.json`, with the construction, fail-closed stages and proving tests. `docs/LEARNINGS.md`, the canonical lighting-proof workflow and its generated Claude adapter are updated together. The nominal-height construction defect is repaired and its guard proofs pass. The full production measurement gate remains failed on the separately retained vase obstruction; lighting-design and presentation findings keep their existing status.
+
+
+
+### Production results
+
+Fresh exported source hash: `1c8581a1571d95c79e68c9260e6ecfba3fe1021ad9f9f97a12fca725630f115f`, uncommitted work on `afe73479a3c6ffa3180cd69ed77a815275b6b193`. The full production consumer is rerun from [measure_production.py](../out/task-probe-fix/measure_production.py) with the pinned Blender binary. It refuses the dining-table centre before any sensor render. The complete evaluated audit finds **24 clear probes and one refused probe**: `prop-dining-vase-000`, face 9889, at `[16.9453125, -25.904687881469727, -2.237814426422119]` m, on an upward-view path. Its sensor elevation is −2.247 m, so the vase face is about 9.2 mm above the sensor. This is the same instrumentation-occlusion class on imported geometry, and the new guard catches it at the earliest stage that has that geometry. The earlier diagnostic claim that 25 returned readings met their minima did not establish that this foreign-solid pixel was a sensor reading; the new production result leaves it unavailable.
+
+[Audit and measurement script](../out/task-probe-fix/audit_and_measure.py) audits the original 25-point export and runs the unchanged production consumer on its 24 accepted points, which the mandatory guards check again. It keeps every original mesh, model, prop, cloth, curtain, light and point coordinate. This is explicitly a **partial production measurement**, not a passed 25-point gate. It reports all original 25 points in [all-point-results.json](../out/task-probe-fix/all-point-results.json), retaining the refused point without inventing an illuminance value. The original full consumer and this audit command both exit nonzero for the refusal. No guard bypass, placement patch or decoration removal is used.
+
+Measurements retain the existing maintenance factor 0.8, all functional layers at their authored output, black sky, 256 samples, 32 × 32 pixel probes, 16-bounce total and zero-bounce direct measurements, no denoising, actual furnished scene and existing optical assumptions. Twenty-four measured points meet their minima; none is a genuine measured shortfall. The remaining 100 lx dining-centre target has no valid achieved value. The existing assumed upper-ratio screen remains advisory and unchanged.
+
+| Point | Room / task | Direct lx | Total lx | Target lx | Result |
+| --- | --- | ---: | ---: | ---: | --- |
+| 1 | kitchen / island prep side | 1077.2 | 1362.7 | 500 | PASS |
+| 2 | kitchen / island seating side | 838.0 | 1096.0 | 200 | PASS |
+| 3 | kitchen / island prep side | 1033.6 | 1228.6 | 500 | PASS |
+| 4 | kitchen / island seating side | 850.9 | 1114.0 | 200 | PASS |
+| 5 | kitchen / island prep side | 835.4 | 1112.8 | 500 | PASS |
+| 6 | kitchen / island seating side | 676.6 | 926.3 | 200 | PASS |
+| 7 | kitchen / single induction zone | 1004.7 | 1301.4 | 300 | PASS |
+| 8 | kitchen / sink | 1154.1 | 1348.3 | 300 | PASS |
+| 9 | dining / dining table centre | unavailable | unavailable | 100 | REFUSED: vase |
+| 10 | dining / table end (homework) | 462.1 | 580.8 | 200 | PASS |
+| 11 | dirty-kitchen / dirty kitchen run | 679.0 | 812.5 | 500 | PASS |
+| 12 | study-game / study-desk | 931.6 | 1014.2 | 400 | PASS |
+| 13 | study-game / study-adult-desk | 905.8 | 972.3 | 400 | PASS |
+| 14 | kids-a / ka-desk-1 | 1391.5 | 1513.5 | 400 | PASS |
+| 15 | kids-a / ka-desk-2 | 1390.4 | 1500.0 | 400 | PASS |
+| 16 | kids-b / kb-desk | 1389.4 | 1485.9 | 400 | PASS |
+| 17 | parents-bed / pillow | 1114.0 | 1194.5 | 200 | PASS |
+| 18 | parents-bed / pillow | 1116.5 | 1189.2 | 200 | PASS |
+| 19 | family-bath / fb-basin | 1337.5 | 1616.4 | 300 | PASS |
+| 20 | parents-ensuite / pe-basin | 631.2 | 757.8 | 300 | PASS |
+| 21 | guest-wc / gwc-basin | 1375.2 | 1599.5 | 300 | PASS |
+| 22 | lounge / armchair | 789.7 | 951.2 | 200 | PASS |
+| 23 | bar-alcove / daybed nook | 324.6 | 421.8 | 200 | PASS |
+| 24 | cinema / cinema desk | 1483.9 | 1521.8 | 400 | PASS |
+| 25 | cinema / cinema desk | 1492.4 | 1526.1 | 400 | PASS |
+
+Point numbers follow original export order; repeated labels identify distinct coordinates in the linked JSON. Raw linear probes are retained under [accepted-measurements](../out/task-probe-fix/accepted-measurements). The full obstruction audit is [evaluated-probe-audit.json](../out/task-probe-fix/evaluated-probe-audit.json), and the refusing consumer log is [production-measurement-final.log](../out/task-probe-fix/production-measurement-final.log). [unchanged-design-final.json](../out/task-probe-fix/unchanged-design-final.json) compares the full scene fields by value against the retained diagnosis export; it separately checks all point identities, targets and horizontal coordinates.
+
+
+### Fix acceptance
+
+| Check | Result | Evidence |
+| --- | --- | --- |
+| Focused lighting, render standard, scene contract, task guard and adapter selection | 124 tests, exit 0 | [focused-tests-final.log](../out/task-probe-fix/focused-tests-final.log) |
+| Final task guard and adapter selection, including the glass and real vase cases | 16 tests, exit 0 | [guard-and-agent-tests-final.log](../out/task-probe-fix/guard-and-agent-tests-final.log) |
+| Actual Blender evaluated-ray guard cases | 2 tests, exit 0; the 17 failing and 17 clean hosts plus vase/glass controls | [blender-guard-tests-final.log](../out/task-probe-fix/blender-guard-tests-final.log) |
+| `scripts/verify.py --portable`, normal `HOME` | Exit 0 | [verify-portable-final.log](../out/task-probe-fix/verify-portable-final.log) |
+| `scripts/verify.py --portable`, initially empty `HOME` | Exit 0 | [verify-empty-home-final.log](../out/task-probe-fix/verify-empty-home-final.log) |
+| Full production measurement | Expected exit 1: named vase obstruction; no sensor rendered | [production-measurement-final.log](../out/task-probe-fix/production-measurement-final.log) |
+| Guarded clear-subset production measurement | 24 measured minima met; expected exit 1 for the retained refused point | [audit-and-measure.log](../out/task-probe-fix/audit-and-measure.log) |
+| Canonical agent adapters / diff whitespace | `sync_agent_assets.py --check` and `git diff --check`, exit 0 | 38 adapters checked |
+
+[acceptance-status.json](../out/task-probe-fix/acceptance-status.json) retains exit statuses and log hashes, distinguishing code acceptance from the failed full measurement gate. [refresh_evidence.py](../out/task-probe-fix/refresh_evidence.py) verifies the matching export source and unchanged persisted scene values, then refreshes both production executions. [verify_both.py](../out/task-probe-fix/verify_both.py) runs the two portable contexts sequentially. The initial mistaken `tests.test_lighting` name was refused before test execution; the corrected existing module selection above passed. The final material-exemption correction was separately tested by the final guard and Blender selections and both portable contexts.
+
+The pinned Python interpreter, `PYTHONPATH=src`, `NO_COLOR=1`, single-threaded OpenBLAS and Blender 4.5.14 were retained. Production rendering used eight CPU threads and the existing graphics lock. The lighting-proof skill was updated and `scripts/sync_agent_assets.py` run; adapters match. No package installation, full-suite run, protected shared-data modification or commit was performed. The lead retains full-suite and commit ownership. These results repair instrumentation ownership; they approve no real villa design gate.

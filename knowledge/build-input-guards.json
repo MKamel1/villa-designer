@@ -99,6 +99,33 @@
         "test_stable_source_accepts_exact_bytes_and_refuses_changed_scene_or_truncation"
       ],
       "closure": "Exclude contaminated live-tree profile; no rendering or design approval"
+    },
+    {
+      "lesson_id": "lighting-rebalance-sensor-host",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "task_probe.author_bindings and bind_planes own final mesh faces after mounting",
+      "check": "task_probe.require_clear_probes; villa_render_contract.validate_scene; villa_scene.measure_lighting evaluated ray guard; scripts/verify.py; tests/blender_task_probe.py exercises Blender evaluated rays on the frozen 17 hosts and the actual vase",
+      "stage": "scene export and before lighting measurement",
+      "proof_file": "tests/test_task_probe.py",
+      "proofs": [
+        "test_all_17_real_hidden_sensors_fire_and_corrected_planes_stay_quiet",
+        "test_renamed_translated_siblings_fire_and_stay_quiet",
+        "test_surface_construction_follows_measured_top_and_refuses_missing_ownership",
+        "test_foreign_solid_and_noncentral_pixel_mutations_fire",
+        "test_source_approach_fires_without_rejecting_remote_shadows",
+        "test_stale_or_removed_host_is_refused",
+        "test_evaluated_ray_provider_checks_the_same_frozen_cases",
+        "test_invalid_binding_values_refuse_before_measurement",
+        "test_all_17_host_bindings_construct_corrected_placement_after_mounting",
+        "test_measurement_refuses_real_hidden_probe_before_accessing_blender",
+        "test_export_contract_refuses_hidden_and_missing_ownership_but_accepts_clean",
+        "test_real_evaluated_vase_obstruction_and_renamed_sibling",
+        "test_glass_solid_never_exempts_an_obstructed_probe"
+      ],
+      "closure": "Measurement ownership only; design lighting and presentation failures unchanged"
     }
   ]
 }

@@ -177,6 +177,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     code = b"".join((ROOT / "src/archpipe/blender" / n).read_bytes() for n in ("villa_scene.py", "photoreal.py",
                                                                                  "build_scene.py", "presentation.py"))
     code += (ROOT / "src/archpipe/villa_render_contract.py").read_bytes()
+    code += (ROOT / "src/archpipe/task_probe.py").read_bytes()
     code += (ROOT / "src/archpipe/furniture_orientation.py").read_bytes()
     code += (ROOT / "src/archpipe/execution_context.py").read_bytes()
     code += (ROOT / "scripts/preflight.py").read_bytes()

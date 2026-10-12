@@ -2153,14 +2153,18 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                                            "night": {"hdri": "dikhololo_night.exr", "horizontal_lux": 0.3}},
              "measurement_maintenance_factor": VL.MF,
              "measurement_points": [dict(room=room, card=card, position=[x, y, z], label=label,
-                                         required_lux=VL.card_value(card))
-                                    for room, card, x, y, z, label in VL.task_points(lay)],
+                                         required_lux=VL.card_value(card), host_item=host,
+                                         host_reference=('rim' if card in ('ies-res-kitchen-sink-300',
+                                                         'ies-res-vanity-grooming-300') else 'top'))
+                                    for room, card, x, y, z, label, host in VL.task_points(lay, with_hosts=True)],
              "notes": notes + ["Selected furniture products use measured native glTF bounds and uniform scale; "
                                "rejected choices remain PROCEDURAL STAND-INS with recorded reasons. Joinery and "
                                "sanitaryware remain procedural. Pulls, taps, leg styles, sink "
                                "and cushion forms are ASSUMED details inside each checked envelope.",
                                "Finishes are ASSUMED from the taste profile (no finishes answers yet).",
                                "Dressing (plants, books, vases, art, pillows) is not design."]}
+    from ..task_probe import author_bindings, bind_planes, require_clear_probes
+    author_bindings(scene)
     _seat_recessed_on_soffit(scene)
     from .fitting_mounting import migrate
     migrate(scene, lay, sp, FINISH)
@@ -2249,6 +2253,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     scene['part_failures'] = admitted.failures
     scene['part_exemptions'] = [dict(id=m['id'], kind=m['part_kind'], **m['proxy_exemption'])
                                for m in admitted if m.get('proxy_exemption')]
+    bind_planes(scene)
+    require_clear_probes(scene)
     return scene
 
 
