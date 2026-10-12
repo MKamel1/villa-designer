@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-12T05:50:41.424819+00:00",
+  "branch": "codex/search2",
+  "scope": "Research only; no assets downloaded, no production changes or integration.",
+  "definitions": {
+    "D1": "Current authored villa layout option; this is not an approved real villa design gate.",
+    "UID": "Sketchfab unique model identifier.",
+    "CC_BY": "Creative Commons Attribution; exact licence URL accompanies each candidate.",
+    "CC0": "Creative Commons Zero public-domain dedication.",
+    "m": "metres",
+    "mm": "millimetres"
+  },
+  "robots_receipts": [
+    {
+      "url": "https://sketchfab.com/robots.txt",
+      "status": 200,
+      "checked_at_utc": "2026-10-12T05:36:42.993201+00:00",
+      "body": "User-agent: *\nDisallow: /admin*\nDisallow: /i/*\nDisallow: /models/*/ar-redirect\nUser-agent: bingbot\nCrawl-delay: 1\nAllow: /\n",
+      "sha256": "58f9abd0e34e776a7418e5cf3c674f7a9fbe4575c9d2452a57d4bc46fc95594d",
+      "decision": "Public /3d-models/, /v3/search and /v3/models/<UID> permitted for User-agent *; no login or downloads requested."
+    },
+    {
+      "url": "https://api.sketchfab.com/robots.txt",
+      "status": 200,
+      "checked_at_utc": "2026-10-12T05:36:43.542199+00:00",
+      "body": "User-agent: *\nDisallow: /admin*\nDisallow: /i/*\nDisallow: /models/*/ar-redirect\nUser-agent: bingbot\nCrawl-delay: 1\nAllow: /\n",
+      "sha256": "58f9abd0e34e776a7418e5cf3c674f7a9fbe4575c9d2452a57d4bc46fc95594d",
+      "decision": "Public /3d-models/, /v3/search and /v3/models/<UID> permitted for User-agent *; no login or downloads requested."
+    },
+    {
+      "url": "https://polyhaven.com/robots.txt",
+      "status": 403,
+      "checked_at_utc": "2026-10-12T05:36:43Z",
+      "timestamp_precision": "batch start; individual response time not recorded",
+      "decision": "Robots unavailable; stopped direct requests. Search-engine indexed text only; no permission inferred."
+    },
+    {
+      "url": "https://api.polyhaven.com/robots.txt",
+      "status": 403,
+      "checked_at_utc": "2026-10-12T05:36:43Z",
+      "timestamp_precision": "batch start; individual response time not recorded",
+      "decision": "Robots unavailable; stopped direct requests. Search-engine indexed text only; no permission inferred."
+    },
+    {
+      "url": "https://www.blenderkit.com/robots.txt",
+      "status": 403,
+      "checked_at_utc": "2026-10-12T05:36:43Z",
+      "timestamp_precision": "batch start; individual response time not recorded",
+      "decision": "Robots unavailable; stopped direct requests. Search-engine indexed text only; no permission inferred."
+    },
+    {
+      "url": "https://media.sketchfab.com/robots.txt",
+      "status": 200,
+      "checked_at_utc": "2026-10-12T05:39:10.266536+00:00",
+      "sha256": "84d200fc0af0a8ada208ab6208768bf2a60781bb758dc948137efd8ae581ef4e",
+      "body": "User-agent: *\nDisallow: /archives/\nDisallow: /backgrounds/\nDisallow: /debug/\nDisallow: /download/\nDisallow: /environments/\nDisallow: /rendering-tests/\nDisallow: /trash/\nDisallow: /urls/\nDisallow: /uploads/\nAllow:    /urls/*/thumbnails/\nAllow:    /urls/*/fallback/",
+      "decision": "Listing /models/<UID>/thumbnails/ permitted; archive/download paths not accessed."
+    }
+  ],
+  "public_api_search_queries": [
+    "bunk bed",
+    "bunk",
+    "single bed",
+    "bed 120",
+    "scandinavian bed",
+    "oak bed",
+    "wardrobe",
+    "oak wardrobe",
+    "walnut bedside",
+    "dressing table",
+    "mid century cabinet",
+    "tv cabinet",
+    "sideboard",
+    "bunk dimensions",
+    "wooden bed",
+    "bedside brass",
+    "walnut nightstand",
+    "wardrobe 150",
+    "dressing table walnut",
+    "bed dimensions",
+    "bed small double",
+    "bed 120cm",
+    "nordic bed",
+    "walnut brass cabinet",
+    "walnut dressing table",
+    "desk mid century",
+    "oak desk drawers",
+    "bed 120x200",
+    "bunk 90x200",
+    "bed 120 200",
+    "oak wardrobe 150",
+    "bed 4ft"
+  ],
+  "search_limits": "Public API queries sampled the first 24 results (last four storage queries: first 12); query terms sometimes match unrelated assets. No exhaustive catalogue claim.",
+  "alternative_catalogues": [
+    {
+      "source": "Poly Haven",
+      "licence": "CC0",
+      "licence_source": "https://polyhaven.com/license",
+      "search": "site:polyhaven.com/a bed; indexed furniture catalogue",
+      "result": "Indexed beds: Gothic Bed 01, Old Bed Frame, Vintage Day Bed; style/form mismatch, no new shortlist. Direct robots/API unavailable (403)."
+    },
+    {
+      "source": "BlenderKit",
+      "terms_source": "https://www.blenderkit.com/get-blenderkit/659b5eb1-707c-45c6-bb52-8f7193d04e70/",
+      "result": "Official free download flow promotes add-on and account creation; unauthenticated asset download permission not established. Robots 403; excluded under no-login condition, not a claim that all free assets require login."
+    }
+  ],
+  "requirements_source": [
+    "User search brief (15 percent distortion and 50 mm frame margin)",
+    "docs/beds-report.md, round 5; src/archpipe/beds.py scaled_bed_fit"
+  ],
+  "report_version_limit": "This branch copy of docs/beds-report.md ends at round 5; rounds 6 and 7 are not present. The user-supplied 50 mm condition is applied as a search requirement, without claiming it already exists in production checks.",
+  "acceptance_checks": [
+    "Measure actual separate mattress geometry, source units and head/foot orientation; never use frame bounds as mattress bounds.",
+    "Compute width and length multipliers from actual mattress dimensions. Both must be between 0.5 and 2.0; the larger divided by the smaller, minus one, must be at most 0.15 (15 percent).",
+    "Measure every retained frame edge against the transformed mattress: at most 0.050 m (50 mm) outward beyond each mattress edge; retain ladder in frame/route review.",
+    "Keep one transform for the whole bed; both bunk mattresses must match 0.900 by 2.000 m and their tops must remain 0.400 and 1.400 m above finished floor. Kids B top remains 0.475 m.",
+    "Verify bed-only separability, support, guard and ladder geometry, collisions, doors, routes, storage fronts, cloth and unchanged-room neutral preview. No material retouching or room changes to rescue a mismatch."
+  ],
+  "qualified_candidates_count": 0,
+  "existing_library_bed_records": [
+    {
+      "id": "sf_chelsea_bed",
+      "source": "sketchfab",
+      "credit": "Chelsea bed with storage - 3D Model by bertosalotti (https://sketchfab.com/3d-models/chelsea-bed-with-storage-3d-model-cbe6e0dcc10a414a84acc5cc08171b87), CC Attribution"
+    },
+    {
+      "id": "sf_bed_forssa",
+      "source": null,
+      "credit": "Model Information:\n* title:\tBed FORSSA\n* source:\thttps://sketchfab.com/3d-models/bed-forssa-0e4ec2bb5aff42d8a324b3f8ab9ac9de\n* author:\tleonardgraylar (https://sketchfab.com/leonardgraylar)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Bed FORSSA\" (https://sketchfab.com/3d-models/bed-forssa-0e4ec2bb5aff42d8a324b3f8ab9ac9de) by leonardgraylar (https://sketchfab.com/leonardgraylar) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed_scandi_bare",
+      "source": null,
+      "credit": "Model Information:\n* title:\tStained Bare Scandinavian Bed\n* source:\thttps://sketchfab.com/3d-models/stained-bare-scandinavian-bed-3af9fc8452ca4c1180ce9ae7a9600b79\n* author:\tJudeNavarre (https://sketchfab.com/JudeNavarre)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Stained Bare Scandinavian Bed\" (https://sketchfab.com/3d-models/stained-bare-scandinavian-bed-3af9fc8452ca4c1180ce9ae7a9600b79) by JudeNavarre (https://sketchfab.com/JudeNavarre) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed_upholstered_cyberfox",
+      "source": null,
+      "credit": "Model Information:\n* title:\tUpholstered Bed || Free model\n* source:\thttps://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be\n* author:\tCyberFox 3D Studio (https://sketchfab.com/cyberfox3d)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Upholstered Bed || Free model\" (https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be) by CyberFox 3D Studio (https://sketchfab.com/cyberfox3d) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bunk_home_series",
+      "source": null,
+      "credit": "Model Information:\n* title:\tHome Series – Bunk Bed\n* source:\thttps://sketchfab.com/3d-models/home-series-bunk-bed-2ba8ccae518d4dc1be00dcdff0d4ac01\n* author:\tSpazio Silvestre (https://sketchfab.com/spazio_silvestre)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Home Series – Bunk Bed\" (https://sketchfab.com/3d-models/home-series-bunk-bed-2ba8ccae518d4dc1be00dcdff0d4ac01) by Spazio Silvestre (https://sketchfab.com/spazio_silvestre) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bunk_simple_3dworkbench",
+      "source": null,
+      "credit": "Model Information:\n* title:\tsimple wooden bunk bed\n* source:\thttps://sketchfab.com/3d-models/simple-wooden-bunk-bed-a7685bd7b2354157b4c1a8264892acf0\n* author:\tlionarts3d (https://sketchfab.com/lionarts3d)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"simple wooden bunk bed\" (https://sketchfab.com/3d-models/simple-wooden-bunk-bed-a7685bd7b2354157b4c1a8264892acf0) by lionarts3d (https://sketchfab.com/lionarts3d) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed3_dff77bbd",
+      "source": null,
+      "credit": "Model Information:\n* title:\tModern bed\n* source:\thttps://sketchfab.com/3d-models/modern-bed-dff77bbdb8854ba4afe502af5068d8f9\n* author:\tArchVibe 3D (https://sketchfab.com/super-valentin)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Modern bed\" (https://sketchfab.com/3d-models/modern-bed-dff77bbdb8854ba4afe502af5068d8f9) by ArchVibe 3D (https://sketchfab.com/super-valentin) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed3_d3aeb724",
+      "source": null,
+      "credit": "Model Information:\n* title:\tDark Modern Bed\n* source:\thttps://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220\n* author:\tRen Viro Store (https://sketchfab.com/renviros)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Dark Modern Bed\" (https://sketchfab.com/3d-models/dark-modern-bed-d3aeb724e09c44af96ef09cd20885220) by Ren Viro Store (https://sketchfab.com/renviros) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed3_9fb7c547",
+      "source": null,
+      "credit": "Model Information:\n* title:\tSimple Bunk Bed\n* source:\thttps://sketchfab.com/3d-models/simple-bunk-bed-9fb7c54715dd41b98b3dc67b367cf81d\n* author:\tBlender3D (https://sketchfab.com/Blender3D)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Simple Bunk Bed\" (https://sketchfab.com/3d-models/simple-bunk-bed-9fb7c54715dd41b98b3dc67b367cf81d) by Blender3D (https://sketchfab.com/Blender3D) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed3_0e134823",
+      "source": null,
+      "credit": "Model Information:\n* title:\tbunk bed\n* source:\thttps://sketchfab.com/3d-models/bunk-bed-0e13482338344239abd8b697def3b20c\n* author:\tAM ARCHITECTURE (https://sketchfab.com/abir_sd)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"bunk bed\" (https://sketchfab.com/3d-models/bunk-bed-0e13482338344239abd8b697def3b20c) by AM ARCHITECTURE (https://sketchfab.com/abir_sd) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed3_2cabd354",
+      "source": null,
+      "credit": "Model Information:\n* title:\tSimple Bunk Bed 3D Model\n* source:\thttps://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10\n* author:\tsparshgupta (https://sketchfab.com/SPARSHGUPTA)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Simple Bunk Bed 3D Model\" (https://sketchfab.com/3d-models/simple-bunk-bed-3d-model-2cabd354ef2e4293ae817b01a8fdbf10) by sparshgupta (https://sketchfab.com/SPARSHGUPTA) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed3_28a8b705",
+      "source": null,
+      "credit": "Model Information:\n* title:\tBed Wood Oak PBR\n* source:\thttps://sketchfab.com/3d-models/bed-wood-oak-pbr-28a8b7050a5e4951abbfb588015abf41\n* author:\tAHMED KCHIKICH (https://sketchfab.com/inven2000)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Bed Wood Oak PBR\" (https://sketchfab.com/3d-models/bed-wood-oak-pbr-28a8b7050a5e4951abbfb588015abf41) by AHMED KCHIKICH (https://sketchfab.com/inven2000) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    },
+    {
+      "id": "sf_bed3_fe3c50e1",
+      "source": null,
+      "credit": "Model Information:\n* title:\tEngi bed\n* source:\thttps://sketchfab.com/3d-models/engi-bed-fe3c50e1eb7b4b0eafa647598ca53f11\n* author:\tWOODPORT (https://sketchfab.com/woodport)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Engi bed\" (https://sketchfab.com/3d-models/engi-bed-fe3c50e1eb7b4b0eafa647598ca53f11) by WOODPORT (https://sketchfab.com/woodport) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)"
+    }
+  ],
+  "beds": [
+    {
+      "id": "ka-bunk",
+      "room": "kids-a",
+      "berths": 2,
+      "mattress_plan_m": [
+        0.9,
+        2.0
+      ],
+      "mattress_top_above_finished_floor_m": [
+        0.4,
+        1.4
+      ],
+      "design_overall_height_m": 1.7,
+      "candidates": [
+        {
+          "uid": "e81c12b73b44472cbcc262069c03fc45",
+          "url": "https://sketchfab.com/3d-models/e81c12b73b44472cbcc262069c03fc45",
+          "name": "Bunk Bed",
+          "author": "Em3D",
+          "author_username": "Em3D",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "metadata_receipt": {
+            "url": "https://api.sketchfab.com/v3/models/e81c12b73b44472cbcc262069c03fc45",
+            "status": 200,
+            "checked_at": "2026-10-12T05:38:50.582061+00:00",
+            "sha256": "74284e1492995ab1d5e295244045d7dffe3da9ff94017d5b188ae040b90fa154"
+          },
+          "target_ids": [
+            "ka-bunk"
+          ],
+          "stated_dimensions": null,
+          "source_dimensions_measured": false,
+          "thumbnail_url": "https://media.sketchfab.com/models/e81c12b73b44472cbcc262069c03fc45/thumbnails/944aa673f41d4fe6817a9ce050825a93/256x144.jpeg",
+          "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+          "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+          "rationale": "Best style lead: pale timber, two exposed mattresses and compact upright ladder at the end; simple form offers identifiable mattress and frame surfaces. No dimensions support a numerical pass prediction.",
+          "reservations": "Separate mattresses only appear distinct in the thumbnail; node separation, units, berth-height ratio, frame margins and ladder route remain unknown.",
+          "status": "conditional_search_lead; no model downloaded; not accepted"
+        },
+        {
+          "uid": "3ddab7a93381496eba3c36677e777912",
+          "url": "https://sketchfab.com/3d-models/3ddab7a93381496eba3c36677e777912",
+          "name": "Bunk Bed",
+          "author": "neverfollow81",
+          "author_username": "neverfollow81",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "metadata_receipt": {
+            "url": "https://api.sketchfab.com/v3/models/3ddab7a93381496eba3c36677e777912",
+            "status": 200,
+            "checked_at": "2026-10-12T05:38:43.864790+00:00",
+            "sha256": "038ffdf109ab6b5f34e46899e365468746f94a2cfa5889ce50a9727c0fbbf436"
+          },
+          "target_ids": [
+            "ka-bunk"
+          ],
+          "stated_dimensions": null,
+          "source_dimensions_measured": false,
+          "thumbnail_url": "https://media.sketchfab.com/models/3ddab7a93381496eba3c36677e777912/thumbnails/9d8d3eb0b5dc428e9d19fdf28b4279ea/e429cdd9cccd4009b55fdbd3423bb425.jpeg",
+          "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+          "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+          "rationale": "Thin tubular frame, exposed two mattresses and upright ladder avoid the staircase/storage width of previous misses. Bed-only thumbnail; clean surfaces make mattress identification plausible.",
+          "reservations": "Metal rather than light oak; artist describes a game asset. Real dimensions, mattress separation, both top heights and margins unpublished.",
+          "status": "conditional_search_lead; no model downloaded; not accepted"
+        },
+        {
+          "uid": "ea60847abaaf4662b5f7c75b44f3ce9d",
+          "url": "https://sketchfab.com/3d-models/ea60847abaaf4662b5f7c75b44f3ce9d",
+          "name": "bunk bed",
+          "author": "filthycent",
+          "author_username": "filthycent",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "metadata_receipt": {
+            "url": "https://api.sketchfab.com/v3/models/ea60847abaaf4662b5f7c75b44f3ce9d",
+            "status": 200,
+            "checked_at": "2026-10-12T05:38:42.371035+00:00",
+            "sha256": "7c5d099db7e0cd7b46d810ff29e4a15e4203186f188d967a562f35b235667e56"
+          },
+          "target_ids": [
+            "ka-bunk"
+          ],
+          "stated_dimensions": null,
+          "source_dimensions_measured": false,
+          "thumbnail_url": "https://media.sketchfab.com/models/ea60847abaaf4662b5f7c75b44f3ce9d/thumbnails/7f117e162d5f471a8438ba4720f1fe5c/5eea66713f0c48e1a7875300d401cfd4.jpeg",
+          "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+          "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+          "rationale": "Bed-only preview has exposed mattresses, narrow posts and a straight ladder; frame looks less bulky than rejected staircase bunks.",
+          "reservations": "Black metal style reserve; listing description empty. Source dimensions, ladder projection, separate mattress nodes and common height transform unknown.",
+          "status": "conditional_search_lead; no model downloaded; not accepted"
+        },
+        {
+          "uid": "560110ada0484449b5ab71594c4bb85d",
+          "url": "https://sketchfab.com/3d-models/560110ada0484449b5ab71594c4bb85d",
+          "name": "Low Poly Bunk Bed #1",
+          "author": "JustBlender",
+          "author_username": "JustBlender",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "metadata_receipt": {
+            "url": "https://api.sketchfab.com/v3/models/560110ada0484449b5ab71594c4bb85d",
+            "status": 200,
+            "checked_at": "2026-10-12T05:39:51.675194+00:00",
+            "sha256": "5cfc6e6dc47164c50f0bf3d07dbbb679154562e06ae030f0fb3ab2d243fea1d2"
+          },
+          "target_ids": [
+            "ka-bunk"
+          ],
+          "stated_dimensions": {
+            "text": "1.97m x 1.03m x 1.62m",
+            "kind": "overall extents; axis order not named",
+            "semantic_order_inferred_from_preview": "length, width, height",
+            "mattress_m": null
+          },
+          "source_dimensions_measured": false,
+          "thumbnail_url": "https://media.sketchfab.com/models/560110ada0484449b5ab71594c4bb85d/thumbnails/58878ca9a68a44e38e1bb702c714acf8/52afa0cbf92f48e691f059dccb507f0a.jpeg",
+          "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+          "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+          "rationale": "Dimension-first reserve: listing overall extents are near a single-bunk size. Two purple mattress surfaces and vertical ladder are visible. Overall plan ratios suggest modest adjustment, but only actual mattress ratios can establish eligibility.",
+          "reservations": "Very simple low-poly appearance with tall end panels and flat colour; 1.03 m overall width is not a 0.90 m mattress. Overall extents used as a deliberately invalid mattress proxy give 16.1873 percent distortion, above 15 percent. Mattress can be narrower, so measure before rejecting or accepting.",
+          "status": "conditional_search_lead; no model downloaded; not accepted"
+        }
+      ]
+    },
+    {
+      "id": "kb-bed",
+      "room": "kids-b",
+      "berths": 1,
+      "mattress_plan_m": [
+        1.2,
+        2.0
+      ],
+      "mattress_top_above_finished_floor_m": [
+        0.475
+      ],
+      "design_overall_height_m": 0.95,
+      "style": "Scandinavian light oak",
+      "candidates": [
+        {
+          "uid": "d92ab9476b6c4223b9e942954aa58835",
+          "url": "https://sketchfab.com/3d-models/d92ab9476b6c4223b9e942954aa58835",
+          "name": "Nordi-bed",
+          "author": "WOODPORT",
+          "author_username": "woodport",
+          "licence": "CC Attribution",
+          "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+          "downloadable": true,
+          "metadata_receipt": {
+            "url": "https://api.sketchfab.com/v3/models/d92ab9476b6c4223b9e942954aa58835",
+            "status": 200,
+            "checked_at": "2026-10-12T05:38:53.202942+00:00",
+            "sha256": "96d3bc499b66caf30619adf1c5bba8e6b4df2c953071ae1f570cee56649d9d5e"
+          },
+          "target_ids": [
+            "kb-bed"
+          ],
+          "stated_dimensions": null,
+          "source_dimensions_measured": false,
+          "thumbnail_url": "https://media.sketchfab.com/models/d92ab9476b6c4223b9e942954aa58835/thumbnails/dac09ba0237145b28eecd2f34a4b6ee4/967402234f6c42e48a6ae023d248183b.jpeg",
+          "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+          "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+          "rationale": "Strongest material lead: author identifies oak; bed-only thumbnail shows a pale timber frame with exposed mattress edge and light bedding.",
+          "reservations": "No sizes stated. Headboard projects sideways; frame edges may exceed 50 mm. Mattress is partly dressed and a separable full mattress is unconfirmed. A double-bed aspect ratio would fail the plan-distortion rule.",
+          "status": "conditional_search_lead; no model downloaded; not accepted"
+        }
+      ]
+    }
+  ],
+  "screened_out": [
+    {
+      "uid": "28a8b7050a5e4951abbfb588015abf41",
+      "name": "Bed Wood Oak PBR",
+      "url": "https://sketchfab.com/3d-models/28a8b7050a5e4951abbfb588015abf41",
+      "reason": "Already cached and measured as sf_bed3_28a8b705, round 4. Removed by final UID duplicate audit; do not download again or treat a fresh metadata response as new geometry evidence."
+    },
+    {
+      "uid": "8aeacdcd0de84070b2ea64296ddba474",
+      "name": "Bed Sweet",
+      "url": "https://sketchfab.com/3d-models/8aeacdcd0de84070b2ea64296ddba474",
+      "reason": "Published sleeping place 1500 by 2000 (units implicit, interpreted as mm). If confirmed, Kids B factors are 0.8 and 1.0, giving 25 percent distortion; published side thickness 120 also conflicts with a 50 mm frame margin. Not shortlisted."
+    },
+    {
+      "uid": "b5a75d2a3bb242989d4d05e3e449a7ec",
+      "name": "bed with headboard begie 120 * 190",
+      "url": "https://sketchfab.com/3d-models/b5a75d2a3bb242989d4d05e3e449a7ec",
+      "reason": "Title supplies 120 by 190 without units or a mattress definition; preview shows only a rounded panel/headboard, not an identifiable whole bed. If it meant a 1.20 by 1.90 m mattress, factors 1 and 1.052632 give 5.2632 percent distortion, but this cannot establish a bed-only oak candidate."
+    },
+    {
+      "uid": "b8fb51200aae41c6a660e54c16c9b538",
+      "name": "Children's Bunk Bed Lucia",
+      "url": "https://sketchfab.com/3d-models/b8fb51200aae41c6a660e54c16c9b538",
+      "reason": "Published overall dimensions 0.839 by 1.717 by 2.526 m, axes unnamed. Large storage staircase shown; no ladder and no mattress sizes. Poor prospect for retained-frame margin."
+    },
+    {
+      "uid": "964acad2c4ab45ca97d8c8d5d57d6327",
+      "name": "Bunk Bed",
+      "url": "https://sketchfab.com/3d-models/964acad2c4ab45ca97d8c8d5d57d6327",
+      "reason": "Broad staircase/storage unit rather than compact ladder. No dimensions."
+    },
+    {
+      "uid": "e3f81d29bf234b728a154b41f50bbb9b",
+      "name": "Bunk Bed",
+      "url": "https://sketchfab.com/3d-models/e3f81d29bf234b728a154b41f50bbb9b",
+      "reason": "Listing preview carries assorted loose toys/props and stylized bedding; no dimensions. Prefer cleaner bed-only prospects."
+    },
+    {
+      "uid": "c7bea79b8c7a4b7c9ec5eadfa2529b9a",
+      "name": "Single wooden bed",
+      "url": "https://sketchfab.com/3d-models/c7bea79b8c7a4b7c9ec5eadfa2529b9a",
+      "reason": "Author explicitly describes separable mattress/bedding, but distressed horror-game appearance and unspecified single-bed size are weak prospects for a light-oak 1.20 m small double."
+    },
+    {
+      "uid": "7e5f290cf4474aba93979b6c7244f142",
+      "name": "Low Poly Bunk Bed #2",
+      "url": "https://sketchfab.com/3d-models/7e5f290cf4474aba93979b6c7244f142",
+      "reason": "Overall 1.99 by 1.03 by 1.59 m, not mattress dimensions. Metal flat-colour reserve superseded by the dimensioned wood bunk; no additional download priority."
+    }
+  ],
+  "recommendation": "Measure Em3D bunk first if the lead authorizes a download; screen Nordi dimensions first. Retain procedural beds. No evidence supports a promised round-5/6 pass.",
+  "research_defect_record": {
+    "id": "search2-cached-asset-as-new-lead",
+    "observed": "Draft incorrectly called UID 28a8b7050a5e4951abbfb588015abf41 a new kids-B lead.",
+    "found_by": "Final research audit, before delivery",
+    "real_reproduction": {
+      "uid": "28a8b7050a5e4951abbfb588015abf41",
+      "draft_target": "kb-bed",
+      "existing_id": "sf_bed3_28a8b705",
+      "existing_evidence": "docs/beds-report.md round 4: unresolved naked mattress; measured rejection"
+    },
+    "root_cause": "Fresh public metadata and renamed display author were screened before authoritative UID exclusion; titles and author names do not identify a new asset.",
+    "escape": "No construction-time cached-UID join; final audit caught it after the draft was written.",
+    "control_tier": "1: temporary report generator refuses construction of any cached UID as a new search lead; output validation also fails closed.",
+    "proofs": [
+      "Actual cached Oak PBR UID blocked",
+      "Cached sparshgupta bunk UID 2cabd354ef2e4293ae817b01a8fdbf10 blocked as sibling",
+      "Clean Em3D UID e81c12b73b44472cbcc262069c03fc45 accepted as conditional lead",
+      "Renamed target room does not bypass cached-UID rejection"
+    ],
+    "audit_validation_correction": "Initial audit additionally assumed every licence URL used HTTPS. Actual API returns HTTP CC-BY URLs; validate host and licence path while preserving source URL.",
+    "status": "Draft corrected and scoped construction/audit proofs pass. Central learning/registry/workflow registration deferred to lead: writes restricted to three deliverables; not closed as a repository-wide process fix."
+  },
+  "search_sample_count": 341
+}
