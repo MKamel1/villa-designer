@@ -126,6 +126,27 @@
         "test_glass_solid_never_exempts_an_obstructed_probe"
       ],
       "closure": "Measurement ownership only; design lighting and presentation failures unchanged"
+    },
+    {
+      "lesson_id": "lighting-rebalance-covered-task-point",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "task_probe.author_bindings records the cited finite task area; resolve_surface_probes selects and records the nearest clear tested point on the same host without changing nominal targets or scene geometry",
+      "check": "villa_scene.measure_lighting validates raw ownership, resolves evaluated resting-object coverage, and checks selected raw and evaluated paths; require_clear_probes rejects unrecorded or out-of-area offsets",
+      "stage": "task binding and evaluated geometry before any sensor render",
+      "proof_file": "tests/test_task_probe.py",
+      "proofs": [
+        "test_actual_vase_search_records_nearest_same_surface_without_design_changes",
+        "test_clean_actual_homework_point_is_unchanged",
+        "test_translated_table_vase_sibling_has_same_recorded_offset",
+        "test_covered_entire_task_area_fails_and_never_searches_other_furniture",
+        "test_overhead_obstruction_missing_citation_and_outside_face_refuse",
+        "test_unrecorded_or_changed_offset_cannot_bypass_binding_guard",
+        "test_mutated_citation_does_not_poison_other_bindings"
+      ],
+      "closure": "Instrumentation rule only; all-point production measurement and existing presentation/design findings reported separately"
     }
   ]
 }

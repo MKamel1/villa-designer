@@ -14,7 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'src'))
 import bpy
 from archpipe.blender.villa_scene import evaluated_probe_ray
-from archpipe.task_probe import require_clear_paths, probe_sources
+from archpipe.task_probe import (require_clear_paths, probe_sources, author_bindings,
+                                 resolve_surface_probes)
 
 
 def install(meshes):
@@ -33,6 +34,35 @@ def install(meshes):
 
 
 class EvaluatedTaskProbes(unittest.TestCase):
+    def test_actual_table_vase_surface_search_and_unchanged_clean_point(self):
+        fixture = ROOT/'tests/fixtures/task-probe-table-vase.json.gz'
+        offsets = []
+        for shift in ((0,0,0), (7,-3,2)):
+            row = json.loads(gzip.decompress(fixture.read_bytes()))
+            meshes = [row['host'], row['solid']]
+            scene = dict(meshes=meshes, materials={}, lights=row['lights'],
+                         measurement_points=[row['point'], row['clean_point']])
+            for point in scene['measurement_points']:
+                point['position'] = [v+d for v,d in zip(point['position'], shift)]
+            for mesh in meshes:
+                for face in mesh['faces']:
+                    for vertex in face:
+                        vertex[:] = [v+d for v,d in zip(vertex, shift)]
+            for light in scene['lights']:
+                light['position'] = [v+d for v,d in zip(light['position'], shift)]
+            bounds = [[v+d for v,d in zip(vertex, shift)] for vertex in row['bounds_m']]
+            author_bindings(scene)
+            before = copy.deepcopy(scene)
+            install(meshes)
+            ray = evaluated_probe_ray(scene)
+            points = resolve_surface_probes(scene, ray, lambda name: bounds)
+            self.assertEqual(scene, before)
+            self.assertEqual(points[1], before['measurement_points'][1])
+            require_clear_paths(points, probe_sources(scene), ray)
+            offsets.append(points[0]['host_surface']['surface_search']['offset_m'])
+        self.assertEqual(offsets[0], offsets[1])
+        self.assertEqual(offsets[0], [-.03, .095, 0.])
+
     def test_frozen_evaluated_vase_and_clear_control(self):
         frozen = json.loads(gzip.decompress((ROOT/'tests/fixtures/task-probe-evaluated-obstructions.json.gz').read_bytes()))
         for row in frozen['records']:

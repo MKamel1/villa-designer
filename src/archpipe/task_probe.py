@@ -9,6 +9,9 @@ probe. SENSOR_OFFSET and CAMERA_OFFSET retain the existing meter geometry.
 """
 from __future__ import annotations
 
+from copy import deepcopy
+from functools import lru_cache
+
 import numpy as np
 
 from .concept.render_support import _triangles
@@ -17,6 +20,26 @@ SENSOR_OFFSET = 0.001
 CAMERA_OFFSET = 0.025
 METER_HALF_WIDTH = 0.005  # central 16 of 32 pixels in the 20 mm camera field
 LOCAL_PATH_LENGTH = CAMERA_OFFSET - SENSOR_OFFSET
+SEARCH_STEP = 0.005  # instrument sampling resolution, not a design requirement
+
+
+@lru_cache(maxsize=None)
+def _cached_area_citation(card_id):
+    from .guidance import library
+    card = library()['evidence'][card_id]
+    if card.get('status') != 'verified' or not card.get('original_page_checked'):
+        raise ValueError('unverified task area: ' + card_id)
+    return dict(card=card_id, source_id=card['source_id'], edition=card['edition'],
+                locator=card['locator'], conditions=card['conditions'])
+
+
+def _area_citation(card_id):
+    return deepcopy(_cached_area_citation(card_id))
+
+
+def probe_position(point):
+    """Effective instrument position; the authored target stays in position."""
+    return point.get('measurement_position', point['position'])
 
 
 def _name(point):
@@ -73,6 +96,10 @@ def author_bindings(scene):
         point['host_surface'] = dict(mesh_id=mesh_id, face_index=index,
                                      offset_m=0.0 if contact else gap,
                                      authored_plane_m=list(point['position']))
+        if contact and not rim:
+            point['host_surface']['task_area'] = dict(
+                citation=_area_citation(point['card']),
+                extent='finite owning host face', decision='lead 2026-10-11')
 
 
 def bind_planes(scene):
@@ -145,7 +172,7 @@ def require_clear_probes(scene):
     # Avoid triangulating distant garden meshes; retain any solid whose bounds
     # can intersect the local camera or source segments for any task point.
     meshes = []
-    centres = np.asarray([p['position'] for p in points], dtype=float).reshape(-1, 3)
+    centres = np.asarray([probe_position(p) for p in points], dtype=float).reshape(-1, 3)
     for mesh in scene['meshes']:
         vertices = np.asarray([v for face in mesh['faces'] for v in face], dtype=float)
         lo, hi = vertices.min(axis=0), vertices.max(axis=0)
@@ -155,21 +182,35 @@ def require_clear_probes(scene):
     triangles, owners = _triangles(meshes)
     sources = probe_sources(scene)
     for point in points:
-        x, y, plane = point['position']
+        x, y, plane = probe_position(point)
         require_clear_paths([point], sources,
                             lambda start, end: _hit(triangles, owners, meshes, start, end))
         binding = point['host_surface']
         host = next((m for m in scene['meshes'] if m['id'] == binding['mesh_id']), None)
         if host is None:
             raise ValueError(_name(point) + ': missing host ' + binding['mesh_id'])
-        expected = _surface(host['faces'][binding['face_index']], x, y)+binding['offset_m']
+        face = host['faces'][binding['face_index']]
+        if 'measurement_position' in point:
+            record = binding.get('surface_search', {})
+            if (not np.isfinite(probe_position(point)).all() or
+                    record.get('nominal_position_m') != point['position'] or
+                    record.get('measurement_position_m') != probe_position(point) or
+                    not np.allclose(np.asarray(probe_position(point))-point['position'],
+                                    record.get('offset_m', [float('nan')]*3), atol=1e-10, rtol=0) or
+                    binding.get('offset_m') != 0 or
+                    binding.get('task_area', {}).get('citation') != _area_citation(point['card']) or
+                    not all(_inside_face(face, x+dx, y+dy)
+                            for dx in (-METER_HALF_WIDTH, METER_HALF_WIDTH)
+                            for dy in (-METER_HALF_WIDTH, METER_HALF_WIDTH))):
+                raise ValueError(_name(point) + ': invalid surface search record')
+        expected = _surface(face, x, y)+binding['offset_m']
         if abs(expected-plane) > 1e-8:
             raise ValueError(_name(point) + ': stale plane for host ' + binding['mesh_id'])
 
 
 def probe_paths(point, sources):
     """Meter-pixel and local source segments, as (description, start, end)."""
-    x, y, plane = point['position']
+    x, y, plane = probe_position(point)
     sensor = np.array([x, y, plane+SENSOR_OFFSET])
     paths = []
     # Match the actual averaged pixel population, not just its centre.
@@ -193,6 +234,98 @@ def require_clear_paths(points, sources, first_hit):
             if hit:
                 raise ValueError(_name(point) + ': ' + path + ' hits ' + hit['mesh_id'] +
                                  ' at ' + str(hit['position_m']) + ' before sensor plane')
+
+
+def _inside_face(face, x, y):
+    """Finite polygon containment in the horizontal projection, edges included."""
+    inside = False
+    for a, b in zip(face, face[1:] + face[:1]):
+        delta = np.asarray(b[:2])-a[:2]
+        relative = np.array([x, y])-a[:2]
+        cross = delta[0]*relative[1]-delta[1]*relative[0]
+        if abs(cross) < 1e-10 and np.dot(relative, delta) >= -1e-10 and np.dot(relative, delta) <= np.dot(delta, delta)+1e-10:
+            return True
+        if (a[1] > y) != (b[1] > y) and x < a[0]+(y-a[1])*(b[0]-a[0])/(b[1]-a[1]):
+            inside = not inside
+    return inside
+
+
+def resolve_surface_probes(scene, first_hit, solid_bounds):
+    """Select the nearest clear sampled position on the SAME finite host face.
+
+    Return copied points, never change authored targets or scene objects. The
+    nominal point is tested first; clean points are unchanged. Only contact
+    tasks covered by a foreign object resting on their host may search. The
+    lattice is anchored to the nominal point, spaced 5 mm, ordered by squared
+    distance, then signed x and y indices. All metered paths must be clear and
+    all four meter footprint corners must remain on the cited task surface.
+    Exhausting its finite area fails closed. No lux reading guides the search.
+    solid_bounds returns measured world-space minimum/maximum coordinates.
+    """
+    points = deepcopy(scene['measurement_points'])
+    meshes = {m['id']: m for m in scene['meshes']}
+    sources = probe_sources(scene)
+
+    def obstruction(point):
+        for path, start, end in probe_paths(point, sources):
+            hit = first_hit(start, end)
+            if hit:
+                return dict(path=path, hit=hit)
+        return None
+
+    for point in points:
+        # Always start from the nominal binding, including on repeated calls.
+        point.pop('measurement_position', None)
+        binding = point['host_surface']
+        binding.pop('surface_search', None)
+        blocked = obstruction(point)
+        if not blocked:
+            continue
+        face = meshes[binding['mesh_id']]['faces'][binding['face_index']]
+        x, y, plane = point['position']
+        area = binding.get('task_area')
+        if (not area or area.get('citation') != _area_citation(point['card']) or
+                area.get('extent') != 'finite owning host face' or binding['offset_m'] != 0 or
+                abs(_surface(face, x, y)-plane) > 1e-8):
+            raise ValueError(_name(point) + ': obstruction has no cited contact task area')
+        hit = blocked['hit']
+        lo, hi = np.asarray(solid_bounds(hit['mesh_id']), dtype=float)
+        # The existing 1 mm sensor clearance bounds contact uncertainty; this
+        # cannot admit an overhead obstacle or a host hiding its own sensor.
+        if (hit['mesh_id'] == binding['mesh_id'] or not np.isfinite([lo, hi]).all() or
+                abs(lo[2]-plane) > SENSOR_OFFSET or
+                not (lo[0] <= x <= hi[0] and lo[1] <= y <= hi[1]) or
+                not _inside_face(face, x, y)):
+            raise ValueError(_name(point) + ': obstructing object is not resting on task host')
+        vertices = np.asarray(face)
+        low = np.ceil((vertices[:, :2].min(axis=0)-[x,y])/SEARCH_STEP).astype(int)
+        high = np.floor((vertices[:, :2].max(axis=0)-[x,y])/SEARCH_STEP).astype(int)
+        candidates = sorted((i*i+j*j, i, j) for i in range(low[0], high[0]+1)
+                            for j in range(low[1], high[1]+1) if i or j)
+        attempts = [dict(offset_m=[0.,0.,0.], obstruction=blocked)]
+        for distance, i, j in candidates:
+            cx, cy = x+i*SEARCH_STEP, y+j*SEARCH_STEP
+            if not all(_inside_face(face, cx+dx, cy+dy)
+                       for dx in (-METER_HALF_WIDTH, METER_HALF_WIDTH)
+                       for dy in (-METER_HALF_WIDTH, METER_HALF_WIDTH)):
+                continue
+            cz = _surface(face, cx, cy)
+            point['measurement_position'] = [cx, cy, cz]
+            hit = obstruction(point)
+            attempts.append(dict(offset_m=[i*SEARCH_STEP, j*SEARCH_STEP, cz-plane], obstruction=hit))
+            if not hit:
+                binding['surface_search'] = dict(
+                    nominal_position_m=list(point['position']),
+                    measurement_position_m=list(point['measurement_position']),
+                    offset_m=attempts[-1]['offset_m'], distance_m=float(np.linalg.norm(attempts[-1]['offset_m'])),
+                    pattern='nominal-anchored square lattice; increasing squared distance; signed x then y index',
+                    step_m=SEARCH_STEP, nearest='nearest clear tested lattice point',
+                    task_area=deepcopy(area), original_obstruction=blocked,
+                    resting_object_bounds_m=[lo.tolist(), hi.tolist()], attempts=attempts)
+                break
+        else:
+            raise ValueError(_name(point) + ': no unobstructed point within cited task area ' + str(area))
+    return points
 
 
 def probe_sources(scene):

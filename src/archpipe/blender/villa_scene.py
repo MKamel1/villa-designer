@@ -1593,10 +1593,18 @@ def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mes
     applied. Direct and reflected-light results are separate. These are
     predictions for the authored fixtures and materials, not installed tests.
     """
-    from archpipe.task_probe import require_clear_probes, require_clear_paths, probe_sources
+    from archpipe.task_probe import (require_clear_probes, require_clear_paths, probe_sources,
+                                     resolve_surface_probes, probe_position)
     require_clear_probes(scene_data)
-    require_clear_paths(scene_data.get('measurement_points', []), probe_sources(scene_data),
-                        evaluated_probe_ray(scene_data))
+    ray = evaluated_probe_ray(scene_data)
+    def solid_bounds(name):
+        obj = bpy.data.objects[name].evaluated_get(bpy.context.evaluated_depsgraph_get())
+        vertices = [obj.matrix_world @ vertex.co for vertex in obj.data.vertices]
+        return [[min(v[i] for v in vertices) for i in range(3)],
+                [max(v[i] for v in vertices) for i in range(3)]]
+    scene_data = dict(scene_data, measurement_points=resolve_surface_probes(scene_data, ray, solid_bounds))
+    require_clear_probes(scene_data)
+    require_clear_paths(scene_data.get('measurement_points', []), probe_sources(scene_data), ray)
     points = scene_data.get("measurement_points", [])
     if not points:
         raise ValueError("No measurement_points authored")
@@ -1648,7 +1656,7 @@ def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mes
     s.camera = camera
     records = []
     for index, point in enumerate(points):
-        x, y, z = point["position"]
+        x, y, z = probe_position(point)
         sensor.location = (x, y, z + 0.001)
         camera.location = (x, y, z + 0.025)
         record = dict(point)

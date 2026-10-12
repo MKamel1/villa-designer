@@ -1,5 +1,7 @@
 # Lighting rebalance diagnosis — 2026-10-09
 
+Current instrumentation result (2026-10-11): **25/25 targets met in a fresh complete measurement**, applying the lead's same-host covered-point rule. The [covered dining continuation](#covered-dining-task-point--lead-decision-applied-2026-10-11) records the offset and acceptance; earlier diagnoses and refusals below are retained historical evidence.
+
 Baseline: `codex/lightbal`, clean `d400cec0ec84ad4ab86cc52f2f675c57bd2ae23f` (integration 4). **No lighting-design correction is applied.** The v15 warmth is reproduced at its physical sources, not traced to an erroneous lamp, material or colour conversion. A separate production measurement defect hides 17 of 25 sensors beneath finished task surfaces. Diagnostic probes at the measured surfaces support review; they do not repair or approve the production measurement gate. The existing maximum task ratio is explicitly **ASSUMED 3.0**, with an unresolved source, so it cannot be presented as a cited maximum that authorises automatic dimming.
 
 Lux (lx) measures illuminance; lumens (lm) measure emitted light. CCT means correlated colour temperature, in kelvin (K). RGB means red, green and blue channels. Linear RGB values here precede camera development; they are not lux. Display luminance is a weighted pixel brightness between zero and one. EXR denotes linear high dynamic range image files; PNG denotes developed image files. Coordinates give the two horizontal model axes followed by elevation, in metres; ground-floor finished floor is zero and basement finished floor is −3 m. A millimetre is 0.001 m. One exposure stop doubles camera gain. QA means quality assurance. PASS, WARN and FAIL are the existing check classifications; a warning is retained, not waived.
@@ -299,3 +301,57 @@ Point numbers follow original export order; repeated labels identify distinct co
 [acceptance-status.json](../out/task-probe-fix/acceptance-status.json) retains exit statuses and log hashes, distinguishing code acceptance from the failed full measurement gate. [refresh_evidence.py](../out/task-probe-fix/refresh_evidence.py) verifies the matching export source and unchanged persisted scene values, then refreshes both production executions. [verify_both.py](../out/task-probe-fix/verify_both.py) runs the two portable contexts sequentially. The initial mistaken `tests.test_lighting` name was refused before test execution; the corrected existing module selection above passed. The final material-exemption correction was separately tested by the final guard and Blender selections and both portable contexts.
 
 The pinned Python interpreter, `PYTHONPATH=src`, `NO_COLOR=1`, single-threaded OpenBLAS and Blender 4.5.14 were retained. Production rendering used eight CPU threads and the existing graphics lock. The lighting-proof skill was updated and `scripts/sync_agent_assets.py` run; adapters match. No package installation, full-suite run, protected shared-data modification or commit was performed. The lead retains full-suite and commit ownership. These results repair instrumentation ownership; they approve no real villa design gate.
+
+## Covered dining task point — lead decision applied 2026-10-11
+
+This continuation supersedes the 2026-10-09 full-measurement refusal above; the historical runs remain unchanged. **All 25 points are freshly measured; 25/25 meet their existing targets.** No scene geometry, furniture, vase/dressing, light, material, presentation camera, target or nominal task coordinate changed. [Measurement inputs and unchanged-scene comparisons](../out/dining-probe/measurement-inputs.json) compare every persisted design field and all 25 nominal points against the retained production export. Fresh source hash: `ea6899755501d8a12dc60801f336206d59544bb67ae98e72f203f9384c45708e`, uncommitted on `b5258666d39edb84795d912a5875ea06c89f6e09`.
+
+The export names the blocked point **dining table centre**, card `ies-res-dining-informal-100`, target 100 lx. The separate **table end (homework)** uses `ies-res-dining-study-200`, target 200 lx, and remains at its original measurement position. Both [verified dining cards](../knowledge/library.json) cite IES Lighting Handbook, 10th edition (2011), Table 33.2, printed p. 33.8: horizontal maintained illuminance at the table plane, averaged over the area of coverage. The search area is conservatively bounded to the complete finite measured owning tabletop face (`furn-dining-table-0`, face 26), with every corner of the metered footprint inside it. These individual authored-point checks do not establish an area-average, glare or uniformity verdict.
+
+`author_bindings` records that cited area. Before any sensor render, `resolve_surface_probes` checks the evaluated scene and confirms the obstructing object rests on the host: the measured vase bottom is −2.2479999065 m against tabletop −2.248 m. Only the instrument measurement position is selected nearby; `position` keeps the nominal target. A nominal-anchored square lattice searches outward at 5 mm spacing, ordered by squared distance and then signed horizontal x and y indices. The x and y axes are the first and second horizontal model axes; elevation is the third coordinate. The spacing is instrument sampling resolution, not a design rule. The selected point is the **nearest clear tested lattice point**; no lux value selects it. Every metered camera path and every local source approach must be clear. Missing/stale citation, a non-resting object or no clear candidate within that same finite task area remains failed, with no invented lux reading.
+
+The actual production centre is measured at `[16.92, -25.805, -2.248]` m instead of nominal `[16.95, -25.9, -2.248]` m: offset **[-30.0, +95.0, +0.0] mm**, distance **99.624 mm**, after 567 recorded candidate tests including the nominal point. Its [measurement record](../out/dining-probe/measurements/lighting-measurements.json) carries nominal/effective coordinates, offset, pattern, cited area, original vase hit, complete measured resting-object bounds and every candidate's obstruction result. The other 24 points have no offset. Both raw and evaluated guards run again on selected positions. The complete vase and furnished scene remain in the light transport, including their shadows.
+
+[Actual evaluated fixture](../tests/fixtures/task-probe-table-vase.json.gz) retains the table, local vase faces and complete measured vase bounds by value; provenance records Poly Haven `ceramic_vase_01`, James Ray Cock, CC0 as recorded in the existing intake manifest, metres converted to the scene's upward elevation axis. [First-fix instrumentation preview](../out/dining-probe/first-fix-preview.png) was inspected against that geometry before production measurement. Python regressions prove the real blocked case, an unchanged clean homework point, renamed/translated table and vase, fully covered task area despite adjacent furniture, overhead obstruction, missing/mutated citation and forged offset. The pinned Blender evaluated-ray tests also prove the real case, clean control and translated sibling with all 228 production analytic lights and emissive mesh centres frozen as segment sources. The initial analytic-only fixture selected [−25, +95, 0] mm; production rejected that candidate because the approach from emissive `marker-PATH-corridor-09` hits the vase. Both Python and Blender regressions now assert that rejection and the complete-source production selection. No production code or geometry changed for this fixture correction. The [complete-source instrumentation preview](../out/dining-probe/complete-source-preview.png) was also inspected against the final selected footprint. This is instrumentation acceptance, with the existing presentation/design findings retained.
+
+The unchanged production consumer in [measure.py](../out/dining-probe/measure.py) runs all 25 points, with maintenance factor 0.8, all authored functional layers, black sky, 256 samples, 32 × 32 pixel probes, zero-bounce direct and 16-bounce total measurements, no denoising and the existing optical assumptions. Raw linear probes are in [measurements](../out/dining-probe/measurements). The existing assumed upper-ratio screen stays advisory and unchanged.
+
+| Point | Room / task | Direct lx | Total lx | Target lx | Instrument offset mm (x, y, elevation) | Result |
+| --- | --- | ---: | ---: | ---: | --- | --- |
+| 1 | kitchen / island prep side | 1077.2 | 1364.2 | 500 | 0, 0, 0 | PASS |
+| 2 | kitchen / island seating side | 838.0 | 1097.0 | 200 | 0, 0, 0 | PASS |
+| 3 | kitchen / island prep side | 1033.6 | 1226.6 | 500 | 0, 0, 0 | PASS |
+| 4 | kitchen / island seating side | 850.9 | 1113.8 | 200 | 0, 0, 0 | PASS |
+| 5 | kitchen / island prep side | 835.4 | 1116.3 | 500 | 0, 0, 0 | PASS |
+| 6 | kitchen / island seating side | 676.6 | 925.8 | 200 | 0, 0, 0 | PASS |
+| 7 | kitchen / single induction zone | 1004.7 | 1302.7 | 300 | 0, 0, 0 | PASS |
+| 8 | kitchen / sink | 1154.1 | 1348.7 | 300 | 0, 0, 0 | PASS |
+| 9 | dining / dining table centre | 546.2 | 649.8 | 100 | -30.0, +95.0, +0.0 | PASS |
+| 10 | dining / table end (homework) | 462.1 | 584.9 | 200 | 0, 0, 0 | PASS |
+| 11 | dirty-kitchen / dirty kitchen run | 679.0 | 812.3 | 500 | 0, 0, 0 | PASS |
+| 12 | study-game / study-desk | 931.6 | 1013.8 | 400 | 0, 0, 0 | PASS |
+| 13 | study-game / study-adult-desk | 905.8 | 974.3 | 400 | 0, 0, 0 | PASS |
+| 14 | kids-a / ka-desk-1 | 1391.5 | 1499.7 | 400 | 0, 0, 0 | PASS |
+| 15 | kids-a / ka-desk-2 | 1390.4 | 1529.5 | 400 | 0, 0, 0 | PASS |
+| 16 | kids-b / kb-desk | 1389.4 | 1509.1 | 400 | 0, 0, 0 | PASS |
+| 17 | parents-bed / pillow | 1114.0 | 1194.5 | 200 | 0, 0, 0 | PASS |
+| 18 | parents-bed / pillow | 1116.5 | 1187.4 | 200 | 0, 0, 0 | PASS |
+| 19 | family-bath / fb-basin | 1337.5 | 1616.4 | 300 | 0, 0, 0 | PASS |
+| 20 | parents-ensuite / pe-basin | 631.2 | 757.8 | 300 | 0, 0, 0 | PASS |
+| 21 | guest-wc / gwc-basin | 1375.2 | 1599.5 | 300 | 0, 0, 0 | PASS |
+| 22 | lounge / armchair | 789.7 | 952.0 | 200 | 0, 0, 0 | PASS |
+| 23 | bar-alcove / daybed nook | 324.6 | 421.5 | 200 | 0, 0, 0 | PASS |
+| 24 | cinema / cinema desk | 1483.9 | 1521.8 | 400 | 0, 0, 0 | PASS |
+| 25 | cinema / cinema desk | 1492.4 | 1526.1 | 400 | 0, 0, 0 | PASS |
+
+| Acceptance | Result | Evidence |
+| --- | --- | --- |
+| Focused lighting, probe, render standard, scene contract and adapters | 133 tests, exit 0 | [focused-tests.log](../out/dining-probe/focused-tests.log) |
+| Final probe regressions with all production sources | 20 tests, exit 0 | [probe-tests-final.log](../out/dining-probe/probe-tests-final.log) |
+| Pinned Blender evaluated-ray probes with all production sources | 3 tests, exit 0 | [blender-tests-complete-sources.log](../out/dining-probe/blender-tests-complete-sources.log) |
+| `scripts/verify.py --portable`, normal HOME | Exit 0 | [verify-portable-final.log](../out/dining-probe/verify-portable-final.log) |
+| `scripts/verify.py --portable`, initially empty HOME | Exit 0 | [verify-empty-home-final.log](../out/dining-probe/verify-empty-home-final.log) |
+| Full production measurement | 25 measured, 25 targets met; exit 0 | [measurement.log](../out/dining-probe/measurement.log) |
+| Adapters and whitespace | 38 adapters checked; `git diff --check`, exit 0 | [acceptance-status.json](../out/dining-probe/acceptance-status.json) |
+
+[Acceptance receipts](../out/dining-probe/acceptance-status.json) record exit statuses and log hashes. The first added ordering assertion compared floating metre ties exactly; it was corrected to compare the recorded integer lattice indices, without changing search resolution or tolerance. An export begun before the final source edit correctly refused source drift; the settled-code export was rebuilt. Those earlier logs remain retained separately. `docs/LEARNINGS.md`, the build-input guard registry and canonical/generated lighting-proof workflows are updated together; `scripts/sync_agent_assets.py` was run. No installation, shared-symlink modification, full-suite run or commit was performed. Full-suite and commit ownership remain with the lead; no real villa design gate or presentation acceptance is approved.

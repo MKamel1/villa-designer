@@ -8,9 +8,116 @@ import unittest
 from unittest.mock import patch
 
 from archpipe.task_probe import (author_bindings, bind_planes, require_clear_probes,
-                                 require_clear_paths, probe_sources, _hit)
+                                 require_clear_paths, probe_sources, _hit,
+                                 resolve_surface_probes, probe_position, _inside_face)
 
 FIXTURE = Path(__file__).parent/'fixtures/task-probe-hidden-sensors.json.gz'
+
+
+class SurfaceProbeSearch(unittest.TestCase):
+    """Actual evaluated table/vase, unchanged clear point and translated sibling."""
+    def case(self, clean=False, shift=(0, 0, 0)):
+        from archpipe.concept.render_support import _triangles
+        row = json.loads(gzip.decompress((FIXTURE.parent/'task-probe-table-vase.json.gz').read_bytes()))
+        point = row['clean_point'] if clean else row['point']
+        scene = dict(measurement_points=[point], meshes=[row['host'], row['solid']],
+                     lights=row['lights'], materials={})
+        if any(shift):
+            point['room'], point['label'], point['host_item'] = 'other-room', 'other-task', 'other-table'
+            row['host']['id'], row['solid']['id'] = 'furn-other-table-0', 'other-decoration'
+        point['position'] = [a+b for a,b in zip(point['position'], shift)]
+        for mesh in scene['meshes']:
+            for face in mesh['faces']:
+                for vertex in face:
+                    vertex[:] = [a+b for a,b in zip(vertex, shift)]
+        for light in scene['lights']:
+            light['position'] = [a+b for a,b in zip(light['position'], shift)]
+        bounds = [[a+b for a,b in zip(vertex, shift)] for vertex in row['bounds_m']]
+        author_bindings(scene)
+        triangles, owners = _triangles(scene['meshes'])
+        return scene, lambda start,end: _hit(triangles, owners, scene['meshes'], start,end), lambda name: bounds
+
+    def test_actual_vase_search_records_nearest_same_surface_without_design_changes(self):
+        scene, ray, bounds = self.case()
+        before = copy.deepcopy(scene)
+        with self.assertRaisesRegex(ValueError, 'upward view hits prop-dining-vase'):
+            require_clear_probes(scene)
+        points = resolve_surface_probes(scene, ray, bounds)
+        self.assertEqual(scene, before)
+        point = points[0]
+        self.assertEqual(point['position'], before['measurement_points'][0]['position'])
+        self.assertEqual(point['required_lux'], 100)
+        record = point['host_surface']['surface_search']
+        self.assertEqual(record['offset_m'], [-.03, .095, 0.])
+        first_candidate = next(a for a in record['attempts'] if a['offset_m']==[-.025,.095,0.])
+        self.assertEqual(first_candidate['obstruction']['path'], 'source marker-PATH-corridor-09')
+        self.assertEqual(record['task_area']['citation']['card'], point['card'])
+        self.assertGreater(record['distance_m'], 0)
+        self.assertIsNone(record['attempts'][-1]['obstruction'])
+        self.assertTrue(all(a['obstruction'] for a in record['attempts'][:-1]))
+        distances = [sum(round(v/record['step_m'])**2 for v in a['offset_m'][:2])
+                     for a in record['attempts']]
+        self.assertEqual(distances, sorted(distances))
+        require_clear_probes(dict(scene, measurement_points=points))
+        require_clear_paths(points, probe_sources(scene), ray)
+        self.assertEqual(resolve_surface_probes(dict(scene, measurement_points=points), ray, bounds), points)
+
+    def test_clean_actual_homework_point_is_unchanged(self):
+        scene, ray, bounds = self.case(clean=True)
+        self.assertEqual(resolve_surface_probes(scene, ray, bounds), scene['measurement_points'])
+
+    def test_translated_table_vase_sibling_has_same_recorded_offset(self):
+        scene, ray, bounds = self.case()
+        original = resolve_surface_probes(scene, ray, bounds)[0]
+        shift = (7, -3, 2)
+        scene, ray, bounds = self.case(shift=shift)
+        sibling = resolve_surface_probes(scene, ray, bounds)[0]
+        self.assertEqual(sibling['host_surface']['surface_search']['offset_m'],
+                         original['host_surface']['surface_search']['offset_m'])
+        for a,b,d in zip(probe_position(original), probe_position(sibling), shift):
+            self.assertAlmostEqual(a+d,b)
+        require_clear_probes(dict(scene, measurement_points=[sibling]))
+
+    def test_covered_entire_task_area_fails_and_never_searches_other_furniture(self):
+        scene, ray, bounds = self.case()
+        point = scene['measurement_points'][0]
+        x,y,z = point['position']
+        # Real blocked point, injected smaller host task area: every candidate
+        # remains covered by the same actual vase. Adjacent hosts cannot help.
+        face = [[x-.01,y-.01,z], [x+.01,y-.01,z], [x+.01,y+.01,z], [x-.01,y+.01,z]]
+        scene['meshes'][0]['faces'][point['host_surface']['face_index']] = face
+        scene['meshes'].append(dict(id='other-table', faces=[[[x+.2,y-.1,z], [x+.4,y-.1,z],
+                                                              [x+.4,y+.1,z], [x+.2,y+.1,z]]]))
+        with self.assertRaisesRegex(ValueError, 'no unobstructed point within cited task area'):
+            resolve_surface_probes(scene, ray, bounds)
+
+    def test_overhead_obstruction_missing_citation_and_outside_face_refuse(self):
+        scene, ray, bounds = self.case()
+        floating = bounds('unused')
+        floating[0][2] += .01
+        with self.assertRaisesRegex(ValueError, 'not resting on task host'):
+            resolve_surface_probes(scene, ray, lambda name: floating)
+        del scene['measurement_points'][0]['host_surface']['task_area']
+        with self.assertRaisesRegex(ValueError, 'no cited contact task area'):
+            resolve_surface_probes(scene, ray, bounds)
+        # A polygon's bounding box must never substitute for its actual area.
+        self.assertFalse(_inside_face([[0,0,0], [1,0,0], [0,1,0]], .8,.8))
+
+    def test_unrecorded_or_changed_offset_cannot_bypass_binding_guard(self):
+        scene, ray, bounds = self.case(clean=True)
+        point = scene['measurement_points'][0]
+        point['measurement_position'] = [a+d for a,d in zip(point['position'], [.02,0,0])]
+        with self.assertRaisesRegex(ValueError, 'invalid surface search record'):
+            require_clear_probes(scene)
+
+    def test_mutated_citation_does_not_poison_other_bindings(self):
+        scene, ray, bounds = self.case()
+        scene['measurement_points'][0]['host_surface']['task_area']['citation']['locator'] = 'invented'
+        with self.assertRaisesRegex(ValueError, 'no cited contact task area'):
+            resolve_surface_probes(scene, ray, bounds)
+        fresh, ray, bounds = self.case()
+        points = resolve_surface_probes(fresh, ray, bounds)
+        self.assertIn('printed page 33.8', points[0]['host_surface']['surface_search']['task_area']['citation']['locator'])
 
 
 class TaskProbeOwnership(unittest.TestCase):
