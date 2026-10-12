@@ -1,0 +1,31 @@
+{
+  "schema": "chair-height-evidence/1",
+  "id": "osha-task-chair-back-above-compressed-seat",
+  "source": "Occupational Safety and Health Administration, Computer Workstations eTool, Purchasing Guide",
+  "url": "https://www.osha.gov/etools/computer-workstations/checklists/purchasing-guide",
+  "locator": "Chairs, item 11",
+  "original_page_checked": true,
+  "checked_date": "2026-10-11",
+  "chair_type": "office task chair",
+  "datum": "vertical backrest top above compressed seat pan",
+  "original_minimum": {
+    "value": 17.7,
+    "unit": "in"
+  },
+  "minimum_m": 0.44958,
+  "maximum_m": null,
+  "conversion": "One inch equals exactly 0.0254 metres",
+  "application": "Appearance-only height screen under whole-item source fit; design seat height remains ASSUMED 0.460 m; zero compression ASSUMED; adjustability, user stature and prolonged comfort are not established",
+  "alternative": {
+    "url": "https://osha.oregon.gov/OSHAPubs/1863.pdf",
+    "title": "Evaluating your computer workspace",
+    "printed_page": 10,
+    "original_page_checked": true,
+    "range_inches": [
+      15,
+      20
+    ],
+    "datum": "physical backrest height/size; not the seat-to-top rise; not substituted for OSHA item 11"
+  },
+  "scope": "Guidance and source-appearance screen, not code compliance or verified buyable-product ergonomics"
+}

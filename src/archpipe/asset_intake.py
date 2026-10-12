@@ -316,7 +316,8 @@ def audit_scene_manifest(path: Path, scene: dict, local_root: Path | None = None
             for item in instances:
                 if item["asset"] != asset_id:
                     continue
-                actual = item.get("scale", 1.0)
+                actual = (item.get('scale_xyz') if item.get('scaling') or item.get('furniture_fitting')
+                          else item.get("scale", 1.0))
                 if not any(
                     isinstance(actual, (int, float)) and isinstance(factor, (int, float))
                     and abs(actual - factor) <= 1e-5

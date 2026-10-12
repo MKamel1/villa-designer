@@ -1,8 +1,9 @@
 # Desks and task chairs — Stages 1 and 2
 
-Current Stage 2: seven measured desks active; eight task chairs and the vanity
-chair remain procedural. Measurements, refusals and neutral previews are in
-the Stage-2 section below. D1 names the current villa layout option.
+Current Stage 2 (2026-10-11): seven measured desks and eight seat-scaled
+task chairs are active; the parents vanity chair remains procedural. The
+follow-up section records current measurements, source/room refusals and
+neutral previews. D1 names the current villa layout option.
 The following Stage-1 record is historical.
 
 2026-10-09, branch `codex/desks`, based on committed beds work `961a03a`.
@@ -374,3 +375,111 @@ are registered in `LEARNINGS.md`, `knowledge/furniture-fit-guards.json` and
 `knowledge/bed-guards.json`. The lead runs the full suite. No presentation
 images, package installs, native Revit edits or commits were made. Canonical skills were updated and their generated adapters synchronized. Shared
 `assets/user` and `out/villa/round3` data were not modified.
+
+## Stage 2 follow-up — seat-driven task chairs (2026-10-11)
+
+The lead's chair rule retains the fixed planned footprint and derives the
+independent vertical factor from the design seat height. Back height follows
+the source under that same factor; an independently assumed 0.850 m back top
+is no longer a second exact target. The seat target remains **ASSUMED 0.460 m**,
+from `villa_furnish3d._chair` defaults through the actual furnishing dispatch.
+It is not a new ergonomic standard.
+
+The read source is [OSHA Computer Workstations eTool, Purchasing Guide,
+Chairs item 11](https://www.osha.gov/etools/computer-workstations/checklists/purchasing-guide).
+It gives a minimum backrest top **17.7 inches above the compressed seat pan**:
+449.580 mm, using exactly 25.4 mm per inch. It gives no upper limit, so the
+accepted interval is 449.580 mm or greater; no upper maximum is invented.
+`knowledge/chair-height-evidence.json` records applicability and the original
+page check. Source cushions are measured with **ASSUMED zero compression**.
+This is an appearance height screen; adjustment mechanisms, physical user fit
+and prolonged comfort remain unverified. Oregon OSHA's printed p.10
+15–20 inch guidance describes physical backrest size, a different datum;
+it is not substituted for this seat-to-top measurement.
+
+| Re-evaluated source | Seat result | Back top above floor | Back top above seat | Decision |
+|---|---:|---:|---:|---|
+| Flannigan, complete connected seat | 460 mm | 811.402 mm | 351.402 mm | Refuse: 98.178 mm below cited minimum |
+| Two leather chairs, complete `Object_4` | 460 mm | 913.680 mm | 453.680 mm | Plan/height pass; selected appearance |
+| Two leather chairs, complete `Object_6` | 460 mm | 913.680 mm | 453.680 mm | Independently measured equivalent alternate |
+| White Leather Chair, complete seat component 5 | 460 mm | 960.572 mm | 500.572 mm | Plan/height pass; unselected white/chrome alternate, no room acceptance claimed |
+| Leather Office Chair with platform | Unresolved complete seat datum | — | — | Chair-only plan pass retained; fallback |
+| Lamy swivel chair | Unresolved fused seat/back datum | — | — | No overall-top substitute; fallback |
+| Black Leather Chair | Stationary cantilever, incompatible task-chair type | — | — | Fallback |
+| Worn Leather, Eames Aluminum, Black Office, Wooden Office | Plan refusal retained | — | — | Factors below 0.5 and/or distortion over 15%; fallback |
+
+No new source download or unit inference was used. Every library candidate's
+new or retained refusal is recorded in `out/furniture-oct11/chair-intake.json`.
+The source bundle contains two separately named complete chairs; the chosen
+`Object_4` is measured independently and the complete sibling `Object_6` is
+explicitly omitted. A complete seat is partitioned by connected-component
+source face indices; every face of the retained chair remains. Source bytes,
+licence and credits are unchanged. This is a render appearance, not a verified
+buyable chair product.
+
+All eight task chairs use that complete leather source at their existing
+0.440 × 0.450 m plan footprint. Width/depth/vertical factors are
+0.504076106, 0.576184739 and 0.690071857 respectively; these are dimensionless
+source-to-design ratios. Plan-factor distortion is about 14.305%, below 15%.
+Exact values are in the measured receipts. The actual retained seat component
+measures 334.250 × 338.321 mm in plan inside the 440 × 450 mm whole-chair
+footprint. This acceptance covers the requested footprint/seat-height/back-height
+screen; it does not approve seat width/depth or anthropometric comfort for a
+real user. Each seat remains 0.460 m above its own finished floor; cinema chairs use the actual basement floor
+-2.998 m, other task chairs 0.002 m. Positions, rotations, desks, architecture
+and named cameras are unchanged. The parents vanity chair remains procedural.
+
+Every chair's procedural/model comparison and the combined comparison pass
+against the **seven currently accepted desks**. Parent desk access remains
+864 mm for cinema and kids, 564 mm for the shared study desk and 240 mm for
+the adult study desk, identical in both columns. All use the unchanged
+864 mm card; inherited study shortfalls remain reported. No new route, swing,
+storage-front, boundary or fixed-element body conflict appears. Intended
+chair planning bodies do not obstruct their own parent desk use zone; every
+physical chair face still participates in body/support/route/boundary checks.
+The Mitton source remains 4th edition (2022), Chapter 8, Figure 8.13,
+printed p.235. Existing absolute findings remain reported.
+
+Eight complete isolated neutral images with 1.8 m figure and eight unchanged
+room-camera previews were inspected before receipt publication. All show
+complete chair bodies in isolates without evident member warping. Black
+leather/chrome is coherent with study/cinema and contrasts with kids oak desks.
+Existing room views can crop feet or hide seats. Supplemental neutral views
+of cinema and kids A show both complete chairs, with every actual imported
+vertex within frame. Original v08/v06 cameras remain unchanged. Supplementary
+cameras are diagnostic angles, not replacements for named presentation views.
+Image/selection/source/camera hashes and import errors are bound in
+`preview-review.json`, `chair-previews-current/evidence.json` and
+`supplemental-preview-evidence.json` under `out/furniture-oct11`.
+
+The portable furniture receipt now carries seven desks and eight independently
+owned chair instances. Exact chair bodies hide only for their own accepted
+imports; a missing source restores those physical fallbacks. Desk prefixes
+never own their derived chairs. The new importer also namespaces empty glTF
+hierarchy nodes, preventing earlier desk nodes from renaming later source
+meshes and invalidating exact component selections. The real failing logs,
+fixed combined-context previews and regression controls are preserved.
+
+### Resumed acceptance evidence
+
+A fresh default build activates all seven desks and eight task chairs along
+with the separately accepted parents bed; all 41 default views retain their
+original named cameras. Kids' bed fallbacks remain visible. Read-back is in
+`out/furniture-oct11/default-activation-resume.json`.
+
+The focused bed/furniture/receipt/adapter batch passes **90 tests, exit 0**
+(`focused-resume.log`), including the real seat-driven chair fit, cited back
+refusal, translated sibling, exact native floor, whole-source ownership and
+activation mutations. The affected consumer batch passes **187 tests, exit 0**
+(`affected-resume.log`): bed scaling/frames/clearance/ray precision, fitted
+furniture, asset intake, render standard, cameras, furnishing, detailed
+furnishing and furniture primitives. Portable verification passes **186 checks, exit 0**
+under both normal and initially empty HOME, the home directory environment
+setting (`verify-normal-resume.log`, `verify-empty-home-resume.log` and its
+separate home receipt). All 38 generated adapters match after synchronization;
+`git diff --check` passes. Final execution results and content hashes are in
+`out/furniture-oct11/acceptance-resume.json`.
+
+No presentation images, native Revit edits or commits were made. Shared
+`assets/user` and `out/villa/round3` data were not modified. The lead owns
+the full suite and commit.

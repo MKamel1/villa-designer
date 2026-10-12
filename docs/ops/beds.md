@@ -255,3 +255,7 @@ closed-shell containment, open-shell and unresolved refusals retain their
 existing tolerances. `scripts/prove_bed_ray_precision.py` proves the real,
 translated, outside and enclosed cases in Blender; neutral previews then
 prove the complete generated duvet/throw.
+
+Lead decision 2026-10-11 permits omitting complete connected source quilt/throw/blanket components only when frame/mattress triangles remain identical. Generated cloth still derives from the actual mattress. `prepare_furniture_oct11.bed_without_source_covers` partitions exact source face indices, preserves every face in the measured receipt, omits only reviewed complete covers, and recomputes retained bounds. Retained source pillows need their own relative room pass. Fused mattress/frame bedding remains refused. `knowledge/parents-bed.json.gz` binds accepted source selection, baseline evaluated cloth, physical-cloth records, current room inputs, credits and unchanged v22 before default activation after measured furniture.
+
+For every neutral preview invoke Blender with `--python-exit-code 1`; Blender otherwise may return zero after a Python exception. Evidence files and bound fresh images remain required. A stored relative bed review can be reused only under identical room inputs, model selections and evaluated-baseline hash; authored cloth specification and reviewed camera bindings remain independent gates.

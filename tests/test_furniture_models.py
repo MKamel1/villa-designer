@@ -107,6 +107,13 @@ class GuardOnThePlacedScene(unittest.TestCase):
     def test_every_placed_model_world_box_is_within_footprint_plus_20mm(self):
         self.assertTrue(SCENE["models"], "expected at least one real model placed (the living rug)")
         for m in SCENE["models"]:
+            if m.get('scaling'):
+                from archpipe.beds import model_mattress_bounds,slim_frame_findings,model_review_meshes
+                box=model_mattress_bounds(m,world=True)['lower']
+                self.assertAlmostEqual(box['max'][0]-box['min'][0],m['footprint_w'],places=5)
+                self.assertAlmostEqual(box['max'][1]-box['min'][1],m['footprint_d'],places=5)
+                self.assertEqual(slim_frame_findings(m,model_review_meshes([m])),[])
+                continue
             if m.get('furniture_fitting'):
                 from archpipe.beds import model_review_meshes
                 points=[p for row in model_review_meshes([m]) for face in row['faces'] for p in face]
@@ -142,10 +149,13 @@ class GuardOnThePlacedScene(unittest.TestCase):
             self.assertTrue(hidden, prefix)
             for mesh in hidden:
                 self.assertEqual(mesh.get("visibility"), hide_vis, mesh["id"])
-            if model.get('furniture_fitting'):
+            if model.get('role')=='desk':
                 chairs=[mesh for mesh in SCENE['meshes'] if mesh['id'].startswith(prefix+'chair-')]
                 self.assertTrue(chairs)
-                self.assertTrue(all('visibility' not in mesh for mesh in chairs))
+                replaced={identifier for m in SCENE['models'] for identifier in m.get('replacement_mesh_ids',[])}
+                for mesh in chairs:
+                    if mesh['id'] in replaced:self.assertEqual(mesh['visibility'],hide_vis)
+                    else:self.assertNotIn('visibility',mesh)
 
     def test_fallback_pieces_keep_their_procedural_mesh_visible(self):
         """lounge-sofa is the real fallback (see FitRule above): its procedural mesh must render normally, not be

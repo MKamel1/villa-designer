@@ -16,6 +16,15 @@ CLIENT_SOURCE = 'Client furniture scaling decision 2026-10-09'
 MAX_PLAN_DISTORTION = .15
 
 
+def replacement_floor(scene, model):
+    """Use the exact current fallback bodies, including basement/upper levels."""
+    names=set(model['replacement_mesh_ids'])
+    rows=[r for r in scene['meshes'] if r['id'] in names]
+    if not names or {r['id'] for r in rows}!=names:
+        raise ValueError('replacement floor requires every exact native fallback body')
+    return min(p[2] for row in rows for face in row['faces'] for p in face)
+
+
 def positive_numbers(*values):
     return all(isinstance(v, (int, float)) and not isinstance(v, bool)
                and math.isfinite(v) and v > 0 for v in values)
@@ -151,7 +160,8 @@ def native_box(rows):
 
 
 def fit_furniture(model, width_m, depth_m, *, height_parts, height_m,
-                  height_source, height_basis, height_constraints=None):
+                  height_source, height_basis, height_constraints=None,
+                  back_height_range=None):
     """Strict desk/chair intake from retained faces and a semantic height datum.
 
     height_basis is design or citation. height_source must name the design
@@ -179,6 +189,25 @@ def fit_furniture(model, width_m, depth_m, *, height_parts, height_m,
     result['height_basis'] = height_basis
     reasons = [] if result['ok'] else [result['reason']]
     result['heights'] = {}
+    if back_height_range is not None:
+        contract = back_height_range
+        lower, upper = contract.get('min_m'), contract.get('max_m')
+        parts = contract.get('parts') or []
+        if (contract.get('basis') != 'citation' or not contract.get('source')
+                or contract.get('datum') != 'above-seat'
+                or not positive_numbers(lower) or
+                (upper is not None and (not positive_numbers(upper) or upper < lower))
+                or not parts or len(parts) != len(set(parts)) or not set(parts) <= names):
+            raise ValueError('chair back range requires measured parts, above-seat datum and cited limits')
+        back = native_box([r for r in rows if r['name'] in parts])
+        floor_top = (back['max'][1]-native_box(rows)['min'][1])*result['source_unit_factor']*result['sz']
+        rise = floor_top-height_m
+        result['back_height'] = dict(floor_top_m=floor_top, above_seat_m=rise,
+            min_m=lower, max_m=upper, source=contract['source'], datum='above-seat',
+            seat_compression='ASSUMED zero compression for appearance geometry; not a physical user fit')
+        if rise < lower-1e-5 or (upper is not None and rise > upper+1e-5):
+            reasons.append(f'back height above seat {rise:.6f} m outside cited range '
+                           f'{lower:.6f} m to {upper if upper is not None else "no published upper limit"}; {contract["source"]}')
     for name, contract in (height_constraints or {}).items():
         parts = contract.get('parts') or []
         target = contract.get('height_m')
@@ -203,7 +232,8 @@ def model_fit(model):
         raise ValueError('furniture replacement requires client decision 2026-10-09')
     return fit_furniture(model,*contract['footprint_m'],height_parts=contract['height_parts'],
         height_m=contract['height_m'],height_source=contract['height_source'],
-        height_basis=contract['height_basis'],height_constraints=contract.get('height_constraints'))
+        height_basis=contract['height_basis'],height_constraints=contract.get('height_constraints'),
+        back_height_range=contract.get('back_height_range'))
 
 
 def review_selection(model):
@@ -223,6 +253,8 @@ def require_furniture_geometry(model, library_root=None, *, neutral_diagnostic=F
     from pathlib import Path
     import hashlib
     fit=model_fit(model)
+    if model.get('role')=='task_chair' and not model['furniture_fitting'].get('back_height_range'):
+        raise ValueError('task chair activation requires a cited resulting back-height range')
     if not fit['ok']:raise ValueError(model['id']+': '+fit['reason'])
     if any(abs(a-b)>1e-12 for a,b in zip(model['scale_xyz'],fit['scale_xyz'])) or len(model['scale_xyz'])!=3:
         raise ValueError('furniture factors disagree with measured geometry')

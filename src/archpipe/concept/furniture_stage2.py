@@ -10,6 +10,24 @@ from pathlib import Path
 
 RECEIPT=Path(__file__).resolve().parents[3]/'knowledge/furniture-stage2.json.gz'
 
+def derived_seats(furniture):
+    """Resolve actual derived chairs from the same authored desk inputs."""
+    from . import villa_furnish3d as F3, villa_furniture_detail as FD
+    result=[]
+    for desk in furniture:
+        if desk['type']!='desk':continue
+        for spec in F3.spec(items=[desk]):
+            if spec['type']!='chair':continue
+            seat=FD.seat_item(spec)
+            # Match inventory's declared micrometre precision; subtracting
+            # world box endpoints otherwise yields 0.4399999999999995 m for
+            # the authored 0.440 m chair, defeating exact target identity.
+            seat['w']=round(seat['w'],6)
+            seat['d']=round(seat['d'],6)
+            result.append(dict(seat,room=desk['room'],level=desk['level'],parent_id=desk['id'],
+                               type='task_chair' if 'gas-lift' in FD.seat_parts(spec,0) else 'vanity_chair'))
+    return result
+
 def digest(value):
     return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
@@ -58,10 +76,10 @@ def room_context(scene,layout,specification,furniture,models):
 
 def integrate(scene,models,layout,specification,furniture,receipt):
     """Require original placement, exact native fallback identity and bound gates."""
-    from ..furniture_fit import require_furniture_geometry,review_selection,model_fit
+    from ..furniture_fit import require_furniture_geometry,review_selection,model_fit,replacement_floor
     from ..furniture_orientation import check_model_orientation
     from .villa_furnish import footprint
-    items={it['id']:it for it in furniture}
+    items={it['id']:it for it in furniture+derived_seats(furniture)}
     if receipt.get('status')!='accepted' or receipt.get('combined_room_review_ok') is not True:
         raise ValueError('furniture activation requires a reviewed passing combined room comparison')
     if receipt.get('room_context_sha256')!=room_context(scene,layout,specification,furniture,models):
@@ -74,9 +92,9 @@ def integrate(scene,models,layout,specification,furniture,receipt):
     for model in models:
         require_furniture_geometry(model);check_model_orientation(model)
         item=items[model['label']];bounds=footprint(item)
-        floor=min(p[2] for row in scene['meshes'] if row['id'] in model['replacement_mesh_ids'] for face in row['faces'] for p in face)
+        floor=replacement_floor(scene,model)
         if (model['furniture_fitting']['footprint_m']!=[item['w'],item['d']] or
-                model['furniture_fitting']['height_m']!=item['h'] or
+                model['furniture_fitting']['height_m']!=item.get('seat_h',item['h']) or
                 model['layout_rotation_deg']!=item['rot'] or
                 any(abs(a-b)>1e-5 for a,b in zip(model['position'],[item['cx'],item['cy'],floor])) or
                 any(abs(a-b)>1e-5 for a,b in zip([model['footprint_w'],model['footprint_d']],

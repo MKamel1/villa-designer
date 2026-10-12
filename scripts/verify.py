@@ -293,8 +293,23 @@ def main() -> int:
     measured=[m for m in scene['models'] if m.get('furniture_fitting')]
     for model in measured:require_furniture_geometry(model)
     expect('seven measured desk instances have reviewed source and fixed-room bindings',
-           len(measured)==7 and all(m['room_review']['ok'] for m in measured))
+           len([m for m in measured if m['role']=='desk'])==7 and all(m['room_review']['ok'] for m in measured))
+    expect('eight task chairs retain seat-driven cited back-height acceptance',
+           len([m for m in measured if m['role']=='task_chair'])==8 and all(
+               m['furniture_fitting'].get('back_height_range') for m in measured if m['role']=='task_chair'))
+    expect('parents bed omits only separable source covers and has both activation gates',
+           scene.get('parents_bed',{}).get('status')=='active' and all(
+               set(m['omitted_meshes'])=={'source-quilt','source-throw'} and
+               m['physical_cloth_review']['status']=='accepted'
+               for m in scene['models'] if m.get('role')=='bed'))
     furniture_registry=json.loads((ROOT/'knowledge/furniture-fit-guards.json').read_text())
+    from archpipe.furniture_fit import model_fit,replacement_floor
+    chair_case=json.loads(gzip.decompress((ROOT/'tests/fixtures/chair-seat-rule-real.json.gz').read_bytes()))
+    expect('real task chair vertical factor follows seat and cited back range',
+           model_fit(chair_case['leather'])['ok'] and not model_fit(chair_case['flannigan'])['ok'])
+    floor_case=json.loads((ROOT/'tests/fixtures/chair-floor-before.json').read_text())
+    expect('real basement chair floor comes from exact native fallback',
+           replacement_floor(floor_case['scene'],floor_case['model'])==floor_case['actual_floor_m'])
     expect('furniture controls have registered proving tests',all((ROOT/item['proof_file']).is_file() and all(
         'def '+name+'(' in (ROOT/item['proof_file']).read_text() for name in item['proofs']) for item in furniture_registry['records']))
     from archpipe.concept.furniture_stage2 import physical_architecture,digest

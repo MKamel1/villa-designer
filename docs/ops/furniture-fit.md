@@ -28,8 +28,7 @@ Ordinary and frozen read-only mappings must both work through shared APIs.
    `height_basis` is `design` or `citation`; `height_source` names the design
    field or the read publication/edition/page. Authored assumptions remain
    labelled; they do not establish ergonomic verification. Pass every other
-   required height through `height_constraints`, including a chair back.
-   No part is individually stretched to hit a datum.
+   required height through `height_constraints`, for other exact design heights. Lead decision 2026-10-11 changes task-chair back height: derive the vertical factor from the design seat height, label it ASSUMED where applicable, and use a cited `back_height_range` measured above the seat. Back height follows the source under that factor. Report overall top and above-seat rise; do not force the old assumed back top. No part is individually stretched to hit a datum.
 5. Width/depth factors after source-unit conversion must each lie in 0.5–2.0.
    Larger divided by smaller minus one must be at most 0.15 (15 percent).
    The vertical factor comes independently from measured height above the
@@ -87,3 +86,7 @@ remain independent physical fallbacks. Missing source files restore the
 exact procedural body at runtime. Normal imports require accepted review;
 pending review is admitted only for explicit neutral diagnostics. Never add
 a production bypass to make a pending receipt load.
+
+2026-10-11 source-cover/chair package: `prepare_furniture_oct11.py`, `review_furniture_oct11.py`, `preview_chairs_supplemental.py` and `accept_furniture_oct11.py`. Review against the current measured desks, not merely the former procedural desk geometry. Resolve derived chair identifiers and exact fallback floor from their authored bodies; keep parent desk access cards, with the chair planning body excluded only from its own intended use zone. Retain all physical faces in support/routes/overlap/boundary checks. Namespace every imported glTF hierarchy object, including empty nodes. Supplemental diagnostic angles bind actual full-frame chair vertices and preserve original named cameras. Source geometry and CC-BY credits remain in portable receipts; other candidates and the vanity retain fallbacks.
+
+Every Blender diagnostic command must set `--python-exit-code 1`; inspect the final evidence and image bindings as well as process status. Independent fitted models are audited through their active `scale_xyz`, with a manifest `placement_scale_source`; dormant candidate metadata must be completed before activation.

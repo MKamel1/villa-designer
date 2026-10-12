@@ -491,7 +491,9 @@ def bed_frame_items(scene, furniture):
     for model in scene.get('models',[]):
         if (model.get('role')!='bed' and not model.get('furniture_fitting')) or model.get('status')=='procedural-bed-fallback':
             continue
-        mark = model['replaces'].removeprefix('furn-').removesuffix('-')
+        mark = model.get('label')
+        if mark not in {item['id'] for item in furniture}:
+            mark = model['replaces'].removeprefix('furn-').removesuffix('-')
         rows,matrix,offset = model_transform(model)
         if model.get('frame_slimming'):
             # Planning furniture uses rigid frame plus mattress, while every
@@ -529,7 +531,8 @@ def scene_with_model_geometry(scene):
     return dict(scene,meshes=meshes+faces)
 
 
-def integrate_bed_models(scene, models, layout, specification, furniture, *, baseline_meshes=None):
+def integrate_bed_models(scene, models, layout, specification, furniture, *, baseline_meshes=None,
+                         accepted_room_review=None):
     """Activate reviewed scaled beds only when unchanged room checks pass.
 
     Keep procedural faces for runtime missing-file fallback. Blender hides
@@ -566,14 +569,23 @@ def integrate_bed_models(scene, models, layout, specification, furniture, *, bas
         if not review['ok']:
             raise ValueError('scaled bed fails fixed room: '+str(review['findings']))
         raise ValueError('bed activation requires the current evaluated procedural baseline, including soft goods')
-    from .furniture_room_review import baseline_relative_review
-    marks=[m['label'] for m in models]
-    baseline_scene=dict(scene,meshes=scene['meshes']+list(baseline_meshes),models=[m for m in scene.get('models',[]) if m.get('role')!='bed'])
-    baseline=bed_room_review(baseline_scene,layout,specification,furniture,target_marks=marks,absolute=True)
-    candidate=bed_room_review(result,layout,specification,furniture,target_marks=marks,absolute=True)
-    review=baseline_relative_review(baseline,candidate,target_prefixes=tuple(p for m in models
-        for p in (m['label']+'::',m['id']+'::','furn-'+m['label']+'-','dress-pillow-'+m['label']+'-',
-                  'cloth-duvet-'+m['label'],'cloth-throw-'+m['label'])),fixed_items=[it['id'] for it in furniture if it['id'] not in marks])
+    if accepted_room_review is not None:
+        from .concept.furniture_stage2 import room_context,digest
+        from copy import deepcopy
+        if (accepted_room_review.get('room_context_sha256')!=room_context(scene,layout,specification,furniture,models)
+                or accepted_room_review.get('selections')!=[review_selection(m) for m in models]
+                or accepted_room_review.get('baseline_cloth_sha256')!=digest(baseline_meshes)):
+            raise ValueError('accepted bed room review changed; repeat measured baseline-relative review')
+        review=deepcopy(accepted_room_review['review'])
+    else:
+        from .furniture_room_review import baseline_relative_review
+        marks=[m['label'] for m in models]
+        baseline_scene=dict(scene,meshes=scene['meshes']+list(baseline_meshes),models=[m for m in scene.get('models',[]) if m.get('role')!='bed'])
+        baseline=bed_room_review(baseline_scene,layout,specification,furniture,target_marks=marks,absolute=True)
+        candidate=bed_room_review(result,layout,specification,furniture,target_marks=marks,absolute=True)
+        review=baseline_relative_review(baseline,candidate,target_prefixes=tuple(p for m in models
+            for p in (m['label']+'::',m['id']+'::','furn-'+m['label']+'-','dress-pillow-'+m['label']+'-',
+                      'cloth-duvet-'+m['label'],'cloth-throw-'+m['label'])),fixed_items=[it['id'] for it in furniture if it['id'] not in marks])
     if not review['ok']:raise ValueError('scaled bed worsens fixed room versus procedural baseline: '+str(review['findings']))
     for model in models:
         physical=model.get('physical_cloth_review',{})
@@ -585,6 +597,10 @@ def integrate_bed_models(scene, models, layout, specification, furniture, *, bas
                     ('intersections','inside_vertices','uncertain_vertices')) for r in records)):
             raise ValueError('bed activation requires selection-bound passing evaluated cloth for every soft good')
     result['bed_room_review']=review
+    hidden={'camera':False,'shadow':False,'diffuse':False,'glossy':False,'transmission':False}
+    pillow_prefixes=tuple('dress-pillow-'+m['label']+'-' for m in models)
+    result['meshes']=[dict(row,visibility=hidden) if row['id'].startswith(tuple(prefixes)+pillow_prefixes)
+                      else row for row in result['meshes']]
     return result
 
 
@@ -889,19 +905,20 @@ def bed_room_review(scene, layout, specification, furniture, *, target_marks=Non
                if m.get('role')=='bed' and m.get('status')!='procedural-bed-fallback'}
     if target_marks is not None:
         bed_marks = set(target_marks)
-    target_prefixes = tuple('furn-'+mark+'-' for mark in bed_marks) + tuple(
+    target_prefixes = tuple('furn-'+mark.replace('#','-')+'-' for mark in bed_marks) + tuple(
         'dress-pillow-'+mark+'-' for mark in bed_marks) + tuple(
         prefix+mark for mark in bed_marks for prefix in ('cloth-duvet-', 'cloth-throw-')) + tuple(
         m['id']+'::' for m in scene.get('models',[]) if m.get('label') in bed_marks)
     def belongs(identifier):
         # Derived chairs remain independent physical items when a desk is
         # replaced; their names share its prefix but not its body identity.
-        if any(identifier.startswith('furn-'+mark+'-chair-') for mark in bed_marks):
+        if any(identifier.startswith('furn-'+mark+'-chair-') for mark in bed_marks) and not any(
+                identifier.startswith('furn-'+mark.replace('#','-')+'-') for mark in bed_marks if '#' in mark):
             return False
         return identifier in bed_marks or identifier.startswith(target_prefixes)
     def owner(identifier):
-        for mark in bed_marks:
-            prefixes=('furn-'+mark+'-','dress-pillow-'+mark+'-','cloth-duvet-'+mark,'cloth-throw-'+mark)
+        for mark in sorted(bed_marks,key=len,reverse=True):
+            prefixes=('furn-'+mark.replace('#','-')+'-','dress-pillow-'+mark+'-','cloth-duvet-'+mark,'cloth-throw-'+mark)
             instances=tuple(m['id']+'::' for m in scene.get('models',[]) if m.get('label')==mark)
             if identifier==mark or identifier.startswith(prefixes+instances):return mark
         return None
@@ -913,7 +930,7 @@ def bed_room_review(scene, layout, specification, furniture, *, target_marks=Non
         for mark in procedural:
             item = next(it for it in furniture if it['id']==mark)
             parts = [dict(r,id=mark+'::'+r['id']) for r in scene['meshes']
-                     if belongs(r['id']) and r['id'].startswith(('furn-'+mark+'-', 'dress-pillow-'+mark+'-', 'cloth-duvet-'+mark, 'cloth-throw-'+mark))]
+                     if belongs(r['id']) and r['id'].startswith(('furn-'+mark.replace('#','-')+'-', 'dress-pillow-'+mark+'-', 'cloth-duvet-'+mark, 'cloth-throw-'+mark))]
             findings.extend(bed_room_boundary_findings(dict(models=[dict(
                 id=mark, role='bed', room=item['room'])]), layout, parts))
     for query in (topology.unsupported_floating,
@@ -963,6 +980,10 @@ def bed_room_review(scene, layout, specification, furniture, *, target_marks=Non
                 other['id'] in active_marks and furnishing._ov(furnishing.side_zone(item,'front',.914),furnishing.footprint(other))
                 for other in reviewed):
             continue
+        # Derived task-chair access belongs to its parent desk's cited chair
+        # zone. Its body, routes and boundary still participate above.
+        if item['type'] in ('task_chair','vanity_chair'):
+            continue
         kind = catalogue.get(item['type'])
         card = ('tss-front-of-storage-914' if item['type'] in ('wardrobe','chest_drawers') else
                 'mitton-desk-chair-access-864' if item['type']=='desk' else
@@ -978,7 +999,8 @@ def bed_room_review(scene, layout, specification, furniture, *, target_marks=Non
             sides += [(side,kind.clearance_any[1]/1000) for side in either]
         rooms = [layout['rooms'][r]['rect'] for r in furnishing._cluster(layout,item['room'])]
         walls = furnishing._walls(specification,item['level'])+furnishing._columns()
-        neighbours = [it for it in reviewed if it['id']!=item['id'] and it['level']==item['level']]
+        neighbours = [it for it in reviewed if it['id']!=item['id'] and it['level']==item['level']
+                      and it.get('parent_id')!=item['id']]
         side_rows = []
         for side,required in sides:
             if abs(required-requirement.value)>1e-6:

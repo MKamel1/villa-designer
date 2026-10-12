@@ -45,7 +45,7 @@ procedural mattress top. Record every resulting bunk top: a lower-top match
 does not authorize changing the upper target. `integrate_bed_models` refuses
 any changed design berth height. Record resulting headboard height and the
 sourced or explicitly ASSUMED maximum. Require a bed-only contents review;
-omit only separately named accessory meshes and record every omission.
+omit only separately named accessory meshes and record every omission. Lead decision 2026-10-11 permits complete connected source quilt/throw/blanket components to be omitted when frame, mattress and pillow faces are preserved. Record exact source face indices and recompute retained bounds. Keep source pillows only after an independent relative room pass; fused structural bedding refuses.
 Bind the neutral review to source hashes, orientation, retained meshes,
 mattress bindings, source-face cuts, independent factors, contents, geometry
 digest, placement and units before activation. Save an independent review

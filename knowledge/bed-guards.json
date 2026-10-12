@@ -361,6 +361,23 @@
         "test_real_duplicate_ray_hits_refuse_before_fix_and_clean_local_hits_agree",
         "test_local_construction_generalises_to_translated_shell_and_real_inside_point"
       ]
+    },
+    {
+      "lesson_id": "source-bedding-separable-omission",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Whole source component identity and exact fallback floor; seat-driven vertical fit with a cited measured back range; namespace complete imported hierarchy",
+      "check": "Measured fitting/import plus selection-bound neutral and baseline-relative room gates",
+      "stage": "before preview and activation",
+      "proof_file": "tests/test_furniture_oct11.py",
+      "proofs": [
+        "test_real_bedding_omission_keeps_frame_and_mattress_triangles_intact",
+        "test_renamed_bedding_sibling_and_fused_component_mutation",
+        "test_actual_accepted_parent_context_and_empty_view_subset_keep_bound_room_review",
+        "test_actual_parent_room_camera_cloth_and_baseline_mutations_refuse"
+      ]
     }
   ]
 }

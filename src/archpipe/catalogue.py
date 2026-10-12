@@ -182,6 +182,10 @@ CATALOGUE: dict[str, FurnitureType] = {t.id: t for t in (
         clearance_any=(("left", "right"), 750),
     ),
     FurnitureType("bedside_table", "Bedside table", 500, 400, _c(), "ENVELOPE (no clearance of its own)"),
+    FurnitureType("task_chair", "Derived task chair", 440, 450, _c(),
+        "ASSUMED villa_furnish3d._chair footprint; access belongs to parent desk's mitton-desk-chair-access-864 card"),
+    FurnitureType("vanity_chair", "Derived vanity chair", 440, 450, _c(),
+        "ASSUMED villa_furnish3d._chair footprint; access belongs to parent desk's mitton-desk-chair-access-864 card"),
     FurnitureType(
         "sofa_4seat", "Sofa, 4 seat", 2600, 950, _c(front=457),
         "card mitton-sofa-coffee-table-457 -- sofa to coffee table 18 in (457 mm) where the table is not minimal",

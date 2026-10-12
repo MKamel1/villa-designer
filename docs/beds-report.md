@@ -1,8 +1,9 @@
 # Furniture phase, step 1: beds
 
-**Round 7: retain the procedural parents bed.** Generated cloth now passes;
-CyberFox still introduces bedside-table/book body conflicts. The baseline
-comparison and zero-extension proposal are recorded in the round-7 section.
+**Current, round 8 (2026-10-11): parents CyberFox is active with complete
+source quilt/throw components omitted and both source pillows retained.**
+Relative room, generated-cloth and neutral preview gates pass. Kids A/B retain
+procedural fallbacks. The round-7 refusal below is historical.
 
 **Round 6 client decision, 2026-10-09: keep the layout and use slim frames.**
 The mattress scaling rule remains unchanged; frame parts receive their own
@@ -1240,3 +1241,95 @@ Final execution and artifact hashes are in
 No presentation images, packages, native Revit edits or commits were made.
 Shared `assets/user` and `out/villa/round3` data were not modified. The lead
 owns the full suite and commit.
+
+## Round 8 — separable source covers omitted (2026-10-11)
+
+The lead permits complete source quilt/throw/blanket components to be omitted
+where they are separable from frame, mattress and pillows. CyberFox meets that
+condition. `Object_6` comprises four complete connected components. The source
+frame `Object_4` and actual mattress retain every triangle unchanged.
+
+| Source part | Source triangles | Decision |
+|---|---:|---|
+| Frame, feet and headboard | 3,082 | Retain unchanged source triangles |
+| Actual mattress | 232 | Retain unchanged source triangles |
+| Quilt, `Object_6` component 0 | 12,496 | Omit as `source-quilt` |
+| Throw, `Object_6` component 1 | 8,212 | Omit as `source-throw` |
+| Left pillow, component 2 | 2,668 | Retain; independent room gate passes |
+| Right pillow, component 3 | 2,668 | Retain; independent room gate passes |
+
+All 29,358 source triangles remain in the measured receipt and exact component
+selections; 20,708 cover triangles are omitted at import. No face is cut and no
+source file is changed. The retained collider geometry contains 8,650 triangles.
+The source partition and immutable structural rows are regression-tested on the
+real model, a renamed sibling and a fused-component mutation. Fused structural
+bedding remains refused. Retained native bounds are recomputed after omissions.
+
+The planned mattress remains 1.600 × 2.000 m, centred at the same authored
+position, with top 0.527 m above the world datum (finished floor 0.002 m).
+Width, length and vertical factors remain 0.897994856, 1.000389787 and
+0.905497481 respectively. These are dimensionless source-to-design ratios.
+Converted-source horizontal frame factors remain 0.835384639 and 0.802408894;
+head and side extension beyond the mattress remain zero. These are the round-7
+frame decision, not new mattress or layout changes.
+
+The parents relative room review uses the evaluated procedural duvet/throw,
+current accepted desks, identical room scope and the same cards. Front and left
+access remain 750 mm in both columns; right access remains 568 mm in both
+columns against the 750 mm card, an inherited 182 mm shortfall. Boundary
+overrun remains zero.
+No new route, swing, storage-front or fixed-element body conflict appears.
+The former new bedside-table/book conflicts disappear with the two complete
+source covers. Inherited absolute findings remain in both report columns.
+The combined parents/chairs/desks comparison also passes. The access citation
+remains `ukadm-bed-principal-750`, Approved Document M Volume 1 (2015 with
+2016 corrections), paragraph 2.25b, printed p.18, applied through the existing
+ageing-in-place brief. This screen approves no real villa design gate.
+
+| Generated soft good | Crossings | Inside vertices | Unresolved vertices | Minimum surface distance |
+|---|---:|---:|---:|---:|
+| Duvet | 0 | 0 | 0 | 2.478 mm |
+| Throw | 0 | 0 | 0 | 7.204 mm |
+
+The generated duvet derives from the actual retained mattress; the throw keeps
+its authored cut and evaluated-duvet support. Source pillows remain colliders.
+Both physical gates pass without changing cloth tolerances. Neutral isolate
+with a 1.8 m figure and unchanged v22-parents-day were inspected with the
+accepted vanity desk present. No evident frame-member warping was found.
+The original v22 crops head/foot and cannot visually prove complete access;
+numerical and isolate evidence remain necessary.
+
+Evidence is under `out/furniture-oct11`: `bed-room-comparison.json`,
+`all-replacements-combined.json`, `bed-previews-current/evidence.json`,
+`preview-review.json` and `credits.md`. `knowledge/parents-bed.json.gz`
+contains source geometry, exact omissions, complete CC-BY attribution,
+selection-bound evaluated cloth, baseline cloth and accepted relative review.
+Activation binds physical room inputs, unchanged camera and authored cloth
+specifications separately. A changed input refuses reuse. Native fallback
+bodies remain available for missing source files. Kids A and B retain their
+round-6 procedural fallbacks and existing fit/height refusals.
+
+### Resumed acceptance evidence
+
+Fresh default activation passes with all 41 default views: the parents bed,
+seven desks and eight task chairs are active, kids' bed fallbacks remain
+visible, and the original v22 camera is retained. Read-back is in
+`out/furniture-oct11/default-activation-resume.json`.
+
+The focused bed/furniture/receipt/adapter batch passes **90 tests, exit 0**
+(`focused-resume.log`). This includes real source-cover triangle preservation,
+the fused-component refusal, the real chair seat-height rule, and room,
+camera, cloth and baseline mutations. The affected consumer batch passes
+**187 tests, exit 0** (`affected-resume.log`): bed scaling/frames/clearance/ray
+precision, fitted furniture, asset intake, render standard, cameras,
+furnishing, detailed furnishing and furniture primitives. Portable verification passes
+**186 checks, exit 0**, under both normal and initially empty HOME, the home
+directory environment setting (`verify-normal-resume.log`,
+`verify-empty-home-resume.log` and its separate home receipt).
+All 38 generated adapters match after synchronization; `git diff --check`
+passes. Final execution results and content hashes are recorded in
+`out/furniture-oct11/acceptance-resume.json`.
+
+No presentation images, native Revit edits or commits were made. Shared
+`assets/user` and `out/villa/round3` data were not modified. The lead owns
+the full suite and commit.

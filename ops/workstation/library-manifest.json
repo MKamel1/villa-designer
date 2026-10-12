@@ -3945,7 +3945,8 @@
         "room_preview": "out/beds/round5/previews-supported/pb-bed-room-neutral.png",
         "cloth_proof": "out/beds/round5/importer-cloth-support-final.json",
         "integrated": false
-      }
+      },
+      "placement_scale_source": "archpipe.beds.scaled_model_fit; Blender villa_scene.import_models uses scale_xyz for the whole retained model, with slim_frame_fit recorded separately for frame parts"
     },
     {
       "id": "sf_bunk_home_series",
@@ -5161,6 +5162,67 @@
       },
       "preview_image": "props/sf_desk_6e47547c/preview.png",
       "status": "measured-neutral-source; placement gated separately"
+    },
+    {
+      "id": "sf_desk_aee7ef03",
+      "role": "task-chair",
+      "source_url": "https://sketchfab.com/3d-models/leather-office-chair-low-polygon-game-ready-aee7ef0361b848d6b66bd3588fc2190c",
+      "author": "RenendStudio",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tLeather Office Chair - Low Polygon / Game Ready\n* source:\thttps://sketchfab.com/3d-models/leather-office-chair-low-polygon-game-ready-aee7ef0361b848d6b66bd3588fc2190c\n* author:\tmurattd3v (https://sketchfab.com/murattd3v)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Leather Office Chair - Low Polygon / Game Ready\" (https://sketchfab.com/3d-models/leather-office-chair-low-polygon-game-ready-aee7ef0361b848d6b66bd3588fc2190c) by murattd3v (https://sketchfab.com/murattd3v) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF 2.0 metres; two separable complete chairs, fixed chair plan and seat fit recorded independently"
+      },
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "bounds_m": {
+        "min": [
+          -1.029734879732132,
+          -0.4983237683773041,
+          -0.3431348204612732
+        ],
+        "max": [
+          0.9808252155780792,
+          0.8257120847702026,
+          0.4378645420074463
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -1.0297348499298096,
+          -0.4983240067958832,
+          -0.3431348204612732
+        ],
+        "max": [
+          0.9808251857757568,
+          0.8257124423980713,
+          0.4378646910190582
+        ]
+      },
+      "expected_size_range": {
+        "min_m": [
+          1.0052800178527832,
+          0.6620182245969772,
+          0.3904997557401657
+        ],
+        "max_m": [
+          4.021120071411133,
+          2.648072898387909,
+          1.5619990229606628
+        ],
+        "source": "Client scaling decision 2026-10-11: 0.5\u20132.0 applied to each measured complete chair; bundle bounds only source intake, no unit inference",
+        "basis": "client-decision"
+      },
+      "contents": {
+        "item_only": false,
+        "separable_chairs": [
+          "Object_4",
+          "Object_6"
+        ]
+      },
+      "preview_image": "props/sf_desk_aee7ef03/preview.png",
+      "status": "measured source; neutral and room acceptance required"
     }
   ],
   "_bounds_note": "bounds_m: native glTF (Y-up, metres) world AABB per prop, node-hierarchy-aware (handles multi-root variant packs e.g. shrub_02). Measured 2026-09-28 on ai-workstation via ops/workstation/fetch_asset_library.py bounds(); verified against one headless Blender 4.2.9 import (tree_small_02, shrub_02) matching to 1e-4 m. Blender glTF import maps (x,y,z)_gltf -> (x,-z,y)_scene."

@@ -133,7 +133,8 @@ class FurnishedBeds(unittest.TestCase):
             parts = [m for m in self.scene['meshes'] if m['id'].startswith('furn-'+bed['id']+'-')]
             self.assertTrue(parts, bed['id'])
             self.assertTrue(all('PROCEDURAL BED FALLBACK (stand-in)' in m['fallback_label'] for m in parts))
-            self.assertTrue(all(m.get('visibility',{}).get('camera',True) for m in parts))
+            replaced=any(m.get('role')=='bed' and m.get('label')==bed['id'] for m in self.scene['models'])
+            self.assertTrue(all(m.get('visibility',{}).get('camera',True)==(not replaced) for m in parts))
 
     def test_fallback_labels_generalise_without_mutating_geometry(self):
         item={'id':'other-rest','type':'daybed_nook'}
@@ -158,15 +159,19 @@ class FurnishedBeds(unittest.TestCase):
         # Move the whole real assembly into open air, far from walls;
         # adjacent furniture must not falsely ground the lifted bed.
         from archpipe.concept.villa_render import LZ
-        bad=deepcopy(self.scene)
-        bed_parts=[m for m in bad['meshes'] if m['id'].startswith('furn-pb-bed-')]
-        for mesh in bed_parts:
-            mesh.pop('mounting',None)
-            for face in mesh['faces']:
-                for p in face:
-                    p[0]+=100
-                    p[2]+=1
-        self.assertTrue(any(f.source_id.startswith('furn-pb-bed-') for f in
+        actual=next((m for m in self.scene['models'] if m.get('role')=='bed' and m.get('label')=='pb-bed'),None)
+        if actual:
+            lifted=deepcopy(actual);lifted['position'][0]+=100;lifted['position'][2]+=1
+            bad=dict(self.scene,models=[lifted if m['id']==actual['id'] else m for m in self.scene['models']])
+            prefix=actual['id']+'::'
+        else:
+            bad=deepcopy(self.scene);prefix='furn-pb-bed-'
+            bed_parts=[m for m in bad['meshes'] if m['id'].startswith(prefix)]
+            for mesh in bed_parts:
+                mesh.pop('mounting',None)
+                for face in mesh['faces']:
+                    for p in face:p[0]+=100;p[2]+=1
+        self.assertTrue(any(f.source_id.startswith(prefix) for f in
                             GeometryTopology.from_inputs(scene=bad).unsupported_floating()))
         bed=next(b for b in self.items if b['id']=='pb-bed')
         rect=F.footprint(bed)

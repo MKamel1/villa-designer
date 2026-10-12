@@ -27,7 +27,7 @@ def semantic_cut(geometry, recipes):
     source={m['name']:m for m in geometry['meshes']}
     used={}; new=[]
     for berth,recipe in recipes.items():
-        name='measured-'+berth+'-mattress'; mesh=source[recipe['mesh']]
+        name=recipe.get('name','measured-'+berth+'-mattress'); mesh=source[recipe['mesh']]
         groups=components(mesh['faces'])
         points=(groups[recipe['component_index']] if 'component_index' in recipe else
                 next(g for g in groups if len(g)==recipe['expected_vertices']))

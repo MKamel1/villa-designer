@@ -183,7 +183,7 @@ def render(args):
     for mark,room,view_id in requests:
         if args.beds and mark not in args.beds:
             continue
-        prefix='furn-'+mark+'-'
+        prefix='furn-'+mark.replace('#','-')+'-'
         bed_meshes=[m for m in data['meshes'] if m['id'].startswith(prefix) and not m['id'].startswith(prefix+'chair-')]
         meshes=[m for m in data['meshes'] if m['group'] in ('shell','context') or m.get('room')==room]
         scene,objects,materials,warnings=setup(meshes)

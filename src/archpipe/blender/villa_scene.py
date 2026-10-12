@@ -1255,7 +1255,7 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
         meshes = [obj for obj in new if obj.type == "MESH"]
         if not meshes:
             raise ValueError("model has no meshes: " + spec["asset"])
-        if spec.get('role')=='bed':
+        if spec.get('role')=='bed' or spec.get('furniture_fitting'):
             # Generated semantic mattress cuts preserve every source face and
             # material. They identify colliders, never remove fused extras.
             selections=spec.get('part_selections',{})
@@ -1340,7 +1340,11 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
             if ratio < 1.0 and faces > 10:
                 mod = obj.modifiers.new("bounded product decimation", "DECIMATE")
                 mod.ratio = ratio
-            obj.name = "model-%s-%s" % (spec["id"], obj.name)
+        # glTF also creates empty hierarchy nodes. Their unscoped names can
+        # force a later source mesh to become Object_4.001, invalidating an
+        # exact semantic face selection even though its source is unchanged.
+        from archpipe.blender.import_identity import namespace_objects
+        namespace_objects(new,spec['id'])
         if spec.get('role')=='bed':
             # Keep procedural fallback objects for a later missing-file run,
             # but remove them from both rendering and cloth collision now.

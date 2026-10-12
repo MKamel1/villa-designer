@@ -2207,7 +2207,9 @@ def _build(lay=None, views=None, *, collect_part_failures=True, bed_replacements
     from copy import deepcopy
     scene['authoring_room_context']=deepcopy(dict(layout=lay,specification=sp,furniture=list(it_all.values())))
     from .furniture_stage2 import apply as apply_furniture_stage2
-    return apply_furniture_stage2(scene,lay,sp,list(it_all.values()))
+    scene=apply_furniture_stage2(scene,lay,sp,list(it_all.values()))
+    from .parents_bed import apply as apply_parents_bed
+    return apply_parents_bed(scene,lay,sp,list(it_all.values()))
 
 
 def _seat_recessed_on_soffit(scene):

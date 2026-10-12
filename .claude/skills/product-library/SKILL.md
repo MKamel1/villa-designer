@@ -46,7 +46,7 @@ appearances into new shared-library folders with complete licence/credits;
 measure declared units, actual mesh bounds, facing and complete item contents.
 Plan factors must each be 0.5–2.0 with a larger/smaller factor ratio no greater
 than 1.15. Fit the whole item; identify a complete desktop or seat datum and
-check every independently required height under the same vertical factor.
+check every independently required height under the same vertical factor. For task chairs (lead decision 2026-10-11), derive that factor from the design seat height (label assumptions), then measure the resulting back top above the seat against a read cited range; never force an independently assumed overall back target. Derive floor from exact native fallback bodies, including basement/upper levels.
 A plan pass cannot approve an unresolved seat/back or a fused extra. For
 separable platforms or bundles, record exact retained/omitted identities and
 measure each complete retained item independently; a prose omission is not

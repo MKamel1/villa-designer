@@ -1,0 +1,158 @@
+{
+  "entry": {
+    "id": "sf_bed_upholstered_cyberfox",
+    "url": "https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be",
+    "source_url": "https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be",
+    "role": "bed",
+    "author": "cyberfox3d",
+    "licence": "CC Attribution",
+    "credit": "Model Information:\n* title:\tUpholstered Bed || Free model\n* source:\thttps://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be\n* author:\tCyberFox 3D Studio (https://sketchfab.com/cyberfox3d)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Upholstered Bed || Free model\" (https://sketchfab.com/3d-models/upholstered-bed-free-model-7602267cc32e4caf8c92c60b677539be) by CyberFox 3D Studio (https://sketchfab.com/cyberfox3d) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "up_axis": "+Y",
+    "front_axis": "-X",
+    "front_axis_source": "Upper 20% vertices at native X 1.050701 to 1.195498, Z -0.991287 to 0.980353 form headboard at +X.",
+    "length_axis": "X",
+    "orientation_evidence": {
+      "front_axis": "-X",
+      "length_axis": "X",
+      "access_axis": null,
+      "basis": "Upper 20% vertices at native X 1.050701 to 1.195498, Z -0.991287 to 0.980353 form headboard at +X.",
+      "review": "out/beds/round2/preview-review.md",
+      "status": "measured, lead-verifiable; not lead approval"
+    },
+    "units_normalised": {
+      "scale_factor": 1.0,
+      "reason": "glTF 2.0 metre source coordinates; dimensionless plan/height factors recorded separately under client decision 2026-10-09"
+    },
+    "bounds_m": {
+      "min": [
+        -1.0499999523162842,
+        -0.0001455545425415039,
+        -1.2844038009643555
+      ],
+      "max": [
+        1.1970534324645996,
+        1.5065058469772339,
+        1.270896077156067
+      ]
+    },
+    "measured_bounds_m": {
+      "min": [
+        -1.0499999523162842,
+        -0.0001455545425415039,
+        -1.2844038009643555
+      ],
+      "max": [
+        1.1970534324645996,
+        1.5065058469772339,
+        1.270896077156067
+      ]
+    },
+    "bounds_basis": "conservative transformed accessor envelope for existing C2 validator; measured_bounds_m contains exact indexed vertices for bed fitting",
+    "contents": {
+      "bedding": true
+    },
+    "preview_image": "previews/beds-round5-intake/sf_bed_upholstered_cyberfox.png",
+    "neutral_preview": "out/beds/round2/candidates-preview-corrected/sf_bed_upholstered_cyberfox-plus-y.png",
+    "status": "rejected-fixed-envelope",
+    "fit": {
+      "ok": false,
+      "scale": 0.6261496013442058,
+      "scaled_size_m": [
+        1.6000000000000003,
+        1.4069915810796987,
+        0.9433891744262963
+      ],
+      "footprint_error_m": [
+        2.220446049250313e-16,
+        0.5930084189203013
+      ],
+      "height_err": 0.10153411959400349,
+      "reason": "scale-distortion: depth misses fixed footprint by 593.008 mm (>20 mm); overall height 0.943389 m misses 1.050000 m by 10.153% (>5%)"
+    },
+    "intake_sources": {
+      "provenance": "/home/omar/archpipe/assets/library/props/sf_bed_upholstered_cyberfox/provenance.json",
+      "licence": "/home/omar/archpipe/assets/library/props/sf_bed_upholstered_cyberfox/license.txt"
+    },
+    "expected_size_range": {
+      "min_m": [
+        1.123526692390442,
+        null,
+        1.2776499390602112
+      ],
+      "max_m": [
+        4.494106769561768,
+        null,
+        5.110599756240845
+      ],
+      "basis": "client-decision",
+      "source": "Client bed scaling decision 2026-10-09: horizontal factors 0.5\u20132.0; exact mattress, distortion and height checked by archpipe.beds. This range covers retained frame overhang; C8 still required."
+    },
+    "placement_scale_factors": [
+      [
+        1.0003897874379446,
+        0.8979948556776004,
+        0.905497480651127
+      ]
+    ],
+    "round5": {
+      "status": "scaled-plan-fit; neutral cloth reviewed; fixed-room refusal",
+      "fit": {
+        "ok": true,
+        "reason": "scaled mattresses fit exactly",
+        "sx": 0.8979948556776004,
+        "sy": 1.0003897874379446,
+        "sz": 0.905497480651127,
+        "scale_xyz": [
+          1.0003897874379446,
+          0.8979948556776004,
+          0.905497480651127
+        ],
+        "source_unit_factor": 1.0,
+        "plan_distortion": 0.1140261896969108,
+        "mattresses": {
+          "lower": {
+            "size_m": [
+              1.6,
+              2.0
+            ],
+            "error_m": [
+              0.0,
+              0.0
+            ],
+            "top_m": 0.525
+          }
+        },
+        "headboard_height_m": 1.3642693721531338,
+        "headboard_limit_m": 1.8,
+        "height_source": "ASSUMED design: unchanged procedural duvet-pb-bed mattress_top 0.527 m minus finished floor 0.002 m; villa_render.build bedding and furniture generator/detail",
+        "headboard_limit_source": "ASSUMED diagnostic cap: single 1.8 m, bunk 2.4 m; generous compared with existing authored heads 0.95/1.05/1.70 m, below room ceiling; not a standard",
+        "source": "Client bed scaling decision 2026-10-09"
+      },
+      "bed": "pb-bed",
+      "omitted_meshes": [],
+      "neutral_preview": "out/beds/round5/previews-supported/pb-bed-isolated-neutral.png",
+      "room_preview": "out/beds/round5/previews-supported/pb-bed-room-neutral.png",
+      "cloth_proof": "out/beds/round5/importer-cloth-support-final.json",
+      "integrated": false
+    }
+  },
+  "model": {
+    "asset": "sf_bed_upholstered_cyberfox",
+    "scale": 1.0,
+    "scale_xyz": [
+      1.0003897874379446,
+      0.8979948556776004,
+      0.905497480651127
+    ],
+    "scaling": {
+      "decision_date": "2026-10-09",
+      "mattress_top_m": 0.525,
+      "height_source": "ASSUMED design: unchanged procedural duvet-pb-bed mattress_top 0.527 m minus finished floor 0.002 m; villa_render.build bedding and furniture generator/detail",
+      "headboard_parts": [
+        "Object_4"
+      ],
+      "headboard_limit_m": 1.8,
+      "headboard_limit_source": "ASSUMED diagnostic cap: single 1.8 m, bunk 2.4 m; generous compared with existing authored heads 0.95/1.05/1.70 m, below room ceiling; not a standard"
+    }
+  }
+}
