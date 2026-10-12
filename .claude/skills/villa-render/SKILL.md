@@ -78,6 +78,26 @@ or use only the slim frame's planning envelope. `bed_room_boundary_findings`
 reports conservative plan-bound area outside that union against zero;
 corners alone cannot prove containment in a concave cluster. Disclose this
 as a bounds screen, not exact solid penetration.
+Round 7, fixed-layout replacement decision **2026-10-09**: measure the
+current procedural item, including its evaluated generated soft goods, with
+the SAME `bed_room_review` target scope and evidence cards. Access on each
+side may lose at most 0.005 m (five millimetres, client allowance), boundary
+overrun may not increase, and routes, swings, storage fronts and fixed-element
+body conflicts may introduce no new failure. Use `baseline_relative_review`;
+retain every inherited absolute finding. Tighten permitted frame head/side
+extension from its measured contract when it worsens the baseline; record
+the actual extension. A same fixed-element body identity may have different
+part/proxy row counts; equal row counts never prove acceptance. Room and
+physical generated-cloth gates must BOTH pass before activation. Refused
+neutral images remain diagnostics and the physical fallback remains active.
+
+Build containment query structures near zero using bounded local coordinates;
+never move the world design geometry. Count each planar source triangle once
+per straight ray; repeated floating-point hits cannot create new surfaces.
+Preserve exact crossing, actual enclosed-vertex and unresolved/open-shell
+refusals. Freeze actual failed point/shell triangles and prove outside and
+enclosed translated siblings, then review fresh neutral previews.
+
 Imported headings pin only within actual mattress width, on the measured
 local support envelope over a grid-cell subdivision ring plus existing
 collision offsets. Inset covers start on that envelope; hanging cuts retain
@@ -373,3 +393,8 @@ asset or view:
 Compensate with exposure, white balance or tone curves; add unlabelled
 content; move design geometry or photometry to make an image look better;
 show an image that has not passed the guards and been looked at.
+
+For measured furniture activation, bind architectural evidence by physical
+face/material and stable host data, rather than numbered export buckets or
+doorway captions. Full/empty-view export equality needs a real regression;
+actual geometry, material, visibility and finish-host changes still refuse.

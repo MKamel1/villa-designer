@@ -36,10 +36,16 @@ def render(args):
     if args.scaled_models:
         scaled=json.loads(args.scaled_models.read_text())
         data['models']=[m for m in data['models'] if m.get('replaces') not in {s['replaces'] for s in scaled}]+scaled
+    if args.furniture_models:
+        furniture=json.loads(args.furniture_models.read_text())
+        data['models']=[m for m in data['models'] if m.get('replaces') not in {s['replaces'] for s in furniture}]+furniture
     args.output.mkdir(parents=True,exist_ok=True)
     requests=[('pb-bed','parents-bed','v22-parents-day'),
               ('kb-bed','kids-b','v13-kids-b'),('ka-bunk','kids-a','v06-kids-room'),
               ('library-daybed','bar-alcove','v24-bar-alcove')]
+    if args.furniture_models:
+        views={'study-game':'v04-study-deck','cinema':'v08-cinema','kids-a':'v06-kids-room','kids-b':'v13-kids-b','parents-bed':'v22-parents-day'}
+        requests=[(m['label'],m['room'],views[m['room']]) for m in furniture]
     receipts=[]
 
     def setup(meshes):
@@ -178,12 +184,12 @@ def render(args):
         if args.beds and mark not in args.beds:
             continue
         prefix='furn-'+mark+'-'
-        bed_meshes=[m for m in data['meshes'] if m['id'].startswith(prefix)]
+        bed_meshes=[m for m in data['meshes'] if m['id'].startswith(prefix) and not m['id'].startswith(prefix+'chair-')]
         meshes=[m for m in data['meshes'] if m['group'] in ('shell','context') or m.get('room')==room]
         scene,objects,materials,warnings=setup(meshes)
         # Other accepted room furniture imports retain their real textures.
         models=builder.import_models([m for m in data['models'] if m.get('room')==room],str(args.library),
-                                     neutral_diagnostic=bool(args.scaled_models))
+                                     neutral_diagnostic=bool(args.scaled_models or args.furniture_models))
         cloth=[c for c in data['cloth'] if c['id'].startswith(('duvet-'+mark,'throw-'+mark))]
         for name in {c['material'] for c in cloth}-materials.keys():
             materials[name]=builder.add_material(name,data['materials'][name],str(args.library),warnings)
@@ -191,12 +197,26 @@ def render(args):
             cloth_report=builder.drape_cloth(cloth,materials,models)
             cloth_status='passed'
         except ValueError as error:
-            if not args.scaled_models:raise
+            if not (args.scaled_models or args.furniture_models):raise
             cloth_report=dict(passed=False,refused=str(error))
             cloth_status='refused; raw imported bedding shown; candidate cannot activate'
             for obj in list(bpy.data.objects):
                 if obj.name.startswith(('cloth-duvet-'+mark,'cloth-throw-'+mark)):
                     bpy.data.objects.remove(obj,do_unlink=True)
+        # Generated soft goods belong to the current procedural baseline's
+        # physical body too. Export evaluated faces for identical room review;
+        # never hand-edit a generated scene/extract to invent that baseline.
+        import gzip
+        evaluated_cloth=[]
+        for obj in bpy.data.objects:
+            if obj.type=='MESH' and obj.name.startswith(('cloth-duvet-'+mark,'cloth-throw-'+mark)):
+                evaluated=obj.evaluated_get(bpy.context.evaluated_depsgraph_get())
+                actual=evaluated.to_mesh();points=[list(evaluated.matrix_world@v.co) for v in actual.vertices]
+                evaluated_cloth.append(dict(id=obj.name,group='furniture',room=room,material=cloth[0]['material'],
+                    part_kind='evaluated-cloth',faces=[[points[i] for i in p.vertices] for p in actual.polygons]))
+                evaluated.to_mesh_clear()
+        cloth_geometry=args.output/(mark+'-evaluated-cloth.json.gz')
+        cloth_geometry.write_bytes(gzip.compress(json.dumps(evaluated_cloth,separators=(',',':')).encode(),mtime=0))
         disable_material_emission({m.name:m for m in bpy.data.materials})
         view=next(v for v in data['views'] if v['id']==view_id)
         for mid in view.get('hide_meshes',[]):
@@ -223,9 +243,11 @@ def render(args):
             source_geometry_sha256=canonical_hash(bed_meshes),
             source_materials_sha256=canonical_hash({n:data['materials'][n] for n in {m['material'] for m in bed_meshes}}),
             source_cloth_sha256=canonical_hash(cloth),cloth_report=cloth_report,cloth_status=cloth_status,
+            evaluated_cloth_geometry=str(cloth_geometry),evaluated_cloth_sha256=hashlib.sha256(cloth_geometry.read_bytes()).hexdigest(),
             scaled_model_selection=(replacement.get('neutral_review',{}).get('selection') if replacement else None),
             source_sha256=(replacement['review_geometry']['source_sha256'] if replacement else None),
             actual_imported_bounds_m=(replacement['bounds'] if replacement else None),
+            import_transform_max_error_m=(replacement.get('import_transform_max_error_m') if replacement else None),
             emission_disabled=True,neutral_softbox_watts=500,warnings=warnings,
             context_scope='Actual architecture and room furniture; diagnostic props/curtains omitted',
             review_status='pending'))
@@ -256,6 +278,7 @@ def main():
     parser.add_argument('--rejected-model',type=Path)
     parser.add_argument('--candidates',type=Path,help='Measured candidate list for isolated review only')
     parser.add_argument('--scaled-models',type=Path,help='Pending measured scaled beds for neutral diagnostics only')
+    parser.add_argument('--furniture-models',type=Path,help='Pending measured fitted desks/chairs, neutral diagnostics only')
     parser.add_argument('--graphics-lock',type=Path,default=Path('/home/omar/archpipe/locks/graphics.lock'))
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv[1:])
     import fcntl

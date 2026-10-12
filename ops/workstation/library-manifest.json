@@ -4866,6 +4866,301 @@
         "provenance": "/home/omar/archpipe/assets/library/props/sf_bed3_fe3c50e1/provenance.json",
         "licence": "/home/omar/archpipe/assets/library/props/sf_bed3_fe3c50e1/license.txt"
       }
+    },
+    {
+      "id": "sf_desk_01f6ba08",
+      "role": "desk",
+      "source_url": "https://sketchfab.com/3d-models/ideal-130-3030-oak-01f6ba08d39844b1afb149ecbcb81832",
+      "url": "https://sketchfab.com/3d-models/ideal-130-3030-oak-01f6ba08d39844b1afb149ecbcb81832",
+      "author": "classe-saga",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tIdeal 130\u30c7\u30b9\u30af (30\u30ad\u30e3\u30d3\u30cd\u30c3\u30c8\u30fb30\u30c9\u30ed\u30ef\u30fc) OAK\n* source:\thttps://sketchfab.com/3d-models/ideal-130-3030-oak-01f6ba08d39844b1afb149ecbcb81832\n* author:\tclasse-saga (https://sketchfab.com/classe-saga)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Ideal 130\u30c7\u30b9\u30af (30\u30ad\u30e3\u30d3\u30cd\u30c3\u30c8\u30fb30\u30c9\u30ed\u30ef\u30fc) OAK\" (https://sketchfab.com/3d-models/ideal-130-3030-oak-01f6ba08d39844b1afb149ecbcb81832) by classe-saga (https://sketchfab.com/classe-saga) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "bounds_m": {
+        "min": [
+          -0.6441515198533665,
+          -0.7170000076293945,
+          -0.09682640179972085
+        ],
+        "max": [
+          0.6558485418933202,
+          2.6426278165736505e-08,
+          0.33317362625357827
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -0.644151508808136,
+          -0.7170000076293945,
+          -0.09682643413543701
+        ],
+        "max": [
+          0.6558485627174377,
+          1.6383958723054093e-07,
+          0.3331737220287323
+        ]
+      },
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "front_axis_source": "actual drawer fronts at converted minimum Y (native positive Z), read from complete source parts and both neutral views",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre convention; whole-item fit recorded separately"
+      },
+      "expected_size_range": {
+        "min_m": [
+          0.6500000357627869,
+          0.3585000857344909,
+          0.21500007808208466
+        ],
+        "max_m": [
+          2.6000001430511475,
+          1.4340003429379635,
+          0.8600003123283386
+        ],
+        "source": "client furniture fit factors 0.5\u20132.0; measured item footprint and 15% rule enforced separately",
+        "basis": "client-decision"
+      },
+      "contents": {
+        "item_only": true
+      },
+      "preview_image": "props/sf_desk_01f6ba08/preview.png",
+      "status": "measured-neutral-source; placement gated separately"
+    },
+    {
+      "id": "sf_desk_1710e30f",
+      "role": "desk",
+      "source_url": "https://sketchfab.com/3d-models/leaves-110x45-b-wn-1710e30f8c494b2787d04473ef7f4ee2",
+      "url": "https://sketchfab.com/3d-models/leaves-110x45-b-wn-1710e30f8c494b2787d04473ef7f4ee2",
+      "author": "classe-saga",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tLeaves 110x45\u30c7\u30b9\u30af B\u811a WN\n* source:\thttps://sketchfab.com/3d-models/leaves-110x45-b-wn-1710e30f8c494b2787d04473ef7f4ee2\n* author:\tclasse-saga (https://sketchfab.com/classe-saga)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Leaves 110x45\u30c7\u30b9\u30af B\u811a WN\" (https://sketchfab.com/3d-models/leaves-110x45-b-wn-1710e30f8c494b2787d04473ef7f4ee2) by classe-saga (https://sketchfab.com/classe-saga) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "bounds_m": {
+        "min": [
+          -0.13642298011255605,
+          -0.7200000286102296,
+          -0.15724440022044223
+        ],
+        "max": [
+          0.9635770721346404,
+          5.5879355587151736e-09,
+          0.29275563641220104
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -0.13642297685146332,
+          -0.7200000286102295,
+          -0.15724442899227142
+        ],
+        "max": [
+          0.9635770916938782,
+          1.5814038079042803e-07,
+          0.29275575280189514
+        ]
+      },
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "front_axis_source": "actual drawer fronts at converted minimum Y (native positive Z), read from complete source parts and both neutral views",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre convention; whole-item fit recorded separately"
+      },
+      "expected_size_range": {
+        "min_m": [
+          0.5500000342726707,
+          0.36000009337530514,
+          0.22500009089708328
+        ],
+        "max_m": [
+          2.200000137090683,
+          1.4400003735012206,
+          0.9000003635883331
+        ],
+        "source": "client furniture fit factors 0.5\u20132.0; measured item footprint and 15% rule enforced separately",
+        "basis": "client-decision"
+      },
+      "contents": {
+        "item_only": true
+      },
+      "preview_image": "props/sf_desk_1710e30f/preview.png",
+      "status": "measured-neutral-source; placement gated separately"
+    },
+    {
+      "id": "sf_desk_2edb7c9c",
+      "role": "desk",
+      "source_url": "https://sketchfab.com/3d-models/leaves-110x60-b-wn-2edb7c9c74b04a30953e11c73a1be815",
+      "url": "https://sketchfab.com/3d-models/leaves-110x60-b-wn-2edb7c9c74b04a30953e11c73a1be815",
+      "author": "classe-saga",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tLeaves 110x60\u30c7\u30b9\u30af B\u811a WN\n* source:\thttps://sketchfab.com/3d-models/leaves-110x60-b-wn-2edb7c9c74b04a30953e11c73a1be815\n* author:\tclasse-saga (https://sketchfab.com/classe-saga)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Leaves 110x60\u30c7\u30b9\u30af B\u811a WN\" (https://sketchfab.com/3d-models/leaves-110x60-b-wn-2edb7c9c74b04a30953e11c73a1be815) by classe-saga (https://sketchfab.com/classe-saga) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "bounds_m": {
+        "min": [
+          -0.13642298011255605,
+          -0.7200000286102297,
+          -0.15724441628575664
+        ],
+        "max": [
+          0.9635770721346404,
+          5.5879355587151736e-09,
+          0.4427556274715043
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -0.13642297685146332,
+          -0.7200000286102295,
+          -0.157244473695755
+        ],
+        "max": [
+          0.9635770916938782,
+          1.782942149475275e-07,
+          0.44275572896003723
+        ]
+      },
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "front_axis_source": "actual drawer fronts at converted minimum Y (native positive Z), read from complete source parts and both neutral views",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre convention; whole-item fit recorded separately"
+      },
+      "expected_size_range": {
+        "min_m": [
+          0.5500000342726707,
+          0.3600001034522222,
+          0.3000001013278961
+        ],
+        "max_m": [
+          2.200000137090683,
+          1.4400004138088889,
+          1.2000004053115845
+        ],
+        "source": "client furniture fit factors 0.5\u20132.0; measured item footprint and 15% rule enforced separately",
+        "basis": "client-decision"
+      },
+      "contents": {
+        "item_only": true
+      },
+      "preview_image": "props/sf_desk_2edb7c9c/preview.png",
+      "status": "measured-neutral-source; placement gated separately"
+    },
+    {
+      "id": "sf_desk_6dfafa3b",
+      "role": "desk",
+      "source_url": "https://sketchfab.com/3d-models/ideal-140-30-wn-6dfafa3b5c36426bb4031ca598729e4e",
+      "url": "https://sketchfab.com/3d-models/ideal-140-30-wn-6dfafa3b5c36426bb4031ca598729e4e",
+      "author": "classe-saga",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tIdeal 140\u30c7\u30b9\u30af (\u811a\u30fb30\u30ad\u30e3\u30d3\u30cd\u30c3\u30c8) WN\n* source:\thttps://sketchfab.com/3d-models/ideal-140-30-wn-6dfafa3b5c36426bb4031ca598729e4e\n* author:\tclasse-saga (https://sketchfab.com/classe-saga)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Ideal 140\u30c7\u30b9\u30af (\u811a\u30fb30\u30ad\u30e3\u30d3\u30cd\u30c3\u30c8) WN\" (https://sketchfab.com/3d-models/ideal-140-30-wn-6dfafa3b5c36426bb4031ca598729e4e) by classe-saga (https://sketchfab.com/classe-saga) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "bounds_m": {
+        "min": [
+          -0.5805711945678382,
+          -0.7169966101646423,
+          -0.18268183708672953
+        ],
+        "max": [
+          0.8194288719285936,
+          3.42389103025198e-06,
+          0.2473181833371747
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -0.580571174621582,
+          -0.7169966101646423,
+          -0.1826818585395813
+        ],
+        "max": [
+          0.8194288611412048,
+          3.5497689623298356e-06,
+          0.247318297624588
+        ]
+      },
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "front_axis_source": "actual drawer fronts at converted minimum Y (native positive Z), read from complete source parts and both neutral views",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre convention; whole-item fit recorded separately"
+      },
+      "expected_size_range": {
+        "min_m": [
+          0.7000000178813934,
+          0.35850007996680233,
+          0.21500007808208466
+        ],
+        "max_m": [
+          2.8000000715255737,
+          1.4340003198672093,
+          0.8600003123283386
+        ],
+        "source": "client furniture fit factors 0.5\u20132.0; measured item footprint and 15% rule enforced separately",
+        "basis": "client-decision"
+      },
+      "contents": {
+        "item_only": true
+      },
+      "preview_image": "props/sf_desk_6dfafa3b/preview.png",
+      "status": "measured-neutral-source; placement gated separately"
+    },
+    {
+      "id": "sf_desk_6e47547c",
+      "role": "desk",
+      "source_url": "https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae",
+      "url": "https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae",
+      "author": "classe-saga",
+      "licence": "CC Attribution",
+      "credit": "Model Information:\n* title:\tLeaves 120x60\u30c7\u30b9\u30af C\u811a OAK\n* source:\thttps://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae\n* author:\tclasse-saga (https://sketchfab.com/classe-saga)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Leaves 120x60\u30c7\u30b9\u30af C\u811a OAK\" (https://sketchfab.com/3d-models/leaves-120x60-c-oak-6e47547c9ff543819b84aeb495a632ae) by classe-saga (https://sketchfab.com/classe-saga) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "bounds_m": {
+        "min": [
+          -0.13642298011255605,
+          -0.7200000286102294,
+          -0.15724477391362512
+        ],
+        "max": [
+          1.0635770768843855,
+          5.587935447692871e-09,
+          0.44275526984363545
+        ]
+      },
+      "measured_bounds_m": {
+        "min": [
+          -0.13642297685146332,
+          -0.7200000286102295,
+          -0.1572447419166565
+        ],
+        "max": [
+          1.0635770559310913,
+          1.782942149475275e-07,
+          0.4427553713321686
+        ]
+      },
+      "up_axis": "+Y",
+      "front_axis": "+Z",
+      "front_axis_source": "actual drawer fronts at converted minimum Y (native positive Z), read from complete source parts and both neutral views",
+      "units_normalised": {
+        "scale_factor": 1.0,
+        "reason": "glTF metre convention; whole-item fit recorded separately"
+      },
+      "expected_size_range": {
+        "min_m": [
+          0.6000000163912773,
+          0.3600001034522222,
+          0.30000005662441254
+        ],
+        "max_m": [
+          2.4000000655651093,
+          1.4400004138088889,
+          1.2000002264976501
+        ],
+        "source": "client furniture fit factors 0.5\u20132.0; measured item footprint and 15% rule enforced separately",
+        "basis": "client-decision"
+      },
+      "contents": {
+        "item_only": true
+      },
+      "preview_image": "props/sf_desk_6e47547c/preview.png",
+      "status": "measured-neutral-source; placement gated separately"
     }
   ],
   "_bounds_note": "bounds_m: native glTF (Y-up, metres) world AABB per prop, node-hierarchy-aware (handles multi-root variant packs e.g. shrub_02). Measured 2026-09-28 on ai-workstation via ops/workstation/fetch_asset_library.py bounds(); verified against one headless Blender 4.2.9 import (tree_small_02, shrub_02) matching to 1e-4 m. Blender glTF import maps (x,y,z)_gltf -> (x,-z,y)_scene."

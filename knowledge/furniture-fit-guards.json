@@ -1,26 +1,97 @@
 {
   "schema": "furniture-fit-guards/1",
-  "scope": "Shared beds/desks/chairs scaling and Stage 1 authored inventory. No replacement activation.",
-  "registry_handoff": "Central guard_registry.py belongs to the parallel registry agent; these records name the exact controls and proving tests without editing that file.",
+  "scope": "Shared measured beds/desks/chairs fit and baseline-relative activation; exact body ownership; portable source receipts",
   "records": [
     {
       "lesson_id": "desks-inventory-json-types",
-      "control_tier": [1],
+      "control_tier": [
+        1
+      ],
       "construction": "scripts.inventory_desks.inventory returns lists for every world footprint",
       "check": "tests.test_furniture_fit.FurnitureFit.test_inventory_matches_furnishing_data compares generated, recorded and JSON round-trip values",
       "stage": "authored inventory generation before hand-off",
       "proof_file": "tests/test_furniture_fit.py",
-      "proofs": ["test_inventory_matches_furnishing_data"]
+      "proofs": [
+        "test_inventory_matches_furnishing_data"
+      ]
     },
     {
       "lesson_id": "furniture-fit-unit-mappings",
-      "control_tier": [1],
+      "control_tier": [
+        1
+      ],
       "construction": "archpipe.furniture_fit.unit_scale accepts collections.abc.Mapping; archpipe.beds.unit_scale preserves the legacy empty default",
       "check": "Shared validator still requires declared supported units and a source on nonempty evidence",
       "stage": "measured furniture intake and frozen C8 review",
       "proof_file": "tests/test_furniture_fit.py",
-      "proofs": ["test_real_bed_empty_units_legacy_default_and_generic_strict", "test_units_convert_separately_from_plan_and_height"],
+      "proofs": [
+        "test_real_bed_empty_units_legacy_default_and_generic_strict",
+        "test_units_convert_separately_from_plan_and_height"
+      ],
       "real_regression": "tests.test_bed_scaling.ScaledBeds.test_scoped_c8_preserves_real_body_conflicts_without_own_proxy_or_unrelated_route_intake"
+    },
+    {
+      "lesson_id": "furniture-baseline-relative-room",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Identical procedural/model target scope with inherited findings retained; access no more than 5 mm worse; no new fixed-element conflict, boundary overrun, route/swing/storage failure",
+      "check": "archpipe.furniture_room_review.baseline_relative_review; scripts/verify.py",
+      "stage": "before replacement activation",
+      "proof_file": "tests/test_furniture_room_review.py",
+      "proofs": [
+        "test_real_round6_access_worsening_over_five_mm_refuses_and_renamed_sibling",
+        "test_identical_inherited_findings_stay_reported_and_five_mm_boundary",
+        "test_missing_side_or_new_fixed_body_conflict_refuses"
+      ]
+    },
+    {
+      "lesson_id": "furniture-replacement-prefix-owned-body",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Exact selection-bound body identifiers preserve independent derived chairs; real imported transform verified; missing-file physical fallback retained",
+      "check": "archpipe.furniture_fit.require_furniture_geometry; archpipe.beds.scene_with_model_geometry; Blender import_models",
+      "stage": "before room review/activation/import",
+      "proof_file": "tests/test_fitted_furniture_models.py",
+      "proofs": [
+        "test_actual_desk_source_replacement_never_removes_its_derived_chair_sibling",
+        "test_real_desks_fit_footprint_floor_and_top_with_one_whole_item_transform",
+        "test_factor_contents_placement_and_review_mutations_refuse"
+      ]
+    },
+    {
+      "lesson_id": "furniture-review-authoring-snapshot",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Consume deep-copied exact builder inputs; physical signature excludes only override audit notes; validate supplied reviewed camera identities independently of a requested view subset",
+      "check": "villa_render._build authoring_room_context; furniture_stage2.room_context/integrate",
+      "stage": "review bundle construction and activation",
+      "proof_file": "tests/test_furniture_review_context.py",
+      "proofs": [
+        "test_real_cold_and_cached_derivation_notes_are_not_physical_changes",
+        "test_changed_actual_geometry_position_or_material_still_invalidates_review",
+        "test_supplied_reviewed_camera_edit_refuses_before_furniture_activation"
+      ]
+    },
+    {
+      "lesson_id": "furniture-review-shell-buckets",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Bind all architectural faces/materials and physical host fields independently of generated shell buckets; reviewed camera identities remain separately bound",
+      "check": "furniture_stage2.physical_architecture/room_context; scripts.verify",
+      "stage": "review receipt construction and activation",
+      "proof_file": "tests/test_furniture_review_context.py",
+      "proofs": [
+        "test_real_empty_view_shell_buckets_and_renamed_sibling_keep_physical_binding",
+        "test_real_shell_geometry_material_and_finish_host_mutations_still_refuse"
+      ]
     }
   ]
 }

@@ -107,13 +107,21 @@ class GuardOnThePlacedScene(unittest.TestCase):
     def test_every_placed_model_world_box_is_within_footprint_plus_20mm(self):
         self.assertTrue(SCENE["models"], "expected at least one real model placed (the living rug)")
         for m in SCENE["models"]:
+            if m.get('furniture_fitting'):
+                from archpipe.beds import model_review_meshes
+                points=[p for row in model_review_meshes([m]) for face in row['faces'] for p in face]
+                fw=max(p[0] for p in points)-min(p[0] for p in points)
+                fd=max(p[1] for p in points)-min(p[1] for p in points)
+                self.assertAlmostEqual(fw,m['footprint_w'],places=5)
+                self.assertAlmostEqual(fd,m['footprint_d'],places=5)
+                continue
             bounds = BOUNDS[m["asset"]]
             nx, ny, nz = VR.native_size(bounds)
             world_w, world_d = nx * m["scale"], nz * m["scale"]
             # rot is a multiple of 90 degrees; at +-90 the footprint axes swap
             swapped = round(m["rotation_deg"][2]) % 180 == 90
             fw, fd = (world_d, world_w) if swapped else (world_w, world_d)
-            mark = m["replaces"].removeprefix("furn-")
+            mark = m["replaces"].removeprefix("furn-").removesuffix('-')
             item = next((i for i in F.layout() if i["id"] == mark), None)
             if item is not None:
                 fp = F.footprint(item)
@@ -124,14 +132,20 @@ class GuardOnThePlacedScene(unittest.TestCase):
         """The duvet cloth sim and any other collider keys objects by their "furn-<mark>-" name prefix
         (villa_scene.build_curtains / the duvet loop), so a replaced piece's procedural mesh must still be an
         object in the scene -- only hidden from every ray, never deleted."""
-        replaced_prefixes = {m["replaces"] for m in SCENE["models"]}
-        self.assertTrue(replaced_prefixes)
+        self.assertTrue(SCENE['models'])
         hide_vis = {"camera": False, "shadow": False, "diffuse": False, "glossy": False, "transmission": False}
-        for prefix in replaced_prefixes:
-            hidden = [mesh for mesh in SCENE["meshes"] if mesh["id"] == prefix or mesh["id"].startswith(prefix)]
+        for model in SCENE['models']:
+            prefix=model['replaces']
+            hidden = [mesh for mesh in SCENE["meshes"] if
+                      (mesh['id'] in model['replacement_mesh_ids'] if model.get('furniture_fitting') else
+                       mesh["id"] == prefix or mesh["id"].startswith(prefix))]
             self.assertTrue(hidden, prefix)
             for mesh in hidden:
                 self.assertEqual(mesh.get("visibility"), hide_vis, mesh["id"])
+            if model.get('furniture_fitting'):
+                chairs=[mesh for mesh in SCENE['meshes'] if mesh['id'].startswith(prefix+'chair-')]
+                self.assertTrue(chairs)
+                self.assertTrue(all('visibility' not in mesh for mesh in chairs))
 
     def test_fallback_pieces_keep_their_procedural_mesh_visible(self):
         """lounge-sofa is the real fallback (see FitRule above): its procedural mesh must render normally, not be

@@ -227,3 +227,31 @@ scripts/verify.py --portable
 does not waive room, cloth or visual gates. A preview exit 1 remains a failure,
 even if diagnostic images were written. Keep those images and refusal receipts;
 review them as evidence and retain the fallbacks.
+
+Round 7, lead/client decision 2026-10-09: use the identical fixed-room review
+on the CURRENT procedural item as well as the proposed retained model.
+Consume the builder's `authoring_room_context`; freeze and include evaluated
+procedural duvet/throw geometry from neutral previews. Missing generated soft
+goods are an incomplete physical baseline. A model must not worsen any
+access side by more than 5 mm, add a route/swing/storage-front failure or a
+fixed-element body conflict, or enlarge boundary overrun. Keep inherited
+findings in the report. `integrate_bed_models` requires the evaluated baseline
+and selection-bound passing cloth for every soft good; an empty absolute
+finding list alone cannot activate an un-compared bed.
+
+`frame_slimming.head_depth_m` and `side_extension_m` may tighten the existing
+100/50 mm maxima down to zero; recompute measured factors and neutral review
+bindings after any change. This does not waive retained-bedding checks or
+authorize omitting a source mesh. The current parent proposal has zero head
+extension and zero permitted side extension, retains all source meshes, and
+still refuses because source Object_6 bedding adds fixed-element overlap
+screens absent from the procedural baseline. Kids fallbacks remain unchanged.
+
+Cloth spatial indices use local query coordinates and each straight ray
+counts a planar source triangle at most once. World geometry never moves.
+The real parents throw previously counted one triangle twice due to
+single-precision advancement at distant coordinates. Exact crossing,
+closed-shell containment, open-shell and unresolved refusals retain their
+existing tolerances. `scripts/prove_bed_ray_precision.py` proves the real,
+translated, outside and enclosed cases in Blender; neutral previews then
+prove the complete generated duvet/throw.

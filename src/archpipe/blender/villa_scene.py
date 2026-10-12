@@ -897,55 +897,78 @@ def cloth_model_clearance(sheet, colliders):
             evaluated.to_mesh_clear()
         return points,faces
     cp,cf=triangles([sheet]);mp,mf=triangles(colliders)
-    cloth_tree=BVHTree.FromPolygons(cp,cf,all_triangles=True)
-    model_tree=BVHTree.FromPolygons(mp,mf,all_triangles=True)
-    from archpipe.bed_containment import face_shells, RAY_DIRECTIONS
+    from archpipe.bed_containment import face_shells, RAY_DIRECTIONS, local_query_coordinates, unique_triangle_parity
     import numpy as np
     shells=face_shells(mp,mf);closed=[];face_shell={}
+    origin,local=local_query_coordinates([list(p) for p in mp])
+    mp=[Vector(p) for p in local]
+    cp=[Vector(np.asarray(list(p))-origin) for p in cp]
+    cloth_tree=BVHTree.FromPolygons(cp,cf,all_triangles=True)
+    model_tree=BVHTree.FromPolygons(mp,mf,all_triangles=True)
+    def world(point):return (np.asarray(list(point))+origin).tolist()
     for shell in shells:
         for i in shell['face_indices']:face_shell[i]=shell
         if shell['closed']:
             indices=[mf[i] for i in shell['face_indices']]
             points=np.asarray([list(mp[i]) for f in indices for i in f])
-            closed.append((BVHTree.FromPolygons(mp,indices,all_triangles=True),points.min(0),points.max(0)))
+            closed.append((BVHTree.FromPolygons(mp,indices,all_triangles=True),points.min(0),points.max(0),indices))
     directions=[Vector(d).normalized() for d in RAY_DIRECTIONS]
     def contains(tree,point):
         votes=[]
         for direction in directions:
-            origin=point.copy();hits=0
+            ray_origin=point.copy();hits=[]
             for _ in range(len(mf)+1):
-                location,_,_,_=tree.ray_cast(origin,direction)
+                location,_,face_index,_=tree.ray_cast(ray_origin,direction)
                 if location is None:break
-                hits+=1;origin=location+direction*.00001
-            votes.append(hits%2==1)
+                hits.append(face_index);ray_origin=location+direction*.00001
+            votes.append(unique_triangle_parity(hits))
         return votes[0] if len(set(votes))==1 else None
     overlaps=cloth_tree.overlap(model_tree)
-    crossings=len(overlaps);minimum=float('inf');inside=0;uncertain=0;inside_samples=[]
+    crossings=len(overlaps);minimum=float('inf');inside=0;uncertain=0;inside_samples=[];uncertain_samples=[]
     for vertex_index,point in enumerate(cp):
         location,normal,index,distance=model_tree.find_nearest(point)
         minimum=min(minimum,distance)
         signed=(point-location).dot(normal)
         contained=False;unresolved=False
-        for tree,low,high in closed:
+        ray_diagnostics=[]
+        for tree,low,high,indices in closed:
             if all(low[i]<=point[i]<=high[i] for i in range(3)):
                 verdict=contains(tree,point)
                 if verdict is True:contained=True;break
-                if verdict is None:unresolved=True
+                if verdict is None:
+                    unresolved=True
+                    from archpipe.bed_containment import closed_shell_contains, ray_hits
+                    triangles=np.asarray([[list(mp[i]) for i in face] for face in indices])
+                    ray_diagnostics.append(dict(independent_verdict=closed_shell_contains(triangles,list(point)),
+                        ray_distances=[ray_hits(triangles,list(point),d) for d in RAY_DIRECTIONS]))
+                    diagnostic_root=os.environ.get('ARCHPIPE_CLOTH_DIAGNOSTICS')
+                    if diagnostic_root:
+                        import gzip,json
+                        from pathlib import Path
+                        destination=Path(diagnostic_root);destination.mkdir(parents=True,exist_ok=True)
+                        (destination/(sheet.name+'-'+str(vertex_index)+'.json.gz')).write_bytes(gzip.compress(
+                            json.dumps(dict(point_m=world(point),triangles=(triangles+origin).tolist(),diagnostics=ray_diagnostics)).encode()))
         # Do not certify volume containment for an open collider. Keep the
         # old conservative refusal explicitly unresolved in that case.
         if signed<-.0001 and not face_shell[index]['closed']:unresolved=True
-        if unresolved and not contained:uncertain+=1
+        if unresolved and not contained:
+            uncertain+=1
+            if len(uncertain_samples)<8:
+                uncertain_samples.append(dict(vertex_index=vertex_index,point_m=world(point),nearest_m=world(location),
+                    normal=list(normal),signed_distance_m=signed,nearest_shell_closed=face_shell[index]['closed'],ray_diagnostics=ray_diagnostics,
+                    model_triangle=[world(mp[i]) for i in mf[index]]))
         if contained:
             inside+=1
             if len(inside_samples)<8:
-                inside_samples.append(dict(vertex_index=vertex_index,point_m=list(point),nearest_m=list(location),
-                    normal=list(normal),signed_distance_m=signed,model_triangle=[list(mp[i]) for i in mf[index]]))
+                inside_samples.append(dict(vertex_index=vertex_index,point_m=world(point),nearest_m=world(location),
+                    normal=list(normal),signed_distance_m=signed,model_triangle=[world(mp[i]) for i in mf[index]]))
     return dict(intersections=crossings,inside_vertices=inside,
                 minimum_surface_distance_m=minimum,evaluated_cloth_vertices=len(cp),
                 model_triangles=len(mf),numerical_tolerance_m=.0001,inside_samples=inside_samples,
-                uncertain_vertices=uncertain,closed_shells=len(closed),open_shells=sum(not s['closed'] for s in shells),
-                crossing_samples=[dict(cloth_triangle=[list(cp[i]) for i in cf[a]],
-                    model_triangle=[list(mp[i]) for i in mf[b]]) for a,b in overlaps[:8]])
+                uncertain_vertices=uncertain,uncertain_samples=uncertain_samples,closed_shells=len(closed),open_shells=sum(not s['closed'] for s in shells),
+                query_origin_m=origin.tolist(),unique_triangle_ray_hits=True,
+                crossing_samples=[dict(cloth_triangle=[world(cp[i]) for i in cf[a]],
+                    model_triangle=[world(mp[i]) for i in mf[b]]) for a,b in overlaps[:8]])
 
 
 def build_curtains(curtain_specs, materials):
@@ -1197,8 +1220,10 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
         from pathlib import Path
         path = os.path.join(library_root, "props", spec["asset"], "model.gltf")
         bed_pillow_prefix=('dress-pillow-'+spec.get('replaces','').removeprefix('furn-').removesuffix('-')+'-')
-        if not os.path.isfile(path) and spec.get('role')=='bed':
-            fallback=[o for o in bpy.data.objects if o.type=='MESH' and o.name.startswith((spec['replaces'],bed_pillow_prefix))]
+        if not os.path.isfile(path) and (spec.get('role')=='bed' or spec.get('furniture_fitting')):
+            fallback=[o for o in bpy.data.objects if o.type=='MESH' and (
+                o.name in spec['replacement_mesh_ids'] if spec.get('furniture_fitting') else
+                o.name.startswith((spec['replaces'],bed_pillow_prefix)))]
             if not fallback:
                 raise ValueError(spec['id']+': missing model and physical procedural fallback')
             for obj in fallback:
@@ -1206,14 +1231,17 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
                 obj.hide_render=False
                 if 'replaced_by_model' in obj:
                     del obj['replaced_by_model']
-                obj['asset_status']='procedural-bed-fallback'
-                obj['fallback_label']='PROCEDURAL BED FALLBACK (stand-in): '+obj.name
+                obj['asset_status']='procedural-furniture-fallback' if spec.get('furniture_fitting') else 'procedural-bed-fallback'
+                obj['fallback_label']=('PROCEDURAL FURNITURE FALLBACK (stand-in): ' if spec.get('furniture_fitting') else 'PROCEDURAL BED FALLBACK (stand-in): ')+obj.name
             imported.append(dict(id=spec['id'],asset=spec['asset'],objects=[],
-                status='procedural-bed-fallback',fallback_objects=[o.name for o in fallback]))
+                status='procedural-furniture-fallback' if spec.get('furniture_fitting') else 'procedural-bed-fallback',fallback_objects=[o.name for o in fallback]))
             continue
         if spec.get('role')=='bed':
             from archpipe.beds import require_bed_geometry
             require_bed_geometry(spec,library_root,neutral_diagnostic=neutral_diagnostic)
+        if spec.get('furniture_fitting'):
+            from archpipe.furniture_fit import require_furniture_geometry
+            require_furniture_geometry(spec,library_root,neutral_diagnostic=neutral_diagnostic)
         require_registered_asset(spec["asset"], Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
                                  Path(library_root) / "props" / spec["asset"] / "model.gltf")
         from archpipe.furniture_orientation import check_model_orientation
@@ -1289,7 +1317,7 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
             root.parent = anchor
         anchor.rotation_mode = "XYZ"
         anchor.rotation_euler = tuple(math.radians(v) for v in spec["rotation_deg"])
-        anchor.scale = tuple(spec['scale_xyz']) if spec.get('scaling') else (spec["scale"],) * 3
+        anchor.scale = tuple(spec['scale_xyz']) if spec.get('scaling') or spec.get('furniture_fitting') else (spec["scale"],) * 3
         bpy.context.view_layer.update()
         def corners():
             return [obj.matrix_world @ v.co for obj in meshes for v in obj.data.vertices]
@@ -1320,6 +1348,19 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
                 if obj.type=='MESH' and obj.name.startswith((spec['replaces'],bed_pillow_prefix)):
                     obj.hide_render=True
                     obj['replaced_by_model']=spec['id']
+        if spec.get('furniture_fitting'):
+            from archpipe.beds import model_review_meshes
+            import numpy as np
+            expected=model_review_meshes([spec])
+            points=np.asarray([p for r in expected for f in r['faces'] for p in f])
+            actual=np.asarray([list(p) for p in corners()])
+            error=float(np.max(np.abs(np.array([points.min(0),points.max(0)])-
+                                         np.array([actual.min(0),actual.max(0)]))))
+            if error>1e-5:raise ValueError('actual furniture transform disagrees with measured review')
+            spec={**spec,'import_transform_max_error_m':error}
+            for obj in bpy.data.objects:
+                if obj.type=='MESH' and obj.name in spec['replacement_mesh_ids']:
+                    obj.hide_render=True;obj['replaced_by_model']=spec['id']
         xyz = corners()
         box = (min(v.x for v in xyz), min(v.y for v in xyz), min(v.z for v in xyz),
                max(v.x for v in xyz), max(v.y for v in xyz), max(v.z for v in xyz))

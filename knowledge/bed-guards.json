@@ -346,6 +346,21 @@
         "test_real_joined_room_frame_and_bedding_boundary_renamed_clean_and_concave",
         "test_real_parent_cluster_boundary_runs_in_c8"
       ]
+    },
+    {
+      "lesson_id": "beds-cloth-world-ray-duplicate",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Build local spatial-query coordinates and count each planar triangle once per straight ray; retain unchanged exact crossings, open-shell and unresolved refusals",
+      "check": "archpipe.bed_containment.local_query_coordinates/unique_triangle_parity; Blender cloth_model_clearance; scripts/prove_bed_ray_precision.py; scripts/verify.py",
+      "stage": "evaluated cloth before activation",
+      "proof_file": "tests/test_bed_ray_precision.py",
+      "proofs": [
+        "test_real_duplicate_ray_hits_refuse_before_fix_and_clean_local_hits_agree",
+        "test_local_construction_generalises_to_translated_shell_and_real_inside_point"
+      ]
     }
   ]
 }

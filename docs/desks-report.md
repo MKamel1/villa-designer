@@ -1,4 +1,9 @@
-# Desks and task chairs — Stage 1
+# Desks and task chairs — Stages 1 and 2
+
+Current Stage 2: seven measured desks active; eight task chairs and the vanity
+chair remain procedural. Measurements, refusals and neutral previews are in
+the Stage-2 section below. D1 names the current villa layout option.
+The following Stage-1 record is historical.
 
 2026-10-09, branch `codex/desks`, based on committed beds work `961a03a`.
 The working tree was clean before starting. Stage 1 adds shared measured
@@ -158,3 +163,214 @@ no packages were installed. `assets/user` and `out/villa/round3` were not
 modified. No `.agents/` file was edited, so adapter synchronization was not
 needed. The parallel owners' files were not edited. Full-suite execution
 and any commit remain with the lead.
+
+
+## Stage 2 — measured downloads, neutral review and activation (2026-10-09)
+
+**Seven desks are accepted for D1; all eight task chairs and the separate
+vanity chair remain procedural.** Seventeen lead-downloaded CC Attribution
+folders were copied into new shared-library folders only. The two refused
+NonCommercial listings were not copied. Full original attribution, licence,
+provenance, textures and file hashes accompany each folder; `model.gltf` is
+a byte-identical alias of original `scene.gltf`, not converted geometry.
+glTF means Graphics Library Transmission Format, the downloaded model format.
+Copy receipt: `out/desks/stage2/copy-receipt.json`. Source files were measured
+and previewed before fitted candidates were reviewed.
+
+All models are appearance assets, not manufacturer-certified buyable
+products. Walnut and oak below describe the requested/source-labelled
+appearance; species, finish, hardware operation and ergonomics are not
+certified by a render. WN is the source name abbreviation for walnut; OAK
+is its oak appearance label. Neither is species verification.
+
+### Measured candidates and decisions
+
+The following whole-source dimensions are measured **width × depth × height
+in metres** after declared glTF metre coordinates are converted to project
+axes. Native horizontal axes and facing were checked from real drawer
+fronts/source geometry and two neutral views, rather than model titles.
+A source item's plan factors must each lie between 0.5 and 2.0; their larger
+to smaller ratio may not exceed 1.15. Every required height uses one vertical
+transform, and only a complete item may be fitted. Oversized source coordinates
+are not silently reinterpreted as centimetres.
+
+| Library identifier suffix / name | Measured whole source | Stage-2 decision |
+|---|---|---|
+| 003b00c7 / Worn Leather Office Chair | 3.222484 × 2.393727 × 3.314699 | Plan factors below 0.5; distressed antique appearance; fallback. |
+| 01f6ba08 / Ideal 130 OAK | 1.300000 × 0.430000 × 0.717000 | Complete desktop/legs/storage measured; alternate, Leaves chosen by room appearance and plan fit. |
+| 1710e30f / Leaves 110×45 WN | 1.100000 × 0.450000 × 0.720000 | Selected for study shared desk and parents vanity. |
+| 2edb7c9c / Leaves 110×60 WN | 1.100000 × 0.600000 × 0.720000 | Selected for study adult desk. |
+| 4548bc41 / Milk Oak desk | 1.574206 × 0.567681 × 1.484369 | Fused desk/hutch/shelves; item-only desktop unresolved; refuse. |
+| 4f6c2ce1 / Eames Aluminum Chair | 0.892443 × 0.890641 × 1.007455 | Compact authored plan needs factors below 0.5; refuse. |
+| 531bff2f / Flannigan leather chair | 0.559473 × 0.579788 × 0.850132 | Complete seat identified; fitting seat to 0.460 gives back 0.811402, not required 0.850; refuse. |
+| 602c9164 / Black Office Chair | 0.926190 × 0.781788 × 1.068301 | Width factor below 0.5 and plan distortion over 15%; refuse. |
+| 6dfafa3b / Ideal 140 WN | 1.400000 × 0.430000 × 0.717000 | Complete alternate; Leaves fits requested restrained mid-century room appearance better. |
+| 6e47547c / Leaves 120×60 OAK | 1.200000 × 0.600000 × 0.720000 | Selected for cinema and all kids desks. |
+| 792bb7e8 / Leather Office Chair | 2.000000 × 1.641106 × 0.994992 | Source includes platform; separately measured chair-only plan below. Seat/back under one vertical transform unresolved; fallback. |
+| aee7ef03 / two Leather Office Chairs | 2.010560 × 0.781000 × 1.324036 | Each separate complete chair re-screened below; unresolved seat/back heights; fallback. |
+| c187de2b / White Leather Chair | 0.659756 × 0.697645 × 1.063514 | Plan pass alone insufficient: complete seat datum unresolved; white/chrome also outside requested kids oak/study leather style. |
+| c5105496 / Wooden Desk | 5.317378 × 9.970996 × 5.038239 | All authored desk plan fits require factors below 0.5; refuse. |
+| ca9d09ae / Black Leather Chair | 0.480724 × 0.525457 × 0.938389 | Plan can fit, but seat/back proof unresolved; stationary cantilever is not requested task-chair type. |
+| f415e04f / Wooden Office Chair | 0.918896 × 0.918884 × 1.274314 | Plan factors below 0.5; antique/red seat does not meet kids light oak style. |
+| f7c72291 / Lamy swivel chair | 0.637789 × 0.697714 × 0.814199 | Plan can fit; fused seat/back lacks verified seat datum and dark marbled appearance fails kids palette. |
+
+Identifiers above are the first eight characters of the source identifier following shared-library
+prefix `sf_desk_`; full URLs/authors/credits and every matching desk/chair
+plan screen are in `out/desks/stage2/intake.json`. No unresolved chair is
+reported as height-tested or room-accepted. Source isolates/two-angle contact
+sheet are in `source-previews`; all seventeen were visually inspected.
+
+For separable contents, the leather-chair platform `defaultMaterial.022`
+is excluded only from the diagnostic item-only re-screen. Both complete
+chairs `Object_4` and `Object_6` in the two-chair download are measured
+independently. Their retained/omitted mesh lists, separate bounds and plan
+factors are recorded in `item_only_rescreens`. Each still refuses unverified
+complete seat/back constraints, so none is integrated. No omission changes
+an accepted model; all faces of the three selected desk sources are retained.
+
+### Accepted fixed-footprint desks
+
+Width, depth and height factors are dimensionless ratios from measured source
+to authored item; height is driven by the complete desktop slab. No individual
+leg, drawer or tabletop is stretched independently. Each final desktop is
+**0.750 m**, preserving the authored design assumption. The 0.460 m chair
+seat and 0.850 m back are also unchanged authored assumptions from
+`villa_furnish3d._chair`, not newly verified ergonomic dimensions. The held
+book files are unavailable on this workstation; existing verified clearance
+cards were used without inventing new source figures.
+
+| Authored item | Source | Fixed width × depth (m) | Width factor | Depth factor | Height factor |
+|---|---|---:|---:|---:|---:|
+| study-desk | Leaves 110×45 WN | 1.80 × 0.70 | 1.636364 | 1.555555 | 1.041666 |
+| study-adult-desk | Leaves 110×60 WN | 1.40 × 0.70 | 1.272727 | 1.166666 | 1.041666 |
+| cinema-desk | Leaves 120×60 OAK | 1.24 × 0.55 | 1.033333 | 0.916666 | 1.041666 |
+| ka-desk-1 | Leaves 120×60 OAK | 1.10 × 0.60 | 0.916667 | 1.000000 | 1.041666 |
+| ka-desk-2 | Leaves 120×60 OAK | 1.10 × 0.60 | 0.916667 | 1.000000 | 1.041666 |
+| kb-desk | Leaves 120×60 OAK | 1.20 × 0.60 | 1.000000 | 1.000000 | 1.041666 |
+| pb-vanity | Leaves 110×45 WN | 1.00 × 0.40 | 0.909091 | 0.888889 | 1.041666 |
+
+All pass the factor/proportion/height/content gate. Existing centres,
+floors, rotations, plan footprints, furniture and cameras stay fixed. Native
+positive Z faces the user at the drawer fronts; the importer applies the
+existing authored rotation through the verified orientation mapping.
+
+### Procedural baseline versus models
+
+Each desk was reviewed with the same `bed_room_review` dispatcher, same cards,
+fixed room and elements, before/after. All seven together were also reviewed.
+Every desk has procedural **864 mm front access**, fitted-model **864 mm
+front access**, and **0 mm boundary overrun in both columns**. The card is
+`mitton-desk-chair-access-864`, Mitton 4th edition (2022), Chapter 8,
+Figure 8.13, printed page 235: 610 mm chair plus 254 mm access. Storage uses
+the unchanged verified 914 mm Time-Saver card, printed page 87. These are
+planning screens, not actual animated door/drawer travel.
+
+| Item | Baseline body-screen rows | Model body-screen rows | New route / swing / storage failures | New fixed-element body conflicts |
+|---|---:|---:|---|---|
+| cinema-desk | 6 | 18 | 0 / 0 / 0 | 0 |
+| study-desk | 12 | 65 | 0 / 0 / 0 | 0 |
+| study-adult-desk | 7 | 61 | 0 / 0 / 0 | 0 |
+| ka-desk-1 | 5 | 61 | 0 / 0 / 0 | 0 |
+| ka-desk-2 | 5 | 61 | 0 / 0 / 0 | 0 |
+| kb-desk | 5 | 61 | 0 / 0 / 0 | 0 |
+| pb-vanity | 6 | 46 | 0 / 0 / 0 | 0 |
+
+Additional raw rows arise from imported part granularity, against already
+reported fixed identities. Comparison joins physical parts/planning bodies
+by exact fixed item while retaining every original row. No inherited layout
+finding is hidden or converted to an absolute room pass. Full two-column
+findings and combined result: `room-comparison.json` and
+`combined-room-comparison.json`. All individual and combined relative gates
+pass; this does not clear existing layout/body-screen findings.
+
+### Neutral review and activation
+
+Seven isolated and seven in-room neutral images in
+`out/desks/stage2/previews` were reviewed before generating the active
+receipt. Study walnut sources have restrained timber desks suitable for the
+requested mid-century room; existing leather-style procedural task chairs
+remain visible. Kids use pale oak appearances. Cinema uses warm oak and
+parents vanity uses walnut appearance. No obvious leg/top warping was found.
+Image hashes, notes and qualifications are in `preview-review.json`;
+source/selection hashes and actual imported transforms are in
+`previews/evidence.json`. Maximum import error is 0.001542 mm, below the
+0.010 mm read-back threshold.
+
+Existing room views are v04-study-deck, v08-cinema, v06-kids-room,
+v13-kids-b and v22-parents-day. The second kids A desk is outside the
+unchanged v06 field of view. A supplementary neutral diagnostic angle now
+shows both desks, with all actual imported second-desk vertices in frame:
+`previews/ka-desk-2-room-supplemental-neutral.png`. The existing v06 camera
+is retained. `supplemental-preview-evidence.json` binds its reviewed image,
+actual source/selection, unchanged original camera, searched diagnostic
+camera, imported transform and active receipt. Its complete isolate and
+separately transformed geometry were also reviewed. Other unchanged room cameras crop some legs/edges.
+These limitations remain explicit; no camera was moved to obtain a pass.
+
+`knowledge/furniture-stage2.json.gz` stores the accepted seven selections,
+three deduplicated measured source geometries, complete credits, reviewed
+images, retained inherited findings and bound room/context/camera evidence.
+The D1 scene builder activates these measured desks by default. Other design
+options retain existing procedural furniture. Missing library geometry at
+actual import restores exact procedural desk bodies. Only recorded desk body
+identifiers hide; derived chair identifiers remain visible. Flannigan and all
+other chair candidates stay refused, so all nine authored seats remain
+procedural. Full accepted credits: `out/desks/stage2/credits.md`; credits are
+also carried by the portable receipt for downstream use.
+
+Activation first refused a context mismatch. Diagnosis found differing cold/
+cache audit explanations, a genuine historical/current family-WC placement
+difference, and an omitted verification view list. The builder now provides
+its exact deep-copied authoring snapshot; signatures exclude only explanatory
+`overrides` notes while retaining all actual furniture/specification/geometry
+values. Reviewed camera identities are checked separately, allowing empty
+or partial numerical view selections. Geometry or camera changes still
+refuse. The original failed logs are retained and are not acceptance evidence.
+
+Resume found one further context mismatch: actual full/empty-view builds
+renumbered shell buckets because doorway captions partition the same door
+faces differently. Independent comparison found all 3,012 architectural
+faces/materials identical, and every furniture/fixture/dressing row identical.
+Architectural signatures now bind individual faces/materials and stable
+physical host data, independent of generated bucket names/captions. Exact
+geometry, winding, visibility, materials, thickness and finish-host data
+remain bound. The real full/empty-view regression and renamed sibling pass;
+geometry, material, visibility and host mutations invalidate acceptance.
+The receipt was regenerated from the same reviewed inputs without changing
+a numerical gate, camera or preview. `activation-readback-resume.json`
+confirms seven active desks, 24 exact desk body parts hidden, 18 derived
+chair parts preserved and no imported parents bed.
+
+
+### Stage-2 verification
+
+The main bed/furniture batch completed **94 tests, exit 0**
+(`focused-resume.log`). Final context, baseline-relative, measured-model,
+cloth-ray, fit and adapter controls completed **29 tests, exit 0**
+(`final-controls.log`), including the two new actual architectural export
+regressions. These batches overlap; they are not a unique full-suite count.
+
+Portable verification completed **182 checks, exit 0** in both normal and
+initially empty HOME. Final logs are `verify-normal-physical-shell.log`
+and `verify-empty-home-physical-shell.log`. All **38** generated adapters
+match after synchronization, and `git diff --check` passes.
+
+Fresh affected consumers pass **178 tests, exit 0**
+(`out/desks/stage2/affected-stable-final.log`): bed models, asset intake,
+geometry topology, render standard, furnishing, detailed furnishing and
+furniture primitives. The camera module separately passes **20 tests,
+exit 0** (`render-views-stable-final.log`). These fresh processes used stable
+final code and acceptance inputs. The lead retains the full-suite run.
+
+`acceptance-resume.json` records final execution, active read-back, supplemental
+neutral review and artifact hashes. The earlier portable failures and the
+obsolete affected-test process are retained as failed/interrupted evidence.
+That process loaded the previous context code before the receipt was
+regenerated; it was terminated rather than counted as passing final tests.
+Fresh consumer processes use stable final code/inputs.
+
+Causes, real cases, renamed/translated siblings, clean controls and procedures
+are registered in `LEARNINGS.md`, `knowledge/furniture-fit-guards.json` and
+`knowledge/bed-guards.json`. The lead runs the full suite. No presentation
+images, package installs, native Revit edits or commits were made. Canonical skills were updated and their generated adapters synchronized. Shared
+`assets/user` and `out/villa/round3` data were not modified.

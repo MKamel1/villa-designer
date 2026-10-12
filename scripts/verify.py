@@ -273,6 +273,40 @@ def main() -> int:
            all((ROOT / item['proof_file']).is_file() and all(
                'def '+name+'(' in (ROOT / item['proof_file']).read_text()
                for name in item['proofs']) for item in bed_registry['records']))
+    from archpipe.furniture_room_review import baseline_relative_review
+    relative=json.loads((ROOT/'tests/fixtures/bed-round7-baseline-comparison.json').read_text())
+    kwargs=dict(target_prefixes=relative['target_prefixes'],fixed_items=relative['fixed_items'])
+    worsened=baseline_relative_review(relative['baseline'],relative['candidate'],**kwargs)
+    expect('real round-6 bed worsening over 5 mm refuses relative to procedural baseline',
+           not worsened['ok'] and any(f['check']=='access' for f in worsened['findings']))
+    expect('unchanged inherited room findings remain reported and pass replacement comparison',
+           baseline_relative_review(relative['baseline'],relative['baseline'],**kwargs)['ok'])
+    from archpipe.bed_containment import unique_triangle_parity,local_query_coordinates
+    import gzip
+    ray=json.loads(gzip.decompress((ROOT/'tests/fixtures/bed-round7-ray-duplicate.json.gz').read_bytes()))
+    expect('real duplicated world-ray triangle does not create false enclosed parity',
+           [unique_triangle_parity(v) for v in ray['world_bvh_face_hits']]==[False]*3)
+    origin,local=local_query_coordinates([p for f in ray['triangles'] for p in f])
+    expect('cloth spatial query coordinates stay local without changing world geometry',
+           float(abs(local).max())<2.)
+    from archpipe.furniture_fit import require_furniture_geometry
+    measured=[m for m in scene['models'] if m.get('furniture_fitting')]
+    for model in measured:require_furniture_geometry(model)
+    expect('seven measured desk instances have reviewed source and fixed-room bindings',
+           len(measured)==7 and all(m['room_review']['ok'] for m in measured))
+    furniture_registry=json.loads((ROOT/'knowledge/furniture-fit-guards.json').read_text())
+    expect('furniture controls have registered proving tests',all((ROOT/item['proof_file']).is_file() and all(
+        'def '+name+'(' in (ROOT/item['proof_file']).read_text() for name in item['proofs']) for item in furniture_registry['records']))
+    from archpipe.concept.furniture_stage2 import physical_architecture,digest
+    shells=json.loads(gzip.decompress((ROOT/'tests/fixtures/furniture-review-shell-buckets.json.gz').read_bytes()))
+    shell_binding=digest(physical_architecture(shells['reviewed']))
+    expect('real empty-view export buckets preserve all reviewed physical architectural faces',
+           shell_binding==digest(physical_architecture(shells['empty_views'])))
+    from copy import deepcopy
+    changed_shells=deepcopy(shells['empty_views'])
+    changed_shells[0]['faces'][0][0][0]+=.01
+    expect('physical architectural change invalidates furniture room binding',
+           shell_binding!=digest(physical_architecture(changed_shells)))
     from archpipe.beds import preview_clip_range, preview_datums, preview_neutral_light
     clip_case=json.loads((ROOT/'tests/fixtures/bed-round4-camera-clipping.json').read_text())
     clips=preview_clip_range(clip_case['points_m'],clip_case['camera_position_m'],clip_case['camera_target_m'])

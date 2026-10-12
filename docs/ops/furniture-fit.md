@@ -47,3 +47,43 @@ empty HOME environments. HOME is the user's home-directory environment
 variable; set it only for the requested empty-home verification, never as
 a shell scratch variable. Use the supplied interpreter, `PYTHONPATH=src`
 and `NO_COLOR=1`, and judge by exit status. Keep failed diagnostic logs.
+
+Stage 2 (2026-10-09): `scripts/prepare_desks_stage2.py` measures the seventeen
+lead-downloaded assets from immutable indexed geometry and source hashes.
+`furniture_fitting` stores one whole-item transform; `height_parts` must
+identify complete desktop or seat geometry. Every separately required back
+height still uses that same vertical factor. A footprint pass never admits
+an unresolved seat or fused extra. Source credits accompany the library copy
+and `out/desks/stage2/credits.md`; the accepted geometries are appearance
+proxies, not verified buyable products.
+
+Use `villa_render.build`'s deep-copied `authoring_room_context` for the exact
+layout, specification and furniture reviewed; do not reconstruct them under
+different revision/default contexts. Compare the same procedural versus model
+room scope with `bed_room_review(..., target_marks=..., absolute=True)` and
+`baseline_relative_review`. Retain all inherited layout findings. Each access
+side must achieve at least its baseline minus 0.005 m (five millimetres,
+client decision); no new route, swing, storage-front failure or fixed-element
+body conflict is permitted. Boundary overrun may not exceed baseline. Check
+both individual replacements and their combined scene.
+
+The active Stage-2 receipt is `knowledge/furniture-stage2.json.gz`, generated
+only after isolated and unchanged-room neutral images have been inspected.
+It carries exact source faces, three source geometries shared by seven desk
+instances, complete credits, reviewed image hashes, actual import error and
+selection-bound fit/room records. `furniture_stage2.apply` validates the live
+physical context and each supplied reviewed camera before activation. Cold
+and cached override **explanations** are not physical inputs; all actual
+furniture values remain bound. A numerical build requesting no views is a
+valid view subset, not an edited camera. Architectural binding compares each
+physical face/material and stable host fields, independent of numbered export
+buckets and doorway captions. Exact geometry, winding, materials, visibility
+and finish-host data still invalidate a receipt; generated bucket renaming
+does not. Test actual full/empty-view exports, not only an edited view list.
+
+Record exact `replacement_mesh_ids`: a desk prefix also contains its derived
+chair names. Only the desk's own body may hide/delete. Derived task chairs
+remain independent physical fallbacks. Missing source files restore the
+exact procedural body at runtime. Normal imports require accepted review;
+pending review is admitted only for explicit neutral diagnostics. Never add
+a production bypass to make a pending receipt load.

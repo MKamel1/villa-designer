@@ -10,6 +10,32 @@ WELD_DECIMALS = 6
 RAY_DIRECTIONS = ((1.,.371,.529),(-.23,1.,.43),(.29,-.31,1.))
 
 
+def local_query_coordinates(points):
+    """Centre spatial queries near zero without moving design geometry.
+
+    Blender spatial indices use single-precision numbers. At distant world
+    coordinates a ten-micrometre ray advance can hit the same triangle
+    twice. Return the double-precision origin and translated query points;
+    callers add the origin back only for world-coordinate evidence.
+    """
+    import numpy as np
+    values=np.asarray(points,dtype=float)
+    if values.ndim!=2 or values.shape[1]!=3 or not np.isfinite(values).all() or not len(values):
+        raise ValueError('spatial queries require finite three-dimensional points')
+    origin=(values.min(0)+values.max(0))/2
+    return origin, values-origin
+
+
+def unique_triangle_parity(face_indices):
+    """A straight ray crosses a planar triangle at most once.
+
+    face_indices are the source triangle numbers hit along one ray. Repeated
+    hits caused by numerical advancement do not create a second surface.
+    This does not merge different faces or change the crossing tolerance.
+    """
+    return len(set(face_indices)) % 2 == 1
+
+
 def face_shells(points, faces):
     """Return source face indices and whether every shell edge has two faces."""
     parent={}

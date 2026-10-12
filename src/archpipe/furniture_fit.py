@@ -194,3 +194,56 @@ def fit_furniture(model, width_m, depth_m, *, height_parts, height_m,
             reasons.append(f'{name} height {achieved:.6f} m differs from required {target:.6f} m; {source}')
     result.update(ok=not reasons, reason='; '.join(reasons) or 'scaled item fits exactly')
     return result
+
+
+def model_fit(model):
+    """Recompute the whole-item contract; supplied factors are never authority."""
+    contract=model['furniture_fitting']
+    if contract.get('decision_date')!='2026-10-09':
+        raise ValueError('furniture replacement requires client decision 2026-10-09')
+    return fit_furniture(model,*contract['footprint_m'],height_parts=contract['height_parts'],
+        height_m=contract['height_m'],height_source=contract['height_source'],
+        height_basis=contract['height_basis'],height_constraints=contract.get('height_constraints'))
+
+
+def review_selection(model):
+    """Freeze factors, geometry, contents, orientation and unchanged placement."""
+    from copy import deepcopy
+    import hashlib,json
+    return deepcopy(dict(furniture_fitting=model['furniture_fitting'],scale_xyz=model['scale_xyz'],
+        contents_review=model['contents_review'],omitted_meshes=model.get('omitted_meshes',[]),
+        part_selections=model.get('part_selections',{}),unit_evidence=model.get('unit_evidence'),
+        orientation_evidence=model['orientation_evidence'],position=model['position'],rotation_deg=model['rotation_deg'],
+        replacement_mesh_ids=model['replacement_mesh_ids'],
+        geometry_sha256=hashlib.sha256(json.dumps(model['review_geometry'],sort_keys=True,separators=(',',':')).encode()).hexdigest()))
+
+
+def require_furniture_geometry(model, library_root=None, *, neutral_diagnostic=False):
+    """Refuse unreviewed/stale/altered desk and chair fit before real import."""
+    from pathlib import Path
+    import hashlib
+    fit=model_fit(model)
+    if not fit['ok']:raise ValueError(model['id']+': '+fit['reason'])
+    if any(abs(a-b)>1e-12 for a,b in zip(model['scale_xyz'],fit['scale_xyz'])) or len(model['scale_xyz'])!=3:
+        raise ValueError('furniture factors disagree with measured geometry')
+    geometry=model['review_geometry'];orientation=model.get('orientation_evidence',{})
+    replacements=model.get('replacement_mesh_ids',[])
+    prefix=model['replaces']
+    if (not replacements or len(replacements)!=len(set(replacements)) or
+            any(not name.startswith(prefix) or (model.get('role')=='desk' and name.startswith(prefix+'chair-')) for name in replacements)):
+        raise ValueError('furniture replacement requires exact own body meshes; derived chairs stay independent')
+    if geometry.get('schema') not in ('furniture-model-geometry/1','bed-model-geometry/1') or geometry.get('asset')!=model['asset']:
+        raise ValueError('furniture requires measured geometry receipt')
+    if orientation.get('front_axis')!=model.get('front_axis') or not orientation.get('basis'):
+        raise ValueError('furniture requires measured front orientation')
+    review=model.get('neutral_review',{})
+    if review.get('status') not in (('pending','accepted') if neutral_diagnostic else ('accepted',)):
+        raise ValueError('furniture requires accepted neutral review')
+    if review.get('selection')!=review_selection(model) or review.get('source_sha256')!=geometry['source_sha256']:
+        raise ValueError('furniture neutral review is not bound to current selection')
+    if library_root is not None:
+        root=(Path(library_root)/'props'/model['asset']).resolve()
+        for relative,digest in geometry['source_sha256'].items():
+            path=(root/relative).resolve()
+            if not path.is_relative_to(root) or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest()!=digest:
+                raise ValueError('stale furniture source receipt: '+relative)

@@ -1,5 +1,9 @@
 # Furniture phase, step 1: beds
 
+**Round 7: retain the procedural parents bed.** Generated cloth now passes;
+CyberFox still introduces bedside-table/book body conflicts. The baseline
+comparison and zero-extension proposal are recorded in the round-7 section.
+
 **Round 6 client decision, 2026-10-09: keep the layout and use slim frames.**
 The mattress scaling rule remains unchanged; frame parts receive their own
 plan factors. No downloaded bed is activated after the round-6 checks below.
@@ -1088,3 +1092,151 @@ unchanged. Desks stage-1 work is retained on `codex/desks`. The supplied
 interpreter, `PYTHONPATH=src` and `NO_COLOR=1` were used; no packages installed,
 no native Revit or real design-gate approval claimed, no commit made.
 The lead owns the full suite and any commit.
+
+
+## Round 7 — procedural baseline and parents-only review (2026-10-09)
+
+**Parents remains procedural.** CyberFox passes mattress/frame fitting and
+physical generated cloth after the numerical repair below, but its retained
+source bedding introduces body-screen conflicts with the fixed bedside table
+and books. Activation requires both gates; the room gate stays closed. No
+source part is silently omitted, and the layout is unchanged. Kids A and B
+remain procedural for their existing fit/height refusals.
+
+### Same fixed-room baseline versus CyberFox
+
+The current procedural parents bed was evaluated through `bed_room_review`
+with the same principal-bed card, room cluster, physical fixed elements,
+routes, door swings and storage fronts as each replacement. Its evaluated
+procedural duvet and throw are included. The baseline comes from the live
+scene builder's exact authoring snapshot, rather than reconstructed inputs
+under another furnishing revision. Current procedural faces and architecture
+were also compared with the saved scene (`out/desks/stage2/current-room-equality.json`).
+
+The client's five-millimetre allowance applies separately to each measured
+access side. Existing absolute findings stay in the report even when the
+replacement comparator accepts them. Dimensions below are millimetres.
+
+| Check | Current procedural baseline | Final CyberFox proposal | Relative result |
+|---|---:|---:|---|
+| Front access; card requires 750 | 750 | 750 | Pass |
+| Left access; card requires 750 | 750 | 750 | Pass |
+| Right access; card requires 750 | 750 | 750 | Pass |
+| Largest boundary overrun | 0 | 0 | Pass |
+| Route failures | 0 | 0 | No new failure |
+| Swing failures | 0 | 0 | No new failure |
+| Storage-front failures | 0 | 0 | No new failure |
+| Body-screen rows, including inherited findings | 11 | 11 | Four new rows; fail |
+| New conflicting fixed elements | None | Bedside table and bedside books | Fail |
+
+The access source is the unchanged `ukadm-bed-principal-750` card: Approved
+Document M, Volume 1, 2015 incorporating 2016 amendments/corrections,
+paragraph 2.25b, printed page 18; application follows the villa's ageing-in-place
+brief. This screen does not approve a real villa design gate.
+
+The eleven baseline body rows report headboard slats (one row, 30 mm), the
+rug (two rows, 10 mm), and the combined door-handle detail (eight rows,
+84–537.340 mm). These are conservative mesh/body screens, including a
+room-wide combined detail; they are retained layout findings, not established
+exact solid penetrations. The model still reports those three inherited fixed
+identities. Source `Object_6` additionally screens against bedside table parts
+(350 and 7 mm), the table planning body (350 mm) and bedside books
+(163.1 mm). The table proxy duplicates a physical-table identity; the books
+are a different fixed element. Equal raw row counts do not mean equal
+conflicts. Full baseline and model columns, including each finding and its
+source, are in `out/beds/round7/room-comparison.json`.
+
+Round-6 head extension 100 mm and side extension 50 mm produce a new
+50 mm head boundary overrun and reduce side access to approximately 1/0 mm
+against the procedural 750/750 mm. Reducing head extension to 50 mm removes
+the overrun but does not restore side access; reducing side extension to zero
+also leaves a wall-zone access failure until the head extension is zero.
+The final **head depth extension is 0 mm**, and **side extension is 0 mm**;
+this states extension beyond the unchanged mattress, not literal zero
+headboard thickness. Frame factors remain at least 0.5 and all source parts
+remain retained. No mattress, bed centre, rotation, height, fixed element or
+camera is moved. Tightening frame depth cannot remove the new bedding/table
+conflicts, so the source model remains refused.
+
+### Generated-cloth cause and first-fix checkpoint
+
+The real round-6 throw refusal was reproduced: zero crossings, zero enclosed
+vertices, one unresolved vertex (5313). Its ray against the closed evaluated
+duvet shell hit source triangle 14604 twice and triangle 14615 once; counting
+three hits gave false inside parity and disagreed with other directions.
+Independent double-precision ray distances are 0.055938297 and 0.077580170 m:
+two actual surfaces, with all three directions agreeing the point is outside.
+The frozen actual geometry is `tests/fixtures/bed-round7-ray-duplicate.json.gz`.
+
+Spatial query structures now use bounded local coordinates, and a straight
+ray counts each planar source triangle once. World geometry, cloth simulation,
+clearance thresholds and the fail-closed crossing/inside/unresolved checks
+are unchanged. Diagnostic capture precedes the fix; the first-fix cloth
+receipt is `out/beds/round7/first-cloth-fix/evidence.json`.
+`ray-precision-proof.json` proves real and translated outside cases stay
+quiet and real and translated enclosed mutations still refuse in Blender.
+
+| Final generated cloth | Crossings | Inside vertices | Unresolved vertices | Minimum surface distance |
+|---|---:|---:|---:|---:|
+| Parents duvet | 0 | 0 | 0 | 6.406 mm |
+| Parents throw | 0 | 0 | 0 | 7.168 mm |
+
+The physical cloth gate passes. Its success does not override the independent
+room refusal. The historical round-6 failure remains preserved as failed
+evidence; the precision cause is now diagnosed and repaired.
+
+### Neutral preview review and fallbacks
+
+`out/beds/round7/final-previews/pb-bed-isolated-neutral.png` and
+`pb-bed-room-neutral.png` were inspected before any integration. The isolate
+shows the complete retained model with a scale figure and no obvious frame
+warping. The room image uses unchanged **v22-parents-day** and includes the
+generated duvet and throw. Its camera crops the foot/headboard; it cannot
+prove complete boundary or bedside clearance. These are diagnostic previews
+of a refused proposal, not an active imported bed. Selection/source/cloth
+bindings are in `final-previews/evidence.json`.
+
+Kids A keeps its procedural bunk: round-6 frame width factor 0.456000612 is
+below 0.5, and the single vertical transform cannot meet both berth heights
+(the lower top misses by 98.826 mm). Kids B keeps its procedural bed:
+none of the twelve measured source mattresses passes the unchanged
+1.200 × 2.000 m mattress contract. Their full refusal table remains above;
+this parents-only round does not reopen those decisions.
+
+### Round-7 regression and execution evidence
+
+The new baseline-relative guard freezes the real round-6 parents access
+worsening, refuses both original and renamed siblings, permits precisely
+5 mm access loss, refuses larger loss, preserves inherited findings and
+rejects new fixed-element conflicts/boundary overrun. Cloth tests retain
+real outside/enclosed geometry and translated siblings. Registration is in
+`knowledge/furniture-fit-guards.json` and `knowledge/bed-guards.json`; causes
+and workflows are updated in `LEARNINGS.md`, `docs/ops/beds.md` and
+`docs/ops/furniture-fit.md`.
+
+The bed/furniture batch completed **94 tests, exit 0**
+(`out/desks/stage2/focused-resume.log`). Final context, baseline-relative,
+actual fitted furniture, cloth-ray, fit and adapter controls completed
+**29 tests, exit 0** (`final-controls.log`); these overlap the main batch.
+Portable verification completed **182 checks, exit 0** under both normal
+and initially empty HOME (`verify-normal-physical-shell.log` and
+`verify-empty-home-physical-shell.log`). Every run used the supplied
+interpreter with `PYTHONPATH=src` and `NO_COLOR=1`.
+
+Fresh affected consumers pass **178 tests, exit 0**
+(`out/desks/stage2/affected-stable-final.log`): bed models, asset intake,
+geometry topology, render standard, furnishing, detailed furnishing and
+furniture primitives. The camera module separately passes **20 tests,
+exit 0** (`render-views-stable-final.log`). These fresh processes used stable
+final code and acceptance inputs. The lead retains the full-suite run.
+
+All **38** generated adapters match after synchronization; `git diff --check`
+passes. Failed/interrupted earlier executions remain diagnostic evidence,
+including the pre-fix portable failures and obsolete mixed-version test run.
+Final execution and artifact hashes are in
+`out/desks/stage2/acceptance-resume.json` and
+`out/beds/round7/acceptance-resume.json`.
+
+No presentation images, packages, native Revit edits or commits were made.
+Shared `assets/user` and `out/villa/round3` data were not modified. The lead
+owns the full suite and commit.

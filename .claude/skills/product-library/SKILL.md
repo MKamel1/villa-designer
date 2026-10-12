@@ -38,3 +38,31 @@ unless a link says otherwise. Never present it as the named product.
 - Colour space is checked by physics: under a uniform white environment a
   diffuse swatch renders at its albedo. The Non-Color negative control must
   keep failing.
+
+
+**Measured furniture fitting and replacement (2026-10-09).** Follow
+[the fit workflow](../../../docs/ops/furniture-fit.md). Copy downloaded
+appearances into new shared-library folders with complete licence/credits;
+measure declared units, actual mesh bounds, facing and complete item contents.
+Plan factors must each be 0.5–2.0 with a larger/smaller factor ratio no greater
+than 1.15. Fit the whole item; identify a complete desktop or seat datum and
+check every independently required height under the same vertical factor.
+A plan pass cannot approve an unresolved seat/back or a fused extra. For
+separable platforms or bundles, record exact retained/omitted identities and
+measure each complete retained item independently; a prose omission is not
+a measurement receipt.
+
+Use the scene builder's deep-copied `authoring_room_context`, not inputs
+reconstructed under another revision. Compare the current procedural item
+and model through identical room/card checks using `baseline_relative_review`:
+access loss at most five millimetres per side; no bigger boundary overrun or
+new route, swing, storage-front or fixed-element body conflict. Preserve
+inherited layout findings. Review both individual and combined replacements,
+then isolated and unchanged-camera neutral images before integration. Bind
+accepted geometry, contents, transforms, physical inputs and reviewed camera
+identities. Actual changes refuse; omitted numerical view selections remain
+valid subsets. Bind architectural faces/materials and stable physical host
+fields independently of generated shell buckets and doorway captions. Test
+actual full/empty-view exports; geometry, material, visibility and finish-host
+mutations must still refuse. Replace exact body identifiers, preserving derived chairs and
+physical procedural fallbacks. Missing source geometry restores those bodies.

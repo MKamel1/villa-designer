@@ -37,7 +37,7 @@ def _valid_size_override(value: object) -> bool:
 
 # Asset type is controlled; descriptive placement and species text belongs in `use`.
 ROLES = frozenset({
-    "sofa", "armchair", "dining-chair", "task-chair", "bed", "bedside-table",
+    "sofa", "armchair", "dining-chair", "task-chair", "desk", "bed", "bedside-table",
     "rug", "bench-outdoor", "bistro-set", "egg-swing", "task-lamp",
     "shade-tree", "small-tree", "shrub", "climber", "groundcover",
     "ornamental-grass", "indoor-floor-plant", "indoor-table-plant",
@@ -48,7 +48,7 @@ GARDEN_PLANTS = {"shade-tree", "small-tree", "shrub", "climber", "groundcover", 
 PLANT_ROLES = INDOOR_PLANTS | GARDEN_PLANTS
 ASSUMED_ROLES = {"decor-small", "wall-art", "boulder", "planter", "rug",
                  "bistro-set", "egg-swing", "bench-outdoor", "task-lamp", "bedding"}
-DIR_ROLES = {"sofa", "armchair", "dining-chair", "task-chair", "bed", "bench-outdoor",
+DIR_ROLES = {"sofa", "armchair", "dining-chair", "task-chair", "desk", "bed", "bench-outdoor",
              "bistro-set", "egg-swing", "task-lamp", "wall-art"}
 OPTIONALLY_NONDIRECTIONAL = {"bench-outdoor", "bistro-set"}
 
