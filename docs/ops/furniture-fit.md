@@ -90,3 +90,27 @@ a production bypass to make a pending receipt load.
 2026-10-11 source-cover/chair package: `prepare_furniture_oct11.py`, `review_furniture_oct11.py`, `preview_chairs_supplemental.py` and `accept_furniture_oct11.py`. Review against the current measured desks, not merely the former procedural desk geometry. Resolve derived chair identifiers and exact fallback floor from their authored bodies; keep parent desk access cards, with the chair planning body excluded only from its own intended use zone. Retain all physical faces in support/routes/overlap/boundary checks. Namespace every imported glTF hierarchy object, including empty nodes. Supplemental diagnostic angles bind actual full-frame chair vertices and preserve original named cameras. Source geometry and CC-BY credits remain in portable receipts; other candidates and the vanity retain fallbacks.
 
 Every Blender diagnostic command must set `--python-exit-code 1`; inspect the final evidence and image bindings as well as process status. Independent fitted models are audited through their active `scale_xyz`, with a manifest `placement_scale_source`; dormant candidate metadata must be completed before activation.
+
+Storage Stage 2 (2026-10-12): `export_storage_stage2.py` saves the exact
+builder context and room requests; `prepare_storage_stage2.py` measures all
+fourteen unchanged credited downloads; `review_storage_stage2.py` preserves
+the inherited room findings. The user scope keeps all wardrobes and built-in
+joinery procedural. No complete loose source currently qualifies for
+activation, so no new receipt is published. The Jonah bedside fits after its
+separate platform is omitted but remains provenance-quarantined. Refused
+fits cannot enter a room through a diagnostic bypass. Existing measured
+desks/chairs and the parents bed remain independently active.
+
+Use `scene_reset.clear_objects` between every Blender import and
+`scene_reset.scene_meshes` for source geometry. Armature custom-shape objects
+are editor helpers, identified by actual bone references rather than names;
+selection-based deletion leaves them in hidden collections. Diagnostic room
+requests must use the item's actual authored room, not a camera's room name.
+`preview_scope` checks body ownership before rendering and uses the complete
+authored room cluster. Storage-front clearance dispatch now includes the
+sideboard, bookcase and pantry shelving catalogue types, preserving the held
+Time-Saver Standards for Interior Design and Space Planning, second edition,
+printed page 87 card: 914 mm. The value is existing guidance, not a new local
+code-compliance claim. Original books are not present on this workstation;
+the verified evidence card and its existing source-value regression are the
+available portable evidence.

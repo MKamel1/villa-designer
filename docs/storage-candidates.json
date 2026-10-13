@@ -1,0 +1,3278 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-10-12T05:50:41.424819+00:00",
+  "branch": "codex/search2",
+  "scope": "Research only; no assets downloaded, no production changes or integration.",
+  "definitions": {
+    "D1": "Current authored villa layout option; this is not an approved real villa design gate.",
+    "UID": "Sketchfab unique model identifier.",
+    "CC_BY": "Creative Commons Attribution; exact licence URL accompanies each candidate.",
+    "CC0": "Creative Commons Zero public-domain dedication.",
+    "m": "metres",
+    "mm": "millimetres"
+  },
+  "robots_receipts": [
+    {
+      "url": "https://sketchfab.com/robots.txt",
+      "status": 200,
+      "checked_at_utc": "2026-10-12T05:36:42.993201+00:00",
+      "body": "User-agent: *\nDisallow: /admin*\nDisallow: /i/*\nDisallow: /models/*/ar-redirect\nUser-agent: bingbot\nCrawl-delay: 1\nAllow: /\n",
+      "sha256": "58f9abd0e34e776a7418e5cf3c674f7a9fbe4575c9d2452a57d4bc46fc95594d",
+      "decision": "Public /3d-models/, /v3/search and /v3/models/<UID> permitted for User-agent *; no login or downloads requested."
+    },
+    {
+      "url": "https://api.sketchfab.com/robots.txt",
+      "status": 200,
+      "checked_at_utc": "2026-10-12T05:36:43.542199+00:00",
+      "body": "User-agent: *\nDisallow: /admin*\nDisallow: /i/*\nDisallow: /models/*/ar-redirect\nUser-agent: bingbot\nCrawl-delay: 1\nAllow: /\n",
+      "sha256": "58f9abd0e34e776a7418e5cf3c674f7a9fbe4575c9d2452a57d4bc46fc95594d",
+      "decision": "Public /3d-models/, /v3/search and /v3/models/<UID> permitted for User-agent *; no login or downloads requested."
+    },
+    {
+      "url": "https://polyhaven.com/robots.txt",
+      "status": 403,
+      "checked_at_utc": "2026-10-12T05:36:43Z",
+      "timestamp_precision": "batch start; individual response time not recorded",
+      "decision": "Robots unavailable; stopped direct requests. Search-engine indexed text only; no permission inferred."
+    },
+    {
+      "url": "https://api.polyhaven.com/robots.txt",
+      "status": 403,
+      "checked_at_utc": "2026-10-12T05:36:43Z",
+      "timestamp_precision": "batch start; individual response time not recorded",
+      "decision": "Robots unavailable; stopped direct requests. Search-engine indexed text only; no permission inferred."
+    },
+    {
+      "url": "https://www.blenderkit.com/robots.txt",
+      "status": 403,
+      "checked_at_utc": "2026-10-12T05:36:43Z",
+      "timestamp_precision": "batch start; individual response time not recorded",
+      "decision": "Robots unavailable; stopped direct requests. Search-engine indexed text only; no permission inferred."
+    },
+    {
+      "url": "https://media.sketchfab.com/robots.txt",
+      "status": 200,
+      "checked_at_utc": "2026-10-12T05:39:10.266536+00:00",
+      "sha256": "84d200fc0af0a8ada208ab6208768bf2a60781bb758dc948137efd8ae581ef4e",
+      "body": "User-agent: *\nDisallow: /archives/\nDisallow: /backgrounds/\nDisallow: /debug/\nDisallow: /download/\nDisallow: /environments/\nDisallow: /rendering-tests/\nDisallow: /trash/\nDisallow: /urls/\nDisallow: /uploads/\nAllow:    /urls/*/thumbnails/\nAllow:    /urls/*/fallback/",
+      "decision": "Listing /models/<UID>/thumbnails/ permitted; archive/download paths not accessed."
+    }
+  ],
+  "public_api_search_queries": [
+    "bunk bed",
+    "bunk",
+    "single bed",
+    "bed 120",
+    "scandinavian bed",
+    "oak bed",
+    "wardrobe",
+    "oak wardrobe",
+    "walnut bedside",
+    "dressing table",
+    "mid century cabinet",
+    "tv cabinet",
+    "sideboard",
+    "bunk dimensions",
+    "wooden bed",
+    "bedside brass",
+    "walnut nightstand",
+    "wardrobe 150",
+    "dressing table walnut",
+    "bed dimensions",
+    "bed small double",
+    "bed 120cm",
+    "nordic bed",
+    "walnut brass cabinet",
+    "walnut dressing table",
+    "desk mid century",
+    "oak desk drawers",
+    "bed 120x200",
+    "bunk 90x200",
+    "bed 120 200",
+    "oak wardrobe 150",
+    "bed 4ft"
+  ],
+  "search_limits": "Public API queries sampled the first 24 results (last four storage queries: first 12); query terms sometimes match unrelated assets. No exhaustive catalogue claim.",
+  "alternative_catalogues": [
+    {
+      "source": "Poly Haven",
+      "licence": "CC0",
+      "licence_source": "https://polyhaven.com/license",
+      "search": "site:polyhaven.com/a bed; indexed furniture catalogue",
+      "result": "Indexed beds: Gothic Bed 01, Old Bed Frame, Vintage Day Bed; style/form mismatch, no new shortlist. Direct robots/API unavailable (403)."
+    },
+    {
+      "source": "BlenderKit",
+      "terms_source": "https://www.blenderkit.com/get-blenderkit/659b5eb1-707c-45c6-bb52-8f7193d04e70/",
+      "result": "Official free download flow promotes add-on and account creation; unauthenticated asset download permission not established. Robots 403; excluded under no-login condition, not a claim that all free assets require login."
+    }
+  ],
+  "stage": "Storage research stage 1, not Villa Method Stage 1 Ground approval",
+  "sources": [
+    {
+      "path": "src/archpipe/concept/villa_furnish.py",
+      "sha256": "45e5d0954dfbac429191ea9c67b95bdff7951080f7c72cb5176640ea544d9e34"
+    },
+    {
+      "path": "src/archpipe/concept/villa_furnish3d.py",
+      "sha256": "e80f8a6ff771cf30fc39ee09d3339a7f9d2f2068800f03892a2c7e3e062d2f54"
+    },
+    {
+      "path": "src/archpipe/concept/villa_furniture_detail.py",
+      "sha256": "98b53ebd612aea19d827e914285905e95f19d0ede9fcf2feaa1f91beee9a6762"
+    },
+    {
+      "path": "src/archpipe/concept/villa_render.py",
+      "sha256": "2d1b71411d64d93d679dfbd177886483a725884764c0ebba11718d1e2bcd6036"
+    },
+    {
+      "path": "src/archpipe/furniture.py",
+      "sha256": "068708abe1f1ff23909917a3c6ff1bc65c019100c3eb60ac01f3b69fc1d84851"
+    },
+    {
+      "path": "ops/workstation/library-manifest.json",
+      "sha256": "24f7990636ce7cfebc807bed9cf66380edb8aa06e2e2b1e1775a4e672423c8ee"
+    },
+    {
+      "path": "docs/beds-report.md",
+      "sha256": "e7cda25b52f4b5baab05341ba926bc5b93931712a68dd5e4b23822b80e5d12a6"
+    }
+  ],
+  "inventory": [
+    {
+      "id": "lounge-tv",
+      "room": "lounge",
+      "level": "B",
+      "type": "tv_unit",
+      "planned_footprint_m": [
+        2.0,
+        0.45
+      ],
+      "planned_height_m": 0.5,
+      "height_range_in_authored_box_builder_m": [
+        0.1,
+        0.5
+      ],
+      "world_plan_bounds_m": [
+        5.0,
+        -24.091,
+        7.0,
+        -23.641
+      ],
+      "centre_m": [
+        6.0,
+        -23.866
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._cabinet(floating=True)",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "TV wall between the NE column and the column at x 7.0 (east face); 75 in screen",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.9835,
+              0.194,
+              0.1165
+            ],
+            "max": [
+              -0.349833,
+              0.213,
+              0.4835
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.316833,
+              0.194,
+              0.1165
+            ],
+            "max": [
+              0.316833,
+              0.213,
+              0.4835
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.349833,
+              0.194,
+              0.1165
+            ],
+            "max": [
+              0.9835,
+              0.213,
+              0.4835
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "mounting": "Wall-hung cabinet: bottom 0.100 m, top 0.500 m; screen above excluded from storage height. Floor-standing candidate requires a reviewed mounting decision."
+    },
+    {
+      "id": "stair-flight-store",
+      "room": "stair-b",
+      "level": "B",
+      "type": "under_stair_storage",
+      "planned_footprint_m": [
+        1.8,
+        0.4
+      ],
+      "planned_height_m": 2.3,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.3
+      ],
+      "world_plan_bounds_m": [
+        5.3,
+        -28.471,
+        7.1,
+        -28.071
+      ],
+      "centre_m": [
+        6.2,
+        -28.271
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furnish3d.body",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "sliding-door joinery cut to the descending stair soffit; standing access at the high end",
+      "modules": [
+        [
+          "standing-access",
+          0.55
+        ],
+        [
+          "luggage",
+          0.65
+        ],
+        [
+          "seasonal-boxes",
+          0.6
+        ]
+      ],
+      "front_parts": [
+        {
+          "part": "sliding-door-pocketed",
+          "local_bounds_m": {
+            "min": [
+              -0.38799999999999996,
+              -0.165,
+              0.1
+            ],
+            "max": [
+              -0.37,
+              0.14500000000000002,
+              2.3
+            ]
+          }
+        },
+        {
+          "part": "sliding-door-pocketed",
+          "local_bounds_m": {
+            "min": [
+              0.26200000000000007,
+              -0.165,
+              0.1
+            ],
+            "max": [
+              0.28,
+              0.14500000000000002,
+              2.0076470588235296
+            ]
+          }
+        },
+        {
+          "part": "sliding-door-pocketed",
+          "local_bounds_m": {
+            "min": [
+              0.862,
+              -0.165,
+              0.1
+            ],
+            "max": [
+              0.88,
+              0.14500000000000002,
+              1.6547058823529412
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "stair-landing-store",
+      "room": "lounge-nook",
+      "level": "B",
+      "type": "under_stair_storage",
+      "planned_footprint_m": [
+        0.2,
+        0.2
+      ],
+      "planned_height_m": 2.3,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.3
+      ],
+      "world_plan_bounds_m": [
+        3.99,
+        -28.621,
+        4.19,
+        -28.421
+      ],
+      "centre_m": [
+        4.09,
+        -28.521
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furnish3d.body",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "shallow box cubby below the top landing, between retained column and pantry door; sliding front clear of the lounge route",
+      "modules": [
+        [
+          "small-boxes",
+          0.2
+        ]
+      ],
+      "front_parts": [
+        {
+          "part": "sliding-door-pocketed",
+          "local_bounds_m": {
+            "min": [
+              0.062000000000000006,
+              -0.065,
+              0.1
+            ],
+            "max": [
+              0.08,
+              0.045000000000000005,
+              2.3
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "k-run",
+      "room": "kitchen",
+      "level": "B",
+      "type": "base_run",
+      "planned_footprint_m": [
+        2.01,
+        0.6
+      ],
+      "planned_height_m": 0.9,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.9
+      ],
+      "world_plan_bounds_m": [
+        11.54,
+        -24.241,
+        13.55,
+        -23.641
+      ],
+      "centre_m": [
+        12.545,
+        -23.941
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._runs",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "sink under the east wall between column 4 and the dirty-kitchen door; the one dishwasher beside it",
+      "modules": [
+        [
+          "dw",
+          0.6
+        ],
+        [
+          "counter",
+          0.05
+        ],
+        [
+          "sink",
+          0.9
+        ],
+        [
+          "counter",
+          0.46
+        ]
+      ],
+      "front_parts": [
+        {
+          "part": "dw",
+          "local_bounds_m": {
+            "min": [
+              -1.005,
+              -0.3,
+              0.1
+            ],
+            "max": [
+              -0.405,
+              0.256,
+              0.86
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -1.0035,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              -0.4065,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.4035,
+              0.256,
+              0.6715
+            ],
+            "max": [
+              -0.3565,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.4035,
+              0.256,
+              0.4055
+            ],
+            "max": [
+              -0.3565,
+              0.275,
+              0.6685
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.4035,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              -0.3565,
+              0.275,
+              0.4025
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.3535,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              0.0935,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.0965,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              0.5435,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.5465,
+              0.256,
+              0.6715
+            ],
+            "max": [
+              1.0035,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.5465,
+              0.256,
+              0.4055
+            ],
+            "max": [
+              1.0035,
+              0.275,
+              0.6685
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.5465,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              1.0035,
+              0.275,
+              0.4025
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "k-island",
+      "room": "kitchen",
+      "level": "B",
+      "type": "island",
+      "planned_footprint_m": [
+        3.05,
+        1.1
+      ],
+      "planned_height_m": 0.92,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.92
+      ],
+      "world_plan_bounds_m": [
+        11.55,
+        -26.56,
+        14.6,
+        -25.46
+      ],
+      "centre_m": [
+        13.075,
+        -26.01
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._runs",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "Five stools on party side; one ASSUMED 350 mm induction zone and microwave; double marble waterfall on short ends; 1.219 m work aisle",
+      "modules": [
+        [
+          "microwave",
+          0.6
+        ],
+        [
+          "counter",
+          0.6
+        ],
+        [
+          "single-induction",
+          0.35
+        ],
+        [
+          "counter",
+          1.5
+        ]
+      ],
+      "front_parts": [
+        {
+          "part": "microwave",
+          "local_bounds_m": {
+            "min": [
+              -1.525,
+              -0.25,
+              0.1
+            ],
+            "max": [
+              -0.925,
+              0.506,
+              0.88
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -1.5235,
+              0.506,
+              0.1015
+            ],
+            "max": [
+              -0.9265,
+              0.525,
+              0.8785
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.9235,
+              0.506,
+              0.6865
+            ],
+            "max": [
+              -0.3265,
+              0.525,
+              0.8785
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.9235,
+              0.506,
+              0.4135
+            ],
+            "max": [
+              -0.3265,
+              0.525,
+              0.6835
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.9235,
+              0.506,
+              0.1015
+            ],
+            "max": [
+              -0.3265,
+              0.525,
+              0.4105
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.3235,
+              0.506,
+              0.1015
+            ],
+            "max": [
+              0.0235,
+              0.525,
+              0.8785
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.0265,
+              0.506,
+              0.1015
+            ],
+            "max": [
+              0.7735,
+              0.525,
+              0.8785
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.7765,
+              0.506,
+              0.1015
+            ],
+            "max": [
+              1.5235,
+              0.525,
+              0.8785
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "dining-sideboard",
+      "room": "dining-side",
+      "level": "B",
+      "type": "sideboard",
+      "planned_footprint_m": [
+        1.2,
+        0.45
+      ],
+      "planned_height_m": 0.8,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.8
+      ],
+      "world_plan_bounds_m": [
+        16.2,
+        -28.471,
+        17.4,
+        -28.021
+      ],
+      "centre_m": [
+        16.8,
+        -28.246
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._cabinet",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "compact serving sideboard keeps the library approach clear",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.5835,
+              0.194,
+              0.1165
+            ],
+            "max": [
+              -0.0165,
+              0.213,
+              0.7835
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.0165,
+              0.194,
+              0.1165
+            ],
+            "max": [
+              0.5835,
+              0.213,
+              0.7835
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance."
+    },
+    {
+      "id": "library-cabinet-left",
+      "room": "bar-alcove",
+      "level": "B",
+      "type": "bookcase",
+      "planned_footprint_m": [
+        1.2,
+        0.4
+      ],
+      "planned_height_m": 2.1,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.1
+      ],
+      "world_plan_bounds_m": [
+        17.468,
+        -29.716,
+        18.668,
+        -29.316
+      ],
+      "centre_m": [
+        18.068,
+        -29.516
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._glass_bookcase",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "glass-door book joinery on the windowless south wall",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "library-daybed",
+      "room": "bar-alcove",
+      "level": "B",
+      "type": "daybed_nook",
+      "planned_footprint_m": [
+        2.0,
+        0.95
+      ],
+      "planned_height_m": 0.45,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.1
+      ],
+      "world_plan_bounds_m": [
+        18.668,
+        -29.716,
+        20.668,
+        -28.766
+      ],
+      "centre_m": [
+        19.668,
+        -29.241
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._daybed_nook",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "single 0.9 x 2.0 m mattress in a 0.95 m deep reading nook within the joinery",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "storage_front": "No opening front; fixed surround included to avoid losing built-in joinery in inventory."
+    },
+    {
+      "id": "library-cabinet-right",
+      "room": "bar-alcove",
+      "level": "B",
+      "type": "bookcase",
+      "planned_footprint_m": [
+        1.532,
+        0.4
+      ],
+      "planned_height_m": 2.1,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.1
+      ],
+      "world_plan_bounds_m": [
+        20.668,
+        -29.716,
+        22.2,
+        -29.316
+      ],
+      "centre_m": [
+        21.434,
+        -29.516
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._glass_bookcase",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "glass-door book joinery completes the windowless south wall",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "library-end-panel",
+      "room": "bar-alcove",
+      "level": "B",
+      "type": "joinery_end_panel",
+      "planned_footprint_m": [
+        0.197,
+        0.4
+      ],
+      "planned_height_m": 2.1,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.1
+      ],
+      "world_plan_bounds_m": [
+        22.1995,
+        -29.716,
+        22.3965,
+        -29.316
+      ],
+      "centre_m": [
+        22.298,
+        -29.516
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furnish3d.body",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "fixed joinery return beside the garden column; no opening leaf in its blocked approach",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "storage_front": "Fixed return panel; no opening front."
+    },
+    {
+      "id": "cinema-desk",
+      "room": "cinema",
+      "level": "B",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.24,
+        0.55
+      ],
+      "planned_height_m": 0.75,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.75
+      ],
+      "world_plan_bounds_m": [
+        4.66,
+        -21.351,
+        5.9,
+        -20.801
+      ],
+      "centre_m": [
+        5.28,
+        -21.076
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._desk",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "two work places behind the cinema sofa, under the ramp soffit; card ies-res-desk-400",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5945,
+              0.232,
+              0.5375
+            ],
+            "max": [
+              -0.2659,
+              0.251,
+              0.6965
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5945,
+              0.232,
+              0.3107
+            ],
+            "max": [
+              -0.2659,
+              0.251,
+              0.5345
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5945,
+              0.232,
+              0.0515
+            ],
+            "max": [
+              -0.2659,
+              0.251,
+              0.3077
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "storage_front": "Three-drawer pedestal added by detailed render builder; native box builder represents only table top and legs."
+    },
+    {
+      "id": "gwc-basin",
+      "room": "guest-wc",
+      "level": "B",
+      "type": "washbasin",
+      "planned_footprint_m": [
+        0.6,
+        0.5
+      ],
+      "planned_height_m": 0.85,
+      "height_range_in_authored_box_builder_m": [
+        0.35,
+        0.85
+      ],
+      "world_plan_bounds_m": [
+        9.277,
+        -23.45,
+        9.777,
+        -22.85
+      ],
+      "centre_m": [
+        9.527,
+        -23.15
+      ],
+      "rotation_degrees": -90,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._washbasin",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "basin on the side wall",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "storage_front": "Basin vanity front in render builder; sanitary basin occupies top. Retain service locations."
+    },
+    {
+      "id": "dk-run",
+      "room": "dirty-kitchen",
+      "level": "B",
+      "type": "base_run",
+      "planned_footprint_m": [
+        3.45,
+        0.6
+      ],
+      "planned_height_m": 0.9,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.9
+      ],
+      "world_plan_bounds_m": [
+        11.66,
+        -21.401,
+        15.11,
+        -20.801
+      ],
+      "centre_m": [
+        13.385,
+        -21.101
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._runs",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "heavy cooking: gas hob with oven under, sink, washer and exact carded landing widths; washer worktop is the folding surface, cleaning storage is below the end counter",
+      "modules": [
+        [
+          "washer",
+          0.6
+        ],
+        [
+          "counter",
+          0.383
+        ],
+        [
+          "hob",
+          0.6
+        ],
+        [
+          "counter",
+          0.61
+        ],
+        [
+          "sink",
+          0.8
+        ],
+        [
+          "counter",
+          0.457
+        ]
+      ],
+      "front_parts": [
+        {
+          "part": "washer",
+          "local_bounds_m": {
+            "min": [
+              -1.725,
+              -0.3,
+              0.1
+            ],
+            "max": [
+              -1.125,
+              0.256,
+              0.86
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -1.7235,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              -1.1265,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -1.1235,
+              0.256,
+              0.6715
+            ],
+            "max": [
+              -0.7435,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -1.1235,
+              0.256,
+              0.4055
+            ],
+            "max": [
+              -0.7435,
+              0.275,
+              0.6685
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -1.1235,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              -0.7435,
+              0.275,
+              0.4025
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.7405,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              -0.1435,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.1405,
+              0.256,
+              0.6715
+            ],
+            "max": [
+              0.4665,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.1405,
+              0.256,
+              0.4055
+            ],
+            "max": [
+              0.4665,
+              0.275,
+              0.6685
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.1405,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              0.4665,
+              0.275,
+              0.4025
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.4695,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              0.8665,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.8695,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              1.2665,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              1.2695,
+              0.256,
+              0.6715
+            ],
+            "max": [
+              1.7235,
+              0.275,
+              0.8585
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              1.2695,
+              0.256,
+              0.4055
+            ],
+            "max": [
+              1.7235,
+              0.275,
+              0.6685
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              1.2695,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              1.7235,
+              0.275,
+              0.4025
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "dk-appliance-bank",
+      "room": "dirty-kitchen",
+      "level": "B",
+      "type": "base_run",
+      "planned_footprint_m": [
+        1.2,
+        0.6
+      ],
+      "planned_height_m": 2.3,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.3
+      ],
+      "world_plan_bounds_m": [
+        11.25,
+        -22.9,
+        11.85,
+        -21.7
+      ],
+      "centre_m": [
+        11.55,
+        -22.3
+      ],
+      "rotation_degrees": -90,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._runs",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "shared fridge and oven for both kitchens; NKBA fridge landing on the folding counter / run (card nkba-fridge-landing-381)",
+      "modules": [
+        [
+          "fridge",
+          0.6
+        ],
+        [
+          "oven",
+          0.6
+        ]
+      ],
+      "front_parts": [
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.5985,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              -0.0015,
+              0.275,
+              2.2985
+            ]
+          }
+        },
+        {
+          "part": "oven",
+          "local_bounds_m": {
+            "min": [
+              0.0,
+              -0.3,
+              0.0
+            ],
+            "max": [
+              0.6,
+              0.256,
+              2.3
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.0015,
+              0.256,
+              0.6115
+            ],
+            "max": [
+              0.5985,
+              0.275,
+              0.7785
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.0015,
+              0.256,
+              0.3735
+            ],
+            "max": [
+              0.5985,
+              0.275,
+              0.6085
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.0015,
+              0.256,
+              0.1015
+            ],
+            "max": [
+              0.5985,
+              0.275,
+              0.3705
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.0015,
+              0.256,
+              1.4315
+            ],
+            "max": [
+              0.5985,
+              0.275,
+              2.2985
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "dk-fold",
+      "room": "dirty-kitchen",
+      "level": "B",
+      "type": "folding_counter",
+      "planned_footprint_m": [
+        1.25,
+        0.6
+      ],
+      "planned_height_m": 0.9,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.9
+      ],
+      "world_plan_bounds_m": [
+        11.9,
+        -23.541,
+        13.15,
+        -22.941
+      ],
+      "centre_m": [
+        12.525,
+        -23.241
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._folding_counter",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "laundry folding counter with cleaning storage below, under the pass-through (its landing on the dirty-kitchen side)",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.6135,
+              0.269,
+              0.0965
+            ],
+            "max": [
+              -0.0015,
+              0.288,
+              0.8485
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.0015,
+              0.269,
+              0.0965
+            ],
+            "max": [
+              0.6135,
+              0.288,
+              0.8485
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly."
+    },
+    {
+      "id": "pantry-shelves-1",
+      "room": "pantry",
+      "level": "B",
+      "type": "pantry_shelving",
+      "planned_footprint_m": [
+        0.995,
+        0.3
+      ],
+      "planned_height_m": 2.2,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.2
+      ],
+      "world_plan_bounds_m": [
+        3.817,
+        -29.7155,
+        4.117,
+        -28.7205
+      ],
+      "centre_m": [
+        3.967,
+        -29.218
+      ],
+      "rotation_degrees": -90,
+      "procedural_builder": "archpipe.concept.villa_furnish3d.body",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "shelving on the end wall: the pantry is 1.0 m deep clear, too shallow for a back-wall run with 914 mm in front",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "storage_front": "Open shelves; no door. Ramp store heights are cut per module."
+    },
+    {
+      "id": "pantry-shelves-2",
+      "room": "pantry",
+      "level": "B",
+      "type": "pantry_shelving",
+      "planned_footprint_m": [
+        0.995,
+        0.3
+      ],
+      "planned_height_m": 2.2,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.2
+      ],
+      "world_plan_bounds_m": [
+        6.44,
+        -29.7155,
+        6.74,
+        -28.7205
+      ],
+      "centre_m": [
+        6.59,
+        -29.218
+      ],
+      "rotation_degrees": 90,
+      "procedural_builder": "archpipe.concept.villa_furnish3d.body",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "shelving on the other end wall",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "storage_front": "Open shelves; no door. Ramp store heights are cut per module."
+    },
+    {
+      "id": "store-shelves",
+      "room": "store-ramp",
+      "level": "B",
+      "type": "store_shelving",
+      "planned_footprint_m": [
+        2.85,
+        0.5
+      ],
+      "planned_height_m": 1.9,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        1.74
+      ],
+      "world_plan_bounds_m": [
+        0.177,
+        -21.301,
+        3.027,
+        -20.801
+      ],
+      "centre_m": [
+        1.602,
+        -21.051
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furnish3d.body",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "zoned shelves under the rising ramp: luggage, seasonal boxes and bikes",
+      "modules": [
+        [
+          "luggage",
+          0.95
+        ],
+        [
+          "seasonal-boxes",
+          0.95
+        ],
+        [
+          "bikes",
+          0.95
+        ]
+      ],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "storage_front": "Open shelves; no door. Ramp store heights are cut per module.",
+      "module_top_heights_m": [
+        1.74,
+        1.55,
+        1.43
+      ]
+    },
+    {
+      "id": "study-desk",
+      "room": "study-game",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.8,
+        0.7
+      ],
+      "planned_height_m": 0.75,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.75
+      ],
+      "world_plan_bounds_m": [
+        3.817,
+        -26.3,
+        4.517,
+        -24.5
+      ],
+      "centre_m": [
+        4.167,
+        -25.4
+      ],
+      "rotation_degrees": -90,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._desk",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "shared homework desk for two, under the street window (sill 0.9)",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.8745,
+              0.307,
+              0.5375
+            ],
+            "max": [
+              -0.4855,
+              0.326,
+              0.6965
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.8745,
+              0.307,
+              0.3107
+            ],
+            "max": [
+              -0.4855,
+              0.326,
+              0.5345
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.8745,
+              0.307,
+              0.0515
+            ],
+            "max": [
+              -0.4855,
+              0.326,
+              0.3077
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "storage_front": "Three-drawer pedestal added by detailed render builder; native box builder represents only table top and legs."
+    },
+    {
+      "id": "study-adult-desk",
+      "room": "study-game",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.4,
+        0.7
+      ],
+      "planned_height_m": 0.75,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.75
+      ],
+      "world_plan_bounds_m": [
+        4.6,
+        -24.491,
+        6.0,
+        -23.791
+      ],
+      "centre_m": [
+        5.3,
+        -24.141
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._desk",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "adult work desk (one adult most days) under the high window; plain wall behind for calls",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.6745,
+              0.307,
+              0.5375
+            ],
+            "max": [
+              -0.2995,
+              0.326,
+              0.6965
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.6745,
+              0.307,
+              0.3107
+            ],
+            "max": [
+              -0.2995,
+              0.326,
+              0.5345
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.6745,
+              0.307,
+              0.0515
+            ],
+            "max": [
+              -0.2995,
+              0.326,
+              0.3077
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "storage_front": "Three-drawer pedestal added by detailed render builder; native box builder represents only table top and legs."
+    },
+    {
+      "id": "study-tv",
+      "room": "study-game",
+      "level": "GF",
+      "type": "tv_unit",
+      "planned_footprint_m": [
+        1.6,
+        0.45
+      ],
+      "planned_height_m": 0.5,
+      "height_range_in_authored_box_builder_m": [
+        0.1,
+        0.5
+      ],
+      "world_plan_bounds_m": [
+        8.727,
+        -26.2,
+        9.177,
+        -24.6
+      ],
+      "centre_m": [
+        8.952,
+        -25.4
+      ],
+      "rotation_degrees": 90,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._cabinet(floating=True)",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "gaming / TV on the bathroom wall",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.7835,
+              0.194,
+              0.1165
+            ],
+            "max": [
+              -0.283167,
+              0.213,
+              0.4835
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              -0.250167,
+              0.194,
+              0.1165
+            ],
+            "max": [
+              0.250167,
+              0.213,
+              0.4835
+            ]
+          }
+        },
+        {
+          "part": "front",
+          "local_bounds_m": {
+            "min": [
+              0.283167,
+              0.194,
+              0.1165
+            ],
+            "max": [
+              0.7835,
+              0.213,
+              0.4835
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "mounting": "Wall-hung cabinet: bottom 0.100 m, top 0.500 m; screen above excluded from storage height. Floor-standing candidate requires a reviewed mounting decision."
+    },
+    {
+      "id": "fb-basin",
+      "room": "family-bath",
+      "level": "GF",
+      "type": "washbasin",
+      "planned_footprint_m": [
+        0.43,
+        0.45
+      ],
+      "planned_height_m": 0.85,
+      "height_range_in_authored_box_builder_m": [
+        0.35,
+        0.85
+      ],
+      "world_plan_bounds_m": [
+        9.277,
+        -25.901,
+        9.727,
+        -25.471
+      ],
+      "centre_m": [
+        9.502,
+        -25.686
+      ],
+      "rotation_degrees": -90,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._washbasin",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "compact basin beside the WC",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "storage_front": "Basin vanity front in render builder; sanitary basin occupies top. Retain service locations."
+    },
+    {
+      "id": "ka-desk-1",
+      "room": "kids-a",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.1,
+        0.6
+      ],
+      "planned_height_m": 0.75,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.75
+      ],
+      "world_plan_bounds_m": [
+        12.62,
+        -24.391,
+        13.72,
+        -23.791
+      ],
+      "centre_m": [
+        13.17,
+        -24.091
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._desk",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "desk, girl 1",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5245,
+              0.257,
+              0.5375
+            ],
+            "max": [
+              -0.2365,
+              0.276,
+              0.6965
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5245,
+              0.257,
+              0.3107
+            ],
+            "max": [
+              -0.2365,
+              0.276,
+              0.5345
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5245,
+              0.257,
+              0.0515
+            ],
+            "max": [
+              -0.2365,
+              0.276,
+              0.3077
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "storage_front": "Three-drawer pedestal added by detailed render builder; native box builder represents only table top and legs."
+    },
+    {
+      "id": "ka-desk-2",
+      "room": "kids-a",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.1,
+        0.6
+      ],
+      "planned_height_m": 0.75,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.75
+      ],
+      "world_plan_bounds_m": [
+        13.76,
+        -24.391,
+        14.86,
+        -23.791
+      ],
+      "centre_m": [
+        14.31,
+        -24.091
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._desk",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "desk, girl 2",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5245,
+              0.257,
+              0.5375
+            ],
+            "max": [
+              -0.2365,
+              0.276,
+              0.6965
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5245,
+              0.257,
+              0.3107
+            ],
+            "max": [
+              -0.2365,
+              0.276,
+              0.5345
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5245,
+              0.257,
+              0.0515
+            ],
+            "max": [
+              -0.2365,
+              0.276,
+              0.3077
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "storage_front": "Three-drawer pedestal added by detailed render builder; native box builder represents only table top and legs."
+    },
+    {
+      "id": "ka-wardrobe",
+      "room": "kids-a",
+      "level": "GF",
+      "type": "wardrobe",
+      "planned_footprint_m": [
+        1.5,
+        0.6
+      ],
+      "planned_height_m": 2.2,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.2
+      ],
+      "world_plan_bounds_m": [
+        14.302,
+        -27.301,
+        14.902,
+        -25.801
+      ],
+      "centre_m": [
+        14.602,
+        -26.551
+      ],
+      "rotation_degrees": 90,
+      "procedural_builder": "archpipe.furniture._build_wardrobe",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "1.5 m wardrobe",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "door_left",
+          "local_bounds_m": {
+            "min": [
+              -0.727,
+              0.267,
+              0.12
+            ],
+            "max": [
+              -0.005,
+              0.285,
+              2.162
+            ]
+          }
+        },
+        {
+          "part": "door_right",
+          "local_bounds_m": {
+            "min": [
+              0.005,
+              0.267,
+              0.12
+            ],
+            "max": [
+              0.727,
+              0.285,
+              2.162
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance."
+    },
+    {
+      "id": "kb-desk",
+      "room": "kids-b",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.2,
+        0.6
+      ],
+      "planned_height_m": 0.75,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.75
+      ],
+      "world_plan_bounds_m": [
+        17.05,
+        -24.391,
+        18.25,
+        -23.791
+      ],
+      "centre_m": [
+        17.65,
+        -24.091
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._desk",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "desk under the window",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5745,
+              0.257,
+              0.5375
+            ],
+            "max": [
+              -0.2575,
+              0.276,
+              0.6965
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5745,
+              0.257,
+              0.3107
+            ],
+            "max": [
+              -0.2575,
+              0.276,
+              0.5345
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.5745,
+              0.257,
+              0.0515
+            ],
+            "max": [
+              -0.2575,
+              0.276,
+              0.3077
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "storage_front": "Three-drawer pedestal added by detailed render builder; native box builder represents only table top and legs."
+    },
+    {
+      "id": "kb-wardrobe",
+      "room": "kids-b",
+      "level": "GF",
+      "type": "wardrobe",
+      "planned_footprint_m": [
+        1.177,
+        0.6
+      ],
+      "planned_height_m": 2.2,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.2
+      ],
+      "world_plan_bounds_m": [
+        17.1995,
+        -27.321,
+        18.3765,
+        -26.721
+      ],
+      "centre_m": [
+        17.788,
+        -27.021
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.furniture._build_wardrobe",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "wardrobe beside the door",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "door_left",
+          "local_bounds_m": {
+            "min": [
+              -0.5655,
+              0.267,
+              0.12
+            ],
+            "max": [
+              -0.005,
+              0.285,
+              2.162
+            ]
+          }
+        },
+        {
+          "part": "door_right",
+          "local_bounds_m": {
+            "min": [
+              0.005,
+              0.267,
+              0.12
+            ],
+            "max": [
+              0.5655,
+              0.285,
+              2.162
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance."
+    },
+    {
+      "id": "pb-bedside",
+      "room": "parents-bed",
+      "level": "GF",
+      "type": "bedside_table",
+      "planned_footprint_m": [
+        0.35,
+        0.4
+      ],
+      "planned_height_m": 0.55,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.55
+      ],
+      "world_plan_bounds_m": [
+        21.13,
+        -26.591,
+        21.48,
+        -26.191
+      ],
+      "centre_m": [
+        21.305,
+        -26.391
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.furniture._build_bedside_table",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "slim 0.35 m bedside in zone a, clear of the dressing door opening (a 0.5 m one stood 0.23 m in it); the other side has a wall shelf so the way in from the entry stays clear",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "drawer_top",
+          "local_bounds_m": {
+            "min": [
+              -0.122,
+              0.132,
+              0.296
+            ],
+            "max": [
+              0.122,
+              0.146,
+              0.502
+            ]
+          }
+        },
+        {
+          "part": "drawer_bottom",
+          "local_bounds_m": {
+            "min": [
+              -0.122,
+              0.132,
+              0.075
+            ],
+            "max": [
+              0.122,
+              0.146,
+              0.281
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance."
+    },
+    {
+      "id": "pb-vanity",
+      "room": "parents-bed",
+      "level": "GF",
+      "type": "desk",
+      "planned_footprint_m": [
+        1.0,
+        0.4
+      ],
+      "planned_height_m": 0.75,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        0.75
+      ],
+      "world_plan_bounds_m": [
+        21.997,
+        -25.3,
+        22.397,
+        -24.3
+      ],
+      "centre_m": [
+        22.197,
+        -24.8
+      ],
+      "rotation_degrees": 90,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._desk",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "loose_furniture",
+      "classification_basis": "Generic replaceable furniture appearance; classification inferred from authored use/builder, not a product specification.",
+      "planned_purpose": "vanity / dressing table at the garden window (answers), clear of the bed zone",
+      "modules": [],
+      "front_parts": [
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.4745,
+              0.157,
+              0.5375
+            ],
+            "max": [
+              -0.2155,
+              0.176,
+              0.6965
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.4745,
+              0.157,
+              0.3107
+            ],
+            "max": [
+              -0.2155,
+              0.176,
+              0.5345
+            ]
+          }
+        },
+        {
+          "part": "drawer",
+          "local_bounds_m": {
+            "min": [
+              -0.4745,
+              0.157,
+              0.0515
+            ],
+            "max": [
+              -0.2155,
+              0.176,
+              0.3077
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Conditional exact-envelope candidate intake and neutral in-room review; keep procedural pending acceptance.",
+      "storage_front": "Three-drawer pedestal added by detailed render builder; native box builder represents only table top and legs."
+    },
+    {
+      "id": "pd-hang-1",
+      "room": "parents-dressing",
+      "level": "GF",
+      "type": "wardrobe",
+      "planned_footprint_m": [
+        1.72,
+        0.6
+      ],
+      "planned_height_m": 2.3,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.3
+      ],
+      "world_plan_bounds_m": [
+        19.627,
+        -27.291,
+        21.347,
+        -26.691
+      ],
+      "centre_m": [
+        20.487,
+        -26.991
+      ],
+      "rotation_degrees": 180,
+      "procedural_builder": "archpipe.concept.villa_furnish3d.body",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "hanging along the bedroom wall, up to the bedroom door",
+      "modules": [
+        [
+          "long-hang",
+          0.65
+        ],
+        [
+          "double-hang",
+          0.45
+        ],
+        [
+          "drawers",
+          0.42
+        ],
+        [
+          "hat-shelf",
+          0.2
+        ]
+      ],
+      "front_parts": [
+        {
+          "part": "drawer-lingerie",
+          "local_bounds_m": {
+            "min": [
+              0.26000000000000206,
+              -0.27999999999999997,
+              0.11
+            ],
+            "max": [
+              0.640000000000002,
+              0.3,
+              0.34
+            ]
+          }
+        },
+        {
+          "part": "drawer-headscarves",
+          "local_bounds_m": {
+            "min": [
+              0.26000000000000206,
+              -0.27999999999999997,
+              0.36
+            ],
+            "max": [
+              0.640000000000002,
+              0.3,
+              0.59
+            ]
+          }
+        },
+        {
+          "part": "drawer-pyjamas",
+          "local_bounds_m": {
+            "min": [
+              0.26000000000000206,
+              -0.27999999999999997,
+              0.61
+            ],
+            "max": [
+              0.640000000000002,
+              0.3,
+              0.84
+            ]
+          }
+        },
+        {
+          "part": "drawer-sleepwear",
+          "local_bounds_m": {
+            "min": [
+              0.26000000000000206,
+              -0.27999999999999997,
+              0.86
+            ],
+            "max": [
+              0.640000000000002,
+              0.3,
+              1.09
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "drawers": [
+        "lingerie",
+        "headscarves",
+        "pyjamas",
+        "sleepwear"
+      ],
+      "top_boxes_above_m": 2.1,
+      "hanger_storage": true,
+      "render_front_detail": "villa_render._details adds drawer fronts under dress-<partner>-module-<index>-front-<index>; same unit, not another cabinet."
+    },
+    {
+      "id": "pd-hang-2",
+      "room": "parents-dressing-ext",
+      "level": "GF",
+      "type": "wardrobe",
+      "planned_footprint_m": [
+        1.346,
+        0.6
+      ],
+      "planned_height_m": 2.3,
+      "height_range_in_authored_box_builder_m": [
+        0,
+        2.3
+      ],
+      "world_plan_bounds_m": [
+        19.854,
+        -28.831,
+        21.2,
+        -28.231
+      ],
+      "centre_m": [
+        20.527,
+        -28.531
+      ],
+      "rotation_degrees": 0,
+      "procedural_builder": "archpipe.concept.villa_furnish3d.body",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "his dedicated hanging, trousers, drawers and shelves up to the ensuite door",
+      "modules": [
+        [
+          "double-hang",
+          0.55
+        ],
+        [
+          "trousers-pullout",
+          0.25
+        ],
+        [
+          "drawers",
+          0.35
+        ],
+        [
+          "shelves",
+          0.196
+        ]
+      ],
+      "front_parts": [
+        {
+          "part": "drawer-socks",
+          "local_bounds_m": {
+            "min": [
+              0.14699999999999966,
+              -0.27999999999999997,
+              0.11
+            ],
+            "max": [
+              0.45699999999999963,
+              0.3,
+              0.34
+            ]
+          }
+        },
+        {
+          "part": "drawer-underwear",
+          "local_bounds_m": {
+            "min": [
+              0.14699999999999966,
+              -0.27999999999999997,
+              0.36
+            ],
+            "max": [
+              0.45699999999999963,
+              0.3,
+              0.59
+            ]
+          }
+        },
+        {
+          "part": "drawer-T-shirts",
+          "local_bounds_m": {
+            "min": [
+              0.14699999999999966,
+              -0.27999999999999997,
+              0.61
+            ],
+            "max": [
+              0.45699999999999963,
+              0.3,
+              0.84
+            ]
+          }
+        },
+        {
+          "part": "drawer-sportswear",
+          "local_bounds_m": {
+            "min": [
+              0.14699999999999966,
+              -0.27999999999999997,
+              0.86
+            ],
+            "max": [
+              0.45699999999999963,
+              0.3,
+              1.09
+            ]
+          }
+        },
+        {
+          "part": "drawer-pyjamas",
+          "local_bounds_m": {
+            "min": [
+              0.14699999999999966,
+              -0.27999999999999997,
+              1.11
+            ],
+            "max": [
+              0.45699999999999963,
+              0.3,
+              1.34
+            ]
+          }
+        },
+        {
+          "part": "drawer-sleepwear",
+          "local_bounds_m": {
+            "min": [
+              0.14699999999999966,
+              -0.27999999999999997,
+              1.36
+            ],
+            "max": [
+              0.45699999999999963,
+              0.3,
+              1.59
+            ]
+          }
+        }
+      ],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "drawers": [
+        "socks",
+        "underwear",
+        "T-shirts",
+        "sportswear",
+        "pyjamas",
+        "sleepwear"
+      ],
+      "top_boxes_above_m": 2.1,
+      "hanger_storage": true,
+      "render_front_detail": "villa_render._details adds drawer fronts under dress-<partner>-module-<index>-front-<index>; same unit, not another cabinet."
+    },
+    {
+      "id": "pe-basin",
+      "room": "parents-ensuite",
+      "level": "GF",
+      "type": "washbasin",
+      "planned_footprint_m": [
+        0.6,
+        0.5
+      ],
+      "planned_height_m": 0.85,
+      "height_range_in_authored_box_builder_m": [
+        0.35,
+        0.85
+      ],
+      "world_plan_bounds_m": [
+        19.804,
+        -29.581,
+        20.304,
+        -28.981
+      ],
+      "centre_m": [
+        20.054,
+        -29.281
+      ],
+      "rotation_degrees": -90,
+      "procedural_builder": "archpipe.concept.villa_furniture_detail._washbasin",
+      "native_model_builder": "archpipe.concept.villa_furnish3d.body / spec",
+      "classification": "built_in_joinery",
+      "classification_basis": "Wall/site/soffit/custom-module or service-bound joinery; retain exact authored geometry.",
+      "planned_purpose": "single basin: with the ensuite 0.21 m shorter for the dressing, a double basin zone reaches the bath",
+      "modules": [],
+      "front_parts": [],
+      "front_evidence": "Computed from named procedural render components where available; no native Revit read-back or external-model measurement performed.",
+      "replacement_policy": "Keep procedural unless every envelope, module, front, mount, finish and service relationship matches exactly.",
+      "storage_front": "Basin vanity front in render builder; sanitary basin occupies top. Retain service locations."
+    }
+  ],
+  "counts": {
+    "total": 32,
+    "by_classification": {
+      "loose_furniture": 13,
+      "built_in_joinery": 19
+    }
+  },
+  "coordinate_definitions": {
+    "planned_footprint_m": "Local width across front, then depth; rotation applied separately.",
+    "world_plan_bounds_m": "Minimum X, minimum Y, maximum X, maximum Y in authored Revit project plan axes.",
+    "front_parts": "Named procedural front components, indexed by array order. Bounds are minimum and maximum local X/right, Y/front, Z/up, in metres above finished floor.",
+    "level": "B is basement; GF is ground floor.",
+    "rotation_degrees": "0 faces +Y; 180 faces -Y; -90 faces +X; 90 faces -X."
+  },
+  "inventory_limits": "Authored furnishing data and procedural render components only; planned heights are not measured native-model acceptance. Service fronts remain part of their parent run. No unlisted chest of drawers or standalone parents-bedroom wardrobe was invented.",
+  "excluded_furnishing_ids": [
+    {
+      "id": "lounge-sofa",
+      "type": "sofa_4seat",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "lounge-coffee",
+      "type": "coffee_table",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "lounge-armchair",
+      "type": "armchair",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "dining-table",
+      "type": "dining_6x",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "living-sofa",
+      "type": "sofa_3seat",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "living-coffee",
+      "type": "coffee_table",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "living-chair-1",
+      "type": "armchair",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "living-chair-2",
+      "type": "armchair",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "cinema-tv",
+      "type": "screen",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "cinema-sofa",
+      "type": "sofa_2seat",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "gwc-wc",
+      "type": "wc",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "gwc-shower",
+      "type": "shower_walkin",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "study-sofa",
+      "type": "sofa_2seat",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "fb-shower",
+      "type": "shower_walkin",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "fb-wc",
+      "type": "wc",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "ka-bunk",
+      "type": "bed_single",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "kb-bed",
+      "type": "bed_small_double",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "pb-bed",
+      "type": "bed_double",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "pe-wc",
+      "type": "wc",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    },
+    {
+      "id": "pe-bath",
+      "type": "bath",
+      "reason": "No authored storage/dressing use or drawer front in furnishing builders"
+    }
+  ],
+  "candidates": [
+    {
+      "uid": "0999a8a70ed040c6afa8388ee4ffe923",
+      "url": "https://sketchfab.com/3d-models/0999a8a70ed040c6afa8388ee4ffe923",
+      "name": "Modern Closet / Wardrobe / Dresser Cabinet",
+      "author": "AlyStation",
+      "author_username": "alyxyuu",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/0999a8a70ed040c6afa8388ee4ffe923",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:00.345795+00:00",
+        "sha256": "78b3c914f9585b57a1ed8cb1c1699103958ace3e28201aa92339bb410e51dd52"
+      },
+      "target_ids": [
+        "ka-wardrobe",
+        "kb-wardrobe"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/0999a8a70ed040c6afa8388ee4ffe923/thumbnails/16e89c7d01d64955ab78242291a5c634/5c6a615ae7004d679049029afc3e4304.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Primary kids lead: light timber appearance, two doors and two lower drawers; author describes separately grouped moving fronts.",
+      "reservations": "No stated dimensions. Open and closed versions appear together in thumbnail: verify they are alternate poses/meshes, not inseparable duplicate wardrobes.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "48bd85b39d2b4c03901d50ab7b65d571",
+      "url": "https://sketchfab.com/3d-models/48bd85b39d2b4c03901d50ab7b65d571",
+      "name": "Sala 120ワードローブ OAK",
+      "author": "classe-saga",
+      "author_username": "classe-saga",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/48bd85b39d2b4c03901d50ab7b65d571",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:04.373436+00:00",
+        "sha256": "f88f0081f8c22b9e74243db730e0a73405d7b0287cebffbda34d839fcd5bae68"
+      },
+      "target_ids": [
+        "kb-wardrobe",
+        "ka-wardrobe"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/48bd85b39d2b4c03901d50ab7b65d571/thumbnails/5f6006a922e74b55a7bbaad2ad4a09c1/266bb08ff642410fae168fc0d9fcf550.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Oak-labelled, simple sliding-front wardrobe; Kids B width is 1.177 m, making the Sala 120 name worth checking with the manufacturer.",
+      "reservations": "120 in title has no declared unit or dimension meaning. No depth/height stated. Do not assume 1.20 m width, resize built-in joinery, or claim exact fit.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "c5046eb689a54bf0b899b054abc13dc6",
+      "url": "https://sketchfab.com/3d-models/c5046eb689a54bf0b899b054abc13dc6",
+      "name": "jonah_bedside_table_oak_and_brass",
+      "author": "Ha Van",
+      "author_username": "nganha2169",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/c5046eb689a54bf0b899b054abc13dc6",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:52.938719+00:00",
+        "sha256": "48c88ea5f16a32f377a1c7df3c117264f75b00507ce60b665cbdaffebd0ab6b4"
+      },
+      "target_ids": [
+        "pb-bedside"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/c5046eb689a54bf0b899b054abc13dc6/thumbnails/13598ea3bd4f406ab3dfba5d14c906a7/761e82f5e2ca44a3837d39884d255090.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Oak/brass-labelled two-drawer nightstand with restrained straight fronts, closer to warm luxury minimalism than ornate alternatives.",
+      "reservations": "No dimensions; must fit 0.350 by 0.400 by 0.550 m. Re-upload author differs from MADE.COM originals, which are noncommercial: platform CC-BY label does not establish rights to the original; quarantine pending provenance confirmation. Oak rather than requested walnut.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "ba32c03d924943c982ece9043e9ae9cb",
+      "url": "https://sketchfab.com/3d-models/ba32c03d924943c982ece9043e9ae9cb",
+      "name": "Bedside table",
+      "author": "patriciu",
+      "author_username": "patriciu",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/ba32c03d924943c982ece9043e9ae9cb",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:05.669462+00:00",
+        "sha256": "9e9a28cbfe1c16680a5db6e5e4df4f9164dceaff3871cbeeda843a87c295caff"
+      },
+      "target_ids": [
+        "pb-bedside"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/ba32c03d924943c982ece9043e9ae9cb/thumbnails/413a388c53e446718e7c0efba9b17033/c3d03ba0b6eb4cdf8c591475cf205e9c.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Round two-drawer timber bedside can serve as a shape alternate after exact-envelope screening.",
+      "reservations": "Walnut/brass not established; curved form is a style reserve. No dimensions and likely wider than the slim bedside; do not enlarge layout.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "79138881b94547a4b42bb242b0094308",
+      "url": "https://sketchfab.com/3d-models/79138881b94547a4b42bb242b0094308",
+      "name": "Dressing table",
+      "author": "kochut_wood",
+      "author_username": "kochut_wood",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/79138881b94547a4b42bb242b0094308",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:07.154200+00:00",
+        "sha256": "06a60414187e6287884300c09bf922945f3f899b9c7dafbcd87e911936e21575"
+      },
+      "target_ids": [
+        "pb-vanity"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/79138881b94547a4b42bb242b0094308/thumbnails/50c398b7471a40819f46211cc2577ece/7d887dfda2dd4d66be58248f5f3c53b9.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Timber dressing table with drawer pedestal and mirror; manufacturer-like author and simpler form than historical vanity listings.",
+      "reservations": "Light timber rather than verified walnut/brass. No dimensions; mirror is additional geometry requiring visibility, mount and window checks; preserve 1.000 by 0.400 by 0.750 m table envelope.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "5577bdb9323f48458472742acab745d9",
+      "url": "https://sketchfab.com/3d-models/5577bdb9323f48458472742acab745d9",
+      "name": "Free Modular TV Cabinet – Mid Century",
+      "author": "Viksell",
+      "author_username": "Viksell",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/5577bdb9323f48458472742acab745d9",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:08.587279+00:00",
+        "sha256": "5d8281d2466223d22109ab6b09166f1fa7e0f9a13d44ecdc2345ca04da582aaa"
+      },
+      "target_ids": [
+        "study-tv",
+        "lounge-tv"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/5577bdb9323f48458472742acab745d9/thumbnails/6ee4bc78c0d44d679e1636ef79f7588c/87ad552984ac457daec4ba414dc9538d.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Primary media lead: explicitly mid-century, wooden, modular cabinet with separate visible door forms.",
+      "reservations": "No sizes. Both D1 cabinets are wall-hung; source appears foot-supported, so exact mounting and envelope must be resolved without automatic conversion.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "9ef2d89128e44bdaa018ee9fb058a118",
+      "url": "https://sketchfab.com/3d-models/9ef2d89128e44bdaa018ee9fb058a118",
+      "name": "Walnut Console",
+      "author": "neverstopbuilding",
+      "author_username": "neverstopbuilding",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/9ef2d89128e44bdaa018ee9fb058a118",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:10.073079+00:00",
+        "sha256": "2af91ccdfeb9aea4d168ddb09750fa6cf08866ce0321d580c4393d385d3aed3d"
+      },
+      "target_ids": [
+        "study-tv",
+        "lounge-tv"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/9ef2d89128e44bdaa018ee9fb058a118/thumbnails/e915eec85e2e46399a2b7879b9feda8e/0344f21d2f804d6382f6cc628124f203.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Walnut two-door console with slatted electronics fronts; mid-century study and warm lounge appearance.",
+      "reservations": "No sizes; floor-standing legs conflict with wall-hung design. Treat as appearance reserve, not a drop-in cabinet.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "3028ba44d1f245b886c12eadc934f722",
+      "url": "https://sketchfab.com/3d-models/3028ba44d1f245b886c12eadc934f722",
+      "name": "Mid Century Teak Sideboard Credenza",
+      "author": "calebkung",
+      "author_username": "calebkung",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/3028ba44d1f245b886c12eadc934f722",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:11.449585+00:00",
+        "sha256": "1ac6d69b08fe9c0fe8db7fd64bb20a53764829f0e211c1649ed8232f22c2e20b"
+      },
+      "target_ids": [
+        "dining-sideboard",
+        "study-tv"
+      ],
+      "stated_dimensions": {
+        "text": "1350mml x ~360mmw x ~635mmh",
+        "kind": "overall; interpreting l as long dimension, w as depth, h as height",
+        "width_depth_height_m": [
+          1.35,
+          0.36,
+          0.635
+        ]
+      },
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/3028ba44d1f245b886c12eadc934f722/thumbnails/f7d13c50ed5745709ab61b804cf511a1/4af6678d25a14127971421893e4780b2.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Dimensioned mid-century teak sideboard; drawers and doors visible. Useful compact shape reserve for serving/media storage.",
+      "reservations": "Stated width 1.350 m exceeds dining width 1.200 m by 150 mm, so fails unchanged-size dining fit; depth/height also differ. Study wall-hung mounting differs. Do not scale or change the design without a separate decision.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "65c10ad6cc1d4e7fae698334ee32ea89",
+      "url": "https://sketchfab.com/3d-models/65c10ad6cc1d4e7fae698334ee32ea89",
+      "name": "Mid Century Cabinet",
+      "author": "GreekmythTR",
+      "author_username": "GreekmythTR",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/65c10ad6cc1d4e7fae698334ee32ea89",
+        "status": 200,
+        "checked_at": "2026-10-12T05:39:13.974444+00:00",
+        "sha256": "1ca00676bb7540d97172bd89718f3ebc1b4086d2e35beacfc7fefb8195735d94"
+      },
+      "target_ids": [
+        "dining-sideboard"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/65c10ad6cc1d4e7fae698334ee32ea89/thumbnails/23b84935194b4d508286c0647cc933ee/ed1e645190ff4786b37a5d379a109d87.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Compact mid-century door/drawer cabinet is an alternate to the oversized dimensioned credenza.",
+      "reservations": "No dimensions; warm timber rather than confirmed walnut. Legs and drop-down door motion require actual support and front clearance measurements.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "c51054964ac04d958a90b75c81b86347",
+      "url": "https://sketchfab.com/3d-models/c51054964ac04d958a90b75c81b86347",
+      "name": "Modern Wooden Desk with Drawer | 3D Model",
+      "author": "Hassan Arts",
+      "author_username": "hassanarts1",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/c51054964ac04d958a90b75c81b86347",
+        "status": 200,
+        "checked_at": "2026-10-12T05:42:46.137344+00:00",
+        "sha256": "a50f663e6e265a60a8e5c8b693b3436b39a6153492c8210b422f1c0985a2370a"
+      },
+      "target_ids": [
+        "ka-desk-1",
+        "ka-desk-2",
+        "kb-desk",
+        "pb-vanity",
+        "study-desk",
+        "study-adult-desk",
+        "cinema-desk"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/c51054964ac04d958a90b75c81b86347/thumbnails/7beb3d7def414a72a46484a8c06d7a12/983763313f3e401a8869ebbd8dae7215.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Oak top and one drawer, clean leg form; primary kids drawer-desk lead, style reserve elsewhere.",
+      "reservations": "No dimensions. One drawer does not preserve the existing three-drawer pedestal capacity; exact size and storage requirement must be reviewed before replacement.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "2402ee2330014244943f2c14b8627eaf",
+      "url": "https://sketchfab.com/3d-models/2402ee2330014244943f2c14b8627eaf",
+      "name": "Wood Desk-Rigged-Animated",
+      "author": "AnonimArt",
+      "author_username": "ludovicocolucci",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/2402ee2330014244943f2c14b8627eaf",
+        "status": 200,
+        "checked_at": "2026-10-12T05:42:47.942548+00:00",
+        "sha256": "2f26daebddadf0a37f18fb09859fa25e89b671987e98baf96ce0bac49a3146e8"
+      },
+      "target_ids": [
+        "ka-desk-1",
+        "ka-desk-2",
+        "kb-desk"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/2402ee2330014244943f2c14b8627eaf/thumbnails/14263954151c4e7cb12f8b630938816a/d64b5bc7b8a14a47a0e3e7ee338dd231.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Author describes oak maps and animated drawers; provides an alternate with storage geometry to inspect.",
+      "reservations": "No dimensions; green/grey cabinet details and upper shelf differ from simple light-oak room style. Animation does not prove clearance.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    },
+    {
+      "uid": "20a54670d5eb401585ae5dda4510927c",
+      "url": "https://sketchfab.com/3d-models/20a54670d5eb401585ae5dda4510927c",
+      "name": "Metal Desk",
+      "author": "Jaxim",
+      "author_username": "jaxim",
+      "licence": "CC Attribution",
+      "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+      "downloadable": true,
+      "metadata_receipt": {
+        "url": "https://api.sketchfab.com/v3/models/20a54670d5eb401585ae5dda4510927c",
+        "status": 200,
+        "checked_at": "2026-10-12T05:42:49.661493+00:00",
+        "sha256": "8057722d5d7ef6473f647b4e8c759e58861240ddf616605e9e90f811f83d4592"
+      },
+      "target_ids": [
+        "study-desk",
+        "study-adult-desk",
+        "cinema-desk"
+      ],
+      "stated_dimensions": null,
+      "source_dimensions_measured": false,
+      "thumbnail_url": "https://media.sketchfab.com/models/20a54670d5eb401585ae5dda4510927c/thumbnails/ef0f55e9f68c44f5bd28d3c6e45df547/8c12cfbef8bd401680f1af567b8533e8.jpeg",
+      "listing_thumbnail_review": "Inspected public thumbnail; geometry and scale unmeasured.",
+      "claim": "look-alike-proxy; manufacturer identity and purchasability unverified",
+      "rationale": "Explicitly mid-century drawer desk; style alternate for study storage fronts.",
+      "reservations": "Metal appearance is dark/worn rather than the current walnut desk. No sizes; no source evidence of meeting either 1.800 or 1.400 m study width.",
+      "status": "conditional_search_lead; no model downloaded; not accepted"
+    }
+  ],
+  "qualified_exact_matches_count": 0,
+  "screening_notes": [
+    {
+      "uid": "622271027c2a472eae761de10dddad5b",
+      "reason": "Published 1550 mm is one unnamed dimension; assembled open frame/doors do not establish an exact kids wardrobe."
+    },
+    {
+      "uid": "f5d363e12df34e89a701978c0979f4a4",
+      "reason": "Columpio 70 is open hanging stand, not closed wardrobe; loses requested cabinet form."
+    },
+    {
+      "licence": "CC Attribution-NonCommercial",
+      "reason": "MADE.COM walnut Fonteyn vanity and original Jonah brass/oak nightstands excluded; no CC-BY substitution of original rights."
+    }
+  ],
+  "recommendation": "Retain all built-in joinery. Prioritize AlyStation kids wardrobe and Viksell study media metadata; all loose units still require dimensions, source rights, exact-envelope measurement, front-motion and neutral-room review.",
+  "search_sample_count": 341
+}
