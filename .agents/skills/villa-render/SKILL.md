@@ -453,3 +453,15 @@ For measured furniture activation, bind architectural evidence by physical
 face/material and stable host data, rather than numbered export buckets or
 doorway captions. Full/empty-view export equality needs a real regression;
 actual geometry, material, visibility and finish-host changes still refuse.
+### Dressing contents (C3 garments package)
+
+Use [the dressing workflow](../../../docs/ops/garments.md) for closed procedural
+rail, shelf, drawer and top-box contents. Derive counts from measured rails,
+keep the broad garment axis perpendicular to the rail, label unsourced drops,
+pitch and colours ASSUMED, and preserve the sourced rail-to-hem datum.
+`garments.contents_findings` must run on final live values after historical
+mounting migration. Check every named support chain and every authored slot;
+solid closure, ring count and colour variation cannot establish occupancy or
+recognisable sleeves. Inspect isolated samples with the 1.8 m reference and
+unchanged dressing cameras before integration. Closed fronts retain hidden
+contents; front-omitted drawer previews are diagnostics only.

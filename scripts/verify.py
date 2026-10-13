@@ -179,6 +179,13 @@ def main() -> int:
     imported_sibling['physical_model_meshes'] = []
     expect('C3 imported appearance without physical stand-in refuses',
            raises(ValueError, require_imported_scene, imported_sibling))
+    from archpipe.concept.garments import contents_findings
+    expect('dressing contents occupy every authored slot with closed supported physical parts',
+           not contents_findings(scene['dressing_wardrobes'], scene['meshes']))
+    import gzip
+    old_dressing = json.loads(gzip.decompress((ROOT / 'tests/fixtures/l0923-dressing-before.json.gz').read_bytes()))
+    expect('l0923 real frozen empty/proxy dressing fails physical contents check',
+           bool(contents_findings(old_dressing['wardrobes'], old_dressing['meshes'])))
     from archpipe.orientation_guard import scene_findings as orientation_findings, document_findings
     expect("client garden compass names agree with geometry", not orientation_findings(scene))
     expect("garden documents use recorded client compass names", not document_findings())

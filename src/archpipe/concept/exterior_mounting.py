@@ -153,6 +153,9 @@ def apply_lead_review(scene):
     scene['e_approved_light_movements'] = []
     for approved in authority['rows']:
         mid = approved['id']
+        from .garments import retire_historical_approval
+        if retire_historical_approval(scene, approved):
+            continue
         if mid in retired:
             if mid in rows: raise ValueError(mid + ': obsolete inward grille movement still exists')
             replacement = scene['mounting_hosts'][mid.removeprefix('host-face-')]

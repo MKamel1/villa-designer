@@ -1,0 +1,16 @@
+{
+  "schema": "garment-dimensions/1",
+  "cards": {
+    "neufert-folded-trouser-drop-900": {
+      "source_id": "neufert",
+      "edition": "2nd International English edition, 1980",
+      "locator": "Printed page 74, Figure 6, Dimensions of clothes; PDF page index 85",
+      "unit": "mm",
+      "verified_value": 900,
+      "original_page_checked": true,
+      "verification": "Original held page image re-read 2026-10-13. Men's trousers show 1300 mm full hanging and 900 mm folded hanging.",
+      "conditions": "Men's trousers folded over a hanger; full-length hanging is a different 1300 mm figure.",
+      "regression_test": "tests.test_garments.PhysicalGarments.test_folded_trouser_drop_is_the_reread_900_mm_figure"
+    }
+  }
+}
