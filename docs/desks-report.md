@@ -483,3 +483,225 @@ separate home receipt). All 38 generated adapters match after synchronization;
 No presentation images, native Revit edits or commits were made. Shared
 `assets/user` and `out/villa/round3` data were not modified. The lead owns
 the full suite and commit.
+
+### Integration 5 refresh — 2026-10-12
+
+Integration `origin/integ-5` (42602e8) is merged without a commit. The assembly
+order is furniture, parents bed, final strict authored mesh admission, final
+task-plane binding and obstruction refusal, then return. Incoming changed
+Python files compile; a malformed native Unicode literal was corrected with
+a frozen real-source regression. No native Revit run was performed on Linux.
+
+The same scope/card combined comparisons on the codex/desks baseline and
+integrated architectural inputs have **83 baseline findings and 418 candidate
+findings in both**, **zero relative failures in both**, and **0.000 mm change
+in every measured access side**. Raw row counts include multiple source parts;
+replacement acceptance compares fixed-item conflict identities rather than
+assuming row-count equality establishes a pass. Complete findings remain
+in `out/furniture-integ5/codex-desks-base-combined.json` and
+`combined-room-comparison.json`; explicit differences are in
+`measurement-deltas.json`.
+
+| Item/access | Base achieved | Integrated achieved | Required | Change |
+|---|---:|---:|---:|---:|
+| cinema-desk / front | 864.000 mm | 864.000 mm | 864 mm | 0.000 mm |
+| study-desk / front | 564.000 mm | 564.000 mm | 864 mm | 0.000 mm |
+| study-adult-desk / front | 240.000 mm | 240.000 mm | 864 mm | 0.000 mm |
+| ka-desk-1 / front | 864.000 mm | 864.000 mm | 864 mm | 0.000 mm |
+| ka-desk-2 / front | 864.000 mm | 864.000 mm | 864 mm | 0.000 mm |
+| kb-desk / front | 864.000 mm | 864.000 mm | 864 mm | 0.000 mm |
+| pb-bed / front | 750.000 mm | 750.000 mm | 750 mm | 0.000 mm |
+| pb-bed / left | 750.000 mm | 750.000 mm | 750 mm | 0.000 mm |
+| pb-bed / right | 568.000 mm | 568.000 mm | 750 mm | 0.000 mm |
+| pb-vanity / front | 864.000 mm | 864.000 mm | 864 mm | 0.000 mm |
+
+Shared-study and adult-desk shortfalls remain 300 and 624 mm respectively;
+the parents right-side bed shortfall remains 182 mm. These are inherited
+layout findings, not approval of the absolute design. Eight chairs are reviewed
+against the current measured desks; the parents bed is reviewed after all
+measured room furniture. Their fresh receipts preserve the five-millimetre
+access-loss allowance and all zero-new-conflict/boundary requirements.
+
+All 30 desk/chair images plus six parent/kids bed images were visually
+inspected: exact source textures, shape and facing remain consistent with the
+prior selections. Neutral lighting disables emissive materials, retains the
+1.8 m reference figure in isolates, and uses the unchanged v04, v06, v08, v13
+and v22 cameras. v06 still omits the second kids A desk; its fresh isolate
+was reviewed, while the old supplemental angle is not claimed as a fresh
+integrated preview. v22 retains its head/foot crop; the parent isolate shows
+the complete bed. No visible new frame distortion was found. The kids A
+procedural fallback still lacks a ladder; the rejected imports do not fix that
+visible limitation. Image hashes and judgement are bound in
+`out/furniture-integ5/preview-review.json`. Fresh evaluated procedural parents
+duvet/throw geometry is byte-identical to the prior measured baseline.
+
+The guard remains strict: room geometry/material/placement/camera and cloth
+changes refuse reuse. Task probes now bind retained imported desktop parts;
+parent reading intent retains its authored 375 mm clearance over the unchanged
+design mattress rather than reusing the native decorative pillow offset.
+Missing-source fallback restores the exact native host binding. No luminaire,
+layout, mattress target, camera or lighting target was changed.
+
+A separate imported-source PartMeshList diagnostic found **88 refusals among
+359 furniture source parts**: 68 generic rectangular classifications, 12
+zero-area-triangle records, and eight open-edge records. These are previously
+accepted immutable external source faces. They remain under the existing
+source/fit/room/import gates; the final procedural sink does not certify their
+closure. Applying the authored closed-solid contract to those imported faces
+would refuse existing selections; this outstanding contract choice was sent
+to the lead. No source face or strict tolerance was altered to hide it.
+
+### Integrated furnished lighting task measurements
+
+All **25 / 25** total-light targets are met with maintenance factor **0.8**,
+sky off, all functional layers on, 256 Cycles samples and actual imported
+furniture/cloth/props. Sensor reflectance is 0.5; illuminance is linear sensor
+radiance multiplied by pi (the circle circumference-to-diameter ratio) and
+divided by 0.5, measured 1 mm above the bound
+task plane. `lx` means lux, illuminance in lumens per square metre. Direct
+and reflected-plus-direct values are separate; these are predictions under
+authored optical assumptions, not installed measurements or glare approval.
+
+| Task | Direct achieved | Total achieved | Target |
+|---|---:|---:|---:|
+| 1. kitchen / island prep side | 1077.16 lx | 1363.66 lx | 500 lx |
+| 2. kitchen / island seating side | 837.98 lx | 1097.47 lx | 200 lx |
+| 3. kitchen / island prep side | 1033.56 lx | 1226.37 lx | 500 lx |
+| 4. kitchen / island seating side | 850.94 lx | 1115.05 lx | 200 lx |
+| 5. kitchen / island prep side | 835.45 lx | 1112.35 lx | 500 lx |
+| 6. kitchen / island seating side | 676.59 lx | 926.50 lx | 200 lx |
+| 7. kitchen / single induction zone | 1004.74 lx | 1302.14 lx | 300 lx |
+| 8. kitchen / sink | 1154.11 lx | 1348.28 lx | 300 lx |
+| 9. dining / dining table centre | 546.25 lx | 647.05 lx | 100 lx |
+| 10. dining / table end (homework) | 462.12 lx | 581.97 lx | 200 lx |
+| 11. dirty-kitchen / dirty kitchen run | 679.03 lx | 812.28 lx | 500 lx |
+| 12. study-game / study-desk | 931.58 lx | 1009.72 lx | 400 lx |
+| 13. study-game / study-adult-desk | 905.81 lx | 975.78 lx | 400 lx |
+| 14. kids-a / ka-desk-1 | 1391.48 lx | 1529.03 lx | 400 lx |
+| 15. kids-a / ka-desk-2 | 1390.37 lx | 1546.74 lx | 400 lx |
+| 16. kids-b / kb-desk | 1389.36 lx | 1502.98 lx | 400 lx |
+| 17. parents-bed / pillow | 1113.91 lx | 1190.15 lx | 200 lx |
+| 18. parents-bed / pillow | 1116.43 lx | 1175.59 lx | 200 lx |
+| 19. family-bath / fb-basin | 1337.48 lx | 1616.37 lx | 300 lx |
+| 20. parents-ensuite / pe-basin | 631.21 lx | 757.85 lx | 300 lx |
+| 21. guest-wc / gwc-basin | 1375.24 lx | 1599.46 lx | 300 lx |
+| 22. lounge / armchair | 789.70 lx | 952.53 lx | 200 lx |
+| 23. bar-alcove / daybed nook | 324.60 lx | 421.95 lx | 200 lx |
+| 24. cinema / cinema desk | 1483.93 lx | 1524.06 lx | 400 lx |
+| 25. cinema / cinema desk | 1492.44 lx | 1527.53 lx | 400 lx |
+
+Full bindings, calibrated readings and dining same-host surface-search evidence
+are in `out/furniture-integ5/lighting/lighting-measurements.json`. No lighting
+target, fixture, aiming, power, design geometry or camera was changed.
+
+### Final door-assembly correction and fresh review
+
+The first portable run correctly refused the empty-view context. Actual
+full/empty input diagnosis found camera-caption buckets changing the closure
+operation: the same 72 authored door interfaces produced 180 extra backing
+faces in the empty export. Layout, specification, furnishing, props, materials
+and all 169 scoped non-architectural rows were identical.
+
+`construction_solids.physical_door_leaves` now assembles exact connected
+computer-aided design source door bodies before closure. It keeps every
+coordinate and material; view captions hide complete leaves. It changes no
+room, furnishing, camera, fitting, target or snapshot comparison rule. All
+12 physical leaves are closed from their 72 original faces, without invented
+door backing. Actual full/empty architectural evidence is now identical:
+**7,795 faces**, hash
+`5f14a25053a6aea42f2f03ee75975d2498269756ab9eb7dc23913d447fb1b063`.
+The focused proof also covers renamed/translated sources, replay and real
+face edits. Genuine clipped sources retain the existing assumed backing;
+canonical identity follows their completed geometry so replay is idempotent.
+
+The fresh final individual and combined reviews, after this construction
+fix, retain **83 baseline and 418 candidate finding rows, zero relative
+failures and zero access changes**. All 36 fresh furniture/bed neutrals were
+inspected again, with the same original camera positions, lenses and crops.
+No new furniture distortion or orientation change was found. Newly evaluated
+procedural baseline cloth remains identical. Both strict physical-context
+receipts were regenerated only after that new review. Final evidence is in
+`out/furniture-integ5/door-fix`; earlier pre-fix/mixed-version tests and logs
+are diagnosis, not final acceptance of this fix.
+
+The imported-source closure limitation was checked again at the complete
+retained-model level, rather than treating every glTF material/semantic node
+as an independent physical body. Four Leaf desk instances pass that strict
+whole-model diagnostic. **12 complete models still refuse**: study desk,
+adult desk and parents vanity trigger the existing triangle-area guard;
+eight chairs and the parents bed trigger open/inconsistent-edge refusal.
+The earlier 68 rectangular-node classifications are not whole-model shape
+refusals. `out/furniture-integ5/whole-model-admission.json` records the actual
+model-level failures. No imported face or threshold was altered. Current
+activation retains the previously authorized immutable-source appearance
+contracts; this work **does not certify strict closed-solid admission of those
+12 imported models**. That additional requirement remains pending the lead's
+source-policy decision.
+
+### Final corrected-scene lighting rerun
+
+The fresh final default-export lighting run completes with exit 0 and meets
+**25 / 25** targets. Maintenance remains 0.8, sky off, 256 samples, zero
+bounces for direct light and sixteen for total light. No fixture, power,
+aiming, dimming, camera or target was changed. These are maintained
+illuminance predictions, with the existing optical assumptions. The following
+final readings supersede the earlier pre-correction measurement table.
+
+| Task | Direct achieved | Total achieved | Target |
+|---|---:|---:|---:|
+| 1. kitchen / island prep side | 1077.16 lx | 1362.66 lx | 500 lx |
+| 2. kitchen / island seating side | 837.98 lx | 1095.66 lx | 200 lx |
+| 3. kitchen / island prep side | 1033.56 lx | 1227.21 lx | 500 lx |
+| 4. kitchen / island seating side | 850.94 lx | 1114.29 lx | 200 lx |
+| 5. kitchen / island prep side | 835.45 lx | 1114.19 lx | 500 lx |
+| 6. kitchen / island seating side | 676.59 lx | 927.69 lx | 200 lx |
+| 7. kitchen / single induction zone | 1004.74 lx | 1305.74 lx | 300 lx |
+| 8. kitchen / sink | 1154.11 lx | 1348.39 lx | 300 lx |
+| 9. dining / dining table centre | 546.25 lx | 647.28 lx | 100 lx |
+| 10. dining / table end (homework) | 462.12 lx | 581.88 lx | 200 lx |
+| 11. dirty-kitchen / dirty kitchen run | 679.03 lx | 812.65 lx | 500 lx |
+| 12. study-game / study-desk | 931.58 lx | 1009.67 lx | 400 lx |
+| 13. study-game / study-adult-desk | 905.81 lx | 975.40 lx | 400 lx |
+| 14. kids-a / ka-desk-1 | 1391.48 lx | 1505.37 lx | 400 lx |
+| 15. kids-a / ka-desk-2 | 1390.37 lx | 1529.24 lx | 400 lx |
+| 16. kids-b / kb-desk | 1389.36 lx | 1522.41 lx | 400 lx |
+| 17. parents-bed / pillow | 1110.91 lx | 1183.50 lx | 200 lx |
+| 18. parents-bed / pillow | 1114.99 lx | 1180.05 lx | 200 lx |
+| 19. family-bath / fb-basin | 1337.48 lx | 1616.37 lx | 300 lx |
+| 20. parents-ensuite / pe-basin | 631.21 lx | 757.85 lx | 300 lx |
+| 21. guest-wc / gwc-basin | 1375.24 lx | 1599.46 lx | 300 lx |
+| 22. lounge / armchair | 789.70 lx | 952.12 lx | 200 lx |
+| 23. bar-alcove / daybed nook | 324.60 lx | 421.77 lx | 200 lx |
+| 24. cinema / cinema desk | 1483.93 lx | 1524.06 lx | 400 lx |
+| 25. cinema / cinema desk | 1492.44 lx | 1527.53 lx | 400 lx |
+
+Final full bindings and dining surface-search evidence are in
+`out/furniture-integ5/door-fix/lighting-final/lighting-measurements.json`.
+
+### Resume acceptance — 2026-10-13
+
+Fresh furniture/bed/probe/lighting/construction acceptance passes **179 tests,
+exit 0**. Portable verification passes **189 checks, exit 0**, in both normal
+and initially empty HOME (the user's home-directory environment variable).
+All 90 changed Python files compile and all 38 generated adapters are
+synchronized. The prior final render-standard/garden-view run (73 tests,
+exit 0) is retained: the saved final scene's source hash equals the current
+code, all 16 published imported-model records match that scene, and all 36
+reviewed image hashes are unchanged. No scene or snapshot input changed
+during this resume. Evidence and process exit receipts are in
+`out/furniture-integ5/resume-final/acceptance.json` and adjacent files.
+
+The final 25-point lighting measurement remains current, with **25 / 25
+targets met**. Its lowest total-light margin is the dirty-kitchen run:
+812.65 lux achieved against 500 lux required. The dining-centre meter moved
+30 mm in the negative horizontal x direction and 95 mm in the positive
+horizontal y direction on the same owning table face to clear the resting
+vase; the nominal task position and target remain unchanged. The homework
+point remained at its nominal position. Full search evidence is retained in
+the final measurement file.
+
+The kids-bed decision and exact misses are in `docs/beds-report.md`: no new
+import passed, so both procedural fallbacks remain. The unresolved strict
+closed-solid admission of **12 existing imported models** remains a separate
+open acceptance condition; passing the fit/room/preview/probe checks does not
+certify it. No source face or tolerance was changed and no commit was made.

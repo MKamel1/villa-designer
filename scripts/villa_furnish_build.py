@@ -49,7 +49,18 @@ def main(argv=None) -> int:
         sp["round3_elements"] = F3.round3_elements(sp, lay)
         (OUT / "options-spec.json").write_text(json.dumps([sp], indent=1), encoding="utf-8")
         print(OUT / "options-spec.json", len(sp["furniture"]), "elements")
-        return 0
+        from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+        stage_record = OUT / "villa-furnish-build-spec.stage-result.json"
+        inputs = [p for p in [ROOT / "spec/villa-site.yaml"] if p.is_file()]
+        write_stage_result(
+            "villa-furnish-build-spec",
+            record_path=stage_record,
+            inputs=inputs,
+            outputs=[OUT / "options-spec.json"],
+            exit_code=0,
+            metadata={"elements": len(sp["furniture"]), "passed": True},
+        )
+        return enforce_clean_verdict({"passed": True, "elements": len(sp["furniture"])}, exit_code=1)
     rb = json.loads((OUT / "readback.json").read_text(encoding="utf-8"))["options"][0]
     spec = json.loads((OUT / "options-spec.json").read_text(encoding="utf-8"))[0]
     probs = F3.postcondition(spec["furniture"], rb.get("furniture", []), lay)
@@ -60,7 +71,28 @@ def main(argv=None) -> int:
     for p in fails + probs:
         print("  FAIL", p)
     print("POST-CONDITION", "PASS" if not probs and not fails else "FAIL")
-    return 1 if probs or fails else 0
+    bad = bool(probs or fails)
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = OUT / "villa-furnish-build.stage-result.json"
+    inputs = [p for p in [OUT / "readback.json", OUT / "options-spec.json"] if p.is_file()]
+    write_stage_result(
+        "villa-furnish-build",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[],
+        exit_code=1 if bad else 0,
+        metadata={
+            "built": rb.get("built"),
+            "build_failures": len(fails),
+            "problems": probs,
+            "fails": fails,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {"passed": not bad, "problems": probs, "fails": fails, "failures": probs + fails},
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":

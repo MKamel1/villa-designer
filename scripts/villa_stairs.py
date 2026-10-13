@@ -66,10 +66,36 @@ def main(argv=None) -> int:
         print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
         return 2
     if cmd == "spec":
-        print(spec())
-        return 0
+        res_path = spec()
+        print(res_path)
+        from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+        stage_record = OUT / "villa-stairs-spec.stage-result.json"
+        write_stage_result(
+            "villa-stairs-spec",
+            record_path=stage_record,
+            inputs=[],
+            outputs=[OUT / "stairs-spec.json"],
+            exit_code=0,
+            metadata={"passed": True},
+        )
+        return enforce_clean_verdict({"passed": True}, exit_code=1)
     else:
-        return 1 if compare() else 0
+        bad = compare()
+        from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+        stage_record = OUT / "villa-stairs.stage-result.json"
+        inputs = [p for p in [OUT / "stairs-readback.json"] if p.is_file()]
+        write_stage_result(
+            "villa-stairs",
+            record_path=stage_record,
+            inputs=inputs,
+            outputs=[],
+            exit_code=1 if bad else 0,
+            metadata={"disagreements": bad, "passed": bad == 0},
+        )
+        return enforce_clean_verdict(
+            {"passed": bad == 0, "failures": [f"Clash check disagreements: {bad}"] if bad else []},
+            exit_code=1,
+        )
 
 
 if __name__ == "__main__":

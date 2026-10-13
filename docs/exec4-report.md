@@ -31,64 +31,64 @@ All migrations follow the strict fail-closed contract established in Phase 1 and
 
 The following 13 scripts have been migrated:
 
-1. [`scripts/configure_assistants.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/configure_assistants.py)
+1. [`scripts/configure_assistants.py`](../scripts/configure_assistants.py)
    - Refactored from top-level script execution into guarded `def main() -> None:`.
    - Preflight: declares input `ROOT / "scripts/archpipe_mcp.py"`.
    - All original top-level statements, variables, and assignments preserved verbatim in `main()`.
 
-2. [`scripts/cubicasa_calibrate.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/cubicasa_calibrate.py)
+2. [`scripts/cubicasa_calibrate.py`](../scripts/cubicasa_calibrate.py)
    - Preflight inside `main()`: declares output directory `a.out.parent`, required modules `["numpy", "PIL"]`.
    - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-3. [`scripts/delegate_implementation.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/delegate_implementation.py)
+3. [`scripts/delegate_implementation.py`](../scripts/delegate_implementation.py)
    - Preflight inside `main()`: declares input `args.task`.
    - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-4. [`scripts/fetch_asset_library.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/fetch_asset_library.py)
+4. [`scripts/fetch_asset_library.py`](../scripts/fetch_asset_library.py)
    - Preflight inside `main()`: declares input `ROOT / "ops/workstation/library-manifest.json"`.
    - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-5. [`scripts/fetch_families.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/fetch_families.py)
+5. [`scripts/fetch_families.py`](../scripts/fetch_families.py)
    - Preflight inside `main()`: declares output directory `a.out`.
    - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-6. [`scripts/handoff.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/handoff.py)
+6. [`scripts/handoff.py`](../scripts/handoff.py)
    - Preflight inside `main()`: declares input `a.spec`, required modules `["yaml", "shapely", "ifcopenshell", "numpy"]`.
    - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-7. [`scripts/preview_furniture_orientation.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/preview_furniture_orientation.py)
+7. [`scripts/preview_furniture_orientation.py`](../scripts/preview_furniture_orientation.py)
    - Refactored from top-level script execution into guarded `def main() -> None:`.
    - Preflight: declares input `a.scene`, required module `["PIL"]`.
    - All original top-level statements, variables, and assignments preserved verbatim in `main()`.
 
-8. [`scripts/swiss_calibrate.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/swiss_calibrate.py)
+8. [`scripts/swiss_calibrate.py`](../scripts/swiss_calibrate.py)
    - Preflight inside `main()`: declares input `a.root / "geometries.csv"`, output directory `a.out.parent`, required module `["shapely"]`.
    - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-9. [`scripts/swiss_stack_calibrate.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/swiss_stack_calibrate.py)
+9. [`scripts/swiss_stack_calibrate.py`](../scripts/swiss_stack_calibrate.py)
    - Preflight inside `main()`: declares input `a.root / "geometries.csv"`, output directory `a.out.parent`, required module `["shapely"]`.
    - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-10. [`scripts/sync_agent_assets.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/sync_agent_assets.py)
+10. [`scripts/sync_agent_assets.py`](../scripts/sync_agent_assets.py)
     - Preflight inside `main()`: declares input `ROOT / "agents/roles.json"`.
     - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-11. [`scripts/thermal_job.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/thermal_job.py)
+11. [`scripts/thermal_job.py`](../scripts/thermal_job.py)
     - Preflight inside `main()`: declares inputs `[a.input, a.epw]`, output directory `a.out`.
     - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
-12. [`scripts/villa_climate.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_climate.py)
+12. [`scripts/villa_climate.py`](../scripts/villa_climate.py)
     - Refactored from top-level script execution into guarded `def main() -> None:`.
     - Preflight: declares input `[EPW]` (when run in `run` mode), required module `["shapely"]`.
     - All original top-level statements, variables, and assignments preserved verbatim in `main()`.
 
-13. [`scripts/villa_concepts.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_concepts.py)
+13. [`scripts/villa_concepts.py`](../scripts/villa_concepts.py)
     - Preflight inside `main()`: declares output directory `OUT`, required modules `["matplotlib", "numpy"]`.
     - Catches `ContextError`, prints single preflight error message to stderr, exits 2.
 
 ## Skipped Scripts and Justification
 
-- [`scripts/products_worker.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/products_worker.py)
+- [`scripts/products_worker.py`](../scripts/products_worker.py)
   - **Boundary and Rationale**: `products_worker.py` is a specialized dual-mode worker designed to run on the remote workstation:
     - Mode `fetch`: runs under workstation Python to download assets.
     - Mode `render`: runs directly inside headless Blender via `blender -b --factory-startup -P products_worker.py -- render ...`.
@@ -106,7 +106,7 @@ For Batch B, strict discipline was maintained against `scripts/refactor_audit.py
 
 ## Tests and Proofs
 
-Extended [`tests/test_execution_context.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_execution_context.py) with 4 new tests covering the entire Batch B migration:
+Extended [`tests/test_execution_context.py`](../tests/test_execution_context.py) with 4 new tests covering the entire Batch B migration:
 
 1. `test_batch_b_scripts_call_preflight_in_main_and_not_at_module_top_level`:
    - Uses Python AST parsing to scan each of the 13 migrated scripts.
@@ -128,31 +128,31 @@ Extended [`tests/test_execution_context.py`](file:///C:/Users/mmbka/arch-pipelin
 
 ## Documentation and Learnings
 
-1. [`docs/execution-context.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/execution-context.md):
+1. [`docs/execution-context.md`](execution-context.md):
    - Updated inventory table rows for all 14 Batch B entry points (13 Shared, 1 Skipped).
    - Added subsection `### Completed Phase 2 item: Phase 2 Batch B entry points`.
    - Appended Batch B checkpoint entry to `## Checkpoint evidence`.
 
-2. [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md):
+2. [`docs/LEARNINGS.md`](LEARNINGS.md):
    - Appended a learning line to the existing `execution-context-wrong-interpreter` entry recording the Batch B migration and the Blender `-P` worker skip boundary.
 
 ## Files Changed
 
 Only the following 17 files were modified or created:
-- [`scripts/configure_assistants.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/configure_assistants.py)
-- [`scripts/cubicasa_calibrate.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/cubicasa_calibrate.py)
-- [`scripts/delegate_implementation.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/delegate_implementation.py)
-- [`scripts/fetch_asset_library.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/fetch_asset_library.py)
-- [`scripts/fetch_families.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/fetch_families.py)
-- [`scripts/handoff.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/handoff.py)
-- [`scripts/preview_furniture_orientation.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/preview_furniture_orientation.py)
-- [`scripts/swiss_calibrate.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/swiss_calibrate.py)
-- [`scripts/swiss_stack_calibrate.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/swiss_stack_calibrate.py)
-- [`scripts/sync_agent_assets.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/sync_agent_assets.py)
-- [`scripts/thermal_job.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/thermal_job.py)
-- [`scripts/villa_climate.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_climate.py)
-- [`scripts/villa_concepts.py`](file:///C:/Users/mmbka/arch-pipeline-agy/scripts/villa_concepts.py)
-- [`tests/test_execution_context.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_execution_context.py)
-- [`docs/execution-context.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/execution-context.md)
-- [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md)
-- [`docs/exec4-report.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/exec4-report.md)
+- [`scripts/configure_assistants.py`](../scripts/configure_assistants.py)
+- [`scripts/cubicasa_calibrate.py`](../scripts/cubicasa_calibrate.py)
+- [`scripts/delegate_implementation.py`](../scripts/delegate_implementation.py)
+- [`scripts/fetch_asset_library.py`](../scripts/fetch_asset_library.py)
+- [`scripts/fetch_families.py`](../scripts/fetch_families.py)
+- [`scripts/handoff.py`](../scripts/handoff.py)
+- [`scripts/preview_furniture_orientation.py`](../scripts/preview_furniture_orientation.py)
+- [`scripts/swiss_calibrate.py`](../scripts/swiss_calibrate.py)
+- [`scripts/swiss_stack_calibrate.py`](../scripts/swiss_stack_calibrate.py)
+- [`scripts/sync_agent_assets.py`](../scripts/sync_agent_assets.py)
+- [`scripts/thermal_job.py`](../scripts/thermal_job.py)
+- [`scripts/villa_climate.py`](../scripts/villa_climate.py)
+- [`scripts/villa_concepts.py`](../scripts/villa_concepts.py)
+- [`tests/test_execution_context.py`](../tests/test_execution_context.py)
+- [`docs/execution-context.md`](execution-context.md)
+- [`docs/LEARNINGS.md`](LEARNINGS.md)
+- [`docs/exec4-report.md`](exec4-report.md)

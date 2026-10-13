@@ -1333,3 +1333,126 @@ passes. Final execution results and content hashes are recorded in
 No presentation images, native Revit edits or commits were made. Shared
 `assets/user` and `out/villa/round3` data were not modified. The lead owns
 the full suite and commit.
+
+### Integration 5 and search-2 kids beds — 2026-10-12
+
+The parent bed, seven desks and eight task chairs were re-reviewed against
+integration 5; detailed room and image evidence is in `docs/desks-report.md`
+and `out/furniture-integ5`. The old and integrated same-scope combined
+reviews have 83 procedural and 418 candidate absolute finding rows each,
+zero replacement-induced failures, and zero change in every access dimension.
+Fresh evaluated procedural parent cloth is byte-identical to the old baseline.
+Fresh source-bed duvet and throw have zero crossings, enclosed vertices and
+unresolved vertices; the complete parent isolate and unchanged v22 were
+inspected. Existing crops and inherited absolute failures remain disclosed.
+
+All **13** downloaded search-2 models were copied to **new folders only** in
+`/home/omar/archpipe/assets/library/props/sf_kbed_*`, retaining original
+`scene.gltf`, buffers, textures, provenance and CC Attribution credits.
+`model.gltf` is an identical-byte importer alias; source files were not edited.
+File hashes and complete licence credits are recorded in
+`out/beds/search2/library-copy.json` and `credits.md`. These are appearance
+proxies, not verified buyable products. No existing shared-library folder,
+`assets/user` or `out/villa/round3` was modified.
+
+`measure_kids_search2.py` reproduces the source-hash checks, actual geometry
+bounds and complete connected-mattress measurements. The recipe records
+source mesh/component identities and measured vertex counts. Width and
+length factors are dimensionless design/native-size ratios after the declared
+unit conversion. glTF metres are retained; neither a huge model nor a listing
+size authorizes an inferred centimetre conversion. One vertical factor is
+computed from retained floor to the design upper top; the lower top follows
+that same factor. The unchanged kids A targets are 0.900 × 2.000 m per berth,
+with mattress tops 0.400 and 1.400 m above finished floor. The unchanged kids B
+plan is 1.200 × 2.000 m and top 0.475 m. These are authored design inputs,
+not published safety standards. Access's five-millimetre loss allowance does
+not apply to exact mattress-top identity.
+
+| Candidate | Width factor | Length factor | Plan distortion | Resulting lower / upper top | Refusal |
+|---|---:|---:|---:|---:|---|
+| neverfollow81 metal ladder bunk, 3ddab7a9 | 0.915141 | 1.050999 | 14.845567% | 0.529781 / 1.400000 m | Lower top **129.781 mm too high** |
+| filthycent metal ladder bunk, ea60847a | 1.142998 | 1.016000 | 12.499871% | 0.561213 / 1.400000 m | Lower top **161.213 mm too high** |
+| Lucia storage-stair bunk, b8fb5120 | 1.124999 | 1.000000 | 12.499934% | 0.404862 / 1.400000 m | Lower top **4.862 mm too high**; storage stairs rather than visible ladder |
+| Em3D timber bunk, e81c12b7 | 0.293412 | 0.343096 | 16.933081% | 0.537231 / 1.400000 m | Both plan factors below 0.5; distortion **1.933081 percentage points over 15%**; lower top 137.231 mm too high |
+| JustBlender wood bunk, 560110ad | 0.009456 | 0.010572 | measured in intake | 0.396297 / 1.400000 m | Both plan factors below 0.5 in declared metres; a listing overall-size claim is not a unit override |
+| JustBlender metal bunk, 7e5f290c | 0.009541 | 0.010564 | measured in intake | 0.420331 / 1.400000 m | Both plan factors below 0.5 in declared metres |
+| Bed Sweet, 8aeacdcd, kids B | 1.328701 | 0.997689 | 33.177805% | not an eligible height proposal | Distortion **18.177805 percentage points over 15%** |
+| Single wooden bed, c7bea79b, kids B | 0.208060 | 0.184821 | 12.574106% | not an eligible height proposal | Both plan factors below 0.5; distressed appearance also fails the light-oak brief |
+
+Nordi-bed (d92ab947) is the strongest light-oak appearance lead in the fresh
+opposing native previews, but its full independent mattress remains unresolved.
+The source contains separately named fabric/cover/pillow meshes, including
+partial dressed surfaces; those bounds are not substituted for a complete
+mattress. Therefore no honest millimetre miss can be reported for that
+unresolved datum. Bed Wood Oak PBR (28a8b705) repeats the prior cached UID and
+still lacks a verified naked mattress. The beige-headboard model (b5a75d2a)
+lacks an independently identified whole mattress. The remaining storage-stair
+bunk (964acad2) and toy-dressed bunk (e3f81d29) also remain unresolved at the
+complete mattress/content gate. Complete measured extents, triangles, source
+hashes and refusals for all 13 are in `measured-intake.json`.
+
+Fresh opposing native neutral images were inspected for the two numerically
+closest ladder bunks, Em3D, Lucia and Nordi. Each has a 1.8 m figure; oversized
+Em3D also has labelled close-up images without the figure, with no model scale
+change. The metal ladders are visible. Em3D's actual materials/size do not
+support the listing's compact pale-timber impression. Lucia retains its broad
+storage-stair form; Nordi reads as pale oak but its mattress remains unproved.
+No passing complete-mattress/berth-height candidate exists. Later slim-frame,
+source-cover omission, generated replacement cloth, room and activation gates
+cannot rescue that earlier failure and are not falsely marked passed.
+
+**Both kids beds retain their procedural fallbacks.** Fresh generated fallback
+bedding, isolated neutral previews and unchanged **v06 / v13** were inspected
+in `out/furniture-integ5/bed-previews`. No imported kids bed was activated.
+The procedural kids A bunk still lacks a visible ladder; retaining it does
+not claim to satisfy the requested appearance. The best ladder candidate
+misses lower height by 129.781 mm; the closer storage-stair alternative misses
+by 4.862 mm and fails the ladder brief. For kids B, Nordi's unresolved complete
+mattress is the blocking measurement; the measurable Bed Sweet misses the
+plan-distortion allowance by 18.177805 percentage points.
+
+Fresh Blender extraction of all 13 shared-library `scene.gltf` files reproduced
+**every source face and source hash exactly** against the saved work-in-progress
+extracts (`out/beds/search2/remeasure-equality.json`). No generated extract was
+hand-edited. The post-admission and actual pre-activation room-context hashes
+also match on the integrated builder (`activation-boundary.log`), so refreshing
+the receipts does not normalize away a real architectural change.
+
+The final door-assembly correction, fresh contextual neutral review and new
+snapshot publication are documented in `docs/desks-report.md`. Final images
+and room/cloth evidence are under `out/furniture-integ5/door-fix`. The same
+kids-bed refusals and exact mattress datums remain unchanged. Complete-source
+closed-solid admission still refuses the imported parents bed (and eight
+chairs); current appearance activation is not a closed-solid certificate.
+
+### Resume acceptance — 2026-10-13
+
+The search-2 decision is final for these downloads: **no imported kids bed
+qualifies; both procedural fallbacks remain active**. The immutable-source
+measurement script was rerun, reproducing the recorded refusals. The final
+kids isolates and unchanged v06 / v13 neutral images were inspected again,
+alongside the native ladder-bunk and Nordi previews. No mattress, furniture,
+camera, lighting target or source geometry was changed during this resume.
+Kids A's missing ladder remains an unmet appearance requirement.
+
+Fresh focused acceptance passes **179 tests, exit 0**, covering search-2
+datums, bed geometry/scaling/slim frames/clearance/ray precision, furniture,
+physical review context, task probes, lighting, physical door construction,
+native-script compilation and agent adapters. Portable verification passes
+**189 checks, exit 0**, with both normal and initially empty HOME (the user's
+home-directory environment variable). All **90 changed Python files**
+compile; **38 adapters** were synchronized; `git diff --check` passes.
+
+The final exported scene's source hash still matches the current code, all
+16 published furniture/parent-bed model records match that scene, and all
+36 reviewed neutral image hashes are intact. The existing final
+`test_render_standard` / `test_garden_views` run (**73 tests, exit 0**) is
+retained for that unchanged scene; it was not rerun during this resume.
+Current verification receipts and the explicit evidence-reuse record are in
+`out/furniture-integ5/resume-final/acceptance.json` and adjacent files.
+
+These successful checks do **not** close the requested strict imported-model
+admission condition: 12 existing furniture/parent-bed imports still refuse
+the complete-source closed-solid diagnostic documented in the desks report.
+That condition remains open. No commit was made; neither shared symlinked
+data directory was modified. The lead owns the full suite and commit.

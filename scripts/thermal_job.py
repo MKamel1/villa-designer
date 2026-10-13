@@ -15,6 +15,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from archpipe.execution_context import ContextError, project_context  # noqa: E402
+from archpipe.stage_result import write_stage_result, enforce_clean_verdict
+from archpipe.safe_io import save_json
 from archpipe import thermal as t  # noqa: E402
 
 
@@ -120,8 +122,26 @@ def main(argv=None) -> int:
     else:
         raise SystemExit(f"unknown kind {kind!r}")
     result.update({"kind": kind, "epw": a.epw.name, "assumptions_default": t.ASSUMPTIONS})
+    output = a.out / "thermal-results.json"
+    save_json(output, result, indent=2)
+    tools = [p for p in (a.energyplus, a.radiance) if p and p.is_file()]
+    if a.radiance and a.radiance.is_dir():
+        tools += sorted((a.radiance / "bin").glob("*"))
+        tools = [p for p in tools if p.is_file()]
+    inputs = [a.input, a.epw] + tools
+    if a.epw.with_suffix(".stat").is_file():
+        inputs.append(a.epw.with_suffix(".stat"))
+    record = write_stage_result(
+        "thermal-job", record_path=a.out / "thermal-job.stage-result.json",
+        inputs=inputs, outputs=[output] + sorted(p for p in a.out.rglob("*")
+            if p.is_file() and p != output and not p.name.endswith(".stage-result.json")),
+        expected_outputs=[output],
+        root=ROOT, code_paths=[__file__, ROOT / "src/archpipe/thermal.py"],
+        exit_code=0 if result.get("passed", True) else 1,
+        metadata={"kind": kind, "python": sys.version,
+                  "tool_hashes": {str(p): __import__("hashlib").sha256(p.read_bytes()).hexdigest() for p in tools}})
     print(json.dumps(result))
-    return 0 if result.get("passed", True) else 1
+    return enforce_clean_verdict(record, message="Thermal job validation failed")
 
 
 if __name__ == "__main__":

@@ -14,6 +14,18 @@ import tarfile
 import time
 
 
+def job_manifest(kind, params, source_id, runtime, code):
+    """Exact dependencies of one cached job; unrelated source edits allow reuse."""
+    from archpipe.worker import identity
+    common = ('src/archpipe/worker.py', 'scripts/worker_entry.py', 'requirements-worker.txt')
+    relevant = {n: v for n, v in code.items() if n in common or
+                (kind in ('render', 'probe') and n.startswith('src/archpipe/blender/')) or
+                (kind == 'radiance' and n == 'src/archpipe/radiance.py') or
+                kind in ('verify', 'lighting', 'geometry')}
+    return {'schema': 1, 'kind': kind, 'parameters': params, 'model': source_id,
+            'runtime': {**runtime, 'code': identity(relevant)}}
+
+
 def command(argv, cwd, env, label, timeout=900):
     started = time.perf_counter()
     with (cwd/(label+'.log')).open('w') as log:
@@ -49,6 +61,8 @@ def main():
     if not a.views or any(v not in ('bed','window','overview') for v in a.views):
         ap.error('Unknown camera view')
     sys.path[:0] = [str(release/'src'),str(release/'scripts')]
+    from archpipe.stage_result import write_stage_result, enforce_clean_verdict
+    from archpipe.safe_io import save_json
     from archpipe.worker import cached_job, identity, sha_file, process_lock
     installed = json.loads(Path(config['environment']).read_text())
     if installed['requirements_sha256'] != sha_file(release/'requirements-worker.txt'):
@@ -76,9 +90,15 @@ def main():
                             if p.is_file() and p.suffix in ('.cal','.tab')},
         'code':identity(code),'assets':identity(assets)}
     if a.action == 'status':
-        print(json.dumps({'passed':True,'runtime':runtime,'release':str(release),
-                         'job_count':len(list((root/'jobs').glob('*/result.json')))},indent=2))
-        return
+        report = {'passed': True, 'runtime': runtime, 'release': str(release),
+                  'job_count': len(list((root/'jobs').glob('*/result.json')))}
+        output = root / 'status.json'
+        save_json(output, report, indent=2)
+        record = write_stage_result('worker-status', record_path=root / 'worker-status.stage-result.json',
+            inputs=[root / 'worker-environment.json', Path(config['environment']), release / 'release.json'],
+            outputs=[output], root=release, code_paths=[release / n for n in code], metadata={'runtime': runtime})
+        print(json.dumps(report, indent=2))
+        return enforce_clean_verdict(record)
     data = json.loads(a.input.read_text()) if a.input else None
     source_id = identity(data) if data else None
     if data:
@@ -190,14 +210,8 @@ def main():
         kind,params = item
         # A documentation or unrelated engine edit must not discard an
         # expensive, otherwise identical render or physical benchmark.
-        common = ('src/archpipe/worker.py','scripts/worker_entry.py','requirements-worker.txt')
-        relevant = {n:v for n,v in code.items() if n in common or
-                    (kind in ('render','probe') and n.startswith('src/archpipe/blender/')) or
-                    (kind=='radiance' and n=='src/archpipe/radiance.py') or
-                    kind in ('verify','lighting','geometry')}
-        job_runtime = {**runtime,'code':identity(relevant)}
-        job_manifest = {'schema':1,'kind':kind,'parameters':params,'model':source_id,'runtime':job_runtime}
-        return cached_job(root,job_manifest,lambda folder:action(kind,params,folder))
+        manifest = job_manifest(kind, params, source_id, runtime, code)
+        return cached_job(root, manifest, lambda folder: action(kind, params, folder))
     # Timing comparisons run in isolation; concurrent jobs would corrupt them.
     if a.action == 'benchmark':
         results = [execute(item) for item in requests]
@@ -224,7 +238,19 @@ def main():
             if discrepancy>0.05:
                 report['passed']=False
         report['comparison']=comparison
-    (batch/'report.json').write_text(json.dumps(report,indent=2))
+    save_json(batch / 'report.json', report, indent=2)
+    # Record expensive completed attempts before the fallible archive step.
+    input_files = [root / 'worker-environment.json', Path(config['environment']), release / 'release.json']
+    if a.input:
+        input_files.append(a.input)
+    input_files += [release / name for name in assets]
+    artifacts = [batch / 'report.json'] + [p for r in results for p in Path(r['attempt']).rglob('*') if p.is_file()]
+    record = write_stage_result('worker-' + a.action,
+        record_path=batch / 'worker.stage-result.json', inputs=input_files, outputs=artifacts,
+        expected_outputs=[batch / 'report.json'],
+        root=release, code_paths=[release / n for n in code],
+        exit_code=0 if report['passed'] else 1,
+        metadata={'runtime': runtime, 'jobs': [r['manifest'] for r in results]})
     archive=batch/'results.tar.gz'
     with tarfile.open(archive,'w:gz') as tf:
         tf.add(batch/'report.json',arcname='report.json')
@@ -235,8 +261,15 @@ def main():
                 if p.is_file() and p.suffix!='.exr':
                     tf.add(p,arcname=r['job_id'][:16]+'/'+p.relative_to(attempt).as_posix())
     report['bundle']=str(archive)
+    record = write_stage_result('worker-' + a.action,
+        record_path=batch / 'worker.stage-result.json', inputs=input_files, outputs=artifacts + [archive],
+        expected_outputs=[batch / 'report.json', archive],
+        root=release, code_paths=[release / n for n in code],
+        exit_code=0 if report['passed'] else 1,
+        metadata={'runtime': runtime, 'jobs': [r['manifest'] for r in results]})
     print(json.dumps(report,indent=2))
+    return enforce_clean_verdict(record, message='Worker batch failed')
 
 
 if __name__=='__main__':
-    main()
+    raise SystemExit(main())

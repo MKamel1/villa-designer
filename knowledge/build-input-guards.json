@@ -99,6 +99,101 @@
         "test_stable_source_accepts_exact_bytes_and_refuses_changed_scene_or_truncation"
       ],
       "closure": "Exclude contaminated live-tree profile; no rendering or design approval"
+    },
+    {
+      "lesson_id": "lighting-rebalance-sensor-host",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "task_probe.author_bindings and bind_planes own final mesh faces after mounting",
+      "check": "task_probe.require_clear_probes; villa_render_contract.validate_scene; villa_scene.measure_lighting evaluated ray guard; scripts/verify.py; tests/blender_task_probe.py exercises Blender evaluated rays on the frozen 17 hosts and the actual vase",
+      "stage": "scene export and before lighting measurement",
+      "proof_file": "tests/test_task_probe.py",
+      "proofs": [
+        "test_all_17_real_hidden_sensors_fire_and_corrected_planes_stay_quiet",
+        "test_renamed_translated_siblings_fire_and_stay_quiet",
+        "test_surface_construction_follows_measured_top_and_refuses_missing_ownership",
+        "test_foreign_solid_and_noncentral_pixel_mutations_fire",
+        "test_source_approach_fires_without_rejecting_remote_shadows",
+        "test_stale_or_removed_host_is_refused",
+        "test_evaluated_ray_provider_checks_the_same_frozen_cases",
+        "test_invalid_binding_values_refuse_before_measurement",
+        "test_all_17_host_bindings_construct_corrected_placement_after_mounting",
+        "test_measurement_refuses_real_hidden_probe_before_accessing_blender",
+        "test_export_contract_refuses_hidden_and_missing_ownership_but_accepts_clean",
+        "test_real_evaluated_vase_obstruction_and_renamed_sibling",
+        "test_glass_solid_never_exempts_an_obstructed_probe"
+      ],
+      "closure": "Measurement ownership only; design lighting and presentation failures unchanged"
+    },
+    {
+      "lesson_id": "lighting-rebalance-covered-task-point",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "task_probe.author_bindings records the cited finite task area; resolve_surface_probes selects and records the nearest clear tested point on the same host without changing nominal targets or scene geometry",
+      "check": "villa_scene.measure_lighting validates raw ownership, resolves evaluated resting-object coverage, and checks selected raw and evaluated paths; require_clear_probes rejects unrecorded or out-of-area offsets",
+      "stage": "task binding and evaluated geometry before any sensor render",
+      "proof_file": "tests/test_task_probe.py",
+      "proofs": [
+        "test_actual_vase_search_records_nearest_same_surface_without_design_changes",
+        "test_clean_actual_homework_point_is_unchanged",
+        "test_translated_table_vase_sibling_has_same_recorded_offset",
+        "test_covered_entire_task_area_fails_and_never_searches_other_furniture",
+        "test_overhead_obstruction_missing_citation_and_outside_face_refuse",
+        "test_unrecorded_or_changed_offset_cannot_bypass_binding_guard",
+        "test_mutated_citation_does_not_poison_other_bindings"
+      ],
+      "closure": "Instrumentation rule only; all-point production measurement and existing presentation/design findings reported separately"
+    },
+    {
+      "lesson_id": "task-probe-replacement-host",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Bind contact tasks to retained imported desktop faces; reading intent to design mattress clearance; obstruction queries omit replaced procedural bodies",
+      "check": "task_probe.bind_planes and require_clear_probes",
+      "stage": "after furniture replacement and before export/measurement",
+      "proof_file": "tests/test_task_probe_models.py",
+      "proofs": [
+        "test_real_model_binding_ignores_changed_hidden_fallback_and_follows_source",
+        "test_renamed_translated_model_and_missing_semantic_datum",
+        "test_real_parent_reading_clearance_and_frozen_wrong_pillow_offset",
+        "test_missing_source_fallback_rebinds_to_exact_native_host"
+      ]
+    },
+    {
+      "lesson_id": "integration5-native-probe-escape",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Native ASCII escape uses a raw literal; compile native source without Autodesk imports",
+      "check": "native source compilation and real helper serialization",
+      "stage": "integration compile check",
+      "proof_file": "tests/test_integration5_compile.py",
+      "proofs": [
+        "test_real_helper_and_frozen_bad_escape"
+      ]
+    },
+    {
+      "lesson_id": "integration5-review-view-subset",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Assemble exact connected CAD door source faces before closure; captions affect whole-leaf hiding only",
+      "check": "construction_solids.physical_door_leaves and unchanged room_context physical hash",
+      "stage": "before shell closure and furniture review",
+      "proof_file": "tests/test_door_source_components.py",
+      "proofs": [
+        "test_real_camera_buckets_change_old_backing_but_new_physical_sources_match",
+        "test_translated_renamed_sources_and_complete_leaf_hiding",
+        "test_actual_source_geometry_change_remains_a_physical_change"
+      ]
     }
   ]
 }

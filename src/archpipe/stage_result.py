@@ -1,461 +1,285 @@
-"""Atomic stage-result contract and proof of completeness for pipeline stages.
+"""Atomic stage-result contract, shared by CPython and IronPython 2.7.
 
-Pattern: A stage reports success, or a later stage consumes an output,
-without proof that the output is complete, current, and produced by this run.
-
-Every stage writes a result record atomically (safe_io) with:
-1. Inputs' content hashes (SHA-256) and sizes.
-2. Code provenance (source hash, git HEAD, git dirty state).
-3. Outputs' content hashes (SHA-256) and sizes.
-4. Exit status (exit_code and status 'ok'/'fail').
-5. Completeness check (all expected outputs present and non-empty).
-
-A consumer must validate the record (fresh inputs, complete outputs, status ok)
-before using outputs; any mismatch fails closed with the reason.
-A script whose report says FAIL must exit non-zero (shared fail_closed helper).
-
-Quick Test:
-    from pathlib import Path
-    import tempfile
-    from archpipe.stage_result import write_stage_result, validate_stage_result
-
-    with tempfile.TemporaryDirectory() as tmp:
-        p = Path(tmp)
-        inp = p / "in.txt"
-        inp.write_text("hello", encoding="utf-8")
-        out = p / "out.txt"
-        out.write_text("world", encoding="utf-8")
-        rec = p / "stage.json"
-        res = write_stage_result("demo", record_path=rec, inputs=[inp], outputs=[out])
-        assert validate_stage_result(rec)[0] is True
+Records bind actual file inputs and outputs to source provenance. The writer
+uses safe_io and completes serialization before publishing. Native hosts use
+exactly the same schema and hashing algorithm as portable jobs.
 """
-from __future__ import annotations
-
 import hashlib
 import json
 import os
-from pathlib import Path
 import re
+import struct
 import subprocess
 import sys
 import time
-from typing import Iterable, Sequence
-
-ROOT = Path(__file__).resolve().parents[2]
 from archpipe.safe_io import load_json, save_json
 
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+try:
+    string_types = (basestring,)
+except NameError:
+    string_types = (str,)
+try:
+    missing_file_error = FileNotFoundError
+except NameError:
+    missing_file_error = IOError
 
 class StageResultError(RuntimeError):
-    """Base error for stage result contract violations."""
-
-
+    """Stage result contract violation."""
 class StaleInputError(StageResultError):
-    """Stage inputs are stale, modified, or missing."""
-
-
+    """Inputs changed or disappeared."""
 StaleStageError = StaleInputError
-
-
 class IncompleteOutputError(StageResultError):
-    """Stage outputs are missing, empty, or modified."""
-
-
+    """Output missing, empty or modified."""
 class FailedStageError(StageResultError):
-    """Stage reported failure or non-zero exit code."""
-
-
+    """Stage reported failure."""
 class CodeDriftError(StageResultError):
-    """Code provenance does not match current repository code."""
+    """Source differs from recorded provenance."""
 
 
-def digest_file(path: Path | str) -> tuple[str, int]:
-    """Return (sha256_hex, size_bytes) for a file.
+def _path(path, root=None):
+    return os.path.realpath(os.path.join(str(root), str(path))) if root is not None else os.path.realpath(str(path))
 
-    Raises FileNotFoundError if the file does not exist.
-    """
-    p = Path(path).resolve()
-    if not p.is_file():
-        raise FileNotFoundError(f"File not found: {p}")
+
+def _rel_path(path, root):
+    absolute = _path(path, root)
+    relative = os.path.relpath(absolute, str(root))
+    if relative == os.pardir or relative.startswith(os.pardir + os.sep):
+        return absolute.replace(os.sep, '/')
+    return relative.replace(os.sep, '/')
+
+
+def digest_file(path):
+    """Return the SHA-256 content digest and byte count (SHA means Secure Hash Algorithm)."""
+    resolved = _path(path)
+    if not os.path.isfile(resolved):
+        raise missing_file_error("File not found: %s" % resolved)
     h = hashlib.sha256()
     size = 0
-    with p.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
+    with open(resolved, 'rb') as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
             h.update(block)
             size += len(block)
     return h.hexdigest(), size
 
 
-def compute_code_provenance(
-    root: Path | str | None = None,
-    code_paths: Iterable[Path | str] | None = None,
-) -> dict:
-    """Identify the source and repository provenance from which a stage executes.
-
-    Follows the scene provenance hash pattern from archpipe.concept.villa_render.
-    """
-    root_path = Path(root or ROOT).resolve()
-    if code_paths is None:
-        inputs = sorted((root_path / "src/archpipe").rglob("*.py"))
-        for extra in (
-            "ops/workstation/library-manifest.json",
-            "out/villa/round3/plant-palette.json",
-            "spec/villa-site.yaml",
-            "knowledge/library.json",
-            "knowledge/projects/villa-01/brief-requirements.json",
-            "knowledge/projects/villa-01/taste.json",
-        ):
-            target = root_path / extra
-            if target.is_file():
-                inputs.append(target)
-    else:
-        inputs = []
-        for p in code_paths:
-            resolved = Path(p) if Path(p).is_absolute() else root_path / p
-            if resolved.is_file():
-                inputs.append(resolved)
-    h = hashlib.sha256()
-    for path in sorted(inputs, key=lambda p: p.relative_to(root_path).as_posix()):
-        if not path.is_file():
-            continue
-        name = path.relative_to(root_path).as_posix().encode("utf-8")
-        data = path.read_bytes()
-        h.update(len(name).to_bytes(4, "big") + name)
-        h.update(len(data).to_bytes(8, "big") + data)
-    head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root_path, capture_output=True, text=True)
-    status = subprocess.run(
-        ["git", "status", "--porcelain", "--untracked-files=no"],
-        cwd=root_path, capture_output=True, text=True,
-    )
-    return {
-        "source_hash": h.hexdigest(),
-        "git_head": head.stdout.strip() if head.returncode == 0 else None,
-        "git_dirty": bool(status.stdout.strip()) if status.returncode == 0 else None,
-    }
-
-
-def _rel_path(path: Path | str, root: Path) -> str:
-    p = Path(path).resolve()
+def _git(args, root):
     try:
-        return p.relative_to(root).as_posix()
-    except ValueError:
-        return p.as_posix()
+        process = subprocess.Popen(['git'] + args, cwd=root,
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, _ = process.communicate()
+        return stdout.decode('utf-8').strip() if process.returncode == 0 else None
+    except OSError:
+        return None
 
 
-def build_file_manifest(
-    paths: Iterable[Path | str],
-    root: Path | None = None,
-    require_exists: bool = True,
-) -> dict[str, dict]:
-    root_path = Path(root or ROOT).resolve()
-    manifest = {}
-    for p in sorted(paths, key=lambda x: str(x)):
-        resolved = Path(p) if Path(p).is_absolute() else (root_path / p).resolve()
-        key = _rel_path(resolved, root_path)
-        if not resolved.is_file():
-            if require_exists:
-                raise FileNotFoundError(f"Required artifact does not exist: {resolved}")
-            manifest[key] = {
-                "path": str(resolved),
-                "sha256": None,
-                "size_bytes": 0,
-                "exists": False,
-            }
+def compute_code_provenance(root=None, code_paths=None):
+    """Hash source names and bytes; git HEAD and dirty state are audit information."""
+    root = _path(root or ROOT)
+    if code_paths is None:
+        paths = []
+        for folder, _, names in os.walk(os.path.join(root, 'src', 'archpipe')):
+            paths.extend(os.path.join(folder, n) for n in names if n.endswith('.py'))
+        paths.extend(os.path.join(root, n) for n in (
+            'ops/workstation/library-manifest.json', 'out/villa/round3/plant-palette.json',
+            'spec/villa-site.yaml', 'knowledge/library.json',
+            'knowledge/projects/villa-01/brief-requirements.json',
+            'knowledge/projects/villa-01/taste.json'))
+    else:
+        paths = [_path(p, root) for p in code_paths]
+    h = hashlib.sha256()
+    for path in sorted(set(paths), key=lambda p: _rel_path(p, root)):
+        if not os.path.isfile(path):
             continue
-        sha, size = digest_file(resolved)
-        manifest[key] = {
-            "path": str(resolved),
-            "sha256": sha,
-            "size_bytes": size,
-            "exists": True,
-        }
+        name = _rel_path(path, root).encode('utf-8')
+        with open(path, 'rb') as stream:
+            data = stream.read()
+        h.update(struct.pack('>I', len(name)) + name)
+        h.update(struct.pack('>Q', len(data)) + data)
+    status = _git(['status', '--porcelain', '--untracked-files=no'], root)
+    return {'source_hash': h.hexdigest(), 'git_head': _git(['rev-parse', 'HEAD'], root),
+            'git_dirty': bool(status) if status is not None else None,
+            'code_paths': sorted(_rel_path(p, root) for p in set(paths) if os.path.isfile(p))}
+
+
+def build_file_manifest(paths, root=None, require_exists=True):
+    root = _path(root or ROOT)
+    manifest = {}
+    for path in sorted(paths, key=str):
+        resolved = _path(path, root)
+        exists = os.path.isfile(resolved)
+        if not exists and require_exists:
+            raise missing_file_error('Required artifact does not exist: %s' % resolved)
+        sha, size = digest_file(resolved) if exists else (None, 0)
+        manifest[_rel_path(resolved, root)] = {
+            'path': resolved, 'sha256': sha, 'size_bytes': size, 'exists': exists}
     return manifest
 
 
-def evaluate_completeness(
-    expected_outputs: Iterable[Path | str],
-    output_manifest: dict[str, dict],
-    root: Path | None = None,
-) -> dict:
-    root_path = Path(root or ROOT).resolve()
-    expected_keys = [_rel_path(p, root_path) for p in expected_outputs]
-    missing = []
-    empty = []
-    for key in expected_keys:
+def evaluate_completeness(expected_outputs, output_manifest, root=None):
+    root = _path(root or ROOT)
+    keys = [_rel_path(p, root) for p in expected_outputs]
+    missing, empty = [], []
+    for key in keys:
         info = output_manifest.get(key)
-        if not info or not info.get("exists", False):
+        if not info or not info.get('exists', False):
             missing.append(key)
-        elif (info.get("size_bytes") or 0) <= 0:
+        elif (info.get('size_bytes') or 0) <= 0:
             empty.append(key)
-    complete = len(missing) == 0 and len(empty) == 0
-    return {
-        "complete": complete,
-        "expected_outputs": expected_keys,
-        "missing_outputs": missing,
-        "empty_outputs": empty,
-    }
+    return {'complete': not missing and not empty, 'expected_outputs': keys,
+            'missing_outputs': missing, 'empty_outputs': empty}
 
 
-def write_stage_result(
-    stage: str,
-    *,
-    record_path: Path | str,
-    outputs: Iterable[Path | str],
-    inputs: Iterable[Path | str] = (),
-    expected_outputs: Iterable[Path | str] | None = None,
-    exit_code: int = 0,
-    status: str | None = None,
-    root: Path | str | None = None,
-    code_paths: Iterable[Path | str] | None = None,
-    metadata: dict | None = None,
-    started_utc: str | None = None,
-    finished_utc: str | None = None,
-) -> dict:
-    """Atomically record the completed stage result, hashes, provenance, and completeness."""
-    root_path = Path(root or ROOT).resolve()
-    target_record = Path(record_path) if Path(record_path).is_absolute() else (root_path / record_path).resolve()
-    target_record.parent.mkdir(parents=True, exist_ok=True)
-
-    # Filter out target_record itself if callers passed it in outputs;
-    # a stage result cannot record its own SHA-256 before being written to disk.
-    def _is_target_record(p: Path | str) -> bool:
-        res = Path(p) if Path(p).is_absolute() else (root_path / p).resolve()
-        return res == target_record
-
-    clean_outputs = [p for p in outputs if not _is_target_record(p)]
-    if expected_outputs is None:
-        clean_expected = clean_outputs
-    else:
-        clean_expected = [p for p in expected_outputs if not _is_target_record(p)]
-
-    input_manifest = build_file_manifest(inputs, root=root_path, require_exists=True)
-    output_manifest = build_file_manifest(clean_outputs, root=root_path, require_exists=False)
-
-    completeness = evaluate_completeness(clean_expected, output_manifest, root=root_path)
-
-    # Determine status and exit code
-    if not completeness["complete"] and exit_code == 0:
+def write_stage_result(stage, record_path, outputs, inputs=(), expected_outputs=None,
+                       exit_code=0, status=None, root=None, code_paths=None,
+                       metadata=None, started_utc=None, finished_utc=None,
+                       input_manifest=None, code_provenance=None):
+    """Publish one atomic proof. Only declared expected outputs affect completeness."""
+    root = _path(root or ROOT)
+    target = _path(record_path, root)
+    parent = os.path.dirname(target)
+    if not os.path.isdir(parent):
+        os.makedirs(parent)
+    clean_outputs = [p for p in outputs if _path(p, root) != target]
+    expected = clean_outputs if expected_outputs is None else [
+        p for p in expected_outputs if _path(p, root) != target]
+    if input_manifest is None:
+        input_manifest = build_file_manifest(inputs, root)
+    output_manifest = build_file_manifest(clean_outputs, root, require_exists=False)
+    completeness = evaluate_completeness(expected, output_manifest, root)
+    if not completeness['complete'] and exit_code == 0:
         exit_code = 1
     if status is None:
-        status = "ok" if (exit_code == 0 and completeness["complete"]) else "fail"
-    elif not completeness["complete"] and status == "ok":
-        status = "fail"
-
-    provenance = compute_code_provenance(root_path, code_paths=code_paths)
-
-    now_utc = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-    record = {
-        "_metadata": {
-            "description": f"Atomic stage result record for pipeline stage '{stage}'",
-            "structure": "stage, status, exit_code, code_provenance, inputs, outputs, completeness, metadata",
-            "total_items": len(output_manifest),
-            "last_updated": now_utc,
-        },
-        "schema": "stage-result/1",
-        "stage": stage,
-        "status": status,
-        "exit_code": exit_code,
-        "started_utc": started_utc or now_utc,
-        "finished_utc": finished_utc or now_utc,
-        "code_provenance": provenance,
-        "inputs": input_manifest,
-        "outputs": output_manifest,
-        "completeness": completeness,
-        "metadata": metadata or {},
-    }
-    save_json(target_record, record, indent=2)
+        status = 'ok' if exit_code == 0 and completeness['complete'] else 'fail'
+    elif not completeness['complete'] and status == 'ok':
+        status = 'fail'
+    now = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+    record = {'_metadata': {
+        'description': "Atomic stage result record for pipeline stage '%s'" % stage,
+        'structure': 'stage, status, exit_code, code_provenance, inputs, outputs, completeness, metadata',
+        'total_items': len(output_manifest), 'last_updated': now},
+        'schema': 'stage-result/1', 'stage': stage, 'status': status, 'exit_code': exit_code,
+        'started_utc': started_utc or now, 'finished_utc': finished_utc or now,
+        'code_provenance': code_provenance if code_provenance is not None else compute_code_provenance(root, code_paths),
+        'inputs': input_manifest, 'outputs': output_manifest,
+        'overwritten_inputs': sorted(key for key, info in input_manifest.items()
+            if key in output_manifest and info['path'] == output_manifest[key]['path']
+            and info['sha256'] != output_manifest[key]['sha256']),
+        'completeness': completeness, 'metadata': metadata or {}}
+    save_json(target, record, indent=2)
     return record
 
 
-def validate_stage_result(
-    record_or_path: dict | Path | str,
-    *,
-    root: Path | str | None = None,
-    current_inputs: Iterable[Path | str] | None = None,
-    check_code_provenance: bool = False,
-    raise_on_error: bool = True,
-) -> tuple[bool, str, dict]:
-    """Validate that a stage result is fresh, complete, and successful.
-
-    Fails closed with specific error if:
-    1. Expected outputs are missing, 0 bytes, or modified (IncompleteOutputError).
-    2. Input files have changed or are missing (StaleInputError / StaleStageError).
-    3. Code provenance changed when check_code_provenance=True (CodeDriftError).
-    4. The stage status is not 'ok' or exit_code != 0 (FailedStageError).
-    """
-    root_path = Path(root or ROOT).resolve()
-    if isinstance(record_or_path, (str, Path)):
-        rec_path = Path(record_or_path) if Path(record_or_path).is_absolute() else (root_path / record_or_path).resolve()
-        if not rec_path.is_file():
-            reason = f"Stage result record does not exist: {rec_path}"
-            if raise_on_error:
-                raise IncompleteOutputError(reason)
-            return False, reason, {}
-        record = load_json(rec_path)
+def validate_stage_result(record_or_path, root=None, current_inputs=None,
+                          check_code_provenance=False, raise_on_error=True, code_paths=None):
+    """Refuse stale results; intentional input overwrites validate as produced outputs."""
+    root = _path(root or ROOT)
+    def reject(error, reason, record):
+        if raise_on_error:
+            raise error(reason)
+        return False, reason, record
+    if not isinstance(record_or_path, dict):
+        path = _path(record_or_path, root)
+        if not os.path.isfile(path):
+            return reject(IncompleteOutputError, 'Stage result record does not exist: %s' % path, {})
+        record = load_json(path)
     else:
         record = record_or_path
-
-    stage_name = record.get("stage", "unnamed_stage")
-
-    # 1. Completeness check
-    completeness = record.get("completeness", {})
-    if not completeness.get("complete", False):
-        missing = completeness.get("missing_outputs", [])
-        empty = completeness.get("empty_outputs", [])
-        reason = f"Stage '{stage_name}' record is incomplete (missing: {missing}, empty: {empty})"
-        if raise_on_error:
-            raise IncompleteOutputError(reason)
-        return False, reason, record
-
-    outputs = record.get("outputs", {})
-    for rel_path, out_info in outputs.items():
-        expected_path = Path(out_info.get("path")) if out_info.get("path") else (root_path / rel_path)
-        if not expected_path.is_file():
-            reason = f"Stage '{stage_name}' output is missing on disk: {rel_path}"
-            if raise_on_error:
-                raise IncompleteOutputError(reason)
-            return False, reason, record
-        cur_sha, cur_size = digest_file(expected_path)
-        if cur_size == 0:
-            reason = f"Stage '{stage_name}' output is empty (0 bytes) on disk: {rel_path}"
-            if raise_on_error:
-                raise IncompleteOutputError(reason)
-            return False, reason, record
-        if cur_sha != out_info.get("sha256"):
-            reason = (
-                f"Stage '{stage_name}' output was modified on disk: {rel_path} "
-                f"(recorded SHA: {out_info.get('sha256')}, current: {cur_sha})"
-            )
-            if raise_on_error:
-                raise IncompleteOutputError(reason)
-            return False, reason, record
-
-    # 2. Input freshness check
-    inputs = record.get("inputs", {})
-    for rel_path, in_info in inputs.items():
-        inp_path = Path(in_info.get("path")) if in_info.get("path") else (root_path / rel_path)
-        if not inp_path.is_file():
-            reason = f"Stage '{stage_name}' input missing on disk: {rel_path}"
-            if raise_on_error:
-                raise StaleInputError(reason)
-            return False, reason, record
-        cur_sha, _ = digest_file(inp_path)
-        if cur_sha != in_info.get("sha256"):
-            reason = (
-                f"Stage '{stage_name}' input is stale / modified: {rel_path} "
-                f"(recorded SHA: {in_info.get('sha256')}, current: {cur_sha})"
-            )
-            if raise_on_error:
-                raise StaleInputError(reason)
-            return False, reason, record
-
-    # Check additional consumer-specified inputs if provided
+    name = record.get('stage', 'unnamed_stage')
+    complete = record.get('completeness', {})
+    if not complete.get('complete', False):
+        return reject(IncompleteOutputError,
+            "Stage '%s' record is incomplete (missing: %s, empty: %s)" % (
+                name, complete.get('missing_outputs', []), complete.get('empty_outputs', [])), record)
+    for relative, info in record.get('outputs', {}).items():
+        path = info.get('path') or _path(relative, root)
+        if not os.path.isfile(path):
+            return reject(IncompleteOutputError, "Stage '%s' output is missing on disk: %s" % (name, relative), record)
+        sha, size = digest_file(path)
+        required = complete.get('expected_outputs', list(record.get('outputs', {})))
+        if size == 0 and relative in required:
+            return reject(IncompleteOutputError, "Stage '%s' output is empty (0 bytes) on disk: %s" % (name, relative), record)
+        if sha != info.get('sha256'):
+            return reject(IncompleteOutputError, "Stage '%s' output was modified on disk: %s" % (name, relative), record)
+    inputs = record.get('inputs', {})
+    for relative, info in inputs.items():
+        # An intentional in-place save consumes the old revision and produces
+        # a new one. Its current bytes were already checked as an output.
+        produced = record.get('outputs', {}).get(relative, {})
+        if (relative in record.get('overwritten_inputs', []) and produced.get('exists')
+                and produced.get('path') == info.get('path')):
+            continue
+        path = info.get('path') or _path(relative, root)
+        if not os.path.isfile(path):
+            return reject(StaleInputError, "Stage '%s' input missing on disk: %s" % (name, relative), record)
+        if digest_file(path)[0] != info.get('sha256'):
+            return reject(StaleInputError, "Stage '%s' input is stale / modified: %s" % (name, relative), record)
     if current_inputs is not None:
-        for p in current_inputs:
-            rel = _rel_path(p, root_path)
-            if rel not in inputs:
-                reason = f"Stage '{stage_name}' was not executed with required input: {rel}"
-                if raise_on_error:
-                    raise StaleInputError(reason)
-                return False, reason, record
-            inp_path = (root_path / rel).resolve()
-            if not inp_path.is_file():
-                reason = f"Current input missing on disk: {rel}"
-                if raise_on_error:
-                    raise StaleInputError(reason)
-                return False, reason, record
-            cur_sha, _ = digest_file(inp_path)
-            if cur_sha != inputs[rel].get("sha256"):
-                reason = f"Current input differs from stage record: {rel}"
-                if raise_on_error:
-                    raise StaleInputError(reason)
-                return False, reason, record
-
-    # 3. Code provenance check (optional)
+        for path in current_inputs:
+            relative = _rel_path(path, root)
+            if relative not in inputs:
+                return reject(StaleInputError, "Stage '%s' was not executed with required input: %s" % (name, relative), record)
     if check_code_provenance:
-        prov = record.get("code_provenance", {})
-        current_prov = compute_code_provenance(root_path)
-        if prov.get("source_hash") != current_prov.get("source_hash"):
-            reason = (
-                f"Stage '{stage_name}' code provenance mismatch: "
-                f"recorded source hash {prov.get('source_hash')} != current {current_prov.get('source_hash')}"
-            )
-            if raise_on_error:
-                raise CodeDriftError(reason)
-            return False, reason, record
-
-    # 4. Exit status and success check (specific reasons above take precedence)
-    exit_code = record.get("exit_code", 0)
-    status = record.get("status", "unknown")
-    if exit_code != 0 or status != "ok":
-        reason = f"Stage '{stage_name}' failed with exit code {exit_code} (status: {status})"
-        if raise_on_error:
-            raise FailedStageError(reason)
-        return False, reason, record
-
-    return True, "ok", record
+        if code_paths is None:
+            code_paths = record.get('code_provenance', {}).get('code_paths')
+        if record.get('code_provenance', {}).get('source_hash') != compute_code_provenance(root, code_paths)['source_hash']:
+            return reject(CodeDriftError, "Stage '%s' code provenance mismatch" % name, record)
+    if record.get('exit_code', 0) != 0 or record.get('status') != 'ok':
+        return reject(FailedStageError, "Stage '%s' failed with exit code %s (status: %s)" % (
+            name, record.get('exit_code', 0), record.get('status')), record)
+    return True, 'ok', record
 
 
-def report_has_failure(report_or_verdict) -> tuple[bool, list[str]]:
+def report_has_failure(report_or_verdict):
     """Inspect a report, verdict, text or object and determine if it indicates failure.
 
     Returns (has_failure: bool, reasons: list[str]).
     """
     if report_or_verdict is None:
-        return False, []
+        return (False, [])
     if isinstance(report_or_verdict, bool):
-        return (not report_or_verdict, ["Boolean verdict was False"] if not report_or_verdict else [])
+        return (not report_or_verdict, ['Boolean verdict was False'] if not report_or_verdict else [])
     if isinstance(report_or_verdict, (int, float)):
         bad_count = int(report_or_verdict)
-        return (bad_count > 0, [f"Failure count is {bad_count}"] if bad_count > 0 else [])
-    if isinstance(report_or_verdict, str):
-        if (
-            re.search(r"\b(FAIL|FAILED)\b", report_or_verdict)
-            or "VERDICT: FAIL" in report_or_verdict
-            or "QA FAIL" in report_or_verdict
-        ):
-            return True, [f"Report text contains failure: {report_or_verdict.strip()[:200]}"]
-        return False, []
+        return (bad_count > 0, ['Failure count is {0}'.format(bad_count)] if bad_count > 0 else [])
+    if isinstance(report_or_verdict, string_types):
+        if re.search('\\b(FAIL|FAILED)\\b', report_or_verdict) or 'VERDICT: FAIL' in report_or_verdict or 'QA FAIL' in report_or_verdict:
+            return (True, ['Report text contains failure: {0}'.format(report_or_verdict.strip()[:200])])
+        return (False, [])
     if isinstance(report_or_verdict, (list, tuple)):
         reasons = []
         for item in report_or_verdict:
             sub_fail, sub_reasons = report_has_failure(item)
             if sub_fail:
                 reasons.extend(sub_reasons)
-        return len(reasons) > 0, reasons
+        return (len(reasons) > 0, reasons)
     if isinstance(report_or_verdict, dict):
         reasons = []
-        if report_or_verdict.get("passed") is False:
+        if report_or_verdict.get('passed') is False:
             reasons.append("Field 'passed' is False")
-        if report_or_verdict.get("exit_code", 0) != 0:
-            reasons.append(f"Field 'exit_code' is non-zero ({report_or_verdict.get('exit_code')})")
-        status = report_or_verdict.get("status")
-        if status in ("FAIL", "FAILED", "fail", "failed", "DIAGNOSTIC", "error"):
-            reasons.append(f"Status is '{status}'")
-        failures = report_or_verdict.get("failures")
+        if report_or_verdict.get('exit_code', 0) != 0:
+            reasons.append("Field 'exit_code' is non-zero ({0})".format(report_or_verdict.get('exit_code')))
+        status = report_or_verdict.get('status')
+        if status in ('FAIL', 'FAILED', 'fail', 'failed', 'DIAGNOSTIC', 'error'):
+            reasons.append("Status is '{0}'".format(status))
+        failures = report_or_verdict.get('failures')
         if failures:
-            reasons.append(f"Failures reported: {failures}")
-        failed = report_or_verdict.get("failed")
+            reasons.append('Failures reported: {0}'.format(failures))
+        failed = report_or_verdict.get('failed')
         if failed:
-            reasons.append(f"Failed items reported: {failed}")
-        for chk in report_or_verdict.get("checks", []):
+            reasons.append('Failed items reported: {0}'.format(failed))
+        for chk in report_or_verdict.get('checks', []):
             if isinstance(chk, dict):
-                if chk.get("passed") is False or chk.get("status") == "FAIL" or chk.get("pass") is False:
-                    reasons.append(f"Check failed: {chk.get('check', chk)}")
-        for v in report_or_verdict.get("verdicts", []):
+                if chk.get('passed') is False or chk.get('status') == 'FAIL' or chk.get('pass') is False:
+                    reasons.append('Check failed: {0}'.format(chk.get('check', chk)))
+        for v in report_or_verdict.get('verdicts', []):
             if isinstance(v, dict):
-                if v.get("pass") is False or v.get("passed") is False or v.get("status") == "FAIL":
-                    reasons.append(f"Verdict failed: {v.get('check', v)}")
-        return len(reasons) > 0, reasons
+                if v.get('pass') is False or v.get('passed') is False or v.get('status') == 'FAIL':
+                    reasons.append('Verdict failed: {0}'.format(v.get('check', v)))
+        return (len(reasons) > 0, reasons)
+    return (False, [])
 
-    return False, []
-
-
-def enforce_clean_verdict(
-    report_or_verdict,
-    *,
-    message: str = "Stage report indicates FAIL",
-    exit_code: int = 1,
-) -> int:
+def enforce_clean_verdict(report_or_verdict, message='Stage report indicates FAIL', exit_code=1):
     """Exit non-zero if the report or verdict contains any FAIL.
 
     Shared fail-closed helper preventing l0029 (script printing FAIL but returning 0).
@@ -463,17 +287,11 @@ def enforce_clean_verdict(
     """
     failed, reasons = report_has_failure(report_or_verdict)
     if failed:
-        detail = "; ".join(reasons) if reasons else message
-        print(f"FAIL: {message} ({detail})", file=sys.stderr)
+        detail = '; '.join(reasons) if reasons else message
+        sys.stderr.write('FAIL: {0} ({1})'.format(message, detail) + '\n')
         sys.exit(exit_code)
     return 0
 
-
-def fail_closed_exit(
-    report_or_verdict,
-    *,
-    message: str = "Stage report indicates FAIL",
-    exit_code: int = 1,
-) -> int:
+def fail_closed_exit(report_or_verdict, message='Stage report indicates FAIL', exit_code=1):
     """Alias for enforce_clean_verdict."""
     return enforce_clean_verdict(report_or_verdict, message=message, exit_code=exit_code)

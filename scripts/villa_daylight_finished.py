@@ -23,6 +23,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from render_remote import DEFAULT_HOST, _ssh                         # noqa: E402
 
+from archpipe.stage_result import write_stage_result, enforce_clean_verdict
+from archpipe.safe_io import save_json
 from archpipe import daylight as D                                   # noqa: E402
 from archpipe.concept import villa_daylight as VD                    # noqa: E402
 from archpipe.concept import villa_r11 as R                          # noqa: E402
@@ -143,7 +145,25 @@ def main(argv=None) -> int:
     except ContextError as exc:
         print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
         return 2
-    return {"run": run, "fetch": fetch}[cmd]()
+    code = {"run": run, "fetch": fetch}[cmd]()
+    outputs = ([LOCAL / "report.json"] if cmd == "fetch" and code != 2 else
+               [LOCAL / "job.tar.gz", LOCAL / "expectation.json"] if cmd == "run" else [])
+    # write_job's bundle name is defined by the producer, not guessed here.
+    if cmd == "run":
+        outputs = [LOCAL.with_suffix(".tar.gz")] + sorted(p for p in LOCAL.rglob("*")
+            if p.is_file() and not p.name.endswith(".stage-result.json"))
+    inputs = [LOCAL / "expectation.json"] if cmd == "fetch" else []
+    if cmd == "fetch":
+        inputs += sorted((LOCAL / "cases").glob("*/out.txt"))
+    scene = VR.OUT / "scene.json"
+    if scene.is_file():
+        inputs.append(scene)
+    record = write_stage_result('villa-daylight-finished-' + cmd,
+        record_path=LOCAL / ('daylight-' + cmd + '.stage-result.json'),
+        inputs=inputs, outputs=outputs, root=ROOT,
+        code_paths=[__file__] + sorted((ROOT / 'src/archpipe/concept').glob('*.py')) + [ROOT / 'src/archpipe/daylight.py'],
+        exit_code=code, metadata={'command': cmd, 'remote': REMOTE})
+    return enforce_clean_verdict(record, exit_code=code or 1)
 
 
 if __name__ == "__main__":

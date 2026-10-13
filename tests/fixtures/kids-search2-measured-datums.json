@@ -1,0 +1,990 @@
+[
+  {
+    "asset": "sf_kbed_3ddab7a9",
+    "name": "Bunk Bed",
+    "credit": "Model Information:\n* title:\tBunk Bed\n* source:\thttps://sketchfab.com/3d-models/bunk-bed-3ddab7a93381496eba3c36677e777912\n* author:\tneverfollow81 (https://sketchfab.com/neverfollow81)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Bunk Bed\" (https://sketchfab.com/3d-models/bunk-bed-3ddab7a93381496eba3c36677e777912) by neverfollow81 (https://sketchfab.com/neverfollow81) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source_sha256": {
+      "scene.gltf": "ccf9d4a2e16285f7c93cf648fec01256626c3d16e87a4e24d48c2436fa3ed397",
+      "scene.bin": "a32bd19c5022a440c1a4c4b72d8c092bca9874a04c49c242f8a905547dbec2fe",
+      "textures/DefaultMaterial1_baseColor.jpeg": "795cdc79bc485caf33d30b06846f5f3d72e668226e769b33a2d5a1656d4b2e1b",
+      "textures/DefaultMaterial1_metallicRoughness.png": "b8a68bf16dafdff77d827260eec18a75cad45c09c5531892bbe72fe630732d91",
+      "textures/DefaultMaterial1_normal.png": "a2918dd8d6054fd84b470423abbce258b4b9f9232c25b3a558312812b2655537"
+    },
+    "native_converted_bounds_m": [
+      [
+        -1.0,
+        -0.7469931840896606,
+        -0.8349362015724182
+      ],
+      [
+        1.0,
+        0.7469931840896606,
+        0.8349362015724182
+      ]
+    ],
+    "target": "ka-bunk",
+    "recipes": [
+      {
+        "berth": "lower",
+        "mesh": "defaultMaterial",
+        "component_index": 0,
+        "unique_vertices": 8,
+        "converted_bounds_m": [
+          [
+            -0.9527519941329956,
+            -0.36037710309028625,
+            -0.3906450867652893
+          ],
+          [
+            0.9502000212669373,
+            0.6230781078338623,
+            -0.23153406381607056
+          ]
+        ]
+      },
+      {
+        "berth": "upper",
+        "mesh": "defaultMaterial",
+        "component_index": 5,
+        "unique_vertices": 8,
+        "converted_bounds_m": [
+          [
+            -0.9527519941329956,
+            -0.36037710309028625,
+            0.6029481291770935
+          ],
+          [
+            0.9502000212669373,
+            0.6230770945549011,
+            0.7596161961555481
+          ]
+        ]
+      }
+    ],
+    "mattress_bounds_native_m": {
+      "lower": {
+        "min": [
+          -0.9527519941329956,
+          -0.3906450867652893,
+          -0.6230781078338623
+        ],
+        "max": [
+          0.9502000212669373,
+          -0.23153406381607056,
+          0.36037710309028625
+        ]
+      },
+      "upper": {
+        "min": [
+          -0.9527519941329956,
+          0.6029481291770935,
+          -0.6230770945549011
+        ],
+        "max": [
+          0.9502000212669373,
+          0.7596161961555481,
+          0.36037710309028625
+        ]
+      }
+    },
+    "fit": {
+      "ok": true,
+      "reason": "scaled mattresses fit exactly",
+      "sx": 0.915140811704352,
+      "sy": 1.0509986504203424,
+      "sz": 0.877989335436591,
+      "scale_xyz": [
+        1.0509986504203424,
+        0.915140811704352,
+        0.877989335436591
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.14845566603348126,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.9,
+            2.0
+          ],
+          "error_m": [
+            0.0,
+            0.0
+          ],
+          "top_m": 0.529780641929714
+        },
+        "upper": {
+          "size_m": [
+            0.899999072707069,
+            2.0
+          ],
+          "error_m": [
+            9.272929309966926e-07,
+            0.0
+          ],
+          "top_m": 1.4
+        }
+      },
+      "headboard_height_m": 1.466130161501038,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED unchanged design mattress top above finished floor",
+      "headboard_limit_source": "ASSUMED existing diagnostic cap",
+      "source": "Client bed scaling decision 2026-10-09"
+    },
+    "top_errors_m": [
+      0.12978064192971395,
+      0.0
+    ]
+  },
+  {
+    "asset": "sf_kbed_560110ad",
+    "name": "Low Poly Bunk Bed #1",
+    "credit": "Model Information:\n* title:\tLow Poly Bunk Bed #1\n* source:\thttps://sketchfab.com/3d-models/low-poly-bunk-bed-1-560110ada0484449b5ab71594c4bb85d\n* author:\tJustBlender (https://sketchfab.com/JustBlender)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Low Poly Bunk Bed #1\" (https://sketchfab.com/3d-models/low-poly-bunk-bed-1-560110ada0484449b5ab71594c4bb85d) by JustBlender (https://sketchfab.com/JustBlender) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source_sha256": {
+      "scene.gltf": "89f644cd094d0a406e1aa8f2862f32badf10b61062143c97f1d974f8d76bf687",
+      "scene.bin": "f8987871b5a48abfa61d8fe310c62478420784426404408b607d26d355687977"
+    },
+    "native_converted_bounds_m": [
+      [
+        -95.5450668334961,
+        -49.71657180786133,
+        -95.42497253417969
+      ],
+      [
+        101.45494079589844,
+        53.283485412597656,
+        66.5750503540039
+      ]
+    ],
+    "target": "ka-bunk",
+    "recipes": [
+      {
+        "berth": "lower",
+        "mesh": "BunkBed1_Matress_0",
+        "component_index": 0,
+        "unique_vertices": 24,
+        "converted_bounds_m": [
+          [
+            -91.63542938232422,
+            -45.806922912597656,
+            -66.16658782958984
+          ],
+          [
+            97.54528045654297,
+            49.373809814453125,
+            -56.933231353759766
+          ]
+        ]
+      },
+      {
+        "berth": "upper",
+        "mesh": "BunkBed1_Matress_0",
+        "component_index": 1,
+        "unique_vertices": 24,
+        "converted_bounds_m": [
+          [
+            -91.63542938232422,
+            -45.80689239501953,
+            31.321474075317383
+          ],
+          [
+            97.54528045654297,
+            49.37384033203125,
+            40.55482482910156
+          ]
+        ]
+      }
+    ],
+    "mattress_bounds_native_m": {
+      "lower": {
+        "min": [
+          -91.63542938232422,
+          -66.16658782958984,
+          -49.373809814453125
+        ],
+        "max": [
+          97.54528045654297,
+          -56.933231353759766,
+          45.806922912597656
+        ]
+      },
+      "upper": {
+        "min": [
+          -91.63542938232422,
+          31.321474075317383,
+          -49.37384033203125
+        ],
+        "max": [
+          97.54528045654297,
+          40.55482482910156,
+          45.80689239501953
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "reason": "plan scale outside 0.5\u20132.0: sx=0.009455695, sy=0.010571902; Client bed scaling decision 2026-10-09",
+      "sx": 0.009455695225428919,
+      "sy": 0.010571902397995443,
+      "sz": 0.010295647053067628,
+      "scale_xyz": [
+        0.010571902397995443,
+        0.009455695225428919,
+        0.010295647053067628
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.11804601840007933,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.9000000000000001,
+            2.0
+          ],
+          "error_m": [
+            1.1102230246251565e-16,
+            0.0
+          ],
+          "top_m": 0.39629738165163225
+        },
+        "upper": {
+          "size_m": [
+            0.9000000000000001,
+            2.0
+          ],
+          "error_m": [
+            1.1102230246251565e-16,
+            0.0
+          ],
+          "top_m": 1.4
+        }
+      },
+      "headboard_height_m": 1.6678950582456158,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED unchanged design mattress top above finished floor",
+      "headboard_limit_source": "ASSUMED existing diagnostic cap",
+      "source": "Client bed scaling decision 2026-10-09"
+    },
+    "top_errors_m": [
+      -0.00370261834836777,
+      0.0
+    ]
+  },
+  {
+    "asset": "sf_kbed_7e5f290c",
+    "name": "Low Poly Bunk Bed #2",
+    "credit": "Model Information:\n* title:\tLow Poly Bunk Bed #2\n* source:\thttps://sketchfab.com/3d-models/low-poly-bunk-bed-2-7e5f290cf4474aba93979b6c7244f142\n* author:\tJustBlender (https://sketchfab.com/JustBlender)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Low Poly Bunk Bed #2\" (https://sketchfab.com/3d-models/low-poly-bunk-bed-2-7e5f290cf4474aba93979b6c7244f142) by JustBlender (https://sketchfab.com/JustBlender) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source_sha256": {
+      "scene.gltf": "a5b9364c02c8b85ae4ecd7e11d4ad1d89ba1620b8bec56d8f5235b0456511282",
+      "scene.bin": "b0e090820bd527c8170ffa09c924feecf4d6ab2507df0ba020578bcb1237c805"
+    },
+    "native_converted_bounds_m": [
+      [
+        -106.09781646728516,
+        -45.34830093383789,
+        -100.80355834960938
+      ],
+      [
+        91.90216827392578,
+        57.651763916015625,
+        58.19647979736328
+      ]
+    ],
+    "target": "ka-bunk",
+    "recipes": [
+      {
+        "berth": "lower",
+        "mesh": "BunkBed2_Matress_0",
+        "component_index": 0,
+        "unique_vertices": 24,
+        "converted_bounds_m": [
+          [
+            -101.76168823242188,
+            -41.01216125488281,
+            -70.89405059814453
+          ],
+          [
+            87.5660400390625,
+            53.31559371948242,
+            -60.783531188964844
+          ]
+        ]
+      },
+      {
+        "berth": "upper",
+        "mesh": "BunkBed2_Matress_0",
+        "component_index": 1,
+        "unique_vertices": 24,
+        "converted_bounds_m": [
+          [
+            -101.76168823242188,
+            -41.012123107910156,
+            22.381074905395508
+          ],
+          [
+            87.5660400390625,
+            53.31562423706055,
+            32.49159240722656
+          ]
+        ]
+      }
+    ],
+    "mattress_bounds_native_m": {
+      "lower": {
+        "min": [
+          -101.76168823242188,
+          -70.89405059814453,
+          -53.31559371948242
+        ],
+        "max": [
+          87.5660400390625,
+          -60.783531188964844,
+          41.01216125488281
+        ]
+      },
+      "upper": {
+        "min": [
+          -101.76168823242188,
+          22.381074905395508,
+          -53.31562423706055
+        ],
+        "max": [
+          87.5660400390625,
+          32.49159240722656,
+          41.012123107910156
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "reason": "plan scale outside 0.5\u20132.0: sx=0.009541200, sy=0.010563693; Client bed scaling decision 2026-10-09",
+      "sx": 0.00954120025696134,
+      "sy": 0.0105636930113698,
+      "sz": 0.010503007739223417,
+      "scale_xyz": [
+        0.0105636930113698,
+        0.00954120025696134,
+        0.010503007739223417
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.10716605111211663,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.8999999999999999,
+            2.0
+          ],
+          "error_m": [
+            1.1102230246251565e-16,
+            0.0
+          ],
+          "top_m": 0.42033065499218086
+        },
+        "upper": {
+          "size_m": [
+            0.8999999272064189,
+            2.0
+          ],
+          "error_m": [
+            7.27935811628555e-08,
+            0.0
+          ],
+          "top_m": 1.4
+        }
+      },
+      "headboard_height_m": 1.6699786311944722,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED unchanged design mattress top above finished floor",
+      "headboard_limit_source": "ASSUMED existing diagnostic cap",
+      "source": "Client bed scaling decision 2026-10-09"
+    },
+    "top_errors_m": [
+      0.02033065499218084,
+      0.0
+    ]
+  },
+  {
+    "asset": "sf_kbed_8aeacdcd",
+    "name": "Bed Sweet",
+    "credit": "Model Information:\n* title:\tBed Sweet\n* source:\thttps://sketchfab.com/3d-models/bed-sweet-8aeacdcd0de84070b2ea64296ddba474\n* author:\tRuslanOz (https://sketchfab.com/KarinaOz)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Bed Sweet\" (https://sketchfab.com/3d-models/bed-sweet-8aeacdcd0de84070b2ea64296ddba474) by RuslanOz (https://sketchfab.com/KarinaOz) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source_sha256": {
+      "scene.gltf": "2cde2a9611f3b99e2f14cba9e2696eb1dfc5156b3b00ceecae4918318d19e384",
+      "scene.bin": "1cda3b3d8a2d76fc110f4b68ae5a7e0d7d2bc974c5b04671d213a3bf1b99bd19",
+      "textures/pillows_baseColor.png": "5b64f0b7a0658af08503a67893f6a3277ae51ebff6e772a85ae5a6da9faccf77",
+      "textures/pillows_metallicRoughness.png": "aefac282af0bf14cff923d52c4e40b9ea74ab60f4c1771d793d187916d15ecb5",
+      "textures/pillows_normal.png": "00849fc458db3c523e280d2f64836b8ad5217afe5701c40cc9255e6a9a6fe7f5",
+      "textures/beddown_baseColor.png": "dd9ae7cbb3ff51812e55ef8c48c86691cc5c4820c225cce36b6d8f50d43d0319",
+      "textures/beddown_metallicRoughness.png": "e8e7f7e9cc91e013c7d4e840c5aab03ffbdc88880c09a892c588ec95208b88ca",
+      "textures/beddown_normal.png": "cd9c9b793a3ef1a3c4bfe8b6830a6f34155051597f682a55ee245998ed7b2316",
+      "textures/blanket_normal.png": "653b54f7880bc7572160278266584391551fed74be8b2e85037f8548ddd0fb9a"
+    },
+    "native_converted_bounds_m": [
+      [
+        -1.1581246852874756,
+        -0.4519096612930298,
+        -0.20551012456417084
+      ],
+      [
+        1.0776041746139526,
+        0.6076114177703857,
+        0.6976535320281982
+      ]
+    ],
+    "target": "kb-bed",
+    "recipes": [
+      {
+        "berth": "lower",
+        "mesh": "beddown_beddown_0",
+        "component_index": 1,
+        "unique_vertices": 31202,
+        "converted_bounds_m": [
+          [
+            -0.999565839767456,
+            -0.4519096612930298,
+            0.05114065483212471
+          ],
+          [
+            1.0050663948059082,
+            0.4512283205986023,
+            0.24229225516319275
+          ]
+        ]
+      }
+    ],
+    "mattress_bounds_native_m": {
+      "lower": {
+        "min": [
+          -0.999565839767456,
+          0.05114065483212471,
+          -0.4512283205986023
+        ],
+        "max": [
+          1.0050663948059082,
+          0.24229225516319275,
+          0.4519096612930298
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "reason": "plan distortion 33.177805% exceeds 15%; Client bed scaling decision 2026-10-09",
+      "sx": 1.3287006238920294,
+      "sy": 0.9976892347167359,
+      "sz": 1.0607357653820313,
+      "scale_xyz": [
+        0.9976892347167359,
+        1.3287006238920294,
+        1.0607357653820313
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.3317780503758512,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            1.2,
+            2.0
+          ],
+          "error_m": [
+            0.0,
+            0.0
+          ],
+          "top_m": 0.47500000000000003
+        }
+      },
+      "headboard_height_m": 0.9580179925407407,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED unchanged design mattress top above finished floor",
+      "headboard_limit_source": "ASSUMED existing diagnostic cap",
+      "source": "Client bed scaling decision 2026-10-09"
+    }
+  },
+  {
+    "asset": "sf_kbed_b8fb5120",
+    "name": "Children's Bunk Bed Lucia",
+    "credit": "Model Information:\n* title:\tChildren's Bunk Bed Lucia\n* source:\thttps://sketchfab.com/3d-models/childrens-bunk-bed-lucia-b8fb51200aae41c6a660e54c16c9b538\n* author:\t3rdeco (https://sketchfab.com/3rdeco)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Children's Bunk Bed Lucia\" (https://sketchfab.com/3d-models/childrens-bunk-bed-lucia-b8fb51200aae41c6a660e54c16c9b538) by 3rdeco (https://sketchfab.com/3rdeco) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source_sha256": {
+      "scene.gltf": "ee1b00c234aec1bf9b72c4f885c09c20dfed729b6cffeda3b69c7710e5ef8787",
+      "scene.bin": "e583e79499642b954fd87d376062dffbbb21b4072c87fcce6677b043c1ee857a"
+    },
+    "native_converted_bounds_m": [
+      [
+        8.967569442575041e-08,
+        -0.8390007615089417,
+        -1.8809975799172207e-09
+      ],
+      [
+        2.5260002613067627,
+        1.341573749868985e-07,
+        1.7170010805130005
+      ]
+    ],
+    "target": "ka-bunk",
+    "recipes": [
+      {
+        "berth": "lower",
+        "mesh": "Object_32",
+        "component_index": null,
+        "unique_vertices": 40,
+        "converted_bounds_m": [
+          [
+            0.506499707698822,
+            -0.8180006742477417,
+            0.3058916926383972
+          ],
+          [
+            2.506500005722046,
+            -0.018000084906816483,
+            0.4558917284011841
+          ]
+        ]
+      },
+      {
+        "berth": "upper",
+        "mesh": "Object_50",
+        "component_index": null,
+        "unique_vertices": 40,
+        "converted_bounds_m": [
+          [
+            0.5064999461174011,
+            -0.8180015683174133,
+            1.426456332206726
+          ],
+          [
+            2.506500244140625,
+            -0.018000978976488113,
+            1.5764573812484741
+          ]
+        ]
+      }
+    ],
+    "mattress_bounds_native_m": {
+      "lower": {
+        "min": [
+          0.506499707698822,
+          0.3058916926383972,
+          0.018000084906816483
+        ],
+        "max": [
+          2.506500005722046,
+          0.4558917284011841,
+          0.8180006742477417
+        ]
+      },
+      "upper": {
+        "min": [
+          0.5064999461174011,
+          1.426456332206726,
+          0.018000978976488113
+        ],
+        "max": [
+          2.506500244140625,
+          1.5764573812484741,
+          0.8180015683174133
+        ]
+      }
+    },
+    "fit": {
+      "ok": true,
+      "reason": "scaled mattresses fit exactly",
+      "sx": 1.1249991712399345,
+      "sy": 0.9999998509884103,
+      "sz": 0.8880671402742387,
+      "scale_xyz": [
+        0.9999998509884103,
+        1.1249991712399345,
+        0.8880671402742387
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.12499933887787451,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.9,
+            2.0
+          ],
+          "error_m": [
+            0.0,
+            0.0
+          ],
+          "top_m": 0.40486246518637165
+        },
+        "upper": {
+          "size_m": [
+            0.9,
+            2.0
+          ],
+          "error_m": [
+            0.0,
+            0.0
+          ],
+          "top_m": 1.4
+        }
+      },
+      "headboard_height_m": 1.5248122410894105,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED unchanged design mattress top above finished floor",
+      "headboard_limit_source": "ASSUMED existing diagnostic cap",
+      "source": "Client bed scaling decision 2026-10-09"
+    },
+    "top_errors_m": [
+      0.004862465186371623,
+      0.0
+    ]
+  },
+  {
+    "asset": "sf_kbed_c7bea79b",
+    "name": "Single wooden bed",
+    "credit": "Model Information:\n* title:\tSingle wooden bed\n* source:\thttps://sketchfab.com/3d-models/single-wooden-bed-c7bea79b8c7a4b7c9ec5eadfa2529b9a\n* author:\tfranckross (https://sketchfab.com/franckross)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Single wooden bed\" (https://sketchfab.com/3d-models/single-wooden-bed-c7bea79b8c7a4b7c9ec5eadfa2529b9a) by franckross (https://sketchfab.com/franckross) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source_sha256": {
+      "scene.gltf": "3a3d9a82908b32093f7cd283d11a54599c7dbc95611ff7119ce0e0683908e85b",
+      "scene.bin": "5b6507781753047cfb6bc1479955d929ed4eaa29203b33e7502d639f9d25e33b",
+      "textures/sporchissimo01_normal.jpeg": "7fb935f2d554fe9688fe386e90a058d4ad958fa1b1e632041183cf0d9c0b9490"
+    },
+    "native_converted_bounds_m": [
+      [
+        16.365779876708984,
+        -16.328136444091797,
+        0.12351948022842407
+      ],
+      [
+        28.198253631591797,
+        -8.822011947631836,
+        3.55061936378479
+      ]
+    ],
+    "target": "kb-bed",
+    "recipes": [
+      {
+        "berth": "lower",
+        "mesh": "Object_16",
+        "component_index": null,
+        "unique_vertices": 50,
+        "converted_bounds_m": [
+          [
+            17.318639755249023,
+            -15.42723560333252,
+            1.6830174922943115
+          ],
+          [
+            28.139936447143555,
+            -9.659676551818848,
+            2.8771250247955322
+          ]
+        ]
+      }
+    ],
+    "mattress_bounds_native_m": {
+      "lower": {
+        "min": [
+          17.318639755249023,
+          1.6830174922943115,
+          9.659676551818848
+        ],
+        "max": [
+          28.139936447143555,
+          2.8771250247955322,
+          15.42723560333252
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "reason": "plan scale outside 0.5\u20132.0: sx=0.208060288, sy=0.184820734; Client bed scaling decision 2026-10-09",
+      "sx": 0.20806028846554506,
+      "sy": 0.18482073423770543,
+      "sz": 0.17250110530071375,
+      "scale_xyz": [
+        0.18482073423770543,
+        0.20806028846554506,
+        0.17250110530071375
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.1257410556434122,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            1.2,
+            2.0
+          ],
+          "error_m": [
+            0.0,
+            0.0
+          ],
+          "top_m": 0.4749999999999999
+        }
+      },
+      "headboard_height_m": 0.5911785178894206,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED unchanged design mattress top above finished floor",
+      "headboard_limit_source": "ASSUMED existing diagnostic cap",
+      "source": "Client bed scaling decision 2026-10-09"
+    }
+  },
+  {
+    "asset": "sf_kbed_e81c12b7",
+    "name": "Bunk Bed",
+    "credit": "Model Information:\n* title:\tBunk Bed\n* source:\thttps://sketchfab.com/3d-models/bunk-bed-e81c12b73b44472cbcc262069c03fc45\n* author:\tEm3D (https://sketchfab.com/Em3D)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"Bunk Bed\" (https://sketchfab.com/3d-models/bunk-bed-e81c12b73b44472cbcc262069c03fc45) by Em3D (https://sketchfab.com/Em3D) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source_sha256": {
+      "scene.gltf": "dbd883b87e1025fbcc57422b779c0356c247bb59ed649f057282e44a193e9150",
+      "scene.bin": "a0db96608adb9f581b769416181b68f35fd3bc725933320be8b536d7efbbe0e3"
+    },
+    "native_converted_bounds_m": [
+      [
+        -4.131609916687012,
+        -1.3887898921966553,
+        -2.8964107036590576
+      ],
+      [
+        2.779829978942871,
+        2.736929416656494,
+        2.9071691036224365
+      ]
+    ],
+    "target": "ka-bunk",
+    "recipes": [
+      {
+        "berth": "lower",
+        "mesh": "Bed Down_0",
+        "component_index": null,
+        "unique_vertices": 7810,
+        "converted_bounds_m": [
+          [
+            -3.596869945526123,
+            -0.8239403367042542,
+            -1.782210350036621
+          ],
+          [
+            2.232409954071045,
+            2.243420124053955,
+            -1.1706489324569702
+          ]
+        ]
+      },
+      {
+        "berth": "upper",
+        "mesh": "Bed Up_0",
+        "component_index": null,
+        "unique_vertices": 7810,
+        "converted_bounds_m": [
+          [
+            -3.596869945526123,
+            -0.8239399790763855,
+            0.9892867803573608
+          ],
+          [
+            2.232410192489624,
+            2.243420362472534,
+            1.6008481979370117
+          ]
+        ]
+      }
+    ],
+    "mattress_bounds_native_m": {
+      "lower": {
+        "min": [
+          -3.596869945526123,
+          -1.782210350036621,
+          -2.243420124053955
+        ],
+        "max": [
+          2.232409954071045,
+          -1.1706489324569702,
+          0.8239403367042542
+        ]
+      },
+      "upper": {
+        "min": [
+          -3.596869945526123,
+          0.9892867803573608,
+          -2.243420362472534
+        ],
+        "max": [
+          2.232410192489624,
+          1.6008481979370117,
+          0.8239399790763855
+        ]
+      }
+    },
+    "fit": {
+      "ok": false,
+      "reason": "plan scale outside 0.5\u20132.0: sx=0.293411880, sy=0.343095551; Client bed scaling decision 2026-10-09; plan distortion 16.933081% exceeds 15%; Client bed scaling decision 2026-10-09",
+      "sx": 0.2934118801862408,
+      "sy": 0.34309555115687784,
+      "sz": 0.31130073465486774,
+      "scale_xyz": [
+        0.34309555115687784,
+        0.2934118801862408,
+        0.31130073465486774
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.1693308087562806,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.9000000000000001,
+            1.9999999999999998
+          ],
+          "error_m": [
+            1.1102230246251565e-16,
+            2.220446049250313e-16
+          ],
+          "top_m": 0.5372309072144956
+        },
+        "upper": {
+          "size_m": [
+            0.8999999650225783,
+            2.0000000818003536
+          ],
+          "error_m": [
+            3.4977421736748227e-08,
+            8.180035360183524e-08
+          ],
+          "top_m": 1.4
+        }
+      },
+      "headboard_height_m": 1.8066586576348849,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED unchanged design mattress top above finished floor",
+      "headboard_limit_source": "ASSUMED existing diagnostic cap",
+      "source": "Client bed scaling decision 2026-10-09"
+    },
+    "top_errors_m": [
+      0.1372309072144956,
+      0.0
+    ]
+  },
+  {
+    "asset": "sf_kbed_ea60847a",
+    "name": "bunk bed",
+    "credit": "Model Information:\n* title:\tbunk bed\n* source:\thttps://sketchfab.com/3d-models/bunk-bed-ea60847abaaf4662b5f7c75b44f3ce9d\n* author:\tfilthycent (https://sketchfab.com/filthycent)\n\nModel License:\n* license type:\tCC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)\n* requirements:\tAuthor must be credited. Commercial use is allowed.\n\nIf you use this 3D model in your project be sure to copy paste this credit wherever you share it:\nThis work is based on \"bunk bed\" (https://sketchfab.com/3d-models/bunk-bed-ea60847abaaf4662b5f7c75b44f3ce9d) by filthycent (https://sketchfab.com/filthycent) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+    "source_sha256": {
+      "scene.gltf": "4a3ffd89166a655fb746c207e317a45bbfde6dde57df544143885d8b4c8fa1d9",
+      "scene.bin": "782c129ee93859b84f56d157e8b6d0ae0f06e8994dbbb094032d80bf1f267f0d",
+      "textures/03_-_Default_baseColor.png": "a8bfd1eb18cb372035eee10bcfc8ca110eed57e799ca011746e6098a737f7b4a",
+      "textures/03_-_Default_metallicRoughness.png": "d453abfca29e6937b9679fdb7de469260fe176855d121140ef2ec8c9aca3ef87",
+      "textures/03_-_Default_normal.png": "f43bdf061c213e0d8c91bf2366a53bbd3c264d11620013a6ac7ccdac0b39844c"
+    },
+    "native_converted_bounds_m": [
+      [
+        -1.0531498193740845,
+        -0.4724411964416504,
+        1.1807743760527956e-07
+      ],
+      [
+        1.053149938583374,
+        0.4625987410545349,
+        1.792051911354065
+      ]
+    ],
+    "target": "ka-bunk",
+    "recipes": [
+      {
+        "berth": "lower",
+        "mesh": "low_03 - Default_0",
+        "component_index": 33,
+        "unique_vertices": 304,
+        "converted_bounds_m": [
+          [
+            -0.9842522740364075,
+            -0.3937012255191803,
+            0.43307095766067505
+          ],
+          [
+            0.9842522740364075,
+            0.3937014937400818,
+            0.5926861763000488
+          ]
+        ]
+      },
+      {
+        "berth": "upper",
+        "mesh": "low_03 - Default_0",
+        "component_index": 34,
+        "unique_vertices": 304,
+        "converted_bounds_m": [
+          [
+            -0.9842522740364075,
+            -0.39370107650756836,
+            1.31889808177948
+          ],
+          [
+            0.9842522740364075,
+            0.393701434135437,
+            1.4785133600234985
+          ]
+        ]
+      }
+    ],
+    "mattress_bounds_native_m": {
+      "lower": {
+        "min": [
+          -0.9842522740364075,
+          0.43307095766067505,
+          -0.3937014937400818
+        ],
+        "max": [
+          0.9842522740364075,
+          0.5926861763000488,
+          0.3937012255191803
+        ]
+      },
+      "upper": {
+        "min": [
+          -0.9842522740364075,
+          1.31889808177948,
+          -0.393701434135437
+        ],
+        "max": [
+          0.9842522740364075,
+          1.4785133600234985,
+          0.39370107650756836
+        ]
+      }
+    },
+    "fit": {
+      "ok": true,
+      "reason": "scaled mattresses fit exactly",
+      "sx": 1.1429983386984772,
+      "sy": 1.015999684612372,
+      "sz": 0.946897166884539,
+      "scale_xyz": [
+        1.015999684612372,
+        1.1429983386984772,
+        0.946897166884539
+      ],
+      "source_unit_factor": 1.0,
+      "plan_distortion": 0.12499871408381225,
+      "mattresses": {
+        "lower": {
+          "size_m": [
+            0.9,
+            1.9999999999999998
+          ],
+          "error_m": [
+            0.0,
+            2.220446049250313e-16
+          ],
+          "top_m": 0.5612127493829555
+        },
+        "upper": {
+          "size_m": [
+            0.8999997615519651,
+            1.9999999999999998
+          ],
+          "error_m": [
+            2.3844803487271804e-07,
+            2.220446049250313e-16
+          ],
+          "top_m": 1.4
+        }
+      },
+      "headboard_height_m": 1.696888765963996,
+      "headboard_limit_m": 2.4,
+      "height_source": "ASSUMED unchanged design mattress top above finished floor",
+      "headboard_limit_source": "ASSUMED existing diagnostic cap",
+      "source": "Client bed scaling decision 2026-10-09"
+    },
+    "top_errors_m": [
+      0.1612127493829555,
+      0.0
+    ]
+  }
+]

@@ -45,96 +45,12 @@ COVE_BAND = 0.40
 UNDER_SOFFIT = ("cinema", "store-ramp", "guest-wc", "dirty-kitchen")
 MF = 0.8                       # maintenance factor (stated, lighting.DEFAULT_MAINTENANCE_FACTOR)
 
-# kind -> the requirement (what a product must meet) and its generic stand-in
-KINDS = {
-    "DL":   dict(what="flush trimless downlight, wide", mount="recessed", lm=650, beam=55, cct=2700, cri=90,
-                 layer="ambient", aperture=0.075),
-    "DLN":  dict(what="flush trimless downlight, medium (task)", mount="recessed", lm=750, beam=36, cct=3000,
-                 cri=90, layer="task", aperture=0.075),
-    "ADJ":  dict(what="flush trimless adjustable accent", mount="recessed", lm=500, beam=24, cct=2700, cri=90,
-                 layer="accent", aperture=0.075),
-    "WW":   dict(what="flush trimless wall washer", mount="recessed", lm=650, beam=70, cct=2700, cri=90,
-                 layer="accent", aperture=0.075),
-    "PEN-GLOBE": dict(what="opal glass globe pendant D300", mount="pendant", lm=800, beam=None, cct=2700, cri=90,
-                      layer="decorative", diameter=0.30),
-    "PEN-SMALL": dict(what="opal glass globe pendant D200 (bedside)", mount="pendant", lm=350, beam=None, cct=2700,
-                      cri=90, layer="decorative", diameter=0.20),
-    "WALL-READ": dict(what="adjustable wall-mounted swing-arm reading light (ASSUMED product)", mount="wall",
-                      lm=350, beam=None, cct=2700, cri=90, layer="decorative", diameter=0.12),
-    "SWING": dict(what="movable wall reading light: wall plate, articulated 0.6 m reach and rotating head "
-                  "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=None,
-                  cct=2700, cri=90, layer="task", diameter=0.12, reach=0.6),
-    "PEN-LIN": dict(what="linear pendant 1.6 m, direct/indirect", mount="pendant", lm=1200, beam=90, cct=2700,
-                    cri=90, layer="task", length=1.6),
-    "SCONCE": dict(what="vanity wall light, opal, each side of the mirror", mount="wall", lm=450, beam=None,
-                   cct=3000, cri=90, layer="task", diameter=0.12),
-    "COVE": dict(what="LED strip in the cove, 2700 K", mount="strip", lm_per_m=900, cct=2700, cri=90,
-                 layer="decorative"),
-    "BACK": dict(what="LED strip inside glass-door book cabinet", mount="strip", lm_per_m=400, cct=2700, cri=90,
-                 layer="accent"),
-    "UC":   dict(what="under-cabinet LED strip", mount="strip", lm_per_m=1000, cct=3000, cri=90, layer="task"),
-    "RAIL": dict(what="LED strip over the hanging rail (in-wardrobe)", mount="strip", lm_per_m=500, cct=3000, cri=90,
-                 layer="task"),
-    "TOE":  dict(what="toe-kick LED strip", mount="strip", lm_per_m=150, cct=2200, cri=90, layer="night"),
-    "NL":   dict(what="night-light strip under the bed / plinth", mount="strip", lm_per_m=100, cct=2200, cri=90,
-                 layer="night"),
-    "DESK": dict(what="adjustable wall-arm desk lamp, shielded head, 3000 K", mount="task-lamp", lm=450, beam=70,
-                 cct=3000, cri=90, layer="task"),
-    "VSTRIP": dict(what="vertical LED strip at a hanging-section edge (shadow-free dressing light)", mount="strip",
-                   lm_per_m=500, cct=3000, cri=90, layer="task"),
-    "STORE-BATTEN": dict(what="ASSUMED opal LED storage batten, 0.70 m per shelving bay", mount="strip",
-                          lm_per_m=900, cct=3000, cri=90, layer="task"),
-    "MIRROR": dict(what="backlit mirror halo, 3000 K", mount="strip", lm_per_m=250, cct=3000, cri=90, layer="task"),
-    "VSCONCE": dict(what="vertical opal sconce 0.5 m, each side of the mirror", mount="wall", lm=450, beam=None,
-                    cct=3000, cri=90, layer="task", diameter=0.12),
-    "STEP": dict(what="recessed step marker in the stair wall", mount="wall-marker", lm=60, beam=None, cct=2200,
-                 cri=90, layer="night"),
-    "PATH": dict(what="low recessed path marker (0.3 m AFF)", mount="wall-marker", lm=60, beam=None, cct=2200,
-                 cri=90, layer="night"),
-}
-
-# kind -> the verified library product that meets it (lighting-library: imported, flux vs LORL and LDT vs the
-# manufacturer's IES checked). Strips, pendants, sconces and markers stay GENERIC: iGuzzini Underscore ST49 failed
-# its LDT/IES pair check (59.8 %), the Laser Evo wall washer LSEVO-AAKR2I failed it (100 %, asymmetric), and no
-# decorative globe pendant with photometry was found. WW is served meanwhile by the soft flood placed 0.3 m off the
-# wall (grazing), stated as a substitute.
-PRODUCT_CHOICE = {
-    "DL": ("iguzzini", "LSEVO-AAK3EW", "Laser Evo recessed D75 Soft, Flood 33 deg, 2700 K CRI97, phase-cut; "
-                                       "flush (trimless) accessory"),
-    "DLN": ("iguzzini", "LSEVO-AAIIA6", "Laser Evo recessed D75 Cone, Medium 29 deg, 2700 K CRI90, phase-cut; "
-                                        "flush (trimless) accessory"),
-    "ADJ": ("iguzzini", "LSEVO-AAHENX", "Laser Evo recessed D75 Cone Easy Adjustable, Spot 18 deg, 2700 K CRI97, "
-                                        "phase-cut; flush (trimless) accessory"),
-    "WW": ("iguzzini", "LSEVO-AAK3EW", "SUBSTITUTE for the wall washer LSEVO-AAKR2I (files failed the pair check): "
-                                       "Laser Evo D75 Soft Flood 33 deg grazing from 0.3 m"),
-}
-PRODUCTS: dict[str, dict] = {}
-_products_bound = False
-
-
-def bind_products(ies_dir=None):
-    """Export each chosen verified product's IES (from its LDT) and bind it to its kind; a product missing from the
-    library leaves the kind generic (stated in every output)."""
-    global _products_bound
-    if _products_bound:
-        return PRODUCTS
-    from pathlib import Path
-    from ..luminaires import library as LIB
-    ies_dir = Path(ies_dir or Path(__file__).resolve().parents[3] / "out" / "villa" / "render-d1" / "ies")
-    for kind, (mfr, sku, what) in PRODUCT_CHOICE.items():
-        row = LIB.get(mfr, sku, 0)
-        if not row or not row.get("verified"):
-            continue
-        path = LIB.export_ies(mfr, sku, 0, ies_dir / mfr / (sku + ".ies"))
-        PRODUCTS[kind] = {"manufacturer": mfr, "code": sku, "ies": str(path), "lm": float(row["luminaire_lm"]),
-                          "watts": row["watts"], "cct": row["cct_k"], "beam": row["beam_deg"], "what": what,
-                          "substitute": what.startswith("SUBSTITUTE")}
-    _products_bound = True
-    return PRODUCTS
+# Read-only compatibility views; declarations are owned by fixture_record.
+from ..fixture_record import FIXTURE_KINDS, KINDS, PRODUCT_CHOICE, PRODUCTS, bind_products, record_for, kind_photometry, vanity_pair_datum, VANITY_DECISIONS, VANITY_DECISION_SOURCE, over_mirror_datum
 
 
 def products():
-    """Return the cached verified bindings, creating them before any lighting consumer reads them."""
+    """Resolve the fixture-record product registry before consuming photometry."""
     return bind_products()
 
 
@@ -161,14 +77,11 @@ class Fixture:
 
     @property
     def lumens(self):
-        dimmer = self.extra.get("dimmer", 1.0)
-        product = products().get(self.kind)
-        if product:                               # a real product emits its own flux (dimming is per scene)
-            return product["lm"] * dimmer
-        if self.lm is not None:
-            return self.lm * dimmer
-        k = self.spec
-        return (k["lm_per_m"] * self.length if "lm_per_m" in k else k["lm"]) * dimmer
+        return record_for(self).flux_lm
+
+    @property
+    def record(self):
+        return record_for(self)
 
     @property
     def layer(self):
@@ -232,10 +145,12 @@ def design(lay=None):
                 if q[0] <= x <= q[2] and q[1] <= y <= q[3]:
                     room = other
                     break
+        count = kw.pop("identity_slots", 1)
         n[room] = n.get(room, 0) + 1
         z = z if z is not None else ceiling_z(level, x, room, y, lay, spec)
         out.append(Fixture("%s-%s-%02d" % (kind, room, n[room]), kind, room, level, round(x, 3), round(y, 3),
                            round(z, 3), why=why, card=card, **kw))
+        n[room] += count - 1
 
     def strip(kind, room, a, b, z, aim, why="", card="", level=None):
         """A straight LED strip from a to b (x, y) at height z, emitting along aim."""
@@ -570,6 +485,10 @@ def _gf_opening(lay):
 def _sconces(add, room, basin, lay, rc, vertical=False):
     """Two sconces either side of the mirror over a basin on a wall, 0.95 m apart at 1.60 m AFF (card
     rid-vanity-sconces-914: 914-1016 mm apart, eye level)."""
+    kind = "VSCONCE" if vertical else "SCONCE"
+    housing = FIXTURE_KINDS[kind].housing
+    wall_offset = housing["wall_offset"]
+    half_spacing = housing["vanity_half_spacing"]
     x0, y0, x1, y1 = basin
     r = rc[room]
     lv = lay["rooms"][room]["level"]
@@ -585,21 +504,52 @@ def _sconces(add, room, basin, lay, rc, vertical=False):
         add("DLN", room, (x0 + x1) / 2, dy, why="basin counter light, in front of the mirror",
             card="ies-res-vanity-grooming-300", level=lv, lm=900)
     if abs(x0 - r[0]) < 0.05 or abs(x1 - r[2]) < 0.05:           # basin against an x wall: mirror on that wall
-        wx = r[0] + 0.06 if abs(x0 - r[0]) < 0.05 else r[2] - 0.06
+        wx = r[0] + wall_offset if abs(x0 - r[0]) < 0.05 else r[2] - wall_offset
         cy = (y0 + y1) / 2
-        for s in (-1, 1):
-            add("VSCONCE" if vertical else "SCONCE", room, wx, cy + s * 0.475, z=z,
-                aim=(1 if wx < (r[0] + r[2]) / 2 else -1, 0, 0),
-                why="grooming light each side of the mirror", card="rid-vanity-sconces-914", level=lv)
+        from .sanitary_relocation import historical_input
+        correction = False
+        if not historical_input() and room not in VANITY_DECISIONS:
+            cy, correction = vanity_pair_datum(r, cy, kind)
+            if correction:
+                from .mounting import finish_from_record
+                # The already-approved marble finish shifts the fixing face.
+                wx += (1 if wx < (r[0]+r[2])/2 else -1)*finish_from_record('marble-wall-thinset').thickness_m
+        if not historical_input() and room in VANITY_DECISIONS:
+            from .mounting import finish_from_record
+            basin_item = next(i for i in F.layout(lay) if F.footprint(i) == basin and i['room'] == room)
+            mirror_width = min(basin_item['w']-.04,.78)
+            mirror_top = LEVEL_Z[lv]+basin_item['h']+.95
+            normal = 1 if abs(x0-r[0]) < .05 else -1
+            finished_wall = (r[0] if normal > 0 else r[2])+normal*finish_from_record('marble-wall-thinset').thickness_m
+            bx, by, bz = over_mirror_datum(r,basin,mirror_width,mirror_top,finished_wall,normal)
+            h = FIXTURE_KINDS['VANITY-LIN'].housing
+            add('VANITY-LIN',room,bx,by,z=bz,aim=(normal,0,0),length=h['length'],along=(0,1,0),
+                identity_slots=2, why=VANITY_DECISION_SOURCE+'; ASSUMED over-mirror linear LED bar',
+                card='ies-res-vanity-grooming-300',level=lv,
+                extra=dict(over_mirror=True,decision_source=VANITY_DECISION_SOURCE,
+                    retired_fixture_ids=VANITY_DECISIONS[room],mirror_id='mirror-'+basin_item['id'],
+                    room_rect=r,finished_wall=finished_wall,ceiling_z=ceiling_z(lv,bx,room,by,lay),
+                    assumptions=('ASSUMED authored: %g mm length, %g mm height, %g mm depth; '
+                        'centre %g mm above mirror top; %g lm raw; no verified product' %
+                        (h['length']*1000,h['half_height']*2000,h['half_depth']*2000,
+                         h['centre_above_mirror']*1000,FIXTURE_KINDS['VANITY-LIN'].spec['lm']))))
+        else:
+            for s in (-1, 1):
+                add(kind, room, wx, cy + s * half_spacing, z=z,
+                    aim=(1 if wx < (r[0] + r[2]) / 2 else -1, 0, 0),
+                    why="grooming light each side of the mirror", card="rid-vanity-sconces-914", level=lv,
+                    **({'extra': {'vanity_pair_source_correction': True}} if correction else {}))
         if vertical:                                  # backlit mirror halo (advisory B-VANITY)
+            wx = r[0] + wall_offset if abs(x0-r[0]) < 0.05 else r[2] - wall_offset
+            cy = (y0+y1)/2
             add("MIRROR", room, wx + (0.01 if wx < (r[0] + r[2]) / 2 else -0.01), cy, z=z, level=lv, length=0.7,
                 along=(0.0, 1.0, 0.0), aim=(1 if wx < (r[0] + r[2]) / 2 else -1, 0, 0),
                 why="backlit mirror: soft light behind the glass (advisory B-VANITY)")
     else:
-        wy = r[1] + 0.06 if abs(y0 - r[1]) < 0.05 else r[3] - 0.06
+        wy = r[1] + wall_offset if abs(y0 - r[1]) < 0.05 else r[3] - wall_offset
         cx = (x0 + x1) / 2
         for s in (-1, 1):
-            add("SCONCE", room, cx + s * 0.475, wy, z=z, aim=(0, 1 if wy < (r[1] + r[3]) / 2 else -1, 0),
+            add("SCONCE", room, cx + s * half_spacing, wy, z=z, aim=(0, 1 if wy < (r[1] + r[3]) / 2 else -1, 0),
                 why="grooming light each side of the mirror", card="rid-vanity-sconces-914", level=lv)
 
 
@@ -623,24 +573,22 @@ def generic_ies(lm, beam_deg, name="GENERIC"):
 
 
 def photometry_for(kind):
-    from .. import photometry as ph
-    k = KINDS[kind]
-    product = products().get(kind)
-    if product:
-        return ph.load(product["ies"]), False
-    lm = k.get("lm") or k.get("lm_per_m", 100)
-    beam = k.get("beam", 120) if k["mount"] != "strip" else 120
-    return ph.parse(generic_ies(lm, beam), name=kind), True
+    return kind_photometry(kind)
 
 
 # ------------------------------------------------------------------ the check
-def task_points(lay=None):
-    """(room, card, x, y, plane z absolute, label): the carded task planes of D1."""
+def task_points(lay=None, *, with_hosts=False):
+    """(room, card, x, y, plane z absolute, label): the carded task planes of D1.
+
+    with_hosts appends the authored furniture item identity; x/y/z are metres."""
     lay = lay or R.design("D1")
     it = {i["id"]: i for i in F.layout(lay)}
     fp = {k: F.footprint(v) for k, v in it.items()}
     B, G = LEVEL_Z["B"], LEVEL_Z["GF"]
     pts = []
+
+    def add(host, point):
+        pts.append((*point, host) if with_hosts else point)
 
     def c(k):
         q = fp[k]
@@ -653,32 +601,32 @@ def task_points(lay=None):
               prep_spans[-1][0] + (prep_spans[-1][1] - prep_spans[-1][0]) / 3,
               prep_spans[-1][0] + 2 * (prep_spans[-1][1] - prep_spans[-1][0]) / 3]
     for x in prep_x:
-        pts.append(("kitchen", "ies-res-kitchen-prep-500", x, isl[3] - 0.3, B + 0.92, "island prep side"))
-        pts.append(("kitchen", "ies-res-breakfast-200", x, isl[1] + 0.2, B + 0.92, "island seating side"))
+        add("k-island", ("kitchen", "ies-res-kitchen-prep-500", x, isl[3] - 0.3, B + 0.92, "island prep side"))
+        add("k-island", ("kitchen", "ies-res-breakfast-200", x, isl[1] + 0.2, B + 0.92, "island seating side"))
     burner = next((a, b) for kind, a, b in F.module_spans(it["k-island"]) if kind == "single-induction")
-    pts.append(("kitchen", "ies-res-kitchen-cooktop-300", (burner[0] + burner[1]) / 2,
+    add("k-island", ("kitchen", "ies-res-kitchen-cooktop-300", (burner[0] + burner[1]) / 2,
                 (isl[1] + isl[3]) / 2, B + 0.926, "single induction zone"))
     run = fp["k-run"]
-    pts.append(("kitchen", "ies-res-kitchen-sink-300", (run[0] + run[2]) / 2, run[1] + 0.25, B + 0.9, "sink"))
-    pts.append(("dining", "ies-res-dining-informal-100", *c("dining-table"), B + 0.75, "dining table centre"))
+    add("k-run", ("kitchen", "ies-res-kitchen-sink-300", (run[0] + run[2]) / 2, run[1] + 0.25, B + 0.9, "sink"))
+    add("dining-table", ("dining", "ies-res-dining-informal-100", *c("dining-table"), B + 0.75, "dining table centre"))
     dt = fp["dining-table"]
-    pts.append(("dining", "ies-res-dining-study-200", dt[0] + 0.3, (dt[1] + dt[3]) / 2, B + 0.75, "table end (homework)"))
+    add("dining-table", ("dining", "ies-res-dining-study-200", dt[0] + 0.3, (dt[1] + dt[3]) / 2, B + 0.75, "table end (homework)"))
     dk = fp["dk-run"]
-    pts.append(("dirty-kitchen", "ies-res-kitchen-prep-500", dk[0] + 1.5, dk[1] + 0.3, B + 0.9, "dirty kitchen run"))
+    add("dk-run", ("dirty-kitchen", "ies-res-kitchen-prep-500", dk[0] + 1.5, dk[1] + 0.3, B + 0.9, "dirty kitchen run"))
     for d, lv in (("study-desk", G), ("study-adult-desk", G), ("ka-desk-1", G), ("ka-desk-2", G), ("kb-desk", G)):
-        pts.append((it[d]["room"], "ies-res-desk-400", *c(d), lv + 0.75, d))
+        add(d, (it[d]["room"], "ies-res-desk-400", *c(d), lv + 0.75, d))
     b = fp["pb-bed"]
     for x in (b[0] + 0.4, b[2] - 0.4):
-        pts.append(("parents-bed", "ies-res-bed-reading-200", x, b[1] + 0.35, G + 0.9, "pillow"))
+        add("pb-bed", ("parents-bed", "ies-res-bed-reading-200", x, b[1] + 0.35, G + 0.9, "pillow"))
     for basin, room in (("fb-basin", "family-bath"), ("pe-basin", "parents-ensuite"), ("gwc-basin", "guest-wc")):
         lv = B if room == "guest-wc" else G
-        pts.append((room, "ies-res-vanity-grooming-300", *c(basin), lv + 0.91, basin))
+        add(basin, (room, "ies-res-vanity-grooming-300", *c(basin), lv + 0.91, basin))
     a = fp["lounge-armchair"]
-    pts.append(("lounge", "ies-res-chair-reading-200", *c("lounge-armchair"), B + 0.76, "armchair"))
-    pts.append(("bar-alcove", "ies-res-chair-reading-200", *c("library-daybed"), B + 0.76, "daybed nook"))
+    add("lounge-armchair", ("lounge", "ies-res-chair-reading-200", *c("lounge-armchair"), B + 0.76, "armchair"))
+    add("library-daybed", ("bar-alcove", "ies-res-chair-reading-200", *c("library-daybed"), B + 0.76, "daybed nook"))
     desk = fp["cinema-desk"]
     for x in (desk[0] + 0.31, desk[2] - 0.31):
-        pts.append(("cinema", "ies-res-desk-400", x, (desk[1] + desk[3]) / 2, B + 0.75, "cinema desk"))
+        add("cinema-desk", ("cinema", "ies-res-desk-400", x, (desk[1] + desk[3]) / 2, B + 0.75, "cinema desk"))
     return pts
 
 
@@ -816,13 +764,15 @@ def _same_space(lay, a, b):
 
 
 def _emitters(f):
-    """Point emitters of a fixture: one for a point source, one per 0.25 m for a strip."""
-    if f.length and f.length > 0:
-        nseg = max(1, int(round(f.length / 0.25)))
+    """Analytic emitters: one point, or one sample per 0.25 metre of strip."""
+    record = f.record
+    x, y, z = record.position
+    if record.length and record.length > 0:
+        nseg = max(1, int(round(record.length / 0.25)))
         out = []
         for k in range(nseg):
             t = (k + 0.5) / nseg - 0.5
-            out.append((f.x + f.along[0] * t * f.length, f.y + f.along[1] * t * f.length,
-                        f.z + f.along[2] * t * f.length, f.lumens / nseg))
+            out.append((x + record.along[0] * t * record.length, y + record.along[1] * t * record.length,
+                        z + record.along[2] * t * record.length, record.flux_lm / nseg))
         return out
-    return [(f.x, f.y, f.z, f.lumens)]
+    return [(x, y, z, record.flux_lm)]

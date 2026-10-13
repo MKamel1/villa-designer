@@ -15,6 +15,8 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
+from archpipe.stage_result import write_stage_result, enforce_clean_verdict
+from archpipe.safe_io import save_json
 from archpipe.review_extract import review_model  # noqa: E402
 from archpipe.safe_io import copy_file  # noqa: E402
 from archpipe.execution_context import (ContextError, Tool, project_context,
@@ -85,6 +87,23 @@ def pid_alive(pid: int) -> bool:
     return True
 
 
+def record_acceptance(result, inputs, reused=False):
+    out = ROOT / 'out'
+    outputs = [out / 'bedroom-acceptance.json']
+    outputs += [out / name for name in result.get('artifacts', {})]
+    record = write_stage_result('bedroom', record_path=out / 'bedroom.stage-result.json',
+        inputs=[ROOT / name for name in inputs], outputs=outputs, root=ROOT,
+        code_paths=[ROOT / name for name in inputs if name.endswith('.py')],
+        exit_code=0 if result['passed'] else 1,
+        metadata={'worker_runtime': result.get('worker_runtime'), 'samples': result.get('samples'),
+                  'reused': reused, 'runtime_before': result.get('runtime_before'),
+                  'runtime_after': result.get('runtime_after'), 'error': result.get('error')})
+    try:
+        return enforce_clean_verdict(record, message='Bedroom acceptance failed')
+    except SystemExit as exc:            # main() callers and tests expect a return code
+        return exc.code
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--skip-revit', action='store_true')
@@ -112,16 +131,16 @@ def main():
                    'input_hashes':inputs,'samples':a.samples,
                    'scope':'capability example, not villa approval',
                    'finished_utc':time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime())}
-        acceptance.write_text(json.dumps(failure,indent=2),encoding='utf-8')
+        save_json(acceptance, failure, indent=2)
         print('FAIL '+str(exc),file=sys.stderr)
-        return 1
+        return record_acceptance(failure, inputs)
     runtime_id = hashlib.sha256(json.dumps(runtime,sort_keys=True).encode()).hexdigest()
     if (a.resume and previous.get('passed') and previous.get('input_hashes') == inputs
             and previous.get('worker_runtime') == runtime_id
             and previous.get('samples') == a.samples and artifacts_match(previous.get('artifacts', {}))):
         print('PASS unchanged inputs and artifacts; reused complete verified run')
         print(acceptance)
-        return 0
+        return record_acceptance(previous, inputs, reused=True)
     revit_inputs = {k:v for k,v in inputs.items() if k.startswith('revit/') or
                     k in ['spec/bedroom-test.yaml', 'scripts/make_bedroom_spec.py',
                           'src/archpipe/furniture.py']}
@@ -132,8 +151,8 @@ def main():
               'execution_context': context,
               'scope': 'capability example, not villa approval', 'checks': {}, 'artifacts': {},
               'input_hashes': inputs, 'samples': a.samples, 'reused_revit': a.skip_revit,
-              'worker_runtime':runtime_id}
-    acceptance.write_text(json.dumps(result, indent=2))
+              'worker_runtime':runtime_id, 'runtime_before':runtime}
+    save_json(acceptance, result, indent=2)
     env = {**os.environ, 'PYTHONIOENCODING': 'utf-8', 'PYTHONPATH': str(ROOT / 'src')}
     try:
         run([sys.executable, ROOT/'scripts/make_bedroom_spec.py'], 'spec', env)
@@ -198,6 +217,9 @@ def main():
              '--resolution','1600x1000'], 'worker_bedroom',env,
              out/'workstation/bedroom-latest.json',timeout=1800)
         batch = json.loads((out/'workstation/bedroom-latest.json').read_text())
+        result['runtime_after'] = batch.get('runtime')
+        # Persist the completed worker batch before downstream copies and PDF/JSON work.
+        save_json(out / 'bedroom-worker-checkpoint.json', batch, indent=2)
         if not batch['passed']:
             raise RuntimeError('Workstation batch did not pass')
         bundle = out/'workstation'/batch['batch_id']
@@ -242,9 +264,9 @@ def main():
         result['error'] = str(exc)
         print('FAIL', exc, file=sys.stderr)
     result['finished_utc'] = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
-    acceptance.write_text(json.dumps(result, indent=2), encoding='utf-8')
+    save_json(acceptance, result, indent=2)
     print(acceptance)
-    return 0 if result['passed'] else 1
+    return record_acceptance(result, inputs)
 
 
 if __name__ == '__main__':

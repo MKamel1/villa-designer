@@ -32,6 +32,7 @@ ALLOWED_MATERIALS = {
     "alu-bronze", "stainless", "paint-white-satin", "white-paint-joinery", "led-lin-2700", "lens-2700",
     "marker-2200", "opal-pen-globe-2700", "opal-inner-2700", "swing-disc-2700", "opal-pen-small-2700", "opal-wall-read-2700", "opal-sconce-3000",
     "opal-vsconce-3000", "curtain-sheer", "curtain-heavy", "curtain-heavy-dimout",
+    "opal-VANITY-LIN-guest-wc-03", "opal-VANITY-LIN-parents-ensuite-04",  # client 2026-10-08, ASSUMED opal bars
     "garment-ivory", "garment-blush", "garment-terracotta", "garment-sage-soft",
     "garment-navy", "garment-charcoal", "garment-stone", "garment-olive",
 }
@@ -480,6 +481,43 @@ class RenderStandard(unittest.TestCase):
     def test_exposure_metered_and_locked_per_state(self):          # ADR-0013 part 6 + amendment
         self.assertEqual(SCENE["exposure_mode"], "set-metered")
 
+    def test_l0091_individually_metered_real_view_is_refused(self):
+        """Replay the recorded independent-exposure policy on the real set.
+
+        l0091 records equalised dark/sunlit views, without historic meter
+        readings; this tests that policy failure, not invented readings.
+        """
+        from archpipe.villa_render_contract import validate_scene
+        self.assertEqual(validate_scene(SCENE), [])
+        alone = dict(SCENE, views=[next(v for v in SCENE['views'] if v['id'] == 'v12-ensuite')],
+                     exposure_mode='per-view-metered')
+        self.assertTrue(any('exposure_mode' in error for error in validate_scene(alone)))
+        # A different current view and missing mode cannot silently use a
+        # renderer fallback. Subset requests still retain set-metered mode.
+        sibling = dict(SCENE, exposure_mode='per-view-metered')
+        self.assertTrue(any('exposure_mode' in error for error in validate_scene(sibling)))
+        missing = dict(SCENE)
+        missing.pop('exposure_mode')
+        self.assertTrue(any('exposure_mode' in error for error in validate_scene(missing)))
+        overridden = dict(SCENE, views=[dict(SCENE['views'][0], exposure_mode='per-view-metered')])
+        self.assertTrue(any('exposure_mode' in error for error in validate_scene(overridden)))
+
+    def test_l0481_real_wall_is_refused_by_contract_and_scene_build(self):
+        from copy import deepcopy
+        from unittest.mock import patch
+        from archpipe.villa_render_contract import validate_scene
+        view = deepcopy(next(v for v in SCENE['views'] if v['id'] == 'v30-under-ramp-store'))
+        x, y, z = view['camera']['position']
+        view['camera']['target'] = [x, y-1, z]
+        scene = dict(SCENE, views=[view])
+        self.assertTrue(any('camera faces wall' in error for error in validate_scene(scene)))
+        # Keep the real inputs, and inject only the downstream visibility
+        # result so the build's independent wall-validation gate is reached.
+        with patch('archpipe.concept.garden_render_review.subject_visibility_findings', return_value=[]), \
+                patch('archpipe.concept.garden_render_review.subject_frame_findings', return_value=[]):
+            with self.assertRaisesRegex(ValueError, 'camera wall sightline:.*v30-under-ramp-store'):
+                VR.build(views=[view])
+
     def test_every_bed_is_dressed_with_cloth(self):                 # ADR-0013 part 9
         ids = {c["id"] for c in SCENE["cloth"]}
         for bed in ("pb-bed", "kb-bed", "ka-bunk"):
@@ -776,9 +814,20 @@ class RenderStandard(unittest.TestCase):
             self.assertAlmostEqual(min(p[2] for p in pts) - floor - items[basin_id]["h"], 0.20)
             sconces = [m for m in SCENE["meshes"] if m["id"].startswith(("lamp-SCONCE-" + room,
                                                                            "lamp-VSCONCE-" + room))]
-            self.assertEqual(len(sconces), 2)
             axis = 0 if max(p[0] for p in pts) - min(p[0] for p in pts) > 0.1 else 1
             mirror_lo = min(p[axis] for p in pts); mirror_hi = max(p[axis] for p in pts)
+            if room in ('guest-wc','parents-ensuite'):
+                self.assertEqual(sconces,[])
+                bars = [m for m in SCENE['meshes'] if m['id'].startswith('body-VANITY-LIN-'+room)]
+                self.assertEqual(len(bars),1)
+                bar_pts = [p for face in bars[0]['faces'] for p in face]
+                self.assertAlmostEqual((min(p[axis] for p in bar_pts)+max(p[axis] for p in bar_pts))/2,
+                                       (mirror_lo+mirror_hi)/2)
+                self.assertGreater(min(p[2] for p in bar_pts),max(p[2] for p in pts))
+                self.assertGreaterEqual(min(p[axis] for p in bar_pts),mirror_lo)
+                self.assertLessEqual(max(p[axis] for p in bar_pts),mirror_hi)
+                continue
+            self.assertEqual(len(sconces), 2)
             centres = [sum(p[axis] for face in m["faces"] for p in face) /
                        sum(len(face) for face in m["faces"]) for m in sconces]
             self.assertLess(min(centres), mirror_lo)

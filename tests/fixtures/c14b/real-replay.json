@@ -1,0 +1,92 @@
+{
+  "manifest": {
+    "schema": 1,
+    "kind": "render",
+    "parameters": {
+      "camera": "bed",
+      "samples": 32,
+      "resolution": "128x128"
+    },
+    "model": "cb24cd10956e9fa53b65dedee58b213e52be93ba1ea59df4b2b91682029abb79",
+    "runtime": {
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "system": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+      "blender_version": "Blender 4.5.14 LTS",
+      "blender_sha256": "050c02562f81fe80ba616a80198fa02d381e60f8b61b8d39add881f4bca0d7d8",
+      "assets": "847b6f11ea217fabb3ad74a21a63ed57791d2018ce53e74782976601c23b10e4",
+      "code": "197e3e67b585290ae16ce37decd0141f52e4d24ac77f6d28743340a7ea2f200a"
+    }
+  },
+  "job_id": "9334d0990e6b0f0a445a5db9a13f28d2fd13be9da61ba48f9a5240a6130870bd",
+  "runtime": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "system": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+    "blender_version": "Blender 4.5.14 LTS",
+    "blender_sha256": "050c02562f81fe80ba616a80198fa02d381e60f8b61b8d39add881f4bca0d7d8",
+    "assets": "847b6f11ea217fabb3ad74a21a63ed57791d2018ce53e74782976601c23b10e4"
+  },
+  "code": {
+    "scripts/worker_entry.py": "34897a84a86eb58205bfab7362142e0b891013f894caeeb7c121457430632bc8",
+    "src/archpipe/worker.py": "322cbc6e72c711865bbc0abf4d387b1718ce254930c45b78ed0e740c1fdf538b",
+    "requirements-worker.txt": "b16842c6f2161c9d6a1055da4e4283108c86a31b60741ab3f5fc6d3615d4734d",
+    "src/archpipe/blender/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/archpipe/blender/build_scene.py": "9a364f64c03a92a255a1bc6542e44f68d95a16920d827d9f4cb409b2bd0e10ad",
+    "src/archpipe/blender/calibrate_photometry.py": "38887c9363d112a3feec0ee8f4f4ba5fa988b99b3fa4d1b790b66a879e569832",
+    "src/archpipe/blender/calibrate_sky.py": "89a7204ff69d26a8ee95f9c5dacabb4e5a30ee331a45299046356b257ce9efa9",
+    "src/archpipe/blender/climber_placement.py": "e42678c32570750888563e72b3a75f21d5c053c9ab3c500146a6fcb9657e3c59",
+    "src/archpipe/blender/grain.py": "fa08815ace86e05179dee80380b6d4ed3be6551b34ca0e9ec788e9ad6baed3ec",
+    "src/archpipe/blender/measure_lux.py": "e96c4f6c07db5a9d5523c2f675a7be4d7fcd4c23e278bb1dc01b2ad919f0e65b",
+    "src/archpipe/blender/photoreal.py": "269ab17b0d2739db91a51c39507e9c5e90635405b62b0c4fdf29f178bd34c47d",
+    "src/archpipe/blender/presentation.py": "d14d44a675abc2a08ae614a305804db206afdafd6aa00c5608002f9804ec5790",
+    "src/archpipe/blender/stone_union.py": "83f0a79a3c839685872128e60940f0886dc2662b413e8baaaf1f8792d242a85e",
+    "src/archpipe/blender/validate_render_photometry.py": "0d3ad43f9e33dccecd33570a1abe44a9e1e662b1e5dd4743b75860ed50f7e888",
+    "src/archpipe/blender/villa_scene.py": "8bfc2f357fb389ad320d06a9ae70f307162fea8815dcf67b0fd49cd74080408b"
+  },
+  "input_hashes": {
+    "bedroom-render.json": "e3040b12ad6c4aa1fcf45198c1cfb39d25e91398fab7892167466e16b9dbc533",
+    "EWL2A19.ies": "8434ad442c158123638f8d9c62061e916918dec8985f9050190d0a8a226d2126",
+    "LGLled.ies": "3c53a083e007947cb3c333bb4ff43ae3d61939f48fd1afdadcb5f9548a777e9e",
+    "PLD1A21.ies": "efb8d1cb91b1629ed44147c2de978c57c260d58f85726d37b4e5bce99ee10bde"
+  },
+  "renderer_mutation_job_id": "ec88c15b0ee46c272748660313a41f1b7b2f241a3d41c7aed12df1cb3a1356be",
+  "unchanged_reused": 3,
+  "legacy_manifest": {
+    "scene": "cb24cd10956e9fa53b65dedee58b213e52be93ba1ea59df4b2b91682029abb79",
+    "ies": "847b6f11ea217fabb3ad74a21a63ed57791d2018ce53e74782976601c23b10e4"
+  },
+  "legacy_stale_reused": true,
+  "legacy_recorded_renderer": "Blender 4.5.14 LTS",
+  "requested_renderer_mutation": "Blender 4.5.14 LTS [mutation]",
+  "version_mutation_reused": false,
+  "corrupt_output_reused": false,
+  "passed": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "real_attempts": [
+    "out/c14b-final-real/jobs/9334d0990e6b0f0a445a5db9a13f28d2fd13be9da61ba48f9a5240a6130870bd/attempts/f299d7c2aab4439588f78acac0cd5f25",
+    "out/c14b-final-real/jobs/c6d8a72af1ecfbf1d0194b24d34cd05595d4c7323d2f93fb7a3b284146b4f4f0/attempts/692af5c695ec4dfbb4d70e1fdaffd4a5",
+    "out/c14b-final-real/jobs/3be125f6c68c42c58c7968e4d35ef1623b5654f1dabae6f7263906e689f4a52a/attempts/9df135fb873a4221b000748675bc4d93",
+    "out/c14b-final-real/jobs/ec88c15b0ee46c272748660313a41f1b7b2f241a3d41c7aed12df1cb3a1356be/attempts/57f26392fb264255a4f70b37cf470303",
+    "out/c14b-final-real/jobs/9334d0990e6b0f0a445a5db9a13f28d2fd13be9da61ba48f9a5240a6130870bd/attempts/46fadfd0b506421fbf8f3cf6984c74a0"
+  ],
+  "scope": "real native render; version string mutation uses the same installed Blender binary",
+  "photometry": {
+    "clean": {
+      "on": true,
+      "count": 5,
+      "with_ies": 5
+    },
+    "missing": {
+      "on": true,
+      "count": 5,
+      "with_ies": 0
+    }
+  }
+}

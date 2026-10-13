@@ -58,6 +58,16 @@ actual or specification values are not independent measurement evidence.
 | `radiance._write` | Direct `Path.write_text` in helper | Atomic `save_text` via `safe_io` covers all scenes, points, grids, and reports |
 | `cli._design` | Direct `Path.write_text(json.dumps(...))` for markup notes | Atomic `save_json` via `safe_io` |
 | `thermal.py` | Direct `write_text`/`open` | Audited: process log redirection requires append mode; scratch IDF and scene files immediately consumed by child processes are listed exceptions |
+| `revit/build_bedroom.py` | Direct JSON report write | Atomic `safe_io.save_json`; native model SaveAs retained |
+| `revit/diag_context.py` | Direct `json.dump` of diagnostic context | Atomic `safe_io.save_json` |
+| `revit/dump_mcp_tools.py` | Direct `json.dump` of tool definitions | Atomic `safe_io.save_json` |
+| `revit/export_views.py` | Direct `json.dump` of views report | Atomic `safe_io.save_json`; native model Save and PDF Export retained |
+| `revit/place_families_test.py` | Direct `json.dump` of placement test results | Atomic `safe_io.save_json`; native model SaveAs retained |
+| `revit/probe.py` | Direct `json.dump` of API probe | Atomic `safe_io.save_json` |
+| `revit/probe_fixture_drop.py` | Direct `json.dump` of drop lever probe | Atomic `safe_io.save_json` |
+| `revit/probe_fixture_geometry.py` | Direct `json.dump` of geometry probe | Atomic `safe_io.save_json` |
+| `revit/probe_product_family.py` | Non-atomic write of ASCII-escaped text (`default=str`) | Atomic `safe_io.save_json` with `default=str` and ASCII escaping retained |
+| `revit/probe_villa_inventory.py` | Direct `codecs.open` write in `_write` (`_clean`) | Atomic `safe_io.save_json` with `_clean` retained; native model SaveAs retained |
 
 Legacy extract fields remain compatible. The current extractor still casts Color
 channels manually and exports legacy TextNote fields; native typed adapter wiring
@@ -68,12 +78,11 @@ and identifiers are tested but complete field adoption is pending. Legacy
 
 ## Phase 2 list
 
-Direct report writers in `revit/`: `build_bedroom.py`, `diag_context.py`,
+Direct report writers in `revit/` (`build_bedroom.py`, `diag_context.py`,
 `dump_mcp_tools.py`, `export_views.py`, `place_families_test.py`, `probe.py`,
 `probe_fixture_drop.py`, `probe_fixture_geometry.py`, `probe_product_family.py`,
-`probe_villa_inventory.py`. The last two use local cleaning, not atomic writes.
-Product-family output still uses `default=str`; its UTF-16 catalogue reader
-already decodes bytes explicitly.
+`probe_villa_inventory.py`) were migrated in Phase 2 Batch 2 onto `safe_io.save_json`,
+preserving `default=str` and `_clean` serialization behavior.
 
 Local JSON input readers: `build_bedroom.py`, `build_villa_env.py`,
 `build_villa_stairs.py`, `build_villa_option.py`. Raw parameter JSON metadata:

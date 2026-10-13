@@ -23,7 +23,7 @@ executive_summary: >
 
 ## Executive Summary
 
-Phase 2 Batch 1 routes four critical external intake call sites through the centralized guards in [`src/archpipe/external_claims.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/external_claims.py). The migrations eliminate silent ingestion of empty files ([`l0072`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L257)), content-type spoofing and HTML error pages disguised as assets ([`l0113`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L298)), and catalogue crawl completeness shortfalls ([`l0122`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L307)). Public function signatures and return types are strictly preserved, no arbitrary thresholds were introduced, and unit tests execute under complete network isolation via mocked HTTP layers.
+Phase 2 Batch 1 routes four critical external intake call sites through the centralized guards in [`src/archpipe/external_claims.py`](../src/archpipe/external_claims.py). The migrations eliminate silent ingestion of empty files ([`l0072`](LEARNINGS.md#L257)), content-type spoofing and HTML error pages disguised as assets ([`l0113`](LEARNINGS.md#L298)), and catalogue crawl completeness shortfalls ([`l0122`](LEARNINGS.md#L307)). Public function signatures and return types are strictly preserved, no arbitrary thresholds were introduced, and unit tests execute under complete network isolation via mocked HTTP layers.
 
 ---
 
@@ -31,12 +31,12 @@ Phase 2 Batch 1 routes four critical external intake call sites through the cent
 
 Only the following six files were modified or created for this batch:
 
-1. [`src/archpipe/fetch.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py): Added `external_claims` import; updated `get_text()` and `download()`.
-2. [`src/archpipe/luminaires/iguzzini.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/iguzzini.py): Added `external_claims` import; updated `crawl_products()` and `fetch_photometry()`.
-3. [`tests/test_c11_phase2.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_c11_phase2.py): New unit test suite with 10 isolated tests verifying all four call sites against frozen historical defects, quiet clean inputs, and sibling mutations.
-4. [`docs/external-claims.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/external-claims.md): Marked the four migrated rows in Sections 1 and 2 as migrated in Phase 2 Batch 1.
-5. [`docs/LEARNINGS.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md): Appended the Phase 2 Batch 1 migration record under the `external-claims-phase1` section.
-6. [`docs/c11p2-report.md`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/c11p2-report.md): This report document.
+1. [`src/archpipe/fetch.py`](../src/archpipe/fetch.py): Added `external_claims` import; updated `get_text()` and `download()`.
+2. [`src/archpipe/luminaires/iguzzini.py`](../src/archpipe/luminaires/iguzzini.py): Added `external_claims` import; updated `crawl_products()` and `fetch_photometry()`.
+3. [`tests/test_c11_phase2.py`](../tests/test_c11_phase2.py): New unit test suite with 10 isolated tests verifying all four call sites against frozen historical defects, quiet clean inputs, and sibling mutations.
+4. [`docs/external-claims.md`](external-claims.md): Marked the four migrated rows in Sections 1 and 2 as migrated in Phase 2 Batch 1.
+5. [`docs/LEARNINGS.md`](LEARNINGS.md): Appended the Phase 2 Batch 1 migration record under the `external-claims-phase1` section.
+6. [`docs/c11p2-report.md`](c11p2-report.md): This report document.
 
 ---
 
@@ -47,8 +47,8 @@ Only the following six files were modified or created for this batch:
 - **New Behavior**: Before `part.replace(dest)`, downloaded bytes are read and passed to `external_claims.ingest_bytes(data, declared_type=dest.suffix.lstrip(".") or None, url=url)`.
   - If `rec.status != external_claims.VERIFIED`:
     - The `.part` file is deleted (`part.unlink()`).
-    - If `sniffed_type == "empty"`, raises `external_claims.EmptyContentError` ([`l0072`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L257)).
-    - Otherwise raises `external_claims.ContentTypeMismatchError` ([`l0113`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L298)).
+    - If `sniffed_type == "empty"`, raises `external_claims.EmptyContentError` ([`l0072`](LEARNINGS.md#L257)).
+    - Otherwise raises `external_claims.ContentTypeMismatchError` ([`l0113`](LEARNINGS.md#L298)).
 - **Return Type & Intake Receipt Rationale**: The inventory noted recording SHA-256 and retrieval time into an intake receipt. However, `download()` has an established public return type signature of `Path` (`return dest: Path`), consumed across the project (e.g., `src/archpipe/asset_intake.py`). Returning a tuple or dictionary receipt would alter this public return type and break existing callers. In accordance with the instruction, the public `Path` return type was kept strictly unchanged, and this limitation is recorded here.
 - **Test Proofs in `tests/test_c11_phase2.py`**:
   - `test_fetch_download_real_html_error_page_fails_closed_l0113`: Frozen Signify HTML 404 error page payload fails closed with `ContentTypeMismatchError`; `dest` is not created.
@@ -81,7 +81,7 @@ Only the following six files were modified or created for this batch:
 ### 4. `src/archpipe/luminaires/iguzzini.py:crawl_products()`
 - **Old Behavior**: Crawled product pages and wrote coverage statistics via `write_coverage`, returning parsed rows even when substantial families were unread.
 - **New Behavior**: Immediately after `write_coverage("iguzzini", ...)`, calls `external_claims.assert_manifest_complete(len(requested), len(rows), label="iGuzzini product crawl", min_coverage_ratio=1.0, missing_items=unread)`.
-- **Threshold Policy**: In accordance with the instructions ("do not invent a threshold: if assert_manifest_complete needs a minimum ratio that the repo does not already define, require completeness (all requested families) and state that in the report"), the ratio is set to strict 100% completeness (`min_coverage_ratio=1.0`). If any requested family fails to parse, the crawl fails closed with `CompletenessShortfallError` ([`l0122`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L307)).
+- **Threshold Policy**: In accordance with the instructions ("do not invent a threshold: if assert_manifest_complete needs a minimum ratio that the repo does not already define, require completeness (all requested families) and state that in the report"), the ratio is set to strict 100% completeness (`min_coverage_ratio=1.0`). If any requested family fails to parse, the crawl fails closed with `CompletenessShortfallError` ([`l0122`](LEARNINGS.md#L307)).
 - **Test Proofs in `tests/test_c11_phase2.py`**:
   - `test_iguzzini_crawl_products_real_shortfall_fails_closed_l0122`: Frozen historical defect of 381 requested families with 158 unread/lost (223 received, 41% loss) fails closed with `CompletenessShortfallError`.
   - `test_iguzzini_crawl_products_clean_completeness_passes_quietly`: 5 requested families all parsed successfully passes quietly and returns all 5 rows.
@@ -124,9 +124,9 @@ In accordance with batch boundary rules, the remaining candidate call sites from
 
 | Lesson ID | Quoted Historical Learning | Registered Call-Site Function |
 |---|---|---|
-| [`l0072`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L257) | *"All six props were recorded as downloaded while their folders were empty"* | [`archpipe.fetch.download`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py#L97-L125), [`archpipe.fetch.get_text`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py#L75-L94) |
-| [`l0113`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L298) | *"Signify served a zip labelled application/json; Revit type catalogues are UTF-16 with a BOM"* | [`archpipe.fetch.download`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py#L97-L125), [`archpipe.fetch.get_text`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/fetch.py#L75-L94), [`archpipe.luminaires.iguzzini.fetch_photometry`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/iguzzini.py#L208-L229) |
-| [`l0122`](file:///C:/Users/mmbka/arch-pipeline-agy/docs/LEARNINGS.md#L307) | *"The catalogue crawl lost 158 of 381 families (41%) and still looked finished"* | [`archpipe.luminaires.iguzzini.crawl_products`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/luminaires/iguzzini.py#L173-L206) |
+| [`l0072`](LEARNINGS.md#L257) | *"All six props were recorded as downloaded while their folders were empty"* | [`archpipe.fetch.download`](../src/archpipe/fetch.py#L97-L125), [`archpipe.fetch.get_text`](../src/archpipe/fetch.py#L75-L94) |
+| [`l0113`](LEARNINGS.md#L298) | *"Signify served a zip labelled application/json; Revit type catalogues are UTF-16 with a BOM"* | [`archpipe.fetch.download`](../src/archpipe/fetch.py#L97-L125), [`archpipe.fetch.get_text`](../src/archpipe/fetch.py#L75-L94), [`archpipe.luminaires.iguzzini.fetch_photometry`](../src/archpipe/luminaires/iguzzini.py#L208-L229) |
+| [`l0122`](LEARNINGS.md#L307) | *"The catalogue crawl lost 158 of 381 families (41%) and still looked finished"* | [`archpipe.luminaires.iguzzini.crawl_products`](../src/archpipe/luminaires/iguzzini.py#L173-L206) |
 
 ## Lead review correction (2026-10-08)
 

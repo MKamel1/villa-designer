@@ -450,40 +450,23 @@ class TestFixtureRecordConsistency(unittest.TestCase):
     # -------------------------------------------------------------------------
 
     def test_remaining_c5_lessons_status_is_documented(self) -> None:
-        """Verify documentation rationale for all 14 Class C5 lessons.
-        
-        5 lessons are proven by value with real frozen reproductions (l0095, l0096, l0119, l0123, l0610).
-        The remaining 9 lessons require dynamic render/radiance/timing harnesses and are scheduled for Phase 2.
+        """Read source-quoted reasons for the nine lessons still open in Phase 2.
+
+        Real Phase-1 failure proofs remain in their independent tests above.
+        A fixture-record mismatch is not a surrogate for renderer transport.
         """
-        c5_lessons = {
-            "l0025-third-party-families": "Phase 2: requires live Revit .rfa family parameter write probe",
-            "l0026-blender-ies-azimuth": "Phase 2: requires Cycles rendered image angular flux probe",
-            "l0074-nishita-sky-units": "Phase 2: covered by src/archpipe/blender/calibrate_sky.py",
-            "l0080-lamps-rendered-far": "Phase 2: requires pixel colour sampling from rendered image",
-            "l0090-window-glass-passed": "Phase 2: requires Cycles transmission ray caustics probe",
-            "l0095-lamp-sources-sat": "PROVEN in Phase 1 (emitter datum vs spec mounting height)",
-            "l0096-two-spec-heights": "PROVEN in Phase 1 (shade top penetrating ceiling)",
-            "l0119-housing-below-ceiling": "PROVEN in Phase 1 (recessed void note vs pendant clash)",
-            "l0123-swapping-4300-lm": "PROVEN in Phase 1 (luminaire flux vs requirement band)",
-            "l0606-first-drafts-failed": "Phase 2: design card verification check in villa_lighting.py",
-            "l0610-fitting-labelled-wrong": "PROVEN in Phase 1 (room clear rectangle containment)",
-            "l0650-scene-lux-measurement": "Phase 2: requires in-scene sensor camera clipping probe",
-            "l0656-glass-verified": "Phase 2: requires physical slab transmittance integration",
-            "l0874-per-point-recomputation": "Phase 2: benchmark timing test bounding check run time",
-        }
-        self.assertEqual(len(c5_lessons), 14)
-        proven = [k for k, v in c5_lessons.items() if v.startswith("PROVEN")]
-        self.assertEqual(len(proven), 5)
-        self.assertEqual(
-            set(proven),
-            {
-                "l0095-lamp-sources-sat",
-                "l0096-two-spec-heights",
-                "l0119-housing-below-ceiling",
-                "l0123-swapping-4300-lm",
-                "l0610-fitting-labelled-wrong",
-            },
-        )
+        statuses = json.loads((ROOT / 'knowledge/c5-phase2-lessons.json').read_text())
+        self.assertEqual(set(statuses), {
+            'l0025-third-party-families', 'l0026-blender-ies-azimuth',
+            'l0074-nishita-sky-units', 'l0080-lamps-rendered-far',
+            'l0090-window-glass-passed', 'l0606-first-drafts-failed',
+            'l0650-scene-lux-measurement', 'l0656-glass-verified',
+            'l0874-per-point-recomputation'})
+        for lesson, status in statuses.items():
+            self.assertEqual(status['status'], 'open', lesson)
+            self.assertIn('LEARNINGS.md:', status['reason'])
+            self.assertGreater(len(status['reason']), 100)
+
 
 
 if __name__ == "__main__":

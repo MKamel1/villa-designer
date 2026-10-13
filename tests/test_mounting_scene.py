@@ -164,7 +164,12 @@ class StairFirstPackage(unittest.TestCase):
         fixes={'detail-gwc-hand-shower-head','detail-gwc-hand-shower-hose','lamp-SCONCE-guest-wc-03'}
         render_meshes={m['id']:m for m in self.scene['meshes']}
         diag_meshes={m['id']:m for m in self.scene.get('diagnostic_meshes',[])}
+        from archpipe.fixture_record import VANITY_DECISIONS
+        retired={fid for pair in VANITY_DECISIONS.values() for fid in pair}
         for row in self.scene['mounting_movements']:
+            if row['id'] in {prefix+fid for fid in retired for prefix in ('lamp-','bracket-')}:
+                self.assertNotIn(row['id'],render_meshes)
+                continue  # Frozen approval receipt of a client-retired fitting.
             if row['package']=='e-support': continue
             if row['id'] in fixes:
                 continue
@@ -177,7 +182,7 @@ class StairFirstPackage(unittest.TestCase):
                 self.assertEqual(bounds_for_test(mesh),row['old'])
             else:
                 self.assertEqual(mesh['faces'],row['proposed_faces'])
-        self.assertEqual(len([m for m in render_meshes.values() if m.get('mounting_package') in ('b-bathroom','c-wall-lights')]),62)
+        self.assertEqual(len([m for m in render_meshes.values() if m.get('mounting_package') in ('b-bathroom','c-wall-lights')]),56)
 
     def test_bc_frozen_handset_and_wall_edge_are_not_silenced(self):
         frozen=json.loads((Path(__file__).parent/'fixtures/c4-guest-before-fixes.json').read_text())
@@ -207,7 +212,10 @@ class StairFirstPackage(unittest.TestCase):
         hose['hose_path']['retained_endpoints'][0][0]+=.01
         self.assertTrue(any('endpoints changed' in f for f in scene_findings(mutant)))
         mutant=deepcopy(subset)
-        sconce=next(m for m in mutant['meshes'] if m['id'].endswith('SCONCE-guest-wc-03'))
+        # Retired fitting retains its actual frozen host-coverage proof.
+        history=json.loads((Path(__file__).parent/'fixtures/c5_pair_scene.json').read_text())
+        sconce=deepcopy(next(m for m in history['before']['meshes'] if m['id']=='lamp-SCONCE-guest-wc-03'))
+        mutant['meshes'].append(sconce)
         sconce['mounting']['fixing_footprint'][0][1]-=.1
         self.assertTrue(any('finite host coverage' in f for f in scene_findings(mutant)))
 
@@ -222,6 +230,9 @@ class StairFirstPackage(unittest.TestCase):
         # Reproduce the historical render-channel defect explicitly: this
         # datum now lives only in diagnostics, so replacement was a no-op.
         self.assertIn(frozen['id'], {m['id'] for m in reproduced['diagnostic_meshes']})
+        # Deliberately inject an invalid historical datum into the downstream
+        # schema guard. Production strict Part admission rejects it earlier.
+        reproduced['meshes'] = list(reproduced['meshes'])
         reproduced['meshes'].append(frozen)
         self.assertTrue(any('.label: string required' in f for f in contract.validate_scene(reproduced)))
         sibling=deepcopy(schema_scene)
@@ -296,7 +307,7 @@ class StairFirstPackage(unittest.TestCase):
             host=mutant['mounting_hosts'][root['mounting']['host_id']]
             host['void_depth_m']-=.03
             self.assertTrue(any('void' in f for f in scene_findings(mutant) if f.startswith(root['id']+':')))
-        with __import__('unittest.mock',fromlist=['patch']).patch.dict(VL.PRODUCT_CHOICE,{'DL':('iguzzini','NO-DEPTH-RECORD','missing')}):
+        with __import__('unittest.mock',fromlist=['patch']).patch.object(VL,'PRODUCT_CHOICE',{**VL.PRODUCT_CHOICE,'DL':('iguzzini','NO-DEPTH-RECORD','missing')}):
             req=requirements([VL.Fixture('custom','DL','new-room','GF',1,1,2.7)])
             self.assertEqual(req[0]['status'],'UNRESOLVED')
             self.assertIsNone(req[0]['required_void_mm'])
@@ -353,15 +364,27 @@ class StairFirstPackage(unittest.TestCase):
         self.assertEqual(min(p[2] for face in floor["faces"] for p in face), -3)
 
     def test_visible_wall_face_agrees_with_mounts_and_stays_in_package(self):
+        from archpipe.concept.construction_solids import BACKING_M
+        from archpipe.concept.fitting_mounting import normal
+        from archpipe.concept.physical_part import PartMeshList
         spec = RS.build(R.design("D1"))
         treads = [b for b in spec["stair"] if b[5] - b[2] < 300]
         start, end = min(b[0] for b in treads) / 1000, max(b[3] for b in treads) / 1000
         walls = [m for m in self.scene["meshes"] if m.get("finished_host_id") == "stair-party-wall"]
         self.assertTrue(walls)
         for wall in walls:
-            for face in wall["faces"]:
+            PartMeshList().append(wall)
+            fronts = [face for face in wall['faces'] if normal(face)[1] > .999999]
+            self.assertTrue(fronts)
+            for face in fronts:
                 for point in face:
                     self.assertAlmostEqual(point[1], -28.458)
+            # A closed finish has host-side backing; only its occupied face
+            # is coplanar with the retained finished datum.
+            for face in wall["faces"]:
+                for point in face:
+                    self.assertGreaterEqual(point[1], -28.458-BACKING_M-1e-9)
+                    self.assertLessEqual(point[1], -28.458+1e-9)
                     self.assertLessEqual(start - 1e-9, point[0])
                     self.assertLessEqual(point[0], end + 1e-9)
 
@@ -403,6 +426,9 @@ class StairFirstPackage(unittest.TestCase):
         self.assertIn("stair-basement-floor", self.scene.get("mounting_hosts", {}))
 
         mutant = deepcopy(self.scene)
+        # This test targets write-time channel rejection after bypassing the
+        # earlier physical boundary only for deliberately invalid fixtures.
+        mutant['meshes'] = list(mutant['meshes'])
         mutant["meshes"].append(dict(
             id="host-face-bath-gwc-wc", group="shell", material="marble-bath",
             room="guest-wc", label="Measured finished fixing face",
@@ -412,6 +438,7 @@ class StairFirstPackage(unittest.TestCase):
         self.assertTrue(any("host-face-bath-gwc-wc" in e and "bookkeeping" in e for e in mutant_errors))
 
         mutant2 = deepcopy(self.scene)
+        mutant2['meshes'] = list(mutant2['meshes'])
         mutant2["meshes"].append(dict(
             id="support-detail-test-patch", group="shell", material="ceiling-white",
             room="guest-wc", label="Support patch",
@@ -432,6 +459,7 @@ class StairFirstPackage(unittest.TestCase):
         from archpipe.villa_render_contract import validate_scene
         scene = VR.build()
         mutant = deepcopy(scene)
+        mutant['meshes'] = list(mutant['meshes'])  # Exercise the later write guard on the historical open datum.
         mutant["meshes"].append(dict(
             id="host-face-test-wall", group="shell", material="plaster-warm-white",
             room="lounge", label="Bookkeeping host face",
@@ -476,6 +504,12 @@ class StairFirstPackage(unittest.TestCase):
             knowledge_dir / 'c4-final-approvals.json',
         ]
         retired = {'host-face-support-detail-vent-' + room + '-grille' for room in ('guest-wc', 'dirty-kitchen')}
+        from archpipe.fixture_record import VANITY_DECISIONS, VANITY_DECISION_SOURCE
+        retired_fixture_ids={fid for pair in VANITY_DECISIONS.values() for fid in pair}
+        retired_fitting_meshes={prefix+fid for fid in retired_fixture_ids for prefix in ('lamp-','bracket-')}
+        self.assertEqual({fid for decision in scene['vanity_client_decisions'] for fid in decision['retired']},
+                         retired_fixture_ids)
+        self.assertTrue(all(d['source']==VANITY_DECISION_SOURCE for d in scene['vanity_client_decisions']))
 
         render_meshes = {m['id']: m for m in scene['meshes']}
         diag_meshes = {m['id']: m for m in scene.get('diagnostic_meshes', [])}
@@ -489,6 +523,18 @@ class StairFirstPackage(unittest.TestCase):
                 if mid in retired:
                     continue
                 approved_count += 1
+                # Retired fitting receipts remain tested even though the
+                # dated client decision removes their active geometry.
+                scheduled = [r for r in scene['mounting_movements'] if r['id']==mid
+                             and r['host_id']==row['host_id'] and
+                             all(abs(a-b)<1e-8 for key in ('old','new')
+                                 for a,b in zip(r[key],row[key]))]
+                self.assertTrue(scheduled, f"Frozen approval for {mid} absent from movement history")
+                self.assertTrue(all('APPLIED' in r['approval'] for r in scheduled))
+                if mid in retired_fitting_meshes:
+                    self.assertNotIn(mid,render_mesh_ids)
+                    self.assertNotIn(mid,diag_mesh_ids)
+                    continue
                 in_render = mid in render_mesh_ids
                 in_diag = mid in diag_mesh_ids
                 self.assertTrue(
@@ -501,14 +547,6 @@ class StairFirstPackage(unittest.TestCase):
                     all_movements[mid]['proposed_faces'],
                     f"Faces for {mid} do not match proposed faces in movement record"
                 )
-                # Later explicit design fixes supersede a pose, but the
-                # approved host and bounds must survive in the history.
-                scheduled = [r for r in scene['mounting_movements'] if r['id']==mid
-                             and r['host_id']==row['host_id'] and
-                             all(abs(a-b)<1e-8 for key in ('old','new')
-                                 for a,b in zip(r[key],row[key]))]
-                self.assertTrue(scheduled, f"Frozen approval for {mid} absent from movement history")
-                self.assertTrue(all('APPLIED' in r['approval'] for r in scheduled))
 
         self.assertGreater(approved_count, 0)
 

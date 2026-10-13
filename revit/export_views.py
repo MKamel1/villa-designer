@@ -25,6 +25,11 @@ from System.Collections.Generic import List
 sys.path.insert(0, os.path.dirname(__file__))
 from extract_model import resolve_doc, mm
 
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
+
 
 def ft(value):
     return UnitUtils.ConvertToInternalUnits(float(value), UnitTypeId.Millimeters)
@@ -175,14 +180,18 @@ def main():
     report['pdf_exported'] = doc.Export(dest, ids, opts)
     report['pdf'] = os.path.join(dest, opts.FileName + '.pdf')
     report['saved_model'] = doc.PathName
-    with open(os.path.join(dest, 'views-report.json'), 'w') as fh:
-        json.dump(report, fh, indent=2, sort_keys=True)
+    safe_io.save_json(os.path.join(dest, 'views-report.json'), report, indent=2, sort_keys=True)
     print('ARCHPIPE VIEWS ' + json.dumps(report, sort_keys=True))
     doc.Close(False)
 
 
-try:
-    main()
-except Exception:
-    print('ARCHPIPE VIEWS FAILED\n' + traceback.format_exc())
-    raise
+if __name__ == '__main__':
+    from stage_command import run as run_stage, report as read_report
+    dest = os.environ['ARCHPIPE_VIEWS_OUT']
+    report_path = os.path.join(dest, 'views-report.json')
+    model = os.environ.get('ARCHPIPE_MODEL') or resolve_doc().PathName
+    raise SystemExit(run_stage('export-views', main,
+        os.path.join(dest, 'export-views.stage-result.json'), [model],
+        lambda value: [model, report_path, os.path.join(dest, 'bedroom-native-views.pdf')],
+        lambda value: bool(read_report(report_path).get('errors')) or
+            not read_report(report_path).get('pdf_exported'), __revit__.Application))

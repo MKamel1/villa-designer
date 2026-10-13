@@ -98,13 +98,21 @@ def make_scene(folder: Path, ies_source: Path | None = None) -> dict:
     return scene
 
 
-def main():
+def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--out", type=Path, default=ROOT / "out/villa/render-selftest")
     ap.add_argument("--run", action="store_true")
     ap.add_argument("--host", default="ai-workstation")
     ap.add_argument("--ies-source", type=Path)
-    a = ap.parse_args()
+    a = ap.parse_args(sys.argv[1:] if argv is None else argv)
+    from archpipe.execution_context import ContextError, project_context
+    try:
+        project_context(ROOT, Path(__file__).resolve(), "villa-render-selftest",
+                        inputs=[a.ies_source] if a.ies_source else (), output=a.out,
+                        modules=["PIL"] if a.run else ())
+    except ContextError as exc:
+        print("PREFLIGHT FAILED: " + str(exc), file=sys.stderr)
+        return 2
     scene = make_scene(a.out, a.ies_source)
     print(json.dumps({"scene": str(a.out / "scene.json"), "views": [v["id"] for v in scene["views"]]}))
     if a.run:
@@ -146,7 +154,8 @@ def main():
             raise AssertionError("Locked exposure same-surface brightness differs by more than 5%")
         if not proof["white_card_middle_grey_passed"]:
             raise AssertionError("White card did not render at expected middle grey")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

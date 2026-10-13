@@ -17,6 +17,11 @@ import json
 import os
 import sys
 
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
+
 out = {
     "ran_at": datetime.datetime.now().isoformat(),
     "python": sys.version,
@@ -51,5 +56,4 @@ dest = os.environ.get("ARCHPIPE_PROBE_OUT")
 if not dest:
     dest = os.path.join(os.path.expanduser("~"), "archpipe_probe.json")
 
-with open(dest, "w") as fh:
-    json.dump(out, fh, indent=2)
+safe_io.save_json(dest, out, indent=2)

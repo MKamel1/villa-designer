@@ -99,7 +99,26 @@ def main(argv=None) -> int:
     print(f"  {len(spec.get('openings', []))} openings, "
           f"{len(spec.get('furniture', []))} furniture, "
           f"{len(spec.get('lighting', []))} luminaires")
-    return 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = a.out.parent / "make-bedroom-spec.stage-result.json"
+    write_stage_result(
+        "make-bedroom-spec",
+        record_path=stage_record,
+        inputs=[a.spec] if a.spec.is_file() else [],
+        outputs=[a.out],
+        exit_code=0,
+        metadata={
+            "room": f"{r['width']}x{r['depth']}",
+            "openings": len(spec.get("openings", [])),
+            "furniture": len(spec.get("furniture", [])),
+            "lighting": len(spec.get("lighting", [])),
+            "passed": True,
+        },
+    )
+    return enforce_clean_verdict(
+        {"passed": True, "openings": len(spec.get("openings", []))},
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":

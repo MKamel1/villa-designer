@@ -17,6 +17,10 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
 from Autodesk.Revit.DB import (BuiltInParameter, CeilingType, Element, FamilySymbol, FilteredElementCollector,
                                Level, Options, SpecTypeId, StorageType, Structure, SubTransaction, Transaction,
                                UnitTypeId, UnitUtils, ViewDetailLevel, XYZ, Ceiling, CurveLoop, Line)
@@ -262,12 +266,10 @@ def _ascii(v):
     if isinstance(v, (list, tuple)):
         return [_ascii(x) for x in v]
     if isinstance(v, basestring):                                # noqa: F821 (IronPython 2)
-        return "".join(c if ord(c) < 128 else "\u%04x" % ord(c) for c in v)
+        return "".join(c if ord(c) < 128 else r"\u%04x" % ord(c) for c in v)
     return v
 
 
-text = json.dumps(_ascii(out), indent=2, sort_keys=True, default=str)
-with open(dest, "w") as fh:
-    fh.write(text)
+safe_io.save_json(dest, _ascii(out), indent=2, sort_keys=True, default=str)
 print("archpipe: wrote " + dest)
 __revit__.DialogBoxShowing -= _on_dialog                         # noqa: F821

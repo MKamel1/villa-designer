@@ -174,8 +174,28 @@ def main(argv=None) -> int:
                      fontsize=10)
         pdf.savefig(fig)
         plt.close(fig)
-    print(DIR / "NE-yard-wall-confirmed.pdf")
-    return 0
+    out_pdf = DIR / "NE-yard-wall-confirmed.pdf"
+    print(out_pdf)
+    failed_items = [f for f in rb.get("failed", [])]
+    bad = len(failed_items) > 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = DIR / "yard-wall-pdf.stage-result.json"
+    inputs = [p for p in [DIR / "yard-wall-readback.json", *sorted(DIR.glob("yard-wall-*.png"))] if p.is_file()]
+    write_stage_result(
+        "yard-wall-pdf",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[out_pdf],
+        exit_code=1 if bad else 0,
+        metadata={
+            "failed": failed_items,
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {"passed": not bad, "failed": failed_items, "failures": failed_items},
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":

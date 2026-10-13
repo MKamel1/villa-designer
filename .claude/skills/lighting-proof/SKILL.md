@@ -32,6 +32,36 @@ geometry, bounce count and assumed reflectances. Compare direct with
 direct. Empty-room calibration does not validate furnished shadows or
 total-light uniformity. A numerical mismatch must produce a failed gate.
 
+Task probes must own an exported mesh face, including the actual rim datum
+for a sink aperture. Author ownership before mounting, then derive the final
+plane from that face after mounting with its explicit reading/grooming
+clearance; keep the sensor 1 mm above that plane. Export and measurement
+unconditionally refuse hidden metered pixels and solid hits in the local
+source approach, naming the task and hit. Blender checks evaluated geometry
+before any probe render, so imported assets and cloth cannot hide a sensor
+silently. A remote furniture shadow remains legitimate light transport.
+Never repair instrumentation by moving furniture or tuning lights/targets.
+Run `tests/test_task_probe.py` and the pinned Blender background command
+`--python-exit-code 1 --python tests/blender_task_probe.py` for ownership
+changes. Lead decision 2026-10-11: when a nominal contact point is covered by
+an object resting on its host, `task_probe.resolve_surface_probes` searches
+outward on the SAME finite owning face within the cited task area. It uses
+a nominal-anchored 5 mm lattice ordered by distance, then signed horizontal
+indices; this is instrument sampling resolution, not a design rule. Record
+the original obstruction, measured resting-object bounds, all tested offsets,
+selected measurement position and offset; keep the nominal target position.
+The nearest clear tested point must pass every metered/source path and retain
+its meter footprint on that face. An unblocked point stays unchanged. Never
+use achieved lux to choose the position. No cited area, an overhead obstacle,
+or an exhausted area fails closed; retain its hit and unavailable illuminance.
+Test the actual covered point, unchanged clean point and translated host/object
+sibling in Python and Blender. Re-measure the complete point set and report
+achieved versus target with offsets. A guarded subset remains partial evidence;
+the full measurement gate stays failed until every probe is valid.
+Freeze every analytic light AND emissive mesh centre from `probe_sources`
+for search regressions; an analytic-only fixture omits valid local approaches
+and can choose a different clear point from the complete production scene.
+
 Inspect the final image as well as the numbers. Check ceiling, openings,
 fixture placement, measured furniture bounds, authored finish hue and
 camera framing. Never retouch a simulation with image generation to make

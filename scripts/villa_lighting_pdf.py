@@ -205,7 +205,40 @@ def main(argv=None) -> int:
         pdf.savefig(fig)
         plt.close(fig)
     print(path)
-    return 0
+    failed_tasks = [
+        f"{t['room']}/{t['what']}: {t['achieved_lx']} < {t['required_lx']} lx"
+        for t in res.get("tasks", [])
+        if t.get("status") == "fail"
+    ]
+    failed_rooms = [
+        f"{r['room']}: {r['avg_floor_lx_direct']} < {r['required_lx']} lx"
+        for r in res.get("rooms", [])
+        if r.get("status") == "fail"
+    ]
+    problems = list(res.get("problems", []))
+    failed_items = failed_tasks + failed_rooms + problems
+    bad = len(failed_items) > 0
+    from archpipe.stage_result import enforce_clean_verdict, write_stage_result
+    stage_record = OUT / "villa-lighting-pdf.stage-result.json"
+    inputs = [p for p in [ROOT / "knowledge/library.json", ROOT / "spec/villa-site.yaml"] if p.is_file()]
+    write_stage_result(
+        "villa-lighting-pdf",
+        record_path=stage_record,
+        inputs=inputs,
+        outputs=[path],
+        exit_code=1 if bad else 0,
+        metadata={
+            "failed_tasks": failed_tasks,
+            "failed_rooms": failed_rooms,
+            "problems": problems,
+            "failed_count": len(failed_items),
+            "passed": not bad,
+        },
+    )
+    return enforce_clean_verdict(
+        {"passed": not bad, "failed": failed_items, "failures": failed_items},
+        exit_code=1,
+    )
 
 
 if __name__ == "__main__":

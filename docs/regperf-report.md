@@ -12,17 +12,17 @@ Executive Summary: This report details performance optimizations for `tests/test
 # Regression Performance Report: Guard Registry Optimization
 
 ## Executive Summary
-Execution time of [`tests/test_guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_guard_registry.py) previously inflated from ~0.5 s to ~247 s across Batches 4–7 due to repeated evaluation of full villa layouts, furniture placements, and Revit specification builds. By consolidating heavy constructions behind module-level lazy caches and memoising case execution results across the test suite, execution speed is restored without weakening any guard proofs or altering test assertions.
+Execution time of [`tests/test_guard_registry.py`](../tests/test_guard_registry.py) previously inflated from ~0.5 s to ~247 s across Batches 4–7 due to repeated evaluation of full villa layouts, furniture placements, and Revit specification builds. By consolidating heavy constructions behind module-level lazy caches and memoising case execution results across the test suite, execution speed is restored without weakening any guard proofs or altering test assertions.
 
 ## Changed Files
 The following files were modified:
-- [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py)
-- [`tests/test_guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_guard_registry.py)
+- [`src/archpipe/guard_registry.py`](../src/archpipe/guard_registry.py)
+- [`tests/test_guard_registry.py`](../tests/test_guard_registry.py)
 
 No other files were touched.
 
 ## Cached Constructions
-In [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/src/archpipe/guard_registry.py), the following heavy constructions are consolidated behind `@functools.lru_cache(maxsize=1)` lazy singletons:
+In [`src/archpipe/guard_registry.py`](../src/archpipe/guard_registry.py), the following heavy constructions are consolidated behind `@functools.lru_cache(maxsize=1)` lazy singletons:
 
 1. **`_d1_round2_fixtures()`**:
    - Computes `lay = villa_r11.design("D1")`, `spec = revit_spec.build(lay)`, `villa_furnish3d.spec(lay)`, and `villa_furnish3d.round2_elements(spec)` exactly once.
@@ -61,7 +61,7 @@ In [`src/archpipe/guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/s
    - Reuses `_round2_spec` and deep copies `_round2_clean_rb` rather than reconstructing the full Revit specification and element list.
 
 ## Removed Duplicate Executions
-In [`tests/test_guard_registry.py`](file:///C:/Users/mmbka/arch-pipeline-agy/tests/test_guard_registry.py):
+In [`tests/test_guard_registry.py`](../tests/test_guard_registry.py):
 - `RegisteredGuard.run_case` is wrapped at module scope with `_memoized_run_case`, caching `GuardExecutionResult` keyed by `(self.name, case_type)`.
 - When `test_registered_guards_run_on_both_cases` executes, every registered guard runs its `real` and `clean` cases once and caches the result.
 - When per-batch execution tests run (`test_phase2_batch1_guards_execution` through `test_phase2_batch7_guards_execution`, `test_c5_fixture_record_guard_execution`, `test_c7_material_appearance_basis_guard_execution`, and `test_refactor_silent_deletion_guard_execution`), they retrieve the cached execution results in microseconds.

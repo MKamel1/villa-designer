@@ -87,3 +87,26 @@ check. These small-room measurements do not predict whole-villa timings.
 Primary references: [Radiance distribution](https://www.radiance-online.org/download-install/radiance-source-code/latest-release),
 [IES conversion](https://radsite.lbl.gov/radiance/man_html/ies2rad.1.html),
 [ray tracing](https://radsite.lbl.gov/radiance/man_html/rtrace.1.html).
+
+## Atomic command proof (C14 Batch B)
+
+Worker status writes `worker-status.stage-result.json`; batches write
+`batches/<identifier>/worker.stage-result.json` before archive creation and
+update it with the archive hash after completion. Each record uses the
+shared `archpipe.stage_result` API. The command exits non-zero when its
+existing job or benchmark verdict fails. A sweep candidate's
+`design_passed` remains separate from execution success.
+
+The submitting workstation writes `out/workstation/<operation>.stage-result.json`
+and retains a failed worker's structured stdout report even when its exit is
+non-zero. Thermal jobs save `thermal-results.json` and their stage proof before
+printing stdout. The bedroom coordinator saves the completed worker report to
+`bedroom-worker-checkpoint.json` before downstream work and records runtime
+before and after the batch; those values diagnose the still-open immediate
+resume hypothesis rather than changing the resume predicate.
+
+Native commands use the same writer through `revit/stage_command.py`, with
+inputs hashed before any in-place model save. Revit/pyRevit execution of this
+migration remains unproven on Linux. See `docs/c14b-report.md` for per-command
+failure predicates and frozen Blender replay evidence. A stage proof records
+execution evidence; client design gates still require their own reviews.

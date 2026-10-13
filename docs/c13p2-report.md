@@ -55,16 +55,16 @@ This report documents the completion of Serialization Class (C13), Phase 2, Batc
 
 The following files were modified or created in this batch:
 
-1. [src/archpipe/daylight.py](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/daylight.py)
-2. [src/archpipe/daylight_climate.py](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/daylight_climate.py)
-3. [src/archpipe/radiance.py](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/radiance.py)
-4. [src/archpipe/cli.py](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/cli.py)
-5. [tests/test_c13_phase2.py](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_c13_phase2.py)
-6. [docs/serialization-boundary.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/serialization-boundary.md)
-7. [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/LEARNINGS.md)
-8. [docs/c13p2-report.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/c13p2-report.md)
+1. [src/archpipe/daylight.py](../src/archpipe/daylight.py)
+2. [src/archpipe/daylight_climate.py](../src/archpipe/daylight_climate.py)
+3. [src/archpipe/radiance.py](../src/archpipe/radiance.py)
+4. [src/archpipe/cli.py](../src/archpipe/cli.py)
+5. [tests/test_c13_phase2.py](../tests/test_c13_phase2.py)
+6. [docs/serialization-boundary.md](serialization-boundary.md)
+7. [docs/LEARNINGS.md](LEARNINGS.md)
+8. [docs/c13p2-report.md](c13p2-report.md)
 
-*(Note: [src/archpipe/thermal.py](file:///C:/Users/mmbka/arch-pipeline-agy2/src/archpipe/thermal.py) was audited; all 4 writes therein are documented exceptions with 0 statement changes).*
+*(Note: [src/archpipe/thermal.py](../src/archpipe/thermal.py) was audited; all 4 writes therein are documented exceptions with 0 statement changes).*
 
 # Per-File Migration Details
 
@@ -202,7 +202,7 @@ The following calls were audited and left unchanged, in compliance with the expl
 
 # Tests and Verification Proofs
 
-Added [tests/test_c13_phase2.py](file:///C:/Users/mmbka/arch-pipeline-agy2/tests/test_c13_phase2.py) containing:
+Added [tests/test_c13_phase2.py](../tests/test_c13_phase2.py) containing:
 
 1. **Proof (a) - AST Scan (`test_ast_no_unlisted_direct_writes`)**:
    Parses the abstract syntax trees of `daylight.py`, `daylight_climate.py`, `thermal.py`, `radiance.py`, and `cli.py`. Verifies that no `.write_text()`, `.write_bytes()`, `open(mode="w"/"a")`, `.open(mode="w"/"a")`, `json.dump()`, or `shutil.copy*()` calls exist outside the constant `EXCEPTIONS`. Also enforces that every registered exception is actively present in the codebase.
@@ -220,4 +220,4 @@ Added [tests/test_c13_phase2.py](file:///C:/Users/mmbka/arch-pipeline-agy2/tests
 # Lessons to Register
 
 - **Lessons to Register**: `none`
-  *(Per task instructions, `src/archpipe/guard_registry.py` was not modified. The existing registry entry `serialization-file-boundary-phase1` in [docs/LEARNINGS.md](file:///C:/Users/mmbka/arch-pipeline-agy2/docs/LEARNINGS.md) was updated with an appended line recording the Phase 2 Batch 1 migration, covering historical lessons `l0019`, `l0024`, `l0067`, `l0101`, `l0181`, and `l0755` for this batch's sibling components).*
+  *(Per task instructions, `src/archpipe/guard_registry.py` was not modified. The existing registry entry `serialization-file-boundary-phase1` in [docs/LEARNINGS.md](LEARNINGS.md) was updated with an appended line recording the Phase 2 Batch 1 migration, covering historical lessons `l0019`, `l0024`, `l0067`, `l0101`, `l0181`, and `l0755` for this batch's sibling components).*

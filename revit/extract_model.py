@@ -744,10 +744,12 @@ def main():
     return dest
 
 
-if __name__ == "__main__":
-    try:
-        main()
-    except Exception:                          # the runner shows only the message; the line is what we need
-        import traceback
-        print("archpipe: extract failed:\n" + traceback.format_exc())
-        raise
+if __name__ == '__main__':
+    from stage_command import run as run_stage
+    model = _model_path_argument()
+    doc = resolve_doc()
+    model = model or (doc.PathName if doc is not None else None)
+    dest = os.environ.get('ARCHPIPE_EXTRACT_OUT') or (
+        destination(doc) if doc is not None else os.path.join(os.getcwd(), 'model.json'))
+    raise SystemExit(run_stage('extract-model', main, dest + '.stage-result.json',
+        [model], lambda value: [dest], lambda value: value is None, __revit__.Application))

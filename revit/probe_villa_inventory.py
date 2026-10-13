@@ -14,6 +14,10 @@ import os
 import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+_SRC = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+if _SRC not in sys.path:
+    sys.path.insert(0, _SRC)
+from archpipe import safe_io                                        # noqa: E402
 import extract_model as X                                          # noqa: E402
 from Autodesk.Revit.DB import (BuiltInCategory, FilteredElementCollector, ImportInstance,  # noqa: E402
                                RevitLinkInstance)
@@ -114,9 +118,7 @@ def _clean(v):
 
 
 def _write(path, data):
-    import codecs
-    with codecs.open(path, "w", "utf-8") as fh:
-        fh.write(json.dumps(_clean(data), indent=1, sort_keys=True, ensure_ascii=True))
+    safe_io.save_json(path, _clean(data), indent=1, sort_keys=True)
 
 
 if __name__ == "__main__":
