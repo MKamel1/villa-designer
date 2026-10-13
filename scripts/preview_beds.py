@@ -17,6 +17,24 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def preview_scope(data, mark, room):
+    """Resolve actual authored room ownership before creating any image."""
+    prefix = 'furn-' + mark.replace('#', '-') + '-'
+    parts = [m for m in data['meshes'] if m['id'].startswith(prefix)
+             and not m['id'].startswith(prefix+'chair-')]
+    if not parts or any(m.get('room') != room for m in parts):
+        raise ValueError('preview request must name the actual authored item room: '+mark)
+    context = data.get('authoring_room_context')
+    if context:
+        from archpipe.concept.villa_furnish import _cluster
+        rooms = set(_cluster(context['layout'], room))
+    else:
+        rooms = {room}
+    meshes = [m for m in data['meshes'] if m['group'] in ('shell', 'context') or m.get('room') in rooms]
+    models = [m for m in data['models'] if m.get('room') in rooms]
+    return parts, meshes, models
+
+
 def require_neutral_cloth(receipts):
     """Diagnostic raw-model images may exist, but refusal cannot exit zero."""
     failures=[r['bed'] for r in receipts if isinstance(r.get('cloth_report'),dict)
@@ -30,6 +48,7 @@ def render(args):
     sys.path.insert(0, str(ROOT/'src'))
     sys.path.insert(0, str(ROOT/'scripts'))
     from archpipe.blender import villa_scene as builder
+    from archpipe.blender.scene_reset import clear_objects, scene_meshes
     from garden_g6_preview import disable_material_emission, canonical_hash
 
     data=json.loads(args.scene.read_text())
@@ -46,11 +65,12 @@ def render(args):
     if args.furniture_models:
         views={'study-game':'v04-study-deck','cinema':'v08-cinema','kids-a':'v06-kids-room','kids-b':'v13-kids-b','parents-bed':'v22-parents-day'}
         requests=[(m['label'],m['room'],views[m['room']]) for m in furniture]
+    if args.preview_requests:
+        requests = json.loads(args.preview_requests.read_text())
     receipts=[]
 
     def setup(meshes):
-        bpy.ops.object.select_all(action='SELECT')
-        bpy.ops.object.delete(use_global=False)
+        clear_objects(bpy)
         warnings=[]
         names={m['material'] for m in meshes} | {n for m in meshes for n in m.get('face_materials',[])}
         materials={n:builder.add_material(n,data['materials'][n],str(args.library),warnings) for n in names}
@@ -150,7 +170,7 @@ def render(args):
             path=Path(candidate['model']).resolve()
             scene,_,_,warnings=setup([])
             bpy.ops.import_scene.gltf(filepath=str(path))
-            objects=[o for o in bpy.data.objects if o.type=='MESH']
+            objects=scene_meshes(bpy)
             # Apply only one scale to the entire imported hierarchy.
             anchor=bpy.data.objects.new('candidate uniform-scale anchor',None)
             bpy.context.collection.objects.link(anchor)
@@ -184,11 +204,10 @@ def render(args):
         if args.beds and mark not in args.beds:
             continue
         prefix='furn-'+mark.replace('#','-')+'-'
-        bed_meshes=[m for m in data['meshes'] if m['id'].startswith(prefix) and not m['id'].startswith(prefix+'chair-')]
-        meshes=[m for m in data['meshes'] if m['group'] in ('shell','context') or m.get('room')==room]
+        bed_meshes, meshes, room_models = preview_scope(data, mark, room)
         scene,objects,materials,warnings=setup(meshes)
         # Other accepted room furniture imports retain their real textures.
-        models=builder.import_models([m for m in data['models'] if m.get('room')==room],str(args.library),
+        models=builder.import_models(room_models,str(args.library),
                                      neutral_diagnostic=bool(args.scaled_models or args.furniture_models))
         cloth=[c for c in data['cloth'] if c['id'].startswith(('duvet-'+mark,'throw-'+mark))]
         for name in {c['material'] for c in cloth}-materials.keys():
@@ -257,7 +276,7 @@ def render(args):
         path=args.rejected_model.resolve()
         scene,_,_,warnings=setup([])
         bpy.ops.import_scene.gltf(filepath=str(path))
-        objects=[o for o in bpy.data.objects if o.type=='MESH']
+        objects=scene_meshes(bpy)
         disable_material_emission({m.name:m for m in bpy.data.materials})
         iso=isolated(scene,objects,args.output/'chelsea-rejected-native-isolated-neutral.png')
         receipts.append(dict(bed='chelsea-rejected',status='REJECTED; native size, no distortion',
@@ -279,6 +298,7 @@ def main():
     parser.add_argument('--candidates',type=Path,help='Measured candidate list for isolated review only')
     parser.add_argument('--scaled-models',type=Path,help='Pending measured scaled beds for neutral diagnostics only')
     parser.add_argument('--furniture-models',type=Path,help='Pending measured fitted desks/chairs, neutral diagnostics only')
+    parser.add_argument('--preview-requests',type=Path,help='Explicit diagnostic item, room and existing-view triples')
     parser.add_argument('--graphics-lock',type=Path,default=Path('/home/omar/archpipe/locks/graphics.lock'))
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv[1:])
     import fcntl

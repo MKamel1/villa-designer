@@ -159,6 +159,48 @@
         "test_real_sofa_contained_dressing_support_and_floating_translated_sibling",
         "test_orphaned_import_rows_refuse_after_models_and_metadata_are_removed"
       ]
+    },
+    {
+      "lesson_id": "furniture-batch-hidden-object-contamination",
+      "control_tier": [
+        1
+      ],
+      "construction": "Clear all object datablocks directly; measure/preview source geometry excluding actual armature custom-shape references",
+      "check": "Focused storage regressions and actual Blender read-back",
+      "stage": "source measurement and same-card room review",
+      "proof_file": "tests/test_storage_stage2.py",
+      "proofs": [
+        "test_real_armature_custom_shape_references_never_become_item_geometry",
+        "test_hidden_and_renamed_inherited_objects_removed_without_selection"
+      ]
+    },
+    {
+      "lesson_id": "furniture-storage-front-card-dispatch",
+      "control_tier": [
+        1
+      ],
+      "construction": "Use the storage-front evidence card for sideboards, bookcases and pantry shelving as well as wardrobes",
+      "check": "Focused storage regressions and actual Blender read-back",
+      "stage": "source measurement and same-card room review",
+      "proof_file": "tests/test_storage_stage2.py",
+      "proofs": [
+        "test_actual_sideboard_uses_storage_card_and_keeps_inherited_findings",
+        "test_renamed_bookcase_and_pantry_siblings_use_storage_card",
+        "test_bed_card_and_no_own_access_units_stay_unchanged"
+      ]
+    },
+    {
+      "lesson_id": "furniture-preview-authored-room-ownership",
+      "control_tier": [
+        1
+      ],
+      "construction": "Derive diagnostic room requests from authored item ownership and retain complete physical room clusters before rendering",
+      "check": "preview_beds.preview_scope",
+      "stage": "before diagnostic image creation",
+      "proof_file": "tests/test_storage_stage2.py",
+      "proofs": [
+        "test_real_preview_rejects_wrong_room_and_preserves_authored_cluster"
+      ]
     }
   ]
 }

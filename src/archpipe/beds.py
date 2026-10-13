@@ -888,6 +888,7 @@ def bed_room_review(scene, layout, specification, furniture, *, target_marks=Non
     from .geometry_topology import GeometryTopology, Finding, Requirement
     from .concept import villa_furnish as furnishing
     from . import catalogue
+    storage_front_types = ('wardrobe', 'chest_drawers', 'sideboard', 'bookcase', 'pantry_shelving')
     if absolute:
         # Scope the expensive support graph to the unchanged target rooms.
         # Keep every architectural face and every physical part intersecting
@@ -983,7 +984,7 @@ def bed_room_review(scene, layout, specification, furniture, *, target_marks=Non
     checks = ['support','routes','door swings','passages','body collisions','room boundaries','bedside access','storage fronts']
     for item in reviewed:
         # Check beds and every storage front a growing bed can obstruct.
-        if item['id'] not in active_marks and item['type'] not in ('wardrobe','chest_drawers'):
+        if item['id'] not in active_marks and item['type'] not in storage_front_types:
             continue
         if item['id'] not in active_marks and not any(
                 other['id'] in active_marks and furnishing._ov(furnishing.side_zone(item,'front',.914),furnishing.footprint(other))
@@ -994,7 +995,7 @@ def bed_room_review(scene, layout, specification, furniture, *, target_marks=Non
         if item['type'] in ('task_chair','vanity_chair'):
             continue
         kind = catalogue.get(item['type'])
-        card = ('tss-front-of-storage-914' if item['type'] in ('wardrobe','chest_drawers') else
+        card = ('tss-front-of-storage-914' if item['type'] in storage_front_types else
                 'mitton-desk-chair-access-864' if item['type']=='desk' else
                 'ukadm-bed-principal-750' if item['type'] in ('bed_double','bed_king') else
                 'ukadm-bed-other-double-750' if item['type']=='bed_double_other' else 'ukadm-bed-single-750')

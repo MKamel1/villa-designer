@@ -14,6 +14,8 @@ import sys
 
 def main():
     import bpy
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+    from archpipe.blender.scene_reset import clear_objects, scene_meshes
     from mathutils import Vector
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--models',nargs='+',type=Path,required=True)
@@ -21,12 +23,11 @@ def main():
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:])
     args.output.mkdir(parents=True,exist_ok=True)
     for path in args.models:
-        bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
+        clear_objects(bpy)
         bpy.ops.import_scene.gltf(filepath=str(path.resolve()))
         bpy.context.view_layer.update()
         meshes=[]
-        for obj in bpy.data.objects:
-            if obj.type!='MESH':continue
+        for obj in scene_meshes(bpy):
             points=[list(obj.matrix_world@v.co) for v in obj.data.vertices]
             faces=[[points[i] for i in p.vertices] for p in obj.data.polygons]
             low=[min(p[i] for p in points) for i in range(3)]

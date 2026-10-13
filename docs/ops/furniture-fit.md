@@ -134,3 +134,26 @@ plane. Source geometry supplies this unchanged datum only; physical queries,
 collision, ray guards and ownership continue to use the stand-in. Freeze the
 actual pre-policy bound point, rather than its earlier authored coordinate,
 and prove a renamed/translated replay as well as a wrong-offset refusal.
+Storage Stage 2 (2026-10-12): `export_storage_stage2.py` saves the exact
+builder context and room requests; `prepare_storage_stage2.py` measures all
+fourteen unchanged credited downloads; `review_storage_stage2.py` preserves
+the inherited room findings. The user scope keeps all wardrobes and built-in
+joinery procedural. No complete loose source currently qualifies for
+activation, so no new receipt is published. The Jonah bedside fits after its
+separate platform is omitted but remains provenance-quarantined. Refused
+fits cannot enter a room through a diagnostic bypass. Existing measured
+desks/chairs and the parents bed remain independently active.
+
+Use `scene_reset.clear_objects` between every Blender import and
+`scene_reset.scene_meshes` for source geometry. Armature custom-shape objects
+are editor helpers, identified by actual bone references rather than names;
+selection-based deletion leaves them in hidden collections. Diagnostic room
+requests must use the item's actual authored room, not a camera's room name.
+`preview_scope` checks body ownership before rendering and uses the complete
+authored room cluster. Storage-front clearance dispatch now includes the
+sideboard, bookcase and pantry shelving catalogue types, preserving the held
+Time-Saver Standards for Interior Design and Space Planning, second edition,
+printed page 87 card: 914 mm. The value is existing guidance, not a new local
+code-compliance claim. Original books are not present on this workstation;
+the verified evidence card and its existing source-value regression are the
+available portable evidence.

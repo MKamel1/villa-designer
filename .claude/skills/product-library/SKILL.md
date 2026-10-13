@@ -66,3 +66,9 @@ fields independently of generated shell buckets and doorway captions. Test
 actual full/empty-view exports; geometry, material, visibility and finish-host
 mutations must still refuse. Replace exact body identifiers, preserving derived chairs and
 physical procedural fallbacks. Missing source geometry restores those bodies.
+
+For Blender measurement and neutral batches, use `scene_reset.clear_objects`
+before each import and `scene_reset.scene_meshes` for item geometry. Selection
+cannot remove hidden objects. Armature custom shapes are importer editor
+helpers: exclude actual bone references, never meshes matched by name or size.
+Real source meshes remain measured even if named like an editor helper.
