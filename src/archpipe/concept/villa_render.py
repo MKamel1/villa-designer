@@ -940,6 +940,10 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         parts = {}
         component_names = {}
         for part_index, (name, b) in enumerate(zip(f["parts"], f["boxes"])):
+            if src is not None and src.get("partner") and f["type"] == "wardrobe" and name not in ("plinth", "divider", "back"):
+                # The contents builder replaces envelopes, not the authored native payload.
+                # Keep only actual structural boards here; no duplicate rails or solid contents bays.
+                continue
             if f["mark"] == "gwc-shower" and name == "linear-drain":
                 continue  # The bath-fitting record below owns the one visible drain.
             if f["type"] in ("under_stair_storage", "store_shelving") and name == "suitcase-handle":
@@ -1172,167 +1176,11 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
 
     cloth = []
     # ---- dressing: clothes on the dressing rails, duvets and pillows on the beds (NOT design)
-    import random
-    rnd = random.Random(7)
-    # Client round-3 (v31/v32): hanging clothes were flat 25 mm vertical slabs, all drawn from one shared,
-    # colour-agnostic `fabrics` list. Fixed here with real garment silhouettes (a hanger + a tapered body with
-    # front-to-back thickness -- pane_faces gives a proper closed, drape-tapered frustum, not a plane) and a
-    # small per-partner colour palette (MATERIALS table, "garment-*"). Lengths follow the brief: shirts
-    # 0.90-1.00 m, jackets ~0.85 m, dresses/abayas 1.45-1.60 m (card neufert-longhang-drop-1600), trousers
-    # folded over the hanger ~0.70 m.
-    GARMENT = {
-        "shirt":  dict(length=(0.90, 1.00), shoulder=0.28, hem=0.30, depth=(0.10, 0.14)),
-        "jacket": dict(length=(0.82, 0.88), shoulder=0.36, hem=0.34, depth=(0.13, 0.15)),
-        "dress":  dict(length=(1.45, 1.60), shoulder=0.26, hem=0.42, depth=(0.10, 0.17)),
-    }
-    HERS_FABRICS = ["garment-ivory", "garment-blush", "garment-terracotta", "garment-sage-soft"]
-    HIS_FABRICS = ["garment-navy", "garment-charcoal", "garment-stone", "garment-olive"]
-
-    def garment_body(cx, cy_, ztop, zbot, wtop, wbot, dtop, dbot):
-        # The first correction used only top and hem rings and still rendered as a flat slab in v31.
-        # Six cross-sections give a neck, sloped shoulders, sleeve/body taper and a gently flared hem. Small
-        # alternating front/back offsets give folds physical relief; every ring stays within the module clamp.
-        fractions = (0.0, 0.09, 0.23, 0.51, 0.78, 1.0)
-        widths = (0.45*wtop, wtop, 0.88*wtop, 0.72*wtop+0.28*wbot,
-                  0.35*wtop+0.65*wbot, wbot)
-        rings = []
-        for i, (fraction, width) in enumerate(zip(fractions, widths)):
-            z = ztop + fraction*(zbot-ztop)
-            depth = dtop + fraction*(dbot-dtop)
-            half = width/2
-            fold = min(0.014, depth*0.12) * (0.4 + fraction)
-            front, back = cy_-depth/2, cy_+depth/2
-            rings.append([[cx-half, front, z], [cx-half/2, front+fold, z],
-                          [cx, front-fold, z], [cx+half/2, front+fold, z],
-                          [cx+half, front, z], [cx+half, back, z],
-                          [cx, back+fold/2, z], [cx-half, back, z]])
-        faces = [rings[0], rings[-1][::-1]]
-        for top, bottom in zip(rings, rings[1:]):
-            for j in range(len(top)):
-                next_j = (j+1) % len(top)
-                faces.extend(([top[next_j], top[j], bottom[j]],
-                              [top[next_j], bottom[j], bottom[next_j]]))
-        return faces
-
-    def hanger_faces(cx, cy_, rail_z, shoulder_w):
-        neck = rod_faces((cx, cy_, rail_z - 0.004), (cx, cy_, rail_z - 0.045), 0.006)
-        bar = rod_faces((cx - shoulder_w * 0.35, cy_, rail_z - 0.045), (cx + shoulder_w * 0.35, cy_, rail_z - 0.045), 0.006)
-        return neck + bar
-
-    for wid in ("pd-hang-1", "pd-hang-2"):
-        wardrobe = it[wid]
-        q = F.footprint(wardrobe)
-        cy = (q[1] + q[3]) / 2
-        floor = LZ["GF"]
-        partner = wardrobe["partner"]
-        palette = HERS_FABRICS if partner == "hers" else HIS_FABRICS
-        for index, (kind, xa, xb) in enumerate(F.module_spans(wardrobe)):
-            lo, hi = xa + 0.025, xb - 0.025
-            if hi <= lo:
-                continue
-            prefix = "dress-%s-%s-%d" % (partner, kind, index)
-            if kind in ("long-hang", "double-hang"):
-                levels = (1.98,) if kind == "long-hang" else (1.08, 2.02)
-                for j, rail in enumerate(levels):
-                    rail_z = floor + rail
-                    mesh(prefix + "-rail-%d" % j, "brass",
-                         round_tube((lo, cy, rail_z), (hi, cy, rail_z), .012),
-                         "dressing", room=wardrobe["room"], label=partner + " closed tubular hanging rail", kind="hanging-rail")
-                    for end, xx in (("left", lo), ("right", hi)):
-                        mesh(prefix + "-rail-%d-bracket-%s" % (j, end), "brass",
-                             round_tube((xx, cy, rail_z), (xx, q[1] + .012, rail_z), .019),
-                             "dressing", room=wardrobe["room"], label=partner + " rail end bracket", kind="rail-bracket")
-                    # long-hang = dresses/abayas (full-length card); the LOWER rail of a double-hang carries
-                    # trousers folded over the hanger, the upper rail shirts/jackets.
-                    if kind == "long-hang":
-                        gtype = "dress"
-                    elif rail < 1.5:
-                        gtype = "trousers"
-                    else:
-                        gtype = "shirt"
-                    x = lo + 0.05
-                    n_ = 0
-                    while x < hi - 0.03:
-                        fabric = palette[(index + n_) % len(palette)]
-                        if gtype == "trousers":
-                            length = rnd.uniform(0.68, 0.72)
-                            wtop, wbot, dtop, dbot = 0.06, 0.22, 0.05, 0.10
-                        else:
-                            g = GARMENT["shirt" if (gtype == "shirt" and n_ % 2 == 1) else
-                                        ("jacket" if gtype == "shirt" else gtype)]
-                            length = rnd.uniform(*g["length"])
-                            wtop, wbot, dtop, dbot = g["shoulder"], g["hem"], g["depth"][0], g["depth"][1]
-                        # Stay inside the module envelope (same clamp idiom as climber_placement.placements):
-                        # a packed garment near the module's own edge is narrower than its nominal width, not
-                        # wider than the checked envelope.
-                        half_top = min(wtop / 2, x - lo, hi - x)
-                        half_bot = min(wbot / 2, x - lo, hi - x)
-                        faces = garment_body(x, cy, rail_z - 0.05, rail_z - 0.05 - length,
-                                             2 * half_top, 2 * half_bot, dtop, dbot)
-                        gid = prefix + "-garment-%d-%d" % (j, round(x * 1000))
-                        mesh(gid, fabric, faces, "dressing", room=wardrobe["room"],
-                             label=partner + " hanging " + ("shirt/jacket" if gtype == "shirt" else gtype), kind="garment")
-                        if gtype != "trousers":
-                            mesh(gid + "-hanger", "brass", hanger_faces(x, cy, rail_z, 2 * half_top),
-                                 "dressing", room=wardrobe["room"], label=partner + " hanger", kind="hanger")
-                        x += 0.12 if gtype != "trousers" else 0.16
-                        n_ += 1
-            elif kind == "drawers":
-                for j in range(4):
-                    z = floor + 0.10 + j * 0.26
-                    mesh(prefix + "-front-%d" % j, "greige-lacquer",
-                         box_faces(lo, q[1] if wardrobe["rot"] == 0 else q[3] - 0.018, z,
-                                   hi, q[1] + 0.018 if wardrobe["rot"] == 0 else q[3], z + 0.235),
-                         "dressing", room=wardrobe["room"], label=partner + " drawer front", kind="door-leaf")
-            elif kind in ("shelves", "shoe-shelves", "hat-shelf", "trousers-pullout"):
-                for j in range(4):
-                    z = floor + 0.34 + j * 0.42
-                    # WP-round3 wood-grain fix (same pattern as the stair tread/vanity front, docs/LEARNINGS.md):
-                    # a horizontal shelf top with plain "walnut" (grain_axis="z") sends its own thin vertical
-                    # extent into one of Box-projection's two sampled top-face coordinates -- a streaked smear.
-                    # "walnut-grain-x" is identity rotation and is already the established fix for exactly this
-                    # ("grain along horizontal tops and shelves", villa_render.py M table).
-                    mesh(prefix + "-shelf-%d" % j, "walnut-grain-x", box_faces(lo, q[1] + 0.02, z,
-                         hi, q[3] - 0.02, z + 0.018), "dressing", room=wardrobe["room"], label=partner + " shelf", kind="shelf")
-                    mesh(prefix + "-stack-%d" % j, "linen" if kind == "shelves" else "leather-brown",
-                         box_faces(lo + 0.03, cy - 0.15, z + 0.02, min(hi - 0.02, lo + 0.22), cy + 0.15,
-                                   z + 0.10), "dressing", room=wardrobe["room"],
-                         label=partner + (" folded stack" if kind == "shelves" else " shoes and hats"), kind="folded-fabric" if kind == "shelves" else "luggage")
-        # A single full-width slab read as one shelf; individual lidded boxes and paired shoes make the
-        # wardrobe's storage use legible without adding anything outside its measured footprint.
-        usable = q[2] - q[0] - 0.14
-        box_count = 3 if usable > 1.45 else 2
-        gap = 0.025
-        box_w = (usable - gap*(box_count-1))/box_count
-        for bi in range(box_count):
-            xa = q[0] + 0.07 + bi*(box_w+gap)
-            xb, ya, yb, za, zb = xa + box_w, cy - .18, cy + .18, floor + 2.04, floor + 2.18
-            mesh("dress-%s-top-box-%d" % (partner, bi), "linen",
-                 box_faces(xa, ya, za, xb, yb, zb-.018) +
-                 box_faces(xa-.003, ya-.003, zb-.018, xb+.003, yb+.003, zb),
-                 "dressing", room=wardrobe["room"], label=partner + " lidded top box", kind="storage-box")
-            mesh("dress-%s-top-box-%d-handle" % (partner, bi), "leather-brown",
-                 round_tube((xa+box_w*.4, yb+.002, za+.065), (xa+box_w*.6, yb+.002, za+.065), .007),
-                 "dressing", room=wardrobe["room"], label="ASSUMED box pull handle", kind="box-handle")
-        shoe_module = next((span for span in F.module_spans(wardrobe) if span[0] in ("long-hang", "double-hang")), None)
-        if shoe_module:
-            _, xa, xb = shoe_module
-            for pair in range(2):
-                sx = xa + 0.10 + pair*0.23
-                for foot in range(2):
-                    xshoe = sx + foot*0.095
-                    if xshoe + 0.07 > xb - 0.02:
-                        continue
-                    zsole = floor + 0.045
-                    faces = box_faces(xshoe, cy-0.115, zsole, xshoe+0.07, cy+0.115, zsole+0.018)
-                    faces += box_faces(xshoe+0.005, cy-0.105, floor, xshoe+0.065, cy-0.045, zsole)
-                    lower = [[xshoe, cy-0.10, zsole+0.018], [xshoe+0.07, cy-0.10, zsole+0.018],
-                             [xshoe+0.07, cy+0.08, zsole+0.018], [xshoe, cy+0.08, zsole+0.018]]
-                    upper = [[xshoe+0.015, cy-0.075, zsole+0.060], [xshoe+0.055, cy-0.075, zsole+0.060],
-                             [xshoe+0.055, cy+0.015, zsole+0.060], [xshoe+0.015, cy+0.015, zsole+0.060]]
-                    faces += pane_faces(upper, lower)
-                    mesh("dress-%s-shoe-%d-%d" % (partner, pair, foot), "leather-brown", faces,
-                         "dressing", room=wardrobe["room"], label=partner + " shoe pair", kind="shoe")
+    from . import garments
+    dressing_wardrobes = [w for w in it.values() if w.get("partner") and w["type"] == "wardrobe"]
+    garment_modules = []
+    notes.append("Dressing contents: owned procedural appearances; colours, spacing, forms and unsourced "
+                 "drops ASSUMED. Neufert 1980 p.74 Fig.6 dress/jacket drops. Closed drawers retain hidden contents.")
     for bid, duvet in (("pb-bed", "bedding-white"), ("kb-bed", "sage-fabric"), ("ka-bunk", "bedding-white")):
         b_ = it[bid]
         q = F.footprint(b_)
@@ -2146,6 +1994,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
              "mounting_hosts": {hid: asdict(host) for hid, host in stair_hosts.items()},
              "library_root": "$HOME/archpipe/assets/library", "materials": mats, "meshes": meshes,
              "diagnostic_meshes": diagnostic_meshes, "lights": lights,
+             "garment_modules": garment_modules, "dressing_wardrobes": dressing_wardrobes,
+             "garment_contents_version": "closed/1",
              "part_failures": meshes.failures,
              "props": props(lay) + land_props, "models": models, "cloth": cloth, "curtains": curtains, "views": views,
              "exposure_mode": "set-metered", "exposure": EXPOSURE, "sky": {"day": "nishita",
@@ -2220,6 +2070,10 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     wall_failures = [f for view in scene['views'] for f in wall_sightline_findings(view, walls)]
     if wall_failures:
         raise ValueError('camera wall sightline: ' + '; '.join(wall_failures))
+    garments.integrate(scene)
+    garment_failures = garments.contents_findings(dressing_wardrobes, scene['meshes'])
+    if garment_failures:
+        raise ValueError('Dressing physical contents: ' + '; '.join(garment_failures))
     final_sun_study=SunStudy(scene)
     scene["garden_sun_evidence"]["geometry_sha256"]=final_sun_study.geometry_sha256
     scene["garden_sun_evidence"]["plants"]=audit_plants(list({p["id"]:p for p in land_plan["plants"]+[m for m in land_meshes if m.get("part_kind")=="climber"]}.values()),final_sun_study)
