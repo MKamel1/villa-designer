@@ -245,7 +245,8 @@ class GeometryTopology:
             # instances still enter route review via their conservative
             # envelopes; these envelopes are never claimed as support faces.
             for model in scene.get('models', ()):
-                if model.get('review_geometry') or model.get('status')=='procedural-bed-fallback':
+                if (model.get('review_geometry') or model.get('status')=='procedural-bed-fallback' or
+                        any(p.get('model_instance') == model['id'] for p in scene.get('meshes', ()))):
                     continue
                 bb = landscape.prop_world_box(model['asset'], model['position'],
                     model.get('rotation_deg', [0,0,0]), model.get('scale', 1.0))

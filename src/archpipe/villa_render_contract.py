@@ -112,6 +112,12 @@ def validate_scene(scene: dict) -> list[str]:
 
     if not isinstance(scene, dict):
         return ["scene: expected object"]
+    from .imported_appearance import require_scene, needs_scene_admission
+    if needs_scene_admission(scene):
+        try:
+            require_scene(scene)
+        except (ValueError, KeyError, TypeError) as exc:
+            errors.append('imported admission: ' + str(exc))
     need(scene.get("schema") == "villa-render/1", "schema", "expected villa-render/1")
     need(isinstance(scene.get("id"), str) and bool(scene.get("id")), "id", "nonempty string required")
     north = scene.get("north")

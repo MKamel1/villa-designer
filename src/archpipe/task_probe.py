@@ -103,18 +103,22 @@ def author_bindings(scene):
 
 
 def task_geometry(scene):
-    """Actual retained model faces replace their hidden procedural bodies."""
+    """Closed measured stand-ins replace the hidden procedural bodies."""
     from .beds import scene_with_model_geometry
     return scene_with_model_geometry(scene)
 
 
 def bind_planes(scene):
-    """Derive exported planes from the final retained desktop or native face."""
+    """Derive planes from the measured desktop stand-in or native host face."""
     physical = task_geometry(scene)
     meshes = {m['id']: m for m in physical['meshes']}
     models = {m.get('label'): m for m in scene.get('models', [])
               if (m.get('furniture_fitting') or m.get('role') == 'bed')
               and m.get('status') != 'procedural-bed-fallback'}
+    models.update({m['replaces'].removeprefix('furn-').removesuffix('-'):m
+                   for m in scene.get('models', []) if not m.get('review_geometry')
+                   and m.get('replaces', '').startswith('furn-')
+                   and m.get('status') != 'procedural-bed-fallback'})
     for point in scene['measurement_points']:
         binding = point.get('host_surface')
         if not binding:
@@ -126,8 +130,9 @@ def bind_planes(scene):
         if model is not None:
             if 'native_host_surface' not in binding:
                 binding['native_host_surface'] = deepcopy(binding)
-            parts = (model['furniture_fitting']['height_parts'] if model.get('furniture_fitting')
-                     else model['mattress_bindings']['lower']['parts'])
+            legacy = not model.get('review_geometry')
+            parts = (model['furniture_fitting']['height_parts'] if model.get('furniture_fitting') else
+                     model['mattress_bindings']['lower']['parts'] if model.get('role') == 'bed' else [])
             if model.get('role') == 'bed':
                 cloth = next(c for c in scene['cloth'] if c['id'] == 'duvet-'+model['label'])
                 # Reading intent is authored above the design mattress. The
@@ -136,7 +141,8 @@ def bind_planes(scene):
                     binding['native_offset_m'] = binding['offset_m']
                     binding['replacement_datum_offset_m'] = point['position'][2]-cloth['mattress_top']
                 binding['offset_m'] = binding['replacement_datum_offset_m']
-            allowed = {model['id']+'::'+name for name in parts}
+            allowed = ({identifier for identifier in meshes if identifier.startswith(model['id']+'::')}
+                       if legacy else {model['id']+'::'+name for name in parts})
             x, y = point['position'][:2]
             candidates = []
             for identifier in allowed:
@@ -153,7 +159,48 @@ def bind_planes(scene):
                     candidates.append((height, identifier, index))
             if not candidates:
                 raise ValueError(_name(point)+': no retained desktop at authored task position')
-            height, identifier, index = max(candidates)
+            if legacy:
+                if point['card'] != 'ies-res-chair-reading-200':
+                    raise ValueError(_name(point)+': imported contact task needs a measured semantic datum')
+                native = binding['native_host_surface']
+                native_host = next((m for m in scene['meshes'] if m['id'] == native['mesh_id']),None)
+                if native_host is None:
+                    raise ValueError(_name(point)+': native reading intent host missing')
+                native_height = _surface(native_host['faces'][native['face_index']],x,y)
+                height, identifier, index = min(candidates,key=lambda c:(abs(c[0]-native_height),c[1],c[2]))
+                # Reading height is explicit authored intent. Capture its
+                # clearance above the measured seat component once; later
+                # binding follows that same finite physical face.
+                if 'legacy_authored_offset_m' not in binding:
+                    binding['legacy_authored_offset_m'] = native_height+native['offset_m']-height
+                    binding['legacy_datum_basis'] = 'measured component top nearest authored native seat datum; preserve authored reading plane'
+                binding['offset_m'] = binding['legacy_authored_offset_m']
+            else:
+                height, identifier, index = max(candidates)
+                if model.get('role') == 'bed':
+                    # A conservative box top must not rewrite the existing
+                    # reading datum on a slightly curved mattress. Measure
+                    # that datum from the immutable retained source, then
+                    # express its original reading clearance as an offset
+                    # from the finite owning stand-in face. Physical rays,
+                    # collisions and ownership still use only the stand-in.
+                    from .beds import model_review_meshes
+                    source_heights = []
+                    for row in model_review_meshes([model]):
+                        if row['id'] not in allowed:
+                            continue
+                        for face in row['faces']:
+                            vertices = np.asarray(face)
+                            normal = np.cross(vertices[1]-vertices[0], vertices[2]-vertices[0])
+                            length = np.linalg.norm(normal)
+                            if length > 1e-12 and normal[2]/length > .98 and _inside_face(face,x,y):
+                                source_heights.append(_surface(face,x,y))
+                    if not source_heights:
+                        raise ValueError(_name(point)+': retained reading datum missing')
+                    source_height = max(source_heights)
+                    binding['retained_reading_datum_m'] = source_height
+                    binding['offset_m'] = source_height+binding['replacement_datum_offset_m']-height
+                    binding['reading_datum_basis'] = 'unchanged retained mattress reading plane, owned by measured stand-in'
             binding.update(mesh_id=identifier, face_index=index, model_instance=model['id'])
         try:
             face = meshes[binding['mesh_id']]['faces'][binding['face_index']]
@@ -230,6 +277,20 @@ def require_clear_probes(scene):
     sources = probe_sources(scene)
     for point in points:
         x, y, plane = probe_position(point)
+        # A segment wholly inside a closed body crosses no boundary face.
+        # Measured component boxes make that interior explicit; do not let
+        # the absence of a surface hit certify a buried sensor.
+        sensor = np.asarray([x, y, plane+SENSOR_OFFSET])
+        for mesh in meshes:
+            if mesh.get('part_kind') != 'imported-physical-standin':
+                continue
+            frame = mesh['local_frame']
+            local = (sensor-np.asarray(frame['origin_m']))@np.asarray(frame['rotation'])
+            for component in mesh['components']:
+                low, high = np.asarray(component['local_bounds_m'])
+                if np.all(local > low+1e-8) and np.all(local < high-1e-8):
+                    raise ValueError(_name(point)+': upward view hits '+mesh['id']+
+                                     ': sensor inside closed physical stand-in at '+str(sensor.tolist()))
         require_clear_paths([point], sources,
                             lambda start, end: _hit(triangles, owners, meshes, start, end))
         binding = point['host_surface']

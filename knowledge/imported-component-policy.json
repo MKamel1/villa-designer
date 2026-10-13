@@ -1,0 +1,13 @@
+{
+  "source": "Measured chair structural component review, implementing lead policy 2026-10-13",
+  "max_faces_per_open_frame_leaf": 12,
+  "reason": "Separate fused structural frame members; a whole connected-frame box fills its seat/back cavity. This is physical decomposition, not a render change or C3 exemption.",
+  "assets": {
+    "sf_probber_cane_armchair": {
+      "source_sha256": "79d377e2700179b18ee684f70b62099a69406ce2e67742eb4b79632696b18d3d",
+      "open_frame_components": [
+        "01f3140def2eae6e7d6172315f7496e71f7f47ba5c1709a81a88031cfaebb847"
+      ]
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "source": "Archived integration-5 binding from git HEAD, measured 2026-10-13 on real parent fixture",
+  "authored_position_m": [
+    19.929999999999996,
+    -26.241,
+    0.902
+  ],
+  "bound_position_m": [
+    19.929999999999996,
+    -26.241,
+    0.9019445964900553
+  ],
+  "bound_surface": {
+    "mesh_id": "model-pb-bed::measured-lower-mattress",
+    "face_index": 223,
+    "offset_m": 0.375,
+    "authored_plane_m": [
+      19.929999999999996,
+      -26.241,
+      0.9
+    ],
+    "surface_height_m": 0.5269445964900553,
+    "native_host_surface": {
+      "mesh_id": "furn-pb-bed-4",
+      "face_index": 55,
+      "offset_m": 0.11781818181818104,
+      "authored_plane_m": [
+        19.929999999999996,
+        -26.241,
+        0.9
+      ],
+      "surface_height_m": 0.784181818181819
+    },
+    "native_offset_m": 0.11781818181818104,
+    "replacement_datum_offset_m": 0.375,
+    "model_instance": "model-pb-bed"
+  }
+}

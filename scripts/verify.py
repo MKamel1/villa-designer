@@ -171,6 +171,14 @@ def main() -> int:
     from archpipe.concept.physical_part import PartMeshList
     expect('C3 exported geometry survives fresh physical admission',
            not raises(ValueError, PartMeshList().extend, scene['meshes']))
+    from archpipe.imported_appearance import require_scene as require_imported_scene, bind_scene as bind_imported_scene
+    expect('C3 imported appearances have hash-bound strict nonrendered physical stand-ins',
+           not raises(ValueError, require_imported_scene, scene) and
+           len(scene['imported_appearances']) == len(scene['physical_model_meshes']))
+    imported_sibling = bind_imported_scene(dict(models=[scene['models'][-1]], meshes=[]))
+    imported_sibling['physical_model_meshes'] = []
+    expect('C3 imported appearance without physical stand-in refuses',
+           raises(ValueError, require_imported_scene, imported_sibling))
     from archpipe.orientation_guard import scene_findings as orientation_findings, document_findings
     expect("client garden compass names agree with geometry", not orientation_findings(scene))
     expect("garden documents use recorded client compass names", not document_findings())

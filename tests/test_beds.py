@@ -164,6 +164,13 @@ class FurnishedBeds(unittest.TestCase):
             lifted=deepcopy(actual);lifted['position'][0]+=100;lifted['position'][2]+=1
             bad=dict(self.scene,models=[lifted if m['id']==actual['id'] else m for m in self.scene['models']])
             prefix=actual['id']+'::'
+            # A changed source pose first invalidates its paired stand-in.
+            # Reconstruct the measured pair to test the separate C8 support
+            # refusal for an intentionally lifted, freshly admitted body.
+            from archpipe.imported_appearance import bind_scene
+            with self.assertRaisesRegex(ValueError,'stand-in'):
+                GeometryTopology.from_inputs(scene=bad)
+            bind_scene(bad)
         else:
             bad=deepcopy(self.scene);prefix='furn-pb-bed-'
             bed_parts=[m for m in bad['meshes'] if m['id'].startswith(prefix)]

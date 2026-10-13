@@ -705,3 +705,151 @@ import passed, so both procedural fallbacks remain. The unresolved strict
 closed-solid admission of **12 existing imported models** remains a separate
 open acceptance condition; passing the fit/room/preview/probe checks does not
 certify it. No source face or tolerance was changed and no commit was made.
+
+### Imported appearance and physical admission — lead decision 2026-10-13
+
+The source policy is the **lead's imported-model admission decision dated
+2026-10-13**. It supersedes the pending source-closure condition above.
+Downloaded meshes are appearance geometry. Each retained import now has an
+explicit `imported appearance mesh` record, bound to its unchanged source,
+buffer, native face and placement hashes. Appearance records are not physical
+parts and receive no exemption from C3, the strict physical-part boundary.
+Rendering retains the existing source faces, materials and placement.
+
+Each appearance row is paired with nonrendering, closed outward-solid boxes
+around its measured connected components, using the model's local axes and
+existing transform. Only these stand-ins feed support, collision, C8 (the
+geometry-topology room reviewer) and lighting task ownership. The numerical
+enclosure tolerance is **0.000010 m, ten micrometres**; a degenerate component
+axis gains that thickness on either side. Missing, stale, non-enclosing or
+rendered stand-ins and appearance presented as physical parts fail closed.
+The original twelve refusals and renamed/translated siblings are frozen in
+`tests/test_imported_admission.py`; no source face was repaired or deleted.
+
+The sibling audit also migrated five older imports: the living sofa, three
+cane chairs and the rug. Their glTF (the imported scene format), buffers,
+textures and measured components are bound to the tracked receipt and library
+manifest. A fused open chair frame is decomposed into whole source-face groups
+under an exact source/component-hash-bound policy; its whole box would fill
+its seat cavity. Unknown sources refuse. Legacy component-only receipts
+permit orthogonal yaw; any other yaw requires complete measured review faces
+so its actual renderer anchor can be established. A contained dressing base can obtain
+conservative support from a grounded stand-in; an ungrounded body cannot
+supply that support. Collision review remains separate, and the existing
+contact tolerances and visible dressing remain unchanged.
+
+Comparison tolerances are recorded before final result analysis in
+`out/imported-admission/comparison_policy.json`: ten micrometres for room
+lengths, 0.1 mm for task-plane changes, and 0.1% of each previous achieved
+reading for lighting repeatability. Existing task requirements and the
+five-millimetre client replacement allowance remain unchanged. Final execution results are recorded below.
+
+
+The fresh default export strictly admits **1,102 authored parts plus 439
+imported physical rows containing 1,504 closed component solids**, across
+21 imported instances. All 439 appearance rows have a matching nonrendering
+stand-in; no imported appearance is counted as a physical part or uses a C3
+exemption. The original sixteen desk/chair/bed selections contribute 363
+rows and 680 component bodies. The five older instances contribute the rest.
+The actual legacy-source measurement replay is byte-identical to the tracked
+receipt. Evidence: `out/imported-admission/resume-scene-proof.json` and
+`legacy-replay-proof.json`.
+
+All **16 individual room comparisons and the combined comparison pass**.
+The combined review retains **83 baseline and 418 candidate finding rows**,
+zero relative failures and **zero access-distance change**. The only numeric
+receipt difference is floating-point overlap-area roundoff of
+0.000000000000000444 square metres; every finding identity and all other
+values remain unchanged. The complete pre-policy comparisons frozen at task
+start are used, because a historical per-item file in `door-fix` contains
+only ten items. Evidence: `out/imported-admission/final-room-comparison.json`
+and `resume-room/`. These comparisons retain inherited absolute findings;
+they do not approve a real villa design gate.
+
+The default export's meshes, models, materials, lights, cloth specifications,
+curtain specifications, props and views have identical hashes to the reviewed
+integration-5 scene. No new neutral previews are required for this admission
+change. Native source vertices and all transformations remain unchanged.
+Task binding now owns stand-in faces. The first migration flattened a curved
+mattress datum and shifted one reading plane by 0.055404 mm. The correction
+preserves the existing retained-source reading datum as a clearance offset
+from that owning stand-in, with no source geometry or lighting changes.
+The final maximum task-plane difference is **0.000042 mm**, below the stated
+10-micrometre enclosure tolerance. Frozen actual bound coordinates and a
+renamed/translated sibling prove preservation. The nominal dining target and
+its existing same-table search offset (−30 mm in horizontal x, +95 mm in
+horizontal y) remain unchanged.
+
+The final same-evaluated-scene comparison uses the archived integration-5
+instrumentation as a labelled diagnostic baseline and the current strict
+stand-in instrumentation for production measurement. Both own valid task
+planes under their respective protocols. The evaluated mesh hashes before
+and after match exactly. **25 / 25 targets pass**, and the largest admission
+change is **0.433144 lux (0.042849%)**, below the original **0.1%** allowance.
+Physical ownership, collision and source-approach guards use stand-ins in
+the production run. Evidence: `out/imported-admission/paired-lighting-comparison.json`
+and `paired-lighting/evaluated-scene-proof.json`.
+
+The final cross-process comparison with the saved historical receipt also
+meets **25 / 25 targets** (maintenance factor 0.8, sky off, 256 samples,
+zero direct-light bounces and sixteen total-light bounces), but **historical
+lighting equality remains OPEN**. Total light changes by up to
+**26.164766 lux (1.710968%)**, exceeding the declared 0.1% allowance.
+The curtain builder uses Python's process-random hash to seed pleats;
+authored-input hashes do not bind those evaluated meshes between runs.
+The process-seed reproduction and paired isolation experiment are retained.
+No tolerance, light, target, source face or curtain construction was changed
+to conceal that discrepancy. The initial independent rerun and failed
+pre-correction paired run are diagnosis, superseded by the final files.
+
+The following final production readings compare with the saved integration-5
+receipt. Deltas mean new minus saved; positive means brighter. Lux is the unit
+of illuminance. Full precision, relative differences, ownership and sampling
+positions are in `out/imported-admission/final-historical-lighting-comparison.json`
+and `paired-lighting/standin-positions/lighting-measurements.json`.
+
+| Task | Direct lux | Total lux | Direct delta lux | Total delta lux | Target lux |
+|---|---:|---:|---:|---:|---:|
+| 1. kitchen / island prep side | 1077.16 | 1363.60 | +0.0000 | +0.9430 | 500 |
+| 2. kitchen / island seating side | 837.98 | 1102.55 | +0.0000 | +6.8866 | 200 |
+| 3. kitchen / island prep side | 1033.56 | 1227.01 | +0.0000 | -0.2043 | 500 |
+| 4. kitchen / island seating side | 850.94 | 1114.31 | +0.0000 | +0.0151 | 200 |
+| 5. kitchen / island prep side | 835.45 | 1114.34 | +0.0000 | +0.1502 | 500 |
+| 6. kitchen / island seating side | 676.59 | 927.53 | +0.0000 | -0.1595 | 200 |
+| 7. kitchen / single induction zone | 1004.74 | 1302.25 | +0.0000 | -3.4848 | 300 |
+| 8. kitchen / sink | 1154.11 | 1349.15 | +0.0000 | +0.7541 | 300 |
+| 9. dining / dining table centre | 546.25 | 648.98 | +0.0000 | +1.7016 | 100 |
+| 10. dining / table end (homework) | 462.12 | 583.90 | +0.0000 | +2.0200 | 200 |
+| 11. dirty-kitchen / dirty kitchen run | 679.03 | 812.37 | +0.0000 | -0.2819 | 500 |
+| 12. study-game / study-desk | 931.58 | 1010.42 | -0.0000 | +0.7473 | 400 |
+| 13. study-game / study-adult-desk | 905.81 | 974.11 | -0.0000 | -1.2938 | 400 |
+| 14. kids-a / ka-desk-1 | 1391.48 | 1512.68 | +0.0004 | +7.3105 | 400 |
+| 15. kids-a / ka-desk-2 | 1390.37 | 1503.07 | +0.0004 | -26.1648 | 400 |
+| 16. kids-b / kb-desk | 1389.36 | 1516.17 | +0.0003 | -6.2335 | 400 |
+| 17. parents-bed / pillow | 1110.91 | 1183.39 | +0.0000 | -0.1097 | 200 |
+| 18. parents-bed / pillow | 1114.99 | 1179.52 | +0.0000 | -0.5319 | 200 |
+| 19. family-bath / fb-basin | 1337.48 | 1616.37 | +0.0000 | +0.0000 | 300 |
+| 20. parents-ensuite / pe-basin | 631.21 | 757.85 | +0.0000 | +0.0000 | 300 |
+| 21. guest-wc / gwc-basin | 1375.24 | 1599.46 | +0.0000 | +0.0000 | 300 |
+| 22. lounge / armchair | 789.70 | 952.56 | +0.0000 | +0.4348 | 200 |
+| 23. bar-alcove / daybed nook | 324.60 | 421.96 | +0.0000 | +0.1879 | 200 |
+| 24. cinema / cinema desk | 1483.93 | 1524.06 | +0.0000 | +0.0000 | 400 |
+| 25. cinema / cinema desk | 1492.44 | 1527.53 | +0.0000 | +0.0000 | 400 |
+
+
+Final focused furniture/bed/lighting/probe/render/garden acceptance passes
+**306 tests, exit 0**. Follow-up reading/physical regressions pass **68 tests**,
+the final boundary/schema regressions pass **50 tests**, the additional
+furniture-layout tests pass **14 tests**, and Blender's evaluated-probe
+regressions pass **3 tests**, all with exit 0. These are overlapping focused
+batches, not a full-suite claim. All 38 agent adapters are synchronized.
+Portable verification passes **191 checks, exit 0**, in both the normal
+environment and an initially empty HOME. All 18 changed Python files compile.
+
+`out/imported-admission/acceptance.json` consolidates process exits, source
+and artifact hashes, room and lighting comparisons, source measurement replay,
+and explicit limits. The imported appearance/physical policy, strict scene
+admission, same-runtime lighting comparison and requested focused checks pass.
+The saved historical total-light receipt does not repeat within 0.1%; that
+requirement is explicitly unsatisfied and remains a separate runtime issue.
+No commit was made and neither shared-data symlink was modified.

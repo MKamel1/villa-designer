@@ -168,19 +168,25 @@ class BedModelGeometry(unittest.TestCase):
         scene['models'][0]['position']=[5,5,0]
         self.assertEqual(GeometryTopology.from_inputs(scene=scene,routes=route,route_ground={'clear-path':0}).object_in_route(),[])
 
-    def test_real_legacy_model_envelope_uses_centred_floor_anchor(self):
-        rows=json.loads((FIXTURES/'bed-round2-measurements.json').read_text())
-        measured=next(r for r in rows if r['id']=='sf_bed_forssa')['bounds_m']
-        extents=[b-a for a,b in zip(measured['min'],measured['max'])]
+    def test_real_legacy_model_requires_measured_standin_and_keeps_centred_floor_anchor(self):
+        import gzip
+        from archpipe.imported_appearance import ENCLOSURE_TOLERANCE_M
+        unknown=dict(id='legacy-renamed-bed-control',asset='sf_bed_forssa',scale=.5,
+                     position=[5,8,3],rotation_deg=[0,0,0])
+        with self.assertRaisesRegex(ValueError,'no measured physical stand-in'):
+            GeometryTopology.from_inputs(scene=dict(meshes=[],models=[unknown]))
+        actual=json.loads((FIXTURES/'imported-legacy-before.json').read_text())['models'][1]
+        receipt=json.loads(gzip.decompress((Path(__file__).parents[1]/'knowledge/imported-legacy-components.json.gz').read_bytes()))
+        components=[c for row in receipt['assets'][actual['asset']]['meshes'] for c in row['components']]
+        native_height=max(c['high'][2] for c in components)-min(c['low'][2] for c in components)
         for yaw,position in [(0,[5,8,3]),(90,[-9,15,-3])]:
-            model=dict(id='legacy-renamed-bed-control',asset='sf_bed_forssa',scale=.5,
-                       position=position,rotation_deg=[0,0,yaw])
-            obstacle=GeometryTopology.from_inputs(scene=dict(meshes=[],models=[model])).obstacles[0]
-            box=obstacle.bounds
-            self.assertAlmostEqual((box[0]+box[3])/2,position[0])
-            self.assertAlmostEqual((box[1]+box[4])/2,position[1])
-            self.assertAlmostEqual(box[2],position[2])
-            self.assertAlmostEqual(box[5]-box[2],extents[1]*.5,places=5)
+            model=dict(actual,id='renamed-cane-control',position=position,rotation_deg=[0,0,yaw])
+            obstacles=GeometryTopology.from_inputs(scene=dict(meshes=[],models=[model])).obstacles
+            box=[min(o.bounds[i] for o in obstacles) for i in range(3)]+[max(o.bounds[i] for o in obstacles) for i in range(3,6)]
+            self.assertAlmostEqual((box[0]+box[3])/2,position[0],delta=ENCLOSURE_TOLERANCE_M)
+            self.assertAlmostEqual((box[1]+box[4])/2,position[1],delta=ENCLOSURE_TOLERANCE_M)
+            self.assertAlmostEqual(box[2],position[2],delta=ENCLOSURE_TOLERANCE_M+1e-9)
+            self.assertAlmostEqual(box[5]-box[2],native_height*model['scale'],delta=2*ENCLOSURE_TOLERANCE_M+1e-9)
 
     def test_expansion_is_idempotent_and_removes_only_selected_fallback(self):
         scene=self.scene()

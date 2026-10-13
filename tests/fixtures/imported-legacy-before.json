@@ -1,0 +1,165 @@
+{
+  "source": "Actual unchanged integration-5 default-scene legacy imports",
+  "models": [
+    {
+      "id": "model-living-sofa",
+      "asset": "sf_minotti_sofa",
+      "position": [
+        19.85,
+        -27.239,
+        -2.998
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        180.0
+      ],
+      "layout_rotation_deg": 0.0,
+      "front_axis": "+Z",
+      "scale": 0.01,
+      "footprint_w": 2.959,
+      "footprint_d": 1.062,
+      "reference_h": 0.891,
+      "replaces": "furn-living-sofa-",
+      "room": "living",
+      "label": "furniture model: sf_minotti_sofa",
+      "mounting": {
+        "host_id": "support-living-sofa",
+        "kind": "floor-standing",
+        "offset_m": 0,
+        "housing_depth_m": 0.0,
+        "finished_face": [
+          18.367,
+          -28.671,
+          -2.998
+        ]
+      }
+    },
+    {
+      "id": "model-living-chair-1",
+      "asset": "sf_probber_cane_armchair",
+      "position": [
+        19.7,
+        -24.9,
+        -2.998
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        180.0
+      ],
+      "layout_rotation_deg": 180.0,
+      "front_axis": "-Z",
+      "scale": 0.01293,
+      "footprint_w": 0.946,
+      "footprint_d": 0.794,
+      "reference_h": 0.85,
+      "replaces": "furn-living-chair-1-",
+      "room": "living",
+      "label": "furniture model: sf_probber_cane_armchair",
+      "mounting": {
+        "host_id": "support-living-chair-1",
+        "kind": "floor-standing",
+        "offset_m": 0,
+        "housing_depth_m": 0.0,
+        "finished_face": [
+          18.367,
+          -28.671,
+          -2.998
+        ]
+      }
+    },
+    {
+      "id": "model-living-chair-2",
+      "asset": "sf_probber_cane_armchair",
+      "position": [
+        20.75,
+        -24.9,
+        -2.998
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        180.0
+      ],
+      "layout_rotation_deg": 180.0,
+      "front_axis": "-Z",
+      "scale": 0.01293,
+      "footprint_w": 0.946,
+      "footprint_d": 0.794,
+      "reference_h": 0.85,
+      "replaces": "furn-living-chair-2-",
+      "room": "living",
+      "label": "furniture model: sf_probber_cane_armchair",
+      "mounting": {
+        "host_id": "support-living-chair-2",
+        "kind": "floor-standing",
+        "offset_m": 0,
+        "housing_depth_m": 0.0,
+        "finished_face": [
+          18.367,
+          -28.671,
+          -2.998
+        ]
+      }
+    },
+    {
+      "id": "model-lounge-armchair",
+      "asset": "sf_probber_cane_armchair",
+      "position": [
+        8.448,
+        -26.2,
+        -2.998
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        90.0
+      ],
+      "layout_rotation_deg": 90.0,
+      "front_axis": "-Z",
+      "scale": 0.01293,
+      "footprint_w": 0.794,
+      "footprint_d": 0.946,
+      "reference_h": 0.85,
+      "replaces": "furn-lounge-armchair-",
+      "room": "lounge",
+      "label": "furniture model: sf_probber_cane_armchair",
+      "mounting": {
+        "host_id": "support-lounge-armchair",
+        "kind": "floor-standing",
+        "offset_m": 0,
+        "housing_depth_m": 0.0,
+        "finished_face": [
+          3.817,
+          -27.471,
+          -2.998
+        ]
+      }
+    },
+    {
+      "id": "model-rug-living",
+      "asset": "sf_rug_round_jute",
+      "position": [
+        20.35,
+        -26.0,
+        -3.0
+      ],
+      "rotation_deg": [
+        0,
+        0,
+        0.0
+      ],
+      "layout_rotation_deg": 0.0,
+      "front_axis": "none",
+      "scale": 0.06654,
+      "footprint_w": 2.4,
+      "footprint_d": 2.406,
+      "reference_h": 0.051,
+      "replaces": "rug-living",
+      "room": "living",
+      "decimate_ratio": 0.05,
+      "label": "furniture model: sf_rug_round_jute"
+    }
+  ]
+}

@@ -33,7 +33,24 @@ direct. Empty-room calibration does not validate furnished shadows or
 total-light uniformity. A numerical mismatch must produce a failed gate.
 
 Task probes must own an exported mesh face, including the actual rim datum
-for a sink aperture. Author ownership before mounting, then derive the final
+for a sink aperture. Lead policy 2026-10-13: imported furniture binds to its
+closed measured component stand-ins, while its unchanged appearance mesh
+renders. Validate hash-bound source/stand-in pairs before measurement and
+reject a sensor inside a stand-in even when a short ray crosses no face.
+Preserve nominal positions, cited task intent and all source geometry.
+For above-mattress reading, retain the existing measured source reading
+datum as an offset from its finite owning stand-in face. A conservative
+box top must not flatten a curved source datum and move the task plane.
+Source faces establish that unchanged datum only; physical queries and
+ownership use stand-ins. Freeze the actual pre-policy bound position,
+not the earlier authored coordinate, and prove renamed/translated replay.
+Legacy chair reading tasks preserve the explicitly authored reading plane;
+record its clearance over the measured component nearest the native seat
+datum. Never let a fused structural-frame box invent occupied space in its
+open seat: decompose that source component physically, without moving the
+probe, furniture or light. Imported-only scenes require the same paired
+admission as mixed scenes.
+Author ownership before mounting, then derive the final
 plane from that face after mounting with its explicit reading/grooming
 clearance; keep the sensor 1 mm above that plane. Export and measurement
 unconditionally refuse hidden metered pixels and solid hits in the local

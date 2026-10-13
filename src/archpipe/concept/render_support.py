@@ -281,6 +281,26 @@ def unsupported(scene, lay=None):
     building = (~is_item[owner]) & (~glass[owner])
     for p in scene.get("props", []):
         x, y, z = p["position"]
+        # Tight imported review bodies conservatively enclose curved source
+        # surfaces. A dressing base inside a grounded body has support even
+        # when it is below that box's top face. Never grant this to an open
+        # appearance mesh or an ungrounded assembly; collision review remains
+        # separate and no contact tolerance changes.
+        contained = False
+        for i, mesh in enumerate(meshes):
+            if mesh.get('part_kind') != 'imported-physical-standin':
+                continue
+            islands = [key for key in keys if key[0] == i]
+            if not islands or any(find(key) not in grounded for key in islands):
+                continue
+            frame = mesh['local_frame']
+            local = (np.asarray(p['position'])-np.asarray(frame['origin_m'])) @ np.asarray(frame['rotation'])
+            if any(np.all(local >= low) and np.all(local <= high)
+                   for low, high in (np.asarray(c['local_bounds_m']) for c in mesh['components'])):
+                contained = True
+                break
+        if contained:
+            continue
         if any(S.meets(S.up, x + dx, y + dy, z) for dx, dy in ((0, 0), (0.1, 0), (-0.1, 0), (0, 0.1), (0, -0.1))):
             continue
         if "art" in p["label"] and S.touches(building, [x - 0.05, y - 0.05, z, x + 0.05, y + 0.05, z + 0.5], 0.06):

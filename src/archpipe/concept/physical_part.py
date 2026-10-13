@@ -12,6 +12,7 @@ import math
 
 # Each admitted kind has a physical reason to retain a rectangular solid.
 BOX_KINDS = {
+    "imported-physical-standin": "Lead decision 2026-10-13: measured component review volume; paired immutable appearance renders instead, and this closed solid never renders.",
     "trellis": "Straight timber pergola/trellis members have rectangular physical sections; assembled frames retain open gaps.",
     "cabinet-carcass": "Planar cabinet boards and rectangular enclosure are the finished joinery shape.",
     "shelf": "A straight shelf is a rectangular board with stated thickness.",
@@ -189,8 +190,8 @@ class Part:
             raise PartError("glass pane must be a closed solid")
         if self.surface and self.kind not in SURFACE_EXEMPTIONS:
             raise PartError("unregistered surface exemption for " + self.kind)
-        if self.basis == "measured-gltf":
-            return  # C2 asset intake owns mesh validation and measured dimensions.
+        if self.basis == "measured-gltf" or self.basis == "imported appearance mesh":
+            raise PartError("imported appearance mesh cannot be presented as a physical part")
         faces = _freeze_faces(self.solid) if self.solid else self.solid
         errors = geometry_errors(faces, surface=self.surface, occupied_side=self.occupied_side)
         exempt = False
@@ -235,6 +236,11 @@ class PartMeshList(list):
         if record.get('surface'):
             record['surface_exemption_reason'] = SURFACE_EXEMPTIONS.get(kind)
         try:
+            if record.get('mesh_class') == 'imported appearance mesh' or record.get('physical_part') is False:
+                raise PartError('imported appearance mesh cannot be presented as a physical part')
+            if kind == 'imported-physical-standin' and (record.get('render') is not False or
+                    not record.get('source_faces_sha256') or not record.get('local_frame')):
+                raise PartError('imported physical stand-in requires nonrendering measured source binding and local frame')
             if 'face_materials' in record and len(record['face_materials']) != len(record['faces']):
                 raise PartError('face material count does not match faces')
             Part(kind, record["faces"], tuple(record["local_axes"]), record["material"],

@@ -1242,6 +1242,9 @@ def import_models(model_specs, library_root, *, neutral_diagnostic=False):
         if spec.get('furniture_fitting'):
             from archpipe.furniture_fit import require_furniture_geometry
             require_furniture_geometry(spec,library_root,neutral_diagnostic=neutral_diagnostic)
+        if not spec.get('review_geometry'):
+            from archpipe.imported_appearance import require_legacy_source
+            require_legacy_source(spec, library_root)
         require_registered_asset(spec["asset"], Path(__file__).resolve().parents[3] / "ops/workstation/library-manifest.json",
                                  Path(library_root) / "props" / spec["asset"] / "model.gltf")
         from archpipe.furniture_orientation import check_model_orientation
@@ -1749,6 +1752,9 @@ def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mes
 
 
 def render(scene_data, args):
+    from archpipe.imported_appearance import require_scene, needs_scene_admission
+    if needs_scene_admission(scene_data):
+        require_scene(scene_data)
     os.makedirs(args.out, exist_ok=True)
     if args.views == "none" and not (args.calibrate or args.measure_lighting):
         raise ValueError("--views none requires --calibrate or --measure-lighting")

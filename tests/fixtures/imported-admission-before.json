@@ -1,0 +1,283 @@
+{
+  "source": "Actual integration-5 retained immutable imports before lead policy 2026-10-13",
+  "cases": [
+    {
+      "id": "model-cinema-desk",
+      "label": "cinema-desk",
+      "geometry_sha256": "ed8683a011fd79834b3c4f93895fc63d59174ce0bf192d1d0f40492da63e0c7f",
+      "source_sha256": {
+        "model.gltf": "6f11a211a561fec7cb7ebd423eb6d5e10f8d2593e599bd7b14b161e0119d665c",
+        "scene.bin": "455a615bc8c66a574c42ad0a6358e56511f476da5275db44954f1331d8dc8025",
+        "textures/material_baseColor.jpeg": "a87f88be44794089aaa8c1bdc7e40799f03a949e732d53ea973c909f5d483774",
+        "textures/kiri_baseColor.jpeg": "f32ebf6bd3c0b7d157ac2801104504a6afd99c017f7031ba82033adcef344471",
+        "textures/shina_baseColor.jpeg": "9ca8bf6729ed94de8958b8a6bcd3c138c0543ade56cb9aa9b55e275358f56ea8"
+      },
+      "physical_errors": []
+    },
+    {
+      "id": "model-study-desk",
+      "label": "study-desk",
+      "geometry_sha256": "a6b7ef9d49b2b8e0ad9fc8264ec5d7bf09f176ead5820ebb4164d43263e8b2b8",
+      "source_sha256": {
+        "model.gltf": "dd496d66505a3448f1eedfb5a338249f1643ea53d298fcb888232a4b62a889e7",
+        "scene.bin": "a7d838945a2795bb7bc8c2c13d0a087125d0d3e91927ba0411bc7272eb2681cc",
+        "textures/material_baseColor.jpeg": "fdbc872f60d8ca49a734cc7661ebc48e9cf84f1a8e0522559495d258468455a8",
+        "textures/kiri_baseColor.jpeg": "c8c46eb863b4d1dd82fd07cdc2c2843e62dfe5e7ef3c921b95cbed16d5767969",
+        "textures/shina_baseColor.jpeg": "a6ebb6615b5c72a9f5c1d4ca2dec7ac2b0f9ec7bd0fe9dc35872397c597ee323"
+      },
+      "physical_errors": [
+        {
+          "id": "model-study-desk",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "zero-area triangle"
+        }
+      ]
+    },
+    {
+      "id": "model-study-adult-desk",
+      "label": "study-adult-desk",
+      "geometry_sha256": "a2c896b5a3dad8f6ae9bb091021bfd5952c6d3b1a514fbc80809b12455f85eda",
+      "source_sha256": {
+        "model.gltf": "819d15b2e0e61a38f14a3ef797a4c2d85d0557ad873aaffb576c062883fcf865",
+        "scene.bin": "699a5051390b8f39ff7b199c9a046c160a63d59d0bca72ad81cd488c02bfadd1",
+        "textures/material_baseColor.jpeg": "fdbc872f60d8ca49a734cc7661ebc48e9cf84f1a8e0522559495d258468455a8",
+        "textures/kiri_baseColor.jpeg": "c8c46eb863b4d1dd82fd07cdc2c2843e62dfe5e7ef3c921b95cbed16d5767969",
+        "textures/shina_baseColor.jpeg": "a6ebb6615b5c72a9f5c1d4ca2dec7ac2b0f9ec7bd0fe9dc35872397c597ee323"
+      },
+      "physical_errors": [
+        {
+          "id": "model-study-adult-desk",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "zero-area triangle"
+        }
+      ]
+    },
+    {
+      "id": "model-ka-desk-1",
+      "label": "ka-desk-1",
+      "geometry_sha256": "ed8683a011fd79834b3c4f93895fc63d59174ce0bf192d1d0f40492da63e0c7f",
+      "source_sha256": {
+        "model.gltf": "6f11a211a561fec7cb7ebd423eb6d5e10f8d2593e599bd7b14b161e0119d665c",
+        "scene.bin": "455a615bc8c66a574c42ad0a6358e56511f476da5275db44954f1331d8dc8025",
+        "textures/material_baseColor.jpeg": "a87f88be44794089aaa8c1bdc7e40799f03a949e732d53ea973c909f5d483774",
+        "textures/kiri_baseColor.jpeg": "f32ebf6bd3c0b7d157ac2801104504a6afd99c017f7031ba82033adcef344471",
+        "textures/shina_baseColor.jpeg": "9ca8bf6729ed94de8958b8a6bcd3c138c0543ade56cb9aa9b55e275358f56ea8"
+      },
+      "physical_errors": []
+    },
+    {
+      "id": "model-ka-desk-2",
+      "label": "ka-desk-2",
+      "geometry_sha256": "ed8683a011fd79834b3c4f93895fc63d59174ce0bf192d1d0f40492da63e0c7f",
+      "source_sha256": {
+        "model.gltf": "6f11a211a561fec7cb7ebd423eb6d5e10f8d2593e599bd7b14b161e0119d665c",
+        "scene.bin": "455a615bc8c66a574c42ad0a6358e56511f476da5275db44954f1331d8dc8025",
+        "textures/material_baseColor.jpeg": "a87f88be44794089aaa8c1bdc7e40799f03a949e732d53ea973c909f5d483774",
+        "textures/kiri_baseColor.jpeg": "f32ebf6bd3c0b7d157ac2801104504a6afd99c017f7031ba82033adcef344471",
+        "textures/shina_baseColor.jpeg": "9ca8bf6729ed94de8958b8a6bcd3c138c0543ade56cb9aa9b55e275358f56ea8"
+      },
+      "physical_errors": []
+    },
+    {
+      "id": "model-kb-desk",
+      "label": "kb-desk",
+      "geometry_sha256": "ed8683a011fd79834b3c4f93895fc63d59174ce0bf192d1d0f40492da63e0c7f",
+      "source_sha256": {
+        "model.gltf": "6f11a211a561fec7cb7ebd423eb6d5e10f8d2593e599bd7b14b161e0119d665c",
+        "scene.bin": "455a615bc8c66a574c42ad0a6358e56511f476da5275db44954f1331d8dc8025",
+        "textures/material_baseColor.jpeg": "a87f88be44794089aaa8c1bdc7e40799f03a949e732d53ea973c909f5d483774",
+        "textures/kiri_baseColor.jpeg": "f32ebf6bd3c0b7d157ac2801104504a6afd99c017f7031ba82033adcef344471",
+        "textures/shina_baseColor.jpeg": "9ca8bf6729ed94de8958b8a6bcd3c138c0543ade56cb9aa9b55e275358f56ea8"
+      },
+      "physical_errors": []
+    },
+    {
+      "id": "model-pb-vanity",
+      "label": "pb-vanity",
+      "geometry_sha256": "a6b7ef9d49b2b8e0ad9fc8264ec5d7bf09f176ead5820ebb4164d43263e8b2b8",
+      "source_sha256": {
+        "model.gltf": "dd496d66505a3448f1eedfb5a338249f1643ea53d298fcb888232a4b62a889e7",
+        "scene.bin": "a7d838945a2795bb7bc8c2c13d0a087125d0d3e91927ba0411bc7272eb2681cc",
+        "textures/material_baseColor.jpeg": "fdbc872f60d8ca49a734cc7661ebc48e9cf84f1a8e0522559495d258468455a8",
+        "textures/kiri_baseColor.jpeg": "c8c46eb863b4d1dd82fd07cdc2c2843e62dfe5e7ef3c921b95cbed16d5767969",
+        "textures/shina_baseColor.jpeg": "a6ebb6615b5c72a9f5c1d4ca2dec7ac2b0f9ec7bd0fe9dc35872397c597ee323"
+      },
+      "physical_errors": [
+        {
+          "id": "model-pb-vanity",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "zero-area triangle"
+        }
+      ]
+    },
+    {
+      "id": "model-cinema-desk#chair-1",
+      "label": "cinema-desk#chair-1",
+      "geometry_sha256": "ad6fea012cc66566313b149e5bd531055403e3a04b5b2514a80e2a52f7150f88",
+      "source_sha256": {
+        "model.gltf": "dfa14e76ba750f304f41c8a7d08d250076a9334c6f624a8c81841366104b0874",
+        "scene.bin": "58f5752879b4e982ea1755b8e08c1f7de1bca45637cb8c6821cb1008962b0970",
+        "textures/M_Sandalye_baseColor.png": "bad2871f030233d111e3dedb5b0e2a02e21654be8052826349e5a9a224a9179e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-cinema-desk#chair-1",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    },
+    {
+      "id": "model-cinema-desk#chair-2",
+      "label": "cinema-desk#chair-2",
+      "geometry_sha256": "ad6fea012cc66566313b149e5bd531055403e3a04b5b2514a80e2a52f7150f88",
+      "source_sha256": {
+        "model.gltf": "dfa14e76ba750f304f41c8a7d08d250076a9334c6f624a8c81841366104b0874",
+        "scene.bin": "58f5752879b4e982ea1755b8e08c1f7de1bca45637cb8c6821cb1008962b0970",
+        "textures/M_Sandalye_baseColor.png": "bad2871f030233d111e3dedb5b0e2a02e21654be8052826349e5a9a224a9179e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-cinema-desk#chair-2",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    },
+    {
+      "id": "model-study-desk#chair-1",
+      "label": "study-desk#chair-1",
+      "geometry_sha256": "ad6fea012cc66566313b149e5bd531055403e3a04b5b2514a80e2a52f7150f88",
+      "source_sha256": {
+        "model.gltf": "dfa14e76ba750f304f41c8a7d08d250076a9334c6f624a8c81841366104b0874",
+        "scene.bin": "58f5752879b4e982ea1755b8e08c1f7de1bca45637cb8c6821cb1008962b0970",
+        "textures/M_Sandalye_baseColor.png": "bad2871f030233d111e3dedb5b0e2a02e21654be8052826349e5a9a224a9179e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-study-desk#chair-1",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    },
+    {
+      "id": "model-study-desk#chair-2",
+      "label": "study-desk#chair-2",
+      "geometry_sha256": "ad6fea012cc66566313b149e5bd531055403e3a04b5b2514a80e2a52f7150f88",
+      "source_sha256": {
+        "model.gltf": "dfa14e76ba750f304f41c8a7d08d250076a9334c6f624a8c81841366104b0874",
+        "scene.bin": "58f5752879b4e982ea1755b8e08c1f7de1bca45637cb8c6821cb1008962b0970",
+        "textures/M_Sandalye_baseColor.png": "bad2871f030233d111e3dedb5b0e2a02e21654be8052826349e5a9a224a9179e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-study-desk#chair-2",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    },
+    {
+      "id": "model-study-adult-desk#chair-1",
+      "label": "study-adult-desk#chair-1",
+      "geometry_sha256": "ad6fea012cc66566313b149e5bd531055403e3a04b5b2514a80e2a52f7150f88",
+      "source_sha256": {
+        "model.gltf": "dfa14e76ba750f304f41c8a7d08d250076a9334c6f624a8c81841366104b0874",
+        "scene.bin": "58f5752879b4e982ea1755b8e08c1f7de1bca45637cb8c6821cb1008962b0970",
+        "textures/M_Sandalye_baseColor.png": "bad2871f030233d111e3dedb5b0e2a02e21654be8052826349e5a9a224a9179e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-study-adult-desk#chair-1",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    },
+    {
+      "id": "model-ka-desk-1#chair-1",
+      "label": "ka-desk-1#chair-1",
+      "geometry_sha256": "ad6fea012cc66566313b149e5bd531055403e3a04b5b2514a80e2a52f7150f88",
+      "source_sha256": {
+        "model.gltf": "dfa14e76ba750f304f41c8a7d08d250076a9334c6f624a8c81841366104b0874",
+        "scene.bin": "58f5752879b4e982ea1755b8e08c1f7de1bca45637cb8c6821cb1008962b0970",
+        "textures/M_Sandalye_baseColor.png": "bad2871f030233d111e3dedb5b0e2a02e21654be8052826349e5a9a224a9179e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-ka-desk-1#chair-1",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    },
+    {
+      "id": "model-ka-desk-2#chair-1",
+      "label": "ka-desk-2#chair-1",
+      "geometry_sha256": "ad6fea012cc66566313b149e5bd531055403e3a04b5b2514a80e2a52f7150f88",
+      "source_sha256": {
+        "model.gltf": "dfa14e76ba750f304f41c8a7d08d250076a9334c6f624a8c81841366104b0874",
+        "scene.bin": "58f5752879b4e982ea1755b8e08c1f7de1bca45637cb8c6821cb1008962b0970",
+        "textures/M_Sandalye_baseColor.png": "bad2871f030233d111e3dedb5b0e2a02e21654be8052826349e5a9a224a9179e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-ka-desk-2#chair-1",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    },
+    {
+      "id": "model-kb-desk#chair-1",
+      "label": "kb-desk#chair-1",
+      "geometry_sha256": "ad6fea012cc66566313b149e5bd531055403e3a04b5b2514a80e2a52f7150f88",
+      "source_sha256": {
+        "model.gltf": "dfa14e76ba750f304f41c8a7d08d250076a9334c6f624a8c81841366104b0874",
+        "scene.bin": "58f5752879b4e982ea1755b8e08c1f7de1bca45637cb8c6821cb1008962b0970",
+        "textures/M_Sandalye_baseColor.png": "bad2871f030233d111e3dedb5b0e2a02e21654be8052826349e5a9a224a9179e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-kb-desk#chair-1",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    },
+    {
+      "id": "model-pb-bed",
+      "label": "pb-bed",
+      "geometry_sha256": "6dfaac322136c55e08b89e93b35f6dc12d060270da51faafc86d379d056f98b7",
+      "source_sha256": {
+        "model.gltf": "7a4a12f0986407fed871bc777a17fca73a30c11893746a3448dcd7c238019991",
+        "scene.bin": "95876e63d5f9dcab017d624cf30782295d1b2db675c9646ec2c07f2816525bf0",
+        "textures/MAT_Bed_Body_baseColor.png": "eca987c14191111980da1e297acc29921d212a6aad1e993a71f68eef6cd686e9",
+        "textures/MAT_Bed_Body_metallicRoughness.png": "87c5d8bba0382434aebf8325b14b8ef6388dee689db6f6ae3d50548035584961",
+        "textures/MAT_Bed_Body_normal.png": "8a8c25297e1ae29dd3372d6e5e340e786687896e868b0c15e08bf4a5859301f7",
+        "textures/MAT_Bed_blanket_baseColor.png": "24b3923d140705e8ad9f97f166cd4d71065db7f179001184c54b4c9ada5394bc",
+        "textures/MAT_Bed_blanket_normal.png": "dbd0aab98326555d27fdb860a59408a1c8ebeba50a0f3c5b243f852dc2b5063e"
+      },
+      "physical_errors": [
+        {
+          "id": "model-pb-bed",
+          "kind": "model-part",
+          "room": "unassigned",
+          "reason": "open or inconsistently wound edges"
+        }
+      ]
+    }
+  ]
+}

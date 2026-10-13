@@ -405,6 +405,27 @@ asset or view:
    and remain visibly unresolved. Never use either path for a new proxy.
    Include exemption policy in scene provenance; revoking permission must
    invalidate any cached scene before a renderer can consume it.
+   Lead decision 2026-10-13: downloaded furniture source meshes are explicit
+   hash-bound `imported appearance mesh` records, never physical Parts or C3
+   exemptions. Keep source faces unchanged. Construct closed tight boxes per
+   connected measured component in local axes, with the stated 10 micrometre
+   numerical enclosure tolerance. Strictly admit those nonrendering stand-ins
+   and use them for support, collisions, C8 room review and task binding.
+   Include legacy imports with no review faces: generate their component
+   measurements and source/buffer hashes with `scripts/measure_imported_legacy.py`.
+   A connected open structural frame must be decomposed by whole source
+   face groups, under the exact source/component-bound decomposition policy;
+   its whole box fills cavities. Bind the generated receipt to that policy
+   and the manifest. Unknown imported assets fail closed.
+   Export and renderer refuse missing, stale/non-enclosing or rendered
+   stand-ins and appearance presented as physical parts. Rerun all affected
+   room/probe comparisons; unchanged render geometry requires hash evidence,
+   and any visible change still requires neutral preview review.
+   A dressing base enclosed by a grounded stand-in has conservative support
+   even below its box top; do not move dressing or enlarge contact tolerances
+   to repair a surface-only false refusal. A floating stand-in cannot supply
+   that support. Keep collision screening separate and test the real base,
+   a lifted base and a translated/renamed sibling.
 5. **Cameras need line of sight, not just framing.** Subjects in frame is not
    enough: nothing (prop canopy, pot, wall edge, trellis) may stand between
    the lens and its subjects, and the lens may not start inside or within

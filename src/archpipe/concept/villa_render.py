@@ -2259,6 +2259,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     scene['part_failures'] = admitted.failures
     scene['part_exemptions'] = [dict(id=m['id'], kind=m['part_kind'], **m['proxy_exemption'])
                                for m in admitted if m.get('proxy_exemption')]
+    from ..imported_appearance import bind_scene
+    bind_scene(scene)
     bind_planes(scene)
     require_clear_probes(scene)
     return scene
@@ -3098,6 +3100,8 @@ def source_provenance(root=None):
         "ops/workstation/library-manifest.json", "knowledge/garden-palette.json", "knowledge/site-orientation.json",
         "knowledge/c4-final-approvals.json",
         "knowledge/c3-part-exemptions.json",
+        "knowledge/imported-legacy-components.json.gz",
+        "knowledge/imported-component-policy.json",
         "spec/villa-site.yaml", "knowledge/library.json",
         "knowledge/projects/villa-01/brief-requirements.json",
         "knowledge/projects/villa-01/taste.json")]

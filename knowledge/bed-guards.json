@@ -95,7 +95,7 @@
       "stage": "model instance route review",
       "proof_file": "tests/test_bed_models.py",
       "proofs": [
-        "test_real_legacy_model_envelope_uses_centred_floor_anchor"
+        "test_real_legacy_model_requires_measured_standin_and_keeps_centred_floor_anchor"
       ]
     },
     {

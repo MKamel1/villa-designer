@@ -35,10 +35,11 @@ class PhysicalPartBoundary(unittest.TestCase):
         with self.assertRaisesRegex(PartError, "duvet intersects mattress support"):
             self.part("duvet", box_faces(0, 0, 0.45, 1, 1, 0.55), support=(0, 0, 0, 1, 1, 0.5))
 
-    def test_real_rectangular_carcass_and_measured_gltf_are_quiet(self):
+    def test_real_rectangular_carcass_quiet_and_imported_physical_bypass_refuses(self):
         self.part("cabinet-carcass", box_faces(0, 0, 0, 0.6, 0.4, 2.0))
         self.part("door-leaf", box_faces(0, 0, 0, 0.9, 0.04, 2.1))
-        Part("plant", None, ("x", "y", "z"), "leaf", "measured-gltf")
+        with self.assertRaisesRegex(PartError, 'appearance mesh cannot'):
+            Part("plant", None, ("x", "y", "z"), "leaf", "measured-gltf")
 
     def test_undeclared_kind_and_box_rail_fail(self):
         with self.assertRaisesRegex(PartError, "requires kind"):

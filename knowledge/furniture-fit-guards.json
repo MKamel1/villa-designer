@@ -137,6 +137,28 @@
       "proofs": [
         "test_real_independent_bed_scale_audit_and_renamed_sibling"
       ]
+    },
+    {
+      "lesson_id": "imported-appearance-physical-admission",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Lead decision 2026-10-13: immutable hash-bound appearance meshes paired with closed nonrendering local component stand-ins",
+      "check": "imported_appearance.bind_scene/require_scene; physical_part.PartMeshList; task_probe.require_clear_probes; scripts.verify",
+      "stage": "before physical review, exported-scene admission and rendering",
+      "proof_file": "tests/test_imported_admission.py",
+      "proofs": [
+        "test_real_twelve_refusals_get_strict_closed_component_standins_without_face_edits",
+        "test_every_real_component_vertex_is_inside_actual_outward_standin_faces",
+        "test_missing_standin_shrunken_stale_or_rendering_pair_fails_closed",
+        "test_renamed_translated_sibling_preserves_enclosure_and_refuses_missing_pair",
+        "test_physical_consumers_keep_appearance_out_and_preserve_fallback",
+        "test_real_five_legacy_imports_and_unknown_or_changed_sibling_fail_closed",
+        "test_real_open_structural_frame_keeps_reading_sensor_clear_and_translated_sibling",
+        "test_real_sofa_contained_dressing_support_and_floating_translated_sibling",
+        "test_orphaned_import_rows_refuse_after_models_and_metadata_are_removed"
+      ]
     }
   ]
 }

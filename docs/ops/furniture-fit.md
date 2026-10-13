@@ -98,3 +98,39 @@ Door closure must consume physical CAD components, not camera-caption buckets.
 faces before backing is considered; captions select complete leaf visibility
 only. A new closure migration needs real full/empty export equality, as well
 as a changed-face refusal, before its furniture snapshots are published.
+
+### Imported appearance admission (lead decision 2026-10-13)
+
+Source glTF (the imported scene format), buffer and texture hashes keep their
+existing immutable-source binding. An imported appearance mesh is explicitly
+not a physical Part or an exemption from C3, the strict physical-part boundary.
+`imported_appearance.bind_scene` constructs tight closed stand-ins per connected
+measured component, in scaled model-local axes, and keeps them outside render
+meshes. The numerical enclosure tolerance is 0.000010 metres (ten micrometres);
+only degenerate component axes gain that thickness on either side.
+
+Support, collision, C8 (the geometry-topology room reviewer) and task-host
+binding consume these stand-ins. `require_scene` checks source/face/stand-in
+hashes, exact reconstructed measured bounds and strict outward-solid admission
+before export or rendering. Missing, stale, non-enclosing or rendered stand-ins
+refuse; source appearance presented as a physical part refuses. Source faces
+remain unchanged. A task sensor inside a closed stand-in refuses even if its
+short approach ray crosses no surface. Compare all affected room receipts and
+all lighting targets after changing physical admission; retain absolute findings
+and state numerical differences. Neutral previews are required if rendering
+geometry, materials or cameras change. Otherwise prove their hashes unchanged.
+
+Soft dressing may lie within a conservative component box around curved
+source geometry. The support query recognizes base containment only in
+grounded stand-ins; it retains the existing surface/contact tolerances and
+separate collision screen. Neither a lifted prop nor an ungrounded enclosing
+body qualifies. Immutable room snapshots must remain usable on repeated
+physical expansion; do not mutate their frozen input arrays.
+
+Above-mattress reading preserves its existing retained-source datum as an
+explicit clearance offset from the finite owning stand-in face. A conservative
+component box must not flatten the curved source top and change that task
+plane. Source geometry supplies this unchanged datum only; physical queries,
+collision, ray guards and ownership continue to use the stand-in. Freeze the
+actual pre-policy bound point, rather than its earlier authored coordinate,
+and prove a renamed/translated replay as well as a wrong-offset refusal.

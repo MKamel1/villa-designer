@@ -16,6 +16,7 @@ def source_findings(source, relative_path):
     if path.startswith("blender/") or path in ("asset_route_generator.py", "build_input_guard.py"):
         return []
     tree = ast.parse(source.lstrip("\ufeff"))
+    parents = {id(child): parent for parent in ast.walk(tree) for child in ast.iter_child_nodes(parent)}
     docstrings = {id(node.value) for node in ast.walk(tree)
                   if isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant)
                   and isinstance(node.value.value, str)}
@@ -37,7 +38,11 @@ def source_findings(source, relative_path):
                 reason = "implicit HOME input in build code"
         elif isinstance(node, ast.Constant) and isinstance(node.value, str) and id(node) not in docstrings:
             value = node.value.replace("\\", "/").lower()
-            if ".gltf" in value and path != "asset_intake.py":
+            parent = parents.get(id(node))
+            hash_lookup = (isinstance(parent, ast.Subscript) and parent.slice is node and
+                isinstance(parent.value, ast.Subscript) and
+                isinstance(parent.value.slice, ast.Constant) and parent.value.slice.value == 'source_sha256')
+            if ".gltf" in value and path != "asset_intake.py" and not hash_lookup:
                 reason = "raw glTF path in build code"
             elif ("assets/library" in value and node.value != "$HOME/archpipe/assets/library") or value in ("home", "userprofile"):
                 if path != "sources.py":

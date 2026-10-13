@@ -449,15 +449,17 @@ def label_fallbacks(meshes, items, replacements=()):
 
 
 def model_review_meshes(models):
-    """Place measured model faces for portable support, routes and doors.
+    """Place unchanged appearance faces for import and source-fit comparison.
 
     review_geometry stores actual imported faces in Blender's converted glTF
     axes, before source-unit conversion, yaw and floor placement. Mattress
     centring and the retained frame floor datum also drive Blender import.
-    Beds require these faces; other legacy models retain envelope-only route
-    coverage until their own exact geometry receipts are migrated.
+    These faces verify unchanged import transforms and source-fit contracts.
+    Physical queries use separate closed measured stand-ins, through
+    scene_with_model_geometry, under the lead's 2026-10-13 policy.
     """
     import numpy as np
+    from .imported_appearance import APPEARANCE_CLASS
     result=[]
     for model in models:
         if model.get('status')=='procedural-bed-fallback':
@@ -474,6 +476,7 @@ def model_review_meshes(models):
             faces=[(np.asarray(f)@matrix.T+offset).tolist() for f in row['faces']]
             result.append(dict(id=model['id']+'::'+row['name'],faces=faces,
                 group='furniture',material='imported-model',part_kind='model-part',
+                mesh_class=APPEARANCE_CLASS, physical_part=False, basis=APPEARANCE_CLASS,
                 room=model.get('room'),label=model.get('label',model['id']),model_instance=model['id']))
     return result
 
@@ -482,7 +485,7 @@ def bed_frame_items(scene, furniture):
     """Review-only frame envelopes; preserve layout/mattress and other items.
 
     The route solver consumes these measured frames instead of planned
-    mattress rectangles. Actual C8 collision/support still uses every face.
+    mattress rectangles. C8 collision/support uses closed measured components.
     """
     import numpy as np
     if not furniture:
@@ -517,18 +520,24 @@ def bed_frame_items(scene, furniture):
 
 
 def scene_with_model_geometry(scene):
-    """Expand instance faces once, keeping input scene and fallbacks immutable."""
+    """Use closed stand-ins once, keeping appearance and fallbacks immutable."""
+    from .imported_appearance import physical_meshes, bind_scene, has_imported_rows
+    if (scene.get('models') and not has_imported_rows(scene) and not any(
+            key in scene for key in ('imported_appearances','physical_model_meshes','imported_admission_policy'))):
+        # Internal review inputs gain independent pair records before their
+        # first expansion; repeated/frozen expansion validates the same pair.
+        scene = bind_scene(dict(scene))
     models=scene.get('models',[])
-    faces=model_review_meshes(models)
+    faces=physical_meshes(scene)
     active=[m for m in models if m.get('status')!='procedural-bed-fallback']
-    prefixes={m.get('replaces') for m in active if m.get('review_geometry') and m.get('replaces') and not m.get('replacement_mesh_ids')}
+    prefixes={m.get('replaces') for m in active if m.get('replaces') and not m.get('replacement_mesh_ids')}
     exact={identifier for m in active for identifier in m.get('replacement_mesh_ids',[])}
-    instance_ids={m['id'] for m in active if m.get('review_geometry')}
+    instance_ids={m['id'] for m in active}
     pillow_prefixes={'dress-pillow-'+m['replaces'].removeprefix('furn-').removesuffix('-')+'-'
                      for m in active if m.get('role')=='bed' and m.get('review_geometry') and m.get('replaces')}
     meshes=[m for m in scene.get('meshes',[]) if m.get('model_instance') not in instance_ids and m['id'] not in exact
             and not any(m['id'].startswith(p) for p in prefixes|pillow_prefixes)]
-    return dict(scene,meshes=meshes+faces)
+    return dict(scene,meshes=meshes+list(faces))
 
 
 def integrate_bed_models(scene, models, layout, specification, furniture, *, baseline_meshes=None,

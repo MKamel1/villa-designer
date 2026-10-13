@@ -3,6 +3,7 @@ from copy import deepcopy
 import gzip,json
 from pathlib import Path
 import unittest
+import numpy as np
 from archpipe.task_probe import bind_planes, task_geometry
 
 class ModelTaskHost(unittest.TestCase):
@@ -47,13 +48,36 @@ class ModelTaskHost(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'height datum requires measured retained parts'):bind_planes(scene)
 
 class ParentReadingDatum(unittest.TestCase):
+    def test_retained_reading_datum_preserves_renamed_translated_sibling(self):
+        from archpipe.task_probe import require_clear_probes
+        frozen=json.loads(gzip.decompress(Path('tests/fixtures/task-probe-parent-replacement.json.gz').read_bytes()))
+        scene=deepcopy(frozen);shift=[30,-20,3]
+        model=scene['models'][0];model['id']='unrelated-reading-bed';model['label']='unrelated-reading-item'
+        model['position']=[v+d for v,d in zip(model['position'],shift)]
+        for mesh in scene['meshes']:
+            for face in mesh['faces']:
+                for vertex in face:vertex[:]=[v+d for v,d in zip(vertex,shift)]
+        for light in scene['lights']:
+            light['position']=[v+d for v,d in zip(light['position'],shift)]
+        for cloth in scene['cloth']:
+            cloth['id']='duvet-'+model['label'];cloth['mattress_top']+=shift[2]
+        point=scene['measurement_points'][0];point['host_item']=model['label']
+        point['position']=[v+d for v,d in zip(point['position'],shift)]
+        before=json.loads(Path('tests/fixtures/imported-reading-datum-before.json').read_text())
+        original=[v+d for v,d in zip(before['bound_position_m'],shift)]
+        bind_planes(scene);require_clear_probes(scene)
+        np.testing.assert_allclose(point['position'],original,atol=1e-8,rtol=0)
+        self.assertEqual(point['host_surface']['model_instance'],model['id'])
+
     def test_real_parent_reading_clearance_and_frozen_wrong_pillow_offset(self):
         from archpipe.task_probe import require_clear_probes, _surface
         scene=json.loads(gzip.decompress(Path('tests/fixtures/task-probe-parent-replacement.json.gz').read_bytes()))
-        p=scene['measurement_points'][0];original=p['position'][2]
+        before=json.loads(Path('tests/fixtures/imported-reading-datum-before.json').read_text())
+        p=scene['measurement_points'][0];original=before['bound_position_m'][2]
         bind_planes(scene)
         self.assertAlmostEqual(p['host_surface']['replacement_datum_offset_m'],.375)
-        self.assertAlmostEqual(p['position'][2],original,delta=.0001)
+        self.assertAlmostEqual(p['position'][2],original,delta=1e-8)
+        self.assertIn('owned by measured stand-in', p['host_surface']['reading_datum_basis'])
         require_clear_probes(scene)
         wrong=deepcopy(scene);p=wrong['measurement_points'][0];binding=p['host_surface']
         face=next(r for r in task_geometry(wrong)['meshes'] if r['id']==binding['mesh_id'])['faces'][binding['face_index']]

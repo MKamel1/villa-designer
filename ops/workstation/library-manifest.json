@@ -2951,7 +2951,12 @@
         "decided_by": "lead",
         "date": "2026-09-30"
       },
-      "preview_image": "previews/sf_minotti_sofa.png"
+      "preview_image": "previews/sf_minotti_sofa.png",
+      "source_sha256": "092a392994e787bddef3e8dd88b3b1ea46f35feb1089c360cf2c4f97906c0ec1",
+      "geometry_buffer_sha256": {
+        "scene.bin": "976ac8d2fe0a14fdd291ac7fd8e50ded3e735d4a485541f71cefb06e7683a82c"
+      },
+      "imported_component_geometry_sha256": "2ff95da94bab1b5d84873e90093149e049622d4d7de9ef9a306a70ad4186604c"
     },
     {
       "id": "sf_modern_low_sofa",
@@ -3121,7 +3126,12 @@
       ],
       "placed_scale": 0.012931414818488578,
       "placement_scale_source": "src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models",
-      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models"
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models",
+      "source_sha256": "79d377e2700179b18ee684f70b62099a69406ce2e67742eb4b79632696b18d3d",
+      "geometry_buffer_sha256": {
+        "scene.bin": "69bb885b3490cebb1b6d6065b419a7272c4146c68841446f6960e204c28f3fdf"
+      },
+      "imported_component_geometry_sha256": "79da3176f491c684ec3768073bb89c40bda3dae6239c5a978041babb16da3d50"
     },
     {
       "id": "sf_royal_poinciana",
@@ -3235,7 +3245,12 @@
       ],
       "placed_scale": 0.06654319207692391,
       "placement_scale_source": "src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models",
-      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models"
+      "placed_scale_reason": "Actual D1 placement factor from src/archpipe/concept/villa_furnish.py:product; src/archpipe/concept/villa_render.py:place_model/rug placement; src/archpipe/blender/villa_scene.py:import_models",
+      "source_sha256": "23b76e42157d360ac08b2e0cea86c777bcf9b59fc2a2e4d844eaac72d1fd95cc",
+      "geometry_buffer_sha256": {
+        "scene.bin": "7aca92148aa58d4383e8f930a0000f8a7d0da7465e0bf775683780cc8d3624c9"
+      },
+      "imported_component_geometry_sha256": "7121c490c201a8ea8406d59776ed36243f6cc8362adb5f390cd558cf353d8649"
     },
     {
       "id": "sf_wooden_bench",
