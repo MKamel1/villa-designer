@@ -55,7 +55,14 @@ def _thaw(value):
 def _faces(faces):
     if isinstance(faces, tuple):
         return faces
-    return tuple(tuple(tuple(float(v) for v in p) for p in f) for f in faces)
+    def point(p):
+        # Authored metre coordinates are predominantly plain Python floats.
+        # Preserve their exact bits (including negative zero) without three
+        # generator dispatches; other numeric types retain float conversion.
+        if len(p)==3 and type(p[0]) is float and type(p[1]) is float and type(p[2]) is float:
+            return tuple(p)
+        return tuple(map(float,p))
+    return tuple(tuple(point(p) for p in f) for f in faces)
 
 
 def bounds_of(faces):

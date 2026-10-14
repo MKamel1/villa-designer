@@ -1829,9 +1829,10 @@ def render(scene_data, args):
         require_clear_probes(scene_data)
     warnings = []
     library_root = os.path.expandvars(os.path.expanduser(args.library_root or scene_data["library_root"]))
-    materials = {name: add_material(name, spec, library_root, warnings) for name, spec in scene_data["materials"].items()}
+    from archpipe.drape_appearance import needs_admission, rendered_meshes, render_materials
+    render_specs = render_materials(scene_data) if needs_admission(scene_data) else scene_data['materials']
+    materials = {name: add_material(name, spec, library_root, warnings) for name, spec in render_specs.items()}
     configure_glass(materials, scene_data["materials"])
-    from archpipe.drape_appearance import needs_admission, rendered_meshes
     render_meshes = rendered_meshes(scene_data) if needs_admission(scene_data) else scene_data['meshes']
     objects = build_meshes(render_meshes, materials, scene_data["materials"], warnings)
     build_climbers(render_meshes, objects, materials, warnings)

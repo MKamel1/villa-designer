@@ -18,7 +18,9 @@ def bake(data):
     from archpipe.imported_appearance import digest
     if data.get('runtime') and data['runtime']['blender_version']!=bpy.app.version_string:
         raise ValueError('unpinned Blender cloth runtime')
-    rule=data['policy'];random.seed(rule['seed'])
+    from archpipe.scene_reproducibility import stable_seed
+    rule=data['policy'];pattern_seed=stable_seed(data)
+    rng=random.Random(pattern_seed)
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene=bpy.context.scene;scene.gravity=rule['gravity_m_s2']
     scene.render.threads_mode='FIXED';scene.render.threads=1
@@ -30,16 +32,20 @@ def bake(data):
         low=[min(q[k] for q in p) for k in range(3)]
         high=[max(q[k] for q in p) for k in range(3)]
         w,d,h=[high[k]-low[k] for k in range(3)]
+        # Two doubled fabric leaves, connected at the rear fold. The small
+        # waist at the open front reads as a folded edge rather than a pillow.
+        phase=rng.uniform(-.4,.4)
         rings=[]
-        for i in range(13):
-            t=i/12;scale=.88+.10*math.sin(math.pi*t)**.5
-            ring=rounded_ring(0,0,w*scale,d*scale,h*t,min(h*.28,w*.12,d*.12))
+        for i in range(25):
+            t=i/24;scale=.91+.07*math.sin(math.pi*t)**.5
+            waist=.020*math.exp(-((t-.5)/.065)**2)
+            ring=rounded_ring(0,0,w*(scale-waist),d*(scale-waist),h*t,min(h*.21,w*.12,d*.12))
             for q in ring:
-                q[2]+=.0008*math.sin(q[0]*47+q[1]*31)*math.sin(math.pi*t)
+                q[2]+=.0008*math.sin(q[0]*47+q[1]*31+phase)*math.sin(math.pi*t)
             rings.append(ring)
         faces=loft(rings)
         return dict(faces=faces,skin_vertices=rings[-1],boundary_indices=list(range(len(rings[-1]))),
-                    simulation=dict(method='ASSUMED procedural rounded folded layers',seed=rule['seed']))
+                    simulation=dict(method='ASSUMED procedural doubled folded layers',seed=rule['seed'],pattern_seed=pattern_seed))
     # Use the measured cut silhouette for shirts, jackets and long garments.
     # The two skins of the old extrusion alternated in its first 2048 faces.
     if typ!='trousers':
@@ -60,7 +66,10 @@ def bake(data):
                 if (az>z)!=(bz>z) and y<ay+(by-ay)*(z-az)/(bz-az):crossings+=1
             return crossings%2==1
         top=max(q[2] for f in original for q in f)
-        width=.53;columns=80;rows=max(50,round(top/.010))
+        # Metre-native rest-pattern resolution: at least six columns per
+        # dominant fold, and approximately 15 mm longitudinal cells. Smooth
+        # shading uses this baked shell; no geometry modifier runs at build.
+        width=.53;columns=56;rows=max(40,round(top/.015))
         verts=[];polys=[];index={}
         for i in range(rows):
             for j in range(columns):
@@ -102,10 +111,17 @@ def bake(data):
             amplitude=.0045+.004*math.sin(math.pi*fraction)
             verts[vi]=[amplitude*math.sin(y*79+fraction*.4),y,zz]
         # Deform the rest pattern with restrained nonuniform vertical folds.
+        phase=rng.uniform(-.4,.4)
         for q in verts:
             fraction=(top-q[2])/top;y=q[1]
-            q[0]=(.0038*math.sin(y*79+fraction*2.8)+.0021*math.sin(y*43+fraction*4.1)+
-                   .0010*math.sin(y*141-fraction*1.9))*(.5+.5*math.sin(math.pi*fraction)**.5)
+            # Folds react to shoulder/underarm restraint and vary down the
+            # body. No regular corrugation is carried unchanged to the hem.
+            shoulder=.40+.60*math.sin(math.pi*fraction)**.5
+            underarm=math.exp(-((fraction-.30)/.13)**2)
+            drift=fraction*3.8+underarm*math.sin(y*19)*1.2
+            q[0]=(.0038*math.sin(y*79+drift+phase)+
+                   .0021*math.sin(y*43+fraction*5.1)+
+                   .0010*math.sin(y*141-fraction*2.9))*shoulder
         unique={};merged=[];remap={}
         for vi,q in enumerate(verts):
             key=tuple(round(v,9) for v in q)
@@ -116,7 +132,8 @@ def bake(data):
             ids=list(dict.fromkeys(remap[i] for i in poly))
             if len(ids)>=3:welded.append(ids)
         verts,polys=merged,welded
-        pins=[i for i,p in enumerate(verts) if p[2]>top-.080]
+        shoulder_boundary={remap[i] for i in outer}
+        pins=sorted(i for i in shoulder_boundary if verts[i][2]>top-.080 and abs(verts[i][1])>.080)
     else:
         # A single continuous pattern goes over the existing hanger bar;
         # both leg panels hang from the bar, without a squared folded slab.
@@ -139,9 +156,19 @@ def bake(data):
                     a=base+i*(cols+1)+j
                     quad=[a,a+1,a+cols+2,a+cols+1]
                     polys.append(quad if side==-1 else quad[::-1])
-        # Join the folded nose, so the bar passes inside a real U fold.
+        # Rounded continuous return over the existing bar. The entire nose
+        # is pinned to that support datum, not pulled into a squared cap.
         base=(rows+1)*(cols+1)
-        for j in range(cols):polys.append([j,j+base,j+base+1,j+1])
+        bridge=[list(range(cols+1))]
+        for step in range(1,8):
+            angle=math.pi*(1-step/8);strip=[]
+            for j in range(cols+1):
+                strip.append(len(verts));pins.append(len(verts))
+                verts.append([.005*math.cos(angle),-.130+.260*j/cols,top+.0025*math.sin(angle)])
+            bridge.append(strip)
+        bridge.append(list(range(base,base+cols+1)))
+        for first,second in zip(bridge,bridge[1:]):
+            for j in range(cols):polys.append([first[j],second[j],second[j+1],first[j+1]])
     # Omit unused grid vertices so they cannot free-fall into morphology
     # measurements when a trouser-leg gap removes its adjacent cells.
     used=sorted({i for f in polys for i in f});remap={old:new for new,old in enumerate(used)}
@@ -181,10 +208,20 @@ def bake(data):
         def bulk(p):
             fraction=max(0,min(1,(top-p[2])/top))
             torso=max(0,1-(abs(p[1])/.26)**2)
-            return .002+.006*math.sin(math.pi*fraction)**.65*torso
+            sleeve=0.
+            drop=.52 if typ in ('dress','abaya') else .39 if typ=='jacket' else .31
+            if p[2]>top-drop and abs(p[1])>.14:
+                sleeve=.006*max(0,1-((abs(p[1])-.207)/.057)**2)
+            return .002+.006*math.sin(math.pi*fraction)**.65*torso+sleeve
         vv=[[p[0]+side*bulk(p),p[1],p[2]] for side in (1,-1) for p in skin_vertices]
         count=len(skin_vertices)
-        pp=[list(f.vertices) for f in skin.polygons]
+        # Leave an actual centre-front opening on shirts/jackets. Solidify
+        # closes each fabric edge; the back remains continuous. The small
+        # opening is an ASSUMED clothing cut, not a physical-part edit.
+        front=[f for f in skin.polygons if typ not in ('shirt','jacket') or
+               not (min(skin_vertices[i][1] for i in f.vertices)<.002 and
+                    max(skin_vertices[i][1] for i in f.vertices)>-.002)]
+        pp=[list(f.vertices) for f in front]
         pp += [[i+count for i in reversed(f.vertices)] for f in skin.polygons]
         oriented=[]
         for f in skin.polygons:
@@ -210,13 +247,28 @@ def bake(data):
         # Two turned collar/lapel skins. They share the shoulder datum,
         # remain inside the measured garment envelope, and have fabric edges.
         for side in (-1,1):
-            points=[[.006,side*.044,top-.032],[.007,side*.079,top-.002],
-                    [.014,side*.118,top-.092],[.009,side*.056,top-.125]]
+            points=[[.006,side*.025,top-.043],[.007,side*.080,top-.008],
+                    [.014,side*.120,top-.115],[.009,side*.026,top-(.240 if typ=='jacket' else .145)]]
             for i,q in enumerate(points):
                 near=min(skin_vertices,key=lambda p:(p[1]-q[1])**2+(p[2]-q[2])**2)
                 q[0]=near[0]+bulk(near)+(.004 if i in (1,2) else .001)
-            collar=bpy.data.meshes.new('ASSUMED turned collar')
-            collar.from_pydata(points,[],[[0,1,2,3]]);collar.update()
+            # A rolled fabric collar, not one rigid paper quad. Bilinear
+            # subdivision follows the existing cut; a small curved return
+            # gives the turned edge depth within its original garment box.
+            collar_vertices=[];collar_faces=[];steps=12
+            for i in range(steps+1):
+                u=i/steps
+                for j in range(steps+1):
+                    v=j/steps
+                    q=[(1-u)*((1-v)*points[0][k]+v*points[1][k])+
+                       u*((1-v)*points[3][k]+v*points[2][k]) for k in range(3)]
+                    q[0]+=.002*math.sin(math.pi*v)+.001*math.sin(math.pi*u)*math.sin(2*math.pi*v)
+                    collar_vertices.append(q)
+            for i in range(steps):
+                for j in range(steps):
+                    a=i*(steps+1)+j;collar_faces.append([a,a+1,a+steps+2,a+steps+1])
+            collar=bpy.data.meshes.new('ASSUMED rolled collar')
+            collar.from_pydata(collar_vertices,[],collar_faces);collar.update()
             item=bpy.data.objects.new('turned collar',collar);bpy.context.collection.objects.link(item)
             thick=item.modifiers.new('closed collar fabric','SOLIDIFY')
             thick.thickness=rule['thickness_m'];thick.offset=0
@@ -226,7 +278,8 @@ def bake(data):
                 skin_vertices=[[round(v,7) for v in p] for p in skin_vertices],boundary_indices=boundary,
                 simulation=dict(method='Blender CLOTH, shoulder pinned, gravity only',blender=bpy.app.version_string,
                     seed=rule['seed'],frames=rule['frames'],threads=1,gravity=rule['gravity_m_s2'],pins=pins,
-                    thickness_m=rule['thickness_m'],initial_vertices_sha256=digest(verts)))
+                    thickness_m=rule['thickness_m'],pattern_seed=pattern_seed,
+                    initial_vertices_sha256=digest(verts)))
 
 
 def main():
@@ -235,9 +288,12 @@ def main():
     args=parser.parse_args(argv)
     sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'src'))
     from archpipe.imported_appearance import digest
+    from archpipe.drape_appearance import generator_dependencies
     data=json.loads(args.input.read_text())
     if data['generator_sha256']!=digest(Path(__file__).read_text()):
         raise ValueError('generator changed after cloth input was hashed')
+    if data['dependencies_sha256']!=generator_dependencies():
+        raise ValueError('pattern dependency changed after cloth input was hashed')
     out=bake(data)
     out['input_sha256']=digest(data);out['mesh_sha256']=digest(out['faces'])
     args.output.write_text(json.dumps(out,separators=(',',':')))

@@ -3,7 +3,11 @@
   "records": [
     {
       "lesson_id": "drape-rigid-soft-goods",
-      "control_tier": [1, 2, 3],
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
       "construction": "Pinned gravity cloth patterns produce closed shells from immutable physical garments; shelf textiles use independent rounded layers",
       "check": "archpipe.drape_appearance.require_scene binds exact source/cache/policy, registered morphology and conservative forbidden-contact checks at export and render; neutral preview review remains required",
       "stage": "Scene export and Stage 7 neutral preview before presentation",
@@ -16,7 +20,98 @@
         "test_pre_registered_morphology_mutations_fire",
         "test_live_two_process_trouser_determinism",
         "test_render_replacements_do_not_change_c3_c4_c8_physical_values",
+        "test_neighbour_joinery_and_door_mutations_fire_on_real_shell",
+        "test_real_joinery_air_cavity_is_not_enclosed_material_and_sibling",
+        "test_warm_cache_never_launches_solver_and_mutable_results_are_independent",
+        "test_compact_reference_readback_and_pose_mutations_refuse",
+        "test_changed_pattern_helper_requires_a_fresh_cache",
+        "test_material_appearance_preserves_physical_and_shared_material_values",
+        "test_topology_float_snapshot_preserves_real_faces_and_nonfloat_siblings",
+        "test_cache_key_precision_never_relaxes_actual_world_enclosure"
+      ]
+    },
+    {
+      "lesson_id": "drape-cavity-containment",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Signed polygon-fan angles retain cancellation at concave faces and component interfaces",
+      "check": "archpipe.drape_appearance.collision_findings screens both crossing and wholly enclosed material",
+      "stage": "Appearance admission at export and render",
+      "proof_file": "tests/test_drape.py",
+      "proofs": [
+        "test_real_joinery_air_cavity_is_not_enclosed_material_and_sibling",
         "test_neighbour_joinery_and_door_mutations_fire_on_real_shell"
+      ]
+    },
+    {
+      "lesson_id": "drape-cache-build-cost",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Compact hash-bound render references defer expansion to renderer/evidence; value-keyed admission and native placement, offline simulation only",
+      "check": "Complete authored-view build remains below existing 120 seconds",
+      "stage": "Whole-scene build",
+      "proof_file": "tests/test_build_cache.py",
+      "proofs": [
+        "test_full_villa_build_time_budget"
+      ]
+    },
+    {
+      "lesson_id": "drape-physical-material-state",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Garment shader styling uses separate render-only overrides; physical and shared materials remain untouched",
+      "check": "require_scene validates exact override values before render_materials creates owned copies",
+      "stage": "Appearance binding and rendering",
+      "proof_file": "tests/test_drape.py",
+      "proofs": [
+        "test_material_appearance_preserves_physical_and_shared_material_values"
+      ]
+    },
+    {
+      "lesson_id": "drape-opening-review-cost",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Discard provably disjoint whole-mesh envelopes before connected-island opening review; preserve original overlaps and labels",
+      "check": "Complete normal-view build uses unchanged 120 second budget",
+      "stage": "C8 opening review",
+      "proof_file": "tests/test_drape.py",
+      "proofs": [
+        "test_opening_prefilter_preserves_real_review_and_translated_intrusion"
+      ]
+    },
+    {
+      "lesson_id": "drape-runtime-diagnostic-identity",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Portable cache references bind exact geometry and exclude backend-dependent diagnostic reductions",
+      "check": "World envelope uses exact physical extrema, runtime references and pose mutations refuse before rendering",
+      "stage": "Scene read-back and Blender import",
+      "proof_file": "tests/test_drape.py",
+      "proofs": [
+        "test_compact_reference_readback_and_pose_mutations_refuse",
+        "test_cache_key_precision_never_relaxes_actual_world_enclosure"
+      ]
+    },
+    {
+      "lesson_id": "drape-neighbour-rendered-envelope",
+      "control_tier": [1, 2],
+      "construction": "Candidate envelopes include both physical clearance volumes and actual rendered bounds",
+      "check": "Conservative neighbour contact and named-support penetration tests include both permitted appearance expansions",
+      "stage": "Appearance admission at export and render",
+      "proof_file": "tests/test_drape.py",
+      "proofs": [
+        "test_neighbour_appearance_expansion_is_checked_on_real_layers_and_sibling",
+        "test_real_stack_support_contact_is_bidirectional_and_never_penetration"
       ]
     }
   ]

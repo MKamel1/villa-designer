@@ -483,7 +483,11 @@ contents; front-omitted drawer previews are diagnostics only.
 
 For draped dressing textiles follow [the drape workflow](../../../docs/ops/drape.md).
 Keep closed physical parts immutable. Bind gravity-simulated appearance shells
-outside the Parts list; require exact source/cache/policy hashes, measured tight
+outside the Parts list. Publish compact hash-bound cache/pose references; expand
+faces only in admitted render/evidence consumers. Keep cloth shader overrides
+separate from physical/shared materials. Diagnostic reductions may differ across
+numerical backends and are not identity fields; exact geometry and actual world
+extrema remain bound. Require exact source/cache/policy hashes, measured tight
 part envelopes and forbidden-contact checks at both export and rendering.
 Pre-register appearance screens before a new build, freeze the actual rejected
 shape by value, and prove repeatability in two independent Blender processes.
@@ -498,4 +502,3 @@ admission and runtime import share `scene_reproducibility.signed_volume`.
 For arithmetic changes, replay frozen real small solids and renamed/distant
 siblings through `tests/blender_reproducibility.py`; genuinely inverted
 siblings must still refuse, without moving or redesigning the sources.
->>>>>>> 038e47620f82088125516509d8b7728cfe8ba240

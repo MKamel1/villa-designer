@@ -320,13 +320,6 @@ def blocked_openings(scene, lay=None, *, specification=None):
     lay = lay or R.design("D1")
     sp = RS.build(lay) if specification is None else specification
     out = []
-    parts = []
-    for m in scene["meshes"]:
-        if m["group"] not in ITEM_GROUPS or "handle" in m["id"]:
-            continue
-        for faces in _islands(m["faces"]):
-            pts = np.array([p for f in faces for p in f], dtype=float)
-            parts.append((m["id"], pts.min(axis=0), pts.max(axis=0)))
     # doorless openings: where two rooms of a storey share an edge and no wall stands on it (the parents' entry)
     openings = []
     rooms = [(rid, r) for rid, r in lay["rooms"].items()]
@@ -357,6 +350,7 @@ def blocked_openings(scene, lay=None, *, specification=None):
                     v += 0.05
                 if run:
                     openings.append((a_["level"], horiz, line, run[0], run[-1], ra + "/" + rb))
+    passages=[]
     for lv, horiz, line, v0, v1, name in openings:
         # a PASSAGE is 0.6-1.6 m wide; wider shared edges are zones of one open-plan space, not openings
         if not 0.6 <= v1 - v0 + 0.05 <= 1.6:
@@ -364,6 +358,30 @@ def blocked_openings(scene, lay=None, *, specification=None):
         z0 = LZ[lv]
         lo = np.array([v0, line - 0.35, z0 + 0.05]) if horiz else np.array([line - 0.35, v0, z0 + 0.05])
         hi = np.array([v1, line + 0.35, z0 + 2.0]) if horiz else np.array([line + 0.35, v1, z0 + 2.0])
+        passages.append((lo,hi,name))
+    doors=[]
+    for d in sp['doors']:
+        h = F._door_axis(d) == 'h'; hw = d['width']/2-.02; z0=LZ[d['level']]
+        lo=np.array([d['x']-hw,d['y']-.35,z0+.05]) if h else np.array([d['x']-.35,d['y']-hw,z0+.05])
+        hi=np.array([d['x']+hw,d['y']+.35,z0+2.0]) if h else np.array([d['x']+.35,d['y']+hw,z0+2.0])
+        doors.append((lo,hi,d))
+    queries=passages+doors
+    if not queries:return []
+    query_low=np.asarray([q[0] for q in queries]);query_high=np.asarray([q[1] for q in queries])
+    parts=[]
+    for m in scene['meshes']:
+        if m['group'] not in ITEM_GROUPS or 'handle' in m['id']:continue
+        pts=np.asarray([p for f in m['faces'] for p in f],dtype=float)
+        if not len(pts):continue
+        low,high=pts.min(axis=0),pts.max(axis=0)
+        # Every connected island lies in this whole-mesh envelope. If that
+        # envelope is disjoint from every passage under the original 5 mm
+        # overlap rule, island decomposition cannot produce a finding.
+        if not np.any(np.all(np.minimum(high,query_high)-np.maximum(low,query_low)>.005,axis=1)):continue
+        for faces in _islands(m['faces']):
+            points=np.asarray([p for f in faces for p in f],dtype=float)
+            parts.append((m['id'],points.min(axis=0),points.max(axis=0)))
+    for lo,hi,name in passages:
         for mid, a, b in parts:
             # the furnished-plan route check (villa_furnish, 914 mm body) already clears furniture in passages; it
             # cannot see render-only details or hanging fixtures, which is how the slat panel closed the entry
@@ -373,12 +391,7 @@ def blocked_openings(scene, lay=None, *, specification=None):
                 continue  # the stringers and handrails define the stair edge and its access, not a room passage
             if np.all(np.minimum(b, hi) - np.maximum(a, lo) > 0.005):
                 out.append((mid, "opening %s" % name))
-    for d in sp["doors"]:
-        h = F._door_axis(d) == "h"
-        hw = d["width"] / 2 - 0.02
-        z0 = LZ[d["level"]]
-        lo = np.array([d["x"] - hw, d["y"] - 0.35, z0 + 0.05]) if h else np.array([d["x"] - 0.35, d["y"] - hw, z0 + 0.05])
-        hi = np.array([d["x"] + hw, d["y"] + 0.35, z0 + 2.0]) if h else np.array([d["x"] + 0.35, d["y"] + hw, z0 + 2.0])
+    for lo,hi,d in doors:
         for mid, a, b in parts:
             if np.all(np.minimum(b, hi) - np.maximum(a, lo) > 0.005):
                 out.append((mid, "door %s at (%.2f, %.2f)" % ("/".join(d.get("rooms") or []), d["x"], d["y"])))

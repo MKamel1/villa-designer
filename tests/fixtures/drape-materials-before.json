@@ -1,0 +1,26 @@
+{
+  "physical": {
+    "kind": "principled",
+    "base_rgb": [
+      0.86,
+      0.83,
+      0.76
+    ],
+    "reflectance": 0.55,
+    "roughness": 0.6,
+    "note": "ASSUMED hanging garment fabric, ivory"
+  },
+  "appearance": {
+    "kind": "principled",
+    "base_rgb": [
+      0.86,
+      0.83,
+      0.76
+    ],
+    "reflectance": 0.55,
+    "roughness": 0.8,
+    "note": "ASSUMED hanging garment fabric, ivory",
+    "cloth_weave_m": 0.0007,
+    "appearance_basis": "ASSUMED colour, weave and sheen"
+  }
+}

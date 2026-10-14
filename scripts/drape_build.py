@@ -6,6 +6,7 @@ This writes only owned cache/evidence paths, never shared symlink data.
 import argparse
 import gzip
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -44,7 +45,8 @@ def main():
                 command=[str(args.blender),'-b','-t','1','--python-exit-code','1','-P',str(D.GENERATOR_PATH),'--',
                          '--input',str(input_path),'--output',str(path)]
                 with (out/(key+f'-process-{trial}.log')).open('w') as log:
-                    subprocess.run(command,check=True,cwd=ROOT,stdout=log,stderr=subprocess.STDOUT)
+                    env=dict(os.environ,PYTHONHASHSEED=str(0 if trial==1 else 987654))
+                    subprocess.run(command,check=True,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT)
             current=json.loads(path.read_text())
             if current['input_sha256']!=key or current['mesh_sha256']!=digest(current['faces']):
                 raise ValueError('corrupt cached process output '+str(path))
@@ -65,7 +67,8 @@ def main():
         entries[key]=template
         metrics=D.measure(template['skin_vertices'],template['boundary_indices']) if part.get('garment_type') else None
         records.append(dict(input_sha256=key,physical_id=part['id'],mesh_sha256=template['mesh_sha256'],
-                            process_paths=[str(p.relative_to(ROOT)) for p in paths],metrics=metrics,enclosure=template['enclosure']))
+                            process_paths=[str(p.relative_to(ROOT)) for p in paths],metrics=metrics,enclosure=template['enclosure'],
+                            process_hash_seeds=[0,987654],generator_sha256=data['generator_sha256']))
         print(number+1,part['id'],metrics,template['enclosure']['maximum_escape_m'],flush=True)
     pending=D.CACHE_PATH.with_suffix('.gz.tmp')
     pending.write_bytes(gzip.compress(json.dumps(dict(schema='drape-cloth-cache/1',entries=entries),sort_keys=True,separators=(',',':')).encode(),mtime=0))

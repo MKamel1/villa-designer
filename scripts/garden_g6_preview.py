@@ -89,18 +89,20 @@ def render(args):
     if not args.scene and input_findings(data):
         raise ValueError('; '.join(input_findings(data)))
     if args.scene:
-        from archpipe.drape_appearance import needs_admission, rendered_meshes
+        from archpipe.drape_appearance import needs_admission, rendered_meshes, render_materials
         if needs_admission(data):
             physical_hash = canonical_hash(data['meshes'])
+            styled_materials = render_materials(data)
             data['meshes'] = rendered_meshes(data)
+            data['materials'] = styled_materials
             data['neutral_physical_geometry_sha256'] = physical_hash
     args.output.mkdir(parents=True, exist_ok=True)
     evidence = []
     reference = {row['id']: row for row in json.loads(args.reference_receipt.read_text())} if args.reference_receipt else {}
 
     def setup(meshes, materials):
-        bpy.ops.object.select_all(action="SELECT")
-        bpy.ops.object.delete(use_global=False)
+        from archpipe.blender.scene_reset import clear_objects
+        clear_objects(bpy)
         warnings = []
         names = {m["material"] for m in meshes} | {n for m in meshes for n in m.get("face_materials", [])}
         built_materials = {name: builder.add_material(name, materials[name], str(args.library), warnings)
@@ -111,6 +113,8 @@ def render(args):
         scene = bpy.context.scene
         scene.render.engine = "CYCLES"
         scene.cycles.samples = args.samples
+        scene.cycles.seed = 0
+        scene.cycles.use_animated_seed = False
         scene.cycles.max_bounces = 8
         scene.render.threads_mode = "FIXED"
         scene.render.threads = 8
@@ -169,6 +173,7 @@ def render(args):
             evidence.append(dict(id=view["id"], image=str(path), neutral=True,
                                  camera=view["camera"], neutral_physical_geometry_sha256=data.get("neutral_physical_geometry_sha256"), neutral_material_emission_off=True, neutral_preview_fill=data.get('neutral_preview_fill',[]), source_geometry_sha256=canonical_hash(data["meshes"]),
                                  resolution=[scene.render.resolution_x,scene.render.resolution_y],
+                                 appearance_basis=data.get('appearance_basis'),
                                  subjects=builder.subjects(view, data["meshes"], objects, imported), warnings=warnings))
             bpy.data.objects.remove(camera, do_unlink=True)
     else:
@@ -260,7 +265,8 @@ def render(args):
                                  actual_bounds_m=[low, high], isolation_translation_m=[-v for v in origin],
                                  staging=dict(origin=origin, span=span, floor_z=staging_floor_z, camera_location=list(camera.location),
                                               camera_rotation=list(camera.rotation_euler), ortho_scale=camera_data.ortho_scale),
-                                 source_geometry_sha256=canonical_hash(specimen["meshes"]), warnings=warnings))
+                                 source_geometry_sha256=canonical_hash(specimen["meshes"]),
+                                 appearance_basis=data.get('appearance_basis'), warnings=warnings))
             evidence[-1]['source_lights_sha256'] = canonical_hash(specimen.get('lights', []))
             used={m['material'] for m in specimen['meshes']} | {n for m in specimen['meshes'] for n in m.get('face_materials',[])}
             evidence[-1]['source_materials_sha256'] = canonical_hash({n:data['materials'][n] for n in sorted(used)})
