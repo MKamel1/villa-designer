@@ -17,22 +17,38 @@ from collections.abc import Mapping
 import numpy as np
 from .units import mm_to_m
 
+_SCALAR_TYPES = (float, int, str, bool, type(None))
 
 def _freeze(value):
+    # Coordinate leaves dominate these snapshots. Avoid abstract Mapping
+    # instance checks for millions of known immutable scalar values.
+    if type(value) in _SCALAR_TYPES:
+        return value
+    if isinstance(value, (list, tuple)):
+        # Three-coordinate points are already immutable scalar values.
+        # Snapshot the container once instead of recursively dispatching
+        # three leaf calls for every measured vertex in every review.
+        if (len(value) == 3 and type(value[0]) in _SCALAR_TYPES and
+                type(value[1]) in _SCALAR_TYPES and type(value[2]) in _SCALAR_TYPES):
+            return tuple(value)
+        return tuple(_freeze(v) for v in value)
     if isinstance(value, MappingProxyType):
         return value
     if isinstance(value, Mapping):
         return MappingProxyType({k: _freeze(v) for k, v in value.items()})
-    if isinstance(value, (list, tuple)):
-        return tuple(_freeze(v) for v in value)
     return value
 
 
 def _thaw(value):
+    if type(value) in _SCALAR_TYPES:
+        return value
+    if isinstance(value, tuple):
+        if (len(value) == 3 and type(value[0]) in _SCALAR_TYPES and
+                type(value[1]) in _SCALAR_TYPES and type(value[2]) in _SCALAR_TYPES):
+            return list(value)
+        return [_thaw(v) for v in value]
     if isinstance(value, Mapping):
         return {k: _thaw(v) for k, v in value.items()}
-    if isinstance(value, tuple):
-        return [_thaw(v) for v in value]
     return value
 
 
@@ -344,13 +360,13 @@ class GeometryTopology:
         from .concept.render_support import _triangles, _tri_box_overlap
         out = []
         for obstacle in self.obstacles:
-            record = _thaw(obstacle.record) if obstacle.record is not None else {}
-            triangles = prop_triangles(record) if 'asset' in record else None
             bb = obstacle.bounds
             rect = (bb[0], bb[1], bb[3], bb[4])
             candidates = [r for r in self.routes if overlap_area(rect, r.rect) > 1e-6]
             if not candidates:
                 continue
+            record = _thaw(obstacle.record) if obstacle.record is not None else {}
+            triangles = prop_triangles(record) if 'asset' in record else None
             if obstacle.faces and triangles is None:
                 triangles, _ = _triangles([{'faces': obstacle.faces}])
             for route in candidates:

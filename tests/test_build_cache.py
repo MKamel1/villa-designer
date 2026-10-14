@@ -10,6 +10,27 @@ from archpipe.concept import villa_render as VR
 
 
 class BuildCache(unittest.TestCase):
+    def test_real_route_cache_tracks_values_and_preserves_requested_trace(self):
+        lay = R.design('D1')
+        with scope():
+            items = F.layout(lay, products=False)
+            specification = RS.build(lay)
+            with patch.object(F, '_route_problems', wraps=F._route_problems) as compute:
+                first = F.route_problems(lay, specification, items, 'GF', room_ids={'kids-b'})
+                self.assertEqual(F.route_problems(lay, specification, items, 'GF', room_ids={'kids-b'}), first)
+                self.assertEqual(compute.call_count, 1)
+                changed = copy.deepcopy(items)
+                next(i for i in changed if i['id']=='kb-bed')['cx'] += .01
+                F.route_problems(lay, specification, changed, 'GF', room_ids={'kids-b'})
+                self.assertEqual(compute.call_count, 2)
+                with patch.object(F, 'BODY', F.BODY+.001):
+                    F.route_problems(lay, specification, items, 'GF', room_ids={'kids-b'})
+                self.assertEqual(compute.call_count, 3)
+                with patch.object(F, 'TRACE', {}):
+                    F.route_problems(lay, specification, items, 'GF', room_ids={'kids-b'})
+                    self.assertTrue(F.TRACE)
+                self.assertEqual(compute.call_count, 4)
+
     def test_full_villa_build_time_budget(self):
         # Set from the measured clean build after the cache correction. This
         # remains a real full view search, rather than an empty-view shortcut.

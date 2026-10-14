@@ -572,7 +572,8 @@ def integrate_bed_models(scene, models, layout, specification, furniture, *, bas
         if not model.get('frame_slimming'):
             raise ValueError('bed activation requires current slim-frame contract dated 2026-10-09')
     prefixes={m['replaces'] for m in models}
-    result=dict(scene,models=[m for m in scene.get('models',[]) if m.get('replaces') not in prefixes]+list(models))
+    from .imported_appearance import with_models
+    result=with_models(scene,[m for m in scene.get('models',[]) if m.get('replaces') not in prefixes]+list(models))
     if baseline_meshes is None:
         review=bed_room_review(result,layout,specification,furniture)
         if not review['ok']:
@@ -589,7 +590,8 @@ def integrate_bed_models(scene, models, layout, specification, furniture, *, bas
     else:
         from .furniture_room_review import baseline_relative_review
         marks=[m['label'] for m in models]
-        baseline_scene=dict(scene,meshes=scene['meshes']+list(baseline_meshes),models=[m for m in scene.get('models',[]) if m.get('role')!='bed'])
+        baseline_scene=dict(with_models(scene,[m for m in scene.get('models',[]) if m.get('role')!='bed']),
+                            meshes=scene['meshes']+list(baseline_meshes))
         baseline=bed_room_review(baseline_scene,layout,specification,furniture,target_marks=marks,absolute=True)
         candidate=bed_room_review(result,layout,specification,furniture,target_marks=marks,absolute=True)
         review=baseline_relative_review(baseline,candidate,target_prefixes=tuple(p for m in models
@@ -908,7 +910,8 @@ def bed_room_review(scene, layout, specification, furniture, *, target_marks=Non
     reviewed = bed_frame_items(scene,furniture)
     topology = GeometryTopology.from_inputs(scene=scene,layout=layout,
         specification=specification,furniture=furniture)
-    baseline = GeometryTopology.from_inputs(scene=dict(scene,models=[m for m in scene.get('models',[]) if m.get('role')!='bed']),
+    from .imported_appearance import with_models
+    baseline = GeometryTopology.from_inputs(scene=with_models(scene,[m for m in scene.get('models',[]) if m.get('role')!='bed']),
         layout=layout,specification=specification,furniture=furniture)
     findings = bed_room_boundary_findings(scene,layout,topology.scene['meshes'])
     bed_marks={m['replaces'].removeprefix('furn-').removesuffix('-') for m in scene.get('models',[])

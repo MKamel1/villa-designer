@@ -128,7 +128,8 @@ def _geometry_errors(faces, *, surface=False, occupied_side=None):
         return ["no faces"]
     errors = []
     edges = Counter()
-    volume = 0.0
+    from archpipe.scene_reproducibility import signed_volume
+    volume = signed_volume(faces) if all(len(f) >= 3 for f in faces) else 0.0
     point_keys = {}
     for face in faces:
         if len(face) < 3:
@@ -148,7 +149,6 @@ def _geometry_errors(faces, *, surface=False, occupied_side=None):
             area2 = math.sqrt(_dot(cross, cross))
             if area2 <= 1e-10:
                 errors.append("zero-area triangle")
-            volume += _dot(a, _cross(b, c)) / 6.0
     if surface:
         if occupied_side is None or len(occupied_side) != 3 or not any(abs(v) > 1e-9 for v in occupied_side):
             errors.append("surface requires occupied-side direction")

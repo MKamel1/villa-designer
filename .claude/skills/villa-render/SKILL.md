@@ -341,6 +341,21 @@ when its geometry and fallback probes pass. See [beds report](../../../docs/beds
 
 ## Integration discipline (generalised from the D1 round-3 failures)
 
+Historical tests that deliberately suppress finishes, relocation or final
+mounting construct a procedural diagnostic baseline; final reviewed furniture
+cannot activate against those changed fixed inputs. Production input guards
+remain unconditional. Derive provenance fixtures from `provenance_inputs`,
+freeze exact replaced rows by value and re-admit every replacement. A full
+preview hash remains a full-scene guard: replay an exact recorded source
+migration rather than excluding unrelated categories or updating a hash from
+an uninspected current build. Numerical review does not grant visual approval.
+When rebuilding an assembly, migrate every intended support declaration as
+well as its faces. A rail retains both measured end brackets in the garment
+contract and the mounting contract; one surviving support chain cannot prove
+that all intended supports exist. Reconcile historical approval/inventory
+fixtures through exact source migrations, never new broad skip lists or
+weaker count thresholds.
+
 Round 3 shipped a dozen visual defects that every numeric guard passed: a
 sofa facing backwards, a trellis that read as a wall, flat mint "grass",
 smoky pendant globes, a mirror-like bath screen, slab clothes, box lamps,
@@ -465,3 +480,12 @@ solid closure, ring count and colour variation cannot establish occupancy or
 recognisable sleeves. Inspect isolated samples with the 1.8 m reference and
 unchanged dressing cameras before integration. Closed fronts retain hidden
 contents; front-omitted drawer previews are diagnostics only.
+
+Shared mesh import evaluates closed-solid signed volume from the authored
+coordinates in double precision relative to a common local origin, before
+Blender converts them to single precision. Do not silently reverse winding
+based on a world-vector volume sign. Inward solids fail closed; source
+admission and runtime import share `scene_reproducibility.signed_volume`.
+For arithmetic changes, replay frozen real small solids and renamed/distant
+siblings through `tests/blender_reproducibility.py`; genuinely inverted
+siblings must still refuse, without moving or redesigning the sources.

@@ -53,7 +53,7 @@ def physical_architecture(meshes):
                        for face,material in zip(row['faces'],materials))
     return sorted(records,key=lambda row:json.dumps(row,sort_keys=True,separators=(',',':')))
 
-def room_context(scene,layout,specification,furniture,models):
+def room_context_inputs(scene,layout,specification,furniture,models):
     """Bind a passed review to every fixed room input and its existing camera.
 
     Architectural faces remain complete. Target procedural bodies remain in
@@ -66,13 +66,18 @@ def room_context(scene,layout,specification,furniture,models):
     # Override audit explanations differ between a cold layout and a cache
     # restoration. Bind every actual field/value, not those derivation notes.
     physical_furniture=[{key:value for key,value in item.items() if key!='overrides'} for item in furniture]
-    return digest(dict(layout=layout,specification=specification,furniture=physical_furniture,
+    return dict(layout=layout,specification=specification,furniture=physical_furniture,
         architecture=physical_architecture([r for r in scene['meshes'] if r['group'] in ('shell','context')]),
         meshes=[r for r in scene['meshes'] if r.get('model_instance') not in instances and
                 r['group'] not in ('shell','context') and r.get('room') in rooms],
         models=[m for m in scene.get('models',[]) if m.get('room') in rooms and m.get('replaces') not in prefixes],
         props=[p for p in scene.get('props',[]) if p.get('room') in rooms],
-        materials=scene['materials']))
+        materials=scene['materials'])
+
+
+def room_context(scene,layout,specification,furniture,models):
+    """Hash the complete fixed-input record; diagnostics share the same inventory."""
+    return digest(room_context_inputs(scene,layout,specification,furniture,models))
 
 def integrate(scene,models,layout,specification,furniture,receipt):
     """Require original placement, exact native fallback identity and bound gates."""
@@ -83,7 +88,11 @@ def integrate(scene,models,layout,specification,furniture,receipt):
     if receipt.get('status')!='accepted' or receipt.get('combined_room_review_ok') is not True:
         raise ValueError('furniture activation requires a reviewed passing combined room comparison')
     if receipt.get('room_context_sha256')!=room_context(scene,layout,specification,furniture,models):
-        raise ValueError('furniture fixed-room inputs changed; repeat baseline-relative review and previews')
+        expected = receipt.get('room_context_components_sha256', {})
+        actual = room_context_inputs(scene,layout,specification,furniture,models)
+        changed = [k for k,v in actual.items() if k in expected and digest(v) != expected[k]]
+        detail = (' (changed sections: '+', '.join(changed)+')') if changed else ''
+        raise ValueError('furniture fixed-room inputs changed; repeat baseline-relative review and previews'+detail)
     # A requested subset (including no views in numerical verification) is
     # not a camera edit. Check every supplied reviewed camera by identity.
     for view in scene.get('views',[]):
@@ -107,8 +116,9 @@ def integrate(scene,models,layout,specification,furniture,receipt):
     prefixes={m['replaces'] for m in models}
     exact={identifier for model in models for identifier in model['replacement_mesh_ids']}
     hidden={'camera':False,'shadow':False,'diffuse':False,'glossy':False,'transmission':False}
-    return dict(scene,meshes=[dict(row,visibility=hidden) if row['id'] in exact else row for row in scene['meshes']],
-        models=[m for m in scene.get('models',[]) if m.get('replaces') not in prefixes]+deepcopy(models),
+    from ..imported_appearance import with_models
+    result = with_models(scene, [m for m in scene.get('models',[]) if m.get('replaces') not in prefixes]+deepcopy(models))
+    return dict(result,meshes=[dict(row,visibility=hidden) if row['id'] in exact else row for row in scene['meshes']],
         furniture_stage2=dict(status='active',items=[m['label'] for m in models],
             source_receipt_sha256=digest(receipt),room_context_sha256=receipt['room_context_sha256'],
             layout_findings=receipt['layout_findings']))

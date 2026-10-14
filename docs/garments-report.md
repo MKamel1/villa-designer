@@ -147,3 +147,14 @@ include the exact historical-approval retirement and the new 900 mm source card.
 The integration lead owns `guard_registry.py` and its tests; they were not edited.
 Also track `garments-importer-volume-precision` as OPEN in the shared-importer
 package; its reproduction is evidence of the defect, not an implemented guard.
+
+
+## Reproducibility follow-up — 2026-10-13
+
+The shared-importer arithmetic limitation above is now resolved on
+`codex/repro`: actual frozen solids and translated siblings retain positive
+winding in Blender, and genuinely inverted solids refuse. Source design
+geometry is unchanged. See [repro-report.md](repro-report.md) for the shared
+local double-precision construction, regressions, complete numerical replay
+and acceptance results. The earlier OPEN ownership/precision notes are
+historical; neutral appearance approval remains separate.

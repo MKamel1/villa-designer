@@ -268,7 +268,9 @@ class FinalPhysicalScene(unittest.TestCase):
                     # remains in a complete physical door source.
                     self.assertTrue(all(face_key(f) in door_faces for f in mesh['faces']))
                 else:
-                    self.assertTrue(mesh['id'] in by_id or mesh['id'] in retired)
+                    from archpipe.concept.garments import historical_replacements
+                    self.assertTrue(mesh['id'] in by_id or mesh['id'] in retired or
+                                    historical_replacements(self.scene, mesh))
         # A real fixed member from every frozen kind must still be admitted
         # with unrelated identifiers. Neither room nor identifier is a waiver.
         covered = set()
@@ -280,7 +282,11 @@ class FinalPhysicalScene(unittest.TestCase):
                 fronts = {face_key(f) for f in mesh['faces']}
                 current = next((m for m in leaves if any(face_key(f) in fronts for f in m['faces'])),None)
             if current is None:
-                continue
+                from archpipe.concept.garments import historical_replacements
+                replacements = historical_replacements(self.scene, mesh)
+                if not replacements:
+                    continue
+                current = replacements[0]
             sibling = deepcopy(current)
             sibling['id'] = 'another-project-fixed-member'
             sibling['room'] = 'another-room'

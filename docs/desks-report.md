@@ -853,3 +853,13 @@ admission, same-runtime lighting comparison and requested focused checks pass.
 The saved historical total-light receipt does not repeat within 0.1%; that
 requirement is explicitly unsatisfied and remains a separate runtime issue.
 No commit was made and neither shared-data symlink was modified.
+
+
+## Reproducibility follow-up — 2026-10-13
+
+[repro-report.md](repro-report.md) records the deterministic curtain builder
+and a new baseline: separate process hash seeds produce identical evaluated
+meshes and all 25 direct/total readings, with all targets met. The saved
+historical receipt came from a random pleat seed; equality with it remains
+unclaimed. Its failed 0.1 percent comparison is retained as historical evidence,
+not replaced by a wider allowance.

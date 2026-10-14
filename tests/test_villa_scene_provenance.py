@@ -21,15 +21,7 @@ class VillaSceneProvenance(unittest.TestCase):
         self.root = ROOT / "out/tmp" / ("scene-provenance-" + uuid.uuid4().hex)
         self.root.mkdir(parents=True)
         self.addCleanup(shutil.rmtree, self.root)
-        paths = [
-            "src/archpipe/concept/villa_render.py", "src/archpipe/blender/villa_scene.py",
-            "src/archpipe/blender/photoreal.py", "src/archpipe/blender/build_scene.py",
-            "src/archpipe/blender/presentation.py", "src/archpipe/villa_render_contract.py",
-            "src/archpipe/furniture_orientation.py", "ops/workstation/library-manifest.json",
-            "knowledge/garden-palette.json", "knowledge/site-orientation.json", "knowledge/c4-final-approvals.json", "spec/villa-site.yaml",
-            "knowledge/c3-part-exemptions.json",
-            "knowledge/library.json", "knowledge/projects/villa-01/brief-requirements.json",
-            "knowledge/projects/villa-01/taste.json"]
+        paths = [p.relative_to(ROOT) for p in scene_builder.provenance_inputs(ROOT)]
         for relative in paths:
             target = self.root / relative
             target.parent.mkdir(parents=True, exist_ok=True)

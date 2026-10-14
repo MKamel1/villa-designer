@@ -149,8 +149,14 @@ class PresentationDecisions(unittest.TestCase):
         # Integration 5 furnished neutral previews inspected in docs/desks-report.md;
         # source furniture and parent bed now hide their exact native fallbacks.
         # Door faces assemble independently of camera captions; final neutrals re-reviewed.
+        # Integration 6's exact dressing-source migration is recorded by
+        # value. Replay it before the original complete-scene check: every
+        # new/changed row must match; unrelated indoor/outdoor rows stay bound.
+        # Garment visual acceptance remains separate and open.
+        from tests.scene_migration import prior_reviewed_rows
+        rows = prior_reviewed_rows(self.scene['meshes'])
         reviewed = '701ccd97096f11c1ce5aa4220811ced9474e474957be5da746acc869e68b7acc'
-        data = json.dumps(self.scene['meshes'], sort_keys=True, separators=(',', ':')).encode()
+        data = json.dumps(rows, sort_keys=True, separators=(',', ':')).encode()
         self.assertEqual(hashlib.sha256(data).hexdigest(), reviewed)
 
     def test_actual_candidate_has_only_reviewed_rear_chair_allowance(self):

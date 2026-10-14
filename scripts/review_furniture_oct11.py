@@ -8,12 +8,17 @@ from archpipe.concept.furniture_stage2 import derived_seats
 from archpipe.furniture_room_review import baseline_relative_review
 OUT=ROOT/'out/furniture-oct11'
 def compare(scene,context,models,marks):
+    from archpipe.imported_appearance import bind_scene
+    # Review candidates own their newly selected models; inherited admission
+    # pairs belong to the old model list and cannot certify a trial.
+    scene = bind_scene(dict(scene))
     furniture=context['furniture']+derived_seats(context['furniture']);layout=context['layout'];spec=context['specification']
     marks=list(dict.fromkeys(marks+[m['label'].split('#')[0] for m in models if m['role']=='task_chair']))
     baseline=bed_room_review(scene,layout,spec,furniture,target_marks=marks,absolute=True)
     prefixes={m['replaces'] for m in models}
     trial=dict(scene,models=[m for m in scene['models'] if m.get('replaces') not in prefixes]+models,
         meshes=[r for r in scene['meshes'] if not any(r['id'].startswith(('cloth-duvet-'+m['label'],'cloth-throw-'+m['label'])) for m in models if m['role']=='bed')])
+    trial = bind_scene(trial)
     candidate=bed_room_review(trial,layout,spec,furniture,target_marks=marks,absolute=True)
     return baseline_relative_review(baseline,candidate,target_prefixes=tuple(p for m in models for p in (m['label']+'::',m['id']+'::',m['replaces'],'dress-pillow-'+m['label']+'-','cloth-duvet-'+m['label'],'cloth-throw-'+m['label'])),fixed_items=[it['id'] for it in furniture if it['id'] not in [m['label'] for m in models]])
 def main():

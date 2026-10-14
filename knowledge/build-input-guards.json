@@ -210,6 +210,188 @@
         "test_real_source_hash_lookup_and_renamed_sibling_are_quiet",
         "test_actual_raw_path_read_or_nonhash_lookup_still_fires"
       ]
+    },
+    {
+      "lesson_id": "lighting-runtime-curtain-seed-nonrepeatability",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "scene_reproducibility.stable_seed binds every curtain seed to canonical authored input; evaluated_scene_receipt binds evaluated meshes",
+      "check": "scripts/verify.py and tests/test_reproducibility.py; numerical runtime replay scripts/prove_reproducibility.py",
+      "stage": "scene generation / importer before measurement",
+      "proof_file": "tests/test_reproducibility.py",
+      "proofs": [
+        "test_real_and_renamed_curtains_in_separate_hash_seed_processes",
+        "test_randomness_audit_real_old_seed_aliases_and_clean_sources",
+        "test_receipt_detects_runtime_mesh_drift_and_missing_binding",
+        "test_production_uses_construction_controls"
+      ],
+      "closure": "Runtime reproducibility and source winding; no presentation/design approval"
+    },
+    {
+      "lesson_id": "garments-importer-volume-precision",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "scene_reproducibility.signed_volume computes locally in double precision before Blender conversion; importer refuses inversion; physical_part shares the arithmetic",
+      "check": "scripts/verify.py and tests/test_reproducibility.py; numerical runtime replay scripts/prove_reproducibility.py",
+      "stage": "scene generation / importer before measurement",
+      "proof_file": "tests/test_reproducibility.py",
+      "proofs": [
+        "test_real_solids_translated_siblings_and_inverted_refusal",
+        "test_production_uses_construction_controls"
+      ],
+      "closure": "Runtime reproducibility and source winding; no presentation/design approval"
+    },
+    {
+      "lesson_id": "reproducibility-proof-input-contract",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "prove_reproducibility.optical_file_hashes requires and hashes complete scene photometry; compare_measurements preserves ordered task identity",
+      "check": "optical preflight and actual receipt comparator tests",
+      "stage": "before runtime scene construction and before replay acceptance",
+      "proof_file": "tests/test_reproducibility.py",
+      "proofs": [
+        "test_optical_preflight_real_references_missing_sibling_and_clean",
+        "test_real_receipt_task_keys_and_declared_allowance"
+      ]
+    },
+    {
+      "lesson_id": "garments-scoped-pair-test-context",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "test scope calls imported_appearance.bind_scene; require_scene retains orphan refusal",
+      "check": "frozen orphan receipts refuse; rebound native scopes stay quiet",
+      "stage": "test-scene construction before support review",
+      "proof_file": "tests/test_garments.py",
+      "proofs": [
+        "test_frozen_scoped_scene_rebinds_pairs_and_keeps_stale_refusal"
+      ]
+    },
+    {
+      "lesson_id": "reproducibility-helper-cache-dependency",
+      "control_tier": [
+        1
+      ],
+      "construction": "scripts/villa_render.py includes shared scene_reproducibility source bytes in render job identity",
+      "check": "actual production dry-run job identifier under helper-source mutation",
+      "stage": "render/probe job cache admission",
+      "proof_file": "tests/test_reproducibility.py",
+      "proofs": [
+        "test_render_job_identity_changes_with_shared_runtime_helper"
+      ]
+    },
+    {
+      "lesson_id": "integ6-model-selection-pair-lifecycle",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "imported_appearance.with_models validates incoming pairs and authors new model selections with matching closed stand-ins; migrated furniture, bed baselines, bed activation and Blender fallback",
+      "check": "strict imported admission and by-value orphan reproduction",
+      "stage": "scene selection before physical review",
+      "proof_file": "tests/test_integ6.py",
+      "proofs": [
+        "test_real_orphan_bed_pair_refuses_and_atomic_selection_stays_clean"
+      ]
+    },
+    {
+      "lesson_id": "integ6-exact-contents-migration",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "garments.historical_replacements requires exact retired values and complete strict replacement parts; full preview migration replay binds every new/changed row by value before original full-scene hash",
+      "check": "frozen actual proxy and full-scene source migration, missing/changed/unknown mutations",
+      "stage": "integrated source admission and reviewed preview identity",
+      "proof_file": "tests/test_integ6.py",
+      "proofs": [
+        "test_exact_contents_retirement_requires_all_closed_replacements",
+        "test_real_scene_migration_keeps_full_inventory_and_exact_row_bindings"
+      ]
+    },
+    {
+      "lesson_id": "integ6-build-cache-input-value",
+      "control_tier": [
+        1
+      ],
+      "construction": "garment constructor and imported stand-in measurements use exact input-content keys; route snapshots avoid scalar Mapping tests and thaw only possible route intersections",
+      "check": "real recipe, translated inputs and caller mutation isolation",
+      "stage": "scene construction before unconditional final admission",
+      "proof_file": "tests/test_integ6.py",
+      "proofs": [
+        "test_garment_cache_tracks_recipe_translation_and_caller_mutation"
+      ]
+    },
+    {
+      "lesson_id": "integ6-provenance-fixture-inventory",
+      "control_tier": [
+        1
+      ],
+      "construction": "provenance_inputs is the single real source/data inventory; provenance test roots copy that inventory rather than a hand list",
+      "check": "real temporary provenance tree and changed source refusal",
+      "stage": "scene provenance construction",
+      "proof_file": "tests/test_villa_scene_provenance.py",
+      "proofs": [
+        "test_real_stale_scene_refused_default_rebuilds_and_hash_is_reported"
+      ]
+    },
+    {
+      "lesson_id": "integ6-route-cache-dependencies",
+      "control_tier": [
+        1
+      ],
+      "construction": "build-local furnished route cache binds layout/spec/furniture/level/cell/rooms/columns/body widths/directions/seat classes/catalogue; requested TRACE bypasses value reuse to populate the diagnostic raster",
+      "check": "actual route query repeats, geometry and radius mutations, trace production",
+      "stage": "furnished route review before scene activation",
+      "proof_file": "tests/test_build_cache.py",
+      "proofs": [
+        "test_real_route_cache_tracks_values_and_preserves_requested_trace",
+        "test_full_villa_build_time_budget"
+      ]
+    },
+    {
+      "lesson_id": "integ6-historical-approval-channel",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "active channel assertions validate exact garment retirement rows through the production contract; retirement registration records one receipt per exact row",
+      "check": "changed historical values and surviving old movement refuse; repeated exact registration stays quiet",
+      "stage": "integrated mounting approval reconciliation",
+      "proof_file": "tests/test_garments.py",
+      "proofs": [
+        "test_historical_retirement_is_exact_and_scoped"
+      ]
+    },
+    {
+      "lesson_id": "integ6-rail-support-contract",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "garments.build authors both real bracket IDs; integrate carries them into mounting support_parts; contents_findings independently requires both actual joint parts",
+      "check": "real frozen lost-right bracket, renamed/translated sibling, each missing rebuilt end and clean package",
+      "stage": "garment construction and final mounting admission",
+      "proof_file": "tests/test_integ6.py",
+      "proofs": [
+        "test_real_rail_requires_both_end_brackets_and_renamed_sibling"
+      ]
+    },
+    {
+      "lesson_id": "reproducibility-published-view-selection",
+      "control_tier": [2],
+      "construction": "villa_render.write unconditionally validates published authored views; numerical --views none changes render selection only",
+      "check": "actual empty-view export refuses publication; complete authored scenes remain valid",
+      "stage": "before scene publication and numerical replay",
+      "proof_file": "tests/test_villa_render_scene.py",
+      "proofs": ["test_invalid_view", "test_valid_scene"]
     }
   ]
 }
