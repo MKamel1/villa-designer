@@ -9,6 +9,9 @@ from __future__ import annotations
 
 import math
 import json
+import hashlib
+from copy import deepcopy
+from functools import lru_cache
 from pathlib import Path
 from .physical_part import PartMeshList, geometry_errors, _rectangular_proxy
 from .part_exemptions import annotate as annotate_part
@@ -128,7 +131,23 @@ def body(x, y, rail_z, garment_type):
     return faces
 
 
+@lru_cache(maxsize=4)
+def _cached_build(input_sha256, encoded):
+    data = json.loads(encoded)
+    return _build(data['wardrobes'], data['floor'])
+
+
 def build(wardrobes, floor):
+    """Cache exact authored inputs/recipe/policy; each caller owns its geometry."""
+    from . import part_exemptions
+    encoded = json.dumps(dict(wardrobes=wardrobes, floor=floor,
+        recipe=dict(drop=DROP, basis=BASIS, pitch=PITCH, thickness=THICKNESS, palettes=PALETTES),
+        exemptions_sha256=hashlib.sha256(part_exemptions.RECORD.read_bytes()).hexdigest()),
+        sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+    return deepcopy(_cached_build(hashlib.sha256(encoded).hexdigest(), encoded))
+
+
+def _build(wardrobes, floor):
     """Build every module with packing fixed before geometry, never clamped."""
     from . import villa_furnish as F
     from .villa_render import box_faces, round_tube
@@ -171,6 +190,7 @@ def build(wardrobes, floor):
                             'rail-bracket','bracket',source,contents_joint=rail)
                     rail_record=next(m for m in meshes if m['id']==rail)
                     rail_record['contents_support']=rail+'-bracket-left'
+                    rail_record['contents_support_parts']=[rail+'-bracket-left',rail+'-bracket-right']
                     count=math.floor((hi-lo-.020-THICKNESS)/PITCH)+1
                     if count<1:raise ValueError(prefix+': no physical garment fits')
                     positions=[(lo+hi)/2+(n-(count-1)/2)*PITCH for n in range(count)]
@@ -395,6 +415,12 @@ def contents_findings(wardrobes, meshes):
             expected=1 if kind=='long-hang' else 2 if kind=='double-hang' else 0
             if len(rails)!=expected:out.append(module+': missing rail contents slot')
             for rail_index, rail in enumerate(sorted(rails,key=lambda m:bounds(m)[2])):
+                joints = [m for m in rows if m.get('contents_joint') == rail['id']]
+                declared = rail.get('contents_support_parts', [])
+                if (len(declared) != 2 or len(set(declared)) != 2 or len(joints) != 2 or
+                        set(declared) != {m['id'] for m in joints} or
+                        any(m.get('part_kind') != 'rail-bracket' for m in joints)):
+                    out.append(rail['id']+': missing declared rail brackets')
                 hanging=[m for m in rows if m.get('rail_id')==rail['id']]
                 if not hanging:out.append(rail['id']+': empty rail')
                 types={'dress','abaya'} if kind=='long-hang' else {'trousers'} if rail_index==0 else {'shirt','jacket'}
@@ -496,8 +522,31 @@ def retire_historical_approval(scene, approved):
     if matches[0]!=approved:raise ValueError(approved['id']+': historical retirement provenance drift')
     if any(r['id']==approved['id'] for r in scene['mounting_movements']):
         raise ValueError(approved['id']+': old mounting row survives contents rebuild')
-    scene.setdefault('garment_retired_approvals',[]).append(approved['id'])
+    retired = scene.setdefault('garment_retired_approvals',[])
+    if approved['id'] not in retired:
+        retired.append(approved['id'])
     return True
+
+
+def historical_replacements(scene, old):
+    """Require an exact retired proxy and all its strict physical replacements."""
+    if scene.get('garment_contents_version') != 'closed/1':
+        return None
+    data = json.loads((Path(__file__).resolve().parents[3]/'knowledge/garment-part-retirements.json').read_text())
+    record = next((r for r in data['rows'] if r['before']['id'] == old['id']), None)
+    if record is None:
+        return None
+    if record['before'] != old:
+        raise ValueError(old['id']+': historical contents retirement provenance drift')
+    by_id = {m['id']:m for m in scene['meshes']}
+    if old['id'] in by_id:
+        raise ValueError(old['id']+': historical contents proxy survives rebuild')
+    replacements = [by_id.get(identifier) for identifier in record['replacement_ids']]
+    if any(m is None or m['part_kind'] != record['replacement_kind'] or m.get('proxy_exemption')
+           for m in replacements):
+        raise ValueError(old['id']+': missing strict contents replacement')
+    PartMeshList().extend(replacements)
+    return replacements
 
 
 def integrate(scene):
@@ -517,5 +566,7 @@ def integrate(scene):
             geometry_role='assembly-child',assembly_root=root['id'],child_projection_m=projection,
             projection_basis='Measured live floor-bearing wardrobe; explicit contents_support chain independently checked')
         row['mounting_package']='garments-live-joinery'
+        if row.get('contents_role') == 'rail':
+            row['mounting']['support_parts'] = list(row['contents_support_parts'])
         scene['meshes'].append(row)
     scene['garment_support_status']='Geometric contact only; fixings and structural capacities ASSUMED pending joinery coordination'

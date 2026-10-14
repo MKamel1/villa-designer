@@ -75,15 +75,22 @@ def _component_bounds(faces):
     return _bounds_by_value(tuple(len(f) for f in faces), points.tobytes())
 
 
+@lru_cache(maxsize=4)
+def _legacy_inputs(record_bytes, policy_bytes, manifest_bytes):
+    """Parse measurements once per exact file content, never per path/mtime."""
+    return (json.loads(gzip.decompress(record_bytes)), json.loads(policy_bytes),
+            json.loads(manifest_bytes))
+
+
 def _legacy_geometry(model):
-    record = json.loads(gzip.decompress(LEGACY_RECORD.read_bytes()))
+    record, policy, manifest = _legacy_inputs(LEGACY_RECORD.read_bytes(),
+        (ROOT/'knowledge/imported-component-policy.json').read_bytes(),
+        (ROOT/'ops/workstation/library-manifest.json').read_bytes())
     if record.get('schema') != 'imported-component-measurements/1' or model['asset'] not in record['assets']:
         raise ValueError(model['id']+': imported appearance has no measured physical stand-in source')
     geometry = record['assets'][model['asset']]
-    policy=json.loads((ROOT/'knowledge/imported-component-policy.json').read_text())
     if geometry.get('component_policy_sha256') != digest(policy):
         raise ValueError(model['id']+': stale imported component decomposition policy')
-    manifest = json.loads((ROOT/'ops/workstation/library-manifest.json').read_text())
     entry = next(r for r in manifest['props'] if r['id'] == model['asset'])
     if (geometry['source_sha256']['model.gltf'] != entry['source_sha256'] or
             any(geometry['source_sha256'].get(k) != v for k,v in entry.get('geometry_buffer_sha256', {}).items()) or
@@ -186,15 +193,20 @@ def _construct_model(model):
 
 
 @lru_cache(maxsize=32)
-def _cached_pair(model_bytes):
-    return _construct_model(json.loads(model_bytes))
+def _cached_pair(input_sha256, model_bytes):
+    # Construction admits the physical parts once. Cache their canonical
+    # serialized value; the C JSON reader clones large face-index tables
+    # without millions of Python deepcopy calls on unchanged scalar leaves.
+    return encoded(_construct_model(json.loads(model_bytes)))
 
 
 def build_model(model):
     """Reuse only byte-identical inputs; callers own independent pair records."""
     if not model.get('review_geometry'):
         model = dict(model, review_component_measurements=_legacy_geometry(model))
-    return deepcopy(_cached_pair(encoded(model)))
+    model_bytes = encoded(model)
+    appearance, physical = json.loads(_cached_pair(hashlib.sha256(model_bytes).hexdigest(), model_bytes))
+    return appearance, physical
 
 
 def build_pairs(models):
@@ -216,6 +228,44 @@ def bind_scene(scene):
     scene['physical_model_meshes'] = parts
     scene['imported_admission_policy'] = POLICY_SOURCE
     return scene
+
+
+def with_models(scene, models):
+    """Author a new selection atomically, retaining strict incoming admission.
+
+    A source scene's pairs certify its old model list. Validate those pairs
+    before selecting; construct the new pairs from the new authored list.
+    Select on authored scenes, before physical expansion. Expanded meshes
+    would retain orphan colliders when a model is removed.
+    """
+    bound = any(k in scene for k in
+            ('imported_appearances', 'physical_model_meshes', 'imported_admission_policy'))
+    if needs_scene_admission(scene) and bound:
+        require_scene(scene)
+    selected = list(models)
+    if not bound or not isinstance(scene.get('physical_model_meshes'), list):
+        return bind_scene(dict(scene, models=selected))
+    # Reuse only models that are the exact incoming objects just validated.
+    # New objects (even with matching IDs) require complete source construction.
+    # Copy pairs so a new selection cannot mutate the admitted source scene.
+    appearances, parts = [], []
+    old = {m['id']:m for m in scene.get('models', [])}
+    by_model = {}
+    by_part = {a['standin_id']:a for a in scene['imported_appearances']}
+    for part in scene['physical_model_meshes']:
+        by_model.setdefault(part['model_instance'], []).append(part)
+    for model in selected:
+        if model.get('status') == 'procedural-bed-fallback':
+            continue
+        if model is old.get(model['id']):
+            physical = deepcopy(by_model.get(model['id'], []))
+            appearance = [deepcopy(by_part[p['id']]) for p in physical]
+        else:
+            appearance, physical = build_pairs([model])
+        appearances.extend(appearance)
+        parts.extend(physical)
+    return dict(scene, models=selected, imported_appearances=appearances,
+                physical_model_meshes=parts, imported_admission_policy=POLICY_SOURCE)
 
 
 def has_imported_rows(scene):

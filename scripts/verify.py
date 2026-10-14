@@ -154,6 +154,17 @@ def main() -> int:
            all((ROOT / item["proof_file"]).is_file() and all(
                "def " + name + "(" in (ROOT / item["proof_file"]).read_text(encoding="utf-8")
                for name in item["proofs"]) for item in build_registry["records"]))
+    from archpipe.scene_reproducibility import repository_randomness_findings, require_outward
+    randomness = repository_randomness_findings(ROOT)
+    expect("scene/scripts randomness has stable owned seeds" + (": " + "; ".join(randomness) if randomness else ""), not randomness)
+    import gzip
+    precision_parts = json.loads(gzip.decompress((ROOT / "tests/fixtures/garment-importer-precision-before.json.gz").read_bytes()))['parts']
+    expect("real small solids retain outward volume under distant translations", all(
+        require_outward([[[v+d for v,d in zip(p, shift)] for p in f] for f in part['faces']], 'precision-sibling') > 0
+        for part in precision_parts for shift in ((0,0,0),(1e6,-2e6,3e6))))
+    expect("real small solids inverted siblings are refused", all(
+        raises(ValueError, require_outward, [list(reversed(f)) for f in part['faces']], 'inverted')
+        for part in precision_parts))
     from archpipe.asset_route_record import RECORD, recorded_geometry, read_record
     route_record = read_record()
     expect("route records validate walking topology, precision, hulls and scale ranges",

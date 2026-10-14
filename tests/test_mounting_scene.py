@@ -110,7 +110,9 @@ class StairFirstPackage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         from unittest.mock import patch
-        with patch('archpipe.concept.sanitary_relocation.apply_family'):
+        with patch('archpipe.concept.sanitary_relocation.apply_family'), \
+             patch('archpipe.concept.furniture_stage2.apply', side_effect=lambda s,*a:s), \
+             patch('archpipe.concept.parents_bed.apply', side_effect=lambda s,*a:s):
             cls.scene = VR.build(views=[])
         # Historical a-d proofs retain their pre-e clearance case. Current
         # authorized slides are independently exercised by support tests.
@@ -521,6 +523,11 @@ class StairFirstPackage(unittest.TestCase):
             for row in auth_data['rows']:
                 mid = row['id']
                 if mid in retired:
+                    continue
+                from archpipe.concept.garments import retire_historical_approval
+                if retire_historical_approval(scene, row):
+                    self.assertIn(mid, scene['garment_retired_approvals'])
+                    self.assertNotIn(mid, all_movements)
                     continue
                 approved_count += 1
                 # Retired fitting receipts remain tested even though the

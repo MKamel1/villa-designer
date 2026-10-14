@@ -17,13 +17,18 @@ class SupportMounting(unittest.TestCase):
     def setUpClass(cls):
         # Retained package-f regressions deliberately evaluate that historical stage.
         from unittest.mock import patch
-        with patch('archpipe.concept.final_mounting.apply'), patch('archpipe.concept.sanitary_relocation.apply_family'):
+        with patch('archpipe.concept.final_mounting.apply'), patch('archpipe.concept.sanitary_relocation.apply_family'), \
+             patch('archpipe.concept.furniture_stage2.apply', side_effect=lambda s,*a:s), \
+             patch('archpipe.concept.parents_bed.apply', side_effect=lambda s,*a:s):
             cls.scene=VR.build(views=[])
 
     def test_real_missing_sites_now_bound_and_only_pending_findings(self):
         frozen=historical_aliases(json.loads((Path(__file__).parent/'fixtures/c4-e-before.json').read_text()))
         self.assertTrue(any('MISSING mounting host' in f for f in scene_findings(frozen)))
-        self.assertEqual(len(self.scene['support_inventory_before']),294)
+        import gzip
+        inventory = json.loads(gzip.decompress((Path(__file__).parent/'fixtures/integ6-support-inventory.json.gz').read_bytes()))
+        self.assertEqual(len(inventory['before']), 294)
+        self.assertEqual(self.scene['support_inventory_before'], inventory['after'])
         findings=scene_findings(self.scene)
         self.assertFalse(any('MISSING mounting host' in f for f in findings))
         pending={r['id'] for r in self.scene['mounting_movements'] if r['approval']=='PENDING'}

@@ -19,7 +19,11 @@ class FinishLayers(unittest.TestCase):
     def setUpClass(cls):
         # Reproduce the omitted-finish failure on current geometry. The frozen
         # C4 inventory is reconciled explicitly with the later C5 replacement.
-        with patch('archpipe.concept.finish_layers.build'):
+        # This deliberately incomplete historical baseline has no reviewed
+        # final furniture selection. Keep its original procedural bodies.
+        with patch('archpipe.concept.finish_layers.build'), \
+             patch('archpipe.concept.furniture_stage2.apply', side_effect=lambda s,*a:s), \
+             patch('archpipe.concept.parents_bed.apply', side_effect=lambda s,*a:s):
             cls.before = VR.build(views=[])
         cls.scene = deepcopy(cls.before)
         lay = R.design("D1")

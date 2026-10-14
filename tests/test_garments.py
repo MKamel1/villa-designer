@@ -173,6 +173,8 @@ class PhysicalGarments(unittest.TestCase):
             self.assertFalse(G.retire_historical_approval({},row))
             scene=dict(garment_contents_version='closed/1',mounting_movements=[])
             self.assertTrue(G.retire_historical_approval(scene,row))
+            self.assertTrue(G.retire_historical_approval(scene,row))
+            self.assertEqual(scene['garment_retired_approvals'], [row['id']])
             changed=deepcopy(row);changed['old'][0]+=.001
             with self.assertRaises(ValueError):G.retire_historical_approval(scene,changed)
             scene['mounting_movements']=[dict(id=row['id'])]
@@ -180,7 +182,8 @@ class PhysicalGarments(unittest.TestCase):
 
 
     def test_frozen_outward_parts_reproduce_shared_importer_float32_reversal(self):
-        # OPEN shared-importer defect: this is evidence, not a production fix.
+        # Historical single-precision reproduction; production fix is proved
+        # by tests.test_reproducibility and tests/blender_reproducibility.py.
         # Volume is in cubic metres. Float32 means single precision; float64
         # means double precision. A positive signed volume indicates outward
         # winding. Local subtraction changes arithmetic, not design geometry.
@@ -198,6 +201,21 @@ class PhysicalGarments(unittest.TestCase):
             self.assertGreater(volume(np.float64,False),0)
             self.assertLess(volume(np.float32,False),0)
             self.assertGreater(volume(np.float32,True),0)
+
+    def test_frozen_scoped_scene_rebinds_pairs_and_keeps_stale_refusal(self):
+        from archpipe.imported_appearance import bind_scene, require_scene
+        before=json.loads(gzip.decompress((ROOT/'tests/fixtures/garment-scoped-admission-before.json.gz').read_bytes()))
+        for renamed in (False,True):
+            stale=deepcopy(before)
+            if renamed:
+                for key in ('imported_appearances','physical_model_meshes'):
+                    for row in stale[key]: row['id']='other-'+row['id']
+            with self.assertRaisesRegex(ValueError,'missing, stale'):
+                require_scene(stale)
+            clean=bind_scene(deepcopy(stale))
+            self.assertEqual(require_scene(clean),[])
+            self.assertEqual(clean['meshes'],before['meshes'])
+
 
 
 class FreshDressingScene(unittest.TestCase):
@@ -218,7 +236,8 @@ class FreshDressingScene(unittest.TestCase):
         # Existing complete-scene tests prove the same checks globally.
         rooms={w['room'] for w in self.scene['dressing_wardrobes']}
         selected=[m for m in self.scene['meshes'] if m.get('room') in rooms]
-        sub=dict(self.scene,meshes=selected,props=[],cloth=[],models=[])
+        from archpipe.imported_appearance import bind_scene
+        sub=bind_scene(dict(self.scene,meshes=selected,props=[],cloth=[],models=[]))
         self.assertEqual(S.unsupported(sub),[])
         self.assertEqual([f for f in S.blocked_openings(self.scene,R.design('D1')) if 'dress-' in str(f)],[])
         admitted=PartMeshList();admitted.extend(selected)

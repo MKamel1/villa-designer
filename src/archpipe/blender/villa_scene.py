@@ -465,14 +465,10 @@ def add_mesh_batch(specs, name, material, warnings, materials=None):
                 source_faces[-1].material_index = material_names.index(spec["face_materials"][face_index])
         source_edges = {edge for face in source_faces for edge in face.edges}
         if all(len(edge.link_faces) == 2 for edge in source_edges):
-            volume = 0.0
-            for face in source_faces:
-                a = face.verts[0].co
-                for i in range(1, len(face.verts)-1):
-                    volume += a.dot(face.verts[i].co.cross(face.verts[i+1].co)) / 6
-            if volume < -1e-9:
-                bmesh.ops.reverse_faces(bm, faces=source_faces)
-                warnings.append(spec["id"] + ": reversed " + str(len(source_faces)) + " faces (negative signed volume)")
+            # Use authored double-precision coordinates before Blender rounds
+            # world positions to single precision. Refuse genuine inversion.
+            from archpipe.scene_reproducibility import require_outward
+            require_outward(spec["faces"], spec["id"])
     bm.normal_update()
     bm.to_mesh(mesh)
     bm.free()
@@ -1014,7 +1010,8 @@ def build_curtains(curtain_specs, materials):
     report = []
     floors = [o for o in bpy.data.objects if o.name.startswith("floor-")]
     for spec in curtain_specs:
-        rnd = random.Random(abs(hash(spec["id"])) % (2 ** 31))
+        from archpipe.scene_reproducibility import stable_seed
+        rnd = random.Random(stable_seed(spec))
         axis = spec["axis"]                                  # "h": opening runs along x, normal along y; "v": along y, normal along x
         cx, cy = spec["center"]                               # the WINDOW LINE -- width-axis anchor only, never the hang depth
         sign = spec["normal_sign"]
@@ -1472,6 +1469,8 @@ def configure_cycles(cpu):
                     break
             except Exception:
                 pass
+    scene.cycles.seed = 0
+    scene.cycles.use_animated_seed = False
     scene.cycles.use_adaptive_sampling = True
     scene.cycles.use_denoising = True
     scene.cycles.denoiser = "OPENIMAGEDENOISE"
@@ -1679,6 +1678,42 @@ def evaluated_probe_ray(scene_data):
     return first_solid
 
 
+def evaluated_scene_receipt(scene_data, curtain_objects):
+    """Bind authored inputs and every evaluated runtime mesh, without rounding.
+
+    Hash local vertex coordinates plus the world matrix, polygon connectivity
+    and material indices; modifiers are evaluated, including settled curtains.
+    NumPy fixed-width little-endian buffers make the digest encoding explicit.
+    """
+    import hashlib
+    import numpy as np
+    from archpipe.imported_appearance import digest
+    bpy.context.view_layer.update()
+    dependencies = bpy.context.evaluated_depsgraph_get()
+    records = {}
+    for obj in sorted((o for o in bpy.context.scene.objects if o.type == 'MESH'), key=lambda o: o.name):
+        evaluated = obj.evaluated_get(dependencies)
+        mesh = evaluated.to_mesh()
+        try:
+            coords = np.empty(len(mesh.vertices)*3, dtype='<f4')
+            mesh.vertices.foreach_get('co', coords)
+            loops = np.empty(len(mesh.loops), dtype='<i4')
+            mesh.loops.foreach_get('vertex_index', loops)
+            polygons = np.empty(len(mesh.polygons)*3, dtype='<i4')
+            for index, face in enumerate(mesh.polygons):
+                polygons[index*3:index*3+3] = (face.loop_start, face.loop_total, face.material_index)
+            value = hashlib.sha256()
+            for array in (np.asarray(evaluated.matrix_world, dtype='<f8'), coords, loops, polygons):
+                value.update(array.tobytes())
+            records[obj.name] = dict(mesh_sha256=value.hexdigest(), vertices=len(mesh.vertices),
+                                     polygons=len(mesh.polygons))
+        finally:
+            evaluated.to_mesh_clear()
+    return dict(schema='evaluated-scene/1', authored_scene_sha256=digest(scene_data),
+                evaluated_meshes_sha256=digest(records), meshes=records,
+                curtains={name: records[name] for name in sorted(curtain_objects)})
+
+
 def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mesh_by_id, switched_emitters):
     """Read maintained horizontal illuminance from the furnished scene.
 
@@ -1772,7 +1807,8 @@ def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mes
               "method": "0.5-reflectance sensor; linear radiance times pi / 0.5; 1 mm above task plane",
               "occlusion": "actual scene geometry", "samples": s.cycles.samples,
               "assumptions": scene_data["notes"], "points": records,
-              "all_targets_met": all(r["meets_target"] for r in records)}
+              "all_targets_met": all(r["meets_target"] for r in records),
+              "scene_receipt": json.load(open(os.path.join(args.out, "scene-receipt.json"), encoding="utf-8"))}
     with open(os.path.join(args.out, "lighting-measurements.json"), "w", encoding="utf-8") as stream:
         json.dump(result, stream, indent=2)
 
@@ -1811,8 +1847,9 @@ def render(scene_data, args):
     imported_models = import_models(scene_data.get("models", []), library_root)
     absent={m['id'] for m in imported_models if m.get('status')=='procedural-bed-fallback'}
     if absent:
-        scene_data=dict(scene_data,models=[dict(m,status='procedural-bed-fallback') if m['id'] in absent else m
-                                         for m in scene_data.get('models',[])])
+        from archpipe.imported_appearance import with_models
+        scene_data=with_models(scene_data,[dict(m,status='procedural-bed-fallback') if m['id'] in absent else m
+                                          for m in scene_data.get('models',[])])
         from archpipe.task_probe import bind_planes
         bind_planes(scene_data)
     cloth_report = drape_cloth(scene_data.get("cloth", []), materials, imported_models)
@@ -1826,6 +1863,9 @@ def render(scene_data, args):
     full_power = {ident: obj.data.energy for ident, obj in lights.items()}
     mesh_by_id = {mesh["id"]: mesh for mesh in scene_data["meshes"]}
     configure_cycles(args.cpu)
+    receipt = evaluated_scene_receipt(scene_data, curtain_objects)
+    with open(os.path.join(args.out, "scene-receipt.json"), "w", encoding="utf-8") as stream:
+        json.dump(receipt, stream, indent=2)
     if args.measure_lighting:
         measure_lighting(scene_data, args, lights, full_power, emissive_sources, mesh_by_id, switched_emitters)
         return
@@ -1984,7 +2024,9 @@ def render(scene_data, args):
                   "imported_models": [{"id": m["id"], "asset": m["asset"], "bounds": m["bounds"],
                                        "material_qa": m["material_qa"]}
                                       for m in imported_models], "cloth": cloth_report,
-                  "curtains": [dict(r, hidden=objects[r["id"]].hide_render) for r in curtain_report],
+                  "curtains": [dict(r, hidden=objects[r["id"]].hide_render,
+                                    mesh_sha256=receipt["curtains"][r["id"]]["mesh_sha256"]) for r in curtain_report],
+                  "scene_receipt": receipt,
                   "mesh_object_count": len(set(objects.values())),
                   "emissive_sources": current_emissive,
                   "max_bounces": s.cycles.max_bounces, "clamp_indirect": s.cycles.sample_clamp_indirect,

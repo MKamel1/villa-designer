@@ -37,6 +37,13 @@ for a sink aperture. Lead policy 2026-10-13: imported furniture binds to its
 closed measured component stand-ins, while its unchanged appearance mesh
 renders. Validate hash-bound source/stand-in pairs before measurement and
 reject a sensor inside a stand-in even when a short ray crosses no face.
+Whenever a review/import fallback changes the model selection, use
+`imported_appearance.with_models`: validate the incoming pairs, then construct
+matching new pairs. Never inherit a previous selection's stand-in receipt in
+a bed-free baseline, scoped review or procedural fallback.
+Select on the authored scene before physical expansion; an expanded review
+scene contains collider rows that would survive model removal. The selection
+API refuses that mixed-stage input rather than retaining orphan geometry.
 Preserve nominal positions, cited task intent and all source geometry.
 For above-mattress reading, retain the existing measured source reading
 datum as an offset from its finite owning stand-in face. A conservative
@@ -94,3 +101,21 @@ Keep execution success distinct from lighting/design acceptance.
 Capture a minimal failing input for new photometric bugs, add a
 regression, and update the calibration evidence. Do not generalize an
 example target into a code-compliance requirement without a verified source.
+
+Runtime repeatability: derive procedural cloth seeds from canonical authored
+records with `archpipe.scene_reproducibility.stable_seed`, never built-in
+`hash()` or process entropy. The numerical and per-view receipts bind every
+evaluated curtain mesh and the full evaluated mesh set. After any procedural
+cloth change, run `scripts/prove_reproducibility.py` on one fresh unchanged
+scene export: two separate Blender processes with different `PYTHONHASHSEED`
+values must have identical evaluated receipts and every direct/total task
+reading must agree within the declared 0.1 percent. Keep the old receipt as
+historical if its runtime geometry was unbound or random; record a new baseline
+with that limitation. Never widen the allowance or claim equality with the
+historical random-pleat receipt. This numerical check requires no presentation
+render and does not approve appearance or a villa design gate.
+
+For a published numerical-proof input, call `villa_render.write` with its
+normal authored views. `build(views=[])` is an in-memory diagnostic subset;
+it cannot pass the exported-scene contract. Suppress presentation rendering
+with the numerical runner's `--views none`, leaving authored views intact.

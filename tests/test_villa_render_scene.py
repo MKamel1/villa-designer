@@ -123,6 +123,11 @@ class VillaRenderContractTest(unittest.TestCase):
         self.assertIn("nonzero vector", errors)
 
     def test_invalid_view(self):
+        # Actual numerical-export misuse: --views none belongs to rendering,
+        # not to the published scene's authored camera inventory.
+        empty = copy.deepcopy(self.valid)
+        empty["views"] = []
+        self.assertIn("views: nonempty array required", validate_scene(empty))
         scene = copy.deepcopy(self.valid)
         scene["views"][0]["camera"]["lens_mm"] = 0
         scene["views"][0]["layers_on"] = ["unknown"]

@@ -2946,11 +2946,8 @@ def _VIEWS(lay=None, resolve=True):
     return V
 
 
-def source_provenance(root=None):
-    """Identify the source and data inputs from which a villa scene is built."""
-    import hashlib
-    import subprocess
-
+def provenance_inputs(root=None):
+    """Return the complete source/data inventory shared by receipts and fixtures."""
     root = Path(root or ROOT).resolve()
     inputs = sorted((root / "src/archpipe").rglob("*.py"))
     inputs += [root / name for name in (
@@ -2959,11 +2956,22 @@ def source_provenance(root=None):
         "knowledge/c3-part-exemptions.json",
         "knowledge/imported-legacy-components.json.gz",
         "knowledge/imported-component-policy.json",
+        "knowledge/garment-dimensions.json", "knowledge/garment-mounting-retirements.json",
+        "knowledge/garment-part-retirements.json", "knowledge/furniture-stage2.json.gz",
+        "knowledge/parents-bed.json.gz",
         "spec/villa-site.yaml", "knowledge/library.json",
         "knowledge/projects/villa-01/brief-requirements.json",
         "knowledge/projects/villa-01/taste.json")]
+    return sorted(inputs, key=lambda p: p.relative_to(root).as_posix())
+
+
+def source_provenance(root=None):
+    """Identify the source and data inputs from which a villa scene is built."""
+    import hashlib
+    import subprocess
+    root = Path(root or ROOT).resolve()
     h = hashlib.sha256()
-    for path in sorted(inputs, key=lambda p: p.relative_to(root).as_posix()):
+    for path in provenance_inputs(root):
         name = path.relative_to(root).as_posix().encode("utf-8")
         data = path.read_bytes()  # Missing inputs must fail before a scene can be trusted.
         h.update(len(name).to_bytes(4, "big") + name)

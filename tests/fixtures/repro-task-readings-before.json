@@ -1,0 +1,332 @@
+[
+  {
+    "room": "kitchen",
+    "label": "island prep side",
+    "position": [
+      12.45,
+      -25.76,
+      -2.0780000000000003
+    ],
+    "required_lux": 500,
+    "direct_lux": 1077.164531273938,
+    "total_lux": 1364.2040609265357,
+    "meets_target": true
+  },
+  {
+    "room": "kitchen",
+    "label": "island seating side",
+    "position": [
+      12.45,
+      -26.360000000000003,
+      -2.0780000000000003
+    ],
+    "required_lux": 200,
+    "direct_lux": 837.9837554100212,
+    "total_lux": 1096.5448084662337,
+    "meets_target": true
+  },
+  {
+    "room": "kitchen",
+    "label": "island prep side",
+    "position": [
+      13.599999999999998,
+      -25.76,
+      -2.0780000000000003
+    ],
+    "required_lux": 500,
+    "direct_lux": 1033.556779477572,
+    "total_lux": 1228.4454921227234,
+    "meets_target": true
+  },
+  {
+    "room": "kitchen",
+    "label": "island seating side",
+    "position": [
+      13.599999999999998,
+      -26.360000000000003,
+      -2.0780000000000003
+    ],
+    "required_lux": 200,
+    "direct_lux": 850.9441856223034,
+    "total_lux": 1113.601918043889,
+    "meets_target": true
+  },
+  {
+    "room": "kitchen",
+    "label": "island prep side",
+    "position": [
+      14.099999999999998,
+      -25.76,
+      -2.0780000000000003
+    ],
+    "required_lux": 500,
+    "direct_lux": 835.4472583421984,
+    "total_lux": 1115.8596644616825,
+    "meets_target": true
+  },
+  {
+    "room": "kitchen",
+    "label": "island seating side",
+    "position": [
+      14.099999999999998,
+      -26.360000000000003,
+      -2.0780000000000003
+    ],
+    "required_lux": 200,
+    "direct_lux": 676.5934360458344,
+    "total_lux": 927.0273902573839,
+    "meets_target": true
+  },
+  {
+    "room": "kitchen",
+    "label": "single induction zone",
+    "position": [
+      12.924999999999997,
+      -26.01,
+      -2.072
+    ],
+    "required_lux": 300,
+    "direct_lux": 1004.7382121148343,
+    "total_lux": 1301.8524976629108,
+    "meets_target": true
+  },
+  {
+    "room": "kitchen",
+    "label": "sink",
+    "position": [
+      12.545,
+      -23.991,
+      -2.0980000000000003
+    ],
+    "required_lux": 300,
+    "direct_lux": 1154.1083304996114,
+    "total_lux": 1350.1750323830033,
+    "meets_target": true
+  },
+  {
+    "room": "dining",
+    "label": "dining table centre",
+    "position": [
+      16.95,
+      -25.9,
+      -2.248
+    ],
+    "measurement_position": [
+      16.919999999999998,
+      -25.805,
+      -2.248
+    ],
+    "required_lux": 100,
+    "direct_lux": 546.2496022946814,
+    "total_lux": 646.8534468750717,
+    "meets_target": true
+  },
+  {
+    "room": "dining",
+    "label": "table end (homework)",
+    "position": [
+      16.35,
+      -25.9,
+      -2.248
+    ],
+    "required_lux": 200,
+    "direct_lux": 462.1191609900957,
+    "total_lux": 582.8831721321708,
+    "meets_target": true
+  },
+  {
+    "room": "dirty-kitchen",
+    "label": "dirty kitchen run",
+    "position": [
+      13.16,
+      -21.101,
+      -2.0980000000000003
+    ],
+    "required_lux": 500,
+    "direct_lux": 679.0293882950757,
+    "total_lux": 812.4697731851044,
+    "meets_target": true
+  },
+  {
+    "room": "study-game",
+    "label": "study-desk",
+    "position": [
+      4.167,
+      -25.4,
+      0.752
+    ],
+    "required_lux": 400,
+    "direct_lux": 931.5786179491846,
+    "total_lux": 1008.3295312574637,
+    "meets_target": true
+  },
+  {
+    "room": "study-game",
+    "label": "study-adult-desk",
+    "position": [
+      5.3,
+      -24.141,
+      0.7520000000000001
+    ],
+    "required_lux": 400,
+    "direct_lux": 905.8097246929657,
+    "total_lux": 976.8301570895749,
+    "meets_target": true
+  },
+  {
+    "room": "kids-a",
+    "label": "ka-desk-1",
+    "position": [
+      13.17,
+      -24.091,
+      0.7520000000000001
+    ],
+    "required_lux": 400,
+    "direct_lux": 1391.480616481418,
+    "total_lux": 1521.4763653279322,
+    "meets_target": true
+  },
+  {
+    "room": "kids-a",
+    "label": "ka-desk-2",
+    "position": [
+      14.31,
+      -24.091,
+      0.7520000000000001
+    ],
+    "required_lux": 400,
+    "direct_lux": 1390.3702330694823,
+    "total_lux": 1528.1491110946354,
+    "meets_target": true
+  },
+  {
+    "room": "kids-b",
+    "label": "kb-desk",
+    "position": [
+      17.65,
+      -24.091,
+      0.7520000000000001
+    ],
+    "required_lux": 400,
+    "direct_lux": 1389.3629275983396,
+    "total_lux": 1509.9108983417254,
+    "meets_target": true
+  },
+  {
+    "room": "parents-bed",
+    "label": "pillow",
+    "position": [
+      19.929999999999996,
+      -26.241,
+      0.8999999999999999
+    ],
+    "required_lux": 200,
+    "direct_lux": 1110.9694228648402,
+    "total_lux": 1181.9715942105347,
+    "meets_target": true
+  },
+  {
+    "room": "parents-bed",
+    "label": "pillow",
+    "position": [
+      20.73,
+      -26.241,
+      0.8999999999999999
+    ],
+    "required_lux": 200,
+    "direct_lux": 1115.013868771391,
+    "total_lux": 1179.9922024481145,
+    "meets_target": true
+  },
+  {
+    "room": "family-bath",
+    "label": "fb-basin",
+    "position": [
+      9.502,
+      -25.686,
+      0.91
+    ],
+    "required_lux": 300,
+    "direct_lux": 1337.479261189873,
+    "total_lux": 1616.371373200873,
+    "meets_target": true
+  },
+  {
+    "room": "parents-ensuite",
+    "label": "pe-basin",
+    "position": [
+      20.054,
+      -29.281,
+      0.91
+    ],
+    "required_lux": 300,
+    "direct_lux": 631.2130401479499,
+    "total_lux": 757.8496023179989,
+    "meets_target": true
+  },
+  {
+    "room": "guest-wc",
+    "label": "gwc-basin",
+    "position": [
+      9.527,
+      -23.15,
+      -2.09
+    ],
+    "required_lux": 300,
+    "direct_lux": 1375.2362331389793,
+    "total_lux": 1599.4552602309782,
+    "meets_target": true
+  },
+  {
+    "room": "lounge",
+    "label": "armchair",
+    "position": [
+      8.448,
+      -26.2,
+      -2.2380000000000004
+    ],
+    "required_lux": 200,
+    "direct_lux": 789.7042924684137,
+    "total_lux": 953.2672104352608,
+    "meets_target": true
+  },
+  {
+    "room": "bar-alcove",
+    "label": "daybed nook",
+    "position": [
+      19.668,
+      -29.241,
+      -2.2380000000000004
+    ],
+    "required_lux": 200,
+    "direct_lux": 324.60353944199693,
+    "total_lux": 422.6707611053025,
+    "meets_target": true
+  },
+  {
+    "room": "cinema",
+    "label": "cinema desk",
+    "position": [
+      4.97,
+      -21.076,
+      -2.248
+    ],
+    "required_lux": 400,
+    "direct_lux": 1483.9305488285017,
+    "total_lux": 1524.0574048044646,
+    "meets_target": true
+  },
+  {
+    "room": "cinema",
+    "label": "cinema desk",
+    "position": [
+      5.590000000000001,
+      -21.076,
+      -2.248
+    ],
+    "required_lux": 400,
+    "direct_lux": 1492.4398536444749,
+    "total_lux": 1527.5251744522054,
+    "meets_target": true
+  }
+]

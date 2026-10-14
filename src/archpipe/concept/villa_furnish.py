@@ -971,9 +971,19 @@ TRACE = None   # set to {} to keep each cluster's raster
 
 def route_problems(lay, sp, items, level, cell=0.02, room_ids=None):
     """Review the existing route raster through the shared read-only topology."""
+    from dataclasses import asdict
+    from .build_cache import derived
     from ..geometry_topology import GeometryTopology
-    model = GeometryTopology.from_inputs(layout=lay, specification=sp, furniture=items)
-    return [(finding.detail, {}) for finding in model.furnished_routes(level, cell, room_ids)]
+    def compute():
+        model = GeometryTopology.from_inputs(layout=lay, specification=sp, furniture=items)
+        return [(finding.detail, {}) for finding in model.furnished_routes(level, cell, room_ids)]
+    if TRACE is not None:
+        return compute()  # A requested diagnostic raster must actually be populated.
+    inputs = (lay, sp, items, level, cell, sorted(room_ids) if room_ids is not None else None,
+              _columns(), BODY, BEDROOM_ROUTE, PRINCIPAL_BEDROOM, DIRS, SIDES, sorted(SEATS),
+              {kind:asdict(cat.CATALOGUE[kind]) if kind in cat.CATALOGUE else None
+               for kind in sorted({item['type'] for item in items})})
+    return derived('furnished_route_raster', inputs, compute)
 
 
 def _route_problems(lay, sp, items, level, cell=0.02, room_ids=None):
