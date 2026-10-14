@@ -3,7 +3,9 @@
 `archpipe.concept.garments` owns procedural dressing appearances. They are
 labelled ASSUMED, not product selections. The authored native wardrobe payload
 is unchanged; render export replaces its content envelopes and keeps structural
-plinths, backs and dividers. No cloth simulation is required.
+plinths, backs and dividers. Physical contents remain unchanged. The renderer uses separate hash-bound
+cloth appearances; follow [the drape workflow](drape.md). Never feed appearance
+faces to physical support, collision, C8 room or occupancy checks.
 
 Build the final scene with `villa_render.build()`, saving the returned scene to
 `out/garments/final-scene.json`. The builder runs `contents_findings` after all

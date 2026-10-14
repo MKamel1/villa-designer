@@ -41,6 +41,8 @@ def main():
         if args.first_fix:raise ValueError('Candidate requires saved live joinery')
         scene['meshes']=[m for m in scene['meshes'] if not m.get('wardrobe_id')]
         G.integrate(scene)
+        from archpipe.drape_appearance import bind_scene
+        bind_scene(scene)
         scene['garment_preview_status']='CANDIDATE: new contents in unchanged saved architectural context; final fresh build still required'
     if args.context:
         if args.first_fix:raise ValueError('Context requires a fresh complete scene')
@@ -49,15 +51,17 @@ def main():
         scene['neutral_preview_fill']=[dict(position_m=[20.4,-27.60,2.65],target_m=[20.4,-27.0,1.2],size_m=1.,watts=350.),
                                        dict(position_m=[20.4,-27.60,2.65],target_m=[20.4,-28.5,1.2],size_m=1.,watts=350.)]
         (output/'neutral-scene.json').write_text(json.dumps(scene,separators=(',',':')))
-    by_id={m['id']:m for m in scene['meshes']}
+    from archpipe.drape_appearance import rendered_meshes
+    preview_meshes=rendered_meshes(scene) if scene.get('draped_appearances') is not None else scene['meshes']
+    by_id={m['id']:m for m in preview_meshes}
     assemblies=[]
     for typ in G.DROP:
         m=next(m for m in scene['meshes'] if m.get('garment_type')==typ and
                (typ in ('dress','abaya') or 'dress-his-' in m['id']))
-        assemblies.append(dict(id=typ,meshes=[m,by_id[m['contents_support']]],camera_direction=[3,-1,1]))
+        assemblies.append(dict(id=typ,meshes=[by_id[m['id']],by_id[m['contents_support']]],camera_direction=[3,-1,1]))
     for role in ('folded sportswear','folded knit hat','lingerie','headscarves','shoe','lidded top box'):
         m=next(m for m in scene['meshes'] if m.get('contents_role')==role)
-        samples=[m]
+        samples=[by_id[m['id']]]
         if role=='lidded top box':samples+=[by_id[m['id']+'-lid']]
         if role in ('lingerie','headscarves'):
             module=m['contents_module'];front=by_id[m['drawer_front_id']]
@@ -65,11 +69,11 @@ def main():
             # Diagnostic only: omit named opaque front so contents can be inspected.
             samples=[r for r in scene['meshes'] if r.get('contents_module')==module and
                      (r.get('drawer_front_id')==front['id'] or r['id'].startswith(module+'-tray-'+index) or r['id']==module+'-insert-'+index)]
-        assemblies.append(dict(id=role.replace(' ','-'),meshes=samples))
+        assemblies.append(dict(id=role.replace(' ','-'),meshes=[by_id[r['id']] for r in samples]))
     for wardrobe in scene['dressing_wardrobes']:
         package=[m for m in scene['meshes'] if m.get('wardrobe_id')==wardrobe['id'] or m['id']=='furn-'+wardrobe['id']+'-0']
         direction=[1.3,3,1.5] if wardrobe['rot']==0 else [-1.3,-3,1.5]
-        assemblies.append(dict(id=wardrobe['partner']+'-wardrobe',meshes=package,camera_direction=direction))
+        assemblies.append(dict(id=wardrobe['partner']+'-wardrobe',meshes=[by_id[r['id']] for r in package],camera_direction=direction))
     specimen_file=output/('first-fix-specimens.json' if args.first_fix else 'specimens.json')
     specimen_file.write_text(json.dumps(dict(materials=scene['materials'],assemblies=assemblies),separators=(',',':')))
     findings=G.contents_findings(scene['dressing_wardrobes'],scene['meshes'])

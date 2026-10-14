@@ -465,3 +465,13 @@ solid closure, ring count and colour variation cannot establish occupancy or
 recognisable sleeves. Inspect isolated samples with the 1.8 m reference and
 unchanged dressing cameras before integration. Closed fronts retain hidden
 contents; front-omitted drawer previews are diagnostics only.
+
+For draped dressing textiles follow [the drape workflow](../../../docs/ops/drape.md).
+Keep closed physical parts immutable. Bind gravity-simulated appearance shells
+outside the Parts list; require exact source/cache/policy hashes, measured tight
+part envelopes and forbidden-contact checks at both export and rendering.
+Pre-register appearance screens before a new build, freeze the actual rejected
+shape by value, and prove repeatability in two independent Blender processes.
+Preview every garment type and both unchanged dressing cameras in neutral light;
+morphology screens cannot establish photographic quality. No post-bake clamping,
+geometry modifiers or design changes may be used to satisfy a check.

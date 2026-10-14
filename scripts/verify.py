@@ -186,6 +186,17 @@ def main() -> int:
     old_dressing = json.loads(gzip.decompress((ROOT / 'tests/fixtures/l0923-dressing-before.json.gz').read_bytes()))
     expect('l0923 real frozen empty/proxy dressing fails physical contents check',
            bool(contents_findings(old_dressing['wardrobes'], old_dressing['meshes'])))
+    from archpipe import drape_appearance as drape
+    expect('draped garments bind unchanged physical parts and refuse forbidden contact',
+           not raises(ValueError, drape.require_scene, scene))
+    frozen_boards=json.loads(gzip.decompress((ROOT/'tests/fixtures/drape-boards-before.json.gz').read_bytes()))
+    expect('real frozen board garments fail preregistered appearance screens',
+           all(drape.appearance_findings(drape.frozen_appearance(p))
+               for p in frozen_boards['parts'] if p.get('garment_type')))
+    drape_registry=json.loads((ROOT/'knowledge/drape-guards.json').read_text())
+    expect('drape appearance controls have registered proving tests',all(
+        (ROOT/r['proof_file']).is_file() and all('def '+name+'(' in (ROOT/r['proof_file']).read_text()
+        for name in r['proofs']) for r in drape_registry['records']))
     from archpipe.orientation_guard import scene_findings as orientation_findings, document_findings
     expect("client garden compass names agree with geometry", not orientation_findings(scene))
     expect("garden documents use recorded client compass names", not document_findings())

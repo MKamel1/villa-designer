@@ -2115,6 +2115,9 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                                for m in admitted if m.get('proxy_exemption')]
     from ..imported_appearance import bind_scene
     bind_scene(scene)
+    from ..drape_appearance import bind_scene as bind_drape, require_scene as require_drape
+    bind_drape(scene)
+    require_drape(scene)
     bind_planes(scene)
     require_clear_probes(scene)
     return scene

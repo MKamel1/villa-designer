@@ -88,6 +88,12 @@ def render(args):
     data = json.loads(args.input.read_text())
     if not args.scene and input_findings(data):
         raise ValueError('; '.join(input_findings(data)))
+    if args.scene:
+        from archpipe.drape_appearance import needs_admission, rendered_meshes
+        if needs_admission(data):
+            physical_hash = canonical_hash(data['meshes'])
+            data['meshes'] = rendered_meshes(data)
+            data['neutral_physical_geometry_sha256'] = physical_hash
     args.output.mkdir(parents=True, exist_ok=True)
     evidence = []
     reference = {row['id']: row for row in json.loads(args.reference_receipt.read_text())} if args.reference_receipt else {}
@@ -161,7 +167,7 @@ def render(args):
             scene.render.filepath = str(path)
             bpy.ops.render.render(write_still=True)
             evidence.append(dict(id=view["id"], image=str(path), neutral=True,
-                                 camera=view["camera"], neutral_material_emission_off=True, neutral_preview_fill=data.get('neutral_preview_fill',[]), source_geometry_sha256=canonical_hash(data["meshes"]),
+                                 camera=view["camera"], neutral_physical_geometry_sha256=data.get("neutral_physical_geometry_sha256"), neutral_material_emission_off=True, neutral_preview_fill=data.get('neutral_preview_fill',[]), source_geometry_sha256=canonical_hash(data["meshes"]),
                                  resolution=[scene.render.resolution_x,scene.render.resolution_y],
                                  subjects=builder.subjects(view, data["meshes"], objects, imported), warnings=warnings))
             bpy.data.objects.remove(camera, do_unlink=True)

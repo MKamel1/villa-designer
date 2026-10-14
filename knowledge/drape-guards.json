@@ -1,0 +1,23 @@
+{
+  "schema": "drape-guards/1",
+  "records": [
+    {
+      "lesson_id": "drape-rigid-soft-goods",
+      "control_tier": [1, 2, 3],
+      "construction": "Pinned gravity cloth patterns produce closed shells from immutable physical garments; shelf textiles use independent rounded layers",
+      "check": "archpipe.drape_appearance.require_scene binds exact source/cache/policy, registered morphology and conservative forbidden-contact checks at export and render; neutral preview review remains required",
+      "stage": "Scene export and Stage 7 neutral preview before presentation",
+      "proof_file": "tests/test_drape.py",
+      "proofs": [
+        "test_real_board_values_fail_preregistered_screens_new_shells_pass",
+        "test_renamed_translated_real_sibling_reuses_shape_and_keeps_binding",
+        "test_every_cached_shell_closed_and_inside_unchanged_physical_envelope",
+        "test_real_mutations_refuse_cache_and_envelope",
+        "test_pre_registered_morphology_mutations_fire",
+        "test_live_two_process_trouser_determinism",
+        "test_render_replacements_do_not_change_c3_c4_c8_physical_values",
+        "test_neighbour_joinery_and_door_mutations_fire_on_real_shell"
+      ]
+    }
+  ]
+}

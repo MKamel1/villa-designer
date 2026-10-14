@@ -378,6 +378,29 @@ def add_material(name, spec, library_root, warnings):
                 normal_image = bpy.data.images.load(normal, check_existing=True)
                 normal_image.colorspace_settings.name = "Non-Color"
                 nt.links.new(triplanar_normal(nt, mapping.outputs["Vector"], normal_image), bsdf.inputs["Normal"])
+    if spec.get('cloth_weave_m'):
+        # ASSUMED woven appearance, metre-scaled independently of object size.
+        bsdf.inputs['Sheen Weight'].default_value = .28
+        bsdf.inputs['Sheen Roughness'].default_value = .7
+        coord = nt.nodes.new('ShaderNodeTexCoord')
+        waves = []
+        for direction in ('Y', 'Z'):
+            wave = nt.nodes.new('ShaderNodeTexWave')
+            wave.wave_type = 'BANDS'
+            wave.bands_direction = direction
+            wave.inputs['Scale'].default_value = 1 / spec['cloth_weave_m']
+            nt.links.new(coord.outputs['Object'], wave.inputs['Vector'])
+            waves.append(wave)
+        weave = nt.nodes.new('ShaderNodeMath')
+        weave.operation = 'MULTIPLY'
+        for i, wave in enumerate(waves):
+            nt.links.new(wave.outputs['Fac'], weave.inputs[i])
+        bump = nt.nodes.new('ShaderNodeBump')
+        bump.inputs['Strength'].default_value = .16
+        bump.inputs['Distance'].default_value = .00008
+        nt.links.new(weave.outputs[0], bump.inputs['Height'])
+        nt.links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])
+        mat['appearance_basis'] = 'ASSUMED subtle weave, sheen and fabric colour'
     if spec.get('procedural_gravel_m') or spec.get('procedural_stone_m'):
         # Geometry Position is metre-native world space: mesh dimensions and
         # object transforms never stretch the nominal mineral chip size.
@@ -464,6 +487,9 @@ def add_mesh_batch(specs, name, material, warnings, materials=None):
 
 def add_mesh_detail(obj, spec):
     """Apply authored edge rounding and smoothing only to a separate object."""
+    if spec.get("mesh_class") == "draped appearance mesh":
+        for face in obj.data.polygons:
+            face.use_smooth = True
     bevel_width = spec.get("bevel_m", 0)
     subdivision_levels = spec.get("subdivide", 0)
     if bevel_width <= 0 and subdivision_levels <= 0:
@@ -1769,8 +1795,10 @@ def render(scene_data, args):
     library_root = os.path.expandvars(os.path.expanduser(args.library_root or scene_data["library_root"]))
     materials = {name: add_material(name, spec, library_root, warnings) for name, spec in scene_data["materials"].items()}
     configure_glass(materials, scene_data["materials"])
-    objects = build_meshes(scene_data["meshes"], materials, scene_data["materials"], warnings)
-    build_climbers(scene_data["meshes"], objects, materials, warnings)
+    from archpipe.drape_appearance import needs_admission, rendered_meshes
+    render_meshes = rendered_meshes(scene_data) if needs_admission(scene_data) else scene_data['meshes']
+    objects = build_meshes(render_meshes, materials, scene_data["materials"], warnings)
+    build_climbers(render_meshes, objects, materials, warnings)
     switched_emitters = layered_emissive_materials(scene_data["meshes"], objects, scene_data["materials"])
     emissive_sources = []
     for spec in scene_data["meshes"]:

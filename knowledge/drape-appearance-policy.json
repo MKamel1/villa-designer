@@ -1,0 +1,15 @@
+{
+  "schema": "drape-appearance-policy/1",
+  "basis": "ASSUMED diagnostic screens pre-registered 2026-10-13 before measuring new meshes; these do not certify photographic realism",
+  "spacing_m": 0.004,
+  "thickness_m": 0.0008,
+  "maximum_plumb_angle_deg": 3.0,
+  "minimum_fold_relief_m": 0.0065,
+  "minimum_hem_range_m": 0.0015,
+  "gravity_m_s2": [0, 0, -9.81],
+  "seed": 13013,
+  "frames": 48,
+  "solver_quality": 8,
+  "cache_precision_decimal_places": 7,
+  "measurement": "Hanging centre: displacement between means of upper and lower quarter vertices divided by their vertical separation, converted to degrees. Fold relief: peak-to-peak x residual after least-squares quadratic fit against y on front-skin vertices in a 20 mm horizontal band halfway down. Hem range: highest minus lowest boundary vertex in the lowest 20 mm. All lengths metres; x along rail, y across depth, z upwards."
+}

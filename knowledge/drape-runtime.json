@@ -1,0 +1,7 @@
+{
+  "blender_version": "4.5.14 LTS",
+  "blender_sha256": "050c02562f81fe80ba616a80198fa02d381e60f8b61b8d39add881f4bca0d7d8",
+  "simulation_threads": 1,
+  "architecture": "Linux x86_64",
+  "scope": "Repeatability proven on this pinned workstation runtime; no cross-version claim"
+}
