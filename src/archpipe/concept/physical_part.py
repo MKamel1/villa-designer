@@ -90,7 +90,20 @@ def _key(p):
 class _FrozenFaces(tuple):
     """Immutable face snapshot shared by a part's geometry and proxy checks."""
     def __new__(cls, faces):
-        return super().__new__(cls, (tuple(tuple(p) for p in face) for face in faces))
+        value = super().__new__(cls, (tuple(tuple(p) for p in face) for face in faces))
+        object.__setattr__(value, '_value_hash', tuple.__hash__(value))
+        return value
+
+    def __hash__(self):
+        return self._value_hash
+
+    def __setattr__(self, name, value):
+        raise TypeError('immutable face snapshot')
+
+    def __reduce__(self):
+        # Recompute this process-local dictionary accelerator after copy or
+        # transport; never serialize a cached runtime hash as geometry data.
+        return type(self), (tuple(self),)
 
 
 def _freeze_faces(faces):

@@ -131,8 +131,10 @@ def render(args):
                     break
             except Exception:
                 pass
-        scene.render.resolution_x = 960
-        scene.render.resolution_y = 720 if not args.scene else 640
+        if args.require_gpu and scene.cycles.device != "GPU":
+            raise ValueError("requested GPU unavailable; neutral preview refuses CPU fallback")
+        scene.render.resolution_x = args.max_dimension
+        scene.render.resolution_y = round(args.max_dimension*(.75 if not args.scene else 2/3))
         scene.render.resolution_percentage = 100
         scene.world.use_nodes = True
         background = scene.world.node_tree.nodes["Background"]
@@ -142,6 +144,12 @@ def render(args):
         scene.view_settings.exposure = 0
         scene.render.image_settings.file_format = "PNG"
         return scene, objects, warnings
+
+    def renderer_receipt(scene):
+        preferences=bpy.context.preferences.addons['cycles'].preferences
+        return dict(device=scene.cycles.device,backend=preferences.compute_device_type,
+                    samples=args.samples,maximum_dimension=args.max_dimension,
+                    enabled_devices=[dict(name=d.name,type=d.type) for d in preferences.devices if d.use])
 
     if args.scene:
         scene, objects, warnings = setup(data["meshes"], data["materials"])
@@ -162,7 +170,7 @@ def render(args):
             # Keep the authored physical sensor aspect, including portrait.
             # Forcing 960x640 silently crops a correctly framed portrait view.
             width,height=view['resolution']
-            scale=960/max(width,height)
+            scale=args.max_dimension/max(width,height)
             scene.render.resolution_x=round(width*scale)
             scene.render.resolution_y=round(height*scale)
             camera, _ = builder.configure_camera(view)
@@ -170,7 +178,7 @@ def render(args):
             path = args.output / (view["id"] + "-neutral.png")
             scene.render.filepath = str(path)
             bpy.ops.render.render(write_still=True)
-            evidence.append(dict(id=view["id"], image=str(path), neutral=True,
+            evidence.append(dict(id=view["id"], image=str(path), neutral=True, renderer=renderer_receipt(scene),
                                  camera=view["camera"], neutral_physical_geometry_sha256=data.get("neutral_physical_geometry_sha256"), neutral_material_emission_off=True, neutral_preview_fill=data.get('neutral_preview_fill',[]), source_geometry_sha256=canonical_hash(data["meshes"]),
                                  resolution=[scene.render.resolution_x,scene.render.resolution_y],
                                  appearance_basis=data.get('appearance_basis'),
@@ -261,7 +269,7 @@ def render(args):
             path = args.output / (specimen["id"]+".png")
             scene.render.filepath = str(path)
             bpy.ops.render.render(write_still=True)
-            evidence.append(dict(id=specimen["id"], image=str(path), neutral=True, scale_reference_height_m=1.8,
+            evidence.append(dict(id=specimen["id"], image=str(path), neutral=True, renderer=renderer_receipt(scene), scale_reference_height_m=1.8,
                                  actual_bounds_m=[low, high], isolation_translation_m=[-v for v in origin],
                                  staging=dict(origin=origin, span=span, floor_z=staging_floor_z, camera_location=list(camera.location),
                                               camera_rotation=list(camera.rotation_euler), ortho_scale=camera_data.ortho_scale),
@@ -299,6 +307,8 @@ def main():
     parser.add_argument("--library", type=Path, default=Path("/home/omar/archpipe/assets/library"))
     parser.add_argument("--samples", type=int, default=32)
     parser.add_argument("--scene", action="store_true")
+    parser.add_argument("--max-dimension", type=int, default=960)
+    parser.add_argument("--require-gpu", action="store_true", help="Refuse CPU fallback; record actual backend")
     parser.add_argument("--candidate-view", type=Path)
     parser.add_argument("--reference-receipt", type=Path, help="Reuse before-preview camera, scale aid and neutral staging exactly")
     parser.add_argument("--views", nargs="+", default=[])

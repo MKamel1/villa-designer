@@ -15,6 +15,7 @@ import math
 from pathlib import Path
 import numpy as np
 from .imported_appearance import digest, encoded
+from . import drape_polish as polish
 
 
 def bounds(part):
@@ -165,14 +166,15 @@ def _admit_template(input_bytes,template_bytes):
         if errors:raise ValueError('; '.join(errors))
 
 
-@lru_cache(maxsize=32)
-def _trusted_template(input_bytes, cache_bytes):
+@lru_cache(maxsize=128)
+def _trusted_template(input_bytes, cache_bytes, polish_inputs):
     """Reuse admission of exact immutable file bytes, never mutable records."""
     data=json.loads(input_bytes);key=digest(data);cache=_cache(cache_bytes)
     if cache.get('schema')!='drape-cloth-cache/1':raise ValueError('invalid drape cache schema')
     if key not in cache['entries']:raise ValueError('uncached cloth input; run scripts/drape_build.py')
     template=cache['entries'][key]
     _admit_template(input_bytes,encoded(template))
+    template=polish.cached(data,template,*polish_inputs)
     # Keep face order while batching equal-arity runs for native-array
     # placement. This preserves exact values and avoids millions of Python
     # coordinate additions; mutable results are never returned from here.
@@ -194,14 +196,14 @@ def _native_hash(lengths, arrays):
 
 
 @lru_cache(maxsize=256)
-def _placed_hash(input_bytes,cache_bytes,origin):
-    template,_,chunks,_=_trusted_template(input_bytes,cache_bytes)
+def _placed_hash(input_bytes,cache_bytes,origin,polish_inputs):
+    template,_,chunks,_=_trusted_template(input_bytes,cache_bytes,polish_inputs)
     return _native_hash([len(f) for f in template['faces']],(chunk+origin for chunk in chunks))
 
 
-@lru_cache(maxsize=32)
-def _reference_geometry(input_bytes,cache_bytes):
-    template,_,chunks,skin=_trusted_template(input_bytes,cache_bytes)
+@lru_cache(maxsize=128)
+def _reference_geometry(input_bytes,cache_bytes,polish_inputs):
+    template,_,chunks,skin=_trusted_template(input_bytes,cache_bytes,polish_inputs)
     low=np.min([chunk.min(axis=(0,1)) for chunk in chunks],axis=0)
     high=np.max([chunk.max(axis=(0,1)) for chunk in chunks],axis=0)
     return tuple(low),tuple(high)
@@ -215,42 +217,52 @@ def make_reference(part):
     A read-back reference must match all expected fields before its measured
     bounds can supply conservative collision screening.
     """
-    data,origin,physical_bounds=local_input(part,include_bounds=True);input_bytes=encoded(data);cache_bytes=CACHE_PATH.read_bytes()
-    template,template_hash,_,_=_trusted_template(input_bytes,cache_bytes)
-    low,high=_reference_geometry(input_bytes,cache_bytes)
+    data,origin,physical_bounds=local_input(part,include_bounds=True);input_bytes=encoded(data);cache_bytes=CACHE_PATH.read_bytes();polish_inputs=polish.cache_binding(part)
+    template,template_hash,_,_=_trusted_template(input_bytes,cache_bytes,polish_inputs)
+    low,high=_reference_geometry(input_bytes,cache_bytes,polish_inputs)
     render_bounds=[low[k]+origin[k] for k in range(3)]+[high[k]+origin[k] for k in range(3)]
+    _source_world_enclosure(template,origin,physical_bounds)
     enclosure=_world_enclosure(template,render_bounds,physical_bounds)
     return dict(id=part['id'],mesh_class='draped appearance mesh',physical_part=False,
         appearance_reference=True,standin_id=part['id'],standin_sha256=digest(part),
         input_sha256=digest(data),template_sha256=template_hash,spacing_m=policy()['spacing_m'],
         material=part['material'],label='ASSUMED gravity-draped fabric and colour',
         garment_type=part.get('garment_type'),origin_m=origin,
-        appearance_sha256=_placed_hash(input_bytes,cache_bytes,tuple(origin)),
+        appearance_sha256=_placed_hash(input_bytes,cache_bytes,tuple(origin),polish_inputs),
         render_bounds_m=render_bounds,
         simulation=deepcopy(template['simulation']),enclosure=enclosure)
 
 
-def _world_enclosure(template,render_bounds,physical_bounds):
+def _source_world_enclosure(template,origin,physical_bounds):
+    # Shaping cannot launder a base-cache escape hidden by local-key rounding.
+    # Admit the source against exact live bounds before admitting its polish.
+    if 'source_enclosure_bounds_m' in template:
+        bb=template['source_enclosure_bounds_m']
+        _world_enclosure(template,[v+origin[k%3] for k,v in enumerate(bb)],physical_bounds,source=True)
+
+
+def _world_enclosure(template,render_bounds,physical_bounds,*,source=False):
     """Cache-key rounding never substitutes for actual physical extrema."""
     escape=max(0.,max(physical_bounds[k]-render_bounds[k] for k in range(3)),
         max(render_bounds[k+3]-physical_bounds[k+3] for k in range(3)))
-    if escape>policy()['spacing_m']:raise ValueError('cloth outside actual physical envelope')
+    limit=polish.policy()['maximum_envelope_escape_m'] if template.get('polish') and not source else policy()['spacing_m']
+    if escape>limit:raise ValueError('cloth outside actual physical envelope: '+str(escape)+' m')
     return dict(template['enclosure'],maximum_escape_m=escape)
 
 
 def make(part, cache=None):
-    data,origin,physical_bounds=local_input(part,include_bounds=True);key=digest(data)
+    data,origin,physical_bounds=local_input(part,include_bounds=True);key=digest(data);polish_inputs=polish.cache_binding(part)
     if cache is None:
         input_bytes=encoded(data);cache_bytes=CACHE_PATH.read_bytes()
-        template,template_hash,chunks,skin=_trusted_template(input_bytes,cache_bytes)
+        template,template_hash,chunks,skin=_trusted_template(input_bytes,cache_bytes,polish_inputs)
         placed_faces=[f for chunk in chunks for f in (chunk+origin).tolist()]
         placed_skin=(skin+origin).tolist()
-        appearance_hash=_placed_hash(input_bytes,cache_bytes,tuple(origin))
+        appearance_hash=_placed_hash(input_bytes,cache_bytes,tuple(origin),polish_inputs)
     else:
         if cache.get('schema')!='drape-cloth-cache/1':raise ValueError('invalid drape cache schema')
         if key not in cache['entries']:raise ValueError(part['id']+': uncached cloth input; run scripts/drape_build.py')
         template=cache['entries'][key]
-        _admit_template(encoded(data),encoded(template));template_hash=digest(template)
+        _admit_template(encoded(data),encoded(template));template=polish.apply(data,template,polish_inputs[0]);template_hash=digest(template)
         placed_faces=[[[p[k]+origin[k] for k in range(3)] for p in f] for f in template['faces']]
         placed_skin=[[p[k]+origin[k] for k in range(3)] for p in template['skin_vertices']]
         appearance_hash=_native_hash([len(f) for f in placed_faces],
@@ -263,7 +275,10 @@ def make(part, cache=None):
              faces=placed_faces,skin_vertices=placed_skin,
              boundary_indices=list(template['boundary_indices']),simulation=deepcopy(template['simulation']),
              enclosure=deepcopy(template['enclosure']))
+    for name in ('tailoring_features','body_front_faces','shoulder_return_sections','fold_top_faces','fold_hem_faces','polish'):
+        if name in template:row[name]=deepcopy(template[name])
     row['appearance_sha256']=appearance_hash
+    _source_world_enclosure(template,origin,physical_bounds)
     row['enclosure']=_world_enclosure(template,bounds(row),physical_bounds)
     return row
 
@@ -273,6 +288,7 @@ def bind_scene(scene):
     scene['draped_appearances']=[make_reference(p) for p in scene['meshes'] if eligible(p)]
     scene['drape_material_overrides']=_material_overrides(scene.get('materials',{}))
     scene['drape_policy_sha256']=digest(policy())
+    scene['drape_polish_policy_sha256']=digest(polish.policy())
     scene['drape_preview_status']='PENDING lead neutral-preview acceptance; ASSUMED fabric/colours'
     return scene
 
@@ -297,6 +313,7 @@ def require_scene(scene):
     actual=scene.get('draped_appearances')
     if actual is None or len(actual)!=len(parts):raise ValueError('missing garment appearances')
     if scene.get('drape_policy_sha256')!=digest(policy()):raise ValueError('stale drape policy')
+    if scene.get('drape_polish_policy_sha256')!=digest(polish.policy()):raise ValueError('stale drape polish policy')
     if scene.get('drape_material_overrides')!=_material_overrides(scene.get('materials',{})):
         raise ValueError('missing or stale garment appearance shader binding')
     seen=set()
@@ -406,4 +423,5 @@ def collision_findings(scene, appearances=None):
                 # occupied joinery from a wardrobe's internal air cavity.
                 if _occupied_centre(other['faces'],(low+high)/2):
                     out.append(row['id']+': enclosed by joinery/door/obstacle '+other['id'])
+    out.extend(polish.gap_findings(rows,appearances))
     return sorted(set(out))

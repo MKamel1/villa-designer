@@ -14,8 +14,9 @@ from archpipe.imported_appearance import digest
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--scene',type=Path,default=ROOT/'out/garments/final-scene.json')
+    parser.add_argument('--output',type=Path,default=ROOT/'out/drape')
     parser.add_argument('--fresh',action='store_true',help='Build and save fresh authoritative scene before evidence')
-    args=parser.parse_args();args.scene=args.scene.resolve();out=ROOT/'out/drape';out.mkdir(exist_ok=True)
+    args=parser.parse_args();args.scene=args.scene.resolve();out=args.output.resolve();out.mkdir(exist_ok=True,parents=True)
     build_seconds=None
     if args.fresh:
         from archpipe.concept import villa_render
@@ -58,6 +59,7 @@ def main():
     scene['views']=[v for v in scene['views'] if v['id'] in ('v31-dressing-hers','v32-dressing-his')]
     (out/'neutral-scene.json').write_text(json.dumps(scene,separators=(',',':')))
     physical=[p for p in scene['meshes'] if D.eligible(p)]
+    from archpipe import drape_polish as P
     receipt=dict(physical_geometry_sha256=digest(physical),appearance_sha256=digest(scene['draped_appearances']),
                  full_build_seconds=build_seconds,full_build_budget_seconds=120,
                  full_build_budget_pass=build_seconds is not None and build_seconds<120,
@@ -65,9 +67,10 @@ def main():
                  physical_source=str(args.scene.relative_to(ROOT)) if args.scene.is_relative_to(ROOT) else str(args.scene),policy=D.policy(),
                  camera_sha256=digest(scene['views']),neutral_preview_fill=fill,
                  camera_comparison_unchanged=all(v['camera']==next(r for r in old if r['id']==v['id'])['camera'] for v in scene['views']),
-                 collisions=D.collision_findings(scene),
+                 collisions=D.collision_findings(scene),polish_policy=P.policy(),
+                 hanging_gaps=P.hanging_gaps(scene['meshes'],scene['draped_appearances']),
                  measurements=[dict(id=p['id'],metrics=D.measure(by[p['id']]['skin_vertices'],by[p['id']]['boundary_indices']) if p.get('garment_type') else None,
-                                    enclosure=p['enclosure']) for p in scene['draped_appearances']])
+                                    enclosure=p['enclosure'],polish_metrics=P.metrics(by[p['id']]) if p.get('garment_type') in (None,'shirt','jacket') else None) for p in scene['draped_appearances']])
     (out/'measurements.json').write_text(json.dumps(receipt,indent=2)+'\n')
     print(json.dumps(dict(physical_count=len(physical),collisions=receipt['collisions'])))
     if build_seconds is not None and build_seconds>=120:

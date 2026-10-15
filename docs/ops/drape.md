@@ -96,3 +96,71 @@ lead acceptance pending until the lead reviews them. Run `tests.test_drape`,
 then `scripts/verify.py --portable` under normal and empty HOME. The lead owns
 full-suite runs and commits. Report paths in `docs/drape-report.md` and retain
 its lessons-to-register line.
+
+## Garment polish after the cached drape (2026-10-14)
+
+`archpipe.drape_polish` shapes a separately bound appearance after admission of
+that immutable cache. Never rewrite/rebake the gravity cache for this step.
+`knowledge/drape-polish-policy.json` pre-registers ASSUMED compressed-hanger
+panel depths, stand/fall/placket/lapel dimensions, rounded shoulder returns,
+exterior tailoring, folded relief and per-item drift. Its exact-envelope rule
+is stricter than the inherited drape's 4 mm allowance; the hanging gap stays
+27 mm. Conflicts refuse, with a measured distance. Both the base cache and
+polished geometry retain exact live-physical-envelope admission, including
+local-key rounding edge cases.
+
+Recover the relaxed panel cells and their consistent winding; a local fold
+may legitimately turn its normal away from the overall front direction.
+Sew eight-segment curved boundary returns before closing fabric thickness.
+Measure actual front triangles to attach collar points and lapels: fixed
+front coordinates can bury a valid-looking feature after body inflation.
+Feature extents alone do not establish exterior visibility or curved returns.
+Shelf pieces use `scene_reproducibility.stable_seed`, eight bounded per-item
+variants, dimension-dependent offsets/rotation, rounded edges and concave top
+caps. Test every cached source size and all eight variants; a wide sportswear
+sample cannot prove narrow drawer pieces fit.
+
+Run `scripts/drape_evidence.py --fresh --output out/drape-polish` to produce
+fresh complete-build timing, context and isolated inputs plus measurements.
+Render `shirt jacket folded-stack` and the unchanged v31/v32 with the neutral
+reader, `--samples 24 --max-dimension 960 --require-gpu`, and the original
+`out/drape/isolated/isolated-preview-evidence.json` reference receipt for
+isolated staging. The GPU requirement refuses processor fallback and writes
+actual backend/device evidence. Keep the configured graphics lock and one
+small preview batch at a time. Compare image and receipt hashes after the
+last code change. Review isolated and context images before acceptance;
+report procedural collar/cuff/fold defects that remain. Do not make a
+presentation set. Also run `tests.test_drape_polish` and retain the report at
+`docs/drape-polish-report.md`, including a lessons-to-register line.
+
+Derived construction also needs a portable output cache. Run
+`scripts/drape_polish_build.py` after changing its construction/policy; it
+computes all 42 source/variant inputs in two project-Python processes and
+atomically promotes only identical outputs to
+`knowledge/drape-polish-cache.json.gz`. This is separate from the intact
+original gravity cache. Normal builds and Blender validate/read the exact
+stored derived mesh; rebuilding normals in Blender changed local coordinates
+at approximately 1e-18 m and invalidated exact template identity. Actual cache
+bytes participate in admission keys, so warm reads cannot hide file mutations.
+Use the live Blender read-back regression before GPU contexts. For stacks,
+require a front free-edge groove distinct from the continuous rear fold;
+uniform perimeter waists plus sag still resemble upholstered pads.
+
+The final folded variant also has a separately closed, 0.8 mm turned front
+hem, sized from the measured piece. Its bound face ranges supply actual return
+height/depth screens; flattening either dimension refuses. Frozen smooth-pad
+and first-polish stack values remain rejection evidence. Exact zero escape
+applies to the polished shirts/jackets and folded shelf/drawer pieces, measured
+against live physical extrema as well as cache-local envelopes. Unpolished
+trousers retain the original drape allowance; disclose those inherited rows
+separately. A changed source scene can be supplied to the derived bake using
+`--scene path/to/saved-scene.json`; missing original gravity inputs still
+require the original bounded cloth bake first.
+
+Budget repair must retain complete value identity: imported-model cache keys
+may use ordered face lengths and exact finite-float coordinate buffers plus
+canonical remaining metadata, reconstructing the former JSON input before
+unchanged construction. Other numeric representations use the original path.
+Compare against the frozen old selector/JSON constructor on real inputs,
+coordinate/order/pose/metadata/type mutations and independent returned copies.
+Never trade a cheaper identity test for source or physical admission.

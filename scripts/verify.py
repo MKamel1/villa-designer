@@ -204,6 +204,12 @@ def main() -> int:
     expect('real frozen board garments fail preregistered appearance screens',
            all(drape.appearance_findings(drape.frozen_appearance(p))
                for p in frozen_boards['parts'] if p.get('garment_type')))
+    from archpipe import drape_polish
+    polish_before=json.loads(gzip.decompress((ROOT/'tests/fixtures/drape-polish-before.json.gz').read_bytes()))
+    expect('actual frozen thin profiles, generic tailoring and planar stacks fail polish screens',
+           all(drape_polish.findings(row) for row in polish_before['appearances']))
+    expect('garment polish preserves original gravity cache bytes',
+           __import__('hashlib').sha256(drape.CACHE_PATH.read_bytes()).hexdigest()==polish_before['cache_sha256'])
     drape_registry=json.loads((ROOT/'knowledge/drape-guards.json').read_text())
     expect('drape appearance controls have registered proving tests',all(
         (ROOT/r['proof_file']).is_file() and all('def '+name+'(' in (ROOT/r['proof_file']).read_text()
