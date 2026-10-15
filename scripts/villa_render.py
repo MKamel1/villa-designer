@@ -7,7 +7,7 @@ import shlex
 import subprocess
 import sys
 import time
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -21,13 +21,14 @@ from render_remote import _ssh, _push
 from workstation import deploy, digest
 
 
-def remote_preflight(host: str, release: str, job: str, blender: str) -> dict:
+def remote_preflight(host: str, release: str, job: str, blender: str,
+                     expected_version: str = "4.5.14") -> dict:
     """Check where Blender executes, before launching or reusing its job."""
     remote_check = [release + "/scripts/preflight.py", "--root", release,
                     "--script", release + "/src/archpipe/blender/villa_scene.py",
                     "--out", job + "/out", "--temp", job + "/tmp",
                     "--record", job + "/out/execution-context.json",
-                    "--tool", "blender", blender, "4.5.14"]
+                    "--tool", "blender", blender, expected_version]
     checked = _ssh(host, "cd " + shlex.quote(release) +
                    " && NO_COLOR=1 PYTHONPATH=" + shlex.quote(release + "/src") +
                    ' "$(command -v python3)" ' + shlex.join(remote_check))
@@ -41,7 +42,7 @@ def remote_preflight(host: str, release: str, job: str, blender: str) -> dict:
         valid = (context["schema"] == "execution-context/1" and
                  context["working_directory"] == release and
                  context["tools"]["blender"]["requested_path"] == blender and
-                 context["tools"]["blender"]["version"] == "4.5.14" and
+                 context["tools"]["blender"]["version"] == expected_version and
                  context["environment"]["NO_COLOR"] == "1" and
                  release + "/src/archpipe/blender/villa_scene.py" in context["scripts"])
     except (ValueError, KeyError, TypeError):
@@ -147,7 +148,10 @@ def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
 
 def run(scene_path: Path, views: str, samples: int | None, resolution: str | None,
         host: str, ies_dir: Path, dry_run: bool = False, calibrate: bool = False,
-        measure_lighting: bool = False, allow_stale_scene: bool = False) -> dict:
+        measure_lighting: bool = False, allow_stale_scene: bool = False,
+        blender: str | None = None, expected_version: str = "4.5.14") -> dict:
+    if blender is not None and not PurePosixPath(blender).is_absolute():
+        raise ValueError("--blender must be an absolute workstation executable path")
     scene_path = scene_path.resolve()
     context = project_context(ROOT, Path(__file__).resolve(), "villa-render")
     scene = json.loads(scene_path.read_text(encoding="utf-8"))
@@ -178,7 +182,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     # the renderer's own code is part of the identity: a changed renderer must not resume an old job's results
     # (it did once: a calibration after a renderer change returned the previous run's files)
     code = b"".join((ROOT / "src/archpipe/blender" / n).read_bytes() for n in ("villa_scene.py", "photoreal.py",
-                                                                                 "build_scene.py", "presentation.py"))
+                                                                                 "build_scene.py", "presentation.py", "sky_compat.py"))
     code += (ROOT / "src/archpipe/villa_render_contract.py").read_bytes()
     code += (ROOT / "src/archpipe/task_probe.py").read_bytes()
     code += (ROOT / "src/archpipe/scene_reproducibility.py").read_bytes()
@@ -187,8 +191,11 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     code += (ROOT / "scripts/preflight.py").read_bytes()
     identity = digest(scene_path.read_bytes() + code + b"".join(files[n].read_bytes() for n in ies_names)
                       + json.dumps([selected, samples, resolution, calibrate, measure_lighting], sort_keys=True).encode())[:24]
+    renderer = {"executable": blender or "~/opt/blender/blender", "expected_version": expected_version}
+    if blender is not None or expected_version != "4.5.14":
+        identity = digest((identity + json.dumps(renderer, sort_keys=True)).encode())[:24]
     if dry_run:
-        return {"dry_run": True, "views": selected, "ies": ies_names, "job_id": identity,
+        return {"dry_run": True, "renderer": renderer, "views": selected, "ies": ies_names, "job_id": identity,
                 "execution_context": context, "remote_preflight": "not run (dry run)",
                 "host": host, "scene": str(scene_path), "scene_provenance": provenance,
                 "scene_source_hash": scene_hash, "stale_scene": stale, "label": stale_label}
@@ -207,7 +214,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
             "--", "--scene", job + "/scene.json", "--views", "none" if not selected else ",".join(selected), "--out", job + "/out",
             "--ies-dir", remote_ies, "--library-root", scene["library_root"]]
     # Workstation Blender is installed under ~/opt, outside the archpipe root.
-    argv[0] = root.rsplit("/archpipe", 1)[0] + "/opt/blender/blender"
+    argv[0] = blender or root.rsplit("/archpipe", 1)[0] + "/opt/blender/blender"
     if samples is not None:
         argv.extend(["--samples", str(samples)])
     if resolution:
@@ -219,7 +226,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     # Run the same boundary on the machine that actually executes Blender.
     # Resolve python3 there, record its actual interpreter, require absolute
     # renderer paths and the pinned release from 10-blender.sh.
-    remote_context = remote_preflight(host, release, job, argv[0])
+    remote_context = remote_preflight(host, release, job, argv[0], expected_version)
     write_record({"local": context, "remote": remote_context},
                  ROOT / "out/villa-render-execution-context.json")
     command = ("cd " + shlex.quote(release) + " && NO_COLOR=1 TMP=" + shlex.quote(job + "/tmp") +
@@ -357,6 +364,8 @@ def main():
     ap.add_argument("--samples", type=int)
     ap.add_argument("--res")
     ap.add_argument("--host", default="ai-workstation")
+    ap.add_argument("--blender", help="Absolute workstation executable; default keeps the production symlink")
+    ap.add_argument("--expected-version", default="4.5.14")
     ap.add_argument("--ies-dir", type=Path, default=ROOT / "out/villa/render-d1/ies")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--calibrate", action="store_true")
@@ -372,7 +381,7 @@ def main():
         scene_path = a.scene
     try:
         result = run(scene_path, a.views, a.samples, a.res, a.host, a.ies_dir, a.dry_run, a.calibrate,
-                     a.measure_lighting, a.allow_stale_scene)
+                     a.measure_lighting, a.allow_stale_scene, a.blender, a.expected_version)
     except (ValueError, ContextError) as exc:
         ap.error(str(exc))
     print(json.dumps(result, indent=2))

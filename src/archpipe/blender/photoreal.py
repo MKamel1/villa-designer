@@ -130,7 +130,8 @@ def daylight_world(sun_alt_deg, sun_az_deg, view_hdri=None, view_rotation_deg=0.
     out = nt.nodes.new("ShaderNodeOutputWorld")
 
     sky = nt.nodes.new("ShaderNodeTexSky")
-    sky.sky_type = "NISHITA"
+    from archpipe.blender.sky_compat import configure_legacy_sky
+    configure_legacy_sky(sky)
     sky.sun_disc = True
     sky.sun_size = math.radians(0.545)
     sky.sun_elevation = math.radians(sun_alt_deg)

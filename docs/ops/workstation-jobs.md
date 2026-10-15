@@ -110,3 +110,38 @@ inputs hashed before any in-place model save. Revit/pyRevit execution of this
 migration remains unproven on Linux. See `docs/c14b-report.md` for per-command
 failure predicates and frozen Blender replay evidence. A stage proof records
 execution evidence; client design gates still require their own reviews.
+
+## Side-by-side Blender evaluation on the Linux workstation
+
+`scripts/blender52_eval.py` is a local evaluation driver for the approved
+5.2.2 comparison, not a deployment or production-default change. It uses
+the same graphics lock and explicit executable/version preflight, an
+isolated Blender configuration, low process priority and content-bound
+receipts under `out/blender52/`. Background Blender must have host GPU
+access. The managed sandbox can hide the graphics driver and hang during
+PulseAudio shutdown even after Python tests print success; preserve its
+exit status and rerun in the approved host context. The evaluation wrapper
+refuses to record GPU timings without an enabled graphics device.
+Use `scripts/verify.py --portable` on Linux; plain verification also requires
+the Windows installed Revit family corpus. Do not change that native gate
+to make a Linux evaluation pass.
+
+The version adapter is `blender.sky_compat.configure_legacy_sky`; both daylight
+and calibration builders preserve the old single-scattering atmosphere. Run
+`tests/blender_version_api.py` under both explicit binaries before rendering.
+Keep per-view exposure fixed to the reference receipt. Differences in evaluated
+modifier geometry must be listed separately from colour/pixel differences.
+Cloth input seeds bind runtime identity: a normal version-changing rebake
+reseeds its pattern. Use a separately recorded fixed-pattern control and
+`summarize_blender52.controlled_cloth_attribution` before claiming solver drift.
+Never replace the pinned cache with an evaluation rebake without its normal
+admission and neutral preview review. The MCP installation/SSH stdio procedure
+is in `docs/ops/blender-mcp.md`; it uses its own 5.2 user configuration.
+Lighting tables preserve every recorded point index along with its room and
+label: kitchen/pillow labels repeat and must never be used alone as keys.
+
+Exercise affected standalone Blender scripts as well as the shared API helper.
+Blender ignores `PYTHONPATH` by default; a standalone entry point must resolve
+shared imports from its own checkout. The isolated relocated-checkout import
+regression covers `calibrate_sky.py`, and actual calibration runs in both
+runtimes verify the rendering entry point.

@@ -81,3 +81,17 @@ Prefer an automatic check (a `render_qa` check with a unit test, a
 catches the real defect: reproduce it (`render_hyperreal.py --qa-break`, or
 the historical input) and watch it fail. A guard that has only seen
 synthetic data can miss the real case; two guards here did at first.
+
+For an approved side-by-side Blender evaluation, select both the explicit
+executable and expected version; retain the production default and isolated
+output/configuration. Run `tests/blender_version_api.py` in both runtimes
+before a batch, and execute affected standalone entry points too. Blender
+ignores PYTHONPATH by default: shared imports must resolve from each entry
+point’s checkout and pass an isolated relocated-checkout import test. Sky API renames must retain the legacy light-source model
+and atmospheric defaults, rather than accepting new node defaults. Lock
+camera/exposure/settings and report every evaluated geometry difference.
+A version-bound procedural seed can change the initial cloth pattern: require
+equal recorded pattern seeds and initial-vertex hashes before attributing
+output differences to the solver. Keep normal migration and fixed-pattern
+controls in separate receipts. See `docs/ops/workstation-jobs.md` and
+`scripts/summarize_blender52.py` for the evaluation guards.

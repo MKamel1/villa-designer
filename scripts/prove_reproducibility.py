@@ -66,6 +66,7 @@ def main():
     parser.add_argument('--ies-dir', type=Path, required=True)
     parser.add_argument('--library-root', type=Path, required=True)
     parser.add_argument('--blender', type=Path, required=True)
+    parser.add_argument('--expected-version', default='4.5.14')
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--samples', type=int, default=256)
     parser.add_argument('--compare-recorded', action='store_true', help='Compare completed isolated processes without rerunning Blender')
@@ -74,7 +75,7 @@ def main():
     from archpipe.execution_context import Tool, project_context
     project_context(ROOT, Path(__file__).resolve(), 'reproducibility',
                               inputs=[args.scene.resolve()], output=root,
-                              tools=[Tool('blender', args.blender.resolve(), '4.5.14')])
+                              tools=[Tool('blender', args.blender.resolve(), args.expected_version)])
     scene = json.loads(args.scene.read_text())
     optics = optical_file_hashes(scene, args.ies_dir)
     code = runtime_sources()
