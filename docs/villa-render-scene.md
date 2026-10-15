@@ -166,12 +166,29 @@ Units metres. Model axes: x street -> garden, y party wall -> east face, z absol
   Evening and night: the respective named high-dynamic-range image scaled to `horizontal_lux`.
   `exterior-dusk` selects `sky.evening`; it can use its own named exposure preset. Only `day` is reported as
   daylight to villa image-quality checks.
-- With `exposure_mode: set-metered`, `photoreal.camera_meter` meters each selected view with a fast pre-render;
-  the median exposure for each named `view.exposure` state is locked across the selected set. The fixed-exposure
-  render remains the comparison image; the renderer also develops a metered view from the same linear render.
-  The view report records `locked_ev100` and `view_meter`. Without this mode, the named preset
-  `exposure[view.exposure].ev100` is used. White balance is the stated preset; the view transform is AgX.
-  Keep the same selected comparison set when comparing locked exposures.
+- With `exposure_mode: set-metered`, `photoreal.camera_meter` meters the complete authored cohort for every
+  requested exposure state, even when only one view is requested. The median is locked across that state.
+  The contract refuses other exposure modes. The locked render remains the comparison image; its linear
+  image is retained for explicitly labelled diagnostic developments, which cannot replace presentation.
+  The view report records `exposure_stops`, `exposure_state`, `exposure_metered_over`, `locked_ev100` and
+  `view_meter`. White balance is the stated preset; the view transform is AgX. A historical lock flag without
+  a named cohort does not establish equal comparison settings. ADR-0013 provides no per-view exemption.
+  Captions carry measured settings and nonpassing QA measurements in `render_evidence`; warnings and
+  failures remain applicable. The preset exposure object alone is not the measured camera gain.
+- Subject resolution follows mounted assembly ownership, rather than treating a labelled plinth as the
+  complete furniture item. Measured reports must carry each declared subject exactly once and every
+  expected assembly member; an omitted row cannot bypass the member check. Views declaring `require_full_subject_frame` project actual authored vertices;
+  conservative bounding-box corners can overstate a crop and cannot alone justify moving the camera.
+  Before interpreting a dark view, compare actual exposure cohorts, linear scene values and unchanged
+  subjects/lighting. Shaded client intent is preserved and faithful darkness disclosed, with failures retained.
+  The real dark-view cases and renamed/clean controls are frozen in `tests/test_darkviews.py`.
+- Rendering requires an actual graphics device unless `--cpu` explicitly requests CPU diagnosis.
+  `select_cycles_device` checks this before scene assembly; an unavailable device or a CPU-only inventory
+  refuses instead of silently falling back. Every view and `render_evidence` caption records the actual
+  device, backend and selected device names. Missing legacy device records are identified explicitly.
+  A sandbox that hides the NVIDIA driver cannot supply a comparable GPU draft: use the authorised
+  workstation GPU boundary and retain its shared graphics lock. Mesh equality and exit zero do not
+  establish equivalent CPU/GPU rendering. Freeze the actual unavailable-device inventory when diagnosing.
 - `view.hide_meshes` hides only the listed mesh identifiers in that view, used to open a doorway leaf;
   `view.caption_notes` appears in the driver caption. `camera.home_room` names the authored room;
   `camera.reframed` is false if unchanged, true if moved within the room, or `"doorway"` if moved
@@ -225,4 +242,3 @@ linear probe images as OpenEXR files.
 For a storage view, declare whether sliding fronts are open and show stocked shelves or floor zones inside the checked envelope. The scene exports the state and labels stored items as dressing. Check every item against the stair or ramp soffit before export. Each windowless store needs a held lighting card, a fitting at every practical bay, and a reported achieved floor value; `store-ramp` uses the IES frequent-use storage card of 50 maintained lux and three ASSUMED opal battens. Inspect the isolated close-up before accepting the geometry or light in a final view.
 
 For each indoor plant, use a measured potted asset and declare the finished floor or furniture-top support elevation. `villa_render.indoor_plant_violations` checks pot identity, measured bounds, support contact and the sofa-to-television corridor for every room. Run it before `write()`, then inspect an eye-level preview to confirm that the pot reads on the floor and the television remains visible from the seats.
-

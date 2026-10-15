@@ -165,7 +165,8 @@ def check(image_path, qa: dict) -> dict:
     # A fixed camera over a design that moves: the old detail view was named
     # for a pendant it never framed, and nothing noticed.
     for sub in qa.get("subjects", []):
-        add(f"view_subject:{sub['id']}", "PASS" if sub.get("in_frame") else "FAIL",
+        framed = sub.get("full_frame") if qa.get("require_full_subject_frame") else sub.get("in_frame")
+        add(f"view_subject:{sub['id']}", "PASS" if framed else "FAIL",
             f"coverage {sub.get('coverage')} screen {sub.get('screen')}" + (f" {sub['note']}" if sub.get("note") else ""),
             "The detail view was named for a pendant it never showed.")
     cam = qa.get("camera", {})

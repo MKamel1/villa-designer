@@ -21,11 +21,12 @@ def subject_frame_findings(view, scene):
     """
     if not view.get('require_full_subject_frame'):return []
     import numpy as np
+    from ..villa_render_contract import subject_meshes
     from .route_geometry import prop_framing_points
     c=view['camera'];eye=np.array(c['position']);yaw=math.atan2(c['target'][1]-eye[1],c['target'][0]-eye[0])
     half=view['resolution'][1]/view['resolution'][0]/2;out=[]
     for subject in view['subjects']:
-        points=[p for m in scene['meshes'] if m['id'].startswith(subject) or m.get('label')==subject for face in m['faces'] for p in face]
+        points=[p for m in subject_meshes(subject, scene['meshes']) for face in m['faces'] for p in face]
         for prop in scene.get('props',[]):
             if prop['id'].startswith(subject) or prop.get('label')==subject:points+=prop_framing_points(prop).tolist()
         if not points:

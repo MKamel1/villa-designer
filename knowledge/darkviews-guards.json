@@ -1,0 +1,69 @@
+{
+  "schema": "darkviews-guards/1",
+  "records": [
+    {
+      "lesson_id": "darkviews-locked-comparison",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Every villa caption includes measured exposure, its complete named cohort and nonpassing QA measurements; no exposure exemption",
+      "check": "archpipe.render_evidence.caption_evidence",
+      "proof_file": "tests/test_darkviews.py",
+      "proofs": [
+        "test_real_failure_caption_discloses_actual_lock_and_keeps_failure",
+        "test_historical_brightness_does_not_establish_equal_exposure",
+        "test_actual_cohort_meters_are_selection_independent"
+      ],
+      "fixture": "tests/fixtures/darkviews-real.json.gz",
+      "stage": "Stage 7 render caption and draft comparison"
+    },
+    {
+      "lesson_id": "darkviews-subject-binding",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Shared subject selection follows mounting assembly ownership; explicit whole-subject intent uses actual vertices; measured rows must match every declared subject exactly once",
+      "check": "archpipe.render_evidence.require_subject_bindings; archpipe.concept.garden_render_review.subject_frame_findings; archpipe.render_qa.check",
+      "proof_file": "tests/test_darkviews.py",
+      "proofs": [
+        "test_real_assembly_binding_refuses_plinth_only_and_accepts_complete",
+        "test_real_plant_vertices_fit_without_camera_motion_and_renamed_sibling",
+        "test_qa_obeys_explicit_whole_subject_intent",
+        "test_real_missing_subject_row_and_renamed_sibling_refuse"
+      ],
+      "fixture": "tests/fixtures/darkviews-real.json.gz",
+      "stage": "Stage 7 scene contract, renderer subject report and caption"
+    },
+    {
+      "lesson_id": "darkviews-probe-archive-layout",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Resolve generated, local archive and worker archive photometry roots explicitly before assembly; never invent missing files",
+      "check": "scripts.garden_view_probes.resolve_probe_photometry",
+      "proof_file": "tests/test_darkviews.py",
+      "proofs": [
+        "test_local_and_worker_photometry_roots_clean_missing_and_renamed"
+      ],
+      "stage": "Stage 7 diagnostic probe input resolution"
+    },
+    {
+      "lesson_id": "darkviews-gpu-fallback",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Select a real OPTIX/CUDA graphics device before assembly; missing graphics refuses unless CPU diagnosis was explicitly requested; report and caption actual device",
+      "check": "archpipe.blender.villa_scene.select_cycles_device",
+      "proof_file": "tests/test_darkviews.py",
+      "proofs": [
+        "test_real_unavailable_graphics_cannot_silently_fall_back_to_cpu"
+      ],
+      "fixture": "tests/fixtures/darkviews-device-before.json",
+      "stage": "Stage 7 render device preflight, before assembly"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "OPTIX": {
+    "devices": []
+  },
+  "CUDA": {
+    "devices": []
+  }
+}

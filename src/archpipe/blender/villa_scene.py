@@ -737,7 +737,7 @@ def subjects(view, mesh_specs, objects, imported_props=()):
     result = []
     scene = bpy.context.scene
     for subject in view["subjects"]:
-        matches = [m for m in mesh_specs if m["id"] == subject or m["id"].startswith(subject) or m.get("room") == subject or m.get("label") == subject]
+        matches = contract.subject_meshes(subject, mesh_specs)
         full_intent = view.get('require_full_subject_frame', False)
         coords = [world_to_camera_view(scene, scene.camera, objects[m["id"]].matrix_world @ Vector(point))
                   for m in matches for point in
@@ -1451,24 +1451,33 @@ def visible_props(imported):
     return records
 
 
+def select_cycles_device(preferences, cpu=False):
+    """Require a real graphics device unless CPU diagnosis was explicit."""
+    if cpu:
+        return {"device": "CPU", "backend": None, "devices": [], "explicit_cpu": True}
+    for backend in ("OPTIX", "CUDA"):
+        try:
+            preferences.compute_device_type = backend
+            preferences.get_devices()
+            devices = preferences.get_devices_for_type(backend)
+            graphics = [device for device in devices if device.type != "CPU"]
+            if not graphics:
+                continue
+            for device in devices:
+                device.use = device.type != "CPU"
+            return {"device": "GPU", "backend": backend,
+                    "devices": [device.name for device in graphics], "explicit_cpu": False}
+        except Exception:
+            continue
+    raise RuntimeError("GPU requested but no usable Cycles graphics device is available; "
+                       "check driver/sandbox access, or request --cpu explicitly for labelled CPU diagnosis")
+
+
 def configure_cycles(cpu):
     scene = bpy.context.scene
     scene.render.engine = "CYCLES"
-    scene.cycles.device = "CPU"
-    if not cpu:
-        prefs = bpy.context.preferences.addons["cycles"].preferences
-        for backend in ("OPTIX", "CUDA"):
-            try:
-                prefs.get_devices()
-                prefs.compute_device_type = backend
-                devices = prefs.get_devices_for_type(backend)
-                if devices:
-                    for device in devices:
-                        device.use = device.type != "CPU"
-                    scene.cycles.device = "GPU"
-                    break
-            except Exception:
-                pass
+    device = select_cycles_device(None if cpu else bpy.context.preferences.addons["cycles"].preferences, cpu)
+    scene.cycles.device = device["device"]
     scene.cycles.seed = 0
     scene.cycles.use_animated_seed = False
     scene.cycles.use_adaptive_sampling = True
@@ -1486,6 +1495,7 @@ def configure_cycles(cpu):
     scene.cycles.transmission_bounces = 16
     scene.cycles.transparent_max_bounces = 16
     scene.cycles.max_bounces = 16
+    return device
 
 
 def calibrate(scene_data, args):
@@ -1814,6 +1824,9 @@ def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mes
 
 
 def render(scene_data, args):
+    # Resolve the actual execution device before expensive scene assembly.
+    # A requested GPU render must never silently become a CPU comparison.
+    select_cycles_device(None if args.cpu else bpy.context.preferences.addons["cycles"].preferences, args.cpu)
     from archpipe.imported_appearance import require_scene, needs_scene_admission
     if needs_scene_admission(scene_data):
         require_scene(scene_data)
@@ -1863,7 +1876,7 @@ def render(scene_data, args):
     lights = {l["id"]: add_light(l, args.ies_dir) for l in scene_data["lights"]}
     full_power = {ident: obj.data.energy for ident, obj in lights.items()}
     mesh_by_id = {mesh["id"]: mesh for mesh in scene_data["meshes"]}
-    configure_cycles(args.cpu)
+    render_device = configure_cycles(args.cpu)
     receipt = evaluated_scene_receipt(scene_data, curtain_objects)
     with open(os.path.join(args.out, "scene-receipt.json"), "w", encoding="utf-8") as stream:
         json.dump(receipt, stream, indent=2)
@@ -2019,6 +2032,7 @@ def render(scene_data, args):
                                "duvet_y": [bounds[axis], bounds[axis + 3]],
                                "duvet_z_min": bounds[2]})
         report = {"view": view["id"], "state": view["state"], "samples": s.cycles.samples,
+                  "render_device": render_device,
                   "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
                   "lights_on_count": sum(not obj.hide_render for obj in lights.values()), "subjects": subject_result,
                   "imported_props": prop_result,
