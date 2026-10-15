@@ -1,0 +1,56 @@
+{
+  "schema": "exposure-group-guards/1",
+  "records": [
+    {
+      "lesson_id": "dominant-light-exposure-policy",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Pre-register source-majority rule; derive membership from frozen source isolations; meter each complete group; bind one exposure and authored-population white balance to every receipt and caption",
+      "check": "archpipe.exposure_groups.require_record; archpipe.exposure_groups.require_receipts",
+      "proof_file": "tests/test_exposure_groups.py",
+      "proofs": [
+        "test_real_v15_v29_v36_rule_and_clean_case",
+        "test_real_membership_mutation_and_renamed_sibling_refuse",
+        "test_real_receipt_wrong_group_gain_white_balance_and_subset_refuse",
+        "test_stale_transport_view_fraction_and_population_refuse",
+        "test_group_meter_is_selection_independent",
+        "test_actual_gpu_receipts_obey_locks_and_mutations_refuse"
+      ],
+      "fixture": "tests/fixtures/exposure-groups-real.json",
+      "stage": "Stage 7 export, renderer admission, measured receipt and caption"
+    },
+    {
+      "lesson_id": "dominant-light-source-binding",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Transport identity includes separate renderer appearance records, material overrides and policies; exact original-scene migration preserves all measured values",
+      "check": "archpipe.exposure_groups.transport_digest; archpipe.exposure_groups.require_record",
+      "proof_file": "tests/test_exposure_groups.py",
+      "proofs": [
+        "test_real_appearance_source_changes_and_sibling_refuse",
+        "test_real_baseline_appearance_difference_is_not_transport_equality"
+      ],
+      "fixture": "tests/fixtures/exposure-groups-real.json",
+      "stage": "Stage 7 source-isolation reuse and export admission"
+    },
+    {
+      "lesson_id": "dominant-light-final-view-context",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Portable policy verification consumes one complete final build, including authored opened doors and curtains; never join raw view declarations to empty-view geometry",
+      "check": "scripts.verify.main; archpipe.exposure_groups.require_record",
+      "proof_file": "tests/test_exposure_groups.py",
+      "proofs": [
+        "test_real_raw_view_declarations_omit_final_visibility_and_refuse"
+      ],
+      "fixture": "tests/fixtures/exposure-groups-pre-mount-views.json",
+      "stage": "Stage 7 portable policy verification"
+    }
+  ]
+}

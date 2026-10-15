@@ -2755,8 +2755,8 @@ def _VIEWS(lay=None, resolve=True):
     V[-1]["caption_notes"] = ["North garden: open-sky standing camera, showing the left Fatsia/Aspidistra/spider-plant/mondo grouping in ground-level soil. Presentation companions v37, v39 and the G4d evening view show the accent planting and hanging retreat. Bistro and lounge pots removed per client 2026-10-06. Hanging retreat under the GF balcony shown in companion v39: client decision 2026-10-06; structural check pending. Authored botanical appearances ASSUMED; Egypt nursery performance UNVERIFIED."]
     V[-1]["require_full_subject_frame"] = True
     V[-1]["caption_notes"].append(
-        "Shaded courtyard by client preference. All design lamps are off. The exterior-day whole-set exposure "
-        "is retained; dark foliage and soil may lose detail. Read the measured exposure cohort and image QA "
+        "Shaded courtyard by client preference. All design lamps are off. The pre-registered dominant-light group exposure "
+        "is reported; dark foliage and soil may lose detail. Read the measured exposure cohort and image QA "
         "in render_evidence; a crushed-shadow failure remains a presentation limitation, not an approved exemption.")
     v("v37-north-garden-lounge", "North garden — grape ivy and foliage accent through the lounge", "day",
       [4.00, -27.40, B + 1.35], [.4781496760738273, -24.3252447282807, B + 1.35], 24,
@@ -2799,7 +2799,7 @@ def _VIEWS(lay=None, resolve=True):
                               "the side pockets; each open bay has an ASSUMED internal LED strip. "
                               "Dressing inside: vacuum, suitcase, seasonal boxes and folded linens (ASSUMED)."]
     V[-1]["caption_notes"].append(
-        "Storage cavities are shown at the whole-day comparison exposure, with ambient at 50 percent and "
+        "Storage cavities are shown at their reported dominant-light group exposure, with ambient at 50 percent and "
         "accent at full output. Their dark interiors lose legibility at that lock. Historical separately "
         "metered brightness is not a like-for-like design comparison. Read measured exposure and image QA "
         "in render_evidence; any crushed-shadow failure remains unresolved.")
@@ -2962,7 +2962,7 @@ def provenance_inputs(root=None):
     inputs = sorted((root / "src/archpipe").rglob("*.py"))
     inputs += [root / name for name in (
         "ops/workstation/library-manifest.json", "knowledge/garden-palette.json", "knowledge/site-orientation.json",
-        "knowledge/c4-final-approvals.json",
+        "knowledge/c4-final-approvals.json", "knowledge/exposure-group-rule.json",
         "knowledge/c3-part-exemptions.json",
         "knowledge/imported-legacy-components.json.gz",
         "knowledge/imported-component-policy.json",
@@ -2972,6 +2972,8 @@ def provenance_inputs(root=None):
         "spec/villa-site.yaml", "knowledge/library.json",
         "knowledge/projects/villa-01/brief-requirements.json",
         "knowledge/projects/villa-01/taste.json")]
+    if (root / 'knowledge/exposure-groups.json').is_file():
+        inputs.append(root / 'knowledge/exposure-groups.json')
     return sorted(inputs, key=lambda p: p.relative_to(root).as_posix())
 
 
@@ -2993,9 +2995,16 @@ def source_provenance(root=None):
             "git_dirty": bool(status.stdout.strip()) if status.returncode == 0 else None}
 
 
-def write(path=None, views=None):
+def write(path=None, views=None, *, measure_exposure_groups=False):
     before = source_provenance()
     scene = build(views=views)
+    from archpipe.exposure_groups import require_record
+    group_path = ROOT / 'knowledge/exposure-groups.json'
+    if not measure_exposure_groups:
+        if not group_path.is_file():
+            raise ValueError('Frozen dominant-light measurements required; run --measure-exposure-groups first')
+        scene['exposure_group_mode'] = 'dominant-light'
+        scene['exposure_groups'] = require_record(scene, json.loads(group_path.read_text()))
     from archpipe.villa_render_contract import validate_scene
     errors = validate_scene(scene)
     if errors:

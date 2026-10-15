@@ -336,6 +336,14 @@ def validate_scene(scene: dict) -> list[str]:
                  p+".decimate_ratio", "fraction from 0 (exclusive) to 1 required")
     need(scene.get('exposure_mode') == 'set-metered', 'exposure_mode',
          'set-metered required: meter the complete exposure-state cohort and lock it across views')
+    need(scene.get('exposure_group_mode') != 'dominant-light' or bool(scene.get('exposure_groups')),
+         'exposure_groups', 'frozen dominant-light groups required')
+    if scene.get('exposure_groups'):
+        from archpipe.exposure_groups import require_record
+        try:
+            require_record(scene, scene['exposure_groups'])
+        except (ValueError, KeyError, TypeError) as exc:
+            errors.append('exposure_groups: ' + str(exc))
     exposure = scene.get("exposure")
     if not isinstance(exposure, dict):
         errors.append("exposure: object required"); exposure = {}

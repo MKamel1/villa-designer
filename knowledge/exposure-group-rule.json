@@ -1,0 +1,39 @@
+{
+  "schema": "dominant-light-rule/1",
+  "decision": "client decision 2026-10-15",
+  "status": "PRE-REGISTERED before source-isolation or group QA measurements",
+  "basis": "ASSUMED photographic classification, not a published lighting standard; strict majority defines dominance. Client: shade over sun.",
+  "lamp_fraction_threshold": 0.5,
+  "solar_fraction_threshold": 0.5,
+  "source_probe": {
+    "resolution": [
+      144,
+      96
+    ],
+    "samples": 256,
+    "denoising": false,
+    "seed": 0,
+    "max_bounces": 16,
+    "mask": "same pixel indices for every source; lowest 97% of summed lamps-only plus daylight-only luminance, positive combined values only",
+    "statistic": "sum of linear luminance over fixed mask; lamps/(lamps+daylight); solar=max(0,daylight-sky_only)/daylight, clamped to [0,1]"
+  },
+  "assignment_order": [
+    "Preserve evening and exterior-dusk exposure presets, including day-state gallery already using evening",
+    "For original day or exterior-day: lamps fraction > 0.5 -> lamp-dominant",
+    "Otherwise original exterior-day and solar fraction <= 0.5 -> exterior-shade",
+    "Otherwise keep original day or exterior-day"
+  ],
+  "exterior_shade_definition": "Exterior daytime subjects represented by the camera meter are predominantly sky-lit, with at most half their daylight luminance attributable to the sun disc. Same scene and camera with only Nishita sun_disc disabled measures sky-only; includes indirect sunlight. No identifiers, compass names or QA outcomes select membership.",
+  "white_balance": {
+    "day": 5500,
+    "exterior-day": 5500,
+    "exterior-shade": 5500,
+    "evening": 3000,
+    "exterior-dusk": 4300,
+    "lamp-dominant": "nearest integer kelvin, emitted-flux-weighted CCT of authored active analytic lamps across all member views, weighted once per lamp per view at its authored driver/view dimmer; include emissive-only sources by measured area*exitance and exclude analytic companion lenses to avoid double counting"
+  },
+  "exposure": "Unchanged photoreal.camera_meter per view: 24 samples, 15% image scale, top 3% removed, logarithmic average, -0.4 stop bias, unchanged capped highlight priority; upper median across complete group, independent of selected render subset",
+  "cohort": "All authored views, including retired diagnostic members, retain metering participation for compatibility; every active view is assigned automatically. Preserve evening/dusk cohort order and settings.",
+  "freeze": "Save probe values, derived assignments, view inputs and complete transport fingerprint by value. Validate assignment by recomputation, immutable canonical rule equality, measurement digest and live transport/view hashes; any change requires new pre-registered measurement, never a hand membership override.",
+  "qa": "Production render_qa unchanged, every selected view, no exemptions"
+}

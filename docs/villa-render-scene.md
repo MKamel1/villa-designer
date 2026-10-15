@@ -242,3 +242,40 @@ linear probe images as OpenEXR files.
 For a storage view, declare whether sliding fronts are open and show stocked shelves or floor zones inside the checked envelope. The scene exports the state and labels stored items as dressing. Check every item against the stair or ramp soffit before export. Each windowless store needs a held lighting card, a fitting at every practical bay, and a reported achieved floor value; `store-ramp` uses the IES frequent-use storage card of 50 maintained lux and three ASSUMED opal battens. Inspect the isolated close-up before accepting the geometry or light in a final view.
 
 For each indoor plant, use a measured potted asset and declare the finished floor or furniture-top support elevation. `villa_render.indoor_plant_violations` checks pot identity, measured bounds, support contact and the sofa-to-television corridor for every room. Run it before `write()`, then inspect an eye-level preview to confirm that the pot reads on the floor and the television remains visible from the seats.
+
+## Dominant-light camera groups (client decision 2026-10-15)
+
+ADR-0013's 2026-10-15 amendment supersedes the villa-wide state lock for
+new measured exports. `knowledge/exposure-group-rule.json` is pre-registered;
+`knowledge/exposure-groups.json` freezes all source readings and computed
+membership by value. A changed transport or camera requires a new declared
+measurement, never a membership override. `scripts/villa_render.py --out <folder>
+--views none --measure-exposure-groups` renders the source isolates through
+the production builder. Admit its record before the next export. Draft requests
+still meter every authored member of each selected group. Captions and receipts
+carry group, source ratios, complete cohort, actual exposure and white balance.
+Production image QA remains unchanged; changed grouping never waives a failure.
+
+Use the frozen assignments when constructing mutation tests. An anticipated
+lamp/shade category is not an observation, and a valid singleton group is
+allowed. Make membership and cohort mutations actually differ from their
+measured values; keep the original singleton as a clean control. Source
+majority over the camera meter can differ from the named subject's apparent
+lighting, so disclose unchanged groups and remaining image failures.
+
+Source-isolation reuse binds the renderer's separate draped/imported appearance
+records and runtime material overrides as well as physical meshes. A valid
+replacement appearance can change transport without changing its physical
+envelope. An expanded identity may rebind measured values only against the
+identical original measured scene, with exact unchanged-value assertions and
+an explicit old/new fingerprint migration receipt; a new appearance needs
+fresh source measurements.
+
+Portable membership validation uses the complete final build. Raw `VIEWS(layout)`
+declarations lack final door/curtain visibility, and `build(views=[])` is a
+geometry-only diagnostic. Neither may stand in for the final renderer cohort.
+
+Collect render evidence by the declared active view identifiers. A `v*.json`
+glob also matches `villa-render.stage-result.json`; metadata files are not view
+receipts. Assert exact complete and unique identifier equality before publishing
+the comparison or a frozen test fixture.

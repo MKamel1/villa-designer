@@ -65,17 +65,17 @@ def luminance(rgb):
 
 def exposure_meter_views(views, selected):
     """Meter the full scene cohort for every selected exposure state."""
-    states = {view["exposure"] for view in views if view["id"] in selected}
-    return [view for view in views if view["exposure"] in states]
+    states = {view.get("exposure_group", view["exposure"]) for view in views if view["id"] in selected}
+    return [view for view in views if view.get("exposure_group", view["exposure"]) in states]
 
 
 def exposure_locks(views, selected, meter):
-    """Return state locks and provenance, independent of render selection."""
+    """Return complete-group locks, preserving legacy states when no group is supplied."""
     readings, by_state, metered_over = {}, {}, {}
     for view in exposure_meter_views(views, selected):
         ev, logavg = meter(view)
         readings[view["id"]] = {"exposure_stops": ev, "log_average": logavg}
-        state = view["exposure"]
+        state = view.get("exposure_group", view["exposure"])
         by_state.setdefault(state, []).append(ev)
         metered_over.setdefault(state, []).append(view["id"])
     locked = {state: sorted(values)[len(values) // 2] for state, values in by_state.items()}
@@ -1823,15 +1823,89 @@ def measure_lighting(scene_data, args, lights, full_power, emissive_sources, mes
         json.dump(result, stream, indent=2)
 
 
+def measure_exposure_groups(scene_data, args, setup_view, lights, emissive_sources):
+    """Independent source isolations with a common linear camera-meter mask."""
+    from archpipe.exposure_groups import freeze, lamp_population, measurement, rule
+    policy = rule()['source_probe']
+    scene = bpy.context.scene
+    rows = {}
+    for view in scene_data['views']:
+        setup_view(view)
+        camera, _ = configure_camera(view)
+        scene.render.resolution_x, scene.render.resolution_y = policy['resolution']
+        scene.render.resolution_percentage = 100
+        scene.cycles.samples = policy['samples']
+        scene.cycles.use_denoising = policy['denoising']
+        scene.cycles.use_adaptive_sampling = False
+        scene.cycles.seed = policy['seed']
+        scene.cycles.max_bounces = policy['max_bounces']
+        scene.view_settings.exposure = 0
+        scene.render.image_settings.file_format = 'OPEN_EXR'
+        scene.render.image_settings.color_depth = '32'
+        scene.view_settings.view_transform = 'Standard'
+        emission_nodes = [(node.inputs['Strength'], node.inputs['Strength'].default_value)
+                          for mat in bpy.data.materials if mat.use_nodes
+                          for node in mat.node_tree.nodes if node.type == 'EMISSION']
+        # Daylight-only keeps the sources' physical opaque housings and lenses.
+        for obj in lights.values():
+            obj.data.energy = 0
+        for socket, _ in emission_nodes:
+            socket.default_value = 0
+        def probe(mode):
+            path = os.path.join(args.out, view['id']+'-'+mode+'.exr')
+            scene.render.filepath = path
+            bpy.ops.render.render(write_still=True)
+            img = bpy.data.images.load(path)
+            pixels = img.pixels[:]
+            values = [max(0., luminance(pixels[i:i+3])) for i in range(0, len(pixels), 4)]
+            bpy.data.images.remove(img)
+            return values
+        day = probe('daylight-only')
+        sky = None
+        if view['exposure'] == 'exterior-day':
+            sky_nodes = [node for node in scene.world.node_tree.nodes if node.type == 'TEX_SKY']
+            if len(sky_nodes) != 1:
+                raise ValueError('Sun isolation requires one authored sky')
+            sky_nodes[0].sun_disc = False
+            sky = probe('sky-only')
+        for socket, value in emission_nodes:
+            socket.default_value = value
+        setup_view(view)
+        world_strengths = [(node.inputs['Strength'], node.inputs['Strength'].default_value)
+                           for node in scene.world.node_tree.nodes if node.type == 'BACKGROUND']
+        for socket, _ in world_strengths:
+            socket.default_value = 0
+        lamps = probe('lamps-only')
+        for socket, value in world_strengths:
+            socket.default_value = value
+        for socket, value in emission_nodes:
+            socket.default_value = value
+        row = measurement(lamps, day, sky)
+        row['lamp_population'] = lamp_population(scene_data, view, emissive_sources)
+        rows[view['id']] = row
+        camera_data = camera.data
+        bpy.data.objects.remove(camera, do_unlink=True)
+        bpy.data.cameras.remove(camera_data)
+    result = freeze(scene_data, rows, dict(blender=bpy.app.version_string,
+                                         render_device=configure_cycles(args.cpu), probe=policy))
+    with open(os.path.join(args.out, 'exposure-group-measurements.json'), 'w') as stream:
+        json.dump(result, stream, indent=2)
+
+
 def render(scene_data, args):
     # Resolve the actual execution device before expensive scene assembly.
     # A requested GPU render must never silently become a CPU comparison.
     select_cycles_device(None if args.cpu else bpy.context.preferences.addons["cycles"].preferences, args.cpu)
+    from archpipe.exposure_groups import require_record
+    if scene_data.get('exposure_group_mode') == 'dominant-light' and not scene_data.get('exposure_groups'):
+        raise ValueError('Missing frozen dominant-light groups')
+    if scene_data.get('exposure_groups'):
+        require_record(scene_data, scene_data['exposure_groups'])
     from archpipe.imported_appearance import require_scene, needs_scene_admission
     if needs_scene_admission(scene_data):
         require_scene(scene_data)
     os.makedirs(args.out, exist_ok=True)
-    if args.views == "none" and not (args.calibrate or args.measure_lighting):
+    if args.views == "none" and not (args.calibrate or args.measure_lighting or args.measure_exposure_groups):
         raise ValueError("--views none requires --calibrate or --measure-lighting")
     if args.views == "none" and args.calibrate:
         configure_cycles(args.cpu)
@@ -1910,9 +1984,14 @@ def render(scene_data, args):
             photoreal.hdri_world(hdri, sky["horizontal_lux"])
         return emissive
 
+    if args.measure_exposure_groups:
+        measure_exposure_groups(scene_data, args, setup_view, lights, emissive_sources)
+        return
+    from archpipe.exposure_groups import group_for
+    grouped_views = [dict(v, exposure_group=group_for(scene_data, v)) for v in scene_data['views']]
     # ADR-0013 part 6, the bedroom standard: meter every view with photoreal.camera_meter (fast pre-render,
     # log-average luminance, top 3 % excluded, highlight priority, -0.4 stop bias), then LOCK one exposure per
-    # state (the median of its views) so rooms still compare honestly (ADR-0013 amendment).
+    # measured dominant-light group (upper median), retaining legacy-state compatibility.
     locked, metered, metered_over = {}, {}, {}
     if scene_data.get("exposure_mode") == "set-metered":
         def meter_view(view):
@@ -1927,7 +2006,7 @@ def render(scene_data, args):
             bpy.data.objects.remove(cam_, do_unlink=True)
             bpy.data.cameras.remove(cdata)
             return ev, logavg
-        locked, metered, metered_over = exposure_locks(scene_data["views"], selected, meter_view)
+        locked, metered, metered_over = exposure_locks(grouped_views, selected, meter_view)
     for view in scene_data["views"]:
         if view["id"] not in selected:
             continue
@@ -1942,12 +2021,15 @@ def render(scene_data, args):
         preset = scene_data["exposure"][view["exposure"]]
         s.view_settings.view_transform = "AgX"
         s.view_settings.look = "AgX - Medium High Contrast"
-        if view["exposure"] in locked:
-            s.view_settings.exposure = locked[view["exposure"]]
+        group = group_for(scene_data, view)
+        if group in locked:
+            s.view_settings.exposure = locked[group]
         else:
             s.view_settings.exposure = math.log2(math.pi / (2.5 * 2**preset["ev100"]))
         locked_ev100 = math.log2(math.pi / (2.5 * 2 ** s.view_settings.exposure))
-        wb = photoreal.white_balance(preset["white_balance_k"])
+        wb_k = (scene_data['exposure_groups']['white_balance_k'][group]
+                if scene_data.get('exposure_groups') else preset['white_balance_k'])
+        wb = photoreal.white_balance(wb_k)
         if not wb:
             current_warnings.append("Blender does not support stated white balance")
         bpy.context.view_layer.update()
@@ -2048,10 +2130,20 @@ def render(scene_data, args):
                   "clipped_pixel_fraction": clipped, "mean_luminance": mean, "ev100": preset["ev100"],
                   "locked_ev100": locked_ev100, "view_meter": metered.get(view["id"]),
                   "exposure_state": view["exposure"],
-                  "exposure_metered_over": metered_over.get(view["exposure"], []),
+                  "exposure_metered_over": metered_over.get(group, []),
                   "exposure_locked_per_state": bool(locked), "log_average_linear": log_avg,
                   "exposure_stops": s.view_settings.exposure, "white_balance_applied": wb,
                   "camera_pitch_deg": pitch, "warnings": current_warnings}
+        if scene_data.get('exposure_groups'):
+            from archpipe.exposure_groups import RULE_SHA256
+            record = scene_data['exposure_groups']
+            report.update(exposure_group=group, exposure_locked_per_group=bool(locked),
+                          white_balance_k=float(s.view_settings.white_balance_temperature),
+                          exposure_rule_sha256=RULE_SHA256,
+                          exposure_measurement_sha256=record['measurement_sha256'],
+                          exposure_rule_measurement=record['measurements'][view['id']],
+                          group_meters={ident: metered[ident] for ident in metered_over[group]})
+            report['exposure_locked_per_state'] = False
         architectural_glass = sum(name == "glass-clear" and spec["kind"] == "glass" and
                                   any(node.type == "BSDF_TRANSPARENT" for node in materials[name].node_tree.nodes)
                                   for name, spec in scene_data["materials"].items())
@@ -2085,6 +2177,7 @@ def main():
     ap.add_argument("--cpu", action="store_true")
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--measure-lighting", action="store_true")
+    ap.add_argument("--measure-exposure-groups", action="store_true")
     args = ap.parse_args(sys.argv[sys.argv.index("--")+1:] if "--" in sys.argv else [])
     with open(args.scene, encoding="utf-8") as f:
         render(json.load(f), args)

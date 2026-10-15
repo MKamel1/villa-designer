@@ -48,8 +48,11 @@ product.
 the fixtures' photometry: IES distribution, lumens and colour temperature.
 If lamps look wrong, find the error in the light's spec or conversion
 (e.g. display-sRGB lamp colour used as linear light) and fix it there.
-Never compensate with white balance, exposure or tone-curve tuning; the
-camera uses standard presets (daylight 5500 K, tungsten 3200 K).
+Follow the client decision 2026-10-15 in ADR-0013 for measured villa groups:
+one locked exposure and white balance per pre-registered dominant-light group.
+Daylit groups use 5500 K; lamp-group white balance follows authored dimmed
+flux/CCT population. Never tune per view or use group changes to waive QA.
+The bedroom path retains its standard presets.
 
 **Views are declared by what they show.** Each view lists its subjects
 by design id (`photoreal.VIEW_SUBJECTS`); `render_qa` fails a view whose
