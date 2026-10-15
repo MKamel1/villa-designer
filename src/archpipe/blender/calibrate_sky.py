@@ -24,8 +24,14 @@ import math
 import os
 import sys
 import tempfile
+from pathlib import Path
 
 import bpy
+
+# Blender isolates Python from PYTHONPATH unless explicitly told otherwise.
+# Resolve the shared adapter from this entry point's checkout in either mode.
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from archpipe.blender.sky_compat import configure_legacy_sky
 
 ALBEDO = 0.5
 
@@ -87,7 +93,7 @@ def main():
     world = bpy.data.worlds.new("sky")
     world.use_nodes = True
     sky = world.node_tree.nodes.new("ShaderNodeTexSky")
-    sky.sky_type = "NISHITA"
+    configure_legacy_sky(sky)
     sky.sun_disc = True
     sky.sun_elevation = math.radians(elevation)
     sky.sun_rotation = math.radians(rotation)

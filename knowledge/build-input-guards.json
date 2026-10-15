@@ -386,12 +386,89 @@
     },
     {
       "lesson_id": "reproducibility-published-view-selection",
-      "control_tier": [2],
+      "control_tier": [
+        2
+      ],
       "construction": "villa_render.write unconditionally validates published authored views; numerical --views none changes render selection only",
       "check": "actual empty-view export refuses publication; complete authored scenes remain valid",
       "stage": "before scene publication and numerical replay",
       "proof_file": "tests/test_villa_render_scene.py",
-      "proofs": ["test_invalid_view", "test_valid_scene"]
+      "proofs": [
+        "test_invalid_view",
+        "test_valid_scene"
+      ]
+    },
+    {
+      "lesson_id": "renderer-evaluation-device-context",
+      "control_tier": [
+        2
+      ],
+      "construction": "Evaluation launch uses an explicit executable/version and isolated Blender configuration",
+      "check": "scripts/blender52_eval.py::require_gpu; Blender wrapper before render timing",
+      "stage": "renderer evaluation execution preflight",
+      "proof_file": "tests/test_blender_versions.py",
+      "proofs": [
+        "test_gpu_receipt_refuses_cpu_fallback_and_disabled_gpu"
+      ],
+      "closure": "Execution context only; no renderer equivalence or design acceptance"
+    },
+    {
+      "lesson_id": "renderer-evaluation-photometry-root",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Explicit evaluation IES root and reference-file preflight before Blender construction",
+      "check": "prove_reproducibility.optical_file_hashes from scripts/blender52_eval.py",
+      "stage": "renderer evaluation input preflight",
+      "proof_file": "tests/test_blender_versions.py",
+      "proofs": [
+        "test_real_missing_photometry_and_sibling_fail_before_render"
+      ],
+      "closure": "Input completeness only; no photometry or renderer tolerances changed"
+    },
+    {
+      "lesson_id": "blender-sky-api-rename",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Both sky builders select the supported legacy single-scattering model and explicitly preserve atmospheric defaults; render identity binds the adapter source; standalone calibration resolves the adapter from its own checkout without trusting PYTHONPATH",
+      "check": "blender.sky_compat.configure_legacy_sky refuses unknown sky models or absent aerosol density",
+      "stage": "Blender sky construction before rendering",
+      "proof_file": "tests/test_blender_sky_compat.py",
+      "proofs": [
+        "test_frozen_real_52_api_selects_legacy_and_removes_altitude_drift",
+        "test_45_defaults_stay_unchanged_and_other_atmospheres_fail_closed",
+        "test_mutated_node_defaults_are_set_explicitly",
+        "test_standalone_calibration_bootstraps_without_pythonpath_in_other_checkout"
+      ]
+    },
+    {
+      "lesson_id": "renderer-evaluation-pattern-seed",
+      "control_tier": [
+        2
+      ],
+      "construction": "Controlled cloth evaluation holds pattern seeds fixed without changing production cache inputs",
+      "check": "summarize_blender52.controlled_cloth_attribution refuses changed seeds and initial vertices before solver attribution",
+      "stage": "Renderer migration numerical comparison",
+      "proof_file": "tests/test_blender52_comparison.py",
+      "proofs": [
+        "test_runtime_seed_confounded_replay_refused_and_clean_control_accepted"
+      ]
+    },
+    {
+      "lesson_id": "renderer-evaluation-task-identity",
+      "control_tier": [
+        1
+      ],
+      "construction": "Report task identity includes recorded point index, room and label",
+      "check": "summarize_blender52.indexed_tasks retains every repeated task and report compares complete identity sets",
+      "stage": "Lighting comparison reporting",
+      "proof_file": "tests/test_blender52_comparison.py",
+      "proofs": [
+        "test_real_repeated_task_labels_and_renamed_sibling_retain_every_point"
+      ]
     }
   ]
 }

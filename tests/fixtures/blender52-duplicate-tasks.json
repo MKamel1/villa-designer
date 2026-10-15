@@ -1,0 +1,68 @@
+[
+  {
+    "room": "kitchen",
+    "label": "island prep side",
+    "position": [
+      12.45,
+      -25.76,
+      -2.0780000000000003
+    ],
+    "total_lux": 1364.0749409435919,
+    "required_lux": 500
+  },
+  {
+    "room": "kitchen",
+    "label": "island seating side",
+    "position": [
+      12.45,
+      -26.360000000000003,
+      -2.0780000000000003
+    ],
+    "total_lux": 1095.4970331172015,
+    "required_lux": 200
+  },
+  {
+    "room": "kitchen",
+    "label": "island prep side",
+    "position": [
+      13.599999999999998,
+      -25.76,
+      -2.0780000000000003
+    ],
+    "total_lux": 1230.1399943466797,
+    "required_lux": 500
+  },
+  {
+    "room": "kitchen",
+    "label": "island seating side",
+    "position": [
+      13.599999999999998,
+      -26.360000000000003,
+      -2.0780000000000003
+    ],
+    "total_lux": 1114.7476409140254,
+    "required_lux": 200
+  },
+  {
+    "room": "kitchen",
+    "label": "island prep side",
+    "position": [
+      14.099999999999998,
+      -25.76,
+      -2.0780000000000003
+    ],
+    "total_lux": 1113.8443925813933,
+    "required_lux": 500
+  },
+  {
+    "room": "kitchen",
+    "label": "island seating side",
+    "position": [
+      14.099999999999998,
+      -26.360000000000003,
+      -2.0780000000000003
+    ],
+    "total_lux": 926.3086927832817,
+    "required_lux": 200
+  }
+]

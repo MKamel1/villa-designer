@@ -1,0 +1,24 @@
+{
+  "id": "dress-hers-long-hang-0-garment-0-0",
+  "before": {
+    "simulation": {
+      "pattern_seed": 36136843455952842758389553566028872843023287052549079852605375941889115632924,
+      "initial_vertices_sha256": "eac7b3d098ef4e471e90a09a441b25ed7ddc87315dd720d832f4fd093ea3f4a7"
+    },
+    "mesh_sha256": "c0291e25138317ba0fe10d51c0abe8a3b5071de9d62ac93915365358eecd552c"
+  },
+  "rebaked": {
+    "simulation": {
+      "pattern_seed": 113433558945315196542125945764969203200629395442879749653402811528879650174896,
+      "initial_vertices_sha256": "ca45fe21c78690d26b051e9d840abd1c81ed0650f91fbd2669c40cce6d07c1b1"
+    },
+    "mesh_sha256": "a4e6b7da71c7a73a7d5a29f667582aad12c2e5c6bdbda03edce48e888d67cc1f"
+  },
+  "controlled": {
+    "simulation": {
+      "pattern_seed": 36136843455952842758389553566028872843023287052549079852605375941889115632924,
+      "initial_vertices_sha256": "eac7b3d098ef4e471e90a09a441b25ed7ddc87315dd720d832f4fd093ea3f4a7"
+    },
+    "mesh_sha256": "c0291e25138317ba0fe10d51c0abe8a3b5071de9d62ac93915365358eecd552c"
+  }
+}
