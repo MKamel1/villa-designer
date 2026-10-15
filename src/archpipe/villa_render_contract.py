@@ -16,6 +16,24 @@ RAY_VISIBILITY = ("camera", "shadow", "diffuse", "glossy", "transmission")
 DOOR_CLEAR_WIDTH_M = 0.914
 
 
+def subject_meshes(subject, meshes):
+    """Resolve an authored subject and its mounted assembly descendants.
+
+    A furniture item's exact label often belongs only to its floor-bearing
+    root. Mounting ownership, rather than label wording, binds its children.
+    Preserve source order and include each mesh once.
+    """
+    selected = {m['id'] for m in meshes if m['id'] == subject or m['id'].startswith(subject)
+                or m.get('label') == subject or m.get('room') == subject}
+    while True:
+        children = {m['id'] for m in meshes
+                    if m.get('mounting', {}).get('assembly_root') in selected}
+        extended = selected | children
+        if extended == selected:
+            return [m for m in meshes if m['id'] in selected]
+        selected = extended
+
+
 def presentation_view_ids(by_id, review=False):
     """Batch view identifiers; retired definitions remain usable explicitly."""
     return [ident for ident, view in by_id.items()

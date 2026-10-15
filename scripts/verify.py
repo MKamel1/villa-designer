@@ -226,6 +226,32 @@ def main() -> int:
            all((ROOT / item["proof_file"]).is_file() and all(
                "def " + name + "(" in (ROOT / item["proof_file"]).read_text(encoding="utf-8")
                for name in item["proofs"]) for item in garden_registry["records"]))
+    darkview_registry = json.loads((ROOT / 'knowledge/darkviews-guards.json').read_text())
+    expect('dark-view evidence controls have registered proving tests', all(
+        (ROOT / row['proof_file']).is_file() and all(
+            'def ' + name + '(' in (ROOT / row['proof_file']).read_text()
+            for name in row['proofs']) for row in darkview_registry['records']))
+    from archpipe.render_evidence import caption_evidence, require_subject_bindings
+    from archpipe.villa_render_contract import subject_meshes
+    frozen_dark = json.loads(gzip.decompress((ROOT / 'tests/fixtures/darkviews-real.json.gz').read_bytes()))
+    dark_scene = frozen_dark['scene']
+    store_report = frozen_dark['now']['reports']['v29-under-stair-store']
+    expect('actual plinth-only storage subject evidence refuses',
+           raises(ValueError, require_subject_bindings, dark_scene, store_report))
+    for row in store_report['subjects']:
+        row['matched_objects'] = [m['id'] for m in subject_meshes(row['id'], dark_scene['meshes'])]
+    expect('complete actual storage assembly evidence stays quiet',
+           not raises(ValueError, require_subject_bindings, dark_scene, store_report))
+    dark_view = next(v for v in dark_scene['views'] if v['id'] == 'v36-north-garden')
+    garden_report = frozen_dark['now']['reports'][dark_view['id']]
+    dark_caption = caption_evidence(dark_scene, dark_view, garden_report,
+                                   frozen_dark['now']['qa'][dark_view['id']])
+    expect('faithful dark image retains its failure and actual locked exposure',
+           not dark_caption['qa_passed'] and dark_caption['whole_set_lock_verified']
+           and dark_caption['exposure_stops'] == garden_report['exposure_stops'])
+    garden_report['exposure_metered_over'] = [dark_view['id']]
+    expect('actual dark-view single-view cohort mutation refuses',
+           raises(ValueError, caption_evidence, dark_scene, dark_view, garden_report, {'checks': []}))
     from archpipe.concept.garden_render_review import downward_ground_findings, plant_form_findings, opening_frame_findings, garden_camera_findings
     expect("scene contains no ground-only downward faces", not downward_ground_findings(scene))
     expect("procedural leaf mass reaches root soil", not plant_form_findings(scene["meshes"]))

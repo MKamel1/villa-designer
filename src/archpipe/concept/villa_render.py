@@ -2753,6 +2753,11 @@ def _VIEWS(lay=None, resolve=True):
       ["landscape-north-back-00", "landscape-north-mid-00", "landscape-north-front-00", "landscape-north-edge-00"],
       shift_y=-.31, final_only=True, exposure="exterior-day")
     V[-1]["caption_notes"] = ["North garden: open-sky standing camera, showing the left Fatsia/Aspidistra/spider-plant/mondo grouping in ground-level soil. Presentation companions v37, v39 and the G4d evening view show the accent planting and hanging retreat. Bistro and lounge pots removed per client 2026-10-06. Hanging retreat under the GF balcony shown in companion v39: client decision 2026-10-06; structural check pending. Authored botanical appearances ASSUMED; Egypt nursery performance UNVERIFIED."]
+    V[-1]["require_full_subject_frame"] = True
+    V[-1]["caption_notes"].append(
+        "Shaded courtyard by client preference. All design lamps are off. The exterior-day whole-set exposure "
+        "is retained; dark foliage and soil may lose detail. Read the measured exposure cohort and image QA "
+        "in render_evidence; a crushed-shadow failure remains a presentation limitation, not an approved exemption.")
     v("v37-north-garden-lounge", "North garden — grape ivy and foliage accent through the lounge", "day",
       [4.00, -27.40, B + 1.35], [.4781496760738273, -24.3252447282807, B + 1.35], 24,
       ["landscape-trellis-north", "landscape-climber-north", "landscape-north-rhapis-accent", "landscape-north-feature-stone", "landscape-north-back-02"],
@@ -2793,6 +2798,11 @@ def _VIEWS(lay=None, resolve=True):
     V[-1]["caption_notes"] = ["24 mm view from the lounge. Telescoping sliding fronts retracted into "
                               "the side pockets; each open bay has an ASSUMED internal LED strip. "
                               "Dressing inside: vacuum, suitcase, seasonal boxes and folded linens (ASSUMED)."]
+    V[-1]["caption_notes"].append(
+        "Storage cavities are shown at the whole-day comparison exposure, with ambient at 50 percent and "
+        "accent at full output. Their dark interiors lose legibility at that lock. Historical separately "
+        "metered brightness is not a like-for-like design comparison. Read measured exposure and image QA "
+        "in render_evidence; any crushed-shadow failure remains unresolved.")
     # v30 rendered black (round 4): the store has no window, but the view used the shared day exposure (~100-600
     # lx assumed) with only DL-store-ramp-01 dimmed to 50 %. Made an interior presentation instead: evening
     # exposure (ADR-0013, lamp white balance) with ambient at full brightness, the store's only layer.

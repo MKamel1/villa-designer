@@ -52,6 +52,7 @@ class VillaRenderContractTest(unittest.TestCase):
 
     def test_calibrated_transport_does_not_discard_bounced_light(self):
         configure = blender_function("configure_cycles")
+        configure.__globals__["select_cycles_device"] = blender_function("select_cycles_device")
         scene = SimpleNamespace(cycles=SimpleNamespace(), render=SimpleNamespace())
         configure.__globals__["bpy"] = SimpleNamespace(context=SimpleNamespace(scene=scene))
         configure(True)
@@ -386,7 +387,8 @@ class VillaRenderContractTest(unittest.TestCase):
         prop = {"id": "vase", "asset": "brass_vase_03", "label": "dressing: brass vase",
                 "objects": ["prop-vase-000"], "in_frame": True}
         report = {"warnings": [], "imported_props": [prop]}
-        qa = {"checks": [{"check": "highlight_clipping"}, {"check": "view_subject:floor"}]}
+        qa = {"checks": [{"check": "highlight_clipping", "status": "PASS"},
+                         {"check": "view_subject:floor", "status": "PASS"}]}
         scope = villa_qa_scope(qa)
         self.assertIn("highlight_clipping", scope["applied"])
         self.assertIn("window_view", scope["omitted"])

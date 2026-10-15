@@ -77,6 +77,7 @@ def villa_qa_context(scene: dict, view: dict, render_report: dict) -> dict:
     day = view["state"] == "day"
     measured = render_report["qa_scene"]
     return {"subjects": render_report["subjects"],
+            "require_full_subject_frame": view.get("require_full_subject_frame", False),
             "exterior_camera": view["exposure"].startswith("exterior"),
             "camera": {"pitch_deg": 90 + render_report["camera_pitch_deg"],
                        "shift_y": view["camera"].get("shift_y", 0)},
@@ -114,6 +115,7 @@ def villa_qa_scope(qa: dict, context: dict | None = None) -> dict:
 
 
 def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dict:
+    from archpipe.render_evidence import caption_evidence
     generic = [light["id"] for light in scene["lights"]
                if light.get("product", {}).get("generic") and light["layer"] in view["layers_on"]]
     return {"view": view["id"], "title": view.get("title", view["id"]),
@@ -126,7 +128,8 @@ def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dic
             "emissive_sources": render_report.get("emissive_sources", []),
             "dressing (not design)": render_report.get("imported_props", []),
             "sun": view.get("sun"), "exposure": scene["exposure"][view["exposure"]],
-            "qa_checks_ran": [item["check"] for item in qa["checks"]]}
+            "qa_checks_ran": [item["check"] for item in qa["checks"]],
+            "render_evidence": caption_evidence(scene, view, render_report, qa)}
 
 
 def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
