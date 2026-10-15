@@ -34,10 +34,13 @@ def remote_root(host):
 
 def package():
     names = subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard','-z'],cwd=ROOT).decode().split('\0')
-    allowed = ('src/','scripts/','tests/','spec/','ops/','docs/','.agents/','agents/')
+    allowed = ('src/','scripts/','tests/','spec/','ops/','docs/','.agents/','agents/','knowledge/')
     text_suffixes = {'.py','.md','.json','.yaml','.yml','.toml','.txt','.sh','.xml','.csv','.svg'}
+    # Source reads compressed knowledge records (e.g. imported-legacy-components.json.gz)
+    # inside Blender, so knowledge/ ships its .json.gz data too (tests/test_release_package.py).
     files = {name:(ROOT/name).read_bytes() for name in names if name and (ROOT/name).is_file()
-             and Path(name).suffix.lower() in text_suffixes
+             and (Path(name).suffix.lower() in text_suffixes
+                  or (name.startswith('knowledge/') and name.endswith('.json.gz')))
              and (name.startswith(allowed) or name in ('requirements.txt','requirements-worker.txt','requirements-thermal.txt','AGENTS.md','CLAUDE.md'))}
     ies = photometry.revit_ies_dir()
     if ies:
