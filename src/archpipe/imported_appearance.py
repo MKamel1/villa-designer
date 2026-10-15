@@ -200,12 +200,53 @@ def _cached_pair(input_sha256, model_bytes):
     return encoded(_construct_model(json.loads(model_bytes)))
 
 
+def _binary_model_input(model):
+    """Exact finite-float face buffers plus canonical remaining JSON fields.
+
+    This is only an internal value key. Every face boundary/order and every
+    unrounded 64-bit coordinate bit is retained. Integer, boolean, string or
+    other coordinate types use the original canonical JSON path so its source
+    face hash cannot be aliased by numeric conversion. Source records are never
+    mutated, and every non-face field remains in the complete canonical key.
+    """
+    geometry=model.get('review_geometry')
+    if not isinstance(geometry,Mapping) or not isinstance(geometry.get('meshes'),(list,tuple)):
+        return None
+    rows=[];buffers=[]
+    for row in geometry['meshes']:
+        faces=row.get('faces')
+        if not isinstance(faces,(list,tuple)):return None
+        points=[p for face in faces for p in face]
+        if not all(len(p)==3 and type(p[0]) is float and type(p[1]) is float and type(p[2]) is float for p in points):
+            return None
+        array=np.asarray(points,dtype='<f8')
+        if not np.isfinite(array).all():return None
+        buffers.append((tuple(len(f) for f in faces),array.tobytes()))
+        rows.append(dict(row,faces=None))
+    metadata=dict(model,review_geometry=dict(geometry,meshes=rows))
+    return encoded(metadata),tuple(buffers)
+
+
+@lru_cache(maxsize=32)
+def _cached_binary_pair(metadata_bytes,buffers):
+    model=json.loads(metadata_bytes)
+    for row,(lengths,coordinates) in zip(model['review_geometry']['meshes'],buffers):
+        points=np.frombuffer(coordinates,dtype='<f8').reshape(-1,3)
+        ends=np.cumsum((0,)+lengths)
+        row['faces']=[points[a:b].tolist() for a,b in zip(ends[:-1],ends[1:])]
+    return encoded(_construct_model(model))
+
+
 def build_model(model):
     """Reuse only byte-identical inputs; callers own independent pair records."""
     if not model.get('review_geometry'):
         model = dict(model, review_component_measurements=_legacy_geometry(model))
-    model_bytes = encoded(model)
-    appearance, physical = json.loads(_cached_pair(hashlib.sha256(model_bytes).hexdigest(), model_bytes))
+    binary=_binary_model_input(model)
+    if binary is not None:
+        appearance,physical=json.loads(_cached_binary_pair(*binary))
+    else:
+        model_bytes = encoded(model)
+        appearance, physical = json.loads(_cached_pair(hashlib.sha256(model_bytes).hexdigest(), model_bytes))
     return appearance, physical
 
 
@@ -258,8 +299,11 @@ def with_models(scene, models):
         if model.get('status') == 'procedural-bed-fallback':
             continue
         if model is old.get(model['id']):
-            physical = deepcopy(by_model.get(model['id'], []))
-            appearance = [deepcopy(by_part[p['id']]) for p in physical]
+            # Incoming JSON pair values have just passed complete admission.
+            # Clone their canonical values in the C decoder; Python recursive
+            # deepcopy repeatedly walks the large immutable face-index tables.
+            physical = json.loads(encoded(by_model.get(model['id'], [])))
+            appearance = json.loads(encoded([by_part[p['id']] for p in physical]))
         else:
             appearance, physical = build_pairs([model])
         appearances.extend(appearance)

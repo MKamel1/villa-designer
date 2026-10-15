@@ -104,7 +104,10 @@
     },
     {
       "lesson_id": "drape-neighbour-rendered-envelope",
-      "control_tier": [1, 2],
+      "control_tier": [
+        1,
+        2
+      ],
       "construction": "Candidate envelopes include both physical clearance volumes and actual rendered bounds",
       "check": "Conservative neighbour contact and named-support penetration tests include both permitted appearance expansions",
       "stage": "Appearance admission at export and render",
@@ -112,6 +115,81 @@
       "proofs": [
         "test_neighbour_appearance_expansion_is_checked_on_real_layers_and_sibling",
         "test_real_stack_support_contact_is_bidirectional_and_never_penetration"
+      ]
+    },
+    {
+      "lesson_id": "drape-polish-thin-tailoring",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "Separate hash-bound shaping preserves gravity cache bytes: separated sewn panels with curved returns, surface-attached stand/fall/lapels/placket, bounded seeded per-item folded variations; derived mesh cache has bound source/policy/variant and two independent process proofs, avoiding runtime regeneration",
+      "check": "drape_polish.apply refuses morphology and exact physical envelope conflicts; gap_findings enforces unchanged 27 mm hanging separation; unchanged neutral contexts and independent visual review remain required",
+      "stage": "Appearance admission at scene export and renderer, followed by neutral preview checkpoint",
+      "proof_file": "tests/test_drape_polish.py",
+      "proofs": [
+        "test_actual_thin_profiles_and_renamed_translated_siblings_fire_clean_shapes_quiet",
+        "test_real_first_fix_straight_returns_and_buried_lapels_fail_revised_construction_passes",
+        "test_body_collar_placket_lapel_and_fold_mutations_fire",
+        "test_folded_items_have_deterministic_individual_offsets_without_moving_envelopes",
+        "test_every_actual_local_shape_and_all_bounded_fold_variants_fit_exact_envelopes",
+        "test_preserves_actual_gravity_cache_and_physical_values",
+        "test_independent_process_hash_salts_and_binding_mutations",
+        "test_actual_rail_gap_mutation_and_shifted_sibling_fire_clean_gap_quiet",
+        "test_actual_pad_perimeter_and_translated_sibling_fail_fold_edge_contrast",
+        "test_portable_cache_replaces_runtime_reconstruction_and_invalidates_on_file_changes",
+        "test_live_blender_reads_identical_stored_geometry_references",
+        "test_polished_zero_escape_uses_exact_live_bounds_beyond_rounded_cache_key"
+      ]
+    },
+    {
+      "lesson_id": "drape-polish-folded-edge",
+      "control_tier": [
+        1,
+        2,
+        3
+      ],
+      "construction": "Front-only free-hem groove and continuous rear fold replace padded perimeter waist; pre-registered actual height-band contrast plus neutral review",
+      "check": "archpipe.drape_polish.cached and admission screens run before export and render",
+      "stage": "Appearance construction and renderer read-back",
+      "proof_file": "tests/test_drape_polish.py",
+      "proofs": [
+        "test_actual_pad_perimeter_and_translated_sibling_fail_fold_edge_contrast",
+        "test_every_actual_local_shape_and_all_bounded_fold_variants_fit_exact_envelopes"
+      ]
+    },
+    {
+      "lesson_id": "drape-polish-portable-construction",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Separate exact derived mesh cache binds source/policy/variant, actual file bytes and two independent process outputs; Blender never regenerates normals",
+      "check": "archpipe.drape_polish.cached and admission screens run before export and render",
+      "stage": "Appearance construction and renderer read-back",
+      "proof_file": "tests/test_drape_polish.py",
+      "proofs": [
+        "test_portable_cache_replaces_runtime_reconstruction_and_invalidates_on_file_changes",
+        "test_live_blender_reads_identical_stored_geometry_references",
+        "test_independent_process_hash_salts_and_binding_mutations"
+      ]
+    },
+    {
+      "lesson_id": "drape-polish-build-budget",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Canonical independently decoded copies replace repeated Python deepcopy on already admitted JSON pairs; immutable face snapshots cache exact tuple hash and reconstruct it after transport; repeated model-face serialization uses exact finite-float bytes plus ordered face lengths and canonical complete remaining fields, with original path for other coordinate representations",
+      "check": "All geometry/containment admission remains unchanged; complete authored-view build stays below unchanged 120 seconds",
+      "stage": "Whole-scene build and physical admission",
+      "proof_file": "tests/test_drape_polish_build_cost.py",
+      "proofs": [
+        "test_real_pair_copy_matches_frozen_selector_and_is_independent",
+        "test_face_snapshot_hash_and_cached_review_match_real_uncached_arithmetic",
+        "test_snapshot_transport_recomputes_process_local_hash_for_numeric_string_sibling",
+        "test_actual_model_binary_value_key_matches_original_json_construction_and_mutations"
       ]
     }
   ]

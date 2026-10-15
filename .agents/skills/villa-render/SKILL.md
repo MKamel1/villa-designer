@@ -502,3 +502,16 @@ admission and runtime import share `scene_reproducibility.signed_volume`.
 For arithmetic changes, replay frozen real small solids and renamed/distant
 siblings through `tests/blender_reproducibility.py`; genuinely inverted
 siblings must still refuse, without moving or redesigning the sources.
+
+
+**Garment polish, 2026-10-14.** Preserve the original gravity cache. Follow
+`docs/ops/drape.md` and pre-register new construction screens before replacement
+measurement. Depth alone cannot prove a rounded shoulder, feature size cannot
+prove an exterior lapel, and stack sag cannot distinguish folded/free edges
+from a padded perimeter seam. Freeze actual rejected meshes and renamed,
+translated siblings. Use separately bound portable derived meshes with exact
+source/policy/variant and independent-process proofs; Blender must read those
+bytes instead of regenerating surface normals. Keep exact garment envelopes,
+the unchanged 27 mm hanging gap, physical parts, rails, slots and cameras.
+Validate all source sizes and all bounded folded variants; review a small
+unchanged-context neutral GPU checkpoint before complete-build acceptance.
