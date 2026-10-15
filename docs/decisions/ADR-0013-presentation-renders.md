@@ -211,7 +211,11 @@ Each lamp counts once per view; emitting companion lenses are not counted twice,
 and emissive-only sources use measured area times luminous exitance. This is
 a declared red, green and blue (RGB) camera approximation, not spectral chromatic adaptation.
 Evening retains 3000 kelvin and exterior-dusk 4300 kelvin. White-balance tint
-remains 10 and the AgX Medium High Contrast look is unchanged.
+was initially fixed at 10. The authorised white-balance reciprocity check
+(`docs/wbcheck-report.md`) demonstrated that this daylight offset disagrees
+with the Planckian lamp model. Lamp-dominant and evening therefore use tint
+zero; daylit and exterior-dusk groups retain tint 10. Temperature, group
+membership, exposure method and the AgX Medium High Contrast look are unchanged.
 
 Exposure uses the existing camera meter without modification and the same
 upper median across every view in each complete group. A subset render request

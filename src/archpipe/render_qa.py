@@ -73,6 +73,34 @@ def _pixels(img: Image.Image):
     return small, [(r / 255.0, g / 255.0, b / 255.0) for r, g, b in flat]
 
 
+def grey_card_neutrality(mean_rgb):
+    """Check a neutral calibration card, never a coloured room or material.
+
+    mean_rgb contains developed midtone red, green and blue channel means.
+    Ratios compare red/green, blue/green and red/blue. The fixed limits were
+    registered before measurement in docs/wbcheck-report.md.
+    """
+    if len(mean_rgb) != 3 or any(not math.isfinite(v) or not 0 < v < 1 for v in mean_rgb):
+        raise ValueError("grey card needs three finite, positive display channel means below one")
+    red, green, blue = mean_rgb
+    mean = sum(mean_rgb) / 3
+    cast = math.sqrt(sum((v - mean) ** 2 for v in mean_rgb) / 3)
+    ratios = [red / green, blue / green, red / blue]
+    return dict(display_mean=list(mean_rgb), ratios=ratios, cast=cast,
+                passed=cast < 0.020 and all(0.950 <= r <= 1.050 for r in ratios))
+
+
+def grey_card_check(image_path):
+    """Use the production PNG decoder and midtone mask for a grey-card guard."""
+    with Image.open(image_path) as image:
+        _, pixels = _pixels(image)
+    mids = [p for p in pixels if 0.25 < _luma(p) < 0.75]
+    if not mids:
+        raise ValueError("grey card has no display midtones")
+    result = grey_card_neutrality([sum(p[i] for p in mids) / len(mids) for i in range(3)])
+    return dict(result, image=str(image_path), midtone_count=len(mids))
+
+
 def _luma(p):
     return 0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2]
 

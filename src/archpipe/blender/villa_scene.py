@@ -2029,7 +2029,8 @@ def render(scene_data, args):
         locked_ev100 = math.log2(math.pi / (2.5 * 2 ** s.view_settings.exposure))
         wb_k = (scene_data['exposure_groups']['white_balance_k'][group]
                 if scene_data.get('exposure_groups') else preset['white_balance_k'])
-        wb = photoreal.white_balance(wb_k)
+        wb_illuminant = "planckian" if group in ("evening", "lamp-dominant") else "daylight"
+        wb = photoreal.white_balance(wb_k, illuminant=wb_illuminant)
         if not wb:
             current_warnings.append("Blender does not support stated white balance")
         bpy.context.view_layer.update()
@@ -2133,6 +2134,8 @@ def render(scene_data, args):
                   "exposure_metered_over": metered_over.get(group, []),
                   "exposure_locked_per_state": bool(locked), "log_average_linear": log_avg,
                   "exposure_stops": s.view_settings.exposure, "white_balance_applied": wb,
+                  "white_balance_illuminant": wb_illuminant,
+                  "white_balance_tint": float(s.view_settings.white_balance_tint),
                   "camera_pitch_deg": pitch, "warnings": current_warnings}
         if scene_data.get('exposure_groups'):
             from archpipe.exposure_groups import RULE_SHA256

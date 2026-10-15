@@ -123,6 +123,8 @@ def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dic
             "exposure_group": render_report.get('exposure_group', view['exposure']),
             "camera_exposure_stops": render_report.get('exposure_stops'),
             "white_balance_k": render_report.get('white_balance_k'),
+            "white_balance_tint": render_report.get('white_balance_tint'),
+            "white_balance_illuminant": render_report.get('white_balance_illuminant'),
             "design": {"meshes": [mesh["id"] for mesh in scene["meshes"]],
                        "lights": [light["id"] for light in scene["lights"]
                                   if light["layer"] in view["layers_on"]]},

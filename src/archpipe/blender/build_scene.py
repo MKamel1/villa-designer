@@ -1029,7 +1029,8 @@ def main():
             # read that stale line as the applied exposure).
             print("SCENE METER log-average %.4g -> exposure %.2f stops (applied; supersedes the lux-target exposure above)" % (logavg, ev))
         wb = opt["wb"] or (5500.0 if not opt["interior_lights"] else 3000.0)
-        wb_ok = photoreal.white_balance(wb)
+        wb_illuminant = "planckian" if opt["interior_lights"] else "daylight"
+        wb_ok = photoreal.white_balance(wb, illuminant=wb_illuminant)
         print("SCENE WHITE BALANCE %s K %s" % (wb, "applied" if wb_ok
                                               else "unavailable (Blender < 4.3)"))
         # One machine-readable line for archpipe.render_qa; keep it last
