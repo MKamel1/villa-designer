@@ -47,7 +47,7 @@ sys.path.insert(0, str(Path(sys.argv[1]) / "src"))
 import villa_render as driver
 from archpipe.concept.villa_render import source_provenance
 root, scene = Path(sys.argv[2]), Path(sys.argv[3])
-def write():
+def write(path=None, views=None, *, measure_exposure_groups=False):  # mirrors villa_render.write
     data = json.loads(scene.read_text(encoding="utf-8"))
     data["provenance"] = source_provenance(root)
     scene.write_text(json.dumps(data), encoding="utf-8")
@@ -138,6 +138,7 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
         target = self.root / "export.json"
         with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1", "lights": []}), \
              patch("archpipe.villa_render_contract.validate_scene", lambda scene: []), \
+             patch("archpipe.exposure_groups.require_record", lambda scene, record: {}), \
              patch.object(scene_builder, "source_provenance", lambda: source_provenance(self.root)):
             scene_builder.write(target)
         stamped = json.loads(target.read_text(encoding="utf-8"))
@@ -146,6 +147,7 @@ with patch.object(driver, "source_provenance", lambda: source_provenance(root)),
         hashes = iter(({"source_hash": "before"}, {"source_hash": "after"}))
         with patch.object(scene_builder, "build", lambda views=None: {"schema": "villa-render/1", "lights": []}), \
              patch("archpipe.villa_render_contract.validate_scene", lambda scene: []), \
+             patch("archpipe.exposure_groups.require_record", lambda scene, record: {}), \
              patch.object(scene_builder, "source_provenance", lambda: next(hashes)):
             with self.assertRaisesRegex(RuntimeError, "changed during build"):
                 scene_builder.write(target)
