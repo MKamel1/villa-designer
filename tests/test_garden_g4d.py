@@ -8,6 +8,7 @@ from pathlib import Path
 from types import SimpleNamespace
 import unittest
 
+from archpipe import villa_render_contract as contract
 from archpipe.concept import garden_g4d as G
 from archpipe.concept.garden_render_review import (
     garden_camera_findings,subject_frame_findings,downward_ground_findings,plant_form_findings)
@@ -208,12 +209,14 @@ class PreviewControls(unittest.TestCase):
         function=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='subjects')
         class Identity:
             def __matmul__(self,p):return p
-        mesh=dict(id='plant',faces=[[[.2,.1,1],[.8,.1,1],[.5,.9,1]]])
+        # Actual perspective: the high vertex is farther away. An empty
+        # bounding-box corner combines its height with the nearer depth.
+        mesh=dict(id='plant',faces=[[[.2,.1,1],[.8,.1,1],[.5,1.8,2]]])
         obj=SimpleNamespace(matrix_world=Identity())
         namespace=dict(bpy=SimpleNamespace(context=SimpleNamespace(scene=SimpleNamespace(camera=None))),
             Vector=lambda p:SimpleNamespace(x=p[0],y=p[1],z=p[2]),
-            world_to_camera_view=lambda scene,camera,p:p,
-            contract=SimpleNamespace(mesh_bbox_corners=lambda m:[[.2,-.3,1],[.8,1.1,1]]))
+            world_to_camera_view=lambda scene,camera,p:SimpleNamespace(x=p.x/p.z,y=p.y/p.z,z=p.z),
+            contract=contract)
         exec(compile(ast.fix_missing_locations(ast.Module(body=[function],type_ignores=[])),'actual-function','exec'),namespace)
         old=namespace['subjects']({'subjects':['plant']},[mesh],{'plant':obj})
         self.assertTrue(old[0]['in_frame']);self.assertFalse(old[0]['full_frame'])

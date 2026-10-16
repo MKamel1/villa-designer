@@ -4,6 +4,8 @@ from pathlib import Path
 from types import SimpleNamespace
 import unittest
 
+from archpipe import villa_render_contract as contract
+
 
 class ImportedGardenSubjects(unittest.TestCase):
     def setUp(self):
@@ -21,7 +23,7 @@ class ImportedGardenSubjects(unittest.TestCase):
                   SimpleNamespace(co=SimpleNamespace(x=.75,y=.80,z=1))]
         obj=SimpleNamespace(matrix_world=IdentityMatrix(),data=SimpleNamespace(vertices=vertices))
         imported=[dict(id='other-imported-plant',objects=[obj],label='authored appearance')]
-        self.namespace=dict(bpy=SimpleNamespace(context=SimpleNamespace(scene=SimpleNamespace(camera=None))),
+        self.namespace=dict(contract=contract,bpy=SimpleNamespace(context=SimpleNamespace(scene=SimpleNamespace(camera=None))),
                             world_to_camera_view=lambda scene,camera,point:point,
                             view={'subjects':['other-imported-plant']},scene_data={'meshes':[]},
                             objects={},imported_props=imported)
@@ -42,6 +44,28 @@ class ImportedGardenSubjects(unittest.TestCase):
         # local result is imported_props, not imported.
         frozen=compile('subjects(view, scene_data["meshes"], objects, imported)','frozen-call','eval')
         with self.assertRaises(NameError):eval(frozen,self.namespace)
+
+    def test_actual_render_call_resolves_mounted_descendants_and_missing_subject(self):
+        # The production helper, including assembly ownership, participates
+        # in this extracted consumer; Blender projection alone is doubled.
+        points=[[.25,.30,1],[.75,.80,1]]
+        meshes=[dict(id='stand-root',label='authored-assembly',faces=[points]),
+                dict(id='unrelated-leaf-name',mounting={'assembly_root':'stand-root'},faces=[points])]
+        obj=self.namespace['imported_props'][0]['objects'][0]
+        self.namespace.update(view={'subjects':['authored-assembly']},
+                              scene_data={'meshes':meshes},
+                              objects={m['id']:obj for m in meshes},imported_props=[],
+                              Vector=lambda p:SimpleNamespace(x=p[0],y=p[1],z=p[2]))
+        result=eval(compile(ast.Expression(self.call),'actual-render-call','eval'),self.namespace)
+        self.assertEqual(result[0]['matched_objects'],['stand-root','unrelated-leaf-name'])
+        self.assertTrue(result[0]['full_frame'])
+        meshes[1]['mounting']={}
+        result=eval(compile(ast.Expression(self.call),'actual-render-call','eval'),self.namespace)
+        self.assertEqual(result[0]['matched_objects'],['stand-root'])
+        self.namespace['view']['subjects']=['missing-assembly']
+        result=eval(compile(ast.Expression(self.call),'actual-render-call','eval'),self.namespace)
+        self.assertEqual(result[0]['matched_objects'],[])
+        self.assertFalse(result[0]['in_frame'])
 
 
 if __name__=='__main__':unittest.main()

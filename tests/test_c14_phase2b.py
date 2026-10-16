@@ -278,12 +278,36 @@ class FingerprintTests(unittest.TestCase):
     def test_refactor_keeps_branch_start_computation_functions(self):
         import hashlib
         audit=json.loads((FIXTURE/'refactor-audit.json').read_text())
+        # Reviewed behaviour changes retain an exact replacement digest and
+        # their original digest, commit and proof in audit['reviewed_changes'].
         for script, functions in audit['unchanged_functions'].items():
             tree=ast.parse((ROOT/script).read_text(encoding='utf-8-sig'))
             current={n.name:n for n in tree.body if isinstance(n,(ast.FunctionDef,ast.ClassDef))}
             for name, digest in functions.items():
                 with self.subTest(script=script,function=name):
                     self.assertEqual(hashlib.sha256(ast.dump(current[name],include_attributes=False).replace(', type_params=[]', '').encode()).hexdigest(),digest)
+
+    def test_reviewed_package_fingerprint_still_rejects_unreviewed_edits(self):
+        import hashlib
+        from copy import deepcopy
+        audit=json.loads((FIXTURE/'refactor-audit.json').read_text())
+        change=next(row for row in audit['reviewed_changes']
+                    if row['script']=='scripts/workstation.py' and row['function']=='package')
+        self.assertEqual(change['commit'],'6be1230')
+        self.assertEqual(change['proof'],'tests/test_release_package.py')
+        self.assertTrue((ROOT/change['proof']).is_file())
+        self.assertNotEqual(change['previous_sha256'],change['sha256'])
+        tree=ast.parse((ROOT/change['script']).read_text())
+        functions={n.name:n for n in tree.body if isinstance(n,ast.FunctionDef)}
+        for name in ('package','digest'):
+            expected=audit['unchanged_functions'][change['script']][name]
+            if name=='package':self.assertEqual(expected,change['sha256'])
+            original=functions[name]
+            fingerprint=lambda node:hashlib.sha256(ast.dump(node,include_attributes=False).replace(', type_params=[]','').encode()).hexdigest()
+            self.assertEqual(fingerprint(original),expected)
+            mutated=deepcopy(original)
+            mutated.body.append(ast.Return(value=ast.Constant(value='unreviewed computation')))
+            self.assertNotEqual(fingerprint(mutated),expected)
 
     def test_frozen_renderer_mutation_and_unrelated_edit(self):
         worker=module('worker_entry')

@@ -68,6 +68,8 @@ These operational procedures govern task delegation, remote workstation executio
   - The audit performs AST scope analysis to ensure that every assigned name, call target, and function scope is preserved, moved, or renamed.
   - If a removal is intentional, declare it in an allowlist dictionary (`{path: [names]}`) where every entry specifies a non-empty justification reason.
   - Fail closed (exit 1) on any un-allowed removal; unreadable input fails closed (exit 2).
+  - When a reviewed behaviour change supersedes a frozen computation fingerprint, keep exact comparison and record the old and replacement digests, reviewed commit, reason and behaviour regression together in the audit fixture. Integration 8 records `6be1230` and `tests/test_release_package.py` in `tests/fixtures/c14b/refactor-audit.json`; never exempt the function or automatically regenerate baselines.
+  - When a shared helper changes, search for executable-function extraction harnesses and run those sibling consumers with the real helper module. Double only unavailable runtime boundaries. Include missing-input and mounted-descendant cases for subject selection; see `integ8-extracted-function-dependencies` in the learning index.
   - Cross-reference: [docs/LEARNINGS.md](../LEARNINGS.md) (`refactor-silent-deletion`).
 
 ## Operational Dispatch Checklist

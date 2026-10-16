@@ -30,7 +30,7 @@
     "scripts/workstation.py": {
       "deploy": "d886163847a3ef19cb8fc14d6733548d6fbe7662a1189eeeb2d84a5a47095c8f",
       "digest": "76d8d324f495a51f83a6b18390dc06d039df7af6cdb0475bf4d0f20fd66ad23c",
-      "package": "63ca83a67e4eac8093490defe90f342c059e0d5ba536b0e09dbd6173df553d71",
+      "package": "e00b5818ea7db63ee3aa8d3143bc6c3c00d84ad0a5f3ac7c6d2583cea42c0263",
       "remote_root": "8a321cfb45909c79276cc39e4564da7b80e8a02b6f784c0c20b6729003df1aa5"
     },
     "revit/build_bedroom.py": {
@@ -137,5 +137,16 @@
       "shape": "8b30df2dc109bfe042be317f38e6c96ec677fc97326e1c84bea373b7285e2856",
       "solid": "d50ae133eeb17a3d0c3f459d135662ee86dc3769bceed3ec49a7352238c54a7b"
     }
-  }
+  },
+  "reviewed_changes": [
+    {
+      "script": "scripts/workstation.py",
+      "function": "package",
+      "previous_sha256": "63ca83a67e4eac8093490defe90f342c059e0d5ba536b0e09dbd6173df553d71",
+      "sha256": "e00b5818ea7db63ee3aa8d3143bc6c3c00d84ad0a5f3ac7c6d2583cea42c0263",
+      "commit": "6be1230",
+      "reason": "Render release ships knowledge/ records read inside Blender, including compressed JSON; intentional runtime dependency repair.",
+      "proof": "tests/test_release_package.py"
+    }
+  ]
 }

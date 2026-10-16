@@ -64,6 +64,35 @@
       ],
       "fixture": "tests/fixtures/darkviews-device-before.json",
       "stage": "Stage 7 render device preflight, before assembly"
+    },
+    {
+      "lesson_id": "integ8-reviewed-package-fingerprint",
+      "control_tier": [
+        2
+      ],
+      "construction": "An intentional reviewed change retains the old digest and pins the replacement digest with its commit and behaviour regression; no function is exempted",
+      "check": "tests.test_c14_phase2b.FingerprintTests.test_refactor_keeps_branch_start_computation_functions",
+      "proof_file": "tests/test_c14_phase2b.py",
+      "proofs": [
+        "test_refactor_keeps_branch_start_computation_functions",
+        "test_reviewed_package_fingerprint_still_rejects_unreviewed_edits"
+      ],
+      "stage": "Integration release dependency and computation audit"
+    },
+    {
+      "lesson_id": "integ8-extracted-function-dependencies",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Extracted renderer consumers bind the real contract module; Blender projection alone is doubled",
+      "check": "archpipe.blender.villa_scene.subjects",
+      "proof_file": "tests/test_garden_render_subjects.py",
+      "proofs": [
+        "test_actual_render_call_resolves_imported_vertex_subject",
+        "test_actual_render_call_resolves_mounted_descendants_and_missing_subject"
+      ],
+      "stage": "Portable renderer consumer and integration regression"
     }
   ]
 }
