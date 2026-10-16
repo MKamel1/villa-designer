@@ -53,9 +53,8 @@ def subject_points(subject, scene):
     marker may stand in for a removed assembly or a rendered prop.
     """
     from archpipe.concept.route_geometry import prop_framing_points
-    points = [p for m in scene["meshes"]
-              if m["id"] == subject or m["id"].startswith(subject) or m.get("label") == subject
-              for face in m["faces"] for p in face]
+    from archpipe.villa_render_contract import subject_meshes
+    points = [p for m in subject_meshes(subject,scene['meshes']) for face in m['faces'] for p in face]
     for prop in scene.get("props", []):
         if prop["id"] == subject or prop["id"].startswith(subject) or prop.get("label") == subject:
             points += prop_framing_points(prop).tolist()
@@ -107,8 +106,42 @@ def subject_mesh_frame_violations(view, scene, subject):
     return sorted(failed)
 
 
-def camera_proximity_violations(view, scene, items, clearance=None):
+def _camera_garden_obstacle(mesh):
+    physical=mesh.get('part_kind') in ('hanging-basket','swing-cushion','suspension-line',
+        'ceiling-anchor','plant-clump','feature-stone','climber','climber-branch','trellis',
+        'planter','planter-rim','steel-trough')
+    physical |= mesh.get('g6_element') in ('pergola','climber','centrepiece','furniture','espalier','foliage')
+    return physical and mesh.get('group') in ('furniture','dressing','landscape')
+
+
+def _camera_mesh_bounds(mesh):
+    points=[p for face in mesh['faces'] for p in face]
+    return ([min(p[i] for p in points) for i in range(3)],
+            [max(p[i] for p in points) for i in range(3)])
+
+
+class CameraProximityGeometry:
+    """Bounds prepared once for one immutable scene during a camera batch.
+
+    The cache is local to the admission call, never global or persisted.
+    A different scene/list refuses instead of reusing another model's bounds.
+    The camera decision and exact-triangle fallback remain in the same guard.
+    """
+    def __init__(self,scene):
+        self.scene=scene
+        self.meshes=scene['meshes']
+        self.values={id(m):_camera_mesh_bounds(m) for m in self.meshes if _camera_garden_obstacle(m)}
+
+    def bounds(self,mesh):return self.values[id(mesh)]
+
+    def require_scene(self,scene):
+        if scene is not self.scene or scene['meshes'] is not self.meshes:
+            raise ValueError('Camera proximity preparation belongs to another scene')
+
+
+def camera_proximity_violations(view, scene, items, clearance=None, geometry=None):
     """Return props and furniture closer than the required camera clearance in metres."""
+    if geometry is not None:geometry.require_scene(scene)
     if clearance is None:
         clearance = .15 if view.get("standing_room") else 1.0
     px, py, pz = view["camera"]["position"]
@@ -126,16 +159,8 @@ def camera_proximity_violations(view, scene, items, clearance=None):
     # Procedural landscape foliage/containers need the same lens clearance
     # as imported planting. Paving/turf are the standing surface.
     for mesh in scene["meshes"]:
-        physical_garden_part = mesh.get("part_kind") in ("hanging-basket", "swing-cushion", "suspension-line", "ceiling-anchor", "plant-clump", "feature-stone", "climber", "climber-branch", "trellis", "planter", "planter-rim", "steel-trough")
-        # New procedural assemblies carry their physical role explicitly;
-        # an exterior camera must not bypass clearance by using a new view
-        # identifier or a previously unseen builder part name.
-        physical_garden_part |= mesh.get("g6_element") in ("pergola", "climber", "centrepiece", "furniture", "espalier", "foliage")
-        if not physical_garden_part or mesh.get("group") not in ("furniture", "dressing", "landscape"):
-            continue
-        points = [p for f in mesh["faces"] for p in f]
-        lo = [min(p[i] for p in points) for i in range(3)]
-        hi = [max(p[i] for p in points) for i in range(3)]
+        if not _camera_garden_obstacle(mesh):continue
+        lo,hi=geometry.bounds(mesh) if geometry is not None else _camera_mesh_bounds(mesh)
         distance = math.sqrt(sum(max(lo[i]-v, 0, v-hi[i])**2 for i,v in enumerate((px,py,pz))))
         if distance < clearance and (mesh.get('explicit_geometry') or mesh.get('leaf_face_indices')):
             # A vine's low root and high canopy make its whole-mesh box

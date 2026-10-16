@@ -12,6 +12,26 @@ GROUND_ONLY = frozenset({'paving', 'travertine', 'oak-floor', 'artificial-grass'
 LEAF_GAP_M = .20
 
 
+def subject_points(subject, scene):
+    """Resolve actual subject geometry before any camera decision.
+
+    An empty target set cannot establish framing or a clear opening. Imported
+    props retain their measured framing geometry; ordinary unknown identifiers
+    refuse just as unknown explicit room queries already do.
+    """
+    from ..villa_render_contract import subject_meshes
+    from .route_geometry import prop_framing_points
+    if not isinstance(subject,str) or not subject:
+        raise ValueError('unresolved built subject '+repr(subject))
+    points=[p for m in subject_meshes(subject,scene['meshes'])
+            for face in m['faces'] for p in face]
+    for prop in scene.get('props',[]):
+        if prop['id'].startswith(subject) or prop.get('label')==subject:
+            points.extend(prop_framing_points(prop).tolist())
+    if not points:raise ValueError('unresolved built subject '+subject)
+    return points
+
+
 def subject_frame_findings(view, scene):
     """Full physical-vertex framing for views declaring that subject intent.
 
@@ -21,16 +41,10 @@ def subject_frame_findings(view, scene):
     """
     if not view.get('require_full_subject_frame'):return []
     import numpy as np
-    from ..villa_render_contract import subject_meshes
-    from .route_geometry import prop_framing_points
     c=view['camera'];eye=np.array(c['position']);yaw=math.atan2(c['target'][1]-eye[1],c['target'][0]-eye[0])
     half=view['resolution'][1]/view['resolution'][0]/2;out=[]
     for subject in view['subjects']:
-        points=[p for m in subject_meshes(subject, scene['meshes']) for face in m['faces'] for p in face]
-        for prop in scene.get('props',[]):
-            if prop['id'].startswith(subject) or prop.get('label')==subject:points+=prop_framing_points(prop).tolist()
-        if not points:
-            out.append(view['id']+': unresolved built subject '+subject);continue
+        points=subject_points(subject,scene)
         delta=np.asarray(points)-eye
         depth=delta[:,0]*math.cos(yaw)+delta[:,1]*math.sin(yaw)
         if depth.min()<=0:
@@ -302,20 +316,13 @@ def opening_frame_findings(view, scene):
     Only openings through which a subject ray passes count: remote windows
     seen on another facade are not foreground openings. No view-id exceptions.
     """
-    from .route_geometry import prop_framing_points
     from shapely.geometry import Polygon
     cam = view['camera']; half_height = view['resolution'][1]/view['resolution'][0]/2
     # Resolve intended subjects directly; never import a drawing script here.
-    points = [q for subject in view['subjects'] for mesh in scene['meshes']
-              if mesh['id'].startswith(subject) or mesh.get('label') == subject
-              for face in mesh['faces'] for q in face]
-    for subject in view['subjects']:
-        for prop in scene.get('props', []):
-            if prop['id'].startswith(subject): points.extend(prop_framing_points(prop).tolist())
+    resolved=[subject_points(subject,scene) for subject in view['subjects']]
+    points=[p for group in resolved for p in group]
     primary=view['subjects'][0] if view.get('subjects') else None
-    primary_points=[q for mesh in scene['meshes'] if primary and (mesh['id'].startswith(primary) or mesh.get('label')==primary) for face in mesh['faces'] for q in face]
-    for prop in scene.get('props', []):
-        if primary and prop['id'].startswith(primary):primary_points.extend(prop_framing_points(prop).tolist())
+    primary_points=resolved[0] if primary else []
     primary_depths=[project(cam,p)[0] for p in primary_points if project(cam,p)[0]>0]
     foreground_depth=min(primary_depths) if primary_depths else float('inf')
     import numpy as np

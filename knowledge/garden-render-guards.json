@@ -679,6 +679,163 @@
       "proofs": [
         "test_neutral_context_disables_actual_emission_and_principled_sibling"
       ]
+    },
+    {
+      "lesson_id": "flythrough-transparent-passage",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Keep panes physical; admit every path frame and swept interval against authored and evaluated geometry before metering or rendering; no early-only pass can authorize a render",
+      "check": "archpipe.concept.render_views.CameraSweep; archpipe.flythrough.admit_path; archpipe.flythrough.require_renderable",
+      "stage": "walkthrough admission before exposure measurement and rendering",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_frozen_real_wall_and_transparent_pane_refuse_clean_path_passes",
+        "test_real_thin_glass_tunnelling_is_rejected_between_clear_endpoints",
+        "test_early_physical_gate_cannot_authorize_rendering"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-authored-sun-time",
+      "control_tier": [
+        1
+      ],
+      "construction": "One shared timestamp-to-UTC boundary for still and walking cameras; naive timestamps refuse",
+      "check": "archpipe.concept.villa_render.sun_for_timestamp",
+      "stage": "camera state construction before export and graphics work",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_walking_camera_retains_actual_still_sun_and_curtain_state"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-renderer-dependency-boundary",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Author frame states once in project Python; Blender consumes serialized camera states and measures actual geometry; host Python admits every frame before render stages can load the assembly",
+      "check": "archpipe.flythrough.frame_views; scripts.flythrough.graphics; archpipe.blender.walkthrough.load_context",
+      "stage": "renderer interpreter boundary and pre-render measured admission",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_renderer_consumes_prepared_real_camera_state_without_host_packages",
+        "test_early_physical_gate_cannot_authorize_rendering"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-command-import-boundary",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Explicit repository-root bootstrap; actual CLI import probe from unrelated cwd; mandatory pinned Blender camera/AOV/device preflight before expensive stages",
+      "check": "scripts.flythrough.graphics; archpipe.blender.walkthrough.main",
+      "stage": "command startup before graphics assembly or rendering",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_actual_command_bootstrap_resolves_siblings_from_unrelated_directory",
+        "test_renderer_consumes_prepared_real_camera_state_without_host_packages"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-static-opacity",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Only demonstrably constant opaque nonmetallic nontransmitting nonemissive high-roughness shader inputs enter the temporal mask; linked or unknown optical inputs excluded without changing beauty shaders",
+      "check": "archpipe.flythrough.static_material_eligible; archpipe.blender.walkthrough.static_position_output",
+      "stage": "temporal diagnostic region construction before final rendering",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_actual_linked_opacity_and_optical_siblings_cannot_enter_static_mask",
+        "test_temporal_clean_static_surface_noise_and_missing_coverage"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-curve-overshoot",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Eliminate free tangents: explicit straight corridors ease to zero velocity and acceleration at every waypoint, followed by the unchanged full evaluated sweep",
+      "check": "archpipe.flythrough.walking_path; archpipe.flythrough.admit_path",
+      "stage": "camera path construction and measured admission",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_real_leaf_clip_rejects_old_curve_and_delivered_turn_passes",
+        "test_path_hash_is_deterministic_and_mutations_refuse"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-fixed-geometry-scan",
+      "control_tier": [
+        1
+      ],
+      "construction": "Prepare immutable scene bounds once per admission; retain the same per-camera proximity comparison and exact-triangle fallback; refuse another scene",
+      "check": "scripts.villa_render_views.CameraProximityGeometry; scripts.villa_render_views.camera_proximity_violations",
+      "stage": "per-frame camera guard preparation",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_proximity_preparation_preserves_real_obstacle_clean_and_scene_refusal"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-room-subject-prefix",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Explicit room: queries select physical room membership, with commas meaning union; opening and drawing helpers use the canonical subject resolver; explicit props retain measured-geometry refusal",
+      "check": "archpipe.villa_render_contract.subject_meshes; archpipe.concept.garden_render_review.opening_frame_findings; scripts.villa_render_views.subject_points",
+      "stage": "view intent construction and per-frame opening checks",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_real_room_subject_is_distinct_from_prop_prefix_and_explicit_prop_still_refuses"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-cache-material-retention",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Explicitly retain every referenced material before saving; downstream preflight reopens the actual assembly and checks its complete geometry and metadata",
+      "check": "archpipe.flythrough.retain_cache_materials; archpipe.blender.walkthrough.load_context; archpipe.blender.walkthrough.main",
+      "stage": "native cache publication and downstream read-back preflight",
+      "proof_file": "tests/blender_walkthrough_cache.py",
+      "proofs": [
+        "test_real_referenced_material_cache_roundtrip"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-unresolved-subject",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Resolve actual exported subject geometry before preparation and opening/full-frame decisions; empty target populations refuse",
+      "check": "archpipe.concept.garden_render_review.subject_points; scripts.flythrough.prepare",
+      "stage": "scene preparation and every per-frame camera admission",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_real_unresolved_export_subject_refuses_before_opening_admission"
+      ]
+    },
+    {
+      "lesson_id": "flythrough-static-coverage",
+      "control_tier": [
+        2
+      ],
+      "construction": "Measure three actual static-surface buffers at registered representative cameras before source metering; refuse insufficient opaque coverage without changing beauty shaders",
+      "check": "archpipe.flythrough.static_coverage; archpipe.blender.walkthrough.measure_static_coverage; scripts.flythrough.graphics",
+      "stage": "admitted native assembly before exposure measurement",
+      "proof_file": "tests/test_flythrough.py",
+      "proofs": [
+        "test_real_glazed_endpoint_refuses_early_static_coverage"
+      ]
     }
   ]
 }

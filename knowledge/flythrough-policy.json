@@ -1,0 +1,66 @@
+{
+  "schema": "flythrough-policy/1",
+  "status": "PRE-REGISTERED before walkthrough rendering or image comparisons",
+  "fps": 24,
+  "frames": 720,
+  "duration_seconds": 30,
+  "preview": {
+    "resolution": [
+      480,
+      270
+    ],
+    "samples": 32,
+    "denoise": true
+  },
+  "final_resolution": [
+    1920,
+    1080
+  ],
+  "blender_version": "4.5.14",
+  "seed": 0,
+  "eye_height_m": 1.35,
+  "eye_height_source": "docs/decisions/ADR-0013-presentation-renders.md, decision part 8; render_views.choose default",
+  "obstacle_clearance_m": 0.15,
+  "wall_clearance_m": 0.3,
+  "clearance_source": ".agents/skills/villa-render/SKILL.md, Order 1; render_views.choose standing-point policy",
+  "walking_height_m": 1.8,
+  "walking_height_basis": "ASSUMED conservative camera-operator envelope, not an architectural standard",
+  "maximum_speed_m_s": 0.8,
+  "maximum_yaw_rate_deg_s": 20,
+  "motion_basis": "ASSUMED slow walkthrough camera operation; no published speed or yaw standard claimed",
+  "sample_candidates": [
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "reference_samples": 1024,
+  "sample_difference": {
+    "basis": "ASSUMED image fidelity criterion, registered before measurements",
+    "metric": "mean absolute RGB channel error in developed 8-bit PNG divided by 255, same camera, seed, exposure, white balance, full 1920x1080 frame",
+    "maximum": 0.01,
+    "requirement": "all three representative frames also pass unmodified render_qa"
+  },
+  "temporal_difference": {
+    "basis": "ASSUMED temporal noise criterion, registered before measurements",
+    "metric": "mean absolute RGB change between adjacent candidate frames on static opaque high-roughness surfaces reprojected using measured world position and first-hit position agreement within 0.03 m; reject disocclusion, four-pixel borders, depth edges, glass, emissive and unmatched pixels; RGB divided by 255; includes real view-dependent changes conservatively",
+    "maximum": 0.01,
+    "minimum_static_pixels": 1000,
+    "registration_revision": "2026-10-15 before any walkthrough image rendering or measurement: use actual reprojected candidate changes, avoiding an unnecessary 1024-sample reference for every final frame; threshold unchanged at 0.01",
+    "coverage": "every adjacent frame pair; insufficient valid static pixels refuses acceptance",
+    "minimum_material_roughness": 0.7,
+    "reprojection_match_m": 0.03,
+    "edge_offset_pixels": 4,
+    "maximum_edge_world_jump_m": 0.1
+  },
+  "exposure_rule": "knowledge/exposure-group-rule.json",
+  "exposure_scope": "all 720 path frames; one complete-clip source population and one upper-median meter lock; no still-view lock reuse",
+  "final_gate": "~/archpipe/logs/render/finals.done must exist before final GPU work",
+  "encode": {
+    "codec": "libx264",
+    "pixel_format": "yuv420p",
+    "final_crf": 16,
+    "preview_crf": 23
+  }
+}

@@ -1892,6 +1892,71 @@ def measure_exposure_groups(scene_data, args, setup_view, lights, emissive_sourc
         json.dump(result, stream, indent=2)
 
 
+def frame_qa_scene(scene_data, view, camera, objects, materials, cloth_report):
+    """Measure the production QA context at the actual frame camera.
+
+    Shared by still and walking cameras; window ray tests and cloth measurements
+    retain exactly the same coverage and thresholds.
+    """
+    s = bpy.context.scene
+    windows = []
+    if view["state"] == "day":
+        origin = camera.matrix_world.translation
+        depsgraph = bpy.context.view_layer.depsgraph
+        for spec in scene_data["meshes"]:
+            if spec["material"] != "glass-clear" or spec["id"] in view.get("hide_meshes", []):
+                continue
+            for k, face in enumerate(spec["faces"]):
+                points = [world_to_camera_view(s, camera, Vector(p)) for p in face]
+                if not points or any(p.z <= 0 for p in points):
+                    continue
+                # Projected does not mean visible: a pane in the next
+                # room must not make the image checker sample a wall.
+                centre = sum((Vector(p) for p in face), Vector()) / len(face)
+                samples = [centre] + [centre * 0.5 + Vector(p) * 0.5 for p in face]
+                visible = False
+                for target in samples:
+                    ray = target - origin
+                    hit, location, _normal, _index, obj, _matrix = s.ray_cast(
+                        depsgraph, origin, ray.normalized(), distance=ray.length + 0.02)
+                    if hit and obj.name == objects[spec["id"]].name and (location - target).length < 0.03:
+                        visible = True
+                        break
+                if not visible:
+                    continue
+                rect = [max(0, min(p.x for p in points)), max(0, min(p.y for p in points)),
+                        min(1, max(p.x for p in points)), min(1, max(p.y for p in points))]
+                if rect[2] - rect[0] >= 0.03 and rect[3] - rect[1] >= 0.03:
+                    windows.append({"id": spec["id"] + "-" + str(k), "screen": rect})
+    qa_materials = [{"name": name, "note": mat.get("note", ""), "override": "base_rgb" in mat,
+                     "luminance": luminance(mat.get("base_rgb", [0, 0, 0])),
+                     "glass": mat["kind"] == "glass", "photo": bool(mat.get("asset")),
+                     "saturation": max(mat.get("base_rgb", [0, 0, 0])) - min(mat.get("base_rgb", [0, 0, 0]))}
+                    for name, mat in scene_data["materials"].items()]
+    textile_names = {"boucle", "linen", "sage-fabric", "taupe-fabric", "charcoal-fabric",
+                     "bedding-white", "throw-taupe", "rug", "outdoor-fabric", "leather-brown"}
+    qa_textiles = [{"name": name, "reflectance": scene_data["materials"][name].get("reflectance")}
+                   for name in sorted(textile_names & scene_data["materials"].keys())]
+    cloth_specs = {c["id"]: c for c in scene_data.get("cloth", [])}
+    qa_bedding = []
+    for record in cloth_report:
+        spec = cloth_specs[record["id"]]
+        if not record["id"].startswith("duvet-"):
+            continue
+        axis = 0 if spec["length_axis"] == "x" else 1
+        bounds = record["bounds"]
+        qa_bedding.append({"id": record["id"], "mattress_y": spec["mattress_span"],
+                           "duvet_y": [bounds[axis], bounds[axis + 3]],
+                           "duvet_z_min": bounds[2]})
+    architectural_glass = sum(name == "glass-clear" and spec["kind"] == "glass" and
+                              any(node.type == "BSDF_TRANSPARENT" for node in materials[name].node_tree.nodes)
+                              for name, spec in scene_data["materials"].items())
+    return {"windows": windows, "glass": {"architectural": architectural_glass},
+            "materials": qa_materials, "textiles": qa_textiles,
+            "soft_goods": [{"name": c["id"], "simulated": c["colliders"] > 0} for c in cloth_report],
+            "bedding": qa_bedding}
+
+
 def render(scene_data, args):
     # Resolve the actual execution device before expensive scene assembly.
     # A requested GPU render must never silently become a CPU comparison.
@@ -1984,6 +2049,9 @@ def render(scene_data, args):
             photoreal.hdri_world(hdri, sky["horizontal_lux"])
         return emissive
 
+    if getattr(args, "walkthrough_callback", None):
+        return args.walkthrough_callback(scene_data, args, locals())
+
     if args.measure_exposure_groups:
         measure_exposure_groups(scene_data, args, setup_view, lights, emissive_sources)
         return
@@ -2065,55 +2133,7 @@ def render(scene_data, args):
         s.render.image_settings.color_depth = "8"
         # QA provenance: screen windows are projected from the actual glass
         # faces; cloth bounds are read after simulation, not from the cut.
-        windows = []
-        if view["state"] == "day":
-            origin = camera.matrix_world.translation
-            depsgraph = bpy.context.view_layer.depsgraph
-            for spec in scene_data["meshes"]:
-                if spec["material"] != "glass-clear" or spec["id"] in view.get("hide_meshes", []):
-                    continue
-                for k, face in enumerate(spec["faces"]):
-                    points = [world_to_camera_view(s, camera, Vector(p)) for p in face]
-                    if not points or any(p.z <= 0 for p in points):
-                        continue
-                    # Projected does not mean visible: a pane in the next
-                    # room must not make the image checker sample a wall.
-                    centre = sum((Vector(p) for p in face), Vector()) / len(face)
-                    samples = [centre] + [centre * 0.5 + Vector(p) * 0.5 for p in face]
-                    visible = False
-                    for target in samples:
-                        ray = target - origin
-                        hit, location, _normal, _index, obj, _matrix = s.ray_cast(
-                            depsgraph, origin, ray.normalized(), distance=ray.length + 0.02)
-                        if hit and obj.name == objects[spec["id"]].name and (location - target).length < 0.03:
-                            visible = True
-                            break
-                    if not visible:
-                        continue
-                    rect = [max(0, min(p.x for p in points)), max(0, min(p.y for p in points)),
-                            min(1, max(p.x for p in points)), min(1, max(p.y for p in points))]
-                    if rect[2] - rect[0] >= 0.03 and rect[3] - rect[1] >= 0.03:
-                        windows.append({"id": spec["id"] + "-" + str(k), "screen": rect})
-        qa_materials = [{"name": name, "note": mat.get("note", ""), "override": "base_rgb" in mat,
-                         "luminance": luminance(mat.get("base_rgb", [0, 0, 0])),
-                         "glass": mat["kind"] == "glass", "photo": bool(mat.get("asset")),
-                         "saturation": max(mat.get("base_rgb", [0, 0, 0])) - min(mat.get("base_rgb", [0, 0, 0]))}
-                        for name, mat in scene_data["materials"].items()]
-        textile_names = {"boucle", "linen", "sage-fabric", "taupe-fabric", "charcoal-fabric",
-                         "bedding-white", "throw-taupe", "rug", "outdoor-fabric", "leather-brown"}
-        qa_textiles = [{"name": name, "reflectance": scene_data["materials"][name].get("reflectance")}
-                       for name in sorted(textile_names & scene_data["materials"].keys())]
-        cloth_specs = {c["id"]: c for c in scene_data.get("cloth", [])}
-        qa_bedding = []
-        for record in cloth_report:
-            spec = cloth_specs[record["id"]]
-            if not record["id"].startswith("duvet-"):
-                continue
-            axis = 0 if spec["length_axis"] == "x" else 1
-            bounds = record["bounds"]
-            qa_bedding.append({"id": record["id"], "mattress_y": spec["mattress_span"],
-                               "duvet_y": [bounds[axis], bounds[axis + 3]],
-                               "duvet_z_min": bounds[2]})
+        qa_scene = frame_qa_scene(scene_data, view, camera, objects, materials, cloth_report)
         report = {"view": view["id"], "state": view["state"], "samples": s.cycles.samples,
                   "render_device": render_device,
                   "resolution": [s.render.resolution_x, s.render.resolution_y], "render_seconds": elapsed,
@@ -2147,14 +2167,7 @@ def render(scene_data, args):
                           exposure_rule_measurement=record['measurements'][view['id']],
                           group_meters={ident: metered[ident] for ident in metered_over[group]})
             report['exposure_locked_per_state'] = False
-        architectural_glass = sum(name == "glass-clear" and spec["kind"] == "glass" and
-                                  any(node.type == "BSDF_TRANSPARENT" for node in materials[name].node_tree.nodes)
-                                  for name, spec in scene_data["materials"].items())
-        report["qa_scene"] = {"windows": windows,
-                              "glass": {"architectural": architectural_glass},
-                              "materials": qa_materials, "textiles": qa_textiles,
-                              "soft_goods": [{"name": c["id"], "simulated": c["colliders"] > 0}
-                                             for c in cloth_report], "bedding": qa_bedding}
+        report["qa_scene"] = qa_scene
         with open(os.path.join(args.out, view["id"] + ".json"), "w", encoding="utf-8") as f:
             json.dump(report, f, indent=2)
         print("VILLA RENDER wrote " + path, flush=True)

@@ -519,3 +519,64 @@ bytes instead of regenerating surface normals. Keep exact garment envelopes,
 the unchanged 27 mm hanging gap, physical parts, rails, slots and cameras.
 Validate all source sizes and all bounded folded variants; review a small
 unchanged-context neutral GPU checkpoint before complete-build acceptance.
+
+## Walking cameras
+
+Use `scripts/flythrough.py` for a moving camera on an existing villa scene.
+Keep design geometry and authored lighting fixed. Before metering or rendering,
+reuse the production standing-point, interior lens-clearance, finite-wall and
+opening guards for every frame; also run `render_views.CameraSweep` against
+visible evaluated Blender geometry between successive positions. Transparent
+panes are physical obstacles even where the photographic sightline is clear.
+An early authored-geometry pass cannot admit rendering. Garden panes may move
+only using explicitly authored operable parts and open positions; otherwise
+end inside the threshold and disclose closed glazing.
+
+Register motion, sample-difference and temporal criteria before measurements.
+Apply the registered dominant-light rule to all path-frame source populations
+and lock their complete upper-median exposure and one white point for the clip.
+Hash-bind the path, code, scene, photometry, evaluated assembly and frame bytes;
+reopening a cached Blender scene must reproduce the evaluated mesh receipt.
+Review representative drafts and the complete preview before final integration.
+Video encoding requires all frames, final sample-choice evidence, sampled
+production QA and every adjacent static-region temporal check to pass.
+
+Moving-camera commands preflight both interpreters before expensive work:
+the host resolves sibling modules from the explicit repository root, while
+pinned Blender validates serialized frame states, camera/diagnostic APIs and
+its actual graphics device. Author states once in project Python; do not
+assume Blender bundles project-only packages. Blender measures the actual
+assembly and project Python runs admission before any image render. Temporal
+static masks must prove constant opacity, transmission, metallic response and
+high roughness; linked optical inputs, unknown scattering closures and
+emission are excluded without changing beauty shaders. Require enough valid
+static pixels rather than weakening the registered image-difference limit.
+
+Use explicit room subject queries for moving room-context views: `room:a,b`
+means physical meshes assigned to room a or room b. Do not infer a room from
+a decorative prop's name prefix. Keep opening and drawing projections on the
+canonical subject resolver. Clear waypoints do not prove a clear interpolant:
+use bounded motion corridors and test the evaluated path, including imported
+leaves. Prepare fixed camera-proximity bounds once within an immutable scene,
+while retaining the same decision and exact-triangle fallback.
+
+A saved Blender cache must explicitly retain every material referenced by its
+metadata, including unused authored prototypes. Downstream preflight reopens
+the actual cache and resolves all recorded datablocks and evaluated meshes;
+a camera/API-only preflight cannot prove that round trip. Cache retention is
+a storage property and must not change optical inputs or model geometry.
+
+Moving-camera preparation resolves every declared subject against actual exported
+mesh identifiers or measured imported-prop framing geometry before rendering.
+An empty target population refuses before opening or framing arithmetic. Builder
+local identifiers are not exported identifiers. Review the actual opening-member
+projection after subject correction; a previously quiet empty-target guard is
+superseded evidence, even when physical camera sweeps passed.
+
+After native path admission, run `scripts/flythrough.py coverage` before exposure
+measurement. The three representative cameras must provide eligible opaque
+static pixels at the registered final pixel density, using real position buffers
+and unchanged beauty shaders. This early necessary screen cannot grant temporal
+acceptance: every adjacent final-frame pair must still pass the registered
+matched-pixel count and image-difference limit. A fully glazed view can pass
+physical and opening guards while providing no valid temporal measurement.
