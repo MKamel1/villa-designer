@@ -24,18 +24,23 @@ def require_subject_bindings(scene, report):
             raise ValueError('Measured subject omits assembly meshes: ' + row['id'])
 
 
-def caption_evidence(scene, view, report, qa):
+def caption_evidence(scene, view, report, qa, *, transport_checked=False):
     """Keep actual settings and nonpassing measurements beside the image.
 
     Legacy reports without a named cohort are explicitly unverified. A
     report claiming a current whole-set lock must match the complete scene,
     including diagnostic/retired views that still participate in metering.
     """
+    grouped = bool(scene.get('exposure_groups'))
+    if grouped:
+        from .exposure_groups import require_receipts
+        require_receipts(scene, [report], transport_checked=transport_checked)
+        require_subject_bindings(scene, report)
     state = report.get('exposure_state')
     cohort = report.get('exposure_metered_over')
     stops = report.get('exposure_stops')
     locked = report.get('exposure_locked_per_state') is True
-    verified = False
+    verified = grouped
     legacy_unnamed_lock = locked and state is None and cohort is None
     if locked and not legacy_unnamed_lock:
         expected = [v['id'] for v in scene['views'] if v['exposure'] == view['exposure']]
@@ -46,6 +51,11 @@ def caption_evidence(scene, view, report, qa):
         require_subject_bindings(scene, report)
     checks = qa['checks']
     return {
+        'exposure_group': report.get('exposure_group', state),
+        'exposure_rule_measurement': report.get('exposure_rule_measurement'),
+        'exposure_rule_sha256': report.get('exposure_rule_sha256'),
+        'exposure_measurement_sha256': report.get('exposure_measurement_sha256'),
+        'white_balance_k': report.get('white_balance_k'),
         'exposure_stops': stops,
         'exposure_state': state,
         'metered_over': cohort,

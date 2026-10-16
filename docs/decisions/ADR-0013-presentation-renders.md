@@ -169,3 +169,57 @@ second villa can be run without adapting those inputs and testing its own
 geometry. The scene contract and workstation driver are the reusable
 boundaries. The operating sequence and known limits are recorded in the
 `docs/MCP.md` and `docs/villa-render-scene.md`.
+
+### Amendment (2026-10-15): exposure groups by dominant light
+
+**Client decision 2026-10-15.** Replace the single villa-wide lock per lighting
+state with one exposure and one white balance per measured dominant-light
+group. Comparisons are locked within each named group. Every caption and
+render receipt names the group, source measurements, exposure and white balance.
+Quality assurance (QA) means the production image checks. This changes
+presentation policy; lamps, geometry, finishes and QA limits stay fixed.
+
+The rule is pre-registered in [exposure-group-rule.json](../../knowledge/exposure-group-rule.json)
+before any new group verdict is measured. All thresholds are **ASSUMED**,
+not sourced design standards: a strict majority (greater than 0.50) of
+metered linear luminance from lamps defines lamp dominance. Existing evening
+and exterior-dusk presets, including the day-state gallery already assigned
+evening, retain their cohorts and white balance. Other views retain their
+original day/exterior-day group unless lamp-dominant; remaining exterior-day
+views with at most 0.50 sun-disc contribution to daylight form exterior-shade.
+This declares sky-dominant exterior shade as the client's “shade over sun”
+category; no view identifiers, north-facing labels or image QA verdicts select it.
+
+Measure each complete authored view with production geometry, materials,
+opened doors, camera, layers and dimmers, at 144 × 96 pixels, 256 samples,
+seed zero, no denoising and 16 total bounces. Render lamps-only (black world),
+daylight-only (all authored analytic and mesh emission off), and for daytime
+exteriors sky-only (same daylight with Nishita sun disc disabled). Use a common
+mask: the lowest 97% of lamps-plus-daylight luminances, excluding zero values.
+The lamp fraction is summed lamp luminance divided by summed lamp plus daylight
+luminance. The solar fraction is daylight minus sky-only luminance divided by
+daylight, bounded between zero and one; it includes indirect sun transport.
+Linear luminance is 0.2126 times red plus 0.7152 times green plus 0.0722 times blue.
+Freeze measurements, assignments and live-input fingerprints by value; reject
+manual membership edits and stale sources. Retired authored diagnostic views
+retain their historic metering participation so evening/dusk behaviour is preserved.
+
+Daylit groups use 5500 kelvin. Lamp-dominant white balance is the nearest integer
+kelvin of the emitted-flux-weighted correlated colour temperature of active
+authored lamps over all its member views, with driver and view dimming applied.
+Each lamp counts once per view; emitting companion lenses are not counted twice,
+and emissive-only sources use measured area times luminous exitance. This is
+a declared red, green and blue (RGB) camera approximation, not spectral chromatic adaptation.
+Evening retains 3000 kelvin and exterior-dusk 4300 kelvin. White-balance tint
+was initially fixed at 10. The authorised white-balance reciprocity check
+(`docs/wbcheck-report.md`) demonstrated that this daylight offset disagrees
+with the Planckian lamp model. Lamp-dominant and evening therefore use tint
+zero; daylit and exterior-dusk groups retain tint 10. Temperature, group
+membership, exposure method and the AgX Medium High Contrast look are unchanged.
+
+Exposure uses the existing camera meter without modification and the same
+upper median across every view in each complete group. A subset render request
+still meters the whole group. Guards recompute membership, check source identity
+and require exactly one exposure and white balance per group. Production
+render_qa runs unchanged on every view; failures remain reported. This amendment
+authorises group adaptation, never per-view tuning or presentation approval.

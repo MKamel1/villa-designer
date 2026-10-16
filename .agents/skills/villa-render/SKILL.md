@@ -256,16 +256,20 @@ when its geometry and fallback probes pass. See [beds report](../../../docs/beds
      sample count, minimum visible rays and reason. Other subjects retain
      seven of thirteen rays; copied or invalid allowances fail closed.
      Never lower global visibility or QA limits to accommodate a local decision.
-   - The contract requires `exposure_mode: set-metered`; independent
-     per-view metering and missing modes refuse before rendering. Exposure
-     is LOCKED per state across the whole set: `day`, `evening`,
-     `exterior-dusk`, `exterior-day`. A subset request still meters every
-     scene view in each requested exposure state, preserving its whole-set
-     lock (`villa_scene.exposure_locks`). Never trim the authored scene's
-     view cohort to meter an individual render request.
-   - Rooms without daylight (a windowless corridor) use the lamp white
-     balance; bathrooms and basement rooms by day have their lights on,
-     stated in the caption. Never correct a physical cast in camera.
+   - The contract requires `exposure_mode: set-metered`. Client decision
+     2026-10-15 (ADR-0013 amendment) locks exposure and white balance by
+     measured dominant light, using the pre-registered rule in
+     `knowledge/exposure-group-rule.json` and frozen source isolations in
+     `knowledge/exposure-groups.json`. Never assign a view by hand or tune
+     thresholds from QA outcomes. Subset requests meter the complete group;
+     evening/dusk cohorts retain their behaviour. `exposure_groups.require_record`
+     and `require_receipts` reject stale inputs, edited membership and camera
+     settings inconsistent with the group's complete upper-median meter and
+     white balance. Record the group, source measurements and actual camera
+     settings in every receipt/caption. All render_qa limits still apply.
+   - Daytime bathrooms and basement rooms keep their authored lights on,
+     stated in the caption. Lamp-group white balance is derived once from
+     the group's authored dimmed flux/CCT population; never tune per view.
 2. **Guards, locally, before the workstation** (all must pass):
    - `tests/test_render_standard.py`: lens and camera, set-metered
      exposure, cloth and its cut, smooth paint, construction details,
@@ -460,7 +464,7 @@ asset or view:
 
 ## Never
 
-Compensate with exposure, white balance or tone curves; add unlabelled
+Tune exposure, white balance or tone curves outside the pre-registered group policy; add unlabelled
 content; move design geometry or photometry to make an image look better;
 show an image that has not passed the guards and been looked at.
 

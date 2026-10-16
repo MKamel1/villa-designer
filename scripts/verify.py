@@ -173,7 +173,7 @@ def main() -> int:
     expect("compressed route record stays below 1.5 MB",
            RECORD.stat().st_size < 1500000)
     manifest_path = ROOT / "ops/workstation/library-manifest.json"
-    scene = VR.build(views=[])
+    scene = VR.build()
     from archpipe.task_probe import require_clear_probes
     expect('task probes own actual final surfaces and have clear sensor paths',
            not raises(ValueError, require_clear_probes, scene))
@@ -231,6 +231,22 @@ def main() -> int:
         (ROOT / row['proof_file']).is_file() and all(
             'def ' + name + '(' in (ROOT / row['proof_file']).read_text()
             for name in row['proofs']) for row in darkview_registry['records']))
+    exposure_registry = json.loads((ROOT / 'knowledge/exposure-group-guards.json').read_text())
+    expect('dominant-light exposure controls have registered proving tests', all(
+        (ROOT / row['proof_file']).is_file() and all(
+            'def ' + name + '(' in (ROOT / row['proof_file']).read_text()
+            for name in row['proofs']) for row in exposure_registry['records']))
+    from archpipe.exposure_groups import classify, require_record
+    group_record = json.loads((ROOT / 'knowledge/exposure-groups.json').read_text())
+    # Meter membership binds final per-view doors/curtains, not raw view declarations.
+    authored_group_scene = scene
+    expect('frozen source isolations obey pre-registered groups and live transport',
+           not raises(ValueError, require_record, authored_group_scene, group_record))
+    measured_rows = group_record['measurements']
+    expect('real bath, store and shade memberships survive renaming', all(
+        classify(dict(measured_rows[ident]['view_input'], id='renamed-sibling'), measured_rows[ident])
+        == measured_rows[ident]['group'] for ident in
+        ('v15-family-bath', 'v29-under-stair-store', 'v36-north-garden')))
     from archpipe.render_evidence import caption_evidence, require_subject_bindings
     from archpipe.villa_render_contract import subject_meshes
     frozen_dark = json.loads(gzip.decompress((ROOT / 'tests/fixtures/darkviews-real.json.gz').read_bytes()))

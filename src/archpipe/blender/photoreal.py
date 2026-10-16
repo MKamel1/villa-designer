@@ -481,13 +481,22 @@ def camera_meter(key=0.18, bias_stops=0.0, look="None"):
     return ev, logavg
 
 
-def white_balance(kelvin):
+def white_balance(kelvin, *, illuminant="planckian"):
+    """Adapt to a stated source locus, rather than temperature alone.
+
+    Blender's tint zero lies on its Planckian locus; tint 10 is the
+    daylight offset (its Illuminant A/D55 presets use 0/10 respectively).
+    Our lamp colours integrate Planck radiation, so a daylight tint would
+    over-correct their blue channel. See docs/wbcheck-report.md.
+    """
+    if illuminant not in ("planckian", "daylight"):
+        raise ValueError("white balance requires a planckian or daylight illuminant")
     vs = bpy.context.scene.view_settings
     if not hasattr(vs, "white_balance_temperature"):
         return False                          # Blender < 4.3
     vs.use_white_balance = True
     vs.white_balance_temperature = float(kelvin)
-    vs.white_balance_tint = 10.0              # Blender's neutral at D65
+    vs.white_balance_tint = 0.0 if illuminant == "planckian" else 10.0
     return True
 
 

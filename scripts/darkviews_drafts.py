@@ -29,7 +29,8 @@ def main():
             report = json.loads((output / (vid + '.json')).read_text())
             scene = bpy.context.scene
             scene.view_settings.exposure = fixture[archive]['reports'][vid]['exposure_stops']
-            B.photoreal.white_balance(data['exposure'][view['exposure']]['white_balance_k'])
+            B.photoreal.white_balance(data['exposure'][view['exposure']]['white_balance_k'],
+                                     illuminant='daylight')
             image = bpy.data.images.load(str(output / (vid + '.exr')), check_existing=False)
             path = output / (vid + '-historical-exposure-DIAGNOSTIC.png')
             scene.render.image_settings.file_format = 'PNG'

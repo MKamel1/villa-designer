@@ -1,0 +1,2332 @@
+{
+  "views": [
+    {
+      "id": "v01-kitchen-garden",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          11.297,
+          -26.671,
+          -1.65
+        ],
+        "target": [
+          13.595,
+          -24.743,
+          -1.65
+        ],
+        "lens_mm": 16,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "lens_mm",
+            "prior": 24,
+            "new": 16,
+            "reason": "room subjects require the chosen 16 mm frame"
+          },
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              11.297,
+              -26.671,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              13.595,
+              -24.743,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "lens_basis": {
+          "at_24_mm": {
+            "horizontal_need_deg": 37.750928646502494,
+            "lower_top_need_deg": 10.646765508140652,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 36.86989764584402,
+            "vertical_limit_deg": 26.56505117707799,
+            "position": [
+              11.297,
+              -24.571
+            ],
+            "target": [
+              13.418,
+              -26.692
+            ],
+            "framed_candidates": 0,
+            "search_step_m": 0.1
+          },
+          "at_16_mm": {
+            "horizontal_need_deg": 38.199595661941615,
+            "lower_top_need_deg": 12.772319047412191,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 48.366460663429805,
+            "vertical_limit_deg": 36.86989764584402,
+            "position": [
+              11.297,
+              -26.671
+            ],
+            "target": [
+              13.595,
+              -24.743
+            ],
+            "framed_candidates": 122,
+            "search_step_m": 0.1
+          }
+        },
+        "home_room": "kitchen",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "accent"
+      ],
+      "dimmers": {
+        "ambient": 0.5,
+        "accent": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v02-garden-living",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          18.367,
+          -25.071,
+          -1.65
+        ],
+        "target": [
+          20.088,
+          -27.528,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              18.367,
+              -25.071,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              20.088,
+              -27.528,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "living",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "accent"
+      ],
+      "dimmers": {
+        "ambient": 0.5,
+        "accent": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v03-street-lounge",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          9.617,
+          -27.471,
+          -1.65
+        ],
+        "target": [
+          7.019,
+          -25.971,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              9.617,
+              -27.471,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              7.019,
+              -25.971,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "lounge",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "accent"
+      ],
+      "dimmers": {
+        "ambient": 0.5,
+        "accent": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v04-study-deck",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          8.817,
+          -26.371,
+          1.35
+        ],
+        "target": [
+          6.098,
+          -25.103,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              8.817,
+              -26.371,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              6.098,
+              -25.103,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "study-game",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v05-parents-bedroom",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          18.827,
+          -24.541,
+          1.35
+        ],
+        "target": [
+          21.284,
+          -26.262,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              18.827,
+              -24.541,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              21.284,
+              -26.262,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "parents-bed",
+        "reframed": "chosen"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.3,
+        "accent": 0.4,
+        "task": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v06-kids-room",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          13.177,
+          -27.371,
+          1.35
+        ],
+        "target": [
+          11.909,
+          -24.652,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              13.177,
+              -27.371,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              11.909,
+              -24.652,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "kids-a",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v07-terrace-dusk",
+      "state": "exterior-dusk",
+      "exposure": "exterior-dusk",
+      "camera": {
+        "position": [
+          28.1,
+          -20.81,
+          -1.65
+        ],
+        "target": [
+          25.6363,
+          -25.1509,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.073
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.5,
+        "task": 0.4
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v08-cinema",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          3.125,
+          -22.191,
+          -1.65
+        ],
+        "target": [
+          6.079,
+          -21.67,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              3.125,
+              -22.191,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              6.079,
+              -21.67,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "cinema",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v09-dining-evening",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          18.302,
+          -24.471,
+          -1.65
+        ],
+        "target": [
+          16.004,
+          -26.399,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              18.302,
+              -24.471,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              16.004,
+              -26.399,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "dining",
+        "reframed": "chosen"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.35,
+        "task": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v10-living-evening",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          18.367,
+          -25.071,
+          -1.65
+        ],
+        "target": [
+          20.088,
+          -27.528,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              18.367,
+              -25.071,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              20.088,
+              -27.528,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "living",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.25,
+        "task": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v11-stair-void",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          10.45,
+          -27.95,
+          -1.65
+        ],
+        "target": [
+          5.8,
+          -27.95,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.12,
+        "home_room": "hall-b",
+        "reframed": false
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v12-ensuite",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          21.504,
+          -29.011,
+          1.35
+        ],
+        "target": [
+          19.383,
+          -31.132,
+          1.35
+        ],
+        "lens_mm": 16,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "lens_mm",
+            "prior": 24,
+            "new": 16,
+            "reason": "room subjects require the chosen 16 mm frame"
+          },
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              21.504,
+              -29.011,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              19.383,
+              -31.132,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "lens_basis": {
+          "at_24_mm": {
+            "horizontal_need_deg": 38.98031721896447,
+            "lower_top_need_deg": 18.81077466394362,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 36.86989764584402,
+            "vertical_limit_deg": 26.56505117707799,
+            "position": [
+              21.704,
+              -28.611
+            ],
+            "target": [
+              19.776,
+              -30.909
+            ],
+            "framed_candidates": 0,
+            "search_step_m": 0.1
+          },
+          "at_16_mm": {
+            "horizontal_need_deg": 47.121096396660235,
+            "lower_top_need_deg": 22.81770617388436,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 48.366460663429805,
+            "vertical_limit_deg": 36.86989764584402,
+            "position": [
+              21.504,
+              -29.011
+            ],
+            "target": [
+              19.383,
+              -31.132
+            ],
+            "framed_candidates": 41,
+            "search_step_m": 0.1
+          }
+        },
+        "home_room": "parents-ensuite",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v13-kids-b",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          16.652,
+          -27.571,
+          1.35
+        ],
+        "target": [
+          16.131,
+          -24.617,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              16.652,
+              -27.571,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              16.131,
+              -24.617,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "kids-b",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v15-family-bath",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          10.327,
+          -26.371,
+          1.35
+        ],
+        "target": [
+          9.301,
+          -23.552,
+          1.35
+        ],
+        "lens_mm": 16,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "lens_mm",
+            "prior": 24,
+            "new": 16,
+            "reason": "room subjects require the chosen 16 mm frame"
+          },
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              10.327,
+              -26.371,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              9.301,
+              -23.552,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "lens_basis": {
+          "at_24_mm": {
+            "horizontal_need_deg": 38.74616226255507,
+            "lower_top_need_deg": 27.215471194664996,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 36.86989764584402,
+            "vertical_limit_deg": 26.56505117707799,
+            "position": [
+              10.327,
+              -26.671
+            ],
+            "target": [
+              9.551,
+              -23.773
+            ],
+            "framed_candidates": 0,
+            "search_step_m": 0.1
+          },
+          "at_16_mm": {
+            "horizontal_need_deg": 47.37770277133192,
+            "lower_top_need_deg": 30.39839724811097,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 48.366460663429805,
+            "vertical_limit_deg": 36.86989764584402,
+            "position": [
+              10.327,
+              -26.371
+            ],
+            "target": [
+              9.301,
+              -23.552
+            ],
+            "framed_candidates": 26,
+            "search_step_m": 0.1
+          }
+        },
+        "home_room": "family-bath",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent"
+      ],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v35-family-bath-wc",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          9.602,
+          -24.846,
+          1.35
+        ],
+        "target": [
+          12.2,
+          -26.346,
+          1.35
+        ],
+        "lens_mm": 16,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "lens_mm",
+            "prior": 24,
+            "new": 16,
+            "reason": "room subjects require the chosen 16 mm frame"
+          },
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              9.602,
+              -24.846,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              12.2,
+              -26.346,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "lens_basis": {
+          "at_24_mm": {
+            "horizontal_need_deg": 12.053578303069065,
+            "lower_top_need_deg": 27.408765474073626,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 36.29901471129609,
+            "horizontal_limit_deg": 36.86989764584402,
+            "vertical_limit_deg": 26.56505117707799,
+            "position": [
+              9.577,
+              -24.846
+            ],
+            "target": [
+              12.034,
+              -26.567
+            ],
+            "framed_candidates": 0,
+            "search_step_m": 0.025
+          },
+          "at_16_mm": {
+            "horizontal_need_deg": 13.146300025964138,
+            "lower_top_need_deg": 27.6812893295269,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 36.61651183333575,
+            "horizontal_limit_deg": 48.366460663429805,
+            "vertical_limit_deg": 36.86989764584402,
+            "position": [
+              9.602,
+              -24.846
+            ],
+            "target": [
+              12.2,
+              -26.346
+            ],
+            "framed_candidates": 16,
+            "search_step_m": 0.025
+          }
+        },
+        "home_room": "family-bath",
+        "reframed": "chosen"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent"
+      ],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v16-guest-wc",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          10.727,
+          -23.891,
+          -1.65
+        ],
+        "target": [
+          9.459,
+          -21.172,
+          -1.65
+        ],
+        "lens_mm": 16,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "lens_mm",
+            "prior": 24,
+            "new": 16,
+            "reason": "room subjects require the chosen 16 mm frame"
+          },
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              10.727,
+              -23.891,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              9.459,
+              -21.172,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "lens_basis": {
+          "at_24_mm": {
+            "horizontal_need_deg": 34.132377235958096,
+            "lower_top_need_deg": 36.81231095678031,
+            "upper_fitting_need_deg": 28.250827208354483,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 36.86989764584402,
+            "vertical_limit_deg": 26.56505117707799,
+            "position": [
+              10.627,
+              -23.891
+            ],
+            "target": [
+              11.653,
+              -21.072
+            ],
+            "framed_candidates": 0,
+            "search_step_m": 0.1
+          },
+          "at_16_mm": {
+            "horizontal_need_deg": 43.557483326223064,
+            "lower_top_need_deg": 36.85462420222681,
+            "upper_fitting_need_deg": 28.30449646217481,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 48.366460663429805,
+            "vertical_limit_deg": 36.86989764584402,
+            "position": [
+              10.727,
+              -23.891
+            ],
+            "target": [
+              9.459,
+              -21.172
+            ],
+            "framed_candidates": 35,
+            "search_step_m": 0.1
+          }
+        },
+        "home_room": "guest-wc",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v17-dirty-kitchen",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          14.4,
+          -23.591,
+          -1.65
+        ],
+        "target": [
+          12.9,
+          -20.993,
+          -1.65
+        ],
+        "lens_mm": 16,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "lens_mm",
+            "prior": 24,
+            "new": 16,
+            "reason": "room subjects require the chosen 16 mm frame"
+          },
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              14.4,
+              -23.591,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              12.9,
+              -20.993,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "lens_basis": {
+          "at_24_mm": {
+            "horizontal_need_deg": 43.765215312007946,
+            "lower_top_need_deg": 8.518034532601828,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 36.86989764584402,
+            "vertical_limit_deg": 26.56505117707799,
+            "position": [
+              14.5,
+              -23.891
+            ],
+            "target": [
+              13.0,
+              -21.293
+            ],
+            "framed_candidates": 0,
+            "search_step_m": 0.1
+          },
+          "at_16_mm": {
+            "horizontal_need_deg": 47.96274155151693,
+            "lower_top_need_deg": 9.500581332467187,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 48.366460663429805,
+            "vertical_limit_deg": 36.86989764584402,
+            "position": [
+              14.4,
+              -23.591
+            ],
+            "target": [
+              12.9,
+              -20.993
+            ],
+            "framed_candidates": 18,
+            "search_step_m": 0.1
+          }
+        },
+        "home_room": "dirty-kitchen",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "accent"
+      ],
+      "dimmers": {
+        "ambient": 0.5,
+        "accent": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v18-study-evening",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          4.717,
+          -26.371,
+          1.35
+        ],
+        "target": [
+          7.315,
+          -24.871,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              4.717,
+              -26.371,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              7.315,
+              -24.871,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "study-game",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.4,
+        "task": 0.6
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v19-garden-facade",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          28.3,
+          -20.95,
+          -1.65
+        ],
+        "target": [
+          25.724809625449726,
+          -25.23583650351056,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.07452903963658022
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v20-kitchen-run",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          14.897,
+          -26.671,
+          -1.65
+        ],
+        "target": [
+          12.599,
+          -24.743,
+          -1.65
+        ],
+        "lens_mm": 16,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "lens_mm",
+            "prior": 24,
+            "new": 16,
+            "reason": "room subjects require the chosen 16 mm frame"
+          },
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              14.897,
+              -26.671,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              12.599,
+              -24.743,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "lens_basis": {
+          "at_24_mm": {
+            "horizontal_need_deg": 38.100537365577544,
+            "lower_top_need_deg": 12.508796963745201,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 36.86989764584402,
+            "vertical_limit_deg": 26.56505117707799,
+            "position": [
+              14.897,
+              -26.671
+            ],
+            "target": [
+              12.599,
+              -24.743
+            ],
+            "framed_candidates": 0,
+            "search_step_m": 0.1
+          },
+          "at_16_mm": {
+            "horizontal_need_deg": 38.100537365577544,
+            "lower_top_need_deg": 12.508796963745201,
+            "upper_fitting_need_deg": 0.0,
+            "whole_subject_need_deg": 0.0,
+            "horizontal_limit_deg": 48.366460663429805,
+            "vertical_limit_deg": 36.86989764584402,
+            "position": [
+              14.897,
+              -26.671
+            ],
+            "target": [
+              12.599,
+              -24.743
+            ],
+            "framed_candidates": 36,
+            "search_step_m": 0.1
+          }
+        },
+        "home_room": "kitchen",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.4,
+        "task": 0.8
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v21-lounge-evening",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          9.617,
+          -27.471,
+          -1.65
+        ],
+        "target": [
+          7.019,
+          -25.971,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              9.617,
+              -27.471,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              7.019,
+              -25.971,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "lounge",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.3,
+        "accent": 0.6
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v22-parents-day",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          18.827,
+          -26.641,
+          1.35
+        ],
+        "target": [
+          21.284,
+          -24.92,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              18.827,
+              -26.641,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              21.284,
+              -24.92,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "parents-bed",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v23-gf-gallery",
+      "state": "day",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          19.1,
+          -28.02,
+          1.35
+        ],
+        "target": [
+          8.9,
+          -28.02,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "home_room": "corridor",
+        "reframed": false
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "accent"
+      ],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v24-bar-alcove",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          22.067,
+          -24.671,
+          -1.65
+        ],
+        "target": [
+          21.291,
+          -27.569,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              22.067,
+              -24.671,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              21.291,
+              -27.569,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "living",
+        "reframed": "chosen"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.3,
+        "accent": 0.8
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v25-top-garden-gate",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          4.4,
+          -21.7,
+          1.35
+        ],
+        "target": [
+          12.4,
+          -22.0,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v26-top-garden-east",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          6.95,
+          -23.2,
+          1.35
+        ],
+        "target": [
+          13.4,
+          -21.8,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": -0.1
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v27-east-yard-above",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          15.2,
+          -22.5,
+          -1.65
+        ],
+        "target": [
+          20.063115159606923,
+          -21.33805725424988,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": -0.1199636541821582
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v28-east-yard-below",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          14.2,
+          -21.6,
+          -1.65
+        ],
+        "target": [
+          19.0,
+          -21.8,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": -0.065
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v36-north-garden",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          1.75,
+          -26.2,
+          -1.65
+        ],
+        "target": [
+          0.55,
+          -27.7,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": -0.31
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v37-north-garden-lounge",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          4.0,
+          -27.4,
+          -1.65
+        ],
+        "target": [
+          0.4781496760738273,
+          -24.3252447282807,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": -0.14415908053594262
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v38-north-garden-floor-bed",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          4.1,
+          -25.0,
+          -1.65
+        ],
+        "target": [
+          1.6,
+          -27.7,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": -0.18
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v39-north-garden-hanging-retreat",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          1.75,
+          -26.2,
+          -1.65
+        ],
+        "target": [
+          2.4,
+          -24.77,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": -0.27,
+        "home_room": null,
+        "reframed": false
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v29-under-stair-store",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          5.2,
+          -25.9,
+          -1.65
+        ],
+        "target": [
+          5.55,
+          -28.4,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "home_room": "lounge",
+        "reframed": false
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "accent"
+      ],
+      "dimmers": {
+        "ambient": 0.5,
+        "accent": 1.0
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v30-under-ramp-store",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          0.377,
+          -23.591,
+          -1.65
+        ],
+        "target": [
+          1.877,
+          -20.993,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              0.377,
+              -23.591,
+              -1.65
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              1.877,
+              -20.993,
+              -1.65
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "store-ramp",
+        "reframed": "doorway"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "task"
+      ],
+      "dimmers": {
+        "task": 1.0
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v31-dressing-hers",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          21.827,
+          -28.371,
+          1.35
+        ],
+        "target": [
+          19.899,
+          -26.073,
+          1.35
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0,
+        "overrides": [
+          {
+            "field": "position",
+            "prior": null,
+            "new": [
+              21.827,
+              -28.371,
+              1.35
+            ],
+            "reason": "room chooser positions the camera to include declared subjects"
+          },
+          {
+            "field": "target",
+            "prior": null,
+            "new": [
+              19.899,
+              -26.073,
+              1.35
+            ],
+            "reason": "room chooser aims the camera at declared subjects"
+          }
+        ],
+        "home_room": "parents-dressing",
+        "reframed": "chosen"
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.6
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v32-dressing-his",
+      "state": "evening",
+      "exposure": "evening",
+      "camera": {
+        "position": [
+          20.15,
+          -27.55,
+          1.35
+        ],
+        "target": [
+          20.15,
+          -28.5,
+          1.35
+        ],
+        "lens_mm": 16,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.1,
+        "lens_reason": "level wide lens and upward shift hold upper and lower hanging rails from the clear aisle",
+        "home_room": "parents-dressing",
+        "reframed": false
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "ambient",
+        "task",
+        "accent",
+        "decorative"
+      ],
+      "dimmers": {
+        "ambient": 0.6
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v33-basement-north-south",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          20.3,
+          -23.9,
+          -1.65
+        ],
+        "target": [
+          20.3,
+          -28.5,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "accent"
+      ],
+      "dimmers": {
+        "ambient": 0.5,
+        "accent": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v34-basement-south-north",
+      "state": "day",
+      "exposure": "day",
+      "camera": {
+        "position": [
+          17.8,
+          -28.9,
+          -1.65
+        ],
+        "target": [
+          19.85,
+          -27.2,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [
+        "ambient",
+        "accent"
+      ],
+      "dimmers": {
+        "ambient": 0.5,
+        "accent": 0.5
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v40-south-garden-espalier",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          22.0,
+          -21.8,
+          -1.65
+        ],
+        "target": [
+          25.70004389144623,
+          -20.829635934571048,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.0011362253635164576,
+        "home_room": null,
+        "reframed": false
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v41-south-garden-terrace",
+      "state": "day",
+      "exposure": "exterior-day",
+      "camera": {
+        "position": [
+          22.8,
+          -21.6,
+          -1.65
+        ],
+        "target": [
+          25.570816153166287,
+          -25.76204010616822,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": 0.025046575578505634
+      },
+      "sun": {
+        "altitude_deg": 40.07,
+        "azimuth_true_deg": 135.34
+      },
+      "layers_on": [],
+      "dimmers": {},
+      "resolution": [
+        1920,
+        1280
+      ]
+    },
+    {
+      "id": "v42-north-garden-evening",
+      "state": "exterior-dusk",
+      "exposure": "exterior-dusk",
+      "camera": {
+        "position": [
+          3.9,
+          -26.55,
+          -1.65
+        ],
+        "target": [
+          1.739460010201047,
+          -24.468638197602477,
+          -1.65
+        ],
+        "lens_mm": 24,
+        "sensor_mm": 36,
+        "shift_x": 0.0,
+        "shift_y": -0.15420195429557562
+      },
+      "sun": {
+        "altitude_deg": -2.89,
+        "azimuth_true_deg": 261.64
+      },
+      "layers_on": [
+        "evening-garden"
+      ],
+      "dimmers": {
+        "evening-garden": 1.0
+      },
+      "resolution": [
+        1920,
+        1280
+      ]
+    }
+  ],
+  "changed_from_final": [
+    "v01-kitchen-garden",
+    "v02-garden-living",
+    "v03-street-lounge",
+    "v04-study-deck",
+    "v05-parents-bedroom",
+    "v06-kids-room",
+    "v08-cinema",
+    "v09-dining-evening",
+    "v10-living-evening",
+    "v11-stair-void",
+    "v12-ensuite",
+    "v13-kids-b",
+    "v15-family-bath",
+    "v35-family-bath-wc",
+    "v16-guest-wc",
+    "v17-dirty-kitchen",
+    "v18-study-evening",
+    "v19-garden-facade",
+    "v20-kitchen-run",
+    "v21-lounge-evening",
+    "v22-parents-day",
+    "v23-gf-gallery",
+    "v24-bar-alcove",
+    "v25-top-garden-gate",
+    "v26-top-garden-east",
+    "v27-east-yard-above",
+    "v28-east-yard-below",
+    "v36-north-garden",
+    "v37-north-garden-lounge",
+    "v38-north-garden-floor-bed",
+    "v39-north-garden-hanging-retreat",
+    "v29-under-stair-store",
+    "v30-under-ramp-store",
+    "v31-dressing-hers",
+    "v32-dressing-his",
+    "v33-basement-north-south",
+    "v34-basement-south-north",
+    "v40-south-garden-espalier",
+    "v41-south-garden-terrace"
+  ]
+}

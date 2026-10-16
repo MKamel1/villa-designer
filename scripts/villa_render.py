@@ -120,6 +120,11 @@ def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dic
     generic = [light["id"] for light in scene["lights"]
                if light.get("product", {}).get("generic") and light["layer"] in view["layers_on"]]
     return {"view": view["id"], "title": view.get("title", view["id"]),
+            "exposure_group": render_report.get('exposure_group', view['exposure']),
+            "camera_exposure_stops": render_report.get('exposure_stops'),
+            "white_balance_k": render_report.get('white_balance_k'),
+            "white_balance_tint": render_report.get('white_balance_tint'),
+            "white_balance_illuminant": render_report.get('white_balance_illuminant'),
             "design": {"meshes": [mesh["id"] for mesh in scene["meshes"]],
                        "lights": [light["id"] for light in scene["lights"]
                                   if light["layer"] in view["layers_on"]]},
@@ -130,7 +135,7 @@ def villa_caption(scene: dict, view: dict, render_report: dict, qa: dict) -> dic
             "dressing (not design)": render_report.get("imported_props", []),
             "sun": view.get("sun"), "exposure": scene["exposure"][view["exposure"]],
             "qa_checks_ran": [item["check"] for item in qa["checks"]],
-            "render_evidence": caption_evidence(scene, view, render_report, qa)}
+            "render_evidence": caption_evidence(scene, view, render_report, qa, transport_checked=True)}
 
 
 def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
@@ -149,7 +154,7 @@ def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
 def run(scene_path: Path, views: str, samples: int | None, resolution: str | None,
         host: str, ies_dir: Path, dry_run: bool = False, calibrate: bool = False,
         measure_lighting: bool = False, allow_stale_scene: bool = False,
-        blender: str | None = None, expected_version: str = "4.5.14") -> dict:
+        blender: str | None = None, expected_version: str = "4.5.14", measure_exposure_groups: bool = False) -> dict:
     if blender is not None and not PurePosixPath(blender).is_absolute():
         raise ValueError("--blender must be an absolute workstation executable path")
     scene_path = scene_path.resolve()
@@ -168,9 +173,11 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     if errors:
         raise ValueError("Invalid villa scene:\n" + "\n".join(errors))
     by_id = {v["id"]: v for v in scene["views"]}
+    if measure_exposure_groups and (calibrate or measure_lighting or views != 'none'):
+        raise ValueError('--measure-exposure-groups requires --views none and no other measure mode')
     if measure_lighting and (calibrate or views != "none"):
         raise ValueError("--measure-lighting requires --views none and no --calibrate")
-    selected = select_views(by_id, views, calibrate or measure_lighting)
+    selected = select_views(by_id, views, calibrate or measure_lighting or measure_exposure_groups)
     ies_names = sorted({l["ies"] for l in scene["lights"] if l["type"] == "ies"})
     files = {}
     for name in ies_names:
@@ -189,8 +196,10 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     code += (ROOT / "src/archpipe/furniture_orientation.py").read_bytes()
     code += (ROOT / "src/archpipe/execution_context.py").read_bytes()
     code += (ROOT / "scripts/preflight.py").read_bytes()
+    code += (ROOT / "src/archpipe/exposure_groups.py").read_bytes()
+    code += (ROOT / "knowledge/exposure-group-rule.json").read_bytes()
     identity = digest(scene_path.read_bytes() + code + b"".join(files[n].read_bytes() for n in ies_names)
-                      + json.dumps([selected, samples, resolution, calibrate, measure_lighting], sort_keys=True).encode())[:24]
+                      + json.dumps([selected, samples, resolution, calibrate, measure_lighting, measure_exposure_groups], sort_keys=True).encode())[:24]
     renderer = {"executable": blender or "~/opt/blender/blender", "expected_version": expected_version}
     if blender is not None or expected_version != "4.5.14":
         identity = digest((identity + json.dumps(renderer, sort_keys=True)).encode())[:24]
@@ -210,7 +219,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     _push(host, scene_path, job + "/scene.json")
     for name, path in files.items():
         _push(host, path, remote_ies + "/" + name)
-    argv = [root + "/opt/blender/blender", "-b", "--python-exit-code", "1", "-P", release + "/src/archpipe/blender/villa_scene.py",
+    argv = [root + "/opt/blender/blender", "-b", "-t", "8", "--python-exit-code", "1", "-P", release + "/src/archpipe/blender/villa_scene.py",
             "--", "--scene", job + "/scene.json", "--views", "none" if not selected else ",".join(selected), "--out", job + "/out",
             "--ies-dir", remote_ies, "--library-root", scene["library_root"]]
     # Workstation Blender is installed under ~/opt, outside the archpipe root.
@@ -223,6 +232,8 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         argv.append("--calibrate")
     if measure_lighting:
         argv.append("--measure-lighting")
+    if measure_exposure_groups:
+        argv.append('--measure-exposure-groups')
     # Run the same boundary on the machine that actually executes Blender.
     # Resolve python3 there, record its actual interpreter, require absolute
     # renderer paths and the pinned release from 10-blender.sh.
@@ -262,6 +273,7 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     output = scene_path.parent
     output.mkdir(parents=True, exist_ok=True)
     reports = []
+    render_receipts = []
     for ident in selected:
         for suffix in (".png", ".json"):
             fetched = _ssh(host, "cat " + shlex.quote(job + "/out/" + ident + suffix), timeout=120)
@@ -276,6 +288,9 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         if stale:
             render_report["label"] = stale_label
         save_bytes(output / (ident + ".json"), json.dumps(render_report, indent=2).encode("utf-8"))
+        from archpipe.exposure_groups import require_receipts
+        render_receipts.append(render_report)
+        require_receipts(scene, render_receipts, transport_checked=True)
         view = by_id[ident]
         # Only bedroom-agnostic checks: image metrics, camera level, subjects,
         # glass presence and white-balance availability. The bedroom-specific
@@ -320,6 +335,13 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         if stale:
             measurements["label"] = stale_label
         save_bytes(output / "lighting-measurements.json", json.dumps(measurements, indent=2).encode("utf-8"))
+    if measure_exposure_groups:
+        fetched = _ssh(host, 'cat ' + shlex.quote(job + '/out/exposure-group-measurements.json'), timeout=120)
+        if fetched.returncode or not fetched.stdout:
+            raise RuntimeError('Missing dominant-light measurements')
+        from archpipe.exposure_groups import require_record
+        require_record(scene, json.loads(fetched.stdout))
+        save_bytes(output / 'exposure-group-measurements.json', fetched.stdout)
     stage_record_path = output / "villa-render.stage-result.json"
     outputs = []
     for ident in selected:
@@ -330,6 +352,8 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
             outputs.append(output / suffix)
     if measure_lighting:
         outputs.append(output / "lighting-measurements.json")
+    if measure_exposure_groups:
+        outputs.append(output / 'exposure-group-measurements.json')
     all_qa_passed = all(r.get("qa_passed", False) for r in reports) if reports else True
     write_stage_result(
         "villa-render",
@@ -349,6 +373,8 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
             "execution_context": {"local": context, "remote": remote_context},
             "scene_provenance": provenance, "scene_source_hash": scene_hash,
             "stale_scene": stale, "label": stale_label,
+            "exposure_group_measurements": (str(output / 'exposure-group-measurements.json')
+                                              if measure_exposure_groups else None),
             "calibration": calibration,
             "lighting_measurements": (None if measurements is None else {
                 "path": str(output / "lighting-measurements.json"),
@@ -370,18 +396,21 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--calibrate", action="store_true")
     ap.add_argument("--measure-lighting", action="store_true")
+    ap.add_argument("--measure-exposure-groups", action="store_true")
+    ap.add_argument("--out", type=Path, help="Isolated scene and draft output folder")
     a = ap.parse_args()
     try:
         project_context(ROOT, Path(__file__).resolve(), "villa-render")
     except ContextError as exc:
         ap.exit(2, "PREFLIGHT FAILED: " + str(exc) + "\n")
     if a.scene is None:
-        scene_path, _ = write_scene()
+        scene_path, _ = write_scene(a.out / "scene.json" if a.out else None,
+                                    measure_exposure_groups=a.measure_exposure_groups)
     else:
         scene_path = a.scene
     try:
         result = run(scene_path, a.views, a.samples, a.res, a.host, a.ies_dir, a.dry_run, a.calibrate,
-                     a.measure_lighting, a.allow_stale_scene, a.blender, a.expected_version)
+                     a.measure_lighting, a.allow_stale_scene, a.blender, a.expected_version, a.measure_exposure_groups)
     except (ValueError, ContextError) as exc:
         ap.error(str(exc))
     print(json.dumps(result, indent=2))

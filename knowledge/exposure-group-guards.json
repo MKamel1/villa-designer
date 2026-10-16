@@ -1,0 +1,105 @@
+{
+  "schema": "exposure-group-guards/1",
+  "records": [
+    {
+      "lesson_id": "dominant-light-exposure-policy",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Pre-register source-majority rule; derive membership from frozen source isolations; meter each complete group; bind one exposure and authored-population white balance to every receipt and caption",
+      "check": "archpipe.exposure_groups.require_record; archpipe.exposure_groups.require_receipts",
+      "proof_file": "tests/test_exposure_groups.py",
+      "proofs": [
+        "test_real_v15_v29_v36_rule_and_clean_case",
+        "test_real_membership_mutation_and_renamed_sibling_refuse",
+        "test_real_receipt_wrong_group_gain_white_balance_and_subset_refuse",
+        "test_stale_transport_view_fraction_and_population_refuse",
+        "test_group_meter_is_selection_independent",
+        "test_actual_gpu_receipts_obey_locks_and_mutations_refuse"
+      ],
+      "fixture": "tests/fixtures/exposure-groups-real.json",
+      "stage": "Stage 7 export, renderer admission, measured receipt and caption"
+    },
+    {
+      "lesson_id": "dominant-light-source-binding",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Transport identity includes separate renderer appearance records, material overrides and policies; exact original-scene migration preserves all measured values",
+      "check": "archpipe.exposure_groups.transport_digest; archpipe.exposure_groups.require_record",
+      "proof_file": "tests/test_exposure_groups.py",
+      "proofs": [
+        "test_real_appearance_source_changes_and_sibling_refuse",
+        "test_real_baseline_appearance_difference_is_not_transport_equality"
+      ],
+      "fixture": "tests/fixtures/exposure-groups-real.json",
+      "stage": "Stage 7 source-isolation reuse and export admission"
+    },
+    {
+      "lesson_id": "dominant-light-final-view-context",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Portable policy verification consumes one complete final build, including authored opened doors and curtains; never join raw view declarations to empty-view geometry",
+      "check": "scripts.verify.main; archpipe.exposure_groups.require_record",
+      "proof_file": "tests/test_exposure_groups.py",
+      "proofs": [
+        "test_real_raw_view_declarations_omit_final_visibility_and_refuse"
+      ],
+      "fixture": "tests/fixtures/exposure-groups-pre-mount-views.json",
+      "stage": "Stage 7 portable policy verification"
+    },
+    {
+      "lesson_id": "white-balance-illuminant-reciprocity",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Explicit Planckian/daylight camera illuminant; Planckian tint zero, daylight tint ten",
+      "check": "archpipe.render_qa.grey_card_check; scripts/check_white_balance.py",
+      "proof_file": "tests/test_white_balance.py",
+      "proofs": [
+        "test_real_2700_and_3000_sibling_fail_clean_controls_pass",
+        "test_corrected_complete_set_and_renamed_temperature_mutation",
+        "test_source_approximation_matches_independent_cie_reference",
+        "test_production_camera_uses_planckian_zero_and_explicit_daylight",
+        "test_png_guard_replays_real_values_and_refuses_unmeasurable_card",
+        "test_all_render_callers_name_the_source_locus"
+      ],
+      "fixture": "tests/fixtures/white-balance-real.json",
+      "stage": "Stage 7 colour-path calibration before production drafts"
+    },
+    {
+      "lesson_id": "white-balance-probe-entrypoint",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Correct context-record argument order and execute both orchestration branches",
+      "check": "scripts/check_white_balance.py",
+      "proof_file": "tests/test_white_balance.py",
+      "proofs": [
+        "test_command_preflight_record_and_complete_guard"
+      ],
+      "fixture": "tests/fixtures/white-balance-real.json",
+      "stage": "Stage 7 calibration command startup"
+    },
+    {
+      "lesson_id": "white-balance-caption-model",
+      "control_tier": [
+        1
+      ],
+      "construction": "Generate caption tint and illuminant from actual measured render receipt",
+      "check": "scripts/villa_render.py::villa_caption",
+      "proof_file": "tests/test_white_balance.py",
+      "proofs": [
+        "test_caption_preserves_measured_whitepoint_model"
+      ],
+      "fixture": "tests/fixtures/white-balance-real.json",
+      "stage": "Stage 7 caption generation and read-back"
+    }
+  ]
+}
