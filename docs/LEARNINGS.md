@@ -2929,3 +2929,106 @@ Round 7 resolves the throw refusal at its numerical cause; see
 - Tier 1 control: copy actual measured tint and illuminant into top-level generated captions, retaining actual temperature and the separately named exposure-preset data. Regenerate through `villa_caption`, preserving PNGs and renderer receipts; no image development is repeated.
 - Proof: `test_caption_preserves_measured_whitepoint_model` freezes the actual omission and verifies Planckian v15, renamed evening and daylight clean cases, including differing preset/actual temperatures. Registry: `knowledge/exposure-group-guards.json`, `white-balance-caption-model`.
 >>>>>>> 68fb48e23ea520ded794173bdd2c65329bea34ca
+# Walkthrough diagnosis — 2026-10-15
+
+### flythrough-transparent-passage — photography visibility is not physical passage
+
+- Capture/checkpoint 1: walkthrough intake measured all four B-level garden
+  exits against actual saved scene triangles (`out/flythrough/diagnosis/exits-before.json`).
+  Every exit intersects closed glazing; the fresh local scene groups it as
+  `shell-022-glass-clear`. The original and current source bytes are retained.
+  The actual pane and neighbouring wall faces are frozen by value in
+  `tests/fixtures/flythrough-real.json`.
+- Cause: the authored daylight shell models garden doors as closed glazed
+  openings, without an open leaf state. Escape: still-camera wall sightlines
+  correctly ignore transparent glass, and passage checks cover furniture and
+  dressing rather than architectural glazing. Neither is a walking-camera
+  admission. Class/siblings: transparent door leaves, bath screens, guard glass,
+  window panes and between-frame tunnelling through thin obstacles.
+- Tier 1/2 control: shared `render_views.CameraSweep` uses production triangle/box arithmetic and includes glass between successive camera poses. `admit_path` also reuses standing-point, interior lens, finite-wall and opening guards and repeats the sweep against actual visible evaluated Blender geometry. `require_renderable` refuses an early-only pass. Geometry stays fixed.
+- Proof: frozen real pane/wall rejection, clean path, translated/renamed sibling and clear-endpoint tunnelling regressions in `tests/test_flythrough.py`. Registered in `knowledge/garden-render-guards.json`.
+- Status: physical refusal controls implemented; final delivered-path admission and video acceptance remain pending. No authored garden operable-pane state exists; the lead’s threshold fallback applies.
+
+### flythrough-authored-sun-time — camera adapter duplicated a time boundary
+
+- Capture/checkpoint 1: pre-render source-state check found the new path adapter returned sun altitude 49.65 degrees and azimuth 198.60 degrees for the stills' 2026-10-15 10:30 +03:00 timestamp. The solar API takes UTC (Coordinated Universal Time); the still exporter converts that timestamp to UTC first. No walkthrough image had rendered.
+- Cause/escape/class: the new adapter duplicated timestamp parsing but omitted the UTC boundary. Geometry and motion tests could not detect a changed lighting state. Class: new camera/batch adapters bypassing canonical source-state conversion. Siblings audited: `villa_render._VIEWS` and `scripts/render_hyperreal.py`; both already normalize time.
+- Tier 1 control/checkpoint 2: `villa_render.sun_for_timestamp` is the shared timezone boundary for still and walking cameras. Both now retain the exact authored 40.07-degree altitude and 135.34-degree azimuth; naive timestamps refuse. The original failing values are retained in `out/flythrough/diagnosis/sun-before.log`.
+- Proof: `test_walking_camera_retains_actual_still_sun_and_curtain_state` checks the frozen actual value, equivalent UTC daylight/dusk siblings, naive-time rejection and original curtain state. Registered in `knowledge/garden-render-guards.json`. The pre-render adapter defect is corrected; visual acceptance remains pending.
+
+Walkthrough development check: portable verification rejected two raw file
+copies in the new coordinator before graphics work. Both now publish through
+`archpipe.safe_io.save_bytes`, and its JSON sidecars use the same boundary.
+This is the existing serialization/file-publication class and guard, not a
+new exception or a relaxed lint. The original rejection remains in
+`out/flythrough/verify-normal.log`; current verification is rerun after fixes.
+
+### flythrough-renderer-dependency-boundary — renderer assumed project Python packages
+
+- Capture/checkpoint 1: production Blender 4.5.14 completed asset assembly, then failed before any image at `sun_for_timestamp` importing PyYAML. Actual traceback: `out/flythrough/process/assembly-64-1792121726453624577.log`. Blender's bundled interpreter differs from the project virtual environment.
+- Cause/escape/class: the new renderer adapter recomputed authored states and ran project review inside Blender, crossing into PyYAML and the drawing module's Matplotlib dependency. Host-Python unit tests could not exercise that interpreter boundary. Siblings: exposure, draft, preview, reference and final callers of the same frame-state adapter.
+- Tier 1/2 control/checkpoint 2: authored frame states are serialized once in project Python. `frame_views` validates their exact inventory/cameras against the path before Blender consumes them, without importing host-only packages. Blender measures and saves the actual assembly; project Python runs the existing guards and binds admission to measured faces, metadata and saved Blender bytes before any renderer can load the cache.
+- Proof: frozen actual missing-package failure, blocked-PyYAML/Matplotlib consumption regression, changed-camera rejection and early-only admission refusal. Registry: `knowledge/garden-render-guards.json`. Production retry remains required; no image was rendered by the failed attempt.
+
+### flythrough-command-import-boundary — tests did not launch the actual command
+
+- Capture/checkpoint 1: the corrected Blender retry saved a 1.1 GB measured assembly, then host admission failed importing `scripts.villa_render_views`: the new CLI added only `src` to its module path. Actual trace: `out/flythrough/assembly-boundary-retry.log`. Unit tests launched at the repository root supplied an implicit import path that the command did not have.
+- Cause/escape/class: a new launcher assumed sibling CLI modules were importable. Together with `flythrough-renderer-dependency-boundary`, this repeats the same process escape: unit tests were accepted before a lightweight test of the real command/interpreter boundary. Siblings: host QA and admission imports; Blender adapter state and temporal-output APIs.
+- Tier 1/2 control/checkpoint 2: explicit repository-root bootstrap; real command import regression from an unrelated directory; mandatory pinned Blender state/camera/temporal-output/device preflight before expensive assembly/render stages. All sibling host imports resolve through the declared root. Prepared-state consumption still avoids host-only packages in Blender.
+- Proof: the actual sibling-import regression fires before the correction and passes afterward; changed prepared-camera data still refuses, and isolated pinned Blender temporal-buffer calibration preserves the beauty image and exact world-plane coordinate. Registered in `knowledge/garden-render-guards.json`. The original failed measured assembly is retained, never passed evidence; production retry is still required.
+
+### flythrough-static-opacity — shader defaults did not prove an opaque surface
+
+- Capture/checkpoint 1: pre-final review found the new temporal mask accepted linked-opacity materials using their Principled defaults. The actual assembled `Ixora_flower_01`, its duplicate and two flower-02 siblings produced static-mask value 1 although their alpha inputs are texture-linked. Production-function reproduction exits 1 in `out/flythrough/diagnosis/material-mask-production-before.log`; the actual descriptors/mask values are frozen before correction.
+- Cause/escape/class: the mask checked default transmission and roughness but ignored linked alpha and linked shader inputs. The first calibration cube was opaque and could not expose this class. Siblings: alpha-card foliage, textured transmission/metallic/roughness, mixed BSDF closures and Principled emission. This concerns diagnostic region selection, not model materials.
+- Tier 1/2 control/checkpoint 2: `static_material_eligible` requires explicit constant opaque, nonmetallic, nontransmitting, nonemissive high-roughness Principled inputs. Unknown/mixed closures and linked optical inputs are excluded by construction. Beauty shaders and the registered 0.01 image-difference limits remain unchanged; insufficient coverage refuses acceptance.
+- Proof: frozen actual material descriptors and failing production mask values in `tests/fixtures/flythrough-materials.json`; clean opaque control and linked transmission/roughness/metallic, emission and refractive siblings in `tests/test_flythrough.py`. Registered in `knowledge/garden-render-guards.json`. Fresh production-mask and beauty-preservation probes are rerun after correction.
+
+### flythrough-curve-overshoot — clear waypoints did not establish a clear curve
+
+- Capture/checkpoint 1: measured runtime admission rejected frames 506–519 of the first path against `prop-living-plant-001`; source-plan and standing-point checks were clear. Real evaluated faces and all failed poses are retained under `out/flythrough/failed-host-import-boundary/assembly/` and `out/flythrough/diagnosis/runtime-route-guards-before.json`.
+- Cause/escape/class: unbounded averaged Hermite tangents bulged toward the plant between clear controls. Imported leaf geometry was absent from the early authored-geometry check, which was explicitly insufficient to admit rendering. Class/siblings: nonuniform curve controls and any between-control spline overshoot around furniture, glazing or planting.
+- Tier 1/2 control/checkpoint 2: remove the free spline entirely. Explicit straight corridors use quintic easing with zero velocity and acceleration at every waypoint; turns do not overshoot and do not jump in velocity. A short vertical turn corridor clears the same fixed plant, followed by the unchanged full evaluated sweep. Camera controls live once in `knowledge/flythrough-route.json`, read by both command and tests.
+- Proof: actual old path and 570 candidate leaf faces are frozen in `tests/fixtures/flythrough-plant-clip.json`; all 14 original poses fire, while the authored replacement path and its motion bounds pass that frozen obstacle regression. Full runtime retry remains required. Registered in `knowledge/garden-render-guards.json`.
+
+### flythrough-fixed-geometry-scan — a still-view guard repeated its geometry preparation
+
+- Measured: the first complete runtime admission took 547.89 seconds; a single existing camera proximity call spent 0.8394 seconds rebuilding unchanged landscape bounds. Evidence: `out/flythrough/diagnosis/runtime-route-guards-before.log` and `proximity-timing.log`.
+- Cause/class: a still-image helper combined immutable geometry preparation with its per-camera decision. Repeating it 720 times rebuilt identical bounds. Tier 1 control: `CameraProximityGeometry` prepares them once within one immutable admission scene, preserving the exact existing guard and triangle fallback; another scene/list refuses.
+- Proof: the frozen real planter obstacle has identical cached/uncached failures, the clean control stays quiet, and a different scene refuses. Test: `test_proximity_preparation_preserves_real_obstacle_clean_and_scene_refusal`; registry: `knowledge/garden-render-guards.json`. Full before/after admission timing is retained separately.
+
+### flythrough-room-subject-prefix — a room name also matched a decorative prop
+
+- Capture/checkpoint 1: adding real per-segment view subjects exposed the opening guard matching `dining` to `dining-vase`, then requiring a landscape route record for its ceramic vase. Actual failure: `out/flythrough/diagnosis/runtime-final-intents.log`. The actual room mesh and vase descriptor are frozen before correction.
+- Cause/class: the shared contract supports room membership, but the opening guard repeated a prefix-only resolver; a free room name is also a prop-id prefix. Siblings: opening-frame primary/all targets and the drawing script's subject-point resolver.
+- Tier 1/2 control: `room:` explicitly selects physical room membership; comma-separated room names mean union. Opening-frame primary/all targets and drawing subject points use the canonical contract resolver. The actual vase is no longer implicitly a room subject; explicit `dining-vase` still fails for missing measured framing geometry.
+- Proof: actual dining-wall/floor and vase input in `tests/fixtures/flythrough-room-subjects.json`; canonical room/cluster resolution, unknown-room rejection, quiet correct opening context and retained explicit-vase refusal in `test_real_room_subject_is_distinct_from_prop_prefix_and_explicit_prop_still_refuses`. Registered in `knowledge/garden-render-guards.json`.
+
+### flythrough-cache-material-retention — saved metadata referenced a purged datablock
+
+- Capture/checkpoint 1: the first exposure-stage cache load failed on absent `marble-ensuite`; no source probe or walkthrough image had rendered. Actual trace: `out/flythrough/process/exposure-64-1792125396421560910.log`. Assembly metadata included the authored material table, but Blender omits unused datablocks without an explicit retention user.
+- Cause/escape/class: saving a complete metadata map did not preserve every mapped datablock. Preflight checked camera/API/device imports but had not reopened the actual cache. Siblings: every post-assembly stage using that material table and other referenced zero-user datablocks.
+- Tier 1/2 control/checkpoint 2: `retain_cache_materials` sets Blender’s explicit retention flag on every referenced material before saving. Downstream native preflight now reopens the actual cache, resolves all recorded datablocks and verifies the evaluated geometry before the expensive stage.
+- Proof: the real native regression found 22 missing datablocks before correction, then zero after correction with every evaluated mesh unchanged. Actual results and before/after logs are under `out/flythrough/diagnosis/cache-retention-before` and `cache-retention-after`; proving function `test_real_referenced_material_cache_roundtrip` is registered in `knowledge/garden-render-guards.json`. No shader property, model material or geometry was changed.
+
+### flythrough-unresolved-subject — an unchecked subject admitted empty opening checks
+
+- Capture/checkpoint 1, 2026-10-16: the first three walkthrough drafts passed all imaging checks but endpoint frame 719 failed `view_subject:g6-terrace`, coverage zero and no matched objects. The real exported identifier is `landscape-g6-terrace`; the adapter used the builder-local name. The image shows terrace planting and seating. Original failed receipt and actual paving faces are frozen in `tests/fixtures/flythrough-unresolved-subject.json`; original image and QA remain in `out/flythrough/draft/`.
+- Cause/escape/class: the canonical resolver returns an empty list for an unknown ordinary identifier. The opening guard accepted an empty target population; the full-subject guard was inactive for room-context views. Thus complete camera admission did not establish that every declared subject existed. Class: semantic identifiers crossing a builder/export namespace, with empty-set downstream checks. Siblings: ordinary mesh, room-context and imported-prop subject declarations; the explicit `room:` query already refuses unknown rooms.
+- Disposition: preserve the camera path, model, imaging lock and QA limits while correcting the identifier and adding unconditional early subject-resolution refusal. Production re-admission and image QA are required; this record is not a closed defect or video acceptance.
+
+### flythrough-static-coverage — a clear window view can provide no temporal measurement surface
+
+- Capture/checkpoint 1, 2026-10-16: the pane-centred camera candidate passed all 720 physical/opening guards, but the real three-frame native position-buffer diagnostic found 54,386 / 80,668 / **0** eligible opaque pixels at frames 0 / 359 / 719 (480×270). Source, scene, measured-path admission and diagnostic output are retained under `out/flythrough/diagnosis/real-static-coverage/` and `terrace-corridor-{path,guards}.json`.
+- Cause/escape/class: the central pane and adjacent glazing fill the endpoint view. Transparent first hits correctly exclude the garden from opaque-region measurement. Physical clearance and a clear central opening cannot establish diagnostic coverage. Siblings: fully glazed viewpoints, reflective/low-roughness views and optical-input-linked materials. The diagnostic measured the actual final camera before repeating expensive source metering; no image threshold or beauty material was changed.
+- Disposition: retain the registered temporal criterion, move only the camera to an adjacent authored pane with honest room-side context, and require a native coverage checkpoint before source metering. Fresh camera admission and real diagnostic controls remain required before closure.
+
+Walkthrough correction checkpoint 2, 2026-10-16:
+- `flythrough-unresolved-subject`: the real unknown paving identifier fails before correction and now refuses before camera decisions; corrected/renamed clean subjects resolve, while an independently renamed missing sibling refuses. The shared resolver is used at preparation and opening/full-frame boundaries. The actual opening projection then drove camera-only correction; original thresholds remain intact.
+- `flythrough-static-coverage`: early native coverage is now a mandatory coordinator stage before exposure. It uses the registered minimum final-pixel density as a necessary screen, binds path/policy/evaluated geometry and refuses failed or stale receipts. Real zero-coverage endpoint and clean room populations are frozen in tests; full-size 999/1000-pixel boundary and invalid-population controls prove refusal and quiet behaviour. The command-boundary regression rejects failed/stale path, policy and geometry before graphics context acquisition. Its first mock intercepted Matplotlib's unrelated fontconfig subprocess; the test now mocks the coordinator context boundary rather than a globally shared subprocess module. Production behaviour did not change for that harness correction.
+- The settled camera candidate passes every existing camera guard. Fresh native position-buffer diagnostics at every 24th frame plus 359 and 719 (32 views) measure at least **9,243 eligible opaque pixels out of 129,600** at every sampled camera, including the final held view. Evidence: `out/flythrough/diagnosis/route-static-coverage/result.json`. This is early measurement coverage, not final matched-pair temporal acceptance. Full production admission, image QA and independent corrected-preview review remain required.
+
+Walkthrough full-size source-appearance checkpoint, 2026-10-16 (OPEN):
+- The independent reviewer found visible opal-globe facets and repeated/angular planting in both the 64-sample candidate and 1024-sample references. Actual three globe meshes each have 160 faces and 146 vertices without authored smoothing/subdivision; the frozen source scene and six images remain under `out/flythrough/`, with measured review in `sampling/visual-review.md`.
+- This is the existing open low-detail fixture-housing/botanical-likeness class above: source construction, rather than sample noise, limits photographic fidelity. Production image QA does not certify curved-surface smoothness or botanical likeness; same-camera high-sample comparison exposes that escape. Siblings are other plain curved fixture meshes and repeated procedural foliage.
+- The client fixes the design for this walkthrough, so no source mesh, normal, light, finish or camera is changed to conceal it. Existing preview/reference review and explicit caption/report disclosure prevent promotion of sample similarity into an indistinguishable-photograph claim. A future separately authorised source correction belongs at the builder (tier 1), with real frozen-shape/sibling checks and fresh neutral/context review. This record does not close those source defects or claim a new numerical aesthetic guard.

@@ -496,6 +496,29 @@ def _environment_face_sources():
 
 
 # ------------------------------------------------------------------ the scene
+def curtain_hidden_meshes(curtains, state):
+    """Authored curtain visibility shared by still and moving cameras."""
+    suffixes = ('-heavy-closed',) if state == 'day' else ('-heavy-open-l', '-heavy-open-r')
+    return [c['id'] + suffix for c in curtains for suffix in suffixes]
+
+
+def sun_for_timestamp(when, location=None):
+    """Authored local timestamp to the solar API's UTC boundary.
+
+    UTC means Coordinated Universal Time. Naive timestamps refuse rather
+    than silently taking the workstation's local timezone.
+    """
+    from datetime import datetime, timezone
+    from ..solar import sun_position
+    import yaml
+    time = datetime.fromisoformat(when)
+    if time.tzinfo is None:
+        raise ValueError('Authored solar timestamp requires an explicit timezone')
+    location = location or yaml.safe_load((ROOT/'spec/villa-site.yaml').read_text())['location']
+    sun = sun_position(time.astimezone(timezone.utc), location['latitude'], location['longitude'])
+    return {'altitude_deg':round(sun.altitude,2), 'azimuth_true_deg':round(sun.azimuth,2)}
+
+
 def build(lay=None, views=None, *, collect_part_failures=False, bed_replacements=()):
     from .build_cache import scope
     from .sanitary_relocation import input_revision
@@ -1718,8 +1741,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     for v in views:
         if v["state"] == "exterior-dusk":
             continue
-        suffixes = ("-heavy-closed",) if v["state"] == "day" else ("-heavy-open-l", "-heavy-open-r")
-        hidden = [c["id"] + s for c in curtains for s in suffixes]
+        hidden = curtain_hidden_meshes(curtains, v['state'])
         if hidden:
             if "hide_meshes" in v:
                 override(v, "hide_meshes", v["hide_meshes"] + hidden,
@@ -2950,9 +2972,7 @@ def _VIEWS(lay=None, resolve=True):
     from datetime import timezone
     loc = site["location"]
     for x in V:                                   # Egypt summer time (+03:00) is written into each timestamp
-        t = datetime.fromisoformat(x["when"]).astimezone(timezone.utc)
-        s = sun_position(t, loc["latitude"], loc["longitude"])
-        x["sun"] = {"altitude_deg": round(s.altitude, 2), "azimuth_true_deg": round(s.azimuth, 2)}
+        x['sun'] = sun_for_timestamp(x['when'], loc)
     return V
 
 

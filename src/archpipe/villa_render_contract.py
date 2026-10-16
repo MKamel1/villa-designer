@@ -23,8 +23,17 @@ def subject_meshes(subject, meshes):
     root. Mounting ownership, rather than label wording, binds its children.
     Preserve source order and include each mesh once.
     """
-    selected = {m['id'] for m in meshes if m['id'] == subject or m['id'].startswith(subject)
-                or m.get('label') == subject or m.get('room') == subject}
+    # An explicit room query avoids collisions with decorative prop prefixes.
+    # "room:a,b" means the union of physical meshes assigned to rooms a or b.
+    if subject.startswith('room:'):
+        rooms=set(subject[5:].split(','))
+        available={m.get('room') for m in meshes if m.get('room')}
+        if not rooms or '' in rooms or not rooms.issubset(available):
+            raise ValueError('Unresolved explicit room subject: '+subject)
+        selected={m['id'] for m in meshes if m.get('room') in rooms}
+    else:
+        selected = {m['id'] for m in meshes if m['id'] == subject or m['id'].startswith(subject)
+                    or m.get('label') == subject or m.get('room') == subject}
     while True:
         children = {m['id'] for m in meshes
                     if m.get('mounting', {}).get('assembly_root') in selected}

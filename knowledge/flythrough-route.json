@@ -1,0 +1,90 @@
+{
+  "schema": "flythrough-route/1",
+  "level": "B",
+  "ground_m": -3.0,
+  "intent": "Entrance, past the island flank and dining, through living to the closed south garden threshold; retain the opening's room-side context while looking out.",
+  "points_m": [
+    [
+      15.5,
+      -27.1,
+      -1.65
+    ],
+    [
+      15.55,
+      -24.4,
+      -1.65
+    ],
+    [
+      18.4,
+      -24.3,
+      -1.65
+    ],
+    [
+      21.45,
+      -24.3,
+      -1.65
+    ],
+    [
+      21.45,
+      -25.1,
+      -1.65
+    ],
+    [
+      21.95,
+      -26.13,
+      -1.65
+    ]
+  ],
+  "yaw_knots": [
+    {
+      "seconds": 0,
+      "yaw_deg": 140
+    },
+    {
+      "seconds": 15,
+      "yaw_deg": 260
+    },
+    {
+      "seconds": 27,
+      "yaw_deg": 318
+    },
+    {
+      "seconds": 29.958333333333332,
+      "yaw_deg": 318
+    }
+  ],
+  "yaw_definition": "degrees anticlockwise from model positive x; unwrapped values specify turn direction",
+  "closed_threshold_context": "Arrive inside the south-garden threshold at 27 seconds and hold for the final three seconds. Final aim is 42 degrees toward model negative y from model positive x, retaining room-side context and a clear central opening. Glazing stays closed.",
+  "subject_periods": [
+    {
+      "first_frame": 0,
+      "last_frame": 215,
+      "subjects": [
+        "room:kitchen,kitchen-island"
+      ]
+    },
+    {
+      "first_frame": 216,
+      "last_frame": 400,
+      "subjects": [
+        "room:dining,dining-side"
+      ]
+    },
+    {
+      "first_frame": 401,
+      "last_frame": 623,
+      "subjects": [
+        "room:living,bar-alcove"
+      ]
+    },
+    {
+      "first_frame": 624,
+      "last_frame": 719,
+      "subjects": [
+        "landscape-g6-terrace"
+      ]
+    }
+  ],
+  "subject_basis": "Explicit room queries select physical room-context meshes. The garden period resolves the actual exported landscape-g6-terrace paving after camera approach; every subject must resolve before framing arithmetic.",
+  "travel_seconds": 27
+}

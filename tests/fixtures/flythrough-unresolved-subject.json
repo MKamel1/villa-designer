@@ -1,0 +1,214 @@
+{
+  "view": {
+    "id": "frame-0719",
+    "title": "Entrance to south garden threshold",
+    "camera": {
+      "position": [
+        21.95,
+        -26.13,
+        -1.65
+      ],
+      "target": [
+        22.59278760968654,
+        -26.896044443118978,
+        -1.65
+      ],
+      "lens_mm": 24,
+      "sensor_mm": 36,
+      "shift_x": 0,
+      "shift_y": 0
+    },
+    "state": "day",
+    "exposure": "day",
+    "subjects": [
+      "g6-terrace"
+    ],
+    "resolution": [
+      1920,
+      1080
+    ],
+    "samples": 1024,
+    "layers_on": [
+      "ambient",
+      "accent"
+    ],
+    "dimmers": {
+      "ambient": 0.5,
+      "accent": 0.5
+    },
+    "hide_meshes": [
+      "curtain-study-game-01-heavy-closed",
+      "curtain-study-game-02-heavy-closed",
+      "curtain-kids-a-01-heavy-closed",
+      "curtain-kids-b-01-heavy-closed",
+      "curtain-parents-bed-01-heavy-closed",
+      "curtain-parents-bed-02-heavy-closed",
+      "curtain-dining-01-heavy-closed",
+      "curtain-living-01-heavy-closed",
+      "curtain-living-02-heavy-closed",
+      "curtain-lounge-01-heavy-closed"
+    ],
+    "sun": {
+      "altitude_deg": 40.07,
+      "azimuth_true_deg": 135.34
+    },
+    "caption_notes": [
+      "Garden glazing remains closed; clip ends inside the threshold."
+    ]
+  },
+  "meshes": [
+    {
+      "id": "landscape-g6-terrace",
+      "group": "ground",
+      "material": "stepping-stone",
+      "faces": [
+        [
+          [
+            22.597,
+            -26.72,
+            -3.0
+          ],
+          [
+            22.597,
+            -29.91566,
+            -3.0
+          ],
+          [
+            26.25,
+            -27.05,
+            -3.0
+          ]
+        ],
+        [
+          [
+            22.597,
+            -26.72,
+            -3.0
+          ],
+          [
+            26.25,
+            -27.05,
+            -3.0
+          ],
+          [
+            27.4,
+            -26.72,
+            -3.0
+          ]
+        ],
+        [
+          [
+            27.4,
+            -26.72,
+            -3.0
+          ],
+          [
+            26.25,
+            -27.05,
+            -3.0
+          ],
+          [
+            27.4,
+            -27.05,
+            -3.0
+          ]
+        ],
+        [
+          [
+            27.4,
+            -29.91566,
+            -3.0
+          ],
+          [
+            27.4,
+            -29.65,
+            -3.0
+          ],
+          [
+            26.25,
+            -29.65,
+            -3.0
+          ]
+        ],
+        [
+          [
+            27.4,
+            -29.91566,
+            -3.0
+          ],
+          [
+            26.25,
+            -29.65,
+            -3.0
+          ],
+          [
+            22.597,
+            -29.91566,
+            -3.0
+          ]
+        ],
+        [
+          [
+            22.597,
+            -29.91566,
+            -3.0
+          ],
+          [
+            26.25,
+            -29.65,
+            -3.0
+          ],
+          [
+            26.25,
+            -27.05,
+            -3.0
+          ]
+        ]
+      ],
+      "label": "ASSUMED terrace paving at court grade; 1.65 m east bypass beside pergola; ground finish cut back at authored soil-bed boundaries",
+      "part_kind": "finish-layer",
+      "surface": true,
+      "occupied_side": [
+        0,
+        0,
+        1
+      ],
+      "g6_element": "pergola",
+      "face_materials": [
+        "stepping-stone",
+        "stepping-stone",
+        "stepping-stone",
+        "stepping-stone",
+        "stepping-stone",
+        "stepping-stone"
+      ],
+      "local_axes": [
+        "x",
+        "y",
+        "z"
+      ],
+      "basis": "authored-procedural",
+      "surface_exemption_reason": "Ground-cover film on terrain; subterranean extent is outside this render model."
+    }
+  ],
+  "failed_receipt": [
+    {
+      "id": "g6-terrace",
+      "in_frame": false,
+      "coverage": 0.0,
+      "full_frame": false,
+      "projection_basis": "conservative mesh bounds",
+      "screen": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "matched_objects": []
+    }
+  ],
+  "original_qa": [
+    "view_subject:g6-terrace"
+  ],
+  "source": "out/flythrough/scene.json; draft/frame-0719.json"
+}

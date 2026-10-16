@@ -1,0 +1,97 @@
+{
+  "source": "out/flythrough/failed-host-import-boundary/assembly/scene.blend",
+  "materials": [
+    {
+      "material": "Ixora_flower_01",
+      "nodes": [
+        {
+          "type": "BSDF_PRINCIPLED",
+          "roughness": 0.8985832929611206,
+          "roughness_linked": false,
+          "metallic": 0.0,
+          "metallic_linked": false,
+          "transmission": 0.0,
+          "transmission_linked": false,
+          "alpha": 1.0,
+          "alpha_linked": true,
+          "emission_strength": 0.0,
+          "emission_strength_linked": false,
+          "emission_color_max": 1.0,
+          "emission_color_linked": false
+        }
+      ],
+      "old_static_eligible": true,
+      "expected_static_eligible": false,
+      "actual_static_mask": 1.0
+    },
+    {
+      "material": "Ixora_flower_01.001",
+      "nodes": [
+        {
+          "type": "BSDF_PRINCIPLED",
+          "roughness": 0.8985832929611206,
+          "roughness_linked": false,
+          "metallic": 0.0,
+          "metallic_linked": false,
+          "transmission": 0.0,
+          "transmission_linked": false,
+          "alpha": 1.0,
+          "alpha_linked": true,
+          "emission_strength": 0.0,
+          "emission_strength_linked": false,
+          "emission_color_max": 1.0,
+          "emission_color_linked": false
+        }
+      ],
+      "old_static_eligible": true,
+      "expected_static_eligible": false,
+      "actual_static_mask": 1.0
+    },
+    {
+      "material": "Ixora_flower_02",
+      "nodes": [
+        {
+          "type": "BSDF_PRINCIPLED",
+          "roughness": 0.8985832929611206,
+          "roughness_linked": false,
+          "metallic": 0.0,
+          "metallic_linked": false,
+          "transmission": 0.0,
+          "transmission_linked": false,
+          "alpha": 1.0,
+          "alpha_linked": true,
+          "emission_strength": 0.0,
+          "emission_strength_linked": false,
+          "emission_color_max": 1.0,
+          "emission_color_linked": false
+        }
+      ],
+      "old_static_eligible": true,
+      "expected_static_eligible": false,
+      "actual_static_mask": 1.0
+    },
+    {
+      "material": "Ixora_flower_02.001",
+      "nodes": [
+        {
+          "type": "BSDF_PRINCIPLED",
+          "roughness": 0.8985832929611206,
+          "roughness_linked": false,
+          "metallic": 0.0,
+          "metallic_linked": false,
+          "transmission": 0.0,
+          "transmission_linked": false,
+          "alpha": 1.0,
+          "alpha_linked": true,
+          "emission_strength": 0.0,
+          "emission_strength_linked": false,
+          "emission_color_max": 1.0,
+          "emission_color_linked": false
+        }
+      ],
+      "old_static_eligible": true,
+      "expected_static_eligible": false,
+      "actual_static_mask": 1.0
+    }
+  ]
+}

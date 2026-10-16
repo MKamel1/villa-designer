@@ -108,6 +108,51 @@ def wall_sightline_findings(view, walls):
             for wall, distance in camera_wall_sightline_clearance(view, walls)]
 
 
+
+class CameraSweep:
+    """Physical camera-operator exclusion using production triangle arithmetic.
+
+    Unlike a photographic sightline, this includes glass. The swept box is
+    conservative for diagonal motion: it encloses both endpoints and their
+    horizontal clearance, over the declared walking height. It never creates
+    replacement design geometry. Ground, height and clearance are in metres.
+    Broad bounds only prune; production triangle/box tests decide contact.
+    """
+
+    def __init__(self, scene):
+        self.meshes = []
+        self.cache = {}
+        for mesh in scene['meshes']:
+            if mesh.get('diagnostic') or not mesh.get('faces'):
+                continue
+            points = np.asarray([p for face in mesh['faces'] for p in face])
+            self.meshes.append((mesh, points.min(axis=0), points.max(axis=0)))
+
+    def findings(self, start, end, *, ground_m, clearance_m=.15, height_m=1.8,
+                 hidden=()):
+        from .render_support import _triangles, _tri_box_overlap
+        if (not np.isfinite([*start, *end, ground_m, clearance_m, height_m]).all()
+                or clearance_m <= 0 or height_m <= .05):
+            raise ValueError('Invalid physical camera envelope')
+        low = np.array([min(start[0], end[0])-clearance_m,
+                        min(start[1], end[1])-clearance_m, ground_m+.05])
+        high = np.array([max(start[0], end[0])+clearance_m,
+                         max(start[1], end[1])+clearance_m, ground_m+height_m])
+        hits = []
+        for mesh, bounds_low, bounds_high in self.meshes:
+            if mesh['id'] in hidden or np.any(bounds_low > high) or np.any(bounds_high < low):
+                continue
+            if mesh['id'] not in self.cache:
+                self.cache[mesh['id']] = _triangles([mesh])[0]
+            triangles = self.cache[mesh['id']]
+            nearby = (np.all(triangles.min(axis=1) <= high, axis=1)
+                      & np.all(triangles.max(axis=1) >= low, axis=1))
+            if nearby.any() and _tri_box_overlap(
+                    triangles[nearby], (low+high)/2, (high-low)/2).any():
+                hits.append(mesh['id'])
+        return sorted(hits)
+
+
 def _near(q, x, y, c):
     return q[0] - c < x < q[2] + c and q[1] - c < y < q[3] + c
 
@@ -121,6 +166,25 @@ def _in_opening(sp, lv, x, y, room):
         if abs(along) <= d["width"] / 2 - 0.25 and abs(across) <= 0.35:
             return True
     return False
+
+
+def standing_point_clear(lay, sp, room, x, y, pieces, walls=None):
+    """The still camera's standing policy, also used at every walking frame.
+
+    A doorway uses its authored jamb limits; other interior points retain
+    0.30 metre wall/column and 0.15 metre furniture clearance.
+    """
+    lv = lay['rooms'][room]['level']
+    if any(_near(q, x, y, .15) for q in pieces):
+        return False
+    for d in sp['doors']:
+        if d['level'] != lv or room not in (d.get('rooms') or []):
+            continue
+        along, across = (x-d['x'], y-d['y']) if F._door_axis(d) == 'h' else (y-d['y'], x-d['x'])
+        if abs(across) <= .35 and abs(along) <= d['width']/2+.3:
+            return _in_opening(sp, lv, x, y, room)
+    return (_near(lay['rooms'][room]['rect'], x, y, 0.) and
+            not any(_near(q, x,y,.30) for q in (walls if walls is not None else F._walls(sp,lv)+F._columns())))
 
 
 def _angle(px, py, qx, qy, yaw):
@@ -290,13 +354,7 @@ def choose(lay, room, subjects, lens_mm=24.0, sensor_mm=36.0, eye_m=1.35, sp=Non
         return False
 
     def ok(x, y):
-        if any(_near(q, x, y, 0.15) for q in pieces):
-            return False
-        if in_door_band(x, y):
-            return _in_opening(sp, lv, x, y, room)
-        if _near(rect, x, y, 0.0):
-            return not any(_near(q, x, y, 0.30) for q in walls)
-        return False
+        return standing_point_clear(lay, sp, room, x, y, pieces, walls)
 
     def depth(x, y, yaw):
         # distance along the aim to the room rectangle's far edge
