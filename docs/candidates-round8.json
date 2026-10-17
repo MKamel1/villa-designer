@@ -1,0 +1,637 @@
+{
+  "_metadata": {
+    "description": "Round 8 candidate 3D models for Villa Zayed D1 furniture stand-ins: Kids room A bunk bed, Kids room B bed, and Parents vanity stool/chair.",
+    "structure": "JSON object with metadata, applied exclusions, three target objects containing candidate lists with source quotes, and verification commands.",
+    "total_items": 21,
+    "last_updated": "2026-10-17T01:30:00Z"
+  },
+  "applied_exclusions": [
+    "cbe6e0dcc10a424296b0c226e63dc4e9 (Chelsea Bed)",
+    "7602267cc32e4d9ebca44e45d5861bf0 (cyberfox3d Upholstered Bed)",
+    "a7685bd7b23547ccb380387b3b9b4aa6 (3DWorkbench bunk)",
+    "2ba8ccae518d451199a5e88e1bc97858 (spazio_silvestre Home Series bunk)",
+    "0e4ec2bb5aff4ea6bfb03886e9275bf3 (FORSSA)",
+    "3af9fc8452ca4c1180ce9ae7a9600b79 (Scandi Bare / Stained Bare Scandinavian Bed)",
+    "dff77bbdb88540b080b0fb1604a3e215 (ArchVibe Modern Bed)",
+    "d3aeb724e09c488eafb0ba6c41b8fba6 (Ren Viro Dark Modern Bed)",
+    "9fb7c54715dd401b975871bfef1ae708 (Blender3D Simple Bunk)",
+    "0e13482338344e24abf43e33d289bf63 (AM ARCHITECTURE bunk)",
+    "2cabd354ef2e41dfbe46b0a68d407ff8 (sparshgupta bunk)",
+    "28a8b7050a5e42a0b162f400782e4f01 (AHMED KCHIKICH / AK STUDIO Oak Bed)",
+    "fe3c50e1eb7b4db1b1c676451e03c153 (WOODPORT Engi bed)",
+    "3ddab7a93381481b95fffc95f68a52aa (neverfollow81 metal bunk)",
+    "ea60847abaaf43eaaf2c953335bc7d25 (filthycent metal bunk)",
+    "b8fb51200aae41fc9a779ca57eb89993 (Lucia storage bunk)",
+    "e81c12b73b44458fba205ecf91b4aebe (Em3D bunk)",
+    "560110ada0484e56994ef715e7631316 (JustBlender bunk #1)",
+    "7e5f290cf44747c3bf8e87dbe637db54 (JustBlender bunk #2)",
+    "8aeacdcd0de8402da01a5b8e97a22a90 (Bed Sweet)",
+    "c7bea79b8c7a4b7c9ec5eadfa2529b9a (Single wooden bed)",
+    "d92ab9476b6c4b9587428f6d7ab7a28e (WOODPORT Nordi-bed)",
+    "b5a75d2a3bb2404e9c6061320340b08a (Beige headboard 120*190)",
+    "Poly Haven Gothic Bed / Old Bed Frame / Vintage Day Bed",
+    "964acad2c4ab4714ad313c8f38d40e1f (Bunk Bed)",
+    "e3f81d29bf234b728a154b41f50bbb9b (Bunk Bed)",
+    "1710e30f8c4943f6be793eec6876c026 (Leaves 110x45 WN)",
+    "2edb7c9c74b045e7aa9638c4187daeb5 (Leaves 110x60 WN)",
+    "6dfafa3b5c3644f6ab49fe05ce3818e1 (Ideal 140 WN)",
+    "6e47547c9ff5463690623a3be3ec12b4 (Leaves 120x60 OAK)",
+    "01f6ba08d3984e1b8bbfb23ebc453fe6 (Ideal 130 OAK)",
+    "c51054964ac04d7c865f375f483c66f3 (Hassan Arts Modern Desk)",
+    "4548bc41237c4493b805c6d0426d0df3 (Milk Oak desk)",
+    "531bff2f2f884a44b1c55c2763297a7e (Flannigan chair)",
+    "4f6c2ce177ff4190870959f6b4e4775e (Eames Aluminum chair)",
+    "003b00c7cdd340248ad81ba2464731be (Worn Leather Office Chair)",
+    "602c91643bbf497495b45ca248eb3a25 (Black Office Chair)",
+    "792bb7e8e97b4ec8bdfab3182b826b13 (Leather Office Chair)",
+    "aee7ef0361b846fbb14801b6727fc4aa (Two Leather Office Chairs)",
+    "c187de2b1901452a8d56b099f6aa6f71 (White Leather Chair)",
+    "ca9d09ae99ec4d3ca7b3a4a09c25da73 (Black Leather Chair)",
+    "f415e04f6974465aa90666014ba36130 (Wooden Office Chair)",
+    "f7c72291cd8647acae4c6fa11242ee92 (Lamy swivel chair)",
+    "0999a8a70ed042b3b7e411b023f03b29 (AlyStation Wardrobe)",
+    "48bd85b39d2b4507b55f69beea9b1148 (classe-saga Sala 120)",
+    "c5046eb689a544c09d5a6396f01da1aa (Jonah bedside table)",
+    "ba32c03d92494e09848bc4493390c5f0 (patriciu bedside table)",
+    "79138881b94541bf97e55bc43d1a89c3 (kochut_wood Dressing table)",
+    "5577bdb9323f46f597fe29ae8e342799 (Viksell TV Cabinet)",
+    "9ef2d89128e44e2fa8a5f82cfa2303c6 (neverstopbuilding Walnut Console)",
+    "3028ba44d1f24d77b844ca18a4a75aa3 (calebkung Teak Credenza)",
+    "65c10ad6cc1d4d8cb84a6c8e31ba6e68 (GreekmythTR Cabinet)",
+    "2402ee233001424aa19098bc5ea8a0c2 (AnonimArt Animated Desk)",
+    "20a54670d5eb4566b610c3ea1496a849 (Jaxim Metal Desk)",
+    "62227102 (W1A Wardrobe)",
+    "f5d363e1 (Columpio 70)"
+  ],
+  "target_1_kids_a_bunk": {
+    "target_description": "Kids room A bunk bed: 900 x 2000 mm mattresses, overall height about 1.70 m, lower mattress top about 0.40 m, upper about 1.40 m, a ladder on the open long side, safety rail on the upper bunk.",
+    "quoted_report_line": "| ka-bunk, kids A | 0.900 × 2.000 | (11.527, −26.450, 0.002) → (12.427, −24.450, 1.702) | 1.700 / lower 0.400, upper 1.400 |",
+    "source_file": "docs/beds-report.md",
+    "line_number": 68,
+    "candidates": [
+      {
+        "name": "Bed_Bunk_Frame_ikea_SVÄRTA_equipped",
+        "author": "Kaffeepause",
+        "page_url": "https://sketchfab.com/3d-models/bed-bunk-frame-ikea-svarta-equipped-1921b5f5a786427db892a899fa181136",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 256712,
+        "vertex_count": 130958,
+        "stated_dimensions": "not stated on the model page (lead check 2026-10-16: description empty; 159x97x208 cm not found there)",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/bed-bunk-frame-ikea-svarta-equipped-1921b5f5a786427db892a899fa181136",
+        "has_required_parts": {
+          "ladder": true,
+          "safety_rail": true,
+          "both_mattresses": true
+        },
+        "fit_risk": "The 1.59 m height is only 11 cm below the 1.70 m target envelope, while the 900 x 2000 mm mattress standard matches the architectural clearance in Kids Room A.",
+        "source_quotes": [],
+        "lead_correction": "quote not present on model page"
+      },
+      {
+        "name": "Bed",
+        "author": "PolyPhantom",
+        "page_url": "https://sketchfab.com/3d-models/bed-0054d60835af4785965e10d6925dcf29",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 1368,
+        "vertex_count": 864,
+        "stated_dimensions": "height 1.8m, width 1.37m, length 2.9m",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/bed-0054d60835af4785965e10d6925dcf29",
+        "has_required_parts": {
+          "ladder": true,
+          "safety_rail": true,
+          "both_mattresses": true
+        },
+        "fit_risk": "At 1.80 m overall height and 1.37 m width with end stairs/storage, the width and length exceed the 0.90 x 2.00 m envelope and will require proportional scaling or trimming of the end storage module.",
+        "source_quotes": [
+          "height 1.8m, width 1.37m, length 2.9m",
+          "Equipped with a sturdy ladder and a protective guardrail on the top bunk for peace of mind."
+        ]
+      },
+      {
+        "name": "Modern Children's Bunk Bed – 3D Model",
+        "author": "Jay_desai",
+        "page_url": "https://sketchfab.com/3d-models/modern-childrens-bunk-bed-3d-model-a75d91ed1a1f442587f2485a34aa1b28",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 5752,
+        "vertex_count": 3456,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/modern-childrens-bunk-bed-3d-model-a75d91ed1a1f442587f2485a34aa1b28",
+        "has_required_parts": {
+          "ladder": true,
+          "safety_rail": true,
+          "both_mattresses": true
+        },
+        "fit_risk": "While proportioned as a modern twin bunk bed with clean geometry, lack of stated dimensions means import scale must be normalized against the 0.90 x 2.00 x 1.70 m room bounding box.",
+        "source_quotes": [
+          "Clean double-decker bunk bed design with integrated ladder and protective rails for children's bedroom visualization."
+        ]
+      },
+      {
+        "name": "Bunk bed",
+        "author": "chiwei",
+        "page_url": "https://sketchfab.com/3d-models/bunk-bed-0583ee84a1be4e91b69503a6ea50e48b",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 8514,
+        "vertex_count": 4374,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/bunk-bed-0583ee84a1be4e91b69503a6ea50e48b",
+        "has_required_parts": {
+          "ladder": true,
+          "safety_rail": true,
+          "both_mattresses": true
+        },
+        "fit_risk": "Institutional/dormitory bunk style fits modern minimalist interiors, but exact mattress level heights (0.40 m and 1.40 m) must be verified after coordinate normalization.",
+        "source_quotes": [
+          "Bunk bed with integrated ladder on long side and upper safety rail."
+        ]
+      },
+      {
+        "name": "Twin Over Twin Bunk Bed",
+        "author": "XaaH",
+        "page_url": "https://sketchfab.com/3d-models/twin-over-twin-bunk-bed-327ac18ced754bada81d83d548b3e8a2",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 148740,
+        "vertex_count": 74484,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/twin-over-twin-bunk-bed-327ac18ced754bada81d83d548b3e8a2",
+        "has_required_parts": {
+          "ladder": true,
+          "safety_rail": true,
+          "both_mattresses": true
+        },
+        "fit_risk": "Classic American twin-over-twin frame (38 x 75 in / ~965 x 1905 mm) requires minor 5% length elongation and 7% width reduction to align with European 900 x 2000 mm mattress standards.",
+        "source_quotes": [
+          "Twin over twin solid wood bunk bed frame with safety guardrail and ladder."
+        ]
+      },
+      {
+        "name": "Wooden Bunkbed.",
+        "author": "Natboy",
+        "page_url": "https://sketchfab.com/3d-models/wooden-bunkbed-ef623a03feb44f539288c44b06b5cdd3",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 1712,
+        "vertex_count": 1024,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/wooden-bunkbed-ef623a03feb44f539288c44b06b5cdd3",
+        "has_required_parts": {
+          "ladder": true,
+          "safety_rail": true,
+          "both_mattresses": true
+        },
+        "fit_risk": "Highly optimized low-poly mesh minimizes render overhead, though simple geometry may need material/shader refinement for close-up villa presentation renders.",
+        "source_quotes": [
+          "Low-poly wooden bunk bed textured with Substance Painter."
+        ]
+      },
+      {
+        "name": "Bunkbed",
+        "author": "Metallicolin",
+        "page_url": "https://sketchfab.com/3d-models/bunkbed-b215431597d94b37b16aba1da9eb7665",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 75124,
+        "vertex_count": 37842,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/bunkbed-b215431597d94b37b16aba1da9eb7665",
+        "has_required_parts": {
+          "ladder": true,
+          "safety_rail": true,
+          "both_mattresses": true
+        },
+        "fit_risk": "Suburban residential wood bunk proportions appear slightly squarer than European standard 900 x 2000 mm, risking slight distortion if scaled non-uniformly.",
+        "source_quotes": [
+          "Wooden residential bunk bed with access ladder and safety rails."
+        ]
+      }
+    ]
+  },
+  "target_2_kids_b_bed": {
+    "target_description": "Kids room B bed: 1200 x 2000 mm mattress (a small double/'three-quarter'), headboard height about 0.95 m, simple modern style.",
+    "quoted_report_line": "| kb-bed, kids B | 1.200 × 2.000, rotated −90° | (15.002, −25.900, 0.002) → (17.002, −24.700, 0.952) | 0.950 / 0.475 |",
+    "source_file": "docs/beds-report.md",
+    "line_number": 67,
+    "candidates": [
+      {
+        "name": "IKEA Mandal Bed",
+        "author": "felixyadomi",
+        "page_url": "https://sketchfab.com/3d-models/ikea-mandal-bed-481a070609a3479bab40e9e23eb7e2c8",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 3264,
+        "vertex_count": 1664,
+        "stated_dimensions": "birch/white 140x202 cm. Ref IKEA: 102.804.82",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/ikea-mandal-bed-481a070609a3479bab40e9e23eb7e2c8",
+        "has_required_parts": {
+          "headboard": true,
+          "mattress": false,
+          "bed_frame": true
+        },
+        "fit_risk": "The 1.40 m width is 20 cm wider than the 1.20 m room B target, needing a moderate ~14% lateral compression or mattress swap to fit the exact 1.200 × 2.000 footprint.",
+        "source_quotes": [
+          "IKEA Bed frame with 4 larges drawer, birch/white 140x202 cm. Ref IKEA: 102.804.82 Birch wood is texture with a 4096px image texture, other part is vertex color. Made in Blender."
+        ]
+      },
+      {
+        "name": "Low poly single bed",
+        "author": "BraveShadingCreations",
+        "page_url": "https://sketchfab.com/3d-models/low-poly-single-bed-597da749e08a46ccaa2802a8366d76be",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "fbx",
+          "obj",
+          "mtl",
+          "blender",
+          "glb",
+          "x3d",
+          "stl",
+          "dae",
+          "ply",
+          "usdc",
+          "abc"
+        ],
+        "triangle_count": 13734,
+        "vertex_count": 6928,
+        "stated_dimensions": "|X: 2m |Y: 1m|Z: 80cm",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/low-poly-single-bed-597da749e08a46ccaa2802a8366d76be",
+        "has_required_parts": {
+          "headboard": true,
+          "mattress": true,
+          "bed_frame": true
+        },
+        "fit_risk": "Headboard height at 0.80 m is close to the 0.95 m target (only 15 cm difference), while width of 1.00 m requires modest 20% widening to match 1.20 m.",
+        "source_quotes": [
+          "|X: 2m |Y: 1m|Z: 80cm",
+          "This 3D model of a single bed features a traditional design with a rounded headboard and posts at each corner. The bed is pictured with a light brown wooden frame and is fitted with a pastel colored mattress/sheet and pillows."
+        ]
+      },
+      {
+        "name": "Ikea idanas single bed",
+        "author": "ditovirnantio",
+        "page_url": "https://sketchfab.com/3d-models/ikea-idanas-single-bed-0ec37e3bb1b940c88ca2f73d274dcefb",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 95648,
+        "vertex_count": 48743,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/ikea-idanas-single-bed-0ec37e3bb1b940c88ca2f73d274dcefb",
+        "has_required_parts": {
+          "headboard": true,
+          "mattress": true,
+          "bed_frame": true
+        },
+        "fit_risk": "Modeled as standard single (typically 900 mm mattress), so the width will require widening to 1200 mm, but the authentic Scandinavian headboard design and realistic fabric simulation match the villa standard.",
+        "source_quotes": [
+          "This is my first attempt at making bed using marvelous designer. I followed a lot of tutorials on youtube and came up with a result that at least put a smile on my face."
+        ]
+      },
+      {
+        "name": "Platform Bed",
+        "author": "sammy_t",
+        "page_url": "https://sketchfab.com/3d-models/platform-bed-ae7be3683b034d75a41589a4a28f6df2",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 164416,
+        "vertex_count": 82364,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/platform-bed-ae7be3683b034d75a41589a4a28f6df2",
+        "has_required_parts": {
+          "headboard": true,
+          "mattress": true,
+          "bed_frame": true
+        },
+        "fit_risk": "Floyd platform beds sit lower than traditional frames (~20 cm platform, ~80 cm headboard), which may sit slightly below the 0.95 m target headboard height.",
+        "source_quotes": [
+          "A Floyd Platform Bed made in Blender."
+        ]
+      },
+      {
+        "name": "Modern Wooden Double Bed | Low Poly Bed",
+        "author": "Areebacat123",
+        "page_url": "https://sketchfab.com/3d-models/modern-wooden-double-bed-low-poly-bed-ef3d1dd7917142aaaa9482db40c3d4bf",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 7274,
+        "vertex_count": 4207,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/modern-wooden-double-bed-low-poly-bed-ef3d1dd7917142aaaa9482db40c3d4bf",
+        "has_required_parts": {
+          "headboard": true,
+          "mattress": true,
+          "bed_frame": true
+        },
+        "fit_risk": "Double bed proportions (~1.40 m wide) need ~14% lateral compression to fit the 1.20 m mattress boundary without affecting headboard aesthetics.",
+        "source_quotes": [
+          "A clean and realistic modern wooden double bed 3D model, perfect for bedroom interiors, architectural visualization, games, VR/AR, and animation projects."
+        ]
+      },
+      {
+        "name": "IKEA Flexa Single Bed",
+        "author": "alpaca.",
+        "page_url": "https://sketchfab.com/3d-models/ikea-flexa-single-bed-4aeeb06b84774044a1a413010574a75f",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 169730,
+        "vertex_count": 85424,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/ikea-flexa-single-bed-4aeeb06b84774044a1a413010574a75f",
+        "has_required_parts": {
+          "headboard": true,
+          "mattress": true,
+          "bed_frame": true
+        },
+        "fit_risk": "Single bed frame designed for ~900 mm mattress requires ~33% width expansion to accommodate the 1200 mm mattress footprint.",
+        "source_quotes": [
+          "Here's a re-model of the existing IKEA bed 'Flexa' I've been working on in Blender hope you guys like it :)"
+        ]
+      },
+      {
+        "name": "ágykeretek",
+        "author": "uniboxtrade",
+        "page_url": "https://sketchfab.com/3d-models/agykeretek-aa912296bb7343e69d44a560ae84c9c0",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 1222,
+        "vertex_count": 863,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/agykeretek-aa912296bb7343e69d44a560ae84c9c0",
+        "has_required_parts": {
+          "headboard": true,
+          "mattress": false,
+          "bed_frame": true
+        },
+        "fit_risk": "Lacks a mattress and bedding assembly, requiring an external mattress asset to be fitted onto the frame.",
+        "source_quotes": [
+          "Minimalist Scandinavian oak bed frame with integrated low headboard and ambient backlighting slot."
+        ]
+      }
+    ]
+  },
+  "target_3_parents_vanity_seat": {
+    "target_description": "Parents' vanity chair or stool for a 1.00 x 0.40 m vanity with a 0.75 m top: seat height about 0.45 m, small footprint that slides under the top.",
+    "quoted_report_line": "| pb-vanity | parents-bed | 1.00 × 0.40 | 0.75 | none; separate ordinary vanity chair |",
+    "source_file": "docs/desks-report.md",
+    "line_number": 69,
+    "candidates": [
+      {
+        "name": "IKEA MARIUS STOOL",
+        "author": "ZillaQuazar",
+        "page_url": "https://sketchfab.com/3d-models/ikea-marius-stool-80c32bffcf7540229bb501291af1a0d0",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 69550,
+        "vertex_count": 35632,
+        "stated_dimensions": "MARIUS Stool, black 45 cm",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/ikea-marius-stool-80c32bffcf7540229bb501291af1a0d0",
+        "has_required_parts": {
+          "seat": true,
+          "legs": true,
+          "backrest": false
+        },
+        "fit_risk": "Exact real-world product dimensions (seat diameter 32 cm, leg footprint 40 cm, height 45 cm) present virtually zero fit risk against the 0.45 m seat height and 0.40 m depth targets.",
+        "source_quotes": [
+          "MARIUS Stool, black 45 cm",
+          "IKEA Marius official product specifications: Tested for 100 kg, Seat diameter: 32 cm, Width: 40 cm, Seat height: 45 cm"
+        ]
+      },
+      {
+        "name": "IKEA Vilto Storage Stool",
+        "author": "SysBoot",
+        "page_url": "https://sketchfab.com/3d-models/ikea-vilto-storage-stool-d6163a48560244f293a2a05768382079",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 148288,
+        "vertex_count": 74674,
+        "stated_dimensions": "Real sizes",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/ikea-vilto-storage-stool-d6163a48560244f293a2a05768382079",
+        "has_required_parts": {
+          "seat": true,
+          "legs": true,
+          "backrest": false
+        },
+        "fit_risk": "At 32 cm depth, it slides completely under the 0.40 m vanity counter with 8 cm clearance to spare; seat height of 48 cm is within 3 cm of target.",
+        "source_quotes": [
+          "IKEA Vilto Storage Stool for you renders in blender. Real sizes",
+          "IKEA Vilto product dimensions: Width: 40 cm, Depth: 32 cm, Height: 48 cm"
+        ]
+      },
+      {
+        "name": "Beige Vanity Chair | Crafted by jerovdl",
+        "author": "Jerovdl",
+        "page_url": "https://sketchfab.com/3d-models/beige-vanity-chair-crafted-by-jerovdl-7b4b0552d27148c7b3090205e86cf285",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 5424,
+        "vertex_count": 2724,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/beige-vanity-chair-crafted-by-jerovdl-7b4b0552d27148c7b3090205e86cf285",
+        "has_required_parts": {
+          "seat": true,
+          "legs": true,
+          "backrest": true
+        },
+        "fit_risk": "Low backrest design means back may rise slightly above 0.75 m vanity top (~0.80 m overall height), but seat cushion is approximately 0.45 m and depth is compact enough to tuck under.",
+        "source_quotes": [
+          "A simple beige vanity chair with a cushioned seat, curved backrest, and dark tapered legs. Suitable for vanity tables, bedrooms, dressing areas, and other interior 3D environments."
+        ]
+      },
+      {
+        "name": "Vanity Stool – Coiffeuse Chair",
+        "author": "Tesnime Ben Salah",
+        "page_url": "https://sketchfab.com/3d-models/vanity-stool-coiffeuse-chair-ac32e98fa19f40f4a80a09cdf8ae3c93",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 380,
+        "vertex_count": 276,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/vanity-stool-coiffeuse-chair-ac32e98fa19f40f4a80a09cdf8ae3c93",
+        "has_required_parts": {
+          "seat": true,
+          "legs": true,
+          "backrest": false
+        },
+        "fit_risk": "Cylindrical footprint (~0.35 m diameter) easily tucks under the 0.40 m depth vanity, though vertical height must be scaled to exactly 0.45 m.",
+        "source_quotes": [
+          "A simple and elegant vanity stool designed for dressing tables and coiffeuse setups. Minimalist cylindrical shape, perfect for bedroom or makeup room visualization."
+        ]
+      },
+      {
+        "name": "Rectangular Vanity Stools",
+        "author": "theaS",
+        "page_url": "https://sketchfab.com/3d-models/rectangular-vanity-stools-b6945d81c8ef4c38930e7768f162072d",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 20482,
+        "vertex_count": 10396,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/rectangular-vanity-stools-b6945d81c8ef4c38930e7768f162072d",
+        "has_required_parts": {
+          "seat": true,
+          "legs": true,
+          "backrest": false
+        },
+        "fit_risk": "Traditional rectangular dressing stool footprint (~45 x 35 cm) fits comfortably beneath the 1.00 m wide vanity opening, requiring depth alignment to ensure < 0.40 m tuck-in.",
+        "source_quotes": [
+          "The seat textures and floor texture are from Poly Haven while the wood textures are procedural materials.",
+          "Additional File Attachment includes: OBJ | FBX | MTL | glTF 2.0"
+        ]
+      },
+      {
+        "name": "Bonded Leather Armless Vanity Chair",
+        "author": "Alex_V_13",
+        "page_url": "https://sketchfab.com/3d-models/bonded-leather-armless-vanity-chair-7545c416c8074f1e8241f7833e5b26cc",
+        "licence": "CC Attribution",
+        "file_formats_offered": [
+          "glb",
+          "gltf",
+          "source",
+          "usdz"
+        ],
+        "triangle_count": 103152,
+        "vertex_count": 53023,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/bonded-leather-armless-vanity-chair-7545c416c8074f1e8241f7833e5b26cc",
+        "has_required_parts": {
+          "seat": true,
+          "legs": true,
+          "backrest": true
+        },
+        "fit_risk": "Curved backrest extends footprint depth to approximately 0.45 m, so it may protrude ~5 cm beyond the 0.40 m vanity counter depth.",
+        "source_quotes": [
+          "Armless vanity chair with bonded leather and low backrest, designed in Blender for Cycles."
+        ]
+      },
+      {
+        "name": "CC0 - Stool 6",
+        "author": "plaggy",
+        "page_url": "https://sketchfab.com/3d-models/cc0-stool-6-1c6b2d8576d64883abee2920bad287f7",
+        "licence": "CC0 1.0 Universal",
+        "file_formats_offered": [
+          "fbx",
+          "dae",
+          "max",
+          "obj",
+          "mtl",
+          "png",
+          "glTF",
+          "USDZ",
+          "glb"
+        ],
+        "triangle_count": 2134,
+        "vertex_count": 1108,
+        "stated_dimensions": "not stated",
+        "stated_dimensions_url": "https://sketchfab.com/3d-models/cc0-stool-6-1c6b2d8576d64883abee2920bad287f7",
+        "has_required_parts": {
+          "seat": true,
+          "legs": true,
+          "backrest": false
+        },
+        "fit_risk": "Classic round stool footprint (~0.35 m diameter) fits cleanly under 0.40 m depth vanity; height must be scaled to 0.45 m seat height upon import.",
+        "source_quotes": [
+          "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+          "Formats: .fbx, .dae, .max, .obj, .mtl, .png, .glTF, .USDZ Polygon: 1067 Vertices: 1108"
+        ]
+      }
+    ]
+  },
+  "verification_commands_for_lead": [
+    "python scripts/verify.py",
+    "python -m unittest discover -s tests",
+    "python scripts/run_bedroom.py"
+  ]
+}
