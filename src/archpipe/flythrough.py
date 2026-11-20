@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 
 import numpy as np
@@ -23,8 +24,74 @@ def digest(value):
                                      allow_nan=False).encode()).hexdigest()
 
 
+def policy_path():
+    """Explicit policy selection is inherited by the native renderer process."""
+    return Path(os.environ.get('ARCHPIPE_FLYTHROUGH_POLICY', ROOT/'knowledge/flythrough-policy.json')).resolve()
+
+
 def policy():
-    return json.loads((ROOT/'knowledge/flythrough-policy.json').read_text())
+    return json.loads(policy_path().read_text())
+
+
+def route_path():
+    return ROOT/policy().get('route_file', 'knowledge/flythrough-route.json')
+
+
+def representative_indices(settings=None):
+    settings = settings or policy()
+    return settings.get('representative_frames', [0, (settings['frames']-1)//2, settings['frames']-1])
+
+
+def pixel_filter_settings(settings=None, *, measurement=False):
+    """Native finite-pixel reconstruction; width is measured in image pixels.
+
+    Source-isolation metering retains the original pinned-renderer setting.
+    Width choices are explicit render assumptions, never image-test limits.
+    """
+    settings=settings or policy()
+    configured=settings.get('pixel_filter',{})
+    value=configured.get('measurement' if measurement else 'beauty',
+                         dict(type='BLACKMAN_HARRIS',width_pixels=1.5))
+    width=value.get('width_pixels')
+    if (value.get('type') not in ('BLACKMAN_HARRIS','GAUSSIAN','BOX')
+            or isinstance(width,bool) or not isinstance(width,(int,float))
+            or not math.isfinite(width) or not .01<=width<=10):
+        raise ValueError('Invalid native pixel reconstruction setting')
+    return dict(type=value['type'],width_pixels=float(width))
+
+
+def camera_at_seconds(path, seconds):
+    """Exact eased camera pose, including subframes during the shutter interval.
+
+    Seconds outside the clip are held at the endpoint. The same quintic ease
+    defines integer samples and exposure-time motion; there is no image blur.
+    """
+    def interpolate(knots, key):
+        time = min(max(float(seconds), knots[0]['seconds']), knots[-1]['seconds'])
+        a, b = knots[-2:]
+        for left, right in zip(knots, knots[1:]):
+            if time <= right['seconds']:
+                a, b = left, right
+                break
+        fraction = (time-a['seconds'])/(b['seconds']-a['seconds'])
+        ease = fraction**3*(10+fraction*(-15+6*fraction))
+        return np.asarray(a[key])+(np.asarray(b[key])-a[key])*ease
+    position = interpolate(path['knots'], 'position').tolist()
+    yaw = float(interpolate(path.get('yaw_knots', path['knots']), 'yaw_deg'))
+    angle = math.radians(yaw)
+    return dict(position=position, target=[position[0]+math.cos(angle),
+                position[1]+math.sin(angle), position[2]], yaw_deg=yaw)
+
+
+def early_temporal_indices(path, route=None):
+    """Image-independent selection: maximum motion and first garden subject."""
+    rows = motion_findings(path['frames'], path['settings'])
+    route = route or json.loads(route_path().read_text())
+    garden = next(p['first_frame'] for p in route['subject_periods']
+                  if any('terrace' in s for s in p['subjects']))
+    ends = {max(rows, key=lambda r:r['speed_m_s'])['index'],
+            max(rows, key=lambda r:r['yaw_rate_deg_s'])['index'], max(1, garden)}
+    return sorted(ends)
 
 
 def sample_path(knots, settings=None):
@@ -32,8 +99,8 @@ def sample_path(knots, settings=None):
 
     Knots explicitly specify unwrapped yaw, allowing deliberate turns without
     accidental rotation at the minus/plus 180-degree boundary. Frame zero is
-    at zero seconds; frame 719 is at 719/24, with duration completed by its
-    normal 1/24-second display interval.
+    at zero seconds; the final frame starts at its index divided by the
+    policy frame rate, with duration completed by one display interval.
     """
     settings = settings or policy()
     if (len(knots) < 2 or knots[0]['seconds'] != 0
@@ -106,7 +173,7 @@ def walking_path(points, yaw_knots, settings=None, *, travel_seconds=None):
 
 def authored_path():
     """Read the single authored camera route used by the command and tests."""
-    route=json.loads((ROOT/'knowledge/flythrough-route.json').read_text())
+    route=json.loads(route_path().read_text())
     path=walking_path(route['points_m'],route['yaw_knots'],travel_seconds=route.get('travel_seconds'))
     path['route_input_sha256']=digest(route)
     path['sha256']=digest({k:v for k,v in path.items() if k!='sha256'})
@@ -190,7 +257,7 @@ def frame_views(path, scene):
     # and does not need project-only packages such as PyYAML or Matplotlib.
     from .concept.villa_render import curtain_hidden_meshes, sun_for_timestamp
     sun = sun_for_timestamp('2026-10-15T10:30:00+03:00')
-    periods=json.loads((ROOT/'knowledge/flythrough-route.json').read_text())['subject_periods']
+    periods=json.loads(route_path().read_text())['subject_periods']
     subjects=[]
     for frame in path['frames']:
         matching=[p['subjects'] for p in periods if p['first_frame']<=frame['index']<=p['last_frame']]
@@ -272,7 +339,7 @@ def clip_source_group(rows):
                 white_balance_illuminant='planckian' if group=='lamp-dominant' else 'daylight',
                 white_balance_tint=0 if group=='lamp-dominant' else 10,
                 lamp_luminance_sum=lamps,daylight_luminance_sum=daylight,
-                basis='registered strict majority on all 720 frame source populations')
+                basis='registered strict majority on the complete policy frame population')
 
 
 def temporal_pair(previous_rgb, current_rgb, previous_positions, current_positions,

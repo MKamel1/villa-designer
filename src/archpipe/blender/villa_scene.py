@@ -1892,42 +1892,19 @@ def measure_exposure_groups(scene_data, args, setup_view, lights, emissive_sourc
         json.dump(result, stream, indent=2)
 
 
-def frame_qa_scene(scene_data, view, camera, objects, materials, cloth_report):
+def frame_qa_scene(scene_data, view, camera, objects, materials, cloth_report, geometry_key=None):
     """Measure the production QA context at the actual frame camera.
 
-    Shared by still and walking cameras; window ray tests and cloth measurements
-    retain exactly the same coverage and thresholds.
+    Shared by still and walking cameras; native first-hit pixels own window
+    samples. The image thresholds and cloth measurements remain fixed.
     """
     s = bpy.context.scene
-    windows = []
-    if view["state"] == "day":
-        origin = camera.matrix_world.translation
-        depsgraph = bpy.context.view_layer.depsgraph
-        for spec in scene_data["meshes"]:
-            if spec["material"] != "glass-clear" or spec["id"] in view.get("hide_meshes", []):
-                continue
-            for k, face in enumerate(spec["faces"]):
-                points = [world_to_camera_view(s, camera, Vector(p)) for p in face]
-                if not points or any(p.z <= 0 for p in points):
-                    continue
-                # Projected does not mean visible: a pane in the next
-                # room must not make the image checker sample a wall.
-                centre = sum((Vector(p) for p in face), Vector()) / len(face)
-                samples = [centre] + [centre * 0.5 + Vector(p) * 0.5 for p in face]
-                visible = False
-                for target in samples:
-                    ray = target - origin
-                    hit, location, _normal, _index, obj, _matrix = s.ray_cast(
-                        depsgraph, origin, ray.normalized(), distance=ray.length + 0.02)
-                    if hit and obj.name == objects[spec["id"]].name and (location - target).length < 0.03:
-                        visible = True
-                        break
-                if not visible:
-                    continue
-                rect = [max(0, min(p.x for p in points)), max(0, min(p.y for p in points)),
-                        min(1, max(p.x for p in points)), min(1, max(p.y for p in points))]
-                if rect[2] - rect[0] >= 0.03 and rect[3] - rect[1] >= 0.03:
-                    windows.append({"id": spec["id"] + "-" + str(k), "screen": rect})
+    from archpipe.window_qa import visible_windows
+    glass_objects = [objects[spec['id']] for spec in scene_data['meshes']
+                     if spec['material'] == 'glass-clear'
+                     and spec['id'] not in view.get('hide_meshes', [])]
+    windows, room_glazing = (visible_windows(s, camera, glass_objects, geometry_key=geometry_key, include_room=True)
+                            if view['state'] == 'day' else ([], None))
     qa_materials = [{"name": name, "note": mat.get("note", ""), "override": "base_rgb" in mat,
                      "luminance": luminance(mat.get("base_rgb", [0, 0, 0])),
                      "glass": mat["kind"] == "glass", "photo": bool(mat.get("asset")),
@@ -1951,7 +1928,8 @@ def frame_qa_scene(scene_data, view, camera, objects, materials, cloth_report):
     architectural_glass = sum(name == "glass-clear" and spec["kind"] == "glass" and
                               any(node.type == "BSDF_TRANSPARENT" for node in materials[name].node_tree.nodes)
                               for name, spec in scene_data["materials"].items())
-    return {"windows": windows, "glass": {"architectural": architectural_glass},
+    return {"windows": windows, "room_glazing_pixels": room_glazing,
+            "glass": {"architectural": architectural_glass},
             "materials": qa_materials, "textiles": qa_textiles,
             "soft_goods": [{"name": c["id"], "simulated": c["colliders"] > 0} for c in cloth_report],
             "bedding": qa_bedding}

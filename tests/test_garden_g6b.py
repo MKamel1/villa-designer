@@ -47,6 +47,8 @@ class AppearanceTests(unittest.TestCase):
         for source in (self.meshes,self.east):
             shrub=deepcopy(next(m for m in source if m.get('species')=="Pittosporum tobira 'Wheeler\'s Dwarf'"))
             shrub['id']='another-villa-shrub';shrub['center']=[v+30 for v in shrub['center']];shrub['root_z_m']+=7
+            for record in shrub.get('organ_connections',[]):
+                record['contact_m']=[record['contact_m'][0]+30,record['contact_m'][1]+30,record['contact_m'][2]+7]
             for f in shrub['faces']:
                 for p in f:p[0]+=30;p[1]+=30;p[2]+=7
             self.assertEqual(G.appearance_findings([shrub]),[])

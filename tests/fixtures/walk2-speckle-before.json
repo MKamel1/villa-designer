@@ -1,0 +1,171 @@
+{
+  "policy_sha256": "eedf10e843a9ce2fa180459e165750701001e01974de0eaf50efacff53f951d8",
+  "crop": {
+    "frame": 600,
+    "box_left_top_right_bottom": [
+      940,
+      715,
+      1210,
+      875
+    ],
+    "origin": "top-left; pixel coordinates; right and bottom excluded",
+    "png_sha256": "b4fa0b6cb87fe937c000b6008abb6958d5011b327db4489bce6ae060ae041476"
+  },
+  "frames": [
+    {
+      "index": 588,
+      "png_sha256": "9f23f500e75a5fb75ae58b5f75accff83dcea51cbf8e1d987d462d1ba2afc44f",
+      "density_per_10000": 13.84694554663272,
+      "flicker_per_10000": null,
+      "isolated_pixels": 2863,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 589,
+      "png_sha256": "48a008a723bee9d68050be33026b4cfe5fbc8e6a2f90d87a642f3b88f16620a9",
+      "density_per_10000": 14.780393150719384,
+      "flicker_per_10000": 25.996273948009385,
+      "isolated_pixels": 3056,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 590,
+      "png_sha256": "b935e1d7c16672013d68074fe53f351e3c0e5f76a73bfc60bc3707c324c1e6c8",
+      "density_per_10000": 14.601442055635413,
+      "flicker_per_10000": 27.137691743680126,
+      "isolated_pixels": 3019,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 591,
+      "png_sha256": "ee9008e09f0441b9fc194e2352a79764bdeacd6d2525ca329c8932b51f234b8c",
+      "density_per_10000": 14.765883602469332,
+      "flicker_per_10000": 26.832991230429037,
+      "isolated_pixels": 3053,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 592,
+      "png_sha256": "06331dbe1519871ca5e6aa5b14a82e65ad169ca5d23e6c306042ce827305e120",
+      "density_per_10000": 14.306414574551026,
+      "flicker_per_10000": 27.011942325513008,
+      "isolated_pixels": 2958,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 593,
+      "png_sha256": "4a0ca14e9b68fd31272882ef3325b450aebb532dad1f3c232bb73ea8841783c1",
+      "density_per_10000": 14.32092412280108,
+      "flicker_per_10000": 26.33483007384393,
+      "isolated_pixels": 2961,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 594,
+      "png_sha256": "e23b22a8f45b2a37a4f241073eb46b62c859ec09308c3f1fefff16cab315abf7",
+      "density_per_10000": 15.070584115720418,
+      "flicker_per_10000": 26.866846843012492,
+      "isolated_pixels": 3116,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 595,
+      "png_sha256": "a5d1984f3ff4e365406ba220d829abaaf00fe0394dadb779931ac362da8166a5",
+      "density_per_10000": 14.32092412280108,
+      "flicker_per_10000": 25.909216658509077,
+      "isolated_pixels": 2961,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 596,
+      "png_sha256": "7009a68753aeb2cd07a752a97134b91aae519f35163de56a916aa084e1aa738a",
+      "density_per_10000": 15.012545922720212,
+      "flicker_per_10000": 25.232104406839994,
+      "isolated_pixels": 3104,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 597,
+      "png_sha256": "dc64af598dba8050613c47efeb8b00614d15700a2d8e83d1ff973242065e0bdb",
+      "density_per_10000": 14.306414574551026,
+      "flicker_per_10000": 24.966096022255712,
+      "isolated_pixels": 2958,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 598,
+      "png_sha256": "66dbb7321dccce7ab58cc64cfcfb99947887aed7b620826f651d1497ab3da328",
+      "density_per_10000": 14.219357285050716,
+      "flicker_per_10000": 24.743616282421584,
+      "isolated_pixels": 2940,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 599,
+      "png_sha256": "7c8f340a5edc3836456973b9a7e4cb1d4a082c09e9df032e57348f990d3939fa",
+      "density_per_10000": 14.301578058467676,
+      "flicker_per_10000": 24.719433702004835,
+      "isolated_pixels": 2957,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 600,
+      "png_sha256": "22a1b65d3fdd96dcec4f7b5823302543b60a66f898116b008676953964d46a18",
+      "density_per_10000": 15.573581788388879,
+      "flicker_per_10000": 25.802813304675364,
+      "isolated_pixels": 3220,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 601,
+      "png_sha256": "edb039729c7e9f471651bf0af31030668541769db4974dcc72e536a8803c56a7",
+      "density_per_10000": 14.180665156383911,
+      "flicker_per_10000": 25.904380142425723,
+      "isolated_pixels": 2932,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 602,
+      "png_sha256": "f857dec0792926604000bb778775b37e8c5786a803a3a0f9f4cb0ff2168e54fe",
+      "density_per_10000": 14.615951603885463,
+      "flicker_per_10000": 25.43040156625737,
+      "isolated_pixels": 3022,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 603,
+      "png_sha256": "1e6837eb01f6c59d75232435fd606d35ef561b7f181f08039e7fb3e4deafc722",
+      "density_per_10000": 14.562749926968607,
+      "flicker_per_10000": 25.51262233967433,
+      "isolated_pixels": 3011,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 604,
+      "png_sha256": "65b9deed3492d0d6dfbf0a12c0fc15bfea958eec31e4129a4e2407183a0d07a3",
+      "density_per_10000": 14.272558961967572,
+      "flicker_per_10000": 25.401382469757266,
+      "isolated_pixels": 2951,
+      "interior_pixels": 2067604,
+      "passed": false
+    }
+  ],
+  "passed": false,
+  "status": "REAL V1 REPRODUCTION BEFORE CONSTRUCTION CHANGE"
+}

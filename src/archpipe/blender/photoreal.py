@@ -789,28 +789,10 @@ def scene_qa(data, white_balance_applied, daylight=True):
                    "transmittance": sorted({round(float(m["photoreal_glass_tv"]), 3)
                                             for m in bpy.data.materials if m.get("photoreal_glass")})}
 
-    walls = {w["id"]: w for w in data.get("walls", [])}
-    wins = []
-    for op in data.get("openings", []):
-        if op.get("kind") != "window" or op.get("host") not in walls:
-            continue
-        wl = walls[op["host"]]
-        sx, sy = wl["start"]; ex, ey = wl["end"]
-        L = math.hypot(ex - sx, ey - sy) or 1.0
-        ux, uy = (ex - sx) / L, (ey - sy) / L
-        cx, cy = sx + ux * op["at"], sy + uy * op["at"]
-        z0 = op.get("sill", 0.0); z1 = z0 + op["height"]
-        corners = [Vector(((cx + ux * s * op["width"] / 2) / 1000.0,
-                           (cy + uy * s * op["width"] / 2) / 1000.0, z / 1000.0))
-                   for s in (-1, 1) for z in (z0, z1)]
-        pts = [world_to_camera_view(scene, cam, c) for c in corners]
-        if any(p.z <= 0 for p in pts):
-            continue
-        rect = [max(0.0, min(p.x for p in pts)), max(0.0, min(p.y for p in pts)),
-                min(1.0, max(p.x for p in pts)), min(1.0, max(p.y for p in pts))]
-        if rect[2] > rect[0] and rect[3] > rect[1]:
-            wins.append({"id": op.get("id", ""), "screen": rect})
-    qa["windows"] = wins
+    from archpipe.window_qa import visible_windows
+    qa["windows"], qa["room_glazing_pixels"] = visible_windows(scene, cam, [obj for obj in scene.objects
+        if obj.type == 'MESH' and any(slot.material and slot.material.get('photoreal_glass')
+                                    for slot in obj.material_slots)], include_room=True) if daylight else ([], None)
 
     used = {slot.material for o in scene.objects if o.type == "MESH" and o.visible_camera
             for slot in o.material_slots if slot.material}

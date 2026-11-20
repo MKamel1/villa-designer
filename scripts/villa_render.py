@@ -85,6 +85,7 @@ def villa_qa_context(scene: dict, view: dict, render_report: dict) -> dict:
             "white_balance": render_report["white_balance_applied"],
             "exposure_locked": True, "daylight": day,
             "sky": {"sun": day}, "windows": measured["windows"],
+            "room_glazing_pixels": measured.get("room_glazing_pixels"),
             "glass": measured["glass"], "materials": measured["materials"],
             "textiles": measured["textiles"], "soft_goods": measured["soft_goods"],
             "bedding": measured["bedding"],

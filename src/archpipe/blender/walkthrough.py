@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0,str(ROOT/'src'))
 from archpipe.blender import villa_scene as V
 from archpipe.safe_io import save_bytes
-from archpipe.flythrough import admit_path, frame_views, require_renderable, digest, clip_source_group, policy, static_material_eligible, static_coverage, retain_cache_materials
+from archpipe.flythrough import admit_path, frame_views, require_renderable, digest, clip_source_group, policy, static_material_eligible, static_coverage, retain_cache_materials, representative_indices, camera_at_seconds, pixel_filter_settings
 
 
 def save(path, value):
@@ -120,9 +120,105 @@ def remove_camera(camera):
     bpy.data.cameras.remove(data)
 
 
-def source_probe(scene,context,view,out):
+def animate_camera(camera, path, index):
+    """Cycles integrates actual camera transforms across a centered shutter."""
+    s=bpy.context.scene
+    settings=path['settings'];blur=settings.get('motion_blur',{})
+    s.render.fps=settings['fps'];s.render.fps_base=1
+    s.render.use_motion_blur=bool(blur.get('enabled',False))
+    if not s.render.use_motion_blur:return
+    s.render.motion_blur_shutter=blur['shutter_frames']
+    s.render.motion_blur_position=blur['position']
+    # Three exact eased poses include the complete shutter interval. Linear
+    # keyframes represent each half exposure; no image-space filtering occurs.
+    camera.rotation_mode='QUATERNION'
+    previous_orientation=None
+    for offset in (-.5,0,.5):
+        pose=camera_at_seconds(path,(index+offset)/settings['fps'])
+        camera.location=pose['position']
+        orientation=(Vector(pose['target'])-camera.location).to_track_quat('-Z','Y')
+        # A quaternion and its negation describe the same orientation. Linear
+        # component curves must stay in one hemisphere to take the short turn.
+        if previous_orientation is not None and previous_orientation.dot(orientation)<0:
+            orientation.negate()
+        camera.rotation_quaternion=orientation
+        previous_orientation=orientation.copy()
+        camera.keyframe_insert(data_path='location',frame=index+offset)
+        camera.keyframe_insert(data_path='rotation_quaternion',frame=index+offset)
+    # Blender 4.5 actions expose the legacy curve interface for object actions.
+    for curve in camera.animation_data.action.fcurves:
+        for point in curve.keyframe_points:point.interpolation='LINEAR'
+    whole=math.floor(index)
+    s.frame_set(whole,subframe=index-whole)
+
+
+def validate_camera_motion(path, check_settings=None):
+    """Read actual native forward directions throughout every frame's shutter.
+
+    Compare with the independently authored analytic yaw in double precision.
+    The policy tolerance is an assumed numerical agreement screen in degrees.
+    """
+    settings=path['settings'];blur=settings.get('motion_blur',{})
+    if not blur.get('enabled'):
+        return dict(passed=True,enabled=False)
+    check_settings=check_settings or settings.get('camera_motion_check')
+    if not check_settings:
+        raise ValueError('Native camera-motion agreement policy is missing')
+    tolerance=check_settings['maximum_orientation_error_degrees']
+    fractions=check_settings['shutter_fractions']
+    if (not 0<tolerance<=.1 or fractions!=[-.5,-.25,0,.25,.5]):
+        raise ValueError('Invalid native camera-motion agreement policy')
+    data=bpy.data.cameras.new('shutter-motion-readback')
+    camera=bpy.data.objects.new('shutter-motion-readback',data)
+    bpy.context.collection.objects.link(camera)
+    worst=dict(error_degrees=0.,index=None,offset_frames=None);poses=0
+    try:
+        for frame in path['frames']:
+            if camera.animation_data:
+                action=camera.animation_data.action
+                camera.animation_data_clear()
+                if action:bpy.data.actions.remove(action)
+            index=frame['index'];animate_camera(camera,path,index)
+            for fraction in fractions:
+                offset=fraction*blur['shutter_frames'];instant=index+offset
+                whole=math.floor(instant)
+                bpy.context.scene.frame_set(whole,subframe=instant-whole)
+                actual=camera.evaluated_get(bpy.context.evaluated_depsgraph_get()).matrix_world.to_quaternion() @ Vector((0,0,-1))
+                actual=np.asarray(actual,dtype=float);actual/=np.linalg.norm(actual)
+                yaw=math.radians(camera_at_seconds(path,instant/settings['fps'])['yaw_deg'])
+                expected=np.array([math.cos(yaw),math.sin(yaw),0.])
+                error=math.degrees(math.atan2(float(np.linalg.norm(np.cross(actual,expected))),float(np.dot(actual,expected))))
+                poses+=1
+                if error>worst['error_degrees']:
+                    worst=dict(error_degrees=error,index=index,offset_frames=offset)
+                if not math.isfinite(error) or error>tolerance:
+                    raise ValueError('Native shutter orientation differs from analytic path: '+str(worst))
+    finally:
+        action=camera.animation_data.action if camera.animation_data else None
+        remove_camera(camera)
+        if action:bpy.data.actions.remove(action)
+    return dict(passed=True,enabled=True,frames=len(path['frames']),evaluated_poses=poses,
+                maximum_orientation_error_degrees=worst['error_degrees'],worst=worst,
+                tolerance_degrees=tolerance,basis=check_settings['basis'])
+
+
+def configure_pixel_filter(settings, *, measurement=False):
+    """Apply and read back native reconstruction, without image postprocessing."""
+    expected=pixel_filter_settings(settings,measurement=measurement)
+    scene=bpy.context.scene
+    scene.cycles.pixel_filter_type=expected['type']
+    scene.cycles.filter_width=expected['width_pixels']
+    actual=dict(type=scene.cycles.pixel_filter_type,width_pixels=float(scene.cycles.filter_width))
+    if (actual['type']!=expected['type'] or
+            not math.isclose(actual['width_pixels'],expected['width_pixels'],abs_tol=1e-6)):
+        raise ValueError('Native pixel reconstruction readback differs')
+    return actual
+
+
+def source_probe(scene,context,view,out,settings=None):
     from archpipe.exposure_groups import measurement,rule,lamp_population
     camera,_,_=setup(scene,context,view)
+    pixel_filter=configure_pixel_filter(settings or policy(),measurement=True)
     s=bpy.context.scene;p=rule()['source_probe']
     s.render.resolution_x,s.render.resolution_y=p['resolution']
     s.render.resolution_percentage=100;s.cycles.samples=p['samples']
@@ -150,7 +246,7 @@ def source_probe(scene,context,view,out):
     lamps,lamp_seconds=probe('lamps-only')
     row=measurement(lamps,day)
     row.update(lamp_population=lamp_population(scene,view,context['emissive_sources']),
-               daylight_seconds=day_seconds,lamps_seconds=lamp_seconds)
+               daylight_seconds=day_seconds,lamps_seconds=lamp_seconds,pixel_filter=pixel_filter)
     remove_camera(camera)
     return row
 
@@ -163,17 +259,18 @@ def measure(args,path,scene,context):
         file=out/(view['id']+'.json')
         if file.exists():record=json.loads(file.read_text())
         else:
-            row=source_probe(scene,context,view,out)
+            row=source_probe(scene,context,view,out,path['settings'])
             camera,_,_=setup(scene,context,view)
             s=bpy.context.scene;s.render.resolution_x,s.render.resolution_y=policy()['final_resolution']
             s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast'
+            meter_filter=configure_pixel_filter(path['settings'],measurement=True)
             ev,logavg=V.photoreal.camera_meter(bias_stops=-.4,look='AgX - Medium High Contrast')
             remove_camera(camera)
-            record=dict(source=row,meter=dict(exposure_stops=ev,log_average=logavg),path_sha256=path['sha256'])
+            record=dict(source=row,meter=dict(exposure_stops=ev,log_average=logavg,pixel_filter=meter_filter),path_sha256=path['sha256'])
             save(file,record)
         if record['path_sha256']!=path['sha256']:raise ValueError('Stale frame source measurement')
         rows.append(record['source']);meters[view['id']]=record['meter']
-        print('WALKTHROUGH exposure',len(rows),'/ 720',flush=True)
+        print('WALKTHROUGH exposure',len(rows),'/',len(views),flush=True)
     lock=clip_source_group(rows)
     lock.update(exposure_stops=sorted(m['exposure_stops'] for m in meters.values())[len(meters)//2],
                 group_meters=meters,source_measurements=rows,rule_sha256=RULE_SHA256,
@@ -229,19 +326,21 @@ def render_frames(args,path,scene,context):
         raise ValueError('Clip camera lock binding changed')
     views=frame_views(path,scene)
     resolution=policy()['preview']['resolution'] if args.stage in ('draft','preview') else policy()['final_resolution']
-    samples=32 if args.stage in ('draft','preview') else args.samples
-    indices=[0,359,719] if args.stage=='draft' else [int(i) for i in args.frames.split(',')] if args.frames else range(720)
-    position_output=static_position_output(out) if args.stage=='final' else None
+    samples=policy()['preview']['samples'] if args.stage in ('draft','preview') else args.samples
+    indices=representative_indices() if args.stage=='draft' else [int(i) for i in args.frames.split(',')] if args.frames else range(len(views))
+    position_output=static_position_output(out) if args.stage in ('final','sampling') else None
     for index in indices:
         view=views[index];png=out/(view['id']+'.png');receipt_file=png.with_suffix('.json')
-        identity=digest(dict(path=path['sha256'],lock=lock['sha256'],resolution=resolution,samples=samples))
+        identity=digest(dict(path=path['sha256'],lock=lock['sha256'],resolution=resolution,samples=samples,policy=digest(policy())))
         if receipt_file.exists():
             receipt=json.loads(receipt_file.read_text())
             if (receipt.get('identity')==identity and png.exists() and receipt['png_sha256']==hashlib.sha256(png.read_bytes()).hexdigest()
-                    and (args.stage!='final' or ((out/(view['id']+'-positions.npz')).exists()
+                    and (position_output is None or ((out/(view['id']+'-positions.npz')).exists()
                     and receipt.get('positions_sha256')==hashlib.sha256((out/(view['id']+'-positions.npz')).read_bytes()).hexdigest()))):
                 continue
         camera,pitch,emissive=setup(scene,context,view)
+        animate_camera(camera,path,index)
+        pixel_filter=configure_pixel_filter(path['settings'])
         s=bpy.context.scene;s.render.resolution_x,s.render.resolution_y=resolution;s.render.resolution_percentage=100
         s.cycles.samples=samples;s.cycles.max_bounces=16;s.cycles.use_adaptive_sampling=False;s.cycles.use_denoising=True
         s.cycles.seed=0;s.cycles.use_animated_seed=False
@@ -254,13 +353,16 @@ def render_frames(args,path,scene,context):
         elapsed=time.monotonic()-started
         record=dict(identity=identity,index=index,path_sha256=path['sha256'],lock_sha256=lock['sha256'],
                     samples=samples,resolution=resolution,render_seconds=elapsed,render_device=context['render_device'],
+                    motion_blur=path['settings'].get('motion_blur',{'enabled':False}),
+                    pixel_filter=pixel_filter,
                     exposure_stops=float(s.view_settings.exposure),white_balance_k=float(s.view_settings.white_balance_temperature),
                     white_balance_tint=float(s.view_settings.white_balance_tint),white_balance_illuminant=lock['white_balance_illuminant'],
                     exposure_group=lock['group'],blender_version=bpy.app.version_string,
                     camera_pitch_deg=pitch,white_balance_applied=wb,
                     subjects=V.subjects(view,scene["meshes"],context["objects"]),
                     lights_on_count=sum(not o.hide_render for o in context['lights'].values()),emissive_sources=emissive,
-                    qa_scene=V.frame_qa_scene(scene,view,camera,context['objects'],context['materials'],context['cloth_report']),
+                    qa_scene=V.frame_qa_scene(scene,view,camera,context['objects'],context['materials'],context['cloth_report'],
+                        geometry_key=context['receipt']['evaluated_meshes_sha256']),
                     png_sha256=hashlib.sha256(png.read_bytes()).hexdigest())
         if position_output:
             position_file=next(out.glob(view['id']+'-position-*.exr'))
@@ -277,6 +379,7 @@ def measure_static_coverage(args,path,scene,context):
     """Early real-scene diagnostic; no exposure selection or presentation."""
     out=Path(args.root)/'coverage';out.mkdir(exist_ok=True)
     node=static_position_output(out);views=frame_views(path,scene);rows=[]
+    configure_pixel_filter(path['settings'],measurement=True)
     s=bpy.context.scene
     s.render.resolution_x,s.render.resolution_y=policy()['preview']['resolution']
     s.render.resolution_percentage=100;s.cycles.samples=4
@@ -285,7 +388,7 @@ def measure_static_coverage(args,path,scene,context):
     s.view_settings.view_transform='Standard';s.view_settings.look='None'
     s.view_settings.exposure=0;s.view_settings.use_white_balance=False
     s.render.image_settings.file_format='OPEN_EXR';s.render.image_settings.color_depth='32'
-    for index in (0,359,719):
+    for index in representative_indices():
         camera,_,_=setup(scene,context,views[index])
         name=f'frame-{index:04d}'
         node.file_slots[0].path=name+'-positions-'
@@ -308,7 +411,7 @@ def measure_static_coverage(args,path,scene,context):
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--root',required=True)
-    parser.add_argument('--stage',choices=['preflight','assembly','coverage','exposure','draft','preview','sampling','reference','final'],required=True)
+    parser.add_argument('--stage',choices=['preflight','assembly','same-camera','coverage','exposure','draft','preview','sampling','reference','final'],required=True)
     parser.add_argument('--samples',type=int,default=64)
     parser.add_argument('--frames')
     parser.add_argument('--target-stage')
@@ -316,18 +419,28 @@ def main():
     if bpy.app.version[:3]!=(4,5,14):raise ValueError('Production pin is Blender 4.5.14')
     if args.stage=='preflight':
         root=Path(args.root)
+        motion_readback=validate_camera_motion(json.loads((root/'path.json').read_text()))
         if args.target_stage=='assembly':
             path=json.loads((root/'path.json').read_text())
             scene=json.loads((root/'scene.json').read_text())
         else:
             path,scene,context=load_context(args)
         views=frame_views(path,scene)
-        V.configure_camera(views[0])
-        static_position_output(root/'preflight-diagnostics')
         device=V.configure_cycles(False)
+        for index in representative_indices():
+            camera,_=V.configure_camera(views[index])
+            animate_camera(camera,path,index)
+            if policy().get('motion_blur',{}).get('enabled'):
+                if not bpy.context.scene.render.use_motion_blur:raise ValueError('Native camera motion blur is disabled')
+                if bpy.context.scene.render.motion_blur_shutter!=policy()['motion_blur']['shutter_frames']:
+                    raise ValueError('Native shutter differs from registered policy')
+            remove_camera(camera)
+        static_position_output(root/'preflight-diagnostics')
+        pixel_filter=configure_pixel_filter(path['settings'],measurement=args.target_stage in ('coverage','exposure'))
         save(root/('preflight-'+args.target_stage+'.json'),dict(passed=True,
              blender=bpy.app.version_string,render_device=device,path_sha256=path['sha256'],
-             frames=len(views),sun=views[0]['sun'],cache_readback=args.target_stage!='assembly'))
+             frames=len(views),sun=views[0]['sun'],cache_readback=args.target_stage!='assembly',pixel_filter=pixel_filter,
+             camera_motion_readback=motion_readback))
         return
     if args.stage=='assembly':
         args.out=str(Path(args.root)/'assembly');Path(args.out).mkdir(parents=True,exist_ok=True)
@@ -335,6 +448,9 @@ def main():
         args.library_root=None;args.cpu=False;args.views='all';args.calibrate=False
         args.measure_lighting=False;args.measure_exposure_groups=False;args.walkthrough_callback=prepare
         V.render(json.loads((Path(args.root)/'scene.json').read_text()),args)
+    elif args.stage=='same-camera':
+        import runpy
+        runpy.run_path(str(ROOT/'scripts/walk2_same_camera.py'))['main'](Path(args.root))
     else:
         path,scene,context=load_context(args)
         if args.stage=='coverage':measure_static_coverage(args,path,scene,context)

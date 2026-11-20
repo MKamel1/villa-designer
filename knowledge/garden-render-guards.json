@@ -836,6 +836,178 @@
       "proofs": [
         "test_real_glazed_endpoint_refuses_early_static_coverage"
       ]
+    },
+    {
+      "lesson_id": "walkthrough-detached-plant-organs",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Closed tubular Mona corollas seat at spike axis; star corolla hubs and real sloping Petrea pedicel origins; explicit organ-to-support witnesses read back actual faces",
+      "check": "archpipe.concept.plant_connections.organ_connection_findings; archpipe.concept.garden_g6.appearance_findings",
+      "stage": "plant construction and production scene contract",
+      "proof_file": "tests/test_plant_connections.py",
+      "proofs": [
+        "test_clean_actual_species_organs_are_closed_attached_and_complete",
+        "test_renamed_translated_actual_clean_and_detached_siblings",
+        "test_closed_flower_corolla_is_single_connected_surface"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-temporal-speckle",
+      "control_tier": [
+        2
+      ],
+      "construction": "Pre-register full-frame median residual density and adjacent isolated-mask exclusive-or flicker separately from static opaque reprojection; refuse final encoding on any failed frame/pair",
+      "check": "archpipe.walkthrough_quality.speckle_frame; scripts.flythrough.speckle; scripts.flythrough.encode",
+      "stage": "sample choice and every final frame before encoding",
+      "proof_file": "tests/test_walk2_quality.py",
+      "proofs": [
+        "test_real_lavender_crop_and_adjacent_pair_refuse",
+        "test_clean_gradient_quiet_noise_and_moved_sibling_fire",
+        "test_real_encoding_method_quiet_and_artifact_sibling",
+        "test_actual_closed_attached_first_fix_still_refuses_fine_foliage_speckle"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-policy-encode",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Use selected policy fps and frame count throughout renderer, temporal loop, package queue, encoding and ffprobe validation; native half-frame camera transforms tested separately",
+      "check": "scripts.flythrough.require_video_format; scripts.walk2_queue.packages; archpipe.flythrough.camera_at_seconds",
+      "stage": "render and encode coordination",
+      "proof_file": "tests/test_walk2_quality.py",
+      "proofs": [
+        "test_format_uses_registered_frame_count_and_rate",
+        "test_subframe_camera_matches_samples_and_eased_endpoint",
+        "test_final_packages_cover_policy_once_and_keep_preview_checkpoint"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-visibility-topology",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Declared physical form faces retain stems/leaves/flower lobes and omit added connection hubs/throats from target selection; every opaque actual face still occludes; no threshold changes",
+      "check": "archpipe.concept.garden_render_review.visibility_sample_points; archpipe.concept.garden_render_review.subject_visibility_evidence",
+      "stage": "named feature visibility before scene export and every required view",
+      "proof_file": "tests/test_walk2_visibility.py",
+      "proofs": [
+        "test_real_flower_topology_changes_legacy_samples_but_same_leaves_are_stable",
+        "test_actual_current_jasmine_foliage_visible_and_existing_beams_still_occlude",
+        "test_sampling_uses_declared_physical_faces_and_rejects_invalid_populations"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-fresh-stage-directory",
+      "control_tier": [
+        1
+      ],
+      "construction": "Create the owned sampling directory before atomically publishing image-independent registration; retain safe retry behavior",
+      "check": "scripts.flythrough.choose_samples",
+      "stage": "sample selection before any graphics invocation",
+      "proof_file": "tests/test_walk2_quality.py",
+      "proofs": [
+        "test_sample_registration_precedes_graphics_in_fresh_and_retained_directory"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-preview-gate",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "One bound complete-preview review prerequisite admits sample registration and every final-resolution graphics entry point",
+      "check": "scripts.flythrough.require_preview_review; scripts.walk2_queue.main",
+      "stage": "before reference, candidate sampling and final graphics",
+      "proof_file": "tests/test_walk2_quality.py",
+      "proofs": [
+        "test_complete_preview_receipt_gates_all_final_resolution_entrypoints"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-native-dispatch",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Native stage dispatch derives its root explicitly from parsed arguments; exercise actual parser-to-helper dispatch before expensive scene work",
+      "check": "archpipe.blender.walkthrough.main; tests.blender_walk2_camera.NativeCameraMotion",
+      "stage": "native command preflight before assembly and diagnostic graphics",
+      "proof_file": "tests/blender_walk2_camera.py",
+      "proofs": [
+        "test_real_same_camera_dispatch_derives_root_from_parsed_arguments",
+        "test_same_camera_diagnostic_uses_the_selected_output_root",
+        "test_rendered_camera_exposure_spreads_a_physical_edge"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-pixel-reconstruction",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Explicit native beauty reconstruction type and width in the moving-image policy; source-isolation and exposure meters retain their original reconstruction. Read back native settings; reject aliasing and independently reject excessive visible softness.",
+      "check": "archpipe.flythrough.pixel_filter_settings; archpipe.blender.walkthrough.configure_pixel_filter; archpipe.walkthrough_quality.speckle_frame",
+      "stage": "before native beauty rendering and every final frame/adjacent pair",
+      "proof_file": "tests/test_walk2_quality.py",
+      "proofs": [
+        "test_native_reconstruction_is_policy_bound_and_metering_keeps_original",
+        "test_actual_closed_attached_first_fix_still_refuses_fine_foliage_speckle",
+        "test_clean_gradient_quiet_noise_and_moved_sibling_fire"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-shutter-quaternion",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Successive native quaternion keyframes use compatible signs. Mandatory native preflight reads evaluated forward direction at five shutter fractions for every policy frame against independent analytic yaw; missing/invalid policy refuses.",
+      "check": "archpipe.blender.walkthrough.animate_camera; archpipe.blender.walkthrough.validate_camera_motion; archpipe.blender.walkthrough.main",
+      "stage": "before any native production graphics stage",
+      "proof_file": "tests/blender_walk2_camera.py",
+      "proofs": [
+        "test_real_shutter_sign_discontinuity_refuses_before_and_accepts_continuous_construction"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-window-pixel-ownership",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Native evaluated camera-visible render geometry owns each glazing sample; hidden-render/camera-invisible objects cannot occlude, real opaque instances still do. Preserve brightness/detail/clipping limits; generate fresh native QA and preserve original pixel receipts after proven analysis-only reuse.",
+      "check": "archpipe.window_qa.visible_windows; archpipe.window_qa.render_geometry; scripts.walk2_reuse_qa.prove_qa_only",
+      "stage": "production frame QA before complete-preview acceptance or final encoding",
+      "proof_file": "tests/test_window_qa.py",
+      "proofs": [
+        "test_frozen_real_rectangle_fails_but_native_visible_glass_stays_quiet",
+        "test_real_glass_pixel_mutations_still_fire_for_dim_and_blank_windows",
+        "test_runs_roundtrip_and_refuse_invalid_or_stale_native_grid"
+      ]
+    },
+    {
+      "lesson_id": "walkthrough-window-room-population",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "One semantic inside-room population excludes every native glazing owner, including small panes skipped by individual checks. Exact separate two-pixel window and three-pixel room grids; missing/stale declared room masks refuse. Legacy callers exclude all window rectangles. Strict percentile, brightness, detail and clipping thresholds stay fixed.",
+      "check": "archpipe.window_qa.room_background_pixels; archpipe.window_qa.visible_windows; scripts.villa_render.villa_qa_context",
+      "stage": "native post-render measurement and image QA before preview/final admission",
+      "proof_file": "tests/test_window_room_background.py",
+      "proofs": [
+        "test_real_other_window_is_not_inside_room_and_camera_sibling_generalises",
+        "test_real_dim_window_mutation_still_fires_and_clipping_is_not_waived",
+        "test_all_native_panes_excluded_including_small_and_corrupt_ownership_refuses",
+        "test_exact_native_room_grid_and_adapter_refuse_missing_or_wrong_grid",
+        "test_real_full_image_room_mask_cannot_silently_omit_required_comparison",
+        "test_real_legacy_rectangle_adapter_is_not_a_missing_native_mask"
+      ]
     }
   ]
 }

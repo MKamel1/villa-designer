@@ -54,7 +54,8 @@ def _mound_template(dense):
     def compute():
         growth = mound(dense=dense)
         return (tuple(tuple(tuple(p) for p in face) for face in growth.faces),
-                tuple(growth.leaves), tuple(growth.materials), json.dumps(growth.records))
+                tuple(growth.leaves), tuple(growth.materials), json.dumps(growth.records),
+                json.dumps(growth.connections))
     return immutable("g6-mound-template", dense, compute)
 
 
@@ -83,36 +84,49 @@ def clump(identifier,species,center,ground,data,*,bed,layer,context=None):
     size=row['placement_assumptions'][key]
     if context:size=size.get('contexts',{}).get(context,size)
     height=.4 if species.startswith('Plectranthus') else .7 if context else .75 if layer=='back' else .65;spread=.35 if species.startswith('Plectranthus') else .65
-    faces=[];leaf_indices=[];flower_indices=[]
+    faces=[];leaf_indices=[];flower_indices=[];connections=[]
     if not species.startswith('Plectranthus'):
         template=_mound_template(bool(context))
         faces,leaf_indices=template[0],list(template[1])
+        connections=json.loads(template[4])
     for i in range(17 if species.startswith('Plectranthus') else 0):
         a=i*pi*(3-5**.5);radial=.12+.035*(i%4);z=.26+.035*(i%6)
         tip=(radial*cos(a),radial*sin(a),z)
         faces+=tube((0,0,0),tip,.008)
         for j in range(4):
             p=np.array(tip)*(.45+.18*j);p[:2]+=np.array([cos(a+j),sin(a+j)])*.035
+            parent=list(range(len(faces),len(faces)+28))
             faces+=tube((0,0,0),p,.004)
-            f=leaf(p,.13+.015*sin(i+j),.055+.008*cos(i+2*j),a+j*.7,.2+.25*sin(i+j));leaf_indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
+            f=leaf(p,.13+.015*sin(i+j),.055+.008*cos(i+2*j),a+j*.7,.2+.25*sin(i+j))
+            child=list(range(len(faces),len(faces)+len(f)));leaf_indices+=child;faces+=f
+            connections.append(dict(kind='leaf',child_face_indices=child,parent_face_indices=parent,contact_m=p.tolist()))
         if species.startswith('Plectranthus'):
-            upper=(tip[0],tip[1],tip[2]+.12);faces+=tube(tip,upper,.003)
+            from .garden_g6b import corolla
+            upper=(tip[0],tip[1],tip[2]+.12)
+            parent=list(range(len(faces),len(faces)+28));faces+=tube(tip,upper,.003)
             for k in range(6):
-                p=(upper[0]+.02*cos(k),upper[1]+.02*sin(k),upper[2]-.018*k)
-                f=leaf(p,.035,.025,k);flower_indices+=list(range(len(faces),len(faces)+len(f)));faces+=f
+                contact=np.array([upper[0],upper[1],upper[2]-.018*k])
+                end=contact+np.array([.028*cos(k),.028*sin(k),.004])
+                f=corolla(contact,end)
+                child=list(range(len(faces),len(faces)+len(f)));flower_indices+=child;faces+=f
+                connections.append(dict(kind='flower',child_face_indices=child,parent_face_indices=parent,contact_m=contact.tolist()))
     points=np.array([p for f in faces for p in f]);lo=points.min(axis=0);hi=points.max(axis=0)
     factors=np.array([spread/max((hi-lo)[:2])]*2+[height/(hi[2]-lo[2])]);origin=np.array([(lo[0]+hi[0])/2,(lo[1]+hi[1])/2,lo[2]])
     offset=np.array([*center,ground]);faces=_transform_faces(faces,points,origin,factors,offset)
+    for record in connections:
+        record['contact_m']=(offset+(np.asarray(record['contact_m'])-origin)*factors).tolist()
     m=_mesh(identifier,'garden-foliage',faces,'plant-clump','centrepiece' if context else 'foliage',
         'ASSUMED clipped dome' if not species.startswith('Plectranthus') else 'ASSUMED lavender-flowered underplanting',
         species=species,center=list(center),root_z_m=ground,bed=bed,planting_layer=layer,
-        spread_m=spread,appearance_key=key,leaf_face_indices=leaf_indices,explicit_geometry=True)
+        spread_m=spread,appearance_key=key,leaf_face_indices=leaf_indices,
+        flower_face_indices=flower_indices,organ_connections=connections,explicit_geometry=True)
     if not species.startswith('Plectranthus'):
         m['face_materials']=list(template[2])
         m['leaf_records']=json.loads(template[3])
         m['plant_form']='dense-low-mound'
     if flower_indices:
         m['face_materials']=['g6-lavender-flower' if i in set(flower_indices) else 'garden-foliage' for i in range(len(faces))]
+        m['flower_construction_basis']='ASSUMED closed tubular corollas continuously seated on the spike axis; no camera-dependent minimum feature rule'
     return m
 
 
@@ -366,6 +380,12 @@ def appearance_findings(meshes):
     from .fitting_mounting import bounds
     from math import atan2
     out=[];data=L._plant_data()
+    from .plant_connections import organ_connection_findings
+    # These species use the shared closed-organ builders. Other botanical
+    # builders retain their own existing species-specific continuity guards.
+    connected_species={"Plectranthus 'Mona Lavender'","Pittosporum tobira 'Wheeler\'s Dwarf'",
+                       'Petrea volubilis','Trachelospermum jasminoides','Eriobotrya japonica'}
+    out += organ_connection_findings([m for m in meshes if m.get('species') in connected_species])
     for mesh in meshes:
         species=mesh.get('species','');faces=mesh.get('faces',[])
         if species not in data:continue

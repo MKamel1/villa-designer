@@ -26,15 +26,27 @@ class Growth:
     """Accumulate closed connected stems, leaves and flowers with material slots."""
     def __init__(self, foliage):
         self.faces=[];self.materials=[];self.leaves=[];self.flowers=[];self.records=[];self.foliage=foliage
-    def add(self, faces, material):
+        self.connections=[];self._last_stem=[];self.visibility_faces=[]
+    def add(self, faces, material, *, visibility=True):
+        """Append physical faces; visibility selects morphological samples only.
+
+        Connection-only hubs and throats still render and occlude every ray;
+        they do not redistribute the mixed stem/leaf/flower form population.
+        """
         indices=list(range(len(self.faces),len(self.faces)+len(faces)))
         self.faces+=faces;self.materials += [material]*len(faces)
+        if visibility:self.visibility_faces+=indices
         return indices
     def stem(self, start, end, radius=.003):
-        if np.linalg.norm(np.array(end)-start)>1e-9:self.add(tube(start,end,radius,count=6),'trellis')
+        if np.linalg.norm(np.array(end)-start)>1e-9:
+            self._last_stem=self.add(tube(start,end,radius,count=6),'trellis')
+        return self._last_stem
+    def attach(self, child, parent, contact, kind):
+        self.connections.append(dict(kind=kind,child_face_indices=child,parent_face_indices=parent,contact_m=np.asarray(contact).tolist()))
     def blade(self, center, length, width, angle, tilt, *, obovate=False, veined=False):
         indices=self.add(lamina(center,length,width,angle,tilt,obovate=obovate),self.foliage)
         self.leaves+=indices;self.records.append(dict(face_indices=indices,length_m=length,width_m=width))
+        self.attach(indices,self._last_stem,center,'leaf')
         if veined:
             c=np.array(center);u=np.array([cos(angle)*cos(tilt),sin(angle)*cos(tilt),sin(tilt)]);v=np.array([-sin(angle),cos(angle),0.]);n=np.cross(u,v)
             ridge=c+n*width*.091
@@ -45,13 +57,47 @@ class Growth:
                     b=c+u*length*(t+.08)+v*side*width*.34+n*width*.025
                     self.add(tube(a,b,.00065,count=6),'g6-leaf-vein')
     def star(self, center, diameter, material):
+        # A closed corolla hub and radial throats join the calyx lobes to
+        # the actual pedicel. Closed separate petals alone can still float.
+        center=np.asarray(center,dtype=float)
+        hub=self.add(tube(center-[0,0,diameter*.055],center+[0,0,diameter*.055],diameter*.12,count=10),material,visibility=False)
+        self.flowers+=hub;self.attach(hub,self._last_stem,center,'flower-hub')
         for k in range(5):
             angle=k*2*pi/5
-            p=np.array(center)+np.array([cos(angle),sin(angle),0])*diameter*.25
-            self.flowers+=self.add(lamina(p,diameter*.55,diameter*.18,angle,.15),material)
+            p=center+np.array([cos(angle),sin(angle),0])*diameter*.25
+            throat=self.add(tube(center,p,diameter*.045,count=6),material,visibility=False)
+            self.flowers+=throat;self.attach(throat,hub,center,'flower-throat')
+            petal=self.add(lamina(p,diameter*.55,diameter*.18,angle,.15),material)
+            self.flowers+=petal;self.attach(petal,throat,p,'flower-lobe')
     def fields(self):
         return dict(face_materials=self.materials,leaf_face_indices=self.leaves,
-                    flower_face_indices=self.flowers,leaf_records=self.records,explicit_geometry=True)
+                    flower_face_indices=self.flowers,leaf_records=self.records,
+                    organ_connections=self.connections,
+                    visibility_face_indices=self.visibility_faces,explicit_geometry=True)
+
+
+def corolla(start,end,base_radius=.0035,mouth_radius=.011):
+    """One closed tapered tubular flower, attached at its stalk-axis start.
+
+    All radii and endpoints are metres. These authored botanical shape
+    assumptions preserve a single solid from stalk to a five-lobed mouth;
+    there are no scattered petal cards and no camera-dependent size rule.
+    """
+    start=np.asarray(start,dtype=float);end=np.asarray(end,dtype=float)
+    along=end-start;along/=np.linalg.norm(along)
+    across=np.cross(along,[0,0,1]);across/=np.linalg.norm(across)
+    normal=np.cross(along,across);rings=[]
+    for fraction,radius in ((0.,base_radius),(.45,base_radius*1.2),(.8,mouth_radius*.7),(1.,mouth_radius)):
+        ring=[]
+        for index in range(10):
+            phase=index*2*pi/10
+            radius_here=radius*(1+.10*cos(5*phase)*fraction)
+            ring.append((start+(end-start)*fraction+radius_here*(across*cos(phase)+normal*sin(phase))).tolist())
+        rings.append(ring)
+    faces=[rings[0][::-1],rings[-1]]
+    for low,high in zip(rings,rings[1:]):
+        faces += [[low[i],low[(i+1)%10],high[(i+1)%10],high[i]] for i in range(10)]
+    return _tri(faces)
 
 
 def mound(dense=True):
@@ -116,10 +162,15 @@ def vines(assumptions,posts,ground, botanical):
                     # 0.30 m raceme, 16 star calyces. A vertical stalk
                     # hangs below the rafters rather than dots above them.
                     top=node+np.array([0,0,-.32]);growth.stem(node,top,.002)
-                    end=top+np.array([.018,.012,-.30]);growth.stem(top,end,.002)
+                    end=top+np.array([.018,.012,-.30]);raceme_stalk=growth.stem(top,end,.002)
                     for k in range(16):
-                        phase=k*2.4;p=top+np.array([.025*cos(phase),.025*sin(phase),-.015-k*.018])
-                        growth.stem(top+np.array([0,0,-.015-k*.018]),p,.001)
+                        phase=k*2.4
+                        # Attach to the real sloping stalk, not an imaginary
+                        # vertical line which misses lower lateral pedicels.
+                        axis=top+(end-top)*((.015+k*.018)/.30)
+                        p=axis+np.array([.025*cos(phase),.025*sin(phase),0])
+                        pedicel=growth.stem(axis,p,.001)
+                        growth.attach(pedicel,raceme_stalk,axis,'flower-pedicel')
                         growth.star(p,.041,'g6-lavender-flower')
                 elif index==1 and (col*7+row*3)%113==0:
                     growth.star(node,.021,'g6-white-flower')

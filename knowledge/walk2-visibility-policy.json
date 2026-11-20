@@ -1,0 +1,9 @@
+{
+  "registration": "2026-10-22 revision before measuring form-surface population; leaf-only revision rejected after complete-view audit",
+  "basis": "ASSUMED semantic sampling screen, unchanged seven-of-thirteen visibility criterion. Existing named botanical subjects refer to foliage; flower interior topology must not redistribute leaf visibility rays.",
+  "plant_target_population": "Construction declares visibility_face_indices over morphological faces: original stems, physical leaves and flower lobes. Added connection hub/throat geometry does not redistribute target rays. All meshes without this inventory retain their actual all-face population. Declared inventories are nonempty and validated.",
+  "selection": "Unchanged bounding center plus twelve evenly indexed lexicographically sorted unique actual vertices from the selected population.",
+  "occluders": "All opaque physical geometry still occludes, including new connection hubs/throats, flowers, stems, beams and rafters. No material, species, camera, count or threshold exemption.",
+  "proof": "Frozen v41 old/current topology; exact old versus new jasmine form population; connector-addition invariance; Petrea, existing occluded garden cases and renamed/translated siblings. Complete production garden visibility checks rerun after replacement.",
+  "rejected_revision": "Leaf-only sampling passed jasmine but failed unchanged north-back-02 and Petrea. Failures and source by value retained out/walk2/rejected-leaf-sampling; no threshold or design changed."
+}

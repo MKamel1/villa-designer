@@ -1,0 +1,145 @@
+{
+  "schema": "flythrough-route/1",
+  "level": "B",
+  "ground_m": -3.0,
+  "intent": "Entrance and kitchen/island flank, lounge and stair foot, return through dining and living with bar-alcove context, ending inside the closed south garden threshold.",
+  "points_m": [
+    [
+      15.5,
+      -27.1,
+      -1.65
+    ],
+    [
+      15.3,
+      -27.7,
+      -1.65
+    ],
+    [
+      10.1,
+      -27.7,
+      -1.65
+    ],
+    [
+      10.1,
+      -26.9,
+      -1.65
+    ],
+    [
+      9.15,
+      -26.9,
+      -1.65
+    ],
+    [
+      9.15,
+      -25.2,
+      -1.65
+    ],
+    [
+      10.4,
+      -25.2,
+      -1.65
+    ],
+    [
+      10.4,
+      -24.7,
+      -1.65
+    ],
+    [
+      15.55,
+      -24.4,
+      -1.65
+    ],
+    [
+      18.4,
+      -24.3,
+      -1.65
+    ],
+    [
+      21.45,
+      -24.3,
+      -1.65
+    ],
+    [
+      21.45,
+      -25.1,
+      -1.65
+    ],
+    [
+      21.95,
+      -26.13,
+      -1.65
+    ]
+  ],
+  "yaw_knots": [
+    {
+      "seconds": 0,
+      "yaw_deg": 140
+    },
+    {
+      "seconds": 15,
+      "yaw_deg": 200
+    },
+    {
+      "seconds": 24,
+      "yaw_deg": 180
+    },
+    {
+      "seconds": 44,
+      "yaw_deg": 360
+    },
+    {
+      "seconds": 57.959281098654515,
+      "yaw_deg": 260
+    },
+    {
+      "seconds": 72,
+      "yaw_deg": 318
+    },
+    {
+      "seconds": 74.96666666666667,
+      "yaw_deg": 318
+    }
+  ],
+  "yaw_definition": "degrees anticlockwise from model positive x; unwrapped values specify turn direction",
+  "travel_seconds": 72,
+  "subject_periods": [
+    {
+      "first_frame": 0,
+      "last_frame": 400,
+      "subjects": [
+        "room:kitchen,kitchen-island"
+      ]
+    },
+    {
+      "first_frame": 401,
+      "last_frame": 900,
+      "subjects": [
+        "room:lounge,stair-b"
+      ]
+    },
+    {
+      "first_frame": 901,
+      "last_frame": 1400,
+      "subjects": [
+        "room:kitchen,dining,dining-side"
+      ]
+    },
+    {
+      "first_frame": 1401,
+      "last_frame": 2159,
+      "subjects": [
+        "room:living,bar-alcove"
+      ]
+    },
+    {
+      "first_frame": 2160,
+      "last_frame": 2249,
+      "subjects": [
+        "landscape-g6-terrace"
+      ],
+      "scene_kind": "garden"
+    }
+  ],
+  "closed_threshold_context": "All doors and glazing remain closed; camera ends at [21.95,-26.13,-1.65] inside the south garden threshold, looking 318 degrees and retaining room-side context.",
+  "subject_basis": "Explicit room queries resolve actual physical meshes for contextual crops; final garden subject is exported landscape-g6-terrace."
+}

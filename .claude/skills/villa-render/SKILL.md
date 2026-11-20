@@ -580,3 +580,98 @@ and unchanged beauty shaders. This early necessary screen cannot grant temporal
 acceptance: every adjacent final-frame pair must still pass the registered
 matched-pixel count and image-difference limit. A fully glazed view can pass
 physical and opening guards while providing no valid temporal measurement.
+
+
+For a speckle or flicker correction, follow `docs/ops/walk2.md`. Freeze native
+failing frame values and an identified crop before rebuilding. Pre-register
+isolated-pixel density and adjacent mask flicker separately from broad static
+surface reprojection; a reference image can share a construction defect.
+Closed plant organs also need robust support/axis seating, with assumptions
+labelled and real overlap measured before claiming disconnection. Preserve
+species, counts and positions. Neutral diagnostic previews retain each exact
+source face material, including stems; compare their receipts before review.
+Named plant visibility samples declared physical form faces (original stems,
+leaves and flower lobes), while every opaque organ still occludes. Added flower
+connection vertices cannot redistribute form rays. Leaf-only selection was
+rejected by a complete-view audit; retain the failed evidence and preregister
+replacement populations before measurements. Never compensate plant construction or camera position for a sample-count
+artifact. Freeze old/current sample populations and audit existing occlusion cases.
+
+Moving-image delivery takes frame rate, count, representative frames and package
+size from the selected policy. Use the shared analytic eased pose for camera
+keyframes during a real centered Cycles shutter. Validate the native API, a
+rendered physical-edge blur control, and actual parser-to-stage dispatch before
+expensive work; property flags alone cannot prove blur and a helper-only test
+cannot prove branch-local arguments reach it. Select samples using references plus route-arithmetic fastest
+travel/yaw and garden adjacent pairs, with motion blur enabled. Review every
+preview frame before final packages; the coordinator, reference renders, sample
+selection and final renders all refuse a missing or stale preview review before
+acquiring graphics work. Recheck every final frame and adjacent pair, and compare
+every decoded web frame with native bytes under the registered artifact screen
+and byte ceiling. A size limit alone cannot admit an encoding. Revisit the exact
+original rejected cameras as an independent same-camera planting diagnostic.
+
+Native finite-pixel reconstruction also belongs in a moving-image contract.
+When closed attached foliage still aliases after sample convergence, retain
+actual-camera fixed-geometry sampling controls, then register bounded native
+reconstruction controls before measuring them. Preserve original source-meter
+reconstruction. Hold geometry, normals, camera, materials, lighting, exposure
+and image thresholds fixed. Read back renderer type/width and bind it to all
+beauty/reference/candidate receipts. A numerical speckle pass cannot accept
+visible whole-image softness: compare full-size stationary and moving views
+with the sharp control before integration. Follow `docs/ops/walk2.md`; width
+values are ASSUMED unless supported by an applicable source.
+
+Actual native motion also needs full-route subframe read-back. Frame-centre
+camera admission and a synthetic blur test can miss quaternion sign branches:
+a quaternion and its negation describe the same orientation, but raw linear
+component interpolation may turn the camera almost 180 degrees during exposure.
+Make successive quaternion keyframes sign-compatible by construction. Before
+any production graphics stage, native preflight must evaluate forward direction
+at five shutter fractions for every route frame against independent analytic
+yaw, under the pre-registered ASSUMED numerical agreement tolerance. Freeze
+actual failing poses/constructor and test non-crossing controls plus translated
+siblings. Retain interrupted packages after source corrections and prepare a
+fresh bound scene; complete preview review still precedes final graphics.
+
+Window image samples must belong to actual visible glazing. Projected pane
+rectangles plus one visibility witness can sample foreground wall, while raw
+scene rays can falsely omit panes behind hidden-render curtains. Use the shared
+native first-hit evaluated render-geometry masks (`archpipe.window_qa`), excluding
+hidden-render/camera-invisible objects and including opaque instances. Preserve
+image thresholds and the existing visible-size screen; actual ownership replaces
+the old rectangle inset approximation. Run the frozen actual native-window,
+hidden-curtain and sibling/instance regressions before full revalidation.
+For a strictly post-render QA correction only, `scripts/walk2_reuse_qa.py` permits
+unchanged pixels/meters into a fresh package after exact non-QA source comparison,
+unchanged physical inputs/transport and fresh equal-geometry native admission.
+Preserve original receipts and generate fresh native QA sidecars; old QA verdicts
+and preview approvals never transfer. This exception cannot cover rendering,
+lighting, camera, policy or design changes. See `docs/ops/walk2.md`.
+
+Room-background comparison excludes the union of every visible glazing owner,
+including small panes below the unchanged individual-window size screen. Native
+window samples keep their two-pixel grid; room samples use a separately measured
+exact three-pixel grid, forwarded through all QA adapters. Missing or stale
+declared room ownership refuses. A bright different window is not room interior,
+and rounding between the grids is not native sample ownership. Legacy callers
+retain explicit rectangle/cell approximation only. Run the frozen real room-
+population, small-pane, exact-grid and adapter/reuse regressions before fresh
+whole-population revalidation. Preserve genuine clipping and real sunlit-interior
+versus shaded-garden refusals; corrected masks cannot waive them. See
+`docs/ops/walk2.md` and `tests/test_window_room_background.py`.
+
+Parallel evidence writers need explicit output-prefix ownership before work,
+including registration and snapshots. Reviewers consume their own immutable
+fingerprinted inputs; do not replace another producer's registration schema.
+
+Required indoor brightness comparisons refuse an empty room-background
+population; a full-image declared glazing mask cannot silently omit them.
+Exterior cameras retain their explicit comparison exemption.
+
+For QA context changes, finish new bounded native/legacy/missing-field cases
+and affected existing adapter/consumer regressions before fresh graphics.
+Rectangle-only reports remain legacy even when an optional room-mask field is
+None; they still run brightness and window-view checks. The rendering-standard
+six-check adapter case belongs in this checkpoint. Do not start the next native
+package while its affected regressions are pending.

@@ -1,0 +1,20 @@
+{
+  "schema": "walk2-speckle-policy/1",
+  "registration": "2026-10-21; registered before computing any walk2 isolated-pixel measurements, including the v1 reproduction",
+  "basis": "ASSUMED image acceptance screens, not a botanical or cinematographic standard. Lead-reported v1 peak 15.6 isolated pixels per 10000 informs the preregistration; no new measurement used.",
+  "grayscale": "Pillow RGB to L conversion; byte values from 0 to 255",
+  "isolated_pixel": "Absolute grayscale difference from centered 3 by 3 median strictly greater than 35; exclude outermost one-pixel border",
+  "density": "10000 times number of isolated pixels divided by number of interior pixels",
+  "flicker": "10000 times count of exclusive-or between consecutive isolated-pixel masks divided by number of interior pixels; same screen coordinates, includes true motion conservatively",
+  "maximum_density_per_10000": 5.0,
+  "maximum_flicker_per_10000": 8.0,
+  "coverage": "Every final frame and every adjacent pair at native 1920 by 1080 pixels; preview is diagnostic only. No percentile exemption.",
+  "reproduction_frames": [588, 589, 590, 591, 592, 593, 594, 595, 596, 597, 598, 599, 600, 601, 602, 603, 604],
+  "reproduction_crop": "Freeze frame 600 after visual inspection; crop coordinates recorded by value before construction changes",
+  "encoding": {
+    "basis": "ASSUMED no-new-artifacts screen using the lead's absolute developed RGB channel-error method; every frame, with fast-motion subset additionally identified by route speed and yaw upper quartiles",
+    "channel_difference_threshold": 40,
+    "maximum_fraction_pixels_any_channel_exceeds": 0.001,
+    "maximum_web_bytes": 15000000
+  }
+}

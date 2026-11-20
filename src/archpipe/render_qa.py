@@ -223,7 +223,22 @@ def check(image_path, qa: dict) -> dict:
             "Refractive glass blocks shadow rays: no sun entered the room.")
     # At night a dark window (with the room reflected in it) is correct, so
     # the view checks apply only to daylight renders.
+    from archpipe.window_qa import room_background_pixels
+    if (daylight and 'room_glazing_pixels' in qa and qa['room_glazing_pixels'] is None
+            and any('visible_pixels' in win and win.get('screen') and win['screen'][2] - win['screen'][0] >= .03
+                    and win['screen'][3] - win['screen'][1] >= .03 for win in windows)):
+        raise ValueError('Declared native room glazing ownership is missing')
+    inside = (sorted(_luma(px[y * w + x]) for x, y in room_background_pixels(windows, w, h, qa.get('room_glazing_pixels')))
+              if daylight and windows else [])
+    if (daylight and not qa.get('exterior_camera') and not inside
+            and any(win.get('screen') and win['screen'][2] - win['screen'][0] >= .03
+                    and win['screen'][3] - win['screen'][1] >= .03 for win in windows)):
+        raise ValueError('Inside-room brightness population is empty')
     for win in (windows if daylight else []):
+        owned = None
+        if 'visible_pixels' in win:
+            from archpipe.window_qa import unpack_pixels
+            owned = unpack_pixels(win['visible_pixels'], w, h)
         rect = win.get("screen")          # [x0, y0, x1, y1] in 0..1, y up
         if not rect or rect[2] - rect[0] < 0.03 or rect[3] - rect[1] < 0.03:
             continue
@@ -232,10 +247,10 @@ def check(image_path, qa: dict) -> dict:
         # Daylight through a window is several stops above the room. The
         # garden rendered dimmer than a sunlit desk (render_critic) because
         # the view was scaled by an HDRI mean dominated by sky and sun.
-        inside = sorted(_luma(px[y * w + x]) for y in range(0, h, 3) for x in range(0, w, 3)
-                        if not (x0 <= x < x1 and y0 <= y < y1))
-        view = sorted(_luma(px[y * w + x]) for y in range(y0, y1, 2) for x in range(x0, x1, 2)
-                      if 0 <= x < w and 0 <= y < h)
+        samples = sorted(owned) if owned is not None else [
+            (x, y) for y in range(y0, y1, 2) for x in range(x0, x1, 2)
+            if 0 <= x < w and 0 <= y < h]
+        view = sorted(_luma(px[y * w + x]) for x, y in samples)
         # A daytime exterior camera looks into a darker room; the original
         # bright-window comparison only applies to a camera inside that room.
         if inside and view and not qa.get("exterior_camera"):
@@ -254,11 +269,16 @@ def check(image_path, qa: dict) -> dict:
         xs = range(max(0, box[0]), min(w, box[2]) - 2, 2)
         ys = range(max(0, box[1]), min(h, box[3]) - 2, 2)
         diffs, lum = [], []
-        for x in xs:
-            for y in ys:
-                v = L(x, y)
-                lum.append(v)
-                diffs.append(abs(v - L(x + 2, y)) + abs(v - L(x, y + 2)))
+        # A native first-hit mask excludes the frame/reveal by construction.
+        # The legacy rectangle's 12% inset is only an approximation of that
+        # ownership; applying both would throw away valid cropped glazing.
+        detail_samples = ([(x, y) for x, y in samples
+                           if (x + 2, y) in owned and (x, y + 2) in owned]
+                          if owned is not None else [(x, y) for x in xs for y in ys])
+        for x, y in detail_samples:
+            v = L(x, y)
+            lum.append(v)
+            diffs.append(abs(v - L(x + 2, y)) + abs(v - L(x, y + 2)))
         if not lum:
             continue
         detail = sum(diffs) / (2 * len(diffs))

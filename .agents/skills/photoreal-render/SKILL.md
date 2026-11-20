@@ -107,3 +107,40 @@ equal recorded pattern seeds and initial-vertex hashes before attributing
 output differences to the solver. Keep normal migration and fixed-pattern
 controls in separate receipts. See `docs/ops/workstation-jobs.md` and
 `scripts/summarize_blender52.py` for the evaluation guards.
+
+Window image QA must sample actual first-hit glazing pixels in evaluated render
+geometry (`archpipe.window_qa`), shared with villa still/walking QA. A projected
+rectangle can include foreground wall; raw scene queries can count hidden-render
+curtains. Exclude hidden-render/camera-invisible geometry, include opaque
+instances, and refuse empty/stale declared masks. Actual ownership replaces the
+old inset approximation without changing image thresholds. Run
+`tests/blender_window_qa.py` against the pinned runtime and the portable window/
+render-QA regressions after changing this consumer; see `docs/ops/walk2.md` for
+frozen actual cases and the strictly analysis-only revalidation boundary.
+
+Room-background comparison excludes the union of every visible glazing owner,
+including small panes below the unchanged individual-window size screen. Native
+window samples keep their two-pixel grid; room samples use a separately measured
+exact three-pixel grid, forwarded through all QA adapters. Missing or stale
+declared room ownership refuses. A bright different window is not room interior,
+and rounding between the grids is not native sample ownership. Legacy callers
+retain explicit rectangle/cell approximation only. Run the frozen real room-
+population, small-pane, exact-grid and adapter/reuse regressions before fresh
+whole-population revalidation. Preserve genuine clipping and real sunlit-interior
+versus shaded-garden refusals; corrected masks cannot waive them. See
+`docs/ops/walk2.md` and `tests/test_window_room_background.py`.
+
+Parallel evidence writers need explicit output-prefix ownership before work,
+including registration and snapshots. Reviewers consume their own immutable
+fingerprinted inputs; do not replace another producer's registration schema.
+
+Required indoor brightness comparisons refuse an empty room-background
+population; a full-image declared glazing mask cannot silently omit them.
+Exterior cameras retain their explicit comparison exemption.
+
+For QA context changes, finish new bounded native/legacy/missing-field cases
+and affected existing adapter/consumer regressions before fresh graphics.
+Rectangle-only reports remain legacy even when an optional room-mask field is
+None; they still run brightness and window-view checks. The rendering-standard
+six-check adapter case belongs in this checkpoint. Do not start the next native
+package while its affected regressions are pending.

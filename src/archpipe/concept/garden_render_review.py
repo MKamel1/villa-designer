@@ -56,11 +56,43 @@ def subject_frame_findings(view, scene):
     return out
 
 
+def visibility_sample_points(meshes):
+    """Stable named-form population, independent of connector triangulation.
+
+    Meshes declaring morphological faces use that physical population. All
+    other meshes use all actual faces. Every opaque face still occludes rays.
+    The 13-ray selection and acceptance threshold remain unchanged. This is
+    the assumed semantic screen registered in walk2-visibility-policy.json.
+    """
+    import numpy as np
+    points=[]
+    for mesh in meshes:
+        faces=mesh['faces']
+        if 'visibility_face_indices' in mesh:
+            indices=mesh['visibility_face_indices']
+            if not indices or any(type(i) is not int or not 0<=i<len(faces) for i in indices):
+                raise ValueError('Missing or invalid physical form visibility population: '+mesh['id'])
+            faces=[faces[i] for i in indices]
+        points.extend(p for face in faces for p in face)
+    return visibility_sample_vertices(points)
+
+
+def visibility_sample_vertices(points):
+    """Select the registered center and 12 rays from actual target vertices."""
+    import numpy as np
+    values=np.unique(np.asarray(points,dtype=float).reshape(-1,3),axis=0)
+    if not len(values):raise ValueError('Empty visibility sample population')
+    return np.vstack([(values.min(axis=0)+values.max(axis=0))/2,
+                      values[np.linspace(0,len(values)-1,12,dtype=int)]])
+
+
 def subject_visibility_evidence(view, scene):
     """First-hit mesh rays for explicitly required visible garden subjects.
 
     Thirteen samples per subject: bounding centre and twelve evenly indexed
     unique actual vertices (lexicographically sorted, independent of faces).
+    Declared form faces keep connection geometry additions from redistributing
+    target rays, while all actual geometry still occludes.
     Opaque, camera-visible physical meshes occlude; glass and diagnostic or
     surface datums do not. Imported props still require image review.
     Coordinates/distances are metres; direction is a unit vector. This is
@@ -83,8 +115,7 @@ def subject_visibility_evidence(view, scene):
             results.append(dict(subject=subject, visible=0, samples=13, first_hits=[]))
             continue
         points = np.unique(np.array([p for m in matched for f in m['faces'] for p in f]), axis=0)
-        samples = np.vstack([(points.min(axis=0)+points.max(axis=0))/2,
-                             points[np.linspace(0, len(points)-1, 12, dtype=int)]])
+        samples = visibility_sample_points(matched)
         low = np.minimum(points.min(axis=0), eye)-.03
         high = np.maximum(points.max(axis=0), eye)+.03
         nearby = np.all(triangles.min(axis=1) <= high, axis=1) & np.all(triangles.max(axis=1) >= low, axis=1)

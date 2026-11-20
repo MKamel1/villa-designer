@@ -131,7 +131,7 @@ def trellis(data=None):
         frame+=L._box(x-.012,y0,ground,x+.012,y1,ground+2.2)
     for z in (.18,1.05,2.17):frame+=L._box(x0,y0,ground+z,x1,y1,ground+z+.025)
     timber=L._mesh('trellis-east','furniture','trellis',frame,'ASSUMED retained open timber frame; lead decision 2026-10-06 jasmine replacement; anchors and weather durability UNVERIFIED',kind='trellis')
-    stems=[];leaves=[];petioles=[];flowers=[];connections=[]
+    stems=[];leaves=[];petioles=[];flowers=[];connections=[];flower_connections=[]
     for stem_index in range(3):
         base_x=x0+.21+stem_index*.54
         root=(base_x+.12*sin(stem_index),y1-.006,ground)
@@ -142,21 +142,32 @@ def trellis(data=None):
         for node,point in enumerate(points[1:-1]):
             for sign in (-1,1):
                 tip=np.asarray(point)+np.array([sign*.020,-.030,.016])
+                petiole_start=len(petioles)
                 petioles+=_tube(point,tip,.0025)
                 start=len(leaves);leaf=_leaf(tip,sign,node);leaves+=leaf
-                connections.append(dict(stem_point=list(point),leaf_root=tip.tolist(),face_indices=list(range(start,start+len(leaf)))))
+                connections.append(dict(stem_point=list(point),leaf_root=tip.tolist(),face_indices=list(range(start,start+len(leaf))),petiole_face_indices=list(range(petiole_start,len(petioles)))))
             if node%6==3:
                 tip=np.asarray(point)+np.array([.025,-.080,.035])
+                petiole_start=len(petioles)
                 petioles+=_tube(point,tip,.0025)
+                parent=list(range(petiole_start,len(petioles)))
                 for petal in range(5):
                     angle=petal*2*pi/5;end=tip+np.array([.025*cos(angle),-.006,.025*sin(angle)])
+                    flower_start=len(flowers)
                     flowers+=_tube(tip,end,.006,6)
+                    flower_connections.append(dict(child_face_indices=list(range(flower_start,len(flowers))),parent_face_indices=parent,contact_m=tip.tolist(),kind='flower'))
     branch=L._mesh('climber-branches-east','dressing','trellis',stems,'ASSUMED connected young jasmine twining stems rooted in ground bed',kind='climber-branch')
     leaf_start=len(stems)+len(petioles)
     faces=stems+petioles+leaves+flowers
+    organ_connections=[dict(kind='leaf',child_face_indices=[leaf_start+i for i in record['face_indices']],
+                            parent_face_indices=[len(stems)+i for i in record['petiole_face_indices']],contact_m=record['leaf_root']) for record in connections]
+    for record in flower_connections:
+        record['child_face_indices']=[leaf_start+len(leaves)+i for i in record['child_face_indices']]
+        record['parent_face_indices']=[len(stems)+i for i in record['parent_face_indices']]
+        organ_connections.append(record)
     coverage=unary_union([Polygon([(p[0],p[2]) for p in f]) for f in leaves if Polygon([(p[0],p[2]) for p in f]).area>1e-10]).area/(1.5*2.2)
     plant=L._mesh('climber-east','dressing','garden-foliage',faces,'ASSUMED young star jasmine; white star-shaped flowers; NC State lists Poisonous, details NOT STATED; client accepted 2026-10-06; nursery procurement and photographic likeness UNVERIFIED; '+row['source_url']['value'],kind='climber')
-    plant.update(explicit_geometry=True,appearance_key='procedural-trellis',species=JASMINE,center=(18.75,y1-.006),spread_m=1.5,bed='east',planting_layer='climber',root_z_m=ground,leaf_face_indices=list(range(leaf_start,leaf_start+len(leaves))),leaf_connections=connections,stem_mesh=branch['id'],frame_id=timber['id'],coverage_fraction=float(coverage),coverage_denominator='whole timber frame rectangle 1.5m x 2.2m',face_materials=['trellis']*leaf_start+['garden-foliage']*len(leaves)+['g6-white-flower']*len(flowers))
+    plant.update(explicit_geometry=True,appearance_key='procedural-trellis',species=JASMINE,center=(18.75,y1-.006),spread_m=1.5,bed='east',planting_layer='climber',root_z_m=ground,leaf_face_indices=list(range(leaf_start,leaf_start+len(leaves))),flower_face_indices=list(range(leaf_start+len(leaves),len(faces))),organ_connections=organ_connections,leaf_connections=connections,stem_mesh=branch['id'],frame_id=timber['id'],coverage_fraction=float(coverage),coverage_denominator='whole timber frame rectangle 1.5m x 2.2m',face_materials=['trellis']*leaf_start+['garden-foliage']*len(leaves)+['g6-white-flower']*len(flowers))
     branch.update(species=JASMINE,appearance_key='procedural-trellis',root_z_m=ground,center=plant['center'],bed='east',planting_layer='climber')
     return [timber,branch,plant],[plant]
 

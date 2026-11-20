@@ -1,0 +1,154 @@
+{
+  "passed": false,
+  "frames": [
+    {
+      "index": 588,
+      "density_per_10000": 9.673032166701168,
+      "flicker_per_10000": null,
+      "isolated_pixels": 2000,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 589,
+      "density_per_10000": 10.001915260369008,
+      "flicker_per_10000": 18.194973505564896,
+      "isolated_pixels": 2068,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 590,
+      "density_per_10000": 10.36949048270365,
+      "flicker_per_10000": 19.017181239734494,
+      "isolated_pixels": 2144,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 591,
+      "density_per_10000": 11.1868617007899,
+      "flicker_per_10000": 20.192454647988686,
+      "isolated_pixels": 2313,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 592,
+      "density_per_10000": 10.848305574955358,
+      "flicker_per_10000": 20.758327029740705,
+      "isolated_pixels": 2243,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 593,
+      "density_per_10000": 11.225553829456706,
+      "flicker_per_10000": 20.47780909690637,
+      "isolated_pixels": 2321,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 594,
+      "density_per_10000": 11.757570598625268,
+      "flicker_per_10000": 20.845384319241013,
+      "isolated_pixels": 2431,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 595,
+      "density_per_10000": 11.718878469958465,
+      "flicker_per_10000": 20.86473038357442,
+      "isolated_pixels": 2423,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 596,
+      "density_per_10000": 11.622148148291453,
+      "flicker_per_10000": 20.090887810238325,
+      "isolated_pixels": 2403,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 597,
+      "density_per_10000": 11.35130324762382,
+      "flicker_per_10000": 19.38475646206914,
+      "isolated_pixels": 2347,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 598,
+      "density_per_10000": 11.791426211208721,
+      "flicker_per_10000": 19.805533361320638,
+      "isolated_pixels": 2438,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 599,
+      "density_per_10000": 11.496398730124337,
+      "flicker_per_10000": 19.757168200487136,
+      "isolated_pixels": 2377,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 600,
+      "density_per_10000": 11.970377306292695,
+      "flicker_per_10000": 19.955465359904508,
+      "isolated_pixels": 2475,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 601,
+      "density_per_10000": 11.317447635040365,
+      "flicker_per_10000": 20.03768613332147,
+      "isolated_pixels": 2340,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 602,
+      "density_per_10000": 10.988564541372526,
+      "flicker_per_10000": 19.104238529234806,
+      "isolated_pixels": 2272,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 603,
+      "density_per_10000": 10.582297190371078,
+      "flicker_per_10000": 18.601240856566346,
+      "isolated_pixels": 2188,
+      "interior_pixels": 2067604,
+      "passed": false
+    },
+    {
+      "index": 604,
+      "density_per_10000": 9.977732679952254,
+      "flicker_per_10000": 17.890272992313808,
+      "isolated_pixels": 2063,
+      "interior_pixels": 2067604,
+      "passed": false
+    }
+  ],
+  "policy_sha256": "21c03ebafedc2677181a6f9d6a7f0de672d116d82c4621d9396c61b0be46d947",
+  "receipt_sha256": "696296c82f1d0820f0749ce76879bc0801b1fa787f838ff817b0ba3c17eabd46",
+  "scope": "Frozen actual first construction fix: all closed/attached organ checks pass but all17 original cameras and16 mask pairs fail at64 samples with real half-frame shutter. Guard correctly rejected before complete preview.",
+  "crop": {
+    "frame": 600,
+    "box_left_top_right_bottom": [
+      940,
+      715,
+      1210,
+      875
+    ],
+    "png_sha256": "1dd5cc1b84febf977fe74b5c4162e1b15173e12de2f32fbf96e3721bf5f565e6"
+  }
+}
