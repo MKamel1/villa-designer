@@ -201,6 +201,72 @@
       "proofs": [
         "test_real_preview_rejects_wrong_room_and_preserves_authored_cluster"
       ]
+    },
+    {
+      "lesson_id": "trellis-trial-measurement-precision",
+      "control_tier": [
+        2
+      ],
+      "construction": "Uniform whole-item trial scale; precision-aware computed-dimension assertions preserve exact equal factors",
+      "check": "scripts.trellis_trial.uniform_scale",
+      "stage": "isolated evaluation measurement before neutral preview",
+      "proof_file": "tests/test_trellis_trial.py",
+      "proofs": [
+        "test_height_fit_is_one_uniform_scale_and_retains_unseen_proportions",
+        "test_pendant_uses_horizontal_datum_without_forcing_a_sphere",
+        "test_precision_control_still_detects_a_real_scale_mutation"
+      ]
+    },
+    {
+      "lesson_id": "trellis-cuda-install-layout",
+      "control_tier": [
+        1,
+        2
+      ],
+      "construction": "Derive toolkit prefix from measured executable and require its headers before every isolated extension build",
+      "check": "scripts.trellis_trial.cuda_root; scripts/bootstrap_trellis2.sh",
+      "stage": "isolated trial setup before compilation",
+      "proof_file": "tests/test_trellis_trial.py",
+      "proofs": [
+        "test_cuda_root_requires_actual_compiler_and_matching_prefix_headers"
+      ]
+    },
+    {
+      "lesson_id": "trellis-remote-model-dependencies",
+      "control_tier": [1, 2],
+      "construction": "Pin einops in isolated bootstrap; inspect actual downloaded model imports unconditionally before GPU acquisition; retain failed attempts",
+      "check": "scripts.trellis_trial.require_model_dependencies; scripts.trellis_trial.generate",
+      "stage": "isolated trial model intake before GPU acquisition",
+      "proof_file": "tests/test_trellis_trial.py",
+      "proofs": [
+        "test_actual_birefnet_import_and_sibling_fail_before_gpu_clean_case_passes"
+      ]
+    },
+    {
+      "lesson_id": "trellis-auxiliary-snapshot",
+      "control_tier": [1],
+      "construction": "Pin the auxiliary structure decoder metadata request to the exact measured checkpoint revision",
+      "check": "scripts.trellis_trial.download; STRUCTURE_REVISION",
+      "stage": "isolated trial checkpoint acquisition",
+      "proof_file": "tests/test_trellis_trial.py",
+      "proofs": [
+        "test_real_auxiliary_checkpoint_uses_recorded_revision_instead_of_latest"
+      ]
+    },
+    {
+      "lesson_id": "trellis-trial-output-publication",
+      "control_tier": [
+        1
+      ],
+      "construction": "Isolated installer recursively publishes payloads through shared safe_io.copy_file, then preserves executable metadata",
+      "check": "archpipe.safe_io.copy_file; scripts/verify.py raw-copy lint",
+      "stage": "isolated toolkit installation",
+      "proof_file": "tests/test_safe_io.py",
+      "proofs": [
+        "test_interrupted_write_leaves_old_file_intact",
+        "test_encoder_failure_and_fsync_failure_preserve_previous",
+        "test_unique_staging_for_nested_writers"
+      ]
     }
   ]
 }
