@@ -51,10 +51,7 @@ def main():
     try:
         data = extract_model.build(doc)
         dest = extract_model.destination(doc)
-        import json
-        with open(dest, "w") as fh:
-            json.dump(data, fh, indent=2, sort_keys=True,
-                      separators=(",", ": "))
+        extract_model.write_extract(dest, data)
     except Exception as exc:
         logger.error("extract failed: %s", exc)
         forms.alert("Extract failed:\n\n%s: %s" % (type(exc).__name__, exc),

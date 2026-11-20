@@ -35,6 +35,8 @@ def clean(v):
         return v
     if isinstance(v, int) and name == "int":
         return v
+    if name in ('long', 'Int64', 'Int32', 'Int16', 'Byte', 'SByte', 'UInt64', 'UInt32', 'UInt16'):
+        return int(v)  # never route identifiers through a float (precision loss above 2**53)
     try:                                            # long, Int64, Int32, Double, Decimal and the like
         f = float(v)
         return int(f) if f == int(f) and abs(f) < 2 ** 53 else f

@@ -29,6 +29,8 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import jsonsafe                                                     # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'src'))
+from archpipe import safe_io
 
 from Autodesk.Revit.DB import (
     BuiltInCategory, BuiltInParameter, Element, FilteredElementCollector, Level,
@@ -52,6 +54,12 @@ def mm(value):
 
 def pt_mm(p):
     return [mm(p.X), mm(p.Y)]
+
+
+def rgb(color):
+    """Project native .NET channels through the typed bridge to legacy RGB."""
+    portable = safe_io.decode(safe_io.encode(color))
+    return [portable.red, portable.green, portable.blue]
 
 
 # --------------------------------------------------------------------------
@@ -227,7 +235,7 @@ def extract_meshes(doc, element):
                            'geometry_role': 'light_source_symbol' if subcategory.lower() == 'light source' else 'physical',
                            'vertices_mm': [], 'triangles': [],
                            'material': {'name': name,
-                               'rgb': [int(color.Red), int(color.Green), int(color.Blue)] if color else [180,180,180],
+                               'rgb': rgb(color) if color else [180,180,180],
                                'transparency': int(material.Transparency) if material else 0},
                            '_indices': {}}
         group = groups[key]
@@ -588,7 +596,7 @@ def extract_finishes(doc):
                         if mat:
                             materials[mat.UniqueId] = {
                                 'id': mat.UniqueId, 'name': _name(mat),
-                                'rgb': [int(mat.Color.Red), int(mat.Color.Green), int(mat.Color.Blue)]}
+                                'rgb': rgb(mat.Color)}
             out.append({'element': el.UniqueId, 'role': role,
                         'paint': [materials[k] for k in sorted(materials)]})
     return out
@@ -598,6 +606,7 @@ def extract_markup(doc):
     out = []
     for note in _sorted_by_uid(FilteredElementCollector(doc).OfClass(TextNote).ToElements()):
         out.append({'id': note.UniqueId, 'kind': 'text', 'text': note.Text,
+                    'text_boundary': safe_io.encode(safe_io.normalized_text(note.Text)),
                     'view': str(note.OwnerViewId), 'at': pt_mm(note.Coord)})
     for cloud in _sorted_by_uid(FilteredElementCollector(doc).OfClass(RevisionCloud).ToElements()):
         curves = cloud.GetSketchCurves()
@@ -727,14 +736,18 @@ def main():
     # Serialize BEFORE opening the destination: .NET numeric wrappers can
     # fail JSON encoding; such a failure must not truncate the last extract.
     # jsonsafe: client models carry Arabic names and .NET Int64 ids, which IronPython's encoder rejects
-    payload = jsonsafe.dumps(data, indent=2, sort_keys=True, separators=(",", ": "))
-    with open(dest, "w") as fh:
-        fh.write(payload)
+    write_extract(dest, data)
 
     counts = dict((k, len(v)) for k, v in data.items() if isinstance(v, list))
     print("archpipe: wrote %s" % dest)
     print("archpipe: %s" % json.dumps(counts, sort_keys=True))
     return dest
+
+
+def write_extract(dest, data):
+    """Shared by CLI and ribbon: serialize fully, then atomically publish."""
+    safe_io.save_json(dest, data, serializer=jsonsafe.dumps, indent=2,
+                      sort_keys=True, separators=(",", ": "))
 
 
 if __name__ == "__main__":
