@@ -28,13 +28,11 @@ def test_doubled_product_lumens_is_caught(villa, monkeypatch):
 
 def test_wrong_watts_is_caught(villa, monkeypatch):
     from archpipe.fixture_record import PRODUCTS
-    monkeypatch.setitem(PRODUCTS, "DLN", dict(PRODUCTS["DLN"], watts=23.6))
-    assert any(r.status == "fail" and "W" in r.message for r in V1.check_inputs(Villa()).results)
+    monkeypatch.setitem(PRODUCTS, "DL", dict(PRODUCTS["DL"], watts=23.6))
+    assert any(r.status == "fail" and " W " in r.message for r in V1.check_inputs(Villa()).results)
 
 
-def test_wrong_file_cct_is_caught(villa, monkeypatch):
-    from archpipe.fixture_record import FIXTURE_KINDS
-    import dataclasses
-    k = FIXTURE_KINDS["ADJ"]
-    req = tuple((a, 3000 if a == "cct" else b) for a, b in k.requirement)
-    monkeypatch.setitem(FIXTURE_KINDS, "ADJ", dataclasses.replace(k, requirement=req)) if hasattr(FIXTURE_KINDS, "__setitem__") else pytest.skip("immutable")
+def test_wrong_spec_cct_is_caught(villa, monkeypatch):
+    from archpipe.fixture_record import PRODUCTS
+    monkeypatch.setitem(PRODUCTS, "DL", dict(PRODUCTS["DL"], cct=3000))
+    assert any(r.status == "fail" and "CCT" in r.message for r in V1.check_inputs(Villa()).results)
