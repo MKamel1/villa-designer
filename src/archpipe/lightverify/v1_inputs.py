@@ -102,16 +102,18 @@ def instance_problems(v) -> dict:
     by_id = {f.id: f for f in v.fixtures}
     out = defaultdict(list)
     cache = {}
+    emitted = defaultdict(float)  # a fixture sampled at several points (linear pendant) emits the SUM of its samples
     for p in v.placements:
-        f = by_id[p.meta.get("parent") or p.id]
         if p.meta.get("generic"):
             continue
         path = p.meta["ies_path"]
         if path not in cache:
             cache[path] = ies.lumens(ies.parse(Path(path).read_text(encoding="utf-8", errors="replace")), 0.5, 5)
-        emitted = cache[path] * p.dim
-        if abs(_pct(emitted, f.record.flux_lm)) > LUMEN_TOL:
-            out[f.id].append("engine emits %.1f lm, record says %.1f lm" % (emitted, f.record.flux_lm))
+        emitted[p.meta.get("parent") or p.id] += cache[path] * p.dim
+    for fid, lm in emitted.items():
+        rec = by_id[fid].record.flux_lm
+        if abs(_pct(lm, rec)) > LUMEN_TOL:
+            out[fid].append("engine emits %.1f lm, record says %.1f lm" % (lm, rec))
     return out
 
 
