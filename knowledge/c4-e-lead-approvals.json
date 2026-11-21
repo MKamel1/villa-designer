@@ -209,7 +209,7 @@
         5.317,
         -27.526,
         -3.033529411764706,
-        9.517,
+        9.509,
         -27.496,
         -0.23647058823529415
       ],
@@ -217,10 +217,41 @@
         5.317,
         -27.526,
         -3.0,
-        9.517,
+        9.509,
         -27.496,
         -0.20294117647058812
-      ]
+      ],
+      "original_2026_10_05": {
+        "host_id": "support-detail-stair-open-stringer",
+        "old": [
+          5.317,
+          -27.526,
+          -3.033529411764706,
+          9.517,
+          -27.496,
+          -0.23647058823529415
+        ],
+        "new": [
+          5.317,
+          -27.526,
+          -3.0,
+          9.517,
+          -27.496,
+          -0.20294117647058812
+        ]
+      },
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "knowledge/approvals-review/2026-11-review.json",
+        "caused_by": [
+          "G1 LS2 stair tread overlap 16 mm (lane D, stairs.NOSING_OVERLAP; docs/decisions/G1-safety-decisions-2026-11-21.md)"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        }
+      }
     },
     {
       "id": "dress-hers-long-hang-0-rail-0-bracket-left",
@@ -566,61 +597,154 @@
       "id": "marker-STEP-stair-b-04",
       "host_id": "stair-party-wall",
       "old": [
-        7.227,
-        -28.469999999999995,
+        7.219,
+        -28.47,
         -1.182,
-        7.327,
-        -28.469999999999995,
+        7.319,
+        -28.47,
         -1.142
       ],
       "new": [
-        7.227,
+        7.219,
         -28.458,
         -1.182,
-        7.327,
+        7.319,
         -28.458,
         -1.142
-      ]
+      ],
+      "original_2026_10_05": {
+        "host_id": "stair-party-wall",
+        "old": [
+          7.227,
+          -28.469999999999995,
+          -1.182,
+          7.327,
+          -28.469999999999995,
+          -1.142
+        ],
+        "new": [
+          7.227,
+          -28.458,
+          -1.182,
+          7.327,
+          -28.458,
+          -1.142
+        ]
+      },
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "knowledge/approvals-review/2026-11-review.json",
+        "caused_by": [
+          "G1 LS2 stair tread overlap 16 mm (lane D, stairs.NOSING_OVERLAP; docs/decisions/G1-safety-decisions-2026-11-21.md)"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        }
+      }
     },
     {
       "id": "marker-STEP-stair-b-05",
       "host_id": "stair-party-wall",
       "old": [
-        8.067,
-        -28.469999999999995,
+        8.059,
+        -28.47,
         -1.711,
-        8.167000000000002,
-        -28.469999999999995,
+        8.159,
+        -28.47,
         -1.671
       ],
       "new": [
-        8.067,
+        8.059,
         -28.458,
         -1.711,
-        8.167000000000002,
+        8.159,
         -28.458,
         -1.671
-      ]
+      ],
+      "original_2026_10_05": {
+        "host_id": "stair-party-wall",
+        "old": [
+          8.067,
+          -28.469999999999995,
+          -1.711,
+          8.167000000000002,
+          -28.469999999999995,
+          -1.671
+        ],
+        "new": [
+          8.067,
+          -28.458,
+          -1.711,
+          8.167000000000002,
+          -28.458,
+          -1.671
+        ]
+      },
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "knowledge/approvals-review/2026-11-review.json",
+        "caused_by": [
+          "G1 LS2 stair tread overlap 16 mm (lane D, stairs.NOSING_OVERLAP; docs/decisions/G1-safety-decisions-2026-11-21.md)"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        }
+      }
     },
     {
       "id": "marker-STEP-stair-b-06",
       "host_id": "stair-party-wall",
       "old": [
-        8.907,
-        -28.469999999999995,
+        8.899,
+        -28.47,
         -2.241,
-        9.007000000000001,
-        -28.469999999999995,
+        8.999,
+        -28.47,
         -2.201
       ],
       "new": [
-        8.907,
+        8.899,
         -28.458,
         -2.241,
-        9.007000000000001,
+        8.999,
         -28.458,
         -2.201
-      ]
+      ],
+      "original_2026_10_05": {
+        "host_id": "stair-party-wall",
+        "old": [
+          8.907,
+          -28.469999999999995,
+          -2.241,
+          9.007000000000001,
+          -28.469999999999995,
+          -2.201
+        ],
+        "new": [
+          8.907,
+          -28.458,
+          -2.241,
+          9.007000000000001,
+          -28.458,
+          -2.201
+        ]
+      },
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "knowledge/approvals-review/2026-11-review.json",
+        "caused_by": [
+          "G1 LS2 stair tread overlap 16 mm (lane D, stairs.NOSING_OVERLAP; docs/decisions/G1-safety-decisions-2026-11-21.md)"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        }
+      }
     },
     {
       "id": "detail-cabinet-led-BACK-bar-alcove-01",
@@ -787,20 +911,51 @@
       "host_id": "support-marker-PATH-corridor-07",
       "old": [
         5.102,
-        -28.470999999999997,
+        -28.471,
         0.0,
-        19.604,
+        19.804,
         -28.470999999999997,
         2.8
       ],
       "new": [
         5.102,
-        -28.457999999999995,
+        -28.458,
         0.0,
-        19.604,
+        19.804,
         -28.457999999999995,
         2.8
-      ]
+      ],
+      "original_2026_10_05": {
+        "host_id": "support-marker-PATH-corridor-07",
+        "old": [
+          5.102,
+          -28.470999999999997,
+          0.0,
+          19.604,
+          -28.470999999999997,
+          2.8
+        ],
+        "new": [
+          5.102,
+          -28.457999999999995,
+          0.0,
+          19.604,
+          -28.457999999999995,
+          2.8
+        ]
+      },
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "knowledge/approvals-review/2026-11-review.json",
+        "caused_by": [
+          "Lane M wall-corner closing (revit_spec._close_corner_gaps lengthens GF-33 by 0.2 m; docs/lanes/M-model-completion.md)"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        }
+      }
     },
     {
       "id": "marker-PATH-corridor-07",
@@ -827,20 +982,51 @@
       "host_id": "support-marker-PATH-corridor-08",
       "old": [
         5.102,
-        -28.470999999999997,
+        -28.471,
         0.0,
-        19.604,
+        19.804,
         -28.470999999999997,
         2.8
       ],
       "new": [
         5.102,
-        -28.457999999999995,
+        -28.458,
         0.0,
-        19.604,
+        19.804,
         -28.457999999999995,
         2.8
-      ]
+      ],
+      "original_2026_10_05": {
+        "host_id": "support-marker-PATH-corridor-08",
+        "old": [
+          5.102,
+          -28.470999999999997,
+          0.0,
+          19.604,
+          -28.470999999999997,
+          2.8
+        ],
+        "new": [
+          5.102,
+          -28.457999999999995,
+          0.0,
+          19.604,
+          -28.457999999999995,
+          2.8
+        ]
+      },
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "knowledge/approvals-review/2026-11-review.json",
+        "caused_by": [
+          "Lane M wall-corner closing (revit_spec._close_corner_gaps lengthens GF-33 by 0.2 m; docs/lanes/M-model-completion.md)"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        }
+      }
     },
     {
       "id": "marker-PATH-corridor-08",
@@ -867,20 +1053,51 @@
       "host_id": "support-marker-PATH-corridor-09",
       "old": [
         5.102,
-        -28.470999999999997,
+        -28.471,
         0.0,
-        19.604,
+        19.804,
         -28.470999999999997,
         2.8
       ],
       "new": [
         5.102,
-        -28.457999999999995,
+        -28.458,
         0.0,
-        19.604,
+        19.804,
         -28.457999999999995,
         2.8
-      ]
+      ],
+      "original_2026_10_05": {
+        "host_id": "support-marker-PATH-corridor-09",
+        "old": [
+          5.102,
+          -28.470999999999997,
+          0.0,
+          19.604,
+          -28.470999999999997,
+          2.8
+        ],
+        "new": [
+          5.102,
+          -28.457999999999995,
+          0.0,
+          19.604,
+          -28.457999999999995,
+          2.8
+        ]
+      },
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "knowledge/approvals-review/2026-11-review.json",
+        "caused_by": [
+          "Lane M wall-corner closing (revit_spec._close_corner_gaps lengthens GF-33 by 0.2 m; docs/lanes/M-model-completion.md)"
+        ],
+        "rules": {
+          "R1_cause": true,
+          "R2_physical": true,
+          "R3_intent": true
+        }
+      }
     },
     {
       "id": "marker-PATH-corridor-09",
@@ -918,5 +1135,21 @@
     "landscape-trellis-west",
     "landscape-climber-branches-west",
     "landscape-climber-west"
+  ],
+  "review_notes": [
+    {
+      "date": "2026-11-21",
+      "review": "knowledge/approvals-review/2026-11-review.json",
+      "note": "Rows re-approved after client-approved design changes moved their bounds; each carries original_2026_10_05 and re_review. Guards unchanged.",
+      "rows": [
+        "detail-stair-open-stringer",
+        "marker-STEP-stair-b-04",
+        "marker-STEP-stair-b-05",
+        "marker-STEP-stair-b-06",
+        "host-face-support-marker-PATH-corridor-07",
+        "host-face-support-marker-PATH-corridor-08",
+        "host-face-support-marker-PATH-corridor-09"
+      ]
+    }
   ]
 }

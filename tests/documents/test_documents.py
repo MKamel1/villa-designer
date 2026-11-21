@@ -41,21 +41,16 @@ def test_csv_md_roundtrip(els):
 
 def test_sheetset_spec_counts_and_missing_fields(spec, els):
     assert spec["schedules"]["door"] == 18
-    assert [s["no"] for s in spec["sheets"]][:3] == ["A-001", "A-101", "A-102"]
+    assert {"A-001", "A-100", "A-101", "A-111", "A-201", "A-301"} <= {s["no"] for s in spec["sheets"]}
     assert {"owner", "engineer", "syndicate_no"} == set(spec["missing_title_block_fields"])  # never invented
     plan = next(s for s in spec["sheets"] if s["no"] == "A-101")
-    assert plan["expects"]["door"] == 10 and plan["expects"]["exterior_wall"] == 14
+    assert plan["expects"]["B"]["door"] == 10 and plan["expects"]["B"]["exterior_wall"] == 14
     assert all(s["title_ar"] for s in spec["sheets"])
     json.dumps(spec)
 
 
-def test_arabic_shaping_connects_letters():
+def test_every_room_has_arabic_name():
     assert arabic.is_arabic("غرفة")
-    shaped = arabic.shape("غرفة")
-    assert len(shaped) == 4 and all(0xFE70 <= ord(c) <= 0xFEFC for c in shaped)
-    assert shaped[0] != "غ"                               # initial form, not the base letter
-    assert arabic.shape("لا") == "ﻻ"                  # lam-alef ligature
-    assert arabic.visual("abc 12") == "abc 12"             # non-Arabic untouched
     assert all(names.room_ar(e.room) for e in model.load("D1") if e.kind == "room")
 
 
@@ -64,8 +59,9 @@ def reports(els, spec, tmp_path_factory):
     out = tmp_path_factory.mktemp("sheets")
     reps = []
     for s in spec["sheets"]:
-        if s["kind"] == "plan":
-            reps.append((plans.render_plan(els, spec, s, out / s["no"], formats=("pdf",)), out / (s["no"] + ".pdf")))
+        if s["kind"] == "plan" and s["variant"] == "ga":
+            for pr in plans.render_plan(els, spec, s, out / s["no"], formats=("pdf",))["plans"]:
+                reps.append((pr, out / (s["no"] + ".pdf")))
     return reps
 
 

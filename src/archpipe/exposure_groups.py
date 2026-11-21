@@ -38,6 +38,10 @@ def view_input(view):
 
 
 def transport_digest(scene):
+    # Lane P2 element-identity fields annotate meshes for checks; they never reach the renderer, so they do not
+    # belong in the frozen transport measurement (RA 2026-11-21). Every other change still alters the digest.
+    from .blender.element_ids import without_ids
+    scene = without_ids(scene)
     return digest({key: scene.get(key) for key in TRANSPORT_KEYS})
 
 

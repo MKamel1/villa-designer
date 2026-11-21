@@ -24,13 +24,22 @@ LEVEL_TITLE = {
 
 SHEET_TITLES = {
     "A-001": ("Cover, sheet index and legend", "الغلاف وفهرس اللوحات ومفتاح الرموز"),
-    "A-101": LEVEL_TITLE["B"],
-    "A-102": LEVEL_TITLE["GF"],
-    "A-201": ("Elevations north and south", "الواجهتان الشمالية والجنوبية"),
-    "A-202": ("Elevations east and west", "الواجهتان الشرقية والغربية"),
-    "A-301": ("Section through the stair", "قطاع من خلال السلم"),
-    "A-302": ("Section through the sunken garden", "قطاع من خلال الحديقة الغائرة"),
+    "A-100": ("Site plan with context", "الموقع العام"),
+    "A-101": ("General arrangement plans, basement -1.80 and ground floor +1.20", "المساقط العامة، الدور السفلي والدور الأرضي"),
+    "A-111": ("Furnished plans, basement and ground floor", "مساقط الأثاث، الدور السفلي والدور الأرضي"),
+    "A-121": ("Reflected ceiling and lighting plans", "مساقط الأسقف والإضاءة"),
+    "A-131": ("Room colour-fill plans", "مساقط ألوان الغرف"),
+    "A-141": ("Stair enlarged plans 1:20", "مساقط السلم بمقياس 20:1"),
+    "A-142": ("Wet rooms enlarged plans 1:20", "مساقط الحمامات بمقياس 20:1"),
+    "A-143": ("NE yard wall: plan and elevation for confirmation", "الحائط الشمالي الشرقي للفناء: مسقط وواجهة للاعتماد"),
+    "A-211": ("Interior elevations: parents' bedroom and kids bedrooms", "الواجهات الداخلية: غرفة الوالدين وغرفتا الأطفال"),
+    "A-201": ("Elevations east, north (street), west and south", "الواجهات الشرقية والشمالية (الشارع) والغربية والجنوبية"),
+    "A-301": ("Section through the stair, 1:20", "قطاع من خلال السلم بمقياس 20:1"),
+    "A-302": ("Sections through the sunken garden and across the villa", "قطاعات الحديقة الغائرة والقطاعات العرضية"),
     "A-601": ("Door, window and room schedules", "جداول الأبواب والنوافذ والغرف"),
+    "A-602": ("Finish schedule", "جدول التشطيبات"),
+    "A-603": ("Furniture schedule", "جدول الأثاث"),
+    "A-604": ("Luminaire schedule", "جدول وحدات الإضاءة"),
 }
 
 

@@ -1,0 +1,11 @@
+{
+ "scene": "/tmp/ra-scene/scene.json",
+ "bytes": 428226964,
+ "sha256": "c523d524f45c6759a2d3452471538eb9dc2657612e93b8273bc16842c6210da8",
+ "stripped_ids_json_sha256": "13d487054f49872621a832c46e9cf75f1c26b64766c6bbb2c6dc1ba0c9c32d35",
+ "meshes": 1242,
+ "meshes_with_ids": 1242,
+ "seconds": 145.5,
+ "lead_approved_count": 64,
+ "bypass_receipts": true
+}
