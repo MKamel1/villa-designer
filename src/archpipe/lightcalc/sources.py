@@ -96,6 +96,31 @@ CARDS: dict[str, SourceCard] = {c.id: c for c in [
                "illuminance and that the edges of the strip have at least half that illuminance"),
         value=">= 1 lx on the centre line (edges >= 0.5 lx), >= 1 h", status="std",
         url_or_path="quote: SLL Code printed p. 199 (pdf_page 206); the 1 lx value is EN 1838, not held"),
+    SourceCard(
+        id="CIE171-2006-5.2-via-DAU",
+        document="CIE 171:2006 test case 5.2 (point source, diffuse photometry), values as reproduced in DAU 'Validation of NVIDIA Iray against CIE 171:2006' Table 7",
+        edition="2016 (DAU); CIE 171:2006 not held", locator="DAU p. 18, Table 7",
+        quote="", value="E(A..J) = 111.11 105.21 90.02 71.11 99.73 85.64 68.06 74.36 59.98 49.39 lx; tolerance +/-5 % (LA1 row)",
+        status="std",
+        url_or_path="https://developer.nvidia.com/sites/default/files/akamai/designworks/docs/Validation of NVIDIA's Iray against CIE 171_20160217.pdf"),
+    SourceCard(
+        id="CIE171-2006-5.8-via-DAU",
+        document="CIE 171:2006 test case 5.8 (internal reflected component), values as reproduced in DAU Table 15",
+        edition="2016 (DAU); CIE 171:2006 not held", locator="DAU p. 25, Table 15",
+        quote="", value="Eav (average indirect illuminance): rho 0.5 -> 104.00, 0.8 -> 417.00, 0.2 -> 26.00 lx; tolerance +/-5 % (LA1 row)",
+        status="std",
+        url_or_path="https://developer.nvidia.com/sites/default/files/akamai/designworks/docs/Validation of NVIDIA's Iray against CIE 171_20160217.pdf"),
+    SourceCard(
+        id="SLL-T12.6-UGR-flux-correction",
+        document="SLL Code for Lighting (2012), Table 12.6 / eq. 12.3", edition="2012", locator="printed p. 198 (pdf_page 205)",
+        quote="Table 12.6 Tabulated values of correction factor  Lamp flux 1000 0.0  2000 2.4  3000 3.8  4000 4.8  100 -8.0  500 -2.4",
+        value="UGR correction = 8 log10(lamp flux / 1000)", status="sourced", url_or_path=SLL_PATH),
+    SourceCard(
+        id="SLL-T12.10-UGR-K",
+        document="SLL Code for Lighting (2012), Table 12.10 and K = pi / (4 p^2 D^2)", edition="2012",
+        locator="printed pp. 209-211 (pdf_pages 216-218)",
+        quote="Table 12.10 Pre-calculated parameters for luminaires in the standard array",
+        value="27 transcribed K cells, H = 2 m", status="sourced", url_or_path=SLL_PATH),
 ]}
 
 

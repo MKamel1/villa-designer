@@ -121,28 +121,35 @@ def build(data: dict, include_pendant: bool, params: RadParams | None = None) ->
 
 
 def scene_dimmed(calc: RoomCalc, target: float = TARGET_LUX, accent: float = 1.0) -> Scene:
-    """A dinner scene that lights the table to the card: one common factor f on the table-lighting zones
-    (pendant + fill), f = target / Em(full) from the linear model; the sideboard accent is left as designed."""
-    full = Scene("full", {z: 1.0 for z in {p.zone for p in calc.placements}})
-    levels_acc = {z: (accent if z == "Z-DIN-ACCENT" else 1.0) for z in full.levels}
-    only_table = Scene("tmp", {z: (0.0 if z == "Z-DIN-ACCENT" else 1.0) for z in full.levels})
-    em = calc.stats("table-top", only_table).em
-    f = min(1.0, target / em)
-    levels = {z: (levels_acc[z] if z == "Z-DIN-ACCENT" else f) for z in full.levels}
+    """A dinner scene that lights the table to the card. The Em on the table is linear in the zone levels, so with
+    the sideboard accent left at `accent` and one common factor f on the table-lighting zones (pendant + fill):
+    Em = f * Em_table_zones + accent * Em_accent = target  ->  f = (target - accent * Em_accent) / Em_table_zones."""
+    zones = {p.zone for p in calc.placements}
+    tab = Scene("tab", {z: (0.0 if z == "Z-DIN-ACCENT" else 1.0) for z in zones})
+    acc = Scene("acc", {z: (accent if z == "Z-DIN-ACCENT" else 0.0) for z in zones})
+    em_tab = calc.stats("table-top", tab).em
+    em_acc = calc.stats("table-top", acc).em
+    f = max(0.0, min(1.0, (target - em_acc) / em_tab))
+    levels = {z: (accent if z == "Z-DIN-ACCENT" else f) for z in zones}
     return Scene(f"dinner-dimmed(f={f:.2f})", levels)
 
 
-def run(workdir: Path, host: str | None = None, out_json: Path | None = None) -> dict:
+def run(workdir: Path, host: str | None = None, out_json: Path | None = None, reuse: bool = False) -> dict:
     data = json.loads(INPUT.read_text(encoding="utf-8"))
     report = {"input": str(INPUT.relative_to(ROOT)), "maintenance_factor": MF, "target": data["target"],
               "cycles_measurement_dining": data.get("cycles_measurement"), "variants": {}}
     results: list[CheckResult] = []
     for name, pend in (("model", True), ("built", False)):
         calc = build(data, pend)
-        calc.run(Path(workdir) / name, host)
+        if reuse:
+            calc.load_results(Path(workdir) / name)
+        else:
+            calc.run(Path(workdir) / name, host)
         full = Scene.full({p.zone for p in calc.placements})
         dim = scene_dimmed(calc)
+        spots = [z for z in ("Z-DIN-FILL", "Z-DIN-ACCENT")]
         report["variants"][name] = {"luminaires": [p.id for p in calc.placements],
+                                    "direct_cross_check_spots": {pid: calc.direct_cross_check(pid, spots) for pid in ("table-top",)},
                                     "scenes": {s.name: calc.report(s) for s in (full, dim)}}
         for s in (full, dim):
             for r in calc.checks(s):
@@ -162,11 +169,12 @@ if __name__ == "__main__":
     ap.add_argument("--workdir", default="out/L6/dining")
     ap.add_argument("--host", default=None)
     ap.add_argument("--out", default="knowledge/lighting/L6-dining-result.json")
+    ap.add_argument("--reuse", action="store_true")
     a = ap.parse_args()
     if a.cmd == "extract":
         d = extract_input()
         print(len(d["luminaires"]), "luminaires", d.get("reflectances"))
     else:
-        r = run(Path(a.workdir), a.host, Path(a.out))
+        r = run(Path(a.workdir), a.host, Path(a.out), a.reuse)
         for c in r["results"]:
             print(c.criterion, c.status, c.subject, c.message)

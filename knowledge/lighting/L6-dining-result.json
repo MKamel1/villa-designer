@@ -1,0 +1,586 @@
+{
+ "input": "knowledge\\lighting\\d1-dining-input.json",
+ "maintenance_factor": 0.8,
+ "target": {
+  "card": "ies-res-dining-informal-100",
+  "lux": 100.0
+ },
+ "cycles_measurement_dining": [
+  {
+   "room": "dining",
+   "card": "ies-res-dining-informal-100",
+   "position": [
+    16.95,
+    -25.9,
+    -2.25
+   ],
+   "label": "dining table centre",
+   "required_lux": 100,
+   "direct_lux": 404.784524509424,
+   "total_lux": 466.57752527629907,
+   "meets_target": true
+  },
+  {
+   "room": "dining",
+   "card": "ies-res-dining-study-200",
+   "position": [
+    16.35,
+    -25.9,
+    -2.25
+   ],
+   "label": "table end (homework)",
+   "required_lux": 200,
+   "direct_lux": 466.64330695681167,
+   "total_lux": 579.6305133877227,
+   "meets_target": true
+  }
+ ],
+ "variants": {
+  "model": {
+   "luminaires": [
+    "lum-PEN-LIN-dining-01#0",
+    "lum-PEN-LIN-dining-01#1",
+    "lum-PEN-LIN-dining-01#2",
+    "lum-PEN-LIN-dining-01#3",
+    "lum-PEN-LIN-dining-01#4",
+    "lum-PEN-LIN-dining-01#5",
+    "lum-PEN-LIN-dining-01#6",
+    "lum-PEN-LIN-dining-01#7",
+    "lum-ADJ-dining-side-01",
+    "lum-ADJ-dining-02",
+    "lum-ADJ-dining-side-02",
+    "lum-ADJ-dining-side-03"
+   ],
+   "direct_cross_check_spots": {
+    "table-top": {
+     "n": 18,
+     "max_abs_rel_err": 0.0005843905110041181,
+     "mean_rel_err": -7.751605303962794e-05
+    }
+   },
+   "scenes": {
+    "full": {
+     "room": "D1-dining",
+     "scene": "full",
+     "levels": {
+      "Z-DIN-ACCENT": 1.0,
+      "Z-DIN-FILL": 1.0,
+      "Z-DIN-PEN": 1.0
+     },
+     "maintenance_factor": 0.8,
+     "radiance": {
+      "ab": 6,
+      "ab_extra": [
+       12
+      ]
+     },
+     "reflectances": {
+      "floor": 0.33,
+      "wall": 0.8,
+      "ceiling": 0.85
+     },
+     "planes": {
+      "table-top": {
+       "target_lux": 100.0,
+       "z": -2.25,
+       "grid": {
+        "n": 18,
+        "dx": 0.29999999999999954,
+        "dy": 0.29999999999999954,
+        "z": -2.25
+       },
+       "total": {
+        "n": 18,
+        "em": 709.4397153151111,
+        "emin": 288.892726792,
+        "emax": 1333.810990592,
+        "u0": 0.40721250947119986,
+        "max_avg": 1.8800906712694574,
+        "avg_min": 2.455720236341917
+       },
+       "direct_only": {
+        "n": 18,
+        "em": 670.9010411603244,
+        "emin": 252.82181662144004,
+        "emax": 1295.1940502648001,
+        "u0": 0.37683920743986965,
+        "max_avg": 1.930529199991641,
+        "avg_min": 2.6536516908463272
+       },
+       "convergence_ab_vs_2ab": -0.0067276528061723795
+      },
+      "table-centre-point": {
+       "target_lux": 100.0,
+       "z": -2.25,
+       "grid": {
+        "n": 1,
+        "dx": 0.10000000000000142,
+        "dy": 0.10000000000000142,
+        "z": -2.25
+       },
+       "total": {
+        "n": 1,
+        "em": 1427.2314142240002,
+        "emin": 1427.2314142240002,
+        "emax": 1427.2314142240002,
+        "u0": 1.0,
+        "max_avg": 1.0,
+        "avg_min": 1.0
+       },
+       "direct_only": {
+        "n": 1,
+        "em": 1388.8624287064004,
+        "emin": 1388.8624287064004,
+        "emax": 1388.8624287064004,
+        "u0": 1.0,
+        "max_avg": 1.0,
+        "avg_min": 1.0
+       },
+       "convergence_ab_vs_2ab": -0.003337337490593506
+      }
+     }
+    },
+    "dinner-dimmed(f=0.13)": {
+     "room": "D1-dining",
+     "scene": "dinner-dimmed(f=0.13)",
+     "levels": {
+      "Z-DIN-ACCENT": 1.0,
+      "Z-DIN-FILL": 0.12612908523270466,
+      "Z-DIN-PEN": 0.12612908523270466
+     },
+     "maintenance_factor": 0.8,
+     "radiance": {
+      "ab": 6,
+      "ab_extra": [
+       12
+      ]
+     },
+     "reflectances": {
+      "floor": 0.33,
+      "wall": 0.8,
+      "ceiling": 0.85
+     },
+     "planes": {
+      "table-top": {
+       "target_lux": 100.0,
+       "z": -2.25,
+       "grid": {
+        "n": 18,
+        "dx": 0.29999999999999954,
+        "dy": 0.29999999999999954,
+        "z": -2.25
+       },
+       "total": {
+        "n": 18,
+        "em": 100.0,
+        "emin": 45.47713028184876,
+        "emax": 178.93876387183758,
+        "u0": 0.4547713028184876,
+        "max_avg": 1.7893876387183758,
+        "avg_min": 2.1989074372160395
+       },
+       "direct_only": {
+        "n": 18,
+        "em": 84.75833776639094,
+        "emin": 31.948373383968324,
+        "emax": 163.48955576780702,
+        "u0": 0.3769348742069922,
+        "max_avg": 1.9288905383965096,
+        "avg_min": 2.652978189146951
+       },
+       "convergence_ab_vs_2ab": -0.020951102781854636
+      },
+      "table-centre-point": {
+       "target_lux": 100.0,
+       "z": -2.25,
+       "grid": {
+        "n": 1,
+        "dx": 0.10000000000000142,
+        "dy": 0.10000000000000142,
+        "z": -2.25
+       },
+       "total": {
+        "n": 1,
+        "em": 190.6697714435176,
+        "emin": 190.6697714435176,
+        "emax": 190.6697714435176,
+        "u0": 1.0,
+        "max_avg": 1.0,
+        "avg_min": 1.0
+       },
+       "direct_only": {
+        "n": 1,
+        "em": 175.3028350200341,
+        "emin": 175.3028350200341,
+        "emax": 175.3028350200341,
+        "u0": 1.0,
+        "max_avg": 1.0,
+        "avg_min": 1.0
+       },
+       "convergence_ab_vs_2ab": -0.01099149497745433
+      }
+     }
+    }
+   }
+  },
+  "built": {
+   "luminaires": [
+    "lum-ADJ-dining-side-01",
+    "lum-ADJ-dining-02",
+    "lum-ADJ-dining-side-02",
+    "lum-ADJ-dining-side-03"
+   ],
+   "direct_cross_check_spots": {
+    "table-top": {
+     "n": 18,
+     "max_abs_rel_err": 0.0005843905110041181,
+     "mean_rel_err": -7.751605303962794e-05
+    }
+   },
+   "scenes": {
+    "full": {
+     "room": "D1-dining-built",
+     "scene": "full",
+     "levels": {
+      "Z-DIN-FILL": 1.0,
+      "Z-DIN-ACCENT": 1.0
+     },
+     "maintenance_factor": 0.8,
+     "radiance": {
+      "ab": 6,
+      "ab_extra": [
+       12
+      ]
+     },
+     "reflectances": {
+      "floor": 0.33,
+      "wall": 0.8,
+      "ceiling": 0.85
+     },
+     "planes": {
+      "table-top": {
+       "target_lux": 100.0,
+       "z": -2.25,
+       "grid": {
+        "n": 18,
+        "dx": 0.29999999999999954,
+        "dy": 0.29999999999999954,
+        "z": -2.25
+       },
+       "total": {
+        "n": 18,
+        "em": 390.3570895764445,
+        "emin": 72.78612273600002,
+        "emax": 874.744010592,
+        "u0": 0.1864603581684051,
+        "max_avg": 2.2408815772787367,
+        "avg_min": 5.363070251623306
+       },
+       "direct_only": {
+        "n": 18,
+        "em": 367.0196784047689,
+        "emin": 51.32337822144,
+        "emax": 851.1076518648001,
+        "u0": 0.13983821915084846,
+        "max_avg": 2.318970076929099,
+        "avg_min": 7.15112081712986
+       },
+       "convergence_ab_vs_2ab": -0.007620427041581834
+      },
+      "table-centre-point": {
+       "target_lux": 100.0,
+       "z": -2.25,
+       "grid": {
+        "n": 1,
+        "dx": 0.10000000000000142,
+        "dy": 0.10000000000000142,
+        "z": -2.25
+       },
+       "total": {
+        "n": 1,
+        "em": 962.823089976,
+        "emin": 962.823089976,
+        "emax": 962.823089976,
+        "u0": 1.0,
+        "max_avg": 1.0,
+        "avg_min": 1.0
+       },
+       "direct_only": {
+        "n": 1,
+        "em": 939.2834511064001,
+        "emin": 939.2834511064001,
+        "emax": 939.2834511064001,
+        "u0": 1.0,
+        "max_avg": 1.0,
+        "avg_min": 1.0
+       },
+       "convergence_ab_vs_2ab": -0.003059256039598446
+      }
+     }
+    },
+    "dinner-dimmed(f=0.23)": {
+     "room": "D1-dining-built",
+     "scene": "dinner-dimmed(f=0.23)",
+     "levels": {
+      "Z-DIN-FILL": 0.2324399360116896,
+      "Z-DIN-ACCENT": 1.0
+     },
+     "maintenance_factor": 0.8,
+     "radiance": {
+      "ab": 6,
+      "ab_extra": [
+       12
+      ]
+     },
+     "reflectances": {
+      "floor": 0.33,
+      "wall": 0.8,
+      "ceiling": 0.85
+     },
+     "planes": {
+      "table-top": {
+       "target_lux": 100.0,
+       "z": -2.25,
+       "grid": {
+        "n": 18,
+        "dx": 0.29999999999999954,
+        "dy": 0.29999999999999954,
+        "z": -2.25
+       },
+       "total": {
+        "n": 18,
+        "em": 100.0,
+        "emin": 24.905805647846247,
+        "emax": 212.77925824683035,
+        "u0": 0.24905805647846246,
+        "max_avg": 2.1277925824683037,
+        "avg_min": 4.015128095591142
+       },
+       "direct_only": {
+        "n": 18,
+        "em": 85.43142060740367,
+        "emin": 11.982469386631017,
+        "emax": 197.94376163476184,
+        "u0": 0.1402583417370048,
+        "max_avg": 2.3169901685751393,
+        "avg_min": 7.129700719512834
+       },
+       "convergence_ab_vs_2ab": -0.019631251243566572
+      },
+      "table-centre-point": {
+       "target_lux": 100.0,
+       "z": -2.25,
+       "grid": {
+        "n": 1,
+        "dx": 0.10000000000000142,
+        "dy": 0.10000000000000142,
+        "z": -2.25
+       },
+       "total": {
+        "n": 1,
+        "em": 233.20743941934256,
+        "emin": 233.20743941934256,
+        "emax": 233.20743941934256,
+        "u0": 1.0,
+        "max_avg": 1.0,
+        "avg_min": 1.0
+       },
+       "direct_only": {
+        "n": 1,
+        "em": 218.43843614955418,
+        "emin": 218.43843614955418,
+        "emax": 218.43843614955418,
+        "u0": 1.0,
+        "max_avg": 1.0,
+        "avg_min": 1.0
+       },
+       "convergence_ab_vs_2ab": -0.008358351592188007
+      }
+     }
+    }
+   }
+  }
+ },
+ "checks": [
+  {
+   "criterion": "LA1",
+   "lane": "L6",
+   "status": "fail",
+   "subject": "D1-dining/table-top/full",
+   "achieved": 709.4397153151111,
+   "required": 100.0,
+   "unit": "lx",
+   "message": "Eavg 709 lx vs card 100 lx; allowed 90-110 lx (7.09x of target)",
+   "source_ids": [
+    "IES-HB10-p33.25-avg-allowance"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA2",
+   "lane": "L6",
+   "status": "fail",
+   "subject": "D1-dining/table-top/full",
+   "achieved": 709.4397153151111,
+   "required": 150.0,
+   "unit": "lx",
+   "message": "Eavg 709 lx vs cap 150 lx (1.5 x card 100 lx): 7.09 x target",
+   "source_ids": [
+    "L6-POLICY-LA2-over-lighting-1.5x"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA3",
+   "lane": "L6",
+   "status": "pass",
+   "subject": "D1-dining/table-top/full",
+   "achieved": 0.40721250947119986,
+   "required": null,
+   "unit": "U0",
+   "message": "reported: n=18 Em 709 Emin 289 Emax 1334 lx; U0 0.41; max:avg 1.88; avg:min 2.46",
+   "source_ids": [
+    "IES-HB10-p33.25-uniformity-targets"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA1",
+   "lane": "L6",
+   "status": "pass",
+   "subject": "D1-dining/table-top/dinner-dimmed(f=0.13)",
+   "achieved": 100.0,
+   "required": 100.0,
+   "unit": "lx",
+   "message": "Eavg 100 lx vs card 100 lx; allowed 90-110 lx (1.00x of target)",
+   "source_ids": [
+    "IES-HB10-p33.25-avg-allowance"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA2",
+   "lane": "L6",
+   "status": "pass",
+   "subject": "D1-dining/table-top/dinner-dimmed(f=0.13)",
+   "achieved": 100.0,
+   "required": 150.0,
+   "unit": "lx",
+   "message": "Eavg 100 lx vs cap 150 lx (1.5 x card 100 lx): 1.00 x target",
+   "source_ids": [
+    "L6-POLICY-LA2-over-lighting-1.5x"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA3",
+   "lane": "L6",
+   "status": "pass",
+   "subject": "D1-dining/table-top/dinner-dimmed(f=0.13)",
+   "achieved": 0.4547713028184876,
+   "required": null,
+   "unit": "U0",
+   "message": "reported: n=18 Em 100 Emin 45 Emax 179 lx; U0 0.45; max:avg 1.79; avg:min 2.20",
+   "source_ids": [
+    "IES-HB10-p33.25-uniformity-targets"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA1",
+   "lane": "L6",
+   "status": "fail",
+   "subject": "D1-dining-built/table-top/full",
+   "achieved": 390.3570895764445,
+   "required": 100.0,
+   "unit": "lx",
+   "message": "Eavg 390 lx vs card 100 lx; allowed 90-110 lx (3.90x of target)",
+   "source_ids": [
+    "IES-HB10-p33.25-avg-allowance"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA2",
+   "lane": "L6",
+   "status": "fail",
+   "subject": "D1-dining-built/table-top/full",
+   "achieved": 390.3570895764445,
+   "required": 150.0,
+   "unit": "lx",
+   "message": "Eavg 390 lx vs cap 150 lx (1.5 x card 100 lx): 3.90 x target",
+   "source_ids": [
+    "L6-POLICY-LA2-over-lighting-1.5x"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA3",
+   "lane": "L6",
+   "status": "pass",
+   "subject": "D1-dining-built/table-top/full",
+   "achieved": 0.1864603581684051,
+   "required": null,
+   "unit": "U0",
+   "message": "reported: n=18 Em 390 Emin 73 Emax 875 lx; U0 0.19; max:avg 2.24; avg:min 5.36",
+   "source_ids": [
+    "IES-HB10-p33.25-uniformity-targets"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA1",
+   "lane": "L6",
+   "status": "pass",
+   "subject": "D1-dining-built/table-top/dinner-dimmed(f=0.23)",
+   "achieved": 100.0,
+   "required": 100.0,
+   "unit": "lx",
+   "message": "Eavg 100 lx vs card 100 lx; allowed 90-110 lx (1.00x of target)",
+   "source_ids": [
+    "IES-HB10-p33.25-avg-allowance"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA2",
+   "lane": "L6",
+   "status": "pass",
+   "subject": "D1-dining-built/table-top/dinner-dimmed(f=0.23)",
+   "achieved": 100.0,
+   "required": 150.0,
+   "unit": "lx",
+   "message": "Eavg 100 lx vs cap 150 lx (1.5 x card 100 lx): 1.00 x target",
+   "source_ids": [
+    "L6-POLICY-LA2-over-lighting-1.5x"
+   ],
+   "element_ids": [],
+   "gate": false
+  },
+  {
+   "criterion": "LA3",
+   "lane": "L6",
+   "status": "pass",
+   "subject": "D1-dining-built/table-top/dinner-dimmed(f=0.23)",
+   "achieved": 0.24905805647846246,
+   "required": null,
+   "unit": "U0",
+   "message": "reported: n=18 Em 100 Emin 25 Emax 213 lx; U0 0.25; max:avg 2.13; avg:min 4.02",
+   "source_ids": [
+    "IES-HB10-p33.25-uniformity-targets"
+   ],
+   "element_ids": [],
+   "gate": false
+  }
+ ]
+}

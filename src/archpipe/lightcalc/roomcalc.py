@@ -67,6 +67,30 @@ class RoomCalc:
         job = RadJob(self.name, self.room, self.placements, self.sensors(), self.params)
         self.results = execute(job, workdir, host=host)
 
+    def load_results(self, workdir: Path) -> None:
+        """Re-read the outputs of an earlier run (same inputs) without calling Radiance."""
+        job = RadJob(self.name, self.room, self.placements, self.sensors(), self.params)
+        self.results = job.parse(Path(workdir))
+
+    def direct_cross_check(self, plane_id: str, zones: list[str] | None = None, floor_lx: float = 10.0) -> dict:
+        """Radiance direct-only (ab 0, initial lux) vs the analytic inverse-square engine on the same sensors,
+        for the placements of `zones` (default: all). Points under `floor_lx` are skipped (relative error is noise there)."""
+        from .direct import direct_illuminance
+        lo, hi = self._slices[plane_id]
+        pl = [p for p in self.placements if zones is None or p.zone in zones]
+        pts = self.sensors()[lo:hi]
+        rad = [0.0] * (hi - lo)
+        for z in {p.zone for p in pl}:
+            for i, v in enumerate(self.results[z][0][lo:hi]):
+                rad[i] += v
+        errs = []
+        for s, r in zip(pts, rad):
+            a = direct_illuminance(pl, (s.x, s.y, s.z))
+            if a >= floor_lx:
+                errs.append(r / a - 1)
+        return {"n": len(errs), "max_abs_rel_err": max((abs(e) for e in errs), default=None),
+                "mean_rel_err": (sum(errs) / len(errs)) if errs else None}
+
     def values(self, plane_id: str, scene: Scene, *, ab: int | None = None, direct: bool = False) -> list[float]:
         """Maintained lux on a plane for a scene (ab=0 gives the direct-only component)."""
         a = 0 if direct else (ab if ab is not None else self.params.ab)
