@@ -221,7 +221,9 @@ def load_d1(out_dir: Path | str | None = None) -> DesignModel:
     _prefer_l2_model(m)
     m.waivers[("LS5", "cinema")] = ("WAIVED by client (G1 2026-11-21): accepted risk, the cinema stays an inner room; "
                                     "mitigation is interlinked smoke detection in lounge and cinema (electrical lane)")
-    dd = _optional(villa / "daylight" / "summary-r12.json")
+    # Tracked extract first, so every machine evaluates the same inputs; the untracked run output is a fallback.
+    dd = (_optional(Path(__file__).resolve().parents[3] / "knowledge" / "daylight" / "summary-r12-D1.json")
+          or _optional(villa / "daylight" / "summary-r12.json"))
     dayl = (dd or {}).get("options", {}).get("D1", {}).get("rooms", {})
     for r in m.rooms.values():
         if r.id in dayl:
