@@ -1,0 +1,91 @@
+"""L6b: the villa's calculation planes: task areas (IES Table 33.2 cards) and room planes.
+
+Every task plane is an AREA on its host (table top, desk top, worktop strip, basin top, reading position), not a point;
+the IES cards named here are the ones `concept.villa_lighting.task_points` already carries. Room planes (general
+illuminance, `ROOM_TARGETS`) are minimum-gauged: the card is a floor for the room, not a +/-10 % target.
+"""
+from __future__ import annotations
+
+B, G = -3.0, 0.0
+
+
+def _rect(cx, cy, w, d):
+    return ((cx - w / 2, cy - d / 2), (cx + w / 2, cy - d / 2), (cx + w / 2, cy + d / 2), (cx - w / 2, cy + d / 2))
+
+
+def _box(x0, y0, x1, y1):
+    return ((x0, y0), (x1, y0), (x1, y1), (x0, y1))
+
+
+def _centre(q):
+    return (q[0] + q[2]) / 2, (q[1] + q[3]) / 2
+
+
+# room -> (general card, plane height above the floor, scene that owns it): circulation is lit on the floor/tread plane
+ROOM_PLANE_Z = {"lounge": 0.75, "family": 0.75, "living": 0.75, "kitchen": 0.92, "kitchen-island": 0.0, "hall-b": 0.0,
+                "corridor": 0.0, "study-game": 0.75, "kids-a": 0.75, "kids-b": 0.75, "parents-bed": 0.75,
+                "parents-dressing": 0.0, "cinema": 0.75, "dirty-kitchen": 0.9, "pantry": 0.0, "store-ramp": 0.0,
+                "family-bath": 0.0, "parents-ensuite": 0.0, "guest-wc": 0.0}
+
+
+def build_planes(v):
+    from ..concept import villa_lighting as VL
+    from .villa import Plane
+    fp, items = v.fp, v.items
+    P = []
+
+    def add(pid, room, poly, z, card, scene, what, gauge="average", spacing=None):
+        P.append(Plane(pid, room, tuple(poly), z, card, VL.card_value(card), gauge, scene, what, spacing))
+
+    # kitchen island and run (basement open plan)
+    isl = fp["k-island"]
+    spans = [(a, b) for kind, a, b in v.F.module_spans(items["k-island"]) if kind == "counter" and b - a >= 0.5]
+    x0, x1 = spans[0][0], spans[-1][1]
+    add("island-prep", "kitchen", _box(x0, isl[3] - 0.55, x1, isl[3]), B + 0.92, "ies-res-kitchen-prep-500", "Cook",
+        "island prep side")
+    add("island-seating", "kitchen", _box(x0, isl[1], x1, isl[1] + 0.45), B + 0.92, "ies-res-breakfast-200", "Day",
+        "island seating side")
+    burner = next((a, b) for kind, a, b in v.F.module_spans(items["k-island"]) if kind == "single-induction")
+    add("cooktop", "kitchen", _rect((burner[0] + burner[1]) / 2, (isl[1] + isl[3]) / 2, 0.5, 0.5), B + 0.926,
+        "ies-res-kitchen-cooktop-300", "Cook", "single induction zone")
+    run = fp["k-run"]
+    add("sink", "kitchen", _rect((run[0] + run[2]) / 2, run[1] + 0.27, 0.9, 0.5), B + 0.9, "ies-res-kitchen-sink-300",
+        "Cook", "sink and worktop")
+    # dining table
+    dt = fp["dining-table"]
+    add("dining-table", "dining", _box(dt[0] + 0.05, dt[1] + 0.05, dt[2] - 0.05, dt[3] - 0.05), B + 0.75,
+        "ies-res-dining-informal-100", "Dinner", "table top")
+    add("homework-end", "dining", _box(dt[0] + 0.05, dt[1] + 0.05, dt[0] + 0.65, dt[3] - 0.05), B + 0.75,
+        "ies-res-dining-study-200", "Day", "table end (homework)")
+    dk = fp["dk-run"]
+    add("dirty-kitchen-run", "dirty-kitchen", _box(dk[0] + 0.3, dk[1], dk[2] - 0.3, dk[1] + 0.5), B + 0.9,
+        "ies-res-kitchen-prep-500", "Day", "dirty kitchen run")
+    # desks
+    for d, lv, scene in (("study-desk", G, "Day"), ("study-adult-desk", G, "Day"), ("ka-desk-1", G, "Day"),
+                         ("ka-desk-2", G, "Day"), ("kb-desk", G, "Day"), ("cinema-desk", B, "Day")):
+        q = fp[d]
+        add(d, items[d]["room"], _box(q[0] + 0.03, q[1] + 0.03, q[2] - 0.03, q[3] - 0.03), lv + 0.75, "ies-res-desk-400",
+            scene, d)
+    # parents' bed: reading positions (each side)
+    b = fp["pb-bed"]
+    for k, x in enumerate((b[0] + 0.4, b[2] - 0.4)):
+        add("pillow-%d" % (k + 1), "parents-bed", _rect(x, b[1] + 0.35, 0.5, 0.4), G + 0.9, "ies-res-bed-reading-200",
+            "Reading", "reading position")
+    # basins
+    for basin, room in (("fb-basin", "family-bath"), ("pe-basin", "parents-ensuite"), ("gwc-basin", "guest-wc")):
+        q = fp[basin]
+        lv = B if room == "guest-wc" else G
+        add(basin, room, _box(q[0] + 0.05, q[1] + 0.05, q[2] - 0.05, q[3] - 0.05), lv + 0.91,
+            "ies-res-vanity-grooming-300", "Day", basin)
+    a = fp["lounge-armchair"]
+    add("armchair", "lounge", _rect(*_centre(a), 0.5, 0.5), B + 0.76, "ies-res-chair-reading-200", "Reading", "armchair")
+    n = fp["library-daybed"]
+    add("daybed", "bar-alcove", _rect(*_centre(n), 0.7, 0.5), B + 0.76, "ies-res-chair-reading-200", "Reading",
+        "daybed nook")
+    # room planes (general illuminance, minimum-gauged)
+    for room, card in VL.ROOM_TARGETS.items():
+        r = v.rc[room]
+        lv = G if v.lay["rooms"][room]["level"] == "GF" else B
+        add("room-" + room, room, _box(r[0] + 0.1, r[1] + 0.1, r[2] - 0.1, r[3] - 0.1), lv + ROOM_PLANE_Z[room], card,
+            "Day", "general illuminance (floor)", gauge="minimum")
+    return P
