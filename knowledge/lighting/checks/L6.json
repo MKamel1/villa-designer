@@ -299,6 +299,2365 @@
       ],
       "element_ids": [],
       "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/island-prep/Cook",
+      "achieved": 499.80473294800004,
+      "required": 500,
+      "unit": "lx",
+      "message": "Eavg 500 lx vs card 500 lx; allowed 450-550 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/island-prep/Cook",
+      "achieved": 499.80473294800004,
+      "required": 750.0,
+      "unit": "lx",
+      "message": "Eavg 500 lx vs cap 750 lx (1.5 x card 500 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/island-prep/Cook",
+      "achieved": 0.6348396902856293,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=14 Em 500 Emin 317 Emax 803 lx; U0 0.63; max:avg 1.61; avg:min 1.58",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/island-seating/Day",
+      "achieved": 199.99492360502288,
+      "required": 200,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs card 200 lx; allowed 180-220 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/island-seating/Day",
+      "achieved": 199.99492360502288,
+      "required": 300.0,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs cap 300 lx (1.5 x card 200 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/island-seating/Day",
+      "achieved": 0.8079610227159871,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=14 Em 200 Emin 162 Emax 224 lx; U0 0.81; max:avg 1.12; avg:min 1.24",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/cooktop/Cook",
+      "achieved": 299.92193364947207,
+      "required": 300,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs card 300 lx; allowed 270-330 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/cooktop/Cook",
+      "achieved": 299.92193364947207,
+      "required": 450.0,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs cap 450 lx (1.5 x card 300 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/cooktop/Cook",
+      "achieved": 0.7721690967285737,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=25 Em 300 Emin 232 Emax 369 lx; U0 0.77; max:avg 1.23; avg:min 1.30",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/sink/Cook",
+      "achieved": 299.86150244373334,
+      "required": 300,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs card 300 lx; allowed 270-330 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/sink/Cook",
+      "achieved": 299.86150244373334,
+      "required": 450.0,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs cap 450 lx (1.5 x card 300 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/sink/Cook",
+      "achieved": 0.7469443056299903,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=15 Em 300 Emin 224 Emax 374 lx; U0 0.75; max:avg 1.25; avg:min 1.34",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/dining-table/Dinner",
+      "achieved": 99.9132282007778,
+      "required": 100,
+      "unit": "lx",
+      "message": "Eavg 100 lx vs card 100 lx; allowed 90-110 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/dining-table/Dinner",
+      "achieved": 99.9132282007778,
+      "required": 150.0,
+      "unit": "lx",
+      "message": "Eavg 100 lx vs cap 150 lx (1.5 x card 100 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/dining-table/Dinner",
+      "achieved": 0.6120623915254891,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 100 Emin 61 Emax 153 lx; U0 0.61; max:avg 1.53; avg:min 1.63",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/homework-end/Day",
+      "achieved": 200.11064300167803,
+      "required": 200,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs card 200 lx; allowed 180-220 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/homework-end/Day",
+      "achieved": 200.11064300167803,
+      "required": 300.0,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs cap 300 lx (1.5 x card 200 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/homework-end/Day",
+      "achieved": 0.6806814547588946,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=20 Em 200 Emin 136 Emax 297 lx; U0 0.68; max:avg 1.48; avg:min 1.47",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/armchair/Reading",
+      "achieved": 199.77831800350563,
+      "required": 200,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs card 200 lx; allowed 180-220 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/armchair/Reading",
+      "achieved": 199.77831800350563,
+      "required": 300.0,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs cap 300 lx (1.5 x card 200 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/armchair/Reading",
+      "achieved": 0.5651280537445453,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=25 Em 200 Emin 113 Emax 290 lx; U0 0.57; max:avg 1.45; avg:min 1.77",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/daybed/Reading",
+      "achieved": 199.8353180821958,
+      "required": 200,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs card 200 lx; allowed 180-220 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/daybed/Reading",
+      "achieved": 199.8353180821958,
+      "required": 300.0,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs cap 300 lx (1.5 x card 200 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/daybed/Reading",
+      "achieved": 0.1470664844749203,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=20 Em 200 Emin 29 Emax 636 lx; U0 0.15; max:avg 3.18; avg:min 6.80",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-lounge/Day",
+      "achieved": 164.77221141244445,
+      "required": 100,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 165 lx vs card 100 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-lounge/Day",
+      "achieved": 0.2733191094878921,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=54 Em 165 Emin 45 Emax 485 lx; U0 0.27; max:avg 2.94; avg:min 3.66",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-family/Day",
+      "achieved": 237.98709891682861,
+      "required": 100,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 238 lx vs card 100 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-family/Day",
+      "achieved": 0.28928217937586603,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=28 Em 238 Emin 69 Emax 574 lx; U0 0.29; max:avg 2.41; avg:min 3.46",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-living/Day",
+      "achieved": 177.45710345900574,
+      "required": 30,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 177 lx vs card 30 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-living/Day",
+      "achieved": 0.2793148045038969,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=56 Em 177 Emin 50 Emax 467 lx; U0 0.28; max:avg 2.63; avg:min 3.58",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-kitchen/Day",
+      "achieved": 186.40952217760415,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 186 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-kitchen/Day",
+      "achieved": 0.43829473282870735,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=48 Em 186 Emin 82 Emax 641 lx; U0 0.44; max:avg 3.44; avg:min 2.28",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-kitchen-island/Day",
+      "achieved": 307.4254234815086,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 307 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-kitchen-island/Day",
+      "achieved": 0.7451469950278165,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=28 Em 307 Emin 229 Emax 371 lx; U0 0.75; max:avg 1.21; avg:min 1.34",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-hall-b/Day",
+      "achieved": 267.12057703992,
+      "required": 30,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 267 lx vs card 30 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-hall-b/Day",
+      "achieved": 0.6348760081132042,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=30 Em 267 Emin 170 Emax 344 lx; U0 0.63; max:avg 1.29; avg:min 1.58",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-pantry/Day",
+      "achieved": 331.02185645714286,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 331 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-pantry/Day",
+      "achieved": 0.8761980852389769,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=14 Em 331 Emin 290 Emax 351 lx; U0 0.88; max:avg 1.06; avg:min 1.14",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-store-ramp/Day",
+      "achieved": 172.55353457333337,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 173 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-store-ramp/Day",
+      "achieved": 0.6065527326275629,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=42 Em 173 Emin 105 Emax 234 lx; U0 0.61; max:avg 1.36; avg:min 1.65",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/cinema-desk/Day",
+      "achieved": 399.9127553288889,
+      "required": 400,
+      "unit": "lx",
+      "message": "Eavg 400 lx vs card 400 lx; allowed 360-440 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/cinema-desk/Day",
+      "achieved": 399.9127553288889,
+      "required": 600.0,
+      "unit": "lx",
+      "message": "Eavg 400 lx vs cap 600 lx (1.5 x card 400 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/cinema-desk/Day",
+      "achieved": 0.7258780582811538,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 400 Emin 290 Emax 602 lx; U0 0.73; max:avg 1.50; avg:min 1.38",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-cinema/Day",
+      "achieved": 223.2224338568889,
+      "required": 20,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 223 lx vs card 20 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-cinema/Day",
+      "achieved": 0.15838871244754543,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=36 Em 223 Emin 35 Emax 864 lx; U0 0.16; max:avg 3.87; avg:min 6.31",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/gwc-basin/Day",
+      "achieved": 300.278669056,
+      "required": 300,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs card 300 lx; allowed 270-330 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/gwc-basin/Day",
+      "achieved": 300.278669056,
+      "required": 450.0,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs cap 450 lx (1.5 x card 300 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/gwc-basin/Day",
+      "achieved": 0.8671713584538314,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=20 Em 300 Emin 260 Emax 323 lx; U0 0.87; max:avg 1.08; avg:min 1.15",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-guest-wc/Day",
+      "achieved": 184.85483219908573,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 185 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-guest-wc/Day",
+      "achieved": 0.2952370609453288,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=35 Em 185 Emin 55 Emax 321 lx; U0 0.30; max:avg 1.73; avg:min 3.39",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/dirty-kitchen-run/Day",
+      "achieved": 499.97416606285714,
+      "required": 500,
+      "unit": "lx",
+      "message": "Eavg 500 lx vs card 500 lx; allowed 450-550 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/dirty-kitchen-run/Day",
+      "achieved": 499.97416606285714,
+      "required": 750.0,
+      "unit": "lx",
+      "message": "Eavg 500 lx vs cap 750 lx (1.5 x card 500 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/dirty-kitchen-run/Day",
+      "achieved": 0.7306633119801487,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=14 Em 500 Emin 365 Emax 654 lx; U0 0.73; max:avg 1.31; avg:min 1.37",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-dirty-kitchen/Day",
+      "achieved": 387.85571101833335,
+      "required": 200,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 388 lx vs card 200 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-dirty-kitchen/Day",
+      "achieved": 0.1745336956938613,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=48 Em 388 Emin 68 Emax 748 lx; U0 0.17; max:avg 1.93; avg:min 5.73",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/study-desk/Day",
+      "achieved": 403.9267055857778,
+      "required": 400,
+      "unit": "lx",
+      "message": "Eavg 404 lx vs card 400 lx; allowed 360-440 lx (1.01x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/study-desk/Day",
+      "achieved": 403.9267055857778,
+      "required": 600.0,
+      "unit": "lx",
+      "message": "Eavg 404 lx vs cap 600 lx (1.5 x card 400 lx): 1.01 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/study-desk/Day",
+      "achieved": 0.6086834260375203,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 404 Emin 246 Emax 597 lx; U0 0.61; max:avg 1.48; avg:min 1.64",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/study-adult-desk/Day",
+      "achieved": 432.1075847864445,
+      "required": 400,
+      "unit": "lx",
+      "message": "Eavg 432 lx vs card 400 lx; allowed 360-440 lx (1.08x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/study-adult-desk/Day",
+      "achieved": 432.1075847864445,
+      "required": 600.0,
+      "unit": "lx",
+      "message": "Eavg 432 lx vs cap 600 lx (1.5 x card 400 lx): 1.08 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/study-adult-desk/Day",
+      "achieved": 0.5134934605456171,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 432 Emin 222 Emax 709 lx; U0 0.51; max:avg 1.64; avg:min 1.95",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-corridor/Day",
+      "achieved": 228.43137975980798,
+      "required": 30,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 228 lx vs card 30 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-corridor/Day",
+      "achieved": 0.8493666225563715,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=11 Em 228 Emin 194 Emax 261 lx; U0 0.85; max:avg 1.14; avg:min 1.18",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-study-game/Day",
+      "achieved": 293.1809470144445,
+      "required": 6,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 293 lx vs card 6 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-study-game/Day",
+      "achieved": 0.2102177767075823,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=36 Em 293 Emin 62 Emax 968 lx; U0 0.21; max:avg 3.30; avg:min 4.76",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/ka-desk-1/Day",
+      "achieved": 398.3877572711111,
+      "required": 400,
+      "unit": "lx",
+      "message": "Eavg 398 lx vs card 400 lx; allowed 360-440 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/ka-desk-1/Day",
+      "achieved": 398.3877572711111,
+      "required": 600.0,
+      "unit": "lx",
+      "message": "Eavg 398 lx vs cap 600 lx (1.5 x card 400 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/ka-desk-1/Day",
+      "achieved": 0.282760467870855,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 398 Emin 113 Emax 882 lx; U0 0.28; max:avg 2.22; avg:min 3.54",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/ka-desk-2/Day",
+      "achieved": 401.27279653333335,
+      "required": 400,
+      "unit": "lx",
+      "message": "Eavg 401 lx vs card 400 lx; allowed 360-440 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/ka-desk-2/Day",
+      "achieved": 401.27279653333335,
+      "required": 600.0,
+      "unit": "lx",
+      "message": "Eavg 401 lx vs cap 600 lx (1.5 x card 400 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/ka-desk-2/Day",
+      "achieved": 0.30025405180934445,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 401 Emin 120 Emax 884 lx; U0 0.30; max:avg 2.20; avg:min 3.33",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-kids-a/Day",
+      "achieved": 181.87555961542859,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 182 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-kids-a/Day",
+      "achieved": 0.1623747342768027,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=56 Em 182 Emin 30 Emax 945 lx; U0 0.16; max:avg 5.19; avg:min 6.16",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/kb-desk/Day",
+      "achieved": 400.10398938222227,
+      "required": 400,
+      "unit": "lx",
+      "message": "Eavg 400 lx vs card 400 lx; allowed 360-440 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/kb-desk/Day",
+      "achieved": 400.10398938222227,
+      "required": 600.0,
+      "unit": "lx",
+      "message": "Eavg 400 lx vs cap 600 lx (1.5 x card 400 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/kb-desk/Day",
+      "achieved": 0.2414920978648287,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 400 Emin 97 Emax 950 lx; U0 0.24; max:avg 2.37; avg:min 4.14",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-kids-b/Day",
+      "achieved": 159.21986690257145,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 159 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-kids-b/Day",
+      "achieved": 0.14787516921118435,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=56 Em 159 Emin 24 Emax 1029 lx; U0 0.15; max:avg 6.46; avg:min 6.76",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/fb-basin/Day",
+      "achieved": 299.99979171,
+      "required": 300,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs card 300 lx; allowed 270-330 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/fb-basin/Day",
+      "achieved": 299.99979171,
+      "required": 450.0,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs cap 450 lx (1.5 x card 300 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/fb-basin/Day",
+      "achieved": 0.9561771836071521,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=16 Em 300 Emin 287 Emax 309 lx; U0 0.96; max:avg 1.03; avg:min 1.05",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-family-bath/Day",
+      "achieved": 306.5020877992381,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 307 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-family-bath/Day",
+      "achieved": 0.6061179272673843,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=42 Em 307 Emin 186 Emax 430 lx; U0 0.61; max:avg 1.40; avg:min 1.65",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pillow-1/Reading",
+      "achieved": 199.95285072800002,
+      "required": 200,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs card 200 lx; allowed 180-220 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pillow-1/Reading",
+      "achieved": 199.95285072800002,
+      "required": 300.0,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs cap 300 lx (1.5 x card 200 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pillow-1/Reading",
+      "achieved": 0.29801840595441675,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=20 Em 200 Emin 60 Emax 371 lx; U0 0.30; max:avg 1.85; avg:min 3.36",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pillow-2/Reading",
+      "achieved": 199.917019224,
+      "required": 200,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs card 200 lx; allowed 180-220 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pillow-2/Reading",
+      "achieved": 199.917019224,
+      "required": 300.0,
+      "unit": "lx",
+      "message": "Eavg 200 lx vs cap 300 lx (1.5 x card 200 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pillow-2/Reading",
+      "achieved": 0.29799553470357115,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=20 Em 200 Emin 60 Emax 371 lx; U0 0.30; max:avg 1.85; avg:min 3.36",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-parents-bed/Day",
+      "achieved": 143.45067283581602,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 143 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-parents-bed/Day",
+      "achieved": 0.019514669402798803,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=48 Em 143 Emin 3 Emax 470 lx; U0 0.02; max:avg 3.28; avg:min 51.24",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-parents-dressing/Day",
+      "achieved": 356.0010032822857,
+      "required": 100,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 356 lx vs card 100 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-parents-dressing/Day",
+      "achieved": 0.640184736949421,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=35 Em 356 Emin 228 Emax 477 lx; U0 0.64; max:avg 1.34; avg:min 1.56",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pe-basin/Day",
+      "achieved": 299.8607352736,
+      "required": 300,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs card 300 lx; allowed 270-330 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pe-basin/Day",
+      "achieved": 299.8607352736,
+      "required": 450.0,
+      "unit": "lx",
+      "message": "Eavg 300 lx vs cap 450 lx (1.5 x card 300 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/pe-basin/Day",
+      "achieved": 0.8525595536565989,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=20 Em 300 Emin 256 Emax 322 lx; U0 0.85; max:avg 1.07; avg:min 1.17",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-parents-ensuite/Day",
+      "achieved": 63.928882070285724,
+      "required": 50,
+      "unit": "lx",
+      "message": "minimum-gauged task: achieved 64 lx vs card 50 lx minimum",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/room-parents-ensuite/Day",
+      "achieved": 0.43185975430708184,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=42 Em 64 Emin 28 Emax 155 lx; U0 0.43; max:avg 2.43; avg:min 2.32",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA6",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/one-CCT-per-layer-per-room",
+      "achieved": 0.0,
+      "required": 0.0,
+      "unit": "rooms/layers with >1 CCT",
+      "message": "every (room, layer) has a single CCT: 2700 K interior, 2200 K night",
+      "source_ids": [
+        "L6-POLICY-LA6-2700K"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA6",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/spec-vs-product-CCT",
+      "achieved": 0.0,
+      "required": 0.0,
+      "unit": "kinds",
+      "message": "kind spec CCT equals the bound product CCT for every product-bound kind",
+      "source_ids": [
+        "L6-POLICY-LA6-2700K"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/lounge",
+      "achieved": 5.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, ambient, decorative, night, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/kitchen",
+      "achieved": 4.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: ambient, decorative, night, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/dining",
+      "achieved": 2.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/living",
+      "achieved": 4.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, ambient, decorative, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/family-corner",
+      "achieved": 3.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, ambient, night",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/cinema",
+      "achieved": 4.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, ambient, night, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/study-game",
+      "achieved": 2.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: ambient, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/kids-a",
+      "achieved": 3.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: ambient, night, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/kids-b",
+      "achieved": 3.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: ambient, night, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/parents-bed",
+      "achieved": 4.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, ambient, decorative, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/parents-dressing",
+      "achieved": 2.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: ambient, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/parents-ensuite",
+      "achieved": 3.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, night, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/family-bath",
+      "achieved": 3.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: ambient, night, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/guest-wc",
+      "achieved": 2.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: ambient, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/dirty-kitchen",
+      "achieved": 2.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: ambient, task",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/stair",
+      "achieved": 4.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, ambient, decorative, night",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA8",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/layers/corridor",
+      "achieved": 3.0,
+      "required": 2.0,
+      "unit": "independently switched layers",
+      "message": "layers: accent, ambient, night",
+      "source_ids": [
+        "L6-POLICY-LA8-layers"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA9",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/ceiling-setting-out",
+      "achieved": 100.0,
+      "required": 100.0,
+      "unit": "% on a declared axis",
+      "message": "73/73 recessed fittings on a room axis, furniture axis/edge or a mirrored row about one (tolerance 10 mm)",
+      "source_ids": [
+        "L6-POLICY-LA9-axis-tolerance-10mm"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA13",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/stair",
+      "achieved": 1.1335620511285833,
+      "required": 1.0,
+      "unit": "lx",
+      "message": "min centre-line illuminance 1.13 lx at (6.72, -27.95) over 31 points vs required 1 lx (direct only)",
+      "source_ids": [
+        "EN1838-1lx-escape-route"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA13",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/basement-route-lounge-to-stair-foot",
+      "achieved": 1.730571251178459,
+      "required": 1.0,
+      "unit": "lx",
+      "message": "min centre-line illuminance 1.73 lx at (4.42, -25.56) over 36 points vs required 1 lx (direct only)",
+      "source_ids": [
+        "EN1838-1lx-escape-route"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA13",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/basement-route-dining-to-stair-foot",
+      "achieved": 5.612104023934939,
+      "required": 1.0,
+      "unit": "lx",
+      "message": "min centre-line illuminance 5.61 lx at (11.20, -27.57) over 34 points vs required 1 lx (direct only)",
+      "source_ids": [
+        "EN1838-1lx-escape-route"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/scenes/B-open",
+      "achieved": 5.0,
+      "required": 5.0,
+      "unit": "scenes",
+      "message": "scenes defined: ['Cook', 'Day', 'Dinner', 'Evening', 'Film', 'Night', 'Reading']; missing: none ('Off' is every zone at 0)",
+      "source_ids": [
+        "L6-POLICY-LA10-scenes"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/scenes/B-cinema",
+      "achieved": 4.0,
+      "required": 4.0,
+      "unit": "scenes",
+      "message": "scenes defined: ['Day', 'Evening', 'Film', 'Night']; missing: none ('Off' is every zone at 0)",
+      "source_ids": [
+        "L6-POLICY-LA10-scenes"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/scenes/GF-parents-bed",
+      "achieved": 3.0,
+      "required": 3.0,
+      "unit": "scenes",
+      "message": "scenes defined: ['Day', 'Evening', 'Night', 'Reading']; missing: none ('Off' is every zone at 0)",
+      "source_ids": [
+        "L6-POLICY-LA10-scenes"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/scenes/GF-kids-a",
+      "achieved": 3.0,
+      "required": 3.0,
+      "unit": "scenes",
+      "message": "scenes defined: ['Day', 'Evening', 'Night']; missing: none ('Off' is every zone at 0)",
+      "source_ids": [
+        "L6-POLICY-LA10-scenes"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/scenes/GF-kids-b",
+      "achieved": 3.0,
+      "required": 3.0,
+      "unit": "scenes",
+      "message": "scenes defined: ['Day', 'Evening', 'Night']; missing: none ('Off' is every zone at 0)",
+      "source_ids": [
+        "L6-POLICY-LA10-scenes"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/scenes/GF-circulation",
+      "achieved": 3.0,
+      "required": 3.0,
+      "unit": "scenes",
+      "message": "scenes defined: ['Day', 'Evening', 'Night']; missing: none ('Off' is every zone at 0)",
+      "source_ids": [
+        "L6-POLICY-LA10-scenes"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "not_evaluated",
+      "subject": "villa/two-way-switching",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "two-way switching at the stair and rooms with 2 doors is a device layout (L7 electrical lane); not evaluated here. Scene CSV export for a DALI/Lutron import is not implemented.",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/night-path-level",
+      "achieved": 4.1970837837950254,
+      "required": 5.0,
+      "unit": "lx",
+      "message": "Night scene: max route centre-line illuminance 4.20 lx at 10 % of the night-layer output vs <= 5 lx",
+      "source_ids": [
+        "L6-POLICY-LA10-scenes"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/lounge-sofa-to-TV",
+      "achieved": 1124.269125077652,
+      "required": 3000.0,
+      "unit": "cd/m2",
+      "message": "max source luminance within 45 deg of the sightline 1124 cd/m2 (DL-lounge-02) vs cap 3000 cd/m2",
+      "source_ids": [
+        "L6-POLICY-LA4-luminance-3000"
+      ],
+      "element_ids": [
+        "DL-lounge-02"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/living-sofa-to-garden",
+      "achieved": 970.8176851090951,
+      "required": 3000.0,
+      "unit": "cd/m2",
+      "message": "max source luminance within 45 deg of the sightline 971 cd/m2 (DL-living-04) vs cap 3000 cd/m2",
+      "source_ids": [
+        "L6-POLICY-LA4-luminance-3000"
+      ],
+      "element_ids": [
+        "DL-living-04"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/dining-seat-along-table",
+      "achieved": 575.4357749167709,
+      "required": 3000.0,
+      "unit": "cd/m2",
+      "message": "max source luminance within 45 deg of the sightline 575 cd/m2 (DL-living-03) vs cap 3000 cd/m2",
+      "source_ids": [
+        "L6-POLICY-LA4-luminance-3000"
+      ],
+      "element_ids": [
+        "DL-living-03"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/dining-seat-to-sideboard",
+      "achieved": 0.0,
+      "required": 3000.0,
+      "unit": "cd/m2",
+      "message": "max source luminance within 45 deg of the sightline 0 cd/m2 (none in view) vs cap 3000 cd/m2",
+      "source_ids": [
+        "L6-POLICY-LA4-luminance-3000"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/parents-bed-lying",
+      "achieved": 2651.791307134066,
+      "required": 3000.0,
+      "unit": "cd/m2",
+      "message": "max source luminance within 45 deg of the sightline 2652 cd/m2 (DL-parents-bed-05) vs cap 3000 cd/m2",
+      "source_ids": [
+        "L6-POLICY-LA4-luminance-3000"
+      ],
+      "element_ids": [
+        "DL-parents-bed-05"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "LA12",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/exterior/I toward neighbours (pre-curfew)",
+      "achieved": 0.0,
+      "required": 10000.0,
+      "unit": "cd",
+      "message": "max intensity toward neighbour points 0 cd (n/a) vs E3 10000 cd",
+      "source_ids": [
+        "SLL-T3.2-E3"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA12",
+      "lane": "L6",
+      "status": "fail",
+      "subject": "villa/exterior/ULR",
+      "achieved": 1.0,
+      "required": 0.15,
+      "unit": "fraction",
+      "message": "worst upward light ratio 1.000 (garden-uplight-north-back-00) vs E3 0.15 (installed attitude)",
+      "source_ids": [
+        "SLL-T3.2-E3"
+      ],
+      "element_ids": [
+        "garden-uplight-north-back-00"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "LA12",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/exterior/I toward neighbours (post-curfew)",
+      "achieved": 0.0,
+      "required": 1000.0,
+      "unit": "cd",
+      "message": "max intensity toward neighbour points 0 cd (n/a) vs E3 1000 cd",
+      "source_ids": [
+        "SLL-T3.2-E3"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA12",
+      "lane": "L6",
+      "status": "not_evaluated",
+      "subject": "villa/exterior/boundary-Ev",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "boundary vertical illuminance and facade luminance need an exterior Radiance grid: not run",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-BAR-ALCOVE-DAYBED-READING",
+      "achieved": 0.337,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.337 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-CINEMA-TASK",
+      "achieved": 0.709,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.709 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-DINING-TABLE-PENDANT",
+      "achieved": 0.62,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.620 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-DIRTY-KITCHEN-RUN-TASK",
+      "achieved": 0.742,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.742 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-GUEST-WC-BASIN-TASK",
+      "achieved": 0.416,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.416 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-KITCHEN-ISLAND-COOK",
+      "achieved": 0.37,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.370 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-KITCHEN-ISLAND-PENDANTS",
+      "achieved": 0.796,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.796 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-KITCHEN-ISLAND-PREP",
+      "achieved": 0.777,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.777 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-KITCHEN-RUN-TASK",
+      "achieved": 0.506,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.506 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-B-LOUNGE-ARMCHAIR-READING",
+      "achieved": 0.375,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.375 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-GF-FAMILY-BATH-BASIN-TASK",
+      "achieved": 0.15,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.150 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-GF-FAMILY-BATH-TASK",
+      "achieved": 0.8,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.800 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-GF-KIDS-A-TASK",
+      "achieved": 0.767,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.767 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-GF-KIDS-B-TASK",
+      "achieved": 0.64,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.640 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-GF-PARENTS-BED-BED-READING",
+      "achieved": 0.641,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.641 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-GF-PARENTS-ENSUITE-BASIN-TASK",
+      "achieved": 0.372,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.372 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-GF-STUDY-GAME-DESK-ADULT",
+      "achieved": 0.728,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.728 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA10",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "villa/V12-driver/Z-GF-STUDY-GAME-DESK-TASK",
+      "achieved": 0.718,
+      "required": 0.8,
+      "unit": "x max output",
+      "message": "zone driver 0.718 of maximum output vs <= 0.80 (V12 headroom for commissioning)",
+      "source_ids": [
+        "L6-POLICY-V12-headroom"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "not_evaluated",
+      "subject": "villa/study-UGR",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "UGR (study, limit 19) needs a vertical-eye Radiance sensor for Lb and the CIE 190 worked example is not demonstrated (docs/lanes/L6-lighting-engine.md); luminance checks above run.",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
     }
   ]
 }

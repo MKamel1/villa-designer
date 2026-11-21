@@ -116,3 +116,13 @@ def test_zones_file_matches_the_fixtures(villa):
     assert len(ids) == len(set(ids)) == len(villa.fixtures)
     assert {z.layer for z in zones} <= {"ambient", "task", "accent", "decorative", "exterior", "emergency"}
     assert all(z.watts > 0 and z.dimming in ("dali2", "phase_cut", "switched", "0_10v") for z in zones)
+
+
+def test_v12_driver_cap():
+    from archpipe.lightcalc.villa_checks import check_v12
+    import json
+    from pathlib import Path
+    assert [r.status for r in check_v12({"a": 0.80, "b": 0.5})] == ["pass", "pass"]
+    assert [r.status for r in check_v12({"a": 0.81})] == ["fail"]          # negative: over the cap
+    drivers = json.loads((Path(__file__).resolve().parents[2] / "knowledge/lighting/zone-drivers.json").read_text())
+    assert all(r.status == "pass" for r in check_v12(drivers))

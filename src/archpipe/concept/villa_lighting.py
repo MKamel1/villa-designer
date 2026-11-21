@@ -343,9 +343,14 @@ def design(lay=None):
     prep_x = [(spans[0][0] + spans[0][1]) / 2, spans[-1][0] + (spans[-1][1] - spans[-1][0]) / 3,
               spans[-1][0] + 2 * (spans[-1][1] - spans[-1][0]) / 3]
     icx = (isl[0] + isl[2]) / 2
-    for x in (icx - (isl[2] - isl[0]) / 3, icx, icx + (isl[2] - isl[0]) / 3):          # the globes' axes, mirrored
-        add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line, on the opal globes' axes",
-            card="ies-res-kitchen-prep-500", zone="island-prep:task")
+    # L6b iteration 4: the induction zone (300 lx) lies inside the prep strip (500 lx), so the middle downlight (over the hob)
+    # is its own zone and a third prep downlight is added at the far end, away from the hob (the three on one driver gave
+    # 351 lx at the hob and 371 lx on the prep strip)
+    third = (isl[2] - isl[0]) / 3
+    for x, zn, cd in ((icx - third, "island-prep", "ies-res-kitchen-prep-500"), (icx, "island-cook", "ies-res-kitchen-cooktop-300"),
+                      (icx + third, "island-prep", "ies-res-kitchen-prep-500"), (isl[2] - 0.15, "island-prep", "ies-res-kitchen-prep-500")):
+        add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line (the globes' axes, plus one at the far end); the middle "
+            "one is over the hob", card=cd, zone=zn + ":task")
     run = fp["k-run"]
     for x in ((run[0] + run[2]) / 2 - 0.45, (run[0] + run[2]) / 2 + 0.45):
         add("DL", "kitchen", x, run[3] - 0.65, why="650 mm from the wall face over the counter's front edge, 0.9 m pitch "
@@ -900,7 +905,7 @@ _NIGHT = {"*night": 0.1}
 SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
-        "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
+        "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "island-cook": 1.0, "run-task": 1.0},
         "Dinner": {"table-pendant": 0.405, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
         "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.3, "island-pendants": 0.4},
