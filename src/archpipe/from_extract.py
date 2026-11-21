@@ -38,7 +38,7 @@ from .safe_io import load_json
 
 from . import vocabulary as V
 from .catalogue import get as _cat_get
-from .model import (Furniture, Level, MaterialLayer, Opening, Project, Room,
+from .spec_model import (Furniture, Level, MaterialLayer, Opening, Project, Room,
                     SpecError, Wall, WallType)
 
 # Room-name fragments that imply an occupancy. Deliberately small: the

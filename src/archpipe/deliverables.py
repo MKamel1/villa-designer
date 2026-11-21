@@ -11,7 +11,7 @@ import io
 import math
 from pathlib import Path
 
-from . import model, rules, vocabulary as vocab
+from . import rules, spec_model as model, vocabulary as vocab
 from .safe_io import atomic_path, save_text
 
 # AECOM MEH 2026 p. 120 (Q3 2025, USD/m2 GIA): villas, low-high per city. Card: aecom-villa-rates-2025.

@@ -1,7 +1,7 @@
 """SAN-01 per UK AD G 4.8 / M4(1) and 5.6: positive and negative cases."""
 import unittest
 
-from archpipe import model, rules
+from archpipe import spec_model as model, rules
 
 
 def _p(rooms, entrance_on="L00"):

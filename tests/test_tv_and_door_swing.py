@@ -5,7 +5,7 @@ leaf's sweep) and check their own geometry before the rule runs (see docs/LEARNI
 import math
 import unittest
 
-from archpipe import catalogue, model, rules
+from archpipe import catalogue, spec_model as model, rules
 
 LV = (model.Level("L00", "L00", 0, 3000),)
 WT = (model.WallType("W", 100.0, (), False, ""),)

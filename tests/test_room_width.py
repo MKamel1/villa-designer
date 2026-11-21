@@ -1,7 +1,7 @@
 """DIM-01 by room type (NDSS via Metric Handbook 7th ed. p. 22-4): positive and negative cases."""
 import unittest
 
-from archpipe import model, rules
+from archpipe import spec_model as model, rules
 
 
 def _p(*rooms):

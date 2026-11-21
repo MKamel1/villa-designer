@@ -19,7 +19,7 @@ from shapely.geometry import Polygon
 from shapely.ops import unary_union
 
 from . import layers as std
-from .model import Opening, Project, Wall
+from .spec_model import Opening, Project, Wall
 
 # How far an opening cut extends past each wall face, so the boolean
 # subtraction always breaks through rather than leaving a hairline.

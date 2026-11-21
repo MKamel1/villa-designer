@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from archpipe.execution_context import ContextError, project_context  # noqa: E402
-from archpipe import deliverables as D, model, rules
+from archpipe import deliverables as D, spec_model as model, rules
 from archpipe.safe_io import save_json, save_text
 
 MISSING = [

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import yaml
 
-from archpipe import model, rules
+from archpipe import spec_model as model, rules
 from archpipe.concept import critic, generator as G, layout as L
 
 
