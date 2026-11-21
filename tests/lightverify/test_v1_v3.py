@@ -129,3 +129,11 @@ def test_load_scene_applies_scale_xyz_of_fitted_models(tmp_path):
 def test_load_scene_ignores_scale_xyz_when_not_fitted(tmp_path):      # negative: the renderer uses the scalar then
     ts = _cube_scene(tmp_path, {"scale_xyz": [1.8, 0.7, 0.75], "scale": 1.0})
     assert np.allclose(ts.T.reshape(-1, 3).max(axis=0) - ts.T.reshape(-1, 3).min(axis=0), [1, 1, 1])
+
+
+def test_plane_points_apply_the_engine_exclusions():
+    from types import SimpleNamespace as NS
+    poly = ((0, 0), (1, 0), (1, 1), (0, 1))
+    full = V3.plane_points(NS(polygon=poly, spacing=0.25, exclude=()))[0]
+    cut = V3.plane_points(NS(polygon=poly, spacing=0.25, exclude=((0.4, 0.0, 1.0, 0.6),)))[0]
+    assert len(full) == 16 and len(cut) == 12                      # same rule as roomcalc.sensors

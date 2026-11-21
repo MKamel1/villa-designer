@@ -8,11 +8,10 @@ def villa():
     return Villa()
 
 
-def test_names_the_known_exceptions(villa):
+def test_current_design_has_headroom_everywhere(villa):
     L = V12.run(villa)
-    bad = {r.subject for r in L.results if r.status == "fail"}
-    assert "fb-basin" in bad and "dirty-kitchen-run" in bad       # drivers 1.21 and 0.95 in zone-drivers.json
-    assert "dining-table" not in bad
+    assert not [r.subject for r in L.results if r.status == "fail"]       # worst zone 0.772 after L6b
+    assert any(r.subject == "dining-table" and r.status == "pass" for r in L.results)
 
 
 def test_quiet_when_every_driver_is_low(villa):

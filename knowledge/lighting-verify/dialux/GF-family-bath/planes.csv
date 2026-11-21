@@ -1,3 +1,3 @@
 id,room,z,target_lux,gauge,scene,polygon
-fb-basin,family-bath,0.91,300,average,Day,"[[9.327, -25.851], [9.677, -25.851], [9.677, -25.521], [9.327, -25.521]]"
+fb-basin,family-bath,0.85,300,average,Day,"[[9.277, -25.901], [9.727, -25.901], [9.727, -25.471], [9.277, -25.471]]"
 room-family-bath,family-bath,0.0,50,minimum,Day,"[[9.377, -26.221], [11.327, -26.221], [11.327, -23.891], [9.377, -23.891]]"

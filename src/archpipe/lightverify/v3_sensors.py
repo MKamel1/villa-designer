@@ -73,6 +73,8 @@ def point_findings(ts, x, y, z):
 def plane_points(pl):
     from ..lightcalc.geometry import grid_in_polygon
     pts, dx, dy = grid_in_polygon(list(pl.polygon), spacing=pl.spacing, border=0.0)
+    # the engine drops sensors inside `exclude` footprints (roomcalc.sensors); test the points it actually sends to Radiance
+    pts = [(x, y) for x, y in pts if not any(r[0] <= x <= r[2] and r[1] <= y <= r[3] for r in pl.exclude)]
     return pts, dx, dy
 
 

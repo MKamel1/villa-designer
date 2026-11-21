@@ -15,11 +15,11 @@ def villa():
     return Villa()
 
 
-def _scaled(tmp_path, cluster, k_ab6=1.0, k_ab12=1.0, k_all=1.0):
+def _scaled(tmp_path, cluster, k_base=1.0, k_extra=1.0, k_all=1.0):   # base = params.ab (12), extra = the doubled run (24)
     d = json.loads((RAD / (cluster + ".json")).read_text())
     for z in d["zones"].values():
         for ab in z:
-            z[ab] = [v * k_all * (k_ab12 if ab == "12" else k_ab6) for v in z[ab]]
+            z[ab] = [v * k_all * (k_base if ab == str(d["params"]["ab"]) else k_extra) for v in z[ab]]
     (tmp_path / (cluster + ".json")).write_text(json.dumps(d))
     return tmp_path
 
@@ -62,17 +62,21 @@ def test_v6_catches_doubled_output(villa, tmp_path):
     assert [r for r in L.results if r.subject == "B-guest-wc"][0].status == "fail"
 
 
-def test_v6_finds_the_parents_bedroom_volume_bug(villa):
+def test_v6_parents_bedroom_now_agrees_and_a_wrong_volume_would_not(villa, tmp_path):
+    """The 0.68 m2 volume bug is fixed (L6b): the real results agree (+6 %); results scaled to what the entry-sized
+    volume produced (143 vs 246 lx) are still caught."""
     row = next(r for r in V6.run(villa, RAD).results if r.subject == "GF-parents-bed")
-    assert row.status == "fail" and row.achieved < 0.2 * row.required
+    assert row.status == "pass"
+    bad = next(r for r in V6.run(villa, _scaled(tmp_path, "GF-parents-bed", k_all=0.15)).results if r.subject == "GF-parents-bed")
+    assert bad.status == "fail"
 
 
 def test_v7_flags_unconverged_and_stays_quiet_when_converged(villa, tmp_path):
-    bad = V7.run(villa, _scaled(tmp_path, "B-guest-wc", k_ab12=1.10), with_grid=False)   # ab12 10 % above ab6
+    bad = V7.run(villa, _scaled(tmp_path, "B-guest-wc", k_extra=1.10), with_grid=False)   # the ab 24 run 10 % above ab 12
     assert any(r.status == "fail" for r in bad.results)
     d = json.loads((RAD / "B-guest-wc.json").read_text())
     for z in d["zones"].values():
-        z["12"] = list(z["6"])                       # a run whose doubled-bounce result equals the first
+        z["24"] = list(z["12"])                      # a run whose doubled-bounce result equals the first
     (tmp_path / "B-guest-wc.json").write_text(json.dumps(d))
     good = V7.run(villa, tmp_path, with_grid=False)
     assert all(r.status == "pass" for r in good.results)

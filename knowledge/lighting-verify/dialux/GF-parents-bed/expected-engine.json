@@ -1,24 +1,24 @@
 {
  "scene": "full: every functional zone at 100 % of its luminaire flux_scale, night zones off",
  "maintenance_factor": 0.8,
- "radiance_ab": 6,
+ "radiance_ab": 12,
  "planes": {
   "pillow-1": {
-   "Em": 202.6,
-   "Emin": 60.8,
-   "U0": 0.3,
+   "Em": 302.4,
+   "Emin": 173.6,
+   "U0": 0.574,
    "n": 20
   },
   "pillow-2": {
-   "Em": 200.8,
-   "Emin": 60.4,
-   "U0": 0.301,
+   "Em": 286.2,
+   "Emin": 157.1,
+   "U0": 0.549,
    "n": 20
   },
   "room-parents-bed": {
-   "Em": 143.5,
-   "Emin": 2.8,
-   "U0": 0.02,
+   "Em": 247.8,
+   "Emin": 85.6,
+   "U0": 0.345,
    "n": 48
   }
  }

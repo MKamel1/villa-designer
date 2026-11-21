@@ -1,19 +1,19 @@
 {
  "scene": "full: every functional zone at 100 % of its luminaire flux_scale, night zones off",
  "maintenance_factor": 0.8,
- "radiance_ab": 6,
+ "radiance_ab": 12,
  "planes": {
   "fb-basin": {
-   "Em": 297.2,
-   "Emin": 293.8,
-   "U0": 0.988,
-   "n": 16
+   "Em": 300.4,
+   "Emin": 217.5,
+   "U0": 0.724,
+   "n": 66
   },
   "room-family-bath": {
-   "Em": 320.6,
-   "Emin": 180.3,
-   "U0": 0.562,
-   "n": 42
+   "Em": 305.1,
+   "Emin": 192.1,
+   "U0": 0.63,
+   "n": 32
   }
  }
 }

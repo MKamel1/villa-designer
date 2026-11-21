@@ -52,3 +52,57 @@ frozen in `knowledge/lighting-verify/radiance/`.
 - Radiance run with the merged L6b design as the lane baseline; results frozen into the repo so the command is reproducible without a re-run.
 - Hand-calc UF derived, not looked up (no table held). Thresholds are policy SourceCards (`sources.py`).
 - V9 not built (declined by the client). `lane_guard.py LV` lists the files merged from lane/L6b (29, all L6b-owned) as outside LV's ownership, as expected for this merge.
+
+## Re-verification (2026-11-21): L6b after-state, ab 12 (+ ab 24), LV scene loader fixed
+
+Run: `python -m archpipe.lightverify --design D1 --scene /tmp/RV1-scene/scene.json` -> 286 pass / 4 fail / 64 not evaluated (was 252 / 37 / 61).
+Scene geometry: the same frozen RV1 scene L6b used (`/tmp/RV1-scene/scene.json`); the merged design's scene still does not build (lane RA).
+Radiance: my own full re-run of the merged L6b design (`villa_run --tag lv2`, ARCHPIPE_L6_LOCAL=1, ab 12 and ab 24, all 13 clusters), frozen in
+`knowledge/lighting-verify/radiance/`. Data-sheet inputs for V10: none arrived (`~/archpipe/shared/luminaires-inbox/` does not exist; no `*.points.json` on origin/lane/LP).
+
+### My own bug (loader)
+`scene_geom.load_scene` ignored `scale_xyz` on fitted models (rule now = renderer's `import_models`: `scale_xyz` when `scaling` or `furniture_fitting`, else scalar `scale`).
+Old loader: study desk 0.45 x 1.1 x 0.72 m, desk chair 0.78 x 2.01 x 1.32 m. Fixed: desk 0.70 x 1.80 x 0.75, chair 0.45 x 1.01 x 0.91. Tests: `test_load_scene_applies_scale_xyz_of_fitted_models`
+(fails on the old loader, verified by stashing the fix) and its negative. Artefacts of that bug: the six "desk plane 28 mm above host" findings (now 2 mm) and the chair hits on
+cinema-desk / study-adult-desk. Real, now fixed by L6b: sink, basins, rails, shower/bath, pantry, hob, bowl.
+Second correction: V3 tested every grid point, while the engine drops points inside `exclude` footprints; `v3_sensors.plane_points` now tests the points actually sent to Radiance
+(`test_plane_points_apply_the_engine_exclusions`). Result: 39 of 39 planes pass (0 points inside/under any object; hosted planes 0-4 mm from their host).
+
+### Per layer
+| layer | result |
+|---|---|
+| V1 | 20 of 20 kinds pass |
+| V2 | 92 pass, 0 fail, 57 n/e: the L2 snapshot (`d1-elements.json`) still predates the L6b redesign (30 engine-only, 27 moved fixtures). Bedroom volume now passes. |
+| V3 | 39 / 39 |
+| V4 | 26 / 26 (unchanged; engine not touched) |
+| V5 | 14 / 15 clusters. Radiance vs analytic direct within 0.5 % everywhere; Cycles direct within 2.2 % except the parents' bedroom -3.6 % (bar 3 %; Radiance = analytic there, Cycles total vs Radiance -1.8 %). Cycles vs Radiance total within 4.1 % (bar 10 %). The old circulation failure is gone (now +0.0 % direct). |
+| V6 | 12 / 13. Parents' bedroom -89 % -> +6 %. Parents' dressing -39 % remains a flagged miss (see below). |
+| V7 | ab 12 -> 24: all 39 planes within 3 % (worst pillow-2 2.39 %, pillow-1 0.68 %, parents-bed room 0.28 %; all others < 0.25 %). Direct-grid halving fails for room-cinema (+6.35 %, 0.63 m grid) and daybed (-3.07 %, 0.12 m grid): coarse-grid sampling of direct light, not a bounce issue. |
+| V8 | 9 / 9 |
+| V10 | 17 pass, 4 n/e (published data-sheet cone points not obtainable) |
+| V11 | package regenerated for the current design (all three spaces, bedroom now with the real volume); still not run in DIALux (3 n/e) |
+| V12 | 20 / 20; worst zone 0.772 (island pendants, `Z-B-KITCHEN-ISLAND-PENDANTS` 77 % in Day). Previous 5 exceptions gone. |
+
+### L6b's claims, checked independently
+* Bedroom polygon: 11.706 m2 vs model rooms 11.656 m2 (+0.43 %, the 0.05 m2 bridged wall gap). The other 12 clusters match the model: 11 exactly, circulation +0.37 %. Confirmed.
+* ab 12 -> 24: my own run of all 39 planes (not just 3), max 2.39 % (pillow-2; L6b measured 0.71 % on that plane: Radiance sampling noise between runs; still < 3 % but the least margin). Confirmed.
+* Sensors within 50 mm of objects: 0 of 39 planes, tested against the independent triangle scene with the engine's actual points. Confirmed.
+* Task planes on their surfaces: desks 2 mm, hob 4 mm, others 0 mm. Confirmed.
+* V12 worst 0.772: confirmed (recomputed by V12 from `zone-drivers.json`, zone watts and levels).
+* Parents' dressing: Radiance room mean 378 lx, Cycles total 364.5 vs Radiance 369.7 (-1.4 %), analytic direct agrees within 0.3 % / Cycles 1.5 %. So two engines with different code agree that the room is ~370-380 lx; L6b's radiosity (377) is a third. The lumen-method 615 lx is a poor estimator here (room index 0.43, 79 % of first-incidence flux on walls). I accept the explanation as supported by independent engines; the row stays "unverified" because V6 cannot pass (a documented, explained miss, not argued away).
+
+### Rows: verified vs unverified (39 room-plane rows; `LV-report.md` has the table)
+Verified: 8 (kids-a x3, kids-b x2, kitchen-island, pantry, store-ramp). Unverified: 31:
+* 22 rows: V2 only (stale L2 snapshot; every other layer passes). Fix = regenerate `src/archpipe/model/data/d1-elements.json` (lane L2/lead); LV cannot do it.
+* parents-bed x3 (pillow-1, pillow-2, room): V2 n/e plus V5 Cycles direct -3.6 % (bar 3 %).
+* room-parents-dressing: V2 n/e plus the explained V6 miss (above).
+* dining-table, homework-end: V6 n/e (no lumen-method estimate for an open-plan sub-plane); daybed: V6 n/e plus V7 direct-grid -3.07 %.
+* cinema-desk is clean but room-cinema (+6.35 %) and the cinema row sharing its cluster fail V7 grid only: 2 rows.
+Nothing is verified for V11 (DIALux not run) or V9 (declined); V10 data-sheet points absent.
+
+### Open
+1. Regenerate the L2 model snapshot (frees ~24 rows).
+2. Parents' bedroom: Cycles direct is 3.6 % under analytic/Radiance (0.6 point over the bar). Not diagnosed: possible Cycles sampling at the bridged outline or at the 0.7 m sensor height; no engine or design defect shown (analytic = Radiance).
+3. Room-plane grid for the cinema (0.63 m) is too coarse for a +/-3 % direct result; a finer grid or an accepted tolerance (engine/L6b decision).
+4. V10 data-sheet points and V11 DIALux run (client/laptop).
+5. Fresh scene build of the merged design (lane RA) to repeat V3 on the true scene.

@@ -58,10 +58,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "kind:DESK",
-      "achieved": 286.4,
-      "required": 285.71999999999997,
+      "achieved": 260.2,
+      "required": 259.6,
       "unit": "lm",
-      "message": "DESK: integrated 286.4 lm, generic (assumed, not a product)",
+      "message": "DESK: integrated 260.2 lm, generic (assumed, not a product)",
       "source_ids": [
         "LV-V1-LUMEN",
         "LV-V1-SPEC",
@@ -143,10 +143,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "kind:PEN-GLOBE",
-      "achieved": 950.9,
-      "required": 950.9,
+      "achieved": 940.4,
+      "required": 940.4,
       "unit": "lm",
-      "message": "PEN-GLOBE: integrated 950.9 lm, generic (assumed, not a product)",
+      "message": "PEN-GLOBE: integrated 940.4 lm, generic (assumed, not a product)",
       "source_ids": [
         "LV-V1-LUMEN",
         "LV-V1-SPEC",
@@ -160,10 +160,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "kind:PEN-LIN",
-      "achieved": 744.7,
-      "required": 745.2,
+      "achieved": 726.7,
+      "required": 727.2,
       "unit": "lm",
-      "message": "PEN-LIN: integrated 744.7 lm, generic (assumed, not a product)",
+      "message": "PEN-LIN: integrated 726.7 lm, generic (assumed, not a product)",
       "source_ids": [
         "LV-V1-LUMEN",
         "LV-V1-SPEC",
@@ -194,10 +194,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "kind:SCONCE",
-      "achieved": 540.6,
-      "required": 545.4,
+      "achieved": 195.9,
+      "required": 197.6,
       "unit": "lm",
-      "message": "SCONCE: integrated 540.6 lm, generic (assumed, not a product)",
+      "message": "SCONCE: integrated 195.9 lm, generic (assumed, not a product)",
       "source_ids": [
         "LV-V1-LUMEN",
         "LV-V1-SPEC",
@@ -245,10 +245,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "kind:SWING",
-      "achieved": 118.4,
-      "required": 118.0,
+      "achieved": 118.0,
+      "required": 117.6,
       "unit": "lm",
-      "message": "SWING: integrated 118.4 lm, generic (assumed, not a product)",
+      "message": "SWING: integrated 118.0 lm, generic (assumed, not a product)",
       "source_ids": [
         "LV-V1-LUMEN",
         "LV-V1-SPEC",
@@ -313,10 +313,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "kind:WALL-READ",
-      "achieved": 192.9,
-      "required": 192.3,
+      "achieved": 168.8,
+      "required": 168.3,
       "unit": "lm",
-      "message": "WALL-READ: integrated 192.9 lm, generic (assumed, not a product)",
+      "message": "WALL-READ: integrated 168.8 lm, generic (assumed, not a product)",
       "source_ids": [
         "LV-V1-LUMEN",
         "LV-V1-SPEC",
@@ -437,10 +437,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "volume:GF-circulation",
-      "achieved": 38.01,
+      "achieved": 38.15,
       "required": 38.01,
       "unit": "m2",
-      "message": "calculated volume 38.01 m2 holds its emitters and planes",
+      "message": "calculated volume 38.15 m2 holds its emitters and planes",
       "source_ids": [
         "LV-V2-POS"
       ],
@@ -495,12 +495,12 @@
     {
       "criterion": "LV2",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "volume:GF-parents-bed",
-      "achieved": 0.68,
+      "achieved": 11.71,
       "required": 11.66,
       "unit": "m2",
-      "message": "cluster polygon is 0.68 m2 but its member rooms' clear areas sum to 11.66 m2; 11 emitters outside the calculated volume (e.g. COVE-parents-bed-01#1); task planes outside the calculated volume: pillow-1, pillow-2, room-parents-bed",
+      "message": "calculated volume 11.71 m2 holds its emitters and planes",
       "source_ids": [
         "LV-V2-POS"
       ],
@@ -1035,6 +1035,21 @@
     {
       "criterion": "LV2",
       "lane": "LV",
+      "status": "not_evaluated",
+      "subject": "DL-kitchen-10",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "not in the model snapshot",
+      "source_ids": [
+        "LV-V2-POS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LV2",
+      "lane": "LV",
       "status": "pass",
       "subject": "DL-kitchen-island-01",
       "achieved": null,
@@ -1066,7 +1081,7 @@
       "criterion": "LV2",
       "lane": "LV",
       "status": "not_evaluated",
-      "subject": "TOE-kitchen-10",
+      "subject": "TOE-kitchen-11",
       "achieved": null,
       "required": null,
       "unit": "",
@@ -1635,12 +1650,12 @@
     {
       "criterion": "LV2",
       "lane": "LV",
-      "status": "pass",
+      "status": "not_evaluated",
       "subject": "DL-dirty-kitchen-05",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "inside its room, below its ceiling, datum consistent",
+      "message": "model snapshot differs by 2260 mm",
       "source_ids": [
         "LV-V2-POS"
       ],
@@ -1650,12 +1665,27 @@
     {
       "criterion": "LV2",
       "lane": "LV",
-      "status": "pass",
+      "status": "not_evaluated",
       "subject": "DL-dirty-kitchen-06",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "inside its room, below its ceiling, datum consistent",
+      "message": "model snapshot differs by 1562 mm",
+      "source_ids": [
+        "LV-V2-POS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LV2",
+      "lane": "LV",
+      "status": "not_evaluated",
+      "subject": "DL-dirty-kitchen-07",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "not in the model snapshot",
       "source_ids": [
         "LV-V2-POS"
       ],
@@ -1981,6 +2011,21 @@
       "criterion": "LV2",
       "lane": "LV",
       "status": "not_evaluated",
+      "subject": "DL-study-game-06",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "not in the model snapshot",
+      "source_ids": [
+        "LV-V2-POS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LV2",
+      "lane": "LV",
+      "status": "not_evaluated",
       "subject": "DL-family-bath-01",
       "achieved": null,
       "required": null,
@@ -2011,7 +2056,7 @@
       "criterion": "LV2",
       "lane": "LV",
       "status": "not_evaluated",
-      "subject": "SCONCE-family-bath-03",
+      "subject": "DL-family-bath-03",
       "achieved": null,
       "required": null,
       "unit": "",
@@ -2025,12 +2070,12 @@
     {
       "criterion": "LV2",
       "lane": "LV",
-      "status": "not_evaluated",
+      "status": "pass",
       "subject": "SCONCE-family-bath-04",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "model snapshot differs by 950 mm",
+      "message": "inside its room, below its ceiling, datum consistent",
       "source_ids": [
         "LV-V2-POS"
       ],
@@ -2040,12 +2085,27 @@
     {
       "criterion": "LV2",
       "lane": "LV",
-      "status": "not_evaluated",
-      "subject": "TOE-family-bath-05",
+      "status": "pass",
+      "subject": "SCONCE-family-bath-05",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "not in the model snapshot",
+      "message": "inside its room, below its ceiling, datum consistent",
+      "source_ids": [
+        "LV-V2-POS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LV2",
+      "lane": "LV",
+      "status": "pass",
+      "subject": "TOE-family-bath-06",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "inside its room, below its ceiling, datum consistent",
       "source_ids": [
         "LV-V2-POS"
       ],
@@ -2520,19 +2580,16 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "island-prep",
-      "achieved": 2.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "2 of 14 sensor points inside or under furn-k-island-4, island-bowl (first at x=13.02 y=-25.87)",
+      "message": "12 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "furn-k-island-4",
-        "island-bowl"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -2568,12 +2625,12 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "sink",
       "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "plane 38 mm above its host surface (limit 5 mm)",
+      "message": "9 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
@@ -2613,63 +2670,57 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "dirty-kitchen-run",
-      "achieved": 2.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "2 of 14 sensor points inside or under furn-dk-run-3 (first at x=13.79 y=-21.28)",
+      "message": "10 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "furn-dk-run-3"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "study-desk",
-      "achieved": 1.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "1 of 18 sensor points inside or under model-study-adult-desk#chair-1 (first at x=4.38 y=-24.68); plane 28 mm above its host surface (limit 5 mm)",
+      "message": "12 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "model-study-adult-desk#chair-1"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "study-adult-desk",
-      "achieved": 2.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "2 of 18 sensor points inside or under model-study-desk#chair-1 (first at x=4.74 y=-24.35); plane 28 mm above its host surface (limit 5 mm)",
+      "message": "8 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "model-study-desk#chair-1"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "ka-desk-1",
       "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "plane 28 mm above its host surface (limit 5 mm)",
+      "message": "8 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
@@ -2679,12 +2730,12 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "ka-desk-2",
       "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "plane 28 mm above its host surface (limit 5 mm)",
+      "message": "12 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
@@ -2694,12 +2745,12 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "kb-desk",
       "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "plane 28 mm above its host surface (limit 5 mm)",
+      "message": "8 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
@@ -2709,21 +2760,16 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "cinema-desk",
-      "achieved": 5.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "5 of 18 sensor points inside or under lamp-arm-DESK-cinema-07, lamp-arm-DESK-cinema-08, model-cinema-desk#chair-1, model-cinema-desk#chair-2 (first at x=4.79 y=-21.24); plane 28 mm above its host surface (limit 5 mm)",
+      "message": "8 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "lamp-arm-DESK-cinema-07",
-        "lamp-arm-DESK-cinema-08",
-        "model-cinema-desk#chair-1",
-        "model-cinema-desk#chair-2"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -2759,12 +2805,12 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "fb-basin",
       "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "plane 180 mm above its host surface (limit 5 mm)",
+      "message": "66 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
@@ -2774,12 +2820,12 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "pe-basin",
       "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "plane 180 mm above its host surface (limit 5 mm)",
+      "message": "70 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
@@ -2789,12 +2835,12 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "gwc-basin",
       "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "plane 180 mm above its host surface (limit 5 mm)",
+      "message": "70 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
@@ -2836,17 +2882,14 @@
       "lane": "LV",
       "status": "pass",
       "subject": "room-lounge",
-      "achieved": 2.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "54 points clear (2 of 54 blocked, within the room-plane allowance)",
+      "message": "52 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "lounge-plant",
-        "pillows-lounge"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -2884,18 +2927,14 @@
       "lane": "LV",
       "status": "pass",
       "subject": "room-kitchen",
-      "achieved": 3.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "48 points clear (3 of 48 blocked, within the room-plane allowance)",
+      "message": "45 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "appliance-downdraft-island",
-        "furn-k-island-4",
-        "island-bowl"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -2946,20 +2985,16 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-study-game",
-      "achieved": 4.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "4 of 36 (11 %) points inside or under furn-study-sofa-1, model-study-desk#chair-1, model-study-desk#chair-2",
+      "message": "31 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "furn-study-sofa-1",
-        "model-study-desk#chair-1",
-        "model-study-desk#chair-2"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -2967,17 +3002,14 @@
       "lane": "LV",
       "status": "pass",
       "subject": "room-kids-a",
-      "achieved": 1.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "56 points clear (1 of 56 blocked, within the room-plane allowance)",
+      "message": "56 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "model-ka-desk-1#chair-1",
-        "model-ka-desk-2#chair-1"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -2985,17 +3017,14 @@
       "lane": "LV",
       "status": "pass",
       "subject": "room-kids-b",
-      "achieved": 2.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "56 points clear (2 of 56 blocked, within the room-plane allowance)",
+      "message": "56 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "model-ka-desk-2#chair-1",
-        "model-kb-desk#chair-1"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -3016,19 +3045,16 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-parents-dressing",
-      "achieved": 6.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "6 of 35 (17 %) points inside or under furn-pd-hang-1-0, furn-pd-hang-2-0",
+      "message": "29 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "furn-pd-hang-1-0",
-        "furn-pd-hang-2-0"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -3051,35 +3077,29 @@
       "lane": "LV",
       "status": "pass",
       "subject": "room-dirty-kitchen",
-      "achieved": 4.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "48 points clear (4 of 48 blocked, within the room-plane allowance)",
+      "message": "44 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "furn-dk-appliance-bank-0",
-        "furn-dk-run-3"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-pantry",
-      "achieved": 4.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "4 of 14 (29 %) points inside or under furn-pantry-shelves-1-0, furn-pantry-shelves-2-0",
+      "message": "10 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "furn-pantry-shelves-1-0",
-        "furn-pantry-shelves-2-0"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -3100,35 +3120,31 @@
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-family-bath",
-      "achieved": 10.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "10 of 42 (24 %) points inside or under furn-fb-shower-0",
+      "message": "32 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "furn-fb-shower-0"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
       "criterion": "LV3",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-parents-ensuite",
-      "achieved": 10.0,
+      "achieved": 0.0,
       "required": 0.0,
       "unit": "blocked points",
-      "message": "10 of 42 (24 %) points inside or under furn-pe-bath-0",
+      "message": "32 points clear",
       "source_ids": [
         "LV-V3-CLEAR"
       ],
-      "element_ids": [
-        "furn-pe-bath-0"
-      ],
+      "element_ids": [],
       "gate": false
     },
     {
@@ -3567,10 +3583,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "open-plan living/dining",
-      "achieved": 263.1,
+      "achieved": 262.6,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 149.8 / Radiance 149.1 lx (+0.4 %); Cycles direct 147.3 lx (-1.7 % vs analytic); total: Radiance 263.1 / Cycles 266.7 lx (+1.4 %)",
+      "message": "direct: analytic 141.2 / Radiance 140.6 lx (+0.5 %); Cycles direct 138.4 lx (-2.0 % vs analytic); total: Radiance 262.6 / Cycles 259.1 lx (-1.3 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3582,10 +3598,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "kitchen",
-      "achieved": 406.4,
+      "achieved": 471.3,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 292.6 / Radiance 292.5 lx (+0.0 %); Cycles direct 288.4 lx (-1.5 % vs analytic); total: Radiance 406.4 / Cycles 405.4 lx (-0.2 %)",
+      "message": "direct: analytic 349.3 / Radiance 349.3 lx (+0.0 %); Cycles direct 346.4 lx (-0.8 % vs analytic); total: Radiance 471.3 / Cycles 464.7 lx (-1.4 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3597,10 +3613,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "guest WC (small wet room)",
-      "achieved": 234.2,
+      "achieved": 241.7,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 183.6 / Radiance 183.7 lx (-0.0 %); Cycles direct 183.3 lx (-0.2 % vs analytic); total: Radiance 234.2 / Cycles 235.0 lx (+0.4 %)",
+      "message": "direct: analytic 183.0 / Radiance 183.0 lx (-0.0 %); Cycles direct 182.3 lx (-0.4 % vs analytic); total: Radiance 241.7 / Cycles 236.8 lx (-2.0 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3612,10 +3628,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "family bathroom",
-      "achieved": 297.8,
+      "achieved": 290.1,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 166.2 / Radiance 166.2 lx (-0.0 %); Cycles direct 169.0 lx (+1.7 % vs analytic); total: Radiance 297.8 / Cycles 303.4 lx (+1.9 %)",
+      "message": "direct: analytic 194.6 / Radiance 194.6 lx (-0.0 %); Cycles direct 196.4 lx (+0.9 % vs analytic); total: Radiance 290.1 / Cycles 284.2 lx (-2.0 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3625,12 +3641,12 @@
     {
       "criterion": "LV5",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "stair / circulation",
-      "achieved": 226.5,
+      "achieved": 246.2,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 137.9 / Radiance 128.2 lx (+7.6 %); Cycles direct 127.4 lx (-7.6 % vs analytic); total: Radiance 226.5 / Cycles 226.9 lx (+0.2 %)",
+      "message": "direct: analytic 137.9 / Radiance 137.9 lx (+0.0 %); Cycles direct 137.0 lx (-0.6 % vs analytic); total: Radiance 246.2 / Cycles 236.1 lx (-4.1 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3642,10 +3658,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "study",
-      "achieved": 410.7,
+      "achieved": 348.2,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 334.8 / Radiance 334.8 lx (-0.0 %); Cycles direct 337.0 lx (+0.7 % vs analytic); total: Radiance 410.7 / Cycles 414.8 lx (+1.0 %)",
+      "message": "direct: analytic 266.5 / Radiance 266.5 lx (+0.0 %); Cycles direct 266.9 lx (+0.1 % vs analytic); total: Radiance 348.2 / Cycles 343.5 lx (-1.3 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3657,10 +3673,10 @@
       "lane": "LV",
       "status": "fail",
       "subject": "parents' bedroom",
-      "achieved": 130.5,
+      "achieved": 238.5,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 141.9 / Radiance 130.4 lx (+8.8 %); Cycles direct 126.5 lx (-10.9 % vs analytic); total: Radiance 130.5 / Cycles 126.5 lx (-3.0 %)",
+      "message": "direct: analytic 128.1 / Radiance 127.4 lx (+0.5 %); Cycles direct 123.6 lx (-3.6 % vs analytic); total: Radiance 238.5 / Cycles 234.1 lx (-1.8 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3672,10 +3688,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-pantry",
-      "achieved": 320.8,
+      "achieved": 359.8,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 223.6 / Radiance 223.6 lx (-0.0 %); Cycles direct 220.4 lx (-1.4 % vs analytic); total: Radiance 320.8 / Cycles 319.5 lx (-0.4 %)",
+      "message": "direct: analytic 250.8 / Radiance 250.8 lx (-0.0 %); Cycles direct 248.9 lx (-0.7 % vs analytic); total: Radiance 359.8 / Cycles 348.7 lx (-3.1 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3687,10 +3703,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-store",
-      "achieved": 165.8,
+      "achieved": 172.9,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 79.3 / Radiance 79.3 lx (-0.0 %); Cycles direct 78.8 lx (-0.6 % vs analytic); total: Radiance 165.8 / Cycles 166.8 lx (+0.6 %)",
+      "message": "direct: analytic 79.3 / Radiance 79.3 lx (-0.0 %); Cycles direct 78.8 lx (-0.6 % vs analytic); total: Radiance 172.9 / Cycles 166.8 lx (-3.5 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3702,10 +3718,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-cinema",
-      "achieved": 283.8,
+      "achieved": 288.1,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 214.9 / Radiance 214.9 lx (-0.0 %); Cycles direct 213.9 lx (-0.4 % vs analytic); total: Radiance 283.8 / Cycles 285.0 lx (+0.4 %)",
+      "message": "direct: analytic 216.7 / Radiance 216.7 lx (-0.0 %); Cycles direct 214.9 lx (-0.8 % vs analytic); total: Radiance 288.1 / Cycles 282.1 lx (-2.1 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3717,10 +3733,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-dirty-kitchen",
-      "achieved": 451.5,
+      "achieved": 431.9,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 380.7 / Radiance 380.8 lx (-0.0 %); Cycles direct 379.3 lx (-0.4 % vs analytic); total: Radiance 451.5 / Cycles 452.4 lx (+0.2 %)",
+      "message": "direct: analytic 358.2 / Radiance 358.3 lx (-0.0 %); Cycles direct 356.5 lx (-0.5 % vs analytic); total: Radiance 431.9 / Cycles 423.7 lx (-1.9 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3732,10 +3748,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-kids-a",
-      "achieved": 276.3,
+      "achieved": 329.3,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 233.8 / Radiance 233.8 lx (-0.0 %); Cycles direct 228.8 lx (-2.1 % vs analytic); total: Radiance 276.3 / Cycles 272.1 lx (-1.5 %)",
+      "message": "direct: analytic 287.4 / Radiance 287.5 lx (-0.0 %); Cycles direct 282.1 lx (-1.9 % vs analytic); total: Radiance 329.3 / Cycles 320.7 lx (-2.6 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3747,10 +3763,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-kids-b",
-      "achieved": 232.5,
+      "achieved": 272.3,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 197.8 / Radiance 197.8 lx (+0.0 %); Cycles direct 193.5 lx (-2.2 % vs analytic); total: Radiance 232.5 / Cycles 228.8 lx (-1.6 %)",
+      "message": "direct: analytic 238.3 / Radiance 238.4 lx (-0.0 %); Cycles direct 233.1 lx (-2.2 % vs analytic); total: Radiance 272.3 / Cycles 264.2 lx (-2.9 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3762,10 +3778,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-parents-dressing",
-      "achieved": 350.7,
+      "achieved": 369.7,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 235.1 / Radiance 236.0 lx (-0.4 %); Cycles direct 231.5 lx (-1.5 % vs analytic); total: Radiance 350.7 / Cycles 357.2 lx (+1.9 %)",
+      "message": "direct: analytic 240.3 / Radiance 241.1 lx (-0.3 %); Cycles direct 236.8 lx (-1.5 % vs analytic); total: Radiance 369.7 / Cycles 364.5 lx (-1.4 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3777,10 +3793,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-parents-ensuite",
-      "achieved": 190.9,
+      "achieved": 250.6,
       "required": null,
       "unit": "lx",
-      "message": "direct: analytic 133.2 / Radiance 133.2 lx (-0.0 %); Cycles direct 131.4 lx (-1.3 % vs analytic); total: Radiance 190.9 / Cycles 190.4 lx (-0.3 %)",
+      "message": "direct: analytic 175.2 / Radiance 175.2 lx (-0.0 %); Cycles direct 173.4 lx (-1.0 % vs analytic); total: Radiance 250.6 / Cycles 244.4 lx (-2.5 %)",
       "source_ids": [
         "LV-V5-ENG"
       ],
@@ -3792,10 +3808,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-cinema",
-      "achieved": 223.2,
-      "required": 193.5,
+      "achieved": 228.2,
+      "required": 192.6,
       "unit": "lx",
-      "message": "engine room-plane mean 223 lx vs lumen method 194 lx (+15 %): 4018 lm, first incidence floor 0.62 / wall 0.38 / ceiling 0.00, rho_bar 0.71, UF 0.99",
+      "message": "engine room-plane mean 228 lx vs lumen method 193 lx (+18 %): 4000 lm, first incidence floor 0.62 / wall 0.38 / ceiling 0.00, rho_bar 0.71, UF 0.99",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3808,10 +3824,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-dirty-kitchen",
-      "achieved": 388.8,
-      "required": 344.2,
+      "achieved": 409.9,
+      "required": 342.0,
       "unit": "lx",
-      "message": "engine room-plane mean 389 lx vs lumen method 344 lx (+13 %): 4249 lm, first incidence floor 0.83 / wall 0.17 / ceiling 0.00, rho_bar 0.72, UF 1.10",
+      "message": "engine room-plane mean 410 lx vs lumen method 342 lx (+20 %): 4161 lm, first incidence floor 0.85 / wall 0.15 / ceiling 0.00, rho_bar 0.72, UF 1.12",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3824,10 +3840,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-guest-wc",
-      "achieved": 184.8,
-      "required": 175.2,
+      "achieved": 196.7,
+      "required": 182.2,
       "unit": "lx",
-      "message": "engine room-plane mean 185 lx vs lumen method 175 lx (+5 %): 1136 lm, first incidence floor 0.73 / wall 0.25 / ceiling 0.02, rho_bar 0.74, UF 0.99",
+      "message": "engine room-plane mean 197 lx vs lumen method 182 lx (+8 %): 1188 lm, first incidence floor 0.72 / wall 0.26 / ceiling 0.02, rho_bar 0.74, UF 0.98",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3840,10 +3856,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-open",
-      "achieved": 282.7,
-      "required": 266.7,
+      "achieved": 297.3,
+      "required": 273.3,
       "unit": "lx",
-      "message": "engine room-plane mean 283 lx vs lumen method 267 lx (+6 %): 29879 lm, first incidence floor 0.58 / wall 0.19 / ceiling 0.24, rho_bar 0.68, UF 1.06",
+      "message": "engine room-plane mean 297 lx vs lumen method 273 lx (+9 %): 30473 lm, first incidence floor 0.59 / wall 0.18 / ceiling 0.23, rho_bar 0.68, UF 1.06",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3856,10 +3872,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-pantry",
-      "achieved": 331.0,
+      "achieved": 358.3,
       "required": 305.3,
       "unit": "lx",
-      "message": "engine room-plane mean 331 lx vs lumen method 305 lx (+8 %): 1465 lm, first incidence floor 0.51 / wall 0.49 / ceiling 0.00, rho_bar 0.75, UF 0.76",
+      "message": "engine room-plane mean 358 lx vs lumen method 305 lx (+17 %): 1465 lm, first incidence floor 0.51 / wall 0.49 / ceiling 0.00, rho_bar 0.75, UF 0.76",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3872,10 +3888,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "B-store",
-      "achieved": 172.6,
+      "achieved": 179.7,
       "required": 169.4,
       "unit": "lx",
-      "message": "engine room-plane mean 173 lx vs lumen method 169 lx (+2 %): 1889 lm, first incidence floor 0.41 / wall 0.59 / ceiling 0.00, rho_bar 0.71, UF 0.87",
+      "message": "engine room-plane mean 180 lx vs lumen method 169 lx (+6 %): 1889 lm, first incidence floor 0.41 / wall 0.59 / ceiling 0.00, rho_bar 0.71, UF 0.87",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3888,10 +3904,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-circulation",
-      "achieved": 260.6,
-      "required": 227.8,
+      "achieved": 262.5,
+      "required": 225.4,
       "unit": "lx",
-      "message": "engine room-plane mean 261 lx vs lumen method 228 lx (+14 %): 11720 lm, first incidence floor 0.56 / wall 0.40 / ceiling 0.05, rho_bar 0.72, UF 0.92",
+      "message": "engine room-plane mean 262 lx vs lumen method 225 lx (+16 %): 11421 lm, first incidence floor 0.55 / wall 0.40 / ceiling 0.05, rho_bar 0.71, UF 0.94",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3904,10 +3920,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-family-bath",
-      "achieved": 320.6,
-      "required": 312.3,
+      "achieved": 305.1,
+      "required": 285.1,
       "unit": "lx",
-      "message": "engine room-plane mean 321 lx vs lumen method 312 lx (+3 %): 2546 lm, first incidence floor 0.51 / wall 0.40 / ceiling 0.08, rho_bar 0.74, UF 0.83",
+      "message": "engine room-plane mean 305 lx vs lumen method 285 lx (+7 %): 2086 lm, first incidence floor 0.64 / wall 0.32 / ceiling 0.04, rho_bar 0.74, UF 0.93",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3920,10 +3936,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-kids-a",
-      "achieved": 181.9,
-      "required": 161.1,
+      "achieved": 181.8,
+      "required": 157.9,
       "unit": "lx",
-      "message": "engine room-plane mean 182 lx vs lumen method 161 lx (+13 %): 2157 lm, first incidence floor 0.83 / wall 0.17 / ceiling 0.00, rho_bar 0.72, UF 1.11",
+      "message": "engine room-plane mean 182 lx vs lumen method 158 lx (+15 %): 2106 lm, first incidence floor 0.83 / wall 0.17 / ceiling 0.00, rho_bar 0.72, UF 1.12",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3936,10 +3952,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-kids-b",
-      "achieved": 159.2,
-      "required": 141.0,
+      "achieved": 157.3,
+      "required": 137.1,
       "unit": "lx",
-      "message": "engine room-plane mean 159 lx vs lumen method 141 lx (+13 %): 1850 lm, first incidence floor 0.86 / wall 0.14 / ceiling 0.00, rho_bar 0.72, UF 1.14",
+      "message": "engine room-plane mean 157 lx vs lumen method 137 lx (+15 %): 1788 lm, first incidence floor 0.87 / wall 0.13 / ceiling 0.00, rho_bar 0.72, UF 1.14",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3950,12 +3966,12 @@
     {
       "criterion": "LV6",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "GF-parents-bed",
-      "achieved": 143.5,
-      "required": 1262.4,
+      "achieved": 247.8,
+      "required": 234.1,
       "unit": "lx",
-      "message": "engine room-plane mean 143 lx vs lumen method 1262 lx (-89 %): 4039 lm, first incidence floor 0.04 / wall 0.96 / ceiling 0.00, rho_bar 0.77, UF 0.27",
+      "message": "engine room-plane mean 248 lx vs lumen method 234 lx (+6 %): 3991 lm, first incidence floor 0.47 / wall 0.30 / ceiling 0.23, rho_bar 0.72, UF 0.86",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3968,10 +3984,10 @@
       "lane": "LV",
       "status": "fail",
       "subject": "GF-parents-dressing",
-      "achieved": 356.0,
+      "achieved": 378.4,
       "required": 615.5,
       "unit": "lx",
-      "message": "engine room-plane mean 356 lx vs lumen method 615 lx (-42 %): 7394 lm, first incidence floor 0.21 / wall 0.79 / ceiling 0.00, rho_bar 0.74, UF 0.62",
+      "message": "engine room-plane mean 378 lx vs lumen method 615 lx (-39 %): 7394 lm, first incidence floor 0.21 / wall 0.79 / ceiling 0.00, rho_bar 0.74, UF 0.62",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -3984,10 +4000,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "GF-parents-ensuite",
-      "achieved": 81.3,
-      "required": 88.6,
+      "achieved": 123.1,
+      "required": 110.6,
       "unit": "lx",
-      "message": "engine room-plane mean 81 lx vs lumen method 89 lx (-8 %): 862 lm, first incidence floor 0.27 / wall 0.70 / ceiling 0.02, rho_bar 0.74, UF 0.65",
+      "message": "engine room-plane mean 123 lx vs lumen method 111 lx (+11 %): 1030 lm, first incidence floor 0.31 / wall 0.67 / ceiling 0.02, rho_bar 0.74, UF 0.68",
       "source_ids": [
         "LV-V6-HAND",
         "LV-CIE171-58"
@@ -4003,7 +4019,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 400.0 -> 406.5 lx (-1.58 %); direct grid 0.16 m -> 0.08 m: 323.9 -> 319.0 lx (+1.53 %)",
+      "message": "ab 12 -> 24: 398.8 -> 398.8 lx (-0.02 %); direct grid 0.16 m -> 0.08 m: 307.8 -> 303.2 lx (+1.52 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4018,7 +4034,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 223.2 -> 229.6 lx (-2.75 %); direct grid 0.63 m -> 0.31 m: 160.7 -> 150.9 lx (+6.49 %)",
+      "message": "ab 12 -> 24: 228.2 -> 228.3 lx (-0.04 %); direct grid 0.63 m -> 0.31 m: 159.6 -> 150.1 lx (+6.35 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4033,7 +4049,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 553.4 -> 562.4 lx (-1.60 %); direct grid 0.25 m -> 0.12 m: 478.4 -> 473.2 lx (+1.10 %)",
+      "message": "ab 12 -> 24: 498.2 -> 498.3 lx (-0.04 %); direct grid 0.25 m -> 0.12 m: 428.1 -> 423.5 lx (+1.07 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4048,7 +4064,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 388.8 -> 397.7 lx (-2.23 %); direct grid 0.42 m -> 0.21 m: 322.7 -> 318.9 lx (+1.19 %)",
+      "message": "ab 12 -> 24: 409.9 -> 410.1 lx (-0.04 %); direct grid 0.42 m -> 0.21 m: 323.6 -> 321.1 lx (+0.80 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4063,7 +4079,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 299.7 -> 305.3 lx (-1.84 %); direct grid 0.10 m -> 0.05 m: 242.2 -> 241.5 lx (+0.30 %)",
+      "message": "ab 12 -> 24: 299.9 -> 300.1 lx (-0.05 %); direct grid 0.03 m -> 0.01 m: 253.6 -> 253.7 lx (-0.02 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4078,7 +4094,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 184.8 -> 189.7 lx (-2.59 %); direct grid 0.33 m -> 0.16 m: 143.7 -> 142.5 lx (+0.82 %)",
+      "message": "ab 12 -> 24: 196.7 -> 196.8 lx (-0.07 %); direct grid 0.33 m -> 0.16 m: 148.1 -> 146.9 lx (+0.81 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4093,7 +4109,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 548.3 -> 554.2 lx (-1.06 %); direct grid 0.28 m -> 0.14 m: 430.6 -> 426.5 lx (+0.97 %)",
+      "message": "ab 12 -> 24: 636.1 -> 636.3 lx (-0.03 %); direct grid 0.28 m -> 0.14 m: 497.7 -> 492.3 lx (+1.11 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4108,7 +4124,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 350.9 -> 357.1 lx (-1.73 %); direct grid 0.22 m -> 0.11 m: 231.9 -> 232.4 lx (-0.18 %)",
+      "message": "ab 12 -> 24: 384.0 -> 383.9 lx (+0.04 %); direct grid 0.22 m -> 0.11 m: 256.2 -> 256.7 lx (-0.23 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4123,7 +4139,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 541.5 -> 547.0 lx (-1.00 %); direct grid 0.10 m -> 0.05 m: 420.4 -> 419.9 lx (+0.12 %)",
+      "message": "ab 12 -> 24: 458.0 -> 458.0 lx (-0.01 %); direct grid 0.10 m -> 0.05 m: 328.5 -> 328.3 lx (+0.06 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4138,7 +4154,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 365.1 -> 371.6 lx (-1.75 %); direct grid 0.17 m -> 0.08 m: 252.4 -> 251.6 lx (+0.31 %)",
+      "message": "ab 12 -> 24: 367.9 -> 368.1 lx (-0.04 %); direct grid 0.25 m -> 0.12 m: 252.8 -> 250.5 lx (+0.92 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4153,7 +4169,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 286.8 -> 292.9 lx (-2.10 %); direct grid 0.27 m -> 0.13 m: 180.5 -> 178.8 lx (+1.00 %)",
+      "message": "ab 12 -> 24: 291.6 -> 291.5 lx (+0.05 %); direct grid 0.27 m -> 0.13 m: 176.6 -> 174.8 lx (+1.00 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4168,7 +4184,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 243.4 -> 249.9 lx (-2.57 %); direct grid 0.15 m -> 0.07 m: 142.9 -> 142.8 lx (+0.09 %)",
+      "message": "ab 12 -> 24: 249.2 -> 249.8 lx (-0.23 %); direct grid 0.15 m -> 0.07 m: 140.2 -> 140.1 lx (+0.09 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4183,7 +4199,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 509.1 -> 514.8 lx (-1.12 %); direct grid 0.10 m -> 0.05 m: 393.4 -> 392.5 lx (+0.24 %)",
+      "message": "ab 12 -> 24: 515.6 -> 515.7 lx (-0.02 %); direct grid 0.10 m -> 0.05 m: 392.6 -> 391.7 lx (+0.24 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4198,7 +4214,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 342.6 -> 351.0 lx (-2.38 %); direct grid 0.12 m -> 0.06 m: 214.8 -> 221.6 lx (-3.07 %)",
+      "message": "ab 12 -> 24: 351.2 -> 351.1 lx (+0.04 %); direct grid 0.12 m -> 0.06 m: 214.2 -> 220.9 lx (-3.07 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4213,7 +4229,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 247.3 -> 253.8 lx (-2.53 %); direct grid 0.60 m -> 0.30 m: 128.3 -> 127.6 lx (+0.51 %)",
+      "message": "ab 12 -> 24: 256.6 -> 257.0 lx (-0.14 %); direct grid 0.60 m -> 0.30 m: 128.2 -> 127.6 lx (+0.51 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4228,7 +4244,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 272.7 -> 278.9 lx (-2.21 %); direct grid 0.33 m -> 0.17 m: 174.7 -> 175.2 lx (-0.28 %)",
+      "message": "ab 12 -> 24: 280.2 -> 280.2 lx (+0.01 %); direct grid 0.33 m -> 0.17 m: 174.8 -> 175.3 lx (-0.30 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4243,7 +4259,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 255.4 -> 262.9 lx (-2.87 %); direct grid 0.55 m -> 0.26 m: 135.4 -> 134.9 lx (+0.36 %)",
+      "message": "ab 12 -> 24: 263.5 -> 263.9 lx (-0.13 %); direct grid 0.55 m -> 0.26 m: 135.3 -> 134.8 lx (+0.36 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4258,7 +4274,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 376.3 -> 382.5 lx (-1.63 %); direct grid 0.44 m -> 0.22 m: 264.2 -> 262.0 lx (+0.83 %)",
+      "message": "ab 12 -> 24: 420.9 -> 421.0 lx (-0.04 %); direct grid 0.44 m -> 0.22 m: 303.4 -> 300.7 lx (+0.89 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4273,7 +4289,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 345.7 -> 351.7 lx (-1.70 %); direct grid 0.39 m -> 0.18 m: 235.2 -> 234.0 lx (+0.55 %)",
+      "message": "ab 12 -> 24: 353.7 -> 353.7 lx (+0.02 %); direct grid 0.39 m -> 0.18 m: 235.2 -> 234.0 lx (+0.53 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4288,7 +4304,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 305.1 -> 311.1 lx (-1.91 %); direct grid 0.27 m -> 0.12 m: 202.1 -> 201.2 lx (+0.44 %)",
+      "message": "ab 12 -> 24: 312.2 -> 312.0 lx (+0.06 %); direct grid 0.27 m -> 0.12 m: 202.0 -> 201.1 lx (+0.44 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4298,12 +4314,12 @@
     {
       "criterion": "LV7",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-pantry",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 331.0 -> 342.0 lx (-3.22 %); direct grid 0.39 m -> 0.16 m: 233.6 -> 229.1 lx (+1.95 %)",
+      "message": "ab 12 -> 24: 358.3 -> 358.6 lx (-0.08 %); direct grid 0.39 m -> 0.16 m: 233.6 -> 229.1 lx (+1.95 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4313,12 +4329,12 @@
     {
       "criterion": "LV7",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-store-ramp",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 172.6 -> 179.7 lx (-3.96 %); direct grid 0.40 m -> 0.19 m: 85.1 -> 84.7 lx (+0.47 %)",
+      "message": "ab 12 -> 24: 179.7 -> 179.8 lx (-0.07 %); direct grid 0.40 m -> 0.19 m: 85.1 -> 84.7 lx (+0.47 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4333,7 +4349,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 440.6 -> 447.4 lx (-1.52 %); direct grid 0.21 m -> 0.10 m: 358.9 -> 356.2 lx (+0.74 %)",
+      "message": "ab 12 -> 24: 398.6 -> 398.7 lx (-0.03 %); direct grid 0.21 m -> 0.10 m: 293.2 -> 291.3 lx (+0.66 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4348,7 +4364,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 375.8 -> 382.5 lx (-1.75 %); direct grid 0.21 m -> 0.10 m: 299.2 -> 299.1 lx (+0.04 %)",
+      "message": "ab 12 -> 24: 400.4 -> 400.5 lx (-0.01 %); direct grid 0.21 m -> 0.10 m: 256.2 -> 256.5 lx (-0.10 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4358,12 +4374,12 @@
     {
       "criterion": "LV7",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-corridor",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 228.3 -> 239.6 lx (-4.71 %); direct grid 0.85 m -> 0.42 m: 137.2 -> 135.5 lx (+1.26 %)",
+      "message": "ab 12 -> 24: 246.0 -> 246.2 lx (-0.09 %); direct grid 0.85 m -> 0.42 m: 137.2 -> 135.5 lx (+1.26 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4378,7 +4394,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 283.8 -> 290.6 lx (-2.34 %); direct grid 0.57 m -> 0.26 m: 213.4 -> 210.0 lx (+1.61 %)",
+      "message": "ab 12 -> 24: 274.3 -> 274.4 lx (-0.03 %); direct grid 0.57 m -> 0.26 m: 196.1 -> 193.8 lx (+1.20 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4388,12 +4404,12 @@
     {
       "criterion": "LV7",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "fb-basin",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 297.2 -> 311.8 lx (-4.67 %); direct grid 0.08 m -> 0.04 m: 165.7 -> 159.4 lx (+3.93 %)",
+      "message": "ab 12 -> 24: 300.4 -> 300.7 lx (-0.08 %); direct grid 0.03 m -> 0.01 m: 210.4 -> 209.6 lx (+0.36 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4403,12 +4419,12 @@
     {
       "criterion": "LV7",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-family-bath",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 320.6 -> 333.5 lx (-3.86 %); direct grid 0.33 m -> 0.16 m: 211.9 -> 210.5 lx (+0.63 %)",
+      "message": "ab 12 -> 24: 305.1 -> 305.3 lx (-0.07 %); direct grid 0.33 m -> 0.16 m: 217.7 -> 216.3 lx (+0.65 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4423,7 +4439,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 398.4 -> 402.4 lx (-1.01 %); direct grid 0.17 m -> 0.08 m: 350.8 -> 346.1 lx (+1.37 %)",
+      "message": "ab 12 -> 24: 429.6 -> 429.7 lx (-0.02 %); direct grid 0.17 m -> 0.08 m: 325.2 -> 320.8 lx (+1.37 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4438,7 +4454,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 401.3 -> 405.3 lx (-0.99 %); direct grid 0.17 m -> 0.08 m: 350.6 -> 345.8 lx (+1.37 %)",
+      "message": "ab 12 -> 24: 362.6 -> 362.7 lx (-0.01 %); direct grid 0.17 m -> 0.08 m: 325.0 -> 320.6 lx (+1.37 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4453,7 +4469,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 181.9 -> 185.9 lx (-2.15 %); direct grid 0.42 m -> 0.20 m: 149.6 -> 145.7 lx (+2.67 %)",
+      "message": "ab 12 -> 24: 181.8 -> 181.9 lx (-0.04 %); direct grid 0.42 m -> 0.20 m: 146.5 -> 142.9 lx (+2.56 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4468,7 +4484,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 399.9 -> 403.4 lx (-0.85 %); direct grid 0.18 m -> 0.09 m: 355.7 -> 351.1 lx (+1.31 %)",
+      "message": "ab 12 -> 24: 399.7 -> 399.7 lx (-0.01 %); direct grid 0.18 m -> 0.09 m: 298.8 -> 295.0 lx (+1.31 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4478,12 +4494,12 @@
     {
       "criterion": "LV7",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-kids-b",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 159.2 -> 162.5 lx (-2.05 %); direct grid 0.42 m -> 0.20 m: 132.5 -> 128.6 lx (+3.05 %)",
+      "message": "ab 12 -> 24: 157.3 -> 157.4 lx (-0.05 %); direct grid 0.42 m -> 0.20 m: 128.5 -> 125.1 lx (+2.72 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4498,7 +4514,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 202.6 -> 202.6 lx (+0.00 %); direct grid 0.10 m -> 0.05 m: 208.5 -> 207.4 lx (+0.51 %)",
+      "message": "ab 12 -> 24: 302.4 -> 304.5 lx (-0.68 %); direct grid 0.10 m -> 0.05 m: 183.5 -> 182.6 lx (+0.50 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4513,7 +4529,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 200.8 -> 200.8 lx (+0.00 %); direct grid 0.10 m -> 0.05 m: 201.3 -> 200.1 lx (+0.58 %)",
+      "message": "ab 12 -> 24: 286.2 -> 293.2 lx (-2.39 %); direct grid 0.10 m -> 0.05 m: 176.3 -> 175.3 lx (+0.58 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4528,7 +4544,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 143.5 -> 143.5 lx (-0.00 %); direct grid 0.43 m -> 0.21 m: 149.3 -> 148.2 lx (+0.75 %)",
+      "message": "ab 12 -> 24: 247.8 -> 248.5 lx (-0.28 %); direct grid 0.43 m -> 0.21 m: 145.7 -> 144.7 lx (+0.71 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4538,12 +4554,12 @@
     {
       "criterion": "LV7",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-parents-dressing",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 356.0 -> 369.2 lx (-3.56 %); direct grid 0.36 m -> 0.17 m: 239.5 -> 237.5 lx (+0.86 %)",
+      "message": "ab 12 -> 24: 378.4 -> 378.7 lx (-0.09 %); direct grid 0.36 m -> 0.17 m: 239.5 -> 237.5 lx (+0.86 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4558,7 +4574,7 @@
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 300.0 -> 306.4 lx (-2.08 %); direct grid 0.10 m -> 0.05 m: 228.6 -> 228.1 lx (+0.26 %)",
+      "message": "ab 12 -> 24: 380.9 -> 381.1 lx (-0.04 %); direct grid 0.03 m -> 0.01 m: 315.0 -> 314.9 lx (+0.01 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -4568,12 +4584,12 @@
     {
       "criterion": "LV7",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "room-parents-ensuite",
       "achieved": null,
       "required": null,
       "unit": "",
-      "message": "ab 6 -> 12: 81.3 -> 86.9 lx (-6.42 %); direct grid 0.30 m -> 0.14 m: 36.0 -> 36.1 lx (-0.14 %)",
+      "message": "ab 12 -> 24: 123.1 -> 123.3 lx (-0.11 %); direct grid 0.30 m -> 0.14 m: 49.9 -> 49.9 lx (-0.00 %)",
       "source_ids": [
         "LV-V7-CONV"
       ],
@@ -5100,10 +5116,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "island-prep",
-      "achieved": 0.605,
+      "achieved": 0.728,
       "required": 0.8,
       "unit": "of max",
-      "message": "island-prep in Cook: zone Z-B-KITCHEN-ISLAND-PREP at 60 % of maximum (limit 80 %)",
+      "message": "island-prep in Cook: zone Z-B-KITCHEN-ISLAND-PREP at 73 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5117,10 +5133,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "island-seating",
-      "achieved": 0.787,
+      "achieved": 0.772,
       "required": 0.8,
       "unit": "of max",
-      "message": "island-seating in Day: zone Z-B-KITCHEN-ISLAND-PENDANTS at 79 % of maximum (limit 80 %)",
+      "message": "island-seating in Day: zone Z-B-KITCHEN-ISLAND-PENDANTS at 77 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5134,10 +5150,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "cooktop",
-      "achieved": 0.605,
+      "achieved": 0.728,
       "required": 0.8,
       "unit": "of max",
-      "message": "cooktop in Cook: zone Z-B-KITCHEN-ISLAND-PREP at 60 % of maximum (limit 80 %)",
+      "message": "cooktop in Cook: zone Z-B-KITCHEN-ISLAND-PREP at 73 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5151,10 +5167,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "sink",
-      "achieved": 0.605,
+      "achieved": 0.728,
       "required": 0.8,
       "unit": "of max",
-      "message": "sink in Cook: zone Z-B-KITCHEN-ISLAND-PREP at 60 % of maximum (limit 80 %)",
+      "message": "sink in Cook: zone Z-B-KITCHEN-ISLAND-PREP at 73 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5168,7 +5184,7 @@
       "lane": "LV",
       "status": "pass",
       "subject": "dining-table",
-      "achieved": 0.248,
+      "achieved": 0.245,
       "required": 0.8,
       "unit": "of max",
       "message": "dining-table in Dinner: zone Z-B-DINING-TABLE-PENDANT at 25 % of maximum (limit 80 %)",
@@ -5185,10 +5201,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "homework-end",
-      "achieved": 0.787,
+      "achieved": 0.772,
       "required": 0.8,
       "unit": "of max",
-      "message": "homework-end in Day: zone Z-B-KITCHEN-ISLAND-PENDANTS at 79 % of maximum (limit 80 %)",
+      "message": "homework-end in Day: zone Z-B-KITCHEN-ISLAND-PENDANTS at 77 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5200,12 +5216,12 @@
     {
       "criterion": "LV12",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "dirty-kitchen-run",
-      "achieved": 0.95,
+      "achieved": 0.736,
       "required": 0.8,
       "unit": "of max",
-      "message": "dirty-kitchen-run in Day: zone Z-B-DIRTY-KITCHEN-RUN-TASK at 95 % of maximum (limit 80 %)",
+      "message": "dirty-kitchen-run in Day: zone Z-B-DIRTY-KITCHEN-RUN-TASK at 74 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5217,12 +5233,12 @@
     {
       "criterion": "LV12",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "study-desk",
-      "achieved": 0.861,
+      "achieved": 0.666,
       "required": 0.8,
       "unit": "of max",
-      "message": "study-desk in Day: zone Z-GF-STUDY-GAME-DESK-TASK at 86 % of maximum (limit 80 %)",
+      "message": "study-desk in Day: zone Z-GF-STUDY-GAME-DESK-TASK at 67 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5234,12 +5250,12 @@
     {
       "criterion": "LV12",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "study-adult-desk",
-      "achieved": 0.861,
+      "achieved": 0.666,
       "required": 0.8,
       "unit": "of max",
-      "message": "study-adult-desk in Day: zone Z-GF-STUDY-GAME-DESK-TASK at 86 % of maximum (limit 80 %)",
+      "message": "study-adult-desk in Day: zone Z-GF-STUDY-GAME-DESK-TASK at 67 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5253,10 +5269,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "ka-desk-1",
-      "achieved": 0.767,
+      "achieved": 0.711,
       "required": 0.8,
       "unit": "of max",
-      "message": "ka-desk-1 in Day: zone Z-GF-KIDS-A-TASK at 77 % of maximum (limit 80 %)",
+      "message": "ka-desk-1 in Day: zone Z-GF-KIDS-A-TASK at 71 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5270,10 +5286,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "ka-desk-2",
-      "achieved": 0.767,
+      "achieved": 0.711,
       "required": 0.8,
       "unit": "of max",
-      "message": "ka-desk-2 in Day: zone Z-GF-KIDS-A-TASK at 77 % of maximum (limit 80 %)",
+      "message": "ka-desk-2 in Day: zone Z-GF-KIDS-A-TASK at 71 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5285,12 +5301,12 @@
     {
       "criterion": "LV12",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "kb-desk",
-      "achieved": 0.853,
+      "achieved": 0.537,
       "required": 0.8,
       "unit": "of max",
-      "message": "kb-desk in Day: zone Z-GF-KIDS-B-TASK at 85 % of maximum (limit 80 %)",
+      "message": "kb-desk in Day: zone Z-GF-KIDS-B-TASK at 54 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5304,10 +5320,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "cinema-desk",
-      "achieved": 0.709,
+      "achieved": 0.672,
       "required": 0.8,
       "unit": "of max",
-      "message": "cinema-desk in Day: zone Z-B-CINEMA-TASK at 71 % of maximum (limit 80 %)",
+      "message": "cinema-desk in Day: zone Z-B-CINEMA-TASK at 67 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5321,10 +5337,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "pillow-1",
-      "achieved": 0.641,
+      "achieved": 0.561,
       "required": 0.8,
       "unit": "of max",
-      "message": "pillow-1 in Reading: zone Z-GF-PARENTS-BED-BED-READING at 64 % of maximum (limit 80 %)",
+      "message": "pillow-1 in Reading: zone Z-GF-PARENTS-BED-BED-READING at 56 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5338,10 +5354,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "pillow-2",
-      "achieved": 0.641,
+      "achieved": 0.561,
       "required": 0.8,
       "unit": "of max",
-      "message": "pillow-2 in Reading: zone Z-GF-PARENTS-BED-BED-READING at 64 % of maximum (limit 80 %)",
+      "message": "pillow-2 in Reading: zone Z-GF-PARENTS-BED-BED-READING at 56 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5353,12 +5369,12 @@
     {
       "criterion": "LV12",
       "lane": "LV",
-      "status": "fail",
+      "status": "pass",
       "subject": "fb-basin",
-      "achieved": 1.212,
+      "achieved": 0.439,
       "required": 0.8,
       "unit": "of max",
-      "message": "fb-basin in Day: zone Z-GF-FAMILY-BATH-TASK at 121 % of maximum (limit 80 %); needs more than rated output",
+      "message": "fb-basin in Day: zone Z-GF-FAMILY-BATH-TASK at 44 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5372,10 +5388,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "pe-basin",
-      "achieved": 0.227,
+      "achieved": 0.456,
       "required": 0.8,
       "unit": "of max",
-      "message": "pe-basin in Day: zone Z-GF-PARENTS-ENSUITE-BASIN-TASK at 23 % of maximum (limit 80 %)",
+      "message": "pe-basin in Day: zone Z-GF-PARENTS-ENSUITE-BASIN-TASK at 46 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5389,10 +5405,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "gwc-basin",
-      "achieved": 0.415,
+      "achieved": 0.486,
       "required": 0.8,
       "unit": "of max",
-      "message": "gwc-basin in Day: zone Z-B-GUEST-WC-BASIN-TASK at 42 % of maximum (limit 80 %)",
+      "message": "gwc-basin in Day: zone Z-B-GUEST-WC-BASIN-TASK at 49 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5406,10 +5422,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "armchair",
-      "achieved": 0.376,
+      "achieved": 0.374,
       "required": 0.8,
       "unit": "of max",
-      "message": "armchair in Reading: zone Z-B-LOUNGE-ARMCHAIR-READING at 38 % of maximum (limit 80 %)",
+      "message": "armchair in Reading: zone Z-B-LOUNGE-ARMCHAIR-READING at 37 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
@@ -5423,10 +5439,10 @@
       "lane": "LV",
       "status": "pass",
       "subject": "daybed",
-      "achieved": 0.376,
+      "achieved": 0.374,
       "required": 0.8,
       "unit": "of max",
-      "message": "daybed in Reading: zone Z-B-LOUNGE-ARMCHAIR-READING at 38 % of maximum (limit 80 %)",
+      "message": "daybed in Reading: zone Z-B-LOUNGE-ARMCHAIR-READING at 37 % of maximum (limit 80 %)",
       "source_ids": [
         "LV-V12-HEAD"
       ],
