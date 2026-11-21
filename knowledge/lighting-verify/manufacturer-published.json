@@ -1,0 +1,36 @@
+{
+ "_about": "Manufacturer-published values used by V10. Only values read from a cited source are entered. 'datasheet_points' is EMPTY for every product: iGuzzini publishes no per-code data sheet for Laser Evo codes at a public URL (iguzzini.com/<code> returns 404; the cdn5.iguzzini.com PDF was unreachable from the workstation, 2026-11-21). Fill it from the iGuzzini product selector PDF (illuminance cone, beam diameter, UGR) and V10 will check each point at +/-5 %.",
+ "products": {
+  "LSEVO-AAK3EW": {
+   "family": "Laser Evo recessed Soft 75 mm",
+   "lumen_range_lm": [
+    540,
+    1110
+   ],
+   "lumen_range_source": "ArchDaily catalogue 'Recessed Downlights - Laser Evo | iGuzzini', https://www.archdaily.com/catalog/us/products/39231/recessed-downlights-laser-evo-iguzzini (Soft, 75 mm: 540 lm / 1110 lm, 94 lm/W max); seen as a web-search excerpt, page not opened",
+   "efficacy_max_lm_per_w": 94,
+   "datasheet_points": []
+  },
+  "LSEVO-AAIIA6": {
+   "family": "Laser Evo recessed Cone 75 mm",
+   "lumen_range_lm": [
+    540,
+    1380
+   ],
+   "lumen_range_source": "same ArchDaily page (Cone, 75 mm: 540 lm / 1380 lm, 117 lm/W max)",
+   "efficacy_max_lm_per_w": 117,
+   "datasheet_points": []
+  },
+  "LSEVO-AAHENX": {
+   "family": "Laser Evo recessed Cone Easy Adjustable 75 mm",
+   "lumen_range_lm": [
+    540,
+    1380
+   ],
+   "lumen_range_source": "same ArchDaily page, Cone 75 mm range (Adjustable not listed separately: indicative only)",
+   "efficacy_max_lm_per_w": 117,
+   "datasheet_points": [],
+   "range_indicative_only": true
+  }
+ }
+}
