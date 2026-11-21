@@ -1,0 +1,32 @@
+[
+ {
+  "id": "IES-HB10-14.47-sDA",
+  "document": "IES Lighting Handbook, 10th edition, section 14.16.1 (annual daylight metrics)",
+  "edition": "10th ed., 2011 (held: knowledge/library.json ies-handbook); predates IES LM-83-12",
+  "locator": "section 14.16.1.5; printed p. 14.47 (pdf index 535)",
+  "quote": "Research has suggested that for a given room, occupants find the daylight levels nominally acceptable when sDA300 > 50%, and are progressively more satisfied as the area increases above 75% to an upper feasible limit of approximately 95%.",
+  "value": "sDA300 > 50% nominally acceptable; satisfaction rises above 75% (NOTE: LM-83-12 slides below say 55%, see R-sources discrepancy D5)",
+  "status": "sourced",
+  "url_or_path": "held: ies-handbook/IES - The Lighting Handbook (10th ed, 2011).pdf"
+ },
+ {
+  "id": "IES-HB10-14.47-sDA-def",
+  "document": "IES Lighting Handbook, 10th edition, section 14.16.1 (annual daylight metrics)",
+  "edition": "10th ed., 2011 (held: knowledge/library.json ies-handbook); predates IES LM-83-12",
+  "locator": "section 14.16.1.5; printed p. 14.47 (pdf index 535)",
+  "quote": "It is recommended that the percent time component be locked-in at 50% of the time.",
+  "value": "sDA: 300 lux for at least 50% of the analysis year",
+  "status": "sourced",
+  "url_or_path": "held: ies-handbook/IES - The Lighting Handbook (10th ed, 2011).pdf"
+ },
+ {
+  "id": "IES-HB10-14.47-sunlight-1000",
+  "document": "IES Lighting Handbook, 10th edition, section 14.16.1 (annual daylight metrics)",
+  "edition": "10th ed., 2011 (held: knowledge/library.json ies-handbook); predates IES LM-83-12",
+  "locator": "section 14.16.1.8; printed p. 14.47 (pdf index 535)",
+  "quote": "exceeds 1000 lux based on Perez sky distributions based on site weather data.",
+  "value": "direct-sunlight hours metric: direct sun alone > 1000 lux (the handbook gives no 250 h or 10 % limit)",
+  "status": "sourced",
+  "url_or_path": "held: ies-handbook/IES - The Lighting Handbook (10th ed, 2011).pdf"
+ }
+]

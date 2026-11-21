@@ -34,7 +34,12 @@ def held_pages(book: str):
     n = next(s["pages"] for s in k.stats() if s["id"] == book)
     for i in range(n):
         p = k.read(book, i, 1)[0]
-        yield p["pdf_page"], p["label"], norm(p["text"])
+        t = norm(p["text"])
+        lab = p["label"]
+        if not lab or book.startswith("sll"):  # books with no label basis (SLL): take the running-head number, e.g. "68 Chapter Two"
+            m = re.match(r"(\d{1,3}) (?:Chapter|[A-Z])", t)
+            lab = f"{m.group(1)} (running head)" if m else ""
+        yield p["pdf_page"], lab, t
 
 
 _cache: dict[str, list] = {}
@@ -75,6 +80,9 @@ def _printed_guess(raw: str) -> str:
     for ln in lines[:4] + lines[-3:]:
         if re.fullmatch(r"\d{1,4}", ln):
             return ln
+        m = re.fullmatch(r"[–-] ?(\d{1,4}) ?[–-]", ln)
+        if m:
+            return m.group(1)
     return "?"
 
 
