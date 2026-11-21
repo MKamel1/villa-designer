@@ -43,12 +43,15 @@ def caught(base, mut, slack=1.0):
     return bool(new or worse), new + worse
 
 
-def _nearest_column_shift(w, eid, margin):
-    """Axis-aligned shift that moves element `eid` into its nearest column by `margin` (negative margin = leaves a gap)."""
+def _nearest_column_shift(w, eid, margin, model):
+    """Axis-aligned shift that moves element `eid` into its nearest kept column by `margin` (negative margin = leaves a gap).
+    The column faces come from the intended model (scene face-attribution noise makes a scene column box unreliable)."""
     A = w.elements[eid].box
     best = None
-    for cid, c in w.of("column").items():
-        B = c.box
+    for c in of_kind(model, "column"):
+        cid = c["id"]
+        p = c["params"]
+        B = (p["x0_mm"] / 1e3, p["y0_mm"] / 1e3, -3.0, p["x1_mm"] / 1e3, p["y1_mm"] / 1e3, 6.0)
         for ax in (0, 1):
             o = 1 - ax
             if min(A[o + 3], B[o + 3]) - max(A[o], B[o]) <= 0 or min(A[5], B[5]) - max(A[2], B[2]) <= 0:
@@ -81,6 +84,16 @@ def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, level
     rec("M1", "K02", "mutation", "catch", base, C.k02_wall_slab(w2), "wall-B-ext-07 translated (0,-0.5,0) into the ramp")
     w2 = _edit(w, "wall-B-ext-07", _shift((0, 0.5, 0)))
     rec("N-K02", "K02", "negative", "quiet", base, C.k02_wall_slab(w2), "wall moved 0.5 m away from the ramp")
+
+    # M1b (added after the first run: M1 moved a wall that was sized to the soffit, which is valid geometry): wall 0.7 m taller
+    def taller(dz):
+        def g(t):
+            top = t.reshape(-1, 3)[:, 2].max()
+            t = t.copy(); t[..., 2] = np.where(t[..., 2] > top - 1e-6, t[..., 2] + dz, t[..., 2])
+            return t
+        return g
+    w2 = _edit(w, "wall-B-int-11", taller(0.7))
+    rec("M1b", "K02", "mutation", "catch", base, C.k02_wall_slab(w2), "cross wall wall-B-int-11 (top 10 mm under the ramp soffit) raised 0.7 m through the ramp")
 
     # M2 door head against the soffit
     did = "door-B-cinema-store-ramp"
@@ -125,7 +138,7 @@ def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, level
 
     # M5 tread into a column / negatives / K03
     base = B.get("K01") or C.k01_stair_structure(w)
-    sh = _nearest_column_shift(w, "stair-main", 0.030)
+    sh = _nearest_column_shift(w, "stair-main", 0.030, model)
     if sh is None:
         rows.append(dict(id="M5", check="K01", kind="mutation", expect="catch", caught=False, ok=False, via=[],
                          detail="no column faces the stair: mutation not applicable"))
@@ -138,11 +151,11 @@ def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, level
         d3 = d.copy(); d3[np.nonzero(d3)[0][0]] = np.sign(d3[np.nonzero(d3)[0][0]]) * (gap - 0.005)
         rec("N-K01-gap", "K01", "negative", "quiet", base, C.k01_stair_structure(_edit(w, "stair-main", _shift(d3))), "stair 5 mm short of the column")
     base = B.get("K03") or C.k03_opening_column(w)
-    sh = _nearest_column_shift(w, "door-B-dining-yard", 0.050)
+    sh = _nearest_column_shift(w, "door-B-dining-yard", 0.050, model)
     if sh:
         rec("M-K03", "K03", "mutation", "catch", base, C.k03_opening_column(_edit(w, "door-B-dining-yard", _shift(sh[0]))),
             f"door-B-dining-yard 50 mm into {sh[1]}")
-    sh = _nearest_column_shift(w, "door-B-dining-yard", -0.005)
+    sh = _nearest_column_shift(w, "door-B-dining-yard", -0.005, model)
     if sh:
         rec("N-K03", "K03", "negative", "quiet", base, C.k03_opening_column(_edit(w, "door-B-dining-yard", _shift(sh[0]))), "door 5 mm clear of the column")
 

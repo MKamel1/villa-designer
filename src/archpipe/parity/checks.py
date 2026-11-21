@@ -111,14 +111,14 @@ def thin_axis(t):
         top = sorted(w, key=w.get, reverse=True)[:2]
         if len(top) == 2:
             th = abs(top[0] - top[1])
-            if best is None or th < best[1]:
+            if th >= 0.02 and (best is None or th < best[1]):      # two planes closer than 20 mm are one face seen twice
                 best = (ax, th, min(top), max(top))
     return best
 
 
 def k02_wall_slab(w, tol=TOL_SCENE):
-    """A wall passes THROUGH a ramp/deck when their overlap covers more than half the wall's thickness in the wall's thin
-    direction. Up to half a thickness is a join at the slab edge (the wall's centre line on the slab boundary)."""
+    """A wall passes THROUGH a ramp/deck when its plan overlap with the slab exceeds half the wall's thickness. Up to half a
+    thickness is a join at the slab edge (the wall's centre line on the slab boundary, as every Revit option had it)."""
     ramp = {k: e for k, e in w.elements.items() if k in ("slab-ramp", "slab-deck")}
     out, n = [], 0
     for iw, W in w.of("wall").items():
@@ -135,14 +135,13 @@ def k02_wall_slab(w, tol=TOL_SCENE):
             if d <= tol:
                 continue
             ta = thin_axis(W.tris)
-            if ta is None:
-                out.append(_ne("K02", f"{iw} x {ib}", "wall thickness not measurable")); continue
-            ax, th, a0, a1 = ta
-            ov = min(a1, B.box[ax + 3]) - max(a0, B.box[ax])
+            th = ta[1] if ta else min(W.box[3] - W.box[0], W.box[4] - W.box[1])
+            # plan overlap of the wall with the slab (smaller of the x and y overlap extents)
+            ov = min(min(W.box[3], B.box[3]) - max(W.box[0], B.box[0]), min(W.box[4], B.box[4]) - max(W.box[1], B.box[1]))
             through = ov > th / 2 + tol
             out.append(_f("K02", f"{iw} x {ib}", not through, round(d * 1000, 2), tol * 1000, "mm",
-                          f"{iw} meets {ib}: crossing {d*1000:.0f} mm, overlap {ov*1000:.0f} mm across the wall's {th*1000:.0f} mm thickness "
-                          f"({'through the slab' if through else 'a join at the slab edge, at most half the thickness'}); "
+                          f"{iw} meets {ib}: crossing {d*1000:.0f} mm; plan overlap {ov*1000:.0f} mm against the wall's {th*1000:.0f} mm thickness "
+                          f"({'through the slab' if through else 'a join at the slab edge: at most half the thickness'}); "
                           f"region x{reg[0]:.3f}..{reg[3]:.3f} y{reg[1]:.3f}..{reg[4]:.3f} z{reg[2]:.3f}..{reg[5]:.3f}",
                           (iw, ib), "RV1-TOL-SCENE"))
     if not any(f.status == "fail" for f in out):
