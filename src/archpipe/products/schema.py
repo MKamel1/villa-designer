@@ -121,9 +121,10 @@ def eg_record_problems(rec: dict) -> list[str]:
             p.append("asset_3d needs url, licence and match in ASSET_MATCH")
     if rec.get("lrv") is not None and not (0 <= rec["lrv"] <= 100):
         p.append("lrv outside 0-100")
-    # every empty field of the priced set must be declared in "missing"
+    # Pricing is optional (client scope change 2026-11-20): price_egp / price_date / lead_time may be empty
+    # without being declared. Specification fields that are empty must be declared in "missing".
     declared = set(rec.get("missing") or [])
-    for k in ("sku", "supplier", "price_egp", "lead_time", "dimensions_mm"):
+    for k in ("sku", "supplier", "dimensions_mm"):
         if not rec.get(k) and k not in declared:
             p.append(f"{k} empty but not listed in missing")
     return p
@@ -132,6 +133,19 @@ def eg_record_problems(rec: dict) -> list[str]:
 def eg_fully_priced(rec: dict) -> bool:
     """True if the record could stand as a priced FF&E row (sku, supplier, url, price + date)."""
     return all(rec.get(k) for k in EG_REQUIRED_FOR_PRICED)
+
+
+def eg_fully_specified(rec: dict) -> bool:
+    """True if the record can drive a model and a take-off: SKU, Egypt supplier, URL and the dimensions its
+    category needs (W, D, H; rugs and tiles W, D only; paint needs an LRV instead of a size)."""
+    if not (rec.get("sku") and rec.get("supplier") and rec.get("url")):
+        return False
+    cat = rec.get("category")
+    if cat == "paint":
+        return rec.get("lrv") is not None
+    d = rec.get("dimensions_mm") or {}
+    axes = ("w", "d") if cat in ("rug", "tile_stone") else ("w", "d", "h")
+    return all(d.get(a) for a in axes)
 
 
 def eg_price_age_days(rec: dict, today: str) -> int | None:
