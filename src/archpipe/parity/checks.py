@@ -116,6 +116,21 @@ def thin_axis(t):
     return best
 
 
+def footprint(el):
+    """Plan extent (x0, y0, x1, y1) from the element's VERTICAL faces' planes. Finish skins tagged to the wrong element are
+    mostly horizontal (ceiling/soffit linings) and would inflate an AABB (the 50 mm 'deck' of the RA2/INT2 scenes);
+    vertical edge faces are the structure's own. Falls back to the AABB when an axis has no vertical face."""
+    t = el.tris
+    n = np.cross(t[:, 1] - t[:, 0], t[:, 2] - t[:, 0])
+    ln = np.linalg.norm(n, axis=1)
+    out = []
+    for ax in (0, 1):
+        sel = (ln > 1e-9) & (np.abs(n[:, ax]) > 0.99 * ln)
+        pl = t[sel][:, 0, ax] if sel.any() else None
+        out.append((float(pl.min()), float(pl.max())) if pl is not None and len(pl) else (el.box[ax], el.box[ax + 3]))
+    return out[0][0], out[1][0], out[0][1], out[1][1]
+
+
 def k02_wall_slab(w, tol=TOL_SCENE):
     """A wall passes THROUGH a ramp/deck when its plan overlap with the slab exceeds half the wall's thickness. Up to half a
     thickness is a join at the slab edge (the wall's centre line on the slab boundary, as every Revit option had it)."""
@@ -135,9 +150,10 @@ def k02_wall_slab(w, tol=TOL_SCENE):
             if d <= tol:
                 continue
             ta = thin_axis(W.tris)
-            th = ta[1] if ta else min(W.box[3] - W.box[0], W.box[4] - W.box[1])
+            th = ta[1] if ta else min(footprint(W)[2] - footprint(W)[0], footprint(W)[3] - footprint(W)[1])
             # plan overlap of the wall with the slab (smaller of the x and y overlap extents)
-            ov = min(min(W.box[3], B.box[3]) - max(W.box[0], B.box[0]), min(W.box[4], B.box[4]) - max(W.box[1], B.box[1]))
+            fw, fb = footprint(W), footprint(B)
+            ov = min(min(fw[2], fb[2]) - max(fw[0], fb[0]), min(fw[3], fb[3]) - max(fw[1], fb[1]))
             through = ov > th / 2 + tol
             out.append(_f("K02", f"{iw} x {ib}", not through, round(d * 1000, 2), tol * 1000, "mm",
                           f"{iw} meets {ib}: crossing {d*1000:.0f} mm; plan overlap {ov*1000:.0f} mm against the wall's {th*1000:.0f} mm thickness "
