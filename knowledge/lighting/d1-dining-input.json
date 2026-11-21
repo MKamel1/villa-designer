@@ -1,0 +1,240 @@
+{
+ "source": "archpipe.model.load('D1') (L2 snapshot)",
+ "room_polygon_m": [
+  [
+   14.902,
+   -26.671
+  ],
+  [
+   15.745,
+   -26.671
+  ],
+  [
+   15.745,
+   -28.671
+  ],
+  [
+   18.367,
+   -28.671
+  ],
+  [
+   18.367,
+   -23.591
+  ],
+  [
+   14.902,
+   -23.591
+  ]
+ ],
+ "floor_z": -3.0,
+ "ceiling_z": -0.2999999999999998,
+ "rooms_polygons_m": {
+  "dining": [
+   [
+    14.902,
+    -26.671
+   ],
+   [
+    18.367,
+    -26.671
+   ],
+   [
+    18.367,
+    -23.591
+   ],
+   [
+    14.902,
+    -23.591
+   ]
+  ],
+  "dining-side": [
+   [
+    15.745,
+    -28.671
+   ],
+   [
+    18.367,
+    -28.671
+   ],
+   [
+    18.367,
+    -26.671
+   ],
+   [
+    15.745,
+    -26.671
+   ]
+  ]
+ },
+ "open_to": {
+  "dining": [
+   "kitchen",
+   "dining-side",
+   "living"
+  ],
+  "dining-side": [
+   "entry-b",
+   "dining",
+   "living"
+  ]
+ },
+ "table": {
+  "centre": [
+   16.95,
+   -25.9
+  ],
+  "size": [
+   1.8,
+   0.9
+  ],
+  "top_z": -2.25
+ },
+ "target": {
+  "card": "ies-res-dining-informal-100",
+  "lux": 100.0
+ },
+ "luminaires": [
+  {
+   "id": "lum-PEN-LIN-dining-01",
+   "x": 16.95,
+   "y": -25.9,
+   "z": -1.488,
+   "aim": [
+    0.0,
+    0.0,
+    -1.0
+   ],
+   "layer": "task",
+   "kind": "PEN-LIN",
+   "flux_lm": 1200.0,
+   "watts": null,
+   "ies": "",
+   "generic": true,
+   "beam_deg": 90,
+   "card": "rid-pendant-above-table-762",
+   "length_m": 1.6
+  },
+  {
+   "id": "lum-ADJ-dining-side-01",
+   "x": 16.25,
+   "y": -27.1,
+   "z": -0.2999999999999998,
+   "aim": [
+    0.6999999999999993,
+    1.1999999999999993,
+    -1.95
+   ],
+   "layer": "accent",
+   "kind": "ADJ",
+   "flux_lm": 511.5,
+   "watts": 12.6,
+   "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+   "generic": false,
+   "beam_deg": 18.5,
+   "card": "ies-res-dining-informal-100",
+   "length_m": 0.0
+  },
+  {
+   "id": "lum-ADJ-dining-02",
+   "x": 17.65,
+   "y": -24.7,
+   "z": -0.2999999999999998,
+   "aim": [
+    -0.6999999999999993,
+    -1.1999999999999993,
+    -1.95
+   ],
+   "layer": "accent",
+   "kind": "ADJ",
+   "flux_lm": 511.5,
+   "watts": 12.6,
+   "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+   "generic": false,
+   "beam_deg": 18.5,
+   "card": "ies-res-dining-informal-100",
+   "length_m": 0.0
+  },
+  {
+   "id": "lum-ADJ-dining-side-02",
+   "x": 16.65,
+   "y": -27.121,
+   "z": -0.2999999999999998,
+   "aim": [
+    0,
+    -0.55,
+    -1
+   ],
+   "layer": "accent",
+   "kind": "ADJ",
+   "flux_lm": 511.5,
+   "watts": 12.6,
+   "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+   "generic": false,
+   "beam_deg": 18.5,
+   "card": "ldb-accent-aim-30",
+   "length_m": 0.0
+  },
+  {
+   "id": "lum-ADJ-dining-side-03",
+   "x": 16.95,
+   "y": -27.121,
+   "z": -0.2999999999999998,
+   "aim": [
+    0,
+    -0.55,
+    -1
+   ],
+   "layer": "accent",
+   "kind": "ADJ",
+   "flux_lm": 511.5,
+   "watts": 12.6,
+   "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+   "generic": false,
+   "beam_deg": 18.5,
+   "card": "ldb-accent-aim-30",
+   "length_m": 0.0
+  }
+ ],
+ "reflectances": {
+  "wall": 0.8,
+  "ceiling": 0.85,
+  "floor": 0.33,
+  "basis": "scene.json materials plaster-warm-white / ceiling-white / oak-floor (ASSUMED finishes)"
+ },
+ "cycles_measurement": [
+  {
+   "room": "dining",
+   "card": "ies-res-dining-informal-100",
+   "position": [
+    16.95,
+    -25.9,
+    -2.25
+   ],
+   "label": "dining table centre",
+   "required_lux": 100,
+   "direct_lux": 404.784524509424,
+   "total_lux": 466.57752527629907,
+   "meets_target": true
+  },
+  {
+   "room": "dining",
+   "card": "ies-res-dining-study-200",
+   "position": [
+    16.35,
+    -25.9,
+    -2.25
+   ],
+   "label": "table end (homework)",
+   "required_lux": 200,
+   "direct_lux": 466.64330695681167,
+   "total_lux": 579.6305133877227,
+   "meets_target": true
+  }
+ ],
+ "cycles_dining_lights": [
+  "ADJ-dining-side-01",
+  "ADJ-dining-02",
+  "ADJ-dining-side-02",
+  "ADJ-dining-side-03"
+ ]
+}

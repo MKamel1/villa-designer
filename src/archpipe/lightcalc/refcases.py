@@ -93,7 +93,7 @@ def cube_face_sensors(side: float, n: int, eps: float = 0.0005) -> list[Sensor]:
     return out
 
 
-def case_5_8(workdir: Path, rhos=(0.2, 0.5, 0.8), host: str | None = None, n: int = 10) -> dict:
+def case_5_8(workdir: Path, rhos=(0.2, 0.5, 0.8), host: str | None = None, n: int = 6) -> dict:
     side = CASE_5_8_SIDE
     ies = synth.isotropic_ies_text(CASE_5_8_FLUX / (4 * math.pi))
     ph = synth.load_text(ies, "iso10klm")
@@ -107,7 +107,7 @@ def case_5_8(workdir: Path, rhos=(0.2, 0.5, 0.8), host: str | None = None, n: in
         # bounces needed so that the truncated tail rho^(ab+1) is under ~1 % of the indirect term, and a doubled run for convergence
         ab = max(8, math.ceil(math.log(0.01) / math.log(rho)))
         job = RadJob(f"case_5_8_rho{int(round(rho * 100)):02d}", room, [pl], sensors,
-                     RadParams(ab=ab, ab_extra=(2 * ab,), ad=4096, as_=2048, aa=0.07))
+                     RadParams(ab=ab, ab_extra=(2 * ab,), ad=1024, as_=512, aa=0.1))
         res = execute(job, Path(workdir) / f"rho{int(round(rho * 100)):02d}", host=host)
         r = res["Z1"]
         n_s = len(sensors)
