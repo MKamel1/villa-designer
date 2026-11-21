@@ -112,7 +112,66 @@ def thermal(host, root, release, job_path, epw_zip):
     return enforce_clean_verdict(record, exit_code=result.returncode or 1)
 
 
+JOBQ_FILES = ('ops/workstation/jobq.py', 'ops/workstation/systemd/jobq.service', 'ops/workstation/install_jobq.sh')
+
+
+def install_runner(host):
+    """Copy jobq + its systemd user unit to the workstation and (re)start it."""
+    root = remote_root(host)
+    stage = root + '/ops/jobq-install'
+    _ssh(host, 'mkdir -p ' + shlex.quote(stage + '/systemd'))
+    for name in JOBQ_FILES:
+        data = (ROOT / name).read_bytes().replace(bytes([13, 10]), bytes([10]))  # Windows checkouts may be CRLF; shebangs break
+        if _ssh(host, 'cat > ' + shlex.quote(stage + '/' + name.split('ops/workstation/', 1)[1]), stdin_bytes=data).returncode:
+            raise RuntimeError('could not push ' + name)
+    result = _ssh(host, 'bash ' + shlex.quote(stage + '/install_jobq.sh'))
+    print((result.stdout + result.stderr).decode(errors='replace').encode('ascii', 'replace').decode())
+    return result.returncode
+
+
+def submit(argv):
+    """workstation.py submit [--host H] [--id ID] [--gpu] [--timeout S] [--attempts N] [--wait] -- command...
+
+    Queue a command on the workstation's jobq (see docs/lanes/L8-runner.md). Prints the job id."""
+    sp = argparse.ArgumentParser(prog='workstation.py submit', description=submit.__doc__)
+    sp.add_argument('--host', default='ai-workstation')
+    sp.add_argument('--id')
+    sp.add_argument('--gpu', action='store_true')
+    sp.add_argument('--timeout', type=int, default=3600)
+    sp.add_argument('--attempts', type=int, default=2)
+    sp.add_argument('--cwd')
+    sp.add_argument('--retry', action='store_true')
+    sp.add_argument('--wait', action='store_true', help='block until the job is terminal; exit 0 only if done')
+    sp.add_argument('command', nargs=argparse.REMAINDER)
+    a = sp.parse_args(argv)
+    cmd = a.command[1:] if a.command[:1] == ['--'] else a.command
+    if not cmd:
+        sp.error('no command after --')
+    remote = '$HOME/archpipe/bin/jobq submit --timeout %d --attempts %d' % (a.timeout, a.attempts)
+    for flag, on in (('--gpu', a.gpu), ('--retry', a.retry)):
+        remote += (' ' + flag) if on else ''
+    for flag, val in (('--id', a.id), ('--cwd', a.cwd)):
+        remote += (' %s %s' % (flag, shlex.quote(val))) if val else ''
+    remote += ' -- ' + shlex.join(cmd)
+    result = _ssh(a.host, remote)
+    if result.returncode:
+        print(result.stderr.decode(errors='replace'))
+        return result.returncode
+    job_id = result.stdout.decode().strip()
+    print(job_id)
+    print('watch: ssh %s \'$HOME/archpipe/bin/jobq status %s\'' % (a.host, job_id), file=sys.stderr)
+    if a.wait:
+        waited = _ssh(a.host, '$HOME/archpipe/bin/jobq wait %s' % shlex.quote(job_id), timeout=24 * 3600)
+        print(waited.stdout.decode(errors='replace'))
+        return waited.returncode
+    return 0
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == 'submit':
+        return submit(sys.argv[2:])
+    if len(sys.argv) > 1 and sys.argv[1] == 'install-runner':
+        return install_runner(sys.argv[2] if len(sys.argv) > 2 else 'ai-workstation')
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('action',choices=['setup','status','verify','batch','bedroom','benchmark','sweep','radiance','thermal'])
     ap.add_argument('--host',default='ai-workstation')

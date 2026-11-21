@@ -1,0 +1,11 @@
+{
+  "_comment": "Template. bootstrap.py writes the real ~/archpipe/worker-environment.json; fill {PLACEHOLDERS} only if you must hand-edit. Blender 4.5.14 via the ~/opt/blender symlink.",
+  "python": "{HOME}/archpipe/envs/{ENV_KEY}/venv/bin/python",
+  "environment": "{HOME}/archpipe/envs/{ENV_KEY}/installed.json",
+  "release": "{HOME}/archpipe/releases/{RELEASE_ID}",
+  "blender": "{HOME}/opt/blender/blender",
+  "radiance": "{HOME}/archpipe/tools/radiance-6.0.1",
+  "thermal_python": "{HOME}/archpipe/envs/thermal-{THERMAL_KEY}/venv/bin/python",
+  "energyplus": "{HOME}/archpipe/tools/openstudio-3.11.0/OpenStudio-3.11.0+241b8abb4d-Ubuntu-24.04-x86_64/usr/local/openstudio-3.11.0/EnergyPlus/energyplus",
+  "openstudio": "{HOME}/archpipe/tools/openstudio-3.11.0/OpenStudio-3.11.0+241b8abb4d-Ubuntu-24.04-x86_64/usr/local/openstudio-3.11.0/bin/openstudio"
+}

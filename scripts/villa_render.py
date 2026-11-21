@@ -52,6 +52,13 @@ def remote_preflight(host: str, release: str, job: str, blender: str,
     return context
 
 
+def ensure_runner(host: str, root: str) -> None:
+    """Make sure the jobq runner is installed and its systemd user service is active on the workstation."""
+    if _ssh(host, "test -x " + shlex.quote(root + "/bin/jobq") + " && systemctl --user is-active --quiet jobq").returncode:
+        raise RuntimeError("jobq runner is not installed or not running on " + host +
+                           "; run: python scripts/workstation.py install-runner")
+
+
 def poll_remote(host: str, command: str, job: str):
     """Retry a transient read without relaunching an expensive render."""
     for attempt in range(3):
@@ -154,7 +161,8 @@ def select_views(by_id: dict, requested: str, calibrate: bool) -> list[str]:
 def run(scene_path: Path, views: str, samples: int | None, resolution: str | None,
         host: str, ies_dir: Path, dry_run: bool = False, calibrate: bool = False,
         measure_lighting: bool = False, allow_stale_scene: bool = False,
-        blender: str | None = None, expected_version: str = "4.5.14", measure_exposure_groups: bool = False) -> dict:
+        blender: str | None = None, expected_version: str = "4.5.14", measure_exposure_groups: bool = False,
+        retry: bool = False, job_timeout: int = 6 * 3600) -> dict:
     if blender is not None and not PurePosixPath(blender).is_absolute():
         raise ValueError("--blender must be an absolute workstation executable path")
     scene_path = scene_path.resolve()
@@ -243,30 +251,39 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
     command = ("cd " + shlex.quote(release) + " && NO_COLOR=1 TMP=" + shlex.quote(job + "/tmp") +
                " TEMP=" + shlex.quote(job + "/tmp") + " TMPDIR=" + shlex.quote(job + "/tmp") +
                " PYTHONPATH=" + shlex.quote(release + "/src") + " " + shlex.join(argv))
-    # The shell writes status even if Blender exits nonzero. setsid and nohup
-    # keep it alive when the initiating SSH connection drops.
-    shell = command + " > " + shlex.quote(job + "/render.log") + " 2>&1; echo $? > " + shlex.quote(job + "/status")
-    launch = ("test -f " + shlex.quote(job + "/status") + " || (test -f " + shlex.quote(job + "/pid") +
-              " || (setsid nohup sh -c " + shlex.quote(shell) + " </dev/null >/dev/null 2>&1 & echo $! > " +
-              shlex.quote(job + "/pid") + "))")
-    result = _ssh(host, launch)
-    if result.returncode:
-        raise RuntimeError(result.stderr.decode(errors="replace"))
-    while True:
-        status = poll_remote(host, "cat " + shlex.quote(job + "/status"), job)
-        if status.returncode == 0:
-            break
-        live = poll_remote(host, "test -f " + shlex.quote(job + "/pid") +
-                           " && kill -0 $(cat " + shlex.quote(job + "/pid") + ")", job)
-        if live.returncode:
-            # the shell writes status and exits between our two reads: read status once more before calling the
-            # job dead (a finished 24-view final was reported "stopped without status" this way)
-            status = poll_remote(host, "cat " + shlex.quote(job + "/status"), job)
-            if status.returncode == 0:
-                break
+    # The job runs under the workstation's jobq (ops/workstation/jobq.py): it holds graphics.lock, so a villa
+    # render never shares the GPU with another lane; a runner or Blender process that died without a verdict is
+    # relaunched (the old `test -f status || test -f pid || launch` guard wedged such jobs forever); and the
+    # per-job timeout bounds a hung render. The sh exit code is the Blender exit code.
+    shell = command + " > " + shlex.quote(job + "/render.log") + " 2>&1"
+    jobq = root + "/bin/jobq"
+    queue_id = "villa-" + identity
+    status = poll_remote(host, "cat " + shlex.quote(job + "/status"), job)   # renders finished before jobq existed
+    if status.returncode:
+        ensure_runner(host, root)
+        result = _ssh(host, shlex.join([jobq, "submit", "--id", queue_id, "--gpu", "--timeout", str(job_timeout),
+                                        "--attempts", "2", "--cwd", release] + (["--retry"] if retry else []) +
+                                       ["--", "sh", "-c", shell]))
+        if result.returncode:
+            raise RuntimeError(result.stderr.decode(errors="replace"))
+    while status.returncode:
+        queued = poll_remote(host, shlex.join([jobq, "status", queue_id]), job)
+        try:
+            state = json.loads(queued.stdout)
+        except ValueError:
+            raise RuntimeError("Unreadable jobq status for " + queue_id + ": " + queued.stdout.decode(errors="replace"))
+        if state["state"] == "done":
+            status = subprocess.CompletedProcess([], 0, b"0\n", b"")
+        elif state["state"] in ("failed", "timeout", "died", "cancelled"):
             log = _ssh(host, "tail -n 80 " + shlex.quote(job + "/render.log"))
-            raise RuntimeError("Detached Blender job stopped without status: " + log.stdout.decode(errors="replace"))
-        time.sleep(10)
+            if state["state"] == "failed":
+                status = subprocess.CompletedProcess([], 0, str(state.get("exit_code", 1)).encode(), b"")  # reported below
+            else:
+                raise RuntimeError("Render job " + queue_id + " ended " + state["state"] + " (" +
+                                   str(state.get("reason")) + "); rerun with --retry to relaunch it.\n" +
+                                   log.stdout.decode(errors="replace"))
+        else:
+            time.sleep(10)
     if status.stdout.strip() != b"0":
         log = _ssh(host, "tail -n 80 " + shlex.quote(job + "/render.log"))
         raise RuntimeError("Blender failed: " + log.stdout.decode(errors="replace"))
@@ -398,6 +415,8 @@ def main():
     ap.add_argument("--measure-lighting", action="store_true")
     ap.add_argument("--measure-exposure-groups", action="store_true")
     ap.add_argument("--out", type=Path, help="Isolated scene and draft output folder")
+    ap.add_argument("--retry", action="store_true", help="Relaunch a render job that failed, timed out or died")
+    ap.add_argument("--job-timeout", type=int, default=6 * 3600, help="Seconds before the queued Blender job is killed")
     a = ap.parse_args()
     try:
         project_context(ROOT, Path(__file__).resolve(), "villa-render")
@@ -410,7 +429,8 @@ def main():
         scene_path = a.scene
     try:
         result = run(scene_path, a.views, a.samples, a.res, a.host, a.ies_dir, a.dry_run, a.calibrate,
-                     a.measure_lighting, a.allow_stale_scene, a.blender, a.expected_version, a.measure_exposure_groups)
+                     a.measure_lighting, a.allow_stale_scene, a.blender, a.expected_version, a.measure_exposure_groups,
+                     a.retry, a.job_timeout)
     except (ValueError, ContextError) as exc:
         ap.error(str(exc))
     print(json.dumps(result, indent=2))
