@@ -3,7 +3,7 @@
 Everything the model does not carry is an explicit, flagged assumption (House.flags), never silent:
   - door hinge/latch side: not in the model, chosen by policy (hinge at the end of the opening nearer the wall corner);
   - bed head side: derived from the wall the bed stands against;
-  - luminaire watts for strips, pendants and lamps (83 of 142): flux / 90 lm/W placeholder;
+  - luminaire watts for strips, pendants and lamps (about 60 of 142): flux / 90 lm/W placeholder;
   - lighting control zones: provisional, one per room and layer, until lane L6b publishes knowledge/lighting/zones-d1.json;
   - equipment: knowledge/electrical/d1-equipment-assumed.json (status "assumed");
   - board positions: pantry (main board), stair-foot hall (basement board), stair-head gallery (ground-floor board).
@@ -17,7 +17,7 @@ from pathlib import Path
 from .. import contracts
 from .. import model as design_model
 from .model import Board, Door, Equipment, Furniture, House, Luminaire, Room, Supply
-from .placement import Device, room_walls
+from .placement import Device, room_walls, slide_on_wall
 
 ROOT = Path(__file__).resolve().parents[3]
 EQUIPMENT_JSON = ROOT / "knowledge" / "electrical" / "d1-equipment-assumed.json"
@@ -144,7 +144,7 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
         if rid in rooms:
             rooms[rid].kind = occ
     nonrect = [r.id for r in rooms.values() if len(r.poly) != 4]
-    flags.append(f"room geometry: {len(rooms)} rooms from the model polygons; {len(nonrect)} are not 4-vertex rectangles ({nonrect}); the placement engine walks polygon edges, so the D1 result does not depend on rectangles")
+    flags.append(f"room geometry: {len(rooms)} rooms from the model polygons; {len(nonrect)} are not 4-vertex rectangles. The polygon-edge branch of the placement is exercised by an L-shaped test room, not by D1")
 
     doors = _door_records(els, rooms, flags)
 
@@ -219,7 +219,7 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
                 x, y = xy
                 site_rooms[room] = Room(room, "outdoor", (x - 1000.0, y - 1000.0, x + 1000.0, y + 1000.0), "SITE", 0.0, name=room)
         equipment.append(Equipment(rec["id"], room, rec["kind"], rec["kw"], rec.get("pf", 1.0), rec.get("cat", "standard"), False,
-                                   rec.get("name", ""), bool(rec.get("external")), rec.get("board", ""), xy, rec.get("status", ""), rec.get("reason", "")))
+                                   rec.get("name", ""), bool(rec.get("external")), rec.get("board", ""), xy, rec.get("status", ""), rec.get("reason", ""), float(rec.get("extra_length_m", 0.0))))
         if rec.get("external"):
             extra.append(Device(f"FCU-{room}-{rec['id']}", "fcu", room, xy[0], xy[1], 1200.0, "E11-external-equipment-point", rec["id"], {"basis": "anchor " + rec["anchor"]}))
     gx = [anchors[g["anchor"]] for g in eq["garden_sockets"]]
@@ -229,20 +229,62 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
     all_rooms = list(rooms.values()) + list(site_rooms.values())
 
     s = eq["supply"]
-    # boards: positions on a wall of the chosen room
+    # wall elements and window/door boxes for the device clearance post-condition
+    wall_segs = [{"level": e.level, "x0": e.params["x0_mm"], "y0": e.params["y0_mm"], "x1": e.params["x1_mm"], "y1": e.params["y1_mm"], "t": e.params["thickness_mm"], "id": e.id}
+                 for e in els if e.kind == "wall"]
+    openings = []
+    for e in els:
+        if e.kind not in ("window", "door"):
+            continue
+        span = e.params.get("span") or []
+        horiz = (span[0] == "h") if span else (int(round(e.rotation_deg)) % 180 == 0)
+        w = float(e.params.get("width_mm") or e.size[0])
+        x, y = e.placement[0], e.placement[1]
+        if e.kind == "window":
+            z0 = float(e.params.get("sill_mm") or 0.0)
+            z1 = z0 + float(e.params.get("height_mm") or e.size[2])
+        else:
+            z0, z1 = 0.0, float(e.params.get("height_mm") or 2100.0)
+        box = (x - w / 2, y - 150.0, x + w / 2, y + 150.0) if horiz else (x - 150.0, y - w / 2, x + 150.0, y + w / 2)
+        openings.append({"id": e.id, "kind": e.kind, "level": e.level, "x0": box[0], "y0": box[1], "x1": box[2], "y1": box[3], "z0": z0, "z1": z1})
+    mdb_x, mdb_y = anchors["gate"]
+    sup = Supply(s["v_phase"], s["phases"], s["earthing"], None, None, (mdb_x, mdb_y), s["feeder_length_m"], s["feeder_ambient_c"],
+                 s["roof_ambient_c"], s["drop_m"], None, s["premises"], "RA not measured and the earthing system is not confirmed: " + s["ra_note"])
+    flags.append("boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; "
+                 "meter position and utility cabinet at the street fence are assumptions to confirm")
+    flags.append("routes: Manhattan distance x 1.15 from the board to the farthest load point plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops")
+    # storey areas for the ADB alarm-grade rule (net room polygons; gross adds the wall plan area of the level)
+    areas: dict[str, dict] = {}
+    for lvl in ("B", "GF"):
+        net = sum(abs(sum(p[i][0] * p[(i + 1) % len(p)][1] - p[(i + 1) % len(p)][0] * p[i][1] for i in range(len(p))) / 2.0) / 1e6
+                  for p in (r.poly for r in rooms.values() if r.level == lvl))
+        wl = sum(e.size[0] * e.size[1] for e in els if e.kind == "wall" and e.level == lvl) / 1e6
+        areas[lvl] = {"net": round(net, 1), "walls": round(wl, 1), "gross": round(net + wl, 1)}
+    flags.append("storey areas for the alarm grade (net rooms + wall plan): " + ", ".join(f"{k} {v['gross']} m2 (net {v['net']})" for k, v in areas.items()))
+    x0, y0, x1, y1 = plot
+    site = {"cctv": {"gate": anchors["gate"], "deck": anchors["deck"],
+                     "corner-nw": (x0 + 800, y1 + 800 - 0), "corner-sw": (x0 + 800, y0 + 800), "corner-ne": (x1 - 800, y1 - 800), "corner-se": (x1 - 800, y0 + 800)},
+            "intercom_gate": anchors["gate"], "intercom_monitors": ["hall-b", "corridor", "parents-bed"]}
+    # corners are named by side, not by compass (the client calls the street side north)
+    site["cctv"] = {"gate": anchors["gate"], "deck": anchors["deck"], "corner-street-a": (x0 + 800, y0 + 800), "corner-street-b": (x0 + 800, y1 - 800),
+                    "corner-rear-a": (x1 - 800, y0 + 800), "corner-rear-b": (x1 - 800, y1 - 800)}
+    flags.append("CCTV, intercom and AP positions are layout proposals from the plot fences, the gate anchor and room centroids; the plot is the fence-bounded rectangle x -123..28557, y -29916..-20601 mm")
+    h = House("D1", all_rooms, doors, furniture, lums, zones, equipment, sup, [], extra,
+              {"lighting_pack": "level", "lighting_target_a": 3.0, "socket_pack": "cluster", "storey_area_m2": areas, "storeys_above_ground": 1, "garden_ap_xy": anchors["garden-living-e"], "site_points": site, "supply_extra": {k: s[k] for k in ("single_phase_limit_a", "single_phase_limit_note")}},
+              flags, dict(LEVEL_Z_MM))
+    h.provisional_zones = pub is None
+    h.wall_segs, h.openings = wall_segs, openings
+    # boards: on a clear stretch of a wall of the chosen room (slid along the wall if the first choice hits an opening)
     boards: list[Board] = []
     for bid, (rid, wall, frac, lvl, amb) in BOARD_PLACES.items():
         w = room_walls(rooms[rid])[wall]
         x, y = w.point(w.length * frac)
-        boards.append(Board(bid, lvl, (x, y), None if bid == "MDB" else "MDB", rid, amb))
-    mdb = boards[0]
-    sup = Supply(s["v_phase"], s["phases"], s["earthing"], s["ra_ohm"], None, mdb.xy, s["feeder_length_m"], s["feeder_ambient_c"],
-                 s["roof_ambient_c"], s["drop_m"], None, s["premises"], s["ra_note"])
-    flags.append("boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; "
-                 "meter position and utility cabinet at the street fence are assumptions to confirm")
-    flags.append("routes: Manhattan distance x 1.15 from the board to the farthest load point plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops")
-    h = House("D1", all_rooms, doors, furniture, lums, zones, equipment, sup, boards, extra,
-              {"lighting_pack": "level", "lighting_target_a": 3.0, "socket_pack": "cluster", "supply_extra": {k: s[k] for k in ("single_phase_limit_a", "single_phase_limit_note")}},
-              flags, dict(LEVEL_Z_MM))
-    h.provisional_zones = pub is None
+        pt, why = slide_on_wall(h, rooms[rid], x, y, 1500.0)
+        if pt is None:
+            raise ValueError(f"no clear wall position for board {bid} in {rid}: {why}")
+        if why:
+            flags.append(f"board {bid}: {why}")
+        boards.append(Board(bid, lvl, pt, None if bid == "MDB" else "MDB", rid, amb))
+    h.boards = boards
+    h.supply.board_xy = boards[0].xy
     return h

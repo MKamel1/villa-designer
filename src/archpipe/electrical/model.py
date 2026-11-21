@@ -75,6 +75,7 @@ class Equipment:
     xy: tuple[float, float] | None = None   # load position when it is not in a room (external equipment)
     status: str = ""          # "" | assumed | confirmed
     reason: str = ""
+    extra_length_m: float = 0.0   # route length not visible from the points (e.g. a run to another level)
 
 
 @dataclass
@@ -122,6 +123,9 @@ class House:
     flags: list = field(default_factory=list)                # adapter notes (assumptions) carried to the reports
     level_z_mm: dict = field(default_factory=dict)           # level -> finished-floor z (mm)
     provisional_zones: bool = False                          # lighting zones derived here, not published by L6b
+    wall_segs: list = field(default_factory=list)            # dicts level,x0,y0,x1,y1,t (wall centre lines); empty = no clearance check
+    openings: list = field(default_factory=list)             # dicts id,kind,level,x0,y0,x1,y1,z0,z1 (windows, doors)
+    dropped: list = field(default_factory=list)              # devices the placement could not site (reason strings)
 
     def board_list(self) -> list[Board]:
         return self.boards or [Board("DB-GF", "GF", tuple(self.supply.board_xy))]

@@ -9,6 +9,7 @@ from . import placement, reference_cases, zones
 from .circuits import Design
 from .demand import phase_balance
 from .schedule import schedule_rows, sld_svg
+from . import elv as elvmod
 
 LANE = "L7"
 TABLE_CARD = {"iec_b524": "EL-IEC-B524", "whit_t47": "EL-WHIT-T47", "whit_t46": "EL-WHIT-T47", "iec_c521_F": "EL-IEC-C521"}
@@ -18,12 +19,13 @@ def _r(crit, status, subject, message, sources=(), achieved=None, required=None,
     return CheckResult(crit, LANE, status, subject, achieved, required, unit, message, tuple(sources), tuple(elements), gate)
 
 
-def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
+def run_checks(d: Design, svg: str | None = None, elv=None, svgs: dict | None = None) -> list[CheckResult]:
     h = d.house
     R: list[CheckResult] = []
+    multi = len(d.boards) > 1
 
     # EA1 provision (policy) -------------------------------------------------------------------
-    for room in h.rooms:
+    for room in (r for r in h.rooms if r.kind != "outdoor"):
         need = Counter()
         why = {}
         for kind, n, reason in placement.provision_requirements(h, room):
@@ -37,6 +39,20 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
         R.append(_r("EA1", "fail" if miss else "pass", room.id,
                     ("missing " + "; ".join(miss)) if miss else f"all {sum(need.values())} carded minima met ({', '.join(f'{k} {v}' for k, v in need.items())})",
                     ["EL-POL-PLACEMENT"], sum(1 for k, n in need.items() if placement.provision_count(d.devices, room.id, k) >= n), len(need), "kinds"))
+    if h.wall_segs:
+        bad = placement.clearance_violations(h, d.devices)
+        for dev, why in bad:
+            R.append(_r("EA1", "fail", f"clearance/{dev.id}", f"{dev.kind} in {dev.room} at ({dev.x:.0f}, {dev.y:.0f}, z {dev.z:.0f}): {why}", ["EL-POL-PLACEMENT"], 1, 0, "violations", elements=[dev.id]))
+        moved = sum(1 for x in d.devices if x.params.get("relocated"))
+        if not bad:
+            R.append(_r("EA1", "pass", "clearance", f"{sum(1 for x in d.devices if x.params.get('free_standing') is None and h.room(x.room).kind != 'outdoor')} wall-mounted devices are on a wall element and outside every window and door box; {moved} slid along the wall to get there, {len(h.dropped)} could not be placed",
+                        ["EL-POL-PLACEMENT"], len(bad), 0, "violations"))
+        for msg in h.dropped:
+            R.append(_r("EA1", "warn", "dropped-device", msg, ["EL-POL-PLACEMENT"]))
+    assumed = [x for x in d.devices if x.kind == "switch" and x.params.get("hinge_known") is False]
+    if assumed:
+        R.append(_r("EA1", "warn", "switch-latch-side", f"{len(assumed)} switches sit on a latch side chosen by policy because the model has no door hinge data; confirm hinge sides with the door schedule",
+                    ["EL-POL-LATCH"], len(assumed), 0, "switches", elements=[x.id for x in assumed]))
     R.append(_r("EA1", "not_evaluated", "recall", "recall against >= 3 engineer-marked rooms not run: no engineer markup available; EA1 rules are policy cards"))
 
     # EA2 zones --------------------------------------------------------------------------------
@@ -68,7 +84,7 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
                         ["EL-POL-CIRCUITS"], c.ib_a, 10.0, "A", elements=c.zone_ids))
     for z in h.zones:
         n = len(zone_circuits.get(z.id, []))
-        R.append(_r("EA3", "pass" if n == 1 else "fail", z.id, f"control zone on {n} circuit(s): {zone_circuits.get(z.id, [])}", ["EL-POL-CIRCUITS"], n, 1, "circuits"))
+        R.append(_r("EA3", "pass" if n == 1 else "fail", z.id, f"control zone on {n} circuit(s): {zone_circuits.get(z.id, [])}" + (" (PROVISIONAL zone, derived from layer and room)" if z.id.startswith("Z-PROV") else ""), ["EL-POL-CIRCUITS"], n, 1, "circuits"))
     for e in h.equipment:
         n = sum(1 for c in d.circuits if c.kind == "dedicated" and e.id in c.load_ids)
         R.append(_r("EA3", "pass" if n == 1 else "fail", e.id, f"dedicated equipment on {n} dedicated circuit(s)", ["EL-POL-CIRCUITS"], n, 1, "circuits"))
@@ -82,6 +98,9 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
                 f"worst-phase line current {f['ib_a']:.1f} A vs main breaker {mb} A. Diversity: Whitfield Table 6.2 (household column, 16th-ed. reprint of the OSG percentages); "
                 f"IET OSG Appendix A itself not obtained",
                 ["EL-WHIT-T62-DIV", "EL-EIG-A14-DIV"], f["ib_a"], mb, "A"))
+    for bid, bd in d.board_demand.items():
+        if multi:
+            R.append(_r("EA4", "pass", f"board {bid}", f"{bid}: connected {bd.connected_a:.1f} A -> diversified demand {bd.total_a:.1f} A single-phase equiv. = {bd.kva:.1f} kVA (own circuits only)", ["EL-WHIT-T62-DIV"], bd.kva, None, "kVA"))
     for rc in reference_cases.run():
         if rc.criterion == "EA4":
             R.append(_r("EA4", "pass" if rc.ok else "fail", f"REF {rc.name}: {rc.quantity}", f"expected {rc.expected:g} {rc.unit}, achieved {rc.achieved:.4g} (error {rc.error_pct:.2f} % <= {rc.tol_pct:g} %)",
@@ -98,6 +117,13 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
     fs = f["size"]
     R.append(_r("EA5", "pass" if fs.ok else "fail", "incomer", f"Ib {f['ib_a']:.1f} <= In {f['in_a']:g} <= Iz {fs.iz_a:.1f} A, {fs.csa_mm2} mm2 (3 loaded PVC, method C, {h.supply.feeder_ambient_c:g} C)" if fs.ok else "no size",
                 ["EL-IEC-B524", "EL-IEC-B5214-CA"], fs.iz_a, f["in_a"], "A", gate=True))
+    for sub, bf in d.board_feeders.items():
+        fz = bf["size"]
+        R.append(_r("EA5", "pass" if fz.ok else "fail", f"{bf['from']}/F-{sub}", f"Ib {bf['ib_a']:.1f} <= In {bf['in_a']:g} <= Iz {fz.iz_a:.1f} A, {fz.csa_mm2} mm2 (3 loaded PVC, method C, {h.supply.feeder_ambient_c:g} C)" if fz.ok else "no size",
+                    ["EL-IEC-B524", "EL-IEC-B5214-CA"], fz.iz_a, bf["in_a"], "A", gate=True))
+        tot = bf["vd_pct"] + 100 * f["vd_ph_v"] / h.supply.v_phase
+        R.append(_r("EA6", "pass" if fz.ok and tot <= 5.0 else "fail", f"{bf['from']}/F-{sub}", f"feeder {bf['vd_pct']:.2f} % + incomer {100 * f['vd_ph_v'] / h.supply.v_phase:.2f} % = {tot:.2f} % at {sub} vs 5 %",
+                    ["EL-IEC-G521-VDLIM", "EL-EIG-G30-VD"], tot, 5.0, "%"))
     for rc in reference_cases.run():
         if rc.criterion == "EA5":
             R.append(_r("EA5", "pass" if rc.ok else "fail", f"REF {rc.name}: {rc.quantity}", f"expected {rc.expected:g} {rc.unit}, achieved {rc.achieved:g}", [rc.card], rc.achieved, rc.expected, rc.unit))
@@ -105,7 +131,7 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
     # EA6 voltage drop ---------------------------------------------------------------------------
     for c in d.circuits:
         R.append(_r("EA6", "pass" if c.vd_total_pct <= c.vd_limit_pct + 1e-9 and c.size and c.size.ok else "fail", c.id,
-                    f"{c.vd_total_pct:.2f} % from the origin (incomer {100 * f['vd_ph_v'] / h.supply.v_phase:.2f} % + circuit {c.vd_pct:.2f} %) vs {c.vd_limit_pct:g} %",
+                    f"{c.vd_total_pct:.2f} % from the origin (incomer{' + sub-board feeder' if multi else ''} {(c.vd_origin_pct if multi else 100 * f['vd_ph_v'] / h.supply.v_phase):.2f} % + circuit {c.vd_pct:.2f} %) vs {c.vd_limit_pct:g} %",
                     ["EL-IEC-G521-VDLIM", "EL-WHIT-T47", "EL-EIG-G30-VD"], c.vd_total_pct, c.vd_limit_pct, "%"))
     for rc in reference_cases.run():
         if rc.criterion == "EA6":
@@ -117,7 +143,9 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
         card = "EL-IEC-4-41-TT-F13" if s.earthing == "TT" else "EL-IEC-4-41-TN-F19"
         if s.earthing == "TT":
             if s.ra_ohm is None:
-                R.append(_r("EA7", "not_evaluated", c.id, "TT: electrode resistance RA not measured/confirmed"))
+                if c is d.circuits[0]:
+                    R.append(_r("EA7", "not_evaluated", "installation", f"TT: electrode resistance RA not measured and earthing not confirmed, so none of the {len(d.circuits)} final circuits can be checked. "
+                                f"The Type S 300 mA origin RCD needs RA <= 50 V / 0.3 A = {50.0 / 0.3:.0f} ohm; the 30 mA finals allow {50.0 / 0.03:.0f} ohm. {s.ra_note}"))
                 continue
             volts = s.ra_ohm * (c.rcd_ma or 0) / 1000.0
             ok = c.rcd_ma is not None and volts <= 50.0 and c.disconnect_s is not None and c.disconnect_s <= (c.disconnect_limit_s or 0)
@@ -138,25 +166,42 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
     R.append(_r("EA9", "not_evaluated", "installation", "SPD Type 2 is drawn on the SLD; the IEC 62305-2 lightning risk calculation is not part of this engine"))
     R.append(_r("EA10", "not_evaluated", "installation", "electrode RA must be measured/confirmed with the utility; main bonding and test points are not modelled"))
     R.append(_r("EA14", "not_evaluated", "installation", "Revit read-back not in scope of the engine proof (E-12 is a later step)"))
-    R.append(_r("EA15", "not_evaluated", "installation", "ELV and fire detection layout is not in this engine (E-10)"))
+    if elv is None:
+        R.append(_r("EA15", "not_evaluated", "installation", "ELV and fire detection layout is not in this engine (E-10)"))
+    else:
+        for x in elvmod.lint(h, elv):
+            R.append(_r("EA15", x["status"], x["subject"], x["message"], x["sources"], x["achieved"], x["required"], x["unit"]))
 
     # EA11 phase balance ------------------------------------------------------------------------------
     if s.phases == 3:
         ok, dev = phase_balance(d.phase_loads, 0.10)
         R.append(_r("EA11", "pass" if ok else "fail", "installation", f"phase loads (sum Ib) {', '.join(f'{k} {v:.1f} A' for k, v in d.phase_loads.items())}; worst deviation {100 * dev:.1f} % of mean",
                     ["EL-POL-PHASEBAL"], 100 * dev, 10.0, "%"))
+        if multi:
+            for b in d.boards:
+                pl = {p: sum(c.ib_a for c in d.circuits if c.board == b.id and c.phase == p) for p in d.phase_loads}
+                okb, devb = phase_balance(pl, 0.10)
+                if not okb:
+                    R.append(_r("EA11", "warn", f"board {b.id}", f"{b.id} alone: {', '.join(f'{k} {v:.1f} A' for k, v in pl.items())}; worst deviation {100 * devb:.1f} % of mean (balance is gated on the installation total)", ["EL-POL-PHASEBAL"], 100 * devb, 10.0, "%"))
     else:
         R.append(_r("EA11", "not_evaluated", "installation", "single-phase supply: no phase balance to check"))
 
     # EA12 boards and SLD -------------------------------------------------------------------------------
+    if multi:
+        from .outputs import sld_board_svg
+        svgs = svgs or {b.id: sld_board_svg(d, b.id) for b in d.boards}
+        svg = "\n".join(svgs.values())
     svg = svg if svg is not None else sld_svg(d)
     rows = {r["circuit"] for r in schedule_rows(d)}
     in_svg = set(re.findall(r'<g id="([^"]+)">', svg))
     miss = [c.id for c in d.circuits if c.id not in rows or c.id not in in_svg]
     R.append(_r("EA12", "fail" if miss else "pass", "schedule=SLD=model", f"{len(d.circuits)} circuits in model, {len(rows)} in schedule, {len(in_svg)} in SLD; missing {miss}",
                 ["EL-POL-SPARE"], len(d.circuits) - len(miss), len(d.circuits), "circuits"))
-    spare = d.ways - len(d.circuits)
-    R.append(_r("EA12", "pass" if spare / d.ways >= 0.2 else "fail", "spare ways", f"{spare} of {d.ways} ways spare ({100 * spare / d.ways:.0f} %)", ["EL-POL-SPARE"], 100 * spare / d.ways, 20.0, "%"))
+    for b in d.boards:
+        used = sum(1 for c in d.circuits if c.board == b.id) + sum(1 for x in d.board_feeders.values() if x["from"] == b.id)
+        w = d.board_ways.get(b.id, d.ways)
+        spare = w - used
+        R.append(_r("EA12", "pass" if spare / w >= 0.2 else "fail", f"spare ways {b.id}" if multi else "spare ways", f"{spare} of {w} ways spare ({100 * spare / w:.0f} %)", ["EL-POL-SPARE"], 100 * spare / w, 20.0, "%"))
 
     # EA13 lighting coordination ---------------------------------------------------------------------------
     lum_zone = Counter(l.zone for l in h.luminaires)

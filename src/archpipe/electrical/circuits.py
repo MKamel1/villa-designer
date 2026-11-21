@@ -58,6 +58,7 @@ class CircuitSpec:
     board: str = ""
     points: list = field(default_factory=list)        # (x, y) load points used for the route length
     external: bool = False
+    extra_m: float = 0.0
     vd_origin_pct: float = 0.0                        # drop from the origin to this circuit's board
 
 
@@ -96,11 +97,23 @@ def _manhattan_m(a, b) -> float:
     return (abs(a[0] - b[0]) + abs(a[1] - b[1])) / 1000.0
 
 
+def _chain_m(start, pts) -> float:
+    """Nearest-neighbour chain from the board through every point (a radial visits all its outlets)."""
+    left = list(pts)
+    cur, tot = start, 0.0
+    while left:
+        nxt = min(left, key=lambda p: _manhattan_m(cur, p))
+        tot += _manhattan_m(cur, nxt)
+        cur = nxt
+        left.remove(nxt)
+    return tot
+
+
 def _route_m(h: House, c: "CircuitSpec") -> float:
-    """Board to the farthest load point: Manhattan distance x 1.15 + vertical drops (policy; no wall/slab routing yet)."""
+    """Board through every load point (nearest-neighbour chain): Manhattan distance x 1.15 + vertical drops (policy; no wall/slab routing yet)."""
     b = next(bb for bb in h.board_list() if bb.id == c.board)
     if c.points and h.boards:
-        d = max(_manhattan_m(b.xy, p) for p in c.points)
+        d = _chain_m(b.xy, c.points) + c.extra_m
     else:
         d = _manhattan_m(b.xy, _centroid(h.room(c.rooms[0])))
     return d * ROUTE_ALLOWANCE + h.supply.drop_m
@@ -123,10 +136,11 @@ def group_circuits(h: House, devs: list[Device]) -> list[CircuitSpec]:
         w = sum(q.watts for q in bin_)
         ib = w / (v * LIGHTING_PF)
         ids = [i for q in bin_ for i in q.luminaire_ids]
-        pts = [lum_xy.get(i) or cen[next(q.room for q in bin_ if i in q.luminaire_ids)] for i in ids]
+        pts = [cen[rm] for rm in rooms]       # one point per room served; +4 m of loop-in/loop-out per room below
+        extra = 4.0 * len(rooms)
         nm = f"Lighting {rooms[0]}" if len(rooms) == 1 else f"Lighting {rooms[0]} +{len(rooms) - 1}"
         c = CircuitSpec("", "lighting", nm, rooms, ids, ib, next_in(ib, 6.0), "B", 30.0, "A", "lighting", watts=w,
-                        zone_ids=[q.id for q in bin_], board=board, points=pts)
+                        zone_ids=[q.id for q in bin_], board=board, points=pts, extra_m=extra if h.boards else 0.0)
         out.append(c)
 
     # lighting: zones packed first-fit into circuits of <= 10 A; a zone is never split
@@ -217,7 +231,7 @@ def group_circuits(h: House, devs: list[Device]) -> list[CircuitSpec]:
         pt = (srv.x, srv.y) if srv else (e.xy if e.xy else cen[e.room])
         bid = e.board or _board_of(h, e.room).id
         out.append(CircuitSpec("", "dedicated", f"{e.name or e.kind} {e.id}", [e.room], [e.id], ib, next_in(ib), curve, 30.0, "A", e.cat,
-                               watts=e.kw * 1000.0, board=bid, points=[pt], external=e.external))
+                               watts=e.kw * 1000.0, board=bid, points=[pt], external=e.external, extra_m=e.extra_length_m))
     # ids: L/S/D numbering per board
     counters: dict[tuple[str, str], int] = {}
     pfx = {"lighting": "L", "socket": "S", "dedicated": "D"}

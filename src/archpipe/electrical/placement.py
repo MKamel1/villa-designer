@@ -124,6 +124,11 @@ def room_walls(r: Room) -> dict[str, Wall]:
     return walls
 
 
+def polygon_area_mm2(r: Room) -> float:
+    poly = list(r.poly) or [(r.rect[0], r.rect[1]), (r.rect[2], r.rect[1]), (r.rect[2], r.rect[3]), (r.rect[0], r.rect[3])]
+    return abs(sum(poly[i][0] * poly[(i + 1) % len(poly)][1] - poly[(i + 1) % len(poly)][0] * poly[i][1] for i in range(len(poly)))) / 2.0
+
+
 def point_in_room(r: Room, x: float, y: float, tol: float = 1.0) -> bool:
     poly = list(r.poly) or [(r.rect[0], r.rect[1]), (r.rect[2], r.rect[1]), (r.rect[2], r.rect[3]), (r.rect[0], r.rect[3])]
     for i in range(len(poly)):                              # on the boundary counts as inside
@@ -138,6 +143,80 @@ def point_in_room(r: Room, x: float, y: float, tol: float = 1.0) -> bool:
         if (ay > y) != (by > y) and x < (bx - ax) * (y - ay) / (by - ay) + ax:
             inside = not inside
     return inside
+
+
+def _seg_dist(px, py, ax, ay, bx, by) -> float:
+    dx, dy = bx - ax, by - ay
+    L2 = dx * dx + dy * dy
+    t = 0.0 if L2 == 0 else max(0.0, min(1.0, ((px - ax) * dx + (py - ay) * dy) / L2))
+    return math.hypot(px - (ax + t * dx), py - (ay + t * dy))
+
+
+CLEAR_MARGIN_MM = 100.0
+WALL_TOL_MM = 200.0
+SLIDE_STEP_MM = 150.0
+SLIDE_MAX_MM = 1500.0
+
+
+def clearance(h: House, level: str, x: float, y: float, z: float) -> tuple[bool, str]:
+    """Wall-mounted device post-condition: on a wall element of its level and outside every window/door opening box."""
+    if not h.wall_segs:
+        return True, ""
+    if not any(s["level"] == level and _seg_dist(x, y, s["x0"], s["y0"], s["x1"], s["y1"]) <= s["t"] / 2.0 + WALL_TOL_MM for s in h.wall_segs):
+        return False, "not on a wall element (open-plan edge or no wall in the model)"
+    for o in h.openings:
+        if o["level"] == level and o["x0"] - CLEAR_MARGIN_MM <= x <= o["x1"] + CLEAR_MARGIN_MM and o["y0"] - CLEAR_MARGIN_MM <= y <= o["y1"] + CLEAR_MARGIN_MM \
+                and o["z0"] - 50.0 <= z <= o["z1"] + 50.0:
+            return False, f"inside {o['kind']} {o['id']}"
+    return True, ""
+
+
+def slide_on_wall(h: House, r: Room, x: float, y: float, z: float):
+    """(x, y) of the nearest clear point along the wall nearest to (x, y), or None. Returns the input when it is already clear."""
+    ok, why = clearance(h, r.level, x, y, z)
+    if ok:
+        return (x, y), ""
+    walls = room_walls(r)
+    W = min(walls.values(), key=lambda w: abs(w.depth_of(x, y)))
+    a0 = W.along_of(x, y)
+    k = 1
+    while k * SLIDE_STEP_MM <= SLIDE_MAX_MM:
+        for sgn in (1, -1):
+            a = a0 + sgn * k * SLIDE_STEP_MM
+            if 100.0 <= a <= W.length - 100.0:
+                px, py = W.point(a)
+                if clearance(h, r.level, px, py, z)[0]:
+                    return (px, py), f"moved {k * SLIDE_STEP_MM:.0f} mm along the wall ({why})"
+        k += 1
+    return None, why
+
+
+def nearest_clear_wall_point(h: House, r: Room, x: float, y: float, z: float, max_mm: float = 4000.0):
+    """Closest clear wall point (every 150 mm along every wall of the room) to (x, y) within max_mm, or None."""
+    best = None
+    for W in room_walls(r).values():
+        a = 100.0
+        while a <= W.length - 100.0:
+            px, py = W.point(a)
+            dist = math.hypot(px - x, py - y)
+            if dist <= max_mm and (best is None or dist < best[0]) and clearance(h, r.level, px, py, z)[0]:
+                best = (dist, px, py)
+            a += SLIDE_STEP_MM
+    return None if best is None else (best[1], best[2])
+
+
+def clearance_violations(h: House, devs: list) -> list:
+    """Independent post-condition on a finished device list (used by EA1)."""
+    out = []
+    rooms = {r.id: r for r in h.rooms}
+    for d in devs:
+        r = rooms.get(d.room)
+        if r is None or r.kind == "outdoor" or d.params.get("free_standing"):
+            continue
+        ok, why = clearance(h, r.level, d.x, d.y, d.z)
+        if not ok:
+            out.append((d, why))
+    return out
 
 
 def _wall_len(r: Room, wall: str) -> float:
@@ -194,10 +273,30 @@ def place_devices(h: House) -> list[Device]:
     devs: list[Device] = list(h.extra_devices)
     n = [0]
 
+    rooms_by_id = {r.id: r for r in h.rooms}
+
     def add(kind, room, x, y, z, rule, serves="", **params):
+        if not params.get("free_standing"):
+            pt, why = slide_on_wall(h, rooms_by_id[room], x, y, z)
+            if pt is None and kind == "socket" and why.startswith("not on a wall") and rule not in ("EA1-bedside-both-sides", "EA1-worktop-pitch"):
+                # open-plan edge with no wall: a floor box 600 mm inside the room instead of a wall socket
+                W = min(room_walls(rooms_by_id[room]).values(), key=lambda w: abs(w.depth_of(x, y)))
+                bx, by = x + W.n[0] * 600.0, y + W.n[1] * 600.0
+                if point_in_room(rooms_by_id[room], bx, by):
+                    n[0] += 1
+                    params.update(free_standing=True, floor_box=True, relocated="floor box: no wall element on this edge")
+                    devs.append(Device(f"SOC-{room}-{n[0]:03d}", kind, room, bx, by, 0.0, rule, serves, params))
+                    return
+            if pt is None:
+                h.dropped.append(f"{kind} ({rule}) in {room} at ({x:.0f}, {y:.0f}, z {z:.0f}) not placed: {why}")
+                return
+            if why:
+                params["relocated"] = why
+            x, y = pt
         n[0] += 1
         devs.append(Device(f"{kind[:3].upper()}-{room}-{n[0]:03d}", kind, room, x, y, z, rule, serves, params))
 
+    h.dropped.clear()
     for r in h.rooms:
         if r.kind == "outdoor":
             continue                     # site pseudo-rooms: devices come from House.extra_devices
@@ -207,14 +306,20 @@ def place_devices(h: House) -> list[Device]:
         furn = [f for f in h.furniture if f.room == r.id]
         spans = _door_spans(h, r)
         # one switch per door at the latch side
-        my_doors = [d for d in h.doors if d.room == r.id and not d.garden]
+        small = polygon_area_mm2(r) / 1e6 < 2.0          # cupboard-sized room: switched from the neighbour
+        my_doors = [d for d in h.doors if d.room == r.id and not d.garden and not small]
         for d in my_doors:
             x, y = switch_for_door(r, d)
             add("switch", r.id, x, y, SWITCH_Z, "EA1-switch-latch-side", door=d.id, hinge_known=d.hinge_known)
         if not my_doors and not is_wet:
             p = _shared_edge_point(h, r)
             if p is not None:
-                add("switch", r.id, p[0], p[1], SWITCH_Z, "EA1-switch-open-plan", opening="shared edge with " + ",".join(r.open_to))
+                q = nearest_clear_wall_point(h, r, p[0], p[1], SWITCH_Z) if h.wall_segs else p
+                if q is not None:
+                    add("switch", r.id, q[0], q[1], SWITCH_Z, "EA1-switch-open-plan",
+                        opening="open edge with " + ",".join(r.open_to) + ("; control point moved to the nearest wall" if q != p else ""))
+                else:
+                    h.dropped.append(f"switch (EA1-switch-open-plan) in {r.id}: no clear wall point within 4 m of the opening")
         if is_wet:
             _place_bathroom(h, r, wets, add)
             continue
@@ -262,7 +367,7 @@ def place_devices(h: House) -> list[Device]:
                 long_x = (x1 - x0) >= (y1 - y0)
                 pts = ((x0 + (x1 - x0) * 0.25, y0), (x0 + (x1 - x0) * 0.75, y0)) if long_x else ((x0, y0 + (y1 - y0) * 0.25), (x0, y0 + (y1 - y0) * 0.75))
                 for x, y in pts:
-                    add("socket", r.id, x, y, 900.0, "EA1-island-sockets", furniture=f.id)
+                    add("socket", r.id, x, y, 900.0, "EA1-island-sockets", furniture=f.id, free_standing=True)
             elif f.kind in ("hob", "oven"):
                 x, y = W.point((lo + hi) / 2 + 700.0)
                 for e in h.equipment:
@@ -289,7 +394,9 @@ def place_devices(h: House) -> list[Device]:
                 x, y = W.point(min(W.length / 2 + 600.0 * slot, W.length - 150.0))
             kind = "cooker_unit" if e.kind == "cooker" else "fcu"
             add(kind, r.id, x, y, 600.0 if e.kind != "cooker" else WORKTOP_SOCKET_Z, "EA1-dedicated-cooker" if e.kind == "cooker" else "EA1-dedicated-appliance", serves=e.id)
-        # general sockets: at least one double per free wall stretch, pitch <= 3 m
+        # general sockets: at least one double per free wall stretch, pitch <= 3 m (none in cupboard-sized rooms)
+        if (polygon_area_mm2(r) / 1e6) < 2.0:
+            continue
         for wn, W in walls.items():
             L = W.length
             cnt = max(1, math.ceil(L / WALL_SOCKET_PITCH_MM))
@@ -365,7 +472,8 @@ def validate_devices(h: House, devs: list[Device]) -> list[Violation]:
 # ---- provision minima (EA1) ---------------------------------------------------------------------
 def provision_requirements(h: House, r: Room) -> list[tuple[str, int, str]]:
     """(device kind, minimum count, reason) for the room, from the furniture and room type."""
-    req: list[tuple[str, int, str]] = [("switch", sum(1 for d in h.doors if d.room == r.id and not d.garden), "one switch per door")]
+    small = polygon_area_mm2(r) / 1e6 < 2.0
+    req: list[tuple[str, int, str]] = [("switch", 0 if small else sum(1 for d in h.doors if d.room == r.id and not d.garden), "one switch per door")]
     walls = room_walls(r)
     for f in (f for f in h.furniture if f.room == r.id):
         if f.kind == "bed":
