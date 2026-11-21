@@ -13,9 +13,11 @@ Detail, with every threshold and its source:
 
 The villa is A+ when all four of these are true:
 
-1. **A licensed reviewer would return no compliance comments.** An Egyptian architect and electrical
-   engineer could review, stamp and submit the permit set without rework. (The signature itself stays
-   with them: Egyptian permits require a Syndicate-registered engineer, ER Art.112.)
+1. **A senior international reviewer would return no safety or quality comments.** The bar is
+   international best practice (UK Approved Documents, Neufert, Metric Handbook, NKBA, IES/SLL,
+   IEC 60364), not Egyptian law: the client judged local code hard to source and sub-standard
+   (decision 2026-11-21). Egyptian regulation values are kept as informative notes only. A local
+   licensed engineer still signs the permit; that is a formality outside this bar.
 2. **A contractor could price and build it.** Dimensioned drawings, schedules, specifications and
    costed products leave nothing to guess.
 3. **The client recognises their home.** The brief (shade, colourful planting, frangipani, terracotta,
@@ -29,8 +31,8 @@ The villa is A+ when all four of these are true:
   or a named reviewer step with a 0/1/2 rubric.
 - **Every threshold has a status.** It is either *sourced* (page read in a held book or standard),
   *STD* (standard known but page not yet carded), *POLICY* (our own pre-registered bar, never tuned to
-  pass), or *UNVERIFIED* (must not gate anything until sourced). Egyptian law wins where it sets a
-  value; a stricter international value is the A+ target on top of the legal gate.
+  pass), or *UNVERIFIED* (must not gate anything until sourced). International best practice sets
+  the gates; Egyptian regulation values are reported alongside, informative only.
 - **Gates vs targets.** A *gate* is a legal or safety minimum; failing it caps the grade at D. A
   *target* is the A+ level above it.
 
@@ -57,17 +59,19 @@ enlarged stair and wet rooms 1:20; wall sections and details; door, window, area
 schedules; outline then full specification; fire/escape strategy; daylight and shading report; the
 permit set per ER Art.111–112, bilingual.
 
-**Gates (Egyptian Executive Regulations of Law 119/2008; text to be checked against the Arabic Gazette):**
-- Clear height ≥2.70 m in rooms (2.30 m halls/baths) — Art.93
-- Habitable room ≥7.5 m², min 2.5 m — Art.94; doors ≥80 cm — Art.97
-- Openings onto a road or courtyard ≥8 % of floor area for habitable rooms, **basement included** — Art.96
-- Sunken gardens must qualify as courtyards: min side ≥max(0.25H, 3 m), area ≥max(9 m², (H/4)²) — Art.98
-- Stairs: width ≥110 cm, tread ≥27 cm, riser ≤17 cm, ≤14 risers per flight, headroom ≥2.1 m — Art.100
-- Railings ≥90 cm and stop objects ≥10 cm — Art.103 (A+ target: 1100 mm at drops to gardens, ADK)
-- Fire-code exemption holds only if every storey ≤400 m², top floor ≤16 m, basement ≤3 m below street — Art.106
+**Gates (international best practice, sources in a-plus-architecture.md):**
+- Stairs: uniform risers and goings, 2R+G rule, pitch ≤42°, headroom ≥2.0–2.1 m (ADK)
+- No opening passes a 100 mm sphere; open risers only with ≥16 mm overlap (ADK) — A+ target: closed risers
+- Guards ≥900 mm at stairs and internal edges, ≥1100 mm at balconies and drops to sunken gardens; not climbable (ADK)
+- No inner habitable rooms; every room has an escape route or an escape window ≥0.33 m², ≥450×450, sill ≤1100 (Metric Handbook)
+- Room heights, sizes and door widths against Neufert / Metric Handbook figures
+- Basement rooms get usable daylight and outlook through the sunken gardens (daylight factor reported per room)
 
-**Targets:** closed risers; escape route or escape window from every room; external shading on every
-sun-facing habitable opening (client prefers shade); zero structure clashes; design rubric ≥16/20.
+Egyptian regulation values (e.g. 2.70 m clear height, riser ≤17 cm, 8 % opening ratio) are shown
+beside each result for information only.
+
+**Targets:** closed risers; external shading on every sun-facing habitable opening (client prefers
+shade); zero structure clashes; design rubric ≥16/20.
 
 ### Interior design — today C− → A+
 **Deliver:** concept with named style, mood board and palette with LRVs; layouts with clearance
@@ -101,8 +105,7 @@ detection); bathroom and outdoor special locations; Revit circuits read back.
 **Bar:** carded device provision per room; no socket in bathroom zones 0–2; 30 mA RCD on sockets,
 bathrooms and outdoors; cables sized for 45–50 °C roof runs with voltage drop ≤3 % lighting / ≤5 %
 other; disconnection times met; phases balanced within 10 %; schedules, single-line diagram and Revit
-agree to the watt. Governing code: the Egyptian electrical installations code (number and edition to be
-obtained from HBRC); IEC 60364 until then.
+agree to the watt. Governing standard: IEC 60364 (with BS 7671 / IET worked examples).
 
 ### Renders — today median C−/D+ → A+
 **Bar (R1–R13):** 24 mm lens by default (24–35 mm), camera 1.2–1.6 m, verticals within 0.5°; subject
@@ -127,8 +130,6 @@ caught the 27 known bad views from the November audit (recall reported). The cli
 
 ## 6. Open sourcing work (before these thresholds can gate)
 
-- Check the Executive Regulations rows against the Arabic Gazette text (translation used: Andersen, unofficial).
-- Obtain the Egyptian fire code, disability code and electrical installations code (number and edition from HBRC).
 - Card the STD values from IEC 60364, EN 12464-1/-2, EN 1838, LM-83 pages.
 - Read the NKBA bath clear-floor figure; find a tip-over anchoring standard.
 - Agree with the client the POLICY bars that touch taste (props density, material counts).

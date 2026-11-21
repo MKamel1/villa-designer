@@ -59,14 +59,14 @@ Worker key: **C** = Claude subagent in its own worktree · **X** = Codex · **G*
 ### Wave 1 — engines in parallel (no lane waits for another)
 | WP | Worker | Builds | Proven against (before touching the villa) | Criteria |
 |---|---|---|---|---|
-| L1 Compliance | C | Egyptian code pack (ER Art.93–112) in the code-pack format; checkers for heights, room sizes, doors, light ratio, courtyards, stairs, guards (100 mm sphere), escape, fire-exemption test; **compliance report on D1** | A positive and a negative fixture per rule; the current stair must fail | EG1–EG9, LS1–LS5 |
+| L1 Safety & quality | C | Best-practice checkers (ADK, Metric Handbook, Neufert) for heights, room sizes, doors, basement daylight, stairs, guards (100 mm sphere), escape; **safety report on D1**; Egyptian values informative only | A positive and a negative fixture per rule; the current stair must fail | EG1–EG9, LS1–LS5 |
 | L2 Design model | X | One placed-object record per element (IFC-aligned); scene, Revit spec and schedules read it; retire the ~14 patch passes; guard registry as data | Byte-identical scene output from the new model | BM1, X1 |
 | L3 Vision critic | C | Rubric R1–R13 scored by a vision model; metadata checks (lens, height, verticals, subject exposure, texel density, faceting) | ≥90 % recall on the 27 known bad views; ≤10 % false fails on B views | R1–R13 |
 | L4 Products + style | G (sourcing) + C (code) | Egyptian supplier catalogue (SKU, EGP, lead time, 3D, finish); style engine (palette with LRV, material limits, clone check); 2–3 concept boards for you | 30 real products per category verified; boards rendered | I1–I6, I16 |
 | L6 Lighting engine | X | Whole-room Radiance calc report; UGR (CIE 117/190); over-lighting cap; ceiling-plan setting-out solver; scene and DALI table; exterior and obtrusive light; emergency path; LM-83 metrics | CIE 171 cases ±5 %; CIE 190 UGR exact; LM-83 reference ±3 points | LA1–LA15 engine |
 | L7 Electrical engine | C | Device placement rules; circuits; maximum demand; cable/protection sizing; voltage drop; Zs; boards; single-line diagram (SVG/DXF) | IET OSG demand example ±2 %; IEC 60364-5-52 worked example within ±1 size; bathroom zone negative tests | EA1–EA12 engine |
 | L8 Ops | C | One workstation job runner (systemd user units, dead-job relaunch, GPU queue); root scripts into `ops/workstation/` | Kill a job mid-run and it resumes; two GPU jobs never overlap | — |
-| R Research | G | Arabic Gazette check of ER rows; fire, disability and electrical code numbers and editions (HBRC); card the STD values (IEC 60364, EN 12464, EN 1838, LM-83); NKBA bath figure | Each card has page and quote; UNVERIFIED rows drop | sourcing |
+| R Research | C | Card the international STD values (ADK, Metric Handbook pages, (IEC 60364, EN 12464, EN 1838, LM-83); NKBA bath figure | Each card has page and quote; UNVERIFIED rows drop | sourcing |
 
 **Gate G1 (needs you):** L1's compliance report lists every failure with achieved against required,
 plus a recommended fix. You approve the fixes (H3) and choose a concept (H2). The design freezes.
