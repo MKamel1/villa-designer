@@ -7,8 +7,7 @@ engine, on every plane below, in each of the three spaces. Spaces: `B-open` (con
 For each space folder (`B-open/`, `GF-family-bath/`, `GF-parents-bed/`):
 
 1. New project -> new room by importing `room.dxf` (metres; FLOOR and CEILING outlines at their elevations). If the importer
-   keeps only 2D, draw the floor outline from FLOOR and set room height = CEILING elevation - FLOOR elevation (given in the file's header
-   of `planes.csv` z values: floor z is the lowest elevation). Walls straight, no windows, no doors, no furniture, no daylight.
+   keeps only 2D, draw the floor outline from FLOOR and set the room height to CEILING elevation minus FLOOR elevation. Walls straight, no windows, no doors, no furniture, no daylight.
 2. Surfaces: ceiling 85 %, walls 80 %, floor 33 % (`reflectances.json`). Maintenance factor 0.80 on all luminaires.
 3. Luminaires: import `ies/*.ies` as user photometry. Place one luminaire per row of `luminaires.csv` at (x, y, z) in the same
    coordinates (z absolute; the floor is `FLOOR` elevation). Aim with tilt `tilt_from_nadir_deg` toward azimuth `tilt_azimuth_deg`
