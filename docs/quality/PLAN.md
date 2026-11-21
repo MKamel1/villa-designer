@@ -1,41 +1,148 @@
-# Plan to A+ — villa first, product second
+# Plan to A+ — parallel execution
 
-Goal: take the villa (D1) to the A+ bar in [A-PLUS.md](A-PLUS.md). The general product grows out
-of the tools built for it. Each milestone ends with a re-grade against the criteria IDs listed;
-nothing moves on without an explicit pass.
+Goal: the villa (D1) reaches the A+ bar in [A-PLUS.md](A-PLUS.md) as fast as possible, with many
+agents implementing at once. The general product grows out of the tools built for it.
 
-Working rules (from the 2026-11 review): one implementer lane (Codex) at a time; research and
-sourcing on a second worker that cannot collide (agy); Claude leads, writes briefs and reviews;
-no new guard unless it covers a class of defect; one `STATUS.md` updated per milestone instead of
-phase reports.
+## 1. Why the last parallel attempt stalled, and what changes
 
-**Order matters:** legal and safety gates come before visuals. The new Egyptian rules may change
-the plan (ceiling heights, basement light, courtyard sizes, stair), and there is no point
-re-rendering a design that has to move.
+The October lanes (A/B/M/R) did not speed anything up. The 2026-11 review found three causes:
+- All four lanes drew on one Codex quota. All 43 lane stops were quota stops.
+- Lanes edited the same files (`villa_render.py`, `LEARNINGS.md`, `knowledge/*.json`, `verify.py`). That took 42 merges and needed custom merge tools.
+- Most lanes worked on a single shared villa scene, so each one waited on the others.
 
-| # | Milestone | Main work | Passes when | Needs from you | Size |
-|---|---|---|---|---|---|
-| M0 | Stabilise | Offsite data backup; remove the `out/` junctions; merge `review/2026-11`; laptop on `main`; prune ~45 branches and 4 worktrees; one lane; fix the 2 stuck render jobs; GPU lock on every job | Nothing at risk; one branch; workstation jobs restartable | Backup destination | 1–2 days |
-| M1 | Inputs and sources | Brief interview (budget cap, each daughter's identity, style likes); plot facts: dimensions, street level, setbacks, the validity statement if issued; card ER Art.93–112 into an Egypt pack in `codes.py`; obtain fire, disability and electrical codes | `spec/villa-brief.yaml` and `villa-site.yaml` real; EG pack loads with positive/negative fixtures | ~1 h interview; plot documents; any code PDFs you can get | 1 week |
-| M2 | Compliance baseline | Run EG1–EG9 and LS1–LS5 on D1; list every failure with achieved vs required; fix the design (stair to closed risers and solid guards; heights; basement openings; courtyard sizes; escape route) | All architecture gates pass on D1 (EG1–EG9, LS1–LS5) | Approve design changes | 1–2 weeks |
-| M3 | One design model | Replace the ~14 scene patch passes with one placed-object record; guard registry becomes data; quality tests beside snapshot tests | Scene builds from the model with identical output; registry is data | — | 2 weeks (parallel with M4) |
-| M4 | Vision critic | 12–13 item rubric (R1–R13) scored by a vision model; calibrate on the 38 graded views | Catches ≥90 % of the D/F views and falsely fails ≤10 % of B views, reported before it gates | — | 1–2 weeks |
-| M5 | Interior identity and products | 2–3 concepts with mood boards; choose one; Egyptian product library (SKU, supplier, EGP, lead time, 3D); replace stand-ins; FF&E and finish schedules; styling | I1–I9, I11–I14, I17–I18 pass; budget within cap | Pick a concept; budget cap | 2–3 weeks |
-| M6 | Render re-shoot | Camera and texture standards; exposure policy decided once; re-render the set; critic gate; blind test against studio photos | R1–R13 pass on hero views; blind test at chance | Exposure policy choice; final visual sign-off | 1–2 weeks |
-| M7 | Documents | Revit sheet automation: dimensions, grids, tags, title block (Art.111), sections, elevations, schedules, bilingual; interior elevations and millwork; permit set (Art.112) | DS1–DS4, SC1, BM1, I15–I16 pass; sheet QA finds zero untagged/undimensioned items | — | 3 weeks |
-| M8 | Lighting package | Whole-room Radiance calc report, glare, RCP setting-out, DALI scenes, exterior and obtrusive light, emergency, LM-83 daylight | LA1–LA15 pass; reference cases reproduce | Scene preferences | 3 weeks (parallel with M7) |
-| M9 | Electrical | Device placement, circuits, maximum demand, cable and protection sizing, boards, single-line diagram, earthing, low-voltage systems, Revit read-back | EA1–EA15 pass; worked examples reproduce | Supply type from the utility (1- or 3-phase) | 4 weeks |
-| M10 | Final review | Cross-discipline coherence (A-PLUS §5); re-grade all; optional review by a licensed Egyptian engineer | Overall grade A+ | Choose a licensed reviewer if wanted | 1 week |
+This plan fixes all three:
 
-Rough total: about 4–5 months at one implementer lane, shorter where M3/M4 and M7/M8 run in parallel.
-The biggest uncertainty is M2: if the Egyptian gates force a re-plan of the basement or stair, M2 grows.
+| Cause | Fix |
+|---|---|
+| One quota | **Mixed worker pool.** Claude subagents work in their own isolated copies of the repo (git worktrees); Codex takes up to 2 heavy implementation lanes; agy (Gemini) does sourcing and research. Each pool has its own limit, so they add up. |
+| Shared files | **Each lane owns its files** (§4), enforced by a check in CI. Shared registries become per-lane files that are discovered automatically: no central edits, no merge conflicts. |
+| Waiting on the villa | **Engines first, villa second.** Each lane builds and proves its engine against published reference cases and small test rooms, so it does not wait for the villa. It applies the engine to the villa only once the design is frozen at G1. |
 
-## What to start now
+Concurrency: 5–6 lanes at once. More than that and the lead's review becomes the bottleneck.
+The lead (Claude Opus) writes briefs, reviews every hand-back with an independent verifier agent,
+and merges. The lead does not implement.
 
-1. **M0** — needs only the backup destination.
-2. **M1 sourcing** in parallel (agy): Arabic Gazette check of ER Art.93–112; the fire, disability and
-   electrical code editions.
-3. **M1 interview** — a short session with you, using the existing `villa-intent` stage method.
-4. **M2 dry run** as soon as the Egypt pack exists: likely first failures to check are the 2.307 m
-   cinema soffit (Art.93 asks 2.70 m), the open-riser stair (Art.103), the basement rooms' openings
-   onto the sunken gardens (Art.96) and whether those gardens are large enough to count as courtyards (Art.98).
+## 2. Waves at a glance
+
+```
+Wave 0  (2–3 days)  W0-A stabilise ─┐   W0-B contracts ─┐   H1 interview + plot docs (you)
+                                    └──────────┬────────┘
+Wave 1  (≈3 weeks)  L1 compliance │ L2 design model │ L3 vision critic │ L4 products+style
+                    L6 lighting engine │ L7 electrical engine │ L8 ops │ R research (agy)
+                                    │
+        G1 — compliance report → you approve design fixes; concept chosen (H2) → DESIGN FREEZE
+                                    │
+Wave 2  (≈3 weeks)  L2 apply fixes to D1 │ L4 FF&E into model │ L5 Revit sheets
+                    L6 villa lighting design │ L7 villa electrical │ L3 critic as gate
+                                    │
+        G2 — model complete, all discipline checks green
+                                    │
+Wave 3  (≈2 weeks)  L9 re-render + blind test │ L5 permit set │ L6/L7 packages │ X cross-checks
+                                    │
+        G3 — final regrade (overall = lowest discipline)
+```
+
+Rough total: **about 8–9 weeks**, against 4–5 months with one lane in series. The critical path runs
+L1 (compliance) → G1 (your approval) → L2 (fixes) → L9 (re-render). Everything else is off it.
+
+## 3. Work packages
+
+Worker key: **C** = Claude subagent in its own worktree · **X** = Codex · **G** = agy/Gemini (research, docs) · **H** = you.
+
+### Wave 0 — foundation (blocks everything; short)
+| WP | Worker | Output | Done when |
+|---|---|---|---|
+| W0-A Stabilise | C | Remove the `out/` junctions; merge `review/2026-11`; laptop on `main`; prune merged branches and worktrees; fix the 2 stuck render jobs; one GPU lock for every workstation job | `main` is the only live line; workstation jobs restart cleanly |
+| W0-B Contracts | Lead | The interfaces in §5; lane ownership map `ops/lanes.yaml`; check script `scripts/lane_guard.py`; per-lane registration folders; brief and hand-back templates | Each lane can start with no further questions to the lead |
+| H1 Inputs | H + C (interview) | Budget cap, each daughter's identity, style likes; plot facts and documents → `spec/villa-brief.yaml`, `spec/villa-site.yaml` | Placeholders gone |
+
+### Wave 1 — engines in parallel (no lane waits for another)
+| WP | Worker | Builds | Proven against (before touching the villa) | Criteria |
+|---|---|---|---|---|
+| L1 Compliance | C | Egyptian code pack (ER Art.93–112) in the code-pack format; checkers for heights, room sizes, doors, light ratio, courtyards, stairs, guards (100 mm sphere), escape, fire-exemption test; **compliance report on D1** | A positive and a negative fixture per rule; the current stair must fail | EG1–EG9, LS1–LS5 |
+| L2 Design model | X | One placed-object record per element (IFC-aligned); scene, Revit spec and schedules read it; retire the ~14 patch passes; guard registry as data | Byte-identical scene output from the new model | BM1, X1 |
+| L3 Vision critic | C | Rubric R1–R13 scored by a vision model; metadata checks (lens, height, verticals, subject exposure, texel density, faceting) | ≥90 % recall on the 27 known bad views; ≤10 % false fails on B views | R1–R13 |
+| L4 Products + style | G (sourcing) + C (code) | Egyptian supplier catalogue (SKU, EGP, lead time, 3D, finish); style engine (palette with LRV, material limits, clone check); 2–3 concept boards for you | 30 real products per category verified; boards rendered | I1–I6, I16 |
+| L6 Lighting engine | X | Whole-room Radiance calc report; UGR (CIE 117/190); over-lighting cap; ceiling-plan setting-out solver; scene and DALI table; exterior and obtrusive light; emergency path; LM-83 metrics | CIE 171 cases ±5 %; CIE 190 UGR exact; LM-83 reference ±3 points | LA1–LA15 engine |
+| L7 Electrical engine | C | Device placement rules; circuits; maximum demand; cable/protection sizing; voltage drop; Zs; boards; single-line diagram (SVG/DXF) | IET OSG demand example ±2 %; IEC 60364-5-52 worked example within ±1 size; bathroom zone negative tests | EA1–EA12 engine |
+| L8 Ops | C | One workstation job runner (systemd user units, dead-job relaunch, GPU queue); root scripts into `ops/workstation/` | Kill a job mid-run and it resumes; two GPU jobs never overlap | — |
+| R Research | G | Arabic Gazette check of ER rows; fire, disability and electrical code numbers and editions (HBRC); card the STD values (IEC 60364, EN 12464, EN 1838, LM-83); NKBA bath figure | Each card has page and quote; UNVERIFIED rows drop | sourcing |
+
+**Gate G1 (needs you):** L1's compliance report lists every failure with achieved against required,
+plus a recommended fix. You approve the fixes (H3) and choose a concept (H2). The design freezes.
+
+### Wave 2 — apply engines to the frozen villa
+| WP | Worker | Work | Criteria |
+|---|---|---|---|
+| L2b Design fixes | X | Apply the approved G1 fixes in the model; re-run L1 until all gates pass | EG, LS green |
+| L4b Interior | C | FF&E and finish schedules from the model; replace stand-ins with real products; styling | I7–I15, I17–I18 |
+| L5 Documents | C (Windows laptop, Revit) | Revit sheet automation: dimensions, grids, levels, tags, Art.111 title block, sections, elevations, schedules, bilingual labels; interior elevations and millwork | DS1–DS4, SC1, I15 |
+| L6b Villa lighting | C | Run the lighting engine on D1: RCP, scenes, exterior, emergency; fix over-lighting and glare | LA1–LA15 |
+| L7b Villa electrical | C | Run the electrical engine on D1 using L6b's zones; Revit circuits read back | EA1–EA15 |
+| L3b Critic gate | C | The critic gates every render job; the Revit view exports are checked too | R-gate live |
+
+**Gate G2:** all discipline checks green on the model.
+
+### Wave 3 — outputs and coherence
+| WP | Worker | Work | Criteria |
+|---|---|---|---|
+| L9 Re-render | X (workstation GPU) | Full set to the R1–R13 standard, day and dusk; blind test against studio photographs | R1–R13, blind test |
+| L5b Permit set | C | Art.112 permit set, bilingual, three-copy PDF | DS, permit |
+| L6c / L7c Packages | C | Lighting L-01…L-10 and electrical E-01…E-12 issue sets | package lists |
+| X Cross-checks | C (verifier) | Counts and positions agree across model, sheets, schedules and renders; circuits = luminaires = ceiling plan | A-PLUS §5 |
+
+**Gate G3:** final regrade. Optional: an external review by a licensed Egyptian engineer.
+
+## 4. Lane ownership (no two lanes write the same file)
+
+| Lane | Owns (write) | Reads only |
+|---|---|---|
+| L1 | `src/archpipe/codes/eg/**`, `src/archpipe/compliance/**`, `knowledge/eg/**`, `tests/compliance/**` | design model, `rules.py` |
+| L2 | `src/archpipe/model/**`, `src/archpipe/concept/villa_render.py`, `src/archpipe/blender/villa_scene.py`, `src/archpipe/guard_registry.py` | everything |
+| L3 | `src/archpipe/critic/**`, `knowledge/critic/**`, `tests/critic/**` | renders in `out/` |
+| L4 | `src/archpipe/products/**`, `src/archpipe/interior/**`, `knowledge/products/**` | design model |
+| L5 | `revit/sheets/**`, `src/archpipe/documents/**` | design model, products |
+| L6 | `src/archpipe/lighting/**` (new), extensions to `lighting.py`, `radiance.py`, `luminaires/**` | design model |
+| L7 | `src/archpipe/electrical/**`, `knowledge/electrical/**`, `tests/electrical/**` | design model, L6 zone IDs |
+| L8 | `ops/workstation/**`, `scripts/workstation.py` | — |
+| R | `knowledge/sources/**` (cards only) | — |
+
+Shared files are no longer hand-edited centrally:
+- `verify.py` discovers checks from each lane's `checks/` folder.
+- Lessons go to `docs/lessons/<lane>.md` instead of one `LEARNINGS.md`.
+- Knowledge indexes are rebuilt by a script.
+
+`scripts/lane_guard.py` fails any lane branch that writes outside its lane.
+
+## 5. Contracts written in Wave 0 (lanes build against these)
+
+1. **Design model record:** element id, type, level, placement, footprint and solid, product id, finish codes, host. Owned by L2; the first version is frozen in W0-B, so other lanes code against it from day one.
+2. **Check result:** criterion id (e.g. `EG4`), status, achieved, required, source card, element ids. Every engine emits this, so the regrade is one script.
+3. **Source card:** document, edition, page, quote, value, status (sourced / STD / POLICY / UNVERIFIED).
+4. **Product record:** extends `products/schema.py` with SKU, supplier, EGP, date, lead time, 3D asset, LRV.
+5. **Lighting zone / circuit IDs:** L6 publishes zones; L7 consumes them.
+6. **Render job and critic verdict:** view id, camera metadata, image, R-scores, verdict.
+
+## 6. How a lane runs
+
+1. **Brief.** The lead writes it: goal, owned paths, contracts, reference cases, criteria IDs, and what is out of scope.
+2. **Isolated copy.** The agent works in its own worktree on branch `lane/<id>`. It commits small steps and pushes daily, so nothing is lost.
+3. **Hand-back.** The agent returns: criteria passed, with check output; reference cases reproduced; open items.
+4. **Independent verification.** A verifier agent re-runs the checks from a clean checkout and looks at any visual output. It is not given the implementer's conclusions.
+5. **Merge.** The lead merges to `main` (fast-forward or a small merge; conflicts should be impossible by ownership). It then updates `STATUS.md` and a one-line row in the regrade table.
+
+## 7. Human gates (yours) — they never stall engine work
+
+| Gate | When | What you decide | Time |
+|---|---|---|---|
+| H1 | Wave 0 | Interview: budget, daughters, style; plot documents | about 1 h, plus documents |
+| H2 | End of Wave 1 | Pick one of 2–3 concepts | 15 min |
+| H3 | G1 | Approve the compliance fixes, e.g. a closed stair or changed ceiling heights | 30 min |
+| H4 | Wave 3 | Exposure policy, then final visual sign-off | 30 min |
+
+## 8. Risks
+
+- **G1 grows** if the Egyptian gates force a re-plan of the basement or stair. Mitigation: L1 runs first in Wave 1 and reports early failures by day 3.
+- **The review load is on the lead.** Six lanes report back. Mitigation: verifier agents do the first pass; the lead reviews only verified hand-backs.
+- **Contract drift.** If L2 changes the model record, lanes break. Mitigation: versioned record; changes only at wave boundaries.
+- **Single GPU.** L3 calibration, L6 and L9 compete for the workstation. Mitigation: the L8 queue; Radiance runs on CPU; L9 is the only Wave 3 GPU-heavy job.
