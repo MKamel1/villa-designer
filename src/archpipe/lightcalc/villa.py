@@ -104,12 +104,13 @@ class Plane:
 
 # ------------------------------------------------------------------ fixtures -> placements
 def zone_id(f) -> str:
-    suffix = f.extra.get("zone") or ("%s-%s" % (f.room, f.layer))
-    return "Z-%s-%s" % (f.level, suffix.upper())
+    from ..concept.villa_lighting import zone_id as z
+    return z(f)
 
 
 def zone_layer(f) -> str:
-    return f.extra.get("layer") or f.layer
+    from ..concept.villa_lighting import zone_layer as z
+    return z(f)
 
 
 def hemisphere_ies(lm: float, name: str = "hemi") -> str:
@@ -208,6 +209,8 @@ class Villa:
         poly = union_rects([self.rc[r] for r in rooms])
         floor = LEVEL_Z[level]
         ceil = floor + CEILING_OVERRIDE.get(name, self._ceiling(rooms[0]))
+        top = max((p.position[2] for p in self.cluster_placements(name) if p.meta.get("kind") != "PEN-GLOBE"), default=ceil)
+        ceil = max(ceil, top + 0.01)          # a sloped soffit (cinema, store) can sit above the centre value: keep sources inside
         return Room(tuple(poly), floor, ceil, RHO["floor"], RHO["wall"], RHO["ceiling"])
 
     def _ceiling(self, room: str) -> float:
@@ -231,11 +234,11 @@ class Villa:
         from .villa_planes import build_planes
         return build_planes(self)
 
-    def calc(self, name: str, planes: list[Plane], params: RadParams | None = None) -> RoomCalc:
+    def calc(self, name: str, planes: list[Plane], params: RadParams | None = None, fast: bool = False) -> RoomCalc:
         mine = [p for p in planes if cluster_of(p.room) == name]
         tps = [TaskPlane(p.id, tuple(p.polygon), p.z, p.target, p.gauge, p.spacing) for p in mine]
         return RoomCalc(name, self.cluster_room(name), self.cluster_placements(name), tps,
-                        params or RadParams(ab=6, ab_extra=(12,), workers=4), mf=MF)
+                        params or RadParams(ab=6, ab_extra=() if fast else (12,), workers=4), mf=MF)
 
 
 def run_cluster(calc: RoomCalc, workdir: Path, host: str | None = None, reuse: bool = False):

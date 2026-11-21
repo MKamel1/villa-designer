@@ -88,6 +88,45 @@ class Fixture:
         return self.spec["layer"]
 
 
+def zone_id(f) -> str:
+    """Control-zone id: level x room x (explicit function suffix | layer). A zone is one switched/dimmed circuit group."""
+    suffix = "%s-%s" % (f.room, f.extra.get("zone") or f.layer)
+    return "Z-%s-%s" % (f.level, suffix.upper())
+
+
+def zone_layer(f) -> str:
+    return f.extra.get("layer") or f.layer
+
+
+def _drivers():
+    """Commissioning table solved by lightcalc.villa_tune from the per-zone Radiance results (knowledge/lighting)."""
+    import json
+    from pathlib import Path
+    path = Path(__file__).resolve().parents[3] / "knowledge" / "lighting" / "zone-drivers.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def apply_drivers(fixtures):
+    """Set each fixture's driver output from its zone's solved factor d: a bound product gets extra['dimmer'] = d (<= 1);
+    a generic fitting gets lumens scaled by d (it may exceed 1: the generic is sized, not dimmed)."""
+    table = _drivers()
+    for f in fixtures:
+        d = table.get(zone_id(f))
+        if d is None:
+            continue
+        if f.kind in PRODUCTS or kind_has_product(f.kind):
+            f.extra["dimmer"] = round(min(1.0, d), 3)
+        else:
+            base = f.lm if f.lm is not None else (KINDS[f.kind]["lm_per_m"] * f.length if "lm_per_m" in KINDS[f.kind]
+                                                   else KINDS[f.kind]["lm"])
+            f.lm = round(base * d, 1)
+    return fixtures
+
+
+def kind_has_product(kind):
+    return bool(products().get(kind))
+
+
 def ceiling_z(level, x=None, room=None, y=None, lay=None, spec=None):
     """Finished ceiling above a fitting, using the cove design and the built ramp/deck/roof spec."""
     base = LEVEL_Z[level]
@@ -137,8 +176,11 @@ def design(lay=None):
     n = {}
     spec = RS.build(lay)
 
-    def add(kind, room, x, y, z=None, why="", card="", level=None, **kw):
+    def add(kind, room, x, y, z=None, why="", card="", level=None, zone=None, **kw):
         level = level or lay["rooms"][room]["level"]
+        if zone:                                   # L6b: an explicit control-zone suffix (room x function)
+            zname, _, zl = zone.partition(":")        # "suffix" or "suffix:layer" (layer overrides the kind's)
+            kw["extra"] = dict(kw.get("extra") or {}, zone=zname, **({"layer": zl} if zl else {}))
         if not (rc[room][0] - 1e-6 <= x <= rc[room][2] + 1e-6 and rc[room][1] - 1e-6 <= y <= rc[room][3] + 1e-6):
             for other in F._cluster(lay, room):          # an open-plan neighbour holds it: label it truthfully
                 q = rc[other]
@@ -157,7 +199,8 @@ def design(lay=None):
         (xa, ya), (xb, yb) = a, b
         L = math.hypot(xb - xa, yb - ya)
         add(kind, room, (xa + xb) / 2, (ya + yb) / 2, z, why, card, level, aim=aim, length=round(L, 3),
-            along=((xb - xa) / L, (yb - ya) / L, 0.0))
+            along=((xb - xa) / L, (yb - ya) / L, 0.0),
+            **({"lm": 450.0 * round(L, 3)} if kind == "COVE" else {}))    # L6b: 450 lm/m: a soft wash, not 900
 
     def cove(room, sides, why):
         """Perimeter cove: strips on the band's inner edge along the named sides, stopped 0.3 m short of the end walls
@@ -178,12 +221,12 @@ def design(lay=None):
 
     # =============== BASEMENT ===============
     L = rc["lounge"]
-    for x, y in _grid((L[0], L[1], L[2], L[3]), 3, 2, mx=1.0, my=0.95):
-        add("DL", "lounge", x, y, why="soft ambient, dimmable; 3 x 2 clear of the cove band",
+    for x, y in _grid((L[0], L[1], L[2], L[3]), 2, 2, mx=1.6, my=0.95):
+        add("DL", "lounge", x, y, why="soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
             card="ies-res-family-room-100")
     cove("lounge", ("x0", "y0"), "cove along the street and stair sides: the ceiling floats over the family TV room")
     a = fp["lounge-armchair"]
-    add("ADJ", "lounge", (a[0] + a[2]) / 2 - 0.4, (a[1] + a[3]) / 2, aim=(0.35, 0, -1),
+    add("ADJ", "lounge", (a[0] + a[2]) / 2 - 0.4, (a[1] + a[3]) / 2, aim=(0.35, 0, -1), zone="armchair-reading:task",
         why="reading light over the armchair, aimed ~20 deg", card="ies-res-chair-reading-200")
     from . import villa_furnish3d as F3
     for store in (piece for piece in it.values() if piece["type"] == "under_stair_storage"):
@@ -215,32 +258,41 @@ def design(lay=None):
                 z=b[5] / 1000.0 + 0.25, aim=(0, 1, -0.3), why="step marker 0.25 m above the tread, party wall",
                 card="ies-res-stairs-50", level="B")
     H = rc["hall-b"]
-    for x, y in _grid(H, 1, 2):
-        add("DL", "hall-b", x, y, why="stair foot and hall", card="ies-res-passage-30")
+    add("DL", "hall-b", (H[0] + H[2]) / 2, (H[1] + H[3]) / 2, why="stair foot and hall (L6b: 2 -> 1 on the hall centre)",
+        card="ies-res-passage-30")
     E = rc["entry-b"]
     add("DL", "entry-b", (E[0] + E[2]) / 2, (E[1] + E[3]) / 2, why="entrance", card="ies-res-passage-30")
     add("WW", "entry-b", (E[0] + E[2]) / 2, E[1] + 0.35, aim=(0, -0.25, -1),
         why="washes the party wall at the entrance: a lit wall reads as welcome")
     Fm = rc["family"]
-    for x, y in _grid(Fm, 1, 2):
-        add("DL", "family", x, y, why="family corner ambient", card="ies-res-family-room-100")
-    # kitchen: globe pendants over the island (centrepiece), task downlights over the run
+    add("DL", "family", (Fm[0] + Fm[2]) / 2, (Fm[1] + Fm[3]) / 2, why="family corner ambient (L6b: 2 -> 1 on the room centre)",
+        card="ies-res-family-room-100")
+    strip("NL", "family", (Fm[0] + 0.25, Fm[1] + 0.6), (Fm[0] + 0.25, Fm[3] - 0.6), LEVEL_Z["B"] + 0.05, (0.3, 0, -1),
+          why="L6b: night layer on the basement route: low warm glow along the west wall (second switched layer)")
+    # kitchen: globe pendants over the island (centrepiece AND the seating-side light), downlights over the run
     isl = fp["k-island"]
     top = LEVEL_Z["B"] + it["k-island"]["h"]
     cy = (isl[1] + isl[3]) / 2
     for k in range(3):
         x = isl[0] + (k + 0.5) * (isl[2] - isl[0]) / 3
-        add("PEN-GLOBE", "kitchen", x, cy, z=top + 0.762 + 0.15, why="three opal globes over the island, bottom 762 mm "
-            "above the worktop", card="rid-pendant-above-table-762", extra={"hang_from": ceiling_z("B")})
-    globe_x = [isl[0] + (k + 0.5) * (isl[2] - isl[0]) / 3 for k in range(3)]
-    for x in (isl[0] + 0.05, (globe_x[0] + globe_x[1]) / 2,
-              (globe_x[1] + globe_x[2]) / 2, isl[2] - 0.05):
-        add("DLN", "kitchen", x, cy, why="prep cone between opal globes, clear of their diffusing bodies",
-            card="ies-res-kitchen-prep-500")
+        add("PEN-GLOBE", "kitchen", x, cy, z=top + 0.762 + 0.15, lm=1400, zone="island-pendants:decorative",
+            why="three opal globes over the island, bottom 762 mm above the worktop; ASSUMED 1400 lm each: they light "
+                "the seating side to its card", card="rid-pendant-above-table-762", extra={"hang_from": ceiling_z("B")})
+    # L6b: prep light cut at source: three flush downlights (DL flood, not the 1343 lm DLN) on the prep line of the
+    # counter spans + one over the induction zone; hob and prep are separate zones (300 vs 500 lx cards)
+    spans = [(a_, b_) for kind, a_, b_ in F.module_spans(it["k-island"]) if kind == "counter" and b_ - a_ >= 0.5]
+    prep_x = [(spans[0][0] + spans[0][1]) / 2, spans[-1][0] + (spans[-1][1] - spans[-1][0]) / 3,
+              spans[-1][0] + 2 * (spans[-1][1] - spans[-1][0]) / 3]
+    for x in prep_x:
+        add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line, between the opal globes",
+            card="ies-res-kitchen-prep-500", zone="island-prep:task")
+    burner = next((a_, b_) for kind, a_, b_ in F.module_spans(it["k-island"]) if kind == "single-induction")
+    add("DL", "kitchen", (burner[0] + burner[1]) / 2, (isl[1] + isl[3]) / 2, why="over the single induction zone",
+        card="ies-res-kitchen-cooktop-300", zone="island-hob:task")
     run = fp["k-run"]
-    for x in (run[0] + 0.25, (run[0] + run[2]) / 2, run[2] - 0.25):
-        add("DLN", "kitchen", x, run[3] - 0.65, why="650 mm from the wall face, over the counter's front edge, 1.0 m "
-            "pitch (advisory K-SPOT-OFF / K-SPOT-PITCH)", card="ies-res-kitchen-sink-300")
+    for x in ((run[0] + run[2]) / 2 - 0.45, (run[0] + run[2]) / 2 + 0.45):
+        add("DL", "kitchen", x, run[3] - 0.65, why="650 mm from the wall face over the counter's front edge, 0.9 m pitch "
+            "(L6b: 3 DLN -> 2 DL at the sink)", card="ies-res-kitchen-sink-300", zone="run-task:task")
     add("DL", "kitchen", (rc["kitchen"][0] + isl[0]) / 2 + 0.2, cy + 0.9, why="kitchen general",
         card="ies-res-kitchen-general-50")
     KI = rc["kitchen-island"]
@@ -252,17 +304,14 @@ def design(lay=None):
     # dining: linear pendant over the table (task + decorative), two adjustable fills crossing, sideboard accent
     tb = fp["dining-table"]
     add("PEN-LIN", "dining", (tb[0] + tb[2]) / 2, (tb[1] + tb[3]) / 2,
-        z=LEVEL_Z["B"] + it["dining-table"]["h"] + 0.762, extra={"hang_from": ceiling_z("B")},
+        z=LEVEL_Z["B"] + it["dining-table"]["h"] + 0.762, extra={"hang_from": ceiling_z("B"), "zone": "table-pendant"},
         why="linear pendant along the table, 762 mm above it", card="rid-pendant-above-table-762")
-    tcx, tcy = (tb[0] + tb[2]) / 2, (tb[1] + tb[3]) / 2
-    for x, y in ((tb[0] + 0.2, tb[1] - 0.75), (tb[2] - 0.2, tb[3] + 0.75)):   # opposite diagonal corners
-        add("ADJ", "dining", x, y, aim=(tcx - x, tcy - y, -1.95),
-            why="adjustable fill crossing the table from opposite corners, not straight down (p. 95)",
-            card="ies-res-dining-informal-100")
+    # L6b: the two crossed adjustable fills put ~950 lx on the table centre (9x the 100 lx card; truth probe, variant A):
+    # cut. The pendant is the table's light (Dinner dims it, Day lifts the homework end); the sideboard accent stays.
     sb = fp["dining-sideboard"]
     for x in (sb[0] + 0.45, sb[2] - 0.45):
-        add("ADJ", "dining-side", x, sb[3] + 0.9, aim=(0, -0.55, -1), why="accent on the sideboard and the art "
-            "above it, ~30 deg", card="ldb-accent-aim-30")
+        add("ADJ", "dining-side", x, sb[3] + 0.9, aim=(0, -0.55, -1), zone="sideboard-accent",
+            why="accent on the sideboard and the art above it, ~30 deg", card="ldb-accent-aim-30")
     # garden living: cove, lit glass cabinets, reading in the daybed nook, soft downlights
     Lv = rc["living"]
     cove("living", ("x0", "y0"), "cove on the dining and library sides: the garden living glows at night")
@@ -281,16 +330,17 @@ def design(lay=None):
     for side, face_x, direction in (("left", nook[0] + 0.025, 1), ("right", nook[2] - 0.025, -1)):
         y = (nook[1] + nook[3]) / 2
         add("SWING", "bar-alcove", face_x + direction * 0.59, y, z=LEVEL_Z["B"] + it["library-daybed"]["h"] + 0.55,
+            zone="daybed-reading:task",
             why="ASSUMED side-panel plate 0.55 m above mattress; articulated arm swings over mattress",
             card="ies-res-chair-reading-200", extra={"wall_plate": (face_x, y), "mount_side": side,
                                                        "reach": 0.6, "swept_x": (min(face_x, face_x + direction * 0.6),
                                                                                   max(face_x, face_x + direction * 0.6)),
                                                        "swept_y": (y, y + math.sqrt(0.30**2 - (0.59 / 2)**2))})
     for x in (nook[0] + 0.47, nook[2] - 0.47):
-        add("DLN", "bar-alcove", x, nook[1] + 0.11,
-            z=LEVEL_Z["B"] + it["library-daybed"]["nook_top"] - 0.025,
-            why="recessed in the 2.1 m nook top; task fill", card="ies-res-chair-reading-200",
-            extra={"dimmer": 0.4})
+        add("DL", "bar-alcove", x, nook[1] + 0.11,
+            z=LEVEL_Z["B"] + it["library-daybed"]["nook_top"] - 0.025, zone="daybed-reading:task",
+            why="recessed in the 2.1 m nook top; task fill (L6b: DLN 1343 lm -> DL 732 lm)",
+            card="ies-res-chair-reading-200")
     # cinema: dim wall-wash on the rear wall, low path glow, no light on the screen
     C = rc["cinema"]
     cs = fp["cinema-sofa"]
@@ -304,8 +354,9 @@ def design(lay=None):
           why="low path glow to the door during a film")
     desk = fp["cinema-desk"]
     for x in (desk[0] + 0.31, desk[2] - 0.31):
-        add("DESK", "cinema", x, desk[1] + 0.28, z=LEVEL_Z["B"] + VL_DESK_Z,
-            why="two shielded task lamps at the cinema desk, switched off for films", card="ies-res-desk-400")
+        add("DESK", "cinema", x, desk[1] + 0.28, z=LEVEL_Z["B"] + VL_DESK_Z, lm=250,
+            why="two shielded task lamps at the cinema desk, switched off for films (L6b: 450 -> 250 lm)",
+            card="ies-res-desk-400")
     Sr = rc["store-ramp"]
     shelf = fp["store-shelves"]
     for bay in range(3):
@@ -324,8 +375,8 @@ def design(lay=None):
     DK = rc["dirty-kitchen"]
     dk = fp["dk-run"]
     for x in (dk[0] + 0.5, dk[0] + 1.5, dk[0] + 2.5, dk[2] - 0.4):
-        add("DLN", "dirty-kitchen", x, dk[1] - 0.1, why="over the heavy-cooking run (1000 lm package)",
-            card="ies-res-kitchen-prep-500", lm=1000)
+        add("DL", "dirty-kitchen", x, dk[1] - 0.1, why="over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm)",
+            card="ies-res-kitchen-prep-500", zone="run-task:task")
     for x in (DK[0] + 1.2, DK[2] - 1.2):
         add("DL", "dirty-kitchen", x, DK[1] + 0.9, why="laundry and folding", card="ies-res-laundry-200")
     # =============== GROUND FLOOR ===============
@@ -348,21 +399,21 @@ def design(lay=None):
     Ge = rc["gallery-end"]
     add("DL", "gallery-end", (Ge[0] + Ge[2]) / 2, (Ge[1] + Ge[3]) / 2, why="gallery end", card="ies-res-passage-30")
     S = rc["study-game"]
-    for x, y in _grid(S, 2, 2, mx=1.2, my=0.8):
-        add("DL", "study-game", x, y, why="study ambient", card="ies-res-game-digital-6")
+    for x, y in _grid(S, 2, 1, mx=1.5, my=0.8):
+        add("DL", "study-game", x, (S[1] + S[3]) / 2, why="study ambient (L6b: 4 -> 2)", card="ies-res-game-digital-6")
     d1 = fp["study-desk"]
     for y in (d1[1] + 0.45, d1[3] - 0.45):
-        add("DLN", "study-game", d1[2] - 0.05, y, why="desk light over the shared homework desk's front edge "
-            "(no shadow of the head)", card="ies-res-desk-400")
+        add("DL", "study-game", d1[2] - 0.05, y, why="desk light over the shared homework desk's front edge "
+            "(no shadow of the head); L6b: DL", card="ies-res-desk-400", zone="desk-task:task")
     d2 = fp["study-adult-desk"]
-    add("DLN", "study-game", (d2[0] + d2[2]) / 2, d2[1] - 0.05, why="desk light over the adult desk",
-        card="ies-res-desk-400")
+    add("DL", "study-game", (d2[0] + d2[2]) / 2, d2[1] - 0.05, why="desk light over the adult desk; L6b: DL",
+        card="ies-res-desk-400", zone="desk-task:task")
     FB = rc["family-bath"]
     add("DL", "family-bath", (FB[0] + FB[2]) / 2 + 0.2, (FB[1] + FB[3]) / 2 - 0.3, why="bath ambient",
         card="ies-res-shower-50")
     sh = fp["fb-shower"]
-    add("DLN", "family-bath", (sh[0] + sh[2]) / 2, (sh[1] + sh[3]) / 2, why="shower (wet-rated)",
-        card="ies-res-shower-50")
+    add("DL", "family-bath", (sh[0] + sh[2]) / 2, (sh[1] + sh[3]) / 2, why="shower (wet-rated); L6b: DL",
+        card="ies-res-shower-50", zone="shower:task")
     _sconces(add, "family-bath", fp["fb-basin"], lay, rc)
     bb = fp["fb-basin"]
     strip("TOE", "family-bath", (bb[2] + 0.02, bb[1] + 0.03), (bb[2] + 0.02, bb[3] - 0.03), 0.30, (0.3, 0, -1),
@@ -385,14 +436,12 @@ def design(lay=None):
     strip("COVE", "parents-bed", (b[0] - 0.25, PB[1] + 0.12), (b[2] + 0.25, PB[1] + 0.12), CEILING + 0.03,
           (0, 0.4, 1), why="headboard cove: warm light grazing the bed wall (taste: 2700 K cove at the headboard)")
     for x in (b[0] + 0.18, b[2] - 0.18):
-        add("WALL-READ", "parents-bed", x, PB[1] + 0.13, z=1.45, aim=(0, 0.45, -0.35),
+        add("WALL-READ", "parents-bed", x, PB[1] + 0.13, z=1.45, aim=(0, 0.45, -0.35), zone="bed-reading:task", lm=300,
             why="wall-mounted swing arm on the solid head wall, aimed at the pillow; clear of both passages")
-    for x in (b[0] + 0.4, b[2] - 0.4):
-        add("ADJ", "parents-bed", x, b[1] + 0.35, why="reading spot straight over the reading position (the tilted "
-            "first aim landed 0.6 m down the bed: measured 135-142 lx in the scene)",
-            card="ies-res-bed-reading-200")
+    # L6b: the two straight-down adjustable reading spots gave 790 lx on each pillow (4x the 200 lx card): cut; the
+    # swing-arm lamps on the head wall are the reading lights
     for x, y in ((PB[0] + 0.55, (PB[1] + PB[3]) / 2), ((b[0] + b[2]) / 2, b[3] + 0.45)):
-        add("DL", "parents-bed", x, y, why="ambient, dimmable", card="ies-res-bedroom-general-50")
+        add("DL", "parents-bed", x, y, why="ambient, dimmable", card="ies-res-bedroom-general-50", zone="ambient")
     v = fp["pb-vanity"]
     add("ADJ", "parents-bed", v[0] - 0.35, (v[1] + v[3]) / 2, aim=(0.35, 0, -1), why="vanity light",
         card="ies-res-vanity-grooming-300")
@@ -433,6 +482,7 @@ def design(lay=None):
     pb_ = fp["pe-basin"]
     strip("TOE", "parents-ensuite", (pb_[2] + 0.02, pb_[1] + 0.03), (pb_[2] + 0.02, pb_[3] - 0.03), 0.30,
           (0.3, 0, -1), level="GF", why="glow under the vanity: night light")
+    apply_drivers(out)
     return out
 
 
@@ -497,12 +547,12 @@ def _sconces(add, room, basin, lay, rc, vertical=False):
     # give the face its vertical light, Ev)
     if abs(x0 - r[0]) < 0.05 or abs(x1 - r[2]) < 0.05:
         dx = r[0] + 0.35 if abs(x0 - r[0]) < 0.05 else r[2] - 0.35
-        add("DLN", room, dx, (y0 + y1) / 2, why="basin counter light, in front of the mirror",
-            card="ies-res-vanity-grooming-300", level=lv, lm=900)
+        add("DL", room, dx, (y0 + y1) / 2, why="basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
+            card="ies-res-vanity-grooming-300", level=lv, zone="basin-task:task")
     else:
         dy = r[1] + 0.35 if abs(y0 - r[1]) < 0.05 else r[3] - 0.35
-        add("DLN", room, (x0 + x1) / 2, dy, why="basin counter light, in front of the mirror",
-            card="ies-res-vanity-grooming-300", level=lv, lm=900)
+        add("DL", room, (x0 + x1) / 2, dy, why="basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
+            card="ies-res-vanity-grooming-300", level=lv, zone="basin-task:task")
     if abs(x0 - r[0]) < 0.05 or abs(x1 - r[2]) < 0.05:           # basin against an x wall: mirror on that wall
         wx = r[0] + wall_offset if abs(x0 - r[0]) < 0.05 else r[2] - wall_offset
         cy = (y0 + y1) / 2
@@ -776,3 +826,38 @@ def _emitters(f):
                         z + record.along[2] * t * record.length, record.flux_lm / nseg))
         return out
     return [(x, y, z, record.flux_lm)]
+
+
+# ------------------------------------------------------------------ scenes (LA10)
+# Level (0..1) of each control zone per scene, per Radiance cluster. A key is '*layer' (every zone of that layer) or a
+# zone-id suffix ('island-prep' matches Z-B-KITCHEN-ISLAND-PREP); later keys override earlier ones; missing = off.
+# Owners: each IES task card is met in ONE scene (Dinner 100 lx table, Cook 500 lx prep, Day 200 lx seating/homework and
+# the desks/basins, Reading 200 lx armchair/daybed/pillow). Night = low path/marker level; Film = cinema and lounge.
+_DAY = {"*ambient": 1.0, "*task": 1.0, "*accent": 1.0, "*decorative": 1.0}
+_EVENING = {"*ambient": 0.4, "*accent": 0.7, "*decorative": 0.7}
+_NIGHT = {"*night": 0.1}
+SCENES = {
+    "B-open": {
+        "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
+        "Cook": {"*ambient": 1.0, "island-pendants": 1.0, "island-prep": 1.0, "island-hob": 1.0, "run-task": 1.0},
+        "Dinner": {"table-pendant": 0.4, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
+                   "sideboard-accent": 1.0},
+        "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.3, "island-pendants": 0.4},
+        "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.3, "*decorative": 0.3},
+        "Film": {"lounge-decorative": 0.15, "*night": 0.1},
+        "Night": _NIGHT,
+    },
+    "B-cinema": {"Day": _DAY, "Evening": _EVENING, "Film": {"cinema-accent": 0.15, "*night": 0.3}, "Night": _NIGHT},
+    "GF-circulation": {"Day": _DAY, "Evening": _EVENING, "Night": _NIGHT},
+    "GF-kids-a": {"Day": _DAY, "Evening": _EVENING, "Night": _NIGHT},
+    "GF-kids-b": {"Day": _DAY, "Evening": _EVENING, "Night": _NIGHT},
+    "GF-parents-bed": {"Day": _DAY, "Evening": _EVENING, "Night": _NIGHT,
+                       "Reading": {"bed-reading": 1.0, "*decorative": 0.3}},
+    "GF-parents-dressing": {"Day": _DAY, "Night": _NIGHT},
+    "GF-parents-ensuite": {"Day": _DAY, "Night": _NIGHT},
+    "GF-family-bath": {"Day": _DAY, "Night": _NIGHT},
+    "B-guest-wc": {"Day": _DAY, "Night": _NIGHT},
+    "B-dirty-kitchen": {"Day": _DAY},
+    "B-pantry": {"Day": _DAY},
+    "B-store": {"Day": _DAY},
+}

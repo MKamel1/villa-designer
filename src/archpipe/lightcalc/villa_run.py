@@ -29,13 +29,16 @@ def _dump(calc: RoomCalc, path: Path):
     path.write_text(json.dumps(data), encoding="utf-8")
 
 
-def run_all(villa: Villa, tag: str, out: Path, host: str = "ai-workstation", reuse: bool = False):
+def run_all(villa: Villa, tag: str, out: Path, host: str = "ai-workstation", reuse: bool = False, fast: bool = False,
+            only: list | None = None):
     planes = villa.planes()
     out = Path(out) / tag
     out.mkdir(parents=True, exist_ok=True)
     calcs = {}
     for name in CLUSTERS:
-        c = villa.calc(name, planes)
+        if only and name not in only:
+            continue
+        c = villa.calc(name, planes, fast=fast)
         if not c.planes or not c.placements:
             continue
         c.name = "%s-%s" % (tag, name)
@@ -57,5 +60,7 @@ if __name__ == "__main__":
     ap.add_argument("--tag", required=True)
     ap.add_argument("--out", default="out/L6b")
     ap.add_argument("--reuse", action="store_true")
+    ap.add_argument("--fast", action="store_true", help="ab 6 only (no ab 12 convergence run)")
+    ap.add_argument("--only", nargs="*")
     a = ap.parse_args()
-    run_all(Villa(), a.tag, Path(a.out), reuse=a.reuse)
+    run_all(Villa(), a.tag, Path(a.out), reuse=a.reuse, fast=a.fast, only=a.only)
