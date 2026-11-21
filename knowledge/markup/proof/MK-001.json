@@ -1,0 +1,56 @@
+{
+ "id": "MK-001",
+ "source": {
+  "file": "A-111-plan.pdf",
+  "page": 1,
+  "annotation_id": "fitz-A0",
+  "type": "Text",
+  "hash": "918ba704a7175c04"
+ },
+ "author": "client",
+ "date": null,
+ "text": "door too narrow",
+ "sheet": "A-111",
+ "sheet_point_mm": {
+  "x": 597.9,
+  "y": 244.6
+ },
+ "model_point": {
+  "x_mm": 13255.0,
+  "y_mm": -27341.0,
+  "level": "GF"
+ },
+ "link_status": "linked",
+ "link_reason": "object within tolerance",
+ "tolerance_mm": 150.0,
+ "links": [
+  {
+   "element_id": "door-GF-corridor-kids-a",
+   "kind": "door",
+   "distance_mm": 0.0,
+   "tier": "object"
+  },
+  {
+   "element_id": "room-kids-a",
+   "kind": "room",
+   "distance_mm": 0.0,
+   "tier": "context"
+  }
+ ],
+ "alternatives": [],
+ "frame_verified": {
+  "verified": true,
+  "tags": 30,
+  "inside": 30
+ },
+ "status": "closed",
+ "decision": {
+  "verdict": "accept",
+  "reason": "widen leaf to 900 per brief",
+  "date": "2026-11-21"
+ },
+ "closure": {
+  "commit": "1c3017e",
+  "date": "2026-11-21"
+ }
+}
