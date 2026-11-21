@@ -3,7 +3,7 @@
 Everything the model does not carry is an explicit, flagged assumption (House.flags), never silent:
   - door hinge/latch side: not in the model, chosen by policy (hinge at the end of the opening nearer the wall corner);
   - bed head side: derived from the wall the bed stands against;
-  - luminaire watts for strips, pendants and lamps (about 60 of 142): flux / 90 lm/W placeholder;
+  - luminaire watts for strips, pendants and lamps (63 of 136): flux / 90 lm/W placeholder;
   - lighting control zones: provisional, one per room and layer, until lane L6b publishes knowledge/lighting/zones-d1.json;
   - equipment: knowledge/electrical/d1-equipment-assumed.json (status "assumed");
   - board positions: pantry (main board), stair-foot hall (basement board), stair-head gallery (ground-floor board).

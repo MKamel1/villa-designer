@@ -117,4 +117,4 @@ Gas hob (the 6 kW / 32 A induction circuit is replaced by a 0.3 kW ignition/hood
 
 Real zones in, 136 luminaires (was 142): maximum demand **77.4 kVA** (was 77.6), 352 A single-phase equivalent, 117.5 A on the worst phase; three-phase still holds
 (every sensitivity row above 63 A). 58 final circuits (was 57) + 2 feeders; 3 boards: MDB 8 / 10 ways, DB-B 32 / 40, DB-GF 20 / 26. Incomer 125 A / 50 mm2 unchanged.
-EA checks: 0 fail. Re-run: `python scripts/integrate.py` (see `docs/lanes/INT-integration.md`).
+EA checks: 0 fail. Re-run: `python -m archpipe.exchange.integrate` (see `docs/lanes/INT-integration.md`).
