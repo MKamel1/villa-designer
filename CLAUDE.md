@@ -1,7 +1,8 @@
 # archpipe — working agreement
 
 An AI-led villa design system: a staged method with checks attached.
-**New to this repo? Read `docs/HANDOVER.md` first.**
+**Orchestrating the A+ programme (since 2026-11-21)? Read `docs/quality/ORCHESTRATOR-HANDOVER.md` first.**
+Otherwise, new to this repo: `docs/HANDOVER.md` (historical, 2026-09).
 
 Current scope and status: `docs/ROADMAP.md`. The bedroom is a capability
 example within the full villa method. Shared observed lessons live in
