@@ -139,6 +139,9 @@ def validate_scene(scene: dict) -> list[str]:
 
     if not isinstance(scene, dict):
         return ["scene: expected object"]
+    # Element identity (P2) is additive and hashed by no frozen admission record: judge the scene without it.
+    from .blender.element_ids import without_ids
+    scene = without_ids(scene)
     from .imported_appearance import require_scene, needs_scene_admission
     if needs_scene_admission(scene):
         try:
