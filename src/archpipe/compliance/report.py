@@ -74,18 +74,23 @@ def _src(r, cards):
     return "; ".join(out) or "-"
 
 
-def _table(rows, cards):
-    lines = ["| subject | gate | achieved | required | unit | status | source | note |", "|---|---|---|---|---|---|---|---|"]
+def _table(rows, cards, before=None):
+    lines = ["| subject | gate | achieved | required | unit | before | status | source | note |",
+             "|---|---|---|---|---|---|---|---|---|"]
     for r in rows:
         note = r.message.replace("|", "/")
         if len(note) > 170:
             note = note[:167] + "..."
-        lines.append("| %s | %s | %s | %s | %s | **%s** | %s | %s |" % (
-            r.subject.replace("|", "/"), "gate" if r.gate else "info", _fmt(r.achieved), _fmt(r.required), r.unit, r.status.upper(), _src(r, cards), note))
+        b = (before or {}).get((r.criterion, r.subject))
+        bcell = "-" if b is None else (b["status"].upper() + ("" if b["gate"] == r.gate else " (%s)" % ("gate" if b["gate"] else "info")))
+        if before is not None and b is None:
+            bcell = "new"
+        lines.append("| %s | %s | %s | %s | %s | %s | **%s** | %s | %s |" % (
+            r.subject.replace("|", "/"), "gate" if r.gate else "info", _fmt(r.achieved), _fmt(r.required), r.unit, bcell, r.status.upper(), _src(r, cards), note))
     return "\n".join(lines)
 
 
-def render(m, results, cards) -> str:
+def render(m, results, cards, before=None) -> str:
     gates = [r for r in results if r.gate]
     info = [r for r in results if not r.gate]
     n = lambda rows, st: sum(1 for r in rows if r.status == st)  # noqa: E731
@@ -108,8 +113,37 @@ def render(m, results, cards) -> str:
              "%d fail, %d warn, %d not evaluated.\n" % (
                  len(gates), n(gates, "pass"), n(gates, "fail"), n(gates, "warn"), n(gates, "not_evaluated"),
                  len(info), n(info, "pass"), n(info, "fail"), n(info, "warn"), n(info, "not_evaluated")))
-    L.append("Grade effect under docs/quality/A-PLUS.md: a failed life-safety gate caps the grade at D (open-riser "
-             "stair, windowless cinema).\n")
+    waived = [r for r in info if "WAIVED" in r.message]
+    if n(gates, "fail"):
+        L.append("Grade effect under docs/quality/A-PLUS.md: %d failed life-safety gate(s) cap the grade at D.\n"
+                 % n(gates, "fail"))
+    else:
+        L.append("Grade effect under docs/quality/A-PLUS.md: no gate fails; %d gate rows are not evaluated (a "
+                 "gate that cannot be proved is not a pass). Recorded client waiver%s (G1 2026-11-21, still a "
+                 "best-practice failure, kept visible as an info row): %s.\n" % (
+                     n(gates, "not_evaluated"), "s" if len(waived) != 1 else "",
+                     "; ".join(r.subject for r in waived) or "none"))
+    if before is not None:
+        L.append("## Before and after the G1 design fixes\n")
+        bg = [v for v in before.values() if v["gate"]]
+        L.append("Before (integ/aplus, `knowledge/eg/baseline-before-g1.json`): %d gate rows: %d pass, %d fail, %d warn, "
+                 "%d not evaluated. After: %d gate rows: %d pass, %d fail, %d warn, %d not evaluated.\n" % (
+                     len(bg), sum(v["status"] == "pass" for v in bg), sum(v["status"] == "fail" for v in bg),
+                     sum(v["status"] == "warn" for v in bg), sum(v["status"] == "not_evaluated" for v in bg),
+                     len(gates), n(gates, "pass"), n(gates, "fail"), n(gates, "warn"), n(gates, "not_evaluated")))
+        changed = []
+        for r in results:
+            b = before.get((r.criterion, r.subject))
+            if b is not None and (b["status"], b["gate"]) != (r.status, r.gate) and "[ER informative]" not in r.subject:
+                changed.append((r, b))
+        L.append("Rows whose status or gate flag changed:\n")
+        L.append("| criterion | subject | before | after |")
+        L.append("|---|---|---|---|")
+        for r, b in changed:
+            L.append("| %s | %s | %s (%s) | %s (%s) |" % (r.criterion, r.subject.replace("|", "/"), b["status"].upper(),
+                                                         "gate" if b["gate"] else "info", r.status.upper(),
+                                                         "gate" if r.gate else "info"))
+        L.append("")
     L.append("## Failures and fixes, cheapest first\n")
     seen = set()
     k = 0
@@ -133,7 +167,7 @@ def render(m, results, cards) -> str:
     other = [r for r in results if r.gate and r.status != "pass" and id(r) not in seen]
     if other:
         L.append("### Other open gate rows\n")
-        L.append(_table(other, cards))
+        L.append(_table(other, cards, before))
         L.append("")
     L.append("## Every check, per room and element\n")
     L.append("`gate` rows are safety or quality gates; `info` rows are targets, recommendations or reports. Egyptian "
@@ -143,13 +177,13 @@ def render(m, results, cards) -> str:
         if not rows:
             continue
         L.append("### %s %s\n" % (crit, title))
-        L.append(_table(rows, cards))
+        L.append(_table(rows, cards, before))
         L.append("")
     L.append("## Informative and target rows (not gates)\n")
     L.append("Egyptian ER rows (`[ER informative]`), A+ targets and recommendations. Passing rows are counted, not "
              "listed.\n")
     bad = [r for r in info if r.status != "pass" and "[ER informative]" in r.subject]
-    L.append(_table(bad, cards))
+    L.append(_table(bad, cards, before))
     L.append("")
     er = [r for r in info if "[ER informative]" in r.subject]
     L.append("Egyptian ER informative rows: %d, of which %d would fail. Failing ones: %s.\n" % (

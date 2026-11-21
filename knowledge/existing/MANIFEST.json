@@ -1,0 +1,45 @@
+{
+ "schema": "existing-structure-manifest/1",
+ "purpose": "Frozen facts about the client's existing building (omar.rvt). Any change comes from a new survey, not Revit. Read through archpipe.model.geometry_existing.",
+ "files": {
+  "omar-inventory.json": {
+   "sha256": "238f183b8d1f483813b3f9ed1db05d83321ac84eb2bc6637fffd5f9c25055ad2",
+   "bytes": 8984,
+   "original": "omar-inventory.json",
+   "original_sha256": "238f183b8d1f483813b3f9ed1db05d83321ac84eb2bc6637fffd5f9c25055ad2",
+   "original_bytes": 8984,
+   "note": "Revit 2027 read of omar.rvt: 15 structural columns (ids, bbox), 3 floors, levels, grids (0), framing (0), category counts. U15."
+  },
+  "omar-wet.json": {
+   "sha256": "3a45d104e0709463b475e3e6ad1c6747c03c4d820eb0a319739f3e76a0edebd4",
+   "bytes": 13076,
+   "original": "omar-wet.json",
+   "original_sha256": "3a45d104e0709463b475e3e6ad1c6747c03c4d820eb0a319739f3e76a0edebd4",
+   "original_bytes": 13076,
+   "note": "Wet-room probe of the existing building (U16)."
+  },
+  "omar-stairzone.json.gz": {
+   "sha256": "96581dd58701d5c80cdf179bf8b57f2ad413ac35d8af0f09a453021884b24df7",
+   "bytes": 3942,
+   "original": "omar-stairzone.json",
+   "original_sha256": "65223de88e838ff7b575ea89d33814390d452e414823c4bc7776b9413110f2c8",
+   "original_bytes": 64095,
+   "note": "Stair-zone probe of the existing building (U16); gzip of the original bytes.",
+   "encoding": "gzip"
+  },
+  "omar-2027-extract.nomesh.json.gz": {
+   "sha256": "21aedd52f9910776fb9e7a154d2df3c988484b2f135377a1c24e5a9cf5e5bf2e",
+   "bytes": 10220,
+   "original": "omar-2027-extract.json",
+   "original_sha256": "fd8ffcdc9904996811565dad82e5f05daabb64f29460e6a77cc078271f0c1f31",
+   "original_bytes": 425057156,
+   "note": "Full Revit 2027 extract of omar.rvt (walls 63, openings, casework, furniture, lighting, wall types, levels, site) minus mesh triangles.",
+   "encoding": "gzip",
+   "stripped": "meshes"
+  }
+ },
+ "notes": [
+  "omar-extract.json (Revit 2025 attempt) was a 0-byte file and is not frozen.",
+  "omar-2027-extract.json is 425 MB because of meshes; the stripped copy keeps every placement, size, level and type field."
+ ]
+}

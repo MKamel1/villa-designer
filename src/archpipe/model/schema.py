@@ -6,8 +6,9 @@ import math
 from ..contracts import DesignElement
 
 SCHEMA = "archpipe-model/1"
+REVISION = 2        # additive: storey, floor, ceiling, type kinds; layers, handing, sizes, net areas (lane M)
 KINDS = ("room", "wall", "slab", "door", "window", "stair", "railing", "column", "beam", "furniture", "fixture",
-         "luminaire", "device", "plant", "garden", "context")
+         "luminaire", "device", "plant", "garden", "context", "storey", "floor", "ceiling", "type")
 LEVELS = ("B", "GF", "L1", "ROOF", "SITE")
 
 # params every element of a kind must carry (checked for presence, not for value).
@@ -21,7 +22,13 @@ REQUIRED_PARAMS = {
     "luminaire": ("photometry", "flux_lm", "fixture_kind"),
     "plant": ("species",),
     "furniture": ("type",),
+    "storey": ("elevation_scene_mm", "ours"),
+    "floor": ("finish_code", "polygon_mm", "layers"),
+    "ceiling": ("ceiling_kind", "polygon_mm", "height_mm", "height_min_mm", "height_max_mm", "layers"),
+    "type": ("for_kind", "shared", "occurrences"),
 }
+# kinds whose occurrences must reference a shared type (params.type_id), once the model is complete
+TYPED = ("door", "window", "furniture", "luminaire")
 
 
 def _finite(seq) -> bool:

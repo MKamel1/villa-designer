@@ -1,0 +1,715 @@
+{
+ "log": [
+  "S1: walls 33 doors 18 windows 11 rooms 20 failed 0", 
+  "S2: walls 31 doors 17 windows 12 rooms 20 failed 0", 
+  "S3: walls 31 doors 17 windows 10 rooms 20 failed 0", 
+  "S4: walls 30 doors 17 windows 12 rooms 24 failed 0", 
+  "S5: walls 36 doors 18 windows 14 rooms 20 failed 0"
+ ], 
+ "options": [
+  {
+   "built": {
+    "block_roofs": 0, 
+    "doors": 18, 
+    "gf_opening_id": 1615359, 
+    "stair_id": 1615352, 
+    "walls": 33, 
+    "windows": 11
+   }, 
+   "deleted": 117, 
+   "failed": [], 
+   "id": "S1", 
+   "rooms": [
+    {
+     "area_m2": 2.8799999999999999, 
+     "id": "laundry", 
+     "level": "B", 
+     "name": "laundry / pantry"
+    }, 
+    {
+     "area_m2": 6.0899999999999999, 
+     "id": "hall-b", 
+     "level": "B", 
+     "name": "entrance hall"
+    }, 
+    {
+     "area_m2": 12.170000000000000, 
+     "id": "flex", 
+     "level": "B", 
+     "name": "flex room"
+    }, 
+    {
+     "area_m2": 6.4100000000000001, 
+     "id": "stair-b", 
+     "level": "B", 
+     "name": "stair (U, to the GF)"
+    }, 
+    {
+     "area_m2": 3.7999999999999998, 
+     "id": "gallery", 
+     "level": "B", 
+     "name": "gallery"
+    }, 
+    {
+     "area_m2": 16.660000000000000, 
+     "id": "kitchen", 
+     "level": "B", 
+     "name": "open kitchen"
+    }, 
+    {
+     "area_m2": 3.9700000000000002, 
+     "id": "dirty-kitchen", 
+     "level": "B", 
+     "name": "dirty kitchen"
+    }, 
+    {
+     "area_m2": 2.2300000000000000, 
+     "id": "guest-wc", 
+     "level": "B", 
+     "name": "guest WC"
+    }, 
+    {
+     "area_m2": 15.910000000000000, 
+     "id": "dining", 
+     "level": "B", 
+     "name": "dining"
+    }, 
+    {
+     "area_m2": 18.149999999999999, 
+     "id": "living", 
+     "level": "B", 
+     "name": "garden living"
+    }, 
+    {
+     "area_m2": 4.8600000000000003, 
+     "id": "store-rear", 
+     "level": "B", 
+     "name": "store"
+    }, 
+    {
+     "area_m2": 12.170000000000000, 
+     "id": "study-game", 
+     "level": "GF", 
+     "name": "study / game room (door to the terrace)"
+    }, 
+    {
+     "area_m2": 16.340000000000000, 
+     "id": "corridor", 
+     "level": "GF", 
+     "name": "hall"
+    }, 
+    {
+     "area_m2": 6.1900000000000004, 
+     "id": "stair-gf", 
+     "level": "GF", 
+     "name": "stair (U, from the basement)"
+    }, 
+    {
+     "area_m2": 12.010000000000000, 
+     "id": "kids-a", 
+     "level": "GF", 
+     "name": "kids bedroom A"
+    }, 
+    {
+     "area_m2": 12.170000000000000, 
+     "id": "kids-b", 
+     "level": "GF", 
+     "name": "kids bedroom B"
+    }, 
+    {
+     "area_m2": 6.6200000000000001, 
+     "id": "family-bath", 
+     "level": "GF", 
+     "name": "family bathroom"
+    }, 
+    {
+     "area_m2": 13.650000000000000, 
+     "id": "parents-bed", 
+     "level": "GF", 
+     "name": "parents' bedroom"
+    }, 
+    {
+     "area_m2": 3.2300000000000000, 
+     "id": "parents-dressing", 
+     "level": "GF", 
+     "name": "dressing"
+    }, 
+    {
+     "area_m2": 5.5199999999999996, 
+     "id": "parents-ensuite", 
+     "level": "GF", 
+     "name": "en-suite"
+    }
+   ], 
+   "saved": "C:\\Users\\mmbka\\arch-pipeline\\out\\villa\\options\\omar-option-S1.rvt"
+  }, 
+  {
+   "built": {
+    "block_roofs": 0, 
+    "doors": 17, 
+    "gf_opening_id": 1615361, 
+    "stair_id": 1615354, 
+    "walls": 31, 
+    "windows": 12
+   }, 
+   "deleted": 117, 
+   "failed": [], 
+   "id": "S2", 
+   "rooms": [
+    {
+     "area_m2": 3.7300000000000000, 
+     "id": "dirty-kitchen", 
+     "level": "B", 
+     "name": "dirty kitchen (street window)"
+    }, 
+    {
+     "area_m2": 2.8799999999999999, 
+     "id": "laundry", 
+     "level": "B", 
+     "name": "laundry"
+    }, 
+    {
+     "area_m2": 3.7200000000000002, 
+     "id": "hall-b", 
+     "level": "B", 
+     "name": "entrance hall"
+    }, 
+    {
+     "area_m2": 0.91000000000000003, 
+     "id": "hall-b2", 
+     "level": "B", 
+     "name": "hall"
+    }, 
+    {
+     "area_m2": 9.7200000000000006, 
+     "id": "flex", 
+     "level": "B", 
+     "name": "flex room"
+    }, 
+    {
+     "area_m2": 6.4500000000000002, 
+     "id": "stair-b", 
+     "level": "B", 
+     "name": "stair (U, to the GF)"
+    }, 
+    {
+     "area_m2": 16.010000000000002, 
+     "id": "dining", 
+     "level": "B", 
+     "name": "dining"
+    }, 
+    {
+     "area_m2": 18.149999999999999, 
+     "id": "living", 
+     "level": "B", 
+     "name": "garden living"
+    }, 
+    {
+     "area_m2": 27.629999999999999, 
+     "id": "kitchen", 
+     "level": "B", 
+     "name": "open kitchen"
+    }, 
+    {
+     "area_m2": 1.7100000000000000, 
+     "id": "guest-wc", 
+     "level": "B", 
+     "name": "guest WC"
+    }, 
+    {
+     "area_m2": 3.0200000000000000, 
+     "id": "store-rear", 
+     "level": "B", 
+     "name": "store"
+    }, 
+    {
+     "area_m2": 12.170000000000000, 
+     "id": "study-game", 
+     "level": "GF", 
+     "name": "study / game room (door to the terrace)"
+    }, 
+    {
+     "area_m2": 16.340000000000000, 
+     "id": "corridor", 
+     "level": "GF", 
+     "name": "hall"
+    }, 
+    {
+     "area_m2": 6.1900000000000004, 
+     "id": "stair-gf", 
+     "level": "GF", 
+     "name": "stair (U, from the basement)"
+    }, 
+    {
+     "area_m2": 12.010000000000000, 
+     "id": "kids-a", 
+     "level": "GF", 
+     "name": "kids bedroom A"
+    }, 
+    {
+     "area_m2": 12.170000000000000, 
+     "id": "kids-b", 
+     "level": "GF", 
+     "name": "kids bedroom B"
+    }, 
+    {
+     "area_m2": 6.6200000000000001, 
+     "id": "family-bath", 
+     "level": "GF", 
+     "name": "family bathroom"
+    }, 
+    {
+     "area_m2": 13.650000000000000, 
+     "id": "parents-bed", 
+     "level": "GF", 
+     "name": "parents' bedroom"
+    }, 
+    {
+     "area_m2": 3.2300000000000000, 
+     "id": "parents-dressing", 
+     "level": "GF", 
+     "name": "dressing"
+    }, 
+    {
+     "area_m2": 5.5199999999999996, 
+     "id": "parents-ensuite", 
+     "level": "GF", 
+     "name": "en-suite"
+    }
+   ], 
+   "saved": "C:\\Users\\mmbka\\arch-pipeline\\out\\villa\\options\\omar-option-S2.rvt"
+  }, 
+  {
+   "built": {
+    "block_roofs": 0, 
+    "doors": 17, 
+    "gf_opening_id": 1615351, 
+    "stair_id": 1615344, 
+    "walls": 31, 
+    "windows": 10
+   }, 
+   "deleted": 117, 
+   "failed": [], 
+   "id": "S3", 
+   "rooms": [
+    {
+     "area_m2": 7.8200000000000003, 
+     "id": "stair-b", 
+     "level": "B", 
+     "name": "stair (U, to the GF)"
+    }, 
+    {
+     "area_m2": 6.1100000000000003, 
+     "id": "hall-b", 
+     "level": "B", 
+     "name": "entrance hall"
+    }, 
+    {
+     "area_m2": 2.8799999999999999, 
+     "id": "laundry", 
+     "level": "B", 
+     "name": "laundry"
+    }, 
+    {
+     "area_m2": 6.9400000000000004, 
+     "id": "dirty-kitchen", 
+     "level": "B", 
+     "name": "dirty kitchen"
+    }, 
+    {
+     "area_m2": 11.640000000000001, 
+     "id": "flex", 
+     "level": "B", 
+     "name": "flex room"
+    }, 
+    {
+     "area_m2": 16.100000000000001, 
+     "id": "kitchen", 
+     "level": "B", 
+     "name": "open kitchen"
+    }, 
+    {
+     "area_m2": 2.5699999999999998, 
+     "id": "gallery", 
+     "level": "B", 
+     "name": "gallery"
+    }, 
+    {
+     "area_m2": 16.010000000000002, 
+     "id": "dining", 
+     "level": "B", 
+     "name": "dining"
+    }, 
+    {
+     "area_m2": 18.149999999999999, 
+     "id": "living", 
+     "level": "B", 
+     "name": "garden living"
+    }, 
+    {
+     "area_m2": 1.7100000000000000, 
+     "id": "guest-wc", 
+     "level": "B", 
+     "name": "guest WC"
+    }, 
+    {
+     "area_m2": 3.0200000000000000, 
+     "id": "store-rear", 
+     "level": "B", 
+     "name": "store"
+    }, 
+    {
+     "area_m2": 7.8200000000000003, 
+     "id": "stair-gf", 
+     "level": "GF", 
+     "name": "stair (U, from the basement)"
+    }, 
+    {
+     "area_m2": 16.359999999999999, 
+     "id": "corridor", 
+     "level": "GF", 
+     "name": "hall"
+    }, 
+    {
+     "area_m2": 10.550000000000001, 
+     "id": "study-game", 
+     "level": "GF", 
+     "name": "study / game room"
+    }, 
+    {
+     "area_m2": 12.010000000000000, 
+     "id": "kids-a", 
+     "level": "GF", 
+     "name": "kids bedroom A"
+    }, 
+    {
+     "area_m2": 12.170000000000000, 
+     "id": "kids-b", 
+     "level": "GF", 
+     "name": "kids bedroom B"
+    }, 
+    {
+     "area_m2": 6.6200000000000001, 
+     "id": "family-bath", 
+     "level": "GF", 
+     "name": "family bathroom"
+    }, 
+    {
+     "area_m2": 13.650000000000000, 
+     "id": "parents-bed", 
+     "level": "GF", 
+     "name": "parents' bedroom"
+    }, 
+    {
+     "area_m2": 3.2300000000000000, 
+     "id": "parents-dressing", 
+     "level": "GF", 
+     "name": "dressing"
+    }, 
+    {
+     "area_m2": 5.5199999999999996, 
+     "id": "parents-ensuite", 
+     "level": "GF", 
+     "name": "en-suite"
+    }
+   ], 
+   "saved": "C:\\Users\\mmbka\\arch-pipeline\\out\\villa\\options\\omar-option-S3.rvt"
+  }, 
+  {
+   "built": {
+    "block_roofs": 0, 
+    "doors": 17, 
+    "gf_opening_id": 1615360, 
+    "stair_id": 1615353, 
+    "walls": 30, 
+    "windows": 12
+   }, 
+   "deleted": 117, 
+   "failed": [], 
+   "id": "S4", 
+   "rooms": [
+    {
+     "area_m2": 1.1399999999999999, 
+     "id": "utility-lobby", 
+     "level": "B", 
+     "name": "utility lobby (under the top landing)"
+    }, 
+    {
+     "area_m2": 4.75, 
+     "id": "stair-b", 
+     "level": "B", 
+     "name": "stair (straight, to the GF)"
+    }, 
+    {
+     "area_m2": 2.8799999999999999, 
+     "id": "laundry", 
+     "level": "B", 
+     "name": "laundry"
+    }, 
+    {
+     "area_m2": 6.3200000000000003, 
+     "id": "passage-b", 
+     "level": "B", 
+     "name": "passage"
+    }, 
+    {
+     "area_m2": 4.6399999999999997, 
+     "id": "dirty-kitchen", 
+     "level": "B", 
+     "name": "dirty kitchen (street window)"
+    }, 
+    {
+     "area_m2": 8.1600000000000001, 
+     "id": "flex", 
+     "level": "B", 
+     "name": "flex room"
+    }, 
+    {
+     "area_m2": 4.4900000000000002, 
+     "id": "hall-b", 
+     "level": "B", 
+     "name": "hall at the stair foot"
+    }, 
+    {
+     "area_m2": 14.080000000000000, 
+     "id": "kitchen", 
+     "level": "B", 
+     "name": "open kitchen"
+    }, 
+    {
+     "area_m2": 4.8499999999999996, 
+     "id": "kitchen-island", 
+     "level": "B", 
+     "name": "open kitchen (island zone)"
+    }, 
+    {
+     "area_m2": 3.5099999999999998, 
+     "id": "entry-b", 
+     "level": "B", 
+     "name": "entrance (second core lobby)"
+    }, 
+    {
+     "area_m2": 16.010000000000002, 
+     "id": "dining", 
+     "level": "B", 
+     "name": "dining"
+    }, 
+    {
+     "area_m2": 18.149999999999999, 
+     "id": "living", 
+     "level": "B", 
+     "name": "garden living"
+    }, 
+    {
+     "area_m2": 1.7100000000000000, 
+     "id": "guest-wc", 
+     "level": "B", 
+     "name": "guest WC"
+    }, 
+    {
+     "area_m2": 3.0200000000000000, 
+     "id": "store-rear", 
+     "level": "B", 
+     "name": "store"
+    }, 
+    {
+     "area_m2": 2.1099999999999999, 
+     "id": "landing-gf", 
+     "level": "GF", 
+     "name": "stair landing (core door)"
+    }, 
+    {
+     "area_m2": 7.0400000000000000, 
+     "id": "stair-gf", 
+     "level": "GF", 
+     "name": "stair void + gallery"
+    }, 
+    {
+     "area_m2": 11.550000000000001, 
+     "id": "corridor", 
+     "level": "GF", 
+     "name": "hall"
+    }, 
+    {
+     "area_m2": 11.119999999999999, 
+     "id": "study-game", 
+     "level": "GF", 
+     "name": "study / game room"
+    }, 
+    {
+     "area_m2": 12.840000000000000, 
+     "id": "kids-a", 
+     "level": "GF", 
+     "name": "kids bedroom A"
+    }, 
+    {
+     "area_m2": 12.869999999999999, 
+     "id": "kids-b", 
+     "level": "GF", 
+     "name": "kids bedroom B"
+    }, 
+    {
+     "area_m2": 6.6200000000000001, 
+     "id": "family-bath", 
+     "level": "GF", 
+     "name": "family bathroom"
+    }, 
+    {
+     "area_m2": 15.140000000000001, 
+     "id": "parents-bed", 
+     "level": "GF", 
+     "name": "parents' bedroom"
+    }, 
+    {
+     "area_m2": 3.2300000000000000, 
+     "id": "parents-dressing", 
+     "level": "GF", 
+     "name": "dressing"
+    }, 
+    {
+     "area_m2": 5.5199999999999996, 
+     "id": "parents-ensuite", 
+     "level": "GF", 
+     "name": "en-suite"
+    }
+   ], 
+   "saved": "C:\\Users\\mmbka\\arch-pipeline\\out\\villa\\options\\omar-option-S4.rvt"
+  }, 
+  {
+   "built": {
+    "block_roofs": 2, 
+    "doors": 18, 
+    "gf_opening_id": 1615391, 
+    "stair_id": 1615370, 
+    "walls": 36, 
+    "windows": 14
+   }, 
+   "deleted": 117, 
+   "failed": [], 
+   "id": "S5", 
+   "rooms": [
+    {
+     "area_m2": 6.2999999999999998, 
+     "id": "hall-b", 
+     "level": "B", 
+     "name": "entrance hall"
+    }, 
+    {
+     "area_m2": 13.0, 
+     "id": "lounge", 
+     "level": "B", 
+     "name": "family / TV lounge (open)"
+    }, 
+    {
+     "area_m2": 6.6200000000000001, 
+     "id": "stair-b", 
+     "level": "B", 
+     "name": "stair (U, to the GF)"
+    }, 
+    {
+     "area_m2": 2.8799999999999999, 
+     "id": "laundry", 
+     "level": "B", 
+     "name": "laundry"
+    }, 
+    {
+     "area_m2": 27.969999999999999, 
+     "id": "kitchen", 
+     "level": "B", 
+     "name": "open kitchen"
+    }, 
+    {
+     "area_m2": 16.010000000000002, 
+     "id": "dining", 
+     "level": "B", 
+     "name": "dining"
+    }, 
+    {
+     "area_m2": 18.149999999999999, 
+     "id": "living", 
+     "level": "B", 
+     "name": "garden living"
+    }, 
+    {
+     "area_m2": 1.7100000000000000, 
+     "id": "guest-wc", 
+     "level": "B", 
+     "name": "guest WC"
+    }, 
+    {
+     "area_m2": 3.0200000000000000, 
+     "id": "store-rear", 
+     "level": "B", 
+     "name": "store"
+    }, 
+    {
+     "area_m2": 9.1699999999999999, 
+     "id": "flex", 
+     "level": "B", 
+     "name": "flex room (east-yard block)"
+    }, 
+    {
+     "area_m2": 4.7000000000000002, 
+     "id": "dirty-kitchen", 
+     "level": "B", 
+     "name": "dirty kitchen (east-yard block)"
+    }, 
+    {
+     "area_m2": 12.170000000000000, 
+     "id": "study-game", 
+     "level": "GF", 
+     "name": "study / game room (door to the terrace)"
+    }, 
+    {
+     "area_m2": 16.340000000000000, 
+     "id": "corridor", 
+     "level": "GF", 
+     "name": "hall"
+    }, 
+    {
+     "area_m2": 6.1900000000000004, 
+     "id": "stair-gf", 
+     "level": "GF", 
+     "name": "stair (U, from the basement)"
+    }, 
+    {
+     "area_m2": 12.010000000000000, 
+     "id": "kids-a", 
+     "level": "GF", 
+     "name": "kids bedroom A"
+    }, 
+    {
+     "area_m2": 12.170000000000000, 
+     "id": "kids-b", 
+     "level": "GF", 
+     "name": "kids bedroom B"
+    }, 
+    {
+     "area_m2": 6.6200000000000001, 
+     "id": "family-bath", 
+     "level": "GF", 
+     "name": "family bathroom"
+    }, 
+    {
+     "area_m2": 13.650000000000000, 
+     "id": "parents-bed", 
+     "level": "GF", 
+     "name": "parents' bedroom"
+    }, 
+    {
+     "area_m2": 3.2300000000000000, 
+     "id": "parents-dressing", 
+     "level": "GF", 
+     "name": "dressing"
+    }, 
+    {
+     "area_m2": 5.5199999999999996, 
+     "id": "parents-ensuite", 
+     "level": "GF", 
+     "name": "en-suite"
+    }
+   ], 
+   "saved": "C:\\Users\\mmbka\\arch-pipeline\\out\\villa\\options\\omar-option-S5.rvt"
+  }
+ ]
+}

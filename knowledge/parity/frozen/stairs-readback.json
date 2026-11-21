@@ -1,0 +1,733 @@
+{
+ "options": [
+  {
+   "body_id": 1615227, 
+   "head_id": 1615228, 
+   "intersections": [
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight tread 13"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight tread 14"
+    }, 
+    {
+     "comment": "ENV: column repeated from GF (client: same structure on every floor)", 
+     "id": 1614989, 
+     "kind": "column", 
+     "name": "12 x 19", 
+     "part": "r3 party-wall flight tread 15"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615162, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e0", 
+     "part": "r3 party-wall flight tread 15"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight tread 15"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight tread 15"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 3"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 4"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 5"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 6"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 7"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 8"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 8"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 9"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 9"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 10"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 10"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 11"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 11"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 12"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 12"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 13"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 13"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 14"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 14"
+    }, 
+    {
+     "comment": "ENV: existing column, KEEP (client)", 
+     "id": 1590377, 
+     "kind": "column", 
+     "name": "12 x 19", 
+     "part": "r3 party-wall flight headroom over tread 15"
+    }, 
+    {
+     "comment": "ENV: column repeated from GF (client: same structure on every floor)", 
+     "id": 1614989, 
+     "kind": "column", 
+     "name": "12 x 19", 
+     "part": "r3 party-wall flight headroom over tread 15"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615162, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e0", 
+     "part": "r3 party-wall flight headroom over tread 15"
+    }, 
+    {
+     "comment": "ENV: perimeter beam 250x600 ASSUMED section", 
+     "id": 1615163, 
+     "kind": "framing", 
+     "name": "ENV beam-0-e1", 
+     "part": "r3 party-wall flight headroom over tread 15"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "r3 party-wall flight headroom over tread 15"
+    }
+   ], 
+   "name": "r3 party-wall flight"
+  }, 
+  {
+   "body_id": 1615229, 
+   "head_id": 1615230, 
+   "intersections": [
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay flight 2 tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f1 tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f1 tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f1 tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f1 tread 8"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom over the landing"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f2 tread 1"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f2 tread 2"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f2 tread 3"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f2 tread 4"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f2 tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f2 tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the old bay headroom f2 tread 7"
+    }
+   ], 
+   "name": "U-stair in the old bay"
+  }, 
+  {
+   "body_id": 1615231, 
+   "head_id": 1615232, 
+   "intersections": [
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected tread 16"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 8"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 9"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 10"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 11"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 12"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 13"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 14"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 15"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight, corrected headroom over tread 16"
+    }
+   ], 
+   "name": "party-wall flight, corrected"
+  }, 
+  {
+   "body_id": 1615233, 
+   "head_id": 1615234, 
+   "intersections": [
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall flight 2 tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f1 tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f1 tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f1 tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f1 tread 8"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom over the landing"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f2 tread 1"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f2 tread 2"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f2 tread 3"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f2 tread 4"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f2 tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f2 tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair along the party wall headroom f2 tread 7"
+    }
+   ], 
+   "name": "U-stair along the party wall"
+  }, 
+  {
+   "body_id": 1615235, 
+   "head_id": 1615236, 
+   "intersections": [
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) tread 16"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 8"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 9"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 10"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 11"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 12"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 13"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 14"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 15"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "party-wall flight (r8, landing 1.2 m) headroom over tread 16"
+    }
+   ], 
+   "name": "party-wall flight (r8, landing 1.2 m)"
+  }, 
+  {
+   "body_id": 1615237, 
+   "head_id": 1615238, 
+   "intersections": [
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay flight 2 tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f1 tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f1 tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f1 tread 7"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f1 tread 8"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom over the landing"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f2 tread 1"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f2 tread 2"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f2 tread 3"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f2 tread 4"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f2 tread 5"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f2 tread 6"
+    }, 
+    {
+     "comment": "ENV: our footprint slab (CAD outline)", 
+     "id": 1615037, 
+     "kind": "floor", 
+     "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+     "part": "U-stair in the street-end bay headroom f2 tread 7"
+    }
+   ], 
+   "name": "U-stair in the street-end bay"
+  }
+ ], 
+ "saved": "C:\\Users\\mmbka\\arch-pipeline\\out\\villa\\stairs-r8\\omar-stairs.rvt"
+}

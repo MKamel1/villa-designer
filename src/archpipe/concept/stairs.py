@@ -29,7 +29,14 @@ def _box(x0, y0, z0, x1, y1, z1, what):
     return {"box": [min(x0, x1), min(y0, y1), min(z0, z1), max(x0, x1), max(y0, y1), max(z0, z1)], "what": what}
 
 
-def straight(x_top, x_foot, y0, y1, risers, name):
+# G1 client decision 2026-11-21 (docs/decisions/G1-safety-decisions-2026-11-21.md, LS2): the open-riser look is kept,
+# so each gap between treads gets a horizontal flat bar and each tread runs 16 mm under the nosing of the next.
+NOSING_OVERLAP = 16                           # ADK 1.9a: open-riser treads overlap >= 16 mm in plan (card ukadk-open-risers-dwelling)
+INFILL_BAR_H = 40                             # flat bar on edge, mm (steel 40 x 10), centred in the gap between treads
+INFILL_BAR_T = 10
+
+
+def straight(x_top, x_foot, y0, y1, risers, name, overlap=0, infill=False):
     """A straight flight rising from the basement foot (x_foot) to the GF (x_top); goings are equal. Headroom is
     measured from the PITCH LINE (the line through the nosings, AD K Diagram 1.3), not from the tread tops: over a
     tread the pitch line climbs one rise, and a tread-top envelope once passed a flight with 1.8 m under the slab
@@ -38,19 +45,31 @@ def straight(x_top, x_foot, y0, y1, risers, name):
     going = (x_foot - x_top) / n_go
     rise = (GF_FFL - B_FFL) / risers
     pitch = lambda x: B_FFL + rise * (1 + (x_foot - x) / going)       # noqa: E731  nosing of tread 1 at x_foot
-    parts = []
+    parts, bars = [], []
     for i in range(1, n_go + 1):                       # tread i sits i risers above the basement
         xa = x_foot - (i - 1) * going
         xb = x_foot - i * going
         top = B_FFL + i * rise
-        parts.append(_box(xa, y0, top - TREAD_T, xb, y1, top, f"{name} tread {i}"))
+        # the going (nosing to nosing) is unchanged; every tread but the top one runs `overlap` mm under the next nosing
+        parts.append(_box(xa, y0, top - TREAD_T, xb - (overlap if i < n_go else 0), y1, top, f"{name} tread {i}"))
+        if infill and i < n_go:                        # the gap up to tread i+1: one flat bar behind its nosing
+            gap = rise - TREAD_T
+            z0 = top + (gap - INFILL_BAR_H) / 2
+            bars.append(_box(xb - INFILL_BAR_T, y0, z0, xb, y1, z0 + INFILL_BAR_H, f"{name} riser infill bar {i}"))
         for k in range(HEAD_SLICES):                   # the sloping envelope as slices, each to its high end
             a, b = xa - (xa - xb) * k / HEAD_SLICES, xa - (xa - xb) * (k + 1) / HEAD_SLICES
             parts.append(_box(a, y0, top, b, y1, pitch(b) + HEAD, f"{name} headroom over tread {i}.{k}"))
-    return {"name": name, "parts": parts, "rise": rise, "going": abs(going), "risers": risers,
-            "ends": {"foot": ["v", x_foot, y0, y1], "top": ["v", x_top, y0, y1]},
-            "pitch_line": {"x_low": x_foot + going, "x_high": x_top, "y0": y0, "y1": y1,
-                           "z_low": B_FFL, "z_high": GF_FFL}}
+    out = {"name": name, "parts": parts, "rise": rise, "going": abs(going), "risers": risers,
+           "ends": {"foot": ["v", x_foot, y0, y1], "top": ["v", x_top, y0, y1]},
+           "pitch_line": {"x_low": x_foot + going, "x_high": x_top, "y0": y0, "y1": y1,
+                          "z_low": B_FFL, "z_high": GF_FFL}}
+    if overlap:
+        out["nosing_overlap_mm"] = overlap
+    if infill:
+        gap = rise - TREAD_T
+        out["infill"] = {"bars": bars, "type": "horizontal flat bar", "bar_h_mm": INFILL_BAR_H, "bar_t_mm": INFILL_BAR_T,
+                         "gap_mm": gap, "max_clear_opening_mm": round((gap - INFILL_BAR_H) / 2, 2), "count": len(bars)}
+    return out
 
 
 def pitch_headroom(stair, opening_mm, step=10):
@@ -169,7 +188,7 @@ def party_flight_r8():
     tread_setback = 250
     y0 = outer_face + tread_setback
     result = straight(3977 + 1200, 3977 + 1200 + 16 * 280, y0, y0 + 950, 17,
-                      "party-wall flight (r8, landing 1.2 m)")
+                      "party-wall flight (r8, landing 1.2 m)", overlap=NOSING_OVERLAP, infill=True)
     result["wall_datum"] = dict(outer_face_mm=outer_face, tread_setback_mm=tread_setback,
                                 basis="villa_env.BAR measured CAD outer face; existing 250 mm beam clearance")
     return result

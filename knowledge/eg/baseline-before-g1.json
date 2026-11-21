@@ -1,0 +1,1157 @@
+{
+ "note": "L1 results on integ/aplus before the G1 design fixes (lane L1 report v2): the \"before\" column of the report.",
+ "results": [
+  {
+   "criterion": "EG4",
+   "subject": "landing-gf (stair landing) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "landing-gf (stair landing) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "stair-gf (stair void + gallery) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "stair-gf (stair void + gallery) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "corridor (hall) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "corridor (hall) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "study-game (study / game room) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "study-game (study / game room) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "kids-a (kids bedroom A) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "kids-a (kids bedroom A) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "kids-b (kids bedroom B) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "kids-b (kids bedroom B) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "family-bath (family bathroom) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "family-bath (family bathroom) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-bed (parents' bedroom) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-bed (parents' bedroom) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-dressing (dressing) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-dressing (dressing) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-ensuite (en-suite) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-ensuite (en-suite) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "gallery-end (gallery) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "gallery-end (gallery) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-entry (parents' bedroom) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-entry (parents' bedroom) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-dressing-ext (dressing) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "parents-dressing-ext (dressing) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "lounge (lounge) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "lounge (lounge) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "lounge-nook (lounge) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "lounge-nook (lounge) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "stair-b (stair) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "stair-b (stair) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "pantry (pantry / store) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "pantry (pantry / store) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "hall-b (hall at the stair foot) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "hall-b (hall at the stair foot) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "entry-b (entrance) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "entry-b (entrance) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "family (family / TV corner) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "family (family / TV corner) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "kitchen (open kitchen) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "kitchen (open kitchen) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "kitchen-island (open kitchen) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "kitchen-island (open kitchen) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "dining (dining) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "dining (dining) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "dining-side (dining) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "dining-side (dining) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "living (garden living) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "living (garden living) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "bar-alcove (bar / library alcove) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "bar-alcove (bar / library alcove) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "store-ramp (store under the ramp) clear height (service)",
+   "status": "warn",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "store-ramp (store under the ramp) [ER informative]",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "cinema (cinema) clear height",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG4",
+   "subject": "cinema (cinema) clear height, preferable 2.4 m",
+   "status": "warn",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "cinema (cinema) [ER informative]",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "guest-wc (guest bathroom) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "guest-wc (guest bathroom) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "dirty-kitchen (dirty kitchen + laundry) clear height (service)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "dirty-kitchen (dirty kitchen + laundry) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG4",
+   "subject": "clear under the perimeter beams (all levels)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG5",
+   "subject": "kids-a (kids bedroom A) area",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG5",
+   "subject": "kids-a (kids bedroom A) width",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG5",
+   "subject": "kids-a (kids bedroom A) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG5",
+   "subject": "kids-b (kids bedroom B) area",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG5",
+   "subject": "kids-b (kids bedroom B) width",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG5",
+   "subject": "kids-b (kids bedroom B) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG5",
+   "subject": "parents-bed (parents' bedroom) area",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG5",
+   "subject": "parents-bed (parents' bedroom) width",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG5",
+   "subject": "parents-bed (parents' bedroom) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG5",
+   "subject": "family-bath (family bathroom) area (target)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG5",
+   "subject": "parents-ensuite (en-suite) area (target)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG5",
+   "subject": "guest-wc (guest bathroom) area (target)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-lounge-nook-pantry (lounge-nook/pantry)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-lounge-nook-pantry (lounge-nook/pantry) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-lounge-cinema (lounge/cinema)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-lounge-cinema (lounge/cinema) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-cinema-store-ramp (cinema/store-ramp)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-cinema-store-ramp (cinema/store-ramp) height",
+   "status": "warn",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-cinema-store-ramp (cinema/store-ramp) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-family-guest-wc (family/guest-wc)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-family-guest-wc (family/guest-wc) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-kitchen-dirty-kitchen (kitchen/dirty-kitchen)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-kitchen-dirty-kitchen (kitchen/dirty-kitchen) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-entry-b-core (entry-b/core)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-entry-b-core (entry-b/core) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-dining-yard (dining/yard)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-dining-yard (dining/yard) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-living-yard (living/yard)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-living-yard (living/yard) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-living-yard-2 (living/yard)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-living-yard-2 (living/yard) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-lounge-yard (lounge/yard)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-B-lounge-yard (lounge/yard) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-corridor-kids-a (corridor/kids-a)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-corridor-kids-a (corridor/kids-a) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-corridor-kids-b (corridor/kids-b)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-corridor-kids-b (corridor/kids-b) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-parents-bed-parents-dressing (parents-bed/parents-dressing)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-parents-bed-parents-dressing (parents-bed/parents-dressing) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-gallery-end-family-bath (gallery-end/family-bath)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-gallery-end-family-bath (gallery-end/family-bath) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-corridor-parents-entry (corridor/parents-entry)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-corridor-parents-entry (corridor/parents-entry) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-parents-dressing-ext-parents-ensuite (parents-dressing-ext/parents-ensuite)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-parents-dressing-ext-parents-ensuite (parents-dressing-ext/parents-ensuite) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-landing-gf-core (landing-gf/core)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-landing-gf-core (landing-gf/core) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-study-game-deck (study-game/deck)",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG6",
+   "subject": "door door-GF-study-game-deck (study-game/deck) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "cinema (cinema) daylight factor reported",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "CL2",
+   "subject": "cinema (cinema) DF vs SLL minimum",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "EG7",
+   "subject": "cinema (cinema) glazing / floor area",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "dining (dining) daylight factor reported",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "CL2",
+   "subject": "dining (dining) DF vs SLL minimum",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG7",
+   "subject": "dining (dining) glazing / floor area",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "kids-a (kids bedroom A) daylight factor",
+   "status": "not_evaluated",
+   "gate": true
+  },
+  {
+   "criterion": "EG7",
+   "subject": "kids-a (kids bedroom A) glazing / floor area",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "kids-b (kids bedroom B) daylight factor",
+   "status": "not_evaluated",
+   "gate": true
+  },
+  {
+   "criterion": "EG7",
+   "subject": "kids-b (kids bedroom B) glazing / floor area",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "kitchen (open kitchen) daylight factor reported",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "CL2",
+   "subject": "kitchen (open kitchen) DF vs SLL minimum",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "EG7",
+   "subject": "kitchen (open kitchen) glazing / floor area",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "living (garden living) daylight factor reported",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "CL2",
+   "subject": "living (garden living) DF vs SLL minimum",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG7",
+   "subject": "living (garden living) glazing / floor area",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "lounge (lounge) daylight factor reported",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "CL2",
+   "subject": "lounge (lounge) DF vs SLL minimum",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "EG7",
+   "subject": "lounge (lounge) glazing / floor area",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "parents-bed (parents' bedroom) daylight factor",
+   "status": "not_evaluated",
+   "gate": true
+  },
+  {
+   "criterion": "EG7",
+   "subject": "parents-bed (parents' bedroom) glazing / floor area",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "CL2",
+   "subject": "study-game (study / game room) daylight factor",
+   "status": "not_evaluated",
+   "gate": true
+  },
+  {
+   "criterion": "EG7",
+   "subject": "study-game (study / game room) glazing / floor area",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-B-dirty-kitchen-0 (dirty-kitchen, B)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-study-game-1 (study-game, GF)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-study-game-1 (study-game, GF) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-study-game-2 (study-game, GF)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-study-game-2 (study-game, GF) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-kids-a-3 (kids-a, GF)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-kids-a-3 (kids-a, GF) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-kids-b-4 (kids-b, GF)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-kids-b-4 (kids-b, GF) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-family-bath-5 (family-bath, GF)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-family-bath-5 (family-bath, GF) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-parents-bed-6 (parents-bed, GF)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-parents-bed-6 (parents-bed, GF) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-parents-bed-7 (parents-bed, GF)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "EG9",
+   "subject": "window window-GF-parents-bed-7 (parents-bed, GF) [ER informative]",
+   "status": "pass",
+   "gate": false
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair rise",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair going",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair pitch",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair 2R+G",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair uniform steps",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair headroom over the pitch line",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair top landing",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair bottom landing",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "space under the flight (soffit < 2 m)",
+   "status": "warn",
+   "gate": true
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair width [ER informative]",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair risers per flight [ER informative]",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "LS1",
+   "subject": "stair tread and riser [ER informative]",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "LS2",
+   "subject": "stair open-riser gap (100 mm sphere)",
+   "status": "fail",
+   "gate": true
+  },
+  {
+   "criterion": "LS2",
+   "subject": "stair tread overlap (open risers)",
+   "status": "fail",
+   "gate": true
+  },
+  {
+   "criterion": "LS2",
+   "subject": "stair closed risers (A+ target)",
+   "status": "fail",
+   "gate": true
+  },
+  {
+   "criterion": "LS2",
+   "subject": "stair open risers [ER informative]",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-stair-open-glass (open)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-stair-open-glass (open) 100 mm sphere",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-stair-wall-handrail (wall)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-0 (guard rail on the ramp edge over the north patio)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-0 (guard rail on the ramp edge over the north patio) (A+ target 1100)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-0 (guard rail on the ramp edge over the north patio) 100 mm sphere",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-1 (guard rail along the east fence (fence under 1.1 m above the deck))",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-1 (guard rail along the east fence (fence under 1.1 m above the deck)) (A+ target 1100)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-1 (guard rail along the east fence (fence under 1.1 m above the deck)) 100 mm sphere",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-2 (guard rail at the deck end over the yard)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-2 (guard rail at the deck end over the yard) (A+ target 1100)",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "rail-edge-2 (guard rail at the deck end over the yard) 100 mm sphere",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "GF stair void edge",
+   "status": "not_evaluated",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "GF front terrace edge",
+   "status": "not_evaluated",
+   "gate": true
+  },
+  {
+   "criterion": "LS3",
+   "subject": "patio edge beside the entrance steps",
+   "status": "not_evaluated",
+   "gate": true
+  },
+  {
+   "criterion": "LS4",
+   "subject": "GF core door onto the stair top landing (door-GF-landing-gf-core)",
+   "status": "warn",
+   "gate": true
+  },
+  {
+   "criterion": "LS4",
+   "subject": "GF core door to the top step [ER informative]",
+   "status": "fail",
+   "gate": false
+  },
+  {
+   "criterion": "LS5",
+   "subject": "study-game (study / game room) escape opening",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "kids-a (kids bedroom A) escape opening",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "kids-b (kids bedroom B) escape opening",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "parents-bed (parents' bedroom) escape opening",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "lounge (lounge) escape opening",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "dining (dining) escape opening",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "living (garden living) escape opening",
+   "status": "pass",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "cinema (cinema) escape opening",
+   "status": "fail",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "basement garden doors lead to a place of safety",
+   "status": "not_evaluated",
+   "gate": true
+  },
+  {
+   "criterion": "LS5",
+   "subject": "dead-end hall and the single stair",
+   "status": "not_evaluated",
+   "gate": true
+  }
+ ]
+}

@@ -58,15 +58,21 @@ def generate(design: str = "D1", *, sources: dict | None = None) -> list[DesignE
     els = SS.all_from_spec(lay, sp, finish=VR.FINISH)
     els += FS.furniture(items) + FS.luminaires(fixtures) + FS.indoor_dressing(props) \
         + FS.plants(props, plan, land_props) + FS.garden_zones(plan)
-    problems = validate(els)
+    from . import geometry_complete as GC
+    from . import validate_rules as VR_
+    from .. import villa_env as E
+    els = GC.complete(els, lay, sp, VR.FINISH)
+    problems = validate(els) + [f"{f['rule']}: {f['element']}: {f['message']}" for f in VR_.check(els, lay, sp, E.COLUMNS)
+                                if f["severity"] == "error"]
     if problems:
         raise ValueError("model is not well formed: " + "; ".join(problems[:10]))
     return els
 
 
 def _payload(design: str, elements: list[DesignElement]) -> dict:
+    from .schema import REVISION
     from .spec_source import LEVELS
-    return dict(schema=SCHEMA, contract=CONTRACT_VERSION, design=design, units="mm", levels=LEVELS,
+    return dict(schema=SCHEMA, schema_revision=REVISION, contract=CONTRACT_VERSION, design=design, units="mm", levels=LEVELS,
                 counts=counts(elements), elements=[asdict(e) for e in elements])
 
 

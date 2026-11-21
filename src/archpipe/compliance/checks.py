@@ -226,7 +226,8 @@ def stair_geometry(stair) -> dict:
         return {}
     tops = [b[5] for b in tr]
     rise = (tops[-1] - tops[0]) / (len(tops) - 1)
-    going = tr[0][3] - tr[0][0]
+    fronts = [max(b[0], b[3]) for b in tr]                    # foot-side edge (the nosing) of each tread
+    going = (fronts[0] - fronts[-1]) / (len(fronts) - 1)       # nosing pitch, not box width (treads may overlap)
     thick = tr[0][5] - tr[0][2]
     # step above the last tread to the GF floor: the top step is the landing edge
     last_rise = stair.gf_floor_z_mm - tops[-1]
@@ -307,13 +308,22 @@ def check_stair_geometry(m: DesignModel) -> list:
                         ["ukadk-landing-1-20"], el))
     # under-stair soffit: treads whose underside is under 2.0 m above the basement floor
     lo = [b for b in st.treads if (b[5] - b[2]) < 300 and (b[2] - st.b_floor_z_mm) < 2000.0]
-    if lo:
+    uf = st.under_flight or {}
+    if lo and uf.get("enclosed") and (uf.get("treads_enclosed") or 0) >= len(lo):
+        out.append(_res("LS1", "pass", "space under the flight (soffit < 2 m)", float(uf["treads_enclosed"]),
+                        float(len(lo)), "treads enclosed",
+                        "the %d treads with a soffit under 2.0 m are enclosed by %s (%s treads enclosed): the area "
+                        "beneath is protected by a barrier (ADK 1.8b)" % (len(lo), uf.get("cupboard_id"),
+                                                                         uf.get("treads_enclosed")),
+                        ["ukadk-soffit-under-stair"], (st.id, str(uf.get("cupboard_id")))))
+    elif lo:
         xs = [min(b[0], b[3]) for b in lo] + [max(b[0], b[3]) for b in lo]
         run = (max(xs) - min(xs)) / 1000.0
         out.append(_res("LS1", "warn", "space under the flight (soffit < 2 m)", round(run, 2), 0.0, "m",
                         "the underside of the lowest %d treads is under 2.0 m above the basement floor over %.2f m of "
-                        "run; the steps are open beneath (no enclosure or guard + cane detection in the model); "
-                        "ADK 1.8 asks for one" % (len(lo), run), ["ukadk-soffit-under-stair"], el))
+                        "run; the steps are open beneath (no enclosure or guard + cane detection in the model, or the "
+                        "enclosure covers fewer treads); ADK 1.8 asks for one" % (len(lo), run),
+                        ["ukadk-soffit-under-stair"], el))
     # Egyptian ER informative
     out.append(_res("LS1", "pass" if g["width"] >= 1100 else "fail", "stair width [ER informative]", round(g["width"]),
                     1100.0, "mm", "ER Art.100: clear width %.0f mm vs 1100 mm (ADK sets no private-stair width)"
@@ -342,22 +352,34 @@ def check_open_risers(m: DesignModel) -> list:
                         "riser boards modelled: no open gap (A+ target: closed risers)",
                         ["ukadk-open-risers-dwelling", "ukadk-closed-risers"], el))
         return out
-    gap = g["gap"]
+    infill = st.riser_infill
+    if infill:
+        gap = float(infill["max_clear_opening_mm"])
+        basis = ("riser infill modelled (%s, %.0f mm bar): largest clear opening %.1f mm in the %.1f mm gap between "
+                 "treads" % (infill.get("type", "flat bar"), infill.get("bar_h_mm", 0), gap, g["gap"]))
+    else:
+        gap = g["gap"]
+        basis = ("no riser boards or infill: the gap between treads is %.1f mm (rise %.1f less a %.0f mm tread)"
+                 % (gap, g["rise"], g["tread_t"]))
     sphere_passes = gap >= SPHERE_MM
     out.append(_res("LS2", "fail" if sphere_passes else "pass", "stair open-riser gap (100 mm sphere)", round(gap, 1),
-                    SPHERE_MM, "mm",
-                    "no riser boards: the gap between treads is %.1f mm (rise %.1f less a %.0f mm tread); a 100 mm "
-                    "sphere passes if the gap is >= 100 mm, so it must be under 100 mm" % (gap, g["rise"], g["tread_t"]),
-                    ["ukadk-open-risers-dwelling", "ukadk-guard-sphere"], el))
+                    SPHERE_MM, "mm", "%s; a 100 mm sphere passes if the opening is >= 100 mm, so it must be under "
+                    "100 mm" % basis, ["ukadk-open-risers-dwelling", "ukadk-guard-sphere"], el))
     ok = g["overlap_min"] >= 16 - 1e-9
     out.append(_res("LS2", "pass" if ok else "fail", "stair tread overlap (open risers)", round(g["overlap_min"], 1),
                     16.0, "mm", "consecutive treads overlap by %.1f mm in plan vs 16 mm minimum for open risers (ADK 1.9a)"
                     % g["overlap_min"], ["ukadk-open-risers-dwelling"], el))
+    decided = bool(infill)            # the G1 decision (open risers kept with infill) is implemented in the model
     out.append(_res("LS2", "fail", "stair closed risers (A+ target)", 0.0, 1.0, "closed",
-                    "risers are open; closed risers are the A+ target (ADK 1.6 for non-dwellings) and remove both "
-                    "failures above", ["ukadk-closed-risers"], el))
-    out.append(_res("LS2", "fail", "stair open risers [ER informative]", round(gap, 1), 100.0, "mm",
-                    "ER Art.103: objects >= 10 cm must not fall through; a %.0f mm gap does not stop one" % gap,
+                    ("DECIDED, not adopted (client G1 2026-11-21, %s): open risers kept with infill so no 100 mm "
+                     "sphere passes and treads overlap 16 mm; closed risers (ADK 1.6) stay an unmet A+ target"
+                     % "docs/decisions/G1-safety-decisions-2026-11-21.md") if decided else
+                    "risers are open and not infilled; closed risers are the A+ target (ADK 1.6 for non-dwellings) "
+                    "and remove both failures above",
+                    ["ukadk-closed-risers"] + (["g1-safety-decisions-2026-11-21"] if decided else []), el,
+                    gate=not decided))
+    out.append(_res("LS2", "pass" if gap < 100.0 else "fail", "stair open risers [ER informative]", round(gap, 1),
+                    100.0, "mm", "ER Art.103: objects >= 10 cm must not fall through; largest opening %.0f mm" % gap,
                     ["er119-art103-railing"], el, gate=False))
     return out
 
@@ -394,7 +416,13 @@ def check_guards(m: DesignModel) -> list:
             out.append(_res("LS3", "pass" if ok else "fail", label, round(gd.height_m, 3), need, "m",
                             "stair guard %.2f m above the nosings vs 0.90 m (ADK Diagram 3.1, stairs); passes with no "
                             "margin" % gd.height_m, ["ukadk-guarding-height-internal"], (gd.id,)))
-        if not gd.solid:
+        if gd.max_opening_mm is not None:
+            ok = gd.max_opening_mm < SPHERE_MM and gd.climbable is not True
+            out.append(_res("LS3", "pass" if ok else "fail", label + " 100 mm sphere", float(gd.max_opening_mm),
+                            SPHERE_MM, "mm", "largest opening in the infill %.0f mm (glass or bars)%s; must be under "
+                            "100 mm and not climbable" % (gd.max_opening_mm, ", climbable" if gd.climbable else ""),
+                            ["ukadk-guard-sphere"], (gd.id,)))
+        elif not gd.solid:
             out.append(_res("LS3", "warn", label + " openings", None, SPHERE_MM, "mm",
                             "guard infill is not solid; a 100 mm sphere test needs the balusters", ["ukadk-guard-sphere"],
                             (gd.id,)))
@@ -420,12 +448,23 @@ def check_door_near_flight(m: DesignModel) -> list:
             continue
         lo, hi = o.x - o.width / 2, o.x + o.width / 2
         clear_to_flight = top_nosing - hi
-        out.append(_res("LS4", "warn" if not o.swing_known else ("pass" if clear_to_flight >= 0.4 else "fail"),
-                        "GF core door onto the stair top landing (%s)" % o.id, round(clear_to_flight, 3), 0.4, "m",
-                        "the door's near jamb is %.3f m from the top step; ADK 1.24 / Diagram 1.8 lets a door swing "
-                        "over a landing at the BOTTOM of a flight only, with 400 mm each side; the top landing must be "
-                        "kept clear (1.21). The swing direction is not in the model: if the leaf opens into the landing "
-                        "this fails" % clear_to_flight, ["ukadk-landing-door-1-24"], (o.id,)))
+        outward = o.swing_known and o.swing_direction == "outward"
+        if outward:
+            st_, why = "pass", ("the leaf swings OUTWARD into the shared core, away from the flight: nothing crosses "
+                                "the top landing (ADK 1.21, 1.24); near jamb %.3f m from the top step" % clear_to_flight)
+        elif o.swing_known:
+            st_ = "pass" if clear_to_flight >= 0.4 else "fail"
+            why = ("swing known (%s): near jamb %.3f m from the top step vs 0.40 m (ADK 1.24 / Diagram 1.8 allows a "
+                   "swing over a landing at the BOTTOM of a flight only)" % (o.swing_direction or "into the landing",
+                                                                                clear_to_flight))
+        else:
+            st_ = "warn"
+            why = ("near jamb %.3f m from the top step; ADK 1.24 / Diagram 1.8 lets a door swing over a landing at the "
+                   "BOTTOM of a flight only, with 400 mm each side; the swing direction is not in the model: if the "
+                   "leaf opens into the landing this fails" % clear_to_flight)
+        out.append(_res("LS4", st_, "GF core door onto the stair top landing (%s)" % o.id, round(clear_to_flight, 3),
+                        0.4, "m", why, ["ukadk-landing-door-1-24"] + (["ukadk-landing-clear-1-21"] if outward else []),
+                        (o.id,)))
         out.append(_res("LS4", "pass" if clear_to_flight >= 1.0 else "fail",
                         "GF core door to the top step [ER informative]", round(clear_to_flight, 3), 1.0, "m",
                         "ER Art.96: door opening directly onto a stair flight needs 1.0 m; here %.3f m" % clear_to_flight,
@@ -468,12 +507,15 @@ def check_escape(m: DesignModel) -> list:
         else:
             # an inner room: escape only through another room
             routes = [(l[0] if l[1] == r.id else l[1]) for l in m.links if r.id in l] if hasattr(m, "links") else []
+            waiver = m.waivers.get(("LS5", r.id))
             out.append(_res("LS5", "fail", label + " escape opening", 0.0, 1.0, "opening",
+                            (waiver + ". " if waiver else "") +
                             "no external door or escape window: the room is entered only from %s, an inner room. "
                             "Approved Document B 2.11 allows inner rooms only for a kitchen, utility, dressing room, "
                             "bathroom/WC, a gallery, or a room with an escape window; IRC R310 asks for one "
                             "emergency opening in every basement habitable space" % (", ".join(routes) or "another room"),
-                            ["adb-inner-room", "irc-r310-escape"], (_rid(r),)))
+                            ["adb-inner-room", "irc-r310-escape"] + (["g1-safety-decisions-2026-11-21"] if waiver else []),
+                            (_rid(r),), gate=not waiver))
     for crit, subject, why in m.not_evaluated_gates:
         out.append(_ne(crit, subject, why))
     return out

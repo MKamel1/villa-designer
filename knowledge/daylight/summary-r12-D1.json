@@ -1,0 +1,61 @@
+{
+ "source": "out/villa/daylight/summary-r12.json (validated Radiance run, 2026-09-26 spec; basement rooms only)",
+ "note": "Extract of option D1 room daylight factors for machine-independent checks. Predates the G1 lounge glazing widening (3.41 -> 3.71 m).",
+ "options": {
+  "D1": {
+   "rooms": {
+    "lounge": {
+     "df": 0.66
+    },
+    "lounge-nook": {
+     "df": 0.78
+    },
+    "stair-b": {
+     "df": 0.36
+    },
+    "pantry": {
+     "df": 0.01
+    },
+    "hall-b": {
+     "df": 0.26
+    },
+    "entry-b": {
+     "df": 0.54
+    },
+    "family": {
+     "df": 0.2
+    },
+    "kitchen": {
+     "df": 0.33
+    },
+    "kitchen-island": {
+     "df": 0.33
+    },
+    "dining": {
+     "df": 2.35
+    },
+    "dining-side": {
+     "df": 0.93
+    },
+    "living": {
+     "df": 4.12
+    },
+    "bar-alcove": {
+     "df": 1.08
+    },
+    "store-ramp": {
+     "df": 0.02
+    },
+    "cinema": {
+     "df": 0.04
+    },
+    "guest-wc": {
+     "df": 0.68
+    },
+    "dirty-kitchen": {
+     "df": 3.64
+    }
+   }
+  }
+ }
+}

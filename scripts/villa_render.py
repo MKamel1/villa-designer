@@ -167,7 +167,8 @@ def run(scene_path: Path, views: str, samples: int | None, resolution: str | Non
         raise ValueError("--blender must be an absolute workstation executable path")
     scene_path = scene_path.resolve()
     context = project_context(ROOT, Path(__file__).resolve(), "villa-render")
-    scene = json.loads(scene_path.read_text(encoding="utf-8"))
+    from archpipe.blender.element_ids import without_ids
+    scene = without_ids(json.loads(scene_path.read_text(encoding="utf-8")))   # ids: see element_ids.without_ids
     provenance = scene.get("provenance") or {}
     scene_hash = provenance.get("source_hash")
     current_hash = source_provenance()["source_hash"]

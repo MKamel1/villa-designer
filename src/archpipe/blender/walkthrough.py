@@ -77,7 +77,8 @@ def prepare(scene_data,args,context):
 def load_context(args):
     assembly=Path(args.root)/'assembly'
     path=json.loads((Path(args.root)/'path.json').read_text())
-    scene=json.loads((Path(args.root)/'scene.json').read_text())
+    from archpipe.blender.element_ids import without_ids
+    scene=without_ids(json.loads((Path(args.root)/'scene.json').read_text()))
     metadata=json.loads((assembly/'assembly.json').read_text())
     guards=json.loads((assembly/'guards.json').read_text())
     binding=json.loads((assembly/'admission.json').read_text())

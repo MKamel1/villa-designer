@@ -3,6 +3,7 @@
 Fast checks only. Regenerating the slow sources (lighting, garden plan: minutes) is `python -m archpipe.model.export
 --snapshot`; set ARCHPIPE_SLOW=1 to have this file re-derive luminaires and compare them with the snapshot.
 """
+import copy
 import os
 import unittest
 from collections import Counter
@@ -29,13 +30,19 @@ class Snapshot(unittest.TestCase):
     def test_counts_by_kind(self):
         k = self.kinds
         self.assertEqual((k["room"], k["wall"], k["door"], k["window"], k["stair"]), (30, 36, 18, 8, 1))
-        self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 4, 6))
+        self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 6, 8))     # slab: + B and GF floor slabs (lane M)
         self.assertEqual(k["luminaire"], 142)
         self.assertEqual(k["plant"], 80)
-        self.assertGreaterEqual(k["furniture"], 52)
+        self.assertEqual(k["furniture"], 81)       # includes the G1 under-stair cupboard
 
     def test_spec_kinds_equal_a_fresh_derivation(self):
-        fresh = {e.id: asdict(e) for e in S.all_from_spec(self.lay, self.sp, finish=_finish())}
+        from archpipe.model import geometry_complete as GC
+        spec = S.all_from_spec(self.lay, self.sp, finish=_finish())
+        ids = {e.id for e in spec}
+        slow = [e for e in self.els if e.kind in ("furniture", "luminaire", "plant", "garden") and e.id not in ids]
+        done = GC.complete(spec + [copy.deepcopy(e) for e in slow], self.lay, self.sp, _finish())
+        fresh = {e.id: asdict(e) for e in done if e.id in ids or e.kind in ("floor", "ceiling", "storey", "type")
+                 or e.id in ("slab-B-floor", "slab-GF-floor")}
         snap = {e.id: asdict(e) for e in self.els if e.id in fresh}
         self.assertEqual(set(snap), set(fresh))
         for i, f in fresh.items():
@@ -88,11 +95,15 @@ class Snapshot(unittest.TestCase):
         g = by["rail-gf-stair-void"]
         self.assertEqual(g.params["guard_height_mm"], 1100.0)
         self.assertEqual(g.params["edge_lengths_mm"][0], 3710.0)         # the 3.71 m open edge
-        self.assertFalse(g.params["in_revit_spec"])
+        self.assertTrue(g.params["in_revit_spec"])                       # G1: guards are in the Revit spec
         self.assertTrue(g.params["in_scene"])
-        self.assertFalse(by["slab-gf-terrace"].params["guard_present"])
+        for rid in ("rail-gf-terrace-edge", "rail-patio-steps-edge"):
+            self.assertTrue(by[rid].params["in_revit_spec"], rid)
+            self.assertFalse(by[rid].params["in_scene"], rid)
+        for sid, gid in (("slab-gf-terrace", "rail-gf-terrace-edge"), ("ctx-entrance-steps", "rail-patio-steps-edge")):
+            self.assertTrue(by[sid].params["guard_present"], sid)
+            self.assertEqual(by[sid].params["guard_id"], gid)
         self.assertEqual(by["slab-gf-terrace"].params["drop_to_patio_mm"], 3000.0)
-        self.assertFalse(by["ctx-entrance-steps"].params["guard_present"])
         self.assertEqual(by["garden-north-patio"].params["floor_below_street_mm"], 1800.0)
 
     def test_every_room_element_refers_to_a_room(self):
@@ -117,7 +128,7 @@ def _finish():
     return VR.FINISH
 
 
-_REVIT_ONLY = ("revit_net_area_m2", "net_area_m2", "net_area_basis")      # need out/villa/.../readback.json
+_REVIT_ONLY = ()                       # net areas now come from the built walls: nothing machine-dependent
 
 
 def _norm(d):
