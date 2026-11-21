@@ -128,3 +128,7 @@ and 0 warn; `not_evaluated`: EA1 recall, EA9, EA10, EA14, EA15. Caveats a reader
    remove the conservative substitutions; an engineer's marked-up rooms are needed to measure EA1 recall; ELV, earthing,
    SPD risk (EA9, EA10, EA14, EA15) are separate modules.
 6. **Revit**: circuit loads must be read back from the model (EA14) once E-12 exists.
+
+## Villa run (lane L7b)
+
+Items 1 to 4 above are done for D1 in `docs/lanes/L7b-villa-electrical.md` (polygon-aware placement, per-level boards, assumed equipment, ELV). Remaining from this list: measured RA and earthing, routing through walls and slabs, EA9/EA10/EA14, the EA1 recall test.

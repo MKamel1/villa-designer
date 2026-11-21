@@ -249,7 +249,7 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
         openings.append({"id": e.id, "kind": e.kind, "level": e.level, "x0": box[0], "y0": box[1], "x1": box[2], "y1": box[3], "z0": z0, "z1": z1})
     mdb_x, mdb_y = anchors["gate"]
     sup = Supply(s["v_phase"], s["phases"], s["earthing"], None, None, (mdb_x, mdb_y), s["feeder_length_m"], s["feeder_ambient_c"],
-                 s["roof_ambient_c"], s["drop_m"], None, s["premises"], "RA not measured and the earthing system is not confirmed: " + s["ra_note"])
+                 s["roof_ambient_c"], s["drop_m"], None, s["premises"], s["ra_note"])
     flags.append("boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; "
                  "meter position and utility cabinet at the street fence are assumptions to confirm")
     flags.append("routes: Manhattan distance x 1.15 from the board to the farthest load point plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops")
@@ -270,7 +270,7 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
                     "corner-rear-a": (x1 - 800, y0 + 800), "corner-rear-b": (x1 - 800, y1 - 800)}
     flags.append("CCTV, intercom and AP positions are layout proposals from the plot fences, the gate anchor and room centroids; the plot is the fence-bounded rectangle x -123..28557, y -29916..-20601 mm")
     h = House("D1", all_rooms, doors, furniture, lums, zones, equipment, sup, [], extra,
-              {"lighting_pack": "level", "lighting_target_a": 3.0, "socket_pack": "cluster", "storey_area_m2": areas, "storeys_above_ground": 1, "garden_ap_xy": anchors["garden-living-e"], "site_points": site, "supply_extra": {k: s[k] for k in ("single_phase_limit_a", "single_phase_limit_note")}},
+              {"lighting_pack": "level", "lighting_target_a": 2.0, "socket_pack": "cluster", "storey_area_m2": areas, "storeys_above_ground": 1, "garden_ap_xy": anchors["garden-living-e"], "site_points": site, "supply_extra": {k: s[k] for k in ("single_phase_limit_a", "single_phase_limit_note")}},
               flags, dict(LEVEL_Z_MM))
     h.provisional_zones = pub is None
     h.wall_segs, h.openings = wall_segs, openings

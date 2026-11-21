@@ -82,6 +82,24 @@ def _area(r: Room) -> float:
     return polygon_area_m2(r.poly) if r.poly else (r.rect[2] - r.rect[0]) * (r.rect[3] - r.rect[1]) / 1e6
 
 
+def _door_pairs(h: House) -> set:
+    """Pairs of rooms joined by a door (door records are '<door id>@<room>', one per side)."""
+    by: dict[str, set] = {}
+    for d in h.doors:
+        by.setdefault(d.id.split("@")[0], set()).add(d.room)
+    return {frozenset(v) for v in by.values() if len(v) == 2}
+
+
+def open_plan(h: House, a: str, b: str, pairs: set | None = None) -> bool:
+    """True when a and b open onto each other without a door (smoke passes freely, so a detector in one covers the other)."""
+    pairs = _door_pairs(h) if pairs is None else pairs
+    ra = next((r for r in h.rooms if r.id == a), None)
+    rb = next((r for r in h.rooms if r.id == b), None)
+    if ra is None or rb is None or ra.level != rb.level:
+        return False
+    return (b in ra.open_to or a in rb.open_to) and frozenset((a, b)) not in pairs
+
+
 def _centroid(r: Room):
     return ((r.rect[0] + r.rect[2]) / 2.0, (r.rect[1] + r.rect[3]) / 2.0)
 
@@ -100,6 +118,7 @@ def build_layout(h: House, devs: list[placement.Device]) -> ElvLayout:
     adb = adb_requirement(gross, above_ground_storeys=int(h.policy.get("storeys_above_ground", 1)))
     out: list[ElvDevice] = []
     n = [0]
+    pairs = _door_pairs(h)
 
     def add(kind, room, level, x, y, z, rule, note=""):
         n[0] += 1
@@ -116,8 +135,8 @@ def build_layout(h: House, devs: list[placement.Device]) -> ElvLayout:
         cx, cy = _centroid(r)
         if area < 2.0:
             continue                                   # cupboard-sized: covered by the neighbour (checked by the coverage lint)
-        if area < 6.0 and any(o in {q.id for q in rooms if q.level == r.level} and any(d.kind == kind and d.room == o and math.hypot(d.x - cx, d.y - cy) <= 0.8 * rad for d in out) for o in r.open_to):
-            continue                                   # small open-plan sub-area under a neighbour's detector
+        if area < 6.0 and any(open_plan(h, r.id, o, pairs) and any(d.kind == kind and d.room == o and math.hypot(d.x - cx, d.y - cy) <= 0.8 * rad for d in out) for o in r.open_to):
+            continue                                   # small open-plan sub-area (no door) under a neighbour's detector
         for (x, y) in grid_points(r.rect, rad):
             add(kind, r.id, r.level, x, y, r.ceiling_mm, "EA15-" + ("heat" if kind == "heat" else "smoke") + "-room",
                 "interlinked, mains + sealed battery (Grade D1)" if True else "")
@@ -178,6 +197,7 @@ def lint(h: House, lay: ElvLayout, devs=None) -> list[dict]:
     byroom = {r.id: r for r in rooms}
     sm = lay.of("smoke")
     ht = lay.of("heat")
+    pairs = _door_pairs(h)
 
     def res(subject, ok, msg, src, ach=None, req=None, unit=""):
         R.append({"subject": subject, "status": "pass" if ok else "fail", "message": msg, "sources": src, "achieved": ach, "required": req, "unit": unit})
@@ -193,15 +213,15 @@ def lint(h: House, lay: ElvLayout, devs=None) -> list[dict]:
         res(f"smoke/{lvl}", n >= 1, f"{n} smoke detectors on level {lvl}", ["UK-ADB1-2019-1.1-alarm-grade", "BS5839-6-LD3"], n, 1, "detectors")
     for r in rooms:
         if r.kind in CIRCULATION:
-            ok = any(d.kind == "smoke" and (d.room == r.id or math.hypot(d.x - _centroid(r)[0], d.y - _centroid(r)[1]) <= SMOKE_R_MM and d.level == r.level) for d in lay.devices)
+            ok = any(d.kind == "smoke" and (d.room == r.id or (open_plan(h, r.id, d.room, pairs) and math.hypot(d.x - _centroid(r)[0], d.y - _centroid(r)[1]) <= SMOKE_R_MM)) for d in lay.devices)
             if r.kind == "stair":
                 ok = any(d.kind == "smoke" and d.room == r.id for d in lay.devices)
-            res(f"smoke/{r.id}", ok, f"{r.kind} {r.id}: smoke detector {'in the space or within 7.5 m' if ok else 'missing'}", ["BS5839-6-LD3", "UK-ADB1-2019-1.1-alarm-grade"], 1 if ok else 0, 1, "detector")
+            res(f"smoke/{r.id}", ok, f"{r.kind} {r.id}: smoke detector {'in the space or in an open-plan neighbour within 7.5 m' if ok else 'missing'}", ["BS5839-6-LD3", "UK-ADB1-2019-1.1-alarm-grade"], 1 if ok else 0, 1, "detector")
     # heat in the kitchens
     for r in rooms:
         if r.kind in HEAT_KINDS:
             n = sum(1 for d in ht if d.room == r.id)
-            cov = n >= 1 or any(d.level == r.level and math.hypot(d.x - _centroid(r)[0], d.y - _centroid(r)[1]) <= HEAT_R_MM for d in ht)
+            cov = n >= 1 or any(open_plan(h, r.id, d.room, pairs) and math.hypot(d.x - _centroid(r)[0], d.y - _centroid(r)[1]) <= HEAT_R_MM for d in ht)
             res(f"heat/{r.id}", cov, f"{r.id}: {n} heat detector(s) in the room" + ("" if n else "; covered by a neighbour" if cov else "; none"), ["EL-POL-ELV", "BS5839-6-LD2"], n, 1, "detectors")
     # coverage of every alarm room
     worst_s = 0.0
@@ -211,7 +231,7 @@ def lint(h: House, lay: ElvLayout, devs=None) -> list[dict]:
         if kind is None:
             continue
         rad = HEAT_R_MM if kind == "heat" else SMOKE_R_MM
-        ds = [d for d in lay.devices if d.kind == kind and d.level == r.level]
+        ds = [d for d in lay.devices if d.kind == kind and d.level == r.level and (d.room == r.id or open_plan(h, r.id, d.room, pairs))]
         far = max(min(math.hypot(d.x - px, d.y - py) for d in ds) if ds else 1e9 for px, py in _sample(r))
         worst_s = max(worst_s, far / rad)
         if far > rad:

@@ -249,7 +249,7 @@ def device_rows(d: Design, elv=None) -> list[dict]:
             circ = "+".join(lights.get(x.room, []))
         rows.append({"room": x.room, "level": lvl.get(x.room, ""), "id": x.id, "family": "power/lighting control", "kind": x.kind,
                      "x_mm": round(x.x), "y_mm": round(x.y), "z_mm": round(x.z), "rule": x.rule, "serves": x.serves, "circuit": circ,
-                     "note": ("hinge assumed (policy)" if x.kind == "switch" and x.params.get("hinge_known") is False else "")})
+                     "note": "; ".join(n for n in (("hinge assumed (policy)" if x.kind == "switch" and x.params.get("hinge_known") is False else ""), x.params.get("relocated", "")) if n)})
     for l in d.house.luminaires:
         rows.append({"room": l.room, "level": lvl.get(l.room, ""), "id": l.id, "family": "luminaire", "kind": l.layer, "x_mm": round(l.xy[0]) if l.xy else "", "y_mm": round(l.xy[1]) if l.xy else "",
                      "z_mm": "", "rule": "", "serves": l.zone, "circuit": by_dev.get(l.id, ""), "note": f"{l.watts:g} W"})

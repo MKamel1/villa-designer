@@ -46,8 +46,8 @@
     {"id": "GSOC-LIVING-S", "anchor": "garden-living-s", "status": "assumed", "reason": "outdoor socket on the garden's south side"}
   ],
   "supply": {
-    "v_phase": 220.0, "phases": 3, "earthing": "TT", "ra_ohm": 30.0,
-    "ra_note": "ASSUMED design target for the villa: the TT electrode resistance has not been measured and the earthing system has not been confirmed with the utility (EEHC)",
+    "v_phase": 220.0, "phases": 3, "earthing": "TT", "ra_ohm": null,
+    "ra_note": "TT is the brief's likely earthing but is unconfirmed, and no electrode resistance has been measured; the utility (EEHC) and a site test decide both",
     "feeder_length_m": 15.0, "feeder_ambient_c": 40.0, "roof_ambient_c": 50.0, "drop_m": 3.0, "premises": "household",
     "single_phase_limit_a": 63.0,
     "single_phase_limit_note": "policy threshold (ours): above a 63 A single-phase service the villa is recommended on three phases; the utility's actual single-phase limit is not verified"

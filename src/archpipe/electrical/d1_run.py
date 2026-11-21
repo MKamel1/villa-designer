@@ -1,9 +1,10 @@
 """Run the electrical engine on the D1 villa.
 
-    PYTHONPATH=src python -m archpipe.electrical.d1_run [--out DIR] [--docs DIR] [--no-checks]
+    PYTHONPATH=src python -m archpipe.electrical.d1_run [--out DIR] [--docs DIR] [--data DIR]
 
 Writes board schedules, SLDs, cable schedule, load schedule, device list, ELV list and summary.json to DIR
-(default out/electrical/d1), out/checks/L7.json, and (with --docs) a copy of the small outputs.
+(default out/electrical/d1), out/checks/L7.json, and a copy of the small outputs: markdown to --docs
+(docs/lanes/L7b-d1, the only docs path lane L7b owns is *.md) and csv/svg/json to --data (tests/electrical/d1).
 """
 from __future__ import annotations
 
@@ -22,7 +23,7 @@ COPY = ["board_schedule_MDB.csv", "board_schedule_DB-B.csv", "board_schedule_DB-
         "elv_devices.csv", "summary.json", "L7.json"]
 
 
-def run(out_dir: Path | None = None, docs_dir: Path | None = None, checks_root: Path | str | None = None) -> dict:
+def run(out_dir: Path | None = None, docs_dir: Path | None = None, data_dir: Path | None = None, checks_root: Path | str | None = None) -> dict:
     h = villa.load_villa()
     devs = placement.place_devices(h)
     d = circuits.design(h, devs)
@@ -59,12 +60,13 @@ def run(out_dir: Path | None = None, docs_dir: Path | None = None, checks_root: 
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8")
     cp = contracts.write_results("L7", res, checks_root if checks_root is not None else ROOT / "out" / "checks")
     shutil.copy(cp, out_dir / "L7.json")
-    if docs_dir:
-        docs_dir = Path(docs_dir)
-        docs_dir.mkdir(parents=True, exist_ok=True)
-        for f in COPY:
-            if (out_dir / f).exists():
-                shutil.copy(out_dir / f, docs_dir / f)
+    for dest, want in ((docs_dir, lambda f: f.endswith(".md")), (data_dir, lambda f: not f.endswith(".md"))):
+        if dest:
+            dest = Path(dest)
+            dest.mkdir(parents=True, exist_ok=True)
+            for f in COPY:
+                if want(f) and (out_dir / f).exists():
+                    shutil.copy(out_dir / f, dest / f)
     return {"design": d, "results": res, "layout": lay, "house": h, "summary": summary, "out_dir": out_dir, "checks_path": cp}
 
 
@@ -72,5 +74,6 @@ if __name__ == "__main__":
     a = sys.argv[1:]
     out = Path(a[a.index("--out") + 1]) if "--out" in a else None
     docs = Path(a[a.index("--docs") + 1]) if "--docs" in a else None
-    r = run(out, docs)
+    data = Path(a[a.index("--data") + 1]) if "--data" in a else None
+    r = run(out, docs, data)
     print(json.dumps({k: r["summary"][k] for k in ("supply", "boards", "circuits", "checks")}, indent=1))
