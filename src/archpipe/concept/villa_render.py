@@ -519,9 +519,23 @@ def sun_for_timestamp(when, location=None):
     return {'altitude_deg':round(sun.altitude,2), 'azimuth_true_deg':round(sun.azimuth,2)}
 
 
+def require_untracked_inputs():
+    """Fail before the long build, with the fix, when the git-ignored luminaire library is absent.
+
+    Without it the build ran ~9 min and died with a bare `sqlite3.OperationalError: unable to open database file`
+    in fixture_record.bind_products. A worktree has no assets/: copy assets/user from the main checkout.
+    """
+    from ..luminaires.library import LIBRARY
+    if not (LIBRARY / "library.sqlite").is_file():
+        raise FileNotFoundError(
+            "missing " + str(LIBRARY / "library.sqlite") + " (assets/user is git-ignored; copy it from the main "
+            "checkout, e.g. cp -r <main>/assets/user " + str(ROOT / "assets") + "/). See docs/lanes/P-pipeline.md")
+
+
 def build(lay=None, views=None, *, collect_part_failures=False, bed_replacements=()):
     from .build_cache import scope
     from .sanitary_relocation import input_revision
+    require_untracked_inputs()
     with scope(), input_revision(True):
         return _build(lay, views, collect_part_failures=collect_part_failures,bed_replacements=bed_replacements)
 

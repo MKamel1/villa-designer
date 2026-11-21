@@ -15,11 +15,28 @@ from archpipe.concept import villa_render
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--baseline', type=Path, required=True)
+    parser.add_argument('--baseline', type=Path)
     parser.add_argument('--record-baseline', action='store_true')
     parser.add_argument('--profile', type=Path)
     parser.add_argument('--metrics', type=Path)
+    parser.add_argument('--write-scene', type=Path,
+                        help='build once with villa_render.write() (scene.json with provenance and IES files) instead of '
+                             'comparing to a baseline; the metrics record the scene file sha256')
     args = parser.parse_args()
+    if args.write_scene:
+        import sys
+        start = time.perf_counter()
+        path, _ = villa_render.write(args.write_scene)
+        elapsed = time.perf_counter()-start
+        digest = hashlib.sha256(Path(path).read_bytes()).hexdigest()
+        result = dict(build_seconds=elapsed, platform=sys.platform, scene=str(path), scene_bytes=Path(path).stat().st_size,
+                      scene_file_sha256=digest, source_hash=villa_render.source_provenance()['source_hash'])
+        print(json.dumps(result, indent=2), flush=True)
+        if args.metrics:
+            args.metrics.write_text(json.dumps(result, indent=2)+'\n')
+        return 0
+    if args.baseline is None:
+        parser.error('--baseline is required unless --write-scene is given')
     if args.record_baseline and args.baseline.exists():
         parser.error('refusing to overwrite an existing baseline')
     if not args.record_baseline and not args.baseline.is_file():
