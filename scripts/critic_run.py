@@ -94,11 +94,15 @@ def main(argv=None) -> int:
     elif a.vlm != "off":
         for p in pngs:
             f = Path(a.vlm) / f"{p.stem}.json"
+            if not f.exists():                      # calibration caches are keyed by the vNN prefix
+                f = Path(a.vlm) / f"{p.stem.split('-')[0]}.json"
             if f.exists():
                 cache[p.stem] = json.loads(f.read_text(encoding="utf-8"))
     verdicts, results = [], []
+    views = {p.stem: M.load_view(p) for p in pngs}
+    clones = M.clone_report(views) if len(pngs) > 1 else {}       # informational, not in the verdict
     for p in pngs:
-        view = M.load_view(p)
+        view = views[p.stem]
         det = V.deterministic_scores(p, view)
         j = cache.get(p.stem)
         ok = bool(j and j.get("status") == "ok")
@@ -106,6 +110,7 @@ def main(argv=None) -> int:
         verdict, notes = V.decide(merged, gating, hero=True, vlm_ok=ok)
         notes["vlm"] = "ok" if ok else "unavailable"
         notes["rubric"] = rubric["version"]
+        notes["cloned_assets"] = {a: len(vs) for a, vs in clones.items() if p.stem in vs}
         rv = V.build_verdict(p.stem, str(p), view, merged, verdict, notes)
         verdicts.append(asdict(rv))
         results += V.check_results(p.stem, merged, gating)

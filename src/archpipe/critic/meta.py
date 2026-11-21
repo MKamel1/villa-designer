@@ -101,3 +101,44 @@ def check_r3_meta(camera: dict | None, pitch_deg):
     if a <= 1.5:
         return 1, f"pitch {pitch:.2f} deg exceeds 0.5 deg", a
     return 0, f"pitch {pitch:.2f} deg exceeds 1.5 deg", a
+
+
+# ---- cross-view clone report (informational, not part of the calibrated verdict) -----------------
+def visible_assets(view: dict) -> set[str]:
+    """Imported model assets whose bounding-box centre projects inside the frame (pinhole, level camera)."""
+    import math
+    cam = view.get("camera")
+    if not cam or "target" not in cam:
+        return set()
+    res = view.get("resolution") or [1920, 1280]
+    p, t = cam["position"], cam["target"]
+    f = [t[i] - p[i] for i in range(3)]
+    n = math.sqrt(sum(x * x for x in f)) or 1.0
+    f = [x / n for x in f]
+    r = [f[1], -f[0], 0.0]                                  # forward x z-up
+    rn = math.hypot(r[0], r[1]) or 1.0
+    r = [x / rn for x in r]
+    u = [r[1] * f[2] - r[2] * f[1], r[2] * f[0] - r[0] * f[2], r[0] * f[1] - r[1] * f[0]]
+    lens, out = float(cam["lens_mm"]), set()
+    for m in view.get("imported_models", []):
+        b = m.get("bounds")
+        if not b or len(b) < 6:
+            continue
+        c = [(b[i] + b[i + 3]) / 2 - p[i] for i in range(3)]
+        z = sum(c[i] * f[i] for i in range(3))
+        if z <= 0.1:
+            continue
+        x = lens * sum(c[i] * r[i] for i in range(3)) / z / 36.0 + 0.5
+        y = 0.5 - lens * sum(c[i] * u[i] for i in range(3)) / z / (36.0 * res[1] / res[0])
+        if 0 <= x <= 1 and 0 <= y <= 1:
+            out.add(str(m.get("asset")))
+    return out
+
+
+def clone_report(views: dict[str, dict], min_views: int = 4) -> dict[str, list[str]]:
+    """asset -> views showing it, for assets visible in more than min_views-1 views (audit: same sofa in 7)."""
+    seen: dict[str, list[str]] = {}
+    for vid, v in views.items():
+        for a in visible_assets(v):
+            seen.setdefault(a, []).append(vid)
+    return {a: sorted(vs) for a, vs in seen.items() if len(vs) >= min_views}
