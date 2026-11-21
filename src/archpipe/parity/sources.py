@@ -34,5 +34,22 @@ CARDS = {c.id: c for c in [
 ]}
 
 
+def _load_published():
+    """Published cards are read from the held card file, never retyped."""
+    import json
+    from pathlib import Path
+    p = Path(__file__).resolve().parents[3] / "knowledge" / "eg" / "best-practice-cards.json"
+    if not p.exists():
+        raise FileNotFoundError(p)
+    d = json.loads(p.read_text())
+    for c in (d["cards"] if "cards" in d else d):
+        if c["id"] in ("ukadk-stair-headroom-min", "ukadk-guarding-height-external"):
+            CARDS[c["id"]] = SourceCard(**{k: c[k] for k in ("id", "document", "edition", "locator", "quote", "value", "status")},
+                                        url_or_path=str(p.relative_to(p.parents[2])))
+
+
+_load_published()
+
+
 def card(i):
     return CARDS[i]

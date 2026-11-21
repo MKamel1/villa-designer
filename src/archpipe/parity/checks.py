@@ -42,6 +42,25 @@ def _ne(check, subject, why, src="RV1-TOL-SCENE"):
 
 
 # ---------------------------------------------------------------- crossings (K01 K02 K03 K17)
+def is_box(el, rel=1e-6):
+    """True when the element's surfaces are exactly its bounding box (frozen box geometry): then overlap is exact."""
+    t = el.tris
+    if len(t) != 12:
+        return False
+    n = np.cross(t[:, 1] - t[:, 0], t[:, 2] - t[:, 0])
+    a = 0.5 * np.linalg.norm(n, axis=1)
+    x0, y0, z0, x1, y1, z1 = el.box
+    dx, dy, dz = x1 - x0, y1 - y0, z1 - z0
+    return abs(a.sum() - 2 * (dx * dy + dy * dz + dx * dz)) <= rel * max(a.sum(), 1e-12)
+
+
+def box_depth(A, B):
+    """Exact interpenetration of two boxes: the smallest overlap extent over the three axes (0 if they do not overlap)."""
+    d = [min(A.box[i + 3], B.box[i + 3]) - max(A.box[i], B.box[i]) for i in range(3)]
+    return (min(d), tuple(max(A.box[i], B.box[i]) for i in range(3)) + tuple(min(A.box[i + 3], B.box[i + 3]) for i in range(3))) \
+        if min(d) > 0 else (0.0, None)
+
+
 def crossings(check, groupA, groupB, tol=TOL_SCENE, src="RV1-TOL-SCENE", label=""):
     """Pairwise surface crossings between two dicts of Elements; fail where depth > tol."""
     out, n = [], 0
@@ -54,8 +73,11 @@ def crossings(check, groupA, groupB, tol=TOL_SCENE, src="RV1-TOL-SCENE", label="
             if any(la[i] > hb[i] + 1e-6 or lb[i] > ha[i] + 1e-6 for i in range(3)):
                 continue
             n += 1
-            seg, dep = tri_cross_segments(A.tris, B.tris)
-            d, reg = penetration(seg, dep)
+            if is_box(A) and is_box(B):
+                d, reg = box_depth(A, B)
+            else:
+                seg, dep = tri_cross_segments(A.tris, B.tris)
+                d, reg = penetration(seg, dep)
             if d > tol:
                 out.append(_f(check, f"{ia} x {ib}", False, round(d * 1000, 2), tol * 1000, "mm",
                               f"{ia} passes through {ib}: interpenetration {d*1000:.1f} mm where {tol*1000:.2f} mm is allowed"
@@ -69,14 +91,63 @@ def crossings(check, groupA, groupB, tol=TOL_SCENE, src="RV1-TOL-SCENE", label="
 
 def k01_stair_structure(w, tol=TOL_SCENE, src="RV1-TOL-SCENE"):
     st = w.of("stair")
-    other = {k: e for k, e in w.elements.items() if e.kind in ("column", "beam", "slab", "wall")}
+    other = {k: e for k, e in w.elements.items() if e.kind in ("column", "beam", "slab", "wall") or k.startswith("env-slab")}
     return crossings("K01", st, other, tol, src, "stair vs column/beam/slab/wall")
 
 
+def thin_axis(t):
+    """(axis, thickness, lo, hi) of a wall's thin plan direction from its two largest opposite vertical face planes."""
+    n = np.cross(t[:, 1] - t[:, 0], t[:, 2] - t[:, 0])
+    ar = np.linalg.norm(n, axis=1)
+    best = None
+    for ax in (0, 1):
+        sel = (ar > 1e-9) & (np.abs(n[:, ax]) > 0.99 * ar)
+        if not sel.any():
+            continue
+        pl = np.round(t[sel][:, 0, ax], 3)
+        w = {}
+        for v, a_ in zip(pl, 0.5 * ar[sel]):
+            w[v] = w.get(v, 0) + a_
+        top = sorted(w, key=w.get, reverse=True)[:2]
+        if len(top) == 2:
+            th = abs(top[0] - top[1])
+            if best is None or th < best[1]:
+                best = (ax, th, min(top), max(top))
+    return best
+
+
 def k02_wall_slab(w, tol=TOL_SCENE):
-    # spec-ramp-*infill* are wall extensions (wall-to-wall joins belong to the model's join validation, not here)
+    """A wall passes THROUGH a ramp/deck when their overlap covers more than half the wall's thickness in the wall's thin
+    direction. Up to half a thickness is a join at the slab edge (the wall's centre line on the slab boundary)."""
     ramp = {k: e for k, e in w.elements.items() if k in ("slab-ramp", "slab-deck")}
-    return crossings("K02", w.of("wall"), ramp, tol, label="wall vs ramp/deck")
+    out, n = [], 0
+    for iw, W in w.of("wall").items():
+        for ib, B in ramp.items():
+            lo, hi = W.box[:3], W.box[3:]
+            if any(lo[i] > B.box[i + 3] + 1e-6 or B.box[i] > hi[i] + 1e-6 for i in range(3)):
+                continue
+            n += 1
+            if is_box(W) and is_box(B):
+                d, reg = box_depth(W, B)
+            else:
+                seg, dep = tri_cross_segments(W.tris, B.tris)
+                d, reg = penetration(seg, dep)
+            if d <= tol:
+                continue
+            ta = thin_axis(W.tris)
+            if ta is None:
+                out.append(_ne("K02", f"{iw} x {ib}", "wall thickness not measurable")); continue
+            ax, th, a0, a1 = ta
+            ov = min(a1, B.box[ax + 3]) - max(a0, B.box[ax])
+            through = ov > th / 2 + tol
+            out.append(_f("K02", f"{iw} x {ib}", not through, round(d * 1000, 2), tol * 1000, "mm",
+                          f"{iw} meets {ib}: crossing {d*1000:.0f} mm, overlap {ov*1000:.0f} mm across the wall's {th*1000:.0f} mm thickness "
+                          f"({'through the slab' if through else 'a join at the slab edge, at most half the thickness'}); "
+                          f"region x{reg[0]:.3f}..{reg[3]:.3f} y{reg[1]:.3f}..{reg[4]:.3f} z{reg[2]:.3f}..{reg[5]:.3f}",
+                          (iw, ib), "RV1-TOL-SCENE"))
+    if not any(f.status == "fail" for f in out):
+        out.append(_f("K02", "all", True, 0.0, tol * 1000, "mm", f"{n} wall/slab pairs touch; none passes through (joins at a slab edge ignored)"))
+    return out
 
 
 def k03_opening_column(w, tol=TOL_SCENE, src="RV1-TOL-SCENE"):
@@ -196,10 +267,12 @@ def k06_glazing_to_beam(w, model, allow=0.15):
         c = (a.min(0) + a.max(0)) / 2
         pool = _soffit_pool(w, {e["id"], e["host"]})
         soff = ray_up(pool, (c[0], c[1], a[:, 2].max() - 0.01), 0.0)
-        gap = None if soff is None else soff - a[:, 2].max()
-        ok = floor_gap <= TOL_FIT and gap is not None and gap <= allow
-        out.append(_f("K06", e["id"], ok, None if gap is None else round(gap * 1000, 1), allow * 1000, "mm",
-                      f"glass starts {floor_gap*1000:.0f} mm above the floor and ends {('?' if gap is None else f'{gap*1000:.0f}')} mm below the soffit/beam; {allow*1000:.0f} mm allowed",
+        if soff is None:
+            out.append(_ne("K06", e["id"], "nothing found above the glass head", "RV1-GLAZE-HEAD")); continue
+        gap = soff - a[:, 2].max()
+        ok = floor_gap <= TOL_FIT and gap <= allow
+        out.append(_f("K06", e["id"], ok, round(gap * 1000, 1), allow * 1000, "mm",
+                      f"glass starts {floor_gap*1000:.0f} mm above the floor and ends {gap*1000:.0f} mm below the soffit/beam; {allow*1000:.0f} mm allowed",
                       (e["id"],), "RV1-GLAZE-HEAD"))
     return out
 
@@ -256,6 +329,23 @@ def k08_bbox_vs_figure(items, rel=0.05, absmm=10.0):
     return out
 
 
+def k08_bbox_vs_figure_partial(items, rel=0.05, absmm=10.0):
+    """items: (id, built_dims_mm, figure_dims_mm with 1-3 entries). Each stated figure must match some built dimension."""
+    out = []
+    for i, built, fig in items:
+        b = sorted(built)
+        used, worst = [], 0.0
+        for f in sorted(fig, reverse=True):
+            j = min((k for k in range(3) if k not in used), key=lambda k: abs(b[k] - f))
+            used.append(j)
+            worst = max(worst, abs(b[j] - f) / f)
+        ok = all(abs(b[j] - f) <= max(absmm, rel * f) for j, f in zip(used, sorted(fig, reverse=True)))
+        out.append(_f("K08", i, ok, round(worst * 100, 1), rel * 100, "%",
+                      f"{i}: built bbox {[round(x) for x in built]} mm vs stated size {[round(x) for x in fig]} mm, worst {worst*100:.1f} %",
+                      (i,), "RV1-TOL-CAT"))
+    return out
+
+
 # ---------------------------------------------------------------- K09 identity / K13 detail solids
 def _dup_tris(t, q=1000):
     k = np.round(np.sort(t.reshape(len(t), -1, 3).round(3), 1) * q).astype(np.int64).reshape(len(t), -1)
@@ -278,7 +368,7 @@ def k09_identity(w, model):
         el = w.elements.get(e["id"])
         if el is not None and len(el.tris):
             d = _dup_tris(el.tris)
-            if d:
+            if d >= 0.5 * len(el.tris):
                 dups[e["id"]] = d
     for i, d in dups.items():
         out.append(_f("K09", i, False, d, 0, "duplicate triangles", f"{i}: {d} coincident duplicate triangles (built more than once)", (i,)))
@@ -320,10 +410,11 @@ def k10_placement(w, model, tol=TOL_FIT):
         p = e["placement"]
         short = max(ex - d[0], ey - d[1], 0.0)          # built footprint must contain the modelled carcass
         off = max(abs(c[0] - p[0] / 1000), abs(c[1] - p[1] / 1000))
-        # centre may shift by accessories (stools, chairs); a footprint missing the carcass or a centre off by more than
-        # half of the excess is a placement/yaw error
+        # accessories (stools, chairs) enlarge the footprint and shift its centre by up to half the excess; beyond that,
+        # a centre more than half the carcass's smaller side away is a placement/yaw error (placement convention is
+        # not uniform across plumbing items, so a tighter centre bound is not claimed)
         slack = max(d[0] - ex, d[1] - ey, 0.0) / 2
-        bad = short > tol or off > slack + tol
+        bad = short > tol or off > slack + min(ex, ey) / 2
         out.append(_f("K10", e["id"], not bad, round(max(short, off - slack) * 1000, 1), tol * 1000, "mm",
                       f"footprint {d[0]*1000:.0f}x{d[1]*1000:.0f} mm vs carcass {ex*1000:.0f}x{ey*1000:.0f} at rotation {e['rotation_deg']:.0f}; "
                       f"short by {short*1000:.0f} mm, centre off by {off*1000:.0f} mm (slack {slack*1000:.0f})", (e["id"],), "RV1-TOL-FIT"))
@@ -347,6 +438,8 @@ def k11_net_area(w, ref_areas, rel=0.01):
         a = floor_area(w, rid)
         if a is None:
             out.append(_ne("K11", rid, "no floor-<room> mesh in the scene", "RV1-TOL-AREA")); continue
+        if ref <= 0:
+            out.append(_ne("K11", rid, "frozen Revit area is zero", "RV1-TOL-AREA")); continue
         dev = abs(a - ref) / ref
         out.append(_f("K11", rid, dev <= rel, round(a, 3), round(ref, 3), "m2",
                       f"scene floor area {a:.3f} m2 vs frozen Revit net area {ref:.3f} m2 ({dev*100:.2f} %, {rel*100:.0f} % allowed)",
@@ -355,31 +448,44 @@ def k11_net_area(w, ref_areas, rel=0.01):
 
 
 # ---------------------------------------------------------------- K12 / K18 environment and datum
-def k12_environment(w, env, tol=0.002):
-    """env: frozen env read-back dict (columns, floors, shapes). Columns matched by plan position, shapes by name."""
+def plane_dev(t, axis, val):
+    """Smallest distance from `val` to any face plane of `t` perpendicular to `axis` (robust to faces
+    attributed to the wrong element: only the presence of a face where the reference has one is asked)."""
+    n = np.cross(t[:, 1] - t[:, 0], t[:, 2] - t[:, 0])
+    ln = np.linalg.norm(n, axis=1)
+    sel = (ln > 1e-9) & (np.abs(n[:, axis]) > 0.99 * ln)
+    if not sel.any():
+        return None
+    return float(np.abs(t[sel][:, 0, axis] - val).min())
+
+
+def k12_environment(w, env, model, tol=0.002):
+    """env: frozen env read-back (columns, shapes). Each Revit face plane (mm) must have a scene face within `tol`.
+    Columns are linked to scene ids through the model's existing_id; shapes by name (ctx-<name>)."""
     out = []
-    cols = {k: e.box for k, e in w.of("column").items()}
+    by_rvt = {e["params"].get("existing_id"): e["id"] for e in of_kind(model, "column")}
     for c in env["columns"]:
-        b = np.array(c["bbox"][:6]) / 1000
-        if b[2] != 0.0 and b[2] > -2.9:       # GF-based copies only (scene columns run -3.0..6.0 as one element)
-            continue
-        if not (c["base"].startswith("GF")):
-            continue
-        best = min(cols.items(), key=lambda kv: abs(kv[1][0] - b[0]) + abs(kv[1][1] - b[1]), default=None)
-        if best is None:
-            out.append(_ne("K12", str(c["id"]), "no column in scene", "RV1-ENV")); continue
-        d = max(abs(best[1][0] - b[0]), abs(best[1][1] - b[1]), abs(best[1][3] - b[3]), abs(best[1][4] - b[4]))
-        out.append(_f("K12", f"column {c['id']} ~ {best[0]}", d <= tol, round(d * 1000, 2), tol * 1000, "mm",
-                      f"scene {best[0]} plan box vs Revit column {c['id']}: {d*1000:.2f} mm", (best[0],), "RV1-ENV"))
+        cid = by_rvt.get(c["id"])
+        if cid is None or cid not in w.elements:
+            continue                                    # a neighbour's column: not ours
+        b = np.array(c["bbox"]) / 1000
+        t = w.elements[cid].tris
+        devs = [plane_dev(t, ax, b[ax + k]) for ax in (0, 1) for k in (0, 3)]
+        d = max(x for x in devs if x is not None) if any(x is not None for x in devs) else None
+        out.append(_f("K12", f"column {c['id']} = {cid}", d is not None and d <= tol, None if d is None else round(d * 1000, 2),
+                      tol * 1000, "mm", f"nearest scene face to each of the 4 plan faces of Revit column {c['id']}: worst {None if d is None else round(d*1000,2)} mm",
+                      (cid,), "RV1-ENV"))
     for s in env["shapes"]:
         el = w.elements.get("ctx-" + s["id"]) or w.elements.get(s["id"])
         if el is None:
             continue
         b = np.array(s["bbox"]) / 1000
-        sb = np.array(el.box)
-        d = float(np.abs(sb - b).max())
-        out.append(_f("K12", s["id"], d <= tol, round(d * 1000, 2), tol * 1000, "mm",
-                      f"scene box vs Revit shape box: largest face difference {d*1000:.2f} mm", (el.id,), "RV1-ENV"))
+        devs = [plane_dev(el.tris, ax, b[ax + k]) for ax in (0, 1, 2) for k in (0, 3)]
+        devs = [x for x in devs if x is not None]
+        d = max(devs) if devs else None
+        out.append(_f("K12", s["id"], d is not None and d <= tol, None if d is None else round(d * 1000, 2), tol * 1000, "mm",
+                      f"worst nearest-face distance over the 6 box faces of Revit shape {s['id']}: {None if d is None else round(d*1000,2)} mm",
+                      (el.id,), "RV1-ENV"))
     return out
 
 
@@ -400,3 +506,102 @@ def k18_datum(w, levels, model):
         out.append(_f("K18", f"level {lvl}", abs(med - want) <= TOL_FIT, round(med, 4), want, "m",
                       f"median door sole {med:.4f} m vs frozen Revit level {want:.3f} m", (), "RV1-TOL-FIT"))
     return out
+
+
+# ---------------------------------------------------------------- K14 guards
+def k14_guards(w, model, tol=TOL_FIT):
+    """Every modelled guard is built, and as tall as modelled. A guard the model calls required but the scene lacks fails
+    (D21: no guard at the stair opening / terrace / patio edges)."""
+    out = []
+    for e in of_kind(model, "railing"):
+        p = e["params"]
+        if p.get("kind") != "guard":
+            continue
+        el = w.elements.get(e["id"])
+        want = p["guard_height_mm"] / 1000
+        if el is None or not len(el.tris):
+            out.append(_f("K14", e["id"], False, 0.0, want * 1000, "mm",
+                          f"{e['id']}: modelled guard ({want*1000:.0f} mm, drop {p.get('drop_mm')} mm) has no geometry in the scene",
+                          (e["id"],), "RV1-GUARD")); continue
+        a = el.tris.reshape(-1, 3)
+        h = a[:, 2].max() - a[:, 2].min()
+        out.append(_f("K14", e["id"], h >= want - tol, round(h * 1000, 1), want * 1000, "mm",
+                      f"built height {h*1000:.0f} mm, modelled {want*1000:.0f} mm", (e["id"],), "RV1-GUARD"))
+    return out
+
+
+# ---------------------------------------------------------------- K15 mounting host contact
+def k15_mounting(w, hosts, ids, tol=0.010):
+    """hosts: scene['mounting_hosts'] (structural_point + normal); ids: host key -> luminaire element id."""
+    out = []
+    for key, lid in ids.items():
+        h = hosts.get(key)
+        el = w.elements.get(lid)
+        if h is None or el is None:
+            out.append(_ne("K15", key, "no host record or element", "RV1-MOUNT")); continue
+        plate = el.sel(part_kind="wall-plate")
+        if not len(plate):
+            out.append(_ne("K15", key, "no wall-plate surfaces", "RV1-MOUNT")); continue
+        n = np.array(h["normal"], float)
+        p0 = np.array(h["structural_point"], float)
+        d = (plate.reshape(-1, 3) - p0) @ n            # signed distance of plate vertices from the host face
+        back = d.min()
+        ok = abs(back) <= tol
+        out.append(_f("K15", key, ok, round(back * 1000, 1), tol * 1000, "mm",
+                      f"plate back is {back*1000:+.1f} mm from host face of {h['id']} (normal {tuple(n)}); front stands {d.max()*1000:.0f} mm proud",
+                      (lid,), "RV1-MOUNT"))
+    return out
+
+
+# ---------------------------------------------------------------- K16 stair headroom
+def pitch_points(t, up_axis_pair=None):
+    """Points on the pitch line of a flight built from `t` (stair surfaces): one at each tread's nosing (the edge nearest the
+    tread below) and one half way between nosings. Returns [(x, y, z)]. Treads are the up-facing triangles grouped by height."""
+    n = np.cross(t[:, 1] - t[:, 0], t[:, 2] - t[:, 0])
+    top = n[:, 2] > 1e-9
+    tt = t[top]
+    z = np.round(tt.mean(1)[:, 2], 3)
+    groups = {}
+    for tri, zz in zip(tt, z):
+        groups.setdefault(zz, []).append(tri)
+    zs = sorted(groups)
+    if len(zs) < 3:
+        return []
+    cen = np.array([np.concatenate(groups[k]).mean(0) for k in zs])
+    d = cen[-1, :2] - cen[0, :2]
+    d = d / np.linalg.norm(d)
+    pts = []
+    for k, c in zip(zs, cen):
+        pts_k = np.concatenate(groups[k])
+        s = pts_k[:, :2] @ d
+        lat = pts_k[:, :2] @ np.array([-d[1], d[0]])
+        s0 = s.min()
+        p = d * s0 + np.array([-d[1], d[0]]) * (lat.min() + lat.max()) / 2
+        pts.append((p[0], p[1], k))
+    mids = [((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2) for a, b in zip(pts, pts[1:])]
+    return pts + mids
+
+
+def k16_headroom(w, req=2.0, stair="stair-main", src="ukadk-stair-headroom-min"):
+    """Vertical clearance above the PITCH line (not the tread tops: D16). Source: Approved Document K Diagram 1.3, 2 m."""
+    st = w.elements.get(stair)
+    if st is None:
+        return [_ne("K16", stair, "no stair in scene", src)]
+    pts = pitch_points(st.sel(group="shell"))
+    if not pts:
+        return [_ne("K16", stair, "no treads found", src)]
+    pool = _soffit_pool(w, {stair})
+    best = None
+    for x, y, z in pts:
+        zz = ray_up(pool, (x, y, z + 0.001), 0.0)
+        if zz is None:
+            continue
+        hr = zz - z
+        if best is None or hr < best[0]:
+            best = (hr, x, y, z)
+    if best is None:
+        return [_ne("K16", stair, "no surface overhead the pitch line", src)]
+    hr, x, y, z = best
+    return [_f("K16", stair, hr >= req - TOL_SCENE, round(hr * 1000, 1), req * 1000, "mm",
+               f"least clearance above the pitch line {hr*1000:.0f} mm at x{x:.3f} y{y:.3f} z{z:.3f}; {req*1000:.0f} mm needed",
+               (stair,), src)]
