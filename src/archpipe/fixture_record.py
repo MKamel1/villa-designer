@@ -44,13 +44,13 @@ from types import MappingProxyType
 # MIRROR, VANITY-LIN, VSCONCE) were 3000 K on paper while the bound DLN product is 2700 K. Spec lumens/beam of kinds with
 # a bound library product now equal that product (DL 732 lm 33 deg, DLN 1343 lm 29 deg, ADJ 511 lm 18 deg, WW 732 lm).
 KINDS = {
-    "DL":   dict(what="flush trimless downlight, wide", mount="recessed", lm=1065, beam=57, cct=2700, cri=90,
+    "DL":   dict(what="flush trimless downlight, wide", mount="recessed", lm=732, beam=33, cct=2700, cri=90,
                  layer="ambient", aperture=0.075),
-    "DLN":  dict(what="flush trimless downlight, extra wide (task)", mount="recessed", lm=904, beam=91, cct=2700,
+    "DLN":  dict(what="flush trimless downlight, medium (task)", mount="recessed", lm=1343, beam=29, cct=2700,
                  cri=90, layer="task", aperture=0.075),
-    "ADJ":  dict(what="adjustable narrow-spot accent (track/recessed)", mount="recessed", lm=304, beam=6, cct=2700, cri=90,
+    "ADJ":  dict(what="flush trimless adjustable accent", mount="recessed", lm=511, beam=18, cct=2700, cri=90,
                  layer="accent", aperture=0.075),
-    "WW":   dict(what="flush trimless wall washer", mount="recessed", lm=399, beam=None, cct=2700, cri=90,
+    "WW":   dict(what="flush trimless wall washer", mount="recessed", lm=732, beam=33, cct=2700, cri=90,
                  layer="accent", aperture=0.075),
     "PEN-GLOBE": dict(what="opal glass globe pendant D300", mount="pendant", lm=800, beam=None, cct=2700, cri=90,
                       layer="decorative", diameter=0.30),
@@ -61,7 +61,7 @@ KINDS = {
     "SWING": dict(what="movable wall reading light: wall plate, articulated 0.6 m reach and rotating head "
                   "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=60,
                   cct=2700, cri=90, layer="task", diameter=0.12, reach=0.6),
-    "PEN-LIN": dict(what="linear pendant 1.5 m, direct", mount="pendant", lm=3558, beam=87, cct=2700,
+    "PEN-LIN": dict(what="linear pendant 1.6 m, direct/indirect", mount="pendant", lm=1200, beam=90, cct=2700,
                     cri=90, layer="task", length=1.6),
     "SCONCE": dict(what="vanity wall light, opal, each side of the mirror", mount="wall", lm=450, beam=None,
                    cct=2700, cri=90, layer="task", diameter=0.12),
@@ -75,7 +75,7 @@ KINDS = {
     "TOE":  dict(what="toe-kick LED strip", mount="strip", lm_per_m=150, cct=2200, cri=90, layer="night"),
     "NL":   dict(what="night-light strip under the bed / plinth", mount="strip", lm_per_m=100, cct=2200, cri=90,
                  layer="night"),
-    "DESK": dict(what="adjustable desk lamp, shielded head, 2700 K", mount="task-lamp", lm=234, beam=None,
+    "DESK": dict(what="adjustable wall-arm desk lamp, shielded head, 2700 K", mount="task-lamp", lm=450, beam=70,
                  cct=2700, cri=90, layer="task"),
     "VSTRIP": dict(what="vertical LED strip at a hanging-section edge (shadow-free dressing light)", mount="strip",
                    lm_per_m=500, cct=2700, cri=90, layer="task"),
@@ -98,14 +98,14 @@ KINDS = {
 # decorative globe pendant with photometry was found. WW is served meanwhile by the soft flood placed 0.3 m off the
 # wall (grazing), stated as a substitute.
 PRODUCT_CHOICE = {
-    "DL": ("erco", "41321", "Quintessence downlight, wide flood 56 deg, 1065 lm, 2700 K CRI 92, DALI-2 (V10 pass)"),
-    "DLN": ("erco", "41369", "Quintessence downlight, extra wide flood 89 deg, 904 lm, 2700 K CRI 92, DALI-2 (V10 pass)"),
-    "ADJ": ("erco", "A9000028", "Optec New spot M, narrow spot, 304 lm, 2700 K CRI 92, track, on-board dim "
-                                 "(V10 PARTIAL: published beam diameter not reproduced, see LP-candidates; the L spot A9001547 "
-                                 "is 855 lm and needs 3x the dimming)"),
-    "WW": ("erco", "41374", "Quintessence lens wallwasher, recessed, 399 lm, 2700 K CRI 92, DALI-2 (V10 pass)"),
-    "PEN-LIN": ("erco", "50674", "Jilly pendant downlight 1500 mm, 3558 lm (2 x 1779 lm modules), 2700 K CRI 92, DALI-2, UGR 19 (V10 pass)"),
-    "DESK": ("erco", "31327", "Lucy task light, wide beam, 234 lm, 2700 K CRI 92, on-board dim (V10 pass)"),
+    "DL": ("iguzzini", "LSEVO-AAK3EW", "Laser Evo recessed D75 Soft, Flood 33 deg, 2700 K CRI97, phase-cut; "
+                                       "flush (trimless) accessory"),
+    "DLN": ("iguzzini", "LSEVO-AAIIA6", "Laser Evo recessed D75 Cone, Medium 29 deg, 2700 K CRI90, phase-cut; "
+                                        "flush (trimless) accessory"),
+    "ADJ": ("iguzzini", "LSEVO-AAHENX", "Laser Evo recessed D75 Cone Easy Adjustable, Spot 18 deg, 2700 K CRI97, "
+                                        "phase-cut; flush (trimless) accessory"),
+    "WW": ("iguzzini", "LSEVO-AAK3EW", "SUBSTITUTE for the wall washer LSEVO-AAKR2I (files failed the pair check): "
+                                       "Laser Evo D75 Soft Flood 33 deg grazing from 0.3 m"),
 }
 
 @dataclass(frozen=True)
@@ -181,17 +181,32 @@ _products_bound = False
 
 
 def bind_products(ies_dir=None):
-    """Bind the verified products once. The table is `knowledge/lighting/products-frozen.json` (L6c: manufacturer files
-    copied under `knowledge/lighting/ies/`, each product V10-checked in `knowledge/lighting-products/candidates.json`); it is the
-    single source on every machine. A kind absent from it stays generic (lumens-only, named so wherever it is used)."""
+    """Bind measured library photometry once, retaining original generic fallback."""
     global _products_bound
     if _products_bound:
         return PRODUCTS
-    root = Path(__file__).resolve().parents[2] / 'knowledge' / 'lighting'
-    for kind, row in json.loads((root / 'products-frozen.json').read_text(encoding='utf-8')).items():
-        PRODUCTS[kind] = dict(manufacturer=row['manufacturer'], code=row['code'], ies=str(root / 'ies' / row['ies_file']),
-                              lm=float(row['lm']), watts=row['watts'], cct=row['cct'], beam=row['beam'],
-                              what=row['what'], substitute=row['substitute'])
+    ies_dir = Path(ies_dir or Path(__file__).resolve().parents[2] / 'out/villa/render-d1/ies')
+    try:
+        lib.get('iguzzini', 'LSEVO-AAK3EW', 0)
+    except Exception:
+        # L6b: no luminaire library on this machine (e.g. the workstation checkout): the verified rows and IES files of the
+        # four bound kinds are frozen under knowledge/lighting (products-frozen.json, ies/), identical to the library rows.
+        import json
+        root = Path(__file__).resolve().parents[2] / 'knowledge' / 'lighting'
+        for kind, row in json.loads((root / 'products-frozen.json').read_text(encoding='utf-8')).items():
+            PRODUCTS[kind] = dict(manufacturer=row['manufacturer'], code=row['code'], ies=str(root / 'ies' / row['ies_file']),
+                                  lm=float(row['lm']), watts=row['watts'], cct=row['cct'], beam=row['beam'],
+                                  what=row['what'], substitute=row['substitute'])
+        _products_bound = True
+        return PRODUCTS
+    for kind, (mfr, sku, what) in PRODUCT_CHOICE.items():
+        row = lib.get(mfr, sku, 0)
+        if not row or not row.get('verified'):
+            continue
+        path = lib.export_ies(mfr, sku, 0, ies_dir / mfr / (sku + '.ies'))
+        PRODUCTS[kind] = dict(manufacturer=mfr, code=sku, ies=str(path), lm=float(row['luminaire_lm']),
+                              watts=row['watts'], cct=row['cct_k'], beam=row['beam_deg'], what=what,
+                              substitute=what.startswith('SUBSTITUTE'))
     _products_bound = True
     return PRODUCTS
 
@@ -276,7 +291,7 @@ def record_for(fixture):
     product = bind_products().get(fixture.kind)
     spec = definition.spec
     if product:
-        flux = product['lm'] * (fixture.length if 'lm_per_m' in spec else 1.0)       # a strip product is rated per metre
+        flux = product['lm']
     elif fixture.lm is not None:
         flux = fixture.lm
     else:
