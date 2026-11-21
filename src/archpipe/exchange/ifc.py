@@ -15,6 +15,12 @@ from pathlib import Path
 
 import ifcopenshell
 import ifcopenshell.api
+import ifcopenshell.api.aggregate
+import ifcopenshell.api.context
+import ifcopenshell.api.pset
+import ifcopenshell.api.root
+import ifcopenshell.api.spatial
+import ifcopenshell.api.unit
 import ifcopenshell.guid
 
 from ..contracts import DesignElement
