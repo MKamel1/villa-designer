@@ -20,8 +20,15 @@ below, run by a lane (LV) that does not own the engine and may not edit it.
 | V8 | **Mutation tests** | a verification that cannot fail | Seed known errors (double a lumen value, move a sensor into a vase, shift a fitting 300 mm into the ceiling, swap a datum, rotate an IES 90°) and confirm V1–V7 flag each | 100 % of seeded errors caught |
 | V9 | **Physical measurement** (client option) | everything the models share | Measure a real room with a lux meter and compare to the engine model of that room | Within ±15 % (meter accuracy ±5–10 %) |
 
-V1–V8 run automatically on every lighting change and gate the merge. V9 is the only check that does not
-share assumptions with the software; it needs a lux meter and a real room (client decision).
+| V10 | **Manufacturer photometric data** | engine or file-handling errors, independent of our software | Reproduce each specified product's published data-sheet values (illuminance cone / lux at distance, beam diameter, UGR table where given), which come from the manufacturer's own photometric lab | Within ±5 % of every published point |
+| V11 | **Industry-tool cross-check** | errors a professional's tool would not make | Compute 3 key rooms (dining/kitchen open plan, a bathroom, a bedroom) in DIALux evo (free, Windows; one-off on the laptop) from the same geometry, reflectances and IES files | Em within ±10 %, Emin/U0 within ±15 % |
+| V12 | **Commissioning headroom (design rule)** | a model error stranding purchased fittings | Every task card met in its scene with the zone driver at ≤ 80 % of maximum output; all fittings dimmable | 100 % of tasks; any exception named |
+
+V1–V8, V10 and V12 run automatically on every lighting change and gate the merge; V11 runs once per
+design freeze. V9 was declined by the client (2026-11-21): a measurement after purchase is too late,
+so the software verification must be strong enough not to need it. V10 (manufacturer lab data) and V11
+(the industry tool) supply the independent evidence instead, and V12 means a residual error of up to
+±20 % is absorbed by dimming on site rather than by changing fittings.
 
 ## Acceptance
 
