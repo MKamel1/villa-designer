@@ -34,6 +34,10 @@ class ExchangeError(ValueError):
                          + (" ..." if len(self.problems) > 12 else ""))
 
 
+def fail(msg: str):
+    raise ExchangeError([msg])
+
+
 def load_levels(design: str = "D1", path: Path | str | None = None) -> dict:
     """The level table (scene vs Revit elevations) from the model JSON the elements were loaded from."""
     from ..model import api
