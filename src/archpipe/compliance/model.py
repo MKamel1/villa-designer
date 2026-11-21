@@ -68,6 +68,7 @@ class Opening:
     x: float = 0.0
     y: float = 0.0
     swing_known: bool = False
+    swing_direction: str = ""       # "outward" = away from the stair landing; "" or "inward" = into it
 
 
 @dataclass
@@ -81,6 +82,8 @@ class Stair:
     has_risers: bool = False        # riser boards modelled
     gf_floor_z_mm: float = 0.0
     b_floor_z_mm: float = -3000.0
+    riser_infill: dict | None = None            # {max_clear_opening_mm, ...} when the open risers carry an infill
+    under_flight: dict | None = None            # {enclosed, treads_enclosed, cupboard_id} when the space is enclosed
 
 
 @dataclass
@@ -91,6 +94,8 @@ class Guard:
     kind: str = "guard"             # guard | handrail
     solid: bool = True              # drawn solid / glass, so no gaps for a sphere
     drop_m: float | None = None     # height of the fall it guards
+    max_opening_mm: float | None = None   # largest gap in the infill (None: not stated)
+    climbable: bool | None = None
     level: str = ""
 
 
@@ -108,6 +113,7 @@ class DesignModel:
     sources: list = field(default_factory=list)
     links: list = field(default_factory=list)       # (room, room) pairs that connect
     not_evaluated_gates: list = field(default_factory=list)   # (criterion, subject, reason)
+    waivers: dict = field(default_factory=dict)     # (criterion, room id) -> reason: a recorded client waiver
 
     def group_area(self, group: str) -> float:
         tot = 0.0
@@ -213,6 +219,8 @@ def load_d1(out_dir: Path | str | None = None) -> DesignModel:
          "distances are not carded); reviewer step. GF exits: the core door at the stair top and the escape windows"),
     ]
     _prefer_l2_model(m)
+    m.waivers[("LS5", "cinema")] = ("WAIVED by client (G1 2026-11-21): accepted risk, the cinema stays an inner room; "
+                                    "mitigation is interlinked smoke detection in lounge and cinema (electrical lane)")
     dd = _optional(villa / "daylight" / "summary-r12.json")
     dayl = (dd or {}).get("options", {}).get("D1", {}).get("rooms", {})
     for r in m.rooms.values():
@@ -230,16 +238,35 @@ def load_d1(out_dir: Path | str | None = None) -> DesignModel:
     return m
 
 
+GUARD_UNMODELLED = {"rail-gf-stair-void": "GF stair void edge", "rail-gf-terrace-edge": "GF front terrace edge",
+                    "rail-patio-steps-edge": "patio edge beside the entrance steps"}
+
+
+def _l2_elements(m: DesignModel):
+    """L2 elements built from the current spec (spec_source.all_from_spec: fast, carries the G1 fields); the committed
+    snapshot is the fallback."""
+    try:
+        from ..concept import revit_spec as RS
+        from ..concept import villa_r11 as R
+        from ..model import spec_source as SS
+        lay = R.design("D1")
+        return SS.all_from_spec(lay, RS.build(lay)), "archpipe.model.spec_source.all_from_spec (L2, current spec)"
+    except Exception as exc:            # noqa: BLE001
+        m.sources.append("L2 spec_source failed (%s: %s); trying the committed snapshot" % (type(exc).__name__, exc))
+    from ..model import load as load_model
+    return load_model("D1"), "archpipe.model.load('D1') snapshot (L2)"
+
+
 def _prefer_l2_model(m: DesignModel) -> None:
     """Replace spec-derived openings, stair treads and guards with the L2 canonical model's elements (same values,
-    stable element ids) when it loads; record the cross-check in `m.sources`."""
+    stable element ids) and read the G1 fields; record the cross-check in `m.sources`. Anything missing stays
+    fail-closed (the not-modelled rows remain)."""
     try:
-        from ..model import load as load_model
-        els = load_model("D1")
+        els, label = _l2_elements(m)
     except Exception as exc:            # noqa: BLE001 - the spec-derived values stay
         m.sources.append("L2 model not loaded (%s: %s); element ids are spec-derived" % (type(exc).__name__, exc))
         return
-    ops, guards, stair = [], [], None
+    ops, guards, stair, cupboard = [], [], None, None
     for e in els:
         p = e.params
         if e.kind in ("door", "window"):
@@ -247,17 +274,24 @@ def _prefer_l2_model(m: DesignModel) -> None:
             ext = e.kind == "window" or "yard" in rooms or "deck" in rooms
             ops.append(Opening(e.id, e.kind, e.level, p["width_mm"] / 1000.0, p["height_mm"] / 1000.0,
                                p.get("sill_mm", 0.0) / 1000.0, rooms, ext, e.placement[0] / 1000.0,
-                               e.placement[1] / 1000.0))
+                               e.placement[1] / 1000.0, swing_known=bool(p.get("swing_known")),
+                               swing_direction=str(p.get("swing_direction") or "")))
         elif e.kind == "railing" and p.get("guard_height_mm") is not None:
             if e.id.startswith("rail-stair"):
                 guards.append(Guard(e.id, p.get("side", ""), p["guard_height_mm"] / 1000.0,
                                     "handrail" if p.get("material") == "wood" else "guard",
                                     solid=bool(p.get("glazed")) or p.get("material") == "wood", level=e.level))
             else:
-                guards.append(Guard(e.id, p.get("what", ""), p["guard_height_mm"] / 1000.0, "guard", solid=True,
-                                    drop_m=_rail_drop(p.get("what", "")), level="street"))
+                mo = p.get("max_opening_mm")
+                solid = bool(p.get("glazed")) or (mo is not None and mo < 100.0) or mo is None
+                drop = p.get("drop_min_mm") if p.get("drop_min_mm") is not None else p.get("drop_mm")
+                guards.append(Guard(e.id, p.get("what", ""), p["guard_height_mm"] / 1000.0, "guard", solid=solid,
+                                    drop_m=(drop / 1000.0 if drop is not None else _rail_drop(p.get("what", ""))),
+                                    level="street", max_opening_mm=mo, climbable=p.get("climbable")))
         elif e.kind == "stair":
             stair = e
+        elif e.kind == "furniture" and e.id == "joinery-understair-cupboard":
+            cupboard = e
     n_spec_doors = sum(1 for o in m.openings if o.kind == "door")
     n_doors = sum(1 for o in ops if o.kind == "door")
     if (n_doors, len(ops)) != (n_spec_doors, len(m.openings)):
@@ -267,11 +301,22 @@ def _prefer_l2_model(m: DesignModel) -> None:
     m.openings = ops
     if guards:
         m.guards = guards
-    if stair is not None and stair.params.get("tread_boxes_mm") and m.stair is not None:
-        m.stair.treads = [list(b) for b in stair.params["tread_boxes_mm"]]
+        present = {g.id for g in guards}
+        gone = {GUARD_UNMODELLED[i] for i in GUARD_UNMODELLED if i in present}
+        m.needed_but_unmodelled = [(s_, w) for s_, w in m.needed_but_unmodelled if s_ not in gone]
+    if stair is not None and m.stair is not None:
+        sp = stair.params
+        if sp.get("tread_boxes_mm"):
+            m.stair.treads = [list(b) for b in sp["tread_boxes_mm"]]
         m.stair.id = stair.id
-    m.sources.insert(0, "archpipe.model.load('D1') (L2): openings, stair treads, railings and element ids; counts "
-                        "agree with the spec")
+        ri = sp.get("riser_infill")
+        m.stair.riser_infill = ri if ri and ri.get("present") else None
+        uf = sp.get("under_flight") or {}
+        if uf.get("enclosed") and cupboard is not None and cupboard.params.get("enclosed"):
+            m.stair.under_flight = {"enclosed": True, "treads_enclosed": cupboard.params.get("treads_enclosed"),
+                                    "cupboard_id": cupboard.id}
+    m.sources.insert(0, "%s: openings (with door swing), stair treads, riser infill, railings, under-stair cupboard "
+                        "and element ids; counts agree with the spec" % label)
 
 
 def _optional(path: Path):
