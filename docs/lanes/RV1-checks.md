@@ -96,3 +96,127 @@ U12 I08 -> K01 K17; U13 U17 -> K12; U18 -> K09 K10; U19 -> K11; I04 -> K05; I09 
    M6 split into 90 and 180 degrees; M-K16/N-K16/M-K17 added (K16 and K17 had no D1 mutation); the first N-K16 put the soffit 2.01 m above one
    pitch point but the 0.6 m box also sits over higher points of the rising flight (a wrong negative, not a false alarm): rebuilt at 2.26 m.
 6. D03 reproductions use a 10 mm tolerance because the Revit read-back reports wall tops to 10 mm (lessons 4).
+
+## Results (run `python -m archpipe.parity.run_d1 --scene S --ifc I --prove`)
+
+Primary run: INT2's built production scene (INT2 was still 'running' when this was produced; the scene file is the one it had built at 16:31, model data merged from `origin/lane/INT2`). Earlier run on RA2's scene (sha256 `f7a7fe76418a04ff1fe75b2fdfe8596e095783bb2923155fd303afa35b9ee7b3`): same check results except K10 (stair-flight-store 1.80 vs 1.20 m, fixed in the INT2 model) and 24 more K09 luminaire ids; mutation and recall results identical.
+
+Scene `/home/omar/archpipe/lanes/INT2/out/int2/prod/scene.json` sha256 `045f0487868e3bce8af21d1ed298ec4df4081a8d1fd7657cd1e250eaaeb0b77f`  
+IFC `/home/omar/archpipe/lanes/INT2/out/exchange/D1/D1-ARCH.ifc` sha256 `8598f929cd05dc4e2a320f299f8fc4b3df9a5626436c229581cf606917b86b5a`
+
+### Checks on the D1 scene and IFC
+
+| check | pass | fail | not evaluated |
+|---|---|---|---|
+| K01 | 1 | 0 | 0 |
+| K02 | 6 | 0 | 0 |
+| K03 | 1 | 0 | 0 |
+| K04 | 18 | 0 | 0 |
+| K05 | 25 | 1 | 0 |
+| K06 | 0 | 1 | 0 |
+| K07 | 73 | 3 | 0 |
+| K09 | 0 | 55 | 0 |
+| K10 | 50 | 2 | 0 |
+| K11 | 12 | 13 | 2 |
+| K12 | 90 | 0 | 0 |
+| K13 | 0 | 89 | 0 |
+| K14 | 1 | 2 | 0 |
+| K15 | 2 | 0 | 0 |
+| K16 | 1 | 0 | 0 |
+| K17-K01 | 1 | 0 | 0 |
+| K17-K02 | 3 | 0 | 0 |
+| K17-K03 | 1 | 0 | 0 |
+| K18 | 2 | 0 | 0 |
+
+### Scene vs IFC kernel, per clash pair
+
+No pair fails in either the scene or the IFC: they agree on every clash tested.
+
+### Recall on the frozen reproductions
+
+| row | source | check | subject | expected | got | ok |
+|---|---|---|---|---|---|---|
+| D01 | historic | K01 | r3 party-wall flight | fail | fail | True |
+| D01 | historic | K01 | U-stair in the old bay | fail | fail | True |
+| D01 | historic | K01 | party-wall flight, corrected | fail | fail | True |
+| D01 | historic | K01 | U-stair along the party wall | fail | fail | True |
+| D01 | historic | K01 | party-wall flight (r8, landing 1.2 m) | fail | fail | True |
+| D01 | historic | K01 | U-stair in the street-end bay | fail | fail | True |
+| D02 | historic-reconstructed | K01 exact |  | fail | fail | True |
+| D03 | historic-reconstructed | K02 | P3 | fail | fail | True |
+| D03-fixed | control | K02 | P3 | pass | pass | True |
+| D03 | historic-reconstructed | K02 | P4 | fail | fail | True |
+| D03-fixed | control | K02 | P4 | pass | pass | True |
+| D04 | historic-reconstructed | K04 |  | fail | fail | True |
+| D04-fixed | control | K04 |  | pass | pass | True |
+| D05-asbuilt | control | K03 | P3 | pass | pass | True |
+| D05-asbuilt | control | K03 | P4 | pass | pass | True |
+| D05 | synthetic | K03 | entrance over column 1590377 | fail | fail | True |
+| D06 | control | K05 (credit vs built) |  | pass | pass | True |
+| D06 | synthetic | K05 (credit vs built) |  | fail | fail | True |
+| D07 | historic | K06 | P3 | fail | fail | True |
+| D07 | historic | K06 | P4 | (info) | fail | True |
+| D08 | historic | K07 | LT-02 | fail | fail | True |
+| D08 | historic | K07 | LT-03 | fail | fail | True |
+| D08 | historic | K07 | LT-05 | fail | fail | True |
+| D08 | synthetic | K07 | LT-01 shade top 2717 vs ceiling 2700 (LEARNINGS l0096) | fail | fail | True |
+| D09 | historic | K08 |  | fail (families whose bbox does not match | fail | True |
+| D10/D11/D12 | control | K09 |  | pass | pass | True |
+| D10 | historic | K09 keyed on Mark only (the old post-condition) |  | fail | fail | True |
+| D11 | synthetic | K09 |  | fail | fail | True |
+| D12 | synthetic | K09 |  | fail | fail | True |
+| D12 | control | K10 (bbox vs spec) |  | (report) | pass | True |
+| D12 | synthetic | K10 (bbox vs spec) |  | fail | fail | True |
+| D13 | control | K12 |  | (report) | pass | True |
+| D14 | historic | K11 (1 % band) | flex | fail | fail | True |
+| D14 | historic | K11 (1 % band) | kitchen | (below band) | pass | True |
+| D16 | historic-reconstructed | K16 | opening to x 8.537 | fail | fail | True |
+| D16 | control | K16 | opening to x 8.887 | pass | pass | True |
+| D19 | synthetic | K15 |  | fail | fail | True |
+| D19 | synthetic | K15 |  | pass | pass | True |
+| D21 | synthetic | K14 |  | fail | fail | True |
+| D21 | synthetic | K14 |  | pass | pass | True |
+
+### Mutation set
+
+| id | check | kind | expected | result | detail |
+|---|---|---|---|---|---|
+| M1 | K02 | mutation | catch | quiet **(MISS)** | wall-B-ext-07 translated (0,-0.5,0) into the ramp |
+| N-K02 | K02 | negative | quiet | quiet | wall moved 0.5 m away from the ramp |
+| M1b | K02 | mutation | catch | caught | cross wall wall-B-int-11 (top 10 mm under the ramp soffit) raised 0.7 m through the ramp |
+| M2 | K04 | mutation | catch | caught | door-B-cinema-store-ramp head raised 0.30 m (clearance was 112 mm) |
+| N-K04 | K04 | negative | quiet | quiet | head raised to leave 5 mm below the soffit |
+| M3 | K05 | mutation | catch | caught | all surfaces of window-GF-kids-a-3 deleted |
+| M-K05b | K05 | mutation | catch | caught | glass width halved |
+| N-K05 | K05 | negative | quiet | quiet | glass 3 mm narrower |
+| M4 | K07 | mutation | catch | caught | pendant raised 0.60 m |
+| M-K07b | K07 | mutation | catch | caught | emitter datum 0.25 m too low |
+| N-K07 | K07 | negative | quiet | quiet | pendant 5 mm low |
+| M5 | K01 | mutation | catch | caught | stair-main shifted [-1.23, 0.0, 0.0] m: 30 mm into column-06 (gap was 1200 mm) |
+| N-K01-touch | K01 | negative | quiet | quiet | stair exactly touching the column |
+| N-K01-gap | K01 | negative | quiet | quiet | stair 5 mm short of the column |
+| M-K03 | K03 | mutation | catch | caught | door-B-dining-yard 50 mm into column-03 |
+| N-K03 | K03 | negative | quiet | quiet | door 5 mm clear of the column |
+| M6-90 | K10 | mutation | catch | caught | furn-lounge-armchair (model rotation 90, carcass 946x794) rotated back to 0 |
+| M6-180 | K10 | mutation | catch | quiet **(MISS)** | furn-k-run (model rotation 180, carcass 2010x600) rotated back to 0 |
+| M-K10-move | K10 | mutation | catch | caught | furn-lounge-sofa moved 1.0 m |
+| M-K10-move0.1 | K10 | mutation | catch | quiet **(MISS)** | furn-lounge-sofa moved 0.1 m (the centre bound is half the smaller side: expected to be missed) |
+| N-K10 | K10 | negative | quiet | quiet | furn-lounge-sofa moved 20 mm |
+| M-K09-del | K09 | mutation | catch | caught | furn-lounge-sofa deleted |
+| M-K09-dup | K09 | mutation | catch | caught | furn-lounge-sofa built twice |
+| M-K08-down | K08 | mutation | catch | caught | furn-lounge-sofa scaled 0.85 |
+| M-K08-up | K08 | mutation | catch | caught | furn-lounge-sofa scaled 1.15 |
+| N-K08 | K08 | negative | quiet | quiet | furn-lounge-sofa scaled 1.002 |
+| M-K11 | K11 | mutation | catch | caught | floor of bar-alcove shortened by 10 % |
+| N-K11 | K11 | negative | quiet | quiet | floor of bar-alcove 0.05 % smaller |
+| M-K12 | K12 | mutation | catch | caught | column-00 moved 20 mm |
+| N-K12 | K12 | negative | quiet | quiet | column-00 moved 1 mm |
+| M-K13 | K13 | mutation | catch | caught | one more mesh without an element id |
+| M-K14 | K14 | mutation | catch | caught | rail-gf-stair-void deleted |
+| M-K15 | K15 | mutation | catch | caught | lum-SWING-bar-alcove-09 moved 0.30 m off its host |
+| N-K15 | K15 | negative | quiet | quiet | plate 5 mm off |
+| M-K16 | K16 | mutation | catch | caught | a soffit 1.70 m above the pitch line at x7.49 |
+| N-K16 | K16 | negative | quiet | quiet | a soffit 2.26 m above the pitch line at the sample (2.07 m above the highest pitch point under its 0.6 m width |
+| M-K18 | K18 | mutation | catch | caught | every B-level door shifted +0.10 m |
+| N-K18 | K18 | negative | quiet | quiet | every B-level door shifted +5 mm |
+| M-K17 | K17 | mutation | catch | caught | IFC wall-B-int-11 extrusion +0.7 m (through the ramp), read back by IfcOpenShell |
