@@ -276,7 +276,7 @@ def record_for(fixture):
     product = bind_products().get(fixture.kind)
     spec = definition.spec
     if product:
-        flux = product['lm']
+        flux = product['lm'] * (fixture.length if 'lm_per_m' in spec else 1.0)       # a strip product is rated per metre
     elif fixture.lm is not None:
         flux = fixture.lm
     else:

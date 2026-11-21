@@ -102,7 +102,8 @@ def _drivers():
     """Commissioning table solved by lightcalc.villa_tune from the per-zone Radiance results (knowledge/lighting)."""
     import json
     from pathlib import Path
-    path = Path(__file__).resolve().parents[3] / "knowledge" / "lighting" / "zone-drivers.json"
+    import os
+    path = Path(os.environ.get("ARCHPIPE_ZONE_DRIVERS") or Path(__file__).resolve().parents[3] / "knowledge" / "lighting" / "zone-drivers.json")
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
 
@@ -364,8 +365,10 @@ def design(lay=None):
     third = (isl[2] - isl[0]) / 3
     # L6c: the ERCO DL is 1065 lm (was 732): the separate hob downlight went to the 15 % floor of the driver range, so it is cut;
     # the three prep downlights (one over the hob's side, one each side) light both the 500 lx strip and the 300 lx induction zone
-    for x, zn, cd in ((icx - third, "island-prep", "ies-res-kitchen-prep-500"),
-                      (icx + third, "island-prep", "ies-res-kitchen-prep-500"), (isl[2] - 0.15, "island-prep", "ies-res-kitchen-prep-500")):
+    # four prep downlights in two mirrored pairs about the island centre (+/-1.0 m and +/-1.5 m): a pair close to the hob lifts the
+    # 300 lx induction zone to 1.2x its card when the strip reaches 500 lx (analytic search over positions, then Radiance)
+    for x, zn, cd in ((icx - 1.5, "island-prep", "ies-res-kitchen-prep-500"), (icx - 1.0, "island-prep", "ies-res-kitchen-prep-500"),
+                      (icx + 1.0, "island-prep", "ies-res-kitchen-prep-500"), (icx + 1.5, "island-prep", "ies-res-kitchen-prep-500")):
         add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line (the globes' axes, plus one at the far end); the middle "
             "one is over the hob", card=cd, zone=zn + ":task")
     run = fp["k-run"]
@@ -506,7 +509,7 @@ def design(lay=None):
             add("DL", room, x, (K[1] + K[3]) / 2 - 0.3, why="bedroom ambient", card="ies-res-bedroom-general-50")
         for d in desks:
             q = fp[d]
-            add("DL", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.35, why="L6c: desk downlight in front of the child (Lucy alone "
+            add("DL", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.10, why="L6c: desk downlight in front of the child (Lucy alone "
                 "(234 lm) cannot reach 400 lx at a safe driver setting)", card="ies-res-desk-400", zone="task:task")
             add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF", 
                 why="each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, "
