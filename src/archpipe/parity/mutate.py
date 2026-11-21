@@ -36,8 +36,11 @@ def _fails(fs):
     return {f.subject: (f.achieved if f.achieved is not None else 0.0) for f in fs if f.status == "fail"}
 
 
-def caught(base, mut, slack=1.0):
+def caught(base, mut, slack=1.0, only=None):
+    """`only`: judge just the failing subjects that contain this text (a shifted stair also meets other elements)."""
     nb, nm = _fails(base), _fails(mut)
+    if only:
+        nb, nm = {k: v for k, v in nb.items() if only in k}, {k: v for k, v in nm.items() if only in k}
     new = sorted(set(nm) - set(nb))
     worse = sorted(k for k in nb if k in nm and abs(nm[k]) > abs(nb[k]) + slack)
     return bool(new or worse), new + worse
@@ -73,8 +76,8 @@ def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, level
     rows = []
     B = baselines or {}
 
-    def rec(mid, check, kind, expect, base, mut, detail=""):
-        c, why = caught(base, mut)
+    def rec(mid, check, kind, expect, base, mut, detail="", only=None):
+        c, why = caught(base, mut, only=only)
         rows.append(dict(id=mid, check=check, kind=kind, expect=expect, caught=c,
                          ok=(c if expect == "catch" else not c), via=why[:4], detail=detail))
 
@@ -145,11 +148,11 @@ def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, level
     else:
         d, cid, gap = sh
         rec("M5", "K01", "mutation", "catch", base, C.k01_stair_structure(_edit(w, "stair-main", _shift(d))),
-            f"stair-main shifted {np.round(d, 3).tolist()} m: 30 mm into {cid} (gap was {gap*1000:.0f} mm)")
+            f"stair-main shifted {np.round(d, 3).tolist()} m: 30 mm into {cid} (gap was {gap*1000:.0f} mm)", only=cid)
         d2 = d.copy(); d2[np.nonzero(d2)[0][0]] = np.sign(d2[np.nonzero(d2)[0][0]]) * gap      # exactly touching
-        rec("N-K01-touch", "K01", "negative", "quiet", base, C.k01_stair_structure(_edit(w, "stair-main", _shift(d2))), "stair exactly touching the column")
+        rec("N-K01-touch", "K01", "negative", "quiet", base, C.k01_stair_structure(_edit(w, "stair-main", _shift(d2))), "stair exactly touching the column", only=cid)
         d3 = d.copy(); d3[np.nonzero(d3)[0][0]] = np.sign(d3[np.nonzero(d3)[0][0]]) * (gap - 0.005)
-        rec("N-K01-gap", "K01", "negative", "quiet", base, C.k01_stair_structure(_edit(w, "stair-main", _shift(d3))), "stair 5 mm short of the column")
+        rec("N-K01-gap", "K01", "negative", "quiet", base, C.k01_stair_structure(_edit(w, "stair-main", _shift(d3))), "stair 5 mm short of the column", only=cid)
     base = B.get("K03") or C.k03_opening_column(w)
     sh = _nearest_column_shift(w, "door-B-dining-yard", 0.050, model)
     if sh:

@@ -64,3 +64,22 @@ def agreement(scene_findings, ifc_findings):
         rows.append(dict(pair=" x ".join(k), scene="fail" if a else "quiet", scene_mm=a.achieved if a else None,
                          ifc="fail" if b else "quiet", ifc_mm=b.achieved if b else None, agree=bool(a) == bool(b)))
     return rows
+
+
+def mutate_ifc_wall_taller(src, dst, wall_name="wall-B-int-11", dz=0.7):
+    """Seed an IFC defect for the K17 mutation: the named wall's extrusion is lengthened by `dz` metres (through the ramp)."""
+    import ifcopenshell
+    import ifcopenshell.util.unit as U
+    f = ifcopenshell.open(str(src))
+    scale = U.calculate_unit_scale(f)          # metres per file length unit (0.001 for a millimetre file)
+    w = next(p for p in f.by_type("IfcWall") if p.Name == wall_name)
+    n = 0
+    for rep in w.Representation.Representations:
+        for it in rep.Items:
+            if it.is_a("IfcExtrudedAreaSolid"):
+                it.Depth = it.Depth + dz / scale
+                n += 1
+    if not n:
+        raise RuntimeError(f"{wall_name}: no extruded solid to lengthen")
+    f.write(str(dst))
+    return dst
