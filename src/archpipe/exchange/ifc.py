@@ -420,7 +420,7 @@ class _B:
         h = float(p["clear_height_mm"])
         el.Representation = self.shape([self.prism(poly, h)])
         self.api.aggregate.assign_object(self.f, relating_object=self.storey[e.level], products=[el])
-        self.spaces[e.id] = el
+        self.spaces[e.id[5:] if e.id.startswith("room-") else e.id] = el      # keyed by room name
         gross = p.get("gross_area_m2") or p.get("area_m2")
         net = p.get("net_area_m2")
         wall_len = Q.perimeter(poly)
@@ -510,6 +510,9 @@ class _B:
         ox, oy = e.placement[0], e.placement[1]
         solids = []
         for x0, y0, z0, x1, y1, z1 in p["tread_boxes_mm"]:
+            solids.append(self.rect(x1 - x0, y1 - y0, z1 - z0, (x0 + x1) / 2 - ox, (y0 + y1) / 2 - oy,
+                                    float(z0) + C.DATUM_SHIFT_MM))
+        for x0, y0, z0, x1, y1, z1 in (p.get("riser_infill") or {}).get("bar_boxes_mm", []):    # horizontal riser bars
             solids.append(self.rect(x1 - x0, y1 - y0, z1 - z0, (x0 + x1) / 2 - ox, (y0 + y1) / 2 - oy,
                                     float(z0) + C.DATUM_SHIFT_MM))
         fl = self.new(e, cls="IfcStairFlight", name=f"{e.id}-flight", key=f"{e.id}-flight")
