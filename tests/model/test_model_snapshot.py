@@ -3,6 +3,7 @@
 Fast checks only. Regenerating the slow sources (lighting, garden plan: minutes) is `python -m archpipe.model.export
 --snapshot`; set ARCHPIPE_SLOW=1 to have this file re-derive luminaires and compare them with the snapshot.
 """
+import copy
 import os
 import unittest
 from collections import Counter
@@ -29,13 +30,19 @@ class Snapshot(unittest.TestCase):
     def test_counts_by_kind(self):
         k = self.kinds
         self.assertEqual((k["room"], k["wall"], k["door"], k["window"], k["stair"]), (30, 36, 18, 8, 1))
-        self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 4, 8))
+        self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 6, 8))     # slab: + B and GF floor slabs (lane M)
         self.assertEqual(k["luminaire"], 142)
         self.assertEqual(k["plant"], 80)
         self.assertEqual(k["furniture"], 81)       # includes the G1 under-stair cupboard
 
     def test_spec_kinds_equal_a_fresh_derivation(self):
-        fresh = {e.id: asdict(e) for e in S.all_from_spec(self.lay, self.sp, finish=_finish())}
+        from archpipe.model import geometry_complete as GC
+        spec = S.all_from_spec(self.lay, self.sp, finish=_finish())
+        ids = {e.id for e in spec}
+        slow = [e for e in self.els if e.kind in ("furniture", "luminaire", "plant", "garden") and e.id not in ids]
+        done = GC.complete(spec + [copy.deepcopy(e) for e in slow], self.lay, self.sp, _finish())
+        fresh = {e.id: asdict(e) for e in done if e.id in ids or e.kind in ("floor", "ceiling", "storey", "type")
+                 or e.id in ("slab-B-floor", "slab-GF-floor")}
         snap = {e.id: asdict(e) for e in self.els if e.id in fresh}
         self.assertEqual(set(snap), set(fresh))
         for i, f in fresh.items():
@@ -121,7 +128,7 @@ def _finish():
     return VR.FINISH
 
 
-_REVIT_ONLY = ("revit_net_area_m2", "net_area_m2", "net_area_basis")      # need out/villa/.../readback.json
+_REVIT_ONLY = ()                       # net areas now come from the built walls: nothing machine-dependent
 
 
 def _norm(d):
