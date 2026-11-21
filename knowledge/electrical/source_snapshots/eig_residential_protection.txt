@@ -1,0 +1,43 @@
+Contents
+1 Incoming supply circuit breaker with instantaneous differential relay
+2 Incoming supply circuit breaker with type S time delayed differential relay
+3 Incoming supply circuit breaker without differential protection
+Where utility power supply systems and consumers’ installations form a TT system, the governing standards impose the use of RCDs to ensure the protection of people
+On TT systems, the protection of persons is ensured by the following measures:
+Protection against indirect contact hazards by RCDs (see Fig. Q7) of medium sensitivity (300 mA) at the origin of the installation (incorporated in the incoming supply circuit breaker or, on the incoming feed to the distribution board).
+This measure is associated with a consumer installed earth electrode to which must be connected the protective earth conductor (PE) from the exposed conductive parts of all class I insulated appliances and equipment, as well as those from the earthing contact of all socket outlets
+When the CB at the origin of an installation has no RCD protection, the protection of persons shall be ensured by double or reinforced insulation on all circuits upstream of the first RCDs. In the case where the distribution board is metallic, care shall be taken that all live parts are double insulated (supplementary clearances or insulation, use of covers, etc.) and wiring reliably fixed
+In TN systems, fault protection is ensured by the following measures: 
+Fault Protection is ensured by circuit breaker at the origin of the installation.
+This measure is associated with a consumer installed earth electrode to which must be connected the protective earth conductor (PE) from the exposed conductive parts of all class I insulated appliances and equipment.
+For all earthing systems:
+mandatory protection by 30 mA high sensitivity RCDs of socket outlet circuits, and circuits feeding bathroom. And recently, the IEC 60364 also requires the use of 30 mA RCD for lighting circuits
+ [a] RCD required for Fault Protection in TT systems. In TN system a circuit-breaker is used.
+ [b] Recent evolution of IEC 60364 = 30mA RCDs mandatory for lighting circuits
+ [c] see Protection against arc faults in cables and connections (AFDD)Fig. Q7 – ﻿Requirements of IEC 60364 for protection of people
+Incoming supply circuit breaker with instantaneous differential relay
+In this case:
+An insulation fault to earth could result in a shutdown of the entire installation
+Where a surge protective device is installed, its operation (i.e. discharging a voltage surge to earth) could appear to an RCD as an earth fault, with a consequent shutdown of the installation
+Recommendation of suitable Schneider Electric components
+Incoming supply circuit breaker with 300 mA differential and
+High sensitivity 30 mA RCD (for example differential circuit breaker 1P+N type resi9) on the circuits supplying socket outlets
+High sensitivity 30 mA RCD (for example differential load switch type ID’clic) on circuits to bathrooms, shower rooms, laundry rooms, etc. (lighting, heating, socket outlets)
+Incoming supply circuit breaker with type S time delayed differential relay
+This type of CB affords protection against fault to earth, but by virtue of a short time delay, provides a measure of selectivity with downstream instantaneous RCDs. Tripping of the incoming supply CB and its consequences (on deep freezers, for example) is thereby made less probable in the event of lightning, or other causes of voltage surges. The discharge of voltage surge current to earth, through the surge arrester, will leave the type S circuit breaker unaffected.
+ Fig. Q8 – ﻿Installation with incoming-supply circuit breaker having short time delay differential protection, type S
+Incoming supply circuit breaker without differential protection
+In this case the protection of persons must be ensured by:
+Class II level of insulation up to the downstream terminals of the RCDs
+All outgoing circuits from the distribution board must be protected by 30 mA or 300 mA RCDs according to the type of circuit concerned as discussed in chapter F.
+Where a voltage surge arrester is installed upstream of the distribution board 
+(to protect sensitive electronic equipment such as computers, TV sets, internet access boxes etc.) it is imperative that the device automatically disconnects itself from the installation following a rare (but always possible) failure. Some devices employ replaceable fusing elements; the recommended method however as shown in Fig. Q9, is to use a circuit breaker.
+Recommendation of suitable Schneider Electric components
+Fig. Q9 refers:
+1 = Incoming-supply circuit breaker without differential protection
+2 = Automatic disconnection device (if a lightning arrester is installed)
+3 = 30 mA RCD (for example differential circuit breaker 1P + N type Declic Vigi) on each circuit supplying one or more socket-outlets
+4 = 30 mA RCD (for example differential load swith type ID’clic) on circuits to bathrooms and shower rooms (lighting, heating and socket-outlets) or a 30 mA differential circuit breaker per circuit
+5 = 300 mA RCD (for example differential load switch on all the other circuits.
+ Fig. Q9 – ﻿Installation with incoming-supply circuit breaker having no differential protection
+

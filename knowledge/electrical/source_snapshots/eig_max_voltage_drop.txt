@@ -1,0 +1,16 @@
+
+ROW: Characteristics of particular sources and loads
+Maximum allowable voltage-drop vary from one country to another. Typical values for LV installations are given below in Figure G25.
+ROW: Type of installations | Lighting circuits | Other uses (heating and power)
+ROW: A low-voltage service connection from a LV public power distribution network | 3% | 5%
+ROW: Consumers MV/LV substation supplied from a public distribution MV system | 6% | 8%
+Fig. G25: Maximum voltage-drop between the service-connection point and the point of utilization (IEC60364-5-52 table G.52.1)
+These voltage-drop limits refer to normal steady-state operating conditions and do not apply at times of motor starting, simultaneous switching (by chance) of several loads, etc. as mentioned in Estimation of actual maximum kVA demand (diversity and utilization factors, etc.). When voltage drops exceed the values shown in Figure G25, larger cables (wires) must be used to correct the condition.
+The value of 8%, while permitted, can lead to problems for motor loads; for example: 
+In general, satisfactory motor performance requires a voltage within ± 5% of its rated nominal value in steady-state operation, 
+Starting current of a motor can be 5 to 7 times its full-load value (or even higher). If an 8% voltage drop occurs at full-load current, then a drop of 40% or more will occur during start-up. In such conditions the motor will either:
+ Stall (i.e. remain stationary due to insufficient torque to overcome the load torque) with consequent over-heating and eventual trip-out
+ Or accelerate very slowly, so that the heavy current loading (with possibly undesirable low-voltage effects on other equipment) will continue beyond the normal start-up period 
+Finally an 8% voltage drop represents a continuous power loss, which, for continuous loads will be a significant waste of (metered) energy. For these reasons it is recommended that the maximum value of 8% in steady operating conditions should not be reached on circuits which are sensitive to under-voltage problems (see Fig. G26).
+ Fig. G26: Maximum voltage drop
+

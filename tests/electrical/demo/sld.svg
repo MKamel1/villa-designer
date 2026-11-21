@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1460" height="560" viewBox="0 0 1460 560" font-family="Arial,sans-serif" font-size="9">
+<rect width="1460" height="560" fill="#fff"/>
+<text x="40" y="22" font-size="13" font-weight="bold">Test house (living, kitchen, bedroom, bathroom) - DB-GF single-line diagram</text>
+<rect x="610" y="40" width="240" height="24" fill="#f3f3f3" stroke="#222"/>
+<text x="730" y="55" text-anchor="middle">Supply 380/220 V 50 Hz, 3-phase, TT</text>
+<line x1="730" y1="64" x2="730" y2="74" stroke="#222"/>
+<rect x="610" y="74" width="240" height="24" fill="#f3f3f3" stroke="#222"/>
+<text x="730" y="89" text-anchor="middle">Utility meter</text>
+<line x1="730" y1="98" x2="730" y2="108" stroke="#222"/>
+<rect x="610" y="108" width="240" height="24" fill="#f3f3f3" stroke="#222"/>
+<text x="730" y="123" text-anchor="middle">Main switch/breaker 40 A 4P</text>
+<line x1="730" y1="132" x2="730" y2="142" stroke="#222"/>
+<rect x="610" y="142" width="240" height="24" fill="#f3f3f3" stroke="#222"/>
+<text x="730" y="157" text-anchor="middle">Type S RCD 300 mA (TT origin)</text>
+<line x1="730" y1="166" x2="730" y2="176" stroke="#222"/>
+<rect x="610" y="176" width="240" height="24" fill="#f3f3f3" stroke="#222"/>
+<text x="730" y="191" text-anchor="middle">SPD Type 2</text>
+<line x1="730" y1="200" x2="730" y2="250" stroke="#222"/>
+<text x="736" y="222">incomer cable 10 mm2 Cu PVC, 18 m</text>
+<line x1="40" y1="250" x2="1420" y2="250" stroke="#222" stroke-width="3"/>
+<text x="40" y="244">Busbar DB-GF, 20 ways (5 spare)</text>
+<g id="DB-GF/D1">
+<line x1="86" y1="250" x2="86" y2="270" stroke="#8b4513" stroke-width="2"/>
+<rect x="50" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="86" y="283" text-anchor="middle" font-weight="bold">D1 (L1)</text>
+<text x="86" y="295" text-anchor="middle">RCBO 16A C</text>
+<text x="86" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="86" y1="314" x2="86" y2="370" stroke="#8b4513" stroke-width="2"/>
+<text x="86" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="86" y="396" text-anchor="middle">7 m</text>
+<text x="86" y="408" text-anchor="middle">Ib 11.1 A</text>
+<text x="86" y="420" text-anchor="middle">dV 1.23 %</text>
+<rect x="46" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="86" y="446" text-anchor="middle">ac AC-LIV</text>
+<text x="86" y="460" text-anchor="middle">LIV</text>
+</g>
+<g id="DB-GF/D3">
+<line x1="178" y1="250" x2="178" y2="270" stroke="#8b4513" stroke-width="2"/>
+<rect x="142" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="178" y="283" text-anchor="middle" font-weight="bold">D3 (L1)</text>
+<text x="178" y="295" text-anchor="middle">RCBO 40A B</text>
+<text x="178" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="178" y1="314" x2="178" y2="370" stroke="#8b4513" stroke-width="2"/>
+<text x="178" y="384" text-anchor="middle">10 mm2</text>
+<text x="178" y="396" text-anchor="middle">8.9 m</text>
+<text x="178" y="408" text-anchor="middle">Ib 36.4 A</text>
+<text x="178" y="420" text-anchor="middle">dV 1.24 %</text>
+<rect x="138" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="178" y="446" text-anchor="middle">cooker COOKER</text>
+<text x="178" y="460" text-anchor="middle">KIT</text>
+</g>
+<g id="DB-GF/D4">
+<line x1="270" y1="250" x2="270" y2="270" stroke="#8b4513" stroke-width="2"/>
+<rect x="234" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="270" y="283" text-anchor="middle" font-weight="bold">D4 (L1)</text>
+<text x="270" y="295" text-anchor="middle">RCBO 10A B</text>
+<text x="270" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="270" y1="314" x2="270" y2="370" stroke="#8b4513" stroke-width="2"/>
+<text x="270" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="270" y="396" text-anchor="middle">8.9 m</text>
+<text x="270" y="408" text-anchor="middle">Ib 10.0 A</text>
+<text x="270" y="420" text-anchor="middle">dV 1.33 %</text>
+<rect x="230" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="270" y="446" text-anchor="middle">washer WASHER</text>
+<text x="270" y="460" text-anchor="middle">KIT</text>
+</g>
+<g id="DB-GF/L2">
+<line x1="362" y1="250" x2="362" y2="270" stroke="#8b4513" stroke-width="2"/>
+<rect x="326" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="362" y="283" text-anchor="middle" font-weight="bold">L2 (L1)</text>
+<text x="362" y="295" text-anchor="middle">RCBO 6A B</text>
+<text x="362" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="362" y1="314" x2="362" y2="370" stroke="#8b4513" stroke-width="2"/>
+<text x="362" y="384" text-anchor="middle">1.5 mm2</text>
+<text x="362" y="396" text-anchor="middle">8.9 m</text>
+<text x="362" y="408" text-anchor="middle">Ib 0.7 A</text>
+<text x="362" y="420" text-anchor="middle">dV 0.68 %</text>
+<rect x="322" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="362" y="446" text-anchor="middle">Lighting KIT</text>
+<text x="362" y="460" text-anchor="middle">KIT</text>
+</g>
+<g id="DB-GF/D2">
+<line x1="454" y1="250" x2="454" y2="270" stroke="#111" stroke-width="2"/>
+<rect x="418" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="454" y="283" text-anchor="middle" font-weight="bold">D2 (L2)</text>
+<text x="454" y="295" text-anchor="middle">RCBO 10A C</text>
+<text x="454" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="454" y1="314" x2="454" y2="370" stroke="#111" stroke-width="2"/>
+<text x="454" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="454" y="396" text-anchor="middle">7 m</text>
+<text x="454" y="408" text-anchor="middle">Ib 8.1 A</text>
+<text x="454" y="420" text-anchor="middle">dV 1.06 %</text>
+<rect x="414" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="454" y="446" text-anchor="middle">ac AC-BED</text>
+<text x="454" y="460" text-anchor="middle">BED</text>
+</g>
+<g id="DB-GF/D6">
+<line x1="546" y1="250" x2="546" y2="270" stroke="#111" stroke-width="2"/>
+<rect x="510" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="546" y="283" text-anchor="middle" font-weight="bold">D6 (L2)</text>
+<text x="546" y="295" text-anchor="middle">RCBO 16A B</text>
+<text x="546" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="546" y1="314" x2="546" y2="370" stroke="#111" stroke-width="2"/>
+<text x="546" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="546" y="396" text-anchor="middle">6.9 m</text>
+<text x="546" y="408" text-anchor="middle">Ib 13.6 A</text>
+<text x="546" y="420" text-anchor="middle">dV 1.37 %</text>
+<rect x="506" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="546" y="446" text-anchor="middle">water_heater WH.</text>
+<text x="546" y="460" text-anchor="middle">BATH</text>
+</g>
+<g id="DB-GF/L3">
+<line x1="638" y1="250" x2="638" y2="270" stroke="#111" stroke-width="2"/>
+<rect x="602" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="638" y="283" text-anchor="middle" font-weight="bold">L3 (L2)</text>
+<text x="638" y="295" text-anchor="middle">RCBO 6A B</text>
+<text x="638" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="638" y1="314" x2="638" y2="370" stroke="#111" stroke-width="2"/>
+<text x="638" y="384" text-anchor="middle">1.5 mm2</text>
+<text x="638" y="396" text-anchor="middle">7 m</text>
+<text x="638" y="408" text-anchor="middle">Ib 0.4 A</text>
+<text x="638" y="420" text-anchor="middle">dV 0.64 %</text>
+<rect x="598" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="638" y="446" text-anchor="middle">Lighting BED</text>
+<text x="638" y="460" text-anchor="middle">BED</text>
+</g>
+<g id="DB-GF/S2">
+<line x1="730" y1="250" x2="730" y2="270" stroke="#111" stroke-width="2"/>
+<rect x="694" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="730" y="283" text-anchor="middle" font-weight="bold">S2 (L2)</text>
+<text x="730" y="295" text-anchor="middle">RCBO 20A B</text>
+<text x="730" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="730" y1="314" x2="730" y2="370" stroke="#111" stroke-width="2"/>
+<text x="730" y="384" text-anchor="middle">4 mm2</text>
+<text x="730" y="396" text-anchor="middle">8.9 m</text>
+<text x="730" y="408" text-anchor="middle">Ib 20.0 A</text>
+<text x="730" y="420" text-anchor="middle">dV 1.49 %</text>
+<rect x="690" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="730" y="446" text-anchor="middle">Worktop sockets.</text>
+<text x="730" y="460" text-anchor="middle">KIT</text>
+</g>
+<g id="DB-GF/S4">
+<line x1="822" y1="250" x2="822" y2="270" stroke="#111" stroke-width="2"/>
+<rect x="786" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="822" y="283" text-anchor="middle" font-weight="bold">S4 (L2)</text>
+<text x="822" y="295" text-anchor="middle">RCBO 16A B</text>
+<text x="822" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="822" y1="314" x2="822" y2="370" stroke="#111" stroke-width="2"/>
+<text x="822" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="822" y="396" text-anchor="middle">7 m</text>
+<text x="822" y="408" text-anchor="middle">Ib 16.0 A</text>
+<text x="822" y="420" text-anchor="middle">dV 1.51 %</text>
+<rect x="782" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="822" y="446" text-anchor="middle">Sockets BED</text>
+<text x="822" y="460" text-anchor="middle">BED</text>
+</g>
+<g id="DB-GF/D5">
+<line x1="914" y1="250" x2="914" y2="270" stroke="#777" stroke-width="2"/>
+<rect x="878" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="914" y="283" text-anchor="middle" font-weight="bold">D5 (L3)</text>
+<text x="914" y="295" text-anchor="middle">RCBO 10A B</text>
+<text x="914" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="914" y1="314" x2="914" y2="370" stroke="#777" stroke-width="2"/>
+<text x="914" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="914" y="396" text-anchor="middle">8.9 m</text>
+<text x="914" y="408" text-anchor="middle">Ib 9.1 A</text>
+<text x="914" y="420" text-anchor="middle">dV 1.26 %</text>
+<rect x="874" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="914" y="446" text-anchor="middle">dishwasher DISHW</text>
+<text x="914" y="460" text-anchor="middle">KIT</text>
+</g>
+<g id="DB-GF/L1">
+<line x1="1006" y1="250" x2="1006" y2="270" stroke="#777" stroke-width="2"/>
+<rect x="970" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="1006" y="283" text-anchor="middle" font-weight="bold">L1 (L3)</text>
+<text x="1006" y="295" text-anchor="middle">RCBO 6A B</text>
+<text x="1006" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="1006" y1="314" x2="1006" y2="370" stroke="#777" stroke-width="2"/>
+<text x="1006" y="384" text-anchor="middle">1.5 mm2</text>
+<text x="1006" y="396" text-anchor="middle">7 m</text>
+<text x="1006" y="408" text-anchor="middle">Ib 1.0 A</text>
+<text x="1006" y="420" text-anchor="middle">dV 0.69 %</text>
+<rect x="966" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="1006" y="446" text-anchor="middle">Lighting LIV</text>
+<text x="1006" y="460" text-anchor="middle">LIV</text>
+</g>
+<g id="DB-GF/L4">
+<line x1="1098" y1="250" x2="1098" y2="270" stroke="#777" stroke-width="2"/>
+<rect x="1062" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="1098" y="283" text-anchor="middle" font-weight="bold">L4 (L3)</text>
+<text x="1098" y="295" text-anchor="middle">RCBO 6A B</text>
+<text x="1098" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="1098" y1="314" x2="1098" y2="370" stroke="#777" stroke-width="2"/>
+<text x="1098" y="384" text-anchor="middle">1.5 mm2</text>
+<text x="1098" y="396" text-anchor="middle">6.9 m</text>
+<text x="1098" y="408" text-anchor="middle">Ib 0.2 A</text>
+<text x="1098" y="420" text-anchor="middle">dV 0.62 %</text>
+<rect x="1058" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="1098" y="446" text-anchor="middle">Lighting BATH</text>
+<text x="1098" y="460" text-anchor="middle">BATH</text>
+</g>
+<g id="DB-GF/S1">
+<line x1="1190" y1="250" x2="1190" y2="270" stroke="#777" stroke-width="2"/>
+<rect x="1154" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="1190" y="283" text-anchor="middle" font-weight="bold">S1 (L3)</text>
+<text x="1190" y="295" text-anchor="middle">RCBO 16A B</text>
+<text x="1190" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="1190" y1="314" x2="1190" y2="370" stroke="#777" stroke-width="2"/>
+<text x="1190" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="1190" y="396" text-anchor="middle">7 m</text>
+<text x="1190" y="408" text-anchor="middle">Ib 16.0 A</text>
+<text x="1190" y="420" text-anchor="middle">dV 1.51 %</text>
+<rect x="1150" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="1190" y="446" text-anchor="middle">Sockets LIV</text>
+<text x="1190" y="460" text-anchor="middle">LIV</text>
+</g>
+<g id="DB-GF/S3">
+<line x1="1282" y1="250" x2="1282" y2="270" stroke="#777" stroke-width="2"/>
+<rect x="1246" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="1282" y="283" text-anchor="middle" font-weight="bold">S3 (L3)</text>
+<text x="1282" y="295" text-anchor="middle">RCBO 16A B</text>
+<text x="1282" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="1282" y1="314" x2="1282" y2="370" stroke="#777" stroke-width="2"/>
+<text x="1282" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="1282" y="396" text-anchor="middle">8.9 m</text>
+<text x="1282" y="408" text-anchor="middle">Ib 16.0 A</text>
+<text x="1282" y="420" text-anchor="middle">dV 1.76 %</text>
+<rect x="1242" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="1282" y="446" text-anchor="middle">Sockets KIT</text>
+<text x="1282" y="460" text-anchor="middle">KIT</text>
+</g>
+<g id="DB-GF/S5">
+<line x1="1374" y1="250" x2="1374" y2="270" stroke="#777" stroke-width="2"/>
+<rect x="1338" y="270" width="72" height="44" fill="#eef" stroke="#222"/>
+<text x="1374" y="283" text-anchor="middle" font-weight="bold">S5 (L3)</text>
+<text x="1374" y="295" text-anchor="middle">RCBO 16A B</text>
+<text x="1374" y="307" text-anchor="middle">30 mA Type A</text>
+<line x1="1374" y1="314" x2="1374" y2="370" stroke="#777" stroke-width="2"/>
+<text x="1374" y="384" text-anchor="middle">2.5 mm2</text>
+<text x="1374" y="396" text-anchor="middle">7 m</text>
+<text x="1374" y="408" text-anchor="middle">Ib 16.0 A</text>
+<text x="1374" y="420" text-anchor="middle">dV 1.51 %</text>
+<rect x="1334" y="432" width="80" height="40" fill="#fff" stroke="#222"/>
+<text x="1374" y="446" text-anchor="middle">Sockets BED</text>
+<text x="1374" y="460" text-anchor="middle">BED</text>
+</g>
+<text x="40" y="546">Max demand 24.5 kVA (111.5 A single-phase equiv.), phases: L1 58 A, L2 58 A, L3 58 A. Generated from the same Design as the board schedule.</text>
+</svg>

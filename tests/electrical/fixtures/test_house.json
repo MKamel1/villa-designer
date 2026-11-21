@@ -1,0 +1,662 @@
+{
+ "name": "Test house (living, kitchen, bedroom, bathroom)",
+ "_note": "Test fixture, not the villa. Quantities (mm): room 5200x4500 living, 3000x4500 kitchen, 4200x3500 bedroom, 2500x3500 bathroom; shower tray 1000x1000 in the NE corner, zone 2 reaches 600 mm beyond it. RA 30 ohm is ASSUMED for the demo (TT, to be measured/confirmed with the utility).",
+ "rooms": [
+  {
+   "id": "LIV",
+   "kind": "living",
+   "rect": [
+    0,
+    0,
+    5200,
+    4500
+   ]
+  },
+  {
+   "id": "KIT",
+   "kind": "kitchen",
+   "rect": [
+    5200,
+    0,
+    8200,
+    4500
+   ]
+  },
+  {
+   "id": "BED",
+   "kind": "bedroom",
+   "rect": [
+    0,
+    4500,
+    4200,
+    8000
+   ]
+  },
+  {
+   "id": "BATH",
+   "kind": "bathroom",
+   "rect": [
+    4200,
+    4500,
+    6700,
+    8000
+   ]
+  }
+ ],
+ "doors": [
+  {
+   "id": "D-LIV",
+   "room": "LIV",
+   "wall": "S",
+   "offset_mm": 3800,
+   "width_mm": 900,
+   "hinge": "start"
+  },
+  {
+   "id": "D-KIT",
+   "room": "KIT",
+   "wall": "W",
+   "offset_mm": 3000,
+   "width_mm": 900,
+   "hinge": "end"
+  },
+  {
+   "id": "D-BED",
+   "room": "BED",
+   "wall": "S",
+   "offset_mm": 3000,
+   "width_mm": 800,
+   "hinge": "end"
+  },
+  {
+   "id": "D-BATH",
+   "room": "BATH",
+   "wall": "W",
+   "offset_mm": 600,
+   "width_mm": 700,
+   "hinge": "start"
+  }
+ ],
+ "furniture": [
+  {
+   "id": "SOFA",
+   "room": "LIV",
+   "kind": "sofa",
+   "rect": [
+    1500,
+    3600,
+    3700,
+    4500
+   ],
+   "wall": "N"
+  },
+  {
+   "id": "TV-LIV",
+   "room": "LIV",
+   "kind": "tv",
+   "rect": [
+    800,
+    0,
+    1800,
+    300
+   ],
+   "wall": "S"
+  },
+  {
+   "id": "WT",
+   "room": "KIT",
+   "kind": "worktop",
+   "rect": [
+    5200,
+    3850,
+    8200,
+    4500
+   ],
+   "wall": "N"
+  },
+  {
+   "id": "HOB",
+   "room": "KIT",
+   "kind": "hob",
+   "rect": [
+    6000,
+    3900,
+    6600,
+    4500
+   ],
+   "wall": "N"
+  },
+  {
+   "id": "DW",
+   "room": "KIT",
+   "kind": "dishwasher",
+   "rect": [
+    7000,
+    3900,
+    7600,
+    4500
+   ],
+   "wall": "N"
+  },
+  {
+   "id": "FRIDGE",
+   "room": "KIT",
+   "kind": "fridge",
+   "rect": [
+    7600,
+    0,
+    8200,
+    600
+   ],
+   "wall": "S"
+  },
+  {
+   "id": "WASH",
+   "room": "KIT",
+   "kind": "washer",
+   "rect": [
+    5300,
+    0,
+    5900,
+    600
+   ],
+   "wall": "S"
+  },
+  {
+   "id": "BED-1",
+   "room": "BED",
+   "kind": "bed",
+   "rect": [
+    1100,
+    5800,
+    2900,
+    8000
+   ],
+   "wall": "N"
+  },
+  {
+   "id": "DESK",
+   "room": "BED",
+   "kind": "desk",
+   "rect": [
+    0,
+    4800,
+    600,
+    5900
+   ],
+   "wall": "W"
+  },
+  {
+   "id": "TV-BED",
+   "room": "BED",
+   "kind": "tv",
+   "rect": [
+    3600,
+    5600,
+    4200,
+    6800
+   ],
+   "wall": "E"
+  },
+  {
+   "id": "SHOWER",
+   "room": "BATH",
+   "kind": "shower",
+   "rect": [
+    5700,
+    7000,
+    6700,
+    8000
+   ],
+   "wall": "",
+   "params": {
+    "has_basin": true,
+    "head_h_mm": 2100,
+    "rim_mm": 150
+   }
+  },
+  {
+   "id": "BASIN",
+   "room": "BATH",
+   "kind": "basin",
+   "rect": [
+    4300,
+    7300,
+    4900,
+    7800
+   ],
+   "wall": "W"
+  }
+ ],
+ "luminaires": [
+  {
+   "id": "LIV-DL-01",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-02",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-03",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-04",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-05",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-06",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-07",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-08",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-09",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-DL-10",
+   "room": "LIV",
+   "watts": 12,
+   "zone": "Z-LIV-1"
+  },
+  {
+   "id": "LIV-AC-01",
+   "room": "LIV",
+   "watts": 6,
+   "zone": "Z-LIV-2"
+  },
+  {
+   "id": "LIV-AC-02",
+   "room": "LIV",
+   "watts": 6,
+   "zone": "Z-LIV-2"
+  },
+  {
+   "id": "LIV-AC-03",
+   "room": "LIV",
+   "watts": 6,
+   "zone": "Z-LIV-2"
+  },
+  {
+   "id": "LIV-AC-04",
+   "room": "LIV",
+   "watts": 6,
+   "zone": "Z-LIV-2"
+  },
+  {
+   "id": "LIV-PEN-01",
+   "room": "LIV",
+   "watts": 15,
+   "zone": "Z-LIV-3"
+  },
+  {
+   "id": "LIV-PEN-02",
+   "room": "LIV",
+   "watts": 15,
+   "zone": "Z-LIV-3"
+  },
+  {
+   "id": "LIV-PEN-03",
+   "room": "LIV",
+   "watts": 15,
+   "zone": "Z-LIV-3"
+  },
+  {
+   "id": "KIT-DL-01",
+   "room": "KIT",
+   "watts": 12,
+   "zone": "Z-KIT-1"
+  },
+  {
+   "id": "KIT-DL-02",
+   "room": "KIT",
+   "watts": 12,
+   "zone": "Z-KIT-1"
+  },
+  {
+   "id": "KIT-DL-03",
+   "room": "KIT",
+   "watts": 12,
+   "zone": "Z-KIT-1"
+  },
+  {
+   "id": "KIT-DL-04",
+   "room": "KIT",
+   "watts": 12,
+   "zone": "Z-KIT-1"
+  },
+  {
+   "id": "KIT-DL-05",
+   "room": "KIT",
+   "watts": 12,
+   "zone": "Z-KIT-1"
+  },
+  {
+   "id": "KIT-DL-06",
+   "room": "KIT",
+   "watts": 12,
+   "zone": "Z-KIT-1"
+  },
+  {
+   "id": "KIT-DL-07",
+   "room": "KIT",
+   "watts": 12,
+   "zone": "Z-KIT-1"
+  },
+  {
+   "id": "KIT-DL-08",
+   "room": "KIT",
+   "watts": 12,
+   "zone": "Z-KIT-1"
+  },
+  {
+   "id": "KIT-UC-01",
+   "room": "KIT",
+   "watts": 10,
+   "zone": "Z-KIT-2"
+  },
+  {
+   "id": "KIT-UC-02",
+   "room": "KIT",
+   "watts": 10,
+   "zone": "Z-KIT-2"
+  },
+  {
+   "id": "KIT-UC-03",
+   "room": "KIT",
+   "watts": 10,
+   "zone": "Z-KIT-2"
+  },
+  {
+   "id": "KIT-UC-04",
+   "room": "KIT",
+   "watts": 10,
+   "zone": "Z-KIT-2"
+  },
+  {
+   "id": "BED-DL-01",
+   "room": "BED",
+   "watts": 12,
+   "zone": "Z-BED-1"
+  },
+  {
+   "id": "BED-DL-02",
+   "room": "BED",
+   "watts": 12,
+   "zone": "Z-BED-1"
+  },
+  {
+   "id": "BED-DL-03",
+   "room": "BED",
+   "watts": 12,
+   "zone": "Z-BED-1"
+  },
+  {
+   "id": "BED-DL-04",
+   "room": "BED",
+   "watts": 12,
+   "zone": "Z-BED-1"
+  },
+  {
+   "id": "BED-DL-05",
+   "room": "BED",
+   "watts": 12,
+   "zone": "Z-BED-1"
+  },
+  {
+   "id": "BED-DL-06",
+   "room": "BED",
+   "watts": 12,
+   "zone": "Z-BED-1"
+  },
+  {
+   "id": "BED-BS-01",
+   "room": "BED",
+   "watts": 8,
+   "zone": "Z-BED-2"
+  },
+  {
+   "id": "BED-BS-02",
+   "room": "BED",
+   "watts": 8,
+   "zone": "Z-BED-2"
+  },
+  {
+   "id": "BATH-DL-01",
+   "room": "BATH",
+   "watts": 10,
+   "zone": "Z-BATH-1"
+  },
+  {
+   "id": "BATH-DL-02",
+   "room": "BATH",
+   "watts": 10,
+   "zone": "Z-BATH-1"
+  },
+  {
+   "id": "BATH-DL-03",
+   "room": "BATH",
+   "watts": 10,
+   "zone": "Z-BATH-1"
+  },
+  {
+   "id": "BATH-DL-04",
+   "room": "BATH",
+   "watts": 10,
+   "zone": "Z-BATH-1"
+  }
+ ],
+ "zones": [
+  {
+   "id": "Z-LIV-1",
+   "room": "LIV",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "LIV-DL-01",
+    "LIV-DL-02",
+    "LIV-DL-03",
+    "LIV-DL-04",
+    "LIV-DL-05",
+    "LIV-DL-06",
+    "LIV-DL-07",
+    "LIV-DL-08",
+    "LIV-DL-09",
+    "LIV-DL-10"
+   ],
+   "watts": 120,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-LIV-2",
+   "room": "LIV",
+   "layer": "accent",
+   "luminaire_ids": [
+    "LIV-AC-01",
+    "LIV-AC-02",
+    "LIV-AC-03",
+    "LIV-AC-04"
+   ],
+   "watts": 24,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-LIV-3",
+   "room": "LIV",
+   "layer": "decorative",
+   "luminaire_ids": [
+    "LIV-PEN-01",
+    "LIV-PEN-02",
+    "LIV-PEN-03"
+   ],
+   "watts": 45,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-KIT-1",
+   "room": "KIT",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "KIT-DL-01",
+    "KIT-DL-02",
+    "KIT-DL-03",
+    "KIT-DL-04",
+    "KIT-DL-05",
+    "KIT-DL-06",
+    "KIT-DL-07",
+    "KIT-DL-08"
+   ],
+   "watts": 96,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-KIT-2",
+   "room": "KIT",
+   "layer": "task",
+   "luminaire_ids": [
+    "KIT-UC-01",
+    "KIT-UC-02",
+    "KIT-UC-03",
+    "KIT-UC-04"
+   ],
+   "watts": 40,
+   "dimming": "switched"
+  },
+  {
+   "id": "Z-BED-1",
+   "room": "BED",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "BED-DL-01",
+    "BED-DL-02",
+    "BED-DL-03",
+    "BED-DL-04",
+    "BED-DL-05",
+    "BED-DL-06"
+   ],
+   "watts": 72,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-BED-2",
+   "room": "BED",
+   "layer": "decorative",
+   "luminaire_ids": [
+    "BED-BS-01",
+    "BED-BS-02"
+   ],
+   "watts": 16,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-BATH-1",
+   "room": "BATH",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "BATH-DL-01",
+    "BATH-DL-02",
+    "BATH-DL-03",
+    "BATH-DL-04"
+   ],
+   "watts": 40,
+   "dimming": "switched"
+  }
+ ],
+ "equipment": [
+  {
+   "id": "AC-LIV",
+   "room": "LIV",
+   "kind": "ac",
+   "kw": 2.2,
+   "pf": 0.9,
+   "cat": "ac"
+  },
+  {
+   "id": "AC-BED",
+   "room": "BED",
+   "kind": "ac",
+   "kw": 1.6,
+   "pf": 0.9,
+   "cat": "ac"
+  },
+  {
+   "id": "COOKER",
+   "room": "KIT",
+   "kind": "cooker",
+   "kw": 8.0,
+   "pf": 1.0,
+   "cat": "cooker"
+  },
+  {
+   "id": "WASHER",
+   "room": "KIT",
+   "kind": "washer",
+   "kw": 2.2,
+   "pf": 1.0,
+   "cat": "standard"
+  },
+  {
+   "id": "DISHW",
+   "room": "KIT",
+   "kind": "dishwasher",
+   "kw": 2.0,
+   "pf": 1.0,
+   "cat": "standard"
+  },
+  {
+   "id": "WH-BATH",
+   "room": "BATH",
+   "kind": "water_heater",
+   "kw": 3.0,
+   "pf": 1.0,
+   "cat": "thermo_wh"
+  }
+ ],
+ "supply": {
+  "v_phase": 220.0,
+  "phases": 3,
+  "earthing": "TT",
+  "ra_ohm": 30.0,
+  "ra_note": "ASSUMED for the demo; TT electrode resistance must be measured and the earthing system confirmed with the utility",
+  "ze_ohm": null,
+  "board_xy": [
+   3800,
+   4500
+  ],
+  "feeder_length_m": 18.0,
+  "feeder_ambient_c": 40.0,
+  "roof_ambient_c": 50.0,
+  "drop_m": 3.0,
+  "main_breaker_a": 40.0,
+  "premises": "household"
+ }
+}

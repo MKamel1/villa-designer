@@ -1,0 +1,422 @@
+[
+ {
+  "id": "EL-IEC-B524",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364-5-52 Table B.52.4",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. G20 (page General_method_for_cable_sizing)",
+  "quote": "Fig. G20 – Current-carrying capacities in amperes for different methods of installation, PVC insulation, three loaded conductors, copper or aluminium, conductor temperature: 70 °C, ambient temperature: 30 °C in air, 20 °C in ground (table B.52.4 of IEC 60364-5-52)",
+  "value": "e.g. 1.5 mm2 Cu: A1 13.5, A2 13, B1 15.5, B2 15, C 17.5, D1 18, D2 19 A; 95 mm2 Cu: C 223 A",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_general_method_cable_sizing.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/General_method_for_cable_sizing"
+ },
+ {
+  "id": "EL-IEC-C521",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364-5-52 simplified table",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. G21 (page Recommended_simplified_approach_for_cable_sizing)",
+  "quote": "Fig. G21 – Current-carrying capacity in amperes (table C.52.1 of IEC 60364-5-52)",
+  "value": "Simplified ampacity table, 12 value columns. Only the column mapped to F/3 PVC is used (value column 7 as numbered here from 1; it also reproduces the source's worked-example sizes). A1/A2 header cells are inconsistent as scraped and are NOT used.",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_simplified_cable_sizing.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Recommended_simplified_approach_for_cable_sizing"
+ },
+ {
+  "id": "EL-IEC-B5214-CA",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364-5-52 Table B.52.14",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. G12",
+  "quote": "Fig. G12 – Correction factors for ambient air temperatures other than 30 °C to be applied to the current-carrying capacities for cables in the air (from table B.52.14 of IEC 60364-5-52)",
+  "value": "PVC: 40 C 0.87, 45 C 0.79, 50 C 0.71, 55 C 0.61; XLPE/EPR: 45 C 0.87, 50 C 0.82",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_general_method_cable_sizing.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/General_method_for_cable_sizing"
+ },
+ {
+  "id": "EL-IEC-B5217-CG",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364-5-52 Table B.52.17",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. G16",
+  "quote": "Fig. G16 – Reduction factors for groups of more than one circuit or of more than one multi-core cable (table B.52.17 of IEC 60364-5-52)",
+  "value": "Bunched in air, on a surface, embedded or enclosed: 1 circuit 1.00, 2 0.80, 3 0.70, 4 0.65, 5 0.60, 6 0.57, 8 0.52, 9 0.50, 12 0.45, 16 0.41, 20 0.38",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_general_method_cable_sizing.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/General_method_for_cable_sizing"
+ },
+ {
+  "id": "EL-IEC-G521-VDLIM",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364-5-52 Table G.52.1",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. G25 (page Maximum_voltage_drop)",
+  "quote": "Fig. G25: Maximum voltage-drop between the service-connection point and the point of utilization (IEC60364-5-52 table G.52.1)",
+  "value": "LV service connection from a public LV network: lighting 3 %, other uses 5 %",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_max_voltage_drop.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Maximum_voltage_drop"
+ },
+ {
+  "id": "EL-EIG-G30-VD",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot)",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. G30 (page Calculation_of_voltage_drop_in_steady_load_conditions)",
+  "quote": "Fig. G30 – Phase-to-phase voltage drop ΔU for a circuit, in volts per ampere per km",
+  "value": "Copper 2.5 mm2 single-phase lighting 19 V/A/km; 70 mm2 balanced 3-phase lighting 0.59; 95 mm2 3-phase motor 0.43",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_voltage_drop_steady.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions"
+ },
+ {
+  "id": "EL-EIG-G29-RX",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot)",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. G29 formulas and notes (same page as G30)",
+  "quote": "In the absence of any other information, take X as being equal to 0.08 Ω/km.",
+  "value": "R(copper) = 23.7 ohm.mm2/km / S; X = 0.08 ohm/km; LED lighting cos phi > 0.9",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_voltage_drop_steady.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions"
+ },
+ {
+  "id": "EL-WHIT-T47",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Tables 4.6 and 4.7 (page Book/4.3.9)",
+  "quote": "Table 4.7 - Current ratings and volt drops for sheathed multi-core p.v.c.-insulated cables",
+  "value": "6 mm2 twin in thermal insulation 32 A, 7.3 mV/A/m; 10 mm2 43 A; 4 mm2 11 mV/A/m",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_4_3_9_htm.txt ; https://www.tlc-direct.co.uk/Book/4.3.9.htm"
+ },
+ {
+  "id": "EL-WHIT-T43-CA",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Table 4.3 (page Book/4.3.4)",
+  "quote": "Correction factors to current rating for ambient temperature",
+  "value": "70 C PVC: 40 C 0.87, 45 C 0.79, 50 C 0.71, 55 C 0.61",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_4_3_4_htm.txt ; https://www.tlc-direct.co.uk/Book/4.3.4.htm"
+ },
+ {
+  "id": "EL-WHIT-T44-CG",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Table 4.4 (page Book/4.3.5)",
+  "quote": "Table 4.4 - Correction factors for groups of cables",
+  "value": "2 circuits 0.80, 3 0.70, 4 0.65, 5 0.60, 6 0.57, 7 0.54, 8 0.52, 9 0.50 (enclosed or clipped, touching)",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_4_3_5_htm.txt ; https://www.tlc-direct.co.uk/Book/4.3.5.htm"
+ },
+ {
+  "id": "EL-WHIT-T45-CI",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Table 4.5 (page Book/4.3.6)",
+  "quote": "Derating factors (CI) for cables up to 10mm² in cross-sectional",
+  "value": "50 mm in insulation 0.89, 100 mm 0.81, 200 mm 0.68, 400 mm 0.55, 500 mm or more 0.50",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_4_3_6_htm.txt ; https://www.tlc-direct.co.uk/Book/4.3.6.htm"
+ },
+ {
+  "id": "EL-WHIT-T62-DIV",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies (table originally BS 7671:1992 / IEE On-Site Guide diversity table)",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Table 6.2 (page Book/6.2.3)",
+  "quote": "10 A + 30% balance + 5 A for socket",
+  "value": "Households: lighting 66 % total; heating and power 100 % to 10 A + 50 % balance; cookers 10 A + 30 % balance + 5 A for socket; instantaneous water heaters 100%X+100%Y+25%Z; thermostatic water heaters 100 %; standard circuits and sockets 100%X + 40%(Y+Z)",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_6_2_3_htm.txt ; https://www.tlc-direct.co.uk/Book/6.2.3.htm"
+ },
+ {
+  "id": "EL-EIG-A14-DIV",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot)",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. A14 (page Estimation_of_actual_maximum_kVA_demand)",
+  "quote": "Fig. A14 – Diversity factor according to circuit function (see UTE C 15-105 table AC)",
+  "value": "Lighting 1; heating and air conditioning 1; socket-outlets 0.1 to 0.2",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_diversity.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Estimation_of_actual_maximum_kVA_demand"
+ },
+ {
+  "id": "EL-EIG-A11-DIV",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot)",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. A11",
+  "quote": "Fig. A11 – Example of diversity factors for an apartment block as defined in French standard NFC14-100, and applicable for apartments without electrical heating",
+  "value": "25 to 29 consumers: ks 0.46",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_diversity.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Estimation_of_actual_maximum_kVA_demand"
+ },
+ {
+  "id": "EL-IEC-4-41-TT-F13",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364-4-41",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. F13 (page TT_system_-_Practical_aspects)",
+  "quote": "120 < Uo ≤ 230 | 0.2",
+  "value": "120 V < Uo <= 230 V: 0.2 s (TT final circuits); other circuits 1 s",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_tt_practical.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/TT_system_-_Practical_aspects"
+ },
+ {
+  "id": "EL-IEC-4-41-TN-F19",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364-4-41",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. F19 (page Automatic_disconnection_for_TN_systems)",
+  "quote": "120 < Uo ≤ 230 | 0.4",
+  "value": "120 V < Uo <= 230 V: 0.4 s (TN final circuits); other circuits 5 s",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_tn_disconnection.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Automatic_disconnection_for_TN_systems"
+ },
+ {
+  "id": "EL-IEC-RCD-TIMES-F14",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot)",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. F14",
+  "quote": "Fig. F14 – Maximum operating time of RCDs (in seconds)",
+  "value": "Domestic instantaneous RCD: 1xIdn 0.3 s, 2x 0.15 s, 5x 0.04 s",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_tt_practical.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/TT_system_-_Practical_aspects"
+ },
+ {
+  "id": "EL-IEC-TT-RA",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364-4-41",
+  "edition": "2016/2018 wiki edition",
+  "locator": "TT system - Principle; Fig. F12",
+  "quote": "Protection by automatic disconnection of the supply used in TT system is by RCD of sensitivity:",
+  "value": "Idn <= 50 / RA (50 V limit); 30 mA RCD permits RA up to 1666 ohm",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_tt_principle.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/TT_system_-_Principle"
+ },
+ {
+  "id": "EL-EIG-H28-CURVES",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60898",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Fig. H28",
+  "quote": "Fig. H28 – Tripping-current ranges of overload and short-circuit protective devices for LV circuit breakers",
+  "value": "Domestic IEC 60898: type B 3 In <= Im <= 5 In; type C 5 In <= Im <= 10 In; type D 10 In <= Im <= 20 In",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_cb_characteristics.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Fundamental_characteristics_of_a_circuit-breaker"
+ },
+ {
+  "id": "EL-EIG-Q7-RCD",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot) reproducing IEC 60364 requirements",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Residential electrical installation - Protection of people, Fig. Q7",
+  "quote": "mandatory protection by 30 mA high sensitivity RCDs of socket outlet circuits, and circuits feeding bathroom.",
+  "value": "30 mA RCD mandatory on socket-outlet circuits and bathroom circuits (all earthing systems)",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_residential_protection.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Residential_electrical_installation_-_Protection_of_people"
+ },
+ {
+  "id": "EL-701-ZONE0",
+  "document": "SELECT (Scotland), Electrical Installations in Locations Containing a Bath or Shower, pocket guide TS 19-001 (summarises BS 7671:2018+A2:2022 s.701)",
+  "edition": "BS 7671:2018+A2:2022 s.701 (identical zones to IEC 60364-7-701)",
+  "locator": "page 1",
+  "quote": "Zone 0 is limited to the interior of the bath tub or shower basin.",
+  "value": "Zone 0: inside bath/shower basin; showers without a basin: height 0.10 m, same extent as zone 1",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/select_bs7671_701_pocket_guide.txt"
+ },
+ {
+  "id": "EL-701-ZONE1",
+  "document": "SELECT (Scotland), Electrical Installations in Locations Containing a Bath or Shower, pocket guide TS 19-001 (summarises BS 7671:2018+A2:2022 s.701)",
+  "edition": "BS 7671:2018+A2:2022 s.701",
+  "locator": "page 1",
+  "quote": "Zone 1 is the area above the bath tub or shower basin to a height of 2.25 m from the floor or the highest fixed shower head, whichever is higher.",
+  "value": "Zone 1: above basin/bath to 2.25 m; showers without a basin: 1.20 m horizontally from the fixed outlet",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/select_bs7671_701_pocket_guide.txt"
+ },
+ {
+  "id": "EL-701-ZONE2",
+  "document": "SELECT (Scotland), Electrical Installations in Locations Containing a Bath or Shower, pocket guide TS 19-001 (summarises BS 7671:2018+A2:2022 s.701)",
+  "edition": "BS 7671:2018+A2:2022 s.701",
+  "locator": "page 4",
+  "quote": "Zone 2 is the area external to zone 1 for a distance of 0.6 m horizontally and a height of 2.25 m from the floor",
+  "value": "Zone 2: 0.6 m beyond zone 1, 2.25 m high; no zone 2 for showers without a basin",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/select_bs7671_701_pocket_guide.txt"
+ },
+ {
+  "id": "EL-701-SOCKETS",
+  "document": "SELECT (Scotland), Electrical Installations in Locations Containing a Bath or Shower, pocket guide TS 19-001 (summarises BS 7671:2018+A2:2022 s.701)",
+  "edition": "BS 7671:2018+A2:2022 s.701 (UK national distance)",
+  "locator": "page 4",
+  "quote": "Socket-outlets (other than those of SELV circuits noted above) are prohibited within a distance of 2.5 m horizontally from the boundary of zone 1.",
+  "value": "No socket-outlets in zones 0-2 except SELV; UK national rule: none within 2.5 m of zone 1 (reported as warn, not an IEC gate)",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/select_bs7671_701_pocket_guide.txt"
+ },
+ {
+  "id": "EL-701-RCD",
+  "document": "SELECT (Scotland), Electrical Installations in Locations Containing a Bath or Shower, pocket guide TS 19-001 (summarises BS 7671:2018+A2:2022 s.701)",
+  "edition": "BS 7671:2018+A2:2022 s.701",
+  "locator": "page 4",
+  "quote": "Additional protection by use of one or more 30 mA RCDs must be provided for all low voltage circuits:",
+  "value": "30 mA RCD on all circuits serving the bath/shower location",
+  "status": "std",
+  "url_or_path": "knowledge/electrical/source_snapshots/select_bs7671_701_pocket_guide.txt"
+ },
+ {
+  "id": "EL-EX-WHIT-6.1",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Example 6.1 (page Book/6.2.3)",
+  "quote": "Total single phase current demand = | 486.2 A",
+  "value": "Shop loads, 415 V 3-phase: total single-phase current demand 486.2 A; three-phase line current 162 A",
+  "status": "sourced",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_6_2_3_htm.txt ; https://www.tlc-direct.co.uk/Book/6.2.3.htm"
+ },
+ {
+  "id": "EL-EX-WHIT-6.2",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Example 6.2 (page Book/6.5.2)",
+  "quote": "total = | 29.5 A",
+  "value": "Cooker 14 kW at 240 V with socket: demand 29.5 A",
+  "status": "sourced",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_6_5_2_htm.txt ; https://www.tlc-direct.co.uk/Book/6.5.2.htm"
+ },
+ {
+  "id": "EL-EX-WHIT-4.1",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Example 4.1 (page Book/4.3.9)",
+  "quote": "so 10 mm²with a current rating of 43 A is indicated",
+  "value": "3 kW immersion heater 240 V, 15 A MCB, 50 C roof space, 8 bunched circuits through 50 mm insulation: 6 mm2 (32 A) too small, 10 mm2 (43 A); two bunches of four: 6 mm2",
+  "status": "sourced",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_4_3_9_htm.txt ; https://www.tlc-direct.co.uk/Book/4.3.9.htm"
+ },
+ {
+  "id": "EL-EX-WHIT-4.5",
+  "document": "J. Whitfield, The Electrician's Guide, 5th ed. (EPA Press), as hosted by TLC Electrical Supplies",
+  "edition": "5th ed.; tables from BS 7671:1992 (16th edition), superseded; reference only",
+  "locator": "Example 4.5 (page Book/4.3.11)",
+  "quote": "7.3 x 12.5 x 14 V = 1.28 V",
+  "value": "Example 4.1 cable: 7.3 mV/A/m x 12.5 A x 14 m = 1.28 V; maximum length 105 m",
+  "status": "sourced",
+  "url_or_path": "knowledge/electrical/source_snapshots/whitfield_Book_4_3_11_htm.txt ; https://www.tlc-direct.co.uk/Book/4.3.11.htm"
+ },
+ {
+  "id": "EL-EX-EIG-A12",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot)",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Example under Fig. A11/A12",
+  "quote": "The apparent-power supply required for the building is: 150 x 0.46 = 69 kVA",
+  "value": "25 consumers x 6 kVA: 150 kVA x 0.46 = 69 kVA; rising main current 100 A at 400 V",
+  "status": "sourced",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_diversity.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Estimation_of_actual_maximum_kVA_demand"
+ },
+ {
+  "id": "EL-EX-EIG-WEX",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot)",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Worked example of cable calculation (Figs G69-G72)",
+  "quote": "The total voltage drop at the end of cable C7 is then: 0.73 %.",
+  "value": "Method F, 3 PVC copper, 400 V: C1 2x240 mm2 (909 A), C3 2x120 mm2 (526 A), C7 1x95 mm2 (238 A); voltage drop 0.12 / 0.47 / 0.13 %, total 0.73 %; Ecodial run gives same sizes",
+  "status": "sourced",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_worked_example_cable.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Worked_example_of_cable_calculation"
+ },
+ {
+  "id": "EL-EX-EIG-G32",
+  "document": "Schneider Electric, Electrical Installation Guide (electrical-installation.org wiki, Wayback 2023 snapshot)",
+  "edition": "2016/2018 wiki edition",
+  "locator": "Example 2 (Fig. G32)",
+  "quote": "7.6 + 2.54 = 10.1 V",
+  "value": "70 mm2 3-ph feeder 50 m 150 A + 2.5 mm2 lighting circuit 20 m 20 A: 10.1 V = 4.4 % of 230 V",
+  "status": "sourced",
+  "url_or_path": "knowledge/electrical/source_snapshots/eig_voltage_drop_steady.txt ; https://web.archive.org/web/2023id_/https://www.electrical-installation.org/enwiki/Calculation_of_voltage_drop_in_steady_load_conditions"
+ },
+ {
+  "id": "EL-POL-CIRCUITS",
+  "document": "ours; not from a standard",
+  "edition": "L7 v0",
+  "locator": "EA3",
+  "quote": "",
+  "value": "Lighting circuits <= 10 A design current, each control zone wholly on one circuit; socket radials 16 A (20 A kitchen); one dedicated circuit per AC, cooker, water heater, washer, pump",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-POL-PLACEMENT",
+  "document": "ours; not from a standard",
+  "edition": "L7 v0",
+  "locator": "EA1",
+  "quote": "",
+  "value": "Per room-type device minima (bedside sockets, TV cluster, worktop spacing 1.2 m, switch on latch side at 1.1-1.2 m, data/AC points); not yet recall-tested against an engineer's marked rooms",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-POL-PHASEBAL",
+  "document": "ours; not from a standard",
+  "edition": "L7 v0",
+  "locator": "EA11",
+  "quote": "",
+  "value": "Phase loads within 10 % of the mean",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-POL-SPARE",
+  "document": "ours; not from a standard",
+  "edition": "L7 v0",
+  "locator": "EA12",
+  "quote": "",
+  "value": ">= 20 % spare ways on every board",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-POL-RCD",
+  "document": "ours; not from a standard",
+  "edition": "L7 v0",
+  "locator": "EA8",
+  "quote": "",
+  "value": "Type A 30 mA RCBO on every final circuit; Type S 300 mA at the origin of a TT installation",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-POL-BREAKERS",
+  "document": "ours; not from a standard",
+  "edition": "L7 v0",
+  "locator": "sizing",
+  "quote": "",
+  "value": "Breaker ladder 6,10,16,20,25,32,40,50,63,80,100,125 A; curve B lighting/sockets, C motors and AC",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-POL-SIZES",
+  "document": "ours; not from a standard",
+  "edition": "L7 v0",
+  "locator": "sizing",
+  "quote": "",
+  "value": "Minimum csa 1.5 mm2 lighting, 2.5 mm2 sockets/dedicated; PF 0.9 LED lighting (see G29 cos phi > 0.9)",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-UNV-B522",
+  "document": "IEC 60364-5-52 Tables B.52.2, B.52.3, B.52.5",
+  "edition": "-",
+  "locator": "-",
+  "quote": "",
+  "value": "Two-loaded-conductor PVC and all XLPE/EPR ampacity tables were not found as clean text. Engine uses B.52.4 (3 loaded, conservative for 2 loaded) and Whitfield Table 4.7 (2-core, BS 7671:1992) for single-phase finals.",
+  "status": "unverified",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-UNV-OSGA",
+  "document": "IET On-Site Guide Appendix A (max demand) worked example",
+  "edition": "-",
+  "locator": "-",
+  "quote": "",
+  "value": "The IET OSG Appendix A table and worked example were not found; Whitfield Table 6.2 (the same household percentages, 16th ed. reprint) is used and reported as the reference.",
+  "status": "unverified",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-UNV-ROOF-EG",
+  "document": "Roof ambient 45-50 C and TT earthing at the site",
+  "edition": "-",
+  "locator": "-",
+  "quote": "",
+  "value": "Site facts supplied by the client brief; earth-electrode resistance RA must be measured/confirmed with the utility.",
+  "status": "unverified",
+  "url_or_path": ""
+ }
+]

@@ -1,0 +1,28 @@
+
+Automatic disconnection for TT system is achieved by RCD having a sensitivity of [math]\displaystyle{ I_{\Delta n}\le\frac{50}{R_A} }[/math] where RA is the resistance of the installation earth electrode
+In this system, all exposed-conductive-parts and extraneous-conductive-parts of the installation must be connected to a common earth electrode. The neutral point of the supply system is normally earthed at a point outside the influence area of the installation earth electrode, but need not be so. The impedance of the earth fault loop therefore consists mainly in the two earth electrodes (i.e. the source and installation electrodes) in series, so that the magnitude of the earth fault current is generally too small to operate overcurrent relays or fuses, and the use of a residual current operated device is essential.
+This principle of protection is also valid if one common earth electrode only is used, notably in the case of a consumer-type substation within the installation area, where space limitation may impose the adoption of a TN system earthing, but where all other conditions required by the TN system cannot be fulfilled.
+Protection by automatic disconnection of the supply used in TT system is by RCD of sensitivity:
+[math]\displaystyle{ I_{\Delta n}\le\frac{50}{R_A} }[/math] 
+where
+IΔn is the rated residual operating current of the RCD
+RA is the resistance of the earth electrode for the installation
+For temporary supplies (to work sites, …) and agricultural and horticultural premises, the value of 50 V is replaced by 25 V.
+Example
+(see Fig. F11)
+ Fig. F11 – Automatic disconnection of supply for TT system
+The resistance of the earth electrode of substation neutral Rn is 10 Ω.
+The resistance of the earth electrode of the installation RA is 20 Ω.
+The earth-fault loop current Id = 7.7 A.
+The fault voltage Uf = Id x RA = 154 V and therefore dangerous, but
+IΔn ≤ 50/20 = 2.5 A so that a standard 300 mA RCD will operate in about 30 ms without intentional time delay and will clear the fault where a fault voltage exceeding appears on an exposed-conductive-part.
+The choice of sensitivity of the residual current device is a function of the resistance RA of the earth electrode for the installation, and is given in Fig. F12.
+Fig. F12 – The upper limit of resistance for an installation earthing electrode which must not be exceeded, for given sensitivity levels of RCDs at UL voltage limits of 50 V and 25 V
+ROW: IΔn | Maximum resistance of the earth electrode
+ROW: (50 V) | (25 V)
+ROW: 3 A | 16 Ω | 8 Ω
+ROW: 1 A | 50 Ω | 25 Ω
+ROW: 500 mA | 100 Ω | 50 Ω
+ROW: 300 mA | 166 Ω | 83 Ω
+ROW: 30 mA | 1666 Ω | 833 Ω
+

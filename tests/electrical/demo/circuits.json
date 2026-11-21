@@ -1,0 +1,269 @@
+[
+ {
+  "id": "DB-GF/L1",
+  "board": "DB-GF",
+  "kind": "lighting",
+  "load_ids": [
+   "LIV-DL-01",
+   "LIV-DL-02",
+   "LIV-DL-03",
+   "LIV-DL-04",
+   "LIV-DL-05",
+   "LIV-DL-06",
+   "LIV-DL-07",
+   "LIV-DL-08",
+   "LIV-DL-09",
+   "LIV-DL-10",
+   "LIV-PEN-01",
+   "LIV-PEN-02",
+   "LIV-PEN-03",
+   "LIV-AC-01",
+   "LIV-AC-02",
+   "LIV-AC-03",
+   "LIV-AC-04"
+  ],
+  "design_current_a": 0.955,
+  "breaker_a": 6.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 1.5,
+  "length_m": 7.0,
+  "voltage_drop_pct": 0.686
+ },
+ {
+  "id": "DB-GF/L2",
+  "board": "DB-GF",
+  "kind": "lighting",
+  "load_ids": [
+   "KIT-DL-01",
+   "KIT-DL-02",
+   "KIT-DL-03",
+   "KIT-DL-04",
+   "KIT-DL-05",
+   "KIT-DL-06",
+   "KIT-DL-07",
+   "KIT-DL-08",
+   "KIT-UC-01",
+   "KIT-UC-02",
+   "KIT-UC-03",
+   "KIT-UC-04"
+  ],
+  "design_current_a": 0.687,
+  "breaker_a": 6.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 1.5,
+  "length_m": 8.9,
+  "voltage_drop_pct": 0.678
+ },
+ {
+  "id": "DB-GF/L3",
+  "board": "DB-GF",
+  "kind": "lighting",
+  "load_ids": [
+   "BED-DL-01",
+   "BED-DL-02",
+   "BED-DL-03",
+   "BED-DL-04",
+   "BED-DL-05",
+   "BED-DL-06",
+   "BED-BS-01",
+   "BED-BS-02"
+  ],
+  "design_current_a": 0.444,
+  "breaker_a": 6.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 1.5,
+  "length_m": 7.0,
+  "voltage_drop_pct": 0.638
+ },
+ {
+  "id": "DB-GF/L4",
+  "board": "DB-GF",
+  "kind": "lighting",
+  "load_ids": [
+   "BATH-DL-01",
+   "BATH-DL-02",
+   "BATH-DL-03",
+   "BATH-DL-04"
+  ],
+  "design_current_a": 0.202,
+  "breaker_a": 6.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 1.5,
+  "length_m": 6.9,
+  "voltage_drop_pct": 0.616
+ },
+ {
+  "id": "DB-GF/S1",
+  "board": "DB-GF",
+  "kind": "socket",
+  "load_ids": [
+   "SOC-LIV-003",
+   "SOC-LIV-004",
+   "SOC-LIV-005",
+   "SOC-LIV-006",
+   "SOC-LIV-009",
+   "SOC-LIV-010",
+   "SOC-LIV-011",
+   "SOC-LIV-012"
+  ],
+  "design_current_a": 16.0,
+  "breaker_a": 16.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 7.0,
+  "voltage_drop_pct": 1.514
+ },
+ {
+  "id": "DB-GF/S2",
+  "board": "DB-GF",
+  "kind": "socket",
+  "load_ids": [
+   "SOC-KIT-014",
+   "SOC-KIT-015",
+   "SOC-KIT-016"
+  ],
+  "design_current_a": 20.0,
+  "breaker_a": 20.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 4,
+  "length_m": 8.9,
+  "voltage_drop_pct": 1.487
+ },
+ {
+  "id": "DB-GF/S3",
+  "board": "DB-GF",
+  "kind": "socket",
+  "load_ids": [
+   "SOC-KIT-019",
+   "SOC-KIT-021",
+   "SOC-KIT-022",
+   "SOC-KIT-023",
+   "SOC-KIT-024"
+  ],
+  "design_current_a": 16.0,
+  "breaker_a": 16.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 8.9,
+  "voltage_drop_pct": 1.763
+ },
+ {
+  "id": "DB-GF/S4",
+  "board": "DB-GF",
+  "kind": "socket",
+  "load_ids": [
+   "SOC-BED-027",
+   "SOC-BED-028",
+   "SOC-BED-029",
+   "SOC-BED-031",
+   "SOC-BED-033",
+   "SOC-BED-034",
+   "SOC-BED-037",
+   "SOC-BED-038"
+  ],
+  "design_current_a": 16.0,
+  "breaker_a": 16.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 7.0,
+  "voltage_drop_pct": 1.514
+ },
+ {
+  "id": "DB-GF/S5",
+  "board": "DB-GF",
+  "kind": "socket",
+  "load_ids": [
+   "SOC-BED-039"
+  ],
+  "design_current_a": 16.0,
+  "breaker_a": 16.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 7.0,
+  "voltage_drop_pct": 1.514
+ },
+ {
+  "id": "DB-GF/D1",
+  "board": "DB-GF",
+  "kind": "dedicated",
+  "load_ids": [
+   "AC-LIV"
+  ],
+  "design_current_a": 11.111,
+  "breaker_a": 16.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 7.0,
+  "voltage_drop_pct": 1.234
+ },
+ {
+  "id": "DB-GF/D2",
+  "board": "DB-GF",
+  "kind": "dedicated",
+  "load_ids": [
+   "AC-BED"
+  ],
+  "design_current_a": 8.081,
+  "breaker_a": 10.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 7.0,
+  "voltage_drop_pct": 1.06
+ },
+ {
+  "id": "DB-GF/D3",
+  "board": "DB-GF",
+  "kind": "dedicated",
+  "load_ids": [
+   "COOKER"
+  ],
+  "design_current_a": 36.364,
+  "breaker_a": 40.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 10,
+  "length_m": 8.9,
+  "voltage_drop_pct": 1.245
+ },
+ {
+  "id": "DB-GF/D4",
+  "board": "DB-GF",
+  "kind": "dedicated",
+  "load_ids": [
+   "WASHER"
+  ],
+  "design_current_a": 10.0,
+  "breaker_a": 10.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 8.9,
+  "voltage_drop_pct": 1.326
+ },
+ {
+  "id": "DB-GF/D5",
+  "board": "DB-GF",
+  "kind": "dedicated",
+  "load_ids": [
+   "DISHW"
+  ],
+  "design_current_a": 9.091,
+  "breaker_a": 10.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 8.9,
+  "voltage_drop_pct": 1.259
+ },
+ {
+  "id": "DB-GF/D6",
+  "board": "DB-GF",
+  "kind": "dedicated",
+  "load_ids": [
+   "WH-BATH"
+  ],
+  "design_current_a": 13.636,
+  "breaker_a": 16.0,
+  "rcd_ma": 30.0,
+  "cable_mm2": 2.5,
+  "length_m": 6.9,
+  "voltage_drop_pct": 1.367
+ }
+]

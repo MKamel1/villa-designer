@@ -1,0 +1,595 @@
+Contents
+1 Worked example of cable calculation
+2 Calculation using software Ecodial
+3 The same calculation using the simplified method recommended in this guide
+Worked example of cable calculation
+(see Fig. G69)
+The installation is supplied through a 630 kVA transformer. The process requires a high degree of supply continuity and part of the installation can be supplied by a 250 kVA standby generator. The global earthing system is TN-S, except for the most critical loads supplied by an isolation transformer with a downstream IT configuration.
+The single-line diagram is shown in Figure G69 below. The results of a computer study for the circuit from transformer T1 down to the cable C7 is reproduced on Figure G70. This study was carried out with Ecodial (a Schneider Electric software).
+This is followed by the same calculations carried out by the simplified method described in this guide.
+ Fig. G69 – Example of single-line diagram
+Calculation using software Ecodial
+Fig. G70 – Partial results of calculation carried out with Ecodial software (Schneider Electric). The calculation is performed according to Cenelec TR50480 and IEC 60909
+General network characteristics
+ | 
+ | 
+Cable C3
+ | 
+Earthing system
+ | 
+TN-S
+ | 
+Length
+ | 
+20
+ | 
+Neutral distributed
+ | 
+No
+ | 
+Maximum load current (A)
+ | 
+518
+ | 
+Voltage (V)
+ | 
+400
+ | 
+Type of insulation
+ | 
+PVC
+ | 
+Frequency (Hz)
+ | 
+50
+ | 
+Ambient temperature (°C)
+ | 
+30
+ | 
+Upstream fault level (MVA)
+ | 
+500
+ | 
+Conductor material
+ | 
+Copper
+ | 
+Resistance of MV network (mΩ)
+ | 
+0.035
+ | 
+Single-core or multi-core cable
+ | 
+Single
+ | 
+Reactance of MV network (mΩ)
+ | 
+0.351
+ | 
+Installation method
+ | 
+F31
+ | 
+Transformer T1
+ | 
+Phase conductor selected csa (mm2)
+ | 
+2 x 120
+ | 
+Rating (kVA)
+ | 
+630
+ | 
+Neutral conductor selected csa (mm2)
+ | 
+2 x 120
+ | 
+Short-circuit impedance voltage (%)
+ | 
+4
+ | 
+PE conductor selected csa (mm2)
+ | 
+1 x 120
+ | 
+Load-losses (PkrT) (W)
+ | 
+7100
+ | 
+Cable voltage drop ΔU (%)
+ | 
+0.459
+ | 
+No-load voltage (V)
+ | 
+420
+ | 
+Total voltage drop ΔU (%)
+ | 
+0.583
+ | 
+Rated voltage (V)
+ | 
+400
+ | 
+3-phase short-circuit current Ik3 (kA)
+ | 
+21.5
+ | 
+Cable C1
+ | 
+1-phase-to-earth fault current Ief (kA)
+ | 
+18
+ | 
+Length (m)
+ | 
+5
+ | 
+Distribution Board B6
+ | 
+Maximum load current (A)
+ | 
+909
+ | 
+Reference
+ | 
+Prisma Plus G
+ | 
+Type of insulation
+ | 
+PVC
+ | 
+Rated current (A)
+ | 
+630
+ | 
+Ambient temperature (°C)
+ | 
+30
+ | 
+Circuit breaker Q7
+ | 
+Conductor material
+ | 
+Copper
+ | 
+Load current (A)
+ | 
+238
+ | 
+Single-core or multi-core cable
+ | 
+Single
+ | 
+Type
+ | 
+Compact
+ | 
+Installation method
+ | 
+31F
+ | 
+Reference
+ | 
+NSX250B
+ | 
+Number of layers
+ | 
+1
+ | 
+Rated current (A)
+ | 
+250
+ | 
+Phase conductor selected csa (mm²)
+ | 
+2 x 240
+ | 
+Number of poles and protected poles
+ | 
+3P3d
+ | 
+Neutral conductor selected csa (mm²)
+ | 
+2 x 240
+ | 
+Tripping unit
+ | 
+Micrologic 5.2 E
+ | 
+PE conductor selected csa (mm²)
+ | 
+1 x 240
+ | 
+Overload trip Ir (A)
+ | 
+238
+ | 
+Voltage drop ΔU (%)
+ | 
+0.124
+ | 
+Short-delay trip Im / Isd (A)
+ | 
+2380
+ | 
+3-phase short-circuit current Ik3 (kA)
+ | 
+21.5
+ | 
+Cable C7
+ | 
+Earth fault current Ief (kA)
+ | 
+18
+ | 
+Length
+ | 
+5
+ | 
+Circuit breaker Q1
+ | 
+Maximum load current (A)
+ | 
+238
+ | 
+Load current (A)
+ | 
+909
+ | 
+Type of insulation
+ | 
+PVC
+ | 
+Type
+ | 
+Masterpact
+ | 
+Ambient temperature (°C)
+ | 
+30
+ | 
+Reference
+ | 
+MTZ2 10N1
+ | 
+Conductor material
+ | 
+Copper
+ | 
+Rated current (A)
+ | 
+1000
+ | 
+Single-core or multi-core cable
+ | 
+Single
+ | 
+Number of poles and protected poles
+ | 
+4P4d
+ | 
+Installation method
+ | 
+F31
+ | 
+Tripping unit
+ | 
+Micrologic 5.0X
+ | 
+Phase conductor selected csa (mm²)
+ | 
+1 x 95
+ | 
+Overload trip Ir (A)
+ | 
+920
+ | 
+Neutral conductor selected csa (mm²)
+ | 
+1 x 95
+ | 
+Short-delay trip Im / Isd (A)
+ | 
+9200
+ | 
+PE conductor selected csa (mm²)
+ | 
+1 x 95
+ | 
+Tripping time tm (ms)
+ | 
+50
+ | 
+Cable voltage drop ΔU (%)
+ | 
+0.131
+ | 
+Switchboard B1
+ | 
+Total voltage drop ΔU (%)
+ | 
+0.714
+ | 
+Reference
+ | 
+Prisma Plus P
+ | 
+3-phase short-circuit current Ik3 (kA)
+ | 
+18.0
+ | 
+Rated current (A)
+ | 
+1000
+ | 
+1-phase-to-earth fault current Ief (kA)
+ | 
+14.2
+ | 
+Circuit breaker Q3
+ | 
+ | 
+Load current (A)
+ | 
+518
+ | 
+Type
+ | 
+Compact
+ | 
+Reference
+ | 
+NSX630F
+ | 
+Rated current (A)
+ | 
+630
+ | 
+Number of poles and protected poles
+ | 
+4P4d
+ | 
+Tripping unit
+ | 
+Micrologic 5.3 E
+ | 
+Overload trip Ir (A)
+ | 
+518
+ | 
+Short-delay trip Im / Isd (A)
+ | 
+1036
+ | 
+The same calculation using the simplified method recommended in this guide
+Dimensioning circuit C1
+The MV/LV 630 kVA transformer has a rated voltage of 400 V. Circuit C1 must be suitable for a current of:
+ I
+ b
+ =
+ 630
+ ×
+ 10
+ 3
+ 3
+ ×
+ 400
+ =
+ 909
+ A
+ {\displaystyle I_{b}={\frac {630\times 10^{3}}{{\sqrt {3}}\times 400}}=909\,A}
+ per phase 
+Two single-core PVC-insulated copper cables in parallel will be used for each phase.These cables will be laid on cable trays according to method 31F.
+Each conductor will therefore carry 455 A. Figure G21 indicates that for 3 loaded conductors with PVC insulation, the required c.s.a. is 240 mm².
+The resistance and the inductive reactance, for the two conductors in parallel, and for a length of 5 metres, are:
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle R=\frac{18.51 \times 5}{240\times 2}=0.19\,m\Omega}
+ (cable resistance: 18.51 mΩ.mm2/m at 20 °C)
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle X = 0.08 / 2 \times 5 = 0.2\,m\Omega}
+ (cable reactance: 0.08 mΩ/m, 2 cables in parallel)
+Dimensioning circuit C3
+Circuit C3 supplies two loads, in total 310 kW with cos φ = 0.85, so the total load current is:
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle I_b=\frac{310 \times 10^3}{\sqrt 3 \times 400 \times 0.85}=526\,A}
+Two single-core PVC-insulated copper cables in parallel will be used for each phase. These cables will be laid on cable trays according to method F.
+Each conductor will therefore carry 263 A. Figure G21 indicates that for 3 loaded conductors with PVC insulation, the required c.s.a. is 120 mm².
+The resistance and the inductive reactance, for the two conductors in parallel, and for a length of 20 metres, are:
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle R=\frac{18.51\times 20}{120\times 2}=1.54\,m\Omega}
+ (cable resistance: 18.51 mΩ.mm2/m at 20 °C) 
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle X = 0.08/ 2 \times 20 = 1.6\,m\Omega}
+ (cable reactance: 0.08 mΩ/m, 2 cables in parallel)
+Dimensioning circuit C7
+Circuit C7 supplies one 140kW load with cos φ = 0.85, so the total load current is:
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle I_b=\frac{140 \times 10^3}{\sqrt 3 \times 400 \times 0.85}=238\,A}
+One single-core PVC-insulated copper cable will be used for each phase. 
+The cables will be laid on cable trays according to method F.
+Each conductor will therefore carry 238 A. Figure G21 indicates that for 3 loaded conductors with PVC insulation, the required c.s.a. is 95 mm².
+The resistance and the inductive reactance for a length of 5 metres is:
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle R=\frac{18.51\times 5}{95}=0.97\,m\Omega}
+ (cable resistance: 18.51 mΩ.mm2/m) 
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle X = 0.08 \times 5 = 0.4\,m\Omega}
+ (cable reactance: 0.08 mΩ/m)
+Calculation of short-circuit currents for the selection of circuit-breakers Q1, Q3, Q7
+(see Fig. G71)
+Fig. G71 – Example of short-circuit current evaluation
+Circuit components
+ | 
+R (mΩ)
+ | 
+X (mΩ)
+ | 
+Z (mΩ)
+ | 
+Ikmax (kA)
+ | 
+Upstream MV network, 500MVA fault level (see Fig. G36)
+ | 
+0,035
+ | 
+0,351
+ | 
+ | 
+ | 
+Transformer 630kVA, 4% (see Fig. G37)
+ | 
+2.90
+ | 
+10.8
+ | 
+ | 
+ | 
+Cable C1
+ | 
+0.19
+ | 
+0.20
+ | 
+ | 
+ | 
+Sub-total
+ | 
+3.13
+ | 
+11.4
+ | 
+11.8
+ | 
+21
+ | 
+Cable C3
+ | 
+1.54
+ | 
+0.80
+ | 
+ | 
+ | 
+Sub-total
+ | 
+4.67
+ | 
+12.15
+ | 
+13.0
+ | 
+19
+ | 
+Cable C7
+ | 
+0.97
+ | 
+0.40
+ | 
+ | 
+ | 
+Sub-total
+ | 
+5.64 
+ | 
+12.55
+ | 
+13.8
+ | 
+18
+ | 
+The protective conductor
+Generally, for circuits with phase conductor c.s.a. Sph ≥ 50 mm², the PE conductor minimum c.s.a. will be Sph / 2.
+The proposed c.s.a. of the PE conductor will thus be 1x240 mm² for circuit C1, 1x120 mm² for C3, and 1x50 mm² for C7.
+The minimum c.s.a. for the protective earth conductor (PE) can be calculated using the adiabatic method (formula given in Fig. G59):
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle S_{PE}=\frac{\sqrt {I^2 . t} }{k}}
+For circuit C1, I = 21 kA and k = 143.
+t is the maximum operating time of the MV protection, e.g. 0.5 s
+This gives:
+ S
+ P
+ E
+ =
+ I
+ 2
+ .
+ t
+ k
+ =
+ 21000
+ ×
+ 0.5
+ 143
+ =
+ 104
+ m
+ m
+ 2
+ {\displaystyle S_{PE}={\frac {\sqrt {I^{2}.t}}{k}}={\frac {21000\times {\sqrt {0.5}}}{143}}=104\,mm^{2}}
+A single 120 mm² conductor is therefore largely sufficient, provided that it also satisfies the requirements for fault protection (indirect contact), i.e. that its impedance is sufficiently low.
+Fault protection (protection against indirect contact)
+For TN earthing system, the minimum value of Lmax is given by phase to earth fault (highest impedance). Conventional_method details the calculation of typical phase-to-earth fault and maximum circuit length calculation.
+In this example (3-phase 4-wire circuit), the maximum permitted length of the circuit is given by the formula:
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle L_{max}=\frac{0.8 \times U_0 \times S_{ph} }{\rho \times \left ( 1 + m \right )\times I_a }}
+where m = Sph / SPE
+For circuit C3, this gives:
+Failed to parse (MathML with SVG or PNG fallback (recommended for modern browsers and accessibility tools): Invalid response ("Math extension cannot connect to Restbase.") from server "https://en.wikipedia.org/api/rest_v1/":): {\displaystyle L_{max}=\frac{0.8 \times 230 \times 2 \times 120}{23.7 \times 10^{-3}\times \left ( 1 + 2 \right )\times 630\times 11 } = 90\,m}
+(The value in the denominator 630 x 11 is the maximum current level at which the instantaneous short-circuit magnetic trip of the 630 A circuit breaker operates).
+The length of 20 metres is therefore fully protected by “instantaneous” over-current devices.
+Voltage drop
+The voltage drop is calculated using the data given in Figure G30, for balanced three-phase circuits, motor power normal service (cos φ = 0.8).
+The results are summarized on Fig. G72:
+The total voltage drop at the end of cable C7 is then: 0.73 %.
+Fig. G72 – Voltage drop introduced by the different cables
+ | 
+C1
+ | 
+C3
+ | 
+C7
+ | 
+c.s.a.
+ | 
+2 x 240mm2
+ | 
+2 x 120mm2
+ | 
+1 x 95mm2
+ | 
+∆U per conductor (V/A/km)
+see Fig. G30
+ | 
+0.22
+ | 
+0.36
+ | 
+0.43
+ | 
+Load current (A)
+ | 
+909
+ | 
+526
+ | 
+238
+ | 
+Length (m)
+ | 
+5
+ | 
+20
+ | 
+5
+ | 
+Voltage drop (V)
+ | 
+0.50
+ | 
+1.89
+ | 
+0.51
+ | 
+Voltage drop (%)
+ | 
+0.12
+ | 
+0.47
+ | 
+0.13
+ | 
+

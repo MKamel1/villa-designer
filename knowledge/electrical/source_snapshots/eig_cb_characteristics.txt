@@ -1,0 +1,89 @@
+Contents
+1 Rated operational voltage (Ue)
+2 Rated current (In)
+3 Frame-size rating
+4 Overload relay trip-current setting (Irth or Ir)
+5 Short-circuit relay trip-current setting (Im)
+6 Circuit breaker suitable for isolation
+7 Rated short-circuit breaking capacity (Icu or Icn)
+8 Notes
+9 Related technical guides
+The fundamental characteristics of a circuit-breaker are: 
+Its rated voltage Ue
+Its rated current In
+Its tripping-current-level adjustment ranges for overload protection (Ir[1] or Irth[1]) and for short-circuit protection (Im)[1]
+Its short-circuit current breaking rating (Icu for industrial CBs; Icn for domestic-type CBs).
+Rated operational voltage (Ue)
+This is the voltage at which the circuit-breaker has been designed to operate, in normal (undisturbed) conditions.
+Other values of voltage are also assigned to the circuit-breaker, corresponding to disturbed conditions as noted in Other characteristics of a circuit-breaker .
+Rated current (In)
+This is the maximum value of current that a circuit-breaker, fitted with a specified overcurrent tripping relay, can carry indefinitely at an ambient temperature stated by the manufacturer, without exceeding the specified temperature limits of the current carrying parts. 
+Example
+A circuit-breaker rated at In = 125 A for an ambient temperature of 40°C will be equipped with a suitably calibrated overcurrent tripping relay (set at 125 A). The same circuit-breaker can be used at higher values of ambient temperature however, if suitably “derated”. Thus, the circuit-breaker in an ambient temperature of 50°C could carry only 117 A indefinitely, or again, only 109 A at 60°C, while complying with the specified temperature limit.
+Derating a circuit-breaker is achieved therefore, by reducing the trip-current setting of its overload relay, and marking the CB accordingly. The use of an electronic-type of tripping unit, designed to withstand high temperatures, allows circuit-breakers (derated as described) to operate at 60°C (or even at 70°C) ambient.
+Note: In for circuit-breakers (in IEC 60947-2) is equal to Iu for switchgear generally, Iu being the rated uninterrupted current. 
+Frame-size rating
+A circuit breaker which can be fitted with overcurrent tripping units of different current level-setting ranges, is assigned a rating which corresponds to the highest current-level-setting tripping unit that can be fitted.
+Example
+A Compact NSX630N circuit-breaker can be equipped with 11 electronic trip units from 150 A to 630 A. The size of the circuit-breaker is 630A.
+Overload relay trip-current setting (Irth or Ir)
+Apart from small circuit-breakers which are very easily replaced, industrial circuit-breakers are equipped with removable, i.e. exchangeable, overcurrent-trip relays. Moreover, in order to adapt a circuit-breaker to the requirements of the circuit it controls, and to avoid the need to install over-sized cables, the trip relays are generally adjustable. The trip-current setting Ir or Irth (both designations are in common use) is the current above which the circuit-breaker will trip. It also represents the maximum current that the circuit-breaker can carry without tripping. That value must be greater than the maximum load current IB, but less than the maximum current permitted in the circuit Iz (see chapter Sizing and protection of conductors ).
+The thermal-trip relays are generally adjustable from 0.7 to 1.0 times In, but when electronic devices are used for this duty, the adjustment range is greater; typically 0.4 to 1 times In. 
+Example
+(see Fig. H27)
+A NSX630N circuit-breaker equipped with a 400 A Micrologic 6.3E overcurrent trip relay, set at 0.9, will have a trip-current setting:
+Ir = 400 x 0.9 = 360 A
+Note: For circuit-breakers equipped with non-adjustable overcurrent-trip relays, Ir = In. Example: for iC60N 20 A circuit-breaker, 
+Ir = In = 20 A. 
+ Fig. H27 – Example of a Compact NSX630N circuit breaker with a Micrologic rated 400A adjusted to 0.9 to give Ir = 360 A
+Short-circuit relay trip-current setting (Im)
+Short-circuit tripping relays (instantaneous or slightly time-delayed) are intended to trip the circuit-breaker rapidly on the occurrence of high values of fault current. Their tripping threshold Im is: 
+Either fixed by standards for domestic type CBs, e.g. IEC 60898, or,
+Indicated by the manufacturer for industrial type CBs according to related standards, notably IEC 60947-2.
+For the latter circuit-breakers there exists a wide variety of tripping devices which allow a user to adapt the protective performance of the circuit-breaker to the particular requirements of a load (see Fig. H28, Fig. H29 and Fig. H30). 
+Fig. H28 – Tripping-current ranges of overload and short-circuit protective devices for LV circuit breakers
+ROW: | Type of protective relay | Overloadprotection | Short-circuit protection
+ROW: Domestic breakers IEC 60898 | Thermal- magnetic | Ir = In | Low setting type B 3 In ≤ Im ≤ 5 In | Standard setting type C 5 In ≤ Im ≤ 10 In | High setting circuittype D10 In ≤ Im ≤ 20 In[a]
+ROW: Modular industrial circuit-breakers[b] | Thermal- magnetic | Ir = In fixed | Low settingtype B or Z3.2 In ≤ fixed ≤ 4.8 In | Standard settingtype C7 In ≤ fixed ≤ 10 In | High settingtype D or K10 In ≤ fixed ≤ 14 In
+ROW: Industrial circuit-breakers[b] IEC 60947-2 | Thermal- magnetic | Ir = In fixed | Fixed: Im = 7 to 10 In
+ROW: Adjustable:0.7 In ≤ Ir ≤ In
+ROW: Adjustable: Low setting: 2 to 5 In Standard setting: 5 to 10 In
+ROW: Electronic | Long delay 0.4 In ≤ Ir ≤ In | Short-delay, adjustable 1.5 Ir ≤ Im ≤ 10 Ir Instantaneous (I) fixed I = 12 to 15 In
+^ 50 In in IEC 60898, which is considered to be unrealistically high by most European manufacturers (Schneider Electric = 10 to 14 In).
+^ 1 2 For industrial use, IEC standards do not specify values. The above values are given only as being those in common use.
+ Fig. H29 – Tripping curve of a thermal-magnetic circuit breaker
+ Ir: Overload (thermal or long-delay) relay trip-current setting
+ Im: Short-circuit (magnetic or short-delay) relay trip-current setting
+ Ii: Short-circuit instantaneous relay trip-current setting.
+ Icu: Breaking capacity Fig. H30 – Tripping curve of a circuit breaker with advanced electronic trip unit
+Circuit breaker suitable for isolation
+A circuit-breaker is suitable for isolating a circuit if it fulfills all the conditions prescribed for a disconnector (at its rated voltage) in the relevant standard. In such a case it is referred to as a circuit-breaker-disconnector and marked on its front face with the symbol
+All Acti 9, Compact NSX and Masterpact LV switchgear of Schneider Electric ranges are in this category.
+Rated short-circuit breaking capacity (Icu or Icn)
+The short-circuit current-breaking performance of a LV circuit-breaker is related (approximately) to the cos φ of the fault-current loop. Standard values for this relationship have been established in some standards
+The short-circuit current-breaking rating of a CB is the highest (prospective) value of current that the CB is capable of breaking without being damaged. The value of current quoted in the standards is the rms value of the AC component of the fault current, i.e. the DC transient component (which is always present in the worst possible case of short-circuit) is assumed to be zero for calculating the standardized value. This rated value (Icu) for industrial CBs and (Icn) for domestic-type CBs is normally given in kA rms.
+Icu (rated ultimate s.c. breaking capacity) and Ics (rated service s.c. breaking capacity) are defined in IEC 60947-2 together with a table relating Ics with Icu for different categories of utilization A (instantaneous tripping) and B (time-delayed tripping) as discussed in Other characteristics of a circuit-breaker .
+Tests for proving the rated s.c. breaking capacities of CBs are governed by standards, and include: 
+Operating sequences, comprising a succession of operations, i.e. closing and opening on short-circuit
+Current and voltage phase displacement. When the current is in phase with the supply voltage (cosφ for the circuit = 1), interruption of the current is easier than that at any other power factor. Breaking a current at low lagging values of cosφ is considerably more difficult to achieve; a zero power-factor circuit being (theoretically) the most onerous case.
+In practice, all power-system short-circuit fault currents are (more or less) at lagging power factors, and standards are based on values commonly considered to be representative of the majority of power systems. In general, the greater the level of fault current (at a given voltage), the lower the power factor of the fault-current loop, for example, close to generators or large transformers.
+Figure H31 below extracted from IEC 60947-2 relates standardized values of cos φ to industrial circuit-breakers according to their rated Icu. 
+Following an open - time delay - close/open sequence to test the Icu capacity of a CB, further tests are made to ensure that:
+The dielectric withstand capability
+The disconnection (isolation) performance and
+The correct operation of the overload protection have not been impaired by the test.
+Fig. H31 – Icu related to power factor (cosφ) of fault-current circuit (IEC 60947-2)
+ROW: Icu | cosφ
+ROW: 6 kA < Icu ≤ 10 kA | 0.5
+ROW: 10 kA < Icu ≤ 20 kA | 0.3
+ROW: 20 kA < Icu ≤ 50 kA | 0.25
+ROW: 50 kA < Icu | 0.2
+ Notes 
+^ 1 2 3 Current-level setting values which refer to the current-operated thermal and “instantaneous” magnetic tripping devices for over-load and short-circuit protection.
+Related technical guides
+Selectivity, Cascading and Coordination Guide
+Get all required information to verify your electrical distribution design's robustness, considering overloads and short circuits.
+Combine the benefits of selectivity and cascading to maximize power availability of your LV design at optimized cost.
+Find Schneider Electric's coordination data for ACBs, MCCBs, MCBs, switches, busbar trunking (busways), motor starters and more.
+Download the guide (.pdf)
+

@@ -1,0 +1,75 @@
+Contents
+1 Factor of maximum utilization (ku)
+2 Diversity factor - Coincidence factor (ks)
+3 Diversity factor for an apartment block
+4 Rated Diversity Factor for distribution switchboards
+5 Diversity factor according to circuit function
+All individual loads are not necessarily operating at full rated nominal power nor necessarily at the same time. Factors ku and ks allow the determination of the maximum power and apparent-power demands actually required to dimension the installation.
+Factor of maximum utilization (ku)
+In normal operating conditions the power consumption of a load is sometimes less than that indicated as its nominal power rating, a fairly common occurrence that justifies the application of an utilization factor (ku) in the estimation of realistic values.
+This factor must be applied to each individual load, with particular attention to electric motors, which are very rarely operated at full load.
+In an industrial installation this factor may be estimated on an average at 0.75 for motors.
+For incandescent-lighting loads, the factor always equals 1.
+For socket-outlet circuits, the factors depend entirely on the type of appliances being supplied from the sockets concerned.
+For Electric Vehicle the utilization factor will be systematically estimated to 1, as it takes a long time to load completely the batteries (several hours) and a dedicated circuit feeding the charging station or wall box will be required by standards.
+Diversity factor - Coincidence factor (ks)
+The determination of ks factors is the responsibility of the designer, since it requires a detailed knowledge of the installation and the conditions in which the individual circuits are to be exploited. 
+For this reason, it is not possible to give precise values for general application.
+It is a matter of common experience that the simultaneous operation of all installed loads of a given installation never occurs in practice, i.e. there is always some degree of diversity and this fact is taken into account for estimating purposes by the use of a factor (ks).
+This factor is defined in IEC60050 - International Electrotechnical Vocabulary, as follows:
+Coincidence factor = The ratio, expressed as a numerical value or as a percentage, of the simultaneous maximum demand of a group of electrical appliances or consumers within a specified period, to the sum of their individual maximum demands within the same period. As per this definition, the value is always ≤ 1 and can be expressed as a percentage
+Diversity factor = The reciprocal of the coincidence factor. It means it will always be ≥ 1.
+Note: In practice, the most commonly used term is the diversity factor, but it is used in replacement of the coincidence factor, thus will be always ≤ 1. The term "simultaneity factor" is another alternative that is sometimes used.
+The factor ks is applied to each group of loads (e.g. being supplied from a distribution or sub-distribution board).
+The following tables are coming from local standards or guides, not from international standards. They should only be used as examples of determination of such factors. See also the specific case of Electric Vehicle charging application.
+Diversity factor for an apartment block
+Some typical values for this case are given in Figure A11, and are applicable to domestic consumers without electrical heating, and supplied at 230/400 V (3-phase 4-wires). In the case of consumers using electrical heat-storage units for space heating, a factor of 0.8 is recommended, regardless of the number of consumers.
+Fig. A11 – Example of diversity factors for an apartment block as defined in French standard NFC14-100, and applicable for apartments without electrical heating
+ROW: Number of downstream consumers | Diversity factor (ks)
+ROW: 2 to 4 | 1
+ROW: 5 to 9 | 0.78
+ROW: 10 to 14 | 0.63
+ROW: 15 to 19 | 0.53
+ROW: 20 to 24 | 0.49
+ROW: 25 to 29 | 0.46
+ROW: 30 to 34 | 0.44
+ROW: 35 to 39 | 0.42
+ROW: 40 to 49 | 0.41
+ROW: 50 and more | 0.38
+Example (see Fig. A12):
+5 storeys apartment building with 25 consumers, each having 6 kVA of installed load.
+The total installed load for the building is: 36 + 24 + 30 + 36 + 24 = 150 kVA
+The apparent-power supply required for the building is: 150 x 0.46 = 69 kVA
+From Figure A12, it is possible to determine the magnitude of currents in different sections of the common main feeder supplying all floors. For vertical rising mains fed at ground level, the cross-sectional area of the conductors can evidently be progressively reduced from the lower floors towards the upper floors.
+These changes of conductor size are conventionally spaced by at least 3-floor intervals.
+In the example, the current entering the rising main at ground level is:
+[math]\displaystyle{ \frac{150\times0.46\times10^3}{400\sqrt3}=100A }[/math]
+the current entering the third floor is: 
+[math]\displaystyle{ \frac{\left(36+24\right)\times0.63\times10^3}{400\sqrt3}=55A }[/math]
+ Fig. A12 – Application of the diversity factor (ks) to an apartment block of 5 storeys
+Rated Diversity Factor for distribution switchboards
+The standards IEC61439-1 and 2 define in a similar way the Rated Diversity Factor for distribution switchboards (in this case, always ≤ 1) 
+IEC61439-2 also states that, in the absence of an agreement between the assembly manufacturer (panel builder) and user concerning the actual load currents (diversity factors), the assumed loading of the outgoing circuits of the assembly or group of outgoing circuits may be based on the values in Fig. A13.
+If the circuits are mainly for lighting loads, it is prudent to adopt ks values close to unity. 
+Fig. A13 – Rated diversity factor for distribution boards (cf IEC61439-2 table 101)
+ROW: Type of load | Assumed loading factor
+ROW: Distribution - 2 and 3 circuits | 0.9
+ROW: Distribution - 4 and 5 circuits | 0.8
+ROW: Distribution - 6 to 9 circuits | 0.7
+ROW: Distribution - 10 or more circuits | 0.6
+ROW: Electric actuator | 0.2
+ROW: Motors ≤ 100 kW | 0.8
+ROW: Motors > 100 kW | 1.0
+Diversity factor according to circuit function
+ks factors which may be used for circuits supplying commonly-occurring loads, are shown in Figure A14. It is provided in French practical guide UTE C 15-105. 
+Fig. A14 – Diversity factor according to circuit function (see UTE C 15-105 table AC)
+ROW: Circuit function | Diversity factor (ks)
+ROW: Lighting | 1
+ROW: Heating and air conditioning | 1
+ROW: Socket-outlets | 0.1 to 0.2[a]
+ROW: Lifts and catering hoist[b] | For the most powerful motor | 1
+ROW: For the second most powerful motor | 0.75
+ROW: For all motors | 0.60
+^ In certain cases, notably in industrial installations, this factor can be higher.
+^ The current to take into consideration is equal to the nominal current of the motor, increased by a third of its starting current.
+
