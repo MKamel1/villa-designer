@@ -145,6 +145,7 @@ def set_out(fixtures, rc, it, fp):
         if f.kind in RECESSED_KINDS:
             by.setdefault(f.room, []).append(f)
     for room, fs in by.items():
+        fs = [f for f in fs if "axis" not in f.extra]          # a fitting that declares its own axis is not snapped
         ax, ay = axes_for_room(rc, it, fp, room)
         sx = symmetric_rows([f.x for f in fs], ax[:1] + ax[1::3])
         sy = symmetric_rows([f.y for f in fs], ay[:1] + ay[1::3])
@@ -365,12 +366,18 @@ def design(lay=None):
     third = (isl[2] - isl[0]) / 3
     # L6c: the ERCO DL is 1065 lm (was 732): the separate hob downlight went to the 15 % floor of the driver range, so it is cut;
     # the three prep downlights (one over the hob's side, one each side) light both the 500 lx strip and the 300 lx induction zone
-    # four prep downlights in two mirrored pairs about the island centre (+/-1.0 m and +/-1.5 m): a pair close to the hob lifts the
+    # four prep downlights in two mirrored pairs about the island centre (+/-1.2 m and +/-1.5 m): a pair close to the hob lifts the
     # 300 lx induction zone to 1.2x its card when the strip reaches 500 lx (analytic search over positions, then Radiance)
-    for x, zn, cd in ((icx - 1.5, "island-prep", "ies-res-kitchen-prep-500"), (icx - 1.0, "island-prep", "ies-res-kitchen-prep-500"),
-                      (icx + 1.0, "island-prep", "ies-res-kitchen-prep-500"), (icx + 1.5, "island-prep", "ies-res-kitchen-prep-500")):
-        add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line (the globes' axes, plus one at the far end); the middle "
-            "one is over the hob", card=cd, zone=zn + ":task")
+    for x, zn, cd in ((icx - 1.5, "island-prep", "ies-res-kitchen-prep-500"), (icx - 1.2, "island-prep", "ies-res-kitchen-prep-500"),
+                      (icx + 1.2, "island-prep", "ies-res-kitchen-prep-500"), (icx + 1.5, "island-prep", "ies-res-kitchen-prep-500"),
+                      (spans[-1][0] + (spans[-1][1] - spans[-1][0]) / 2, "island-prep", "ies-res-kitchen-prep-500")):
+        # V12: four DL needed 0.86 of their output at 500 lx; a fifth on the centre line of the right-hand counter module (an
+        # axis of the island's own module grid, declared) brings it under 0.80 without lifting the hob (analytic search)
+        # y: the prep line 200 mm inside the counter edge (the hob's 0.5 m plane then gets less of it than at 300 mm: analytic search)
+        add("DL", "kitchen", x, isl[3] - 0.20, why="prep downlight on the prep line: two mirrored pairs about the island centre and one on "
+            "the centre of the right-hand counter module; none over the hob", card=cd, zone=zn + ":task",
+            extra={"axis": "prep line 200 mm inside the island's prep edge; x on the island centre line (+/-1.2 m, +/-1.5 m) or the "
+                           "centre line of the right-hand counter module"})
     run = fp["k-run"]
     for x in ((run[0] + run[2]) / 2 - 0.45, (run[0] + run[2]) / 2 + 0.45):
         add("DL", "kitchen", x, run[3] - 0.65, why="650 mm from the wall face over the counter's front edge, 0.9 m pitch "
@@ -527,7 +534,9 @@ def design(lay=None):
             why="wall-mounted swing arm on the solid head wall, aimed at the pillow; clear of both passages")
     # L6b: the two straight-down adjustable reading spots gave 790 lx on each pillow (4x the 200 lx card): cut; the
     # swing-arm lamps on the head wall are the reading lights
-    for x, y in (((b[0] + b[2]) / 2, b[3] + 0.45),):          # L6c: 2 -> 1 ambient (ERCO DL 1065 lm)
+    # L6c: 2 -> 1 ambient (ERCO DL 1065 lm). The one kept is the west one by the entry: the bed-foot one is 23 000 cd/m2 into the eye
+    # of a person lying on the bed (LA4 cap 3000), which the old 732 lm fittings did not show
+    for x, y in ((PB[0] + 0.55, (PB[1] + PB[3]) / 2),):
         add("DL", "parents-bed", x, y, why="ambient, dimmable", card="ies-res-bedroom-general-50", zone="ambient")
     v = fp["pb-vanity"]
     add("ADJ", "parents-bed", v[0] - 0.35, (v[1] + v[3]) / 2, aim=(0.35, 0, -1), why="vanity light",

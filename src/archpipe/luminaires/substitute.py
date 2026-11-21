@@ -191,7 +191,7 @@ def check_spec(tag: str, ds: dict, facts: dict, fmeta: dict, ref_lm: float) -> l
     else:
         add("dimming", "pass" if any(t in dim.lower() for t in ok_tokens) else "fail", "%s vs %s" % (dim, spec["dimming"]))
     if spec["mount"].startswith("recessed") and c.get("cutout_mm") is None:
-        add("cutout", "missing", "cut-out size not stated (state it so the ceiling drawing can be checked)")
+        add("cutout", "note", "cut-out size not stated: state it before ordering so the ceiling drawing can be checked")
     if c.get("flicker"):
         add("flicker", "note", "flicker stated: %s (we ask %s)" % (c["flicker"], SCH.FLICKER))
     else:
@@ -227,6 +227,13 @@ def _patched_villa(tag_kind: str, ies_path: Path, rated_lm: float, watts, cct, d
                 FR.PRODUCTS[tag_kind] = saved
 
 
+def _by_fixture(v) -> dict:
+    out = {}
+    for p in v.placements:
+        out.setdefault(p.meta.get("parent") or p.id, []).append(p)
+    return out
+
+
 def _flux(p) -> float:
     return p.dim * p.photometry.integrated_flux()
 
@@ -255,21 +262,22 @@ def analytic_rerun(kind: str, tag: str, ies_path: Path, rated_lm: float, watts, 
         calc = old_v.calc(cl, planes, fast=True)
         sensors = calc.sensors()
         pts = [(s.x, s.y, s.z) for s in sensors]
-        new_by_id = {f.id: f for f in new_v.fixtures}
+        by_old, by_new = _by_fixture(old_v), _by_fixture(new_v)
         zones = copy.deepcopy(res.zones)
         for z in {zone_id(f) for f in old_v.fixtures if f.id in ids and cluster_of(f.room) == cl}:
             mine = [f for f in old_v.fixtures if f.id in ids and zone_id(f) == z]
-            zone_old = [p for f in old_v.fixtures if zone_id(f) == z for p in fixture_placements(f)]
-            old_p = [p for f in mine for p in fixture_placements(f)]
-            new_p = [p for f in mine for p in fixture_placements(new_by_id[f.id])]
+            # placements were built eagerly inside Villa(); a fixture's record is lazy and would see the restored product
+            zone_old = [p for f in old_v.fixtures if zone_id(f) == z for p in by_old[f.id]]
+            old_p = [p for f in mine for p in by_old[f.id]]
+            new_p = [p for f in mine for p in by_new[f.id]]
             phi_zone, phi_old, phi_new = sum(map(_flux, zone_old)), sum(map(_flux, old_p)), sum(map(_flux, new_p))
             ab = str(res.ab)
             tot, d0 = zones[z][ab], zones[z]["0"]
+            delta = [direct_illuminance(new_p, q) - direct_illuminance(old_p, q) for q in pts]          # direct light, analytic
+            share = (phi_old / phi_zone) * (phi_new / phi_old - 1) if phi_old > 0 else 0.0         # inter-reflected light scales with flux
             for key in zones[z]:
-                arr = zones[z][key]
-                zones[z][key] = [t + (direct_illuminance(new_p, q) - direct_illuminance(old_p, q)) * (1 if key == "0" else 1)
-                                 + ((tot[i] - d0[i]) * (phi_old / phi_zone) * (phi_new / phi_old - 1) if key != "0" and phi_old > 0 else 0.0)
-                                 for i, (t, q) in enumerate(zip(arr, pts))]
+                zones[z][key] = [t + dl + (0.0 if key == "0" else (tot[i] - d0[i]) * share)
+                                 for i, (t, dl) in enumerate(zip(zones[z][key], delta))]
         old_res[cl] = res
         new_res[cl] = VR.ClusterRes(res.name, res.mf, res.slices, zones, res.zone_watts, res.zone_layer, res.ab, res.ab2)
     return dict(status="ok", clusters=clusters, old=old_res, new=new_res, planes=planes, fixtures=old_v.fixtures, ids=ids,

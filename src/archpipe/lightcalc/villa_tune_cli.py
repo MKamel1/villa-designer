@@ -85,5 +85,6 @@ if __name__ == "__main__":
     ap.add_argument("--out", default="out/L6c")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--size-generics", action="store_true")
+    ap.add_argument("--lo", type=float, default=0.15, help="lowest driver the solve may choose (default 0.15)")
     a = ap.parse_args()
-    main(a.tag, out_dir=a.out, write=a.write, size_generics=a.size_generics)
+    main(a.tag, out_dir=a.out, write=a.write, lo=a.lo, size_generics=a.size_generics)
