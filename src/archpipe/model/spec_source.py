@@ -45,9 +45,25 @@ def _slug(*parts) -> str:
 
 
 # ----------------------------------------------------------------------------------------------- rooms
-def rooms(lay, sp, finish: dict | None = None) -> list[DesignElement]:
+def revit_room_areas() -> dict[str, float]:
+    """Net room areas read back from Revit (out/villa/furnish-d1/revit/readback.json, option 0); {} when absent.
+
+    Override the location with ARCHPIPE_REVIT_READBACK. A room Revit did not read (area 0) is left out."""
+    import json
+    import os
+    from pathlib import Path
+    p = Path(os.environ.get("ARCHPIPE_REVIT_READBACK", "") or
+             Path(__file__).resolve().parents[3] / "out/villa/furnish-d1/revit/readback.json")
+    if not p.is_file():
+        return {}
+    data = json.loads(p.read_text(encoding="utf-8"))
+    return {r["id"]: r["area_m2"] for r in data["options"][0]["rooms"] if r.get("area_m2")}
+
+
+def rooms(lay, sp, finish: dict | None = None, revit_areas: dict | None = None) -> list[DesignElement]:
     from ..concept import villa_furnish as F
     from ..concept import villa_lighting as VL
+    revit_areas = revit_room_areas() if revit_areas is None else revit_areas
     out = []
     for rid, r in lay["rooms"].items():
         lv = r["level"]
@@ -68,8 +84,13 @@ def rooms(lay, sp, finish: dict | None = None) -> list[DesignElement]:
             room=rid, finish_codes=tuple(sorted(str(v) for v in fin.values())) if isinstance(fin, dict) else (),
             params=dict(
                 name=r.get("name", ""), occupancy=r.get("occupancy", ""), polygon_mm=poly,
-                area_m2=poly_area_m2(poly), clear_height_mm=clear_h,
+                area_m2=poly_area_m2(poly), gross_area_m2=poly_area_m2(poly), clear_height_mm=clear_h,
                 clear_rect_mm=rect_poly_mm(clear), clear_area_m2=poly_area_m2(rect_poly_mm(clear)),
+                revit_net_area_m2=revit_areas.get(rid),
+                net_area_m2=revit_areas.get(rid) or poly_area_m2(rect_poly_mm(clear)),
+                net_area_basis=("Revit read-back (finished-face room area)" if revit_areas.get(rid) else
+                                "clear rectangle: room outline inset by half-wall thicknesses (columns and finishes "
+                                "not deducted; typically 0.0-0.5 m2 above the Revit figure)"),
                 part_of=r.get("part_of", ""), open_to=[b if a == rid else a for a, b in lay["links"] if rid in (a, b)],
                 ceiling_source="villa_lighting.ceiling_z at the room centre (sloped soffits under the ramp: centre value)",
             )))
@@ -132,8 +153,39 @@ def doors(sp, wall_els) -> list[DesignElement]:
             host=_host_wall(wall_els, d["level"], d["x"], d["y"]), room=a,
             params=dict(rooms=list(d["rooms"]), width_mm=mm(d["width"]), height_mm=mm(d["height"]),
                         clear_mm=mm(d["clear"]) if d.get("clear") else None, fit=d.get("fit", ""),
-                        span=list(d.get("span", [])), type=d.get("type", ""))))
+                        span=list(d.get("span", [])), type=d.get("type", ""), **_door_operation(d))))
     return out
+
+
+def _door_operation(d) -> dict:
+    """Operation, swing and clear width of a spec door. The spec authors the leaf width and a door *type*
+    (villa_furnish.DOOR_TYPES: pocket, or hinged swinging into one named room); it does not author a hinge side."""
+    from ..concept import villa_furnish as F
+    key = "/".join(d.get("rooms") or [])
+    typ = F.DOOR_TYPES.get(key) or ""
+    clear = d["width"]
+    if d.get("sliding") or d.get("garden"):
+        pocket = "pocket" in str(d.get("slide_type", ""))
+        n = d.get("leaf_count") or 1
+        if n > 1 and not pocket:
+            clear = d["width"] / n          # bypass leaves overlap: one leaf's share of the opening stays covered
+        op = "sliding"
+        basis = ("pocket leaves retract into the wall: full width clear" if pocket else
+                 f"bypass set of {n} leaves: width / {n} is clear at a time" if n > 1 else
+                 "single sliding leaf: authored width taken as the opening (leaf overlap not authored)")
+    elif typ == "pocket":
+        op, basis = "pocket", "pocket leaf slides into the wall; the opening equals the leaf width"
+    else:
+        op, basis = "hinged", ("upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and "
+                               "stop (not authored)")
+    into = typ[5:] if typ.startswith("into:") else ""
+    return dict(
+        operation=op, swing_into=into,
+        swing_basis=("swings into " + into if into else
+                     "direction not authored: swing squares kept clear on both sides" if op == "hinged" else "no swing"),
+        leaf_width_mm=mm(d["width"]), structural_opening_mm=mm(d["width"] + 0.1),   # leaf + 50 mm frame each side
+        clear_width_mm=mm(clear), clear_width_basis=basis,
+        leaf_count=d.get("leaf_count", 1 if op == "hinged" else None), garden=bool(d.get("garden")))
 
 
 def wall_thick(wall_els, d) -> float:
@@ -154,7 +206,10 @@ def windows(sp, wall_els) -> list[DesignElement]:
             size=(mm(w["width"]), mm(wall_thick(wall_els, dict(w))), mm(w["height"])),
             host=_host_wall(wall_els, w["level"], w["x"], w["y"]), room=w["room"],
             params=dict(width_mm=mm(w["width"]), sill_mm=mm(w["sill"]), height_mm=mm(w["height"]),
-                        full_height=bool(w.get("full_height", False)), span=list(w.get("span", [])))))
+                        full_height=bool(w.get("full_height", False)), span=list(w.get("span", [])),
+                        gross_area_m2=round(w["width"] * w["height"], 4), operation=None, openable_area_m2=None,
+                        openable_basis="not authored: the spec records no operable sash, so L1 must apply a policy "
+                                       "(gross glazed area is the upper bound)")))
     return out
 
 
@@ -197,6 +252,18 @@ def railings(sp) -> list[DesignElement]:
                         guard_height_mm=mm(b.get("height_above_nosing", 0.0)),
                         measured_from="stair nosing line", glazed=("glass" in str(b.get("material"))),
                         profile_mm=[[mm(p[0]), mm(p[1]), mm(p[2])] for p in prof], basis=b.get("basis", ""))))
+    op = sp.get("gf_opening")
+    if op:
+        # villa_render builds "detail-stair-guard" from the opening (1.1 m glass, long edge at y=op[3] plus the return at
+        # x=op[2]); the Revit spec does not carry it ("required; not yet in the Revit model").
+        long_e, ret = mm(op[2] - op[0]), mm(op[3] - op[1])
+        out.append(DesignElement(
+            id="rail-gf-stair-void", kind="railing", level="GF",
+            placement=(mm((op[0] + op[2]) / 2), mm(op[3]), 0.0), size=(long_e, 10.0, 1100.0), room="stair-gf",
+            params=dict(guard_height_mm=1100.0, material="laminated glass, 10 mm closed pane", edge_lengths_mm=[long_e, ret],
+                        length_mm=round(long_e + ret, 1), drop_mm=3000.0,
+                        in_revit_spec=False, in_scene=True, scene_mesh="detail-stair-guard",
+                        basis="villa_render detail (required, not yet in the Revit model); height 1.1 m assumed there")))
     for i, r in enumerate(sp.get("rails", [])):
         prof = r.get("profile") or []
         out.append(DesignElement(
@@ -272,7 +339,10 @@ def context() -> list[DesignElement]:
             placement=((min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2, e["z0"]),
             size=(max(xs) - min(xs), max(ys) - min(ys), e["z1"] - e["z0"]),
             params=dict(category=e.get("category", ""), what=e["id"].split("-")[0], note=e.get("note", ""),
-                        z0_scene_mm=e["z0"], z1_scene_mm=e["z1"])))
+                        z0_scene_mm=e["z0"], z1_scene_mm=e["z1"],
+                        **(dict(guard_present=False, drop_mm=e["z1"] - e["z0"],
+                                guard_basis="shared entrance steps (not ours); no guard in villa_env, spec or scene")
+                           if e["id"] == "entrance-steps" else {}))))
     return out
 
 
@@ -308,11 +378,30 @@ def sunken_gardens(lay) -> list[DesignElement]:
             size=(mm(x1 - x0), mm(y1 - y0), 0.0),
             params=dict(name=np_.get("name", ""), polygon_mm=rect_poly_mm(np_["rect"]),
                         area_m2=poly_area_m2(rect_poly_mm(np_["rect"])), sunken=True, ground_scene_mm=-3000,
+                        floor_below_street_mm=1800.0, guard_present=False,
+                        guard_basis="no guard on the patio edge in spec, villa_render or villa_env (only the ramp-edge "
+                                    "rails of revit_spec.rails exist)",
                         covered_rect_mm=rect_poly_mm(np_["covered"]) if np_.get("covered") else None)))
     return out
+
+
+def terrace(lay) -> list[DesignElement]:
+    """The GF front terrace slab (lay["terrace"]). No guard exists for its edge anywhere in the spec or the scene."""
+    t = lay.get("terrace")
+    if not t:
+        return []
+    x0, y0, x1, y1 = t
+    return [DesignElement(
+        id="slab-gf-terrace", kind="slab", level="GF", placement=(mm((x0 + x1) / 2), mm((y0 + y1) / 2), -200.0),
+        size=(mm(x1 - x0), mm(y1 - y0), 200.0),
+        params=dict(role="GF front (street-side) terrace", polygon_mm=rect_poly_mm(t), area_m2=poly_area_m2(rect_poly_mm(t)),
+                    drop_to_patio_mm=3000.0, drop_to_street_mm=1200.0,
+                    guard_present=False, guard_basis="no guard or parapet for the terrace edge in revit_spec, villa_render "
+                    "or villa_env (the apartment-above terrace has an assumed 1.1 m parapet zone, not ours)"))]
 
 
 def all_from_spec(lay, sp, finish=None) -> list[DesignElement]:
     wall_els = walls(sp)
     return (rooms(lay, sp, finish) + wall_els + doors(sp, wall_els) + windows(sp, wall_els) + stairs(lay, sp)
-            + railings(sp) + slabs(sp) + columns_beams() + context() + bath_fittings(sp) + sunken_gardens(lay))
+            + railings(sp) + slabs(sp) + terrace(lay) + columns_beams() + context() + bath_fittings(sp)
+            + sunken_gardens(lay))

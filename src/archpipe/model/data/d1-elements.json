@@ -45,9 +45,9 @@
   "garden": 14,
   "luminaire": 142,
   "plant": 80,
-  "railing": 5,
+  "railing": 6,
   "room": 30,
-  "slab": 3,
+  "slab": 4,
   "stair": 1,
   "wall": 36,
   "window": 8
@@ -94,6 +94,7 @@
      ]
     ],
     "area_m2": 3.588,
+    "gross_area_m2": 3.588,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -114,6 +115,9 @@
      ]
     ],
     "clear_area_m2": 2.856,
+    "revit_net_area_m2": 2.81,
+    "net_area_m2": 2.81,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "stair-gf"
@@ -162,6 +166,7 @@
      ]
     ],
     "area_m2": 8.533,
+    "gross_area_m2": 8.533,
     "clear_height_mm": 2800.0,
     "clear_rect_mm": [
      [
@@ -182,6 +187,9 @@
      ]
     ],
     "clear_area_m2": 7.791,
+    "revit_net_area_m2": 7.79,
+    "net_area_m2": 7.79,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "landing-gf",
@@ -233,6 +241,7 @@
      ]
     ],
     "area_m2": 13.832,
+    "gross_area_m2": 13.832,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -253,6 +262,9 @@
      ]
     ],
     "clear_area_m2": 11.1195,
+    "revit_net_area_m2": 11.16,
+    "net_area_m2": 11.16,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "stair-gf",
@@ -304,6 +316,7 @@
      ]
     ],
     "area_m2": 15.5958,
+    "gross_area_m2": 15.5958,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -324,6 +337,9 @@
      ]
     ],
     "clear_area_m2": 13.8288,
+    "revit_net_area_m2": 13.63,
+    "net_area_m2": 13.63,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "stair-gf"
@@ -372,6 +388,7 @@
      ]
     ],
     "area_m2": 13.1355,
+    "gross_area_m2": 13.1355,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -392,6 +409,9 @@
      ]
     ],
     "clear_area_m2": 11.9138,
+    "revit_net_area_m2": 11.81,
+    "net_area_m2": 11.81,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "corridor"
@@ -440,6 +460,7 @@
      ]
     ],
     "area_m2": 13.1355,
+    "gross_area_m2": 13.1355,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -460,6 +481,9 @@
      ]
     ],
     "clear_area_m2": 11.9138,
+    "revit_net_area_m2": 11.75,
+    "net_area_m2": 11.75,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "corridor"
@@ -508,6 +532,7 @@
      ]
     ],
     "area_m2": 6.255,
+    "gross_area_m2": 6.255,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -528,6 +553,9 @@
      ]
     ],
     "clear_area_m2": 5.4395,
+    "revit_net_area_m2": 5.18,
+    "net_area_m2": 5.18,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "gallery-end"
@@ -576,6 +604,7 @@
      ]
     ],
     "area_m2": 12.7185,
+    "gross_area_m2": 12.7185,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -596,6 +625,9 @@
      ]
     ],
     "clear_area_m2": 10.976,
+    "revit_net_area_m2": 10.86,
+    "net_area_m2": 10.86,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "parents-dressing",
@@ -645,6 +677,7 @@
      ]
     ],
     "area_m2": 6.2321,
+    "gross_area_m2": 6.2321,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -665,6 +698,9 @@
      ]
     ],
     "clear_area_m2": 5.5836,
+    "revit_net_area_m2": 5.43,
+    "net_area_m2": 5.43,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "parents-bed",
@@ -714,6 +750,7 @@
      ]
     ],
     "area_m2": 6.6096,
+    "gross_area_m2": 6.6096,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -734,6 +771,9 @@
      ]
     ],
     "clear_area_m2": 5.0576,
+    "revit_net_area_m2": 5.03,
+    "net_area_m2": 5.03,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "parents-dressing-ext"
@@ -782,6 +822,7 @@
      ]
     ],
     "area_m2": 2.59,
+    "gross_area_m2": 2.59,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -802,6 +843,9 @@
      ]
     ],
     "clear_area_m2": 2.413,
+    "revit_net_area_m2": 2.4,
+    "net_area_m2": 2.4,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "stair-gf",
@@ -851,6 +895,7 @@
      ]
     ],
     "area_m2": 0.803,
+    "gross_area_m2": 0.803,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -871,6 +916,9 @@
      ]
     ],
     "clear_area_m2": 0.68,
+    "revit_net_area_m2": 0.66,
+    "net_area_m2": 0.66,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "parents-bed",
     "open_to": [
      "corridor",
@@ -920,6 +968,7 @@
      ]
     ],
     "area_m2": 0.5712,
+    "gross_area_m2": 0.5712,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -940,6 +989,9 @@
      ]
     ],
     "clear_area_m2": 0.3712,
+    "revit_net_area_m2": null,
+    "net_area_m2": 0.3712,
+    "net_area_basis": "clear rectangle: room outline inset by half-wall thicknesses (columns and finishes not deducted; typically 0.0-0.5 m2 above the Revit figure)",
     "part_of": "parents-dressing",
     "open_to": [
      "parents-dressing",
@@ -989,6 +1041,7 @@
      ]
     ],
     "area_m2": 23.4352,
+    "gross_area_m2": 23.4352,
     "clear_height_mm": 2800.0,
     "clear_rect_mm": [
      [
@@ -1009,6 +1062,9 @@
      ]
     ],
     "clear_area_m2": 22.3672,
+    "revit_net_area_m2": 21.87,
+    "net_area_m2": 21.87,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "lounge-nook",
@@ -1059,6 +1115,7 @@
      ]
     ],
     "area_m2": 1.872,
+    "gross_area_m2": 1.872,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1079,6 +1136,9 @@
      ]
     ],
     "clear_area_m2": 1.564,
+    "revit_net_area_m2": 1.48,
+    "net_area_m2": 1.48,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "lounge",
     "open_to": [
      "lounge",
@@ -1128,6 +1188,7 @@
      ]
     ],
     "area_m2": 5.376,
+    "gross_area_m2": 5.376,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1148,6 +1209,9 @@
      ]
     ],
     "clear_area_m2": 4.48,
+    "revit_net_area_m2": 4.71,
+    "net_area_m2": 4.71,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "hall-b"
@@ -1196,6 +1260,7 @@
      ]
     ],
     "area_m2": 4.1371,
+    "gross_area_m2": 4.1371,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1216,6 +1281,9 @@
      ]
     ],
     "clear_area_m2": 2.9084,
+    "revit_net_area_m2": 2.88,
+    "net_area_m2": 2.88,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "lounge-nook"
@@ -1264,6 +1332,7 @@
      ]
     ],
     "area_m2": 3.08,
+    "gross_area_m2": 3.08,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1284,6 +1353,9 @@
      ]
     ],
     "clear_area_m2": 2.772,
+    "revit_net_area_m2": 2.77,
+    "net_area_m2": 2.77,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "stair-b",
@@ -1334,6 +1406,7 @@
      ]
     ],
     "area_m2": 3.222,
+    "gross_area_m2": 3.222,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1354,6 +1427,9 @@
      ]
     ],
     "clear_area_m2": 2.8998,
+    "revit_net_area_m2": 2.9,
+    "net_area_m2": 2.9,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "kitchen-island",
@@ -1403,6 +1479,7 @@
      ]
     ],
     "area_m2": 4.7432,
+    "gross_area_m2": 4.7432,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1423,6 +1500,9 @@
      ]
     ],
     "clear_area_m2": 4.6662,
+    "revit_net_area_m2": 4.65,
+    "net_area_m2": 4.65,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "lounge",
     "open_to": [
      "lounge",
@@ -1474,6 +1554,7 @@
      ]
     ],
     "area_m2": 11.4114,
+    "gross_area_m2": 11.4114,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1494,6 +1575,9 @@
      ]
     ],
     "clear_area_m2": 11.2262,
+    "revit_net_area_m2": 10.99,
+    "net_area_m2": 10.99,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "family",
@@ -1545,6 +1629,7 @@
      ]
     ],
     "area_m2": 5.874,
+    "gross_area_m2": 5.874,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1565,6 +1650,9 @@
      ]
     ],
     "clear_area_m2": 5.2866,
+    "revit_net_area_m2": 5.29,
+    "net_area_m2": 5.29,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "hall-b",
@@ -1615,6 +1703,7 @@
      ]
     ],
     "area_m2": 10.6722,
+    "gross_area_m2": 10.6722,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1635,6 +1724,9 @@
      ]
     ],
     "clear_area_m2": 9.9792,
+    "revit_net_area_m2": 9.9,
+    "net_area_m2": 9.9,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "kitchen",
@@ -1685,6 +1777,7 @@
      ]
     ],
     "area_m2": 5.244,
+    "gross_area_m2": 5.244,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1705,6 +1798,9 @@
      ]
     ],
     "clear_area_m2": 4.7196,
+    "revit_net_area_m2": 4.92,
+    "net_area_m2": 4.92,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "dining",
     "open_to": [
      "entry-b",
@@ -1755,6 +1851,7 @@
      ]
     ],
     "area_m2": 21.4884,
+    "gross_area_m2": 21.4884,
     "clear_height_mm": 2800.0,
     "clear_rect_mm": [
      [
@@ -1775,6 +1872,9 @@
      ]
     ],
     "clear_area_m2": 19.6664,
+    "revit_net_area_m2": 19.45,
+    "net_area_m2": 19.45,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "dining",
@@ -1825,6 +1925,7 @@
      ]
     ],
     "area_m2": 6.6346,
+    "gross_area_m2": 6.6346,
     "clear_height_mm": 2700.0,
     "clear_rect_mm": [
      [
@@ -1845,6 +1946,9 @@
      ]
     ],
     "clear_area_m2": 5.1508,
+    "revit_net_area_m2": 5.15,
+    "net_area_m2": 5.15,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "living",
     "open_to": [
      "living"
@@ -1893,6 +1997,7 @@
      ]
     ],
     "area_m2": 9.7115,
+    "gross_area_m2": 9.7115,
     "clear_height_mm": 1674.8,
     "clear_rect_mm": [
      [
@@ -1913,6 +2018,9 @@
      ]
     ],
     "clear_area_m2": 7.7648,
+    "revit_net_area_m2": null,
+    "net_area_m2": 7.7648,
+    "net_area_basis": "clear rectangle: room outline inset by half-wall thicknesses (columns and finishes not deducted; typically 0.0-0.5 m2 above the Revit figure)",
     "part_of": "",
     "open_to": [
      "cinema"
@@ -1961,6 +2069,7 @@
      ]
     ],
     "area_m2": 18.245,
+    "gross_area_m2": 18.245,
     "clear_height_mm": 2579.9,
     "clear_rect_mm": [
      [
@@ -1981,6 +2090,9 @@
      ]
     ],
     "clear_area_m2": 16.4455,
+    "revit_net_area_m2": null,
+    "net_area_m2": 16.4455,
+    "net_area_basis": "clear rectangle: room outline inset by half-wall thicknesses (columns and finishes not deducted; typically 0.0-0.5 m2 above the Revit figure)",
     "part_of": "",
     "open_to": [
      "lounge",
@@ -2030,6 +2142,7 @@
      ]
     ],
     "area_m2": 5.8993,
+    "gross_area_m2": 5.8993,
     "clear_height_mm": 2650.0,
     "clear_rect_mm": [
      [
@@ -2050,6 +2163,9 @@
      ]
     ],
     "clear_area_m2": 5.132,
+    "revit_net_area_m2": 5.06,
+    "net_area_m2": 5.06,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "family"
@@ -2098,6 +2214,7 @@
      ]
     ],
     "area_m2": 12.5939,
+    "gross_area_m2": 12.5939,
     "clear_height_mm": 2800.0,
     "clear_rect_mm": [
      [
@@ -2118,6 +2235,9 @@
      ]
     ],
     "clear_area_m2": 10.8559,
+    "revit_net_area_m2": 10.79,
+    "net_area_m2": 10.79,
+    "net_area_basis": "Revit read-back (finished-face room area)",
     "part_of": "",
     "open_to": [
      "kitchen"
@@ -3203,7 +3323,16 @@
      3.617,
      5.177
     ],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "lounge-nook",
+    "swing_basis": "swings into lounge-nook",
+    "leaf_width_mm": 800.0,
+    "structural_opening_mm": 900.0,
+    "clear_width_mm": 800.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3235,7 +3364,16 @@
     "clear_mm": 2650.0,
     "fit": "full",
     "span": [],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 900.0,
+    "structural_opening_mm": 1000.0,
+    "clear_width_mm": 900.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3267,7 +3405,16 @@
     "clear_mm": 1980.0,
     "fit": "low",
     "span": [],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 800.0,
+    "structural_opening_mm": 900.0,
+    "clear_width_mm": 800.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3299,7 +3446,16 @@
     "clear_mm": 2650.0,
     "fit": "full",
     "span": [],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 800.0,
+    "structural_opening_mm": 900.0,
+    "clear_width_mm": 800.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3331,7 +3487,16 @@
     "clear_mm": 2650.0,
     "fit": "full",
     "span": [],
-    "type": ""
+    "type": "",
+    "operation": "sliding",
+    "swing_into": "",
+    "swing_basis": "no swing",
+    "leaf_width_mm": 1200.0,
+    "structural_opening_mm": 1300.0,
+    "clear_width_mm": 1200.0,
+    "clear_width_basis": "pocket leaves retract into the wall: full width clear",
+    "leaf_count": 3,
+    "garden": false
    }
   },
   {
@@ -3368,7 +3533,16 @@
      14.134,
      15.745
     ],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 1000.0,
+    "structural_opening_mm": 1100.0,
+    "clear_width_mm": 1000.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3405,7 +3579,16 @@
      15.512,
      18.267
     ],
-    "type": ""
+    "type": "",
+    "operation": "sliding",
+    "swing_into": "",
+    "swing_basis": "no swing",
+    "leaf_width_mm": 2350.0,
+    "structural_opening_mm": 2450.0,
+    "clear_width_mm": 2350.0,
+    "clear_width_basis": "single sliding leaf: authored width taken as the opening (leaf overlap not authored)",
+    "leaf_count": null,
+    "garden": true
    }
   },
   {
@@ -3442,7 +3625,16 @@
      18.977,
      22.136999999999997
     ],
-    "type": ""
+    "type": "",
+    "operation": "sliding",
+    "swing_into": "",
+    "swing_basis": "no swing",
+    "leaf_width_mm": 2760.0,
+    "structural_opening_mm": 2860.0,
+    "clear_width_mm": 2760.0,
+    "clear_width_basis": "single sliding leaf: authored width taken as the opening (leaf overlap not authored)",
+    "leaf_count": null,
+    "garden": true
    }
   },
   {
@@ -3479,7 +3671,16 @@
      -28.061,
      -24.201
     ],
-    "type": ""
+    "type": "",
+    "operation": "sliding",
+    "swing_into": "",
+    "swing_basis": "no swing",
+    "leaf_width_mm": 2400.0,
+    "structural_opening_mm": 2500.0,
+    "clear_width_mm": 2400.0,
+    "clear_width_basis": "single sliding leaf: authored width taken as the opening (leaf overlap not authored)",
+    "leaf_count": null,
+    "garden": true
    }
   },
   {
@@ -3516,7 +3717,16 @@
      -28.061,
      -24.251
     ],
-    "type": ""
+    "type": "",
+    "operation": "sliding",
+    "swing_into": "",
+    "swing_basis": "no swing",
+    "leaf_width_mm": 3410.0,
+    "structural_opening_mm": 3510.0,
+    "clear_width_mm": 3410.0,
+    "clear_width_basis": "single sliding leaf: authored width taken as the opening (leaf overlap not authored)",
+    "leaf_count": null,
+    "garden": true
    }
   },
   {
@@ -3553,7 +3763,16 @@
      11.477,
      14.952
     ],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 900.0,
+    "structural_opening_mm": 1000.0,
+    "clear_width_mm": 900.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3590,7 +3809,16 @@
      14.952,
      18.427
     ],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 900.0,
+    "structural_opening_mm": 1000.0,
+    "clear_width_mm": 900.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3627,7 +3855,16 @@
      19.527,
      22.597
     ],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "parents-dressing",
+    "swing_basis": "swings into parents-dressing",
+    "leaf_width_mm": 800.0,
+    "structural_opening_mm": 900.0,
+    "clear_width_mm": 800.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3664,7 +3901,16 @@
      9.227,
      11.477
     ],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 800.0,
+    "structural_opening_mm": 900.0,
+    "clear_width_mm": 800.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3701,7 +3947,16 @@
      18.427,
      19.527
     ],
-    "type": ""
+    "type": "",
+    "operation": "pocket",
+    "swing_into": "",
+    "swing_basis": "no swing",
+    "leaf_width_mm": 900.0,
+    "structural_opening_mm": 1000.0,
+    "clear_width_mm": 900.0,
+    "clear_width_basis": "pocket leaf slides into the wall; the opening equals the leaf width",
+    "leaf_count": null,
+    "garden": false
    }
   },
   {
@@ -3738,7 +3993,16 @@
      19.604,
      22.324
     ],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 800.0,
+    "structural_opening_mm": 900.0,
+    "clear_width_mm": 800.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3775,7 +4039,16 @@
      3.617,
      5.177
     ],
-    "type": ""
+    "type": "",
+    "operation": "hinged",
+    "swing_into": "",
+    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "leaf_width_mm": 1000.0,
+    "structural_opening_mm": 1100.0,
+    "clear_width_mm": 1000.0,
+    "clear_width_basis": "upper bound: nominal leaf width; a leaf open at 90 degrees loses its thickness and stop (not authored)",
+    "leaf_count": 1,
+    "garden": false
    }
   },
   {
@@ -3807,7 +4080,16 @@
     "clear_mm": null,
     "fit": "",
     "span": [],
-    "type": ""
+    "type": "",
+    "operation": "sliding",
+    "swing_into": "",
+    "swing_basis": "no swing",
+    "leaf_width_mm": 1800.0,
+    "structural_opening_mm": 1900.0,
+    "clear_width_mm": 900.0,
+    "clear_width_basis": "bypass set of 2 leaves: width / 2 is clear at a time",
+    "leaf_count": 2,
+    "garden": false
    }
   },
   {
@@ -3839,7 +4121,11 @@
      15.412,
      -23.591,
      -20.601
-    ]
+    ],
+    "gross_area_m2": 5.957,
+    "operation": null,
+    "openable_area_m2": null,
+    "openable_basis": "not authored: the spec records no operable sash, so L1 must apply a policy (gross glazed area is the upper bound)"
    }
   },
   {
@@ -3871,7 +4157,11 @@
      -23.591,
      4.077,
      6.917000000000001
-    ]
+    ],
+    "gross_area_m2": 3.136,
+    "operation": null,
+    "openable_area_m2": null,
+    "openable_basis": "not authored: the spec records no operable sash, so L1 must apply a policy (gross glazed area is the upper bound)"
    }
   },
   {
@@ -3903,7 +4193,11 @@
      3.617,
      -26.371,
      -24.251
-    ]
+    ],
+    "gross_area_m2": 2.128,
+    "operation": null,
+    "openable_area_m2": null,
+    "openable_basis": "not authored: the spec records no operable sash, so L1 must apply a policy (gross glazed area is the upper bound)"
    }
   },
   {
@@ -3935,7 +4229,11 @@
      -23.591,
      11.637,
      14.802
-    ]
+    ],
+    "gross_area_m2": 3.36,
+    "operation": null,
+    "openable_area_m2": null,
+    "openable_basis": "not authored: the spec records no operable sash, so L1 must apply a policy (gross glazed area is the upper bound)"
    }
   },
   {
@@ -3967,7 +4265,11 @@
      -23.591,
      15.512,
      18.267
-    ]
+    ],
+    "gross_area_m2": 3.29,
+    "operation": null,
+    "openable_area_m2": null,
+    "openable_basis": "not authored: the spec records no operable sash, so L1 must apply a policy (gross glazed area is the upper bound)"
    }
   },
   {
@@ -3999,7 +4301,11 @@
      -23.591,
      9.667,
      11.097
-    ]
+    ],
+    "gross_area_m2": 0.48,
+    "operation": null,
+    "openable_area_m2": null,
+    "openable_basis": "not authored: the spec records no operable sash, so L1 must apply a policy (gross glazed area is the upper bound)"
    }
   },
   {
@@ -4031,7 +4337,11 @@
      -23.591,
      18.977,
      22.136999999999997
-    ]
+    ],
+    "gross_area_m2": 3.36,
+    "operation": null,
+    "openable_area_m2": null,
+    "openable_basis": "not authored: the spec records no operable sash, so L1 must apply a policy (gross glazed area is the upper bound)"
    }
   },
   {
@@ -4063,7 +4373,11 @@
      22.597,
      -26.641,
      -24.201
-    ]
+    ],
+    "gross_area_m2": 2.856,
+    "operation": null,
+    "openable_area_m2": null,
+    "openable_basis": "not authored: the spec records no operable sash, so L1 must apply a policy (gross glazed area is the upper bound)"
    }
   },
   {
@@ -4469,6 +4783,40 @@
    }
   },
   {
+   "id": "rail-gf-stair-void",
+   "kind": "railing",
+   "level": "GF",
+   "placement": [
+    7032.0,
+    -27471.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    3710.0,
+    10.0,
+    1100.0
+   ],
+   "host": "",
+   "room": "stair-gf",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "guard_height_mm": 1100.0,
+    "material": "laminated glass, 10 mm closed pane",
+    "edge_lengths_mm": [
+     3710.0,
+     950.0
+    ],
+    "length_mm": 4660.0,
+    "drop_mm": 3000.0,
+    "in_revit_spec": false,
+    "in_scene": true,
+    "scene_mesh": "detail-stair-guard",
+    "basis": "villa_render detail (required, not yet in the Revit model); height 1.1 m assumed there"
+   }
+  },
+  {
    "id": "rail-edge-0",
    "kind": "railing",
    "level": "B",
@@ -4702,6 +5050,52 @@
    "finish_codes": [],
    "params": {
     "role": "extension roof (planted beyond the deck)"
+   }
+  },
+  {
+   "id": "slab-gf-terrace",
+   "kind": "slab",
+   "level": "GF",
+   "placement": [
+    2702.0,
+    -26131.0,
+    -200.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1830.0,
+    5080.0,
+    200.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "role": "GF front (street-side) terrace",
+    "polygon_mm": [
+     [
+      1787.0,
+      -28671.0
+     ],
+     [
+      3617.0,
+      -28671.0
+     ],
+     [
+      3617.0,
+      -23591.0
+     ],
+     [
+      1787.0,
+      -23591.0
+     ]
+    ],
+    "area_m2": 9.2964,
+    "drop_to_patio_mm": 3000.0,
+    "drop_to_street_mm": 1200.0,
+    "guard_present": false,
+    "guard_basis": "no guard or parapet for the terrace edge in revit_spec, villa_render or villa_env (the apartment-above terrace has an assumed 1.1 m parapet zone, not ours)"
    }
   },
   {
@@ -6246,7 +6640,10 @@
     "what": "entrance",
     "note": "shared entrance steps from the street gate up to the core's GF entrance (PDF)",
     "z0_scene_mm": -1200,
-    "z1_scene_mm": 0
+    "z1_scene_mm": 0,
+    "guard_present": false,
+    "drop_mm": 1200,
+    "guard_basis": "shared entrance steps (not ours); no guard in villa_env, spec or scene"
    }
   },
   {
@@ -7330,6 +7727,9 @@
     "area_m2": 18.0642,
     "sunken": true,
     "ground_scene_mm": -3000,
+    "floor_below_street_mm": 1800.0,
+    "guard_present": false,
+    "guard_basis": "no guard on the patio edge in spec, villa_render or villa_env (only the ramp-edge rails of revit_spec.rails exist)",
     "covered_rect_mm": [
      [
       1787.0,

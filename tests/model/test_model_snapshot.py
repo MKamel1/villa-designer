@@ -29,7 +29,7 @@ class Snapshot(unittest.TestCase):
     def test_counts_by_kind(self):
         k = self.kinds
         self.assertEqual((k["room"], k["wall"], k["door"], k["window"], k["stair"]), (30, 36, 18, 8, 1))
-        self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 3, 5))
+        self.assertEqual((k["column"], k["beam"], k["slab"], k["railing"]), (9, 24, 4, 6))
         self.assertEqual(k["luminaire"], 142)
         self.assertEqual(k["plant"], 80)
         self.assertGreaterEqual(k["furniture"], 52)
@@ -60,6 +60,41 @@ class Snapshot(unittest.TestCase):
         for e in lums:
             self.assertGreater(e.params["flux_lm"], 0, e.id)
 
+    def test_net_area_and_openings_for_l1(self):
+        by = {e.id: e for e in self.els}
+        lounge = by["room-lounge"].params
+        self.assertEqual(lounge["gross_area_m2"], lounge["area_m2"])
+        self.assertLess(lounge["net_area_m2"], lounge["gross_area_m2"])
+        self.assertEqual(lounge["revit_net_area_m2"], 21.87)            # Revit read-back, furnish-d1 option 0
+        for e in self.els:
+            if e.kind == "room":
+                self.assertGreater(e.params["net_area_m2"], 0, e.id)
+                self.assertLessEqual(e.params["net_area_m2"], e.params["gross_area_m2"], e.id)
+            if e.kind == "door":
+                for k in ("operation", "swing_basis", "clear_width_mm", "clear_width_basis", "leaf_width_mm"):
+                    self.assertIn(k, e.params, e.id)
+                self.assertIn(e.params["operation"], ("hinged", "pocket", "sliding"))
+                self.assertLessEqual(e.params["clear_width_mm"], e.params["leaf_width_mm"] + 1e-6)
+            if e.kind == "window":
+                self.assertIn("openable_area_m2", e.params)
+                self.assertIsNone(e.params["openable_area_m2"])         # not authored: explicit, not invented
+                self.assertGreater(e.params["gross_area_m2"], 0)
+        pocket = by["door-B-kitchen-dirty-kitchen"].params
+        self.assertEqual(pocket["operation"], "sliding")                # the client-approved 1.2 m sliding link
+        self.assertEqual(by["door-GF-parents-bed-parents-dressing"].params["swing_into"], "parents-dressing")
+
+    def test_guards_and_unguarded_edges(self):
+        by = {e.id: e for e in self.els}
+        g = by["rail-gf-stair-void"]
+        self.assertEqual(g.params["guard_height_mm"], 1100.0)
+        self.assertEqual(g.params["edge_lengths_mm"][0], 3710.0)         # the 3.71 m open edge
+        self.assertFalse(g.params["in_revit_spec"])
+        self.assertTrue(g.params["in_scene"])
+        self.assertFalse(by["slab-gf-terrace"].params["guard_present"])
+        self.assertEqual(by["slab-gf-terrace"].params["drop_to_patio_mm"], 3000.0)
+        self.assertFalse(by["ctx-entrance-steps"].params["guard_present"])
+        self.assertEqual(by["garden-north-patio"].params["floor_below_street_mm"], 1800.0)
+
     def test_every_room_element_refers_to_a_room(self):
         rooms = {e.room for e in self.els if e.kind == "room"} | {e.id[5:] for e in self.els if e.kind == "room"}
         for e in self.els:
@@ -82,9 +117,15 @@ def _finish():
     return VR.FINISH
 
 
+_REVIT_ONLY = ("revit_net_area_m2", "net_area_m2", "net_area_basis")      # need out/villa/.../readback.json
+
+
 def _norm(d):
     import json
-    return json.loads(json.dumps(d, default=list))
+    d = json.loads(json.dumps(d, default=list))
+    for k in _REVIT_ONLY:
+        d.get("params", {}).pop(k, None)
+    return d
 
 
 if __name__ == "__main__":
