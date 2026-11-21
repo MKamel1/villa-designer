@@ -1,0 +1,16 @@
+way,circuit,phase,description,device,ib_a,in_a,connected_w,cable,method,length_m,iz_a,derating,vd_total_pct,vd_limit_pct,disconnect_s,protection
+1,DB-GF/D1,L1,ac AC-LIV,RCBO 16 A C 30 mA Type A,11.11,16.0,2200,2C+E 2.5 mm2 PVC,conduit_wall_2,7.0,16.1,0.7,1.23,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+2,DB-GF/D3,L1,cooker COOKER,RCBO 40 A B 30 mA Type A,36.36,40.0,8000,2C+E 10 mm2 PVC,conduit_wall_2,8.9,52.0,1.0,1.24,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+3,DB-GF/D4,L1,washer WASHER,RCBO 10 A B 30 mA Type A,10.0,10.0,2200,2C+E 2.5 mm2 PVC,conduit_wall_2,8.9,16.1,0.7,1.33,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+4,DB-GF/L2,L1,Lighting KIT,RCBO 6 A B 30 mA Type A,0.69,6.0,136,2C+E 1.5 mm2 PVC,in_insulation_2,8.9,6.5,0.461,0.68,3.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+5,DB-GF/D2,L2,ac AC-BED,RCBO 10 A C 30 mA Type A,8.08,10.0,1600,2C+E 2.5 mm2 PVC,conduit_wall_2,7.0,16.1,0.7,1.06,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+6,DB-GF/D6,L2,water_heater WH-BATH,RCBO 16 A B 30 mA Type A,13.64,16.0,3000,2C+E 2.5 mm2 PVC,conduit_wall_2,6.9,16.1,0.7,1.37,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+7,DB-GF/L3,L2,Lighting BED,RCBO 6 A B 30 mA Type A,0.44,6.0,88,2C+E 1.5 mm2 PVC,in_insulation_2,7.0,6.5,0.461,0.64,3.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+8,DB-GF/S2,L2,Worktop sockets KIT,RCBO 20 A B 30 mA Type A,20.0,20.0,,2C+E 4 mm2 PVC,conduit_wall_2,8.9,21.0,0.7,1.49,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+9,DB-GF/S4,L2,Sockets BED,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 2.5 mm2 PVC,conduit_wall_2,7.0,16.1,0.7,1.51,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+10,DB-GF/D5,L3,dishwasher DISHW,RCBO 10 A B 30 mA Type A,9.09,10.0,2000,2C+E 2.5 mm2 PVC,conduit_wall_2,8.9,16.1,0.7,1.26,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+11,DB-GF/L1,L3,Lighting LIV,RCBO 6 A B 30 mA Type A,0.95,6.0,189,2C+E 1.5 mm2 PVC,in_insulation_2,7.0,6.5,0.461,0.69,3.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+12,DB-GF/L4,L3,Lighting BATH,RCBO 6 A B 30 mA Type A,0.2,6.0,40,2C+E 1.5 mm2 PVC,in_insulation_2,6.9,6.5,0.461,0.62,3.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+13,DB-GF/S1,L3,Sockets LIV,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 2.5 mm2 PVC,conduit_wall_2,7.0,16.1,0.7,1.51,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+14,DB-GF/S3,L3,Sockets KIT,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 2.5 mm2 PVC,conduit_wall_2,8.9,16.1,0.7,1.76,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
+15,DB-GF/S5,L3,Sockets BED,RCBO 16 A B 30 mA Type A,16.0,16.0,,2C+E 2.5 mm2 PVC,conduit_wall_2,7.0,16.1,0.7,1.51,5.0,0.04,RA 30 ohm x IDn 30 mA = 0.90 V (<= 50 V); RCD <= 0.04 s at 5 x IDn
