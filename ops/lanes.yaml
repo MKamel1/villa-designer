@@ -85,6 +85,22 @@ lanes:
     - knowledge/electrical/**
     - tests/electrical/**
     - docs/lanes/L7*.md
+  RV1: # Revit-free: parity inventory + independent 3D checks
+    - src/archpipe/parity/**
+    - tests/parity/**
+    - knowledge/parity/**
+    - docs/lanes/RV1*.md
+  RV2: # Revit-free: sections, elevations and 2D drawing set
+    - src/archpipe/drawings2d/**
+    - src/archpipe/blender/lineart*.py
+    - src/archpipe/documents/**
+    - tests/drawings2d/**
+    - tests/documents/**
+    - docs/lanes/RV2*.md
+  RV3: # Revit-free: IFC + DWG exchange
+    - src/archpipe/exchange/**
+    - tests/exchange/**
+    - docs/lanes/RV3*.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
