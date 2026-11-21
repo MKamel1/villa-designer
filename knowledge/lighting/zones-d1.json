@@ -8,7 +8,7 @@
  "assumptions": [
   "generic fittings (strips, pendants, sconces, markers, desk lamps) at ASSUMED 90 lm/W",
   "luminaire ids are the L2 model ids (lum-<fixture id>) of concept.villa_lighting.design()",
-  "dimming: LSEVO-only zones phase_cut (product datasheet: trailing/leading edge); other zones dali2 (ASSUMED driver choice); emergency markers switched (maintained, battery-backed, ASSUMED)",
+  "dimming: dali2 for every dimmable zone (ERCO DL/DLN/WW/PEN-LIN are DALI-2 per datasheet; ADJ and DESK dim on board, controlled as dali2 zones with an ASSUMED DALI driver/relay); emergency markers switched (maintained, battery-backed, ASSUMED)",
   "night layer on the stair and the basement route is published as `emergency`"
  ],
  "zones": [
@@ -37,7 +37,7 @@
     "lum-SWING-bar-alcove-09",
     "lum-SWING-bar-alcove-10"
    ],
-   "watts": 2.6,
+   "watts": 2.5,
    "dimming": "dali2"
   },
   {
@@ -49,8 +49,8 @@
     "lum-WW-cinema-04",
     "lum-WW-cinema-05"
    ],
-   "watts": 36.0,
-   "dimming": "phase_cut"
+   "watts": 30.3,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-CINEMA-AMBIENT",
@@ -60,8 +60,8 @@
     "lum-DL-cinema-01",
     "lum-DL-cinema-02"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
+   "watts": 28.8,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-CINEMA-NIGHT",
@@ -81,7 +81,7 @@
     "lum-DESK-cinema-07",
     "lum-DESK-cinema-08"
    ],
-   "watts": 3.7,
+   "watts": 8.3,
    "dimming": "dali2"
   },
   {
@@ -92,8 +92,8 @@
     "lum-ADJ-dining-side-01",
     "lum-ADJ-dining-side-02"
    ],
-   "watts": 25.2,
-   "dimming": "phase_cut"
+   "watts": 12.6,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-DINING-TABLE-PENDANT",
@@ -102,7 +102,7 @@
    "luminaire_ids": [
     "lum-PEN-LIN-dining-01"
    ],
-   "watts": 8.1,
+   "watts": 3.5,
    "dimming": "dali2"
   },
   {
@@ -110,11 +110,11 @@
    "room": "dirty-kitchen",
    "layer": "ambient",
    "luminaire_ids": [
-    "lum-DL-dirty-kitchen-06",
-    "lum-DL-dirty-kitchen-07"
+    "lum-DL-dirty-kitchen-05",
+    "lum-DL-dirty-kitchen-06"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
+   "watts": 28.8,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-DIRTY-KITCHEN-RUN-TASK",
@@ -124,11 +124,10 @@
     "lum-DL-dirty-kitchen-01",
     "lum-DL-dirty-kitchen-02",
     "lum-DL-dirty-kitchen-03",
-    "lum-DL-dirty-kitchen-04",
-    "lum-DL-dirty-kitchen-05"
+    "lum-DL-dirty-kitchen-04"
    ],
-   "watts": 44.2,
-   "dimming": "phase_cut"
+   "watts": 43.5,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-ENTRY-B-ACCENT",
@@ -137,8 +136,8 @@
    "luminaire_ids": [
     "lum-WW-entry-b-02"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 10.1,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-ENTRY-B-AMBIENT",
@@ -147,8 +146,8 @@
    "luminaire_ids": [
     "lum-DL-entry-b-01"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-FAMILY-AMBIENT",
@@ -157,8 +156,8 @@
    "luminaire_ids": [
     "lum-DL-family-01"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-FAMILY-NIGHT",
@@ -177,8 +176,8 @@
    "luminaire_ids": [
     "lum-DL-guest-wc-01"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-GUEST-WC-BASIN-TASK",
@@ -187,8 +186,8 @@
    "luminaire_ids": [
     "lum-DL-guest-wc-02"
    ],
-   "watts": 5.8,
-   "dimming": "phase_cut"
+   "watts": 6.6,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-GUEST-WC-TASK",
@@ -207,18 +206,18 @@
    "luminaire_ids": [
     "lum-DL-hall-b-01"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-KITCHEN-AMBIENT",
    "room": "kitchen",
    "layer": "ambient",
    "luminaire_ids": [
-    "lum-DL-kitchen-10"
+    "lum-DL-kitchen-11"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-KITCHEN-ISLAND-AMBIENT",
@@ -228,18 +227,8 @@
     "lum-DL-kitchen-island-01",
     "lum-DL-kitchen-island-02"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
-  },
-  {
-   "id": "Z-B-KITCHEN-ISLAND-COOK",
-   "room": "kitchen",
-   "layer": "task",
-   "luminaire_ids": [
-    "lum-DL-kitchen-05"
-   ],
-   "watts": 4.5,
-   "dimming": "phase_cut"
+   "watts": 28.8,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-KITCHEN-ISLAND-PENDANTS",
@@ -250,7 +239,7 @@
     "lum-PEN-GLOBE-kitchen-02",
     "lum-PEN-GLOBE-kitchen-03"
    ],
-   "watts": 36.0,
+   "watts": 13.2,
    "dimming": "dali2"
   },
   {
@@ -259,18 +248,20 @@
    "layer": "task",
    "luminaire_ids": [
     "lum-DL-kitchen-04",
+    "lum-DL-kitchen-05",
     "lum-DL-kitchen-06",
-    "lum-DL-kitchen-07"
+    "lum-DL-kitchen-07",
+    "lum-DL-kitchen-08"
    ],
-   "watts": 26.2,
-   "dimming": "phase_cut"
+   "watts": 43.2,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-KITCHEN-NIGHT",
    "room": "kitchen",
    "layer": "accent",
    "luminaire_ids": [
-    "lum-TOE-kitchen-11"
+    "lum-TOE-kitchen-12"
    ],
    "watts": 4.9,
    "dimming": "dali2"
@@ -280,11 +271,11 @@
    "room": "kitchen",
    "layer": "task",
    "luminaire_ids": [
-    "lum-DL-kitchen-08",
-    "lum-DL-kitchen-09"
+    "lum-DL-kitchen-09",
+    "lum-DL-kitchen-10"
    ],
-   "watts": 14.5,
-   "dimming": "phase_cut"
+   "watts": 15.0,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-LIVING-AMBIENT",
@@ -292,12 +283,10 @@
    "layer": "ambient",
    "luminaire_ids": [
     "lum-DL-living-03",
-    "lum-DL-living-04",
-    "lum-DL-living-05",
-    "lum-DL-living-06"
+    "lum-DL-living-04"
    ],
-   "watts": 48.0,
-   "dimming": "phase_cut"
+   "watts": 28.8,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-LIVING-DECORATIVE",
@@ -320,8 +309,8 @@
     "lum-DL-lounge-03",
     "lum-DL-lounge-04"
    ],
-   "watts": 48.0,
-   "dimming": "phase_cut"
+   "watts": 57.6,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-LOUNGE-ARMCHAIR-READING",
@@ -330,8 +319,8 @@
    "luminaire_ids": [
     "lum-ADJ-lounge-09"
    ],
-   "watts": 4.7,
-   "dimming": "phase_cut"
+   "watts": 4.2,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-LOUNGE-DECORATIVE",
@@ -361,8 +350,8 @@
    "luminaire_ids": [
     "lum-DL-lounge-nook-02"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-LOUNGE-ROUTE-NIGHT",
@@ -372,19 +361,18 @@
     "lum-DL-lounge-07",
     "lum-DL-lounge-08"
    ],
-   "watts": 3.6,
-   "dimming": "phase_cut"
+   "watts": 4.3,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-PANTRY-AMBIENT",
    "room": "pantry",
    "layer": "ambient",
    "luminaire_ids": [
-    "lum-DL-pantry-01",
-    "lum-DL-pantry-02"
+    "lum-DL-pantry-01"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-B-STAIR-B-ACCENT",
@@ -434,8 +422,8 @@
     "lum-WW-corridor-05",
     "lum-WW-corridor-06"
    ],
-   "watts": 72.0,
-   "dimming": "phase_cut"
+   "watts": 60.6,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-CORRIDOR-NIGHT",
@@ -456,8 +444,8 @@
    "luminaire_ids": [
     "lum-DL-family-bath-01"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-FAMILY-BATH-BASIN-TASK",
@@ -466,8 +454,8 @@
    "luminaire_ids": [
     "lum-DL-family-bath-03"
    ],
-   "watts": 3.7,
-   "dimming": "phase_cut"
+   "watts": 3.9,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-FAMILY-BATH-NIGHT",
@@ -486,8 +474,8 @@
    "luminaire_ids": [
     "lum-DL-family-bath-02"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 6.6,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-FAMILY-BATH-TASK",
@@ -497,7 +485,7 @@
     "lum-SCONCE-family-bath-04",
     "lum-SCONCE-family-bath-05"
    ],
-   "watts": 4.4,
+   "watts": 2.3,
    "dimming": "dali2"
   },
   {
@@ -507,26 +495,25 @@
    "luminaire_ids": [
     "lum-DL-gallery-end-01"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-KIDS-A-AMBIENT",
    "room": "kids-a",
    "layer": "ambient",
    "luminaire_ids": [
-    "lum-DL-kids-a-01",
-    "lum-DL-kids-a-02"
+    "lum-DL-kids-a-01"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-KIDS-A-NIGHT",
    "room": "kids-a",
    "layer": "accent",
    "luminaire_ids": [
-    "lum-NL-kids-a-05"
+    "lum-NL-kids-a-06"
    ],
    "watts": 0.9,
    "dimming": "dali2"
@@ -536,10 +523,12 @@
    "room": "kids-a",
    "layer": "task",
    "luminaire_ids": [
+    "lum-DL-kids-a-02",
     "lum-DESK-kids-a-03",
-    "lum-DESK-kids-a-04"
+    "lum-DL-kids-a-04",
+    "lum-DESK-kids-a-05"
    ],
-   "watts": 7.1,
+   "watts": 26.7,
    "dimming": "dali2"
   },
   {
@@ -547,11 +536,10 @@
    "room": "kids-b",
    "layer": "ambient",
    "luminaire_ids": [
-    "lum-DL-kids-b-01",
-    "lum-DL-kids-b-02"
+    "lum-DL-kids-b-01"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-KIDS-B-NIGHT",
@@ -568,9 +556,10 @@
    "room": "kids-b",
    "layer": "task",
    "luminaire_ids": [
+    "lum-DL-kids-b-02",
     "lum-DESK-kids-b-03"
    ],
-   "watts": 3.6,
+   "watts": 15.9,
    "dimming": "dali2"
   },
   {
@@ -580,8 +569,8 @@
    "luminaire_ids": [
     "lum-DL-landing-gf-03"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-LANDING-GF-NIGHT",
@@ -599,21 +588,20 @@
    "room": "parents-bed",
    "layer": "accent",
    "luminaire_ids": [
-    "lum-ADJ-parents-bed-06"
+    "lum-ADJ-parents-bed-05"
    ],
-   "watts": 12.6,
-   "dimming": "phase_cut"
+   "watts": 6.3,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-PARENTS-BED-AMBIENT",
    "room": "parents-bed",
    "layer": "ambient",
    "luminaire_ids": [
-    "lum-DL-parents-bed-04",
-    "lum-DL-parents-bed-05"
+    "lum-DL-parents-bed-04"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-PARENTS-BED-BED-READING",
@@ -644,8 +632,8 @@
     "lum-DL-parents-dressing-06",
     "lum-DL-parents-dressing-07"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
+   "watts": 28.8,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-PARENTS-DRESSING-EXT-TASK",
@@ -680,8 +668,8 @@
     "lum-WW-parents-ensuite-01",
     "lum-WW-parents-ensuite-02"
    ],
-   "watts": 9.6,
-   "dimming": "phase_cut"
+   "watts": 8.1,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-PARENTS-ENSUITE-BASIN-TASK",
@@ -690,8 +678,8 @@
    "luminaire_ids": [
     "lum-DL-parents-ensuite-03"
    ],
-   "watts": 5.5,
-   "dimming": "phase_cut"
+   "watts": 11.0,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-PARENTS-ENSUITE-NIGHT",
@@ -711,7 +699,7 @@
     "lum-VANITY-LIN-parents-ensuite-04",
     "lum-MIRROR-parents-ensuite-06"
    ],
-   "watts": 1.2,
+   "watts": 1.6,
    "dimming": "dali2"
   },
   {
@@ -721,8 +709,8 @@
    "luminaire_ids": [
     "lum-DL-parents-entry-01"
    ],
-   "watts": 12.0,
-   "dimming": "phase_cut"
+   "watts": 14.4,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-STAIR-GF-DECORATIVE",
@@ -744,19 +732,18 @@
     "lum-DL-study-game-01",
     "lum-DL-study-game-02"
    ],
-   "watts": 24.0,
-   "dimming": "phase_cut"
+   "watts": 28.8,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-STUDY-GAME-DESK-ADULT",
    "room": "study-game",
    "layer": "task",
    "luminaire_ids": [
-    "lum-DL-study-game-05",
-    "lum-DL-study-game-06"
+    "lum-DL-study-game-05"
    ],
-   "watts": 11.8,
-   "dimming": "phase_cut"
+   "watts": 9.3,
+   "dimming": "dali2"
   },
   {
    "id": "Z-GF-STUDY-GAME-DESK-TASK",
@@ -766,8 +753,8 @@
     "lum-DL-study-game-03",
     "lum-DL-study-game-04"
    ],
-   "watts": 16.0,
-   "dimming": "phase_cut"
+   "watts": 15.2,
+   "dimming": "dali2"
   }
  ],
  "scenes": {
@@ -782,11 +769,10 @@
     "*ambient": 1.0,
     "island-pendants": 0.3,
     "island-prep": 1.0,
-    "island-cook": 1.0,
     "run-task": 1.0
    },
    "Dinner": {
-    "table-pendant": 0.405,
+    "table-pendant": 0.47,
     "island-pendants": 0.3,
     "*decorative": 0.3,
     "living-ambient": 0.2,

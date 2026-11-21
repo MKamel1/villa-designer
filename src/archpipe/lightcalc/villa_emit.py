@@ -34,8 +34,8 @@ def build_zones(v: Villa) -> list[LightingZone]:
         if layer == "night":
             layer = "emergency" if fs[0].room in EMERGENCY_ROOMS else "accent"
         watts = sum(p.watts or 0.0 for f in fs for p in fixture_placements(f))
-        phase_cut = all(f.record.product for f in fs)
-        dimming = "phase_cut" if phase_cut else ("switched" if layer == "emergency" else "dali2")
+        # L6c: the bound ERCO products are DALI-2 (or on-board dim: ADJ, DESK), not phase-cut; every dimmable zone is dali2
+        dimming = "switched" if layer == "emergency" else "dali2"
         out.append(LightingZone(z, fs[0].room, layer, tuple("lum-" + f.id for f in fs), round(watts, 1), dimming))
     return out
 
@@ -45,8 +45,8 @@ def zones_json(v: Villa, zones: list[LightingZone], scenes: dict) -> dict:
             "units": {"watts": "W installed at the commissioned driver output"},
             "assumptions": ["generic fittings (strips, pendants, sconces, markers, desk lamps) at ASSUMED 90 lm/W",
                             "luminaire ids are the L2 model ids (lum-<fixture id>) of concept.villa_lighting.design()",
-                            "dimming: LSEVO-only zones phase_cut (product datasheet: trailing/leading edge); other zones "
-                            "dali2 (ASSUMED driver choice); emergency markers switched (maintained, battery-backed, ASSUMED)",
+                            "dimming: dali2 for every dimmable zone (ERCO DL/DLN/WW/PEN-LIN are DALI-2 per datasheet; ADJ and DESK dim on board, "
+                            "controlled as dali2 zones with an ASSUMED DALI driver/relay); emergency markers switched (maintained, battery-backed, ASSUMED)",
                             "night layer on the stair and the basement route is published as `emergency`"],
             "zones": [asdict(z) for z in zones], "scenes": scenes}
 

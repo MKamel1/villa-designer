@@ -1,0 +1,15 @@
+{
+ "maker": "iGuzzini",
+ "code": "LSEVO-AAK3EW",
+ "name": "Laser Evo recessed, Soft, Fix, CRI97, 2700 K, Reflector, F - Flood, Phase cut trailing and leading edge, 75 mm, 12 W 730 lm",
+ "url": null,
+ "claims": {
+  "lumens": 730,
+  "watts": 12,
+  "cct_k": 2700,
+  "cri": 97,
+  "dimming": "phase cut: trailing and leading edge",
+  "finish": "black / titanium"
+ },
+ "points": []
+}

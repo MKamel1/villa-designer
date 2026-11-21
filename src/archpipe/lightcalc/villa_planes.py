@@ -51,6 +51,12 @@ ROOM_PLANE_Z = {"lounge": 0.75, "family": 0.75, "living": 0.75, "kitchen": 0.92,
                 "family-bath": 0.0, "parents-ensuite": 0.0, "guest-wc": 0.0}
 
 
+# L6c: LV open item 3: the 0.63 m cinema room grid changed the direct result by 6.35 % when halved; a 0.30 m pitch (and 0.06 m on the
+# 0.7 x 0.5 m daybed plane, 3.07 % at 0.12 m) brings the halving change under the 3 % bar (checked in tests/lightcalc/test_villa.py)
+ROOM_PLANE_SPACING = {"cinema": 0.30}
+DAYBED_SPACING = 0.06
+
+
 def build_planes(v, filtered=True):
     from ..concept import villa_lighting as VL
     from .villa import Plane
@@ -105,11 +111,11 @@ def build_planes(v, filtered=True):
     add("armchair", "lounge", _rect(*_centre(a), 0.5, 0.5), B + 0.76, "ies-res-chair-reading-200", "Reading", "armchair")
     n = fp["library-daybed"]
     add("daybed", "bar-alcove", _rect(*_centre(n), 0.7, 0.5), B + 0.76, "ies-res-chair-reading-200", "Reading",
-        "daybed nook")
+        "daybed nook", spacing=DAYBED_SPACING)
     # room planes (general illuminance, minimum-gauged)
     for room, card in VL.ROOM_TARGETS.items():
         r = v.rc[room]
         lv = G if v.lay["rooms"][room]["level"] == "GF" else B
         add("room-" + room, room, _box(r[0] + 0.1, r[1] + 0.1, r[2] - 0.1, r[3] - 0.1), lv + ROOM_PLANE_Z[room], card,
-            "Day", "general illuminance (floor)", gauge="minimum")
+            "Day", "general illuminance (floor)", gauge="minimum", spacing=ROOM_PLANE_SPACING.get(room))
     return P

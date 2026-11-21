@@ -116,6 +116,26 @@ def xform_chain(p: Placement) -> list[str]:
     return args
 
 
+def radiance_safe_ies(text: str) -> str:
+    """ies2rad rejects a byte-order mark and the LM-63 negative (circular) opening dimensions that ERCO files carry
+    ("illegal source dimensions", "bad luminaire data"). Strip the BOM and take the absolute value of width/length/height;
+    the photometry is untouched (the point-source model does not use the opening)."""
+    text = text.lstrip("\ufeff")
+    lines = text.splitlines()
+    for i, ln in enumerate(lines):
+        if ln.strip().upper().startswith("TILT=") and ln.strip().upper() == "TILT=NONE":
+            j = i + 1
+            tok = lines[j].split()
+            if len(tok) >= 13:           # n_lamps lumens mult nV nH type units w l h (+ ballast fields on the same line)
+                tok[7:10] = [t.lstrip("-") for t in tok[7:10]]
+                lines[j] = " ".join(tok)
+            elif len(tok) == 10:
+                tok[7:10] = [t.lstrip("-") for t in tok[7:10]]
+                lines[j] = " ".join(tok)
+            break
+    return "\n".join(lines) + "\n"
+
+
 @dataclass
 class RadJob:
     name: str
@@ -153,7 +173,7 @@ class RadJob:
                     if src is None:
                         raise ValueError(f"{p.id}: no ies_text/ies_path/source to hand to Radiance")
                     text = Path(src).read_text(encoding="utf-8", errors="replace")
-                (wd / f"{iesname}.ies").write_text(text, encoding="utf-8", newline="\n")
+                (wd / f"{iesname}.ies").write_text(radiance_safe_ies(text), encoding="utf-8", newline="\n")
                 ies_done[key] = iesname
             iesname = ies_done[key]
             mult = p.dim
