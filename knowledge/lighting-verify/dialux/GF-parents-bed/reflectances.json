@@ -1,0 +1,7 @@
+{
+ "floor": 0.33,
+ "wall": 0.8,
+ "ceiling": 0.85,
+ "maintenance_factor": 0.8,
+ "note": "ASSUMED reflectances (0.80/0.85/0.33), closed room, no furniture; set every surface to these; no windows, no daylight"
+}
