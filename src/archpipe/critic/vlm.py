@@ -110,7 +110,11 @@ def score_view(host: str, rubric: dict, image_jpg: str, bench_jpg: str, title: s
                 replies.append(r)
             out[crit] = pair_score(*replies)
         else:
-            r = chat(host, model, render_prompt(rubric, spec["prompt"], title), [img], opts, SCORE_SCHEMA, think)
+            if rubric["vlm"].get("reference_relative"):
+                imgs = [b64(bench_jpg), img]            # image 1 = reference, image 2 = render under review
+            else:
+                imgs = [img]
+            r = chat(host, model, render_prompt(rubric, spec["prompt"], title), imgs, opts, SCORE_SCHEMA, think)
             out[crit] = clean_score(r)
         log(f"  {crit}: {out[crit].get('score')}")
     return out
