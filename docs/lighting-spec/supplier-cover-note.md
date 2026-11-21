@@ -17,7 +17,7 @@ Every row therefore reads: **"or approved equivalent - submit the IES/LDT file a
 1. For each row, answer one of: **available** (as the example), **equivalent** (tell us the product), or **not found**.
 2. For each equivalent, send the product's **IES or LDT file** (the maker's photometric file) and its **datasheet (PDF)**.
 3. Tell us, for each product, the lumens, colour temperature, CRI (and R9 if known), beam angle, IP rating, dimming
-   protocol, cut-out or size, finish, lead time and price.
+   protocol, cut-out or size and finish. Please do not send prices or lead times at this stage.
 4. If a product is not available, say so; do not substitute silently.
 
 ## What must stay fixed
