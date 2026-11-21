@@ -22,6 +22,9 @@ class Room:
     rect: Rect
     level: str = "GF"
     ceiling_mm: float = 2700.0
+    poly: tuple = ()          # polygon vertices (x, y) mm, counter-clockwise or clockwise; empty = the rectangle `rect`
+    name: str = ""
+    open_to: tuple = ()       # ids of rooms this room opens onto without a door
 
 
 @dataclass
@@ -32,6 +35,9 @@ class Door:
     offset_mm: float          # from the wall's start: W corner for N/S walls, S corner for E/W walls
     width_mm: float
     hinge: str = "start"      # start | end : which end of the opening carries the hinges; latch is the other end
+    hinge_known: bool = True  # False = not in the model: hinge chosen by policy (switch_policy) and flagged
+    garden: bool = False      # glazed/sliding door to the garden (no room switch beside it)
+    operation: str = "hinged"
 
 
 @dataclass
@@ -50,6 +56,8 @@ class Luminaire:
     room: str
     watts: float
     zone: str = ""
+    xy: tuple[float, float] | None = None
+    layer: str = ""
 
 
 @dataclass
@@ -61,6 +69,12 @@ class Equipment:
     pf: float = 1.0
     cat: str = "standard"     # demand category (see demand.py)
     socket_on_cooker: bool = False
+    name: str = ""
+    external: bool = False    # outside the building: buried armoured cable (method D2)
+    board: str = ""           # force a board (default: the sub-board of the room's level)
+    xy: tuple[float, float] | None = None   # load position when it is not in a room (external equipment)
+    status: str = ""          # "" | assumed | confirmed
+    reason: str = ""
 
 
 @dataclass
@@ -81,6 +95,18 @@ class Supply:
 
 
 @dataclass
+class Board:
+    """A distribution board. parent None = main board (fed from the incomer)."""
+    id: str
+    level: str
+    xy: tuple[float, float]
+    parent: str | None = None
+    room: str = ""
+    ambient_c: float = 40.0        # ceiling-void / route ambient for the lighting runs of this board
+    height_mm: float = 1500.0
+
+
+@dataclass
 class House:
     name: str
     rooms: list[Room]
@@ -90,9 +116,30 @@ class House:
     zones: list[LightingZone]
     equipment: list[Equipment]
     supply: Supply
+    boards: list[Board] = field(default_factory=list)       # empty = one board DB-GF at supply.board_xy (test house)
+    extra_devices: list = field(default_factory=list)        # placement.Device records added by an adapter (garden, gate, ...)
+    policy: dict = field(default_factory=dict)               # lighting_pack / socket_pack / level_z_mm ...
+    flags: list = field(default_factory=list)                # adapter notes (assumptions) carried to the reports
+    level_z_mm: dict = field(default_factory=dict)           # level -> finished-floor z (mm)
+    provisional_zones: bool = False                          # lighting zones derived here, not published by L6b
+
+    def board_list(self) -> list[Board]:
+        return self.boards or [Board("DB-GF", "GF", tuple(self.supply.board_xy))]
+
+    def board_for_level(self, level: str) -> Board:
+        """Sub-board of a level; any other level (site, unknown) hangs on the main board."""
+        bl = self.board_list()
+        for b in bl:
+            if b.parent is not None and b.level == level:
+                return b
+        return next((b for b in bl if b.parent is None), bl[0])
 
     def room(self, rid: str) -> Room:
         return next(r for r in self.rooms if r.id == rid)
+
+    def main_board(self) -> Board:
+        bl = self.board_list()
+        return next((b for b in bl if b.parent is None), bl[0])
 
 
 def load_house(path: str | Path) -> House:

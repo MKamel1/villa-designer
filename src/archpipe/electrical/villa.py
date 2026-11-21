@@ -1,0 +1,248 @@
+"""Adapter: the L2 design model (archpipe.model.load("D1")) -> electrical.model.House.
+
+Everything the model does not carry is an explicit, flagged assumption (House.flags), never silent:
+  - door hinge/latch side: not in the model, chosen by policy (hinge at the end of the opening nearer the wall corner);
+  - bed head side: derived from the wall the bed stands against;
+  - luminaire watts for strips, pendants and lamps (83 of 142): flux / 90 lm/W placeholder;
+  - lighting control zones: provisional, one per room and layer, until lane L6b publishes knowledge/lighting/zones-d1.json;
+  - equipment: knowledge/electrical/d1-equipment-assumed.json (status "assumed");
+  - board positions: pantry (main board), stair-foot hall (basement board), stair-head gallery (ground-floor board).
+"""
+from __future__ import annotations
+
+import json
+import math
+from pathlib import Path
+
+from .. import contracts
+from .. import model as design_model
+from .model import Board, Door, Equipment, Furniture, House, Luminaire, Room, Supply
+from .placement import Device, room_walls
+
+ROOT = Path(__file__).resolve().parents[3]
+EQUIPMENT_JSON = ROOT / "knowledge" / "electrical" / "d1-equipment-assumed.json"
+ZONES_JSON = ROOT / "knowledge" / "lighting" / "zones-d1.json"
+EFFICACY_LM_PER_W = 90.0          # placeholder where the model has no watts (policy, flagged)
+LEVEL_Z_MM = {"B": -3000.0, "GF": 0.0, "SITE": -3000.0}      # finished floor, scene datum (L2-model.md)
+KIND_BY_OCC = {"ensuite": "bathroom"}
+FURN_KIND = {"bed_single": "bed", "bed_small_double": "bed", "bed_double": "bed", "desk": "desk", "tv_unit": "tv", "screen": "tv",
+             "sofa_2seat": "sofa", "sofa_3seat": "sofa", "sofa_4seat": "sofa", "base_run": "worktop", "folding_counter": "worktop",
+             "island": "island", "shower_walkin": "shower", "bath": "bath"}
+BOARD_PLACES = {"MDB": ("pantry", "S", 0.5, "B", 40.0), "DB-B": ("hall-b", "S", 0.5, "B", 40.0), "DB-GF": ("gallery-end", "S", 0.5, "GF", 50.0)}
+NON_ROOMS = {"core", "yard", "deck"}
+
+
+def _rect(poly) -> tuple[float, float, float, float]:
+    xs = [p[0] for p in poly]
+    ys = [p[1] for p in poly]
+    return (min(xs), min(ys), max(xs), max(ys))
+
+
+def _furn_rect(e) -> tuple[float, float, float, float]:
+    w, d = e.size[0], e.size[1]
+    if int(round(abs(e.rotation_deg))) % 180 == 90:
+        w, d = d, w
+    cx, cy = e.placement[0], e.placement[1]
+    return (cx - w / 2, cy - d / 2, cx + w / 2, cy + d / 2)
+
+
+def _pick_wall(room: Room, rect, kind: str, flags: list, fid: str) -> tuple[str, float]:
+    """(wall name, gap mm) of the wall a piece stands against. Beds: the wall at one of the short ends (head wall)."""
+    walls = room_walls(room)
+    gaps = {n: w.gap(rect) for n, w in walls.items()}
+    if kind == "bed":
+        long_x = (rect[2] - rect[0]) >= (rect[3] - rect[1])
+        head = {n: g for n, g in gaps.items() if abs(walls[n].n[0] if long_x else walls[n].n[1]) > 0.9}
+        if head and min(head.values()) <= 600.0:
+            n = min(head, key=head.get)
+            return n, head[n]
+        n = min(gaps, key=lambda k: (gaps[k], -walls[k].length))
+        flags.append(f"{fid}: bed head side is not authored and no short end is within 600 mm of a wall; bedside sockets sit at both ends of the wall it stands along ({n})")
+        return n, gaps[n]
+    n = min(gaps, key=lambda k: (gaps[k], -walls[k].length))
+    return n, gaps[n]
+
+
+def _door_records(els, rooms: dict[str, Room], flags: list) -> list[Door]:
+    out: list[Door] = []
+    assumed = 0
+    for e in els:
+        if e.kind != "door":
+            continue
+        width = float(e.params.get("width_mm") or e.size[0])
+        x, y = e.placement[0], e.placement[1]
+        garden = bool(e.params.get("garden"))
+        for rid in e.params.get("rooms", []):
+            r = rooms.get(rid)
+            if r is None or rid in NON_ROOMS:
+                continue
+            best = None
+            for n, w in room_walls(r).items():
+                dep = abs(w.depth_of(x, y))
+                al = w.along_of(x, y)
+                if dep <= 200.0 and -1.0 <= al <= w.length + 1.0 and (best is None or dep < best[0]):
+                    best = (dep, n, w, al)
+            if best is None:
+                flags.append(f"{e.id}: door centre ({x:.0f}, {y:.0f}) is not on any wall of {rid}; no switch placed for it")
+                continue
+            _, n, w, al = best
+            off = al - width / 2
+            hinge_known = "hinge" in e.params
+            if hinge_known:
+                hinge = str(e.params["hinge"])
+            else:
+                hinge = "start" if off <= w.length - (off + width) else "end"   # hinge near the corner: latch on the open side
+                assumed += 1
+            out.append(Door(f"{e.id}@{rid}", rid, n, off, width, hinge, hinge_known, garden, str(e.params.get("operation") or "hinged")))
+    flags.append(f"door hinge/latch side is not in the model: {assumed} of {len(out)} door-room records use the policy 'hinge at the end of the opening nearer the corner, switch at the latch (open) side'. "
+                 "Wall-mounted switches beside glazed garden doors are not placed.")
+    return out
+
+
+def _provisional_zones(lums: list[Luminaire]) -> list[contracts.LightingZone]:
+    by: dict[tuple[str, str, str], list[Luminaire]] = {}
+    for l in lums:
+        by.setdefault((l.room, l.layer or "ambient", l.zone), []).append(l)
+    zs = []
+    for (room, layer, _), ls in sorted(by.items()):
+        zid = f"Z-PROV-{room}-{layer}"
+        for l in ls:
+            l.zone = zid
+        zs.append(contracts.LightingZone(zid, room, layer, tuple(l.id for l in ls), round(sum(l.watts for l in ls), 2), "switched"))
+    return zs
+
+
+def _published_zones(lums: list[Luminaire]) -> list[contracts.LightingZone] | None:
+    """L6b's zones-d1.json, if present: [{id, room, layer, luminaire_ids, watts, dimming}] or {"zones": [...]}."""
+    if not ZONES_JSON.exists():
+        return None
+    raw = json.loads(ZONES_JSON.read_text(encoding="utf-8"))
+    raw = raw["zones"] if isinstance(raw, dict) else raw
+    zs = [contracts.LightingZone(z["id"], z["room"], z["layer"], tuple(z["luminaire_ids"]), float(z["watts"]), z["dimming"]) for z in raw]
+    byid = {l.id: l for l in lums}
+    for z in zs:
+        for i in z.luminaire_ids:
+            if i in byid:
+                byid[i].zone = z.id
+    return zs
+
+
+def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> House:
+    els = design_model.load("D1", path=model_path) if model_path else design_model.load("D1")
+    flags: list[str] = []
+    rooms: dict[str, Room] = {}
+    for e in els:
+        if e.kind != "room":
+            continue
+        p = e.params
+        poly = tuple((float(a), float(b)) for a, b in p["polygon_mm"])
+        occ = p.get("occupancy", "")
+        rooms[e.room] = Room(e.room, KIND_BY_OCC.get(occ, "living" if occ in ("living", "media") else occ), _rect(poly), e.level,
+                             float(p.get("clear_height_mm") or 2700.0), poly, str(p.get("name", "")), tuple(p.get("open_to", [])))
+    # kitchen-like rooms keep the engine's special kind
+    for rid, occ in (("kitchen", "kitchen"), ("kitchen-island", "kitchen")):
+        if rid in rooms:
+            rooms[rid].kind = occ
+    nonrect = [r.id for r in rooms.values() if len(r.poly) != 4]
+    flags.append(f"room geometry: {len(rooms)} rooms from the model polygons; {len(nonrect)} are not 4-vertex rectangles ({nonrect}); the placement engine walks polygon edges, so the D1 result does not depend on rectangles")
+
+    doors = _door_records(els, rooms, flags)
+
+    # fixtures -> shower/bath data
+    heads = {e.params.get("over"): e for e in els if e.kind == "fixture" and e.params.get("fixture_kind") == "ceiling-rain-head"}
+    furniture: list[Furniture] = []
+    skipped = 0
+    for e in els:
+        if e.kind != "furniture" or e.room not in rooms:
+            continue
+        t = e.params.get("type", "")
+        kind = FURN_KIND.get(t)
+        if kind is None:
+            skipped += 1
+            continue
+        r = rooms[e.room]
+        rect = _furn_rect(e)
+        wall, gap = _pick_wall(r, rect, kind, flags, e.id)
+        params: dict = {"model_type": t, "gap_mm": round(gap, 1)}
+        if kind in ("shower", "bath"):
+            over = next((k for k in heads if k and e.id == "furn-" + k), None)
+            head = heads.get(over) if over else None
+            params["head_h_mm"] = float(head.placement[2]) if head else 2250.0
+            if kind == "bath":
+                params.update(has_basin=True, rim_mm=float(e.size[2] or 550.0))
+            elif e.size[2] > 0:                       # shower with a low tray
+                params.update(has_basin=True, rim_mm=float(e.size[2]))
+            else:                                     # wet-zone shower, no tray: zones from the fixed outlet
+                params["has_basin"] = False
+                if head:
+                    params["outlet_xy"] = [head.placement[0], head.placement[1]]
+            flags.append(f"{e.id}: wet-area zone data from the model ({'tray rim ' + str(params.get('rim_mm')) + ' mm' if params['has_basin'] else 'no tray, outlet at the rain head'}; head height {params['head_h_mm']:.0f} mm)")
+        elif kind in ("worktop",) and gap > 300.0:
+            continue
+        elif kind == "sofa" and gap > 1200.0:
+            flags.append(f"{e.id}: sofa stands {gap:.0f} mm from the nearest wall; no end sockets placed (floor box to decide with the interior design)")
+            continue
+        furniture.append(Furniture(e.id, e.room, kind, rect, wall, params))
+
+    # luminaires and provisional zones
+    lums: list[Luminaire] = []
+    derived = 0
+    for e in els:
+        if e.kind != "luminaire":
+            continue
+        w = e.params.get("watts")
+        if not w:
+            w = round(float(e.params.get("flux_lm") or 0.0) / EFFICACY_LM_PER_W, 2)
+            derived += 1
+        lums.append(Luminaire(e.id, e.room, float(w), "", (e.placement[0], e.placement[1]), str(e.params.get("layer", ""))))
+    flags.append(f"luminaire watts: {derived} of {len(lums)} luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / {EFFICACY_LM_PER_W:g} lm/W, a placeholder for lane L6b to replace")
+    pub = _published_zones(lums)
+    if pub is None:
+        zones = _provisional_zones(lums)
+        flags.append(f"lighting zones are PROVISIONAL: knowledge/lighting/zones-d1.json (lane L6b) was not available; {len(zones)} zones derived as one per room and layer")
+    else:
+        zones = pub
+        flags.append(f"lighting zones from knowledge/lighting/zones-d1.json (lane L6b): {len(zones)} zones")
+
+    # equipment (assumed)
+    eq = json.loads(Path(equipment_path).read_text(encoding="utf-8"))
+    anchors = {k: tuple(v["xy"]) for k, v in eq["anchors"].items()}
+    site_rooms: dict[str, Room] = {}
+    equipment: list[Equipment] = []
+    extra: list[Device] = []
+    plot = (-123.0, -29916.0, 28557.0, -20601.0)
+    for rec in eq["equipment"]:
+        xy = anchors.get(rec.get("anchor", ""))
+        room = rec["room"]
+        if rec.get("external"):
+            if room not in site_rooms:
+                x, y = xy
+                site_rooms[room] = Room(room, "outdoor", (x - 1000.0, y - 1000.0, x + 1000.0, y + 1000.0), "SITE", 0.0, name=room)
+        equipment.append(Equipment(rec["id"], room, rec["kind"], rec["kw"], rec.get("pf", 1.0), rec.get("cat", "standard"), False,
+                                   rec.get("name", ""), bool(rec.get("external")), rec.get("board", ""), xy, rec.get("status", ""), rec.get("reason", "")))
+        if rec.get("external"):
+            extra.append(Device(f"FCU-{room}-{rec['id']}", "fcu", room, xy[0], xy[1], 1200.0, "E11-external-equipment-point", rec["id"], {"basis": "anchor " + rec["anchor"]}))
+    gx = [anchors[g["anchor"]] for g in eq["garden_sockets"]]
+    site_rooms["site-garden"] = Room("site-garden", "outdoor", plot, "SITE", 0.0, name="garden")
+    for g, (x, y) in zip(eq["garden_sockets"], gx):
+        extra.append(Device(f"SOC-site-garden-{g['id']}", "socket", "site-garden", x, y, 400.0, "E11-garden-socket", "", {"ip": "IP66", "rcd": "30 mA", "basis": g["reason"]}))
+    all_rooms = list(rooms.values()) + list(site_rooms.values())
+
+    s = eq["supply"]
+    # boards: positions on a wall of the chosen room
+    boards: list[Board] = []
+    for bid, (rid, wall, frac, lvl, amb) in BOARD_PLACES.items():
+        w = room_walls(rooms[rid])[wall]
+        x, y = w.point(w.length * frac)
+        boards.append(Board(bid, lvl, (x, y), None if bid == "MDB" else "MDB", rid, amb))
+    mdb = boards[0]
+    sup = Supply(s["v_phase"], s["phases"], s["earthing"], s["ra_ohm"], None, mdb.xy, s["feeder_length_m"], s["feeder_ambient_c"],
+                 s["roof_ambient_c"], s["drop_m"], None, s["premises"], s["ra_note"])
+    flags.append("boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; "
+                 "meter position and utility cabinet at the street fence are assumptions to confirm")
+    flags.append("routes: Manhattan distance x 1.15 from the board to the farthest load point plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops")
+    h = House("D1", all_rooms, doors, furniture, lums, zones, equipment, sup, boards, extra,
+              {"lighting_pack": "level", "lighting_target_a": 3.0, "socket_pack": "cluster", "supply_extra": {k: s[k] for k in ("single_phase_limit_a", "single_phase_limit_note")}},
+              flags, dict(LEVEL_Z_MM))
+    h.provisional_zones = pub is None
+    return h

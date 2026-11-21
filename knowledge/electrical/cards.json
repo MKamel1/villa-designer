@@ -390,6 +390,56 @@
   "url_or_path": ""
  },
  {
+  "id": "EL-POL-ELV",
+  "document": "ours; not from a standard",
+  "edition": "L7b v0",
+  "locator": "EA15",
+  "quote": "",
+  "value": "Smoke detector 7.5 m and heat detector 5.3 m horizontal radius (flat ceiling); Wi-Fi access point 8 m radius, one per level at least; data point at every bedroom, study, TV wall and cinema; CCTV at the gate, the ramp/deck and plot corners; video intercom at the gate with monitors on each level",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-G1-CINEMA",
+  "document": "docs/decisions/G1-safety-decisions-2026-11-21.md",
+  "edition": "2026-11-21",
+  "locator": "LS5",
+  "quote": "",
+  "value": "Client waiver of the basement cinema (windowless inner room reached only through the lounge); mitigation: interlinked smoke detection in the lounge and the cinema, to be included by the electrical lane",
+  "status": "policy",
+  "url_or_path": "docs/decisions/G1-safety-decisions-2026-11-21.md"
+ },
+ {
+  "id": "EL-POL-ROUTE",
+  "document": "ours; not from a standard",
+  "edition": "L7b v0",
+  "locator": "route length",
+  "quote": "",
+  "value": "No wall/slab routing: length = Manhattan distance from the board to the farthest load point x 1.15 + 3 m of vertical drops; sub-board feeders add the storey rise",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-POL-LATCH",
+  "document": "ours; not from a standard",
+  "edition": "L7b v0",
+  "locator": "EA1",
+  "quote": "",
+  "value": "Where the model has no door hinge data the hinge is placed at the end of the opening nearer the wall corner and the switch goes on the open (latch) side at 1.15 m, and the door is flagged",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
+  "id": "EL-POL-SUPPLY",
+  "document": "ours; not from a standard",
+  "edition": "L7b v0",
+  "locator": "E-01/E-05",
+  "quote": "",
+  "value": "Recommend a three-phase service when the single-phase equivalent maximum demand exceeds 63 A; the utility's own single-phase limit is not verified",
+  "status": "policy",
+  "url_or_path": ""
+ },
+ {
   "id": "EL-UNV-B522",
   "document": "IEC 60364-5-52 Tables B.52.2, B.52.3, B.52.5",
   "edition": "-",
