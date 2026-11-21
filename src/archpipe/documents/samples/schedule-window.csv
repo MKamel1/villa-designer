@@ -1,0 +1,9 @@
+tag,id,level,room,width_mm,height_mm,sill_mm,glazed_area_m2,host_wall
+W01,window-B-dirty-kitchen-0,B,dirty kitchen + laundry (full-height window at the end),2590,2300,0,5.96,wall-B-ext-16
+W02,window-GF-family-bath-5,GF,family bathroom,800,600,1700,0.48,wall-GF-ext-26
+W03,window-GF-kids-a-3,GF,kids bedroom A,2400,1400,900,3.36,wall-GF-ext-26
+W04,window-GF-kids-b-4,GF,kids bedroom B,2350,1400,900,3.29,wall-GF-ext-26
+W05,window-GF-parents-bed-6,GF,parents' bedroom,2400,1400,900,3.36,wall-GF-ext-26
+W06,window-GF-parents-bed-7,GF,parents' bedroom,2040,1400,900,2.86,wall-GF-ext-35
+W07,window-GF-study-game-1,GF,study / game room (open to the stair; sliding door to the deck),2240,1400,900,3.14,wall-GF-ext-26
+W08,window-GF-study-game-2,GF,study / game room (open to the stair; sliding door to the deck),1520,1400,900,2.13,wall-GF-ext-27

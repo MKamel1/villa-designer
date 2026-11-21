@@ -75,6 +75,8 @@ lanes:
   L6b: # Wave 2: villa lighting design
     - src/archpipe/lightcalc/**
     - src/archpipe/concept/villa_lighting.py
+    - src/archpipe/fixture_record.py
+    - src/archpipe/concept/fixture_record.py
     - knowledge/lighting/**
     - tests/lightcalc/**
     - docs/lanes/L6*.md
