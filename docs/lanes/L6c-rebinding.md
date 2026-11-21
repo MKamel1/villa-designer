@@ -190,3 +190,17 @@ python -m archpipe.luminaires.spec_sheet                                  # supp
 ```
 Iterations c0 (all at driver 1.0), c1 (redesign + sizing), c2/c3/c4/c5 (B-open, kids, parents' bedroom re-runs), final (full runs c6 + c7 merged). Drivers of the final table equal the solve of the final
 results (residual change 0).
+
+## 9. Hand-offs (not mine to edit)
+
+Run on this branch: `tests/lightcalc` + `tests/luminaires` **125 passed, 1 skipped**; `scripts/lane_guard.py L6c` clean. Outside my ownership, four tests that encode the old (LSEVO) state now fail; the two legacy
+`tests/test_villa_lighting.py` failures (`test_every_task_and_room_target_is_met`, `test_vanity_sconces_914_to_1016_apart`: 3000 K expectation) already failed on `c33cf26`.
+
+| test | why it fails now | who |
+|---|---|---|
+| `tests/lightverify/test_v1_design.py::test_design_inputs_pass` | LV's V1 *instance* check compares each placement's lumens with the whole fixture's record; the table pendant is now 8 product samples (57.8 lm each, record 462.5 lm). The kind row passes (3558 lm integrated = bound 3558 lm via the derived x2 file). Fix: sum samples by `meta["parent"]` for product placements, as it already does for generic ones. | LV |
+| `tests/lightverify/test_v5_v6_v7.py` (2) | they compare LV's frozen Radiance/Cycles results of the L6b design with the live design; the design and the products changed. Re-run LV V5-V7 on `knowledge/lighting/radiance-l6c/` (Cycles must be re-run: not done here). | LV |
+| `tests/test_villa_lighting.py::Photometry::test_verified_products_are_cached...` | expects `LSEVO-*` as the bound SKUs (now ERCO). | lead / INT |
+| `knowledge/lighting-verify/dialux/` | the DIALux package holds the L6b fixtures and IES; regenerate with `lightverify.dialux_pack` before V11. | LV / client |
+
+`src/archpipe/model/data/d1-elements.json` (L2 snapshot) must be regenerated from the new design (fixture ids, kinds and lumens changed; 5 DL added/removed). The render (`out/villa/render-d1`) still uses the old IES: re-render after INT.
