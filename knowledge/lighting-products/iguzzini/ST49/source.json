@@ -1,0 +1,19 @@
+{
+ "code": "ST49",
+ "maker": "iguzzini",
+ "name": "Underscore15: Underscore Ledstrip Hi Performance - 5W/m - 5W 680lm (1.0 m) - 2700K",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.iguzzini.com/en/st49/",
+ "files": {
+  "ldt": {
+   "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ldt",
+   "sha256": "996ff8e8cf08cd6099843660717ded00fcf2890a1ef1af04a244c2ec1af58b65"
+  },
+  "ies": {
+   "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ies",
+   "sha256": "64bec09f8eb28bbe4e64b8fe4c58fb347fd899b3372346dec288f76f94fc95a3"
+  }
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read",
+ "origin_note": null
+}

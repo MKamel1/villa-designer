@@ -1,0 +1,19 @@
+{
+ "code": "451G",
+ "maker": "iguzzini",
+ "name": "Sipario LV \u00d8 73 - CASAMBI - Flood - Reflector - 19.9W 1957.5lm - 3000K - CRI 92",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.iguzzini.com/en/451g/",
+ "files": {
+  "ldt": {
+   "path": "knowledge/lighting-products/iguzzini/451G/451G.ldt",
+   "sha256": "e5433f1d94f128c0d344f561b8f34fbe43b620ed257dcaf46017ab8e31a50ce7"
+  },
+  "ies": {
+   "path": "knowledge/lighting-products/iguzzini/451G/451G.ies",
+   "sha256": "d4d1904acf4a7386b48e60b1ded98ff5b1977e0f151e225fc2e89960f2254dd8"
+  }
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read",
+ "origin_note": null
+}
