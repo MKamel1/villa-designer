@@ -1,0 +1,54 @@
+# Lane ownership for the parallel A+ plan (docs/quality/PLAN.md section 4).
+# A lane branch may only add or modify paths matching its globs, plus its own
+# lessons file docs/lessons/<lane>.md. scripts/lane_guard.py enforces this.
+base: integ/aplus
+lanes:
+  L1:  # Egyptian compliance
+    - src/archpipe/compliance/**
+    - knowledge/eg/**
+    - tests/compliance/**
+    - docs/lanes/L1*.md
+  L2:  # design model
+    - src/archpipe/model/**
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/blender/villa_scene.py
+    - src/archpipe/guard_registry.py
+    - tests/model/**
+    - docs/lanes/L2*.md
+  L3:  # vision critic
+    - src/archpipe/critic/**
+    - knowledge/critic/**
+    - tests/critic/**
+    - scripts/critic_*.py
+    - docs/lanes/L3*.md
+  L4:  # products + style
+    - src/archpipe/products/**
+    - src/archpipe/interior/**
+    - knowledge/products/**
+    - tests/interior/**
+    - docs/lanes/L4*.md
+  L5:  # documents (Revit sheets)
+    - revit/sheets/**
+    - src/archpipe/documents/**
+    - tests/documents/**
+    - docs/lanes/L5*.md
+  L6:  # lighting engine
+    - src/archpipe/lightcalc/**
+    - knowledge/lighting/**
+    - tests/lightcalc/**
+    - docs/lanes/L6*.md
+  L7:  # electrical engine
+    - src/archpipe/electrical/**
+    - knowledge/electrical/**
+    - tests/electrical/**
+    - docs/lanes/L7*.md
+  L8:  # workstation ops
+    - ops/workstation/**
+    - scripts/workstation.py
+    - tests/ops/**
+    - docs/lanes/L8*.md
+  R:   # sourcing
+    - knowledge/sources/**
+    - docs/lanes/R*.md
+  LEAD:
+    - "**"
