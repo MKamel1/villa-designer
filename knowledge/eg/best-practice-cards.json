@@ -1,0 +1,335 @@
+{
+  "note": "International best-practice thresholds (UK Approved Documents K/B/M, Metric Handbook, SLL, IRC via Residential Interior Design). status=sourced: verbatim text read in the L1 session; status=std: project evidence card in knowledge/library.json (page checked 2026-09-25).",
+  "cards": [
+    {
+      "id": "ukadk-private-stair-rise-max",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.3 Table 1.1, printed p.5",
+      "quote": "Rise* Going* Minimum (mm) Maximum (mm) Minimum (mm) Maximum (mm) Private stair 150 220 220 300",
+      "value": "rise 150-220 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-private-stair-going-min",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.3 Table 1.1, printed p.5",
+      "quote": "Rise* Going* Minimum (mm) Maximum (mm) Minimum (mm) Maximum (mm) Private stair 150 220 220 300",
+      "value": "going 220-300 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-private-stair-pitch-max",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "Table 1.1 note 1, printed p.5",
+      "quote": "The maximum pitch for a private stair is 42°.",
+      "value": "42 deg",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-2r-plus-g",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "Table 1.1 footnote *, printed p.5",
+      "quote": "The normal relationship between the dimensions of the rise and going is: twice the rise plus the going (2R + G) equals between 550mm and 700mm.",
+      "value": "550-700 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-stair-headroom-min",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.11 and Diagram 1.3, printed p.7",
+      "quote": "On the access between levels, provide the minimum headroom shown in Diagram 1.3. (Diagram: At least 2m over flight and landings)",
+      "value": "2000 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-open-risers-dwelling",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.9, printed p.6",
+      "quote": "Steps may have open risers if they comply with both of the following guidance. a. Overlap treads by a minimum of 16mm. b. Construct the steps so that a 100mm diameter sphere cannot pass through the open risers.",
+      "value": "overlap >= 16 mm and 100 mm sphere cannot pass",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-closed-risers",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.6, printed p.6 (A+ target: buildings other than dwellings)",
+      "quote": "Use risers that are not open.",
+      "value": "closed risers",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-soffit-under-stair",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.8, printed p.6",
+      "quote": "If the soffit beneath a stair is less than 2m above floor level, protect the area beneath a stair with one of the following. a. Guarding and low level cane detection. b. A barrier giving the same degree of protection.",
+      "value": "2000 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-landing-1-20",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.20, printed p.10",
+      "quote": "At the top and bottom of every flight, provide landings the width and length at least as great as the smallest width of the flight (see Diagram 1.6).",
+      "value": "landing >= flight width",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-landing-door-1-24",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.24 and Diagram 1.8, printed p.11",
+      "quote": "A door may swing across a landing at the bottom of a flight, but only as shown in Diagram 1.8. (Diagram: at least 400mm each side of the door swing, landing at least the width of the flight)",
+      "value": "400 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-guarding-drop-dwelling",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "Section 3, para 3.2a, printed p.22",
+      "quote": "In dwellings, provide guarding where people could fall from a height of more than 600 mm.",
+      "value": "600 mm",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id ukadk-guarding-drop-dwelling (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "ukadk-guarding-height-internal",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "Diagram 3.1, printed p.24",
+      "quote": "Single family dwellings: Stairs, landings, ramps, edges of internal floors 900mm for all elements",
+      "value": "900 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-guarding-height-external",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "Diagram 3.1, printed p.24",
+      "quote": "Single family dwellings: External balconies, including Juliette balconies and edges of roof 1100mm",
+      "value": "1100 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-guard-sphere",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "printed p.16 and p.24",
+      "quote": "ensure that a 100mm diameter sphere cannot pass through any openings in the guarding.",
+      "value": "100 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-k2b-sunken-areas",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "Requirement K2, printed p.22",
+      "quote": "any light well, basement area or similar sunken area connected to a building, shall be provided with barriers where it is necessary to protect people in or about the building from falling.",
+      "value": "barrier required (height not tabulated; A+ target 1100 mm by analogy with external edges)",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "ukadk-glazing-guard-800",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "Diagram 3.1, printed p.24",
+      "quote": "Glazing in all buildings At opening windows except roof windows in loft extensions, see Approved Document B1 800mm",
+      "value": "800 mm",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "adb-escape-window-area",
+      "document": "Approved Document B Volume 1: Dwellings",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, England (project evidence card)",
+      "locator": "para 2.10a(i), printed p.13",
+      "quote": "Emergency escape window: unobstructed openable area at least 0.33 m2.",
+      "value": "0.33 m2",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id adb-escape-window-area (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "adb-escape-window-min",
+      "document": "Approved Document B Volume 1: Dwellings",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, England (project evidence card)",
+      "locator": "para 2.10a(ii), printed p.13",
+      "quote": "Emergency escape window: at least 450 mm high and 450 mm wide.",
+      "value": "450 x 450 mm",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id adb-escape-window-min (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "adb-escape-window-sill",
+      "document": "Approved Document B Volume 1: Dwellings",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, England (project evidence card)",
+      "locator": "para 2.10a(iii), printed p.13",
+      "quote": "Bottom of the openable area at most 1100 mm above the floor.",
+      "value": "1100 mm",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id adb-escape-window-sill (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "adb-inner-room",
+      "document": "Approved Document B Volume 1: Dwellings",
+      "edition": "2019 edition incorporating 2020 and 2022 amendments, England (project evidence card)",
+      "locator": "para 2.11, printed p.13",
+      "quote": "An inner room (escape only through another room) is permitted only for a kitchen, laundry/utility, dressing room, bathroom/WC/shower, a room on a storey at most 4.5 m above ground with an emergency escape window (2.10), or a gallery (2.15).",
+      "value": "inner room only for listed uses",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id adb-inner-room-2-11 (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "mh-dwelling-ceiling-min",
+      "document": "Metric Handbook: Planning and Design Data",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 'Ceiling heights', printed p.22-13",
+      "quote": "Minimum reasonable ceiling height for domestic buildings (2.4 m preferable; NDSS: 2.3 m over 75 % of the floor area).",
+      "value": "2.3 m over 75 % of floor; 2.4 m preferable",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id mh-dwelling-ceiling-min (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "ndss-double-bedroom-area",
+      "document": "Metric Handbook: Planning and Design Data",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 s.2.2 (NDSS), printed p.22-4",
+      "quote": "A double (or twin) bedroom has a floor area of at least 11.5 m2.",
+      "value": "11.5 m2",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id ndss-double-bedroom-area (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "ndss-first-double-bedroom-width",
+      "document": "Metric Handbook: Planning and Design Data",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 s.2.2 (NDSS), printed p.22-4",
+      "quote": "One double (or twin) bedroom is at least 2.75 m wide.",
+      "value": "2.75 m",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id ndss-first-double-bedroom-width (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "ndss-other-double-bedroom-width",
+      "document": "Metric Handbook: Planning and Design Data",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Chapter 22 s.2.2 (NDSS), printed p.22-4",
+      "quote": "Every other double (or twin) bedroom is at least 2.55 m wide.",
+      "value": "2.55 m",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id ndss-other-double-bedroom-width (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "mh-bathroom-m42-4.30",
+      "document": "Metric Handbook: Planning and Design Data",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Figure 22.12d, printed p.22-11",
+      "quote": "Accessible and adaptable dwelling bathroom: minimum recommended 2150 x 2000 mm (4.30 m2).",
+      "value": "4.30 m2 (target)",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id mh-bathroom-m42-4.30 (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "mh-wc-m42-2.61",
+      "document": "Metric Handbook: Planning and Design Data",
+      "edition": "7th ed., 2022 (Routledge)",
+      "locator": "Figure 22.12c, printed p.22-11",
+      "quote": "Accessible and adaptable dwelling WC: minimum recommended 1450 x 1800 mm (2.61 m2).",
+      "value": "2.61 m2 (target)",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id mh-wc-m42-2.61 (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "ukadm-door-750",
+      "document": "Approved Document M Volume 1 Dwellings",
+      "edition": "2015 incl. 2016 amendments",
+      "locator": "M4(1) Table 1.1 / M4(2) Table 2.1, printed p.8 / p.17",
+      "quote": "Door clear opening 750 mm or wider needs a 900 mm corridor when approached head on.",
+      "value": "750 mm clear",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id ukadm-door-750-corridor-headon (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "ukadm-entrance-door-min",
+      "document": "Approved Document M Volume 1 Dwellings",
+      "edition": "2015 incl. 2016 amendments",
+      "locator": "M4(1) para 1.14a, printed p.7",
+      "quote": "Principal private entrance door minimum clear opening width.",
+      "value": "775 mm clear",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id ukadm-entrance-door-min (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "sll-min-adf-living",
+      "document": "SLL Code for Lighting",
+      "edition": "2012 (SLL)",
+      "locator": "Chapter 5 Table 5.2, printed p.120",
+      "quote": "Living rooms: minimum average daylight factor 1.5 %.",
+      "value": "1.5 %",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id sll-min-adf-living (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "sll-min-adf-bedroom",
+      "document": "SLL Code for Lighting",
+      "edition": "2012 (SLL)",
+      "locator": "Chapter 5 Table 5.2, printed p.120",
+      "quote": "Bedrooms: minimum average daylight factor 1.0 %.",
+      "value": "1.0 %",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id sll-min-adf-bedroom (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "sll-min-adf-kitchen",
+      "document": "SLL Code for Lighting",
+      "edition": "2012 (SLL)",
+      "locator": "Chapter 5 Table 5.2, printed p.120",
+      "quote": "Kitchens: minimum average daylight factor 2.0 %.",
+      "value": "2.0 %",
+      "status": "std",
+      "url_or_path": "knowledge/library.json evidence id sll-min-adf-kitchen (page checked by the project 2026-09-25; quote below is the card summary, not re-read in the L1 session)"
+    },
+    {
+      "id": "irc-r303-glazing",
+      "document": "Residential Interior Design: A Guide to Planning Spaces (quoting IRC R303.1)",
+      "edition": "4th ed., 2022 (Wiley)",
+      "locator": "Chapter 4 Related Codes and Constraints, printed p.92",
+      "quote": "habitable rooms should be provided with \"aggregate glazing area of not less than 8 percent of the floor area.\"",
+      "value": "8 % glazing / floor area (US IRC; best-practice benchmark)",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
+      "id": "irc-r310-escape",
+      "document": "Residential Interior Design: A Guide to Planning Spaces (quoting IRC R310)",
+      "edition": "4th ed., 2022 (Wiley)",
+      "locator": "Chapter 6 Related Codes and Constraints, printed p.169",
+      "quote": "This section describes regulations related to basements with habitable space as well as sleeping rooms and requires that they have at least one openable emergency escape and rescue opening.",
+      "value": "basement habitable space and sleeping rooms: >= 1 escape opening",
+      "status": "sourced",
+      "url_or_path": ""
+    }
+  ]
+}
