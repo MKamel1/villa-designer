@@ -179,6 +179,7 @@ def luminaire_schedule(elements: list[DesignElement]) -> list[dict]:
         key = (p.get("fixture_kind", ""), ph.get("manufacturer", ""), ph.get("code", ""), p.get("what", ""))
         r = g.setdefault(key, {"mark": key[0], "manufacturer": key[1], "code": key[2], "description": key[3],
                                "cct_k": p.get("cct_k"), "lumens": p.get("flux_lm"), "watts": p.get("watts") or 0.0,
+                               "lm_per_w": round(p["flux_lm"] / p["watts"], 1) if p.get("flux_lm") and p.get("watts") else None,
                                "count_B": 0, "count_GF": 0, "total_watts": 0.0, "type_id": p.get("type_id", "")})
         r["count_" + e.level] = r.get("count_" + e.level, 0) + 1
         r["total_watts"] = round(r["total_watts"] + (p.get("watts") or 0.0), 1)

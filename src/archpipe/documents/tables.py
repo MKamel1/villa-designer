@@ -106,9 +106,9 @@ def render_table_sheet(els: list[DesignElement], spec: dict, sheet: dict, out_st
                    [9, 8, 70, 26, 34, 26, 20, 16], "Finish schedule (codes from the model; blank = none authored)"),
         "furniture": (schedules.furniture_schedule(els), ["id", "level", "room", "type", "w_mm", "d_mm", "h_mm", "product"],
                       [56, 8, 52, 30, 12, 12, 12, 30], "Furniture schedule (dressing props excluded)"),
-        "luminaire": (schedules.luminaire_schedule(els), ["mark", "manufacturer", "code", "description", "cct_k", "lumens", "watts",
+        "luminaire": (schedules.luminaire_schedule(els), ["mark", "manufacturer", "code", "description", "cct_k", "lumens", "watts", "lm_per_w",
                                                           "count_B", "count_GF", "total_watts"],
-                      [14, 22, 28, 70, 10, 12, 10, 10, 10, 14], "Luminaire schedule (one row per type)"),
+                      [14, 20, 26, 62, 10, 12, 10, 10, 10, 10, 14], "Luminaire schedule (one row per type)"),
     }[v]
     sh = plans._Sheet(0, 0, 0, 0)
     top = plans.PAPER[1] - plans.EDGE - 14
