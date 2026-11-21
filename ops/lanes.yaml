@@ -45,6 +45,7 @@ lanes:
   L8:  # workstation ops
     - ops/workstation/**
     - scripts/workstation.py
+    - scripts/villa_render.py
     - tests/ops/**
     - docs/lanes/L8*.md
   R:   # sourcing
