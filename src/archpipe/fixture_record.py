@@ -186,6 +186,19 @@ def bind_products(ies_dir=None):
     if _products_bound:
         return PRODUCTS
     ies_dir = Path(ies_dir or Path(__file__).resolve().parents[2] / 'out/villa/render-d1/ies')
+    try:
+        lib.get('iguzzini', 'LSEVO-AAK3EW', 0)
+    except Exception:
+        # L6b: no luminaire library on this machine (e.g. the workstation checkout): the verified rows and IES files of the
+        # four bound kinds are frozen under knowledge/lighting (products-frozen.json, ies/), identical to the library rows.
+        import json
+        root = Path(__file__).resolve().parents[2] / 'knowledge' / 'lighting'
+        for kind, row in json.loads((root / 'products-frozen.json').read_text(encoding='utf-8')).items():
+            PRODUCTS[kind] = dict(manufacturer=row['manufacturer'], code=row['code'], ies=str(root / 'ies' / row['ies_file']),
+                                  lm=float(row['lm']), watts=row['watts'], cct=row['cct'], beam=row['beam'],
+                                  what=row['what'], substitute=row['substitute'])
+        _products_bound = True
+        return PRODUCTS
     for kind, (mfr, sku, what) in PRODUCT_CHOICE.items():
         row = lib.get(mfr, sku, 0)
         if not row or not row.get('verified'):
