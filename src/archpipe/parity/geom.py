@@ -12,11 +12,56 @@ Box = tuple  # (x0, y0, z0, x1, y1, z1) metres
 
 
 def fan(poly) -> np.ndarray:
-    """Triangulate one convex-ish polygon (list of xyz) by fan -> (n,3,3)."""
+    """Triangulate one polygon (list of xyz) -> (n,3,3). Triangles/quads that are convex use a fan; anything else
+    is ear-clipped in the polygon's dominant plane, so a concave face (a slab underside with an opening) is not
+    covered across the opening."""
     p = np.asarray(poly, float)
-    if len(p) < 3:
+    n = len(p)
+    if n < 3:
         return np.zeros((0, 3, 3))
-    return np.stack([np.stack([p[0], p[i], p[i + 1]]) for i in range(1, len(p) - 1)])
+    if n == 3:
+        return p[None]
+    nrm = np.zeros(3)                                   # Newell normal
+    for i in range(n):
+        a, b = p[i], p[(i + 1) % n]
+        nrm += np.array([(a[1] - b[1]) * (a[2] + b[2]), (a[2] - b[2]) * (a[0] + b[0]), (a[0] - b[0]) * (a[1] + b[1])])
+    ax = int(np.abs(nrm).argmax())
+    keep = [i for i in range(3) if i != ax]
+    q = p[:, keep]
+    area2 = float(np.dot(q[:, 0], np.roll(q[:, 1], -1)) - np.dot(q[:, 1], np.roll(q[:, 0], -1)))
+    sgn = 1.0 if area2 >= 0 else -1.0                   # orientation in the projected plane
+
+    def cross(o, a, b):
+        return sgn * ((a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]))
+
+    idx = list(range(n))
+    out = []
+    guard = 0
+    while len(idx) > 3 and guard < 10 * n * n:
+        guard += 1
+        clipped = False
+        for k in range(len(idx)):
+            i0, i1, i2 = idx[k - 1], idx[k], idx[(k + 1) % len(idx)]
+            if cross(q[i0], q[i1], q[i2]) <= 1e-12:
+                continue                                 # reflex or degenerate corner
+            inside = False
+            for j in idx:
+                if j in (i0, i1, i2) or any(np.allclose(q[j], q[v]) for v in (i0, i1, i2)):
+                    continue
+                if (cross(q[i0], q[i1], q[j]) >= -1e-12 and cross(q[i1], q[i2], q[j]) >= -1e-12 and cross(q[i2], q[i0], q[j]) >= -1e-12):
+                    inside = True
+                    break
+            if inside:
+                continue
+            out.append([p[i0], p[i1], p[i2]])
+            idx.pop(k)
+            clipped = True
+            break
+        if not clipped:                                  # degenerate/self-touching polygon: fall back to a fan of what is left
+            break
+    if len(idx) >= 3:
+        out += [[p[idx[0]], p[idx[i]], p[idx[i + 1]]] for i in range(1, len(idx) - 1)]
+    return np.array(out) if out else np.zeros((0, 3, 3))
 
 
 def aabb(tris: np.ndarray) -> Box:
