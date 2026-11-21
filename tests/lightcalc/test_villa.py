@@ -126,3 +126,23 @@ def test_v12_driver_cap():
     assert [r.status for r in check_v12({"a": 0.81})] == ["fail"]          # negative: over the cap
     drivers = json.loads((Path(__file__).resolve().parents[2] / "knowledge/lighting/zone-drivers.json").read_text())
     assert all(r.status == "pass" for r in check_v12(drivers))
+
+
+def _area(poly):
+    return abs(sum(poly[i][0] * poly[(i + 1) % len(poly)][1] - poly[(i + 1) % len(poly)][0] * poly[i][1]
+                   for i in range(len(poly)))) / 2
+
+
+def test_union_bridges_a_thin_wall_gap_and_refuses_a_wide_one():
+    # two rooms 50 mm apart are one closed volume, not "the first component found" (the parents' bedroom defect)
+    assert _area(V.union_rects([(0, 0, 4, 3), (1, 3.05, 2, 3.7)])) == pytest.approx(12 + 0.65 + 0.05, rel=1e-6)
+    with pytest.raises(ValueError):
+        V.union_rects([(0, 0, 4, 3), (1, 3.5, 2, 4.2)])
+
+
+def test_every_cluster_room_area_equals_the_design_model_room_area(villa):
+    from archpipe.model import load
+    mr = {e.room: e for e in load("D1") if e.kind == "room"}
+    for name, rooms in V.CLUSTERS.items():
+        want = sum(mr[r].params["clear_area_m2"] for r in rooms)
+        assert _area(villa.cluster_room(name).polygon) == pytest.approx(want, rel=0.01), name
