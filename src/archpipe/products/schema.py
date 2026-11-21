@@ -75,3 +75,67 @@ def albedo_limits(category: str | None, name: str | None) -> tuple[float, float]
     pile = (category == "fabric") and any(w in (name or "").lower() for w in PILE_WORDS)
     return (ALBEDO_MIN_PILE if pile else ALBEDO_MIN_HARD), ALBEDO_MAX
 
+
+
+# ---------------------------------------------------------------------------
+# Egypt-buyable product record (lane L4, A+ criterion I5). Additive: nothing
+# above changes. A record is a plain dict (JSON in knowledge/products/
+# eg-catalogue.json). A field that is not on the product page is None / empty
+# and its name is listed in "missing"; a value is never invented.
+# ---------------------------------------------------------------------------
+EG_CATEGORIES = ("sofa", "armchair", "dining_table", "dining_chair", "bed", "wardrobe", "rug", "pendant",
+                 "lamp", "outdoor_furniture", "terracotta_pot", "tile_stone", "paint", "sanitary", "kitchen",
+                 "other")
+EG_PRICE_MAX_AGE_DAYS = 90      # POLICY, a-plus-interior-renders.md I5
+SKU_BASES = ("page-labelled", "url-embedded")   # url-embedded = id taken from the product URL, not a labelled SKU
+ASSET_MATCH = ("exact", "look-alike")
+
+# Fields every fully specified record carries (I5 needs sku, supplier, price, lead time).
+EG_REQUIRED_FOR_PRICED = ("sku", "supplier", "url", "price_egp", "price_date")
+EG_FIELDS = ("id", "category", "name", "brand", "sku", "sku_basis", "supplier", "url", "price_egp", "price_date",
+             "price_note", "lead_time", "options", "lrv", "dimensions_mm", "asset_3d", "missing", "notes")
+
+
+def eg_record_problems(rec: dict) -> list[str]:
+    """Structural problems of one Egypt catalogue record (empty list = well-formed)."""
+    p: list[str] = []
+    for k in ("id", "category", "name", "url"):
+        if not rec.get(k):
+            p.append(f"{k} missing")
+    if rec.get("category") and rec["category"] not in EG_CATEGORIES:
+        p.append(f"category {rec['category']!r} not in EG_CATEGORIES")
+    if rec.get("sku") and rec.get("sku_basis") not in SKU_BASES:
+        p.append("sku given without sku_basis")
+    price = rec.get("price_egp")
+    if price is not None and (not isinstance(price, (int, float)) or price <= 0):
+        p.append("price_egp must be a positive number or None")
+    if price is not None and not rec.get("price_date"):
+        p.append("price without price_date")
+    dims = rec.get("dimensions_mm")
+    if dims is not None:
+        if not isinstance(dims, dict) or not any(dims.get(a) for a in ("w", "d", "h")):
+            p.append("dimensions_mm must be {w,d,h} with at least one value, or None")
+    a3 = rec.get("asset_3d")
+    if a3 is not None:
+        if not (a3.get("url") and a3.get("licence") and a3.get("match") in ASSET_MATCH):
+            p.append("asset_3d needs url, licence and match in ASSET_MATCH")
+    if rec.get("lrv") is not None and not (0 <= rec["lrv"] <= 100):
+        p.append("lrv outside 0-100")
+    # every empty field of the priced set must be declared in "missing"
+    declared = set(rec.get("missing") or [])
+    for k in ("sku", "supplier", "price_egp", "lead_time", "dimensions_mm"):
+        if not rec.get(k) and k not in declared:
+            p.append(f"{k} empty but not listed in missing")
+    return p
+
+
+def eg_fully_priced(rec: dict) -> bool:
+    """True if the record could stand as a priced FF&E row (sku, supplier, url, price + date)."""
+    return all(rec.get(k) for k in EG_REQUIRED_FOR_PRICED)
+
+
+def eg_price_age_days(rec: dict, today: str) -> int | None:
+    from datetime import date
+    if not rec.get("price_date"):
+        return None
+    return (date.fromisoformat(today) - date.fromisoformat(rec["price_date"])).days
