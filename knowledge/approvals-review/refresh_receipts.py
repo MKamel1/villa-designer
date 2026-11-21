@@ -46,7 +46,7 @@ br.update(room_context_sha256=sig, combined_room_review_sha256=digest(joint), cl
 br['room_review'] = dict(room_context_sha256=sig, selections=[bed_selection(m) for m in bed],
                          baseline_cloth_sha256=digest(br['baseline_cloth']), review=comparisons[bed[0]['label']])
 note = dict(reason='fixed-input change by approved G1 (stair overlap/infill/guards/cupboard/lounge door/core door swing), M (wall corners) '
-            'and the G1 store trim; evidence knowledge/approvals-review/2026-11-ra2-b2.md',
+            'the G1 store trim, and (INT2 2026-11-21) the L6b/L6c lighting fixtures + landing PATH marker hosts (all changed meshes are fix-/lens-/lamp-/marker-, 12/16 landing finish faces); evidence knowledge/approvals-review/2026-11-ra2-b2.md',
             reviews='16 individual + joint baseline-relative reviews, 0 findings', visual='retained, not re-approved')
 fr['refresh_2026_11_21'] = note; br['refresh_2026_11_21'] = note
 if write:
