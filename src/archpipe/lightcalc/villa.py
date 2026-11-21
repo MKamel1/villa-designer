@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[3]
 LEVEL_Z = {"B": -3.0, "GF": 0.0}
 RHO = {"wall": 0.80, "ceiling": 0.85, "floor": 0.33}
 MF = 0.8
+AB = 12                              # result bounces; the convergence run doubles it (LV: ab 6 under-converged small bright rooms by up to 6 %)
 ASSUMED_LM_PER_W = 90.0            # ASSUMED efficacy of generic (unspecified) LED fittings, for the zone watts
 PROJECT_EDGE = 0.30                 # strip sample pitch in the calc (m)
 
@@ -121,6 +122,8 @@ class Plane:
     scene: str = "Day"           # the scene that owns this card (LA10)
     what: str = ""
     spacing: float | None = None
+    exclude: tuple = ()
+
 
 
 # ------------------------------------------------------------------ fixtures -> placements
@@ -258,9 +261,9 @@ class Villa:
 
     def calc(self, name: str, planes: list[Plane], params: RadParams | None = None, fast: bool = False) -> RoomCalc:
         mine = [p for p in planes if cluster_of(p.room) == name]
-        tps = [TaskPlane(p.id, tuple(p.polygon), p.z, p.target, p.gauge, p.spacing) for p in mine]
+        tps = [TaskPlane(p.id, tuple(p.polygon), p.z, p.target, p.gauge, p.spacing, exclude=p.exclude) for p in mine]
         return RoomCalc(name, self.cluster_room(name), self.cluster_placements(name), tps,
-                        params or RadParams(ab=6, ab_extra=() if fast else (12,), workers=4), mf=MF)
+                        params or RadParams(ab=AB, ab_extra=() if fast else (2 * AB,), workers=4), mf=MF)
 
 
 def run_cluster(calc: RoomCalc, workdir: Path, host: str | None = None, reuse: bool = False):

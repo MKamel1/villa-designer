@@ -40,6 +40,7 @@ class TaskPlane:
     spacing: float | None = None    # None -> EN 12464-1 cell size
     border: float = 0.0
     u0_min: float | None = None
+    exclude: tuple = ()             # ((x0, y0, x1, y1), ...): footprints of objects standing in or under the plane; no sensor there
 
 
 @dataclass
@@ -58,6 +59,9 @@ class RoomCalc:
         out: list[Sensor] = []
         for pl in self.planes:
             pts, dx, dy = grid_in_polygon(list(pl.polygon), spacing=pl.spacing, border=pl.border)
+            pts = [(x, y) for x, y in pts if not any(r[0] <= x <= r[2] and r[1] <= y <= r[3] for r in pl.exclude)]
+            if not pts:
+                raise ValueError("plane %s: every sensor point lies inside an object" % pl.id)
             self._slices[pl.id] = (len(out), len(out) + len(pts))
             self._grid_info[pl.id] = {"n": len(pts), "dx": dx, "dy": dy, "z": pl.z}
             out += [Sensor(x, y, pl.z) for x, y in pts]

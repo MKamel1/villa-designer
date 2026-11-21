@@ -60,7 +60,7 @@ if __name__ == "__main__":
     ap.add_argument("--tag", required=True)
     ap.add_argument("--out", default="out/L6b")
     ap.add_argument("--reuse", action="store_true")
-    ap.add_argument("--fast", action="store_true", help="ab 6 only (no ab 12 convergence run)")
+    ap.add_argument("--fast", action="store_true", help="ab 12 only (no ab 24 convergence run)")
     ap.add_argument("--only", nargs="*")
     a = ap.parse_args()
     run_all(Villa(), a.tag, Path(a.out), reuse=a.reuse, fast=a.fast, only=a.only)

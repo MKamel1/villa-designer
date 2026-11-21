@@ -162,7 +162,7 @@ def set_out(fixtures, rc, it, fp):
 
 
 def apply_drivers(fixtures):
-    """Set each fixture's driver output from its zone's solved factor d: a bound product gets extra['dimmer'] = d (<= 1);
+    """Set each fixture's driver output from its zone's solved factor d: a bound product gets extra['dimmer'] = d (> 1 raises);
     a generic fitting gets lumens scaled by d (it may exceed 1: the generic is sized, not dimmed)."""
     table = _drivers()
     for f in fixtures:
@@ -170,7 +170,10 @@ def apply_drivers(fixtures):
         if d is None:
             continue
         if f.kind in PRODUCTS or kind_has_product(f.kind):
-            f.extra["dimmer"] = round(min(1.0, d), 3)
+            if d > 1.0:      # a bound product cannot exceed its rated output: change the design, never clip the driver
+                raise ValueError("zone %s needs %.2f of the rated output of its bound product %s: add or upgrade fittings"
+                                 % (zone_id(f), d, f.kind))
+            f.extra["dimmer"] = round(d, 3)
         else:
             base = f.lm if f.lm is not None else (KINDS[f.kind]["lm_per_m"] * f.length if "lm_per_m" in KINDS[f.kind]
                                                    else KINDS[f.kind]["lm"])

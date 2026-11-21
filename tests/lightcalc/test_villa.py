@@ -146,3 +146,44 @@ def test_every_cluster_room_area_equals_the_design_model_room_area(villa):
     for name, rooms in V.CLUSTERS.items():
         want = sum(mr[r].params["clear_area_m2"] for r in rooms)
         assert _area(villa.cluster_room(name).polygon) == pytest.approx(want, rel=0.01), name
+
+
+def test_driver_above_rated_output_of_a_bound_product_raises(monkeypatch, villa):
+    zone = next(VL.zone_id(f) for f in villa.fixtures if f.record.product)
+    fs = [f for f in copy.deepcopy(villa.fixtures) if VL.zone_id(f) == zone]
+    monkeypatch.setattr(VL, "_drivers", lambda: {zone: 1.2})
+    with pytest.raises(ValueError, match="rated output"):
+        VL.apply_drivers(fs)
+    monkeypatch.setattr(VL, "_drivers", lambda: {zone: 0.8})       # negative: a valid driver is applied unchanged
+    VL.apply_drivers(fs)
+    assert all(f.extra["dimmer"] == 0.8 for f in fs)
+
+
+def test_sensor_grid_drops_points_inside_an_object_footprint():
+    from archpipe.lightcalc.roomcalc import RoomCalc, TaskPlane
+    poly = ((0, 0), (1, 0), (1, 1), (0, 1))
+    kept = RoomCalc("t", None, [], [TaskPlane("p", poly, 0.75, 300, spacing=0.25)])
+    assert len(kept.sensors()) == 16
+    obj = RoomCalc("t", None, [], [TaskPlane("p", poly, 0.75, 300, spacing=0.25, exclude=((0.4, 0.0, 1.0, 0.6),))])
+    assert len(obj.sensors()) == 16 - 4                          # a chair-like footprint covers 2 x 2 cell centres
+    with pytest.raises(ValueError):
+        RoomCalc("t", None, [], [TaskPlane("p", poly, 0.75, 300, exclude=((-1, -1, 2, 2),))]).sensors()
+
+
+def test_planes_sit_on_their_hosts_and_keep_sensors_out_of_objects(villa):
+    from archpipe.lightcalc import villa_planes as VP
+    rec = VP._obstructions()
+    for pl in villa.planes():
+        e = rec[pl.id]
+        assert e["n_sensors"] >= 3, pl.id                         # a plane reduced to one or two points measures nothing
+        if e["hosted"]:
+            assert e["host_gap_mm"] <= 5.0, "%s: plane %.1f mm above its host" % (pl.id, e["host_gap_mm"])
+    assert rec["fb-basin"]["rects"], "the basin bowl recess must be dropped from the rim plane"
+    assert rec["room-parents-dressing"]["rects"], "hanging rails must be dropped from the dressing floor plane"
+
+
+def test_stale_obstruction_record_fails_loudly(villa):
+    from archpipe.lightcalc import villa_planes as VP
+    pl = next(p for p in villa.planes() if p.id == "fb-basin")
+    with pytest.raises(ValueError, match="stale"):
+        VP.blocked_rects(pl.id, pl.z + 0.06, pl.polygon)         # the plane was 60 mm too high (the original basin defect)
