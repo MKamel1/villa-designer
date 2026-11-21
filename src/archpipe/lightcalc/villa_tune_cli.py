@@ -41,6 +41,22 @@ def main(tag: str, out_dir: str = "out/L6b", write: bool = False, lo: float = 0.
     new = {z: round(init.get(z, 1.0) * f, 3) for z, f in d.items()}
     for z in sorted(new):
         print("driver %-44s %.2f (x%.2f this round)" % (z, new[z], d[z]))
+    # Dinner: the table pendant's scene level that puts the table top on its 100 lx card, other Dinner zones as stated
+    # (Em is linear in the level; the Radiance results already contain the drivers applied to the design)
+    from .villa_report import scene_levels
+    for p in v.planes():
+        if p.scene != "Dinner":
+            continue
+        cl = "B-open"
+        r = res[cl]
+        lev = scene_levels(r, SCENES[cl], "Dinner")
+        zp = [z for z in lev if z.endswith("-TABLE-PENDANT")][0]
+        lev0 = dict(lev, **{zp: 0.0})
+        fixed = r.stats(p.id, lev0).em
+        per = r.stats(p.id, {zp: 1.0}).em
+        L = (p.target - fixed) / per
+        print("Dinner: %s level %.3f solves %s to %d lx (others contribute %.0f lx; pendant at 1.0 gives %.0f lx)" %
+              (zp, L, p.id, p.target, fixed, per))
     if write:
         merged = dict(init)
         merged.update(new)

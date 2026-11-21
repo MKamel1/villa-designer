@@ -120,12 +120,18 @@ def check_la9(v) -> list[CheckResult]:
 # ------------------------------------------------------------------ LA4 luminance
 def check_la4(v, sightlines) -> list[CheckResult]:
     """Luminance of recessed product fittings toward the eye of each sightline; 3000 cd/m2 cap within 45 deg of the
-    sightline unless shielded (policy card). Only product-bound fittings (measured opening) are evaluated."""
-    plac = []
-    for f in v.fixtures:
-        if f.kind in RECESSED and f.record.product:
-            plac += fixture_placements(f)
-    return checks.check_la4_luminance("villa", sightlines, plac)
+    sightline unless shielded (policy card). Only product-bound fittings (measured opening) of the SAME open-plan cluster
+    are in view (walls are not modelled, so other rooms are excluded explicitly)."""
+    from .villa import cluster_of
+    out = []
+    for sl in sightlines:
+        cl = cluster_of(sl["room"])
+        plac = []
+        for f in v.fixtures:
+            if f.kind in RECESSED and f.record.product and cluster_of(f.room) == cl:
+                plac += fixture_placements(f)
+        out += checks.check_la4_luminance("villa", [sl], plac)
+    return out
 
 
 # ------------------------------------------------------------------ LA13
@@ -179,3 +185,84 @@ def lpd_rows(v) -> list[dict]:
         a = (r[2] - r[0]) * (r[3] - r[1])
         rows.append({"room": room, "watts": round(w, 1), "area_m2": round(a, 1), "w_per_m2": round(w / a, 2)})
     return rows
+
+
+# ------------------------------------------------------------------ LA10 scenes, LA4 sightlines, LA13 night level
+REQUIRED_SCENES = {"B-open": ("Day", "Evening", "Dinner", "Film", "Night"), "B-cinema": ("Day", "Evening", "Film", "Night"),
+                   "GF-parents-bed": ("Day", "Evening", "Night"), "GF-kids-a": ("Day", "Evening", "Night"),
+                   "GF-kids-b": ("Day", "Evening", "Night"), "GF-circulation": ("Day", "Evening", "Night")}
+
+
+def check_la10_scenes(scenes: dict) -> list[CheckResult]:
+    out = []
+    for cl, need in REQUIRED_SCENES.items():
+        have = set(scenes.get(cl, {}))
+        miss = [n for n in need if n not in have]
+        out.append(CheckResult("LA10", "L6", "pass" if not miss else "fail", "villa/scenes/" + cl, achieved=float(len(need) - len(miss)),
+                               required=float(len(need)), unit="scenes", source_ids=("L6-POLICY-LA10-scenes",),
+                               message="scenes defined: %s; missing: %s ('Off' is every zone at 0)" % (sorted(have), miss or "none")))
+    out.append(CheckResult("LA10", "L6", "not_evaluated", "villa/two-way-switching",
+                           message="two-way switching at the stair and rooms with 2 doors is a device layout (L7 electrical lane); "
+                                   "not evaluated here. Scene CSV export for a DALI/Lutron import is not implemented."))
+    return out
+
+
+def check_la10_night(v, level: float = 0.1, cap: float = 5.0) -> CheckResult:
+    """The Night scene (night layer at `level`) must keep the stair/route centre line <= 5 lx (policy: a comfortable path,
+    not a glare source). Direct light from the night-layer markers; the mains-failure >= 1 lx at full output is LA13."""
+    from .direct import direct_illuminance
+    ems = []
+    for f in v.fixtures:
+        if _layer(f) in ("night", "emergency") and f.kind in ("STEP", "PATH", "NL", "TOE", "DL"):
+            ems += fixture_placements(f)
+    worst = 0.0
+    for poly in [stair_route(v)] + list(basement_routes(v).values()):
+        for p in poly:
+            worst = max(worst, level * direct_illuminance(ems, p))
+    return CheckResult("LA10", "L6", "pass" if worst <= cap else "fail", "villa/night-path-level", achieved=worst, required=cap,
+                       unit="lx", source_ids=("L6-POLICY-LA10-scenes",),
+                       message="Night scene: max route centre-line illuminance %.2f lx at %.0f %% of the night-layer output vs <= %.0f lx"
+                               % (worst, 100 * level, cap))
+
+
+def sightlines(v) -> list[dict]:
+    """Eye points and directions: seated 1.2 m (sofa, dining chair), reclined on the bed (0.7 m above the floor)."""
+    B, G = -3.0, 0.0
+    fp = v.fp
+    sofa = fp["lounge-sofa"]
+    lsf = fp["living-sofa"]
+    dt = fp["dining-table"]
+    bed = fp["pb-bed"]
+    return [
+        {"id": "lounge-sofa-to-TV", "room": "lounge", "eye": ((sofa[0] + sofa[2]) / 2, (sofa[1] + sofa[3]) / 2, B + 1.2), "dir": (0, 1, 0)},
+        {"id": "living-sofa-to-garden", "room": "living", "eye": ((lsf[0] + lsf[2]) / 2, (lsf[1] + lsf[3]) / 2, B + 1.2), "dir": (0, 1, 0)},
+        {"id": "dining-seat-along-table", "room": "dining", "eye": (dt[0] + 0.5, (dt[1] + dt[3]) / 2, B + 1.2), "dir": (1, 0, 0)},
+        {"id": "dining-seat-to-sideboard", "room": "dining", "eye": ((dt[0] + dt[2]) / 2, dt[1] + 0.2, B + 1.2), "dir": (0, -1, 0)},
+        {"id": "parents-bed-lying", "room": "parents-bed", "eye": ((bed[0] + bed[2]) / 2, bed[1] + 0.4, G + 0.7), "dir": (0, 1, 0.3)},
+    ]
+
+
+# ------------------------------------------------------------------ LA12 exterior (what exists: 4 garden uplights in the render scene)
+def exterior_placements() -> list[Placement]:
+    import json
+    from pathlib import Path
+    from ..photometry import load as load_ies
+    root = Path(__file__).resolve().parents[3] / "knowledge" / "lighting"
+    data = json.loads((root / "exterior-lights-scene.json").read_text(encoding="utf-8"))
+    ph = load_ies(root / "ies" / "GARDEN-UP.ies")
+    return [Placement(l["id"], ph, tuple(l["position"]), aim=tuple(l["aim"])) for l in data["lights"]]
+
+
+def check_la12(v=None) -> list[CheckResult]:
+    """Obtrusive light for the exterior luminaires that exist (four ASSUMED garden uplights in the render scene; none in the
+    L2 model): ULR in the installed attitude and intensity toward neighbour eye points beyond the west boundary (E3, SLL T3.2).
+    The boundary Ev grid and facade luminance need an exterior Radiance run (not done): reported not_evaluated."""
+    ext = exterior_placements()
+    nb = [(-1.5, y, -3.0 + 1.5) for y in (-24.5, -27.7)]
+    out = []
+    for curfew in ("pre", "post"):
+        out += [r for r in checks.check_la12("villa/exterior", exterior=ext, neighbour_points=nb, curfew=curfew)
+                if "ULR" not in r.subject or curfew == "pre"]
+    out.append(CheckResult("LA12", "L6", "not_evaluated", "villa/exterior/boundary-Ev",
+                           message="boundary vertical illuminance and facade luminance need an exterior Radiance grid: not run"))
+    return out

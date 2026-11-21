@@ -1,0 +1,373 @@
+{
+ "source": "out/villa/render-d1/scene-ws.json (render scene of 2026-10-08): the only exterior luminaires built; not in the L2 model or villa_lighting.design()",
+ "lights": [
+  {
+   "id": "garden-uplight-north-back-00",
+   "room": "north-garden",
+   "layer": "evening-garden",
+   "type": "ies",
+   "position": [
+    0.43000000000000005,
+    -27.7,
+    -2.935
+   ],
+   "aim": [
+    0.28674993563956924,
+    0.0,
+    0.9580054667958334
+   ],
+   "spin_deg": 0.0,
+   "lumens": 120.0,
+   "cct_k": 2700,
+   "ies": "generic/GARDEN-UP.ies",
+   "cri": 90,
+   "product": {
+    "manufacturer": "GENERIC",
+    "code": "ASSUMED GARDEN-UP",
+    "generic": true
+   },
+   "generic": true,
+   "garden_g4d": true,
+   "fixture_record": {
+    "id": "garden-uplight-north-back-00",
+    "status": "ASSUMED",
+    "product": null,
+    "plant_id": "landscape-north-back-00",
+    "body_ids": [
+     "garden-uplight-north-back-00-body",
+     "garden-uplight-north-back-00-snoot"
+    ],
+    "lens_id": "garden-uplight-north-back-00-lens",
+    "mount_point_m": [
+     0.43000000000000005,
+     -27.7,
+     -3.0
+    ],
+    "emitter_m": [
+     0.43000000000000005,
+     -27.7,
+     -2.935
+    ],
+    "aim": [
+     0.28674993563956924,
+     0.0,
+     0.9580054667958334
+    ],
+    "target_m": [
+     0.65,
+     -27.7,
+     -2.2
+    ],
+    "flux_lm": 120.0,
+    "beam_deg": 30.0,
+    "cct_k": 2700,
+    "layer": "evening-garden",
+    "cri": 90,
+    "cri_status": "ASSUMED",
+    "photometry": {
+     "status": "ASSUMED",
+     "ies": "generic/GARDEN-UP.ies",
+     "basis": "Rotational cosine-power LM-63 distribution, 120 lm, 30 degree full half-maximum beam; not manufacturer photometry; source distribution BEFORE physical snoot, not final luminaire output"
+    },
+    "shielding": {
+     "snoot_depth_m": 0.12,
+     "aperture_radius_m": 0.048,
+     "lens_radius_m": 0.012,
+     "facet_count": 24
+    },
+    "mounting_status": "modeled ground bearing; electrical/drainage/IP specification pending",
+    "flux_basis": "source-before-physical-snoot",
+    "shield_output": {
+     "status": "ASSUMED",
+     "source_flux_lm": 120.0,
+     "cutoff_deg": [
+      21.632185001286334,
+      21.80140948635181
+     ],
+     "emitted_flux_lm_bounds": [
+      92.98821848545937,
+      93.6335831221427
+     ],
+     "basis": "Independent source IES solid-angle integral inside inner/outer cones of the actual 24-sided snoot; before external plant/ground obstruction"
+    }
+   },
+   "label": "Rotational cosine-power LM-63 distribution, 120 lm, 30 degree full half-maximum beam; not manufacturer photometry; source distribution BEFORE physical snoot, not final luminaire output"
+  },
+  {
+   "id": "garden-uplight-north-back-01",
+   "room": "north-garden",
+   "layer": "evening-garden",
+   "type": "ies",
+   "position": [
+    1.58,
+    -27.7,
+    -2.935
+   ],
+   "aim": [
+    0.28674993563956924,
+    0.0,
+    0.9580054667958334
+   ],
+   "spin_deg": 0.0,
+   "lumens": 120.0,
+   "cct_k": 2700,
+   "ies": "generic/GARDEN-UP.ies",
+   "cri": 90,
+   "product": {
+    "manufacturer": "GENERIC",
+    "code": "ASSUMED GARDEN-UP",
+    "generic": true
+   },
+   "generic": true,
+   "garden_g4d": true,
+   "fixture_record": {
+    "id": "garden-uplight-north-back-01",
+    "status": "ASSUMED",
+    "product": null,
+    "plant_id": "landscape-north-back-01",
+    "body_ids": [
+     "garden-uplight-north-back-01-body",
+     "garden-uplight-north-back-01-snoot"
+    ],
+    "lens_id": "garden-uplight-north-back-01-lens",
+    "mount_point_m": [
+     1.58,
+     -27.7,
+     -3.0
+    ],
+    "emitter_m": [
+     1.58,
+     -27.7,
+     -2.935
+    ],
+    "aim": [
+     0.28674993563956924,
+     0.0,
+     0.9580054667958334
+    ],
+    "target_m": [
+     1.8,
+     -27.7,
+     -2.2
+    ],
+    "flux_lm": 120.0,
+    "beam_deg": 30.0,
+    "cct_k": 2700,
+    "layer": "evening-garden",
+    "cri": 90,
+    "cri_status": "ASSUMED",
+    "photometry": {
+     "status": "ASSUMED",
+     "ies": "generic/GARDEN-UP.ies",
+     "basis": "Rotational cosine-power LM-63 distribution, 120 lm, 30 degree full half-maximum beam; not manufacturer photometry; source distribution BEFORE physical snoot, not final luminaire output"
+    },
+    "shielding": {
+     "snoot_depth_m": 0.12,
+     "aperture_radius_m": 0.048,
+     "lens_radius_m": 0.012,
+     "facet_count": 24
+    },
+    "mounting_status": "modeled ground bearing; electrical/drainage/IP specification pending",
+    "flux_basis": "source-before-physical-snoot",
+    "shield_output": {
+     "status": "ASSUMED",
+     "source_flux_lm": 120.0,
+     "cutoff_deg": [
+      21.632185001286334,
+      21.80140948635181
+     ],
+     "emitted_flux_lm_bounds": [
+      92.98821848545937,
+      93.6335831221427
+     ],
+     "basis": "Independent source IES solid-angle integral inside inner/outer cones of the actual 24-sided snoot; before external plant/ground obstruction"
+    }
+   },
+   "label": "Rotational cosine-power LM-63 distribution, 120 lm, 30 degree full half-maximum beam; not manufacturer photometry; source distribution BEFORE physical snoot, not final luminaire output"
+  },
+  {
+   "id": "garden-uplight-north-back-02",
+   "room": "north-garden",
+   "layer": "evening-garden",
+   "type": "ies",
+   "position": [
+    0.8800000000000001,
+    -24.5,
+    -2.935
+   ],
+   "aim": [
+    0.28674993563956924,
+    0.0,
+    0.9580054667958334
+   ],
+   "spin_deg": 0.0,
+   "lumens": 120.0,
+   "cct_k": 2700,
+   "ies": "generic/GARDEN-UP.ies",
+   "cri": 90,
+   "product": {
+    "manufacturer": "GENERIC",
+    "code": "ASSUMED GARDEN-UP",
+    "generic": true
+   },
+   "generic": true,
+   "garden_g4d": true,
+   "fixture_record": {
+    "id": "garden-uplight-north-back-02",
+    "status": "ASSUMED",
+    "product": null,
+    "plant_id": "landscape-north-back-02",
+    "body_ids": [
+     "garden-uplight-north-back-02-body",
+     "garden-uplight-north-back-02-snoot"
+    ],
+    "lens_id": "garden-uplight-north-back-02-lens",
+    "mount_point_m": [
+     0.8800000000000001,
+     -24.5,
+     -3.0
+    ],
+    "emitter_m": [
+     0.8800000000000001,
+     -24.5,
+     -2.935
+    ],
+    "aim": [
+     0.28674993563956924,
+     0.0,
+     0.9580054667958334
+    ],
+    "target_m": [
+     1.1,
+     -24.5,
+     -2.2
+    ],
+    "flux_lm": 120.0,
+    "beam_deg": 30.0,
+    "cct_k": 2700,
+    "layer": "evening-garden",
+    "cri": 90,
+    "cri_status": "ASSUMED",
+    "photometry": {
+     "status": "ASSUMED",
+     "ies": "generic/GARDEN-UP.ies",
+     "basis": "Rotational cosine-power LM-63 distribution, 120 lm, 30 degree full half-maximum beam; not manufacturer photometry; source distribution BEFORE physical snoot, not final luminaire output"
+    },
+    "shielding": {
+     "snoot_depth_m": 0.12,
+     "aperture_radius_m": 0.048,
+     "lens_radius_m": 0.012,
+     "facet_count": 24
+    },
+    "mounting_status": "modeled ground bearing; electrical/drainage/IP specification pending",
+    "flux_basis": "source-before-physical-snoot",
+    "shield_output": {
+     "status": "ASSUMED",
+     "source_flux_lm": 120.0,
+     "cutoff_deg": [
+      21.632185001286334,
+      21.80140948635181
+     ],
+     "emitted_flux_lm_bounds": [
+      92.98821848545937,
+      93.6335831221427
+     ],
+     "basis": "Independent source IES solid-angle integral inside inner/outer cones of the actual 24-sided snoot; before external plant/ground obstruction"
+    }
+   },
+   "label": "Rotational cosine-power LM-63 distribution, 120 lm, 30 degree full half-maximum beam; not manufacturer photometry; source distribution BEFORE physical snoot, not final luminaire output"
+  },
+  {
+   "id": "garden-uplight-north-rhapis-accent",
+   "room": "north-garden",
+   "layer": "evening-garden",
+   "type": "ies",
+   "position": [
+    0.8,
+    -24.65,
+    -2.935
+   ],
+   "aim": [
+    0.28674993563956924,
+    0.0,
+    0.9580054667958334
+   ],
+   "spin_deg": 0.0,
+   "lumens": 120.0,
+   "cct_k": 2700,
+   "ies": "generic/GARDEN-UP.ies",
+   "cri": 90,
+   "product": {
+    "manufacturer": "GENERIC",
+    "code": "ASSUMED GARDEN-UP",
+    "generic": true
+   },
+   "generic": true,
+   "garden_g4d": true,
+   "fixture_record": {
+    "id": "garden-uplight-north-rhapis-accent",
+    "status": "ASSUMED",
+    "product": null,
+    "plant_id": "landscape-north-rhapis-accent",
+    "body_ids": [
+     "garden-uplight-north-rhapis-accent-body",
+     "garden-uplight-north-rhapis-accent-snoot"
+    ],
+    "lens_id": "garden-uplight-north-rhapis-accent-lens",
+    "mount_point_m": [
+     0.8,
+     -24.65,
+     -3.0
+    ],
+    "emitter_m": [
+     0.8,
+     -24.65,
+     -2.935
+    ],
+    "aim": [
+     0.28674993563956924,
+     0.0,
+     0.9580054667958334
+    ],
+    "target_m": [
+     1.02,
+     -24.65,
+     -2.2
+    ],
+    "flux_lm": 120.0,
+    "beam_deg": 30.0,
+    "cct_k": 2700,
+    "layer": "evening-garden",
+    "cri": 90,
+    "cri_status": "ASSUMED",
+    "photometry": {
+     "status": "ASSUMED",
+     "ies": "generic/GARDEN-UP.ies",
+     "basis": "Rotational cosine-power LM-63 distribution, 120 lm, 30 degree full half-maximum beam; not manufacturer photometry; source distribution BEFORE physical snoot, not final luminaire output"
+    },
+    "shielding": {
+     "snoot_depth_m": 0.12,
+     "aperture_radius_m": 0.048,
+     "lens_radius_m": 0.012,
+     "facet_count": 24
+    },
+    "mounting_status": "modeled ground bearing; electrical/drainage/IP specification pending",
+    "flux_basis": "source-before-physical-snoot",
+    "shield_output": {
+     "status": "ASSUMED",
+     "source_flux_lm": 120.0,
+     "cutoff_deg": [
+      21.632185001286334,
+      21.80140948635181
+     ],
+     "emitted_flux_lm_bounds": [
+      92.98821848545937,
+      93.6335831221427
+     ],
+     "basis": "Independent source IES solid-angle integral inside inner/outer cones of the actual 24-sided snoot; before external plant/ground obstruction"
+    }
+   },
+   "label": "Rotational cosine-power LM-63 distribution, 120 lm, 30 degree full half-maximum beam; not manufacturer photometry; source distribution BEFORE physical snoot, not final luminaire output"
+  }
+ ]
+}

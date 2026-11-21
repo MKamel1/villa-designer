@@ -10,7 +10,9 @@ from .villa import Villa
 
 def main():
     v = Villa()
-    for r in VC.check_la13(v) + VC.check_la9(v) + VC.check_la6(v.fixtures) + VC.check_la8(v.fixtures):
+    from ..concept.villa_lighting import SCENES
+    for r in (VC.check_la13(v) + VC.check_la9(v) + VC.check_la6(v.fixtures) + VC.check_la8(v.fixtures)
+              + VC.check_la10_scenes(SCENES) + [VC.check_la10_night(v)] + VC.check_la4(v, VC.sightlines(v))):
         print(r.criterion, r.status, r.subject, "|", r.message)
     rows = VC.lpd_rows(v)
     tot_w = sum(r["watts"] for r in rows)

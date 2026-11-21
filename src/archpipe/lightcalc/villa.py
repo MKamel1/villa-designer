@@ -115,9 +115,10 @@ def zone_layer(f) -> str:
 
 def hemisphere_ies(lm: float, name: str = "hemi") -> str:
     """Constant intensity lm / 2 pi over the hemisphere around the aim axis, zero behind (wall-mounted opal fittings)."""
-    angles = [float(a) for a in range(0, 181, 5)]
+    angles = [float(a) for a in list(range(0, 90, 5)) + [89, 90] + list(range(95, 181, 5))]
+    angles = sorted(set(angles))
     i0 = lm / (2 * math.pi)
-    cd = [i0 if a <= 90 else 0.0 for a in angles]
+    cd = [i0 if a < 90 else 0.0 for a in angles]
     lines = ["IESNA:LM-63-2002", "[TEST] archpipe hemisphere", "[MANUFAC] GENERIC (not a product)",
              "[LUMINAIRE] %s hemisphere %d lm" % (name, lm), "TILT=NONE", "1 %.3f 1 %d 1 1 2 0 0 0" % (lm, len(angles)),
              "1 1 0", " ".join("%.1f" % a for a in angles), "0.0", " ".join("%.3f" % c for c in cd)]
