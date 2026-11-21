@@ -32,11 +32,28 @@ def render_view_sheet(slim: dict, els, spec, sheet, out_stem, *, page=1, pages=1
         rep["views"].append({"name": v.name, "stroke_u_range_m": [min(us), max(us)] if us else None, "kind": v.kind, "dir": list(v.d), "u_axis": list(v.u_axis), "window_m": list(v.window),
                              "left": viewdraw.left_right(v)[0], "right": viewdraw.left_right(v)[1],
                              "cut_segments": len(built["cut_segments"]), "lines": len(built["lines"]), **{k: cnt[k] for k in ("structure_polys", "context_polys")},
-                             "cut_items": [i[0] for i in cut["items"]], "scale": v.scale})
+                             "cut_items": [i[0] for i in cut["items"]], "scale": v.scale, "stair_detail": cnt.get("stair_detail")})
         x += w + 14
         rowh = max(rowh, h + 16)
     sh.scale = views[0].scale
-    sh.text((plans.LEFT + 10, plans.EDGE + 8), "Poche: cut of the design-model solids (core material not authored). Lines: Blender Line Art of the built scene %s. "
-            "Context (not ours): light grey. Level elevations are Revit datum (scene + 1.2 m)." % str(rep["scene_sha256"])[:10],
-            size=4.4, ha="left", color="#444444")
+    if views[0].name.startswith("Section 1"):
+        import textwrap
+        st = next(e for e in els if e.kind == "stair")
+        q, inf = st.params, st.params["riser_infill"]
+        xr, y = x + 4, paper[1] - plans.EDGE - 40
+        lines = ["Stair detail (from the design model)", "",
+                 "%d risers x %.1f mm, %d treads x %.0f mm going, width %.0f mm." % (q["risers"], q["riser_mm"], q["treads"], q["tread_mm"], q["width_mm"]),
+                 "", "Red: riser infill, %d horizontal flat bars %d x %d mm; openings above and below each bar %.1f mm (100 mm sphere test)."
+                 % (inf["count"], inf["bar_h_mm"], inf["bar_t_mm"], inf["openings_above_and_below_bar_mm"]),
+                 "", "Blue: guards beyond the plane, frameless laminated glass: stair open side 900 mm, GF stair-void edge 1100 mm.",
+                 "", "Tan: understair cupboard, %d treads enclosed; end wall and toe panel cut, side wall and door beyond." % q["under_flight"]["treads_enclosed"]]
+        for i, t in enumerate(lines):
+            for ln in (textwrap.wrap(t, 44) or [""]):
+                sh.text((xr, y), ln, size=9 if i == 0 else 7, ha="left", weight="bold" if i == 0 else "normal")
+                y -= 4.6
+    note = ("Poche: cut of the design-model solids (core material not authored). Lines: Blender Line Art of the built scene %s. "
+            "Context (not ours): light grey. Level elevations are Revit datum (scene + 1.2 m)." % str(rep["scene_sha256"])[:10])
+    import textwrap as _tw
+    for i, ln in enumerate(_tw.wrap(note, 150)[::-1]):
+        sh.text((plans.LEFT + 10, plans.EDGE + 8 + 4.6 * i), ln, size=7, ha="left", color="#444444")
     return plans.finish_sheet(sh, spec, sheet, page, pages, out_stem, formats, rep)

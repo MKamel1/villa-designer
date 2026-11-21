@@ -7,12 +7,12 @@ from pathlib import Path
 
 from archpipe import model
 
-from archpipe.drawings2d import callouts, scene_slim, siteplan, variants, viewsheets
+from archpipe.drawings2d import callouts, interior, scene_slim, siteplan, variants, viewsheets
 
 from . import crosscheck, plans, schedules, sheetset, tables
 
 
-PREVIEWS = ("A-100-site", "A-112-plan", "A-301-section")
+PREVIEWS = ("A-101-plan", "A-111-plan", "A-201-elevation", "A-301-section")
 
 
 def combine(out: Path, spec: dict) -> Path:
@@ -80,14 +80,19 @@ def run(design: str, out: Path, formats=("pdf", "svg", "png"), slim: dict | None
         k = s["kind"]
         if k == "plan":
             rep = plans.render_plan(els, spec, s, stem, page=i, pages=pages, formats=formats, layers=variants.LAYERS[s["variant"]],
-                                    extras=variants.extras_for(s["variant"], s["level"]))
+                                    extras=variants.extras_for(s["variant"]))
             if s["variant"] == "ga":
-                reports.append(rep)
-                qa_rows.append(plans.qa(els, rep, stem.with_suffix(".pdf") if "pdf" in formats else None))
+                for pr in rep["plans"]:
+                    reports.append(pr)
+                    qa_rows.append(plans.qa(els, pr, stem.with_suffix(".pdf") if "pdf" in formats else None))
         elif k == "site":
             rep = siteplan.render_site(els, spec, s, stem, page=i, pages=pages, formats=formats)
+        elif k == "callout" and s["variant"] == "yardwall":
+            rep = callouts.render_yard_wall(els, spec, s, stem, page=i, pages=pages, formats=formats)
         elif k == "callout":
             rep = callouts.render_callouts(els, spec, s, stem, page=i, pages=pages, formats=formats)
+        elif k == "interior":
+            rep = interior.render_interior(els, spec, s, stem, page=i, pages=pages, formats=formats)
         elif k == "schedule":
             rep = tables.render_schedules(els, spec, s, stem, page=i, pages=pages, formats=formats)
         elif k == "schedule2":

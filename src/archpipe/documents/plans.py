@@ -35,7 +35,7 @@ BANNER_AR = "مولّد من نموذج التصميم"
 
 matplotlib.rcParams["pdf.fonttype"] = 42
 matplotlib.rcParams["svg.fonttype"] = "none"
-matplotlib.rcParams["font.family"] = ["DejaVu Sans"]   # has Arabic presentation forms; installed on Windows and Linux alike
+matplotlib.rcParams["font.family"] = arabic.FONT_FAMILY   # Latin first, Arabic glyphs from Noto Naskh; shaping by the renderer
 
 
 def _pip(pt, poly) -> bool:
@@ -117,7 +117,7 @@ class _Sheet:
         self.ax.plot([a[0], b[0]], [a[1], b[1]], color=color, lw=lw, ls=ls, zorder=z, solid_capstyle="butt")
 
     def text(self, xy, s, size=5.0, ha="center", va="center", rot=0, color="k", z=8, weight="normal", bg=False):
-        s = arabic.visual(s)
+        size = max(size, standard.TEXT_MIN_PT)
         kw = {"bbox": dict(fc="white", ec="none", pad=0.15, alpha=0.85)} if bg else {}
         self.ax.text(xy[0], xy[1], s, fontsize=size, ha=ha, va=va, rotation=rot, color=color, zorder=z,
                      weight=weight, **kw)
@@ -169,8 +169,12 @@ def _opening_frame(e: DesignElement, geo: dict):
     return u, n, t
 
 
-def _draw_openings(sh: _Sheet, geo: dict, rep: dict, flag_judgement: bool = False) -> None:
+DOOR_COLOUR, WINDOW_COLOUR = "#e67e22", "#1f77b4"      # parity with the old Revit sheets (orange doors, blue glazing)
+
+
+def _draw_openings(sh: _Sheet, geo: dict, rep: dict, flag_judgement: bool = False, coded: bool = False) -> None:
     for e in geo["windows"] + geo["doors"]:
+        col = (WINDOW_COLOUR if e.kind == "window" else DOOR_COLOUR) if coded else "k"
         u, n, t = _opening_frame(e, geo)
         wd = e.size[0]
         cx, cy = e.placement[0], e.placement[1]
@@ -184,19 +188,19 @@ def _draw_openings(sh: _Sheet, geo: dict, rep: dict, flag_judgement: bool = Fals
         if e.kind == "window":
             for k in (-1, 0, 1):
                 off = k * t / 3
-                sh.line(sh.p(a[0] + n[0] * off, a[1] + n[1] * off), sh.p(b[0] + n[0] * off, b[1] + n[1] * off), lw=thin, z=5)
+                sh.line(sh.p(a[0] + n[0] * off, a[1] + n[1] * off), sh.p(b[0] + n[0] * off, b[1] + n[1] * off), lw=thin, z=5, color=col)
             continue
         op = e.params.get("operation")
         for off in (-t / 4, t / 4):
-            sh.line(sh.p(a[0] + n[0] * off, a[1] + n[1] * off), sh.p(b[0] + n[0] * off, b[1] + n[1] * off), lw=thin, z=5)
+            sh.line(sh.p(a[0] + n[0] * off, a[1] + n[1] * off), sh.p(b[0] + n[0] * off, b[1] + n[1] * off), lw=thin, z=5, color=col)
         if op == "sliding" or e.params.get("garden"):
             # second leaf drawn offset, with a short arrow showing the travel
             o = t / 4
             m = (cx + n[0] * o, cy + n[1] * o)
-            sh.line(sh.p(m[0] - u[0] * wd / 2, m[1] - u[1] * wd / 2), sh.p(m[0], m[1]), lw=standard.lw("proj", sh.scale), z=5)
+            sh.line(sh.p(m[0] - u[0] * wd / 2, m[1] - u[1] * wd / 2), sh.p(m[0], m[1]), lw=standard.lw("proj", sh.scale), z=5, color=col)
             continue
         if op == "pocket":
-            sh.line(sh.p(*a), sh.p(*b), lw=thin, ls=(0, (3, 2)), z=5)
+            sh.line(sh.p(*a), sh.p(*b), lw=thin, ls=(0, (3, 2)), z=5, color=col)
             continue
         hx = e.params.get("hinge_xy_mm")
         if hx:
@@ -206,13 +210,13 @@ def _draw_openings(sh: _Sheet, geo: dict, rep: dict, flag_judgement: bool = Fals
         into = e.params.get("swing_into") or e.room
         s_ = _side_toward(geo, e, n, into)
         leaf_end = (ha[0] + s_ * n[0] * wd, ha[1] + s_ * n[1] * wd)
-        sh.line(sh.p(*ha), sh.p(*leaf_end), lw=standard.lw("proj", sh.scale), z=5)
+        sh.line(sh.p(*ha), sh.p(*leaf_end), lw=standard.lw("proj", sh.scale), z=5, color=col)
         ang0 = math.degrees(math.atan2(s_ * n[1], s_ * n[0]))
         ang1 = math.degrees(math.atan2(fa[1] - ha[1], fa[0] - ha[0]))
         d = (ang0 - ang1 + 180) % 360 - 180
         lo, hi = sorted((d, 0.0))
         sh.ax.add_patch(Arc(sh.p(*ha), 2 * wd / sh.scale, 2 * wd / sh.scale, theta1=ang1 + lo, theta2=ang1 + hi,
-                            lw=thin, color="k", zorder=5))
+                            lw=thin, color=col, zorder=5))
         rep.setdefault("swings", []).append({"id": e.id, "hinge_xy": [round(ha[0]), round(ha[1])],
                                               "leaf_end": [round(leaf_end[0]), round(leaf_end[1])]})
     if flag_judgement:
@@ -221,7 +225,7 @@ def _draw_openings(sh: _Sheet, geo: dict, rep: dict, flag_judgement: bool = Fals
                 u, n, t = _opening_frame(e, geo)
                 sd = _side_toward(geo, e, n, e.params.get("swing_into") or e.room)
                 c = sh.p(e.placement[0] + sd * n[0] * (t / 2 + 1000), e.placement[1] + sd * n[1] * (t / 2 + 1000))
-                sh.ax.add_patch(Circle(c, 2.2, fc="#ffe9f3", ec="#c2185b", lw=0.4, zorder=9))
+                sh.ax.add_patch(Circle(c, 3.0, fc="#ffe9f3", ec="#c2185b", lw=0.4, zorder=9))
                 sh.text(c, "?", size=5, color="#c2185b", z=10, weight="bold")
                 rep.setdefault("handing_flags", []).append(e.id)
 
@@ -267,21 +271,28 @@ def _tags(sh: _Sheet, geo: dict, tagmap: dict[str, str], rep: dict, rooms_only: 
     for r in geo["rooms"]:
         poly = r.params["polygon_mm"]
         cx, cy = r.placement[0], r.placement[1]
-        small = min(r.size[0], r.size[1]) < 1500 or r.params["area_m2"] < 3.0
+        small = min(r.size[0], r.size[1]) / sh.scale < 16 or r.params["area_m2"] < 3.0
         name = names.short_en(r.params["name"])
         if sum(1 for q in geo["rooms"] if names.short_en(q.params["name"]) == name) > 1:
             name = (r.params["name"][:1].upper() + r.params["name"][1:])[:48]
         ar = names.room_ar(r.room)
         area = "%.2f m²" % r.params.get("net_area_m2", r.params["area_m2"])
         tag = tagmap[r.id]
+        c = sh.p(cx, cy)
         if small:
-            sh.text(sh.p(cx, cy), "%s\n%s" % (tag, area), size=3.6, bg=True)
+            sh.text(c, "%s\n%s" % (tag, area), size=standard.TEXT_MIN_PT, bg=True)
         else:
-            lines = textwrap.wrap(name, max(12, int(r.size[0] / 1000 * 3.2)))[:3]
-            sh.text(sh.p(cx, cy + 250), "\n".join(lines), size=5.2, weight="bold", bg=True)
+            lines = textwrap.wrap(name, max(8, int(r.size[0] / sh.scale / 2.6)))[:3]
+            y = c[1] + 1.6 * len(lines) + 1.0                    # paper mm: name lines, Arabic name, then tag and area
+            for ln in lines:
+                sh.text((c[0], y), ln, size=standard.ROOM_NAME_PT, weight="bold", bg=True)
+                y -= 4.4
+            y += 0.4
             if ar:
-                sh.text(sh.p(cx, cy - 330 - 120 * (len(lines) - 1)), ar, size=5.0, bg=True)
-            sh.text(sh.p(cx, cy - 750 - 120 * (len(lines) - 1)), "%s  %s" % (tag, area), size=4.6, bg=True)
+                y -= 3.0
+                sh.text((c[0], y), ar, size=standard.ROOM_NAME_PT - 1, bg=True)
+                y -= 2.2
+            sh.text((c[0], y - 2.0), "%s  %s" % (tag, area), size=standard.TEXT_MIN_PT, bg=True)
         rep["room_tags"].append({"id": r.id, "tag": tag})
     for kind, items, shape in (("door", geo["doors"], "circle"), ("window", geo["windows"], "hex")):
         for e in ([] if rooms_only else items):
@@ -290,7 +301,7 @@ def _tags(sh: _Sheet, geo: dict, tagmap: dict[str, str], rep: dict, rooms_only: 
             off = t / 2 + 330
             x, y = e.placement[0] + side * n[0] * off, e.placement[1] + side * n[1] * off
             c = sh.p(x, y)
-            r = 1.9
+            r = 3.1
             if shape == "circle":
                 sh.ax.add_patch(Circle(c, r, fc="white", ec="k", lw=0.3, zorder=7))
             else:
@@ -384,7 +395,6 @@ def _north_scale(sh: _Sheet, geo: dict, level: str, levels: dict, *, true_north:
     nx, ny = sh.p(bx1 + 10 * sc, by1 + 4 * sc)
     sh.ax.add_patch(Polygon([(nx, ny + 9), (nx - 3, ny), (nx + 3, ny)], closed=True, fc="k", ec="k", lw=0.3, zorder=6))
     sh.text((nx, ny + 11.5), "N", size=7, weight="bold")
-    sh.text((nx, ny - 3.5), "north (street side)", size=3.5)
     if true_north:
         # secondary: true north, 70 degrees clockwise of client north (street facade azimuth 290); drawn dashed and labelled
         ang = math.radians(orient.TRUE_NORTH_CW_FROM_CLIENT_NORTH_DEG)
@@ -476,39 +486,25 @@ def parse_scale(txt: str) -> float:
     return float(txt.split(":")[1])
 
 
-def render_plan(els: list[DesignElement], spec: dict, sheet: dict, out_stem: Path | str, *, page: int = 1,
-                pages: int = 1, formats=("pdf", "svg", "png"), layers: tuple[str, ...] = ("tags", "dims"),
-                crop: tuple[float, float, float, float] | None = None, extras=None) -> dict:
-    """Draw one plan sheet from MODEL-frame elements (`els`); the client-north rotation is applied here.
+PAD_X = 40.0          # paper mm each side of a plan for chains, grid bubbles and their text
+LEGEND_W = 110.0      # paper mm of the left column kept for the legend on multi-plan sheets
 
-    `sheet` carries no, level, scale ("1:100"), paper ("A3 landscape"), titles. `layers` selects what is drawn:
-    tags, dims, furniture, luminaires, colorfill, handing, existing, truenorth. `crop` is (x0, y0, x1, y1) in the
-    CLIENT frame (east, north) mm for enlarged callouts. `extras(sh, geo, rep, cels)` draws sheet-specific content.
-    """
-    paper = standard.PAPERS[sheet.get("paper", "A3 landscape").split()[0]]
-    scale = parse_scale(sheet["scale"])
-    cels = orient.to_client(els)
-    level = sheet["level"]
+
+def _draw_plan(sh: _Sheet, els, cels, spec, level, layers, tagmap, extras, crop, first: bool) -> dict:
+    """One level's plan drawn into `sh` at the offsets already set on it (sh.ox, sh.oy, sh.x0, sh.y0)."""
+    from archpipe.drawings2d import layers as L
     geo = _level_geometry(cels, level)
     levels = _model_levels(spec)
-    bx0, by0, bx1, by1 = crop or geo["bbox"]
-    geo["bbox"] = (bx0, by0, bx1, by1)
-    avail_x0, avail_x1 = LEFT + (44 if not crop else 10), paper[0] - EDGE - STRIP - 10
-    ox = avail_x0 + (avail_x1 - avail_x0 - (bx1 - bx0) / scale) / 2
-    oy = EDGE + (paper[1] - 2 * EDGE - (by1 - by0) / scale) / 2 - 8
-    sh = _Sheet(ox, oy, bx0, by0, paper=paper, scale=scale)
-    rep = {"sheet": sheet["no"], "level": level, "room_tags": [], "door_tags": [], "window_tags": [], "dimensions": [],
-           "scale": scale, "layers": list(layers), "frame": "client-north-up"}
-    tagmap = schedules.tag_numbers(els)
-    if crop:
-        sh.ax.set_clip_on(True)
-    from archpipe.drawings2d import layers as L
-
+    geo["bbox"] = crop or geo["bbox"]
+    rep = {"sheet": None, "level": level, "room_tags": [], "door_tags": [], "window_tags": [], "dimensions": [],
+           "scale": sh.scale, "layers": list(layers), "frame": "client-north-up"}
     if "colorfill" in layers:
         rep["colour_legend"] = L.colour_fill(sh, geo["rooms"])
     _draw_walls(sh, geo)
     _draw_stairs_columns(sh, geo, existing_distinct="existing" in layers)
-    _draw_openings(sh, geo, rep, flag_judgement="handing" in layers)
+    _draw_openings(sh, geo, rep, flag_judgement="handing" in layers, coded="opencolour" in layers)
+    if "clearance" in layers:
+        rep["clearance_zones"] = L.clearance_zones(sh, cels, level)
     if "furniture" in layers:
         rep["furniture_drawn"] = L.furniture(sh, cels, level)
     if "luminaires" in layers:
@@ -520,8 +516,51 @@ def render_plan(els: list[DesignElement], spec: dict, sheet: dict, out_stem: Pat
     if "scalebar" in layers or not crop:
         _north_scale(sh, geo, level, levels, true_north="truenorth" in layers)
     if extras:
-        extras(sh, geo, rep, cels)
-    return finish_sheet(sh, spec, sheet, page, pages, out_stem, formats, rep)
+        extras(sh, geo, rep, cels, first)
+    return rep
+
+
+def render_plan(els: list[DesignElement], spec: dict, sheet: dict, out_stem: Path | str, *, page: int = 1,
+                pages: int = 1, formats=("pdf", "svg", "png"), layers: tuple[str, ...] = ("tags", "dims"),
+                crop: tuple[float, float, float, float] | None = None, extras=None) -> dict:
+    """Draw a plan sheet from MODEL-frame elements (`els`); the client-north rotation is applied here.
+
+    `sheet["levels"]` lists the levels drawn side by side (one panel each) at `sheet["scale"]` on `sheet["paper"]`; the
+    left column keeps the legend. The report is `{"sheet", "plans": [per-level report], "files"}`; each per-level report
+    is what `qa()` and the sheet QA read. `layers` selects what is drawn: tags, dims, furniture, luminaires, colorfill,
+    handing, existing, truenorth. `extras(sh, geo, rep, cels, first)` draws sheet-specific content (legend when `first`).
+    """
+    paper = standard.PAPERS[sheet.get("paper", "A3 landscape").split()[0]]
+    scale = parse_scale(sheet["scale"])
+    cels = orient.to_client(els)
+    levels_ = sheet.get("levels") or [sheet["level"]]
+    geos = [_level_geometry(cels, lv) for lv in levels_]
+    boxes = [crop or g["bbox"] for g in geos]
+    pad = PAD_X if "dims" in layers else 14.0           # chains and grid bubbles need the wide margin
+    widths = [(b[2] - b[0]) / scale + 2 * pad for b in boxes]
+    multi = len(levels_) > 1
+    x_lo = LEFT + ((LEGEND_W if "dims" in layers else LEGEND_W + 60) if multi else 44) if not crop else LEFT + 10
+    ymin, ymax = min(b[1] for b in boxes), max(b[3] for b in boxes)          # one client-frame y origin: panels line up
+    x_hi = paper[0] - EDGE - STRIP - 6
+    gap = max(2.0, (x_hi - x_lo - sum(widths)) / (len(widths) + 1))
+    sh = _Sheet(0, 0, 0, 0, paper=paper, scale=scale)
+    tagmap = schedules.tag_numbers(els)
+    plans, x = [], x_lo + gap
+    for i, (lv, bx, w) in enumerate(zip(levels_, boxes, widths)):
+        sh.ox = x + pad
+        sh.oy = EDGE + 4 + 36 + (paper[1] - 2 * EDGE - 20 - ((ymax - ymin) / scale + 84)) / 2      # 36 below (bar, chains), 48 above
+        sh.x0, sh.y0 = bx[0], ymin
+        rep = _draw_plan(sh, els, cels, spec, lv, layers, tagmap, extras, crop, first=(i == 0))
+        rep["sheet"] = sheet["no"]
+        lvl = _model_levels(spec).get(lv, {}).get("ffl_revit_mm")
+        cap = {"B": "Basement", "GF": "Ground floor"}.get(lv, lv)
+        if multi:
+            sh.text((x + 2, sh.p(0, ymax)[1] + 44), "%s  %+.2f" % (cap, (lvl or 0) / 1000.0), size=12, ha="left", weight="bold")
+            sh.text((x + 2, sh.p(0, ymax)[1] + 39.5), "1:%g%s" % (scale, ("   " + rep["caption_note"]) if rep.get("caption_note") else ""), size=standard.TEXT_MIN_PT, ha="left", color="#444444")
+        plans.append(rep)
+        x += w + gap
+    out = {"sheet": sheet["no"], "plans": plans, "frame": "client-north-up", "scale": scale}
+    return finish_sheet(sh, spec, sheet, page, pages, out_stem, formats, out)
 
 
 def finish_sheet(sh: _Sheet, spec: dict, sheet: dict, page: int, pages: int, out_stem, formats, rep: dict) -> dict:

@@ -153,30 +153,166 @@ def view_violations(els: list[DesignElement], rep: dict) -> dict:
     return {"views_wrong": bad, "detail": detail}
 
 
+# ---- print legibility and composition (lead review 2026-11-21: drawings filled ~20 % of the sheet, text unreadable in print)
+# House standard (policy, not a quoted clause): text height = cap height = 0.73 x font size (DejaVu Sans).
+# Room names >= 2.5 mm, every other text on the sheet >= 1.8 mm (tags, dimensions, notes, title block).
+CAP = 0.729
+MIN_ROOM_NAME_MM = 2.5
+MIN_TEXT_MM = 1.8
+DRAWING_KINDS = {"site", "plan", "callout", "elevation", "section", "interior"}
+MIN_FILL = 0.60                    # ink bounding box over the drawing area
+FRAME_LEFT, FRAME_EDGE, TITLE_BAND_MM = 20.0, 10.0, 16.0
+PT_MM = 25.4 / 72.0
+
+
+def pdf_spans(pdf: Path | str) -> list[dict]:
+    doc = _fitz().open(str(pdf))
+    out = []
+    for page in doc:
+        for b in page.get_text("dict")["blocks"]:
+            for l in b.get("lines", []):
+                for sp in l["spans"]:
+                    if sp["text"].strip():
+                        out.append({"text": sp["text"].strip(), "cap_mm": sp["size"] * PT_MM * CAP, "bbox": sp["bbox"], "bold": bool(sp["flags"] & 16 or "Bold" in sp["font"])})
+    doc.close()
+    return out
+
+
+def text_violations(pdf: Path | str, room_names: list[str] = ()) -> dict:
+    """Printed text heights read from the PDF: spans under 1.8 mm cap height, room-name spans under 2.5 mm."""
+    names = [n.lower() for n in room_names]
+    small, small_rooms, n_room = [], [], 0
+    for sp in pdf_spans(pdf):
+        t = sp["text"].lower()
+        is_room = sp["bold"] and len(t) >= 4 and any(t in n for n in names)      # room tags are bold; table cells are not
+        n_room += is_room
+        if is_room and sp["cap_mm"] < MIN_ROOM_NAME_MM - 0.02:
+            small_rooms.append((sp["text"], round(sp["cap_mm"], 2)))
+        elif sp["cap_mm"] < MIN_TEXT_MM - 0.02:
+            small.append((sp["text"], round(sp["cap_mm"], 2)))
+    sizes = [sp["cap_mm"] for sp in pdf_spans(pdf)]
+    return {"text_below_min": len(small), "room_names_below_min": len(small_rooms), "room_name_spans": n_room,
+            "min_cap_mm": round(min(sizes), 2) if sizes else None, "examples": (small + small_rooms)[:5]}
+
+
+def fill_ratio(pdf: Path | str, strip_mm: float = 88.0, cell_mm: float = 40.0) -> dict:
+    """Share of the drawing area that carries ink, read from the rendered PDF: the page is rasterised and the area
+    (frame minus the title-block strip and the title band) is cut into `cell_mm` squares; fill = squares with any ink.
+    A bounding box would count a stray legend in a far corner as 'filled', so occupancy is used (lead review: 20 %)."""
+    import numpy as np
+    fitz = _fitz()
+    doc = fitz.open(str(pdf))
+    page = doc[0]
+    W, H = page.rect.width * PT_MM, page.rect.height * PT_MM
+    dpi = max(10, round(25.4 / (cell_mm / 6)))                  # 6 px per cell
+    pix = page.get_pixmap(dpi=dpi, colorspace=fitz.csGRAY)
+    img = np.frombuffer(pix.samples, np.uint8).reshape(pix.h, pix.w) < 235
+    doc.close()
+    ppm = pix.w / W
+    x0, x1 = (FRAME_LEFT + 2) * ppm, (W - FRAME_EDGE - strip_mm - 2) * ppm
+    y0, y1 = (FRAME_EDGE + TITLE_BAND_MM) * ppm, (H - FRAME_EDGE - 2) * ppm
+    cs = cell_mm * ppm
+    nx, ny = int((x1 - x0) // cs), int((y1 - y0) // cs)
+    hit = 0
+    for i in range(nx):
+        for j in range(ny):
+            hit += bool(img[int(y0 + j * cs):int(y0 + (j + 1) * cs), int(x0 + i * cs):int(x0 + (i + 1) * cs)].any())
+    return {"fill": round(hit / (nx * ny), 3), "cells": [nx, ny]}
+
+
+def _fills(pdf: Path | str) -> list[tuple[str, tuple[float, float, float, float]]]:
+    """(hex fill colour, bbox in mm) of every filled vector shape on page 1."""
+    doc = _fitz().open(str(pdf))
+    out = []
+    for d in doc[0].get_drawings():
+        if d.get("fill") is not None:
+            c = d["fill"]
+            r = d["rect"]
+            out.append(("#%02x%02x%02x" % tuple(round(v * 255) for v in c[:3]),
+                        (r.x0 * PT_MM, r.y0 * PT_MM, r.x1 * PT_MM, r.y1 * PT_MM)))
+    doc.close()
+    return out
+
+
+def stair_detail_violations(els: list[DesignElement], pdf: Path | str, scale: float = 20.0) -> dict:
+    """A-301 must show what the model has: every riser infill bar, the glazed stair guards and the understair cupboard.
+    Counted in the PDF by the detail's fixed fill colours (and, for the bars, by their printed size: bar_h x bar_t at scale)."""
+    from .stairdetail import BAR_FC, CUPBOARD_FC, GLASS_FC
+    st = next(e for e in els if e.kind == "stair")
+    inf = st.params.get("riser_infill") or {}
+    want_bars = inf.get("count", 0) if inf.get("present") else 0
+    want_guards = sum(1 for e in els if e.id in ("rail-stair-open-glass", "rail-gf-stair-void") and e.params.get("glazed"))
+    cb = next((e for e in els if e.id == "joinery-understair-cupboard"), None)
+    want_cb = len(cb.params["walls"]) if cb else 0
+    fills = _fills(pdf)
+    bars = [b for c, b in fills if c == BAR_FC and abs((b[2] - b[0]) - inf.get("bar_t_mm", 0) / scale) < 0.2
+            and abs((b[3] - b[1]) - inf.get("bar_h_mm", 0) / scale) < 0.2]
+    guards = sum(1 for c, _ in fills if c == GLASS_FC)
+    cupboard = sum(1 for c, _ in fills if c == CUPBOARD_FC)
+    return {"bars_missing": max(0, want_bars - len(bars)), "guards_missing": max(0, want_guards - guards),
+            "cupboard_walls_missing": max(0, want_cb - cupboard), "bars_found": len(bars), "bars_expected": want_bars}
+
+
+def interior_violations(els: list[DesignElement], rep: dict, pdf: Path | str) -> dict:
+    """Every door and window of the elevated rooms has its tag on the interior-elevation sheet."""
+    from .interior import ROOMS
+    tags = schedules.tag_numbers(els)
+    found = {t for _, _, t in pdf_words(pdf)}
+    want = [e for e in els if e.kind in ("door", "window") and any(e.room == r or r in e.params.get("rooms", []) for r, _ in ROOMS)
+            and e.level == "GF"]
+    return {"openings_untagged": sum(1 for e in want if tags[e.id] not in found), "openings_expected": len(want),
+            "elevations": len(rep.get("elevations", [])), "elevations_expected": 4 * len(ROOMS)}
+
+
+def yardwall_violations(els: list[DesignElement], pdf: Path | str) -> dict:
+    """The NE yard wall sheet prints the model's own length, thickness and height."""
+    w = next(e for e in els if e.id == "ctx-yard-wall-ne")
+    words = {t for _, _, t in pdf_words(pdf)}
+    want = {str(int(max(w.size[0], w.size[1]))), str(int(min(w.size[0], w.size[1]))), str(int(w.params["z1_scene_mm"] - w.params["z0_scene_mm"]))}
+    return {"dimensions_missing": len(want - words)}
+
+
+def _flatten(by_level: dict) -> dict:
+    """Merge per-level check rows of one sheet into one row (counts add up; orientation keeps pairs and violations)."""
+    out: dict = {}
+    for lv, r in by_level.items():
+        for k, v in r.items():
+            if isinstance(v, dict):
+                for kk, vv in v.items():
+                    out.setdefault(k, {})[kk] = out.get(k, {}).get(kk, 0) + vv
+            else:
+                out[k] = out.get(k, 0) + v
+    return out
+
+
 def run(els: list[DesignElement], reports: dict, out: Path, levels: dict) -> dict:
     """QA over every produced sheet. `reports`: sheet no -> render report. Returns counts and CheckResults."""
     res: dict = {"sheets": {}, "totals": {}}
     results: list[CheckResult] = []
-    total = {"orientation": 0, "tags": 0, "levels": 0, "chains": 0, "handing": 0, "views": 0}
+    total = {"orientation": 0, "tags": 0, "levels": 0, "chains": 0, "handing": 0, "views": 0, "text": 0, "fill": 0, "stair_detail": 0, "interior": 0, "yardwall": 0}
     for no, rep in sorted(reports.items()):
         pdf = out / (rep["files"][0].rsplit(".", 1)[0] + ".pdf")
         if not pdf.exists():
             continue
         row = {}
-        if "room_tags" in rep and rep.get("level") in ("B", "GF") and "panels" not in rep:
-            o = orientation_violations(els, rep["level"], pdf)
-            t = tag_violations(els, rep, pdf)
-            lv = level_line_violations(levels, pdf, ["%+.2f" % (levels[rep["level"]]["ffl_revit_mm"] / 1000.0)])
-            row.update({"orientation": o, "tags_missing": t, "level_line_missing": lv})
+        subs = rep["plans"] if "plans" in rep else ([rep] if "room_tags" in rep and "panels" not in rep else [])
+        for sub in (x for x in subs if x.get("level") in ("B", "GF")):
+            lvl = sub["level"]
+            o = orientation_violations(els, lvl, pdf)
+            t = tag_violations(els, sub, pdf)
+            lv = level_line_violations(levels, pdf, ["%+.2f" % (levels[lvl]["ffl_revit_mm"] / 1000.0)])
+            row.setdefault(lvl, {}).update({"orientation": o, "tags_missing": t, "level_line_missing": lv})
             total["orientation"] += o["violations"]
             total["tags"] += sum(t.values())
             total["levels"] += lv
-            if "dims" in rep.get("layers", []):
-                c = chain_violations(els, rep)
-                h = handing_violations(els, rep)
-                row.update({"chains": c, "handing": h})
+            if "dims" in sub.get("layers", []):
+                c = chain_violations(els, sub)
+                h = handing_violations(els, sub)
+                row[lvl].update({"chains": c, "handing": h})
                 total["chains"] += sum(c.values())
                 total["handing"] += sum(h.values())
+        if subs:
+            row = _flatten(row)
         elif rep.get("generator") == "lineart":
             vv = view_violations(els, rep)
             exp = ["%+.2f" % (levels[k]["ffl_revit_mm"] / 1000.0) for k in ("B", "GF", "L1", "ROOF")]
@@ -184,6 +320,34 @@ def run(els: list[DesignElement], reports: dict, out: Path, levels: dict) -> dic
             row.update({"views": vv, "level_line_missing": lv})
             total["views"] += vv["views_wrong"]
             total["levels"] += lv
+        if not pdf.name.endswith("-cover.pdf"):
+            names_ = [n for e in els if e.kind == "room" for n in {e.params["name"], e.params["name"].split(" (")[0]}]
+            tv = text_violations(pdf, names_)
+            fr = fill_ratio(pdf) if pdf.stem.split("-", 2)[2] in DRAWING_KINDS else {"fill": None}      # tables are not drawings
+            row.update({"text": tv, "fill": fr})
+            total["text"] += tv["text_below_min"] + tv["room_names_below_min"]
+            total["fill"] += 0 if fr["fill"] is None or fr["fill"] >= MIN_FILL else 1
+            results.append(CheckResult("DS2", "RV2", "pass" if tv["text_below_min"] + tv["room_names_below_min"] == 0 else "fail",
+                                       "print text height " + no, float(tv["min_cap_mm"] or 0), MIN_TEXT_MM, "mm cap height (smallest on sheet)",
+                                       "smallest text %.2f mm cap height, %.1f mm required (%d spans below; room names %.1f mm); house policy"
+                                       % (tv["min_cap_mm"] or 0, MIN_TEXT_MM, tv["text_below_min"] + tv["room_names_below_min"], MIN_ROOM_NAME_MM),
+                                       source_ids=(POLICY,)))
+            if fr["fill"] is not None:
+              results.append(CheckResult("DS2", "RV2", "pass" if fr["fill"] >= MIN_FILL else "fail", "drawing-area fill " + no,
+                                         fr["fill"], MIN_FILL, "share of area with ink", "%.0f %% of the drawing area carries ink, %.0f %% required; house policy"
+                                         % (fr["fill"] * 100, MIN_FILL * 100), source_ids=(POLICY,)))
+        if rep.get("generator") == "lineart" and rep["views"] and rep["views"][0]["name"].startswith("Section 1"):
+            sd = stair_detail_violations(els, pdf, rep["views"][0]["scale"])
+            row["stair_detail"] = sd
+            total["stair_detail"] += sd["bars_missing"] + sd["guards_missing"] + sd["cupboard_walls_missing"]
+        if "elevations" in rep:
+            iv = interior_violations(els, rep, pdf)
+            row["interior"] = iv
+            total["interior"] += iv["openings_untagged"] + abs(iv["elevations"] - iv["elevations_expected"])
+        if rep.get("wall"):
+            yv = yardwall_violations(els, pdf)
+            row["yardwall"] = yv
+            total["yardwall"] += yv["dimensions_missing"]
         res["sheets"][no] = row
         for crit, subject, n in (("DS2", "orientation " + no, sum([row.get("orientation", {}).get("violations", 0)])),
                                  ("DS2", "tags/levels " + no, sum(row.get("tags_missing", {}).values()) + row.get("level_line_missing", 0)),
