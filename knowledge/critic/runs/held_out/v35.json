@@ -1,0 +1,41 @@
+{
+ "view": "v35",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.3,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or exterior views are visible in the image; the scene is an interior bathroom with marble walls and a wooden door."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The marble veining on the walls is extremely large-scale and blotchy, appearing several times larger than real stone veining. The wood grain on the door is also unnaturally coarse and stretched."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The toilet bowl in the lower center is a smooth, rounded form without visible polygon facets. The door and walls are flat planes, which is appropriate for their geometry. No crude, boxy, or faceted assets are visible."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The toilet is properly seated on the floor, and the door is correctly framed within the wall opening. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The wooden door on the right is cut off by the frame edge, and the marble wall occupies a large, plain area on the left, but no object blocks the view or bends."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room contains only a wall-hung toilet and a door. It lacks standard bathroom props like a sink, mirror, towel, or basket, making it appear bare and unstyled compared to the furnished reference."
+  },
+  "R13": {
+   "score": 2,
+   "per_order": [
+    2,
+    2
+   ],
+   "evidence": "Image A exhibits characteristics typical of a real photograph, such as uneven, dim lighting that creates soft, natural shadows and a lack of perfect s | Image A exhibits several hallmarks of a computer-generated render rather than a photograph. The lighting is overly uniform and soft, lacking the subtl"
+  }
+ }
+}

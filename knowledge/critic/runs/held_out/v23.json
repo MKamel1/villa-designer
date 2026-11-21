@@ -1,0 +1,41 @@
+{
+ "view": "v23",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.0,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The far end of the hallway shows a bright, flat white area with no visible exterior details, planting, or sky texture."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the door panel on the right is visibly oversized and blotchy, with a salmon-pink hue that is unnatural for real timber at this scale."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "No round objects, foliage, or complex soft forms are present in the hallway scene to exhibit faceting or crude geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The wooden door on the right is properly framed and set into the wall. The hallway is empty of other objects that could float or intersect. No contact or intersection issues are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The left wall occupies roughly 45-50% of the frame, appearing as a large, plain, empty surface with no detail, which exceeds the 40% threshold for a composition flaw."
+  },
+  "R11": {
+   "score": 0,
+   "evidence": "The corridor is completely bare with no props, and the stair void promised in the title is not visible at the end of the hallway."
+  },
+  "R13": {
+   "score": 2,
+   "per_order": [
+    2,
+    2
+   ],
+   "evidence": "Image B exhibits several hallmarks of a computer render: the lighting is overly uniform and soft, lacking the subtle variations and harshness of real- | Image A exhibits characteristics typical of a 3D render: the lighting is very soft and diffuse with no harsh shadows, the textures on the wood and fab"
+  }
+ }
+}

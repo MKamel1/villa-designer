@@ -144,6 +144,14 @@ def test_verdict_non_gating_criterion_does_not_count():
     assert verdict.decide(_m(R8=0, R5=1, R7=1), gating)[0] == "pass"
 
 
+def test_verdict_fails_closed_when_a_gating_criterion_was_not_evaluated():
+    m = _m()
+    m["R12"]["score"] = None
+    v, notes = verdict.decide(m)
+    assert v == "fail" and "R12" in notes["reasons"][0]
+    assert verdict.decide(m, gating={"R1", "R2"})[0] == "pass"      # non-gating gaps do not block
+
+
 def test_verdict_fails_closed_without_vlm():
     assert verdict.decide(_m(), vlm_ok=False)[0] == "fail"
 

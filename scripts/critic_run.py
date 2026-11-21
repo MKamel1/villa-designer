@@ -92,12 +92,12 @@ def main(argv=None) -> int:
     if a.vlm == "ssh":
         cache = vlm_via_ssh(pngs, Path(a.rubric))
     elif a.vlm != "off":
-        for p in pngs:
-            f = Path(a.vlm) / f"{p.stem}.json"
-            if not f.exists():                      # calibration caches are keyed by the vNN prefix
-                f = Path(a.vlm) / f"{p.stem.split('-')[0]}.json"
-            if f.exists():
-                cache[p.stem] = json.loads(f.read_text(encoding="utf-8"))
+        from archpipe.critic import calibrate as C   # noqa: E402  (a.vlm may be several dirs joined by ',')
+        raw = C.load_vlm_dir(a.vlm)
+        for p in pngs:                              # keyed by stem, or by the vNN prefix (calibration caches)
+            j = raw.get(p.stem) or raw.get(p.stem.split("-")[0])
+            if j:
+                cache[p.stem] = j
     verdicts, results = [], []
     views = {p.stem: M.load_view(p) for p in pngs}
     clones = M.clone_report(views) if len(pngs) > 1 else {}       # informational, not in the verdict

@@ -1,0 +1,41 @@
+{
+ "view": "v09",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.2,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, furniture, and ceiling."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the dining table, chairs, and sideboard is significantly oversized and blotchy, appearing several times larger than real-scale timber grain. The marble on the kitchen island also shows unnaturally large, smeared veining patterns."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The white vase on the dining table and the spherical pendant lights in the background are perfectly smooth with no visible polygon facets or crude geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The dining table, chairs, sideboard, and kitchen island all rest firmly on the floor. The pendant lights hang from the ceiling. No objects are floating, detached, or intersecting improperly."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "No objects block the frame, main subjects (table, island) are fully visible, no excessive empty wall, no seams, bands, haze, or bent lines."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The dining table has only a single vase, the island has one small bowl, and the sideboard has one white object. The room is otherwise empty of typical dining props like plates, glasses, or linens."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Image A displays several hallmarks of a computer render: the lighting is overly uniform and clean, the materials (especially the wood grain and marble | Image B displays characteristics of a high-end architectural photograph, such as realistic material textures (e.g., the veining in the marble island, "
+  }
+ }
+}

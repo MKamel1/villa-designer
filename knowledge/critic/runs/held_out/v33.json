@@ -1,0 +1,41 @@
+{
+ "view": "v33",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 28.7,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "Through the glass door on the left, the exterior is a flat white slab with a simple wooden chair and a flat green ground plane, lacking textured planting, detailed facades, or a graded sky."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the coffee table and the dark bookshelves in the background is consistent with real-world scale. The marble veining on the floor is also appropriately sized and not blotchy or stretched."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The sofa cushions, throw pillows, and the small potted plant on the coffee table all appear as smooth, well-modeled 3D assets without visible polygon facets or crude, boxy geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The sofa, coffee table, and potted plant are all correctly grounded on the floor. The wall sconces are properly attached to the wall. No objects are floating or intersecting incorrectly."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "No objects block the view, the sofa is fully framed, walls are balanced with built-ins, no seams, bands, haze, or bent lines are visible."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The living room is fully styled with a sofa, patterned pillows, a coffee table, a potted plant, and built-in bookshelves filled with books, matching the reference's density."
+  },
+  "R13": {
+   "score": 2,
+   "per_order": [
+    2,
+    2
+   ],
+   "evidence": "Both images are high-quality 3D renders rather than photographs. Image A displays perfect geometric symmetry, idealized lighting with no sensor noise, | Both images are high-quality 3D renders rather than photographs. Image A exhibits typical CGI artifacts: the wood grain on the wardrobe is overly unif"
+  }
+ }
+}

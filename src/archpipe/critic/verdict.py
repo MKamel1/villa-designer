@@ -91,6 +91,8 @@ def decide(merged: dict, gating: set[str] | None = None, hero: bool = True, vlm_
         reasons.append(f"{len(warns)} WARNs ({', '.join(warns)}) escalate to FAIL")
     if not vlm_ok:
         reasons.append("VLM unavailable: fail closed")
+    elif missing:
+        reasons.append(f"not evaluated: {', '.join(missing)} (fail closed)")
     verdict = "fail" if reasons else "pass"
     return verdict, dict(zeros=zeros, warns=warns, not_evaluated=missing, reasons=reasons,
                          gating=sorted(gating), hero=hero)

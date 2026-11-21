@@ -1,0 +1,41 @@
+{
+ "view": "v17",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.2,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or openings to the exterior are visible in the frame; the scene is fully enclosed by interior walls and cabinetry."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Marble countertops and floor in Image 2 show veining and grain patterns that are appropriately scaled for real stone, with no visible stretching, smearing, or unnatural coloration."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The black range hood is a simple box shape, the faucet is a flat L-shaped bar, and the black object on the counter is a plain box. The cabinets are flat planes without depth or detail."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The range hood is mounted to the wall, the sink and faucet are integrated into the countertop, and all cabinets rest on the floor with no visible gaps or intersections."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The kitchen is fully visible and well-framed. The large wall area is a natural part of the kitchen design, not an empty void. No objects are cut off, no seams or bands are present, and the lines are straight."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The kitchen is completely bare. There are no dishes, utensils, food, or any other props on the countertops or in the cabinets, making it look like an empty showroom rather than a lived-in space."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    0,
+    1
+   ],
+   "evidence": "Image A exhibits strong indicators of being a 3D render: the surfaces (walls, cabinets) are perfectly smooth and uniform without any texture or imperf | Image B exhibits strong indicators of being a computer render: the surfaces (cabinets, marble) are unnaturally smooth and uniform, the lighting is per"
+  }
+ }
+}

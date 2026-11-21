@@ -1,0 +1,41 @@
+{
+ "view": "v20",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.0,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or openings to the exterior are visible in the frame; the scene is fully interior."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The marble veining on the large kitchen island countertop and the floor tiles is significantly oversized and blotchy, appearing several times larger than natural stone veining at this scale."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The spherical pendant lights in the kitchen are perfectly smooth with no visible polygon facets. The pink bowl on the island has a smooth, organic shape. The sofa and chairs in the background have appropriate volume and softness, not appearing as flat boxes or rigid wedges."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The pink bowl on the kitchen island, the stools under the island, and the pendant lights all appear to be correctly positioned with proper contact and no visible floating or intersection issues."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "No objects block the frame, main subjects are fully visible, no excessive empty wall, no seams, bands, haze, or bent lines are present."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The kitchen island has only a bowl and a tablet; the background living area has a sofa and one plant, but the kitchen itself lacks typical props like cookware, fruit, or decor, making it appear bare compared to a fully styled scene."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    0
+   ],
+   "evidence": "Image A displays several hallmarks of a 3D render: the lighting is overly uniform and clean, the marble textures on the floor and island appear repeti | Image B exhibits strong indicators of being a computer render: the lighting is unnaturally uniform and bright with no visible shadows or depth; surfac"
+  }
+ }
+}
