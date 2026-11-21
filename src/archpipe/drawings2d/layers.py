@@ -37,10 +37,13 @@ def colour_fill(sh, rooms: list[DesignElement]) -> list[tuple[str, str]]:
     return sorted(seen.items())
 
 
-def furniture(sh, els: list[DesignElement], level: str, *, labels: bool = True) -> int:
+def furniture(sh, els: list[DesignElement], level: str, *, labels: bool = True, window=None) -> int:
     n = 0
     for e in els:
         if e.kind != "furniture" or e.level != level:
+            continue
+        if window and not (window[0] - e.size[0] <= e.placement[0] <= window[2] + e.size[0]
+                           and window[1] - e.size[0] <= e.placement[1] <= window[3] + e.size[0]):
             continue
         typ = e.params.get("type", "")
         dress = typ == "dressing"

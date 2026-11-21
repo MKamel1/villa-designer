@@ -3,7 +3,7 @@
 Client convention (memory `feedback_orientation_naming`): the street side (model -x) is NORTH, model +y is EAST,
 model +x is SOUTH, model -y is WEST. A plan is drawn north-up, so sheet (X right, Y up) = (model y, -model x):
 a pure rotation by -90 degrees, no mirroring. `to_client` returns copies of the design elements already in that frame
-so the plan drawing code (which treats +Y as north) needs no further change. True north (site plan only) is a
+so the plan drawing code (which treats +Y as north) needs no further change. True north (site plan only, 70 degrees clockwise of sheet-up) is a
 labelled secondary.
 """
 from __future__ import annotations
@@ -12,7 +12,7 @@ import dataclasses
 
 from archpipe.contracts import DesignElement
 
-TRUE_NORTH_DEG = 20.0           # site: true north is 20 degrees from the model frame (see spec/villa-site.yaml notes)
+TRUE_NORTH_CW_FROM_CLIENT_NORTH_DEG = 70.0   # street facade faces true azimuth 290 (villa_env.STREET_FACADE_AZIMUTH), so true N is 70 deg clockwise of sheet-up
 LOCAL_FRAME_KINDS = {"door", "window", "furniture", "luminaire", "fixture", "plant", "device"}   # size in own frame
 
 

@@ -37,6 +37,16 @@ def _room_name(rooms: dict[str, DesignElement], rid: str) -> str:
     return r.params.get("name", rid) if r else rid
 
 
+def _hinge_client(e: DesignElement) -> str:
+    """Hinge side as a client compass word (N street .. S, E +y, W -y) from the exact hinge point, or ''."""
+    hx = e.params.get("hinge_xy_mm")
+    if not hx or e.params.get("operation") != "hinged":
+        return ""
+    dx, dy = hx[0] - e.placement[0], hx[1] - e.placement[1]
+    return {"S": "south", "N": "north", "E": "east", "W": "west"}[
+        "S" if abs(dx) >= abs(dy) and dx > 0 else "N" if abs(dx) >= abs(dy) else "E" if dy > 0 else "W"]
+
+
 def door_schedule(elements: list[DesignElement]) -> list[dict]:
     tags = tag_numbers(elements)
     rooms = {e.room: e for e in elements if e.kind == "room"}
@@ -49,7 +59,9 @@ def door_schedule(elements: list[DesignElement]) -> list[dict]:
             "from": _room_name(rooms, pair[0]),
             "to": _room_name(rooms, pair[1]) if len(pair) > 1 else "",
             "width_mm": int(p.get("width_mm", e.size[0])), "height_mm": int(p.get("height_mm", e.size[2])),
-            "operation": p.get("operation", ""), "glazed_garden_door": bool(p.get("garden")),
+            "operation": p.get("operation", ""), "handing": p.get("handing", ""),
+            "hinge_side": _hinge_client(e), "swing_into": _room_name(rooms, p["swing_into"]) if p.get("swing_into") else "",
+            "to_confirm": "YES" if p.get("judgement") else "", "glazed_garden_door": bool(p.get("garden")),
             "host_wall": e.host,
         })
     return rows
@@ -115,3 +127,59 @@ def to_md(rows: list[dict], title: str) -> str:
     for r in rows:
         lines.append("| " + " | ".join(str(r[c]) for c in cols) + " |")
     return "\n".join(lines) + "\n"
+
+
+def _by_room(elements: list[DesignElement], kind: str) -> dict[str, DesignElement]:
+    return {e.id.split("-", 1)[1]: e for e in elements if e.kind == kind}
+
+
+def finish_schedule(elements: list[DesignElement]) -> list[dict]:
+    """One row per room: floor, wall (from the wall sides that face the room) and ceiling finish codes, ceiling kind
+    and height. Codes are the model's own; nothing is inferred when a code is empty (shown blank)."""
+    floors, ceilings = _by_room(elements, "floor"), _by_room(elements, "ceiling")
+    walls: dict[str, set[str]] = {}
+    for w in elements:
+        if w.kind == "wall":
+            for side in w.params.get("sides", {}).values():
+                if side and side.get("room"):
+                    walls.setdefault(side["room"], set()).add(side.get("finish_code") or "")
+    tags = tag_numbers(elements)
+    rows = []
+    for e in sorted((e for e in elements if e.kind == "room"), key=lambda e: tags[e.id]):
+        f, c = floors.get(e.room), ceilings.get(e.room)
+        rows.append({"tag": tags[e.id], "level": e.level, "name": e.params.get("name", e.room),
+                     "floor": f.params.get("finish_code", "") if f else "",
+                     "walls": ", ".join(sorted(x for x in walls.get(e.room, ()) if x)),
+                     "ceiling": c.params.get("finish_code", "") if c else "",
+                     "ceiling_kind": c.params.get("ceiling_kind", "") if c else "",
+                     "ceiling_mm": int(c.params.get("height_mm", 0)) if c else 0})
+    return rows
+
+
+def furniture_schedule(elements: list[DesignElement]) -> list[dict]:
+    """Furniture by type and room (dressing props excluded: they are not furniture and are listed by the render lane)."""
+    rooms = {e.room: e.params.get("name", e.room) for e in elements if e.kind == "room"}
+    rows = []
+    for e in sorted((e for e in elements if e.kind == "furniture" and e.params.get("type") != "dressing"),
+                    key=lambda e: (_lv(e), e.room, e.params.get("type", ""), e.id)):
+        rows.append({"id": e.id, "level": e.level, "room": rooms.get(e.room, e.room), "type": e.params.get("type", ""),
+                     "w_mm": int(e.size[0]), "d_mm": int(e.size[1]), "h_mm": int(e.size[2]),
+                     "product": e.product_id or ""})
+    return rows
+
+
+def luminaire_schedule(elements: list[DesignElement]) -> list[dict]:
+    """One row per luminaire type (kind, product code, what, photometry), with counts per level and total watts."""
+    g: dict[tuple, dict] = {}
+    for e in elements:
+        if e.kind != "luminaire":
+            continue
+        p = e.params
+        ph = p.get("photometry") or {}
+        key = (p.get("fixture_kind", ""), ph.get("manufacturer", ""), ph.get("code", ""), p.get("what", ""))
+        r = g.setdefault(key, {"mark": key[0], "manufacturer": key[1], "code": key[2], "description": key[3],
+                               "cct_k": p.get("cct_k"), "lumens": p.get("flux_lm"), "watts": p.get("watts") or 0.0,
+                               "count_B": 0, "count_GF": 0, "total_watts": 0.0, "type_id": p.get("type_id", "")})
+        r["count_" + e.level] = r.get("count_" + e.level, 0) + 1
+        r["total_watts"] = round(r["total_watts"] + (p.get("watts") or 0.0), 1)
+    return sorted(g.values(), key=lambda r: (r["mark"], r["code"]))

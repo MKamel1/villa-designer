@@ -247,17 +247,17 @@ def _draw_stairs_columns(sh: _Sheet, geo: dict, *, existing_distinct: bool = Fal
         a, z = (c0, c1) if up else (c1, c0)
         sh.ax.annotate("", xy=sh.p(*z), xytext=sh.p(*a), arrowprops=dict(arrowstyle="->", lw=0.4), zorder=6)
         sh.ax.add_patch(Circle(sh.p(*a), 0.9, fc="k", ec="k", zorder=6))
-        sh.text(sh.p(c0[0] + 0.0, c0[1] - 450), "UP" if up else "DN", size=4, z=6)
+        sh.text(sh.p(c0[0] + 0.0, c0[1] - 4.5 * sh.scale), "UP" if up else "DN", size=4, z=6)
         # break line across the flight at 1.0 m of rise (plan convention: the cut plane crosses the stair)
         mid = boxes[len(boxes) // 2]
         horiz = abs(mid[3] - mid[0]) < abs(mid[4] - mid[1])
         cx, cy = (mid[0] + mid[3]) / 2, (mid[1] + mid[4]) / 2
         if horiz:
-            sh.line(sh.p(cx - 700, cy - 120), sh.p(cx, cy + 120), lw=standard.lw("proj", sh.scale), z=6)
-            sh.line(sh.p(cx, cy + 120), sh.p(cx + 700, cy - 120), lw=standard.lw("proj", sh.scale), z=6)
+            sh.line(sh.p(cx - 7 * sh.scale, cy - 1.2 * sh.scale), sh.p(cx, cy + 1.2 * sh.scale), lw=standard.lw("proj", sh.scale), z=6)
+            sh.line(sh.p(cx, cy + 1.2 * sh.scale), sh.p(cx + 7 * sh.scale, cy - 1.2 * sh.scale), lw=standard.lw("proj", sh.scale), z=6)
         else:
-            sh.line(sh.p(cx - 120, cy - 700), sh.p(cx + 120, cy), lw=standard.lw("proj", sh.scale), z=6)
-            sh.line(sh.p(cx + 120, cy), sh.p(cx - 120, cy + 700), lw=standard.lw("proj", sh.scale), z=6)
+            sh.line(sh.p(cx - 1.2 * sh.scale, cy - 7 * sh.scale), sh.p(cx + 1.2 * sh.scale, cy), lw=standard.lw("proj", sh.scale), z=6)
+            sh.line(sh.p(cx + 1.2 * sh.scale, cy), sh.p(cx - 1.2 * sh.scale, cy + 7 * sh.scale), lw=standard.lw("proj", sh.scale), z=6)
 
 
 def _tags(sh: _Sheet, geo: dict, tagmap: dict[str, str], rep: dict, rooms_only: bool = False) -> None:
@@ -281,7 +281,7 @@ def _tags(sh: _Sheet, geo: dict, tagmap: dict[str, str], rep: dict, rooms_only: 
             sh.text(sh.p(cx, cy - 750 - 120 * (len(lines) - 1)), "%s  %s" % (tag, area), size=4.6, bg=True)
         rep["room_tags"].append({"id": r.id, "tag": tag})
     for kind, items, shape in (("door", geo["doors"], "circle"), ("window", geo["windows"], "hex")):
-        for e in items:
+        for e in ([] if rooms_only else items):
             u, n, t = _opening_frame(e, geo)
             side = _side_toward(geo, e, n, e.room)
             off = t / 2 + 330
@@ -383,8 +383,8 @@ def _north_scale(sh: _Sheet, geo: dict, level: str, levels: dict, *, true_north:
     sh.text((nx, ny + 11.5), "N", size=7, weight="bold")
     sh.text((nx, ny - 3.5), "north (street side)", size=3.5)
     if true_north:
-        # secondary: true north, 20 degrees from the model frame; drawn dashed and labelled
-        ang = math.radians(orient.TRUE_NORTH_DEG)
+        # secondary: true north, 70 degrees clockwise of client north (street facade azimuth 290); drawn dashed and labelled
+        ang = math.radians(orient.TRUE_NORTH_CW_FROM_CLIENT_NORTH_DEG)
         tx, ty = nx + 20, ny
         sh.line((tx, ty), (tx + 9 * math.sin(ang), ty + 9 * math.cos(ang)), lw=0.5, ls=(0, (3, 1.5)), z=6)
         sh.text((tx + 9 * math.sin(ang) + 4, ty + 9 * math.cos(ang) + 2), "true N", size=3.6)
@@ -518,6 +518,12 @@ def render_plan(els: list[DesignElement], spec: dict, sheet: dict, out_stem: Pat
         _north_scale(sh, geo, level, levels, true_north="truenorth" in layers)
     if extras:
         extras(sh, geo, rep, cels)
+    return finish_sheet(sh, spec, sheet, page, pages, out_stem, formats, rep)
+
+
+def finish_sheet(sh: _Sheet, spec: dict, sheet: dict, page: int, pages: int, out_stem, formats, rep: dict) -> dict:
+    """Title block, titles, banner; write the files. Shared by every drawn sheet (plans, site, sections, callouts)."""
+    paper = sh.paper
     _title_block(sh, spec, sheet, page, pages)
     sh.text((LEFT + 4, paper[1] - EDGE - 5), sheet["title_en"], size=9, ha="left", weight="bold")
     sh.text((x_title_ar(paper), paper[1] - EDGE - 5), sheet["title_ar"], size=9, ha="right", weight="bold")
