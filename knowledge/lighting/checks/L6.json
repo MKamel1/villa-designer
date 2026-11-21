@@ -1,0 +1,304 @@
+{
+  "contract": "0.1",
+  "lane": "L6",
+  "results": [
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "ref/CIE171-5.2/Radiance",
+      "achieved": 0.039,
+      "required": 5.0,
+      "unit": "% max error",
+      "message": "Radiance: max |error| 0.039 % over 10 points vs published E (111.11 ... 49.39 lx); tolerance 5 %",
+      "source_ids": [
+        "CIE171-2006-5.2-via-DAU"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "ref/CIE171-5.2/analytic",
+      "achieved": 0.044000000000000004,
+      "required": 5.0,
+      "unit": "% max error",
+      "message": "analytic: max |error| 0.044 % over 10 points vs published E (111.11 ... 49.39 lx); tolerance 5 %",
+      "source_ids": [
+        "CIE171-2006-5.2-via-DAU"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "ref/CIE171-5.8/rho=0.2",
+      "achieved": 26.313887458796316,
+      "required": 26.0,
+      "unit": "lx",
+      "message": "mean indirect E 26.3 lx vs published Eav 26.00 lx (+1.21 %); ab 8 vs 16 differ -0.01 %",
+      "source_ids": [
+        "CIE171-2006-5.8-via-DAU"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "ref/CIE171-5.8/rho=0.5",
+      "achieved": 105.08333078611112,
+      "required": 104.0,
+      "unit": "lx",
+      "message": "mean indirect E 105.1 lx vs published Eav 104.00 lx (+1.04 %); ab 8 vs 16 differ -0.14 %",
+      "source_ids": [
+        "CIE171-2006-5.8-via-DAU"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "ref/CIE171-5.8/rho=0.8",
+      "achieved": 407.63096288425925,
+      "required": 417.0,
+      "unit": "lx",
+      "message": "mean indirect E 407.6 lx vs published Eav 417.00 lx (-2.25 %); ab 21 vs 42 differ -0.01 %",
+      "source_ids": [
+        "CIE171-2006-5.8-via-DAU"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "ref/UGR/SLL-T12.6-flux-correction",
+      "achieved": 0.04992989900469702,
+      "required": 0.06,
+      "unit": "UGR points",
+      "message": "8 log10(flux/1000) vs the 49 printed correction values: max difference 0.050",
+      "source_ids": [
+        "SLL-T12.6-UGR-flux-correction"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "ref/UGR/SLL-T12.10-position-index",
+      "achieved": 7.527299890505912,
+      "required": 8.0,
+      "unit": "% max K error",
+      "message": "K = pi/(4 p^2 D^2) from our Guth index vs 27 printed K cells: max |error| 7.5 %, mean 4.8 % (K ~ p^-2, so p within about half of that)",
+      "source_ids": [
+        "SLL-T12.10-UGR-K"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA4",
+      "lane": "L6",
+      "status": "not_evaluated",
+      "subject": "ref/UGR/CIE190-worked-example",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "CIE 190:2010 worked example (2H x 4H, disymmetric luminaire) not accessible (paywalled) and no held page prints a luminaire's photometry together with its UGR table; no manufacturer UGR table with its LDT was obtained. The +/-1 acceptance of LA4 is therefore NOT demonstrated.",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "fail",
+      "subject": "D1-dining/table-top/full",
+      "achieved": 709.4397153151111,
+      "required": 100.0,
+      "unit": "lx",
+      "message": "Eavg 709 lx vs card 100 lx; allowed 90-110 lx (7.09x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "fail",
+      "subject": "D1-dining/table-top/full",
+      "achieved": 709.4397153151111,
+      "required": 150.0,
+      "unit": "lx",
+      "message": "Eavg 709 lx vs cap 150 lx (1.5 x card 100 lx): 7.09 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "D1-dining/table-top/full",
+      "achieved": 0.40721250947119986,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 709 Emin 289 Emax 1334 lx; U0 0.41; max:avg 1.88; avg:min 2.46",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "D1-dining/table-top/dinner-dimmed(f=0.13)",
+      "achieved": 100.0,
+      "required": 100.0,
+      "unit": "lx",
+      "message": "Eavg 100 lx vs card 100 lx; allowed 90-110 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "D1-dining/table-top/dinner-dimmed(f=0.13)",
+      "achieved": 100.0,
+      "required": 150.0,
+      "unit": "lx",
+      "message": "Eavg 100 lx vs cap 150 lx (1.5 x card 100 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "D1-dining/table-top/dinner-dimmed(f=0.13)",
+      "achieved": 0.4547713028184876,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 100 Emin 45 Emax 179 lx; U0 0.45; max:avg 1.79; avg:min 2.20",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "fail",
+      "subject": "D1-dining-built/table-top/full",
+      "achieved": 390.3570895764445,
+      "required": 100.0,
+      "unit": "lx",
+      "message": "Eavg 390 lx vs card 100 lx; allowed 90-110 lx (3.90x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "fail",
+      "subject": "D1-dining-built/table-top/full",
+      "achieved": 390.3570895764445,
+      "required": 150.0,
+      "unit": "lx",
+      "message": "Eavg 390 lx vs cap 150 lx (1.5 x card 100 lx): 3.90 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "D1-dining-built/table-top/full",
+      "achieved": 0.1864603581684051,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 390 Emin 73 Emax 875 lx; U0 0.19; max:avg 2.24; avg:min 5.36",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA1",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "D1-dining-built/table-top/dinner-dimmed(f=0.23)",
+      "achieved": 100.0,
+      "required": 100.0,
+      "unit": "lx",
+      "message": "Eavg 100 lx vs card 100 lx; allowed 90-110 lx (1.00x of target)",
+      "source_ids": [
+        "IES-HB10-p33.25-avg-allowance"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA2",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "D1-dining-built/table-top/dinner-dimmed(f=0.23)",
+      "achieved": 100.0,
+      "required": 150.0,
+      "unit": "lx",
+      "message": "Eavg 100 lx vs cap 150 lx (1.5 x card 100 lx): 1.00 x target",
+      "source_ids": [
+        "L6-POLICY-LA2-over-lighting-1.5x"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "LA3",
+      "lane": "L6",
+      "status": "pass",
+      "subject": "D1-dining-built/table-top/dinner-dimmed(f=0.23)",
+      "achieved": 0.24905805647846246,
+      "required": null,
+      "unit": "U0",
+      "message": "reported: n=18 Em 100 Emin 25 Emax 213 lx; U0 0.25; max:avg 2.13; avg:min 4.02",
+      "source_ids": [
+        "IES-HB10-p33.25-uniformity-targets"
+      ],
+      "element_ids": [],
+      "gate": false
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+ "case_5_2_transcription_check": [
+  {
+   "point": "A",
+   "published_E": 111.11,
+   "formula_E": 111.11,
+   "d_from_xy": 3.0,
+   "d_published": 3.0,
+   "rel_err_formula": 1.0000100001033547e-05
+  },
+  {
+   "point": "B",
+   "published_E": 105.21,
+   "formula_E": 105.21,
+   "d_from_xy": 3.041,
+   "d_published": 3.041,
+   "rel_err_formula": 3.804945445605757e-05
+  },
+  {
+   "point": "C",
+   "published_E": 90.02,
+   "formula_E": 90.02,
+   "d_from_xy": 3.162,
+   "d_published": 3.162,
+   "rel_err_formula": 1.8992926845175687e-07
+  },
+  {
+   "point": "D",
+   "published_E": 71.11,
+   "formula_E": 71.11,
+   "d_from_xy": 3.354,
+   "d_published": 3.354,
+   "rel_err_formula": 2.834760397181045e-06
+  },
+  {
+   "point": "E",
+   "published_E": 99.73,
+   "formula_E": 99.73,
+   "d_from_xy": 3.082,
+   "d_published": 3.082,
+   "rel_err_formula": 4.574899364544078e-05
+  },
+  {
+   "point": "F",
+   "published_E": 85.64,
+   "formula_E": 85.64,
+   "d_from_xy": 3.202,
+   "d_published": 3.202,
+   "rel_err_formula": 5.1412331465581194e-05
+  },
+  {
+   "point": "G",
+   "published_E": 68.06,
+   "formula_E": 68.06,
+   "d_from_xy": 3.391,
+   "d_published": 3.391,
+   "rel_err_formula": 5.999180603977338e-05
+  },
+  {
+   "point": "H",
+   "published_E": 74.36,
+   "formula_E": 74.36,
+   "d_from_xy": 3.317,
+   "d_published": 3.317,
+   "rel_err_formula": 2.3527005067105927e-06
+  },
+  {
+   "point": "I",
+   "published_E": 59.98,
+   "formula_E": 59.98,
+   "d_from_xy": 3.5,
+   "d_published": 3.5,
+   "rel_err_formula": 1.199061163358587e-05
+  },
+  {
+   "point": "J",
+   "published_E": 49.39,
+   "formula_E": 49.39,
+   "d_from_xy": 3.674,
+   "d_published": 3.674,
+   "rel_err_formula": 3.858113403081407e-05
+  }
+ ],
+ "case_5_2": {
+  "case": "CIE 171:2006 5.2 (diffuse photometry)",
+  "rows": [
+   {
+    "point": "A",
+    "expected_E_lx": 111.11,
+    "analytic_lx": 111.111,
+    "radiance_lx": 111.119,
+    "analytic_err": 1e-05,
+    "radiance_err": 8e-05
+   },
+   {
+    "point": "B",
+    "expected_E_lx": 105.21,
+    "analytic_lx": 105.169,
+    "radiance_lx": 105.176,
+    "analytic_err": -0.00039,
+    "radiance_err": -0.00032
+   },
+   {
+    "point": "C",
+    "expected_E_lx": 90.02,
+    "analytic_lx": 89.98,
+    "radiance_lx": 89.985,
+    "analytic_err": -0.00044,
+    "radiance_err": -0.00039
+   },
+   {
+    "point": "D",
+    "expected_E_lx": 71.11,
+    "analytic_lx": 71.095,
+    "radiance_lx": 71.098,
+    "analytic_err": -0.00021,
+    "radiance_err": -0.00017
+   },
+   {
+    "point": "E",
+    "expected_E_lx": 99.73,
+    "analytic_lx": 99.703,
+    "radiance_lx": 99.709,
+    "analytic_err": -0.00027,
+    "radiance_err": -0.00021
+   },
+   {
+    "point": "F",
+    "expected_E_lx": 85.64,
+    "analytic_lx": 85.652,
+    "radiance_lx": 85.656,
+    "analytic_err": 0.00013,
+    "radiance_err": 0.00019
+   },
+   {
+    "point": "G",
+    "expected_E_lx": 68.06,
+    "analytic_lx": 68.046,
+    "radiance_lx": 68.049,
+    "analytic_err": -0.0002,
+    "radiance_err": -0.00016
+   },
+   {
+    "point": "H",
+    "expected_E_lx": 74.36,
+    "analytic_lx": 74.374,
+    "radiance_lx": 74.377,
+    "analytic_err": 0.00019,
+    "radiance_err": 0.00023
+   },
+   {
+    "point": "I",
+    "expected_E_lx": 59.98,
+    "analytic_lx": 59.961,
+    "radiance_lx": 59.963,
+    "analytic_err": -0.00031,
+    "radiance_err": -0.00028
+   },
+   {
+    "point": "J",
+    "expected_E_lx": 49.39,
+    "analytic_lx": 49.378,
+    "radiance_lx": 49.379,
+    "analytic_err": -0.00024,
+    "radiance_err": -0.00021
+   }
+  ],
+  "max_abs_err_analytic": 0.00044,
+  "max_abs_err_radiance": 0.00039
+ },
+ "case_5_8": {
+  "case": "CIE 171:2006 5.8 (internal reflected component)",
+  "sensors_per_run": 216,
+  "rows": [
+   {
+    "rho": 0.2,
+    "ab": 8,
+    "ab2": 16,
+    "E_indirect_ab": 26.312461674074072,
+    "E_indirect_ab2": 26.313887458796316,
+    "E_direct_avg_radiance": 104.91062711111111,
+    "E_direct_avg_closed_form": 104.16666666666667,
+    "closed_form_indirect": 26.041666666666664,
+    "published_Eav": 26.0,
+    "err_vs_published": 0.012072594569089157,
+    "err_vs_closed_form": 0.010453278417778655,
+    "convergence_ab_vs_2ab": -5.418373565957424e-05
+   },
+   {
+    "rho": 0.5,
+    "ab": 8,
+    "ab2": 16,
+    "E_indirect_ab": 104.93893065740743,
+    "E_indirect_ab2": 105.08333078611112,
+    "E_direct_avg_radiance": 104.91062711111111,
+    "E_direct_avg_closed_form": 104.16666666666667,
+    "closed_form_indirect": 104.16666666666667,
+    "published_Eav": 104.0,
+    "err_vs_published": 0.010416642174145396,
+    "err_vs_closed_form": 0.008799975546666783,
+    "convergence_ab_vs_2ab": -0.0013741487600693603
+   },
+   {
+    "rho": 0.8,
+    "ab": 21,
+    "ab2": 42,
+    "E_indirect_ab": 407.6063437546296,
+    "E_indirect_ab2": 407.63096288425925,
+    "E_direct_avg_radiance": 104.91062711111111,
+    "E_direct_avg_closed_form": 104.16666666666667,
+    "closed_form_indirect": 416.66666666666674,
+    "published_Eav": 417.0,
+    "err_vs_published": -0.022467714905853087,
+    "err_vs_closed_form": -0.021685689077778014,
+    "convergence_ab_vs_2ab": -6.039563200854747e-05
+   }
+  ]
+ },
+ "source": "CIE 171:2006 expected values as reproduced in DAU 'Validation of NVIDIA Iray against CIE 171:2006' (2016) Tables 7 and 15; CIE 171 itself not held"
+}
