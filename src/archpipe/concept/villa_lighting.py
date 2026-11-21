@@ -938,7 +938,7 @@ SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
         "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
-        "Dinner": {"table-pendant": 0.405, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
+        "Dinner": {"table-pendant": 0.47, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
         "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.3, "island-pendants": 0.4},
         "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.15, "*decorative": 0.2},

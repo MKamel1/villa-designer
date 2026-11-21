@@ -44,7 +44,8 @@ def load_candidate(path: Path) -> tuple[str, dict]:
     path = Path(path)
     if path.suffix.lower() == ".ldt":
         ld = eulumdat.load(path)
-        return ld.to_ies_text(), dict(format="ldt", cct_k=ld.cct_k, cri=ld.cri_ra, lumens_header=ld.luminaire_flux(0))
+        lamp = ld.lamp_sets[0]
+        return ld.to_ies_text(), dict(format="ldt", cct_k=lamp.cct_k, cri=lamp.cri_ra, lumens_header=ld.luminaire_flux(0))
     raw = path.read_bytes().decode("latin-1").lstrip("﻿")
     text = V10_text(raw)
     m = re.search(r"^TILT=NONE\s*\n\s*(\S+)\s+(\S+)\s+(\S+)", text, re.M)
@@ -123,7 +124,9 @@ def check_inputs(ies_text: str, ds: dict, fmeta: dict) -> tuple[list[dict], dict
         rows.append(dict(id="V10", status="not_evaluated", reason="no published non-lumen point supplied (Imax, lux at a distance, "
                          "beam angle/diameter): the file's lumens are checked, its distribution is NOT checked against the maker's data"))
     t = V10.read_ies(ies_text)
-    facts.update(beam=round(V10.beam_full_angle_independent(t), 1), imax=round(max(max(r) for r in t.cd), 1), watts=_watts(ies_text))
+    imax = max(max(r) for r in t.cd)
+    on_axis = t.cd[0][0] >= 0.9 * imax            # the 50 % beam angle is defined from the nadir; a task lamp/wall washer peaks off axis
+    facts.update(beam=round(V10.beam_full_angle_independent(t), 1) if on_axis else None, imax=round(imax, 1), watts=_watts(ies_text))
     return rows, facts
 
 
@@ -372,7 +375,10 @@ def run(tag: str, ies: Path, datasheet: Path | None, radiance: bool = False, out
     if rated:
         rr = analytic_rerun(kind, tag, ies_file, rated, watts, cct, frozen)
         report["clusters"] = rr["clusters"]
-        if rr["status"] == "ok":
+        if rr["status"] == "unused":
+            report["note"] = rr["message"] + ": performance-spec check only, no room re-run"
+            verdict = ACCEPT if not hard else REJECT
+        elif rr["status"] == "ok":
             prow, new_drv, old_drv = judge_rooms(rr)
             report["rooms"] = prow
             report["drivers"] = {z: dict(old=old_drv.get(z), new=round(v, 3)) for z, v in new_drv.items()}
@@ -408,6 +414,8 @@ def run(tag: str, ies: Path, datasheet: Path | None, radiance: bool = False, out
 
 def _ref_lm(kind: str) -> float:
     from .. import fixture_record as FR
+    if kind not in FR.KINDS:                       # a proposed type not in the design: the reference product's own lumens
+        return float(SCH.TYPE_SPEC[kind]["ref"][0].get("lm", 676)) if SCH.TYPE_SPEC[kind]["ref"] else 0.0
     p = FR.bind_products().get(kind)
     return float(p["lm"]) if p else float(FR.KINDS[kind].get("lm") or FR.KINDS[kind].get("lm_per_m"))
 
@@ -450,6 +458,8 @@ def render(rep: dict) -> str:
     if rep.get("radiance"):
         L += ["", "(c') Radiance (ab 12): " + ", ".join("%s %.0f/%g" % (r["plane"], r["em"], r["target"]) for r in rep["radiance"]["rows"]
                                                        if r["gauge"] == "average")]
+    if rep.get("note"):
+        L.append("  note: " + rep["note"])
     L += ["", "VERDICT: %s" % rep["verdict"]] + ["  - " + r for r in rep["reasons"]]
     return "\n".join(L)
 

@@ -60,9 +60,11 @@ TYPE_SPEC = {
                     ref=[dict(maker="ERCO", code="50674.000", url="https://www.erco.com/50674.000", v10="pass",
                               name="Jilly pendant downlight 1500 mm, 27 W, 3558 lm (2 x 1779), 2700 K, CRI 92, DALI-2, UGR 19")],
                     beam=(87, "wide direct distribution, beam 86-89 deg"), cct=2700, ugr="UGR <= 19 (datasheet UGR 19)", ip="IP20", ik="-",
+                    lumens_text="Reference 3558 lm (2 x 1779) is OVERSIZED: the design commissions it at 13 % (Dinner about 6 %). "
+                                "Preferred: 700-1800 lm for a 1.4-1.6 m linear pendant (the substitution check re-solves its level; "
+                                "at <= 80 % and >= 5 % of output it is accepted)",
                     dimming=DIM_DALI, size="length 1500 mm, width 41 mm, height 121 mm; two wire suspensions, drop 2500 mm adjustable",
-                    finish="white RAL 9002", note="OVERSIZED for the table: the design runs it at about 15 % (Dinner about 7 %); a 1.5 m pendant of "
-                    "700-1500 lm with the same 1 % DALI floor is preferred"),
+                    finish="white RAL 9002", note="a smaller linear pendant is preferred (see lumens); the reference is the only V10-verified linear pendant held"),
     "DESK": dict(name="Adjustable desk task lamp, shielded", role="Desk lamps: cinema desk, children's desks", mount="desk or wall arm, 450 mm over the desktop",
                  ref=[dict(maker="ERCO", code="31327.000", url="https://www.erco.com/31327.000", v10="pass",
                            name="Lucy task light, wide beam, 9.4 W, 234 lm, 2700 K, CRI 92, on-board dim")],
@@ -122,6 +124,13 @@ TYPE_SPEC = {
     "PATH": dict(name="Low path marker light", role="Corridor and landing night route", mount="recessed in the wall, 300 mm AFF", ref=[], beam=(None, "asymmetric, floor wash"),
                  cct=2200, ugr="shielded", ip="IP44", ik="IK07", dimming="switched or DALI, dimmed to 10 % in Night", size="100 x 40 mm face", finish="white or stainless",
                  note="lumens-only"),
+    "EXT-DL": dict(name="Exterior surface downlight, shielded (PROPOSAL, not yet counted)", role="Terrace and step lighting under the soffit/pergola; "
+                   "down-only, ULR 0 (LA12)", mount="surface, ceiling/soffit",
+                   ref=[dict(maker="ERCO", code="B0000184", url="https://www.erco.com/B0000184", v10="pass",
+                             name="Iku surface-mounted downlight IP65, 5 W, 676 lm, 3000 K as listed (2700 K or 3500 K CRI 92 on request), DALI-2")],
+                   beam=(None, "down-only narrow cone (Imax 815 cd); compare the IES/LDT"), cct=2700, ugr="fully shielded, no light above the horizontal",
+                   ip="IP65", ik="IK07", dimming=DIM_DALI, size="surface body; to the maker's drawing", finish="graphite",
+                   note="ERCO lists 3000 K; ask for 2700 K. Quantity follows the exterior design (not in the D1 interior count)"),
 }
 
 _STRIPS = ("COVE", "BACK", "UC", "RAIL", "TOE", "NL", "VSTRIP", "MIRROR")
@@ -156,8 +165,8 @@ def build_schedule(fixtures=None, drivers=None) -> list[dict]:
     rows = []
     for kind, subs in by_kind.items():
         subs.sort(key=lambda t: -t[0])
-        if kind in _STRIPS or kind in ("PEN-GLOBE", "WALL-READ", "SWING", "RAIL"):
-            subs = [(subs[0][0], [x for _s, fs in subs for x in fs])] if len(subs) > 1 and kind in _STRIPS else subs
+        if len(subs) > 1 and (kind in _STRIPS or kind in ("VANITY-LIN", "SCONCE", "WALL-READ", "SWING", "DESK")):
+            subs = [(subs[0][0], [x for _s, fs in subs for x in fs])]       # one tag; the rated lumens of each size are listed
         for i, (size, fs) in enumerate(subs):
             tag = kind if len(subs) == 1 else "%s-%s" % (kind, "ABCDEFGH"[i])
             spec = TYPE_SPEC[kind]
@@ -171,6 +180,9 @@ def build_schedule(fixtures=None, drivers=None) -> list[dict]:
                              lm_per_m=(round(sum(r for _f, r in fs) / length) if length else None),
                              layer=sorted({VL.zone_layer(f) for f, _r in fs}), driver_min=min(ds) if ds else None,
                              driver_max=max(ds) if ds else None, zones=sorted({VL.zone_id(f) for f, _r in fs}), spec=spec))
+    for kind in ("EXT-DL",):
+        rows.append(dict(tag=kind, kind=kind, qty=0, length_m=None, rooms={}, rated_lm=[676.0], lm_per_m=None, layer=["exterior"], driver_min=None,
+                         driver_max=None, zones=[], spec=TYPE_SPEC[kind], proposed=True))
     order = {k: i for i, k in enumerate(TYPE_SPEC)}
     rows.sort(key=lambda r: (order[r["kind"]], r["tag"]))
     return rows

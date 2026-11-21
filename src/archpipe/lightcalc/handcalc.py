@@ -62,3 +62,34 @@ def estimate(placements: list, levels: dict, rect: tuple, z: float, room, mf: fl
     e_dir = phi_plane / area
     e_ind = phi_total * rho / (a_tot * (1 - rho))
     return dict(e_direct=mf * e_dir, e_indirect=mf * e_ind, e_hand=mf * (e_dir + e_ind), phi_total=phi_total, rho=rho, area=area, surfaces=a_tot)
+
+
+def main(res_dir: str, out: str = "knowledge/lighting/v6-subplanes.json") -> dict:
+    """Hand estimate vs the Radiance result (ab 12, owning scene) for the three open-plan sub-planes LV could not estimate."""
+    import json
+    from pathlib import Path
+
+    from ..concept.villa_lighting import SCENES
+    from . import villa_report as VR
+    from .villa import MF, Villa
+
+    v = Villa()
+    res = VR.ClusterRes.load(Path(res_dir) / "B-open.json")
+    rows = {}
+    for p in v.planes():
+        if p.id not in ("dining-table", "homework-end", "daybed"):
+            continue
+        levels = VR.scene_levels(res, SCENES["B-open"], p.scene)
+        xs, ys = [q[0] for q in p.polygon], [q[1] for q in p.polygon]
+        h = estimate(v.cluster_placements("B-open"), levels, (min(xs), min(ys), max(xs), max(ys)), p.z, v.cluster_room("B-open"), MF)
+        eng = res.stats(p.id, levels).em
+        rows[p.id] = dict(scene=p.scene, e_hand=round(h["e_hand"], 1), e_direct=round(h["e_direct"], 1), e_indirect=round(h["e_indirect"], 1),
+                          radiance=round(eng, 1), ratio=round(eng / h["e_hand"], 3), rho=round(h["rho"], 3), within_25_percent=abs(eng / h["e_hand"] - 1) <= 0.25)
+    Path(out).write_text(json.dumps(rows, indent=1), encoding="utf-8")
+    return rows
+
+
+if __name__ == "__main__":
+    import sys
+    for k, r in main(sys.argv[1]).items():
+        print(k, r)
