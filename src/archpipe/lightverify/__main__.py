@@ -69,7 +69,7 @@ def main(argv=None) -> int:
     if rad.exists() and any(rad.glob("*.json")):
         layers["V5"] = v5_engines.run(villa, rad, with_cycles=not a.no_cycles)
         if not a.no_cycles:                              # one light per product kind: catches an orientation error a room average hides
-            layers["V5"].results += v5_engines.run_orientation(villa)
+            v5_engines.run_orientation(villa, layers["V5"])
         layers["V6"] = v6_handcalc.run(villa, rad)
         layers["V7"] = v7_convergence.run(villa, rad)
     else:
@@ -80,6 +80,8 @@ def main(argv=None) -> int:
     layers["V10"] = v10_erco.run(villa)
     layers["V11"] = dialux_compare.run(dialux_pack.OUT) if dialux_pack.OUT.exists() else LayerResult("V11")
     layers["V12"] = v12_headroom.run(villa)
+    if rad.exists():
+        v12_headroom.cards_met(villa, rad, layers["V12"])
     if a.skip_v8:
         L = LayerResult("V8")
         L.results.append(check("LV8", "not_evaluated", "all", (), message="skipped (--skip-v8)"))
@@ -88,7 +90,17 @@ def main(argv=None) -> int:
         layers["V8"] = v8_mutation.run(villa, rad if rad.exists() else rad, ts)
     results = [r for k in sorted(layers, key=lambda s: int(s[1:])) for r in layers[k].results]
     path = write_results("LV", results)
-    Path(a.out).write_text(report.render(villa, layers), encoding="utf-8")
+    sha = None
+    if scene and Path(scene).exists():
+        import hashlib
+        h = hashlib.sha256()
+        with open(scene, "rb") as fh:
+            for blk in iter(lambda: fh.read(1 << 24), b""):
+                h.update(blk)
+        sha = h.hexdigest()
+    meta = dict(design=a.design, scene=scene, scene_sha256=sha, rad=str(rad),
+                scene_note="geometry only: the scene's lights are those of the build, V3 does not use them" if scene else "none")
+    Path(a.out).write_text(report.render(villa, layers, meta), encoding="utf-8")
     counts = {}
     for r in results:
         counts[r.status] = counts.get(r.status, 0) + 1

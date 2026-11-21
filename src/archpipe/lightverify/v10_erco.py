@@ -151,7 +151,7 @@ def run(villa=None) -> LayerResult:
             add("lumens", False, "no 'Luminous flux of the luminaire' in the data sheet text", status="not_evaluated")
         if ds["watts"]:
             w = sum(d.input_watts for d in di)
-            add("watts", abs(w - ds["watts"]) < 0.15 * ds["watts"] + 0.1, "file %.2f W vs data-sheet connected load %g W (the load includes control gear: file watts are the LED input)" % (w, ds["watts"]), w, ds["watts"], "W")
+            add("watts", abs(w - ds["watts"]) < 0.15 * ds["watts"] + 0.1, "file %.2f W vs data-sheet connected load %g W" % (w, ds["watts"]), w, ds["watts"], "W")
         # (d) published points
         if ds["imax"]:
             pk = ies.peak_cd(f0)
@@ -173,6 +173,8 @@ def run(villa=None) -> LayerResult:
         L.table.append(dict(kind=kind, code=code, rows=rows, datasheet=ds))
     if villa is not None:
         zone_of = {(p.meta.get("parent") or p.id): p.zone for p in villa.placements}
+        for f in villa.fixtures:
+            L.mark(f.room, "pass")          # not applicable where a room has no bound product (generic fittings only)
         for f in villa.fixtures:
             code = KINDS.get(f.kind)
             if not code:

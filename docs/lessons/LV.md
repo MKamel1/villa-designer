@@ -1,0 +1,10 @@
+# LV lessons (defect -> why it was missed -> guard)
+
+| defect | why it was missed | guard now |
+|---|---|---|
+| V1's instance check compared each sample of the 8-point pendant with the whole fixture's lumens. | The check was written when every product was one placement per fixture; the L6c redesign sampled the pendant along its length. | `instance_problems` sums by parent; `test_sampled_pendant_is_summed_by_parent` (fails on the old code) and `test_wrong_parent_total_is_still_caught`. |
+| Frozen Radiance baselines silently described the previous design. | Tests compared stored results with the live design, so a redesign only showed as a failing test, not as a stale baseline. | Baseline regenerated on the L6c design; `python -m archpipe.lightverify --regen-radiance --freeze` rebuilds it from the current design. |
+| V10 only knew the iGuzzini products; the ERCO products were "V10 pass" by LP's say-so. | V10 trusted the lane that bound the product. | `v10_erco.py` parses the data-sheet PDFs itself and reproduces lumens, Imax, lux on axis and beam; negative tests change the data-sheet text. A 1 m cone row was first missed (row shares its line with other text): `test_datasheet_parser_reads_every_row_of_the_cone_table`. |
+| A gate that was global (`V10` pass/fail for the whole design) could not express "one product is partial". | One failing point would have made every room unverified, or been hidden. | V10 is a per-room status; the partial ADJ makes only the lounge unverified, with the armchair sensitivity in numbers. |
+| The wallwasher is thrown 90 deg off in Cycles versus the engine and Radiance; V5 only compared room averages. | Room averages mix many lights; the calibrated azimuth offset was proven on straight-down lights only. | V5 single-light orientation probe per product kind (`kind_orientation`), a negative test that the probe responds to spin, and a quiet test for the symmetric DL. |
+| LA4 passes with a 90 000 cd/m2 downlight in the room. | The check only counts sources inside 45 deg of one chosen sightline. | Reported as a design finding with the numbers; add a "looking up" sightline (not mine to edit). |

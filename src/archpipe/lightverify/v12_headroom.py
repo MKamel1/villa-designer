@@ -70,3 +70,36 @@ def run(v, drivers: dict | None = None, scenes: dict | None = None, limit: float
         L.table.append(dict(plane=pl.id, scene=pl.scene, zone=z, level=worst, bound=prod, ok=ok))
         L.mark(pl.room, "pass" if ok else "fail")
     return L
+
+
+CARD_BAND = (0.90, 1.10)     # L6c's own acceptance for an average-gauged card (policy, not a standard)
+
+
+def cards_met(v, rad_dir, L: LayerResult | None = None) -> list:
+    """The drivers V12 checks are only meaningful if they reproduce the cards. Re-read every average-gauged task card from LV's OWN Radiance
+    results (the placements carry the commissioned drivers): plane mean in the card's scene / card must lie in CARD_BAND."""
+    import re
+    from pathlib import Path
+    from ..concept import villa_lighting as VL
+    from ..lightcalc import villa_report as VR
+    from ..lightcalc.villa import cluster_of
+    res, out = {}, []
+    for pl in v.planes():
+        if pl.id.startswith("room-"):
+            continue
+        cl = cluster_of(pl.room)
+        f = Path(rad_dir) / (cl + ".json")
+        if not f.exists():
+            out.append(check("LV12", "not_evaluated", "card/" + pl.id, (), message="no Radiance results for cluster %s" % cl))
+            continue
+        r = res.get(cl) or res.setdefault(cl, VR.ClusterRes.load(f))
+        vals = r.values(pl.id, VR.scene_levels(r, VL.SCENES[cl], pl.scene))
+        mean = sum(vals) / len(vals)
+        card = float(re.findall(r"(\d+)(?!.*\d)", pl.card)[0])
+        ok = CARD_BAND[0] <= mean / card <= CARD_BAND[1]
+        out.append(check("LV12", "pass" if ok else "fail", "card/" + pl.id, SRC, achieved=round(mean, 1), required=card, unit="lx",
+                         message="%s in %s: plane mean %.0f lx (LV Radiance, commissioned drivers) vs card %.0f lx = x%.3f (band %.2f-%.2f)"
+                         % (pl.id, pl.scene, mean, card, mean / card, *CARD_BAND)))
+    if L is not None:
+        L.results += out
+    return out
