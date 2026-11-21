@@ -24,13 +24,25 @@ LEVEL_TITLE = {
 
 SHEET_TITLES = {
     "A-001": ("Cover, sheet index and legend", "الغلاف وفهرس اللوحات ومفتاح الرموز"),
+    "A-100": ("Site plan with context", "الموقع العام"),
     "A-101": LEVEL_TITLE["B"],
     "A-102": LEVEL_TITLE["GF"],
-    "A-201": ("Elevations north and south", "الواجهتان الشمالية والجنوبية"),
+    "A-111": ("Furnished plan, basement -1.80", "مسقط الأثاث، الدور السفلي"),
+    "A-112": ("Furnished plan, ground floor +1.20", "مسقط الأثاث، الدور الأرضي"),
+    "A-121": ("Reflected ceiling and lighting plan, basement", "مسقط السقف والإضاءة، الدور السفلي"),
+    "A-122": ("Reflected ceiling and lighting plan, ground floor", "مسقط السقف والإضاءة، الدور الأرضي"),
+    "A-131": ("Room colour-fill plan, basement", "مسقط ألوان الغرف، الدور السفلي"),
+    "A-132": ("Room colour-fill plan, ground floor", "مسقط ألوان الغرف، الدور الأرضي"),
+    "A-141": ("Stair enlarged plans 1:20", "مساقط السلم بمقياس 20:1"),
+    "A-142": ("Wet rooms enlarged plans 1:20", "مساقط الحمامات بمقياس 20:1"),
+    "A-201": ("Elevations north (street) and south", "الواجهتان الشمالية (الشارع) والجنوبية"),
     "A-202": ("Elevations east and west", "الواجهتان الشرقية والغربية"),
     "A-301": ("Section through the stair", "قطاع من خلال السلم"),
     "A-302": ("Section through the sunken garden", "قطاع من خلال الحديقة الغائرة"),
     "A-601": ("Door, window and room schedules", "جداول الأبواب والنوافذ والغرف"),
+    "A-602": ("Finish schedule", "جدول التشطيبات"),
+    "A-603": ("Furniture schedule", "جدول الأثاث"),
+    "A-604": ("Luminaire schedule", "جدول وحدات الإضاءة"),
 }
 
 
