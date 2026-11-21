@@ -7,6 +7,7 @@
 *.gz binary
 *.rvt binary
 *.rfa binary
-*.ies text eol=lf
+*.ies binary
+*.ldt binary
 *.ps1 text eol=crlf
 *.bat text eol=crlf
