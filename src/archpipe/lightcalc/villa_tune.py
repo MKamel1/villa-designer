@@ -7,6 +7,7 @@ Two solves, both on measured per-zone results:
   drivers(): for every average-gauged task plane, in the scene that owns its card, make Em_p = target by choosing the
              driver factor of the zones that scene lists as tunable (level 1.0 and flagged); least squares on the
              relative error, coordinate descent, bounds [lo, hi].
+  The ridge term (weight 0.02 against a squared relative error, pulled to 0.5) only chooses between equally good splits.
   nothing else is tuned: other zones keep the scene's stated level.
 """
 from __future__ import annotations
@@ -15,8 +16,8 @@ from . import villa_report as VR
 
 
 def solve(res_by_cluster: dict, planes: list, scenes: dict, tunable: set, lo: float = 0.15, hi: float = 3.0,
-          init: dict | None = None, sweeps: int = 400) -> dict:
-    """Return {zone: d}. scenes: {cluster: {scene: {key: level}}}; tunable: set of zone ids (full ids)."""
+          init: dict | None = None, sweeps: int = 400, ridge: float = 0.02, pull: float = 0.5, applied: dict | None = None) -> dict:
+    """Return {zone: d} as ABSOLUTE drivers (`applied`: the drivers the Radiance run already contains). scenes: {cluster: {scene: {key: level}}}; tunable: set of zone ids (full ids)."""
     d = {z: 1.0 for z in tunable}
     if init:
         d.update({z: v for z, v in init.items() if z in d})
@@ -33,7 +34,7 @@ def solve(res_by_cluster: dict, planes: list, scenes: dict, tunable: set, lo: fl
                 continue
             em = res.stats(p.id, {z: L}).em
             if z in tunable:
-                var[z] = em
+                var[z] = em / (applied or {}).get(z, 1.0)      # Em at driver 1.0 (the run had `applied` drivers in it)
             else:
                 fixed += em
         if var:
@@ -56,8 +57,8 @@ def solve(res_by_cluster: dict, planes: list, scenes: dict, tunable: set, lo: fl
                 a = var[z] / t
                 num += a * (1.0 - rest / t)
                 den += a * a
-            if den > 0:
-                d[z] = min(hi, max(lo, num / den))
+            if den > 0:      # a zone that shares a plane with another is under-determined: the ridge picks the balanced split
+                d[z] = min(hi, max(lo, (num + ridge * pull) / (den + ridge)))
     return d, rows
 
 

@@ -35,12 +35,12 @@ def main(tag: str, out_dir: str = "out/L6b", write: bool = False, lo: float = 0.
             if layer == "task" or z.endswith(("-ISLAND-PENDANTS", "-TABLE-PENDANT")):
                 tunable.add(z)
     init = json.loads(TABLE.read_text(encoding="utf-8")) if TABLE.exists() else {}
-    d, rows = solve(res, planes, SCENES, tunable, lo=lo)
+    d, rows = solve(res, planes, SCENES, tunable, lo=lo, applied=init)
     for pid, t, em, ratio in residuals(rows, d):
         print("%-22s target %4d -> %5.0f (%.2fx)" % (pid, t, em, ratio))
-    new = {z: round(init.get(z, 1.0) * f, 3) for z, f in d.items()}
+    new = {z: round(f, 3) for z, f in d.items()}
     for z in sorted(new):
-        print("driver %-44s %.2f (x%.2f this round)" % (z, new[z], d[z]))
+        print("driver %-44s %.2f (was %.2f)" % (z, new[z], init.get(z, 1.0)))
     # Dinner: the table pendant's scene level that puts the table top on its 100 lx card, other Dinner zones as stated
     # (Em is linear in the level; the Radiance results already contain the drivers applied to the design)
     from .villa_report import scene_levels
