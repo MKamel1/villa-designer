@@ -292,7 +292,8 @@ def load_scene(path, library_root: str | None = None) -> TriSet:
                 cache[spec["asset"]] = ("bbox", gltf_boxes(gl))
         kind, data = cache[spec["asset"]]
         rot = spec.get("rotation_deg", [0, 0, 0])
-        sc = spec.get("scale", 1.0)
+        # same rule as blender/villa_scene.import_models: fitted models use scale_xyz, everything else the scalar
+        sc = spec["scale_xyz"] if spec.get("scaling") or spec.get("furniture_fitting") else spec.get("scale", 1.0)
         tris = place_triangles(data, spec["position"], rot, sc) if kind == "tri" else place_asset(data, spec["position"], rot, sc)
         ts.add(tris, spec["id"], "mesh" if kind == "tri" else "bbox")
     ts.missing_assets = missing

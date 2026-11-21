@@ -95,3 +95,37 @@ def test_plane_check_flags_height_error_only_for_hosted():
     assert r["hosted"] and r["worst_gap_mm"] == pytest.approx(30, abs=2)
     ok = Plane("study-desk", "r", ((1.3, 0.1), (1.9, 0.1), (1.9, 0.9), (1.3, 0.9)), 0.0, "c", 400)
     assert V3.check_plane(ts, ok)["worst_gap_mm"] < 2
+
+
+def _cube_scene(tmp_path, model_extra):
+    """A 1 m glTF cube asset and a scene.json placing it as a model with the given extra keys."""
+    import base64, json, struct
+    v = [(x, y, z) for x in (0, 1) for y in (0, 1) for z in (0, 1)]
+    idx = [0, 1, 3, 0, 3, 2, 4, 6, 7, 4, 7, 5, 0, 4, 5, 0, 5, 1, 2, 3, 7, 2, 7, 6, 0, 2, 6, 0, 6, 4, 1, 5, 7, 1, 7, 3]
+    vb = b"".join(struct.pack("<3f", *p) for p in v)
+    ib = struct.pack("<36H", *idx)
+    uri = "data:application/octet-stream;base64," + base64.b64encode(vb + ib).decode()
+    g = {"asset": {"version": "2.0"}, "scene": 0, "scenes": [{"nodes": [0]}], "nodes": [{"mesh": 0}],
+         "meshes": [{"primitives": [{"attributes": {"POSITION": 0}, "indices": 1}]}],
+         "buffers": [{"uri": uri, "byteLength": len(vb) + len(ib)}],
+         "bufferViews": [{"buffer": 0, "byteOffset": 0, "byteLength": len(vb)},
+                         {"buffer": 0, "byteOffset": len(vb), "byteLength": len(ib)}],
+         "accessors": [{"bufferView": 0, "componentType": 5126, "count": 8, "type": "VEC3", "min": [0, 0, 0], "max": [1, 1, 1]},
+                       {"bufferView": 1, "componentType": 5123, "count": 36, "type": "SCALAR"}]}
+    d = tmp_path / "props" / "cube"
+    d.mkdir(parents=True)
+    (d / "model.gltf").write_text(json.dumps(g))
+    spec = {"id": "m1", "asset": "cube", "position": [0, 0, 0], "rotation_deg": [0, 0, 0], "scale": 1.0, **model_extra}
+    sc = tmp_path / "scene.json"
+    sc.write_text(json.dumps({"meshes": [], "props": [], "models": [spec], "library_root": str(tmp_path)}))
+    return G.load_scene(sc)
+
+
+def test_load_scene_applies_scale_xyz_of_fitted_models(tmp_path):
+    ts = _cube_scene(tmp_path, {"furniture_fitting": {"height_m": 0.75}, "scale_xyz": [1.8, 0.7, 0.75]})
+    assert np.allclose(ts.T.reshape(-1, 3).max(axis=0) - ts.T.reshape(-1, 3).min(axis=0), [1.8, 0.7, 0.75])
+
+
+def test_load_scene_ignores_scale_xyz_when_not_fitted(tmp_path):      # negative: the renderer uses the scalar then
+    ts = _cube_scene(tmp_path, {"scale_xyz": [1.8, 0.7, 0.75], "scale": 1.0})
+    assert np.allclose(ts.T.reshape(-1, 3).max(axis=0) - ts.T.reshape(-1, 3).min(axis=0), [1, 1, 1])
