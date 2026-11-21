@@ -464,7 +464,7 @@ def design(lay=None):
             "(no shadow of the head); L6b: DL", card="ies-res-desk-400", zone="desk-task:task")
     d2 = fp["study-adult-desk"]
     add("DL", "study-game", (d2[0] + d2[2]) / 2, d2[1] - 0.05, why="desk light over the adult desk; L6b: DL",
-        card="ies-res-desk-400", zone="desk-task:task")
+        card="ies-res-desk-400", zone="desk-adult:task")
     FB = rc["family-bath"]
     add("DL", "family-bath", (FB[0] + FB[2]) / 2 + 0.2, (FB[1] + FB[3]) / 2 - 0.3, why="bath ambient",
         card="ies-res-shower-50")
@@ -913,7 +913,7 @@ SCENES = {
     "GF-parents-bed": {"Day": _DAY, "Evening": _EVENING, "Night": _NIGHT,
                        "Reading": {"bed-reading": 1.0, "*decorative": 0.3}},
     "GF-parents-dressing": {"Day": _DAY, "Night": _NIGHT},
-    "GF-parents-ensuite": {"Day": _DAY, "Night": _NIGHT},
+    "GF-parents-ensuite": {"Day": dict(_DAY, **{"*accent": 0.4}), "Night": _NIGHT},   # marble-wall washers at 40 % by day
     "GF-family-bath": {"Day": _DAY, "Night": _NIGHT},
     "B-guest-wc": {"Day": _DAY, "Night": _NIGHT},
     "B-dirty-kitchen": {"Day": _DAY},
