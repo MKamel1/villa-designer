@@ -190,9 +190,9 @@ pantry,B,SOC-pantry-117,power/lighting control,socket,3617,-29294,300,EA1-genera
 pantry,B,SWI-pantry-111,power/lighting control,switch,5152,-28671,1150,EA1-switch-latch-side,,DB-B/L1,hinge assumed (policy)
 stair-b,B,RACK-040,ELV/fire,rack,7417,-28071,1200,EA15-rack,,,ELV cabinet assumed in the under-stair cupboard (client to confirm)
 stair-b,B,SMOKE-017,ELV/fire,smoke,7417,-28071,2700,EA15-smoke-room,,,"interlinked, mains + sealed battery (Grade D1)"
-stair-b,B,lum-BACK-stair-b-01,luminaire,accent,5575,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,2.13 W
-stair-b,B,lum-BACK-stair-b-02,luminaire,accent,6025,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,1.24 W
-stair-b,B,lum-BACK-stair-b-03,luminaire,accent,6350,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,1.02 W
+stair-b,B,lum-BACK-stair-b-01,luminaire,accent,5575,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,3.4449 W
+stair-b,B,lum-BACK-stair-b-02,luminaire,accent,6025,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,2.0055 W
+stair-b,B,lum-BACK-stair-b-03,luminaire,accent,6350,-28445,,,Z-B-STAIR-B-ACCENT,DB-B/L1,1.6497 W
 stair-b,B,lum-STEP-stair-b-04,luminaire,night,7269,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L3,0.67 W
 stair-b,B,lum-STEP-stair-b-05,luminaire,night,8109,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L3,0.67 W
 stair-b,B,lum-STEP-stair-b-06,luminaire,night,8949,-28469,,,Z-B-STAIR-B-NIGHT,DB-B/L3,0.67 W

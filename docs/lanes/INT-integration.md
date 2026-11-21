@@ -3,7 +3,7 @@
 **Re-run (after L6c or any lighting/model change):** `python -m archpipe.exchange.integrate` (add `--skip-snapshot` if the model snapshot is
 already current; the snapshot step is ~6 min, everything else ~1 min plus the suite). Steps: model snapshot, electrical design on the
 real zones (writes `docs/lanes/L7b-d1/` and `tests/electrical/d1/`), exchange (IFC/DXF/quantities + validation), drawing set and the committed sample
-schedules, then the lane suite. Then `python -m archpipe.compliance.run_d1` (0 failing gates; `git checkout` the regenerated L1 report) and
+schedules, then the lane suite (plus, since INT2, `tests/test_mounting*.py tests/test_d1_*.py tests/test_exposure_groups.py tests/test_villa_lighting.py`: the scene-building tests; `integrate` runs them). Then `python -m archpipe.compliance.run_d1` (0 failing gates; `git checkout` the regenerated L1 report) and
 `python scripts/lane_guard.py INT`.
 
 ## Broken tests, cause, fix

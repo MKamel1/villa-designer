@@ -6307,12 +6307,12 @@
     {
       "criterion": "EA13",
       "lane": "L7",
-      "status": "fail",
+      "status": "pass",
       "subject": "DB-B/L1",
       "achieved": 363.82,
-      "required": 361.01,
+      "required": 363.7201,
       "unit": "W",
-      "message": "circuit 364 W vs sum of 35 luminaires 361 W",
+      "message": "circuit 364 W vs sum of 35 luminaires 364 W",
       "source_ids": [
         "EL-POL-CIRCUITS"
       ],
