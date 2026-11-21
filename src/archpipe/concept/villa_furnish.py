@@ -227,9 +227,10 @@ def _layout(lay=None, products=True):
     add(item("lounge-armchair", None, "armchair", 8.42, -26.2, 90, h=0.85,
              why="fifth seat, turned to the TV and the family corner"), "lounge")
     add(against("stair-flight-store", r["stair-b"], "y0", 5.30, "under_stair_storage",
-                w=1.80, d=0.4, h=2.3, soffit="stair", doors="sliding",
-                modules=[("standing-access", 0.55), ("luggage", 0.65), ("seasonal-boxes", 0.60)],
-                why="sliding-door joinery cut to the descending stair soffit; standing access at the high end"),
+                w=1.20, d=0.4, h=2.3, soffit="stair", doors="sliding",
+                modules=[("standing-access", 0.55), ("luggage", 0.35), ("seasonal-boxes", 0.30)],
+                why="sliding-door joinery cut to the descending stair soffit; standing access at the high end; "
+                    "ends at x 6.50 where the G1 understair cupboard (x 6.561..9.657) begins; three bays kept so fixture numbering (approved marker ids) is unchanged"),
         "stair-b")
     add(against("stair-landing-store", r["lounge-nook"], "y0", 3.99, "under_stair_storage",
                 w=0.2, d=0.2, h=2.3, soffit="landing", doors="sliding",
