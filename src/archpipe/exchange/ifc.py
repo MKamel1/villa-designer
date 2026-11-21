@@ -527,10 +527,11 @@ def build_ifc(elements: list[DesignElement], levels: dict | None = None, design:
         if lv not in levels:
             raise C.ExchangeError([f"level table lacks {lv}"])
     f = _B(elements, levels, design).build()
-    f.wrapped_data.header.file_name.time_stamp = FIXED_TIMESTAMP
-    f.wrapped_data.header.file_name.author = ("archpipe",)
-    f.wrapped_data.header.file_name.organization = ("arch-pipeline",)
-    f.wrapped_data.header.file_name.originating_system = "archpipe.exchange"
+    hdr = getattr(f, "header", None) or f.wrapped_data.header      # ifcopenshell 0.9 / 0.8 spelling
+    hdr.file_name.time_stamp = FIXED_TIMESTAMP
+    hdr.file_name.author = ("archpipe",)
+    hdr.file_name.organization = ("arch-pipeline",)
+    hdr.file_name.originating_system = "archpipe.exchange"
     return f
 
 
