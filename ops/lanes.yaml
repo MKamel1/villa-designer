@@ -108,6 +108,32 @@ lanes:
     - src/archpipe/model/data/**
     - tests/model/**
     - docs/lanes/FIX1*.md
+  M:   # Revit plan stage 0: model completion
+    - src/archpipe/model/api.py
+    - src/archpipe/model/spec_source.py
+    - src/archpipe/model/fit_source.py
+    - src/archpipe/model/schema.py
+    - src/archpipe/model/export.py
+    - src/archpipe/model/geometry*.py
+    - src/archpipe/model/validate*.py
+    - src/archpipe/model/data/**
+    - src/archpipe/concept/villa_r11.py
+    - src/archpipe/concept/revit_spec.py
+    - src/archpipe/concept/stairs.py
+    - src/archpipe/concept/villa.py
+    - knowledge/existing/**
+    - tests/model/**
+    - tests/design/**
+    - docs/lanes/M*.md
+  P2:  # Revit plan stage 1: element ids on scene meshes
+    - src/archpipe/concept/villa_render.py
+    - src/archpipe/blender/**
+    - src/archpipe/model/passes.py
+    - scripts/villa_render.py
+    - scripts/villa_render_views.py
+    - scripts/benchmark_scene_build.py
+    - tests/pipeline/**
+    - docs/lanes/P2*.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md

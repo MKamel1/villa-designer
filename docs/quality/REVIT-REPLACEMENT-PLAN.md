@@ -140,7 +140,10 @@ What the inventory changed:
 | I05 wall joins and room bounding | Model validation: wall-to-wall join and room-closure checks, with the room-bounding result compared to the frozen Revit room areas. |
 | D02 sub-mm contact | Check exact contacts on the model geometry (no rounding), not the scene. |
 | D15/D17/D18 visible only in exports | Sheet QA in RV2 (orientation and mirroring check against the model; tags; level lines) plus the render critic. |
-| U27/I07 who receives files, U29 markup round trip | **Client questions** (below). |
+| U27/I07 who receives files | **Client (2026-11-21): local engineer/architect, contractor/QS, and the family.** IFC + DXF + PDF all needed now; quantity take-off (no prices) moves into RV3 now. |
+| U29 markup round trip | **Client: keep it.** Stage 3: comments on a sheet or the review page become tracked change requests linked to element ids. |
+
+**Plan approved by the client 2026-11-21.**
 
 ## Workstreams, in order
 
@@ -151,7 +154,9 @@ What the inventory changed:
 | 2a | RV1 (checks) | Built-scene checks for U02–U04, U10–U13, U17–U19, I04, I08–I10, D01–D14, D16, D19, D21 + the IFC-kernel clash check + the mutation set | Historic recall table (13 Revit-caught defects + the others where data exists); mutation recall; D1 passes | 2–3 days |
 | 2b | RV2 (2D) | North-up fix first; drawing standard (C11); plans, furnished, lighting/RCP and site plans; Blender line-art sections and elevations (incl. stair 1:50); schedules for every category (C5, C7); hatches (C8); colour-fill room plans (C9); callouts for stair and wet rooms (C10); annotation (C12, C13); context and kept-columns graphics (C15); sheet QA for orientation, mirroring, tags and level lines (D15, D17, D18) | Side-by-side parity table against every old Revit 2D output (U08, U09, U14, U17, U21, U22); sheet QA counts at zero | 3–4 days |
 | 2c | RV3 (exchange) | IFC4 with types and material layer sets (E3), standard Psets and Qto (E4), grids and space boundaries (E5), discipline files for architecture, lighting and electrical (E7); DXF per level and site | Round-trip counts and dimensions vs the model; schema validation 0 errors; files open in a second viewer | 1–2 days |
-| Later | — | C14 revisions and print sets, C16 sun overlays, D1 BOQ quantities, A16 georeferencing (needs the survey), E6 classification, E8 BCF/IDS, E9 design options | — | when needed |
+| 2c+ | RV3 | Quantity take-off from the model (counts, m², m³, linear m per element type and room), as CSV/XLSX for the QS; no prices | Totals reconcile with model geometry and schedules | 1 day |
+| 3 | MK (markups) | Markup loop: comments on PDF sheets or the review page → change requests linked to element ids, tracked to closure | A test markup round-trips to a change request and back to a revised sheet | 1–2 days |
+| Later | — | C14 revisions and print sets, C16 sun overlays, A16 georeferencing (needs the survey), E6 classification, E8 BCF/IDS, E9 design options | — | when needed |
 
 Stages 2a, 2b and 2c run in parallel on the workstation after stages 0 and 1. Revit stays optional: if the
 client signs in again, a Revit rebuild becomes one more independent check, never a dependency.
