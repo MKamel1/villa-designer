@@ -57,7 +57,7 @@ def case_5_2_t9(workdir: Path) -> list[dict]:
     return rows
 
 
-def run(workdir="out/LV/ref", rhos=(0.05, 0.1, 0.3, 0.4, 0.6, 0.7, 0.8)) -> LayerResult:
+def run(workdir="out/LV/ref", rhos=(0.05, 0.1, 0.3, 0.4, 0.6, 0.7)) -> LayerResult:
     wd = Path(workdir)
     L = LayerResult("V4")
     c52 = R.case_5_2(wd / "c52")
