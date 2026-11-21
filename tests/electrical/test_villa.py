@@ -184,15 +184,25 @@ def test_d1_equipment_has_status_and_reasons(d1):
     assert sum(1 for e in d1["house"].equipment if e.kind == "water_heater") == 3
 
 
-def test_d1_lighting_zones_are_marked_provisional_when_l6b_is_absent(d1):
+def test_d1_uses_the_real_l6b_lighting_zones(d1):
     h = d1["house"]
-    if villa.ZONES_JSON.exists():
-        assert not h.provisional_zones
-    else:
-        assert h.provisional_zones and all(z.id.startswith("Z-PROV") for z in h.zones)
-        assert any("PROVISIONAL" in f for f in h.flags)
-    # every luminaire in exactly one zone, every zone on one circuit (EA13/EA3 joins)
+    pub = json.loads(villa.ZONES_JSON.read_text(encoding="utf-8"))["zones"]
+    assert not h.provisional_zones and not any(z.id.startswith("Z-PROV") for z in h.zones)
+    assert {z.id for z in h.zones} == {z["id"] for z in pub} and len(h.zones) == 69
+    assert any("lighting zones from knowledge/lighting/zones-d1.json" in f for f in h.flags) and not any("PROVISIONAL" in f for f in h.flags)
+    # published zones never lose watts (sized on rated W where the commissioned W is lower)
+    assert all(z.watts >= p["watts"] - 1e-6 for z, p in zip(sorted(h.zones, key=lambda z: z.id), sorted(pub, key=lambda z: z["id"])))
+    # every luminaire in exactly one zone, every zone on one circuit (EA13/EA3 joins); escape markers are supplied too
     assert not by(d1["results"], "EA13", "fail") and not by(d1["results"], "EA3", "fail")
+    em = [c for c in d1["design"].circuits if c.kind == "lighting" and c.name.startswith("Escape/night marker")]
+    assert em and {i for c in em for i in c.load_ids} >= {i for z in h.zones if z.layer == "emergency" for i in z.luminaire_ids}
+
+
+def test_d1_zones_are_provisional_only_when_the_l6b_file_is_absent(monkeypatch, tmp_path):
+    monkeypatch.setattr(villa, "ZONES_JSON", tmp_path / "absent.json")
+    h = villa.load_villa()
+    assert h.provisional_zones and h.zones and all(z.id.startswith("Z-PROV") for z in h.zones)
+    assert any("PROVISIONAL" in f for f in h.flags)
 
 
 def test_d1_bathroom_zones_use_model_fixtures(d1):

@@ -132,13 +132,13 @@ def group_circuits(h: House, devs: list[Device]) -> list[CircuitSpec]:
     lum_xy = {l.id: l.xy for l in h.luminaires if l.xy}
     cen = {r.id: _centroid(r) for r in h.rooms}
 
-    def lighting_circuit(board, rooms, bin_):
+    def lighting_circuit(board, rooms, bin_, name=None):
         w = sum(q.watts for q in bin_)
         ib = w / (v * LIGHTING_PF)
         ids = [i for q in bin_ for i in q.luminaire_ids]
         pts = [cen[rm] for rm in rooms]       # one point per room served; +4 m of loop-in/loop-out per room below
         extra = 4.0 * len(rooms)
-        nm = f"Lighting {rooms[0]}" if len(rooms) == 1 else f"Lighting {rooms[0]} +{len(rooms) - 1}"
+        nm = name or (f"Lighting {rooms[0]}" if len(rooms) == 1 else f"Lighting {rooms[0]} +{len(rooms) - 1}")
         c = CircuitSpec("", "lighting", nm, rooms, ids, ib, next_in(ib, 6.0), "B", 30.0, "A", "lighting", watts=w,
                         zone_ids=[q.id for q in bin_], board=board, points=pts, extra_m=extra if h.boards else 0.0)
         out.append(c)
@@ -177,6 +177,14 @@ def group_circuits(h: House, devs: list[Device]) -> list[CircuitSpec]:
                     bins2.append([z])
             for b in bins2:
                 lighting_circuit(_board_of(h, room.id).id, [room.id], b)
+
+    # escape/night markers (layer "emergency"): one dedicated circuit per board, so no luminaire is left unsupplied
+    em: dict[str, list] = {}
+    for z in h.zones:
+        if z.layer == "emergency":
+            em.setdefault(_board_of(h, z.room).id, []).append(z)
+    for bid, zs in em.items():
+        lighting_circuit(bid, list(dict.fromkeys(q.room for q in zs)), zs, name=f"Escape/night marker lighting {bid}")
 
     # sockets: radials (kitchen worktop on its own 20 A circuit), <= 8 socket-outlets each
     def socket_circuit(board, nm, rooms, ds, amps, external=False):

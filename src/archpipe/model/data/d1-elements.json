@@ -46,7 +46,7 @@
   "floor": 30,
   "furniture": 81,
   "garden": 14,
-  "luminaire": 142,
+  "luminaire": 136,
   "plant": 80,
   "railing": 8,
   "room": 30,
@@ -12916,7 +12916,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    4817.0,
+    5417.0,
     -26521.0,
     2800.0
    ],
@@ -12959,7 +12959,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-family-room-100",
-    "why": "soft ambient, dimmable; 3 x 2 clear of the cove band",
+    "why": "soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
     "emitter_z_scene_mm": -200.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
@@ -12970,7 +12970,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    4817.0,
+    5417.0,
     -24591.0,
     2800.0
    ],
@@ -13013,7 +13013,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-family-room-100",
-    "why": "soft ambient, dimmable; 3 x 2 clear of the cove band",
+    "why": "soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
     "emitter_z_scene_mm": -200.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
@@ -13024,7 +13024,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    6737.0,
+    8057.0,
     -26521.0,
     2800.0
    ],
@@ -13067,7 +13067,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-family-room-100",
-    "why": "soft ambient, dimmable; 3 x 2 clear of the cove band",
+    "why": "soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
     "emitter_z_scene_mm": -200.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
@@ -13078,7 +13078,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    6737.0,
+    8057.0,
     -24591.0,
     2800.0
    ],
@@ -13121,122 +13121,14 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-family-room-100",
-    "why": "soft ambient, dimmable; 3 x 2 clear of the cove band",
+    "why": "soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
     "emitter_z_scene_mm": -200.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DL-lounge-05",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    8657.0,
-    -26521.0,
-    2800.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-family-room-100",
-    "why": "soft ambient, dimmable; 3 x 2 clear of the cove band",
-    "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-DL-lounge-06",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    8657.0,
-    -24591.0,
-    2800.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-family-room-100",
-    "why": "soft ambient, dimmable; 3 x 2 clear of the cove band",
-    "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-COVE-lounge-07",
+   "id": "lum-COVE-lounge-05",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -13259,7 +13151,7 @@
     "layer": "decorative",
     "mount": "strip",
     "what": "LED strip in the cove, 2700 K",
-    "flux_lm": 2187.0,
+    "flux_lm": 1093.5,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -13290,7 +13182,7 @@
    }
   },
   {
-   "id": "lum-COVE-lounge-08",
+   "id": "lum-COVE-lounge-06",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -13313,7 +13205,7 @@
     "layer": "decorative",
     "mount": "strip",
     "what": "LED strip in the cove, 2700 K",
-    "flux_lm": 3996.0,
+    "flux_lm": 1998.0,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -13344,6 +13236,114 @@
    }
   },
   {
+   "id": "lum-DL-lounge-07",
+   "kind": "luminaire",
+   "level": "B",
+   "placement": [
+    4717.0,
+    -25556.0,
+    2800.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    69.0,
+    69.0,
+    0.0
+   ],
+   "host": "",
+   "room": "lounge",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "DL",
+    "layer": "ambient",
+    "mount": "recessed",
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 109.9,
+    "watts": 12.0,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 33.5,
+    "photometry": {
+     "manufacturer": "iguzzini",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "",
+    "why": "L6b LA13: basement escape/night route from the TV room to the stair foot: battery-backed downlight at 15 % output (110 lm) on the lounge centre line; part of the night layer",
+    "emitter_z_scene_mm": -200.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+   }
+  },
+  {
+   "id": "lum-DL-lounge-08",
+   "kind": "luminaire",
+   "level": "B",
+   "placement": [
+    7637.0,
+    -25556.0,
+    2800.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    69.0,
+    69.0,
+    0.0
+   ],
+   "host": "",
+   "room": "lounge",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "DL",
+    "layer": "ambient",
+    "mount": "recessed",
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 109.9,
+    "watts": 12.0,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 33.5,
+    "photometry": {
+     "manufacturer": "iguzzini",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "",
+    "why": "L6b LA13: basement escape/night route from the TV room to the stair foot: battery-backed downlight at 15 % output (110 lm) on the lounge centre line; part of the night layer",
+    "emitter_z_scene_mm": -200.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+   }
+  },
+  {
    "id": "lum-ADJ-lounge-09",
    "kind": "luminaire",
    "level": "B",
@@ -13367,7 +13367,7 @@
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless adjustable accent",
-    "flux_lm": 511.5,
+    "flux_lm": 191.3,
     "watts": 12.6,
     "cct_k": 2700.0,
     "cri": 90,
@@ -13943,7 +13943,7 @@
    "level": "B",
    "placement": [
     10427.0,
-    -28021.0,
+    -27571.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -13985,61 +13985,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-passage-30",
-    "why": "stair foot and hall",
-    "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-DL-hall-b-02",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    10427.0,
-    -27121.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "hall-b",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-passage-30",
-    "why": "stair foot and hall",
+    "why": "stair foot and hall (L6b: 2 -> 1 on the hall centre)",
     "emitter_z_scene_mm": -300.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
@@ -14159,7 +14105,7 @@
    "level": "B",
    "placement": [
     10427.0,
-    -25913.0,
+    -25156.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -14201,64 +14147,64 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-family-room-100",
-    "why": "family corner ambient",
+    "why": "family corner ambient (L6b: 2 -> 1 on the room centre)",
     "emitter_z_scene_mm": -300.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DL-family-02",
+   "id": "lum-NL-family-02",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    10427.0,
-    -24398.0,
-    2700.0
+    9907.0,
+    -25156.0,
+    50.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    1830.0,
+    0.0,
     0.0
    ],
    "host": "",
    "room": "family",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
-    "cct_k": 2700.0,
+    "fixture_kind": "NL",
+    "layer": "night",
+    "mount": "strip",
+    "what": "night-light strip under the bed / plinth",
+    "flux_lm": 183.0,
+    "watts": null,
+    "cct_k": 2200,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "",
+     "code": "",
+     "ies": "",
      "substitute": false,
-     "generic": false
+     "generic": true
     },
     "aim": [
-     0.0,
-     0.0,
-     -1.0
+     0.3,
+     0,
+     -1
     ],
     "along": [
-     1.0,
      0.0,
+     1.0,
      0.0
     ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-family-room-100",
-    "why": "family corner ambient",
-    "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "length_mm": 1830.0,
+    "illuminance_card": "",
+    "why": "L6b: night layer on the basement route: low warm glow along the west wall (second switched layer)",
+    "emitter_z_scene_mm": -2950.0,
+    "size_basis": "authored run length (strip); section not authored",
+    "type_id": "type-luminaire---NL-strip-1830-0"
    }
   },
   {
@@ -14285,7 +14231,7 @@
     "layer": "decorative",
     "mount": "pendant",
     "what": "opal glass globe pendant D300",
-    "flux_lm": 800.0,
+    "flux_lm": 1080.8,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -14309,7 +14255,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "rid-pendant-above-table-762",
-    "why": "three opal globes over the island, bottom 762 mm above the worktop",
+    "why": "three opal globes over the island, bottom 762 mm above the worktop; ASSUMED 1400 lm each: they light the seating side to its card",
     "emitter_z_scene_mm": -1168.0,
     "size_basis": "authored in the requirement text ('D300'): diameter; height not given",
     "type_id": "type-luminaire---PEN-GLOBE-pendant-300-300"
@@ -14339,7 +14285,7 @@
     "layer": "decorative",
     "mount": "pendant",
     "what": "opal glass globe pendant D300",
-    "flux_lm": 800.0,
+    "flux_lm": 1080.8,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -14363,7 +14309,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "rid-pendant-above-table-762",
-    "why": "three opal globes over the island, bottom 762 mm above the worktop",
+    "why": "three opal globes over the island, bottom 762 mm above the worktop; ASSUMED 1400 lm each: they light the seating side to its card",
     "emitter_z_scene_mm": -1168.0,
     "size_basis": "authored in the requirement text ('D300'): diameter; height not given",
     "type_id": "type-luminaire---PEN-GLOBE-pendant-300-300"
@@ -14393,7 +14339,7 @@
     "layer": "decorative",
     "mount": "pendant",
     "what": "opal glass globe pendant D300",
-    "flux_lm": 800.0,
+    "flux_lm": 1080.8,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -14417,45 +14363,45 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "rid-pendant-above-table-762",
-    "why": "three opal globes over the island, bottom 762 mm above the worktop",
+    "why": "three opal globes over the island, bottom 762 mm above the worktop; ASSUMED 1400 lm each: they light the seating side to its card",
     "emitter_z_scene_mm": -1168.0,
     "size_basis": "authored in the requirement text ('D300'): diameter; height not given",
     "type_id": "type-luminaire---PEN-GLOBE-pendant-300-300"
    }
   },
   {
-   "id": "lum-DLN-kitchen-04",
+   "id": "lum-DL-kitchen-04",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    11600.0,
-    -26010.0,
+    12058.0,
+    -25760.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 533.3,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -14471,45 +14417,99 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "prep cone between opal globes, clear of their diffusing bodies",
+    "why": "prep downlight on the prep line (the globes' axes, plus one at the far end); the middle one is over the hob",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-kitchen-05",
+   "id": "lum-DL-kitchen-05",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    12567.0,
-    -26010.0,
+    13075.0,
+    -25760.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 275.5,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "ies-res-kitchen-cooktop-300",
+    "why": "prep downlight on the prep line (the globes' axes, plus one at the far end); the middle one is over the hob",
+    "emitter_z_scene_mm": -300.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+   }
+  },
+  {
+   "id": "lum-DL-kitchen-06",
+   "kind": "luminaire",
+   "level": "B",
+   "placement": [
+    14092.0,
+    -25760.0,
+    2700.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    69.0,
+    69.0,
+    0.0
+   ],
+   "host": "",
+   "room": "kitchen",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "DL",
+    "layer": "ambient",
+    "mount": "recessed",
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 533.3,
+    "watts": 12.0,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 33.5,
+    "photometry": {
+     "manufacturer": "iguzzini",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -14525,45 +14525,45 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "prep cone between opal globes, clear of their diffusing bodies",
+    "why": "prep downlight on the prep line (the globes' axes, plus one at the far end); the middle one is over the hob",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-kitchen-06",
+   "id": "lum-DL-kitchen-07",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    13583.0,
-    -26010.0,
+    14600.0,
+    -25760.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 533.3,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -14579,99 +14579,45 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "prep cone between opal globes, clear of their diffusing bodies",
+    "why": "prep downlight on the prep line (the globes' axes, plus one at the far end); the middle one is over the hob",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-kitchen-07",
+   "id": "lum-DL-kitchen-08",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    14550.0,
-    -26010.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    72.0,
-    72.0,
-    0.0
-   ],
-   "host": "",
-   "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
-    "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 29.0,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "prep cone between opal globes, clear of their diffusing bodies",
-    "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
-   }
-  },
-  {
-   "id": "lum-DLN-kitchen-08",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    11790.0,
+    12095.0,
     -24291.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 441.8,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -14687,45 +14633,45 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-sink-300",
-    "why": "650 mm from the wall face, over the counter's front edge, 1.0 m pitch (advisory K-SPOT-OFF / K-SPOT-PITCH)",
+    "why": "650 mm from the wall face over the counter's front edge, 0.9 m pitch (L6b: 3 DLN -> 2 DL at the sink)",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-kitchen-09",
+   "id": "lum-DL-kitchen-09",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    12545.0,
+    12995.0,
     -24291.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 441.8,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -14741,72 +14687,18 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-sink-300",
-    "why": "650 mm from the wall face, over the counter's front edge, 1.0 m pitch (advisory K-SPOT-OFF / K-SPOT-PITCH)",
+    "why": "650 mm from the wall face over the counter's front edge, 0.9 m pitch (L6b: 3 DLN -> 2 DL at the sink)",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-kitchen-10",
+   "id": "lum-DL-kitchen-10",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    13300.0,
-    -24291.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    72.0,
-    72.0,
-    0.0
-   ],
-   "host": "",
-   "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
-    "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 29.0,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-kitchen-sink-300",
-    "why": "650 mm from the wall face, over the counter's front edge, 1.0 m pitch (advisory K-SPOT-OFF / K-SPOT-PITCH)",
-    "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
-   }
-  },
-  {
-   "id": "lum-DL-kitchen-11",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    11573.0,
+    11550.0,
     -25110.0,
     2700.0
    ],
@@ -14964,7 +14856,7 @@
    }
   },
   {
-   "id": "lum-TOE-kitchen-12",
+   "id": "lum-TOE-kitchen-11",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -15041,7 +14933,7 @@
     "layer": "task",
     "mount": "pendant",
     "what": "linear pendant 1.6 m, direct/indirect",
-    "flux_lm": 1200.0,
+    "flux_lm": 727.2,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -15073,114 +14965,6 @@
   },
   {
    "id": "lum-ADJ-dining-side-01",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    16250.0,
-    -27100.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    31.0,
-    31.0,
-    0.0
-   ],
-   "host": "",
-   "room": "dining-side",
-   "product_id": "iguzzini/LSEVO-AAHENX",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "ADJ",
-    "layer": "accent",
-    "mount": "recessed",
-    "what": "flush trimless adjustable accent",
-    "flux_lm": 511.5,
-    "watts": 12.6,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 18.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAHENX",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.6999999999999993,
-     1.1999999999999993,
-     -1.95
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-dining-informal-100",
-    "why": "adjustable fill crossing the table from opposite corners, not straight down (p. 95)",
-    "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 31.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31"
-   }
-  },
-  {
-   "id": "lum-ADJ-dining-02",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    17650.0,
-    -24700.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    31.0,
-    31.0,
-    0.0
-   ],
-   "host": "",
-   "room": "dining",
-   "product_id": "iguzzini/LSEVO-AAHENX",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "ADJ",
-    "layer": "accent",
-    "mount": "recessed",
-    "what": "flush trimless adjustable accent",
-    "flux_lm": 511.5,
-    "watts": 12.6,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 18.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAHENX",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     -0.6999999999999993,
-     -1.1999999999999993,
-     -1.95
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-dining-informal-100",
-    "why": "adjustable fill crossing the table from opposite corners, not straight down (p. 95)",
-    "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 31.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31"
-   }
-  },
-  {
-   "id": "lum-ADJ-dining-side-02",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -15234,7 +15018,7 @@
    }
   },
   {
-   "id": "lum-ADJ-dining-side-03",
+   "id": "lum-ADJ-dining-side-02",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -15311,7 +15095,7 @@
     "layer": "decorative",
     "mount": "strip",
     "what": "LED strip in the cove, 2700 K",
-    "flux_lm": 3132.0,
+    "flux_lm": 1566.0,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -15365,7 +15149,7 @@
     "layer": "decorative",
     "mount": "strip",
     "what": "LED strip in the cove, 2700 K",
-    "flux_lm": 2367.0,
+    "flux_lm": 1183.5,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -15400,7 +15184,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    19567.0,
+    19700.0,
     -27471.0,
     2800.0
    ],
@@ -15454,7 +15238,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    19567.0,
+    19700.0,
     -24691.0,
     2800.0
    ],
@@ -15508,7 +15292,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    21497.0,
+    21329.0,
     -27471.0,
     2800.0
    ],
@@ -15562,7 +15346,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    21497.0,
+    21329.0,
     -24691.0,
     2800.0
    ],
@@ -16067,11 +15851,11 @@
     "layer": "task",
     "mount": "wall",
     "what": "movable wall reading light: wall plate, articulated 0.6 m reach and rotating head (ASSUMED product; TODO swing-arm-product)",
-    "flux_lm": 350.0,
+    "flux_lm": 117.6,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
-    "beam_deg": null,
+    "beam_deg": 60,
     "photometry": {
      "manufacturer": "",
      "code": "",
@@ -16121,11 +15905,11 @@
     "layer": "task",
     "mount": "wall",
     "what": "movable wall reading light: wall plate, articulated 0.6 m reach and rotating head (ASSUMED product; TODO swing-arm-product)",
-    "flux_lm": 350.0,
+    "flux_lm": 117.6,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
-    "beam_deg": null,
+    "beam_deg": 60,
     "photometry": {
      "manufacturer": "",
      "code": "",
@@ -16149,114 +15933,6 @@
     "emitter_z_scene_mm": -2000.0,
     "size_basis": "authored in the requirement text ('0.6 m'): length; section not given",
     "type_id": "type-luminaire---SWING-wall-600-0"
-   }
-  },
-  {
-   "id": "lum-DLN-bar-alcove-11",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    19138.0,
-    -29606.0,
-    2075.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    72.0,
-    72.0,
-    0.0
-   ],
-   "host": "",
-   "room": "bar-alcove",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
-    "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 537.3,
-    "watts": 11.8,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 29.0,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-chair-reading-200",
-    "why": "recessed in the 2.1 m nook top; task fill",
-    "emitter_z_scene_mm": -925.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
-   }
-  },
-  {
-   "id": "lum-DLN-bar-alcove-12",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    20198.0,
-    -29606.0,
-    2075.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    72.0,
-    72.0,
-    0.0
-   ],
-   "host": "",
-   "room": "bar-alcove",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
-    "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 537.3,
-    "watts": 11.8,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 29.0,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-chair-reading-200",
-    "why": "recessed in the 2.1 m nook top; task fill",
-    "emitter_z_scene_mm": -925.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
    }
   },
   {
@@ -16606,10 +16282,10 @@
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 3000 K",
-    "flux_lm": 450.0,
+    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
+    "flux_lm": 168.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": 70,
     "photometry": {
@@ -16631,7 +16307,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-desk-400",
-    "why": "two shielded task lamps at the cinema desk, switched off for films",
+    "why": "two shielded task lamps at the cinema desk, switched off for films (L6b: 450 -> 250 lm)",
     "emitter_z_scene_mm": -1800.0,
     "size_basis": "not derivable: generic fixture, no bound product, no dimension in the requirement",
     "type_id": "type-luminaire---DESK-task-lamp-0-0"
@@ -16660,10 +16336,10 @@
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 3000 K",
-    "flux_lm": 450.0,
+    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
+    "flux_lm": 168.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": 70,
     "photometry": {
@@ -16685,7 +16361,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-desk-400",
-    "why": "two shielded task lamps at the cinema desk, switched off for films",
+    "why": "two shielded task lamps at the cinema desk, switched off for films (L6b: 450 -> 250 lm)",
     "emitter_z_scene_mm": -1800.0,
     "size_basis": "not derivable: generic fixture, no bound product, no dimension in the requirement",
     "type_id": "type-luminaire---DESK-task-lamp-0-0"
@@ -16717,7 +16393,7 @@
     "what": "ASSUMED opal LED storage batten, 0.70 m per shelving bay",
     "flux_lm": 630.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -16771,7 +16447,7 @@
     "what": "ASSUMED opal LED storage batten, 0.70 m per shelving bay",
     "flux_lm": 630.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -16825,7 +16501,7 @@
     "what": "ASSUMED opal LED storage batten, 0.70 m per shelving bay",
     "flux_lm": 630.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -16908,7 +16584,7 @@
    }
   },
   {
-   "id": "lum-DLN-guest-wc-02",
+   "id": "lum-DL-guest-wc-02",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -16918,28 +16594,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "guest-wc",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 356.0,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -16955,10 +16631,10 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-vanity-grooming-300",
-    "why": "basin counter light, in front of the mirror",
+    "why": "basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
     "emitter_z_scene_mm": -350.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
@@ -16987,7 +16663,7 @@
     "what": "ASSUMED generic linear LED bar over the mirror",
     "flux_lm": 100.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -17016,38 +16692,38 @@
    }
   },
   {
-   "id": "lum-DLN-dirty-kitchen-01",
+   "id": "lum-DL-dirty-kitchen-01",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    12160.0,
+    12060.0,
     -21501.0,
     2650.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 539.2,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -17063,45 +16739,45 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "over the heavy-cooking run (1000 lm package)",
+    "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
     "emitter_z_scene_mm": -350.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-dirty-kitchen-02",
+   "id": "lum-DL-dirty-kitchen-02",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    13160.0,
+    12723.0,
     -21501.0,
-    2800.0
+    2650.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 539.2,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -17117,45 +16793,45 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "over the heavy-cooking run (1000 lm package)",
-    "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
+    "emitter_z_scene_mm": -350.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-dirty-kitchen-03",
+   "id": "lum-DL-dirty-kitchen-03",
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    14160.0,
+    13385.0,
     -21501.0,
     2800.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 539.2,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -17171,14 +16847,68 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "over the heavy-cooking run (1000 lm package)",
+    "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-dirty-kitchen-04",
+   "id": "lum-DL-dirty-kitchen-04",
+   "kind": "luminaire",
+   "level": "B",
+   "placement": [
+    14047.0,
+    -21501.0,
+    2800.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    69.0,
+    69.0,
+    0.0
+   ],
+   "host": "",
+   "room": "dirty-kitchen",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "DL",
+    "layer": "ambient",
+    "mount": "recessed",
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 539.2,
+    "watts": 12.0,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 33.5,
+    "photometry": {
+     "manufacturer": "iguzzini",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "ies-res-kitchen-prep-500",
+    "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
+    "emitter_z_scene_mm": -200.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+   }
+  },
+  {
+   "id": "lum-DL-dirty-kitchen-05",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -17188,28 +16918,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 539.2,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -17225,14 +16955,14 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "over the heavy-cooking run (1000 lm package)",
+    "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DL-dirty-kitchen-05",
+   "id": "lum-DL-dirty-kitchen-06",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -17286,7 +17016,7 @@
    }
   },
   {
-   "id": "lum-DL-dirty-kitchen-06",
+   "id": "lum-DL-dirty-kitchen-07",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -17502,7 +17232,115 @@
    }
   },
   {
-   "id": "lum-DL-landing-gf-01",
+   "id": "lum-PATH-landing-gf-01",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    3837.0,
+    -27971.0,
+    300.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    300.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "landing-gf",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "PATH",
+    "layer": "night",
+    "mount": "wall-marker",
+    "what": "low recessed path marker (0.3 m AFF)",
+    "flux_lm": 60.0,
+    "watts": null,
+    "cct_k": 2200,
+    "cri": 90,
+    "beam_deg": null,
+    "photometry": {
+     "manufacturer": "",
+     "code": "",
+     "ies": "",
+     "substitute": false,
+     "generic": true
+    },
+    "aim": [
+     1,
+     0,
+     -0.2
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "",
+    "why": "L6b LA13: low marker on the landing wall: lights the top treads of the flight and the landing (night layer)",
+    "emitter_z_scene_mm": 300.0,
+    "size_basis": "authored in the requirement text ('0.3 m'): length; section not given",
+    "type_id": "type-luminaire---PATH-wall-marker-300-0"
+   }
+  },
+  {
+   "id": "lum-PATH-landing-gf-02",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    3837.0,
+    -26871.0,
+    300.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    300.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "landing-gf",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "PATH",
+    "layer": "night",
+    "mount": "wall-marker",
+    "what": "low recessed path marker (0.3 m AFF)",
+    "flux_lm": 60.0,
+    "watts": null,
+    "cct_k": 2200,
+    "cri": 90,
+    "beam_deg": null,
+    "photometry": {
+     "manufacturer": "",
+     "code": "",
+     "ies": "",
+     "substitute": false,
+     "generic": true
+    },
+    "aim": [
+     1,
+     0,
+     -0.2
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "",
+    "why": "L6b LA13: low marker on the landing wall: lights the top treads of the flight and the landing (night layer)",
+    "emitter_z_scene_mm": 300.0,
+    "size_basis": "authored in the requirement text ('0.3 m'): length; section not given",
+    "type_id": "type-luminaire---PATH-wall-marker-300-0"
+   }
+  },
+  {
+   "id": "lum-DL-landing-gf-03",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -17561,7 +17399,7 @@
    "level": "GF",
    "placement": [
     9787.0,
-    -28171.0,
+    -27946.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -17615,7 +17453,7 @@
    "level": "GF",
    "placement": [
     11537.0,
-    -28171.0,
+    -27946.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -17669,7 +17507,7 @@
    "level": "GF",
    "placement": [
     13287.0,
-    -28171.0,
+    -27946.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -17723,7 +17561,7 @@
    "level": "GF",
    "placement": [
     15037.0,
-    -28171.0,
+    -27946.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -17777,7 +17615,7 @@
    "level": "GF",
    "placement": [
     16787.0,
-    -28171.0,
+    -27946.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -17831,7 +17669,7 @@
    "level": "GF",
    "placement": [
     18537.0,
-    -28171.0,
+    -27946.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -18100,8 +17938,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    5017.0,
-    -25571.0,
+    5317.0,
+    -25081.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -18143,7 +17981,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-game-digital-6",
-    "why": "study ambient",
+    "why": "study ambient (L6b: 4 -> 2)",
     "emitter_z_scene_mm": 2700.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
@@ -18154,8 +17992,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    5017.0,
-    -24591.0,
+    7677.0,
+    -25081.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -18197,7 +18035,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-game-digital-6",
-    "why": "study ambient",
+    "why": "study ambient (L6b: 4 -> 2)",
     "emitter_z_scene_mm": 2700.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
@@ -18208,8 +18046,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    7977.0,
-    -25571.0,
+    4467.0,
+    -25850.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -18227,7 +18065,7 @@
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
+    "flux_lm": 487.9,
     "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
@@ -18250,8 +18088,8 @@
      0.0
     ],
     "length_mm": 0.0,
-    "illuminance_card": "ies-res-game-digital-6",
-    "why": "study ambient",
+    "illuminance_card": "ies-res-desk-400",
+    "why": "desk light over the shared homework desk's front edge (no shadow of the head); L6b: DL",
     "emitter_z_scene_mm": 2700.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
@@ -18262,8 +18100,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    7977.0,
-    -24591.0,
+    4467.0,
+    -24950.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -18281,7 +18119,7 @@
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
+    "flux_lm": 487.9,
     "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
@@ -18304,154 +18142,46 @@
      0.0
     ],
     "length_mm": 0.0,
-    "illuminance_card": "ies-res-game-digital-6",
-    "why": "study ambient",
+    "illuminance_card": "ies-res-desk-400",
+    "why": "desk light over the shared homework desk's front edge (no shadow of the head); L6b: DL",
     "emitter_z_scene_mm": 2700.0,
     "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
     "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-study-game-05",
+   "id": "lum-DL-study-game-05",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    4467.0,
-    -25850.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    72.0,
-    72.0,
-    0.0
-   ],
-   "host": "",
-   "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
-    "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 29.0,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-desk-400",
-    "why": "desk light over the shared homework desk's front edge (no shadow of the head)",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
-   }
-  },
-  {
-   "id": "lum-DLN-study-game-06",
-   "kind": "luminaire",
-   "level": "GF",
-   "placement": [
-    4467.0,
-    -24950.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    72.0,
-    72.0,
-    0.0
-   ],
-   "host": "",
-   "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
-    "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 29.0,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-desk-400",
-    "why": "desk light over the shared homework desk's front edge (no shadow of the head)",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
-   }
-  },
-  {
-   "id": "lum-DLN-study-game-07",
-   "kind": "luminaire",
-   "level": "GF",
-   "placement": [
-    5300.0,
+    4950.0,
     -24541.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 359.7,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -18467,10 +18197,64 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-desk-400",
-    "why": "desk light over the adult desk",
+    "why": "desk light over the adult desk; L6b: DL (V12: 1 -> 2, one needed 1.12 of driver output)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+   }
+  },
+  {
+   "id": "lum-DL-study-game-06",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    5650.0,
+    -24541.0,
+    2700.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    69.0,
+    69.0,
+    0.0
+   ],
+   "host": "",
+   "room": "study-game",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "DL",
+    "layer": "ambient",
+    "mount": "recessed",
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 359.7,
+    "watts": 12.0,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 33.5,
+    "photometry": {
+     "manufacturer": "iguzzini",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "ies-res-desk-400",
+    "why": "desk light over the adult desk; L6b: DL (V12: 1 -> 2, one needed 1.12 of driver output)",
+    "emitter_z_scene_mm": 2700.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
@@ -18479,7 +18263,7 @@
    "level": "GF",
    "placement": [
     10552.0,
-    -25356.0,
+    -25471.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -18528,7 +18312,7 @@
    }
   },
   {
-   "id": "lum-DLN-family-bath-02",
+   "id": "lum-DL-family-bath-02",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -18538,28 +18322,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "family-bath",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 732.6,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -18575,14 +18359,14 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-shower-50",
-    "why": "shower (wet-rated)",
+    "why": "shower (wet-rated); L6b: DL",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
-   "id": "lum-DLN-family-bath-03",
+   "id": "lum-DL-family-bath-03",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -18592,28 +18376,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "family-bath",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 1343.2,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 228.6,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -18629,10 +18413,10 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-vanity-grooming-300",
-    "why": "basin counter light, in front of the mirror",
+    "why": "basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
@@ -18659,9 +18443,9 @@
     "layer": "task",
     "mount": "wall",
     "what": "vanity wall light, opal, each side of the mirror",
-    "flux_lm": 450.0,
+    "flux_lm": 197.6,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -18713,9 +18497,9 @@
     "layer": "task",
     "mount": "wall",
     "what": "vanity wall light, opal, each side of the mirror",
-    "flux_lm": 450.0,
+    "flux_lm": 197.6,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -18928,10 +18712,10 @@
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 3000 K",
-    "flux_lm": 450.0,
+    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
+    "flux_lm": 319.9,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": 70,
     "photometry": {
@@ -18982,10 +18766,10 @@
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 3000 K",
-    "flux_lm": 450.0,
+    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
+    "flux_lm": 319.9,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": 70,
     "photometry": {
@@ -19198,10 +18982,10 @@
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 3000 K",
-    "flux_lm": 450.0,
+    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
+    "flux_lm": 322.2,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": 70,
     "photometry": {
@@ -19307,7 +19091,7 @@
     "layer": "decorative",
     "mount": "strip",
     "what": "LED strip in the cove, 2700 K",
-    "flux_lm": 1890.0,
+    "flux_lm": 945.0,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -19361,11 +19145,11 @@
     "layer": "decorative",
     "mount": "wall",
     "what": "adjustable wall-mounted swing-arm reading light (ASSUMED product)",
-    "flux_lm": 350.0,
+    "flux_lm": 168.3,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
-    "beam_deg": null,
+    "beam_deg": 60,
     "photometry": {
      "manufacturer": "",
      "code": "",
@@ -19375,8 +19159,8 @@
     },
     "aim": [
      0,
-     0.45,
-     -0.35
+     0.3,
+     -0.55
     ],
     "along": [
      1.0,
@@ -19415,11 +19199,11 @@
     "layer": "decorative",
     "mount": "wall",
     "what": "adjustable wall-mounted swing-arm reading light (ASSUMED product)",
-    "flux_lm": 350.0,
+    "flux_lm": 168.3,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
-    "beam_deg": null,
+    "beam_deg": 60,
     "photometry": {
      "manufacturer": "",
      "code": "",
@@ -19429,8 +19213,8 @@
     },
     "aim": [
      0,
-     0.45,
-     -0.35
+     0.3,
+     -0.55
     ],
     "along": [
      1.0,
@@ -19446,115 +19230,7 @@
    }
   },
   {
-   "id": "lum-ADJ-parents-bed-04",
-   "kind": "luminaire",
-   "level": "GF",
-   "placement": [
-    19930.0,
-    -26241.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    31.0,
-    31.0,
-    0.0
-   ],
-   "host": "",
-   "room": "parents-bed",
-   "product_id": "iguzzini/LSEVO-AAHENX",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "ADJ",
-    "layer": "accent",
-    "mount": "recessed",
-    "what": "flush trimless adjustable accent",
-    "flux_lm": 511.5,
-    "watts": 12.6,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 18.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAHENX",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-bed-reading-200",
-    "why": "reading spot straight over the reading position (the tilted first aim landed 0.6 m down the bed: measured 135-142 lx in the scene)",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 31.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31"
-   }
-  },
-  {
-   "id": "lum-ADJ-parents-bed-05",
-   "kind": "luminaire",
-   "level": "GF",
-   "placement": [
-    20730.0,
-    -26241.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    31.0,
-    31.0,
-    0.0
-   ],
-   "host": "",
-   "room": "parents-bed",
-   "product_id": "iguzzini/LSEVO-AAHENX",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "ADJ",
-    "layer": "accent",
-    "mount": "recessed",
-    "what": "flush trimless adjustable accent",
-    "flux_lm": 511.5,
-    "watts": 12.6,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 18.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAHENX",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-bed-reading-200",
-    "why": "reading spot straight over the reading position (the tilted first aim landed 0.6 m down the bed: measured 135-142 lx in the scene)",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 31.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31"
-   }
-  },
-  {
-   "id": "lum-DL-parents-bed-06",
+   "id": "lum-DL-parents-bed-04",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -19608,7 +19284,7 @@
    }
   },
   {
-   "id": "lum-DL-parents-bed-07",
+   "id": "lum-DL-parents-bed-05",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -19662,7 +19338,7 @@
    }
   },
   {
-   "id": "lum-ADJ-parents-bed-08",
+   "id": "lum-ADJ-parents-bed-06",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -19795,7 +19471,7 @@
     "what": "LED strip over the hanging rail (in-wardrobe)",
     "flux_lm": 810.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -19849,7 +19525,7 @@
     "what": "LED strip over the hanging rail (in-wardrobe)",
     "flux_lm": 623.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -19903,7 +19579,7 @@
     "what": "vertical LED strip at a hanging-section edge (shadow-free dressing light)",
     "flux_lm": 900.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -19957,7 +19633,7 @@
     "what": "vertical LED strip at a hanging-section edge (shadow-free dressing light)",
     "flux_lm": 900.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -20011,7 +19687,7 @@
     "what": "vertical LED strip at a hanging-section edge (shadow-free dressing light)",
     "flux_lm": 900.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -20065,7 +19741,7 @@
     "what": "vertical LED strip at a hanging-section edge (shadow-free dressing light)",
     "flux_lm": 900.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -20119,7 +19795,7 @@
     "what": "vertical LED strip at a hanging-section edge (shadow-free dressing light)",
     "flux_lm": 900.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -20153,7 +19829,7 @@
    "level": "GF",
    "placement": [
     20277.0,
-    -27761.0,
+    -27681.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -20207,7 +19883,7 @@
    "level": "GF",
    "placement": [
     21597.0,
-    -27761.0,
+    -27681.0,
     2700.0
    ],
    "rotation_deg": 0.0,
@@ -20364,7 +20040,7 @@
    }
   },
   {
-   "id": "lum-DLN-parents-ensuite-03",
+   "id": "lum-DL-parents-ensuite-03",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -20374,28 +20050,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    72.0,
-    72.0,
+    69.0,
+    69.0,
     0.0
    ],
    "host": "",
    "room": "parents-ensuite",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
+   "product_id": "iguzzini/LSEVO-AAK3EW",
    "finish_codes": [],
    "params": {
-    "fixture_kind": "DLN",
-    "layer": "task",
+    "fixture_kind": "DL",
+    "layer": "ambient",
     "mount": "recessed",
-    "what": "flush trimless downlight, medium (task)",
-    "flux_lm": 537.3,
-    "watts": 11.8,
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 334.1,
+    "watts": 12.0,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 29.0,
+    "beam_deg": 33.5,
     "photometry": {
      "manufacturer": "iguzzini",
-     "code": "LSEVO-AAIIA6",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
+     "code": "LSEVO-AAK3EW",
+     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
      "substitute": false,
      "generic": false
     },
@@ -20411,10 +20087,10 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-vanity-grooming-300",
-    "why": "basin counter light, in front of the mirror",
+    "why": "basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 72.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72"
+    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
    }
   },
   {
@@ -20443,7 +20119,7 @@
     "what": "ASSUMED generic linear LED bar over the mirror",
     "flux_lm": 40.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -20494,10 +20170,10 @@
     "fixture_kind": "MIRROR",
     "layer": "task",
     "mount": "strip",
-    "what": "backlit mirror halo, 3000 K",
+    "what": "backlit mirror halo, 2700 K",
     "flux_lm": 70.0,
     "watts": null,
-    "cct_k": 3000,
+    "cct_k": 2700,
     "cri": 90,
     "beam_deg": null,
     "photometry": {
@@ -31456,23 +31132,27 @@
       "generic": false
      }
     },
-    "occurrences": 42,
+    "occurrences": 57,
     "occurrence_ids": [
      "lum-DL-lounge-01",
      "lum-DL-lounge-02",
      "lum-DL-lounge-03",
      "lum-DL-lounge-04",
-     "lum-DL-lounge-05",
-     "lum-DL-lounge-06",
+     "lum-DL-lounge-07",
+     "lum-DL-lounge-08",
      "lum-DL-lounge-nook-02",
      "lum-DL-pantry-01",
      "lum-DL-pantry-02",
      "lum-DL-hall-b-01",
-     "lum-DL-hall-b-02",
      "lum-DL-entry-b-01",
      "lum-DL-family-01",
-     "lum-DL-family-02",
-     "lum-DL-kitchen-11",
+     "lum-DL-kitchen-04",
+     "lum-DL-kitchen-05",
+     "lum-DL-kitchen-06",
+     "lum-DL-kitchen-07",
+     "lum-DL-kitchen-08",
+     "lum-DL-kitchen-09",
+     "lum-DL-kitchen-10",
      "lum-DL-kitchen-island-01",
      "lum-DL-kitchen-island-02",
      "lum-DL-living-03",
@@ -31482,24 +31162,35 @@
      "lum-DL-cinema-01",
      "lum-DL-cinema-02",
      "lum-DL-guest-wc-01",
+     "lum-DL-guest-wc-02",
+     "lum-DL-dirty-kitchen-01",
+     "lum-DL-dirty-kitchen-02",
+     "lum-DL-dirty-kitchen-03",
+     "lum-DL-dirty-kitchen-04",
      "lum-DL-dirty-kitchen-05",
      "lum-DL-dirty-kitchen-06",
-     "lum-DL-landing-gf-01",
+     "lum-DL-dirty-kitchen-07",
+     "lum-DL-landing-gf-03",
      "lum-DL-gallery-end-01",
      "lum-DL-study-game-01",
      "lum-DL-study-game-02",
      "lum-DL-study-game-03",
      "lum-DL-study-game-04",
+     "lum-DL-study-game-05",
+     "lum-DL-study-game-06",
      "lum-DL-family-bath-01",
+     "lum-DL-family-bath-02",
+     "lum-DL-family-bath-03",
      "lum-DL-kids-a-01",
      "lum-DL-kids-a-02",
      "lum-DL-kids-b-01",
      "lum-DL-kids-b-02",
-     "lum-DL-parents-bed-06",
-     "lum-DL-parents-bed-07",
+     "lum-DL-parents-bed-04",
+     "lum-DL-parents-bed-05",
      "lum-DL-parents-entry-01",
      "lum-DL-parents-dressing-06",
-     "lum-DL-parents-dressing-07"
+     "lum-DL-parents-dressing-07",
+     "lum-DL-parents-ensuite-03"
     ],
     "key": [
      "luminaire",
@@ -31537,7 +31228,7 @@
      "fixture_kind": "COVE",
      "mount": "strip",
      "layer": "decorative",
-     "flux_lm": 2187.0,
+     "flux_lm": 1093.5,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -31552,7 +31243,7 @@
     },
     "occurrences": 1,
     "occurrence_ids": [
-     "lum-COVE-lounge-07"
+     "lum-COVE-lounge-05"
     ],
     "key": [
      "luminaire",
@@ -31590,7 +31281,7 @@
      "fixture_kind": "COVE",
      "mount": "strip",
      "layer": "decorative",
-     "flux_lm": 3996.0,
+     "flux_lm": 1998.0,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -31605,7 +31296,7 @@
     },
     "occurrences": 1,
     "occurrence_ids": [
-     "lum-COVE-lounge-08"
+     "lum-COVE-lounge-06"
     ],
     "key": [
      "luminaire",
@@ -31643,7 +31334,7 @@
      "fixture_kind": "ADJ",
      "mount": "recessed",
      "layer": "accent",
-     "flux_lm": 511.5,
+     "flux_lm": 191.3,
      "watts": 12.6,
      "cct_k": 2700.0,
      "cri": 90,
@@ -31656,16 +31347,12 @@
       "generic": false
      }
     },
-    "occurrences": 8,
+    "occurrences": 4,
     "occurrence_ids": [
      "lum-ADJ-lounge-09",
      "lum-ADJ-dining-side-01",
-     "lum-ADJ-dining-02",
      "lum-ADJ-dining-side-02",
-     "lum-ADJ-dining-side-03",
-     "lum-ADJ-parents-bed-04",
-     "lum-ADJ-parents-bed-05",
-     "lum-ADJ-parents-bed-08"
+     "lum-ADJ-parents-bed-06"
     ],
     "key": [
      "luminaire",
@@ -32010,6 +31697,59 @@
    }
   },
   {
+   "id": "type-luminaire---NL-strip-1830-0",
+   "kind": "type",
+   "level": "SITE",
+   "placement": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1830.0,
+    0.0,
+    0.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "for_kind": "luminaire",
+    "shared": {
+     "fixture_kind": "NL",
+     "mount": "strip",
+     "layer": "night",
+     "flux_lm": 183.0,
+     "watts": null,
+     "cct_k": 2200,
+     "cri": 90,
+     "beam_deg": null,
+     "photometry": {
+      "manufacturer": "",
+      "code": "",
+      "ies": "",
+      "substitute": false,
+      "generic": true
+     }
+    },
+    "occurrences": 1,
+    "occurrence_ids": [
+     "lum-NL-family-02"
+    ],
+    "key": [
+     "luminaire",
+     "-",
+     "NL",
+     "strip",
+     1830.0,
+     0.0
+    ],
+    "basis": "elements of one kind with identical shared parameters, size and product share one type"
+   }
+  },
+  {
    "id": "type-luminaire---PEN-GLOBE-pendant-300-300",
    "kind": "type",
    "level": "SITE",
@@ -32034,7 +31774,7 @@
      "fixture_kind": "PEN-GLOBE",
      "mount": "pendant",
      "layer": "decorative",
-     "flux_lm": 800.0,
+     "flux_lm": 1080.8,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -32063,78 +31803,6 @@
      "pendant",
      300.0,
      300.0
-    ],
-    "basis": "elements of one kind with identical shared parameters, size and product share one type"
-   }
-  },
-  {
-   "id": "type-luminaire-iguzzini-LSEVO-AAIIA6-DLN-recessed-72-72",
-   "kind": "type",
-   "level": "SITE",
-   "placement": [
-    0.0,
-    0.0,
-    0.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    72.0,
-    72.0,
-    0.0
-   ],
-   "host": "",
-   "room": "",
-   "product_id": "iguzzini/LSEVO-AAIIA6",
-   "finish_codes": [],
-   "params": {
-    "for_kind": "luminaire",
-    "shared": {
-     "fixture_kind": "DLN",
-     "mount": "recessed",
-     "layer": "task",
-     "flux_lm": 1343.2,
-     "watts": 11.8,
-     "cct_k": 2700.0,
-     "cri": 90,
-     "beam_deg": 29.0,
-     "photometry": {
-      "manufacturer": "iguzzini",
-      "code": "LSEVO-AAIIA6",
-      "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAIIA6.ies",
-      "substitute": false,
-      "generic": false
-     }
-    },
-    "occurrences": 20,
-    "occurrence_ids": [
-     "lum-DLN-kitchen-04",
-     "lum-DLN-kitchen-05",
-     "lum-DLN-kitchen-06",
-     "lum-DLN-kitchen-07",
-     "lum-DLN-kitchen-08",
-     "lum-DLN-kitchen-09",
-     "lum-DLN-kitchen-10",
-     "lum-DLN-bar-alcove-11",
-     "lum-DLN-bar-alcove-12",
-     "lum-DLN-guest-wc-02",
-     "lum-DLN-dirty-kitchen-01",
-     "lum-DLN-dirty-kitchen-02",
-     "lum-DLN-dirty-kitchen-03",
-     "lum-DLN-dirty-kitchen-04",
-     "lum-DLN-study-game-05",
-     "lum-DLN-study-game-06",
-     "lum-DLN-study-game-07",
-     "lum-DLN-family-bath-02",
-     "lum-DLN-family-bath-03",
-     "lum-DLN-parents-ensuite-03"
-    ],
-    "key": [
-     "luminaire",
-     "iguzzini/LSEVO-AAIIA6",
-     "DLN",
-     "recessed",
-     72.0,
-     72.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
@@ -32179,7 +31847,7 @@
     },
     "occurrences": 1,
     "occurrence_ids": [
-     "lum-TOE-kitchen-12"
+     "lum-TOE-kitchen-11"
     ],
     "key": [
      "luminaire",
@@ -32217,7 +31885,7 @@
      "fixture_kind": "PEN-LIN",
      "mount": "pendant",
      "layer": "task",
-     "flux_lm": 1200.0,
+     "flux_lm": 727.2,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -32270,7 +31938,7 @@
      "fixture_kind": "COVE",
      "mount": "strip",
      "layer": "decorative",
-     "flux_lm": 3132.0,
+     "flux_lm": 1566.0,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -32323,7 +31991,7 @@
      "fixture_kind": "COVE",
      "mount": "strip",
      "layer": "decorative",
-     "flux_lm": 2367.0,
+     "flux_lm": 1183.5,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -32488,11 +32156,11 @@
      "fixture_kind": "SWING",
      "mount": "wall",
      "layer": "task",
-     "flux_lm": 350.0,
+     "flux_lm": 117.6,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
-     "beam_deg": null,
+     "beam_deg": 60,
      "photometry": {
       "manufacturer": "",
       "code": "",
@@ -32595,9 +32263,9 @@
      "fixture_kind": "DESK",
      "mount": "task-lamp",
      "layer": "task",
-     "flux_lm": 450.0,
+     "flux_lm": 168.0,
      "watts": null,
-     "cct_k": 3000,
+     "cct_k": 2700,
      "cri": 90,
      "beam_deg": 70,
      "photometry": {
@@ -32654,7 +32322,7 @@
      "layer": "task",
      "flux_lm": 630.0,
      "watts": null,
-     "cct_k": 3000,
+     "cct_k": 2700,
      "cri": 90,
      "beam_deg": null,
      "photometry": {
@@ -32709,7 +32377,7 @@
      "layer": "task",
      "flux_lm": 100.0,
      "watts": null,
-     "cct_k": 3000,
+     "cct_k": 2700,
      "cri": 90,
      "beam_deg": null,
      "photometry": {
@@ -32774,8 +32442,10 @@
       "generic": true
      }
     },
-    "occurrences": 3,
+    "occurrences": 5,
     "occurrence_ids": [
+     "lum-PATH-landing-gf-01",
+     "lum-PATH-landing-gf-02",
      "lum-PATH-corridor-07",
      "lum-PATH-corridor-08",
      "lum-PATH-corridor-09"
@@ -32816,9 +32486,9 @@
      "fixture_kind": "SCONCE",
      "mount": "wall",
      "layer": "task",
-     "flux_lm": 450.0,
+     "flux_lm": 197.6,
      "watts": null,
-     "cct_k": 3000,
+     "cct_k": 2700,
      "cri": 90,
      "beam_deg": null,
      "photometry": {
@@ -33029,7 +32699,7 @@
      "fixture_kind": "COVE",
      "mount": "strip",
      "layer": "decorative",
-     "flux_lm": 1890.0,
+     "flux_lm": 945.0,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -33082,11 +32752,11 @@
      "fixture_kind": "WALL-READ",
      "mount": "wall",
      "layer": "decorative",
-     "flux_lm": 350.0,
+     "flux_lm": 168.3,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
-     "beam_deg": null,
+     "beam_deg": 60,
      "photometry": {
       "manufacturer": "",
       "code": "",
@@ -33138,7 +32808,7 @@
      "layer": "task",
      "flux_lm": 810.0,
      "watts": null,
-     "cct_k": 3000,
+     "cct_k": 2700,
      "cri": 90,
      "beam_deg": null,
      "photometry": {
@@ -33191,7 +32861,7 @@
      "layer": "task",
      "flux_lm": 623.0,
      "watts": null,
-     "cct_k": 3000,
+     "cct_k": 2700,
      "cri": 90,
      "beam_deg": null,
      "photometry": {
@@ -33244,7 +32914,7 @@
      "layer": "task",
      "flux_lm": 900.0,
      "watts": null,
-     "cct_k": 3000,
+     "cct_k": 2700,
      "cri": 90,
      "beam_deg": null,
      "photometry": {
@@ -33301,7 +32971,7 @@
      "layer": "task",
      "flux_lm": 70.0,
      "watts": null,
-     "cct_k": 3000,
+     "cct_k": 2700,
      "cri": 90,
      "beam_deg": null,
      "photometry": {
