@@ -27,18 +27,18 @@ Outputs: `out/electrical/d1/` (git-ignored), `out/checks/L7.json`, and committed
 | boards | 3: MDB (pantry, B), DB-B (stair-foot hall, B), DB-GF (stair-head gallery, GF). DB-B and DB-GF are stacked, riser about 3 m |
 | ways (used / total) | MDB 8 / 10 (6 circuits + 2 feeders), DB-B 32 / 40, DB-GF 19 / 24 |
 | final circuits | 57: 5 lighting, 26 socket radials (2 kitchen worktop, 1 garden), 26 dedicated |
-| devices | 140 sockets (22 of them floor boxes), 33 switches, 14 FCUs, 8 AC isolators, 2 cooker units (plus 17 data, 3 TV/SAT, 142 luminaires) |
-| connected load | 143.1 kVA (sum of Ib at 220 V, single-phase equivalent) |
-| **maximum demand** | **80.8 kVA** = 367 A single-phase equivalent, 122 A on the worst phase of three (Whitfield Table 6.2, household column). This is an **upper bound** (see below) |
-| **supply recommendation** | **three-phase 220/380 V**; incomer 125 A, 50 mm2 Cu PVC, 15 m (length assumed), 0.37 % drop. Holds in every sensitivity row |
+| devices | 140 sockets (22 of them floor boxes), 33 switches, 15 FCUs, 8 AC isolators, 1 cooker unit (plus 17 data, 3 TV/SAT, 142 luminaires) |
+| connected load | 137.4 kVA (sum of Ib at 220 V, single-phase equivalent) |
+| **maximum demand** | **77.6 kVA** = 353 A single-phase equivalent, 118 A on the worst phase of three (Whitfield Table 6.2, household column). This is an **upper bound** (see below) |
+| **supply recommendation** | **three-phase 220/380 V**; incomer 125 A, 50 mm2 Cu PVC, 15 m (length assumed), 0.36 % drop. Holds in every sensitivity row |
 | sub-board feeders | MDB to DB-B: 80 A, 25 mm2, 10.4 m. MDB to DB-GF: 50 A, 16 mm2, 14.9 m |
-| phase balance | L1 216.7 A, L2 216.9 A, L3 216.7 A (0.1 % from the mean) |
-| worst voltage drop | 4.93 % from the origin (`DB-B/S5`, lounge socket radial, 32.6 m, 2.5 mm2) (limit 5 %; lighting 3 %) |
+| phase balance | L1 208.3 A, L2 208.2 A, L3 208.1 A (0.1 % from the mean) |
+| worst voltage drop | 4.90 % from the origin (`DB-B/S5`, lounge socket radial, 32.6 m, 2.5 mm2) (limit 5 %; lighting 3 %) |
 | alarm grade | ADB minimum Grade D2 LD3 (no storey over 200 m2: B 168.6, GF 117.5 gross); design Grade D1 LD2 or better, all interlinked |
 
 **Demand caveat.** The carded rule takes 100 % of the largest and 40 % of every other circuit, applied to the breaker rating of each of the
-26 socket radials. Sockets are 40 of the 80.8 kVA, so the headline is conservative. The load schedule gives the same calculation with the
-socket radials at 50 % and 25 % of their rating: 60.8 kVA and 50.8 kVA (policy factors, not sourced). Every row is above the 63 A single-phase
+26 socket radials. Sockets are 40 of the 77.6 kVA, so the headline is conservative. The load schedule gives the same calculation with the
+socket radials at 50 % and 25 % of their rating: 57.6 kVA and 47.6 kVA (policy factors, not sourced). Every row is above the 63 A single-phase
 limit, so the three-phase recommendation does not depend on the choice. The 63 A limit is our policy threshold (card `EL-POL-SUPPLY`);
 the utility's own single-phase limit was not verified.
 
@@ -70,12 +70,12 @@ the utility's own single-phase limit was not verified.
 | EA3 circuits | 90 pass | each luminaire in one zone, each zone on one circuit, lighting circuits <= 10 A (packed to <= 2 A, about 400 W, so a trip does not black out a level), one dedicated circuit per equipment item |
 | EA4 max demand | installation and 3 board records **not evaluated** (figure reported, no limit to pass against: the main breaker is computed, not given); 5 reference cases pass within 2 % | IET OSG Appendix A was not obtained; Whitfield Table 6.2 used |
 | EA5 sizing | 65 pass (57 circuits, incomer, 2 feeders, 5 reference cases) | smallest margin of Iz over In is 0.1 A (`DB-B/D1`); the 2.5 mm2 socket radials are Iz 16.1 A vs In 16 A under the group-of-3 policy |
-| EA6 voltage drop | 66 pass | worst 4.93 % (`DB-B/S5`); the garden radial is 3.9 % |
+| EA6 voltage drop | 66 pass | worst 4.90 % (`DB-B/S5`); the garden radial is 3.9 % |
 | EA7 fault protection | **not evaluated** (1 record) | the electrode resistance RA has not been measured and TT is unconfirmed. For a Type S 300 mA origin RCD the requirement is RA <= 50 V / 0.3 A = 167 ohm; the 30 mA finals allow 1667 ohm. No RA was invented |
 | EA8 RCD | 57 pass | 30 mA Type A RCBO on every final circuit; Type S 300 mA at the origin (drawn on the MDB SLD) |
 | EA9 surge and lightning | not evaluated | SPD Type 2 is drawn; the IEC 62305-2 risk calculation is not done |
 | EA10 earthing | not evaluated | needs the measured RA and bonding survey |
-| EA11 phase balance | pass on the installation; 3 warnings | MDB alone (99.5 % off mean, few large single-phase site loads), DB-B alone (20.4 %) and DB-GF alone (15.3 %) are not balanced by themselves; the installation total is |
+| EA11 phase balance | pass on the installation; 3 warnings | MDB alone (94.7 % off mean, few large single-phase site loads), DB-B alone (18.1 %) and DB-GF alone (20.9 %) are not balanced by themselves; the installation total is |
 | EA12 boards and SLD | 4 pass | 57 circuits + 2 feeders in model = schedule = SLD, spare ways 20 % / 20 % / 21 % per board (MDB / DB-B / DB-GF). The check compares one design with its own renderings, not a second tool |
 | EA13 lighting coordination | 6 pass | on **provisional** zones (below) |
 | EA14 Revit read-back | not evaluated | no Revit electrical model (E-12) |
@@ -93,11 +93,11 @@ the cinema each have a smoke detector on the interlinked network (card `EL-G1-CI
 
 ## Assumptions to confirm with the client
 
-Each equipment line is in `knowledge/electrical/d1-equipment-assumed.json` with `status: assumed` and a reason; correct the file and re-run.
+Each equipment line is in `knowledge/electrical/d1-equipment-assumed.json` with `status` (`assumed` or `client-confirmed`) and a reason; correct the file and re-run.
 
-1. **Equipment** (electrical input power, typical Egyptian villa, no datasheet): split ACs in kids A and B 1.5 HP (1.2 kW), parents 2 HP (1.7), study 1.5 HP, lounge 3 HP (2.4), living 3 HP, dining 2 HP, cinema 2 HP;
-   water heaters 2.0 kW family bath and ensuite, 1.5 kW guest; electric oven 3 kW and **induction hob 6 kW** (a gas hob removes a 32 A circuit; the dirty kitchen is assumed gas); dishwasher 1.8, fridge 0.4, pantry freezer 0.3, washer 2.2, dryer 2.5 kW;
-   booster pump 1.1 kW in the store under the ramp, irrigation pump 0.55 kW, gate motor 0.4 kW; **EV-ready 7.4 kW at the parking deck counted at full load**; garden lighting 300 W allowance (the model has no exterior luminaires);
+1. **Equipment** (electrical input power, typical Egyptian villa, no datasheet; **client-confirmed 2026-11-21: gas hob, EV charger 7.4 kW at the parking, split ACs in all habitable rooms** (unit sizes stay assumed)): split ACs in kids A and B 1.5 HP (1.2 kW), parents 2 HP (1.7), study 1.5 HP, lounge 3 HP (2.4), living 3 HP, dining 2 HP, cinema 2 HP;
+   water heaters 2.0 kW family bath and ensuite, 1.5 kW guest; electric oven 3 kW (assumed); **hob is GAS (client-confirmed 2026-11-21)**, leaving a 0.3 kW ignition/hood circuit (assumed allowance) and no 32 A hob circuit; dishwasher 1.8, fridge 0.4, pantry freezer 0.3, washer 2.2, dryer 2.5 kW;
+   booster pump 1.1 kW in the store under the ramp, irrigation pump 0.55 kW, gate motor 0.4 kW; **EV charger 7.4 kW at the parking deck counted at full load (client-confirmed)**; garden lighting 300 W allowance (the model has no exterior luminaires);
    ELV rack 0.6 kW; 4 outdoor sockets.
 2. **Supply**: three-phase (recommended), earthing TT and RA unconfirmed (EA7, EA10 not evaluated), meter at the street fence with a 15 m incomer, main board in the pantry. The roof/void ambient is 50 C for GF lighting runs (brief 45 to 50 C) and 40 C for B; the feeder ambient 40 C.
 3. **Lighting zones are provisional.** `origin/lane/L6b` had no `knowledge/lighting/zones-d1.json` at run time, so zones are one per room and layer (59, dimming "switched") and 60 of the 142 luminaires (strips, pendants, lamps) have no watts in the model and use flux / 90 lm/W. The adapter reads L6b's file
@@ -109,3 +109,7 @@ Each equipment line is in `knowledge/electrical/d1-equipment-assumed.json` with 
 8. **Routes** are Manhattan x 1.15 with 3 m drops, not wall/slab routing; cable lengths can change by 20 to 30 % when routed.
 9. **Max demand** is the carded upper bound; the client's electrical engineer should choose the socket diversity (the 52 to 85 kVA range above). The incomer (160 A) is sized on the upper bound.
 10. Not done: SPD risk calculation, earthing and bonding design, lightning protection, Revit read-back, the EA1 recall test, and a second-tool cross-check of the SLD.
+
+## Update 2026-11-21 (client answers)
+
+Gas hob (the 6 kW / 32 A induction circuit is replaced by a 0.3 kW ignition/hood circuit), EV charger 7.4 kW at full load, and split ACs in all habitable rooms are marked `client-confirmed`. Maximum demand fell from 80.8 to **77.6 kVA** (worst phase 122 to 118 A); **three-phase still holds** (353 A single-phase equivalent against the 63 A policy limit, and every sensitivity row is above it). Incomer stays 125 A / 50 mm2; DB-B feeder 80 A / 25 mm2, DB-GF feeder 50 A / 16 mm2; 57 circuits and 3 boards as before. `knowledge/lighting/zones-d1.json` had not appeared on `origin/lane/L6b` at this re-run, so the lighting zones are still provisional.

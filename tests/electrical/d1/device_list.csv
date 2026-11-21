@@ -125,7 +125,7 @@ kitchen,B,lum-DLN-kitchen-08,luminaire,task,11790,-24291,,,Z-PROV-kitchen-task,D
 kitchen,B,lum-DLN-kitchen-09,luminaire,task,12545,-24291,,,Z-PROV-kitchen-task,DB-B/L2,11.8 W
 kitchen,B,lum-DLN-kitchen-10,luminaire,task,13300,-24291,,,Z-PROV-kitchen-task,DB-B/L2,11.8 W
 kitchen,B,COO-kitchen-138,power/lighting control,cooker_unit,11840,-23591,1100,EA1-dedicated-cooker,COOK-OVEN,DB-B/D6,
-kitchen,B,COO-kitchen-139,power/lighting control,cooker_unit,12440,-23591,1100,EA1-dedicated-cooker,COOK-HOB,DB-B/D7,
+kitchen,B,FCU-kitchen-139,power/lighting control,fcu,12440,-23591,600,EA1-dedicated-appliance,COOK-HOOD,DB-B/D7,
 kitchen,B,FCU-kitchen-140,power/lighting control,fcu,13040,-23591,600,EA1-dedicated-appliance,DISHWASHER,DB-B/D8,
 kitchen,B,FCU-kitchen-141,power/lighting control,fcu,13490,-23591,600,EA1-dedicated-appliance,FRIDGE,DB-B/D9,moved 150 mm along the wall (inside door door-B-kitchen-dirty-kitchen)
 kitchen,B,SOC-kitchen-134,power/lighting control,socket,12042,-23591,1100,EA1-worktop-pitch,,DB-B/S1,
