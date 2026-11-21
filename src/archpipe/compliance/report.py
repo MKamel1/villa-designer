@@ -156,8 +156,8 @@ def render(m, results, cards) -> str:
         len(er), n(er, "fail"), "; ".join(sorted({r.subject.replace(" [ER informative]", "") for r in er if r.status == "fail"}))
         or "none"))
     L.append("## Margins on ASSUMED inputs\n")
-    L.append("These pass by little, on assumed build-ups, so a small change flips them: stair headroom 2038 mm vs "
-             "2000 (floor build-up 100 mm and slab 200 mm are ASSUMED); cinema floor share at 2.3 m clear about 75 %% "
+    L.append("These pass by little, on assumed build-ups, so a small change flips them: stair headroom 2041 mm vs "
+             "2000 (floor build-up 100 mm and slab 200 mm are ASSUMED); cinema floor share at 2.3 m clear 75.5 %% "
              "vs 75 (ramp soffit profile); parents' bedroom 11.52 m2 vs 11.5 (with the entry alcove); kids rooms "
              "11.81 and 11.75 vs 11.5; the stair guard and the ramp-edge guard sit exactly at their minimum heights "
              "(900 and 1100 mm).\n".replace("%%", "%"))

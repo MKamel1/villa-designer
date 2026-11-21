@@ -10,7 +10,7 @@ Threshold sources are cards in `knowledge/eg/best-practice-cards.json` (verbatim
 
 ## Result in one line
 
-Gates (59 rows): **51 pass, 3 fail, 2 warn, 3 not evaluated**. Informative/target rows (126): 106 pass, 13 fail, 3 warn, 4 not evaluated.
+Gates (75 rows): **60 pass, 4 fail, 2 warn, 9 not evaluated**. Informative/target rows (117): 102 pass, 12 fail, 3 warn, 0 not evaluated.
 
 Grade effect under docs/quality/A-PLUS.md: a failed life-safety gate caps the grade at D (open-riser stair, windowless cinema).
 
@@ -49,7 +49,7 @@ Fixes, cheapest first:
 
 ### 5. Core door sits 75 mm from the top step
 
-- **LS4 WARN** `GF core door onto the stair top landing (door-16)`: achieved 0.075 vs required 0.4 m. the door's near jamb is 0.075 m from the top step; ADK 1.24 / Diagram 1.8 lets a door swing over a landing at the BOTTOM of a flight only, with 400 mm each side; the top landing must be kept clear (1.21). The swing direction is not in the model: if the leaf opens into the landing this fails
+- **LS4 WARN** `GF core door onto the stair top landing (door-GF-landing-gf-core)`: achieved 0.075 vs required 0.4 m. the door's near jamb is 0.075 m from the top step; ADK 1.24 / Diagram 1.8 lets a door swing over a landing at the BOTTOM of a flight only, with 400 mm each side; the top landing must be kept clear (1.21). The swing direction is not in the model: if the leaf opens into the landing this fails
 
 Fixes, cheapest first:
 1. Cheapest: hang the leaf to open OUTWARD into the shared core (or make it a sliding / pocket leaf), so nothing swings across the top landing. Confirm the swing in the Revit family (not modelled).
@@ -64,170 +64,267 @@ Fixes, cheapest first:
 
 ### 7. Terrace edge over the sunken patio has no guard in the model (3.0 m drop)
 
-- **LS3 NOT_EVALUATED** `GF front terrace edge`: achieved - vs required - . not evaluated: no guard at the terrace edge over the sunken north patio (3.0 m drop) in the spec rails or read-back
+- **LS3 NOT_EVALUATED** `GF front terrace edge`: achieved - vs required - . not evaluated: no guard at the terrace edge over the sunken north patio (3.0 m drop): the spec walls and rails and the D1F read-back have none (villa.py's TERRACE comment of a 900 mm parapet is not in D1)
 
 Fixes, cheapest first:
 1. Add a 1.1 m guard along the terrace edge (5.08 m). Required by ADK K2(b)/3.2a for any drop over 0.6 m.
 
-### 8. Basement rooms below the SLL minimum average daylight factor (recommendation)
+### 8. Entrance-steps edge over the sunken patio has no guard (1.8 m drop)
 
-- **EG7 FAIL** `cinema (cinema) mean daylight factor`: achieved 0.04 vs required 1.5 %. simulated mean DF 0.04 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate)
-- **EG7 FAIL** `kitchen (open kitchen) mean daylight factor`: achieved 0.33 vs required 2 %. simulated mean DF 0.33 % vs 2.0 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate)
-- **EG7 FAIL** `lounge (lounge) mean daylight factor`: achieved 0.6 vs required 1.5 %. simulated mean DF 0.60 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate)
+- **LS3 NOT_EVALUATED** `patio edge beside the entrance steps`: achieved - vs required - . not evaluated: the 1.8 m drop from the entrance steps (street level) to the sunken patio has no guard in the spec or read-back
+
+Fixes, cheapest first:
+1. Add a 1.1 m guard along the steps' edge on the patio side (ADK K2(b)).
+
+### 9. Basement escape through garden doors into closed yards is not proven
+
+- **LS5 NOT_EVALUATED** `basement garden doors lead to a place of safety`: achieved - vs required - . not evaluated: the lounge, dining and living pass LS5 only through garden doors into the sunken yards (4 m fences); a way from the yard to the street (gate, steps or the car ramp) is neither modelled nor carded
+
+Fixes, cheapest first:
+1. Draw the yard-to-street route (the car ramp and its gate, or a stair/gate in the street fence) and confirm the gate opens from inside without a key; then these rows can be marked pass.
+
+### 10. Basement rooms below the SLL minimum average daylight factor (recommendation)
+
+- **CL2 FAIL** `cinema (cinema) DF vs SLL minimum`: achieved 0.04 vs required 1.5 %. simulated mean DF 0.04 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate)
+- **CL2 FAIL** `kitchen (open kitchen) DF vs SLL minimum`: achieved 0.33 vs required 2 %. simulated mean DF 0.33 % vs 2.0 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate)
+- **CL2 FAIL** `lounge (lounge) DF vs SLL minimum`: achieved 0.59 vs required 1.5 %. simulated mean DF 0.59 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate)
 
 Fixes, cheapest first:
 1. Practical measures only (client: no light wells): glaze the lounge/kitchen faces floor-to-beam where the column grid allows, keep white finishes (already r12 default), keep guard rails clear glass; accept lower DF in the lounge and cinema and report it, because the client prefers shade. The kitchen has no opening of its own: it borrows light from dining/dirty kitchen; add a glazed pocket-door leaf or a window onto the east yard.
 
-### 9. Habitable room glazing under 8 % of floor
+### 11. Habitable room glazing under 8 % of floor
 
-- **EG7 FAIL** `cinema (cinema) glazing / floor area`: achieved 0 vs required 8 %. 0.00 m2 of glazed openings on 16.90 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames and borrowed light not counted
-- **EG7 FAIL** `kitchen (open kitchen) glazing / floor area`: achieved 0 vs required 8 %. 0.00 m2 of glazed openings on 15.58 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames and borrowed light not counted
+- **EG7 FAIL** `cinema (cinema) glazing / floor area`: achieved 0 vs required 8 %. 0.00 m2 of glazed openings on 16.45 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames and borrowed light not counted
+- **EG7 FAIL** `kitchen (open kitchen) glazing / floor area`: achieved 0 vs required 8 %. 0.00 m2 of glazed openings on 16.28 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames and borrowed light not counted
 
 Fixes, cheapest first:
 1. See daylight row: only the kitchen and cinema have no own opening.
 
 ### Other open gate rows
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| dead-end hall and the single stair | - | - |  | **NOT_EVALUATED** | - | not evaluated: no sourced dead-end or travel-distance limit for a single dwelling is held (Approved Document B travel distances are not carded); a reviewer step. GF ex... |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| kids-a (kids bedroom A) daylight factor | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
+| kids-b (kids bedroom B) daylight factor | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
+| parents-bed (parents' bedroom) daylight factor | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
+| study-game (study / game room) daylight factor | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
+| stair closed risers (A+ target) | gate | 0 | 1 | closed | **FAIL** | ukadk-closed-risers (para 1.6) | risers are open; closed risers are the A+ target (ADK 1.6 for non-dwellings) and remove both failures above |
+| dead-end hall and the single stair | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no sourced dead-end or travel-distance limit for a single dwelling is held (Approved Document B travel distances are not carded); reviewer step. GF exit... |
 
-## Every gate, per room and element
+## Every check, per room and element
+
+`gate` rows are safety or quality gates; `info` rows are targets, recommendations or reports. Egyptian ER rows are listed separately below.
 
 ### LS2 Stair: open risers and gaps (life safety)
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| stair open-riser gap (100 mm sphere) | 116.5 | 100 | mm | **FAIL** | ukadk-open-risers-dwelling (para 1.9); ukadk-guard-sphere (printed p.16 and p.24) | no riser boards: the gap between treads is 116.5 mm (rise 176.5 less a 60 mm tread); a 100 mm sphere passes if the gap is >= 100 mm, so it must be under 100 mm |
-| stair tread overlap (open risers) | 0 | 16 | mm | **FAIL** | ukadk-open-risers-dwelling (para 1.9) | consecutive treads overlap by 0.0 mm in plan vs 16 mm minimum for open risers (ADK 1.9a) |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| stair open-riser gap (100 mm sphere) | gate | 116.5 | 100 | mm | **FAIL** | ukadk-open-risers-dwelling (para 1.9); ukadk-guard-sphere (para 1.39 printed p.16 (stairs) and para 3.3a printed p.24 (other guarding)) | no riser boards: the gap between treads is 116.5 mm (rise 176.5 less a 60 mm tread); a 100 mm sphere passes if the gap is >= 100 mm, so it must be under 100 mm |
+| stair tread overlap (open risers) | gate | 0 | 16 | mm | **FAIL** | ukadk-open-risers-dwelling (para 1.9) | consecutive treads overlap by 0.0 mm in plan vs 16 mm minimum for open risers (ADK 1.9a) |
+| stair closed risers (A+ target) | gate | 0 | 1 | closed | **FAIL** | ukadk-closed-risers (para 1.6) | risers are open; closed risers are the A+ target (ADK 1.6 for non-dwellings) and remove both failures above |
 
 ### LS1 Stair: geometry, headroom, landings
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| stair rise | 176.5 | 220 | mm | **PASS** | ukadk-private-stair-rise-max (para 1.3 Table 1.1) | 176.5 mm vs <= 220 mm (private stair, ADK Table 1.1) |
-| stair going | 280 | 220 | mm | **PASS** | ukadk-private-stair-going-min (para 1.3 Table 1.1) | 280.0 mm vs >= 220 mm |
-| stair pitch | 32.2 | 42 | deg | **PASS** | ukadk-private-stair-pitch-max (Table 1.1 note 1) | 32.2 deg vs <= 42 deg |
-| stair 2R+G | 632.9 | 550 | mm | **PASS** | ukadk-2r-plus-g (Table 1.1 footnote *) | 2R+G = 633 mm, band 550-700 mm (ADK Table 1.1 footnote) |
-| stair uniform steps | 0 | 5 | mm | **PASS** | ukadk-private-stair-rise-max (para 1.3 Table 1.1) | top rise 176.5 mm vs typical 176.5 mm (ADK 1.5: consistent rise) |
-| stair headroom over the pitch line | 2041 | 2000 | mm | **PASS** | ukadk-stair-headroom-min (para 1.11 and Diagram 1.3) | least 2041 mm at x=8.89 m under the GF slab soffit (z -300 mm, 200 slab + 100 build-up ASSUMED) |
-| stair top landing | 1.56 | 0.95 | m | **PASS** | ukadk-landing-1-20 (para 1.20) | landing 1.56 x 2.30 m vs flight width 0.95 m (ADK 1.20) |
-| stair bottom landing | 1.54 | 0.95 | m | **PASS** | ukadk-landing-1-20 (para 1.20) | landing 1.54 x 2.00 m vs flight width 0.95 m (ADK 1.20) |
-| space under the flight (soffit < 2 m) | 3.08 | 0 | m | **WARN** | ukadk-soffit-under-stair (para 1.8) | the underside of the lowest 11 treads is under 2.0 m above the basement floor over 3.08 m of run; the steps are open beneath (no enclosure or guard + cane detection in... |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| stair rise | gate | 176.5 | 220 | mm | **PASS** | ukadk-private-stair-rise-max (para 1.3 Table 1.1) | 176.5 mm vs <= 220 mm (private stair, ADK Table 1.1) |
+| stair going | gate | 280 | 220 | mm | **PASS** | ukadk-private-stair-going-min (para 1.3 Table 1.1) | 280.0 mm vs >= 220 mm |
+| stair pitch | gate | 32.2 | 42 | deg | **PASS** | ukadk-private-stair-pitch-max (Table 1.1 note 1) | 32.2 deg vs <= 42 deg |
+| stair 2R+G | gate | 632.9 | 550 | mm | **PASS** | ukadk-2r-plus-g (Table 1.1 footnote *) | 2R+G = 633 mm, band 550-700 mm (ADK Table 1.1 footnote) |
+| stair uniform steps | gate | 0 | 5 | mm | **PASS** | policy-stair-rise-uniform-5mm (project judgement (ADK 1.5 asks "consistent" without a number)) | top rise 176.5 mm vs typical 176.5 mm (ADK 1.5: consistent rise; the 5 mm tolerance is ours) |
+| stair headroom over the pitch line | gate | 2041 | 2000 | mm | **PASS** | ukadk-stair-headroom-min (para 1.11 and Diagram 1.3) | least 2041 mm at x=8.89 m under the GF slab soffit (z -300 mm, 200 slab + 100 build-up ASSUMED); margin 41 mm: a 40 mm deeper floor build-up would fail |
+| stair top landing | gate | 1.56 | 0.95 | m | **PASS** | ukadk-landing-1-20 (para 1.20) | landing 1.56 x 2.30 m vs flight width 0.95 m (ADK 1.20) |
+| stair bottom landing | gate | 1.54 | 0.95 | m | **PASS** | ukadk-landing-1-20 (para 1.20) | landing 1.54 x 2.00 m vs flight width 0.95 m (ADK 1.20) |
+| space under the flight (soffit < 2 m) | gate | 3.08 | 0 | m | **WARN** | ukadk-soffit-under-stair (para 1.8) | the underside of the lowest 11 treads is under 2.0 m above the basement floor over 3.08 m of run; the steps are open beneath (no enclosure or guard + cane detection in... |
 
 ### LS3 Guards
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| stair-open-glass (open) | 0.9 | 0.9 | m | **PASS** | ukadk-guarding-height-internal (Diagram 3.1) | stair guard 0.90 m above the nosings vs 0.90 m (ADK Diagram 3.1, stairs); passes with no margin |
-| stair-open-glass (open) 100 mm sphere | 0 | 100 | mm | **PASS** | ukadk-guard-sphere (printed p.16 and p.24) | modelled as solid or glazed: no opening for a sphere (construction detail pending) |
-| rail-0 (guard rail on the ramp edge over the north patio) | 1.1 | 0.9 | m | **PASS** | ukadk-k2b-sunken-areas (Requirement K2); ukadk-guarding-height-internal (Diagram 3.1) | guard 1.10 m vs 0.90 m minimum at a drop > 0.6 m (ADK K2/3.2a) |
-| rail-0 (guard rail on the ramp edge over the north patio) 100 mm sphere | 0 | 100 | mm | **PASS** | ukadk-guard-sphere (printed p.16 and p.24) | modelled as solid or glazed: no opening for a sphere (construction detail pending) |
-| rail-1 (guard rail along the east fence (fence under 1.1 m above the deck)) | 1.1 | 0.9 | m | **PASS** | ukadk-k2b-sunken-areas (Requirement K2); ukadk-guarding-height-internal (Diagram 3.1) | guard 1.10 m vs 0.90 m minimum at a drop > 0.6 m (ADK K2/3.2a) |
-| rail-1 (guard rail along the east fence (fence under 1.1 m above the deck)) 100 mm sphere | 0 | 100 | mm | **PASS** | ukadk-guard-sphere (printed p.16 and p.24) | modelled as solid or glazed: no opening for a sphere (construction detail pending) |
-| rail-2 (guard rail at the deck end over the yard) | 1.1 | 0.9 | m | **PASS** | ukadk-k2b-sunken-areas (Requirement K2); ukadk-guarding-height-internal (Diagram 3.1) | guard 1.10 m vs 0.90 m minimum at a drop > 0.6 m (ADK K2/3.2a) |
-| rail-2 (guard rail at the deck end over the yard) 100 mm sphere | 0 | 100 | mm | **PASS** | ukadk-guard-sphere (printed p.16 and p.24) | modelled as solid or glazed: no opening for a sphere (construction detail pending) |
-| GF stair void edge | - | - |  | **NOT_EVALUATED** | - | not evaluated: no guard element for the GF slab opening (the route check villa.gf_route_width assumes a 50 mm balustrade, but no height or type is in the spec or read-... |
-| GF front terrace edge | - | - |  | **NOT_EVALUATED** | - | not evaluated: no guard at the terrace edge over the sunken north patio (3.0 m drop) in the spec rails or read-back |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| rail-stair-open-glass (open) | gate | 0.9 | 0.9 | m | **PASS** | ukadk-guarding-height-internal (Diagram 3.1) | stair guard 0.90 m above the nosings vs 0.90 m (ADK Diagram 3.1, stairs); passes with no margin |
+| rail-stair-open-glass (open) 100 mm sphere | gate | 0 | 100 | mm | **PASS** | ukadk-guard-sphere (para 1.39 printed p.16 (stairs) and para 3.3a printed p.24 (other guarding)) | modelled as solid or glazed: no opening for a sphere (construction detail pending) |
+| rail-stair-wall-handrail (wall) | gate | 0.9 | 0.9 | m | **PASS** | ukadk-handrail-1-34 (para 1.34) | handrail 0.90 m above the nosings (ADK 1.34: 900-1000 mm; one side is enough under 1000 mm width) |
+| rail-edge-0 (guard rail on the ramp edge over the north patio) | gate | 1.1 | 0.9 | m | **PASS** | ukadk-k2b-sunken-areas (Requirement K2); ukadk-guarding-height-internal (Diagram 3.1) | guard 1.10 m vs 0.90 m minimum at a drop > 0.6 m (ADK K2/3.2a) |
+| rail-edge-0 (guard rail on the ramp edge over the north patio) (A+ target 1100) | gate | 1.1 | 1.1 | m | **PASS** | ukadk-guarding-height-external (Diagram 3.1) | 1.10 m vs 1.10 m (external balcony / roof edge, ADK Diagram 3.1; used for sunken edges: the table does not list them) |
+| rail-edge-0 (guard rail on the ramp edge over the north patio) 100 mm sphere | gate | 0 | 100 | mm | **PASS** | ukadk-guard-sphere (para 1.39 printed p.16 (stairs) and para 3.3a printed p.24 (other guarding)) | modelled as solid or glazed: no opening for a sphere (construction detail pending) |
+| rail-edge-1 (guard rail along the east fence (fence under 1.1 m above the deck)) | gate | 1.1 | 0.9 | m | **PASS** | ukadk-k2b-sunken-areas (Requirement K2); ukadk-guarding-height-internal (Diagram 3.1) | guard 1.10 m vs 0.90 m minimum at a drop > 0.6 m (ADK K2/3.2a) |
+| rail-edge-1 (guard rail along the east fence (fence under 1.1 m above the deck)) (A+ target 1100) | gate | 1.1 | 1.1 | m | **PASS** | ukadk-guarding-height-external (Diagram 3.1) | 1.10 m vs 1.10 m (external balcony / roof edge, ADK Diagram 3.1; used for sunken edges: the table does not list them) |
+| rail-edge-1 (guard rail along the east fence (fence under 1.1 m above the deck)) 100 mm sphere | gate | 0 | 100 | mm | **PASS** | ukadk-guard-sphere (para 1.39 printed p.16 (stairs) and para 3.3a printed p.24 (other guarding)) | modelled as solid or glazed: no opening for a sphere (construction detail pending) |
+| rail-edge-2 (guard rail at the deck end over the yard) | gate | 1.1 | 0.9 | m | **PASS** | ukadk-k2b-sunken-areas (Requirement K2); ukadk-guarding-height-internal (Diagram 3.1) | guard 1.10 m vs 0.90 m minimum at a drop > 0.6 m (ADK K2/3.2a) |
+| rail-edge-2 (guard rail at the deck end over the yard) (A+ target 1100) | gate | 1.1 | 1.1 | m | **PASS** | ukadk-guarding-height-external (Diagram 3.1) | 1.10 m vs 1.10 m (external balcony / roof edge, ADK Diagram 3.1; used for sunken edges: the table does not list them) |
+| rail-edge-2 (guard rail at the deck end over the yard) 100 mm sphere | gate | 0 | 100 | mm | **PASS** | ukadk-guard-sphere (para 1.39 printed p.16 (stairs) and para 3.3a printed p.24 (other guarding)) | modelled as solid or glazed: no opening for a sphere (construction detail pending) |
+| GF stair void edge | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no guard element for the GF slab opening (the route check villa.gf_route_width assumes a 50 mm balustrade, but no height or type is in the spec or read-... |
+| GF front terrace edge | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no guard at the terrace edge over the sunken north patio (3.0 m drop): the spec walls and rails and the D1F read-back have none (villa.py's TERRACE comm... |
+| patio edge beside the entrance steps | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: the 1.8 m drop from the entrance steps (street level) to the sunken patio has no guard in the spec or read-back |
 
 ### LS4 Door next to the stair
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| GF core door onto the stair top landing (door-16) | 0.075 | 0.4 | m | **WARN** | ukadk-landing-door-1-24 (para 1.24 and Diagram 1.8) | the door's near jamb is 0.075 m from the top step; ADK 1.24 / Diagram 1.8 lets a door swing over a landing at the BOTTOM of a flight only, with 400 mm each side; the t... |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| GF core door onto the stair top landing (door-GF-landing-gf-core) | gate | 0.075 | 0.4 | m | **WARN** | ukadk-landing-door-1-24 (para 1.24 and Diagram 1.8) | the door's near jamb is 0.075 m from the top step; ADK 1.24 / Diagram 1.8 lets a door swing over a landing at the BOTTOM of a flight only, with 400 mm each side; the t... |
 
 ### LS5 Escape
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| study-game (study / game room) escape opening | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has an external door; whole window taken as openable (openable area is not modelled) |
-| kids-a (kids bedroom A) escape opening | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has a window (sill 0.90 m, 3.36 m2); whole window taken as openable (openable area is not modelled) |
-| kids-b (kids bedroom B) escape opening | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has a window (sill 0.90 m, 3.29 m2); whole window taken as openable (openable area is not modelled) |
-| parents-bed (parents' bedroom) escape opening | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has a window (sill 0.90 m, 3.36 m2); whole window taken as openable (openable area is not modelled) |
-| lounge (lounge) escape opening | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has an external door; whole window taken as openable (openable area is not modelled) |
-| dining (dining) escape opening | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has an external door; whole window taken as openable (openable area is not modelled) |
-| living (garden living) escape opening | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has an external door; whole window taken as openable (openable area is not modelled) |
-| cinema (cinema) escape opening | 0 | 1 | opening | **FAIL** | adb-inner-room (para 2.11); irc-r310-escape (Chapter 6 Related Codes and Constraints) | no external door or escape window: the room is entered only from lounge, store-ramp, an inner room. Approved Document B 2.11 allows inner rooms only for a kitchen, uti... |
-| dead-end hall and the single stair | - | - |  | **NOT_EVALUATED** | - | not evaluated: no sourced dead-end or travel-distance limit for a single dwelling is held (Approved Document B travel distances are not carded); a reviewer step. GF ex... |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| study-game (study / game room) escape opening | gate | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has an external door; whole window taken as openable (openable area is not modelled) |
+| kids-a (kids bedroom A) escape opening | gate | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has a window (sill 0.90 m, 3.36 m2); whole window taken as openable (openable area is not modelled) |
+| kids-b (kids bedroom B) escape opening | gate | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has a window (sill 0.90 m, 3.29 m2); whole window taken as openable (openable area is not modelled) |
+| parents-bed (parents' bedroom) escape opening | gate | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has a window (sill 0.90 m, 3.36 m2); whole window taken as openable (openable area is not modelled) |
+| lounge (lounge) escape opening | gate | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has an external door; whole window taken as openable (openable area is not modelled) |
+| dining (dining) escape opening | gate | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has an external door; whole window taken as openable (openable area is not modelled) |
+| living (garden living) escape opening | gate | 1 | 1 | opening | **PASS** | adb-escape-window-area (para 2.10a(i)); adb-escape-window-min (para 2.10a(ii)); adb-escape-window-sill (para 2.10a(iii)); irc-r310-escape (Chapter 6 Related Codes and Constraints) | has an external door; whole window taken as openable (openable area is not modelled) |
+| cinema (cinema) escape opening | gate | 0 | 1 | opening | **FAIL** | adb-inner-room (para 2.11); irc-r310-escape (Chapter 6 Related Codes and Constraints) | no external door or escape window: the room is entered only from lounge, store-ramp, an inner room. Approved Document B 2.11 allows inner rooms only for a kitchen, uti... |
+| basement garden doors lead to a place of safety | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: the lounge, dining and living pass LS5 only through garden doors into the sunken yards (4 m fences); a way from the yard to the street (gate, steps or t... |
+| dead-end hall and the single stair | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no sourced dead-end or travel-distance limit for a single dwelling is held (Approved Document B travel distances are not carded); reviewer step. GF exit... |
 
 ### EG4 Room heights
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| study-game (study / game room) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| kids-a (kids bedroom A) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| kids-b (kids bedroom B) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| parents-bed (parents' bedroom) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| parents-entry (parents' bedroom) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| lounge (lounge) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| lounge-nook (lounge) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| family (family / TV corner) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| dining (dining) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| dining-side (dining) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| living (garden living) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| bar-alcove (bar / library alcove) clear height | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height) |
-| cinema (cinema) clear height | 75.5 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.00-2.65 m; 76 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 67 % is >= 2.4 m (the preferable height) |
-| clear under the perimeter beams (all levels) | 2.3 | 2.3 | m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | beams 600 deep (ASSUMED section): 2.30 m under the beam vs 2.3 m minimum; 0.10 m under the 2.4 m preferable, local to the perimeter and window heads |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| landing-gf (stair landing) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | landing room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| stair-gf (stair void + gallery) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | stair room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| corridor (hall) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | corridor room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| study-game (study / game room) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| kids-a (kids bedroom A) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| kids-b (kids bedroom B) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| family-bath (family bathroom) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | bathroom room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| parents-bed (parents' bedroom) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| parents-dressing (dressing) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | dressing room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| parents-ensuite (en-suite) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | ensuite room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| gallery-end (gallery) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | corridor room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| parents-entry (parents' bedroom) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| parents-dressing-ext (dressing) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | dressing room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| lounge (lounge) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| lounge-nook (lounge) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| stair-b (stair) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | stair room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| pantry (pantry / store) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | store room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| hall-b (hall at the stair foot) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | hall room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| entry-b (entrance) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | entrance room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| family (family / TV corner) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| kitchen (open kitchen) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | kitchen room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| kitchen-island (open kitchen) clear height (service) | info | 2.7 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | kitchen room: min clear 2.70 m (max 2.70); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| dining (dining) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| dining-side (dining) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| living (garden living) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| bar-alcove (bar / library alcove) clear height | gate | 100 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.70-2.70 m; 100 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 100 % is >= 2.4 m (the preferable height); margin 25.0 points |
+| store-ramp (store under the ramp) clear height (service) | info | 1.45 | 2 | m | **WARN** | policy-service-clear-2000 (project judgement) | store room: min clear 1.45 m (max 2.00); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| cinema (cinema) clear height | gate | 75.5 | 75 | % of floor >= 2.3 m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | clear 2.00-2.65 m; 76 % of the floor is >= 2.3 m (needs 75 %, Metric Handbook / NDSS); 67 % is >= 2.4 m (the preferable height); margin 0.5 points |
+| cinema (cinema) clear height, preferable 2.4 m | info | 67 | 100 | % of floor >= 2.4 m | **WARN** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | meets the 2.3 m minimum but only 67 % of the floor reaches the preferable 2.4 m |
+| guest-wc (guest bathroom) clear height (service) | info | 2.65 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | bathroom room: min clear 2.65 m (max 2.65); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| dirty-kitchen (dirty kitchen + laundry) clear height (service) | info | 2.65 | 2 | m | **PASS** | policy-service-clear-2000 (project judgement) | utility room: min clear 2.65 m (max 2.65); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
+| clear under the perimeter beams (all levels) | gate | 2.3 | 2.3 | m | **PASS** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | beams 600 deep (ASSUMED section): 2.30 m under the beam vs 2.3 m minimum; 0.10 m under the 2.4 m preferable, local to the perimeter and window heads |
 
 ### EG5 Room sizes
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| kids-a (kids bedroom A) area | 12.07 | 11.5 | m2 | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 12.07 m2 vs 11.5 m2 for a double/twin bedroom (NDSS) |
-| kids-a (kids bedroom A) width | 3.32 | 2.75 | m | **PASS** | ndss-first-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 3.32 m vs 2.75 m (NDSS) |
-| kids-b (kids bedroom B) area | 12.07 | 11.5 | m2 | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 12.07 m2 vs 11.5 m2 for a double/twin bedroom (NDSS) |
-| kids-b (kids bedroom B) width | 3.32 | 2.55 | m | **PASS** | ndss-other-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 3.32 m vs 2.55 m (NDSS) |
-| parents-bed (parents' bedroom) area | 11.66 | 11.5 | m2 | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.66 m2 vs 11.5 m2 for a double/twin bedroom (NDSS) |
-| parents-bed (parents' bedroom) width | 2.9 | 2.55 | m | **PASS** | ndss-other-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 2.90 m vs 2.55 m (NDSS) |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| kids-a (kids bedroom A) area | gate | 11.81 | 11.5 | m2 | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.81 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.31 m2 |
+| kids-a (kids bedroom A) width | gate | 3.38 | 2.75 | m | **PASS** | ndss-first-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 3.38 m vs 2.75 m (NDSS) |
+| kids-b (kids bedroom B) area | gate | 11.75 | 11.5 | m2 | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.75 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.25 m2 |
+| kids-b (kids bedroom B) width | gate | 3.38 | 2.55 | m | **PASS** | ndss-other-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 3.38 m vs 2.55 m (NDSS) |
+| parents-bed (parents' bedroom) area | gate | 11.52 | 11.5 | m2 | **PASS** | ndss-double-bedroom-area (Chapter 22 s.2.2 (NDSS)) | net area 11.52 m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin 0.02 m2 |
+| parents-bed (parents' bedroom) width | gate | 2.8 | 2.55 | m | **PASS** | ndss-other-double-bedroom-width (Chapter 22 s.2.2 (NDSS)) | narrowest net dimension 2.80 m vs 2.55 m (NDSS) |
+| family-bath (family bathroom) area (target) | info | 5.18 | 4.3 | m2 | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.18 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
+| parents-ensuite (en-suite) area (target) | info | 5.03 | 4.3 | m2 | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.03 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
+| guest-wc (guest bathroom) area (target) | info | 5.06 | 4.3 | m2 | **PASS** | mh-bathroom-m42-4.30 (Figure 22.12d) | net area 5.06 m2 vs 4.30 m2 recommended for an adaptable-dwelling bathroom (Metric Handbook Fig 22.12d; a target, not a gate) |
+
+### EG6 Doors
+
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| door door-B-lounge-nook-pantry (lounge-nook/pantry) | info | 0.8 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-lounge-cinema (lounge/cinema) | info | 0.9 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-cinema-store-ramp (cinema/store-ramp) | info | 0.8 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-cinema-store-ramp (cinema/store-ramp) height | info | 1.88 | 2 | m | **WARN** | policy-service-clear-2000 (project judgement) | leaf height 1.88 m is under the 2.0 m head height (reduced door under the ramp, a project decision; our policy) |
+| door door-B-family-guest-wc (family/guest-wc) | info | 0.8 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-kitchen-dirty-kitchen (kitchen/dirty-kitchen) | info | 1.2 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 1.20 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-entry-b-core (entry-b/core) | info | 1 | 0.775 | m | **PASS** | ukadm-entrance-door-min (M4(1) para 1.14a) | nominal width 1.00 m vs 0.775 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-dining-yard (dining/yard) | info | 2.35 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 2.35 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-living-yard (living/yard) | info | 2.76 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 2.76 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-living-yard-2 (living/yard) | info | 2.4 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 2.40 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-B-lounge-yard (lounge/yard) | info | 3.41 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 3.41 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-corridor-kids-a (corridor/kids-a) | info | 0.9 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-corridor-kids-b (corridor/kids-b) | info | 0.9 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-parents-bed-parents-dressing (parents-bed/parents-dressing) | info | 0.8 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-gallery-end-family-bath (gallery-end/family-bath) | info | 0.8 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-corridor-parents-entry (corridor/parents-entry) | info | 0.9 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.90 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-parents-dressing-ext-parents-ensuite (parents-dressing-ext/parents-ensuite) | info | 0.8 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 0.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-landing-gf-core (landing-gf/core) | info | 1 | 0.775 | m | **PASS** | ukadm-entrance-door-min (M4(1) para 1.14a) | nominal width 1.00 m vs 0.775 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+| door door-GF-study-game-deck (study-game/deck) | info | 1.8 | 0.75 | m | **PASS** | ukadm-door-750 (M4(1) Table 1.1 / M4(2) Table 2.1) | nominal width 1.80 m vs 0.750 m clear needed (Approved Document M); clear opening is not modelled, so a pass means the door could qualify |
+
+### EG7 Openings and glazing ratio
+
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| cinema (cinema) glazing / floor area | info | 0 | 8 | % | **FAIL** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 0.00 m2 of glazed openings on 16.45 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames a... |
+| dining (dining) glazing / floor area | info | 34.9 | 8 | % | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 5.17 m2 of glazed openings on 14.82 m2 of floor = 34.9 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| kids-a (kids bedroom A) glazing / floor area | info | 28.5 | 8 | % | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 3.36 m2 of glazed openings on 11.81 m2 of floor = 28.5 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| kids-b (kids bedroom B) glazing / floor area | info | 28 | 8 | % | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 3.29 m2 of glazed openings on 11.75 m2 of floor = 28.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| kitchen (open kitchen) glazing / floor area | info | 0 | 8 | % | **FAIL** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 0.00 m2 of glazed openings on 16.28 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames a... |
+| living (garden living) glazing / floor area | info | 46.1 | 8 | % | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 11.35 m2 of glazed openings on 24.60 m2 of floor = 46.1 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames... |
+| lounge (lounge) glazing / floor area | info | 26.8 | 8 | % | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 7.50 m2 of glazed openings on 28.00 m2 of floor = 26.8 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| parents-bed (parents' bedroom) glazing / floor area | info | 54 | 8 | % | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 6.22 m2 of glazed openings on 11.52 m2 of floor = 54.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+| study-game (study / game room) glazing / floor area | info | 66.4 | 8 | % | **PASS** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 9.04 m2 of glazed openings on 13.63 m2 of floor = 66.4 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames ... |
+
+### CL2 Daylight factor per room
+
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| cinema (cinema) daylight factor reported | gate | 0.04 | - | % | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 0.04 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
+| cinema (cinema) DF vs SLL minimum | info | 0.04 | 1.5 | % | **FAIL** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 0.04 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
+| dining (dining) daylight factor reported | gate | 1.88 | - | % | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 1.88 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
+| dining (dining) DF vs SLL minimum | info | 1.88 | 1.5 | % | **PASS** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 1.88 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
+| kids-a (kids bedroom A) daylight factor | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
+| kids-b (kids bedroom B) daylight factor | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
+| kitchen (open kitchen) daylight factor reported | gate | 0.33 | - | % | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 0.33 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
+| kitchen (open kitchen) DF vs SLL minimum | info | 0.33 | 2 | % | **FAIL** | sll-min-adf-kitchen (Chapter 5 Table 5.2) | simulated mean DF 0.33 % vs 2.0 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
+| living (garden living) daylight factor reported | gate | 3.48 | - | % | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 3.48 %, read as moderate (2-5 %) (Metric Handbook bands, descriptive only) |
+| living (garden living) DF vs SLL minimum | info | 3.48 | 1.5 | % | **PASS** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 3.48 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
+| lounge (lounge) daylight factor reported | gate | 0.59 | - | % | **PASS** | mh-daylight-bands (Chapter 9 Light) | simulated mean DF 0.59 %, read as gloomy (< 2 %) (Metric Handbook bands, descriptive only) |
+| lounge (lounge) DF vs SLL minimum | info | 0.59 | 1.5 | % | **FAIL** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 0.59 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
+| parents-bed (parents' bedroom) daylight factor | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
+| study-game (study / game room) daylight factor | gate | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room (the project's Radiance run covers the basement rooms only) |
 
 ### EG9 Window sills and falls
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| window win-00 (dirty-kitchen, B) | 0 | 0 | m | **PASS** | ukadk-guarding-drop-dwelling (Section 3) | basement window opens at yard level: no fall of more than 0.6 m |
-| window win-01 (study-game, GF) | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
-| window win-02 (study-game, GF) | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
-| window win-03 (kids-a, GF) | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
-| window win-04 (kids-b, GF) | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
-| window win-05 (family-bath, GF) | 1.7 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 1.70 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
-| window win-06 (parents-bed, GF) | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
-| window win-07 (parents-bed, GF) | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| window window-B-dirty-kitchen-0 (dirty-kitchen, B) | gate | 0 | 0 | m | **PASS** | policy-yard-level-window (project judgement) | basement window opens at yard level: no fall of more than 0.6 m |
+| window window-GF-study-game-1 (study-game, GF) | gate | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
+| window window-GF-study-game-2 (study-game, GF) | gate | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
+| window window-GF-kids-a-3 (kids-a, GF) | gate | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
+| window window-GF-kids-b-4 (kids-b, GF) | gate | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
+| window window-GF-family-bath-5 (family-bath, GF) | gate | 1.7 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 1.70 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
+| window window-GF-parents-bed-6 (parents-bed, GF) | gate | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
+| window window-GF-parents-bed-7 (parents-bed, GF) | gate | 0.9 | 0.8 | m | **PASS** | ukadk-glazing-guard-800 (Diagram 3.1) | GF window over a drop: sill 0.90 m vs 0.80 m guard height at opening windows (ADK Diagram 3.1) |
 
 ## Informative and target rows (not gates)
 
 Egyptian ER rows (`[ER informative]`), A+ targets and recommendations. Passing rows are counted, not listed.
 
-| subject | achieved | required | unit | status | source | note |
-|---|---|---|---|---|---|---|
-| store-ramp (store under the ramp) clear height (service) | 1.45 | 2 | m | **WARN** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | store room: min clear 1.45 m (max 2.00); the ceiling minimum applies to habitable rooms; 2.0 m is the door/head height, project judgement |
-| store-ramp (store under the ramp) [ER informative] | 1.45 | 2.7 | m | **FAIL** | er119-art93 (ER Article (93)) | ER Art.93 reading: least clear 1.45 m vs 2.70 m (informative, not a gate) |
-| cinema (cinema) clear height, preferable 2.4 m | 67 | 100 | % of floor >= 2.4 m | **WARN** | mh-dwelling-ceiling-min (Chapter 22 'Ceiling heights') | meets the 2.3 m minimum but only 67 % of the floor reaches the preferable 2.4 m |
-| cinema (cinema) [ER informative] | 2 | 2.7 | m | **FAIL** | er119-art93 (ER Article (93)) | ER Art.93 reading: least clear 2.00 m vs 2.70 m (informative, not a gate) |
-| door door-02 (cinema/store-ramp) height | 1.88 | 2 | m | **WARN** | ukadk-stair-headroom-min (para 1.11 and Diagram 1.3) | leaf height 1.88 m is under the 2.0 m head height (reduced door under the ramp, a project decision; no source card) |
-| cinema (cinema) mean daylight factor | 0.04 | 1.5 | % | **FAIL** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 0.04 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
-| cinema (cinema) glazing / floor area | 0 | 8 | % | **FAIL** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 0.00 m2 of glazed openings on 16.90 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames a... |
-| kids-a (kids bedroom A) daylight factor | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room |
-| kids-b (kids bedroom B) daylight factor | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room |
-| kitchen (open kitchen) mean daylight factor | 0.33 | 2 | % | **FAIL** | sll-min-adf-kitchen (Chapter 5 Table 5.2) | simulated mean DF 0.33 % vs 2.0 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
-| kitchen (open kitchen) glazing / floor area | 0 | 8 | % | **FAIL** | irc-r303-glazing (Chapter 4 Related Codes and Constraints) | 0.00 m2 of glazed openings on 15.58 m2 of floor = 0.0 % vs 8 % (IRC R303.1, quoted in Residential Interior Design; the Egyptian ER Art.96 gives the same 8 %). Frames a... |
-| lounge (lounge) mean daylight factor | 0.6 | 1.5 | % | **FAIL** | sll-min-adf-living (Chapter 5 Table 5.2) | simulated mean DF 0.60 % vs 1.5 % minimum average daylight factor (SLL Code, a recommendation; the client prefers shade, so this is reported, not a safety gate) |
-| parents-bed (parents' bedroom) daylight factor | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room |
-| study-game (study / game room) daylight factor | - | - |  | **NOT_EVALUATED** | - | not evaluated: no simulated daylight factor for this room |
-| stair width [ER informative] | 950 | 1100 | mm | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: clear width 950 mm vs 1100 mm (ADK sets no private-stair width) |
-| stair risers per flight [ER informative] | 17 | 14 | risers | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: 17 risers in one flight vs 14 then a landing |
-| stair tread and riser [ER informative] | 176.5 | 170 | mm | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: riser 176.5 mm vs 170, tread 280 vs 270 |
-| stair closed risers (A+ target) | 0 | 1 | closed | **FAIL** | ukadk-closed-risers (para 1.6) | risers are open; closed risers are the A+ target (ADK 1.6 for non-dwellings) and remove both failures above |
-| stair open risers [ER informative] | 116.5 | 100 | mm | **FAIL** | er119-art103-railing (ER Article (103)) | ER Art.103: objects >= 10 cm must not fall through; a 116 mm gap does not stop one |
-| GF core door to the top step [ER informative] | 0.075 | 1 | m | **FAIL** | er119-art96-door-stair (ER Article (96)) | ER Art.96: door opening directly onto a stair flight needs 1.0 m; here 0.075 m |
+| subject | gate | achieved | required | unit | status | source | note |
+|---|---|---|---|---|---|---|---|
+| store-ramp (store under the ramp) [ER informative] | info | 1.45 | 2.7 | m | **FAIL** | er119-art93 (ER Article (93)) | ER Art.93 reading: least clear 1.45 m vs 2.70 m (informative, not a gate) |
+| cinema (cinema) [ER informative] | info | 2 | 2.7 | m | **FAIL** | er119-art93 (ER Article (93)) | ER Art.93 reading: least clear 2.00 m vs 2.70 m (informative, not a gate) |
+| stair width [ER informative] | info | 950 | 1100 | mm | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: clear width 950 mm vs 1100 mm (ADK sets no private-stair width) |
+| stair risers per flight [ER informative] | info | 17 | 14 | risers | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: 17 risers in one flight vs 14 then a landing |
+| stair tread and riser [ER informative] | info | 176.5 | 170 | mm | **FAIL** | er119-art100 (ER Article (100)) | ER Art.100: riser 176.5 mm vs 170, tread 280 vs 270 |
+| stair open risers [ER informative] | info | 116.5 | 100 | mm | **FAIL** | er119-art103-railing (ER Article (103)) | ER Art.103: objects >= 10 cm must not fall through; a 116 mm gap does not stop one |
+| GF core door to the top step [ER informative] | info | 0.075 | 1 | m | **FAIL** | er119-art96-door-stair (ER Article (96)) | ER Art.96: door opening directly onto a stair flight needs 1.0 m; here 0.075 m |
 
 Egyptian ER informative rows: 63, of which 7 would fail. Failing ones: GF core door to the top step; cinema (cinema); stair open risers; stair risers per flight; stair tread and riser; stair width; store-ramp (store under the ramp).
 
+## Margins on ASSUMED inputs
+
+These pass by little, on assumed build-ups, so a small change flips them: stair headroom 2041 mm vs 2000 (floor build-up 100 mm and slab 200 mm are ASSUMED); cinema floor share at 2.3 m clear 75.5 % vs 75 (ramp soffit profile); parents' bedroom 11.52 m2 vs 11.5 (with the entry alcove); kids rooms 11.81 and 11.75 vs 11.5; the stair guard and the ramp-edge guard sit exactly at their minimum heights (900 and 1100 mm).
+
 ## Data used and its limits
 
-- concept/revit_spec.build(design('D1')) (current spec; Revit read-back 2026-09-26 predates it)
-- daylight/summary-r12.json (D1 rooms)
-- concept/villa_r11.design('D1')
-- concept/villa_parking.clear_at
+- concept/revit_spec.build(concept/villa_r11.design('D1')): current spec (doors, windows, stair treads, rails, balustrades). The designs-r12 read-back (2026-09-26) is older: it differs in the GF layout, study windows, pocket door and parents' suite
+- furnish-d1/revit/readback.json (2026-09-29, D1F): Revit net room areas and element marks; counts match the current spec (36 walls, 18 doors, 8 windows)
+- daylight/summary-r12.json D1 rooms: basement rooms only, from the 2026-09-26 spec
+- concept/villa_parking.clear_at: ramp and deck soffit
 - Room areas are estimated net areas (rect less 0.15 m each way); the Revit read-back (designs-r12, 2026-09-26) predates later D1 changes (client glass stair, pocket door, GF layout).
 - Daylight factors are the project's validated Radiance run (`daylight/summary-r12.json`, basement rooms only; the GF rooms have no simulated DF, reported not evaluated). Clean glass, no furniture.
 - Door and window widths are nominal; clear openings, openable areas and door swing are not modelled, so door and escape-window passes mean 'could qualify'.

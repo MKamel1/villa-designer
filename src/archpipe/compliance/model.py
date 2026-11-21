@@ -212,6 +212,7 @@ def load_d1(out_dir: Path | str | None = None) -> DesignModel:
          "no sourced dead-end or travel-distance limit for a single dwelling is held (Approved Document B travel "
          "distances are not carded); reviewer step. GF exits: the core door at the stair top and the escape windows"),
     ]
+    _prefer_l2_model(m)
     dd = _optional(villa / "daylight" / "summary-r12.json")
     dayl = (dd or {}).get("options", {}).get("D1", {}).get("rooms", {})
     for r in m.rooms.values():
@@ -227,6 +228,50 @@ def load_d1(out_dir: Path | str | None = None) -> DesignModel:
     if dd is None:
         m.sources.append("daylight summary NOT FOUND: daylight factors reported not_evaluated")
     return m
+
+
+def _prefer_l2_model(m: DesignModel) -> None:
+    """Replace spec-derived openings, stair treads and guards with the L2 canonical model's elements (same values,
+    stable element ids) when it loads; record the cross-check in `m.sources`."""
+    try:
+        from ..model import load as load_model
+        els = load_model("D1")
+    except Exception as exc:            # noqa: BLE001 - the spec-derived values stay
+        m.sources.append("L2 model not loaded (%s: %s); element ids are spec-derived" % (type(exc).__name__, exc))
+        return
+    ops, guards, stair = [], [], None
+    for e in els:
+        p = e.params
+        if e.kind in ("door", "window"):
+            rooms = tuple(p.get("rooms") or (e.room,))
+            ext = e.kind == "window" or "yard" in rooms or "deck" in rooms
+            ops.append(Opening(e.id, e.kind, e.level, p["width_mm"] / 1000.0, p["height_mm"] / 1000.0,
+                               p.get("sill_mm", 0.0) / 1000.0, rooms, ext, e.placement[0] / 1000.0,
+                               e.placement[1] / 1000.0))
+        elif e.kind == "railing" and p.get("guard_height_mm") is not None:
+            if e.id.startswith("rail-stair"):
+                guards.append(Guard(e.id, p.get("side", ""), p["guard_height_mm"] / 1000.0,
+                                    "handrail" if p.get("material") == "wood" else "guard",
+                                    solid=bool(p.get("glazed")) or p.get("material") == "wood", level=e.level))
+            else:
+                guards.append(Guard(e.id, p.get("what", ""), p["guard_height_mm"] / 1000.0, "guard", solid=True,
+                                    drop_m=_rail_drop(p.get("what", "")), level="street"))
+        elif e.kind == "stair":
+            stair = e
+    n_spec_doors = sum(1 for o in m.openings if o.kind == "door")
+    n_doors = sum(1 for o in ops if o.kind == "door")
+    if (n_doors, len(ops)) != (n_spec_doors, len(m.openings)):
+        m.sources.append("L2 model opening counts differ from the spec (%d vs %d): spec-derived values kept"
+                         % (len(ops), len(m.openings)))
+        return
+    m.openings = ops
+    if guards:
+        m.guards = guards
+    if stair is not None and stair.params.get("tread_boxes_mm") and m.stair is not None:
+        m.stair.treads = [list(b) for b in stair.params["tread_boxes_mm"]]
+        m.stair.id = stair.id
+    m.sources.insert(0, "archpipe.model.load('D1') (L2): openings, stair treads, railings and element ids; counts "
+                        "agree with the spec")
 
 
 def _optional(path: Path):

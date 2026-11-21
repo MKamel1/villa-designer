@@ -30,6 +30,10 @@ def _ne(criterion, subject, reason, elements=(), gate=True):
     return _res(criterion, "not_evaluated", subject, message="not evaluated: " + reason, elements=elements, gate=gate)
 
 
+def _rid(r: Room) -> str:
+    return "room-" + r.id              # the L2 model's element id for a room
+
+
 def _room_label(r: Room) -> str:
     return "%s (%s)" % (r.id, r.name.split(" (")[0] if r.name else r.occupancy)
 
@@ -40,7 +44,7 @@ def check_clear_heights(m: DesignModel) -> list:
     for r in m.rooms.values():
         samples = m.clear.get(r.id)
         if not samples:
-            out.append(_ne("EG4", _room_label(r), "no clear-height data for this room", (r.id,)))
+            out.append(_ne("EG4", _room_label(r), "no clear-height data for this room", (_rid(r),)))
             continue
         habitable = r.occupancy in HABITABLE
         lo, hi = min(samples), max(samples)
@@ -52,25 +56,25 @@ def check_clear_heights(m: DesignModel) -> list:
                             round(share23, 1), 75.0, "% of floor >= 2.3 m",
                             "clear %.2f-%.2f m; %.0f %% of the floor is >= 2.3 m (needs 75 %%, Metric Handbook / NDSS); "
                             "%.0f %% is >= 2.4 m (the preferable height); margin %.1f points" % (lo, hi, share23, share24, share23 - 75.0),
-                            ["mh-dwelling-ceiling-min"], (r.id,)))
+                            ["mh-dwelling-ceiling-min"], (_rid(r),)))
             if ok and share24 < 100.0 - 1e-9:
                 out.append(_res("EG4", "warn", _room_label(r) + " clear height, preferable 2.4 m",
                                 round(share24, 1), 100.0, "% of floor >= 2.4 m",
                                 "meets the 2.3 m minimum but only %.0f %% of the floor reaches the preferable "
-                                "2.4 m" % share24, ["mh-dwelling-ceiling-min"], (r.id,), gate=False))
+                                "2.4 m" % share24, ["mh-dwelling-ceiling-min"], (_rid(r),), gate=False))
         else:
             out.append(_res("EG4", "pass" if lo >= 2.0 - 1e-9 else "warn", _room_label(r) + " clear height (service)",
                             round(lo, 2), 2.0, "m",
                             "%s room: min clear %.2f m (max %.2f); the ceiling minimum applies to habitable rooms; "
                             "2.0 m is the door/head height, project judgement" % (r.occupancy, lo, hi),
-                            ["policy-service-clear-2000"], (r.id,), gate=False))
+                            ["policy-service-clear-2000"], (_rid(r),), gate=False))
         # Egyptian ER Art.93: informative
         er_min = 2.30 if r.occupancy in ("bathroom", "wc", "ensuite", "hall", "corridor", "entrance", "landing",
                                          "utility", "stair") else 2.70
         out.append(_res("EG4", "pass" if lo >= er_min - 1e-9 else "fail", _room_label(r) + " [ER informative]",
                         round(lo, 2), er_min, "m",
                         "ER Art.93 reading: least clear %.2f m vs %.2f m (informative, not a gate)" % (lo, er_min),
-                        ["er119-art93"], (r.id,), gate=False))
+                        ["er119-art93"], (_rid(r),), gate=False))
     if m.beam_clear_m is not None:
         ok = m.beam_clear_m >= 2.3 - 1e-9
         out.append(_res("EG4", "pass" if ok else "fail", "clear under the perimeter beams (all levels)",
@@ -95,26 +99,26 @@ def check_room_sizes(m: DesignModel) -> list:
         out.append(_res("EG5", "pass" if a >= 11.5 - 1e-9 else "fail", _room_label(r) + " area", round(a, 2), 11.5,
                         "m2", "net area %.2f m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin %.2f m2"
                         % (a, a - 11.5),
-                        ["ndss-double-bedroom-area"], (r.id,)))
+                        ["ndss-double-bedroom-area"], (_rid(r),)))
         out.append(_res("EG5", "pass" if wmin >= need_w - 1e-9 else "fail", _room_label(r) + " width", round(wmin, 2),
                         need_w, "m", "narrowest net dimension %.2f m vs %.2f m (NDSS)" % (wmin, need_w),
                         ["ndss-first-double-bedroom-width" if need_w == 2.75 else "ndss-other-double-bedroom-width"],
-                        (r.id,)))
+                        (_rid(r),)))
         out.append(_res("EG5", "pass" if (a >= 7.5 and wmin >= 2.5) else "fail", _room_label(r) + " [ER informative]",
                         round(a, 2), 7.5, "m2", "ER Art.94: %.2f m2 / %.2f m vs 7.5 m2 / 2.5 m" % (a, wmin),
-                        ["er119-art94"], (r.id,), gate=False))
+                        ["er119-art94"], (_rid(r),), gate=False))
     for r in m.rooms.values():
         if r.occupancy in ("bathroom", "ensuite"):
             a = r.area_m2 or r.rect_area
             out.append(_res("EG5", "pass" if a >= 4.3 - 1e-9 else "warn", _room_label(r) + " area (target)",
                             round(a, 2), 4.3, "m2", "net area %.2f m2 vs 4.30 m2 recommended for an adaptable-dwelling "
                             "bathroom (Metric Handbook Fig 22.12d; a target, not a gate)" % a,
-                            ["mh-bathroom-m42-4.30"], (r.id,), gate=False))
+                            ["mh-bathroom-m42-4.30"], (_rid(r),), gate=False))
         if r.occupancy == "wc":
             a = r.area_m2 or r.rect_area
             out.append(_res("EG5", "pass" if a >= 2.61 - 1e-9 else "warn", _room_label(r) + " area (target)",
                             round(a, 2), 2.61, "m2", "net area %.2f m2 vs 2.61 m2 recommended (Metric Handbook "
-                            "Fig 22.12c; a target)" % a, ["mh-wc-m42-2.61"], (r.id,), gate=False))
+                            "Fig 22.12c; a target)" % a, ["mh-wc-m42-2.61"], (_rid(r),), gate=False))
     return out
 
 
@@ -165,7 +169,7 @@ def check_daylight(m: DesignModel) -> list:
         # area-weighted mean DF over the parts that have a DF
         num = sum((r.area_m2 or r.rect_area) * m.df[r.id] for r in rooms if r.id in m.df)
         den = sum((r.area_m2 or r.rect_area) for r in rooms if r.id in m.df)
-        ids = tuple(r.id for r in rooms)
+        ids = tuple(_rid(r) for r in rooms)
         label = "%s (%s)" % (g, main.name.split(" (")[0])
         if den <= 0:
             out.append(_ne("CL2", label + " daylight factor", "no simulated daylight factor for this room (the "
@@ -460,7 +464,7 @@ def check_escape(m: DesignModel) -> list:
             out.append(_res("LS5", "pass", label + " escape opening", 1.0, 1.0, "opening",
                             "has %s; whole window taken as openable (openable area is not modelled)" % kind,
                             ["adb-escape-window-area", "adb-escape-window-min", "adb-escape-window-sill",
-                             "irc-r310-escape"], (r.id,)))
+                             "irc-r310-escape"], (_rid(r),)))
         else:
             # an inner room: escape only through another room
             routes = [(l[0] if l[1] == r.id else l[1]) for l in m.links if r.id in l] if hasattr(m, "links") else []
@@ -469,7 +473,7 @@ def check_escape(m: DesignModel) -> list:
                             "Approved Document B 2.11 allows inner rooms only for a kitchen, utility, dressing room, "
                             "bathroom/WC, a gallery, or a room with an escape window; IRC R310 asks for one "
                             "emergency opening in every basement habitable space" % (", ".join(routes) or "another room"),
-                            ["adb-inner-room", "irc-r310-escape"], (r.id,)))
+                            ["adb-inner-room", "irc-r310-escape"], (_rid(r),)))
     for crit, subject, why in m.not_evaluated_gates:
         out.append(_ne(crit, subject, why))
     return out
