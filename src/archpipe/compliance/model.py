@@ -21,7 +21,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 HABITABLE = ("living", "dining", "bedroom", "study", "media")
-NET_INSET = 0.15     # estimated net area = rect less 0.15 m each way (lounge: 21.97 vs Revit read-back 21.87 m2)
 UTILITY = ("kitchen", "bathroom", "wc", "ensuite", "utility", "dressing", "store", "hall", "corridor", "stair",
            "landing", "entrance")
 
@@ -36,6 +35,8 @@ class Room:
     area_m2: float | None = None    # net area from the Revit read-back when it has one
     part_of: str = ""               # an open-plan part of another room (merged for area and daylight)
     ext: bool = False               # in the east extension under the ramp / deck
+    net_w: float | None = None      # net clear dimensions (villa.net_dims), m
+    net_d: float | None = None
 
     @property
     def group(self) -> str:
@@ -106,6 +107,7 @@ class DesignModel:
     needed_but_unmodelled: list = field(default_factory=list)   # (subject, what) pairs, reported not_evaluated
     sources: list = field(default_factory=list)
     links: list = field(default_factory=list)       # (room, room) pairs that connect
+    not_evaluated_gates: list = field(default_factory=list)   # (criterion, subject, reason)
 
     def group_area(self, group: str) -> float:
         tot = 0.0
@@ -135,24 +137,31 @@ def _j(path: Path):
 
 
 def load_d1(out_dir: Path | str | None = None) -> DesignModel:
-    from ..concept import villa_r11 as R
-    from ..concept import villa_parking as P
-
     from ..concept import revit_spec as RS
+    from ..concept import villa as V
+    from ..concept import villa_parking as P
+    from ..concept import villa_r11 as R
 
     out = Path(out_dir) if out_dir else default_out_dir()
     villa = out / "villa"
     lay = R.design("D1")
-    spec = RS.build(lay)            # the CURRENT D1 spec; the Sept-26 Revit read-back predates later client changes
-    dayl = _j(villa / "daylight" / "summary-r12.json")["options"]["D1"]["rooms"]
+    spec = RS.build(lay)            # the CURRENT D1 spec (36 walls, 18 doors, 8 windows = the 2026-09-29 D1F read-back)
     m = DesignModel("D1")
     m.links = [tuple(l) for l in lay["links"]]
+    rb = _optional(villa / "furnish-d1" / "revit" / "readback.json")
+    rb_rooms = {r["id"]: r["area_m2"] for r in rb["options"][0]["rooms"]} if rb else {}
+    rb_marks = {}
+    if rb:
+        for o in rb["options"][0]["doors"] + rb["options"][0]["windows"]:
+            rb_marks[(round(o["x"], 3), round(o["y"], 3), o["level"])] = o.get("mark", "")
+    ext = lay.get("extension")
+    outline = {lv: V.boundary_segments(V.envelope(lv, ext)) for lv in V.LEVELS}
     for rid, r in lay["rooms"].items():
-        x0, y0, x1, y1 = r["rect"]
-        net = max(0.0, abs(x1 - x0) - NET_INSET) * max(0.0, abs(y1 - y0) - NET_INSET)
-        m.rooms[rid] = Room(rid, r["level"], tuple(r["rect"]), r["occupancy"], r.get("name", ""),
-                            area_m2=round(net, 2), part_of=r.get("part_of", ""), ext=bool(r.get("ext")))
-    # kitchen + its island are one open kitchen; the lounge, family corner and nook are one room
+        w, d = V.net_dims(r["rect"], outline[r["level"]])
+        net = rb_rooms.get(rid) or round(max(w, 0.0) * max(d, 0.0), 2)      # Revit net area, else net_dims estimate
+        m.rooms[rid] = Room(rid, r["level"], tuple(r["rect"]), r["occupancy"], r.get("name", ""), area_m2=net,
+                            part_of=r.get("part_of", ""), ext=bool(r.get("ext")), net_w=round(w, 3), net_d=round(d, 3))
+    # the open kitchen and its island are one room
     m.rooms["kitchen-island"].part_of = "kitchen"
     # ---- clear heights: slab 3.00 - slab 0.20 - build-up 0.10 (villa.py), beams 0.60 deep (ASSUMED section)
     slab_clear, m.beam_clear_m = 2.70, 2.30
@@ -164,20 +173,21 @@ def load_d1(out_dir: Path | str | None = None) -> DesignModel:
             m.clear[rid] = [round(spec["parking2"]["deck"]["z_top"] - 0.35 + 3.0, 3)] * 5      # under the deck: 2.65
         else:
             m.clear[rid] = [slab_clear]
-    # ---- openings
+    # ---- openings (element id = the Revit mark where the read-back has it)
     for i, d in enumerate(spec["doors"]):
-        ext = bool(d.get("garden")) or "yard" in d["rooms"] or "deck" in d["rooms"]
-        m.openings.append(Opening("door-%02d" % i, "door", d["level"], d["width"], d["height"], 0.0,
-                                  tuple(d["rooms"]), ext, d["x"], d["y"]))
+        ext_ = bool(d.get("garden")) or "yard" in d["rooms"] or "deck" in d["rooms"]
+        mark = rb_marks.get((round(d["x"], 3), round(d["y"], 3), d["level"])) or "door-%02d" % i
+        m.openings.append(Opening(mark, "door", d["level"], d["width"], d["height"], 0.0, tuple(d["rooms"]), ext_,
+                                  d["x"], d["y"]))
     for i, w in enumerate(spec["windows"]):
-        m.openings.append(Opening("win-%02d" % i, "window", w["level"], w["width"], w["height"], w["sill"],
-                                  (w["room"],), True, w["x"], w["y"]))
-    # ---- stair as built (tread boxes), as the Revit DirectShape was made
-    op = spec["gf_opening"]
-    m.stair = Stair(spec["stair_name"], [list(b) for b in spec["stair"]], tuple(op), -300.0,
+        mark = rb_marks.get((round(w["x"], 3), round(w["y"], 3), w["level"])) or "win-%02d" % i
+        m.openings.append(Opening(mark, "window", w["level"], w["width"], w["height"], w["sill"], (w["room"],), True,
+                                  w["x"], w["y"]))
+    # ---- stair as built (tread boxes only: the Revit stair is a DirectShape of treads, no riser boards)
+    m.stair = Stair(spec["stair_name"], [list(b) for b in spec["stair"]], tuple(spec["gf_opening"]), -300.0,
                     top_landing=tuple(lay["rooms"]["landing-gf"]["rect"]),
                     bottom_landing=tuple(lay["rooms"]["hall-b"]["rect"]), has_risers=False)
-    # ---- guards: the two stair balustrades and the three parking rails of the spec
+    # ---- guards: the stair balustrades and the parking rails of the spec
     for b in spec.get("balustrades", []) or []:
         m.guards.append(Guard(b["id"], b.get("side", ""), b.get("height_above_nosing"),
                               "handrail" if b["id"] == "stair-wall-handrail" else "guard",
@@ -188,16 +198,42 @@ def load_d1(out_dir: Path | str | None = None) -> DesignModel:
     m.needed_but_unmodelled = [
         ("GF stair void edge", "no guard element for the GF slab opening (the route check villa.gf_route_width "
                                "assumes a 50 mm balustrade, but no height or type is in the spec or read-back)"),
-        ("GF front terrace edge", "no guard at the terrace edge over the sunken north patio (3.0 m drop) in the "
-                                  "spec rails or read-back"),
+        ("GF front terrace edge", "no guard at the terrace edge over the sunken north patio (3.0 m drop): the spec "
+                                  "walls and rails and the D1F read-back have none (villa.py's TERRACE comment of a "
+                                  "900 mm parapet is not in D1)"),
+        ("patio edge beside the entrance steps", "the 1.8 m drop from the entrance steps (street level) to the sunken "
+                                                 "patio has no guard in the spec or read-back"),
     ]
+    m.not_evaluated_gates = [
+        ("LS5", "basement garden doors lead to a place of safety",
+         "the lounge, dining and living pass LS5 only through garden doors into the sunken yards (4 m fences); a way "
+         "from the yard to the street (gate, steps or the car ramp) is neither modelled nor carded"),
+        ("LS5", "dead-end hall and the single stair",
+         "no sourced dead-end or travel-distance limit for a single dwelling is held (Approved Document B travel "
+         "distances are not carded); reviewer step. GF exits: the core door at the stair top and the escape windows"),
+    ]
+    dd = _optional(villa / "daylight" / "summary-r12.json")
+    dayl = (dd or {}).get("options", {}).get("D1", {}).get("rooms", {})
     for r in m.rooms.values():
         if r.id in dayl:
             m.df[r.id] = dayl[r.id]["df"]
-    m.sources = ["concept/revit_spec.build(design('D1')) (current spec; Revit read-back 2026-09-26 predates it)",
-                 "daylight/summary-r12.json (D1 rooms)", "concept/villa_r11.design('D1')",
-                 "concept/villa_parking.clear_at"]
+    m.sources = ["concept/revit_spec.build(concept/villa_r11.design('D1')): current spec (doors, windows, stair "
+                 "treads, rails, balustrades). The designs-r12 read-back (2026-09-26) is older: it differs in the "
+                 "GF layout, study windows, pocket door and parents' suite",
+                 "furnish-d1/revit/readback.json (2026-09-29, D1F): Revit net room areas and element marks; counts "
+                 "match the current spec (36 walls, 18 doors, 8 windows)",
+                 "daylight/summary-r12.json D1 rooms: basement rooms only, from the 2026-09-26 spec",
+                 "concept/villa_parking.clear_at: ramp and deck soffit"]
+    if dd is None:
+        m.sources.append("daylight summary NOT FOUND: daylight factors reported not_evaluated")
     return m
+
+
+def _optional(path: Path):
+    try:
+        return _j(path)
+    except (OSError, ValueError):
+        return None
 
 
 def _profile_height(profile) -> float | None:

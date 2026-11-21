@@ -51,7 +51,7 @@ def check_clear_heights(m: DesignModel) -> list:
             out.append(_res("EG4", "pass" if ok else "fail", _room_label(r) + " clear height",
                             round(share23, 1), 75.0, "% of floor >= 2.3 m",
                             "clear %.2f-%.2f m; %.0f %% of the floor is >= 2.3 m (needs 75 %%, Metric Handbook / NDSS); "
-                            "%.0f %% is >= 2.4 m (the preferable height)" % (lo, hi, share23, share24),
+                            "%.0f %% is >= 2.4 m (the preferable height); margin %.1f points" % (lo, hi, share23, share24, share23 - 75.0),
                             ["mh-dwelling-ceiling-min"], (r.id,)))
             if ok and share24 < 100.0 - 1e-9:
                 out.append(_res("EG4", "warn", _room_label(r) + " clear height, preferable 2.4 m",
@@ -63,7 +63,7 @@ def check_clear_heights(m: DesignModel) -> list:
                             round(lo, 2), 2.0, "m",
                             "%s room: min clear %.2f m (max %.2f); the ceiling minimum applies to habitable rooms; "
                             "2.0 m is the door/head height, project judgement" % (r.occupancy, lo, hi),
-                            ["mh-dwelling-ceiling-min"], (r.id,), gate=False))
+                            ["policy-service-clear-2000"], (r.id,), gate=False))
         # Egyptian ER Art.93: informative
         er_min = 2.30 if r.occupancy in ("bathroom", "wc", "ensuite", "hall", "corridor", "entrance", "landing",
                                          "utility", "stair") else 2.70
@@ -87,13 +87,14 @@ def check_room_sizes(m: DesignModel) -> list:
     bedrooms = [r for r in m.rooms.values() if r.occupancy == "bedroom" and not r.part_of]
     first_done = False
     for r in sorted(bedrooms, key=lambda r: -(r.area_m2 or 0)):
-        a = r.area_m2 or r.rect_area
-        wmin = min(r.w, r.d) - 0.15
+        a = m.group_area(r.group)                 # an entry alcove counts with its room (villa.critique)
+        wmin = min(r.net_w, r.net_d) if r.net_w else min(r.w, r.d) - 0.15
         need_w = 2.75 if not first_done else 2.55
         first_done = True
         # a double bedroom: 11.5 m2; the first double 2.75 m wide, others 2.55 m (NDSS via Metric Handbook)
         out.append(_res("EG5", "pass" if a >= 11.5 - 1e-9 else "fail", _room_label(r) + " area", round(a, 2), 11.5,
-                        "m2", "net area %.2f m2 vs 11.5 m2 for a double/twin bedroom (NDSS)" % a,
+                        "m2", "net area %.2f m2 (with its entry alcove) vs 11.5 m2 for a double/twin bedroom (NDSS); margin %.2f m2"
+                        % (a, a - 11.5),
                         ["ndss-double-bedroom-area"], (r.id,)))
         out.append(_res("EG5", "pass" if wmin >= need_w - 1e-9 else "fail", _room_label(r) + " width", round(wmin, 2),
                         need_w, "m", "narrowest net dimension %.2f m vs %.2f m (NDSS)" % (wmin, need_w),
@@ -136,7 +137,7 @@ def check_doors(m: DesignModel) -> list:
         if o.height < 2.0 - 1e-9:
             out.append(_res("EG6", "warn", label + " height", round(o.height, 2), 2.0, "m",
                             "leaf height %.2f m is under the 2.0 m head height (reduced door under the ramp, a "
-                            "project decision; no source card)" % o.height, ["ukadk-stair-headroom-min"], (o.id,),
+                            "project decision; our policy)" % o.height, ["policy-service-clear-2000"], (o.id,),
                             gate=False))
         er = 0.70 if any(k in " ".join(o.rooms) for k in ("wc", "bath", "kitchen", "ensuite")) else 0.80
         out.append(_res("EG6", "pass" if o.width >= er - 1e-9 else "fail", label + " [ER informative]",
@@ -167,11 +168,15 @@ def check_daylight(m: DesignModel) -> list:
         ids = tuple(r.id for r in rooms)
         label = "%s (%s)" % (g, main.name.split(" (")[0])
         if den <= 0:
-            out.append(_ne("EG7", label + " daylight factor", "no simulated daylight factor for this room", ids,
-                           gate=False))
+            out.append(_ne("CL2", label + " daylight factor", "no simulated daylight factor for this room (the "
+                           "project's Radiance run covers the basement rooms only)", ids))
         else:
             df = num / den
-            out.append(_res("EG7", "pass" if df >= need - 1e-9 else "fail", label + " mean daylight factor",
+            band = "gloomy (< 2 %)" if df < 2.0 else ("generous (> 5 %)" if df > 5.0 else "moderate (2-5 %)")
+            out.append(_res("CL2", "pass", label + " daylight factor reported", round(df, 2), None, "%",
+                            "simulated mean DF %.2f %%, read as %s (Metric Handbook bands, descriptive only)"
+                            % (df, band), ["mh-daylight-bands"], ids))
+            out.append(_res("CL2", "pass" if df >= need - 1e-9 else "fail", label + " DF vs SLL minimum",
                             round(df, 2), need, "%",
                             "simulated mean DF %.2f %% vs %.1f %% minimum average daylight factor (SLL Code, a "
                             "recommendation; the client prefers shade, so this is reported, not a safety gate)"
@@ -197,7 +202,7 @@ def check_sills(m: DesignModel) -> list:
         label = "window %s (%s, %s)" % (o.id, o.rooms[0], o.level)
         if o.level != "GF":
             out.append(_res("EG9", "pass", label, 0.0, 0.0, "m",
-                            "basement window opens at yard level: no fall of more than 0.6 m", ["ukadk-guarding-drop-dwelling"],
+                            "basement window opens at yard level: no fall of more than 0.6 m", ["policy-yard-level-window"],
                             (o.id,)))
             continue
         ok = o.sill >= 0.8 - 1e-9
@@ -277,13 +282,13 @@ def check_stair_geometry(m: DesignModel) -> list:
                     "2R+G = %.0f mm, band 550-700 mm (ADK Table 1.1 footnote)" % two, ["ukadk-2r-plus-g"], el))
     uniform = abs(g["last_rise"] - g["rise"]) <= 5.0
     out.append(_res("LS1", "pass" if uniform else "fail", "stair uniform steps", round(abs(g["last_rise"] - g["rise"]), 1),
-                    5.0, "mm", "top rise %.1f mm vs typical %.1f mm (ADK 1.5: consistent rise)" % (g["last_rise"], g["rise"]),
-                    ["ukadk-private-stair-rise-max"], el))
+                    5.0, "mm", "top rise %.1f mm vs typical %.1f mm (ADK 1.5: consistent rise; the 5 mm tolerance is ours)" % (g["last_rise"], g["rise"]),
+                    ["policy-stair-rise-uniform-5mm"], el))
     hr, hx = stair_headroom_mm(st, g)
     out.append(_res("LS1", "pass" if hr >= 2000 - 1e-9 else "fail", "stair headroom over the pitch line",
                     round(hr), 2000.0, "mm",
-                    "least %.0f mm at x=%.2f m under the GF slab soffit (z %.0f mm, 200 slab + 100 build-up ASSUMED)"
-                    % (hr, hx / 1000, st.slab_soffit_mm), ["ukadk-stair-headroom-min"], el))
+                    "least %.0f mm at x=%.2f m under the GF slab soffit (z %.0f mm, 200 slab + 100 build-up ASSUMED); margin "
+                    "%.0f mm: a 40 mm deeper floor build-up would fail" % (hr, hx / 1000, st.slab_soffit_mm, hr - 2000), ["ukadk-stair-headroom-min"], el))
     # landings: width and length at least the flight width
     tl, bl = st.top_landing, st.bottom_landing
     wflight = g["width"] / 1000.0
@@ -346,7 +351,7 @@ def check_open_risers(m: DesignModel) -> list:
                     % g["overlap_min"], ["ukadk-open-risers-dwelling"], el))
     out.append(_res("LS2", "fail", "stair closed risers (A+ target)", 0.0, 1.0, "closed",
                     "risers are open; closed risers are the A+ target (ADK 1.6 for non-dwellings) and remove both "
-                    "failures above", ["ukadk-closed-risers"], el, gate=False))
+                    "failures above", ["ukadk-closed-risers"], el))
     out.append(_res("LS2", "fail", "stair open risers [ER informative]", round(gap, 1), 100.0, "mm",
                     "ER Art.103: objects >= 10 cm must not fall through; a %.0f mm gap does not stop one" % gap,
                     ["er119-art103-railing"], el, gate=False))
@@ -364,8 +369,8 @@ def check_guards(m: DesignModel) -> list:
         if gd.kind == "handrail":
             ok = 0.9 - 1e-9 <= gd.height_m <= 1.0 + 1e-9
             out.append(_res("LS3", "pass" if ok else "fail", label, round(gd.height_m, 3), 0.9, "m",
-                            "handrail %.2f m above the nosings (ADK 1.34: 900-1000 mm); height only, not a guard"
-                            % gd.height_m, ["ukadk-guarding-height-internal"], (gd.id,), gate=False))
+                            "handrail %.2f m above the nosings (ADK 1.34: 900-1000 mm; one side is enough under 1000 mm width)"
+                            % gd.height_m, ["ukadk-handrail-1-34"], (gd.id,)))
             continue
         if gd.drop_m is not None or gd.level == "street":
             need, sid = 0.9, "ukadk-guarding-height-internal"
@@ -378,7 +383,7 @@ def check_guards(m: DesignModel) -> list:
                             round(gd.height_m, 3), tgt, "m",
                             "%.2f m vs 1.10 m (external balcony / roof edge, ADK Diagram 3.1; used for sunken "
                             "edges: the table does not list them)" % gd.height_m, ["ukadk-guarding-height-external"],
-                            (gd.id,), gate=False))
+                            (gd.id,)))
         else:
             need = 0.9
             ok = gd.height_m >= need - 1e-9
@@ -465,10 +470,8 @@ def check_escape(m: DesignModel) -> list:
                             "bathroom/WC, a gallery, or a room with an escape window; IRC R310 asks for one "
                             "emergency opening in every basement habitable space" % (", ".join(routes) or "another room"),
                             ["adb-inner-room", "irc-r310-escape"], (r.id,)))
-    out.append(_ne("LS5", "dead-end hall and the single stair",
-                   "no sourced dead-end or travel-distance limit for a single dwelling is held (Approved Document B "
-                   "travel distances are not carded); a reviewer step. GF exits: the core door at the stair top and "
-                   "the escape windows; basement exits: the stair, the core door, the garden doors"))
+    for crit, subject, why in m.not_evaluated_gates:
+        out.append(_ne(crit, subject, why))
     return out
 
 

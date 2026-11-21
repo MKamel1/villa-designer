@@ -10,7 +10,8 @@ SECTIONS = [
     ("EG4", "Room heights"),
     ("EG5", "Room sizes"),
     ("EG6", "Doors"),
-    ("EG7", "Daylight to the rooms"),
+    ("EG7", "Openings and glazing ratio"),
+    ("CL2", "Daylight factor per room"),
     ("EG9", "Window sills and falls"),
 ]
 
@@ -44,7 +45,12 @@ FIXES = [
       "glass; 100 mm sphere rule applies. Add it to revit_spec so the route-width check and the model agree."]),
     ("GF front terrace edge", "Terrace edge over the sunken patio has no guard in the model (3.0 m drop)",
      ["Add a 1.1 m guard along the terrace edge (5.08 m). Required by ADK K2(b)/3.2a for any drop over 0.6 m."]),
-    ("mean daylight factor", "Basement rooms below the SLL minimum average daylight factor (recommendation)",
+    ("patio edge beside the entrance steps", "Entrance-steps edge over the sunken patio has no guard (1.8 m drop)",
+     ["Add a 1.1 m guard along the steps' edge on the patio side (ADK K2(b))."]),
+    ("garden doors lead to a place of safety", "Basement escape through garden doors into closed yards is not proven",
+     ["Draw the yard-to-street route (the car ramp and its gate, or a stair/gate in the street fence) and confirm "
+      "the gate opens from inside without a key; then these rows can be marked pass."]),
+    ("DF vs SLL minimum", "Basement rooms below the SLL minimum average daylight factor (recommendation)",
      ["Practical measures only (client: no light wells): glaze the lounge/kitchen faces floor-to-beam where the "
       "column grid allows, keep white finishes (already r12 default), keep guard rails clear glass; accept lower DF in "
       "the lounge and cinema and report it, because the client prefers shade. The kitchen has no opening of its own: "
@@ -69,13 +75,13 @@ def _src(r, cards):
 
 
 def _table(rows, cards):
-    lines = ["| subject | achieved | required | unit | status | source | note |", "|---|---|---|---|---|---|---|"]
+    lines = ["| subject | gate | achieved | required | unit | status | source | note |", "|---|---|---|---|---|---|---|---|"]
     for r in rows:
         note = r.message.replace("|", "/")
         if len(note) > 170:
             note = note[:167] + "..."
-        lines.append("| %s | %s | %s | %s | **%s** | %s | %s |" % (
-            r.subject.replace("|", "/"), _fmt(r.achieved), _fmt(r.required), r.unit, r.status.upper(), _src(r, cards), note))
+        lines.append("| %s | %s | %s | %s | %s | **%s** | %s | %s |" % (
+            r.subject.replace("|", "/"), "gate" if r.gate else "info", _fmt(r.achieved), _fmt(r.required), r.unit, r.status.upper(), _src(r, cards), note))
     return "\n".join(lines)
 
 
@@ -109,7 +115,7 @@ def render(m, results, cards) -> str:
     k = 0
     for key, head, fixes in FIXES:
         rel = [r for r in results if key in r.subject and r.status in ("fail", "warn", "not_evaluated")
-               and (r.gate or key in ("mean daylight factor", "glazing / floor area"))]
+               and (r.gate or key in ("DF vs SLL minimum", "glazing / floor area"))]
         rel = [r for r in rel if "[ER informative]" not in r.subject]
         if not rel:
             continue
@@ -129,9 +135,11 @@ def render(m, results, cards) -> str:
         L.append("### Other open gate rows\n")
         L.append(_table(other, cards))
         L.append("")
-    L.append("## Every gate, per room and element\n")
+    L.append("## Every check, per room and element\n")
+    L.append("`gate` rows are safety or quality gates; `info` rows are targets, recommendations or reports. Egyptian "
+             "ER rows are listed separately below.\n")
     for crit, title in SECTIONS:
-        rows = [r for r in gates if r.criterion == crit]
+        rows = [r for r in results if r.criterion == crit and "[ER informative]" not in r.subject]
         if not rows:
             continue
         L.append("### %s %s\n" % (crit, title))
@@ -140,13 +148,19 @@ def render(m, results, cards) -> str:
     L.append("## Informative and target rows (not gates)\n")
     L.append("Egyptian ER rows (`[ER informative]`), A+ targets and recommendations. Passing rows are counted, not "
              "listed.\n")
-    bad = [r for r in info if r.status != "pass"]
+    bad = [r for r in info if r.status != "pass" and "[ER informative]" in r.subject]
     L.append(_table(bad, cards))
     L.append("")
     er = [r for r in info if "[ER informative]" in r.subject]
     L.append("Egyptian ER informative rows: %d, of which %d would fail. Failing ones: %s.\n" % (
         len(er), n(er, "fail"), "; ".join(sorted({r.subject.replace(" [ER informative]", "") for r in er if r.status == "fail"}))
         or "none"))
+    L.append("## Margins on ASSUMED inputs\n")
+    L.append("These pass by little, on assumed build-ups, so a small change flips them: stair headroom 2038 mm vs "
+             "2000 (floor build-up 100 mm and slab 200 mm are ASSUMED); cinema floor share at 2.3 m clear about 75 %% "
+             "vs 75 (ramp soffit profile); parents' bedroom 11.52 m2 vs 11.5 (with the entry alcove); kids rooms "
+             "11.81 and 11.75 vs 11.5; the stair guard and the ramp-edge guard sit exactly at their minimum heights "
+             "(900 and 1100 mm).\n".replace("%%", "%"))
     L.append("## Data used and its limits\n")
     for s in m.sources:
         L.append("- " + s)
