@@ -7,12 +7,12 @@ from pathlib import Path
 
 from archpipe import model
 
-from archpipe.drawings2d import callouts, siteplan, variants
+from archpipe.drawings2d import callouts, scene_slim, siteplan, variants, viewsheets
 
 from . import crosscheck, plans, schedules, sheetset, tables
 
 
-def run(design: str, out: Path, formats=("pdf", "svg", "png")) -> dict:
+def run(design: str, out: Path, formats=("pdf", "svg", "png"), slim: dict | None = None) -> dict:
     els = model.load(design)
     spec = sheetset.build(design, elements=els)
     spec["levels"] = json.loads(Path(model.api.snapshot_path(design)).read_text(encoding="utf-8")).get("levels", {})
@@ -31,6 +31,12 @@ def run(design: str, out: Path, formats=("pdf", "svg", "png")) -> dict:
     reports, qa_rows, produced, all_reps = [], [], [], {}
     stems = {}
     for i, s in enumerate(spec["sheets"], 1):
+        if s["generator"] == "lineart" and slim is not None:
+            stem = out / ("%s-%s" % (s["no"], s["kind"]))
+            rep = viewsheets.render_view_sheet(slim, els, spec, s, stem, page=i, pages=pages, formats=formats)
+            all_reps[s["no"]] = rep
+            produced.append({"sheet": s["no"], "files": rep["files"], "scene_sha256": rep["scene_sha256"]})
+            continue
         if s["generator"] != "model":
             continue
         stem = out / ("%s-%s" % (s["no"], s["kind"]))
@@ -56,7 +62,7 @@ def run(design: str, out: Path, formats=("pdf", "svg", "png")) -> dict:
         produced.append({"sheet": s["no"], "files": rep["files"]})
     xc = crosscheck.sc1(els, reports)
     summary = {"design": design, "produced": produced,
-               "not_produced": [s["no"] for s in spec["sheets"] if s["generator"] != "model"],
+               "not_produced": [s["no"] for s in spec["sheets"] if s["generator"] != "model" and (slim is None)],
                "sheet_reports": all_reps,
                "plan_qa": qa_rows, "sc1": xc, "spec": spec}
     (out / "sheetset.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -68,8 +74,15 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--design", default="D1")
     ap.add_argument("--out", default="out/documents/D1")
+    ap.add_argument("--scene", help="built scene.json: enables the Line Art sections and elevations (needs Blender)")
     a = ap.parse_args()
-    s = run(a.design, Path(a.out))
+    slim = None
+    if a.scene:
+        Path(a.out).mkdir(parents=True, exist_ok=True)
+        sp = Path(a.out) / "slim-scene.json"
+        scene_slim.slim(a.scene, sp)
+        slim = json.loads(sp.read_text(encoding="utf-8"))
+    s = run(a.design, Path(a.out), slim=slim)
     print(json.dumps({k: s[k] for k in ("produced", "not_produced", "plan_qa")}, indent=1))
     print("SC1 ok=%s evaluated=%s" % (s["sc1"]["ok"], s["sc1"]["evaluated"]))
     for c in s["sc1"]["checks"]:
