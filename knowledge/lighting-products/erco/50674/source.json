@@ -1,0 +1,40 @@
+{
+ "code": "50674",
+ "maker": "erco",
+ "name": "Jilly Pendant downlight 1500 mm, 2 x 11.2 W 2700 K CRI 92, DALI, UGR 19",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/50674.000",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=50674.000&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; page requests only; public, no login",
+ "files": {
+  "erco-50674-000-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-specs.pdf",
+   "sha256": "4b4a4af69ba80c2410937abe0a7922bdc54ff16b19abd1354b978fa51d319f43"
+  },
+  "erco-50674-000-en-ldt-1.ldt": {
+   "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ldt-1.ldt",
+   "sha256": "11fe7d0ab6b29e6ecebc9cb0113c0ae7a7303219c077af9f53042f6875d90617"
+  },
+  "erco-50674-000-en-ldt-2.ldt": {
+   "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ldt-2.ldt",
+   "sha256": "d959149d7b09bb69653d1341937304916af80a6b4e856d2321fa326d12ee3c40"
+  },
+  "erco-50674-000-en-ies-1.ies": {
+   "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ies-1.ies",
+   "sha256": "822d1a4da4efbac5eaa0f5c589677f5d55f09a59f881f42def0a34f2ce34cb5a"
+  },
+  "erco-50674-000-en-ies-2.ies": {
+   "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ies-2.ies",
+   "sha256": "822d1a4da4efbac5eaa0f5c589677f5d55f09a59f881f42def0a34f2ce34cb5a"
+  },
+  "erco-en-2026-11-21-19-02-21.zip": {
+   "path": "knowledge/lighting-products/erco/50674/erco-en-2026-11-21-19-02-21.zip",
+   "sha256": "d2d9edc373bd06bca9d34ad65932b9a4ec39de5fc4ca9b851e1ed1ed3d4c9bf4"
+  },
+  "erco-en-2026-11-21-19-02-24.zip": {
+   "path": "knowledge/lighting-products/erco/50674/erco-en-2026-11-21-19-02-24.zip",
+   "sha256": "8d854ae190bad328056029b86235b5e59c70a2a7e8939c011ed2d9ba89fdfe43"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

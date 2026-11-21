@@ -1,0 +1,1868 @@
+{
+ "generated": "2026-11-21",
+ "reference_products_no_kind": [
+  {
+   "code": "451G",
+   "maker": "iguzzini",
+   "name": "Sipario LV \u00d8 73 - CASAMBI - Flood - Reflector - 19.9W 1957.5lm - 3000K - CRI 92",
+   "lumens": 1957.5,
+   "watts": 19.9,
+   "beam_deg": 33.9,
+   "beam_note": "computed from the file (50 % of axis), not published",
+   "cct_k": 3000.0,
+   "cri_ra": 92.0,
+   "r9": null,
+   "dimming": null,
+   "flicker": null,
+   "ip": null,
+   "ugr_cutoff": null,
+   "egypt_or_eu": null,
+   "v10_status": "pass",
+   "v10": {
+    "lumens": {
+     "stated": 1957.5,
+     "independent": 1957.5,
+     "archpipe": 1956.7,
+     "worst_error": 0.0004,
+     "tolerance": 0.02,
+     "status": "pass"
+    },
+    "points": [
+     {
+      "kind": "imax",
+      "distance_m": null,
+      "published": 5759,
+      "engine": 5736.6,
+      "independent": 5736.6,
+      "worst_error": 0.0039,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "product page 'Maximum intensity (cd)'"
+     },
+     {
+      "kind": "beam_angle",
+      "distance_m": null,
+      "published": 34,
+      "engine": 33.9,
+      "independent": 33.8655,
+      "worst_error": 0.004,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "product page 'F - Flood 34\u00b0'"
+     },
+     {
+      "kind": "lumens",
+      "distance_m": null,
+      "published": 1957.5,
+      "engine": 1956.6911,
+      "independent": 1957.5008,
+      "worst_error": 0.0004,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "product page '1957.5 lm system'"
+     }
+    ],
+    "status": "pass"
+   },
+   "files": {
+    "ldt": {
+     "path": "knowledge/lighting-products/iguzzini/451G/451G.ldt",
+     "sha256": "e5433f1d94f128c0d344f561b8f34fbe43b620ed257dcaf46017ab8e31a50ce7"
+    },
+    "ies": {
+     "path": "knowledge/lighting-products/iguzzini/451G/451G.ies",
+     "sha256": "d4d1904acf4a7386b48e60b1ded98ff5b1977e0f151e225fc2e89960f2254dd8"
+    }
+   },
+   "urls": [
+    "https://www.iguzzini.com/en/451g/"
+   ],
+   "notes": [],
+   "watts_note": "LDT lamp-set watts"
+  },
+  {
+   "code": "B0000184",
+   "maker": "erco",
+   "name": "Iku Surface-mounted downlight IP65, 5 W 3000 K CRI 92 ('Version with 2700K or 3500K CRI 92 available on request')",
+   "exterior": "terrace/step downlight",
+   "lumens": 676,
+   "watts": 7.0,
+   "cct_k": 3000.0,
+   "cri_ra": 92.0,
+   "r9": null,
+   "dimming": "DALI-2, 1-100 % CCR",
+   "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+   "ip": "IP65, IK07",
+   "ugr_cutoff": null,
+   "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+   "v10_status": "pass",
+   "v10": {
+    "lumens": {
+     "stated": 676,
+     "independent": 676.5,
+     "archpipe": 676.4,
+     "worst_error": 0.0008,
+     "tolerance": 0.02,
+     "status": "pass"
+    },
+    "points": [
+     {
+      "kind": "imax",
+      "distance_m": null,
+      "published": 815,
+      "engine": 816.1,
+      "independent": 816.1,
+      "worst_error": 0.0013,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 polar diagram 'Imax=815cd'"
+     },
+     {
+      "kind": "lumens",
+      "distance_m": null,
+      "published": 676,
+      "engine": 676.4436,
+      "independent": 676.5489,
+      "worst_error": 0.0008,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 'Luminous flux of the luminaire 676lm'"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 1,
+      "published": 815,
+      "engine": 815.2,
+      "independent": 815.2,
+      "worst_error": 0.0002,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=1 E=815"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 2,
+      "published": 204,
+      "engine": 203.8,
+      "independent": 203.8,
+      "worst_error": 0.001,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=2 E=204"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 3,
+      "published": 91,
+      "engine": 90.5778,
+      "independent": 90.5778,
+      "worst_error": 0.0046,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=3 E=91"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 4,
+      "published": 51,
+      "engine": 50.95,
+      "independent": 50.95,
+      "worst_error": 0.001,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=4 E=51"
+     },
+     {
+      "kind": "lux_axis",
+      "distance_m": 5,
+      "published": 33,
+      "engine": 32.608,
+      "independent": 32.608,
+      "worst_error": 0.0119,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=5 E=33"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 1,
+      "published": 1.03,
+      "engine": 1.0478,
+      "independent": 1.0472,
+      "worst_error": 0.0173,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=1 D=1.03"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 2,
+      "published": 2.06,
+      "engine": 2.0956,
+      "independent": 2.0944,
+      "worst_error": 0.0173,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=2 D=2.06"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 3,
+      "published": 3.09,
+      "engine": 3.1434,
+      "independent": 3.1416,
+      "worst_error": 0.0173,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=3 D=3.09"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 4,
+      "published": 4.12,
+      "engine": 4.1912,
+      "independent": 4.1889,
+      "worst_error": 0.0173,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=4 D=4.12"
+     },
+     {
+      "kind": "beam_diameter",
+      "distance_m": 5,
+      "published": 5.15,
+      "engine": 5.239,
+      "independent": 5.2361,
+      "worst_error": 0.0173,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table h=5 D=5.15"
+     },
+     {
+      "kind": "beam_angle",
+      "distance_m": null,
+      "published": 54.5,
+      "engine": 55.3,
+      "independent": 55.2737,
+      "worst_error": 0.0147,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 cone table header '54.5\u00b0'"
+     }
+    ],
+    "status": "pass"
+   },
+   "worst_error_passing": 0.0173,
+   "files": {
+    "pdf": {
+     "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-specs.pdf",
+     "sha256": "0214c6cf8fe60ac641542def58f1919d11cc53a7f781a16e73a0ec91c64d7681"
+    },
+    "ldt": {
+     "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-ldt.ldt",
+     "sha256": "d08fd46547c1748472210fafaca61137bbac376343152143550a3c6d9aa63a57"
+    },
+    "ies": {
+     "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-ies.ies",
+     "sha256": "f4033a8de6e69a62d53ab51520db37504fdbea54fc19be8db606aae0a5b7e9b8"
+    }
+   },
+   "all_files": {
+    "erco-B0000184-en-specs.pdf": {
+     "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-specs.pdf",
+     "sha256": "0214c6cf8fe60ac641542def58f1919d11cc53a7f781a16e73a0ec91c64d7681"
+    },
+    "erco-B0000184-en-ldt.ldt": {
+     "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-ldt.ldt",
+     "sha256": "d08fd46547c1748472210fafaca61137bbac376343152143550a3c6d9aa63a57"
+    },
+    "erco-B0000184-en-ies.ies": {
+     "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-ies.ies",
+     "sha256": "f4033a8de6e69a62d53ab51520db37504fdbea54fc19be8db606aae0a5b7e9b8"
+    }
+   },
+   "urls": [
+    "https://www.erco.com/B0000184"
+   ],
+   "notes": [],
+   "two_files": false
+  },
+  {
+   "code": "35720",
+   "maker": "erco",
+   "name": "Castor Bollard floor washlight IP65, 8.1 W 3000 K CRI 92 ('Version with 3000K CRI 97 or 2700K ... available on request')",
+   "exterior": "bollard",
+   "lumens": 198,
+   "watts": 10.0,
+   "cct_k": 3000.0,
+   "cri_ra": 92.0,
+   "r9": null,
+   "dimming": "switchable only (datasheet 'Dimming range --')",
+   "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+   "ip": "IP65, IK10",
+   "ugr_cutoff": null,
+   "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+   "v10_status": "pass",
+   "v10": {
+    "lumens": {
+     "stated": 198,
+     "independent": 198.3,
+     "archpipe": 198.3,
+     "worst_error": 0.0015,
+     "tolerance": 0.02,
+     "status": "pass"
+    },
+    "points": [
+     {
+      "kind": "imax",
+      "distance_m": null,
+      "published": 135,
+      "engine": 136.4,
+      "independent": 136.4,
+      "worst_error": 0.0104,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 polar diagram 'Imax=135cd'"
+     },
+     {
+      "kind": "lumens",
+      "distance_m": null,
+      "published": 198,
+      "engine": 198.2976,
+      "independent": 198.2516,
+      "worst_error": 0.0015,
+      "tolerance": 0.05,
+      "status": "pass",
+      "source": "datasheet p1 'Luminous flux of the luminaire 198lm'"
+     }
+    ],
+    "status": "pass"
+   },
+   "worst_error_passing": 0.0104,
+   "files": {
+    "pdf": {
+     "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-specs.pdf",
+     "sha256": "fbe5352fe52a31cc94026c6020abf6e159c53be4699e5044eb61f7af9372f091"
+    },
+    "ldt": {
+     "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-ldt.ldt",
+     "sha256": "98f9869e6a98f74f16da0c4ee5c84d52da43309d84890eb2d1d06a9b1066760c"
+    },
+    "ies": {
+     "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-ies.ies",
+     "sha256": "4a772caddfdfd11c3d721756cdb925e66847c6eebdd355ecda095542b9f818f5"
+    }
+   },
+   "all_files": {
+    "erco-35720-000-en-specs.pdf": {
+     "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-specs.pdf",
+     "sha256": "fbe5352fe52a31cc94026c6020abf6e159c53be4699e5044eb61f7af9372f091"
+    },
+    "erco-35720-000-en-ldt.ldt": {
+     "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-ldt.ldt",
+     "sha256": "98f9869e6a98f74f16da0c4ee5c84d52da43309d84890eb2d1d06a9b1066760c"
+    },
+    "erco-35720-000-en-ies.ies": {
+     "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-ies.ies",
+     "sha256": "4a772caddfdfd11c3d721756cdb925e66847c6eebdd355ecda095542b9f818f5"
+    }
+   },
+   "urls": [
+    "https://www.erco.com/35720.000"
+   ],
+   "notes": [],
+   "two_files": false
+  }
+ ],
+ "note": "V10 'pass' needs the integrated lumens within 2 % AND at least one published non-lumen point reproduced within 5 % by both routes. 'lumens-only' means the file's flux matches the figure in the manufacturer's product name but no measured point was obtainable.",
+ "sourcing_log": [
+  {
+   "maker": "ERCO",
+   "result": "obtained (2nd run, real Chrome)",
+   "detail": "scripted HTTP gets hit a Vercel checkpoint (not circumvented); a normal Chrome visit passes. Per-article datasheet PDF, LDT and IES come from download-service.erco.com, the same endpoint the page buttons call; 3 s pauses between requests."
+  },
+  {
+   "maker": "Thorn",
+   "result": "blocked",
+   "detail": "thornlighting.com returned HTTP 403 to an automated request."
+  },
+  {
+   "maker": "Signify",
+   "result": "not retried",
+   "detail": "the Signify file API refused unauthenticated requests and archpipe.luminaires.signify documents robots.txt disallowing automated access; not retried with the browser."
+  },
+  {
+   "maker": "Zumtobel",
+   "result": "not retried",
+   "detail": "product pages offer 'LDT/IES Range Download' through JavaScript (data-type=ldt/ies, href '#'); no static file URL in the HTML."
+  },
+  {
+   "maker": "Delta Light",
+   "result": "pages load in Chrome; files not obtained",
+   "detail": "family page (lunelle) loads (HTTP 200) but files and variant data are generated per reference by api.deltalight.com after JavaScript variant selection; not pursued in the 2nd run (ERCO took the time box); robots.txt crawl delay 10-20 s."
+  },
+  {
+   "maker": "Astro",
+   "result": "no photometry",
+   "detail": "datasheet PDFs are public but state 'Lamp Dependent' for flux, CCT and CRI and the site links no IES/LDT file."
+  },
+  {
+   "maker": "Lumenpulse",
+   "result": "files public, datasheet lacks points",
+   "detail": "IES zips download without login (checked: LCRS fixed-tilt zip) but the North-American spec sheet gives nominal beam angles and no measured lux/cd table in its text; not used."
+  },
+  {
+   "maker": "iGuzzini",
+   "result": "partial",
+   "detail": "LDT/IES are static, robots-permitted URLs; family pages are rendered by JavaScript so product codes cannot be listed by a script; product pages publish Imax, flux, LOR and beam angle but no lux-at-distance cone table or datasheet PDF."
+  },
+  {
+   "maker": "Flos / Reggiani / Wever & Ducre",
+   "result": "not tried (flos.com home loads 200 in Chrome)",
+   "detail": "wever-ducre.com did not connect; Flos and Reggiani only redirected on the first probe."
+  }
+ ],
+ "kinds": {
+  "DL": [
+   {
+    "code": "41321",
+    "maker": "erco",
+    "name": "Quintessence Downlight, wide flood, 12.1 W 2700 K CRI 92, DALI",
+    "exterior": null,
+    "lumens": 1065,
+    "watts": 14.4,
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "DALI-2, 1-100 % CCR",
+    "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+    "ip": "IP20",
+    "ugr_cutoff": null,
+    "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+    "v10_status": "pass",
+    "v10": {
+     "lumens": {
+      "stated": 1065,
+      "independent": 1066.0,
+      "archpipe": 1065.9,
+      "worst_error": 0.001,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 1147,
+       "engine": 1147.6,
+       "independent": 1147.6,
+       "worst_error": 0.0005,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 polar diagram 'Imax=1147cd'"
+      },
+      {
+       "kind": "beam_angle",
+       "distance_m": null,
+       "published": 56,
+       "engine": 57.0,
+       "independent": 56.9684,
+       "worst_error": 0.0179,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Beam angle C0 56\u00b0'"
+      },
+      {
+       "kind": "lumens",
+       "distance_m": null,
+       "published": 1065,
+       "engine": 1065.8981,
+       "independent": 1066.0428,
+       "worst_error": 0.001,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Luminous flux of the luminaire 1065lm'"
+      }
+     ],
+     "status": "pass"
+    },
+    "worst_error_passing": 0.0179,
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/erco/41321/erco-41321-000-en-specs.pdf",
+      "sha256": "ea793f102adb43daace15a7d675ebff58167ac8f6121203c7a00857a07a9393f"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/erco/41321/erco-41321-000-en-ldt.ldt",
+      "sha256": "8b953759fb263478c6d032a72484c9edbd50c7e56d13ed2e6361450dc8572439"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/erco/41321/erco-41321-000-en-ies.ies",
+      "sha256": "36a91d17cecd3e9cfdaae1631f3cf538d2c641aaf21d88358b270ea305dd77a0"
+     }
+    },
+    "all_files": {
+     "erco-41321-000-en-specs.pdf": {
+      "path": "knowledge/lighting-products/erco/41321/erco-41321-000-en-specs.pdf",
+      "sha256": "ea793f102adb43daace15a7d675ebff58167ac8f6121203c7a00857a07a9393f"
+     },
+     "erco-41321-000-en-ldt.ldt": {
+      "path": "knowledge/lighting-products/erco/41321/erco-41321-000-en-ldt.ldt",
+      "sha256": "8b953759fb263478c6d032a72484c9edbd50c7e56d13ed2e6361450dc8572439"
+     },
+     "erco-41321-000-en-ies.ies": {
+      "path": "knowledge/lighting-products/erco/41321/erco-41321-000-en-ies.ies",
+      "sha256": "36a91d17cecd3e9cfdaae1631f3cf538d2c641aaf21d88358b270ea305dd77a0"
+     }
+    },
+    "urls": [
+     "https://www.erco.com/41321.000"
+    ],
+    "notes": [
+     "DL: 1065 lm is far from the kind's 650 lm"
+    ],
+    "two_files": false
+   },
+   {
+    "code": "LSEVO-AAK3EW",
+    "maker": "iguzzini",
+    "name": "Laser Evo - Recessed - Soft - Fix - CRI97 - 2700K - Reflector - F - Flood - Phase cut: Trailing & Leading Edge - Integral - 75 mm - Class II - Standard no cable - Black - Titanium - 12W 730lm",
+    "lumens": 730.0,
+    "watts": 12.0,
+    "beam_deg": 33.3,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 97.0,
+    "r9": null,
+    "dimming": "phase-cut (trailing and leading edge)",
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 730.0,
+      "independent": 732.6,
+      "archpipe": 732.3,
+      "worst_error": 0.0036,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAK3EW/LSEVO-AAK3EW.ldt",
+      "sha256": "8125978351f20fa75f451f83cb405fd6c18daf73890c006ba57d623e3eae471f"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAK3EW/LSEVO-AAK3EW.ies",
+      "sha256": "31600995704719a2f291977088d192e65ed9a9e4b7176d0d977adf6f56c364aa"
+     }
+    },
+    "urls": [],
+    "notes": [
+     "WW: a flood downlight grazing from 0.3 m, a substitute, not a wall washer"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ],
+  "DLN": [
+   {
+    "code": "41369",
+    "maker": "erco",
+    "name": "Quintessence Downlight, extra wide flood, 12.1 W 2700 K CRI 92, DALI",
+    "exterior": null,
+    "lumens": 904,
+    "watts": 14.4,
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "DALI-2, 1-100 % CCR",
+    "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+    "ip": "IP20",
+    "ugr_cutoff": null,
+    "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+    "v10_status": "pass",
+    "v10": {
+     "lumens": {
+      "stated": 904,
+      "independent": 905.0,
+      "archpipe": 904.7,
+      "worst_error": 0.0011,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 535,
+       "engine": 535.2,
+       "independent": 535.2,
+       "worst_error": 0.0004,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 polar diagram 'Imax=535cd'"
+      },
+      {
+       "kind": "beam_angle",
+       "distance_m": null,
+       "published": 89,
+       "engine": 91.8,
+       "independent": 91.7127,
+       "worst_error": 0.0315,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Beam angle C0 89\u00b0'"
+      },
+      {
+       "kind": "lumens",
+       "distance_m": null,
+       "published": 904,
+       "engine": 904.7334,
+       "independent": 904.9757,
+       "worst_error": 0.0011,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Luminous flux of the luminaire 904lm'"
+      }
+     ],
+     "status": "pass"
+    },
+    "worst_error_passing": 0.0315,
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/erco/41369/erco-41369-000-en-specs.pdf",
+      "sha256": "605d82ef5afdf75984fa9ca1ebfc221cffae7a7386e7fec7adb6a40bb972716c"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/erco/41369/erco-41369-000-en-ldt.ldt",
+      "sha256": "1d3c94d68c6e039151e28f0193781be236da381d9d45550a9bcaa160d02448bb"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/erco/41369/erco-41369-000-en-ies.ies",
+      "sha256": "d56b66e1b5337873b0cc5bf279e800d0aebc4cc7b05173da7b1bcee16808dffe"
+     }
+    },
+    "all_files": {
+     "erco-41369-000-en-specs.pdf": {
+      "path": "knowledge/lighting-products/erco/41369/erco-41369-000-en-specs.pdf",
+      "sha256": "605d82ef5afdf75984fa9ca1ebfc221cffae7a7386e7fec7adb6a40bb972716c"
+     },
+     "erco-41369-000-en-ldt.ldt": {
+      "path": "knowledge/lighting-products/erco/41369/erco-41369-000-en-ldt.ldt",
+      "sha256": "1d3c94d68c6e039151e28f0193781be236da381d9d45550a9bcaa160d02448bb"
+     },
+     "erco-41369-000-en-ies.ies": {
+      "path": "knowledge/lighting-products/erco/41369/erco-41369-000-en-ies.ies",
+      "sha256": "d56b66e1b5337873b0cc5bf279e800d0aebc4cc7b05173da7b1bcee16808dffe"
+     }
+    },
+    "urls": [
+     "https://www.erco.com/41369.000"
+    ],
+    "notes": [
+     "DLN: file CCT 2700 K, kind wants 3000 K"
+    ],
+    "two_files": false
+   },
+   {
+    "code": "LSEVO-AAIIA6",
+    "maker": "iguzzini",
+    "name": "Laser Evo - Recessed - Cone - Fix - CRI90 High efficacy - 2700K - Reflector - M - Medium - Phase cut: Trailing & Leading Edge - Integral - 75 mm - Class II - Standard no cable - Black - Black - 11.8W 1340lm",
+    "lumens": 1340.0,
+    "watts": 11.8,
+    "beam_deg": 28.8,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "phase-cut (trailing and leading edge)",
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 1340.0,
+      "independent": 1343.3,
+      "archpipe": 1342.6,
+      "worst_error": 0.0025,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAIIA6/LSEVO-AAIIA6.ldt",
+      "sha256": "75424b276ab13e196039abf4165df0f2749e5eb68797acc4ff58d2db7f622c51"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAIIA6/LSEVO-AAIIA6.ies",
+      "sha256": "4e714e7edb6eeb5ec1c20555f014e983e2bec970b77995df7c55d0dfde1a97be"
+     }
+    },
+    "urls": [],
+    "notes": [
+     "DLN: 1340 lm is far from the kind's 750 lm",
+     "DLN: file CCT 2700 K, kind wants 3000 K"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ],
+  "ADJ": [
+   {
+    "code": "A9000028",
+    "maker": "erco",
+    "name": "Optec New Spotlight M, narrow spot, 4.2 W 2700 K CRI 92, track, on-board dim",
+    "exterior": null,
+    "lumens": 304,
+    "watts": 6.3,
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "on-board rotary dim, 1-100 % CCR",
+    "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+    "ip": "IP20",
+    "ugr_cutoff": null,
+    "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+    "v10_status": "partial",
+    "v10": {
+     "lumens": {
+      "stated": 304,
+      "independent": 303.7,
+      "archpipe": 300.4,
+      "worst_error": 0.0118,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 22846,
+       "engine": 22055.2,
+       "independent": 22055.2,
+       "worst_error": 0.0346,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 polar diagram 'Imax=22846cd'"
+      },
+      {
+       "kind": "lumens",
+       "distance_m": null,
+       "published": 304,
+       "engine": 300.4131,
+       "independent": 303.7037,
+       "worst_error": 0.0118,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Luminous flux of the luminaire 304lm'"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 1,
+       "published": 22846,
+       "engine": 22055.2,
+       "independent": 22055.2,
+       "worst_error": 0.0346,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=1 E=22846"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 2,
+       "published": 5711,
+       "engine": 5513.8,
+       "independent": 5513.8,
+       "worst_error": 0.0345,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=2 E=5711"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 3,
+       "published": 2538,
+       "engine": 2450.5778,
+       "independent": 2450.5778,
+       "worst_error": 0.0344,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=3 E=2538"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 4,
+       "published": 1428,
+       "engine": 1378.45,
+       "independent": 1378.45,
+       "worst_error": 0.0347,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=4 E=1428"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 5,
+       "published": 914,
+       "engine": 882.208,
+       "independent": 882.208,
+       "worst_error": 0.0348,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=5 E=914"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 1,
+       "published": 0.08,
+       "engine": 0.0996,
+       "independent": 0.0981,
+       "worst_error": 0.2446,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=1 D=0.08"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 2,
+       "published": 0.16,
+       "engine": 0.1991,
+       "independent": 0.1961,
+       "worst_error": 0.2446,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=2 D=0.16"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 3,
+       "published": 0.25,
+       "engine": 0.2987,
+       "independent": 0.2942,
+       "worst_error": 0.1948,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=3 D=0.25"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 4,
+       "published": 0.33,
+       "engine": 0.3983,
+       "independent": 0.3922,
+       "worst_error": 0.2069,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=4 D=0.33"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 5,
+       "published": 0.41,
+       "engine": 0.4978,
+       "independent": 0.4903,
+       "worst_error": 0.2142,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=5 D=0.41"
+      },
+      {
+       "kind": "beam_angle",
+       "distance_m": null,
+       "published": 4.7,
+       "engine": 5.7,
+       "independent": 5.6138,
+       "worst_error": 0.2128,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table header '4.7\u00b0'"
+      }
+     ],
+     "status": "fail"
+    },
+    "worst_error_passing": 0.0348,
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-specs.pdf",
+      "sha256": "575651a56c5cc09b8a94020f8b6937c458e39a046d42d7b3cfc30a3fba4874e7"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-ldt.ldt",
+      "sha256": "dfb770e14a743be1ce55b80d505528ce95537125b708d787bb0dafac1d5f477a"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-ies.ies",
+      "sha256": "e8b89cd7fed3cb31d6a46c246e72fbaffe532b493446363305c88eeb0b6744c0"
+     }
+    },
+    "all_files": {
+     "erco-A9000028-en-specs.pdf": {
+      "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-specs.pdf",
+      "sha256": "575651a56c5cc09b8a94020f8b6937c458e39a046d42d7b3cfc30a3fba4874e7"
+     },
+     "erco-A9000028-en-ldt.ldt": {
+      "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-ldt.ldt",
+      "sha256": "dfb770e14a743be1ce55b80d505528ce95537125b708d787bb0dafac1d5f477a"
+     },
+     "erco-A9000028-en-ies.ies": {
+      "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-ies.ies",
+      "sha256": "e8b89cd7fed3cb31d6a46c246e72fbaffe532b493446363305c88eeb0b6744c0"
+     }
+    },
+    "urls": [
+     "https://www.erco.com/A9000028"
+    ],
+    "notes": [
+     "ADJ: 304 lm is far from the kind's 500 lm"
+    ],
+    "two_files": false
+   },
+   {
+    "code": "A9001547",
+    "maker": "erco",
+    "name": "Optec New Spotlight L, narrow spot, 9.4 W 2700 K CRI 92, track, on-board dim",
+    "exterior": null,
+    "lumens": 855,
+    "watts": 11.5,
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "on-board rotary dim, 1-100 % CCR",
+    "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+    "ip": "IP20",
+    "ugr_cutoff": null,
+    "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+    "v10_status": "partial",
+    "v10": {
+     "lumens": {
+      "stated": 855,
+      "independent": 855.4,
+      "archpipe": 847.0,
+      "worst_error": 0.0094,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 57848,
+       "engine": 56066.9,
+       "independent": 56066.9,
+       "worst_error": 0.0308,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 polar diagram 'Imax=57848cd'"
+      },
+      {
+       "kind": "lumens",
+       "distance_m": null,
+       "published": 855,
+       "engine": 846.9885,
+       "independent": 855.3513,
+       "worst_error": 0.0094,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Luminous flux of the luminaire 855lm'"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 1,
+       "published": 57848,
+       "engine": 56066.9,
+       "independent": 56066.9,
+       "worst_error": 0.0308,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=1 E=57848"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 2,
+       "published": 14462,
+       "engine": 14016.725,
+       "independent": 14016.725,
+       "worst_error": 0.0308,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=2 E=14462"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 3,
+       "published": 6428,
+       "engine": 6229.6556,
+       "independent": 6229.6556,
+       "worst_error": 0.0309,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=3 E=6428"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 4,
+       "published": 3615,
+       "engine": 3504.1813,
+       "independent": 3504.1813,
+       "worst_error": 0.0307,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=4 E=3615"
+      },
+      {
+       "kind": "lux_axis",
+       "distance_m": 5,
+       "published": 2314,
+       "engine": 2242.676,
+       "independent": 2242.676,
+       "worst_error": 0.0308,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 cone table h=5 E=2314"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 1,
+       "published": 0.09,
+       "engine": 0.1048,
+       "independent": 0.1038,
+       "worst_error": 0.1646,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=1 D=0.09"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 2,
+       "published": 0.17,
+       "engine": 0.2096,
+       "independent": 0.2076,
+       "worst_error": 0.2331,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=2 D=0.17"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 3,
+       "published": 0.26,
+       "engine": 0.3144,
+       "independent": 0.3113,
+       "worst_error": 0.2094,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=3 D=0.26"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 4,
+       "published": 0.35,
+       "engine": 0.4193,
+       "independent": 0.4151,
+       "worst_error": 0.1979,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=4 D=0.35"
+      },
+      {
+       "kind": "beam_diameter",
+       "distance_m": 5,
+       "published": 0.44,
+       "engine": 0.5241,
+       "independent": 0.5189,
+       "worst_error": 0.1911,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table h=5 D=0.44"
+      },
+      {
+       "kind": "beam_angle",
+       "distance_m": null,
+       "published": 5.0,
+       "engine": 6.0,
+       "independent": 5.9409,
+       "worst_error": 0.2,
+       "tolerance": 0.05,
+       "status": "fail",
+       "source": "datasheet p1 cone table header '5.0\u00b0'"
+      }
+     ],
+     "status": "fail"
+    },
+    "worst_error_passing": 0.0309,
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-specs.pdf",
+      "sha256": "5a8cfcd19137577752329a7bceb681e23ba7c5f75b5a567b0964cbb52843483c"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-ldt.ldt",
+      "sha256": "1c49917b46b9a6b7e33cab9ed69b16055de7ec2a477e8740bbcacfa016bc4862"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-ies.ies",
+      "sha256": "14f9aa081220d974d0d347b16a48f71e77abeb675c0222d6298b5ae6d6182813"
+     }
+    },
+    "all_files": {
+     "erco-A9001547-en-specs.pdf": {
+      "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-specs.pdf",
+      "sha256": "5a8cfcd19137577752329a7bceb681e23ba7c5f75b5a567b0964cbb52843483c"
+     },
+     "erco-A9001547-en-ldt.ldt": {
+      "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-ldt.ldt",
+      "sha256": "1c49917b46b9a6b7e33cab9ed69b16055de7ec2a477e8740bbcacfa016bc4862"
+     },
+     "erco-A9001547-en-ies.ies": {
+      "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-ies.ies",
+      "sha256": "14f9aa081220d974d0d347b16a48f71e77abeb675c0222d6298b5ae6d6182813"
+     }
+    },
+    "urls": [
+     "https://www.erco.com/A9001547"
+    ],
+    "notes": [
+     "ADJ: 855 lm is far from the kind's 500 lm"
+    ],
+    "two_files": false
+   },
+   {
+    "code": "LSEVO-AAHENX",
+    "maker": "iguzzini",
+    "name": "Laser Evo - Recessed - Cone - Easy Adjustable - CRI97 - 2700K - Reflector - S - Spot - Phase cut: Trailing & Leading Edge - Integral - 75 mm - Class II - Standard no cable - Black - Black - 12.6W 510lm",
+    "lumens": 510.0,
+    "watts": 12.6,
+    "beam_deg": 18.5,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 97.0,
+    "r9": null,
+    "dimming": "phase-cut (trailing and leading edge)",
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 510.0,
+      "independent": 511.5,
+      "archpipe": 510.9,
+      "worst_error": 0.0029,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAHENX/LSEVO-AAHENX.ldt",
+      "sha256": "77e18ca548c669c165aacbdbffff65e12d7862da5806c07607e85de97ad30d13"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAHENX/LSEVO-AAHENX.ies",
+      "sha256": "ef4289a4803375c29d0e365ca6ac6a498be1177412ba36adc5d4b30556329b78"
+     }
+    },
+    "urls": [],
+    "notes": [],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ],
+  "WW": [
+   {
+    "code": "41374",
+    "maker": "erco",
+    "name": "Quintessence Lens wallwasher, 8.1 W 2700 K CRI 92, DALI",
+    "exterior": null,
+    "lumens": 399,
+    "watts": 10.1,
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "DALI-2, 1-100 % CCR",
+    "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+    "ip": "IP20",
+    "ugr_cutoff": null,
+    "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+    "v10_status": "pass",
+    "v10": {
+     "lumens": {
+      "stated": 399,
+      "independent": 399.1,
+      "archpipe": 399.0,
+      "worst_error": 0.0002,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 471,
+       "engine": 478.6,
+       "independent": 478.6,
+       "worst_error": 0.0161,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 polar diagram 'Imax=471cd'"
+      },
+      {
+       "kind": "lumens",
+       "distance_m": null,
+       "published": 399,
+       "engine": 398.978,
+       "independent": 399.0726,
+       "worst_error": 0.0002,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Luminous flux of the luminaire 399lm'"
+      }
+     ],
+     "status": "pass"
+    },
+    "worst_error_passing": 0.0161,
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-specs.pdf",
+      "sha256": "408fe4e58e62b82047de9d95d714827c4e41ef7dec292f4d8821edd750dd54f3"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-ldt.ldt",
+      "sha256": "275b691a25b7f48fdf5169def9b7e62404d60368184ab293f3cf7f7c278a79cb"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-ies.ies",
+      "sha256": "f3f9cf7fadd65f186221d339d70787c78ce8945b8d9ee17e22e2fb0c659fdde6"
+     }
+    },
+    "all_files": {
+     "erco-41374-000-en-specs.pdf": {
+      "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-specs.pdf",
+      "sha256": "408fe4e58e62b82047de9d95d714827c4e41ef7dec292f4d8821edd750dd54f3"
+     },
+     "erco-41374-000-en-ldt.ldt": {
+      "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-ldt.ldt",
+      "sha256": "275b691a25b7f48fdf5169def9b7e62404d60368184ab293f3cf7f7c278a79cb"
+     },
+     "erco-41374-000-en-ies.ies": {
+      "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-ies.ies",
+      "sha256": "f3f9cf7fadd65f186221d339d70787c78ce8945b8d9ee17e22e2fb0c659fdde6"
+     }
+    },
+    "urls": [
+     "https://www.erco.com/41374.000"
+    ],
+    "notes": [
+     "WW: 399 lm is far from the kind's 650 lm"
+    ],
+    "two_files": false
+   },
+   {
+    "code": "26141",
+    "maker": "erco",
+    "name": "Pantrac Lens wallwasher, 12.1 W 2700 K CRI 92, track, phase dimmable",
+    "exterior": null,
+    "lumens": 777,
+    "watts": 15.0,
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "phase dimmable + on-board dim, 1-100 % CCR_PWM",
+    "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+    "ip": "IP20",
+    "ugr_cutoff": null,
+    "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+    "v10_status": "pass",
+    "v10": {
+     "lumens": {
+      "stated": 777,
+      "independent": 777.1,
+      "archpipe": 777.3,
+      "worst_error": 0.0004,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 1036,
+       "engine": 1045.7,
+       "independent": 1045.7,
+       "worst_error": 0.0094,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 polar diagram 'Imax=1036cd'"
+      },
+      {
+       "kind": "lumens",
+       "distance_m": null,
+       "published": 777,
+       "engine": 777.2801,
+       "independent": 777.0906,
+       "worst_error": 0.0004,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Luminous flux of the luminaire 777lm'"
+      }
+     ],
+     "status": "pass"
+    },
+    "worst_error_passing": 0.0094,
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-specs.pdf",
+      "sha256": "54544c5b4dc33eda969b3606306c8a86116b7a8fa4d8f2df1cbaf36239e87289"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-ldt.ldt",
+      "sha256": "f9b32013d13bf1a4bb680efa5d0b90c8274cfe63c850e612ec90b912d6361696"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-ies.ies",
+      "sha256": "04f9089597ce2e18d0ed35ffe81b7fe6a83ca4d6d7bb663a4f81cad40906de53"
+     }
+    },
+    "all_files": {
+     "erco-26141-000-en-specs.pdf": {
+      "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-specs.pdf",
+      "sha256": "54544c5b4dc33eda969b3606306c8a86116b7a8fa4d8f2df1cbaf36239e87289"
+     },
+     "erco-26141-000-en-ldt.ldt": {
+      "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-ldt.ldt",
+      "sha256": "f9b32013d13bf1a4bb680efa5d0b90c8274cfe63c850e612ec90b912d6361696"
+     },
+     "erco-26141-000-en-ies.ies": {
+      "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-ies.ies",
+      "sha256": "04f9089597ce2e18d0ed35ffe81b7fe6a83ca4d6d7bb663a4f81cad40906de53"
+     }
+    },
+    "urls": [
+     "https://www.erco.com/26141.000"
+    ],
+    "notes": [],
+    "two_files": false
+   },
+   {
+    "code": "LSEVO-AAK3EW",
+    "maker": "iguzzini",
+    "name": "Laser Evo - Recessed - Soft - Fix - CRI97 - 2700K - Reflector - F - Flood - Phase cut: Trailing & Leading Edge - Integral - 75 mm - Class II - Standard no cable - Black - Titanium - 12W 730lm",
+    "lumens": 730.0,
+    "watts": 12.0,
+    "beam_deg": 33.3,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 97.0,
+    "r9": null,
+    "dimming": "phase-cut (trailing and leading edge)",
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 730.0,
+      "independent": 732.6,
+      "archpipe": 732.3,
+      "worst_error": 0.0036,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAK3EW/LSEVO-AAK3EW.ldt",
+      "sha256": "8125978351f20fa75f451f83cb405fd6c18daf73890c006ba57d623e3eae471f"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAK3EW/LSEVO-AAK3EW.ies",
+      "sha256": "31600995704719a2f291977088d192e65ed9a9e4b7176d0d977adf6f56c364aa"
+     }
+    },
+    "urls": [],
+    "notes": [
+     "WW: a flood downlight grazing from 0.3 m, a substitute, not a wall washer"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   },
+   {
+    "code": "LSEVO-AAKR2I",
+    "maker": "iguzzini",
+    "name": "Laser Evo - Recessed - Frame - Wall Washer - CRI97 - 2700K - Reflector - WW - Wall Washer - Phase cut: Trailing & Leading Edge - Integral - 75 mm - Class II - Standard no cable - Black - Black - 12W 520lm",
+    "lumens": 520.0,
+    "watts": 12.0,
+    "beam_deg": null,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 97.0,
+    "r9": null,
+    "dimming": "phase-cut (trailing and leading edge)",
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 520.0,
+      "independent": 521.7,
+      "archpipe": 521.6,
+      "worst_error": 0.0033,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAKR2I/LSEVO-AAKR2I.ldt",
+      "sha256": "e1134861392da4aa66567c6a09dafc5a7167f5017a8a7e05749f0d1a063767ae"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/LSEVO-AAKR2I/LSEVO-AAKR2I.ies",
+      "sha256": "8608e3cfb1f3b91452e05d106c17c62ee20f9c3e040c273bd762d398a3e0918a"
+     }
+    },
+    "urls": [],
+    "notes": [
+     "library pair check: LDT and manufacturer IES disagree (100 %, asymmetric); the IES integrates to the stated lumens, the LDT is not trusted"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ],
+  "PEN-GLOBE": [],
+  "PEN-SMALL": [],
+  "WALL-READ": [],
+  "SWING": [],
+  "PEN-LIN": [
+   {
+    "code": "50674",
+    "maker": "erco",
+    "name": "Jilly Pendant downlight 1500 mm, 2 x 11.2 W 2700 K CRI 92, DALI, UGR 19",
+    "exterior": null,
+    "lumens": 3558,
+    "watts": 13.5,
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "DALI-2, 1-100 % CCR",
+    "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+    "ip": "IP20",
+    "ugr_cutoff": "UGR 19 (datasheet p1); 'UGR glare evaluation C0 18'",
+    "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+    "v10_status": "pass",
+    "v10": {
+     "lumens": {
+      "stated": 1779.0,
+      "independent": 1779.4,
+      "archpipe": 1778.8,
+      "worst_error": 0.0002,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 1055,
+       "engine": 1053.8,
+       "independent": 1053.8,
+       "worst_error": 0.0011,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 polar diagram 'Imax=1055cd' (printed for each of the two light emissions)"
+      },
+      {
+       "kind": "beam_angle",
+       "distance_m": null,
+       "published": 86,
+       "engine": 89.0,
+       "independent": 88.9664,
+       "worst_error": 0.0349,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Beam angle C0 86\u00b0'"
+      }
+     ],
+     "status": "pass"
+    },
+    "worst_error_passing": 0.0349,
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-specs.pdf",
+      "sha256": "4b4a4af69ba80c2410937abe0a7922bdc54ff16b19abd1354b978fa51d319f43"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ldt-1.ldt",
+      "sha256": "11fe7d0ab6b29e6ecebc9cb0113c0ae7a7303219c077af9f53042f6875d90617"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ies-1.ies",
+      "sha256": "822d1a4da4efbac5eaa0f5c589677f5d55f09a59f881f42def0a34f2ce34cb5a"
+     }
+    },
+    "all_files": {
+     "erco-50674-000-en-specs.pdf": {
+      "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-specs.pdf",
+      "sha256": "4b4a4af69ba80c2410937abe0a7922bdc54ff16b19abd1354b978fa51d319f43"
+     },
+     "erco-50674-000-en-ldt-1.ldt": {
+      "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ldt-1.ldt",
+      "sha256": "11fe7d0ab6b29e6ecebc9cb0113c0ae7a7303219c077af9f53042f6875d90617"
+     },
+     "erco-50674-000-en-ldt-2.ldt": {
+      "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ldt-2.ldt",
+      "sha256": "d959149d7b09bb69653d1341937304916af80a6b4e856d2321fa326d12ee3c40"
+     },
+     "erco-50674-000-en-ies-1.ies": {
+      "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ies-1.ies",
+      "sha256": "822d1a4da4efbac5eaa0f5c589677f5d55f09a59f881f42def0a34f2ce34cb5a"
+     },
+     "erco-50674-000-en-ies-2.ies": {
+      "path": "knowledge/lighting-products/erco/50674/erco-50674-000-en-ies-2.ies",
+      "sha256": "822d1a4da4efbac5eaa0f5c589677f5d55f09a59f881f42def0a34f2ce34cb5a"
+     },
+     "erco-en-2026-11-21-19-02-21.zip": {
+      "path": "knowledge/lighting-products/erco/50674/erco-en-2026-11-21-19-02-21.zip",
+      "sha256": "d2d9edc373bd06bca9d34ad65932b9a4ec39de5fc4ca9b851e1ed1ed3d4c9bf4"
+     },
+     "erco-en-2026-11-21-19-02-24.zip": {
+      "path": "knowledge/lighting-products/erco/50674/erco-en-2026-11-21-19-02-24.zip",
+      "sha256": "8d854ae190bad328056029b86235b5e59c70a2a7e8939c011ed2d9ba89fdfe43"
+     }
+    },
+    "urls": [
+     "https://www.erco.com/50674.000"
+    ],
+    "notes": [
+     "PEN-LIN: 3558 lm is far from the kind's 1200 lm"
+    ],
+    "two_files": true
+   }
+  ],
+  "SCONCE": [],
+  "COVE": [
+   {
+    "code": "ST49",
+    "maker": "iguzzini",
+    "name": "Underscore15: Underscore Ledstrip Hi Performance - 5W/m - 5W 680lm (1.0 m) - 2700K",
+    "lumens": 680.0,
+    "watts": 5.0,
+    "beam_deg": null,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 90.0,
+    "r9": null,
+    "dimming": null,
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 680.0,
+      "independent": 680.0,
+      "archpipe": 680.0,
+      "worst_error": 0.0,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ldt",
+      "sha256": "996ff8e8cf08cd6099843660717ded00fcf2890a1ef1af04a244c2ec1af58b65"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ies",
+      "sha256": "64bec09f8eb28bbe4e64b8fe4c58fb347fd899b3372346dec288f76f94fc95a3"
+     }
+    },
+    "urls": [
+     "https://www.iguzzini.com/en/st49/"
+    ],
+    "notes": [
+     "COVE: 680 lm/m is below the kind's 900 lm/m; needs more run or is a different brightness class",
+     "NL: file CCT 2700 K, kind wants 2200 K",
+     "TOE: file CCT 2700 K, kind wants 2200 K",
+     "library pair check: LDT and manufacturer IES disagree (59.8 % flux); the IES integrates to the stated lumens, the LDT is not trusted"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ],
+  "BACK": [
+   {
+    "code": "ST49",
+    "maker": "iguzzini",
+    "name": "Underscore15: Underscore Ledstrip Hi Performance - 5W/m - 5W 680lm (1.0 m) - 2700K",
+    "lumens": 680.0,
+    "watts": 5.0,
+    "beam_deg": null,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 90.0,
+    "r9": null,
+    "dimming": null,
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 680.0,
+      "independent": 680.0,
+      "archpipe": 680.0,
+      "worst_error": 0.0,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ldt",
+      "sha256": "996ff8e8cf08cd6099843660717ded00fcf2890a1ef1af04a244c2ec1af58b65"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ies",
+      "sha256": "64bec09f8eb28bbe4e64b8fe4c58fb347fd899b3372346dec288f76f94fc95a3"
+     }
+    },
+    "urls": [
+     "https://www.iguzzini.com/en/st49/"
+    ],
+    "notes": [
+     "COVE: 680 lm/m is below the kind's 900 lm/m; needs more run or is a different brightness class",
+     "NL: file CCT 2700 K, kind wants 2200 K",
+     "TOE: file CCT 2700 K, kind wants 2200 K",
+     "library pair check: LDT and manufacturer IES disagree (59.8 % flux); the IES integrates to the stated lumens, the LDT is not trusted"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ],
+  "UC": [],
+  "RAIL": [],
+  "TOE": [
+   {
+    "code": "ST49",
+    "maker": "iguzzini",
+    "name": "Underscore15: Underscore Ledstrip Hi Performance - 5W/m - 5W 680lm (1.0 m) - 2700K",
+    "lumens": 680.0,
+    "watts": 5.0,
+    "beam_deg": null,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 90.0,
+    "r9": null,
+    "dimming": null,
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 680.0,
+      "independent": 680.0,
+      "archpipe": 680.0,
+      "worst_error": 0.0,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ldt",
+      "sha256": "996ff8e8cf08cd6099843660717ded00fcf2890a1ef1af04a244c2ec1af58b65"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ies",
+      "sha256": "64bec09f8eb28bbe4e64b8fe4c58fb347fd899b3372346dec288f76f94fc95a3"
+     }
+    },
+    "urls": [
+     "https://www.iguzzini.com/en/st49/"
+    ],
+    "notes": [
+     "COVE: 680 lm/m is below the kind's 900 lm/m; needs more run or is a different brightness class",
+     "NL: file CCT 2700 K, kind wants 2200 K",
+     "TOE: file CCT 2700 K, kind wants 2200 K",
+     "library pair check: LDT and manufacturer IES disagree (59.8 % flux); the IES integrates to the stated lumens, the LDT is not trusted"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ],
+  "NL": [
+   {
+    "code": "ST49",
+    "maker": "iguzzini",
+    "name": "Underscore15: Underscore Ledstrip Hi Performance - 5W/m - 5W 680lm (1.0 m) - 2700K",
+    "lumens": 680.0,
+    "watts": 5.0,
+    "beam_deg": null,
+    "beam_note": "computed from the file (50 % of axis), not published",
+    "cct_k": 2700.0,
+    "cri_ra": 90.0,
+    "r9": null,
+    "dimming": null,
+    "flicker": null,
+    "ip": null,
+    "ugr_cutoff": null,
+    "egypt_or_eu": null,
+    "v10_status": "lumens-only",
+    "v10": {
+     "lumens": {
+      "stated": 680.0,
+      "independent": 680.0,
+      "archpipe": 680.0,
+      "worst_error": 0.0,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [],
+     "status": "not_evaluated"
+    },
+    "files": {
+     "ldt": {
+      "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ldt",
+      "sha256": "996ff8e8cf08cd6099843660717ded00fcf2890a1ef1af04a244c2ec1af58b65"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/iguzzini/ST49/ST49.ies",
+      "sha256": "64bec09f8eb28bbe4e64b8fe4c58fb347fd899b3372346dec288f76f94fc95a3"
+     }
+    },
+    "urls": [
+     "https://www.iguzzini.com/en/st49/"
+    ],
+    "notes": [
+     "COVE: 680 lm/m is below the kind's 900 lm/m; needs more run or is a different brightness class",
+     "NL: file CCT 2700 K, kind wants 2200 K",
+     "TOE: file CCT 2700 K, kind wants 2200 K",
+     "library pair check: LDT and manufacturer IES disagree (59.8 % flux); the IES integrates to the stated lumens, the LDT is not trusted"
+    ],
+    "watts_note": "LDT lamp-set watts"
+   }
+  ],
+  "DESK": [
+   {
+    "code": "31327",
+    "maker": "erco",
+    "name": "Lucy Task light, wide beam, 9.4 W 2700 K CRI 92, on-board dim",
+    "exterior": null,
+    "lumens": 234,
+    "watts": 12.0,
+    "cct_k": 2700.0,
+    "cri_ra": 92.0,
+    "r9": null,
+    "dimming": "push-button dimmer, 1-100 % CCR_PWM",
+    "flicker": "datasheet: TLA SVM <= 0.1/0.4; PstLM <= 1 (as printed)",
+    "ip": "IP20",
+    "ugr_cutoff": null,
+    "egypt_or_eu": "EU/UK/AU marks on datasheet; Egypt distributor not stated",
+    "v10_status": "pass",
+    "v10": {
+     "lumens": {
+      "stated": 234,
+      "independent": 233.8,
+      "archpipe": 233.9,
+      "worst_error": 0.0009,
+      "tolerance": 0.02,
+      "status": "pass"
+     },
+     "points": [
+      {
+       "kind": "imax",
+       "distance_m": null,
+       "published": 454,
+       "engine": 461.4,
+       "independent": 461.4,
+       "worst_error": 0.0163,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 polar diagram 'Imax=454cd'"
+      },
+      {
+       "kind": "lumens",
+       "distance_m": null,
+       "published": 234,
+       "engine": 233.8547,
+       "independent": 233.783,
+       "worst_error": 0.0009,
+       "tolerance": 0.05,
+       "status": "pass",
+       "source": "datasheet p1 'Luminous flux of the luminaire 234lm'"
+      }
+     ],
+     "status": "pass"
+    },
+    "worst_error_passing": 0.0163,
+    "files": {
+     "pdf": {
+      "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-specs.pdf",
+      "sha256": "2273671410b1506c08f57deb2520cc394896b8083416f67d8f25ff309162c0f4"
+     },
+     "ldt": {
+      "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-ldt.ldt",
+      "sha256": "aac92a468d4618f4dba91ae7dbf1a2efd941ae1daf7b5ba5abe6f2fcf87f64a5"
+     },
+     "ies": {
+      "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-ies.ies",
+      "sha256": "9a228ddc905f7c26420cb9b00cea81726d895ff5f7f018d95696afa5faae1423"
+     }
+    },
+    "all_files": {
+     "erco-31327-000-en-specs.pdf": {
+      "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-specs.pdf",
+      "sha256": "2273671410b1506c08f57deb2520cc394896b8083416f67d8f25ff309162c0f4"
+     },
+     "erco-31327-000-en-ldt.ldt": {
+      "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-ldt.ldt",
+      "sha256": "aac92a468d4618f4dba91ae7dbf1a2efd941ae1daf7b5ba5abe6f2fcf87f64a5"
+     },
+     "erco-31327-000-en-ies.ies": {
+      "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-ies.ies",
+      "sha256": "9a228ddc905f7c26420cb9b00cea81726d895ff5f7f018d95696afa5faae1423"
+     }
+    },
+    "urls": [
+     "https://www.erco.com/31327.000"
+    ],
+    "notes": [
+     "DESK: 234 lm is far from the kind's 450 lm",
+     "DESK: file CCT 2700 K, kind wants 3000 K"
+    ],
+    "two_files": false
+   }
+  ],
+  "VSTRIP": [],
+  "STORE-BATTEN": [],
+  "MIRROR": [],
+  "VANITY-LIN": [],
+  "VSCONCE": [],
+  "STEP": [],
+  "PATH": []
+ }
+}

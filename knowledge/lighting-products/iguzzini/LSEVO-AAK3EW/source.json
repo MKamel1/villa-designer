@@ -1,0 +1,19 @@
+{
+ "code": "LSEVO-AAK3EW",
+ "maker": "iguzzini",
+ "name": "Laser Evo - Recessed - Soft - Fix - CRI97 - 2700K - Reflector - F - Flood - Phase cut: Trailing & Leading Edge - Integral - 75 mm - Class II - Standard no cable - Black - Titanium - 12W 730lm",
+ "fetched": null,
+ "product_url": null,
+ "files": {
+  "ldt": {
+   "path": "knowledge/lighting-products/iguzzini/LSEVO-AAK3EW/LSEVO-AAK3EW.ldt",
+   "sha256": "8125978351f20fa75f451f83cb405fd6c18daf73890c006ba57d623e3eae471f"
+  },
+  "ies": {
+   "path": "knowledge/lighting-products/iguzzini/LSEVO-AAK3EW/LSEVO-AAK3EW.ies",
+   "sha256": "31600995704719a2f291977088d192e65ed9a9e4b7176d0d977adf6f56c364aa"
+  }
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read",
+ "origin_note": "imported 2026-09-27 by archpipe.luminaires.iguzzini inbox; product page URL not recorded"
+}

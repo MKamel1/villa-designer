@@ -1,0 +1,19 @@
+{
+ "code": "LSEVO-AAHENX",
+ "maker": "iguzzini",
+ "name": "Laser Evo - Recessed - Cone - Easy Adjustable - CRI97 - 2700K - Reflector - S - Spot - Phase cut: Trailing & Leading Edge - Integral - 75 mm - Class II - Standard no cable - Black - Black - 12.6W 510lm",
+ "fetched": null,
+ "product_url": null,
+ "files": {
+  "ldt": {
+   "path": "knowledge/lighting-products/iguzzini/LSEVO-AAHENX/LSEVO-AAHENX.ldt",
+   "sha256": "77e18ca548c669c165aacbdbffff65e12d7862da5806c07607e85de97ad30d13"
+  },
+  "ies": {
+   "path": "knowledge/lighting-products/iguzzini/LSEVO-AAHENX/LSEVO-AAHENX.ies",
+   "sha256": "ef4289a4803375c29d0e365ca6ac6a498be1177412ba36adc5d4b30556329b78"
+  }
+ },
+ "redistribution": "iGuzzini serves these LDT/IES files publicly for design use; terms not separately read",
+ "origin_note": "imported 2026-09-27 by archpipe.luminaires.iguzzini inbox; product page URL not recorded"
+}

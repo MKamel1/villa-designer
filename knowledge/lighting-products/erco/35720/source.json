@@ -1,0 +1,24 @@
+{
+ "code": "35720",
+ "maker": "erco",
+ "name": "Castor Bollard floor washlight IP65, 8.1 W 3000 K CRI 92 ('Version with 3000K CRI 97 or 2700K ... available on request')",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/35720.000",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=35720.000&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; page requests only; public, no login",
+ "files": {
+  "erco-35720-000-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-specs.pdf",
+   "sha256": "fbe5352fe52a31cc94026c6020abf6e159c53be4699e5044eb61f7af9372f091"
+  },
+  "erco-35720-000-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-ldt.ldt",
+   "sha256": "98f9869e6a98f74f16da0c4ee5c84d52da43309d84890eb2d1d06a9b1066760c"
+  },
+  "erco-35720-000-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/35720/erco-35720-000-en-ies.ies",
+   "sha256": "4a772caddfdfd11c3d721756cdb925e66847c6eebdd355ecda095542b9f818f5"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

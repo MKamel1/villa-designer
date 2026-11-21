@@ -1,0 +1,24 @@
+{
+ "code": "41374",
+ "maker": "erco",
+ "name": "Quintessence Lens wallwasher, 8.1 W 2700 K CRI 92, DALI",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/41374.000",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=41374.000&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; page requests only; public, no login",
+ "files": {
+  "erco-41374-000-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-specs.pdf",
+   "sha256": "408fe4e58e62b82047de9d95d714827c4e41ef7dec292f4d8821edd750dd54f3"
+  },
+  "erco-41374-000-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-ldt.ldt",
+   "sha256": "275b691a25b7f48fdf5169def9b7e62404d60368184ab293f3cf7f7c278a79cb"
+  },
+  "erco-41374-000-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/41374/erco-41374-000-en-ies.ies",
+   "sha256": "f3f9cf7fadd65f186221d339d70787c78ce8945b8d9ee17e22e2fb0c659fdde6"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

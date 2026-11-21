@@ -1,0 +1,24 @@
+{
+ "code": "A9000028",
+ "maker": "erco",
+ "name": "Optec New Spotlight M, narrow spot, 4.2 W 2700 K CRI 92, track, on-board dim",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/A9000028",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=A9000028&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; page requests only; public, no login",
+ "files": {
+  "erco-A9000028-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-specs.pdf",
+   "sha256": "575651a56c5cc09b8a94020f8b6937c458e39a046d42d7b3cfc30a3fba4874e7"
+  },
+  "erco-A9000028-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-ldt.ldt",
+   "sha256": "dfb770e14a743be1ce55b80d505528ce95537125b708d787bb0dafac1d5f477a"
+  },
+  "erco-A9000028-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/A9000028/erco-A9000028-en-ies.ies",
+   "sha256": "e8b89cd7fed3cb31d6a46c246e72fbaffe532b493446363305c88eeb0b6744c0"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

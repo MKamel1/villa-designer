@@ -1,0 +1,24 @@
+{
+ "code": "A9001547",
+ "maker": "erco",
+ "name": "Optec New Spotlight L, narrow spot, 9.4 W 2700 K CRI 92, track, on-board dim",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/A9001547",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=A9001547&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; page requests only; public, no login",
+ "files": {
+  "erco-A9001547-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-specs.pdf",
+   "sha256": "5a8cfcd19137577752329a7bceb681e23ba7c5f75b5a567b0964cbb52843483c"
+  },
+  "erco-A9001547-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-ldt.ldt",
+   "sha256": "1c49917b46b9a6b7e33cab9ed69b16055de7ec2a477e8740bbcacfa016bc4862"
+  },
+  "erco-A9001547-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/A9001547/erco-A9001547-en-ies.ies",
+   "sha256": "14f9aa081220d974d0d347b16a48f71e77abeb675c0222d6298b5ae6d6182813"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}
