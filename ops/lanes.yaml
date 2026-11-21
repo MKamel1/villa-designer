@@ -222,6 +222,12 @@ lanes:
     - tests/test_villa_lighting.py
     - docs/lanes/INT*.md
     - docs/lessons/INT2.md
+  MK: # markup loop: sheet/review comments -> change requests linked to element ids -> revised sheet
+    - src/archpipe/markup/**
+    - tests/markup/**
+    - knowledge/markup/**
+    - docs/lanes/MK*.md
+    - docs/lessons/MK.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
