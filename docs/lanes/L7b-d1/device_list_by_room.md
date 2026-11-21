@@ -11,7 +11,7 @@
 | B | family | lum:ambient x2, pow:socket x5, pow:switch x1 |
 | B | guest-wc | lum:ambient x1, lum:task x2, pow:fcu x1, pow:switch x1 |
 | B | hall-b | ELV:ap x1, ELV:intercom_monitor x1, lum:ambient x2, pow:socket x4, pow:switch x1 |
-| B | kitchen | ELV:heat x1, lum:ambient x1, lum:decorative x3, lum:night x1, lum:task x7, pow:cooker_unit x2, pow:fcu x2, pow:socket x6, pow:switch x1 |
+| B | kitchen | ELV:heat x1, lum:ambient x1, lum:decorative x3, lum:night x1, lum:task x7, pow:cooker_unit x1, pow:fcu x3, pow:socket x6, pow:switch x1 |
 | B | kitchen-island | lum:ambient x2, pow:socket x4, pow:switch x1 |
 | B | living | ELV:ap x1, ELV:smoke x1, lum:ambient x4, lum:decorative x2, pow:isolator_ac x1, pow:socket x5, pow:switch x1 |
 | B | lounge | ELV:data x1, ELV:smoke x1, ELV:tv_sat x1, lum:accent x1, lum:ambient x6, lum:decorative x2, pow:data x1, pow:isolator_ac x1, pow:socket x10, pow:switch x1, pow:tv_sat x1 |

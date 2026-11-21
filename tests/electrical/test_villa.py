@@ -173,9 +173,11 @@ def test_d1_not_evaluated_stay_not_evaluated(d1):
         assert by(d1["results"], crit) and all(r.status == "not_evaluated" for r in by(d1["results"], crit))
 
 
-def test_d1_equipment_is_assumed_with_reasons(d1):
+def test_d1_equipment_has_status_and_reasons(d1):
     eq = json.loads(villa.EQUIPMENT_JSON.read_text(encoding="utf-8"))
-    assert eq["equipment"] and all(e["status"] == "assumed" and len(e["reason"]) > 20 for e in eq["equipment"])
+    assert eq["equipment"] and all(e["status"] in ("assumed", "client-confirmed") and len(e["reason"]) > 20 for e in eq["equipment"])
+    conf = {e["id"] for e in eq["equipment"] if e["status"] == "client-confirmed"}
+    assert "EV-DECK" in conf and "COOK-HOB" not in {e["id"] for e in eq["equipment"]} and all(e["status"] == "client-confirmed" for e in eq["equipment"] if e["kind"] == "ac")
     kinds = {e["kind"] for e in eq["equipment"]}
     assert {"ac", "water_heater", "cooker", "dishwasher", "washer", "fridge", "pump", "gate", "ev"} <= kinds
     assert {h.room for h in [e for e in d1["house"].equipment if e.kind == "ac"]} >= {"kids-a", "kids-b", "parents-bed", "study-game", "lounge", "living", "cinema"}
