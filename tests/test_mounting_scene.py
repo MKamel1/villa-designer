@@ -59,7 +59,7 @@ class SceneMountingGuard(unittest.TestCase):
         # chosen witness, not a measured property of this failing model.
         ceiling = Host("historic-ceiling", "ceiling", (0, 0, 2.7), (0, 0, -1), Finish("existing-ceiling", 0))
         body = dict(id="frozen-l0119", part_kind="lamp-housing",
-                    faces=[[[0, 0, 2.700], [1, 0, 2.700], [1, 0, 2.732], [0, 0, 2.732]]],
+        for kind,depth in [('DL',95),('DLN',92),('ADJ',169),('WW',92)]:   # L6c ERCO LDT body heights (41321, 41369, A9000028, 41374); were the iGuzzini 95/95/98/95
                     mounting=dict(host_id=ceiling.id, kind="recessed", offset_m=0,
                                   housing_depth_m=.032, finished_face=[0, 0, 2.7]))
         self.assertIn("MISSING", check_mesh(body, {ceiling.id: ceiling})[0])

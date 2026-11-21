@@ -1,0 +1,64 @@
+{
+ "layout": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "specification": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "furniture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "architecture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "meshes": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [],
+  "removed": [],
+  "changed_ids": [
+   "fix-ADJ-parents-bed-05",
+   "fix-DL-cinema-01",
+   "fix-DL-cinema-02",
+   "fix-DL-gallery-end-01",
+   "fix-DL-kids-a-01",
+   "fix-DL-kids-a-02",
+   "fix-DL-kids-a-04",
+   "fix-DL-kids-b-01",
+   "fix-DL-kids-b-02",
+   "fix-DL-landing-gf-03",
+   "fix-DL-parents-bed-04",
+   "fix-DL-parents-entry-01",
+   "fix-DL-study-game-01",
+   "fix-DL-study-game-02",
+   "fix-DL-study-game-03",
+   "fix-DL-study-game-04",
+   "fix-DL-study-game-05",
+   "fix-WW-cinema-03",
+   "fix-WW-cinema-04",
+   "fix-WW-cinema-05",
+   "fix-WW-corridor-01",
+   "fix-WW-corridor-02",
+   "fix-WW-corridor-03",
+   "fix-WW-corridor-04",
+   "fix-WW-corridor-05",
+   "fix-WW-corridor-06"
+  ]
+ },
+ "models": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "props": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "materials": {
+  "changed": false,
+  "receipt_component": true
+ }
+}
