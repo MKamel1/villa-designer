@@ -5,7 +5,7 @@
   "edition": "EN 1838 itself NOT read (paywalled)",
   "locator": "Glamox application guide, escape routes (secondary)",
   "quote": "in width, the horizontal illuminances on the floor along the centre line of an escape route must not fall below 1 lx.",
-  "value": "escape route (width <= 2 m): >= 1 lx on the floor along the centre line",
+  "value": "escape route: at least 1 lx on the floor along the centre line",
   "status": "std",
   "url_or_path": "https://glamox.com/en/pbs/application-guide/emergency-lighting/rules-and-regulations/escape-routes--rules-and-luminaires"
  },
@@ -45,7 +45,7 @@
   "edition": "EN 1838 itself NOT read; vendor note dated 01-2020",
   "locator": "section 2.4 (secondary; differs in wording from Glamox); printed p. ? (pdf page 4 of the preview file)",
   "quote": "an illuminance level of at least 1 lux along the center line for a path width of one metre must be guaranteed.",
-  "value": "1 lx along the centre line for a 1 m path width within a 2 m route: Glamox says the central band is half the route width at >= 50 % of the value; the two wordings are not identical",
+  "value": "at least 1 lux along the centre line for a path width of one metre",
   "status": "std",
   "url_or_path": "https://a.storyblok.com/f/158120/x/16e33dc9a6/en-1838-emergency-lighting-en.pdf"
  },
@@ -55,7 +55,7 @@
   "edition": "EN 1838 itself NOT read; vendor note dated 01-2020",
   "locator": "section 2.4 (secondary); printed p. ? (pdf page 4 of the preview file)",
   "quote": "The rated service time is at least one hour.",
-  "value": "rated service time >= 1 h",
+  "value": "rated service time is at least one hour",
   "status": "std",
   "url_or_path": "https://a.storyblok.com/f/158120/x/16e33dc9a6/en-1838-emergency-lighting-en.pdf"
  },
@@ -65,7 +65,7 @@
   "edition": "7th ed., 2022 (held)",
   "locator": "section on emergency lighting, Table XIX follows; printed p. 11-27 (pdf index 234)",
   "quote": "Emergency (escape) lighting should be provided in those areas necessary for escape purposes in case the artificial lighting fails.",
-  "value": "principle only; Table XIX (BS 5266-1) lists common escape routes of flats, not the inside of a single-family house: advisory for a villa",
+  "value": "principle only; the table that follows covers common escape routes, not the inside of a single-family house (advisory for a villa)",
   "status": "sourced",
   "url_or_path": "held: metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf"
  }

@@ -4,7 +4,7 @@
   "document": "SLL Code for Lighting (chapter 2 reproduces BS EN 12464-1:2011 indoor workplace requirements)",
   "edition": "2012 (held: knowledge/library.json sll-code); EN 12464-1:2011 text, superseded by EN 12464-1:2021, not read",
   "locator": "section 2 intro; printed p. 29 (running head) (pdf index 36)",
-  "quote": "This chapter of the Code is based on BS EN 12464-1: 2011: Light and lighting - Lighting of work places - Part 1: Indoor work places",
+  "quote": "This chapter of the Code is based on BS EN 12464-1: 2011: Light and lighting – Lighting of work places – Part 1: Indoor work places",
   "value": "SLL chapter 2 tables are the EN 12464-1:2011 requirements",
   "status": "sourced",
   "url_or_path": "held: sll-code/SLL - Code for Lighting (2012).pdf"
@@ -44,8 +44,18 @@
   "document": "SLL Code for Lighting (chapter 2 reproduces BS EN 12464-1:2011 indoor workplace requirements)",
   "edition": "2012 (held: knowledge/library.json sll-code); EN 12464-1:2011 text, superseded by EN 12464-1:2021, not read",
   "locator": "section 2.1.6.2; printed p. 39 (running head) (pdf index 46)",
-  "quote": "The maintained mean cylindrical illuminance (average vertical plane illuminance) in the activity and interior areas shall be not less than 50 lx with Uo",
-  "value": "mean cylindrical illuminance >= 50 lx (>= 150 lx where visual communication matters: offices, meeting rooms), Uo >= 0.10, at 1.2 m seated / 1.6 m standing",
+  "quote": "The maintained mean cylindrical illuminance (average vertical plane illuminance) in the activity and interior areas shall be not less than 50 lx with Uo ≥ 0.10",
+  "value": "maintained mean cylindrical illuminance >= 50 lx with Uo >= 0.10 in the activity and interior areas",
+  "status": "sourced",
+  "url_or_path": "held: sll-code/SLL - Code for Lighting (2012).pdf"
+ },
+ {
+  "id": "EN12464-1-2011-2.1.6.2-cylindrical-150",
+  "document": "SLL Code for Lighting (chapter 2 reproduces BS EN 12464-1:2011 indoor workplace requirements)",
+  "edition": "2012 (held: knowledge/library.json sll-code); EN 12464-1:2011 text, superseded by EN 12464-1:2021, not read",
+  "locator": "section 2.1.6.2 Note; printed p. 39 (running head) (pdf index 46)",
+  "quote": "should be not less than 150 lx with Uo ≥ 0.10.",
+  "value": "mean cylindrical illuminance not less than 150 lx with Uo >= 0.10 where good visual communication matters (offices, meeting and teaching areas)",
   "status": "sourced",
   "url_or_path": "held: sll-code/SLL - Code for Lighting (2012).pdf"
  },
@@ -65,7 +75,7 @@
   "edition": "2012 (held: knowledge/library.json sll-code); EN 12464-1:2011 text, superseded by EN 12464-1:2021, not read",
   "locator": "section 2.1.5.2 Note 2; printed p. 37 (running head) (pdf index 44)",
   "quote": "If the maximum UGR value in the room is higher than the UGR limit given in section 2",
-  "value": "UGR limits are the section 2.2 table values (UGRL); CIE 117 tabular method is the calculation route",
+  "value": "UGR limits are those given in section 2; the maximum UGR in the room is compared with that limit",
   "status": "sourced",
   "url_or_path": "held: sll-code/SLL - Code for Lighting (2012).pdf"
  },
@@ -75,7 +85,7 @@
   "edition": "2012 (held: knowledge/library.json sll-code); EN 12464-1:2011 text, superseded by EN 12464-1:2021, not read",
   "locator": "section 12.2.10 (spacing tables, emergency lighting); printed p. 199 (running head) (pdf index 206)",
   "quote": "ensure that the illuminance on the centre line of the escape route does not fall below the required illuminance and that the edges of the strip have at least half that illuminance.",
-  "value": "escape routes: centre-line illuminance >= required value and strip edges >= half of it (the numeric 1 lx is EN 1838, see EN1838 cards)",
+  "value": "escape routes: centre-line illuminance at least the required value, strip edges at least half of it",
   "status": "sourced",
   "url_or_path": "held: sll-code/SLL - Code for Lighting (2012).pdf"
  }

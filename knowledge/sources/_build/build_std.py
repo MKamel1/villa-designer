@@ -14,23 +14,33 @@ DL = sys.argv[1] if len(sys.argv) > 1 else r"C:\Users\mmbka\r_dl\std"
 SC = SourceCard
 
 
+from ovr import OVR  # noqa: E402
+
 FAILS = []
+
+
+def _o(cid, quote, value, loc):
+    o = OVR.get(cid, {})
+    return o.get("quote", quote), o.get("value", value), o.get("loc", loc)
 
 
 def held(book, doc, ed, url, rows, status="sourced"):
     out = []
     for cid, loc, quote, value, *lab in rows:
+        quote, value, loc = _o(cid, quote, value, loc)
         try:
             label, pdf, q = held_quote(book, quote, lab[0] if lab else None)
         except ValueError as e:
             FAILS.append((cid, str(e)[:230])); continue
-        out.append(SC(cid, doc, ed, f"{loc}; printed p. {label} (pdf index {pdf})", q, value, status, url))
+        where = f"pdf index {pdf}; printed page label unreliable in this book" if book == "nkba-guidelines" else f"printed p. {label} (pdf index {pdf})"
+        out.append(SC(cid, doc, ed, f"{loc}; {where}", q, value, status, url))
     return out
 
 
 def pdfs(fname, doc, ed, url, rows, status):
     out = []
     for cid, loc, quote, value, *hint in rows:
+        quote, value, loc = _o(cid, quote, value, loc)
         try:
             label, pdf, q = pdf_quote(f"{DL}\\{fname}", quote, hint[0] if hint else None)
         except ValueError as e:
@@ -42,6 +52,7 @@ def pdfs(fname, doc, ed, url, rows, status):
 def html(fname, doc, ed, url, rows, status):
     out = []
     for cid, loc, quote, value in rows:
+        quote, value, loc = _o(cid, quote, value, loc)
         try:
             q = text_quote(f"{DL}\\{fname}.txt", quote)
         except ValueError as e:
@@ -74,6 +85,9 @@ sll = held(SLL, SLL_DOC, SLL_ED, SLL_URL, [
     ("EN12464-1-2011-2.1.6.2-cylindrical", "section 2.1.6.2",
      "The maintained mean cylindrical illuminance (average vertical plane illuminance) in the activity and interior areas shall be not less than 50 lx with Uo",
      "mean cylindrical illuminance >= 50 lx (>= 150 lx where visual communication matters: offices, meeting rooms), Uo >= 0.10, at 1.2 m seated / 1.6 m standing"),
+    ("EN12464-1-2011-2.1.6.2-cylindrical-150", "section 2.1.6.2 Note",
+     "should be not less than 150 lx with Uo ≥ 0.10.",
+     "mean cylindrical illuminance not less than 150 lx with Uo >= 0.10 where good visual communication matters (offices, meeting and teaching areas)"),
     ("EN12464-1-2011-T2.2-shielding", "Table 2.2",
      "Minimum shielding angle a 20 to < 50 15° 50 to < 500 20° ≥500 30°",
      "minimum shielding angle 15 deg (20-<50 kcd/m2), 20 deg (50-<500), 30 deg (>=500)"),
@@ -125,10 +139,10 @@ iec41 = pdfs("iec41_b.pdf", IEC41, "Edition 5.0, 2005-12 (the iTeh preview file 
              "https://cdn.standards.iteh.ai/samples/10887/b410f7c10853465e9e7f293d9e18fd98/IEC-60364-4-41-2005.pdf", [
     ("IEC60364-4-41-2005-411.3.2.2-scope", "clause 411.3.2.2",
      "The maximum disconnection time stated in Table 41.1 shall be applied to final circuits not exceeding 32A.",
-     "Table 41.1 applies to final circuits <= 32 A"),
+     "2005 text: Table 41.1 applies to final circuits <= 32 A (replaced by AMD1:2017, see the AMD1 card for 411.3.2.2)"),
     ("IEC60364-4-41-2005-T41.1", "Table 41.1 (printed p.10; columns 50-120 V a.c./d.c., 120-230 V a.c./d.c., 230-400 V, >400 V)",
      "TN 0,8 Note 1 0,4 5 0,2 0,4 0,1 0,1 TT 0,3 Note 1 0,2 0,4 0,07 0,2 0,04 0,1",
-     "a.c. 120 V < Uo <= 230 V (Egypt 230/400 V, Uo = 230 V): TN 0.4 s, TT 0.2 s. For 230 V < Uo <= 400 V: TN 0.2 s, TT 0.07 s"),
+     "2005 Table 41.1, a.c.: 120 V < Uo <= 230 V: TN 0.4 s, TT 0.2 s; 230 V < Uo <= 400 V: TN 0.2 s, TT 0.07 s (the d.c. TN value 5 s became 1 s in AMD1:2017)"),
     ("IEC60364-4-41-2005-411.3.2.3-5s", "clause 411.3.2.3-4",
      "In TN systems, a disconnection time not exceeding 5 s is permitted for distribution circuits",
      "TN distribution circuits <= 5 s; TT distribution circuits <= 1 s"),
@@ -142,6 +156,12 @@ iec41 = pdfs("iec41_b.pdf", IEC41, "Edition 5.0, 2005-12 (the iTeh preview file 
 ], "sourced")
 iec41 += pdfs("amd1.pdf", IEC41 + ", Amendment 1", "Amendment 1, 2017-03 (iTeh preview contains the replaced 411.3.3 and new 411.3.4)",
               "https://cdn.standards.iteh.ai/samples/22593/faab23b5c332418984d5b3c627cbd1b0/IEC-60364-4-41-2005-AMD1-2017.pdf", [
+    ("IEC60364-4-41-AMD1-2017-411.3.2.2-scope", "clause 411.3.2.2 (replaced)",
+     "The maximum disconnection times stated in Table 41.1 shall be applied to final circuits with a rated current not exceeding • 63 A with one or more socket-outlets, and • 32 A supplying only fixed connected current-using equipment.",
+     "Table 41.1 applies to final circuits <= 63 A with socket-outlets and <= 32 A fixed equipment (the 2005 text said <= 32 A)"),
+    ("IEC60364-4-41-AMD1-2017-T41.1", "Table 41.1 (replaced)",
+     "TN 0,8 a 0,4 1 0,2 0,4 0,1 0,1 TT 0,3 a 0,2 0,4 0,07 0,2 0,04 0,1",
+     "AMD1:2017 Table 41.1, a.c. 120 V < Uo <= 230 V: TN 0.4 s, TT 0.2 s (d.c. TN now 1 s); 230 V < Uo <= 400 V a.c.: TN 0.2 s, TT 0.07 s"),
     ("IEC60364-4-41-AMD1-2017-411.3.3-32A", "clause 411.3.3 (replaced)",
      "a.c. socket-outlets with a rated current not exceeding 32 A that are liable to be used by ordinary persons and are intended for general use",
      "30 mA RCD on general-use a.c. socket-outlets <= 32 A and outdoor mobile equipment <= 32 A (replaces the 20 A of the 2005 text)"),
@@ -164,7 +184,7 @@ iec701 = pdfs("iec701.pdf", IEC701, "Edition 3.0, 2019-10 (iTeh preview contains
      "the parallel vertical virtual surface at a distance of 60 cm from the zone 1 border",
      "zone 2 (bath tub only): 60 cm beyond zone 1, up to 225 cm; for showers there is no zone 2"),
     ("IEC60364-7-701-2019-701.30.104-no-zone2-shower", "clause 701.30.104 b)",
-     "for showers, there is no zone 2.", "ed.3.0 (2019) gives showers no zone 2 (earlier editions did)"),
+     "for showers, there is no zone 2.", "ed.3.0 (2019): showers have no zone 2"),
     ("IEC60364-7-701-2019-701.415.1.101-RCD", "clause 701.415.1.101",
      "additional protection by the use of one or more RCDs having a rated residual operating current not exceeding 30 mA shall be provided for: – circuits serving the location containing a bath tub and/or a shower;",
      "30 mA RCD for circuits serving the bath/shower location and circuits passing through zones 1/2 (SELV/PELV and electrical separation excepted)"),
@@ -262,10 +282,10 @@ bs = html("aico.html", "BS 5839-6 Fire detection and alarm systems for fire safe
           "BS 5839-6:2019+A1:2020 itself NOT read (paywalled); Aico web page read 2026-11-20",
           "https://www.aico.co.uk/technical-support/standards-regulations/fire-british-standard-bs-5839-62019/", [
     ("BS5839-6-grade-D1", "Aico summary, alarm grades (secondary)",
-     "Grade D1 A system of one or more mains powered detectors, each with a tamper-proof standby supply consisting of a battery or batteries.",
+     "Grade D1 A system of one or more mains powered detectors, each with a tamper-proof standby supply consisting of a battery or batteries. Grade D2",
      "Grade D1: mains-powered detectors with tamper-proof standby battery"),
     ("BS5839-6-grade-D2", "Aico summary (secondary)",
-     "Grade D2 A system of one or more mains powered detectors, each with an integral standby supply consisting of a user-replaceable battery or batteries.",
+     "Grade D2 A system of one or more mains powered detectors, each with an integral standby supply consisting of a user-replaceable battery or batteries. Grade F1",
      "Grade D2: mains-powered with user-replaceable standby battery"),
     ("BS5839-6-LD1", "Aico summary, categories (secondary)",
      "LD1 High Protection All areas where a fire could start", "LD1: all areas where a fire could start (hall, landings, living room, kitchen, bedrooms, cupboards)"),
@@ -288,6 +308,11 @@ nk1 = held("nkba-dc-summary-4ed", "NKBA Design Concepts summary (Universal desig
      "The clear floor space should not be obstructed by door swings, cabinetry, casework, fixtures or equipment.",
      "clear floor space not obstructed by door swings or fixtures"),
 ])
+nk1.append(SC("NKBA-DC-1.5e-turning-circle-label", "NKBA Design Concepts summary (Universal design)", "4th ed., (c) 2022 NKBA (held)",
+              "figure 1.5.e (drawing label read by eye from the page image, nkba-dc-summary-4ed pdf index 15; no text layer, so not machine-checked); printed p. 16",
+              '60" - 67" (1 525 mm - 1 700 mm) TURNING CIRCLE',
+              "bath turning circle 60-67 in (1525-1700 mm) drawn overlapping the clear floor spaces; figure 1.5.d is labelled 'clear floor space with no door swing interference'",
+              "sourced", "held: nkba-dc-summary-4ed"))
 nk2 = held("nkba-guidelines", "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines; IRC 2015 / IPC code references)",
            "2nd ed., 2016 NKBA/Wiley (held); pdf labels unreliable, cite by guideline number",
            "held: nkba-guidelines", [
@@ -310,6 +335,18 @@ nk2 += held("nkba-guidelines", "NKBA Kitchen & Bath Planning Guidelines with Acc
             "held: nkba-guidelines", [
     ("NKBA-BG3-ceiling-80in", "Bathroom Planning Guideline 3 Ceiling Height (IRC R305.1)",
      "The minimum ceiling height in a bathroom should not be less than 80″ (2032 mm)", "bathroom ceiling >= 2032 mm (US code)"),
+    ("NKBA-BG20-toilet-centreline-code-15in", "Bathroom Planning Guideline 20 Toilet/Bidet Placement (code requirement)",
+     "A minimum distance of 15″ (381 mm) is required from the centerline of toilet and/or bidet to any bath fixture, wall, or other obstacle.",
+     "code minimum: toilet or bidet centreline 15 in (381 mm) from any fixture, wall or obstacle"),
+    ("NKBA-BG21-compartment-recommended", "Bathroom Planning Guideline 21 Toilet Compartment",
+     "The size for a separate toilet compartment should be at least 36″ × 66″ (914 mm × 1676 mm)",
+     "separate toilet compartment recommended at least 36 x 66 in (914 x 1676 mm)"),
+    ("NKBA-BG21-compartment-code", "Bathroom Planning Guideline 21 Toilet Compartment (code requirement)",
+     "The minimum size for a separate toilet compartment is 30″ × 60″ (762 mm × 1524 mm).",
+     "code minimum separate toilet compartment 30 x 60 in (762 x 1524 mm)"),
+    ("NKBA-BG9-shower-code-30in", "Bathroom Planning Guideline 3 Ceiling Height (IRC R305.1, shower head area)",
+     "A shower, or tub equipped with a shower head, shall have a minimum floor-to-ceiling height of 80″ (2032 mm) above a minimum area 30″ × 30″ (762 mm × 762 mm) at the shower head.",
+     "shower head: 80 in (2032 mm) floor-to-ceiling over a 30 x 30 in (762 x 762 mm) area"),
 ])
 
 # ------------------------------------------------------------------ furniture tip-over
@@ -319,9 +356,15 @@ tip = html("fr1261.html", "16 CFR Part 1261 Safety Standard for Clothing Storage
     ("US-16CFR1261.2-ASTM-F2057-23", "section 1261.2",
      "Each clothing storage unit that is subject to ASTM F2057-23, Standard Safety Specification for Clothing Storage Units, approved on February 1, 2023, shall comply with ASTM F2057-23.",
      "US mandatory: clothing storage units comply with ASTM F2057-23 (units manufactured after 2023-09-01)"),
-    ("US-STURDY-tests-60lb", "preamble, STURDY Act criteria",
-     "tests that simulate the weight of children up to 60 pounds",
-     "STURDY Act criteria: stability tests simulate children up to 60 lb, loaded/multiple open drawers, carpet, dynamic force, units >= 27 in high"),
+    ("US-F2057-23-three-stability-tests", "preamble, CPSC staff description of ASTM F2057-23 (secondary)",
+     "ASTM F2057-23 has a set of three stability tests to simulate the capability of a child weighing up to 60 pounds interacting with a CSU.",
+     "F2057-23 has three stability tests simulating a child up to 60 lb (loaded drawers open; horizontal pull; carpet reaction)"),
+    ("US-F2057-23-9.2.2-pull", "preamble, CPSC staff description of section 9.2.2 (secondary)",
+     "applies a 10-pound horizontal force over a period of at least 5 seconds",
+     "9.2.2 horizontal dynamic force: 10 lb for at least 5 s, held 10 s, hand-hold height at most 56 in"),
+    ("US-F2057-23-9.2.3-carpet", "preamble, CPSC staff description of section 9.2.3 (secondary)",
+     "uses 60 pounds of weight placed on the edge of an open drawer or pull-out shelf, while the CSU is tilted forward using a 0.43 inch test block",
+     "9.2.3: 60 lb on the edge of an open drawer or shelf, unit tilted forward on a 0.43 in block (carpet simulation)"),
 ], "std")
 tip += pdfs("en14749.pdf", "EN 14749:2005 Domestic and kitchen storage units and worktops - Safety requirements and test methods (iTeh/SIST preview)",
             "EN 14749:2005 (current EN 14749:2016+A1:2022 NOT read); preview contains up to clause 6.2.3",

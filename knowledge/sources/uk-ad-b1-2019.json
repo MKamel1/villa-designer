@@ -2,17 +2,17 @@
  {
   "id": "UK-ADB1-2019-1.1-alarm-grade",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
   "locator": "para 1.1; printed p. 9 (pdf page 21)",
   "quote": "All dwellings should have a fire detection and alarm system, minimum Grade D2 Category LD3 standard, in accordance with the relevant recommendations of BS 5839-6.",
-  "value": "minimum Grade D2 Category LD3; NOT Grade D LD2 (see R-sources discrepancy on EA15/LS6)",
+  "value": "minimum Grade D2 Category LD3",
   "status": "sourced",
   "url_or_path": "https://assets.publishing.service.gov.uk/media/67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf (downloaded 2026-11-20; not a held book)"
  },
  {
   "id": "UK-ADB1-2019-1.2-1.4-alarm-power",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
   "locator": "paras 1.2 and 1.4; printed p. 9 (pdf page 21)",
   "quote": "Smoke alarms should be mains operated and conform to BS EN 14604.",
   "value": "smoke alarms mains operated, BS EN 14604; standby power (battery or capacitor)",
@@ -20,19 +20,29 @@
   "url_or_path": "https://assets.publishing.service.gov.uk/media/67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf (downloaded 2026-11-20; not a held book)"
  },
  {
-  "id": "UK-ADB1-2019-1.5-1.7-large-dwellinghouse",
+  "id": "UK-ADB1-2019-1.7-large-three-storeys",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
-  "locator": "paras 1.5-1.7; printed p. 9 (pdf page 21)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
+  "locator": "para 1.7; printed p. 9 (pdf page 21)",
   "quote": "A large dwellinghouse of three or more storeys (excluding basement storeys) should be fitted with a Grade A Category LD2 fire detection and alarm system as described in BS 5839-6.",
-  "value": "large dwellinghouse (>1 storey, at least one storey >200 m2): two storeys Grade A LD3; three or more storeys Grade A LD2",
+  "value": "large dwellinghouse of three or more storeys (basement excluded): Grade A Category LD2",
+  "status": "sourced",
+  "url_or_path": "https://assets.publishing.service.gov.uk/media/67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf (downloaded 2026-11-20; not a held book)"
+ },
+ {
+  "id": "UK-ADB1-2019-1.6-large-two-storeys",
+  "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
+  "locator": "para 1.6; printed p. 9 (pdf page 21)",
+  "quote": "A large dwellinghouse of two storeys (excluding basement storeys) should be fitted with a Grade A Category LD3 fire detection and alarm system, as described in BS 5839-6.",
+  "value": "large dwellinghouse of two storeys (basement excluded): Grade A Category LD3",
   "status": "sourced",
   "url_or_path": "https://assets.publishing.service.gov.uk/media/67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf (downloaded 2026-11-20; not a held book)"
  },
  {
   "id": "UK-ADB1-2019-1.5-large-definition",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
   "locator": "para 1.5; printed p. 9 (pdf page 21)",
   "quote": "A large dwellinghouse has more than one storey, and at least one storey exceeds 200m2.",
   "value": "large dwellinghouse = more than one storey and a storey >200 m2",
@@ -42,7 +52,7 @@
  {
   "id": "UK-ADB1-2019-2.1-habitable-rooms-ground",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
   "locator": "para 2.1; printed p. 11 (pdf page 23)",
   "quote": "All habitable rooms (excluding kitchens) should have either of the following. a. An opening directly onto a hall leading to a final exit. b. An emergency escape window or door, as described in paragraph 2.10.",
   "value": "ground-storey habitable rooms: opening onto hall to final exit, or escape window/door",
@@ -52,9 +62,9 @@
  {
   "id": "UK-ADB1-2019-2.5-protected-stairway",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
   "locator": "para 2.5 (storey >4.5 m above ground); printed p. 11 (pdf page 23)",
-  "quote": "Protected stairway - a stair separated by fire resisting construction (minimum REI 30) at all storeys",
+  "quote": "Dwellinghouses with one storey more than 4.5m above ground level 2.5 See Diagram 2.1c. The dwellinghouse should have either of the following. a. Protected stairway – a stair separated by fire resisting construction (minimum REI 30) at all storeys",
   "value": "storey >4.5 m above ground: protected stairway REI 30 to a final exit, or alternative escape",
   "status": "sourced",
   "url_or_path": "https://assets.publishing.service.gov.uk/media/67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf (downloaded 2026-11-20; not a held book)"
@@ -62,17 +72,27 @@
  {
   "id": "UK-ADB1-2019-2.10-escape-window",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
   "locator": "para 2.10a; printed p. 15 (pdf page 27)",
   "quote": "A minimum height of 450mm and a minimum width of 450mm (the route through the window may be at an angle rather than straight through).",
-  "value": "escape window: openable area >=0.33 m2, >=450 mm high and wide, bottom of opening <=1100 mm above floor",
+  "value": "escape window openable area >=450 mm high and >=450 mm wide",
+  "status": "sourced",
+  "url_or_path": "https://assets.publishing.service.gov.uk/media/67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf (downloaded 2026-11-20; not a held book)"
+ },
+ {
+  "id": "UK-ADB1-2019-2.10-escape-window-area",
+  "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
+  "locator": "para 2.10a i; printed p. 15 (pdf page 27)",
+  "quote": "A minimum area of 0.33m2",
+  "value": "escape window unobstructed openable area >=0.33 m2",
   "status": "sourced",
   "url_or_path": "https://assets.publishing.service.gov.uk/media/67d0230974b001c38a0287ad/Approved_Document_B_volume_1_-_Dwellings_2019_edition_incorporating_2020_and_2022_amendments_collated_with_2025_2026_and_2029_amendments.pdf (downloaded 2026-11-20; not a held book)"
  },
  {
   "id": "UK-ADB1-2019-2.10-escape-window-1100",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
   "locator": "para 2.10a iii; printed p. 15 (pdf page 27)",
   "quote": "The bottom of the openable area is a maximum of 1100mm above the floor.",
   "value": "bottom of openable area <=1100 mm above floor",
@@ -82,7 +102,7 @@
  {
   "id": "UK-ADB1-2019-2.16-basement",
   "document": "Approved Document B (Fire safety) Volume 1: Dwellings (England)",
-  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments; the amendments change none of the paragraphs carded here (their summaries list sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes only)",
+  "edition": "2019 edition incorporating 2020 and 2022 amendments, collated with the 2025, 2026 (in force 2026-09-30) and 2029 amendments. The edition summaries list Regulation 38 and fire safety information, reaction-to-fire classes, sprinklers in care homes, blocks of flats, evacuation lifts and fire-resistance classes; whether any carded paragraph text changed was not compared against the 2019 base",
   "locator": "para 2.16; printed p. 16 (pdf page 28)",
   "quote": "Basement storeys containing habitable rooms should have one of the following. a. An emergency escape window or external door providing escape from the basement (paragraph 2.10). b. A protected stairway (paragraph 2.5a) leading from the basement to a final exit.",
   "value": "basement with habitable rooms: escape window/external door or protected stairway to a final exit",

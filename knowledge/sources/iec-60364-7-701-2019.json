@@ -15,7 +15,7 @@
   "edition": "Edition 3.0, 2019-10 (iTeh preview contains the zone and equipment clauses; figures 2-10 not checked)",
   "locator": "clause 701.30.103; printed p. 8 (pdf page 10 of the preview file)",
   "quote": "a horizontal plane lying 225 cm above the floor level below the bath tub or a horizontal plane corresponding to the highest fixed shower head",
-  "value": "zone 1: bath tub footprint up to 225 cm (or the highest fixed shower head/outlet); showers: within 120 cm of the fixed head",
+  "value": "bath tub: zone 1 reaches 225 cm above the floor below the tub, or the highest fixed shower head or outlet if higher",
   "status": "sourced",
   "url_or_path": "https://cdn.standards.iteh.ai/samples/23637/b686a82d669541109302676be8ecd23b/IEC-60364-7-701-2019.pdf"
  },
@@ -25,7 +25,7 @@
   "edition": "Edition 3.0, 2019-10 (iTeh preview contains the zone and equipment clauses; figures 2-10 not checked)",
   "locator": "clause 701.30.104; printed p. 8 (pdf page 10 of the preview file)",
   "quote": "the parallel vertical virtual surface at a distance of 60 cm from the zone 1 border",
-  "value": "zone 2 (bath tub only): 60 cm beyond zone 1, up to 225 cm; for showers there is no zone 2",
+  "value": "bath tub only: zone 2 extends 60 cm beyond zone 1",
   "status": "sourced",
   "url_or_path": "https://cdn.standards.iteh.ai/samples/23637/b686a82d669541109302676be8ecd23b/IEC-60364-7-701-2019.pdf"
  },
@@ -35,7 +35,7 @@
   "edition": "Edition 3.0, 2019-10 (iTeh preview contains the zone and equipment clauses; figures 2-10 not checked)",
   "locator": "clause 701.30.104 b); printed p. 8 (pdf page 10 of the preview file)",
   "quote": "for showers, there is no zone 2.",
-  "value": "ed.3.0 (2019) gives showers no zone 2 (earlier editions did)",
+  "value": "ed.3.0 (2019): showers have no zone 2",
   "status": "sourced",
   "url_or_path": "https://cdn.standards.iteh.ai/samples/23637/b686a82d669541109302676be8ecd23b/IEC-60364-7-701-2019.pdf"
  },
@@ -44,8 +44,8 @@
   "document": "IEC 60364-7-701 Low-voltage electrical installations, Part 7-701: Locations containing a bath or shower",
   "edition": "Edition 3.0, 2019-10 (iTeh preview contains the zone and equipment clauses; figures 2-10 not checked)",
   "locator": "clause 701.415.1.101; printed p. 9 (pdf page 11 of the preview file)",
-  "quote": "additional protection by the use of one or more RCDs having a rated residual operating current not exceeding 30 mA shall be provided for: - circuits serving the location containing a bath tub and/or a shower;",
-  "value": "30 mA RCD for circuits serving the bath/shower location and circuits passing through zones 1/2 (SELV/PELV and electrical separation excepted)",
+  "quote": "additional protection by the use of one or more RCDs having a rated residual operating current not exceeding 30 mA shall be provided for: – circuits serving the location containing a bath tub and/or a shower; – circuits passing through zone 1 and/or zone 2 not serving this location.",
+  "value": "30 mA RCD for circuits serving the bath/shower location and circuits passing through zone 1 and/or zone 2 (SELV/PELV and electrical separation excepted)",
   "status": "sourced",
   "url_or_path": "https://cdn.standards.iteh.ai/samples/23637/b686a82d669541109302676be8ecd23b/IEC-60364-7-701-2019.pdf"
  },
@@ -54,8 +54,8 @@
   "document": "IEC 60364-7-701 Low-voltage electrical installations, Part 7-701: Locations containing a bath or shower",
   "edition": "Edition 3.0, 2019-10 (iTeh preview contains the zone and equipment clauses; figures 2-10 not checked)",
   "locator": "clause 701.512.2.4.101.4; printed p. 11 (pdf page 13 of the preview file)",
-  "quote": "socket-outlets, having a degree of protection of at least IPX4, of circuits protected by SELV or PELV with the source of supply installed outside zones 0 and 1;",
-  "value": "zone 2 sockets only SELV/PELV with the source outside zones 0-1, IPX4; shaver supply units per IEC 61558-2-5 allowed",
+  "quote": "socket-outlets, having a degree of protection of at least IPX4, of circuits protected by SELV or PELV with the source of supply installed outside zones 0 and 1; – electrical accessories, other than socket-outlets, having a degree of protection at least IPX4, that are permanently connected; – shaver supply units according to IEC 61558-2-5.",
+  "value": "zone 2: sockets only on SELV/PELV with the source outside zones 0 and 1 (IPX4); shaver supply units to IEC 61558-2-5",
   "status": "sourced",
   "url_or_path": "https://cdn.standards.iteh.ai/samples/23637/b686a82d669541109302676be8ecd23b/IEC-60364-7-701-2019.pdf"
  },

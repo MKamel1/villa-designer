@@ -4,7 +4,7 @@
   "document": "IEC 60364-5-52 Table G.52.1 (Annex G, informative) as reproduced by 'eToolboX' (secondary)",
   "edition": "IEC 60364-5-52:2009; Annex G text itself NOT read",
   "locator": "Table G.52.1 type A (secondary)",
-  "quote": "A - Low voltage installations supplied directly from a public low voltage distribution system: Lighting is 3% and other use is 5%.",
+  "quote": "A – Low voltage installations supplied directly from a public low voltage distribution system: Lighting is 3% and other use is 5%.",
   "value": "public LV supply: lighting 3 %, other uses 5 %",
   "status": "std",
   "url_or_path": "https://sites.google.com/view/etoolsbox/electrical/voltage-drop-iec"
@@ -14,8 +14,8 @@
   "document": "IEC 60364-5-52 Table G.52.1 (Annex G, informative) as reproduced by 'eToolboX' (secondary)",
   "edition": "IEC 60364-5-52:2009; Annex G text itself NOT read",
   "locator": "Table G.52.1 type B (secondary)",
-  "quote": "B - Low voltage installation supplied from private LV supply* : Lighting is 6% and other use is 8%.",
-  "value": "private LV supply: lighting 6 %, other 8 %; +0.005 %/m beyond 100 m, max +0.5 %",
+  "quote": "B – Low voltage installation supplied from private LV supply* : Lighting is 6% and other use is 8%.",
+  "value": "private LV supply: lighting 6%, other use 8%",
   "status": "std",
   "url_or_path": "https://sites.google.com/view/etoolsbox/electrical/voltage-drop-iec"
  },

@@ -5,7 +5,7 @@
   "edition": "IEEE 1789-2015 itself NOT read (paywalled); presentation May 2015",
   "locator": "slides 8 and 23 (secondary); printed p. ? (pdf page 20 of the preview file)",
   "quote": "Multiply the frequency by 0.08 and round up to the nearest whole number to get the max Allowable % Flicker",
-  "value": "low-risk: max %Flicker = 0.08 x frequency (Hz), rounded up; 120 Hz -> 10 %",
+  "value": "low-risk: max %Flicker = frequency x 0.08, rounded up to the nearest whole number",
   "status": "std",
   "url_or_path": "https://www.energy.gov/sites/prod/files/2015/05/f22/miller+lehman_flicker_lightfair2015.pdf"
  },
@@ -15,7 +15,7 @@
   "edition": "IEEE 1789-2015 itself NOT read (paywalled); presentation May 2015",
   "locator": "slide 23 (secondary); printed p. ? (pdf page 20 of the preview file)",
   "quote": "Test to determine the flicker frequency in Hz of the SSL product (it must be ≥100 Hz)",
-  "value": "the recommended-practice shortcut applies to products flickering at >= 100 Hz (the 90 Hz boundary in a-plus-lighting LA7 is not in this source)",
+  "value": "the multiplication shortcut applies to products flickering at 100 Hz or more",
   "status": "std",
   "url_or_path": "https://www.energy.gov/sites/prod/files/2015/05/f22/miller+lehman_flicker_lightfair2015.pdf"
  },

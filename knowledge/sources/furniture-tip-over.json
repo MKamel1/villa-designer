@@ -5,17 +5,37 @@
   "edition": "Direct final rule published 2023-05-04; ASTM F2057-23 itself NOT read (paywalled)",
   "locator": "section 1261.2",
   "quote": "Each clothing storage unit that is subject to ASTM F2057-23, Standard Safety Specification for Clothing Storage Units, approved on February 1, 2023, shall comply with ASTM F2057-23.",
-  "value": "US mandatory: clothing storage units comply with ASTM F2057-23 (units manufactured after 2023-09-01)",
+  "value": "clothing storage units must comply with ASTM F2057-23",
   "status": "std",
   "url_or_path": "https://www.govinfo.gov/content/pkg/FR-2023-05-04/html/2023-08997.htm"
  },
  {
-  "id": "US-STURDY-tests-60lb",
+  "id": "US-F2057-23-three-stability-tests",
   "document": "16 CFR Part 1261 Safety Standard for Clothing Storage Units (88 FR 28403, 2023-05-04), adopting ASTM F2057-23",
   "edition": "Direct final rule published 2023-05-04; ASTM F2057-23 itself NOT read (paywalled)",
-  "locator": "preamble, STURDY Act criteria",
-  "quote": "tests that simulate the weight of children up to 60 pounds",
-  "value": "STURDY Act criteria: stability tests simulate children up to 60 lb, loaded/multiple open drawers, carpet, dynamic force, units >= 27 in high",
+  "locator": "preamble, CPSC staff description of ASTM F2057-23 (secondary)",
+  "quote": "ASTM F2057-23 has a set of three stability tests to simulate the capability of a child weighing up to 60 pounds interacting with a CSU.",
+  "value": "F2057-23 has three stability tests simulating a child up to 60 lb (loaded drawers open; horizontal pull; carpet reaction)",
+  "status": "std",
+  "url_or_path": "https://www.govinfo.gov/content/pkg/FR-2023-05-04/html/2023-08997.htm"
+ },
+ {
+  "id": "US-F2057-23-9.2.2-pull",
+  "document": "16 CFR Part 1261 Safety Standard for Clothing Storage Units (88 FR 28403, 2023-05-04), adopting ASTM F2057-23",
+  "edition": "Direct final rule published 2023-05-04; ASTM F2057-23 itself NOT read (paywalled)",
+  "locator": "preamble, CPSC staff description of section 9.2.2 (secondary)",
+  "quote": "applies a 10-pound horizontal force over a period of at least 5 seconds at a ``hand-hold'' not to exceed a 56-inch height",
+  "value": "horizontal force of 10 lb for at least 5 s at a hand-hold no higher than 56 in",
+  "status": "std",
+  "url_or_path": "https://www.govinfo.gov/content/pkg/FR-2023-05-04/html/2023-08997.htm"
+ },
+ {
+  "id": "US-F2057-23-9.2.3-carpet",
+  "document": "16 CFR Part 1261 Safety Standard for Clothing Storage Units (88 FR 28403, 2023-05-04), adopting ASTM F2057-23",
+  "edition": "Direct final rule published 2023-05-04; ASTM F2057-23 itself NOT read (paywalled)",
+  "locator": "preamble, CPSC staff description of section 9.2.3 (secondary)",
+  "quote": "uses 60 pounds of weight placed on the edge of an open drawer or pull-out shelf, while the CSU is tilted forward using a 0.43 inch test block",
+  "value": "9.2.3: 60 lb on the edge of an open drawer or shelf, unit tilted forward on a 0.43 in block (carpet simulation)",
   "status": "std",
   "url_or_path": "https://www.govinfo.gov/content/pkg/FR-2023-05-04/html/2023-08997.htm"
  },
