@@ -12943,7 +12943,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -12997,7 +12997,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13051,7 +13051,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13105,7 +13105,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13267,7 +13267,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13321,7 +13321,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13375,7 +13375,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "A9000028",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
+     "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
      "substitute": false,
      "generic": false
     },
@@ -13645,7 +13645,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13699,7 +13699,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13915,7 +13915,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13969,7 +13969,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14023,7 +14023,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -14077,7 +14077,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14347,7 +14347,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14401,7 +14401,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14455,7 +14455,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14509,7 +14509,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14563,7 +14563,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14617,7 +14617,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14671,7 +14671,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14725,7 +14725,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14779,7 +14779,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14833,7 +14833,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14941,7 +14941,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "50674",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-50674-x2.ies",
+     "ies": "knowledge/lighting/ies/ERCO-50674-x2.ies",
      "substitute": false,
      "generic": false
     },
@@ -14995,7 +14995,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "A9000028",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
+     "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
      "substitute": false,
      "generic": false
     },
@@ -15049,7 +15049,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "A9000028",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
+     "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
      "substitute": false,
      "generic": false
     },
@@ -15211,7 +15211,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -15265,7 +15265,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -15859,7 +15859,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -15913,7 +15913,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -15967,7 +15967,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -16021,7 +16021,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -16075,7 +16075,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -16183,7 +16183,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "31327",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
+     "ies": "knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
      "generic": false
     },
@@ -16237,7 +16237,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "31327",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
+     "ies": "knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
      "generic": false
     },
@@ -16453,7 +16453,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16507,7 +16507,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16615,7 +16615,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16669,7 +16669,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16723,7 +16723,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16777,7 +16777,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16831,7 +16831,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16885,7 +16885,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17209,7 +17209,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17263,7 +17263,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -17317,7 +17317,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -17371,7 +17371,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -17425,7 +17425,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -17479,7 +17479,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -17533,7 +17533,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -17749,7 +17749,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17803,7 +17803,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17857,7 +17857,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17911,7 +17911,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17965,7 +17965,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18019,7 +18019,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18073,7 +18073,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18127,7 +18127,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18181,7 +18181,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18397,7 +18397,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18451,7 +18451,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18505,7 +18505,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "31327",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
+     "ies": "knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
      "generic": false
     },
@@ -18559,7 +18559,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18613,7 +18613,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "31327",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
+     "ies": "knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
      "generic": false
     },
@@ -18721,7 +18721,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18775,7 +18775,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18829,7 +18829,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "31327",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
+     "ies": "knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
      "generic": false
     },
@@ -19099,7 +19099,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -19153,7 +19153,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "A9000028",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
+     "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
      "substitute": false,
      "generic": false
     },
@@ -19207,7 +19207,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -19639,7 +19639,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -19693,7 +19693,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -19747,7 +19747,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -19801,7 +19801,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41374",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41374.ies",
      "substitute": false,
      "generic": false
     },
@@ -19855,7 +19855,7 @@
     "photometry": {
      "manufacturer": "erco",
      "code": "41321",
-     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "ies": "knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -30911,7 +30911,7 @@
      "photometry": {
       "manufacturer": "erco",
       "code": "41321",
-      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+      "ies": "knowledge/lighting/ies/ERCO-41321.ies",
       "substitute": false,
       "generic": false
      }
@@ -31122,7 +31122,7 @@
      "photometry": {
       "manufacturer": "erco",
       "code": "A9000028",
-      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
+      "ies": "knowledge/lighting/ies/ERCO-A9000028.ies",
       "substitute": false,
       "generic": false
      }
@@ -31445,7 +31445,7 @@
      "photometry": {
       "manufacturer": "erco",
       "code": "41374",
-      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+      "ies": "knowledge/lighting/ies/ERCO-41374.ies",
       "substitute": false,
       "generic": false
      }
@@ -31673,7 +31673,7 @@
      "photometry": {
       "manufacturer": "erco",
       "code": "50674",
-      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-50674-x2.ies",
+      "ies": "knowledge/lighting/ies/ERCO-50674-x2.ies",
       "substitute": false,
       "generic": false
      }
@@ -32051,7 +32051,7 @@
      "photometry": {
       "manufacturer": "erco",
       "code": "31327",
-      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
+      "ies": "knowledge/lighting/ies/ERCO-31327.ies",
       "substitute": false,
       "generic": false
      }
