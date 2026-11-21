@@ -22,7 +22,8 @@ LEVEL_NAME = {"B": "B -1.80", "GF": "GF +1.20"}
 LEVELS_Z = {"B": -3.0, "GF": 0.0}      # model z (m) of the storey FFLs
 DOOR_H = 2.10                          # ASSUMED standard leaf (= villa_parking.DOOR_H)
 GARDEN_DOOR_H = 2.20                   # sliding garden doors: to the 2.30 head under the beams, less the frame
-REVEAL = 0.20                          # wall kept each side of a window or garden door on its run (the runs are
+STREET_REVEAL_D1 = 0.05                # G1 daylight option 1: D1's lounge street door keeps 50 mm of run each side
+REVEAL = 0.20                         # wall kept each side of a window or garden door on its run (the runs are
 #                                        already cut clear of the columns; was 0.40, which under-glazed every room)
 SILL, HEAD = 0.90, 2.30              # head at the beam soffit less finishes (elevation_checks)
 
@@ -184,7 +185,53 @@ def _merge(segs):
 
 def build(lay):
     from .build_cache import derived
-    return derived("revit_spec", lay, lambda: _build(lay))
+    return derived("revit_spec", lay, lambda: _close_corner_gaps(_build(lay)))
+
+
+def _close_corner_gaps(spec):
+    """Wall cleanup (plan row I05): a wall that meets a perpendicular wall only corner-to-corner leaves a notch the size of
+    the other wall's thickness (D1: B-13/B-17 against the north core wall, GF-33/GF-34 against the GF north wall; found by
+    model.validate_rules). Each such end is lengthened across the notch, unless an existing column fills it (B-16 and
+    wall B-4 meet inside the column at 14.9-15.4 m). Fixed ends are listed in spec["wall_joins_fixed"]."""
+    import math
+    from .. import villa_env as E
+    from shapely.geometry import LineString, Point, box
+    from shapely.ops import unary_union
+    cols = unary_union([box(*(v / 1000 for v in c)) for c in E.COLUMNS])
+    walls = spec["walls"]
+
+    def slab(w):
+        return LineString([(w["x0"], w["y0"]), (w["x1"], w["y1"])]).buffer(w["thickness"] / 2, cap_style="flat")
+
+    fixed = []
+    for w in walls:
+        for end in ("1", "0"):
+            px, py = w["x" + end], w["y" + end]
+            qx, qy = w["x" + ("0" if end == "1" else "1")], w["y" + ("0" if end == "1" else "1")]
+            n = math.hypot(px - qx, py - qy)
+            if n == 0:
+                continue
+            ux, uy = (px - qx) / n, (py - qy) / n
+            me = slab(w)
+            for o in walls:
+                if o is w or o["level"] != w["level"]:
+                    continue
+                ox, oy = o["x1"] - o["x0"], o["y1"] - o["y0"]
+                on = math.hypot(ox, oy)
+                if abs(ux * ox / on + uy * oy / on) > 1e-6:          # only a perpendicular wall
+                    continue
+                touch = me.intersection(slab(o))
+                if touch.is_empty or touch.geom_type != "Point" or touch.distance(Point(px, py)) > w["thickness"] / 2 + 1e-6:
+                    continue
+                notch = LineString([(px, py), (px + ux * o["thickness"], py + uy * o["thickness"])]).buffer(
+                    w["thickness"] / 2, cap_style="flat")
+                if notch.difference(cols).area < 1e-6:
+                    continue                                          # a column fills the corner
+                w["x" + end], w["y" + end] = round(px + ux * o["thickness"], 3), round(py + uy * o["thickness"], 3)
+                fixed.append(dict(level=w["level"], end=[px, py], extended_by_m=o["thickness"], across=[o["x0"], o["y0"], o["x1"], o["y1"]]))
+                break
+    spec["wall_joins_fixed"] = fixed
+    return spec
 
 
 def _build(lay):
@@ -309,11 +356,12 @@ def _build(lay):
                         spec["windows"].append({"level": lv, "x": x, "y": y, "width": 0.8, "sill": 1.5,
                                                 "height": HEAD - 1.5, "room": rid, "span": span})
         for f, lo, hi, rid in street_runs(lay, lv):
-            wd = round(hi - lo - 2 * REVEAL, 2)
+            tight = lay["id"] == "D1"             # G1 (daylight): D1's street glazing fills the run less a 50 mm reveal
+            wd = round(hi - lo - 2 * (STREET_REVEAL_D1 if tight else REVEAL), 2)
             mid = (lo + hi) / 2
             x, y = (f[1], mid) if f[0] == "v" else (mid, f[1])
             spec["doors"].append({"level": lv, "x": x, "y": y, "width": wd, "rooms": [rid, "yard"], "garden": True,
-                                  "full_height": True, "span": [f[0], f[1], lo, hi]})
+                                  "full_height": True, "span": [f[0], f[1], lo, hi], **({"tight": True} if tight else {})})
         for rid, r in lay["rooms"].items():
             if r["level"] == lv:
                 x0, y0, x1, y1 = r["rect"]
@@ -322,6 +370,10 @@ def _build(lay):
     st = _stair_model(lay)
     spec["stair"] = [p["box"] for p in st["parts"] if "headroom" not in p["what"]]
     spec["stair_name"] = st["name"]
+    spec["stair_nosing_overlap_mm"] = st.get("nosing_overlap_mm", 0)
+    # riser infill bars are NOT in spec["stair"] (checkers read every box under 300 mm high there as a tread)
+    spec["stair_infill"] = [p["box"] for p in st["infill"]["bars"]] if st.get("infill") else []
+    spec["stair_infill_spec"] = {k: v for k, v in st["infill"].items() if k != "bars"} if st.get("infill") else {}
     if "wall_datum" in st:
         spec["stair_wall_datum"] = dict(st["wall_datum"], structural_thickness_m=EXT_T)
     pk2 = lay.get("parking2")
@@ -347,6 +399,7 @@ def _build(lay):
                                      round(y1 - (bw if abs(y1 - V.YE) < 1e-6 else 0), 3)])
     if lay["id"] == "D1":
         _d1_details(lay, spec)
+        _g1_fixes(lay, spec)
     glazing_errors = deck_glazing_problems(spec)
     if glazing_errors:
         raise ValueError("; ".join(glazing_errors))
@@ -456,6 +509,104 @@ def _d1_details(lay, spec):
                                                         card="ukadf-internal-door-undercut-10" if undercut else None),
                                         operation="intermittent", rate_ls=rate, card=card,
                                         run_on_min=runon, run_on_card="ukadf-runon-timer-15min" if runon else None))
+
+
+GUARD_H_EXTERNAL = 1.1                 # policy: 1100 mm at external drops (ADK Diagram 3.1 external balcony / roof edge)
+GUARD_H_INTERNAL = 1.1                 # the GF stair void keeps the 1.1 m of the scene detail (ADK minimum 0.9 m)
+CUPBOARD_DOOR = dict(width=0.60, height=0.95, x=7.90)     # G1 LS1: door of the cupboard under the lowest treads
+
+
+def _g1_fixes(lay, spec):
+    """G1 client decisions (docs/decisions/G1-safety-decisions-2026-11-21.md), authored here so spec, Revit and
+    model see the same elements: guards (LS3), the swing of the GF core door (LS4), the cupboard under the lowest
+    11 treads (LS1). The stair's riser infill and tread overlap (LS2) come from stairs.party_flight_r8()."""
+    from . import villa_parking as P
+    B = LEVELS_Z["B"]
+    ox0, oy0, ox1, oy1 = spec["gf_opening"]
+    t = lay.get("terrace")
+    guards = [dict(
+        id="guard-gf-stair-void", level="GF", kind="guard",
+        what="guard round the GF stair void: the 3.71 m open edge on the gallery side and the return at the corridor",
+        path=[[ox0, oy1, 0.0], [ox1, oy1, 0.0], [ox1, oy0, 0.0]], height_m=GUARD_H_INTERNAL, drop_m=-B,
+        infill="glass", material="laminated glass 2 x 6 mm, clear, in a base shoe", thickness_m=0.012,
+        max_opening_mm=0.0, climbable=False, top_rail="none (frameless)",
+        basis="G1 LS3: the scene already draws this guard (villa_render detail-stair-guard, 1.1 m, 10 mm glass); the "
+              "stair's own glass (0.9 m above the nosings) ends at the top step")]
+    if t:
+        tx0, ty0, tx1, ty1 = t
+        inset = 0.05
+        ye = round(ty1 - inset - 0.05, 3)              # 100 mm inside the ramp-edge rail that already stands on y = ty1
+        guards.append(dict(
+            id="guard-gf-terrace-edge", level="GF", kind="guard",
+            what="guard along the GF front terrace edge over the north patio (west edge) and its ramp side",
+            path=[[round(tx0 + inset, 3), ty0, 0.0], [round(tx0 + inset, 3), ye, 0.0], [tx1, ye, 0.0]],
+            height_m=GUARD_H_EXTERNAL, drop_m=-B, infill="glass",
+            material="laminated glass 2 x 6 mm, clear, in a base shoe", thickness_m=0.012, max_opening_mm=0.0,
+            climbable=False, top_rail="none (frameless)",
+            basis="G1 LS3: 3.0 m drop from the terrace slab to the patio floor; the ramp side drops 0.55-0.92 m to the "
+                  "ramp (ramp-edge rail tops only 0.2-0.55 m above the terrace floor)"))
+    np_ = lay.get("north_patio")
+    if np_:
+        px0, py0, px1, py1 = np_["rect"]
+        cov = np_["covered"][0] if np_.get("covered") else px1
+        guards.append(dict(
+            id="guard-entrance-steps-patio-edge", level="SITE", kind="guard",
+            what="guard on the shared entrance steps' edge over the open north patio court",
+            path=[[px0, round(py0 - 0.05, 3), 0.0], [cov, round(py0 - 0.05, 3), 0.0]], height_m=GUARD_H_EXTERNAL,
+            drop_m=-B, drop_min_m=-B - 1.2, infill="vertical flat bars",
+            material="stainless flat bars 25 x 6 mm at 100 mm centres (75 mm clear), top rail 40 x 20 mm",
+            thickness_m=0.006, max_opening_mm=75.0, climbable=False, top_rail="stainless flat 40 x 20 mm",
+            bar_w_mm=25.0, bar_pitch_mm=100.0,
+            basis="G1 LS3: villa_env models the entrance-steps block top at GF level (z 0), so the drop to the patio floor "
+                  "is 3.0 m here; the real steps rise from the street (1.8 m drop at the gate end). The steps are "
+                  "shared (not ours): the guard stands on their edge, inside our plot line"))
+    spec["guards"] = guards
+    # ---- LS4: the GF core door swings outward, away from the stair (author the swing; hinge on the far jamb)
+    door = next(d for d in spec["doors"] if d["level"] == "GF" and set(d["rooms"]) == {"landing-gf", "core"})
+    hinge_x = round(door["x"] - door["width"] / 2, 3)
+    door["swing"] = dict(into="core", direction="outward", hinge_side="west", hinge_x=hinge_x, arc_radius=door["width"],
+                         near_jamb_to_top_step=round(ox0 - (door["x"] + door["width"] / 2), 3),
+                         basis="G1 LS4: opens into the shared entrance lobby, away from the flight: the leaf sweeps "
+                               "x %.3f-%.3f, y beyond the core wall, nothing over the stair top landing"
+                               % (hinge_x, hinge_x + door["width"]))
+    # ---- LS1: cupboard under the lowest treads (underside < 2.0 m above the basement floor)
+    floor_mm = B * 1000
+    lo = [b for b in spec["stair"] if b[5] - b[2] < 300 and b[2] - floor_mm < 2000.0]
+    x_front, x_end = max(b[3] for b in lo) / 1000, min(b[0] for b in lo) / 1000
+    y0s, y1s = min(b[1] for b in lo) / 1000, max(b[4] for b in lo) / 1000
+    under = lambda b: round((b[2] - floor_mm) / 1000, 4)                # noqa: E731  underside above the floor, m
+    going = (max(b[3] for b in lo) - min(b[3] for b in lo)) / (len(lo) - 1) / 1000 if len(lo) > 1 else 0.28
+    steps = sorted(lo, key=lambda b: -b[3])
+    profile, vol = [], 0.0
+    for i, b in enumerate(steps):                                        # wall top follows each tread's underside
+        xa = b[3] / 1000
+        xb = round(xa - going, 3) if i < len(steps) - 1 else x_end
+        profile.append([xa, xb, under(b)])
+    wt, back = 0.10, round(spec["stair_wall_datum"]["outer_face_mm"] / 1000 + spec["stair_wall_datum"]["structural_thickness_m"], 3)
+    y_in = round(y1s - wt, 3)
+    for xa, xb, h in profile:
+        vol += (xa - xb - (wt if xb == x_end else 0) - (wt if xa == x_front else 0)) * (y_in - back) * h
+    side = dict(id="understair-cupboard-side", x0=x_end, y0=round(y1s - wt / 2, 3), x1=x_front, y1=round(y1s - wt / 2, 3),
+                thickness=wt, top_profile=profile, role="side wall on the open side, top stepping with the treads")
+    front = dict(id="understair-cupboard-front", x0=round(x_front - wt / 2, 3), y0=back, x1=round(x_front - wt / 2, 3),
+                 y1=y1s, thickness=wt, height=under(steps[0]), role="toe panel under tread 1")
+    end = dict(id="understair-cupboard-end", x0=round(x_end + wt / 2, 3), y0=back, x1=round(x_end + wt / 2, 3), y1=y1s,
+               thickness=wt, height=under(steps[-1]), role="end wall under tread %d" % len(steps))
+    d = CUPBOARD_DOOR
+    dx0, dx1 = d["x"] - d["width"] / 2, d["x"] + d["width"] / 2
+    cover = min(under(b) for b in steps if b[0] / 1000 < dx1 and b[3] / 1000 > dx0)
+    if cover < d["height"]:
+        raise ValueError("cupboard door head %.2f m is above the stair soffit %.3f m" % (d["height"], cover))
+    spec["understair_cupboard"] = dict(
+        id="understair-cupboard", level="B", room="stair-b", treads=len(steps), x0=x_end, x1=x_front, y0=back, y1=y1s,
+        interior=[round(x_end + wt, 3), back, round(x_front - wt, 3), y_in], enclosed=True,
+        soffit_min_m=under(steps[0]), soffit_max_m=under(steps[-1]), volume_m3=round(vol, 2), walls=[side, front, end],
+        door=dict(id="door-understair-cupboard", wall=side["id"], x=d["x"], y=side["y0"], width=d["width"],
+                  height=d["height"], operation="hinged", hinge_side="east", swing_into="lounge",
+                  soffit_over_door_m=cover, level="B", rooms=["stair-b", "lounge"],
+                  basis="G1 LS1: 0.60 x 0.95 m low access leaf in the side wall under treads 6-8 (soffit >= 1.0 m), east of the lounge sofa (x 7.52) so its swing is clear"),
+        basis="G1 LS1: enclose the space under the lowest %d treads (soffit < 2.0 m) as a cupboard: side wall, toe panel, "
+              "end wall, one door; treads and riser infill stay open above" % len(steps))
 
 
 def sanitary_extract_requirement(items, room):
@@ -618,7 +769,7 @@ def _clear_columns(spec):
                 continue                               # does not fit: left in place for the post-condition to catch
             mid = round((a + b) / 2, 3)
         else:
-            width = round(min(o["width"], b - a - 0.2), 2)
+            width = round(min(o["width"], b - a - (2 * STREET_REVEAL_D1 if o.get("tight") else 0.2)), 2)
             if width < min_w:
                 o["dropped"] = "column-free run %.2f m" % (b - a)
                 continue
