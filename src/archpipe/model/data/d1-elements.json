@@ -41,11 +41,11 @@
   "context": 58,
   "door": 18,
   "fixture": 7,
-  "furniture": 80,
+  "furniture": 81,
   "garden": 14,
   "luminaire": 142,
   "plant": 80,
-  "railing": 6,
+  "railing": 8,
   "room": 30,
   "slab": 4,
   "stair": 1,
@@ -3326,6 +3326,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "lounge-nook",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "swings into lounge-nook",
     "leaf_width_mm": 800.0,
     "structural_opening_mm": 900.0,
@@ -3367,6 +3371,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "",
+    "swing_known": false,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "direction not authored: swing squares kept clear on both sides",
     "leaf_width_mm": 900.0,
     "structural_opening_mm": 1000.0,
@@ -3408,6 +3416,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "",
+    "swing_known": false,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "direction not authored: swing squares kept clear on both sides",
     "leaf_width_mm": 800.0,
     "structural_opening_mm": 900.0,
@@ -3449,6 +3461,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "",
+    "swing_known": false,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "direction not authored: swing squares kept clear on both sides",
     "leaf_width_mm": 800.0,
     "structural_opening_mm": 900.0,
@@ -3490,6 +3506,10 @@
     "type": "",
     "operation": "sliding",
     "swing_into": "",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "no swing",
     "leaf_width_mm": 1200.0,
     "structural_opening_mm": 1300.0,
@@ -3536,6 +3556,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "",
+    "swing_known": false,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "direction not authored: swing squares kept clear on both sides",
     "leaf_width_mm": 1000.0,
     "structural_opening_mm": 1100.0,
@@ -3582,6 +3606,10 @@
     "type": "",
     "operation": "sliding",
     "swing_into": "",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "no swing",
     "leaf_width_mm": 2350.0,
     "structural_opening_mm": 2450.0,
@@ -3628,6 +3656,10 @@
     "type": "",
     "operation": "sliding",
     "swing_into": "",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "no swing",
     "leaf_width_mm": 2760.0,
     "structural_opening_mm": 2860.0,
@@ -3674,6 +3706,10 @@
     "type": "",
     "operation": "sliding",
     "swing_into": "",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "no swing",
     "leaf_width_mm": 2400.0,
     "structural_opening_mm": 2500.0,
@@ -3694,7 +3730,7 @@
    ],
    "rotation_deg": 90.0,
    "size": [
-    3410.0,
+    3710.0,
     200.0,
     2200.0
    ],
@@ -3707,7 +3743,7 @@
      "lounge",
      "yard"
     ],
-    "width_mm": 3410.0,
+    "width_mm": 3710.0,
     "height_mm": 2200.0,
     "clear_mm": null,
     "fit": "",
@@ -3720,10 +3756,14 @@
     "type": "",
     "operation": "sliding",
     "swing_into": "",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "no swing",
-    "leaf_width_mm": 3410.0,
-    "structural_opening_mm": 3510.0,
-    "clear_width_mm": 3410.0,
+    "leaf_width_mm": 3710.0,
+    "structural_opening_mm": 3810.0,
+    "clear_width_mm": 3710.0,
     "clear_width_basis": "single sliding leaf: authored width taken as the opening (leaf overlap not authored)",
     "leaf_count": null,
     "garden": true
@@ -3766,6 +3806,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "",
+    "swing_known": false,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "direction not authored: swing squares kept clear on both sides",
     "leaf_width_mm": 900.0,
     "structural_opening_mm": 1000.0,
@@ -3812,6 +3856,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "",
+    "swing_known": false,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "direction not authored: swing squares kept clear on both sides",
     "leaf_width_mm": 900.0,
     "structural_opening_mm": 1000.0,
@@ -3858,6 +3906,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "parents-dressing",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "swings into parents-dressing",
     "leaf_width_mm": 800.0,
     "structural_opening_mm": 900.0,
@@ -3904,6 +3956,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "",
+    "swing_known": false,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "direction not authored: swing squares kept clear on both sides",
     "leaf_width_mm": 800.0,
     "structural_opening_mm": 900.0,
@@ -3950,6 +4006,10 @@
     "type": "",
     "operation": "pocket",
     "swing_into": "",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "no swing",
     "leaf_width_mm": 900.0,
     "structural_opening_mm": 1000.0,
@@ -3996,6 +4056,10 @@
     "type": "",
     "operation": "hinged",
     "swing_into": "",
+    "swing_known": false,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "direction not authored: swing squares kept clear on both sides",
     "leaf_width_mm": 800.0,
     "structural_opening_mm": 900.0,
@@ -4041,8 +4105,12 @@
     ],
     "type": "",
     "operation": "hinged",
-    "swing_into": "",
-    "swing_basis": "direction not authored: swing squares kept clear on both sides",
+    "swing_into": "core",
+    "swing_known": true,
+    "hinge_side": "west",
+    "swing_direction": "outward",
+    "near_jamb_to_top_step_mm": 75.0,
+    "swing_basis": "G1 LS4: opens into the shared entrance lobby, away from the flight: the leaf sweeps x 4.102-5.102, y beyond the core wall, nothing over the stair top landing",
     "leaf_width_mm": 1000.0,
     "structural_opening_mm": 1100.0,
     "clear_width_mm": 1000.0,
@@ -4083,6 +4151,10 @@
     "type": "",
     "operation": "sliding",
     "swing_into": "",
+    "swing_known": true,
+    "hinge_side": "",
+    "swing_direction": "",
+    "near_jamb_to_top_step_mm": null,
     "swing_basis": "no swing",
     "leaf_width_mm": 1800.0,
     "structural_opening_mm": 1900.0,
@@ -4410,7 +4482,7 @@
     "run_mm": 4480.0,
     "tread_boxes_mm": [
      [
-      9377.0,
+      9361.0,
       -28421,
       -2883.529411764706,
       9657.0,
@@ -4418,7 +4490,7 @@
       -2823.529411764706
      ],
      [
-      9097.0,
+      9081.0,
       -28421,
       -2707.0588235294117,
       9377.0,
@@ -4426,7 +4498,7 @@
       -2647.0588235294117
      ],
      [
-      8817.0,
+      8801.0,
       -28421,
       -2530.5882352941176,
       9097.0,
@@ -4434,7 +4506,7 @@
       -2470.5882352941176
      ],
      [
-      8537.0,
+      8521.0,
       -28421,
       -2354.1176470588234,
       8817.0,
@@ -4442,7 +4514,7 @@
       -2294.1176470588234
      ],
      [
-      8257.0,
+      8241.0,
       -28421,
       -2177.6470588235293,
       8537.0,
@@ -4450,7 +4522,7 @@
       -2117.6470588235293
      ],
      [
-      7977.0,
+      7961.0,
       -28421,
       -2001.1764705882354,
       8257.0,
@@ -4458,7 +4530,7 @@
       -1941.1764705882354
      ],
      [
-      7697.0,
+      7681.0,
       -28421,
       -1824.7058823529412,
       7977.0,
@@ -4466,7 +4538,7 @@
       -1764.7058823529412
      ],
      [
-      7417.0,
+      7401.0,
       -28421,
       -1648.235294117647,
       7697.0,
@@ -4474,7 +4546,7 @@
       -1588.235294117647
      ],
      [
-      7137.0,
+      7121.0,
       -28421,
       -1471.764705882353,
       7417.0,
@@ -4482,7 +4554,7 @@
       -1411.764705882353
      ],
      [
-      6857.0,
+      6841.0,
       -28421,
       -1295.2941176470588,
       7137.0,
@@ -4490,7 +4562,7 @@
       -1235.2941176470588
      ],
      [
-      6577.0,
+      6561.0,
       -28421,
       -1118.8235294117646,
       6857.0,
@@ -4498,7 +4570,7 @@
       -1058.8235294117646
      ],
      [
-      6297.0,
+      6281.0,
       -28421,
       -942.3529411764707,
       6577.0,
@@ -4506,7 +4578,7 @@
       -882.3529411764707
      ],
      [
-      6017.0,
+      6001.0,
       -28421,
       -765.8823529411766,
       6297.0,
@@ -4514,7 +4586,7 @@
       -705.8823529411766
      ],
      [
-      5737.0,
+      5721.0,
       -28421,
       -589.4117647058824,
       6017.0,
@@ -4522,7 +4594,7 @@
       -529.4117647058824
      ],
      [
-      5457.0,
+      5441.0,
       -28421,
       -412.9411764705883,
       5737.0,
@@ -4557,7 +4629,152 @@
      -352.9,
      -176.5
     ],
-    "nosing_note": "tread depth is the going between riser faces as authored in revit_spec (no nosing overlap)"
+    "going_mm": 280.0,
+    "tread_depth_mm": 296.0,
+    "nosing_overlap_mm": 16,
+    "tread_thickness_mm": 60.0,
+    "riser_infill": {
+     "type": "horizontal flat bar",
+     "bar_h_mm": 40,
+     "bar_t_mm": 10,
+     "gap_mm": 116.47058823529412,
+     "max_clear_opening_mm": 38.24,
+     "count": 15,
+     "present": true,
+     "bar_boxes_mm": [
+      [
+       9367.0,
+       -28421,
+       -2785.294117647059,
+       9377.0,
+       -27471,
+       -2745.294117647059
+      ],
+      [
+       9087.0,
+       -28421,
+       -2608.823529411765,
+       9097.0,
+       -27471,
+       -2568.823529411765
+      ],
+      [
+       8807.0,
+       -28421,
+       -2432.3529411764707,
+       8817.0,
+       -27471,
+       -2392.3529411764707
+      ],
+      [
+       8527.0,
+       -28421,
+       -2255.8823529411766,
+       8537.0,
+       -27471,
+       -2215.8823529411766
+      ],
+      [
+       8247.0,
+       -28421,
+       -2079.4117647058824,
+       8257.0,
+       -27471,
+       -2039.4117647058824
+      ],
+      [
+       7967.0,
+       -28421,
+       -1902.9411764705883,
+       7977.0,
+       -27471,
+       -1862.9411764705883
+      ],
+      [
+       7687.0,
+       -28421,
+       -1726.4705882352941,
+       7697.0,
+       -27471,
+       -1686.4705882352941
+      ],
+      [
+       7407.0,
+       -28421,
+       -1550.0,
+       7417.0,
+       -27471,
+       -1510.0
+      ],
+      [
+       7127.0,
+       -28421,
+       -1373.5294117647059,
+       7137.0,
+       -27471,
+       -1333.5294117647059
+      ],
+      [
+       6847.0,
+       -28421,
+       -1197.0588235294117,
+       6857.0,
+       -27471,
+       -1157.0588235294117
+      ],
+      [
+       6567.0,
+       -28421,
+       -1020.5882352941176,
+       6577.0,
+       -27471,
+       -980.5882352941176
+      ],
+      [
+       6287.0,
+       -28421,
+       -844.1176470588236,
+       6297.0,
+       -27471,
+       -804.1176470588236
+      ],
+      [
+       6007.0,
+       -28421,
+       -667.6470588235295,
+       6017.0,
+       -27471,
+       -627.6470588235295
+      ],
+      [
+       5727.0,
+       -28421,
+       -491.17647058823536,
+       5737.0,
+       -27471,
+       -451.17647058823536
+      ],
+      [
+       5447.0,
+       -28421,
+       -314.7058823529412,
+       5457.0,
+       -27471,
+       -274.7058823529412
+      ]
+     ],
+     "sphere_test_mm": 100.0,
+     "openings_above_and_below_bar_mm": 38.24,
+     "basis": "a horizontal flat bar 40 x 10 mm centred in each 116.5 mm gap between treads leaves two openings of 38.2 mm: no 100 mm sphere passes (ADK 1.9)"
+    },
+    "under_flight": {
+     "enclosed": true,
+     "cupboard_id": "joinery-understair-cupboard",
+     "treads_enclosed": 11,
+     "soffit_min_mm": 116.5,
+     "soffit_max_mm": 1881.2
+    },
+    "nosing_note": "tread_mm is the going (nosing to nosing, unchanged by the overlap); each tread but the top one runs tread_depth_mm - going_mm under the next nosing (ADK 1.9a)"
    }
   },
   {
@@ -4565,13 +4782,13 @@
    "kind": "railing",
    "level": "B",
    "placement": [
-    7417.0,
+    7413.0,
     -27471.0,
     0.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    4200.0,
+    4192.0,
     0.0,
     900.0
    ],
@@ -4593,77 +4810,77 @@
       -176.0
      ],
      [
-      5597.0,
+      5589.0,
       -27471.0,
       -353.0
      ],
      [
-      5877.0,
+      5869.0,
       -27471.0,
       -529.0
      ],
      [
-      6157.0,
+      6149.0,
       -27471.0,
       -706.0
      ],
      [
-      6437.0,
+      6429.0,
       -27471.0,
       -882.0
      ],
      [
-      6717.0,
+      6709.0,
       -27471.0,
       -1059.0
      ],
      [
-      6997.0,
+      6989.0,
       -27471.0,
       -1235.0
      ],
      [
-      7277.0,
+      7269.0,
       -27471.0,
       -1412.0
      ],
      [
-      7557.0,
+      7549.0,
       -27471.0,
       -1588.0
      ],
      [
-      7837.0,
+      7829.0,
       -27471.0,
       -1765.0
      ],
      [
-      8117.0,
+      8109.0,
       -27471.0,
       -1941.0
      ],
      [
-      8397.0,
+      8389.0,
       -27471.0,
       -2118.0
      ],
      [
-      8677.0,
+      8669.0,
       -27471.0,
       -2294.0
      ],
      [
-      8957.0,
+      8949.0,
       -27471.0,
       -2471.0
      ],
      [
-      9237.0,
+      9229.0,
       -27471.0,
       -2647.0
      ],
      [
-      9517.0,
+      9509.0,
       -27471.0,
       -2824.0
      ]
@@ -4676,13 +4893,13 @@
    "kind": "railing",
    "level": "B",
    "placement": [
-    7417.0,
+    7413.0,
     -28671.0,
     0.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    4200.0,
+    4192.0,
     0.0,
     900.0
    ],
@@ -4704,77 +4921,77 @@
       -176.0
      ],
      [
-      5597.0,
+      5589.0,
       -28671.0,
       -353.0
      ],
      [
-      5877.0,
+      5869.0,
       -28671.0,
       -529.0
      ],
      [
-      6157.0,
+      6149.0,
       -28671.0,
       -706.0
      ],
      [
-      6437.0,
+      6429.0,
       -28671.0,
       -882.0
      ],
      [
-      6717.0,
+      6709.0,
       -28671.0,
       -1059.0
      ],
      [
-      6997.0,
+      6989.0,
       -28671.0,
       -1235.0
      ],
      [
-      7277.0,
+      7269.0,
       -28671.0,
       -1412.0
      ],
      [
-      7557.0,
+      7549.0,
       -28671.0,
       -1588.0
      ],
      [
-      7837.0,
+      7829.0,
       -28671.0,
       -1765.0
      ],
      [
-      8117.0,
+      8109.0,
       -28671.0,
       -1941.0
      ],
      [
-      8397.0,
+      8389.0,
       -28671.0,
       -2118.0
      ],
      [
-      8677.0,
+      8669.0,
       -28671.0,
       -2294.0
      ],
      [
-      8957.0,
+      8949.0,
       -28671.0,
       -2471.0
      ],
      [
-      9237.0,
+      9229.0,
       -28671.0,
       -2647.0
      ],
      [
-      9517.0,
+      9509.0,
       -28671.0,
       -2824.0
      ]
@@ -4788,13 +5005,13 @@
    "level": "GF",
    "placement": [
     7032.0,
-    -27471.0,
+    -27946.0,
     0.0
    ],
    "rotation_deg": 0.0,
    "size": [
     3710.0,
-    10.0,
+    950.0,
     1100.0
    ],
    "host": "",
@@ -4802,18 +5019,158 @@
    "product_id": "",
    "finish_codes": [],
    "params": {
+    "what": "guard round the GF stair void: the 3.71 m open edge on the gallery side and the return at the corridor",
     "guard_height_mm": 1100.0,
-    "material": "laminated glass, 10 mm closed pane",
+    "material": "laminated glass 2 x 6 mm, clear, in a base shoe",
+    "infill": "glass",
+    "glazed": true,
+    "max_opening_mm": 0.0,
+    "climbable": false,
+    "top_rail": "none (frameless)",
+    "thickness_mm": 12.0,
+    "kind": "guard",
+    "path_mm": [
+     [
+      5177.0,
+      -27471.0,
+      0.0
+     ],
+     [
+      8887.0,
+      -27471.0,
+      0.0
+     ],
+     [
+      8887.0,
+      -28421.0,
+      0.0
+     ]
+    ],
     "edge_lengths_mm": [
      3710.0,
      950.0
     ],
     "length_mm": 4660.0,
     "drop_mm": 3000.0,
-    "in_revit_spec": false,
+    "drop_min_mm": 3000.0,
+    "in_revit_spec": true,
     "in_scene": true,
     "scene_mesh": "detail-stair-guard",
-    "basis": "villa_render detail (required, not yet in the Revit model); height 1.1 m assumed there"
+    "basis": "G1 LS3: the scene already draws this guard (villa_render detail-stair-guard, 1.1 m, 10 mm glass); the stair's own glass (0.9 m above the nosings) ends at the top step"
+   }
+  },
+  {
+   "id": "rail-gf-terrace-edge",
+   "kind": "railing",
+   "level": "GF",
+   "placement": [
+    2727.0,
+    -26181.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1780.0,
+    4980.0,
+    1100.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "what": "guard along the GF front terrace edge over the north patio (west edge) and its ramp side",
+    "guard_height_mm": 1100.0,
+    "material": "laminated glass 2 x 6 mm, clear, in a base shoe",
+    "infill": "glass",
+    "glazed": true,
+    "max_opening_mm": 0.0,
+    "climbable": false,
+    "top_rail": "none (frameless)",
+    "thickness_mm": 12.0,
+    "kind": "guard",
+    "path_mm": [
+     [
+      1837.0,
+      -28671.0,
+      0.0
+     ],
+     [
+      1837.0,
+      -23691.0,
+      0.0
+     ],
+     [
+      3617.0,
+      -23691.0,
+      0.0
+     ]
+    ],
+    "edge_lengths_mm": [
+     4980.0,
+     1780.0
+    ],
+    "length_mm": 6760.0,
+    "drop_mm": 3000.0,
+    "drop_min_mm": 3000.0,
+    "in_revit_spec": true,
+    "in_scene": false,
+    "scene_mesh": "",
+    "basis": "G1 LS3: 3.0 m drop from the terrace slab to the patio floor; the ramp side drops 0.55-0.92 m to the ramp (ramp-edge rail tops only 0.2-0.55 m above the terrace floor)"
+   }
+  },
+  {
+   "id": "rail-patio-steps-edge",
+   "kind": "railing",
+   "level": "SITE",
+   "placement": [
+    832.0,
+    -28721.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    1910.0,
+    0.0,
+    1100.0
+   ],
+   "host": "",
+   "room": "",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "what": "guard on the shared entrance steps' edge over the open north patio court",
+    "guard_height_mm": 1100.0,
+    "material": "stainless flat bars 25 x 6 mm at 100 mm centres (75 mm clear), top rail 40 x 20 mm",
+    "infill": "vertical flat bars",
+    "glazed": false,
+    "max_opening_mm": 75.0,
+    "climbable": false,
+    "top_rail": "stainless flat 40 x 20 mm",
+    "thickness_mm": 6.0,
+    "kind": "guard",
+    "path_mm": [
+     [
+      -123.0,
+      -28721.0,
+      0.0
+     ],
+     [
+      1787.0,
+      -28721.0,
+      0.0
+     ]
+    ],
+    "edge_lengths_mm": [
+     1910.0
+    ],
+    "length_mm": 1910.0,
+    "drop_mm": 3000.0,
+    "drop_min_mm": 1800.0,
+    "in_revit_spec": true,
+    "in_scene": false,
+    "scene_mesh": "",
+    "basis": "G1 LS3: villa_env models the entrance-steps block top at GF level (z 0), so the drop to the patio floor is 3.0 m here; the real steps rise from the street (1.8 m drop at the gate end). The steps are shared (not ours): the guard stands on their edge, inside our plot line"
    }
   },
   {
@@ -5094,8 +5451,10 @@
     "area_m2": 9.2964,
     "drop_to_patio_mm": 3000.0,
     "drop_to_street_mm": 1200.0,
-    "guard_present": false,
-    "guard_basis": "no guard or parapet for the terrace edge in revit_spec, villa_render or villa_env (the apartment-above terrace has an assumed 1.1 m parapet zone, not ours)"
+    "guard_present": true,
+    "guard_id": "rail-gf-terrace-edge",
+    "guard_height_mm": 1100.0,
+    "guard_basis": "G1 guard on the terrace edge (west edge and ramp side), G1 LS3: 3.0 m drop from the terrace slab to the patio floor; the ramp side drops 0.55-0.92 m to the ramp (ramp-edge rail tops only 0.2-0.55 m above the terrace floor)"
    }
   },
   {
@@ -6641,9 +7000,10 @@
     "note": "shared entrance steps from the street gate up to the core's GF entrance (PDF)",
     "z0_scene_mm": -1200,
     "z1_scene_mm": 0,
-    "guard_present": false,
+    "guard_present": true,
+    "guard_id": "rail-patio-steps-edge",
     "drop_mm": 1200,
-    "guard_basis": "shared entrance steps (not ours); no guard in villa_env, spec or scene"
+    "guard_basis": "shared entrance steps (not ours): G1 guard on their edge over the open patio court (rail-patio-steps-edge)"
    }
   },
   {
@@ -7728,8 +8088,12 @@
     "sunken": true,
     "ground_scene_mm": -3000,
     "floor_below_street_mm": 1800.0,
-    "guard_present": false,
-    "guard_basis": "no guard on the patio edge in spec, villa_render or villa_env (only the ramp-edge rails of revit_spec.rails exist)",
+    "guard_present": true,
+    "guard_ids": [
+     "rail-patio-steps-edge",
+     "rail-gf-terrace-edge"
+    ],
+    "guard_basis": "the patio is the low side: its edges are guarded from above (ramp-edge rail, GF terrace edge, entrance-steps edge); occupants are at the bottom of the drop",
     "covered_rect_mm": [
      [
       1787.0,
@@ -7748,6 +8112,144 @@
       -23841.0
      ]
     ]
+   }
+  },
+  {
+   "id": "joinery-understair-cupboard",
+   "kind": "furniture",
+   "level": "B",
+   "placement": [
+    8109.0,
+    -27971.0,
+    0.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    3096.0,
+    1000.0,
+    1881.2
+   ],
+   "host": "",
+   "room": "stair-b",
+   "product_id": "",
+   "finish_codes": [],
+   "params": {
+    "type": "understair-cupboard",
+    "enclosed": true,
+    "treads_enclosed": 11,
+    "interior_mm": [
+     6661.0,
+     -28471.0,
+     9557.0,
+     -27571.0
+    ],
+    "soffit_min_mm": 116.5,
+    "soffit_max_mm": 1881.2,
+    "volume_m3": 2.62,
+    "walls": [
+     {
+      "id": "understair-cupboard-side",
+      "role": "side wall on the open side, top stepping with the treads",
+      "x0_mm": 6561.0,
+      "y0_mm": -27521.0,
+      "x1_mm": 9657.0,
+      "y1_mm": -27521.0,
+      "thickness_mm": 100.0,
+      "height_mm": null,
+      "top_profile_mm": [
+       [
+        9657.0,
+        9377.0,
+        116.5
+       ],
+       [
+        9377.0,
+        9097.0,
+        292.9
+       ],
+       [
+        9097.0,
+        8817.0,
+        469.4
+       ],
+       [
+        8817.0,
+        8537.0,
+        645.9
+       ],
+       [
+        8537.0,
+        8257.0,
+        822.4
+       ],
+       [
+        8257.0,
+        7977.0,
+        998.8
+       ],
+       [
+        7977.0,
+        7697.0,
+        1175.3
+       ],
+       [
+        7697.0,
+        7417.0,
+        1351.8
+       ],
+       [
+        7417.0,
+        7137.0,
+        1528.2
+       ],
+       [
+        7137.0,
+        6857.0,
+        1704.7
+       ],
+       [
+        6857.0,
+        6561.0,
+        1881.2
+       ]
+      ]
+     },
+     {
+      "id": "understair-cupboard-front",
+      "role": "toe panel under tread 1",
+      "x0_mm": 9607.0,
+      "y0_mm": -28471.0,
+      "x1_mm": 9607.0,
+      "y1_mm": -27471.0,
+      "thickness_mm": 100.0,
+      "height_mm": 116.5,
+      "top_profile_mm": null
+     },
+     {
+      "id": "understair-cupboard-end",
+      "role": "end wall under tread 11",
+      "x0_mm": 6611.0,
+      "y0_mm": -28471.0,
+      "x1_mm": 6611.0,
+      "y1_mm": -27471.0,
+      "thickness_mm": 100.0,
+      "height_mm": 1881.2,
+      "top_profile_mm": null
+     }
+    ],
+    "door": {
+     "id": "door-understair-cupboard",
+     "x_mm": 7900.0,
+     "y_mm": -27521.0,
+     "width_mm": 600.0,
+     "height_mm": 950.0,
+     "operation": "hinged",
+     "hinge_side": "east",
+     "swing_into": "lounge",
+     "soffit_over_door_mm": 998.8,
+     "basis": "G1 LS1: 0.60 x 0.95 m low access leaf in the side wall under treads 6-8 (soffit >= 1.0 m), east of the lounge sofa (x 7.52) so its swing is clear"
+    },
+    "basis": "G1 LS1: enclose the space under the lowest 11 treads (soffit < 2.0 m) as a cupboard: side wall, toe panel, end wall, one door; treads and riser infill stay open above"
    }
   },
   {
@@ -10120,7 +10622,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    7277.0,
+    7269.0,
     -28469.0,
     1838.0
    ],
@@ -10172,7 +10674,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    8117.0,
+    8109.0,
     -28469.0,
     1309.0
    ],
@@ -10224,7 +10726,7 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    8957.0,
+    8949.0,
     -28469.0,
     779.0
    ],
@@ -17568,7 +18070,7 @@
    "kind": "plant",
    "level": "SITE",
    "placement": [
-    3400.0,
+    3000.0,
     -24170.0,
     0.0
    ],
