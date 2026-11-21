@@ -92,8 +92,16 @@ def run(villa, rad_dir: Path, work: Path = ROOT / "out" / "LV" / "cycles", with_
     from ..lightcalc.direct import direct_illuminance
     from ..lightcalc.villa import MF
     L = LayerResult("V5")
+    from ..lightcalc.villa import CLUSTERS, cluster_of
     by_cluster = {}
-    for label, (cl, pids) in ROOMS.items():
+    rooms = dict(ROOMS)
+    if not getattr(run, "headline_only", False):          # every other cluster too: its planes, labelled by cluster
+        for cl in CLUSTERS:
+            if cl not in {c for c, _ in ROOMS.values()}:
+                pl = [p.id for p in villa.planes() if cluster_of(p.room) == cl]
+                if pl:
+                    rooms[cl] = (cl, pl)
+    for label, (cl, pids) in rooms.items():
         by_cluster.setdefault(cl, []).append((label, pids))
     cyc = {}
     for cl, items in by_cluster.items():
@@ -151,7 +159,6 @@ def run(villa, rad_dir: Path, work: Path = ROOT / "out" / "LV" / "cycles", with_
                 msg.append("Cycles not run")
             L.table.append(row)
             L.results.append(check("LV5", status, label, SRC, achieved=round(rt, 1), unit="lx", message="; ".join(msg)))
-            for pid in pids:
-                if pid in samples:
-                    L.mark(samples[pid][0].room, status)
+            for r in CLUSTERS[cl]:                      # the three engines share one closed volume per cluster
+                L.mark(r, status)
     return L

@@ -81,7 +81,7 @@ def _full_planes(d: IesData):
         for a, v in zip(c, cd):
             out[360 - a] = v
         keys = sorted(out)
-    elif lo == 0 and hi == 360:
+    elif lo == 0 and hi > 180:                      # full circle (360 itself omitted: closed by plane 0 below)
         out = {a: v for a, v in zip(c, cd)}
         keys = sorted(out)
     elif lo == 90 and hi == 270:                    # symmetric about 90-270

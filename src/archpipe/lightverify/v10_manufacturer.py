@@ -45,6 +45,16 @@ def cone(d: ies.IesData, dist: float) -> dict:
     return out
 
 
+def cross_check(di, dl) -> tuple:
+    """(ok, worst axis-point difference) of the same product's .ies and .ldt: lumens, watts, peak and 8 points on C0/C90."""
+    li, ll = ies.lumens(di), ies.lumens(dl)
+    axis = [(g, c) for g in (0, 10, 20, 30, 60) for c in (0.0, 90.0)]
+    worst = max((abs(ies.candela(di, g, c) / ies.candela(dl, g, c) - 1) for g, c in axis if ies.candela(dl, g, c) > 50), default=0.0)
+    ok = (abs(li / ll - 1) < 0.01 and worst < 0.01 and abs(di.input_watts - dl.input_watts) < 0.05
+          and abs(ies.peak_cd(di) / ies.peak_cd(dl) - 1) < 0.01)
+    return ok, worst
+
+
 def engine_axis(code: str, ies_path: Path, dist: float) -> float:
     from ..lightcalc.direct import Placement, direct_illuminance
     from ..photometry import load
@@ -68,9 +78,7 @@ def run() -> LayerResult:
             L.results.append(check("LV10", "pass" if ok else "fail", "%s/%s" % (code, name), SRC, achieved=ach, required=req, unit=unit, message=msg))
             rows.append((name, ok, msg))
 
-        axis = [(g, c) for g in (0, 10, 20, 30) for c in (0.0, 90.0)]
-        worst = max(abs(ies.candela(di, g, c) / max(1e-9, ies.candela(dl, g, c)) - 1) for g, c in axis if ies.candela(dl, g, c) > 50)
-        ok = abs(li / ll - 1) < 0.01 and worst < 0.01 and abs(di.input_watts - dl.input_watts) < 0.05 and abs(ies.peak_cd(di) / ies.peak_cd(dl) - 1) < 0.01
+        ok, worst = cross_check(di, dl)
         add("ies-vs-ldt", ok, ".ies %.1f lm / %.2f W / peak %.0f cd; .ldt %.1f lm / %.2f W / peak %.0f cd; worst axis-point difference %.2f %%"
             % (li, di.input_watts, ies.peak_cd(di), ll, dl.input_watts, ies.peak_cd(dl), 100 * worst), li, ll, "lm")
         lum = di.header.get("LUMINAIRE", "")

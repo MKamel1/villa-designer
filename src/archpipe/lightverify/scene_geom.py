@@ -163,10 +163,20 @@ class TriSet:
 
     def add(self, tris, owner, kind="mesh"):
         tris = np.asarray(tris, dtype=float).reshape(-1, 3, 3)
+        self.owner, self.kind = list(self.owner), list(self.kind)       # build() turned them into arrays
         self.tris.append(tris)
         self.owner += [owner] * len(tris)
         self.kind += [kind] * len(tris)
         self._built = False
+
+    def remove(self, owner):
+        """Drop every triangle of `owner` (mutation tests add a vase and take it out again); rebuilds the index."""
+        T = np.concatenate(self.tris)
+        keep = np.array([o != owner for o in self.owner])
+        self.tris = [T[keep]]
+        self.owner = [o for o, k in zip(self.owner, keep) if k]
+        self.kind = [o for o, k in zip(self.kind, keep) if k]
+        self.build()
 
     def build(self):
         self.T = np.concatenate(self.tris) if self.tris else np.zeros((0, 3, 3))

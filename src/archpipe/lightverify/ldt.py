@@ -33,6 +33,8 @@ def parse(text: str) -> IesData:
     gamma = nums[mc:mc + ng]
     body = nums[mc + ng:]
     planes = {0: mc, 1: 1, 2: mc // 2 + 1, 3: mc // 2 + 1, 4: mc // 4 + 1}[isym]
+    if len(body) == mc * ng and isym != 0:        # some labs declare a symmetry yet write every plane: trust the data length
+        planes, isym = mc, 0
     if len(body) != planes * ng:
         raise ValueError("ldt: %d intensity values, expected %d x %d" % (len(body), planes, ng))
     k = total_lm / 1000.0 * float(L[23])

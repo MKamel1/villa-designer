@@ -82,3 +82,34 @@ def run(workdir="out/LV/ref", rhos=(0.05, 0.1, 0.3, 0.4, 0.6, 0.7, 0.8)) -> Laye
         L.table.append(dict(case="5.8", **{k: r[k] for k in ("rho", "E_indirect_ab2", "published_Eav", "err_vs_published")}))
     L.notes.append("not run: 5.3 (charts only), 5.5 and 5.9-5.14 (glass/sky), 5.6 (sketch geometry only), 5.7 (table erroneous in the source)")
     return L
+
+
+CACHE = Path(__file__).resolve().parents[3] / "out" / "LV" / "v4-results.json"
+
+
+def save(L: LayerResult, path: Path = CACHE):
+    import json
+    from dataclasses import asdict
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({"results": [asdict(r) for r in L.results], "notes": L.notes, "table": L.table}), encoding="utf-8")
+
+
+def load(path: Path = CACHE) -> LayerResult | None:
+    import json
+    from ..contracts import CheckResult
+    if not Path(path).exists():
+        return None
+    d = json.loads(Path(path).read_text())
+    L = LayerResult("V4")
+    for r in d["results"]:
+        r["source_ids"], r["element_ids"] = tuple(r.get("source_ids", ())), tuple(r.get("element_ids", ()))
+        L.results.append(CheckResult(**r))
+    L.notes, L.table = d["notes"], d["table"]
+    return L
+
+
+if __name__ == "__main__":
+    out = run()
+    save(out)
+    for r in out.results:
+        print(r.status, r.subject, r.message)
