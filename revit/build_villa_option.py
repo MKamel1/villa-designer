@@ -223,6 +223,150 @@ def solid_prism_xz(profile_m, y0_m, y1_m):
     return GCU.CreateExtrusionGeometry(loops, n, abs(ft(y1_m) - ft(y0_m)))
 
 
+def door_orientation(inst):
+    """Facing / hand vectors and flip flags of a door instance, for the read-back (swing is checked against them)."""
+    f, h = inst.FacingOrientation, inst.HandOrientation
+    return {"facing": [round(f.X, 3), round(f.Y, 3)], "hand": [round(h.X, 3), round(h.Y, 3)],
+            "facing_flipped": bool(inst.FacingFlipped), "hand_flipped": bool(inst.HandFlipped)}
+
+
+def apply_swing(inst, d):
+    """G1 LS4: hang the leaf as the spec authors it (d["swing"]: direction 'outward', hinge on the 'west' jamb, `into`
+    the core). ASSUMPTION, not verified in Revit (no Revit session was available when this was written): the leaf
+    swings to the side OPPOSITE the instance's FacingOrientation and the hand vector points to the hinge. The
+    before/after vectors are written to the read-back (rb["door_swings"]) so the swing can be confirmed against
+    spec door.swing: the leaf must open toward -y (the core) and hinge at the jamb with the smaller x."""
+    sw = d["swing"]
+    want_leaf = {"north": (0, 1), "south": (0, -1)}.get(sw.get("leaf_toward", ""), (0, -1))     # core is toward -y
+    want_hinge_x = -1 if sw["hinge_side"] == "west" else 1
+    out = {"before": door_orientation(inst), "assumed": "leaf swings opposite FacingOrientation; hand points to hinge",
+           "wanted_leaf_dir": list(want_leaf), "wanted_hinge_dir": [want_hinge_x, 0]}
+    f = inst.FacingOrientation
+    if f.X * want_leaf[0] + f.Y * want_leaf[1] > 0:           # facing points where the leaf should go: flip
+        inst.flipFacing()
+    h = inst.HandOrientation
+    if h.X * want_hinge_x + h.Y * 0 < 0:
+        inst.flipHand()
+    return out
+
+
+def seg_box(x0, y0, x1, y1, t, z0, z1):
+    """A thin axis-aligned slab (mm) of thickness t along the segment (x0, y0)-(x1, y1)."""
+    if abs(x1 - x0) < 1e-6:
+        return [x0 - t / 2, min(y0, y1), z0, x0 + t / 2, max(y0, y1), z1]
+    return [min(x0, x1), y0 - t / 2, z0, max(x0, x1), y0 + t / 2, z1]
+
+
+def guard_boxes(g):
+    """Solids (mm boxes, scene datum z) of a G1 guard: one glass slab per path segment, or a top rail, a base rail and
+    vertical flat bars at the authored pitch."""
+    h, t = g["height_m"] * 1000.0, max(g["thickness_m"] * 1000.0, 6.0)
+    out = []
+    for a, b in zip(g["path"], g["path"][1:]):
+        x0, y0, z0 = [v * 1000.0 for v in a]
+        x1, y1 = b[0] * 1000.0, b[1] * 1000.0
+        if g["infill"] == "glass":
+            out.append(seg_box(x0, y0, x1, y1, t, z0, z0 + h))
+            continue
+        out.append(seg_box(x0, y0, x1, y1, 20.0, z0 + h - 40.0, z0 + h))              # top rail 40 x 20
+        out.append(seg_box(x0, y0, x1, y1, 20.0, z0, z0 + 40.0))                       # base rail 40 x 20
+        length = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5
+        n = int(length // g["bar_pitch_mm"])
+        for k in range(n + 1):
+            s = min(k * g["bar_pitch_mm"] + g["bar_w_mm"] / 2, length - g["bar_w_mm"] / 2) / length
+            px, py = x0 + (x1 - x0) * s, y0 + (y1 - y0) * s
+            half = g["bar_w_mm"] / 2
+            bx = ([px - half, py - t / 2, z0 + 40.0, px + half, py + t / 2, z0 + h - 40.0] if abs(x1 - x0) > 1e-6 else
+                  [px - t / 2, py - half, z0 + 40.0, px + t / 2, py + half, z0 + h - 40.0])
+            out.append(bx)
+    return out
+
+
+def cupboard_boxes(cb):
+    """Walls of the cupboard under the lowest treads as boxes (mm), and the door leaf (closed). The side wall's top
+    steps with the treads; the leaf's opening is cut out of it up to the door height."""
+    zf = -3000.0
+    walls, d = [], cb["door"]
+    dx0, dx1 = (d["x"] - d["width"] / 2) * 1000.0, (d["x"] + d["width"] / 2) * 1000.0
+    dh = d["height"] * 1000.0
+    for w in cb["walls"]:
+        t = w["thickness"] * 1000.0
+        y0, y1 = w["y0"] * 1000.0, w["y1"] * 1000.0
+        if "top_profile" in w:
+            cy = (y0 + y1) / 2
+            for xa, xb, h in w["top_profile"]:
+                a, b = sorted((xa * 1000.0, xb * 1000.0))
+                top = zf + h * 1000.0
+                if b <= dx0 or a >= dx1:
+                    walls.append([a, cy - t / 2, zf, b, cy + t / 2, top])
+                    continue
+                if a < dx0:
+                    walls.append([a, cy - t / 2, zf, dx0, cy + t / 2, top])
+                if b > dx1:
+                    walls.append([dx1, cy - t / 2, zf, b, cy + t / 2, top])
+                walls.append([max(a, dx0), cy - t / 2, zf + dh, min(b, dx1), cy + t / 2, top])      # lintel over the leaf
+        else:
+            cx = w["x0"] * 1000.0
+            walls.append([cx - t / 2, min(y0, y1), zf, cx + t / 2, max(y0, y1), zf + w["height"] * 1000.0])
+    cy = d["y"] * 1000.0
+    leaf = [dx0, cy - 20.0, zf, dx1, cy + 20.0, zf + dh]
+    return walls, leaf
+
+
+def build_g1_details(doc, spec, rb):
+    """G1 (docs/decisions/G1-safety-decisions-2026-11-21.md): the guards (LS3) and the cupboard under the lowest treads
+    (LS1), as DirectShapes like the ramp rails and the stair. NOT RUN IN REVIT when written (no session): the
+    read-back lists what was built and anything that failed."""
+    rcid = ElementId(BuiltInCategory.OST_StairsRailing)
+    if not DirectShape.IsValidCategoryId(rcid, doc):
+        rcid = ElementId(BuiltInCategory.OST_GenericModel)
+    for g in spec.get("guards", []):
+        try:
+            s = DirectShape.CreateElement(doc, rcid)
+            s.ApplicationId, s.ApplicationDataId = "archpipe-option", g["id"]
+            geo = List[GeometryObject]()
+            for b in guard_boxes(g):
+                geo.Add(solid_box(b))
+            s.SetShape(geo)
+            s.Name = "GUARD " + g["what"]
+            stamp(s, g["id"], "%.0f mm %s guard, drop %.1f m, max opening %.0f mm (G1 LS3)" % (
+                g["height_m"] * 1000, g["infill"], g["drop_m"], g["max_opening_mm"]))
+            rb["built"].setdefault("guards", []).append({"id": g["id"], "element": int(str(s.Id))})
+        except Exception as exc:
+            rb["failed"].append({"guard": g["id"], "error": str(exc)})
+    cb = spec.get("understair_cupboard")
+    if cb:
+        try:
+            wcid = ElementId(BuiltInCategory.OST_Walls)
+            if not DirectShape.IsValidCategoryId(wcid, doc):
+                wcid = ElementId(BuiltInCategory.OST_GenericModel)
+            walls, leaf = cupboard_boxes(cb)
+            s = DirectShape.CreateElement(doc, wcid)
+            s.ApplicationId, s.ApplicationDataId = "archpipe-option", cb["id"]
+            geo = List[GeometryObject]()
+            for b in walls:
+                geo.Add(solid_box(b))
+            s.SetShape(geo)
+            s.Name = "CUPBOARD under the stair (walls)"
+            stamp(s, cb["id"], "encloses the space under the lowest %d treads (soffit < 2.0 m), G1 LS1" % cb["treads"])
+            rb["built"]["understair_cupboard"] = int(str(s.Id))
+            dcid = ElementId(BuiltInCategory.OST_Doors)
+            if not DirectShape.IsValidCategoryId(dcid, doc):
+                dcid = ElementId(BuiltInCategory.OST_GenericModel)
+            ds = DirectShape.CreateElement(doc, dcid)
+            ds.ApplicationId, ds.ApplicationDataId = "archpipe-option", cb["door"]["id"]
+            geo = List[GeometryObject]()
+            geo.Add(solid_box(leaf))
+            ds.SetShape(geo)
+            ds.Name = "CUPBOARD DOOR (leaf shown closed; hinge %s, swings into %s)" % (
+                cb["door"]["hinge_side"], cb["door"]["swing_into"])
+            stamp(ds, cb["door"]["id"], "%.0f x %.0f mm hinged leaf, hinge %s side, opens into %s" % (
+                cb["door"]["width"] * 1000, cb["door"]["height"] * 1000, cb["door"]["hinge_side"], cb["door"]["swing_into"]))
+            rb["built"]["understair_cupboard_door"] = int(str(ds.Id))
+        except Exception as exc:
+            rb["failed"].append({"cupboard": cb["id"], "error": str(exc)})
+
+
 FURN_BIC = {"furniture": BuiltInCategory.OST_Furniture, "casework": BuiltInCategory.OST_Casework,
             "plumbing": BuiltInCategory.OST_PlumbingFixtures, "equipment": BuiltInCategory.OST_SpecialityEquipment}
 FURN_LABEL = {"OST_Furniture": "furniture", "OST_Casework": "casework", "OST_PlumbingFixtures": "plumbing",
@@ -459,9 +603,16 @@ def build_option(app, model, spec, folder):
                     comments += "; glazing intent, nearest door-family proxy"
             if d.get("sliding") and not sliding_family:
                 comments += "; sliding intent, nearest door-family proxy"
+            swing_rb = apply_swing(inst, d) if d.get("swing") else None
+            if swing_rb:
+                comments += "; swing %s into %s, hinge %s (G1 LS4)" % (d["swing"]["direction"], d["swing"]["into"],
+                                                                      d["swing"]["hinge_side"])
             stamp(inst, mark, comments)
             doc.Regenerate()
             w_, h_ = sym_dims(sym)
+            if swing_rb:
+                swing_rb["after"] = door_orientation(inst)
+                rb.setdefault("door_swings", []).append(dict(swing_rb, mark=mark, rooms=d.get("rooms")))
             rb.setdefault("doors", []).append({"level": d["level"], "x": d["x"], "y": d["y"], "rooms": d.get("rooms"),
                                                "width": w_, "height": h_, "family": sym.Family.Name,
                                                "garden": bool(d.get("garden")), "mark": measured_mark(inst),
@@ -522,6 +673,8 @@ def build_option(app, model, spec, folder):
     ds.ApplicationDataId = "stair"
     g = List[GeometryObject]()
     for b in spec["stair"]:
+        g.Add(solid_box(b))
+    for b in spec.get("stair_infill", []):          # G1 LS2: a horizontal flat bar in each gap between treads
         g.Add(solid_box(b))
     ds.SetShape(g)
     ds.Name = "STAIR " + spec["stair_name"]
@@ -626,6 +779,11 @@ def build_option(app, model, spec, folder):
         except Exception as exc:
             rb["failed"].append({"opening": op, "error": str(exc)})
     t.Commit()
+
+    if spec.get("guards") or spec.get("understair_cupboard"):
+        t = tx(doc, "G1 guards and under-stair cupboard")
+        build_g1_details(doc, spec, rb)
+        t.Commit()
 
     if spec.get("furniture"):
         t = tx(doc, "furniture")
