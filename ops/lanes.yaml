@@ -197,6 +197,30 @@ lanes:
     - tests/luminaires/**
     - docs/lanes/L6*.md
     - docs/lighting-spec/**
+  INT2: # integration of RA2 (production scene) with L6b/L6c lighting; scene rebuild
+    - src/archpipe/model/data/**
+    - tests/model/**
+    - src/archpipe/electrical/**
+    - knowledge/electrical/**
+    - tests/electrical/**
+    - src/archpipe/exchange/**
+    - tests/exchange/**
+    - src/archpipe/documents/**
+    - src/archpipe/drawings2d/**
+    - tests/documents/**
+    - tests/drawings2d/**
+    - src/archpipe/concept/villa_lighting.py
+    - src/archpipe/concept/villa_furnish.py
+    - src/archpipe/concept/villa_furnish3d.py
+    - src/archpipe/concept/fitting_mounting.py
+    - tests/test_mounting*.py
+    - tests/test_d1_*.py
+    - tests/approvals/**
+    - knowledge/approvals-review/**
+    - knowledge/exposure-groups.json
+    - scripts/verify.py
+    - docs/lanes/INT*.md
+    - docs/lessons/INT2.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
