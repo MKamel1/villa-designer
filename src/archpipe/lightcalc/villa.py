@@ -246,5 +246,7 @@ def run_cluster(calc: RoomCalc, workdir: Path, host: str | None = None, reuse: b
         calc.load_results(workdir)
         return calc
     job = ParRadJob(calc.name, calc.room, calc.placements, calc.sensors(), calc.params)
-    calc.results = execute(job, workdir, host=host or "ai-workstation", timeout=3600)
+    import os
+    local = os.environ.get("ARCHPIPE_L6_LOCAL")           # set on the workstation itself: run rtrace in place, no ssh
+    calc.results = execute(job, workdir, host=None if local else (host or "ai-workstation"), timeout=3600)
     return calc
