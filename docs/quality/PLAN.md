@@ -155,3 +155,10 @@ Shared files are no longer hand-edited centrally:
   L7 electrical, L8 workstation runner, R sourcing; later: Revit drawing set, blind photo test,
   automatic layout generation, mood and material boards. Paused: L4 products, style and quantities.
 - Rule: any new capability is proposed to the client for confirmation before it is built.
+- 2026-11-21: Revit-free, with no loss of functionality (client). Revit's two roles are replaced:
+  background checks → RV1 (independent checks on the built scene, proven on the real defects Revit
+  caught); 2D communication → RV2 (sections and elevations from Blender line art, furnished,
+  lighting and site plans, sheet set) and RV3 (IFC + DXF/DWG hand-over). RV1's inventory of every
+  Revit use is the parity contract. Revit stays optional as a second check if the sign-in is restored.
+- 2026-11-21: Client equipment answers: gas hob, 7.4 kW EV charger, split AC in all habitable rooms.
+- 2026-11-21: Scene builds run on the workstation (Windows maths libraries differ in the last bit).
