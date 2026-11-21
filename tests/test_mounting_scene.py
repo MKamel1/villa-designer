@@ -59,7 +59,7 @@ class SceneMountingGuard(unittest.TestCase):
         # chosen witness, not a measured property of this failing model.
         ceiling = Host("historic-ceiling", "ceiling", (0, 0, 2.7), (0, 0, -1), Finish("existing-ceiling", 0))
         body = dict(id="frozen-l0119", part_kind="lamp-housing",
-        for kind,depth in [('DL',95),('DLN',92),('ADJ',169),('WW',92)]:   # L6c ERCO LDT body heights (41321, 41369, A9000028, 41374); were the iGuzzini 95/95/98/95
+                    faces=[[[0, 0, 2.700], [1, 0, 2.700], [1, 0, 2.732], [0, 0, 2.732]]],
                     mounting=dict(host_id=ceiling.id, kind="recessed", offset_m=0,
                                   housing_depth_m=.032, finished_face=[0, 0, 2.7]))
         self.assertIn("MISSING", check_mesh(body, {ceiling.id: ceiling})[0])
@@ -290,7 +290,7 @@ class StairFirstPackage(unittest.TestCase):
         from archpipe.concept.ceiling_requirements import product_depth, requirements
         from archpipe.concept.mounting_resume import apply_approvals, APPROVALS
         from archpipe.concept import villa_lighting as VL
-        for kind,depth in [('DL',95),('DLN',95),('ADJ',98),('WW',95)]:
+        for kind,depth in [('DL',95),('DLN',92),('ADJ',169),('WW',92)]:   # L6c ERCO LDT body heights (41321, 41369, A9000028, 41374); were the iGuzzini 95/95/98/95
             self.assertEqual(product_depth(kind)['housing_depth_mm'],depth)
         recorded=product_depth('DL',{'installation_clearance_mm':40,'installation_depth_mm':110})
         self.assertEqual(recorded['clearance_mm'],40)
