@@ -150,6 +150,11 @@ lanes:
     - src/archpipe/exposure_groups.py
     - tests/approvals/**
     - docs/lanes/RA*.md
+  LP:  # luminaire products with public photometric datasheets (V10 evidence)
+    - knowledge/lighting-products/**
+    - src/archpipe/luminaires/**
+    - tests/luminaires/**
+    - docs/lanes/LP*.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
