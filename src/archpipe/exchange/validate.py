@@ -130,6 +130,8 @@ def validate_ifc(path, elements: list[DesignElement], levels: dict, scope: str =
     add("id set", len(want), None, None, "", [f"missing {i}" for i in sorted(want - have)[:5]]
         + [f"extra {i}" for i in sorted(have - want)[:5]], f"{len(have)} ids in file")
 
+    els = [e for e in els if e.id in ent]               # a missing element is reported above, not a crash below
+
     # 3. room areas (volume of the space solid / clear height) vs model polygon; Qto and floor covering vs net area
     rooms = [e for e in els if e.kind == "room"]
     dev, fails = 0.0, []
@@ -388,3 +390,82 @@ def validate_ifc(path, elements: list[DesignElement], levels: dict, scope: str =
 
 def report_text(checks: list[Check]) -> str:
     return "\n".join(c.line() + ("".join(f"\n      ! {x}" for x in c.failures) if not c.ok else "") for c in checks)
+
+
+def validate_elec(path, elements, levels, directory=None) -> list[Check]:
+    """D1-ELEC.ifc against the electrical lane's CSV outputs."""
+    from . import disciplines as D
+    f = ifcopenshell.open(str(path))
+    out: list[Check] = []
+
+    def add(name, n, worst, tol, unit, fails=(), detail=""):
+        out.append(Check(name, n, worst, tol, unit, not fails and (worst is None or tol is None or worst <= tol), detail, list(fails)[:10]))
+    dev = [r for r in D.read_csv("device_list.csv", directory) if r["family"] != "luminaire"]
+    circuits = [r["circuit"] for b in D.BOARD_IDS for r in D.read_csv(f"board_schedule_{b}.csv", directory)]
+    boards = f.by_type("IfcElectricDistributionBoard")
+    n_rack = sum(1 for r in dev if r["kind"] == "rack")
+    add("boards", len(boards), None, None, "", [] if len(boards) == len(D.BOARD_IDS) + n_rack else
+        [f"{len(boards)} boards vs {len(D.BOARD_IDS)} + {n_rack} rack"])
+    systems = f.by_type("IfcDistributionSystem")
+    add("circuits = schedule rows (IfcDistributionSystem)", len(systems), None, None, "",
+        [] if sorted(s.Name for s in systems) == sorted(circuits) else ["circuit names differ from the board schedules"])
+    placed = {_pset(x, "ArchPipe_ElecDevice").get("DeviceId"): x for x in f.by_type("IfcElement") if _pset(x, "ArchPipe_ElecDevice")}
+    add("devices = device_list (non-luminaire rows)", len(placed), None, None, "", [] if len(placed) == len(dev) else [f"{len(placed)} vs {len(dev)}"])
+    dmax, fails = 0.0, []
+    for r in dev:
+        x = placed.get(r["id"])
+        if x is None:
+            fails.append(f"missing {r['id']}")
+            continue
+        o = UP.get_local_placement(x.ObjectPlacement)[:3, 3]
+        d = math.hypot(o[0] - float(r["x_mm"]), o[1] - float(r["y_mm"]))
+        dmax = max(dmax, d)
+        if d > PLACE_TOL_MM:
+            fails.append(f"{r['id']}: {d:.2f} mm")
+    add("device placements vs device_list x,y", len(dev), dmax, PLACE_TOL_MM, "mm", fails)
+    fails = []
+    for s in systems:
+        mem = {m.id() for rel in s.IsGroupedBy or () for m in rel.RelatedObjects}
+        want = {placed[r["id"]].id() for r in dev if s.Name in r["circuit"].split("+")}
+        board = next(m for rel in s.IsGroupedBy for m in rel.RelatedObjects if m.is_a("IfcElectricDistributionBoard"))
+        if mem - {board.id()} != want:
+            fails.append(f"{s.Name}: members differ")
+        if _pset(board, "ArchPipe_Board").get("BoardId") != _pset(s, "ArchPipe_Circuit").get("Board"):
+            fails.append(f"{s.Name}: wrong board")
+    add("circuit membership = device_list circuit column (+ its board)", len(systems), None, None, "", fails)
+    lg = ifcopenshell.validate.json_logger()
+    ifcopenshell.validate.validate(f, lg, express_rules=True)
+    add("IFC4 schema validation errors (incl. EXPRESS rules)", len(list(f)), len(lg.statements), 0, "errors", [s["message"][:120] for s in lg.statements[:5]])
+    return out
+
+
+def validate_light_zones(path, elements) -> list[Check]:
+    f = ifcopenshell.open(str(path))
+    groups = [g for g in f.by_type("IfcGroup") if g.ObjectType == "LightingControlZone"]
+    lum = {e.id for e in elements if e.kind == "luminaire"}
+    seen = Counter()
+    for g in groups:
+        for rel in g.IsGroupedBy or ():
+            for m in rel.RelatedObjects:
+                seen[_pset(m, "ArchPipe_Source").get("SourceId")] += 1
+    bad = [f"{i}: in {seen.get(i, 0)} zones" for i in sorted(lum) if seen.get(i, 0) != 1]
+    return [Check("every luminaire is in exactly one control zone", len(lum), None, None, "", not bad,
+                  f"{len(groups)} zones", bad[:10])]
+
+
+def validate_shared_origin(paths: dict[str, str]) -> list[Check]:
+    """All discipline files share one origin: same project/site/building/storey GlobalIds, elevations and placements."""
+    sigs = {}
+    for name, p in paths.items():
+        f = ifcopenshell.open(str(p))
+        sig = {}
+        for c in ("IfcProject", "IfcSite", "IfcBuilding", "IfcBuildingStorey"):
+            for x in f.by_type(c):
+                pl = getattr(x, "ObjectPlacement", None)
+                loc = tuple(round(float(v), 3) for v in UP.get_local_placement(pl)[:3, 3]) if pl else None
+                sig[(c, x.GlobalId)] = (getattr(x, "Elevation", None), loc)
+        sigs[name] = sig
+    ref_name = next(iter(sigs))
+    bad = [f"{n} differs from {ref_name}" for n, s in sigs.items() if s != sigs[ref_name]]
+    return [Check("shared origin: spatial structure identical in every discipline file", len(sigs), None, None, "", not bad,
+                  f"{len(sigs[ref_name])} spatial entities", bad)]

@@ -813,7 +813,23 @@ class _B:
         return self.f
 
 
+def deterministic_ids(f):
+    """ifcopenshell's API gives relationships and property sets random GlobalIds, and a set order to the unit list.
+    Both would make a re-export of an unchanged model differ byte for byte; replace them with content-derived values
+    (step ids are stable because the build order is)."""
+    for e in f.by_type("IfcRoot"):
+        if e.is_a("IfcRelationship") or e.is_a("IfcPropertySetDefinition"):
+            e.GlobalId = guid(f"{e.is_a()}-{e.id()}")
+        if e.is_a("IfcRelationship"):                       # the related sets come out of Python sets: sort them
+            for i, v in enumerate(e):
+                if isinstance(v, tuple) and len(v) > 1 and all(isinstance(x, ifcopenshell.entity_instance) for x in v):
+                    e[i] = tuple(sorted(v, key=lambda x: x.id()))
+    for ua in f.by_type("IfcUnitAssignment"):
+        ua.Units = tuple(sorted(ua.Units, key=lambda u: u.id()))
+
+
 def finish_header(f, name: str):
+    deterministic_ids(f)
     hdr = getattr(f, "header", None) or f.wrapped_data.header      # ifcopenshell 0.9 / 0.8 spelling
     hdr.file_name.name = name
     hdr.file_name.time_stamp = FIXED_TIMESTAMP
