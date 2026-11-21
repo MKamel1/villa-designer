@@ -1,0 +1,84 @@
+{
+  "version": "v0-preregistered",
+  "preregistration": {
+    "note": "Written before any scoring of the 38 views. Policy numbers below are the docs/quality/a-plus-interior-renders.md section C values and are never tuned. What may change on the TUNING half only: the VLM prompt anchors, the choice of VLM among the pre-listed candidates, the pixel-level definitions marked tunable, and which VLM criteria gate (rule gate_selection). The held-out half is scored once after the rubric is frozen (version 'frozen-*').",
+    "split_seed": "L3-2026-11-critic-v1",
+    "split_rule": "per human grade, order views by sha256(seed:view), deal alternately; odd extras alternate between halves; v27 is forced into tuning because it was shown to three models while probing. Split is computed by archpipe.critic.labels.stratified_split and stored in knowledge/critic/split.json",
+    "label_tiers": {
+      "must_fail": ["D+", "D", "D-", "F"],
+      "should_pass": ["A", "A-", "B+", "B", "B-"],
+      "middle": ["C+", "C", "C-"]
+    },
+    "targets": {
+      "recall_must_fail": 0.90,
+      "false_fail_should_pass": 0.10,
+      "note": "held-out has 8 must_fail and 2 should_pass views, so recall >= 90% means 8/8 and false-fail <= 10% means 0/2. Seeded recall on the audit's QA false passes and on C-or-worse views is also reported."
+    },
+    "model_candidates": ["gemma4:31b", "qwen3.6:35b-a3b", "qwen3.8:27b-mtp-q4_K_M"],
+    "model": "gemma4:31b",
+    "model_note": "pre-selected: only candidate that named the seam in the one probe image (v27, tuning half). Choose among candidates on tuning half only."
+  },
+  "scoring": {
+    "scale": "0 = fail, 1 = warn, 2 = pass",
+    "hero_views": "all views in the finals set",
+    "hard_fail": "a score of 0 on any gating criterion for a hero view",
+    "escalation": "two or more gating criteria scored 1 make the view a FAIL",
+    "fail_closed": "a criterion that cannot run is not_evaluated; if the VLM is unreachable the verdict is fail with notes.vlm='unavailable'",
+    "out_of_scope": {"R6": "texel density needs UV and camera scripts (not an image critic); reported not_evaluated and excluded from the verdict"},
+    "gate_selection": "a VLM criterion gates iff on the tuning half (fraction of must_fail views scoring < 2) - (fraction of should_pass views scoring < 2) >= 0.30 AND no should_pass view scores 0. Deterministic criteria R1-R4, R10 band/seam, R12 always gate.",
+    "source_cards": "every threshold is policy: card ids POLICY-R1 ... POLICY-R13 in knowledge/critic/rubric.json cards"
+  },
+  "cards": {
+    "POLICY-R1": "R1 lens: 24-35 mm = 2; 16-<24 mm with a written reason in the camera overrides = 1; otherwise 0",
+    "POLICY-R2": "R2 height: 1.1-1.6 m above the floor datum = 2; within 0.2 m outside = 1; else 0. Floor datums -3.0 m and 0.0 m (camera z minus the highest datum at or below it); documented assumption: render_views.choose eye_m=1.35",
+    "POLICY-R3": "R3 verticals: |pitch| and vertical-edge deviation <= 0.5 deg = 2; <= 1.5 deg = 1; else 0",
+    "POLICY-R4": "R4 subject exposure: clipped <= 1 % and crushed <= 2 % of the subject mask = 2; each <= 3x those limits = 1; else 0",
+    "POLICY-R10": "R10 frame: no solid edge band, no full-height hard seam; near occluder <= 15 %, subject not cropped, empty wall <= 40 %",
+    "POLICY-R12": "R12 colour: mid-tone opponent excess; cool/cyan/green <= 0.020 and warm <= 0.080 = 2; cool/cyan/green <= 0.040 and warm <= 0.100 = 1; else 0",
+    "POLICY-VLM": "R5, R7, R8, R9, R10 (occluders, cropping), R11, R13 are judged by the VLM against the anchors in this file, 0/1/2"
+  },
+  "pixel": {
+    "analysis_width_px": 960,
+    "clipped_definition": "any sRGB channel >= 0.985",
+    "crushed_definition": "Rec.709 luma of sRGB-encoded pixel <= 0.03",
+    "subject_mask": "union of the camera json 'subjects[].screen' boxes ([x0,y0,x1,y1], y up, fractions of frame; clipped to the frame and flipped to image coordinates). Fallback when no subject box remains or the union covers < 15 % of the frame: central 60 % x 60 % rectangle. Approximation: the boxes are conservative mesh bounds, so the mask is generous and includes background.",
+    "tunable": ["band_min_fraction", "seam_min_contrast", "seam_coherence", "r3_gradient_percentile"],
+    "band_min_fraction": 0.015,
+    "band_max_luma": 0.03,
+    "band_max_std": 0.02,
+    "seam_min_contrast": 0.06,
+    "seam_coherence": 0.70,
+    "seam_z": 8.0,
+    "r3_gradient_percentile": 97.0
+  },
+  "criteria": {
+    "R5": {
+      "kind": "vlm", "name": "Context",
+      "prompt": "R5_CONTEXT"
+    },
+    "R7": {"kind": "vlm", "name": "Physical scale of materials", "prompt": "R7_SCALE"},
+    "R8": {"kind": "vlm", "name": "Asset fidelity", "prompt": "R8_ASSETS"},
+    "R9": {"kind": "vlm", "name": "Contact and intersection", "prompt": "R9_CONTACT"},
+    "R10": {"kind": "vlm+pixel", "name": "Composition and frame integrity", "prompt": "R10_FRAME"},
+    "R11": {"kind": "vlm", "name": "Truth and styling", "prompt": "R11_TRUTH"},
+    "R13": {"kind": "vlm_pair", "name": "Benchmark parity", "prompt": "R13_PAIR"}
+  },
+  "vlm": {
+    "options": {"temperature": 0, "seed": 7, "num_ctx": 8192, "num_predict": 400},
+    "think": false,
+    "image_max_px": 1280,
+    "one_criterion_per_call": true,
+    "output": "{\"evidence\": string (<= 40 words, name the object and where), \"score\": 0|1|2}",
+    "pair_rule": "R13 runs both left/right orders (benchmark = the cropped 3:2 bedroom-overcast-door.png). The render scores 2 if it is judged at least as photographic in both orders or wins one; 1 if it is judged slightly less photographic in both; 0 if clearly less photographic in both orders.",
+    "preamble": "You are a strict architectural-visualisation critic reviewing a 3D render of a villa. Judge only what is visible in the image. Do not reward good intentions. Reply with JSON only: {\"evidence\": \"...\", \"score\": 0|1|2}. The evidence field comes first: name the specific object and where it is in the frame, then give the score."
+  },
+  "prompts": {
+    "R5_CONTEXT": "Criterion: CONTEXT (what is seen through windows and outside the building).\nScore 2: windows and outdoor areas show a textured, believable exterior (planting, detailed facades, a graded sky), or no exterior is visible at all.\nScore 1: the exterior is plausible but plain (smooth empty sky, one blank wall outside) or part of a window is overexposed.\nScore 0: a window or opening is a flat white or blank slab, the sky is a blank slab, or neighbouring buildings are plain white or clay boxes with fake windows.\nLook at every window, door opening and boundary wall in the frame.",
+    "R7_SCALE": "Criterion: PHYSICAL SCALE OF MATERIALS (is the texture size what the real material would have).\nScore 2: wood grain, stone veining, tile and paver sizes look like real products at real size; textures are not stretched.\nScore 1: one surface has doubtful scale or visible repetition, but nothing is grossly wrong.\nScore 0: wood grain or marble veining is several times too large, marble looks blotchy with rust or pink colour, grain runs the wrong way or is smeared and stretched on a surface, or timber has an unnatural salmon-pink hue.\nExamine floors, tables, doors, joinery, bathroom stone and stair treads.",
+    "R8_ASSETS": "Criterion: ASSET FIDELITY (how crude are the 3D models).\nScore 2: curved objects (globes, pots, cushions, pendants) look smooth and round; plants have individually shaped soft leaves; furniture, bedding and clothing have believable form.\nScore 1: one or two objects look crude or faceted but the frame is not dominated by them.\nScore 0: visible polygon facets on round objects (lamp globes, planters, pots), flat card, disc or lollipop shaped foliage, wire fishbone fronds, furniture built from plain boxes, pillows as rigid wedges, or clothes that look like boards or plates.\nLook closely at lights, pots, plants, bedding, cushions and clothes.",
+    "R9_CONTACT": "Criterion: CONTACT AND INTERSECTION (do objects sit on or attach to things).\nScore 2: every object rests on a surface or is clearly mounted; no object passes through another.\nScore 1: one object is doubtful (a gap under a leg, a lamp that might hover).\nScore 0: a clear floating object (a lamp or fitting hanging in air with no support, a wall light detached from the wall) or an object visibly penetrating another (a cushion through a frame, a pillow into a headboard).",
+    "R10_FRAME": "Criterion: COMPOSITION AND FRAME INTEGRITY.\nScore 2: no object close to the camera blocks the view; the main subject is fully inside the frame; empty plain wall covers well under 40 percent of the frame; no hard straight vertical or horizontal line cutting through objects, no dark or solid band along the frame edge, no milky haze or veil.\nScore 1: one issue of moderate size: something close to the camera covers 15 to 25 percent of the frame, a subject is slightly cropped at an edge, or blank wall covers 40 to 55 percent.\nScore 0: a near wall, curtain, door or furniture back covers more than a quarter of the frame, the main subject is cut off by the frame, blank wall covers more than 55 percent, a visible seam or black band, a milky veil as if shot through hazy glass, or wall and ceiling lines that visibly bend.",
+    "R11_TRUTH": "Criterion: TRUTH AND STYLING. The view is titled: \"{title}\".\nScore 2: the space shown matches that title and looks lived in and dressed with plausible props (books, plants, cushions, accessories, items for the room's use).\nScore 1: the space matches the title but is sparsely styled, generic or mostly empty, or one expected element is missing.\nScore 0: the picture does not show what the title promises (a cinema with no screen or cinema seating, a bath with no fittings visible), the room is bare, or the camera looks at the back of furniture.",
+    "R13_PAIR": "Two images follow. Image 1 is labelled A and image 2 is labelled B. One may be a photograph and one may be a computer render. Which one looks more like a real photograph (credible materials, light, imperfection)? Reply with JSON only: {\"evidence\": \"...\", \"more_photographic\": \"A\"|\"B\"|\"equal\", \"margin\": \"clear\"|\"slight\"}."
+  }
+}

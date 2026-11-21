@@ -1,0 +1,278 @@
+{
+ "seed": "L3-2026-11-critic-v1",
+ "forced_tuning": [
+  "v27"
+ ],
+ "tuning": [
+  "v01",
+  "v05",
+  "v06",
+  "v08",
+  "v10",
+  "v11",
+  "v12",
+  "v16",
+  "v18",
+  "v19",
+  "v22",
+  "v24",
+  "v27",
+  "v28",
+  "v29",
+  "v31",
+  "v34",
+  "v36",
+  "v37",
+  "v41"
+ ],
+ "held_out": [
+  "v02",
+  "v03",
+  "v04",
+  "v09",
+  "v13",
+  "v15",
+  "v17",
+  "v20",
+  "v21",
+  "v23",
+  "v25",
+  "v26",
+  "v30",
+  "v32",
+  "v33",
+  "v35",
+  "v39",
+  "v40"
+ ],
+ "labels": {
+  "v01": {
+   "grade": "C-",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v02": {
+   "grade": "C+",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": false
+  },
+  "v03": {
+   "grade": "D",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v04": {
+   "grade": "C-",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v05": {
+   "grade": "B-",
+   "tier": "should_pass",
+   "qa_passed": true,
+   "false_pass": false
+  },
+  "v06": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v08": {
+   "grade": "D",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v09": {
+   "grade": "C+",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": false
+  },
+  "v10": {
+   "grade": "C+",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": false
+  },
+  "v11": {
+   "grade": "C",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v12": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v13": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v15": {
+   "grade": "D",
+   "tier": "must_fail",
+   "qa_passed": false,
+   "false_pass": false
+  },
+  "v16": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v17": {
+   "grade": "C",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v18": {
+   "grade": "C-",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v19": {
+   "grade": "C",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v20": {
+   "grade": "C",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v21": {
+   "grade": "B-",
+   "tier": "should_pass",
+   "qa_passed": true,
+   "false_pass": false
+  },
+  "v22": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v23": {
+   "grade": "C",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v24": {
+   "grade": "C",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v25": {
+   "grade": "C-",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v26": {
+   "grade": "D",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v27": {
+   "grade": "D",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v28": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v29": {
+   "grade": "F",
+   "tier": "must_fail",
+   "qa_passed": false,
+   "false_pass": false
+  },
+  "v30": {
+   "grade": "F",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v31": {
+   "grade": "C",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v32": {
+   "grade": "C-",
+   "tier": "middle",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v33": {
+   "grade": "B-",
+   "tier": "should_pass",
+   "qa_passed": true,
+   "false_pass": false
+  },
+  "v34": {
+   "grade": "B",
+   "tier": "should_pass",
+   "qa_passed": true,
+   "false_pass": false
+  },
+  "v35": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v36": {
+   "grade": "F",
+   "tier": "must_fail",
+   "qa_passed": false,
+   "false_pass": false
+  },
+  "v37": {
+   "grade": "D",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v39": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v40": {
+   "grade": "D+",
+   "tier": "must_fail",
+   "qa_passed": true,
+   "false_pass": true
+  },
+  "v41": {
+   "grade": "B-",
+   "tier": "should_pass",
+   "qa_passed": true,
+   "false_pass": false
+  }
+ }
+}
