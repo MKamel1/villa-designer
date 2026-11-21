@@ -38,49 +38,54 @@ from archpipe import photometry as ph
 from types import MappingProxyType
 
 # kind -> the requirement (what a product must meet) and its generic stand-in
+# L6b (2026-11-20): colour policy and honest lumens. One CCT per layer, 2700 K for every interior layer (LA6; the render's
+# scene.json already lights everything at 2700 K; no IES card needs 3000 K and the client withdrew the 4000 K closet
+# light); night markers stay 2200 K. The former 3000 K task kinds (DLN, SCONCE, UC, RAIL, DESK, VSTRIP, STORE-BATTEN,
+# MIRROR, VANITY-LIN, VSCONCE) were 3000 K on paper while the bound DLN product is 2700 K. Spec lumens/beam of kinds with
+# a bound library product now equal that product (DL 732 lm 33 deg, DLN 1343 lm 29 deg, ADJ 511 lm 18 deg, WW 732 lm).
 KINDS = {
-    "DL":   dict(what="flush trimless downlight, wide", mount="recessed", lm=650, beam=55, cct=2700, cri=90,
+    "DL":   dict(what="flush trimless downlight, wide", mount="recessed", lm=732, beam=33, cct=2700, cri=90,
                  layer="ambient", aperture=0.075),
-    "DLN":  dict(what="flush trimless downlight, medium (task)", mount="recessed", lm=750, beam=36, cct=3000,
+    "DLN":  dict(what="flush trimless downlight, medium (task)", mount="recessed", lm=1343, beam=29, cct=2700,
                  cri=90, layer="task", aperture=0.075),
-    "ADJ":  dict(what="flush trimless adjustable accent", mount="recessed", lm=500, beam=24, cct=2700, cri=90,
+    "ADJ":  dict(what="flush trimless adjustable accent", mount="recessed", lm=511, beam=18, cct=2700, cri=90,
                  layer="accent", aperture=0.075),
-    "WW":   dict(what="flush trimless wall washer", mount="recessed", lm=650, beam=70, cct=2700, cri=90,
+    "WW":   dict(what="flush trimless wall washer", mount="recessed", lm=732, beam=33, cct=2700, cri=90,
                  layer="accent", aperture=0.075),
     "PEN-GLOBE": dict(what="opal glass globe pendant D300", mount="pendant", lm=800, beam=None, cct=2700, cri=90,
                       layer="decorative", diameter=0.30),
     "PEN-SMALL": dict(what="opal glass globe pendant D200 (bedside)", mount="pendant", lm=350, beam=None, cct=2700,
                       cri=90, layer="decorative", diameter=0.20),
     "WALL-READ": dict(what="adjustable wall-mounted swing-arm reading light (ASSUMED product)", mount="wall",
-                      lm=350, beam=None, cct=2700, cri=90, layer="decorative", diameter=0.12),
+                      lm=350, beam=60, cct=2700, cri=90, layer="decorative", diameter=0.12),
     "SWING": dict(what="movable wall reading light: wall plate, articulated 0.6 m reach and rotating head "
-                  "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=None,
+                  "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=60,
                   cct=2700, cri=90, layer="task", diameter=0.12, reach=0.6),
     "PEN-LIN": dict(what="linear pendant 1.6 m, direct/indirect", mount="pendant", lm=1200, beam=90, cct=2700,
                     cri=90, layer="task", length=1.6),
     "SCONCE": dict(what="vanity wall light, opal, each side of the mirror", mount="wall", lm=450, beam=None,
-                   cct=3000, cri=90, layer="task", diameter=0.12),
+                   cct=2700, cri=90, layer="task", diameter=0.12),
     "COVE": dict(what="LED strip in the cove, 2700 K", mount="strip", lm_per_m=900, cct=2700, cri=90,
                  layer="decorative"),
     "BACK": dict(what="LED strip inside glass-door book cabinet", mount="strip", lm_per_m=400, cct=2700, cri=90,
                  layer="accent"),
-    "UC":   dict(what="under-cabinet LED strip", mount="strip", lm_per_m=1000, cct=3000, cri=90, layer="task"),
-    "RAIL": dict(what="LED strip over the hanging rail (in-wardrobe)", mount="strip", lm_per_m=500, cct=3000, cri=90,
+    "UC":   dict(what="under-cabinet LED strip", mount="strip", lm_per_m=1000, cct=2700, cri=90, layer="task"),
+    "RAIL": dict(what="LED strip over the hanging rail (in-wardrobe)", mount="strip", lm_per_m=500, cct=2700, cri=90,
                  layer="task"),
     "TOE":  dict(what="toe-kick LED strip", mount="strip", lm_per_m=150, cct=2200, cri=90, layer="night"),
     "NL":   dict(what="night-light strip under the bed / plinth", mount="strip", lm_per_m=100, cct=2200, cri=90,
                  layer="night"),
-    "DESK": dict(what="adjustable wall-arm desk lamp, shielded head, 3000 K", mount="task-lamp", lm=450, beam=70,
-                 cct=3000, cri=90, layer="task"),
+    "DESK": dict(what="adjustable wall-arm desk lamp, shielded head, 2700 K", mount="task-lamp", lm=450, beam=70,
+                 cct=2700, cri=90, layer="task"),
     "VSTRIP": dict(what="vertical LED strip at a hanging-section edge (shadow-free dressing light)", mount="strip",
-                   lm_per_m=500, cct=3000, cri=90, layer="task"),
+                   lm_per_m=500, cct=2700, cri=90, layer="task"),
     "STORE-BATTEN": dict(what="ASSUMED opal LED storage batten, 0.70 m per shelving bay", mount="strip",
-                          lm_per_m=900, cct=3000, cri=90, layer="task"),
-    "MIRROR": dict(what="backlit mirror halo, 3000 K", mount="strip", lm_per_m=250, cct=3000, cri=90, layer="task"),
+                          lm_per_m=900, cct=2700, cri=90, layer="task"),
+    "MIRROR": dict(what="backlit mirror halo, 2700 K", mount="strip", lm_per_m=250, cct=2700, cri=90, layer="task"),
     "VANITY-LIN": dict(what="ASSUMED generic linear LED bar over the mirror", mount="wall",
-                       lm=100, beam=None, cct=3000, cri=90, layer="task"),
+                       lm=100, beam=None, cct=2700, cri=90, layer="task"),
     "VSCONCE": dict(what="vertical opal sconce 0.5 m, each side of the mirror", mount="wall", lm=450, beam=None,
-                    cct=3000, cri=90, layer="task", diameter=0.12),
+                    cct=2700, cri=90, layer="task", diameter=0.12),
     "STEP": dict(what="recessed step marker in the stair wall", mount="wall-marker", lm=60, beam=None, cct=2200,
                  cri=90, layer="night"),
     "PATH": dict(what="low recessed path marker (0.3 m AFF)", mount="wall-marker", lm=60, beam=None, cct=2200,
@@ -181,6 +186,19 @@ def bind_products(ies_dir=None):
     if _products_bound:
         return PRODUCTS
     ies_dir = Path(ies_dir or Path(__file__).resolve().parents[2] / 'out/villa/render-d1/ies')
+    try:
+        lib.get('iguzzini', 'LSEVO-AAK3EW', 0)
+    except Exception:
+        # L6b: no luminaire library on this machine (e.g. the workstation checkout): the verified rows and IES files of the
+        # four bound kinds are frozen under knowledge/lighting (products-frozen.json, ies/), identical to the library rows.
+        import json
+        root = Path(__file__).resolve().parents[2] / 'knowledge' / 'lighting'
+        for kind, row in json.loads((root / 'products-frozen.json').read_text(encoding='utf-8')).items():
+            PRODUCTS[kind] = dict(manufacturer=row['manufacturer'], code=row['code'], ies=str(root / 'ies' / row['ies_file']),
+                                  lm=float(row['lm']), watts=row['watts'], cct=row['cct'], beam=row['beam'],
+                                  what=row['what'], substitute=row['substitute'])
+        _products_bound = True
+        return PRODUCTS
     for kind, (mfr, sku, what) in PRODUCT_CHOICE.items():
         row = lib.get(mfr, sku, 0)
         if not row or not row.get('verified'):

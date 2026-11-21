@@ -1,0 +1,46 @@
+{
+ "DL": {
+  "manufacturer": "iguzzini",
+  "code": "LSEVO-AAK3EW",
+  "lm": 732.6,
+  "watts": 12.0,
+  "cct": 2700.0,
+  "beam": 33.5,
+  "what": "Laser Evo recessed D75 Soft, Flood 33 deg, 2700 K CRI97, phase-cut; flush (trimless) accessory",
+  "substitute": false,
+  "ies_file": "LSEVO-AAK3EW.ies"
+ },
+ "DLN": {
+  "manufacturer": "iguzzini",
+  "code": "LSEVO-AAIIA6",
+  "lm": 1343.2,
+  "watts": 11.8,
+  "cct": 2700.0,
+  "beam": 29.0,
+  "what": "Laser Evo recessed D75 Cone, Medium 29 deg, 2700 K CRI90, phase-cut; flush (trimless) accessory",
+  "substitute": false,
+  "ies_file": "LSEVO-AAIIA6.ies"
+ },
+ "ADJ": {
+  "manufacturer": "iguzzini",
+  "code": "LSEVO-AAHENX",
+  "lm": 511.5,
+  "watts": 12.6,
+  "cct": 2700.0,
+  "beam": 18.5,
+  "what": "Laser Evo recessed D75 Cone Easy Adjustable, Spot 18 deg, 2700 K CRI97, phase-cut; flush (trimless) accessory",
+  "substitute": false,
+  "ies_file": "LSEVO-AAHENX.ies"
+ },
+ "WW": {
+  "manufacturer": "iguzzini",
+  "code": "LSEVO-AAK3EW",
+  "lm": 732.6,
+  "watts": 12.0,
+  "cct": 2700.0,
+  "beam": 33.5,
+  "what": "SUBSTITUTE for the wall washer LSEVO-AAKR2I (files failed the pair check): Laser Evo D75 Soft Flood 33 deg grazing from 0.3 m",
+  "substitute": true,
+  "ies_file": "LSEVO-AAK3EW.ies"
+ }
+}

@@ -10,8 +10,8 @@ Two luminaire sets are calculated and both are reported:
            90 deg beam; the model flags it `generic`). The pendant is a 1.6 m line source: it is
            subdivided into 8 equal point sources along its axis (a single point source 0.74 m over the
            table would overstate the peak; the subdivision is still an approximation).
-  built  : only the 4 spots, i.e. what `out/villa/render-d1/scene.json` (the Cycles render that produced
-           lighting-measurements.json) contains in the dining area: it has no pendant there.
+  built  : only the 4 spots (the analytic lights of scene.json). NOTE: the render ALSO emits the pendant as an emissive
+           Lambertian strip; `render` (L6b) adds it, see docs/lanes/L6b-villa-lighting.md.
 """
 from __future__ import annotations
 
@@ -81,7 +81,9 @@ def extract_input(out: Path = INPUT, scene_json: Path | None = None) -> dict:
     return data
 
 
-def placements(data: dict, include_pendant: bool, pendant_parts: int = 8) -> list[Placement]:
+def placements(data: dict, include_pendant: bool, pendant_parts: int = 8, lambertian: bool = False) -> list[Placement]:
+    """lambertian=True models the pendant as the render emits it (a Lambertian strip, 1200 lm; Cycles truth probe: 343 lx at
+    the table centre); False keeps the model's generic cos^n 90 deg beam (about 464 lx there: 35 % too much)."""
     from ..concept.villa_lighting import generic_ies
     out = []
     for l in data["luminaires"]:
@@ -90,7 +92,7 @@ def placements(data: dict, include_pendant: bool, pendant_parts: int = 8) -> lis
             if not include_pendant:
                 continue
             n = pendant_parts
-            text = generic_ies(l["flux_lm"] / n, l["beam_deg"], "PEN-LIN part")
+            text = generic_ies(l["flux_lm"] / n, 120 if lambertian else l["beam_deg"], "PEN-LIN part")
             ph = synth.load_text(text, "PEN-LIN-part")
             L = l["length_m"]
             for k in range(n):
@@ -105,7 +107,8 @@ def placements(data: dict, include_pendant: bool, pendant_parts: int = 8) -> lis
     return out
 
 
-def build(data: dict, include_pendant: bool, params: RadParams | None = None) -> RoomCalc:
+def build(data: dict, include_pendant: bool, params: RadParams | None = None, lambertian: bool = False,
+          label: str | None = None) -> RoomCalc:
     r = data["reflectances"]
     room = Room(tuple(map(tuple, data["room_polygon_m"])), data["floor_z"], data["ceiling_z"],
                 rho_floor=r["floor"], rho_wall=r["wall"], rho_ceiling=r["ceiling"])
@@ -116,7 +119,8 @@ def build(data: dict, include_pendant: bool, params: RadParams | None = None) ->
     pt = tuple((cx + sx * 0.05, cy + sy * 0.05) for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1)))
     planes = [TaskPlane("table-top", table, z, data["target"]["lux"]),
               TaskPlane("table-centre-point", pt, z, data["target"]["lux"], spacing=0.1)]
-    return RoomCalc("D1-dining" + ("" if include_pendant else "-built"), room, placements(data, include_pendant),
+    name = label or ("D1-dining" + ("" if include_pendant else "-built"))
+    return RoomCalc(name, room, placements(data, include_pendant, lambertian=lambertian),
                     planes, params or RadParams(ab=6, ab_extra=(12,)), mf=MF)
 
 
@@ -139,8 +143,9 @@ def run(workdir: Path, host: str | None = None, out_json: Path | None = None, re
     report = {"input": str(INPUT.relative_to(ROOT)), "maintenance_factor": MF, "target": data["target"],
               "cycles_measurement_dining": data.get("cycles_measurement"), "variants": {}}
     results: list[CheckResult] = []
-    for name, pend in (("model", True), ("built", False)):
-        calc = build(data, pend)
+    # "render" = what scene.json renders: the 4 spots AND the emissive Lambertian pendant (the old "built" omitted it)
+    for name, pend, lam in (("model", True, False), ("built", False, False), ("render", True, True)):
+        calc = build(data, pend, lambertian=lam, label="D1-dining-render" if lam else None)
         if reuse:
             calc.load_results(Path(workdir) / name)
         else:
