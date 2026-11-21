@@ -1,0 +1,132 @@
+[
+ {
+  "id": "NKBA-DC-1.5-clear-floor-space",
+  "document": "NKBA Design Concepts summary (Universal design)",
+  "edition": "4th ed., (c) 2022 NKBA (held)",
+  "locator": "section 1.5 Clear Floor Space at Activity Centers (figures 1.5.d-e: bath); printed p. 1.5 (pdf index 12)",
+  "quote": "A minimum clear floor space of 30″ (760 mm) to 32″ (815 mm) by 48″ (1 220 mm) to 52″ (1 320 mm) should be provided at all activity centers.",
+  "value": "clear floor space 760-815 mm x 1220-1320 mm at every activity centre, centre-lined on the fixture, overlap allowed, not obstructed by door swing",
+  "status": "sourced",
+  "url_or_path": "held: nkba-dc-summary-4ed"
+ },
+ {
+  "id": "NKBA-DC-1.5-no-door",
+  "document": "NKBA Design Concepts summary (Universal design)",
+  "edition": "4th ed., (c) 2022 NKBA (held)",
+  "locator": "section 1.5; printed p. 1.5 (pdf index 12)",
+  "quote": "The clear floor space should not be obstructed by door swings, cabinetry, casework, fixtures or equipment.",
+  "value": "clear floor space not obstructed by door swings or fixtures",
+  "status": "sourced",
+  "url_or_path": "held: nkba-dc-summary-4ed"
+ },
+ {
+  "id": "NKBA-DC-1.5e-turning-circle-label",
+  "document": "NKBA Design Concepts summary (Universal design)",
+  "edition": "4th ed., (c) 2022 NKBA (held)",
+  "locator": "figure 1.5.e (drawing label read by eye from the page image, nkba-dc-summary-4ed pdf index 15; no text layer, so not machine-checked); printed p. 16",
+  "quote": "60\" - 67\" (1 525 mm - 1 700 mm) TURNING CIRCLE",
+  "value": "bath turning circle 60-67 in (1525-1700 mm) drawn overlapping the clear floor spaces; figure 1.5.d is labelled 'clear floor space with no door swing interference'",
+  "status": "sourced",
+  "url_or_path": "held: nkba-dc-summary-4ed"
+ },
+ {
+  "id": "NKBA-BG4-clear-space-30in",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines; IRC 2015 / IPC code references)",
+  "edition": "2nd ed., 2016 NKBA/Wiley (held); pdf labels unreliable, cite by guideline number",
+  "locator": "Bathroom Planning Guideline 4 Clear Space; pdf index 95; printed page label unreliable in this book",
+  "quote": "Plan a clear floor space of at least 30″ (762 mm) from the front edge of all fixtures (e.g., lavatory, toilet, bidet, tub, and shower) to any opposite bath fixture, wall, or obstacle.",
+  "value": "762 mm clear in front of every fixture",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG20-toilet-centreline-18in",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines; IRC 2015 / IPC code references)",
+  "edition": "2nd ed., 2016 NKBA/Wiley (held); pdf labels unreliable, cite by guideline number",
+  "locator": "Bathroom Planning Guideline 20 Toilet/Bidet Placement; pdf index 156; printed page label unreliable in this book",
+  "quote": "The distance from the centerline of toilet and/or bidet to any bath fixture, wall, or other obstacle should be at least 18″ (457 mm).",
+  "value": "toilet or bidet centreline at least 18 in (457 mm) from any fixture, wall or obstacle (recommended)",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG21-toilet-front-21in",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines; IRC 2015 / IPC code references)",
+  "edition": "2nd ed., 2016 NKBA/Wiley (held); pdf labels unreliable, cite by guideline number",
+  "locator": "Bathroom Planning Guideline 21 Toilet Compartment (code requirement); pdf index 159; printed page label unreliable in this book",
+  "quote": "There shall be at least a 21″ (533 mm) clearance In front of the toilet to any wall, fixture, or door.",
+  "value": "code minimum: 21 in (533 mm) clear in front of the toilet",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG5-lav-centreline-20in",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines; IRC 2015 / IPC code references)",
+  "edition": "2nd ed., 2016 NKBA/Wiley (held); pdf labels unreliable, cite by guideline number",
+  "locator": "Bathroom Planning Guideline 5 Single-Lavatory Placement; pdf index 114; printed page label unreliable in this book",
+  "quote": "The distance from the centerline of the lavatory to the sidewall/tall obstacle should be at least 20″ (508 mm).",
+  "value": "lavatory centreline >= 508 mm from side wall",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG9-shower-36in",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines; IRC 2015 / IPC code references)",
+  "edition": "2nd ed., 2016 NKBA/Wiley (held); pdf labels unreliable, cite by guideline number",
+  "locator": "Bathroom Planning Guideline 9 Shower Size; pdf index 122; printed page label unreliable in this book",
+  "quote": "The interior shower size is at least 36″ × 36″ (914 mm × 914 mm).",
+  "value": "interior shower at least 36 x 36 in (914 x 914 mm), recommended",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG3-ceiling-80in",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines)",
+  "edition": "2nd ed., 2016 (held)",
+  "locator": "Bathroom Planning Guideline 3 Ceiling Height (IRC R305.1); pdf index 94; printed page label unreliable in this book",
+  "quote": "The minimum ceiling height in a bathroom should not be less than 80″ (2032 mm)",
+  "value": "bathroom ceiling >= 2032 mm (US code)",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG20-toilet-centreline-code-15in",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines)",
+  "edition": "2nd ed., 2016 (held)",
+  "locator": "Bathroom Planning Guideline 20 Toilet/Bidet Placement (code requirement); pdf index 157; printed page label unreliable in this book",
+  "quote": "A minimum distance of 15″ (381 mm) is required from the centerline of toilet and/or bidet to any bath fixture, wall, or other obstacle.",
+  "value": "code minimum: toilet or bidet centreline 15 in (381 mm) from any fixture, wall or obstacle",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG21-compartment-recommended",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines)",
+  "edition": "2nd ed., 2016 (held)",
+  "locator": "Bathroom Planning Guideline 21 Toilet Compartment; pdf index 158; printed page label unreliable in this book",
+  "quote": "The size for a separate toilet compartment should be at least 36″ × 66″ (914 mm × 1676 mm)",
+  "value": "separate toilet compartment recommended at least 36 x 66 in (914 x 1676 mm)",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG21-compartment-code",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines)",
+  "edition": "2nd ed., 2016 (held)",
+  "locator": "Bathroom Planning Guideline 21 Toilet Compartment (code requirement); pdf index 159; printed page label unreliable in this book",
+  "quote": "The minimum size for a separate toilet compartment is 30″ × 60″ (762 mm × 1524 mm).",
+  "value": "code minimum separate toilet compartment 30 x 60 in (762 x 1524 mm)",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ },
+ {
+  "id": "NKBA-BG9-shower-code-30in",
+  "document": "NKBA Kitchen & Bath Planning Guidelines with Access Standards (bathroom guidelines)",
+  "edition": "2nd ed., 2016 (held)",
+  "locator": "Bathroom Planning Guideline 3 Ceiling Height (IRC R305.1, shower head area); pdf index 95; printed page label unreliable in this book",
+  "quote": "A shower, or tub equipped with a shower head, shall have a minimum floor-to-ceiling height of 80″ (2032 mm) above a minimum area 30″ × 30″ (762 mm × 762 mm) at the shower head.",
+  "value": "shower head: 80 in (2032 mm) floor-to-ceiling over a 30 x 30 in (762 x 762 mm) area",
+  "status": "sourced",
+  "url_or_path": "held: nkba-guidelines"
+ }
+]

@@ -1,0 +1,62 @@
+[
+ {
+  "id": "US-16CFR1261.2-ASTM-F2057-23",
+  "document": "16 CFR Part 1261 Safety Standard for Clothing Storage Units (88 FR 28403, 2023-05-04), adopting ASTM F2057-23",
+  "edition": "Direct final rule published 2023-05-04; ASTM F2057-23 itself NOT read (paywalled)",
+  "locator": "section 1261.2",
+  "quote": "Each clothing storage unit that is subject to ASTM F2057-23, Standard Safety Specification for Clothing Storage Units, approved on February 1, 2023, shall comply with ASTM F2057-23.",
+  "value": "clothing storage units must comply with ASTM F2057-23",
+  "status": "std",
+  "url_or_path": "https://www.govinfo.gov/content/pkg/FR-2023-05-04/html/2023-08997.htm"
+ },
+ {
+  "id": "US-F2057-23-three-stability-tests",
+  "document": "16 CFR Part 1261 Safety Standard for Clothing Storage Units (88 FR 28403, 2023-05-04), adopting ASTM F2057-23",
+  "edition": "Direct final rule published 2023-05-04; ASTM F2057-23 itself NOT read (paywalled)",
+  "locator": "preamble, CPSC staff description of ASTM F2057-23 (secondary)",
+  "quote": "ASTM F2057-23 has a set of three stability tests to simulate the capability of a child weighing up to 60 pounds interacting with a CSU.",
+  "value": "F2057-23 has three stability tests simulating a child up to 60 lb (loaded drawers open; horizontal pull; carpet reaction)",
+  "status": "std",
+  "url_or_path": "https://www.govinfo.gov/content/pkg/FR-2023-05-04/html/2023-08997.htm"
+ },
+ {
+  "id": "US-F2057-23-9.2.2-pull",
+  "document": "16 CFR Part 1261 Safety Standard for Clothing Storage Units (88 FR 28403, 2023-05-04), adopting ASTM F2057-23",
+  "edition": "Direct final rule published 2023-05-04; ASTM F2057-23 itself NOT read (paywalled)",
+  "locator": "preamble, CPSC staff description of section 9.2.2 (secondary)",
+  "quote": "applies a 10-pound horizontal force over a period of at least 5 seconds at a ``hand-hold'' not to exceed a 56-inch height",
+  "value": "horizontal force of 10 lb for at least 5 s at a hand-hold no higher than 56 in",
+  "status": "std",
+  "url_or_path": "https://www.govinfo.gov/content/pkg/FR-2023-05-04/html/2023-08997.htm"
+ },
+ {
+  "id": "US-F2057-23-9.2.3-carpet",
+  "document": "16 CFR Part 1261 Safety Standard for Clothing Storage Units (88 FR 28403, 2023-05-04), adopting ASTM F2057-23",
+  "edition": "Direct final rule published 2023-05-04; ASTM F2057-23 itself NOT read (paywalled)",
+  "locator": "preamble, CPSC staff description of section 9.2.3 (secondary)",
+  "quote": "uses 60 pounds of weight placed on the edge of an open drawer or pull-out shelf, while the CSU is tilted forward using a 0.43 inch test block",
+  "value": "9.2.3: 60 lb on the edge of an open drawer or shelf, unit tilted forward on a 0.43 in block (carpet simulation)",
+  "status": "std",
+  "url_or_path": "https://www.govinfo.gov/content/pkg/FR-2023-05-04/html/2023-08997.htm"
+ },
+ {
+  "id": "EN14749-2005-6.2.1-stability-applicability",
+  "document": "EN 14749:2005 Domestic and kitchen storage units and worktops - Safety requirements and test methods (iTeh/SIST preview)",
+  "edition": "EN 14749:2005 (current EN 14749:2016+A1:2022 NOT read); preview contains up to clause 6.2.3",
+  "locator": "clause 6.2.1; printed p. 9 (pdf page 11 of the preview file)",
+  "quote": "The requirements and test methods for the stability (6.6) apply only to storage units, where the height to the top of the unit exceeds 600 mm, and when the multiplication of the height of the centre of gravity in m (6.2.2) and the total mass in kg (6.2.3) exceeds the value 6.",
+  "value": "stability clause 6.6 applies to units > 600 mm high with (centre-of-gravity height in m x total mass in kg) > 6; the 6.6 tilt/load values are NOT in the preview",
+  "status": "std",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/23024/67f85dc0faf64d24b4493bf9160c07b1/SIST-EN-14749-2006.pdf"
+ },
+ {
+  "id": "ASTM-F2057-anchoring",
+  "document": "ASTM F2057-23 / EN 14749:2016+A1:2022",
+  "edition": "2023 / 2022",
+  "locator": "requirement that tall storage be wall-anchored",
+  "quote": "",
+  "value": "tip restraint hardware and the anchoring rule itself (I14 'tall storage is anchored')",
+  "status": "unverified",
+  "url_or_path": "not read; tried: WebSearch + govinfo FR rule (cites the standard, does not reproduce it); CPSC pages 403; ASTM and BSI texts paywalled; EN 14749 preview ends before clause 6.6"
+ }
+]

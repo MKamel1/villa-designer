@@ -1,0 +1,82 @@
+[
+ {
+  "id": "IEEE1789-2015-low-risk-0.08f",
+  "document": "IEEE 1789-2015 Recommended Practice for Modulating Current in High-Brightness LEDs, as summarised in 'Flicker: Understanding the New IEEE Recommended Practice' (N. Miller PNNL, B. Lehman, chair IEEE PAR1789; LightFair 2015, DOE SSL)",
+  "edition": "IEEE 1789-2015 itself NOT read (paywalled); presentation May 2015",
+  "locator": "slides 8 and 23 (secondary); printed p. ? (pdf page 20 of the preview file)",
+  "quote": "Multiply the frequency by 0.08 and round up to the nearest whole number to get the max Allowable % Flicker",
+  "value": "low-risk: max %Flicker = frequency x 0.08, rounded up to the nearest whole number",
+  "status": "std",
+  "url_or_path": "https://www.energy.gov/sites/prod/files/2015/05/f22/miller+lehman_flicker_lightfair2015.pdf"
+ },
+ {
+  "id": "IEEE1789-2015-min-freq-100",
+  "document": "IEEE 1789-2015 Recommended Practice for Modulating Current in High-Brightness LEDs, as summarised in 'Flicker: Understanding the New IEEE Recommended Practice' (N. Miller PNNL, B. Lehman, chair IEEE PAR1789; LightFair 2015, DOE SSL)",
+  "edition": "IEEE 1789-2015 itself NOT read (paywalled); presentation May 2015",
+  "locator": "slide 23 (secondary); printed p. ? (pdf page 20 of the preview file)",
+  "quote": "Test to determine the flicker frequency in Hz of the SSL product (it must be ≥100 Hz)",
+  "value": "the multiplication shortcut applies to products flickering at 100 Hz or more",
+  "status": "std",
+  "url_or_path": "https://www.energy.gov/sites/prod/files/2015/05/f22/miller+lehman_flicker_lightfair2015.pdf"
+ },
+ {
+  "id": "IEEE1789-2015-unknown-freq-10",
+  "document": "IEEE 1789-2015 Recommended Practice for Modulating Current in High-Brightness LEDs, as summarised in 'Flicker: Understanding the New IEEE Recommended Practice' (N. Miller PNNL, B. Lehman, chair IEEE PAR1789; LightFair 2015, DOE SSL)",
+  "edition": "IEEE 1789-2015 itself NOT read (paywalled); presentation May 2015",
+  "locator": "slide 23 (secondary); printed p. ? (pdf page 20 of the preview file)",
+  "quote": "If frequency is difficult to determine, % Flicker shall not exceed 10%.",
+  "value": "unknown frequency: %Flicker <= 10 %",
+  "status": "std",
+  "url_or_path": "https://www.energy.gov/sites/prod/files/2015/05/f22/miller+lehman_flicker_lightfair2015.pdf"
+ },
+ {
+  "id": "IEEE1789-2015-1250Hz",
+  "document": "IEEE 1789-2015 Recommended Practice for Modulating Current in High-Brightness LEDs, as summarised in 'Flicker: Understanding the New IEEE Recommended Practice' (N. Miller PNNL, B. Lehman, chair IEEE PAR1789; LightFair 2015, DOE SSL)",
+  "edition": "IEEE 1789-2015 itself NOT read (paywalled); presentation May 2015",
+  "locator": "slide 23 (secondary); printed p. ? (pdf page 20 of the preview file)",
+  "quote": "At 1250 Hz or higher, 100% flicker is allowed.",
+  "value": "f >= 1250 Hz: no flicker limit",
+  "status": "std",
+  "url_or_path": "https://www.energy.gov/sites/prod/files/2015/05/f22/miller+lehman_flicker_lightfair2015.pdf"
+ },
+ {
+  "id": "IEEE1789-2015-0.0333f-special",
+  "document": "IEEE 1789-2015 Recommended Practice for Modulating Current in High-Brightness LEDs, as summarised in 'Flicker: Understanding the New IEEE Recommended Practice' (N. Miller PNNL, B. Lehman, chair IEEE PAR1789; LightFair 2015, DOE SSL)",
+  "edition": "IEEE 1789-2015 itself NOT read (paywalled); presentation May 2015",
+  "locator": "slide 24 (secondary); printed p. 24 (pdf page 21 of the preview file)",
+  "quote": "% Flicker ≤ Flicker Freq x 0.0333 (special populations)",
+  "value": "special (sensitive) populations: %Flicker <= 0.0333 x f",
+  "status": "std",
+  "url_or_path": "https://www.energy.gov/sites/prod/files/2015/05/f22/miller+lehman_flicker_lightfair2015.pdf"
+ },
+ {
+  "id": "SVM-0.4-regulatory",
+  "document": "Temporal Light Modulation: A Phantom Array Visibility Measure (Tan, Miller, Royer, Irvin; PNNL, DOE 2024), remark on SVM",
+  "edition": "2024 paper (secondary for SVM)",
+  "locator": "discussion of PAVM limits (secondary); printed p. 12 (pdf page 13 of the preview file)",
+  "quote": "Just as regulatory groups are using lower values of SVM (0.4) to protect highly sensitive populations",
+  "value": "SVM <= 0.4 is used by regulatory groups to protect highly sensitive populations (the paper does not name the regulation)",
+  "status": "std",
+  "url_or_path": "https://www.energy.gov/sites/default/files/2024-05/ssl-tan-etal-2024-lrt_tlm.pdf"
+ },
+ {
+  "id": "IEEE1789-2015-low-freq-0.025f",
+  "document": "IEEE 1789-2015 Recommended Practice for Modulating Current in High-Brightness LEDs",
+  "edition": "2015",
+  "locator": "recommendations below 90-100 Hz",
+  "quote": "",
+  "value": "%Flicker coefficient 0.025 x f for f < 90 Hz and the 90 Hz boundary",
+  "status": "unverified",
+  "url_or_path": "not read; tried: WebSearch (DOE LightFair deck covers only 0.08f / 0.0333f at >=100 Hz); IEEE standards page is paywalled; no readable copy found"
+ },
+ {
+  "id": "IEC-TR-61547-1-PstLM-1",
+  "document": "IEC TR 61547-1 / IEC 61000-4-15 (Pst LM)",
+  "edition": "not identified",
+  "locator": "Pst LM <= 1 limit used in LA7",
+  "quote": "",
+  "value": "Pst LM <= 1.0",
+  "status": "unverified",
+  "url_or_path": "not read; tried: WebSearch for IEC TR 61547-1 and a PstLM limit: no readable text; DOE TLM paper only names PstLM as a measure for < 80 Hz"
+ }
+]

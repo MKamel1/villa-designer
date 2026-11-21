@@ -1,0 +1,62 @@
+[
+ {
+  "id": "BS5839-6-grade-D1",
+  "document": "BS 5839-6 Fire detection and alarm systems for fire safety in buildings, Part 6 (domestic premises), as summarised by Aico (manufacturer) (secondary)",
+  "edition": "BS 5839-6:2019+A1:2020 itself NOT read (paywalled); Aico web page read 2026-11-20",
+  "locator": "Aico summary, alarm grades (secondary)",
+  "quote": "Grade D1 A system of one or more mains powered detectors, each with a tamper-proof standby supply consisting of a battery or batteries. Grade D2",
+  "value": "Grade D1: mains-powered detectors with tamper-proof standby battery",
+  "status": "std",
+  "url_or_path": "https://www.aico.co.uk/technical-support/standards-regulations/fire-british-standard-bs-5839-62019/"
+ },
+ {
+  "id": "BS5839-6-grade-D2",
+  "document": "BS 5839-6 Fire detection and alarm systems for fire safety in buildings, Part 6 (domestic premises), as summarised by Aico (manufacturer) (secondary)",
+  "edition": "BS 5839-6:2019+A1:2020 itself NOT read (paywalled); Aico web page read 2026-11-20",
+  "locator": "Aico summary (secondary)",
+  "quote": "Grade D2 A system of one or more mains powered detectors, each with an integral standby supply consisting of a user-replaceable battery or batteries. Grade F1",
+  "value": "Grade D2: mains-powered with user-replaceable standby battery",
+  "status": "std",
+  "url_or_path": "https://www.aico.co.uk/technical-support/standards-regulations/fire-british-standard-bs-5839-62019/"
+ },
+ {
+  "id": "BS5839-6-LD1",
+  "document": "BS 5839-6 Fire detection and alarm systems for fire safety in buildings, Part 6 (domestic premises), as summarised by Aico (manufacturer) (secondary)",
+  "edition": "BS 5839-6:2019+A1:2020 itself NOT read (paywalled); Aico web page read 2026-11-20",
+  "locator": "Aico summary, categories (secondary)",
+  "quote": "LD1 High Protection All areas where a fire could start",
+  "value": "LD1: all areas where a fire could start (hall, landings, living room, kitchen, bedrooms, cupboards)",
+  "status": "std",
+  "url_or_path": "https://www.aico.co.uk/technical-support/standards-regulations/fire-british-standard-bs-5839-62019/"
+ },
+ {
+  "id": "BS5839-6-LD2",
+  "document": "BS 5839-6 Fire detection and alarm systems for fire safety in buildings, Part 6 (domestic premises), as summarised by Aico (manufacturer) (secondary)",
+  "edition": "BS 5839-6:2019+A1:2020 itself NOT read (paywalled); Aico web page read 2026-11-20",
+  "locator": "Aico summary (secondary)",
+  "quote": "LD2 - Medium Protection Escape routes and high risk areas",
+  "value": "LD2: escape routes plus high-risk areas (kitchen, living room)",
+  "status": "std",
+  "url_or_path": "https://www.aico.co.uk/technical-support/standards-regulations/fire-british-standard-bs-5839-62019/"
+ },
+ {
+  "id": "BS5839-6-LD3",
+  "document": "BS 5839-6 Fire detection and alarm systems for fire safety in buildings, Part 6 (domestic premises), as summarised by Aico (manufacturer) (secondary)",
+  "edition": "BS 5839-6:2019+A1:2020 itself NOT read (paywalled); Aico web page read 2026-11-20",
+  "locator": "Aico summary (secondary)",
+  "quote": "LD3 - Minimum Protection Escape routes",
+  "value": "LD3: escape routes only (hall, landings)",
+  "status": "std",
+  "url_or_path": "https://www.aico.co.uk/technical-support/standards-regulations/fire-british-standard-bs-5839-62019/"
+ },
+ {
+  "id": "BS5839-6-no-alarm-in-baths",
+  "document": "BS 5839-6 Fire detection and alarm systems for fire safety in buildings, Part 6 (domestic premises), as summarised by Aico (manufacturer) (secondary)",
+  "edition": "BS 5839-6:2019+A1:2020 itself NOT read (paywalled); Aico web page read 2026-11-20",
+  "locator": "Aico summary (secondary)",
+  "quote": "Across all Categories, alarms should not be installed within toilets, bathrooms or shower rooms.",
+  "value": "no smoke alarms in toilets, bathrooms, shower rooms",
+  "status": "std",
+  "url_or_path": "https://www.aico.co.uk/technical-support/standards-regulations/fire-british-standard-bs-5839-62019/"
+ }
+]

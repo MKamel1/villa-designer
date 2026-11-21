@@ -1,0 +1,42 @@
+[
+ {
+  "id": "IES-LM83-12-sDA-55-75",
+  "document": "IES LM-83-12 Approved Method: sDA and ASE, as summarised in 'Challenges and opportunities of incorporating LM-83 into building simulations' (Mahic, Nezamdoost; 2017 International Radiance Workshop)",
+  "edition": "LM-83-12 itself NOT read (paywalled); slide deck 2017",
+  "locator": "slide 3 (secondary); printed p. ? (pdf page 3 of the preview file)",
+  "quote": "Exceed 55% of the floor area for “nominally acceptable daylight” • Exceed 75% of the floor area for “preferred daylight”",
+  "value": "sDA: more than 55% of floor area nominally acceptable; more than 75% preferred",
+  "status": "std",
+  "url_or_path": "https://www.radiance-online.org/community/workshops/2017-portland-or/presentations/08_AMAN_LM83SimulationChallenges.pdf"
+ },
+ {
+  "id": "IES-LM83-12-ASE-10",
+  "document": "IES LM-83-12 Approved Method: sDA and ASE, as summarised in 'Challenges and opportunities of incorporating LM-83 into building simulations' (Mahic, Nezamdoost; 2017 International Radiance Workshop)",
+  "edition": "LM-83-12 itself NOT read (paywalled); slide deck 2017",
+  "locator": "slide 3 (secondary); printed p. ? (pdf page 3 of the preview file)",
+  "quote": "Below 10% of the floor area for less discomfort",
+  "value": "ASE: below 10% of the floor area for less discomfort",
+  "status": "std",
+  "url_or_path": "https://www.radiance-online.org/community/workshops/2017-portland-or/presentations/08_AMAN_LM83SimulationChallenges.pdf"
+ },
+ {
+  "id": "IES-LM83-12-ASE-def",
+  "document": "IES LM-83-12 Approved Method: sDA and ASE, as summarised in 'Challenges and opportunities of incorporating LM-83 into building simulations' (Mahic, Nezamdoost; 2017 International Radiance Workshop)",
+  "edition": "LM-83-12 itself NOT read (paywalled); slide deck 2017",
+  "locator": "slide 3 (secondary); printed p. ? (pdf page 3 of the preview file)",
+  "quote": "What % of the floor area exceeds 1000 lux",
+  "value": "ASE: share of floor area above 1000 lux of computational direct sunlight",
+  "status": "std",
+  "url_or_path": "https://www.radiance-online.org/community/workshops/2017-portland-or/presentations/08_AMAN_LM83SimulationChallenges.pdf"
+ },
+ {
+  "id": "IES-LM83-12-ASE-250h",
+  "document": "IES LM-83-12 Approved Method: sDA and ASE, as summarised in 'Challenges and opportunities of incorporating LM-83 into building simulations' (Mahic, Nezamdoost; 2017 International Radiance Workshop)",
+  "edition": "LM-83-12 itself NOT read (paywalled); slide deck 2017",
+  "locator": "slide 3 (secondary); printed p. ? (pdf page 3 of the preview file)",
+  "quote": "for more than 250 annual analysis hours?",
+  "value": "ASE duration criterion: more than 250 annual analysis hours",
+  "status": "std",
+  "url_or_path": "https://www.radiance-online.org/community/workshops/2017-portland-or/presentations/08_AMAN_LM83SimulationChallenges.pdf"
+ }
+]

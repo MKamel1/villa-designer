@@ -1,0 +1,32 @@
+[
+ {
+  "id": "IEC60364-5-52-G52.1-A",
+  "document": "IEC 60364-5-52 Table G.52.1 (Annex G, informative) as reproduced by 'eToolboX' (secondary)",
+  "edition": "IEC 60364-5-52:2009; Annex G text itself NOT read",
+  "locator": "Table G.52.1 type A (secondary)",
+  "quote": "A – Low voltage installations supplied directly from a public low voltage distribution system: Lighting is 3% and other use is 5%.",
+  "value": "public LV supply: lighting 3 %, other uses 5 %",
+  "status": "std",
+  "url_or_path": "https://sites.google.com/view/etoolsbox/electrical/voltage-drop-iec"
+ },
+ {
+  "id": "IEC60364-5-52-G52.1-B",
+  "document": "IEC 60364-5-52 Table G.52.1 (Annex G, informative) as reproduced by 'eToolboX' (secondary)",
+  "edition": "IEC 60364-5-52:2009; Annex G text itself NOT read",
+  "locator": "Table G.52.1 type B (secondary)",
+  "quote": "B – Low voltage installation supplied from private LV supply* : Lighting is 6% and other use is 8%.",
+  "value": "private LV supply: lighting 6%, other use 8%",
+  "status": "std",
+  "url_or_path": "https://sites.google.com/view/etoolsbox/electrical/voltage-drop-iec"
+ },
+ {
+  "id": "IEC60364-5-52-annexG-exists",
+  "document": "IEC 60364-5-52 Wiring systems (VDE-Verlag preview, contents and foreword)",
+  "edition": "Edition 3.1, 2024-11 consolidated (2009+AMD1:2024); preview shows contents and foreword only",
+  "locator": "contents and foreword; printed p. 7 (pdf page 7 of the preview file)",
+  "quote": "Clause 525 introduces changes in the maximum value of voltage drop permitted between the origin of the consumer's installation and the equipment which should not be greater than that given in the relevant annex.",
+  "value": "Clause 525 sets the voltage-drop limit by reference to Annex G (informative); the numbers are in Annex G, which the preview omits",
+  "status": "std",
+  "url_or_path": "https://www.vde-verlag.de/iec-normen/preview-pdf/info_iec60364-5-52{ed3.1}en.pdf"
+ }
+]

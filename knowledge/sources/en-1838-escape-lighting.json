@@ -1,0 +1,72 @@
+[
+ {
+  "id": "EN1838-escape-1lx-centreline",
+  "document": "EN 1838 Lighting applications - Emergency lighting, as stated in Glamox 'Escape routes - rules and luminaires' (secondary)",
+  "edition": "EN 1838 itself NOT read (paywalled)",
+  "locator": "Glamox application guide, escape routes (secondary)",
+  "quote": "in width, the horizontal illuminances on the floor along the centre line of an escape route must not fall below 1 lx.",
+  "value": "escape route: at least 1 lx on the floor along the centre line",
+  "status": "std",
+  "url_or_path": "https://glamox.com/en/pbs/application-guide/emergency-lighting/rules-and-regulations/escape-routes--rules-and-luminaires"
+ },
+ {
+  "id": "EN1838-escape-duration-1h",
+  "document": "EN 1838 Lighting applications - Emergency lighting, as stated in Glamox 'Escape routes - rules and luminaires' (secondary)",
+  "edition": "EN 1838 itself NOT read (paywalled)",
+  "locator": "Glamox application guide (secondary)",
+  "quote": "The required minimum emergency escape lighting duration allowed for escape purposes is 1 hour.",
+  "value": "minimum duration 1 h",
+  "status": "std",
+  "url_or_path": "https://glamox.com/en/pbs/application-guide/emergency-lighting/rules-and-regulations/escape-routes--rules-and-luminaires"
+ },
+ {
+  "id": "EN1838-escape-uniformity-40",
+  "document": "EN 1838 Lighting applications - Emergency lighting, as stated in Glamox 'Escape routes - rules and luminaires' (secondary)",
+  "edition": "EN 1838 itself NOT read (paywalled)",
+  "locator": "Glamox application guide (secondary)",
+  "quote": "The minimum to maximum diversity ratio must not be less than 1:40 along the centre line of the escape route.",
+  "value": "max:min along the centre line <= 40:1",
+  "status": "std",
+  "url_or_path": "https://glamox.com/en/pbs/application-guide/emergency-lighting/rules-and-regulations/escape-routes--rules-and-luminaires"
+ },
+ {
+  "id": "EN1838-escape-response-5s-60s",
+  "document": "EN 1838 Lighting applications - Emergency lighting, as stated in Glamox 'Escape routes - rules and luminaires' (secondary)",
+  "edition": "EN 1838 itself NOT read (paywalled)",
+  "locator": "Glamox application guide (secondary)",
+  "quote": "The emergency escape route lighting must reach 50% of the required illuminance within 5 seconds and 100% of the required illuminance within 60 seconds.",
+  "value": "50 % within 5 s, 100 % within 60 s",
+  "status": "std",
+  "url_or_path": "https://glamox.com/en/pbs/application-guide/emergency-lighting/rules-and-regulations/escape-routes--rules-and-luminaires"
+ },
+ {
+  "id": "EN1838-vendor-escape-1lx-1m-band",
+  "document": "EN 1838 Emergency Lighting, Technical Information (LED solutions vendor note, 01-2020) (secondary)",
+  "edition": "EN 1838 itself NOT read; vendor note dated 01-2020",
+  "locator": "section 2.4 (secondary; differs in wording from Glamox); printed p. ? (pdf page 4 of the preview file)",
+  "quote": "an illuminance level of at least 1 lux along the center line for a path width of one metre must be guaranteed.",
+  "value": "at least 1 lux along the centre line for a path width of one metre",
+  "status": "std",
+  "url_or_path": "https://a.storyblok.com/f/158120/x/16e33dc9a6/en-1838-emergency-lighting-en.pdf"
+ },
+ {
+  "id": "EN1838-vendor-duration",
+  "document": "EN 1838 Emergency Lighting, Technical Information (LED solutions vendor note, 01-2020) (secondary)",
+  "edition": "EN 1838 itself NOT read; vendor note dated 01-2020",
+  "locator": "section 2.4 (secondary); printed p. ? (pdf page 4 of the preview file)",
+  "quote": "The rated service time is at least one hour.",
+  "value": "rated service time is at least one hour",
+  "status": "std",
+  "url_or_path": "https://a.storyblok.com/f/158120/x/16e33dc9a6/en-1838-emergency-lighting-en.pdf"
+ },
+ {
+  "id": "MH7-11-27-escape-lighting",
+  "document": "Metric Handbook: Planning and Design Data (Buxton)",
+  "edition": "7th ed., 2022 (held)",
+  "locator": "section on emergency lighting, Table XIX follows; printed p. 11-27 (pdf index 234)",
+  "quote": "Emergency (escape) lighting should be provided in those areas necessary for escape purposes in case the artificial lighting fails.",
+  "value": "principle only; the table that follows covers common escape routes, not the inside of a single-family house (advisory for a villa)",
+  "status": "sourced",
+  "url_or_path": "held: metric-handbook/Buxton - Metric Handbook Planning and Design Data (7th ed, 2022).pdf"
+ }
+]

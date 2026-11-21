@@ -1,0 +1,82 @@
+[
+ {
+  "id": "UK-ADM1-2015-M4(1)-performance",
+  "document": "Approved Document M: Access to and use of buildings, Volume 1: Dwellings (England)",
+  "edition": "2015 edition with 2016 amendments (held: knowledge/library.json uk-ad-m)",
+  "locator": "Requirement M4(1), Performance d.-f.; printed p. 3 (pdf index 10)",
+  "quote": "Visitors can access and use the habitable rooms and a WC within the entrance storey of the dwelling",
+  "value": "WC on entrance storey; step-free between habitable rooms and WC; accessible switches/sockets",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-m; https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf"
+ },
+ {
+  "id": "UK-ADM1-2015-1.6-approach-900",
+  "document": "Approved Document M: Access to and use of buildings, Volume 1: Dwellings (England)",
+  "edition": "2015 edition with 2016 amendments (held: knowledge/library.json uk-ad-m)",
+  "locator": "para 1.6c; printed p. 4 (pdf index 11)",
+  "quote": "The approach route is a minimum of 900mm wide with a maximum cross fall of 1 in 40.",
+  "value": "approach route >=900 mm wide, cross fall <=1:40",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-m; https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf"
+ },
+ {
+  "id": "UK-ADM1-2015-1.7-ramp",
+  "document": "Approved Document M: Access to and use of buildings, Volume 1: Dwellings (England)",
+  "edition": "2015 edition with 2016 amendments (held: knowledge/library.json uk-ad-m)",
+  "locator": "para 1.7a; printed p. 4 (pdf index 11)",
+  "quote": "for gradients up to 1:15 – not more than 10m long • for gradients up to 1:12 – not more than 5m long b. Every flight has a minimum clear width of 900mm.",
+  "value": "external ramp flights: <=1:15 up to 10 m; <=1:12 up to 5 m; clear width >=900 mm",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-m; https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf"
+ },
+ {
+  "id": "UK-ADM1-2015-1.14-entrance",
+  "document": "Approved Document M: Access to and use of buildings, Volume 1: Dwellings (England)",
+  "edition": "2015 edition with 2016 amendments (held: knowledge/library.json uk-ad-m)",
+  "locator": "para 1.14; printed p. 7 (pdf index 14)",
+  "quote": "The door has a minimum clear opening width of 775mm, when measured in accordance with Diagram 1.1. b. Any threshold is an accessible threshold. c. Where a step into the dwelling is unavoidable, the rise is a maximum 150mm",
+  "value": "principal private entrance clear opening >=775 mm; accessible threshold; unavoidable step rise <=150 mm",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-m; https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf"
+ },
+ {
+  "id": "UK-ADM1-2015-1.17-WC",
+  "document": "Approved Document M: Access to and use of buildings, Volume 1: Dwellings (England)",
+  "edition": "2015 edition with 2016 amendments (held: knowledge/library.json uk-ad-m)",
+  "locator": "para 1.17; printed p. 8 (pdf index 15)",
+  "quote": "The door to the room opens outwards and has a clear opening width in accordance with Table 1.1.",
+  "value": "entrance-storey WC door opens outwards; clear access space per the WC access-zone diagram",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-m; https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf"
+ },
+ {
+  "id": "UK-ADM1-2015-1.18-controls",
+  "document": "Approved Document M: Access to and use of buildings, Volume 1: Dwellings (England)",
+  "edition": "2015 edition with 2016 amendments (held: knowledge/library.json uk-ad-m)",
+  "locator": "para 1.18a-b; printed p. 9 (pdf index 16)",
+  "quote": "have their centre line 450-1200mm above floor level, as shown in Diagram 1.5. b. Consumer units are mounted so that the switches are 1350-1450mm above floor level.",
+  "value": "switches, sockets, door bells, TV and telephone points 450-1200 mm above floor; consumer unit switches 1350-1450 mm",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-m; https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf"
+ },
+ {
+  "id": "UK-ADM1-2015-1.15-corridor",
+  "document": "Approved Document M: Access to and use of buildings, Volume 1: Dwellings (England)",
+  "edition": "2015 edition with 2016 amendments (held: knowledge/library.json uk-ad-m)",
+  "locator": "para 1.15b; printed p. 7 (pdf index 14)",
+  "quote": "the corridor is not reduced below a minimum 750mm width at any point.",
+  "value": "corridor not below 750 mm at a localised obstruction",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-m; https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf"
+ },
+ {
+  "id": "UK-ADM1-2015-2.27-WC-M4(2)",
+  "document": "Approved Document M: Access to and use of buildings, Volume 1: Dwellings (England)",
+  "edition": "2015 edition with 2016 amendments (held: knowledge/library.json uk-ad-m)",
+  "locator": "para 2.27 (M4(2) optional); printed p. 19 (pdf index 26)",
+  "quote": "Every dwelling has a room within the entrance storey that provides a WC and basin",
+  "value": "optional accessible-and-adaptable category: entrance-storey room with WC and basin",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-m; https://assets.publishing.service.gov.uk/media/5a7f8a82ed915d74e622b17b/BR_PDF_AD_M1_2015_with_2016_amendments_V3.pdf"
+ }
+]

@@ -1,0 +1,102 @@
+[
+ {
+  "id": "IEC60364-4-41-2005-411.3.2.2-scope",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock",
+  "edition": "Edition 5.0, 2005-12 (the iTeh preview file contains clauses 411.3-411.5 in full)",
+  "locator": "clause 411.3.2.2; printed p. 10 (pdf page 12 of the preview file)",
+  "quote": "The maximum disconnection time stated in Table 41.1 shall be applied to final circuits not exceeding 32A.",
+  "value": "Table 41.1 applies to final circuits not exceeding 32 A",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/10887/b410f7c10853465e9e7f293d9e18fd98/IEC-60364-4-41-2005.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-2005-T41.1",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock",
+  "edition": "Edition 5.0, 2005-12 (the iTeh preview file contains clauses 411.3-411.5 in full)",
+  "locator": "Table 41.1 (printed p.10; columns 50-120 V a.c./d.c., 120-230 V a.c./d.c., 230-400 V, >400 V); printed p. 10 (pdf page 12 of the preview file)",
+  "quote": "TN 0,8 Note 1 0,4 5 0,2 0,4 0,1 0,1 TT 0,3 Note 1 0,2 0,4 0,07 0,2 0,04 0,1",
+  "value": "a.c. 120 V < Uo <= 230 V: TN 0.4 s, TT 0.2 s; 230 V < Uo <= 400 V: TN 0.2 s, TT 0.07 s",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/10887/b410f7c10853465e9e7f293d9e18fd98/IEC-60364-4-41-2005.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-2005-411.3.2.3-5s",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock",
+  "edition": "Edition 5.0, 2005-12 (the iTeh preview file contains clauses 411.3-411.5 in full)",
+  "locator": "clause 411.3.2.3-4; printed p. 10 (pdf page 12 of the preview file)",
+  "quote": "In TN systems, a disconnection time not exceeding 5 s is permitted for distribution circuits, and for circuits not covered by 411.3.2.2. 411.3.2.4 In TT systems, a disconnection time not exceeding 1 s is permitted for distribution circuits",
+  "value": "TN distribution circuits: 5 s; TT distribution circuits: 1 s",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/10887/b410f7c10853465e9e7f293d9e18fd98/IEC-60364-4-41-2005.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-2005-411.3.3-20A",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock",
+  "edition": "Edition 5.0, 2005-12 (the iTeh preview file contains clauses 411.3-411.5 in full)",
+  "locator": "clause 411.3.3 (2005 base text; superseded by AMD1:2017 below); printed p. 10 (pdf page 12 of the preview file)",
+  "quote": "additional protection by means of a residual current protective device (RCD) in accordance with 415.1 shall be provided for – socket-outlets with a rated current not exceeding 20 A that are for use by ordinary persons and are intended for general use",
+  "value": "2005 text: RCD additional protection on general-use socket-outlets with rated current not exceeding 20 A",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/10887/b410f7c10853465e9e7f293d9e18fd98/IEC-60364-4-41-2005.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-2005-411.4.4-Zs",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock",
+  "edition": "Edition 5.0, 2005-12 (the iTeh preview file contains clauses 411.3-411.5 in full)",
+  "locator": "clause 411.4.4; printed p. 12 (pdf page 14 of the preview file)",
+  "quote": "Zs × Ia ≤ Uo",
+  "value": "TN: Zs x Ia <= Uo, with Ia the current causing disconnection within the specified time",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/10887/b410f7c10853465e9e7f293d9e18fd98/IEC-60364-4-41-2005.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-2005-411.5.3-RA",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock",
+  "edition": "Edition 5.0, 2005-12 (the iTeh preview file contains clauses 411.3-411.5 in full)",
+  "locator": "clause 411.5.3; printed p. 13 (pdf page 15 of the preview file)",
+  "quote": "ii) RA x IΔn ≤ 50 V",
+  "value": "TT with an RCD: RA x I_delta_n <= 50 V in addition to the disconnection-time requirement",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/10887/b410f7c10853465e9e7f293d9e18fd98/IEC-60364-4-41-2005.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-AMD1-2017-411.3.2.2-scope",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock, Amendment 1",
+  "edition": "Amendment 1, 2017-03 (iTeh preview contains the replaced 411.3.3 and new 411.3.4)",
+  "locator": "clause 411.3.2.2 (replaced); printed p. 3 (pdf page 5 of the preview file)",
+  "quote": "The maximum disconnection times stated in Table 41.1 shall be applied to final circuits with a rated current not exceeding • 63 A with one or more socket-outlets, and • 32 A supplying only fixed connected current-using equipment.",
+  "value": "Table 41.1 applies to final circuits up to 63 A with socket-outlets and up to 32 A supplying only fixed equipment",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/22593/faab23b5c332418984d5b3c627cbd1b0/IEC-60364-4-41-2005-AMD1-2017.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-AMD1-2017-T41.1",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock, Amendment 1",
+  "edition": "Amendment 1, 2017-03 (iTeh preview contains the replaced 411.3.3 and new 411.3.4)",
+  "locator": "Table 41.1 (replaced; columns 50-120 V, 120-230 V, 230-400 V, above 400 V, each a.c. and d.c.); printed p. 3 (pdf page 5 of the preview file)",
+  "quote": "TN 0,8 a 0,4 1 0,2 0,4 0,1 0,1 TT 0,3 a 0,2 0,4 0,07 0,2 0,04 0,1",
+  "value": "a.c. 120 V < Uo <= 230 V: TN 0.4 s, TT 0.2 s; 230 V < Uo <= 400 V: TN 0.2 s, TT 0.07 s",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/22593/faab23b5c332418984d5b3c627cbd1b0/IEC-60364-4-41-2005-AMD1-2017.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-AMD1-2017-411.3.3-32A",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock, Amendment 1",
+  "edition": "Amendment 1, 2017-03 (iTeh preview contains the replaced 411.3.3 and new 411.3.4)",
+  "locator": "clause 411.3.3 (replaced); printed p. 4 (pdf page 6 of the preview file)",
+  "quote": "Additional protection by means of a residual current protective device (RCD) with a rated residual operating current not exceeding 30 mA shall be provided for – a.c. socket-outlets with a rated current not exceeding 32 A that are liable to be used by ordinary persons and are intended for general use, and – a.c. mobile equipment for use outdoors with a rated current not exceeding 32A.",
+  "value": "30 mA RCD on general-use a.c. socket-outlets up to 32 A and on a.c. mobile equipment for outdoor use up to 32 A",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/22593/faab23b5c332418984d5b3c627cbd1b0/IEC-60364-4-41-2005-AMD1-2017.pdf"
+ },
+ {
+  "id": "IEC60364-4-41-AMD1-2017-411.3.4-luminaires",
+  "document": "IEC 60364-4-41 Low-voltage electrical installations, Part 4-41: Protection against electric shock, Amendment 1",
+  "edition": "Amendment 1, 2017-03 (iTeh preview contains the replaced 411.3.3 and new 411.3.4)",
+  "locator": "clause 411.3.4 (new); printed p. 4 (pdf page 6 of the preview file)",
+  "quote": "In premises designed to accommodate a single household, additional protection by a residual current protective device (RCD) with a rated residual operating current not exceeding 30 mA shall be provided for a.c. final circuits supplying luminaires.",
+  "value": "single-household premises: 30 mA RCD on a.c. final circuits supplying luminaires",
+  "status": "sourced",
+  "url_or_path": "https://cdn.standards.iteh.ai/samples/22593/faab23b5c332418984d5b3c627cbd1b0/IEC-60364-4-41-2005-AMD1-2017.pdf"
+ }
+]
