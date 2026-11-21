@@ -428,8 +428,9 @@ def design(lay=None):
     _sconces(add, "guest-wc", bs, lay, rc)
     DK = rc["dirty-kitchen"]
     dk = fp["dk-run"]
-    for x in (dk[0] + 0.5, dk[0] + 1.5, dk[0] + 2.5, dk[2] - 0.4):
-        add("DL", "dirty-kitchen", x, dk[1] - 0.1, why="over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm)",
+    n_dk = 5                                      # L6b V12: 4 needed 0.85 of driver output; 5 evenly spaced
+    for x in [dk[0] + 0.4 + i * (dk[2] - dk[0] - 0.8) / (n_dk - 1) for i in range(n_dk)]:
+        add("DL", "dirty-kitchen", x, dk[1] - 0.1, why="over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
             card="ies-res-kitchen-prep-500", zone="run-task:task")
     for x in (DK[0] + 1.2, DK[2] - 1.2):
         add("DL", "dirty-kitchen", x, DK[1] + 0.9, why="laundry and folding", card="ies-res-laundry-200")
@@ -463,15 +464,16 @@ def design(lay=None):
         add("DL", "study-game", d1[2] - 0.05, y, why="desk light over the shared homework desk's front edge "
             "(no shadow of the head); L6b: DL", card="ies-res-desk-400", zone="desk-task:task")
     d2 = fp["study-adult-desk"]
-    add("DL", "study-game", (d2[0] + d2[2]) / 2, d2[1] - 0.05, why="desk light over the adult desk; L6b: DL",
-        card="ies-res-desk-400", zone="desk-adult:task")
+    for x in ((d2[0] + d2[2]) / 2 - 0.35, (d2[0] + d2[2]) / 2 + 0.35):
+        add("DL", "study-game", x, d2[1] - 0.05, why="desk light over the adult desk; L6b: DL (V12: 1 -> 2, one needed 1.12 of driver output)",
+            card="ies-res-desk-400", zone="desk-adult:task")
     FB = rc["family-bath"]
     add("DL", "family-bath", (FB[0] + FB[2]) / 2 + 0.2, (FB[1] + FB[3]) / 2 - 0.3, why="bath ambient",
         card="ies-res-shower-50")
     sh = fp["fb-shower"]
     add("DL", "family-bath", (sh[0] + sh[2]) / 2, (sh[1] + sh[3]) / 2, why="shower (wet-rated); L6b: DL",
         card="ies-res-shower-50", zone="shower:task")
-    _sconces(add, "family-bath", fp["fb-basin"], lay, rc, counter=False)   # L6b: the two sconces light the basin; the counter downlight needed a 15 % driver
+    _sconces(add, "family-bath", fp["fb-basin"], lay, rc, counter=True)    # L6b V12: the two sconces alone needed 1.20 of driver output; the counter downlight is back
     bb = fp["fb-basin"]
     strip("TOE", "family-bath", (bb[2] + 0.02, bb[1] + 0.03), (bb[2] + 0.02, bb[3] - 0.03), 0.30, (0.3, 0, -1),
           level="GF", why="glow under the basin: night light")
@@ -481,7 +483,7 @@ def design(lay=None):
             add("DL", room, x, (K[1] + K[3]) / 2 - 0.3, why="bedroom ambient", card="ies-res-bedroom-general-50")
         for d in desks:
             q = fp[d]
-            add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF",
+            add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF", **({"lm": 600} if room == "kids-b" else {}),   # V12: 450 lm needed 0.85
                 why="each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, "
                     "out of the sleep zone", card="ies-res-desk-400")
         q = fp[bed]
@@ -899,7 +901,7 @@ SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
         "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
-        "Dinner": {"table-pendant": 0.4, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
+        "Dinner": {"table-pendant": 0.405, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
         "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.3, "island-pendants": 0.4},
         "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.15, "*decorative": 0.2},
