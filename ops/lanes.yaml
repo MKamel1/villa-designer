@@ -101,6 +101,13 @@ lanes:
     - src/archpipe/exchange/**
     - tests/exchange/**
     - docs/lanes/RV3*.md
+  FIX1: # door-passage planting conflict after the lounge glazing widening; snapshot refresh
+    - src/archpipe/concept/villa_landscape.py
+    - knowledge/garden-*.json
+    - knowledge/landscape*.json
+    - src/archpipe/model/data/**
+    - tests/model/**
+    - docs/lanes/FIX1*.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
