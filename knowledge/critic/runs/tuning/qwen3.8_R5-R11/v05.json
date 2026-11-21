@@ -1,0 +1,33 @@
+{
+ "view": "v05",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.1,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or openings to the exterior are visible in the frame; the scene is fully interior with walls, curtains, and furniture."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood grain on the wardrobe doors and the vertical slats behind the headboard is consistent in scale and proportion with real timber; no stretching, smearing, or unnatural hue is visible."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The round wall-mounted light fixtures on the right are perfectly smooth spheres with no visible polygon facets. The pillows and bedding have soft, rounded forms, not rigid boxes or wedges. The wooden slats are clean and uniform."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The bed, pillows, and headboard are all properly seated on the floor and against the wall. The wall sconces are correctly mounted on the slatted wood panel. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The bed is the main subject and is fully visible within the frame. The wall on the left is large but not excessively empty, and there are no blocking objects, seams, or haze."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room contains a bed, desk, chair, and a small side table with a box, but lacks the wardrobe, plant, and multiple pillows seen in the reference, making it appear less fully styled."
+  }
+ }
+}

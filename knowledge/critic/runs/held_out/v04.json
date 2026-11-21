@@ -1,0 +1,41 @@
+{
+ "view": "v04",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.3,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "Two large windows on the back and right walls show a completely flat, featureless white exterior with no sky gradient, horizon, or detail."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood grain on the desk and floor is consistent in scale and pattern; no oversized, stretched, or unnatural textures are visible."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "Office chairs are blocky with flat, faceted armrests and headrests; the sofa cushions are rigid, boxy shapes with sharp, unsoftened edges, lacking the subtle rounding seen in the reference's pillows and chair."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The black office chairs are positioned under the wooden desks with their casters resting on the floor, and the sofa sits correctly on the floor. No objects are floating, detached, or intersecting improperly."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A large, solid white vertical column on the right edge of the frame occupies a significant portion of the view, acting as a foreground blocker and cutting off the room's depth."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room contains only bare desks and chairs with no books, lamps, or personal items, appearing significantly less styled than the reference bedroom."
+  },
+  "R13": {
+   "score": 2,
+   "per_order": [
+    2,
+    2
+   ],
+   "evidence": "Both images are computer renders and lack the characteristics of a real photograph. Image A features perfectly uniform, textureless window light, idea | Both images are clearly 3D renders rather than photographs. Image A exhibits typical CGI artifacts: the wood grain on the wardrobe is uniform and lack"
+  }
+ }
+}

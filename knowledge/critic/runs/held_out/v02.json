@@ -1,0 +1,41 @@
+{
+ "view": "v02",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.7,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "Through the large window on the left, the exterior shows a flat white sky, a plain white wall, and simple, low-detail green shapes that do not read as believable, textured planting or a detailed facade."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood grain on the bookshelves and door frame is consistent in scale and pattern; no stretched, smeared, or oversized texture mapping is visible."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The sofa cushions, throw pillows, and book spines on the shelves are rendered as flat, rigid boxes and wedges with sharp, unsoftened edges, lacking the subtle volume and softness seen in the reference's bedding and chair."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The sofa, pillows, and bookshelves in Image 2 all appear to be properly supported and in correct contact with the floor and walls. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "No objects block the view, the sofa is fully visible, no large empty walls, no frame seams, bands, haze, or bent lines are present."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The scene is titled 'Garden living' and clearly shows a garden view through the glass door, but the room itself is sparsely styled with only a sofa, two pillows, and a single small plant, lacking the density of props seen in the reference bedroom."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are computer renders. Image A exhibits typical CGI artifacts: perfectly uniform surfaces, overly sharp and clean edges on the furniture an | Both images are high-quality 3D renders rather than photographs. Image A displays characteristic CGI artifacts: the wood grain on the wardrobe is a fl"
+  }
+ }
+}

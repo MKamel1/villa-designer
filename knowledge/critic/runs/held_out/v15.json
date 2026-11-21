@@ -1,0 +1,41 @@
+{
+ "view": "v15",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.1,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The window in the shower area is a flat, bright white rectangle with no visible exterior, sky, or texture."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The marble veining on the walls and shower floor is consistent in scale and pattern, with no visible stretching, smearing, or unnatural coloration."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The round wall sconce on the left wall is a perfectly smooth, flat disc with no visible facets, and the square sink and faucet are clean, sharp geometric forms without crude polygonal artifacts."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The bathroom sink is properly seated on its cabinet base, the faucet is correctly attached to the sink, the mirror is flush against the wall, and the shower glass panel intersects cleanly with the marble walls and floor. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The bathroom is fully framed with no objects blocking the view, no cut-off subjects, no excessive empty wall, no seams, bands, haze, or bent lines."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The bathroom is bare, lacking typical props like towels, toiletries, or a bath mat, unlike the styled bedroom in the reference."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong signs of being a computer render: the marble texture is uniform and lacks natural variation or imperfections; the lighting is  | Image B exhibits strong indicators of being a computer render: the marble texture is uniform and lacks natural variation or imperfections; lighting is"
+  }
+ }
+}

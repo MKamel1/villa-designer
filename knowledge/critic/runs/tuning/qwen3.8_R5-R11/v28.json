@@ -1,0 +1,33 @@
+{
+ "view": "v28",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.5,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "The courtyard exterior visible through the glass doors and open space features detailed potted plants, a flowering tree, textured grass, and a graded sky, all appearing believable and not flat or blank."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "No wood, stone, or tile surfaces are present in Image 2. The visible materials are smooth white walls, glass, and simple green ground cover, none of which exhibit scale or texture mapping errors."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "Potted plants on the right and center have flat, disc-shaped foliage; the tree in the background has lollipop-style leaf clusters; the trellis on the left is a flat card with simple leaf shapes."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "All objects in Image 2, including potted plants, the tree, and the trellis, are correctly positioned on the ground or attached to walls. No floating, detached, or intersecting elements are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A dark vertical band is visible along the right edge of the frame, and a large plain white wall occupies the left third of the image."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image shows a courtyard with a tree, potted plants, a trellis, and a clear path, which is consistent with a yard space."
+  }
+ }
+}

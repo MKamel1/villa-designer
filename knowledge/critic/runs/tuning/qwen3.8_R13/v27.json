@@ -1,0 +1,17 @@
+{
+ "view": "v27",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.0,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A is a 3D render; the plants have flat, repetitive geometry, the lighting is uniform and artificial, and the overall look is clean and synthetic | Image B exhibits clear signs of being a 3D render: the plants have a low-poly, geometric appearance with flat, uniform textures; the lighting is harsh"
+  }
+ }
+}

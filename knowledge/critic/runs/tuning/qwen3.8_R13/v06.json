@@ -1,0 +1,17 @@
+{
+ "view": "v06",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.6,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong indicators of being a 3D render: the lighting is overly uniform and flat, the window light is blown out to pure white without  | Image A displays realistic material properties, such as the visible wood grain on the wardrobe and the texture of the bedding. The lighting is soft an"
+  }
+ }
+}

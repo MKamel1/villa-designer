@@ -1,0 +1,41 @@
+{
+ "view": "v25",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.7,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The exterior visible in Image 2 consists of plain white walls, a flat sky gradient, and simple geometric shapes. There are no textured facades, detailed planting beyond the potted flowers, or believable neighboring structures."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The pavers on the courtyard floor are small, uniform grey blocks with consistent grout lines, and the wood grain on the bench is subtle and appropriately scaled for the object size."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The potted plants in the foreground and background have flat, card-like foliage. The bench is composed of simple, plain boxes. The pots are faceted cylinders."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The bench, potted plants, and sliding door in Image 2 all appear to be correctly placed on the ground or attached to the wall with no visible gaps or intersections."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "No objects block the view, the main subject (courtyard) is fully visible, no plain wall exceeds 40%, no seams, bands, haze, or bent lines are present."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image shows a narrow courtyard with potted plants, a bench, and paving, which is consistent with a garden space, though not explicitly from a street gate."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits classic signs of a 3D render: perfectly smooth and uniform surfaces, idealized lighting with no atmospheric haze or complex reflectio | Image B exhibits multiple hallmarks of a 3D render: the lighting is perfectly uniform and lacks the subtle variations of a real environment; the textu"
+  }
+ }
+}

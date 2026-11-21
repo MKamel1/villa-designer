@@ -1,0 +1,41 @@
+{
+ "view": "v22",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 16.5,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The views through both the left and right windows are completely blank white slabs with no sky, landscape, or architectural detail."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The wooden desk and chair in the center-right of the frame exhibit an unnatural salmon-pink hue."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The lamp globe in the center-right of the frame is clearly faceted, showing visible polygon edges rather than a smooth curve."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The lamp shade on the right side of the frame is floating in mid-air, detached from the arm supporting it."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The right side of the frame is heavily obstructed by a vertical wooden beam and the back of a grey headboard, covering more than a quarter of the image."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The bedroom contains a bed, a desk, and a single small plant in the corner, but lacks any lived-in details such as bedding accessories, books, or personal items on the desk."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A has extremely flat lighting, perfectly smooth surfaces without any texture or wear, and a lack of realistic shadows or ambient occlusion, whic | Image A shows more realistic lighting gradients, subtle texture in the fabric of the bed and pillows, and more natural shadows. Image B has overly bri"
+  }
+ }
+}

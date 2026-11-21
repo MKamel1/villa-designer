@@ -1,0 +1,41 @@
+{
+ "view": "v16",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 16.7,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or outdoor areas are visible in the frame."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The marble veining on the walls and floor is excessively large and blotchy, lacking the fine detail of real stone and appearing more like a painted texture than a physical material."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The shower head at the top center of the frame shows visible polygon facets along its circular rim, indicating a low-poly model."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The toilet bowl in the center of the frame is floating in mid-air without any visible mounting or connection to the wall."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The wall and door frame on the far left side of the image block approximately 25-30% of the frame, obstructing the view of the room."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The guest bathroom contains a toilet, shower head, and sink, but is completely devoid of any lived-in accessories, toiletries, towels, or decorative props."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A has perfectly uniform lighting, lacks any surface imperfections or grime, and the materials (especially the marble and the toilet) have a synt | Image A shows more natural lighting variations, subtle textures on the fabric and wood, and a more realistic interaction between objects and the floor"
+  }
+ }
+}

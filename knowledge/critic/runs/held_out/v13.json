@@ -1,0 +1,41 @@
+{
+ "view": "v13",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 28.8,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in Image 2; the room is enclosed with walls, a curtain, and furniture only."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood grain on the desk and bed frame is subtle and appropriately scaled; no oversized grain, blotchiness, or unnatural hue is visible."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The black office chair on the right has a flat, board-like backrest and armrests. The desk lamp head is a simple, flat black box. The bed headboard is a plain, untextured slab."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The bed, desk, and chair all rest naturally on the floor. The lamp is properly mounted on the desk. No objects are floating, detached, or intersecting."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The bed is cut off at the bottom and left edges of the frame, and the desk and chair are partially cut off on the right, but this is a standard framing choice for an interior scene, not a flaw. No other composition issues are present."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room contains only a bed, desk, and chair. It lacks the wardrobe, rug, and decorative pillows seen in the reference, making it appear bare and unstyled."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong indicators of being a computer render: the lighting is overly uniform and lacks natural variation; the curtain fabric appears  | Image B exhibits strong indicators of being a computer render: the lighting is unnaturally uniform and soft, the curtain has a perfectly smooth, plast"
+  }
+ }
+}

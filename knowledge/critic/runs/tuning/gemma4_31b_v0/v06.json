@@ -1,0 +1,41 @@
+{
+ "view": "v06",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 16.1,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The window in the right half of the frame shows a completely flat white void for the sky and exterior environment."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The wood grain on the desk legs and tabletop in the right foreground is unnaturally stretched and lacks realistic scale."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The pillow on the top bunk and the mattress on the bottom bunk are rigid, boxy shapes lacking believable fabric folds or organic form."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The pillow on the top bunk of the bunk bed is visibly penetrating the white guardrail/headboard panel."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The white wall on the left side of the frame covers more than 55 percent of the total image area."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The kids' room contains a bunk bed and a desk, but it is completely devoid of lived-in details such as books, toys, stationery, or decorative accessories."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Both images are clearly 3D renders. Image A has very flat lighting and lacks texture detail on the bed and walls. Image B has slightly more complex li | Both images are clearly 3D renders, but Image A has slightly more believable lighting and material textures (such as the wood grain on the wardrobe an"
+  }
+ }
+}

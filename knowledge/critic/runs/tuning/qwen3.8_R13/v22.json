@@ -1,0 +1,17 @@
+{
+ "view": "v22",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 10.0,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong indicators of being a computer render: the lighting is overly uniform and bright with no visible shadows or depth; the materia | Image B exhibits strong indicators of being a computer render: the lighting is overly uniform and bright with no visible shadows or depth; the window "
+  }
+ }
+}

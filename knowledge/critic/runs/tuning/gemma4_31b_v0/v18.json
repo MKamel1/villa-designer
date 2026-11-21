@@ -1,0 +1,41 @@
+{
+ "view": "v18",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 16.8,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The view through the window in the center of the frame shows a flat, featureless blue sky and very basic, low-detail foliage."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The wood grain on the TV console and the side table has an unnatural salmon-pink hue."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The plant in the center of the frame has foliage consisting of flat, repetitive disc-like shapes, and the planter pot shows visible polygon facets."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The potted plant in the center-left of the frame is floating slightly above the floor surface."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The curtain on the left side of the frame covers approximately 25-30% of the total image area, acting as a large foreground obstruction."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The view shows a sofa and TV from the desk area, but the room is sparsely styled; the sofa lacks cushions, the TV stand is empty, and the desk is bare, making the space feel generic and uninhabited."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Both images are clearly computer renders, but Image B has slightly more credible lighting and material textures (such as the fabric of the bed and the | Both images are clearly 3D renders, but Image B shows more signs of artificiality, such as the perfectly flat lighting on the walls, the lack of ambie"
+  }
+ }
+}

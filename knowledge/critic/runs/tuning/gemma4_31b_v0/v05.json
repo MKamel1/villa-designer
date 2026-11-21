@@ -1,0 +1,41 @@
+{
+ "view": "v05",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 16.3,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or outdoor areas are visible in the frame."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The wood grain on the door in the center background is excessively large and stretched, appearing unnatural for a standard interior door."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The lamp globes on the right and left of the headboard exhibit visible polygon facets, and the pillows are rendered as rigid, unnatural wedges."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The pillows on the bed are visibly penetrating the fabric of the headboard."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The brown curtain on the left side of the frame covers approximately 40-45% of the total image area, acting as a large, flat vertical block that dominates the composition."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The bedroom contains a bed and a desk, but it is completely devoid of lived-in details such as books, plants, bedside accessories, or personal items on the desk."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are computer renders, but Image B shows more realistic lighting, fabric textures (the bed linens and pillows), and a more natural distribu | Both images are high-quality 3D renders, but Image B exhibits more sophisticated lighting and material properties. The soft glow of the spherical lamp"
+  }
+ }
+}

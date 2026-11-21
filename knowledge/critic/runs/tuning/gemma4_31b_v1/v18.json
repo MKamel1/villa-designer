@@ -1,0 +1,41 @@
+{
+ "view": "v18",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.2,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The view through the window shows a flat, dark blue sky and simplified, low-detail exterior elements."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The marble veining on the wall in the far right background is excessively large and blotchy compared to real-world scale."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The plant foliage in the center of the room consists of flat, disc-like planes, which is significantly more crude than the assets in the reference image."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The curtain on the left is intersecting with the wall/corner of the room."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The sofa in the foreground blocks a significant portion of the lower frame, and the curtain on the left cuts off a large section of the view."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room is sparsely furnished, containing only a sofa, TV stand, and a single plant, lacking the density of props and styling seen in the reference bedroom."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Both images are clearly computer renders, but Image B has slightly more credible lighting and material textures (such as the fabric of the bed and the | Both images are clearly 3D renders, but Image B shows more signs of artificiality, such as the perfectly flat lighting on the walls, the lack of ambie"
+  }
+ }
+}

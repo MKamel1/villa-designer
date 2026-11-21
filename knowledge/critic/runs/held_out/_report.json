@@ -1,0 +1,779 @@
+{
+ "split": "held_out",
+ "gating": [
+  "R1",
+  "R10",
+  "R11",
+  "R12",
+  "R2",
+  "R3",
+  "R4",
+  "R8"
+ ],
+ "verdicts": {
+  "v02": "fail",
+  "v03": "fail",
+  "v04": "fail",
+  "v09": "pass",
+  "v13": "fail",
+  "v15": "fail",
+  "v17": "fail",
+  "v20": "fail",
+  "v21": "fail",
+  "v23": "fail",
+  "v25": "pass",
+  "v26": "fail",
+  "v30": "fail",
+  "v32": "fail",
+  "v33": "pass",
+  "v35": "fail",
+  "v39": "fail",
+  "v40": "fail"
+ },
+ "confusion": {
+  "by_grade": {
+   "B-": {
+    "fail": 1,
+    "pass": 1
+   },
+   "C+": {
+    "fail": 1,
+    "pass": 1
+   },
+   "C": {
+    "fail": 3
+   },
+   "C-": {
+    "fail": 2,
+    "pass": 1
+   },
+   "D+": {
+    "fail": 4
+   },
+   "D": {
+    "fail": 3
+   },
+   "F": {
+    "fail": 1
+   }
+  },
+  "recall_must_fail": [
+   8,
+   8
+  ],
+  "false_fail_should_pass": [
+   1,
+   2
+  ],
+  "recall_c_or_worse": [
+   14,
+   16
+  ],
+  "recall_seeded_false_passes": [
+   12,
+   13
+  ],
+  "middle_fail": [
+   6,
+   8
+  ]
+ },
+ "scores": {
+  "v02": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R5": 1,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 1,
+   "R13": 1,
+   "R6": null
+  },
+  "v03": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 1,
+   "R4": 0,
+   "R10": 1,
+   "R12": 2,
+   "R5": 0,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 2,
+   "R13": 2,
+   "R6": null
+  },
+  "v04": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 1,
+   "R12": 2,
+   "R5": 0,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 1,
+   "R13": 2,
+   "R6": null
+  },
+  "v09": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R5": 2,
+   "R7": 1,
+   "R8": 2,
+   "R9": 2,
+   "R11": 1,
+   "R13": 1,
+   "R6": null
+  },
+  "v13": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R5": 2,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 1,
+   "R13": 0,
+   "R6": null
+  },
+  "v15": {
+   "R1": 1,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 2,
+   "R12": 0,
+   "R5": 0,
+   "R7": 2,
+   "R8": 2,
+   "R9": 2,
+   "R11": 1,
+   "R13": 0,
+   "R6": null
+  },
+  "v17": {
+   "R1": 1,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 2,
+   "R12": 2,
+   "R5": 2,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 1,
+   "R13": 1,
+   "R6": null
+  },
+  "v20": {
+   "R1": 1,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 2,
+   "R12": 2,
+   "R5": 2,
+   "R7": 1,
+   "R8": 2,
+   "R9": 2,
+   "R11": 1,
+   "R13": 1,
+   "R6": null
+  },
+  "v21": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 0,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R5": 2,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 0,
+   "R13": 1,
+   "R6": null
+  },
+  "v23": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 1,
+   "R12": 2,
+   "R5": 1,
+   "R7": 1,
+   "R8": 2,
+   "R9": 2,
+   "R11": 0,
+   "R13": 2,
+   "R6": null
+  },
+  "v25": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R5": 1,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 2,
+   "R13": 0,
+   "R6": null
+  },
+  "v26": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 1,
+   "R12": 2,
+   "R5": 0,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 2,
+   "R13": 1,
+   "R6": null
+  },
+  "v30": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 0,
+   "R10": 2,
+   "R12": null,
+   "R5": 2,
+   "R7": 2,
+   "R8": 1,
+   "R9": 2,
+   "R11": 1,
+   "R13": 0,
+   "R6": null
+  },
+  "v32": {
+   "R1": 1,
+   "R2": 2,
+   "R3": 1,
+   "R4": 0,
+   "R10": 1,
+   "R12": 2,
+   "R5": 2,
+   "R7": 1,
+   "R8": 1,
+   "R9": 2,
+   "R11": 2,
+   "R13": 0,
+   "R6": null
+  },
+  "v33": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 2,
+   "R12": 2,
+   "R5": 1,
+   "R7": 2,
+   "R8": 2,
+   "R9": 2,
+   "R11": 2,
+   "R13": 2,
+   "R6": null
+  },
+  "v35": {
+   "R1": 1,
+   "R2": 2,
+   "R3": 2,
+   "R4": 2,
+   "R10": 1,
+   "R12": 1,
+   "R5": 2,
+   "R7": 0,
+   "R8": 2,
+   "R9": 2,
+   "R11": 1,
+   "R13": 2,
+   "R6": null
+  },
+  "v39": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 1,
+   "R4": 2,
+   "R10": 2,
+   "R12": 0,
+   "R5": 1,
+   "R7": 2,
+   "R8": 2,
+   "R9": 2,
+   "R11": 2,
+   "R13": 0,
+   "R6": null
+  },
+  "v40": {
+   "R1": 2,
+   "R2": 2,
+   "R3": 2,
+   "R4": 1,
+   "R10": 1,
+   "R12": 2,
+   "R5": 1,
+   "R7": 2,
+   "R8": 0,
+   "R9": 2,
+   "R11": 1,
+   "R13": 0,
+   "R6": null
+  }
+ },
+ "notes": {
+  "v02": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v03": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R10",
+    "R3",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "3 WARNs (R10, R3, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v04": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R10",
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "3 WARNs (R10, R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v09": {
+   "zeros": [],
+   "warns": [
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v13": {
+   "zeros": [],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v15": {
+   "zeros": [
+    "R12"
+   ],
+   "warns": [
+    "R1",
+    "R11",
+    "R4"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R12 (hero view)",
+    "3 WARNs (R1, R11, R4) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v17": {
+   "zeros": [],
+   "warns": [
+    "R1",
+    "R11",
+    "R4",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "4 WARNs (R1, R11, R4, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v20": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R1",
+    "R11"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "2 WARNs (R1, R11) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v21": {
+   "zeros": [
+    "R11",
+    "R3"
+   ],
+   "warns": [
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R11, R3 (hero view)"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v23": {
+   "zeros": [
+    "R11",
+    "R4"
+   ],
+   "warns": [
+    "R10"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R11, R4 (hero view)"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v25": {
+   "zeros": [],
+   "warns": [
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v26": {
+   "zeros": [],
+   "warns": [
+    "R10",
+    "R4",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "3 WARNs (R10, R4, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v30": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R11",
+    "R8"
+   ],
+   "not_evaluated": [
+    "R12"
+   ],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "2 WARNs (R11, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v32": {
+   "zeros": [
+    "R4"
+   ],
+   "warns": [
+    "R1",
+    "R10",
+    "R3",
+    "R8"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R4 (hero view)",
+    "4 WARNs (R1, R10, R3, R8) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v33": {
+   "zeros": [],
+   "warns": [],
+   "not_evaluated": [],
+   "reasons": [],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v35": {
+   "zeros": [],
+   "warns": [
+    "R1",
+    "R10",
+    "R11",
+    "R12"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "4 WARNs (R1, R10, R11, R12) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v39": {
+   "zeros": [
+    "R12"
+   ],
+   "warns": [
+    "R3"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R12 (hero view)"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  },
+  "v40": {
+   "zeros": [
+    "R8"
+   ],
+   "warns": [
+    "R10",
+    "R11",
+    "R4"
+   ],
+   "not_evaluated": [],
+   "reasons": [
+    "score 0 on R8 (hero view)",
+    "3 WARNs (R10, R11, R4) escalate to FAIL"
+   ],
+   "gating": [
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R2",
+    "R3",
+    "R4",
+    "R8"
+   ],
+   "hero": true
+  }
+ }
+}

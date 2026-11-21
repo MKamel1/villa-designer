@@ -1,0 +1,41 @@
+{
+ "view": "v40",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.4,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "A small opening at the top center shows a flat, untextured light blue sky slab with no clouds, gradient, or atmospheric detail."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "No wood, stone, tile, or paver surfaces are present in Image 2. The visible materials are plain painted walls, a uniform green ground plane, and foliage, none of which exhibit scale-related texture flaws."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The vertical plant structure on the left wall consists of flat, disc-shaped leaf clusters that look like 2D cards. The shrubs in the bottom right corner are low-poly, blocky mounds with visible faceting, and the tree leaves on the right are flat, rigid shapes."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The vertical trellis structure is mounted to the wall with visible brackets, and the potted plants and tree are situated on the ground plane without any visible floating or intersection issues."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The left wall occupies roughly 45-50% of the frame with no texture or detail, and the main vertical plant structure is partially cut off at the top and bottom edges."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The scene is a bare corner with a vertical trellis and a few shrubs; it lacks the density of props (bed, wardrobe, chair, lamps) seen in the reference, but it does depict a garden wall and espalier structure consistent with the title."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong signs of being a computer render: the lighting is extremely flat and lacks natural variation; the textures on the plants and w | Image A displays realistic material properties, such as the visible wood grain on the wardrobe and the fabric texture of the bedding and headboard. Th"
+  }
+ }
+}

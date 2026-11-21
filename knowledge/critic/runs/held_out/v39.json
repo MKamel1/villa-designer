@@ -1,0 +1,41 @@
+{
+ "view": "v39",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.0,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "A window on the right shows a flat, featureless white curtain and a blank, untextured exterior area; no believable outdoor scene is visible."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wicker chair frame in the center of Image 2 shows a uniform, grid-like pattern with no visible weave texture or material grain; the white cushion fabric appears flat and lacks realistic textile detail, but no texture is visibly oversized, stretched, or unnaturally colored."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The hanging chair's frame is a smooth, continuous lattice with no visible polygon facets. The cushions are soft and rounded, not rigid or boxy. The plant leaves are flat but this is a minor stylistic choice, not a severe flaw."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The hanging chair is suspended by a single rod from above, and its base rests on the floor. The cushions are contained within the frame. No objects are floating, detached, or intersecting improperly."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The main subject, the hanging chair, is fully visible and not cut off. The plant on the left is partially in frame but does not block more than 15% of the view. The wall is plain but does not cover more than 40% of the frame. No other composition issues are present."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image shows a hanging chair on a balcony with a plant and a window, which aligns with the title 'North garden \u2014 balcony hanging retreat'."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong indicators of being a 3D render: the lighting is overly uniform and flat, lacking the complex shadows and ambient occlusion fo | Image B exhibits clear signs of being a computer render: the geometry of the chair's lattice is perfectly uniform, the fabric textures are overly smoo"
+  }
+ }
+}

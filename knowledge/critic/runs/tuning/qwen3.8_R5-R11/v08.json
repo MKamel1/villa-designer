@@ -1,0 +1,33 @@
+{
+ "view": "v08",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 20.5,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or exterior views are visible in the image; the room is fully enclosed with walls and a closed door."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the desk surface and the marble veining on the accent wall are both at a plausible, real-world scale, with no visible stretching, smearing, or unnatural coloration."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The black desk lamps on the left have flat, rectangular shades and rigid, boxy arms. The office chairs have faceted, low-poly backrests. The sofa cushions appear as simple, flat boxes."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The black desk lamps are floating above the table surface without visible bases or contact points. The office chair appears to be intersecting with the sofa armrest."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The left wall and the desk occupy the left third, but the main subject (sofa/desk) is fully visible. No object blocks >15% of the frame, no cut-off subject, no bent lines, no edge bands, no haze. Empty wall area is within acceptable limits."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room is sparsely furnished with only a desk, two chairs, and a sofa. It lacks the density of styling (e.g., books, decor, side tables) seen in the reference bedroom, appearing bare and unfinished."
+  }
+ }
+}

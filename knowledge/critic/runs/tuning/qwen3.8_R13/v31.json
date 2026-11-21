@@ -1,0 +1,17 @@
+{
+ "view": "v31",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.4,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image B exhibits characteristics of a real photograph, such as soft, diffuse ambient lighting, realistic fabric textures on the bedding and headboard, | Image A exhibits characteristics of a real photograph, such as soft, diffuse lighting with natural falloff, realistic wood grain texture on the wardro"
+  }
+ }
+}

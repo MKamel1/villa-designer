@@ -1,0 +1,17 @@
+{
+ "view": "v12",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.6,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong indicators of being a 3D render: the marble texture is uniform and lacks natural variation or grout lines; the lighting is ove | Image A exhibits characteristics of a real photograph, such as soft, natural lighting with subtle shadows, realistic wood grain texture on the wardrob"
+  }
+ }
+}

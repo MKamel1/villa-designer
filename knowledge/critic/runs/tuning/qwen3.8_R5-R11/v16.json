@@ -1,0 +1,33 @@
+{
+ "view": "v16",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 18.9,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, floor, and fixtures."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The marble veining on the walls and floor is consistent in scale and pattern, with no visible stretching, smearing, or unnatural coloration. The texture size appears appropriate for real stone."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The shower head, toilet, and handheld shower fixture are all smooth, rounded, and well-modeled with no visible polygon facets or crude geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The wall-mounted toilet, shower head, and hand shower are all properly attached to the marble walls and ceiling with no visible gaps or floating elements."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A large, plain white wall and a vertical door frame occupy the entire left third of the image, blocking the view and constituting a significant foreground obstruction."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The bathroom is bare, lacking typical props like a towel, soap, or plants, unlike the styled bedroom in the reference."
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "view": "v19",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 17.3,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The sky is a flat, gradient-less blue slab and the boundary wall on the left is a plain white surface without texture."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The paving stones in the background left area are scaled correctly relative to the furniture and architecture."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The foliage of the central tree and the bushes in the foreground consist of repetitive, flat-plane leaf assets (flat cards) without organic variation or volume."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The wooden chair legs in the background (center-left) are floating above the ground surface."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "A solid black vertical band is visible along the entire left edge of the frame."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The south garden pergola and lawn are visible, but the styling is generic and sparse; the outdoor seating area lacks plausible lived-in props such as cushions, books, or accessories, and the interior visible through the glass is minimally dressed."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are clearly 3D renders. Image A has very artificial lighting, perfectly uniform grass, and 'floating' assets. Image B has slightly more cr | Both images are clearly 3D renders. Image A has very flat lighting and perfectly smooth, repetitive textures on the wardrobe and walls. Image B has un"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "view": "v08",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 17.0,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or outdoor areas are visible in the frame."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The marble texture on the wall behind the desk is scaled far too large, with veining patterns that are disproportionate to the room's dimensions."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The sofa cushions in the center and right of the frame are rigid, boxy shapes lacking believable soft form or organic curvature."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The black desk lamps on the wooden table are floating slightly above the surface, with no visible contact or shadows where the bases meet the wood."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The plain brown wall on the left side of the frame covers approximately 40-50% of the total image area, and the back of the sofa occupies a significant portion of the lower center, creating a composition dominated by empty or obstructive surfaces."
+  },
+  "R11": {
+   "score": 0,
+   "evidence": "The camera is positioned behind the cinema seating (center), looking at the back of the sofa, and the room is completely devoid of any lived-in props or accessories."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A has several hallmarks of a 3D render: perfectly uniform lighting on the walls, lack of surface imperfections, and 'too perfect' geometry. Imag | Image A shows more natural light distribution and subtle material imperfections, such as the texture of the bed linens and the grain of the wood wardr"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "view": "v03",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 28.1,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "Large sliding glass doors on the left show a flat, uniform white/grey background with no sky gradient, building detail, or textured planting; the sphere and plants appear as isolated cutouts against a blank slab."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood slats on the TV wall and staircase show uniform, small-scale grain; no oversized, stretched, or blotchy texture mapping is visible."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The spherical hanging chair in the background has a visible wireframe grid structure, and the potted plant foliage appears as flat, low-poly clusters rather than detailed leaves."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The sofa, coffee table, and armchair all rest naturally on the floor. The TV is mounted on the wall panel. No objects are floating, detached, or intersecting improperly."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The staircase structure on the far left edge is cut off by the frame, and the large dark wood-paneled wall on the right occupies a significant portion of the composition, creating a heavy, unbalanced feel."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The living room is fully styled with a sofa, coffee table, armchair, TV, plants, and a decorative sphere, matching the 'Street lounge' title and reference density."
+  },
+  "R13": {
+   "score": 2,
+   "per_order": [
+    2,
+    2
+   ],
+   "evidence": "Image A is extremely dark and underexposed, making it difficult to judge material quality, but the lighting appears consistent with a dimly lit interi | Image B exhibits characteristics of a real photograph, such as complex, soft lighting from multiple sources (recessed ceiling lights and ambient light"
+  }
+ }
+}

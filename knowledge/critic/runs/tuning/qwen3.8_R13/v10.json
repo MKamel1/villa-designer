@@ -1,0 +1,17 @@
+{
+ "view": "v10",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.2,
+ "scores": {
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Image A exhibits strong indicators of being a 3D render: the lighting is overly uniform and clean, the shadows are soft and lack the complexity of a r | Image B exhibits strong indicators of being a computer render: the lighting is overly uniform and clean (especially the recessed ceiling light and wal"
+  }
+ }
+}

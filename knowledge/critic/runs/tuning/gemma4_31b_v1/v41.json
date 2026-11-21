@@ -1,0 +1,41 @@
+{
+ "view": "v41",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.9,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The sky in the background is a flat, gradient blue slab without clouds or atmospheric detail."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the pergola posts and beams is noticeably stretched and oversized compared to the realistic scale of the wood in the reference image."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The foliage on the tree and shrubs consists of flat, repetitive planes (cards) and the planter pot shows visible polygon facets."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The pergola posts are floating above the grass surface without any visible contact or grounding."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The large tree in the foreground blocks a significant portion of the left side of the frame, exceeding 15% of the image area."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image contains all elements promised in the title: a pergola, climbers, a centerpiece tree, and seating areas."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are clearly 3D renders. Image A has very artificial lighting, flat textures on the grass and walls, and perfectly repetitive plant models. | Both images are clearly 3D renders. Image A has very flat lighting, perfectly smooth surfaces, and lacks any natural imperfections or 'noise' found in"
+  }
+ }
+}

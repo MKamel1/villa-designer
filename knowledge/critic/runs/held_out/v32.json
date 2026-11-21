@@ -1,0 +1,41 @@
+{
+ "view": "v32",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 28.8,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in Image 2; the scene is entirely interior with wardrobe and clothing."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the wardrobe interior panels and shelves is visibly oversized and smeared, with streaks several times larger than natural oak grain, and the hue leans salmon-pink."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "Clothes on the hanging rail in the center appear as flat, rigid boards with sharp, faceted edges rather than soft fabric."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "Hangers are attached to the rail, clothes hang from hangers, and items rest on shelves; no floating, detached, or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The right third of the frame is a plain, featureless wall. The main subject (the wardrobe interior) is not cut off, and there are no blocking objects, seams, or haze."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image shows the interior of a wardrobe with hanging clothes, shelves with folded items, and drawers, which aligns with the title 'Dressing: his section'."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong indicators of being a computer render: the wood grain is overly uniform and repetitive, the lighting is perfectly controlled w | Image A exhibits characteristics typical of a real photograph, such as soft, diffuse lighting with natural falloff, realistic wood grain texture on th"
+  }
+ }
+}

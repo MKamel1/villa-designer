@@ -1,0 +1,33 @@
+{
+ "view": "v10",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.8,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, furniture, and ceiling."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood grain on the bookshelves and door frame is consistent in scale and pattern; no stretched, smeared, or unnaturally large grain visible."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The sofa cushions, throw pillows, and the small potted plant on the coffee table all appear as smooth, well-modeled 3D assets without visible polygon facets or crude, boxy geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The sofa, pillows, and coffee table rest naturally on the floor. The wall sconces are properly mounted to the wall. No objects are floating or intersecting."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The main subject, the sofa, is fully visible and not cut off. No object blocks the view. The wall area is reasonable. No seams, bands, haze, or bent lines are visible."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The living room is sparsely styled with only a sofa, two patterned pillows, and a small plant. It lacks the density of props (e.g., books, decor) expected for a 'library' setting, appearing bare compared to the reference."
+  }
+ }
+}

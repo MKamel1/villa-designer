@@ -1,0 +1,41 @@
+{
+ "view": "v31",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 17.5,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or outdoor areas are visible in the frame."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The wood grain on the wardrobe panels (center and right) is excessively large and exaggerated compared to the physical scale of the cabinetry."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The clothing hanging in the wardrobe (center and right) lacks natural folds and drape, appearing as rigid, flat plates or boards rather than fabric."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The clothes hanging on the rod in the center and right sections are floating; they are not attached to hangers or the rod, but are simply intersecting it."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The plain white wall on the left side of the frame covers approximately 30-35% of the image, and the dark wooden panel on the far right acts as a solid band along the frame edge."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The dressing area contains clothes on hangers and drawers, but the styling is generic and lacks lived-in details such as accessories, jewelry, or personal items."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    0,
+    2
+   ],
+   "evidence": "Image A shows unnatural lighting patterns, perfectly uniform fabric folds, and a lack of surface imperfections on the wood grain. Image B, while still | Image A shows a bedroom scene with lighting and textures that are very smooth and uniform, characteristic of a 3D render. Image B, while also appearin"
+  }
+ }
+}

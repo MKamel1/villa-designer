@@ -1,0 +1,17 @@
+{
+ "view": "v19",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.5,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A shows clear signs of being a computer render: the lighting is flat and lacks natural variation, the shadows are overly sharp and uniform, the  | Image B exhibits multiple hallmarks of a 3D render: the foliage on the tree is repetitive and lacks natural variation; the shadows are overly sharp an"
+  }
+ }
+}

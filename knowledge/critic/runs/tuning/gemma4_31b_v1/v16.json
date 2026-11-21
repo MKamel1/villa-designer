@@ -1,0 +1,41 @@
+{
+ "view": "v16",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.2,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in Image 2."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The marble veining on the walls and floor is excessively large and blotchy, lacking the fine detail of real stone."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The shower head on the ceiling shows visible polygon facets around its circular edge."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The toilet is floating above the floor without any visible base or contact point."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The left side of the frame is blocked by a large, plain white vertical wall section, covering approximately 20% of the image."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The bathroom is completely bare, lacking any essential props such as towels, soap, or toiletries, making it feel like an empty shell compared to the styled bedroom in the reference."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A has perfectly uniform lighting, lacks any surface imperfections or grime, and the materials (especially the marble and the toilet) have a synt | Image A shows more natural lighting variations, subtle textures on the fabric and wood, and a more realistic interaction between objects and the floor"
+  }
+ }
+}

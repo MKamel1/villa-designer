@@ -1,0 +1,41 @@
+{
+ "view": "v21",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 28.4,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, furniture, and a curtain."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood grain on the vertical slat wall behind the TV and on the TV console appears consistent in scale and proportion relative to the furniture and room dimensions. No stretched, smeared, or unnaturally large grain patterns are visible."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The potted plant in the corner has flat, card-like foliage. The pillows on the sofa and chair are rigid, blocky wedges. The TV is a flat black rectangle."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The white sofa, wooden coffee table, and armchair all rest firmly on the floor. The TV is mounted on the wood slat wall, and the plant sits on the floor. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The staircase on the left edge is cut off by the frame, but it is a secondary element. The main subject (sofa, TV wall) is fully visible. No other composition flaws are present."
+  },
+  "R11": {
+   "score": 0,
+   "evidence": "The image shows a daytime living room with a sofa, coffee table, TV, and plant, which does not match the 'Street lounge at night' title."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Image A displays several hallmarks of a 3D render: the lighting is overly uniform and clean, the materials (especially the white sofa and marble floor | Image B exhibits strong indicators of being a computer render: the lighting is overly uniform and clean, the materials (especially the marble floor an"
+  }
+ }
+}

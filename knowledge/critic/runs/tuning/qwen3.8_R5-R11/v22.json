@@ -1,0 +1,33 @@
+{
+ "view": "v22",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.2,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "Large windows on the left and right show a flat, featureless white exterior with no sky gradient, buildings, or planting."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the desk and chair in the mid-ground is subtle and appropriately scaled, with no visible stretching, smearing, or unnatural salmon-pink hue."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The spherical lamp globe on the right side of the room shows visible polygonal facets, appearing low-poly and crude compared to the smooth surfaces in the reference."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The spherical lamp fixture on the right appears to float in mid-air with no visible support or connection to the wall or ceiling. The desk and chair are properly grounded on the floor."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A dark vertical band and a grey upholstered element on the right edge block a significant portion of the frame, acting as a foreground obstruction."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room is sparsely styled with only a bed, one chair, a small desk, and a single plant, lacking the density of props (e.g., wardrobe, multiple pillows, rug) seen in the reference."
+  }
+ }
+}

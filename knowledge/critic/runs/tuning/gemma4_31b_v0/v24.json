@@ -1,0 +1,41 @@
+{
+ "view": "v24",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 18.0,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or outdoor areas are visible in the frame."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The marble floor texture exhibits a scale and pattern that is slightly too large and repetitive for a residential interior, lacking the fine detail of real stone veining."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The cushions on the sofa (center right) lack believable soft form and appear as rigid, geometric blocks with unnatural creases, and the plant in the bottom right corner consists of stiff, repetitive, flat-looking leaves."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The wall lamps in the central wooden alcove are floating in mid-air, detached from the wall surface."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The curtain on the left side of the frame covers approximately 30% of the image, blocking a significant portion of the view."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The scene shows a library and daybed nook with books in the shelving (left and right), cushions on the sofa (foreground), and a small plant (bottom right), matching the title and providing plausible styling."
+  },
+  "R13": {
+   "score": 2,
+   "per_order": [
+    2,
+    2
+   ],
+   "evidence": "Both images are high-quality 3D renders. However, Image A shows more complex lighting interactions (recessed ceiling lights, spotlights, and soft shad | Image A shows a bedroom with very flat lighting, perfectly smooth surfaces, and a lack of natural imperfections in the fabric and wood textures, which"
+  }
+ }
+}

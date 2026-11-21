@@ -1,0 +1,33 @@
+{
+ "view": "v24",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.4,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, furniture, and ceiling lighting."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the bookshelves and the marble veining on the floor are both appropriately scaled and consistent with real-world material sizes."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The sofa cushions, book spines, and plant leaves are rendered as flat, low-poly shapes with visible faceting and lack of detail, appearing cruder than the reference's smoother models."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The sofa, pillows, and bookshelves in Image 2 all appear to be properly supported and in correct contact with the floor and walls. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A large, out-of-focus vertical element (likely a wall or curtain) occupies the entire left third of the frame, blocking the view and acting as a foreground obstruction."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The scene is a living room with a sofa and bookshelves, not a library and daybed nook. The styling is sparse, lacking the specific props promised by the title."
+  }
+ }
+}

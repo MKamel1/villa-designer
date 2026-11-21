@@ -1,0 +1,41 @@
+{
+ "view": "v26",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 28.5,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The exterior visible in the background consists of plain white box-like buildings and a flat, untextured sky slab, lacking any believable architectural detail or environmental context."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The pavers on the patio floor and the wood grain on the benches are appropriately scaled and consistent with real-world material sizes; no oversized, stretched, or unnatural textures are visible."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The large terracotta pot in the foreground has visible vertical polygon facets, and the red flowers are flat, clustered discs rather than detailed blooms."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The potted plant in the foreground sits on the paving, the benches are on the ground, and the trellis is attached to the planter box. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A dark vertical window frame and glass pane occupy the entire right edge of the image, acting as a solid band along the frame and partially blocking the view of the courtyard."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image clearly shows a garden with two long troughs containing plants and two benches, matching the title's promise."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    0
+   ],
+   "evidence": "Image A exhibits classic signs of a 3D render: the lighting is flat and lacks natural variation, the materials (especially the white walls and the gra | Image B exhibits clear signs of being a 3D render: the surfaces are unnaturally smooth and clean, the lighting is flat and lacks realistic ambient occ"
+  }
+ }
+}

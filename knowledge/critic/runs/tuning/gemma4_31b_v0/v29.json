@@ -1,0 +1,41 @@
+{
+ "view": "v29",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 17.6,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or outdoor areas are visible in the frame."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The wood grain on the door in the right half of the frame is significantly oversized and stretched, lacking the fine detail of real timber at this scale."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The cushions in the bottom foreground are rendered as rigid, boxy shapes with sharp edges and no believable soft form or organic curvature."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The wooden stairs in the upper left are floating in mid-air without any visible structural support or stringers connecting them to the wall or floor."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The back of the white sofa in the foreground covers approximately 20-25% of the bottom of the frame, and the dark vertical structural elements and the door occupy a significant portion of the composition, creating a heavy, blocking effect."
+  },
+  "R11": {
+   "score": 0,
+   "evidence": "The under-stair storage units in the center and left of the frame are completely empty, lacking any plausible props, books, or accessories to make the space look lived-in."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Image A exhibits several hallmarks of a 3D render, including perfectly straight lines, unnatural lighting gradients in the dark areas, and a lack of s | Image A shows a bedroom with lighting and textures that are characteristic of a 3D render, such as the perfectly smooth walls, the uniform lighting on"
+  }
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "view": "v36",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.5,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the frame; the scene is entirely interior with walls, bed, and wardrobe."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "No wood, stone, or tile materials are visible in Image 2; only dark foliage and a plain wall are present, so the criterion is not applicable."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The plant leaves in the center and left are flat, low-polygon cards with sharp, angular edges, appearing as crude 2D cutouts rather than organic foliage."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The plants in the foreground and the small plant in the background are all situated within a planter box or on a surface. There is no visible floating, detachment, or intersection of objects."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A large, dark plant occupies the left and center foreground, blocking a significant portion of the view. The right side is a large, plain, empty wall. The overall composition is unbalanced and obstructed."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image shows a dark, low-poly garden scene with plants in a planter box, matching the title 'North garden \u2014 shade planting from open sky'."
+  }
+ }
+}

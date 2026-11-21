@@ -1,0 +1,33 @@
+{
+ "view": "v19",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.2,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The sky is a flat, untextured blue slab. The white building facade is a plain, featureless box. The interior visible through the glass is a simple, low-detail render."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "No wood, stone, or tile surfaces are present in Image 2. The visible materials are grass, painted walls, glass, and foliage, none of which exhibit scale or texture mapping errors."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The tree foliage consists of flat, card-like leaf shapes with no depth or volume, and the outdoor chairs are simple boxy forms with rigid, faceted geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The tree trunk is planted in a circular patch of dirt on the lawn, and the chairs are placed on the ground with visible contact points. No objects are floating or intersecting improperly."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A solid black vertical band runs along the entire left edge of the frame, and a dark vertical band is visible on the far right edge, constituting solid bands along the frame edges."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image shows a garden with a frangipani tree, lawn, and a pergola with chairs, matching the title's description."
+  }
+ }
+}

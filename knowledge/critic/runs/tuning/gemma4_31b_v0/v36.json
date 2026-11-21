@@ -1,0 +1,41 @@
+{
+ "view": "v36",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 16.7,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The opening in the upper left background shows a flat, featureless white void instead of a believable exterior environment."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The brick pavers on the floor in the upper left quadrant are scaled far too large relative to the surrounding space, appearing as oversized blocks rather than standard paving stones."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The plants in the center and left of the frame consist of flat, rigid, polygon-shaped leaves with visible facets and a lack of organic curvature."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The plants in the foreground planter box are floating above the soil surface rather than being rooted in it."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The plain wall on the right side of the frame covers more than 55 percent of the total image area."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The North garden area contains generic 3D plant models and a basic brick texture, but lacks any plausible props, furniture, or dressing that would make it look lived-in."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    0,
+    2
+   ],
+   "evidence": "Image A is a very basic 3D render with flat lighting, lack of textures, and simplistic geometry. Image B is also a render, but it features much more s | Image A is a 3D render with very clean, mathematically perfect edges and simplified textures. Image B is also a 3D render, characterized by flat light"
+  }
+ }
+}

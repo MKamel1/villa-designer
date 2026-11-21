@@ -1,0 +1,41 @@
+{
+ "view": "v30",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "frozen-v1",
+ "status": "ok",
+ "seconds": 29.1,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, shelving, and a wardrobe."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the wardrobe doors and the chair seat is appropriately scaled and consistent with real timber; no oversized, stretched, or unnatural textures are visible."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The storage boxes on the shelves are simple, flat rectangular prisms with no texture or detail, appearing as plain boxes. The overall geometry of the shelving unit is also very basic and blocky."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "Shelves and storage boxes are properly seated on the floor and shelf surfaces; linear lights are mounted to the ceiling structure; no objects are floating, detached, or intersecting."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The entire frame is uniformly dark with no visible subject, composition, or architectural elements; no blocking, seams, or haze are present because nothing is rendered."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The shelving units are mostly empty, with only a few boxes, and the room lacks the density of props (bed, chair, lamps) seen in the reference."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image B displays characteristics typical of a real photograph or a high-fidelity photorealistic render intended to look like one. The lighting is soft | Image A displays characteristics typical of a real photograph, such as soft, natural lighting, realistic material textures (wood grain, fabric weave),"
+  }
+ }
+}

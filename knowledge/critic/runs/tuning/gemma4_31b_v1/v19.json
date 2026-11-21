@@ -1,0 +1,41 @@
+{
+ "view": "v19",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.8,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The sky in the background is a flat, solid blue gradient without clouds or atmospheric detail, and the surrounding walls are plain white slabs."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The grass texture in the foreground and the paving stones in the background appear to be at a realistic physical scale."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The foliage of the tree in the center of the frame consists of flat, card-like leaves, which is a more crude modeling approach than the assets in the reference."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The tree trunk in the center of the image is floating slightly above the ground surface."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "A solid black vertical band is present along the entire left edge of the frame."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The garden area is sparsely styled, featuring only a few chairs and a single tree, lacking the density of props and detailing seen in the reference bedroom."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are clearly 3D renders. Image A has very artificial lighting, perfectly uniform grass, and 'floating' assets. Image B has slightly more cr | Both images are clearly 3D renders. Image A has very flat lighting and perfectly smooth, repetitive textures on the wardrobe and walls. Image B has un"
+  }
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "view": "v06",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.6,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The large window on the right shows a completely flat, featureless white exterior with no sky gradient, buildings, or planting visible."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the desk surface and legs is visible but appears consistent with real-world scale; no obvious stretching, blotching, or unnatural hue is present."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The black office chair has a flat, board-like backrest and armrests. The desk lamp is a crude assembly of flat rectangular prisms. The window frame consists of simple, flat black bars."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The black office chair is positioned under the desk with its base on the floor, and the desk legs are planted on the floor. The bunk bed frame is solid and connected. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The left edge of the bunk bed frame is cut off by the frame, and the desk on the right is also partially cut off. The large window on the right is a bright, solid block of light, acting as a large empty area."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room contains only bare mattresses on the bunk bed and an empty desk with a chair. It lacks the styling density (bedding, pillows, wardrobe, lamps) seen in the reference."
+  }
+ }
+}
