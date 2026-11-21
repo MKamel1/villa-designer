@@ -92,8 +92,66 @@ Exchange capabilities:
 | E9 | Design options (D1/D2) as separate IFCs | Replace later |
 | E10 | Native .rvt/.dwg | Not producible without Autodesk/ODA tools; DXF + IFC instead. Revisit only if a recipient insists |
 
-## To complete after RV1 reports
-- Reconcile both lists; mark gaps.
-- Per row: decision, owner lane (RV1 checks / RV2 2D / RV3 exchange / existing lane), equivalence proof
-  (which historical defect or old deliverable it must reproduce), effort, risk.
-- Sequence and lane briefs; then client approval.
+## Reconciliation with RV1 (project inventory: 44 uses, 21 defects — docs/lanes/RV1-parity.md)
+
+What the inventory changed:
+- **Revit has not touched the design since 2026-09-29.** The later D1 changes were never built or read
+  back in Revit, so today nothing independent checks them. Replacing this is urgent, not optional.
+- **What Revit could and could not catch.** It caught "the generator built it wrong" (13 of the 21
+  defects). It could not catch design-intent errors, because it rebuilt from the same spec; the other 8
+  were caught by the client or by looking at exports. The replacement must do at least the 13 and should
+  add the 8.
+- **Silent dependency.** The model bakes Revit net areas into 27 of 30 rooms and falls back to a larger
+  estimate with no error when the untracked read-back is absent. Same class as the daylight issue fixed
+  on 2026-11-21.
+- **Independence has to be earned.** The scene shell is merged by finish (no per-element meshes), and
+  scene coordinates are rounded to 1 mm, so a sub-mm case (D02: landing touching a column by 0.2 mm) is
+  below scene resolution.
+- Items in both lists: A1–A8, B1–B5, C1–C6, E1, G1. Only in RV1: U02/U03/U04 (bedroom and fixture
+  probes), U16 (stair-zone and wet-room probes of the existing building), U23 (Revit-shipped IES and
+  templates), I09 (element identity and counts), D15/D17/D18 (problems seen only by looking at exports).
+  Only in the generic list or RV2/RV3: C7–C16, A9–A17, E3–E10. No row is left unowned below.
+
+## Principles
+
+1. **Every input a check depends on is tracked in git or fetched explicitly; a missing input fails
+   loudly.** Never silently fall back.
+2. **Independence by construction.** Checks measure the built scene with their own geometry code, and a
+   second, separate kernel (the IFC export read back through IfcOpenShell's geometry engine) is used for
+   clashes. Neither path reuses the spec generator's arithmetic.
+3. **Element identity end to end.** The scene build carries model element ids onto every mesh, so checks
+   are per element, not per surface soup.
+4. **Equivalence is proven, not asserted.** Each check must FAIL on the frozen historic defect it replaces,
+   PASS on current D1, and catch a seeded mutation set (wall into the ramp, door head lowered, window
+   removed, fixture through the ceiling, tread into a column, rotation dropped). Recall is reported per
+   defect; nothing is tuned to pass. Resolution limits are stated beside each check.
+5. **The design model is completed before drawings and exchange build on it.**
+
+## Decisions on the open rows
+
+| Row | Decision |
+|---|---|
+| U15/I03 omar.rvt (existing structure) | Freeze: commit the extract JSON (kept columns, framing, slabs, levels, grids, ids) with its hash as tracked data. Any future change to the existing building comes from a new survey, not Revit. |
+| U16 stair-zone / wet-room probes | Freeze the two probe JSONs as tracked data; they are one-off facts about the existing building. |
+| U23 Revit-shipped IES and templates | Audit: fail loudly if any path still resolves a Revit-shipped IES; replace any hit with frozen IES in knowledge/lighting/ies. Templates retire. |
+| I11 door handing and swing | Model gap (A13): author for every door. |
+| U01 bedroom example Revit path | Retire. The bedroom stays as a calibrated photometry example through the scene path only. |
+| I01 independent second build | Principle 2: built-scene checks plus the IFC-kernel clash check. |
+| I05 wall joins and room bounding | Model validation: wall-to-wall join and room-closure checks, with the room-bounding result compared to the frozen Revit room areas. |
+| D02 sub-mm contact | Check exact contacts on the model geometry (no rounding), not the scene. |
+| D15/D17/D18 visible only in exports | Sheet QA in RV2 (orientation and mirroring check against the model; tags; level lines) plus the render critic. |
+| U27/I07 who receives files, U29 markup round trip | **Client questions** (below). |
+
+## Workstreams, in order
+
+| Stage | Lane | Work | Proof of equivalence | Size |
+|---|---|---|---|---|
+| 0 | M (model completion) | A9–A15, A17, I11: floor slabs, layered build-ups and materials, ceilings and floor finishes as elements, shared types, door handing, luminaire/dressing sizes, stair-void guard return, context levels; net areas computed from built walls with the frozen Revit areas as reference (report max deviation; fail loudly if inputs are missing); freeze omar extracts and probes (U15, U16) | Model validation rules (joins, closure, hosts); areas within a stated tolerance of the frozen Revit values | 1–2 days |
+| 1 | P2 (scene identity) | Carry element ids onto every scene mesh (I09, principle 3) | Scene hash changes only by the added id field; render appearance unchanged | ½ day |
+| 2a | RV1 (checks) | Built-scene checks for U02–U04, U10–U13, U17–U19, I04, I08–I10, D01–D14, D16, D19, D21 + the IFC-kernel clash check + the mutation set | Historic recall table (13 Revit-caught defects + the others where data exists); mutation recall; D1 passes | 2–3 days |
+| 2b | RV2 (2D) | North-up fix first; drawing standard (C11); plans, furnished, lighting/RCP and site plans; Blender line-art sections and elevations (incl. stair 1:50); schedules for every category (C5, C7); hatches (C8); colour-fill room plans (C9); callouts for stair and wet rooms (C10); annotation (C12, C13); context and kept-columns graphics (C15); sheet QA for orientation, mirroring, tags and level lines (D15, D17, D18) | Side-by-side parity table against every old Revit 2D output (U08, U09, U14, U17, U21, U22); sheet QA counts at zero | 3–4 days |
+| 2c | RV3 (exchange) | IFC4 with types and material layer sets (E3), standard Psets and Qto (E4), grids and space boundaries (E5), discipline files for architecture, lighting and electrical (E7); DXF per level and site | Round-trip counts and dimensions vs the model; schema validation 0 errors; files open in a second viewer | 1–2 days |
+| Later | — | C14 revisions and print sets, C16 sun overlays, D1 BOQ quantities, A16 georeferencing (needs the survey), E6 classification, E8 BCF/IDS, E9 design options | — | when needed |
+
+Stages 2a, 2b and 2c run in parallel on the workstation after stages 0 and 1. Revit stays optional: if the
+client signs in again, a Revit rebuild becomes one more independent check, never a dependency.
