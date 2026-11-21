@@ -106,6 +106,61 @@ def _drivers():
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
 
+SET_OUT_TOL = 0.010            # LA9: a recessed fitting sits on a declared axis within 10 mm
+SET_OUT_SNAP = 0.30            # a fitting further than this from every axis is not moved (reported by the check instead)
+RECESSED_KINDS = ("DL", "DLN", "ADJ", "WW")
+
+
+def axes_for_room(rc, it, fp, room):
+    """Declared axes of a room: its centre lines and the centre lines/edges of the furniture standing in it."""
+    r = rc[room]
+    ax, ay = [(r[0] + r[2]) / 2], [(r[1] + r[3]) / 2]
+    for k, i in it.items():
+        if i["room"] != room:
+            continue
+        q = fp[k]
+        ax += [(q[0] + q[2]) / 2, q[0], q[2]]
+        ay += [(q[1] + q[3]) / 2, q[1], q[3]]
+    return ax, ay
+
+
+def symmetric_rows(coords, centres):
+    """Coordinates that form a mirrored pair about a declared centre line (a row set out symmetrically about an axis)."""
+    out = set()
+    cs = sorted({round(c, 3) for c in coords})
+    for c0 in centres:
+        for i in range(len(cs)):
+            for j in range(i + 1, len(cs)):
+                if abs((cs[i] + cs[j]) / 2 - c0) <= SET_OUT_TOL:
+                    out.update((cs[i], cs[j]))
+    return out
+
+
+def set_out(fixtures, rc, it, fp):
+    """L6b RCP setting-out (LA9): move a recessed fitting that is within 0.30 m of a room/furniture axis (one coordinate,
+    the nearer) onto it. Fittings in a mirrored row about a centre line are already set out."""
+    by = {}
+    for f in fixtures:
+        if f.kind in RECESSED_KINDS:
+            by.setdefault(f.room, []).append(f)
+    for room, fs in by.items():
+        ax, ay = axes_for_room(rc, it, fp, room)
+        sx = symmetric_rows([f.x for f in fs], ax[:1] + ax[1::3])
+        sy = symmetric_rows([f.y for f in fs], ay[:1] + ay[1::3])
+        for f in fs:
+            dx, nx = min((abs(f.x - a), a) for a in ax)
+            dy, ny = min((abs(f.y - a), a) for a in ay)
+            if dx <= SET_OUT_TOL or dy <= SET_OUT_TOL or round(f.x, 3) in sx or round(f.y, 3) in sy:
+                continue
+            if min(dx, dy) <= SET_OUT_SNAP:
+                if dx <= dy:
+                    f.x = round(nx, 3)
+                else:
+                    f.y = round(ny, 3)
+                f.extra["set_out"] = "snapped to a room/furniture axis"
+    return fixtures
+
+
 def apply_drivers(fixtures):
     """Set each fixture's driver output from its zone's solved factor d: a bound product gets extra['dimmer'] = d (<= 1);
     a generic fitting gets lumens scaled by d (it may exceed 1: the generic is sized, not dimmed)."""
@@ -225,6 +280,10 @@ def design(lay=None):
         add("DL", "lounge", x, y, why="soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
             card="ies-res-family-room-100")
     cove("lounge", ("x0", "y0"), "cove along the street and stair sides: the ceiling floats over the family TV room")
+    for x in (L[0] + 0.9, (L[0] + L[2]) / 2 + 0.9):
+        add("DL", "lounge", x, (L[1] + L[3]) / 2, zone="route-night:night", extra={"dimmer": 0.15},
+            why="L6b LA13: basement escape/night route from the TV room to the stair foot: battery-backed downlight at 15 % "
+                "output (110 lm) on the lounge centre line; part of the night layer")
     a = fp["lounge-armchair"]
     add("ADJ", "lounge", (a[0] + a[2]) / 2 - 0.4, (a[1] + a[3]) / 2, aim=(0.35, 0, -1), zone="armchair-reading:task",
         why="reading light over the armchair, aimed ~20 deg", card="ies-res-chair-reading-200")
@@ -283,8 +342,9 @@ def design(lay=None):
     spans = [(a_, b_) for kind, a_, b_ in F.module_spans(it["k-island"]) if kind == "counter" and b_ - a_ >= 0.5]
     prep_x = [(spans[0][0] + spans[0][1]) / 2, spans[-1][0] + (spans[-1][1] - spans[-1][0]) / 3,
               spans[-1][0] + 2 * (spans[-1][1] - spans[-1][0]) / 3]
-    for x in prep_x:
-        add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line, between the opal globes",
+    icx = (isl[0] + isl[2]) / 2
+    for x in (icx - (isl[2] - isl[0]) / 3, icx, icx + (isl[2] - isl[0]) / 3):          # the globes' axes, mirrored
+        add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line, on the opal globes' axes",
             card="ies-res-kitchen-prep-500", zone="island-prep:task")
     run = fp["k-run"]
     for x in ((run[0] + run[2]) / 2 - 0.45, (run[0] + run[2]) / 2 + 0.45):
@@ -381,6 +441,9 @@ def design(lay=None):
             level="GF", extra={"hang_from": ceiling_z("GF", room="stair-gf")}, why="globe cluster dropping into the stair void: lights the "
             "flight from above and marks the heart of the house", card="ies-res-stairs-50")
     Lg = rc["landing-gf"]
+    for y in (Lg[1] + 0.5, Lg[3] - 0.5):
+        add("PATH", "landing-gf", Lg[0] + 0.02, y, z=0.30, aim=(1, 0, -0.2), level="GF",
+            why="L6b LA13: low marker on the landing wall: lights the top treads of the flight and the landing (night layer)")
     add("DL", "landing-gf", (Lg[0] + Lg[2]) / 2, (Lg[1] + Lg[3]) / 2, why="stair top", card="ies-res-stairs-50")
     Co = rc["corridor"]
     xs = [Co[0] + 0.9 + i * 1.75 for i in range(int((Co[2] - Co[0] - 1.0) / 1.75) + 1)]
@@ -476,6 +539,7 @@ def design(lay=None):
     pb_ = fp["pe-basin"]
     strip("TOE", "parents-ensuite", (pb_[2] + 0.02, pb_[1] + 0.03), (pb_[2] + 0.02, pb_[3] - 0.03), 0.30,
           (0.3, 0, -1), level="GF", why="glow under the vanity: night light")
+    set_out(out, rc, it, fp)
     apply_drivers(out)
     return out
 

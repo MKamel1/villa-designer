@@ -121,7 +121,23 @@ CARDS: dict[str, SourceCard] = {c.id: c for c in [
         locator="printed pp. 209-211 (pdf_pages 216-218)",
         quote="Table 12.10 Pre-calculated parameters for luminaires in the standard array",
         value="27 transcribed K cells, H = 2 m", status="sourced", url_or_path=SLL_PATH),
+    SourceCard(
+        id="L6-POLICY-LA6-2700K",
+        document="L6b villa lighting policy", edition="2026-11", locator="LA6",
+        quote="", value="one CCT per layer per room; 2700 K interior layers, 2200 K night layer; schedule CCT = bound product CCT",
+        status="policy", url_or_path="docs/quality/a-plus-lighting-electrical.md LA6 (R9/SDCM values UNVERIFIED, not checked here)"),
+    SourceCard(
+        id="L6-POLICY-LA8-layers",
+        document="L6b villa lighting policy", edition="2026-11", locator="LA8",
+        quote="", value=">= 2 independently switched layers per habitable space",
+        status="policy", url_or_path="docs/quality/a-plus-lighting-electrical.md LA8 (IES Ch. 33 layering; practice)"),
+    SourceCard(
+        id="L6-POLICY-LA10-scenes",
+        document="L6b villa lighting policy", edition="2026-11", locator="LA10",
+        quote="", value="each task card is met (+/-10 %, <= 1.5x) in the scene that owns it; night level <= 10 %",
+        status="policy", url_or_path="docs/quality/a-plus-lighting-electrical.md LA10 (values are proposals, UNVERIFIED)"),
 ]}
+
 
 
 def card(card_id: str) -> SourceCard:

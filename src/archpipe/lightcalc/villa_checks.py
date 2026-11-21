@@ -36,14 +36,15 @@ def check_la6(fixtures) -> list[CheckResult]:
     out = [CheckResult("LA6", "L6", "pass" if not bad else "fail", "villa/one-CCT-per-layer-per-room",
                        achieved=float(len(bad)), required=0.0, unit="rooms/layers with >1 CCT",
                        message=("every (room, layer) has a single CCT: 2700 K interior, 2200 K night" if not bad else
-                                "mixed CCT: %s" % bad), source_ids=("L6-POLICY-LA6-2700K",) if False else ())]
+                                "mixed CCT: %s" % bad), source_ids=("L6-POLICY-LA6-2700K",))]
     # spec vs bound product
     from ..fixture_record import PRODUCTS, KINDS, bind_products
     bind_products()
     mism = [(k, KINDS[k]["cct"], p["cct"]) for k, p in PRODUCTS.items() if int(KINDS[k]["cct"]) != int(p["cct"])]
     out.append(CheckResult("LA6", "L6", "pass" if not mism else "fail", "villa/spec-vs-product-CCT", achieved=float(len(mism)),
                            required=0.0, unit="kinds", message=("kind spec CCT equals the bound product CCT for every product-bound kind"
-                                                                if not mism else "spec vs product: %s" % mism)))
+                                                                if not mism else "spec vs product: %s" % mism),
+                           source_ids=("L6-POLICY-LA6-2700K",)))
     return out
 
 
@@ -60,7 +61,7 @@ def check_la8(fixtures) -> list[CheckResult]:
         ok = len(layers) >= 2
         out.append(CheckResult("LA8", "L6", "pass" if ok else "fail", "villa/layers/" + sp, achieved=float(len(layers)),
                                required=2.0, unit="independently switched layers",
-                               message="layers: %s" % ", ".join(layers)))
+                               message="layers: %s" % ", ".join(layers), source_ids=("L6-POLICY-LA8-layers",)))
     return out
 
 
@@ -70,16 +71,8 @@ TOL = 0.010
 
 
 def room_axes(v, room):
-    """Declared axes of a room: its centre lines and the centre lines/edges of its furniture (clear rect and joinery)."""
-    r = v.rc[room]
-    ax, ay = [(r[0] + r[2]) / 2], [(r[1] + r[3]) / 2]
-    for k, it in v.items.items():
-        if it["room"] != room:
-            continue
-        q = v.fp[k]
-        ax += [(q[0] + q[2]) / 2, q[0], q[2]]
-        ay += [(q[1] + q[3]) / 2, q[1], q[3]]
-    return ax, ay
+    from ..concept.villa_lighting import axes_for_room
+    return axes_for_room(v.rc, v.items, v.fp, room)
 
 
 def _symmetric_rows(coords, centres):
@@ -121,7 +114,7 @@ def check_la9(v) -> list[CheckResult]:
                         unit="% on a declared axis", message=("%d/%d recessed fittings on a room axis, furniture axis/edge or a "
                                                               "mirrored row about one (tolerance 10 mm)" % (ok, n))
                         + ("; off-axis (id, nearest-axis offset mm): %s" % off if off else ""),
-                        element_ids=tuple("lum-" + o[0] for o in off))]
+                        source_ids=("L6-POLICY-LA9-axis-tolerance-10mm",), element_ids=tuple("lum-" + o[0] for o in off))]
 
 
 # ------------------------------------------------------------------ LA4 luminance
