@@ -18,7 +18,7 @@ The villa is A+ when all four of these are true:
    IEC 60364), not Egyptian law: the client judged local code hard to source and sub-standard
    (decision 2026-11-21). Egyptian regulation values are kept as informative notes only. A local
    licensed engineer still signs the permit; that is a formality outside this bar.
-2. **A contractor could price and build it.** Dimensioned drawings, schedules, specifications and
+2. **A contractor could quantify and build it.** Dimensioned drawings, schedules, specifications and
    costed products leave nothing to guess.
 3. **The client recognises their home.** The brief (shade, colourful planting, frangipani, terracotta,
    a distinct identity for each daughter) is visibly delivered, and the client signs off each gate.
@@ -77,10 +77,10 @@ shade); zero structure clashes; design rubric ≥16/20.
 **Deliver:** concept with named style, mood board and palette with LRVs; layouts with clearance
 overlays; finish plans and finish schedule (every floor, wall, base and ceiling coded); interior
 elevations of every joinery or tiled wall; millwork drawings; sample boards; FF&E schedule with SKU,
-Egyptian supplier, EGP price, lead time, alternate and PO status; art and styling programme.
+Egyptian supplier, dimensions, finish and quantity (pricing deferred); art and styling programme.
 
 **Bar:** one concept traceable through every room; ≤3 woods/stones and ≤2 metals per room; no cloned
-hero pieces; 100 % real products within the budget cap; kitchen aisle ≥1219 mm, walkway ≥914 mm
+hero pieces; 100 % real products with quantities taken off (pricing deferred, no budget cap yet); kitchen aisle ≥1219 mm, walkway ≥914 mm
 (NKBA); wardrobes 610 mm deep; wet floors R10/R11 (showers class B); bunk guard ≥160 mm above the
 mattress; every living space and bedroom styled.
 

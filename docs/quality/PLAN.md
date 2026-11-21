@@ -62,7 +62,7 @@ Worker key: **C** = Claude subagent in its own worktree · **X** = Codex · **G*
 | L1 Safety & quality | C | Best-practice checkers (ADK, Metric Handbook, Neufert) for heights, room sizes, doors, basement daylight, stairs, guards (100 mm sphere), escape; **safety report on D1**; Egyptian values informative only | A positive and a negative fixture per rule; the current stair must fail | EG1–EG9, LS1–LS5 |
 | L2 Design model | X | One placed-object record per element (IFC-aligned); scene, Revit spec and schedules read it; retire the ~14 patch passes; guard registry as data | Byte-identical scene output from the new model | BM1, X1 |
 | L3 Vision critic | C | Rubric R1–R13 scored by a vision model; metadata checks (lens, height, verticals, subject exposure, texel density, faceting) | ≥90 % recall on the 27 known bad views; ≤10 % false fails on B views | R1–R13 |
-| L4 Products + style | G (sourcing) + C (code) | Egyptian supplier catalogue (SKU, EGP, lead time, 3D, finish); style engine (palette with LRV, material limits, clone check); 2–3 concept boards for you | 30 real products per category verified; boards rendered | I1–I6, I16 |
+| L4 Products + style | G (sourcing) + C (code) | Egyptian supplier catalogue (SKU, dimensions, 3D, finish; quantities per room; pricing deferred); style engine (palette with LRV, material limits, clone check); 2–3 concept boards for you | 30 real products per category verified; boards rendered | I1–I6, I16 |
 | L6 Lighting engine | X | Whole-room Radiance calc report; UGR (CIE 117/190); over-lighting cap; ceiling-plan setting-out solver; scene and DALI table; exterior and obtrusive light; emergency path; LM-83 metrics | CIE 171 cases ±5 %; CIE 190 UGR exact; LM-83 reference ±3 points | LA1–LA15 engine |
 | L7 Electrical engine | C | Device placement rules; circuits; maximum demand; cable/protection sizing; voltage drop; Zs; boards; single-line diagram (SVG/DXF) | IET OSG demand example ±2 %; IEC 60364-5-52 worked example within ±1 size; bathroom zone negative tests | EA1–EA12 engine |
 | L8 Ops | C | One workstation job runner (systemd user units, dead-job relaunch, GPU queue); root scripts into `ops/workstation/` | Kill a job mid-run and it resumes; two GPU jobs never overlap | — |
@@ -119,7 +119,7 @@ Shared files are no longer hand-edited centrally:
 1. **Design model record:** element id, type, level, placement, footprint and solid, product id, finish codes, host. Owned by L2; the first version is frozen in W0-B, so other lanes code against it from day one.
 2. **Check result:** criterion id (e.g. `EG4`), status, achieved, required, source card, element ids. Every engine emits this, so the regrade is one script.
 3. **Source card:** document, edition, page, quote, value, status (sourced / STD / POLICY / UNVERIFIED).
-4. **Product record:** extends `products/schema.py` with SKU, supplier, EGP, date, lead time, 3D asset, LRV.
+4. **Product record:** extends `products/schema.py` with SKU, supplier, dimensions, 3D asset, LRV (price fields optional, deferred).
 5. **Lighting zone / circuit IDs:** L6 publishes zones; L7 consumes them.
 6. **Render job and critic verdict:** view id, camera metadata, image, R-scores, verdict.
 
@@ -135,7 +135,7 @@ Shared files are no longer hand-edited centrally:
 
 | Gate | When | What you decide | Time |
 |---|---|---|---|
-| H1 | Wave 0 | Interview: budget, daughters, style; plot documents | about 1 h, plus documents |
+| H1 | Wave 0 | Interview: daughters, style (no budget yet); plot documents | about 1 h, plus documents |
 | H2 | End of Wave 1 | Pick one of 2–3 concepts | 15 min |
 | H3 | G1 | Approve the compliance fixes, e.g. a closed stair or changed ceiling heights | 30 min |
 | H4 | Wave 3 | Exposure policy, then final visual sign-off | 30 min |
