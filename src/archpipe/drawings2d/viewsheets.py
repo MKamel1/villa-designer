@@ -28,7 +28,8 @@ def render_view_sheet(slim: dict, els, spec, sheet, out_stem, *, page=1, pages=1
         built = section.build_view(slim, v, strokes_fn)
         cut = modelcut.cut_solids(els, levels, v) if v.kind == "section" else {"structure": [], "context": [], "items": []}
         cnt = viewdraw.draw_view(sh, built, cut, els, levels, v, (x, ytop - h - 10), label_rooms=True)
-        rep["views"].append({"name": v.name, "kind": v.kind, "dir": list(v.d), "u_axis": list(v.u_axis), "window_m": list(v.window),
+        us = [q[0] for l in built["lines"] for q in l["uz"]]
+        rep["views"].append({"name": v.name, "stroke_u_range_m": [min(us), max(us)] if us else None, "kind": v.kind, "dir": list(v.d), "u_axis": list(v.u_axis), "window_m": list(v.window),
                              "left": viewdraw.left_right(v)[0], "right": viewdraw.left_right(v)[1],
                              "cut_segments": len(built["cut_segments"]), "lines": len(built["lines"]), **{k: cnt[k] for k in ("structure_polys", "context_polys")},
                              "cut_items": [i[0] for i in cut["items"]], "scale": v.scale})

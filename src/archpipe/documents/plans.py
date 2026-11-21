@@ -160,7 +160,10 @@ def _side_toward(geo: dict, e: DesignElement, n: tuple[float, float], room_id: s
 def _opening_frame(e: DesignElement, geo: dict):
     w = _wall_of(geo, e.host)
     t = w.params["thickness_mm"] if w else e.size[1]
-    horizontal = abs(math.sin(math.radians(e.rotation_deg))) < 0.5
+    if w:      # the host wall decides the axis: door-B-cinema-store-ramp carries rotation 0 on a wall along y (lesson RV2-01)
+        horizontal = abs(w.params["y1_mm"] - w.params["y0_mm"]) < abs(w.params["x1_mm"] - w.params["x0_mm"])
+    else:
+        horizontal = abs(math.sin(math.radians(e.rotation_deg))) < 0.5
     u = (1.0, 0.0) if horizontal else (0.0, 1.0)
     n = (-u[1], u[0])
     return u, n, t

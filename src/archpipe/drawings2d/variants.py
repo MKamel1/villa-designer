@@ -19,7 +19,7 @@ def extras_for(variant: str, level: str):
         common = [("?", "door handing is a judgement call: to confirm"), ("#d9c3f0", "kept existing column"),
                   ("#222222", "exterior wall"), ("#e8e8e8", "interior wall (hatched)")]
         if variant == "ga":
-            L.legend_box(sh, x, y, "Legend", common + [("D01", "door tag"), ("W01", "window tag"), ("R01", "room tag")])
+            L.legend_box(sh, x, y, "Legend", common + [("Dnn", "door tag (circle)"), ("Wnn", "window tag (hexagon)"), ("Rnn", "room tag with net area")])
         elif variant == "furnished":
             rows = [("#fffdf5", "furniture and joinery (type name)"), ("#ffffff", "outline only: dressing props")] + common
             n = {}

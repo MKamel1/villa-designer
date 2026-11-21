@@ -60,11 +60,16 @@ def run(design: str, out: Path, formats=("pdf", "svg", "png"), slim: dict | None
             rep = tables.render_cover(spec, s, stem, page=i, pages=pages, formats=formats)
         all_reps[s["no"]] = rep
         produced.append({"sheet": s["no"], "files": rep["files"]})
+    from archpipe.drawings2d import sheetqa
+    from archpipe import contracts
+    qa = sheetqa.run(els, all_reps, out, spec["levels"])
+    (out / "sheet-qa.json").write_text(json.dumps({"totals": qa["totals"], "opening_axis_findings": qa["opening_axis_findings"], "sheets": qa["sheets"]}, indent=1), encoding="utf-8")
+    contracts.write_results("RV2", qa.pop("results"), root=out / "checks")
     xc = crosscheck.sc1(els, reports)
     summary = {"design": design, "produced": produced,
                "not_produced": [s["no"] for s in spec["sheets"] if s["generator"] != "model" and (slim is None)],
                "sheet_reports": all_reps,
-               "plan_qa": qa_rows, "sc1": xc, "spec": spec}
+               "plan_qa": qa_rows, "sheet_qa": qa["totals"], "sc1": xc, "spec": spec}
     (out / "sheetset.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
     (out / "plan-reports.json").write_text(json.dumps(reports, indent=1), encoding="utf-8")
     return summary
