@@ -1,0 +1,9538 @@
+[
+ {
+  "id": "D1F",
+  "title": "Design D1 - Aligned: kitchen bay 4-5, dining bay 5-6, garden living, bar alcove in the rear share",
+  "levels": {
+   "B": "B -1.80",
+   "GF": "GF +1.20"
+  },
+  "walls": [
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 3.617,
+    "y0": -29.816,
+    "x1": 6.94,
+    "y1": -29.816
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 17.268,
+    "y0": -29.816,
+    "x1": 22.597,
+    "y1": -29.816
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 6.94,
+    "y0": -28.570999999999998,
+    "x1": 17.268,
+    "y1": -28.570999999999998
+   },
+   {
+    "level": "B",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 3.617,
+    "y0": -28.671,
+    "x1": 6.94,
+    "y1": -28.671
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 15.412,
+    "y0": -23.691000000000003,
+    "x1": 22.597,
+    "y1": -23.691000000000003
+   },
+   {
+    "level": "B",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 3.617,
+    "y0": -23.591,
+    "x1": 15.412,
+    "y1": -23.591
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 1.45,
+    "x0": -0.123,
+    "y0": -20.701,
+    "x1": 0.877,
+    "y1": -20.701
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 1.55,
+    "x0": 0.877,
+    "y0": -20.701,
+    "x1": 5.877,
+    "y1": -20.701
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.55,
+    "x0": 5.877,
+    "y0": -20.701,
+    "x1": 6.877,
+    "y1": -20.701
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.65,
+    "x0": 6.877,
+    "y0": -20.701,
+    "x1": 15.412,
+    "y1": -20.701
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 1.45,
+    "x0": -0.022999999999999993,
+    "y0": -23.591,
+    "x1": -0.022999999999999993,
+    "y1": -20.601
+   },
+   {
+    "level": "B",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 1.99,
+    "x0": 3.125,
+    "y0": -23.591,
+    "x1": 3.125,
+    "y1": -20.601
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 3.717,
+    "y0": -29.916,
+    "x1": 3.717,
+    "y1": -23.591
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 6.840000000000001,
+    "y0": -29.916,
+    "x1": 6.840000000000001,
+    "y1": -28.671
+   },
+   {
+    "level": "B",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.65,
+    "x0": 9.227,
+    "y0": -23.591,
+    "x1": 9.227,
+    "y1": -20.601
+   },
+   {
+    "level": "B",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.65,
+    "x0": 11.2,
+    "y0": -23.591,
+    "x1": 11.2,
+    "y1": -20.601
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.65,
+    "x0": 15.312000000000001,
+    "y0": -23.591,
+    "x1": 15.312000000000001,
+    "y1": -20.601
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 17.368000000000002,
+    "y0": -29.916,
+    "x1": 17.368000000000002,
+    "y1": -28.671
+   },
+   {
+    "level": "B",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 22.497,
+    "y0": -29.916,
+    "x1": 22.497,
+    "y1": -23.591
+   },
+   {
+    "level": "GF",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 19.604,
+    "y0": -31.211,
+    "x1": 22.324,
+    "y1": -31.211
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 19.604,
+    "y0": -28.881,
+    "x1": 22.324,
+    "y1": -28.881
+   },
+   {
+    "level": "GF",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 3.617,
+    "y0": -28.570999999999998,
+    "x1": 19.604,
+    "y1": -28.570999999999998
+   },
+   {
+    "level": "GF",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 22.324,
+    "y0": -28.570999999999998,
+    "x1": 22.597,
+    "y1": -28.570999999999998
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 11.477,
+    "y0": -27.371,
+    "x1": 19.527,
+    "y1": -27.371
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 19.527,
+    "y0": -26.641,
+    "x1": 22.597,
+    "y1": -26.641
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 9.227,
+    "y0": -26.371,
+    "x1": 11.477,
+    "y1": -26.371
+   },
+   {
+    "level": "GF",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 3.617,
+    "y0": -23.691000000000003,
+    "x1": 22.597,
+    "y1": -23.691000000000003
+   },
+   {
+    "level": "GF",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 3.717,
+    "y0": -28.671,
+    "x1": 3.717,
+    "y1": -23.591
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 9.227,
+    "y0": -26.371,
+    "x1": 9.227,
+    "y1": -23.591
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 11.477,
+    "y0": -27.371,
+    "x1": 11.477,
+    "y1": -23.591
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 14.952,
+    "y0": -27.371,
+    "x1": 14.952,
+    "y1": -23.591
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 18.427,
+    "y0": -27.371,
+    "x1": 18.427,
+    "y1": -23.591
+   },
+   {
+    "level": "GF",
+    "kind": "int",
+    "thickness": 0.1,
+    "height": 2.8,
+    "x0": 19.527,
+    "y0": -28.671,
+    "x1": 19.527,
+    "y1": -26.641
+   },
+   {
+    "level": "GF",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 19.704,
+    "y0": -31.311,
+    "x1": 19.704,
+    "y1": -28.671
+   },
+   {
+    "level": "GF",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 22.224,
+    "y0": -31.311,
+    "x1": 22.224,
+    "y1": -28.671
+   },
+   {
+    "level": "GF",
+    "kind": "ext",
+    "thickness": 0.2,
+    "height": 2.8,
+    "x0": 22.497,
+    "y0": -28.671,
+    "x1": 22.497,
+    "y1": -23.591
+   }
+  ],
+  "separations": [
+   {
+    "level": "B",
+    "x0": 17.268,
+    "y0": -28.671,
+    "x1": 22.597,
+    "y1": -28.671
+   },
+   {
+    "level": "B",
+    "x0": 3.617,
+    "y0": -27.471,
+    "x1": 9.657,
+    "y1": -27.471
+   },
+   {
+    "level": "B",
+    "x0": 9.657,
+    "y0": -26.671,
+    "x1": 18.367,
+    "y1": -26.671
+   },
+   {
+    "level": "B",
+    "x0": 5.177,
+    "y0": -28.671,
+    "x1": 5.177,
+    "y1": -27.471
+   },
+   {
+    "level": "B",
+    "x0": 9.657,
+    "y0": -28.671,
+    "x1": 9.657,
+    "y1": -23.591
+   },
+   {
+    "level": "B",
+    "x0": 11.197,
+    "y0": -28.671,
+    "x1": 11.197,
+    "y1": -23.591
+   },
+   {
+    "level": "B",
+    "x0": 14.134,
+    "y0": -28.671,
+    "x1": 14.134,
+    "y1": -26.671
+   },
+   {
+    "level": "B",
+    "x0": 14.902,
+    "y0": -26.671,
+    "x1": 14.902,
+    "y1": -23.591
+   },
+   {
+    "level": "B",
+    "x0": 15.745,
+    "y0": -28.671,
+    "x1": 15.745,
+    "y1": -26.671
+   },
+   {
+    "level": "B",
+    "x0": 18.367,
+    "y0": -28.671,
+    "x1": 18.367,
+    "y1": -23.591
+   },
+   {
+    "level": "GF",
+    "x0": 19.604,
+    "y0": -28.671,
+    "x1": 22.324,
+    "y1": -28.671
+   },
+   {
+    "level": "GF",
+    "x0": 8.887,
+    "y0": -27.371,
+    "x1": 11.477,
+    "y1": -27.371
+   },
+   {
+    "level": "GF",
+    "x0": 18.427,
+    "y0": -26.641,
+    "x1": 19.527,
+    "y1": -26.641
+   },
+   {
+    "level": "GF",
+    "x0": 3.617,
+    "y0": -26.371,
+    "x1": 9.227,
+    "y1": -26.371
+   },
+   {
+    "level": "GF",
+    "x0": 5.177,
+    "y0": -28.671,
+    "x1": 5.177,
+    "y1": -26.371
+   },
+   {
+    "level": "GF",
+    "x0": 8.887,
+    "y0": -28.671,
+    "x1": 8.887,
+    "y1": -26.371
+   }
+  ],
+  "doors": [
+   {
+    "level": "B",
+    "x": 4.602,
+    "y": -28.671,
+    "width": 0.8,
+    "rooms": [
+     "lounge-nook",
+     "pantry"
+    ],
+    "span": [
+     "h",
+     -28.671,
+     3.617,
+     5.177
+    ],
+    "height": 2.1
+   },
+   {
+    "level": "B",
+    "x": 8.677,
+    "y": -23.591,
+    "width": 0.9,
+    "rooms": [
+     "lounge",
+     "cinema"
+    ],
+    "height": 2.1,
+    "clear": 2.65,
+    "fit": "full"
+   },
+   {
+    "level": "B",
+    "x": 3.125,
+    "y": -22.096,
+    "width": 0.8,
+    "rooms": [
+     "cinema",
+     "store-ramp"
+    ],
+    "height": 1.88,
+    "clear": 1.98,
+    "fit": "low"
+   },
+   {
+    "level": "B",
+    "x": 10.697,
+    "y": -23.591,
+    "width": 0.8,
+    "rooms": [
+     "family",
+     "guest-wc"
+    ],
+    "height": 2.1,
+    "clear": 2.65,
+    "fit": "full"
+   },
+   {
+    "level": "B",
+    "x": 14.202,
+    "y": -23.591,
+    "width": 1.2,
+    "rooms": [
+     "kitchen",
+     "dirty-kitchen"
+    ],
+    "height": 2.1,
+    "clear": 2.65,
+    "fit": "full",
+    "sliding": true,
+    "slide_type": "telescopic-pocket-3",
+    "leaf_count": 3,
+    "panel_width": 0.4,
+    "pocket_side": "west",
+    "pocket_span": [
+     13.202,
+     13.602
+    ],
+    "pocket_wall_thickness": 0.15
+   },
+   {
+    "level": "B",
+    "x": 14.939,
+    "y": -28.671,
+    "width": 1.0,
+    "rooms": [
+     "entry-b",
+     "core"
+    ],
+    "entrance": true,
+    "span": [
+     "h",
+     -28.671,
+     14.134,
+     15.745
+    ],
+    "height": 2.1
+   },
+   {
+    "level": "B",
+    "x": 16.889,
+    "y": -23.591,
+    "width": 2.35,
+    "rooms": [
+     "dining",
+     "yard"
+    ],
+    "garden": true,
+    "full_height": true,
+    "span": [
+     "h",
+     -23.591,
+     15.512,
+     18.267
+    ],
+    "height": 2.2
+   },
+   {
+    "level": "B",
+    "x": 20.557,
+    "y": -23.591,
+    "width": 2.76,
+    "rooms": [
+     "living",
+     "yard"
+    ],
+    "garden": true,
+    "full_height": true,
+    "span": [
+     "h",
+     -23.591,
+     18.977,
+     22.136999999999997
+    ],
+    "height": 2.2
+   },
+   {
+    "level": "B",
+    "x": 22.597,
+    "y": -26.131,
+    "width": 2.4,
+    "rooms": [
+     "living",
+     "yard"
+    ],
+    "garden": true,
+    "span": [
+     "v",
+     22.597,
+     -28.061,
+     -24.201
+    ],
+    "height": 2.2
+   },
+   {
+    "level": "B",
+    "x": 3.617,
+    "y": -26.156,
+    "width": 3.41,
+    "rooms": [
+     "lounge",
+     "yard"
+    ],
+    "garden": true,
+    "full_height": true,
+    "span": [
+     "v",
+     3.617,
+     -28.061,
+     -24.251
+    ],
+    "height": 2.2
+   },
+   {
+    "level": "GF",
+    "x": 13.215,
+    "y": -27.371,
+    "width": 0.9,
+    "rooms": [
+     "corridor",
+     "kids-a"
+    ],
+    "span": [
+     "h",
+     -27.371,
+     11.477,
+     14.952
+    ],
+    "height": 2.1
+   },
+   {
+    "level": "GF",
+    "x": 16.689,
+    "y": -27.371,
+    "width": 0.9,
+    "rooms": [
+     "corridor",
+     "kids-b"
+    ],
+    "span": [
+     "h",
+     -27.371,
+     14.952,
+     18.427
+    ],
+    "height": 2.1
+   },
+   {
+    "level": "GF",
+    "x": 21.897,
+    "y": -26.641,
+    "width": 0.8,
+    "rooms": [
+     "parents-bed",
+     "parents-dressing"
+    ],
+    "span": [
+     "h",
+     -26.641,
+     19.527,
+     22.597
+    ],
+    "pinned": true,
+    "height": 2.1
+   },
+   {
+    "level": "GF",
+    "x": 10.352,
+    "y": -26.371,
+    "width": 0.8,
+    "rooms": [
+     "gallery-end",
+     "family-bath"
+    ],
+    "span": [
+     "h",
+     -26.371,
+     9.227,
+     11.477
+    ],
+    "height": 2.1
+   },
+   {
+    "level": "GF",
+    "x": 18.977,
+    "y": -27.371,
+    "width": 0.9,
+    "rooms": [
+     "corridor",
+     "parents-entry"
+    ],
+    "span": [
+     "h",
+     -27.371,
+     18.427,
+     19.527
+    ],
+    "height": 2.1
+   },
+   {
+    "level": "GF",
+    "x": 21.65,
+    "y": -28.881,
+    "width": 0.8,
+    "rooms": [
+     "parents-dressing-ext",
+     "parents-ensuite"
+    ],
+    "span": [
+     "h",
+     -28.881,
+     19.604,
+     22.324
+    ],
+    "pinned": true,
+    "height": 2.1
+   },
+   {
+    "level": "GF",
+    "x": 4.602,
+    "y": -28.671,
+    "width": 1.0,
+    "rooms": [
+     "landing-gf",
+     "core"
+    ],
+    "entrance": true,
+    "span": [
+     "h",
+     -28.671,
+     3.617,
+     5.177
+    ],
+    "height": 2.1
+   },
+   {
+    "level": "GF",
+    "x": 8.277,
+    "y": -23.591,
+    "width": 1.8,
+    "height": 2.1,
+    "rooms": [
+     "study-game",
+     "deck"
+    ],
+    "sliding": true,
+    "fixed_span": [
+     7.377,
+     9.177
+    ],
+    "fixed_span_face": [
+     "h",
+     -23.591
+    ]
+   }
+  ],
+  "windows": [
+   {
+    "level": "B",
+    "x": 15.412,
+    "y": -22.096,
+    "width": 2.59,
+    "sill": 0.0,
+    "height": 2.3,
+    "room": "dirty-kitchen",
+    "full_height": true,
+    "span": [
+     "v",
+     15.412,
+     -23.591,
+     -20.601
+    ]
+   },
+   {
+    "level": "GF",
+    "x": 5.497,
+    "y": -23.591,
+    "width": 2.24,
+    "sill": 0.9,
+    "height": 1.4,
+    "room": "study-game",
+    "span": [
+     "h",
+     -23.591,
+     4.077,
+     6.917000000000001
+    ]
+   },
+   {
+    "level": "GF",
+    "x": 3.617,
+    "y": -25.311,
+    "width": 1.52,
+    "sill": 0.9,
+    "height": 1.4,
+    "room": "study-game",
+    "span": [
+     "v",
+     3.617,
+     -26.371,
+     -24.251
+    ]
+   },
+   {
+    "level": "GF",
+    "x": 13.22,
+    "y": -23.591,
+    "width": 2.4,
+    "sill": 0.9,
+    "height": 1.4,
+    "room": "kids-a",
+    "span": [
+     "h",
+     -23.591,
+     11.637,
+     14.802
+    ]
+   },
+   {
+    "level": "GF",
+    "x": 16.889,
+    "y": -23.591,
+    "width": 2.35,
+    "sill": 0.9,
+    "height": 1.4,
+    "room": "kids-b",
+    "span": [
+     "h",
+     -23.591,
+     15.512,
+     18.267
+    ]
+   },
+   {
+    "level": "GF",
+    "x": 10.382,
+    "y": -23.591,
+    "width": 0.8,
+    "sill": 1.7,
+    "height": 0.6,
+    "room": "family-bath",
+    "span": [
+     "h",
+     -23.591,
+     9.667,
+     11.097
+    ]
+   },
+   {
+    "level": "GF",
+    "x": 20.557,
+    "y": -23.591,
+    "width": 2.4,
+    "sill": 0.9,
+    "height": 1.4,
+    "room": "parents-bed",
+    "span": [
+     "h",
+     -23.591,
+     18.977,
+     22.136999999999997
+    ]
+   },
+   {
+    "level": "GF",
+    "x": 22.597,
+    "y": -25.421,
+    "width": 2.04,
+    "sill": 0.9,
+    "height": 1.4,
+    "room": "parents-bed",
+    "span": [
+     "v",
+     22.597,
+     -26.641,
+     -24.201
+    ]
+   }
+  ],
+  "rooms": [
+   {
+    "level": "B",
+    "id": "lounge",
+    "name": "lounge (street window floor to beam)",
+    "x": 6.6370000000000005,
+    "y": -25.531
+   },
+   {
+    "level": "B",
+    "id": "lounge-nook",
+    "name": "lounge (under the stair's top landing)",
+    "x": 4.397,
+    "y": -28.070999999999998
+   },
+   {
+    "level": "B",
+    "id": "stair-b",
+    "name": "stair (straight, to the GF)",
+    "x": 7.417,
+    "y": -28.070999999999998
+   },
+   {
+    "level": "B",
+    "id": "pantry",
+    "name": "pantry / store",
+    "x": 5.2785,
+    "y": -29.2935
+   },
+   {
+    "level": "B",
+    "id": "hall-b",
+    "name": "hall at the stair foot",
+    "x": 10.427,
+    "y": -27.671
+   },
+   {
+    "level": "B",
+    "id": "entry-b",
+    "name": "entrance (second core lobby)",
+    "x": 14.939499999999999,
+    "y": -27.671
+   },
+   {
+    "level": "B",
+    "id": "family",
+    "name": "family / TV corner (open to the lounge)",
+    "x": 10.427,
+    "y": -25.131
+   },
+   {
+    "level": "B",
+    "id": "kitchen",
+    "name": "open kitchen (column bay 4-5)",
+    "x": 13.049499999999998,
+    "y": -25.131
+   },
+   {
+    "level": "B",
+    "id": "kitchen-island",
+    "name": "open kitchen (island)",
+    "x": 12.6655,
+    "y": -27.671
+   },
+   {
+    "level": "B",
+    "id": "dining",
+    "name": "dining (column bay 5-6, east window)",
+    "x": 16.6345,
+    "y": -25.131
+   },
+   {
+    "level": "B",
+    "id": "dining-side",
+    "name": "dining (party side)",
+    "x": 17.056,
+    "y": -27.671
+   },
+   {
+    "level": "B",
+    "id": "living",
+    "name": "garden living",
+    "x": 20.482,
+    "y": -26.131
+   },
+   {
+    "level": "B",
+    "id": "bar-alcove",
+    "name": "bar / library alcove (floor-to-beam garden window)",
+    "x": 19.9325,
+    "y": -29.2935
+   },
+   {
+    "level": "B",
+    "id": "store-ramp",
+    "name": "store under the ramp (1.45-2.0 m clear)",
+    "x": 1.501,
+    "y": -22.096
+   },
+   {
+    "level": "B",
+    "id": "cinema",
+    "name": "cinema (under the ramp; 2.0-2.65 m ceiling)",
+    "x": 6.176,
+    "y": -22.096
+   },
+   {
+    "level": "B",
+    "id": "guest-wc",
+    "name": "guest WC (under the deck)",
+    "x": 10.2135,
+    "y": -22.096
+   },
+   {
+    "level": "B",
+    "id": "dirty-kitchen",
+    "name": "dirty kitchen + laundry (full-height window at the end)",
+    "x": 13.306000000000001,
+    "y": -22.096
+   },
+   {
+    "level": "GF",
+    "id": "landing-gf",
+    "name": "stair landing (core door)",
+    "x": 4.397,
+    "y": -27.521
+   },
+   {
+    "level": "GF",
+    "id": "stair-gf",
+    "name": "stair void + gallery",
+    "x": 7.032,
+    "y": -27.521
+   },
+   {
+    "level": "GF",
+    "id": "corridor",
+    "name": "hall",
+    "x": 14.207,
+    "y": -28.021
+   },
+   {
+    "level": "GF",
+    "id": "study-game",
+    "name": "study / game room (open to the stair; sliding door to the deck)",
+    "x": 6.422000000000001,
+    "y": -24.981
+   },
+   {
+    "level": "GF",
+    "id": "kids-a",
+    "name": "kids bedroom A",
+    "x": 13.214500000000001,
+    "y": -25.481
+   },
+   {
+    "level": "GF",
+    "id": "kids-b",
+    "name": "kids bedroom B",
+    "x": 16.6895,
+    "y": -25.481
+   },
+   {
+    "level": "GF",
+    "id": "family-bath",
+    "name": "family bathroom",
+    "x": 10.352,
+    "y": -24.981
+   },
+   {
+    "level": "GF",
+    "id": "parents-bed",
+    "name": "parents' bedroom",
+    "x": 20.512,
+    "y": -25.116
+   },
+   {
+    "level": "GF",
+    "id": "parents-dressing",
+    "name": "dressing (hanging both sides)",
+    "x": 21.062,
+    "y": -27.656
+   },
+   {
+    "level": "GF",
+    "id": "parents-ensuite",
+    "name": "en-suite",
+    "x": 20.964,
+    "y": -30.096
+   },
+   {
+    "level": "GF",
+    "id": "gallery-end",
+    "name": "gallery (round the stair void to the bedrooms)",
+    "x": 10.182,
+    "y": -26.871
+   },
+   {
+    "level": "GF",
+    "id": "parents-entry",
+    "name": "parents' bedroom (entry)",
+    "x": 18.977,
+    "y": -27.006
+   },
+   {
+    "level": "GF",
+    "id": "parents-dressing-ext",
+    "name": "dressing (taken from the ensuite)",
+    "x": 20.964,
+    "y": -28.776
+   }
+  ],
+  "stair": [
+   [
+    9377.0,
+    -28421,
+    -2883.529411764706,
+    9657.0,
+    -27471,
+    -2823.529411764706
+   ],
+   [
+    9097.0,
+    -28421,
+    -2707.0588235294117,
+    9377.0,
+    -27471,
+    -2647.0588235294117
+   ],
+   [
+    8817.0,
+    -28421,
+    -2530.5882352941176,
+    9097.0,
+    -27471,
+    -2470.5882352941176
+   ],
+   [
+    8537.0,
+    -28421,
+    -2354.1176470588234,
+    8817.0,
+    -27471,
+    -2294.1176470588234
+   ],
+   [
+    8257.0,
+    -28421,
+    -2177.6470588235293,
+    8537.0,
+    -27471,
+    -2117.6470588235293
+   ],
+   [
+    7977.0,
+    -28421,
+    -2001.1764705882354,
+    8257.0,
+    -27471,
+    -1941.1764705882354
+   ],
+   [
+    7697.0,
+    -28421,
+    -1824.7058823529412,
+    7977.0,
+    -27471,
+    -1764.7058823529412
+   ],
+   [
+    7417.0,
+    -28421,
+    -1648.235294117647,
+    7697.0,
+    -27471,
+    -1588.235294117647
+   ],
+   [
+    7137.0,
+    -28421,
+    -1471.764705882353,
+    7417.0,
+    -27471,
+    -1411.764705882353
+   ],
+   [
+    6857.0,
+    -28421,
+    -1295.2941176470588,
+    7137.0,
+    -27471,
+    -1235.2941176470588
+   ],
+   [
+    6577.0,
+    -28421,
+    -1118.8235294117646,
+    6857.0,
+    -27471,
+    -1058.8235294117646
+   ],
+   [
+    6297.0,
+    -28421,
+    -942.3529411764707,
+    6577.0,
+    -27471,
+    -882.3529411764707
+   ],
+   [
+    6017.0,
+    -28421,
+    -765.8823529411766,
+    6297.0,
+    -27471,
+    -705.8823529411766
+   ],
+   [
+    5737.0,
+    -28421,
+    -589.4117647058824,
+    6017.0,
+    -27471,
+    -529.4117647058824
+   ],
+   [
+    5457.0,
+    -28421,
+    -412.9411764705883,
+    5737.0,
+    -27471,
+    -352.9411764705883
+   ],
+   [
+    5177.0,
+    -28421,
+    -236.47058823529414,
+    5457.0,
+    -27471,
+    -176.47058823529414
+   ]
+  ],
+  "gf_opening": [
+   5.177,
+   -28.421,
+   8.887,
+   -27.471
+  ],
+  "hatches": [
+   {
+    "id": "kitchen-sink-pass-through",
+    "level": "B",
+    "wall_axis": "h",
+    "x0": 11.8,
+    "x1": 13.1,
+    "y": -23.591,
+    "sill": 1.0,
+    "head": 2.1,
+    "above": "k-run",
+    "closure": "roll-up-shutter",
+    "shutter_box": [
+     11.8,
+     -23.666,
+     2.1,
+     13.1,
+     -23.516,
+     2.3
+    ],
+    "card": null,
+    "basis": "client-approved worktop + upstand and shutter"
+   }
+  ],
+  "pocket_buildouts": [
+   {
+    "id": "kitchen-dirty-pocket",
+    "level": "B",
+    "wall_axis": "h",
+    "y": -23.591,
+    "x0": 13.202,
+    "x1": 13.602,
+    "thickness": 0.15,
+    "extra_side": "dirty-kitchen",
+    "height": 2.1
+   }
+  ],
+  "balustrades": [
+   {
+    "id": "stair-open-glass",
+    "level": "B",
+    "side": "open",
+    "stair": "party-wall flight",
+    "material": "frameless laminated glass",
+    "support": "steel stringer",
+    "top_edge": "clear",
+    "rail": "none",
+    "nosing_profile": [
+     [
+      5.317,
+      -27.471,
+      -0.176
+     ],
+     [
+      5.597,
+      -27.471,
+      -0.353
+     ],
+     [
+      5.877,
+      -27.471,
+      -0.529
+     ],
+     [
+      6.157,
+      -27.471,
+      -0.706
+     ],
+     [
+      6.437,
+      -27.471,
+      -0.882
+     ],
+     [
+      6.717,
+      -27.471,
+      -1.059
+     ],
+     [
+      6.997,
+      -27.471,
+      -1.235
+     ],
+     [
+      7.277,
+      -27.471,
+      -1.412
+     ],
+     [
+      7.557,
+      -27.471,
+      -1.588
+     ],
+     [
+      7.837,
+      -27.471,
+      -1.765
+     ],
+     [
+      8.117,
+      -27.471,
+      -1.941
+     ],
+     [
+      8.397,
+      -27.471,
+      -2.118
+     ],
+     [
+      8.677,
+      -27.471,
+      -2.294
+     ],
+     [
+      8.957,
+      -27.471,
+      -2.471
+     ],
+     [
+      9.237,
+      -27.471,
+      -2.647
+     ],
+     [
+      9.517,
+      -27.471,
+      -2.824
+     ]
+    ],
+    "height_above_nosing": 0.9,
+    "thickness_m": null,
+    "basis": "client glass decision; 0.9 m height carried from ASSUMED D1 render, structural size pending"
+   },
+   {
+    "id": "stair-wall-handrail",
+    "level": "B",
+    "side": "wall",
+    "stair": "party-wall flight",
+    "material": "wood",
+    "support": "wall",
+    "nosing_profile": [
+     [
+      5.317,
+      -28.671,
+      -0.176
+     ],
+     [
+      5.597,
+      -28.671,
+      -0.353
+     ],
+     [
+      5.877,
+      -28.671,
+      -0.529
+     ],
+     [
+      6.157,
+      -28.671,
+      -0.706
+     ],
+     [
+      6.437,
+      -28.671,
+      -0.882
+     ],
+     [
+      6.717,
+      -28.671,
+      -1.059
+     ],
+     [
+      6.997,
+      -28.671,
+      -1.235
+     ],
+     [
+      7.277,
+      -28.671,
+      -1.412
+     ],
+     [
+      7.557,
+      -28.671,
+      -1.588
+     ],
+     [
+      7.837,
+      -28.671,
+      -1.765
+     ],
+     [
+      8.117,
+      -28.671,
+      -1.941
+     ],
+     [
+      8.397,
+      -28.671,
+      -2.118
+     ],
+     [
+      8.677,
+      -28.671,
+      -2.294
+     ],
+     [
+      8.957,
+      -28.671,
+      -2.471
+     ],
+     [
+      9.237,
+      -28.671,
+      -2.647
+     ],
+     [
+      9.517,
+      -28.671,
+      -2.824
+     ]
+    ],
+    "height_above_nosing": 0.9,
+    "basis": "client wood handrail decision; 0.9 m height carried from ASSUMED D1 render"
+   }
+  ],
+  "bath_fittings": [
+   {
+    "id": "pe-rain-head",
+    "level": "GF",
+    "room": "parents-ensuite",
+    "kind": "ceiling-rain-head",
+    "x": 20.704,
+    "y": -30.736,
+    "z": 2.3,
+    "over": "pe-bath"
+   },
+   {
+    "id": "pe-hand-shower",
+    "level": "GF",
+    "room": "parents-ensuite",
+    "kind": "hand-shower",
+    "x": 20.104,
+    "y": -31.061,
+    "z": 1.1,
+    "over": "pe-bath"
+   },
+   {
+    "id": "pe-bath-screen",
+    "level": "GF",
+    "room": "parents-ensuite",
+    "kind": "fixed-frameless-glass",
+    "x0": 19.854,
+    "x1": 20.753999999999998,
+    "y": -30.361,
+    "sill": 0.55,
+    "head": 2.1,
+    "transmittance": 0.91,
+    "ior": 1.52,
+    "optical_note": "ASSUMED 10 mm low-iron glass: 0.91 transmittance, 1.52 index of refraction; TODO low-iron-glass-optics",
+    "entry_clear": 0.8000000000000043,
+    "card": "nkba-shower-clear-floor-762"
+   }
+  ],
+  "ventilation": [
+   {
+    "id": "guest-wc-extract",
+    "level": "B",
+    "room": "guest-wc",
+    "kind": "extract-fan",
+    "fan": [
+     10.1,
+     -21.15,
+     2.45
+    ],
+    "duct_route": [
+     [
+      10.1,
+      -21.15,
+      2.45
+     ],
+     [
+      10.1,
+      -20.501,
+      2.45
+     ]
+    ],
+    "discharge": "external-wall",
+    "discharge_card": "ukadf-extract-to-outside",
+    "makeup_air": {
+     "path": "door-undercut",
+     "door_rooms": [
+      "family",
+      "guest-wc"
+     ],
+     "undercut_m": 0.01,
+     "card": "ukadf-internal-door-undercut-10"
+    },
+    "operation": "intermittent",
+    "rate_ls": 6.0,
+    "card": "ukadf-sanitary-intermittent-6",
+    "run_on_min": 15,
+    "run_on_card": "ukadf-runon-timer-15min"
+   },
+   {
+    "id": "dirty-kitchen-extract",
+    "level": "B",
+    "room": "dirty-kitchen",
+    "kind": "cooker-hood-ducted",
+    "fan": [
+     13.827,
+     -20.881,
+     2.35
+    ],
+    "duct_route": [
+     [
+      13.827,
+      -20.881,
+      2.35
+     ],
+     [
+      13.827,
+      -20.501,
+      2.35
+     ]
+    ],
+    "discharge": "external-wall",
+    "discharge_card": "ukadf-extract-to-outside",
+    "makeup_air": {
+     "path": "sliding-door-gap",
+     "door_rooms": [
+      "kitchen",
+      "dirty-kitchen"
+     ],
+     "undercut_m": null,
+     "card": null
+    },
+    "operation": "intermittent",
+    "rate_ls": 30.0,
+    "card": "ukadf-kitchen-intermittent-hood-30",
+    "run_on_min": null,
+    "run_on_card": null
+   }
+  ],
+  "stair_name": "party-wall flight (r8, landing 1.2 m)",
+  "parking2": {
+   "ramp": {
+    "profile": [
+     [
+      -0.123,
+      -1.2
+     ],
+     [
+      0.877,
+      -1.1
+     ],
+     [
+      5.877,
+      -0.1
+     ],
+     [
+      6.877,
+      0.0
+     ]
+    ],
+    "y0": -23.591,
+    "y1": -20.601,
+    "thick": 0.35
+   },
+   "deck": {
+    "x0": 6.877,
+    "x1": 12.777,
+    "y0": -23.591,
+    "y1": -20.601,
+    "z_top": 0.0,
+    "thick": 0.35
+   },
+   "cars": [
+    [
+     7.077,
+     -22.996,
+     11.677,
+     -21.196,
+     0.0,
+     1.45
+    ]
+   ]
+  },
+  "roofs": [
+   [
+    12.777,
+    -23.591,
+    15.412,
+    -20.601
+   ]
+  ],
+  "infills": [
+   {
+    "what": "wall top up to the ramp soffit",
+    "y0": -20.801,
+    "y1": -20.601,
+    "profile": [
+     [
+      -0.123,
+      -1.55
+     ],
+     [
+      0.877,
+      -1.55
+     ],
+     [
+      0.877,
+      -1.45
+     ]
+    ]
+   },
+   {
+    "what": "wall top up to the ramp soffit",
+    "y0": -20.801,
+    "y1": -20.601,
+    "profile": [
+     [
+      0.877,
+      -1.45
+     ],
+     [
+      5.877,
+      -1.45
+     ],
+     [
+      5.877,
+      -0.45
+     ]
+    ]
+   },
+   {
+    "what": "wall top up to the ramp soffit",
+    "y0": -20.801,
+    "y1": -20.601,
+    "profile": [
+     [
+      5.877,
+      -0.45
+     ],
+     [
+      6.877,
+      -0.45
+     ],
+     [
+      6.877,
+      -0.35
+     ]
+    ]
+   }
+  ],
+  "infill": {
+   "y0": -23.841,
+   "y1": -23.591,
+   "profile": [
+    [
+     -0.123,
+     -1.6
+    ],
+    [
+     3.617,
+     -1.6
+    ],
+    [
+     3.617,
+     -0.902
+    ],
+    [
+     0.877,
+     -1.45
+    ],
+    [
+     -0.123,
+     -1.55
+    ]
+   ]
+  },
+  "rails": [
+   {
+    "what": "guard rail on the ramp edge over the north patio",
+    "y0": -23.641,
+    "y1": -23.591,
+    "profile": [
+     [
+      -0.123,
+      -1.2
+     ],
+     [
+      0.877,
+      -1.1
+     ],
+     [
+      3.617,
+      -0.552
+     ],
+     [
+      3.617,
+      0.548
+     ],
+     [
+      0.877,
+      0.0
+     ],
+     [
+      -0.123,
+      -0.1
+     ]
+    ]
+   },
+   {
+    "what": "guard rail along the east fence (fence under 1.1 m above the deck)",
+    "y0": -20.701,
+    "y1": -20.651,
+    "profile": [
+     [
+      5.88,
+      -0.1
+     ],
+     [
+      6.877,
+      0.0
+     ],
+     [
+      15.412,
+      0.0
+     ],
+     [
+      15.412,
+      1.1
+     ],
+     [
+      6.877,
+      1.1
+     ],
+     [
+      5.88,
+      1.0
+     ]
+    ]
+   },
+   {
+    "what": "guard rail at the deck end over the yard",
+    "y0": -23.591,
+    "y1": -20.601,
+    "profile": [
+     [
+      15.362,
+      0.0
+     ],
+     [
+      15.412,
+      0.0
+     ],
+     [
+      15.412,
+      1.1
+     ],
+     [
+      15.362,
+      1.1
+     ]
+    ]
+   }
+  ],
+  "dropped": [
+   {
+    "room": "study-game",
+    "level": "GF",
+    "reason": "no column-free run"
+   },
+   {
+    "room": "bar-alcove/yard",
+    "level": "B",
+    "reason": "column-free run 1.14 m"
+   }
+  ],
+  "gf_voids": [],
+  "furniture": [
+   {
+    "mark": "lounge-tv",
+    "level": "B",
+    "type": "tv_unit",
+    "room": "lounge",
+    "category": "furniture",
+    "boxes": [
+     [
+      5.0,
+      -24.091,
+      0.1,
+      7.0,
+      -23.641,
+      0.5
+     ],
+     [
+      5.1698,
+      -23.691,
+      0.633,
+      6.8302,
+      -23.641,
+      1.567
+     ]
+    ],
+    "parts": [
+     "unit",
+     "screen"
+    ],
+    "envelope": [
+     5.0,
+     -24.091,
+     0.1,
+     7.0,
+     -23.641,
+     1.567
+    ],
+    "footprint": [
+     5.0,
+     -24.091,
+     7.0,
+     -23.641
+    ],
+    "h": 0.5
+   },
+   {
+    "mark": "lounge-sofa",
+    "level": "B",
+    "type": "sofa_4seat",
+    "room": "lounge",
+    "category": "furniture",
+    "boxes": [
+     [
+      5.08,
+      -27.371,
+      0.0,
+      7.36,
+      -26.421,
+      0.22
+     ],
+     [
+      5.08,
+      -27.151,
+      0.22,
+      7.36,
+      -26.421,
+      0.44
+     ],
+     [
+      5.08,
+      -27.371,
+      0.22,
+      7.36,
+      -27.151,
+      0.85
+     ],
+     [
+      4.92,
+      -27.371,
+      0.0,
+      5.08,
+      -26.421,
+      0.62
+     ],
+     [
+      7.36,
+      -27.371,
+      0.0,
+      7.52,
+      -26.421,
+      0.62
+     ]
+    ],
+    "parts": [
+     "base",
+     "seat",
+     "back",
+     "arm",
+     "arm"
+    ],
+    "envelope": [
+     4.92,
+     -27.371,
+     0.0,
+     7.52,
+     -26.421,
+     0.85
+    ],
+    "footprint": [
+     4.92,
+     -27.371,
+     7.52,
+     -26.421
+    ],
+    "h": 0.85
+   },
+   {
+    "mark": "lounge-coffee",
+    "level": "B",
+    "type": "coffee_table",
+    "room": "lounge",
+    "category": "furniture",
+    "boxes": [
+     [
+      5.62,
+      -25.959,
+      0.35,
+      6.82,
+      -25.359,
+      0.4
+     ],
+     [
+      5.67,
+      -25.909,
+      0.1,
+      6.77,
+      -25.409,
+      0.12
+     ],
+     [
+      5.65,
+      -25.929,
+      0,
+      5.7,
+      -25.879,
+      0.35
+     ],
+     [
+      5.65,
+      -25.439,
+      0,
+      5.7,
+      -25.389,
+      0.35
+     ],
+     [
+      6.74,
+      -25.929,
+      0,
+      6.79,
+      -25.879,
+      0.35
+     ],
+     [
+      6.74,
+      -25.439,
+      0,
+      6.79,
+      -25.389,
+      0.35
+     ]
+    ],
+    "parts": [
+     "top",
+     "shelf",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     5.62,
+     -25.959,
+     0,
+     6.82,
+     -25.359,
+     0.4
+    ],
+    "footprint": [
+     5.62,
+     -25.959,
+     6.82,
+     -25.359
+    ],
+    "h": 0.4
+   },
+   {
+    "mark": "lounge-armchair",
+    "level": "B",
+    "type": "armchair",
+    "room": "lounge",
+    "category": "furniture",
+    "boxes": [
+     [
+      7.995,
+      -26.505,
+      0.0,
+      8.845,
+      -25.895,
+      0.22
+     ],
+     [
+      7.995,
+      -26.505,
+      0.22,
+      8.625,
+      -25.895,
+      0.44
+     ],
+     [
+      8.625,
+      -26.505,
+      0.22,
+      8.845,
+      -25.895,
+      0.85
+     ],
+     [
+      7.995,
+      -26.625,
+      0.0,
+      8.845,
+      -26.505,
+      0.62
+     ],
+     [
+      7.995,
+      -25.895,
+      0.0,
+      8.845,
+      -25.775,
+      0.62
+     ]
+    ],
+    "parts": [
+     "base",
+     "seat",
+     "back",
+     "arm",
+     "arm"
+    ],
+    "envelope": [
+     7.995,
+     -26.625,
+     0.0,
+     8.845,
+     -25.775,
+     0.85
+    ],
+    "footprint": [
+     7.995,
+     -26.625,
+     8.845,
+     -25.775
+    ],
+    "h": 0.85
+   },
+   {
+    "mark": "stair-flight-store",
+    "level": "B",
+    "type": "under_stair_storage",
+    "room": "stair-b",
+    "category": "casework",
+    "boxes": [
+     [
+      5.737,
+      -28.471,
+      0,
+      5.85,
+      -28.071,
+      0.1
+     ],
+     [
+      5.737,
+      -28.471,
+      0.1,
+      5.85,
+      -28.101,
+      2.3
+     ],
+     [
+      5.737,
+      -28.096,
+      0.1,
+      5.85,
+      -28.071,
+      2.3
+     ],
+     [
+      5.737,
+      -28.451,
+      0.55,
+      5.85,
+      -28.111,
+      0.57
+     ],
+     [
+      5.457,
+      -28.471,
+      0,
+      5.737,
+      -28.071,
+      0.1
+     ],
+     [
+      5.457,
+      -28.471,
+      0.1,
+      5.737,
+      -28.101,
+      2.3
+     ],
+     [
+      5.457,
+      -28.096,
+      0.1,
+      5.737,
+      -28.071,
+      2.3
+     ],
+     [
+      5.457,
+      -28.451,
+      0.55,
+      5.737,
+      -28.111,
+      0.57
+     ],
+     [
+      5.3,
+      -28.471,
+      0,
+      5.457,
+      -28.071,
+      0.1
+     ],
+     [
+      5.3,
+      -28.471,
+      0.1,
+      5.457,
+      -28.101,
+      2.3
+     ],
+     [
+      5.3,
+      -28.096,
+      0.1,
+      5.457,
+      -28.071,
+      2.3
+     ],
+     [
+      5.3,
+      -28.451,
+      0.55,
+      5.457,
+      -28.111,
+      0.57
+     ],
+     [
+      6.297,
+      -28.471,
+      0,
+      6.5,
+      -28.071,
+      0.1
+     ],
+     [
+      6.297,
+      -28.471,
+      0.1,
+      6.5,
+      -28.101,
+      2.0076
+     ],
+     [
+      6.297,
+      -28.096,
+      0.1,
+      6.5,
+      -28.071,
+      2.0076
+     ],
+     [
+      6.297,
+      -28.451,
+      0.55,
+      6.5,
+      -28.111,
+      0.57
+     ],
+     [
+      6.017,
+      -28.471,
+      0,
+      6.297,
+      -28.071,
+      0.1
+     ],
+     [
+      6.017,
+      -28.471,
+      0.1,
+      6.297,
+      -28.101,
+      2.1841
+     ],
+     [
+      6.017,
+      -28.096,
+      0.1,
+      6.297,
+      -28.071,
+      2.1841
+     ],
+     [
+      6.017,
+      -28.451,
+      0.55,
+      6.297,
+      -28.111,
+      0.57
+     ],
+     [
+      5.85,
+      -28.471,
+      0,
+      6.017,
+      -28.071,
+      0.1
+     ],
+     [
+      5.85,
+      -28.471,
+      0.1,
+      6.017,
+      -28.101,
+      2.3
+     ],
+     [
+      5.85,
+      -28.096,
+      0.1,
+      6.017,
+      -28.071,
+      2.3
+     ],
+     [
+      5.85,
+      -28.451,
+      0.55,
+      6.017,
+      -28.111,
+      0.57
+     ],
+     [
+      6.857,
+      -28.471,
+      0,
+      7.1,
+      -28.071,
+      0.1
+     ],
+     [
+      6.857,
+      -28.471,
+      0.1,
+      7.1,
+      -28.101,
+      1.6547
+     ],
+     [
+      6.857,
+      -28.096,
+      0.1,
+      7.1,
+      -28.071,
+      1.6547
+     ],
+     [
+      6.857,
+      -28.451,
+      0.55,
+      7.1,
+      -28.111,
+      0.57
+     ],
+     [
+      6.577,
+      -28.471,
+      0,
+      6.857,
+      -28.071,
+      0.1
+     ],
+     [
+      6.577,
+      -28.471,
+      0.1,
+      6.857,
+      -28.101,
+      1.8312
+     ],
+     [
+      6.577,
+      -28.096,
+      0.1,
+      6.857,
+      -28.071,
+      1.8312
+     ],
+     [
+      6.577,
+      -28.451,
+      0.55,
+      6.857,
+      -28.111,
+      0.57
+     ],
+     [
+      6.5,
+      -28.471,
+      0,
+      6.577,
+      -28.071,
+      0.1
+     ],
+     [
+      6.5,
+      -28.471,
+      0.1,
+      6.577,
+      -28.101,
+      2.0076
+     ],
+     [
+      6.5,
+      -28.096,
+      0.1,
+      6.577,
+      -28.071,
+      2.0076
+     ],
+     [
+      6.5,
+      -28.451,
+      0.55,
+      6.577,
+      -28.111,
+      0.57
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "standing-access-carcass",
+     "sliding-door",
+     "standing-access-shelf",
+     "plinth",
+     "standing-access-carcass",
+     "sliding-door",
+     "standing-access-shelf",
+     "plinth",
+     "standing-access-carcass",
+     "sliding-door",
+     "standing-access-shelf",
+     "plinth",
+     "luggage-carcass",
+     "sliding-door",
+     "luggage-shelf",
+     "plinth",
+     "luggage-carcass",
+     "sliding-door",
+     "luggage-shelf",
+     "plinth",
+     "luggage-carcass",
+     "sliding-door",
+     "luggage-shelf",
+     "plinth",
+     "seasonal-boxes-carcass",
+     "sliding-door",
+     "seasonal-boxes-shelf",
+     "plinth",
+     "seasonal-boxes-carcass",
+     "sliding-door",
+     "seasonal-boxes-shelf",
+     "plinth",
+     "seasonal-boxes-carcass",
+     "sliding-door",
+     "seasonal-boxes-shelf"
+    ],
+    "envelope": [
+     5.3,
+     -28.471,
+     0,
+     7.1,
+     -28.071,
+     2.3
+    ],
+    "footprint": [
+     5.3,
+     -28.471,
+     7.1,
+     -28.071
+    ],
+    "h": 2.3
+   },
+   {
+    "mark": "stair-landing-store",
+    "level": "B",
+    "type": "under_stair_storage",
+    "room": "lounge-nook",
+    "category": "casework",
+    "boxes": [
+     [
+      3.99,
+      -28.621,
+      0,
+      4.19,
+      -28.421,
+      0.1
+     ],
+     [
+      3.99,
+      -28.621,
+      0.1,
+      4.19,
+      -28.451,
+      2.3
+     ],
+     [
+      3.99,
+      -28.446,
+      0.1,
+      4.19,
+      -28.421,
+      2.3
+     ],
+     [
+      3.99,
+      -28.601,
+      0.55,
+      4.19,
+      -28.461,
+      0.57
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "small-boxes-carcass",
+     "sliding-door",
+     "small-boxes-shelf"
+    ],
+    "envelope": [
+     3.99,
+     -28.621,
+     0,
+     4.19,
+     -28.421,
+     2.3
+    ],
+    "footprint": [
+     3.99,
+     -28.621,
+     4.19,
+     -28.421
+    ],
+    "h": 2.3
+   },
+   {
+    "mark": "k-run",
+    "level": "B",
+    "type": "base_run",
+    "room": "kitchen",
+    "category": "casework",
+    "boxes": [
+     [
+      12.95,
+      -24.191,
+      0,
+      13.55,
+      -23.641,
+      0.1
+     ],
+     [
+      12.95,
+      -24.216,
+      0.1,
+      13.55,
+      -23.641,
+      0.86
+     ],
+     [
+      12.95,
+      -24.241,
+      0.86,
+      13.55,
+      -23.641,
+      0.9
+     ],
+     [
+      12.9,
+      -24.191,
+      0,
+      12.95,
+      -23.641,
+      0.1
+     ],
+     [
+      12.9,
+      -24.216,
+      0.1,
+      12.95,
+      -23.641,
+      0.86
+     ],
+     [
+      12.9,
+      -24.241,
+      0.86,
+      12.95,
+      -23.641,
+      0.9
+     ],
+     [
+      12.0,
+      -24.191,
+      0,
+      12.9,
+      -23.641,
+      0.1
+     ],
+     [
+      12.0,
+      -24.216,
+      0.1,
+      12.9,
+      -23.641,
+      0.86
+     ],
+     [
+      12.0,
+      -24.241,
+      0.86,
+      12.9,
+      -23.641,
+      0.9
+     ],
+     [
+      11.54,
+      -24.191,
+      0,
+      12.0,
+      -23.641,
+      0.1
+     ],
+     [
+      11.54,
+      -24.216,
+      0.1,
+      12.0,
+      -23.641,
+      0.86
+     ],
+     [
+      11.54,
+      -24.241,
+      0.86,
+      12.0,
+      -23.641,
+      0.9
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "dw",
+     "worktop",
+     "plinth",
+     "counter",
+     "worktop",
+     "plinth",
+     "sink",
+     "worktop",
+     "plinth",
+     "counter",
+     "worktop"
+    ],
+    "envelope": [
+     11.54,
+     -24.241,
+     0,
+     13.55,
+     -23.641,
+     0.9
+    ],
+    "footprint": [
+     11.54,
+     -24.241,
+     13.55,
+     -23.641
+    ],
+    "h": 0.9
+   },
+   {
+    "mark": "k-island",
+    "level": "B",
+    "type": "island",
+    "room": "kitchen",
+    "category": "casework",
+    "boxes": [
+     [
+      11.55,
+      -26.56,
+      0.88,
+      14.6,
+      -25.46,
+      0.92
+     ],
+     [
+      11.6,
+      -26.21,
+      0,
+      14.55,
+      -25.51,
+      0.1
+     ],
+     [
+      11.55,
+      -26.26,
+      0.1,
+      12.15,
+      -25.46,
+      0.88
+     ],
+     [
+      12.15,
+      -26.26,
+      0.1,
+      12.6,
+      -25.46,
+      0.88
+     ],
+     [
+      12.6,
+      -26.26,
+      0.1,
+      13.5,
+      -25.46,
+      0.88
+     ],
+     [
+      13.5,
+      -26.26,
+      0.1,
+      14.6,
+      -25.46,
+      0.88
+     ]
+    ],
+    "parts": [
+     "worktop",
+     "plinth",
+     "microwave",
+     "counter",
+     "hob",
+     "counter"
+    ],
+    "envelope": [
+     11.55,
+     -26.56,
+     0,
+     14.6,
+     -25.46,
+     0.92
+    ],
+    "footprint": [
+     11.55,
+     -26.56,
+     14.6,
+     -25.46
+    ],
+    "h": 0.92
+   },
+   {
+    "mark": "k-island#stool-1",
+    "level": "B",
+    "type": "stool",
+    "room": "kitchen",
+    "category": "furniture",
+    "boxes": [
+     [
+      11.675,
+      -26.59,
+      0,
+      12.035,
+      -26.23,
+      0.02
+     ],
+     [
+      11.83,
+      -26.435,
+      0.02,
+      11.88,
+      -26.385,
+      0.6
+     ],
+     [
+      11.705,
+      -26.56,
+      0.25,
+      12.005,
+      -26.26,
+      0.27
+     ],
+     [
+      11.665,
+      -26.6,
+      0.6,
+      12.045,
+      -26.22,
+      0.65
+     ]
+    ],
+    "parts": [
+     "base",
+     "post",
+     "footrest",
+     "seat"
+    ],
+    "envelope": [
+     11.665,
+     -26.6,
+     0,
+     12.045,
+     -26.22,
+     0.65
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "k-island#stool-2",
+    "level": "B",
+    "type": "stool",
+    "room": "kitchen",
+    "category": "furniture",
+    "boxes": [
+     [
+      12.285,
+      -26.59,
+      0,
+      12.645,
+      -26.23,
+      0.02
+     ],
+     [
+      12.44,
+      -26.435,
+      0.02,
+      12.49,
+      -26.385,
+      0.6
+     ],
+     [
+      12.315,
+      -26.56,
+      0.25,
+      12.615,
+      -26.26,
+      0.27
+     ],
+     [
+      12.275,
+      -26.6,
+      0.6,
+      12.655,
+      -26.22,
+      0.65
+     ]
+    ],
+    "parts": [
+     "base",
+     "post",
+     "footrest",
+     "seat"
+    ],
+    "envelope": [
+     12.275,
+     -26.6,
+     0,
+     12.655,
+     -26.22,
+     0.65
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "k-island#stool-3",
+    "level": "B",
+    "type": "stool",
+    "room": "kitchen",
+    "category": "furniture",
+    "boxes": [
+     [
+      12.895,
+      -26.59,
+      0,
+      13.255,
+      -26.23,
+      0.02
+     ],
+     [
+      13.05,
+      -26.435,
+      0.02,
+      13.1,
+      -26.385,
+      0.6
+     ],
+     [
+      12.925,
+      -26.56,
+      0.25,
+      13.225,
+      -26.26,
+      0.27
+     ],
+     [
+      12.885,
+      -26.6,
+      0.6,
+      13.265,
+      -26.22,
+      0.65
+     ]
+    ],
+    "parts": [
+     "base",
+     "post",
+     "footrest",
+     "seat"
+    ],
+    "envelope": [
+     12.885,
+     -26.6,
+     0,
+     13.265,
+     -26.22,
+     0.65
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "k-island#stool-4",
+    "level": "B",
+    "type": "stool",
+    "room": "kitchen",
+    "category": "furniture",
+    "boxes": [
+     [
+      13.505,
+      -26.59,
+      0,
+      13.865,
+      -26.23,
+      0.02
+     ],
+     [
+      13.66,
+      -26.435,
+      0.02,
+      13.71,
+      -26.385,
+      0.6
+     ],
+     [
+      13.535,
+      -26.56,
+      0.25,
+      13.835,
+      -26.26,
+      0.27
+     ],
+     [
+      13.495,
+      -26.6,
+      0.6,
+      13.875,
+      -26.22,
+      0.65
+     ]
+    ],
+    "parts": [
+     "base",
+     "post",
+     "footrest",
+     "seat"
+    ],
+    "envelope": [
+     13.495,
+     -26.6,
+     0,
+     13.875,
+     -26.22,
+     0.65
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "k-island#stool-5",
+    "level": "B",
+    "type": "stool",
+    "room": "kitchen",
+    "category": "furniture",
+    "boxes": [
+     [
+      14.115,
+      -26.59,
+      0,
+      14.475,
+      -26.23,
+      0.02
+     ],
+     [
+      14.27,
+      -26.435,
+      0.02,
+      14.32,
+      -26.385,
+      0.6
+     ],
+     [
+      14.145,
+      -26.56,
+      0.25,
+      14.445,
+      -26.26,
+      0.27
+     ],
+     [
+      14.105,
+      -26.6,
+      0.6,
+      14.485,
+      -26.22,
+      0.65
+     ]
+    ],
+    "parts": [
+     "base",
+     "post",
+     "footrest",
+     "seat"
+    ],
+    "envelope": [
+     14.105,
+     -26.6,
+     0,
+     14.485,
+     -26.22,
+     0.65
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "dining-table",
+    "level": "B",
+    "type": "dining_6x",
+    "room": "dining",
+    "category": "furniture",
+    "boxes": [
+     [
+      16.05,
+      -26.35,
+      0.71,
+      17.85,
+      -25.45,
+      0.75
+     ],
+     [
+      16.08,
+      -26.32,
+      0,
+      16.13,
+      -26.27,
+      0.71
+     ],
+     [
+      16.08,
+      -25.53,
+      0,
+      16.13,
+      -25.48,
+      0.71
+     ],
+     [
+      17.77,
+      -26.32,
+      0,
+      17.82,
+      -26.27,
+      0.71
+     ],
+     [
+      17.77,
+      -25.53,
+      0,
+      17.82,
+      -25.48,
+      0.71
+     ]
+    ],
+    "parts": [
+     "top",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     16.05,
+     -26.35,
+     0,
+     17.85,
+     -25.45,
+     0.75
+    ],
+    "footprint": [
+     16.05,
+     -26.35,
+     17.85,
+     -25.45
+    ],
+    "h": 0.75
+   },
+   {
+    "mark": "dining-table#chair-1",
+    "level": "B",
+    "type": "chair",
+    "room": "dining",
+    "category": "furniture",
+    "boxes": [
+     [
+      16.13,
+      -25.4,
+      0.42,
+      16.57,
+      -24.95,
+      0.46
+     ],
+     [
+      16.13,
+      -25.4,
+      0,
+      16.17,
+      -25.36,
+      0.42
+     ],
+     [
+      16.13,
+      -24.99,
+      0,
+      16.17,
+      -24.95,
+      0.42
+     ],
+     [
+      16.53,
+      -25.4,
+      0,
+      16.57,
+      -25.36,
+      0.42
+     ],
+     [
+      16.53,
+      -24.99,
+      0,
+      16.57,
+      -24.95,
+      0.42
+     ],
+     [
+      16.13,
+      -24.98,
+      0.46,
+      16.57,
+      -24.95,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     16.13,
+     -25.4,
+     0,
+     16.57,
+     -24.95,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "dining-table#chair-2",
+    "level": "B",
+    "type": "chair",
+    "room": "dining",
+    "category": "furniture",
+    "boxes": [
+     [
+      16.13,
+      -26.85,
+      0.42,
+      16.57,
+      -26.4,
+      0.46
+     ],
+     [
+      16.13,
+      -26.85,
+      0,
+      16.17,
+      -26.81,
+      0.42
+     ],
+     [
+      16.13,
+      -26.44,
+      0,
+      16.17,
+      -26.4,
+      0.42
+     ],
+     [
+      16.53,
+      -26.85,
+      0,
+      16.57,
+      -26.81,
+      0.42
+     ],
+     [
+      16.53,
+      -26.44,
+      0,
+      16.57,
+      -26.4,
+      0.42
+     ],
+     [
+      16.13,
+      -26.85,
+      0.46,
+      16.57,
+      -26.82,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     16.13,
+     -26.85,
+     0,
+     16.57,
+     -26.4,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "dining-table#chair-3",
+    "level": "B",
+    "type": "chair",
+    "room": "dining",
+    "category": "furniture",
+    "boxes": [
+     [
+      16.73,
+      -25.4,
+      0.42,
+      17.17,
+      -24.95,
+      0.46
+     ],
+     [
+      16.73,
+      -25.4,
+      0,
+      16.77,
+      -25.36,
+      0.42
+     ],
+     [
+      16.73,
+      -24.99,
+      0,
+      16.77,
+      -24.95,
+      0.42
+     ],
+     [
+      17.13,
+      -25.4,
+      0,
+      17.17,
+      -25.36,
+      0.42
+     ],
+     [
+      17.13,
+      -24.99,
+      0,
+      17.17,
+      -24.95,
+      0.42
+     ],
+     [
+      16.73,
+      -24.98,
+      0.46,
+      17.17,
+      -24.95,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     16.73,
+     -25.4,
+     0,
+     17.17,
+     -24.95,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "dining-table#chair-4",
+    "level": "B",
+    "type": "chair",
+    "room": "dining",
+    "category": "furniture",
+    "boxes": [
+     [
+      16.73,
+      -26.85,
+      0.42,
+      17.17,
+      -26.4,
+      0.46
+     ],
+     [
+      16.73,
+      -26.85,
+      0,
+      16.77,
+      -26.81,
+      0.42
+     ],
+     [
+      16.73,
+      -26.44,
+      0,
+      16.77,
+      -26.4,
+      0.42
+     ],
+     [
+      17.13,
+      -26.85,
+      0,
+      17.17,
+      -26.81,
+      0.42
+     ],
+     [
+      17.13,
+      -26.44,
+      0,
+      17.17,
+      -26.4,
+      0.42
+     ],
+     [
+      16.73,
+      -26.85,
+      0.46,
+      17.17,
+      -26.82,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     16.73,
+     -26.85,
+     0,
+     17.17,
+     -26.4,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "dining-table#chair-5",
+    "level": "B",
+    "type": "chair",
+    "room": "dining",
+    "category": "furniture",
+    "boxes": [
+     [
+      17.33,
+      -25.4,
+      0.42,
+      17.77,
+      -24.95,
+      0.46
+     ],
+     [
+      17.33,
+      -25.4,
+      0,
+      17.37,
+      -25.36,
+      0.42
+     ],
+     [
+      17.33,
+      -24.99,
+      0,
+      17.37,
+      -24.95,
+      0.42
+     ],
+     [
+      17.73,
+      -25.4,
+      0,
+      17.77,
+      -25.36,
+      0.42
+     ],
+     [
+      17.73,
+      -24.99,
+      0,
+      17.77,
+      -24.95,
+      0.42
+     ],
+     [
+      17.33,
+      -24.98,
+      0.46,
+      17.77,
+      -24.95,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     17.33,
+     -25.4,
+     0,
+     17.77,
+     -24.95,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "dining-table#chair-6",
+    "level": "B",
+    "type": "chair",
+    "room": "dining",
+    "category": "furniture",
+    "boxes": [
+     [
+      17.33,
+      -26.85,
+      0.42,
+      17.77,
+      -26.4,
+      0.46
+     ],
+     [
+      17.33,
+      -26.85,
+      0,
+      17.37,
+      -26.81,
+      0.42
+     ],
+     [
+      17.33,
+      -26.44,
+      0,
+      17.37,
+      -26.4,
+      0.42
+     ],
+     [
+      17.73,
+      -26.85,
+      0,
+      17.77,
+      -26.81,
+      0.42
+     ],
+     [
+      17.73,
+      -26.44,
+      0,
+      17.77,
+      -26.4,
+      0.42
+     ],
+     [
+      17.33,
+      -26.85,
+      0.46,
+      17.77,
+      -26.82,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     17.33,
+     -26.85,
+     0,
+     17.77,
+     -26.4,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "dining-sideboard",
+    "level": "B",
+    "type": "sideboard",
+    "room": "dining-side",
+    "category": "furniture",
+    "boxes": [
+     [
+      16.25,
+      -28.471,
+      0,
+      17.35,
+      -28.071,
+      0.1
+     ],
+     [
+      16.2,
+      -28.471,
+      0.1,
+      17.4,
+      -28.021,
+      0.8
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "carcass"
+    ],
+    "envelope": [
+     16.2,
+     -28.471,
+     0,
+     17.4,
+     -28.021,
+     0.8
+    ],
+    "footprint": [
+     16.2,
+     -28.471,
+     17.4,
+     -28.021
+    ],
+    "h": 0.8
+   },
+   {
+    "mark": "living-sofa",
+    "level": "B",
+    "type": "sofa_3seat",
+    "room": "living",
+    "category": "furniture",
+    "boxes": [
+     [
+      18.96,
+      -27.77,
+      0.0,
+      20.74,
+      -26.87,
+      0.22
+     ],
+     [
+      18.96,
+      -27.55,
+      0.22,
+      20.74,
+      -26.87,
+      0.44
+     ],
+     [
+      18.96,
+      -27.77,
+      0.22,
+      20.74,
+      -27.55,
+      0.85
+     ],
+     [
+      18.8,
+      -27.77,
+      0.0,
+      18.96,
+      -26.87,
+      0.62
+     ],
+     [
+      20.74,
+      -27.77,
+      0.0,
+      20.9,
+      -26.87,
+      0.62
+     ]
+    ],
+    "parts": [
+     "base",
+     "seat",
+     "back",
+     "arm",
+     "arm"
+    ],
+    "envelope": [
+     18.8,
+     -27.77,
+     0.0,
+     20.9,
+     -26.87,
+     0.85
+    ],
+    "footprint": [
+     18.8,
+     -27.77,
+     20.9,
+     -26.87
+    ],
+    "h": 0.85
+   },
+   {
+    "mark": "living-coffee",
+    "level": "B",
+    "type": "coffee_table",
+    "room": "living",
+    "category": "furniture",
+    "boxes": [
+     [
+      19.8,
+      -26.413,
+      0.35,
+      20.9,
+      -25.813,
+      0.4
+     ],
+     [
+      19.85,
+      -26.363,
+      0.1,
+      20.85,
+      -25.863,
+      0.12
+     ],
+     [
+      19.83,
+      -26.383,
+      0,
+      19.88,
+      -26.333,
+      0.35
+     ],
+     [
+      19.83,
+      -25.893,
+      0,
+      19.88,
+      -25.843,
+      0.35
+     ],
+     [
+      20.82,
+      -26.383,
+      0,
+      20.87,
+      -26.333,
+      0.35
+     ],
+     [
+      20.82,
+      -25.893,
+      0,
+      20.87,
+      -25.843,
+      0.35
+     ]
+    ],
+    "parts": [
+     "top",
+     "shelf",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     19.8,
+     -26.413,
+     0,
+     20.9,
+     -25.813,
+     0.4
+    ],
+    "footprint": [
+     19.8,
+     -26.413,
+     20.9,
+     -25.813
+    ],
+    "h": 0.4
+   },
+   {
+    "mark": "living-chair-1",
+    "level": "B",
+    "type": "armchair",
+    "room": "living",
+    "category": "furniture",
+    "boxes": [
+     [
+      19.62,
+      -25.356,
+      0.0,
+      20.23,
+      -24.506,
+      0.22
+     ],
+     [
+      19.62,
+      -25.356,
+      0.22,
+      20.23,
+      -24.726,
+      0.44
+     ],
+     [
+      19.62,
+      -24.726,
+      0.22,
+      20.23,
+      -24.506,
+      0.85
+     ],
+     [
+      20.23,
+      -25.356,
+      0.0,
+      20.35,
+      -24.506,
+      0.62
+     ],
+     [
+      19.5,
+      -25.356,
+      0.0,
+      19.62,
+      -24.506,
+      0.62
+     ]
+    ],
+    "parts": [
+     "base",
+     "seat",
+     "back",
+     "arm",
+     "arm"
+    ],
+    "envelope": [
+     19.5,
+     -25.356,
+     0.0,
+     20.35,
+     -24.506,
+     0.85
+    ],
+    "footprint": [
+     19.5,
+     -25.356,
+     20.35,
+     -24.506
+    ],
+    "h": 0.85
+   },
+   {
+    "mark": "living-chair-2",
+    "level": "B",
+    "type": "armchair",
+    "room": "living",
+    "category": "furniture",
+    "boxes": [
+     [
+      20.52,
+      -25.356,
+      0.0,
+      21.13,
+      -24.506,
+      0.22
+     ],
+     [
+      20.52,
+      -25.356,
+      0.22,
+      21.13,
+      -24.726,
+      0.44
+     ],
+     [
+      20.52,
+      -24.726,
+      0.22,
+      21.13,
+      -24.506,
+      0.85
+     ],
+     [
+      21.13,
+      -25.356,
+      0.0,
+      21.25,
+      -24.506,
+      0.62
+     ],
+     [
+      20.4,
+      -25.356,
+      0.0,
+      20.52,
+      -24.506,
+      0.62
+     ]
+    ],
+    "parts": [
+     "base",
+     "seat",
+     "back",
+     "arm",
+     "arm"
+    ],
+    "envelope": [
+     20.4,
+     -25.356,
+     0.0,
+     21.25,
+     -24.506,
+     0.85
+    ],
+    "footprint": [
+     20.4,
+     -25.356,
+     21.25,
+     -24.506
+    ],
+    "h": 0.85
+   },
+   {
+    "mark": "library-cabinet-left",
+    "level": "B",
+    "type": "bookcase",
+    "room": "bar-alcove",
+    "category": "casework",
+    "boxes": [
+     [
+      17.468,
+      -29.716,
+      0,
+      18.668,
+      -29.696,
+      2.1
+     ],
+     [
+      17.468,
+      -29.716,
+      0,
+      17.488,
+      -29.316,
+      2.1
+     ],
+     [
+      18.648,
+      -29.716,
+      0,
+      18.668,
+      -29.316,
+      2.1
+     ],
+     [
+      17.488,
+      -29.696,
+      0.0,
+      18.648,
+      -29.316,
+      0.02
+     ],
+     [
+      17.488,
+      -29.696,
+      0.42,
+      18.648,
+      -29.316,
+      0.44
+     ],
+     [
+      17.488,
+      -29.696,
+      0.84,
+      18.648,
+      -29.316,
+      0.86
+     ],
+     [
+      17.488,
+      -29.696,
+      1.26,
+      18.648,
+      -29.316,
+      1.28
+     ],
+     [
+      17.488,
+      -29.696,
+      1.68,
+      18.648,
+      -29.316,
+      1.7
+     ],
+     [
+      17.488,
+      -29.696,
+      2.08,
+      18.648,
+      -29.316,
+      2.1
+     ],
+     [
+      17.488,
+      -29.331,
+      0.04,
+      18.058,
+      -29.316,
+      2.06
+     ],
+     [
+      18.078,
+      -29.331,
+      0.04,
+      18.648,
+      -29.316,
+      2.06
+     ]
+    ],
+    "parts": [
+     "back",
+     "side",
+     "side",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "glass-door",
+     "glass-door"
+    ],
+    "envelope": [
+     17.468,
+     -29.716,
+     0,
+     18.668,
+     -29.316,
+     2.1
+    ],
+    "footprint": [
+     17.468,
+     -29.716,
+     18.668,
+     -29.316
+    ],
+    "h": 2.1
+   },
+   {
+    "mark": "library-daybed",
+    "level": "B",
+    "type": "daybed_nook",
+    "room": "bar-alcove",
+    "category": "casework",
+    "boxes": [
+     [
+      18.668,
+      -29.716,
+      0,
+      20.668,
+      -28.766,
+      0.25
+     ],
+     [
+      18.668,
+      -29.691,
+      0.25,
+      20.668,
+      -28.791,
+      0.45
+     ],
+     [
+      18.668,
+      -29.716,
+      0,
+      18.693,
+      -28.766,
+      2.1
+     ],
+     [
+      20.643,
+      -29.716,
+      0,
+      20.668,
+      -28.766,
+      2.1
+     ],
+     [
+      18.668,
+      -29.716,
+      2.075,
+      20.668,
+      -28.766,
+      2.1
+     ]
+    ],
+    "parts": [
+     "base",
+     "mattress",
+     "nook-side",
+     "nook-side",
+     "nook-top"
+    ],
+    "envelope": [
+     18.668,
+     -29.716,
+     0,
+     20.668,
+     -28.766,
+     2.1
+    ],
+    "footprint": [
+     18.668,
+     -29.716,
+     20.668,
+     -28.766
+    ],
+    "h": 0.45
+   },
+   {
+    "mark": "library-cabinet-right",
+    "level": "B",
+    "type": "bookcase",
+    "room": "bar-alcove",
+    "category": "casework",
+    "boxes": [
+     [
+      20.668,
+      -29.716,
+      0,
+      22.2,
+      -29.696,
+      2.1
+     ],
+     [
+      20.668,
+      -29.716,
+      0,
+      20.688,
+      -29.316,
+      2.1
+     ],
+     [
+      22.18,
+      -29.716,
+      0,
+      22.2,
+      -29.316,
+      2.1
+     ],
+     [
+      20.688,
+      -29.696,
+      0.0,
+      22.18,
+      -29.316,
+      0.02
+     ],
+     [
+      20.688,
+      -29.696,
+      0.42,
+      22.18,
+      -29.316,
+      0.44
+     ],
+     [
+      20.688,
+      -29.696,
+      0.84,
+      22.18,
+      -29.316,
+      0.86
+     ],
+     [
+      20.688,
+      -29.696,
+      1.26,
+      22.18,
+      -29.316,
+      1.28
+     ],
+     [
+      20.688,
+      -29.696,
+      1.68,
+      22.18,
+      -29.316,
+      1.7
+     ],
+     [
+      20.688,
+      -29.696,
+      2.08,
+      22.18,
+      -29.316,
+      2.1
+     ],
+     [
+      20.688,
+      -29.331,
+      0.04,
+      21.424,
+      -29.316,
+      2.06
+     ],
+     [
+      21.444,
+      -29.331,
+      0.04,
+      22.18,
+      -29.316,
+      2.06
+     ]
+    ],
+    "parts": [
+     "back",
+     "side",
+     "side",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "glass-door",
+     "glass-door"
+    ],
+    "envelope": [
+     20.668,
+     -29.716,
+     0,
+     22.2,
+     -29.316,
+     2.1
+    ],
+    "footprint": [
+     20.668,
+     -29.716,
+     22.2,
+     -29.316
+    ],
+    "h": 2.1
+   },
+   {
+    "mark": "library-end-panel",
+    "level": "B",
+    "type": "joinery_end_panel",
+    "room": "bar-alcove",
+    "category": "casework",
+    "boxes": [
+     [
+      22.1995,
+      -29.716,
+      0,
+      22.3965,
+      -29.316,
+      2.1
+     ]
+    ],
+    "parts": [
+     "block"
+    ],
+    "envelope": [
+     22.1995,
+     -29.716,
+     0,
+     22.3965,
+     -29.316,
+     2.1
+    ],
+    "footprint": [
+     22.1995,
+     -29.716,
+     22.3965,
+     -29.316
+    ],
+    "h": 2.1
+   },
+   {
+    "mark": "cinema-tv",
+    "level": "B",
+    "type": "screen",
+    "room": "cinema",
+    "category": "equipment",
+    "boxes": [
+     [
+      9.077,
+      -22.686,
+      0.4425,
+      9.177,
+      -20.806,
+      1.5
+     ]
+    ],
+    "parts": [
+     "screen"
+    ],
+    "envelope": [
+     9.077,
+     -22.686,
+     0.4425,
+     9.177,
+     -20.806,
+     1.5
+    ],
+    "footprint": [
+     9.077,
+     -22.686,
+     9.177,
+     -20.806
+    ],
+    "h": 1.5
+   },
+   {
+    "mark": "cinema-sofa",
+    "level": "B",
+    "type": "sofa_2seat",
+    "room": "cinema",
+    "category": "furniture",
+    "boxes": [
+     [
+      5.902,
+      -22.391,
+      0.0,
+      6.852,
+      -21.111,
+      0.22
+     ],
+     [
+      6.122,
+      -22.391,
+      0.22,
+      6.852,
+      -21.111,
+      0.44
+     ],
+     [
+      5.902,
+      -22.391,
+      0.22,
+      6.122,
+      -21.111,
+      0.9
+     ],
+     [
+      5.902,
+      -21.111,
+      0.0,
+      6.852,
+      -20.951,
+      0.62
+     ],
+     [
+      5.902,
+      -22.551,
+      0.0,
+      6.852,
+      -22.391,
+      0.62
+     ]
+    ],
+    "parts": [
+     "base",
+     "seat",
+     "back",
+     "arm",
+     "arm"
+    ],
+    "envelope": [
+     5.902,
+     -22.551,
+     0.0,
+     6.852,
+     -20.951,
+     0.9
+    ],
+    "footprint": [
+     5.902,
+     -22.551,
+     6.852,
+     -20.951
+    ],
+    "h": 0.9
+   },
+   {
+    "mark": "cinema-desk",
+    "level": "B",
+    "type": "desk",
+    "room": "cinema",
+    "category": "furniture",
+    "boxes": [
+     [
+      4.66,
+      -21.351,
+      0.71,
+      5.9,
+      -20.801,
+      0.75
+     ],
+     [
+      5.82,
+      -20.881,
+      0,
+      5.87,
+      -20.831,
+      0.71
+     ],
+     [
+      5.82,
+      -21.321,
+      0,
+      5.87,
+      -21.271,
+      0.71
+     ],
+     [
+      4.69,
+      -20.881,
+      0,
+      4.74,
+      -20.831,
+      0.71
+     ],
+     [
+      4.69,
+      -21.321,
+      0,
+      4.74,
+      -21.271,
+      0.71
+     ]
+    ],
+    "parts": [
+     "top",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     4.66,
+     -21.351,
+     0,
+     5.9,
+     -20.801,
+     0.75
+    ],
+    "footprint": [
+     4.66,
+     -21.351,
+     5.9,
+     -20.801
+    ],
+    "h": 0.75
+   },
+   {
+    "mark": "cinema-desk#chair-1",
+    "level": "B",
+    "type": "chair",
+    "room": "cinema",
+    "category": "furniture",
+    "boxes": [
+     [
+      5.37,
+      -21.651,
+      0.42,
+      5.81,
+      -21.201,
+      0.46
+     ],
+     [
+      5.77,
+      -21.241,
+      0,
+      5.81,
+      -21.201,
+      0.42
+     ],
+     [
+      5.77,
+      -21.651,
+      0,
+      5.81,
+      -21.611,
+      0.42
+     ],
+     [
+      5.37,
+      -21.241,
+      0,
+      5.41,
+      -21.201,
+      0.42
+     ],
+     [
+      5.37,
+      -21.651,
+      0,
+      5.41,
+      -21.611,
+      0.42
+     ],
+     [
+      5.37,
+      -21.651,
+      0.46,
+      5.81,
+      -21.621,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     5.37,
+     -21.651,
+     0,
+     5.81,
+     -21.201,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "cinema-desk#chair-2",
+    "level": "B",
+    "type": "chair",
+    "room": "cinema",
+    "category": "furniture",
+    "boxes": [
+     [
+      4.75,
+      -21.651,
+      0.42,
+      5.19,
+      -21.201,
+      0.46
+     ],
+     [
+      5.15,
+      -21.241,
+      0,
+      5.19,
+      -21.201,
+      0.42
+     ],
+     [
+      5.15,
+      -21.651,
+      0,
+      5.19,
+      -21.611,
+      0.42
+     ],
+     [
+      4.75,
+      -21.241,
+      0,
+      4.79,
+      -21.201,
+      0.42
+     ],
+     [
+      4.75,
+      -21.651,
+      0,
+      4.79,
+      -21.611,
+      0.42
+     ],
+     [
+      4.75,
+      -21.651,
+      0.46,
+      5.19,
+      -21.621,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     4.75,
+     -21.651,
+     0,
+     5.19,
+     -21.201,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "gwc-wc",
+    "level": "B",
+    "type": "wc",
+    "room": "guest-wc",
+    "category": "plumbing",
+    "boxes": [
+     [
+      9.9,
+      -21.351,
+      0.12,
+      10.3,
+      -20.801,
+      0.38
+     ],
+     [
+      9.91,
+      -21.351,
+      0.38,
+      10.29,
+      -20.851,
+      0.4
+     ],
+     [
+      9.98,
+      -20.821,
+      0.95,
+      10.22,
+      -20.801,
+      1.12
+     ]
+    ],
+    "parts": [
+     "pan",
+     "seat",
+     "flush-plate"
+    ],
+    "envelope": [
+     9.9,
+     -21.351,
+     0.12,
+     10.3,
+     -20.801,
+     1.12
+    ],
+    "footprint": [
+     9.9,
+     -21.351,
+     10.3,
+     -20.801
+    ],
+    "h": 0.4
+   },
+   {
+    "mark": "gwc-basin",
+    "level": "B",
+    "type": "washbasin",
+    "room": "guest-wc",
+    "category": "plumbing",
+    "boxes": [
+     [
+      9.277,
+      -22.9,
+      0.35,
+      9.777,
+      -22.3,
+      0.8
+     ],
+     [
+      9.277,
+      -22.9,
+      0.8,
+      9.777,
+      -22.3,
+      0.85
+     ]
+    ],
+    "parts": [
+     "vanity",
+     "basin"
+    ],
+    "envelope": [
+     9.277,
+     -22.9,
+     0.35,
+     9.777,
+     -22.3,
+     0.85
+    ],
+    "footprint": [
+     9.277,
+     -22.9,
+     9.777,
+     -22.3
+    ],
+    "h": 0.85
+   },
+   {
+    "mark": "dk-run",
+    "level": "B",
+    "type": "base_run",
+    "room": "dirty-kitchen",
+    "category": "casework",
+    "boxes": [
+     [
+      14.51,
+      -21.351,
+      0,
+      15.11,
+      -20.801,
+      0.1
+     ],
+     [
+      14.51,
+      -21.376,
+      0.1,
+      15.11,
+      -20.801,
+      0.86
+     ],
+     [
+      14.51,
+      -21.401,
+      0.86,
+      15.11,
+      -20.801,
+      0.9
+     ],
+     [
+      14.127,
+      -21.351,
+      0,
+      14.51,
+      -20.801,
+      0.1
+     ],
+     [
+      14.127,
+      -21.376,
+      0.1,
+      14.51,
+      -20.801,
+      0.86
+     ],
+     [
+      14.127,
+      -21.401,
+      0.86,
+      14.51,
+      -20.801,
+      0.9
+     ],
+     [
+      13.527,
+      -21.351,
+      0,
+      14.127,
+      -20.801,
+      0.1
+     ],
+     [
+      13.527,
+      -21.376,
+      0.1,
+      14.127,
+      -20.801,
+      0.86
+     ],
+     [
+      13.527,
+      -21.401,
+      0.86,
+      14.127,
+      -20.801,
+      0.9
+     ],
+     [
+      12.917,
+      -21.351,
+      0,
+      13.527,
+      -20.801,
+      0.1
+     ],
+     [
+      12.917,
+      -21.376,
+      0.1,
+      13.527,
+      -20.801,
+      0.86
+     ],
+     [
+      12.917,
+      -21.401,
+      0.86,
+      13.527,
+      -20.801,
+      0.9
+     ],
+     [
+      12.117,
+      -21.351,
+      0,
+      12.917,
+      -20.801,
+      0.1
+     ],
+     [
+      12.117,
+      -21.376,
+      0.1,
+      12.917,
+      -20.801,
+      0.86
+     ],
+     [
+      12.117,
+      -21.401,
+      0.86,
+      12.917,
+      -20.801,
+      0.9
+     ],
+     [
+      11.66,
+      -21.351,
+      0,
+      12.117,
+      -20.801,
+      0.1
+     ],
+     [
+      11.66,
+      -21.376,
+      0.1,
+      12.117,
+      -20.801,
+      0.86
+     ],
+     [
+      11.66,
+      -21.401,
+      0.86,
+      12.117,
+      -20.801,
+      0.9
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "washer",
+     "worktop",
+     "plinth",
+     "counter",
+     "worktop",
+     "plinth",
+     "hob",
+     "worktop",
+     "plinth",
+     "counter",
+     "worktop",
+     "plinth",
+     "sink",
+     "worktop",
+     "plinth",
+     "counter",
+     "worktop"
+    ],
+    "envelope": [
+     11.66,
+     -21.401,
+     0,
+     15.11,
+     -20.801,
+     0.9
+    ],
+    "footprint": [
+     11.66,
+     -21.401,
+     15.11,
+     -20.801
+    ],
+    "h": 0.9
+   },
+   {
+    "mark": "dk-appliance-bank",
+    "level": "B",
+    "type": "base_run",
+    "room": "dirty-kitchen",
+    "category": "casework",
+    "boxes": [
+     [
+      11.25,
+      -22.3,
+      0,
+      11.85,
+      -21.7,
+      2.3
+     ],
+     [
+      11.25,
+      -22.9,
+      0,
+      11.85,
+      -22.3,
+      2.3
+     ]
+    ],
+    "parts": [
+     "fridge",
+     "oven"
+    ],
+    "envelope": [
+     11.25,
+     -22.9,
+     0,
+     11.85,
+     -21.7,
+     2.3
+    ],
+    "footprint": [
+     11.25,
+     -22.9,
+     11.85,
+     -21.7
+    ],
+    "h": 2.3
+   },
+   {
+    "mark": "dk-fold",
+    "level": "B",
+    "type": "folding_counter",
+    "room": "dirty-kitchen",
+    "category": "casework",
+    "boxes": [
+     [
+      11.95,
+      -23.541,
+      0,
+      13.1,
+      -22.991,
+      0.1
+     ],
+     [
+      11.9,
+      -23.541,
+      0.1,
+      13.15,
+      -22.941,
+      0.86
+     ],
+     [
+      11.9,
+      -23.541,
+      0.86,
+      13.15,
+      -22.941,
+      0.9
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "carcass",
+     "worktop"
+    ],
+    "envelope": [
+     11.9,
+     -23.541,
+     0,
+     13.15,
+     -22.941,
+     0.9
+    ],
+    "footprint": [
+     11.9,
+     -23.541,
+     13.15,
+     -22.941
+    ],
+    "h": 0.9
+   },
+   {
+    "mark": "pantry-shelves-1",
+    "level": "B",
+    "type": "pantry_shelving",
+    "room": "pantry",
+    "category": "casework",
+    "boxes": [
+     [
+      3.817,
+      -29.7155,
+      0,
+      3.837,
+      -28.7205,
+      2.2
+     ],
+     [
+      3.817,
+      -28.7405,
+      0,
+      4.117,
+      -28.7205,
+      2.2
+     ],
+     [
+      3.817,
+      -29.7155,
+      0,
+      4.117,
+      -29.6955,
+      2.2
+     ],
+     [
+      3.837,
+      -29.6955,
+      0.0,
+      4.117,
+      -28.7405,
+      0.02
+     ],
+     [
+      3.837,
+      -29.6955,
+      0.44,
+      4.117,
+      -28.7405,
+      0.46
+     ],
+     [
+      3.837,
+      -29.6955,
+      0.88,
+      4.117,
+      -28.7405,
+      0.9
+     ],
+     [
+      3.837,
+      -29.6955,
+      1.32,
+      4.117,
+      -28.7405,
+      1.34
+     ],
+     [
+      3.837,
+      -29.6955,
+      1.76,
+      4.117,
+      -28.7405,
+      1.78
+     ],
+     [
+      3.837,
+      -29.6955,
+      2.18,
+      4.117,
+      -28.7405,
+      2.2
+     ]
+    ],
+    "parts": [
+     "back",
+     "side",
+     "side",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf"
+    ],
+    "envelope": [
+     3.817,
+     -29.7155,
+     0,
+     4.117,
+     -28.7205,
+     2.2
+    ],
+    "footprint": [
+     3.817,
+     -29.7155,
+     4.117,
+     -28.7205
+    ],
+    "h": 2.2
+   },
+   {
+    "mark": "pantry-shelves-2",
+    "level": "B",
+    "type": "pantry_shelving",
+    "room": "pantry",
+    "category": "casework",
+    "boxes": [
+     [
+      6.72,
+      -29.7155,
+      0,
+      6.74,
+      -28.7205,
+      2.2
+     ],
+     [
+      6.44,
+      -29.7155,
+      0,
+      6.74,
+      -29.6955,
+      2.2
+     ],
+     [
+      6.44,
+      -28.7405,
+      0,
+      6.74,
+      -28.7205,
+      2.2
+     ],
+     [
+      6.44,
+      -29.6955,
+      0.0,
+      6.72,
+      -28.7405,
+      0.02
+     ],
+     [
+      6.44,
+      -29.6955,
+      0.44,
+      6.72,
+      -28.7405,
+      0.46
+     ],
+     [
+      6.44,
+      -29.6955,
+      0.88,
+      6.72,
+      -28.7405,
+      0.9
+     ],
+     [
+      6.44,
+      -29.6955,
+      1.32,
+      6.72,
+      -28.7405,
+      1.34
+     ],
+     [
+      6.44,
+      -29.6955,
+      1.76,
+      6.72,
+      -28.7405,
+      1.78
+     ],
+     [
+      6.44,
+      -29.6955,
+      2.18,
+      6.72,
+      -28.7405,
+      2.2
+     ]
+    ],
+    "parts": [
+     "back",
+     "side",
+     "side",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf",
+     "shelf"
+    ],
+    "envelope": [
+     6.44,
+     -29.7155,
+     0,
+     6.74,
+     -28.7205,
+     2.2
+    ],
+    "footprint": [
+     6.44,
+     -29.7155,
+     6.74,
+     -28.7205
+    ],
+    "h": 2.2
+   },
+   {
+    "mark": "store-shelves",
+    "level": "B",
+    "type": "store_shelving",
+    "room": "store-ramp",
+    "category": "casework",
+    "boxes": [
+     [
+      2.077,
+      -20.821,
+      0,
+      3.027,
+      -20.801,
+      1.3
+     ],
+     [
+      2.077,
+      -21.301,
+      0.1,
+      3.027,
+      -20.801,
+      0.12
+     ],
+     [
+      2.077,
+      -21.301,
+      0.55,
+      3.027,
+      -20.801,
+      0.57
+     ],
+     [
+      2.077,
+      -21.301,
+      1.05,
+      3.027,
+      -20.801,
+      1.07
+     ],
+     [
+      1.127,
+      -20.821,
+      0,
+      2.077,
+      -20.801,
+      1.3
+     ],
+     [
+      1.127,
+      -21.301,
+      0.1,
+      2.077,
+      -20.801,
+      0.12
+     ],
+     [
+      1.127,
+      -21.301,
+      0.55,
+      2.077,
+      -20.801,
+      0.57
+     ],
+     [
+      1.127,
+      -21.301,
+      1.05,
+      2.077,
+      -20.801,
+      1.07
+     ],
+     [
+      0.177,
+      -20.821,
+      0,
+      1.127,
+      -20.801,
+      1.3
+     ],
+     [
+      0.177,
+      -21.301,
+      0.1,
+      1.127,
+      -20.801,
+      0.12
+     ],
+     [
+      0.227,
+      -20.921,
+      1.1,
+      1.077,
+      -20.801,
+      1.15
+     ]
+    ],
+    "parts": [
+     "luggage-back",
+     "luggage-base",
+     "luggage-shelf",
+     "luggage-shelf",
+     "seasonal-boxes-back",
+     "seasonal-boxes-base",
+     "seasonal-boxes-shelf",
+     "seasonal-boxes-shelf",
+     "bikes-back",
+     "bikes-base",
+     "bikes-hooks"
+    ],
+    "envelope": [
+     0.177,
+     -21.301,
+     0,
+     3.027,
+     -20.801,
+     1.3
+    ],
+    "footprint": [
+     0.177,
+     -21.301,
+     3.027,
+     -20.801
+    ],
+    "h": 1.3
+   },
+   {
+    "mark": "study-desk",
+    "level": "GF",
+    "type": "desk",
+    "room": "study-game",
+    "category": "furniture",
+    "boxes": [
+     [
+      3.817,
+      -26.3,
+      0.71,
+      4.517,
+      -24.5,
+      0.75
+     ],
+     [
+      3.847,
+      -24.58,
+      0,
+      3.897,
+      -24.53,
+      0.71
+     ],
+     [
+      4.437,
+      -24.58,
+      0,
+      4.487,
+      -24.53,
+      0.71
+     ],
+     [
+      3.847,
+      -26.27,
+      0,
+      3.897,
+      -26.22,
+      0.71
+     ],
+     [
+      4.437,
+      -26.27,
+      0,
+      4.487,
+      -26.22,
+      0.71
+     ]
+    ],
+    "parts": [
+     "top",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     3.817,
+     -26.3,
+     0,
+     4.517,
+     -24.5,
+     0.75
+    ],
+    "footprint": [
+     3.817,
+     -26.3,
+     4.517,
+     -24.5
+    ],
+    "h": 0.75
+   },
+   {
+    "mark": "study-desk#chair-1",
+    "level": "GF",
+    "type": "chair",
+    "room": "study-game",
+    "category": "furniture",
+    "boxes": [
+     [
+      4.367,
+      -25.17,
+      0.42,
+      4.817,
+      -24.73,
+      0.46
+     ],
+     [
+      4.367,
+      -24.77,
+      0,
+      4.407,
+      -24.73,
+      0.42
+     ],
+     [
+      4.777,
+      -24.77,
+      0,
+      4.817,
+      -24.73,
+      0.42
+     ],
+     [
+      4.367,
+      -25.17,
+      0,
+      4.407,
+      -25.13,
+      0.42
+     ],
+     [
+      4.777,
+      -25.17,
+      0,
+      4.817,
+      -25.13,
+      0.42
+     ],
+     [
+      4.787,
+      -25.17,
+      0.46,
+      4.817,
+      -24.73,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     4.367,
+     -25.17,
+     0,
+     4.817,
+     -24.73,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "study-desk#chair-2",
+    "level": "GF",
+    "type": "chair",
+    "room": "study-game",
+    "category": "furniture",
+    "boxes": [
+     [
+      4.367,
+      -26.07,
+      0.42,
+      4.817,
+      -25.63,
+      0.46
+     ],
+     [
+      4.367,
+      -25.67,
+      0,
+      4.407,
+      -25.63,
+      0.42
+     ],
+     [
+      4.777,
+      -25.67,
+      0,
+      4.817,
+      -25.63,
+      0.42
+     ],
+     [
+      4.367,
+      -26.07,
+      0,
+      4.407,
+      -26.03,
+      0.42
+     ],
+     [
+      4.777,
+      -26.07,
+      0,
+      4.817,
+      -26.03,
+      0.42
+     ],
+     [
+      4.787,
+      -26.07,
+      0.46,
+      4.817,
+      -25.63,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     4.367,
+     -26.07,
+     0,
+     4.817,
+     -25.63,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "study-adult-desk",
+    "level": "GF",
+    "type": "desk",
+    "room": "study-game",
+    "category": "furniture",
+    "boxes": [
+     [
+      4.6,
+      -24.491,
+      0.71,
+      6.0,
+      -23.791,
+      0.75
+     ],
+     [
+      5.92,
+      -23.871,
+      0,
+      5.97,
+      -23.821,
+      0.71
+     ],
+     [
+      5.92,
+      -24.461,
+      0,
+      5.97,
+      -24.411,
+      0.71
+     ],
+     [
+      4.63,
+      -23.871,
+      0,
+      4.68,
+      -23.821,
+      0.71
+     ],
+     [
+      4.63,
+      -24.461,
+      0,
+      4.68,
+      -24.411,
+      0.71
+     ]
+    ],
+    "parts": [
+     "top",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     4.6,
+     -24.491,
+     0,
+     6.0,
+     -23.791,
+     0.75
+    ],
+    "footprint": [
+     4.6,
+     -24.491,
+     6.0,
+     -23.791
+    ],
+    "h": 0.75
+   },
+   {
+    "mark": "study-adult-desk#chair-1",
+    "level": "GF",
+    "type": "chair",
+    "room": "study-game",
+    "category": "furniture",
+    "boxes": [
+     [
+      5.08,
+      -24.791,
+      0.42,
+      5.52,
+      -24.341,
+      0.46
+     ],
+     [
+      5.48,
+      -24.381,
+      0,
+      5.52,
+      -24.341,
+      0.42
+     ],
+     [
+      5.48,
+      -24.791,
+      0,
+      5.52,
+      -24.751,
+      0.42
+     ],
+     [
+      5.08,
+      -24.381,
+      0,
+      5.12,
+      -24.341,
+      0.42
+     ],
+     [
+      5.08,
+      -24.791,
+      0,
+      5.12,
+      -24.751,
+      0.42
+     ],
+     [
+      5.08,
+      -24.791,
+      0.46,
+      5.52,
+      -24.761,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     5.08,
+     -24.791,
+     0,
+     5.52,
+     -24.341,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "study-tv",
+    "level": "GF",
+    "type": "tv_unit",
+    "room": "study-game",
+    "category": "furniture",
+    "boxes": [
+     [
+      8.727,
+      -26.2,
+      0.1,
+      9.177,
+      -24.6,
+      0.5
+     ],
+     [
+      9.127,
+      -26.0088,
+      0.7576,
+      9.177,
+      -24.7912,
+      1.4424
+     ]
+    ],
+    "parts": [
+     "unit",
+     "screen"
+    ],
+    "envelope": [
+     8.727,
+     -26.2,
+     0.1,
+     9.177,
+     -24.6,
+     1.4424
+    ],
+    "footprint": [
+     8.727,
+     -26.2,
+     9.177,
+     -24.6
+    ],
+    "h": 0.5
+   },
+   {
+    "mark": "study-sofa",
+    "level": "GF",
+    "type": "sofa_2seat",
+    "room": "study-game",
+    "category": "furniture",
+    "boxes": [
+     [
+      6.377,
+      -25.99,
+      0.0,
+      7.277,
+      -24.81,
+      0.22
+     ],
+     [
+      6.597,
+      -25.99,
+      0.22,
+      7.277,
+      -24.81,
+      0.44
+     ],
+     [
+      6.377,
+      -25.99,
+      0.22,
+      6.597,
+      -24.81,
+      0.85
+     ],
+     [
+      6.377,
+      -24.81,
+      0.0,
+      7.277,
+      -24.65,
+      0.62
+     ],
+     [
+      6.377,
+      -26.15,
+      0.0,
+      7.277,
+      -25.99,
+      0.62
+     ]
+    ],
+    "parts": [
+     "base",
+     "seat",
+     "back",
+     "arm",
+     "arm"
+    ],
+    "envelope": [
+     6.377,
+     -26.15,
+     0.0,
+     7.277,
+     -24.65,
+     0.85
+    ],
+    "footprint": [
+     6.377,
+     -26.15,
+     7.277,
+     -24.65
+    ],
+    "h": 0.85
+   },
+   {
+    "mark": "fb-shower",
+    "level": "GF",
+    "type": "shower_walkin",
+    "room": "family-bath",
+    "category": "plumbing",
+    "boxes": [
+     [
+      9.567,
+      -24.691,
+      0,
+      11.197,
+      -23.791,
+      0.1
+     ],
+     [
+      9.567,
+      -24.691,
+      0.1,
+      10.4635,
+      -24.681,
+      2.0
+     ]
+    ],
+    "parts": [
+     "tray",
+     "glass"
+    ],
+    "envelope": [
+     9.567,
+     -24.691,
+     0,
+     11.197,
+     -23.791,
+     2.0
+    ],
+    "footprint": [
+     9.567,
+     -24.691,
+     11.197,
+     -23.791
+    ],
+    "h": 0.1
+   },
+   {
+    "mark": "fb-wc",
+    "level": "GF",
+    "type": "wc",
+    "room": "family-bath",
+    "category": "plumbing",
+    "boxes": [
+     [
+      9.277,
+      -26.301,
+      0.12,
+      9.827,
+      -25.901,
+      0.38
+     ],
+     [
+      9.327,
+      -26.291,
+      0.38,
+      9.827,
+      -25.911,
+      0.4
+     ],
+     [
+      9.277,
+      -26.221,
+      0.95,
+      9.297,
+      -25.981,
+      1.12
+     ]
+    ],
+    "parts": [
+     "pan",
+     "seat",
+     "flush-plate"
+    ],
+    "envelope": [
+     9.277,
+     -26.301,
+     0.12,
+     9.827,
+     -25.901,
+     1.12
+    ],
+    "footprint": [
+     9.277,
+     -26.301,
+     9.827,
+     -25.901
+    ],
+    "h": 0.4
+   },
+   {
+    "mark": "fb-basin",
+    "level": "GF",
+    "type": "washbasin",
+    "room": "family-bath",
+    "category": "plumbing",
+    "boxes": [
+     [
+      9.277,
+      -25.901,
+      0.35,
+      9.727,
+      -25.471,
+      0.8
+     ],
+     [
+      9.277,
+      -25.901,
+      0.8,
+      9.727,
+      -25.471,
+      0.85
+     ]
+    ],
+    "parts": [
+     "vanity",
+     "basin"
+    ],
+    "envelope": [
+     9.277,
+     -25.901,
+     0.35,
+     9.727,
+     -25.471,
+     0.85
+    ],
+    "footprint": [
+     9.277,
+     -25.901,
+     9.727,
+     -25.471
+    ],
+    "h": 0.85
+   },
+   {
+    "mark": "ka-bunk",
+    "level": "GF",
+    "type": "bed_single",
+    "room": "kids-a",
+    "category": "furniture",
+    "boxes": [
+     [
+      11.527,
+      -26.45,
+      0,
+      11.587,
+      -26.39,
+      1.7
+     ],
+     [
+      11.527,
+      -24.51,
+      0,
+      11.587,
+      -24.45,
+      1.7
+     ],
+     [
+      12.367,
+      -26.45,
+      0,
+      12.427,
+      -26.39,
+      1.7
+     ],
+     [
+      12.367,
+      -24.51,
+      0,
+      12.427,
+      -24.45,
+      1.7
+     ],
+     [
+      11.527,
+      -26.45,
+      0.15,
+      12.427,
+      -24.45,
+      0.25
+     ],
+     [
+      11.557,
+      -26.39,
+      0.25,
+      12.397,
+      -24.51,
+      0.4
+     ],
+     [
+      11.527,
+      -26.45,
+      1.15,
+      12.427,
+      -24.45,
+      1.25
+     ],
+     [
+      11.557,
+      -26.39,
+      1.25,
+      12.397,
+      -24.51,
+      1.4
+     ],
+     [
+      12.387,
+      -25.95,
+      1.4,
+      12.427,
+      -24.51,
+      1.7
+     ],
+     [
+      11.527,
+      -25.17,
+      0,
+      11.572,
+      -25.125,
+      1.47
+     ],
+     [
+      11.527,
+      -24.755,
+      0,
+      11.572,
+      -24.71,
+      1.47
+     ],
+     [
+      11.527,
+      -25.145,
+      0.32,
+      11.592,
+      -24.735,
+      0.355
+     ],
+     [
+      11.527,
+      -25.145,
+      0.59,
+      11.592,
+      -24.735,
+      0.625
+     ],
+     [
+      11.527,
+      -25.145,
+      0.86,
+      11.592,
+      -24.735,
+      0.895
+     ],
+     [
+      11.527,
+      -25.145,
+      1.13,
+      11.592,
+      -24.735,
+      1.165
+     ]
+    ],
+    "parts": [
+     "post",
+     "post",
+     "post",
+     "post",
+     "lower-frame",
+     "lower-mattress",
+     "upper-frame",
+     "upper-mattress",
+     "rail",
+     "ladder-stile",
+     "ladder-stile",
+     "ladder-rung",
+     "ladder-rung",
+     "ladder-rung",
+     "ladder-rung"
+    ],
+    "envelope": [
+     11.527,
+     -26.45,
+     0,
+     12.427,
+     -24.45,
+     1.7
+    ],
+    "footprint": [
+     11.527,
+     -26.45,
+     12.427,
+     -24.45
+    ],
+    "h": 1.7
+   },
+   {
+    "mark": "ka-desk-1",
+    "level": "GF",
+    "type": "desk",
+    "room": "kids-a",
+    "category": "furniture",
+    "boxes": [
+     [
+      12.62,
+      -24.391,
+      0.71,
+      13.72,
+      -23.791,
+      0.75
+     ],
+     [
+      13.64,
+      -23.871,
+      0,
+      13.69,
+      -23.821,
+      0.71
+     ],
+     [
+      13.64,
+      -24.361,
+      0,
+      13.69,
+      -24.311,
+      0.71
+     ],
+     [
+      12.65,
+      -23.871,
+      0,
+      12.7,
+      -23.821,
+      0.71
+     ],
+     [
+      12.65,
+      -24.361,
+      0,
+      12.7,
+      -24.311,
+      0.71
+     ]
+    ],
+    "parts": [
+     "top",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     12.62,
+     -24.391,
+     0,
+     13.72,
+     -23.791,
+     0.75
+    ],
+    "footprint": [
+     12.62,
+     -24.391,
+     13.72,
+     -23.791
+    ],
+    "h": 0.75
+   },
+   {
+    "mark": "ka-desk-1#chair-1",
+    "level": "GF",
+    "type": "chair",
+    "room": "kids-a",
+    "category": "furniture",
+    "boxes": [
+     [
+      12.95,
+      -24.691,
+      0.42,
+      13.39,
+      -24.241,
+      0.46
+     ],
+     [
+      13.35,
+      -24.281,
+      0,
+      13.39,
+      -24.241,
+      0.42
+     ],
+     [
+      13.35,
+      -24.691,
+      0,
+      13.39,
+      -24.651,
+      0.42
+     ],
+     [
+      12.95,
+      -24.281,
+      0,
+      12.99,
+      -24.241,
+      0.42
+     ],
+     [
+      12.95,
+      -24.691,
+      0,
+      12.99,
+      -24.651,
+      0.42
+     ],
+     [
+      12.95,
+      -24.691,
+      0.46,
+      13.39,
+      -24.661,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     12.95,
+     -24.691,
+     0,
+     13.39,
+     -24.241,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "ka-desk-2",
+    "level": "GF",
+    "type": "desk",
+    "room": "kids-a",
+    "category": "furniture",
+    "boxes": [
+     [
+      13.76,
+      -24.391,
+      0.71,
+      14.86,
+      -23.791,
+      0.75
+     ],
+     [
+      14.78,
+      -23.871,
+      0,
+      14.83,
+      -23.821,
+      0.71
+     ],
+     [
+      14.78,
+      -24.361,
+      0,
+      14.83,
+      -24.311,
+      0.71
+     ],
+     [
+      13.79,
+      -23.871,
+      0,
+      13.84,
+      -23.821,
+      0.71
+     ],
+     [
+      13.79,
+      -24.361,
+      0,
+      13.84,
+      -24.311,
+      0.71
+     ]
+    ],
+    "parts": [
+     "top",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     13.76,
+     -24.391,
+     0,
+     14.86,
+     -23.791,
+     0.75
+    ],
+    "footprint": [
+     13.76,
+     -24.391,
+     14.86,
+     -23.791
+    ],
+    "h": 0.75
+   },
+   {
+    "mark": "ka-desk-2#chair-1",
+    "level": "GF",
+    "type": "chair",
+    "room": "kids-a",
+    "category": "furniture",
+    "boxes": [
+     [
+      14.09,
+      -24.691,
+      0.42,
+      14.53,
+      -24.241,
+      0.46
+     ],
+     [
+      14.49,
+      -24.281,
+      0,
+      14.53,
+      -24.241,
+      0.42
+     ],
+     [
+      14.49,
+      -24.691,
+      0,
+      14.53,
+      -24.651,
+      0.42
+     ],
+     [
+      14.09,
+      -24.281,
+      0,
+      14.13,
+      -24.241,
+      0.42
+     ],
+     [
+      14.09,
+      -24.691,
+      0,
+      14.13,
+      -24.651,
+      0.42
+     ],
+     [
+      14.09,
+      -24.691,
+      0.46,
+      14.53,
+      -24.661,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     14.09,
+     -24.691,
+     0,
+     14.53,
+     -24.241,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "ka-wardrobe",
+    "level": "GF",
+    "type": "wardrobe",
+    "room": "kids-a",
+    "category": "furniture",
+    "boxes": [
+     [
+      14.352,
+      -27.251,
+      0,
+      14.902,
+      -25.851,
+      0.1
+     ],
+     [
+      14.302,
+      -27.301,
+      0.1,
+      14.902,
+      -25.801,
+      2.2
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "carcass"
+    ],
+    "envelope": [
+     14.302,
+     -27.301,
+     0,
+     14.902,
+     -25.801,
+     2.2
+    ],
+    "footprint": [
+     14.302,
+     -27.301,
+     14.902,
+     -25.801
+    ],
+    "h": 2.2
+   },
+   {
+    "mark": "kb-bed",
+    "level": "GF",
+    "type": "bed_small_double",
+    "room": "kids-b",
+    "category": "furniture",
+    "boxes": [
+     [
+      15.002,
+      -25.9,
+      0.0,
+      17.002,
+      -24.7,
+      0.25
+     ],
+     [
+      15.062,
+      -25.88,
+      0.25,
+      16.982,
+      -24.72,
+      0.5
+     ],
+     [
+      15.002,
+      -25.9,
+      0.0,
+      15.062,
+      -24.7,
+      1.05
+     ]
+    ],
+    "parts": [
+     "base",
+     "mattress",
+     "headboard"
+    ],
+    "envelope": [
+     15.002,
+     -25.9,
+     0.0,
+     17.002,
+     -24.7,
+     1.05
+    ],
+    "footprint": [
+     15.002,
+     -25.9,
+     17.002,
+     -24.7
+    ],
+    "h": 0.5
+   },
+   {
+    "mark": "kb-desk",
+    "level": "GF",
+    "type": "desk",
+    "room": "kids-b",
+    "category": "furniture",
+    "boxes": [
+     [
+      17.05,
+      -24.391,
+      0.71,
+      18.25,
+      -23.791,
+      0.75
+     ],
+     [
+      18.17,
+      -23.871,
+      0,
+      18.22,
+      -23.821,
+      0.71
+     ],
+     [
+      18.17,
+      -24.361,
+      0,
+      18.22,
+      -24.311,
+      0.71
+     ],
+     [
+      17.08,
+      -23.871,
+      0,
+      17.13,
+      -23.821,
+      0.71
+     ],
+     [
+      17.08,
+      -24.361,
+      0,
+      17.13,
+      -24.311,
+      0.71
+     ]
+    ],
+    "parts": [
+     "top",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     17.05,
+     -24.391,
+     0,
+     18.25,
+     -23.791,
+     0.75
+    ],
+    "footprint": [
+     17.05,
+     -24.391,
+     18.25,
+     -23.791
+    ],
+    "h": 0.75
+   },
+   {
+    "mark": "kb-desk#chair-1",
+    "level": "GF",
+    "type": "chair",
+    "room": "kids-b",
+    "category": "furniture",
+    "boxes": [
+     [
+      17.43,
+      -24.691,
+      0.42,
+      17.87,
+      -24.241,
+      0.46
+     ],
+     [
+      17.83,
+      -24.281,
+      0,
+      17.87,
+      -24.241,
+      0.42
+     ],
+     [
+      17.83,
+      -24.691,
+      0,
+      17.87,
+      -24.651,
+      0.42
+     ],
+     [
+      17.43,
+      -24.281,
+      0,
+      17.47,
+      -24.241,
+      0.42
+     ],
+     [
+      17.43,
+      -24.691,
+      0,
+      17.47,
+      -24.651,
+      0.42
+     ],
+     [
+      17.43,
+      -24.691,
+      0.46,
+      17.87,
+      -24.661,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     17.43,
+     -24.691,
+     0,
+     17.87,
+     -24.241,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "kb-wardrobe",
+    "level": "GF",
+    "type": "wardrobe",
+    "room": "kids-b",
+    "category": "furniture",
+    "boxes": [
+     [
+      17.2495,
+      -27.321,
+      0,
+      18.3265,
+      -26.771,
+      0.1
+     ],
+     [
+      17.1995,
+      -27.321,
+      0.1,
+      18.3765,
+      -26.721,
+      2.2
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "carcass"
+    ],
+    "envelope": [
+     17.1995,
+     -27.321,
+     0,
+     18.3765,
+     -26.721,
+     2.2
+    ],
+    "footprint": [
+     17.1995,
+     -27.321,
+     18.3765,
+     -26.721
+    ],
+    "h": 2.2
+   },
+   {
+    "mark": "pb-bed",
+    "level": "GF",
+    "type": "bed_double",
+    "room": "parents-bed",
+    "category": "furniture",
+    "boxes": [
+     [
+      19.53,
+      -26.591,
+      0.0,
+      21.13,
+      -24.591,
+      0.25
+     ],
+     [
+      19.55,
+      -26.531,
+      0.25,
+      21.11,
+      -24.611,
+      0.5
+     ],
+     [
+      19.53,
+      -26.591,
+      0.0,
+      21.13,
+      -26.531,
+      1.05
+     ]
+    ],
+    "parts": [
+     "base",
+     "mattress",
+     "headboard"
+    ],
+    "envelope": [
+     19.53,
+     -26.591,
+     0.0,
+     21.13,
+     -24.591,
+     1.05
+    ],
+    "footprint": [
+     19.53,
+     -26.591,
+     21.13,
+     -24.591
+    ],
+    "h": 0.5
+   },
+   {
+    "mark": "pb-bedside",
+    "level": "GF",
+    "type": "bedside_table",
+    "room": "parents-bed",
+    "category": "furniture",
+    "boxes": [
+     [
+      21.18,
+      -26.591,
+      0,
+      21.43,
+      -26.241,
+      0.1
+     ],
+     [
+      21.13,
+      -26.591,
+      0.1,
+      21.48,
+      -26.191,
+      0.55
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "carcass"
+    ],
+    "envelope": [
+     21.13,
+     -26.591,
+     0,
+     21.48,
+     -26.191,
+     0.55
+    ],
+    "footprint": [
+     21.13,
+     -26.591,
+     21.48,
+     -26.191
+    ],
+    "h": 0.55
+   },
+   {
+    "mark": "pb-vanity",
+    "level": "GF",
+    "type": "desk",
+    "room": "parents-bed",
+    "category": "furniture",
+    "boxes": [
+     [
+      21.997,
+      -25.3,
+      0.71,
+      22.397,
+      -24.3,
+      0.75
+     ],
+     [
+      22.317,
+      -25.27,
+      0,
+      22.367,
+      -25.22,
+      0.71
+     ],
+     [
+      22.027,
+      -25.27,
+      0,
+      22.077,
+      -25.22,
+      0.71
+     ],
+     [
+      22.317,
+      -24.38,
+      0,
+      22.367,
+      -24.33,
+      0.71
+     ],
+     [
+      22.027,
+      -24.38,
+      0,
+      22.077,
+      -24.33,
+      0.71
+     ]
+    ],
+    "parts": [
+     "top",
+     "leg",
+     "leg",
+     "leg",
+     "leg"
+    ],
+    "envelope": [
+     21.997,
+     -25.3,
+     0,
+     22.397,
+     -24.3,
+     0.75
+    ],
+    "footprint": [
+     21.997,
+     -25.3,
+     22.397,
+     -24.3
+    ],
+    "h": 0.75
+   },
+   {
+    "mark": "pb-vanity#chair-1",
+    "level": "GF",
+    "type": "chair",
+    "room": "parents-bed",
+    "category": "furniture",
+    "boxes": [
+     [
+      21.697,
+      -25.02,
+      0.42,
+      22.147,
+      -24.58,
+      0.46
+     ],
+     [
+      22.107,
+      -25.02,
+      0,
+      22.147,
+      -24.98,
+      0.42
+     ],
+     [
+      21.697,
+      -25.02,
+      0,
+      21.737,
+      -24.98,
+      0.42
+     ],
+     [
+      22.107,
+      -24.62,
+      0,
+      22.147,
+      -24.58,
+      0.42
+     ],
+     [
+      21.697,
+      -24.62,
+      0,
+      21.737,
+      -24.58,
+      0.42
+     ],
+     [
+      21.697,
+      -25.02,
+      0.46,
+      21.727,
+      -24.58,
+      0.85
+     ]
+    ],
+    "parts": [
+     "seat",
+     "leg",
+     "leg",
+     "leg",
+     "leg",
+     "back"
+    ],
+    "envelope": [
+     21.697,
+     -25.02,
+     0,
+     22.147,
+     -24.58,
+     0.85
+    ],
+    "footprint": null,
+    "h": null
+   },
+   {
+    "mark": "pd-hang-1",
+    "level": "GF",
+    "type": "wardrobe",
+    "room": "parents-dressing",
+    "category": "furniture",
+    "boxes": [
+     [
+      19.627,
+      -27.291,
+      0,
+      21.347,
+      -26.691,
+      0.1
+     ],
+     [
+      19.627,
+      -27.291,
+      2.1,
+      21.347,
+      -26.691,
+      2.3
+     ],
+     [
+      19.627,
+      -27.291,
+      2.05,
+      21.347,
+      -26.691,
+      2.1
+     ],
+     [
+      21.327,
+      -27.291,
+      0,
+      21.347,
+      -26.691,
+      2.3
+     ],
+     [
+      20.697,
+      -26.711,
+      0,
+      21.347,
+      -26.691,
+      2.3
+     ],
+     [
+      20.717,
+      -27.001,
+      1.87,
+      21.327,
+      -26.981,
+      1.9
+     ],
+     [
+      20.677,
+      -27.291,
+      0,
+      20.697,
+      -26.691,
+      2.3
+     ],
+     [
+      20.247,
+      -26.711,
+      0,
+      20.697,
+      -26.691,
+      2.3
+     ],
+     [
+      20.267,
+      -27.001,
+      1.0,
+      20.677,
+      -26.981,
+      1.03
+     ],
+     [
+      20.267,
+      -27.001,
+      1.95,
+      20.677,
+      -26.981,
+      1.98
+     ],
+     [
+      20.227,
+      -27.291,
+      0,
+      20.247,
+      -26.691,
+      2.3
+     ],
+     [
+      19.827,
+      -26.711,
+      0,
+      20.247,
+      -26.691,
+      2.3
+     ],
+     [
+      19.847,
+      -27.291,
+      0.11,
+      20.227,
+      -26.711,
+      0.34
+     ],
+     [
+      19.847,
+      -27.291,
+      0.36,
+      20.227,
+      -26.711,
+      0.59
+     ],
+     [
+      19.847,
+      -27.291,
+      0.61,
+      20.227,
+      -26.711,
+      0.84
+     ],
+     [
+      19.847,
+      -27.291,
+      0.86,
+      20.227,
+      -26.711,
+      1.09
+     ],
+     [
+      19.807,
+      -27.291,
+      0,
+      19.827,
+      -26.691,
+      2.3
+     ],
+     [
+      19.627,
+      -26.711,
+      0,
+      19.827,
+      -26.691,
+      2.3
+     ],
+     [
+      19.647,
+      -27.291,
+      0.5,
+      19.807,
+      -26.711,
+      0.52
+     ],
+     [
+      19.647,
+      -27.291,
+      1.0,
+      19.807,
+      -26.711,
+      1.02
+     ],
+     [
+      19.647,
+      -27.291,
+      1.5,
+      19.807,
+      -26.711,
+      1.52
+     ],
+     [
+      19.647,
+      -27.291,
+      2.0,
+      19.807,
+      -26.711,
+      2.02
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "top-boxes",
+     "hanger-storage",
+     "divider",
+     "back",
+     "long-hang-rail",
+     "divider",
+     "back",
+     "double-hang-rail",
+     "double-hang-rail",
+     "divider",
+     "back",
+     "drawer-lingerie",
+     "drawer-headscarves",
+     "drawer-pyjamas",
+     "drawer-sleepwear",
+     "divider",
+     "back",
+     "hat-shelf",
+     "hat-shelf",
+     "hat-shelf",
+     "hat-shelf"
+    ],
+    "envelope": [
+     19.627,
+     -27.291,
+     0,
+     21.347,
+     -26.691,
+     2.3
+    ],
+    "footprint": [
+     19.627,
+     -27.291,
+     21.347,
+     -26.691
+    ],
+    "h": 2.3
+   },
+   {
+    "mark": "pd-hang-2",
+    "level": "GF",
+    "type": "wardrobe",
+    "room": "parents-dressing-ext",
+    "category": "furniture",
+    "boxes": [
+     [
+      19.854,
+      -28.831,
+      0,
+      21.2,
+      -28.231,
+      0.1
+     ],
+     [
+      19.854,
+      -28.831,
+      2.1,
+      21.2,
+      -28.231,
+      2.3
+     ],
+     [
+      19.854,
+      -28.831,
+      2.05,
+      21.2,
+      -28.231,
+      2.1
+     ],
+     [
+      19.854,
+      -28.831,
+      0,
+      19.874,
+      -28.231,
+      2.3
+     ],
+     [
+      19.854,
+      -28.831,
+      0,
+      20.404,
+      -28.811,
+      2.3
+     ],
+     [
+      19.874,
+      -28.541,
+      1.0,
+      20.384,
+      -28.521,
+      1.03
+     ],
+     [
+      19.874,
+      -28.541,
+      1.95,
+      20.384,
+      -28.521,
+      1.98
+     ],
+     [
+      20.404,
+      -28.831,
+      0,
+      20.424,
+      -28.231,
+      2.3
+     ],
+     [
+      20.404,
+      -28.831,
+      0,
+      20.654,
+      -28.811,
+      2.3
+     ],
+     [
+      20.424,
+      -28.811,
+      0.65,
+      20.634,
+      -28.231,
+      0.72
+     ],
+     [
+      20.654,
+      -28.831,
+      0,
+      20.674,
+      -28.231,
+      2.3
+     ],
+     [
+      20.654,
+      -28.831,
+      0,
+      21.004,
+      -28.811,
+      2.3
+     ],
+     [
+      20.674,
+      -28.811,
+      0.11,
+      20.984,
+      -28.231,
+      0.34
+     ],
+     [
+      20.674,
+      -28.811,
+      0.36,
+      20.984,
+      -28.231,
+      0.59
+     ],
+     [
+      20.674,
+      -28.811,
+      0.61,
+      20.984,
+      -28.231,
+      0.84
+     ],
+     [
+      20.674,
+      -28.811,
+      0.86,
+      20.984,
+      -28.231,
+      1.09
+     ],
+     [
+      20.674,
+      -28.811,
+      1.11,
+      20.984,
+      -28.231,
+      1.34
+     ],
+     [
+      20.674,
+      -28.811,
+      1.36,
+      20.984,
+      -28.231,
+      1.59
+     ],
+     [
+      21.004,
+      -28.831,
+      0,
+      21.024,
+      -28.231,
+      2.3
+     ],
+     [
+      21.004,
+      -28.831,
+      0,
+      21.2,
+      -28.811,
+      2.3
+     ],
+     [
+      21.024,
+      -28.811,
+      0.5,
+      21.18,
+      -28.231,
+      0.52
+     ],
+     [
+      21.024,
+      -28.811,
+      1.0,
+      21.18,
+      -28.231,
+      1.02
+     ],
+     [
+      21.024,
+      -28.811,
+      1.5,
+      21.18,
+      -28.231,
+      1.52
+     ],
+     [
+      21.024,
+      -28.811,
+      2.0,
+      21.18,
+      -28.231,
+      2.02
+     ]
+    ],
+    "parts": [
+     "plinth",
+     "top-boxes",
+     "hanger-storage",
+     "divider",
+     "back",
+     "double-hang-rail",
+     "double-hang-rail",
+     "divider",
+     "back",
+     "trousers-pullout",
+     "divider",
+     "back",
+     "drawer-socks",
+     "drawer-underwear",
+     "drawer-T-shirts",
+     "drawer-sportswear",
+     "drawer-pyjamas",
+     "drawer-sleepwear",
+     "divider",
+     "back",
+     "shelves",
+     "shelves",
+     "shelves",
+     "shelves"
+    ],
+    "envelope": [
+     19.854,
+     -28.831,
+     0,
+     21.2,
+     -28.231,
+     2.3
+    ],
+    "footprint": [
+     19.854,
+     -28.831,
+     21.2,
+     -28.231
+    ],
+    "h": 2.3
+   },
+   {
+    "mark": "pe-wc",
+    "level": "GF",
+    "type": "wc",
+    "room": "parents-ensuite",
+    "category": "plumbing",
+    "boxes": [
+     [
+      21.624,
+      -30.251,
+      0.12,
+      22.124,
+      -29.851,
+      0.38
+     ],
+     [
+      21.624,
+      -30.241,
+      0.38,
+      22.074,
+      -29.861,
+      0.4
+     ],
+     [
+      22.104,
+      -30.171,
+      0.95,
+      22.124,
+      -29.931,
+      1.12
+     ]
+    ],
+    "parts": [
+     "pan",
+     "seat",
+     "flush-plate"
+    ],
+    "envelope": [
+     21.624,
+     -30.251,
+     0.12,
+     22.124,
+     -29.851,
+     1.12
+    ],
+    "footprint": [
+     21.624,
+     -30.251,
+     22.124,
+     -29.851
+    ],
+    "h": 0.4
+   },
+   {
+    "mark": "pe-bath",
+    "level": "GF",
+    "type": "bath",
+    "room": "parents-ensuite",
+    "category": "plumbing",
+    "boxes": [
+     [
+      19.854,
+      -31.111,
+      0,
+      21.554,
+      -30.361,
+      0.12
+     ],
+     [
+      19.854,
+      -31.111,
+      0.12,
+      21.554,
+      -31.041,
+      0.55
+     ],
+     [
+      19.854,
+      -30.431,
+      0.12,
+      21.554,
+      -30.361,
+      0.55
+     ],
+     [
+      19.854,
+      -31.041,
+      0.12,
+      19.924,
+      -30.431,
+      0.55
+     ],
+     [
+      21.484,
+      -31.041,
+      0.12,
+      21.554,
+      -30.431,
+      0.55
+     ]
+    ],
+    "parts": [
+     "floor",
+     "rim",
+     "rim",
+     "rim",
+     "rim"
+    ],
+    "envelope": [
+     19.854,
+     -31.111,
+     0,
+     21.554,
+     -30.361,
+     0.55
+    ],
+    "footprint": [
+     19.854,
+     -31.111,
+     21.554,
+     -30.361
+    ],
+    "h": 0.55
+   },
+   {
+    "mark": "pe-basin",
+    "level": "GF",
+    "type": "washbasin",
+    "room": "parents-ensuite",
+    "category": "plumbing",
+    "boxes": [
+     [
+      19.804,
+      -29.581,
+      0.35,
+      20.304,
+      -28.981,
+      0.8
+     ],
+     [
+      19.804,
+      -29.581,
+      0.8,
+      20.304,
+      -28.981,
+      0.85
+     ]
+    ],
+    "parts": [
+     "vanity",
+     "basin"
+    ],
+    "envelope": [
+     19.804,
+     -29.581,
+     0.35,
+     20.304,
+     -28.981,
+     0.85
+    ],
+    "footprint": [
+     19.804,
+     -29.581,
+     20.304,
+     -28.981
+    ],
+    "h": 0.85
+   }
+  ],
+  "round2_elements": [
+   {
+    "mark": "kitchen-dirty-pocket",
+    "category": "Walls",
+    "bbox": [
+     13.202,
+     -23.591,
+     -3.0,
+     13.602,
+     -23.441,
+     -0.9
+    ],
+    "room": null,
+    "comments": "pocket buildout; thickness 0.150 m"
+   },
+   {
+    "mark": "kitchen-sink-pass-through-shutter",
+    "category": "Generic Models",
+    "bbox": [
+     11.8,
+     -23.666,
+     -0.9,
+     13.1,
+     -23.516,
+     -0.7
+    ],
+    "room": null,
+    "comments": "roll-up-shutter"
+   },
+   {
+    "mark": "stair-open-glass-01",
+    "category": "Generic Models",
+    "bbox": [
+     5.317,
+     -27.491,
+     -3.353,
+     5.597,
+     -27.471,
+     -2.276
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      5.317,
+      -3.176
+     ],
+     [
+      5.597,
+      -3.3529999999999998
+     ],
+     [
+      5.597,
+      -2.453
+     ],
+     [
+      5.317,
+      -2.2760000000000002
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-02",
+    "category": "Generic Models",
+    "bbox": [
+     5.597,
+     -27.491,
+     -3.529,
+     5.877,
+     -27.471,
+     -2.453
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      5.597,
+      -3.3529999999999998
+     ],
+     [
+      5.877,
+      -3.529
+     ],
+     [
+      5.877,
+      -2.629
+     ],
+     [
+      5.597,
+      -2.453
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-03",
+    "category": "Generic Models",
+    "bbox": [
+     5.877,
+     -27.491,
+     -3.706,
+     6.157,
+     -27.471,
+     -2.629
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      5.877,
+      -3.529
+     ],
+     [
+      6.157,
+      -3.706
+     ],
+     [
+      6.157,
+      -2.806
+     ],
+     [
+      5.877,
+      -2.629
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-04",
+    "category": "Generic Models",
+    "bbox": [
+     6.157,
+     -27.491,
+     -3.882,
+     6.437,
+     -27.471,
+     -2.806
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      6.157,
+      -3.706
+     ],
+     [
+      6.437,
+      -3.882
+     ],
+     [
+      6.437,
+      -2.982
+     ],
+     [
+      6.157,
+      -2.806
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-05",
+    "category": "Generic Models",
+    "bbox": [
+     6.437,
+     -27.491,
+     -4.059,
+     6.717,
+     -27.471,
+     -2.982
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      6.437,
+      -3.882
+     ],
+     [
+      6.717,
+      -4.059
+     ],
+     [
+      6.717,
+      -3.1590000000000003
+     ],
+     [
+      6.437,
+      -2.982
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-06",
+    "category": "Generic Models",
+    "bbox": [
+     6.717,
+     -27.491,
+     -4.235,
+     6.997,
+     -27.471,
+     -3.159
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      6.717,
+      -4.059
+     ],
+     [
+      6.997,
+      -4.235
+     ],
+     [
+      6.997,
+      -3.3350000000000004
+     ],
+     [
+      6.717,
+      -3.1590000000000003
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-07",
+    "category": "Generic Models",
+    "bbox": [
+     6.997,
+     -27.491,
+     -4.412,
+     7.277,
+     -27.471,
+     -3.335
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      6.997,
+      -4.235
+     ],
+     [
+      7.277,
+      -4.412
+     ],
+     [
+      7.277,
+      -3.512
+     ],
+     [
+      6.997,
+      -3.3350000000000004
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-08",
+    "category": "Generic Models",
+    "bbox": [
+     7.277,
+     -27.491,
+     -4.588,
+     7.557,
+     -27.471,
+     -3.512
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      7.277,
+      -4.412
+     ],
+     [
+      7.557,
+      -4.588
+     ],
+     [
+      7.557,
+      -3.688
+     ],
+     [
+      7.277,
+      -3.512
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-09",
+    "category": "Generic Models",
+    "bbox": [
+     7.557,
+     -27.491,
+     -4.765,
+     7.837,
+     -27.471,
+     -3.688
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      7.557,
+      -4.588
+     ],
+     [
+      7.837,
+      -4.765
+     ],
+     [
+      7.837,
+      -3.8649999999999998
+     ],
+     [
+      7.557,
+      -3.688
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-10",
+    "category": "Generic Models",
+    "bbox": [
+     7.837,
+     -27.491,
+     -4.941,
+     8.117,
+     -27.471,
+     -3.865
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      7.837,
+      -4.765
+     ],
+     [
+      8.117,
+      -4.941
+     ],
+     [
+      8.117,
+      -4.0409999999999995
+     ],
+     [
+      7.837,
+      -3.8649999999999998
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-11",
+    "category": "Generic Models",
+    "bbox": [
+     8.117,
+     -27.491,
+     -5.118,
+     8.397,
+     -27.471,
+     -4.041
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      8.117,
+      -4.941
+     ],
+     [
+      8.397,
+      -5.118
+     ],
+     [
+      8.397,
+      -4.218
+     ],
+     [
+      8.117,
+      -4.0409999999999995
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-12",
+    "category": "Generic Models",
+    "bbox": [
+     8.397,
+     -27.491,
+     -5.294,
+     8.677,
+     -27.471,
+     -4.218
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      8.397,
+      -5.118
+     ],
+     [
+      8.677,
+      -5.2940000000000005
+     ],
+     [
+      8.677,
+      -4.394
+     ],
+     [
+      8.397,
+      -4.218
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-13",
+    "category": "Generic Models",
+    "bbox": [
+     8.677,
+     -27.491,
+     -5.471,
+     8.957,
+     -27.471,
+     -4.394
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      8.677,
+      -5.2940000000000005
+     ],
+     [
+      8.957,
+      -5.471
+     ],
+     [
+      8.957,
+      -4.571
+     ],
+     [
+      8.677,
+      -4.394
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-14",
+    "category": "Generic Models",
+    "bbox": [
+     8.957,
+     -27.491,
+     -5.647,
+     9.237,
+     -27.471,
+     -4.571
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      8.957,
+      -5.471
+     ],
+     [
+      9.237,
+      -5.647
+     ],
+     [
+      9.237,
+      -4.747
+     ],
+     [
+      8.957,
+      -4.571
+     ]
+    ]
+   },
+   {
+    "mark": "stair-open-glass-15",
+    "category": "Generic Models",
+    "bbox": [
+     9.237,
+     -27.491,
+     -5.824,
+     9.517,
+     -27.471,
+     -4.747
+    ],
+    "room": "stair-b",
+    "comments": "frameless laminated glass; ASSUMED visual thickness 0.020 m; structural size pending",
+    "profile": [
+     [
+      9.237,
+      -5.647
+     ],
+     [
+      9.517,
+      -5.824
+     ],
+     [
+      9.517,
+      -4.9239999999999995
+     ],
+     [
+      9.237,
+      -4.747
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-01",
+    "category": "Generic Models",
+    "bbox": [
+     5.317,
+     -28.671,
+     -3.353,
+     5.597,
+     -28.631,
+     -2.276
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      5.317,
+      -3.176
+     ],
+     [
+      5.597,
+      -3.3529999999999998
+     ],
+     [
+      5.597,
+      -2.453
+     ],
+     [
+      5.317,
+      -2.2760000000000002
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-02",
+    "category": "Generic Models",
+    "bbox": [
+     5.597,
+     -28.671,
+     -3.529,
+     5.877,
+     -28.631,
+     -2.453
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      5.597,
+      -3.3529999999999998
+     ],
+     [
+      5.877,
+      -3.529
+     ],
+     [
+      5.877,
+      -2.629
+     ],
+     [
+      5.597,
+      -2.453
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-03",
+    "category": "Generic Models",
+    "bbox": [
+     5.877,
+     -28.671,
+     -3.706,
+     6.157,
+     -28.631,
+     -2.629
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      5.877,
+      -3.529
+     ],
+     [
+      6.157,
+      -3.706
+     ],
+     [
+      6.157,
+      -2.806
+     ],
+     [
+      5.877,
+      -2.629
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-04",
+    "category": "Generic Models",
+    "bbox": [
+     6.157,
+     -28.671,
+     -3.882,
+     6.437,
+     -28.631,
+     -2.806
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      6.157,
+      -3.706
+     ],
+     [
+      6.437,
+      -3.882
+     ],
+     [
+      6.437,
+      -2.982
+     ],
+     [
+      6.157,
+      -2.806
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-05",
+    "category": "Generic Models",
+    "bbox": [
+     6.437,
+     -28.671,
+     -4.059,
+     6.717,
+     -28.631,
+     -2.982
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      6.437,
+      -3.882
+     ],
+     [
+      6.717,
+      -4.059
+     ],
+     [
+      6.717,
+      -3.1590000000000003
+     ],
+     [
+      6.437,
+      -2.982
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-06",
+    "category": "Generic Models",
+    "bbox": [
+     6.717,
+     -28.671,
+     -4.235,
+     6.997,
+     -28.631,
+     -3.159
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      6.717,
+      -4.059
+     ],
+     [
+      6.997,
+      -4.235
+     ],
+     [
+      6.997,
+      -3.3350000000000004
+     ],
+     [
+      6.717,
+      -3.1590000000000003
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-07",
+    "category": "Generic Models",
+    "bbox": [
+     6.997,
+     -28.671,
+     -4.412,
+     7.277,
+     -28.631,
+     -3.335
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      6.997,
+      -4.235
+     ],
+     [
+      7.277,
+      -4.412
+     ],
+     [
+      7.277,
+      -3.512
+     ],
+     [
+      6.997,
+      -3.3350000000000004
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-08",
+    "category": "Generic Models",
+    "bbox": [
+     7.277,
+     -28.671,
+     -4.588,
+     7.557,
+     -28.631,
+     -3.512
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      7.277,
+      -4.412
+     ],
+     [
+      7.557,
+      -4.588
+     ],
+     [
+      7.557,
+      -3.688
+     ],
+     [
+      7.277,
+      -3.512
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-09",
+    "category": "Generic Models",
+    "bbox": [
+     7.557,
+     -28.671,
+     -4.765,
+     7.837,
+     -28.631,
+     -3.688
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      7.557,
+      -4.588
+     ],
+     [
+      7.837,
+      -4.765
+     ],
+     [
+      7.837,
+      -3.8649999999999998
+     ],
+     [
+      7.557,
+      -3.688
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-10",
+    "category": "Generic Models",
+    "bbox": [
+     7.837,
+     -28.671,
+     -4.941,
+     8.117,
+     -28.631,
+     -3.865
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      7.837,
+      -4.765
+     ],
+     [
+      8.117,
+      -4.941
+     ],
+     [
+      8.117,
+      -4.0409999999999995
+     ],
+     [
+      7.837,
+      -3.8649999999999998
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-11",
+    "category": "Generic Models",
+    "bbox": [
+     8.117,
+     -28.671,
+     -5.118,
+     8.397,
+     -28.631,
+     -4.041
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      8.117,
+      -4.941
+     ],
+     [
+      8.397,
+      -5.118
+     ],
+     [
+      8.397,
+      -4.218
+     ],
+     [
+      8.117,
+      -4.0409999999999995
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-12",
+    "category": "Generic Models",
+    "bbox": [
+     8.397,
+     -28.671,
+     -5.294,
+     8.677,
+     -28.631,
+     -4.218
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      8.397,
+      -5.118
+     ],
+     [
+      8.677,
+      -5.2940000000000005
+     ],
+     [
+      8.677,
+      -4.394
+     ],
+     [
+      8.397,
+      -4.218
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-13",
+    "category": "Generic Models",
+    "bbox": [
+     8.677,
+     -28.671,
+     -5.471,
+     8.957,
+     -28.631,
+     -4.394
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      8.677,
+      -5.2940000000000005
+     ],
+     [
+      8.957,
+      -5.471
+     ],
+     [
+      8.957,
+      -4.571
+     ],
+     [
+      8.677,
+      -4.394
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-14",
+    "category": "Generic Models",
+    "bbox": [
+     8.957,
+     -28.671,
+     -5.647,
+     9.237,
+     -28.631,
+     -4.571
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      8.957,
+      -5.471
+     ],
+     [
+      9.237,
+      -5.647
+     ],
+     [
+      9.237,
+      -4.747
+     ],
+     [
+      8.957,
+      -4.571
+     ]
+    ]
+   },
+   {
+    "mark": "stair-wall-handrail-15",
+    "category": "Generic Models",
+    "bbox": [
+     9.237,
+     -28.671,
+     -5.824,
+     9.517,
+     -28.631,
+     -4.747
+    ],
+    "room": "stair-b",
+    "comments": "wood; ASSUMED visual thickness 0.040 m; structural size pending",
+    "profile": [
+     [
+      9.237,
+      -5.647
+     ],
+     [
+      9.517,
+      -5.824
+     ],
+     [
+      9.517,
+      -4.9239999999999995
+     ],
+     [
+      9.237,
+      -4.747
+     ]
+    ]
+   },
+   {
+    "mark": "pe-rain-head",
+    "category": "Generic Models",
+    "bbox": [
+     20.604,
+     -30.836,
+     2.28,
+     20.804,
+     -30.636,
+     2.3
+    ],
+    "room": "parents-ensuite",
+    "comments": "rain head; ASSUMED 200 mm representation diameter"
+   },
+   {
+    "mark": "pe-hand-shower-rail",
+    "category": "Generic Models",
+    "bbox": [
+     20.089,
+     -31.076,
+     0.7,
+     20.119,
+     -31.046,
+     1.2
+    ],
+    "room": "parents-ensuite",
+    "comments": "hand shower rail; ASSUMED representation size"
+   },
+   {
+    "mark": "pe-hand-shower-head",
+    "category": "Generic Models",
+    "bbox": [
+     20.054,
+     -31.091,
+     1.14,
+     20.154,
+     -31.031,
+     1.2
+    ],
+    "room": "parents-ensuite",
+    "comments": "hand shower head; ASSUMED representation size"
+   },
+   {
+    "mark": "pe-bath-screen",
+    "category": "Generic Models",
+    "bbox": [
+     19.854,
+     -30.371,
+     0.55,
+     20.754,
+     -30.351,
+     2.1
+    ],
+    "room": "parents-ensuite",
+    "comments": "fixed bath screen; transmittance 0.91; ior 1.52; ASSUMED 20 mm representation thickness"
+   },
+   {
+    "mark": "guest-wc-extract-fan",
+    "category": "Mechanical Equipment",
+    "bbox": [
+     10.05,
+     -21.2,
+     -0.6,
+     10.15,
+     -21.1,
+     -0.5
+    ],
+    "room": "guest-wc",
+    "comments": "extract-fan; 6.0 l/s; card ukadf-sanitary-intermittent-6; ASSUMED 100 mm representation size"
+   },
+   {
+    "mark": "guest-wc-extract-duct",
+    "category": "Ducts",
+    "bbox": [
+     10.06,
+     -21.19,
+     -0.59,
+     10.14,
+     -20.461,
+     -0.51
+    ],
+    "room": null,
+    "comments": "extract-fan; 6.0 l/s; card ukadf-sanitary-intermittent-6; ASSUMED 80 mm representation width"
+   },
+   {
+    "mark": "guest-wc-extract-grille",
+    "category": "Mechanical Equipment",
+    "bbox": [
+     10.04,
+     -20.521,
+     -0.61,
+     10.16,
+     -20.481,
+     -0.49
+    ],
+    "room": null,
+    "comments": "extract-fan; 6.0 l/s; card ukadf-sanitary-intermittent-6; external grille; ASSUMED 120 mm representation size"
+   },
+   {
+    "mark": "dirty-kitchen-extract-fan",
+    "category": "Mechanical Equipment",
+    "bbox": [
+     13.777,
+     -20.931,
+     -0.7,
+     13.877,
+     -20.831,
+     -0.6
+    ],
+    "room": "dirty-kitchen",
+    "comments": "cooker-hood-ducted; 30.0 l/s; card ukadf-kitchen-intermittent-hood-30; ASSUMED 100 mm representation size"
+   },
+   {
+    "mark": "dirty-kitchen-extract-duct",
+    "category": "Ducts",
+    "bbox": [
+     13.787,
+     -20.921,
+     -0.69,
+     13.867,
+     -20.461,
+     -0.61
+    ],
+    "room": null,
+    "comments": "cooker-hood-ducted; 30.0 l/s; card ukadf-kitchen-intermittent-hood-30; ASSUMED 80 mm representation width"
+   },
+   {
+    "mark": "dirty-kitchen-extract-grille",
+    "category": "Mechanical Equipment",
+    "bbox": [
+     13.767,
+     -20.521,
+     -0.71,
+     13.887,
+     -20.481,
+     -0.59
+    ],
+    "room": null,
+    "comments": "cooker-hood-ducted; 30.0 l/s; card ukadf-kitchen-intermittent-hood-30; external grille; ASSUMED 120 mm representation size"
+   }
+  ],
+  "round3_elements": [
+   {
+    "mark": "SWING-bar-alcove-09-plate",
+    "category": "Lighting Fixtures",
+    "bbox": [
+     19.408,
+     -29.691,
+     -1.96,
+     19.528,
+     -29.661,
+     -1.84
+    ],
+    "comments": "SWING wall plate; articulated reach 0.6 m"
+   },
+   {
+    "mark": "SWING-bar-alcove-09-arm",
+    "category": "Lighting Fixtures",
+    "bbox": [
+     19.456,
+     -29.676,
+     -1.912,
+     19.48,
+     -29.196,
+     -1.888
+    ],
+    "comments": "SWING articulated arm; reach 0.6 m"
+   },
+   {
+    "mark": "SWING-bar-alcove-09-head",
+    "category": "Lighting Fixtures",
+    "bbox": [
+     19.408,
+     -29.256,
+     -1.96,
+     19.528,
+     -29.136,
+     -1.84
+    ],
+    "comments": "SWING rotating head; emitter at spec position"
+   },
+   {
+    "mark": "SWING-bar-alcove-10-plate",
+    "category": "Lighting Fixtures",
+    "bbox": [
+     19.808,
+     -29.691,
+     -1.96,
+     19.928,
+     -29.661,
+     -1.84
+    ],
+    "comments": "SWING wall plate; articulated reach 0.6 m"
+   },
+   {
+    "mark": "SWING-bar-alcove-10-arm",
+    "category": "Lighting Fixtures",
+    "bbox": [
+     19.856,
+     -29.676,
+     -1.912,
+     19.88,
+     -29.196,
+     -1.888
+    ],
+    "comments": "SWING articulated arm; reach 0.6 m"
+   },
+   {
+    "mark": "SWING-bar-alcove-10-head",
+    "category": "Lighting Fixtures",
+    "bbox": [
+     19.808,
+     -29.256,
+     -1.96,
+     19.928,
+     -29.136,
+     -1.84
+    ],
+    "comments": "SWING rotating head; emitter at spec position"
+   },
+   {
+    "mark": "DLN-bar-alcove-11",
+    "category": "Lighting Fixtures",
+    "bbox": [
+     18.8305,
+     -29.2785,
+     -0.925,
+     18.9055,
+     -29.2035,
+     -0.9
+    ],
+    "comments": "DLN recessed nook downlight; emitter at spec position"
+   },
+   {
+    "mark": "DLN-bar-alcove-12",
+    "category": "Lighting Fixtures",
+    "bbox": [
+     20.4305,
+     -29.2785,
+     -0.925,
+     20.5055,
+     -29.2035,
+     -0.9
+    ],
+    "comments": "DLN recessed nook downlight; emitter at spec position"
+   },
+   {
+    "mark": "stair-flight-store-body-001",
+    "category": "Casework",
+    "bbox": [
+     5.737,
+     -28.471,
+     -3.0,
+     5.85,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-002",
+    "category": "Casework",
+    "bbox": [
+     5.737,
+     -28.471,
+     -2.9,
+     5.85,
+     -28.101,
+     -0.7
+    ],
+    "comments": "under_stair_storage; standing-access-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-003",
+    "category": "Casework",
+    "bbox": [
+     5.737,
+     -28.096,
+     -2.9,
+     5.85,
+     -28.071,
+     -0.7
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-004",
+    "category": "Casework",
+    "bbox": [
+     5.737,
+     -28.451,
+     -2.45,
+     5.85,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; standing-access-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-005",
+    "category": "Casework",
+    "bbox": [
+     5.457,
+     -28.471,
+     -3.0,
+     5.737,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-006",
+    "category": "Casework",
+    "bbox": [
+     5.457,
+     -28.471,
+     -2.9,
+     5.737,
+     -28.101,
+     -0.7
+    ],
+    "comments": "under_stair_storage; standing-access-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-007",
+    "category": "Casework",
+    "bbox": [
+     5.457,
+     -28.096,
+     -2.9,
+     5.737,
+     -28.071,
+     -0.7
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-008",
+    "category": "Casework",
+    "bbox": [
+     5.457,
+     -28.451,
+     -2.45,
+     5.737,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; standing-access-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-009",
+    "category": "Casework",
+    "bbox": [
+     5.3,
+     -28.471,
+     -3.0,
+     5.457,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-010",
+    "category": "Casework",
+    "bbox": [
+     5.3,
+     -28.471,
+     -2.9,
+     5.457,
+     -28.101,
+     -0.7
+    ],
+    "comments": "under_stair_storage; standing-access-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-011",
+    "category": "Casework",
+    "bbox": [
+     5.3,
+     -28.096,
+     -2.9,
+     5.457,
+     -28.071,
+     -0.7
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-012",
+    "category": "Casework",
+    "bbox": [
+     5.3,
+     -28.451,
+     -2.45,
+     5.457,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; standing-access-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-013",
+    "category": "Casework",
+    "bbox": [
+     6.297,
+     -28.471,
+     -3.0,
+     6.5,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-014",
+    "category": "Casework",
+    "bbox": [
+     6.297,
+     -28.471,
+     -2.9,
+     6.5,
+     -28.101,
+     -0.9924
+    ],
+    "comments": "under_stair_storage; luggage-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-015",
+    "category": "Casework",
+    "bbox": [
+     6.297,
+     -28.096,
+     -2.9,
+     6.5,
+     -28.071,
+     -0.9924
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-016",
+    "category": "Casework",
+    "bbox": [
+     6.297,
+     -28.451,
+     -2.45,
+     6.5,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; luggage-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-017",
+    "category": "Casework",
+    "bbox": [
+     6.017,
+     -28.471,
+     -3.0,
+     6.297,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-018",
+    "category": "Casework",
+    "bbox": [
+     6.017,
+     -28.471,
+     -2.9,
+     6.297,
+     -28.101,
+     -0.8159
+    ],
+    "comments": "under_stair_storage; luggage-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-019",
+    "category": "Casework",
+    "bbox": [
+     6.017,
+     -28.096,
+     -2.9,
+     6.297,
+     -28.071,
+     -0.8159
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-020",
+    "category": "Casework",
+    "bbox": [
+     6.017,
+     -28.451,
+     -2.45,
+     6.297,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; luggage-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-021",
+    "category": "Casework",
+    "bbox": [
+     5.85,
+     -28.471,
+     -3.0,
+     6.017,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-022",
+    "category": "Casework",
+    "bbox": [
+     5.85,
+     -28.471,
+     -2.9,
+     6.017,
+     -28.101,
+     -0.7
+    ],
+    "comments": "under_stair_storage; luggage-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-023",
+    "category": "Casework",
+    "bbox": [
+     5.85,
+     -28.096,
+     -2.9,
+     6.017,
+     -28.071,
+     -0.7
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-024",
+    "category": "Casework",
+    "bbox": [
+     5.85,
+     -28.451,
+     -2.45,
+     6.017,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; luggage-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-025",
+    "category": "Casework",
+    "bbox": [
+     6.857,
+     -28.471,
+     -3.0,
+     7.1,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-026",
+    "category": "Casework",
+    "bbox": [
+     6.857,
+     -28.471,
+     -2.9,
+     7.1,
+     -28.101,
+     -1.3453
+    ],
+    "comments": "under_stair_storage; seasonal-boxes-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-027",
+    "category": "Casework",
+    "bbox": [
+     6.857,
+     -28.096,
+     -2.9,
+     7.1,
+     -28.071,
+     -1.3453
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-028",
+    "category": "Casework",
+    "bbox": [
+     6.857,
+     -28.451,
+     -2.45,
+     7.1,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; seasonal-boxes-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-029",
+    "category": "Casework",
+    "bbox": [
+     6.577,
+     -28.471,
+     -3.0,
+     6.857,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-030",
+    "category": "Casework",
+    "bbox": [
+     6.577,
+     -28.471,
+     -2.9,
+     6.857,
+     -28.101,
+     -1.1688
+    ],
+    "comments": "under_stair_storage; seasonal-boxes-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-031",
+    "category": "Casework",
+    "bbox": [
+     6.577,
+     -28.096,
+     -2.9,
+     6.857,
+     -28.071,
+     -1.1688
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-032",
+    "category": "Casework",
+    "bbox": [
+     6.577,
+     -28.451,
+     -2.45,
+     6.857,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; seasonal-boxes-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-033",
+    "category": "Casework",
+    "bbox": [
+     6.5,
+     -28.471,
+     -3.0,
+     6.577,
+     -28.071,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-034",
+    "category": "Casework",
+    "bbox": [
+     6.5,
+     -28.471,
+     -2.9,
+     6.577,
+     -28.101,
+     -0.9924
+    ],
+    "comments": "under_stair_storage; seasonal-boxes-carcass; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-035",
+    "category": "Casework",
+    "bbox": [
+     6.5,
+     -28.096,
+     -2.9,
+     6.577,
+     -28.071,
+     -0.9924
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit stair"
+   },
+   {
+    "mark": "stair-flight-store-body-036",
+    "category": "Casework",
+    "bbox": [
+     6.5,
+     -28.451,
+     -2.45,
+     6.577,
+     -28.111,
+     -2.43
+    ],
+    "comments": "under_stair_storage; seasonal-boxes-shelf; soffit stair"
+   },
+   {
+    "mark": "stair-landing-store-body-001",
+    "category": "Casework",
+    "bbox": [
+     3.99,
+     -28.621,
+     -3.0,
+     4.19,
+     -28.421,
+     -2.9
+    ],
+    "comments": "under_stair_storage; plinth; soffit landing"
+   },
+   {
+    "mark": "stair-landing-store-body-002",
+    "category": "Casework",
+    "bbox": [
+     3.99,
+     -28.621,
+     -2.9,
+     4.19,
+     -28.451,
+     -0.7
+    ],
+    "comments": "under_stair_storage; small-boxes-carcass; soffit landing"
+   },
+   {
+    "mark": "stair-landing-store-body-003",
+    "category": "Casework",
+    "bbox": [
+     3.99,
+     -28.446,
+     -2.9,
+     4.19,
+     -28.421,
+     -0.7
+    ],
+    "comments": "under_stair_storage; sliding-door; soffit landing"
+   },
+   {
+    "mark": "stair-landing-store-body-004",
+    "category": "Casework",
+    "bbox": [
+     3.99,
+     -28.601,
+     -2.45,
+     4.19,
+     -28.461,
+     -2.43
+    ],
+    "comments": "under_stair_storage; small-boxes-shelf; soffit landing"
+   },
+   {
+    "mark": "store-shelves-body-001",
+    "category": "Casework",
+    "bbox": [
+     2.077,
+     -20.821,
+     -3.0,
+     3.027,
+     -20.801,
+     -1.7
+    ],
+    "comments": "store_shelving; luggage-back; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-002",
+    "category": "Casework",
+    "bbox": [
+     2.077,
+     -21.301,
+     -2.9,
+     3.027,
+     -20.801,
+     -2.88
+    ],
+    "comments": "store_shelving; luggage-base; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-003",
+    "category": "Casework",
+    "bbox": [
+     2.077,
+     -21.301,
+     -2.45,
+     3.027,
+     -20.801,
+     -2.43
+    ],
+    "comments": "store_shelving; luggage-shelf; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-004",
+    "category": "Casework",
+    "bbox": [
+     2.077,
+     -21.301,
+     -1.95,
+     3.027,
+     -20.801,
+     -1.93
+    ],
+    "comments": "store_shelving; luggage-shelf; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-005",
+    "category": "Casework",
+    "bbox": [
+     1.127,
+     -20.821,
+     -3.0,
+     2.077,
+     -20.801,
+     -1.7
+    ],
+    "comments": "store_shelving; seasonal-boxes-back; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-006",
+    "category": "Casework",
+    "bbox": [
+     1.127,
+     -21.301,
+     -2.9,
+     2.077,
+     -20.801,
+     -2.88
+    ],
+    "comments": "store_shelving; seasonal-boxes-base; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-007",
+    "category": "Casework",
+    "bbox": [
+     1.127,
+     -21.301,
+     -2.45,
+     2.077,
+     -20.801,
+     -2.43
+    ],
+    "comments": "store_shelving; seasonal-boxes-shelf; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-008",
+    "category": "Casework",
+    "bbox": [
+     1.127,
+     -21.301,
+     -1.95,
+     2.077,
+     -20.801,
+     -1.93
+    ],
+    "comments": "store_shelving; seasonal-boxes-shelf; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-009",
+    "category": "Casework",
+    "bbox": [
+     0.177,
+     -20.821,
+     -3.0,
+     1.127,
+     -20.801,
+     -1.7
+    ],
+    "comments": "store_shelving; bikes-back; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-010",
+    "category": "Casework",
+    "bbox": [
+     0.177,
+     -21.301,
+     -2.9,
+     1.127,
+     -20.801,
+     -2.88
+    ],
+    "comments": "store_shelving; bikes-base; soffit ramp"
+   },
+   {
+    "mark": "store-shelves-body-011",
+    "category": "Casework",
+    "bbox": [
+     0.227,
+     -20.921,
+     -1.9,
+     1.077,
+     -20.801,
+     -1.85
+    ],
+    "comments": "store_shelving; bikes-hooks; soffit ramp"
+   },
+   {
+    "mark": "pd-hang-1-module-01",
+    "category": "Casework",
+    "bbox": [
+     20.697,
+     -27.261,
+     0.1,
+     21.347,
+     -26.721,
+     2.05
+    ],
+    "comments": "owner hers; kind long-hang"
+   },
+   {
+    "mark": "pd-hang-1-module-02",
+    "category": "Casework",
+    "bbox": [
+     20.247,
+     -27.261,
+     0.1,
+     20.697,
+     -26.721,
+     2.05
+    ],
+    "comments": "owner hers; kind double-hang"
+   },
+   {
+    "mark": "pd-hang-1-module-03",
+    "category": "Casework",
+    "bbox": [
+     19.827,
+     -27.261,
+     0.1,
+     20.247,
+     -26.721,
+     2.05
+    ],
+    "comments": "owner hers; kind drawers"
+   },
+   {
+    "mark": "pd-hang-1-module-04",
+    "category": "Casework",
+    "bbox": [
+     19.627,
+     -27.261,
+     0.1,
+     19.827,
+     -26.721,
+     2.05
+    ],
+    "comments": "owner hers; kind hat-shelf"
+   },
+   {
+    "mark": "pd-hang-2-module-01",
+    "category": "Casework",
+    "bbox": [
+     19.854,
+     -28.801,
+     0.1,
+     20.404,
+     -28.261,
+     2.05
+    ],
+    "comments": "owner his; kind double-hang"
+   },
+   {
+    "mark": "pd-hang-2-module-02",
+    "category": "Casework",
+    "bbox": [
+     20.404,
+     -28.801,
+     0.1,
+     20.654,
+     -28.261,
+     2.05
+    ],
+    "comments": "owner his; kind trousers-pullout"
+   },
+   {
+    "mark": "pd-hang-2-module-03",
+    "category": "Casework",
+    "bbox": [
+     20.654,
+     -28.801,
+     0.1,
+     21.004,
+     -28.261,
+     2.05
+    ],
+    "comments": "owner his; kind drawers"
+   },
+   {
+    "mark": "pd-hang-2-module-04",
+    "category": "Casework",
+    "bbox": [
+     21.004,
+     -28.801,
+     0.1,
+     21.2,
+     -28.261,
+     2.05
+    ],
+    "comments": "owner his; kind shelves"
+   }
+  ]
+ }
+]

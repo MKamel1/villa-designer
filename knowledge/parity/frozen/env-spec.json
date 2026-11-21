@@ -1,0 +1,2622 @@
+{
+ "units": "mm",
+ "origin": "Revit project internal = CAD",
+ "levels": [
+  {
+   "name": "Street +-0.00",
+   "z": -1200
+  },
+  {
+   "name": "B -1.80",
+   "z": -3000
+  },
+  {
+   "name": "GF +1.20",
+   "z": 0
+  },
+  {
+   "name": "APT +4.20 (not ours)",
+   "z": 3000
+  },
+  {
+   "name": "APT roof +7.20",
+   "z": 6000
+  }
+ ],
+ "site": {
+  "latitude": 30.04026,
+  "longitude": 30.961099,
+  "time_zone": 2.0,
+  "street_facade_azimuth": 290.0,
+  "street_facade_direction": [
+   -1,
+   0
+  ]
+ },
+ "plot": [
+  -373,
+  -39480.32,
+  28557,
+  -20351
+ ],
+ "axis_y": -29915.66,
+ "footprint": [
+  [
+   3617,
+   -23591
+  ],
+  [
+   3617,
+   -28671
+  ],
+  [
+   19604,
+   -28671
+  ],
+  [
+   19604,
+   -31311
+  ],
+  [
+   22324,
+   -31311
+  ],
+  [
+   22324,
+   -28671
+  ],
+  [
+   22597,
+   -28671
+  ],
+  [
+   22597,
+   -23591
+  ]
+ ],
+ "footprint_b": [
+  [
+   3617,
+   -23591
+  ],
+  [
+   3617,
+   -29915.66
+  ],
+  [
+   6940,
+   -29915.66
+  ],
+  [
+   6940,
+   -28671
+  ],
+  [
+   17268,
+   -28671
+  ],
+  [
+   17268,
+   -29915.66
+  ],
+  [
+   22597,
+   -29915.66
+  ],
+  [
+   22597,
+   -23591
+  ]
+ ],
+ "columns": {
+  "revit_ids": [
+   1585908,
+   1585915,
+   1585917,
+   1585924,
+   1585933,
+   1585938,
+   1590377,
+   1591282,
+   1591340
+  ],
+  "cad": [
+   [
+    7017,
+    -24101,
+    7377,
+    -23591
+   ],
+   [
+    9227,
+    -24101,
+    9567,
+    -23591
+   ],
+   [
+    11197,
+    -24251,
+    11537,
+    -23591
+   ],
+   [
+    14902,
+    -23951,
+    15412,
+    -23591
+   ],
+   [
+    22237,
+    -28671,
+    22597,
+    -28161
+   ],
+   [
+    3617,
+    -24151,
+    3977,
+    -23641
+   ],
+   [
+    3617,
+    -28671,
+    3977,
+    -28161
+   ],
+   [
+    18367,
+    -23951,
+    18877,
+    -23591
+   ],
+   [
+    22237,
+    -24101,
+    22597,
+    -23591
+   ]
+  ],
+  "copies": [
+   {
+    "base": "B -1.80",
+    "top": "GF +1.20",
+    "dz": -3000
+   },
+   {
+    "base": "APT +4.20 (not ours)",
+    "top": "APT roof +7.20",
+    "dz": 3000
+   }
+  ],
+  "gf": {
+   "base": "GF +1.20",
+   "top": "APT +4.20 (not ours)"
+  }
+ },
+ "delete_revit_ids": [
+  1586207,
+  1586214,
+  1586627
+ ],
+ "slabs": [
+  {
+   "id": "slab-B",
+   "level": "B -1.80",
+   "pts": [
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -29915.66
+    ],
+    [
+     6940,
+     -29915.66
+    ],
+    [
+     6940,
+     -28671
+    ],
+    [
+     17268,
+     -28671
+    ],
+    [
+     17268,
+     -29915.66
+    ],
+    [
+     22597,
+     -29915.66
+    ],
+    [
+     22597,
+     -23591
+    ]
+   ],
+   "note": "our footprint slab (CAD outline + our halves of the core ends)"
+  },
+  {
+   "id": "slab-GF",
+   "level": "GF +1.20",
+   "pts": [
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -31311
+    ],
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -28671
+    ],
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -23591
+    ]
+   ],
+   "note": "our footprint slab (CAD outline)"
+  },
+  {
+   "id": "slab-APT",
+   "level": "APT +4.20 (not ours)",
+   "pts": [
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -31311
+    ],
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -28671
+    ],
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -23591
+    ]
+   ],
+   "note": "our footprint slab (CAD outline)"
+  },
+  {
+   "id": "slab-ROOF",
+   "level": "APT roof +7.20",
+   "pts": [
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -31311
+    ],
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -28671
+    ],
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -23591
+    ]
+   ],
+   "note": "our footprint slab (CAD outline)"
+  },
+  {
+   "id": "slab-GF-front",
+   "level": "GF +1.20",
+   "pts": [
+    [
+     1787,
+     -28671
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     3617,
+     -23591
+    ],
+    [
+     1787,
+     -23591
+    ]
+   ],
+   "note": "street-side terrace/landing, ASSUMED use"
+  },
+  {
+   "id": "yard-ours",
+   "level": "B -1.80",
+   "pts": [
+    [
+     -373,
+     -20351
+    ],
+    [
+     -373,
+     -29915.66
+    ],
+    [
+     3617,
+     -29915.66
+    ],
+    [
+     3617,
+     -23591
+    ],
+    [
+     22597,
+     -23591
+    ],
+    [
+     22597,
+     -29915.66
+    ],
+    [
+     28557,
+     -29915.66
+    ],
+    [
+     28557,
+     -20351
+    ]
+   ],
+   "note": "our sunken yard at -1.80 (BRIEF)"
+  },
+  {
+   "id": "yard-sister",
+   "level": "B -1.80",
+   "pts": [
+    [
+     28557,
+     -39480.32
+    ],
+    [
+     28557,
+     -29915.66
+    ],
+    [
+     22597,
+     -29915.66
+    ],
+    [
+     22597,
+     -36240.32
+    ],
+    [
+     3617,
+     -36240.32
+    ],
+    [
+     3617,
+     -29915.66
+    ],
+    [
+     -373,
+     -29915.66
+    ],
+    [
+     -373,
+     -39480.32
+    ]
+   ],
+   "note": "sister's yard, mirrored (context)"
+  }
+ ],
+ "elements": [
+  {
+   "id": "fence-street",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     -373,
+     -39480.32
+    ],
+    [
+     -123,
+     -39480.32
+    ],
+    [
+     -123,
+     -20351
+    ],
+    [
+     -373,
+     -20351
+    ]
+   ],
+   "z0": -3000,
+   "z1": 1000,
+   "note": "concrete fence 4.00 m from basement (BRIEF)"
+  },
+  {
+   "id": "fence-east",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     -373,
+     -20601
+    ],
+    [
+     28557,
+     -20601
+    ],
+    [
+     28557,
+     -20351
+    ],
+    [
+     -373,
+     -20351
+    ]
+   ],
+   "z0": -3000,
+   "z1": 1000,
+   "note": "concrete fence 4.00 m from basement (BRIEF)"
+  },
+  {
+   "id": "fence-rear",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     28307,
+     -39480.32
+    ],
+    [
+     28557,
+     -39480.32
+    ],
+    [
+     28557,
+     -20351
+    ],
+    [
+     28307,
+     -20351
+    ]
+   ],
+   "z0": -3000,
+   "z1": 1000,
+   "note": "concrete fence 4.00 m from basement (BRIEF)"
+  },
+  {
+   "id": "fence-west",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     -373,
+     -39480.32
+    ],
+    [
+     28557,
+     -39480.32
+    ],
+    [
+     28557,
+     -39230.32
+    ],
+    [
+     -373,
+     -39230.32
+    ]
+   ],
+   "z0": -3000,
+   "z1": 1000,
+   "note": "concrete fence 4.00 m from basement (BRIEF)"
+  },
+  {
+   "id": "yard-wall-ne",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     -123,
+     -23841
+    ],
+    [
+     3617,
+     -23841
+    ],
+    [
+     3617,
+     -23591
+    ],
+    [
+     -123,
+     -23591
+    ]
+   ],
+   "z0": -3000,
+   "z1": -1600,
+   "note": "wall 1.40 m from the basement floor, NE column to the street fence, ~250 thick, flush with the villa's east face (CLIENT 2026-09-26)"
+  },
+  {
+   "id": "apartment-above",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -31311
+    ],
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -28671
+    ],
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -23591
+    ]
+   ],
+   "z0": 3000,
+   "z1": 5800,
+   "note": "identical apartment above our GF (BRIEF)"
+  },
+  {
+   "id": "apartment-above-front",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     1787,
+     -28671
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     3617,
+     -23591
+    ],
+    [
+     1787,
+     -23591
+    ]
+   ],
+   "z0": 3000,
+   "z1": 4100,
+   "note": "its street-side terrace parapet zone, ASSUMED"
+  },
+  {
+   "id": "sister",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     3617,
+     -36240.32
+    ],
+    [
+     22597,
+     -36240.32
+    ],
+    [
+     22597,
+     -31160.32
+    ],
+    [
+     3617,
+     -31160.32
+    ]
+   ],
+   "z0": -3000,
+   "z1": 6000,
+   "note": "sister villa + its apartment, mirrored (BRIEF)"
+  },
+  {
+   "id": "sister-front",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     1787,
+     -36240.32
+    ],
+    [
+     3617,
+     -36240.32
+    ],
+    [
+     3617,
+     -31160.32
+    ],
+    [
+     1787,
+     -31160.32
+    ]
+   ],
+   "z0": -200,
+   "z1": 0,
+   "note": "sister's terrace, mirrored"
+  },
+  {
+   "id": "core-B-shared",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     6940,
+     -31160.32
+    ],
+    [
+     17268,
+     -31160.32
+    ],
+    [
+     17268,
+     -28671
+    ],
+    [
+     6940,
+     -28671
+    ]
+   ],
+   "z0": -3000,
+   "z1": -200,
+   "note": "shared basement core: lobby, main stair, shaft, lift (PDF)"
+  },
+  {
+   "id": "sister-core-B-front",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     3617,
+     -31160.32
+    ],
+    [
+     6940,
+     -31160.32
+    ],
+    [
+     6940,
+     -29915.66
+    ],
+    [
+     3617,
+     -29915.66
+    ]
+   ],
+   "z0": -3000,
+   "z1": -200,
+   "note": "the sister's half of the basement core end (PDF)"
+  },
+  {
+   "id": "sister-core-B-rear",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     17268,
+     -31160.32
+    ],
+    [
+     22597,
+     -31160.32
+    ],
+    [
+     22597,
+     -29915.66
+    ],
+    [
+     17268,
+     -29915.66
+    ]
+   ],
+   "z0": -3000,
+   "z1": -200,
+   "note": "the sister's half of the basement core end (PDF)"
+  },
+  {
+   "id": "core-entrance-GF",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     3617,
+     -31160.32
+    ],
+    [
+     8506,
+     -31160.32
+    ],
+    [
+     8506,
+     -28671
+    ],
+    [
+     3617,
+     -28671
+    ]
+   ],
+   "z0": 0,
+   "z1": 2800,
+   "note": "shared entrance lobby from the street gate (+0.00 FFL of the old plan = GF)"
+  },
+  {
+   "id": "core-stair-GF",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     8506,
+     -31160.32
+    ],
+    [
+     12778,
+     -31160.32
+    ],
+    [
+     12778,
+     -28671
+    ],
+    [
+     8506,
+     -28671
+    ]
+   ],
+   "z0": 0,
+   "z1": 2800,
+   "note": "shared main stair to the apartments (not in the DWG or Revit)"
+  },
+  {
+   "id": "core-shaft-landing-GF",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     12778,
+     -31160.32
+    ],
+    [
+     14134,
+     -31160.32
+    ],
+    [
+     14134,
+     -28671
+    ],
+    [
+     12778,
+     -28671
+    ]
+   ],
+   "z0": 0,
+   "z1": 2800,
+   "note": "stair landing and air shaft"
+  },
+  {
+   "id": "core-lobby-GF",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     14134,
+     -31160.32
+    ],
+    [
+     15928,
+     -31160.32
+    ],
+    [
+     15928,
+     -28671
+    ],
+    [
+     14134,
+     -28671
+    ]
+   ],
+   "z0": 0,
+   "z1": 2800,
+   "note": "shared lobby, doors to both villas"
+  },
+  {
+   "id": "core-lift-GF",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     15928,
+     -31160.32
+    ],
+    [
+     17408,
+     -31160.32
+    ],
+    [
+     17408,
+     -28671
+    ],
+    [
+     15928,
+     -28671
+    ]
+   ],
+   "z0": 0,
+   "z1": 2800,
+   "note": "X-marked box with a 0.80 door: most likely the lift"
+  },
+  {
+   "id": "sister-bath-GF",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     17408,
+     -31160.32
+    ],
+    [
+     19604,
+     -31160.32
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     17408,
+     -28671
+    ]
+   ],
+   "z0": 0,
+   "z1": 2800,
+   "note": "the sister's GF bathroom (staggered with ours)"
+  },
+  {
+   "id": "core-entrance-APT",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     3617,
+     -31160.32
+    ],
+    [
+     8506,
+     -31160.32
+    ],
+    [
+     8506,
+     -28671
+    ],
+    [
+     3617,
+     -28671
+    ]
+   ],
+   "z0": 3000,
+   "z1": 5800,
+   "note": "shared entrance lobby from the street gate (+0.00 FFL of the old plan = GF) (apartment storey, assumed as GF)"
+  },
+  {
+   "id": "core-stair-APT",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     8506,
+     -31160.32
+    ],
+    [
+     12778,
+     -31160.32
+    ],
+    [
+     12778,
+     -28671
+    ],
+    [
+     8506,
+     -28671
+    ]
+   ],
+   "z0": 3000,
+   "z1": 5800,
+   "note": "shared main stair to the apartments (not in the DWG or Revit) (apartment storey, assumed as GF)"
+  },
+  {
+   "id": "core-shaft-landing-APT",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     12778,
+     -31160.32
+    ],
+    [
+     14134,
+     -31160.32
+    ],
+    [
+     14134,
+     -28671
+    ],
+    [
+     12778,
+     -28671
+    ]
+   ],
+   "z0": 3000,
+   "z1": 5800,
+   "note": "stair landing and air shaft (apartment storey, assumed as GF)"
+  },
+  {
+   "id": "core-lobby-APT",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     14134,
+     -31160.32
+    ],
+    [
+     15928,
+     -31160.32
+    ],
+    [
+     15928,
+     -28671
+    ],
+    [
+     14134,
+     -28671
+    ]
+   ],
+   "z0": 3000,
+   "z1": 5800,
+   "note": "shared lobby, doors to both villas (apartment storey, assumed as GF)"
+  },
+  {
+   "id": "core-lift-APT",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     15928,
+     -31160.32
+    ],
+    [
+     17408,
+     -31160.32
+    ],
+    [
+     17408,
+     -28671
+    ],
+    [
+     15928,
+     -28671
+    ]
+   ],
+   "z0": 3000,
+   "z1": 5800,
+   "note": "X-marked box with a 0.80 door: most likely the lift (apartment storey, assumed as GF)"
+  },
+  {
+   "id": "sister-bath-APT",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     17408,
+     -31160.32
+    ],
+    [
+     19604,
+     -31160.32
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     17408,
+     -28671
+    ]
+   ],
+   "z0": 3000,
+   "z1": 5800,
+   "note": "the sister's GF bathroom (staggered with ours) (apartment storey, assumed as GF)"
+  },
+  {
+   "id": "core-shaft",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     12838,
+     -30271
+    ],
+    [
+     14074,
+     -30271
+    ],
+    [
+     14074,
+     -28671
+    ],
+    [
+     12838,
+     -28671
+    ]
+   ],
+   "z0": -3000,
+   "z1": 7000,
+   "note": "air shaft beside our party wall, all floors, open to the sky (PDF)"
+  },
+  {
+   "id": "entrance-steps",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     -123,
+     -31160.32
+    ],
+    [
+     3617,
+     -31160.32
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     -123,
+     -28671
+    ]
+   ],
+   "z0": -1200,
+   "z1": 0,
+   "note": "shared entrance steps from the street gate up to the core's GF entrance (PDF)"
+  },
+  {
+   "id": "neighbour-east",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     3617,
+     -17361
+    ],
+    [
+     22597,
+     -17361
+    ],
+    [
+     22597,
+     -4711.68
+    ],
+    [
+     3617,
+     -4711.68
+    ]
+   ],
+   "z0": -3000,
+   "z1": 9000,
+   "note": "neighbour, 12 m (BRIEF), plot mirrored ASSUMED"
+  },
+  {
+   "id": "neighbour-rear",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     34267,
+     -36240.32
+    ],
+    [
+     53247,
+     -36240.32
+    ],
+    [
+     53247,
+     -23591
+    ],
+    [
+     34267,
+     -23591
+    ]
+   ],
+   "z0": -3000,
+   "z1": 9000,
+   "note": "neighbour, 12 m (BRIEF), plot mirrored ASSUMED"
+  },
+  {
+   "id": "neighbour-rear-east",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     34267,
+     -17361
+    ],
+    [
+     53247,
+     -17361
+    ],
+    [
+     53247,
+     -4711.68
+    ],
+    [
+     34267,
+     -4711.68
+    ]
+   ],
+   "z0": -3000,
+   "z1": 9000,
+   "note": "neighbour, 12 m, ASSUMED"
+  },
+  {
+   "id": "neighbour-east-w0-z-3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     4647,
+     -17421
+    ],
+    [
+     6247,
+     -17421
+    ],
+    [
+     6247,
+     -17361
+    ],
+    [
+     4647,
+     -17361
+    ]
+   ],
+   "z0": -2100,
+   "z1": -600,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w1-z-3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     7797,
+     -17421
+    ],
+    [
+     8797,
+     -17421
+    ],
+    [
+     8797,
+     -17361
+    ],
+    [
+     7797,
+     -17361
+    ]
+   ],
+   "z0": -2100,
+   "z1": -600,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w2-z-3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     12437,
+     -17421
+    ],
+    [
+     14007,
+     -17421
+    ],
+    [
+     14007,
+     -17361
+    ],
+    [
+     12437,
+     -17361
+    ]
+   ],
+   "z0": -2100,
+   "z1": -600,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w3-z-3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     16307,
+     -17421
+    ],
+    [
+     17757,
+     -17421
+    ],
+    [
+     17757,
+     -17361
+    ],
+    [
+     16307,
+     -17361
+    ]
+   ],
+   "z0": -2100,
+   "z1": -600,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w4-z-3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     19967,
+     -17421
+    ],
+    [
+     21417,
+     -17421
+    ],
+    [
+     21417,
+     -17361
+    ],
+    [
+     19967,
+     -17361
+    ]
+   ],
+   "z0": -2100,
+   "z1": -600,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w0-z0",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     4647,
+     -17421
+    ],
+    [
+     6247,
+     -17421
+    ],
+    [
+     6247,
+     -17361
+    ],
+    [
+     4647,
+     -17361
+    ]
+   ],
+   "z0": 900,
+   "z1": 2400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w1-z0",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     7797,
+     -17421
+    ],
+    [
+     8797,
+     -17421
+    ],
+    [
+     8797,
+     -17361
+    ],
+    [
+     7797,
+     -17361
+    ]
+   ],
+   "z0": 900,
+   "z1": 2400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w2-z0",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     12437,
+     -17421
+    ],
+    [
+     14007,
+     -17421
+    ],
+    [
+     14007,
+     -17361
+    ],
+    [
+     12437,
+     -17361
+    ]
+   ],
+   "z0": 900,
+   "z1": 2400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w3-z0",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     16307,
+     -17421
+    ],
+    [
+     17757,
+     -17421
+    ],
+    [
+     17757,
+     -17361
+    ],
+    [
+     16307,
+     -17361
+    ]
+   ],
+   "z0": 900,
+   "z1": 2400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w4-z0",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     19967,
+     -17421
+    ],
+    [
+     21417,
+     -17421
+    ],
+    [
+     21417,
+     -17361
+    ],
+    [
+     19967,
+     -17361
+    ]
+   ],
+   "z0": 900,
+   "z1": 2400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w0-z3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     4647,
+     -17421
+    ],
+    [
+     6247,
+     -17421
+    ],
+    [
+     6247,
+     -17361
+    ],
+    [
+     4647,
+     -17361
+    ]
+   ],
+   "z0": 3900,
+   "z1": 5400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w1-z3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     7797,
+     -17421
+    ],
+    [
+     8797,
+     -17421
+    ],
+    [
+     8797,
+     -17361
+    ],
+    [
+     7797,
+     -17361
+    ]
+   ],
+   "z0": 3900,
+   "z1": 5400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w2-z3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     12437,
+     -17421
+    ],
+    [
+     14007,
+     -17421
+    ],
+    [
+     14007,
+     -17361
+    ],
+    [
+     12437,
+     -17361
+    ]
+   ],
+   "z0": 3900,
+   "z1": 5400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w3-z3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     16307,
+     -17421
+    ],
+    [
+     17757,
+     -17421
+    ],
+    [
+     17757,
+     -17361
+    ],
+    [
+     16307,
+     -17361
+    ]
+   ],
+   "z0": 3900,
+   "z1": 5400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w4-z3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     19967,
+     -17421
+    ],
+    [
+     21417,
+     -17421
+    ],
+    [
+     21417,
+     -17361
+    ],
+    [
+     19967,
+     -17361
+    ]
+   ],
+   "z0": 3900,
+   "z1": 5400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w0-z6000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     4647,
+     -17421
+    ],
+    [
+     6247,
+     -17421
+    ],
+    [
+     6247,
+     -17361
+    ],
+    [
+     4647,
+     -17361
+    ]
+   ],
+   "z0": 6900,
+   "z1": 8400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w1-z6000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     7797,
+     -17421
+    ],
+    [
+     8797,
+     -17421
+    ],
+    [
+     8797,
+     -17361
+    ],
+    [
+     7797,
+     -17361
+    ]
+   ],
+   "z0": 6900,
+   "z1": 8400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w2-z6000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     12437,
+     -17421
+    ],
+    [
+     14007,
+     -17421
+    ],
+    [
+     14007,
+     -17361
+    ],
+    [
+     12437,
+     -17361
+    ]
+   ],
+   "z0": 6900,
+   "z1": 8400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w3-z6000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     16307,
+     -17421
+    ],
+    [
+     17757,
+     -17421
+    ],
+    [
+     17757,
+     -17361
+    ],
+    [
+     16307,
+     -17361
+    ]
+   ],
+   "z0": 6900,
+   "z1": 8400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-east-w4-z6000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     19967,
+     -17421
+    ],
+    [
+     21417,
+     -17421
+    ],
+    [
+     21417,
+     -17361
+    ],
+    [
+     19967,
+     -17361
+    ]
+   ],
+   "z0": 6900,
+   "z1": 8400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-rear-w0-z-3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     34207,
+     -26521
+    ],
+    [
+     34267,
+     -26521
+    ],
+    [
+     34267,
+     -25071
+    ],
+    [
+     34207,
+     -25071
+    ]
+   ],
+   "z0": -2100,
+   "z1": -600,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-rear-w1-z-3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     34207,
+     -34760.32
+    ],
+    [
+     34267,
+     -34760.32
+    ],
+    [
+     34267,
+     -33310.32
+    ],
+    [
+     34207,
+     -33310.32
+    ]
+   ],
+   "z0": -2100,
+   "z1": -600,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-rear-w0-z0",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     34207,
+     -26521
+    ],
+    [
+     34267,
+     -26521
+    ],
+    [
+     34267,
+     -25071
+    ],
+    [
+     34207,
+     -25071
+    ]
+   ],
+   "z0": 900,
+   "z1": 2400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-rear-w1-z0",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     34207,
+     -34760.32
+    ],
+    [
+     34267,
+     -34760.32
+    ],
+    [
+     34267,
+     -33310.32
+    ],
+    [
+     34207,
+     -33310.32
+    ]
+   ],
+   "z0": 900,
+   "z1": 2400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-rear-w0-z3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     34207,
+     -26521
+    ],
+    [
+     34267,
+     -26521
+    ],
+    [
+     34267,
+     -25071
+    ],
+    [
+     34207,
+     -25071
+    ]
+   ],
+   "z0": 3900,
+   "z1": 5400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-rear-w1-z3000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     34207,
+     -34760.32
+    ],
+    [
+     34267,
+     -34760.32
+    ],
+    [
+     34267,
+     -33310.32
+    ],
+    [
+     34207,
+     -33310.32
+    ]
+   ],
+   "z0": 3900,
+   "z1": 5400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-rear-w0-z6000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     34207,
+     -26521
+    ],
+    [
+     34267,
+     -26521
+    ],
+    [
+     34267,
+     -25071
+    ],
+    [
+     34207,
+     -25071
+    ]
+   ],
+   "z0": 6900,
+   "z1": 8400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "neighbour-rear-w1-z6000",
+   "kind": "box",
+   "category": "Windows",
+   "pts": [
+    [
+     34207,
+     -34760.32
+    ],
+    [
+     34267,
+     -34760.32
+    ],
+    [
+     34267,
+     -33310.32
+    ],
+    [
+     34207,
+     -33310.32
+    ]
+   ],
+   "z0": 6900,
+   "z1": 8400,
+   "note": "neighbour window, position ASSUMED like ours"
+  },
+  {
+   "id": "street",
+   "kind": "box",
+   "category": "GenericModel",
+   "pts": [
+    [
+     -10373,
+     -39480.32
+    ],
+    [
+     -373,
+     -39480.32
+    ],
+    [
+     -373,
+     -20351
+    ],
+    [
+     -10373,
+     -20351
+    ]
+   ],
+   "z0": -1400,
+   "z1": -1200,
+   "note": "street at +-0.00, width ASSUMED"
+  },
+  {
+   "id": "beam-0-e0",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     3867,
+     -28671
+    ],
+    [
+     3867,
+     -23591
+    ]
+   ],
+   "z0": -600,
+   "z1": 0,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-0-e1",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     3617,
+     -28671
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -28421
+    ],
+    [
+     3617,
+     -28421
+    ]
+   ],
+   "z0": -600,
+   "z1": 0,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-0-e2",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -31311
+    ],
+    [
+     19854,
+     -31311
+    ],
+    [
+     19854,
+     -28671
+    ]
+   ],
+   "z0": -600,
+   "z1": 0,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-0-e3",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     19604,
+     -31311
+    ],
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -31061
+    ],
+    [
+     19604,
+     -31061
+    ]
+   ],
+   "z0": -600,
+   "z1": 0,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-0-e4",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -28671
+    ],
+    [
+     22074,
+     -28671
+    ],
+    [
+     22074,
+     -31311
+    ]
+   ],
+   "z0": -600,
+   "z1": 0,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-0-e5",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22324,
+     -28671
+    ],
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -28421
+    ],
+    [
+     22324,
+     -28421
+    ]
+   ],
+   "z0": -600,
+   "z1": 0,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-0-e6",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -23591
+    ],
+    [
+     22347,
+     -23591
+    ],
+    [
+     22347,
+     -28671
+    ]
+   ],
+   "z0": -600,
+   "z1": 0,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-0-e7",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22597,
+     -23591
+    ],
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -23841
+    ],
+    [
+     22597,
+     -23841
+    ]
+   ],
+   "z0": -600,
+   "z1": 0,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-3000-e0",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     3867,
+     -28671
+    ],
+    [
+     3867,
+     -23591
+    ]
+   ],
+   "z0": 2400,
+   "z1": 3000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-3000-e1",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     3617,
+     -28671
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -28421
+    ],
+    [
+     3617,
+     -28421
+    ]
+   ],
+   "z0": 2400,
+   "z1": 3000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-3000-e2",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -31311
+    ],
+    [
+     19854,
+     -31311
+    ],
+    [
+     19854,
+     -28671
+    ]
+   ],
+   "z0": 2400,
+   "z1": 3000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-3000-e3",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     19604,
+     -31311
+    ],
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -31061
+    ],
+    [
+     19604,
+     -31061
+    ]
+   ],
+   "z0": 2400,
+   "z1": 3000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-3000-e4",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -28671
+    ],
+    [
+     22074,
+     -28671
+    ],
+    [
+     22074,
+     -31311
+    ]
+   ],
+   "z0": 2400,
+   "z1": 3000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-3000-e5",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22324,
+     -28671
+    ],
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -28421
+    ],
+    [
+     22324,
+     -28421
+    ]
+   ],
+   "z0": 2400,
+   "z1": 3000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-3000-e6",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -23591
+    ],
+    [
+     22347,
+     -23591
+    ],
+    [
+     22347,
+     -28671
+    ]
+   ],
+   "z0": 2400,
+   "z1": 3000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-3000-e7",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22597,
+     -23591
+    ],
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -23841
+    ],
+    [
+     22597,
+     -23841
+    ]
+   ],
+   "z0": 2400,
+   "z1": 3000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-6000-e0",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -28671
+    ],
+    [
+     3867,
+     -28671
+    ],
+    [
+     3867,
+     -23591
+    ]
+   ],
+   "z0": 5400,
+   "z1": 6000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-6000-e1",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     3617,
+     -28671
+    ],
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -28421
+    ],
+    [
+     3617,
+     -28421
+    ]
+   ],
+   "z0": 5400,
+   "z1": 6000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-6000-e2",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     19604,
+     -28671
+    ],
+    [
+     19604,
+     -31311
+    ],
+    [
+     19854,
+     -31311
+    ],
+    [
+     19854,
+     -28671
+    ]
+   ],
+   "z0": 5400,
+   "z1": 6000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-6000-e3",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     19604,
+     -31311
+    ],
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -31061
+    ],
+    [
+     19604,
+     -31061
+    ]
+   ],
+   "z0": 5400,
+   "z1": 6000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-6000-e4",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22324,
+     -31311
+    ],
+    [
+     22324,
+     -28671
+    ],
+    [
+     22074,
+     -28671
+    ],
+    [
+     22074,
+     -31311
+    ]
+   ],
+   "z0": 5400,
+   "z1": 6000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-6000-e5",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22324,
+     -28671
+    ],
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -28421
+    ],
+    [
+     22324,
+     -28421
+    ]
+   ],
+   "z0": 5400,
+   "z1": 6000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-6000-e6",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22597,
+     -28671
+    ],
+    [
+     22597,
+     -23591
+    ],
+    [
+     22347,
+     -23591
+    ],
+    [
+     22347,
+     -28671
+    ]
+   ],
+   "z0": 5400,
+   "z1": 6000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  },
+  {
+   "id": "beam-6000-e7",
+   "kind": "box",
+   "category": "StructuralFraming",
+   "pts": [
+    [
+     22597,
+     -23591
+    ],
+    [
+     3617,
+     -23591
+    ],
+    [
+     3617,
+     -23841
+    ],
+    [
+     22597,
+     -23841
+    ]
+   ],
+   "z0": 5400,
+   "z1": 6000,
+   "note": "perimeter beam 250x600 ASSUMED section"
+  }
+ ],
+ "assumptions": [
+  "Floor-to-floor 3.00 m for the apartment above as for our ground floor.",
+  "Neighbour buildings are 12 m tall from their basement level (-1.80), four 3 m storeys, windows at our current window positions (sill 0.9, height 1.5) on every storey.",
+  "Neighbour plots mirror ours, set back from the shared fence as we are (PDF offsets).",
+  "Perimeter beams 250 x 600 mm under the GF, apartment and roof slabs.",
+  "The street-side strip (CAD, 1.83 m deep x 5.08 m, in front of the living room, beside the shared entrance) is part of our GF with no use yet; the old plan asked whether to open it to the villa or to the stair, or close it. The apartment repeats it. The old PDF draws it about 1.0-1.3 m deep; the CAD governs building geometry.",
+  "The shared entrance steps run from the street gate over the sunken front yard to the core's GF entrance.",
+  "Street width 10 m (context only). No fence between our yard and the sister's.",
+  "The north-east yard wall (NE column to the street fence, 1.40 m from the basement floor) is about 250 mm thick with its east face flush with the villa's east face (client 2026-09-26).",
+  "The lift position is read from an X-marked box with a door on both floors (OPEN: confirm it is a lift)."
+ ],
+ "questions": []
+}
