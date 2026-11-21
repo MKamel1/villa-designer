@@ -1,0 +1,17 @@
+{
+ "counts": {
+  "removed|stair-flight": 92,
+  "removed|M-wall-GF-33-finish": 126,
+  "removed|lounge-door": 128,
+  "removed|M-corner-GF-22": 32,
+  "removed|M-corner-east-B": 11,
+  "removed|M-corner-GF-19": 11,
+  "added|lounge-door": 128,
+  "added|M-wall-GF-33-finish": 126,
+  "added|stair-flight": 92,
+  "added|M-corner-east-B": 11,
+  "added|M-corner-GF-22": 32,
+  "added|M-corner-GF-19": 11
+ },
+ "unexplained": []
+}

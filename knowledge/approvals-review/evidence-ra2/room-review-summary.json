@@ -1,0 +1,153 @@
+[
+ {
+  "item": "cinema-desk",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "study-desk",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": -0.30000000002235183
+ },
+ {
+  "item": "study-adult-desk",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": -0.6240000000223518
+ },
+ {
+  "item": "ka-desk-1",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "ka-desk-2",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "kb-desk",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "pb-vanity",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "cinema-desk#chair-1",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "cinema-desk#chair-2",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "study-desk#chair-1",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": -0.30000000002235183
+ },
+ {
+  "item": "study-desk#chair-2",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": -0.30000000002235183
+ },
+ {
+  "item": "study-adult-desk#chair-1",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": -0.6240000000223518
+ },
+ {
+  "item": "ka-desk-1#chair-1",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "ka-desk-2#chair-1",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "kb-desk#chair-1",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 2,
+  "checks_ok": 2,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": 0.0
+ },
+ {
+  "item": "pb-bed",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 4,
+  "checks_ok": 4,
+  "candidate_worse_than_baseline": 0,
+  "min_candidate_minus_required": -0.1820000000152504
+ },
+ {
+  "item": "JOINT",
+  "ok": true,
+  "relative_findings": 0,
+  "checks": 11,
+  "checks_ok": 11
+ }
+]

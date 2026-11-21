@@ -29,11 +29,11 @@ class Round3BuilderContract(unittest.TestCase):
     def test_real_spec_round_trip_and_counts(self):
         self.assertEqual(len(SPEC["furniture"]), 72)  # gwc-shower: the new guest open wet zone belongs in Revit
         self.assertIn("gwc-shower", {item["mark"] for item in SPEC["furniture"]})
-        self.assertEqual(len(DETAILS), 75)   # round 3b: open bays, sides, shelves, bike hooks; stored contents excluded
+        self.assertEqual(len(DETAILS), 69)   # round 3b: open bays, sides, shelves, bike hooks; stored contents excluded (75 before RA2 trimmed stair-flight-store to x<=6.5: six fewer bay details)
         self.assertEqual(sum(d["mark"].startswith("SWING-") for d in DETAILS), 6)
         self.assertEqual(sum(d["mark"].startswith("DLN-") for d in DETAILS), 2)
         self.assertEqual(sum("-module-" in d["mark"] for d in DETAILS), 8)
-        self.assertEqual(sum("-body-" in d["mark"] for d in DETAILS), 59)   # 51 + 8 new joinery parts (round 3b)
+        self.assertEqual(sum("-body-" in d["mark"] for d in DETAILS), 53)   # 51 + 8 new joinery parts (round 3b); 59 before RA2 trimmed stair-flight-store
         self.assertFalse(any("curtain" in d["mark"].lower() for d in DETAILS))
         bath = next(d for d in F3.round2_elements(SPEC) if d["mark"] == "pe-bath-screen")
         self.assertIn("transmittance 0.91; ior 1.52", bath["comments"])
