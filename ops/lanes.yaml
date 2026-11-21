@@ -219,6 +219,7 @@ lanes:
     - knowledge/approvals-review/**
     - knowledge/exposure-groups.json
     - scripts/verify.py
+    - tests/test_villa_lighting.py
     - docs/lanes/INT*.md
     - docs/lessons/INT2.md
   R:   # sourcing
