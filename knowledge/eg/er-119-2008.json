@@ -1,0 +1,105 @@
+{
+  "note": "INFORMATIVE ONLY (client 2026-11: Egyptian compliance is not the bar). Status unverified: English translation not checked against the Arabic Gazette. Never a gate.",
+  "cards": [
+    {
+      "id": "er119-art93",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (93), printed p.135",
+      "quote": "The minimum clear internal height of each floor, measured from the finished floor level to the underside of its exposed ceiling, shall be 2.70 metres on all floors. Such height may be reduced to 2.30 metres in respect of entrances, internal corridors, bathrooms, laundry rooms, building guards' rooms and similar spaces, as well as sloping parts of upper ceilings, provided that such sloping parts do not exceed 25% of the area of the room.",
+      "value": "2.70 m (2.30 m for entrances, corridors, bathrooms, laundry; sloping parts <= 25 % of room area)",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art94",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (94), printed p.136",
+      "quote": "The internal area of any room of the building or any of its utilities, or any dimension thereof, shall not be less than the following: Residential rooms 7.5 m2 / 2.5 m; Toilet 0.80 m2 / 0.80 m; Kitchens 3.00 m2 / 1.50 m; Bathrooms 1.50 m2 / 1.20 m",
+      "value": "habitable 7.5 m2 and 2.5 m; kitchen 3.0 m2 and 1.5 m; bathroom 1.5 m2 and 1.2 m; toilet 0.8 m2 and 0.8 m",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art96-openings",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (96), printed p.136-137",
+      "quote": "The total area of the opening shall not be less than the following: 8% of the floor area of residential rooms. 10% of the floor area of any building utility, including bathroom, kitchen, toilet, stairwell on the floor, and the like. ... the area of a single opening shall not be less than half a square metre for residential rooms, offices and stairwells, and not less than one quarter of a square metre for building utilities.",
+      "value": "8 % (habitable) / 10 % (utility) of floor area; single opening >= 0.5 m2 / 0.25 m2",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art96-door-stair",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (96), printed p.137",
+      "quote": "Where there is a door opening directly onto a stair flight, a distance of not less than one metre must separate them.",
+      "value": "1.0 m",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art96-sill",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (96), printed p.137",
+      "quote": "The sill height of windows shall not be less than 0.9 metre, except where balconies or terraces exist in front of such windows from the outside, or where fall-prevention barriers, namely railings, exist at a height of not less than 0.9 metre.",
+      "value": "0.9 m",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art97",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (97), printed p.138",
+      "quote": "Residential rooms and offices 80 cm; Kitchens, bathrooms and toilets 70 cm",
+      "value": "80 cm rooms; 70 cm kitchen, bath, WC",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art98",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (98), printed p.139",
+      "quote": "Residential rooms and offices | Internal | 0.25H or 3 m, whichever is greater | 9 m2 or the square of one-quarter of the height, whichever is greater. Bathroom, kitchen, toilet, staircase, places allocated for washing and storage | External | 2.5 m. Each lightwell or open courtyard must be provided with the necessary installations for rainwater drainage.",
+      "value": "min dimension max(0.25H, 3 m); area max(9 m2, (H/4)^2); utility 2.5 m",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art100",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (100), printed p.140",
+      "quote": "Clear length of the step 110 cm if the number of units on the floor does not exceed four units. Tread shall not be less than 27 cm. Riser shall not exceed 17 cm. Maximum number of consecutive steps 14 steps, followed by a landing whose width shall not be less than four treads. Minimum height of the railing 90 cm. The minimum clear height above any step must be 2.1 metres.",
+      "value": "width 110 cm; tread 27 cm; riser 17 cm; 14 steps then landing; rail 90 cm; headroom 2.1 m",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art103-railing",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (103), printed p.142",
+      "quote": "The height of the railings of terraces, balconies and open staircases shall not be less than 0.9 metre for the first five floors above pavement surface level. ... The railing must be designed in a manner that prevents the fall of objects having diameters of 10 cm or more.",
+      "value": "0.9 m; objects >= 10 cm must not pass",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    },
+    {
+      "id": "er119-art106",
+      "document": "Executive Regulations of Law 119/2008, unofficial Andersen English translation",
+      "edition": "Law No. 119 of 2008 PDF (Andersen, eg.andersen.com); read 2026-11-20 (205 pp); NOT checked against the Arabic Gazette",
+      "locator": "ER Article (106), printed p.143",
+      "quote": "Compliance with the provisions of the Egyptian Code for Design Principles and Execution Requirements for the Protection of Structures from Fire Hazards shall be required in the construction of buildings to be licensed, except for the following: Residential buildings, including apartments and villas, to which the following apply: The floor level of the highest storey in the building does not exceed 16 metres from street level. The area of any storey, including the basement, does not exceed 400 m2. The floor level of the basement, if any, is not more than three metres below street level.",
+      "value": "highest storey <= 16 m; every storey incl. basement <= 400 m2; basement <= 3 m below street",
+      "status": "unverified",
+      "url_or_path": "https://eg.andersen.com/wp-content/uploads/2026/08/Law-No.-119-of-2008.pdf"
+    }
+  ]
+}
