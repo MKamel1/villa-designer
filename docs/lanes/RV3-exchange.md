@@ -127,7 +127,7 @@ finest grain: every other table is a sum of it), reconciliation (15). Summary D1
 | stair | 1; 16 treads (4.48 m2 in plan), 17 risers, 15 riser bars |
 | luminaires / furniture | 142 (984.8 W total) / 81, by type and room |
 
-Layers: 99 layer rows have a thickness and a volume; 66 finish rows have **no authored thickness** and carry an area and a blank
+Layers: 46 layer rows have a thickness and a volume; 66 finish rows have **no authored thickness** and carry an area and a blank
 volume. Reconciliation (all PASS): element count equals the model (582 exported kinds); room areas against the model and against
 the SC1 room schedule (0.005 m2 net, 0.009 m2 gross, schedule rounds to 0.01); door and window counts against the schedules;
 wall core and finish layer areas against face area times layers per side computed a second way; wall and slab volumes by layer
