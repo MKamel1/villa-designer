@@ -408,7 +408,7 @@ def design(lay=None):
     sh = fp["fb-shower"]
     add("DL", "family-bath", (sh[0] + sh[2]) / 2, (sh[1] + sh[3]) / 2, why="shower (wet-rated); L6b: DL",
         card="ies-res-shower-50", zone="shower:task")
-    _sconces(add, "family-bath", fp["fb-basin"], lay, rc)
+    _sconces(add, "family-bath", fp["fb-basin"], lay, rc, counter=False)   # L6b: the two sconces light the basin; the counter downlight needed a 15 % driver
     bb = fp["fb-basin"]
     strip("TOE", "family-bath", (bb[2] + 0.02, bb[1] + 0.03), (bb[2] + 0.02, bb[3] - 0.03), 0.30, (0.3, 0, -1),
           level="GF", why="glow under the basin: night light")
@@ -526,7 +526,7 @@ def _gf_opening(lay):
     return RS.build(lay)["gf_opening"]
 
 
-def _sconces(add, room, basin, lay, rc, vertical=False):
+def _sconces(add, room, basin, lay, rc, vertical=False, counter=True):
     """Two sconces either side of the mirror over a basin on a wall, 0.95 m apart at 1.60 m AFF (card
     rid-vanity-sconces-914: 914-1016 mm apart, eye level)."""
     kind = "VSCONCE" if vertical else "SCONCE"
@@ -539,14 +539,15 @@ def _sconces(add, room, basin, lay, rc, vertical=False):
     z = LEVEL_Z[lv] + 1.60
     # Eh on the counter needs light from above: a task downlight 0.3 m in front of the mirror wall (the sconces
     # give the face its vertical light, Ev)
-    if abs(x0 - r[0]) < 0.05 or abs(x1 - r[2]) < 0.05:
-        dx = r[0] + 0.35 if abs(x0 - r[0]) < 0.05 else r[2] - 0.35
-        add("DL", room, dx, (y0 + y1) / 2, why="basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
-            card="ies-res-vanity-grooming-300", level=lv, zone="basin-task:task")
-    else:
-        dy = r[1] + 0.35 if abs(y0 - r[1]) < 0.05 else r[3] - 0.35
-        add("DL", room, (x0 + x1) / 2, dy, why="basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
-            card="ies-res-vanity-grooming-300", level=lv, zone="basin-task:task")
+    if counter:
+        if abs(x0 - r[0]) < 0.05 or abs(x1 - r[2]) < 0.05:
+            dx = r[0] + 0.35 if abs(x0 - r[0]) < 0.05 else r[2] - 0.35
+            add("DL", room, dx, (y0 + y1) / 2, why="basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
+                card="ies-res-vanity-grooming-300", level=lv, zone="basin-task:task")
+        else:
+            dy = r[1] + 0.35 if abs(y0 - r[1]) < 0.05 else r[3] - 0.35
+            add("DL", room, (x0 + x1) / 2, dy, why="basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
+                card="ies-res-vanity-grooming-300", level=lv, zone="basin-task:task")
     if abs(x0 - r[0]) < 0.05 or abs(x1 - r[2]) < 0.05:           # basin against an x wall: mirror on that wall
         wx = r[0] + wall_offset if abs(x0 - r[0]) < 0.05 else r[2] - wall_offset
         cy = (y0 + y1) / 2
