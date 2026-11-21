@@ -2,18 +2,18 @@
 
 Supply 220/380 V 50 Hz, TT. Diversity: Whitfield Table 6.2 household column (EL-WHIT-T62-DIV); socket radials are counted at their breaker rating.
 
-- Connected load (sum of Ib, single-phase equivalent at 220 V): 137.4 kVA
-- Maximum demand after diversity: **77.6 kVA** = 352.6 A single-phase equivalent
-- Worst-phase line current on three phases: 117.6 A; incomer 125 A
-- Supply recommendation: **three-phase**. single-phase equivalent demand 353 A is above the 63 A policy limit for one phase; three phases give a worst-phase line current of 118 A. policy threshold (ours): above a 63 A single-phase service the villa is recommended on three phases; the utility's actual single-phase limit is not verified
+- Connected load (sum of Ib, single-phase equivalent at 220 V): 137.2 kVA
+- Maximum demand after diversity: **77.4 kVA** = 352.0 A single-phase equivalent
+- Worst-phase line current on three phases: 117.5 A; incomer 125 A
+- Supply recommendation: **three-phase**. single-phase equivalent demand 352 A is above the 63 A policy limit for one phase; three phases give a worst-phase line current of 117 A. policy threshold (ours): above a 63 A single-phase service the villa is recommended on three phases; the utility's actual single-phase limit is not verified
 
 ## By board (own diversified demand)
 
 | board | circuits | demand kVA | worst-phase line A |
 |---|---|---|---|
 | MDB | 6 | 12.1 | - |
-| DB-B | 32 | 42.2 | 71.8 |
-| DB-GF | 19 | 27.9 | 48.8 |
+| DB-B | 32 | 42.1 | 72.3 |
+| DB-GF | 20 | 27.8 | 48.3 |
 
 ## By category (installation)
 
@@ -22,7 +22,7 @@ Supply 220/380 V 50 Hz, TT. Diversity: Whitfield Table 6.2 household column (EL-
 | ac | 8 | 68.2 | 68.2 | 15.0 |
 | cooker | 1 | 13.6 | 11.1 | 2.4 |
 | ev | 1 | 33.6 | 33.6 | 7.4 |
-| lighting | 6 | 8.7 | 5.7 | 1.3 |
+| lighting | 7 | 7.6 | 5.0 | 1.1 |
 | sockets | 26 | 424.0 | 181.6 | 40.0 |
 | standard | 12 | 51.5 | 27.4 | 6.0 |
 | thermo_wh | 3 | 25.0 | 25.0 | 5.5 |
@@ -33,10 +33,10 @@ The carded rule (100 % of the largest circuit + 40 % of every other) is applied 
 
 | socket current factor | demand kVA | 1-ph equivalent A | worst-phase 3-ph line A |
 |---|---|---|---|
-| 1.0 | 77.6 | 352.6 | 117.5 |
-| 0.5 | 57.6 | 261.8 | 87.3 |
-| 0.25 | 47.6 | 216.4 | 72.1 |
+| 1.0 | 77.4 | 352.0 | 117.3 |
+| 0.5 | 57.5 | 261.2 | 87.1 |
+| 0.25 | 47.5 | 215.8 | 71.9 |
 
 ## Phases (sum of Ib)
 
-L1 208.3 A, L2 208.2 A, L3 208.1 A
+L1 207.6 A, L2 208.1 A, L3 207.9 A

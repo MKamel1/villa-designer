@@ -123,8 +123,11 @@ def _published_zones(lums: list[Luminaire]) -> list[contracts.LightingZone] | No
         return None
     raw = json.loads(ZONES_JSON.read_text(encoding="utf-8"))
     raw = raw["zones"] if isinstance(raw, dict) else raw
-    zs = [contracts.LightingZone(z["id"], z["room"], z["layer"], tuple(z["luminaire_ids"]), float(z["watts"]), z["dimming"]) for z in raw]
     byid = {l.id: l for l in lums}
+    # L6b's zone watts are the commissioned (dimmed) driver output; a set-point is programming, not a limit, so circuits are sized on
+    # the rated luminaire watts when those are higher (upper bound). EA13 then equals circuit W = sum of luminaire W.
+    zs = [contracts.LightingZone(z["id"], z["room"], z["layer"], tuple(z["luminaire_ids"]),
+                                 max(float(z["watts"]), round(sum(byid[i].watts for i in z["luminaire_ids"] if i in byid), 2)), z["dimming"]) for z in raw]
     for z in zs:
         for i in z.luminaire_ids:
             if i in byid:
@@ -207,7 +210,10 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
         flags.append(f"lighting zones are PROVISIONAL: knowledge/lighting/zones-d1.json (lane L6b) was not available; {len(zones)} zones derived as one per room and layer")
     else:
         zones = pub
-        flags.append(f"lighting zones from knowledge/lighting/zones-d1.json (lane L6b): {len(zones)} zones")
+        _raw = json.loads(ZONES_JSON.read_text(encoding="utf-8"))
+        raw_w = {z["id"]: float(z["watts"]) for z in (_raw["zones"] if isinstance(_raw, dict) else _raw)}
+        up = sum(1 for z in zones if z.watts > raw_w[z.id] + 0.05)
+        flags.append(f"lighting zones from knowledge/lighting/zones-d1.json (lane L6b): {len(zones)} zones; {up} sized on rated luminaire W above the published commissioned W")
 
     # equipment (assumed)
     eq = json.loads(Path(equipment_path).read_text(encoding="utf-8"))
