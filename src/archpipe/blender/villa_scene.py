@@ -2196,7 +2196,8 @@ def main():
     ap.add_argument("--measure-exposure-groups", action="store_true")
     args = ap.parse_args(sys.argv[sys.argv.index("--")+1:] if "--" in sys.argv else [])
     with open(args.scene, encoding="utf-8") as f:
-        render(json.load(f), args)
+        from archpipe.blender.element_ids import without_ids
+        render(without_ids(json.load(f)), args)
 
 
 if __name__ == "__main__":
