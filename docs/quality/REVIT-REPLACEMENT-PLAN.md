@@ -62,6 +62,36 @@ labelled secondary on the site plan.
 **Lead decisions (routine):** plans drawn north-up in the client convention; paper and scale set per
 sheet (A3 default; larger only where a drawing needs it, e.g. a full-length section).
 
+## Additions from RV3 (exchange/BIM capabilities and model gaps)
+
+Model gaps Revit used to fill implicitly (these block both drawings and exchange, so they go to the
+design model first):
+
+| # | Gap | Decision (draft) |
+|---|---|---|
+| A9 | No floor slabs for B and GF in the model | Replace now (model) |
+| A10 | No layered wall/floor/ceiling build-ups or materials as elements (Revit assemblies) | Replace now (model; build-ups exist in knowledge/finish-build-ups.json) |
+| A11 | Ceilings and floor finishes not separate elements | Replace now (model) |
+| A12 | Shared types (door/window/furniture/luminaire types) instead of one-off occurrences | Replace now (model + IFC types) |
+| A13 | Door handing / operation not authored | Replace now (model; also needed by electrical switch placement and drawings) |
+| A14 | Sizes missing for 106 of 142 luminaires and 28 dressing items; plant heights | Replace now (model) |
+| A15 | Stair-void guard return edge has no position | Replace now (model) |
+| A16 | Georeferencing: survey point, project base point, true north vs client north | Replace later (needs the real plot survey) |
+| A17 | Extra levels (apartment L1, roof, roof garden) as storeys | Replace now as context levels |
+
+Exchange capabilities:
+
+| # | Capability | Decision (draft) |
+|---|---|---|
+| E3 | IFC types with shared property sets; material layer sets | Replace now |
+| E4 | Standard property sets and quantities (Pset_*Common, Qto) for walls, doors, slabs, spaces | Replace now |
+| E5 | IfcGrid; space boundaries (IfcRelSpaceBoundary) | Replace now |
+| E6 | Classification codes (Uniclass) | Replace later (needed when a contractor/QS joins) |
+| E7 | Discipline exports: architecture, interior, lighting, electrical (circuits as distribution systems) on a shared origin | Replace now (architecture + lighting + electrical) |
+| E8 | BCF issue exchange, IDS delivery spec, revision/delta comparison between exports | Replace later |
+| E9 | Design options (D1/D2) as separate IFCs | Replace later |
+| E10 | Native .rvt/.dwg | Not producible without Autodesk/ODA tools; DXF + IFC instead. Revisit only if a recipient insists |
+
 ## To complete after RV1 reports
 - Reconcile both lists; mark gaps.
 - Per row: decision, owner lane (RV1 checks / RV2 2D / RV3 exchange / existing lane), equivalence proof
