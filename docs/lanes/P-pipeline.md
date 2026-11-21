@@ -97,3 +97,16 @@ rerun with `--baseline B` after the change; exit 0 means every byte equal.
 - Tests on the workstation: `tests/pipeline`, `tests/model/test_passes.py`, `tests/test_villa_render_scene.py`,
   `tests/test_scene_build_benchmark.py`, `tests/test_scene_build_performance.py`: 55 passed.
 - Smoke render through the queue: see the section below.
+
+## Smoke render through the queue (workstation, 2026-11-21)
+
+Scene built on the workstation (`--write-scene`, above), then one view (`v08-cinema`, 32 samples, 800x500) submitted
+with `python scripts/workstation.py submit --gpu ...` running Blender 4.5.14 (`~/opt/blender/blender`) on
+`src/archpipe/blender/villa_scene.py`: state `done`, exit 0, 218.7 s, wrote `/tmp/laneP-render/v08-cinema.png`
+(545,663 bytes; draft quality, not a gate render). Two things to know when submitting from Git Bash on Windows:
+
+- Git Bash rewrites `--cwd /home/...` to `C:/Program Files/Git/home/...` and the job dies in `waiting_lock`; prefix the
+  command with `MSYS_NO_PATHCONV=1`.
+- `write()` only generates the generic IES files; the real ones (`ies/iguzzini/*.ies`) are copied from
+  `out/villa/render-d1/ies` of the main checkout beside the scene (`scripts/villa_render.py` pushes them itself; its
+  default path builds the scene locally, so on Windows it hits the guard above; use the workstation-built scene).
