@@ -1,12 +1,13 @@
 """Lighting control zones (D1-LIGHT.ifc) and the electrical file (D1-ELEC.ifc), on the shared origin of ifc.py.
 
 Inputs are the committed electrical-lane outputs in tests/electrical/d1/ (device_list.csv, board_schedule_*.csv) and the
-board positions from archpipe.electrical.villa. `knowledge/lighting/zones-d1.json` does not exist on origin (checked on
-every branch), so the control zones are the electrical lane's provisional zones: they are labelled provisional.
+board positions from archpipe.electrical.villa. Control zones are L6b's published `knowledge/lighting/zones-d1.json` (layer, dimming
+and watts are read from it); if that file is absent the electrical lane's provisional `Z-PROV-*` zones are used and labelled so.
 """
 from __future__ import annotations
 
 import csv
+import json
 import math
 from pathlib import Path
 
@@ -48,17 +49,23 @@ def light_zones(b: "I._B", directory: Path | None = None) -> int:
         if not r["serves"]:
             raise C.ExchangeError([f"{r['id']}: luminaire has no control zone in device_list.csv"])
         zones.setdefault(r["serves"], []).append(r)
+    from ..electrical import villa
+    pub = {}
+    if villa.ZONES_JSON.exists():
+        raw = json.loads(villa.ZONES_JSON.read_text(encoding="utf-8"))
+        pub = {q["id"]: q for q in (raw["zones"] if isinstance(raw, dict) else raw)}
     for z, rs in sorted(zones.items()):
         g = b.api.root.create_entity(b.f, ifc_class="IfcGroup", name=z)
         g.GlobalId = I.guid(f"zone-{z}")
         g.ObjectType = "LightingControlZone"
         b.api.group.assign_group(b.f, products=[b.ent[r["id"]] for r in rs], group=g)
         b._pset(g, "ArchPipe_ControlZone", dict(
-            Zone=z, Room=rs[0]["room"], Level=rs[0]["level"], Layer=rs[0]["kind"], Members=len(rs),
+            Zone=z, Room=rs[0]["room"], Level=rs[0]["level"], Layer=pub[z]["layer"] if z in pub else rs[0]["kind"], Members=len(rs),
+            **({"Dimming": pub[z]["dimming"]} if z in pub else {}),
             Circuits=", ".join(sorted({r["circuit"] for r in rs if r["circuit"]})),
             TotalWatts=round(sum(float(b.by[r["id"]].params.get("watts") or 0) for r in rs), 2),
-            Basis="provisional zone from the electrical lane (device_list.csv 'serves'); knowledge/lighting/zones-d1.json "
-                  "does not exist, so no authored control scheme is available"))
+            Basis=("control zone published by lane L6b (knowledge/lighting/zones-d1.json)" if z in pub else
+                   "provisional zone from the electrical lane (device_list.csv 'serves'); no L6b zone of this id")))
     return len(zones)
 
 
