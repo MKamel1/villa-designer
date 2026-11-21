@@ -42,15 +42,15 @@ The JSON file is `{schema: "archpipe-model/1", contract, design, units: "mm", le
 - Plants: species, bed, layer, spread. Gardens: beds, paths and the sunken north patio (`params.sunken`).
 - `context`: neighbours, fences, core, street, apartment (villa_env boxes; not ours, for sun and sight-line studies).
 
-## Coverage (D1 snapshot, 515 elements)
+## Coverage (D1 snapshot, 517 elements)
 
 | kind | count | source |
 |---|---|---|
 | room | 30 | `villa_r11.design` rooms (B 17, GF 13) |
 | wall | 36 | `revit_spec.build` walls |
 | door / window | 18 / 8 | `revit_spec.build` doors, windows |
-| stair / railing | 1 / 5 | `revit_spec` stair boxes, balustrades, ramp-edge rails |
-| slab | 3 | ramp, deck, extension roof |
+| stair / railing | 1 / 6 | `revit_spec` stair boxes, balustrades, ramp-edge rails; GF stair-void guard (scene detail) |
+| slab | 4 | ramp, deck, extension roof, GF front terrace |
 | column / beam | 9 / 24 | `villa_env` |
 | context | 58 | `villa_env` |
 | furniture | 80 | `villa_furnish.layout` (52) + `villa_render.props` dressing (28) |
@@ -63,10 +63,9 @@ The JSON file is `{schema: "archpipe-model/1", contract, design, units: "mm", le
 - Furniture, luminaires and plants come from their generators, not from the final built scene. The ~14 build patch
   passes (C4 mounting moves, WC slides, family relocation, furniture stage 2, bed replacement, garden swing/G4d/G6) are
   not reflected: small positional moves, replaced assets (real glTF products for the stand-ins) and garden structures
-  (pergola, trough, swing, uplights) are missing from the model. Phase 2 moves them into data.
+  (pergola, trough, swing, uplights) are missing from the model. See L2-passes.md.
 - No `device` elements (sockets, switches): L7 owns placement. No separate `slab` per floor and no ceilings; the
   false-ceiling and cove heights are room parameters.
-- The GF stair-void guard (built in `villa_render`, "required, not yet in the Revit model") is not a railing element.
 - `windows` lists only the spec's windows; glazed doors are doors. `host` is geometric (nearest wall), not a Revit id.
 - Plant height is not recorded (the garden plan has spread only). Furniture `product_id` is empty where the layout
   uses a procedural stand-in.
