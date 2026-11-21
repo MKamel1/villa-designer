@@ -32,7 +32,10 @@ IEC 60364-4-41 specifies the maximum operating time of protective devices used i
  For all other circuits, the maximum disconnection time is fixed to 5 s. This limit enables selectivity between protective devices installed on distribution circuits
 Note: The use of RCDs may be necessary on TN-earthed systems. Use of RCDs on TN-C-S systems means that the protective conductor and the neutral conductor must (evidently) be separated upstream of the RCD. This separation is commonly made at the service entrance.
 ROW: Uo[a] (V AC) | T (s)
-ROW: 50 400 | 0.1
+ROW: 50 < Uo ≤ 120 | 0.8
+ROW: 120 < Uo ≤ 230 | 0.4
+ROW: 230 < Uo ≤ 400 | 0.2
+ROW: Uo > 400 | 0.1
 [a]  Uo is the nominal phase to earth voltage
 Fig. F19: Maximum disconnecting times in TN system for final circuits not exceeding 63 A with one or more socket-outlets, and 32 A supplying only fixed connected current-using equipment
  Protection by means of circuit breaker 

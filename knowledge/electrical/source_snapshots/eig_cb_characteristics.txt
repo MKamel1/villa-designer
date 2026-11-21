@@ -74,7 +74,10 @@ The disconnection (isolation) performance and
 The correct operation of the overload protection have not been impaired by the test.
 Fig. H31 – Icu related to power factor (cosφ) of fault-current circuit (IEC 60947-2)
 ROW: Icu | cosφ
-ROW: 6 kA 
+ROW: 6 kA < Icu ≤ 10 kA | 0.5
+ROW: 10 kA < Icu ≤ 20 kA | 0.3
+ROW: 20 kA < Icu ≤ 50 kA | 0.25
+ROW: 50 kA < Icu | 0.2
  Notes 
 ^ 1 2 3 Current-level setting values which refer to the current-operated thermal and “instantaneous” magnetic tripping devices for over-load and short-circuit protection.
 Related technical guides

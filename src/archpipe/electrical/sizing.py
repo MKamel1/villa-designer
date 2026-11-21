@@ -73,8 +73,11 @@ def ca_factor(ambient_c: float, insulation: str = "PVC") -> float:
         return 1.0
     rows = data.table("ca_air_iec_b5214")["rows"]
     keys = sorted(int(k) for k in rows)
-    k = next((x for x in keys if x >= ambient_c), keys[-1])      # next hotter row: conservative
-    return rows[str(k)][0 if insulation == "PVC" else 1]
+    k = next((x for x in keys if x >= ambient_c), None)          # next hotter row: conservative
+    if k is None:
+        return 0.0                                               # hotter than the table: no rating
+    v = rows[str(k)][0 if insulation == "PVC" else 1]
+    return 0.0 if v is None else v                               # source prints '-': insulation cannot be used there
 
 
 def cg_factor(n: int) -> float:

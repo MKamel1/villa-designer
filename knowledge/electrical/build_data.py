@@ -76,6 +76,11 @@ def parse_g30() -> dict:
     return out
 
 
+def parse_ca() -> dict:
+    rows = _rows("eig_general_method_cable_sizing.txt", "Fig. G12", "Fig. G13")
+    return {r[0]: [_num(r[1]), _num(r[2])] for r in rows if re.fullmatch(r"\d+", r[0])}
+
+
 def card(id, document, edition, locator, quote, value, status, url):
     return dict(id=id, document=document, edition=edition, locator=locator, quote=quote,
                 value=value, status=status, url_or_path=url)
@@ -159,13 +164,13 @@ def cards() -> list[dict]:
         "std", sp("eig_diversity.txt") + " ; " + WB + "Estimation_of_actual_maximum_kVA_demand"))
     # ---- protection ----
     C.append(card("EL-IEC-4-41-TT-F13", EIG + " reproducing IEC 60364-4-41", EIGED, "Fig. F13 (page TT_system_-_Practical_aspects)",
-        "Fig. F13 – Maximum disconnecting times in TT system for final circuits not exceeding 63 A with one or more socket-outlets, and 32 A supplying only fixed connected current-using equipment",
+        "120 < Uo ≤ 230 | 0.2",
         "120 V < Uo <= 230 V: 0.2 s (TT final circuits); other circuits 1 s",
-        "std", sp("eig_tt_practical.txt") + " ; " + sp("eig_fig_F13_F19_raw.txt") + " ; " + WB + "TT_system_-_Practical_aspects"))
+        "std", sp("eig_tt_practical.txt") + " ; " + WB + "TT_system_-_Practical_aspects"))
     C.append(card("EL-IEC-4-41-TN-F19", EIG + " reproducing IEC 60364-4-41", EIGED, "Fig. F19 (page Automatic_disconnection_for_TN_systems)",
-        "the maximum disconnection time given in Fig. F19 is 0.4 s",
+        "120 < Uo ≤ 230 | 0.4",
         "120 V < Uo <= 230 V: 0.4 s (TN final circuits); other circuits 5 s",
-        "std", sp("eig_tn_disconnection.txt") + " ; " + sp("eig_fig_F13_F19_raw.txt") + " ; " + WB + "Automatic_disconnection_for_TN_systems"))
+        "std", sp("eig_tn_disconnection.txt") + " ; " + WB + "Automatic_disconnection_for_TN_systems"))
     C.append(card("EL-IEC-RCD-TIMES-F14", EIG, EIGED, "Fig. F14",
         "Fig. F14 – Maximum operating time of RCDs (in seconds)",
         "Domestic instantaneous RCD: 1xIdn 0.3 s, 2x 0.15 s, 5x 0.04 s",
@@ -205,19 +210,19 @@ def cards() -> list[dict]:
         "std", sp("select_bs7671_701_pocket_guide.txt")))
     # ---- worked examples (expected values) ----
     C.append(card("EL-EX-WHIT-6.1", WHIT, WHED, "Example 6.1 (page Book/6.2.3)",
-        "Total single phase current",
+        "Total single phase current demand = | 486.2 A",
         "Shop loads, 415 V 3-phase: total single-phase current demand 486.2 A; three-phase line current 162 A",
         "sourced", sp("whitfield_Book_6_2_3_htm.txt") + " ; " + TLC + "Book/6.2.3.htm"))
     C.append(card("EL-EX-WHIT-6.2", WHIT, WHED, "Example 6.2 (page Book/6.5.2)",
-        "A 30 A protective device is likely to be chosen.",
+        "total = | 29.5 A",
         "Cooker 14 kW at 240 V with socket: demand 29.5 A",
         "sourced", sp("whitfield_Book_6_5_2_htm.txt") + " ; " + TLC + "Book/6.5.2.htm"))
     C.append(card("EL-EX-WHIT-4.1", WHIT, WHED, "Example 4.1 (page Book/4.3.9)",
-        "is not quite large enough",
+        "so 10 mm²with a current rating of 43 A is indicated",
         "3 kW immersion heater 240 V, 15 A MCB, 50 C roof space, 8 bunched circuits through 50 mm insulation: 6 mm2 (32 A) too small, 10 mm2 (43 A); two bunches of four: 6 mm2",
         "sourced", sp("whitfield_Book_4_3_9_htm.txt") + " ; " + TLC + "Book/4.3.9.htm"))
     C.append(card("EL-EX-WHIT-4.5", WHIT, WHED, "Example 4.5 (page Book/4.3.11)",
-        "Maximum permissible volt drop is 4% of 240 V",
+        "7.3 x 12.5 x 14 V = 1.28 V",
         "Example 4.1 cable: 7.3 mV/A/m x 12.5 A x 14 m = 1.28 V; maximum length 105 m",
         "sourced", sp("whitfield_Book_4_3_11_htm.txt") + " ; " + TLC + "Book/4.3.11.htm"))
     C.append(card("EL-EX-EIG-A12", EIG, EIGED, "Example under Fig. A11/A12",
@@ -274,10 +279,8 @@ def tables() -> dict:
     T["bs7671_1992_whitfield_t46_single_core_pvc"] = {"card": "EL-WHIT-T47", "columns": cols,
         "note": "source prints 2.5 mm2 2-cable vd as '18..0' (typo); 18.0 used, agrees with Table 4.7", "rows": t46}
     T["bs7671_1992_whitfield_t47_multicore_pvc"] = {"card": "EL-WHIT-T47", "columns": cols, "rows": t47}
-    T["ca_air_iec_b5214"] = {"card": "EL-IEC-B5214-CA", "unit": "factor", "rows": {
-        "10": [1.22, 1.15], "15": [1.17, 1.12], "20": [1.12, 1.08], "25": [1.06, 1.04], "30": [1.0, 1.0], "35": [0.94, 0.96],
-        "40": [0.87, 0.91], "45": [0.79, 0.87], "50": [0.71, 0.82], "55": [0.61, 0.76], "60": [0.50, 0.71]},
-        "columns": ["PVC", "XLPE_EPR"]}
+    T["ca_air_iec_b5214"] = {"card": "EL-IEC-B5214-CA", "unit": "factor", "rows": parse_ca(), "columns": ["PVC", "XLPE_EPR"],
+                             "note": "None = the source prints '-' (no rating at that ambient)"}
     T["cg_iec_b5217_bunched"] = {"card": "EL-IEC-B5217-CG", "rows": {
         "1": 1.00, "2": 0.80, "3": 0.70, "4": 0.65, "5": 0.60, "6": 0.57, "7": 0.54, "8": 0.52, "9": 0.50, "12": 0.45, "16": 0.41, "20": 0.38}}
     T["ci_whitfield_t45"] = {"card": "EL-WHIT-T45-CI", "rows": {"50": 0.89, "100": 0.81, "200": 0.68, "400": 0.55, "500": 0.50},

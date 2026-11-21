@@ -1,3 +1,0 @@
-Fig. F13 (TT, final circuits, max disconnecting time): Uo (V AC) | T (s): 50 < Uo <= 120 | 0.3 ; 120 < Uo <= 230 | 0.2 ; 230 < Uo <= 400 | 0.07 ; Uo > 400 | 0.04
-Fig. F19 (TN, final circuits, max disconnecting time): Uo (V AC) | T (s): 50 < Uo <= 120 | 0.8 ; 120 < Uo <= 230 | 0.4 ; 230 < Uo <= 400 | 0.2 ; Uo > 400 | 0.1
-(Re-read from raw HTML of the Wayback snapshots; the plain-text extraction drops cells containing '<'.)

@@ -91,7 +91,8 @@ def place_devices(h: House) -> list[Device]:
         devs.append(Device(f"{kind[:3].upper()}-{room}-{n[0]:03d}", kind, room, x, y, z, rule, serves, params))
 
     for r in h.rooms:
-        wets = zones.wet_areas(r, h.furniture) if r.kind == "bathroom" else []
+        wets = zones.wet_areas(r, h.furniture)
+        is_wet = r.kind == "bathroom" or bool(wets)
         furn = [f for f in h.furniture if f.room == r.id]
         spans = _door_spans(h, r)
         # one switch per door at the latch side
@@ -99,7 +100,7 @@ def place_devices(h: House) -> list[Device]:
             if d.room == r.id:
                 x, y = switch_for_door(r, d)
                 add("switch", r.id, x, y, SWITCH_Z, "EA1-switch-latch-side", door=d.id)
-        if r.kind == "bathroom":
+        if is_wet:
             _place_bathroom(h, r, wets, add)
             continue
         # equipment points (AC isolator high on the longest free wall, FCU/cooker unit spurs)
@@ -209,9 +210,9 @@ def validate_devices(h: House, devs: list[Device]) -> list[Violation]:
         r = rooms[d.room]
         if d.kind == "switch" and not (SWITCH_BAND[0] <= d.z <= SWITCH_BAND[1]):
             out.append(Violation("EA1-switch-height", d.id, d.room, "fail", f"switch at {d.z:.0f} mm, band {SWITCH_BAND[0]:.0f}-{SWITCH_BAND[1]:.0f} mm", "EL-POL-PLACEMENT"))
-        if r.kind != "bathroom":
-            continue
         wets = zones.wet_areas(r, h.furniture)
+        if r.kind != "bathroom" and not wets:
+            continue
         z = zones.zone_at(d.x, d.y, d.z, wets)
         if z is not None and d.kind in SOCKET_KINDS:
             out.append(Violation("EA2-socket-in-zone", d.id, d.room, "fail", f"socket-outlet in zone {z}", f"EL-701-ZONE{z}"))

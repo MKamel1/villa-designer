@@ -117,7 +117,7 @@ Soil thermal resistivity
 The current-carrying capacities of cables in the ground are based on a ground resistivity equal to 2.5 K•m/W. For other values, the correction factor is given in Figure G14.
 The related correction factor is here noted k3. 
 Fig. G14 – Correction factors for cables in buried ducts for soil thermal resistivities other than 2.5 K.m/W to be applied to the current-carrying capacities for reference method D (table B.52.16 of IEC 60364-5-52)
-ROW: 
+ROW:  
 ROW: Thermal resistivity, K•m/W | 0.5 | 0.7 | 1 | 1.5 | 2 | 2.5 | 3
 ROW: Correction factor for cables in buried ducts | 1.28 | 1.20 | 1.18 | 1.1 | 1.05 | 1 | 0.96
 ROW: Correction factor for direct buried cables | 1.88 | 1.62 | 1.5 | 1.28 | 1.12 | 1 | 0.90
@@ -192,7 +192,7 @@ This of course affects the current-carrying capacity of the cable, and a correct
 In addition, if the 3rd harmonic percentage h3 is greater than 33%, the neutral current is greater than the phase current and the cable size selection is based on the neutral current. The heating effect of harmonic currents in the phase conductors has also to be taken into account.
 The values of k5 depending on the 3rd harmonic content are given in Figure G19. 
 Fig. G19 – Correction factors for harmonic currents in four-core and five-core cables (table E.52.1 of IEC 60364-5-52)
-ROW: Third harmonic content of phase current % | Correction factor
+ROW: Third harmonic content of phase current % | Correction factor
 ROW: Size selection is based on phase current | Size selection is based on neutral current
 ROW: 0 ­­­­­­­- 15 | 1.0 | 
 ROW: 15 - 33 | 0.86

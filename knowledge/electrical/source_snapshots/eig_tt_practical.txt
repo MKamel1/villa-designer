@@ -10,7 +10,10 @@ For all final circuits with a rated current not exceeding 63 A with one or more 
 For all other circuits, the maximum disconnection time is fixed to 1 s. This limit enables selectivity between RCDs when installed on distribution circuits.
 Fig. F13 – Maximum disconnecting times in TT system for final circuits not exceeding 63 A with one or more socket-outlets, and 32 A supplying only fixed connected current-using equipment
 ROW: Uo[a] (V AC) | T (s)
-ROW: 50 400 | 0.04
+ROW: 50 < Uo ≤ 120 | 0.3
+ROW: 120 < Uo ≤ 230 | 0.2
+ROW: 230 < Uo ≤ 400 | 0.07
+ROW: Uo > 400 | 0.04
 ^ Uo is the nominal phase to earth voltage
 RCD is a general term for all devices operating on the residual-current principle.
 RCCB (Residual Current Circuit Breaker) as defined in IEC 61008 series is a specific class of RCD.
@@ -20,7 +23,7 @@ ROW: x IΔn | | 1 | 2 | 5 | > 5
 ROW: Domestic | Instantaneous | 0.3 | 0.15 | 0.04 | 0.04
 ROW: Type S | 0.5 | 0.2 | 0.15 | 0.15
 ROW: Industrial | Instantaneous | 0.3 | 0.15 | 0.04 | 0.04
-ROW: Time-delay : 0.06 s | 0.5 | 0.2 | 0.15 | 0.15
+ROW: Time-delay : 0.06 s | 0.5 | 0.2 | 0.15 | 0.15
 ROW: Time-delay (other) | According to manufacturer
 Case of distribution circuits
 (see Fig. F15)

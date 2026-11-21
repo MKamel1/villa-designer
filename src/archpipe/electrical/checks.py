@@ -41,7 +41,10 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
 
     # EA2 zones --------------------------------------------------------------------------------
     viol = placement.validate_devices(h, d.devices)
-    for room in (r for r in h.rooms if r.kind == "bathroom"):
+    for room in (r for r in h.rooms if r.kind == "bathroom" or zones.wet_areas(r, h.furniture)):
+        if not zones.wet_areas(room, h.furniture):
+            R.append(_r("EA2", "not_evaluated", room.id, "bathroom has no bath or shower modelled: zones cannot be placed, so no device can be checked against them"))
+            continue
         vs = [v for v in viol if v.room == room.id and v.severity == "fail" and v.rule.startswith("EA2")]
         ws = [v for v in viol if v.room == room.id and v.severity == "warn"]
         n_dev = sum(1 for x in d.devices if x.room == room.id)
@@ -162,10 +165,16 @@ def run_checks(d: Design, svg: str | None = None) -> list[CheckResult]:
         zs = [z.id for z in h.zones if l.id in z.luminaire_ids]
         if len(zs) != 1:
             R.append(_r("EA13", "fail", l.id, f"luminaire in {len(zs)} zones", ["EL-POL-CIRCUITS"], len(zs), 1, "zones"))
+    for z in h.zones:
+        unknown = [i for i in z.luminaire_ids if i not in lum_by_id]
+        if unknown:
+            R.append(_r("EA13", "fail", z.id, f"zone names luminaires that are not in the luminaire list: {unknown[:5]}", ["EL-POL-CIRCUITS"], len(unknown), 0, "luminaires"))
     for c in (c for c in d.circuits if c.kind == "lighting"):
-        w_lum = sum(lum_by_id[i].watts for i in c.load_ids)
-        R.append(_r("EA13", "pass" if abs(w_lum - c.watts) <= 1.0 and all(i in lum_by_id for i in c.load_ids) else "fail", c.id,
-                    f"circuit {c.watts:.0f} W vs sum of {len(c.load_ids)} luminaires {w_lum:.0f} W", ["EL-POL-CIRCUITS"], c.watts, w_lum, "W"))
+        missing = [i for i in c.load_ids if i not in lum_by_id]
+        w_lum = sum(lum_by_id[i].watts for i in c.load_ids if i in lum_by_id)
+        R.append(_r("EA13", "pass" if abs(w_lum - c.watts) <= 1.0 and not missing else "fail", c.id,
+                    f"circuit {c.watts:.0f} W vs sum of {len(c.load_ids) - len(missing)} luminaires {w_lum:.0f} W" + (f"; unknown luminaires {missing[:5]}" if missing else ""),
+                    ["EL-POL-CIRCUITS"], c.watts, w_lum, "W"))
     unc = [l.id for l in h.luminaires if not any(l.id in c.load_ids for c in d.circuits if c.kind == "lighting")]
     R.append(_r("EA13", "fail" if unc else "pass", "all luminaires", f"{len(h.luminaires)} luminaires, {len(unc)} without a circuit {unc[:5]}", ["EL-POL-CIRCUITS"], len(unc), 0, "luminaires"))
     return R

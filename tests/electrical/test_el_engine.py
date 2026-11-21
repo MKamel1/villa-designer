@@ -254,3 +254,37 @@ def test_not_evaluated_criteria_never_pass(house):
     _, res = results(house)
     for crit in ("EA9", "EA10", "EA14", "EA15"):
         assert by(res, crit) and all(r.status == "not_evaluated" for r in by(res, crit))
+
+
+# ---- fail-closed paths -----------------------------------------------------------------------------------------------
+def test_ea2_not_evaluated_when_bathroom_has_no_wet_area(house):
+    h = copy.deepcopy(house)
+    h.furniture = [f for f in h.furniture if f.kind not in ("shower", "bath")]
+    _, res = results(h)
+    r = by(res, "EA2", subject="BATH")
+    assert r and all(x.status == "not_evaluated" for x in r)
+
+
+def test_ea2_applies_to_a_wet_room_not_named_bathroom(house):
+    h = copy.deepcopy(house)
+    h.rooms = [dataclasses.replace(r, kind="ensuite") if r.id == "BATH" else r for r in h.rooms]
+    devs = placement.place_devices(h)
+    devs.append(placement.Device("BAD", "socket", "BATH", 6000, 7500, 1200))
+    res = checks.run_checks(circuits.design(h, devs))
+    assert by(res, "EA2", "fail", "BATH")
+
+
+def test_ca_beyond_the_table_gives_no_rating():
+    from archpipe.electrical import sizing
+    assert sizing.ca_factor(65, "PVC") == 0.0 and sizing.ca_factor(90, "XLPE_EPR") == 0.0
+    assert sizing.ca_factor(65, "XLPE_EPR") == 0.65
+    r = sizing.size_cable(10, 16, [sizing.Segment("hot", 5, ambient_c=65)], sizing.TableSpec("whit_t47", col="clipped_2"))
+    assert not r.ok
+
+
+def test_ea13_zone_naming_unknown_luminaire_fails_not_raises(house):
+    h = copy.deepcopy(house)
+    z = h.zones[0]
+    h.zones[0] = dataclasses.replace(z, luminaire_ids=z.luminaire_ids + ("GHOST-1",))
+    _, res = results(h)
+    assert by(res, "EA13", "fail", "Z-LIV-1") and by(res, "EA13", "fail", "DB-GF/L1")

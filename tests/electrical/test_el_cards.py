@@ -107,12 +107,86 @@ def test_correction_tables_match_snapshot():
         assert (f"{mm} or more {f:.2f}" if mm == "500" else f"{mm} {f:.2f}") in ci, (mm, f)
 
 
-def test_disconnection_and_curves_in_snapshots():
-    raw = snap("eig_fig_F13_F19_raw.txt")
+def _lines(name):
+    return [l.strip() for l in (SNAP / name).read_text(encoding="utf-8").replace(" ", " ").splitlines()]
+
+
+def test_disconnection_times_match_snapshot_rows():
+    tt = " ".join(_lines("eig_tt_practical.txt"))
+    tn = " ".join(_lines("eig_tn_disconnection.txt"))
     for r in data.table("disconnection_s")["rows"]:
-        assert f"{r['tn']:g}" in raw and f"{r['tt']:g}" in raw
+        lo, hi = r["uo_gt"], r["uo_le"]
+        band = f"{lo} < Uo ≤ {hi} | " if hi < 1e8 else f"Uo > {lo} | "
+        assert f"{band}{r['tt']:g}" in tt, band
+        assert f"{band}{r['tn']:g}" in tn, band
+
+
+def test_curves_rcd_and_ra_in_snapshots():
     cb = snap("eig_cb_characteristics.txt")
     assert "type B 3 In ≤ Im ≤ 5 In" in cb and "type C 5 In ≤ Im ≤ 10 In" in cb and "type D10 In ≤ Im ≤ 20 In" in cb
     tt = snap("eig_tt_principle.txt")
     for idn, ra in data.table("tt_ra_max_ohm")["rows"].items():
         assert f"{ra} Ω" in tt
+    f14 = {l.split(" | ", 1)[0]: l for l in _lines("eig_tt_practical.txt") if l.startswith("ROW: Domestic")}
+    assert "ROW: Domestic | Instantaneous | 0.3 | 0.15 | 0.04 | 0.04" in f14.values()
+    rows = data.table("rcd_max_time_s_domestic_instantaneous")["rows"]
+    assert (rows["1"], rows["2"], rows["5"]) == (0.3, 0.15, 0.04)
+
+
+def test_voltage_drop_limits_and_a11_match_snapshot():
+    mx = _lines("eig_max_voltage_drop.txt")
+    t = data.table("voltage_drop_limits_pct")
+    assert f"ROW: A low-voltage service connection from a LV public power distribution network | {t['lighting']:g}% | {t['other']:g}%" in mx
+    dv = _lines("eig_diversity.txt")
+    for lo, hi, ks in data.table("diversity_eig_a11_apartments")["rows"]:
+        label = f"{lo} to {hi}" if hi < 1e5 else f"{lo} and more"
+        assert f"ROW: {label} | {ks:g}" in dv, label
+
+
+def _render(rule: dict) -> str:
+    k = rule["kind"]
+    if k == "total_pct":
+        return "100%" if rule["p"] == 1.0 else f"{round(rule['p'] * 100)}% total demand"
+    if k == "first_plus":
+        return f"100% up to {rule['first']} A + {round(rule['rest'] * 100)}% balance"
+    if k == "cooker":
+        return f"{rule['first']} A + {round(rule['rest'] * 100)}% balance + {rule['socket_a']} A for socket"
+    a, b, c = (round(x * 100) for x in rule["w"])
+    if b == c:
+        return f"100%X + {b}%(Y+Z)"
+    return f"100%X + {b}%Y + {c}%Z"
+
+
+def test_whitfield_table_6_2_every_rule_matches_snapshot():
+    lines = [l.strip(" |") for l in _lines("whitfield_Figures_Tab6_2_htm.txt")]
+    lines = [l for l in lines if l]
+    labels = {"lighting": "Lighting", "heating_power": "Heating and power", "cooker": "Cookers", "motors": "Motors (but not lifts)",
+              "inst_wh": "Instantaneous water heaters", "thermo_wh": "Thermostatic water heaters", "standard": "Standard circuits",
+              "sockets": "Sockets and stationary equip."}
+    cols = ["household", "shop", "hotel"]
+    t = data.table("diversity_whitfield_t62")["premises"]
+    checked = 0
+    for cat, label in labels.items():
+        i = lines.index(label)
+        got = lines[i + 1:i + 4]
+        if cat == "motors":                       # household cell is blank in the source
+            got = [None] + lines[i + 1:i + 3]
+        for col, text in zip(cols, got):
+            if text is None:
+                assert cat not in t[col]
+                continue
+            assert _render(t[col][cat]) == text, (cat, col, text)
+            checked += 1
+    assert checked == 23
+
+
+def test_reference_case_expected_values_appear_in_their_snapshots():
+    from archpipe.electrical import reference_cases
+    wanted = {"EL-EX-WHIT-6.1": ["486.2", "162 A"], "EL-EX-WHIT-6.2": ["29.5"], "EL-EX-WHIT-4.1": ["32.4", "43 A"], "EL-EX-WHIT-4.5": ["1.28", "105m"],
+              "EL-EX-EIG-A12": ["69 kVA", "100A"], "EL-EX-EIG-WEX": ["0.73", "2 x 240", "2 x 120", "1 x 95", "0.12", "0.47", "0.13"],
+              "EL-EX-EIG-G32": ["10.1", "4.4"]}
+    for cid, toks in wanted.items():
+        text = " ".join(snap(Path(f).name) for f in _first_snapshot(data.card(cid)))
+        for t in toks:
+            assert t in text or t.replace(" ", "") in text.replace(" ", ""), (cid, t)
+    assert {rc.card for rc in reference_cases.run()} <= set(wanted)

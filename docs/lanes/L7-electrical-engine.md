@@ -8,7 +8,7 @@ Run the demo (a 4-room test house, not the villa):
 
 ```
 PYTHONPATH=src python -m archpipe.electrical.demo [--out DIR]     # writes out/checks/L7.json and DIR/{board_schedule.csv,md,sld.svg,...}
-PYTHONPATH=src python -m pytest tests/electrical -q               # 88 tests (pytest from the system Python; the project venv has none)
+PYTHONPATH=src python -m pytest tests/electrical -q               # 96 tests (pytest from the system Python; the project venv has none)
 python knowledge/electrical/build_data.py                         # rebuild cards.json / tables.json from the snapshots
 ```
 
@@ -38,7 +38,7 @@ written with `contracts.write_results("L7", ...)`). Internally a richer `Circuit
 `knowledge/electrical/cards.json` holds 42 `SourceCard`s (25 std, 7 sourced, 7 policy, 3 unverified); every std/sourced
 card has a verbatim quote that `tests/electrical/test_el_cards.py` finds in the committed text snapshot under
 `knowledge/electrical/source_snapshots/`. Every numeric table cell in `tables.json` that came from a web table is
-compared with the snapshot row by row in the same test file (G20, G21, G30, Ca, Cg, Ci, Whitfield 4.6/4.7).
+compared with the snapshot row by row in the same test file: G20, G21, G30, Ca (10-80 C, '-' cells kept as None), Cg, Ci, Whitfield 4.6/4.7, Table 6.2 (all 23 household/shop/hotel rules), Fig A11, F13/F19 times, F14, G25 limits, H28 bands. The expected value of each reference case is also checked to occur in its snapshot. Hand-typed and unchecked: the breaker ladder, csa ladder and policy values (they are policy).
 
 | data | table | source (all read second-hand, so `std`) | status |
 |---|---|---|---|
@@ -84,7 +84,7 @@ All inputs and expected values are the source's own (cards `EL-EX-*`, status `so
 The Ecodial figures on the same EIG page serve as the "commercial tool" cross-check for EA5 (same csa); a separate
 ProDesign/ETAP run was not available. The IET On-Site Guide Appendix A example itself was not found.
 
-Negative tests: socket in zone 0, 1 and 2 fail; a shaver unit is allowed in zone 2 but not zone 1; a socket 2.5 m
+Negative tests (fail-closed paths included): a bathroom with no bath/shower modelled is `not_evaluated` for EA2; an ambient above the Ca table gives no rating; a zone naming an unknown luminaire fails EA13; socket in zone 0, 1 and 2 fail; a shaver unit is allowed in zone 2 but not zone 1; a socket 2.5 m
 rule only warns; a zone > 10 A fails EA3; a luminaire in two zones or a watt mismatch fails EA13; a circuit removed from
 the SVG fails EA12; TN with Ze 6 ohm fails EA7; TT without RA is `not_evaluated`; a 300 mA final circuit fails EA8;
 a whole-route product method needs a larger cable than the segment method.
@@ -97,6 +97,8 @@ and 0 warn; `not_evaluated`: EA1 recall, EA9, EA10, EA14, EA15. Caveats a reader
 
 - Passing EA1/EA3/EA8/EA11/EA12 only means the policy rules are met; EA1 has no recall test. EA12 compares one design
   with its own renderings (a tamper test proves the check can fail), not a second tool.
+- The safety gates (EA2, EA5, EA7, EA8) rest on second-hand `std` cards; EA8 also cites a policy card (Type A) and EA5's table
+  for single-phase finals is the BS 7671:1992 reprint.
 - RA = 30 ohm is an assumption in the fixture; EA7 passes only on that assumption.
 - CPC size is assumed equal to the phase conductor (TN path only, not exercised in the demo).
 - Single-phase finals use BS 7671:1992 table values (16th edition), which for <= 16 mm2 PVC equal later editions for
