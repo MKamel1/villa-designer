@@ -30,7 +30,12 @@ def main(argv=None) -> int:
     print("wrote", path, len(results), "results")
     if not a.no_report:
         Path(a.report).parent.mkdir(parents=True, exist_ok=True)
-        Path(a.report).write_text(report.render(m, results, cards), encoding="utf-8")
+        base = Path(__file__).resolve().parents[3] / "knowledge" / "eg" / "baseline-before-g1.json"
+        before = None
+        if base.exists():
+            import json
+            before = {(r["criterion"], r["subject"]): r for r in json.loads(base.read_text(encoding="utf-8"))["results"]}
+        Path(a.report).write_text(report.render(m, results, cards, before), encoding="utf-8")
         print("wrote", a.report)
     return 0
 

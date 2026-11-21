@@ -156,13 +156,43 @@ def test_open_riser_stair_fails():
     assert status(res, "LS2", "overlap", gate=True) == {"fail"}
 
 
-def test_d1_as_authored_fails_ls2():
+def test_d1_spec_without_infill_fails_sphere_but_has_overlap():
     from archpipe.concept import revit_spec as RS
     from archpipe.concept import villa_r11 as R
     spec = RS.build(R.design("D1"))
     st = Stair("d1", [list(b) for b in spec["stair"]], tuple(spec["gf_opening"]), -300.0)
     res = C.check_open_risers(model_with(stair=st))
-    assert {r.status for r in res if r.gate} == {"fail"}
+    assert status(res, "LS2", "sphere", gate=True) == {"fail"}          # 116.5 mm gap, no infill given
+    assert status(res, "LS2", "overlap", gate=True) == {"pass"}         # G1: treads 296 wide on a 280 going = 16 mm
+    assert C.stair_geometry(st)["going"] == pytest.approx(280.0, abs=0.5)    # nosing pitch, not the 296 box width
+
+
+def test_riser_infill_passes_and_closed_risers_becomes_info():
+    st = make_stair(thick=60.0, overlap=16.0)
+    st.riser_infill = {"present": True, "max_clear_opening_mm": 38.24, "bar_h_mm": 40, "type": "horizontal flat bar"}
+    res = C.check_open_risers(model_with(stair=st))
+    assert status(res, "LS2", "sphere", gate=True) == {"pass"}
+    closed = [r for r in res if "closed risers" in r.subject][0]
+    assert closed.gate is False and closed.status == "fail" and "g1-safety-decisions-2026-11-21" in closed.source_ids
+    assert "G1" in closed.message
+    st.riser_infill["max_clear_opening_mm"] = 110.0
+    assert status(C.check_open_risers(model_with(stair=st)), "LS2", "sphere", gate=True) == {"fail"}
+
+
+def test_closed_risers_row_is_a_gate_without_the_decision():
+    res = C.check_open_risers(model_with(stair=make_stair()))
+    assert [r.gate for r in res if "closed risers" in r.subject] == [True]
+
+
+def test_under_flight_cupboard_clears_the_warning():
+    st = make_stair()
+    st.under_flight = {"enclosed": True, "treads_enclosed": 11, "cupboard_id": "cup"}
+    res = C.check_stair_geometry(model_with(stair=st))
+    assert status(res, "LS1", "space under", gate=True) == {"pass"}
+    st.under_flight = {"enclosed": True, "treads_enclosed": 5, "cupboard_id": "cup"}     # covers too few treads
+    assert status(C.check_stair_geometry(model_with(stair=st)), "LS1", "space under", gate=True) == {"warn"}
+    st.under_flight = None
+    assert status(C.check_stair_geometry(model_with(stair=st)), "LS1", "space under", gate=True) == {"warn"}
 
 
 def test_closed_risers_pass():
@@ -204,8 +234,9 @@ def test_handrail_height_range():
 
 
 # ---- LS4 door near the flight -----------------------------------------------------------------------------------
-def door_at(x, swing):
-    return Opening("core", "door", "GF", 1.0, 2.1, rooms=("landing-gf", "core"), x=x, swing_known=swing)
+def door_at(x, swing, direction=""):
+    return Opening("core", "door", "GF", 1.0, 2.1, rooms=("landing-gf", "core"), x=x, swing_known=swing,
+                   swing_direction=direction)
 
 
 def test_door_close_to_top_step_warns_when_swing_unknown_and_fails_when_known():
@@ -213,6 +244,13 @@ def test_door_close_to_top_step_warns_when_swing_unknown_and_fails_when_known():
     assert {r.status for r in C.check_door_near_flight(near) if r.gate} == {"warn"}
     near_known = model_with(stair=make_stair(), openings=[door_at(4.602, True)])
     assert {r.status for r in C.check_door_near_flight(near_known) if r.gate} == {"fail"}
+
+
+def test_outward_swing_passes_even_close_to_the_step():
+    m = model_with(stair=make_stair(), openings=[door_at(4.602, True, "outward")])
+    assert {r.status for r in C.check_door_near_flight(m) if r.gate} == {"pass"}
+    m = model_with(stair=make_stair(), openings=[door_at(4.602, True, "inward")])
+    assert {r.status for r in C.check_door_near_flight(m) if r.gate} == {"fail"}
 
 
 def test_door_far_from_top_step_passes():
@@ -241,6 +279,25 @@ def test_escape_window_limits():
     assert status(C.check_escape(good), "LS5", "b (", gate=True) == {"pass"}
 
 
+def test_waived_inner_room_stays_fail_but_is_not_a_gate():
+    m = model_with(rooms={"cinema": room("cinema", "media", 3, 3, level="B")}, links=[("lounge", "cinema")],
+                   waivers={("LS5", "cinema"): "WAIVED by client (G1 2026-11-21): accepted risk"})
+    row = [r for r in C.check_escape(m) if "cinema" in r.subject][0]
+    assert row.status == "fail" and row.gate is False
+    assert row.message.startswith("WAIVED by client (G1 2026-11-21)")
+    assert "g1-safety-decisions-2026-11-21" in row.source_ids
+
+
+def test_guard_infill_opening_and_missing_guard_stays_not_evaluated():
+    glass = Guard("g1", "void", 1.1, drop_m=3.0, level="street", max_opening_mm=0.0, climbable=False)
+    bars = Guard("g2", "steps", 1.1, drop_m=1.8, level="street", max_opening_mm=75.0, climbable=False)
+    wide = Guard("g3", "steps", 1.1, drop_m=1.8, level="street", max_opening_mm=120.0, climbable=False)
+    res = C.check_guards(model_with(guards=[glass, bars, wide], needed_but_unmodelled=[("edge x", "no element")]))
+    sph = {r.element_ids[0]: r.status for r in res if "sphere" in r.subject}
+    assert sph == {"g1": "pass", "g2": "pass", "g3": "fail"}
+    assert any(r.status == "not_evaluated" and r.subject == "edge x" for r in res)
+
+
 def test_unproven_escape_gates_are_not_evaluated():
     m = model_with(not_evaluated_gates=[("LS5", "dead end", "no limit held")])
     assert [r.status for r in C.check_escape(m)] == ["not_evaluated"]
@@ -265,3 +322,19 @@ def test_er_cards_are_unverified_and_all_cited_cards_exist():
 def test_policy_cards_are_marked_policy():
     cards = sources.load_cards()
     assert cards["policy-stair-rise-uniform-5mm"].status == "policy"
+
+
+# ---- D1 end to end (no out/ data needed: missing read-backs degrade to not_evaluated) ---------------------------
+def test_d1_loads_g1_fields_and_has_no_failed_or_warned_gate(tmp_path):
+    from archpipe.compliance.model import load_d1
+    m = load_d1(tmp_path)
+    assert m.stair.riser_infill and m.stair.under_flight and m.stair.under_flight["enclosed"]
+    ids = {g.id for g in m.guards}
+    assert {"rail-gf-stair-void", "rail-gf-terrace-edge", "rail-patio-steps-edge"} <= ids
+    assert m.needed_but_unmodelled == []
+    res = C.run_all(m)
+    assert {r.status for r in res if r.gate} <= {"pass", "not_evaluated"}
+    assert any(r.status == "fail" and not r.gate and "WAIVED" in r.message for r in res)
+    door = [r for r in res if r.criterion == "LS4" and r.gate][0]
+    assert door.status == "pass" and "OUTWARD" in door.message
+    assert sources.missing_sources(res, sources.load_cards()) == []

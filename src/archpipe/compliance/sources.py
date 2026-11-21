@@ -13,7 +13,7 @@ def load_cards(card_dir: Path | str | None = None) -> dict:
     d = Path(card_dir) if card_dir else CARD_DIR
     cards = {}
     for p in sorted(d.glob("*.json")):
-        for c in json.loads(p.read_text(encoding="utf-8"))["cards"]:
+        for c in json.loads(p.read_text(encoding="utf-8")).get("cards", []):     # other files here are not cards
             card = SourceCard(**c)
             if card.id in cards:
                 raise ValueError("duplicate source card id %s (%s)" % (card.id, p.name))

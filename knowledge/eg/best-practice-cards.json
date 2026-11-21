@@ -92,11 +92,21 @@
       "url_or_path": ""
     },
     {
+      "id": "ukadk-landing-clear-1-21",
+      "document": "Approved Document K: Protection from falling, collision and impact",
+      "edition": "2013 edition, England (held; verified by page read)",
+      "locator": "para 1.21, printed p.10",
+      "quote": "A landing: ... b. should be kept clear of permanent obstructions",
+      "value": "landing kept clear (a door swinging away from the stair, into the adjoining space, is not on the landing)",
+      "status": "sourced",
+      "url_or_path": ""
+    },
+    {
       "id": "ukadk-landing-door-1-24",
       "document": "Approved Document K: Protection from falling, collision and impact",
       "edition": "2013 edition, England (held; verified by page read)",
       "locator": "para 1.24 and Diagram 1.8, printed p.11",
-      "quote": "A door may swing across a landing at the bottom of a flight, but only as shown in Diagram 1.8. (Diagram: at least 400mm each side of the door swing, landing at least the width of the flight)",
+      "quote": "A door may swing across a landing at the bottom of a flight, but only as shown in Diagram 1.8. [Diagram 1.8, Landings next to doors in dwellings: At least 400mm / Width of flight / At least 400mm]",
       "value": "400 mm",
       "status": "sourced",
       "url_or_path": ""
@@ -350,6 +360,16 @@
       "value": "< 2 % gloomy, > 5 % generous (descriptive bands)",
       "status": "std",
       "url_or_path": ""
+    },
+    {
+      "id": "g1-safety-decisions-2026-11-21",
+      "document": "Client decision record G1 (ours)",
+      "edition": "2026-11-21",
+      "locator": "docs/decisions/G1-safety-decisions-2026-11-21.md",
+      "quote": "",
+      "value": "LS2: keep open risers, add infill (no 100 mm sphere) and 16 mm overlap; closed risers not adopted. LS5: basement cinema inner room is an accepted risk (waiver).",
+      "status": "policy",
+      "url_or_path": "docs/decisions/G1-safety-decisions-2026-11-21.md"
     },
     {
       "id": "policy-service-clear-2000",
