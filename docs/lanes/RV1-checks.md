@@ -93,5 +93,6 @@ U12 I08 -> K01 K17; U13 U17 -> K12; U18 -> K09 K10; U19 -> K11; I04 -> K05; I09 
 3. K10: the centre-offset bound became half the carcass's smaller side plus accessory slack (plumbing items use a different placement convention).
 4. K09: duplicate detection needs at least half of an element's triangles duplicated (coincident skins are common in the scene).
 5. Mutations: M1 was a valid geometry and is reported as a miss; M1b added; M5 and K03 read the column faces from the model (lessons 2, 3);
-   M6 split into 90 and 180 degrees.
+   M6 split into 90 and 180 degrees; M-K16/N-K16/M-K17 added (K16 and K17 had no D1 mutation); the first N-K16 put the soffit 2.01 m above one
+   pitch point but the 0.6 m box also sits over higher points of the rising flight (a wrong negative, not a false alarm): rebuilt at 2.26 m.
 6. D03 reproductions use a 10 mm tolerance because the Revit read-back reports wall tops to 10 mm (lessons 4).

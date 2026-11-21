@@ -54,6 +54,14 @@ def run(scene, ifc, model_path=None, prove=False):
         from . import mutate as M
         report["historic_and_synthetic"] = F.run_all()
         report["mutations"] = M.run_mutations(world, model, hosts, env, areas, env["levels"], host_ids)
+        import tempfile
+        with tempfile.TemporaryDirectory() as td:         # K17 mutation: a seeded IFC defect read back through the second kernel
+            m = K.mutate_ifc_wall_taller(ifc, Path(td) / "mut.ifc")
+            got = [f for f in K.ifc_clashes(K.load_ifc_world(m, hash_it=False)) if f.status == "fail"]
+        base = [f for f in ifs if f.status == "fail"]
+        new = [f.subject for f in got if f.subject not in {b.subject for b in base}]
+        report["mutations"].append(dict(id="M-K17", check="K17", kind="mutation", expect="catch", caught=bool(new), ok=bool(new), via=new[:3],
+                                        detail="IFC wall-B-int-11 extrusion +0.7 m (through the ramp), read back by IfcOpenShell"))
     return fs, report
 
 

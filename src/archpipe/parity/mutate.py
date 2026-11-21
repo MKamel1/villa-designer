@@ -250,6 +250,19 @@ def run_mutations(w: World, model: dict, hosts=None, env=None, areas=None, level
         k0 = next(iter(host_ids)); n = np.array(hosts[k0]["normal"], float)
         rec("M-K15", "K15", "mutation", "catch", base, C.k15_mounting(_edit(w, host_ids[k0], _shift(n * 0.30)), hosts, host_ids), f"{host_ids[k0]} moved 0.30 m off its host")
         rec("N-K15", "K15", "negative", "quiet", base, C.k15_mounting(_edit(w, host_ids[k0], _shift(n * 0.005)), hosts, host_ids), "plate 5 mm off")
+    # K16 soffit lowered over the stair (a box dropped over the flight)
+    from .geom import box_tris
+    base = B.get("K16") or C.k16_headroom(w)
+    pts = C.pitch_points(w.elements["stair-main"].sel(group="shell"))
+    px, py, pz = min(pts, key=lambda p: p[0])            # the pitch point nearest the stair's low-x end
+    xm, ym, zm = sorted(pts, key=lambda p: abs(p[0] - 7.5))[0]
+
+    def with_soffit(z_under):
+        w2 = _copy(w)
+        w2.elements["slab-mut"] = Element("slab-mut", [("m", "shell", None, None, box_tris((xm - 0.3, ym - 0.4, z_under, xm + 0.3, ym + 0.4, z_under + 0.2)))])
+        return w2
+    rec("M-K16", "K16", "mutation", "catch", base, C.k16_headroom(with_soffit(zm + 1.70)), f"a soffit 1.70 m above the pitch line at x{xm:.2f}")
+    rec("N-K16", "K16", "negative", "quiet", base, C.k16_headroom(with_soffit(zm + 2.26)), "a soffit 2.26 m above the pitch line at the sample (2.07 m above the highest pitch point under its 0.6 m width)")
     # K18 datum
     if levels:
         base = B.get("K18") or C.k18_datum(w, levels, model)
