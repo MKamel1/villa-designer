@@ -392,6 +392,29 @@ def k13_detail_solids(w):
     return out
 
 
+def k09_ids(expected, built, label="K09"):
+    """expected: ids the design asks for; built: ids found in the as-built record (repeats = built more than once)."""
+    out, seen = [], {}
+    for b in built:
+        seen[b] = seen.get(b, 0) + 1
+    for e in expected:
+        n = seen.get(e, 0)
+        if n != 1:
+            out.append(_f(label, e, False, n, 1, "built", f"{e}: built {n} times where exactly 1 is expected", (e,)))
+    if not out:
+        out.append(_f(label, "ids", True, len(expected), len(expected), "elements", f"all {len(expected)} expected ids built exactly once"))
+    return out
+
+
+def k10_boxes(pairs, tol=TOL_FIT, label="K10"):
+    """pairs: (id, spec_box, built_box) boxes (x0,y0,z0,x1,y1,z1) in one unit; worst face difference vs tol."""
+    out = []
+    for i, a, b in pairs:
+        d = float(np.abs(np.array(a, float) - np.array(b, float)).max())
+        out.append(_f(label, i, d <= tol, round(d * 1000, 1), tol * 1000, "mm", f"{i}: largest box-face difference {d*1000:.1f} mm", (i,), "RV1-TOL-FIT"))
+    return out
+
+
 # ---------------------------------------------------------------- K10 placement and yaw
 def k10_placement(w, model, tol=TOL_FIT):
     out = []
@@ -556,7 +579,7 @@ def k15_mounting(w, hosts, ids, tol=0.010):
 # ---------------------------------------------------------------- K16 stair headroom
 def pitch_points(t, up_axis_pair=None):
     """Points on the pitch line of a flight built from `t` (stair surfaces): one at each tread's nosing (the edge nearest the
-    tread below) and one half way between nosings. Returns [(x, y, z)]. Treads are the up-facing triangles grouped by height."""
+    tread below) and and a 20 mm sampling between nosings. Returns [(x, y, z)]. Treads are the up-facing triangles grouped by height."""
     n = np.cross(t[:, 1] - t[:, 0], t[:, 2] - t[:, 0])
     top = n[:, 2] > 1e-9
     tt = t[top]
@@ -578,8 +601,11 @@ def pitch_points(t, up_axis_pair=None):
         s0 = s.min()
         p = d * s0 + np.array([-d[1], d[0]]) * (lat.min() + lat.max()) / 2
         pts.append((p[0], p[1], k))
-    mids = [((a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2) for a, b in zip(pts, pts[1:])]
-    return pts + mids
+    dense = []
+    for a, b in zip(pts, pts[1:]):                    # the pitch line is straight between nosings: sample every 20 mm
+        n = max(2, int(np.ceil(np.hypot(b[0] - a[0], b[1] - a[1]) / 0.02)))
+        dense += [tuple(np.array(a) + (np.array(b) - np.array(a)) * i / n) for i in range(n)]
+    return pts + dense
 
 
 def k16_headroom(w, req=2.0, stair="stair-main", src="ukadk-stair-headroom-min"):

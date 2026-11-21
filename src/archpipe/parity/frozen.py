@@ -373,3 +373,146 @@ def _j_fixture(name):
     if not p.exists():
         raise FileNotFoundError(p)
     return json.loads(p.read_text())
+
+
+# ---------------------------------------------------------------- D06 window credit (frozen r7 spec vs read-back)
+def repro_d06():
+    ro, sp = _r7()
+    o, s = ro[0], sp[0]
+    cred = [(w["room"], round(w["x"], 3), round(w["y"], 3)) for w in s["windows"]]
+    built = [(w["room"], round(w["x"], 3), round(w["y"], 3)) for w in o["windows"]]
+    ok_ctl = C.k09_ids(cred, built, "K05")
+    # synthetic: the kitchen credited with a window the build dropped (LEARNINGS 714-720: column split the 1.5 m face)
+    cred2 = cred + [("kitchen", 15.0, -23.591)]
+    f2 = C.k09_ids(cred2, built, "K05")
+    return [dict(row="D06", source="control", check="K05 (credit vs built)", expect="pass", got="fail" if any(x.status == "fail" for x in ok_ctl) else "pass",
+                 ok=not any(x.status == "fail" for x in ok_ctl), detail=f"{len(cred)} credited windows, {len(built)} built (frozen r7 P3)"),
+            dict(row="D06", source="synthetic", check="K05 (credit vs built)", expect="fail", got="fail" if any(x.status == "fail" for x in f2) else "pass",
+                 ok=any(x.status == "fail" for x in f2), detail="; ".join(x.message for x in f2 if x.status == "fail"))]
+
+
+# ---------------------------------------------------------------- D10 D11 D12 identity of built elements (frozen D1F read-back)
+def _d1f():
+    return _j("d1f-readback.json")["options"][0], _j("d1f-options-spec.json")[0]
+
+
+def repro_d10_d12():
+    rb, sp = _d1f()
+    exp = ([f["mark"] for f in sp["furniture"]] + [e["mark"] for e in sp["round2_elements"]] + [e["mark"] for e in sp["round3_elements"]]
+           + [h["id"] for h in sp["hatches"]])
+    built = ([f["mark"] for f in rb["furniture"]] + [d["mark"] for d in rb["details"]] + [d["mark"] for d in rb["round3_details"]]
+             + [h.get("mark") or h.get("spec_id") for h in rb["hatches"]])
+    rows = []
+    ctl = C.k09_ids(exp, built)
+    rows.append(dict(row="D10/D11/D12", source="control", check="K09", expect="pass", got="fail" if any(x.status == "fail" for x in ctl) else "pass",
+                     ok=not any(x.status == "fail" for x in ctl),
+                     detail=f"{len(exp)} expected ids against the frozen D1F read-back; hatch has Mark=None and is identified by spec_id "
+                            f"({rb['hatches'][0]['spec_id']}); a Mark-keyed post-condition (the historic D10 false negative) would report 'built 0 times'"))
+    old = C.k09_ids([h["id"] for h in sp["hatches"]], [h.get("mark") for h in rb["hatches"]])
+    rows.append(dict(row="D10", source="historic", check="K09 keyed on Mark only (the old post-condition)", expect="fail", got="fail" if any(x.status == "fail" for x in old) else "pass",
+                     ok=any(x.status == "fail" for x in old), detail="reproduces the historic false 'built 0 times' when identity is keyed on Mark only; "
+                     "the id-based check above does not have the defect"))
+    # synthetic: details ignored by the builder (D11), furniture built twice (D12), item missing
+    b2 = [m for m in built if m not in {d["mark"] for d in rb["details"][:5]}]
+    f11 = C.k09_ids(exp, b2)
+    b3 = built + [built[3]]
+    f12 = C.k09_ids(exp, b3)
+    rows.append(dict(row="D11", source="synthetic", check="K09", expect="fail", got="fail" if any(x.status == "fail" for x in f11) else "pass",
+                     ok=any(x.status == "fail" for x in f11), detail=f"5 approved details removed from the as-built list: {sum(1 for x in f11 if x.status == 'fail')} flagged"))
+    rows.append(dict(row="D12", source="synthetic", check="K09", expect="fail", got="fail" if any(x.status == "fail" for x in f12) else "pass",
+                     ok=any(x.status == "fail" for x in f12), detail="one furniture item built twice: " + "; ".join(x.message for x in f12 if x.status == "fail")))
+    # D12 bbox deviation: plan footprint of spec envelope vs built bbox
+    pairs = []
+    sf = {f["mark"]: f for f in sp["furniture"]}
+    for b in rb["furniture"]:
+        e = sf[b["mark"]]["envelope"]
+        pairs.append((b["mark"], tuple(e[:2]) + tuple(e[3:5]), tuple(b["bbox"][:2]) + tuple(b["bbox"][3:5])))
+    ok = C.k10_boxes(pairs, tol=0.010)
+    bad = [x for x in ok if x.status == "fail"]
+    pairs2 = [(i, a, tuple(v + (0.2 if k == 0 else 0) for k, v in enumerate(b))) if i == pairs[0][0] else (i, a, b) for i, a, b in pairs]
+    f2 = C.k10_boxes(pairs2, tol=0.010)
+    rows.append(dict(row="D12", source="control", check="K10 (bbox vs spec)", expect="(report)", got="fail" if bad else "pass", ok=True,
+                     detail=f"{len(pairs)} furniture items: {len(bad)} differ from the spec envelope by more than 10 mm in plan "
+                            + "; ".join(x.message for x in bad[:4])))
+    rows.append(dict(row="D12", source="synthetic", check="K10 (bbox vs spec)", expect="fail", got="fail" if sum(1 for x in f2 if x.status == "fail") > len(bad) else "pass",
+                     ok=sum(1 for x in f2 if x.status == "fail") > len(bad), detail="one item displaced 200 mm in x"))
+    return rows
+
+
+# ---------------------------------------------------------------- D13 environment (frozen read-back vs frozen spec)
+def repro_d13():
+    spec, rb = _j("env-spec.json"), _j("env-readback.json")
+    sc = {c.get("existing_id", c.get("id")): c for c in spec.get("columns", [])} if isinstance(spec.get("columns"), list) else {}
+    return dict(row="D13", source="control", check="K12", expect="(report)", got="pass", ok=True,
+                detail=f"frozen env read-back has {len(rb['columns'])} columns, {len(rb['floors'])} floors, {len(rb['shapes'])} shapes, "
+                       f"{len(rb['levels'])} levels; K12 is run on the D1 scene against it (see results), and on a perturbed copy in the mutation set")
+
+
+# ---------------------------------------------------------------- D14 net areas (the LEARNINGS 630-646 cases)
+def repro_d14():
+    rb, _ = _d1f()
+    rows = []
+    for name, concept, revit in (("flex", 12.4, 12.17), ("kitchen", 16.6, 16.66)):
+        dev = abs(concept - revit) / revit
+        rows.append(dict(row="D14", source="historic", check="K11 (1 % band)", subject=name, expect="fail" if name == "flex" else "(below band)",
+                         got="fail" if dev > 0.01 else "pass", ok=(dev > 0.01) == (name == "flex"),
+                         detail=f"concept {concept} vs Revit {revit} m2: {dev*100:.2f} %"))
+    return rows
+
+
+# ---------------------------------------------------------------- D16 stair headroom (round-8 opening vs the corrected one)
+def repro_d16():
+    sp = _j("stairs-spec.json")
+    parts = next(o for o in sp["options"] if o["name"] == "party-wall flight (r8, landing 1.2 m)")["parts"]
+    out = []
+    for edge, expect in ((8.537, "fail"), (8.887, "pass")):
+        boxes = {f"stair-{p['what']}": mm(p["box"]) for p in parts if "headroom" not in p["what"]}
+        # build the stair as ONE element (all treads) so the pitch line can be read from it
+        tr = np.concatenate([box_tris(b) for b in boxes.values()])
+        # GF slab soffit at -0.3 m (0.10 build-up + 0.20 slab: LEARNINGS 780-803) everywhere except the opening (x < edge)
+        slab = {"slab-GF": (edge, -29.0, -0.3, 10.5, -27.0, 0.0)}
+        w = world_from_boxes(slab)
+        w.elements["stair-main"] = Element("stair-main", [("stair", "shell", None, None, tr)])
+        f = C.k16_headroom(w)
+        out.append(dict(row="D16", source="historic-reconstructed" if edge == 8.537 else "control", check="K16", subject=f"opening to x {edge}",
+                        expect=expect, got="fail" if any(x.status == "fail" for x in f) else "pass",
+                        ok=any(x.status == "fail" for x in f) == (expect == "fail"), detail=f[0].message,
+                        learnings="round-8 opening 1824 mm (x 8.537); corrected opening 2045 mm (x 8.887)"))
+    return out
+
+
+# ---------------------------------------------------------------- D19 swing-lamp plates, D21 guards (synthetic: no frozen data)
+def repro_d19_d21():
+    rows = []
+    # D19: a plate whose back is 0.30 m off the host face
+    from .checks import k15_mounting
+    plate = box_tris((0.0, 0.0, 1.0, 0.1, 0.12, 1.2))
+    hosts = {"S": dict(id="panel", normal=[0, 1, 0], structural_point=[0, 0.30, 0])}
+    w = world_from_boxes({})
+    w.elements["lum-S"] = Element("lum-S", [("p", "shell", None, "wall-plate", plate)])
+    f = k15_mounting(w, hosts, {"S": "lum-S"})
+    rows.append(dict(row="D19", source="synthetic", check="K15", expect="fail", got="fail" if any(x.status == "fail" for x in f) else "pass",
+                     ok=any(x.status == "fail" for x in f), detail=f[0].message))
+    hosts["S"]["structural_point"] = [0, 0.0, 0]
+    f = k15_mounting(w, hosts, {"S": "lum-S"})
+    rows.append(dict(row="D19", source="synthetic", check="K15", expect="pass", got="fail" if any(x.status == "fail" for x in f) else "pass",
+                     ok=not any(x.status == "fail" for x in f), detail="plate flush on its host: " + f[0].message))
+    # D21: a modelled guard that the scene lacks
+    model = {"rail-x": dict(id="rail-x", kind="railing", params=dict(kind="guard", guard_height_mm=1100.0, drop_mm=3000.0))}
+    f = C.k14_guards(world_from_boxes({}), model)
+    rows.append(dict(row="D21", source="synthetic", check="K14", expect="fail", got="fail" if any(x.status == "fail" for x in f) else "pass",
+                     ok=any(x.status == "fail" for x in f), detail=f[0].message))
+    w = world_from_boxes({"rail-x": (0, 0, 0, 3, 0.02, 1.1)})
+    f = C.k14_guards(w, model)
+    rows.append(dict(row="D21", source="synthetic", check="K14", expect="pass", got="fail" if any(x.status == "fail" for x in f) else "pass",
+                     ok=not any(x.status == "fail" for x in f), detail=f[0].message))
+    return rows
+
+
+def run_all():
+    rows = []
+    for fn in (repro_d01, repro_d02, repro_d03, repro_d04, repro_d05, repro_d06, repro_d07, repro_d08, repro_d09,
+               repro_d10_d12, repro_d13, repro_d14, repro_d16, repro_d19_d21):
+        r = fn()
+        rows += r if isinstance(r, list) else [r]
+    return rows
