@@ -38,13 +38,21 @@ def solve(res_by_cluster: dict, planes: list, scenes: dict, tunable: set, lo: fl
                 fixed += em
         if var:
             rows.append((p.id, p.target, var, fixed))
+    # a zone that moves no plane by at least 10 % of its target (vanity sconces: vertical light) is not a task driver
+    reach = {}
+    for _pid, t, var, _fixed in rows:
+        for z, v in var.items():
+            reach[z] = max(reach.get(z, 0.0), v / t)
+    for z in list(d):
+        if reach.get(z, 0.0) < 0.10:
+            del d[z]
     for _ in range(sweeps):
         for z in d:
             num = den = 0.0
             for _pid, t, var, fixed in rows:
                 if z not in var:
                     continue
-                rest = fixed + sum(d[k] * v for k, v in var.items() if k != z)
+                rest = fixed + sum(d.get(k, 1.0) * v for k, v in var.items() if k != z)
                 a = var[z] / t
                 num += a * (1.0 - rest / t)
                 den += a * a
@@ -56,6 +64,6 @@ def solve(res_by_cluster: dict, planes: list, scenes: dict, tunable: set, lo: fl
 def residuals(rows: list, d: dict) -> list[tuple]:
     out = []
     for pid, t, var, fixed in rows:
-        em = fixed + sum(d[z] * v for z, v in var.items())
+        em = fixed + sum(d.get(z, 1.0) * v for z, v in var.items())
         out.append((pid, t, em, em / t))
     return out

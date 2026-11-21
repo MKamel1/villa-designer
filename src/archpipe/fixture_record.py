@@ -57,9 +57,9 @@ KINDS = {
     "PEN-SMALL": dict(what="opal glass globe pendant D200 (bedside)", mount="pendant", lm=350, beam=None, cct=2700,
                       cri=90, layer="decorative", diameter=0.20),
     "WALL-READ": dict(what="adjustable wall-mounted swing-arm reading light (ASSUMED product)", mount="wall",
-                      lm=350, beam=None, cct=2700, cri=90, layer="decorative", diameter=0.12),
+                      lm=350, beam=60, cct=2700, cri=90, layer="decorative", diameter=0.12),
     "SWING": dict(what="movable wall reading light: wall plate, articulated 0.6 m reach and rotating head "
-                  "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=None,
+                  "(ASSUMED product; TODO swing-arm-product)", mount="wall", lm=350, beam=60,
                   cct=2700, cri=90, layer="task", diameter=0.12, reach=0.6),
     "PEN-LIN": dict(what="linear pendant 1.6 m, direct/indirect", mount="pendant", lm=1200, beam=90, cct=2700,
                     cri=90, layer="task", length=1.6),

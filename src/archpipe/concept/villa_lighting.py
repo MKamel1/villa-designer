@@ -286,9 +286,6 @@ def design(lay=None):
     for x in prep_x:
         add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line, between the opal globes",
             card="ies-res-kitchen-prep-500", zone="island-prep:task")
-    burner = next((a_, b_) for kind, a_, b_ in F.module_spans(it["k-island"]) if kind == "single-induction")
-    add("DL", "kitchen", (burner[0] + burner[1]) / 2, (isl[1] + isl[3]) / 2, why="over the single induction zone",
-        card="ies-res-kitchen-cooktop-300", zone="island-hob:task")
     run = fp["k-run"]
     for x in ((run[0] + run[2]) / 2 - 0.45, (run[0] + run[2]) / 2 + 0.45):
         add("DL", "kitchen", x, run[3] - 0.65, why="650 mm from the wall face over the counter's front edge, 0.9 m pitch "
@@ -336,11 +333,8 @@ def design(lay=None):
                                                        "reach": 0.6, "swept_x": (min(face_x, face_x + direction * 0.6),
                                                                                   max(face_x, face_x + direction * 0.6)),
                                                        "swept_y": (y, y + math.sqrt(0.30**2 - (0.59 / 2)**2))})
-    for x in (nook[0] + 0.47, nook[2] - 0.47):
-        add("DL", "bar-alcove", x, nook[1] + 0.11,
-            z=LEVEL_Z["B"] + it["library-daybed"]["nook_top"] - 0.025, zone="daybed-reading:task",
-            why="recessed in the 2.1 m nook top; task fill (L6b: DLN 1343 lm -> DL 732 lm)",
-            card="ies-res-chair-reading-200")
+    # L6b: the two recessed nook-top fills (DLN, then DL) needed a 26 % driver for a 0.7 x 0.5 m reading area: cut; the
+    # two swing arms are the daybed's reading lights
     # cinema: dim wall-wash on the rear wall, low path glow, no light on the screen
     C = rc["cinema"]
     cs = fp["cinema-sofa"]
@@ -436,7 +430,7 @@ def design(lay=None):
     strip("COVE", "parents-bed", (b[0] - 0.25, PB[1] + 0.12), (b[2] + 0.25, PB[1] + 0.12), CEILING + 0.03,
           (0, 0.4, 1), why="headboard cove: warm light grazing the bed wall (taste: 2700 K cove at the headboard)")
     for x in (b[0] + 0.18, b[2] - 0.18):
-        add("WALL-READ", "parents-bed", x, PB[1] + 0.13, z=1.45, aim=(0, 0.45, -0.35), zone="bed-reading:task", lm=300,
+        add("WALL-READ", "parents-bed", x, PB[1] + 0.13, z=1.45, aim=(0, 0.3, -0.55), zone="bed-reading:task", lm=300,
             why="wall-mounted swing arm on the solid head wall, aimed at the pillow; clear of both passages")
     # L6b: the two straight-down adjustable reading spots gave 790 lx on each pillow (4x the 200 lx card): cut; the
     # swing-arm lamps on the head wall are the reading lights
@@ -839,11 +833,11 @@ _NIGHT = {"*night": 0.1}
 SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
-        "Cook": {"*ambient": 1.0, "island-pendants": 1.0, "island-prep": 1.0, "island-hob": 1.0, "run-task": 1.0},
+        "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
         "Dinner": {"table-pendant": 0.4, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
         "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.3, "island-pendants": 0.4},
-        "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.3, "*decorative": 0.3},
+        "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.15, "*decorative": 0.2},
         "Film": {"lounge-decorative": 0.15, "*night": 0.1},
         "Night": _NIGHT,
     },
