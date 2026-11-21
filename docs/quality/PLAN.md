@@ -62,7 +62,7 @@ Worker key: **C** = Claude subagent in its own worktree · **X** = Codex · **G*
 | L1 Safety & quality | C | Best-practice checkers (ADK, Metric Handbook, Neufert) for heights, room sizes, doors, basement daylight, stairs, guards (100 mm sphere), escape; **safety report on D1**; Egyptian values informative only | A positive and a negative fixture per rule; the current stair must fail | EG1–EG9, LS1–LS5 |
 | L2 Design model | X | One placed-object record per element (IFC-aligned); scene, Revit spec and schedules read it; retire the ~14 patch passes; guard registry as data | Byte-identical scene output from the new model | BM1, X1 |
 | L3 Vision critic | C | Rubric R1–R13 scored by a vision model; metadata checks (lens, height, verticals, subject exposure, texel density, faceting) | ≥90 % recall on the 27 known bad views; ≤10 % false fails on B views | R1–R13 |
-| L4 Products + style | G (sourcing) + C (code) | Egyptian supplier catalogue (SKU, dimensions, 3D, finish; quantities per room; pricing deferred); style engine (palette with LRV, material limits, clone check); 2–3 concept boards for you | 30 real products per category verified; boards rendered | I1–I6, I16 |
+| ~~L4 Products + style~~ (PAUSED by client 2026-11-21; revisit after G1) | G (sourcing) + C (code) | Egyptian supplier catalogue (SKU, dimensions, 3D, finish; quantities per room; pricing deferred); style engine (palette with LRV, material limits, clone check); 2–3 concept boards for you | 30 real products per category verified; boards rendered | I1–I6, I16 |
 | L6 Lighting engine | X | Whole-room Radiance calc report; UGR (CIE 117/190); over-lighting cap; ceiling-plan setting-out solver; scene and DALI table; exterior and obtrusive light; emergency path; LM-83 metrics | CIE 171 cases ±5 %; CIE 190 UGR exact; LM-83 reference ±3 points | LA1–LA15 engine |
 | L7 Electrical engine | C | Device placement rules; circuits; maximum demand; cable/protection sizing; voltage drop; Zs; boards; single-line diagram (SVG/DXF) | IET OSG demand example ±2 %; IEC 60364-5-52 worked example within ±1 size; bathroom zone negative tests | EA1–EA12 engine |
 | L8 Ops | C | One workstation job runner (systemd user units, dead-job relaunch, GPU queue); root scripts into `ops/workstation/` | Kill a job mid-run and it resumes; two GPU jobs never overlap | — |
@@ -146,3 +146,12 @@ Shared files are no longer hand-edited centrally:
 - **The review load is on the lead.** Six lanes report back. Mitigation: verifier agents do the first pass; the lead reviews only verified hand-backs.
 - **Contract drift.** If L2 changes the model record, lanes break. Mitigation: versioned record; changes only at wave boundaries.
 - **Single GPU.** L3 calibration, L6 and L9 compete for the workstation. Mitigation: the L8 queue; Radiance runs on CPU; L9 is the only Wave 3 GPU-heavy job.
+
+## 9. Scope decisions log
+
+- 2026-11-21: International best practice is the gate; Egyptian code is informative only.
+- 2026-11-21: No pricing or budget for now; quantities and specifications only.
+- 2026-11-21: Client confirmed scope. Kept: L1 safety, L2 design model, L3 render critic, L6 lighting,
+  L7 electrical, L8 workstation runner, R sourcing; later: Revit drawing set, blind photo test,
+  automatic layout generation, mood and material boards. Paused: L4 products, style and quantities.
+- Rule: any new capability is proposed to the client for confirmation before it is built.
