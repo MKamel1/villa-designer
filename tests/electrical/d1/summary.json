@@ -1,35 +1,35 @@
 {
  "design": "D1",
  "supply": {
-  "max_demand_kva": 77.4,
-  "single_phase_equiv_a": 352.0,
-  "line_current_a_3ph_worst_phase": 117.5,
+  "max_demand_kva": 77.5,
+  "single_phase_equiv_a": 352.2,
+  "line_current_a_3ph_worst_phase": 117.6,
   "incomer_in_a": 125.0,
   "recommendation": "three-phase",
   "single_phase_limit_a": 63.0,
   "limit_note": "policy threshold (ours): above a 63 A single-phase service the villa is recommended on three phases; the utility's actual single-phase limit is not verified",
-  "connected_kva": 137.2,
+  "connected_kva": 137.3,
   "sensitivity": [
    {
     "socket_current_factor": 1.0,
-    "total_a_1ph_equiv": 352.0,
-    "kva": 77.4,
-    "line_a_3ph": 117.3
+    "total_a_1ph_equiv": 352.2,
+    "kva": 77.5,
+    "line_a_3ph": 117.4
    },
    {
     "socket_current_factor": 0.5,
-    "total_a_1ph_equiv": 261.2,
+    "total_a_1ph_equiv": 261.4,
     "kva": 57.5,
     "line_a_3ph": 87.1
    },
    {
     "socket_current_factor": 0.25,
-    "total_a_1ph_equiv": 215.8,
+    "total_a_1ph_equiv": 216.0,
     "kva": 47.5,
-    "line_a_3ph": 71.9
+    "line_a_3ph": 72.0
    }
   ],
-  "rationale": "single-phase equivalent demand 352 A is above the 63 A policy limit for one phase; three phases give a worst-phase line current of 117 A"
+  "rationale": "single-phase equivalent demand 352 A is above the 63 A policy limit for one phase; three phases give a worst-phase line current of 118 A"
  },
  "boards": {
   "MDB": {
@@ -51,7 +51,7 @@
    "room": "gallery-end",
    "circuits": 20,
    "ways": 26,
-   "demand_kva": 27.8
+   "demand_kva": 27.9
   }
  },
  "circuits": {
@@ -104,9 +104,9 @@
  },
  "provisional_zones": false,
  "phase_loads_a": {
-  "L1": 207.6,
-  "L2": 208.1,
-  "L3": 207.9
+  "L1": 208.3,
+  "L2": 207.9,
+  "L3": 207.7
  },
  "checks": {
   "EA1:not_evaluated": 1,
@@ -116,11 +116,12 @@
   "EA11:pass": 1,
   "EA11:warn": 3,
   "EA12:pass": 4,
-  "EA13:pass": 7,
+  "EA13:fail": 1,
+  "EA13:pass": 6,
   "EA14:not_evaluated": 1,
   "EA15:pass": 29,
   "EA2:pass": 6,
-  "EA3:pass": 101,
+  "EA3:pass": 100,
   "EA4:not_evaluated": 4,
   "EA4:pass": 5,
   "EA5:pass": 66,
@@ -136,8 +137,8 @@
   "furn-fb-shower: wet-area zone data from the model (tray rim 100.0 mm; head height 2250 mm)",
   "furn-ka-bunk: bed head side is not authored and no short end is within 600 mm of a wall; bedside sockets sit at both ends of the wall it stands along (W)",
   "furn-pe-bath: wet-area zone data from the model (tray rim 550.0 mm; head height 2300 mm)",
-  "luminaire watts: 63 of 136 luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / 90 lm/W, a placeholder for lane L6b to replace",
-  "lighting zones from knowledge/lighting/zones-d1.json (lane L6b): 69 zones; 12 sized on rated luminaire W above the published commissioned W",
+  "luminaire watts: 57 of 132 luminaires have no watts in the model (strips, pendants, lamps); derived as flux_lm / 90 lm/W, a placeholder for lane L6b to replace",
+  "lighting zones from knowledge/lighting/zones-d1.json (lane L6b): 68 zones; 16 sized on rated luminaire W above the published commissioned W",
   "boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; meter position and utility cabinet at the street fence are assumptions to confirm",
   "routes: Manhattan distance x 1.15 through all the circuit's load points (nearest-neighbour chain) plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops",
   "storey areas for the alarm grade (net rooms + wall plan): B 168.7 m2 (net 153.6), GF 117.6 m2 (net 103.6)",

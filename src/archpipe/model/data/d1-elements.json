@@ -46,7 +46,7 @@
   "floor": 30,
   "furniture": 81,
   "garden": 14,
-  "luminaire": 136,
+  "luminaire": 132,
   "plant": 80,
   "railing": 8,
   "room": 30,
@@ -11395,13 +11395,13 @@
    "kind": "furniture",
    "level": "B",
    "placement": [
-    6200.0,
+    5900.0,
     -28271.0,
     0.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    1800.0,
+    1200.0,
     400.0,
     2300.0
    ],
@@ -11411,7 +11411,7 @@
    "finish_codes": [],
    "params": {
     "type": "under_stair_storage",
-    "why": "sliding-door joinery cut to the descending stair soffit; standing access at the high end",
+    "why": "sliding-door joinery cut to the descending stair soffit; standing access at the high end; ends at x 6.50 where the G1 understair cupboard (x 6.561..9.657) begins; three bays kept so fixture numbering (approved marker ids) is unchanged",
     "extra": {
      "soffit": "stair",
      "doors": "sliding",
@@ -11422,16 +11422,16 @@
       ],
       [
        "luggage",
-       0.65
+       0.35
       ],
       [
        "seasonal-boxes",
-       0.6
+       0.3
       ]
      ]
     },
     "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-under_stair_storage---1800-400-2300"
+    "type_id": "type-furniture-under_stair_storage---1200-400-2300"
    }
   },
   {
@@ -12922,28 +12922,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -12961,8 +12961,8 @@
     "illuminance_card": "ies-res-family-room-100",
     "why": "soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -12976,28 +12976,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13015,8 +13015,8 @@
     "illuminance_card": "ies-res-family-room-100",
     "why": "soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -13030,28 +13030,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13069,8 +13069,8 @@
     "illuminance_card": "ies-res-family-room-100",
     "why": "soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -13084,28 +13084,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13123,8 +13123,8 @@
     "illuminance_card": "ies-res-family-room-100",
     "why": "soft ambient, dimmable; 2 x 2 clear of the cove band (L6b: 6 -> 4, 4 m2 per fitting)",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -13246,28 +13246,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 109.9,
-    "watts": 12.0,
+    "flux_lm": 159.8,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13285,8 +13285,8 @@
     "illuminance_card": "",
     "why": "L6b LA13: basement escape/night route from the TV room to the stair foot: battery-backed downlight at 15 % output (110 lm) on the lounge centre line; part of the night layer",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -13300,28 +13300,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 109.9,
-    "watts": 12.0,
+    "flux_lm": 159.8,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13339,8 +13339,8 @@
     "illuminance_card": "",
     "why": "L6b LA13: basement escape/night route from the TV room to the stair foot: battery-backed downlight at 15 % output (110 lm) on the lounge centre line; part of the night layer",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -13354,28 +13354,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    31.0,
-    31.0,
+    77.0,
+    77.0,
     0.0
    ],
    "host": "",
    "room": "lounge",
-   "product_id": "iguzzini/LSEVO-AAHENX",
+   "product_id": "erco/A9000028",
    "finish_codes": [],
    "params": {
     "fixture_kind": "ADJ",
     "layer": "accent",
     "mount": "recessed",
-    "what": "flush trimless adjustable accent",
-    "flux_lm": 191.3,
-    "watts": 12.6,
+    "what": "adjustable narrow-spot accent (track/recessed)",
+    "flux_lm": 200.6,
+    "watts": 6.3,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 18.5,
+    "beam_deg": 5.7,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAHENX",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+     "manufacturer": "erco",
+     "code": "A9000028",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
      "substitute": false,
      "generic": false
     },
@@ -13393,8 +13393,8 @@
     "illuminance_card": "ies-res-chair-reading-200",
     "why": "reading light over the armchair, aimed ~20 deg",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 31.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31"
+    "size_basis": "IES LM-63 luminous opening, diameter 77.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77"
    }
   },
   {
@@ -13456,13 +13456,13 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    6175.0,
+    6025.0,
     -28445.0,
-    1953.0
+    2129.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    580.0,
+    280.0,
     0.0,
     0.0
    ],
@@ -13475,7 +13475,7 @@
     "layer": "accent",
     "mount": "strip",
     "what": "LED strip inside glass-door book cabinet",
-    "flux_lm": 232.0,
+    "flux_lm": 112.0,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -13497,12 +13497,12 @@
      0.0,
      0.0
     ],
-    "length_mm": 580.0,
+    "length_mm": 280.0,
     "illuminance_card": "",
     "why": "ASSUMED internal LED strip on the back of each open under-stair bay",
-    "emitter_z_scene_mm": -1047.0,
+    "emitter_z_scene_mm": -871.0,
     "size_basis": "authored run length (strip); section not authored",
-    "type_id": "type-luminaire---BACK-strip-580-0"
+    "type_id": "type-luminaire---BACK-strip-280-0"
    }
   },
   {
@@ -13510,13 +13510,13 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    6800.0,
+    6350.0,
     -28445.0,
-    1600.0
+    1953.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    530.0,
+    230.0,
     0.0,
     0.0
    ],
@@ -13529,7 +13529,7 @@
     "layer": "accent",
     "mount": "strip",
     "what": "LED strip inside glass-door book cabinet",
-    "flux_lm": 212.0,
+    "flux_lm": 92.0,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -13551,12 +13551,12 @@
      0.0,
      0.0
     ],
-    "length_mm": 530.0,
+    "length_mm": 230.0,
     "illuminance_card": "",
     "why": "ASSUMED internal LED strip on the back of each open under-stair bay",
-    "emitter_z_scene_mm": -1400.0,
+    "emitter_z_scene_mm": -1047.0,
     "size_basis": "authored run length (strip); section not authored",
-    "type_id": "type-luminaire---BACK-strip-530-0"
+    "type_id": "type-luminaire---BACK-strip-230-0"
    }
   },
   {
@@ -13624,28 +13624,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "lounge-nook",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13663,8 +13663,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "the way to the pantry",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -13672,34 +13672,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    4548.0,
+    5279.0,
     -29218.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "pantry",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13717,62 +13717,8 @@
     "illuminance_card": "ies-res-storage-frequent-50",
     "why": "pantry shelves",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-DL-pantry-02",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    6009.0,
-    -29218.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "pantry",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-storage-frequent-50",
-    "why": "pantry shelves",
-    "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -13948,28 +13894,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "hall-b",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -13987,8 +13933,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "stair foot and hall (L6b: 2 -> 1 on the hall centre)",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -14002,28 +13948,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "entry-b",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14041,8 +13987,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "entrance",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -14056,29 +14002,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "entry-b",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -14095,8 +14041,8 @@
     "illuminance_card": "",
     "why": "washes the party wall at the entrance: a lit wall reads as welcome",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -14110,28 +14056,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "family",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14149,8 +14095,8 @@
     "illuminance_card": "ies-res-family-room-100",
     "why": "family corner ambient (L6b: 2 -> 1 on the room centre)",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -14231,7 +14177,7 @@
     "layer": "decorative",
     "mount": "pendant",
     "what": "opal glass globe pendant D300",
-    "flux_lm": 1080.8,
+    "flux_lm": 394.9,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -14285,7 +14231,7 @@
     "layer": "decorative",
     "mount": "pendant",
     "what": "opal glass globe pendant D300",
-    "flux_lm": 1080.8,
+    "flux_lm": 394.9,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -14339,7 +14285,7 @@
     "layer": "decorative",
     "mount": "pendant",
     "what": "opal glass globe pendant D300",
-    "flux_lm": 1080.8,
+    "flux_lm": 394.9,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -14374,34 +14320,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    12058.0,
-    -25760.0,
+    11575.0,
+    -25660.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 533.3,
-    "watts": 12.0,
+    "flux_lm": 639.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14417,10 +14363,10 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "prep downlight on the prep line (the globes' axes, plus one at the far end); the middle one is over the hob",
+    "why": "prep downlight on the prep line: two mirrored pairs about the island centre and one on the centre of the right-hand counter module; none over the hob",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -14428,34 +14374,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    13075.0,
-    -25760.0,
+    11875.0,
+    -25660.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 275.5,
-    "watts": 12.0,
+    "flux_lm": 639.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14470,11 +14416,11 @@
      0.0
     ],
     "length_mm": 0.0,
-    "illuminance_card": "ies-res-kitchen-cooktop-300",
-    "why": "prep downlight on the prep line (the globes' axes, plus one at the far end); the middle one is over the hob",
+    "illuminance_card": "ies-res-kitchen-prep-500",
+    "why": "prep downlight on the prep line: two mirrored pairs about the island centre and one on the centre of the right-hand counter module; none over the hob",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -14482,34 +14428,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    14092.0,
-    -25760.0,
+    14275.0,
+    -25660.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 533.3,
-    "watts": 12.0,
+    "flux_lm": 639.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14525,10 +14471,10 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "prep downlight on the prep line (the globes' axes, plus one at the far end); the middle one is over the hob",
+    "why": "prep downlight on the prep line: two mirrored pairs about the island centre and one on the centre of the right-hand counter module; none over the hob",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -14536,34 +14482,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    14600.0,
-    -25760.0,
+    14575.0,
+    -25660.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 533.3,
-    "watts": 12.0,
+    "flux_lm": 639.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14579,14 +14525,68 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "prep downlight on the prep line (the globes' axes, plus one at the far end); the middle one is over the hob",
+    "why": "prep downlight on the prep line: two mirrored pairs about the island centre and one on the centre of the right-hand counter module; none over the hob",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
    "id": "lum-DL-kitchen-08",
+   "kind": "luminaire",
+   "level": "B",
+   "placement": [
+    13850.0,
+    -25660.0,
+    2700.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    76.0,
+    76.0,
+    0.0
+   ],
+   "host": "",
+   "room": "kitchen",
+   "product_id": "erco/41321",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "DL",
+    "layer": "ambient",
+    "mount": "recessed",
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 639.0,
+    "watts": 14.4,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 57.0,
+    "photometry": {
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "ies-res-kitchen-prep-500",
+    "why": "prep downlight on the prep line: two mirrored pairs about the island centre and one on the centre of the right-hand counter module; none over the hob",
+    "emitter_z_scene_mm": -300.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
+   }
+  },
+  {
+   "id": "lum-DL-kitchen-09",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -14596,28 +14596,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 441.8,
-    "watts": 12.0,
+    "flux_lm": 553.8,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14635,12 +14635,12 @@
     "illuminance_card": "ies-res-kitchen-sink-300",
     "why": "650 mm from the wall face over the counter's front edge, 0.9 m pitch (L6b: 3 DLN -> 2 DL at the sink)",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
-   "id": "lum-DL-kitchen-09",
+   "id": "lum-DL-kitchen-10",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -14650,28 +14650,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 441.8,
-    "watts": 12.0,
+    "flux_lm": 553.8,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14689,12 +14689,12 @@
     "illuminance_card": "ies-res-kitchen-sink-300",
     "why": "650 mm from the wall face over the counter's front edge, 0.9 m pitch (L6b: 3 DLN -> 2 DL at the sink)",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
-   "id": "lum-DL-kitchen-10",
+   "id": "lum-DL-kitchen-11",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -14704,28 +14704,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14743,8 +14743,8 @@
     "illuminance_card": "ies-res-kitchen-general-50",
     "why": "kitchen general",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -14758,28 +14758,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen-island",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14797,8 +14797,8 @@
     "illuminance_card": "ies-res-kitchen-general-50",
     "why": "aisle behind the island stools",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -14812,28 +14812,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kitchen-island",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -14851,12 +14851,12 @@
     "illuminance_card": "ies-res-kitchen-general-50",
     "why": "aisle behind the island stools",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
-   "id": "lum-TOE-kitchen-11",
+   "id": "lum-TOE-kitchen-12",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -14920,30 +14920,30 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    1600.0,
-    0.0,
+    350.0,
+    115.0,
     0.0
    ],
    "host": "",
    "room": "dining",
-   "product_id": "",
+   "product_id": "erco/50674",
    "finish_codes": [],
    "params": {
     "fixture_kind": "PEN-LIN",
     "layer": "task",
     "mount": "pendant",
-    "what": "linear pendant 1.6 m, direct/indirect",
-    "flux_lm": 727.2,
-    "watts": null,
-    "cct_k": 2700,
+    "what": "linear pendant 1.5 m, direct",
+    "flux_lm": 462.5,
+    "watts": 27.0,
+    "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 90,
+    "beam_deg": 87.0,
     "photometry": {
-     "manufacturer": "",
-     "code": "",
-     "ies": "",
+     "manufacturer": "erco",
+     "code": "50674",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-50674-x2.ies",
      "substitute": false,
-     "generic": true
+     "generic": false
     },
     "aim": [
      0.0,
@@ -14955,12 +14955,12 @@
      0.0,
      0.0
     ],
-    "length_mm": 0.0,
+    "length_mm": 1500.0,
     "illuminance_card": "rid-pendant-above-table-762",
     "why": "linear pendant along the table, 762 mm above it",
     "emitter_z_scene_mm": -1488.0,
-    "size_basis": "authored in the requirement text ('1.6 m'): length; section not given",
-    "type_id": "type-luminaire---PEN-LIN-pendant-1600-0"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-50674-PEN-LIN-pendant-350-115"
    }
   },
   {
@@ -14974,28 +14974,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    31.0,
-    31.0,
+    77.0,
+    77.0,
     0.0
    ],
    "host": "",
    "room": "dining-side",
-   "product_id": "iguzzini/LSEVO-AAHENX",
+   "product_id": "erco/A9000028",
    "finish_codes": [],
    "params": {
     "fixture_kind": "ADJ",
     "layer": "accent",
     "mount": "recessed",
-    "what": "flush trimless adjustable accent",
-    "flux_lm": 511.5,
-    "watts": 12.6,
+    "what": "adjustable narrow-spot accent (track/recessed)",
+    "flux_lm": 304.0,
+    "watts": 6.3,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 18.5,
+    "beam_deg": 5.7,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAHENX",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+     "manufacturer": "erco",
+     "code": "A9000028",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
      "substitute": false,
      "generic": false
     },
@@ -15013,8 +15013,8 @@
     "illuminance_card": "ldb-accent-aim-30",
     "why": "accent on the sideboard and the art above it, ~30 deg",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 31.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31"
+    "size_basis": "IES LM-63 luminous opening, diameter 77.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77"
    }
   },
   {
@@ -15028,28 +15028,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    31.0,
-    31.0,
+    77.0,
+    77.0,
     0.0
    ],
    "host": "",
    "room": "dining-side",
-   "product_id": "iguzzini/LSEVO-AAHENX",
+   "product_id": "erco/A9000028",
    "finish_codes": [],
    "params": {
     "fixture_kind": "ADJ",
     "layer": "accent",
     "mount": "recessed",
-    "what": "flush trimless adjustable accent",
-    "flux_lm": 511.5,
-    "watts": 12.6,
+    "what": "adjustable narrow-spot accent (track/recessed)",
+    "flux_lm": 304.0,
+    "watts": 6.3,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 18.5,
+    "beam_deg": 5.7,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAHENX",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+     "manufacturer": "erco",
+     "code": "A9000028",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
      "substitute": false,
      "generic": false
     },
@@ -15067,8 +15067,8 @@
     "illuminance_card": "ldb-accent-aim-30",
     "why": "accent on the sideboard and the art above it, ~30 deg",
     "emitter_z_scene_mm": -300.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 31.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31"
+    "size_basis": "IES LM-63 luminous opening, diameter 77.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77"
    }
   },
   {
@@ -15184,34 +15184,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    19700.0,
-    -27471.0,
+    19567.0,
+    -26000.0,
     2800.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "living",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -15229,8 +15229,8 @@
     "illuminance_card": "ies-res-living-30",
     "why": "ambient, dimmable",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -15238,34 +15238,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    19700.0,
-    -24691.0,
+    21497.0,
+    -26000.0,
     2800.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "living",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -15283,116 +15283,8 @@
     "illuminance_card": "ies-res-living-30",
     "why": "ambient, dimmable",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-DL-living-05",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    21329.0,
-    -27471.0,
-    2800.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "living",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-living-30",
-    "why": "ambient, dimmable",
-    "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-DL-living-06",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    21329.0,
-    -24691.0,
-    2800.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "living",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-living-30",
-    "why": "ambient, dimmable",
-    "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -15851,7 +15743,7 @@
     "layer": "task",
     "mount": "wall",
     "what": "movable wall reading light: wall plate, articulated 0.6 m reach and rotating head (ASSUMED product; TODO swing-arm-product)",
-    "flux_lm": 117.6,
+    "flux_lm": 113.7,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -15905,7 +15797,7 @@
     "layer": "task",
     "mount": "wall",
     "what": "movable wall reading light: wall plate, articulated 0.6 m reach and rotating head (ASSUMED product; TODO swing-arm-product)",
-    "flux_lm": 117.6,
+    "flux_lm": 113.7,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -15946,28 +15838,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "cinema",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -15985,8 +15877,8 @@
     "illuminance_card": "ies-res-media-lcd-20",
     "why": "soft ambient over the loveseat, dimmed to off for films (the draft render showed a room with no ambient light at all)",
     "emitter_z_scene_mm": -380.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -16000,28 +15892,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "cinema",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16039,8 +15931,8 @@
     "illuminance_card": "ies-res-media-lcd-20",
     "why": "soft ambient over the loveseat, dimmed to off for films (the draft render showed a room with no ambient light at all)",
     "emitter_z_scene_mm": -380.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -16054,29 +15946,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "cinema",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -16093,8 +15985,8 @@
     "illuminance_card": "ies-res-media-lcd-20",
     "why": "rear wall wash, dimmed for films (no light on the screen)",
     "emitter_z_scene_mm": -900.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -16108,29 +16000,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "cinema",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -16147,8 +16039,8 @@
     "illuminance_card": "ies-res-media-lcd-20",
     "why": "rear wall wash, dimmed for films (no light on the screen)",
     "emitter_z_scene_mm": -900.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -16162,29 +16054,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "cinema",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -16201,8 +16093,8 @@
     "illuminance_card": "ies-res-media-lcd-20",
     "why": "rear wall wash, dimmed for films (no light on the screen)",
     "emitter_z_scene_mm": -900.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -16270,30 +16162,30 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    0.0,
-    0.0,
-    0.0
+    1.0,
+    1.0,
+    1.0
    ],
    "host": "",
    "room": "cinema",
-   "product_id": "",
+   "product_id": "erco/31327",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
-    "flux_lm": 168.0,
-    "watts": null,
-    "cct_k": 2700,
+    "what": "adjustable desk lamp, shielded head, 2700 K",
+    "flux_lm": 80.7,
+    "watts": 12.0,
+    "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 70,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "",
-     "code": "",
-     "ies": "",
+     "manufacturer": "erco",
+     "code": "31327",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
-     "generic": true
+     "generic": false
     },
     "aim": [
      0.0,
@@ -16309,8 +16201,8 @@
     "illuminance_card": "ies-res-desk-400",
     "why": "two shielded task lamps at the cinema desk, switched off for films (L6b: 450 -> 250 lm)",
     "emitter_z_scene_mm": -1800.0,
-    "size_basis": "not derivable: generic fixture, no bound product, no dimension in the requirement",
-    "type_id": "type-luminaire---DESK-task-lamp-0-0"
+    "size_basis": "IES LM-63 luminous opening, diameter 1.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-31327-DESK-task-lamp-1-1"
    }
   },
   {
@@ -16324,30 +16216,30 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    0.0,
-    0.0,
-    0.0
+    1.0,
+    1.0,
+    1.0
    ],
    "host": "",
    "room": "cinema",
-   "product_id": "",
+   "product_id": "erco/31327",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
-    "flux_lm": 168.0,
-    "watts": null,
-    "cct_k": 2700,
+    "what": "adjustable desk lamp, shielded head, 2700 K",
+    "flux_lm": 80.7,
+    "watts": 12.0,
+    "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 70,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "",
-     "code": "",
-     "ies": "",
+     "manufacturer": "erco",
+     "code": "31327",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
-     "generic": true
+     "generic": false
     },
     "aim": [
      0.0,
@@ -16363,8 +16255,8 @@
     "illuminance_card": "ies-res-desk-400",
     "why": "two shielded task lamps at the cinema desk, switched off for films (L6b: 450 -> 250 lm)",
     "emitter_z_scene_mm": -1800.0,
-    "size_basis": "not derivable: generic fixture, no bound product, no dimension in the requirement",
-    "type_id": "type-luminaire---DESK-task-lamp-0-0"
+    "size_basis": "IES LM-63 luminous opening, diameter 1.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-31327-DESK-task-lamp-1-1"
    }
   },
   {
@@ -16540,28 +16432,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "guest-wc",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16579,8 +16471,8 @@
     "illuminance_card": "ies-res-shower-50",
     "why": "guest WC ambient",
     "emitter_z_scene_mm": -350.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -16594,28 +16486,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "guest-wc",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 356.0,
-    "watts": 12.0,
+    "flux_lm": 487.8,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16633,8 +16525,8 @@
     "illuminance_card": "ies-res-vanity-grooming-300",
     "why": "basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
     "emitter_z_scene_mm": -350.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -16702,28 +16594,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 539.2,
-    "watts": 12.0,
+    "flux_lm": 805.1,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16741,8 +16633,8 @@
     "illuminance_card": "ies-res-kitchen-prep-500",
     "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
     "emitter_z_scene_mm": -350.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -16750,34 +16642,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    12723.0,
+    12943.0,
     -21501.0,
-    2650.0
+    2800.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 539.2,
-    "watts": 12.0,
+    "flux_lm": 805.1,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16794,9 +16686,9 @@
     "length_mm": 0.0,
     "illuminance_card": "ies-res-kitchen-prep-500",
     "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
-    "emitter_z_scene_mm": -350.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "emitter_z_scene_mm": -200.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -16804,34 +16696,34 @@
    "kind": "luminaire",
    "level": "B",
    "placement": [
-    13385.0,
+    13827.0,
     -21501.0,
     2800.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 539.2,
-    "watts": 12.0,
+    "flux_lm": 805.1,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16849,66 +16741,12 @@
     "illuminance_card": "ies-res-kitchen-prep-500",
     "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
    "id": "lum-DL-dirty-kitchen-04",
-   "kind": "luminaire",
-   "level": "B",
-   "placement": [
-    14047.0,
-    -21501.0,
-    2800.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 539.2,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-kitchen-prep-500",
-    "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
-    "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-DL-dirty-kitchen-05",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -16918,28 +16756,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 539.2,
-    "watts": 12.0,
+    "flux_lm": 805.1,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -16957,12 +16795,12 @@
     "illuminance_card": "ies-res-kitchen-prep-500",
     "why": "over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
-   "id": "lum-DL-dirty-kitchen-06",
+   "id": "lum-DL-dirty-kitchen-05",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -16972,28 +16810,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17011,12 +16849,12 @@
     "illuminance_card": "ies-res-laundry-200",
     "why": "laundry and folding",
     "emitter_z_scene_mm": -350.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
-   "id": "lum-DL-dirty-kitchen-07",
+   "id": "lum-DL-dirty-kitchen-06",
    "kind": "luminaire",
    "level": "B",
    "placement": [
@@ -17026,28 +16864,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "dirty-kitchen",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17065,8 +16903,8 @@
     "illuminance_card": "ies-res-laundry-200",
     "why": "laundry and folding",
     "emitter_z_scene_mm": -200.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -17236,8 +17074,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    3837.0,
-    -27971.0,
+    3887.0,
+    -28451.0,
     300.0
    ],
    "rotation_deg": 0.0,
@@ -17269,7 +17107,7 @@
     },
     "aim": [
      1,
-     0,
+     0.6,
      -0.2
     ],
     "along": [
@@ -17279,7 +17117,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "",
-    "why": "L6b LA13: low marker on the landing wall: lights the top treads of the flight and the landing (night layer)",
+    "why": "L6b LA13: low marker on the landing's south wall stub: lights the top treads of the flight and the landing (night layer)",
     "emitter_z_scene_mm": 300.0,
     "size_basis": "authored in the requirement text ('0.3 m'): length; section not given",
     "type_id": "type-luminaire---PATH-wall-marker-300-0"
@@ -17290,8 +17128,8 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    3837.0,
-    -26871.0,
+    4017.0,
+    -28451.0,
     300.0
    ],
    "rotation_deg": 0.0,
@@ -17322,8 +17160,8 @@
      "generic": true
     },
     "aim": [
+     0.4,
      1,
-     0,
      -0.2
     ],
     "along": [
@@ -17333,7 +17171,7 @@
     ],
     "length_mm": 0.0,
     "illuminance_card": "",
-    "why": "L6b LA13: low marker on the landing wall: lights the top treads of the flight and the landing (night layer)",
+    "why": "L6b LA13: low marker on the landing's south wall stub: lights the top treads of the flight and the landing (night layer)",
     "emitter_z_scene_mm": 300.0,
     "size_basis": "authored in the requirement text ('0.3 m'): length; section not given",
     "type_id": "type-luminaire---PATH-wall-marker-300-0"
@@ -17350,28 +17188,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "landing-gf",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17389,8 +17227,8 @@
     "illuminance_card": "ies-res-stairs-50",
     "why": "stair top",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -17404,29 +17242,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "corridor",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -17443,8 +17281,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "grazing the long party wall: the corridor is lit by its wall, not by a row of spots",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -17458,29 +17296,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "corridor",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -17497,8 +17335,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "grazing the long party wall: the corridor is lit by its wall, not by a row of spots",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -17512,29 +17350,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "corridor",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -17551,8 +17389,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "grazing the long party wall: the corridor is lit by its wall, not by a row of spots",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -17566,29 +17404,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "corridor",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -17605,8 +17443,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "grazing the long party wall: the corridor is lit by its wall, not by a row of spots",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -17620,29 +17458,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "corridor",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -17659,8 +17497,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "grazing the long party wall: the corridor is lit by its wall, not by a row of spots",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -17674,29 +17512,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "corridor",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 399.0,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -17713,8 +17551,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "grazing the long party wall: the corridor is lit by its wall, not by a row of spots",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -17890,28 +17728,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "gallery-end",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17929,8 +17767,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "gallery end",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -17944,28 +17782,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -17983,8 +17821,8 @@
     "illuminance_card": "ies-res-game-digital-6",
     "why": "study ambient (L6b: 4 -> 2)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -17998,28 +17836,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18037,8 +17875,8 @@
     "illuminance_card": "ies-res-game-digital-6",
     "why": "study ambient (L6b: 4 -> 2)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18052,28 +17890,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 487.9,
-    "watts": 12.0,
+    "flux_lm": 563.4,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18091,8 +17929,8 @@
     "illuminance_card": "ies-res-desk-400",
     "why": "desk light over the shared homework desk's front edge (no shadow of the head); L6b: DL",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18106,28 +17944,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 487.9,
-    "watts": 12.0,
+    "flux_lm": 563.4,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18145,8 +17983,8 @@
     "illuminance_card": "ies-res-desk-400",
     "why": "desk light over the shared homework desk's front edge (no shadow of the head); L6b: DL",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18154,34 +17992,34 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    4950.0,
+    5300.0,
     -24541.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 359.7,
-    "watts": 12.0,
+    "flux_lm": 688.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18199,62 +18037,8 @@
     "illuminance_card": "ies-res-desk-400",
     "why": "desk light over the adult desk; L6b: DL (V12: 1 -> 2, one needed 1.12 of driver output)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-DL-study-game-06",
-   "kind": "luminaire",
-   "level": "GF",
-   "placement": [
-    5650.0,
-    -24541.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "study-game",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 359.7,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-desk-400",
-    "why": "desk light over the adult desk; L6b: DL (V12: 1 -> 2, one needed 1.12 of driver output)",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18268,28 +18052,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "family-bath",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18307,8 +18091,8 @@
     "illuminance_card": "ies-res-shower-50",
     "why": "bath ambient",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18322,28 +18106,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "family-bath",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 484.6,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18361,8 +18145,8 @@
     "illuminance_card": "ies-res-shower-50",
     "why": "shower (wet-rated); L6b: DL",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18376,28 +18160,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "family-bath",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 228.6,
-    "watts": 12.0,
+    "flux_lm": 289.7,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18415,8 +18199,8 @@
     "illuminance_card": "ies-res-vanity-grooming-300",
     "why": "basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18443,7 +18227,7 @@
     "layer": "task",
     "mount": "wall",
     "what": "vanity wall light, opal, each side of the mirror",
-    "flux_lm": 197.6,
+    "flux_lm": 101.7,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -18497,7 +18281,7 @@
     "layer": "task",
     "mount": "wall",
     "what": "vanity wall light, opal, each side of the mirror",
-    "flux_lm": 197.6,
+    "flux_lm": 101.7,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -18586,34 +18370,34 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    12427.0,
+    13214.0,
     -25856.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kids-a",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18631,8 +18415,8 @@
     "illuminance_card": "ies-res-bedroom-general-50",
     "why": "bedroom ambient",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18640,34 +18424,34 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    14002.0,
-    -25856.0,
+    13170.0,
+    -23991.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kids-a",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 537.8,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18682,11 +18466,11 @@
      0.0
     ],
     "length_mm": 0.0,
-    "illuminance_card": "ies-res-bedroom-general-50",
-    "why": "bedroom ambient",
+    "illuminance_card": "ies-res-desk-400",
+    "why": "L6c: desk downlight in front of the child (Lucy alone (234 lm) cannot reach 400 lx at a safe driver setting)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18700,30 +18484,30 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    0.0,
-    0.0,
-    0.0
+    1.0,
+    1.0,
+    1.0
    ],
    "host": "",
    "room": "kids-a",
-   "product_id": "",
+   "product_id": "erco/31327",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
-    "flux_lm": 319.9,
-    "watts": null,
-    "cct_k": 2700,
+    "what": "adjustable desk lamp, shielded head, 2700 K",
+    "flux_lm": 118.2,
+    "watts": 12.0,
+    "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 70,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "",
-     "code": "",
-     "ies": "",
+     "manufacturer": "erco",
+     "code": "31327",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
-     "generic": true
+     "generic": false
     },
     "aim": [
      0.0,
@@ -18739,12 +18523,66 @@
     "illuminance_card": "ies-res-desk-400",
     "why": "each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, out of the sleep zone",
     "emitter_z_scene_mm": 1200.0,
-    "size_basis": "not derivable: generic fixture, no bound product, no dimension in the requirement",
-    "type_id": "type-luminaire---DESK-task-lamp-0-0"
+    "size_basis": "IES LM-63 luminous opening, diameter 1.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-31327-DESK-task-lamp-1-1"
    }
   },
   {
-   "id": "lum-DESK-kids-a-04",
+   "id": "lum-DL-kids-a-04",
+   "kind": "luminaire",
+   "level": "GF",
+   "placement": [
+    14310.0,
+    -23991.0,
+    2700.0
+   ],
+   "rotation_deg": 0.0,
+   "size": [
+    76.0,
+    76.0,
+    0.0
+   ],
+   "host": "",
+   "room": "kids-a",
+   "product_id": "erco/41321",
+   "finish_codes": [],
+   "params": {
+    "fixture_kind": "DL",
+    "layer": "ambient",
+    "mount": "recessed",
+    "what": "flush trimless downlight, wide",
+    "flux_lm": 537.8,
+    "watts": 14.4,
+    "cct_k": 2700.0,
+    "cri": 90,
+    "beam_deg": 57.0,
+    "photometry": {
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
+     "substitute": false,
+     "generic": false
+    },
+    "aim": [
+     0.0,
+     0.0,
+     -1.0
+    ],
+    "along": [
+     1.0,
+     0.0,
+     0.0
+    ],
+    "length_mm": 0.0,
+    "illuminance_card": "ies-res-desk-400",
+    "why": "L6c: desk downlight in front of the child (Lucy alone (234 lm) cannot reach 400 lx at a safe driver setting)",
+    "emitter_z_scene_mm": 2700.0,
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
+   }
+  },
+  {
+   "id": "lum-DESK-kids-a-05",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -18754,30 +18592,30 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    0.0,
-    0.0,
-    0.0
+    1.0,
+    1.0,
+    1.0
    ],
    "host": "",
    "room": "kids-a",
-   "product_id": "",
+   "product_id": "erco/31327",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
-    "flux_lm": 319.9,
-    "watts": null,
-    "cct_k": 2700,
+    "what": "adjustable desk lamp, shielded head, 2700 K",
+    "flux_lm": 118.2,
+    "watts": 12.0,
+    "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 70,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "",
-     "code": "",
-     "ies": "",
+     "manufacturer": "erco",
+     "code": "31327",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
-     "generic": true
+     "generic": false
     },
     "aim": [
      0.0,
@@ -18793,12 +18631,12 @@
     "illuminance_card": "ies-res-desk-400",
     "why": "each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, out of the sleep zone",
     "emitter_z_scene_mm": 1200.0,
-    "size_basis": "not derivable: generic fixture, no bound product, no dimension in the requirement",
-    "type_id": "type-luminaire---DESK-task-lamp-0-0"
+    "size_basis": "IES LM-63 luminous opening, diameter 1.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-31327-DESK-task-lamp-1-1"
    }
   },
   {
-   "id": "lum-NL-kids-a-05",
+   "id": "lum-NL-kids-a-06",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -18856,34 +18694,34 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    15902.0,
+    16689.0,
     -25856.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kids-b",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18901,8 +18739,8 @@
     "illuminance_card": "ies-res-bedroom-general-50",
     "why": "bedroom ambient",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18910,34 +18748,34 @@
    "kind": "luminaire",
    "level": "GF",
    "placement": [
-    17477.0,
-    -25856.0,
+    17650.0,
+    -23991.0,
     2700.0
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "kids-b",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 640.1,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -18952,11 +18790,11 @@
      0.0
     ],
     "length_mm": 0.0,
-    "illuminance_card": "ies-res-bedroom-general-50",
-    "why": "bedroom ambient",
+    "illuminance_card": "ies-res-desk-400",
+    "why": "L6c: desk downlight in front of the child (Lucy alone (234 lm) cannot reach 400 lx at a safe driver setting)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -18970,30 +18808,30 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    0.0,
-    0.0,
-    0.0
+    1.0,
+    1.0,
+    1.0
    ],
    "host": "",
    "room": "kids-b",
-   "product_id": "",
+   "product_id": "erco/31327",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DESK",
     "layer": "task",
     "mount": "task-lamp",
-    "what": "adjustable wall-arm desk lamp, shielded head, 2700 K",
-    "flux_lm": 322.2,
-    "watts": null,
-    "cct_k": 2700,
+    "what": "adjustable desk lamp, shielded head, 2700 K",
+    "flux_lm": 140.6,
+    "watts": 12.0,
+    "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 70,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "",
-     "code": "",
-     "ies": "",
+     "manufacturer": "erco",
+     "code": "31327",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
      "substitute": false,
-     "generic": true
+     "generic": false
     },
     "aim": [
      0.0,
@@ -19009,8 +18847,8 @@
     "illuminance_card": "ies-res-desk-400",
     "why": "each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, out of the sleep zone",
     "emitter_z_scene_mm": 1200.0,
-    "size_basis": "not derivable: generic fixture, no bound product, no dimension in the requirement",
-    "type_id": "type-luminaire---DESK-task-lamp-0-0"
+    "size_basis": "IES LM-63 luminous opening, diameter 1.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-31327-DESK-task-lamp-1-1"
    }
   },
   {
@@ -19145,7 +18983,7 @@
     "layer": "decorative",
     "mount": "wall",
     "what": "adjustable wall-mounted swing-arm reading light (ASSUMED product)",
-    "flux_lm": 168.3,
+    "flux_lm": 167.8,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -19199,7 +19037,7 @@
     "layer": "decorative",
     "mount": "wall",
     "what": "adjustable wall-mounted swing-arm reading light (ASSUMED product)",
-    "flux_lm": 168.3,
+    "flux_lm": 167.8,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -19240,28 +19078,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "parents-bed",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -19279,66 +19117,12 @@
     "illuminance_card": "ies-res-bedroom-general-50",
     "why": "ambient, dimmable",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
-   "id": "lum-DL-parents-bed-05",
-   "kind": "luminaire",
-   "level": "GF",
-   "placement": [
-    20330.0,
-    -24141.0,
-    2700.0
-   ],
-   "rotation_deg": 0.0,
-   "size": [
-    69.0,
-    69.0,
-    0.0
-   ],
-   "host": "",
-   "room": "parents-bed",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
-   "finish_codes": [],
-   "params": {
-    "fixture_kind": "DL",
-    "layer": "ambient",
-    "mount": "recessed",
-    "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
-    "cct_k": 2700.0,
-    "cri": 90,
-    "beam_deg": 33.5,
-    "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": false,
-     "generic": false
-    },
-    "aim": [
-     0.0,
-     0.0,
-     -1.0
-    ],
-    "along": [
-     1.0,
-     0.0,
-     0.0
-    ],
-    "length_mm": 0.0,
-    "illuminance_card": "ies-res-bedroom-general-50",
-    "why": "ambient, dimmable",
-    "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
-   }
-  },
-  {
-   "id": "lum-ADJ-parents-bed-06",
+   "id": "lum-ADJ-parents-bed-05",
    "kind": "luminaire",
    "level": "GF",
    "placement": [
@@ -19348,28 +19132,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    31.0,
-    31.0,
+    77.0,
+    77.0,
     0.0
    ],
    "host": "",
    "room": "parents-bed",
-   "product_id": "iguzzini/LSEVO-AAHENX",
+   "product_id": "erco/A9000028",
    "finish_codes": [],
    "params": {
     "fixture_kind": "ADJ",
     "layer": "accent",
     "mount": "recessed",
-    "what": "flush trimless adjustable accent",
-    "flux_lm": 511.5,
-    "watts": 12.6,
+    "what": "adjustable narrow-spot accent (track/recessed)",
+    "flux_lm": 304.0,
+    "watts": 6.3,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 18.5,
+    "beam_deg": 5.7,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAHENX",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+     "manufacturer": "erco",
+     "code": "A9000028",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
      "substitute": false,
      "generic": false
     },
@@ -19387,8 +19171,8 @@
     "illuminance_card": "ies-res-vanity-grooming-300",
     "why": "vanity light",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 31.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31"
+    "size_basis": "IES LM-63 luminous opening, diameter 77.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77"
    }
   },
   {
@@ -19402,28 +19186,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "parents-entry",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -19441,8 +19225,8 @@
     "illuminance_card": "ies-res-passage-30",
     "why": "entry lobby",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -19834,28 +19618,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "parents-dressing",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -19873,8 +19657,8 @@
     "illuminance_card": "ies-res-dressing-general-100",
     "why": "dressing aisle",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -19888,28 +19672,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "parents-dressing",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 732.6,
-    "watts": 12.0,
+    "flux_lm": 1065.0,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -19927,8 +19711,8 @@
     "illuminance_card": "ies-res-dressing-general-100",
     "why": "dressing aisle",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -19942,29 +19726,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "parents-ensuite",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 293.0,
-    "watts": 12.0,
+    "flux_lm": 159.6,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -19981,8 +19765,8 @@
     "illuminance_card": "ies-res-shower-50",
     "why": "washes the marble wall; no direct downlight over the tub (advisory B-NODOWN)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -19996,29 +19780,29 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "parents-ensuite",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "fixture_kind": "WW",
     "layer": "accent",
     "mount": "recessed",
     "what": "flush trimless wall washer",
-    "flux_lm": 293.0,
-    "watts": 12.0,
+    "flux_lm": 159.6,
+    "watts": 10.1,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": null,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-     "substitute": true,
+     "manufacturer": "erco",
+     "code": "41374",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+     "substitute": false,
      "generic": false
     },
     "aim": [
@@ -20035,8 +19819,8 @@
     "illuminance_card": "ies-res-shower-50",
     "why": "washes the marble wall; no direct downlight over the tub (advisory B-NODOWN)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41374-WW-recessed-50-75"
    }
   },
   {
@@ -20050,28 +19834,28 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "parents-ensuite",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "fixture_kind": "DL",
     "layer": "ambient",
     "mount": "recessed",
     "what": "flush trimless downlight, wide",
-    "flux_lm": 334.1,
-    "watts": 12.0,
+    "flux_lm": 810.5,
+    "watts": 14.4,
     "cct_k": 2700.0,
     "cri": 90,
-    "beam_deg": 33.5,
+    "beam_deg": 57.0,
     "photometry": {
-     "manufacturer": "iguzzini",
-     "code": "LSEVO-AAK3EW",
-     "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+     "manufacturer": "erco",
+     "code": "41321",
+     "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
      "substitute": false,
      "generic": false
     },
@@ -20089,8 +19873,8 @@
     "illuminance_card": "ies-res-vanity-grooming-300",
     "why": "basin counter light, in front of the mirror (L6b: DL, driver set to the card)",
     "emitter_z_scene_mm": 2700.0,
-    "size_basis": "IES LM-63 luminous opening, diameter 69.0 mm; housing depth and trim not in the file",
-    "type_id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69"
+    "size_basis": "IES LM-63 luminous opening, diameter 76.0 mm; housing depth and trim not in the file",
+    "type_id": "type-luminaire-erco-41321-DL-recessed-76-76"
    }
   },
   {
@@ -20117,7 +19901,7 @@
     "layer": "task",
     "mount": "wall",
     "what": "ASSUMED generic linear LED bar over the mirror",
-    "flux_lm": 40.0,
+    "flux_lm": 53.3,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -20171,7 +19955,7 @@
     "layer": "task",
     "mount": "strip",
     "what": "backlit mirror halo, 2700 K",
-    "flux_lm": 70.0,
+    "flux_lm": 93.2,
     "watts": null,
     "cct_k": 2700,
     "cri": 90,
@@ -21218,8 +21002,8 @@
    "kind": "plant",
    "level": "SITE",
    "placement": [
-    3000.0,
-    -24170.0,
+    3420.0,
+    -24070.0,
     0.0
    ],
    "rotation_deg": 0.0,
@@ -29453,7 +29237,7 @@
    }
   },
   {
-   "id": "type-furniture-under_stair_storage---1800-400-2300",
+   "id": "type-furniture-under_stair_storage---1200-400-2300",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -29463,7 +29247,7 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    1800.0,
+    1200.0,
     400.0,
     2300.0
    ],
@@ -29484,7 +29268,7 @@
      "furniture",
      "under_stair_storage",
      "-",
-     1800.0,
+     1200.0,
      400.0,
      2300.0
     ],
@@ -31095,7 +30879,7 @@
    }
   },
   {
-   "id": "type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69",
+   "id": "type-luminaire-erco-41321-DL-recessed-76-76",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -31105,13 +30889,13 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    76.0,
+    76.0,
     0.0
    ],
    "host": "",
    "room": "",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41321",
    "finish_codes": [],
    "params": {
     "for_kind": "luminaire",
@@ -31119,20 +30903,20 @@
      "fixture_kind": "DL",
      "mount": "recessed",
      "layer": "ambient",
-     "flux_lm": 732.6,
-     "watts": 12.0,
+     "flux_lm": 1065.0,
+     "watts": 14.4,
      "cct_k": 2700.0,
      "cri": 90,
-     "beam_deg": 33.5,
+     "beam_deg": 57.0,
      "photometry": {
-      "manufacturer": "iguzzini",
-      "code": "LSEVO-AAK3EW",
-      "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
+      "manufacturer": "erco",
+      "code": "41321",
+      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41321.ies",
       "substitute": false,
       "generic": false
      }
     },
-    "occurrences": 57,
+    "occurrences": 53,
     "occurrence_ids": [
      "lum-DL-lounge-01",
      "lum-DL-lounge-02",
@@ -31142,7 +30926,6 @@
      "lum-DL-lounge-08",
      "lum-DL-lounge-nook-02",
      "lum-DL-pantry-01",
-     "lum-DL-pantry-02",
      "lum-DL-hall-b-01",
      "lum-DL-entry-b-01",
      "lum-DL-family-01",
@@ -31153,12 +30936,11 @@
      "lum-DL-kitchen-08",
      "lum-DL-kitchen-09",
      "lum-DL-kitchen-10",
+     "lum-DL-kitchen-11",
      "lum-DL-kitchen-island-01",
      "lum-DL-kitchen-island-02",
      "lum-DL-living-03",
      "lum-DL-living-04",
-     "lum-DL-living-05",
-     "lum-DL-living-06",
      "lum-DL-cinema-01",
      "lum-DL-cinema-02",
      "lum-DL-guest-wc-01",
@@ -31169,7 +30951,6 @@
      "lum-DL-dirty-kitchen-04",
      "lum-DL-dirty-kitchen-05",
      "lum-DL-dirty-kitchen-06",
-     "lum-DL-dirty-kitchen-07",
      "lum-DL-landing-gf-03",
      "lum-DL-gallery-end-01",
      "lum-DL-study-game-01",
@@ -31177,16 +30958,15 @@
      "lum-DL-study-game-03",
      "lum-DL-study-game-04",
      "lum-DL-study-game-05",
-     "lum-DL-study-game-06",
      "lum-DL-family-bath-01",
      "lum-DL-family-bath-02",
      "lum-DL-family-bath-03",
      "lum-DL-kids-a-01",
      "lum-DL-kids-a-02",
+     "lum-DL-kids-a-04",
      "lum-DL-kids-b-01",
      "lum-DL-kids-b-02",
      "lum-DL-parents-bed-04",
-     "lum-DL-parents-bed-05",
      "lum-DL-parents-entry-01",
      "lum-DL-parents-dressing-06",
      "lum-DL-parents-dressing-07",
@@ -31194,11 +30974,11 @@
     ],
     "key": [
      "luminaire",
-     "iguzzini/LSEVO-AAK3EW",
+     "erco/41321",
      "DL",
      "recessed",
-     69.0,
-     69.0
+     76.0,
+     76.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
@@ -31310,7 +31090,7 @@
    }
   },
   {
-   "id": "type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31",
+   "id": "type-luminaire-erco-A9000028-ADJ-recessed-77-77",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -31320,13 +31100,13 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    31.0,
-    31.0,
+    77.0,
+    77.0,
     0.0
    ],
    "host": "",
    "room": "",
-   "product_id": "iguzzini/LSEVO-AAHENX",
+   "product_id": "erco/A9000028",
    "finish_codes": [],
    "params": {
     "for_kind": "luminaire",
@@ -31334,15 +31114,15 @@
      "fixture_kind": "ADJ",
      "mount": "recessed",
      "layer": "accent",
-     "flux_lm": 191.3,
-     "watts": 12.6,
+     "flux_lm": 200.6,
+     "watts": 6.3,
      "cct_k": 2700.0,
      "cri": 90,
-     "beam_deg": 18.5,
+     "beam_deg": 5.7,
      "photometry": {
-      "manufacturer": "iguzzini",
-      "code": "LSEVO-AAHENX",
-      "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAHENX.ies",
+      "manufacturer": "erco",
+      "code": "A9000028",
+      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-A9000028.ies",
       "substitute": false,
       "generic": false
      }
@@ -31352,15 +31132,15 @@
      "lum-ADJ-lounge-09",
      "lum-ADJ-dining-side-01",
      "lum-ADJ-dining-side-02",
-     "lum-ADJ-parents-bed-06"
+     "lum-ADJ-parents-bed-05"
     ],
     "key": [
      "luminaire",
-     "iguzzini/LSEVO-AAHENX",
+     "erco/A9000028",
      "ADJ",
      "recessed",
-     31.0,
-     31.0
+     77.0,
+     77.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
@@ -31419,7 +31199,7 @@
    }
   },
   {
-   "id": "type-luminaire---BACK-strip-580-0",
+   "id": "type-luminaire---BACK-strip-280-0",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -31429,7 +31209,7 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    580.0,
+    280.0,
     0.0,
     0.0
    ],
@@ -31443,7 +31223,7 @@
      "fixture_kind": "BACK",
      "mount": "strip",
      "layer": "accent",
-     "flux_lm": 232.0,
+     "flux_lm": 112.0,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -31465,14 +31245,14 @@
      "-",
      "BACK",
      "strip",
-     580.0,
+     280.0,
      0.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
   },
   {
-   "id": "type-luminaire---BACK-strip-530-0",
+   "id": "type-luminaire---BACK-strip-230-0",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -31482,7 +31262,7 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    530.0,
+    230.0,
     0.0,
     0.0
    ],
@@ -31496,7 +31276,7 @@
      "fixture_kind": "BACK",
      "mount": "strip",
      "layer": "accent",
-     "flux_lm": 212.0,
+     "flux_lm": 92.0,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -31518,7 +31298,7 @@
      "-",
      "BACK",
      "strip",
-     530.0,
+     230.0,
      0.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
@@ -31633,7 +31413,7 @@
    }
   },
   {
-   "id": "type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69",
+   "id": "type-luminaire-erco-41374-WW-recessed-50-75",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -31643,13 +31423,13 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
     0.0
    ],
    "host": "",
    "room": "",
-   "product_id": "iguzzini/LSEVO-AAK3EW",
+   "product_id": "erco/41374",
    "finish_codes": [],
    "params": {
     "for_kind": "luminaire",
@@ -31657,16 +31437,16 @@
      "fixture_kind": "WW",
      "mount": "recessed",
      "layer": "accent",
-     "flux_lm": 732.6,
-     "watts": 12.0,
+     "flux_lm": 399.0,
+     "watts": 10.1,
      "cct_k": 2700.0,
      "cri": 90,
-     "beam_deg": 33.5,
+     "beam_deg": null,
      "photometry": {
-      "manufacturer": "iguzzini",
-      "code": "LSEVO-AAK3EW",
-      "ies": "out/villa/render-d1/ies/iguzzini/LSEVO-AAK3EW.ies",
-      "substitute": true,
+      "manufacturer": "erco",
+      "code": "41374",
+      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-41374.ies",
+      "substitute": false,
       "generic": false
      }
     },
@@ -31687,11 +31467,11 @@
     ],
     "key": [
      "luminaire",
-     "iguzzini/LSEVO-AAK3EW",
+     "erco/41374",
      "WW",
      "recessed",
-     69.0,
-     69.0
+     50.0,
+     75.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
@@ -31774,7 +31554,7 @@
      "fixture_kind": "PEN-GLOBE",
      "mount": "pendant",
      "layer": "decorative",
-     "flux_lm": 1080.8,
+     "flux_lm": 394.9,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -31847,7 +31627,7 @@
     },
     "occurrences": 1,
     "occurrence_ids": [
-     "lum-TOE-kitchen-11"
+     "lum-TOE-kitchen-12"
     ],
     "key": [
      "luminaire",
@@ -31861,7 +31641,7 @@
    }
   },
   {
-   "id": "type-luminaire---PEN-LIN-pendant-1600-0",
+   "id": "type-luminaire-erco-50674-PEN-LIN-pendant-350-115",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -31871,13 +31651,13 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    1600.0,
-    0.0,
+    350.0,
+    115.0,
     0.0
    ],
    "host": "",
    "room": "",
-   "product_id": "",
+   "product_id": "erco/50674",
    "finish_codes": [],
    "params": {
     "for_kind": "luminaire",
@@ -31885,17 +31665,17 @@
      "fixture_kind": "PEN-LIN",
      "mount": "pendant",
      "layer": "task",
-     "flux_lm": 727.2,
-     "watts": null,
-     "cct_k": 2700,
+     "flux_lm": 462.5,
+     "watts": 27.0,
+     "cct_k": 2700.0,
      "cri": 90,
-     "beam_deg": 90,
+     "beam_deg": 87.0,
      "photometry": {
-      "manufacturer": "",
-      "code": "",
-      "ies": "",
+      "manufacturer": "erco",
+      "code": "50674",
+      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-50674-x2.ies",
       "substitute": false,
-      "generic": true
+      "generic": false
      }
     },
     "occurrences": 1,
@@ -31904,11 +31684,11 @@
     ],
     "key": [
      "luminaire",
-     "-",
+     "erco/50674",
      "PEN-LIN",
      "pendant",
-     1600.0,
-     0.0
+     350.0,
+     115.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
@@ -32156,7 +31936,7 @@
      "fixture_kind": "SWING",
      "mount": "wall",
      "layer": "task",
-     "flux_lm": 117.6,
+     "flux_lm": 113.7,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -32239,7 +32019,7 @@
    }
   },
   {
-   "id": "type-luminaire---DESK-task-lamp-0-0",
+   "id": "type-luminaire-erco-31327-DESK-task-lamp-1-1",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -32249,13 +32029,13 @@
    ],
    "rotation_deg": 0.0,
    "size": [
-    0.0,
-    0.0,
-    0.0
+    1.0,
+    1.0,
+    1.0
    ],
    "host": "",
    "room": "",
-   "product_id": "",
+   "product_id": "erco/31327",
    "finish_codes": [],
    "params": {
     "for_kind": "luminaire",
@@ -32263,17 +32043,17 @@
      "fixture_kind": "DESK",
      "mount": "task-lamp",
      "layer": "task",
-     "flux_lm": 168.0,
-     "watts": null,
-     "cct_k": 2700,
+     "flux_lm": 80.7,
+     "watts": 12.0,
+     "cct_k": 2700.0,
      "cri": 90,
-     "beam_deg": 70,
+     "beam_deg": null,
      "photometry": {
-      "manufacturer": "",
-      "code": "",
-      "ies": "",
+      "manufacturer": "erco",
+      "code": "31327",
+      "ies": "/home/omar/archpipe/lanes/INT2/knowledge/lighting/ies/ERCO-31327.ies",
       "substitute": false,
-      "generic": true
+      "generic": false
      }
     },
     "occurrences": 5,
@@ -32281,16 +32061,16 @@
      "lum-DESK-cinema-07",
      "lum-DESK-cinema-08",
      "lum-DESK-kids-a-03",
-     "lum-DESK-kids-a-04",
+     "lum-DESK-kids-a-05",
      "lum-DESK-kids-b-03"
     ],
     "key": [
      "luminaire",
-     "-",
+     "erco/31327",
      "DESK",
      "task-lamp",
-     0.0,
-     0.0
+     1.0,
+     1.0
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"
    }
@@ -32486,7 +32266,7 @@
      "fixture_kind": "SCONCE",
      "mount": "wall",
      "layer": "task",
-     "flux_lm": 197.6,
+     "flux_lm": 101.7,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -32608,7 +32388,7 @@
     },
     "occurrences": 1,
     "occurrence_ids": [
-     "lum-NL-kids-a-05"
+     "lum-NL-kids-a-06"
     ],
     "key": [
      "luminaire",
@@ -32752,7 +32532,7 @@
      "fixture_kind": "WALL-READ",
      "mount": "wall",
      "layer": "decorative",
-     "flux_lm": 168.3,
+     "flux_lm": 167.8,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
@@ -32969,7 +32749,7 @@
      "fixture_kind": "MIRROR",
      "mount": "strip",
      "layer": "task",
-     "flux_lm": 70.0,
+     "flux_lm": 93.2,
      "watts": null,
      "cct_k": 2700,
      "cri": 90,
