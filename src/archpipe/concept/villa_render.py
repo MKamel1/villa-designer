@@ -38,6 +38,7 @@ from .part_exemptions import annotate as annotate_part
 from .mounting import MountItem, binding, check_mesh, Host, Finish, stacked_finish_bridge
 from . import stair_mounting as SM
 from . import garden_g4e
+from ..blender import element_ids as EID
 from dataclasses import asdict
 
 LZ = {"B": -3.0, "GF": 0.0}
@@ -557,7 +558,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     doorway_cams = {v["id"]: v["camera"]["position"][:3] for v in views if v["camera"].get("reframed") == "doorway"}
     SOFT = {"boucle", "linen", "sage-fabric", "taupe-fabric", "charcoal-fabric", "bedding-white", "outdoor-fabric"}
 
+    declared_ids = {}     # mesh id -> element ids named at creation; kept out of the mesh dicts until attach(), because
+    #                       furniture_stage2 hashes every mesh attribute and the ids must not change its receipt
+
     def mesh(mid, mat, faces, group, *, kind, room=None, label=None, **kw):
+        if "element_ids" in kw:
+            declared_ids[mid] = {k: kw.pop(k) for k in ("element_ids", "faces_by_element") if k in kw}
         if group in ("furniture", "dressing") and "bevel_m" not in kw and mat not in ("glass-guard", "rug"):
             # real pieces have no knife edges: 4 mm on hard pieces, soft rounded edges on upholstery and bedding
             if mat in SOFT:
@@ -568,13 +574,20 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                            faces=faces, part_kind=kind, **kw)))
 
     # ---- shell: the daylight scene's faces, re-materialised
-    shell = VD.scene(lay)
+    with EID.trace_adds() as shell_calls:
+        shell = VD.scene(lay)
+    shell_owner = EID.shell_owners(shell, shell_calls, sp, lay)
+    id_registry = EID.Registry()          # tracked shell faces: element identity survives the finish merge below
+    for face, owner_id in zip(shell.faces, shell_owner):
+        id_registry.add([list(p) for p in face.points], owner_id)
+    from ..model import spec_source as _SS
+    door_model_ids = [e.id for e in _SS.doors(sp, _SS.walls(sp))]    # same order as sp["doors"]
     environment_sources = _environment_face_sources()
     stair_boxes = [[v / 1000.0 for v in b] for b in sp["stair"]]
     flight_boxes = [b for b in stair_boxes if b[5] - b[2] < 0.3]
     stair_x0, stair_x1 = min(b[0] for b in flight_boxes), max(b[3] for b in flight_boxes)
     buckets = {}
-    for f in shell.faces:
+    for face_index, f in enumerate(shell.faces):
         pts = [list(p) for p in f.points]
         cx = sum(p[0] for p in pts) / len(pts)
         cy = sum(p[1] for p in pts) / len(pts)
@@ -639,6 +652,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 all(abs(p[1] - return_host.structural_point[1]) < 1e-8 for p in pts) and
                 max(p[0] for p in pts) > stair_x0 and min(p[0] for p in pts) < stair_x1):
             unchanged, finished = SM.plaster_faces(pts, return_host, stair_x0, stair_x1)
+            for derived in list(unchanged) + ([finished] if finished else []):
+                id_registry.add(derived, shell_owner[face_index])
             if unchanged:
                 buckets.setdefault((mat, room, source), []).extend(unchanged)
             if finished:
@@ -648,6 +663,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 all(abs(p[1] - stair_host.structural_point[1]) < 1e-8 for p in pts) and
                 max(p[0] for p in pts) > stair_x0 and min(p[0] for p in pts) < stair_x1):
             unchanged, finished = SM.plaster_faces(pts, stair_host, stair_x0, stair_x1)
+            for derived in list(unchanged) + ([finished] if finished else []):
+                id_registry.add(derived, shell_owner[face_index])
             if unchanged:
                 buckets.setdefault((mat, room, source), []).extend(unchanged)
             if finished:
@@ -675,7 +692,10 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 back = [[p[i] - 0.01 * n[i] for i in range(3)] for p in front]
                 leaf_key = (mat, room, "glazed-slider-%.3f-%.3f-leaf-%d" %
                             (glazed_slider["x"], glazed_slider["y"], leaf_index)) if glazed_slider else key
-                buckets.setdefault(leaf_key, []).extend(pane_faces(front, back))
+                made = pane_faces(front, back)
+                for derived in made:
+                    id_registry.add(derived, shell_owner[face_index])
+                buckets.setdefault(leaf_key, []).extend(made)
         else:
             buckets.setdefault(key, []).append(pts)
     hide = {}
@@ -697,7 +717,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     bridge = stacked_finish_bridge(stair_host, stair_host, lower, upper, VD.SLAB_T)
     mesh("finish-stair-stacked-slab-edge", "plaster-warm-white", bridge, "shell", room="stair-b",
          label="Continuous coplanar stacked-wall plaster across slab edge", kind="finish-layer",
-         finished_host_id=stair_host.id)
+         finished_host_id=stair_host.id,
+         element_ids=sorted({e for e in (id_registry.lookup(f) for f in party_faces) if e}))
     notes.append("ASSUMED exterior finish: our walls, ground-floor perimeter beams, exposed slab/ramp edges and boundary/fence walls use smooth very light grey-green mineral paint, reflectance 0.65. Entrance steps are paved; soffits are painted white. Neighbour and apartment context remains neutral mineral render; all exposed construction faces receive a stated finish.")
     for v in views:
         if v["id"] in hide:
@@ -747,7 +768,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     for k in range(int((tv[2] + 0.6 - (tv[0] - 0.6)) / 0.06)):
         xa = tv[0] - 0.6 + k * 0.06
         faces += box_faces(xa, L[3] - 0.04, LZ["B"], xa + 0.04, L[3], LZ["B"] + VL.CEILING)
-    mesh("detail-tv-fluting", "walnut", faces, "furniture", room="lounge", label="detail: walnut fluted TV wall", kind="wall-panel")
+    mesh("detail-tv-fluting", "walnut", faces, "furniture", room="lounge", label="detail: walnut fluted TV wall", kind="wall-panel",
+         element_ids=["furn-lounge-tv"])
     PB = F.clear_rect(lay, "parents-bed")
     bed = F.footprint(it["pb-bed"])
     faces = []
@@ -760,7 +782,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             continue
         faces += box_faces(xa, PB[1], 0.0, xa + 0.03, PB[1] + 0.03, 2.10)   # partial height (advisory M-HEADWALL)
     mesh("detail-headboard-slats", "oak", faces, "furniture", room="parents-bed",
-         label="detail: oak slatted headboard wall", kind="wall-panel")
+         label="detail: oak slatted headboard wall", kind="wall-panel", element_ids=["furn-pb-bed"])
     op = sp["gf_opening"]
     gz = 0.0
     # Round-3 defect 4 (glass reads as a mirror): this guard was two ZERO-THICKNESS quads with a refractive
@@ -1323,7 +1345,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         wx, wy, _ = FD.to_world_point(item, lx, ly, 0, LZ[item["level"]])
         mesh(mid, mat, box_faces(wx - sx / 2, wy - sy / 2, LZ[item["level"]] + z0,
                                  wx + sx / 2, wy + sy / 2, LZ[item["level"]] + z0 + h),
-             "fixture", room=item["room"], label="ASSUMED appliance: " + mid + "; add to Revit", kind="appliance-front")
+             "fixture", room=item["room"], label="ASSUMED appliance: " + mid + "; add to Revit", kind="appliance-front",
+             element_ids=["furn-" + support])
 
     def coffee_machine(mid, support, lx, ly):
         item = it_all[support]
@@ -1337,7 +1360,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         mesh(mid + "-body", "black-metal",
              [[shell_vertices[i] for i in tri] for tri in shell_tris], "fixture", room=item["room"],
              label="ASSUMED rounded coffee machine housing; add to Revit", keep_object=True,
-             bevel_m=0.003, subdivide=1, kind="appliance-housing")
+             bevel_m=0.003, subdivide=1, kind="appliance-housing", element_ids=["furn-" + support])
         for suffix, material, bounds in (
             ("drip-tray", "black-metal", (x-.078, y+.075, floor, x+.078, y+.11, floor+.018)),
             ("spout", "brass", (x-.018, y+.072, floor+.115, x+.018, y+.108, floor+.145)),
@@ -1345,7 +1368,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
         ):
             mesh(mid + "-" + suffix, material, box_faces(*bounds), "fixture", room=item["room"],
                  label="ASSUMED coffee machine " + suffix + "; add to Revit", bevel_m=0.005,
-                 kind={"water-tank": "glass-pane", "drip-tray": "appliance-tray", "spout": "appliance-spout"}[suffix])
+                 kind={"water-tank": "glass-pane", "drip-tray": "appliance-tray", "spout": "appliance-spout"}[suffix],
+                 element_ids=["furn-" + support])
 
         from .attached_assembly import bind
         bind(dict(meshes=meshes), mid+"-body", [mid+"-"+suffix for suffix in ("drip-tray", "spout", "water-tank")])
@@ -1365,7 +1389,8 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     else:
         vent = box_faces(hx + back * 0.30 - 0.04, hy - 0.175, ztop_i, hx + back * 0.30 + 0.04, hy + 0.175, ztop_i + 0.012)
     mesh("appliance-downdraft-island", "black-metal", vent, "fixture", room="kitchen",
-         label="ASSUMED 350 mm downdraft local capture for cooking fumes from single induction zone; duct/discharge pending", kind="vent-slot")
+         label="ASSUMED 350 mm downdraft local capture for cooking fumes from single induction zone; duct/discharge pending", kind="vent-slot",
+         element_ids=["furn-k-island"])
     dirty = it_all["dk-run"]
     hob = next((a, b) for kind, a, b in F3._local_modules(dirty) if kind == "hob")
     hx, hy, _ = FD.to_world_point(dirty, sum(hob) / 2, 0, 0, LZ["B"])
@@ -1394,10 +1419,10 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     hood_top = min(hits)
     mesh("appliance-hood-dirty-canopy", "black-metal", box_faces(hx - 0.34, hy - 0.27, -1.05,
          hx + 0.34, wall_y, -0.98), "fixture", room="dirty-kitchen",
-         label="ASSUMED wall cooker hood canopy; add to Revit", kind="appliance-housing")
+         label="ASSUMED wall cooker hood canopy; add to Revit", kind="appliance-housing", element_ids=["furn-dk-run"])
     mesh("appliance-hood-dirty-chimney", "black-metal", box_faces(hx - 0.115, wall_y - 0.16, -0.98,
          hx + 0.115, wall_y, hood_top), "fixture", room="dirty-kitchen",
-         label="ASSUMED cooker hood duct to rendered soffit; add to Revit", kind="duct")
+         label="ASSUMED cooker hood duct to rendered soffit; add to Revit", kind="duct", element_ids=["furn-dk-run"])
     from .attached_assembly import bind
     bind(dict(meshes=meshes), "appliance-hood-dirty-canopy", ["appliance-hood-dirty-chimney"])
     for basin_id in ("gwc-basin", "fb-basin", "pe-basin"):
@@ -1440,11 +1465,13 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             mesh("detail-pocket-panel-%d" % k, "door-oak",
                  box_faces(x0 + 0.01, y - 0.009, LZ[d["level"]] + 0.015,
                            x1 - 0.01, y + 0.009, LZ[d["level"]] + d["height"] - 0.015),
-                 "fixture", room="dirty-kitchen", label="ASSUMED telescopic sliding leaf stowed in pocket", kind="door-leaf")
+                 "fixture", room="dirty-kitchen", label="ASSUMED telescopic sliding leaf stowed in pocket", kind="door-leaf",
+                 element_ids=[door_model_ids[sp["doors"].index(d)]])
         mesh("detail-pocket-track", "black-metal", box_faces(x0, d["y"] - 0.055,
              LZ[d["level"]] + d["height"], d["x"] + d["width"] / 2, d["y"] + 0.055,
              LZ[d["level"]] + d["height"] + 0.024), "fixture", room="dirty-kitchen",
-             label="ASSUMED overhead telescopic pocket track", kind="door-track")
+             label="ASSUMED overhead telescopic pocket track", kind="door-track",
+             element_ids=[door_model_ids[sp["doors"].index(d)]])
     notes.append("ASSUMED hatch reveals and roll-up shutter housing: shutter raised for all current day views; "
                  "three 0.4 m sliding panels are stowed inside the 0.4 m west pocket, with an overhead track.")
 
@@ -1577,10 +1604,11 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     from . import revit_spec as RS2
     for lv in ("B", "GF"):
         zf = LZ[lv] + 0.002
-        faces = []
+        faces, skirt_ranges = [], []
         for (x0, y0, x1, y1) in F._walls(sp, lv):
             horiz = (x1 - x0) >= (y1 - y0)
             for side in (-1, 1):
+                skirt_start = len(faces)
                 if horiz:
                     yy = y0 if side < 0 else y1
                     probe = _room_at(lay, (x0 + x1) / 2, yy + side * 0.1, zf + 0.5)
@@ -1593,10 +1621,13 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                     if probe in FINISH and FINISH[probe][1] == "plaster-warm-white":
                         a_, b_ = (xx - 0.012, xx) if side < 0 else (xx, xx + 0.012)
                         faces += box_faces(a_, y0, zf, b_, y1, zf + 0.08)
-        mesh("detail-skirting-" + lv, "paint-white-satin", faces, "shell", label="detail: 80 mm painted skirting", kind="finish-layer")
-    frames = []
+                skirt_ranges.append((skirt_start, len(faces), probe and "room-" + probe))
+        mesh("detail-skirting-" + lv, "paint-white-satin", faces, "shell", label="detail: 80 mm painted skirting", kind="finish-layer",
+             **EID.declare(skirt_ranges))
+    frames, frame_ranges = [], []
     for m in [m for m in meshes if m["material"] == "glass-clear"]:
         for face in m["faces"][::6]:
+            frame_start = len(frames)
             xs_ = [q[0] for q in face]
             ys_ = [q[1] for q in face]
             zs_ = [q[2] for q in face]
@@ -1617,11 +1648,14 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 if xb - xa > 1.6:
                     mid = (xa + xb) / 2
                     frames += box_faces(mid - fw / 2, y_ - 0.03, za, mid + fw / 2, y_ + 0.03, zb)
-    mesh("detail-window-frames", "alu-bronze", frames, "shell", label="detail: 50 mm aluminium frames (ASSUMED)", kind="window-frame")
-    arch, handles = [], []
-    for d in sp["doors"]:
+            frame_ranges.append((frame_start, len(frames), id_registry.lookup(face)))
+    mesh("detail-window-frames", "alu-bronze", frames, "shell", label="detail: 50 mm aluminium frames (ASSUMED)", kind="window-frame",
+         **EID.declare(frame_ranges))
+    arch, handles, arch_ranges, handle_ranges = [], [], [], []
+    for door_index, d in enumerate(sp["doors"]):
         if d.get("garden") or d.get("sliding"):
             continue
+        arch_start, handle_start = len(arch), len(handles)
         z0 = LZ[d["level"]] + 0.002
         h_ = d.get("height", 2.1)
         w_ = d["width"]
@@ -1645,8 +1679,12 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
                 hy = d["y"] + w_ / 2 - 0.08
                 handles += box_faces(min(d["x"], d["x"] + s_ * 0.07), hy - 0.07, z0 + 1.02, max(d["x"], d["x"] + s_ * 0.07),
                                      hy + 0.03, z0 + 1.04)
-    mesh("detail-architraves", "paint-white-satin", arch, "shell", label="detail: 70 mm architraves", kind="door-trim")
-    mesh("detail-door-handles", "brass", handles, "fixture", label="detail: lever handles", kind="door-handle")
+        arch_ranges.append((arch_start, len(arch), door_model_ids[door_index]))
+        handle_ranges.append((handle_start, len(handles), door_model_ids[door_index]))
+    mesh("detail-architraves", "paint-white-satin", arch, "shell", label="detail: 70 mm architraves", kind="door-trim",
+         **EID.declare(arch_ranges))
+    mesh("detail-door-handles", "brass", handles, "fixture", label="detail: lever handles", kind="door-handle",
+         **EID.declare(handle_ranges))
     notes.append("Construction details added for the render: 80 mm skirting, 50 mm aluminium window frames and "
                  "mullions, 70 mm architraves and lever handles (not yet in the Revit model).")
 
@@ -2125,7 +2163,25 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     require_drape(scene)
     bind_planes(scene)
     require_clear_probes(scene)
+    # Element identity (lane P2): additive fields, attached last so no pass, receipt or appearance record that
+    # copies or hashes mesh attributes ever sees them (furniture_stage2 and draped_appearances do).
+    EID.attach(scene, id_registry, _live_model_ids(lay, sp, it_all, land_plan, land_props), declared_ids)
     return scene
+
+
+def _live_model_ids(lay, sp, items, land_plan, land_props):
+    """Ids of the design-model elements, derived from the same live sources as model.api.generate (no snapshot)."""
+    from ..model import spec_source as SS, fit_source as FS
+    ids = {e.id for e in SS.all_from_spec(lay, sp, finish=FINISH)}
+    ids |= {"furn-" + it["id"] for it in items.values()}
+    from .sanitary_relocation import input_revision
+    with input_revision(False):          # the model's lighting records (the build itself runs with the revision on)
+        ids |= {"lum-" + f.id for f in VL.design(lay)}
+    ids |= {"prop-" + p["id"] for p in props(lay)}
+    ids |= {"plant-" + p["id"] for p in land_plan.get("plants", [])}
+    ids |= {"plant-" + p["id"] for p in land_props if "species" in p}
+    ids |= {e.id for e in FS.garden_zones(land_plan)}
+    return ids
 
 
 def apply_vanity_decision(scene, fixtures):
@@ -3007,9 +3063,9 @@ def write(path=None, views=None, *, measure_exposure_groups=False):
         if not group_path.is_file():
             raise ValueError('Frozen dominant-light measurements required; run --measure-exposure-groups first')
         scene['exposure_group_mode'] = 'dominant-light'
-        scene['exposure_groups'] = require_record(scene, json.loads(group_path.read_text()))
+        scene['exposure_groups'] = require_record(EID.without_ids(scene), json.loads(group_path.read_text()))
     from archpipe.villa_render_contract import validate_scene
-    errors = validate_scene(scene)
+    errors = validate_scene(EID.without_ids(scene))
     if errors:
         raise ValueError("invalid exported scene: " + "; ".join(errors))
     after = source_provenance()
