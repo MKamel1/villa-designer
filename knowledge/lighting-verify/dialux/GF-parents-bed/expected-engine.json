@@ -1,0 +1,6 @@
+{
+ "scene": "full: every functional zone at 100 % of its luminaire flux_scale, night zones off",
+ "maintenance_factor": 0.8,
+ "radiance_ab": null,
+ "planes": {}
+}

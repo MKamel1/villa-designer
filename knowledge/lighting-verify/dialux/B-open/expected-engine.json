@@ -1,0 +1,91 @@
+{
+ "scene": "full: every functional zone at 100 % of its luminaire flux_scale, night zones off",
+ "maintenance_factor": 0.8,
+ "radiance_ab": 6,
+ "planes": {
+  "island-prep": {
+   "Em": 548.3,
+   "Emin": 425.3,
+   "U0": 0.776,
+   "n": 14
+  },
+  "island-seating": {
+   "Em": 350.9,
+   "Emin": 248.3,
+   "U0": 0.708,
+   "n": 14
+  },
+  "cooktop": {
+   "Em": 541.5,
+   "Emin": 424.3,
+   "U0": 0.784,
+   "n": 25
+  },
+  "sink": {
+   "Em": 365.1,
+   "Emin": 286.1,
+   "U0": 0.784,
+   "n": 15
+  },
+  "dining-table": {
+   "Em": 286.8,
+   "Emin": 192.0,
+   "U0": 0.67,
+   "n": 18
+  },
+  "homework-end": {
+   "Em": 243.4,
+   "Emin": 176.1,
+   "U0": 0.723,
+   "n": 20
+  },
+  "armchair": {
+   "Em": 509.1,
+   "Emin": 405.4,
+   "U0": 0.796,
+   "n": 25
+  },
+  "daybed": {
+   "Em": 342.6,
+   "Emin": 165.4,
+   "U0": 0.483,
+   "n": 20
+  },
+  "room-lounge": {
+   "Em": 247.3,
+   "Emin": 96.3,
+   "U0": 0.389,
+   "n": 54
+  },
+  "room-family": {
+   "Em": 272.7,
+   "Emin": 99.2,
+   "U0": 0.364,
+   "n": 28
+  },
+  "room-living": {
+   "Em": 255.4,
+   "Emin": 99.2,
+   "U0": 0.388,
+   "n": 56
+  },
+  "room-kitchen": {
+   "Em": 376.3,
+   "Emin": 112.4,
+   "U0": 0.299,
+   "n": 48
+  },
+  "room-kitchen-island": {
+   "Em": 345.7,
+   "Emin": 258.2,
+   "U0": 0.747,
+   "n": 28
+  },
+  "room-hall-b": {
+   "Em": 305.1,
+   "Emin": 207.9,
+   "U0": 0.681,
+   "n": 30
+  }
+ }
+}

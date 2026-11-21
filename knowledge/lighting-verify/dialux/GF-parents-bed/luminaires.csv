@@ -1,0 +1,14 @@
+id,ies,x,y,z,aim_x,aim_y,aim_z,tilt_from_nadir_deg,tilt_azimuth_deg,flux_scale,zone,layer,generic
+COVE-parents-bed-01#0,generic-COVE.ies,19.43,-26.471,2.73,0,0.4,1,158.2,90.0,1.0,Z-GF-PARENTS-BED-DECORATIVE,decorative,True
+COVE-parents-bed-01#1,generic-COVE.ies,19.73,-26.471,2.73,0,0.4,1,158.2,90.0,1.0,Z-GF-PARENTS-BED-DECORATIVE,decorative,True
+COVE-parents-bed-01#2,generic-COVE.ies,20.03,-26.471,2.73,0,0.4,1,158.2,90.0,1.0,Z-GF-PARENTS-BED-DECORATIVE,decorative,True
+COVE-parents-bed-01#3,generic-COVE.ies,20.33,-26.471,2.73,0,0.4,1,158.2,90.0,1.0,Z-GF-PARENTS-BED-DECORATIVE,decorative,True
+COVE-parents-bed-01#4,generic-COVE.ies,20.63,-26.471,2.73,0,0.4,1,158.2,90.0,1.0,Z-GF-PARENTS-BED-DECORATIVE,decorative,True
+COVE-parents-bed-01#5,generic-COVE.ies,20.93,-26.471,2.73,0,0.4,1,158.2,90.0,1.0,Z-GF-PARENTS-BED-DECORATIVE,decorative,True
+COVE-parents-bed-01#6,generic-COVE.ies,21.23,-26.471,2.73,0,0.4,1,158.2,90.0,1.0,Z-GF-PARENTS-BED-DECORATIVE,decorative,True
+WALL-READ-parents-bed-02,generic-WALL-READ.ies,19.71,-26.461,1.45,0,0.3,-0.55,28.61,90.0,1.0,Z-GF-PARENTS-BED-BED-READING,task,True
+WALL-READ-parents-bed-03,generic-WALL-READ.ies,20.95,-26.461,1.45,0,0.3,-0.55,28.61,90.0,1.0,Z-GF-PARENTS-BED-BED-READING,task,True
+DL-parents-bed-04,LSEVO-AAK3EW.ies,19.027,-25.191,2.7,0.0,0.0,-1.0,0.0,0.0,1.0004,Z-GF-PARENTS-BED-AMBIENT,ambient,False
+DL-parents-bed-05,LSEVO-AAK3EW.ies,20.33,-24.141,2.7,0.0,0.0,-1.0,0.0,0.0,1.0004,Z-GF-PARENTS-BED-AMBIENT,ambient,False
+ADJ-parents-bed-06,LSEVO-AAHENX.ies,21.647,-24.8,2.7,0.35,0,-1,19.29,0.0,1.0012,Z-GF-PARENTS-BED-ACCENT,accent,False
+DL-parents-entry-01,LSEVO-AAK3EW.ies,18.977,-26.981,2.7,0.0,0.0,-1.0,0.0,0.0,1.0004,Z-GF-PARENTS-ENTRY-AMBIENT,ambient,False

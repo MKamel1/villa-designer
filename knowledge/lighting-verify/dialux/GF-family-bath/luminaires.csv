@@ -1,0 +1,6 @@
+id,ies,x,y,z,aim_x,aim_y,aim_z,tilt_from_nadir_deg,tilt_azimuth_deg,flux_scale,zone,layer,generic
+DL-family-bath-01,LSEVO-AAK3EW.ies,10.552,-25.471,2.7,0.0,0.0,-1.0,0.0,0.0,1.0004,Z-GF-FAMILY-BATH-AMBIENT,ambient,False
+DL-family-bath-02,LSEVO-AAK3EW.ies,10.382,-24.241,2.7,0.0,0.0,-1.0,0.0,0.0,1.0004,Z-GF-FAMILY-BATH-SHOWER,task,False
+SCONCE-family-bath-03,generic-SCONCE.ies,9.337,-26.161,1.6,1,0,0,90.0,0.0,1.0,Z-GF-FAMILY-BATH-TASK,task,True
+SCONCE-family-bath-04,generic-SCONCE.ies,9.337,-25.211,1.6,1,0,0,90.0,0.0,1.0,Z-GF-FAMILY-BATH-TASK,task,True
+TOE-family-bath-05#0,generic-TOE.ies,9.747,-25.686,0.3,0.3,0,-1,16.7,0.0,1.0,Z-GF-FAMILY-BATH-NIGHT,night,True

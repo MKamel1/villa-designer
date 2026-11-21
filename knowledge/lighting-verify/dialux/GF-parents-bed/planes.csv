@@ -1,0 +1,4 @@
+id,room,z,target_lux,gauge,scene,polygon
+pillow-1,parents-bed,0.9,200,average,Reading,"[[19.68, -26.441], [20.18, -26.441], [20.18, -26.041], [19.68, -26.041]]"
+pillow-2,parents-bed,0.9,200,average,Reading,"[[20.48, -26.441], [20.98, -26.441], [20.98, -26.041], [20.48, -26.041]]"
+room-parents-bed,parents-bed,0.75,50,minimum,Day,"[[18.577, -26.491], [22.297, -26.491], [22.297, -23.891], [18.577, -23.891]]"
