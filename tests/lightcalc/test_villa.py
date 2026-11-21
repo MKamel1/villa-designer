@@ -1,6 +1,8 @@
 """L6b villa lighting: harness geometry, zones, and the non-Radiance checks (LA6, LA8, LA9, LA10, LA13) with negative cases.
 The Villa object is built once (design() takes ~30 s); no Radiance and no external library are needed (frozen products)."""
 import copy
+import json
+from pathlib import Path
 import math
 
 import pytest
@@ -187,3 +189,25 @@ def test_stale_obstruction_record_fails_loudly(villa):
     pl = next(p for p in villa.planes() if p.id == "fb-basin")
     with pytest.raises(ValueError, match="stale"):
         VP.blocked_rects(pl.id, pl.z + 0.06, pl.polygon)         # the plane was 60 mm too high (the original basin defect)
+
+
+@pytest.mark.parametrize("cluster, plane", [("GF-parents-dressing", "room-parents-dressing"), ("B-guest-wc", "room-guest-wc"),
+                                            ("B-pantry", "room-pantry"), ("GF-family-bath", "room-family-bath")])
+def test_radiosity_agrees_with_radiance_on_box_rooms(villa, cluster, plane):
+    """Independent transport check (no Radiance code): the published floor-plane mean of every functional zone at 100 %
+    equals a patch radiosity of the same placements. This is what shows the dressing room's lumen-method miss is the
+    closed form's uniform inter-reflection (615 lx), not the engine (378 lx)."""
+    from archpipe.lightcalc import radiosity, villa_report as VR
+    rows = {r["plane"]: r for r in json.loads((Path(__file__).resolve().parents[2] / "knowledge/lighting/villa-after-rows.json").read_text())}
+    pls = [p for p in villa.cluster_placements(cluster) if p.layer not in VR.NIGHT_LAYERS]
+    e = radiosity.floor_mean_lux(villa.cluster_room(cluster), pls, V.MF)
+    assert e == pytest.approx(rows[plane]["full_em"], rel=0.06)
+
+
+def test_radiosity_negative_a_wrong_reflectance_is_caught(villa):
+    from dataclasses import replace
+    from archpipe.lightcalc import radiosity, villa_report as VR
+    room = villa.cluster_room("GF-parents-dressing")
+    pls = [p for p in villa.cluster_placements("GF-parents-dressing") if p.layer not in VR.NIGHT_LAYERS]
+    dark = replace(room, rho_wall=0.4)
+    assert radiosity.floor_mean_lux(dark, pls, V.MF) < 0.85 * radiosity.floor_mean_lux(room, pls, V.MF)

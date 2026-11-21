@@ -81,7 +81,7 @@
     "lum-DESK-cinema-07",
     "lum-DESK-cinema-08"
    ],
-   "watts": 3.9,
+   "watts": 3.7,
    "dimming": "dali2"
   },
   {
@@ -102,7 +102,7 @@
    "luminaire_ids": [
     "lum-PEN-LIN-dining-01"
    ],
-   "watts": 8.3,
+   "watts": 8.1,
    "dimming": "dali2"
   },
   {
@@ -127,7 +127,7 @@
     "lum-DL-dirty-kitchen-04",
     "lum-DL-dirty-kitchen-05"
    ],
-   "watts": 44.5,
+   "watts": 44.2,
    "dimming": "phase_cut"
   },
   {
@@ -187,7 +187,7 @@
    "luminaire_ids": [
     "lum-DL-guest-wc-02"
    ],
-   "watts": 5.0,
+   "watts": 5.8,
    "dimming": "phase_cut"
   },
   {
@@ -238,7 +238,7 @@
    "luminaire_ids": [
     "lum-DL-kitchen-05"
    ],
-   "watts": 4.4,
+   "watts": 4.5,
    "dimming": "phase_cut"
   },
   {
@@ -250,7 +250,7 @@
     "lum-PEN-GLOBE-kitchen-02",
     "lum-PEN-GLOBE-kitchen-03"
    ],
-   "watts": 37.1,
+   "watts": 36.0,
    "dimming": "dali2"
   },
   {
@@ -262,7 +262,7 @@
     "lum-DL-kitchen-06",
     "lum-DL-kitchen-07"
    ],
-   "watts": 28.0,
+   "watts": 26.2,
    "dimming": "phase_cut"
   },
   {
@@ -283,7 +283,7 @@
     "lum-DL-kitchen-08",
     "lum-DL-kitchen-09"
    ],
-   "watts": 12.1,
+   "watts": 14.5,
    "dimming": "phase_cut"
   },
   {
@@ -466,7 +466,7 @@
    "luminaire_ids": [
     "lum-DL-family-bath-03"
    ],
-   "watts": 1.8,
+   "watts": 3.7,
    "dimming": "phase_cut"
   },
   {
@@ -497,7 +497,7 @@
     "lum-SCONCE-family-bath-04",
     "lum-SCONCE-family-bath-05"
    ],
-   "watts": 8.0,
+   "watts": 4.4,
    "dimming": "dali2"
   },
   {
@@ -539,7 +539,7 @@
     "lum-DESK-kids-a-03",
     "lum-DESK-kids-a-04"
    ],
-   "watts": 7.7,
+   "watts": 7.1,
    "dimming": "dali2"
   },
   {
@@ -570,7 +570,7 @@
    "luminaire_ids": [
     "lum-DESK-kids-b-03"
    ],
-   "watts": 4.3,
+   "watts": 3.6,
    "dimming": "dali2"
   },
   {
@@ -623,7 +623,7 @@
     "lum-WALL-READ-parents-bed-02",
     "lum-WALL-READ-parents-bed-03"
    ],
-   "watts": 4.3,
+   "watts": 3.7,
    "dimming": "dali2"
   },
   {
@@ -690,7 +690,7 @@
    "luminaire_ids": [
     "lum-DL-parents-ensuite-03"
    ],
-   "watts": 4.5,
+   "watts": 5.5,
    "dimming": "phase_cut"
   },
   {
@@ -755,7 +755,7 @@
     "lum-DL-study-game-05",
     "lum-DL-study-game-06"
    ],
-   "watts": 17.5,
+   "watts": 11.8,
    "dimming": "phase_cut"
   },
   {
@@ -766,7 +766,7 @@
     "lum-DL-study-game-03",
     "lum-DL-study-game-04"
    ],
-   "watts": 17.2,
+   "watts": 16.0,
    "dimming": "phase_cut"
   }
  ],
