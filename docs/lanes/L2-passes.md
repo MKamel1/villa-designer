@@ -45,6 +45,14 @@ See [L2-model.md](L2-model.md) for the model itself.
 | assembly | finish-layers, complete-shell, garden-swing, garden-g4d | finish-build-ups.json | finishes, shell, swing, N-court uplights |
 | furniture | furniture-stage2, parents-bed | furniture-stage2.json.gz, parents-bed.json.gz | measured furniture, bed omission |
 
+Byte-identity evidence (2026-11-20, Windows laptop): the full D1 scene was built before and after this change with
+the last two receipt-bound passes (furniture-stage2, parents-bed) bypassed, and every top-level section hashed
+(`json.dumps(sort_keys=True)`): whole-scene sha256 `9c6946750c4e4e2203ddfc1fb8066a92787e45736bf410fad07157c1d2b7797f`
+in both runs (about 11 min per build here). The stage-2 receipt itself fails at the base commit on this machine
+("furniture fixed-room inputs changed ... changed sections: meshes"), so `scripts/benchmark_scene_build.py`
+cannot record a baseline here; the two receipt-bound passes are called through the registry with identical arguments
+but were not exercised end to end.
+
 Status: the passes are data-ordered but their geometry logic is unchanged, so none is retired yet. Each is a mesh
 transformation against measured hosts (not a placed-object delta); the knowledge files hold approval rows and receipts
 that those transformations verify against, so freezing their outputs as data would only be a snapshot.

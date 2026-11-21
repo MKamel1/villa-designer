@@ -2038,46 +2038,18 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
     from ..task_probe import author_bindings, bind_planes, require_clear_probes
     author_bindings(scene)
     _seat_recessed_on_soffit(scene)
-    from .fitting_mounting import migrate
-    migrate(scene, lay, sp, FINISH)
-    from .mounting_resume import apply_approvals, guest_fixes
-    apply_approvals(scene)
-    guest_fixes(scene, sp)
-    # Current lighting records replace historical C4 pair placements only.
-    from ..fixture_record import reconcile_vanity_emitters
+    # The mounting, assembly and furniture passes are data: archpipe.model.passes.PASSES (order, inputs, knowledge
+    # files). Current lighting records replace historical C4 pair placements only; the client's current vanity decision
+    # replaces the retired fittings only after the frozen C4 approvals. See docs/lanes/L2-model.md.
+    from ..model import passes as _passes
+    from . import garden_swing, garden_g6
     from .sanitary_relocation import input_revision
-    with input_revision(False):
-        reconcile_vanity_emitters(scene, VL.design(lay))
-    from .ceiling_mounting import migrate as migrate_ceiling
-    migrate_ceiling(scene, lay)
-    from .mounting_resume import APPROVALS
-    apply_approvals(scene, APPROVALS.with_name('c4-d-lead-approvals.json'))
-    from . import garden_g6
-    garden_g6.mount(scene, lay)
-    from .support_mounting import migrate as migrate_support
-    migrate_support(scene, lay)
-    from .exterior_mounting import apply_lead_review
-    apply_lead_review(scene)
-    from .final_mounting import apply as apply_final_mounting
-    apply_final_mounting(scene, lay)
-    from .wc_slides import apply as apply_wc_slides
-    apply_wc_slides(scene, lay)
-    from .sanitary_relocation import apply_family
-    apply_family(scene, lay)
-    # Frozen C4 migration remains reproducible. The client's current fixture
-    # decision replaces its retired fittings only after those approvals.
-    with input_revision(False):
-        apply_vanity_decision(scene, VL.design(lay))
+    pass_ctx = dict(lay=lay, sp=sp, finish=FINISH, furniture=list(it_all.values()))
+    scene = _passes.run_stage("mounting", scene, pass_ctx)
     failures = indoor_plant_violations(scene['props'], lay, scene)
     if failures:
         raise ValueError('indoor plant placement after mounting: ' + '; '.join(failures))
-    from .finish_layers import build as build_finish_layers
-    build_finish_layers(scene, {room:F.clear_rect(lay,room) for room in lay["rooms"]})
-    from .construction_solids import complete_shell
-    complete_shell(scene)
-    from . import garden_swing
-    garden_swing.mount(scene, lay)
-    garden_g4d.integrate(scene)
+    scene = _passes.run_stage("assembly", scene, pass_ctx)
     g4d_failures=garden_g4d.scene_findings(scene)
     if g4d_failures:raise ValueError('G4d garden records: '+ '; '.join(g4d_failures))
     swing_failures=garden_swing.scene_findings(scene)
@@ -2122,10 +2094,7 @@ def _build(lay=None, views=None, *, collect_part_failures=False, bed_replacement
             raise ValueError('real bed frame fails fixed room: '+json.dumps(scene['bed_room_review']))
     from copy import deepcopy
     scene['authoring_room_context']=deepcopy(dict(layout=lay,specification=sp,furniture=list(it_all.values())))
-    from .furniture_stage2 import apply as apply_furniture_stage2
-    scene=apply_furniture_stage2(scene,lay,sp,list(it_all.values()))
-    from .parents_bed import apply as apply_parents_bed
-    scene=apply_parents_bed(scene,lay,sp,list(it_all.values()))
+    scene=_passes.run_stage("furniture",scene,dict(pass_ctx,furniture=list(it_all.values())))
     # Mounting and assembly passes can mutate faces or replace the working
     # list. Re-admit the actual final values; a cached historical collection
     # cannot certify the exported scene. Keep the strict sink on the result.
