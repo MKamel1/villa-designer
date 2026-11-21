@@ -33,3 +33,12 @@ See `docs/lanes/L8-runner.md` for states, rules and recovery. Local logic tests:
 
 `python scripts/workstation.py install-runner` copies `jobq.py` over `~/archpipe/bin/jobq` and restarts the service.
 Running jobs are not killed by the restart (`KillMode=process`); the new daemon re-adopts them.
+
+## Browser (public manufacturer pages)
+
+Real Google Chrome via Playwright for Python, headed on a virtual display (sites block scripted HTTP):
+
+    python3 -m venv ~/archpipe/envs/browser-venv && ~/archpipe/envs/browser-venv/bin/pip install playwright   # 1.65.2 on Python 3.14
+    xvfb-run -a ~/archpipe/envs/browser-venv/bin/python ops/workstation/browser_probe.py
+
+Rules: public pages only, no logins, skip any site that challenges a normal visitor.
