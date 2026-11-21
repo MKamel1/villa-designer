@@ -27,6 +27,10 @@ CARDS = {c.id: c for c in [
                "case 5.2", "", "E = I cos(i)/d^2 at 10 points; table in knowledge/lighting/L6-reference-results.json",
                "std", "knowledge/lighting/L6-reference-results.json"),
 ]}
+CARDS["LV-CIE171-58"] = SourceCard("LV-CIE171-58", "CIE 171:2006 case 5.8 Eav (via DAU Iray validation report 2016, Table 15)",
+                                   "2006", "case 5.8 / Table 15", "", "Eav rho 0.05..0.95; closed form Phi rho / (A (1 - rho))", "std")
+CARDS["LV-CIE171-T9"] = SourceCard("LV-CIE171-T9", "CIE 171:2006 case 5.2, 'CIE T9 photometry' (via DAU Iray validation report 2016, Table 7)",
+                                   "2006", "case 5.2 / Table 7", "", "I and E at points A-J, 3 m below the source", "std")
 
 
 def ids(*keys: str) -> tuple:

@@ -76,8 +76,35 @@ def fixture_problems(f, rooms, ceiling_of, levels) -> list[str]:
     return pr
 
 
+def cluster_geometry(v, L):
+    """The closed volume the engine actually calculates must contain what it calculates: polygon area = member clear rects,
+    every emitter sample inside it, every task-plane vertex inside it. (Found: GF-parents-bed lost the 11 m2 bedroom.)"""
+    from ..lightcalc.geometry import area
+    from ..lightcalc.villa import CLUSTERS, cluster_of
+    for cl, rooms in CLUSTERS.items():
+        room = v.cluster_room(cl)
+        poly = [tuple(p) for p in room.polygon]
+        want = sum((v.rc[r][2] - v.rc[r][0]) * (v.rc[r][3] - v.rc[r][1]) for r in rooms)
+        got = area(list(poly))
+        pr = []
+        if abs(got - want) > 0.02 * want:
+            pr.append("cluster polygon is %.2f m2 but its member rooms' clear areas sum to %.2f m2" % (got, want))
+        out_e = [p.id for p in v.cluster_placements(cl) if not _inside(poly, p.position[0], p.position[1], WALL_TOL)]
+        if out_e:
+            pr.append("%d emitters outside the calculated volume (e.g. %s)" % (len(out_e), out_e[0]))
+        out_p = sorted({pl.id for pl in v.planes() if cluster_of(pl.room) == cl for q in pl.polygon if not _inside(poly, q[0], q[1], 0.01)})
+        if out_p:
+            pr.append("task planes outside the calculated volume: %s" % ", ".join(out_p))
+        st = "fail" if pr else "pass"
+        L.results.append(check("LV2", st, "volume:" + cl, SRC, achieved=round(got, 2), required=round(want, 2), unit="m2",
+                               message="; ".join(pr) or "calculated volume %.2f m2 holds its emitters and planes" % got))
+        for r in rooms:
+            L.mark(r, st)
+
+
 def check_placement(v) -> LayerResult:
     L = LayerResult("V2")
+    cluster_geometry(v, L)
     rooms, lums = load_model()
     levels = _levels()
     from ..lightcalc.villa import LEVEL_Z

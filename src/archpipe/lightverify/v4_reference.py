@@ -24,10 +24,6 @@ from .sources import CARDS, ids
 from ..contracts import SourceCard
 
 TOL = 0.05
-CARDS["LV-CIE171-T9"] = SourceCard("LV-CIE171-T9", "CIE 171:2006 case 5.2, 'CIE T9 photometry' (via DAU Iray validation report 2016, Table 7)",
-                                   "2006", "case 5.2 / Table 7", "", "I and E at points A-J, 3 m below the source", "std")
-CARDS["LV-CIE171-58"] = SourceCard("LV-CIE171-58", "CIE 171:2006 case 5.8 Eav (via DAU Iray validation report 2016, Table 15)",
-                                   "2006", "case 5.8 / Table 15", "", "Eav rho 0.05..0.95", "std")
 SRC52, SRC52B, SRC58 = ids("LV-CIE171-52", "LV-V4-TOL"), ids("LV-CIE171-T9", "LV-V4-TOL"), ids("LV-CIE171-58", "LV-V4-TOL")
 
 # DAU Table 7, second photometry: point -> (incidence deg, d m, I cd, E lx)
