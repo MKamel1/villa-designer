@@ -172,6 +172,31 @@ lanes:
     - tests/test_parents_bed*.py
     - tests/approvals/**
     - docs/lanes/RA*.md
+  INT: # integration after lighting changes: snapshot + all downstream consumers
+    - src/archpipe/model/data/**
+    - tests/model/**
+    - src/archpipe/electrical/**
+    - knowledge/electrical/**
+    - tests/electrical/**
+    - src/archpipe/exchange/**
+    - tests/exchange/**
+    - src/archpipe/documents/**
+    - src/archpipe/drawings2d/**
+    - tests/documents/**
+    - tests/drawings2d/**
+    - docs/lanes/INT*.md
+    - docs/lanes/L7*.md
+  L6c: # re-bind lighting to V10-verified products; supplier spec sheet + substitution loop
+    - src/archpipe/lightcalc/**
+    - src/archpipe/concept/villa_lighting.py
+    - src/archpipe/fixture_record.py
+    - src/archpipe/luminaires/**
+    - knowledge/lighting/**
+    - knowledge/lighting-products/**
+    - tests/lightcalc/**
+    - tests/luminaires/**
+    - docs/lanes/L6*.md
+    - docs/lighting-spec/**
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
