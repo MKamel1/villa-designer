@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[3]
 TABLE = ROOT / "knowledge" / "lighting" / "zone-drivers.json"
 
 
-def main(tag: str, out_dir: str = "out/L6b", write: bool = False, lo: float = 0.15):
+def main(tag: str, out_dir: str = "out/L6b", write: bool = False, lo: float = 0.15, size_generics: bool = False):
     from ..concept.villa_lighting import SCENES
     v = Villa()
     planes = [p for p in v.planes() if p.scene != "Dinner"]
@@ -57,6 +57,21 @@ def main(tag: str, out_dir: str = "out/L6b", write: bool = False, lo: float = 0.
         L = (p.target - fixed) / per
         print("Dinner: %s level %.3f solves %s to %d lx (others contribute %.0f lx; pendant at 1.0 gives %.0f lx)" %
               (zp, L, p.id, p.target, fixed, per))
+    if size_generics:
+        # L6c: a zone made only of generic fittings is re-sized (rated lumens x d/0.70) and driven at 0.70 (V12 <= 0.80)
+        from ..concept import villa_lighting as VL
+        kinds = {}
+        for f in v.fixtures:
+            kinds.setdefault(VL.zone_id(f), set()).add(f.kind)
+        sz_path = ROOT / "knowledge" / "lighting" / "zone-sizing.json"
+        sizing = json.loads(sz_path.read_text(encoding="utf-8")) if sz_path.exists() else {}
+        for z in sorted(new):
+            if kinds.get(z) and not any(k in VL.PRODUCTS for k in kinds[z]):
+                sizing[z] = round(sizing.get(z, 1.0) * new[z] / 0.70, 3)
+                print("size   %-44s rated x%.3f (driver %.2f -> 0.70)" % (z, sizing[z], new[z]))
+                new[z] = 0.70
+        if write:
+            sz_path.write_text(json.dumps(sizing, indent=1, sort_keys=True), encoding="utf-8")
     if write:
         merged = dict(init)
         merged.update(new)
@@ -67,6 +82,8 @@ def main(tag: str, out_dir: str = "out/L6b", write: bool = False, lo: float = 0.
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--tag", required=True)
+    ap.add_argument("--out", default="out/L6c")
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--size-generics", action="store_true")
     a = ap.parse_args()
-    main(a.tag, write=a.write)
+    main(a.tag, out_dir=a.out, write=a.write, size_generics=a.size_generics)

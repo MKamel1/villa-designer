@@ -161,10 +161,21 @@ def set_out(fixtures, rc, it, fp):
     return fixtures
 
 
+def _sizing():
+    """L6c: rated-lumen multiplier per control zone for GENERIC fittings (no verified product), solved by villa_tune_cli
+    --size-generics so the commissioning driver sits at 0.70: a generic fitting is specified at the size the design needs,
+    never an oversized one dimmed to the floor. Bound products are never resized (they are what they are)."""
+    import json
+    from pathlib import Path
+    path = Path(__file__).resolve().parents[3] / "knowledge" / "lighting" / "zone-sizing.json"
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
 def apply_drivers(fixtures):
     """Set each fixture's driver output from its zone's solved factor d: a bound product gets extra['dimmer'] = d (> 1 raises);
     a generic fitting gets lumens scaled by d (it may exceed 1: the generic is sized, not dimmed)."""
     table = _drivers()
+    sizing = _sizing()
     for f in fixtures:
         d = table.get(zone_id(f))
         if d is None:
@@ -177,7 +188,8 @@ def apply_drivers(fixtures):
         else:
             base = f.lm if f.lm is not None else (KINDS[f.kind]["lm_per_m"] * f.length if "lm_per_m" in KINDS[f.kind]
                                                    else KINDS[f.kind]["lm"])
-            f.lm = round(base * d, 1)
+            f.extra["rated_lm"] = round(base * sizing.get(zone_id(f), 1.0), 1)     # what the supplier specifies (full output)
+            f.lm = round(base * sizing.get(zone_id(f), 1.0) * d, 1)
     return fixtures
 
 
@@ -306,7 +318,7 @@ def design(lay=None):
     add("DL", "lounge-nook", (rc["lounge-nook"][0] + rc["lounge-nook"][2]) / 2, (rc["lounge-nook"][1] +
         rc["lounge-nook"][3]) / 2, why="the way to the pantry", card="ies-res-passage-30")
     Pn = rc["pantry"]
-    for x, y in _grid(Pn, 2, 1):
+    for x, y in _grid(Pn, 1, 1):          # L6c: 2 -> 1 (ERCO DL 1065 lm)
         add("DL", "pantry", x, y, why="pantry shelves", card="ies-res-storage-frequent-50")
     # stair: step markers in the party-wall side of the flight every 3rd tread, and a light at the foot
     walls_b = F._walls(spec, "B")
@@ -350,7 +362,9 @@ def design(lay=None):
     # is its own zone and a third prep downlight is added at the far end, away from the hob (the three on one driver gave
     # 351 lx at the hob and 371 lx on the prep strip)
     third = (isl[2] - isl[0]) / 3
-    for x, zn, cd in ((icx - third, "island-prep", "ies-res-kitchen-prep-500"), (icx, "island-cook", "ies-res-kitchen-cooktop-300"),
+    # L6c: the ERCO DL is 1065 lm (was 732): the separate hob downlight went to the 15 % floor of the driver range, so it is cut;
+    # the three prep downlights (one over the hob's side, one each side) light both the 500 lx strip and the 300 lx induction zone
+    for x, zn, cd in ((icx - third, "island-prep", "ies-res-kitchen-prep-500"),
                       (icx + third, "island-prep", "ies-res-kitchen-prep-500"), (isl[2] - 0.15, "island-prep", "ies-res-kitchen-prep-500")):
         add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line (the globes' axes, plus one at the far end); the middle "
             "one is over the hob", card=cd, zone=zn + ":task")
@@ -370,6 +384,7 @@ def design(lay=None):
     tb = fp["dining-table"]
     add("PEN-LIN", "dining", (tb[0] + tb[2]) / 2, (tb[1] + tb[3]) / 2,
         z=LEVEL_Z["B"] + it["dining-table"]["h"] + 0.762, extra={"hang_from": ceiling_z("B"), "zone": "table-pendant"},
+        length=1.5, along=(1.0, 0.0, 0.0) if (tb[2] - tb[0]) >= (tb[3] - tb[1]) else (0.0, 1.0, 0.0),   # L6c: ERCO Jilly 1500 mm
         why="linear pendant along the table, 762 mm above it", card="rid-pendant-above-table-762")
     # L6b: the two crossed adjustable fills put ~950 lx on the table centre (9x the 100 lx card; truth probe, variant A):
     # cut. The pendant is the table's light (Dinner dims it, Day lifts the homework end); the sideboard accent stays.
@@ -380,7 +395,7 @@ def design(lay=None):
     # garden living: cove, lit glass cabinets, reading in the daybed nook, soft downlights
     Lv = rc["living"]
     cove("living", ("x0", "y0"), "cove on the dining and library sides: the garden living glows at night")
-    for x, y in _grid((Lv[0] + 0.3, Lv[1] + 0.3, Lv[2], Lv[3]), 2, 2, mx=0.9, my=0.9):
+    for x, y in _grid((Lv[0] + 0.3, Lv[1] + 0.3, Lv[2], Lv[3]), 2, 1, mx=0.9, my=0.9):      # L6c: 4 -> 2 (ERCO DL 1065 lm)
         add("DL", "living", x, y, why="ambient, dimmable", card="ies-res-living-30")
     for name in ("library-cabinet-left", "library-cabinet-right"):
         bk, bfp = it[name], fp[name]
@@ -436,7 +451,7 @@ def design(lay=None):
     _sconces(add, "guest-wc", bs, lay, rc)
     DK = rc["dirty-kitchen"]
     dk = fp["dk-run"]
-    n_dk = 5                                      # L6b V12: 4 needed 0.85 of driver output; 5 evenly spaced
+    n_dk = 4                                      # L6c: ERCO DL 1065 lm (was 732): 5 -> 4 evenly spaced
     for x in [dk[0] + 0.4 + i * (dk[2] - dk[0] - 0.8) / (n_dk - 1) for i in range(n_dk)]:
         add("DL", "dirty-kitchen", x, dk[1] - 0.1, why="over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
             card="ies-res-kitchen-prep-500", zone="run-task:task")
@@ -472,7 +487,7 @@ def design(lay=None):
         add("DL", "study-game", d1[2] - 0.05, y, why="desk light over the shared homework desk's front edge "
             "(no shadow of the head); L6b: DL", card="ies-res-desk-400", zone="desk-task:task")
     d2 = fp["study-adult-desk"]
-    for x in ((d2[0] + d2[2]) / 2 - 0.35, (d2[0] + d2[2]) / 2 + 0.35):
+    for x in ((d2[0] + d2[2]) / 2,):       # L6c: 2 -> 1 (ERCO DL 1065 lm)
         add("DL", "study-game", x, d2[1] - 0.05, why="desk light over the adult desk; L6b: DL (V12: 1 -> 2, one needed 1.12 of driver output)",
             card="ies-res-desk-400", zone="desk-adult:task")
     FB = rc["family-bath"]
@@ -487,11 +502,13 @@ def design(lay=None):
           level="GF", why="glow under the basin: night light")
     for room, desks, bed in (("kids-a", ("ka-desk-1", "ka-desk-2"), "ka-bunk"), ("kids-b", ("kb-desk",), "kb-bed")):
         K = rc[room]
-        for x, y in _grid(K, 2, 1, mx=0.9):
+        for x, y in _grid(K, 1, 1, mx=0.9):          # L6c: 2 -> 1 ambient (ERCO DL 1065 lm); each desk gets its own task downlight
             add("DL", room, x, (K[1] + K[3]) / 2 - 0.3, why="bedroom ambient", card="ies-res-bedroom-general-50")
         for d in desks:
             q = fp[d]
-            add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF", **({"lm": 600} if room == "kids-b" else {}),   # V12: 450 lm needed 0.85
+            add("DL", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.35, why="L6c: desk downlight in front of the child (Lucy alone "
+                "(234 lm) cannot reach 400 lx at a safe driver setting)", card="ies-res-desk-400", zone="task:task")
+            add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF", 
                 why="each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, "
                     "out of the sleep zone", card="ies-res-desk-400")
         q = fp[bed]
@@ -507,7 +524,7 @@ def design(lay=None):
             why="wall-mounted swing arm on the solid head wall, aimed at the pillow; clear of both passages")
     # L6b: the two straight-down adjustable reading spots gave 790 lx on each pillow (4x the 200 lx card): cut; the
     # swing-arm lamps on the head wall are the reading lights
-    for x, y in ((PB[0] + 0.55, (PB[1] + PB[3]) / 2), ((b[0] + b[2]) / 2, b[3] + 0.45)):
+    for x, y in (((b[0] + b[2]) / 2, b[3] + 0.45),):          # L6c: 2 -> 1 ambient (ERCO DL 1065 lm)
         add("DL", "parents-bed", x, y, why="ambient, dimmable", card="ies-res-bedroom-general-50", zone="ambient")
     v = fp["pb-vanity"]
     add("ADJ", "parents-bed", v[0] - 0.35, (v[1] + v[3]) / 2, aim=(0.35, 0, -1), why="vanity light",
@@ -544,7 +561,7 @@ def design(lay=None):
     _sconces(add, "parents-ensuite", fp["pe-basin"], lay, rc, vertical=True)
     # ASSUMED initial driver setting; final dimmer scene is measured in the render.
     for fixture in out:
-        if fixture.room == "parents-ensuite":
+        if fixture.room == "parents-ensuite" and fixture.layer != "task":      # L6c: the tuned task layer gets its driver from the table
             fill_defaults(fixture.extra, {"dimmer": 0.4})
     pb_ = fp["pe-basin"]
     strip("TOE", "parents-ensuite", (pb_[2] + 0.02, pb_[1] + 0.03), (pb_[2] + 0.02, pb_[3] - 0.03), 0.30,
@@ -908,7 +925,7 @@ _NIGHT = {"*night": 0.1}
 SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
-        "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "island-cook": 1.0, "run-task": 1.0},
+        "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
         "Dinner": {"table-pendant": 0.405, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
         "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.3, "island-pendants": 0.4},
