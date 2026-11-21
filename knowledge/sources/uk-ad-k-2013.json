@@ -1,0 +1,162 @@
+[
+ {
+  "id": "UK-ADK-2013-1.3-T1.1-private-stair",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.3, Table 1.1; printed p. 5 (pdf index 14)",
+  "quote": "Private stair1, 2 150 220 220 300",
+  "value": "Private stair: rise 150-220 mm, going 220-300 mm",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.3-T1.1-note1-pitch",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.3, Table 1.1 note 1; printed p. 5 (pdf index 14)",
+  "quote": "The maximum pitch for a private stair is 42°.",
+  "value": "max pitch 42 deg (private stair)",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.3-2R+G",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.3, Table 1.1 footnote *; printed p. 5 (pdf index 14)",
+  "quote": "twice the rise plus the going (2R + G) equals between 550mm and 700mm.",
+  "value": "2R+G = 550-700 mm (normal relationship)",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.5-uniform-steps",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.5; printed p. 6 (pdf index 15)",
+  "quote": "Have level treads on steps, ensuring that the rise and going of each step are consistent throughout a flight of steps",
+  "value": "rise and going consistent in a flight; level treads",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.8-soffit",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.8; printed p. 6 (pdf index 15)",
+  "quote": "If the soffit beneath a stair is less than 2m above floor level, protect the area beneath a stair",
+  "value": "soffit <2 m above floor: guard/barrier below stair",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.9-open-risers",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.9 (dwellings); printed p. 6 (pdf index 15)",
+  "quote": "Steps may have open risers if they comply with both of the following guidance. a. Overlap treads by a minimum of 16mm. b. Construct the steps so that a 100mm diameter sphere cannot pass through the open risers.",
+  "value": "open risers in dwellings: tread overlap >=16 mm and 100 mm sphere cannot pass",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.11-headroom",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.11, Diagram 1.3; printed p. 7 (pdf index 16)",
+  "quote": "On the access between levels, provide the minimum headroom shown in Diagram 1.3.",
+  "value": "minimum headroom 2 m on the pitch line/landing (Diagram 1.3 reads 'At least 2m')",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.16-entrance-storey-width",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.16 (dwellings); printed p. 8 (pdf index 17)",
+  "quote": "ensure that stairs within the entrance storey of a dwelling have flights with a minimum stair width of 900mm.",
+  "value": "900 mm stair width, exceptional (severely sloping plot) entrance-storey stairs; ADK sets no other dwelling stair width",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.17-36-risers",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.17 (all buildings); printed p. 9 (pdf index 18)",
+  "quote": "If stairs have more than 36 risers in consecutive flights, make a minimum of one change of direction between flights",
+  "value": "more than 36 consecutive risers: change of direction >=30 deg",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.20-landings",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.20 (all buildings); printed p. 10 (pdf index 19)",
+  "quote": "At the top and bottom of every flight, provide landings the width and length at least as great as the smallest width of the flight",
+  "value": "landing width and length >= flight width",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-1.34-handrail",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 1.34 (all buildings); printed p. 14 (pdf index 23)",
+  "quote": "Position the top of the handrail 900mm to 1000mm from the pitch line or floor.",
+  "value": "handrail top 900-1000 mm from pitch line/floor; both sides if stair >=1000 mm wide",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-K2-performance-600",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "Requirement K2, Performance a.; printed p. 22 (pdf index 31)",
+  "quote": "in dwellings: provide pedestrian guarding that is capable of preventing people from being injured by falling from a height of more than 600mm",
+  "value": "dwellings: guard where drop > 600 mm",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-3.1-guard-siting",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 3.1a; printed p. 23 (pdf index 32)",
+  "quote": "any light well, basement or similar sunken area next to a building",
+  "value": "guarding required at light wells, basements and similar sunken areas next to a building (height not stated for sunken areas)",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-D3.1-guard-900",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "Diagram 3.1 (p.24; figure page); printed p. 24 (pdf index 33)",
+  "quote": "Single family dwellings Stairs, landings, ramps, edges of internal floors 900mm for all elements",
+  "value": "single-family dwelling stairs, landings, ramps, internal floor edges: guard >=900 mm",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-D3.1-guard-1100",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "Diagram 3.1 (p.24; figure page); printed p. 24 (pdf index 33)",
+  "quote": "External balconies, including Juliette balconies and edges of roof 1100mm",
+  "value": "single-family dwelling external balconies and roof edges: guard >=1100 mm",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ },
+ {
+  "id": "UK-ADK-2013-3.3-sphere-climb",
+  "document": "Approved Document K: Protection from falling, collision and impact (England)",
+  "edition": "2013 edition (held: knowledge/library.json uk-ad-k)",
+  "locator": "para 3.3; printed p. 24 (pdf index 33)",
+  "quote": "ensure that a 100mm sphere cannot pass through any openings in the guarding. b. To prevent children from readily being able to climb the guarding: avoid horizontal rails.",
+  "value": "100 mm sphere test; avoid horizontal rails (buildings used by children under five)",
+  "status": "sourced",
+  "url_or_path": "held: uk-ad-k; https://assets.publishing.service.gov.uk/media/60d5bdcde90e07716f516cfd/Approved_Document_K.pdf"
+ }
+]
