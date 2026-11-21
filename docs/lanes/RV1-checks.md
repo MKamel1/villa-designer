@@ -54,3 +54,44 @@ join, 1 mm scene rounding, item scaled 1 mm).
 
 Recall reporting rule: a miss is reported as a miss with its cause. Nothing is tuned after seeing a result; any
 change made after the first run is listed in the "Changes after first run" section below.
+
+## Check reference: resolution limits and SourceCards
+
+All thresholds are SourceCards (`src/archpipe/parity/sources.py`): `policy` where ours, the two published ones are read from
+`knowledge/eg/best-practice-cards.json` (`ukadk-stair-headroom-min`: 2 m over flight and landings, Approved Document K Diagram 1.3;
+`ukadk-guarding-height-external` is held there but K14 compares against the modelled height, not the published minimum).
+"Resolution" is what the check cannot see; a pass never claims more.
+
+| check | threshold (card) | resolution limit |
+|---|---|---|
+| K01 K02 K03 K17 | crossing depth <= 2 mm scene / 0.05 mm exact boxes (`RV1-TOL-SCENE`, `RV1-TOL-EXACT`) | scene vertices are rounded to 1 mm, so a contact below 2 mm is invisible in the scene. D02 (0.2 mm) is caught only on exact box geometry. "Depth" is the poke-through of the shorter side of the crossing triangles (exact for boxes). K02 allows half a wall thickness of plan overlap (a join at the slab edge) |
+| K04 | head <= soffit (`RV1-SOFFIT-CLEAR`) | vertical rays at 3 points across the door; the first surface above, excluding the door and its host wall |
+| K05 | 10 mm (`RV1-TOL-FIT`) | pocket and sliding doors show retracted panels: width is not measurable, only height |
+| K06 | gap <= 150 mm (`RV1-GLAZE-HEAD`, policy) | one ray at the glass centre; one full-height window in D1 |
+| K07 | 10 mm, pendant top <= ceiling + 2 mm (`RV1-TOL-FIT`) | only pendant and recessed mounts; the scene datum of a task lamp is not the modelled placement and is not compared |
+| K08 | 5 % or 10 mm (`RV1-TOL-CAT`) | stated size parsed from the Revit type name; items with no size in the name are not evaluated |
+| K09 K13 | exactly one build; every face carries an id | luminaires drawn only as a light source (cove, strip) have no mesh and read as "built 0 times" |
+| K10 | footprint contains the carcass within 10 mm; centre within half the smaller side + accessories (`RV1-TOL-FIT`) | an axis-aligned footprint cannot see a 180 degree turn (M6-180 misses) or a 0.1 m shift of a large item |
+| K11 | 1 % of area (`RV1-TOL-AREA`) | scene floor mesh area, not Revit's room boundary |
+| K12 | 2 mm (`RV1-ENV`) | asks that a face exists within 2 mm of each Revit plane; it does not prove nothing extra is there |
+| K14 | built height >= modelled (`RV1-GUARD`) | height of the tagged surfaces; does not test the infill or the fixing |
+| K15 | 10 mm (`RV1-MOUNT`) | needs a mounting_hosts record and a wall-plate part |
+| K16 | 2000 mm (`ukadk-stair-headroom-min`) | 20 mm sampling along the pitch line between nosings; first surface overhead |
+| K18 | 10 mm (`RV1-TOL-FIT`) | median sole of hinged doors per level |
+
+## Row coverage
+
+U02 U03 U04 -> K07 K08 K10 (bedroom Revit path retired; the same checks run on the frozen bedroom meshes); U10 -> K02 K04; U11 -> K03 K05;
+U12 I08 -> K01 K17; U13 U17 -> K12; U18 -> K09 K10; U19 -> K11; I04 -> K05; I09 -> K09; I10 -> K13; D01-D14, D16, D19, D21 as in the recall table.
+
+## Changes after the first run (nothing is tuned to pass; each is a defect in my check or mutation, found by looking at real data)
+
+1. `geom.fan` replaced by ear clipping (lessons/RV1 entry 1). Removed two false findings (K01 23 mm, K16 64 mm).
+2. K02: a wall now fails only when its plan overlap with the slab exceeds half its thickness (join rule), measured from the VERTICAL
+   faces of both (lessons 2, 6). Before this the D1 scene showed 5 "walls through the ramp/deck"; four were joins at the edge and one
+   came from finish skins tagged to the deck.
+3. K10: the centre-offset bound became half the carcass's smaller side plus accessory slack (plumbing items use a different placement convention).
+4. K09: duplicate detection needs at least half of an element's triangles duplicated (coincident skins are common in the scene).
+5. Mutations: M1 was a valid geometry and is reported as a miss; M1b added; M5 and K03 read the column faces from the model (lessons 2, 3);
+   M6 split into 90 and 180 degrees.
+6. D03 reproductions use a 10 mm tolerance because the Revit read-back reports wall tops to 10 mm (lessons 4).
