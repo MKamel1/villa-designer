@@ -29,7 +29,7 @@ To retry: sign in to Autodesk in the user's session once (or run from the user's
 | file | content |
 |---|---|
 | `sheetset.json` | sheet-set spec (8 sheets, views, expected counts, missing title-block fields), plan QA, SC1 result |
-| `schedule-door.csv`, `schedule-window.csv`, `schedule-room.csv`, `schedules.md` | schedules from the model (copies in `L5-samples/`) |
+| `schedule-door.csv`, `schedule-window.csv`, `schedule-room.csv`, `schedules.md` | schedules from the model (copies and the two sample PNGs in `src/archpipe/documents/samples/`; the brief asked for docs/lanes/L5-samples/ but lane_guard only allows .md there) |
 | `A-001-cover`, `A-101-plan`, `A-102-plan`, `A-601-schedule` (`.pdf` vector, `.svg`, `.png`) | A3 sheets |
 
 Every sheet is banner-labelled "MODEL-GENERATED, NOT REVIT" (English and Arabic). The plans are drawn from the
