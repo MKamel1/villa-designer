@@ -25,14 +25,34 @@ def kind_of(eid: str) -> str:
 @dataclass
 class Element:
     id: str
-    tris: np.ndarray                      # (n,3,3) metres
-    meshes: list = field(default_factory=list)   # mesh ids contributing
-    groups: set = field(default_factory=set)
-    materials: set = field(default_factory=set)
+    parts: list = field(default_factory=list)   # (mesh_id, group, material, part_kind, tris (n,3,3))
+    _all: object = None
+
+    @property
+    def tris(self) -> np.ndarray:
+        if self._all is None:
+            ts = [p[4] for p in self.parts]
+            self._all = np.concatenate(ts) if ts else np.zeros((0, 3, 3))
+        return self._all
+
+    def sel(self, material=None, group=None, part_kind=None, mesh_prefix=None) -> np.ndarray:
+        ts = [p[4] for p in self.parts
+              if (material is None or p[2] == material) and (group is None or p[1] == group)
+              and (part_kind is None or p[3] == part_kind)
+              and (mesh_prefix is None or p[0].startswith(mesh_prefix))]
+        return np.concatenate(ts) if ts else np.zeros((0, 3, 3))
 
     @property
     def kind(self) -> str:
         return kind_of(self.id)
+
+    @property
+    def meshes(self):
+        return sorted({p[0] for p in self.parts})
+
+    @property
+    def groups(self):
+        return {p[1] for p in self.parts}
 
     @property
     def box(self):
@@ -45,6 +65,7 @@ class World:
     unowned: list            # (mesh id, group, n faces) with no element id  -> findings
     source: str = ""
     sha256: str = ""
+    mesh_tris: dict = field(default_factory=dict)   # mesh id -> (n,3,3), every mesh, owned or not
 
     def of(self, *kinds):
         return {k: e for k, e in self.elements.items() if e.kind in kinds}
@@ -58,50 +79,42 @@ def sha256_file(path) -> str:
     return h.hexdigest()
 
 
-def load_scene_json(path, hash_it: bool = True, groups=None) -> tuple[World, dict]:
+def load_scene_json(path, hash_it: bool = True) -> tuple[World, dict]:
     """Return (World, raw scene dict). Faces are attributed to ids via faces_by_element;
-    a mesh with only element_ids owns its faces wholly (single id) or is split evenly-unknown
-    (multi id without faces_by_element -> reported as unowned, never guessed)."""
+    a mesh with several ids and no faces_by_element is reported as unowned, never guessed."""
     path = Path(path)
     if not path.exists():
         raise FileNotFoundError(path)
     s = json.loads(path.read_text())
-    acc: dict = {}
-    unowned = []
+    els: dict = {}
+    unowned, mesh_tris = [], {}
     for m in s["meshes"]:
-        if groups and m["group"] not in groups:
-            continue
         faces = m["faces"]
+        allt = [fan(f) for f in faces]
+        mesh_tris[m["id"]] = np.concatenate([t for t in allt if len(t)]) if any(len(t) for t in allt) else np.zeros((0, 3, 3))
         fbe = m.get("faces_by_element")
         ids = m.get("element_ids") or []
+
+        def add(eid, idx):
+            ts = [allt[i] for i in idx if len(allt[i])]
+            if ts:
+                els.setdefault(eid, Element(eid)).parts.append(
+                    (m["id"], m["group"], m.get("material"), m.get("part_kind"), np.concatenate(ts)))
         if fbe:
             owned = set()
             for eid, idx in fbe.items():
                 owned.update(idx)
-                _add(acc, eid, m, [faces[i] for i in idx])
+                add(eid, idx)
             rest = [i for i in range(len(faces)) if i not in owned]
             if rest:
                 unowned.append((m["id"], m["group"], len(rest)))
         elif len(ids) == 1:
-            _add(acc, ids[0], m, faces)
+            add(ids[0], range(len(faces)))
         else:
             unowned.append((m["id"], m["group"], len(faces)))
-    els = {}
-    for eid, (tl, ms, gs, mats) in acc.items():
-        t = np.concatenate(tl) if tl else np.zeros((0, 3, 3))
-        els[eid] = Element(eid, t, sorted(ms), gs, mats)
-    return World(els, unowned, str(path), sha256_file(path) if hash_it else ""), s
-
-
-def _add(acc, eid, m, faces):
-    tl, ms, gs, mats = acc.setdefault(eid, ([], set(), set(), set()))
-    for f in faces:
-        t = fan(f)
-        if len(t):
-            tl.append(t)
-    ms.add(m["id"]); gs.add(m["group"]); mats.add(m.get("material"))
+    return World(els, unowned, str(path), sha256_file(path) if hash_it else "", mesh_tris), s
 
 
 def world_from_boxes(boxes: dict, source="boxes") -> World:
     """boxes: id -> (x0,y0,z0,x1,y1,z1) metres. Used for the frozen historic reproductions."""
-    return World({k: Element(k, box_tris(b)) for k, b in boxes.items()}, [], source)
+    return World({k: Element(k, [(k, "box", None, None, box_tris(b))]) for k, b in boxes.items()}, [], source)
