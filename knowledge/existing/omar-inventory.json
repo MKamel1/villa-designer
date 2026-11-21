@@ -1,0 +1,503 @@
+{
+ "architectural_columns": [], 
+ "counts_by_category": {
+  "5- Lighting (1-100) (1).dwg": 1, 
+  "9- First Floor Furniture plan (1-100).dwg": 1, 
+  "<Sketch>": 222, 
+  "Analytical Members": 15, 
+  "Analytical Nodes": 60, 
+  "Area Schemes": 2, 
+  "Automatic Sketch Dimensions": 98, 
+  "Building Type Settings": 33, 
+  "Cameras": 5, 
+  "Casework": 18, 
+  "Ceilings": 9, 
+  "Color Fill Schema": 11, 
+  "Communication Devices": 5, 
+  "Constraints": 31, 
+  "Detail Groups": 23, 
+  "Detail Items": 23, 
+  "Dimensions": 28, 
+  "Doors": 16, 
+  "Electrical Demand Factor Definitions": 14, 
+  "Electrical Fixtures": 20, 
+  "Electrical Load Classification Parameter Element": 138, 
+  "Electrical Load Classifications": 23, 
+  "Elevations": 5, 
+  "Floors": 3, 
+  "Furniture": 27, 
+  "Furniture Systems": 1, 
+  "Generic Annotations": 1, 
+  "Generic Models": 47, 
+  "Guide Grid": 1, 
+  "HVAC Load Schedules": 50, 
+  "Internal Origin": 1, 
+  "Legend Components": 117, 
+  "Levels": 1, 
+  "Lighting Fixtures": 36, 
+  "Lines": 486, 
+  "Material Assets": 139, 
+  "Materials": 769, 
+  "Mechanical Equipment": 6, 
+  "Model Groups": 1, 
+  "Panel Schedule Templates - Branch Panel": 3, 
+  "Panel Schedule Templates - Data Panel": 1, 
+  "Panel Schedule Templates - Switchboard": 1, 
+  "Phases": 2, 
+  "Pipe Segments": 12, 
+  "Plan Region": 1, 
+  "Plumbing Fixtures": 13, 
+  "Primary Contours": 2, 
+  "Project Base Point": 1, 
+  "Project Information": 1, 
+  "Raster Images": 6, 
+  "Rectangular Straight Wall Opening": 4, 
+  "Reference Planes": 16, 
+  "Revision": 1, 
+  "Revision Clouds": 9, 
+  "Revision Numbering Sequences": 2, 
+  "Schedules": 97, 
+  "Section Boxes": 5, 
+  "Shared Site": 3, 
+  "Sheets": 6, 
+  "Space Type Settings": 125, 
+  "Specialty Equipment": 3, 
+  "Structural Columns": 15, 
+  "Structural Load Cases": 8, 
+  "Sun Path": 195, 
+  "Survey Point": 1, 
+  "Text Notes": 128, 
+  "Title Blocks": 5, 
+  "Viewports": 36, 
+  "Views": 169, 
+  "Walls": 75, 
+  "Windows": 11, 
+  "Work Plane Grid": 51, 
+  "ama-floor-luxcambra": 2
+ }, 
+ "floors": [
+  {
+   "bbox": {
+    "max": [
+     23678.505000000001, 
+     -21092.169999999998, 
+     0.0
+    ], 
+    "min": [
+     878.50500000000000, 
+     -31892.169999999998, 
+     -100.0
+    ]
+   }, 
+   "id": 1586207, 
+   "level": "Level 1", 
+   "name": "A-FLR-Arch Default", 
+   "type": "A-FLR-Arch Default"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     23678.505000000001, 
+     -21092.169999999998, 
+     3100.0
+    ], 
+    "min": [
+     878.50500000000000, 
+     -31892.169999999998, 
+     2900.0
+    ]
+   }, 
+   "id": 1586214, 
+   "level": "Level 1", 
+   "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+   "type": "A-FLR-Architectural Slab Edge 200mm THK"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     23678.505000000001, 
+     -21092.169999999998, 
+     -100.0
+    ], 
+    "min": [
+     878.50500000000000, 
+     -31892.169999999998, 
+     -300.0
+    ]
+   }, 
+   "id": 1586627, 
+   "level": "Level 1", 
+   "name": "A-FLR-Architectural Slab Edge 200mm THK", 
+   "type": "A-FLR-Architectural Slab Edge 200mm THK"
+  }
+ ], 
+ "grids": [], 
+ "imports": [
+  {
+   "bbox": {
+    "max": [
+     -6318.0290000000005, 
+     -4602.3270000000002, 
+     0.0
+    ], 
+    "min": [
+     -27629.559000000001, 
+     -18245.849999999999, 
+     0.0
+    ]
+   }, 
+   "linked": true, 
+   "name": "location <Not Shared>"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     58627.061999999998, 
+     -6476.75, 
+     0.0
+    ], 
+    "min": [
+     31027.062000000002, 
+     -23904.291000000001, 
+     0.0
+    ]
+   }, 
+   "linked": false, 
+   "name": "location <Not Shared>"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     5093.0820000000003, 
+     -19507.126000000000, 
+     2141.4169999999999
+    ], 
+    "min": [
+     4572.2640000000001, 
+     -20027.944000000000, 
+     0.0
+    ]
+   }, 
+   "linked": false, 
+   "name": "location <Not Shared>"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     6874.0439999999999, 
+     -35633.019999999997, 
+     2141.4169999999999
+    ], 
+    "min": [
+     6353.2259999999997, 
+     -36153.838000000003, 
+     0.0
+    ]
+   }, 
+   "linked": false, 
+   "name": "location <Not Shared>"
+  }
+ ], 
+ "levels": [
+  {
+   "elevation": 0.0, 
+   "height": null, 
+   "id": "e3e052f9-0156-11d5-9301-0000863f27ad-00000137", 
+   "name": "Level 1"
+  }
+ ], 
+ "project": {
+  "name": "omar-2027", 
+  "path": "C:\\Users\\mmbka\\arch-pipeline\\out\\villa\\omar-2027.rvt"
+ }, 
+ "revit_links": [], 
+ "roofs": [], 
+ "site": {
+  "base_point": [
+   0.0, 
+   0.0
+  ], 
+  "elevation": 100000.0, 
+  "latitude": 42.358429000000001, 
+  "longitude": -71.059775999999999, 
+  "north_angle": 0.0, 
+  "place": "<Default>"
+ }, 
+ "source": "revit", 
+ "stairs": [], 
+ "structural_columns": [
+  {
+   "bbox": {
+    "max": [
+     7377.2280000000001, 
+     -23590.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     7017.2280000000001, 
+     -24100.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1585908, 
+   "level": "Level 1", 
+   "name": "12 x 19", 
+   "type": "12 x 19"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     9567.2279999999992, 
+     -23590.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     9227.2279999999992, 
+     -24100.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1585915, 
+   "level": "Level 1", 
+   "name": "12 x 20", 
+   "type": "12 x 20"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     11537.227999999999, 
+     -23590.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     11197.227999999999, 
+     -24250.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1585917, 
+   "level": "Level 1", 
+   "name": "12 x 23", 
+   "type": "12 x 23"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     15412.227999999999, 
+     -23590.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     14902.227999999999, 
+     -23950.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1585924, 
+   "level": "Level 1", 
+   "name": "12 x 21", 
+   "type": "12 x 21"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     22597.227999999999, 
+     -28160.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     22237.227999999999, 
+     -28670.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1585933, 
+   "level": "Level 1", 
+   "name": "12 x 21", 
+   "type": "12 x 21"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     3977.2280000000001, 
+     -23640.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     3617.2280000000001, 
+     -24150.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1585938, 
+   "level": "Level 1", 
+   "name": "12 x 19", 
+   "type": "12 x 19"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     7377.2280000000001, 
+     -35730.660000000003, 
+     3000.0
+    ], 
+    "min": [
+     7017.2280000000001, 
+     -36240.660000000003, 
+     0.0
+    ]
+   }, 
+   "id": 1587347, 
+   "level": "Level 1", 
+   "name": "12 x 19", 
+   "type": "12 x 19"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     9567.2279999999992, 
+     -35730.660000000003, 
+     3000.0
+    ], 
+    "min": [
+     9227.2279999999992, 
+     -36240.660000000003, 
+     0.0
+    ]
+   }, 
+   "id": 1587354, 
+   "level": "Level 1", 
+   "name": "12 x 20", 
+   "type": "12 x 20"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     11537.227999999999, 
+     -35680.660000000003, 
+     3000.0
+    ], 
+    "min": [
+     11197.227999999999, 
+     -36190.660000000003, 
+     0.0
+    ]
+   }, 
+   "id": 1587356, 
+   "level": "Level 1", 
+   "name": "12 x 20", 
+   "type": "12 x 20"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     15337.227999999999, 
+     -35680.660000000003, 
+     3000.0
+    ], 
+    "min": [
+     14977.227999999999, 
+     -36190.660000000003, 
+     0.0
+    ]
+   }, 
+   "id": 1587363, 
+   "level": "Level 1", 
+   "name": "12 x 21", 
+   "type": "12 x 21"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     22597.227999999999, 
+     -31160.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     22237.227999999999, 
+     -31670.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1587372, 
+   "level": "Level 1", 
+   "name": "12 x 21", 
+   "type": "12 x 21"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     3797.2280000000001, 
+     -35950.660000000003, 
+     3000.0
+    ], 
+    "min": [
+     3417.2280000000001, 
+     -36310.660000000003, 
+     0.0
+    ]
+   }, 
+   "id": 1587377, 
+   "level": "Level 1", 
+   "name": "12 x 22", 
+   "type": "12 x 22"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     3977.2280000000001, 
+     -28160.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     3617.2280000000001, 
+     -28670.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1590377, 
+   "level": "Level 1", 
+   "name": "12 x 19", 
+   "type": "12 x 19"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     18877.227999999999, 
+     -23590.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     18367.227999999999, 
+     -23950.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1591282, 
+   "level": "Level 1", 
+   "name": "12 x 21", 
+   "type": "12 x 21"
+  }, 
+  {
+   "bbox": {
+    "max": [
+     22597.227999999999, 
+     -23590.660000000000, 
+     3000.0
+    ], 
+    "min": [
+     22237.227999999999, 
+     -24100.660000000000, 
+     0.0
+    ]
+   }, 
+   "id": 1591340, 
+   "level": "Level 1", 
+   "name": "12 x 21", 
+   "type": "12 x 21"
+  }
+ ], 
+ "structural_framing": [], 
+ "units": "mm", 
+ "walls_count": 75
+}
