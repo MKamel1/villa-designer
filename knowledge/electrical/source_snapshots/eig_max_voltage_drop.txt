@@ -1,0 +1,33 @@
+
+ROW: General rules of electrical installation design
+ROW: Connection to the MV utility distribution network
+ROW: Connection to the LV utility distribution network
+ROW: MV and LV architecture selection guide for buildings
+ROW: LV Distribution
+ROW: Protection against electric shocks and electric fires
+ROW: Sizing and protection of conductors
+ROW: Conductor sizing and protection Conductor sizing: methodology and definition Overcurrent protection principles Practical values for a protective scheme Location of protective devices Conductors in parallel Practical method for determining the smallest allowable cross-sectional area of circuit conductors General method for cable sizing Recommended simplified approach for cable sizing Sizing of busbar trunking systems (busways) Determination of voltage drop Maximum voltage drop limit Calculation of voltage drop in steady load conditions Short-circuit current Short-circuit current at the secondary terminals of a MV/LV distribution transformer 3-phase short-circuit current (Isc) at any point within a LV installation Isc at the receiving end of a feeder as a function of the Isc at its sending end Short-circuit current supplied by a generator or an inverter Particular cases of short-circuit current Calculation of minimum levels of short-circuit current Verification of the withstand capabilities of cables under short-circuit conditions Protective earthing conductor (PE) Connection and choice for protective earthing conductor Sizing of protective earthing conductor Protective conductor between MV/LV transformer and the main general distribution board (MGDB) Equipotential conductor The neutral conductor Sizing the neutral conductor Protection of the neutral conductor Breaking of the neutral conductor Isolation of the neutral conductor Worked example of cable calculation
+ROW: LV switchgear: functions and selection
+ROW: Overvoltage protection
+ROW: Energy Efficiency in electrical distribution
+ROW: Power Factor Correction
+ROW: Power harmonics management
+ROW: Characteristics of particular sources and loads
+ROW: PhotoVoltaic (PV) installation
+ROW: Residential and other special locations
+ROW: ElectroMagnetic Compatibility (EMC)
+ROW: Measurement
+Maximum allowable voltage-drop vary from one country to another. Typical values for LV installations are given below in Figure G25.
+ROW: Type of installations | Lighting circuits | Other uses (heating and power)
+ROW: A low-voltage service connection from a LV public power distribution network | 3% | 5%
+ROW: Consumers MV/LV substation supplied from a public distribution MV system | 6% | 8%
+Fig. G25: Maximum voltage-drop between the service-connection point and the point of utilization (IEC60364-5-52 table G.52.1)
+These voltage-drop limits refer to normal steady-state operating conditions and do not apply at times of motor starting, simultaneous switching (by chance) of several loads, etc. as mentioned in Estimation of actual maximum kVA demand (diversity and utilization factors, etc.). When voltage drops exceed the values shown in Figure G25, larger cables (wires) must be used to correct the condition.
+The value of 8%, while permitted, can lead to problems for motor loads; for example: 
+In general, satisfactory motor performance requires a voltage within ± 5% of its rated nominal value in steady-state operation, 
+Starting current of a motor can be 5 to 7 times its full-load value (or even higher). If an 8% voltage drop occurs at full-load current, then a drop of 40% or more will occur during start-up. In such conditions the motor will either:
+ Stall (i.e. remain stationary due to insufficient torque to overcome the load torque) with consequent over-heating and eventual trip-out
+ Or accelerate very slowly, so that the heavy current loading (with possibly undesirable low-voltage effects on other equipment) will continue beyond the normal start-up period 
+Finally an 8% voltage drop represents a continuous power loss, which, for continuous loads will be a significant waste of (metered) energy. For these reasons it is recommended that the maximum value of 8% in steady operating conditions should not be reached on circuits which are sensitive to under-voltage problems (see Fig. G26).
+ Fig. G26: Maximum voltage drop
+

@@ -1,0 +1,284 @@
+
+ TLC Electrical Supplies
+ Contact Us
+ Technical Section
+ Guide to the 16th Edition Regs
+ 16th Edition (reference only) – NOW superseded by the 17th Edition IEE Regulations.
+ chapter 
+ 1
+ The 
+ IEE Regulations
+ | 
+ chapter 
+ 2
+ Installation 
+ Requirements 
+ and Characteristics
+ | 
+ chapter 
+ 3
+ Installation 
+ Control
+ and Protection
+ | 
+ chapter 
+ 4
+ Cables, 
+ Conduits
+ and Trunking
+ | 
+ chapter 
+ 5
+ Earthing
+ | 
+ chapter 
+ 6
+ Circuits
+ | 
+ chapter 
+ 7
+ Special 
+ Installations
+ | 
+ chapter 
+ 8
+ Testing
+ and 
+ Inspection
+ | 
+ chapter 
+ 9
+ Data 
+ cabling
+ and Networks
+ | 
+ Contents
+ | 
+ | 
+ Circuits | 
+   | 
+ 6.1. 
+ - Basic requirements for circuits | 
+ 6.4 
+ - Industrial socket outlet circuits | 
+ | 
+   | 
+ 6.2 
+ - Maximum demand and diversity | 
+ 6.5 
+ - Other circuits | 
+ | 
+   | 
+ 6.3 
+ - BS1363 socket outlet circuits | 
+ 6.6 
+ - Circuit segregation | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ 6.2.1 -  
+ Maximum demand | 
+ 6.2.2 - 
+ Diversity | 
+ 6.2.3 -  
+ Applied diversity | 
+ | 
+ | 
+ | 
+ | 
+ 6.2.3 -  Applied diversity
+ Apart from indicating that diversity and 
+ maximum demand must be assessed, the
+ Regulations themselves give little help. Suggestions 
+ of values for the allowances
+ for diversity are given in {Table 6.2}.
+ Distribution boards must not have diversity applied 
+ so that they can carry the total load connected to them.
+ Example 6.1
+ A shop has the following single-phase loads, which 
+ are balanced as evenly as possible across the 415 V three-phase 
+ supply.
+ 2 x 6 kW and 7 x 3kw thermostatically controlled 
+ water heaters
+ 2 x 3 kW instantaneous water heaters
+ 2 x 6 kW and 1 x 4 kW cookers
+ 12 kW of discharge lighting (Sum of tube ratings)
+ 8 x 30 A ring circuits feeding 13 A sockets.
+ Calculate the total demand of the system, 
+ assuming that diversity can be applied. Calculations will 
+ be based on {Table 6.2}.
+ The single-phase voltage for a 415V three-phase 
+ system is 415/Ö 3 = 240 
+ V.
+ All loads with the exception of the discharge 
+ lighting can be assumed to be at unity power factor, so 
+ current may be calculated from
+ l = | 
+ P | 
+   | 
+ U | 
+ Thus the current per kilowatt 
+ will be 
+ 1000 A = | 
+ 4.17 | 
+ A | 
+   | 
+ 240 | 
+   | 
+ Table 6.2 - Allowance for diversity
+ | 
+ Note the following abbreviations 
+ :
+ X is the full load current of the largest 
+ appliance or circuit
+ Y is the full load current of the second 
+ largest appliance or circuit
+ Z is the full load current of the remaining 
+ appliances or circuits
+ | 
+ Type of final circuit | 
+   | 
+ Type of premises | 
+   | 
+   | 
+ Households | 
+ Small shops, stores, offices | 
+ Hotels, guest houses | 
+ Lighting | 
+ 66% total demand | 
+ 90% total demand | 
+ 75% total demand | 
+ Heating and power | 
+ 100% up to 10 A + 50% balance | 
+ 100%X + 75%(Y+Z) | 
+ 100%X + 80%Y + 60%Z | 
+ Cookers | 
+ 10 A + 30% balance + 5 A for socket | 
+ 100%X + 80%Y + 60%Z | 
+ 100%X + 80%Y + 60%Z | 
+ Motors (but not lifts) | 
+   | 
+ 100%X + 80%Y + 60%Z | 
+ 100%X + 50%(Y+Z) | 
+ Instantaneous water heaters | 
+ 100%X + 100%Y + 25%Z | 
+ 100%X + 100%Y + 25%Z | 
+ 100%X + 100%Y + 25%Z | 
+ Thermostatic water heaters | 
+ 100% | 
+ 100% | 
+ 100% | 
+ Floor warming installations | 
+ 100% | 
+ 100% | 
+ 100% | 
+ Thermal storage heating | 
+ 100% | 
+ 100% | 
+ 100% | 
+ Standard circuits | 
+ 100%X + 40%(Y+Z) | 
+ 100%X + 50%(Y+Z) | 
+ 100%X + 50%(Y+Z) | 
+ Sockets and stationary equip. | 
+ 100%X + 40%(Y+Z) | 
+ 100%X + 75%(Y+Z) | 
+ 100%X + 75%Y + 40%Z | 
+ Water 
+ heaters (thermostatic)
+ No diversity is allowable, so the 
+ total load will be: | 
+ (2 x 6) + (7 x 3) kW = 12 + 21kw 
+ = 33kw | 
+ This gives a total single-phase current 
+ of I = 33 x 4.17 = 137.6 A | 
+ Water heaters (instantaneous)
+ 100% of largest 
+ plus 100% of next means that in effect there is no allowable 
+ diversity. | 
+ Single-phase current thus | 
+ = 2 x 3 x 4.17 =  | 
+   25.0 
+ A | 
+ Cookers
+ 100% of largest | 
+ = 6 x 4.17A =  | 
+ 25.0 A | 
+ 80% of second | 
+ = 80 x 6 x 4.17A = | 
+ 20.0 A | 
+   | 
+ =100 | 
+   | 
+ 60% of remainder | 
+ = 60 x 4 x 4.17 
+ A = | 
+ 10.0 A | 
+   | 
+ =100 | 
+   | 
+ Total for cookers | 
+ = 
+ | 
+ 55.O A | 
+ Discharge lighting
+ 90% of total which must 
+ be increased to allow for power factor and control gear 
+ losses. | 
+   | 
+   | 
+   | 
+ Lighting current | 
+ = 12 x 4.17 x 1.8 x 90 =
+ | 
+ 81.1 A | 
+   | 
+ 100
+ | 
+   | 
+ Ring circuits
+ First circuit 100%, 50 
+ current is 30 A | 
+ 75% of remainder | 
+ = 7 x 30 x 75 =
+ | 
+ 157.5 A | 
+   | 
+ 100
+ | 
+   | 
+ Total current demand 
+ for ring circuits =  | 
+ 187.5 A | 
+ Total single phase current 
+ demand = | 
+ 486.2 A | 
+ Since a perfect balance 
+ is assumed, three phase line current = | 
+ 486.2 A | 
+   | 
+   | 
+ =3 | 
+   | 
+ = 
+ | 
+ 162 A | 
+ | 
+ | 
+   | 
+ Return to top of page
+ Extracted from The Electricians Guide Fifth Edition
+ by John Whitfield
+ Published by EPA Press Click Here to order your Copy.
+ Click here for list of abbreviations
+ | 
+ | 
+

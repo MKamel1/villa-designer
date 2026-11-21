@@ -1,0 +1,70 @@
+
+ TLC Electrical Supplies
+ Contact Us
+ Technical Section
+ Guide to the 16th Edition Regs
+ 16th Edition (reference only) – NOW superseded by the 17th Edition IEE Regulations.
+ Table 6.2 - Allowance for diversity
+ | 
+ Note the following abbreviations :
+ X is the full load current of the largest 
+ appliance or circuit
+ Y is the full load current of the second 
+ largest appliance or circuit
+ Z is the full load current of the remaining appliances 
+ or circuits
+ | 
+ Type of final circuit | 
+   | 
+ Type of premises | 
+   | 
+   | 
+ Households | 
+ Small shops, stores, offices | 
+ Hotels, guest houses | 
+ Lighting | 
+ 66% total demand | 
+ 90% total demand | 
+ 75% total demand | 
+ Heating and power | 
+ 100% up to 10 A + 50% balance | 
+ 100%X + 75%(Y+Z) | 
+ 100%X + 80%Y + 60%Z | 
+ Cookers | 
+ 10 A + 30% balance + 5 A for socket | 
+ 100%X + 80%Y + 60%Z | 
+ 100%X + 80%Y + 60%Z | 
+ Motors (but not lifts) | 
+   | 
+ 100%X + 80%Y + 60%Z | 
+ 100%X + 50%(Y+Z) | 
+ Instantaneous water heaters | 
+ 100%X + 100%Y + 25%Z | 
+ 100%X + 100%Y + 25%Z | 
+ 100%X + 100%Y + 25%Z | 
+ Thermostatic water heaters | 
+ 100% | 
+ 100% | 
+ 100% | 
+ Floor warming installations | 
+ 100% | 
+ 100% | 
+ 100% | 
+ Thermal storage heating | 
+ 100% | 
+ 100% | 
+ 100% | 
+ Standard circuits | 
+ 100%X + 40%(Y+Z) | 
+ 100%X + 50%(Y+Z) | 
+ 100%X + 50%(Y+Z) | 
+ Sockets and stationary equip. | 
+ 100%X + 40%(Y+Z) | 
+ 100%X + 75%(Y+Z) | 
+ 100%X + 75%Y + 40%Z | 
+ Return to top of page
+ Extracted from The Electricians Guide Fifth Edition
+ by John Whitfield
+ Published by EPA Press Click Here to order your Copy.
+ Click here for list of abbreviations
+

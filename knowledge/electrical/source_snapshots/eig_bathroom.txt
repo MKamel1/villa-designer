@@ -1,0 +1,31 @@
+Bathrooms and shower rooms are areas of high risk, because of the very low resistance of the human body when wet or immersed in water.
+Precaution to be taken are therefore correspondingly rigorous, and the regulations are more severe than those for most other locations.
+The relevant international standard is IEC 60364-7-701, applicable to the electrical installations in locations containing a fixed bath (bath tub) or shower and to the surrounding zones. Refer to country specific standards (or deviations from the IEC requirements) whenever they exist.
+Precautions to observe are based on three aspects:
+The definition of zones, numbered 0, 1 and 2 in which the placement (or exclusion) of any electrical device is strictly limited or forbidden and, where permitted, the electrical and mechanical protection is prescribed
+The strict adherence to the requirements prescribed for each zone
+The establishment of an equipotential bond between all exposed and extraneous metal parts in the zones concerned.
+Classification of zones
+Sub-clause 701.30 of IEC 60364-7-701 defines the zones 0, 1 and 2, illustrated by the following figures for most common examples.
+Refer to the standard for a more complete view.
+ Fig. Q15 – ﻿Definition of zones 0, 1 and 2 (global view)
+ Fig. Q16 – Definition of zones 0, 1, and 2 – Bath tub complementary examples
+ Fig. Q17 – Definition of zones 0, 1, and 2 - shower without basin complementary examples
+Requirements prescribed for each zone
+The IEC 60364-7-701 provides the specific requirements for the different zones defined in classification of zones, applicable to the equipments, circuits ... 
+It is an international standard that has been achieved as a compromise between countries, considering their existing national standards and regulations, thus it includes a significant number of notes providing country specific requirements. It is thus difficult to share a simplified view of these requirements.
+Therefore, what you see below is an overview of the requirements for each zone, based on French standard (NFC 15-100). Always refer to your national standards for the applicable local requirements. 
+Fig. Q18 – Equipment IP required for each zone
+ROW: Zone | Equipment IP required
+ROW: Zone 0 | IPX7
+ROW: Zone 1 | IPX4[a]
+ROW: Zone 2 | IPX4
+^ IPX5 for showers with horizontal water jets
+ Cells with a grey background indicate that such equipment is forbidden in this zone.
+ [a] IPX5 for showers with horizontal water jets
+ [b] Separation transformer of the circuit shall be installed outside zones 0..2
+ [c] Outside zones 0..2, all circuits shall be protected by 30mA RCDs (or separation transformer, SELV or PELV)Fig. Q19 – Overview of the specific requirements for bathrooms and shower rooms (based on French NFC 15-100 standard) - refer to your local standard for actual and complete requirements
+Equipotential bonding
+see Fig. Q20
+ Fig. Q20 – ﻿﻿Supplementary equipotential bonding in a bathroom
+

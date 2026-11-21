@@ -1,0 +1,60 @@
+
+ROW: Characteristics of particular sources and loads
+ROW: Contents 1- Example 2- Specified maximum disconnection time 3- Protection by means of circuit breaker 4- Protection by means of fuses 5- Protection by means of Residual Current Devices (not applicable for TN-C)
+ROW: The automatic disconnection for TN system is achieved by overcurrent protective devices or RCDs
+In this system all exposed and extraneous-conductive-parts of the installation are connected directly to the earthed point of the power supply by protective conductors.
+As noted in Definition of standardised earthing schemes, the way in which this direct connection is carried out depends on whether the TN-C, TN-S, or TN-C-S method of implementing the TN principle is used. In Figure F18 the method TN-C is shown, in which the neutral conductor acts as both the Protective-Earth and Neutral (PEN) conductor. In all TN systems, any insulation fault to earth results in a phase to neutral short-circuit. High fault current levels allow to use overcurrent protection but can give rise to touch voltages exceeding 50 % of the phase to neutral voltage at the fault position during the short disconnection time.
+In practice for utility distribution network, earth electrodes are normally installed at regular intervals along the protective conductor (PE or PEN) of the network, while the consumer is often required to install an earth electrode at the service entrance.
+On large installations, additional earth electrodes dispersed around the premises are often provided, in order to reduce the touch voltage as much as possible. In high-rise apartment blocks, all extraneous conductive parts are connected to the protective conductor at each level. 
+In order to ensure adequate protection, the earth-fault current
+ or 
+must be higher or equal to Ia, where:
+Id = fault current
+Uo = nominal phase to neutral voltage
+Zs = earth-fault current loop impedance equal to the sum of the impedance of the source, the phase conductors to the fault position, the protective conductors from the fault position back to the source
+Zc = the faulty-circuit loop impedance (see Conventional method)
+Ia = current equal to the value required to operate the protective device in the specified time
+Note: The path through earth electrodes back to the source will have (generally) much higher impedance values than those listed above, and need not be considered.
+ Example
+(see Fig. F18)
+The fault voltage and is hazardous;
+The fault loop impedance .
+If and are predominant, then: , so that 
+ (≈ 22 In based on a NSX 160 circuit-breaker).
+The “instantaneous” magnetic trip unit adjustment of the circuit-breaker is many time less than this short-circuit value, so that positive operation in the shortest possible time is assured.
+Note: Some authorities base such calculations on the assumption that a voltage drop of 20% occurs in the part of the impedance loop BANE.
+This method, which is recommended, is explained in chapter Conventional method and in this example will give an estimated fault current of 
+ (≈ 18 In)
+ Fig. F18: ﻿Automatic disconnection in TN system
+ Specified maximum disconnection time 
+IEC 60364-4-41 specifies the maximum operating time of protective devices used in TN system for fault protection:
+ For all final circuits with a rated current not exceeding 63 A with one or more socket-outlets, and 32 A supplying only fixed connected current-using equipment, the maximum disconnecting time will not exceed the values indicated in Fig. F19
+ For all other circuits, the maximum disconnection time is fixed to 5 s. This limit enables selectivity between protective devices installed on distribution circuits
+Note: The use of RCDs may be necessary on TN-earthed systems. Use of RCDs on TN-C-S systems means that the protective conductor and the neutral conductor must (evidently) be separated upstream of the RCD. This separation is commonly made at the service entrance.
+ROW: Uo[a] (V AC) | T (s)
+ROW: 50 400 | 0.1
+[a]  Uo is the nominal phase to earth voltage
+Fig. F19: Maximum disconnecting times in TN system for final circuits not exceeding 63 A with one or more socket-outlets, and 32 A supplying only fixed connected current-using equipment
+ Protection by means of circuit breaker 
+(see Fig. F20)
+ROW: If the protection is to be provided by a circuit breaker, it is sufficient to verify that the fault current will always exceed the current-setting level of the instantaneous or short-time delay tripping unit (Im)
+The instantaneous trip unit of a circuit breaker will eliminate a fault to earth in less than 0.1 second.
+In consequence, automatic disconnection within the maximum allowable time will always be assured, since all types of trip unit, magnetic or electronic, instantaneous or slightly retarded, are suitable: Ia = Im. The maximum tolerance authorized by the relevant standard, however, must always be taken into consideration. It is sufficient therefore that the fault current U0/Zs or 0.8 U0/Zc determined by calculation (or estimated on site) be greater than the instantaneous trip-setting current Im, or greater than the very short-time tripping threshold level, to be sure of tripping within the permitted time limit.
+ Fig. F20: ﻿Disconnection by circuit breaker for a TN system
+ Protection by means of fuses 
+(see Fig. F21)
+ROW: Is can be determined from the fuse performance curve. In any case, protection cannot be achieved if the loop impedance Zs or Zc exceeds a certain value
+The value of current which assures the correct operation of a fuse can be ascertained from a current/time performance graph for the fuse concerned.
+The fault current U0/Zs or 0.8 U0/Zc as determined above, must largely exceed the current necessary to ensure positive operation of the fuse. The condition to observe therefore is that or as indicated in Fig. F21.
+ Fig. F21: ﻿Disconnection by fuses for a TN system
+Example: The nominal phase to neutral voltage of the network is 230 V and the maximum disconnection time given in Fig. F19 is 0.4 s.
+The corresponding value of Ia can be read from the graph. Using the voltage (230 V) and the current Ia, the complete loop impedance or the circuit loop impedance can be calculated from: 
+ or 
+This impedance value must never be exceeded and should preferably be substantially less to ensure satisfactory fuse operation.
+ Protection by means of Residual Current Devices (not applicable for TN-C) 
+Residual Current Devices must be used where:
+ The loop impedance cannot be determined precisely (lengths difficult to estimate, presence of metallic material close to the wiring)
+ The fault current is so low that the disconnection time cannot be met by using overcurrent protective devices
+The rated tripping current of RCDs being in the order of a few amps, it is well below the fault current level. RCDs are consequently well adapted to this situation.
+In practice, they are often installed in the LV sub-distribution and in many countries, the automatic disconnection of final circuits shall be achieved by Residual Current Devices.
+

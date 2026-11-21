@@ -1,0 +1,141 @@
+
+=====PAGE 1=====
+This pocket guide provides an overview of Section 701 of 
+BS 7671:2018+A2:2022 (IET Wiring Regulations 18th Edition). 
+This guide does not cover all of the requirements of Section 701; 
+therefore BS 7671 should always be consulted where doubts exist.
+Descriptions of the zones and the electrical equipment permitted 
+in each are given below and on the back page. Illustrations of the 
+zones are provided in the centre pages.
+Zone 0 is limited to the interior of the bath tub or shower basin. For 
+showers without a basin, the height of zone 0 is 0.10 m and has the 
+same horizontal extent as zone 1 (see below).
+In zone 0, only electrical equipment meeting all of the following 
+requirements is permitted:
+	 • The equipment is fixed, permanently connected and has a degree 
+of protection of at least IPX7 (against temporary immersion) and
+	 •	The equipment complies with the relevant standard and is suitable 
+for use in zone 0 according to the manufacturer’s instructions for 
+use and mounting and
+	 •	The equipment is protected by a SELV source not exceeding 12 
+V AC or 30 V DC, the safety source being installed outside zones 
+0, 1 and 2. Note: a source as described in Regulation 414.3 (iv) 
+shall not be used.
+Zone 1 is the area above the bath tub or shower basin to a height of 
+2.25 m from the floor or the highest fixed shower head, whichever is 
+higher. The space under the bath tub or shower basin is included if 
+accessible without the use of a tool.
+For showers without a basin, zone 1 extends 1.20 m horizontally 
+from the centre point of the fixed water outlet on the wall or ceiling. 
+In zone 1, only the following fixed and permanently connected 
+electrical equipment having a degree of protection of at least IPX4 
+(against splashing from any direction) is permitted, provided it is 
+suitable according to the manufacturer’s instructions:
+	 •	Electric showers, shower pumps and whirlpool units;
+	 •	Ventilation equipment, towel rails, water heaters and luminaires;
+	 •	Equipment protected by a SELV or PELV source not exceeding 
+25 V AC or 60 V DC (and SELV switches not exceeding 12 V AC 
+or 30 V DC), the safety source being installed outside zones 0, 1 
+and 2 in each case. Note: a source as described in Regulation 
+414.3 (iv) shall not be used.  
+Electrical Installations in Locations 
+Containing a Bath or Shower 
+
+=====PAGE 2=====
+Zone 2
+2.25 m or the highest 
+ﬁxed shower head, 
+whichever is higher.
+0.6 m
+2.5 m
+Ceiling
+Window
+Recess
+Zone 2
+Outside Zones
+Outside Zones
+Bathroom Zones Elevation
+Zone 1
+Zone 0
+13 amp socket-outlets are only 
+permitted outwith a distance of 
+2.5 m horizontally from the 
+boundary of Zone 1 and must 
+be protected by a 30 mA RCD.
+Space under the bath tub or shower 
+basin is Zone 1 if accessible without               
+the use of a tool.
+Space under the bath tub or shower basin, 
+accessible only with the use of a tool, 
+is outside the Zones.
+*
+*
+
+=====PAGE 3=====
+Shower Without a Basin - Zones Plan
+1.20 m
+Zone 1
+Zone 0
+Outside Zones
+• The height of Zone 0 is 0.10 m
+• The height of Zone 1 is 2.25 m from the ﬂoor or the highest ﬁxed
+  shower head or water outlet, whichever is higher
+Centre point of the ﬁxed 
+water outlet on the wall 
+or ceiling
+Figures 701.1 and 701.2 of BS 7671:2018+A2:2022 provides 
+further examples of zone dimensions for various configurations of 
+bath tubs and showers, with or without permanent fixed partitions.
+
+=====PAGE 4=====
+ 
+Zone 2 is the area external to zone 1 for a distance of 0.6 m 
+horizontally and a height of 2.25 m from the floor or the highest 
+fixed shower head, whichever is higher. For showers without a 
+basin, there is no zone 2 but an increased zone 1, as described 
+previously.
+In zone 2, only the following electrical equipment is permitted:
+	 •	Shaver supply units complying with BS EN 61558-2-5, located 
+where direct spray from showers is unlikely;
+	 •	Other electrical equipment having a degree of protection of at 
+least IPX4 (against splashing from any direction);
+	 •	Switches and socket-outlets of SELV circuits only, the safety 
+source being installed outside zones 0, 1 and 2.
+Outside the Zones
+Socket-outlets (other than those of SELV circuits noted above) 
+are prohibited within a distance of 2.5 m horizontally from the 
+boundary of zone 1.
+Other equipment, switchgear and accessories in accordance 
+with the general requirements of BS 7671 are permitted outside 
+the zones (but within the bath/shower room) provided the circuits 
+supplying them are protected by one or more 30 mA RCDs (see 
+below). 
+RCD Protection 
+Additional protection by use of one or more 30 mA RCDs must 
+be provided for all low voltage circuits:
+	 • Serving the location (i.e. the room containing the fixed bath or 
+shower);
+	 •	Passing through zone 1 and/or zone 2 not serving the location.
+Local Supplementary Protective Equipotential Bonding
+Where the location containing a bath or shower is in a building 
+with a suitable protective equipotential bonding system, 
+supplementary  protective equipotential bonding may be omitted 
+where all of the following conditions are met:
+	 •	All final circuits of the location comply with the requirements 
+for automatic disconnection and
+	 • All final circuits of the location have additional protection by 
+means of one or more 30 mA RCDs and
+	 •	All extraneous-conductive-parts of the location are effectively 
+connected to the protective equipotential bonding.
+Note: Any addition or alteration carried out on an existing 
+bath/shower room must meet the requirements of Section 701 of 
+BS 7671:2018+A2:2022. In such circumstances unless all three 
+conditions noted above are met, local supplementary protective 
+equipotential bonding will require to be established.
+The Walled Garden
+Bush Estate, Midlothian, EH26 0SB
+Telephone 0131 445 5577 
+Fax 0131 445 5548
+e-mail: admin@select.org.uk 
+Website: www.select.org.uk
+TS 19-001   

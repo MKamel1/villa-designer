@@ -1,0 +1,244 @@
+Contents
+1 Possible methods of installation for different types of conductors or cables
+2 Possible methods of installation for different situations:
+3 Examples of wiring systems and reference methods of installations
+4 Maximum operating temperature:
+5 Correction factors
+6 Admissible current as a function of nominal cross-sectional area of conductors
+Possible methods of installation for different types of conductors or cables
+The different admissible methods of installation are listed in Figure G8, in conjonction with the different types of conductors and cables. 
+Fig. G8 – Selection of wiring systems (table A.52.1 of IEC 60364-5-52)
+ROW: Conductors and cables | Method of installation
+ROW: Without fixings | Clipped direct | Conduit systems | Cable trunking systems (including skirting trunking, flush floor trunking) | Cable ducting systems | Cable ladder, Cable tray, Cable rackets | On insulators | Support wire
+ROW: Bare conductors | - | - | - | - | - | - | + | -
+ROW: Insulated conductors[a] | - | - | + | +[b] | + | - | + | -
+ROW: Sheathed cables (including armoured and mineral insulated) | Multi-core | + | + | + | + | + | + | 0 | +
+ROW: Single-core | 0 | + | + | + | + | + | 0 | +
++ : Permitted.
+- : Not Permitted.
+0 : Not applicable, or not normally used in practice.
+^ Insulated conductors which are used as protective conductors or protective bonding conductors may use any appropriate method of installation and need not be laid in conduits, trunking or ducting systems.
+^ Insulated conductors are admitted if the cable trunking systems provide at least he degree of protection IP4X or IPXXD and if the cover can only be removed by means of a tool or a deliberate action.
+Possible methods of installation for different situations:
+Different methods of installation can be implemented in different situations. The possible combinations are presented in Figure G9.
+The number given in this table refer to the different wiring systems considered.
+Fig. G9 – Erection of wiring systems (table A.52.2 of IEC 60364-5-52)
+ROW: Situations | Method of installation
+ROW: Without fixings | Clipped direct | Conduit Systems | Cable trunking (including skirting trunking, flush floor trunking) | Cable ducting systems | Cable ladder, cable tray, cable brackets | On insulators | Support wire
+ROW: Building voids | Accessible | 40 | 33 | 41, 42 | 6, 7, 8, 9,12 | 43, 44 | 30, 31, 32, 33, 34 | - | 0
+ROW: Not accessible | 40 | 0 | 41, 42 | 0 | 43 | 0 | 0 | 0
+ROW: Cable channel | ­56 | 56 | 54, 55 | 0 | | 30, 31, 32, 34 | - | -
+ROW: Buried in ground | 72, 73 | 0 | 70, 71 | - | 70, 71 | 0 | - | -
+ROW: Embedded in structure | 57, 58 | 3 | 1, 2, 59, 60 | 50, 51, 52, 53 | 46, 45 | 0 | - | -
+ROW: Surface mounted | - | 20, 21, 22, 23, 33 | 4, 5 | 6, 7, 8, 9, 12 | 6, 7, 8, 9 | 30, 31, 32, 34 | 36 | -
+ROW: Overhead/free in air | - | 33 | 0 | 10, 11 | 10, 11 | 30, 31, 32, 34 | 36 | 35
+ROW: Window frames | 16 | 0 | 16 | 0 | 0 | 0 | - | -
+ROW: Architrave | 15 | 0 | 15 | 0 | 0 | 0 | - | -
+ROW: Immersed 1 | + | + | + | - | + | 0 | - | -
+– : Not permitted.
+0 : Not applicable or not normally used in practice.
++ : Follow manufacturer’s instructions.
+Note: The number in each box, e.g. 40, 46, refers to the number of the method of installation in Table A.52.3.
+Examples of wiring systems and reference methods of installations
+An illustration of some of the many different wiring systems and methods of installation is provided in Figure G10.
+Several reference methods are defined (with code letters A to G), grouping installation methods having the same characteristics relative to the current-carrying capacities of the wiring systems. 
+Fig. G10 – Examples of methods of installation (part of table A.52.3 of IEC 60364-5-52)
+ROW: Item No. | Methods of installation | Description | Reference method of installation to be used to obtain current-carrying capacity
+ROW: 1 | Room | Insulated conductors or single-core cables in conduit in a thermally insulated wall | A1
+ROW: 2 | Room | Multi-core cables in conduit in a thermally insulated wall | A2
+ROW: 4 | | Insulated conductors or single-core cables in conduit on a wooden, or masonry wall or spaced less than 0,3 x conduit diameter from it | B1
+ROW: 5 | | Multi-core cable in conduit on a wooden, or mansonry wall or spaced less than 0,3 x conduit diameter from it | B2
+ROW: 20 | | Single-core or multi-core cables: - fixed on, or sapced less than 0.3 x cable diameter from a wooden wall | C
+ROW: 30 | | Single-core or multi-core cables: On unperforated tray run horizontally or vertically | C
+ROW: 31 | | Single-core or multi-core cables: On perforated tray run horizontally or vertically | E or F
+ROW: 36 | | Bare or insulated conductors on insulators | G
+ROW: 70 | | Multi-core cables in conduit or in cable ducting in the ground | D1
+ROW: 71 | | Single-core cable in conduit or in cable ducting in the ground | D1
+Maximum operating temperature:
+The current-carrying capacities given in the subsequent tables have been determined so that the maximum insulation temperature is not exceeded for sustained periods of time.
+For different type of insulation material, the maximum admissible temperature is given in Figure G11. 
+Fig. G11 – Maximum operating temperatures for types of insulation (table 52.1 of IEC 60364-5-52)
+ROW: Type of insulation | Temperature limit °C
+ROW: Polyvinyl-chloride (PVC) | 70 at the conductor
+ROW: Cross-linked polyethylene (XLPE) and ethylene propylene rubber (EPR) | 90 at the conductor
+ROW: Mineral (PVC covered or bare exposed to touch) | 70 at the sheath
+ROW: Mineral (bare not exposed to touch and not in contact with combustible material) | 105 at the seath
+Correction factors
+In order to take service conditions of the installation into account, correction factors have been introduced.
+The cross-sectional area of cables is determined using the current-carrying capacity of the cable IZ, multiplied by correction factors:
+I'Z = IZ . k1 . k2 ...
+where:
+IZ = current carrying capacity of the cable in the reference installation method
+I'Z = "corrected" current carrying capacity of the cable in real installation conditions
+k1, k2 ... = corrections factors, detailed in the following paragraphs
+The cross sectional area of cables is then chosen in order to ensure that their "corrected" current-carrying capacity I'Z is higher than the rated load current IB: IB ≤ I'Z
+Ambient temperature
+The current-carrying capacities of cables in the air are based on an ambient air temperature equal to 30 °C. For other temperatures, the correction factor is given in Figure G12 for PVC, EPR and XLPE insulation material.
+The related correction factor is here noted k1. 
+Fig. G12 – Correction factors for ambient air temperatures other than 30 °C to be applied to the current-carrying capacities for cables in the air (from table B.52.14 of IEC 60364-5-52)
+ROW: Ambient air temperature °C | Insulation
+ROW: PVC | XLPE and EPR
+ROW: 10 | 1.22 | 1.15
+ROW: 15 | 1.17 | 1.12
+ROW: 20 | 1.12 | 1.08
+ROW: 25 | 1.06 | 1.04
+ROW: 30 | 1 | 1
+ROW: 35 | 0.94 | 0.96
+ROW: 40 | 0.87 | 0.91
+ROW: 45 | 0.79 | 0.87
+ROW: 50 | 0.71 | 0.82
+ROW: 55 | 0.61 | 0.76
+ROW: 60 | 0.50 | 0.71
+ROW: 65 | - | 0.65
+ROW: 70 | - | 0.58
+ROW: 75 | - | 0.50
+ROW: 80 | - | 0.41
+The current-carrying capacities of cables in the ground are based on an ambient ground temperature equal to 20 °C. For other temperatures, the correction factor is given in Figure G13 for PVC, EPR and XLPE insulation material.
+The related correction factor is here noted k2. 
+Fig. G13 – Correction factors for ambient ground temperatures other than 20 °C to be applied to the current-carrying capacities for cables in ducts in the ground (from table B.52.15 of IEC 60364-5-52)
+ROW: Ground temperature °C | Insulation
+ROW: PVC | XLPE and EPR
+ROW: 10 | 1.10 | 1.07
+ROW: 15 | 1.05 | 1.04
+ROW: 20 | 1 | 1
+ROW: 25 | 0.95 | 0.96
+ROW: 30 | 0.89 | 0.93
+ROW: 35 | 0.84 | 0.89
+ROW: 40 | 0.77 | 0.85
+ROW: 45 | 0.71 | 0.80
+ROW: 50 | 0.63 | 0.76
+ROW: 55 | 0.55 | 0.71
+ROW: 60 | 0.45 | 0.65
+ROW: 65 | - | 0.60
+ROW: 70 | - | 0.53
+ROW: 75 | - | 0.46
+ROW: 80 | - | 0.38
+Soil thermal resistivity
+The current-carrying capacities of cables in the ground are based on a ground resistivity equal to 2.5 K•m/W. For other values, the correction factor is given in Figure G14.
+The related correction factor is here noted k3. 
+Fig. G14 – Correction factors for cables in buried ducts for soil thermal resistivities other than 2.5 K.m/W to be applied to the current-carrying capacities for reference method D (table B.52.16 of IEC 60364-5-52)
+ROW: 
+ROW: Thermal resistivity, K•m/W | 0.5 | 0.7 | 1 | 1.5 | 2 | 2.5 | 3
+ROW: Correction factor for cables in buried ducts | 1.28 | 1.20 | 1.18 | 1.1 | 1.05 | 1 | 0.96
+ROW: Correction factor for direct buried cables | 1.88 | 1.62 | 1.5 | 1.28 | 1.12 | 1 | 0.90
+Note 1: The correction factors given have been averaged over the range of conductor sizes and types of installation included in Tables B.52.2 to B.52.5. The overall accuracy of correction factors is within ±5 %.
+Note 2: The correction factors are applicable to cables drawn into buried ducts; for cables laid direct in the ground the correction factors for thermal resistivities less than 2.5 K•m/W will be higher. Where more precise values are required they may be calculated by methods given in the IEC 60287 series.
+Note 3: The correction factors are applicable to ducts buried at depths of up to 0.8 m.
+Note 4: It is assumed that the soil properties are uniform. No allowance had been made for the possibility of moisture migration which can lead to a region of high thermal resistivity around the cable. If partial drying out of the soil is foreseen, the permissible current rating should be derived by the methods specified in the IEC 60287 series.
+Based on experience, a relationship exist between the soil nature and resistivity. Then, empiric values of correction factors k3 are proposed in Figure G15, depending on the nature of soil. 
+Fig. G15 – Correction factor k3 depending on the nature of soil
+ROW: Nature of soil | k3
+ROW: Very wet soil (saturated) | 1.21
+ROW: Wet soil | 1.13
+ROW: Damp soil | 1.05
+ROW: Dry soil | 1.00
+ROW: Very dry soil (sunbaked) | 0.86
+Grouping of conductors or cables
+The current-carrying capacities given in the subsequent tables relate to single circuits consisting of the following numbers of loaded conductors:
+Two insulated conductors or two single-core cables, or one twin-core cable (applicable to single-phase circuits);
+Three insulated conductors or three single-core cables, or one three-core cable (applicable to three-phase circuits).
+Where more insulated conductors or cables are installed in the same group, a group reduction factor (here noted k4) shall be applied.
+Examples are given in Figures G16 to G18 for different configurations (installation methods, in free air or in the ground).
+Figure G16 gives the values of correction factor k4 for different configurations of unburied cables or conductors, grouping of more than one circuit or multi-core cables. 
+Fig. G16 – Reduction factors for groups of more than one circuit or of more than one multi-core cable (table B.52.17 of IEC 60364-5-52)
+ROW: Arrangement (cables touching) | Number of circuits or multi-core cables | Reference methods
+ROW: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 12 | 16 | 20
+ROW: Bunched in air, on a surface, embedded orenclosed | 1.00 | 0.80 | 0.70 | 0.65 | 0.60 | 0.57 | 0.54 | 0.52 | 0.50 | 0.45 | 0.41 | 0.38 | Methods A to F
+ROW: Single layer on wall, floor or unperforated tray | 1.00 | 0.85 | 0.79 | 0.75 | 0.73 | 0.72 | 0.72 | 0.71 | 0.70 | No further reduction factor for more than nine circuits or multi-core cables | Method C
+ROW: Single layer fixed directly under a wooden ceiling | 0.95 | 0.81 | 0.72 | 0.68 | 0.66 | 0.64 | 0.63 | 0.62 | 0.61
+ROW: Single layer on a perforated horizontal or vertical tray | 1.00 | 0.88 | 0.82 | 0.77 | 0.75 | 0.73 | 0.73 | 0.72 | 0.72 | Methods E and F
+ROW: Single layer on ladder support or cleats etc. | 1.00 | 0.87 | 0.82 | 0.80 | 0.80 | 0.79 | 0.79 | 0.78 | 0.78
+Figure G17 gives the values of correction factor k4 for different configurations of unburied cables or conductors, for groups of more than one circuit of single-core cables in free air. 
+Fig. G17 – Reduction factors for groups of more than one circuit of single-core cables to be applied to reference rating for one circuit of single-core cables in free air - Method of installation F. (table B.52.21 of IEC 60364-5-52)
+ROW: Method of installation | Number of tray | Number of three-phase circuits | Use as a multiplier to rating for
+ROW: 1 | 2 | 3
+ROW: Perforated trays | 31 | ﻿Touching | 1 | 0.98 | 0.91 | 0.87 | Three cables in horizontal formation
+ROW: 2 | 0.96 | 0.87 | 0.81
+ROW: 3 | 0.95 | 0.85 | 0.78
+ROW: Vertical perforated trays | 31 | Touching | 1 | 0.96 | 0.86 | | Three cables in vertical formation
+ROW: 2 | 0.95 | 0.84
+ROW: Ladder supports, cleats, etc... formation | 32 | Touching | 1 | 1.00 | 0.97 | 0.96 | Three cables in horizontal formation
+ROW: 33 | 2 | 0.98 | 0.93 | 0.89
+ROW: 34 | 3 | 0.97 | 0.90 | 0.86
+ROW: Perforated trays | 31 | | 1 | 1.00 | 0.98 | 0.96 | Three cables in trefoil formation
+ROW: 2 | 0.97 | 0.93 | 0.89
+ROW: 3 | 0.96 | 0.92 | 0.86
+ROW: Vertical perforated trays | 31 | Spaced | 1 | 1.00 | 0.91 | 0.89
+ROW: 2 | 1.00 | 0.90 | 0.86
+ROW: Ladder supports, cleats, etc... | 32 | | 1 | 1.00 | 1.00 | 1.00
+ROW: 33 | 2 | 0.97 | 0.95 | 0.93
+ROW: 34 | 3 | 0.96 | 0.94 | 0.90
+Figure G18 gives the values of correction factor k4 for different configurations of cables or conductors laid directly in the ground.
+Fig. G18 – Reduction factors for more than one circuit, single-core or multi-core cables laid directly in the ground. Installation method D. (table B.52.18 of IEC 60364-5-52)
+ROW: Number of circuits | Cable to cable clearance(a)
+ROW: Nil (cables touching) | One cable diameter | 0.125 m | 0.25 m | 0.5 m
+ROW: 2 | 0.75 | 0.80 | 0.85 | 0.90 | 0.90
+ROW: 3 | 0.65 | 0.70 | 0.75 | 0.80 | 0.85
+ROW: 4 | 0.60 | 0.60 | 0.70 | 0.75 | 0.80
+ROW: 5 | 0.55 | 0.55 | 0.65 | 0.70 | 0.80
+ROW: 6 | 0.50 | 0.55 | 0.60 | 0.70 | 0.80
+ROW: 7 | 0.45 | 0.51 | 0.59 | 0.67 | 0.76
+ROW: 8 | 0.43 | 0.48 | 0.57 | 0.65 | 0.75
+ROW: 9 | 0.41 | 0.46 | 0.55 | 0.63 | 0.74
+ROW: 12 | 0.36 | 0.42 | 0.51 | 0.59 | 0.71
+ROW: 16 | 0.32 | 0.38 | 0.47 | 0.56 | 0.38
+ROW: 20 | 0.29 | 0.35 | 0.44 | 0.53 | 0.66
+ROW: (a) for Multi-core cables | 
+ROW: (a) for Single-core cables | 
+Harmonic current
+The current-carrying capacity of three-phase, 4-core or 5-core cables is based on the assumption that only 3 conductors are fully loaded.
+However, when harmonic currents are circulating, the neutral current can be significant, and even higher than the phase currents. This is due to the fact that the 3rd harmonic currents of the three phases do not cancel each other, and sum up in the neutral conductor.
+This of course affects the current-carrying capacity of the cable, and a correction factor noted here k5 shall be applied.
+In addition, if the 3rd harmonic percentage h3 is greater than 33%, the neutral current is greater than the phase current and the cable size selection is based on the neutral current. The heating effect of harmonic currents in the phase conductors has also to be taken into account.
+The values of k5 depending on the 3rd harmonic content are given in Figure G19. 
+Fig. G19 – Correction factors for harmonic currents in four-core and five-core cables (table E.52.1 of IEC 60364-5-52)
+ROW: Third harmonic content of phase current % | Correction factor
+ROW: Size selection is based on phase current | Size selection is based on neutral current
+ROW: 0 ­­­­­­­- 15 | 1.0 | 
+ROW: 15 - 33 | 0.86
+ROW: 33 - 45 | 0.86
+ROW: > 45 | 1.0[a]
+^ If the neutral current is more than 135 % of the phase current and the cable size is selected on the basis of the neutral current then the three phase conductors will not be fully loaded. The reduction in heat generated by the phase conductors offsets the heat generated by the neutral conductor to the extent that it is not necessary to apply any reduction factor to the current carrying capacity for three loaded conductors.
+Admissible current as a function of nominal cross-sectional area of conductors
+IEC standard 60364-5-52 proposes extensive information in the form of tables giving the admissible currents as a function of cross-sectional area of cables. Many parameters are taken into account, such as the method of installation, type of insulation material, type of conductor material, number of loaded conductors.
+As an example, Figure G20 gives the current-carrying capacities for different methods of installation of PVC insulation, three loaded copper or almunium conductors, free air or in ground. 
+Fig. G20 – Current-carrying capacities in amperes for different methods of installation, PVC insulation, three loaded conductors, copper or aluminium, conductor temperature: 70 °C, ambient temperature: 30 °C in air, 20 °C in ground (table B.52.4 of IEC 60364-5-52)
+ROW: Nominal cross-sectional area of conductors(mm2) | Installation methods of Table B.52.1
+ROW: A1 | A2 | B1 | B2 | C | D1 | D2
+ROW: | | | | | | 
+ROW: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8
+ROW: Copper
+ROW: 1.5 | 13.5 | 13 | 15.5 | 15 | 17.5 | 18 | 19
+ROW: 2.5 | 18 | 17.5 | 21 | 20 | 24 | 24 | 24
+ROW: 4 | 24 | 23 | 28 | 27 | 32 | 30 | 33
+ROW: 6 | 31 | 29 | 36 | 34 | 41 | 38 | 41
+ROW: 10 | 42 | 39 | 50 | 46 | 57 | 50 | 54
+ROW: 16 | 56 | 52 | 68 | 62 | 76 | 64 | 70
+ROW: 25 | 73 | 68 | 89 | 80 | 96 | 82 | 92
+ROW: 35 | 89 | 83 | 110 | 99 | 119 | 98 | 110
+ROW: 50 | 108 | 99 | 134 | 118 | 144 | 116 | 130
+ROW: 70 | 136 | 125 | 171 | 149 | 184 | 143 | 162
+ROW: 95 | 164 | 150 | 207 | 179 | 223 | 169 | 193
+ROW: 120 | 188 | 172 | 239 | 206 | 259 | 192 | 220
+ROW: 150 | 216 | 196 | 262 | 225 | 299 | 217 | 246
+ROW: 185 | 245 | 223 | 296 | 255 | 341 | 243 | 278
+ROW: 240 | 286 | 261 | 346 | 297 | 403 | 280 | 320
+ROW: 300 | 328 | 298 | 394 | 339 | 464 | 316 | 359
+ROW: Aluminium
+ROW: 2.5 | 14 | 13.5 | 16.5 | 15.5 | 18.5 | 18.5 | 
+ROW: 4 | 18.5 | 17.5 | 22 | 21 | 25 | 24 | 
+ROW: 6 | 24 | 23 | 28 | 27 | 32 | 30 | 
+ROW: 10 | 32 | 31 | 39 | 36 | 44 | 39 | 
+ROW: 16 | 43 | 41 | 53 | 48 | 59 | 50 | 53
+ROW: 25 | 57 | 53 | 70 | 62 | 73 | 64 | 69
+ROW: 35 | 70 | 65 | 86 | 77 | 90 | 77 | 83
+ROW: 50 | 84 | 78 | 104 | 92 | 110 | 91 | 99
+ROW: 70 | 107 | 98 | 133 | 116 | 140 | 112 | 122
+ROW: 95 | 129 | 118 | 161 | 139 | 170 | 132 | 148
+ROW: 120 | 149 | 135 | 186 | 160 | 197 | 150 | 169
+ROW: 150 | 170 | 155 | 204 | 176 | 227 | 169 | 189
+ROW: 185 | 194 | 176 | 230 | 199 | 259 | 190 | 214
+ROW: 240 | 227 | 207 | 269 | 232 | 305 | 218 | 250
+ROW: 300 | 261 | 237 | 306 | 265 | 351 | 247 | 282
+Note: In columns 3, 5, 6, 7 and 8, circular conductors are assumed for sizes up to and including 16 mm2. Values for larger sizes relate to shaped conductors and may safely be applied to circular conductors.
+

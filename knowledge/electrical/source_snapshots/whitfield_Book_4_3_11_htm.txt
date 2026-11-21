@@ -1,0 +1,438 @@
+
+ TLC Electrical Supplies
+ Contact Us
+ Technical Section
+ Guide to the 16th Edition Regs
+ 16th Edition (reference only) – NOW superseded by the 17th Edition IEE Regulations.
+ chapter 
+ 1
+ The 
+ IEE Regulations
+ | 
+ chapter 
+ 2
+ Installation 
+ Requirements 
+ and Characteristics
+ | 
+ chapter 
+ 3
+ Installation 
+ Control
+ and Protection
+ | 
+ chapter 
+ 4
+ Cables, 
+ Conduits
+ and Trunking
+ | 
+ chapter 
+ 5
+ Earthing
+ | 
+ chapter 
+ 6
+ Circuits
+ | 
+ chapter 
+ 7
+ Special 
+ Installations
+ | 
+ chapter 
+ 8
+ Testing
+ and 
+ Inspection
+ | 
+ chapter 
+ 9
+ Data 
+ cabling
+ and Networks
+ | 
+ Contents
+ | 
+ | 
+ Cables, 
+ conduits and trunking | 
+   | 
+ 4.1 
+ - Cable insulation materials | 
+ 4.4 
+ - Cable supports, joints and terminations | 
+ | 
+   | 
+ 4.2 
+ - Cables | 
+ 4.5 
+ - Cable enclosures | 
+ | 
+   | 
+ 4.3 
+ - Cable choice
+ | 
+ 4.6 
+ - Conductor and cable identification | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ | 
+ 4.3.1 
+ - Cable types | 
+ 4.3.8 
+ - Protection by semi-enclosed (rewirable) fuses | 
+ 4.3.2 - 
+ Current carrying capacity of conductors | 
+ 4.3.9 
+ - Cable rating calculation | 
+ 4.3.3 - 
+ Methods of cable installation | 
+ 4.3.10 
+ - Special formulas - grouping factor calculation | 
+ 4.3.4 
+ - Ambient temperature correction factors | 
+ 4.3.11 
+ - Cable volt drop | 
+ 4.3.5 - 
+ Cable grouping correction factors | 
+ 4.3.12 
+ - Harmonic currents and neutral conductors | 
+ 4.3.6 
+ - Thermal insulation correction factors | 
+ 4.3.13 
+ - Low smoke-emitting cables | 
+ 4.3.7 
+ - When a number of correction 
+ --------- factors applies | 
+ 4.3.14 
+ - The effects of animals, insects and plants
+ | 
+ 4.3.11 - Cable volt 
+ drop
+ All cables have resistance, and when current 
+ flows in them this results in a volt drop. Hence, the voltage 
+ at the load is lower than the supply voltage by the amount 
+ of this volt drop.
+ The volt drop may be calculated 
+ using the basic Ohm's law formula
+ | 
+ U = I x R
+ | 
+ where | 
+ U is the cable volt drop (V | 
+   | 
+ I 
+ is the circuit current (A), and | 
+   | 
+ R is the circuit resistance 
+ W(Ohms) | 
+ Unfortunately, this simple 
+ formula is seldom of use in this case, because the cable 
+ resistance under load conditions is not easy to calculate.
+ [525-01-03] indicates that the voltage 
+ at any load must never fall so low as to impair the safe 
+ working of that load, or fall below the level indicated 
+ by the relevant British Standard where one applies.
+ [525-01-02] indicates that these requirements 
+ will he met if the voltage drop does not exceed 4% of the 
+ declared supply voltage. If the supply is single-phase at 
+ the usual level of 240 V, this means a maximum volt drop 
+ of 4% of 240 V which is 9.6 V, giving (in simple terms) 
+ a load voltage as low as 230.4 V. For a 415 V three-phase 
+ system, allowable volt drop will be 16.6 V with a line load 
+ voltage as low as 398.4 V.
+ It 
+ should be borne in mind that European Agreement RD 472 S2 
+ allows the declared supply voltage of 230 V to vary by +10% 
+ or -6%. Assuming that the supply voltage of 240 V is 6% 
+ low, and allowing a 4% volt drop, this gives permissible 
+ load voltages of 216.6 V for a single-phase supply, or 374.5 
+ V (line) for a 415 V three-phase supply.
+ To calculate the volt drop for a particular 
+ cable we use {Tables 
+ 4.6, 4.7 and 4.9}. Each current rating table 
+ has an associated volt drop column or table. For example, 
+ multicore sheathed non-armoured P.V.C. insulated cables 
+ are covered by {Table 
+ 4.7} for current ratings, and volt drops. 
+ The exception in the Regulations to this layout is for mineral 
+ insulated cables where there are separate volt drop tables 
+ for single- and three-phase operation, which are combined 
+ here as {Table 
+ 4.9}.
+ Each cable rating in the Tables of [Appendix 
+ 4] has a corresponding volt drop figure in millivolts 
+ per ampere per metre of run (mV/A/m). Strictly this should 
+ be mV/(A m), but here we shall follow the pattern 
+ adopted by BS 7671: 1992. To calculate the cable volt drop:
+ 1. 
+ - take the value from the volt drop table (mV/A/m)
+ 2. - multiply by the actual current in the 
+ cable (NOT the current rating)
+ 3. - 
+ multiply by the length of run in metres
+ 4. - divide 
+ the result by one thousand (to convert millivolts to volts).
+ For example, if a 4 mm² p.v.c. sheathed 
+ circuit feeds a 6 kW shower and has a length of run of 16 
+ m, we can find the volt drop thus:
+ From 
+ {Table 4.7}, the volt drop figure for 
+ 4 mm² two-core cable is 11 mV/A/m.
+ Cable current is calculated from
+ | 
+ I =
+ | 
+ P = 6000 
+ A 
+ | 
+ = 25 A
+ | 
+   | 
+   | 
+ U     240-----
+ | 
+   | 
+ Volt drop is then
+ | 
+ 11 x 25 x 16 V 
+ | 
+ = 4.4 V
+ | 
+   | 
+ 1000
+ | 
+   | 
+ Since the permissible volt drop is 4% of 
+ 240 V, which is 9.6 V, the cable in question meets volt 
+ drop requirements. The following examples will make the 
+ method clear.
+ Example 4.5
+ Calculate the volt drop for the case of Example 
+ 4.1. What maximum length of cable would 
+ allow the installation to comply with the volt drop regulations?
+ The table concerned here is {4.7}, 
+ which shows a figure of 7.3 mV/A/m for 6 mm² twin with protective 
+ conductor pvc insulated and sheathed cable. The actual circuit 
+ current is 12.5 A, and the length of run is 14 m.
+ Volt drop = 
+ | 
+ 7.3 x 
+ 12.5 x 14 V
+ | 
+ = 1.28 V 
+ | 
+   | 
+ 1000
+ | 
+   | 
+ Maximum 
+ permissible volt drop is | 
+ 4% of 240 V =
+ | 
+ 4 of 240 V
+ | 
+ = 9.6 V
+ | 
+   | 
+   | 
+ 100
+ | 
+   | 
+ If a 14 m run gives a volt drop of 
+ 1.28 V, 
+ the length of run for a 9.6 V drop will be:
+ | 
+ 9.6 x 14m 
+ | 
+ = 105m
+ | 
+ 1.28
+ | 
+   | 
+ Example 4.6
+ Calculate the volt drop for the case of {Example 
+ 4.2}. What maximum length of cable would allow 
+ the installation to comply with the volt drop regulations?
+ The Table concerned here is {4.7} 
+ which shows a volt drop figure for 4.0 mm² cable of 11mV/A/m, 
+ with the current and the length of run remaining at 12.5 
+ A. and 14 m respectively.
+ Volt drop = 
+ | 
+ 11 x 12.5 x 14 V
+ | 
+ = 1.93 V 
+ | 
+   | 
+ 1000
+ | 
+   | 
+ Maximum 
+ permissible volt drop is | 
+ 4% of 240 V =
+ | 
+ 4 of 240 V
+ | 
+ = 9.6 V
+ | 
+   | 
+   | 
+ 100
+ | 
+   | 
+ If a 14 m run gives a volt drop of 
+ 1.93 V, 
+ the length of run for a 9.6 V drop will be:
+ | 
+ 9.6 x 14m 
+ | 
+ = 70m
+ | 
+ 1.93
+ | 
+   | 
+ Example 4.7
+ Calculate the volt drop for the cases of {Example 
+ 4.3} for each of the alternative installations. 
+ What maximum length of cable would allow the installation 
+ to comply with the volt drop regulations in each case?
+ In neither case is there any change in 
+ cable sizes, the selected cables being 6 mm² in the first 
+ case and 4 mm² in the second. Solutions are thus the same 
+ as those in {Examples 
+ 4.5 and 
+ 4.6} respectively.
+ Example 4.8
+ Calculate the volt drop and maximum length of run 
+ for the motor circuit of {Example 
+ 4.4}.
+ This time we have a mineral insulated p.v.c. 
+ sheathed cable, so volt drop figures will come from 
+ {Table 4.9}. This shows 9.1 mV/A/m for 
+ the 4 mm² cable selected, which must be used with the circuit 
+ current of 15.3 A and the length of run which is 20 m.
+ Volt drop = 
+ | 
+ 9.1 x 15.3 x 20 V
+ | 
+ = 2.78 V 
+ | 
+   | 
+ 1000
+ | 
+   | 
+ Maximum 
+ permissible volt drop is | 
+ 4% of 415 V =
+ | 
+ 4 of 415V
+ | 
+ = 16.6 V
+ | 
+   | 
+   | 
+ 100
+ | 
+   | 
+ Maximum length of run for this circuit 
+ with the same cable size and type will be:
+ | 
+   16.6 x 20m 
+ | 
+ = 119m
+ | 
+ 2.78
+ | 
+   | 
+ The 'length of run' calculations carried 
+ out in these examples are often useful to the electrician 
+ when installing equipment at greater distances from the 
+ mains position.
+ It is important to appreciate that the 
+ allowable volt drop of 4% of the supply voltage applies 
+ to the whole of an installation. If an installation has 
+ mains, sub-mains and final circuits, for instance, the volt 
+ drop in each must be calculated and added to give the total 
+ volt drop as indicated in {Fig 4.10}.
+ All of our work in this sub-section so 
+ far has assumed that cable resistance is the only factor 
+ responsible for volt drop. In fact, larger cables have significant 
+ self inductance as well as resistance. As we shall see in 
+ Chapter 
+ 5 there is also an effect called impedance which 
+ is made up of resistance and inductive reactance (see 
+ {Fig 5.8(a)}).
+ Inductive reactance
+ | 
+ XL
+ | 
+ =
+ | 
+ 2(pi)fL
+ | 
+ where | 
+ XL
+ | 
+ = | 
+ inductive reactance in Wohms
+ | 
+   | 
+ (pi) | 
+ = | 
+ the mathematical constant 3.142
+ | 
+   | 
+ f | 
+ = | 
+ the system frequency in hertz (Hz)
+ | 
+   | 
+ L | 
+ = | 
+ circuit self inductance in henrys 
+ (H)
+ | 
+ It is clear that inductive reactance 
+ increases with frequency, and for this reason the volt drop 
+ tables apply only to systems with a frequency lying between 
+ 49 Hz and 61 Hz.
+ | 
+ Fig 4.10 Total volt drop 
+ in large installations
+ For small cables, the self inductance is 
+ such that the inductive reactance, is small compared with 
+ the resistance. Only with cables of cross-sectional area 
+ 25 mm² and greater need reactance be considered. Since cables 
+ as large as this are seldom used on work which has not been 
+ designed by a qualified engineer, the subject of reactive 
+ volt drop component will not be further considered here.
+ If 
+ the actual current carried by the cable (the design current) 
+ is less than the rated value, the cable will not become 
+ as warm as the calculations used to produce the volt drop 
+ tables have assumed, The Regulations include (in [Appendix 
+ 4]) a very complicated formula to be applied to cables of 
+ cross-sectional area 16 mm² and less which may show that 
+ the actual volt drop is less than that obtained from the 
+ tables. This possibility is again seldom of interest to 
+ the electrician, and is not considered here.
+ | 
+ | 
+   | 
+ Return to top of page
+ Extracted from The Electricians Guide Fifth Edition
+ by John Whitfield
+ Published by EPA Press Click Here to order your Copy.
+ Click here for list of abbreviations
+ | 
+ | 
+

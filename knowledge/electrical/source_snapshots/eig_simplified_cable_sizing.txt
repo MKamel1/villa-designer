@@ -1,0 +1,95 @@
+Contents
+1 Unburied cables
+2 Buried cables
+In order to facilitate the selection of cables, 2 simplified tables are proposed, for unburied and buried cables.
+These tables summarize the most commonly used configurations and give easier access to the information. 
+Unburied cables
+Fig. G21 – Current-carrying capacity in amperes (table C.52.1 of IEC 60364-5-52)
+ROW: Reference methods | Number of loaded conductors and type of insulation
+ROW: A1 | | 2 PVC | 3 PVC | | 3 XLPE | 2 XLPE | | | | | | 
+ROW: A2 | 3 PVC | 2 PVC | | 3 XLPE | 2 XLPE | | | | | | | 
+ROW: B1 | | | | 3 PVC | 2 PVC | | 3 XLPE | | 2 XLPE | | | 
+ROW: B2 | | | 3 PVC | 2 PVC | | 3 XLPE | 2 XLPE | | | | | 
+ROW: C | | | | | 3 PVC | | 2 PVC | 3 XLPE | | 2 XLPE | | 
+ROW: E | | | | | | 3 PVC | | 2 PVC | 3 XLPE | | 2 XLPE | 
+ROW: F | | | | | | | 3 PVC | | 2 PVC | 3XLPE | | 2 XLPE
+ROW: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13
+ROW: Size (mm2)
+ROW: Copper
+ROW: 1.5 | 13 | 13.5 | 14.5 | 15.5 | 17 | 18.5 | 19.5 | 22 | 23 | 24 | 26 | -
+ROW: 2.5 | 17.5 | 18 | 19.5 | 21 | 23 | 25 | 27 | 30 | 31 | 33 | 36 | -
+ROW: 4 | 23 | 24 | 26 | 28 | 31 | 34 | 36 | 40 | 42 | 45 | 49 | -
+ROW: 6 | 29 | 31 | 34 | 36 | 40 | 43 | 46 | 51 | 54 | 58 | 63 | -
+ROW: 10 | 39 | 42 | 46 | 50 | 54 | 60 | 63 | 70 | 75 | 80 | 86 | -
+ROW: 16 | 52 | 56 | 61 | 68 | 73 | 80 | 85 | 94 | 100 | 107 | 115 | -
+ROW: 25 | 68 | 73 | 80 | 89 | 95 | 101 | 110 | 119 | 127 | 135 | 149 | 161
+ROW: 35 | - | - | - | 110 | 117 | 126 | 137 | 147 | 158 | 169 | 185 | 200
+ROW: 50 | - | - | - | 134 | 141 | 153 | 167 | 179 | 192 | 207 | 225 | 242
+ROW: 70 | - | - | - | 171 | 179 | 196 | 213 | 229 | 246 | 268 | 289 | 310
+ROW: 95 | - | - | - | 207 | 216 | 238 | 258 | 278 | 298 | 328 | 352 | 377
+ROW: 120 | - | - | - | 239 | 249 | 276 | 299 | 322 | 346 | 382 | 410 | 437
+ROW: 150 | - | - | - | - | 285 | 318 | 344 | 371 | 395 | 441 | 473 | 504
+ROW: 185 | - | - | - | - | 324 | 362 | 392 | 424 | 450 | 506 | 542 | 575
+ROW: 240 | - | - | - | - | 380 | 424 | 461 | 500 | 538 | 599 | 641 | 679
+ROW: Aluminium
+ROW: 2.5 | 13.5 | 14 | 15 | 16.5 | 18.5 | 19.5 | 21 | 23 | 24 | 26 | 28 | -
+ROW: 4 | 17.5 | 18.5 | 20 | 22 | 25 | 26 | 28 | 31 | 32 | 35 | 38 | -
+ROW: 6 | 23 | 24 | 26 | 28 | 32 | 33 | 36 | 39 | 42 | 45 | 49 | -
+ROW: 10 | 31 | 32 | 36 | 39 | 44 | 46 | 49 | 54 | 58 | 62 | 67 | -
+ROW: 16 | 41 | 43 | 48 | 53 | 58 | 61 | 66 | 73 | 77 | 84 | 91 | -
+ROW: 25 | 53 | 57 | 63 | 70 | 73 | 78 | 83 | 90 | 97 | 101 | 108 | 121
+ROW: 35 | - | - | - | 86 | 90 | 96 | 103 | 112 | 120 | 126 | 135 | 150
+ROW: 50 | - | - | - | 104 | 110 | 117 | 125 | 136 | 146 | 154 | 164 | 184
+ROW: 70 | - | - | - | 133 | 140 | 150 | 160 | 174 | 187 | 198 | 211 | 237
+ROW: 95 | - | - | - | 161 | 170 | 183 | 195 | 211 | 227 | 241 | 257 | 289
+ROW: 120 | - | - | - | 186 | 197 | 212 | 226 | 245 | 263 | 280 | 300 | 337
+ROW: 150 | - | - | - | - | 226 | 245 | 261 | 283 | 304 | 324 | 346 | 389
+ROW: 185 | - | - | - | - | 256 | 280 | 298 | 323 | 347 | 371 | 397 | 447
+ROW: 240 | - | - | - | - | 300 | 330 | 352 | 382 | 409 | 439 | 470 | 530
+Correction factors are given in Figure G22 for groups of several circuits or multi-core cables:
+Fig. G22 – Reduction factors for groups of several circuits or of several multi-core cables(table C.52.3 of IEC 60364-5-52)
+ROW: Arrangement | Number of circuits or multi-core cables
+ROW: 1 | 2 | 3 | 4 | 6 | 9 | 12 | 16 | 20
+ROW: Embedded or enclosed | 1.00 | 0.80 | 0.70 | 0.70 | 0.55 | 0.50 | 0.45 | 0.40 | 0.40
+ROW: Single layer on walls, floors or on unperforated trays | 1.00 | 0.85 | 0.80 | 0.75 | 0.70 | 0.70 | - | - | -
+ROW: Single layer fixed directly under a ceiling | 0.95 | 0.80 | 0.70 | 0.70 | 0.65 | 0.60 | - | - | -
+ROW: Single layer on perforated horizontal trays or on vertical trays | 1.00 | 0.90 | 0.80 | 0.75 | 0.75 | 0.70 | - | - | -
+ROW: Single layer on cable ladder supports or cleats, etc... | 1.00 | 0.85 | 0.80 | 0.80 | 0.80 | 0.80 | - | - | -
+Buried cables
+Fig. G23 – Current-carrying capacity in amperes (table B.52-1 of IEC 60364-5-52)
+ROW: Installation method | Size mm2 | Number of loaded conductors and type of insulation
+ROW: Two PVC | Three PVC | Two XLPE | Three XLPE
+ROW: D1/D2 | Copper
+ROW: 1.5 | 22 | 18 | 26 | 22
+ROW: 2.5 | 29 | 24 | 34 | 29
+ROW: 4 | 38 | 31 | 44 | 37
+ROW: 6 | 47 | 39 | 56 | 46
+ROW: 10 | 63 | 52 | 73 | 61
+ROW: 16 | 81 | 67 | 95 | 79
+ROW: 25 | 104 | 86 | 121 | 101
+ROW: 35 | 125 | 103 | 146 | 122
+ROW: 50 | 148 | 122 | 173 | 144
+ROW: 70 | 183 | 151 | 213 | 178
+ROW: 95 | 216 | 179 | 252 | 211
+ROW: 120 | 246 | 203 | 287 | 240
+ROW: 150 | 278 | 230 | 324 | 271
+ROW: 185 | 312 | 258 | 363 | 304
+ROW: 240 | 361 | 297 | 419 | 351
+ROW: 300 | 408 | 336 | 474 | 396
+ROW: D1/D2 | Aluminium
+ROW: 2.5 | 22 | 18.5 | 26 | 22
+ROW: 4 | 29 | 24 | 34 | 29
+ROW: 6 | 36 | 30 | 42 | 36
+ROW: 10 | 48 | 40 | 56 | 47
+ROW: 16 | 62 | 52 | 73 | 61
+ROW: 25 | 80 | 66 | 93 | 78
+ROW: 35 | 96 | 80 | 112 | 94
+ROW: 50 | 113 | 94 | 132 | 112
+ROW: 70 | 140 | 117 | 163 | 138
+ROW: 95 | 166 | 138 | 193 | 164
+ROW: 120 | 189 | 157 | 220 | 186
+ROW: 150 | 213 | 178 | 249 | 210
+ROW: 185 | 240 | 200 | 279 | 236
+ROW: 240 | 277 | 230 | 322 | 272
+ROW: 300 | 313 | 260 | 364 | 308
+

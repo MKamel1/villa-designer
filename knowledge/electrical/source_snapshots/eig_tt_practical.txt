@@ -1,0 +1,42 @@
+Contents
+1 Specified maximum disconnecting time
+2 Case of distribution circuits
+3 Case where the exposed conductive parts of an appliance, or group of appliances, are connected to a separate earth electrode
+4 Protection when exposed conductive parts are not connected to earth
+Specified maximum disconnecting time
+The tripping times of RCDs are generally lower than those required in most national standards; this feature facilitates their use and allows the adoption of an effective selective protection.
+IEC 60364-4-41 specifies the maximum operating time of protective devices used in TT system for the protection against indirect contact:
+For all final circuits with a rated current not exceeding 63 A with one or more socket-outlets, and 32 A supplying only fixed connected current-using equipment, the maximum disconnecting time will not exceed the values indicated in Fig. F13
+For all other circuits, the maximum disconnection time is fixed to 1 s. This limit enables selectivity between RCDs when installed on distribution circuits.
+Fig. F13 – Maximum disconnecting times in TT system for final circuits not exceeding 63 A with one or more socket-outlets, and 32 A supplying only fixed connected current-using equipment
+ROW: Uo[a] (V AC) | T (s)
+ROW: 50 400 | 0.04
+^ Uo is the nominal phase to earth voltage
+RCD is a general term for all devices operating on the residual-current principle.
+RCCB (Residual Current Circuit Breaker) as defined in IEC 61008 series is a specific class of RCD.
+General type and S type (Selective) of IEC 61008 have tripping time/current characteristics as shown in Fig. F14. These characteristics allow a certain degree of selective tripping between the several combinations of ratings and types, as shown later in Coordination of residual current protective devices. Industrial type RCD according to IEC 60947-2 provide more possibilities of selectivity due to their flexibility of time-delaying.
+Fig. F14 – Maximum operating time of RCDs (in seconds)
+ROW: x IΔn | | 1 | 2 | 5 | > 5
+ROW: Domestic | Instantaneous | 0.3 | 0.15 | 0.04 | 0.04
+ROW: Type S | 0.5 | 0.2 | 0.15 | 0.15
+ROW: Industrial | Instantaneous | 0.3 | 0.15 | 0.04 | 0.04
+ROW: Time-delay : 0.06 s | 0.5 | 0.2 | 0.15 | 0.15
+ROW: Time-delay (other) | According to manufacturer
+Case of distribution circuits
+(see Fig. F15)
+IEC 60364-4-41 and a number of national standards recognize a maximum tripping time of 1 second in installation distribution circuits (as opposed to final circuits).
+This allows a degree of selectivity to be achieved:
+At level A: Time-delayed RCD, e.g. “S” type
+At level B: Instantaneous RCD.
+ Fig. F15 – ﻿Distribution circuits
+Case where the exposed conductive parts of an appliance, or group of appliances, are connected to a separate earth electrode
+(see Fig. F16)
+Fault Protection is provided by a RCD at the circuit breaker level protecting each group or separately-earthed individual appliance.
+In each case, the sensitivity must be compatible with the resistance of the earth electrode concerned.
+ Fig. F16 – ﻿Separate earth electrode
+Protection when exposed conductive parts are not connected to earth
+(see Fig. F17)
+(In the case of an existing installation where the location is dry and provision of an earthing connection is not possible, or in the event that a protective earth wire becomes broken).
+RCDs of high sensitivity (≤ 30 mA) will afford both fault protection (against indirect contact hazards), and the additional protection against the dangers of contact with live parts (direct contact).
+ Fig. F17 – ﻿Unearthed exposed conductive parts (A)
+

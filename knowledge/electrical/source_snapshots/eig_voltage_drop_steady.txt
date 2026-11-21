@@ -1,0 +1,113 @@
+Contents
+1 Use of formulae
+2 Simplified table
+3 Examples
+4 Notes
+Use of formulae
+Figure G29 below gives formulae commonly used to calculate voltage drop in a given circuit per kilometre of length (copper cable with XLPE insulation).
+where:
+IB = The full load current in amps
+L = Length of the cable in kilometres
+R = Resistance of the cable conductor in Ω/km
+[math]\displaystyle{ R=\frac{23.7\ \Omega\ mm^2/km}{S\left ( c.s.a\ in\ mm^2 \right )} }[/math]   for copper[1]
+[math]\displaystyle{ R=\frac{37.6\ \Omega\ mm^2/km}{S\left ( c.s.a\ in\ mm^2 \right )} }[/math]   for aluminium[1]
+Note: R is negligible above a c.s.a. of 500 mm2
+X = inductive reactance of a conductor in Ω/km
+Note: X is negligible for conductors of c.s.a. less than 50 mm2. In the absence of any other information, take X as being equal to 0.08 Ω/km.
+φ = phase angle between voltage and current in the circuit considered, generally:
+Incandescent lighting: cosφ = 1
+Led lighting: cosφ > 0.9
+Fluorescent with electronic ballast: cosφ > 0.9
+Motor power:
+At start-up: cosφ = 0.35
+In normal service: cosφ = 0.8
+Un = phase-to-phase voltage
+Vn = phase-to-neutral voltage
+For prefabricated pre-wired ducts and busways (busbar trunking systems), resistance and inductive reactance values are given by the manufacturer.
+Fig. G29 – Voltage-drop formulae
+ROW: Circuit | Voltage drop (ΔU)
+ROW: in volts | in %
+ROW: Phase/phase | [math]\displaystyle{ \Delta U=2I_B\left ( R \cos\phi + X \sin\phi \right )L }[/math] | [math]\displaystyle{ \frac {100 \Delta U}{Un} }[/math]
+ROW: Phase/neutral | [math]\displaystyle{ \Delta U=2I_B\left ( R \cos\phi + X \sin\phi \right )L }[/math] | [math]\displaystyle{ \frac {100 \Delta U}{Vn} }[/math]
+ROW: Balanced 3-phase: 3 phases (with or without neutral) | [math]\displaystyle{ \Delta U=\sqrt 3I_B\left ( R \cos\phi + X \sin\phi \right )L }[/math] | [math]\displaystyle{ \frac {100 \Delta U}{Un} }[/math]
+Simplified table
+Calculations may be avoided by using Figure G30, which gives, with an adequate approximation, the phase-to-phase voltage drop per km of cable per ampere, in terms of: 
+Kinds of circuit use: motor circuits with cosφ close to 0.8, or lighting with a cosφ close to 1.
+Type of circuit; single-phase or 3-phase
+Voltage drop in a cable is then given by: K x IB x L
+K = given by the table,
+IB = the full-load current in amps,
+L = the length of cable in km.
+The column motor power “cosφ = 0.35” of Figure G30 may be used to compute the voltage drop occurring during the start-up period of a motor (see example no. 1 after the Figure G30).
+Fig. G30 – Phase-to-phase voltage drop ΔU for a circuit, in volts per ampere per km
+ROW: Copper cables | Aluminium cables
+ROW: c.s.a.in mm2 | Single-phase circuit | Balanced three-phase circuit | c.s.a.in mm2 | Single-phase circuit | Balanced three-phase circuit
+ROW: Motor power | Lighting | Motor power | Lighting | Motor power | Lighting | Motor power | Lighting
+ROW: Normalservice | Start- up | Normalservice | Start-up | Normalservice | Start-up | Normalservice | Start-up
+ROW: cos ϕ = 0.8 | cos ϕ = 0.35 | cos ϕ = 1 | cos ϕ = 0.8 | cos ϕ = 0.35 | cos ϕ = 1 | cos ϕ = 0.8 | cos ϕ = 0.35 | cos ϕ = 1 | cos ϕ = 0.8 | cos ϕ = 0.35 | cos ϕ = 1
+ROW: 1.5 | 25.4 | 11.2 | 32 | 22 | 9.7 | 27 | | | | | | | 
+ROW: 2.5 | 15.3 | 6.8 | 19 | 13.2 | 5.9 | 16 | | | | | | | 
+ROW: 4 | 9.6 | 4.3 | 11.9 | 8.3 | 3.7 | 10.3 | 6 | 10.1 | 4.5 | 12.5 | 8.8 | 3.9 | 10.9
+ROW: 6 | 6.4 | 2.9 | 7.9 | 5.6 | 2.5 | 6.8 | 10 | 6.1 | 2.8 | 7.5 | 5.3 | 2.4 | 6.5
+ROW: 10 | 3.9 | 1.8 | 4.7 | 3.4 | 1.6 | 4.1 | 16 | 3.9 | 1.8 | 4.7 | 3.3 | 1.6 | 4.1
+ROW: 16 | 2.5 | 1.2 | 3 | 2.1 | 1 | 2.6 | 25 | 2.50 | 1.2 | 3 | 2.2 | 1 | 2.6
+ROW: 25 | 1.6 | 0.81 | 1.9 | 1.4 | 0.70 | 1.6 | 35 | 1.8 | 0.90 | 2.1 | 1.6 | 0.78 | 1.9
+ROW: 35 | 1.18 | 0.62 | 1.35 | 1 | 0.54 | 1.2 | 50 | 1.4 | 0.70 | 1.6 | 1.18 | 0.61 | 1.37
+ROW: 50 | 0.89 | 0.50 | 1.00 | 0.77 | 0.43 | 0.86 | 70 | 0.96 | 0.53 | 1.07 | 0.83 | 0.46 | 0.93
+ROW: 70 | 0.64 | 0.39 | 0.68 | 0.55 | 0.34 | 0.59 | 120 | 0.60 | 0.37 | 0.63 | 0.52 | 0.32 | 0.54
+ROW: 95 | 0.50 | 0.32 | 0.50 | 0.43 | 0.28 | 0.43 | 150 | 0.50 | 0.33 | 0.50 | 0.43 | 0.28 | 0.43
+ROW: 120 | 0.41 | 0.29 | 0.40 | 0.36 | 0.25 | 0.34 | 185 | 0.42 | 0.29 | 0.41 | 0.36 | 0.25 | 0.35
+ROW: 150 | 0.35 | 0.26 | 0.32 | 0.30 | 0.23 | 0.27 | 240 | 0.35 | 0.26 | 0.31 | 0.30 | 0.22 | 0.27
+ROW: 185 | 0.30 | 0.24 | 0.26 | 0.26 | 0.21 | 0.22 | 300 | 0.30 | 0.24 | 0.25 | 0.26 | 0.21 | 0.22
+ROW: 240 | 0.25 | 0.22 | 0.20 | 0.22 | 0.19 | 0.17 | 400 | 0.25 | 0.22 | 0.19 | 0.21 | 0.19 | 0.16
+ROW: 300 | 0.22 | 0.21 | 0.16 | 0.19 | 0.18 | 0.14 | 500 | 0.22 | 0.20 | 0.15 | 0.19 | 0.18 | 0.13
+Examples
+Example 1
+(see Fig. G31)
+A three-phase 35 mm2 copper cable 50 metres long supplies a 400 V motor taking: 
+100 A at a cos φ = 0.8 on normal permanent load
+500 A (5 In) at a cos φ = 0.35 during start-up
+The voltage drop at the origin of the motor cable in normal circumstances (i.e. with the distribution board of Figure G29 distributing a total of 1,000 A) is 10 V phase-to-phase.
+What is the voltage drop at the motor terminals: 
+In normal service?
+During start-up?
+Solution: 
+Voltage drop in normal service conditions:
+[math]\displaystyle{ \Delta U\%=100\frac {\Delta U}{Un} }[/math]
+Table Figure G30 shows 1 V/A/km so that:
+ΔU for the cable = 1 x 100 x 0.05 = 5 V
+ΔU total = 10 + 5 = 15 V = i.e. [math]\displaystyle{ \frac {15}{400} \times 100 = 3.75\% }[/math] 
+This value is less than that authorized (8%) and is satisfactory. 
+Voltage drop during motor start-up:
+ΔUcable = 0.54 x 500 x 0.05 = 13.5 V
+Owing to the additional current taken by the motor when starting, the voltage drop at the distribution board will exceed 10 Volts.
+Supposing that the infeed to the distribution board during motor starting is 900 + 500 = 1,400 A then the voltage drop at the distribution board will increase approximately pro rata, i.e.
+[math]\displaystyle{ \frac{ 10 \times 1,400}{1,000} = 14V }[/math] 
+ΔU distribution board = 14 V
+ΔU for the motor cable = 13 V
+ΔU total = 13.5 + 14 = 27.5 V i.e.
+[math]\displaystyle{ \frac{27.5}{400} \times 100 = 6.9\% }[/math]
+a value which is satisfactory during motor starting.
+ Fig. G31 – Example 1
+Example 2
+(see Fig. G32)
+A 3-phase 4-wire copper line of 70 mm2 c.s.a. and a length of 50 m passes a current of 150 A. The line supplies, among other loads, 3 single-phase lighting circuits, each of 2.5 mm2 c.s.a. copper 20 m long, and each passing 20 A.
+It is assumed that the currents in the 70 mm2 line are balanced and that the three lighting circuits are all connected to it at the same point.
+What is the voltage drop at the end of the lighting circuits?
+Solution: 
+Voltage drop in the 4-wire line:
+[math]\displaystyle{ \Delta U \%=100\frac{\Delta U}{Un} }[/math]
+Figure G30 shows 0.59 V/A/km
+ΔU line = 0.59 x 150 x 0.05 = 4.4 V phase-to-phase
+which gives:
+[math]\displaystyle{ \frac{4.4}{\sqrt 3}= 2.54 V }[/math] phase to neutral. 
+Voltage drop in any one of the lighting single-phase circuits:
+ΔU for a single-phase circuit = 19 x 20 x 0.02 = 7.6 V
+The total voltage drop is therefore
+7.6 + 2.54 = 10.1 V 
+[math]\displaystyle{ \frac{10.1V}{230V} \times 100 =4.4\% }[/math]
+This value is satisfactory, being less than the maximum permitted voltage drop of 6%.
+ Fig. G32 – Example 2
+ Notes 
+^ 1 2 Values of ρ according to IEC60909-0 and Cenelec TR 50480. See Figure G38.
+
