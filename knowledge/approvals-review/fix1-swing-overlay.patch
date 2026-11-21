@@ -1,0 +1,15 @@
+diff --git a/knowledge/garden-palette.json b/knowledge/garden-palette.json
+index cb0b0ea..547636c 100644
+--- a/knowledge/garden-palette.json
++++ b/knowledge/garden-palette.json
+@@ -3018,8 +3018,8 @@
+               -28.25
+             ],
+             [
+-              3.0,
+-              -24.17
++              3.42,
++              -24.07
+             ]
+           ]
+         },

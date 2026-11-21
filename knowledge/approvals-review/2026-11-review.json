@@ -1,0 +1,690 @@
+{
+ "review": "2026-11 approval drift review (lane RA)",
+ "date": "2026-11-21",
+ "base": "origin/integ/aplus 357ba45",
+ "method": "collect_drift.py (read-only harness) + ablation runs; see docs/lanes/RA-review.md",
+ "ablation_remaining": {
+  "stair-overlap": [
+   "host-face-support-marker-PATH-corridor-07",
+   "host-face-support-marker-PATH-corridor-08",
+   "host-face-support-marker-PATH-corridor-09"
+  ],
+  "corner-fix": [
+   "detail-stair-open-stringer",
+   "marker-STEP-stair-b-04",
+   "marker-STEP-stair-b-05",
+   "marker-STEP-stair-b-06"
+  ],
+  "both": []
+ },
+ "rows": [
+  {
+   "id": "detail-stair-open-stringer",
+   "file": "c4-e-lead-approvals.json",
+   "decision": "accept",
+   "rules": {
+    "R1_cause": true,
+    "R2_physical": true,
+    "R3_intent": true
+   },
+   "caused_by": [
+    "G1 LS2 stair tread overlap 16 mm (lane D, stairs.NOSING_OVERLAP; docs/decisions/G1-safety-decisions-2026-11-21.md)"
+   ],
+   "host_id": "support-detail-stair-open-stringer",
+   "approved_old": [
+    5.317,
+    -27.526,
+    -3.033529411764706,
+    9.517,
+    -27.496,
+    -0.23647058823529415
+   ],
+   "approved_new": [
+    5.317,
+    -27.526,
+    -3.0,
+    9.517,
+    -27.496,
+    -0.20294117647058812
+   ],
+   "new_old": [
+    5.317,
+    -27.526,
+    -3.033529411764706,
+    9.509,
+    -27.496,
+    -0.23647058823529415
+   ],
+   "new_new": [
+    5.317,
+    -27.526,
+    -3.0,
+    9.509,
+    -27.496,
+    -0.20294117647058812
+   ],
+   "delta_old": [
+    0.0,
+    0.0,
+    0.0,
+    -0.008,
+    0.0,
+    0.0
+   ],
+   "delta_new": [
+    0.0,
+    0.0,
+    0.0,
+    -0.008,
+    0.0,
+    0.0
+   ],
+   "mounted_on_host": [
+    {
+     "id": "detail-stair-open-stringer",
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "marker-STEP-stair-b-04",
+   "file": "c4-e-lead-approvals.json",
+   "decision": "accept",
+   "rules": {
+    "R1_cause": true,
+    "R2_physical": true,
+    "R3_intent": true
+   },
+   "caused_by": [
+    "G1 LS2 stair tread overlap 16 mm (lane D, stairs.NOSING_OVERLAP; docs/decisions/G1-safety-decisions-2026-11-21.md)"
+   ],
+   "host_id": "stair-party-wall",
+   "approved_old": [
+    7.227,
+    -28.469999999999995,
+    -1.182,
+    7.327,
+    -28.469999999999995,
+    -1.142
+   ],
+   "approved_new": [
+    7.227,
+    -28.458,
+    -1.182,
+    7.327,
+    -28.458,
+    -1.142
+   ],
+   "new_old": [
+    7.219,
+    -28.47,
+    -1.182,
+    7.319,
+    -28.47,
+    -1.142
+   ],
+   "new_new": [
+    7.219,
+    -28.458,
+    -1.182,
+    7.319,
+    -28.458,
+    -1.142
+   ],
+   "delta_old": [
+    -0.008,
+    -0.0,
+    0.0,
+    -0.008,
+    -0.0,
+    0.0
+   ],
+   "delta_new": [
+    -0.008,
+    0.0,
+    0.0,
+    -0.008,
+    0.0,
+    0.0
+   ],
+   "mounted_on_host": [
+    {
+     "id": "detail-stair-wall-rail-bracket-00",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-04",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-07",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-08",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-08",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-09",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-10",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-11",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-12",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-12",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-13",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-14",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-plate",
+     "min_gap_to_finished_face_mm": 30.0
+    },
+    {
+     "id": "detail-stair-wall-handrail",
+     "min_gap_to_finished_face_mm": 85.0
+    },
+    {
+     "id": "marker-STEP-stair-b-04",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-05",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-06",
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "marker-STEP-stair-b-05",
+   "file": "c4-e-lead-approvals.json",
+   "decision": "accept",
+   "rules": {
+    "R1_cause": true,
+    "R2_physical": true,
+    "R3_intent": true
+   },
+   "caused_by": [
+    "G1 LS2 stair tread overlap 16 mm (lane D, stairs.NOSING_OVERLAP; docs/decisions/G1-safety-decisions-2026-11-21.md)"
+   ],
+   "host_id": "stair-party-wall",
+   "approved_old": [
+    8.067,
+    -28.469999999999995,
+    -1.711,
+    8.167000000000002,
+    -28.469999999999995,
+    -1.671
+   ],
+   "approved_new": [
+    8.067,
+    -28.458,
+    -1.711,
+    8.167000000000002,
+    -28.458,
+    -1.671
+   ],
+   "new_old": [
+    8.059,
+    -28.47,
+    -1.711,
+    8.159,
+    -28.47,
+    -1.671
+   ],
+   "new_new": [
+    8.059,
+    -28.458,
+    -1.711,
+    8.159,
+    -28.458,
+    -1.671
+   ],
+   "delta_old": [
+    -0.008,
+    -0.0,
+    0.0,
+    -0.008,
+    -0.0,
+    0.0
+   ],
+   "delta_new": [
+    -0.008,
+    0.0,
+    0.0,
+    -0.008,
+    0.0,
+    0.0
+   ],
+   "mounted_on_host": [
+    {
+     "id": "detail-stair-wall-rail-bracket-00",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-04",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-07",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-08",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-08",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-09",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-10",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-11",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-12",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-12",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-13",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-14",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-plate",
+     "min_gap_to_finished_face_mm": 30.0
+    },
+    {
+     "id": "detail-stair-wall-handrail",
+     "min_gap_to_finished_face_mm": 85.0
+    },
+    {
+     "id": "marker-STEP-stair-b-04",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-05",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-06",
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "marker-STEP-stair-b-06",
+   "file": "c4-e-lead-approvals.json",
+   "decision": "accept",
+   "rules": {
+    "R1_cause": true,
+    "R2_physical": true,
+    "R3_intent": true
+   },
+   "caused_by": [
+    "G1 LS2 stair tread overlap 16 mm (lane D, stairs.NOSING_OVERLAP; docs/decisions/G1-safety-decisions-2026-11-21.md)"
+   ],
+   "host_id": "stair-party-wall",
+   "approved_old": [
+    8.907,
+    -28.469999999999995,
+    -2.241,
+    9.007000000000001,
+    -28.469999999999995,
+    -2.201
+   ],
+   "approved_new": [
+    8.907,
+    -28.458,
+    -2.241,
+    9.007000000000001,
+    -28.458,
+    -2.201
+   ],
+   "new_old": [
+    8.899,
+    -28.47,
+    -2.241,
+    8.999,
+    -28.47,
+    -2.201
+   ],
+   "new_new": [
+    8.899,
+    -28.458,
+    -2.241,
+    8.999,
+    -28.458,
+    -2.201
+   ],
+   "delta_old": [
+    -0.008,
+    -0.0,
+    0.0,
+    -0.008,
+    -0.0,
+    0.0
+   ],
+   "delta_new": [
+    -0.008,
+    0.0,
+    0.0,
+    -0.008,
+    0.0,
+    0.0
+   ],
+   "mounted_on_host": [
+    {
+     "id": "detail-stair-wall-rail-bracket-00",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-04",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-07",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-08",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-08",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-09",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-10",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-11",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-12",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-12",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-13",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-14",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-plate",
+     "min_gap_to_finished_face_mm": 30.0
+    },
+    {
+     "id": "detail-stair-wall-handrail",
+     "min_gap_to_finished_face_mm": 85.0
+    },
+    {
+     "id": "marker-STEP-stair-b-04",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-05",
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-06",
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "host-face-support-marker-PATH-corridor-07",
+   "file": "c4-e-lead-approvals.json",
+   "decision": "accept",
+   "rules": {
+    "R1_cause": true,
+    "R2_physical": true,
+    "R3_intent": true
+   },
+   "caused_by": [
+    "Lane M wall-corner closing (revit_spec._close_corner_gaps lengthens GF-33 by 0.2 m; docs/lanes/M-model-completion.md)"
+   ],
+   "host_id": "support-marker-PATH-corridor-07",
+   "approved_old": [
+    5.102,
+    -28.470999999999997,
+    0.0,
+    19.604,
+    -28.470999999999997,
+    2.8
+   ],
+   "approved_new": [
+    5.102,
+    -28.457999999999995,
+    0.0,
+    19.604,
+    -28.457999999999995,
+    2.8
+   ],
+   "new_old": [
+    5.102,
+    -28.471,
+    0.0,
+    19.804,
+    -28.470999999999997,
+    2.8
+   ],
+   "new_new": [
+    5.102,
+    -28.458,
+    0.0,
+    19.804,
+    -28.457999999999995,
+    2.8
+   ],
+   "delta_old": [
+    0.0,
+    -0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0
+   ],
+   "delta_new": [
+    0.0,
+    -0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0
+   ],
+   "mounted_on_host": [
+    {
+     "id": "marker-PATH-corridor-07",
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "host-face-support-marker-PATH-corridor-08",
+   "file": "c4-e-lead-approvals.json",
+   "decision": "accept",
+   "rules": {
+    "R1_cause": true,
+    "R2_physical": true,
+    "R3_intent": true
+   },
+   "caused_by": [
+    "Lane M wall-corner closing (revit_spec._close_corner_gaps lengthens GF-33 by 0.2 m; docs/lanes/M-model-completion.md)"
+   ],
+   "host_id": "support-marker-PATH-corridor-08",
+   "approved_old": [
+    5.102,
+    -28.470999999999997,
+    0.0,
+    19.604,
+    -28.470999999999997,
+    2.8
+   ],
+   "approved_new": [
+    5.102,
+    -28.457999999999995,
+    0.0,
+    19.604,
+    -28.457999999999995,
+    2.8
+   ],
+   "new_old": [
+    5.102,
+    -28.471,
+    0.0,
+    19.804,
+    -28.470999999999997,
+    2.8
+   ],
+   "new_new": [
+    5.102,
+    -28.458,
+    0.0,
+    19.804,
+    -28.457999999999995,
+    2.8
+   ],
+   "delta_old": [
+    0.0,
+    -0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0
+   ],
+   "delta_new": [
+    0.0,
+    -0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0
+   ],
+   "mounted_on_host": [
+    {
+     "id": "marker-PATH-corridor-08",
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ]
+  },
+  {
+   "id": "host-face-support-marker-PATH-corridor-09",
+   "file": "c4-e-lead-approvals.json",
+   "decision": "accept",
+   "rules": {
+    "R1_cause": true,
+    "R2_physical": true,
+    "R3_intent": true
+   },
+   "caused_by": [
+    "Lane M wall-corner closing (revit_spec._close_corner_gaps lengthens GF-33 by 0.2 m; docs/lanes/M-model-completion.md)"
+   ],
+   "host_id": "support-marker-PATH-corridor-09",
+   "approved_old": [
+    5.102,
+    -28.470999999999997,
+    0.0,
+    19.604,
+    -28.470999999999997,
+    2.8
+   ],
+   "approved_new": [
+    5.102,
+    -28.457999999999995,
+    0.0,
+    19.604,
+    -28.457999999999995,
+    2.8
+   ],
+   "new_old": [
+    5.102,
+    -28.471,
+    0.0,
+    19.804,
+    -28.470999999999997,
+    2.8
+   ],
+   "new_new": [
+    5.102,
+    -28.458,
+    0.0,
+    19.804,
+    -28.457999999999995,
+    2.8
+   ],
+   "delta_old": [
+    0.0,
+    -0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0
+   ],
+   "delta_new": [
+    0.0,
+    -0.0,
+    0.0,
+    0.2,
+    0.0,
+    0.0
+   ],
+   "mounted_on_host": [
+    {
+     "id": "marker-PATH-corridor-09",
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ]
+  }
+ ]
+}

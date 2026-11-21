@@ -1,0 +1,1906 @@
+[
+ {
+  "id": "detail-stair-open-stringer",
+  "source": "c4-e-lead-approvals.json",
+  "approved_host": "support-detail-stair-open-stringer",
+  "new_host": "support-detail-stair-open-stringer",
+  "approved_old": [
+   5.317,
+   -27.526,
+   -3.033529411764706,
+   9.517,
+   -27.496,
+   -0.23647058823529415
+  ],
+  "approved_new": [
+   5.317,
+   -27.526,
+   -3.0,
+   9.517,
+   -27.496,
+   -0.20294117647058812
+  ],
+  "old": [
+   5.317,
+   -27.526,
+   -3.033529411764706,
+   9.509,
+   -27.496,
+   -0.23647058823529415
+  ],
+  "new": [
+   5.317,
+   -27.526,
+   -3.0,
+   9.509,
+   -27.496,
+   -0.20294117647058812
+  ],
+  "package": "e-support",
+  "why": "Floor-bearing assembly; modeled finished level; build-up UNVERIFIED",
+  "mm": 33.529412,
+  "physical": {
+   "finished_plane_point": [
+    3.617,
+    -23.591,
+    -3.0
+   ],
+   "mounted": [
+    {
+     "id": "detail-stair-open-stringer",
+     "bounds": [
+      5.317,
+      -27.526,
+      -3.0,
+      9.509,
+      -27.496,
+      -0.20294117647058812
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ],
+   "coplanar_shell_extent": [
+    [
+     -0.373,
+     -39.4803,
+     -3.0
+    ],
+    [
+     28.557,
+     -20.351,
+     -3.0
+    ]
+   ]
+  },
+  "host_record": {
+   "id": "support-detail-stair-open-stringer",
+   "kind": "floor",
+   "structural_point": [
+    3.617,
+    -23.591,
+    -3.0
+   ],
+   "normal": [
+    0,
+    0,
+    1
+   ],
+   "finish": {
+    "name": "modeled finished travertine; build-up UNVERIFIED; level retained",
+    "thickness_m": 0
+   },
+   "void_depth_m": null,
+   "source_mesh": "finish-stair-basement-floor-host",
+   "source_faces": [
+    [
+     [
+      3.617,
+      -23.591,
+      -3.0
+     ],
+     [
+      3.617,
+      -29.91566,
+      -3.0
+     ],
+     [
+      6.94,
+      -29.91566,
+      -3.0
+     ],
+     [
+      6.94,
+      -28.671,
+      -3.0
+     ],
+     [
+      17.268,
+      -28.671,
+      -3.0
+     ],
+     [
+      17.268,
+      -29.91566,
+      -3.0
+     ],
+     [
+      22.597,
+      -29.91566,
+      -3.0
+     ],
+     [
+      22.597,
+      -23.591,
+      -3.0
+     ]
+    ],
+    [
+     [
+      -0.373,
+      -20.351,
+      -3.0
+     ],
+     [
+      -0.373,
+      -29.91566,
+      -3.0
+     ],
+     [
+      3.617,
+      -29.91566,
+      -3.0
+     ],
+     [
+      3.617,
+      -23.591,
+      -3.0
+     ],
+     [
+      22.597,
+      -23.591,
+      -3.0
+     ],
+     [
+      22.597,
+      -29.91566,
+      -3.0
+     ],
+     [
+      28.557,
+      -29.91566,
+      -3.0
+     ],
+     [
+      28.557,
+      -20.351,
+      -3.0
+     ]
+    ],
+    [
+     [
+      28.557,
+      -39.48032,
+      -3.0
+     ],
+     [
+      28.557,
+      -29.91566,
+      -3.0
+     ],
+     [
+      22.597,
+      -29.91566,
+      -3.0
+     ],
+     [
+      22.597,
+      -36.24032,
+      -3.0
+     ],
+     [
+      3.617,
+      -36.24032,
+      -3.0
+     ],
+     [
+      3.617,
+      -29.91566,
+      -3.0
+     ],
+     [
+      -0.373,
+      -29.91566,
+      -3.0
+     ],
+     [
+      -0.373,
+      -39.48032,
+      -3.0
+     ]
+    ]
+   ],
+   "source_material": "travertine",
+   "finish_status": "UNVERIFIED"
+  },
+  "mesh": {
+   "bounds": [
+    5.317,
+    -27.526,
+    -3.0,
+    9.509,
+    -27.496,
+    -0.20294117647058812
+   ],
+   "mounting": {
+    "host_id": "support-detail-stair-open-stringer",
+    "kind": "floor-standing",
+    "offset_m": 0,
+    "housing_depth_m": 0.0,
+    "finished_face": [
+     3.617,
+     -23.591,
+     -3.0
+    ]
+   },
+   "host": {
+    "id": "support-detail-stair-open-stringer",
+    "kind": "floor",
+    "structural_point": [
+     3.617,
+     -23.591,
+     -3.0
+    ],
+    "normal": [
+     0,
+     0,
+     1
+    ],
+    "finish": {
+     "name": "modeled finished travertine; build-up UNVERIFIED; level retained",
+     "thickness_m": 0
+    },
+    "void_depth_m": null,
+    "source_mesh": "finish-stair-basement-floor-host",
+    "source_faces": [
+     [
+      [
+       3.617,
+       -23.591,
+       -3.0
+      ],
+      [
+       3.617,
+       -29.91566,
+       -3.0
+      ],
+      [
+       6.94,
+       -29.91566,
+       -3.0
+      ],
+      [
+       6.94,
+       -28.671,
+       -3.0
+      ],
+      [
+       17.268,
+       -28.671,
+       -3.0
+      ],
+      [
+       17.268,
+       -29.91566,
+       -3.0
+      ],
+      [
+       22.597,
+       -29.91566,
+       -3.0
+      ],
+      [
+       22.597,
+       -23.591,
+       -3.0
+      ]
+     ],
+     [
+      [
+       -0.373,
+       -20.351,
+       -3.0
+      ],
+      [
+       -0.373,
+       -29.91566,
+       -3.0
+      ],
+      [
+       3.617,
+       -29.91566,
+       -3.0
+      ],
+      [
+       3.617,
+       -23.591,
+       -3.0
+      ],
+      [
+       22.597,
+       -23.591,
+       -3.0
+      ],
+      [
+       22.597,
+       -29.91566,
+       -3.0
+      ],
+      [
+       28.557,
+       -29.91566,
+       -3.0
+      ],
+      [
+       28.557,
+       -20.351,
+       -3.0
+      ]
+     ],
+     [
+      [
+       28.557,
+       -39.48032,
+       -3.0
+      ],
+      [
+       28.557,
+       -29.91566,
+       -3.0
+      ],
+      [
+       22.597,
+       -29.91566,
+       -3.0
+      ],
+      [
+       22.597,
+       -36.24032,
+       -3.0
+      ],
+      [
+       3.617,
+       -36.24032,
+       -3.0
+      ],
+      [
+       3.617,
+       -29.91566,
+       -3.0
+      ],
+      [
+       -0.373,
+       -29.91566,
+       -3.0
+      ],
+      [
+       -0.373,
+       -39.48032,
+       -3.0
+      ]
+     ]
+    ],
+    "source_material": "travertine",
+    "finish_status": "UNVERIFIED"
+   }
+  }
+ },
+ {
+  "id": "marker-STEP-stair-b-04",
+  "source": "c4-e-lead-approvals.json",
+  "approved_host": "stair-party-wall",
+  "new_host": "stair-party-wall",
+  "approved_old": [
+   7.227,
+   -28.469999999999995,
+   -1.182,
+   7.327,
+   -28.469999999999995,
+   -1.142
+  ],
+  "approved_new": [
+   7.227,
+   -28.458,
+   -1.182,
+   7.327,
+   -28.458,
+   -1.142
+  ],
+  "old": [
+   7.219,
+   -28.47,
+   -1.182,
+   7.319,
+   -28.47,
+   -1.142
+  ],
+  "new": [
+   7.219,
+   -28.458,
+   -1.182,
+   7.319,
+   -28.458,
+   -1.142
+  ],
+  "package": "e-support",
+  "why": "Assembly fixing face from measured host; interior-plaster",
+  "mm": 12.0,
+  "physical": {
+   "finished_plane_point": [
+    0.0,
+    -28.458,
+    0.0
+   ],
+   "mounted": [
+    {
+     "id": "detail-stair-wall-rail-bracket-00",
+     "bounds": [
+      5.305000000000001,
+      -28.458,
+      0.6935294117647058,
+      5.329,
+      -28.333,
+      0.7335294117647059
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-04",
+     "bounds": [
+      6.417000000000001,
+      -28.458,
+      -0.012352941176470678,
+      6.441,
+      -28.333,
+      0.027647058823529358
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-07",
+     "bounds": [
+      7.121,
+      -28.458,
+      -1.591764705882353,
+      7.417,
+      -28.396,
+      -1.446764705882353
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-08",
+     "bounds": [
+      7.401,
+      -28.458,
+      -1.768235294117647,
+      7.697,
+      -28.396,
+      -1.623235294117647
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-08",
+     "bounds": [
+      7.537,
+      -28.458,
+      -0.718235294117647,
+      7.560999999999999,
+      -28.333,
+      -0.6782352941176469
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-09",
+     "bounds": [
+      7.681,
+      -28.458,
+      -1.9447058823529413,
+      7.977,
+      -28.396,
+      -1.7997058823529413
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-10",
+     "bounds": [
+      7.961,
+      -28.458,
+      -2.1211764705882357,
+      8.257,
+      -28.396,
+      -1.9761764705882356
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-11",
+     "bounds": [
+      8.241,
+      -28.458,
+      -2.2976470588235296,
+      8.537,
+      -28.396,
+      -2.1526470588235296
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-12",
+     "bounds": [
+      8.521,
+      -28.458,
+      -2.4741176470588235,
+      8.817,
+      -28.396,
+      -2.3291176470588235
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-12",
+     "bounds": [
+      8.657,
+      -28.458,
+      -1.4241176470588233,
+      8.681000000000001,
+      -28.333,
+      -1.3841176470588232
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-13",
+     "bounds": [
+      8.801,
+      -28.458,
+      -2.6505882352941175,
+      9.097,
+      -28.396,
+      -2.5055882352941174
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-14",
+     "bounds": [
+      9.081,
+      -28.458,
+      -2.827058823529412,
+      9.377,
+      -28.396,
+      -2.682058823529412
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-plate",
+     "bounds": [
+      5.317,
+      -28.427999999999997,
+      -3.033529411764706,
+      9.509,
+      -28.397999999999996,
+      -0.23647058823529415
+     ],
+     "min_gap_to_finished_face_mm": 30.0
+    },
+    {
+     "id": "detail-stair-wall-handrail",
+     "bounds": [
+      5.317,
+      -28.372999999999998,
+      -1.945529411764706,
+      9.509,
+      -28.333,
+      0.7455294117647059
+     ],
+     "min_gap_to_finished_face_mm": 85.0
+    },
+    {
+     "id": "marker-STEP-stair-b-04",
+     "bounds": [
+      7.219,
+      -28.458,
+      -1.182,
+      7.319,
+      -28.458,
+      -1.142
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-05",
+     "bounds": [
+      8.059,
+      -28.458,
+      -1.711,
+      8.159,
+      -28.458,
+      -1.671
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-06",
+     "bounds": [
+      8.899,
+      -28.458,
+      -2.241,
+      8.999,
+      -28.458,
+      -2.201
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ],
+   "coplanar_shell_extent": [
+    [
+     3.617,
+     -28.471,
+     -3.0
+    ],
+    [
+     22.597,
+     -28.471,
+     2.8
+    ]
+   ]
+  },
+  "host_record": {
+   "id": "stair-party-wall",
+   "kind": "wall",
+   "structural_point": [
+    0.0,
+    -28.471,
+    0.0
+   ],
+   "normal": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "finish": {
+    "name": "interior-plaster",
+    "thickness_m": 0.013
+   },
+   "void_depth_m": null
+  },
+  "mesh": {
+   "bounds": [
+    7.219,
+    -28.458,
+    -1.182,
+    7.319,
+    -28.458,
+    -1.142
+   ],
+   "mounting": {
+    "host_id": "stair-party-wall",
+    "kind": "surface-mounted",
+    "offset_m": 0.0,
+    "housing_depth_m": 0.0,
+    "finished_face": [
+     0.0,
+     -28.458,
+     0.0
+    ],
+    "assembly_root": "marker-STEP-stair-b-04",
+    "projection_basis": "Generated child relative to authored assembly fixing plane",
+    "installation_status": "CONSTRUCTION REQUIREMENT: selected recessed housing depth and installation data MISSING; visible face only"
+   },
+   "host": {
+    "id": "stair-party-wall",
+    "kind": "wall",
+    "structural_point": [
+     0.0,
+     -28.471,
+     0.0
+    ],
+    "normal": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "finish": {
+     "name": "interior-plaster",
+     "thickness_m": 0.013
+    },
+    "void_depth_m": null
+   }
+  }
+ },
+ {
+  "id": "marker-STEP-stair-b-05",
+  "source": "c4-e-lead-approvals.json",
+  "approved_host": "stair-party-wall",
+  "new_host": "stair-party-wall",
+  "approved_old": [
+   8.067,
+   -28.469999999999995,
+   -1.711,
+   8.167000000000002,
+   -28.469999999999995,
+   -1.671
+  ],
+  "approved_new": [
+   8.067,
+   -28.458,
+   -1.711,
+   8.167000000000002,
+   -28.458,
+   -1.671
+  ],
+  "old": [
+   8.059,
+   -28.47,
+   -1.711,
+   8.159,
+   -28.47,
+   -1.671
+  ],
+  "new": [
+   8.059,
+   -28.458,
+   -1.711,
+   8.159,
+   -28.458,
+   -1.671
+  ],
+  "package": "e-support",
+  "why": "Assembly fixing face from measured host; interior-plaster",
+  "mm": 12.0,
+  "physical": {
+   "finished_plane_point": [
+    0.0,
+    -28.458,
+    0.0
+   ],
+   "mounted": [
+    {
+     "id": "detail-stair-wall-rail-bracket-00",
+     "bounds": [
+      5.305000000000001,
+      -28.458,
+      0.6935294117647058,
+      5.329,
+      -28.333,
+      0.7335294117647059
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-04",
+     "bounds": [
+      6.417000000000001,
+      -28.458,
+      -0.012352941176470678,
+      6.441,
+      -28.333,
+      0.027647058823529358
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-07",
+     "bounds": [
+      7.121,
+      -28.458,
+      -1.591764705882353,
+      7.417,
+      -28.396,
+      -1.446764705882353
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-08",
+     "bounds": [
+      7.401,
+      -28.458,
+      -1.768235294117647,
+      7.697,
+      -28.396,
+      -1.623235294117647
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-08",
+     "bounds": [
+      7.537,
+      -28.458,
+      -0.718235294117647,
+      7.560999999999999,
+      -28.333,
+      -0.6782352941176469
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-09",
+     "bounds": [
+      7.681,
+      -28.458,
+      -1.9447058823529413,
+      7.977,
+      -28.396,
+      -1.7997058823529413
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-10",
+     "bounds": [
+      7.961,
+      -28.458,
+      -2.1211764705882357,
+      8.257,
+      -28.396,
+      -1.9761764705882356
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-11",
+     "bounds": [
+      8.241,
+      -28.458,
+      -2.2976470588235296,
+      8.537,
+      -28.396,
+      -2.1526470588235296
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-12",
+     "bounds": [
+      8.521,
+      -28.458,
+      -2.4741176470588235,
+      8.817,
+      -28.396,
+      -2.3291176470588235
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-12",
+     "bounds": [
+      8.657,
+      -28.458,
+      -1.4241176470588233,
+      8.681000000000001,
+      -28.333,
+      -1.3841176470588232
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-13",
+     "bounds": [
+      8.801,
+      -28.458,
+      -2.6505882352941175,
+      9.097,
+      -28.396,
+      -2.5055882352941174
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-14",
+     "bounds": [
+      9.081,
+      -28.458,
+      -2.827058823529412,
+      9.377,
+      -28.396,
+      -2.682058823529412
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-plate",
+     "bounds": [
+      5.317,
+      -28.427999999999997,
+      -3.033529411764706,
+      9.509,
+      -28.397999999999996,
+      -0.23647058823529415
+     ],
+     "min_gap_to_finished_face_mm": 30.0
+    },
+    {
+     "id": "detail-stair-wall-handrail",
+     "bounds": [
+      5.317,
+      -28.372999999999998,
+      -1.945529411764706,
+      9.509,
+      -28.333,
+      0.7455294117647059
+     ],
+     "min_gap_to_finished_face_mm": 85.0
+    },
+    {
+     "id": "marker-STEP-stair-b-04",
+     "bounds": [
+      7.219,
+      -28.458,
+      -1.182,
+      7.319,
+      -28.458,
+      -1.142
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-05",
+     "bounds": [
+      8.059,
+      -28.458,
+      -1.711,
+      8.159,
+      -28.458,
+      -1.671
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-06",
+     "bounds": [
+      8.899,
+      -28.458,
+      -2.241,
+      8.999,
+      -28.458,
+      -2.201
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ],
+   "coplanar_shell_extent": [
+    [
+     3.617,
+     -28.471,
+     -3.0
+    ],
+    [
+     22.597,
+     -28.471,
+     2.8
+    ]
+   ]
+  },
+  "host_record": {
+   "id": "stair-party-wall",
+   "kind": "wall",
+   "structural_point": [
+    0.0,
+    -28.471,
+    0.0
+   ],
+   "normal": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "finish": {
+    "name": "interior-plaster",
+    "thickness_m": 0.013
+   },
+   "void_depth_m": null
+  },
+  "mesh": {
+   "bounds": [
+    8.059,
+    -28.458,
+    -1.711,
+    8.159,
+    -28.458,
+    -1.671
+   ],
+   "mounting": {
+    "host_id": "stair-party-wall",
+    "kind": "surface-mounted",
+    "offset_m": 0.0,
+    "housing_depth_m": 0.0,
+    "finished_face": [
+     0.0,
+     -28.458,
+     0.0
+    ],
+    "assembly_root": "marker-STEP-stair-b-05",
+    "projection_basis": "Generated child relative to authored assembly fixing plane",
+    "installation_status": "CONSTRUCTION REQUIREMENT: selected recessed housing depth and installation data MISSING; visible face only"
+   },
+   "host": {
+    "id": "stair-party-wall",
+    "kind": "wall",
+    "structural_point": [
+     0.0,
+     -28.471,
+     0.0
+    ],
+    "normal": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "finish": {
+     "name": "interior-plaster",
+     "thickness_m": 0.013
+    },
+    "void_depth_m": null
+   }
+  }
+ },
+ {
+  "id": "marker-STEP-stair-b-06",
+  "source": "c4-e-lead-approvals.json",
+  "approved_host": "stair-party-wall",
+  "new_host": "stair-party-wall",
+  "approved_old": [
+   8.907,
+   -28.469999999999995,
+   -2.241,
+   9.007000000000001,
+   -28.469999999999995,
+   -2.201
+  ],
+  "approved_new": [
+   8.907,
+   -28.458,
+   -2.241,
+   9.007000000000001,
+   -28.458,
+   -2.201
+  ],
+  "old": [
+   8.899,
+   -28.47,
+   -2.241,
+   8.999,
+   -28.47,
+   -2.201
+  ],
+  "new": [
+   8.899,
+   -28.458,
+   -2.241,
+   8.999,
+   -28.458,
+   -2.201
+  ],
+  "package": "e-support",
+  "why": "Assembly fixing face from measured host; interior-plaster",
+  "mm": 12.0,
+  "physical": {
+   "finished_plane_point": [
+    0.0,
+    -28.458,
+    0.0
+   ],
+   "mounted": [
+    {
+     "id": "detail-stair-wall-rail-bracket-00",
+     "bounds": [
+      5.305000000000001,
+      -28.458,
+      0.6935294117647058,
+      5.329,
+      -28.333,
+      0.7335294117647059
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-04",
+     "bounds": [
+      6.417000000000001,
+      -28.458,
+      -0.012352941176470678,
+      6.441,
+      -28.333,
+      0.027647058823529358
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-07",
+     "bounds": [
+      7.121,
+      -28.458,
+      -1.591764705882353,
+      7.417,
+      -28.396,
+      -1.446764705882353
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-08",
+     "bounds": [
+      7.401,
+      -28.458,
+      -1.768235294117647,
+      7.697,
+      -28.396,
+      -1.623235294117647
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-08",
+     "bounds": [
+      7.537,
+      -28.458,
+      -0.718235294117647,
+      7.560999999999999,
+      -28.333,
+      -0.6782352941176469
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-09",
+     "bounds": [
+      7.681,
+      -28.458,
+      -1.9447058823529413,
+      7.977,
+      -28.396,
+      -1.7997058823529413
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-10",
+     "bounds": [
+      7.961,
+      -28.458,
+      -2.1211764705882357,
+      8.257,
+      -28.396,
+      -1.9761764705882356
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-11",
+     "bounds": [
+      8.241,
+      -28.458,
+      -2.2976470588235296,
+      8.537,
+      -28.396,
+      -2.1526470588235296
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-12",
+     "bounds": [
+      8.521,
+      -28.458,
+      -2.4741176470588235,
+      8.817,
+      -28.396,
+      -2.3291176470588235
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-rail-bracket-12",
+     "bounds": [
+      8.657,
+      -28.458,
+      -1.4241176470588233,
+      8.681000000000001,
+      -28.333,
+      -1.3841176470588232
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-13",
+     "bounds": [
+      8.801,
+      -28.458,
+      -2.6505882352941175,
+      9.097,
+      -28.396,
+      -2.5055882352941174
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-stringer-14",
+     "bounds": [
+      9.081,
+      -28.458,
+      -2.827058823529412,
+      9.377,
+      -28.396,
+      -2.682058823529412
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "detail-stair-wall-plate",
+     "bounds": [
+      5.317,
+      -28.427999999999997,
+      -3.033529411764706,
+      9.509,
+      -28.397999999999996,
+      -0.23647058823529415
+     ],
+     "min_gap_to_finished_face_mm": 30.0
+    },
+    {
+     "id": "detail-stair-wall-handrail",
+     "bounds": [
+      5.317,
+      -28.372999999999998,
+      -1.945529411764706,
+      9.509,
+      -28.333,
+      0.7455294117647059
+     ],
+     "min_gap_to_finished_face_mm": 85.0
+    },
+    {
+     "id": "marker-STEP-stair-b-04",
+     "bounds": [
+      7.219,
+      -28.458,
+      -1.182,
+      7.319,
+      -28.458,
+      -1.142
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-05",
+     "bounds": [
+      8.059,
+      -28.458,
+      -1.711,
+      8.159,
+      -28.458,
+      -1.671
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    },
+    {
+     "id": "marker-STEP-stair-b-06",
+     "bounds": [
+      8.899,
+      -28.458,
+      -2.241,
+      8.999,
+      -28.458,
+      -2.201
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ],
+   "coplanar_shell_extent": [
+    [
+     3.617,
+     -28.471,
+     -3.0
+    ],
+    [
+     22.597,
+     -28.471,
+     2.8
+    ]
+   ]
+  },
+  "host_record": {
+   "id": "stair-party-wall",
+   "kind": "wall",
+   "structural_point": [
+    0.0,
+    -28.471,
+    0.0
+   ],
+   "normal": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "finish": {
+    "name": "interior-plaster",
+    "thickness_m": 0.013
+   },
+   "void_depth_m": null
+  },
+  "mesh": {
+   "bounds": [
+    8.899,
+    -28.458,
+    -2.241,
+    8.999,
+    -28.458,
+    -2.201
+   ],
+   "mounting": {
+    "host_id": "stair-party-wall",
+    "kind": "surface-mounted",
+    "offset_m": 0.0,
+    "housing_depth_m": 0.0,
+    "finished_face": [
+     0.0,
+     -28.458,
+     0.0
+    ],
+    "assembly_root": "marker-STEP-stair-b-06",
+    "projection_basis": "Generated child relative to authored assembly fixing plane",
+    "installation_status": "CONSTRUCTION REQUIREMENT: selected recessed housing depth and installation data MISSING; visible face only"
+   },
+   "host": {
+    "id": "stair-party-wall",
+    "kind": "wall",
+    "structural_point": [
+     0.0,
+     -28.471,
+     0.0
+    ],
+    "normal": [
+     0.0,
+     1.0,
+     0.0
+    ],
+    "finish": {
+     "name": "interior-plaster",
+     "thickness_m": 0.013
+    },
+    "void_depth_m": null
+   }
+  }
+ },
+ {
+  "id": "host-face-support-marker-PATH-corridor-07",
+  "source": "c4-e-lead-approvals.json",
+  "approved_host": "support-marker-PATH-corridor-07",
+  "new_host": "support-marker-PATH-corridor-07",
+  "approved_old": [
+   5.102,
+   -28.470999999999997,
+   0.0,
+   19.604,
+   -28.470999999999997,
+   2.8
+  ],
+  "approved_new": [
+   5.102,
+   -28.457999999999995,
+   0.0,
+   19.604,
+   -28.457999999999995,
+   2.8
+  ],
+  "old": [
+   5.102,
+   -28.471,
+   0.0,
+   19.804,
+   -28.470999999999997,
+   2.8
+  ],
+  "new": [
+   5.102,
+   -28.458,
+   0.0,
+   19.804,
+   -28.457999999999995,
+   2.8
+  ],
+  "package": "e-support",
+  "why": "Declared finish face over measured source polygon; interior-plaster",
+  "mm": 13.0,
+  "physical": {
+   "finished_plane_point": [
+    19.804,
+    -28.458,
+    0.0
+   ],
+   "mounted": [
+    {
+     "id": "marker-PATH-corridor-07",
+     "bounds": [
+      10.136999999999999,
+      -28.458,
+      0.27999999999999997,
+      10.237,
+      -28.458,
+      0.32
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ],
+   "coplanar_shell_extent": [
+    [
+     3.617,
+     -28.471,
+     -3.0
+    ],
+    [
+     22.597,
+     -28.471,
+     2.8
+    ]
+   ]
+  },
+  "host_record": {
+   "id": "support-marker-PATH-corridor-07",
+   "kind": "wall",
+   "structural_point": [
+    19.804,
+    -28.471,
+    0.0
+   ],
+   "normal": [
+    0,
+    1,
+    0
+   ],
+   "finish": {
+    "name": "interior-plaster",
+    "thickness_m": 0.013
+   },
+   "void_depth_m": null,
+   "source_mesh": "shell-045-plaster-warm-white",
+   "source_face": [
+    [
+     19.804,
+     -28.471,
+     0.0
+    ],
+    [
+     9.657,
+     -28.470999999999997,
+     0.0
+    ],
+    [
+     9.657,
+     -28.470999999999997,
+     2.8
+    ],
+    [
+     19.804,
+     -28.471,
+     2.8
+    ]
+   ],
+   "source_faces": [
+    [
+     [
+      5.177,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      5.102,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      5.102,
+      -28.470999999999997,
+      2.8
+     ],
+     [
+      5.177,
+      -28.470999999999997,
+      2.8
+     ]
+    ],
+    [
+     [
+      19.804,
+      -28.471,
+      0.0
+     ],
+     [
+      9.657,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      9.657,
+      -28.470999999999997,
+      2.8
+     ],
+     [
+      19.804,
+      -28.471,
+      2.8
+     ]
+    ]
+   ],
+   "source_material": "plaster-warm-white"
+  },
+  "mesh": {
+   "bounds": [
+    5.102,
+    -28.458,
+    0.0,
+    19.804,
+    -28.457999999999995,
+    2.8
+   ],
+   "mounting": null,
+   "host": null
+  }
+ },
+ {
+  "id": "host-face-support-marker-PATH-corridor-08",
+  "source": "c4-e-lead-approvals.json",
+  "approved_host": "support-marker-PATH-corridor-08",
+  "new_host": "support-marker-PATH-corridor-08",
+  "approved_old": [
+   5.102,
+   -28.470999999999997,
+   0.0,
+   19.604,
+   -28.470999999999997,
+   2.8
+  ],
+  "approved_new": [
+   5.102,
+   -28.457999999999995,
+   0.0,
+   19.604,
+   -28.457999999999995,
+   2.8
+  ],
+  "old": [
+   5.102,
+   -28.471,
+   0.0,
+   19.804,
+   -28.470999999999997,
+   2.8
+  ],
+  "new": [
+   5.102,
+   -28.458,
+   0.0,
+   19.804,
+   -28.457999999999995,
+   2.8
+  ],
+  "package": "e-support",
+  "why": "Declared finish face over measured source polygon; interior-plaster",
+  "mm": 13.0,
+  "physical": {
+   "finished_plane_point": [
+    19.804,
+    -28.458,
+    0.0
+   ],
+   "mounted": [
+    {
+     "id": "marker-PATH-corridor-08",
+     "bounds": [
+      13.636999999999999,
+      -28.458,
+      0.27999999999999997,
+      13.737,
+      -28.458,
+      0.32
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ],
+   "coplanar_shell_extent": [
+    [
+     3.617,
+     -28.471,
+     -3.0
+    ],
+    [
+     22.597,
+     -28.471,
+     2.8
+    ]
+   ]
+  },
+  "host_record": {
+   "id": "support-marker-PATH-corridor-08",
+   "kind": "wall",
+   "structural_point": [
+    19.804,
+    -28.471,
+    0.0
+   ],
+   "normal": [
+    0,
+    1,
+    0
+   ],
+   "finish": {
+    "name": "interior-plaster",
+    "thickness_m": 0.013
+   },
+   "void_depth_m": null,
+   "source_mesh": "shell-045-plaster-warm-white",
+   "source_face": [
+    [
+     19.804,
+     -28.471,
+     0.0
+    ],
+    [
+     9.657,
+     -28.470999999999997,
+     0.0
+    ],
+    [
+     9.657,
+     -28.470999999999997,
+     2.8
+    ],
+    [
+     19.804,
+     -28.471,
+     2.8
+    ]
+   ],
+   "source_faces": [
+    [
+     [
+      5.177,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      5.102,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      5.102,
+      -28.470999999999997,
+      2.8
+     ],
+     [
+      5.177,
+      -28.470999999999997,
+      2.8
+     ]
+    ],
+    [
+     [
+      19.804,
+      -28.471,
+      0.0
+     ],
+     [
+      9.657,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      9.657,
+      -28.470999999999997,
+      2.8
+     ],
+     [
+      19.804,
+      -28.471,
+      2.8
+     ]
+    ]
+   ],
+   "source_material": "plaster-warm-white"
+  },
+  "mesh": {
+   "bounds": [
+    5.102,
+    -28.458,
+    0.0,
+    19.804,
+    -28.457999999999995,
+    2.8
+   ],
+   "mounting": null,
+   "host": null
+  }
+ },
+ {
+  "id": "host-face-support-marker-PATH-corridor-09",
+  "source": "c4-e-lead-approvals.json",
+  "approved_host": "support-marker-PATH-corridor-09",
+  "new_host": "support-marker-PATH-corridor-09",
+  "approved_old": [
+   5.102,
+   -28.470999999999997,
+   0.0,
+   19.604,
+   -28.470999999999997,
+   2.8
+  ],
+  "approved_new": [
+   5.102,
+   -28.457999999999995,
+   0.0,
+   19.604,
+   -28.457999999999995,
+   2.8
+  ],
+  "old": [
+   5.102,
+   -28.471,
+   0.0,
+   19.804,
+   -28.470999999999997,
+   2.8
+  ],
+  "new": [
+   5.102,
+   -28.458,
+   0.0,
+   19.804,
+   -28.457999999999995,
+   2.8
+  ],
+  "package": "e-support",
+  "why": "Declared finish face over measured source polygon; interior-plaster",
+  "mm": 13.0,
+  "physical": {
+   "finished_plane_point": [
+    19.804,
+    -28.458,
+    0.0
+   ],
+   "mounted": [
+    {
+     "id": "marker-PATH-corridor-09",
+     "bounds": [
+      17.137,
+      -28.458,
+      0.27999999999999997,
+      17.237000000000002,
+      -28.458,
+      0.32
+     ],
+     "min_gap_to_finished_face_mm": 0.0
+    }
+   ],
+   "coplanar_shell_extent": [
+    [
+     3.617,
+     -28.471,
+     -3.0
+    ],
+    [
+     22.597,
+     -28.471,
+     2.8
+    ]
+   ]
+  },
+  "host_record": {
+   "id": "support-marker-PATH-corridor-09",
+   "kind": "wall",
+   "structural_point": [
+    19.804,
+    -28.471,
+    0.0
+   ],
+   "normal": [
+    0,
+    1,
+    0
+   ],
+   "finish": {
+    "name": "interior-plaster",
+    "thickness_m": 0.013
+   },
+   "void_depth_m": null,
+   "source_mesh": "shell-045-plaster-warm-white",
+   "source_face": [
+    [
+     19.804,
+     -28.471,
+     0.0
+    ],
+    [
+     9.657,
+     -28.470999999999997,
+     0.0
+    ],
+    [
+     9.657,
+     -28.470999999999997,
+     2.8
+    ],
+    [
+     19.804,
+     -28.471,
+     2.8
+    ]
+   ],
+   "source_faces": [
+    [
+     [
+      5.177,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      5.102,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      5.102,
+      -28.470999999999997,
+      2.8
+     ],
+     [
+      5.177,
+      -28.470999999999997,
+      2.8
+     ]
+    ],
+    [
+     [
+      19.804,
+      -28.471,
+      0.0
+     ],
+     [
+      9.657,
+      -28.470999999999997,
+      0.0
+     ],
+     [
+      9.657,
+      -28.470999999999997,
+      2.8
+     ],
+     [
+      19.804,
+      -28.471,
+      2.8
+     ]
+    ]
+   ],
+   "source_material": "plaster-warm-white"
+  },
+  "mesh": {
+   "bounds": [
+    5.102,
+    -28.458,
+    0.0,
+    19.804,
+    -28.457999999999995,
+    2.8
+   ],
+   "mounting": null,
+   "host": null
+  }
+ }
+]
