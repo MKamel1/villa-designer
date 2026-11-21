@@ -1,0 +1,24 @@
+{
+ "code": "B0000184",
+ "maker": "erco",
+ "name": "Iku Surface-mounted downlight IP65, 5 W 3000 K CRI 92 ('Version with 2700K or 3500K CRI 92 available on request')",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/B0000184",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=B0000184&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; page requests only; public, no login",
+ "files": {
+  "erco-B0000184-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-specs.pdf",
+   "sha256": "0214c6cf8fe60ac641542def58f1919d11cc53a7f781a16e73a0ec91c64d7681"
+  },
+  "erco-B0000184-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-ldt.ldt",
+   "sha256": "d08fd46547c1748472210fafaca61137bbac376343152143550a3c6d9aa63a57"
+  },
+  "erco-B0000184-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/B0000184/erco-B0000184-en-ies.ies",
+   "sha256": "f4033a8de6e69a62d53ab51520db37504fdbea54fc19be8db606aae0a5b7e9b8"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

@@ -1,0 +1,24 @@
+{
+ "code": "26141",
+ "maker": "erco",
+ "name": "Pantrac Lens wallwasher, 12.1 W 2700 K CRI 92, track, phase dimmable",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/26141.000",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=26141.000&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; page requests only; public, no login",
+ "files": {
+  "erco-26141-000-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-specs.pdf",
+   "sha256": "54544c5b4dc33eda969b3606306c8a86116b7a8fa4d8f2df1cbaf36239e87289"
+  },
+  "erco-26141-000-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-ldt.ldt",
+   "sha256": "f9b32013d13bf1a4bb680efa5d0b90c8274cfe63c850e612ec90b912d6361696"
+  },
+  "erco-26141-000-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/26141/erco-26141-000-en-ies.ies",
+   "sha256": "04f9089597ce2e18d0ed35ffe81b7fe6a83ca4d6d7bb663a4f81cad40906de53"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

@@ -1,0 +1,24 @@
+{
+ "code": "31327",
+ "maker": "erco",
+ "name": "Lucy Task light, wide beam, 9.4 W 2700 K CRI 92, on-board dim",
+ "fetched": "2026-11-21",
+ "product_url": "https://www.erco.com/31327.000",
+ "download_service": "https://download-service.erco.com/download/en?articleIds=31327.000&types=15|4|3&formattedId=false",
+ "retrieval": "real Chrome via Playwright; page requests only; public, no login",
+ "files": {
+  "erco-31327-000-en-specs.pdf": {
+   "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-specs.pdf",
+   "sha256": "2273671410b1506c08f57deb2520cc394896b8083416f67d8f25ff309162c0f4"
+  },
+  "erco-31327-000-en-ldt.ldt": {
+   "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-ldt.ldt",
+   "sha256": "aac92a468d4618f4dba91ae7dbf1a2efd941ae1daf7b5ba5abe6f2fcf87f64a5"
+  },
+  "erco-31327-000-en-ies.ies": {
+   "path": "knowledge/lighting-products/erco/31327/erco-31327-000-en-ies.ies",
+   "sha256": "9a228ddc905f7c26420cb9b00cea81726d895ff5f7f018d95696afa5faae1423"
+  }
+ },
+ "redistribution": "ERCO offers these files publicly for lighting design; terms not separately read"
+}

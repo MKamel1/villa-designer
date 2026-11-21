@@ -15,7 +15,7 @@ from pathlib import Path
 
 from archpipe import fixture_record as fr
 from archpipe.luminaires import eulumdat as eu
-from archpipe.luminaires import v10
+from archpipe.luminaires import lp_erco, v10
 
 ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "knowledge/lighting-products"
@@ -39,8 +39,7 @@ PRODUCTS = {
 
 # Where each maker stood when tried (2026-11-21). Every row is something observed, not assumed.
 SOURCING_LOG = [
-    dict(maker="ERCO", result="blocked", detail="erco.com answers automated requests with HTTP 429 and a Vercel "
-         "security challenge; not circumvented. Files must be downloaded by a person."),
+    dict(maker="ERCO", result="obtained (2nd run, real Chrome)", detail="scripted HTTP gets hit a Vercel checkpoint (not circumvented); a normal Chrome visit passes. Per-article datasheet PDF, LDT and IES come from download-service.erco.com, the same endpoint the page buttons call; 3 s pauses between requests."),
     dict(maker="Thorn", result="blocked", detail="thornlighting.com returned HTTP 403 to an automated request."),
     dict(maker="Signify", result="blocked", detail="the Signify file API refuses unauthenticated requests and "
          "archpipe.luminaires.signify documents robots.txt disallowing automated access; person downloads."),
@@ -136,13 +135,13 @@ PAIR_FAILED = {"ST49": "59.8 % flux", "LSEVO-AAKR2I": "100 %, asymmetric"}
 
 
 def build() -> dict:
-    prods = [_product(c) for c in PRODUCTS]
+    prods = [_product(c) for c in PRODUCTS] + lp_erco.products()
     for p in prods:
         p["notes"] = _notes(p)
     by_kind = {}
     for k in fr.KINDS:
         cands = [p for p in prods if k in p["kinds"]]
-        rank = {"pass": 0, "lumens-only": 1, "not_evaluated": 2, "fail": 3}
+        rank = {"pass": 0, "partial": 1, "lumens-only": 2, "not_evaluated": 3, "fail": 4}
         by_kind[k] = sorted(cands, key=lambda p: rank[p["v10_status"]])
     ref = [_slim(p) for p in prods if not p["kinds"]]
     out = dict(generated=TODAY, reference_products_no_kind=ref, note="V10 'pass' needs the integrated lumens within 2 % AND at least one published "
