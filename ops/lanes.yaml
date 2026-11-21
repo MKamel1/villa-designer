@@ -155,6 +155,23 @@ lanes:
     - src/archpipe/luminaires/**
     - tests/luminaires/**
     - docs/lanes/LP*.md
+  RA2: # make the production scene build: B1-B5 from lane RA
+    - knowledge/garden-palette.json
+    - knowledge/furniture-stage2*
+    - knowledge/parents-bed*
+    - knowledge/beds*
+    - knowledge/exposure-group*.json
+    - knowledge/exposure-groups.json
+    - knowledge/approvals-review/**
+    - src/archpipe/concept/furniture_stage2.py
+    - src/archpipe/concept/parents_bed.py
+    - src/archpipe/concept/beds.py
+    - src/archpipe/villa_render_contract.py
+    - tests/test_mounting*.py
+    - tests/test_furniture_stage2*.py
+    - tests/test_parents_bed*.py
+    - tests/approvals/**
+    - docs/lanes/RA*.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
