@@ -24,10 +24,10 @@ def render(villa, layers) -> str:
     out.append("")
     # global gates that apply to every room
     glob = {}
-    for k in ("V4", "V8", "V10"):
+    for k in ("V4", "V8"):
         sts = {r.status for r in layers[k].results}
         glob[k] = "FAIL" if "fail" in sts else ("pass" if sts == {"pass"} else ("n/e" if not sts else "pass*"))
-    out += ["Global layers (apply to all rooms): " + ", ".join("%s %s" % (k, v) for k, v in glob.items()) +
+    out += ["Global layers (apply to all rooms; V10 is per room: a room is only as verified as its products): " + ", ".join("%s %s" % (k, v) for k, v in glob.items()) +
             "  (`pass*` = passes, some points not evaluable: see the layer tables)", ""]
     v3 = {r.subject: r.status for r in layers["V3"].results}
     v12 = {r.subject: r.status for r in layers["V12"].results}
@@ -36,19 +36,20 @@ def render(villa, layers) -> str:
     for p in planes:
         by_room[p.room].append(p)
     out += ["## Per room x scene", "",
-            "| room | scene | plane | inputs V1 | placement V2 | sensors V3 | engines V5 | hand V6 | convergence V7 | headroom V12 | status |",
-            "|---|---|---|---|---|---|---|---|---|---|---|"]
+            "| room | scene | plane | inputs V1 | placement V2 | sensors V3 | engines V5 | hand V6 | convergence V7 | maker data V10 | headroom V12 | status |",
+            "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     n_ok = n_all = 0
     for room in sorted(by_room):
         for p in by_room[room]:
             st = {"V1": layers["V1"].room_status(room), "V2": layers["V2"].room_status(room), "V3": v3.get(p.id), "V5": layers["V5"].room_status(room),
                   "V6": layers["V6"].room_status(room), "V7": layers["V7"].room_status(room) if layers["V7"].rooms else None,
+                  "V10": layers["V10"].room_status(room),
                   "V12": v12.get(p.id) if not p.id.startswith("room-") else "pass"}
-            ok = all(v == "pass" for v in st.values()) and glob["V4"].startswith("pass") and glob["V8"].startswith("pass") and glob["V10"].startswith("pass")
+            ok = all(v == "pass" for v in st.values()) and glob["V4"].startswith("pass") and glob["V8"].startswith("pass")
             n_all += 1
             n_ok += ok
-            out.append("| %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
-                room, p.scene, p.id, *(SYM.get(st[k]) for k in ("V1", "V2", "V3", "V5", "V6", "V7", "V12")), "**verified**" if ok else "unverified"))
+            out.append("| %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s |" % (
+                room, p.scene, p.id, *(SYM.get(st[k]) for k in ("V1", "V2", "V3", "V5", "V6", "V7", "V10", "V12")), "**verified**" if ok else "unverified"))
     out += ["", "Verified %d of %d room-plane rows." % (n_ok, n_all), ""]
     for k in ("V1", "V5", "V6", "V7", "V4", "V10", "V12", "V8"):
         out += ["## %s detail" % k, ""]
