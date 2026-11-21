@@ -19,6 +19,11 @@ from .. import model as design_model
 from .model import Board, Door, Equipment, Furniture, House, Luminaire, Room, Supply
 from .placement import Device, room_walls, slide_on_wall
 
+
+def placement_clear(h, level, x, y, z) -> bool:
+    from .placement import clearance
+    return clearance(h, level, x, y, z)[0]
+
 ROOT = Path(__file__).resolve().parents[3]
 EQUIPMENT_JSON = ROOT / "knowledge" / "electrical" / "d1-equipment-assumed.json"
 ZONES_JSON = ROOT / "knowledge" / "lighting" / "zones-d1.json"
@@ -252,7 +257,7 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
                  s["roof_ambient_c"], s["drop_m"], None, s["premises"], s["ra_note"])
     flags.append("boards: MDB in the pantry (B), DB-B at the stair-foot hall (B), DB-GF at the stair-head gallery (GF), stacked so the riser is about 3 m; "
                  "meter position and utility cabinet at the street fence are assumptions to confirm")
-    flags.append("routes: Manhattan distance x 1.15 from the board to the farthest load point plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops")
+    flags.append("routes: Manhattan distance x 1.15 through all the circuit's load points (nearest-neighbour chain) plus 3 m of vertical drops (the engine has no wall/slab routing); sub-board feeders add the 3 m storey rise and 3 m of drops")
     # storey areas for the ADB alarm-grade rule (net room polygons; gross adds the wall plan area of the level)
     areas: dict[str, dict] = {}
     for lvl in ("B", "GF"):
@@ -274,12 +279,35 @@ def load_villa(model_path=None, equipment_path: Path | str = EQUIPMENT_JSON) -> 
               flags, dict(LEVEL_Z_MM))
     h.provisional_zones = pub is None
     h.wall_segs, h.openings = wall_segs, openings
+    # floor footprints no floor box may sit in: every model furniture box with a size, and the stair
+    for e in els:
+        if e.kind == "furniture" and e.size[0] > 0 and e.size[1] > 0 and e.params.get("type") != "dressing":
+            fx0, fy0, fx1, fy1 = _furn_rect(e)
+            h.keepouts.append({"id": e.id, "level": e.level, "x0": fx0, "y0": fy0, "x1": fx1, "y1": fy1})
+        elif e.kind == "stair":
+            h.keepouts.append({"id": e.id, "level": e.level, "x0": e.placement[0] - e.size[0] / 2, "y0": e.placement[1] - e.size[1] / 2,
+                               "x1": e.placement[0] + e.size[0] / 2, "y1": e.placement[1] + e.size[1] / 2})
     # boards: on a clear stretch of a wall of the chosen room (slid along the wall if the first choice hits an opening)
     boards: list[Board] = []
     for bid, (rid, wall, frac, lvl, amb) in BOARD_PLACES.items():
-        w = room_walls(rooms[rid])[wall]
-        x, y = w.point(w.length * frac)
-        pt, why = slide_on_wall(h, rooms[rid], x, y, 1500.0)
+        rw = room_walls(rooms[rid])
+        order = [wall] + sorted((n for n in rw if n != wall), key=lambda n: -rw[n].length)
+        pt, why = None, "no clear stretch"
+        for wn in order:                          # a board is 600 mm wide: both ends and the middle must be on a wall element and clear of openings
+            w = rw[wn]
+            a0 = w.length * frac
+            for k in range(0, 40):
+                for sgn in ((1,) if k == 0 else (1, -1)):
+                    a = a0 + sgn * k * 150.0
+                    if 300.0 <= a <= w.length - 300.0 and all(placement_clear(h, rooms[rid].level, *w.point(a + dx), 1500.0) for dx in (-300.0, 0.0, 300.0)):
+                        pt = w.point(a)
+                        why = (f"wall {wn}" if wn != wall else "") + (f" moved {k * 150} mm" if k else "")
+                        why = (why.strip() + " to get a 600 mm clear stretch") if why.strip() else ""
+                        break
+                if pt:
+                    break
+            if pt:
+                break
         if pt is None:
             raise ValueError(f"no clear wall position for board {bid} in {rid}: {why}")
         if why:

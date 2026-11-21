@@ -302,3 +302,47 @@ def test_outputs_written(d1):
               "load_schedule.md", "device_list.csv", "elv_devices.csv", "summary.json", "L7.json"):
         assert (out / f).stat().st_size > 100, f
     assert (out / "sld_DB-B.svg").read_text(encoding="utf-8").startswith("<svg")
+
+
+# ---- review fixes: wall ends, floor-box keep-outs, vacuous EA4 -----------------------------------------------------------------
+def test_device_past_the_end_of_a_wall_is_not_on_the_wall():
+    h = _clear_house()
+    on = placement.Device("S-1", "socket", "A", 5900.0, 8000.0, 300.0)
+    past = placement.Device("S-2", "socket", "A", 6200.0, 8000.0, 300.0)          # 200 mm beyond the wall end
+    assert placement.clearance_violations(h, [on]) == []
+    assert "not on a wall element" in placement.clearance_violations(h, [past])[0][1]
+
+
+def test_floor_box_is_dropped_inside_a_keepout():
+    h = _clear_house()
+    h.keepouts = [{"id": "stair-x", "level": "GF", "x0": 5000.0, "y0": 0.0, "x1": 6000.0, "y1": 8000.0}]
+    devs = placement.place_devices(h)
+    assert not [d for d in devs if d.params.get("floor_box") and d.x > 4300]
+    assert any("stair-x" in m for m in h.dropped)
+
+
+def test_d1_floor_boxes_avoid_the_stair_and_furniture_and_stairs_get_no_sockets(d1):
+    h, d = d1["house"], d1["design"]
+    rooms = {r.id: r for r in h.rooms}
+    boxes = [x for x in d.devices if x.params.get("floor_box")]
+    assert boxes
+    for x in boxes:
+        assert not placement._in_keepout(h, rooms[x.room], x.x, x.y, margin=0.0), (x.id, x.room)
+    assert not [x for x in d.devices if rooms[x.room].kind == "stair" and x.kind == "socket"]
+
+
+def test_d1_ea4_records_are_not_evaluated_without_a_limit_but_reference_cases_pass(d1):
+    res = d1["results"]
+    inst = by(res, "EA4", subject="installation")
+    assert inst and all(r.status == "not_evaluated" for r in inst) and "kVA" in inst[0].message
+    assert all(r.status == "not_evaluated" for r in by(res, "EA4", subject="board"))
+    assert len(by(res, "EA4", "pass", "REF")) == 5
+
+
+def test_d1_boards_have_a_600_mm_clear_wall_stretch(d1):
+    h = d1["house"]
+    rooms = {r.id: r for r in h.rooms}
+    for b in h.boards:
+        w = min(placement.room_walls(rooms[b.room]).values(), key=lambda w: abs(w.depth_of(*b.xy)))
+        a = w.along_of(*b.xy)
+        assert all(placement.clearance(h, b.level, *w.point(a + dx), b.height_mm)[0] for dx in (-300.0, 0.0, 300.0)), b.id

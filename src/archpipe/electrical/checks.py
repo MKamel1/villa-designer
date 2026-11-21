@@ -92,7 +92,7 @@ def run_checks(d: Design, svg: str | None = None, elv=None, svgs: dict | None = 
     # EA4 max demand ---------------------------------------------------------------------------
     f = d.feeder
     mb = h.supply.main_breaker_a
-    status = "pass" if (mb is None or f["ib_a"] <= mb) else "fail"
+    status = ("pass" if f["ib_a"] <= mb else "fail") if mb is not None else "not_evaluated"
     R.append(_r("EA4", status, "installation",
                 f"connected {d.demand.connected_a:.1f} A -> max demand {d.demand.total_a:.1f} A single-phase equiv. = {d.demand.kva:.1f} kVA at {h.supply.v_phase:g} V; "
                 f"worst-phase line current {f['ib_a']:.1f} A vs main breaker {mb} A. Diversity: Whitfield Table 6.2 (household column, 16th-ed. reprint of the OSG percentages); "
@@ -100,7 +100,7 @@ def run_checks(d: Design, svg: str | None = None, elv=None, svgs: dict | None = 
                 ["EL-WHIT-T62-DIV", "EL-EIG-A14-DIV"], f["ib_a"], mb, "A"))
     for bid, bd in d.board_demand.items():
         if multi:
-            R.append(_r("EA4", "pass", f"board {bid}", f"{bid}: connected {bd.connected_a:.1f} A -> diversified demand {bd.total_a:.1f} A single-phase equiv. = {bd.kva:.1f} kVA (own circuits only)", ["EL-WHIT-T62-DIV"], bd.kva, None, "kVA"))
+            R.append(_r("EA4", "not_evaluated", f"board {bid}", f"{bid}: connected {bd.connected_a:.1f} A -> diversified demand {bd.total_a:.1f} A single-phase equiv. = {bd.kva:.1f} kVA (own circuits only); no board limit was given, so this is a reported figure, not a pass", ["EL-WHIT-T62-DIV"], bd.kva, None, "kVA"))
     for rc in reference_cases.run():
         if rc.criterion == "EA4":
             R.append(_r("EA4", "pass" if rc.ok else "fail", f"REF {rc.name}: {rc.quantity}", f"expected {rc.expected:g} {rc.unit}, achieved {rc.achieved:.4g} (error {rc.error_pct:.2f} % <= {rc.tol_pct:g} %)",

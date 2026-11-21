@@ -126,6 +126,7 @@ class House:
     wall_segs: list = field(default_factory=list)            # dicts level,x0,y0,x1,y1,t (wall centre lines); empty = no clearance check
     openings: list = field(default_factory=list)             # dicts id,kind,level,x0,y0,x1,y1,z0,z1 (windows, doors)
     dropped: list = field(default_factory=list)              # devices the placement could not site (reason strings)
+    keepouts: list = field(default_factory=list)             # dicts id,level,x0,y0,x1,y1: floor footprints (stair, furniture) no floor box may sit in
 
     def board_list(self) -> list[Board]:
         return self.boards or [Board("DB-GF", "GF", tuple(self.supply.board_xy))]

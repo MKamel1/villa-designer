@@ -152,6 +152,18 @@ def _seg_dist(px, py, ax, ay, bx, by) -> float:
     return math.hypot(px - (ax + t * dx), py - (ay + t * dy))
 
 
+def _on_segment(x: float, y: float, s: dict, end_tol: float = 50.0) -> bool:
+    """On the wall: the projection falls inside the segment (end_tol overshoot) and the perpendicular distance is within the wall half-thickness + tolerance."""
+    ax, ay, bx, by = s["x0"], s["y0"], s["x1"], s["y1"]
+    L = math.hypot(bx - ax, by - ay)
+    if L == 0:
+        return False
+    ux, uy = (bx - ax) / L, (by - ay) / L
+    al = (x - ax) * ux + (y - ay) * uy
+    perp = abs(-(x - ax) * uy + (y - ay) * ux)
+    return -end_tol <= al <= L + end_tol and perp <= s["t"] / 2.0 + WALL_TOL_MM
+
+
 CLEAR_MARGIN_MM = 100.0
 WALL_TOL_MM = 200.0
 SLIDE_STEP_MM = 150.0
@@ -162,7 +174,7 @@ def clearance(h: House, level: str, x: float, y: float, z: float) -> tuple[bool,
     """Wall-mounted device post-condition: on a wall element of its level and outside every window/door opening box."""
     if not h.wall_segs:
         return True, ""
-    if not any(s["level"] == level and _seg_dist(x, y, s["x0"], s["y0"], s["x1"], s["y1"]) <= s["t"] / 2.0 + WALL_TOL_MM for s in h.wall_segs):
+    if not any(s["level"] == level and _on_segment(x, y, s) for s in h.wall_segs):
         return False, "not on a wall element (open-plan edge or no wall in the model)"
     for o in h.openings:
         if o["level"] == level and o["x0"] - CLEAR_MARGIN_MM <= x <= o["x1"] + CLEAR_MARGIN_MM and o["y0"] - CLEAR_MARGIN_MM <= y <= o["y1"] + CLEAR_MARGIN_MM \
@@ -189,6 +201,16 @@ def slide_on_wall(h: House, r: Room, x: float, y: float, z: float):
                     return (px, py), f"moved {k * SLIDE_STEP_MM:.0f} mm along the wall ({why})"
         k += 1
     return None, why
+
+
+def _in_keepout(h: House, r: Room, x: float, y: float, margin: float = 100.0) -> str:
+    for k in h.keepouts:
+        if k["level"] == r.level and k["x0"] - margin <= x <= k["x1"] + margin and k["y0"] - margin <= y <= k["y1"] + margin:
+            return f"inside {k['id']}"
+    for f in h.furniture:
+        if f.room == r.id and f.rect[0] - margin <= x <= f.rect[2] + margin and f.rect[1] - margin <= y <= f.rect[3] + margin:
+            return f"inside furniture {f.id}"
+    return ""
 
 
 def nearest_clear_wall_point(h: House, r: Room, x: float, y: float, z: float, max_mm: float = 4000.0):
@@ -282,6 +304,10 @@ def place_devices(h: House) -> list[Device]:
                 # open-plan edge with no wall: a floor box 600 mm inside the room instead of a wall socket
                 W = min(room_walls(rooms_by_id[room]).values(), key=lambda w: abs(w.depth_of(x, y)))
                 bx, by = x + W.n[0] * 600.0, y + W.n[1] * 600.0
+                blocked = _in_keepout(h, rooms_by_id[room], bx, by)
+                if blocked:
+                    h.dropped.append(f"floor box ({rule}) in {room} at ({bx:.0f}, {by:.0f}) not placed: {blocked}")
+                    return
                 if point_in_room(rooms_by_id[room], bx, by):
                     n[0] += 1
                     params.update(free_standing=True, floor_box=True, relocated="floor box: no wall element on this edge")
@@ -395,8 +421,8 @@ def place_devices(h: House) -> list[Device]:
             kind = "cooker_unit" if e.kind == "cooker" else "fcu"
             add(kind, r.id, x, y, 600.0 if e.kind != "cooker" else WORKTOP_SOCKET_Z, "EA1-dedicated-cooker" if e.kind == "cooker" else "EA1-dedicated-appliance", serves=e.id)
         # general sockets: at least one double per free wall stretch, pitch <= 3 m (none in cupboard-sized rooms)
-        if (polygon_area_mm2(r) / 1e6) < 2.0:
-            continue
+        if (polygon_area_mm2(r) / 1e6) < 2.0 or r.kind == "stair":
+            continue                     # cupboard-sized rooms and stairs get no general sockets
         for wn, W in walls.items():
             L = W.length
             cnt = max(1, math.ceil(L / WALL_SOCKET_PITCH_MM))
