@@ -50,9 +50,9 @@ def render_site(els, spec, sheet, out_stem, *, page=1, pages=1, formats=("pdf", 
     cels = orient.to_client(els)
     px0, py0, px1, py1 = plot_rect(cels)
     # window (client frame mm): the plot with street, the sister's half, and the neighbours' near faces
-    wx0, wy0, wx1, wy1 = px0 - 3000, py0 - 5000, px1 + 9000, py1 + 8000
+    wx0, wy0, wx1, wy1 = px0 - 3000, py0 - 2500, px1 + 9000, py1 + 3500
     sh = plans._Sheet(0, 0, wx0, wy0, paper=paper, scale=scale)
-    sh.ox = plans.LEFT + 70
+    sh.ox = plans.LEFT + 14
     sh.oy = plans.EDGE + (paper[1] - 2 * plans.EDGE - (wy1 - wy0) / scale) / 2 - 6
     ax = sh.ax
     rep = {"sheet": sheet["no"], "kind": "site", "frame": "client-north-up", "scale": scale}
@@ -73,7 +73,7 @@ def render_site(els, spec, sheet, out_stem, *, page=1, pages=1, formats=("pdf", 
         if w == "street":
             poly(_box_poly(e), fc="#d8d8d8", ec="none", zorder=1)
             c = sh.p(e.placement[0], e.placement[1])
-            sh.text(c, "STREET (width ASSUMED)", size=5, color="#555555")
+            sh.text(sh.p(e.placement[0], py1 + 1800), "STREET (width ASSUMED)", size=7, color="#555555")
     # sunken yard / gardens
     gardens = [e for e in cels if e.kind == "garden"]
     for g in gardens:
@@ -91,7 +91,7 @@ def render_site(els, spec, sheet, out_stem, *, page=1, pages=1, formats=("pdf", 
             heights[e.id] = h
         elif w == "sister" and e.id == "ctx-sister":
             poly(_box_poly(e), fc="#e0e0e0", ec="#555555", lw=standard.lw("ctx", scale), hatch="////", zorder=2)
-            sh.text(sh.p(*e.placement[:2]), "SISTER VILLA + apartment\n%.1f m high (not ours)" % ((z1 - z0) / 1000.0), size=5, color="#333333")
+            sh.text(sh.p(e.placement[0], e.placement[1] + e.size[1] * 0.32), "SISTER VILLA + apartment\n%.1f m high (not ours)" % ((z1 - z0) / 1000.0), size=7, color="#333333", bg=True)
         elif w == "core":
             poly(_box_poly(e), fc="#f2f2f2", ec="#888888", lw=standard.lw("ctx", scale), zorder=2)
         elif w == "entrance":
@@ -112,6 +112,7 @@ def render_site(els, spec, sheet, out_stem, *, page=1, pages=1, formats=("pdf", 
             ax.add_patch(Circle(sh.p(*e.placement[:2]), r, fc="#9ccc84", ec="#4c7a34", lw=0.12, alpha=0.7, zorder=3))
     # apartment above: dashed footprint of the GF walls
     geo_gf = plans._level_geometry(cels, "GF")
+    bx0_, by0_, bx1_, by1_ = geo_gf["bbox"]
     geo_b = plans._level_geometry(cels, "B")
     for w in geo_b["walls"]:
         poly(plans._wall_poly(w.params), fc="#cccccc", ec="#555555", lw=standard.lw("proj", scale), zorder=5)
@@ -121,6 +122,20 @@ def render_site(els, spec, sheet, out_stem, *, page=1, pages=1, formats=("pdf", 
         keep = bool(c.params.get("existing_id"))
         ax.add_patch(Rectangle(sh.p(c.placement[0] - c.size[0] / 2, c.placement[1] - c.size[1] / 2), c.size[0] / scale, c.size[1] / scale,
                                fc="#d9c3f0" if keep else "#444", ec="#6a1b9a", lw=0.3, hatch="xxxx", zorder=7))
+    # structural grid (same lines and letters/numbers as the plans), drawn over the villa only
+    g = plans.grid_lines(cels)
+    gx_, gy_ = [v for v in g["x"] if bx0_ - 300 <= v <= bx1_ + 300], [v for v in g["y"] if by0_ - 300 <= v <= by1_ + 300]
+    for i, x_ in enumerate(gx_):
+        a_, b_ = sh.p(x_, by0_ - 3 * scale), sh.p(x_, by1_ + 3 * scale)
+        sh.line(a_, b_, lw=0.12, ls=(0, (8, 2, 1, 2)), z=8, color="#c0392b")
+        ax.add_patch(Circle((b_[0], b_[1] + 3.2), 3.0, fc="white", ec="#c0392b", lw=0.3, zorder=9))
+        sh.text((b_[0], b_[1] + 3.2), "ABCDEFGHJK"[i], size=7, color="#c0392b", z=10)
+    for i, y_ in enumerate(gy_):
+        a_, b_ = sh.p(bx0_ - 3 * scale, y_), sh.p(bx1_ + 3 * scale, y_)
+        sh.line(a_, b_, lw=0.12, ls=(0, (8, 2, 1, 2)), z=8, color="#c0392b")
+        ax.add_patch(Circle((a_[0] - 3.2, a_[1]), 3.0, fc="white", ec="#c0392b", lw=0.3, zorder=9))
+        sh.text((a_[0] - 3.2, a_[1]), str(i + 1), size=7, color="#c0392b", z=10)
+    rep["grid"] = {"x": gx_, "y": gy_}
     sb = setbacks(els)
     bx = [v for w in geo_gf["walls"] for v in (w.params["x0_mm"], w.params["x1_mm"])]
     by = [v for w in geo_gf["walls"] for v in (w.params["y0_mm"], w.params["y1_mm"])]
@@ -138,8 +153,25 @@ def render_site(els, spec, sheet, out_stem, *, page=1, pages=1, formats=("pdf", 
              "Street facade faces true azimuth 290 degrees; site coordinates are placeholders (spec/villa-site.yaml).",
              "Kept existing columns: purple cross-hatch. Neighbours and sister villa are ASSUMED boxes (brief), not surveyed.",
              "Set-backs are from the GF wall centre-lines to the plot line (fence outer face); the basement yard retaining walls run closer."]
-    for i, t in enumerate(notes):
-        sh.text((plans.LEFT + 6, plans.EDGE + 18 - i * 4.2), t, size=4.2, ha="left")
+    # right-hand column: legend, set-back table, notes (the plan itself fills the left; the column keeps text at print size)
+    import textwrap
+    from . import layers as L
+    xr = sh.ox + (wx1 - wx0) / scale + 14
+    y = paper[1] - plans.EDGE - 30
+    yb = L.legend_box(sh, xr, y, "Legend", [("#d8d8d8", "street (width ASSUMED)"), ("#999999", "fence / yard wall (plot line = fence outer face)"),
+                                            ("#cfe8c4", "garden / sunken yard"), ("#ececec", "neighbour (ASSUMED box)"),
+                                            ("#e0e0e0", "sister villa + apartment (ASSUMED)"), ("#222222", "our villa, GF walls"),
+                                            ("#d9c3f0", "kept existing column")])
+    yb = L.text_table(sh, xr, yb - 8, "Set-backs to the plot line (GF wall centre-lines)", ["side", "m"],
+                      [[{"N": "North (street)", "E": "East", "S": "South", "W": "West"}[k], "%.2f" % v] for k, v in sb.items()], [50, 20], size=9, pitch=6.0)
+    yb -= 6
+    sh.text((xr, yb), "Notes", size=9, ha="left", weight="bold")
+    yb -= 6
+    for t in notes:
+        for ln in textwrap.wrap(t, 62):
+            sh.text((xr, yb), ln, size=7, ha="left")
+            yb -= 4.4
+        yb -= 1.5
     rep["setbacks_m"] = {k: round(v, 3) for k, v in sb.items()}
     rep["neighbour_heights_m"] = heights
     rep["plot_mm"] = [px0, py0, px1, py1]

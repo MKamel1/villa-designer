@@ -40,7 +40,7 @@ def test_swing_hinge_follows_authored_handing(els):
     spec = {"project": {"project": "p", "owner": None, "address": "", "engineer": None, "syndicate_no": None,
                         "date": "d", "revision": "P01", "revision_location": ""}, "design": "D1",
             "levels": {"GF": {"ffl_revit_mm": 1200}}}
-    rep = plans.render_plan(els, spec, s, "/tmp/rv2-test/gf", formats=("png",))
+    rep = plans.render_plan(els, spec, s, "/tmp/rv2-test/gf", formats=("png",))["plans"][0]
     cel = {e.id: e for e in orient.to_client(els)}
     assert rep["swings"]
     for sw in rep["swings"]:

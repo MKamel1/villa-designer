@@ -29,35 +29,35 @@ PROJECT = {
 }
 
 # kind: plan | elevation | section | schedule | cover; `generated_by`: which producer can make it today.
-A2, A3 = "A2 landscape", "A3 landscape"
+A1, A2, A3 = "A1 landscape", "A2 landscape", "A3 landscape"
+# Composition rule (lead review 2026-11-21, plan-row RV2 fix 1): the paper is the smallest ISO A size on which the view set
+# fits at a standard scale (1:20, 1:50, 1:100), the views fill the drawing area (sheetqa.fill_ratio >= 0.60) and printed text
+# stays at or above 1.8 mm cap height (room names 2.5 mm). Both floor plans share one sheet at 1:50.
 SHEETS = [
     {"no": "A-001", "kind": "cover", "level": None, "scale": "NTS", "views": ["sheet index", "legend", "title block key"]},
-    {"no": "A-100", "kind": "site", "level": "SITE", "scale": "1:150", "paper": A2, "views": ["Site plan with context"]},
-    {"no": "A-101", "kind": "plan", "variant": "ga", "level": "B", "scale": "1:100", "paper": A2, "views": ["GA plan B -1.80"]},
-    {"no": "A-102", "kind": "plan", "variant": "ga", "level": "GF", "scale": "1:100", "paper": A2, "views": ["GA plan GF +1.20"]},
-    {"no": "A-111", "kind": "plan", "variant": "furnished", "level": "B", "scale": "1:100", "paper": A2, "views": ["Furnished plan B"]},
-    {"no": "A-112", "kind": "plan", "variant": "furnished", "level": "GF", "scale": "1:100", "paper": A2, "views": ["Furnished plan GF"]},
-    {"no": "A-121", "kind": "plan", "variant": "lighting", "level": "B", "scale": "1:100", "paper": A2, "views": ["Reflected ceiling and lighting plan B"]},
-    {"no": "A-122", "kind": "plan", "variant": "lighting", "level": "GF", "scale": "1:100", "paper": A2, "views": ["Reflected ceiling and lighting plan GF"]},
-    {"no": "A-131", "kind": "plan", "variant": "colorfill", "level": "B", "scale": "1:100", "paper": A2, "views": ["Room colour-fill plan B"]},
-    {"no": "A-132", "kind": "plan", "variant": "colorfill", "level": "GF", "scale": "1:100", "paper": A2, "views": ["Room colour-fill plan GF"]},
+    {"no": "A-100", "kind": "site", "level": "SITE", "scale": "1:100", "paper": A2, "views": ["Site plan with context"]},
+    {"no": "A-101", "kind": "plan", "variant": "ga", "level": "B+GF", "levels": ["B", "GF"], "scale": "1:50", "paper": A1, "views": ["GA plans B -1.80 and GF +1.20"]},
+    {"no": "A-111", "kind": "plan", "variant": "furnished", "level": "B+GF", "levels": ["B", "GF"], "scale": "1:50", "paper": A1, "views": ["Furnished plans B and GF"]},
+    {"no": "A-121", "kind": "plan", "variant": "lighting", "level": "B+GF", "levels": ["B", "GF"], "scale": "1:50", "paper": A1, "views": ["Reflected ceiling and lighting plans B and GF"]},
+    {"no": "A-131", "kind": "plan", "variant": "colorfill", "level": "B+GF", "levels": ["B", "GF"], "scale": "1:50", "paper": A1, "views": ["Room colour-fill plans B and GF"]},
     {"no": "A-141", "kind": "callout", "variant": "stair", "level": "B", "scale": "1:20", "paper": A2, "views": ["Stair plan B and GF, 1:20"]},
     {"no": "A-142", "kind": "callout", "variant": "wet", "level": "GF", "scale": "1:20", "paper": A2, "views": ["Wet rooms 1:20"]},
-    {"no": "A-201", "kind": "elevation", "level": None, "scale": "1:100", "paper": A2, "views": ["North elevation (street)", "South elevation"]},
-    {"no": "A-202", "kind": "elevation", "level": None, "scale": "1:100", "paper": A2, "views": ["East elevation", "West elevation"]},
-    {"no": "A-301", "kind": "section", "level": None, "scale": "1:50", "paper": A2, "views": ["Section 1 through the stair"]},
-    {"no": "A-302", "kind": "section", "level": None, "scale": "1:100", "paper": A2, "views": ["Section 2 through the sunken garden"]},
-    {"no": "A-601", "kind": "schedule", "level": None, "scale": "NTS",
+    {"no": "A-143", "kind": "callout", "variant": "yardwall", "level": "B", "scale": "1:25", "paper": A3, "views": ["NE yard wall, plan and elevation (client confirmation)"]},
+    {"no": "A-201", "kind": "elevation", "level": None, "scale": "1:50", "paper": A1, "views": ["East, North (street), West and South elevations"]},
+    {"no": "A-211", "kind": "interior", "level": "GF", "scale": "1:25", "paper": A1, "views": ["Interior elevations: parents' bedroom, kids bedrooms A and B"]},
+    {"no": "A-301", "kind": "section", "level": None, "scale": "1:20", "paper": A1, "views": ["Section 1 through the stair"]},
+    {"no": "A-302", "kind": "section", "level": None, "scale": "1:50", "paper": A1, "views": ["Section 2 through the sunken garden", "Cross-sections 3, 4 and 5"]},
+    {"no": "A-601", "paper": A2, "kind": "schedule", "level": None, "scale": "NTS",
      "views": ["Door schedule", "Window schedule", "Room schedule"]},
-    {"no": "A-602", "kind": "schedule2", "variant": "finish", "level": None, "scale": "NTS", "views": ["Finish schedule"]},
-    {"no": "A-603", "kind": "schedule2", "variant": "furniture", "level": None, "scale": "NTS", "views": ["Furniture schedule"]},
-    {"no": "A-604", "kind": "schedule2", "variant": "luminaire", "level": None, "scale": "NTS", "views": ["Luminaire schedule"]},
+    {"no": "A-602", "paper": A3, "kind": "schedule2", "variant": "finish", "level": None, "scale": "NTS", "views": ["Finish schedule"]},
+    {"no": "A-603", "paper": A2, "kind": "schedule2", "variant": "furniture", "level": None, "scale": "NTS", "views": ["Furniture schedule"]},
+    {"no": "A-604", "paper": A3, "kind": "schedule2", "variant": "luminaire", "level": None, "scale": "NTS", "views": ["Luminaire schedule"]},
 ]
 # L1 (apartment above) is not ours: no A-103 sheet (it is drawn dashed on the site plan only).
 
 # Everything is generated from the design model; sections and elevations additionally need a built scene (Blender line art).
 GENERATOR = {"cover": "model", "plan": "model", "site": "model", "callout": "model", "schedule": "model",
-             "schedule2": "model", "elevation": "lineart", "section": "lineart"}
+             "schedule2": "model", "interior": "model", "elevation": "lineart", "section": "lineart"}
 
 
 def expected_counts(elements: list[DesignElement]) -> dict:
@@ -86,7 +86,7 @@ def build(design: str = "D1", *, elements: list[DesignElement] | None = None, da
         rec = dict(s, title_en=t_en, title_ar=t_ar, generator=GENERATOR[s["kind"]])
         rec.setdefault("paper", "A3 landscape")
         if s["kind"] == "plan":
-            rec["expects"] = dict(exp["by_level"].get(lv, {}))
+            rec["expects"] = {l: dict(exp["by_level"].get(l, {})) for l in s["levels"]}
             rec["required_graphics"] = ["grids", "level marks", "room tags (name + area)", "door tags", "window tags",
                                         "overall, grid and opening dimension chains on every exterior wall",
                                         "north point", "graphic scale"]

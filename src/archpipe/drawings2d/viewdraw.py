@@ -12,21 +12,24 @@ from shapely.geometry import LineString, box
 from archpipe.contracts import DesignElement
 from archpipe.documents import plans
 
-from . import modelcut, orient, section, standard
+from . import modelcut, orient, section, stairdetail, standard
 from .section import View
 
 LEVEL_NAMES = [("B", "Basement FFL"), ("GF", "Ground floor FFL"), ("L1", "Apartment FFL (not ours)"), ("ROOF", "Roof slab top")]
 SKIN_MATERIALS = {"glass-clear", "door-oak", "alu-bronze", "black-metal"}
 
-SECTION_1 = View("Section 1: through the stair", "section", (0.0, 1.0, 0.0), (0.0, -27.95), (3.2, -3.5, 11.6, 6.4), "A-301", 50.0)
-SECTION_2 = View("Section 2: through the sunken garden", "section", (0.0, 1.0, 0.0), (0.0, -22.2), (-0.8, -3.6, 24.0, 6.8), "A-302", 100.0)
+SECTION_1 = View("Section 1: through the stair", "section", (0.0, 1.0, 0.0), (0.0, -27.95), (1.5, -3.5, 13.5, 6.4), "A-301", 20.0)
+SECTION_2 = View("Section 2: through the sunken garden", "section", (0.0, 1.0, 0.0), (0.0, -22.2), (-0.8, -3.5, 16.4, 6.4), "A-302", 50.0)
+SECTION_3 = View("Section 3: across kids bedroom A and the kitchen", "section", (1.0, 0.0, 0.0), (13.2, 0.0), (19.6, -3.5, 32.0, 6.4), "A-302", 50.0)
+SECTION_5 = View("Section 5: across the study and the lounge", "section", (1.0, 0.0, 0.0), (6.4, 0.0), (19.6, -3.5, 32.0, 6.4), "A-302", 50.0)
+SECTION_4 = View("Section 4: across the parents' bedroom and the living room", "section", (1.0, 0.0, 0.0), (20.6, 0.0), (19.6, -3.5, 32.0, 6.4), "A-302", 50.0)
 ELEVATIONS = [
-    View("North elevation (street)", "elevation", (1.0, 0.0, 0.0), (0.0, -26.0), (20.0, -3.5, 32.5, 6.8), "A-201", 100.0),
-    View("South elevation", "elevation", (-1.0, 0.0, 0.0), (30.0, -26.0), (-32.5, -3.5, -20.0, 6.8), "A-201", 100.0),
-    View("East elevation", "elevation", (0.0, -1.0, 0.0), (10.0, 0.0), (-24.5, -3.5, -3.0, 6.8), "A-202", 100.0),
-    View("West elevation", "elevation", (0.0, 1.0, 0.0), (10.0, -40.0), (3.0, -3.5, 24.5, 6.8), "A-202", 100.0),
+    View("East elevation", "elevation", (0.0, -1.0, 0.0), (10.0, 0.0), (-24.5, -3.5, -3.0, 6.8), "A-201", 50.0),
+    View("North elevation (street)", "elevation", (1.0, 0.0, 0.0), (0.0, -26.0), (20.0, -3.5, 32.5, 6.8), "A-201", 50.0),
+    View("West elevation", "elevation", (0.0, 1.0, 0.0), (10.0, -40.0), (3.0, -3.5, 24.5, 6.8), "A-201", 50.0),
+    View("South elevation", "elevation", (-1.0, 0.0, 0.0), (30.0, -26.0), (-32.5, -3.5, -20.0, 6.8), "A-201", 50.0),
 ]
-ALL_VIEWS = [SECTION_1, SECTION_2] + ELEVATIONS
+ALL_VIEWS = [SECTION_1, SECTION_2, SECTION_3, SECTION_4, SECTION_5] + ELEVATIONS
 
 
 def left_right(view: View) -> tuple[str, str]:
@@ -110,6 +113,8 @@ def draw_view(sh, built: dict, cut: dict, els, levels, view: View, origin_mm: tu
     for a, b, m in built["cut_segments"]:                 # scene skins at the cut that are not poche: glazing, door leaves
         if m in SKIN_MATERIALS:
             sh.line(P(*a), P(*b), lw=standard.lw("proj", sc), z=7)
+    if stairdetail.applies(els, view):
+        cnt["stair_detail"] = stairdetail.draw(sh, P, els, view, sc, standard.lw("cut", sc), standard.lw("proj", sc))
     # levels (Revit elevation = scene + 1.2), ground and street lines
     zlev = []
     for key, nm in LEVEL_NAMES:

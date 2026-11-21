@@ -17,9 +17,11 @@ _PENS = {
     500: {"cut": 0.18, "proj": 0.10, "beyond": 0.07, "ctx": 0.07, "dim": 0.07, "grid": 0.07, "hatch": 0.05, "fine": 0.05},
 }
 
-# text cap-height-ish sizes in pt (matplotlib font size) by role; same on every scale (text is paper-size, not model-size)
-TEXT = {"sheet_title": 9.0, "view_title": 7.5, "room_name": 5.2, "room_tag": 4.6, "small": 3.6, "dim": 3.8,
-        "tag": 3.4, "note": 4.6, "legend": 4.4, "schedule": 3.8, "level": 4.5}
+# Print legibility (house policy, not a quoted clause; lead review 2026-11-21). Text height = cap height = 0.729 x font
+# size (DejaVu Sans). Room names >= 2.5 mm cap (10 pt), everything else >= 1.8 mm cap (7 pt), at the printed scale.
+# `plans._Sheet.text` clamps every size to this floor so no caller can print smaller; sheetqa re-reads the PDF to prove it.
+TEXT_MIN_PT = 7.0
+ROOM_NAME_PT = 10.0
 
 DIM = {"tick_mm": 0.9, "ext_mm": 1.4, "offset_mm": 6.5, "eq_tol_mm": 1.0}
 

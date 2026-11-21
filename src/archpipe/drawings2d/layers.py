@@ -37,6 +37,41 @@ def colour_fill(sh, rooms: list[DesignElement]) -> list[tuple[str, str]]:
     return sorted(seen.items())
 
 
+CLEAR_FC = "#c8e6c9"
+
+
+def clearance_zones(sh, els: list[DesignElement], level: str, window=None) -> int:
+    """Free-space zones beside each piece from the catalogue's per-side clearances (front = local +Y, as the catalogue defines).
+    Legacy diagnostic values, unverified (catalogue.py header): the zones show what the old Revit sheets showed, they do not
+    certify a passage. Pieces the catalogue does not know, and sides with 0 mm, draw nothing."""
+    from archpipe import catalogue
+    n = 0
+    for e in els:
+        if e.kind != "furniture" or e.level != level or e.params.get("type") == "dressing":
+            continue
+        try:
+            ft = catalogue.get(e.params.get("type", ""))
+        except KeyError:
+            continue
+        w, d = e.size[0], e.size[1]
+        a = math.radians(e.rotation_deg)
+        c_, s_ = math.cos(a), math.sin(a)
+        for side, (ox, oy, zw, zd) in {"front": (0, d / 2, w, ft.clearance.get("front", 0)), "back": (0, -d / 2, w, ft.clearance.get("back", 0)),
+                                       "left": (-w / 2, 0, ft.clearance.get("left", 0), d), "right": (w / 2, 0, ft.clearance.get("right", 0), d)}.items():
+            amount = zd if side in ("front", "back") else zw
+            if amount <= 0:
+                continue
+            sx, sy = (1 if side in ("front", "right") else -1), 0
+            lx = ox + (sx * zw / 2 if side in ("left", "right") else 0)
+            ly = oy + ((1 if side == "front" else -1) * zd / 2 if side in ("front", "back") else 0)
+            cx = e.placement[0] + c_ * lx - s_ * ly
+            cy = e.placement[1] + s_ * lx + c_ * ly
+            sh.ax.add_patch(Polygon([sh.p(*q) for q in rect_poly(cx, cy, zw, zd, e.rotation_deg)], closed=True, fc=CLEAR_FC, ec="#4c8c4a",
+                                    lw=standard.lw("fine", sh.scale), alpha=0.6, ls=(0, (4, 2)), zorder=2))
+            n += 1
+    return n
+
+
 def furniture(sh, els: list[DesignElement], level: str, *, labels: bool = True, window=None) -> int:
     n = 0
     for e in els:
@@ -117,15 +152,38 @@ def luminaires(sh, els: list[DesignElement], level: str, rep: dict | None = None
     return sorted((k, v[0], v[1]) for k, v in legend.items())
 
 
-def legend_box(sh, x: float, y: float, title: str, rows: list[tuple[str, str]], *, w: float = 62, size: float = 3.8) -> float:
+def legend_box(sh, x: float, y: float, title: str, rows: list[tuple[str, str]], *, w: float = 62, size: float = 7.0, label_dx: float = 7.0) -> float:
     """Paper-mm legend: title then (swatch colour or text, label) rows. Returns the y below the box."""
-    sh.text((x, y), title, size=5.2, ha="left", weight="bold")
-    y -= 5
+    sh.text((x, y), title, size=9, ha="left", weight="bold")
+    y -= 6
     for sw, label in rows:
         if sw.startswith("#"):
-            sh.ax.add_patch(Rectangle((x, y - 1.6), 5, 3.2, fc=sw, ec="k", lw=0.2, zorder=6))
+            sh.ax.add_patch(Rectangle((x, y - 1.8), 5, 3.6, fc=sw, ec="k", lw=0.2, zorder=6))
         else:
-            sh.text((x + 2.5, y), sw, size=size, z=7)
-        sh.text((x + 7, y), label, size=size, ha="left")
-        y -= 4.2
+            sh.text((x + (2.5 if label_dx <= 7 else 0.0), y), sw, size=size, z=7, ha="center" if label_dx <= 7 else "left")
+        sh.text((x + label_dx, y), label, size=size, ha="left")
+        y -= 4.8
+    return y
+
+
+def text_table(sh, x: float, y: float, title: str, header: list[str], rows: list[list[str]], widths: list[float], *,
+               size: float = 7.0, pitch: float = 4.4, note: str = "") -> float:
+    """Paper-mm table in the left column of a sheet (cells are cut to their column width). Returns the y below it."""
+    sh.text((x, y), title, size=9, ha="left", weight="bold")
+    y -= 5.5
+    cx = x
+    for h, w in zip(header, widths):
+        sh.text((cx, y), h, size=size, ha="left", color="#333333")      # headers are not bold: bold = room names (sheetqa reads that)
+        cx += w
+    sh.line((x, y - 2.0), (x + sum(widths), y - 2.0), lw=0.3)
+    y -= pitch + 0.6
+    for r in rows:
+        cx = x
+        for c, w in zip(r, widths):
+            sh.text((cx, y), str(c)[: max(3, int(w / (size * 0.26)))], size=size, ha="left")
+            cx += w
+        y -= pitch
+    if note:
+        sh.text((x, y - 1), note, size=size, ha="left", color="#444444")
+        y -= pitch + 1
     return y

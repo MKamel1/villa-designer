@@ -23,8 +23,8 @@ def spec(els):
 
 def _render(els, spec, tmp, no="A-101", level="B", variant="ga"):
     sheet = next(s for s in spec["sheets"] if s["no"] == no)
-    rep = plans.render_plan(els, spec, sheet, tmp / no, formats=("pdf",), layers=variants.LAYERS[variant])
-    return rep, tmp / (no + ".pdf")
+    out = plans.render_plan(els, spec, sheet, tmp / no, formats=("pdf",), layers=variants.LAYERS[variant])
+    return next(p for p in out["plans"] if p["level"] == level), tmp / (no + ".pdf")
 
 
 def test_correct_plan_has_zero_violations(els, spec, tmp_path):
@@ -63,8 +63,8 @@ def test_hinge_check_catches_the_real_rotation_defect(els, spec, tmp_path, monke
 
 def test_all_eight_judgement_doors_flagged(els, spec, tmp_path):
     flagged = set()
-    for no, lv in (("A-101", "B"), ("A-102", "GF")):
-        rep, _ = _render(els, spec, tmp_path, no, lv)
+    for lv in ("B", "GF"):
+        rep, _ = _render(els, spec, tmp_path, "A-101", lv)
         flagged |= set(rep["handing_flags"])
     assert len(flagged) == 8 == sum(1 for e in els if e.kind == "door" and e.params.get("judgement"))
 
