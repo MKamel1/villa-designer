@@ -134,6 +134,11 @@ lanes:
     - scripts/benchmark_scene_build.py
     - tests/pipeline/**
     - docs/lanes/P2*.md
+  LV:  # independent lighting verification (may not edit the engine)
+    - src/archpipe/lightverify/**
+    - knowledge/lighting-verify/**
+    - tests/lightverify/**
+    - docs/lanes/LV*.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md
