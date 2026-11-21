@@ -95,7 +95,7 @@ class Completed(unittest.TestCase):
         for e in self.els:
             if e.kind in ("luminaire", "furniture", "plant"):
                 self.assertTrue(e.params.get("size_basis"), e.id)
-        self.assertEqual(self.by["lum-DL-lounge-01"].size[:2], (69.0, 69.0))
+        self.assertEqual(self.by["lum-DL-lounge-01"].size[:2], (76.0, 76.0))
         self.assertIn("IES", self.by["lum-DL-lounge-01"].params["size_basis"])
         books = self.by["prop-lounge-books"]
         self.assertGreater(books.size[0], 100)

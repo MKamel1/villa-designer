@@ -40,7 +40,10 @@ def _ies_ref(path: str) -> str:
     """Repository-relative photometry reference, never an absolute machine path."""
     p = str(path).replace("\\", "/")
     i = p.find("out/villa/render-d1/ies/")
-    return p[i:] if i >= 0 else p
+    if i >= 0:
+        return p[i:]
+    j = p.find("knowledge/lighting/ies/")          # L6c: the bound ERCO files live in the repo, not under out/
+    return p[j:] if j >= 0 else p
 
 
 def luminaires(fixtures) -> list[DesignElement]:

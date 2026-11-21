@@ -45,7 +45,8 @@ class FinishLayers(unittest.TestCase):
         before = {m['id']:m for m in self.before['meshes']}
         for frozen in migration['meshes']:
             # Bind the new failures to actual C5 geometry, beyond their names.
-            self.assertEqual(json.loads(json.dumps(before[frozen['id']])), frozen)
+            from archpipe.blender.element_ids import strip  # P2 identity fields are additive; the frozen fixture predates them
+            self.assertEqual(json.loads(json.dumps(strip(dict(before[frozen['id']])))), frozen)
         failures = surface_findings(self.before)
         failed_ids = {f.split(':')[0] for f in failures}
         self.assertTrue(expected <= failed_ids, expected-failed_ids)

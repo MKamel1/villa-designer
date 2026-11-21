@@ -475,9 +475,13 @@ def design(lay=None):
             level="GF", extra={"hang_from": ceiling_z("GF", room="stair-gf")}, why="globe cluster dropping into the stair void: lights the "
             "flight from above and marks the heart of the house", card="ies-res-stairs-50")
     Lg = rc["landing-gf"]
-    for y in (Lg[1] + 0.5, Lg[3] - 0.5):
-        add("PATH", "landing-gf", Lg[0] + 0.02, y, z=0.30, aim=(1, 0, -0.2), level="GF",
-            why="L6b LA13: low marker on the landing wall: lights the top treads of the flight and the landing (night layer)")
+    # Wall markers are +y-facing only (support_mounting hosts them on a +y shell face; the marker mesh is built in an xz
+    # plane). The west-wall position (x = Lg[0]+0.02, aim +x) had no such face: 01 passed only by hosting on a hidden
+    # wall end-cap 0.19 m away, 02 had nothing within 250 mm. The landing's one real +y face is the 0.285 m stub of its
+    # south wall west of the door (x 3.817..4.102), so both markers sit on it, aimed along the landing toward the flight.
+    for dx, aim in ((0.07, (1, 0.6, -0.2)), (0.20, (0.4, 1, -0.2))):
+        add("PATH", "landing-gf", Lg[0] + dx, Lg[1] + 0.02, z=0.30, aim=aim, level="GF",
+            why="L6b LA13: low marker on the landing's south wall stub: lights the top treads of the flight and the landing (night layer)")
     add("DL", "landing-gf", (Lg[0] + Lg[2]) / 2, (Lg[1] + Lg[3]) / 2, why="stair top", card="ies-res-stairs-50")
     Co = rc["corridor"]
     xs = [Co[0] + 0.9 + i * 1.75 for i in range(int((Co[2] - Co[0] - 1.0) / 1.75) + 1)]

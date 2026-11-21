@@ -50,7 +50,7 @@ from shapely.ops import unary_union
 from . import catalogue as cat
 from . import vocabulary as vocab
 from .codes import CodePack
-from .model import Furniture, Opening, Project, Room, Wall
+from .spec_model import Furniture, Opening, Project, Room, Wall
 from .units import mm_to_in
 
 # The occupancy groups come from the shared vocabulary. They used to be

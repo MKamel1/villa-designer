@@ -1,35 +1,55 @@
 {
  "schema": "derived-sizes/1",
  "luminaires": {
-  "iguzzini/LSEVO-AAHENX": {
+  "erco/31327": {
    "size_mm": [
-    31.0,
-    31.0,
-    0.0
+    1.0,
+    1.0,
+    1.0
    ],
    "shape": "circular",
-   "basis": "IES LM-63 luminous opening, diameter 31.0 mm",
-   "sha256": "ef4289a4803375c29d0e365ca6ac6a498be1177412ba36adc5d4b30556329b78"
+   "basis": "IES LM-63 luminous opening, diameter 1.0 mm",
+   "sha256": "9a228ddc905f7c26420cb9b00cea81726d895ff5f7f018d95696afa5faae1423"
   },
-  "iguzzini/LSEVO-AAIIA6": {
+  "erco/41321": {
    "size_mm": [
-    72.0,
-    72.0,
+    76.0,
+    76.0,
     0.0
    ],
    "shape": "circular",
-   "basis": "IES LM-63 luminous opening, diameter 72.0 mm",
-   "sha256": "4e714e7edb6eeb5ec1c20555f014e983e2bec970b77995df7c55d0dfde1a97be"
+   "basis": "IES LM-63 luminous opening, diameter 76.0 mm",
+   "sha256": "36a91d17cecd3e9cfdaae1631f3cf538d2c641aaf21d88358b270ea305dd77a0"
   },
-  "iguzzini/LSEVO-AAK3EW": {
+  "erco/41374": {
    "size_mm": [
-    69.0,
-    69.0,
+    50.0,
+    75.0,
+    0.0
+   ],
+   "shape": "rectangular",
+   "basis": "IES LM-63 luminous opening",
+   "sha256": "f3f9cf7fadd65f186221d339d70787c78ce8945b8d9ee17e22e2fb0c659fdde6"
+  },
+  "erco/50674": {
+   "size_mm": [
+    350.0,
+    115.0,
+    0.0
+   ],
+   "shape": "rectangular",
+   "basis": "IES LM-63 luminous opening",
+   "sha256": "c4632b9f10b02b438c5187974882d9789027f0817f2797072e5d267082a25978"
+  },
+  "erco/A9000028": {
+   "size_mm": [
+    77.0,
+    77.0,
     0.0
    ],
    "shape": "circular",
-   "basis": "IES LM-63 luminous opening, diameter 69.0 mm",
-   "sha256": "31600995704719a2f291977088d192e65ed9a9e4b7176d0d977adf6f56c364aa"
+   "basis": "IES LM-63 luminous opening, diameter 77.0 mm",
+   "sha256": "e8b89cd7fed3cb31d6a46c246e72fbaffe532b493446363305c88eeb0b6744c0"
   }
  },
  "assets": {

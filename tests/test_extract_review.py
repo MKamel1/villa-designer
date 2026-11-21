@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 from archpipe.from_extract import convert
-from archpipe.model import SpecError
+from archpipe.spec_model import SpecError
 from archpipe.review_extract import review_model
 
 

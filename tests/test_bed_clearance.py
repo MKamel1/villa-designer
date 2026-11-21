@@ -7,7 +7,7 @@ exactly like a wrong rule, and the temptation is to "fix" the rule.
 """
 import unittest
 
-from archpipe import catalogue, model, rules
+from archpipe import catalogue, spec_model as model, rules
 
 WALL = 200.0                     # wall thickness; walls centred on the room outline
 HALF = WALL / 2

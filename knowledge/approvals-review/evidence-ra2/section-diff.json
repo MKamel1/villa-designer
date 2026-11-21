@@ -1,0 +1,4067 @@
+{
+ "layout": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "specification": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [
+   "guards",
+   "stair_infill",
+   "stair_infill_spec",
+   "stair_nosing_overlap_mm",
+   "understair_cupboard",
+   "wall_joins_fixed"
+  ],
+  "removed": [],
+  "changed_ids": [
+   "balustrades",
+   "doors",
+   "stair",
+   "walls"
+  ]
+ },
+ "furniture": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [],
+  "removed": [],
+  "changed_ids": [
+   "stair-flight-store"
+  ]
+ },
+ "architecture": {
+  "changed": true,
+  "receipt_component": true,
+  "faces_removed": 400,
+  "faces_added": 400,
+  "removed_sample": [
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-6a7db1482428c96989ccb826",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-6a7db1482428c96989ccb826",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-6a7db1482428c96989ccb826",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-6a7db1482428c96989ccb826",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-6a7db1482428c96989ccb826",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-6a7db1482428c96989ccb826",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   }
+  ],
+  "added_sample": [
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-9938beb95b25ab269f9e0f25",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-9938beb95b25ab269f9e0f25",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "stair-party-wall",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-9938beb95b25ab269f9e0f25",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-9938beb95b25ab269f9e0f25",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge-nook"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "hall-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "glass-pane",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining-side"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "window-frame",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-9938beb95b25ab269f9e0f25",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "door-leaf",
+    "host": "door-leaf-9938beb95b25ab269f9e0f25",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "pantry"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "entry-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "stair-b"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "lounge"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "parents-dressing"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "corridor"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   }
+  ]
+ },
+ "meshes": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [],
+  "removed": [],
+  "changed_ids": [
+   "marker-PATH-corridor-07",
+   "marker-PATH-corridor-08",
+   "marker-PATH-corridor-09"
+  ]
+ },
+ "models": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "props": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "materials": {
+  "changed": false,
+  "receipt_component": true
+ }
+}

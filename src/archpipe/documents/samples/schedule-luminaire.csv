@@ -1,21 +1,21 @@
 mark,manufacturer,code,description,cct_k,lumens,watts,lm_per_w,count_B,count_GF,total_watts,type_id
-ADJ,iguzzini,LSEVO-AAHENX,flush trimless adjustable accent,2700.0,191.3,12.6,15.2,3,1,50.4,type-luminaire-iguzzini-LSEVO-AAHENX-ADJ-recessed-31-31
+ADJ,erco,A9000028,adjustable narrow-spot accent (track/recessed),2700.0,200.6,6.3,31.8,3,1,25.2,type-luminaire-erco-A9000028-ADJ-recessed-77-77
 BACK,,,LED strip inside glass-door book cabinet,2700,192.0,0.0,,12,0,0.0,type-luminaire---BACK-strip-480-0
 COVE,,,"LED strip in the cove, 2700 K",2700,1093.5,0.0,,4,1,0.0,type-luminaire---COVE-strip-2430-0
-DESK,,,"adjustable wall-arm desk lamp, shielded head, 2700 K",2700,168.0,0.0,,2,3,0.0,type-luminaire---DESK-task-lamp-0-0
-DL,iguzzini,LSEVO-AAK3EW,"flush trimless downlight, wide",2700.0,732.6,12.0,61.1,36,21,684.0,type-luminaire-iguzzini-LSEVO-AAK3EW-DL-recessed-69-69
-MIRROR,,,"backlit mirror halo, 2700 K",2700,70.0,0.0,,0,1,0.0,type-luminaire---MIRROR-strip-700-0
+DESK,erco,31327,"adjustable desk lamp, shielded head, 2700 K",2700.0,80.7,12.0,6.7,2,3,60.0,type-luminaire-erco-31327-DESK-task-lamp-1-1
+DL,erco,41321,"flush trimless downlight, wide",2700.0,1065.0,14.4,74.0,33,20,763.2,type-luminaire-erco-41321-DL-recessed-76-76
+MIRROR,,,"backlit mirror halo, 2700 K",2700,93.2,0.0,,0,1,0.0,type-luminaire---MIRROR-strip-700-0
 NL,,,night-light strip under the bed / plinth,2200,183.0,0.0,,2,2,0.0,type-luminaire---NL-strip-1830-0
 PATH,,,low recessed path marker (0.3 m AFF),2200,60.0,0.0,,0,5,0.0,type-luminaire---PATH-wall-marker-300-0
-PEN-GLOBE,,,opal glass globe pendant D300,2700,1080.8,0.0,,3,3,0.0,type-luminaire---PEN-GLOBE-pendant-300-300
-PEN-LIN,,,"linear pendant 1.6 m, direct/indirect",2700,727.2,0.0,,1,0,0.0,type-luminaire---PEN-LIN-pendant-1600-0
+PEN-GLOBE,,,opal glass globe pendant D300,2700,394.9,0.0,,3,3,0.0,type-luminaire---PEN-GLOBE-pendant-300-300
+PEN-LIN,erco,50674,"linear pendant 1.5 m, direct",2700.0,462.5,27.0,17.1,1,0,27.0,type-luminaire-erco-50674-PEN-LIN-pendant-350-115
 RAIL,,,LED strip over the hanging rail (in-wardrobe),2700,810.0,0.0,,0,2,0.0,type-luminaire---RAIL-strip-1620-0
-SCONCE,,,"vanity wall light, opal, each side of the mirror",2700,197.6,0.0,,0,2,0.0,type-luminaire---SCONCE-wall-0-0
+SCONCE,,,"vanity wall light, opal, each side of the mirror",2700,101.7,0.0,,0,2,0.0,type-luminaire---SCONCE-wall-0-0
 STEP,,,recessed step marker in the stair wall,2200,60.0,0.0,,3,0,0.0,type-luminaire---STEP-wall-marker-0-0
 STORE-BATTEN,,,"ASSUMED opal LED storage batten, 0.70 m per shelving bay",2700,630.0,0.0,,3,0,0.0,type-luminaire---STORE-BATTEN-strip-700-0
-SWING,,,"movable wall reading light: wall plate, articulated 0.6 m reach and rotating head (ASSUMED product; TODO swing-arm-product)",2700,117.6,0.0,,2,0,0.0,type-luminaire---SWING-wall-600-0
+SWING,,,"movable wall reading light: wall plate, articulated 0.6 m reach and rotating head (ASSUMED product; TODO swing-arm-product)",2700,113.7,0.0,,2,0,0.0,type-luminaire---SWING-wall-600-0
 TOE,,,toe-kick LED strip,2200,442.5,0.0,,1,2,0.0,type-luminaire---TOE-strip-2950-0
 VANITY-LIN,,,ASSUMED generic linear LED bar over the mirror,2700,100.0,0.0,,1,1,0.0,type-luminaire---VANITY-LIN-wall-500-0
 VSTRIP,,,vertical LED strip at a hanging-section edge (shadow-free dressing light),2700,900.0,0.0,,0,5,0.0,type-luminaire---VSTRIP-strip-1800-0
-WALL-READ,,,adjustable wall-mounted swing-arm reading light (ASSUMED product),2700,168.3,0.0,,0,2,0.0,type-luminaire---WALL-READ-wall-0-0
-WW,iguzzini,LSEVO-AAK3EW,flush trimless wall washer,2700.0,732.6,12.0,61.1,4,8,144.0,type-luminaire-iguzzini-LSEVO-AAK3EW-WW-recessed-69-69
+WALL-READ,,,adjustable wall-mounted swing-arm reading light (ASSUMED product),2700,167.8,0.0,,0,2,0.0,type-luminaire---WALL-READ-wall-0-0
+WW,erco,41374,flush trimless wall washer,2700.0,399.0,10.1,39.5,4,8,121.2,type-luminaire-erco-41374-WW-recessed-50-75

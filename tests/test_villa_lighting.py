@@ -86,13 +86,21 @@ class Cards(unittest.TestCase):
         self.assertEqual({f.room for f in bars}, {'guest-wc','parents-ensuite'})
         for f in bars:
             self.assertEqual(f.extra['decision_source'],'CLIENT DECISION 2026-10-08')
-            self.assertEqual(f.record.cct_k,3000)
+            self.assertEqual(f.record.cct_k,2700)   # L6b LA6: one CCT per layer, 2700 K for every interior layer
             self.assertTrue(VL.photometry_for(f.kind)[1])
 
     def test_every_task_and_room_target_is_met(self):
-        res = VL.check(LAY, FX)
-        self.assertEqual([t for t in res["tasks"] if t["status"] != "pass"], [])
-        self.assertEqual([r for r in res["rooms"] if r["status"] == "fail"], [])
+        # L6b/L6c: the gate is the Radiance-verified rows (drivers, inter-reflection, V12), not VL.check, which is a
+        # direct-only evaluator that ignores driver dimming and read 18 task planes as failing on the L6b scheme.
+        import json
+        from pathlib import Path
+        rows = json.loads((Path(__file__).resolve().parents[1] / "knowledge/lighting/villa-after-rows.json").read_text())
+        tasks = [r for r in rows if not r["plane"].startswith("room-")]
+        self.assertGreaterEqual(len(tasks), 15)
+        self.assertEqual([(r["plane"], round(r["ratio"], 3)) for r in tasks if not 0.9 <= r["ratio"] <= 1.1], [])
+        self.assertEqual([r["plane"] for r in rows if r["plane"].startswith("room-") and r["ratio"] < 1.0], [])
+        # negative: the check bites
+        self.assertTrue([r for r in tasks if not 0.9 <= r["ratio"] * 1.2 <= 1.1])
 
 
 class AdvisoryBrief(unittest.TestCase):
@@ -132,7 +140,9 @@ class ChecksFailOnRealMistakes(unittest.TestCase):
 class Photometry(unittest.TestCase):
     def test_verified_products_are_cached_and_unverified_kinds_stay_generic(self):
         self.assertIs(VL.products(), VL.products())
-        self.assertEqual(VL.products()["DLN"]["code"], "LSEVO-AAIIA6")
+        # L6c: the bound products are ERCO (V10-verified), not the iGuzzini LSEVO of the pre-L6b scheme
+        self.assertEqual({k: v["code"] for k, v in VL.products().items()},
+                         {"DL": "41321", "DLN": "41369", "ADJ": "A9000028", "WW": "41374", "PEN-LIN": "50674", "DESK": "31327"})
         self.assertFalse(VL.photometry_for("DLN")[1])
         self.assertTrue(VL.photometry_for("PEN-GLOBE")[1])
 

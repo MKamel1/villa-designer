@@ -1,0 +1,14 @@
+[
+ {
+  "item": "pantry-shelves-1",
+  "room": "pantry",
+  "against": "wall",
+  "gap_m": -0.0
+ },
+ {
+  "item": "pantry-shelves-2",
+  "room": "pantry",
+  "against": "wall",
+  "gap_m": -0.0
+ }
+]

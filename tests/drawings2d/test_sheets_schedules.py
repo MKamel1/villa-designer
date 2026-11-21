@@ -21,7 +21,7 @@ def test_schedules_cover_model(els):
     assert len(schedules.finish_schedule(els)) == 30
     assert len(schedules.furniture_schedule(els)) == sum(1 for e in els if e.kind == "furniture" and e.params.get("type") != "dressing")
     lum = schedules.luminaire_schedule(els)
-    assert sum(r["count_B"] + r["count_GF"] for r in lum) == 136 == sum(1 for e in els if e.kind == "luminaire")
+    assert sum(r["count_B"] + r["count_GF"] for r in lum) == 132 == sum(1 for e in els if e.kind == "luminaire")
     bad = [e for e in els if e.kind == "luminaire"][:1]
     assert schedules.luminaire_schedule(bad)[0]["count_B"] + schedules.luminaire_schedule(bad)[0]["count_GF"] == 1   # negative: no cross-count
 

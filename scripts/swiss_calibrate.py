@@ -34,7 +34,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from archpipe.execution_context import ContextError, project_context  # noqa: E402
 from shapely import affinity, wkt
 
-from archpipe import model, rules
+from archpipe import spec_model as model, rules
 
 MAP = {"BEDROOM": "bedroom_single", "ROOM": "bedroom_single", "LIVING_ROOM": "living", "LIVING_DINING": "living",
        "DINING": "dining", "OFFICE": "study", "KITCHEN": "kitchen"}
