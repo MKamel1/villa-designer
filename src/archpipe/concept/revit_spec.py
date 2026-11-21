@@ -467,7 +467,7 @@ def _d1_details(lay, spec):
 
 GUARD_H_EXTERNAL = 1.1                 # policy: 1100 mm at external drops (ADK Diagram 3.1 external balcony / roof edge)
 GUARD_H_INTERNAL = 1.1                 # the GF stair void keeps the 1.1 m of the scene detail (ADK minimum 0.9 m)
-CUPBOARD_DOOR = dict(width=0.70, height=1.50, x=7.05)     # G1 LS1: door of the cupboard under the lowest treads
+CUPBOARD_DOOR = dict(width=0.60, height=0.95, x=7.90)     # G1 LS1: door of the cupboard under the lowest treads
 
 
 def _g1_fixes(lay, spec):
@@ -558,7 +558,7 @@ def _g1_fixes(lay, spec):
         door=dict(id="door-understair-cupboard", wall=side["id"], x=d["x"], y=side["y0"], width=d["width"],
                   height=d["height"], operation="hinged", hinge_side="east", swing_into="lounge",
                   soffit_over_door_m=cover, level="B", rooms=["stair-b", "lounge"],
-                  basis="G1 LS1: 0.70 x 1.50 m leaf in the side wall, under treads 9-11 (soffit >= 1.53 m)"),
+                  basis="G1 LS1: 0.60 x 0.95 m low access leaf in the side wall under treads 6-8 (soffit >= 1.0 m), east of the lounge sofa (x 7.52) so its swing is clear"),
         basis="G1 LS1: enclose the space under the lowest %d treads (soffit < 2.0 m) as a cupboard: side wall, toe panel, "
               "end wall, one door; treads and riser infill stay open above" % len(steps))
 
