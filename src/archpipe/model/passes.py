@@ -15,6 +15,7 @@ Argument tokens (resolved at call time, inside the pass's own context manager):
 from __future__ import annotations
 
 import importlib
+import sys
 from contextlib import nullcontext
 from dataclasses import dataclass
 from pathlib import Path
@@ -99,6 +100,20 @@ def _resolve(token: str, ctx: dict):
     return ctx[token]
 
 
+PLATFORM_NOTE = (
+    "\n[lane P] Receipt-bound passes compare bit-exact float digests that were recorded on the workstation (Linux, "
+    "glibc libm). Another platform's maths library differs in the last bit (about 1e-15 m) in a few rotated pieces "
+    "(2026-11-20: furn-cinema-desk-chair-1-0/-2-0 on win32), so the guard trips although no input changed. "
+    "Build the scene on ai-workstation (docs/lanes/P-pipeline.md); do not regenerate the receipt for this.")
+
+
+def platform_hint(exc: Exception, pass_id: str) -> Exception:
+    """Add the platform explanation to a receipt-input mismatch raised off the recording platform."""
+    if sys.platform != "linux" and "inputs changed" in str(exc):
+        return ValueError("pass " + pass_id + ": " + str(exc) + PLATFORM_NOTE)
+    return exc
+
+
 def run_stage(name: str, scene, ctx: dict):
     """Run a stage's passes in order; returns the (possibly replaced) scene."""
     ctx = dict(ctx)
@@ -111,8 +126,14 @@ def run_stage(name: str, scene, ctx: dict):
         else:
             from ..concept.sanitary_relocation import input_revision
             cm = input_revision(p.input_revision)
-        with cm:
-            out = func(*[_resolve(a, ctx) for a in p.args])
+        try:
+            with cm:
+                out = func(*[_resolve(a, ctx) for a in p.args])
+        except ValueError as exc:
+            hinted = platform_hint(exc, p.id)
+            if hinted is exc:
+                raise
+            raise hinted from exc
         if p.returns_scene:
             scene = out
     return scene
