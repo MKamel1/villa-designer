@@ -65,3 +65,28 @@ def write(filename: str, cards: list[SourceCard]) -> Path:
     p = OUT / filename
     p.write_text(json.dumps([asdict(c) for c in cards], indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
     return p
+
+
+_pdf_cache: dict = {}
+
+
+def _printed_guess(raw: str) -> str:
+    lines = [ln.strip() for ln in raw.splitlines() if ln.strip() and "O N L I N E" not in ln]
+    for ln in lines[:4] + lines[-3:]:
+        if re.fullmatch(r"\d{1,4}", ln):
+            return ln
+    return "?"
+
+
+def pdf_quote(pdf_path, quote: str, page_hint: int | None = None):
+    """Find a quote in a local PDF (a web download). Returns (printed_guess, pdf_page_1based, normalised quote)."""
+    import pymupdf
+    key = str(pdf_path)
+    if key not in _pdf_cache:
+        d = pymupdf.open(key)
+        _pdf_cache[key] = [(i + 1, p.get_text()) for i, p in enumerate(d)]
+    q = norm(quote)
+    hits = [(i, _printed_guess(t)) for i, t in _pdf_cache[key] if q in norm(t) and (page_hint is None or i == page_hint)]
+    if len(hits) != 1:
+        raise ValueError(f"{pdf_path}: quote on {len(hits)} pages {hits[:5]}: {q[:80]!r}")
+    return hits[0][1], hits[0][0], q
