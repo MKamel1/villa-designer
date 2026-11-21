@@ -31,8 +31,8 @@ PROJECT = {
 # kind: plan | elevation | section | schedule | cover; `generated_by`: which producer can make it today.
 SHEETS = [
     {"no": "A-001", "kind": "cover", "level": None, "scale": "NTS", "views": ["sheet index", "legend", "title block key"]},
-    {"no": "A-101", "kind": "plan", "level": "B", "scale": "1:100", "views": ["GA plan B -1.80"]},
-    {"no": "A-102", "kind": "plan", "level": "GF", "scale": "1:100", "views": ["GA plan GF +1.20"]},
+    {"no": "A-101", "kind": "plan", "level": "B", "scale": "1:100", "paper": "A2 landscape", "views": ["GA plan B -1.80"]},
+    {"no": "A-102", "kind": "plan", "level": "GF", "scale": "1:100", "paper": "A2 landscape", "views": ["GA plan GF +1.20"]},
     {"no": "A-201", "kind": "elevation", "level": None, "scale": "1:100", "views": ["North elevation", "South elevation"]},
     {"no": "A-202", "kind": "elevation", "level": None, "scale": "1:100", "views": ["East elevation", "West elevation"]},
     {"no": "A-301", "kind": "section", "level": None, "scale": "1:50", "views": ["Section 1 through the stair"]},
@@ -69,7 +69,8 @@ def build(design: str = "D1", *, elements: list[DesignElement] | None = None, da
     for s in SHEETS:
         t_en, t_ar = names.SHEET_TITLES[s["no"]]
         lv = s["level"]
-        rec = dict(s, title_en=t_en, title_ar=t_ar, generator=GENERATOR[s["kind"]], paper="A3 landscape")
+        rec = dict(s, title_en=t_en, title_ar=t_ar, generator=GENERATOR[s["kind"]])
+        rec.setdefault("paper", "A3 landscape")
         if s["kind"] == "plan":
             rec["expects"] = dict(exp["by_level"].get(lv, {}))
             rec["required_graphics"] = ["grids", "level marks", "room tags (name + area)", "door tags", "window tags",
