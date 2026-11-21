@@ -1,0 +1,13 @@
+[Unit]
+Description=jobq: workstation job queue (GPU jobs serialised by ~/archpipe/locks/graphics.lock)
+
+[Service]
+ExecStart=%h/archpipe/bin/jobq daemon
+Restart=always
+RestartSec=5
+# Restarting or stopping the daemon must not kill running jobs; they are separate sessions that jobq re-adopts.
+KillMode=process
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target
