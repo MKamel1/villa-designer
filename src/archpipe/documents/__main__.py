@@ -12,6 +12,42 @@ from archpipe.drawings2d import callouts, scene_slim, siteplan, variants, viewsh
 from . import crosscheck, plans, schedules, sheetset, tables
 
 
+PREVIEWS = ("A-100-site", "A-112-plan", "A-301-section")
+
+
+def combine(out: Path, spec: dict) -> Path:
+    """One PDF of every produced sheet in sheet-number order, with bookmarks (print set)."""
+    try:
+        import pymupdf as fitz
+    except ImportError:
+        import fitz
+    doc = fitz.open()
+    toc = []
+    for s in spec["sheets"]:
+        f = out / ("%s-%s.pdf" % (s["no"], s["kind"]))
+        if f.exists():
+            toc.append([1, "%s  %s" % (s["no"], s["title_en"]), doc.page_count + 1])
+            doc.insert_pdf(fitz.open(str(f)))
+    doc.set_toc(toc)
+    dest = out / "D1-set.pdf"
+    doc.save(str(dest))
+    return dest
+
+
+def previews(out: Path, dest: Path) -> list[str]:
+    import shutil
+    dest.mkdir(parents=True, exist_ok=True)
+    for old in dest.glob("*.png"):
+        old.unlink()
+    got = []
+    for stem in PREVIEWS:
+        f = out / (stem + ".png")
+        if f.exists():
+            shutil.copy(f, dest / f.name)
+            got.append(f.name)
+    return got
+
+
 def run(design: str, out: Path, formats=("pdf", "svg", "png"), slim: dict | None = None) -> dict:
     els = model.load(design)
     spec = sheetset.build(design, elements=els)
@@ -79,6 +115,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--design", default="D1")
     ap.add_argument("--out", default="out/documents/D1")
+    ap.add_argument("--previews", help="copy 3 PNG previews of the set to this directory (committed samples)")
     ap.add_argument("--scene", help="built scene.json: enables the Line Art sections and elevations (needs Blender)")
     a = ap.parse_args()
     slim = None
@@ -88,6 +125,10 @@ def main() -> int:
         scene_slim.slim(a.scene, sp)
         slim = json.loads(sp.read_text(encoding="utf-8"))
     s = run(a.design, Path(a.out), slim=slim)
+    spec_ = s["spec"]
+    print("combined:", combine(Path(a.out), spec_))
+    if a.previews:
+        print("previews:", previews(Path(a.out), Path(a.previews)))
     print(json.dumps({k: s[k] for k in ("produced", "not_produced", "plan_qa")}, indent=1))
     print("SC1 ok=%s evaluated=%s" % (s["sc1"]["ok"], s["sc1"]["evaluated"]))
     for c in s["sc1"]["checks"]:

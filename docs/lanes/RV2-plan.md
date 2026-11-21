@@ -1,4 +1,4 @@
-# RV2 plan: Revit-free 2D drawings (status after step 1, 2026-11-21)
+# RV2 plan: Revit-free 2D drawings (status: steps 1-8 built, see RV2-handback.md and RV2-parity.md)
 
 Nothing in the sheet set has been changed yet. Step 1 was reconnaissance plus one proof; the proof and the findings are
 recorded here so the plan can be approved before building.

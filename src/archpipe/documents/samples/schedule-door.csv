@@ -1,19 +1,19 @@
-tag,id,level,from,to,width_mm,height_mm,operation,glazed_garden_door,host_wall
-D01,door-B-cinema-store-ramp,B,cinema (under the ramp; 2.0-2.65 m ceiling),store under the ramp (1.45-2.0 m clear),800,1880,hinged,False,wall-B-int-11
-D02,door-B-dining-yard,B,"dining (column bay 5-6, east window)",yard,2350,2200,sliding,True,wall-B-ext-04
-D03,door-B-entry-b-core,B,entrance (second core lobby),core,1000,2100,hinged,False,wall-B-ext-02
-D04,door-B-family-guest-wc,B,family / TV corner (open to the lounge),guest bathroom (under the deck),800,2100,hinged,False,wall-B-int-05
-D05,door-B-kitchen-dirty-kitchen,B,open kitchen (column bay 4-5),dirty kitchen + laundry (full-height window at the end),1200,2100,sliding,False,wall-B-int-05
-D06,door-B-living-yard,B,garden living,yard,2760,2200,sliding,True,wall-B-ext-04
-D07,door-B-living-yard-2,B,garden living,yard,2400,2200,sliding,True,wall-B-ext-18
-D08,door-B-lounge-cinema,B,lounge (street window floor to beam),cinema (under the ramp; 2.0-2.65 m ceiling),900,2100,hinged,False,wall-B-int-05
-D09,door-B-lounge-nook-pantry,B,lounge (under the stair's top landing),pantry / store,800,2100,hinged,False,wall-B-int-03
-D10,door-B-lounge-yard,B,lounge (street window floor to beam),yard,3410,2200,sliding,True,wall-B-ext-12
-D11,door-GF-corridor-kids-a,GF,hall,kids bedroom A,900,2100,hinged,False,wall-GF-int-23
-D12,door-GF-corridor-kids-b,GF,hall,kids bedroom B,900,2100,hinged,False,wall-GF-int-23
-D13,door-GF-corridor-parents-entry,GF,hall,parents' bedroom (entry),900,2100,pocket,False,wall-GF-int-23
-D14,door-GF-gallery-end-family-bath,GF,gallery (round the stair void to the bedrooms),family bathroom,800,2100,hinged,False,wall-GF-int-25
-D15,door-GF-landing-gf-core,GF,stair landing (core door),core,1000,2100,hinged,False,wall-GF-ext-21
-D16,door-GF-parents-bed-parents-dressing,GF,parents' bedroom,dressing (hanging both sides),800,2100,hinged,False,wall-GF-int-24
-D17,door-GF-parents-dressing-ext-parents-ensuite,GF,dressing (taken from the ensuite),en-suite,800,2100,hinged,False,wall-GF-int-20
-D18,door-GF-study-game-deck,GF,study / game room (open to the stair; sliding door to the deck),deck,1800,2100,sliding,False,wall-GF-ext-26
+tag,id,level,from,to,width_mm,height_mm,operation,handing,hinge_side,swing_into,to_confirm,glazed_garden_door,host_wall
+D01,door-B-cinema-store-ramp,B,cinema (under the ramp; 2.0-2.65 m ceiling),store under the ramp (1.45-2.0 m clear),800,1880,hinged,LH,west,store under the ramp (1.45-2.0 m clear),YES,False,wall-B-int-11
+D02,door-B-dining-yard,B,"dining (column bay 5-6, east window)",yard,2350,2200,sliding,n/a,,,,True,wall-B-ext-04
+D03,door-B-entry-b-core,B,entrance (second core lobby),core,1000,2100,hinged,LH,north,entrance (second core lobby),YES,False,wall-B-ext-02
+D04,door-B-family-guest-wc,B,family / TV corner (open to the lounge),guest bathroom (under the deck),800,2100,hinged,RH,south,guest bathroom (under the deck),,False,wall-B-int-05
+D05,door-B-kitchen-dirty-kitchen,B,open kitchen (column bay 4-5),dirty kitchen + laundry (full-height window at the end),1200,2100,sliding,n/a,,,,False,wall-B-int-05
+D06,door-B-living-yard,B,garden living,yard,2760,2200,sliding,n/a,,,,True,wall-B-ext-04
+D07,door-B-living-yard-2,B,garden living,yard,2400,2200,sliding,n/a,,,,True,wall-B-ext-18
+D08,door-B-lounge-cinema,B,lounge (street window floor to beam),cinema (under the ramp; 2.0-2.65 m ceiling),900,2100,hinged,RH,south,cinema (under the ramp; 2.0-2.65 m ceiling),YES,False,wall-B-int-05
+D09,door-B-lounge-nook-pantry,B,lounge (under the stair's top landing),pantry / store,800,2100,hinged,RH,south,lounge (under the stair's top landing),,False,wall-B-int-03
+D10,door-B-lounge-yard,B,lounge (street window floor to beam),yard,3710,2200,sliding,n/a,,,,True,wall-B-ext-12
+D11,door-GF-corridor-kids-a,GF,hall,kids bedroom A,900,2100,hinged,RH,south,kids bedroom A,YES,False,wall-GF-int-23
+D12,door-GF-corridor-kids-b,GF,hall,kids bedroom B,900,2100,hinged,LH,north,kids bedroom B,YES,False,wall-GF-int-23
+D13,door-GF-corridor-parents-entry,GF,hall,parents' bedroom (entry),900,2100,pocket,n/a,,,YES,False,wall-GF-int-23
+D14,door-GF-gallery-end-family-bath,GF,gallery (round the stair void to the bedrooms),family bathroom,800,2100,hinged,LH,north,family bathroom,YES,False,wall-GF-int-25
+D15,door-GF-landing-gf-core,GF,stair landing (core door),core,1000,2100,hinged,RH,north,core,,False,wall-GF-ext-21
+D16,door-GF-parents-bed-parents-dressing,GF,parents' bedroom,dressing (hanging both sides),800,2100,hinged,LH,south,dressing (hanging both sides),,False,wall-GF-int-24
+D17,door-GF-parents-dressing-ext-parents-ensuite,GF,dressing (taken from the ensuite),en-suite,800,2100,hinged,LH,south,en-suite,YES,False,wall-GF-int-20
+D18,door-GF-study-game-deck,GF,study / game room (open to the stair; sliding door to the deck),deck,1800,2100,sliding,n/a,,,,False,wall-GF-ext-26

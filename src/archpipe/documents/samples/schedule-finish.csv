@@ -1,0 +1,31 @@
+tag,level,name,floor,walls,ceiling,ceiling_kind,ceiling_mm
+R01,B,bar / library alcove (floor-to-beam garden window),travertine,plaster-warm-white,ceiling-white,flat,2700
+R02,B,cinema (under the ramp; 2.0-2.65 m ceiling),rug,taupe-fabric,ceiling-white,soffit-lining,2579
+R03,B,"dining (column bay 5-6, east window)",travertine,,ceiling-white,flat,2700
+R04,B,dining (party side),travertine,,ceiling-white,flat,2700
+R05,B,dirty kitchen + laundry (full-height window at the end),travertine,plaster-warm-white,ceiling-white,soffit-lining,2800
+R06,B,entrance (second core lobby),travertine,,ceiling-white,flat,2700
+R07,B,family / TV corner (open to the lounge),travertine,,ceiling-white,flat,2700
+R08,B,guest bathroom (under the deck),marble-bath,marble-bath,ceiling-white,soffit-lining,2650
+R09,B,hall at the stair foot,travertine,,ceiling-white,flat,2700
+R10,B,open kitchen (column bay 4-5),travertine,,ceiling-white,flat,2700
+R11,B,open kitchen (island),travertine,plaster-warm-white,ceiling-white,flat,2700
+R12,B,garden living,travertine,plaster-warm-white,ceiling-white,cove,2800
+R13,B,lounge (street window floor to beam),travertine,plaster-warm-white,ceiling-white,cove,2800
+R14,B,lounge (under the stair's top landing),travertine,,ceiling-white,flat,2700
+R15,B,pantry / store,travertine,plaster-warm-white,ceiling-white,flat,2700
+R16,B,"stair (straight, to the GF)",travertine,plaster-warm-white,ceiling-white,flat,2700
+R17,B,store under the ramp (1.45-2.0 m clear),travertine,plaster-warm-white,ceiling-white,soffit-lining,1674
+R18,GF,hall,oak-floor,plaster-warm-white,ceiling-white,flat,2700
+R19,GF,family bathroom,marble-bath,marble-bath,ceiling-white,flat,2700
+R20,GF,gallery (round the stair void to the bedrooms),oak-floor,plaster-warm-white,ceiling-white,flat,2700
+R21,GF,kids bedroom A,oak-floor,plaster-warm-white,ceiling-white,flat,2700
+R22,GF,kids bedroom B,oak-floor,plaster-warm-white,ceiling-white,flat,2700
+R23,GF,stair landing (core door),oak-floor,,ceiling-white,flat,2700
+R24,GF,parents' bedroom,oak-floor,plaster-warm-white,ceiling-white,flat,2700
+R25,GF,dressing (hanging both sides),oak-floor,plaster-warm-white,ceiling-white,flat,2700
+R26,GF,dressing (taken from the ensuite),oak-floor,plaster-warm-white,ceiling-white,flat,2700
+R27,GF,en-suite,marble-bath,marble-bath,ceiling-white,flat,2700
+R28,GF,parents' bedroom (entry),oak-floor,,ceiling-white,flat,2700
+R29,GF,stair void + gallery,,,,slab-soffit,2800
+R30,GF,study / game room (open to the stair; sliding door to the deck),oak-floor,plaster-warm-white,ceiling-white,flat,2700
