@@ -185,7 +185,53 @@ def _merge(segs):
 
 def build(lay):
     from .build_cache import derived
-    return derived("revit_spec", lay, lambda: _build(lay))
+    return derived("revit_spec", lay, lambda: _close_corner_gaps(_build(lay)))
+
+
+def _close_corner_gaps(spec):
+    """Wall cleanup (plan row I05): a wall that meets a perpendicular wall only corner-to-corner leaves a notch the size of
+    the other wall's thickness (D1: B-13/B-17 against the north core wall, GF-33/GF-34 against the GF north wall; found by
+    model.validate_rules). Each such end is lengthened across the notch, unless an existing column fills it (B-16 and
+    wall B-4 meet inside the column at 14.9-15.4 m). Fixed ends are listed in spec["wall_joins_fixed"]."""
+    import math
+    from .. import villa_env as E
+    from shapely.geometry import LineString, Point, box
+    from shapely.ops import unary_union
+    cols = unary_union([box(*(v / 1000 for v in c)) for c in E.COLUMNS])
+    walls = spec["walls"]
+
+    def slab(w):
+        return LineString([(w["x0"], w["y0"]), (w["x1"], w["y1"])]).buffer(w["thickness"] / 2, cap_style="flat")
+
+    fixed = []
+    for w in walls:
+        for end in ("1", "0"):
+            px, py = w["x" + end], w["y" + end]
+            qx, qy = w["x" + ("0" if end == "1" else "1")], w["y" + ("0" if end == "1" else "1")]
+            n = math.hypot(px - qx, py - qy)
+            if n == 0:
+                continue
+            ux, uy = (px - qx) / n, (py - qy) / n
+            me = slab(w)
+            for o in walls:
+                if o is w or o["level"] != w["level"]:
+                    continue
+                ox, oy = o["x1"] - o["x0"], o["y1"] - o["y0"]
+                on = math.hypot(ox, oy)
+                if abs(ux * ox / on + uy * oy / on) > 1e-6:          # only a perpendicular wall
+                    continue
+                touch = me.intersection(slab(o))
+                if touch.is_empty or touch.geom_type != "Point" or touch.distance(Point(px, py)) > w["thickness"] / 2 + 1e-6:
+                    continue
+                notch = LineString([(px, py), (px + ux * o["thickness"], py + uy * o["thickness"])]).buffer(
+                    w["thickness"] / 2, cap_style="flat")
+                if notch.difference(cols).area < 1e-6:
+                    continue                                          # a column fills the corner
+                w["x" + end], w["y" + end] = round(px + ux * o["thickness"], 3), round(py + uy * o["thickness"], 3)
+                fixed.append(dict(level=w["level"], end=[px, py], extended_by_m=o["thickness"], across=[o["x0"], o["y0"], o["x1"], o["y1"]]))
+                break
+    spec["wall_joins_fixed"] = fixed
+    return spec
 
 
 def _build(lay):

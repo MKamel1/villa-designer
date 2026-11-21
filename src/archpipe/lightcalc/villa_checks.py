@@ -266,3 +266,11 @@ def check_la12(v=None) -> list[CheckResult]:
     out.append(CheckResult("LA12", "L6", "not_evaluated", "villa/exterior/boundary-Ev",
                            message="boundary vertical illuminance and facade luminance need an exterior Radiance grid: not run"))
     return out
+
+
+def check_v12(drivers: dict, cap: float = 0.80) -> list[CheckResult]:
+    """V12: every tuned zone driver (fraction of maximum output) is <= cap, so commissioning has >= 25 % headroom."""
+    return [CheckResult("LA10", "L6", "pass" if d <= cap + 1e-9 else "fail", "villa/V12-driver/" + z, achieved=d, required=cap,
+                        unit="x max output", source_ids=("L6-POLICY-V12-headroom",),
+                        message="zone driver %.3f of maximum output vs <= %.2f (V12 headroom for commissioning)" % (d, cap))
+            for z, d in sorted(drivers.items())]

@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[3]
 LEVEL_Z = {"B": -3.0, "GF": 0.0}
 RHO = {"wall": 0.80, "ceiling": 0.85, "floor": 0.33}
 MF = 0.8
+AB = 12                              # result bounces; the convergence run doubles it (LV: ab 6 under-converged small bright rooms by up to 6 %)
 ASSUMED_LM_PER_W = 90.0            # ASSUMED efficacy of generic (unspecified) LED fittings, for the zone watts
 PROJECT_EDGE = 0.30                 # strip sample pitch in the calc (m)
 
@@ -50,8 +51,27 @@ def cluster_of(room: str) -> str:
 
 
 # ------------------------------------------------------------------ geometry helpers
+BRIDGE_GAP = 0.06     # m: rooms of one cluster this close across a wall gap are one closed volume (parents' bed / entry: 50 mm)
+
+
+def _bridges(rects):
+    """Rectangles filling gaps <= BRIDGE_GAP between rectangle pairs that overlap in the other axis, so a cluster whose
+    members are separated by a thin wall is one outline instead of silently keeping a single component."""
+    out = []
+    for i, a in enumerate(rects):
+        for b in rects[i + 1:]:
+            for ax in (0, 1):
+                o = 1 - ax
+                gap_lo, gap_hi = (a[ax + 2], b[ax]) if a[ax + 2] <= b[ax] else (b[ax + 2], a[ax])
+                lo, hi = max(a[o], b[o]), min(a[o + 2], b[o + 2])
+                if 0 < gap_hi - gap_lo <= BRIDGE_GAP and hi > lo:
+                    out.append((gap_lo, lo, gap_hi, hi) if ax == 0 else (lo, gap_lo, hi, gap_hi))
+    return out
+
+
 def union_rects(rects: list[tuple[float, float, float, float]]) -> list[Point]:
     """Outline of a union of axis-aligned rectangles that form one simply connected region (CCW, collinear points merged)."""
+    rects = rects + _bridges(rects)
     xs = sorted({round(v, 6) for r in rects for v in (r[0], r[2])})
     ys = sorted({round(v, 6) for r in rects for v in (r[1], r[3])})
 
@@ -80,6 +100,8 @@ def union_rects(rects: list[tuple[float, float, float, float]]) -> list[Point]:
     while cur != start:
         loop.append(cur)
         cur = edges[cur]
+    if len(loop) != len(edges):
+        raise ValueError("rectangles form more than one outline (gap > %.2f m or a hole)" % BRIDGE_GAP)
     out = []
     for k, p in enumerate(loop):          # drop collinear vertices
         a, b = loop[k - 1], loop[(k + 1) % len(loop)]
@@ -100,6 +122,8 @@ class Plane:
     scene: str = "Day"           # the scene that owns this card (LA10)
     what: str = ""
     spacing: float | None = None
+    exclude: tuple = ()
+
 
 
 # ------------------------------------------------------------------ fixtures -> placements
@@ -237,9 +261,9 @@ class Villa:
 
     def calc(self, name: str, planes: list[Plane], params: RadParams | None = None, fast: bool = False) -> RoomCalc:
         mine = [p for p in planes if cluster_of(p.room) == name]
-        tps = [TaskPlane(p.id, tuple(p.polygon), p.z, p.target, p.gauge, p.spacing) for p in mine]
+        tps = [TaskPlane(p.id, tuple(p.polygon), p.z, p.target, p.gauge, p.spacing, exclude=p.exclude) for p in mine]
         return RoomCalc(name, self.cluster_room(name), self.cluster_placements(name), tps,
-                        params or RadParams(ab=6, ab_extra=() if fast else (12,), workers=4), mf=MF)
+                        params or RadParams(ab=AB, ab_extra=() if fast else (2 * AB,), workers=4), mf=MF)
 
 
 def run_cluster(calc: RoomCalc, workdir: Path, host: str | None = None, reuse: bool = False):

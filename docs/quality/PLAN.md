@@ -162,3 +162,7 @@ Shared files are no longer hand-edited centrally:
   Revit use is the parity contract. Revit stays optional as a second check if the sign-in is restored.
 - 2026-11-21: Client equipment answers: gas hob, 7.4 kW EV charger, split AC in all habitable rooms.
 - 2026-11-21: Scene builds run on the workstation (Windows maths libraries differ in the last bit).
+- 2026-11-21: Lighting is verified independently (docs/quality/LIGHTING-VERIFICATION.md); a physical
+  check after purchase is too late (client), so V10 manufacturer lab data + V12 80 % dimmer headroom
+  carry the independent evidence. Client prefers luminaires from makers that publish full photometric
+  datasheets openly (lane LP), so every specified product is checked against lab data before purchase.

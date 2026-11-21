@@ -22,6 +22,10 @@ def main():
     parser.add_argument('--write-scene', type=Path,
                         help='build once with villa_render.write() (scene.json with provenance and IES files) instead of '
                              'comparing to a baseline; the metrics record the scene file sha256')
+    parser.add_argument('--strip-ids', action='store_true',
+                        help='remove the element-identity fields (element_ids, faces_by_element, element_id_basis) '
+                             'from every mesh before hashing/comparing: proves the ids changed nothing else')
+    parser.add_argument('--coverage', type=Path, help='write the element-id coverage by group (JSON) of the built scene')
     args = parser.parse_args()
     if args.write_scene:
         import sys
@@ -54,6 +58,17 @@ def main():
     if source_before['source_hash'] != source_after['source_hash']:
         print('Refusing benchmark: source changed during build; freeze the producer and retry.', flush=True)
         return 1
+    if args.coverage:
+        from archpipe.blender import element_ids as EID
+        args.coverage.write_text(json.dumps(EID.coverage(scene['meshes']), indent=2, sort_keys=True)+'\n')
+        args.coverage.with_suffix('.meshes.json').write_text(json.dumps(
+            [dict(id=m['id'], group=m['group'], faces=len(m['faces']), element_ids=m.get('element_ids'),
+                  basis=m.get('element_id_basis'), covered=EID.covered_faces(m), part_kind=m.get('part_kind'))
+             for m in scene['meshes']]))
+    if args.strip_ids:
+        from archpipe.blender import element_ids as EID
+        for mesh in scene['meshes']:
+            EID.strip(mesh)
     raw = json.dumps(scene, sort_keys=True).encode()
     digest = hashlib.sha256(raw).hexdigest()
     if args.record_baseline:
@@ -71,7 +86,7 @@ def main():
     if profile:
         profile.dump_stats(str(args.profile))
     result = dict(build_seconds=elapsed, profiled=bool(profile), scene_bytes=len(raw),
-                  sha256=digest, byte_identical=identical, source_hash=source_after['source_hash'])
+                  sha256=digest, byte_identical=identical, ids_stripped=args.strip_ids, source_hash=source_after['source_hash'])
     print(json.dumps(result, indent=2), flush=True)
     if args.metrics:
         args.metrics.write_text(json.dumps(result, indent=2)+'\n')

@@ -1,0 +1,127 @@
+{
+ "schema": "derived-sizes/1",
+ "luminaires": {
+  "iguzzini/LSEVO-AAHENX": {
+   "size_mm": [
+    31.0,
+    31.0,
+    0.0
+   ],
+   "shape": "circular",
+   "basis": "IES LM-63 luminous opening, diameter 31.0 mm",
+   "sha256": "ef4289a4803375c29d0e365ca6ac6a498be1177412ba36adc5d4b30556329b78"
+  },
+  "iguzzini/LSEVO-AAIIA6": {
+   "size_mm": [
+    72.0,
+    72.0,
+    0.0
+   ],
+   "shape": "circular",
+   "basis": "IES LM-63 luminous opening, diameter 72.0 mm",
+   "sha256": "4e714e7edb6eeb5ec1c20555f014e983e2bec970b77995df7c55d0dfde1a97be"
+  },
+  "iguzzini/LSEVO-AAK3EW": {
+   "size_mm": [
+    69.0,
+    69.0,
+    0.0
+   ],
+   "shape": "circular",
+   "basis": "IES LM-63 luminous opening, diameter 69.0 mm",
+   "sha256": "31600995704719a2f291977088d192e65ed9a9e4b7176d0d977adf6f56c364aa"
+  }
+ },
+ "assets": {
+  "book_encyclopedia_set_01": {
+   "size_mm": [
+    551.3,
+    163.1,
+    237.4
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "6c8c76560ca8e3c28516c0831545db903111bea069ce569579c2848a2e781bed"
+  },
+  "ceramic_vase_01": {
+   "size_mm": [
+    203.6,
+    203.6,
+    400.3
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "294f6c19f128ed5fa99225f02e00bdd5867cbc1f717fe98e8e09f3ae3191fb52"
+  },
+  "ceramic_vase_03": {
+   "size_mm": [
+    112.2,
+    112.2,
+    414.4
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "f01b35d72b3edf565961dcd1b2d81da90e8c6b51ccddbc62d7c54d9b8ca988b9"
+  },
+  "potted_plant_01": {
+   "size_mm": [
+    587.4,
+    633.6,
+    1350.2
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "41357028b8a7861c596cadc51c8793448c18c42e8d84d834ebe7993b5b30c924"
+  },
+  "potted_plant_02": {
+   "size_mm": [
+    701.2,
+    657.4,
+    841.2
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "80ab49cb61737244f50b805ddde3dd64e461b2a244817f8882e95a97c916d158"
+  },
+  "potted_plant_04": {
+   "size_mm": [
+    167.9,
+    184.8,
+    267.5
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "3f9502718be285a6614622774a6b19fd9014e2d5e05e6a08f822321dd157e6d5"
+  },
+  "sf_frangipani": {
+   "size_mm": [
+    3885.6,
+    3537.0,
+    2768.5
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "03d79d7028bf53cd330f1f5f3d55c592004db1a6714392f801a0dd853ee14d1a"
+  },
+  "sf_ixora": {
+   "size_mm": [
+    1222.7,
+    1244.4,
+    861.4
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "00f224e8f7c5047852a98baa61a46f7065a0474abee855067a89e92d059dc2ef"
+  },
+  "throw_pillows_01": {
+   "size_mm": [
+    1021.6,
+    627.5,
+    450.2
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "3869830ba5fb524efc0d2dbc6fb3d01162fa06fc70c367b50594ccf8b15a61f1"
+  },
+  "wooden_bowl_01": {
+   "size_mm": [
+    313.1,
+    309.1,
+    93.7
+   ],
+   "basis": "glTF POSITION bounding box (w, d, h = x, z, y-up), native scale",
+   "sha256": "9b2aadbd2aed3144cdbc30834052a8dd3536b3756a554cce99e9702c8adeb440"
+  }
+ }
+}

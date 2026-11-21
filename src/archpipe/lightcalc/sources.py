@@ -136,6 +136,11 @@ CARDS: dict[str, SourceCard] = {c.id: c for c in [
         document="L6b villa lighting policy", edition="2026-11", locator="LA10",
         quote="", value="each task card is met (+/-10 %, <= 1.5x) in the scene that owns it; night level <= 10 %",
         status="policy", url_or_path="docs/quality/a-plus-lighting-electrical.md LA10 (values are proposals, UNVERIFIED)"),
+    SourceCard(
+        id="L6-POLICY-V12-headroom",
+        document="L6b villa lighting policy", edition="2026-11", locator="V12",
+        quote="", value="every task card is met with its zone driver <= 0.80 of maximum output (>= 25 % upward headroom)",
+        status="policy", url_or_path="client decision: fittings are bought before any physical check (lead brief, 2026-11)"),
 ]}
 
 

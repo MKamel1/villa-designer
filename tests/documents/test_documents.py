@@ -41,7 +41,7 @@ def test_csv_md_roundtrip(els):
 
 def test_sheetset_spec_counts_and_missing_fields(spec, els):
     assert spec["schedules"]["door"] == 18
-    assert [s["no"] for s in spec["sheets"]][:3] == ["A-001", "A-101", "A-102"]
+    assert {"A-001", "A-100", "A-101", "A-102"} <= {s["no"] for s in spec["sheets"]}
     assert {"owner", "engineer", "syndicate_no"} == set(spec["missing_title_block_fields"])  # never invented
     plan = next(s for s in spec["sheets"] if s["no"] == "A-101")
     assert plan["expects"]["door"] == 10 and plan["expects"]["exterior_wall"] == 14
@@ -64,7 +64,7 @@ def reports(els, spec, tmp_path_factory):
     out = tmp_path_factory.mktemp("sheets")
     reps = []
     for s in spec["sheets"]:
-        if s["kind"] == "plan":
+        if s["kind"] == "plan" and s["variant"] == "ga":
             reps.append((plans.render_plan(els, spec, s, out / s["no"], formats=("pdf",)), out / (s["no"] + ".pdf")))
     return reps
 

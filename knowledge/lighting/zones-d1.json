@@ -1,0 +1,973 @@
+{
+ "schema": "archpipe-lighting-zones/1",
+ "design": "D1",
+ "contract": "contracts.LightingZone (v0.1)",
+ "units": {
+  "watts": "W installed at the commissioned driver output"
+ },
+ "assumptions": [
+  "generic fittings (strips, pendants, sconces, markers, desk lamps) at ASSUMED 90 lm/W",
+  "luminaire ids are the L2 model ids (lum-<fixture id>) of concept.villa_lighting.design()",
+  "dimming: LSEVO-only zones phase_cut (product datasheet: trailing/leading edge); other zones dali2 (ASSUMED driver choice); emergency markers switched (maintained, battery-backed, ASSUMED)",
+  "night layer on the stair and the basement route is published as `emergency`"
+ ],
+ "zones": [
+  {
+   "id": "Z-B-BAR-ALCOVE-ACCENT",
+   "room": "bar-alcove",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-BACK-bar-alcove-01",
+    "lum-BACK-bar-alcove-02",
+    "lum-BACK-bar-alcove-03",
+    "lum-BACK-bar-alcove-04",
+    "lum-BACK-bar-alcove-05",
+    "lum-BACK-bar-alcove-06",
+    "lum-BACK-bar-alcove-07",
+    "lum-BACK-bar-alcove-08"
+   ],
+   "watts": 45.0,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-BAR-ALCOVE-DAYBED-READING",
+   "room": "bar-alcove",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-SWING-bar-alcove-09",
+    "lum-SWING-bar-alcove-10"
+   ],
+   "watts": 2.6,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-CINEMA-ACCENT",
+   "room": "cinema",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-WW-cinema-03",
+    "lum-WW-cinema-04",
+    "lum-WW-cinema-05"
+   ],
+   "watts": 36.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-CINEMA-AMBIENT",
+   "room": "cinema",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-cinema-01",
+    "lum-DL-cinema-02"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-CINEMA-NIGHT",
+   "room": "cinema",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-NL-cinema-06"
+   ],
+   "watts": 6.0,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-CINEMA-TASK",
+   "room": "cinema",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DESK-cinema-07",
+    "lum-DESK-cinema-08"
+   ],
+   "watts": 3.7,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-DINING-SIDE-SIDEBOARD-ACCENT",
+   "room": "dining-side",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-ADJ-dining-side-01",
+    "lum-ADJ-dining-side-02"
+   ],
+   "watts": 25.2,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-DINING-TABLE-PENDANT",
+   "room": "dining",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-PEN-LIN-dining-01"
+   ],
+   "watts": 8.1,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-DIRTY-KITCHEN-AMBIENT",
+   "room": "dirty-kitchen",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-dirty-kitchen-06",
+    "lum-DL-dirty-kitchen-07"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-DIRTY-KITCHEN-RUN-TASK",
+   "room": "dirty-kitchen",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-dirty-kitchen-01",
+    "lum-DL-dirty-kitchen-02",
+    "lum-DL-dirty-kitchen-03",
+    "lum-DL-dirty-kitchen-04",
+    "lum-DL-dirty-kitchen-05"
+   ],
+   "watts": 44.2,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-ENTRY-B-ACCENT",
+   "room": "entry-b",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-WW-entry-b-02"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-ENTRY-B-AMBIENT",
+   "room": "entry-b",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-entry-b-01"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-FAMILY-AMBIENT",
+   "room": "family",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-family-01"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-FAMILY-NIGHT",
+   "room": "family",
+   "layer": "emergency",
+   "luminaire_ids": [
+    "lum-NL-family-02"
+   ],
+   "watts": 2.0,
+   "dimming": "switched"
+  },
+  {
+   "id": "Z-B-GUEST-WC-AMBIENT",
+   "room": "guest-wc",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-guest-wc-01"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-GUEST-WC-BASIN-TASK",
+   "room": "guest-wc",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-guest-wc-02"
+   ],
+   "watts": 5.8,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-GUEST-WC-TASK",
+   "room": "guest-wc",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-VANITY-LIN-guest-wc-03"
+   ],
+   "watts": 1.1,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-HALL-B-AMBIENT",
+   "room": "hall-b",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-hall-b-01"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-KITCHEN-AMBIENT",
+   "room": "kitchen",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-kitchen-10"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-KITCHEN-ISLAND-AMBIENT",
+   "room": "kitchen-island",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-kitchen-island-01",
+    "lum-DL-kitchen-island-02"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-KITCHEN-ISLAND-COOK",
+   "room": "kitchen",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-kitchen-05"
+   ],
+   "watts": 4.5,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-KITCHEN-ISLAND-PENDANTS",
+   "room": "kitchen",
+   "layer": "decorative",
+   "luminaire_ids": [
+    "lum-PEN-GLOBE-kitchen-01",
+    "lum-PEN-GLOBE-kitchen-02",
+    "lum-PEN-GLOBE-kitchen-03"
+   ],
+   "watts": 36.0,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-KITCHEN-ISLAND-PREP",
+   "room": "kitchen",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-kitchen-04",
+    "lum-DL-kitchen-06",
+    "lum-DL-kitchen-07"
+   ],
+   "watts": 26.2,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-KITCHEN-NIGHT",
+   "room": "kitchen",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-TOE-kitchen-11"
+   ],
+   "watts": 4.9,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-KITCHEN-RUN-TASK",
+   "room": "kitchen",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-kitchen-08",
+    "lum-DL-kitchen-09"
+   ],
+   "watts": 14.5,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-LIVING-AMBIENT",
+   "room": "living",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-living-03",
+    "lum-DL-living-04",
+    "lum-DL-living-05",
+    "lum-DL-living-06"
+   ],
+   "watts": 48.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-LIVING-DECORATIVE",
+   "room": "living",
+   "layer": "decorative",
+   "luminaire_ids": [
+    "lum-COVE-living-01",
+    "lum-COVE-living-02"
+   ],
+   "watts": 30.5,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-LOUNGE-AMBIENT",
+   "room": "lounge",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-lounge-01",
+    "lum-DL-lounge-02",
+    "lum-DL-lounge-03",
+    "lum-DL-lounge-04"
+   ],
+   "watts": 48.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-LOUNGE-ARMCHAIR-READING",
+   "room": "lounge",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-ADJ-lounge-09"
+   ],
+   "watts": 4.7,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-LOUNGE-DECORATIVE",
+   "room": "lounge",
+   "layer": "decorative",
+   "luminaire_ids": [
+    "lum-COVE-lounge-05",
+    "lum-COVE-lounge-06"
+   ],
+   "watts": 34.4,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-LOUNGE-NOOK-ACCENT",
+   "room": "lounge-nook",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-BACK-lounge-nook-01"
+   ],
+   "watts": 0.6,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-LOUNGE-NOOK-AMBIENT",
+   "room": "lounge-nook",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-lounge-nook-02"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-LOUNGE-ROUTE-NIGHT",
+   "room": "lounge",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-DL-lounge-07",
+    "lum-DL-lounge-08"
+   ],
+   "watts": 3.6,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-PANTRY-AMBIENT",
+   "room": "pantry",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-pantry-01",
+    "lum-DL-pantry-02"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-B-STAIR-B-ACCENT",
+   "room": "stair-b",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-BACK-stair-b-01",
+    "lum-BACK-stair-b-02",
+    "lum-BACK-stair-b-03"
+   ],
+   "watts": 7.1,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-B-STAIR-B-NIGHT",
+   "room": "stair-b",
+   "layer": "emergency",
+   "luminaire_ids": [
+    "lum-STEP-stair-b-04",
+    "lum-STEP-stair-b-05",
+    "lum-STEP-stair-b-06"
+   ],
+   "watts": 2.0,
+   "dimming": "switched"
+  },
+  {
+   "id": "Z-B-STORE-RAMP-TASK",
+   "room": "store-ramp",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-STORE-BATTEN-store-ramp-01",
+    "lum-STORE-BATTEN-store-ramp-02",
+    "lum-STORE-BATTEN-store-ramp-03"
+   ],
+   "watts": 21.0,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-CORRIDOR-ACCENT",
+   "room": "corridor",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-WW-corridor-01",
+    "lum-WW-corridor-02",
+    "lum-WW-corridor-03",
+    "lum-WW-corridor-04",
+    "lum-WW-corridor-05",
+    "lum-WW-corridor-06"
+   ],
+   "watts": 72.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-CORRIDOR-NIGHT",
+   "room": "corridor",
+   "layer": "emergency",
+   "luminaire_ids": [
+    "lum-PATH-corridor-07",
+    "lum-PATH-corridor-08",
+    "lum-PATH-corridor-09"
+   ],
+   "watts": 2.0,
+   "dimming": "switched"
+  },
+  {
+   "id": "Z-GF-FAMILY-BATH-AMBIENT",
+   "room": "family-bath",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-family-bath-01"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-FAMILY-BATH-BASIN-TASK",
+   "room": "family-bath",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-family-bath-03"
+   ],
+   "watts": 3.7,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-FAMILY-BATH-NIGHT",
+   "room": "family-bath",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-TOE-family-bath-06"
+   ],
+   "watts": 0.6,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-FAMILY-BATH-SHOWER",
+   "room": "family-bath",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-family-bath-02"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-FAMILY-BATH-TASK",
+   "room": "family-bath",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-SCONCE-family-bath-04",
+    "lum-SCONCE-family-bath-05"
+   ],
+   "watts": 4.4,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-GALLERY-END-AMBIENT",
+   "room": "gallery-end",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-gallery-end-01"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-KIDS-A-AMBIENT",
+   "room": "kids-a",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-kids-a-01",
+    "lum-DL-kids-a-02"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-KIDS-A-NIGHT",
+   "room": "kids-a",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-NL-kids-a-05"
+   ],
+   "watts": 0.9,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-KIDS-A-TASK",
+   "room": "kids-a",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DESK-kids-a-03",
+    "lum-DESK-kids-a-04"
+   ],
+   "watts": 7.1,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-KIDS-B-AMBIENT",
+   "room": "kids-b",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-kids-b-01",
+    "lum-DL-kids-b-02"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-KIDS-B-NIGHT",
+   "room": "kids-b",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-NL-kids-b-04"
+   ],
+   "watts": 2.1,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-KIDS-B-TASK",
+   "room": "kids-b",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DESK-kids-b-03"
+   ],
+   "watts": 3.6,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-LANDING-GF-AMBIENT",
+   "room": "landing-gf",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-landing-gf-03"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-LANDING-GF-NIGHT",
+   "room": "landing-gf",
+   "layer": "emergency",
+   "luminaire_ids": [
+    "lum-PATH-landing-gf-01",
+    "lum-PATH-landing-gf-02"
+   ],
+   "watts": 1.3,
+   "dimming": "switched"
+  },
+  {
+   "id": "Z-GF-PARENTS-BED-ACCENT",
+   "room": "parents-bed",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-ADJ-parents-bed-06"
+   ],
+   "watts": 12.6,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-PARENTS-BED-AMBIENT",
+   "room": "parents-bed",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-parents-bed-04",
+    "lum-DL-parents-bed-05"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-PARENTS-BED-BED-READING",
+   "room": "parents-bed",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-WALL-READ-parents-bed-02",
+    "lum-WALL-READ-parents-bed-03"
+   ],
+   "watts": 3.7,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-PARENTS-BED-DECORATIVE",
+   "room": "parents-bed",
+   "layer": "decorative",
+   "luminaire_ids": [
+    "lum-COVE-parents-bed-01"
+   ],
+   "watts": 10.5,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-PARENTS-DRESSING-AMBIENT",
+   "room": "parents-dressing",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-parents-dressing-06",
+    "lum-DL-parents-dressing-07"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-PARENTS-DRESSING-EXT-TASK",
+   "room": "parents-dressing-ext",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-VSTRIP-parents-dressing-ext-01",
+    "lum-VSTRIP-parents-dressing-ext-02"
+   ],
+   "watts": 20.0,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-PARENTS-DRESSING-TASK",
+   "room": "parents-dressing",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-RAIL-parents-dressing-01",
+    "lum-RAIL-parents-dressing-02",
+    "lum-VSTRIP-parents-dressing-03",
+    "lum-VSTRIP-parents-dressing-04",
+    "lum-VSTRIP-parents-dressing-05"
+   ],
+   "watts": 45.9,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-PARENTS-ENSUITE-ACCENT",
+   "room": "parents-ensuite",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-WW-parents-ensuite-01",
+    "lum-WW-parents-ensuite-02"
+   ],
+   "watts": 9.6,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-PARENTS-ENSUITE-BASIN-TASK",
+   "room": "parents-ensuite",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-parents-ensuite-03"
+   ],
+   "watts": 5.5,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-PARENTS-ENSUITE-NIGHT",
+   "room": "parents-ensuite",
+   "layer": "accent",
+   "luminaire_ids": [
+    "lum-TOE-parents-ensuite-07"
+   ],
+   "watts": 0.9,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-PARENTS-ENSUITE-TASK",
+   "room": "parents-ensuite",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-VANITY-LIN-parents-ensuite-04",
+    "lum-MIRROR-parents-ensuite-06"
+   ],
+   "watts": 1.2,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-PARENTS-ENTRY-AMBIENT",
+   "room": "parents-entry",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-parents-entry-01"
+   ],
+   "watts": 12.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-STAIR-GF-DECORATIVE",
+   "room": "stair-gf",
+   "layer": "decorative",
+   "luminaire_ids": [
+    "lum-PEN-GLOBE-stair-gf-01",
+    "lum-PEN-GLOBE-stair-gf-02",
+    "lum-PEN-GLOBE-stair-gf-03"
+   ],
+   "watts": 26.7,
+   "dimming": "dali2"
+  },
+  {
+   "id": "Z-GF-STUDY-GAME-AMBIENT",
+   "room": "study-game",
+   "layer": "ambient",
+   "luminaire_ids": [
+    "lum-DL-study-game-01",
+    "lum-DL-study-game-02"
+   ],
+   "watts": 24.0,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-STUDY-GAME-DESK-ADULT",
+   "room": "study-game",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-study-game-05",
+    "lum-DL-study-game-06"
+   ],
+   "watts": 11.8,
+   "dimming": "phase_cut"
+  },
+  {
+   "id": "Z-GF-STUDY-GAME-DESK-TASK",
+   "room": "study-game",
+   "layer": "task",
+   "luminaire_ids": [
+    "lum-DL-study-game-03",
+    "lum-DL-study-game-04"
+   ],
+   "watts": 16.0,
+   "dimming": "phase_cut"
+  }
+ ],
+ "scenes": {
+  "B-open": {
+   "Day": {
+    "*ambient": 1.0,
+    "island-pendants": 1.0,
+    "table-pendant": 1.0,
+    "*accent": 0.5
+   },
+   "Cook": {
+    "*ambient": 1.0,
+    "island-pendants": 0.3,
+    "island-prep": 1.0,
+    "island-cook": 1.0,
+    "run-task": 1.0
+   },
+   "Dinner": {
+    "table-pendant": 0.405,
+    "island-pendants": 0.3,
+    "*decorative": 0.3,
+    "living-ambient": 0.2,
+    "sideboard-accent": 1.0
+   },
+   "Evening": {
+    "*ambient": 0.4,
+    "*decorative": 0.7,
+    "*accent": 0.7,
+    "table-pendant": 0.3,
+    "island-pendants": 0.4
+   },
+   "Reading": {
+    "armchair-reading": 1.0,
+    "daybed-reading": 1.0,
+    "*ambient": 0.15,
+    "*decorative": 0.2
+   },
+   "Film": {
+    "lounge-decorative": 0.15,
+    "*night": 0.1
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "B-cinema": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   },
+   "Evening": {
+    "*ambient": 0.4,
+    "*accent": 0.7,
+    "*decorative": 0.7
+   },
+   "Film": {
+    "cinema-accent": 0.15,
+    "*night": 0.3
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "GF-circulation": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   },
+   "Evening": {
+    "*ambient": 0.4,
+    "*accent": 0.7,
+    "*decorative": 0.7
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "GF-kids-a": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   },
+   "Evening": {
+    "*ambient": 0.4,
+    "*accent": 0.7,
+    "*decorative": 0.7
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "GF-kids-b": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   },
+   "Evening": {
+    "*ambient": 0.4,
+    "*accent": 0.7,
+    "*decorative": 0.7
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "GF-parents-bed": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   },
+   "Evening": {
+    "*ambient": 0.4,
+    "*accent": 0.7,
+    "*decorative": 0.7
+   },
+   "Night": {
+    "*night": 0.1
+   },
+   "Reading": {
+    "bed-reading": 1.0,
+    "*decorative": 0.3
+   }
+  },
+  "GF-parents-dressing": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "GF-parents-ensuite": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 0.4,
+    "*decorative": 1.0
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "GF-family-bath": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "B-guest-wc": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   },
+   "Night": {
+    "*night": 0.1
+   }
+  },
+  "B-dirty-kitchen": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   }
+  },
+  "B-pantry": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   }
+  },
+  "B-store": {
+   "Day": {
+    "*ambient": 1.0,
+    "*task": 1.0,
+    "*accent": 1.0,
+    "*decorative": 1.0
+   }
+  }
+ }
+}

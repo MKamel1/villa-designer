@@ -139,6 +139,22 @@ lanes:
     - knowledge/lighting-verify/**
     - tests/lightverify/**
     - docs/lanes/LV*.md
+  RA:  # lead review of approval drift after G1/FIX1/M design changes; exposure digest ignores ids
+    - knowledge/c4-*-approvals.json
+    - knowledge/exposure-group*.json
+    - knowledge/exposure-groups.json
+    - knowledge/approvals-review/**
+    - src/archpipe/concept/final_mounting.py
+    - src/archpipe/concept/mounting_resume.py
+    - src/archpipe/concept/exterior_mounting.py
+    - src/archpipe/exposure_groups.py
+    - tests/approvals/**
+    - docs/lanes/RA*.md
+  LP:  # luminaire products with public photometric datasheets (V10 evidence)
+    - knowledge/lighting-products/**
+    - src/archpipe/luminaires/**
+    - tests/luminaires/**
+    - docs/lanes/LP*.md
   R:   # sourcing
     - knowledge/sources/**
     - docs/lanes/R*.md

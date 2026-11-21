@@ -162,7 +162,7 @@ def set_out(fixtures, rc, it, fp):
 
 
 def apply_drivers(fixtures):
-    """Set each fixture's driver output from its zone's solved factor d: a bound product gets extra['dimmer'] = d (<= 1);
+    """Set each fixture's driver output from its zone's solved factor d: a bound product gets extra['dimmer'] = d (> 1 raises);
     a generic fitting gets lumens scaled by d (it may exceed 1: the generic is sized, not dimmed)."""
     table = _drivers()
     for f in fixtures:
@@ -170,7 +170,10 @@ def apply_drivers(fixtures):
         if d is None:
             continue
         if f.kind in PRODUCTS or kind_has_product(f.kind):
-            f.extra["dimmer"] = round(min(1.0, d), 3)
+            if d > 1.0:      # a bound product cannot exceed its rated output: change the design, never clip the driver
+                raise ValueError("zone %s needs %.2f of the rated output of its bound product %s: add or upgrade fittings"
+                                 % (zone_id(f), d, f.kind))
+            f.extra["dimmer"] = round(d, 3)
         else:
             base = f.lm if f.lm is not None else (KINDS[f.kind]["lm_per_m"] * f.length if "lm_per_m" in KINDS[f.kind]
                                                    else KINDS[f.kind]["lm"])
@@ -343,9 +346,14 @@ def design(lay=None):
     prep_x = [(spans[0][0] + spans[0][1]) / 2, spans[-1][0] + (spans[-1][1] - spans[-1][0]) / 3,
               spans[-1][0] + 2 * (spans[-1][1] - spans[-1][0]) / 3]
     icx = (isl[0] + isl[2]) / 2
-    for x in (icx - (isl[2] - isl[0]) / 3, icx, icx + (isl[2] - isl[0]) / 3):          # the globes' axes, mirrored
-        add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line, on the opal globes' axes",
-            card="ies-res-kitchen-prep-500", zone="island-prep:task")
+    # L6b iteration 4: the induction zone (300 lx) lies inside the prep strip (500 lx), so the middle downlight (over the hob)
+    # is its own zone and a third prep downlight is added at the far end, away from the hob (the three on one driver gave
+    # 351 lx at the hob and 371 lx on the prep strip)
+    third = (isl[2] - isl[0]) / 3
+    for x, zn, cd in ((icx - third, "island-prep", "ies-res-kitchen-prep-500"), (icx, "island-cook", "ies-res-kitchen-cooktop-300"),
+                      (icx + third, "island-prep", "ies-res-kitchen-prep-500"), (isl[2] - 0.15, "island-prep", "ies-res-kitchen-prep-500")):
+        add("DL", "kitchen", x, isl[3] - 0.30, why="prep downlight on the prep line (the globes' axes, plus one at the far end); the middle "
+            "one is over the hob", card=cd, zone=zn + ":task")
     run = fp["k-run"]
     for x in ((run[0] + run[2]) / 2 - 0.45, (run[0] + run[2]) / 2 + 0.45):
         add("DL", "kitchen", x, run[3] - 0.65, why="650 mm from the wall face over the counter's front edge, 0.9 m pitch "
@@ -428,8 +436,9 @@ def design(lay=None):
     _sconces(add, "guest-wc", bs, lay, rc)
     DK = rc["dirty-kitchen"]
     dk = fp["dk-run"]
-    for x in (dk[0] + 0.5, dk[0] + 1.5, dk[0] + 2.5, dk[2] - 0.4):
-        add("DL", "dirty-kitchen", x, dk[1] - 0.1, why="over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm)",
+    n_dk = 5                                      # L6b V12: 4 needed 0.85 of driver output; 5 evenly spaced
+    for x in [dk[0] + 0.4 + i * (dk[2] - dk[0] - 0.8) / (n_dk - 1) for i in range(n_dk)]:
+        add("DL", "dirty-kitchen", x, dk[1] - 0.1, why="over the heavy-cooking run (L6b: DLN 1343 lm -> DL 732 lm; V12: 4 -> 5)",
             card="ies-res-kitchen-prep-500", zone="run-task:task")
     for x in (DK[0] + 1.2, DK[2] - 1.2):
         add("DL", "dirty-kitchen", x, DK[1] + 0.9, why="laundry and folding", card="ies-res-laundry-200")
@@ -463,15 +472,16 @@ def design(lay=None):
         add("DL", "study-game", d1[2] - 0.05, y, why="desk light over the shared homework desk's front edge "
             "(no shadow of the head); L6b: DL", card="ies-res-desk-400", zone="desk-task:task")
     d2 = fp["study-adult-desk"]
-    add("DL", "study-game", (d2[0] + d2[2]) / 2, d2[1] - 0.05, why="desk light over the adult desk; L6b: DL",
-        card="ies-res-desk-400", zone="desk-adult:task")
+    for x in ((d2[0] + d2[2]) / 2 - 0.35, (d2[0] + d2[2]) / 2 + 0.35):
+        add("DL", "study-game", x, d2[1] - 0.05, why="desk light over the adult desk; L6b: DL (V12: 1 -> 2, one needed 1.12 of driver output)",
+            card="ies-res-desk-400", zone="desk-adult:task")
     FB = rc["family-bath"]
     add("DL", "family-bath", (FB[0] + FB[2]) / 2 + 0.2, (FB[1] + FB[3]) / 2 - 0.3, why="bath ambient",
         card="ies-res-shower-50")
     sh = fp["fb-shower"]
     add("DL", "family-bath", (sh[0] + sh[2]) / 2, (sh[1] + sh[3]) / 2, why="shower (wet-rated); L6b: DL",
         card="ies-res-shower-50", zone="shower:task")
-    _sconces(add, "family-bath", fp["fb-basin"], lay, rc, counter=False)   # L6b: the two sconces light the basin; the counter downlight needed a 15 % driver
+    _sconces(add, "family-bath", fp["fb-basin"], lay, rc, counter=True)    # L6b V12: the two sconces alone needed 1.20 of driver output; the counter downlight is back
     bb = fp["fb-basin"]
     strip("TOE", "family-bath", (bb[2] + 0.02, bb[1] + 0.03), (bb[2] + 0.02, bb[3] - 0.03), 0.30, (0.3, 0, -1),
           level="GF", why="glow under the basin: night light")
@@ -481,7 +491,7 @@ def design(lay=None):
             add("DL", room, x, (K[1] + K[3]) / 2 - 0.3, why="bedroom ambient", card="ies-res-bedroom-general-50")
         for d in desks:
             q = fp[d]
-            add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF",
+            add("DESK", room, (q[0] + q[2]) / 2, (q[1] + q[3]) / 2 + 0.05, z=VL_DESK_Z, level="GF", **({"lm": 600} if room == "kids-b" else {}),   # V12: 450 lm needed 0.85
                 why="each child's own adjustable, shielded desk lamp (advisory KID-DESK): its light stays on the desk, "
                     "out of the sleep zone", card="ies-res-desk-400")
         q = fp[bed]
@@ -898,8 +908,8 @@ _NIGHT = {"*night": 0.1}
 SCENES = {
     "B-open": {
         "Day": {"*ambient": 1.0, "island-pendants": 1.0, "table-pendant": 1.0, "*accent": 0.5},
-        "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "run-task": 1.0},
-        "Dinner": {"table-pendant": 0.4, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
+        "Cook": {"*ambient": 1.0, "island-pendants": 0.3, "island-prep": 1.0, "island-cook": 1.0, "run-task": 1.0},
+        "Dinner": {"table-pendant": 0.405, "island-pendants": 0.3, "*decorative": 0.3, "living-ambient": 0.2,
                    "sideboard-accent": 1.0},
         "Evening": {"*ambient": 0.4, "*decorative": 0.7, "*accent": 0.7, "table-pendant": 0.3, "island-pendants": 0.4},
         "Reading": {"armchair-reading": 1.0, "daybed-reading": 1.0, "*ambient": 0.15, "*decorative": 0.2},

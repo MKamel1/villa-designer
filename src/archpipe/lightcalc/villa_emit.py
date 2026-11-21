@@ -92,6 +92,7 @@ def main(tag: str = "after", out_dir: str = "out/L6b"):
     res_list += VC.check_la6(v.fixtures) + VC.check_la8(v.fixtures) + VC.check_la9(v)
     res_list += VC.check_la13(v) + VC.check_la10_scenes(SCENES) + [VC.check_la10_night(v)]
     res_list += VC.check_la4(v, VC.sightlines(v)) + VC.check_la12(v)
+    res_list += VC.check_v12(json.loads((ROOT / "knowledge/lighting/zone-drivers.json").read_text(encoding="utf-8")))
     res_list.append(CheckResult("LA4", "L6", "not_evaluated", "villa/study-UGR",
                                 message="UGR (study, limit 19) needs a vertical-eye Radiance sensor for Lb and the CIE 190 worked "
                                         "example is not demonstrated (docs/lanes/L6-lighting-engine.md); luminance checks above run."))

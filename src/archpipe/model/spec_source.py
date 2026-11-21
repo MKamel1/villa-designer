@@ -45,25 +45,13 @@ def _slug(*parts) -> str:
 
 
 # ----------------------------------------------------------------------------------------------- rooms
-def revit_room_areas() -> dict[str, float]:
-    """Net room areas read back from Revit (out/villa/furnish-d1/revit/readback.json, option 0); {} when absent.
-
-    Override the location with ARCHPIPE_REVIT_READBACK. A room Revit did not read (area 0) is left out."""
-    import json
-    import os
-    from pathlib import Path
-    p = Path(os.environ.get("ARCHPIPE_REVIT_READBACK", "") or
-             Path(__file__).resolve().parents[3] / "out/villa/furnish-d1/revit/readback.json")
-    if not p.is_file():
-        return {}
-    data = json.loads(p.read_text(encoding="utf-8"))
-    return {r["id"]: r["area_m2"] for r in data["options"][0]["rooms"] if r.get("area_m2")}
-
-
-def rooms(lay, sp, finish: dict | None = None, revit_areas: dict | None = None) -> list[DesignElement]:
+def rooms(lay, sp, finish: dict | None = None, net: dict | None = None, reference: dict | None = None) -> list[DesignElement]:
     from ..concept import villa_furnish as F
     from ..concept import villa_lighting as VL
-    revit_areas = revit_room_areas() if revit_areas is None else revit_areas
+    from .. import villa_env as E
+    from . import geometry_net as GN
+    net = GN.net_areas(lay, sp, E.COLUMNS) if net is None else net           # from the built wall faces (no Revit input)
+    reference = GN.frozen_reference() if reference is None else reference   # frozen Revit areas: comparison only
     out = []
     for rid, r in lay["rooms"].items():
         lv = r["level"]
@@ -86,11 +74,13 @@ def rooms(lay, sp, finish: dict | None = None, revit_areas: dict | None = None) 
                 name=r.get("name", ""), occupancy=r.get("occupancy", ""), polygon_mm=poly,
                 area_m2=poly_area_m2(poly), gross_area_m2=poly_area_m2(poly), clear_height_mm=clear_h,
                 clear_rect_mm=rect_poly_mm(clear), clear_area_m2=poly_area_m2(rect_poly_mm(clear)),
-                revit_net_area_m2=revit_areas.get(rid),
-                net_area_m2=revit_areas.get(rid) or poly_area_m2(rect_poly_mm(clear)),
-                net_area_basis=("Revit read-back (finished-face room area)" if revit_areas.get(rid) else
-                                "clear rectangle: room outline inset by half-wall thicknesses (columns and finishes "
-                                "not deducted; typically 0.0-0.5 m2 above the Revit figure)"),
+                revit_net_area_m2=reference.get(rid),
+                net_area_m2=net[rid]["net_m2"], net_polygon_mm=net[rid]["polygon_mm"],
+                net_wall_deduction_m2=net[rid]["walls_m2"], net_column_deduction_m2=net[rid]["columns_m2"],
+                net_area_deviation_m2=(round(net[rid]["net_m2"] - reference[rid], 3) if rid in reference else None),
+                net_area_basis=("room rectangle minus built wall slabs (axis +/- half thickness), pocket buildouts and "
+                                "kept columns (geometry_net); finishes not deducted. Frozen Revit value in "
+                                "revit_net_area_m2 is the reference, not an input"),
                 part_of=r.get("part_of", ""), open_to=[b if a == rid else a for a, b in lay["links"] if rid in (a, b)],
                 ceiling_source="villa_lighting.ceiling_z at the room centre (sloped soffits under the ramp: centre value)",
             )))
