@@ -39,6 +39,29 @@ lane, equivalence proof, risk, and a decision (replace now / replace later / not
 | F1 | MEP | Electrical circuits/panels in the model | Planned (L7 E-12) | L7 engine outputs (schedules, SLD) + IFC export |
 | G1 | Automation | Revit API / MCP tools | Yes (pyRevit scripts) | Python on the model |
 
+## Additions from RV2 (2D capabilities not in its brief)
+
+| # | Capability | Decision (draft) |
+|---|---|---|
+| C7 | Schedules for every category (finish, fixture, luminaire, furniture), not just door/window/room | Replace now |
+| C8 | Material-driven cut and surface hatches (poché follows the material) | Replace now |
+| C9 | Colour-fill room/area plans with legends | Replace now |
+| C10 | Enlarged callouts: stair and wet rooms 1:20, wall sections, 1:5 details | Replace now (stair, wet rooms); details later |
+| C11 | View templates, line-weight table per scale, dimension styles incl. EQ | Replace now (one drawing standard) |
+| C12 | Spot elevations, ceiling-height and keynote tags | Replace now |
+| C13 | Stair UP/DN arrows with break lines; auto-updating section/elevation markers | Replace now |
+| C14 | Revision clouds, revision schedule, sheet/view lists, print sets | Replace later (single team) |
+| C15 | Linked-model overlays (neighbours, structure) and phasing graphics (kept existing columns) | Replace now (context and existing columns shown distinctly) |
+| C16 | Shade and sun-path overlays on elevations | Replace later (client prefers shade; useful) |
+
+**Defect found by RV2:** the existing model-generated plan sheets draw model +y up and label it north.
+Client convention: street side (model −x) is NORTH, +y EAST, +x SOUTH, −y WEST; the old Revit sheets have
+the street at the top. Fix: map model (x, y) → sheet (y, −x) once before drawing; true north only as a
+labelled secondary on the site plan.
+
+**Lead decisions (routine):** plans drawn north-up in the client convention; paper and scale set per
+sheet (A3 default; larger only where a drawing needs it, e.g. a full-length section).
+
 ## To complete after RV1 reports
 - Reconcile both lists; mark gaps.
 - Per row: decision, owner lane (RV1 checks / RV2 2D / RV3 exchange / existing lane), equivalence proof
