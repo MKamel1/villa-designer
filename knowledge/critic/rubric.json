@@ -1,5 +1,5 @@
 {
-  "version": "v1-tuning",
+  "version": "frozen-v1",
   "preregistration": {
     "note": "Written before any scoring of the 38 views. Policy numbers below are the docs/quality/a-plus-interior-renders.md section C values and are never tuned. What may change on the TUNING half only: the VLM prompt anchors, the choice of VLM among the pre-listed candidates, the pixel-level definitions marked tunable, and which VLM criteria gate (rule gate_selection). The held-out half is scored once after the rubric is frozen (version 'frozen-*').",
     "split_seed": "L3-2026-11-critic-v1",
@@ -34,8 +34,8 @@
       "qwen3.6:35b-a3b",
       "qwen3.8:27b-mtp-q4_K_M"
     ],
-    "model": "gemma4:31b",
-    "model_note": "pre-selected: only candidate that named the seam in the one probe image (v27, tuning half). Choose among candidates on tuning half only."
+    "model": "qwen3.8:27b-mtp-q4_K_M",
+    "model_note": "chosen on the tuning half by the summed gate-selection separation over R5,R7,R8,R9,R10,R11 (scripts/critic_model_compare.py): qwen3.8:27b-mtp-q4_K_M 1.43, gemma4:31b 1.17, qwen3.6:35b-a3b 1.10. The selection rule was written while the first 7 qwen3.8 rows had been read."
   },
   "scoring": {
     "scale": "0 = fail, 1 = warn, 2 = pass",
@@ -168,6 +168,20 @@
       "scope": "R13 pair rule",
       "why": "mixed order results are position bias; final = 2 only when both orders agree the render is at least as photographic, 0 only when both say clearly less, else 1 (text in vlm.pair_rule corrected to match the code written before scoring)",
       "evidence": "none needed; the code was written before the first scoring run"
+    },
+    {
+      "id": "A6",
+      "scope": "model and gating freeze",
+      "why": "model chosen by summed separation on the tuning half; gating set by the pre-registered rule",
+      "evidence": "tuning half, qwen3.8: recall on must_fail 10/10, false-fail on should_pass 1/3 (v34 B: R4 warn from window glare inside the subject box, plus an R10 warn)"
     }
-  ]
+  ],
+  "gating": {
+    "vlm": [
+      "R8",
+      "R10",
+      "R11"
+    ],
+    "selection": "rubric.scoring.gate_selection on the tuning half with qwen3.8 scores: R8 0.47, R10 0.47, R11 0.47 gate; R5 0.07, R7 -0.23, R9 0.20, R13 0.00 do not (they are still scored and reported)"
+  }
 }

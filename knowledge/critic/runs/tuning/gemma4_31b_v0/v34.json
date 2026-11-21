@@ -1,0 +1,41 @@
+{
+ "view": "v34",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 17.7,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The left window is completely overexposed, appearing as a flat white void."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The floor tiles in the foreground and right side of the frame exhibit a blotchy, unnatural texture with inconsistent scaling and smearing, lacking the definition of real stone or ceramic tiles."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The cushions on the sofa in the foreground and the pillows on the chair in the center are rigid, blocky wedges lacking believable soft form and organic folds."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The left chair's front leg is floating above the floor surface."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The back of the brown sofa in the foreground covers more than a quarter of the frame, blocking the view of the room."
+  },
+  "R11": {
+   "score": 0,
+   "evidence": "The camera is positioned behind the sofa, looking at the back of the furniture, which dominates the foreground of the frame."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are high-quality 3D renders. However, Image A exhibits several 'too perfect' characteristics typical of CGI: the lighting is extremely uni | Image A shows several signs of being a render: the lighting is very flat and lacks natural bounce, the textures on the wardrobe and bed linens are ove"
+  }
+ }
+}

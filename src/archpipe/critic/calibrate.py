@@ -57,8 +57,15 @@ def confusion(verdicts: dict[str, str], labels: dict, views: list[str]) -> dict:
 
 
 def load_vlm_dir(d: str | Path) -> dict[str, dict]:
-    out = {}
-    for p in sorted(Path(d).glob("v*.json")):
-        j = json.loads(p.read_text(encoding="utf-8"))
-        out[j["view"]] = j
+    """Load cached VLM results. `d` may be several directories joined by ',' (scores are merged per view)."""
+    out: dict[str, dict] = {}
+    for one in str(d).split(","):
+        for p in sorted(Path(one).glob("v*.json")):
+            j = json.loads(p.read_text(encoding="utf-8"))
+            if j["view"] in out:
+                out[j["view"]]["scores"].update(j["scores"])
+                if j.get("status") != "ok":
+                    out[j["view"]]["status"] = j["status"]
+            else:
+                out[j["view"]] = j
     return out

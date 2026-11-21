@@ -1,0 +1,17 @@
+{
+ "view": "v11",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.9,
+ "scores": {
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Image A displays several hallmarks of a 3D render: the lighting is overly uniform and clean, the glass balustrade is perfectly transparent without any | Image B exhibits classic signs of a 3D render: the lighting is overly uniform and clean, the materials (especially the wood grain on the stairs and th"
+  }
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "view": "v37",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 10.2,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong signs of being a 3D render: the lighting is overly soft and diffuse with no distinct light source or hard shadows; the materia | Image B exhibits strong signs of being a computer render: the lighting is overly uniform and diffuse with no distinct light source or hard shadows; th"
+  }
+ }
+}

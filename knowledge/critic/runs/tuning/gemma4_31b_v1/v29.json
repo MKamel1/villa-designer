@@ -1,0 +1,41 @@
+{
+ "view": "v29",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.8,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors to the exterior, or outdoor views are visible in Image 2."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the door in the center-right of Image 2 is excessively large and stretched, appearing unnatural compared to real-world scale."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The 3D models in Image 2, including the stairs and shelving, appear smooth and well-defined without visible polygon facets or crude geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "No visible contact or intersection issues are present in the scene."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The bottom of the frame is blocked by a large, white sofa that occupies a significant portion of the foreground."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The under-stair storage area is almost entirely black and devoid of any styling or props, appearing empty and unfinished compared to the furnished bedroom in the reference."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Image A exhibits several hallmarks of a 3D render, including perfectly straight lines, unnatural lighting gradients in the dark areas, and a lack of s | Image A shows a bedroom with lighting and textures that are characteristic of a 3D render, such as the perfectly smooth walls, the uniform lighting on"
+  }
+ }
+}

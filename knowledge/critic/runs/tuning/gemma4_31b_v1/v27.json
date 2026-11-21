@@ -1,0 +1,41 @@
+{
+ "view": "v27",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.2,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The sky in the background is a flat, featureless light blue gradient, and the neighboring building is a plain white slab without texture or detail."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The paving slabs on the ground are disproportionately large compared to the surrounding plants and the scale of the building architecture."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The foliage on the trellis and the shrubs in the garden are flat cards and simple planes, lacking the 3D volume and organic detail seen in the reference's bedding and furniture."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The plants in the foreground and middle ground are intersecting with the ground plane and each other, and the trellis is floating slightly off the wall."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "A hard straight vertical seam cuts through the entire height of the image, splitting the scene into two different perspectives."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The scene contains the promised jasmine trellis, stepping route, and plants, providing a level of styling density comparable to the reference image."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A is a very obvious 3D render with flat lighting, repetitive plant geometry, and lack of texture detail. Image B, while still appearing to be a  | Both images are clearly 3D renders. Image A has more realistic lighting and material textures (wood grain, fabric folds) compared to Image B, which ha"
+  }
+ }
+}

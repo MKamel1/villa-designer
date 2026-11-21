@@ -1,0 +1,41 @@
+{
+ "view": "v01",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 15.3,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The exterior views through the large windows and sliding doors show simplified, flat white walls and basic greenery, lacking the depth and texture of a believable environment."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The marble veining on the kitchen island and countertops is slightly oversized and lacks the fine detail found in real stone of this scale."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The spherical pendant lamps hanging from the ceiling show visible polygon facets, indicating a low poly count."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "No visible floating objects, detached fittings, or intersecting geometries are present in the scene."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The left edge of the frame is blocked by a vertical brown wall/column, covering approximately 5-10% of the image, which is within acceptable limits."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The kitchen island and surrounding area are sparsely styled, lacking common kitchen props or accessories compared to the detailed bedding and furniture in the reference."
+  },
+  "R13": {
+   "score": 2,
+   "per_order": [
+    2,
+    2
+   ],
+   "evidence": "Both images are high-quality 3D renders. Image A shows typical CGI characteristics such as perfectly smooth surfaces, idealized lighting, and a lack o | Both images are high-quality 3D renders. However, Image B exhibits more complex lighting interactions, realistic material reflections on the marble co"
+  }
+ }
+}

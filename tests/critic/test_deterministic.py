@@ -226,6 +226,33 @@ def test_score_view_with_mocked_model(monkeypatch, tmp_path):
     assert calls.count((2, True)) == 2                              # both orders
 
 
+def test_chat_retries_truncated_json_then_gives_empty(monkeypatch):
+    import io
+    import json as _json
+    replies = iter(['{"evidence": "cut off', '{"evidence": "ok", "score": 1}'])
+    seen = []
+
+    class R(io.BytesIO):
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    def fake_open(req, timeout=0):
+        seen.append(_json.loads(req.data)["options"])
+        return R(_json.dumps({"message": {"content": next(replies)}}).encode())
+    monkeypatch.setattr(vlm.urllib.request, "urlopen", fake_open)
+    out = vlm.chat("http://x", "m", "p", [], {"num_predict": 100}, vlm.SCORE_SCHEMA)
+    assert out["score"] == 1
+    assert seen[0]["num_predict"] == 100 and seen[1]["num_predict"] == 300
+    assert all(not k.startswith("_") for o in seen for k in o)
+    replies = iter(["{bad", "{bad"])                        # unparsable twice -> {} -> not_evaluated
+    assert vlm.chat("http://x", "m", "p", [], {"num_predict": 100}, vlm.SCORE_SCHEMA) == {}
+    assert vlm.clean_score({})["score"] is None
+    assert vlm.pair_score({"render_is": "A"}, {"render_is": "B"})["score"] is None
+
+
 def test_vlm_unreachable_raises_unavailable():
     with pytest.raises(vlm.VlmUnavailable):
         vlm.chat("http://127.0.0.1:9", "m", "p", [], {}, vlm.SCORE_SCHEMA, timeout=2)

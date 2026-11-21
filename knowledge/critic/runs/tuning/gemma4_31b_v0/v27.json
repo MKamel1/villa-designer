@@ -1,0 +1,41 @@
+{
+ "view": "v27",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 16.8,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The sky in the background and the neighboring building visible above the wall are flat, featureless white slabs."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The paving slabs on the ground are disproportionately large compared to the surrounding plants and the scale of the villa's architecture."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The plants throughout the scene, specifically the foliage on the trellis (left) and the shrubs (center), consist of flat, repetitive card-like leaves. The terracotta pots (right) exhibit visible polygon facets rather than smooth curves."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The trellis on the left wall is floating slightly away from the wall surface, and the potted plants on the right side are intersecting with the ground plane/grass."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The plain white wall on the left side of the frame covers approximately 60% of the total image area."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The east court contains the promised beds, jasmine trellis, and stepping route, but the styling is generic and lacks lived-in details or plausible accessories beyond basic plants."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A is a very obvious 3D render with flat lighting, repetitive plant geometry, and lack of texture detail. Image B, while still appearing to be a  | Both images are clearly 3D renders. Image A has more realistic lighting and material textures (wood grain, fabric folds) compared to Image B, which ha"
+  }
+ }
+}

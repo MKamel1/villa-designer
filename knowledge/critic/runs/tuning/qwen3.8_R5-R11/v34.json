@@ -1,0 +1,33 @@
+{
+ "view": "v34",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.1,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "Large windows show a detailed exterior with a flowering tree, green lawn, shrubs, and potted plants, providing a textured and believable outdoor scene."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the dark wood panel on the right edge of the frame is visible but appears consistent with real-scale timber; no oversized grain, veining, or unnatural hue is apparent in the visible materials."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The sofa, armchairs, and pillows in Image 2 are composed of smooth, continuous surfaces with soft edges and no visible polygon facets, flat discs, or rigid box-like geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The sofa, armchairs, and potted plants are all resting correctly on the floor. The curtains hang from the ceiling track. No objects are floating or intersecting improperly."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A dark, solid vertical band occupies the entire right edge of the frame, and the main sofa is partially cut off by the bottom and right frame edges."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The room is furnished with a sofa, two armchairs, a rug, and potted plants, providing adequate styling density comparable to the reference bedroom."
+  }
+ }
+}

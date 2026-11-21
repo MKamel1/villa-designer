@@ -1,0 +1,41 @@
+{
+ "view": "v05",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 13.6,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or exterior views are visible in Image 2."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the wall paneling behind the bed and the door in the background appears consistent with real-world scale."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The pillows on the bed in Image 2 appear as rigid, overly smooth shapes lacking the natural folds and organic volume seen in the reference."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The pillows are visibly intersecting and sinking into the headboard in Image 2."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The composition is balanced, the main subject is well-framed, and there are no visible artifacts or framing issues."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room is sparsely styled, lacking the variety of furniture and props seen in the reference, such as the wardrobe and chair."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are computer renders, but Image B shows more realistic lighting, fabric textures (the bed linens and pillows), and a more natural distribu | Both images are high-quality 3D renders, but Image B exhibits more sophisticated lighting and material properties. The soft glow of the spherical lamp"
+  }
+ }
+}

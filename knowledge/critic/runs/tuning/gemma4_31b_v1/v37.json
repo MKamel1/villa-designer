@@ -1,0 +1,41 @@
+{
+ "view": "v37",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.4,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The background visible through the glass walls is a flat, featureless white void without any believable exterior environment or sky."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The textures on the floor and walls in Image 2 are smooth and uniform, with no visible scale issues regarding grain or veining."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The foliage of the plant in the center is composed of flat, card-like leaves, which is significantly more crude than the assets in the reference."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The hanging chair's support cable is not visibly connected to the ceiling, appearing to float in the upper center of the frame."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A milky haze or veil is present across the entire image, reducing contrast and clarity."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The garden area is sparsely styled, featuring only a few plants and a hanging chair, lacking the density of furniture and accessories seen in the reference bedroom."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A is a highly stylized 3D render with unnatural lighting, perfectly smooth surfaces, and simplified geometry (e.g., the plant leaves and the han | Both images are clearly 3D renders. Image A has more realistic lighting and material textures (wood grain, fabric folds) compared to Image B, which ha"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "view": "v28",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 17.6,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The sky in the background and the neighboring building visible above the boundary wall are flat, featureless white slabs."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The paving slabs on the ground are disproportionately large compared to the surrounding plants and architectural elements, appearing as oversized blocks rather than standard pavers."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The terracotta pots in the center and right of the frame exhibit visible polygon facets rather than smooth curves, and the foliage on the plants throughout the scene consists of flat, repetitive planes."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The trellis on the left wall is floating slightly away from the wall surface, and the potted plants on the right side show gaps between the pots and the ground surface."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The left side of the frame is dominated by a large, plain white wall and a dark shadow area that covers approximately 30-35% of the image, and a solid black vertical band (door frame) cuts through the right side of the frame."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The east yard at basement level is shown, but it is sparsely styled with generic 3D plant assets and lacks any lived-in props such as outdoor furniture, lighting, or accessories."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are clearly 3D renders. Image A has very flat lighting, unrealistic plant geometry, and lacks texture detail. Image B has slightly more so | Both images are clearly 3D renders. Image A has very flat lighting and perfectly smooth, unrealistic surfaces on the wardrobe and walls. Image B has s"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "view": "v11",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.2,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in Image 2."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the stair treads is excessively large and coarse relative to the scale of the steps."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The plant pot in the bottom right corner shows visible polygon facets on its curved surface."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The wooden handrail on the left side of the stairs is floating and not physically connected to the wall brackets."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The left side of the image is dominated by a large, plain empty wall covering more than 40% of the frame."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The image shows a staircase and a living area, but the 'globe cluster in the void' mentioned in the title is not visible in the frame."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Image A shows several signs of being a 3D render: the lighting is overly uniform and soft, the edges of the stairs and handrail are mathematically per | Image A shows more natural lighting variations, subtle textures on the fabric and wood, and a more realistic distribution of shadows. Image B has a ve"
+  }
+ }
+}

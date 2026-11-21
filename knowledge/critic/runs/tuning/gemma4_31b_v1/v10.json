@@ -1,0 +1,41 @@
+{
+ "view": "v10",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 15.0,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in Image 2."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the shelving unit and wall paneling in the background appears consistent with real-world scale."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The plant pot in the bottom left corner shows visible polygon facets on its curved surface."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The sofa cushions are intersecting with the sofa frame/backrest, and the sofa base appears to be floating slightly above the floor."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The composition is well-balanced, the main subject (sofa) is fully visible, and there are no significant framing issues or distortions."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The scene contains a sofa, bookshelves, and a plant, providing a level of styling density comparable to the bedroom in the reference image."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are high-quality 3D renders. However, Image B shows slightly more natural light fall-off and more believable fabric textures on the beddin | Image A shows several signs of being a render: the lighting is very flat, the textures on the wardrobe and bed linens lack natural micro-detail, and t"
+  }
+ }
+}

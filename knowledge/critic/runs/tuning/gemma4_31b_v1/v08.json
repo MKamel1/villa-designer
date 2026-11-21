@@ -1,0 +1,41 @@
+{
+ "view": "v08",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 13.9,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "no exterior is visible in Image 2"
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the desk surface in the foreground is too large and lacks the fine detail expected for a real-world timber surface."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The sofa cushions and the edges of the desk in the foreground show very clean geometry without obvious faceting or crude modeling."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "No visible floating objects, detached fittings, or intersecting geometries are present in the scene."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The right side of the image is dominated by a large, plain empty wall covering more than 40% of the frame."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The camera is positioned behind the sofa, looking at the back of the furniture rather than the cinema screen and seating arrangement."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A has several hallmarks of a 3D render: perfectly uniform lighting on the walls, lack of surface imperfections, and 'too perfect' geometry. Imag | Image A shows more natural light distribution and subtle material imperfections, such as the texture of the bed linens and the grain of the wood wardr"
+  }
+ }
+}

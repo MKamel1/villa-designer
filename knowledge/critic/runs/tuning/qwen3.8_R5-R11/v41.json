@@ -1,0 +1,33 @@
+{
+ "view": "v41",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 20.0,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The sky is a flat, uniform light blue with no clouds or gradient. The background walls are plain white slabs with no texture or architectural detail."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wooden pergola posts and beams, as well as the chair frames, show a uniform, flat brown color with no visible wood grain or texture. The grass is a uniform green without blade detail, and the paving stones are plain white squares without stone veining or texture."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The foliage on the tree and shrubs is composed of flat, card-like polygons. The chairs and pergola are made of simple, untextured boxes and cylinders, lacking the detail seen in the reference."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The chairs under the pergola, the potted plant, and the stepping stones all appear to be properly grounded on the grass surface. No objects are floating or intersecting incorrectly."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The large tree on the left occupies a significant portion of the frame, but it is the main subject and not an obstruction. The composition is balanced with the pergola and seating area on the right. No elements are cut off, no plain walls exceed 40%, no seams, bands, haze, or bent lines are visible."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image shows a pergola, seating, a tree, and planters, matching the title's description of a garden terrace."
+  }
+ }
+}

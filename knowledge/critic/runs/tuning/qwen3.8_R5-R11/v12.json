@@ -1,0 +1,33 @@
+{
+ "view": "v12",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.4,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, a bathtub, and a sink."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The marble veining on the walls and floor is significantly oversized and blotchy, with large, smeared patches that do not match the scale of real stone."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The shower head is a flat disc, the faucet is a simple L-shaped tube, and the mirror light is a flat rectangular bar, all appearing as crude, low-poly geometry."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The shower head is suspended from the ceiling by a visible rod. The faucet is attached to the wall. The sink is supported by a cabinet. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "No objects block the view, the main subjects (tub, sink) are fully visible, no large empty walls, no frame seams, bands, haze, or bent lines are present."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The bathroom is bare; the bathtub, vanity, and shower area have no props such as towels, toiletries, or plants, unlike the styled bedroom in the reference."
+  }
+ }
+}

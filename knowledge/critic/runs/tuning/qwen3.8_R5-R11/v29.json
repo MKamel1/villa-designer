@@ -1,0 +1,33 @@
+{
+ "view": "v29",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 20.6,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or openings to an exterior are visible in the frame; the scene is entirely interior with walls, ceiling beams, and furniture."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood grain on the door and ceiling beams is visible but appears consistent with real-scale timber; no obvious stretching, blotchiness, or unnatural hue."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The white sofa in the foreground has blocky, box-like armrests and cushions with hard, flat edges, lacking the soft, rounded forms and fabric detail seen on the bed and pillows in the reference image."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The white sofa in the foreground is not fully visible, making it impossible to judge its contact with the floor. The dark shelving units and door appear properly integrated into the wall structure. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The image is extremely dark, with large areas of the frame, particularly the center and right, being solid black or near-black, effectively blocking the view and constituting a dark band."
+  },
+  "R11": {
+   "score": 0,
+   "evidence": "The image is extremely dark and underexposed. While the title promises 'under-stair storage from the lounge', the scene is barely visible. The storage units are black voids, and the lounge area is reduced to the tops of two white sofa cushions. There are no props, no visible textures, and the overal"
+  }
+ }
+}

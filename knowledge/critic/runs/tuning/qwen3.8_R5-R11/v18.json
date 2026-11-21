@@ -1,0 +1,33 @@
+{
+ "view": "v18",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.9,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "Window on the left shows a flat blue sky slab and a blurry, low-detail exterior with indistinct red shapes; no textured planting or believable facade detail."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the TV console and the marble veining on the right wall are both at a plausible, real-world scale. The timber on the desk in the foreground has a natural, fine grain without any obvious stretching or unnatural coloration."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The potted plant in the corner has flat, card-like foliage. The sofa and TV stand are composed of simple, boxy geometry with hard edges, lacking the softness and detail seen in the reference's bedding and wardrobe."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The TV is mounted on the wall, the TV stand rests on the floor, the sofa is on the floor, and the potted plant is on the floor. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The left edge of the frame is dominated by a large, out-of-focus beige curtain that blocks a significant portion of the view, and the main subject (the sofa) is partially cut off at the bottom."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The scene shows the back of a sofa, a bare wall with a TV, and a single plant. It lacks the density of props (e.g., books, desk items) seen in the reference, appearing somewhat bare."
+  }
+ }
+}

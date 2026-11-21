@@ -1,0 +1,33 @@
+{
+ "view": "v27",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.5,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The sky visible at the top of the courtyard is a flat, untextured light blue slab. The surrounding building facades are plain white boxes with no surface detail or texture."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "No wood, stone, or tile surfaces are present in Image 2. The scene consists of flat white walls, green ground cover, and low-poly plants, so the criterion is not applicable."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "Pots on the right are faceted cylinders; foliage on the left trellis and in planters consists of flat, card-like leaf shapes; the small plant in the bottom right has lollipop-shaped flowers."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "All objects in Image 2, including potted plants, the trellis, and ground cover, are properly seated on the ground or attached to walls with no visible floating or intersection issues."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "A hard vertical seam runs down the center of the image, splitting the garden scene and cutting through the grass and plant beds."
+  },
+  "R11": {
+   "score": 0,
+   "evidence": "The image shows a garden with plants, a trellis, and a path, but no beds or kitchen, failing to match the title's promise."
+  }
+ }
+}

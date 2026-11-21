@@ -1,0 +1,33 @@
+{
+ "view": "v37",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.7,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The background behind the glass wall is a flat, featureless white/gray gradient with no visible exterior details, planting, or sky texture."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wooden grid of the hanging chair and the trellis in the background have uniform, clean lines with no visible wood grain or texture, but no oversized or unnatural material scale is present."
+  },
+  "R8": {
+   "score": 2,
+   "evidence": "The hanging egg chair is a perfectly smooth wireframe grid with no faceting. The plant leaves are flat, 2D cutouts (cardboard style), but the reference also uses simple, flat foliage shapes. The overall geometry is clean and not crude."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The hanging egg chair is suspended by a single cable from the ceiling, and the plant sits on a dark platform. No objects are floating without support or intersecting incorrectly."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A dark vertical band is visible along the right edge of the frame, and a milky haze or veil is present across the left side of the image, obscuring details."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The scene is sparsely styled with only a hanging chair, a potted plant, and a trellis, lacking the density of props (bed, wardrobe, chair, lamps) seen in the reference."
+  }
+ }
+}

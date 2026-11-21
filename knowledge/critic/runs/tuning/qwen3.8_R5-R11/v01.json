@@ -1,0 +1,33 @@
+{
+ "view": "v01",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 23.7,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "Large windows on the right show a bright, flat white exterior with simple green plant shapes and no detailed facades or graded sky."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The marble veining on the large kitchen island and the adjacent countertop is proportionate to the surface area, with no visible stretching, smearing, or unnatural coloration."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The white spherical pendant lights hanging over the kitchen island show visible polygonal facets on their surfaces, appearing low-poly and crude compared to the smooth, high-quality geometry of the reference render's cylindrical lamps."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The bed, wardrobe, chair, and kitchen island all rest correctly on the floor. The pendant lights hang from the ceiling. No objects are floating, detached, or intersecting improperly."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "No objects block the view, the main subject (kitchen island) is fully visible, no large empty walls, no seams, bands, haze, or bent lines are present."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The kitchen island and counter are nearly empty, lacking typical props like fruit bowls, cookware, or books, making the space feel bare compared to the styled bedroom in the reference."
+  }
+ }
+}

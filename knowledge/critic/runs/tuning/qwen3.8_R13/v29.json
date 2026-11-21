@@ -1,0 +1,17 @@
+{
+ "view": "v29",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 12.9,
+ "scores": {
+  "R13": {
+   "score": 1,
+   "per_order": [
+    0,
+    2
+   ],
+   "evidence": "Image B displays characteristics typical of a high-quality photograph or a photorealistic render intended to look like one. The lighting is soft and d | Image A exhibits characteristics typical of a 3D render rather than a photograph: the lighting is overly uniform and soft, the wood grain on the wardr"
+  }
+ }
+}

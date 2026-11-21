@@ -1,0 +1,41 @@
+{
+ "view": "v06",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.1,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The window in the background shows a flat, featureless white void instead of a believable exterior environment."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the desk in the foreground is noticeably stretched and lacks the natural scale and detail seen in the reference's wardrobe."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The bunk bed frame and mattresses in Image 2 are composed of very simple, rigid boxes with no realistic cushioning or soft edges, appearing more crude than the bedding in Image 1."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The bunk bed frame is intersecting with the wall on the left side of the image."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The white bunk bed frame on the left side of the image blocks a significant portion of the frame, exceeding 15%."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room is bare; the desk and bunk beds lack any props, toys, or personal items typical of a kids' room, making it feel under-styled compared to the reference."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Both images are clearly 3D renders. Image A has very flat lighting and lacks texture detail on the bed and walls. Image B has slightly more complex li | Both images are clearly 3D renders, but Image A has slightly more believable lighting and material textures (such as the wood grain on the wardrobe an"
+  }
+ }
+}

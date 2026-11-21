@@ -1,0 +1,41 @@
+{
+ "view": "v34",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 15.3,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The view through the left window is a flat, overexposed white void with no visible exterior detail."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The marble floor texture in the foreground and midground appears slightly blurred and lacks defined veining, but it remains within a believable scale relative to the furniture."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The foliage of the tree visible through the window consists of flat, disc-like planes rather than realistic 3D leaves."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "No visible floating objects or intersections are present in the scene."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "A dark brown vertical band/wall section blocks the right edge of the frame, covering approximately 10-15% of the image."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The room is well-styled with a sofa, armchairs, a coffee table, a rug, and plants, providing a density of props comparable to the reference image."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are high-quality 3D renders. However, Image A exhibits several 'too perfect' characteristics typical of CGI: the lighting is extremely uni | Image A shows several signs of being a render: the lighting is very flat and lacks natural bounce, the textures on the wardrobe and bed linens are ove"
+  }
+ }
+}

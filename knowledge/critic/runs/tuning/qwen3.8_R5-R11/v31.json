@@ -1,0 +1,33 @@
+{
+ "view": "v31",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.7,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, wardrobe, and bed."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The wood grain on the wardrobe interior panels and shelving is clearly visible and appears significantly larger and more pronounced than the fine, subtle grain on the wardrobe in the reference render."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "Clothes on the right rail are flat, board-like planes with no folds; left-side garments are similarly rigid and faceted."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The hanging garments in the wardrobe are suspended from a rail that is properly attached to the wooden frame. The drawers and shelves are integrated into the cabinetry structure. No objects are floating, detached, or intersecting improperly."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The left third of the frame is a plain, empty wall with no objects, covering well over 40% of the image area. The main subject (the wardrobe interior) is also partially cut off on the right edge."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The image shows the interior of a wardrobe with hanging clothes, shelves, and drawers, which aligns with the title 'Dressing: her section'."
+  }
+ }
+}

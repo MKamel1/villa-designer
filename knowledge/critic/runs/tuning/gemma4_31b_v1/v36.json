@@ -1,0 +1,41 @@
+{
+ "view": "v36",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 13.7,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The area beyond the opening in the background is a flat, featureless white void, lacking any believable exterior detail or sky."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The paving stones in the background are disproportionately large compared to the surrounding space and the plants."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The foliage of the plants in the foreground and center consists of flat, card-like leaves with no volume or organic curvature."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "no visible contact or intersection issues found in the scene"
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The large plant leaves on the left side of the frame block a significant portion of the view."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The garden area in Image 2 is sparsely populated with only a few low-poly plants, lacking the detailed styling and density seen in the reference bedroom."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    0,
+    2
+   ],
+   "evidence": "Image A is a very basic 3D render with flat lighting, lack of textures, and simplistic geometry. Image B is also a render, but it features much more s | Image A is a 3D render with very clean, mathematically perfect edges and simplified textures. Image B is also a 3D render, characterized by flat light"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "view": "v01",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 24.1,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The view through the windows and the open doorway shows a flat, featureless white sky and plain white boundary walls with minimal, generic greenery."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The marble veining on the kitchen island in the foreground is excessively large and lacks the fine detail of real stone, appearing blotchy and oversized relative to the scale of the room."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The pendant lights in the upper center and right of the frame exhibit visible polygon facets, and the cushions on the sofa in the background are rigid wedges."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The pendant light in the center foreground is floating in the air with no visible cable or mounting attachment to the ceiling."
+  },
+  "R10": {
+   "score": 0,
+   "evidence": "The left edge of the frame is dominated by a large, vertical section of a textured wall/pillar that blocks a significant portion of the view, covering more than a quarter of the frame."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The view shows a kitchen island looking towards the garden, but the styling is minimal and generic: only a single bowl on the island and a few distant plants/cushions in the living area, leaving the kitchen surfaces largely empty of plausible daily-use props."
+  },
+  "R13": {
+   "score": 2,
+   "per_order": [
+    2,
+    2
+   ],
+   "evidence": "Both images are high-quality 3D renders. Image A shows typical CGI characteristics such as perfectly smooth surfaces, idealized lighting, and a lack o | Both images are high-quality 3D renders. However, Image B exhibits more complex lighting interactions, realistic material reflections on the marble co"
+  }
+ }
+}

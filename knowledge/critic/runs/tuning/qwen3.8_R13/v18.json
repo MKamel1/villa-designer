@@ -1,0 +1,17 @@
+{
+ "view": "v18",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.5,
+ "scores": {
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Both images are computer renders, but Image B exhibits more photographic qualities. The lighting in B is softer and more diffuse, creating natural-loo | Both images are 3D renders, but Image B contains several visual artifacts that make it look less like a real photograph. The potted plant has a very a"
+  }
+ }
+}

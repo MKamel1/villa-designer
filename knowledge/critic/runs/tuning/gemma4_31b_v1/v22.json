@@ -1,0 +1,41 @@
+{
+ "view": "v22",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 13.9,
+ "scores": {
+  "R5": {
+   "score": 0,
+   "evidence": "The windows in Image 2 show a flat, featureless white void instead of a believable exterior environment."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The wood grain on the desk and chair in the center of the image appears consistent with real-world scale."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The round lamp globe in the center of the image shows visible polygon facets."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The chair legs are floating above the floor surface in the center of the room."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A vertical wooden beam on the right edge of the frame blocks a significant portion of the view."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The room is very bare; it lacks the wardrobe, lighting fixtures, and bedding accessories seen in the reference, containing only a bed, a simple desk, and a chair."
+  },
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A has extremely flat lighting, perfectly smooth surfaces without any texture or wear, and a lack of realistic shadows or ambient occlusion, whic | Image A shows more realistic lighting gradients, subtle texture in the fabric of the bed and pillows, and more natural shadows. Image B has overly bri"
+  }
+ }
+}

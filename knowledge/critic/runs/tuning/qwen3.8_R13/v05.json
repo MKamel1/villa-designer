@@ -1,0 +1,17 @@
+{
+ "view": "v05",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.9,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong indicators of being a 3D render: the lighting is overly uniform and clean, the wood slat wall has perfectly identical spacing  | Image B exhibits strong indicators of being a computer render: the lighting is unnaturally uniform and clean, the wood slat wall has perfectly identic"
+  }
+ }
+}

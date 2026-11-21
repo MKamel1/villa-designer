@@ -1,0 +1,41 @@
+{
+ "view": "v28",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.6,
+ "scores": {
+  "R5": {
+   "score": 1,
+   "evidence": "The neighboring building in the background is a plain white, featureless box, and the sky is a flat, gradient-less blue slab."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "The paving slabs in the foreground and the proportions of the potted plants relative to the architecture appear slightly off, but there are no obvious texture scaling issues."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The foliage on the plants and the tree in the courtyard consists of flat, disc-like planes, which is significantly more crude than the assets in the reference."
+  },
+  "R9": {
+   "score": 1,
+   "evidence": "The plants in the pots on the right side of the image are floating above the soil/pot surface."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A thick black vertical frame element blocks the right side of the image, covering approximately 15-20% of the frame."
+  },
+  "R11": {
+   "score": 2,
+   "evidence": "The yard is populated with various plants, pots, and paving, providing a level of styling density comparable to the bedroom in the reference image."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    2
+   ],
+   "evidence": "Both images are clearly 3D renders. Image A has very flat lighting, unrealistic plant geometry, and lacks texture detail. Image B has slightly more so | Both images are clearly 3D renders. Image A has very flat lighting and perfectly smooth, unrealistic surfaces on the wardrobe and walls. Image B has s"
+  }
+ }
+}

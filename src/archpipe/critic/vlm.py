@@ -30,7 +30,8 @@ def b64(path: str | Path) -> str:
 
 def chat(host: str, model: str, prompt: str, images: list[str], options: dict, schema: dict,
          think: bool = False, timeout: float = 600.0) -> dict:
-    body = {"model": model, "stream": False, "think": think, "format": schema, "options": options,
+    body = {"model": model, "stream": False, "think": think, "format": schema,
+            "options": {k: v for k, v in options.items() if not k.startswith("_")},
             "messages": [{"role": "user", "content": prompt, "images": images}]}
     req = urllib.request.Request(host.rstrip("/") + "/api/chat", data=json.dumps(body).encode(),
                                  headers={"Content-Type": "application/json"})
@@ -41,7 +42,15 @@ def chat(host: str, model: str, prompt: str, images: list[str], options: dict, s
         raise VlmUnavailable(str(e)) from e
     if data.get("error"):
         raise VlmUnavailable(data["error"])
-    return parse_json(data["message"]["content"])
+    try:
+        return parse_json(data["message"]["content"])
+    except ValueError:
+        # Truncated or malformed JSON (e.g. long evidence hit num_predict): retry once with more room,
+        # then give up on this criterion (it becomes not_evaluated, never a silent pass).
+        if options.get("num_predict", 0) and not options.get("_retried"):
+            return chat(host, model, prompt, images, dict(options, num_predict=options["num_predict"] * 3, _retried=True),
+                        schema, think, timeout)
+        return {}
 
 
 def parse_json(text: str) -> dict:

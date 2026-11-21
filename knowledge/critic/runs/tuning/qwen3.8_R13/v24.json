@@ -1,0 +1,17 @@
+{
+ "view": "v24",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 9.6,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits strong indicators of being a computer render: the lighting is overly uniform and perfect (especially the cove lighting), the material | Image B exhibits strong indicators of being a computer render: the lighting is overly uniform and 'perfect' (especially the cove lighting and spotligh"
+  }
+ }
+}

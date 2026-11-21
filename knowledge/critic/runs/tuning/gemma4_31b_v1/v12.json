@@ -1,0 +1,41 @@
+{
+ "view": "v12",
+ "model": "gemma4:31b",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 14.6,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in Image 2."
+  },
+  "R7": {
+   "score": 1,
+   "evidence": "The marble veining on the walls is excessively large and blotchy, lacking the fine detail and scale of real stone."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The shower head in the upper left shows visible polygon facets around its circular edge."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The shower head is floating in the air, detached from the ceiling."
+  },
+  "R10": {
+   "score": 2,
+   "evidence": "The composition is balanced, and there are no objects blocking the view or significant framing issues."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The bathroom is completely devoid of styling props (towels, soap, toiletries, etc.), making it look like a sterile showroom compared to the lived-in feel of the reference bedroom."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Both images are clearly 3D renders. Image A has perfectly smooth, repetitive marble textures and unrealistic lighting on the sink and mirror. Image B  | Both images are high-quality 3D renders, but Image A exhibits more realistic lighting gradients, subtle texture imperfections on the wardrobe and bedd"
+  }
+ }
+}

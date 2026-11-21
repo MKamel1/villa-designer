@@ -1,0 +1,17 @@
+{
+ "view": "v36",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 10.4,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits characteristics of a low-quality 3D render or a poorly lit scene: the plants have flat, non-organic geometry (especially the leaves w | Image A displays realistic material properties, such as the visible wood grain on the wardrobe and the fabric texture of the bedding and headboard. Th"
+  }
+ }
+}

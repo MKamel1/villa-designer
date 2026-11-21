@@ -1,0 +1,33 @@
+{
+ "view": "v11",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 19.8,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows, doors, or exterior views are visible in the image; the scene is entirely interior with walls, stairs, and furniture."
+  },
+  "R7": {
+   "score": 2,
+   "evidence": "Wood grain on the staircase treads and handrail is consistent in scale and pattern, matching real timber at real size; no stretched, smeared, or oversized texture is visible."
+  },
+  "R8": {
+   "score": 1,
+   "evidence": "The potted plant on the right has flat, card-like foliage. The wooden box on the table is a plain, untextured rectangular prism. The orange throw on the sofa is a flat, rigid shape."
+  },
+  "R9": {
+   "score": 2,
+   "evidence": "The potted plant on the right rests on a surface, the radio sits on a table, and the stairs are structurally connected to the wall and floor. No floating or intersecting objects are visible."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "A thick, solid black vertical band runs along the entire left edge of the frame, acting as a dark border that violates frame integrity."
+  },
+  "R11": {
+   "score": 1,
+   "evidence": "The scene is sparsely styled with only a potted plant, a small box, and a single throw pillow visible in the lower right, lacking the density of the reference."
+  }
+ }
+}

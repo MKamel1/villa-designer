@@ -1,0 +1,41 @@
+{
+ "view": "v11",
+ "model": "gemma4:31b",
+ "rubric": "v0-preregistered",
+ "status": "ok",
+ "seconds": 17.2,
+ "scores": {
+  "R5": {
+   "score": 2,
+   "evidence": "No windows or outdoor areas are visible in the frame."
+  },
+  "R7": {
+   "score": 0,
+   "evidence": "The wood grain on the stair treads is excessively large and coarse relative to the scale of the steps, appearing unnatural."
+  },
+  "R8": {
+   "score": 0,
+   "evidence": "The cushion on the sofa in the lower right is a rigid, geometric wedge without believable fabric folds or softness, and the plant leaves are flat, repetitive planes."
+  },
+  "R9": {
+   "score": 0,
+   "evidence": "The wooden handrail on the left wall is floating; the black mounting brackets are positioned behind the rail rather than securing it to the wall, leaving a visible gap between the rail and the wall surface."
+  },
+  "R10": {
+   "score": 1,
+   "evidence": "The plain white wall on the left side of the frame covers approximately 40-50% of the total image area."
+  },
+  "R11": {
+   "score": 0,
+   "evidence": "The image shows the stairs, but the 'globe cluster in the void' mentioned in the title is not visible in the frame. Additionally, the styling is minimal, consisting only of a single plant, a cushion, and a small box on a table."
+  },
+  "R13": {
+   "score": 1,
+   "per_order": [
+    1,
+    1
+   ],
+   "evidence": "Image A shows several signs of being a 3D render: the lighting is overly uniform and soft, the edges of the stairs and handrail are mathematically per | Image A shows more natural lighting variations, subtle textures on the fabric and wood, and a more realistic distribution of shadows. Image B has a ve"
+  }
+ }
+}

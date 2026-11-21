@@ -1,0 +1,17 @@
+{
+ "view": "v41",
+ "model": "qwen3.8:27b-mtp-q4_K_M",
+ "rubric": "v1-tuning",
+ "status": "ok",
+ "seconds": 10.6,
+ "scores": {
+  "R13": {
+   "score": 0,
+   "per_order": [
+    0,
+    0
+   ],
+   "evidence": "Image A exhibits multiple hallmarks of a 3D render: the lighting is flat and lacks natural shadows or ambient occlusion; the textures on the grass, tr | Image B exhibits multiple hallmarks of a 3D render: the foliage on the tree and bushes consists of repeated, flat textures; the shadows are unnaturall"
+  }
+ }
+}
