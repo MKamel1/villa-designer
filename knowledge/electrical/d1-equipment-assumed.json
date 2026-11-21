@@ -1,0 +1,55 @@
+{
+  "design": "D1",
+  "schema": "archpipe-electrical-equipment/1",
+  "status_note": "No equipment schedule exists in the design model or the brief. Every record below is an ASSUMED typical Egyptian-villa value (electrical input power, not cooling or heating output). None is a manufacturer datasheet figure. The client should correct or confirm each line; the engine re-runs from this file.",
+  "anchors": {
+    "gate": {"xy": [-123, -22096], "basis": "vehicle gate at the street fence at the head of the car ramp (slab-ramp centre line y; street fence x)"},
+    "deck": {"xy": [9827, -22096], "basis": "centre of slab-deck, the parking deck over the basement extension"},
+    "garden-north": {"xy": [1747, -26256], "basis": "centre of garden-north-patio (street-side sunken patio)"},
+    "garden-lounge": {"xy": [2308, -26156], "basis": "centre of garden-path-lounge-north"},
+    "garden-dining": {"xy": [16889, -22470], "basis": "centre of garden-path-dining"},
+    "garden-living-e": {"xy": [20557, -22470], "basis": "centre of garden-path-living-east"},
+    "garden-living-s": {"xy": [23848, -26131], "basis": "centre of garden-path-living-south"}
+  },
+  "equipment": [
+    {"id": "AC-KIDS-A", "room": "kids-a", "kind": "ac", "kw": 1.2, "pf": 0.9, "cat": "ac", "name": "Split AC 1.5 HP", "status": "assumed", "reason": "one inverter split per bedroom; 1.5 HP (about 12,000 BTU/h) draws about 1.2 kW for a 13 m2 room"},
+    {"id": "AC-KIDS-B", "room": "kids-b", "kind": "ac", "kw": 1.2, "pf": 0.9, "cat": "ac", "name": "Split AC 1.5 HP", "status": "assumed", "reason": "one inverter split per bedroom; 1.5 HP for a 13 m2 room"},
+    {"id": "AC-PARENTS", "room": "parents-bed", "kind": "ac", "kw": 1.7, "pf": 0.9, "cat": "ac", "name": "Split AC 2 HP", "status": "assumed", "reason": "master bedroom 12.7 m2 plus dressing; 2 HP (about 18,000 BTU/h) draws about 1.7 kW"},
+    {"id": "AC-STUDY", "room": "study-game", "kind": "ac", "kw": 1.2, "pf": 0.9, "cat": "ac", "name": "Split AC 1.5 HP", "status": "assumed", "reason": "study / game room 15.6 m2 with a glazed deck door: 1.5 HP, upsize to 2 HP if the client uses it as a game room"},
+    {"id": "AC-LOUNGE", "room": "lounge", "kind": "ac", "kw": 2.4, "pf": 0.9, "cat": "ac", "name": "Split AC 3 HP", "status": "assumed", "reason": "lounge 23 m2 open to the family corner: 3 HP (about 24,000 BTU/h) draws about 2.4 kW"},
+    {"id": "AC-CINEMA", "room": "cinema", "kind": "ac", "kw": 1.7, "pf": 0.9, "cat": "ac", "name": "Split AC 2 HP", "status": "assumed", "reason": "windowless 18 m2 room with a seated audience and projector heat: 2 HP"},
+    {"id": "AC-LIVING", "room": "living", "kind": "ac", "kw": 2.4, "pf": 0.9, "cat": "ac", "name": "Split AC 3 HP", "status": "assumed", "reason": "garden living room 21 m2, large glazing: 3 HP"},
+    {"id": "AC-DINING", "room": "dining", "kind": "ac", "kw": 1.7, "pf": 0.9, "cat": "ac", "name": "Split AC 2 HP", "status": "assumed", "reason": "dining 10.7 m2 open to the kitchen: one 2 HP split serves both"},
+    {"id": "WH-FAMILY", "room": "family-bath", "kind": "water_heater", "kw": 2.0, "pf": 1.0, "cat": "thermo_wh", "name": "Storage water heater 50 L", "status": "assumed", "reason": "one electric storage heater per bathroom, the common Egyptian arrangement; 50 L / 2 kW"},
+    {"id": "WH-ENSUITE", "room": "parents-ensuite", "kind": "water_heater", "kw": 2.0, "pf": 1.0, "cat": "thermo_wh", "name": "Storage water heater 50 L", "status": "assumed", "reason": "one electric storage heater per bathroom; 50 L / 2 kW for the bath"},
+    {"id": "WH-GUEST", "room": "guest-wc", "kind": "water_heater", "kw": 1.5, "pf": 1.0, "cat": "thermo_wh", "name": "Storage water heater 30 L", "status": "assumed", "reason": "guest shower only: 30 L / 1.5 kW"},
+    {"id": "COOK-OVEN", "room": "kitchen", "kind": "cooker", "kw": 3.0, "pf": 1.0, "cat": "cooker", "name": "Built-in electric oven", "status": "assumed", "reason": "oven and hob are in the lane brief's list of items to assume; 3 kW single-phase built-in oven"},
+    {"id": "COOK-HOB", "room": "kitchen", "kind": "cooker", "kw": 6.0, "pf": 1.0, "cat": "cooker", "name": "Induction hob 4 zone", "status": "assumed", "reason": "electric induction hob assumed; a gas hob would remove this 6 kW (32 A) circuit. The dirty kitchen is assumed gas for heavy cooking"},
+    {"id": "DISHWASHER", "room": "kitchen", "kind": "dishwasher", "kw": 1.8, "pf": 1.0, "cat": "standard", "name": "Dishwasher", "status": "assumed", "reason": "built-in 12-place dishwasher, cold fill"},
+    {"id": "FRIDGE", "room": "kitchen", "kind": "fridge", "kw": 0.4, "pf": 0.8, "cat": "standard", "name": "Fridge-freezer", "status": "assumed", "reason": "side-by-side fridge-freezer on its own circuit so a fault elsewhere does not spoil food; 0.4 kW including defrost"},
+    {"id": "FREEZER-PANTRY", "room": "pantry", "kind": "freezer", "kw": 0.3, "pf": 0.8, "cat": "standard", "name": "Chest freezer", "status": "assumed", "reason": "second freezer in the pantry, common for Egyptian households that buy in bulk"},
+    {"id": "WASHER", "room": "dirty-kitchen", "kind": "washer", "kw": 2.2, "pf": 1.0, "cat": "standard", "name": "Washing machine", "status": "assumed", "reason": "front-loader with a heating element, 2.2 kW"},
+    {"id": "DRYER", "room": "dirty-kitchen", "kind": "dryer", "kw": 2.5, "pf": 1.0, "cat": "standard", "name": "Tumble dryer", "status": "assumed", "reason": "condenser or vented dryer, 2.5 kW; omit if the client dries outdoors"},
+    {"id": "PUMP-BOOSTER", "room": "store-ramp", "kind": "pump", "kw": 1.1, "pf": 0.8, "cat": "standard", "name": "Water booster pump", "status": "assumed", "reason": "pressure set from the ground tank to the roof/apartment risers; 1.1 kW (1.5 HP), location assumed in the store under the ramp"},
+    {"id": "PUMP-IRRIGATION", "room": "site-garden", "kind": "pump", "kw": 0.55, "pf": 0.8, "cat": "standard", "name": "Irrigation pump", "external": true, "anchor": "garden-living-e", "board": "MDB", "status": "assumed", "reason": "garden irrigation pump 0.55 kW; the garden is a large part of the brief"},
+    {"id": "GATE-MOTOR", "room": "site-gate", "kind": "gate", "kw": 0.4, "pf": 0.8, "cat": "standard", "name": "Sliding gate motor", "external": true, "anchor": "gate", "board": "MDB", "status": "assumed", "reason": "sliding vehicle gate at the head of the ramp, 0.4 kW"},
+    {"id": "EV-DECK", "room": "site-deck", "kind": "ev", "kw": 7.4, "pf": 1.0, "cat": "ev", "name": "EV-ready point (7.4 kW wallbox)", "external": true, "anchor": "deck", "board": "MDB", "status": "assumed", "reason": "EV-ready: 32 A circuit installed to the parking deck, charger later; counted at full load so the service is sized for it"},
+    {"id": "GARDEN-LIGHT", "room": "site-garden", "kind": "lighting", "kw": 0.3, "pf": 0.9, "cat": "lighting", "name": "Garden lighting (LV transformer)", "external": true, "anchor": "garden-living-s", "board": "MDB", "status": "assumed", "reason": "the model has no exterior luminaires; one allowance of 300 W for garden path/uplight drivers until the exterior lighting design exists"},
+    {"id": "ELV-RACK", "room": "stair-b", "kind": "elv", "kw": 0.6, "pf": 0.9, "cat": "standard", "name": "ELV rack, PoE switch, NVR, UPS", "status": "assumed", "reason": "structured cabling cabinet with PoE switch, CCTV recorder and UPS; location assumed in the under-stair cupboard, stair-b"},
+    {"id": "ELV-GATE", "room": "site-gate", "kind": "elv", "kw": 0.2, "pf": 0.9, "cat": "standard", "name": "Gate intercom station and camera supply", "external": true, "anchor": "gate", "board": "MDB", "status": "assumed", "reason": "video intercom and gate camera power at the gate"},
+    {"id": "FIRE-ALARMS", "room": "hall-b", "kind": "fire_alarm", "kw": 0.15, "pf": 0.9, "cat": "standard", "name": "Interlinked smoke/heat alarms, both levels", "extra_length_m": 25, "status": "assumed", "reason": "one dedicated radial feeds all mains alarms on both levels so the hard-wired interlink stays on one phase (19 units, a few W each); 25 m allowance for the run up to the ground floor"}
+  ],
+  "garden_sockets": [
+    {"id": "GSOC-NORTH", "anchor": "garden-north", "status": "assumed", "reason": "outdoor IP66 socket on the street-side patio"},
+    {"id": "GSOC-DINING", "anchor": "garden-dining", "status": "assumed", "reason": "outdoor socket at the dining terrace door"},
+    {"id": "GSOC-LIVING-E", "anchor": "garden-living-e", "status": "assumed", "reason": "outdoor socket at the living-room garden door"},
+    {"id": "GSOC-LIVING-S", "anchor": "garden-living-s", "status": "assumed", "reason": "outdoor socket on the garden's south side"}
+  ],
+  "supply": {
+    "v_phase": 220.0, "phases": 3, "earthing": "TT", "ra_ohm": null,
+    "ra_note": "TT is the brief's likely earthing but is unconfirmed, and no electrode resistance has been measured; the utility (EEHC) and a site test decide both",
+    "feeder_length_m": 15.0, "feeder_ambient_c": 40.0, "roof_ambient_c": 50.0, "drop_m": 3.0, "premises": "household",
+    "single_phase_limit_a": 63.0,
+    "single_phase_limit_note": "policy threshold (ours): above a 63 A single-phase service the villa is recommended on three phases; the utility's actual single-phase limit is not verified"
+  }
+}

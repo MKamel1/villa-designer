@@ -1,0 +1,6157 @@
+{
+  "contract": "0.1",
+  "lane": "L7",
+  "results": [
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "landing-gf",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "stair-gf",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "corridor",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 3 carded minima met (switch 3)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "study-game",
+      "achieved": 5,
+      "required": 5,
+      "unit": "kinds",
+      "message": "all 14 carded minima met (switch 1, socket 6, data 5, tv_sat 1, isolator_ac 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "kids-a",
+      "achieved": 5,
+      "required": 5,
+      "unit": "kinds",
+      "message": "all 12 carded minima met (switch 1, socket_bedside 2, socket 4, data 4, isolator_ac 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "kids-b",
+      "achieved": 5,
+      "required": 5,
+      "unit": "kinds",
+      "message": "all 8 carded minima met (switch 1, socket_bedside 2, socket 2, data 2, isolator_ac 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "family-bath",
+      "achieved": 2,
+      "required": 2,
+      "unit": "kinds",
+      "message": "all 2 carded minima met (switch 1, fcu 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "parents-bed",
+      "achieved": 5,
+      "required": 5,
+      "unit": "kinds",
+      "message": "all 8 carded minima met (switch 1, socket_bedside 2, socket 2, data 2, isolator_ac 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "parents-dressing",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "parents-ensuite",
+      "achieved": 2,
+      "required": 2,
+      "unit": "kinds",
+      "message": "all 2 carded minima met (switch 1, fcu 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "gallery-end",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "parents-entry",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "parents-dressing-ext",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "lounge",
+      "achieved": 5,
+      "required": 5,
+      "unit": "kinds",
+      "message": "all 6 carded minima met (switch 1, socket 2, tv_sat 1, data 1, isolator_ac 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "lounge-nook",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "stair-b",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "pantry",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "hall-b",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "entry-b",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "family",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "kitchen",
+      "achieved": 5,
+      "required": 5,
+      "unit": "kinds",
+      "message": "all 8 carded minima met (switch 1, socket_worktop 2, socket_island 2, cooker_unit 2, fcu 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "kitchen-island",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "dining",
+      "achieved": 2,
+      "required": 2,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 0, isolator_ac 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "dining-side",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "living",
+      "achieved": 2,
+      "required": 2,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 0, isolator_ac 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "bar-alcove",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 0 carded minima met (switch 0)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "store-ramp",
+      "achieved": 1,
+      "required": 1,
+      "unit": "kinds",
+      "message": "all 1 carded minima met (switch 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "cinema",
+      "achieved": 5,
+      "required": 5,
+      "unit": "kinds",
+      "message": "all 11 carded minima met (switch 2, socket 4, tv_sat 1, data 3, isolator_ac 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "guest-wc",
+      "achieved": 2,
+      "required": 2,
+      "unit": "kinds",
+      "message": "all 2 carded minima met (switch 1, fcu 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "dirty-kitchen",
+      "achieved": 3,
+      "required": 3,
+      "unit": "kinds",
+      "message": "all 8 carded minima met (switch 1, socket_worktop 6, fcu 1)",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "clearance",
+      "achieved": 0,
+      "required": 0,
+      "unit": "violations",
+      "message": "184 wall-mounted devices are on a wall element and outside every window and door box; 70 slid along the wall to get there, 7 could not be placed",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "dropped-device",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "floor box (EA1-general-pitch) in lounge at (6637, -26871) not placed: inside furn-lounge-sofa",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "dropped-device",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "floor box (EA1-general-pitch) in kitchen at (14302, -25901) not placed: inside furn-k-island",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "dropped-device",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "floor box (EA1-general-pitch) in kitchen at (11797, -25901) not placed: inside furn-k-island",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "dropped-device",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "floor box (EA1-general-pitch) in dining at (17767, -25901) not placed: inside furn-dining-table",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "dropped-device",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "floor box (EA1-general-pitch) in dining at (17501, -26071) not placed: inside furn-dining-table",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "dropped-device",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "floor box (EA1-general-pitch) in living at (18967, -27401) not placed: inside furn-living-sofa",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "dropped-device",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "socket (EA1-general-pitch) in dirty-kitchen at (15412, -22096, z 300) not placed: inside window window-B-dirty-kitchen-0",
+      "source_ids": [
+        "EL-POL-PLACEMENT"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "switch-latch-side",
+      "achieved": 22,
+      "required": 0,
+      "unit": "switches",
+      "message": "22 switches sit on a latch side chosen by policy because the model has no door hinge data; confirm hinge sides with the door schedule",
+      "source_ids": [
+        "EL-POL-LATCH"
+      ],
+      "element_ids": [
+        "SWI-landing-gf-001",
+        "SWI-corridor-006",
+        "SWI-corridor-007",
+        "SWI-corridor-008",
+        "SWI-study-game-018",
+        "SWI-kids-a-038",
+        "SWI-kids-b-053",
+        "SWI-family-bath-066",
+        "SWI-parents-bed-068",
+        "SWI-parents-dressing-081",
+        "SWI-parents-ensuite-087",
+        "SWI-gallery-end-089",
+        "SWI-lounge-095",
+        "SWI-pantry-111",
+        "SWI-entry-b-123",
+        "SWI-family-127",
+        "SWI-kitchen-133",
+        "SWI-store-ramp-174",
+        "SWI-cinema-181",
+        "SWI-cinema-182",
+        "SWI-guest-wc-198",
+        "SWI-dirty-kitchen-200"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "EA1",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "recall",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "recall against >= 3 engineer-marked rooms not run: no engineer markup available; EA1 rules are policy cards",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA2",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "family-bath",
+      "achieved": 0,
+      "required": 0,
+      "unit": "violations",
+      "message": "2 devices checked against zones 0-2; no socket-outlet or fixed device in a zone",
+      "source_ids": [
+        "EL-701-ZONE0",
+        "EL-701-ZONE1",
+        "EL-701-ZONE2"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA2",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "family-bath/rcd",
+      "achieved": 0,
+      "required": 0,
+      "unit": "circuits",
+      "message": "all 2 circuits serving the room are on 30 mA RCDs",
+      "source_ids": [
+        "EL-701-RCD",
+        "EL-EIG-Q7-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA2",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "parents-ensuite",
+      "achieved": 0,
+      "required": 0,
+      "unit": "violations",
+      "message": "2 devices checked against zones 0-2; no socket-outlet or fixed device in a zone",
+      "source_ids": [
+        "EL-701-ZONE0",
+        "EL-701-ZONE1",
+        "EL-701-ZONE2"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA2",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "parents-ensuite/rcd",
+      "achieved": 0,
+      "required": 0,
+      "unit": "circuits",
+      "message": "all 2 circuits serving the room are on 30 mA RCDs",
+      "source_ids": [
+        "EL-701-RCD",
+        "EL-EIG-Q7-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA2",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "guest-wc",
+      "achieved": 0,
+      "required": 0,
+      "unit": "violations",
+      "message": "2 devices checked against zones 0-2; no socket-outlet or fixed device in a zone",
+      "source_ids": [
+        "EL-701-ZONE0",
+        "EL-701-ZONE1",
+        "EL-701-ZONE2"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA2",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "guest-wc/rcd",
+      "achieved": 0,
+      "required": 0,
+      "unit": "circuits",
+      "message": "all 2 circuits serving the room are on 30 mA RCDs",
+      "source_ids": [
+        "EL-701-RCD",
+        "EL-EIG-Q7-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L1",
+      "achieved": 1.9102020202020202,
+      "required": 10.0,
+      "unit": "A",
+      "message": "lighting Ib 1.91 A vs 10 A; zones Z-PROV-landing-gf-ambient, Z-PROV-stair-gf-decorative, Z-PROV-study-game-ambient, Z-PROV-study-game-task, Z-PROV-gallery-end-ambient, Z-PROV-kids-a-ambient, Z-PROV-kids-a-night, Z-PROV-kids-a-task, Z-PROV-family-bath-ambient, Z-PROV-family-bath-night, Z-PROV-family-bath-task, Z-PROV-corridor-accent, Z-PROV-corridor-night, Z-PROV-kids-b-ambient, Z-PROV-kids-b-night, Z-PROV-kids-b-task, Z-PROV-parents-ensuite-accent, Z-PROV-parents-ensuite-night, Z-PROV-parents-ensuite-task, Z-PROV-parents-dressing-ext-task",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [
+        "Z-PROV-landing-gf-ambient",
+        "Z-PROV-stair-gf-decorative",
+        "Z-PROV-study-game-ambient",
+        "Z-PROV-study-game-task",
+        "Z-PROV-gallery-end-ambient",
+        "Z-PROV-kids-a-ambient",
+        "Z-PROV-kids-a-night",
+        "Z-PROV-kids-a-task",
+        "Z-PROV-family-bath-ambient",
+        "Z-PROV-family-bath-night",
+        "Z-PROV-family-bath-task",
+        "Z-PROV-corridor-accent",
+        "Z-PROV-corridor-night",
+        "Z-PROV-kids-b-ambient",
+        "Z-PROV-kids-b-night",
+        "Z-PROV-kids-b-task",
+        "Z-PROV-parents-ensuite-accent",
+        "Z-PROV-parents-ensuite-night",
+        "Z-PROV-parents-ensuite-task",
+        "Z-PROV-parents-dressing-ext-task"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L2",
+      "achieved": 0.8712121212121212,
+      "required": 10.0,
+      "unit": "A",
+      "message": "lighting Ib 0.87 A vs 10 A; zones Z-PROV-parents-dressing-ambient, Z-PROV-parents-dressing-task, Z-PROV-parents-entry-ambient, Z-PROV-parents-bed-accent, Z-PROV-parents-bed-ambient, Z-PROV-parents-bed-decorative",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [
+        "Z-PROV-parents-dressing-ambient",
+        "Z-PROV-parents-dressing-task",
+        "Z-PROV-parents-entry-ambient",
+        "Z-PROV-parents-bed-accent",
+        "Z-PROV-parents-bed-ambient",
+        "Z-PROV-parents-bed-decorative"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L1",
+      "achieved": 1.9189898989898988,
+      "required": 10.0,
+      "unit": "A",
+      "message": "lighting Ib 1.92 A vs 10 A; zones Z-PROV-store-ramp-task, Z-PROV-pantry-ambient, Z-PROV-lounge-nook-accent, Z-PROV-lounge-nook-ambient, Z-PROV-stair-b-accent, Z-PROV-stair-b-night, Z-PROV-lounge-accent, Z-PROV-lounge-ambient, Z-PROV-lounge-decorative, Z-PROV-cinema-accent, Z-PROV-cinema-ambient, Z-PROV-cinema-night, Z-PROV-cinema-task, Z-PROV-hall-b-ambient, Z-PROV-kitchen-island-ambient, Z-PROV-family-ambient, Z-PROV-kitchen-ambient",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [
+        "Z-PROV-store-ramp-task",
+        "Z-PROV-pantry-ambient",
+        "Z-PROV-lounge-nook-accent",
+        "Z-PROV-lounge-nook-ambient",
+        "Z-PROV-stair-b-accent",
+        "Z-PROV-stair-b-night",
+        "Z-PROV-lounge-accent",
+        "Z-PROV-lounge-ambient",
+        "Z-PROV-lounge-decorative",
+        "Z-PROV-cinema-accent",
+        "Z-PROV-cinema-ambient",
+        "Z-PROV-cinema-night",
+        "Z-PROV-cinema-task",
+        "Z-PROV-hall-b-ambient",
+        "Z-PROV-kitchen-island-ambient",
+        "Z-PROV-family-ambient",
+        "Z-PROV-kitchen-ambient"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L2",
+      "achieved": 1.8909595959595957,
+      "required": 10.0,
+      "unit": "A",
+      "message": "lighting Ib 1.89 A vs 10 A; zones Z-PROV-kitchen-decorative, Z-PROV-kitchen-night, Z-PROV-kitchen-task, Z-PROV-dirty-kitchen-ambient, Z-PROV-dirty-kitchen-task, Z-PROV-guest-wc-ambient, Z-PROV-guest-wc-task, Z-PROV-dining-side-accent, Z-PROV-entry-b-accent, Z-PROV-entry-b-ambient, Z-PROV-dining-accent, Z-PROV-dining-task, Z-PROV-bar-alcove-accent, Z-PROV-bar-alcove-task",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [
+        "Z-PROV-kitchen-decorative",
+        "Z-PROV-kitchen-night",
+        "Z-PROV-kitchen-task",
+        "Z-PROV-dirty-kitchen-ambient",
+        "Z-PROV-dirty-kitchen-task",
+        "Z-PROV-guest-wc-ambient",
+        "Z-PROV-guest-wc-task",
+        "Z-PROV-dining-side-accent",
+        "Z-PROV-entry-b-accent",
+        "Z-PROV-entry-b-ambient",
+        "Z-PROV-dining-accent",
+        "Z-PROV-dining-task",
+        "Z-PROV-bar-alcove-accent",
+        "Z-PROV-bar-alcove-task"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L3",
+      "achieved": 0.551010101010101,
+      "required": 10.0,
+      "unit": "A",
+      "message": "lighting Ib 0.55 A vs 10 A; zones Z-PROV-living-ambient, Z-PROV-living-decorative",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [
+        "Z-PROV-living-ambient",
+        "Z-PROV-living-decorative"
+      ],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-bar-alcove-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-bar-alcove-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-cinema-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-cinema-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-cinema-night",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-cinema-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-corridor-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-corridor-night",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-dining-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-dining-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-dining-side-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-dirty-kitchen-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-dirty-kitchen-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-entry-b-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-entry-b-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-family-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-family-bath-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-family-bath-night",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-family-bath-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-gallery-end-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-guest-wc-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-guest-wc-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-hall-b-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kids-a-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kids-a-night",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kids-a-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kids-b-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kids-b-night",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kids-b-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kitchen-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kitchen-decorative",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kitchen-night",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kitchen-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-kitchen-island-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-landing-gf-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-living-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L3'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-living-decorative",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L3'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-lounge-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-lounge-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-lounge-decorative",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-lounge-nook-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-lounge-nook-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-pantry-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-bed-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-bed-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-bed-decorative",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-dressing-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-dressing-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-dressing-ext-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-ensuite-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-ensuite-night",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-ensuite-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-parents-entry-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L2'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-stair-b-accent",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-stair-b-night",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-stair-gf-decorative",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-store-ramp-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-B/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-study-game-ambient",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "Z-PROV-study-game-task",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "control zone on 1 circuit(s): ['DB-GF/L1'] (PROVISIONAL zone, derived from layer and room)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "AC-KIDS-A",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "AC-KIDS-B",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "AC-PARENTS",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "AC-STUDY",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "AC-LOUNGE",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "AC-CINEMA",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "AC-LIVING",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "AC-DINING",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "WH-FAMILY",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "WH-ENSUITE",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "WH-GUEST",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "COOK-OVEN",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "COOK-HOB",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DISHWASHER",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "FRIDGE",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "FREEZER-PANTRY",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "WASHER",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DRYER",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "PUMP-BOOSTER",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "PUMP-IRRIGATION",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "GATE-MOTOR",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "EV-DECK",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "GARDEN-LIGHT",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "ELV-RACK",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "ELV-GATE",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA3",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "FIRE-ALARMS",
+      "achieved": 1,
+      "required": 1,
+      "unit": "circuits",
+      "message": "dedicated equipment on 1 dedicated circuit(s)",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "installation",
+      "achieved": 122.4766131447326,
+      "required": null,
+      "unit": "A",
+      "message": "connected 650.4 A -> max demand 367.2 A single-phase equiv. = 80.8 kVA at 220 V; worst-phase line current 122.5 A vs main breaker None A. Diversity: Whitfield Table 6.2 (household column, 16th-ed. reprint of the OSG percentages); IET OSG Appendix A itself not obtained",
+      "source_ids": [
+        "EL-WHIT-T62-DIV",
+        "EL-EIG-A14-DIV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "board MDB",
+      "achieved": 12.116388888888888,
+      "required": null,
+      "unit": "kVA",
+      "message": "MDB: connected 57.6 A -> diversified demand 55.1 A single-phase equiv. = 12.1 kVA (own circuits only); no board limit was given, so this is a reported figure, not a pass",
+      "source_ids": [
+        "EL-WHIT-T62-DIV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "board DB-B",
+      "achieved": 45.41365577777778,
+      "required": null,
+      "unit": "kVA",
+      "message": "DB-B: connected 369.1 A -> diversified demand 206.4 A single-phase equiv. = 45.4 kVA (own circuits only); no board limit was given, so this is a reported figure, not a pass",
+      "source_ids": [
+        "EL-WHIT-T62-DIV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "board DB-GF",
+      "achieved": 27.892750222222222,
+      "required": null,
+      "unit": "kVA",
+      "message": "DB-GF: connected 223.7 A -> diversified demand 126.8 A single-phase equiv. = 27.9 kVA (own circuits only); no board limit was given, so this is a reported figure, not a pass",
+      "source_ids": [
+        "EL-WHIT-T62-DIV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Whitfield Example 6.1 (shop, 3-phase): total single-phase current",
+      "achieved": 486.0,
+      "required": 486.2,
+      "unit": "A",
+      "message": "expected 486.2 A, achieved 486 (error 0.04 % <= 2 %)",
+      "source_ids": [
+        "EL-EX-WHIT-6.1"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Whitfield Example 6.1 (shop, 3-phase): three-phase line current",
+      "achieved": 162.0,
+      "required": 162.0,
+      "unit": "A",
+      "message": "expected 162 A, achieved 162 (error 0.00 % <= 2 %)",
+      "source_ids": [
+        "EL-EX-WHIT-6.1"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Whitfield Example 6.2 (cooker 14 kW + socket): cooker demand",
+      "achieved": 29.5,
+      "required": 29.5,
+      "unit": "A",
+      "message": "expected 29.5 A, achieved 29.5 (error 0.00 % <= 2 %)",
+      "source_ids": [
+        "EL-EX-WHIT-6.2"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider EIG A12 (25 flats x 6 kVA): apparent power",
+      "achieved": 69.0,
+      "required": 69.0,
+      "unit": "kVA",
+      "message": "expected 69 kVA, achieved 69 (error 0.00 % <= 2 %)",
+      "source_ids": [
+        "EL-EX-EIG-A12"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA4",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider EIG A12 (25 flats x 6 kVA): rising-main current",
+      "achieved": 99.59292143521044,
+      "required": 100.0,
+      "unit": "A",
+      "message": "expected 100 A, achieved 99.59 (error 0.41 % <= 2 %)",
+      "source_ids": [
+        "EL-EX-EIG-A12"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L1",
+      "achieved": 10.508,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 1.91 <= In 6 <= Iz 10.5 A (csa 2.5 mm2; roof void factor 0.568)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L2",
+      "achieved": 7.951999999999999,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 0.87 <= In 6 <= Iz 8.0 A (csa 1.5 mm2; roof void factor 0.568)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L1",
+      "achieved": 8.526,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 1.92 <= In 6 <= Iz 8.5 A (csa 1.5 mm2; roof void factor 0.609)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L2",
+      "achieved": 8.526,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 1.89 <= In 6 <= Iz 8.5 A (csa 1.5 mm2; roof void factor 0.609)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L3",
+      "achieved": 8.526,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 0.55 <= In 6 <= Iz 8.5 A (csa 1.5 mm2; roof void factor 0.609)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S1",
+      "achieved": 21.0,
+      "required": 20.0,
+      "unit": "A",
+      "message": "Ib 20.00 <= In 20 <= Iz 21.0 A (csa 4 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S2",
+      "achieved": 21.0,
+      "required": 20.0,
+      "unit": "A",
+      "message": "Ib 20.00 <= In 20 <= Iz 21.0 A (csa 4 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/S1",
+      "achieved": 33.0,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 33.0 A (csa 4 mm2; buried SWA factor 1.000)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-IEC-B524"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S1",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S2",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S3",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S4",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S5",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S6",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S7",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S8",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S9",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S10",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S11",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S3",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S4",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S5",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S6",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S7",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S8",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S9",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S10",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S11",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S12",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S13",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S14",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 16.00 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D1",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 6.06 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D2",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 6.06 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D3",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 8.59 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D4",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 6.06 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D1",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 12.12 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D2",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 8.59 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D3",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 12.12 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D4",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 8.59 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D5",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 9.09 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D6",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 9.09 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D5",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 6.82 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D6",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 13.64 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D7",
+      "achieved": 38.0,
+      "required": 32.0,
+      "unit": "A",
+      "message": "Ib 27.27 <= In 32 <= Iz 38.0 A (csa 6 mm2; wall/floor chase factor 1.000)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D8",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 8.18 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D9",
+      "achieved": 16.099999999999998,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 2.27 <= In 6 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D10",
+      "achieved": 16.099999999999998,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 1.70 <= In 6 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D11",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 10.00 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D12",
+      "achieved": 16.099999999999998,
+      "required": 16.0,
+      "unit": "A",
+      "message": "Ib 11.36 <= In 16 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D13",
+      "achieved": 16.099999999999998,
+      "required": 10.0,
+      "unit": "A",
+      "message": "Ib 6.25 <= In 10 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D1",
+      "achieved": 24.0,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 3.12 <= In 6 <= Iz 24.0 A (csa 2.5 mm2; buried SWA factor 1.000)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-IEC-B524"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D2",
+      "achieved": 24.0,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 2.27 <= In 6 <= Iz 24.0 A (csa 2.5 mm2; buried SWA factor 1.000)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-IEC-B524"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D3",
+      "achieved": 41.0,
+      "required": 40.0,
+      "unit": "A",
+      "message": "Ib 33.64 <= In 40 <= Iz 41.0 A (csa 6 mm2; buried SWA factor 1.000)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-IEC-B524"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D4",
+      "achieved": 24.0,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 1.52 <= In 6 <= Iz 24.0 A (csa 2.5 mm2; buried SWA factor 1.000)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-IEC-B524"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D14",
+      "achieved": 16.099999999999998,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 3.03 <= In 6 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D5",
+      "achieved": 24.0,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 1.01 <= In 6 <= Iz 24.0 A (csa 2.5 mm2; buried SWA factor 1.000)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-IEC-B524"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D15",
+      "achieved": 16.099999999999998,
+      "required": 6.0,
+      "unit": "A",
+      "message": "Ib 0.76 <= In 6 <= Iz 16.1 A (csa 2.5 mm2; wall/floor chase factor 0.700)",
+      "source_ids": [
+        "EL-IEC-B5214-CA",
+        "EL-IEC-B5217-CG",
+        "EL-WHIT-T45-CI",
+        "EL-WHIT-T47"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "incomer",
+      "achieved": 125.28,
+      "required": 125.0,
+      "unit": "A",
+      "message": "Ib 122.5 <= In 125 <= Iz 125.3 A, 50 mm2 (3 loaded PVC, method C, 40 C)",
+      "source_ids": [
+        "EL-IEC-B524",
+        "EL-IEC-B5214-CA"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/F-DB-B",
+      "achieved": 83.52,
+      "required": 80.0,
+      "unit": "A",
+      "message": "Ib 77.1 <= In 80 <= Iz 83.5 A, 25 mm2 (3 loaded PVC, method C, 40 C)",
+      "source_ids": [
+        "EL-IEC-B524",
+        "EL-IEC-B5214-CA"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/F-DB-B",
+      "achieved": 0.6643167674662596,
+      "required": 5.0,
+      "unit": "%",
+      "message": "feeder 0.29 % + incomer 0.37 % = 0.66 % at DB-B vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/F-DB-GF",
+      "achieved": 66.12,
+      "required": 50.0,
+      "unit": "A",
+      "message": "Ib 45.7 <= In 50 <= Iz 66.1 A, 16 mm2 (3 loaded PVC, method C, 40 C)",
+      "source_ids": [
+        "EL-IEC-B524",
+        "EL-IEC-B5214-CA"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/F-DB-GF",
+      "achieved": 0.7449196648688774,
+      "required": 5.0,
+      "unit": "%",
+      "message": "feeder 0.37 % + incomer 0.37 % = 0.74 % at DB-GF vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Whitfield Example 4.1 (50 C roof space, 8 bunched): csa",
+      "achieved": 10,
+      "required": 10.0,
+      "unit": "mm2",
+      "message": "expected 10 mm2, achieved 10",
+      "source_ids": [
+        "EL-EX-WHIT-4.1"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Whitfield Example 4.1 (two bunches of four): csa",
+      "achieved": 6,
+      "required": 6.0,
+      "unit": "mm2",
+      "message": "expected 6 mm2, achieved 6",
+      "source_ids": [
+        "EL-EX-WHIT-4.1"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider worked example cable C1 (method F, 3 PVC): csa per conductor",
+      "achieved": 240,
+      "required": 240.0,
+      "unit": "mm2",
+      "message": "expected 240 mm2, achieved 240",
+      "source_ids": [
+        "EL-EX-EIG-WEX"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider worked example cable C3 (method F, 3 PVC): csa per conductor",
+      "achieved": 120,
+      "required": 120.0,
+      "unit": "mm2",
+      "message": "expected 120 mm2, achieved 120",
+      "source_ids": [
+        "EL-EX-EIG-WEX"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA5",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider worked example cable C7 (method F, 3 PVC): csa per conductor",
+      "achieved": 95,
+      "required": 95.0,
+      "unit": "mm2",
+      "message": "expected 95 mm2, achieved 95",
+      "source_ids": [
+        "EL-EX-EIG-WEX"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L1",
+      "achieved": 2.3687650367697035,
+      "required": 3.0,
+      "unit": "%",
+      "message": "2.37 % from the origin (incomer + sub-board feeder 0.74 % + circuit 1.62 %) vs 3 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L2",
+      "achieved": 1.1491620891113017,
+      "required": 3.0,
+      "unit": "%",
+      "message": "1.15 % from the origin (incomer + sub-board feeder 0.74 % + circuit 0.40 %) vs 3 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L1",
+      "achieved": 2.8979337830769114,
+      "required": 3.0,
+      "unit": "%",
+      "message": "2.90 % from the origin (incomer + sub-board feeder 0.66 % + circuit 2.23 %) vs 3 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L2",
+      "achieved": 2.616044928623284,
+      "required": 3.0,
+      "unit": "%",
+      "message": "2.62 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.95 %) vs 3 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L3",
+      "achieved": 0.824836028255975,
+      "required": 3.0,
+      "unit": "%",
+      "message": "0.82 % from the origin (incomer + sub-board feeder 0.66 % + circuit 0.16 %) vs 3 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S1",
+      "achieved": 1.8543167674662597,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.85 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.19 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S2",
+      "achieved": 2.7443167674662594,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.74 % from the origin (incomer + sub-board feeder 0.66 % + circuit 2.08 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/S1",
+      "achieved": 3.995237504234861,
+      "required": 5.0,
+      "unit": "%",
+      "message": "4.00 % from the origin (incomer + sub-board feeder 0.37 % + circuit 3.62 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S1",
+      "achieved": 2.538374210323423,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.54 % from the origin (incomer + sub-board feeder 0.74 % + circuit 1.79 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S2",
+      "achieved": 3.140556028505241,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.14 % from the origin (incomer + sub-board feeder 0.74 % + circuit 2.40 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S3",
+      "achieved": 3.6772833012325137,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.68 % from the origin (incomer + sub-board feeder 0.74 % + circuit 2.93 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S4",
+      "achieved": 3.2976469375961495,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.30 % from the origin (incomer + sub-board feeder 0.74 % + circuit 2.55 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S5",
+      "achieved": 1.988556028505241,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.99 % from the origin (incomer + sub-board feeder 0.74 % + circuit 1.24 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S6",
+      "achieved": 3.8081923921416045,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.81 % from the origin (incomer + sub-board feeder 0.74 % + circuit 3.06 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S7",
+      "achieved": 1.517283301232514,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.52 % from the origin (incomer + sub-board feeder 0.74 % + circuit 0.77 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S8",
+      "achieved": 3.87364693759615,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.87 % from the origin (incomer + sub-board feeder 0.74 % + circuit 3.13 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S9",
+      "achieved": 3.926010573959787,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.93 % from the origin (incomer + sub-board feeder 0.74 % + circuit 3.18 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S10",
+      "achieved": 4.240192392141604,
+      "required": 5.0,
+      "unit": "%",
+      "message": "4.24 % from the origin (incomer + sub-board feeder 0.74 % + circuit 3.50 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S11",
+      "achieved": 2.8001923921416045,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.80 % from the origin (incomer + sub-board feeder 0.74 % + circuit 2.06 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S3",
+      "achieved": 4.2250440401935325,
+      "required": 5.0,
+      "unit": "%",
+      "message": "4.23 % from the origin (incomer + sub-board feeder 0.66 % + circuit 3.56 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S4",
+      "achieved": 2.5494076765571685,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.55 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.89 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S5",
+      "achieved": 4.931953131102624,
+      "required": 5.0,
+      "unit": "%",
+      "message": "4.93 % from the origin (incomer + sub-board feeder 0.66 % + circuit 4.27 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S6",
+      "achieved": 2.405407676557169,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.41 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.74 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S7",
+      "achieved": 3.217044040193532,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.22 % from the origin (incomer + sub-board feeder 0.66 % + circuit 2.55 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S8",
+      "achieved": 3.230134949284442,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.23 % from the origin (incomer + sub-board feeder 0.66 % + circuit 2.57 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S9",
+      "achieved": 2.0912258583753505,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.09 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.43 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S10",
+      "achieved": 2.0650440401935324,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.07 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.40 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S11",
+      "achieved": 3.6621349492844417,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.66 % from the origin (incomer + sub-board feeder 0.66 % + circuit 3.00 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S12",
+      "achieved": 3.897771312920805,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.90 % from the origin (incomer + sub-board feeder 0.66 % + circuit 3.23 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S13",
+      "achieved": 3.3872258583753507,
+      "required": 5.0,
+      "unit": "%",
+      "message": "3.39 % from the origin (incomer + sub-board feeder 0.66 % + circuit 2.72 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S14",
+      "achieved": 4.578498585648077,
+      "required": 5.0,
+      "unit": "%",
+      "message": "4.58 % from the origin (incomer + sub-board feeder 0.66 % + circuit 3.91 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D1",
+      "achieved": 1.2606221442077203,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.26 % from the origin (incomer + sub-board feeder 0.74 % + circuit 0.52 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D2",
+      "achieved": 1.4589692516457369,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.46 % from the origin (incomer + sub-board feeder 0.74 % + circuit 0.71 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D3",
+      "achieved": 2.185002309496977,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.19 % from the origin (incomer + sub-board feeder 0.74 % + circuit 1.44 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D4",
+      "achieved": 1.2060766896622659,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.21 % from the origin (incomer + sub-board feeder 0.74 % + circuit 0.46 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D1",
+      "achieved": 1.9734076765571689,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.97 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.31 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D2",
+      "achieved": 1.872581230276177,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.87 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.21 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D3",
+      "achieved": 2.7965481724249375,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.80 % from the origin (incomer + sub-board feeder 0.66 % + circuit 2.13 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D4",
+      "achieved": 1.7039861889538632,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.70 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.04 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D5",
+      "achieved": 1.2060766896622659,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.21 % from the origin (incomer + sub-board feeder 0.74 % + circuit 0.46 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D6",
+      "achieved": 2.1135147061911916,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.11 % from the origin (incomer + sub-board feeder 0.74 % + circuit 1.37 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D5",
+      "achieved": 1.3951018914332018,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.40 % from the origin (incomer + sub-board feeder 0.66 % + circuit 0.73 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D6",
+      "achieved": 1.835804370772045,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.84 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.17 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D7",
+      "achieved": 1.6778704864745242,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.68 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.01 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D8",
+      "achieved": 1.4542341228381606,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.45 % from the origin (incomer + sub-board feeder 0.66 % + circuit 0.79 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D9",
+      "achieved": 0.8948952798629539,
+      "required": 5.0,
+      "unit": "%",
+      "message": "0.89 % from the origin (incomer + sub-board feeder 0.66 % + circuit 0.23 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D10",
+      "achieved": 0.788438668292706,
+      "required": 5.0,
+      "unit": "%",
+      "message": "0.79 % from the origin (incomer + sub-board feeder 0.66 % + circuit 0.12 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D11",
+      "achieved": 1.8097713129208053,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.81 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.15 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D12",
+      "achieved": 2.0310523046563422,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.03 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.37 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D13",
+      "achieved": 1.8148849492844414,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.81 % from the origin (incomer + sub-board feeder 0.66 % + circuit 1.15 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D1",
+      "achieved": 1.1152715951439522,
+      "required": 5.0,
+      "unit": "%",
+      "message": "1.12 % from the origin (incomer + sub-board feeder 0.37 % + circuit 0.74 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D2",
+      "achieved": 0.7096672563009772,
+      "required": 5.0,
+      "unit": "%",
+      "message": "0.71 % from the origin (incomer + sub-board feeder 0.37 % + circuit 0.34 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D3",
+      "achieved": 2.290956512499324,
+      "required": 5.0,
+      "unit": "%",
+      "message": "2.29 % from the origin (incomer + sub-board feeder 0.37 % + circuit 1.92 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D4",
+      "achieved": 0.7270226282018035,
+      "required": 5.0,
+      "unit": "%",
+      "message": "0.73 % from the origin (incomer + sub-board feeder 0.37 % + circuit 0.36 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D14",
+      "achieved": 0.8428291641604746,
+      "required": 5.0,
+      "unit": "%",
+      "message": "0.84 % from the origin (incomer + sub-board feeder 0.66 % + circuit 0.18 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D5",
+      "achieved": 0.5216507273753572,
+      "required": 5.0,
+      "unit": "%",
+      "message": "0.52 % from the origin (incomer + sub-board feeder 0.37 % + circuit 0.15 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D15",
+      "achieved": 0.8682423873009704,
+      "required": 5.0,
+      "unit": "%",
+      "message": "0.87 % from the origin (incomer + sub-board feeder 0.66 % + circuit 0.20 %) vs 5 %",
+      "source_ids": [
+        "EL-IEC-G521-VDLIM",
+        "EL-WHIT-T47",
+        "EL-EIG-G30-VD"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Whitfield Example 4.5 (6 mm2, 12.5 A, 14 m): voltage drop",
+      "achieved": 1.2775,
+      "required": 1.28,
+      "unit": "V",
+      "message": "expected 1.28 V, achieved 1.278 (error 0.20 %)",
+      "source_ids": [
+        "EL-EX-WHIT-4.5"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider Fig G72 cable C1: voltage drop",
+      "achieved": 0.12498749999999999,
+      "required": 0.12,
+      "unit": "%",
+      "message": "expected 0.12 %, achieved 0.125 (error 4.16 %)",
+      "source_ids": [
+        "EL-EX-EIG-WEX"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider Fig G72 cable C3: voltage drop",
+      "achieved": 0.4734,
+      "required": 0.47,
+      "unit": "%",
+      "message": "expected 0.47 %, achieved 0.4734 (error 0.72 %)",
+      "source_ids": [
+        "EL-EX-EIG-WEX"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider Fig G72 cable C7: voltage drop",
+      "achieved": 0.127925,
+      "required": 0.13,
+      "unit": "%",
+      "message": "expected 0.13 %, achieved 0.1279 (error 1.60 %)",
+      "source_ids": [
+        "EL-EX-EIG-WEX"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider Fig G72 total at C7: voltage drop",
+      "achieved": 0.7263125,
+      "required": 0.73,
+      "unit": "%",
+      "message": "expected 0.73 %, achieved 0.7263 (error 0.51 %)",
+      "source_ids": [
+        "EL-EX-EIG-WEX"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider Example 2 (feeder + lighting circuit): voltage drop",
+      "achieved": 10.154774941164094,
+      "required": 10.1,
+      "unit": "V",
+      "message": "expected 10.1 V, achieved 10.15 (error 0.54 %)",
+      "source_ids": [
+        "EL-EX-EIG-G32"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA6",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "REF Schneider Example 2 (feeder + lighting circuit): voltage drop",
+      "achieved": 4.415119539636563,
+      "required": 4.4,
+      "unit": "%",
+      "message": "expected 4.4 %, achieved 4.415 (error 0.34 %)",
+      "source_ids": [
+        "EL-EX-EIG-G32"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA7",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "installation",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "TT: electrode resistance RA not measured and earthing not confirmed, so none of the 57 final circuits can be checked. The Type S 300 mA origin RCD needs RA <= 50 V / 0.3 A = 167 ohm; the 30 mA finals allow 1667 ohm. TT is the brief's likely earthing but is unconfirmed, and no electrode resistance has been measured; the utility (EEHC) and a site test decide both",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L1",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "lighting circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L2",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "lighting circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L1",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "lighting circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L2",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "lighting circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L3",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "lighting circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S1",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S2",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/S1",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S1",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S2",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S3",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S4",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S5",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S6",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S7",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S8",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S9",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S10",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/S11",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S3",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S4",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S5",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S6",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S7",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S8",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S9",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S10",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S11",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S12",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S13",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/S14",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "socket circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D1",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D2",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D3",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D4",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D1",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D2",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D3",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D4",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D5",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/D6",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D5",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D6",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D7",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D8",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D9",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D10",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D11",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D12",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D13",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D1",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D2",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D3",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D4",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D14",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "MDB/D5",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA8",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/D15",
+      "achieved": 30.0,
+      "required": 30.0,
+      "unit": "mA",
+      "message": "dedicated circuit: 30.0 mA Type A",
+      "source_ids": [
+        "EL-EIG-Q7-RCD",
+        "EL-POL-RCD"
+      ],
+      "element_ids": [],
+      "gate": true
+    },
+    {
+      "criterion": "EA9",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "installation",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "SPD Type 2 is drawn on the SLD; the IEC 62305-2 lightning risk calculation is not part of this engine",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA10",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "installation",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "electrode RA must be measured/confirmed with the utility; main bonding and test points are not modelled",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA14",
+      "lane": "L7",
+      "status": "not_evaluated",
+      "subject": "installation",
+      "achieved": null,
+      "required": null,
+      "unit": "",
+      "message": "Revit read-back not in scope of the engine proof (E-12 is a later step)",
+      "source_ids": [],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "alarm-grade",
+      "achieved": 2,
+      "required": 1,
+      "unit": "grade rank",
+      "message": "design Grade D1 LD2 vs ADB minimum Grade D2 Category LD3: no storey exceeds 200 m2 (B 168.6 m2, GF 117.5 m2), so the dwelling is not 'large'",
+      "source_ids": [
+        "UK-ADB1-2019-1.1-alarm-grade",
+        "UK-ADB1-2019-1.5-large-definition",
+        "BS5839-6-grade-D1",
+        "BS5839-6-LD2"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/B",
+      "achieved": 9,
+      "required": 1,
+      "unit": "detectors",
+      "message": "9 smoke detectors on level B",
+      "source_ids": [
+        "UK-ADB1-2019-1.1-alarm-grade",
+        "BS5839-6-LD3"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/GF",
+      "achieved": 8,
+      "required": 1,
+      "unit": "detectors",
+      "message": "8 smoke detectors on level GF",
+      "source_ids": [
+        "UK-ADB1-2019-1.1-alarm-grade",
+        "BS5839-6-LD3"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/landing-gf",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detector",
+      "message": "landing landing-gf: smoke detector in the space or in an open-plan neighbour within 7.5 m",
+      "source_ids": [
+        "BS5839-6-LD3",
+        "UK-ADB1-2019-1.1-alarm-grade"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/stair-gf",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detector",
+      "message": "stair stair-gf: smoke detector in the space or in an open-plan neighbour within 7.5 m",
+      "source_ids": [
+        "BS5839-6-LD3",
+        "UK-ADB1-2019-1.1-alarm-grade"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/corridor",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detector",
+      "message": "corridor corridor: smoke detector in the space or in an open-plan neighbour within 7.5 m",
+      "source_ids": [
+        "BS5839-6-LD3",
+        "UK-ADB1-2019-1.1-alarm-grade"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/gallery-end",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detector",
+      "message": "corridor gallery-end: smoke detector in the space or in an open-plan neighbour within 7.5 m",
+      "source_ids": [
+        "BS5839-6-LD3",
+        "UK-ADB1-2019-1.1-alarm-grade"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/stair-b",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detector",
+      "message": "stair stair-b: smoke detector in the space or in an open-plan neighbour within 7.5 m",
+      "source_ids": [
+        "BS5839-6-LD3",
+        "UK-ADB1-2019-1.1-alarm-grade"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/hall-b",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detector",
+      "message": "hall hall-b: smoke detector in the space or in an open-plan neighbour within 7.5 m",
+      "source_ids": [
+        "BS5839-6-LD3",
+        "UK-ADB1-2019-1.1-alarm-grade"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "smoke/entry-b",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detector",
+      "message": "entrance entry-b: smoke detector in the space or in an open-plan neighbour within 7.5 m",
+      "source_ids": [
+        "BS5839-6-LD3",
+        "UK-ADB1-2019-1.1-alarm-grade"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "heat/kitchen",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detectors",
+      "message": "kitchen: 1 heat detector(s) in the room",
+      "source_ids": [
+        "EL-POL-ELV",
+        "BS5839-6-LD2"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "heat/kitchen-island",
+      "achieved": 0,
+      "required": 1,
+      "unit": "detectors",
+      "message": "kitchen-island: 0 heat detector(s) in the room; covered by a neighbour",
+      "source_ids": [
+        "EL-POL-ELV",
+        "BS5839-6-LD2"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "heat/dirty-kitchen",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detectors",
+      "message": "dirty-kitchen: 1 heat detector(s) in the room",
+      "source_ids": [
+        "EL-POL-ELV",
+        "BS5839-6-LD2"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "alarm-coverage",
+      "achieved": 0.69,
+      "required": 1.0,
+      "unit": "worst point / radius",
+      "message": "every point of 27 alarm rooms is within the detector radius (smoke 7.5 m, heat 5.3 m)",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "alarm-not-in-baths",
+      "achieved": 0,
+      "required": 0,
+      "unit": "alarms",
+      "message": "0 alarms in bathrooms/WCs",
+      "source_ids": [
+        "BS5839-6-no-alarm-in-baths"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "G1-cinema-waiver/lounge",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detectors",
+      "message": "1 interlinked smoke detector(s) in lounge (G1 waiver mitigation: lounge and cinema interlinked)",
+      "source_ids": [
+        "EL-G1-CINEMA",
+        "BS5839-6-grade-D1"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "G1-cinema-waiver/cinema",
+      "achieved": 1,
+      "required": 1,
+      "unit": "detectors",
+      "message": "1 interlinked smoke detector(s) in cinema (G1 waiver mitigation: lounge and cinema interlinked)",
+      "source_ids": [
+        "EL-G1-CINEMA",
+        "BS5839-6-grade-D1"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "data/study-game",
+      "achieved": 5,
+      "required": 1,
+      "unit": "points",
+      "message": "5 data point(s) in study-game",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "data/kids-a",
+      "achieved": 4,
+      "required": 1,
+      "unit": "points",
+      "message": "4 data point(s) in kids-a",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "data/kids-b",
+      "achieved": 2,
+      "required": 1,
+      "unit": "points",
+      "message": "2 data point(s) in kids-b",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "data/parents-bed",
+      "achieved": 2,
+      "required": 1,
+      "unit": "points",
+      "message": "2 data point(s) in parents-bed",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "tv/furn-lounge-tv",
+      "achieved": 1,
+      "required": 1,
+      "unit": "outlets",
+      "message": "TV wall furn-lounge-tv: 1 data, 1 TV/SAT outlets within 1.5 m",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "tv/furn-cinema-tv",
+      "achieved": 1,
+      "required": 1,
+      "unit": "outlets",
+      "message": "TV wall furn-cinema-tv: 1 data, 1 TV/SAT outlets within 1.5 m",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "tv/furn-study-tv",
+      "achieved": 1,
+      "required": 1,
+      "unit": "outlets",
+      "message": "TV wall furn-study-tv: 1 data, 1 TV/SAT outlets within 1.5 m",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "ap-coverage",
+      "achieved": 5,
+      "required": null,
+      "unit": "APs",
+      "message": "every room centre on both levels is within 8 m of an AP (5 APs, 1 outdoor)",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "data-link-length",
+      "achieved": 35.1,
+      "required": 90.0,
+      "unit": "m",
+      "message": "longest ELV cable from the rack 35 m (Manhattan x 1.15 + storey rise + 4 m) vs 90 m permanent link",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "cctv-gate",
+      "achieved": 1,
+      "required": 1,
+      "unit": "cameras",
+      "message": "1 camera(s) at the gate",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "cctv-perimeter",
+      "achieved": 4,
+      "required": 4,
+      "unit": "cameras",
+      "message": "4 perimeter cameras (plot corners)",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA15",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "intercom",
+      "achieved": 1,
+      "required": 1,
+      "unit": "stations",
+      "message": "1 gate station, 3 indoor monitors",
+      "source_ids": [
+        "EL-POL-ELV"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA11",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "installation",
+      "achieved": 0.05974996959695869,
+      "required": 10.0,
+      "unit": "%",
+      "message": "phase loads (sum Ib) L1 216.7 A, L2 216.9 A, L3 216.7 A; worst deviation 0.1 % of mean",
+      "source_ids": [
+        "EL-POL-PHASEBAL"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA11",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "board MDB",
+      "achieved": 99.49766380766447,
+      "required": 10.0,
+      "unit": "%",
+      "message": "MDB alone: L1 38.3 A, L2 16.0 A, L3 3.3 A; worst deviation 99.5 % of mean (balance is gated on the installation total)",
+      "source_ids": [
+        "EL-POL-PHASEBAL"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA11",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "board DB-B",
+      "achieved": 20.432813265700037,
+      "required": 10.0,
+      "unit": "%",
+      "message": "DB-B alone: L1 97.9 A, L2 137.8 A, L3 133.4 A; worst deviation 20.4 % of mean (balance is gated on the installation total)",
+      "source_ids": [
+        "EL-POL-PHASEBAL"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA11",
+      "lane": "L7",
+      "status": "warn",
+      "subject": "board DB-GF",
+      "achieved": 15.320352371355195,
+      "required": 10.0,
+      "unit": "%",
+      "message": "DB-GF alone: L1 80.6 A, L2 63.2 A, L3 80.0 A; worst deviation 15.3 % of mean (balance is gated on the installation total)",
+      "source_ids": [
+        "EL-POL-PHASEBAL"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA12",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "schedule=SLD=model",
+      "achieved": 57,
+      "required": 57,
+      "unit": "circuits",
+      "message": "57 circuits in model, 57 in schedule, 59 in SLD; missing []",
+      "source_ids": [
+        "EL-POL-SPARE"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA12",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "spare ways MDB",
+      "achieved": 20.0,
+      "required": 20.0,
+      "unit": "%",
+      "message": "2 of 10 ways spare (20 %)",
+      "source_ids": [
+        "EL-POL-SPARE"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA12",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "spare ways DB-B",
+      "achieved": 20.0,
+      "required": 20.0,
+      "unit": "%",
+      "message": "8 of 40 ways spare (20 %)",
+      "source_ids": [
+        "EL-POL-SPARE"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA12",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "spare ways DB-GF",
+      "achieved": 20.833333333333332,
+      "required": 20.0,
+      "unit": "%",
+      "message": "5 of 24 ways spare (21 %)",
+      "source_ids": [
+        "EL-POL-SPARE"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA13",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L1",
+      "achieved": 378.22,
+      "required": 378.22,
+      "unit": "W",
+      "message": "circuit 378 W vs sum of 44 luminaires 378 W",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA13",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-GF/L2",
+      "achieved": 172.5,
+      "required": 172.5,
+      "unit": "W",
+      "message": "circuit 172 W vs sum of 16 luminaires 172 W",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA13",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L1",
+      "achieved": 379.96,
+      "required": 379.96,
+      "unit": "W",
+      "message": "circuit 380 W vs sum of 37 luminaires 380 W",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA13",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L2",
+      "achieved": 374.40999999999997,
+      "required": 374.41,
+      "unit": "W",
+      "message": "circuit 374 W vs sum of 39 luminaires 374 W",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA13",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "DB-B/L3",
+      "achieved": 109.1,
+      "required": 109.1,
+      "unit": "W",
+      "message": "circuit 109 W vs sum of 6 luminaires 109 W",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    },
+    {
+      "criterion": "EA13",
+      "lane": "L7",
+      "status": "pass",
+      "subject": "all luminaires",
+      "achieved": 0,
+      "required": 0,
+      "unit": "luminaires",
+      "message": "142 luminaires, 0 without a circuit []",
+      "source_ids": [
+        "EL-POL-CIRCUITS"
+      ],
+      "element_ids": [],
+      "gate": false
+    }
+  ]
+}
