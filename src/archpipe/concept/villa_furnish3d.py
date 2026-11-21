@@ -134,6 +134,10 @@ def body(it):
                 for box in treads:
                     xa = max(a, box[0] / 1000 - it["cx"])
                     xb = min(b, box[3] / 1000 - it["cx"])
+                    # G1 treads overlap 16 mm: a lower tread beginning inside this span owns that strip.
+                    for low in treads:
+                        if box[0] < low[0] < box[3] and low[2] < box[2]:
+                            xb = min(xb, low[0] / 1000 - it["cx"])
                     if xb > xa + 1e-6:
                         spans.append((xa, xb, min(H, box[2] / 1000 - RS.LEVELS_Z["B"] - 0.05)))
             else:
@@ -164,8 +168,11 @@ def body(it):
                         parts.append(("storage-box", (inner_a + 0.02, cy0, 0.10,
                                                        inner_b - 0.02, cy1, min(top - 0.08, 0.38))))
                         if top > 0.85:
-                            parts.append(("folded-linens", (inner_a + 0.02, cy0, 0.57,
-                                                             inner_b - 0.02, cy1, min(top - 0.07, 0.70))))
+                            # two piles of unequal height: a lone folded stack is a bare rectangular proxy
+                            mid = (inner_a + inner_b) / 2
+                            h = min(top - 0.07, 0.70)
+                            parts.extend([("folded-linens", (inner_a + 0.02, cy0, 0.57, mid, cy1, h)),
+                                          ("folded-linens", (mid, cy0, 0.57, inner_b - 0.02, cy1, h - 0.05))])
             if spans:
                 # The back follows the stair in small spans, but each bay has two end panels.
                 parts.append((kind + "-side", (a, yb, 0.1, a + 0.018, yf,
