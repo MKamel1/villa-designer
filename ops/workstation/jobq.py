@@ -186,7 +186,7 @@ def vram_free_mb():
 
 class Queue:
     def __init__(self, root=DEFAULT_ROOT, gpu_lock=DEFAULT_GPU_LOCK, cpu_slots=2, launcher=None, alive=pid_alive,
-                 gpu_slots=2, vram_free=vram_free_mb):
+                 gpu_slots=3, vram_free=vram_free_mb):
         self.root = Path(root)
         self.gpu_lock = Path(gpu_lock)
         self.cpu_slots = cpu_slots
@@ -402,7 +402,7 @@ def main(argv=None) -> int:
     ap.add_argument("--root", default=str(DEFAULT_ROOT))
     ap.add_argument("--gpu-lock", default=str(DEFAULT_GPU_LOCK))
     ap.add_argument("--cpu-slots", type=int, default=4)
-    ap.add_argument("--gpu-slots", type=int, default=2)
+    ap.add_argument("--gpu-slots", type=int, default=3)
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("submit")
     s.add_argument("--id")

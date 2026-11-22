@@ -51,7 +51,7 @@ ssh ai-workstation '~/archpipe/bin/jobq cancel <id>'
 
 ## For lanes: submit Blender previews with `--gpu`
 
-Waits are short now (two GPU slots, previews overlap each other's CPU phases), so **do not fall back to CPU renders to
+Waits are short now (three GPU slots, previews overlap each other's CPU phases), so **do not fall back to CPU renders to
 dodge the queue**: CPU renders load the 32 threads the test suites need. Submit previews as `--gpu` (add
 `--vram-mb 4000` if yours is small). Render **final timing jobs and any timing measurement with `--exclusive`** so
 another job does not skew the number. Tools that `flock graphics.lock` directly still work, but they occupy slot 0 only.
@@ -64,5 +64,5 @@ another job does not skew the number. Tools that `flock graphics.lock` directly 
   recovers from a dead runner; `--retry` relaunches a failed/timed-out/died one, `--job-timeout S` (default 6 h) bounds it.
 - The service is `systemd --user` `jobq.service`, enabled with linger, so it starts at boot and relaunches jobs that
   died with the machine. Update it with `python scripts/workstation.py install-runner`. Slot counts are in the unit's `ExecStart`
-  (`--cpu-slots 4 --gpu-slots 2`). Restarting the daemon never touches running jobs: each runner holds its own flock.
+  (`--cpu-slots 4 --gpu-slots 3`). Restarting the daemon never touches running jobs: each runner holds its own flock.
 - Broken job dirs are moved, never deleted, into `~/archpipe/quarantine/`.

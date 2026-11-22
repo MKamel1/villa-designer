@@ -181,7 +181,7 @@ class GpuSlotsTest(unittest.TestCase):
         self.free = 20000
 
     def queue(self, **kw):
-        q = jobq.Queue(self.root / "q", self.lock, gpu_slots=2, vram_free=lambda: self.free, **kw)
+        q = jobq.Queue(self.root / "q", self.lock, gpu_slots=3, vram_free=lambda: self.free, **kw)
         q.launcher = lambda j: None
         return q
 
@@ -189,23 +189,23 @@ class GpuSlotsTest(unittest.TestCase):
         for j in ids:
             q.submit(py("pass"), job_id=j, gpu=True, **kw)
 
-    def test_two_gpu_jobs_run_together_third_waits_then_fifo(self):
+    def test_three_gpu_jobs_run_together_fourth_waits_then_fifo(self):
         q = self.queue()
-        self.submit(q, "g1", "g2", "g3")
-        self.assertEqual(q.tick()["started"], ["g1", "g2"])
-        self.assertEqual(q.status("g3")["state"], "queued")
+        self.submit(q, "g1", "g2", "g3", "g4", "g5")
+        self.assertEqual(q.tick()["started"], ["g1", "g2", "g3"])
+        self.assertEqual(q.status("g4")["state"], "queued")
         q.set_status("g1", state="done")
-        self.assertEqual(q.tick()["started"], ["g3"])
+        self.assertEqual(q.tick()["started"], ["g4"])  # g5 still behind
 
-    def test_runners_really_overlap_on_two_slots_but_not_three(self):
+    def test_runners_really_overlap_on_three_slots_but_not_four(self):
         log = self.root / "spans.txt"
         code = ("import time,sys; f=open(sys.argv[1],'a'); f.write('s\\n'); f.flush(); time.sleep(1.0); "
                 "f.write('e\\n'); f.close()")
         q = self.queue()
-        for j in "abc":
+        for j in "abcd":
             q.submit(py(code) + [str(log)], job_id=j, gpu=True)
             q.set_status(j, state="launching", attempt=1)
-        threads = [threading.Thread(target=q.execute, args=(j,)) for j in "abc"]
+        threads = [threading.Thread(target=q.execute, args=(j,)) for j in "abcd"]
         for t in threads:
             t.start()
         for t in threads:
@@ -214,8 +214,8 @@ class GpuSlotsTest(unittest.TestCase):
         for ev in log.read_text().split():
             depth += 1 if ev == "s" else -1
             peak = max(peak, depth)
-        self.assertEqual(peak, 2)  # concurrent, and never three
-        self.assertTrue((self.root / "graphics.lock.1").exists())
+        self.assertEqual(peak, 3)  # concurrent, and never four
+        self.assertTrue((self.root / "graphics.lock.2").exists())
 
     def test_vram_guard_holds_job_and_later_gpu_jobs_keep_order(self):
         q = self.queue()
@@ -236,8 +236,8 @@ class GpuSlotsTest(unittest.TestCase):
     def test_unreadable_nvidia_smi_falls_back_to_slots_only(self):
         q = self.queue()
         q.vram_free = lambda: None
-        self.submit(q, "g1", "g2", "g3")
-        self.assertEqual(q.tick()["started"], ["g1", "g2"])
+        self.submit(q, "g1", "g2", "g3", "g4")
+        self.assertEqual(q.tick()["started"], ["g1", "g2", "g3"])
 
     def test_exclusive_waits_for_empty_gpu_and_blocks_later_jobs(self):
         q = self.queue()
@@ -254,11 +254,11 @@ class GpuSlotsTest(unittest.TestCase):
     def test_exclusive_runner_holds_every_slot(self):
         q = self.queue()
         q.submit(py("pass"), job_id="ex", gpu=True, exclusive=True)
-        with jobq.gpu_locks(self.lock, 2, exclusive=True):
-            for path in jobq.slot_paths(self.lock, 2):
+        with jobq.gpu_locks(self.lock, 3, exclusive=True):
+            for path in jobq.slot_paths(self.lock, 3):
                 with open(path, "a+b") as fh:
                     self.assertFalse(jobq._try_lock(fh))
-        for path in jobq.slot_paths(self.lock, 2):        # and released afterwards
+        for path in jobq.slot_paths(self.lock, 3):        # and released afterwards
             with open(path, "a+b") as fh:
                 self.assertTrue(jobq._try_lock(fh))
                 jobq._unlock(fh)
@@ -270,14 +270,14 @@ class GpuSlotsTest(unittest.TestCase):
             got = []
 
             def take():
-                with jobq.gpu_locks(self.lock, 2):
+                with jobq.gpu_locks(self.lock, 3):
                     got.append(time.time())
             t = threading.Thread(target=take)
             t.start()
             t.join(5)
             self.assertEqual(len(got), 1)                  # went to slot 1 without waiting
             # negative: with slot 1 also taken, a second runner must wait for the direct holder
-            with jobq.gpu_locks(self.lock, 2):
+            with jobq.gpu_locks(self.lock, 3), jobq.gpu_locks(self.lock, 3):  # slots 1 and 2
                 blocked = threading.Thread(target=take, daemon=True)
                 blocked.start()
                 blocked.join(0.8)
