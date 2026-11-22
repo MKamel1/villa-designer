@@ -2,7 +2,7 @@
 
     blender -b --python-exit-code 1 -P asset_preview.py -- --assets assets.json --out DIR
 
-assets.json: [{"id": "...", "gltf": "/abs/model.gltf"}, ...]. For each asset writes
+assets.json: [{"id": "...", "gltf": "/abs/model.gltf", "scale": 1.0 (optional)}, ...]. For each asset writes
 DIR/<id>_d5_az<deg>.png and DIR/<id>_d15_az<deg>.png (35 mm lens, eye 1.6 m, camera 5 m and 15 m
 from the asset centre, azimuths 0/90/180/270) and DIR/stats.json (triangles, bbox, alpha-card share).
 Run it through ~/archpipe/bin/jobq (GPU lock). Assets are left at their authored scale.
@@ -97,6 +97,12 @@ for a in assets:
     bpy.ops.import_scene.gltf(filepath=a["gltf"])
     new = [o for o in bpy.data.objects if o not in before]
     meshes = [o for o in new if o.type == "MESH"]
+    sc_f = float(a.get("scale", 1.0))  # placement scale (sourced height / authored height); default as authored
+    if sc_f != 1.0:
+        for o in new:
+            if o.parent is None:
+                o.scale = (o.scale[0] * sc_f, o.scale[1] * sc_f, o.scale[2] * sc_f)
+        bpy.context.view_layer.update()
     # glTF imports Y-up -> Z-up; the plant should stand on z=0
     st = stats(meshes)
     lift = -st["bbox_min_m"][2]
