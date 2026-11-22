@@ -502,7 +502,7 @@
         -3.0,
         15.412,
         -20.801000000000002,
-        -0.3500000000000001
+        -0.20000000000000018
       ],
       "new": [
         15.212000000000002,
@@ -510,8 +510,14 @@
         -3.0,
         15.412,
         -20.814000000000004,
-        -0.3500000000000001
-      ]
+        -0.20000000000000018
+      ],
+      "re_review": {
+        "date": "2026-11-21",
+        "review": "docs/lanes/SC2-follow-ups.md",
+        "caused_by": "wall-B-ext-16 raised 2.65 -> 2.80 m to meet the slab-roof-0 soffit (lead decision, lane SC2); host face top z -0.35 -> -0.20, approved 13 mm movement unchanged",
+        "approved_by": "lead (orchestrator) 2026-11-21"
+      }
     },
     {
       "id": "appliance-hood-dirty-canopy",

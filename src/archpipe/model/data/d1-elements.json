@@ -4373,7 +4373,7 @@
    "size": [
     2990.0,
     200.0,
-    2650.0
+    2800.0
    ],
    "host": "",
    "room": "",
@@ -4388,7 +4388,7 @@
     "x1_mm": 15312.0,
     "y1_mm": -20601.0,
     "thickness_mm": 200.0,
-    "height_mm": 2650.0,
+    "height_mm": 2800.0,
     "layers": [
      {
       "side": "left",
@@ -7503,6 +7503,130 @@
      "sphere_test_mm": 100.0,
      "openings_above_and_below_bar_mm": 38.24,
      "basis": "a horizontal flat bar 40 x 10 mm centred in each 116.5 mm gap between treads leaves two openings of 38.2 mm: no 100 mm sphere passes (ADK 1.9)"
+    },
+    "steel": {
+     "members": [
+      {
+       "id": "detail-stair-wall-stringer-00",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-01",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-02",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-03",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-04",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-05",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-06",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-07",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-08",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-09",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-10",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-11",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-12",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-13",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-14",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-stringer-15",
+       "role": "wall stringer and tread bearing",
+       "y1_mm": -28396.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-wall-plate",
+       "role": "continuous wall stringer plate",
+       "y0_mm": -28428.0,
+       "y1_mm": -28398.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-open-stringer",
+       "role": "continuous open-side steel stringer",
+       "y0_mm": -27526.0,
+       "y1_mm": -27496.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      },
+      {
+       "id": "detail-stair-glass-shoe",
+       "role": "steel base shoe under the stair glass",
+       "y0_mm": -27536.0,
+       "y1_mm": -27496.0,
+       "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
+      }
+     ],
+     "wall_side_y_mm": -28396.0,
+     "open_side_y_mm": -27536.0,
+     "basis": "ASSUMED stair steel as built in the scene (villa_render), pending structural engineer sizing"
     },
     "under_flight": {
      "enclosed": true,
@@ -11140,13 +11264,13 @@
    "level": "B",
    "placement": [
     8109.0,
-    -27971.0,
+    -27966.0,
     0.0
    ],
    "rotation_deg": 0.0,
    "size": [
     3096.0,
-    1000.0,
+    860.0,
     1881.2
    ],
    "host": "",
@@ -11159,21 +11283,21 @@
     "treads_enclosed": 11,
     "interior_mm": [
      6661.0,
-     -28471.0,
+     -28396.0,
      9557.0,
-     -27571.0
+     -27636.0
     ],
     "soffit_min_mm": 116.5,
     "soffit_max_mm": 1881.2,
-    "volume_m3": 2.62,
+    "volume_m3": 2.21,
     "walls": [
      {
       "id": "understair-cupboard-side",
       "role": "side wall on the open side, top stepping with the treads",
       "x0_mm": 6561.0,
-      "y0_mm": -27521.0,
+      "y0_mm": -27586.0,
       "x1_mm": 9657.0,
-      "y1_mm": -27521.0,
+      "y1_mm": -27586.0,
       "thickness_mm": 100.0,
       "height_mm": null,
       "top_profile_mm": [
@@ -11238,9 +11362,9 @@
       "id": "understair-cupboard-front",
       "role": "toe panel under tread 1",
       "x0_mm": 9607.0,
-      "y0_mm": -28471.0,
+      "y0_mm": -28396.0,
       "x1_mm": 9607.0,
-      "y1_mm": -27471.0,
+      "y1_mm": -27536.0,
       "thickness_mm": 100.0,
       "height_mm": 116.5,
       "top_profile_mm": null
@@ -11249,9 +11373,9 @@
       "id": "understair-cupboard-end",
       "role": "end wall under tread 11",
       "x0_mm": 6611.0,
-      "y0_mm": -28471.0,
+      "y0_mm": -28396.0,
       "x1_mm": 6611.0,
-      "y1_mm": -27471.0,
+      "y1_mm": -27536.0,
       "thickness_mm": 100.0,
       "height_mm": 1881.2,
       "top_profile_mm": null
@@ -11260,7 +11384,7 @@
     "door": {
      "id": "door-understair-cupboard",
      "x_mm": 7900.0,
-     "y_mm": -27521.0,
+     "y_mm": -27586.0,
      "width_mm": 600.0,
      "height_mm": 950.0,
      "operation": "hinged",
@@ -11271,7 +11395,7 @@
     },
     "basis": "G1 LS1: enclose the space under the lowest 11 treads (soffit < 2.0 m) as a cupboard: side wall, toe panel, end wall, one door; treads and riser infill stay open above",
     "size_basis": "authored in the furniture layout",
-    "type_id": "type-furniture-understair-cupboard---3096-1000-1881_2"
+    "type_id": "type-furniture-understair-cupboard---3096-860-1881_2"
    }
   },
   {
@@ -29040,7 +29164,7 @@
    }
   },
   {
-   "id": "type-furniture-understair-cupboard---3096-1000-1881_2",
+   "id": "type-furniture-understair-cupboard---3096-860-1881_2",
    "kind": "type",
    "level": "SITE",
    "placement": [
@@ -29051,7 +29175,7 @@
    "rotation_deg": 0.0,
    "size": [
     3096.0,
-    1000.0,
+    860.0,
     1881.2
    ],
    "host": "",
@@ -29072,7 +29196,7 @@
      "understair-cupboard",
      "-",
      3096.0,
-     1000.0,
+     860.0,
      1881.2
     ],
     "basis": "elements of one kind with identical shared parameters, size and product share one type"

@@ -1,0 +1,855 @@
+{
+ "layout": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "specification": {
+  "changed": true,
+  "receipt_component": true,
+  "added": [],
+  "removed": [],
+  "changed_ids": [
+   "walls"
+  ]
+ },
+ "furniture": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "architecture": {
+  "changed": true,
+  "receipt_component": true,
+  "faces_removed": 81,
+  "faces_added": 81,
+  "removed_sample": [
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   }
+  ],
+  "added_sample": [
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dining"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": null
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   },
+   {
+    "part_kind": "finish-layer",
+    "host": "villa-shell",
+    "room": "dirty-kitchen"
+   }
+  ]
+ },
+ "meshes": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "models": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "props": {
+  "changed": false,
+  "receipt_component": true
+ },
+ "materials": {
+  "changed": false,
+  "receipt_component": true
+ }
+}

@@ -11,6 +11,7 @@ from __future__ import annotations
 import math
 
 from ..contracts import DesignElement
+from . import stair_steel as SS
 
 # Scene datum: GF finished floor = 0. Revit datum is 1.2 m higher (spec levels "B -1.80", "GF +1.20").
 LEVELS = {
@@ -235,6 +236,8 @@ def stairs(lay, sp) -> list[DesignElement]:
                     going_mm=tread, tread_depth_mm=depth, nosing_overlap_mm=sp.get("stair_nosing_overlap_mm", 0),
                     tread_thickness_mm=round(boxes[0][5] - boxes[0][2], 1),
                     riser_infill=_riser_infill(sp),
+                    steel=dict(members=SS.members(sp), wall_side_y_mm=mm(SS.clear_y(sp)[0]), open_side_y_mm=mm(SS.clear_y(sp)[1]),
+                               basis=SS.BASIS),
                     under_flight=_under_flight(sp),
                     nosing_note="tread_mm is the going (nosing to nosing, unchanged by the overlap); each tread but "
                                 "the top one runs tread_depth_mm - going_mm under the next nosing (ADK 1.9a)"))]
@@ -448,11 +451,27 @@ def terrace(lay, sp=None) -> list[DesignElement]:
                     **_terrace_guard(sp)))]
 
 
+def _yield_to_steel(cb, sp):
+    """The cupboard as built: joinery yields to the stair steel (lane SC2). The back face is the wall-stringer bearings'
+    face and the side wall's outer face is the open-side shoe's, not the structural face and the tread edge the spec
+    drew, so its walls, interior, depth and volume follow."""
+    back, yo = SS.clear_y(sp)
+    wt = cb["walls"][0]["thickness"]
+    ym, y_in = round(yo - wt / 2, 4), round(yo - wt, 4)
+    walls = [dict(w, y0=ym, y1=ym) if w["id"].endswith("side") else dict(w, y0=back, y1=yo) for w in cb["walls"]]
+    x0, x1 = cb["x0"], cb["x1"]
+    vol = sum((xa - xb - (wt if xb == x0 else 0) - (wt if xa == x1 else 0)) * (y_in - back) * h
+              for xa, xb, h in cb["walls"][0]["top_profile"])
+    return dict(cb, y0=back, y1=yo, interior=[round(x0 + wt, 3), back, round(x1 - wt, 3), y_in], walls=walls, door=dict(cb["door"], y=ym),
+                volume_m3=round(vol, 2))
+
+
 def cupboard(sp) -> list[DesignElement]:
     """The cupboard enclosing the space under the lowest treads (G1 LS1): one joinery element carrying its walls and door."""
     cb = sp.get("understair_cupboard")
     if not cb:
         return []
+    cb = _yield_to_steel(cb, sp)
     w = [dict(id=x["id"], role=x["role"], x0_mm=mm(x["x0"]), y0_mm=mm(x["y0"]), x1_mm=mm(x["x1"]), y1_mm=mm(x["y1"]),
               thickness_mm=mm(x["thickness"]),
               height_mm=mm(x["height"]) if "height" in x else None,
