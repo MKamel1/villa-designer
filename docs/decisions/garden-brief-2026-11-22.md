@@ -36,5 +36,5 @@ Recorded by the lead from the client's answers; the landscape method (docs/quali
 
 ## Client decisions (2026-11-22, later)
 - **Sister plot (west line of the south garden): SCREEN IT.** A tall screen along the open west line. Concepts use the screened variant.
-- **Plant assets:** approved a free Sketchfab account (the client supplies the token) and Botaniq (Blender, about $100; the client buys it). Not approved: the Xfrog libraries.
+- **Plant assets:** a free Sketchfab account is approved, and the token was saved on 2026-11-22. Botaniq was SKIPPED by the client (2026-11-22). The Xfrog libraries are not approved. Free sources only (Sketchfab CC0/CC-BY, Poly Haven, the existing library). Where no free model of grade B exists, a labelled genus stand-in is used, or the plant is drawn as a planted mass, never as an invented species.
 - **A Pattern Language:** the client will buy it and tell the lead. Until then the 12 patterns without a held equivalent stay unused.
