@@ -168,8 +168,8 @@ def draw_all(L, Vis, force=False):
     vv = [14.6, -40.2, 29.3, -19.8]
     plan_png(M, str(P / "final-visualisation-plan.png"), title="VISUALISATION ONLY: south garden mirrored onto the sister plot (not our land, not our design); not checked, scheduled or counted", view=vv)
     stamp(str(P / "final-visualisation-plan.png"), V.LABEL.upper(), tint=vis_tint(vv))
-    for name, lay, view, kw in (("final-massing-south.png", L, [14.0, -32.0, 30.0, -19.5], {}), ("final-massing-north.png", L, [-1.5, -30.5, 6.5, -22.5], dict(azimuth=205, elevation=50)),
-                                ("final-massing-east.png", L, [13.0, -26.0, 24.0, -19.5], dict(azimuth=300, elevation=45)), ("final-visualisation-massing.png", M, [14.0, -41.0, 30.0, -19.5], {})):
+    for name, lay, view, kw in (("final-massing-south.png", L, [14.0, -32.0, 30.0, -19.5], {}), ("final-massing-north.png", L, [-1.5, -30.5, 6.5, -22.5], dict(azimuth=250, elevation=55)),
+                                ("final-massing-east.png", L, [13.0, -26.0, 24.0, -19.5], dict(azimuth=90, elevation=50)), ("final-visualisation-massing.png", M, [14.0, -41.0, 30.0, -19.5], {})):
         if todo(name):
             massing_png(lay, str(P / name), view=view, **kw)
             if "visualisation" in name:
