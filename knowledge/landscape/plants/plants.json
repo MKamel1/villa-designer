@@ -8935,13 +8935,19 @@
      "quote_check": "verified"
     },
     "heat": {
-     "status": "GAP",
-     "reason": "no source opened states heat tolerance (MBG zone 5-9, NCSU zone 4-13, no heat statement)",
-     "searched": [
-      "https://plants.ces.ncsu.edu/plants/hedera-helix/",
-      "https://pfaf.org/user/Plant.aspx?LatinName=Hedera+helix",
-      "https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?taxonid=248687"
-     ]
+     "status": "SOURCED",
+     "value": {
+      "class": "low",
+      "text": "ASU (Phoenix, hot-arid): does not tolerate full summer sun; plant only in light to full shade. Class low = our policy for a plant that dies in full sun at this heat; shade siting is the only route"
+     },
+     "source": {
+      "source_id": "ASU-Phoenix",
+      "url": "https://www.asu.edu/lib/camartin/plants/Plant%20html%20files/hederahelix.html",
+      "accessed": "2026-11-22",
+      "locator": "Light",
+      "quote": "In the Phoenix area, English ivy DOES NOT tolerate full sun and will quickly die when exposed to western afternoon sun during summer. Because of this, plant English ivy only in light to full shade in Phoenix."
+     },
+     "quote_check": "verified"
     },
     "drought": {
      "status": "SOURCED",
@@ -9090,17 +9096,17 @@
      "quote_check": "verified"
     }
    },
-   "notes": "Cool-temperate (Europe). Heat tolerance is a GAP, so the viability verdict stays unverified; do not read the cold hardiness or the NCSU tag as heat evidence. NCSU advises houseplant or patio container only in North Carolina.",
+   "notes": "Cool-temperate (Europe). Heat: ASU (Phoenix) says it dies in full summer sun and belongs only in light to full shade, so it is not viable on a sun-exposed trellis or wall; shaded north-side use only. NCSU advises houseplant or patio container only in North Carolina.",
    "invasive_flag": "NCSU: invasive species in North Carolina; climbs and kills trees and shrubs, smothers ground, nearly impossible to eradicate; MBG: highly invasive in woodlands in some climates.",
    "site_viability": {
-    "verdict": "unverified",
+    "verdict": "not_viable",
     "factors": {
      "frost": "pass",
-     "heat": "unknown",
+     "heat": "fail",
      "alkaline_soil": "pass"
     },
     "reasons": [
-     "heat tolerance is a GAP"
+     "heat: low tolerance; 154 days with daily max above 30 C"
     ]
    },
    "placement_constraints": [

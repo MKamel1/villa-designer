@@ -1792,6 +1792,263 @@
     "Zamia_Palm_ulrtcjsia_High_ulrtcjsia_VarE_LOD3.fbx": "6d7f07b0d7a62f4ac338966d3ce0b854126a11dff20918fbad12b9789c2c1a3b",
     "ulrtcjsia.json": "f227dd3bb646372747445a2620d071543a1b29f93c2476a1a9328f3501ee0d09"
    }
+  },
+  "star_jasmine_pjycl2_4k": {
+   "kind": "atlas_cutout_leaves",
+   "megascans_id": "pjycl2",
+   "name": "Star Jasmine",
+   "latin_name_on_asset": "Trachelospermum jasminoides",
+   "asset_tags_latin": [
+    "trachelospermum jasminoides"
+   ],
+   "scan_area_m": "0.79x0.79 m",
+   "quality_variant": "4k",
+   "zip": "star_jasmine_pjycl2_4k.zip",
+   "zip_sha256": "c1af03defaa6eea9e0cdd7fd4bc3a1c16150847de045ddb6b1c42c6973891944",
+   "map_types_in_json": [
+    "Albedo",
+    "Bump",
+    "Displacement",
+    "Gloss",
+    "Normal",
+    "Opacity",
+    "Roughness",
+    "Specular",
+    "Translucency"
+   ],
+   "listing_uid": "6daae790-468e-4e2a-8394-4c27ed958e1d",
+   "listing_match": "uid supplied by the client with the download",
+   "listing_url": "https://www.fab.com/listings/6daae790-468e-4e2a-8394-4c27ed958e1d",
+   "listing_licences": [
+    "personal",
+    "professional"
+   ],
+   "listing_price": [
+    0.0,
+    0.0
+   ],
+   "listing_seller": "Quixel Megascans",
+   "licence": "Fab Standard License",
+   "licence_url": "https://www.fab.com/eula",
+   "licence_quote": "Fab Standard License (summary on the EULA page, not legally binding; the full EULA text is): You may: Use the assets commercially or privately; Modify and adjust the assets in order to incorporate them into your Projects; Commercially distribute your Projects with the Fab assets incorporated into it; Use the assets with any compatible tools (usage is not limited to Unreal Engine). You may not: Resell or redistribute the asset for free on a standalone basis or allow others to do the same. Both pricing tiers (Personal and Professional) grant you the same scope of rights.",
+   "variants": {
+    "star_jasmine_pjycl2_4k_exr": {
+     "zip_sha256": "1151e807116e797ad76b160349705491e2021da55a2875c353f5ab2504af7d58",
+     "files": {
+      "Star_Jasmine_pjycl2_4K_BaseColor.exr": "e0adcae19d21cc1a1b77fd12b56e608009b257faef69ed3830cc8c731838ebf2",
+      "Star_Jasmine_pjycl2_4K_Bump.exr": "50fb3401b6134eea64f84aca162542271b6994ef4614e028a15d1b7c4a72ef3f",
+      "Star_Jasmine_pjycl2_4K_Displacement.exr": "e0cf52fb53402495ebfbaef59114e3197bdbc66e48682533a29540e57553b5cc",
+      "Star_Jasmine_pjycl2_4K_Gloss.exr": "7ac337ba8ff5b84e5906ff28da2eacf662a8c321132bc6f2668db756447113e5",
+      "Star_Jasmine_pjycl2_4K_Normal.exr": "757aa7a2f310666a0f5180636cd11974a8eb78a1e11051889c15b472cda84376",
+      "Star_Jasmine_pjycl2_4K_Opacity.exr": "e91f1e704d1ab004fdabf2d9b1cb6990a4a5e4fd07f6abe8093ef8ab36cdaf0d",
+      "Star_Jasmine_pjycl2_4K_Roughness.exr": "443a70bd062ebfd31c933197c17eac0c2fdd31c312744d98964bbe02e0dd594d",
+      "Star_Jasmine_pjycl2_4K_Specular.exr": "0c49af0baf4e9f4db792d39beded6a1157827ee2d78a5630ae7128fc068d5924",
+      "Star_Jasmine_pjycl2_4K_Translucency.exr": "0edc60d039a95525f95c005991810350866c316d34a87ab13e551cd17dede974",
+      "pjycl2.json": "249e11a1e08d794b173a0e38828ad7d2674420c425026989540bbdd928a64bd9"
+     }
+    }
+   },
+   "files": {
+    "Star_Jasmine_pjycl2_4K_BaseColor.jpg": "8f9bf0d0785abdbfbe1051602b98ac9ea36f347087ef4e0c990601dba96838fb",
+    "Star_Jasmine_pjycl2_4K_Bump.jpg": "6b60d54c70b6b29c9424288275564b8224c9cb4b28ba0f1327abb7b609013a46",
+    "Star_Jasmine_pjycl2_4K_Displacement.jpg": "987bb7b431583d0574391ca58debe4c3f5ea4f25a964f7d43966e2abb3d38ac7",
+    "Star_Jasmine_pjycl2_4K_Gloss.jpg": "b811c5a10957c0154e19c76ac59d3ee2e7a0646f39cf21df02192d33c1a69b95",
+    "Star_Jasmine_pjycl2_4K_Normal.jpg": "8f2b696f59acabb72a99cbbec703a54c91d10cbe9bd6117852a86788920065a6",
+    "Star_Jasmine_pjycl2_4K_Opacity.jpg": "b6532715e0f8b3380472a6b67e2ccd6789d8478b2711e78d6cc1c19fd7820781",
+    "Star_Jasmine_pjycl2_4K_Roughness.jpg": "09d373b177d67b25cc5c6bc1681423d597ae4e5c8248aaa408bdd9c8b8a2b280",
+    "Star_Jasmine_pjycl2_4K_Specular.jpg": "4c71f8fbfe08a8aa67899a087cde7b78aa057641239f088b5aa81a2fce22b61b",
+    "Star_Jasmine_pjycl2_4K_Translucency.jpg": "a192c0818291b1524b3ab2b892c815079511400fcd1b9e2b855f444f2119f088",
+    "pjycl2.json": "249e11a1e08d794b173a0e38828ad7d2674420c425026989540bbdd928a64bd9"
+   }
+  },
+  "creeping_fig_ompjv0_4k": {
+   "kind": "atlas_tileable_wall_scan",
+   "megascans_id": "ompjv0",
+   "name": "Creeping Fig",
+   "latin_name_on_asset": "ficus pumila",
+   "asset_tags_latin": [
+    "ficus pumila"
+   ],
+   "scan_area_m": "0.85x0.85 m",
+   "quality_variant": "4k",
+   "zip": "creeping_fig_ompjv0_4k.zip",
+   "zip_sha256": "ee5c5208f7d2c56b72610ea458c31049320f3b76df289ba877106278a30766c4",
+   "map_types_in_json": [
+    "AO",
+    "Basecolor",
+    "Bump",
+    "Cavity",
+    "Displacement",
+    "Gloss",
+    "Normal",
+    "Roughness",
+    "Specular"
+   ],
+   "listing_uid": "adf6d6d2-0dc7-4784-a6be-3ee7f8c1828a",
+   "listing_match": "uid supplied by the client with the download",
+   "listing_url": "https://www.fab.com/listings/adf6d6d2-0dc7-4784-a6be-3ee7f8c1828a",
+   "listing_licences": [
+    "personal",
+    "professional"
+   ],
+   "listing_price": [
+    0.0,
+    0.0
+   ],
+   "listing_seller": "Quixel Megascans",
+   "licence": "Fab Standard License",
+   "licence_url": "https://www.fab.com/eula",
+   "licence_quote": "Fab Standard License (summary on the EULA page, not legally binding; the full EULA text is): You may: Use the assets commercially or privately; Modify and adjust the assets in order to incorporate them into your Projects; Commercially distribute your Projects with the Fab assets incorporated into it; Use the assets with any compatible tools (usage is not limited to Unreal Engine). You may not: Resell or redistribute the asset for free on a standalone basis or allow others to do the same. Both pricing tiers (Personal and Professional) grant you the same scope of rights.",
+   "variants": {
+    "creeping_fig_ompjv0_4k_exr": {
+     "zip_sha256": "b311ce9ffc915399d13d9a44722cc36688e67712e4013ce5205d62ed9dabda9f",
+     "files": {
+      "Creeping_Fig_ompjv0_4K_AO.exr": "9e2622ffc8d8fe8932e2f7b8fe062f8287f803419bbbb381cc9f036efc69fe24",
+      "Creeping_Fig_ompjv0_4K_BaseColor.exr": "eec75f242b8bec318533d919b4e98e5f51896ec4f0c13af6261a369ecaae8863",
+      "Creeping_Fig_ompjv0_4K_Bump.exr": "31b954c5daa1640996fe2f21b66bd492fba3ee9f45f59494f466d39b35eb2e90",
+      "Creeping_Fig_ompjv0_4K_Cavity.exr": "9f17a132d544a01e30c6ac5fc89b5c884b4bbf7d40bbfb4261d6fe86ef4fc1bc",
+      "Creeping_Fig_ompjv0_4K_Displacement.exr": "223711c90fe6fe7167b7386ece99b333ebcb4b7f136abd1d2cf40a57ee07de8b",
+      "Creeping_Fig_ompjv0_4K_Gloss.exr": "f52d6959cf8bb5a80463999c488b3561fb4544b4306815551e2a98db79e85c2e",
+      "Creeping_Fig_ompjv0_4K_Normal.exr": "3fd4741b1baf08f132990c3465794663e705d168fee68ededb8108f68e22449f",
+      "Creeping_Fig_ompjv0_4K_Roughness.exr": "7c7059d7147044dd6dd3b34602d7a20c41699631d6999576537387a0ce3f0817",
+      "Creeping_Fig_ompjv0_4K_Specular.exr": "0d69634028e0cc74fcc4f65bec13971e135731fbb91adfed301dbaf950ea30a5",
+      "ompjv0.json": "cf4deed81841153dbeab9c6ff681907a70dd2248a1e620333cf2037fe62d5182"
+     }
+    },
+    "creeping_fig_ompjv0_4k_ue_high": {
+     "zip_sha256": "ee6b748fc18b29fcd70602151ec7369921e51eda666df2d3c0e731be4757912c",
+     "files": {
+      "T_ompjv0_4K_B.png": "34f6f8df513d0f6f7b7f82761ddac19b992d83f9b0bdc6a46d2d83eb55c5c672",
+      "T_ompjv0_4K_H.png": "1f3863548bd0845f1ca642a54986c96239f5c59e065751efecd2ae1ce02c8f52",
+      "T_ompjv0_4K_N.png": "e4f8e47d88428481bc6a70cdc1139c9b23ed472f4758519ad80d23817eeed560",
+      "T_ompjv0_4K_ORM.png": "830e0a7ecab1d9edd041c36506145f77516bc8c7a98ab4a15896006a8afbad48",
+      "ompjv0.json": "cf4deed81841153dbeab9c6ff681907a70dd2248a1e620333cf2037fe62d5182",
+      "ompjv0_tier_1.bin": "4b960c1ff5b64d776bdf833e35b4cb1f275f843a09ee3d5f0908d86fb65ec4bc",
+      "ompjv0_tier_1.gltf": "92a201037dbe39b4ad3958f52d9ee5fbe3ebe740b9e558786924302d7f1ca5b2"
+     }
+    }
+   },
+   "files": {
+    "Creeping_Fig_ompjv0_4K_AO.jpg": "706f652f62d6c06ba4aaad817f6e1fc12d44055197c173f0f841ede8e27332be",
+    "Creeping_Fig_ompjv0_4K_BaseColor.jpg": "530ea87a66d089bf6163912bd45b21eae662a34fcd282329dd5ed7a79c0f5f1e",
+    "Creeping_Fig_ompjv0_4K_Bump.jpg": "ad92142e535e490339a35fc605da89f1e6911e2267076050d8d6747a016765ac",
+    "Creeping_Fig_ompjv0_4K_Cavity.jpg": "edb54b051929a205679b7dfa59ba0ea2bae0696fda19bf965d8ac825bf55cad0",
+    "Creeping_Fig_ompjv0_4K_Displacement.jpg": "6a139a4dbaac922838c63c4e8476155c660cac0a46392a623fd888da164eba3b",
+    "Creeping_Fig_ompjv0_4K_Gloss.jpg": "b887d9ac48f85807192d88494568b81f2f4c6d7747d5b131a459d3dac6c60549",
+    "Creeping_Fig_ompjv0_4K_Normal.jpg": "48805192bc3a5e5522ef8d29429fff544e735a36941f938f11a99d5d1cf4af0d",
+    "Creeping_Fig_ompjv0_4K_Roughness.jpg": "8947167645ecec1b43cb2fb597aa7eef4f6d685c35c7448182cd0e47e7e89ebb",
+    "Creeping_Fig_ompjv0_4K_Specular.jpg": "75e233c52ae37718b08585115feac736ff70f6817f74fb48b7b35af8829455c2",
+    "ompjv0.json": "cf4deed81841153dbeab9c6ff681907a70dd2248a1e620333cf2037fe62d5182"
+   }
+  },
+  "bougainvillea_flower_phfeffeh2_4k": {
+   "kind": "atlas_cutout_flowers",
+   "megascans_id": "phfeffeh2",
+   "name": "Bougainvillea Flower",
+   "latin_name_on_asset": "Bougainvillea glabra",
+   "asset_tags_latin": [],
+   "scan_area_m": "0.25x0.25 m",
+   "quality_variant": "4k",
+   "zip": "bougainvillea_flower_phfeffeh2_4k.zip",
+   "zip_sha256": "63b00619bdb900ae3a46d31fd1678152d33b26f5d6bd132a52c342932c628ea4",
+   "map_types_in_json": [
+    "AO",
+    "Albedo",
+    "Bump",
+    "Cavity",
+    "Displacement",
+    "Gloss",
+    "Normal",
+    "Opacity",
+    "Roughness",
+    "Specular",
+    "Translucency"
+   ],
+   "listing_uid": "134c08c4-471e-4902-ab3a-9d9ab77791cf",
+   "listing_match": "uid supplied by the client with the download",
+   "listing_url": "https://www.fab.com/listings/134c08c4-471e-4902-ab3a-9d9ab77791cf",
+   "listing_licences": [
+    "personal",
+    "professional"
+   ],
+   "listing_price": [
+    0.0,
+    0.0
+   ],
+   "listing_seller": "Quixel Megascans",
+   "licence": "Fab Standard License",
+   "licence_url": "https://www.fab.com/eula",
+   "licence_quote": "Fab Standard License (summary on the EULA page, not legally binding; the full EULA text is): You may: Use the assets commercially or privately; Modify and adjust the assets in order to incorporate them into your Projects; Commercially distribute your Projects with the Fab assets incorporated into it; Use the assets with any compatible tools (usage is not limited to Unreal Engine). You may not: Resell or redistribute the asset for free on a standalone basis or allow others to do the same. Both pricing tiers (Personal and Professional) grant you the same scope of rights.",
+   "variants": {
+    "bougainvillea_flower_phfeffeh2_4k_exr": {
+     "zip_sha256": "bc96851eb3fcaa28438b1aacb6e3ff846937db7534fbc844321f475a0310f98a",
+     "files": {
+      "Bougainvillea_Flower_phfeffeh2_4K_AO.exr": "3680ca32399b2752f9eee5b12e3040b120f541a6e5917c0d3d94f9aa2673e405",
+      "Bougainvillea_Flower_phfeffeh2_4K_BaseColor.exr": "97f344a4010a3f67c585d78a4bd91deff43e52395942e2fed6ce27fe36d50ceb",
+      "Bougainvillea_Flower_phfeffeh2_4K_Bump.exr": "690bd06591d34f5372e3497ba1f2969bcdb64d91197265838fc9700747ac590a",
+      "Bougainvillea_Flower_phfeffeh2_4K_Cavity.exr": "93b491e796dbcc7f8325f9198a5fcb14018bb5f430274d1d2b40a8f2ee325eac",
+      "Bougainvillea_Flower_phfeffeh2_4K_Displacement.exr": "67338a6551365548208ae9fb2f196b958007b49c8dcb90843e1bd474b535f605",
+      "Bougainvillea_Flower_phfeffeh2_4K_Gloss.exr": "6b07b40d683d8ee829b2fef4b0c1f27eea1302842463a07d9ddf349209119f9b",
+      "Bougainvillea_Flower_phfeffeh2_4K_Normal.exr": "c4d8a6bb68d2ca52ea4d3efd0db3022dc9d721c7915031e3f49ca1634d6c97d8",
+      "Bougainvillea_Flower_phfeffeh2_4K_Opacity.exr": "4932818c8d95d03767ac972f5ecd584e2afcec525ee1ff5870760fffc6352444",
+      "Bougainvillea_Flower_phfeffeh2_4K_Roughness.exr": "291e1a964cf84f641e7566e2c4a49744e4bb578ab06ed15ec6c935e166aed098",
+      "Bougainvillea_Flower_phfeffeh2_4K_Specular.exr": "2916dfb220a1c97a17e7ab47bbe7460379b2b0167a974031165edaaddf24a0e8",
+      "Bougainvillea_Flower_phfeffeh2_4K_Translucency.exr": "89275abfe4215460cbb6b26bb36dc6c9f9eb0cfee2024eaf680c6cb0b91d46cc",
+      "phfeffeh2.json": "acf88865ed98aa6a90f4971b28b1ffef9c4610b153d56a275a4090102e1a433e"
+     }
+    }
+   },
+   "files": {
+    "Bougainvillea_Flower_phfeffeh2_4K_AO.jpg": "b61c4270eb9244e45bbb73e749d751e06ada13a960a15d4030aa48cdf51d9829",
+    "Bougainvillea_Flower_phfeffeh2_4K_BaseColor.jpg": "4e6d84edce3a09295c3e7d0bbd58b0c6ab4aaa62a143bec9cca4cf6f22df0d13",
+    "Bougainvillea_Flower_phfeffeh2_4K_Bump.jpg": "f7d602325608bbed66ca51608697a8a2b82389ad93362546f6e432f74a73f1ab",
+    "Bougainvillea_Flower_phfeffeh2_4K_Cavity.jpg": "c94e74639d3a6799d8376e12954bc4c157e4db1ffd6399ea7897f4987c4c9f3d",
+    "Bougainvillea_Flower_phfeffeh2_4K_Displacement.jpg": "becf1183be180966525b227ace3ba12fd4726b4a9ac8a107e69109c87e1bdb89",
+    "Bougainvillea_Flower_phfeffeh2_4K_Gloss.jpg": "dbf09e433ed5945b63f81c86b058aa59ea62590102027cbbb4f81006f66bc5f6",
+    "Bougainvillea_Flower_phfeffeh2_4K_Normal.jpg": "a55ae3ff09ea0460a63ec0dca0166b7139ed18d6a39aa2c57771044bdcad671c",
+    "Bougainvillea_Flower_phfeffeh2_4K_Opacity.jpg": "978df7c3a2e1b2d09593c91d5e37a18433268ac0a1ddf3c4d79b207d6bd6020e",
+    "Bougainvillea_Flower_phfeffeh2_4K_Roughness.jpg": "7932ccc08c038f812ba44ef25368a7975e61ef06cf00edf7be41e95ad99a3567",
+    "Bougainvillea_Flower_phfeffeh2_4K_Specular.jpg": "33b20172f3a7c3566bec33f68d49fbefdb171712faed3ce9c656104bb5deaa11",
+    "Bougainvillea_Flower_phfeffeh2_4K_Translucency.jpg": "7b2b89cdb303c8f47d4ca7048c0179364dc240d6c1c373260d3cb001d6a8d7de",
+    "phfeffeh2.json": "acf88865ed98aa6a90f4971b28b1ffef9c4610b153d56a275a4090102e1a433e"
+   }
+  },
+  "olive_tree_source": {
+   "kind": "3d_tree_game_optimised",
+   "megascans_id": null,
+   "name": "Olive Tree for Italian Panorama",
+   "latin_name_on_asset": null,
+   "asset_tags_latin": [],
+   "scan_area_m": null,
+   "quality_variant": "source_fbx",
+   "zip": "source.zip",
+   "zip_sha256": "1ba90a9c4d27ec7487bcfd5523ed243d549ec3f48129168898174e287ca3506f",
+   "map_types_in_json": [],
+   "listing_uid": "7e103045-81b6-41dd-82a8-5a1d1e276115",
+   "listing_match": "uid supplied by the client with the download",
+   "listing_url": "https://www.fab.com/listings/7e103045-81b6-41dd-82a8-5a1d1e276115",
+   "listing_licences": [
+    "personal",
+    "professional"
+   ],
+   "listing_price": [
+    0.0,
+    0.0
+   ],
+   "listing_seller": "THGames1984",
+   "licence": "Fab Standard License",
+   "licence_url": "https://www.fab.com/eula",
+   "licence_quote": "Fab Standard License (summary on the EULA page, not legally binding; the full EULA text is): You may: Use the assets commercially or privately; Modify and adjust the assets in order to incorporate them into your Projects; Commercially distribute your Projects with the Fab assets incorporated into it; Use the assets with any compatible tools (usage is not limited to Unreal Engine). You may not: Resell or redistribute the asset for free on a standalone basis or allow others to do the same. Both pricing tiers (Personal and Professional) grant you the same scope of rights.",
+   "variants": {},
+   "files": {
+    "SM_ItalianTress_Olive.FBX": "c90a960ee28a40c78add6488783ad3c804a6cdf01187c0f241e6c71dd9ab7e1d",
+    "T_ItalianTress_Common_Mask.PNG": "2152908e8df5584fd14b3d398b7b2cd1577a617284389abd3c400d8ce48120b0",
+    "T_ItalianTress_Olive_AORM.PNG": "59d57915931b1c14996d6b538d513ad86682ee7e428c3fbd2ec9a9743bc0fd35",
+    "T_ItalianTress_Olive_D.PNG": "ce587211fb955bf4d1205df85f77348f5f3601d26fdd56539192a1801db35ba5",
+    "T_ItalianTress_Olive_N.PNG": "53e32a6533e2b51f98716259334b5f1d1e2ee121c307cae90b39a4622027cfbc",
+    "T_ItalianTress_Olivio_N.PNG": "017f03599ea7f885a87bd073a4ee6ce031cd197b7094ecdb1881655bf4166656",
+    "T_ItalianTress_Olivio_Tronco_D.PNG": "e74b02c4a5773f7779da3df5ab7b5aeeaff896a28eca3ce36115058cbb3c9bb4"
+   }
   }
  }
 }

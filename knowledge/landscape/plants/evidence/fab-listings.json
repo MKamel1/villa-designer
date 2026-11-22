@@ -682,5 +682,101 @@
   "is_ai_forbidden": false,
   "first_published": "2024-10-23T12:07:34.156986Z",
   "seller": "Quixel Megascans"
+ },
+ "6daae790-468e-4e2a-8394-4c27ed958e1d": {
+  "title": "Star Jasmine",
+  "maps": [
+   "Albedo",
+   "Bump",
+   "Displacement",
+   "Gloss",
+   "Normal",
+   "Opacity",
+   "Roughness",
+   "Specular",
+   "Translucency"
+  ],
+  "licenses": [
+   "personal",
+   "professional"
+  ],
+  "price": [
+   0.0,
+   0.0
+  ],
+  "is_ai_forbidden": false,
+  "first_published": "2024-10-12T17:45:16.883188Z",
+  "seller": "Quixel Megascans",
+  "description_text": "Texel density:  5185 px/m   Scan Area:  0.79x0.79 m   Maps:  Opacity Normal Translucency Specular Albedo Roughness Gloss Displacement Bump \n  Create high-quality 3D experiences and worlds with Quixel Megascans. Browse thousands of photorealistic assets and environments, including materials, 3D assets, plants, decals, and more available     here     on Fab.      For any questions or support regarding Quixel content, please get in touch     here    ."
+ },
+ "adf6d6d2-0dc7-4784-a6be-3ee7f8c1828a": {
+  "title": "Creeping Fig",
+  "maps": [
+   "AO",
+   "Basecolor",
+   "Bump",
+   "Cavity",
+   "Displacement",
+   "Gloss",
+   "Normal",
+   "Roughness",
+   "Specular"
+  ],
+  "licenses": [
+   "personal",
+   "professional"
+  ],
+  "price": [
+   0.0,
+   0.0
+  ],
+  "is_ai_forbidden": false,
+  "first_published": "2024-10-14T03:55:41.865433Z",
+  "seller": "Quixel Megascans",
+  "description_text": "Texel density:  4819 px/m   Scan Area:  0.85x0.85 m   Maps:  AO Basecolor Gloss Displacement Normal Bump Cavity Specular Roughness \n  Create high-quality 3D experiences and worlds with Quixel Megascans. Browse thousands of photorealistic assets and environments, including materials, 3D assets, plants, decals, and more available     here     on Fab.      For any questions or support regarding Quixel content, please get in touch     here    ."
+ },
+ "134c08c4-471e-4902-ab3a-9d9ab77791cf": {
+  "title": "Bougainvillea Flower",
+  "maps": [
+   "AO",
+   "Albedo",
+   "Bump",
+   "Cavity",
+   "Displacement",
+   "Gloss",
+   "Normal",
+   "Opacity",
+   "Roughness",
+   "Specular",
+   "Translucency"
+  ],
+  "licenses": [
+   "personal",
+   "professional"
+  ],
+  "price": [
+   0.0,
+   0.0
+  ],
+  "is_ai_forbidden": false,
+  "first_published": "2024-10-12T09:48:16.960108Z",
+  "seller": "Quixel Megascans",
+  "description_text": "Texel density:  16384 px/m   Scan Area:  0.25x0.25 m   Maps:  Gloss Roughness Translucency Displacement AO Opacity Cavity Bump Specular Albedo Normal \n  Create high-quality 3D experiences and worlds with Quixel Megascans. Browse thousands of photorealistic assets and environments, including materials, 3D assets, plants, decals, and more available     here     on Fab.      For any questions or support regarding Quixel content, please get in touch     here    ."
+ },
+ "7e103045-81b6-41dd-82a8-5a1d1e276115": {
+  "title": "Olive Tree for Italian Panorama",
+  "maps": [],
+  "licenses": [
+   "personal",
+   "professional"
+  ],
+  "price": [
+   0.0,
+   0.0
+  ],
+  "is_ai_forbidden": false,
+  "first_published": "2024-10-31T09:12:15.653781Z",
+  "seller": "THGames1984",
+  "description_text": "THGames1984       A triangle Optimized 3d model of a decorative olive tree (olea europaea).  Model dimensions : about 7 m height, square 9x9m  Mesh details \u2013 9998 triangles  Two materials, leaves and trunk, each with diffuse, normal and AORM texture  Formats Blender FBX  Object suitable for games and Garden Renderings. Let us know what we can do for improve it!  Open to create new models  Find more assets on THGames1984"
  }
 }
